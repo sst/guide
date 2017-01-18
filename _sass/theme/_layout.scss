@@ -123,13 +123,14 @@
   @extend %clearfix;
 
   a.author-link {
-    color: $tertiary-text-color;
+    @extend %a-tertiary;
     font-weight: bold;
   }
 
   a.email-link,
   a.page-link {
-    color: $tertiary-text-color;
+    font-size: 13px;
+    @extend %a-tertiary;
   }
 
   .site-title,
@@ -141,7 +142,7 @@
     padding-top: 4px;
     font-size: 13px;
     a {
-      color: $tertiary-text-color;
+      @extend %a-tertiary;
     }
   }
 }
@@ -221,6 +222,7 @@
 }
 
 .post-title {
+  margin-bottom: 5px;
   font-size: 42px;
   letter-spacing: -1px;
   line-height: 1;
@@ -228,6 +230,12 @@
   @include media-query($on-laptop) {
     font-size: 36px;
   }
+}
+
+a.post-info {
+  font-size: 14px;
+  font-weight: 300;
+  @extend %a-tertiary;
 }
 
 .post-content {

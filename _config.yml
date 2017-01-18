@@ -19,9 +19,12 @@ description: > # this means to ignore newlines until "baseurl:"
   The definitive guide to creating full stack
   serverless React apps.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
-github_username:  jekyll
+url: "http://serverless-stack.com" # the base hostname & protocol for your site, e.g. http://example.com
+
+github_repo: "https://github.com/AnomalyInnovations/serverless-stack-com"
+github_edit_prefix: "/edit/master/"
+
+google_analytics: "UA-3536629-11"
 
 collections:
   chapters:

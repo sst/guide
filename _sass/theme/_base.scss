@@ -104,6 +104,24 @@ a {
   }
 }
 
+%a-secondary {
+  color: $secondary-text-color;
+  text-decoration: none;
+
+  &:hover {
+    color: $text-color;
+  }
+}
+
+%a-tertiary {
+  color: $tertiary-text-color;
+  text-decoration: none;
+
+  &:hover {
+    color: $text-color;
+  }
+}
+
 
 
 /**
