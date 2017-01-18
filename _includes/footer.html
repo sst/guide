@@ -1,0 +1,30 @@
+<footer class="site-footer">
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="link-list">
+					<li class="site-title">
+						{{ site.title | escape }}
+					</li>
+          <li><a class="page-link" href="/">Table of Contents</a></li>
+					{% if site.email %}
+					<li><a class="email-link" href="mailto:{{ site.email }}">Contact Us</a></li>
+					{% endif %}
+          <li><a class="page-link" href="/">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="contact-list">
+          <li class="site-description">{{ site.description | escape }}</li>
+					<li class="site-author">Created by <a target="_blank" href="http://anoma.ly">Anomaly Innovations</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+</footer>

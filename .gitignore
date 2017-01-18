@@ -1,0 +1,5 @@
+Session.vim
+_site
+.swp
+.sass-cache
+.jekyll-metadata
