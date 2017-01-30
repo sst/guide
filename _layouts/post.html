@@ -12,4 +12,13 @@ layout: default
     {{ content }}
   </div>
 
+  <div class="post-footer">
+    {% if page.previous.url %}
+    <a class="previous" href="{{ page.previous.url }} ">&larr; Previous</a>
+    {% endif %}
+    {% if page.next.url %}
+    <a class="next" href="{{ page.next.url }} ">Next &rarr;</a>
+    {% endif %}
+  </div>
+
 </article>

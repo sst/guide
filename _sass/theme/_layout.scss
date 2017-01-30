@@ -265,3 +265,20 @@ a.post-info {
     }
   }
 }
+
+.post-footer {
+  margin-top: 54px;
+  @extend %clearfix;
+
+  a {
+    @extend %a-secondary;
+    font-weight: bold;
+  }
+
+  .previous {
+    float: left;
+  }
+  .next {
+    float: right;
+  }
+}
