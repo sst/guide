@@ -7,10 +7,10 @@ layout: home
 
 # Table of Contents
 
-- Create a new app with Create React App
-  - Include Google Fonts
-  - Create universal favicons
-  - Setup Bootstrap
+- [Create a new app with Create React App]({{ site.baseurl }}{% link _chapters/create-new-create-react-app.md %})
+  - [Add favicons]({{ site.baseurl }}{% link _chapters/add-favicons.md %})
+  - [Include custom fonts]({{ site.baseurl }}{% link _chapters/include-custom-fonts.md %})
+  - [Setting up Bootstrap]({{ site.baseurl }}{% link _chapters/setting-up-bootstrap.md %})
 - Create routes with React Router
   - Create containers
   - Handle 404s
