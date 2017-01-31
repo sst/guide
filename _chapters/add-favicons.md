@@ -11,11 +11,11 @@ For our example we are going to start with a simple image and generate the vario
 
 To ensure that our icon works for most of our targetted platforms we'll use a service called the [Favicon Generator](http://realfavicongenerator.net).
 
-![Realfavicongenerator.net Screenshot]({{ site.url }}/assets/realfavicongenerator.png)
+![Realfavicongenerator.net screenshot]({{ site.url }}/assets/realfavicongenerator.png)
 
 Once you upload your icon, it'll generate a few different versions that you need.
 
-![Realfavicongenerator.net Completed Screenshot]({{ site.url }}/assets/realfavicongenerator-completed.png)
+![Realfavicongenerator.net completed screenshot]({{ site.url }}/assets/realfavicongenerator-completed.png)
 
 Download the generated package and copy all the files over to your `public` directory. To include a file from the `public` directory in your HTML, Create React App needs the `%PUBLIC_URL%` prefix.
 

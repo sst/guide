@@ -20,7 +20,7 @@ npm start
 
 This should fire up the newly created app in your browser.
 
-![New Create React App Screenshot]({{ site.url }}/assets/new-create-react-app.png)
+![New Create React App screenshot]({{ site.url }}/assets/new-create-react-app.png)
 
 Create React App comes with pre-loaded with a pretty convinient yet minimal developement environment. It includes live reloading, a testing framework, ES6 support, and [much more](https://github.com/facebookincubator/create-react-app#why-use-this).
 
