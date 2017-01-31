@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Add Favicons
+title: Add App Favicons
 ---
 
 Create React App generates a simple favicon for our app and places it in `public/favicon.ico`. However, getting the favicon to work on all browsers and mobile platforms requires a little bit more work. There are quite a few different requirements and dimensions. And this gives us a good oppurtunity to learn how to include files in the `public` directory of our app.
@@ -30,7 +30,7 @@ Copy the generated code and add the `%PUBLIC_URL%` prefix to all the URLs. It sh
 <meta name="theme-color" content="#ffffff">
 {% endhighlight %}
 
-Add it to your `index.html` and remove the following line that references the original favicon.
+Add it to your `public/index.html` and remove the following line that references the original favicon.
 
 {% highlight html %}
 <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">

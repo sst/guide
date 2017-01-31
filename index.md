@@ -8,8 +8,8 @@ layout: home
 # Table of Contents
 
 - [Create a new app with Create React App]({% link _chapters/create-new-create-react-app.md %})
-  - [Add favicons]({% link _chapters/add-favicons.md %})
-  - [Include custom fonts]({% link _chapters/include-custom-fonts.md %})
+  - [Add app favicons]({% link _chapters/add-app-favicons.md %})
+  - [Using custom fonts]({% link _chapters/using-custom-fonts.md %})
   - [Setting up Bootstrap]({% link _chapters/setting-up-bootstrap.md %})
 - [Handle routes with React Router]({% link _chapters/handle-routes-with-react-router.md %})
   - [Create containers]({% link _chapters/create-containers.md %})
