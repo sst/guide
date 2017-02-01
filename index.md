@@ -1,7 +1,4 @@
 ---
-# You don't need to edit this file, it's empty on purpose.
-# Edit theme's home layout instead if you wanna make some changes
-# See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: home
 ---
 
@@ -21,7 +18,8 @@ layout: home
 - [Coming soon...]
 - [Deploying]({% link _chapters/deploying.md %})
   - [Create a S3 bucket]({% link _chapters/create-a-s3-bucket.md %})
-  - Upload to S3
+  - [Configure the AWS CLI]({% link _chapters/configure-the-aws-cli.md %})
+  - [Deploy to S3]({% link _chapters/deploy-to-s3.md %})
   - Create a CloudFront distribution
   - Point your domain to CloudFront
   - Setup SSL
