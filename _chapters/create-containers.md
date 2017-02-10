@@ -72,6 +72,10 @@ Remove all the code inside `src/App.css` and replace it with the following:
 .App {
   margin-top: 15px;
 }
+
+.App .navbar-brand {
+  font-family: "Open Sans Semibold", sans-serif;
+}
 {% endhighlight %}
 
 ### Add the Home container
@@ -111,12 +115,13 @@ export default class Home extends Component {
 This simple renders our home page given that the user is not currently signed in. Let's add a few lines to style this. Add the following into `src/containers/Home.css`.
 
 {% highlight css %}
-.Home {
+.Home .lander {
   padding-top: 100px;
+  text-align: center;
 }
 
-.Home .lander {
-  text-align: center;
+.Home .lander h1 {
+  font-family: "Open Sans Semibold", sans-serif;
 }
 
 .Home .lander p {
