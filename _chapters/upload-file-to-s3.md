@@ -168,4 +168,4 @@ Now when we swtich over to our browser and submit the form with an uploaded file
 
 ![New note file uploaded screenshot]({{ site.url }}/assets/new-note-file-uploaded.png)
 
-Next up we are going to allow users to see a list of their notes.
+Next up we are going to make sure we clear out AWS credentials that are cached by the AWS JS SDK before we move on.
