@@ -56,4 +56,4 @@ And that's it. Now if you were to switch over to your browser and try clicking o
 
 ![Router 404 page screenshot]({{ site.url }}/assets/router-404-page.png)
 
-Next up, we are going to work on creating our signup form.
+Next up, we are going to work on creating our login and sign up forms.
