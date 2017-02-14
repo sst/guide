@@ -50,11 +50,11 @@ In the `Table name` field, type `notes`.
 1. We will accept the default settings for this example.
 1. Now click **Create**.
 
-3.png
+![Select DynamoDB Service screenshot]({{ site.url }}/assets/dynamodb/3.png)
 
-When the “Music” table is ready to use, it appears in in the table list with a checkbox.
+When the **notes** table is ready to use, it appears in in the table list with a checkbox.
 
-4.png
+![Select DynamoDB Service screenshot]({{ site.url }}/assets/dynamodb/4.png)
 
 [aws-console]: https://console.aws.amazon.com/console/home?region=us-east-1
 [dynamodb-intro]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html
