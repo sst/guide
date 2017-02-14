@@ -48,14 +48,14 @@ export default class Login extends Component {
     return (
       <div className="Login">
         <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="username">
+          <FormGroup controlId="username" bsSize="large">
             <ControlLabel>Email</ControlLabel>
             <FormControl
               type="text"
               value={this.state.username}
               onChange={this.handleChange} />
           </FormGroup>
-          <FormGroup controlId="password">
+          <FormGroup controlId="password" bsSize="large">
             <ControlLabel>Password</ControlLabel>
             <FormControl
               value={this.state.password}
@@ -63,6 +63,8 @@ export default class Login extends Component {
               type="password" />
           </FormGroup>
           <Button
+            block
+            bsSize="large"
             disabled={ ! this.validateForm() }
             type="submit">
             Login
@@ -89,15 +91,19 @@ We are introducing a couple of new concepts in this.
 Let's all add a couple of styles to this in the file `src/containers/Login.css`.
 
 {% highlight css %}
-.Login {
-  padding: 60px 0;
-}
+@media all and (min-width: 480px) {
+  .Login {
+    padding: 60px 0;
+  }
 
-.Login form {
-  margin: 0 auto;
-  max-width: 320px;
+  .Login form {
+    margin: 0 auto;
+    max-width: 320px;
+  }
 }
 {% endhighlight %}
+
+These styles roughly target any non-mobile screen sizes.
 
 ### Add the Route
 

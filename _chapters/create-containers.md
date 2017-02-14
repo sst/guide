@@ -74,7 +74,7 @@ Remove all the code inside `src/App.css` and replace it with the following:
 }
 
 .App .navbar-brand {
-  font-family: "Open Sans Semibold", sans-serif;
+  font-weight: bold;
 }
 {% endhighlight %}
 
@@ -121,7 +121,8 @@ This simple renders our home page given that the user is not currently signed in
 }
 
 .Home .lander h1 {
-  font-family: "Open Sans Semibold", sans-serif;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
 }
 
 .Home .lander p {

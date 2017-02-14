@@ -22,6 +22,7 @@ class Home extends Component {
     super(props);
 
     this.state = {
+      isLoading: false,
       notes: [],
     };
   }
@@ -44,7 +45,7 @@ class Home extends Component {
       <div className="notes">
         <PageHeader>Your Notes</PageHeader>
         <ListGroup>
-          { this.state.notes.length !== 0
+          { ! this.state.isLoading
             && this.renderNotesList(this.state.notes) }
         </ListGroup>
       </div>

@@ -61,10 +61,9 @@ class NewNote extends Component {
   }
 
   render() {
-    const isLoading = this.state.isLoading;
     return (
       <div className="NewNote">
-        <form onSubmit={ ! isLoading ? this.handleSubmit : null }>
+        <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="content">
             <FormControl
               onChange={this.handleChange}
@@ -83,7 +82,7 @@ class NewNote extends Component {
             bsSize="large"
             disabled={ ! this.validateForm() }
             type="submit"
-            isLoading={isLoading}
+            isLoading={this.state.isLoading}
             text="Create"
             loadingText="Creating…" />
         </form>

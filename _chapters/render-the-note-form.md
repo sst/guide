@@ -52,11 +52,10 @@ handleDelete = async (event) => {
 }
 
 render() {
-  const { isLoading, isDeleting } = this.state;
   return (
     <div className="Notes">
       { this.state.note &&
-        ( <form onSubmit={ ! isLoading ? this.handleSubmit : null }>
+        ( <form onSubmit={this.handleSubmit}>
             <FormGroup controlId="content">
               <FormControl
                 onChange={this.handleChange}
@@ -85,14 +84,14 @@ render() {
               bsSize="large"
               disabled={ ! this.validateForm() }
               type="submit"
-              isLoading={isLoading}
+              isLoading={this.state.isLoading}
               text="Save"
               loadingText="Saving…" />
             <LoaderButton
               block
               bsStyle="danger"
               bsSize="large"
-              isLoading={isDeleting}
+              isLoading={this.state.isDeleting}
               onClick={this.handleDelete}
                 text="Delete"
                 loadingText="Deleting…" />
@@ -137,10 +136,6 @@ Let's also add some styles by adding the following to `src/containers/Notes.css`
 .Notes form textarea {
   height: 300px;
   font-size: 24px;
-}
-
-.Notes form button[type=submit] {
-  margin-top: 40px;
 }
 {% endhighlight %}
 

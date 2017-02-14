@@ -67,10 +67,9 @@ class Signup extends Component {
   }
 
   renderConfirmationForm() {
-    const isLoading = this.state.isLoading;
     return (
-      <form onSubmit={ ! isLoading ? this.handleConfirmationSubmit : null }>
-        <FormGroup controlId="confirmationCode">
+      <form onSubmit={this.handleConfirmationSubmit}>
+        <FormGroup controlId="confirmationCode" bsSize="large">
           <ControlLabel>Confirmation Code</ControlLabel>
           <FormControl
             type="text"
@@ -78,9 +77,11 @@ class Signup extends Component {
             onChange={this.handleChange} />
         </FormGroup>
         <LoaderButton
+          block
+          bsSize="large"
           disabled={ ! this.validateCofirmationForm() }
           type="submit"
-          isLoading={isLoading}
+          isLoading={this.state.isLoading}
           text="Verify"
           loadingText="Verifying…" />
       </form>
@@ -88,24 +89,23 @@ class Signup extends Component {
   }
 
   renderForm() {
-    const isLoading = this.state.isLoading;
     return (
-      <form onSubmit={ ! isLoading ? this.handleSubmit : null }>
-        <FormGroup controlId="username">
+      <form onSubmit={this.handleSubmit}>
+        <FormGroup controlId="username" bsSize="large">
           <ControlLabel>Email</ControlLabel>
           <FormControl
             type="text"
             value={this.state.username}
             onChange={this.handleChange} />
         </FormGroup>
-        <FormGroup controlId="password">
+        <FormGroup controlId="password" bsSize="large">
           <ControlLabel>Password</ControlLabel>
           <FormControl
             value={this.state.password}
             onChange={this.handleChange}
             type="password" />
         </FormGroup>
-        <FormGroup controlId="confirmPassword">
+        <FormGroup controlId="confirmPassword" bsSize="large">
           <ControlLabel>Confirm Password</ControlLabel>
           <FormControl
             value={this.state.confirmPassword}
@@ -113,9 +113,11 @@ class Signup extends Component {
             type="password" />
         </FormGroup>
         <LoaderButton
+          block
+          bsSize="large"
           disabled={ ! this.validateForm() }
           type="submit"
-          isLoading={isLoading}
+          isLoading={this.state.isLoading}
           text="Signup"
           loadingText="Signing up…" />
       </form>
@@ -151,13 +153,15 @@ Most of things we are doing here are fairly straightforward but let's go over th
 Also, let's add a couple of styles in `src/containers/Signup.css`.
 
 {% highlight css %}
-.Signup {
-  padding: 60px 0;
-}
+@media all and (min-width: 480px) {
+  .Signup {
+    padding: 60px 0;
+  }
 
-.Signup form {
-  margin: 0 auto;
-  max-width: 320px;
+  .Signup form {
+    margin: 0 auto;
+    max-width: 320px;
+  }
 }
 {% endhighlight %}
 

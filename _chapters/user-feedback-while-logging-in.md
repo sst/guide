@@ -45,11 +45,12 @@ Create the following in `src/components/LoaderButton.js`.
 
 {% highlight javascript %}
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Glyphicon } from 'react-bootstrap';
 
 export default function LoaderButton({ isLoading, text, loadingText, disabled = false, ...props }) {
   return (
     <Button disabled={ disabled || isLoading } {...props}>
+      { isLoading && <Glyphicon glyph="refresh" className="spinning" /> }
       { ! isLoading ? text : loadingText }
     </Button>
   );
@@ -57,6 +58,22 @@ export default function LoaderButton({ isLoading, text, loadingText, disabled = 
 {% endhighlight %}
 
 This is a really simple component that simply taken a `isLoading` flag and the text that the button displays in the two states (ie, the default state and the loading state). The `disabled` prop is a result of what we have currently in our `Login` button. And ensure that the button is disabled when `isLoading` is `true`.
+
+And let's add a couple of styles to animate our loading icon. Add the following to `src/index.css`.
+
+{% highlight css %}
+.spinning.glyphicon {
+  margin-right: 7px;
+  top: 2px;
+  animation: spin 1s infinite linear;
+}
+@keyframes spin {
+  from { transform: scale(1) rotate(0deg); }
+  to { transform: scale(1) rotate(360deg); }
+}
+{% endhighlight %}
+
+This spins the refresh Glyphicon over the duration of a second infinitely.
 
 ### Render Using the isLoading Flag
 
@@ -80,12 +97,6 @@ import {
   ControlLabel,
 } from 'react-bootstrap';
 import LoaderButton from '../components/LoaderButton.js';
-{% endhighlight %}
-
-And finally, disable the form from submitting while it is loading. Just replace the opening `<form>` tag with the following.
-
-{% highlight javascript %}
-<form onSubmit={ ! this.state.isLoading ? this.handleSubmit : null }>
 {% endhighlight %}
 
 And now when we switch over to the browser and try logging in, you should see the intermediate state before the login completes.

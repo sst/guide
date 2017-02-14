@@ -29,6 +29,23 @@ Optionally, you can include a Bootstrap theme by just including it's styles.
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css">
 {% endhighlight %}
 
+We'll also tweak the styles of the form fields so that the mobile browser does not zoom in on them on focus. We just need them to have a minimum font size of 16px to prevent the zoom.
+
+To do that, let's add the following to our `src/index.css`.
+
+{% highlight css %}
+select.form-control,
+textarea.form-control,
+input.form-control {
+  font-size: 16px;
+}
+input[type=file] {
+  width: 100%;
+}
+{% endhighlight %}
+
+We are also setting the width of the input type file to prevent the page on mobile from overflowing and adding a scroll.
+
 Now if you head over to your browser, you might notice that the styles have shifted a bit. This is because Bootstrap includes [Normalize.css](http://necolas.github.io/normalize.css/) to have more consistent styles across browsers.
 
 Next, we are going to create a few routes for our application and set up the React Router.

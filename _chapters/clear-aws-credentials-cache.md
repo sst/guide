@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Create AWS Credentials Cache
+title: Clear AWS Credentials Cache
 ---
 
 To be able to upload our files to S3 we needed to get the AWS credentials first. And the AWS JS SDK saves those credentials temporarily.

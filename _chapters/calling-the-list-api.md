@@ -13,6 +13,8 @@ async componentWillMount() {
     return;
   }
 
+  this.setState({ isLoading: true });
+
   try {
     const results = await this.notes();
     this.setState({ notes: results.data });
@@ -20,6 +22,8 @@ async componentWillMount() {
   catch(e) {
     alert(e);
   }
+
+  this.setState({ isLoading: false });
 }
 
 notes() {
@@ -87,10 +91,14 @@ Let's also add a couple of styles to our `src/containers/Home.css`.
 {% highlight css %}
 .Home .notes h4 {
   font-family: "Open Sans", sans-serif;
+  font-weight: 600;
   overflow: hidden;
   line-height: 1.5;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+.Home .notes p {
+  color: #666;
 }
 {% endhighlight %}
 
