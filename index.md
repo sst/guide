@@ -44,13 +44,10 @@ layout: home
   - [Create a S3 bucket]({% link _chapters/create-a-s3-bucket.md %})
   - [Configure the AWS CLI]({% link _chapters/configure-the-aws-cli.md %})
   - [Deploy to S3]({% link _chapters/deploy-to-s3.md %})
-  - Create a CloudFront distribution
-  - Point your domain to CloudFront
-  - Setup SSL
-- Re-deploy
-  - Sync local with S3
-  - Invalidate CloudFront
-- Staging and Rollbacks
-  - Staging environment with S3
-  - Promoting to production
-  - Rolling back deploys
+  - [Create a CloudFront distribution]({% link _chapters/create-a-cloudfront-distribution.md %})
+  - [Setup your domain with CloudFront]({% link _chapters/setup-your-domain-with-cloudfront.md %})
+  - [Setup www domain redirect]({% link _chapters/setup-www-domain-redirect.md %})
+  - [Setup SSL]({% link _chapters/setup-ssl.md %})
+- [Deploying updates]({% link _chapters/deploying-updates.md %})
+  - [Update the app]({% link _chapters/update-the-app.md %})
+  - [Deploy again]({% link _chapters/deploy-again.md %})
