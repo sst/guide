@@ -9,10 +9,12 @@
 						{{ site.title | escape }}
 					</li>
           <li><a class="page-link" href="/">Table of Contents</a></li>
-					{% if site.email %}
-					<li><a class="email-link" href="mailto:{{ site.email }}">Contact Us</a></li>
+					{% if site.github_repo %}
+					<li><a class="email-link" href="{{ site.github_repo }}">GitHub</a></li>
 					{% endif %}
-          <li><a class="page-link" href="/">FAQ</a></li>
+					{% if site.email %}
+					<li><a class="email-link" href="mailto:{{ site.email }}">Email</a></li>
+					{% endif %}
         </ul>
       </div>
 

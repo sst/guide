@@ -2,14 +2,14 @@
 layout: home
 ---
 
-### About this tutorial
-
-### Getting Help
+Serverless Stack is a comprehensive step-by-step guide for creating full-stack serverless applications. We'll be creating a [simple note taking app](https://demo.serverless-stack.com) from scratch using React.js, AWS Lambda, and a few other AWS services.
 
 ### Introduction
 
-- Who is this for?
-- What will we be covering?
+- [Who is this for?]({% link _chapters/who-is-this-for.md %})
+- [What are we building?]({% link _chapters/what-are-we-building.md %})
+- [How to get help?]({% link _chapters/how-to-get-help.md %})
+- [Why create serverless apps?]({% link _chapters/why-create-serverless-apps.md %})
 
 ### Setting up the Backend
 
