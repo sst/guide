@@ -2,13 +2,25 @@
 layout: home
 ---
 
-# Table of Contents
+### About this tutorial
+
+### Getting Help
+
+### Introduction
+
+- Who is this for?
+- What will we be covering?
+
+### Setting up the Backend
 
 - [Create an IAM user]({% link _chapters/create-an-iam-user.md %})
 - [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %})
 - [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %})
 - [Create a DynamoDB table]({% link _chapters/create-a-dynamodb-table.md %})
 - [Create Serverless APIs with Lambda]({% link _chapters/create-serverless-apis-with-lambda.md %})
+
+### Setting up the Frontend
+
 - [Create a new app with Create React App]({% link _chapters/create-new-create-react-app.md %})
   - [Add app favicons]({% link _chapters/add-app-favicons.md %})
   - [Using custom fonts]({% link _chapters/using-custom-fonts.md %})
@@ -16,6 +28,9 @@ layout: home
 - [Handle routes with React Router]({% link _chapters/handle-routes-with-react-router.md %})
   - [Create containers]({% link _chapters/create-containers.md %})
   - [Handle 404s]({% link _chapters/handle-404s.md %})
+
+### Building the Frontend
+
 - [Create a login page]({% link _chapters/create-a-login-page.md %})
   - [Login with AWS Cognito]({% link _chapters/login-with-aws-cognito.md %})
   - [Add the user token to the state]({% link _chapters/add-the-user-token-to-the-state.md %})
@@ -40,6 +55,9 @@ layout: home
   - [Create a HOC that checks auth]({% link _chapters/create-a-hoc-that-checks-auth.md %})
   - [Use the HOC in the routes]({% link _chapters/use-the-hoc-in-the-routes.md %})
   - [Redirect on login]({% link _chapters/redirect-on-login.md %})
+
+### Deploying the Frontend
+
 - [Deploying]({% link _chapters/deploying.md %})
   - [Create a S3 bucket]({% link _chapters/create-a-s3-bucket.md %})
   - [Configure the AWS CLI]({% link _chapters/configure-the-aws-cli.md %})
@@ -51,3 +69,7 @@ layout: home
 - [Deploying updates]({% link _chapters/deploying-updates.md %})
   - [Update the app]({% link _chapters/update-the-app.md %})
   - [Deploy again]({% link _chapters/deploy-again.md %})
+
+### Conclusion
+
+- Wrapping up
