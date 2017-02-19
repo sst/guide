@@ -5,7 +5,7 @@ title: Create a S3 Bucket for file upload
 
 Amazon S3 (Simple Storage Service) provides storage service through web services interfaces like REST. You can store any object on S3, including images, videos, files, etc. Objects are organized into buckets, and identified within each bucket by a unique, user-assigned key.
 
-In this tutorial, we are going to create an S3 bucket which will be used to store user uploaded files from our notes app.
+In this chapter, we are going to create an S3 bucket which will be used to store user uploaded files from our notes app.
 
 ### Create Bucket
 

@@ -3,43 +3,46 @@ layout: post
 title: Create an IAM User
 ---
 
-An IAM User is required to access AWS service outside of AWS web console, and by Serverless Framework in a later tutorial.
+Amazon IAM (Identity and Access Management) enables AWS customers to manage users and user permissions in AWS. You can create one or more IAM users in your AWS account. You might create an IAM user for someone who needs access to your AWS console, or when you have a new application that needs to make API calls to AWS.
 
+In this chapter, we are going to create a new IAM user for Serverless Framework, who will be managing our Amazon Lambda, Amazon Api Gate and other Amazon services for us.
 
-### Create Pool
+### Create User
 
 First, log in to your [AWS Console](https://console.aws.amazon.com) and select IAM from the list of services.
 
-![Screenshot]({{ site.url }}/assets/iam-user/1.png)
+![Select IAM Service Screenshot]({{ site.url }}/assets/iam-user/select-iam-service.png)
 
 Select **Users**
 
-![Screenshot]({{ site.url }}/assets/iam-user/2.png)
+![Select IAM Users Screenshot]({{ site.url }}/assets/iam-user/select-iam-users.png)
 
 Select **Add User**
 
-![Screenshot]({{ site.url }}/assets/iam-user/3.png)
+![Add IAM User Screenshot]({{ site.url }}/assets/iam-user/add-iam-user.png)
 
-Enter a **User name** and check **Programmatic access**
+Enter a **User name** and check **Programmatic access**, then select **Next: Permissions**
 
-Select **Next: Permissions**
+Serverless Framework will manage our services through AWS API. It does not need access to our AWS Management Console.
 
-![Screenshot]({{ site.url }}/assets/iam-user/4.png)
+![Fill in IAM User Info Screenshot]({{ site.url }}/assets/iam-user/fill-in-iam-user-info.png)
 
 Select **Attach existing policies directly**.
 
-![Screenshot]({{ site.url }}/assets/iam-user/5.png)
+![Add IAM User Policy Screenshot]({{ site.url }}/assets/iam-user/add-iam-user-policy.png)
 
-Search for **AdministratorAccess** and select the policy.
+Search for **AdministratorAccess** and select the policy, then select **Next: Review**
 
-Select **Next: Review**
-
-![Screenshot]({{ site.url }}/assets/iam-user/6.png)
+![Added Admin Policy Screenshot]({{ site.url }}/assets/iam-user/added-admin-policy.png)
 
 Select **Create user**
 
-![Screenshot]({{ site.url }}/assets/iam-user/7.png)
+![Reivew IAM User Screenshot]({{ site.url }}/assets/iam-user/review-iam-user.png)
 
-Select **Show** to reveal **Secret access key**. Take a note of the **Access key ID** and **Secret access key** which will be required later in setting up **Serverless Api**.
+Select **Show** to reveal **Secret access key**.
 
-![Screenshot]({{ site.url }}/assets/iam-user/8.png)
+![Added IAM User Screenshot]({{ site.url }}/assets/iam-user/added-iam-user.png)
+
+Take a note of the **Access key ID** and **Secret access key** which will be required by Serverless Framework in the later chapter.
+
+![IAM User Credentials Screenshot]({{ site.url }}/assets/iam-user/iam-user-credentials.png)

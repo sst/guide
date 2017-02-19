@@ -3,37 +3,15 @@ layout: post
 title: Create a DynamoDB Table
 ---
 
-TODO
-===
-* open aws console in new window
-
 Introduction to DynamoDB
 ===
 
-In this tutorial, you will learn how to create a simple table, add data, scan and query the data, delete data, and delete the table using the DynamoDB Console.
+Amazon DynamoDB is a fully managed NoSQL database that provides fast and predictable performance with seamless scalability. Similar to other database, DynamoDB stores data in tables. Each table contains multiple items, and each item is composed of one or more attributes.
 
-* What is DynamoDB?
-
-    Amazon DynamoDB is a fully managed NoSQL database. Similar to other database, DynamoDB stores data in tables. Each row in a table is called an `Item`. Each column value in a row is called an `Attribute`. Read more here [What Is Amazon DynamoDB][dynamodb-intro].
+In this chapter, we are going to create a simple table to store notes created by each user.
 
 
-* How do indexes work?
-
-    Each DynamoDB table has a primary key, which cannot be changed once set. DynamoDB supports two different kinds of primary keys:
-
-    * Partition key
-    * Partition key and sort key
-
-    If you want to read the data using non-key attributes, you can use a secondary index to do this. Read more here [DynamoDB Core Components][dynamodb-components].
-
-* What is Provisioned Throughput
-
-    Read more here [Provisioned Throughput][dynamodb-throughput].
-
-
----
-
-### Create a DynamoDB Table
+### Create Table
 
 First, log in to your [AWS Console](https://console.aws.amazon.com) and select DynamoDB from the list of services.
 
@@ -41,22 +19,29 @@ First, log in to your [AWS Console](https://console.aws.amazon.com) and select D
 
 Select **Create table**
 
-![My helpful screenshot]({{ site.url }}/assets/dynamodb/create-table-start.png)
+![Create DynamoDB Table screenshot]({{ site.url }}/assets/dynamodb/create-dynamodb-table.png)
 
-In the `Table name` field, type `notes`.
+Enter the **Table name** and **Primary key** info.
 
-1. In the `Partition key` field, type `userId`. The `Partition key` is used to spread data across partitions for scalability. It’s important to choose an attribute with a wide range of values and that is likely to have evenly distributed access patterns.
-1. Since each user may have many notes, you can enable easy sorting with a Sort Key. Check the Add sort key box. Type `noteId` in the Sort Key field.
-1. We will accept the default settings for this example.
-1. Now click **Create**.
+Each DynamoDB table has a primary key, which cannot be changed once set. The primary key uniquely identifies each item in the table, so that no two items can have the same key. DynamoDB supports two different kinds of primary keys:
 
-![Select DynamoDB Service screenshot]({{ site.url }}/assets/dynamodb/3.png)
+ * Partition key
+ * Partition key and sort key (composite)
 
-When the **notes** table is ready to use, it appears in in the table list with a checkbox.
+We are going to use the composite primary key which gives us additional flexibility when query data. For example, if you provide only the value for **UserId**, DynamoDB would retrieve all of the notes by that user. Or you could provide a value for **UserId** and a value for **NoteId**, to retrieve a particular note.
 
-![Select DynamoDB Service screenshot]({{ site.url }}/assets/dynamodb/4.png)
+To get a further understanding on how indexes work in DynamoDB, read more here [DynamoDB Core Components][dynamodb-components].
 
-[aws-console]: https://console.aws.amazon.com/console/home?region=us-east-1
-[dynamodb-intro]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html
+![Set Table Primary Key screenshot]({{ site.url }}/assets/dynamodb/set-table-primary-key.png)
+
+Ensure **Use default settings** is checked, then select **Create**.
+
+Note the default settings provision 5 reads and 5 writes. When you create a table, you specify how much provisioned throughput capacity you want to reserve for reads and writes. DynamoDB will reserve the necessary resources to meet your throughput needs while ensuring consistent, low-latency performance. One read capacity unit can read up to 8 KB per second and one write capacity unit can write up to 1 KB per second. You can change your provisioned throughput settings, increasing or decreasing capacity as needed.
+
+![Set Table Provisioned Capacity screenshot]({{ site.url }}/assets/dynamodb/set-table-provisioned-capacity.png)
+
+The **notes** table is created. Table creation should not take long time to complete. If you find yourself stuck with the **Table is being created** messsage, refresh the page manually.
+
+![Select DynamoDB Service screenshot]({{ site.url }}/assets/dynamodb/dynamodb-table-created.png)
+
 [dynamodb-components]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html
-[dynamodb-throughput]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ProvisionedThroughput.html

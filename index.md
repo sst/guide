@@ -13,12 +13,24 @@ Serverless Stack is a comprehensive step-by-step guide for creating full-stack s
 
 ### Setting up the Backend
 
-- [Create a S3 bucket for file upload]({% link _chapters/create-a-s3-bucket-for-file-upload.md %})
-- [Create a DynamoDB table]({% link _chapters/create-a-dynamodb-table.md %})
 - [Create an IAM user]({% link _chapters/create-an-iam-user.md %})
+- [Create a DynamoDB table]({% link _chapters/create-a-dynamodb-table.md %})
+- [Create a S3 bucket for file upload]({% link _chapters/create-a-s3-bucket-for-file-upload.md %})
 - [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %})
 - [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %})
-- [Create a backend with Serverless Framework]({% link _chapters/create-serverless-apis-with-lambda.md %})
+- [Setup Serverless Framework]({% link _chapters/setup-serverless-framework.md %})
+
+### Building the Backend
+
+- [Create note API]({% link _chapters/create-note-api.md %})
+- [Get note API]({% link _chapters/get-note-api.md %})
+- [List notes API]({% link _chapters/list-notes-api.md %})
+- [Update note API]({% link _chapters/update-note-api.md %})
+- [Delete note API]({% link _chapters/delete-note-api.md %})
+
+### Deploying the Backend
+
+- [Deploy APIs]({% link _chapters/deploy-apis.md %})
 
 ### Setting up the Frontend
 
