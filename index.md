@@ -2,7 +2,16 @@
 layout: home
 ---
 
-# Table of Contents
+Serverless Stack is a comprehensive step-by-step guide for creating full-stack serverless applications. We'll be creating a [simple note taking app](https://demo.serverless-stack.com) from scratch using React.js, AWS Lambda, and a few other AWS services.
+
+### Introduction
+
+- [Who is this for?]({% link _chapters/who-is-this-for.md %})
+- [What are we building?]({% link _chapters/what-are-we-building.md %})
+- [How to get help?]({% link _chapters/how-to-get-help.md %})
+- [Why create serverless apps?]({% link _chapters/why-create-serverless-apps.md %})
+
+### Setting up the Backend
 
 - [Create a S3 bucket for file upload]({% link _chapters/create-a-s3-bucket-for-file-upload.md %})
 - [Create a DynamoDB table]({% link _chapters/create-a-dynamodb-table.md %})
@@ -10,6 +19,9 @@ layout: home
 - [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %})
 - [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %})
 - [Create a backend with Serverless Framework]({% link _chapters/create-serverless-apis-with-lambda.md %})
+
+### Setting up the Frontend
+
 - [Create a new app with Create React App]({% link _chapters/create-new-create-react-app.md %})
   - [Add app favicons]({% link _chapters/add-app-favicons.md %})
   - [Using custom fonts]({% link _chapters/using-custom-fonts.md %})
@@ -17,6 +29,9 @@ layout: home
 - [Handle routes with React Router]({% link _chapters/handle-routes-with-react-router.md %})
   - [Create containers]({% link _chapters/create-containers.md %})
   - [Handle 404s]({% link _chapters/handle-404s.md %})
+
+### Building the Frontend
+
 - [Create a login page]({% link _chapters/create-a-login-page.md %})
   - [Login with AWS Cognito]({% link _chapters/login-with-aws-cognito.md %})
   - [Add the user token to the state]({% link _chapters/add-the-user-token-to-the-state.md %})
@@ -41,17 +56,21 @@ layout: home
   - [Create a HOC that checks auth]({% link _chapters/create-a-hoc-that-checks-auth.md %})
   - [Use the HOC in the routes]({% link _chapters/use-the-hoc-in-the-routes.md %})
   - [Redirect on login]({% link _chapters/redirect-on-login.md %})
+
+### Deploying the Frontend
+
 - [Deploying]({% link _chapters/deploying.md %})
   - [Create a S3 bucket]({% link _chapters/create-a-s3-bucket.md %})
   - [Configure the AWS CLI]({% link _chapters/configure-the-aws-cli.md %})
   - [Deploy to S3]({% link _chapters/deploy-to-s3.md %})
-  - Create a CloudFront distribution
-  - Point your domain to CloudFront
-  - Setup SSL
-- Re-deploy
-  - Sync local with S3
-  - Invalidate CloudFront
-- Staging and Rollbacks
-  - Staging environment with S3
-  - Promoting to production
-  - Rolling back deploys
+  - [Create a CloudFront distribution]({% link _chapters/create-a-cloudfront-distribution.md %})
+  - [Setup your domain with CloudFront]({% link _chapters/setup-your-domain-with-cloudfront.md %})
+  - [Setup www domain redirect]({% link _chapters/setup-www-domain-redirect.md %})
+  - [Setup SSL]({% link _chapters/setup-ssl.md %})
+- [Deploying updates]({% link _chapters/deploying-updates.md %})
+  - [Update the app]({% link _chapters/update-the-app.md %})
+  - [Deploy again]({% link _chapters/deploy-again.md %})
+
+### Conclusion
+
+- Wrapping up

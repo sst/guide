@@ -13,17 +13,25 @@ First, log in to your [AWS Console](https://console.aws.amazon.com) and select S
 
 ![Select S3 Service screenshot]({{ site.url }}/assets/select-s3-service.png)
 
-Select **Create Bucket** and pick a name for your application and select the **US Standard** Region. Since our application is being served out using a CDN, the region should not matter to us and US Standard ends up working better with our workflow.
+Select **Create Bucket** and pick a name for your application and select the **US East** Region. Since our application is being served out using a CDN, the region should not matter to us.
 
 ![Create S3 Bucket screenshot]({{ site.url }}/assets/create-s3-bucket.png)
 
-Now click on your newly created bucket from the list and navigate to it's properties.
+Step through the next steps and leave the defaults by clicking **Next**.
 
-![Select Bucket properties screenshot]({{ site.url }}/assets/select-bucket-properties.png)
+![Create S3 Bucket next properties screenshot]({{ site.url }}/assets/create-s3-bucket-next-properties.png)
+
+![Create S3 Bucket next permissions screenshot]({{ site.url }}/assets/create-s3-bucket-next-permissions.png)
+
+![Create S3 Bucket next review screenshot]({{ site.url }}/assets/create-s3-bucket-next-review.png)
+
+Now click on your newly created bucket from the list and navigate to it's permissions by clicking **Permissions**.
+
+![Select Bucket properties screenshot]({{ site.url }}/assets/select-bucket-permissions.png)
 
 ### Add Permissions
 
-Buckets by defualt are not publicly accessible, so we need to change the permissions. Select the **Permissions** panel from the left and click on **Add bucket policy**.
+Buckets by defualt are not publicly accessible, so we need to change the permissions. Select the **Bucket Policy** from the permissions panel.
 
 ![Add bucket policy screenshot]({{ site.url }}/assets/add-bucket-policy.png)
 
@@ -50,11 +58,15 @@ And hit **Save**.
 
 ### Enable Static Web Hosting
 
-And finally we need to turn our bucket into a static website. To do this, we need to select **Static Web Hosting** panel in the properties.
+And finally we need to turn our bucket into a static website. Select the **Properties** tab from the top panel.
+
+![Select properties tab screenshot]({{ site.url }}/assets/select-bucket-properties.png)
+
+Select **Static website hosting**. 
 
 ![Select static web hosting screenshot]({{ site.url }}/assets/select-static-website-hosting.png)
 
-Now select **Enable website hosting** and add our `index.html` as the **Index Document** and the **Error Document**. Since we are letting React handle 404s, we can simply redirect our errors to our `index.html` as well. Hit save once you are done.
+Now select **Use this bucket to host a website** and add our `index.html` as the **Index Document** and the **Error Document**. Since we are letting React handle 404s, we can simply redirect our errors to our `index.html` as well. Hit **Save** once you are done.
 
 This panel also shows us where our app will be accessible. AWS assigns us a URL for our static website. In this case the URL assigned to me is `notes-app-client.s3-website-us-east-1.amazonaws.com`.
 
