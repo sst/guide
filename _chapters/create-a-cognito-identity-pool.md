@@ -26,6 +26,48 @@ Select **Create Pool**
 
 ![Screenshot]({{ site.url }}/assets/cognito-user-pool/4.png)
 
-Select **Allow**
+Now we need to specify what AWS resources are accessible for users with temporary credentials obtained from the identity pool.
+
+Select **View Details**. Two **Role Summary** sections are expanded. The top section summarizes the permission policy for authenticated users, and the bottom section summarizes that for unauthenticated users.
+
+Select **View Policy Document** in the top section. Then select **Edit**.
 
 ![Screenshot]({{ site.url }}/assets/cognito-user-pool/5.png)
+
+It will warn you to read the documentation. Select **Ok** to edit.
+
+![Screenshot]({{ site.url }}/assets/cognito-user-pool/6.png)
+
+Add the following polity into the editor. Where `react-notes-app` is the name of our S3 bucket.
+
+{% highlight json %}
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "mobileanalytics:PutEvents",
+        "cognito-sync:*",
+        "cognito-identity:*"
+      ],
+      "Resource": [
+        "*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:*"
+      ],
+      "Resource": [
+        "arn:aws:s3:::anomaly-notes-app/${cognito-identity.amazonaws.com:sub}*"
+      ]
+    }
+  ]
+}
+{% endhighlight %}
+
+Select **Allow**
+
+![Screenshot]({{ site.url }}/assets/cognito-user-pool/7.png)

@@ -24,7 +24,7 @@ Enter **Pool name** and select **Review defaults**
 
 ![Select Review defaults screenshot]({{ site.url }}/assets/cognito-user-pool/4.png)
 
-Select **Create pool**
+Select **Create pool** at the bottom of the page
 
 ![Select Create pool screenshot]({{ site.url }}/assets/cognito-user-pool/5.png)
 
@@ -49,3 +49,21 @@ Enter **App name** and select **Create app**
 The app is created. Take a note of the **App client id** which will be required later in setting up **Identity Pool**.
 
 ![Screenshot]({{ site.url }}/assets/cognito-user-pool/9.png)
+
+### Create Test User
+
+Select **Users and groups** from the left menu.
+
+![Screenshot]({{ site.url }}/assets/cognito-user-pool/10.png)
+
+Select **Create user**.
+
+![Screenshot]({{ site.url }}/assets/cognito-user-pool/11.png)
+
+Enter a **Username** and **Temporary password** that conforms with the password policy specified when creating the user pool. Uncheck **Mark phone number as verified?**. Enter an **Email**. Select **Create user**.
+
+![Screenshot]({{ site.url }}/assets/cognito-user-pool/12.png)
+
+The user is created. An email should be sent to the user's email address from **no-reply@verificationemail.com** with the username and password.
+
+![Screenshot]({{ site.url }}/assets/cognito-user-pool/13.png)

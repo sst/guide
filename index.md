@@ -4,11 +4,12 @@ layout: home
 
 # Table of Contents
 
+- [Create a S3 bucket for file upload]({% link _chapters/create-a-s3-bucket-for-file-upload.md %})
+- [Create a DynamoDB table]({% link _chapters/create-a-dynamodb-table.md %})
 - [Create an IAM user]({% link _chapters/create-an-iam-user.md %})
 - [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %})
 - [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %})
-- [Create a DynamoDB table]({% link _chapters/create-a-dynamodb-table.md %})
-- [Create Serverless APIs with Lambda]({% link _chapters/create-serverless-apis-with-lambda.md %})
+- [Create a backend with Serverless Framework]({% link _chapters/create-serverless-apis-with-lambda.md %})
 - [Create a new app with Create React App]({% link _chapters/create-new-create-react-app.md %})
   - [Add app favicons]({% link _chapters/add-app-favicons.md %})
   - [Using custom fonts]({% link _chapters/using-custom-fonts.md %})
