@@ -19,6 +19,25 @@ layout: default
     {% if page.next.url %}
     <a class="next" href="{{ page.next.url }} ">Next &rarr;</a>
     {% endif %}
+    <div class="clear"></div>
+    <div class="share-container">
+      <div class="share">
+        <p>Share this article</p>
+        <ul class="share-buttons">
+          <!-- Facebook -->
+          <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url }}&p[title]={{ page.title }}" target="_blank" title="Share on Facebook"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a></li>
+          <!-- Twitter -->
+          <li><a href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ site.url }}{{ page.url }}" target="_blank" title="Tweet"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i><span class="sr-only">Tweet</span></a></li>
+          <!-- Reddit -->
+          <li><a href="http://www.reddit.com/submit?url={{ site.url }}{{ page.url }}&title={{ page.title }}" target="_blank" title="Submit to Reddit"><i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a></li>
+          <!-- LinkedIn -->
+          <li><a href="http://www.linkedin.com/shareArticle?mini=true&url={{ site.url }}{{ page.url }}&title={{ page.title }}" target="_blank" title="Share on LinkedIn"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i><span class="sr-only">Share on LinkedIn</span></a></li>
+          <!-- Email -->
+          <li><a href="mailto:?subject={{ page.title }}&body={{ page.title }}%0A%0A{{ site.url }}{{ page.url }}" target="_blank" title="Send email"><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i><span class="sr-only">Send email</span></a></li>
+
+        </ul>
+      </div>
+    </div>
   </div>
 
 </article>

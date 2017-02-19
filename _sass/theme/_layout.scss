@@ -267,12 +267,18 @@ a.post-info {
 }
 
 .post-footer {
-  margin-top: 54px;
   @extend %clearfix;
+  margin-top: 54px;
 
-  a {
+  & > a {
     @extend %a-secondary;
     font-weight: bold;
+    line-height: 84px;
+
+    @include media-query($on-palm) {
+      padding-bottom: 30px;
+      line-height: 1.5;
+    }
   }
 
   .previous {
@@ -280,5 +286,35 @@ a.post-info {
   }
   .next {
     float: right;
+  }
+
+  .clear {
+    @extend %clearfix;
+    display: none;
+    @include media-query($on-palm) {
+      display: block;
+    }
+  }
+
+  .share-container {
+    text-align: center;
+
+    .share {
+      display: inline-block;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: darken($background-color, 5%);
+
+      p {
+        color: $tertiary-text-color;
+        font-weight: bold;
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+
+      ul.share-buttons li {
+        padding: 0 5px;
+      }
+    }
   }
 }

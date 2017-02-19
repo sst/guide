@@ -32,7 +32,7 @@ handleSubmit = async (event) => {
   event.preventDefault();
 
   if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
-    alert('Please pick a file smaller than 1MB');
+    alert('Please pick a file smaller than 5MB');
     return;
   }
 
