@@ -11,9 +11,13 @@ Serverless Stack is a comprehensive step-by-step guide for creating full-stack s
 - [How to get help?]({% link _chapters/how-to-get-help.md %})
 - [Why create serverless apps?]({% link _chapters/why-create-serverless-apps.md %})
 
-### Setting up the Backend
+### Setup your AWS account
 
 - [Create an IAM user]({% link _chapters/create-an-iam-user.md %})
+- [Configure the AWS CLI]({% link _chapters/configure-the-aws-cli.md %})
+
+### Setting up the Backend
+
 - [Create a DynamoDB table]({% link _chapters/create-a-dynamodb-table.md %})
 - [Create a S3 bucket for file upload]({% link _chapters/create-a-s3-bucket-for-file-upload.md %})
 - [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %})
@@ -73,7 +77,6 @@ Serverless Stack is a comprehensive step-by-step guide for creating full-stack s
 
 - [Deploying]({% link _chapters/deploying.md %})
   - [Create a S3 bucket]({% link _chapters/create-a-s3-bucket.md %})
-  - [Configure the AWS CLI]({% link _chapters/configure-the-aws-cli.md %})
   - [Deploy to S3]({% link _chapters/deploy-to-s3.md %})
   - [Create a CloudFront distribution]({% link _chapters/create-a-cloudfront-distribution.md %})
   - [Setup your domain with CloudFront]({% link _chapters/setup-your-domain-with-cloudfront.md %})
