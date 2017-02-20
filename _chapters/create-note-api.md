@@ -5,7 +5,7 @@ title: Create note API
 
 ### Create Function Code
 
-Create a new file create.js file and paste the following code
+Create a new file create.js and paste the following code
 
 {% highlight javascript %}
 'use strict';
@@ -15,17 +15,16 @@ const AWS = require('aws-sdk');
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.create = (event, context, callback) => {
-  // request body is passed in as a JSON encoded string in 'event.body'
+  // Request body is passed in as a JSON encoded string in 'event.body'
   const data = JSON.parse(event.body);
 
   const params = {
-    //  
     TableName: 'notes',
     Item: {
-      // use the federated identity ID of the authenticated user for 'userId'
+      // Use the federated identity ID of the authenticated user for 'userId'
       // which is in 'event.requestContext.authorizer.claims.sub'
       userId: event.requestContext.authorizer.claims.sub,
-      // generate a unique uuid for 'noteId'
+      // Generate a unique uuid for 'noteId'
       noteId: uuid.v1(),
       content: data.content,
       attachment: data.attachment,
@@ -34,13 +33,13 @@ module.exports.create = (event, context, callback) => {
   };
 
   dynamoDb.put(params, (error, data) => {
-    // response headers to enable CORS (Cross-Origin Resource Sharing)
+    // Set response headers to enable CORS (Cross-Origin Resource Sharing)
     const headers = {
       'Access-Control-Allow-Origin': '*',
       "Access-Control-Allow-Credentials" : true,
     };
 
-    // return status code 500 on error
+    // Return status code 500 on error
     if (error) {
       const response = {
         statusCode: 500,
@@ -51,7 +50,7 @@ module.exports.create = (event, context, callback) => {
       return;
     }
 
-    // return status code 200 and newly created item in response body
+    // Return status code 200 and newly created item in response body
     const response = {
       statusCode: 200,
       headers: headers,
@@ -64,7 +63,7 @@ module.exports.create = (event, context, callback) => {
 
 ### Configure API Endpoint
 
-Open serverless.yml file and replace the content with following code
+Open **serverless.yml** file and replace the content with following code
 
 {% highlight yaml %}
 service: notes-app-api
@@ -122,7 +121,7 @@ region: us-east-1
 endpoints:
   POST - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes
 functions:
-  notes-app-api-prod-list: arn:aws:lambda:us-east-1:632240853321:function:notes-app-api-prod-list
+  notes-app-api-prod-create: arn:aws:lambda:us-east-1:632240853321:function:notes-app-api-prod-create
 {% endhighlight %}
 
 ### Test
