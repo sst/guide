@@ -43,7 +43,7 @@ Select **Add an app**
 
 ![Select Add An App Screenshot]({{ site.url }}/assets/cognito-user-pool/select-add-an-app.png)
 
-Enter **App name** and select **Create app**
+Enter **App name**, select **Enable sign-in API for server-based authentication**, then select **Create app**.
 
 ![Fill User Pool App Info Screenshot]({{ site.url }}/assets/cognito-user-pool/fill-user-pool-app-info.png)
 
