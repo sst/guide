@@ -13,6 +13,7 @@ Create a new container at `src/containers/Signup.js` with the following.
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import {
+  HelpBlock,
   FormGroup,
   FormControl,
   ControlLabel,
@@ -72,9 +73,10 @@ class Signup extends Component {
         <FormGroup controlId="confirmationCode" bsSize="large">
           <ControlLabel>Confirmation Code</ControlLabel>
           <FormControl
-            type="text"
+            type="tel"
             value={this.state.confirmationCode}
             onChange={this.handleChange} />
+          <HelpBlock>Please check your email for the code.</HelpBlock>
         </FormGroup>
         <LoaderButton
           block
@@ -162,6 +164,12 @@ Also, let's add a couple of styles in `src/containers/Signup.css`.
     margin: 0 auto;
     max-width: 320px;
   }
+}
+
+.Signup form span.help-block {
+  font-size: 14px;
+  padding-bottom: 10px;
+  color: #999;
 }
 {% endhighlight %}
 

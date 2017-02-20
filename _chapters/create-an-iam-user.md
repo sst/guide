@@ -43,6 +43,8 @@ Select **Show** to reveal **Secret access key**.
 
 ![Added IAM User Screenshot]({{ site.url }}/assets/iam-user/added-iam-user.png)
 
-Take a note of the **Access key ID** and **Secret access key** which will be required by Serverless Framework in the later chapter.
+Take a note of the **Access key ID** and **Secret access key**.
 
 ![IAM User Credentials Screenshot]({{ site.url }}/assets/iam-user/iam-user-credentials.png)
+
+Next we'll be using this info to configure the AWS CLI.

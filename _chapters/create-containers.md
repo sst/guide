@@ -116,7 +116,7 @@ This simple renders our home page given that the user is not currently signed in
 
 {% highlight css %}
 .Home .lander {
-  padding-top: 100px;
+  padding: 80px 0;
   text-align: center;
 }
 

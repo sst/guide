@@ -53,7 +53,7 @@ class NewNote extends Component {
     event.preventDefault();
 
     if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
-      alert('Please pick a file smaller than 1MB');
+      alert('Please pick a file smaller than 5MB');
       return;
     }
 
@@ -99,7 +99,7 @@ Everything is fairly standard here, except for the file input. Our form elements
 Currently, our `handleSubmit` does not do a whole lot other than limitting the file size of our attachment. We are going to define this in our config, so add the following to our `src/config.js`.
 
 {% highlight javascript %}
-MAX_ATTACHMENT_SIZE: 1000000,
+MAX_ATTACHMENT_SIZE: 5000000,
 {% endhighlight %}
 
 Let's also add the styles for our form in `src/containers/NewNote.css`.

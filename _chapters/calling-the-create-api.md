@@ -78,17 +78,17 @@ handleSubmit = async (event) => {
   event.preventDefault();
 
   if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
-    alert('Please pick a file smaller than 1MB');
+    alert('Please pick a file smaller than 5MB');
     return;
   }
 
   this.setState({ isLoading: true });
 
   try {
-    const results = await this.createNote({
+    await this.createNote({
       content: this.state.content,
     });
-    this.props.router.push(`/notes/${results.data.noteId}`);
+    this.props.router.push('/');
   }
   catch(e) {
     alert(e);
