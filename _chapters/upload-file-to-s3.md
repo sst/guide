@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Upload File to S3
+date: 2017-01-24 00:00:00
 ---
 
 Let's now add an attachment to our note. The flow we are using here is very simple.

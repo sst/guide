@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Create a DynamoDB Table
+date: 2016-12-27 00:00:00
 ---
 
 Introduction to DynamoDB

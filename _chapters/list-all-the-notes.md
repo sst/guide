@@ -1,6 +1,7 @@
 ---
 layout: post
 title: List All the Notes
+date: 2017-01-26 00:00:00
 ---
 
 Now that we are able to create a new note. Let's create a page where we can see a list of all the notes a user has created. It makes sense that this would be the home page (even though we use the `/` route for the landing page). So we just need to conditionally render the landing page or the home page depending on the user session.

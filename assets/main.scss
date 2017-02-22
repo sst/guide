@@ -13,7 +13,7 @@ $base-line-height:      1.5;
 
 $spacing-unit:          30px;
 
-$text-color:            #222;
+$text-color:            #333;
 $secondary-text-color:  #666;
 $tertiary-text-color:  	#999;
 $background-color:      #f2efe8;
@@ -43,13 +43,13 @@ $on-laptop:             800px;
 @import "theme";
 
 // Share buttons
-ul.share-buttons{
+ul.share-buttons {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-ul.share-buttons li{
+ul.share-buttons li {
   display: inline;
 }
 
@@ -62,4 +62,12 @@ ul.share-buttons .sr-only {
   height: 1px;
   width: 1px;
   overflow: hidden;
+}
+
+// Homepage pitch
+div.home p.pitch {
+  padding: 0 30px 50px;
+  text-align: center;
+  font-size: 24px;
+  color: #555;
 }

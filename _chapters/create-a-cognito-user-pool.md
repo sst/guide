@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Create a Cognito User Pool
+date: 2016-12-28 00:00:00
 ---
 
 Amazon Cognito User Pool makes it easy for developers to add sign-up and sign-in functionality to web and mobile applications. It serves as your own identity provider to maintain a user directory. It supports user registration and sign-in, as well as provisioning identity tokens for signed-in users.

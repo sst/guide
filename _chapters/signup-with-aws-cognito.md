@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Signup with AWS Cognito
+date: 2017-01-21 00:00:00
 ---
 
 Now let's go ahead and implement the `handleSubmit` and `handleConfirmationSubmit` methods and connect it up with our AWS Cognito setup.

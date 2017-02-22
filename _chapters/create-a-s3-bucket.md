@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Create a S3 Bucket
+date: 2017-02-06 00:00:00
 ---
 
 To be able to host our note taking app, we need to upload the assets that are going to served out statically on S3. S3 has a concept of buckets (or folders) to separate different types of files.

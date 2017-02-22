@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Use the HOC in the Routes
+date: 2017-02-03 00:00:00
 ---
 
 Now that we created the `AuthenticatedComponent` and `UnauthenticatedComponent`, let's use them on the containers we want to secure.

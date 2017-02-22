@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Deploying Updates
+date: 2017-02-12 00:00:00
 ---
 
 Now let's look at how we make changes and update our app. The process is very simillar to how we deployed our code to S3 but with a few changes. Here is what it looks like.

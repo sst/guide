@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Redirect On Login
+date: 2017-02-04 00:00:00
 ---
 
 Our secured pages redirect to the login page when the user is not logged in, with a referral to the originating page. To redirect back after they login, we need to add a couple of things to our `Login` container.

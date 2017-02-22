@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Calling the List API
+date: 2017-01-27 00:00:00
 ---
 
 Now that we have our basic home page setup, let's make the API call to render our list of notes.

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Create a new app with Create React App
+date: 2017-01-06 00:00:00
 ---
 
 Let's get started by creating our single page app using React. We'll use the [Create React App](https://github.com/facebookincubator/create-react-app) project to set everything up. It is officially supported by the React team and conviniently packages all the dependencies for a React.js proejct.

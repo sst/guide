@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Create a HOC That Checks Auth
+date: 2017-02-02 00:00:00
 ---
 
 Let's first create a HOC that will act on the containers that need a user to be logged in.

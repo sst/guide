@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Create a Cognito Identity Pool
+date: 2016-12-29 00:00:00
 ---
 
 Amazon Cognito Federated Identities enable developer to create unique identities for your users and authenticate them with federated identity providers. With a federated identity, you can obtain temporary, limited-privilege AWS credentials to securely access other AWS services such as Amazon DynamoDB, Amazon S3, and Amazon API Gateway. Amazon Cognito Federated Identities support federated identity providers — including Amazon, Facebook, Google, Twitter, OpenID Connect providers, and SAML identity providers — as well as unauthenticated identities.
