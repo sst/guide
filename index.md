@@ -22,6 +22,7 @@ layout: home
 - [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %})
 - [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %})
 - [Setup Serverless Framework]({% link _chapters/setup-serverless-framework.md %})
+  - [Add support for ES6 Javascript]({% link _chapters/add-support-for-es6-javascript.md %})
 
 ### Building the Backend
 
