@@ -16,14 +16,14 @@ AWS CLI needs Python 2 version 2.6.5+ or Python 3 version 3.3+ and [Pip](https:/
 Now using Pip you can install the AWS CLI (on Linux, macOS, or Unix) by running:
 
 {% highlight bash %}
-sudo pip install awscli
+$ sudo pip install awscli
 {% endhighlight %}
 
 If you are having some problems installing the AWS CLI or need Windows install instructions, refer to the [complete install instructions](http://docs.aws.amazon.com/cli/latest/userguide/installing.html).
 
 ### Add Your Access Key to AWS CLI
 
-We now need to tell the AWS CLI to use your Access Keys from a step above.
+We now need to tell the AWS CLI to use your Access Keys from the previous chapter.
 
 It should look something like this:
 
@@ -33,7 +33,7 @@ It should look something like this:
 Simply run the following and enter your Secret Key ID and your Access Key. You can leave the **Default region name** and **Default output format** the way they are.
 
 {% highlight bash %}
-aws configure
+$ aws configure
 {% endhighlight %}
 
 Next let's get started with setting up our backend.

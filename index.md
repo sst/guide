@@ -18,7 +18,7 @@ layout: home
 ### Setting up the Backend
 
 - [Create a DynamoDB table]({% link _chapters/create-a-dynamodb-table.md %})
-- [Create a S3 bucket for file upload]({% link _chapters/create-a-s3-bucket-for-file-upload.md %})
+- [Create a S3 bucket for file uploads]({% link _chapters/create-a-s3-bucket-for-file-uploads.md %})
 - [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %})
 - [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %})
 - [Setup Serverless Framework]({% link _chapters/setup-serverless-framework.md %})
