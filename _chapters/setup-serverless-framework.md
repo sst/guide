@@ -9,6 +9,12 @@ In this chapter, we are going to setup Serverless Framework on our local develop
 
 ### Install Serverless
 
+Create a project folder to store the Lambda code.
+{% highlight bash %}
+$ mkdir notes-app-api
+$ cd notes-app-api
+{% endhighlight %}
+
 Install serverless globally
 {% highlight bash %}
 $ npm install serverless -g
@@ -22,7 +28,7 @@ Setup AWS credentials.
 $ serverless config credentials --provider aws --key my-key --secret my-secret
 {% endhighlight %}
 
-Create an AWS Lambda function in Node.js
+At the root of the project, create an AWS Lambda function in Node.js
 {% highlight bash %}
 $ serverless create --template aws-nodejs
 {% endhighlight %}
@@ -38,6 +44,7 @@ handler.js    serverless.yml
 
 ### Install NodeJS Dependencies
 
+At the root of the project, run
 {% highlight bash %}
 $ npm init
 $ npm install aws-sdk uuid --save
