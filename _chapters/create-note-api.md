@@ -6,7 +6,7 @@ date: 2016-12-31 00:00:00
 
 ### Create Function Code
 
-Create a new file create.js and paste the following code
+Create a new file **create.js** and paste the following code
 
 {% highlight javascript %}
 import uuid from 'uuid';
@@ -20,11 +20,15 @@ export function main(event, context, callback) {
 
   const params = {
     TableName: 'notes',
+    // 'Item' contains the attributes of the item to be created
+    // - 'userId': because users are authenticated via Cognito User Pool, we
+    //             will use the User Pool sub (an UUID) of the authencated user
+    // - 'noteId': a unique uuid
+    // - 'content': parsed from request body
+    // - 'attachment': parsed from request body
+    // - 'createdAt': current Unix timestamp
     Item: {
-      // Use the federated identity ID of the authenticated user for 'userId'
-      // which is in 'event.requestContext.authorizer.claims.sub'
       userId: event.requestContext.authorizer.claims.sub,
-      // Generate a unique uuid for 'noteId'
       noteId: uuid.v1(),
       content: data.content,
       attachment: data.attachment,
@@ -51,7 +55,7 @@ export function main(event, context, callback) {
     }
 
 
-    // Return status code 200 and newly created item in response body
+    // Return status code 200 and the newly created item
     const response = {
       statusCode: 200,
       headers: headers,
@@ -63,14 +67,6 @@ export function main(event, context, callback) {
 {% endhighlight %}
 
 ### Configure API Endpoint
-
-Open **webpack.config.js** file and update the **entry** block to include the js file
-{% highlight javascript %}
-  entry: {
-    create: './create.js',
-  },
-{% endhighlight %}
-
 
 Open **serverless.yml** file and replace the content with following code
 
@@ -89,7 +85,7 @@ provider:
   stage: prod
   region: us-east-1
 
-  # iamRoleStatement defines the permission policy for the Lambda function.
+  # 'iamRoleStatement' defines the permission policy for the Lambda function.
   # In this case Lambda functions are granted with permissions to access DynamoDB.
   iamRoleStatements:
     - Effect: Allow
@@ -104,26 +100,34 @@ provider:
       Resource: "arn:aws:dynamodb:us-east-1:*:*"
 
 functions:
+  # Defines an HTTP API endpoint that calls the main function in create.js
+  # - path: url path is /notes
+  # - method: POST request
+  # - cors: enabled CORS (Cross-Origin Resource Sharing) for browswer cross
+  #     domain api call
+  # - authorizer: authenticate the api via Cognito User Pool. Update the 'arn'
+  #     with the User Pool ARN created in the previous chapter
   create:
-    # HTTP endpoint will trigger the create function in create.js
-    handler: create.create
+    handler: create.main
     events:
       - http:
-          # path is /notes
           path: notes
-          # request type is POST
           method: post
-          # CORS (Cross-Origin Resource Sharing) enabled for browswer cross domain api call.
           cors: true
-          # the api is authencated via the user pool we created in the previous tutorial.
-          # use the user pool arn in place for arn:aws:cognito-idp:us-east-1:632240853321:userpool/us-east-1_KLsuR0TMI
           authorizer:
             arn: arn:aws:cognito-idp:us-east-1:632240853321:userpool/us-east-1_KLsuR0TMI
 {% endhighlight %}
 
+Open **webpack.config.js** file and update the **entry** block to include the js file
+{% highlight json %}
+  entry: {
+    create: './create.js',
+  },
+{% endhighlight %}
+
 ### Test
 
-To test calling the API on the local, we need to mock the HTTP request parameters. In the project root, create **event.json** with the following content,
+To test calling the API on the local, we need to mock the HTTP request parameters. In the project root, create **event.json** with following content
 {% highlight json %}
 {
   "body": "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}",
@@ -142,10 +146,10 @@ Run
 $ serverless webpack invoke --function create --path event.json
 {% endhighlight %}
 
-If curl is successful, the response will look similar to this
+The response will look similar to this
 {% highlight json %}
 {
-  "userId": "2aa71372-f926-451b-a05b-cf714e800c8e",
+  "userId": "USER-SUB-1234",
   "noteId": "578eb840-f70f-11e6-9d1a-1359b3b22944",
   "content": "hello world",
   "attachment": "earth.jpg",

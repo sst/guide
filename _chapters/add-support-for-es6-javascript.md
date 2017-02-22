@@ -1,6 +1,7 @@
 ---
 layout: post
-title: Create a Serverless API with lambda
+title: Add Support for ES6 Javascript
+date: 2016-12-30 12:00:00
 ---
 
 By default, Lambda only supports a specific version of Javascript. It doesn't have an up-to-date NodeJs engine allowing us to use Node’s ES6 capabilities. Because we will be coding in ES6 syntax in React on the frontend, it would make sense to follow the same syntax on the backend and have a transpiler to compile it down to the Lambda supported version.

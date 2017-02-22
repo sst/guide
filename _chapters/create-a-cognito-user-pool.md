@@ -30,7 +30,7 @@ Select **Create pool** at the bottom of the page
 
 ![Select Create pool screenshot]({{ site.url }}/assets/cognito-user-pool/select-create-pool.png)
 
-The user pool is created. Take a note of the **Pool Id** which will be required later in setting up **Identity Pool** and **Serverless Api**.
+The user pool is created. Take a note of the **Pool Id** and **Pool ARN** which will be required later in setting up **Identity Pool** and **Serverless Api**.
 
 ![User Pool Created Screenshot]({{ site.url }}/assets/cognito-user-pool/user-pool-created.png)
 
