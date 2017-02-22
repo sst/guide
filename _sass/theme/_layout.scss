@@ -5,14 +5,25 @@
 	text-align: center;
 
   .site-title {
-    font-size: 28px;
     line-height: 80px;
-    letter-spacing: -1px;
     margin-bottom: 0;
+
+    img {
+      margin-right: 5px;
+      display: inline-block;
+      vertical-align: middle; 
+    }
+
+    span {
+      letter-spacing: -1px;
+      font-size: 28px;
+      display: inline-block;
+      vertical-align: middle; 
+    }
 
     &,
     &:visited {
-      color: $secondary-text-color;
+      color: $brand-color;
     }
   }
 

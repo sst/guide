@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Creating a note
+title: Add the Create Note Page
 date: 2017-01-22 00:00:00
 ---
 

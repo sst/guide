@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Deploying Updates
+title: Deploy Updates
 date: 2017-02-12 00:00:00
 ---
 

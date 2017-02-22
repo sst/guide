@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Setting Up Bootstrap
+title: Setup Bootstrap
 date: 2017-01-09 00:00:00
 ---
 

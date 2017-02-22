@@ -11,6 +11,7 @@ layout: home
 
 ### Setup your AWS account
 
+- [Create an AWS account]({% link _chapters/create-an-aws-account.md %})
 - [Create an IAM user]({% link _chapters/create-an-iam-user.md %})
 - [Configure the AWS CLI]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -38,8 +39,8 @@ layout: home
 
 - [Create a new app with Create React App]({% link _chapters/create-a-new-create-react-app.md %})
   - [Add app favicons]({% link _chapters/add-app-favicons.md %})
-  - [Using custom fonts]({% link _chapters/using-custom-fonts.md %})
-  - [Setting up Bootstrap]({% link _chapters/setting-up-bootstrap.md %})
+  - [Setup custom fonts]({% link _chapters/setup-custom-fonts.md %})
+  - [Setup Bootstrap]({% link _chapters/setup-bootstrap.md %})
 - [Handle routes with React Router]({% link _chapters/handle-routes-with-react-router.md %})
   - [Create containers]({% link _chapters/create-containers.md %})
   - [Handle 404s]({% link _chapters/handle-404s.md %})
@@ -52,35 +53,35 @@ layout: home
   - [Load the state from the session]({% link _chapters/load-the-state-from-the-session.md %})
   - [Clear the session on logout]({% link _chapters/clear-the-session-on-logout.md %})
   - [Redirect on login and logout]({% link _chapters/redirect-on-login-and-logout.md %})
-  - [User feedback while logging in]({% link _chapters/user-feedback-while-logging-in.md %})
+  - [Give feedback while logging in]({% link _chapters/give-feedback-while-logging-in.md %})
 - [Create a signup page]({% link _chapters/create-a-signup-page.md %})
   - [Create the signup form]({% link _chapters/create-the-signup-form.md %})
   - [Signup with AWS Cognito]({% link _chapters/signup-with-aws-cognito.md %})
-- [Creating a note]({% link _chapters/creating-a-note.md %})
-  - [Calling the create API]({% link _chapters/calling-the-create-api.md %})
-  - [Upload file to S3]({% link _chapters/upload-file-to-s3.md %})
+- [Add the create note page]({% link _chapters/add-the-create-note-page.md %})
+  - [Call the create API]({% link _chapters/call-the-create-api.md %})
+  - [Upload a file to S3]({% link _chapters/upload-a-file-to-s3.md %})
   - [Clear AWS Credentials Cache]({% link _chapters/clear-aws-credentials-cache.md %})
 - [List all the notes]({% link _chapters/list-all-the-notes.md %})
-  - [Calling the list API]({% link _chapters/calling-the-list-api.md %})
+  - [Call the list API]({% link _chapters/call-the-list-api.md %})
 - [Display a note]({% link _chapters/display-a-note.md %})
   - [Render the note form]({% link _chapters/render-the-note-form.md %})
   - [Save changes to a note]({% link _chapters/save-changes-to-a-note.md %})
-  - [Deleting a note]({% link _chapters/deleting-a-note.md %})
-- [Securing pages]({% link _chapters/securing-pages.md %})
+  - [Delete a note]({% link _chapters/delete-a-note.md %})
+- [Setup secure pages]({% link _chapters/setup-secure-pages.md %})
   - [Create a HOC that checks auth]({% link _chapters/create-a-hoc-that-checks-auth.md %})
   - [Use the HOC in the routes]({% link _chapters/use-the-hoc-in-the-routes.md %})
   - [Redirect on login]({% link _chapters/redirect-on-login.md %})
 
 ### Deploying the Frontend
 
-- [Deploying]({% link _chapters/deploying.md %})
+- [Deploy the Frontend]({% link _chapters/deploy-the-frontend.md %})
   - [Create a S3 bucket]({% link _chapters/create-a-s3-bucket.md %})
   - [Deploy to S3]({% link _chapters/deploy-to-s3.md %})
   - [Create a CloudFront distribution]({% link _chapters/create-a-cloudfront-distribution.md %})
   - [Setup your domain with CloudFront]({% link _chapters/setup-your-domain-with-cloudfront.md %})
   - [Setup www domain redirect]({% link _chapters/setup-www-domain-redirect.md %})
   - [Setup SSL]({% link _chapters/setup-ssl.md %})
-- [Deploying updates]({% link _chapters/deploying-updates.md %})
+- [Deploy updates]({% link _chapters/deploy-updates.md %})
   - [Update the app]({% link _chapters/update-the-app.md %})
   - [Deploy again]({% link _chapters/deploy-again.md %})
 

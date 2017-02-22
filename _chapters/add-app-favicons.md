@@ -8,7 +8,7 @@ Create React App generates a simple favicon for our app and places it in `public
 
 For our example we are going to start with a simple image and generate the various version from it.
 
-<img alt="App Icon" width="130" height="130" src="{{ site.url }}/assets/icon.png" />
+<img alt="App Icon" width="130" height="130" src="{{ site.url }}/assets/scratch-icon.png" />
 
 To ensure that our icon works for most of our targetted platforms we'll use a service called the [Favicon Generator](http://realfavicongenerator.net).
 

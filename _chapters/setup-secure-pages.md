@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Securing Pages
+title: Setup Secure Pages
 date: 2017-02-01 00:00:00
 ---
 

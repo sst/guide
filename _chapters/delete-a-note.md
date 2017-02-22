@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Deleting a Note
+title: Delete a Note
 date: 2017-01-31 00:00:00
 ---
 

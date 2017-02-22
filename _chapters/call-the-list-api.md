@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Calling the List API
+title: Call the List API
 date: 2017-01-27 00:00:00
 ---
 

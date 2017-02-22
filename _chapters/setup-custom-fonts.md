@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Using Custom Fonts
+title: Setup Custom Fonts
 date: 2017-01-08 00:00:00
 ---
 

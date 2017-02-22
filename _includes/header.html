@@ -2,7 +2,10 @@
 
   <div class="wrapper">
 
-    <a class="site-title" href="{{ "/" | relative_url}}">{{ site.title | escape }}</a>
+    <a class="site-title" href="{{ "/" | relative_url}}">
+      <img src="/assets/logo.png" height="32" />
+      <span>{{ site.title | escape }}</span>
+    </a>
 
 		<p class="site-description">{{ site.description | escape }}</p>
 

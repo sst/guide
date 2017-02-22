@@ -20,6 +20,7 @@ description: > # this means to ignore newlines until "baseurl:"
   full-stack serverless apps.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://serverless-stack.com" # the base hostname & protocol for your site, e.g. http://example.com
+logo: /assets/apple-touch-icon.png
 
 github_repo: "https://github.com/AnomalyInnovations/serverless-stack-com"
 github_edit_prefix: "/edit/master/"
