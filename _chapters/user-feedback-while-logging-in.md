@@ -1,6 +1,7 @@
 ---
 layout: post
 title: User Feedback While Logging In
+date: 2017-01-18 00:00:00
 ---
 
 It's important that we give the user some feedback while we are logging them in. So they get the sense that are app is still working as opposed to being unresponsive.

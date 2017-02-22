@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Setup Your Domain With CloudFront
+date: 2017-02-09 00:00:00
 ---
 
 Now that we have our CloudFront distribution live, let's setup our domain with it. You can purchase a domain right from the [AWS Console](https://console.aws.amazon.com) by heading to the Route 53 section in the list of services.

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Create a Signup Page
+date: 2017-01-19 00:00:00
 ---
 
 The signup page is quite similar to the login page that we just created. But it has a couple of key differences. When we sign the user up, AWS Cognito sends them a confirmation code via email. And we need to authenticate the new user once it's been confirmed.

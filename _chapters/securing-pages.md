@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Securing Pages
+date: 2017-02-01 00:00:00
 ---
 
 We are almost done putting together our app. All the pages are done but there are a few pages that should be accessible if a user is not logged in. For example, a page with the note should not load if a user is not logged in. Currently we get an error when we do this because the page loads but since the user token does not exist, the call to our API fails.

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Deploying
+date: 2017-02-05 00:00:00
 ---
 
 Now that we have our setup working in our local environment, let's do our first deploy and look into what we need to do to host our serverless application.

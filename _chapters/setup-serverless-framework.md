@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Create a Serverless API with lambda
+date: 2016-12-30 00:00:00
 ---
 
 Serverless Framework enable developer to deploy backend applications as independent functions that will be deployed to AWS Lambda. AWS Lambda is a compute service that lets you run code without provisioning or managing servers. AWS Lambda executes your code only when needed and scales automatically, from a few requests per day to thousands per second. You pay only for the compute time you consume - there is no charge when your code is not running.  Serverless Framework will also configure AWS Lambda to run your code in response to HTTP requests using Amazon API Gateway.

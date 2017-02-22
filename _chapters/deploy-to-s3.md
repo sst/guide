@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Deploy to S3
+date: 2017-02-07 00:00:00
 ---
 
 Now that our S3 bucket is created we are ready to deploy our app.

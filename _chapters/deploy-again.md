@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Deploy Again
+date: 2017-02-14 00:00:00
 ---
 
 Now that we've made some changes to our app, let's deploy the updates. This is the process we are going to repeat everytime we need to deploy any updates.

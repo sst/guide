@@ -2,12 +2,10 @@
 layout: home
 ---
 
-Serverless Stack is a comprehensive step-by-step guide for creating full-stack serverless applications. We'll be creating a [simple note taking app](https://demo.serverless-stack.com) from scratch using React.js, AWS Lambda, and a few other AWS services.
-
 ### Introduction
 
-- [Who is this for?]({% link _chapters/who-is-this-for.md %})
-- [What are we building?]({% link _chapters/what-are-we-building.md %})
+- [Who is this guide for?]({% link _chapters/who-is-this-guide-for.md %})
+- [What does this guide cover?]({% link _chapters/what-does-this-guide-cover.md %})
 - [How to get help?]({% link _chapters/how-to-get-help.md %})
 - [Why create serverless apps?]({% link _chapters/why-create-serverless-apps.md %})
 
@@ -39,7 +37,7 @@ Serverless Stack is a comprehensive step-by-step guide for creating full-stack s
 
 ### Setting up the Frontend
 
-- [Create a new app with Create React App]({% link _chapters/create-new-create-react-app.md %})
+- [Create a new app with Create React App]({% link _chapters/create-a-new-create-react-app.md %})
   - [Add app favicons]({% link _chapters/add-app-favicons.md %})
   - [Using custom fonts]({% link _chapters/using-custom-fonts.md %})
   - [Setting up Bootstrap]({% link _chapters/setting-up-bootstrap.md %})

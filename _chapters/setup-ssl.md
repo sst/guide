@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Setup SSL
+date: 2017-02-11 00:00:00
 ---
 
 Now that our app is being served through our domain let's add a layer of security to it by switching to HTTPS. AWS makes this fairly easy to do, thanks to Certificate Manager.

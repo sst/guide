@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Configure the AWS CLI
+date: 2016-12-26 00:00:00
 ---
 
 To make it easier to work with a lot of the AWS services, we are going to use the [AWS CLI](https://aws.amazon.com/cli/).

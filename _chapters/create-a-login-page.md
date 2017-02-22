@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Create a Login Page
+date: 2017-01-13 00:00:00
 ---
 
 Let's create page where the users for our app can sign in with their login credentials. We'll start by creating the basic form.

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Redirect on Login and Logout
+date: 2017-01-17 00:00:00
 ---
 
 To complete the login flow we are going to need to do two more things.

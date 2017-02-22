@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Create the Signup Form
+date: 2017-01-20 00:00:00
 ---
 
 Let's start by creating the signup form that'll get the user's email and password.
