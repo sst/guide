@@ -9,7 +9,7 @@ $heading-font-family:   "PT Serif", serif;
 $base-font-size:        16px;
 $base-font-weight:      400;
 $small-font-size:       $base-font-size * 0.875;
-$base-line-height:      1.5;
+$base-line-height:      1.6;
 
 $spacing-unit:          30px;
 
@@ -70,4 +70,19 @@ div.home p.pitch {
   text-align: center;
   font-size: 24px;
   color: #555;
+}
+
+// Change markers
+span.code-marker {
+  line-height: 1;
+  margin-right: 5px;
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: white;
+  background-color: #C3BDCA;
+  padding: 6px 8px 5px;
+  border-radius: 3px;
+  display: inline-block;
+  vertical-align: middle; 
 }

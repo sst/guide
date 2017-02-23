@@ -40,7 +40,7 @@ It will warn you to read the documentation. Select **Ok** to edit.
 
 ![Select Confirm Edit Policy Screenshot]({{ site.url }}/assets/cognito-identity-pool/select-confirm-edit-policy.png)
 
-Add the following policy into the editor.
+{% include code-marker.html %} Add the following policy into the editor.
 
 Note the line ``arn:aws:s3:::react-notes-app/${cognito-identity.amazonaws.com:sub}``, where **react-notes-app** is the name of our S3 bucket, and **cognito-identity.amazonaws.com:sub** is the authenticated user's federated identity ID. This policy grants the authenticated user access to files with filenames prefixed by the user's id in the S3 bucket as a security measure.
 

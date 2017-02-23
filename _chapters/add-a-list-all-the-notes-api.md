@@ -1,12 +1,14 @@
 ---
 layout: post
-title: List notes API
+title: Add a List All the Notes API
 date: 2017-01-02 00:00:00
 ---
 
-### Create Function Code
+Now we are going to add an API that returns a list of all the notes a user has.
 
-Create a new file **list.js** and paste the following code
+### Add the Function
+
+{% include code-marker.html %} Create a new file called `list.js` with the following.
 
 {% highlight javascript %}
 import * as dynamoDbLib from './libs/dynamodb-lib';
@@ -36,9 +38,11 @@ export async function main(event, context, callback) {
 };
 {% endhighlight %}
 
-### Configure API Endpoint
+This is pretty much the same as our `get.js` except we only pass in the `userId` in the DynamoDB `query` call.
 
-Open **serverless.yml** file and append the following code to the bottom
+### Configure the API Endpoint
+
+{% include code-marker.html %} Open the `serverless.yml` file and append the following.
 
 {% highlight yaml %}
   list:
@@ -55,17 +59,22 @@ Open **serverless.yml** file and append the following code to the bottom
             arn: arn:aws:cognito-idp:us-east-1:632240853321:userpool/us-east-1_KLsuR0TMI
 {% endhighlight %}
 
-Open **webpack.config.js** file and add **list.js** at the end of the **entry** block
+This defines the `/notes` endpoint that takes a GET request with the same Cognito User Pool authorizer.
+
+{% include code-marker.html %} Open the `webpack.config.js` file and update the `entry` block to include our newly created file. The `entry` block should now look like the following.
+
 {% highlight javascript %}
   entry: {
-    ...
+    create: './create.js',
+    get: './get.js',
     list: './list.js',
   },
 {% endhighlight %}
 
 ### Test
 
-Update **event.json** file with following content
+Update `event.json` file with following.
+
 {% highlight json %}
 {
   "requestContext": {
@@ -78,12 +87,14 @@ Update **event.json** file with following content
 }
 {% endhighlight %}
 
-Run
+And invoke our function.
+
 {% highlight bash %}
 $ serverless webpack invoke --function list --path event.json
 {% endhighlight %}
 
-The response will look similar to this
+The response should look similar to this.
+
 {% highlight json %}
 [
   {
@@ -95,3 +106,7 @@ The response will look similar to this
   }
 ]
 {% endhighlight %}
+
+Note that this API returns an array of note objects as opposed to the `get.js` function that returns just a single note object.
+
+Next we are going to add an API to update a note.

@@ -1,16 +1,21 @@
 ---
 layout: post
-title: Create note API
+title: Add a Create Note API
 date: 2016-12-31 00:00:00
 ---
 
-### Create Function Code
+Let's get started on our backend by first adding an API to create a note. This API will take the note object as the input and store it in the database with a new id. The note object will contain the `content` field (the content of the note) and an `attachment` field (the URL to the uploaded file).
 
-Create a new file **create.js** and paste the following code
+### Add the Function
+
+Let's add our first function.
+
+{% include code-marker.html %} Create a new file called `create.js` with the following.
 
 {% highlight javascript %}
 import uuid from 'uuid';
 import AWS from 'aws-sdk';
+
 AWS.config.update({region:'us-east-1'});
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
@@ -22,7 +27,7 @@ export function main(event, context, callback) {
     TableName: 'notes',
     // 'Item' contains the attributes of the item to be created
     // - 'userId': because users are authenticated via Cognito User Pool, we
-    //             will use the User Pool sub (an UUID) of the authencated user
+    //             will use the User Pool sub (a UUID) of the authenticated user
     // - 'noteId': a unique uuid
     // - 'content': parsed from request body
     // - 'attachment': parsed from request body
@@ -54,7 +59,6 @@ export function main(event, context, callback) {
       return;
     }
 
-
     // Return status code 200 and the newly created item
     const response = {
       statusCode: 200,
@@ -66,9 +70,18 @@ export function main(event, context, callback) {
 };
 {% endhighlight %}
 
-### Configure API Endpoint
+There are some helpful comments in the code but we are doing a few simple things here.
 
-Open **serverless.yml** file and replace the content with following code
+- Parse the input from the `event.body`. This represents the HTTP request parameters.
+- Make a call to DynamoDB to put a new object with a generated `noteId` and the current date as the `createdAt`.
+- Upon success, return the newly create note object with the HTTP status code `200` and response headers to enable **CORS (Cross-Origin Resource Sharing)**.
+- And if the DynamoDB call fails then return an error with the HTTP status code `500`.
+
+### Configure the API Endpoint
+
+Now let's define the API endpoint for our function.
+
+{% include code-marker.html %} Open the `serverless.yml` file and replace it with the following.
 
 {% highlight yaml %}
 service: notes-app-api
@@ -103,10 +116,10 @@ functions:
   # Defines an HTTP API endpoint that calls the main function in create.js
   # - path: url path is /notes
   # - method: POST request
-  # - cors: enabled CORS (Cross-Origin Resource Sharing) for browswer cross
+  # - cors: enabled CORS (Cross-Origin Resource Sharing) for browser cross
   #     domain api call
   # - authorizer: authenticate the api via Cognito User Pool. Update the 'arn'
-  #     with the User Pool ARN created in the previous chapter
+  #     with your own User Pool ARN
   create:
     handler: create.main
     events:
@@ -118,8 +131,11 @@ functions:
             arn: arn:aws:cognito-idp:us-east-1:632240853321:userpool/us-east-1_KLsuR0TMI
 {% endhighlight %}
 
-Open **webpack.config.js** file and update the **entry** block to include the js file
-{% highlight json %}
+Here we are adding our newly added create function to the configuration. We specify that it handles `post` requests at the `/notes` endpoint. We set CORS support to true. This is because our frontend is going to be served from a different domain. We also specify that we want this API to authenticate via the Cognito User Pool that we had previously setup. Make sure to replace the `arn` field with the **Pool ARN** that we made a note of in the Cognito User Pool chapter.
+
+{% include code-marker.html %} Open the `webpack.config.js` file and update the `entry` block to include our newly created file.
+
+{% highlight javascript %}
   entry: {
     create: './create.js',
   },
@@ -127,7 +143,10 @@ Open **webpack.config.js** file and update the **entry** block to include the js
 
 ### Test
 
-To test calling the API on the local, we need to mock the HTTP request parameters. In the project root, create **event.json** with following content
+Now we are ready to test our new API. To be able to test it on our local we are going to mock the input parameters.
+
+{% include code-marker.html %} Create an `event.json` file and add the following.
+
 {% highlight json %}
 {
   "body": "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}",
@@ -141,12 +160,16 @@ To test calling the API on the local, we need to mock the HTTP request parameter
 }
 {% endhighlight %}
 
-Run
+You might have noticed that the `body` and `requestContext` fields are the ones we used in our create function.
+
+And to invoke our function we run the following.
+
 {% highlight bash %}
 $ serverless webpack invoke --function create --path event.json
 {% endhighlight %}
 
-The response will look similar to this
+The response should look similar to this.
+
 {% highlight json %}
 {
   "userId": "USER-SUB-1234",
@@ -157,18 +180,21 @@ The response will look similar to this
 }
 {% endhighlight %}
 
-### Refactor code
+Make a note of the `noteId` in the response. We are going to use this newly created note in the next chapter.
 
-Before we move on to the next chapter, let's quickly refactor the code.
+### Refactor Our Code
 
-In project root, create a **libs** folder
+Before we move on to the next chapter, let's quickly refactor the code since we are going to be doing much of the same for all of our APIs.
+
+{% include code-marker.html %} In our project root, create a `libs/` directory.
 
 {% highlight bash %}
 $ mkdir libs
 $ cd libs
 {% endhighlight %}
 
-Inside libs, create a **response-lib.js** file. It will manage building response objects for both success and failure cases with proper HTTP status code and headers.
+{% include code-marker.html %} And create a `libs/response-lib.js` file. 
+
 {% highlight javascript %}
 export function success(body) {
   return buildResponse(200, body);
@@ -190,9 +216,13 @@ function buildResponse(statusCode, body) {
 }
 {% endhighlight %}
 
-Again inside libs, create a **dynamodb-lib.js** file. It will convert DynamoDB callbacks to use ES6 Promise syntax. Promises are a method for managing asynchronous code that serve as an alternative to the standard callback function syntax. It will make our **create.js** clearer code.
+This will manage building the response objects for both success and failure cases with the proper HTTP status code and headers.
+
+{% include code-marker.html %} Again inside `libs/`, create a `dynamodb-lib.js` file.
+
 {% highlight javascript %}
 import AWS from 'aws-sdk';
+
 AWS.config.update({region:'us-east-1'});
 
 export function call(action, params) {
@@ -211,7 +241,10 @@ export function call(action, params) {
 }
 {% endhighlight %}
 
-Now, go back to project root, update create.js to use the libs we just created
+Here we are adding a helper function to convert the DynamoDB callbacks to use the ES6 Promise syntax. Promises are a method for managing asynchronous code that serve as an alternative to the standard callback function syntax. It will make our code a lot easier to read.
+
+{% include code-marker.html %} Now, we'll go back to our `create.js` and use the helper functions we created. Our `create.js` should now look like the following.
+
 {% highlight javascript %}
 import uuid from 'uuid';
 import * as dynamoDbLib from './libs/dynamodb-lib';
@@ -240,4 +273,5 @@ export async function main(event, context, callback) {
 };
 {% endhighlight %}
 
-You can ru-run the test to ensure the code still works.
+Next, we are going to write the API to get a note given it's id.
+

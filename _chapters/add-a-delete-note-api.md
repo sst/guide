@@ -1,12 +1,14 @@
 ---
 layout: post
-title: Delete note API
+title: Add a Delete Note API
 date: 2017-01-04 00:00:00
 ---
 
-### Create Function Code
+Finally, we are going to create an API that allows a user to delete a given note.
 
-Create a new file **delete.js** and paste the following code
+### Add the Function
+
+{% include code-marker.html %} Create a new file `delete.js` and paste the following code
 
 {% highlight javascript %}
 import * as dynamoDbLib from './libs/dynamodb-lib';
@@ -35,9 +37,11 @@ export async function main(event, context, callback) {
 }
 {% endhighlight %}
 
-### Configure API Endpoint
+This makes a DynamoDB `delete` call with the `userId` & `noteId` key to delete the note.
 
-Open **serverless.yml** file and append the following code to the bottom
+### Configure the API Endpoint
+
+{% include code-marker.html %} Open the `serverless.yml` file and append the following to it.
 
 {% highlight yaml %}
   get:
@@ -54,17 +58,24 @@ Open **serverless.yml** file and append the following code to the bottom
             arn: arn:aws:cognito-idp:us-east-1:632240853321:userpool/us-east-1_KLsuR0TMI
 {% endhighlight %}
 
-Open **webpack.config.js** file and add **delete.js** at the end of the **entry** block
+This adds a DELETE request handler to the `/notes/{id}` endpoint.
+
+{% include code-marker.html %} Open the `webpack.config.js` file and update the `entry` block to include our newly created file. The `entry` block should now look like the following.
+
 {% highlight javascript %}
   entry: {
-    ...
+    create: './create.js',
+    get: './get.js',
+    list: './list.js',
+    update: './update.js',
     delete: './delete.js',
   },
 {% endhighlight %}
 
 ### Test
 
-Update **event.json** file with following content. Replace the path parameter id with the **noteId** created in the previous chapter.
+Replace the `events.json` with the following. Just like before we'll use the `noteId` of our note in place of the `id` in the `pathParameters` block.
+
 {% highlight json %}
 {
   "pathParameters": {
@@ -80,14 +91,18 @@ Update **event.json** file with following content. Replace the path parameter id
 }
 {% endhighlight %}
 
-Run
+Invoke our newly created function.
+
 {% highlight bash %}
 $ serverless webpack invoke --function delete --path event.json
 {% endhighlight %}
 
-The response will look similar to this
+And the response should look similar to this.
+
 {% highlight json %}
 {
   "status": true
 }
 {% endhighlight %}
+
+Now that our APIs are complete; we'll deploy them next.

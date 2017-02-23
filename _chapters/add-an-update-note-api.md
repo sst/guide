@@ -1,12 +1,14 @@
 ---
 layout: post
-title: Update note API
+title: Add an Update Note API
 date: 2017-01-03 00:00:00
 ---
 
-### Create Function Code
+Now let's create an API that allows a user to update a note with a new note object given it's id.
 
-Create a new file **update.js** and paste the following code
+### Add the Function
+
+{% include code-marker.html %} Create a new file `update.js` and paste the following code
 
 {% highlight javascript %}
 import * as dynamoDbLib from './libs/dynamodb-lib';
@@ -43,9 +45,11 @@ export async function main(event, context, callback) {
 };
 {% endhighlight %}
 
-### Configure API Endpoint
+This should look similar to the `create.js` function. Here we make an `update` DynamoDB call with the new `content` and `attachment` values in the `params`.
 
-Open **serverless.yml** file and append the following code to the bottom
+### Configure the API Endpoint
+
+{% include code-marker.html %} Open the `serverless.yml` file and append the following to it.
 
 {% highlight yaml %}
   update:
@@ -62,17 +66,23 @@ Open **serverless.yml** file and append the following code to the bottom
             arn: arn:aws:cognito-idp:us-east-1:632240853321:userpool/us-east-1_KLsuR0TMI
 {% endhighlight %}
 
-Open **webpack.config.js** file and add **update.js** at the end of the **entry** block
+Here we are adding a handler for the PUT request to the `/notes/{id}` endpoint.
+
+{% include code-marker.html %} Open the `webpack.config.js` file and update the `entry` block to include our newly created file. The `entry` block should now look like the following.
+
 {% highlight javascript %}
   entry: {
-    ...
+    create: './create.js',
+    get: './get.js',
+    list: './list.js',
     update: './update.js',
   },
 {% endhighlight %}
 
 ### Test
 
-Update **event.json** file with following content. Replace the path parameter id with the **noteId** created in the previous chapter.
+To test our function replace the `events.json` with the following. Also, don't forget to use the `noteId` of the note we have been using in place of the `id` in the `pathParameters` block.
+
 {% highlight json %}
 {
   "body": "{\"content\":\"new world\",\"attachment\":\"new.jpg\"}",
@@ -89,14 +99,18 @@ Update **event.json** file with following content. Replace the path parameter id
 }
 {% endhighlight %}
 
-Run
+And we invoke our newly created function.
+
 {% highlight bash %}
 $ serverless webpack invoke --function update --path event.json
 {% endhighlight %}
 
-The response will look similar to this
+The response should look similar to this.
+
 {% highlight json %}
 {
   "status": true
 }
 {% endhighlight %}
+
+Next we are going to add an API to delete a note given it's id.

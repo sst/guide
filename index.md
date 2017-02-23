@@ -21,20 +21,20 @@ layout: home
 - [Create a S3 bucket for file uploads]({% link _chapters/create-a-s3-bucket-for-file-uploads.md %})
 - [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %})
 - [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %})
-- [Setup Serverless Framework]({% link _chapters/setup-serverless-framework.md %})
-  - [Add support for ES6 Javascript]({% link _chapters/add-support-for-es6-javascript.md %})
+- [Setup the Serverless Framework]({% link _chapters/setup-the-serverless-framework.md %})
+  - [Add support for ES6 JavaScript]({% link _chapters/add-support-for-es6-javascript.md %})
 
 ### Building the Backend
 
-- [Create note API]({% link _chapters/create-note-api.md %})
-- [Get note API]({% link _chapters/get-note-api.md %})
-- [List notes API]({% link _chapters/list-notes-api.md %})
-- [Update note API]({% link _chapters/update-note-api.md %})
-- [Delete note API]({% link _chapters/delete-note-api.md %})
+- [Add a create note API]({% link _chapters/add-a-create-note-api.md %})
+- [Add a get note API]({% link _chapters/add-a-get-note-api.md %})
+- [Add a list all the notes API]({% link _chapters/add-a-list-all-the-notes-api.md %})
+- [Add an update note API]({% link _chapters/add-an-update-note-api.md %})
+- [Add a delete note API]({% link _chapters/add-a-delete-note-api.md %})
 
 ### Deploying the Backend
 
-- [Deploy APIs]({% link _chapters/deploy-apis.md %})
+- [Deploy the APIs]({% link _chapters/deploy-the-apis.md %})
 
 ### Setting up the Frontend
 

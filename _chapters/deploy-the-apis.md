@@ -1,17 +1,20 @@
 ---
 layout: post
-title: Deploy APIs
+title: Deploy the APIs
 date: 2017-01-05 00:00:00
 ---
 
+Now that our APIs are complete, let's deploy them.
+
 ### Deploy
 
-Run this command when you have made code changes
+{% include code-marker.html %} Run the following in your working directory.
+
 {% highlight bash %}
 $ serverless deploy
 {% endhighlight %}
 
-Near the bottom of the output, you will find **Service Information**
+Near the bottom of the output for this command, you will find the `Service Information`. This has a list of the endpoints of the APIs that were created. Make a note of these endpoints as we are going to use them later while creating our frontend. We are also going to quickly test these endpoints a bit further down in this chapter.
 
 {% highlight bash %}
 service: notes-app-api
@@ -23,11 +26,11 @@ functions:
   notes-app-api-prod-create: arn:aws:lambda:us-east-1:632240853321:function:notes-app-api-prod-create
 {% endhighlight %}
 
-### Deploy Function
+### Deploy a Single Function
 
-The **serverless deploy function** command deploys an individual function without without going through the entire deployment cycle. This is a much faster way of deploying changes in code.
+There are going to be cases where you might want to deploy just a single API as opposed to all of them. The `serverless deploy function` command deploys an individual function without going through the entire deployment cycle. This is a much faster way of deploying the changes we make.
 
-For example, to deploy the list function again:
+For example, to deploy the list function again, we can run the following.
 
 {% highlight bash %}
 $ serverless deploy function -f list
@@ -35,13 +38,15 @@ $ serverless deploy function -f list
 
 ### Test
 
-Now let's test the API we just deployed. Because the API is authencated via Cognito User Pool, we need to obtain the necessary identity token to include in the request Authorization header.
+Now let's test the API we just deployed. Because the API is authenticated via the Cognito User Pool, we need to obtain an identity token to include in the API request Authorization header.
 
-First generate the identity token. Replace the following parameters with those of the Cognito User Pool created in the earlier chapter:
+First let's generate the identity token. Replace the following parameters with those of the Cognito User Pool created in one of our earlier chapters.
 
 - **--user-pool-id**: User pool id
 - **--client-id**: App client id
 - **--auth-parameters**: username and password of the test user created in the pool
+
+And run the following.
 
 {% highlight bash %}
 aws cognito-idp admin-initiate-auth \
@@ -52,7 +57,7 @@ aws cognito-idp admin-initiate-auth \
   --auth-parameters USERNAME=admin,PASSWORD=Passw0rd!
 {% endhighlight %}
 
-The identity token can be found in the **IdToken** field of the response.
+The identity token can be found in the `IdToken` field of the response.
 
 {% highlight json %}
 {
@@ -67,14 +72,16 @@ The identity token can be found in the **IdToken** field of the response.
 }
 {% endhighlight %}
 
-Make a curl call to the API endpoint
+Now we can use that as the `Authorization` header to make a request to our API using the following.
+
 {% highlight bash %}
 $ curl https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes \
   -H "Authorization:eyJraWQiOiIxeVVnNXQ3NWY3YzlzYlpnNURZZWFDVWhGMVhEOEdUUEpNXC9zQVhDZEhFbz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI3MDM4MDg1Mi1iZGNiLTQ5NzAtOTU2Zi1kZTZkMGFjODBjODUiLCJhdWQiOiIxMnNyNTBwZzF1ZjAwNDRhajYzZTRoc2g2aSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE0ODc1NDUzNzUsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX1dkSEVHQWk4TyIsImNvZ25pdG86dXNlcm5hbWUiOiJmcmFuayIsImV4cCI6MTQ4NzU0ODk3NSwiaWF0IjoxNDg3NTQ1Mzc1LCJlbWFpbCI6IndhbmdmYW5qaWVAZ21haWwuY29tIn0.d7HRBs2QegvQsGwQhJfpJBWYdh9N6CwoQFhmC91ugJ0YFxVdRhHUFQl4uoLplrOJO90PjTrjmxR7az17MfRlfu8v-ij3s31oaQqz8IdWECuhWW63xCNfGMN8lAbnUBwlHISer9CIGmdf8iF-xar2uyHeH8WHhIjI3gbJw15ORCC6Fo43CuKJ6k2zWaOywMkNr7oT2U7Etk93b2pDwIgeZ4V6uGbHgv3IRJYXYvMdIqsemoF8tLpx3XD58Iq8hNJlw_gOpOp8dlpDA3AK9-vjyXYDjJ_0zZa6alf6j0XEgwCVm08IIcYhF8ntg7ju0ZVBbQwYrdgzBCBhxtfzz1elVg" \
   -d "{\"content\":\"hello world\",\"attachment\":\"earth.jpg\"}"
 {% endhighlight %}
 
-If curl is successful, the response will look similar to this
+If the curl command is successful, the response will look similar to this.
+
 {% highlight bash %}
 {
   "userId": "2aa71372-f926-451b-a05b-cf714e800c8e",
@@ -84,3 +91,5 @@ If curl is successful, the response will look similar to this
   "createdAt": 1487555594691
 }
 {% endhighlight %}
+
+And that's it for the backend! Next we are going to move on to creating the frontend of our app.

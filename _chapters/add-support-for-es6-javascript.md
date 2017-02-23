@@ -1,16 +1,16 @@
 ---
 layout: post
-title: Add Support for ES6 Javascript
+title: Add Support for ES6 JavaScript
 date: 2016-12-30 12:00:00
 ---
 
-By default, Lambda only supports a specific version of Javascript. It doesn't have an up-to-date NodeJs engine allowing us to use Node’s ES6 capabilities. Because we will be coding in ES6 syntax in React on the frontend, it would make sense to follow the same syntax on the backend and have a transpiler to compile it down to the Lambda supported version.
+By default, AWS Lambda only supports a specific version of JavaScript. It doesn't have an up-to-date Node.js engine. And looking a bit further ahead, we'll be using a more advanced flavor of JavaScript in the frontend called ES6. So it would make sense to follow the same syntax on the backend and have a transpiler to compile it down to the Lambda supported version for us.
 
-In this chapter, we are going to enable ES6 capabilities by setting up Babel and Webpack for the project. If you would like to code with Lambda's default Javascript version, you can skip this chapter. Note you will not be able to use the sample code in the later chapters, as they are written in ES6 syntax.
+In this chapter, we are going to enable ES6 capabilities by setting up [Babel](https://babeljs.io) and [Webpack](https://webpack.github.io) to transpile and package our project. If you would like to code with Lambda's default JavaScript version, you can skip this chapter. But you will not be able to directly use the sample code in the later chapters, as they are written in ES6 syntax.
 
-### Install NodeJS Dependencies
+### Install Babel and Webpack
 
-At the root of the project, run
+{% include code-marker.html %} At the root of the project, run.
 
 {% highlight bash %}
 $ npm install --save-dev \
@@ -25,7 +25,7 @@ $ npm install --save-dev \
 $ npm install --save babel-runtime
 {% endhighlight %}
 
-Create file **webpack.config.js** in the root with the content
+{% include code-marker.html %} Create a file called `webpack.config.js` in the root with the following.
 
 {% highlight javascript %}
 var nodeExternals = require('webpack-node-externals');
@@ -36,7 +36,7 @@ module.exports = {
   entry: {
   },
   target: 'node',
-  // because 'aws-skd' is not compatible with webpack,
+  // because 'aws-sdk' is not compatible with webpack,
   // we exclude all node dependencies
   externals: [nodeExternals()],
   // run babel on all .js files and skip those in node_modules
@@ -48,8 +48,8 @@ module.exports = {
       exclude: /node_modules/,
     }]
   },
-  // we are going to create multiple APIs in this tutorial, and we are going to
-  // create a js file to handle each API, we need to setup this output block
+  // since we are going to create multiple APIs in this guide, and we are 
+  // going to create a js file to for each, we need this output block
   output: {
     libraryTarget: 'commonjs',
     path: path.join(__dirname, '.webpack'),
@@ -58,7 +58,9 @@ module.exports = {
 };
 {% endhighlight %}
 
-Create file **.babelrc** in the root with the content. We are using the same babel preset **react-app** as the one in the frontend.
+This is the configuration Webpack will use to package our app.
+
+{% include code-marker.html %} Create a file called `.babelrc` in the root with the following. We are using the same Babel preset (**react-app**) as the one we are going to use in the frontend.
 
 {% highlight json %}
 {
@@ -67,7 +69,7 @@ Create file **.babelrc** in the root with the content. We are using the same bab
 }
 {% endhighlight %}
 
-Open **serverless.yml** and replace the content with follow code
+{% include code-marker.html %} Open `serverless.yml` and replace it with the following.
 
 {% highlight yaml %}
 service: react-notes-app-api
@@ -86,3 +88,5 @@ provider:
   stage: prod
   region: us-east-1
 {% endhighlight %}
+
+And now we are ready to build our backend.
