@@ -27,14 +27,6 @@ $ npm install serverless -g
 
 The above command needs [NPM](https://www.npmjs.com), a package manager for JavaScript. Follow [this](https://docs.npmjs.com/getting-started/installing-node) if you need help installing NPM.
 
-{% include code-marker.html %} And setup your AWS credentials.
-
-{% highlight bash %}
-$ serverless config credentials --provider aws --key my-key --secret my-secret
-{% endhighlight %}
-
-In the above command, **my-key** and **my-secret** are the **Access key ID** and **Secret access key** of the IAM user we created in the earlier chapter.
-
 {% include code-marker.html %} At the root of the project; create an AWS Node.js service.
 
 {% highlight bash %}
@@ -48,7 +40,8 @@ $ ls
 handler.js    serverless.yml
 {% endhighlight %}
 
-The **serverless.yml** file contains the configuration on what AWS services Serverless will provision and how to configure them. The **handler.js** file contains actual code for the services/functions that will be deployed to AWS Lambda.
+- **handler.js** file contains actual code for the services/functions that will be deployed to AWS Lambda.
+- **serverless.yml** file contains the configuration on what AWS services Serverless will provision and how to configure them.
 
 ### Install AWS Related Dependencies
 
@@ -66,7 +59,8 @@ This creates a new Node.js project for you. This will help us manage any depende
 - **uuid** generates unique ids. We need this for storing things to DynamoDB.
 
 {% highlight bash %}
-$ npm install aws-sdk uuid --save
+$ npm install aws-sdk --save-dev
+$ npm install uuid --save
 {% endhighlight %}
 
 Now the directory should contain 3 files and 1 folder.
@@ -76,6 +70,7 @@ $ ls
 handler.js    node_modules    package.json    serverless.yml
 {% endhighlight %}
 
-The **package.json** contains the Node.js configuration for our project. And **node_modules** contains the Node.js dependencies that we just installed.
+- **node_modules** contains the Node.js dependencies that we just installed.
+- **package.json** contains the Node.js configuration for our project.
 
 Next, we are going to setup a standard JavaScript environment for us by adding support for ES6.

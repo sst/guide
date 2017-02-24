@@ -17,13 +17,24 @@ $ serverless deploy
 Near the bottom of the output for this command, you will find the `Service Information`. This has a list of the endpoints of the APIs that were created. Make a note of these endpoints as we are going to use them later while creating our frontend. We are also going to quickly test these endpoints a bit further down in this chapter.
 
 {% highlight bash %}
+Service Information
 service: notes-app-api
 stage: prod
 region: us-east-1
+api keys:
+  None
 endpoints:
   POST - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes
+  GET - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
+  GET - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes
+  PUT - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
+  DELETE - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
 functions:
-  notes-app-api-prod-create: arn:aws:lambda:us-east-1:632240853321:function:notes-app-api-prod-create
+  notes-app-api-prod-create
+  notes-app-api-prod-get
+  notes-app-api-prod-list
+  notes-app-api-prod-update
+  notes-app-api-prod-delete
 {% endhighlight %}
 
 ### Deploy a Single Function

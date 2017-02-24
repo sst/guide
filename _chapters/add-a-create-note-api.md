@@ -81,7 +81,7 @@ There are some helpful comments in the code but we are doing a few simple things
 
 Now let's define the API endpoint for our function.
 
-{% include code-marker.html %} Open the `serverless.yml` file and replace it with the following.
+{% include code-marker.html %} Open the `serverless.yml` file and replace it with the following. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the Cognito User Pool chapter.
 
 {% highlight yaml %}
 service: notes-app-api
@@ -128,10 +128,10 @@ functions:
           method: post
           cors: true
           authorizer:
-            arn: arn:aws:cognito-idp:us-east-1:632240853321:userpool/us-east-1_KLsuR0TMI
+            arn: YOUR_USER_POOL_ARN
 {% endhighlight %}
 
-Here we are adding our newly added create function to the configuration. We specify that it handles `post` requests at the `/notes` endpoint. We set CORS support to true. This is because our frontend is going to be served from a different domain. We also specify that we want this API to authenticate via the Cognito User Pool that we had previously setup. Make sure to replace the `arn` field with the **Pool ARN** that we made a note of in the Cognito User Pool chapter.
+Here we are adding our newly added create function to the configuration. We specify that it handles `post` requests at the `/notes` endpoint. We set CORS support to true. This is because our frontend is going to be served from a different domain. We also specify that we want this API to authenticate via the Cognito User Pool that we had previously setup.
 
 {% include code-marker.html %} Open the `webpack.config.js` file and update the `entry` block to include our newly created file.
 
@@ -172,11 +172,12 @@ The response should look similar to this.
 
 {% highlight json %}
 {
-  "userId": "USER-SUB-1234",
-  "noteId": "578eb840-f70f-11e6-9d1a-1359b3b22944",
-  "content": "hello world",
-  "attachment": "earth.jpg",
-  "createdAt": 1487555594691
+  statusCode: 200,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Credentials': true
+  },
+  body: '{"userId":"USER-SUB-1234","noteId":"578eb840-f70f-11e6-9d1a-1359b3b22944","content":"hello world","attachment":"hello.jpg","createdAt":1487800950620}'
 }
 {% endhighlight %}
 
@@ -265,7 +266,7 @@ export async function main(event, context, callback) {
 
   try {
     const result = await dynamoDbLib.call('put', params);
-    callback(null, success(result.Item));
+    callback(null, success(params.Item));
   }
   catch(e) {
     callback(null, failure({status: false}));

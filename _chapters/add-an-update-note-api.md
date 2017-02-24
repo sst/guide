@@ -49,7 +49,7 @@ This should look similar to the `create.js` function. Here we make an `update` D
 
 ### Configure the API Endpoint
 
-{% include code-marker.html %} Open the `serverless.yml` file and append the following to it.
+{% include code-marker.html %} Open the `serverless.yml` file and append the following to it. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the Cognito User Pool chapter.
 
 {% highlight yaml %}
   update:
@@ -63,7 +63,7 @@ This should look similar to the `create.js` function. Here we make an `update` D
           method: put
           cors: true
           authorizer:
-            arn: arn:aws:cognito-idp:us-east-1:632240853321:userpool/us-east-1_KLsuR0TMI
+            arn: YOUR_USER_POOL_ARN
 {% endhighlight %}
 
 Here we are adding a handler for the PUT request to the `/notes/{id}` endpoint.
@@ -109,7 +109,12 @@ The response should look similar to this.
 
 {% highlight json %}
 {
-  "status": true
+  statusCode: 200,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Credentials': true
+  },
+  body: '{"status":true}'
 }
 {% endhighlight %}
 

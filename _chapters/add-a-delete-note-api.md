@@ -15,7 +15,6 @@ import * as dynamoDbLib from './libs/dynamodb-lib';
 import { success, failure } from './libs/response-lib';
 
 export async function main(event, context, callback) {
-  const data = JSON.parse(event.body);
   const params = {
     TableName: 'notes',
     // 'Key' defines the partition key and sort key of the time to be removed
@@ -34,17 +33,17 @@ export async function main(event, context, callback) {
   catch(e) {
     callback(null, failure({status: false}));
   }
-}
+};
 {% endhighlight %}
 
 This makes a DynamoDB `delete` call with the `userId` & `noteId` key to delete the note.
 
 ### Configure the API Endpoint
 
-{% include code-marker.html %} Open the `serverless.yml` file and append the following to it.
+{% include code-marker.html %} Open the `serverless.yml` file and append the following to it. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the Cognito User Pool chapter.
 
 {% highlight yaml %}
-  get:
+  delete:
     # Defines an HTTP API endpoint that calls the main function in delete.js
     # - path: url path is /notes/{id}
     # - method: DELETE request
@@ -55,7 +54,7 @@ This makes a DynamoDB `delete` call with the `userId` & `noteId` key to delete t
           method: delete
           cors: true
           authorizer:
-            arn: arn:aws:cognito-idp:us-east-1:632240853321:userpool/us-east-1_KLsuR0TMI
+            arn: YOUR_USER_POOL_ARN
 {% endhighlight %}
 
 This adds a DELETE request handler to the `/notes/{id}` endpoint.
@@ -101,7 +100,13 @@ And the response should look similar to this.
 
 {% highlight json %}
 {
-  "status": true
+  statusCode: 200,
+  headers: 
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Credentials': true
+  },
+  body: '{"status":true}'
 }
 {% endhighlight %}
 

@@ -46,7 +46,10 @@ Select **Add an app**.
 
 ![Select Add An App Screenshot]({{ site.url }}/assets/cognito-user-pool/select-add-an-app.png)
 
-Enter **App name**, select **Enable sign-in API for server-based authentication**, then select **Create app**.
+Enter **App name**, un-select **Generate client secret**, select **Enable sign-in API for server-based authentication**, then select **Create app**.
+
+- **Generate client secret**: user pool apps with a client secret are not supported by JavaScript SDK. Need to un-select the option.
+- **Enable sign-in API for server-based authentication**: required by AWS CLI when managing the pool users via command line interface. We will be creating a test user through command line interface in the next chapter.
 
 ![Fill User Pool App Info Screenshot]({{ site.url }}/assets/cognito-user-pool/fill-user-pool-app-info.png)
 
@@ -54,28 +57,4 @@ Now that the app is created. Take a note of the **App client id** which will be 
 
 ![User Pool App Created Screenshot]({{ site.url }}/assets/cognito-user-pool/user-pool-app-created.png)
 
-### Create a Test User
-
-You can manually add users to the User Pool through the AWS console. Let's create a test user which we can use later to test parts of our app as we are developing it.
-
-Select **Users and groups** from the left menu.
-
-![Select User Pool Users Screenshot]({{ site.url }}/assets/cognito-user-pool/select-user-pool-useres.png)
-
-Select **Create user**.
-
-![Select Create User Screenshot]({{ site.url }}/assets/cognito-user-pool/select-create-user.png)
-
-Enter a **Username** and **Temporary password** that conforms with the password policy specified when creating the User Pool.
-
-Leave the **Phone number** blank and uncheck the **Mark phone number as verified?** field.
-
-Enter an **Email** and select **Create user**.
-
-![Fill in User Info Screenshot]({{ site.url }}/assets/cognito-user-pool/fill-in-user-info.png)
-
-An email should be sent to the user's email address with the username and password.
-
-![User Pool User Created Screenshot]({{ site.url }}/assets/cognito-user-pool/user-pool-user-created.png)
-
-Next let's setup Cognito Identity Pools to secure the S3 Bucket we created for file uploads.
+Now our User Pool is ready. It will maintain a user directory for our React App. It will also be used to authenticate access to our API. Next let's setup a test user within the pool. We will use this user in later chapters to test api permission and app login permission.

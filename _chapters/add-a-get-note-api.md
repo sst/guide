@@ -41,7 +41,7 @@ This follows exactly the same structure as our previous `create.js` function. Th
 
 ### Configure the API Endpoint
 
-{% include code-marker.html %} Open the `serverless.yml` file and append the following to it.
+{% include code-marker.html %} Open the `serverless.yml` file and append the following to it. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the Cognito User Pool chapter.
 
 {% highlight yaml %}
   get:
@@ -55,7 +55,7 @@ This follows exactly the same structure as our previous `create.js` function. Th
           method: get
           cors: true
           authorizer:
-            arn: arn:aws:cognito-idp:us-east-1:632240853321:userpool/us-east-1_KLsuR0TMI
+            arn: YOUR_USER_POOL_ARN
 {% endhighlight %}
 
 This defines our get note API. It adds a GET request handler with the endpoint `/notes/{id}`. And just as before we use our Cognito User Pool as the authorizer.
@@ -98,11 +98,12 @@ The response should look similar to this.
 
 {% highlight json %}
 {
-  "userId": "USER-SUB-1234",
-  "noteId": "578eb840-f70f-11e6-9d1a-1359b3b22944",
-  "content": "hello world",
-  "attachment": "earth.jpg",
-  "createdAt": 1487555594691
+  statusCode: 200,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Credentials': true
+  },
+  body: '{"attachment":"hello.jpg","content":"hello world","createdAt":1487800950620,"noteId":"578eb840-f70f-11e6-9d1a-1359b3b22944","userId":"USER-SUB-1234"}'
 }
 {% endhighlight %}
 
