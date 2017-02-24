@@ -55,13 +55,13 @@ This creates a new Node.js project for you. This will help us manage any depende
 
 {% include code-marker.html %} Next, install these two packages.
 
-- **aws-sdk** allows us to talk to the various AWS services.
-- **uuid** generates unique ids. We need this for storing things to DynamoDB.
-
 {% highlight bash %}
 $ npm install aws-sdk --save-dev
 $ npm install uuid --save
 {% endhighlight %}
+
+- **aws-sdk** allows us to talk to the various AWS services.
+- **uuid** generates unique ids. We need this for storing things to DynamoDB.
 
 Now the directory should contain 3 files and 1 folder.
 
