@@ -17,13 +17,24 @@ $ serverless deploy
 Near the bottom of the output for this command, you will find the `Service Information`. This has a list of the endpoints of the APIs that were created. Make a note of these endpoints as we are going to use them later while creating our frontend. We are also going to quickly test these endpoints a bit further down in this chapter.
 
 {% highlight bash %}
+Service Information
 service: notes-app-api
 stage: prod
 region: us-east-1
+api keys:
+  None
 endpoints:
   POST - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes
+  GET - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
+  GET - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes
+  PUT - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
+  DELETE - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
 functions:
-  notes-app-api-prod-create: arn:aws:lambda:us-east-1:632240853321:function:notes-app-api-prod-create
+  notes-app-api-prod-create
+  notes-app-api-prod-get
+  notes-app-api-prod-list
+  notes-app-api-prod-update
+  notes-app-api-prod-delete
 {% endhighlight %}
 
 ### Deploy a Single Function
@@ -51,8 +62,8 @@ And run the following.
 {% highlight bash %}
 aws cognito-idp admin-initiate-auth \
   --region us-east-1 \
-  --user-pool-id us-east-1_KLsuR0TMI \
-  --client-id 1nbegql09uran4rd015kja3o5k \
+  --user-pool-id YOUR_COGNITO_USER_POOL_ID \
+  --client-id YOUR_COGNITO_USER_POOL_APP_ID \
   --auth-flow ADMIN_NO_SRP_AUTH \
   --auth-parameters USERNAME=admin,PASSWORD=Passw0rd!
 {% endhighlight %}
@@ -77,7 +88,7 @@ Now we can use that as the `Authorization` header to make a request to our API u
 {% highlight bash %}
 $ curl https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes \
   -H "Authorization:eyJraWQiOiIxeVVnNXQ3NWY3YzlzYlpnNURZZWFDVWhGMVhEOEdUUEpNXC9zQVhDZEhFbz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI3MDM4MDg1Mi1iZGNiLTQ5NzAtOTU2Zi1kZTZkMGFjODBjODUiLCJhdWQiOiIxMnNyNTBwZzF1ZjAwNDRhajYzZTRoc2g2aSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE0ODc1NDUzNzUsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX1dkSEVHQWk4TyIsImNvZ25pdG86dXNlcm5hbWUiOiJmcmFuayIsImV4cCI6MTQ4NzU0ODk3NSwiaWF0IjoxNDg3NTQ1Mzc1LCJlbWFpbCI6IndhbmdmYW5qaWVAZ21haWwuY29tIn0.d7HRBs2QegvQsGwQhJfpJBWYdh9N6CwoQFhmC91ugJ0YFxVdRhHUFQl4uoLplrOJO90PjTrjmxR7az17MfRlfu8v-ij3s31oaQqz8IdWECuhWW63xCNfGMN8lAbnUBwlHISer9CIGmdf8iF-xar2uyHeH8WHhIjI3gbJw15ORCC6Fo43CuKJ6k2zWaOywMkNr7oT2U7Etk93b2pDwIgeZ4V6uGbHgv3IRJYXYvMdIqsemoF8tLpx3XD58Iq8hNJlw_gOpOp8dlpDA3AK9-vjyXYDjJ_0zZa6alf6j0XEgwCVm08IIcYhF8ntg7ju0ZVBbQwYrdgzBCBhxtfzz1elVg" \
-  -d "{\"content\":\"hello world\",\"attachment\":\"earth.jpg\"}"
+  -d "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}"
 {% endhighlight %}
 
 If the curl command is successful, the response will look similar to this.
@@ -87,7 +98,7 @@ If the curl command is successful, the response will look similar to this.
   "userId": "2aa71372-f926-451b-a05b-cf714e800c8e",
   "noteId": "578eb840-f70f-11e6-9d1a-1359b3b22944",
   "content": "hello world",
-  "attachment": "earth.jpg",
+  "attachment": "hello.jpg",
   "createdAt": 1487555594691
 }
 {% endhighlight %}

@@ -20,14 +20,34 @@ Select **Create Bucket**.
 
 ![Select Create Bucket screenshot]({{ site.url }}/assets/s3/select-create-bucket.png)
 
-Pick a name of the bucket and select the **US Standard** Region. Then select **Create**.
+Pick a name of the bucket and select a region. Then select **Create**.
 
-![Create S3 Bucket screenshot]({{ site.url }}/assets/s3/create-s3-bucket.png)
+- **Bucket names** are globally unique, which means you cannot pick the same name as this tutorial.
+- **Region** is the physical geological region where the files are stored. You can choose any AWS Region that is geographically close to you to optimize latency. We will use **US Standard** in this guide.
 
-**Bucket names** are globally unique, which means you cannot pick the same name as this tutorial.
+![Enter S3 Bucket Info screenshot]({{ site.url }}/assets/s3/enter-s3-bucket-info.png)
 
-**Region** is the physical geological region where the files are stored. You can choose any AWS Region that is geographically close to you to optimize latency. We will use **US Standard** in this guide.
+Step through the next steps and leave the defaults by clicking **Next**, and then click **Create Bucket** on the last step.
 
-![Create S3 Bucket Successful screenshot]({{ site.url }}/assets/s3/create-s3-bucket-successful.png)
+![Set S3 Bucket Properties screenshot]({{ site.url }}/assets/s3/set-s3-bucket-properties.png)
+![Set S3 Bucket Permissions screenshot]({{ site.url }}/assets/s3/set-s3-bucket-permissions.png)
+![Review S3 Bucket screenshot]({{ site.url }}/assets/s3/review-s3-bucket.png)
+
+### Enable CORS
+
+In the React App we will be building, users will be uploading files to the bucket we just created directly from the browser. By default, S3 does not allow its resources to be accessed by a web page from a different domain. However, cross-origin resource sharing (CORS) defines a way for client web applications that are loaded in one domain to interact with resources in a different domain. Let's enable CORS for our S3 bucket.
+
+Select the bucket we just created.
+
+![Select Created S3 Bucket screenshot]({{ site.url }}/assets/s3/select-created-s3-bucket.png)
+
+Select **Permissions** tab, then select **CORS configuration**.
+
+![Select S3 Bucket CORS Configuration screenshot]({{ site.url }}/assets/s3/select-s3-bucket-cors-configuration.png)
+
+Add the following CORS configuration into the editor, then hit **Save**.
+
+![Save S3 Bucket CORS Configuration screenshot]({{ site.url }}/assets/s3/save-s3-bucket-cors-configuration.png)
 
 Now that our S3 bucket is ready, let's get setup to handle user authentication.
+

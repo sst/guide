@@ -20,6 +20,7 @@ layout: home
 - [Create a DynamoDB table]({% link _chapters/create-a-dynamodb-table.md %})
 - [Create a S3 bucket for file uploads]({% link _chapters/create-a-s3-bucket-for-file-uploads.md %})
 - [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %})
+  - [Create a Cognito test user]({% link _chapters/create-a-cognito-test-user.md %})
 - [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %})
 - [Setup the Serverless Framework]({% link _chapters/setup-the-serverless-framework.md %})
   - [Add support for ES6 JavaScript]({% link _chapters/add-support-for-es6-javascript.md %})
