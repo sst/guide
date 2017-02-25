@@ -35,13 +35,13 @@ Step through the next steps and leave the defaults by clicking **Next**, and the
 
 ### Enable CORS
 
-In the React App we will be building, users will be uploading files to the bucket we just created directly from the browser. By default, S3 does not allow its resources to be accessed by a web page from a different domain. However, cross-origin resource sharing (CORS) defines a way for client web applications that are loaded in one domain to interact with resources in a different domain. Let's enable CORS for our S3 bucket.
+In the notes app we'll be building, users will be uploading files to the bucket we just created. And since our app will be served through our custom domain, it'll be communicating across domains while it does the uploads. By default, S3 does not allow its resources to be accessed from a different domain. However, cross-origin resource sharing (CORS) defines a way for client web applications that are loaded in one domain to interact with resources in a different domain. Let's enable CORS for our S3 bucket.
 
 Select the bucket we just created.
 
 ![Select Created S3 Bucket screenshot]({{ site.url }}/assets/s3/select-created-s3-bucket.png)
 
-Select **Permissions** tab, then select **CORS configuration**.
+Select the **Permissions** tab, then select **CORS configuration**.
 
 ![Select S3 Bucket CORS Configuration screenshot]({{ site.url }}/assets/s3/select-s3-bucket-cors-configuration.png)
 

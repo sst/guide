@@ -4,11 +4,11 @@ title: Create a Cognito Test User
 date: 2016-12-28 12:00:00
 ---
 
-In this chapter, we are going to create a user which we are going use in later chapters to test our API and React App authentication.
+In this chapter, we are going to create a test user for our Cognito User Pool. We are going to need this user to test the authentication portion of our app later.
 
 ### Create User
 
-First, we will use aws cli to sign up a user with username, password and email.
+First, we will use AWS CLI to sign up a user with username, password and email.
 
 {% include code-marker.html %} In your terminal, run.
 
@@ -30,4 +30,6 @@ $ aws cognito-idp admin-confirm-sign-up \
   --username admin
 {% endhighlight %}
 
-Now the test user is created. Next let's setup Cognito Identity Pools to secure the S3 Bucket we created for file uploads.
+Now our test user is ready.
+
+Next, let's setup Cognito Identity Pools to secure the S3 Bucket we created for file uploads.

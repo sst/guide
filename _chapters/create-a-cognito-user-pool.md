@@ -57,4 +57,4 @@ Now that the app is created. Take a note of the **App client id** which will be 
 
 ![User Pool App Created Screenshot]({{ site.url }}/assets/cognito-user-pool/user-pool-app-created.png)
 
-Now our User Pool is ready. It will maintain a user directory for our React App. It will also be used to authenticate access to our API. Next let's setup a test user within the pool. We will use this user in later chapters to test api permission and app login permission.
+Now our User Pool is ready. It will maintain a user directory for our notes app. It will also be used to authenticate access to our API. Next let's setup a test user within the pool.
