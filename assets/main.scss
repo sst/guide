@@ -66,22 +66,28 @@ ul.share-buttons .sr-only {
 
 // Homepage pitch
 div.home .pitch {
-  padding: 0 30px 50px;
+  font-family: $base-font-family;
+  padding: 0 20px 2 * $spacing-unit - 10px;
   text-align: center;
   font-size: 24px;
   color: #555;
+
+  @include media-query($on-palm) {
+    font-size: 20px;
+    padding: 0 5px $spacing-unit - 10px;
+  }
 }
 
 // Change markers
 span.code-marker {
-  line-height: 1;
+  line-height: 1.1;
   margin-right: 5px;
   font-family: "Space Mono", monospace;
   font-size: 10px;
   font-weight: 700;
   color: white;
   background-color: #C3BDCA;
-  padding: 6px 8px 5px;
+  padding: 5px 8px 5px;
   border-radius: 3px;
   display: inline-block;
   vertical-align: middle; 

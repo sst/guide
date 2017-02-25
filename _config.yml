@@ -17,10 +17,10 @@ title: Serverless Stack
 email: contact@anoma.ly
 description: > # this means to ignore newlines until "baseurl:"
   A step-by-step guide to creating
-  full-stack serverless apps.
+  full-stack serverless apps
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://serverless-stack.com" # the base hostname & protocol for your site, e.g. http://example.com
-logo: /assets/apple-touch-icon.png
+logo: /assets/android-chrome-512x512.png
 
 github_repo: "https://github.com/AnomalyInnovations/serverless-stack-com"
 github_edit_prefix: "/edit/master/"
@@ -41,3 +41,10 @@ exclude:
   - Session.vim
   - Gemfile
   - Gemfile.lock
+
+# Front Matter defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/android-chrome-512x512.png

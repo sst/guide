@@ -33,11 +33,12 @@
     max-width: 380px;
     font-size: 13px;
     font-weight: 300;
-    color: $tertiary-text-color;
+    color: $secondary-text-color;
     border-width: 1px 0;
     border-style: solid;
     border-color: darken($background-color, 10%);
   }
+
 }
 
 /*
@@ -191,6 +192,10 @@
 .page-content {
   padding: 2 * $spacing-unit 0;
 
+  @include media-query($on-palm) {
+    padding: $spacing-unit - 5px 0;
+  }
+
   .placeholder {
     font-family: $heading-font-family;
     font-size: 42px;
@@ -235,7 +240,7 @@
   margin-bottom: 5px;
   font-size: 42px;
   letter-spacing: -1px;
-  line-height: 1;
+  line-height: 1.3;
 
   @include media-query($on-laptop) {
     font-size: 36px;

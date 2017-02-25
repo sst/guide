@@ -1,9 +1,10 @@
 ---
 layout: home
+description: Serverless Stack is a comprehensive step-by-step guide to creating full-stack serverless applications. We'll be creating a [simple note taking app](https://demo.serverless-stack.com) from scratch using React.js, AWS Lambda, API Gateway, DynamoDB and a few other AWS services.
 ---
 
 {: .pitch }
-# Serverless Stack is a comprehensive step-by-step guide to creating full-stack serverless applications. We'll be creating a [simple note taking app](https://demo.serverless-stack.com) from scratch using React.js, AWS Lambda, DynamoDB and a few other AWS services.
+# {{ page.description }}
 
 ### Introduction
 
