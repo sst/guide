@@ -145,7 +145,7 @@ Here we are adding our newly added create function to the configuration. We spec
 
 Now we are ready to test our new API. To be able to test it on our local we are going to mock the input parameters.
 
-{% include code-marker.html %} Create an `event.json` file and add the following.
+Create an `event.json` file and add the following.
 
 {% highlight json %}
 {

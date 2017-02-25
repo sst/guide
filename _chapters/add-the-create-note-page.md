@@ -10,7 +10,7 @@ First we are going to create the form for a note. It'll take some content and a 
 
 ### Add the Container
 
-Create a new file `src/containers/NewNote.js` and add the following.
+{% include code-marker.html %} Create a new file `src/containers/NewNote.js` and add the following.
 
 {% highlight javascript %}
 import React, { Component } from 'react';
@@ -95,15 +95,17 @@ class NewNote extends Component {
 export default withRouter(NewNote);
 {% endhighlight %}
 
-Everything is fairly standard here, except for the file input. Our form elements so far have been [controlled components](https://facebook.github.io/react/docs/forms.html), as in their value is directly controlled by the state of the component. The file input simply calls a different `onChange` handler (`handleFileChange`) that saves the file object as class property. We use a class property instead of saving it in the state because the file object we save does not change or drive the rendering of our component.
+Everything is fairly standard here, except for the file input. Our form elements so far have been [controlled components](https://facebook.github.io/react/docs/forms.html), as in their value is directly controlled by the state of the component. The file input simply calls a different `onChange` handler (`handleFileChange`) that saves the file object as a class property. We use a class property instead of saving it in the state because the file object we save does not change or drive the rendering of our component.
 
-Currently, our `handleSubmit` does not do a whole lot other than limitting the file size of our attachment. We are going to define this in our config, so add the following to our `src/config.js`.
+Currently, our `handleSubmit` does not do a whole lot other than limiting the file size of our attachment. We are going to define this in our config.
+
+{% include code-marker.html %} So add the following to our `src/config.js` below the `export default {` line.
 
 {% highlight javascript %}
 MAX_ATTACHMENT_SIZE: 5000000,
 {% endhighlight %}
 
-Let's also add the styles for our form in `src/containers/NewNote.css`.
+{% include code-marker.html %} Let's also add the styles for our form in `src/containers/NewNote.css`.
 
 {% highlight css %}
 .NewNote form {
@@ -118,20 +120,20 @@ Let's also add the styles for our form in `src/containers/NewNote.css`.
 
 ### Add the Route
 
-Finally, add our container as a route in `src/Routes.js` below our signup route.
+{% include code-marker.html %} Finally, add our container as a route in `src/Routes.js` below our signup route.
 
 {% highlight javascript %}
 <Route path="notes/new" component={NewNote} />
 {% endhighlight %}
 
-And include our component in the header.
+{% include code-marker.html %} And include our component in the header.
 
 {% highlight javascript %}
 import NewNote from './containers/NewNote';
 {% endhighlight %}
 
-Now if we switch to our browser and navigate `http://localhost:3000/notes/new` we should see our newly created form. Try adding some content, uploading a file and hitting submit to see it in action.
+Now if we switch to our browser and navigate `http://localhost:3000/notes/new` we should see our newly created form. Try adding some content, uploading a file, and hitting submit to see it in action.
 
 ![New note page added screenshot]({{ site.url }}/assets/new-note-page-added.png)
 
-Next, let's get into connecting to our API.
+Next, let's get into connecting this form to our API.

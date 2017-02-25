@@ -6,7 +6,7 @@ date: 2017-01-29 00:00:00
 
 Now that our container loads a note on `componentWillMount`, let's go ahead and render the form that we'll use to edit it.
 
-Replace our placeholder `render` method with the following.
+{% include code-marker.html %} Replace our placeholder `render` method in `src/containers/Notes.js` with the following.
 
 {% highlight javascript %}
 validateForm() {
@@ -63,17 +63,17 @@ render() {
                 value={this.state.content}
                 componentClass="textarea" />
             </FormGroup>
-            { this.state.note.file &&
+            { this.state.note.attachment &&
             ( <FormGroup>
               <ControlLabel>Attachment</ControlLabel>
               <FormControl.Static>
-                <a target="_blank" href={ this.state.note.file }>
-                  { this.formatFilename(this.state.note.file) }
+                <a target="_blank" href={ this.state.note.attachment }>
+                  { this.formatFilename(this.state.note.attachment) }
                 </a>
               </FormControl.Static>
             </FormGroup> )}
             <FormGroup controlId="file">
-              { ! this.state.note.file &&
+              { ! this.state.note.attachment &&
               <ControlLabel>Attachment</ControlLabel> }
               <FormControl
                 onChange={this.handleFileChange}
@@ -102,21 +102,23 @@ render() {
 }
 {% endhighlight %}
 
-We are doing a few simple things here:
+We are doing a few things here:
 
 1. We render our form only when `this.state.note` is available.
 
-2. Inside the form we conditionally render the part where we display the attachement by sing `this.state.note.file`.
+2. Inside the form we conditionally render the part where we display the attachment by using `this.state.note.attachment`.
 
-3. We form the attachment URL using `formatFilename` (since AWS gives us some very long URLs).
+3. We form the attachment URL using `formatFilename` (since S3 gives us some very long URLs).
 
-4. We also added a delete button to allow users to delete the note. And just like the submit button it too needs a flag that signals that the call is the progress. We call it `isLoading`.
+4. We also added a delete button to allow users to delete the note. And just like the submit button it too needs a flag that signals that the call is in progress. We call it `isLoading`.
 
 5. We handle attachments with a file input exactly like we did in the `NewNote` component.
 
-6. Our delete button also confirms with the user if they want to delete the note using the browser's `confirm`.
+6. Our delete button also confirms with the user if they want to delete the note using the browser's `confirm` dialog.
 
-To complete this code up let's add `isLoading` and `isDeleting` to the state. So our new initial state in the `constructor` looks like the following.
+To complete this code, let's add `isLoading` and `isDeleting` to the state.
+
+{% include code-marker.html %} So our new initial state in the `constructor` looks like so.
 
 {% highlight javascript %}
 this.state = {
@@ -127,7 +129,7 @@ this.state = {
 };
 {% endhighlight %}
 
-Let's also add some styles by adding the following to `src/containers/Notes.css`.
+{% include code-marker.html %} Let's also add some styles by adding the following to `src/containers/Notes.css`.
 
 {% highlight javascript %}
 .Notes form {
@@ -140,7 +142,7 @@ Let's also add some styles by adding the following to `src/containers/Notes.css`
 }
 {% endhighlight %}
 
-Also, let's include the React-Boostrap components that we are using here by adding the following to our header. And our styles, the `LoaderButton`, and the `config`.
+{% include code-marker.html %} Also, let's include the React-Bootstrap components that we are using here by adding the following to our header. And our styles, the `LoaderButton`, and the `config`.
 
 {% highlight javascript %}
 import {
@@ -153,8 +155,8 @@ import config from '../config.js';
 import './Notes.css';
 {% endhighlight %}
 
-And that's it. If you swtich over to your browser, you should see the note loaded.
+And that's it. If you switch over to your browser, you should see the note loaded.
 
 ![Notes page loaded screenshot]({{ site.url }}/assets/notes-page-loaded.png)
 
-Next we'll look at saving the changes we make to our note.
+Next, we'll look at saving the changes we make to our note.

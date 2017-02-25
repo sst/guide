@@ -8,7 +8,7 @@ Let's start by creating the signup form that'll get the user's email and passwor
 
 ### Add the Container
 
-Create a new container at `src/containers/Signup.js` with the following.
+{% include code-marker.html %} Create a new container at `src/containers/Signup.js` with the following.
 
 {% highlight javascript %}
 import React, { Component } from 'react';
@@ -42,7 +42,7 @@ class Signup extends Component {
       && this.state.password === this.state.confirmPassword;
   }
 
-  validateCofirmationForm() {
+  validateConfirmationForm() {
     return this.state.confirmationCode.length > 0;
   }
 
@@ -82,7 +82,7 @@ class Signup extends Component {
         <LoaderButton
           block
           bsSize="large"
-          disabled={ ! this.validateCofirmationForm() }
+          disabled={ ! this.validateConfirmationForm() }
           type="submit"
           isLoading={this.state.isLoading}
           text="Verify"
@@ -141,19 +141,19 @@ class Signup extends Component {
 export default withRouter(Signup);
 {% endhighlight %}
 
-Most of things we are doing here are fairly straightforward but let's go over them quickly.
+Most of the things we are doing here are fairly straightforward but let's go over them quickly.
 
-1. Since we need to show the user a form to enter the confirmation code, we are conditionally rendering two form based on if we have a user object or not.
+1. Since we need to show the user a form to enter the confirmation code, we are conditionally rendering two forms based on if we have a user object or not.
 
 2. We are using the `LoaderButton` component that we created earlier for our submit buttons.
 
-3. We are also using the `withRouter` HOC on our Singup component.
+3. We are also using the `withRouter` HOC on our Signup component.
 
-4. Since we have two forms we have two validation methods called `validateForm` and `validateCofirmationForm`.
+4. Since we have two forms we have two validation methods called `validateForm` and `validateConfirmationForm`.
 
 5. For now our `handleSubmit` and `handleConfirmationSubmit` don't do a whole lot besides setting the `isLoading` state and a dummy value for the `newUser` state.
 
-Also, let's add a couple of styles in `src/containers/Signup.css`.
+{% include code-marker.html %} Also, let's add a couple of styles in `src/containers/Signup.css`.
 
 {% highlight css %}
 @media all and (min-width: 480px) {
@@ -176,7 +176,7 @@ Also, let's add a couple of styles in `src/containers/Signup.css`.
 
 ### Add the Route
 
-Finally, add our container as a route in `src/Routes.js` below our login route.
+{% include code-marker.html %} Finally, add our container as a route in `src/Routes.js` below our login route.
 
 {% highlight javascript %}
 <Route path="signup" component={Signup} />
@@ -188,7 +188,7 @@ And include our component in the header.
 import Signup from './containers/Signup';
 {% endhighlight %}
 
-Now if we switch to our browser and navigate to the signup page we should see our newly created form. Try filling in the form and ensure that it shows the confirmation code form as well.
+Now if we switch to our browser and navigate to the signup page we should see our newly created form. Try filling it in and ensure that it shows the confirmation code form as well.
 
 ![Signup page added screenshot]({{ site.url }}/assets/signup-page-added.png)
 

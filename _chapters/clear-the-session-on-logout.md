@@ -6,7 +6,7 @@ date: 2017-01-16 00:00:00
 
 Currently we are only removing the user token from our app's state. But when we refresh the page, we load the user token from the browser session, in effect logging them back in.
 
-To clear the browser session on logout replace the `handleLogout` method with the following.
+{% include code-marker.html %} To clear the browser session on logout, replace the `handleLogout` method in our `src/App.js` with this:
 
 {% highlight javascript %}
 handleLogout = (event) => {
@@ -20,6 +20,8 @@ handleLogout = (event) => {
 }
 {% endhighlight %}
 
-Now if you head over to your browser, logout and then refresh the page; you should be logouted completely.
+Here we are once again using the AWS Cognito JS SDK to log the user out by calling `currentUser.signOut()`.
 
-If you can try out the entire login flow from the beginning you'll notice that, we are constanly stuck on the login page through the entire process. Next, we'll look at redirecting the page after we login and logout to make it so that the flow makes more sense.
+Now if you head over to your browser, logout and then refresh the page; you should be logged out completely.
+
+If you try out the entire login flow from the beginning you'll notice that, we continue to stay on the login page through out the entire process. Next, we'll look at redirecting the page after we login and logout to make the flow makes more sense.

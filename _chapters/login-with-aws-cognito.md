@@ -8,7 +8,7 @@ Before we link up our login form with our AWS Cognito setup let's grab our Cogni
 
 ### Load AWS Cognito Details
 
-We'll take our Cognito **User Pool Id** and our **Client Id** and save into it `src/config.js` using the following.
+{% include code-marker.html %} We'll take the Cognito **User Pool Id** and our **Client Id** (from the Cognito User Pool chapter) and save into it `src/config.js` using the following.
 
 {% highlight javascript %}
 export default {
@@ -19,7 +19,7 @@ export default {
 };
 {% endhighlight %}
 
-And to load it into our login form simply import it by adding the following to the header of our `Login` container.
+{% include code-marker.html %} And to load it into our login form simply import it by adding the following to the header of our Login container in `src/containers/Login.js`.
 
 {% highlight javascript %}
 import config from '../config.js';
@@ -27,13 +27,15 @@ import config from '../config.js';
 
 ### Login to AWS Cognito
 
-We are going to use the NPM module `amazon-cognito-identity-js` to login to Cognito. Install it by running the following in your project root.
+We are going to use the NPM module `amazon-cognito-identity-js` to login to Cognito.
+
+{% include code-marker.html %} Install it by running the following in your project root.
 
 {% highlight bash %}
-npm install amazon-cognito-identity-js --save
+$ npm install amazon-cognito-identity-js --save
 {% endhighlight %}
 
-And include the following in the header of our `Login` container.
+{% include code-marker.html %} And include the following in the header of our `src/containers/Login.js`.
 
 {% highlight javascript %}
 import {
@@ -43,7 +45,9 @@ import {
 } from 'amazon-cognito-identity-js';
 {% endhighlight %}
 
-The actual login code is relatively simple. Add the following method to your `Login` container as well.
+The login code itself is relatively simple.
+
+{% include code-marker.html %} Add the following method to `src/containers/Login.js` as well.
 
 {% highlight javascript %}
 login(username, password) {
@@ -72,13 +76,13 @@ This function does a few things for us:
 
 1. It creates a new `CognitoUserPool` using the details from our config. And it creates a new `CognitoUser` using the username that is passed in.
 
-2. It then authenticates our user using the authentication details with the call `user.authenticateUser`. If the authentication call is successful we can retreive a **user token** that we can then use for our subsequent API calls.
+2. It then authenticates our user using the authentication details with the call `user.authenticateUser`. If the authentication call is successful we can retrieve a **user token** that we can then use for our subsequent API calls.
 
 3. Since, the login call is asynchronous we return a `Promise` object. This way we can call this method directly and simply get the user token in return without fidgeting with callbacks.
 
 ### Trigger Login onSubmit
 
-To connect the above `login` method to our form simply replace our placeholder `handleSubmit` method with the following.
+{% include code-marker.html %} To connect the above `login` method to our form simply replace our placeholder `handleSubmit` method in `src/containers/Login.js` with the following.
 
 {% highlight javascript %}
 handleSubmit = async (event) => {

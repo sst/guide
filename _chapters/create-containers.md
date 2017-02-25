@@ -10,7 +10,7 @@ Currently, our app has a single component that renders our content. For creating
 
 Let's start by creating the outer chrome of our application by first adding a navigation bar to it. We are going to use the [Navbar](https://react-bootstrap.github.io/components.html#navbars) React-Bootstrap component.
 
-Go ahead and remove the code inside `src/App.js` and replace it with the following. Also, you can go ahead and remove `src/logo.svg`.
+{% include code-marker.html %} Go ahead and remove the code inside `src/App.js` and replace it with the following. Also, you can go ahead and remove `src/logo.svg`.
 
 {% highlight javascript %}
 import React, { Component } from 'react';
@@ -53,21 +53,21 @@ export default class App extends Component {
 
 We are doing a few things here:
 
-1. Creating a fixed width container using Boostrap in `div.container`.
+1. Creating a fixed width container using Bootstrap in `div.container`.
 2. Adding a Navbar inside the container that fits to it's container's width using the attribute `fluid`.
 3. Adding a responsive and collapsible right section to the Navbar for our Login and Signup buttons using `Navbar.Collapse`.
-4. Using `IndexLink` from the React-Router to handling links to our index route dynamically (as opposed to having to refresh the page).
-5. Simillary, we handle links to our Login and Signup pages using a `LinkContainer` provided by the React-Router-Bootstrap package. It handles the styles necessary for Bootstrap NavItems while dynamically linking to our pages.
+4. Using `IndexLink` from the React-Router to handle links to our index route dynamically (as opposed to having to refresh the page).
+5. Similarly, we handle links to our Login and Signup pages using a `LinkContainer` provided by the React-Router-Bootstrap package. It handles the styles necessary for Bootstrap NavItems while dynamically linking to our pages.
 
-Now, for this code to work we need to install the React-Router-Bootstrap package. Run the following command in your working directory
+{% include code-marker.html %} Now, for this code to work we need to install the React-Router-Bootstrap package. Run the following command in your working directory.
 
 {% highlight bash %}
-npm install react-router-bootstrap --save
+$ npm install react-router-bootstrap --save
 {% endhighlight %}
 
 Let's also add a couple of line of styles to space things out a bit more.
 
-Remove all the code inside `src/App.css` and replace it with the following:
+{% include code-marker.html %} Remove all the code inside `src/App.css` and replace it with the following:
 
 {% highlight css %}
 .App {
@@ -83,7 +83,7 @@ Remove all the code inside `src/App.css` and replace it with the following:
 
 Now that we have the outer chrome of our application ready, let's add the container that will hold the content for each of the pages.
 
-Right below the `</Navbar>` closing tag in `src/App.js`, add the following:
+{% include code-marker.html %} Right below the `</Navbar>` closing tag in `src/App.js`, add the following:
 
 {% highlight javascript %}
 <div>
@@ -91,9 +91,11 @@ Right below the `</Navbar>` closing tag in `src/App.js`, add the following:
 </div>
 {% endhighlight %}
 
-This tells this component to where to render it's child components.
+This tells this component where to render it's child components.
 
-Let's create our first container. It'll respond to the `/` route. Create a `src/containers` directory and add the following inside `src/containers/Home.js`.
+Let's create our first container. It'll respond to the `/` route.
+
+{% include code-marker.html %} Create a `src/containers` directory and add the following inside `src/containers/Home.js`.
 
 {% highlight javascript %}
 import React, { Component } from 'react';
@@ -113,7 +115,9 @@ export default class Home extends Component {
 }
 {% endhighlight %}
 
-This simple renders our home page given that the user is not currently signed in. Let's add a few lines to style this. Add the following into `src/containers/Home.css`.
+This simply renders our home page given that the user is not currently signed in. Let's add a few lines to style this.
+
+{% include code-marker.html %} Add the following into `src/containers/Home.css`.
 
 {% highlight css %}
 .Home .lander {
@@ -133,13 +137,15 @@ This simple renders our home page given that the user is not currently signed in
 
 ### Add the Route
 
-Now to have this container respond to the `/` route we need to tweak our `src/Routes.js` just a bit. Just replace the following:
+Now to have this container respond to the `/` route we need to tweak our routes just a bit.
+
+{% include code-marker.html %} Find the following in `src/Routes.js`.
 
 {% highlight javascript %}
 <Route path="/" component={App} />
 {% endhighlight %}
 
-with this:
+{% include code-marker.html %} And replace it with this:
 
 {% highlight javascript %}
 <Route path="/" component={App}>
@@ -147,9 +153,11 @@ with this:
 </Route>
 {% endhighlight %}
 
-This tells our router to render the IndexRoute of the path `/` (meaning the `/` route) with the `Home` component as a child of the `App` component. The result of this would be that the chrome that we setup a few steps ago would contain the home page that we designed above.
+This tells our router to render the IndexRoute of the path `/` with the `Home` component as a child of the `App` component. The result of this would be that the chrome that we setup a few steps ago would contain the home page that we designed above.
 
-Let's not forget to include the `Home` and `IndexRoute` component. The header of your `src/Routes.js` should look like this:
+Let's not forget to include the `Home` and `IndexRoute` component.
+
+{% include code-marker.html %} The header of your `src/Routes.js` should look like this:
 
 {% highlight javascript %}
 import React from 'react';

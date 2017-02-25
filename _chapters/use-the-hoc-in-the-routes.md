@@ -6,14 +6,16 @@ date: 2017-02-03 00:00:00
 
 Now that we created the `AuthenticatedComponent` and `UnauthenticatedComponent`, let's use them on the containers we want to secure.
 
-First import them in the header of `src/Routes.js`.
+{% include code-marker.html %} First import them in the header of `src/Routes.js`.
 
 {% highlight javascript %}
 import requireAuth from './components/AuthenticatedComponent';
 import requireUnauth from './components/UnauthenticatedComponent';
 {% endhighlight %}
 
-Next, we simply wrap the components we want secured. So the following routes would be affected.
+Next, we simply wrap the components we want secured.
+
+So the following routes in `src/Routes.js` would be affected.
 
 {% highlight javascript %}
 <Route path="login" component={Login} />
@@ -22,7 +24,7 @@ Next, we simply wrap the components we want secured. So the following routes wou
 <Route path="notes/:id" component={Notes} />
 {% endhighlight %}
 
-They should now look like so.
+{% include code-marker.html %} They should now look like so:
 
 {% highlight javascript %}
 <Route path="login" component={requireUnauth(Login)} />

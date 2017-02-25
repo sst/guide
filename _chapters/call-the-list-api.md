@@ -6,7 +6,9 @@ date: 2017-01-27 00:00:00
 
 Now that we have our basic home page setup, let's make the API call to render our list of notes.
 
-Add the following below the constructor in `src/containers/Home.js`.
+### Make the Request
+
+{% include code-marker.html %} Add the following below the `constructor` block in `src/containers/Home.js`.
 
 {% highlight javascript %}
 async componentWillMount() {
@@ -32,16 +34,19 @@ notes() {
 }
 {% endhighlight %}
 
-And include our API Gateway Client helper in the header.
+{% include code-marker.html %} And include our API Gateway Client helper in the header.
 
 {% highlight javascript %}
-import { invokeApig } from '../lib/awsLib.js';
+import { invokeApig } from '../libs/awsLib.js';
 {% endhighlight %}
 
-All this does is make a GET request to `/notes` on `componentWillMount` and puts the results in `notes` object in the state.
+All this does, is make a GET request to `/notes` on `componentWillMount` and puts the results in the `notes` object in the state.
 
-Now let's render the results. Replace our `renderNotesList` placeholder method with the following.
+Now let's render the results.
 
+### Render the List
+
+{% include code-marker.html %} Replace our `renderNotesList` placeholder method with the following.
 
 {% highlight javascript %}
 renderNotesList(notes) {
@@ -69,7 +74,7 @@ onNoteClick = (event) => {
 }
 {% endhighlight %}
 
-And include the `ListGroupItem` in the header so that our `react-bootstrap` import looks like so.
+{% include code-marker.html %} And include the `ListGroupItem` in the header so that our `react-bootstrap` import looks like so.
 
 {% highlight javascript %}
 import {
@@ -81,13 +86,13 @@ import {
 
 The code above does a few things.
 
-1. It always renders a **Create a new note** button as the first item in the list (even if the list is empty). We do this my concatinating an array with an empty object with our `notes` array.
+1. It always renders a **Create a new note** button as the first item in the list (even if the list is empty). We do this my concatenating an array with an empty object with our `notes` array.
 
 2. We render the first line of each note as the `ListGroupItem` header by doing `note.content.trim().split('\n')[0]`.
 
 3. And `onClick` for each of the list items we navigate to their respective pages.
 
-Let's also add a couple of styles to our `src/containers/Home.css`.
+{% include code-marker.html %} Let's also add a couple of styles to our `src/containers/Home.css`.
 
 {% highlight css %}
 .Home .notes h4 {
@@ -107,6 +112,6 @@ Now head over to your browser and you should see your list displayed.
 
 ![Home page list loaded screenshot]({{ site.url }}/assets/home-page-list-loaded.png)
 
-And if you click on the links they should take you to their respoective pages.
+And if you click on the links they should take you to their respective pages.
 
 Next up we are going to allow users to view and edit their notes.

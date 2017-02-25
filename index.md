@@ -38,7 +38,7 @@ layout: home
 
 ### Setting up the Frontend
 
-- [Create a new app with Create React App]({% link _chapters/create-a-new-create-react-app.md %})
+- [Create a new React.js app]({% link _chapters/create-a-new-reactjs-app.md %})
   - [Add app favicons]({% link _chapters/add-app-favicons.md %})
   - [Setup custom fonts]({% link _chapters/setup-custom-fonts.md %})
   - [Setup Bootstrap]({% link _chapters/setup-bootstrap.md %})

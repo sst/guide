@@ -4,7 +4,7 @@ title: Create a CloudFront Distribution
 date: 2017-02-08 00:00:00
 ---
 
-Now that we our app up and running on S3, let's serve it out globally through CloudFront. To do this we need to create a CloudFront Distribution.
+Now that we have our app up and running on S3, let's serve it out globally through CloudFront. To do this we need to create a CloudFront Distribution.
 
 Select CloudFront from the list of services in your [AWS Console](https://console.aws.amazon.com).
 
@@ -18,15 +18,17 @@ And then in the **Web** section select **Get Started**.
 
 ![Select get started web screenshot]({{ site.url }}/assets/select-get-started-web.png)
 
-In the Create Distribution form we need to start by specifying the Origin Domain Name for our Web CloudFront Distribution. This field is pre-filled with a few options including the S3 bucket we created. But we are **not** going to selct on the options in the dropdown. This is because the options here are the REST API endpoints for the S3 bucket instead of the one that is setup as a static website.
+In the Create Distribution form we need to start by specifying the Origin Domain Name for our Web CloudFront Distribution. This field is pre-filled with a few options including the S3 bucket we created. But we are **not** going to select on the options in the dropdown. This is because the options here are the REST API endpoints for the S3 bucket instead of the one that is setup as a static website.
+
+You can grab the S3 website endpoint from the **Static website hosting** panel for your S3 bucket. We had configured this in the previous chapter. Copy the URL in the **Endpoint** field.
 
 ![S3 static website domain screenshot]({{ site.url }}/assets/s3-static-website-domain.png)
 
-Now copy and paste that URL in the **Origin Domain Name** field. In our case it is, `http://notes-app-client.s3-website-us-east-1.amazonaws.com`.
+And paste that URL in the **Origin Domain Name** field. In our case it is, `http://notes-app-client.s3-website-us-east-1.amazonaws.com`.
 
 ![Fill origin domain name field screenshot]({{ site.url }}/assets/fill-origin-domain-name-field.png)
 
-And now scroll down the form and switch **Compress Objects Automatically** to **Yes**. This will automatically Gzip compress the files that can be compressed.
+And now scroll down the form and switch **Compress Objects Automatically** to **Yes**. This will automatically Gzip compress the files that can be compressed and speed up the delivery of our app.
 
 ![Select compress objects automatically screenshot]({{ site.url }}/assets/select-compress-objects-automatically.png)
 
@@ -38,7 +40,7 @@ And finally, hit **Create Distribution**.
 
 ![Hit create distribution screenshot]({{ site.url }}/assets/hit-create-distribution.png)
 
-It takes AWS a little while to create a distribution. But once it is complete you can find your CloudFront Distribution by clicking on your newly created distribution from the list and looking up it's domain name.
+It takes AWS a little while to create a distribution. But once it is complete you can find your CloudFront Distribution by clicking on your newly created distribution from the list and looking up its domain name.
 
 ![CloudFront Distribution doamin name screenshot]({{ site.url }}/assets/cloudfront-distribution-domain-name.png)
 
@@ -46,4 +48,4 @@ And if you navigate over to that in your browser, you should see your app live.
 
 ![App live on CloudFront screenshot]({{ site.url }}/assets/app-live-on-cloudfront.png)
 
-Next up let's point our domain to our CloudFront Distribution.
+Next up, let's point our domain to our CloudFront Distribution.

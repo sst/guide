@@ -4,15 +4,15 @@ title: Setup SSL
 date: 2017-02-11 00:00:00
 ---
 
-Now that our app is being served through our domain let's add a layer of security to it by switching to HTTPS. AWS makes this fairly easy to do, thanks to Certificate Manager.
+Now that our app is being served through our domain, let's add a layer of security to it by switching to HTTPS. AWS makes this fairly easy to do, thanks to Certificate Manager.
 
 ### Request a Certificate
 
-Select Certificate Manager from the list of services in your [AWS Console](https://console.aws.amazon.com).
+Select **Certificate Manager** from the list of services in your [AWS Console](https://console.aws.amazon.com).
 
 ![Select Certificate Manager service screenshot]({{ site.url }}/assets/select-certificate-manager-service.png)
 
-Hit **Request a certificate** from the top and type in the name of our domain and hit **Add another name to this certificate** and add our www version of our domain as well. Hit **Review and request** once you are done.
+Hit **Request a certificate** from the top and type in the name of our domain. Hit **Add another name to this certificate** and add our www version of our domain as well. Hit **Review and request** once you are done.
 
 ![Add domain names to certificate screenshot]({{ site.url }}/assets/add-domain-names-to-certificate.png)
 
@@ -20,7 +20,7 @@ On the next screen review to make sure you filled in the right domain names and 
 
 ![Review domain name details screenshot]({{ site.url }}/assets/review-domain-name-details.png)
 
-And finally on the **Validation** screen, AWS let's you know which email addresses it's going to send emails to verify that it is your domain. Hit **Continue** to send the verification emails.
+And finally on the **Validation** screen, AWS let's you know which email addresses it's going to send emails to verify that it is your domain. Hit **Continue**, to send the verification emails.
 
 ![Validation for domains screenshot]({{ site.url }}/assets/validation-for-domains.png)
 
@@ -62,4 +62,4 @@ And that's it. Our app should be served out on our domain through HTTPS.
 
 ![App live with certificate screenshot]({{ site.url }}/assets/app-live-with-certificate.png)
 
-Next up let's look at the process of deploying updates to our app.
+Next up, let's look at the process of deploying updates to our app.

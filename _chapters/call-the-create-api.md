@@ -10,17 +10,17 @@ To make it easy to talk to API Gateway, we'll use the [AWS API Gateway JS Client
 
 ### Installing the API Gateway JS Client
 
-Run the following command in your working directory
+{% include code-marker.html %} Run the following command in your working directory
 
 {% highlight bash %}
-npm install aws-api-gateway-client --save
+$ npm install aws-api-gateway-client --save
 {% endhighlight %}
 
 ### Invoking the Client
 
-To call our API through API Gateway we need to first create a client and then pass in a whole number of parameters. And since we are going to make a lot of calls to our API, let's simplify the process a bit.
+To call our API through API Gateway we need to first create a client and then pass in a whole lot of parameters. And since we are going to make a lot of calls to our API, let's simplify the process a bit.
 
-Let's create a helper function in `src/lib/awsLib.js` and add the following.
+{% include code-marker.html %} Let's create a helper function in `src/libs/awsLib.js` and add the following. Make sure to create the `src/libs/` directory first.
 
 {% highlight javascript %}
 import apigClientFactory from 'aws-api-gateway-client';
@@ -52,9 +52,9 @@ export function invokeApig(
 }
 {% endhighlight %}
 
-We just made it so that we can call `invokeApig` from now on and only pass in the parameters that are necessary. Also, it also adds our user token to the header of the request.
+We just made it so that we can call `invokeApig` from now on and only pass in the parameters that are necessary. Also, it adds our user token to the header of the request.
 
-Now to create a new API Gateway client we need our region and API Gateway URL. Let's add that to our config with the following.
+{% include code-marker.html %} Now to create a new API Gateway client we need our region and API Gateway URL. Let's add that to our `src/config.js` above the `cognito: {` line.
 
 {% highlight javascript %}
 apiGateway: {
@@ -63,16 +63,17 @@ apiGateway: {
 },
 {% endhighlight %}
 
-### Call in handleSubmit
+### Make the Call
 
-Now we are ready to make our create call in our form. Let's include our awsLib by adding the following to the header of `src/containers/NewNote.js`.
+Now we are ready to make our create call in our form.
+
+{% include code-marker.html %} Let's include our `awsLib` by adding the following to the header of `src/containers/NewNote.js`.
 
 {% highlight javascript %}
-import { invokeApig } from '../lib/awsLib.js';
+import { invokeApig } from '../libs/awsLib.js';
 {% endhighlight %}
 
-And replace our `handleSubmit` function with the following.
-
+{% include code-marker.html %} And replace our `handleSubmit` function with the following.
 
 {% highlight javascript %}
 handleSubmit = async (event) => {
@@ -111,15 +112,12 @@ This does a couple of simple things.
 
 1. We make our create call in `createNote` by making a POST request to `/notes` and passing in our note object.
 
-2. For now the note object is simply the content of the note. We are creating these notes without the attachment for now.
+2. For now the note object is simply the content of the note. We are creating these notes without an attachment for now.
 
-3. Finally, after the note is created we redirect the note to the URL `/notes/NOTE_ID`. Of course, that page does not exist yet but we will create it soon.
+3. Finally, after the note is created we redirect to our home page.
 
-And that's it. If you switch over to your browser and try submitting your form, it should successfully navigate over to your new note page.
+And that's it; if you switch over to your browser and try submitting your form, it should successfully navigate over to our home page.
 
 ![New note created screenshot]({{ site.url }}/assets/new-note-created.png)
 
 Next let's upload our file to S3 and add an attachment to our note.
-
-
-

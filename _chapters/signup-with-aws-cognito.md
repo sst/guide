@@ -6,7 +6,7 @@ date: 2017-01-21 00:00:00
 
 Now let's go ahead and implement the `handleSubmit` and `handleConfirmationSubmit` methods and connect it up with our AWS Cognito setup.
 
-Replace our `handleSubmit` and `handleConfirmationSubmit` methods with the following.
+{% include code-marker.html %} Replace our `handleSubmit` and `handleConfirmationSubmit` methods in `src/containers/Signup.js` with the following.
 
 {% highlight javascript %}
 handleSubmit = async (event) => {
@@ -96,7 +96,7 @@ authenticate(user, username, password) {
 }
 {% endhighlight %}
 
-Also, include the following in our header.
+{% include code-marker.html %} Also, include the following in our header.
 
 {% highlight javascript %}
 import {
@@ -109,8 +109,8 @@ import config from '../config.js';
 
 The important thing we are doing here is after we call `confirm` we call `authenticate` to get the user token. And just like in the `Login` component we call `updateUserToken` and set that in our app's state.
 
-Now if you were to swtich over to your browser and try signing up for a new account it should redirect you to the home page after sign up successfuly completes.
+Now if you were to switch over to your browser and try signing up for a new account it should redirect you to the home page after sign up successfully completes.
 
 ![Redirect home after signup screenshot]({{ site.url }}/assets/redirect-home-after-signup.png)
 
-Next up we are going to create our first note.
+Next up, we are going to create our first note.

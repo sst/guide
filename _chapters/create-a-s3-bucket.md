@@ -4,21 +4,21 @@ title: Create a S3 Bucket
 date: 2017-02-06 00:00:00
 ---
 
-To be able to host our note taking app, we need to upload the assets that are going to served out statically on S3. S3 has a concept of buckets (or folders) to separate different types of files.
+To be able to host our note taking app, we need to upload the assets that are going to be served out statically on S3. S3 has a concept of buckets (or folders) to separate different types of files.
 
 A bucket can also be configured to host the assets in it as a static website and is automatically assigned a publicly accessible URL. So let's get started.
 
-### Create Bucket
+### Create the Bucket
 
 First, log in to your [AWS Console](https://console.aws.amazon.com) and select S3 from the list of services.
 
 ![Select S3 Service screenshot]({{ site.url }}/assets/select-s3-service.png)
 
-Select **Create Bucket** and pick a name for your application and select the **US East** Region. Since our application is being served out using a CDN, the region should not matter to us.
+Select **Create Bucket** and pick a name for your application and select the **US East (N. Virginia) Region** Region. Since our application is being served out using a CDN, the region should not matter to us.
 
 ![Create S3 Bucket screenshot]({{ site.url }}/assets/create-s3-bucket.png)
 
-Step through the next steps and leave the defaults by clicking **Next**.
+Go through the next steps and leave the defaults by clicking **Next**.
 
 ![Create S3 Bucket next properties screenshot]({{ site.url }}/assets/create-s3-bucket-next-properties.png)
 
@@ -26,17 +26,17 @@ Step through the next steps and leave the defaults by clicking **Next**.
 
 ![Create S3 Bucket next review screenshot]({{ site.url }}/assets/create-s3-bucket-next-review.png)
 
-Now click on your newly created bucket from the list and navigate to it's permissions by clicking **Permissions**.
+Now click on your newly created bucket from the list and navigate to it's permissions panel by clicking **Permissions**.
 
 ![Select Bucket properties screenshot]({{ site.url }}/assets/select-bucket-permissions.png)
 
 ### Add Permissions
 
-Buckets by defualt are not publicly accessible, so we need to change the permissions. Select the **Bucket Policy** from the permissions panel.
+Buckets by default are not publicly accessible, so we need to change its permissions. Select the **Bucket Policy** from the permissions panel.
 
 ![Add bucket policy screenshot]({{ site.url }}/assets/add-bucket-policy.png)
 
-Add the following bucket policy into the editor. Where `notes-app-client` is the name of our S3 bucket.
+{% include code-marker.html %} Add the following bucket policy into the editor. Where `notes-app-client` is the name of our S3 bucket. Make sure to use the name of your bucket here.
 
 {% highlight json %}
 {
@@ -46,8 +46,7 @@ Add the following bucket policy into the editor. Where `notes-app-client` is the
         "Effect":"Allow",
 	  "Principal": "*",
       "Action":["s3:GetObject"],
-      "Resource":["arn:aws:s3:::notes-app-client/*"
-      ]
+      "Resource":["arn:aws:s3:::notes-app-client/*"]
     }
   ]
 }

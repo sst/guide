@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Setup Your Domain With CloudFront
+title: Setup Your Domain with CloudFront
 date: 2017-02-09 00:00:00
 ---
 
@@ -8,7 +8,7 @@ Now that we have our CloudFront distribution live, let's setup our domain with i
 
 ![Select Route 53 service screenshot]({{ site.url }}/assets/select-route-53-service.png)
 
-### Purchase a domain with Route 53
+### Purchase a Domain with Route 53
 
 Type in your domain in the **Register domain** section and click **Check**.
 
@@ -22,7 +22,7 @@ And hit **Continue** at the bottom of the page.
 
 ![Continue to contact details screenshot]({{ site.url }}/assets/continue-to-contact-detials.png)
 
-Fill in your contact details and hit **Continue** at the bottom of the page.
+Fill in your contact details and hit **Continue** once again.
 
 ![Continue to confirm details screenshot]({{ site.url }}/assets/continue-to-confirm-detials.png)
 
@@ -30,7 +30,7 @@ Finally, review your details and confirm the purchase by hitting **Complete Purc
 
 ![Confirm domain purchase screenshot]({{ site.url }}/assets/confirm-domain-purchase.png)
 
-Next we'll add an alternate domain name for our CloudFront Distribution.
+Next, we'll add an alternate domain name for our CloudFront Distribution.
 
 ### Add Alternate Domain for CloudFront Distribution
 
@@ -58,7 +58,7 @@ Select your domain from the list and hit **Create Record Set** in the details sc
 
 ![Select create record set screenshot]({{ site.url }}/assets/select-create-record-set.png)
 
-Leave the **Name** field empty since we are going to point our bare domain (without the wwww.) to our CloudFront Distribution.
+Leave the **Name** field empty since we are going to point our bare domain (without the www.) to our CloudFront Distribution.
 
 ![Leave name field empty screenshot]({{ site.url }}/assets/leave-name-field-empty.png)
 

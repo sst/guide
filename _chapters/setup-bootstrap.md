@@ -4,35 +4,29 @@ title: Setup Bootstrap
 date: 2017-01-09 00:00:00
 ---
 
-A big part of writing web applications is having a UI Kit to help create the interface of the application. We are going to use [Bootstrap](http://getbootstrap.com) for our note taking app. While Boostrap can be used directly with React; the preferred way is to use it with the [React-Bootstrap](https://react-bootstrap.github.io) package. This makes our markup a lot simpler to implement and understand.
+A big part of writing web applications is having a UI Kit to help create the interface of the application. We are going to use [Bootstrap](http://getbootstrap.com) for our note taking app. While Bootstrap can be used directly with React; the preferred way is to use it with the [React-Bootstrap](https://react-bootstrap.github.io) package. This makes our markup a lot simpler to implement and understand.
 
 ### Installing React Bootstrap
 
-Run the following command in your working directory
+{% include code-marker.html %} Run the following command in your working directory
 
 {% highlight bash %}
-npm install react-bootstrap --save
+$ npm install react-bootstrap --save
 {% endhighlight %}
 
 This installs the NPM package and adds the dependency to your `package.json`.
 
-### Add Boostrap styles
+### Add Bootstrap Styles
 
-React Bootstrap uses the standard Bootstrap styles; so just add the following styles to your `index.html`.
+{% include code-marker.html %} React Bootstrap uses the standard Bootstrap styles; so just add the following styles to your `public/index.html`.
 
 {% highlight html %}
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 {% endhighlight %}
 
-Optionally, you can include a Bootstrap theme by just including it's styles.
+We'll also tweak the styles of the form fields so that the mobile browser does not zoom in on them on focus. We just need them to have a minimum font size of `16px` to prevent the zoom.
 
-{% highlight html %}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css">
-{% endhighlight %}
-
-We'll also tweak the styles of the form fields so that the mobile browser does not zoom in on them on focus. We just need them to have a minimum font size of 16px to prevent the zoom.
-
-To do that, let's add the following to our `src/index.css`.
+{% include code-marker.html %} To do that, let's add the following to our `src/index.css`.
 
 {% highlight css %}
 select.form-control,
@@ -45,8 +39,8 @@ input[type=file] {
 }
 {% endhighlight %}
 
-We are also setting the width of the input type file to prevent the page on mobile from overflowing and adding a scroll.
+We are also setting the width of the input type file to prevent the page on mobile from overflowing and adding a scrollbar.
 
-Now if you head over to your browser, you might notice that the styles have shifted a bit. This is because Bootstrap includes [Normalize.css](http://necolas.github.io/normalize.css/) to have more consistent styles across browsers.
+Now if you head over to your browser, you might notice that the styles have shifted a bit. This is because Bootstrap includes [Normalize.css](http://necolas.github.io/normalize.css/) to have a more consistent styles across browsers.
 
 Next, we are going to create a few routes for our application and set up the React Router.

@@ -1,14 +1,14 @@
 ---
 layout: post
-title: Load the State From the Session
+title: Load the State from the Session
 date: 2017-01-15 00:00:00
 ---
 
-To make our login information persist we need to store and load it from the browser session. There are a few different ways we can do this, using Cookies or Local Storage. Thankfully the AWS Congnito JS SDK does that for us automatically and we just need to read from it and load it into our application state.
+To make our login information persist we need to store and load it from the browser session. There are a few different ways we can do this, using Cookies or Local Storage. Thankfully the AWS Cognito JS SDK does that for us automatically and we just need to read from it and load it into our application state.
 
 ### Get Current User and Token
 
-Add the following to your `App` component.
+{% include code-marker.html %} Add the following to your `src/App.js`.
 
 {% highlight javascript %}
 getCurrentUser() {
@@ -32,20 +32,20 @@ getUserToken(currentUser) {
 }
 {% endhighlight %}
 
-And include the following in the header.
+{% include code-marker.html %} And include this in it's header:
 
 {% highlight javascript %}
 import { CognitoUserPool, } from 'amazon-cognito-identity-js';
 import config from './config.js';
 {% endhighlight %}
 
-These two methods are pretty self-explanatory; they load the current user from the session. And given a user object they retrieve the stored user token.
+These two methods are pretty self-explanatory. In `getCurrentUser`, we use the Cognito JS SDK to load the current user from the session. And in `getUserToken`, we retrieve the user token given a user object.
 
 ### Load User Token in to the State
 
-We want to ensure that when they user refreshes the app, we load the user token from the session. We are going to do this in `componentWillMount`. And since `getUserToken` is going to be called async; we need to ensure that the rest of our app is only read to go after this has been loaded.
+We want to ensure that when the user refreshes the app, we load the user token from the session. We are going to do this in `componentWillMount`. And since `getUserToken` is going to be called async; we need to ensure that the rest of our app is only ready to go after this has been loaded.
 
-To do this, let's add a flag to our `App` state called `isLoadingUserToken`. The initial state in our contructor should look like the following.
+{% include code-marker.html %} To do this, let's add a flag to our `src/App.js` state called `isLoadingUserToken`. The initial state in our constructor should look like the following.
 
 {% highlight javascript %}
 this.state = {
@@ -54,8 +54,7 @@ this.state = {
 };
 {% endhighlight %}
 
-Now to load the user token we'll add the following to our `App` component.
-
+{% include code-marker.html %} Now to load the user token we'll add the following to our `src/App.js`.
 
 {% highlight javascript %}
 async componentWillMount() {
@@ -78,13 +77,15 @@ async componentWillMount() {
 }
 {% endhighlight %}
 
-All this does is check if there is a user in session, and then load their user token. It also updates the 'isLoadingUserToken' flag once the process is complete.
+All this does is check if there is a user in session, and then load their user token. It also updates the `isLoadingUserToken` flag once the process is complete.
 
-### Render When the State is Ready
+### Render When the State Is Ready
 
 Since loading the user token is an asynchronous process, we want to ensure that our app does not change states when it first loads. To do this we'll hold off rendering our app till `isLoadingUserToken` is `false`.
 
-We'll conditionally render our app based on the `isLoadingUserToken` flag. Our `render` method should be as follows.
+We'll conditionally render our app based on the `isLoadingUserToken` flag.
+
+{% include code-marker.html %} Our `render` method in `src/App.js` should be as follows.
 
 {% highlight javascript %}
 render() {
@@ -129,4 +130,4 @@ Now if you head over to your browser and refresh the page, you should see that a
 
 ![Login from session loaded screenshot]({{ site.url }}/assets/login-from-session-loaded.png)
 
-Unfortunately, when we hit Logout and refresh the page; we are still logged in. To fix this we are going to clear the session on logout next.
+Unfortunately, when we hit **Logout** and refresh the page; we are still logged in. To fix this we are going to clear the session on logout next.

@@ -6,17 +6,17 @@ date: 2017-01-24 00:00:00
 
 Let's now add an attachment to our note. The flow we are using here is very simple.
 
-1. The user uploads the file.
+1. The user selects a file to upload.
 
 2. The file is uploaded to S3 under the user's space and we get a URL back. 
 
 3. Create a note with the file URL as the attachment.
 
-We are going to use the AWS SDK to upload our files to S3. But to be able to upload we first need to generate our AWS temporary credentials using our user token.
+We are going to use the AWS SDK to upload our files to S3. The S3 Bucket that we created previously, is secured using our Cognito Identity Pool. So to be able to upload, we first need to generate our Cognito Identity temporary credentials with our user token.
 
 ### Get AWS Credentials
 
-To do that let's add the following to our `src/lib/awsLib.js`.
+{% include code-marker.html %} To do that let's append the following to our `src/libs/awsLib.js`.
 
 {% highlight javascript %}
 export function getAwsCredentials(userToken) {
@@ -42,13 +42,13 @@ export function getAwsCredentials(userToken) {
 }
 {% endhighlight %}
 
-And include it in our header using the following.
+{% include code-marker.html %} And include the **AWS SDK** in our header.
 
 {% highlight javascript %}
 import AWS from 'aws-sdk';
 {% endhighlight %}
 
-To get our AWS credentials we need to use the following in our `src/config.js`.
+{% include code-marker.html %} To get our AWS credentials we need to use the following in our `src/config.js` below the `MAX_ATTACHMENT_SIZE` line.
 
 {% highlight javascript %}
 aws: {
@@ -57,17 +57,21 @@ aws: {
 },
 {% endhighlight %}
 
-And also add this in the `cognito` block.
+Be sure to replace the `IDENTITY_POOL_ID` with your own from the Cognito Identity Pool chapter.
+
+{% include code-marker.html %} And also add this line in the `cognito` block of `src/config.js`.
 
 {% highlight javascript %}
 AUTHENTICATOR: 'cognito-idp.us-east-1.amazonaws.com/us-east-1_WdHEGAi8O',
 {% endhighlight %}
 
-The `AUTHENTICATOR` is a part of our AWS Cognito setup that is required to validate our user token. 
+The `AUTHENTICATOR` is the url that the SDK will use to authenticate the user. Replace the `us-east-1_WdHEGAi8O` with your Cognito User Pool ID.
+
+Now we are ready to upload a file to S3.
 
 ### Upload to S3
 
-Now we are ready to upload a file to S3. Add the following in `src/awsLib.js`.
+{% include code-marker.html %} Append the following in `src/awsLib.js`.
 
 {% highlight javascript %}
 export async function s3Upload(file, userToken) {
@@ -98,7 +102,7 @@ export async function s3Upload(file, userToken) {
 }
 {% endhighlight %}
 
-And add the following to our `src/config.js`.
+{% include code-marker.html %} And add this to our `src/config.js` above the `apiGateway` block.
 
 {% highlight javascript %}
 S3: {
@@ -107,21 +111,23 @@ S3: {
 },
 {% endhighlight %}
 
+Be sure to replace the `BUCKET` with your own bucket name from the S3 File Upload chapter.
+
 The above method does a couple of things.
 
 1. It takes a file object and the user token as parameters.
 
-2. Generates a unique file name prefixed with our `identityId` that's a part of the credentials we generated.
+2. Generates a unique file name prefixed with the `identityId`. This is necessary to secure the files on a per-user basis.
 
 3. Upload the file to S3 and set it's permissions to `public-read` to ensure that we can download it later.
 
 4. And return the public URL.
 
-### Upload before Creating a Note
+### Upload Before Creating a Note
 
-Now that we have our upload methods ready, let's call them from create note method.
+Now that we have our upload methods ready, let's call them from the create note method.
 
-Replace the `handleSubmit` method in `src/containers/NewNote.js` with the following.
+{% include code-marker.html %} Replace the `handleSubmit` method in `src/containers/NewNote.js` with the following.
 
 {% highlight javascript %}
 handleSubmit = async (event) => {
@@ -141,7 +147,7 @@ handleSubmit = async (event) => {
 
     await this.createNote({
       content: this.state.content,
-      file: uploadedFilename,
+      attachment: uploadedFilename,
     });
     this.props.router.push('/');
   }
@@ -153,20 +159,18 @@ handleSubmit = async (event) => {
 }
 {% endhighlight %}
 
-And make sure to include `s3Upload` in the header by doing this.
+{% include code-marker.html %} And make sure to include `s3Upload` in the header by doing this:
 
 {% highlight javascript %}
-import { invokeApig, s3Upload } from '../lib/awsLib.js';
+import { invokeApig, s3Upload } from '../libs/awsLib.js';
 {% endhighlight %}
 
-The change we've made in the `handleSubmit` is that
+The change we've made in the `handleSubmit` is that:
 
 1. We upload the file using `s3Upload`.
 
 2. Use the returned URL and add that to the note object when we create the note.
 
-Now when we swtich over to our browser and submit the form with an uploaded file we should see the note being created successfully. Unfortunately, we are not displaying the file upload information yet but you can see analyze the requests to see that the upload request is made successfully.
-
-![New note file uploaded screenshot]({{ site.url }}/assets/new-note-file-uploaded.png)
+Now when we switch over to our browser and submit the form with an uploaded file we should see the note being created successfully. And the app being redirected to the home page.
 
 Next up we are going to make sure we clear out AWS credentials that are cached by the AWS JS SDK before we move on.

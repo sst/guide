@@ -1,12 +1,14 @@
 ---
 layout: post
-title: Redirect On Login
+title: Redirect on Login
 date: 2017-02-04 00:00:00
 ---
 
 Our secured pages redirect to the login page when the user is not logged in, with a referral to the originating page. To redirect back after they login, we need to add a couple of things to our `Login` container.
 
-Let's start by adding a method to read the `redirect` URL from the querystring. Add the following to your `src/containers/Login.js`.
+Let's start by adding a method to read the `redirect` URL from the querystring.
+
+{% include code-marker.html %} Add the following method to your `src/containers/Login.js` below the `constructor` method.
 
 {% highlight javascript %}
 querystring(name, url = window.location.href) {
@@ -24,7 +26,9 @@ querystring(name, url = window.location.href) {
 
 This method takes the querystring param we want to read and returns it.
 
-Now let's update our `handleSubmit` method to redirect to the new `redirect` URL upon login. Replace our current `handleSubmit` with the following.
+Now let's update our `handleSubmit` method to redirect to the new `redirect` URL upon login.
+
+{% include code-marker.html %} Replace our current `handleSubmit` with the following.
 
 {% highlight javascript %}
 handleSubmit = async (event) => {
@@ -48,6 +52,6 @@ handleSubmit = async (event) => {
 }
 {% endhighlight %}
 
-Now our login page should redirect after we login. And that's it! Our app is ready to go live.
+Now our login page should redirect after we login.
 
-Next let's look at how we are going to deploy it using our serverless setup.
+And that's it! Our app is ready to go live. Let's look at how we are going to deploy it using our serverless setup.

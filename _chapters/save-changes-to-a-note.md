@@ -6,7 +6,7 @@ date: 2017-01-30 00:00:00
 
 Now that our note loads into our form, let's work on saving the changes we make to that note.
 
-Replace the `handleSubmit` method is `src/containers/Notes.js` with the following.
+{% include code-marker.html %} Replace the `handleSubmit` method in `src/containers/Notes.js` with the following.
 
 {% highlight javascript %}
 saveNote(note) {
@@ -38,7 +38,7 @@ handleSubmit = async (event) => {
     await this.saveNote({
       ...this.state.note,
       content: this.state.content,
-      file: uploadedFilename || this.state.note.file,
+      attachment: uploadedFilename || this.state.note.attachment,
     });
     this.props.router.push('/');
   }
@@ -49,15 +49,15 @@ handleSubmit = async (event) => {
 }
 {% endhighlight %}
 
-And include our `s3Upload` helper method in the header so it looks like the following.
+{% include code-marker.html %} And include our `s3Upload` helper method in the header:
 
 {% highlight javascript %}
-import { invokeApig, s3Upload } from '../lib/awsLib.js';
+import { invokeApig, s3Upload } from '../libs/awsLib.js';
 {% endhighlight %}
 
 The code above is doing a couple of things that should be very similar to what we did in the `NewNote` container.
 
-1. If there is a file to upload we call `s3Upload` to upload it and give us the URL.
+1. If there is a file to upload we call `s3Upload` to upload it and return the URL.
 
 2. We save the note by making `PUT` request with the note object to `/notes/note_id` where we get the note_id from `this.props.params.id`.
 
@@ -67,4 +67,4 @@ Let's switch over to our browser and give it a try by saving some changes.
 
 ![Notes page saving screenshot]({{ site.url }}/assets/notes-page-saving.png)
 
-Next up let's allow users to delete their note.
+Next up, let's allow users to delete their note.

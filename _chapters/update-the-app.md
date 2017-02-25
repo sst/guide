@@ -6,9 +6,9 @@ date: 2017-02-13 00:00:00
 
 Let's make a couple of quick changes to test the process of deploying updates to our app.
 
-We are going to add a Login and Signup button to give users a clear call to action.
+We are going to add a Login and Signup button to our lander to give users a clear call to action.
 
-To do this update our `renderLander` method in `src/containers/Home.js`.
+{% include code-marker.html %} To do this update our `renderLander` method in `src/containers/Home.js`.
 
 {% highlight javascript %}
 renderLander() {
@@ -25,13 +25,13 @@ renderLander() {
 }
 {% endhighlight %}
 
-And import the `Link` component from React-Router, so that our import looks like the following.
+{% include code-marker.html %} And import the `Link` component from React-Router, so that our import looks like the following.
 
 {% highlight javascript %}
 import { withRouter, Link } from 'react-router';
 {% endhighlight %}
 
-Also add a couple of styles to `src/containers/Home.css`.
+{% include code-marker.html %} Also, add a couple of styles to `src/containers/Home.css`.
 
 {% highlight css %}
 .Home .lander div {

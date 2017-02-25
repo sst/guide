@@ -6,34 +6,34 @@ date: 2017-01-17 00:00:00
 
 To complete the login flow we are going to need to do two more things.
 
-1. Redirect the user to the home page after the login
-2. And redirect them back to the login page after they logout
+1. Redirect the user to the home page after they login.
+2. And redirect them back to the login page after they logout.
 
 This gives us a chance to explore how to do redirects with React-Router.
 
-React-Router comes with a [Higher-Order Component](https://facebook.github.io/react/docs/higher-order-components.html) (or HOC) called `withRouter` that gives us direct acces to our app's router from any component.
+React-Router comes with a [Higher-Order Component](https://facebook.github.io/react/docs/higher-order-components.html) (or HOC) called `withRouter` that gives us direct access to our app's router from any component.
 
 ### Redirect to Home on Login
 
-To use it in our Login component, let's replace the line that defines our component.
+{% include code-marker.html %} To use it in our `src/containers/Login.js`, let's replace the line that defines our component.
 
 {% highlight javascript %}
 export default class Login extends Component {
 {% endhighlight %}
 
-with the following.
+{% include code-marker.html %} with the following:
 
 {% highlight javascript %}
 class Login extends Component {
 {% endhighlight %}
 
-And instead export it in the following way.
+{% include code-marker.html %} And instead export it by adding this at the bottom of our `src/containers/Login.js`.
 
 {% highlight javascript %}
 export default withRouter(Login);
 {% endhighlight %}
 
-Also, import the `withRouter` in the header.
+{% include code-marker.html %} Also, import `withRouter` in the header.
 
 {% highlight javascript %}
 import { withRouter } from 'react-router';
@@ -45,7 +45,7 @@ Now we can use the router after a successful login by doing the following.
 this.props.router.push('/');
 {% endhighlight %}
 
-Our updated `handleSubmit` method in our `Login` component should look like this.
+{% include code-marker.html %} Our updated `handleSubmit` method in `src/containers/Login.js` should look like this:
 
 {% highlight javascript %}
 handleSubmit = async (event) => {
@@ -68,27 +68,35 @@ Now if you head over to your browser and try logging in, you should be redirecte
 
 ### Redirect to Login After Logout
 
-Now we'll do something very simillar for the logout process.
+Now we'll do something very similar for the logout process.
 
-Define our App component by doing this instead.
+{% include code-marker.html %} Define our `src/App.js` component by replacing the line below.
+
+{% highlight javascript %}
+export default class App extends Component {
+{% endhighlight %}
+
+{% include code-marker.html %} with this:
 
 {% highlight javascript %}
 class App extends Component {
 {% endhighlight %}
 
-And export it after calling `withRouter`.
+{% include code-marker.html %} And export it after calling `withRouter` by adding this to the bottom of `src/App.js`.
 
 {% highlight javascript %}
 export default withRouter(App);
 {% endhighlight %}
 
-Import `withRouter` along with `IndexLink`.
+{% include code-marker.html %} Import `withRouter` (along with the `IndexLink` from before) in the header of `src/App.js`.
 
 {% highlight javascript %}
 import { withRouter, IndexLink } from 'react-router';
 {% endhighlight %}
 
-And finally, redirect after logut by doing the following.
+And finally, redirect after the logout.
+
+{% include code-marker.html %} Add the following to the bottom of the `handleLogout` method in our `src/App.js`.
 
 {% highlight javascript %}
 if (this.props.location.pathname !== '/login') {
@@ -96,6 +104,8 @@ if (this.props.location.pathname !== '/login') {
 }
 {% endhighlight %}
 
-Now if you swtich your browser and trying logging out, you should be redirected to the login page.
+This redirects us back to the login page once the user logs out.
 
-You might have noticed while testing this flow that since the login call has a bit of a delay, it would be important to give some feedback to the user that it is in progress.
+Now if you switch over to your browser and try logging out, you should be redirected to the login page.
+
+You might have noticed while testing this flow that since the login call has a bit of a delay, we might need to give some feedback to the user that the login call is in progress. Let's do that next.

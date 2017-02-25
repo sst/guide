@@ -6,7 +6,7 @@ date: 2017-02-02 00:00:00
 
 Let's first create a HOC that will act on the containers that need a user to be logged in.
 
-Add the following to `src/components/AuthenticatedComponent.js`.
+{% include code-marker.html %} Add the following to `src/components/AuthenticatedComponent.js`.
 
 {% highlight javascript %}
 import React from 'react';
@@ -47,7 +47,9 @@ export default function requireAuth(Component) {
 
 The function `requireAuth` takes a component as input and returns a component that will check if the user has auth (`hasAuth`) and return the original component. And if the user is not logged in, then it simply returns `null` and routes the user to the login page with a reference (`redirect` in the querystring) to the page they were trying to access.
 
-We'll do something similar for ensuring that the user is not authenticated. Add the following to `src/components/UnauthenticatedComponent.js`.
+We'll do something similar to ensure that the user is not authenticated.
+
+{% include code-marker.html %} Add the following to `src/components/UnauthenticatedComponent.js`.
 
 {% highlight javascript %}
 import React from 'react';
