@@ -4,7 +4,13 @@ title: What Does This Guide Cover?
 date: 2016-12-22 00:00:00
 ---
 
-To step through the major concepts involved in building web applications, we are going to be building a simple note taking app called [Scratch](https://demo.serverless-stack.com). It is a single page application powered by a serverless API. It is a relatively simple application but we need it to address the following requirements.
+To step through the major concepts involved in building web applications, we are going to be building a simple note taking app called [Scratch](https://demo.serverless-stack.com).
+
+![Completed app desktop screenshot]({{ site.url }}/assets/completed-app-desktop.png)
+
+<img alt="Completed app mobile screenshot" src="{{ site.url }}/assets/completed-app-mobile.png" width="432" />
+
+It is a single page application powered by a serverless API. It is a relatively simple application but we need it to address the following requirements.
 
 - Should allow users to signup and login to their accounts
 - Users should be able to create notes with some content

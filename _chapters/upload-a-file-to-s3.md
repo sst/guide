@@ -88,6 +88,7 @@ export async function s3Upload(file, userToken) {
     s3.putObject({
       Key: filename,
       Body: file,
+      ContentType: file.type,
       ACL: 'public-read',
     },
     (error, result) => {
