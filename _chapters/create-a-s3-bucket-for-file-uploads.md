@@ -47,6 +47,20 @@ Select the **Permissions** tab, then select **CORS configuration**.
 
 Add the following CORS configuration into the editor, then hit **Save**.
 
+{% highlight xml %}
+<CORSConfiguration>
+	<CORSRule>
+		<AllowedOrigin>*</AllowedOrigin>
+		<AllowedMethod>GET</AllowedMethod>
+		<AllowedMethod>PUT</AllowedMethod>
+		<AllowedMethod>POST</AllowedMethod>
+		<AllowedMethod>HEAD</AllowedMethod>
+		<MaxAgeSeconds>3000</MaxAgeSeconds>
+		<AllowedHeader>*</AllowedHeader>
+	</CORSRule>
+</CORSConfiguration>
+{% endhighlight %}
+
 ![Save S3 Bucket CORS Configuration screenshot]({{ site.url }}/assets/s3/save-s3-bucket-cors-configuration.png)
 
 Now that our S3 bucket is ready, let's get setup to handle user authentication.
