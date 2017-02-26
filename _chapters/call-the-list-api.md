@@ -48,7 +48,7 @@ Now let's render the results.
 
 {% include code-marker.html %} Replace our `renderNotesList` placeholder method with the following.
 
-``` javascript
+``` coffee
 renderNotesList(notes) {
   return [{}].concat(notes).map((note, i) => (
     i !== 0
