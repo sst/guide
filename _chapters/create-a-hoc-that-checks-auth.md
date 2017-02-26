@@ -8,7 +8,7 @@ Let's first create a HOC that will act on the containers that need a user to be 
 
 {% include code-marker.html %} Add the following to `src/components/AuthenticatedComponent.js`.
 
-``` javascript
+``` coffee
 import React from 'react';
 import { withRouter } from 'react-router';
 
@@ -51,7 +51,7 @@ We'll do something similar to ensure that the user is not authenticated.
 
 {% include code-marker.html %} Add the following to `src/components/UnauthenticatedComponent.js`.
 
-``` javascript
+``` coffee
 import React from 'react';
 import { withRouter } from 'react-router';
 
