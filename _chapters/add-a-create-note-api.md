@@ -135,7 +135,7 @@ Here we are adding our newly added create function to the configuration. We spec
 
 {% include code-marker.html %} Open the `webpack.config.js` file and update the `entry` block to include our newly created file.
 
-``` javascript
+```
   entry: {
     create: './create.js',
   },
@@ -147,7 +147,7 @@ Now we are ready to test our new API. To be able to test it on our local we are 
 
 Create an `event.json` file and add the following.
 
-``` json
+``` javascript
 {
   "body": "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}",
   "requestContext": {
@@ -170,7 +170,7 @@ $ serverless webpack invoke --function create --path event.json
 
 The response should look similar to this.
 
-``` json
+``` javascript
 {
   statusCode: 200,
   headers: {
