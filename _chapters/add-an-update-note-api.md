@@ -70,7 +70,7 @@ Here we are adding a handler for the PUT request to the `/notes/{id}` endpoint.
 
 {% include code-marker.html %} Open the `webpack.config.js` file and update the `entry` block to include our newly created file. The `entry` block should now look like the following.
 
-``` javascript
+```
   entry: {
     create: './create.js',
     get: './get.js',
@@ -107,7 +107,7 @@ $ serverless webpack invoke --function update --path event.json
 
 The response should look similar to this.
 
-``` json
+``` javascript
 {
   statusCode: 200,
   headers: {
