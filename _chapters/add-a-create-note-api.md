@@ -147,7 +147,7 @@ Now we are ready to test our new API. To be able to test it on our local we are 
 
 Create an `event.json` file and add the following.
 
-``` javascript
+``` json
 {
   "body": "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}",
   "requestContext": {
