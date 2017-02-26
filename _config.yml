@@ -47,4 +47,4 @@ defaults:
   - scope:
       path: ""
     values:
-      image: /assets/android-chrome-512x512.png
+      image: /assets/og-image.jpg
