@@ -58,7 +58,7 @@ import AWS from 'aws-sdk';
 
 {% include code-marker.html %} To get our AWS credentials we need to use the following in our `src/config.js` below the `MAX_ATTACHMENT_SIZE` line.
 
-``` javascript
+```
 aws: {
   REGION: 'us-east-1',
   IDENTITY_POOL_ID: 'us-east-1:bdff90fd-8265-4356-9698-0d997fb05d38',
@@ -69,7 +69,7 @@ Be sure to replace the `IDENTITY_POOL_ID` with your own from the Cognito Identit
 
 {% include code-marker.html %} And also add this line in the `cognito` block of `src/config.js`.
 
-``` javascript
+```
 AUTHENTICATOR: 'cognito-idp.us-east-1.amazonaws.com/us-east-1_WdHEGAi8O',
 ```
 
@@ -81,7 +81,7 @@ Now we are ready to upload a file to S3.
 
 {% include code-marker.html %} Append the following in `src/awsLib.js`.
 
-``` javascript
+``` coffee
 export async function s3Upload(file, userToken) {
   await getAwsCredentials(userToken);
 
@@ -113,7 +113,7 @@ export async function s3Upload(file, userToken) {
 
 {% include code-marker.html %} And add this to our `src/config.js` above the `apiGateway` block.
 
-``` javascript
+```
 S3: {
   BUCKET: 'notes-app-uploads',
   DOMAIN: 'https://s3.amazonaws.com'
