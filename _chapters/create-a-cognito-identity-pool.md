@@ -44,7 +44,7 @@ It will warn you to read the documentation. Select **Ok** to edit.
 
 Note the line ``arn:aws:s3:::react-notes-app/${cognito-identity.amazonaws.com:sub}``, where **react-notes-app** is the name of our S3 bucket, and **cognito-identity.amazonaws.com:sub** is the authenticated user's federated identity ID. This policy grants the authenticated user access to files with filenames prefixed by the user's id in the S3 bucket as a security measure.
 
-{% highlight json %}
+``` json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -70,7 +70,7 @@ Note the line ``arn:aws:s3:::react-notes-app/${cognito-identity.amazonaws.com:su
     }
   ]
 }
-{% endhighlight %}
+```
 
 Select **Allow**.
 

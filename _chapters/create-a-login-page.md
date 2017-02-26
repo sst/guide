@@ -10,7 +10,7 @@ Let's create a page where the users for our app can sign in with their login cre
 
 {% include code-marker.html %} Create a new file `src/containers/Login.js` and add the following.
 
-{% highlight javascript %}
+``` javascript
 import React, { Component } from 'react';
 import {
   Button,
@@ -75,7 +75,7 @@ export default class Login extends Component {
     );
   }
 }
-{% endhighlight %}
+```
 
 We are introducing a couple of new concepts in this.
 
@@ -91,7 +91,7 @@ We are introducing a couple of new concepts in this.
 
 {% include code-marker.html %} Let's add a couple of styles to this in the file `src/containers/Login.css`.
 
-{% highlight css %}
+``` css
 @media all and (min-width: 480px) {
   .Login {
     padding: 60px 0;
@@ -102,7 +102,7 @@ We are introducing a couple of new concepts in this.
     max-width: 320px;
   }
 }
-{% endhighlight %}
+```
 
 These styles roughly target any non-mobile screen sizes.
 
@@ -110,15 +110,15 @@ These styles roughly target any non-mobile screen sizes.
 
 {% include code-marker.html %} Now we link this container up with the rest of our app by adding the following line to `src/Routes.js` below our `<IndexRoute>`.
 
-{% highlight javascript %}
+``` javascript
 <Route path="login" component={Login} />
-{% endhighlight %}
+```
 
 {% include code-marker.html %} And include our component in the header.
 
-{% highlight javascript %}
+``` javascript
 import Login from './containers/Login';
-{% endhighlight %}
+```
 
 Now if we switch to our browser and navigate to the login page we should see our newly created form.
 

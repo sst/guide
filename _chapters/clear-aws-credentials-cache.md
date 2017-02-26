@@ -10,15 +10,15 @@ But we need to make sure that we clear out those credentials when we logout. If 
 
 {% include code-marker.html %} To do that let's add the following lines to the `handleLogout` method in our `src/App.js` above the `this.updateUserToken(null);` line.
 
-{% highlight javascript %}
+``` javascript
 if (AWS.config.credentials) {
   AWS.config.credentials.clearCachedId();
 }
-{% endhighlight %}
+```
 
 So our `handleLogout` as a result should now look like so:
 
-{% highlight javascript %}
+``` javascript
 handleLogout = (event) => {
   const currentUser = this.getCurrentUser();
 
@@ -36,12 +36,12 @@ handleLogout = (event) => {
     this.props.router.push('/login');
   }
 }
-{% endhighlight %}
+```
 
 {% include code-marker.html %} And include the **AWS SDK** in the header.
 
-{% highlight javascript %}
+``` javascript
 import AWS from 'aws-sdk';
-{% endhighlight %}
+```
 
 Next up we are going to allow users to see a list of the notes they've created.

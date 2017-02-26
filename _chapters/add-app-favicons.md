@@ -30,20 +30,20 @@ Copy the generated code and add the `%PUBLIC_URL%` prefix to all the URLs. It sh
 
 {% include code-marker.html %} Add it to your `public/index.html`.
 
-{% highlight html %}
+``` html
 <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="%PUBLIC_URL%/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="%PUBLIC_URL%/favicon-16x16.png" sizes="16x16">
 <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
 <link rel="mask-icon" href="%PUBLIC_URL%/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="theme-color" content="#ffffff">
-{% endhighlight %}
+```
 
 {% include code-marker.html %} And **remove** the following line that references the original favicon.
 
-{% highlight html %}
+``` html
 <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-{% endhighlight %}
+```
 
 Finally head over to your browser and try the `/favicon-32x32.png` path to ensure that the files were added correctly.
 

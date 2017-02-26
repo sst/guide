@@ -8,7 +8,7 @@ The last thing we need to do on the note page is allowing users to delete their 
 
 {% include code-marker.html %} Replace our `handleDelete` method in `src/containers/Notes.js`.
 
-{% highlight javascript %}
+``` javascript
 deleteNote() {
   return invokeApig({
     path: `/notes/${this.props.params.id}`,
@@ -36,7 +36,7 @@ handleDelete = async (event) => {
     this.setState({ isDeleting: false });
   }
 }
-{% endhighlight %}
+```
 
 We are simply making a `DELETE` request to `/notes/note_id` where we get the `id` from `this.props.params.id`. This calls our delete API and we redirect to the homepage on success.
 

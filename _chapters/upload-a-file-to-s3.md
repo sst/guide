@@ -20,13 +20,13 @@ We are going to use the NPM module `aws-sdk` to help us get the Identity Pool cr
 
 {% include code-marker.html %} Install it by running the following in your project root.
 
-{% highlight bash %}
+``` bash
 $ npm install aws-sdk --save
-{% endhighlight %}
+```
 
 {% include code-marker.html %} Next, let's append the following to our `src/libs/awsLib.js`.
 
-{% highlight javascript %}
+``` javascript
 export function getAwsCredentials(userToken) {
   AWS.config.update({ region: config.aws.REGION });
 
@@ -48,30 +48,30 @@ export function getAwsCredentials(userToken) {
     })
   ));
 }
-{% endhighlight %}
+```
 
 {% include code-marker.html %} And include the **AWS SDK** in our header.
 
-{% highlight javascript %}
+``` javascript
 import AWS from 'aws-sdk';
-{% endhighlight %}
+```
 
 {% include code-marker.html %} To get our AWS credentials we need to use the following in our `src/config.js` below the `MAX_ATTACHMENT_SIZE` line.
 
-{% highlight javascript %}
+``` javascript
 aws: {
   REGION: 'us-east-1',
   IDENTITY_POOL_ID: 'us-east-1:bdff90fd-8265-4356-9698-0d997fb05d38',
 },
-{% endhighlight %}
+```
 
 Be sure to replace the `IDENTITY_POOL_ID` with your own from the Cognito Identity Pool chapter.
 
 {% include code-marker.html %} And also add this line in the `cognito` block of `src/config.js`.
 
-{% highlight javascript %}
+``` javascript
 AUTHENTICATOR: 'cognito-idp.us-east-1.amazonaws.com/us-east-1_WdHEGAi8O',
-{% endhighlight %}
+```
 
 The `AUTHENTICATOR` is the url that the SDK will use to authenticate the user. Replace the `us-east-1_WdHEGAi8O` with your Cognito User Pool ID.
 
@@ -81,7 +81,7 @@ Now we are ready to upload a file to S3.
 
 {% include code-marker.html %} Append the following in `src/awsLib.js`.
 
-{% highlight javascript %}
+``` javascript
 export async function s3Upload(file, userToken) {
   await getAwsCredentials(userToken);
 
@@ -109,16 +109,16 @@ export async function s3Upload(file, userToken) {
     })
   ));
 }
-{% endhighlight %}
+```
 
 {% include code-marker.html %} And add this to our `src/config.js` above the `apiGateway` block.
 
-{% highlight javascript %}
+``` javascript
 S3: {
-  BUCKET: 'anomaly-notes-app',
+  BUCKET: 'notes-app-uploads',
   DOMAIN: 'https://s3.amazonaws.com'
 },
-{% endhighlight %}
+```
 
 Be sure to replace the `BUCKET` with your own bucket name from the S3 File Upload chapter.
 
@@ -138,7 +138,7 @@ Now that we have our upload methods ready, let's call them from the create note 
 
 {% include code-marker.html %} Replace the `handleSubmit` method in `src/containers/NewNote.js` with the following.
 
-{% highlight javascript %}
+``` javascript
 handleSubmit = async (event) => {
   event.preventDefault();
 
@@ -166,13 +166,13 @@ handleSubmit = async (event) => {
   }
 
 }
-{% endhighlight %}
+```
 
 {% include code-marker.html %} And make sure to include `s3Upload` in the header by doing this:
 
-{% highlight javascript %}
+``` javascript
 import { invokeApig, s3Upload } from '../libs/awsLib.js';
-{% endhighlight %}
+```
 
 The change we've made in the `handleSubmit` is that:
 

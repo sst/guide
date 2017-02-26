@@ -10,17 +10,17 @@ It's important that we give the user some feedback while we are logging them in.
 
 {% include code-marker.html %} To do this we are going to add a `isLoading` flag to the state of our `src/containers/Login.js`. So the initial state in the `constructor` looks like the following.
 
-{% highlight javascript %}
+``` javascript
 this.state = {
   isLoading: false,
   username: '',
   password: '',
 };
-{% endhighlight %}
+```
 
 {% include code-marker.html %} And we'll update it while we are logging in. So our `handleSubmit` method now looks like so:
 
-{% highlight javascript %}
+``` javascript
 handleSubmit = async (event) => {
   event.preventDefault();
 
@@ -36,7 +36,7 @@ handleSubmit = async (event) => {
     this.setState({ isLoading: false });
   }
 }
-{% endhighlight %}
+```
 
 ### Create a Loader Button
 
@@ -44,7 +44,7 @@ Now to reflect the state change in our button we are going to render it differen
 
 {% include code-marker.html %} Create a `src/components/` directory and add the following in `src/components/LoaderButton.js`.
 
-{% highlight javascript %}
+``` javascript
 import React from 'react';
 import { Button, Glyphicon } from 'react-bootstrap';
 
@@ -56,13 +56,13 @@ export default function LoaderButton({ isLoading, text, loadingText, disabled = 
     </Button>
   );
 }
-{% endhighlight %}
+```
 
 This is a really simple component that takes a `isLoading` flag and the text that the button displays in the two states (the default state and the loading state). The `disabled` prop is a result of what we have currently in our `Login` button. And we ensure that the button is disabled when `isLoading` is `true`. This makes it so that the user can't click it while we are in the process of logging them in.
 
 {% include code-marker.html %} And let's add a couple of styles to animate our loading icon. Add the following to `src/index.css`.
 
-{% highlight css %}
+``` css
 .spinning.glyphicon {
   margin-right: 7px;
   top: 2px;
@@ -72,7 +72,7 @@ This is a really simple component that takes a `isLoading` flag and the text tha
   from { transform: scale(1) rotate(0deg); }
   to { transform: scale(1) rotate(360deg); }
 }
-{% endhighlight %}
+```
 
 This spins the refresh Glyphicon for the duration of a second.
 
@@ -80,7 +80,7 @@ This spins the refresh Glyphicon for the duration of a second.
 
 {% include code-marker.html %} Now we can use our new component in our `src/containers/Login.js`. Let's start by replacing the `<Button>` element in the `render` method with the following.
 
-{% highlight javascript %}
+``` javascript
 <LoaderButton
   block
   bsSize="large"
@@ -89,18 +89,18 @@ This spins the refresh Glyphicon for the duration of a second.
   isLoading={this.state.isLoading}
   text="Login"
   loadingText="Logging in…" />
-{% endhighlight %}
+```
 
 {% include code-marker.html %} Import the `LoaderButton` in the header. And remove the reference to the `Button` component.
 
-{% highlight javascript %}
+``` javascript
 import {
   FormGroup,
   FormControl,
   ControlLabel,
 } from 'react-bootstrap';
 import LoaderButton from '../components/LoaderButton.js';
-{% endhighlight %}
+```
 
 And now when we switch over to the browser and try logging in, you should see the intermediate state before the login completes.
 

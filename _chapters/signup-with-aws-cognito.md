@@ -8,7 +8,7 @@ Now let's go ahead and implement the `handleSubmit` and `handleConfirmationSubmi
 
 {% include code-marker.html %} Replace our `handleSubmit` and `handleConfirmationSubmit` methods in `src/containers/Signup.js` with the following.
 
-{% highlight javascript %}
+``` javascript
 handleSubmit = async (event) => {
   event.preventDefault();
 
@@ -94,18 +94,18 @@ authenticate(user, username, password) {
     })
   ));
 }
-{% endhighlight %}
+```
 
 {% include code-marker.html %} Also, include the following in our header.
 
-{% highlight javascript %}
+``` javascript
 import {
   AuthenticationDetails,
   CognitoUserPool,
   CognitoUserAttribute,
 } from 'amazon-cognito-identity-js';
 import config from '../config.js';
-{% endhighlight %}
+```
 
 The important thing we are doing here is after we call `confirm` we call `authenticate` to get the user token. And just like in the `Login` component we call `updateUserToken` and set that in our app's state.
 

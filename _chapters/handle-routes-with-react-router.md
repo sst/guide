@@ -12,9 +12,9 @@ Let's start by installing React Router.
 
 {% include code-marker.html %} Run the following command in your working directory.
 
-{% highlight bash %}
+``` bash
 $ npm install react-router --save
-{% endhighlight %}
+```
 
 This installs the NPM package and adds the dependency to your `package.json`.
 
@@ -24,7 +24,7 @@ Even though we don't have any routes setup in our app, we can get the basic stru
 
 {% include code-marker.html %} Let's create `src/Routes.js` and add the following into it.
 
-{% highlight javascript %}
+``` javascript
 import React from 'react';
 import { Router, Route } from 'react-router';
 import App from './App';
@@ -34,7 +34,7 @@ export default (props) => (
     <Route path="/" component={App} />
   </Router>
 );
-{% endhighlight %}
+```
 
 This is basically telling React Router to direct all the requests with the path `/` to the `App` component.
 
@@ -42,7 +42,7 @@ And now we'll head over to our `index.js` and use this newly created Router inst
 
 {% include code-marker.html %} Replace code in `src/index.js` with the following.
 
-{% highlight javascript %}
+``` javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Routes from './Routes';
@@ -53,7 +53,7 @@ ReactDOM.render(
   <Routes history={browserHistory} />,
   document.getElementById('root')
 );
-{% endhighlight %}
+```
 
 We've made two small changes here.
 

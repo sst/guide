@@ -12,7 +12,7 @@ In this chapter, we are going to enable ES6 capabilities by setting up [Babel](h
 
 {% include code-marker.html %} At the root of the project, run.
 
-{% highlight bash %}
+``` bash
 $ npm install --save-dev \
     babel-core \
     babel-loader \
@@ -23,11 +23,11 @@ $ npm install --save-dev \
     webpack-node-externals
 
 $ npm install --save babel-runtime
-{% endhighlight %}
+```
 
 {% include code-marker.html %} Create a file called `webpack.config.js` in the root with the following.
 
-{% highlight javascript %}
+``` javascript
 var nodeExternals = require('webpack-node-externals');
 var path = require('path');
 process.env.NODE_ENV = 'production';
@@ -56,22 +56,22 @@ module.exports = {
     filename: '[name].js'
   },
 };
-{% endhighlight %}
+```
 
 This is the configuration Webpack will use to package our app.
 
 {% include code-marker.html %} Create a file called `.babelrc` in the root with the following. We are using the same Babel preset (**react-app**) as the one we are going to use in the frontend.
 
-{% highlight json %}
+``` json
 {
   "plugins": ["transform-runtime"],
   "presets": ["react-app"]
 }
-{% endhighlight %}
+```
 
 {% include code-marker.html %} Open `serverless.yml` and replace it with the following.
 
-{% highlight yaml %}
+``` yaml
 service: react-notes-app-api
 
 # use serverless-webpack plugin to transpile ES6
@@ -87,6 +87,6 @@ provider:
   runtime: nodejs4.3
   stage: prod
   region: us-east-1
-{% endhighlight %}
+```
 
 And now we are ready to build our backend.

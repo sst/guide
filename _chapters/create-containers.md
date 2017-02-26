@@ -12,7 +12,7 @@ Let's start by creating the outer chrome of our application by first adding a na
 
 {% include code-marker.html %} Go ahead and remove the code inside `src/App.js` and replace it with the following. Also, you can go ahead and remove `src/logo.svg`.
 
-{% highlight javascript %}
+``` javascript
 import React, { Component } from 'react';
 import { IndexLink } from 'react-router';
 import {
@@ -49,7 +49,7 @@ export default class App extends Component {
     );
   }
 }
-{% endhighlight %}
+```
 
 We are doing a few things here:
 
@@ -61,15 +61,15 @@ We are doing a few things here:
 
 {% include code-marker.html %} Now, for this code to work we need to install the React-Router-Bootstrap package. Run the following command in your working directory.
 
-{% highlight bash %}
+``` bash
 $ npm install react-router-bootstrap --save
-{% endhighlight %}
+```
 
 Let's also add a couple of line of styles to space things out a bit more.
 
 {% include code-marker.html %} Remove all the code inside `src/App.css` and replace it with the following:
 
-{% highlight css %}
+``` css
 .App {
   margin-top: 15px;
 }
@@ -77,7 +77,7 @@ Let's also add a couple of line of styles to space things out a bit more.
 .App .navbar-brand {
   font-weight: bold;
 }
-{% endhighlight %}
+```
 
 ### Add the Home container
 
@@ -85,11 +85,11 @@ Now that we have the outer chrome of our application ready, let's add the contai
 
 {% include code-marker.html %} Right below the `</Navbar>` closing tag in `src/App.js`, add the following:
 
-{% highlight javascript %}
+``` javascript
 <div>
   { this.props.children }
 </div>
-{% endhighlight %}
+```
 
 This tells this component where to render it's child components.
 
@@ -97,7 +97,7 @@ Let's create our first container. It'll respond to the `/` route.
 
 {% include code-marker.html %} Create a `src/containers` directory and add the following inside `src/containers/Home.js`.
 
-{% highlight javascript %}
+``` javascript
 import React, { Component } from 'react';
 import './Home.css';
 
@@ -113,13 +113,13 @@ export default class Home extends Component {
     );
   }
 }
-{% endhighlight %}
+```
 
 This simply renders our home page given that the user is not currently signed in. Let's add a few lines to style this.
 
 {% include code-marker.html %} Add the following into `src/containers/Home.css`.
 
-{% highlight css %}
+``` css
 .Home .lander {
   padding: 80px 0;
   text-align: center;
@@ -133,7 +133,7 @@ This simply renders our home page given that the user is not currently signed in
 .Home .lander p {
   color: #999;
 }
-{% endhighlight %}
+```
 
 ### Add the Route
 
@@ -141,17 +141,17 @@ Now to have this container respond to the `/` route we need to tweak our routes 
 
 {% include code-marker.html %} Find the following in `src/Routes.js`.
 
-{% highlight javascript %}
+``` javascript
 <Route path="/" component={App} />
-{% endhighlight %}
+```
 
 {% include code-marker.html %} And replace it with this:
 
-{% highlight javascript %}
+``` javascript
 <Route path="/" component={App}>
   <IndexRoute component={Home} />
 </Route>
-{% endhighlight %}
+```
 
 This tells our router to render the IndexRoute of the path `/` with the `Home` component as a child of the `App` component. The result of this would be that the chrome that we setup a few steps ago would contain the home page that we designed above.
 
@@ -159,12 +159,12 @@ Let's not forget to include the `Home` and `IndexRoute` component.
 
 {% include code-marker.html %} The header of your `src/Routes.js` should look like this:
 
-{% highlight javascript %}
+``` javascript
 import React from 'react';
 import { Router, Route, IndexRoute } from 'react-router';
 import App from './App';
 import Home from './containers/Home';
-{% endhighlight %}
+```
 
 Finally, head over to your browser and your app should show the brand new home page of your app.
 

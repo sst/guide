@@ -12,7 +12,7 @@ Since we are going to be calling API Gateway a few times in our app, let's first
 
 {% include code-marker.html %} Let's create a helper function in `src/libs/awsLib.js` and add the following. Make sure to create the `src/libs/` directory first.
 
-{% highlight javascript %}
+``` javascript
 import config from '../config.js';
 
 export async function invokeApig(
@@ -35,17 +35,17 @@ export async function invokeApig(
 
   return results.json();
 }
-{% endhighlight %}
+```
 
 We just made it so that we can call `invokeApig` from now on and only pass in the parameters that are necessary. Also, it adds our user token to the header of the request.
 
 {% include code-marker.html %} Now to call our API we need the API Gateway URL. Let's add that to our `src/config.js` above the `cognito: {` line.
 
-{% highlight javascript %}
+``` javascript
 apiGateway: {
   URL: 'https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod',
 },
-{% endhighlight %}
+```
 
 ### Make the Call
 
@@ -53,13 +53,13 @@ Now we are ready to make our create call in our form.
 
 {% include code-marker.html %} Let's include our `awsLib` by adding the following to the header of `src/containers/NewNote.js`.
 
-{% highlight javascript %}
+``` javascript
 import { invokeApig } from '../libs/awsLib.js';
-{% endhighlight %}
+```
 
 {% include code-marker.html %} And replace our `handleSubmit` function with the following.
 
-{% highlight javascript %}
+``` javascript
 handleSubmit = async (event) => {
   event.preventDefault();
 
@@ -90,7 +90,7 @@ createNote(note) {
     body: note,
   }, this.props.userToken);
 }
-{% endhighlight %}
+```
 
 This does a couple of simple things.
 

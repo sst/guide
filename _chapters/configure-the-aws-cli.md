@@ -15,9 +15,9 @@ AWS CLI needs Python 2 version 2.6.5+ or Python 3 version 3.3+ and [Pip](https:/
 
 {% include code-marker.html %} Now using Pip you can install the AWS CLI (on Linux, macOS, or Unix) by running:
 
-{% highlight bash %}
+``` bash
 $ sudo pip install awscli
-{% endhighlight %}
+```
 
 If you are having some problems installing the AWS CLI or need Windows install instructions, refer to the [complete install instructions](http://docs.aws.amazon.com/cli/latest/userguide/installing.html).
 
@@ -32,9 +32,9 @@ It should look something like this:
 
 {% include code-marker.html %} Simply run the following with your Secret Key ID and your Access Key.
 
-{% highlight bash %}
+``` bash
 $ aws configure
-{% endhighlight %}
+```
 
 You can leave the **Default region name** and **Default output format** the way they are.
 

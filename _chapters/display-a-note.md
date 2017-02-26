@@ -12,9 +12,9 @@ The first thing we are going to need to do is load the note when our container l
 
 {% include code-marker.html %} Let's add a route for the note page that we are going to create by adding the following line to `src/Routes.js` below our `notes/new` route.
 
-{% highlight javascript %}
+``` javascript
 <Route path="notes/:id" component={Notes} />
-{% endhighlight %}
+```
 
 This is important because we are going to be pattern matching to extract our note id from the URL.
 
@@ -22,9 +22,9 @@ By using the route path `notes/:id` we are telling the router to send all matchi
 
 {% include code-marker.html %} And include our component in the header.
 
-{% highlight javascript %}
+``` javascript
 import Notes from './containers/Notes';
-{% endhighlight %}
+```
 
 Of course this component doesn't exist yet and we are going to create it now.
 
@@ -32,7 +32,7 @@ Of course this component doesn't exist yet and we are going to create it now.
 
 {% include code-marker.html %} Create a new file `src/containers/Notes.js` and add the following.
 
-{% highlight javascript %}
+``` javascript
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { invokeApig } from '../libs/awsLib.js';
@@ -75,7 +75,7 @@ class Notes extends Component {
 }
 
 export default withRouter(Notes);
-{% endhighlight %}
+```
 
 All this does is load the note on `componentWillMount` and save it to the state. We get the `id` of our note from the URL using the props automatically passed to us by React-Router in `this.props.params.id`. The keyword `id` is a part of the pattern matching in our route (`notes/:id`).
 

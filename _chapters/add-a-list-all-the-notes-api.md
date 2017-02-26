@@ -10,7 +10,7 @@ Now we are going to add an API that returns a list of all the notes a user has.
 
 {% include code-marker.html %} Create a new file called `list.js` with the following.
 
-{% highlight javascript %}
+``` javascript
 import * as dynamoDbLib from './libs/dynamodb-lib';
 import { success, failure } from './libs/response-lib';
 
@@ -36,7 +36,7 @@ export async function main(event, context, callback) {
     callback(null, failure({status: false}));
   }
 };
-{% endhighlight %}
+```
 
 This is pretty much the same as our `get.js` except we only pass in the `userId` in the DynamoDB `query` call.
 
@@ -44,7 +44,7 @@ This is pretty much the same as our `get.js` except we only pass in the `userId`
 
 {% include code-marker.html %} Open the `serverless.yml` file and append the following. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the Cognito User Pool chapter.
 
-{% highlight yaml %}
+``` yaml
   list:
     # Defines an HTTP API endpoint that calls the main function in list.js
     # - path: url path is /notes
@@ -57,25 +57,25 @@ This is pretty much the same as our `get.js` except we only pass in the `userId`
           cors: true
           authorizer:
             arn: YOUR_USER_POOL_ARN
-{% endhighlight %}
+```
 
 This defines the `/notes` endpoint that takes a GET request with the same Cognito User Pool authorizer.
 
 {% include code-marker.html %} Open the `webpack.config.js` file and update the `entry` block to include our newly created file. The `entry` block should now look like the following.
 
-{% highlight javascript %}
+``` javascript
   entry: {
     create: './create.js',
     get: './get.js',
     list: './list.js',
   },
-{% endhighlight %}
+```
 
 ### Test
 
 Update `event.json` file with following.
 
-{% highlight json %}
+``` json
 {
   "requestContext": {
     "authorizer": {
@@ -85,17 +85,17 @@ Update `event.json` file with following.
     }
   }
 }
-{% endhighlight %}
+```
 
 And invoke our function.
 
-{% highlight bash %}
+``` bash
 $ serverless webpack invoke --function list --path event.json
-{% endhighlight %}
+```
 
 The response should look similar to this.
 
-{% highlight json %}
+``` json
 {
   statusCode: 200,
   headers: {
@@ -104,7 +104,7 @@ The response should look similar to this.
   },
   body: '[{"attachment":"hello.jpg","content":"hello world","createdAt":1487800950620,"noteId":"578eb840-f70f-11e6-9d1a-1359b3b22944","userId":"USER-SUB-1234"}]'
 }
-{% endhighlight %}
+```
 
 Note that this API returns an array of note objects as opposed to the `get.js` function that returns just a single note object.
 

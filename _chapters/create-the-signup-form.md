@@ -10,7 +10,7 @@ Let's start by creating the signup form that'll get the user's email and passwor
 
 {% include code-marker.html %} Create a new container at `src/containers/Signup.js` with the following.
 
-{% highlight javascript %}
+``` javascript
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import {
@@ -139,7 +139,7 @@ class Signup extends Component {
 }
 
 export default withRouter(Signup);
-{% endhighlight %}
+```
 
 Most of the things we are doing here are fairly straightforward but let's go over them quickly.
 
@@ -155,7 +155,7 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 {% include code-marker.html %} Also, let's add a couple of styles in `src/containers/Signup.css`.
 
-{% highlight css %}
+``` css
 @media all and (min-width: 480px) {
   .Signup {
     padding: 60px 0;
@@ -172,21 +172,21 @@ Most of the things we are doing here are fairly straightforward but let's go ove
   padding-bottom: 10px;
   color: #999;
 }
-{% endhighlight %}
+```
 
 ### Add the Route
 
 {% include code-marker.html %} Finally, add our container as a route in `src/Routes.js` below our login route.
 
-{% highlight javascript %}
+``` javascript
 <Route path="signup" component={Signup} />
-{% endhighlight %}
+```
 
 And include our component in the header.
 
-{% highlight javascript %}
+``` javascript
 import Signup from './containers/Signup';
-{% endhighlight %}
+```
 
 Now if we switch to our browser and navigate to the signup page we should see our newly created form. Try filling it in and ensure that it shows the confirmation code form as well.
 

@@ -12,7 +12,7 @@ Let's start by creating a component that will handle this for us.
 
 {% include code-marker.html %} Create a new component at `src/containers/NotFound.js` and add the following.
 
-{% highlight javascript %}
+``` javascript
 import React, { Component } from 'react';
 import './NotFound.css';
 
@@ -25,18 +25,18 @@ export default class NotFound extends Component {
     );
   }
 }
-{% endhighlight %}
+```
 
 All this component does is print out a simple message for us.
 
 {% include code-marker.html %} Let's add a couple of styles for it in `src/containers/NotFound.css`.
 
-{% highlight css %}
+``` css
 .NotFound {
   padding-top: 100px;
   text-align: center;
 }
-{% endhighlight %}
+```
 
 ### Add a Catch All Route
 
@@ -44,18 +44,18 @@ Now we just need to add this component to our routes to handle our 404s.
 
 {% include code-marker.html %} Find the `<Route>` block in `src/Routes.js` and add it as the last line in that section.
 
-{% highlight javascript %}
+``` javascript
 { /* Finally, catch all unmatched routes */ }
 <Route path="*" component={NotFound} />
-{% endhighlight %}
+```
 
 This needs to always be the last line in the `<Route>` block. You can think of it as the route that handles requests in case all the other routes before it have failed.
 
 {% include code-marker.html %} And include the `NotFound` component in the header by adding the following:
 
-{% highlight javascript %}
+``` javascript
 import NotFound from './containers/NotFound';
-{% endhighlight %}
+```
 
 And that's it! Now if you were to switch over to your browser and try clicking on the Login or Signup buttons in the Nav you should see the 404 message that we have.
 

@@ -10,9 +10,9 @@ Now that our S3 Bucket is created we are ready to upload the assets of our app.
 
 Create React App comes with a convenient way to package and prepare our app for deployment. From our working directory simply run the following command.
 
-{% highlight bash %}
+``` bash
 $ npm run build
-{% endhighlight %}
+```
 
 This packages all of our assets and places them in the `build/` directory.
 
@@ -20,9 +20,9 @@ This packages all of our assets and places them in the `build/` directory.
 
 Now to deploy simply run the following command; where `notes-app-client` is the name of the bucket we previously created.
 
-{% highlight bash %}
+``` bash
 $ aws s3 sync build/ s3://notes-app-client
-{% endhighlight %}
+```
 
 All this command does is that it syncs the `build/` directory with our bucket on S3. Just as a sanity check, go into the S3 section in your [AWS Console](https://console.aws.amazon.com/console/home) and check if your bucket has the files we just uploaded.
 

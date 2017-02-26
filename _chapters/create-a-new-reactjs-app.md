@@ -10,9 +10,9 @@ Let's get started with our frontend. We are going to create a single page app us
 
 {% include code-marker.html %} Run the following command in your working directory
 
-{% highlight bash %}
+``` bash
 $ npm install -g create-react-app
-{% endhighlight %}
+```
 
 This installs the NPM package globally.
 
@@ -20,18 +20,18 @@ This installs the NPM package globally.
 
 {% include code-marker.html %} From your working directory, run the following command to create our note taking app.
 
-{% highlight bash %}
+``` bash
 $ create-react-app note-app
-{% endhighlight %}
+```
 
 This should take a second to run, and it will create your new project.
 
 {% include code-marker.html %} Now let's run our project.
 
-{% highlight bash %}
+``` bash
 $ cd note-app
 $ npm start
-{% endhighlight %}
+```
 
 This should fire up the newly created app in your browser.
 
@@ -41,9 +41,9 @@ This should fire up the newly created app in your browser.
 
 {% include code-marker.html %} Let's quickly change the title of our note taking app. Open up `public/index.html` and edit the `title` tag to the following:
 
-{% highlight html %}
+``` html
 <title>Scratch - A simple note taking app</title>
-{% endhighlight %}
+```
 
 Create React App comes pre-loaded with a pretty convenient yet minimal development environment. It includes live reloading, a testing framework, ES6 support, and [much more](https://github.com/facebookincubator/create-react-app#why-use-this).
 

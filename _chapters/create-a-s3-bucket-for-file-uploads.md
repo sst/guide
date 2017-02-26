@@ -47,7 +47,7 @@ Select the **Permissions** tab, then select **CORS configuration**.
 
 Add the following CORS configuration into the editor, then hit **Save**.
 
-{% highlight xml %}
+``` xml
 <CORSConfiguration>
 	<CORSRule>
 		<AllowedOrigin>*</AllowedOrigin>
@@ -59,7 +59,7 @@ Add the following CORS configuration into the editor, then hit **Save**.
 		<AllowedHeader>*</AllowedHeader>
 	</CORSRule>
 </CORSConfiguration>
-{% endhighlight %}
+```
 
 ![Save S3 Bucket CORS Configuration screenshot]({{ site.url }}/assets/s3/save-s3-bucket-cors-configuration.png)
 

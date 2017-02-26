@@ -10,7 +10,7 @@ Now let's create an API that allows a user to update a note with a new note obje
 
 {% include code-marker.html %} Create a new file `update.js` and paste the following code
 
-{% highlight javascript %}
+``` javascript
 import * as dynamoDbLib from './libs/dynamodb-lib';
 import { success, failure } from './libs/response-lib';
 
@@ -43,7 +43,7 @@ export async function main(event, context, callback) {
     callback(null, failure({status: false}));
   }
 };
-{% endhighlight %}
+```
 
 This should look similar to the `create.js` function. Here we make an `update` DynamoDB call with the new `content` and `attachment` values in the `params`.
 
@@ -51,7 +51,7 @@ This should look similar to the `create.js` function. Here we make an `update` D
 
 {% include code-marker.html %} Open the `serverless.yml` file and append the following to it. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the Cognito User Pool chapter.
 
-{% highlight yaml %}
+``` yaml
   update:
     # Defines an HTTP API endpoint that calls the main function in update.js
     # - path: url path is /notes/{id}
@@ -64,26 +64,26 @@ This should look similar to the `create.js` function. Here we make an `update` D
           cors: true
           authorizer:
             arn: YOUR_USER_POOL_ARN
-{% endhighlight %}
+```
 
 Here we are adding a handler for the PUT request to the `/notes/{id}` endpoint.
 
 {% include code-marker.html %} Open the `webpack.config.js` file and update the `entry` block to include our newly created file. The `entry` block should now look like the following.
 
-{% highlight javascript %}
+``` javascript
   entry: {
     create: './create.js',
     get: './get.js',
     list: './list.js',
     update: './update.js',
   },
-{% endhighlight %}
+```
 
 ### Test
 
 To test our function replace the `events.json` with the following. Also, don't forget to use the `noteId` of the note we have been using in place of the `id` in the `pathParameters` block.
 
-{% highlight json %}
+``` json
 {
   "body": "{\"content\":\"new world\",\"attachment\":\"new.jpg\"}",
   "pathParameters": {
@@ -97,17 +97,17 @@ To test our function replace the `events.json` with the following. Also, don't f
     }
   }
 }
-{% endhighlight %}
+```
 
 And we invoke our newly created function.
 
-{% highlight bash %}
+``` bash
 $ serverless webpack invoke --function update --path event.json
-{% endhighlight %}
+```
 
 The response should look similar to this.
 
-{% highlight json %}
+``` json
 {
   statusCode: 200,
   headers: {
@@ -116,6 +116,6 @@ The response should look similar to this.
   },
   body: '{"status":true}'
 }
-{% endhighlight %}
+```
 
 Next we are going to add an API to delete a note given it's id.

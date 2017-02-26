@@ -10,20 +10,20 @@ Before we link up our login form with our AWS Cognito setup let's grab our Cogni
 
 {% include code-marker.html %} We'll take the Cognito **User Pool Id** and our **Client Id** (from the Cognito User Pool chapter) and save into it `src/config.js` using the following.
 
-{% highlight javascript %}
+``` javascript
 export default {
   cognito: {
     USER_POOL_ID : 'us-east-1_exampleid',
     CLIENT_ID : '12sr50exampleclientid',
   }
 };
-{% endhighlight %}
+```
 
 {% include code-marker.html %} And to load it into our login form simply import it by adding the following to the header of our Login container in `src/containers/Login.js`.
 
-{% highlight javascript %}
+``` javascript
 import config from '../config.js';
-{% endhighlight %}
+```
 
 ### Login to AWS Cognito
 
@@ -31,25 +31,25 @@ We are going to use the NPM module `amazon-cognito-identity-js` to login to Cogn
 
 {% include code-marker.html %} Install it by running the following in your project root.
 
-{% highlight bash %}
+``` bash
 $ npm install amazon-cognito-identity-js --save
-{% endhighlight %}
+```
 
 {% include code-marker.html %} And include the following in the header of our `src/containers/Login.js`.
 
-{% highlight javascript %}
+``` javascript
 import {
   CognitoUserPool,
   AuthenticationDetails,
   CognitoUser
 } from 'amazon-cognito-identity-js';
-{% endhighlight %}
+```
 
 The login code itself is relatively simple.
 
 {% include code-marker.html %} Add the following method to `src/containers/Login.js` as well.
 
-{% highlight javascript %}
+``` javascript
 login(username, password) {
   const userPool = new CognitoUserPool({
     UserPoolId: config.cognito.USER_POOL_ID,
@@ -70,7 +70,7 @@ login(username, password) {
     })
   ));
 }
-{% endhighlight %}
+```
 
 This function does a few things for us:
 
@@ -84,7 +84,7 @@ This function does a few things for us:
 
 {% include code-marker.html %} To connect the above `login` method to our form simply replace our placeholder `handleSubmit` method in `src/containers/Login.js` with the following.
 
-{% highlight javascript %}
+``` javascript
 handleSubmit = async (event) => {
   event.preventDefault();
 
@@ -96,7 +96,7 @@ handleSubmit = async (event) => {
     alert(e);
   }
 }
-{% endhighlight %}
+```
 
 We are doing two things of note here.
 

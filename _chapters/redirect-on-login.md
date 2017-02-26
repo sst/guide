@@ -10,7 +10,7 @@ Let's start by adding a method to read the `redirect` URL from the querystring.
 
 {% include code-marker.html %} Add the following method to your `src/containers/Login.js` below the `constructor` method.
 
-{% highlight javascript %}
+``` javascript
 querystring(name, url = window.location.href) {
   name = name.replace(/[\[\]]/g, "\\$&");
 
@@ -22,7 +22,7 @@ querystring(name, url = window.location.href) {
 
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
-{% endhighlight %}
+```
 
 This method takes the querystring param we want to read and returns it.
 
@@ -30,7 +30,7 @@ Now let's update our `handleSubmit` method to redirect to the new `redirect` URL
 
 {% include code-marker.html %} Replace our current `handleSubmit` with the following.
 
-{% highlight javascript %}
+``` javascript
 handleSubmit = async (event) => {
   event.preventDefault();
 
@@ -50,7 +50,7 @@ handleSubmit = async (event) => {
     this.setState({ isLoading: false });
   }
 }
-{% endhighlight %}
+```
 
 Now our login page should redirect after we login.
 

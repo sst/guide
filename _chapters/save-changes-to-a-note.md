@@ -8,7 +8,7 @@ Now that our note loads into our form, let's work on saving the changes we make 
 
 {% include code-marker.html %} Replace the `handleSubmit` method in `src/containers/Notes.js` with the following.
 
-{% highlight javascript %}
+``` javascript
 saveNote(note) {
   return invokeApig({
     path: `/notes/${this.props.params.id}`,
@@ -47,13 +47,13 @@ handleSubmit = async (event) => {
     this.setState({ isLoading: false });
   }
 }
-{% endhighlight %}
+```
 
 {% include code-marker.html %} And include our `s3Upload` helper method in the header:
 
-{% highlight javascript %}
+``` javascript
 import { invokeApig, s3Upload } from '../libs/awsLib.js';
-{% endhighlight %}
+```
 
 The code above is doing a couple of things that should be very similar to what we did in the `NewNote` container.
 

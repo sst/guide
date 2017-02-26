@@ -10,13 +10,13 @@ Now that our APIs are complete, let's deploy them.
 
 {% include code-marker.html %} Run the following in your working directory.
 
-{% highlight bash %}
+``` bash
 $ serverless deploy
-{% endhighlight %}
+```
 
 Near the bottom of the output for this command, you will find the `Service Information`. This has a list of the endpoints of the APIs that were created. Make a note of these endpoints as we are going to use them later while creating our frontend. We are also going to quickly test these endpoints a bit further down in this chapter.
 
-{% highlight bash %}
+``` bash
 Service Information
 service: notes-app-api
 stage: prod
@@ -35,7 +35,7 @@ functions:
   notes-app-api-prod-list
   notes-app-api-prod-update
   notes-app-api-prod-delete
-{% endhighlight %}
+```
 
 ### Deploy a Single Function
 
@@ -43,9 +43,9 @@ There are going to be cases where you might want to deploy just a single API as 
 
 For example, to deploy the list function again, we can run the following.
 
-{% highlight bash %}
+``` bash
 $ serverless deploy function -f list
-{% endhighlight %}
+```
 
 ### Test
 
@@ -59,18 +59,18 @@ First let's generate the identity token. Replace the following parameters with t
 
 And run the following.
 
-{% highlight bash %}
+``` bash
 aws cognito-idp admin-initiate-auth \
   --region us-east-1 \
   --user-pool-id YOUR_COGNITO_USER_POOL_ID \
   --client-id YOUR_COGNITO_USER_POOL_APP_ID \
   --auth-flow ADMIN_NO_SRP_AUTH \
   --auth-parameters USERNAME=admin,PASSWORD=Passw0rd!
-{% endhighlight %}
+```
 
 The identity token can be found in the `IdToken` field of the response.
 
-{% highlight json %}
+``` json
 {
     "AuthenticationResult": {
         "ExpiresIn": 3600, 
@@ -81,19 +81,19 @@ The identity token can be found in the `IdToken` field of the response.
     }, 
     "ChallengeParameters": {}
 }
-{% endhighlight %}
+```
 
 Now we can use that as the `Authorization` header to make a request to our API using the following.
 
-{% highlight bash %}
+``` bash
 $ curl https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes \
   -H "Authorization:eyJraWQiOiIxeVVnNXQ3NWY3YzlzYlpnNURZZWFDVWhGMVhEOEdUUEpNXC9zQVhDZEhFbz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI3MDM4MDg1Mi1iZGNiLTQ5NzAtOTU2Zi1kZTZkMGFjODBjODUiLCJhdWQiOiIxMnNyNTBwZzF1ZjAwNDRhajYzZTRoc2g2aSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE0ODc1NDUzNzUsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX1dkSEVHQWk4TyIsImNvZ25pdG86dXNlcm5hbWUiOiJmcmFuayIsImV4cCI6MTQ4NzU0ODk3NSwiaWF0IjoxNDg3NTQ1Mzc1LCJlbWFpbCI6IndhbmdmYW5qaWVAZ21haWwuY29tIn0.d7HRBs2QegvQsGwQhJfpJBWYdh9N6CwoQFhmC91ugJ0YFxVdRhHUFQl4uoLplrOJO90PjTrjmxR7az17MfRlfu8v-ij3s31oaQqz8IdWECuhWW63xCNfGMN8lAbnUBwlHISer9CIGmdf8iF-xar2uyHeH8WHhIjI3gbJw15ORCC6Fo43CuKJ6k2zWaOywMkNr7oT2U7Etk93b2pDwIgeZ4V6uGbHgv3IRJYXYvMdIqsemoF8tLpx3XD58Iq8hNJlw_gOpOp8dlpDA3AK9-vjyXYDjJ_0zZa6alf6j0XEgwCVm08IIcYhF8ntg7ju0ZVBbQwYrdgzBCBhxtfzz1elVg" \
   -d "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}"
-{% endhighlight %}
+```
 
 If the curl command is successful, the response will look similar to this.
 
-{% highlight bash %}
+``` bash
 {
   "userId": "2aa71372-f926-451b-a05b-cf714e800c8e",
   "noteId": "578eb840-f70f-11e6-9d1a-1359b3b22944",
@@ -101,6 +101,6 @@ If the curl command is successful, the response will look similar to this.
   "attachment": "hello.jpg",
   "createdAt": 1487555594691
 }
-{% endhighlight %}
+```
 
 And that's it for the backend! Next we are going to move on to creating the frontend of our app.

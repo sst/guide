@@ -12,7 +12,7 @@ Let's add our first function.
 
 {% include code-marker.html %} Create a new file called `create.js` with the following.
 
-{% highlight javascript %}
+``` javascript
 import uuid from 'uuid';
 import AWS from 'aws-sdk';
 
@@ -68,7 +68,7 @@ export function main(event, context, callback) {
     callback(null, response);
   });
 };
-{% endhighlight %}
+```
 
 There are some helpful comments in the code but we are doing a few simple things here.
 
@@ -83,7 +83,7 @@ Now let's define the API endpoint for our function.
 
 {% include code-marker.html %} Open the `serverless.yml` file and replace it with the following. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the Cognito User Pool chapter.
 
-{% highlight yaml %}
+``` yaml
 service: notes-app-api
 
 plugins:
@@ -129,17 +129,17 @@ functions:
           cors: true
           authorizer:
             arn: YOUR_USER_POOL_ARN
-{% endhighlight %}
+```
 
 Here we are adding our newly added create function to the configuration. We specify that it handles `post` requests at the `/notes` endpoint. We set CORS support to true. This is because our frontend is going to be served from a different domain. We also specify that we want this API to authenticate via the Cognito User Pool that we had previously setup.
 
 {% include code-marker.html %} Open the `webpack.config.js` file and update the `entry` block to include our newly created file.
 
-{% highlight javascript %}
+``` javascript
   entry: {
     create: './create.js',
   },
-{% endhighlight %}
+```
 
 ### Test
 
@@ -147,7 +147,7 @@ Now we are ready to test our new API. To be able to test it on our local we are 
 
 Create an `event.json` file and add the following.
 
-{% highlight json %}
+``` json
 {
   "body": "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}",
   "requestContext": {
@@ -158,19 +158,19 @@ Create an `event.json` file and add the following.
     }
   }
 }
-{% endhighlight %}
+```
 
 You might have noticed that the `body` and `requestContext` fields are the ones we used in our create function.
 
 And to invoke our function we run the following.
 
-{% highlight bash %}
+``` bash
 $ serverless webpack invoke --function create --path event.json
-{% endhighlight %}
+```
 
 The response should look similar to this.
 
-{% highlight json %}
+``` json
 {
   statusCode: 200,
   headers: {
@@ -179,7 +179,7 @@ The response should look similar to this.
   },
   body: '{"userId":"USER-SUB-1234","noteId":"578eb840-f70f-11e6-9d1a-1359b3b22944","content":"hello world","attachment":"hello.jpg","createdAt":1487800950620}'
 }
-{% endhighlight %}
+```
 
 Make a note of the `noteId` in the response. We are going to use this newly created note in the next chapter.
 
@@ -189,14 +189,14 @@ Before we move on to the next chapter, let's quickly refactor the code since we 
 
 {% include code-marker.html %} In our project root, create a `libs/` directory.
 
-{% highlight bash %}
+``` bash
 $ mkdir libs
 $ cd libs
-{% endhighlight %}
+```
 
 {% include code-marker.html %} And create a `libs/response-lib.js` file. 
 
-{% highlight javascript %}
+``` javascript
 export function success(body) {
   return buildResponse(200, body);
 }
@@ -215,13 +215,13 @@ function buildResponse(statusCode, body) {
     body: JSON.stringify(body),
   };
 }
-{% endhighlight %}
+```
 
 This will manage building the response objects for both success and failure cases with the proper HTTP status code and headers.
 
 {% include code-marker.html %} Again inside `libs/`, create a `dynamodb-lib.js` file.
 
-{% highlight javascript %}
+``` javascript
 import AWS from 'aws-sdk';
 
 AWS.config.update({region:'us-east-1'});
@@ -240,13 +240,13 @@ export function call(action, params) {
     });
   });
 }
-{% endhighlight %}
+```
 
 Here we are adding a helper function to convert the DynamoDB callbacks to use the ES6 Promise syntax. Promises are a method for managing asynchronous code that serve as an alternative to the standard callback function syntax. It will make our code a lot easier to read.
 
 {% include code-marker.html %} Now, we'll go back to our `create.js` and use the helper functions we created. Our `create.js` should now look like the following.
 
-{% highlight javascript %}
+``` javascript
 import uuid from 'uuid';
 import * as dynamoDbLib from './libs/dynamodb-lib';
 import { success, failure } from './libs/response-lib';
@@ -272,7 +272,7 @@ export async function main(event, context, callback) {
     callback(null, failure({status: false}));
   }
 };
-{% endhighlight %}
+```
 
 Next, we are going to write the API to get a note given it's id.
 

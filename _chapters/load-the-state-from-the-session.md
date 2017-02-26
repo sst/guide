@@ -10,7 +10,7 @@ To make our login information persist we need to store and load it from the brow
 
 {% include code-marker.html %} Add the following to your `src/App.js`.
 
-{% highlight javascript %}
+``` javascript
 getCurrentUser() {
   const userPool = new CognitoUserPool({
     UserPoolId: config.cognito.USER_POOL_ID,
@@ -30,14 +30,14 @@ getUserToken(currentUser) {
     });
   });
 }
-{% endhighlight %}
+```
 
 {% include code-marker.html %} And include this in it's header:
 
-{% highlight javascript %}
+``` javascript
 import { CognitoUserPool, } from 'amazon-cognito-identity-js';
 import config from './config.js';
-{% endhighlight %}
+```
 
 These two methods are pretty self-explanatory. In `getCurrentUser`, we use the Cognito JS SDK to load the current user from the session. And in `getUserToken`, we retrieve the user token given a user object.
 
@@ -47,16 +47,16 @@ We want to ensure that when the user refreshes the app, we load the user token f
 
 {% include code-marker.html %} To do this, let's add a flag to our `src/App.js` state called `isLoadingUserToken`. The initial state in our constructor should look like the following.
 
-{% highlight javascript %}
+``` javascript
 this.state = {
   userToken: null,
   isLoadingUserToken: true,
 };
-{% endhighlight %}
+```
 
 {% include code-marker.html %} Now to load the user token we'll add the following to our `src/App.js`.
 
-{% highlight javascript %}
+``` javascript
 async componentWillMount() {
   const currentUser = this.getCurrentUser();
 
@@ -75,7 +75,7 @@ async componentWillMount() {
 
   this.setState({isLoadingUserToken: false});
 }
-{% endhighlight %}
+```
 
 All this does is check if there is a user in session, and then load their user token. It also updates the `isLoadingUserToken` flag once the process is complete.
 
@@ -87,7 +87,7 @@ We'll conditionally render our app based on the `isLoadingUserToken` flag.
 
 {% include code-marker.html %} Our `render` method in `src/App.js` should be as follows.
 
-{% highlight javascript %}
+``` javascript
 render() {
   const childProps = {
     userToken: this.state.userToken,
@@ -124,7 +124,7 @@ render() {
       </div>
     );
 }
-{% endhighlight %}
+```
 
 Now if you head over to your browser and refresh the page, you should see that a user is logged in.
 

@@ -10,7 +10,7 @@ Now that we created a note and saved it to our database. Let's add an API to ret
 
 {% include code-marker.html %} Create a new file `get.js` and paste the following code
 
-{% highlight javascript %}
+``` javascript
 import * as dynamoDbLib from './libs/dynamodb-lib';
 import { success, failure } from './libs/response-lib';
 
@@ -40,7 +40,7 @@ export async function main(event, context, callback) {
     callback(null, failure({status: false}));
   }
 };
-{% endhighlight %}
+```
 
 This follows exactly the same structure as our previous `create.js` function. The major difference here is that we are doing a `dynamoDbLib.call('get', params)` to get a note object given the `noteId` and `userId` that is passed in through the request.
 
@@ -48,7 +48,7 @@ This follows exactly the same structure as our previous `create.js` function. Th
 
 {% include code-marker.html %} Open the `serverless.yml` file and append the following to it. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the Cognito User Pool chapter.
 
-{% highlight yaml %}
+``` yaml
   get:
     # Defines an HTTP API endpoint that calls the main function in get.js
     # - path: url path is /notes/{id}
@@ -61,24 +61,24 @@ This follows exactly the same structure as our previous `create.js` function. Th
           cors: true
           authorizer:
             arn: YOUR_USER_POOL_ARN
-{% endhighlight %}
+```
 
 This defines our get note API. It adds a GET request handler with the endpoint `/notes/{id}`. And just as before we use our Cognito User Pool as the authorizer.
 
 {% include code-marker.html %} Open the `webpack.config.js` file and update the `entry` block to include our newly created file. The `entry` block should now look like the following.
 
-{% highlight javascript %}
+``` javascript
   entry: {
     create: './create.js',
     get: './get.js',
   },
-{% endhighlight %}
+```
 
 ### Test
 
 To test our get note API we need to mock passing in the `noteId` parameter. We are going to use the `noteId` of the note we created in the previous chapter and add in a `pathParameters` block to our `events.json`. So it should look similar to the one below.
 
-{% highlight json %}
+``` json
 {
   "pathParameters": {
     "id": "578eb840-f70f-11e6-9d1a-1359b3b22944"
@@ -91,17 +91,17 @@ To test our get note API we need to mock passing in the `noteId` parameter. We a
     }
   }
 }
-{% endhighlight %}
+```
 
 And we invoke our newly created function.
 
-{% highlight bash %}
+``` bash
 $ serverless webpack invoke --function get --path event.json
-{% endhighlight %}
+```
 
 The response should look similar to this.
 
-{% highlight json %}
+``` json
 {
   statusCode: 200,
   headers: {
@@ -110,6 +110,6 @@ The response should look similar to this.
   },
   body: '{"attachment":"hello.jpg","content":"hello world","createdAt":1487800950620,"noteId":"578eb840-f70f-11e6-9d1a-1359b3b22944","userId":"USER-SUB-1234"}'
 }
-{% endhighlight %}
+```
 
 Next, let's create an API to list all the notes a user has.

@@ -16,9 +16,9 @@ Let's first include them in the HTML. Our React.js app is using a single HTML fi
 
 {% include code-marker.html %} Go ahead and edit `public/index.html` and add the following line in the `<head>` section of the HTML to include the two typefaces.
 
-{% highlight html %}
+``` html
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=PT+Serif|Open+Sans:300,400,600,700,800">
-{% endhighlight %}
+```
 
 Here we are referencing all the 5 different weights (300, 400, 600, 700, and 800) of the Open Sans typeface.
 
@@ -28,19 +28,19 @@ Now we are ready to add our newly added fonts to our stylesheets. Create React A
 
 {% include code-marker.html %} Let's change the current font in `src/index.css` for the `body` tag from `font-family: sans-serif;` to the following.
 
-{% highlight css %}
+``` css
 font-family: "Open Sans", sans-serif;
 font-size: 16px;
 color: #333;
-{% endhighlight %}
+```
 
 {% include code-marker.html %} And let's change the fonts for the header tags to our new Serif font by adding this block to the css file.
 
-{% highlight css %}
+``` css
 h1, h2, h3, h4, h5, h6 {
   font-family: "PT Serif", serif;
 }
-{% endhighlight %}
+```
 
 Now if you just flip over to your browser with our new app, you should see the new fonts update automatically; thanks to the live reloading.
 

@@ -8,7 +8,7 @@ Currently we are only removing the user token from our app's state. But when we 
 
 {% include code-marker.html %} To clear the browser session on logout, replace the `handleLogout` method in our `src/App.js` with this:
 
-{% highlight javascript %}
+``` javascript
 handleLogout = (event) => {
   const currentUser = this.getCurrentUser();
 
@@ -18,7 +18,7 @@ handleLogout = (event) => {
 
   this.updateUserToken(null);
 }
-{% endhighlight %}
+```
 
 Here we are once again using the AWS Cognito JS SDK to log the user out by calling `currentUser.signOut()`.
 

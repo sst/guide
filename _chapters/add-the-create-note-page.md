@@ -12,7 +12,7 @@ First we are going to create the form for a note. It'll take some content and a 
 
 {% include code-marker.html %} Create a new file `src/containers/NewNote.js` and add the following.
 
-{% highlight javascript %}
+``` javascript
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import {
@@ -93,7 +93,7 @@ class NewNote extends Component {
 }
 
 export default withRouter(NewNote);
-{% endhighlight %}
+```
 
 Everything is fairly standard here, except for the file input. Our form elements so far have been [controlled components](https://facebook.github.io/react/docs/forms.html), as in their value is directly controlled by the state of the component. The file input simply calls a different `onChange` handler (`handleFileChange`) that saves the file object as a class property. We use a class property instead of saving it in the state because the file object we save does not change or drive the rendering of our component.
 
@@ -101,13 +101,13 @@ Currently, our `handleSubmit` does not do a whole lot other than limiting the fi
 
 {% include code-marker.html %} So add the following to our `src/config.js` below the `export default {` line.
 
-{% highlight javascript %}
+``` javascript
 MAX_ATTACHMENT_SIZE: 5000000,
-{% endhighlight %}
+```
 
 {% include code-marker.html %} Let's also add the styles for our form in `src/containers/NewNote.css`.
 
-{% highlight css %}
+``` css
 .NewNote form {
   padding-bottom: 15px;
 }
@@ -116,21 +116,21 @@ MAX_ATTACHMENT_SIZE: 5000000,
   height: 300px;
   font-size: 24px;
 }
-{% endhighlight %}
+```
 
 ### Add the Route
 
 {% include code-marker.html %} Finally, add our container as a route in `src/Routes.js` below our signup route.
 
-{% highlight javascript %}
+``` javascript
 <Route path="notes/new" component={NewNote} />
-{% endhighlight %}
+```
 
 {% include code-marker.html %} And include our component in the header.
 
-{% highlight javascript %}
+``` javascript
 import NewNote from './containers/NewNote';
-{% endhighlight %}
+```
 
 Now if we switch to our browser and navigate `http://localhost:3000/notes/new` we should see our newly created form. Try adding some content, uploading a file, and hitting submit to see it in action.
 

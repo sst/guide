@@ -10,9 +10,9 @@ Now that we've made some changes to our app, let's deploy the updates. This is t
 
 First let's prepare our app for production by building it. Run the following in your working directory.
 
-{% highlight bash %}
+``` bash
 $ npm run build
-{% endhighlight %}
+```
 
 Now that are app is build and ready in the `build/` directory, let's deploy to S3.
 
@@ -20,9 +20,9 @@ Now that are app is build and ready in the `build/` directory, let's deploy to S
 
 Run the following from our working directory to upload our app to our main S3 Bucket.
 
-{% highlight bash %}
+``` bash
 $ aws s3 sync build/ s3://notes-app-client
-{% endhighlight %}
+```
 
 Our changes should be live on S3.
 
@@ -40,16 +40,16 @@ To do this we'll need the **Distribution ID** of both of our CloudFront Distribu
 
 Now we can use the AWS CLI to invalidate the cache of the two distributions. As of writing this, the CloudFront portion of the CLI is in preview and needs to be enabled by running the following. This only needs to be run once and not every time we deploy.
 
-{% highlight bash %}
+``` bash
 $ aws configure set preview.cloudfront true
-{% endhighlight %}
+```
 
 And to invalidate the cache we run the following.
 
-{% highlight bash %}
+``` bash
 $ aws cloudfront create-invalidation --distribution-id E1KTCKT9SOAHBW --paths "/*"
 $ aws cloudfront create-invalidation --distribution-id E3MQXGQ47VCJB0 --paths "/*"
-{% endhighlight %}
+```
 
 This invalidates our distribution for both the www and non-www versions of our domain. If you click on the **Invalidations** tab, you should see your invalidation request being processed.
 

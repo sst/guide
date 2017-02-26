@@ -17,37 +17,37 @@ React-Router comes with a [Higher-Order Component](https://facebook.github.io/re
 
 {% include code-marker.html %} To use it in our `src/containers/Login.js`, let's replace the line that defines our component.
 
-{% highlight javascript %}
+``` javascript
 export default class Login extends Component {
-{% endhighlight %}
+```
 
 {% include code-marker.html %} with the following:
 
-{% highlight javascript %}
+``` javascript
 class Login extends Component {
-{% endhighlight %}
+```
 
 {% include code-marker.html %} And instead export it by adding this at the bottom of our `src/containers/Login.js`.
 
-{% highlight javascript %}
+``` javascript
 export default withRouter(Login);
-{% endhighlight %}
+```
 
 {% include code-marker.html %} Also, import `withRouter` in the header.
 
-{% highlight javascript %}
+``` javascript
 import { withRouter } from 'react-router';
-{% endhighlight %}
+```
 
 Now we can use the router after a successful login by doing the following.
 
-{% highlight javascript %}
+``` javascript
 this.props.router.push('/');
-{% endhighlight %}
+```
 
 {% include code-marker.html %} Our updated `handleSubmit` method in `src/containers/Login.js` should look like this:
 
-{% highlight javascript %}
+``` javascript
 handleSubmit = async (event) => {
   event.preventDefault();
 
@@ -60,7 +60,7 @@ handleSubmit = async (event) => {
     alert(e);
   }
 }
-{% endhighlight %}
+```
 
 Now if you head over to your browser and try logging in, you should be redirected to the home page after you've been logged in.
 
@@ -72,37 +72,37 @@ Now we'll do something very similar for the logout process.
 
 {% include code-marker.html %} Define our `src/App.js` component by replacing the line below.
 
-{% highlight javascript %}
+``` javascript
 export default class App extends Component {
-{% endhighlight %}
+```
 
 {% include code-marker.html %} with this:
 
-{% highlight javascript %}
+``` javascript
 class App extends Component {
-{% endhighlight %}
+```
 
 {% include code-marker.html %} And export it after calling `withRouter` by adding this to the bottom of `src/App.js`.
 
-{% highlight javascript %}
+``` javascript
 export default withRouter(App);
-{% endhighlight %}
+```
 
 {% include code-marker.html %} Import `withRouter` (along with the `IndexLink` from before) in the header of `src/App.js`.
 
-{% highlight javascript %}
+``` javascript
 import { withRouter, IndexLink } from 'react-router';
-{% endhighlight %}
+```
 
 And finally, redirect after the logout.
 
 {% include code-marker.html %} Add the following to the bottom of the `handleLogout` method in our `src/App.js`.
 
-{% highlight javascript %}
+``` javascript
 if (this.props.location.pathname !== '/login') {
   this.props.router.push('/login');
 }
-{% endhighlight %}
+```
 
 This redirects us back to the login page once the user logs out.
 

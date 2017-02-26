@@ -10,7 +10,7 @@ Currently, our Home containers is very simple. Let's add the conditional renderi
 
 {% include code-marker.html %} Replace our `src/containers/Home.js` with the following.
 
-{% highlight javascript %}
+``` javascript
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import {
@@ -67,7 +67,7 @@ class Home extends Component {
 }
 
 export default withRouter(Home);
-{% endhighlight %}
+```
 
 We are doing a few things of note here:
 

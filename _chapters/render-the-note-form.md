@@ -8,7 +8,7 @@ Now that our container loads a note on `componentWillMount`, let's go ahead and 
 
 {% include code-marker.html %} Replace our placeholder `render` method in `src/containers/Notes.js` with the following.
 
-{% highlight javascript %}
+``` javascript
 validateForm() {
   return this.state.content.length > 0;
 }
@@ -100,7 +100,7 @@ render() {
       </div>
     );
 }
-{% endhighlight %}
+```
 
 We are doing a few things here:
 
@@ -120,18 +120,18 @@ To complete this code, let's add `isLoading` and `isDeleting` to the state.
 
 {% include code-marker.html %} So our new initial state in the `constructor` looks like so.
 
-{% highlight javascript %}
+``` javascript
 this.state = {
   isLoading: null,
   isDeleting: null,
   note: null,
   content: '',
 };
-{% endhighlight %}
+```
 
 {% include code-marker.html %} Let's also add some styles by adding the following to `src/containers/Notes.css`.
 
-{% highlight javascript %}
+``` javascript
 .Notes form {
   padding-bottom: 15px;
 }
@@ -140,11 +140,11 @@ this.state = {
   height: 300px;
   font-size: 24px;
 }
-{% endhighlight %}
+```
 
 {% include code-marker.html %} Also, let's include the React-Bootstrap components that we are using here by adding the following to our header. And our styles, the `LoaderButton`, and the `config`.
 
-{% highlight javascript %}
+``` javascript
 import {
   FormGroup,
   FormControl,
@@ -153,7 +153,7 @@ import {
 import LoaderButton from '../components/LoaderButton.js';
 import config from '../config.js';
 import './Notes.css';
-{% endhighlight %}
+```
 
 And that's it. If you switch over to your browser, you should see the note loaded.
 

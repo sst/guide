@@ -10,7 +10,7 @@ We are going to add a Login and Signup button to our lander to give users a clea
 
 {% include code-marker.html %} To do this update our `renderLander` method in `src/containers/Home.js`.
 
-{% highlight javascript %}
+``` javascript
 renderLander() {
   return (
     <div className="lander">
@@ -23,24 +23,24 @@ renderLander() {
     </div>
   );
 }
-{% endhighlight %}
+```
 
 {% include code-marker.html %} And import the `Link` component from React-Router, so that our import looks like the following.
 
-{% highlight javascript %}
+``` javascript
 import { withRouter, Link } from 'react-router';
-{% endhighlight %}
+```
 
 {% include code-marker.html %} Also, add a couple of styles to `src/containers/Home.css`.
 
-{% highlight css %}
+``` css
 .Home .lander div {
   padding-top: 20px;
 }
 .Home .lander div a:first-child {
   margin-right: 20px;
 }
-{% endhighlight %}
+```
 
 And our lander should look something like this.
 

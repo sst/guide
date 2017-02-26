@@ -38,7 +38,7 @@ Buckets by default are not publicly accessible, so we need to change its permiss
 
 {% include code-marker.html %} Add the following bucket policy into the editor. Where `notes-app-client` is the name of our S3 bucket. Make sure to use the name of your bucket here.
 
-{% highlight json %}
+``` json
 {
   "Version":"2012-10-17",
   "Statement":[{
@@ -50,7 +50,7 @@ Buckets by default are not publicly accessible, so we need to change its permiss
     }
   ]
 }
-{% endhighlight %}
+```
 
 ![Save bucket policy screenshot]({{ site.url }}/assets/save-bucket-policy.png)
 

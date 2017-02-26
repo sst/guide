@@ -10,7 +10,7 @@ Now that we have our basic home page setup, let's make the API call to render ou
 
 {% include code-marker.html %} Add the following below the `constructor` block in `src/containers/Home.js`.
 
-{% highlight javascript %}
+``` javascript
 async componentWillMount() {
   if (this.props.userToken === null) {
     return;
@@ -32,13 +32,13 @@ async componentWillMount() {
 notes() {
   return invokeApig({ path: '/notes' }, this.props.userToken);
 }
-{% endhighlight %}
+```
 
 {% include code-marker.html %} And include our API Gateway Client helper in the header.
 
-{% highlight javascript %}
+``` javascript
 import { invokeApig } from '../libs/awsLib.js';
-{% endhighlight %}
+```
 
 All this does, is make a GET request to `/notes` on `componentWillMount` and puts the results in the `notes` object in the state.
 
@@ -48,7 +48,7 @@ Now let's render the results.
 
 {% include code-marker.html %} Replace our `renderNotesList` placeholder method with the following.
 
-{% highlight javascript %}
+``` javascript
 renderNotesList(notes) {
   return [{}].concat(notes).map((note, i) => (
     i !== 0
@@ -72,17 +72,17 @@ onNoteClick = (event) => {
   event.preventDefault();
   this.props.router.push(event.currentTarget.getAttribute('href'));
 }
-{% endhighlight %}
+```
 
 {% include code-marker.html %} And include the `ListGroupItem` in the header so that our `react-bootstrap` import looks like so.
 
-{% highlight javascript %}
+``` javascript
 import {
   PageHeader,
   ListGroup,
   ListGroupItem,
 } from 'react-bootstrap';
-{% endhighlight %}
+```
 
 The code above does a few things.
 
@@ -94,7 +94,7 @@ The code above does a few things.
 
 {% include code-marker.html %} Let's also add a couple of styles to our `src/containers/Home.css`.
 
-{% highlight css %}
+``` css
 .Home .notes h4 {
   font-family: "Open Sans", sans-serif;
   font-weight: 600;
@@ -106,7 +106,7 @@ The code above does a few things.
 .Home .notes p {
   color: #666;
 }
-{% endhighlight %}
+```
 
 Now head over to your browser and you should see your list displayed.
 
