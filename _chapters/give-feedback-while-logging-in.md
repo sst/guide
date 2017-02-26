@@ -44,7 +44,7 @@ Now to reflect the state change in our button we are going to render it differen
 
 {% include code-marker.html %} Create a `src/components/` directory and add the following in `src/components/LoaderButton.js`.
 
-``` javascript
+``` coffee
 import React from 'react';
 import { Button, Glyphicon } from 'react-bootstrap';
 
