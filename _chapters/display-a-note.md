@@ -53,8 +53,8 @@ class Notes extends Component {
     try {
       const results = await this.getNote();
       this.setState({
-        note: results.data,
-        content: results.data.content,
+        note: results,
+        content: results.content,
       });
     }
     catch(e) {

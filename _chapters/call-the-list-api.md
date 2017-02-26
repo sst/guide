@@ -20,7 +20,7 @@ async componentWillMount() {
 
   try {
     const results = await this.notes();
-    this.setState({ notes: results.data });
+    this.setState({ notes: results });
   }
   catch(e) {
     alert(e);

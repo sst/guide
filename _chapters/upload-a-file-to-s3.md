@@ -14,9 +14,17 @@ Let's now add an attachment to our note. The flow we are using here is very simp
 
 We are going to use the AWS SDK to upload our files to S3. The S3 Bucket that we created previously, is secured using our Cognito Identity Pool. So to be able to upload, we first need to generate our Cognito Identity temporary credentials with our user token.
 
-### Get AWS Credentials
+### Get Cognito Identity Pool Credentials
 
-{% include code-marker.html %} To do that let's append the following to our `src/libs/awsLib.js`.
+We are going to use the NPM module `aws-sdk` to help us get the Identity Pool credentials.
+
+{% include code-marker.html %} Install it by running the following in your project root.
+
+{% highlight bash %}
+$ npm install aws-sdk --save
+{% endhighlight %}
+
+{% include code-marker.html %} Next, let's append the following to our `src/libs/awsLib.js`.
 
 {% highlight javascript %}
 export function getAwsCredentials(userToken) {

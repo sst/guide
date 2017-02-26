@@ -6,59 +6,43 @@ date: 2017-01-23 00:00:00
 
 Now that we have our basic create note form working, let's connect it to our API. We'll do the upload to S3 a little bit later.
 
-To make it easy to talk to API Gateway, we'll use the [AWS API Gateway JS Client](https://github.com/kndt84/aws-api-gateway-client).
+### Calling API Gateway
 
-### Installing the API Gateway JS Client
-
-{% include code-marker.html %} Run the following command in your working directory
-
-{% highlight bash %}
-$ npm install aws-api-gateway-client --save
-{% endhighlight %}
-
-### Invoking the Client
-
-To call our API through API Gateway we need to first create a client and then pass in a whole lot of parameters. And since we are going to make a lot of calls to our API, let's simplify the process a bit.
+Since we are going to be calling API Gateway a few times in our app, let's first create a little helper function for it.
 
 {% include code-marker.html %} Let's create a helper function in `src/libs/awsLib.js` and add the following. Make sure to create the `src/libs/` directory first.
 
 {% highlight javascript %}
-import apigClientFactory from 'aws-api-gateway-client';
 import config from '../config.js';
 
-function getApigClient() {
-  return apigClientFactory.newClient({
-    invokeUrl: config.apiGateway.URL,
-    region: config.apiGateway.REGION
-  });
-}
-
-export function invokeApig(
-  { params = {},
-    path,
+export async function invokeApig(
+  { path,
     method = 'GET',
-    additionalParams= {},
-    body = {}}, userToken) {
+    body }, userToken) {
 
-  const apigClient = getApigClient();
+  const url = `${config.apiGateway.URL}${path}`;
+  const headers = {
+    Authorization: userToken,
+  };
 
-  if ( ! additionalParams.haders) {
-    additionalParams.headers = {};
-  }
+  body = (body) ? JSON.stringify(body) : body;
 
-  additionalParams.headers.Authorization = userToken;
+  const results = await fetch(url, {
+    method,
+    body,
+    headers
+  });
 
-  return apigClient.invokeApi(params, path, method, additionalParams, body);
+  return results.json();
 }
 {% endhighlight %}
 
 We just made it so that we can call `invokeApig` from now on and only pass in the parameters that are necessary. Also, it adds our user token to the header of the request.
 
-{% include code-marker.html %} Now to create a new API Gateway client we need our region and API Gateway URL. Let's add that to our `src/config.js` above the `cognito: {` line.
+{% include code-marker.html %} Now to call our API we need the API Gateway URL. Let's add that to our `src/config.js` above the `cognito: {` line.
 
 {% highlight javascript %}
 apiGateway: {
-  REGION: 'us-east-1',
   URL: 'https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod',
 },
 {% endhighlight %}

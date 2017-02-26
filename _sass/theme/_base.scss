@@ -153,6 +153,8 @@ code {
   border: 1px solid darken($code-background-color, 3%);
   border-radius: 3px;
   background-color: $code-background-color;
+  word-wrap: normal;
+  word-break: normal;
 }
 
 code {
