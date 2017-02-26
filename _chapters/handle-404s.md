@@ -12,7 +12,7 @@ Let's start by creating a component that will handle this for us.
 
 {% include code-marker.html %} Create a new component at `src/containers/NotFound.js` and add the following.
 
-``` javascript
+``` coffee
 import React, { Component } from 'react';
 import './NotFound.css';
 
@@ -44,7 +44,7 @@ Now we just need to add this component to our routes to handle our 404s.
 
 {% include code-marker.html %} Find the `<Route>` block in `src/Routes.js` and add it as the last line in that section.
 
-``` javascript
+``` coffee
 { /* Finally, catch all unmatched routes */ }
 <Route path="*" component={NotFound} />
 ```
