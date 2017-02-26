@@ -10,7 +10,7 @@ We are going to add a Login and Signup button to our lander to give users a clea
 
 {% include code-marker.html %} To do this update our `renderLander` method in `src/containers/Home.js`.
 
-``` javascript
+``` coffee
 renderLander() {
   return (
     <div className="lander">
