@@ -67,7 +67,7 @@ This defines our get note API. It adds a GET request handler with the endpoint `
 
 {% include code-marker.html %} Open the `webpack.config.js` file and update the `entry` block to include our newly created file. The `entry` block should now look like the following.
 
-``` javascript
+```
   entry: {
     create: './create.js',
     get: './get.js',
@@ -101,7 +101,7 @@ $ serverless webpack invoke --function get --path event.json
 
 The response should look similar to this.
 
-``` json
+``` javascript
 {
   statusCode: 200,
   headers: {
