@@ -8,7 +8,7 @@ The last thing we need to do on the note page is allowing users to delete their 
 
 {% include code-marker.html %} Replace our `handleDelete` method in `src/containers/Notes.js`.
 
-``` javascript
+``` coffee
 deleteNote() {
   return invokeApig({
     path: `/notes/${this.props.params.id}`,
