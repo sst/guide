@@ -24,7 +24,7 @@ Even though we don't have any routes setup in our app, we can get the basic stru
 
 {% include code-marker.html %} Let's create `src/Routes.js` and add the following into it.
 
-``` jsx
+```jsx
 import React from 'react';
 import { Router, Route } from 'react-router';
 import App from './App';
@@ -42,7 +42,7 @@ And now we'll head over to our `index.js` and use this newly created Router inst
 
 {% include code-marker.html %} Replace code in `src/index.js` with the following.
 
-``` jsx
+```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Routes from './Routes';
