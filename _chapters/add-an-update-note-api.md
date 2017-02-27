@@ -107,7 +107,7 @@ $ serverless webpack invoke --function update --path event.json
 
 The response should look similar to this.
 
-``` javascript
+``` bash
 {
   statusCode: 200,
   headers: {
