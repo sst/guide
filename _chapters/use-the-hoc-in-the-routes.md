@@ -17,7 +17,7 @@ Next, we simply wrap the components we want secured.
 
 So the following routes in `src/Routes.js` would be affected.
 
-``` javascript
+``` coffee
 <Route path="login" component={Login} />
 <Route path="signup" component={Signup} />
 <Route path="notes/new" component={NewNote} />
@@ -26,7 +26,7 @@ So the following routes in `src/Routes.js` would be affected.
 
 {% include code-marker.html %} They should now look like so:
 
-``` javascript
+``` coffee
 <Route path="login" component={requireUnauth(Login)} />
 <Route path="signup" component={requireUnauth(Signup)} />
 <Route path="notes/new" component={requireAuth(NewNote)} />

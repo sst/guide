@@ -12,7 +12,7 @@ Let's start by creating the outer chrome of our application by first adding a na
 
 {% include code-marker.html %} Go ahead and remove the code inside `src/App.js` and replace it with the following. Also, you can go ahead and remove `src/logo.svg`.
 
-``` javascript
+``` coffee
 import React, { Component } from 'react';
 import { IndexLink } from 'react-router';
 import {
@@ -85,7 +85,7 @@ Now that we have the outer chrome of our application ready, let's add the contai
 
 {% include code-marker.html %} Right below the `</Navbar>` closing tag in `src/App.js`, add the following:
 
-``` javascript
+``` coffee
 <div>
   { this.props.children }
 </div>
@@ -97,7 +97,7 @@ Let's create our first container. It'll respond to the `/` route.
 
 {% include code-marker.html %} Create a `src/containers` directory and add the following inside `src/containers/Home.js`.
 
-``` javascript
+``` coffee
 import React, { Component } from 'react';
 import './Home.css';
 
@@ -141,13 +141,13 @@ Now to have this container respond to the `/` route we need to tweak our routes 
 
 {% include code-marker.html %} Find the following in `src/Routes.js`.
 
-``` javascript
+``` coffee
 <Route path="/" component={App} />
 ```
 
 {% include code-marker.html %} And replace it with this:
 
-``` javascript
+``` coffee
 <Route path="/" component={App}>
   <IndexRoute component={Home} />
 </Route>
@@ -159,7 +159,7 @@ Let's not forget to include the `Home` and `IndexRoute` component.
 
 {% include code-marker.html %} The header of your `src/Routes.js` should look like this:
 
-``` javascript
+``` coffee
 import React from 'react';
 import { Router, Route, IndexRoute } from 'react-router';
 import App from './App';

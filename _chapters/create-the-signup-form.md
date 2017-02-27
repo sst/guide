@@ -10,7 +10,7 @@ Let's start by creating the signup form that'll get the user's email and passwor
 
 {% include code-marker.html %} Create a new container at `src/containers/Signup.js` with the following.
 
-``` javascript
+``` coffee
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import {
@@ -178,7 +178,7 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 {% include code-marker.html %} Finally, add our container as a route in `src/Routes.js` below our login route.
 
-``` javascript
+``` coffee
 <Route path="signup" component={Signup} />
 ```
 

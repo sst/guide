@@ -12,7 +12,7 @@ First we are going to create the form for a note. It'll take some content and a 
 
 {% include code-marker.html %} Create a new file `src/containers/NewNote.js` and add the following.
 
-``` javascript
+``` coffee
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import {
@@ -101,7 +101,7 @@ Currently, our `handleSubmit` does not do a whole lot other than limiting the fi
 
 {% include code-marker.html %} So add the following to our `src/config.js` below the `export default {` line.
 
-``` javascript
+```
 MAX_ATTACHMENT_SIZE: 5000000,
 ```
 
@@ -122,7 +122,7 @@ MAX_ATTACHMENT_SIZE: 5000000,
 
 {% include code-marker.html %} Finally, add our container as a route in `src/Routes.js` below our signup route.
 
-``` javascript
+``` coffee
 <Route path="notes/new" component={NewNote} />
 ```
 

@@ -12,7 +12,7 @@ The first thing we are going to need to do is load the note when our container l
 
 {% include code-marker.html %} Let's add a route for the note page that we are going to create by adding the following line to `src/Routes.js` below our `notes/new` route.
 
-``` javascript
+``` coffee
 <Route path="notes/:id" component={Notes} />
 ```
 
@@ -32,7 +32,7 @@ Of course this component doesn't exist yet and we are going to create it now.
 
 {% include code-marker.html %} Create a new file `src/containers/Notes.js` and add the following.
 
-``` javascript
+``` coffee
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { invokeApig } from '../libs/awsLib.js';

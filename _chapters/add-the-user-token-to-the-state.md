@@ -67,7 +67,7 @@ this.props.updateUserToken(userToken);
 
 We can now use this to display a Logout button once the user logs in. Find the following in our `src/App.js`.
 
-``` javascript
+``` coffee
 <LinkContainer to="/signup">
   <NavItem>Signup</NavItem>
 </LinkContainer>
@@ -78,7 +78,7 @@ We can now use this to display a Logout button once the user logs in. Find the f
 
 {% include code-marker.html %} And replace it with this:
 
-``` javascript
+``` coffee
 { this.state.userToken
   ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
   : [ <LinkContainer key="1" to="/signup">

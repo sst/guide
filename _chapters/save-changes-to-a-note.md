@@ -8,7 +8,7 @@ Now that our note loads into our form, let's work on saving the changes we make 
 
 {% include code-marker.html %} Replace the `handleSubmit` method in `src/containers/Notes.js` with the following.
 
-``` javascript
+``` coffee
 saveNote(note) {
   return invokeApig({
     path: `/notes/${this.props.params.id}`,

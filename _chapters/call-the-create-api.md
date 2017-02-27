@@ -12,7 +12,7 @@ Since we are going to be calling API Gateway a few times in our app, let's first
 
 {% include code-marker.html %} Let's create a helper function in `src/libs/awsLib.js` and add the following. Make sure to create the `src/libs/` directory first.
 
-``` javascript
+``` coffee
 import config from '../config.js';
 
 export async function invokeApig(
@@ -41,7 +41,7 @@ We just made it so that we can call `invokeApig` from now on and only pass in th
 
 {% include code-marker.html %} Now to call our API we need the API Gateway URL. Let's add that to our `src/config.js` above the `cognito: {` line.
 
-``` javascript
+```
 apiGateway: {
   URL: 'https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod',
 },

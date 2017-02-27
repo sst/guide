@@ -10,7 +10,7 @@ Currently, our Home containers is very simple. Let's add the conditional renderi
 
 {% include code-marker.html %} Replace our `src/containers/Home.js` with the following.
 
-``` javascript
+``` coffee
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import {

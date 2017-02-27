@@ -8,7 +8,7 @@ Now that our container loads a note on `componentWillMount`, let's go ahead and 
 
 {% include code-marker.html %} Replace our placeholder `render` method in `src/containers/Notes.js` with the following.
 
-``` javascript
+``` coffee
 validateForm() {
   return this.state.content.length > 0;
 }
@@ -131,7 +131,7 @@ this.state = {
 
 {% include code-marker.html %} Let's also add some styles by adding the following to `src/containers/Notes.css`.
 
-``` javascript
+``` css
 .Notes form {
   padding-bottom: 15px;
 }

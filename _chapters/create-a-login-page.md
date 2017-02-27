@@ -10,7 +10,7 @@ Let's create a page where the users for our app can sign in with their login cre
 
 {% include code-marker.html %} Create a new file `src/containers/Login.js` and add the following.
 
-``` javascript
+``` coffee
 import React, { Component } from 'react';
 import {
   Button,
@@ -110,7 +110,7 @@ These styles roughly target any non-mobile screen sizes.
 
 {% include code-marker.html %} Now we link this container up with the rest of our app by adding the following line to `src/Routes.js` below our `<IndexRoute>`.
 
-``` javascript
+``` coffee
 <Route path="login" component={Login} />
 ```
 

@@ -87,7 +87,7 @@ We'll conditionally render our app based on the `isLoadingUserToken` flag.
 
 {% include code-marker.html %} Our `render` method in `src/App.js` should be as follows.
 
-``` javascript
+``` coffee
 render() {
   const childProps = {
     userToken: this.state.userToken,
