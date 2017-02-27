@@ -170,7 +170,7 @@ $ serverless webpack invoke --function create --path event.json
 
 The response should look similar to this.
 
-```
+``` 
 {
   statusCode: 200,
   headers: {
