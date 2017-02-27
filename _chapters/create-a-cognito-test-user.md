@@ -14,7 +14,7 @@ First, we will use AWS CLI to sign up a user with username, password and email.
 
 {% highlight bash %}
 $ aws cognito-idp sign-up \
-  --client-id YOUR_USER_POOL_APP_ID \
+  --client-id YOUR_USER_POOL_APP_CLIENT_ID \
   --username admin \
   --password Passw0rd! \
   --user-attributes Name=email,Value=admin@example.com
