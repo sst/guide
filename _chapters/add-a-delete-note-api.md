@@ -98,7 +98,7 @@ $ serverless webpack invoke --function delete --path event.json
 
 And the response should look similar to this.
 
-``` javascript
+``` bash
 {
   statusCode: 200,
   headers: 
