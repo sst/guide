@@ -103,7 +103,8 @@ description: Serverless Stack is a comprehensive step-by-step guide to creating 
     </div>
     <div class="share">
       <p>Share this guide</p>
-      {% include share-buttons.html url=site.url title=site.title %}
+      {% capture full_title %}{{ site.title }} - {{ site.description }}{% endcapture %}
+      {% include share-buttons.html url=site.url title=full_title %}
     </div>
   </div>
 </div>
