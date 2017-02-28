@@ -1,0 +1,12 @@
+<ul class="share-buttons">
+  <!-- Facebook -->
+  <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ include.url }}&p[title]={{ include.title }}" target="_blank" title="Share on Facebook"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a></li>
+  <!-- Twitter -->
+  <li><a href="https://twitter.com/intent/tweet?text={{ include.title }}&url={{ include.url }}" target="_blank" title="Tweet"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i><span class="sr-only">Tweet</span></a></li>
+  <!-- Reddit -->
+  <li><a href="http://www.reddit.com/submit?url={{ include.url }}&title={{ include.title }}" target="_blank" title="Submit to Reddit"><i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a></li>
+  <!-- LinkedIn -->
+  <li><a href="http://www.linkedin.com/shareArticle?mini=true&url={{ include.url }}&title={{ include.title }}" target="_blank" title="Share on LinkedIn"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i><span class="sr-only">Share on LinkedIn</span></a></li>
+  <!-- Email -->
+  <li><a href="mailto:?subject={{ include.title }}&body={{ include.title }}%0A%0A{{ include.url }}" target="_blank" title="Send email"><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i><span class="sr-only">Send email</span></a></li>
+</ul>

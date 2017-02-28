@@ -95,3 +95,15 @@ description: Serverless Stack is a comprehensive step-by-step guide to creating 
 
 - [Wrapping up]({% link _chapters/wrapping-up.md %})
 
+<div class="extras">
+  <div class="container">
+    <div class="newsletter">
+      <p>Get email updates on any new articles we publish</p>
+      <a href="{{ site.mailchimp_signup_form }}" target="_blank">Subscribe to our newsletter</a>
+    </div>
+    <div class="share">
+      <p>Share this guide</p>
+      {% include share-buttons.html url=site.url title=site.title %}
+    </div>
+  </div>
+</div>

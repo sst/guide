@@ -25,6 +25,8 @@ logo: /assets/og-image.jpg
 github_repo: "https://github.com/AnomalyInnovations/serverless-stack-com"
 github_edit_prefix: "/edit/master/"
 
+mailchimp_signup_form: "http://eepurl.com/cEaBlf"
+
 google_analytics: "UA-3536629-11"
 
 collections:

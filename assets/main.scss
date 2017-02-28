@@ -64,20 +64,6 @@ ul.share-buttons .sr-only {
   overflow: hidden;
 }
 
-// Homepage pitch
-div.home .pitch {
-  font-family: $base-font-family;
-  padding: 0 20px 2 * $spacing-unit - 10px;
-  text-align: center;
-  font-size: 24px;
-  color: #555;
-
-  @include media-query($on-palm) {
-    font-size: 20px;
-    padding: 0 5px $spacing-unit - 10px;
-  }
-}
-
 // Change markers
 span.code-marker {
   line-height: 1.1;
@@ -91,4 +77,79 @@ span.code-marker {
   border-radius: 3px;
   display: inline-block;
   vertical-align: middle; 
+}
+
+/**
+ * Homepage
+ */
+div.home .pitch {
+  font-family: $base-font-family;
+  margin-bottom: 2 * $spacing-unit - 6px;
+  padding: 0 20px;
+  text-align: center;
+  font-size: 24px;
+  color: #555;
+
+  @include media-query($on-palm) {
+    font-size: 20px;
+    padding: 0 5px 0;
+    margin-bottom: $spacing-unit - 5px;
+  }
+}
+
+div.home .share-container {
+  text-align: center;
+
+  .share {
+    display: inline-block;
+    border-top: 1px solid darken($background-color, 10%);
+    padding: 22px 40px 2 * $spacing-unit - 10px;
+
+    @include media-query($on-palm) {
+      padding: 15px 40px $spacing-unit - 10px;
+    }
+
+    ul li {
+      padding: 0 5px;
+    }
+  }
+}
+
+div.home .extras {
+  text-align: center;
+  margin-top: $spacing-unit + 10px;
+
+  div.container {
+    display: inline-block;
+    padding: $spacing-unit $spacing-unit + 15px $spacing-unit + 7px;
+    background-color: darken($background-color, 5%);
+    border-radius: 5px;
+
+    p {
+      font-size: 18px;
+      font-weight: 300;
+    }
+
+    div.newsletter {
+      margin-bottom: 25px;
+      a {
+        padding: 14px 22px;
+        font-weight: bold;
+        border-radius: 4px;
+        line-height: 1.2;
+        display: inline-block;
+        background-color: $brand-color;
+        color: white;
+        &:hover {
+          background-color: darken($brand-color, 10%);
+        }
+      }
+    }
+
+    div.share {
+      ul.share-buttons li {
+        padding: 0 5px;
+      }
+    }
+  }
 }
