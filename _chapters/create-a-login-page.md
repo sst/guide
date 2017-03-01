@@ -52,6 +52,7 @@ export default class Login extends Component {
           <FormGroup controlId="username" bsSize="large">
             <ControlLabel>Email</ControlLabel>
             <FormControl
+              autoFocus
               type="text"
               value={this.state.username}
               onChange={this.handleChange} />
@@ -85,9 +86,11 @@ We are introducing a couple of new concepts in this.
 
 3. But to update the state when the user types something into these fields; we'll call a handle function called `handleChange`. This function grabs the `id` (set as `controlId` for the `<FormGroup>`) of the field being changed and updates it's state with the value the user is typing in. Also, to have access to the `this` keyword inside `handleChange` we store the reference to an anonymous function like so: `handleChange = (event) => { } `.
 
-4. We also link up our submit button with our state by using a validate function called `validateForm`. This simply checks if our fields are non-empty, but can easily do something more complicated.
+4. We are setting the `autoFocus` flag for our username field. So that when our form loads, it sets focus to it.
 
-5. Finally, we trigger our callback `handleSubmit` when the form is submitted. For now we are simply suppressing the browsers default behavior on submit but we'll do more here later.
+5. We also link up our submit button with our state by using a validate function called `validateForm`. This simply checks if our fields are non-empty, but can easily do something more complicated.
+
+6. Finally, we trigger our callback `handleSubmit` when the form is submitted. For now we are simply suppressing the browsers default behavior on submit but we'll do more here later.
 
 {% include code-marker.html %} Let's add a couple of styles to this in the file `src/containers/Login.css`.
 

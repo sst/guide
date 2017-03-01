@@ -74,6 +74,7 @@ class Signup extends Component {
         <FormGroup controlId="confirmationCode" bsSize="large">
           <ControlLabel>Confirmation Code</ControlLabel>
           <FormControl
+            autoFocus
             type="tel"
             value={this.state.confirmationCode}
             onChange={this.handleChange} />
@@ -97,6 +98,7 @@ class Signup extends Component {
         <FormGroup controlId="username" bsSize="large">
           <ControlLabel>Email</ControlLabel>
           <FormControl
+            autoFocus
             type="text"
             value={this.state.username}
             onChange={this.handleChange} />
@@ -151,7 +153,9 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 4. Since we have two forms we have two validation methods called `validateForm` and `validateConfirmationForm`.
 
-5. For now our `handleSubmit` and `handleConfirmationSubmit` don't do a whole lot besides setting the `isLoading` state and a dummy value for the `newUser` state.
+5. We are setting the `autoFocus` flags on our username and the confirmation code fields.
+
+6. For now our `handleSubmit` and `handleConfirmationSubmit` don't do a whole lot besides setting the `isLoading` state and a dummy value for the `newUser` state.
 
 {% include code-marker.html %} Also, let's add a couple of styles in `src/containers/Signup.css`.
 
