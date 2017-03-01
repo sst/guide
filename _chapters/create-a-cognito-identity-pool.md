@@ -40,9 +40,7 @@ It will warn you to read the documentation. Select **Ok** to edit.
 
 ![Select Confirm Edit Policy Screenshot]({{ site.url }}/assets/cognito-identity-pool/select-confirm-edit-policy.png)
 
-{% include code-marker.html %} Add the following policy into the editor.
-
-Note the line ``arn:aws:s3:::react-notes-app/${cognito-identity.amazonaws.com:sub}``, where **react-notes-app** is the name of our S3 bucket, and **cognito-identity.amazonaws.com:sub** is the authenticated user's federated identity ID. This policy grants the authenticated user access to files with filenames prefixed by the user's id in the S3 bucket as a security measure.
+{% include code-marker.html %} Add the following policy into the editor. Replace `YOUR_S3_UPLOADS_BUCKET_NAME` with the **bucket name** from the **Create a S3 bucket for file uploads chapter**.
 
 ``` json
 {
@@ -65,19 +63,27 @@ Note the line ``arn:aws:s3:::react-notes-app/${cognito-identity.amazonaws.com:su
         "s3:*"
       ],
       "Resource": [
-        "arn:aws:s3:::react-notes-app/${cognito-identity.amazonaws.com:sub}*"
+        "arn:aws:s3:::YOUR_S3_UPLOADS_BUCKET_NAME/${cognito-identity.amazonaws.com:sub}*"
       ]
     }
   ]
 }
 ```
 
+Note **cognito-identity.amazonaws.com:sub** is the authenticated user's federated identity ID. This policy grants the authenticated user access to files with filenames prefixed by the user's id in the S3 bucket as a security measure.
+
 Select **Allow**.
 
 ![Submit Identity Pool Policy Screenshot]({{ site.url }}/assets/cognito-identity-pool/submit-identity-pool-policy.png)
 
-Our Identity Pool should now be created.
+Our Identity Pool should now be created. Let's find out the Identity Pool ID.
+
+Select **Dashboard** from the left panel, then select **Edit identity pool**.
 
 ![Identity Pool Created Screenshot]({{ site.url }}/assets/cognito-identity-pool/identity-pool-created.png)
+
+Take a note of the **Identity pool ID** which will be required in the later chapters.
+
+![Identity Pool Created Screenshot]({{ site.url }}/assets/cognito-identity-pool/identity-pool-id.png)
 
 Next we'll setup the Serverless Framework to create our backend APIs.

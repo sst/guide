@@ -63,7 +63,7 @@ And run the following.
 aws cognito-idp admin-initiate-auth \
   --region us-east-1 \
   --user-pool-id YOUR_COGNITO_USER_POOL_ID \
-  --client-id YOUR_COGNITO_USER_POOL_APP_ID \
+  --client-id YOUR_USER_POOL_APP_CLIENT_ID \
   --auth-flow ADMIN_NO_SRP_AUTH \
   --auth-parameters USERNAME=admin,PASSWORD=Passw0rd!
 ```
