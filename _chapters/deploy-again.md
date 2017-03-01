@@ -18,10 +18,10 @@ Now that are app is build and ready in the `build/` directory, let's deploy to S
 
 ### Upload to S3
 
-Run the following from our working directory to upload our app to our main S3 Bucket.
+Run the following from our working directory to upload our app to our main S3 Bucket. Make sure to replace `YOUR_S3_DEPLOY_BUCKET_NAME` with the S3 Bucket we created in the [Create a S3 bucket]({% link _chapters/create-a-s3-bucket.md %}) chapter.
 
 ``` bash
-$ aws s3 sync build/ s3://notes-app-client
+$ aws s3 sync build/ s3://YOUR_S3_DEPLOY_BUCKET_NAME
 ```
 
 Our changes should be live on S3.
@@ -34,7 +34,7 @@ Now to ensure that CloudFront is serving out the updated version of our app, let
 
 CloudFront allows you to invalidate objects in the distribution by passing in the path of the object. But it also allows you to use a wildcard (`/*`) to invalidate the entire distribution in a single command. This is recommended when we are deploying a new version of our app.
 
-To do this we'll need the **Distribution ID** of both of our CloudFront Distributions. You can get it by clicking on the distribution from the list of CloudFront Distributions.
+To do this we'll need the **Distribution ID** of **both** of our CloudFront Distributions. You can get it by clicking on the distribution from the list of CloudFront Distributions.
 
 ![CloudFront Distributions ID screenshot]({{ site.url }}/assets/cloudfront-distribution-id.png)
 
@@ -44,11 +44,11 @@ Now we can use the AWS CLI to invalidate the cache of the two distributions. As 
 $ aws configure set preview.cloudfront true
 ```
 
-And to invalidate the cache we run the following.
+And to invalidate the cache we run the following. Make sure to replace `YOUR_CF_DISTRIBUTION_ID` and `YOUR_WWW_CF_DISTRIBUTION_ID` with the ones from above.
 
 ``` bash
-$ aws cloudfront create-invalidation --distribution-id E1KTCKT9SOAHBW --paths "/*"
-$ aws cloudfront create-invalidation --distribution-id E3MQXGQ47VCJB0 --paths "/*"
+$ aws cloudfront create-invalidation --distribution-id YOUR_CF_DISTRIBUTION_ID --paths "/*"
+$ aws cloudfront create-invalidation --distribution-id YOUR_WWW_CF_DISTRIBUTION_ID --paths "/*"
 ```
 
 This invalidates our distribution for both the www and non-www versions of our domain. If you click on the **Invalidations** tab, you should see your invalidation request being processed.

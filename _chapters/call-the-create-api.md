@@ -39,11 +39,13 @@ export async function invokeApig(
 
 We just made it so that we can call `invokeApig` from now on and only pass in the parameters that are necessary. Also, it adds our user token to the header of the request.
 
-{% include code-marker.html %} Now to call our API we need the API Gateway URL. Let's add that to our `src/config.js` above the `cognito: {` line.
+Now to call our API we need the API Gateway URL that was generated back in the [Deploy the APIs]({% link _chapters/deploy-the-apis.md %}) chapter.
+
+{% include code-marker.html %} Let's add that to our `src/config.js` above the `cognito: {` line. Make sure to replace `https://YOUR_API_GATEWAY_URL` with your URL.
 
 ```
 apiGateway: {
-  URL: 'https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod',
+  URL: 'https://YOUR_API_GATEWAY_URL',
 },
 ```
 

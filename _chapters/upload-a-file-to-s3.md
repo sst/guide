@@ -26,7 +26,7 @@ $ npm install aws-sdk --save
 
 {% include code-marker.html %} Next, let's append the following to our `src/libs/awsLib.js`.
 
-``` javascript
+``` coffee
 export function getAwsCredentials(userToken) {
   const authenticator = `cognito-idp.${config.cognito.REGION}.amazonaws.com/${config.cognito.USER_POOL_ID}`;
 
@@ -58,14 +58,12 @@ export function getAwsCredentials(userToken) {
 import AWS from 'aws-sdk';
 ```
 
-{% include code-marker.html %} To get our AWS credentials we need to add the following to our `src/config.js` in the `cognito` block.
+{% include code-marker.html %} To get our AWS credentials we need to add the following to our `src/config.js` in the `cognito` block. Make sure to replace `YOUR_IDENTITY_POOL_ID` with your **Identity pool ID** from the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter.
 
 ```
 REGION: 'us-east-1',
-IDENTITY_POOL_ID: 'us-east-1:bdff90fd-8265-4356-9698-0d997fb05d38',
+IDENTITY_POOL_ID: 'YOUR_IDENTITY_POOL_ID',
 ```
-
-Be sure to replace the `IDENTITY_POOL_ID` with your own from the Cognito Identity Pool chapter.
 
 Now we are ready to upload a file to S3.
 
@@ -103,11 +101,11 @@ export async function s3Upload(file, userToken) {
 }
 ```
 
-{% include code-marker.html %} And add this to our `src/config.js` above the `apiGateway` block.
+{% include code-marker.html %} And add this to our `src/config.js` above the `apiGateway` block. Make sure to replace `YOUR_S3_UPLOADS_BUCKET_NAME` with the your S3 Bucket name from the [Create a S3 bucket for file uploads]({% link _chapters/create-a-s3-bucket-for-file-uploads.md %}) chapter.
 
 ```
 s3: {
-  BUCKET: 'notes-app-uploads',
+  BUCKET: 'YOUR_S3_UPLOADS_BUCKET_NAME',
   DOMAIN: 'https://s3.amazonaws.com'
 },
 ```
