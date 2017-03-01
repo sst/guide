@@ -87,7 +87,7 @@ export async function s3Upload(file, userToken) {
 
   const s3 = new AWS.S3({
     params: {
-      Bucket: config.S3.BUCKET,
+      Bucket: config.s3.BUCKET,
     }
   });
   const filename = `${AWS.config.credentials.identityId}-${Date.now()}-${file.name}`;
@@ -105,7 +105,7 @@ export async function s3Upload(file, userToken) {
         return;
       }
 
-      resolve(`${config.S3.DOMAIN}/${config.S3.BUCKET}/${filename}`);
+      resolve(`${config.s3.DOMAIN}/${config.S3.BUCKET}/${filename}`);
     })
   ));
 }
@@ -114,7 +114,7 @@ export async function s3Upload(file, userToken) {
 {% include code-marker.html %} And add this to our `src/config.js` above the `apiGateway` block.
 
 ```
-S3: {
+s3: {
   BUCKET: 'notes-app-uploads',
   DOMAIN: 'https://s3.amazonaws.com'
 },
