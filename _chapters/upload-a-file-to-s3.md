@@ -28,12 +28,14 @@ $ npm install aws-sdk --save
 
 ``` javascript
 export function getAwsCredentials(userToken) {
-  AWS.config.update({ region: config.aws.REGION });
+  const authenticator = `cognito-idp.${config.cognito.REGION}.amazonaws.com/${config.cognito.USER_POOL_ID}`;
+
+  AWS.config.update({ region: config.cognito.REGION });
 
   AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-    IdentityPoolId: config.aws.IDENTITY_POOL_ID,
+    IdentityPoolId: config.cognito.IDENTITY_POOL_ID,
     Logins: {
-      [config.cognito.AUTHENTICATOR]: userToken
+      [authenticator]: userToken
     }
   });
 
@@ -56,24 +58,14 @@ export function getAwsCredentials(userToken) {
 import AWS from 'aws-sdk';
 ```
 
-{% include code-marker.html %} To get our AWS credentials we need to use the following in our `src/config.js` below the `MAX_ATTACHMENT_SIZE` line.
+{% include code-marker.html %} To get our AWS credentials we need to add the following to our `src/config.js` in the `cognito` block.
 
 ```
-aws: {
-  REGION: 'us-east-1',
-  IDENTITY_POOL_ID: 'us-east-1:bdff90fd-8265-4356-9698-0d997fb05d38',
-},
+REGION: 'us-east-1',
+IDENTITY_POOL_ID: 'us-east-1:bdff90fd-8265-4356-9698-0d997fb05d38',
 ```
 
 Be sure to replace the `IDENTITY_POOL_ID` with your own from the Cognito Identity Pool chapter.
-
-{% include code-marker.html %} And also add this line in the `cognito` block of `src/config.js`.
-
-```
-AUTHENTICATOR: 'cognito-idp.us-east-1.amazonaws.com/us-east-1_WdHEGAi8O',
-```
-
-The `AUTHENTICATOR` is the url that the SDK will use to authenticate the user. Replace the `us-east-1_WdHEGAi8O` with your Cognito User Pool ID.
 
 Now we are ready to upload a file to S3.
 
@@ -105,7 +97,7 @@ export async function s3Upload(file, userToken) {
         return;
       }
 
-      resolve(`${config.s3.DOMAIN}/${config.S3.BUCKET}/${filename}`);
+      resolve(`${config.s3.DOMAIN}/${config.s3.BUCKET}/${filename}`);
     })
   ));
 }
