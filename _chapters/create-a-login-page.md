@@ -53,7 +53,7 @@ export default class Login extends Component {
             <ControlLabel>Email</ControlLabel>
             <FormControl
               autoFocus
-              type="text"
+              type="email"
               value={this.state.username}
               onChange={this.handleChange} />
           </FormGroup>
