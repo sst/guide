@@ -2,6 +2,7 @@
 layout: post
 title: Add a Get Note API
 date: 2017-01-01 00:00:00
+code: backend
 ---
 
 Now that we created a note and saved it to our database. Let's add an API to retrieve a note given it's id.

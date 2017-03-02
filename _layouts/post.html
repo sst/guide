@@ -12,6 +12,21 @@ layout: default
     {{ content }}
   </div>
 
+  {% if page.code == 'backend' or page.code == 'frontend' %}
+  <div class="post-code-link">
+    {% capture chapter_name %}{{ page.id | replace: '/chapters/', '' }}{% endcapture %}
+    <p>For reference, here is the code so far.</p>
+    <a class="previous" href="https://github.com/AnomalyInnovations/serverless-stack-demo-api/tree/{{ chapter_name }}">
+      <i class="fa fa-github" aria-hidden="true"></i>
+      {% if page.code == 'backend' %}
+      API Source :{{ chapter_name }}
+      {% else %}
+      Client Source :{{ chapter_name }}
+      {% endif %}
+    </a>
+  </div>
+  {% endif %}
+
   <div class="post-footer">
     {% if page.previous.url %}
     <a class="previous" href="{{ page.previous.url }} ">&larr; Previous</a>
