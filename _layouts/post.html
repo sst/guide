@@ -16,14 +16,17 @@ layout: default
   <div class="post-code-link">
     {% capture chapter_name %}{{ page.id | replace: '/chapters/', '' }}{% endcapture %}
     <p>For reference, here is the code so far.</p>
-    <a class="previous" href="https://github.com/AnomalyInnovations/serverless-stack-demo-api/tree/{{ chapter_name }}">
+    {% if page.code == 'backend' %}
+    <a class="previous" href="{{ site.backend_github_repo }}/tree/{{ chapter_name }}">
       <i class="fa fa-github" aria-hidden="true"></i>
-      {% if page.code == 'backend' %}
-      API Source :{{ chapter_name }}
-      {% else %}
-      Client Source :{{ chapter_name }}
-      {% endif %}
+      Backend Source :{{ chapter_name }}
     </a>
+    {% else %}
+    <a class="previous" href="{{ site.frontend_github_repo }}/tree/{{ chapter_name }}">
+      <i class="fa fa-github" aria-hidden="true"></i>
+      Frontend Source :{{ chapter_name }}
+    </a>
+    {% endif %}
   </div>
   {% endif %}
 
