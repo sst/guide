@@ -4,9 +4,12 @@ title: How to Get Help?
 date: 2016-12-23 00:00:00
 ---
 
-In case you find yourself having problems with a certain step, we want to make sure that we are around to help you fix it and figure it out. There are a few ways to get in touch with us.
+In case you find yourself having problems with a certain step, we want to make sure that we are around to help you fix it and figure it out. There are a few ways to get help.
 
-- Send us an [email](mailto:{{ site.email }}) if you have an urgent question. We'll be sure to respond within a day.
+- Use the live chat button on the bottom right of the page to send us your questions.
+- Or if we are not around, send us an [email](mailto:{{ site.email }}). We will make sure to respond within a day.
+
+![Live chat button screenshot]({{ site.url }}/assets/live-chat-button.png)
 
 Also, this entire guide is hosted on [GitHub](https://github.com/AnomalyInnovations/serverless-stack-com). So you can always:
 
