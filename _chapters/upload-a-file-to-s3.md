@@ -26,14 +26,16 @@ $ npm install aws-sdk --save
 
 {% include code-marker.html %} Next, let's append the following to our `src/libs/awsLib.js`.
 
-``` javascript
+``` coffee
 export function getAwsCredentials(userToken) {
-  AWS.config.update({ region: config.aws.REGION });
+  const authenticator = `cognito-idp.${config.cognito.REGION}.amazonaws.com/${config.cognito.USER_POOL_ID}`;
+
+  AWS.config.update({ region: config.cognito.REGION });
 
   AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-    IdentityPoolId: config.aws.IDENTITY_POOL_ID,
+    IdentityPoolId: config.cognito.IDENTITY_POOL_ID,
     Logins: {
-      [config.cognito.AUTHENTICATOR]: userToken
+      [authenticator]: userToken
     }
   });
 
@@ -56,24 +58,12 @@ export function getAwsCredentials(userToken) {
 import AWS from 'aws-sdk';
 ```
 
-{% include code-marker.html %} To get our AWS credentials we need to use the following in our `src/config.js` below the `MAX_ATTACHMENT_SIZE` line.
+{% include code-marker.html %} To get our AWS credentials we need to add the following to our `src/config.js` in the `cognito` block. Make sure to replace `YOUR_IDENTITY_POOL_ID` with your **Identity pool ID** from the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter.
 
 ```
-aws: {
-  REGION: 'us-east-1',
-  IDENTITY_POOL_ID: 'us-east-1:bdff90fd-8265-4356-9698-0d997fb05d38',
-},
+REGION: 'us-east-1',
+IDENTITY_POOL_ID: 'YOUR_IDENTITY_POOL_ID',
 ```
-
-Be sure to replace the `IDENTITY_POOL_ID` with your own from the Cognito Identity Pool chapter.
-
-{% include code-marker.html %} And also add this line in the `cognito` block of `src/config.js`.
-
-```
-AUTHENTICATOR: 'cognito-idp.us-east-1.amazonaws.com/us-east-1_WdHEGAi8O',
-```
-
-The `AUTHENTICATOR` is the url that the SDK will use to authenticate the user. Replace the `us-east-1_WdHEGAi8O` with your Cognito User Pool ID.
 
 Now we are ready to upload a file to S3.
 
@@ -87,7 +77,7 @@ export async function s3Upload(file, userToken) {
 
   const s3 = new AWS.S3({
     params: {
-      Bucket: config.S3.BUCKET,
+      Bucket: config.s3.BUCKET,
     }
   });
   const filename = `${AWS.config.credentials.identityId}-${Date.now()}-${file.name}`;
@@ -105,17 +95,17 @@ export async function s3Upload(file, userToken) {
         return;
       }
 
-      resolve(`${config.S3.DOMAIN}/${config.S3.BUCKET}/${filename}`);
+      resolve(`${config.s3.DOMAIN}/${config.s3.BUCKET}/${filename}`);
     })
   ));
 }
 ```
 
-{% include code-marker.html %} And add this to our `src/config.js` above the `apiGateway` block.
+{% include code-marker.html %} And add this to our `src/config.js` above the `apiGateway` block. Make sure to replace `YOUR_S3_UPLOADS_BUCKET_NAME` with the your S3 Bucket name from the [Create a S3 bucket for file uploads]({% link _chapters/create-a-s3-bucket-for-file-uploads.md %}) chapter.
 
 ```
-S3: {
-  BUCKET: 'notes-app-uploads',
+s3: {
+  BUCKET: 'YOUR_S3_UPLOADS_BUCKET_NAME',
   DOMAIN: 'https://s3.amazonaws.com'
 },
 ```

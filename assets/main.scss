@@ -6,6 +6,7 @@
 // Our variables
 $base-font-family:      Lato, sans-serif;
 $heading-font-family:   "PT Serif", serif;
+$code-font-family:      "Source Pro", monospace;
 $base-font-size:        16px;
 $base-font-weight:      400;
 $small-font-size:       $base-font-size * 0.875;
@@ -42,6 +43,11 @@ $on-laptop:             800px;
 // Import partials from the `minima` theme.
 @import "theme";
 
+
+
+/**
+ * Globals
+ */
 // Share buttons
 ul.share-buttons {
   list-style: none;
@@ -78,6 +84,24 @@ span.code-marker {
   display: inline-block;
   vertical-align: middle; 
 }
+
+// Source Code Links
+div.post-code-link {
+  border: 2px solid darken($background-color, 5%);
+  border-radius: 5px;
+  padding: $spacing-unit - 5px;
+
+  p {
+    color: $secondary-text-color;
+  }
+
+  a {
+    font-family: $code-font-family;
+    font-size: 18px;
+  }
+}
+
+
 
 /**
  * Homepage
@@ -151,5 +175,33 @@ div.home .extras {
         padding: 0 5px;
       }
     }
+  }
+}
+
+
+
+/**
+ * Cost Table
+ */
+table.cost-table {
+  td, th {
+    &:first-child {
+      min-width: 170px;
+
+      @include media-query($on-palm) {
+        min-width: 110px;
+      }
+    }
+    &:last-child {
+      min-width: 60px;
+    }
+  }
+
+  tr:nth-child(even) {
+    background-color: transparent;
+  }
+
+  tr:last-child {
+    background-color: lighten($grey-color-light, 10%);
   }
 }

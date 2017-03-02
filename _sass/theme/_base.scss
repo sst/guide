@@ -159,7 +159,7 @@ code {
 
 code {
   padding: 1px 5px;
-  font-family: "Source Pro", monospace;
+  font-family: $code-font-family;
 }
 
 pre {
@@ -218,4 +218,28 @@ pre {
   path {
     fill: $grey-color;
   }
+}
+
+
+
+/**
+ * Tables
+ */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: $spacing-unit / 2;
+}
+
+td, th {
+  border: 1px solid $grey-color-light;
+  padding: 8px;
+}
+
+thead {
+  background-color: lighten($grey-color-light, 10%);
+}
+
+tr:nth-child(even) {
+  background-color: lighten($grey-color-light, 10%);
 }

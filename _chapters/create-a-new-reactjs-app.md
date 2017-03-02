@@ -8,28 +8,28 @@ Let's get started with our frontend. We are going to create a single page app us
 
 ### Install Create React App
 
-{% include code-marker.html %} Run the following command in your working directory
+{% include code-marker.html %} Run the following command.
 
 ``` bash
 $ npm install -g create-react-app
 ```
 
-This installs the NPM package globally.
+This installs the Create React App NPM package globally.
 
 ### Create a New App
 
-{% include code-marker.html %} From your working directory, run the following command to create our note taking app.
+{% include code-marker.html %} From your working directory, run the following command to create the client for our notes app.
 
 ``` bash
-$ create-react-app note-app
+$ create-react-app notes-app-client
 ```
 
-This should take a second to run, and it will create your new project.
+This should take a second to run, and it will create your new project and your new working directory.
 
-{% include code-marker.html %} Now let's run our project.
+{% include code-marker.html %} Now let's go into our working directory and run our project.
 
 ``` bash
-$ cd note-app
+$ cd notes-app-client
 $ npm start
 ```
 

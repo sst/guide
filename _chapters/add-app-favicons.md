@@ -18,7 +18,11 @@ Click **Select your Favicon picture** to upload our icon.
 
 ![Realfavicongenerator.net screenshot]({{ site.url }}/assets/realfavicongenerator.png)
 
-Once you upload your icon, it'll generate a few different versions that you need.
+Once you upload your icon, it'll show you a preview of your icon on various platforms. Scroll down the page and hit the **Generate your Favicons and HTML code** button.
+
+![Realfavicongenerator.net screenshot]({{ site.url }}/assets/realfavicongenerator-generate.png)
+
+This should generate your favicon package and the accompanying code.
 
 Click **Favicon package** to download the generated favicons. And copy all the files over to your `public/` directory.
 

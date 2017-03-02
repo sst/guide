@@ -24,7 +24,7 @@ You can grab the S3 website endpoint from the **Static website hosting** panel f
 
 ![S3 static website domain screenshot]({{ site.url }}/assets/s3-static-website-domain.png)
 
-And paste that URL in the **Origin Domain Name** field. In our case it is, `http://notes-app-client.s3-website-us-east-1.amazonaws.com`.
+And paste that URL in the **Origin Domain Name** field. In my case it is, `http://notes-app-client.s3-website-us-east-1.amazonaws.com`.
 
 ![Fill origin domain name field screenshot]({{ site.url }}/assets/fill-origin-domain-name-field.png)
 

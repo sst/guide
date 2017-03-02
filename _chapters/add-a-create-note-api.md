@@ -2,6 +2,7 @@
 layout: post
 title: Add a Create Note API
 date: 2016-12-31 00:00:00
+code: backend
 ---
 
 Let's get started on our backend by first adding an API to create a note. This API will take the note object as the input and store it in the database with a new id. The note object will contain the `content` field (the content of the note) and an `attachment` field (the URL to the uploaded file).
@@ -275,4 +276,3 @@ export async function main(event, context, callback) {
 ```
 
 Next, we are going to write the API to get a note given it's id.
-

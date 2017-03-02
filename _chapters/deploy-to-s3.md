@@ -18,10 +18,10 @@ This packages all of our assets and places them in the `build/` directory.
 
 ### Upload to S3
 
-Now to deploy simply run the following command; where `notes-app-client` is the name of the bucket we previously created.
+Now to deploy simply run the following command; where `YOUR_S3_DEPLOY_BUCKET_NAME` is the name of the S3 Bucket we created in the [Create a S3 bucket]({% link _chapters/create-a-s3-bucket.md %}) chapter.
 
 ``` bash
-$ aws s3 sync build/ s3://notes-app-client
+$ aws s3 sync build/ s3://YOUR_S3_DEPLOY_BUCKET_NAME
 ```
 
 All this command does is that it syncs the `build/` directory with our bucket on S3. Just as a sanity check, go into the S3 section in your [AWS Console](https://console.aws.amazon.com/console/home) and check if your bucket has the files we just uploaded.

@@ -10,7 +10,7 @@ To create a new domain and have it redirect we are going to use the redirection 
 
 ### Create S3 Bucket to Redirect Requests
 
-Create a new S3 Bucket through the [AWS Console](https://console.aws.amazon.com) and call it `www-notes-app-client`. The name doesn't really matter but it just helps us distinguish between the two.
+Create a new S3 Bucket through the [AWS Console](https://console.aws.amazon.com). The name doesn't really matter but it pick something that helps us distinguish between the two.
 
 ![Create S3 Redirect Bucket screenshot]({{ site.url }}/assets/create-s3-redirect-bucket.png)
 

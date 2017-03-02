@@ -2,6 +2,7 @@
 layout: post
 title: Add a Delete Note API
 date: 2017-01-04 00:00:00
+code: backend
 ---
 
 Finally, we are going to create an API that allows a user to delete a given note.

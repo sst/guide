@@ -8,13 +8,13 @@ Before we link up our login form with our AWS Cognito setup let's grab our Cogni
 
 ### Load AWS Cognito Details
 
-{% include code-marker.html %} We'll take the Cognito **User Pool Id** and our **Client Id** (from the Cognito User Pool chapter) and save into it `src/config.js` using the following.
+{% include code-marker.html %} Save the following into `src/config.js` and replace `YOUR_COGNITO_USER_POOL_ID` and `YOUR_COGNITO_APP_CLIENT_ID` with the Cognito **Pool Id** and **App Client id** from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
 
 ``` javascript
 export default {
   cognito: {
-    USER_POOL_ID : 'us-east-1_exampleid',
-    CLIENT_ID : '12sr50exampleclientid',
+    USER_POOL_ID : 'YOUR_COGNITO_USER_POOL_ID',
+    APP_CLIENT_ID : 'YOUR_COGNITO_APP_CLIENT_ID',
   }
 };
 ```
@@ -53,7 +53,7 @@ The login code itself is relatively simple.
 login(username, password) {
   const userPool = new CognitoUserPool({
     UserPoolId: config.cognito.USER_POOL_ID,
-    ClientId: config.cognito.CLIENT_ID
+    ClientId: config.cognito.APP_CLIENT_ID
   });
   const authenticationData = {
     Username: username,

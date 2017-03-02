@@ -2,6 +2,7 @@
 layout: post
 title: Setup the Serverless Framework
 date: 2016-12-30 00:00:00
+code: backend
 ---
 
 We are going to be using [AWS Lambda](https://aws.amazon.com/lambda/) and [Amazon API Gateway](https://aws.amazon.com/api-gateway/) to create our backend. AWS Lambda is a compute service that lets you run code without provisioning or managing servers. You pay only for the compute time you consume - there is no charge when your code is not running. And API Gateway makes it easy for developers to create, publish, maintain, monitor, and secure APIs. Working directly with AWS Lambda and configuring API Gateway can be a bit cumbersome; so we are going to use the [Serverless Framework](https://serverless.com) to help us with it.
@@ -12,7 +13,7 @@ In this chapter, we are going to setup the Serverless Framework on our local dev
 
 ### Install Serverless
 
-{% include code-marker.html %} Create a project folder to store the Lambda code.
+{% include code-marker.html %} Create a directory for our API backend.
 
 ``` bash
 $ mkdir notes-app-api
@@ -63,7 +64,7 @@ $ npm install uuid --save
 - **aws-sdk** allows us to talk to the various AWS services.
 - **uuid** generates unique ids. We need this for storing things to DynamoDB.
 
-Now the directory should contain 3 files and 1 folder.
+Now the directory should contain three files and one directory.
 
 ``` bash
 $ ls
