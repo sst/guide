@@ -41,7 +41,7 @@ This makes a DynamoDB `delete` call with the `userId` & `noteId` key to delete t
 
 ### Configure the API Endpoint
 
-{% include code-marker.html %} Open the `serverless.yml` file and append the following to it. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the Cognito User Pool chapter.
+{% include code-marker.html %} Open the `serverless.yml` file and append the following to it. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
 
 ``` yaml
   delete:

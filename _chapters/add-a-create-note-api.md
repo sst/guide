@@ -82,7 +82,7 @@ There are some helpful comments in the code but we are doing a few simple things
 
 Now let's define the API endpoint for our function.
 
-{% include code-marker.html %} Open the `serverless.yml` file and replace it with the following. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the Cognito User Pool chapter.
+{% include code-marker.html %} Open the `serverless.yml` file and replace it with the following. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
 
 ``` yaml
 service: notes-app-api

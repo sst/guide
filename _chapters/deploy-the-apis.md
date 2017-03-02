@@ -51,11 +51,7 @@ $ serverless deploy function -f list
 
 Now let's test the API we just deployed. Because the API is authenticated via the Cognito User Pool, we need to obtain an identity token to include in the API request Authorization header.
 
-First let's generate the identity token. Replace the following parameters with those of the Cognito User Pool created in one of our earlier chapters.
-
-- **--user-pool-id**: User pool id
-- **--client-id**: App client id
-- **--auth-parameters**: username and password of the test user created in the pool
+First let's generate the identity token. Replace **YOUR_COGNITO_USER_POOL_ID** and **YOUR_COGNITO_APP_CLIENT_ID** with the values from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter. Also use the username and password of the user created in the [Create a Cognito test user]({% link _chapters/create-a-cognito-test-user.md %}) chapter.
 
 And run the following.
 
@@ -63,7 +59,7 @@ And run the following.
 aws cognito-idp admin-initiate-auth \
   --region us-east-1 \
   --user-pool-id YOUR_COGNITO_USER_POOL_ID \
-  --client-id YOUR_USER_POOL_APP_CLIENT_ID \
+  --client-id YOUR_COGNITO_APP_CLIENT_ID \
   --auth-flow ADMIN_NO_SRP_AUTH \
   --auth-parameters USERNAME=admin,PASSWORD=Passw0rd!
 ```
