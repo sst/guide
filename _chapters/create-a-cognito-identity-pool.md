@@ -24,7 +24,7 @@ Enter an **Identity pool name**.
 
 ![Fill Identity Pool Info Screenshot]({{ site.url }}/assets/cognito-identity-pool/fill-identity-pool-info.png)
 
-Select **Authentication providers**. Under **Cognito** tab, enter **User Pool ID** and **App Client ID** of the User Pool created in the previous chapter. Select **Create Pool**.
+Select **Authentication providers**. Under **Cognito** tab, enter **User Pool ID** and **App Client ID** of the User Pool created in the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter. Select **Create Pool**.
 
 ![Fill Authentication Provider Info Screenshot]({{ site.url }}/assets/cognito-identity-pool/fill-authentication-provider-info.png)
 
@@ -40,7 +40,7 @@ It will warn you to read the documentation. Select **Ok** to edit.
 
 ![Select Confirm Edit Policy Screenshot]({{ site.url }}/assets/cognito-identity-pool/select-confirm-edit-policy.png)
 
-{% include code-marker.html %} Add the following policy into the editor. Replace `YOUR_S3_UPLOADS_BUCKET_NAME` with the **bucket name** from the **Create a S3 bucket for file uploads chapter**.
+{% include code-marker.html %} Add the following policy into the editor. Replace `YOUR_S3_UPLOADS_BUCKET_NAME` with the **bucket name** from the [Create a S3 bucket for file uploads]({% link _chapters/create-a-s3-bucket-for-file-uploads.md %}) chapter.
 
 ``` json
 {
