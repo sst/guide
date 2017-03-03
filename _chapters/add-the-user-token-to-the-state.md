@@ -2,6 +2,7 @@
 layout: post
 title: Add the User Token to the State
 date: 2017-01-15 00:00:00
+code: frontend
 ---
 
 To complete the login process we would need to store the user token and update the app to reflect that the user has logged in.

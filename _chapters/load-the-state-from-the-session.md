@@ -2,6 +2,7 @@
 layout: post
 title: Load the State from the Session
 date: 2017-01-15 00:00:00
+code: frontend
 ---
 
 To make our login information persist we need to store and load it from the browser session. There are a few different ways we can do this, using Cookies or Local Storage. Thankfully the AWS Cognito JS SDK does that for us automatically and we just need to read from it and load it into our application state.

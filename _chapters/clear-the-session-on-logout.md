@@ -2,6 +2,7 @@
 layout: post
 title: Clear the Session on Logout
 date: 2017-01-16 00:00:00
+code: frontend
 ---
 
 Currently we are only removing the user token from our app's state. But when we refresh the page, we load the user token from the browser session, in effect logging them back in.

@@ -2,6 +2,7 @@
 layout: post
 title: Login with AWS Cognito
 date: 2017-01-14 00:00:00
+code: frontend
 ---
 
 Before we link up our login form with our AWS Cognito setup let's grab our Cognito details and load it into our application as a part of it's config.

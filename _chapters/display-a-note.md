@@ -2,6 +2,7 @@
 layout: post
 title: Display a Note
 date: 2017-01-28 00:00:00
+code: frontend
 ---
 
 Now that we have a listing of all the notes, let's create a page that displays a note and let's the user edit it.

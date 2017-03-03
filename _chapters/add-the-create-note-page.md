@@ -2,6 +2,7 @@
 layout: post
 title: Add the Create Note Page
 date: 2017-01-22 00:00:00
+code: frontend
 ---
 
 Now that we can signup users and also log them in. Let's get started with the most important part of our note taking app; the creation of a note.

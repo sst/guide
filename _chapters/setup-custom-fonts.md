@@ -2,6 +2,7 @@
 layout: post
 title: Setup Custom Fonts
 date: 2017-01-08 00:00:00
+code: frontend
 ---
 
 Custom Fonts are now an almost standard part of modern web applications. We'll be setting it up for our note taking app using [Google Fonts](https://fonts.google.com).

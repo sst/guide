@@ -2,6 +2,7 @@
 layout: post
 title: Update the App
 date: 2017-02-13 00:00:00
+code: frontend
 ---
 
 Let's make a couple of quick changes to test the process of deploying updates to our app.

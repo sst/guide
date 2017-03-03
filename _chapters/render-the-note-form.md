@@ -2,6 +2,7 @@
 layout: post
 title: Render the Note Form
 date: 2017-01-29 00:00:00
+code: frontend
 ---
 
 Now that our container loads a note on `componentWillMount`, let's go ahead and render the form that we'll use to edit it.

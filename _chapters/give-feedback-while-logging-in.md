@@ -2,6 +2,7 @@
 layout: post
 title: Give Feedback While Logging In
 date: 2017-01-18 00:00:00
+code: frontend
 ---
 
 It's important that we give the user some feedback while we are logging them in. So they get the sense that the app is still working, as opposed to being unresponsive.

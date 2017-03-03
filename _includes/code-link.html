@@ -1,0 +1,32 @@
+{% if page.code == 'backend' or page.code == 'frontend' or page.code == 'backend_full' or page.code == 'frontend_full' %}
+<div class="post-code-link">
+  {% capture chapter_name %}{{ page.id | replace: '/chapters/', '' }}{% endcapture %}
+  {% if page.code == 'backend_full' or page.code == 'frontend_full' %}
+  {% capture repo_desc %}For reference, here is the complete code.{% endcapture %}
+  {% else %}
+  {% capture repo_desc %}For reference, here is the code so far.{% endcapture %}
+  {% endif %}
+  <p>{{ repo_desc }}</p>
+  {% if page.code == 'backend' %}
+  {% capture repo_url %}{{ site.backend_github_repo }}/tree/{{ chapter_name }}{% endcapture %}
+  {% capture repo_tag %}Backend Source :{{ chapter_name }}{% endcapture %}
+
+  {% elsif page.code == 'frontend' %}
+  {% capture repo_url %}{{ site.frontend_github_repo }}/tree/{{ chapter_name }}{% endcapture %}
+  {% capture repo_tag %}Frontend Source :{{ chapter_name }}{% endcapture %}
+
+  {% elsif page.code == 'backend_full' %}
+  {% capture repo_url %}{{ site.backend_github_repo }}{% endcapture %}
+  {% capture repo_tag %}Backend Source{% endcapture %}
+
+  {% elsif page.code == 'frontend_full' %}
+  {% capture repo_url %}{{ site.frontend_github_repo }}{% endcapture %}
+  {% capture repo_tag %}Frontend Source{% endcapture %}
+  {% endif %}
+  <a class="previous" target="_blank" href="{{ repo_url }}">
+    <i class="fa fa-github" aria-hidden="true"></i>
+    {{ repo_tag }}
+  </a>
+</div>
+{% endif %}
+
