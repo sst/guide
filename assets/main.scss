@@ -189,7 +189,7 @@ table.cost-table {
       min-width: 170px;
 
       @include media-query($on-palm) {
-        min-width: 110px;
+        min-width: 0;
       }
     }
     &:last-child {
