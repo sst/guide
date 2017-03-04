@@ -50,7 +50,7 @@ For the backend:
 
 For the frontend:
 
-- Setup our project with Create-React-App
+- Setup our project with Create React App
 - Add favicons, fonts, and a UI Kit using Bootstrap
 - Setup routes using React-Router
 - Use AWS Cognito SDK to login and signup users
