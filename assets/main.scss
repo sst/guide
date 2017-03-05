@@ -4,32 +4,33 @@
 @charset "utf-8";
 
 // Our variables
-$base-font-family:      Lato, sans-serif;
-$heading-font-family:   "PT Serif", serif;
-$code-font-family:      "Source Pro", monospace;
-$base-font-size:        16px;
-$base-font-weight:      400;
-$small-font-size:       $base-font-size * 0.875;
-$base-line-height:      1.6;
+$base-font-family:          Lato, sans-serif;
+$heading-font-family:       "PT Serif", serif;
+$code-font-family:          "Source Pro", monospace;
+$base-font-size:            16px;
+$base-font-weight:          400;
+$small-font-size:           $base-font-size * 0.875;
+$base-line-height:          1.6;
 
-$spacing-unit:          30px;
+$spacing-unit:              30px;
 
-$text-color:            #333;
-$secondary-text-color:  #666;
-$tertiary-text-color:  	#999;
-$background-color:      #f2efe8;
-$code-background-color: #f0eaf7;
-$brand-color:           #9068BE;
+$text-color:                #333;
+$secondary-text-color:      #666;
+$tertiary-text-color:  	    #999;
+$background-color:          #f2efe8;
+$code-background-color:     #f0eaf7;
+$hilight-background-color:  #fff694;
+$brand-color:               #9068BE;
 
-$grey-color:            #828282;
-$grey-color-light:      lighten($grey-color, 30%);
-$grey-color-dark:       darken($grey-color, 25%);
+$grey-color:                #828282;
+$grey-color-light:          lighten($grey-color, 30%);
+$grey-color-dark:           darken($grey-color, 25%);
 
-// Width of the content area
-$content-width:         800px;
+// Width of the content     area
+$content-width:             800px;
 
-$on-palm:               600px;
-$on-laptop:             800px;
+$on-palm:                   600px;
+$on-laptop:                 800px;
 
 // Minima also includes a mixin for defining media queries.
 // Use media queries like this:
@@ -108,17 +109,58 @@ div.post-code-link {
  */
 div.home .pitch {
   font-family: $base-font-family;
-  margin-bottom: 2 * $spacing-unit - 6px;
   padding: 0 20px;
   text-align: center;
-  font-size: 24px;
+  font-size: 26px;
   color: #555;
 
   @include media-query($on-palm) {
     font-size: 20px;
     padding: 0 5px 0;
-    margin-bottom: $spacing-unit - 5px;
   }
+}
+
+div.home .feature-divider {
+  margin: $spacing-unit auto;
+  width: 300px;
+  height: 1px;
+  background-color: darken($background-color, 15%);
+}
+
+div.home .feature-pitch {
+  margin-bottom: 2px;
+  padding: 0 10px;
+  font-size: 20px;
+  font-family: $heading-font-family;
+  font-weight: 700;
+  text-align: center;
+}
+div.home .feature-desc {
+  font-size: 18px;
+  text-align: center;
+  color: $secondary-text-color;
+}
+div.home .feature-list {
+  font-size: 18px;
+  margin-bottom: 2 * $spacing-unit - 6px;
+  padding: 0 90px;
+
+  strong {
+    background-color: $hilight-background-color;
+  }
+
+  @include media-query($on-palm) {
+    margin-bottom: $spacing-unit - 5px;
+    padding: 0 10px;
+  }
+}
+div.home .toc {
+  padding-top: 2 * $spacing-unit - 10px;
+  margin-bottom: $spacing-unit;
+  border-top: 4px solid darken($background-color, 10%);
+  text-align: center;
+  font-weight: bold;
+  font-size: 24px;
 }
 
 div.home .share-container {
