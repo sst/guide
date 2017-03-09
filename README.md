@@ -1,8 +1,8 @@
 # Source for [Serverless-Stack.com](http://serverless-stack.com)
 
-> Serverless Stack is a comprehensive guide to creating full-stack serverless applications.  Create a [note taking app](https://demo.serverless-stack.com) from scratch using React.js, AWS Lambda, API Gateway, DynamoDB, and Cognito.
 
----
+Serverless Stack is a comprehensive guide to creating full-stack serverless applications.  Create a [note taking app](https://demo.serverless-stack.com) from scratch using React.js, AWS Lambda, API Gateway, DynamoDB, and Cognito.
+
 
 The entire guide is hosted on GitHub Pages and runs on Jekyll.
 
