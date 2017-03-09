@@ -8,4 +8,6 @@ This guide is meant for full-stack developers or developers that would like to b
 
 So you might be a backend developer who would like to learn more about the frontend portion of building serverless apps or a frontend developer that would like to learn more about the backend; this guide should have you covered.
 
+We are also catering this soley towards JavaScript developers for now. We might target other languages and environments in the future. But we think this is a good starting point because it can be really beneficial as a full-stack developer to use a single language (JavaScript) and environment (Node.js) to build your entire application.
+
 Let's start by looking at what we'll be covering.
