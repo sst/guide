@@ -46,7 +46,7 @@ export function main(event, context, callback) {
     // Set response headers to enable CORS (Cross-Origin Resource Sharing)
     const headers = {
       'Access-Control-Allow-Origin': '*',
-      "Access-Control-Allow-Credentials" : true,
+      'Access-Control-Allow-Credentials': true,
     };
 
     // Return status code 500 on error
@@ -211,7 +211,7 @@ function buildResponse(statusCode, body) {
     statusCode: statusCode,
     headers: {
       'Access-Control-Allow-Origin': '*',
-      "Access-Control-Allow-Credentials" : true,
+      'Access-Control-Allow-Credentials': true,
     },
     body: JSON.stringify(body),
   };
