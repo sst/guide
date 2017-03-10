@@ -19,13 +19,13 @@ We are going to use the AWS SDK to upload our files to S3. The S3 Bucket that we
 
 We are going to use the NPM module `aws-sdk` to help us get the Identity Pool credentials.
 
-{% include code-marker.html %} Install it by running the following in your project root.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Install it by running the following in your project root.
 
 ``` bash
 $ npm install aws-sdk --save
 ```
 
-{% include code-marker.html %} Next, let's append the following to our `src/libs/awsLib.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Next, let's append the following to our `src/libs/awsLib.js`.
 
 ``` coffee
 export function getAwsCredentials(userToken) {
@@ -53,13 +53,13 @@ export function getAwsCredentials(userToken) {
 }
 ```
 
-{% include code-marker.html %} And include the **AWS SDK** in our header.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And include the **AWS SDK** in our header.
 
 ``` javascript
 import AWS from 'aws-sdk';
 ```
 
-{% include code-marker.html %} To get our AWS credentials we need to add the following to our `src/config.js` in the `cognito` block. Make sure to replace `YOUR_IDENTITY_POOL_ID` with your **Identity pool ID** from the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />To get our AWS credentials we need to add the following to our `src/config.js` in the `cognito` block. Make sure to replace `YOUR_IDENTITY_POOL_ID` with your **Identity pool ID** from the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter.
 
 ```
 REGION: 'us-east-1',
@@ -70,7 +70,7 @@ Now we are ready to upload a file to S3.
 
 ### Upload to S3
 
-{% include code-marker.html %} Append the following in `src/awsLib.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Append the following in `src/awsLib.js`.
 
 ``` coffee
 export async function s3Upload(file, userToken) {
@@ -102,7 +102,7 @@ export async function s3Upload(file, userToken) {
 }
 ```
 
-{% include code-marker.html %} And add this to our `src/config.js` above the `apiGateway` block. Make sure to replace `YOUR_S3_UPLOADS_BUCKET_NAME` with the your S3 Bucket name from the [Create a S3 bucket for file uploads]({% link _chapters/create-a-s3-bucket-for-file-uploads.md %}) chapter.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And add this to our `src/config.js` above the `apiGateway` block. Make sure to replace `YOUR_S3_UPLOADS_BUCKET_NAME` with the your S3 Bucket name from the [Create a S3 bucket for file uploads]({% link _chapters/create-a-s3-bucket-for-file-uploads.md %}) chapter.
 
 ```
 s3: {
@@ -127,7 +127,7 @@ The above method does a couple of things.
 
 Now that we have our upload methods ready, let's call them from the create note method.
 
-{% include code-marker.html %} Replace the `handleSubmit` method in `src/containers/NewNote.js` with the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace the `handleSubmit` method in `src/containers/NewNote.js` with the following.
 
 ``` javascript
 handleSubmit = async (event) => {
@@ -159,7 +159,7 @@ handleSubmit = async (event) => {
 }
 ```
 
-{% include code-marker.html %} And make sure to include `s3Upload` in the header by doing this:
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And make sure to include `s3Upload` in the header by doing this:
 
 ``` javascript
 import { invokeApig, s3Upload } from '../libs/awsLib.js';

@@ -9,7 +9,7 @@ It's important that we give the user some feedback while we are logging them in.
 
 ### Use a isLoading Flag
 
-{% include code-marker.html %} To do this we are going to add a `isLoading` flag to the state of our `src/containers/Login.js`. So the initial state in the `constructor` looks like the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />To do this we are going to add a `isLoading` flag to the state of our `src/containers/Login.js`. So the initial state in the `constructor` looks like the following.
 
 ``` javascript
 this.state = {
@@ -19,7 +19,7 @@ this.state = {
 };
 ```
 
-{% include code-marker.html %} And we'll update it while we are logging in. So our `handleSubmit` method now looks like so:
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And we'll update it while we are logging in. So our `handleSubmit` method now looks like so:
 
 ``` javascript
 handleSubmit = async (event) => {
@@ -43,7 +43,7 @@ handleSubmit = async (event) => {
 
 Now to reflect the state change in our button we are going to render it differently based on the `isLoading` flag. But we are going to need this piece of code in a lot of different places. So it makes sense that we create a reusable component out of it.
 
-{% include code-marker.html %} Create a `src/components/` directory and add the following in `src/components/LoaderButton.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a `src/components/` directory and add the following in `src/components/LoaderButton.js`.
 
 ``` coffee
 import React from 'react';
@@ -61,7 +61,7 @@ export default function LoaderButton({ isLoading, text, loadingText, disabled = 
 
 This is a really simple component that takes a `isLoading` flag and the text that the button displays in the two states (the default state and the loading state). The `disabled` prop is a result of what we have currently in our `Login` button. And we ensure that the button is disabled when `isLoading` is `true`. This makes it so that the user can't click it while we are in the process of logging them in.
 
-{% include code-marker.html %} And let's add a couple of styles to animate our loading icon. Add the following to `src/index.css`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And let's add a couple of styles to animate our loading icon. Add the following to `src/index.css`.
 
 ``` css
 .spinning.glyphicon {
@@ -79,7 +79,7 @@ This spins the refresh Glyphicon for the duration of a second.
 
 ### Render Using the isLoading Flag
 
-{% include code-marker.html %} Now we can use our new component in our `src/containers/Login.js`. Let's start by replacing the `<Button>` element in the `render` method with the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Now we can use our new component in our `src/containers/Login.js`. Let's start by replacing the `<Button>` element in the `render` method with the following.
 
 ``` javascript
 <LoaderButton
@@ -92,7 +92,7 @@ This spins the refresh Glyphicon for the duration of a second.
   loadingText="Logging in…" />
 ```
 
-{% include code-marker.html %} Import the `LoaderButton` in the header. And remove the reference to the `Button` component.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Import the `LoaderButton` in the header. And remove the reference to the `Button` component.
 
 ``` javascript
 import {

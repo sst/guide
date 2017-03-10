@@ -9,7 +9,7 @@ Now that we created a note and saved it to our database. Let's add an API to ret
 
 ### Add the Function
 
-{% include code-marker.html %} Create a new file `get.js` and paste the following code
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new file `get.js` and paste the following code
 
 ``` javascript
 import * as dynamoDbLib from './libs/dynamodb-lib';
@@ -47,7 +47,7 @@ This follows exactly the same structure as our previous `create.js` function. Th
 
 ### Configure the API Endpoint
 
-{% include code-marker.html %} Open the `serverless.yml` file and append the following to it. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `serverless.yml` file and append the following to it. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
 
 ``` yaml
   get:
@@ -66,7 +66,7 @@ This follows exactly the same structure as our previous `create.js` function. Th
 
 This defines our get note API. It adds a GET request handler with the endpoint `/notes/{id}`. And just as before we use our Cognito User Pool as the authorizer.
 
-{% include code-marker.html %} Open the `webpack.config.js` file and update the `entry` block to include our newly created file. The `entry` block should now look like the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `webpack.config.js` file and update the `entry` block to include our newly created file. The `entry` block should now look like the following.
 
 ```
   entry: {

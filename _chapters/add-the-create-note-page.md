@@ -11,7 +11,7 @@ First we are going to create the form for a note. It'll take some content and a 
 
 ### Add the Container
 
-{% include code-marker.html %} Create a new file `src/containers/NewNote.js` and add the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new file `src/containers/NewNote.js` and add the following.
 
 ``` coffee
 import React, { Component } from 'react';
@@ -100,13 +100,13 @@ Everything is fairly standard here, except for the file input. Our form elements
 
 Currently, our `handleSubmit` does not do a whole lot other than limiting the file size of our attachment. We are going to define this in our config.
 
-{% include code-marker.html %} So add the following to our `src/config.js` below the `export default {` line.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />So add the following to our `src/config.js` below the `export default {` line.
 
 ```
 MAX_ATTACHMENT_SIZE: 5000000,
 ```
 
-{% include code-marker.html %} Let's also add the styles for our form in `src/containers/NewNote.css`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's also add the styles for our form in `src/containers/NewNote.css`.
 
 ``` css
 .NewNote form {
@@ -121,13 +121,13 @@ MAX_ATTACHMENT_SIZE: 5000000,
 
 ### Add the Route
 
-{% include code-marker.html %} Finally, add our container as a route in `src/Routes.js` below our signup route.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our signup route.
 
 ``` coffee
 <Route path="notes/new" component={NewNote} />
 ```
 
-{% include code-marker.html %} And include our component in the header.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And include our component in the header.
 
 ``` javascript
 import NewNote from './containers/NewNote';

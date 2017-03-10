@@ -33,7 +33,7 @@ To include a file from the `public/` directory in your HTML, Create React App ne
 
 Copy the generated code and add the `%PUBLIC_URL%` prefix to all the URLs. It should look something like the following.
 
-{% include code-marker.html %} Add it to your `public/index.html`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add it to your `public/index.html`.
 
 ``` html
 <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png">
@@ -44,7 +44,7 @@ Copy the generated code and add the `%PUBLIC_URL%` prefix to all the URLs. It sh
 <meta name="theme-color" content="#ffffff">
 ```
 
-{% include code-marker.html %} And **remove** the following line that references the original favicon.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And **remove** the following line that references the original favicon.
 
 ``` html
 <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">

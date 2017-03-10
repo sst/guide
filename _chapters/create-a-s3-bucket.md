@@ -36,7 +36,7 @@ Buckets by default are not publicly accessible, so we need to change its permiss
 
 ![Add bucket policy screenshot]({{ site.url }}/assets/add-bucket-policy.png)
 
-{% include code-marker.html %} Add the following bucket policy into the editor. Where `notes-app-client` is the name of our S3 bucket. Make sure to use the name of your bucket here.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following bucket policy into the editor. Where `notes-app-client` is the name of our S3 bucket. Make sure to use the name of your bucket here.
 
 ``` json
 {

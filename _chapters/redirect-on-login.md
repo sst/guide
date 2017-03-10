@@ -9,7 +9,7 @@ Our secured pages redirect to the login page when the user is not logged in, wit
 
 Let's start by adding a method to read the `redirect` URL from the querystring.
 
-{% include code-marker.html %} Add the following method to your `src/containers/Login.js` below the `constructor` method.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following method to your `src/containers/Login.js` below the `constructor` method.
 
 ``` javascript
 querystring(name, url = window.location.href) {
@@ -29,7 +29,7 @@ This method takes the querystring param we want to read and returns it.
 
 Now let's update our `handleSubmit` method to redirect to the new `redirect` URL upon login.
 
-{% include code-marker.html %} Replace our current `handleSubmit` with the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace our current `handleSubmit` with the following.
 
 ``` javascript
 handleSubmit = async (event) => {

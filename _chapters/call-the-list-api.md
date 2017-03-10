@@ -9,7 +9,7 @@ Now that we have our basic home page setup, let's make the API call to render ou
 
 ### Make the Request
 
-{% include code-marker.html %} Add the following below the `constructor` block in `src/containers/Home.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following below the `constructor` block in `src/containers/Home.js`.
 
 ``` javascript
 async componentWillMount() {
@@ -35,7 +35,7 @@ notes() {
 }
 ```
 
-{% include code-marker.html %} And include our API Gateway Client helper in the header.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And include our API Gateway Client helper in the header.
 
 ``` javascript
 import { invokeApig } from '../libs/awsLib.js';
@@ -47,7 +47,7 @@ Now let's render the results.
 
 ### Render the List
 
-{% include code-marker.html %} Replace our `renderNotesList` placeholder method with the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace our `renderNotesList` placeholder method with the following.
 
 ``` coffee
 renderNotesList(notes) {
@@ -75,7 +75,7 @@ onNoteClick = (event) => {
 }
 ```
 
-{% include code-marker.html %} And include the `ListGroupItem` in the header so that our `react-bootstrap` import looks like so.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And include the `ListGroupItem` in the header so that our `react-bootstrap` import looks like so.
 
 ``` javascript
 import {
@@ -93,7 +93,7 @@ The code above does a few things.
 
 3. And `onClick` for each of the list items we navigate to their respective pages.
 
-{% include code-marker.html %} Let's also add a couple of styles to our `src/containers/Home.css`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's also add a couple of styles to our `src/containers/Home.css`.
 
 ``` css
 .Home .notes h4 {

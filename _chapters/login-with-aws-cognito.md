@@ -9,7 +9,7 @@ Before we link up our login form with our AWS Cognito setup let's grab our Cogni
 
 ### Load AWS Cognito Details
 
-{% include code-marker.html %} Save the following into `src/config.js` and replace `YOUR_COGNITO_USER_POOL_ID` and `YOUR_COGNITO_APP_CLIENT_ID` with the Cognito **Pool Id** and **App Client id** from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Save the following into `src/config.js` and replace `YOUR_COGNITO_USER_POOL_ID` and `YOUR_COGNITO_APP_CLIENT_ID` with the Cognito **Pool Id** and **App Client id** from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
 
 ``` javascript
 export default {
@@ -20,7 +20,7 @@ export default {
 };
 ```
 
-{% include code-marker.html %} And to load it into our login form simply import it by adding the following to the header of our Login container in `src/containers/Login.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And to load it into our login form simply import it by adding the following to the header of our Login container in `src/containers/Login.js`.
 
 ``` javascript
 import config from '../config.js';
@@ -30,13 +30,13 @@ import config from '../config.js';
 
 We are going to use the NPM module `amazon-cognito-identity-js` to login to Cognito.
 
-{% include code-marker.html %} Install it by running the following in your project root.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Install it by running the following in your project root.
 
 ``` bash
 $ npm install amazon-cognito-identity-js --save
 ```
 
-{% include code-marker.html %} And include the following in the header of our `src/containers/Login.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And include the following in the header of our `src/containers/Login.js`.
 
 ``` javascript
 import {
@@ -48,7 +48,7 @@ import {
 
 The login code itself is relatively simple.
 
-{% include code-marker.html %} Add the following method to `src/containers/Login.js` as well.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following method to `src/containers/Login.js` as well.
 
 ``` javascript
 login(username, password) {
@@ -83,7 +83,7 @@ This function does a few things for us:
 
 ### Trigger Login onSubmit
 
-{% include code-marker.html %} To connect the above `login` method to our form simply replace our placeholder `handleSubmit` method in `src/containers/Login.js` with the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />To connect the above `login` method to our form simply replace our placeholder `handleSubmit` method in `src/containers/Login.js` with the following.
 
 ``` javascript
 handleSubmit = async (event) => {

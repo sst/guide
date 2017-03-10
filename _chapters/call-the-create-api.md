@@ -11,7 +11,7 @@ Now that we have our basic create note form working, let's connect it to our API
 
 Since we are going to be calling API Gateway a few times in our app, let's first create a little helper function for it.
 
-{% include code-marker.html %} Let's create a helper function in `src/libs/awsLib.js` and add the following. Make sure to create the `src/libs/` directory first.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's create a helper function in `src/libs/awsLib.js` and add the following. Make sure to create the `src/libs/` directory first.
 
 ``` coffee
 import config from '../config.js';
@@ -42,7 +42,7 @@ We just made it so that we can call `invokeApig` from now on and only pass in th
 
 Now to call our API we need the API Gateway URL that was generated back in the [Deploy the APIs]({% link _chapters/deploy-the-apis.md %}) chapter.
 
-{% include code-marker.html %} Let's add that to our `src/config.js` above the `cognito: {` line. Make sure to replace `https://YOUR_API_GATEWAY_URL` with your URL.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's add that to our `src/config.js` above the `cognito: {` line. Make sure to replace `https://YOUR_API_GATEWAY_URL` with your URL.
 
 ```
 apiGateway: {
@@ -54,13 +54,13 @@ apiGateway: {
 
 Now we are ready to make our create call in our form.
 
-{% include code-marker.html %} Let's include our `awsLib` by adding the following to the header of `src/containers/NewNote.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's include our `awsLib` by adding the following to the header of `src/containers/NewNote.js`.
 
 ``` javascript
 import { invokeApig } from '../libs/awsLib.js';
 ```
 
-{% include code-marker.html %} And replace our `handleSubmit` function with the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And replace our `handleSubmit` function with the following.
 
 ``` javascript
 handleSubmit = async (event) => {

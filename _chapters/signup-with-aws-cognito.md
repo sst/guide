@@ -7,7 +7,7 @@ code: frontend
 
 Now let's go ahead and implement the `handleSubmit` and `handleConfirmationSubmit` methods and connect it up with our AWS Cognito setup.
 
-{% include code-marker.html %} Replace our `handleSubmit` and `handleConfirmationSubmit` methods in `src/containers/Signup.js` with the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace our `handleSubmit` and `handleConfirmationSubmit` methods in `src/containers/Signup.js` with the following.
 
 ``` javascript
 handleSubmit = async (event) => {
@@ -97,7 +97,7 @@ authenticate(user, username, password) {
 }
 ```
 
-{% include code-marker.html %} Also, include the following in our header.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Also, include the following in our header.
 
 ``` javascript
 import {

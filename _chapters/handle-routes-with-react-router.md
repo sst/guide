@@ -11,7 +11,7 @@ Let's start by installing React Router.
 
 ### Installing React Router
 
-{% include code-marker.html %} Run the following command in your working directory.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Run the following command in your working directory.
 
 ``` bash
 $ npm install react-router --save
@@ -23,7 +23,7 @@ This installs the NPM package and adds the dependency to your `package.json`.
 
 Even though we don't have any routes setup in our app, we can get the basic structure up and running. Our app currently runs from the `App` component in `src/App.js`. We are going to be using this component as the container for our entire app. To do that we'll create a file that will contain the information about all of our routes.
 
-{% include code-marker.html %} Let's create `src/Routes.js` and add the following into it.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's create `src/Routes.js` and add the following into it.
 
 ```coffee
 import React from 'react';
@@ -41,7 +41,7 @@ This is basically telling React Router to direct all the requests with the path 
 
 And now we'll head over to our `index.js` and use this newly created Router instead of the App component that we were using.
 
-{% include code-marker.html %} Replace code in `src/index.js` with the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace code in `src/index.js` with the following.
 
 ``` coffee
 import React from 'react';

@@ -9,7 +9,7 @@ To make our login information persist we need to store and load it from the brow
 
 ### Get Current User and Token
 
-{% include code-marker.html %} Add the following to your `src/App.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following to your `src/App.js`.
 
 ``` javascript
 getCurrentUser() {
@@ -33,7 +33,7 @@ getUserToken(currentUser) {
 }
 ```
 
-{% include code-marker.html %} And include this in it's header:
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And include this in it's header:
 
 ``` javascript
 import { CognitoUserPool, } from 'amazon-cognito-identity-js';
@@ -46,7 +46,7 @@ These two methods are pretty self-explanatory. In `getCurrentUser`, we use the C
 
 We want to ensure that when the user refreshes the app, we load the user token from the session. We are going to do this in `componentWillMount`. And since `getUserToken` is going to be called async; we need to ensure that the rest of our app is only ready to go after this has been loaded.
 
-{% include code-marker.html %} To do this, let's add a flag to our `src/App.js` state called `isLoadingUserToken`. The initial state in our constructor should look like the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />To do this, let's add a flag to our `src/App.js` state called `isLoadingUserToken`. The initial state in our constructor should look like the following.
 
 ``` javascript
 this.state = {
@@ -55,7 +55,7 @@ this.state = {
 };
 ```
 
-{% include code-marker.html %} Now to load the user token we'll add the following to our `src/App.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Now to load the user token we'll add the following to our `src/App.js`.
 
 ``` javascript
 async componentWillMount() {
@@ -86,7 +86,7 @@ Since loading the user token is an asynchronous process, we want to ensure that 
 
 We'll conditionally render our app based on the `isLoadingUserToken` flag.
 
-{% include code-marker.html %} Our `render` method in `src/App.js` should be as follows.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Our `render` method in `src/App.js` should be as follows.
 
 ``` coffee
 render() {

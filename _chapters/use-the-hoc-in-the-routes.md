@@ -7,7 +7,7 @@ code: frontend
 
 Now that we created the `AuthenticatedComponent` and `UnauthenticatedComponent`, let's use them on the containers we want to secure.
 
-{% include code-marker.html %} First import them in the header of `src/Routes.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />First import them in the header of `src/Routes.js`.
 
 ``` javascript
 import requireAuth from './components/AuthenticatedComponent';
@@ -25,7 +25,7 @@ So the following routes in `src/Routes.js` would be affected.
 <Route path="notes/:id" component={Notes} />
 ```
 
-{% include code-marker.html %} They should now look like so:
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />They should now look like so:
 
 ``` coffee
 <Route path="login" component={requireUnauth(Login)} />

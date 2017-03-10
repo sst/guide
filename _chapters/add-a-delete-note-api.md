@@ -9,7 +9,7 @@ Finally, we are going to create an API that allows a user to delete a given note
 
 ### Add the Function
 
-{% include code-marker.html %} Create a new file `delete.js` and paste the following code
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new file `delete.js` and paste the following code
 
 ``` javascript
 import * as dynamoDbLib from './libs/dynamodb-lib';
@@ -41,7 +41,7 @@ This makes a DynamoDB `delete` call with the `userId` & `noteId` key to delete t
 
 ### Configure the API Endpoint
 
-{% include code-marker.html %} Open the `serverless.yml` file and append the following to it. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `serverless.yml` file and append the following to it. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
 
 ``` yaml
   delete:
@@ -60,7 +60,7 @@ This makes a DynamoDB `delete` call with the `userId` & `noteId` key to delete t
 
 This adds a DELETE request handler to the `/notes/{id}` endpoint.
 
-{% include code-marker.html %} Open the `webpack.config.js` file and update the `entry` block to include our newly created file. The `entry` block should now look like the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `webpack.config.js` file and update the `entry` block to include our newly created file. The `entry` block should now look like the following.
 
 ```
   entry: {

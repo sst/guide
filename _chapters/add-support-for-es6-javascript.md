@@ -11,7 +11,7 @@ In this chapter, we are going to enable ES6 capabilities by setting up [Babel](h
 
 ### Install Babel and Webpack
 
-{% include code-marker.html %} At the root of the project, run.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />At the root of the project, run.
 
 ``` bash
 $ npm install --save-dev \
@@ -26,7 +26,7 @@ $ npm install --save-dev \
 $ npm install --save babel-runtime
 ```
 
-{% include code-marker.html %} Create a file called `webpack.config.js` in the root with the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a file called `webpack.config.js` in the root with the following.
 
 ``` javascript
 var nodeExternals = require('webpack-node-externals');
@@ -61,7 +61,7 @@ module.exports = {
 
 This is the configuration Webpack will use to package our app.
 
-{% include code-marker.html %} Create a file called `.babelrc` in the root with the following. We are using the same Babel preset (**react-app**) as the one we are going to use in the frontend.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a file called `.babelrc` in the root with the following. We are using the same Babel preset (**react-app**) as the one we are going to use in the frontend.
 
 ``` json
 {
@@ -70,7 +70,7 @@ This is the configuration Webpack will use to package our app.
 }
 ```
 
-{% include code-marker.html %} Open `serverless.yml` and replace it with the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open `serverless.yml` and replace it with the following.
 
 ``` yaml
 service: react-notes-app-api

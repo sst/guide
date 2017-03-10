@@ -7,7 +7,7 @@ code: frontend
 
 Now that our note loads into our form, let's work on saving the changes we make to that note.
 
-{% include code-marker.html %} Replace the `handleSubmit` method in `src/containers/Notes.js` with the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace the `handleSubmit` method in `src/containers/Notes.js` with the following.
 
 ``` coffee
 saveNote(note) {
@@ -50,7 +50,7 @@ handleSubmit = async (event) => {
 }
 ```
 
-{% include code-marker.html %} And include our `s3Upload` helper method in the header:
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And include our `s3Upload` helper method in the header:
 
 ``` javascript
 import { invokeApig, s3Upload } from '../libs/awsLib.js';

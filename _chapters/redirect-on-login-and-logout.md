@@ -16,25 +16,25 @@ React-Router comes with a [Higher-Order Component](https://facebook.github.io/re
 
 ### Redirect to Home on Login
 
-{% include code-marker.html %} To use it in our `src/containers/Login.js`, let's replace the line that defines our component.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />To use it in our `src/containers/Login.js`, let's replace the line that defines our component.
 
 ``` javascript
 export default class Login extends Component {
 ```
 
-{% include code-marker.html %} with the following:
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />with the following:
 
 ``` javascript
 class Login extends Component {
 ```
 
-{% include code-marker.html %} And instead export it by adding this at the bottom of our `src/containers/Login.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And instead export it by adding this at the bottom of our `src/containers/Login.js`.
 
 ``` javascript
 export default withRouter(Login);
 ```
 
-{% include code-marker.html %} Also, import `withRouter` in the header.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Also, import `withRouter` in the header.
 
 ``` javascript
 import { withRouter } from 'react-router';
@@ -46,7 +46,7 @@ Now we can use the router after a successful login by doing the following.
 this.props.router.push('/');
 ```
 
-{% include code-marker.html %} Our updated `handleSubmit` method in `src/containers/Login.js` should look like this:
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Our updated `handleSubmit` method in `src/containers/Login.js` should look like this:
 
 ``` javascript
 handleSubmit = async (event) => {
@@ -71,25 +71,25 @@ Now if you head over to your browser and try logging in, you should be redirecte
 
 Now we'll do something very similar for the logout process.
 
-{% include code-marker.html %} Define our `src/App.js` component by replacing the line below.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Define our `src/App.js` component by replacing the line below.
 
 ``` javascript
 export default class App extends Component {
 ```
 
-{% include code-marker.html %} with this:
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />with this:
 
 ``` javascript
 class App extends Component {
 ```
 
-{% include code-marker.html %} And export it after calling `withRouter` by adding this to the bottom of `src/App.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And export it after calling `withRouter` by adding this to the bottom of `src/App.js`.
 
 ``` javascript
 export default withRouter(App);
 ```
 
-{% include code-marker.html %} Import `withRouter` (along with the `IndexLink` from before) in the header of `src/App.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Import `withRouter` (along with the `IndexLink` from before) in the header of `src/App.js`.
 
 ``` javascript
 import { withRouter, IndexLink } from 'react-router';
@@ -97,7 +97,7 @@ import { withRouter, IndexLink } from 'react-router';
 
 And finally, redirect after the logout.
 
-{% include code-marker.html %} Add the following to the bottom of the `handleLogout` method in our `src/App.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following to the bottom of the `handleLogout` method in our `src/App.js`.
 
 ``` javascript
 if (this.props.location.pathname !== '/login') {

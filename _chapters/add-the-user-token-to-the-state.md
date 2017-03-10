@@ -11,7 +11,7 @@ To complete the login process we would need to store the user token and update t
 
 First we'll start by storing the user token in the state. We might be tempted to store this in the `Login` container, but since we are going to use this in a lot of other places, it makes sense to lift up the state. The most logical place to do this will in our `App` component.
 
-{% include code-marker.html %} Add the following to `src/App.js` right below the `export default class App extends Component {` line.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following to `src/App.js` right below the `export default class App extends Component {` line.
 
 ``` javascript
 constructor(props) {
@@ -39,7 +39,7 @@ We can do this by passing in a couple of props to the child components the `App`
 { this.props.children }
 ```
 
-{% include code-marker.html %} In the `src/App.js`, replace it with the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />In the `src/App.js`, replace it with the following.
 
 ``` javascript
 { React.cloneElement(this.props.children, childProps) }
@@ -47,7 +47,7 @@ We can do this by passing in a couple of props to the child components the `App`
 
 Also, initialize the `childProps` at the top of our render method.
 
-{% include code-marker.html %} Add the following right below the `render() {` line in `src/App.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following right below the `render() {` line in `src/App.js`.
 
 ``` javascript
 const childProps = {
@@ -58,7 +58,7 @@ const childProps = {
 
 And on the other side of this in the `Login` container we'll call the `updateUserToken` method.
 
-{% include code-marker.html %} Replace the `alert(userToken);` line with the following in `src/containers/Login.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace the `alert(userToken);` line with the following in `src/containers/Login.js`.
 
 ``` javascript
 this.props.updateUserToken(userToken);
@@ -77,7 +77,7 @@ We can now use this to display a Logout button once the user logs in. Find the f
 </LinkContainer>
 ```
 
-{% include code-marker.html %} And replace it with this:
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And replace it with this:
 
 ``` coffee
 { this.state.userToken
@@ -90,7 +90,7 @@ We can now use this to display a Logout button once the user logs in. Find the f
       </LinkContainer> ] }
 ```
 
-{% include code-marker.html %} And add this `handleLogout` method to `src/App.js` above the `render() {` line as well.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And add this `handleLogout` method to `src/App.js` above the `render() {` line as well.
 
 ``` javascript
 handleLogout = (event) => {

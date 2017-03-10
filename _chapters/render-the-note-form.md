@@ -7,7 +7,7 @@ code: frontend
 
 Now that our container loads a note on `componentWillMount`, let's go ahead and render the form that we'll use to edit it.
 
-{% include code-marker.html %} Replace our placeholder `render` method in `src/containers/Notes.js` with the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace our placeholder `render` method in `src/containers/Notes.js` with the following.
 
 ``` coffee
 validateForm() {
@@ -119,7 +119,7 @@ We are doing a few things here:
 
 To complete this code, let's add `isLoading` and `isDeleting` to the state.
 
-{% include code-marker.html %} So our new initial state in the `constructor` looks like so.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />So our new initial state in the `constructor` looks like so.
 
 ``` javascript
 this.state = {
@@ -130,7 +130,7 @@ this.state = {
 };
 ```
 
-{% include code-marker.html %} Let's also add some styles by adding the following to `src/containers/Notes.css`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's also add some styles by adding the following to `src/containers/Notes.css`.
 
 ``` css
 .Notes form {
@@ -143,7 +143,7 @@ this.state = {
 }
 ```
 
-{% include code-marker.html %} Also, let's include the React-Bootstrap components that we are using here by adding the following to our header. And our styles, the `LoaderButton`, and the `config`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Also, let's include the React-Bootstrap components that we are using here by adding the following to our header. And our styles, the `LoaderButton`, and the `config`.
 
 ``` javascript
 import {

@@ -72,16 +72,16 @@ ul.share-buttons .sr-only {
 }
 
 // Change markers
-span.code-marker {
-  line-height: 1.1;
-  margin-right: 5px;
-  font-family: "Space Mono", monospace;
-  font-size: 10px;
-  font-weight: 700;
-  color: white;
-  background-color: #C3BDCA;
-  padding: 5px 8px 5px;
-  border-radius: 3px;
+img.code-marker {
+  $width: 68px;
+  $height: 21px;
+
+  margin-right: 7px;
+  margin-bottom: 2px;
+  width: $width;
+  height: $height;
+  background-image: url('/assets/change-marker.png');
+  background-size: $width $height;
   display: inline-block;
   vertical-align: middle; 
 }

@@ -9,7 +9,7 @@ Now that we are able to create a new note. Let's create a page where we can see 
 
 Currently, our Home containers is very simple. Let's add the conditional rendering in there.
 
-{% include code-marker.html %} Replace our `src/containers/Home.js` with the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace our `src/containers/Home.js` with the following.
 
 ``` coffee
 import React, { Component } from 'react';

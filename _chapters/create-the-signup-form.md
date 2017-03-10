@@ -9,7 +9,7 @@ Let's start by creating the signup form that'll get the user's email and passwor
 
 ### Add the Container
 
-{% include code-marker.html %} Create a new container at `src/containers/Signup.js` with the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new container at `src/containers/Signup.js` with the following.
 
 ``` coffee
 import React, { Component } from 'react';
@@ -158,7 +158,7 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 6. For now our `handleSubmit` and `handleConfirmationSubmit` don't do a whole lot besides setting the `isLoading` state and a dummy value for the `newUser` state.
 
-{% include code-marker.html %} Also, let's add a couple of styles in `src/containers/Signup.css`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Also, let's add a couple of styles in `src/containers/Signup.css`.
 
 ``` css
 @media all and (min-width: 480px) {
@@ -181,7 +181,7 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 ### Add the Route
 
-{% include code-marker.html %} Finally, add our container as a route in `src/Routes.js` below our login route.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our login route.
 
 ``` coffee
 <Route path="signup" component={Signup} />

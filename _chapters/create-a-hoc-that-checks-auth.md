@@ -7,7 +7,7 @@ code: frontend
 
 Let's first create a HOC that will act on the containers that need a user to be logged in.
 
-{% include code-marker.html %} Add the following to `src/components/AuthenticatedComponent.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following to `src/components/AuthenticatedComponent.js`.
 
 ``` coffee
 import React from 'react';
@@ -50,7 +50,7 @@ The function `requireAuth` takes a component as input and returns a component th
 
 We'll do something similar to ensure that the user is not authenticated.
 
-{% include code-marker.html %} Add the following to `src/components/UnauthenticatedComponent.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following to `src/components/UnauthenticatedComponent.js`.
 
 ``` coffee
 import React from 'react';

@@ -9,7 +9,7 @@ Let's make a couple of quick changes to test the process of deploying updates to
 
 We are going to add a Login and Signup button to our lander to give users a clear call to action.
 
-{% include code-marker.html %} To do this update our `renderLander` method in `src/containers/Home.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />To do this update our `renderLander` method in `src/containers/Home.js`.
 
 ``` coffee
 renderLander() {
@@ -26,13 +26,13 @@ renderLander() {
 }
 ```
 
-{% include code-marker.html %} And import the `Link` component from React-Router, so that our import looks like the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And import the `Link` component from React-Router, so that our import looks like the following.
 
 ``` javascript
 import { withRouter, Link } from 'react-router';
 ```
 
-{% include code-marker.html %} Also, add a couple of styles to `src/containers/Home.css`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Also, add a couple of styles to `src/containers/Home.css`.
 
 ``` css
 .Home .lander div {

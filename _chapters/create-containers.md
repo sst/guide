@@ -11,7 +11,7 @@ Currently, our app has a single component that renders our content. For creating
 
 Let's start by creating the outer chrome of our application by first adding a navigation bar to it. We are going to use the [Navbar](https://react-bootstrap.github.io/components.html#navbars) React-Bootstrap component.
 
-{% include code-marker.html %} Go ahead and remove the code inside `src/App.js` and replace it with the following. Also, you can go ahead and remove `src/logo.svg`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Go ahead and remove the code inside `src/App.js` and replace it with the following. Also, you can go ahead and remove `src/logo.svg`.
 
 ``` coffee
 import React, { Component } from 'react';
@@ -60,7 +60,7 @@ We are doing a few things here:
 4. Using `IndexLink` from the React-Router to handle links to our index route dynamically (as opposed to having to refresh the page).
 5. Similarly, we handle links to our Login and Signup pages using a `LinkContainer` provided by the React-Router-Bootstrap package. It handles the styles necessary for Bootstrap NavItems while dynamically linking to our pages.
 
-{% include code-marker.html %} Now, for this code to work we need to install the React-Router-Bootstrap package. Run the following command in your working directory.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Now, for this code to work we need to install the React-Router-Bootstrap package. Run the following command in your working directory.
 
 ``` bash
 $ npm install react-router-bootstrap --save
@@ -68,7 +68,7 @@ $ npm install react-router-bootstrap --save
 
 Let's also add a couple of line of styles to space things out a bit more.
 
-{% include code-marker.html %} Remove all the code inside `src/App.css` and replace it with the following:
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Remove all the code inside `src/App.css` and replace it with the following:
 
 ``` css
 .App {
@@ -84,7 +84,7 @@ Let's also add a couple of line of styles to space things out a bit more.
 
 Now that we have the outer chrome of our application ready, let's add the container that will hold the content for each of the pages.
 
-{% include code-marker.html %} Right below the `</Navbar>` closing tag in `src/App.js`, add the following:
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Right below the `</Navbar>` closing tag in `src/App.js`, add the following:
 
 ``` coffee
 <div>
@@ -96,7 +96,7 @@ This tells this component where to render it's child components.
 
 Let's create our first container. It'll respond to the `/` route.
 
-{% include code-marker.html %} Create a `src/containers` directory and add the following inside `src/containers/Home.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a `src/containers` directory and add the following inside `src/containers/Home.js`.
 
 ``` coffee
 import React, { Component } from 'react';
@@ -118,7 +118,7 @@ export default class Home extends Component {
 
 This simply renders our home page given that the user is not currently signed in. Let's add a few lines to style this.
 
-{% include code-marker.html %} Add the following into `src/containers/Home.css`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following into `src/containers/Home.css`.
 
 ``` css
 .Home .lander {
@@ -140,13 +140,13 @@ This simply renders our home page given that the user is not currently signed in
 
 Now to have this container respond to the `/` route we need to tweak our routes just a bit.
 
-{% include code-marker.html %} Find the following in `src/Routes.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Find the following in `src/Routes.js`.
 
 ``` coffee
 <Route path="/" component={App} />
 ```
 
-{% include code-marker.html %} And replace it with this:
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And replace it with this:
 
 ``` coffee
 <Route path="/" component={App}>
@@ -158,7 +158,7 @@ This tells our router to render the IndexRoute of the path `/` with the `Home` c
 
 Let's not forget to include the `Home` and `IndexRoute` component.
 
-{% include code-marker.html %} The header of your `src/Routes.js` should look like this:
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />The header of your `src/Routes.js` should look like this:
 
 ``` coffee
 import React from 'react';
