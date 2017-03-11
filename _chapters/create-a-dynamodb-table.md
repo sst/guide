@@ -21,7 +21,7 @@ Select **Create table**.
 
 ![Create DynamoDB Table screenshot]({{ site.url }}/assets/dynamodb/create-dynamodb-table.png)
 
-Enter the **Table name** and **Primary key** info as shown below.
+Enter the **Table name** and **Primary key** info as shown below. Just make sure that `userId` and `noteId` are in camel case.
 
 ![Set Table Primary Key screenshot]({{ site.url }}/assets/dynamodb/set-table-primary-key.png)
 
