@@ -2,6 +2,7 @@
 layout: post
 title: Setup Bootstrap
 date: 2017-01-09 00:00:00
+description: Tutorial on how to add and configure Bootstrap for your React.js app using React-Bootstrap.
 code: frontend
 ---
 

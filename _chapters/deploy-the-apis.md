@@ -2,6 +2,7 @@
 layout: post
 title: Deploy the APIs
 date: 2017-01-05 00:00:00
+description: Tutorial on how to deploy your entire Serverless project or a single function to AWS Lambda and API Gateway.
 code: backend_full
 ---
 

@@ -2,6 +2,7 @@
 layout: post
 title: Add an Update Note API
 date: 2017-01-03 00:00:00
+description: Tutorial on adding a HTTP PUT endpoint with CORS support to AWS Lambda and API Gateway using the Serverless Framework.
 code: backend
 ---
 

@@ -2,6 +2,7 @@
 layout: post
 title: Delete a Note
 date: 2017-01-31 00:00:00
+description: Tutorial on how to make a DELETE request to a AWS API Gateway endpoint in your React.js app.
 code: frontend
 ---
 

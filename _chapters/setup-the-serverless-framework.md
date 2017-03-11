@@ -2,6 +2,7 @@
 layout: post
 title: Setup the Serverless Framework
 date: 2016-12-30 00:00:00
+description: Tutorial on how to install the Serverless Framework.
 code: backend
 ---
 

@@ -2,6 +2,7 @@
 layout: post
 title: Handle 404s
 date: 2017-01-12 00:00:00
+description: Tutorial on how to handle 404s in your React.js app using React Router.
 code: frontend
 ---
 

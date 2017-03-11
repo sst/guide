@@ -2,6 +2,7 @@
 layout: post
 title: Load the State from the Session
 date: 2017-01-15 00:00:00
+description: Tutorial on how to load the current AWS Cognito session user ID token in your React.js app.
 code: frontend
 ---
 

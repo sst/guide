@@ -2,6 +2,7 @@
 layout: post
 title: Setup Custom Fonts
 date: 2017-01-08 00:00:00
+description: Tutorial on how to add custom fonts using Google Fonts to your React.js app.
 code: frontend
 ---
 

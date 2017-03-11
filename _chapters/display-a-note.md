@@ -2,6 +2,7 @@
 layout: post
 title: Display a Note
 date: 2017-01-28 00:00:00
+description: Tutorial on how to call an API with the React Router path parameter in your React.js app.
 code: frontend
 ---
 

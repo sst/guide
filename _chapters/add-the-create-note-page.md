@@ -2,6 +2,7 @@
 layout: post
 title: Add the Create Note Page
 date: 2017-01-22 00:00:00
+description: Tutorial on how to create a file upload form using an input field with type file to your React.js app.
 code: frontend
 ---
 

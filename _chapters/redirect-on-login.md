@@ -2,6 +2,7 @@
 layout: post
 title: Redirect on Login
 date: 2017-02-04 00:00:00
+description: Tutorial on how to redirect to the original page after a user logs in to your React.js app.
 code: frontend
 ---
 

@@ -2,6 +2,7 @@
 layout: post
 title: Clear the Session on Logout
 date: 2017-01-16 00:00:00
+description: Tutorial on how to sign out the current user using the AWS JS SDK in your React.js app.
 code: frontend
 ---
 

@@ -2,6 +2,7 @@
 layout: post
 title: List All the Notes
 date: 2017-01-26 00:00:00
+description: Tutorial on how to render conditionally in a component in your React.js app.
 code: frontend
 ---
 

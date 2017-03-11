@@ -2,6 +2,7 @@
 layout: post
 title: Add App Favicons
 date: 2017-01-07 00:00:00
+description: Tutorial on how to add app icons and favicons to your React.js app.
 code: frontend
 ---
 

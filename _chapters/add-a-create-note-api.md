@@ -2,6 +2,7 @@
 layout: post
 title: Add a Create Note API
 date: 2016-12-31 00:00:00
+description: Tutorial on adding a HTTP POST endpoint with CORS support to AWS Lambda and API Gateway using the Serverless Framework.
 code: backend
 ---
 

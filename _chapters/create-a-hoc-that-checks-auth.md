@@ -2,6 +2,7 @@
 layout: post
 title: Create a HOC That Checks Auth
 date: 2017-02-02 00:00:00
+description: Tutorial on how to create a Higher-Order Component that checks if a user is logged in to your React.js app.
 code: frontend
 ---
 

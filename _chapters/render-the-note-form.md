@@ -2,6 +2,7 @@
 layout: post
 title: Render the Note Form
 date: 2017-01-29 00:00:00
+description: Tutorial on how to render a React Bootstrap form in your React.js app.
 code: frontend
 ---
 

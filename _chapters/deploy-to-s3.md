@@ -2,6 +2,7 @@
 layout: post
 title: Deploy to S3
 date: 2017-02-07 00:00:00
+description: Tutorial on how to deploy a Create React App to a S3 bucket using the AWS CLI.
 ---
 
 Now that our S3 Bucket is created we are ready to upload the assets of our app.

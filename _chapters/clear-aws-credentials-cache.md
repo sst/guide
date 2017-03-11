@@ -2,6 +2,7 @@
 layout: post
 title: Clear AWS Credentials Cache
 date: 2017-01-25 00:00:00
+description: Tutorial on how to clear the AWS credentials in your React.js app using the AWS JS SDK.
 code: frontend
 ---
 

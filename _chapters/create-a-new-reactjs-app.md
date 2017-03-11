@@ -2,6 +2,7 @@
 layout: post
 title: Create a New React.js App
 date: 2017-01-06 00:00:00
+description: Tutorial on how to create a new React.js app using Create React App.
 code: frontend
 ---
 

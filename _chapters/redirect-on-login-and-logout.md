@@ -2,6 +2,7 @@
 layout: post
 title: Redirect on Login and Logout
 date: 2017-01-17 00:00:00
+description: Tutorial on how to redirect to a page using the React Router withRouter Higher-Order Component in your React.js app.
 code: frontend
 ---
 

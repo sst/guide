@@ -2,6 +2,7 @@
 layout: post
 title: Use the HOC in the Routes
 date: 2017-02-03 00:00:00
+description: Tutorial on how to add a Higher-Order Component in your React Router routes for your React.js app.
 code: frontend
 ---
 

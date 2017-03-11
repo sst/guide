@@ -2,6 +2,7 @@
 layout: post
 title: Create a Login Page
 date: 2017-01-13 00:00:00
+description: Tutorial on how to add a login page to your React.js app.
 code: frontend
 ---
 

@@ -2,6 +2,7 @@
 layout: post
 title: Create a DynamoDB Table
 date: 2016-12-27 00:00:00
+description: Tutorial on how to create and configure a new DynamoDB table.
 ---
 
 To build the backend for our notes app, it makes sense that we first start by thinking about how the data is going to be stored. We are going to use [DynamoDB](https://aws.amazon.com/dynamodb/) to do this.

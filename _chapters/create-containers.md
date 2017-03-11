@@ -2,6 +2,7 @@
 layout: post
 title: Create Containers
 date: 2017-01-11 00:00:00
+description: Tutorial on how to add a container and a Navbar to your React.js app.
 code: frontend
 ---
 

@@ -2,6 +2,7 @@
 layout: post
 title: Add a Get Note API
 date: 2017-01-01 00:00:00
+description: Tutorial on adding a HTTP GET endpoint with path parameters and CORS support to AWS Lambda and API Gateway using the Serverless Framework.
 code: backend
 ---
 

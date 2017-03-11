@@ -2,6 +2,7 @@
 layout: post
 title: Add Support for ES6 JavaScript
 date: 2016-12-30 12:00:00
+description: Tutorial on adding support for ES6 JavaScript in the Serverless Framework using Babel and Webpack.
 code: backend
 ---
 

@@ -2,6 +2,7 @@
 layout: post
 title: Handle Routes with React Router
 date: 2017-01-10 00:00:00
+description: Tutorial on how to handle routes in your React.js app using React Router.
 code: frontend
 ---
 

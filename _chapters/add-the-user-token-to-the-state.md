@@ -2,6 +2,7 @@
 layout: post
 title: Add the User Token to the State
 date: 2017-01-15 00:00:00
+description: Tutorial on how to store the AWS Cognito user ID token in your React.js app.
 code: frontend
 ---
 

@@ -2,6 +2,7 @@
 layout: post
 title: Give Feedback While Logging In
 date: 2017-01-18 00:00:00
+description: Tutorial on how to add a loading state to the React Bootstrap buttons in your React.js app.
 code: frontend
 ---
 
