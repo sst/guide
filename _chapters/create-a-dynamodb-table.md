@@ -30,7 +30,7 @@ Each DynamoDB table has a primary key, which cannot be changed once set. The pri
 * Partition key
 * Partition key and sort key (composite)
 
-We are going to use the composite primary key which gives us additional flexibility when querying the data. For example, if you provide only the value for `userid`, DynamoDB would retrieve all of the notes by that user. Or you could provide a value for `userid` and a value for `noteid`, to retrieve a particular note.
+We are going to use the composite primary key which gives us additional flexibility when querying the data. For example, if you provide only the value for `userId`, DynamoDB would retrieve all of the notes by that user. Or you could provide a value for `userId` and a value for `noteId`, to retrieve a particular note.
 
 To get a further understanding on how indexes work in DynamoDB, you can read more here [DynamoDB Core Components][dynamodb-components].
 
