@@ -23,16 +23,16 @@ It is a single page application powered by a serverless API written completely i
 
 We'll be using the AWS Platform to build it. We might expand further and cover a few other platforms but we figured the AWS Platform would be a good place to start. We'll be using the following set of technologies to build our serverless application. 
 
-- [Lambda](Lambda) & [API Gateway](APIG) for our serverless API
-- [DynamoDB](DynamoDB) for our database
-- [Cognito](Cognito) for user authentication and securing our APIs
-- [S3](S3) for hosting our app and file uploads
-- [CloudFront](CF) for serving out our app
-- [Route 53](R53) for our domain
-- [Certificate Manager](CM) for SSL
-- [React.js](React) for our single page app
-- [React Router](RR) for routing
-- [Bootstrap](Bootstrap) for the UI Kit
+- [Lambda][Lambda] & [API Gateway][APIG] for our serverless API
+- [DynamoDB][DynamoDB] for our database
+- [Cognito][Cognito] for user authentication and securing our APIs
+- [S3][S3] for hosting our app and file uploads
+- [CloudFront][CF] for serving out our app
+- [Route 53][R53] for our domain
+- [Certificate Manager][CM] for SSL
+- [React.js][React] for our single page app
+- [React Router][RR] for routing
+- [Bootstrap][Bootstrap] for the UI Kit
 
 While the list above might look daunting, we are trying to ensure that upon completing the guide you'll be ready to build **real-world**, **secure**, and **fully-functional** web apps. And don't worry we'll be around to help!
 
