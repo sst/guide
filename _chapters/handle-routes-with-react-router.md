@@ -10,7 +10,7 @@ Create React App sets a lot of things up by default but it does not come with a 
 
 
 
-Let's start by installing React Router. React Router is currently making some large changes as they upgrade to v4. So for now let's stick with v3. This tutorial will be updated once React Router v4 stabilizes.
+Let's start by installing React Router. React Router is currently making some large changes as they upgrade to v4. So for now let's stick with v3. This chapter will be updated once React Router v4 stabilizes.
 
 ### Installing React Router
 
