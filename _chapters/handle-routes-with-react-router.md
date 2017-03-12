@@ -8,14 +8,16 @@ code: frontend
 
 Create React App sets a lot of things up by default but it does not come with a built-in way to handle routes. And since we are building a single page app, we are going to use [React Router](https://reacttraining.com/react-router/) to handle them for us.
 
-Let's start by installing React Router.
+
+
+Let's start by installing React Router. React Router is currently making some large changes as they upgrade to v4. So for now let's stick with v3. This tutorial will be updated once React Router v4 stabilizes.
 
 ### Installing React Router
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Run the following command in your working directory.
 
 ``` bash
-$ npm install react-router --save
+$ npm install react-router@3.0.2 --save
 ```
 
 This installs the NPM package and adds the dependency to your `package.json`.
