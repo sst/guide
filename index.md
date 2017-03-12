@@ -43,7 +43,7 @@ Our comprehensive tutorials include
 ### Setting up the Backend
 
 - [Create a DynamoDB table]({% link _chapters/create-a-dynamodb-table.md %})
-- [Create a S3 bucket for file uploads]({% link _chapters/create-a-s3-bucket-for-file-uploads.md %})
+- [Create an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %})
 - [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %})
   - [Create a Cognito test user]({% link _chapters/create-a-cognito-test-user.md %})
 - [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %})
@@ -102,7 +102,7 @@ Our comprehensive tutorials include
 ### Deploying the Frontend
 
 - [Deploy the Frontend]({% link _chapters/deploy-the-frontend.md %})
-  - [Create a S3 bucket]({% link _chapters/create-a-s3-bucket.md %})
+  - [Create an S3 bucket]({% link _chapters/create-an-s3-bucket.md %})
   - [Deploy to S3]({% link _chapters/deploy-to-s3.md %})
   - [Create a CloudFront distribution]({% link _chapters/create-a-cloudfront-distribution.md %})
   - [Setup your domain with CloudFront]({% link _chapters/setup-your-domain-with-cloudfront.md %})

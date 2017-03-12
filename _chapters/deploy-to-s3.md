@@ -19,7 +19,7 @@ This packages all of our assets and places them in the `build/` directory.
 
 ### Upload to S3
 
-Now to deploy simply run the following command; where `YOUR_S3_DEPLOY_BUCKET_NAME` is the name of the S3 Bucket we created in the [Create a S3 bucket]({% link _chapters/create-a-s3-bucket.md %}) chapter.
+Now to deploy simply run the following command; where `YOUR_S3_DEPLOY_BUCKET_NAME` is the name of the S3 Bucket we created in the [Create an S3 bucket]({% link _chapters/create-an-s3-bucket.md %}) chapter.
 
 ``` bash
 $ aws s3 sync build/ s3://YOUR_S3_DEPLOY_BUCKET_NAME
