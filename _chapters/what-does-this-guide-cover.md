@@ -56,7 +56,7 @@ For the frontend:
 - Use AWS Cognito SDK to login and signup users
 - Plugin to the backend APIs to manage our notes
 - Use the AWS JS SDK to upload files 
-- Create a S3 bucket to upload our app
+- Create an S3 bucket to upload our app
 - Configure CloudFront to serve out our app
 - Point our domain with Route 53 to CloudFront
 - Setup SSL to serve our app over HTTPS
