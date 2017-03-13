@@ -2,6 +2,7 @@
 layout: post
 title: Create an S3 Bucket
 date: 2017-02-06 00:00:00
+redirect_from:  /chapters/create-a-s3-bucket.html
 description: Tutorial on how to create an S3 bucket to host a React.js single page application.
 ---
 

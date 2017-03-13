@@ -2,6 +2,7 @@
 layout: post
 title: Create an S3 Bucket for File Uploads
 date: 2016-12-27 00:00:00
+redirect_from: /chapters/create-a-s3-bucket-for-file-uploads.html
 description: Tutorial on how to create and configure an S3 bucket for file uploads.
 ---
 
