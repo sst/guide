@@ -106,7 +106,7 @@ We are doing two things of note here.
 
 2. We use the `await` keyword to invoke the `login` method and store the userToken that it returns. And to do so we need to label our `handleSubmit` method as `async`.
 
-Now if you try to login using the admin user (that we created in the [Create a Cognito Test User]({% link _chapters/create-a-cognito-test-user.md %}) chapter), you should see the browser alert with the newly created user token.
+Now if you try to login using the admin@example.com user (that we created in the [Create a Cognito Test User]({% link _chapters/create-a-cognito-test-user.md %}) chapter), you should see the browser alert with the newly created user token.
 
 ![Login success screenshot]({{ site.url }}/assets/login-success.png)
 
