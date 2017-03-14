@@ -10,14 +10,14 @@ Create React App sets a lot of things up by default but it does not come with a 
 
 
 
-Let's start by installing React Router. React Router is currently making some large changes as they upgrade to v4. So for now let's stick with v3. This chapter will be updated once React Router v4 stabilizes.
+Let's start by installing React Router. React Router is currently making some large changes as they upgrade to v4. So for now let's stick with v3. This chapter will be updated once React Router v4 stabilizes.  We will also need to install the [React Router Bootstrap](https://github.com/react-bootstrap/react-router-bootstrap) library to allow us to integrate React Router with React Bootstrap.
 
 ### Installing React Router
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Run the following command in your working directory.
 
 ``` bash
-$ npm install react-router@3.0.2 --save
+$ npm install react-router@3.0.2 react-router-bootstrap --save
 ```
 
 This installs the NPM package and adds the dependency to your `package.json`.
