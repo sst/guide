@@ -9,7 +9,7 @@ In this chapter, we are going to create a test user for our Cognito User Pool. W
 
 ### Create User
 
-First, we will use AWS CLI to sign up a user with username, password and email. For simplicity of this tutorial, we will use the email for both username and email fields. 
+First, we will use AWS CLI to sign up a user with username, password and email. To keep things simple we are going to have people use their email as their username (as opposed to creating a username) while creating their account.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />In your terminal, run.
 
