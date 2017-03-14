@@ -40,7 +40,7 @@ Ensure **Use default settings** is checked, then select **Create**.
 
 Note that the default setting provisions 5 reads and 5 writes. When you create a table, you specify how much provisioned throughput capacity you want to reserve for reads and writes. DynamoDB will reserve the necessary resources to meet your throughput needs while ensuring consistent, low-latency performance. One read capacity unit can read up to 8 KB per second and one write capacity unit can write up to 1 KB per second. You can change your provisioned throughput settings, increasing or decreasing capacity as needed.
 
-The `notes` table has now been created. If you find yourself stuck with the **Table is being created** messsage; refresh the page manually.
+The `notes` table has now been created. If you find yourself stuck with the **Table is being created** message; refresh the page manually.
 
 ![Select DynamoDB Service screenshot]({{ site.url }}/assets/dynamodb/dynamodb-table-created.png)
 
