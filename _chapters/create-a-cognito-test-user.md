@@ -9,14 +9,14 @@ In this chapter, we are going to create a test user for our Cognito User Pool. W
 
 ### Create User
 
-First, we will use AWS CLI to sign up a user with username, password and email.
+First, we will use AWS CLI to sign up a user with username, password and email. To keep things simple we are going to have people use their email as their username (as opposed to creating a username) while creating their account.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />In your terminal, run.
 
 ``` bash
 $ aws cognito-idp sign-up \
   --client-id YOUR_COGNITO_APP_CLIENT_ID \
-  --username admin \
+  --username admin@example.com \
   --password Passw0rd! \
   --user-attributes Name=email,Value=admin@example.com
 ```
@@ -28,7 +28,7 @@ Now, the user is created in Cognito User Pool. However, before the user can auth
 ``` bash
 $ aws cognito-idp admin-confirm-sign-up \
   --user-pool-id YOUR_USER_POOL_ID \
-  --username admin
+  --username admin@example.com
 ```
 
 Now our test user is ready.

@@ -99,7 +99,7 @@ handleLogout = (event) => {
 }
 ```
 
-Now head over to your browser and try logging in with the admin credentials we created in the Cognito User Pool chapter. You should see the Logout button appear right away.
+Now head over to your browser and try logging in with the admin credentials we created in the [Create a Cognito Test User]({% link _chapters/create-a-cognito-test-user.md %}) chapter. You should see the Logout button appear right away.
 
 ![Login state updated screenshot]({{ site.url }}/assets/login-state-updated.png)
 
