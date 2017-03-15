@@ -10,9 +10,15 @@ Currently, our app has a single component that renders our content. For creating
 
 ### Add a Navbar
 
-Let's start by creating the outer chrome of our application by first adding a navigation bar to it. We are going to use the [Navbar](https://react-bootstrap.github.io/components.html#navbars) React-Bootstrap component.
+Let's start by creating the outer chrome of our application by first adding a navigation bar to it. We are going to use the [Navbar](https://react-bootstrap.github.io/components.html#navbars) React-Bootstrap component. And to have the links in our Navbar respond to the current route we are going to use the simple [React-Router-Bootstrap](https://github.com/react-bootstrap/react-router-bootstrap) package.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Go ahead and remove the code inside `src/App.js` and replace it with the following. Also, you can go ahead and remove `src/logo.svg`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Run the following command in your working directory.
+
+``` bash
+$ npm install react-router-bootstrap --save
+```
+
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And go ahead and remove the code inside `src/App.js` and replace it with the following. Also, you can go ahead and remove `src/logo.svg`.
 
 ``` coffee
 import React, { Component } from 'react';
@@ -59,13 +65,7 @@ We are doing a few things here:
 2. Adding a Navbar inside the container that fits to it's container's width using the attribute `fluid`.
 3. Adding a responsive and collapsible right section to the Navbar for our Login and Signup buttons using `Navbar.Collapse`.
 4. Using `IndexLink` from the React-Router to handle links to our index route dynamically (as opposed to having to refresh the page).
-5. Similarly, we handle links to our Login and Signup pages using a `LinkContainer` provided by the React-Router-Bootstrap package. It handles the styles necessary for Bootstrap NavItems while dynamically linking to our pages.
-
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Now, for this code to work we need to install the React-Router-Bootstrap package. Run the following command in your working directory.
-
-``` bash
-$ npm install react-router-bootstrap --save
-```
+5. Similarly, we handle links to our Login and Signup pages using a `LinkContainer` provided by the React-Router-Bootstrap package. It handles the styles necessary for the Bootstrap `NavItem` while dynamically linking to our pages.
 
 Let's also add a couple of line of styles to space things out a bit more.
 
