@@ -25,7 +25,7 @@ Select **Create Bucket**.
 Pick a name of the bucket and select a region. Then select **Create**.
 
 - **Bucket names** are globally unique, which means you cannot pick the same name as this tutorial.
-- **Region** is the physical geological region where the files are stored. You can choose any AWS Region that is geographically close to you to optimize latency. We will use **US Standard** in this guide.
+- **Region** is the physical geological region where the files are stored. We will use **US East (N. Virginia)** for this guide.
 
 ![Enter S3 Bucket Info screenshot]({{ site.url }}/assets/s3/enter-s3-bucket-info.png)
 
