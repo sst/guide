@@ -16,7 +16,7 @@ Now that our APIs are complete, let's deploy them.
 $ serverless deploy
 ```
 
-Near the bottom of the output for this command, you will find the `Service Information`. This has a list of the endpoints of the APIs that were created. Make a note of these endpoints as we are going to use them later while creating our frontend. We are also going to quickly test these endpoints a bit further down in this chapter.
+Near the bottom of the output for this command, you will find the `Service Information`. This has a list of the endpoints of the APIs that were created. Make a note of these endpoints as we are going to use them later while creating our frontend. We are also going to quickly test these endpoints next.
 
 ``` bash
 Service Information
@@ -39,6 +39,7 @@ functions:
   notes-app-api-prod-delete
 ```
 
+<!--
 ### Deploy a Single Function
 
 There are going to be cases where you might want to deploy just a single API as opposed to all of them. The `serverless deploy function` command deploys an individual function without going through the entire deployment cycle. This is a much faster way of deploying the changes we make.
@@ -48,6 +49,7 @@ For example, to deploy the list function again, we can run the following.
 ``` bash
 $ serverless deploy function -f list
 ```
+-->
 
 ### Test
 
