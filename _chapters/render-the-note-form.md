@@ -152,7 +152,7 @@ import {
   FormControl,
   ControlLabel,
 } from 'react-bootstrap';
-import LoaderButton from '../components/LoaderButton.js';
+import LoaderButton from '../components/LoaderButton';
 import config from '../config.js';
 import './Notes.css';
 ```

@@ -43,7 +43,7 @@ handleConfirmationSubmit = async (event) => {
     );
 
     this.props.updateUserToken(userToken);
-    this.props.router.push('/');
+    this.props.history.push('/');
   }
   catch(e) {
     alert(e);

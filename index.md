@@ -70,6 +70,7 @@ Our comprehensive tutorials include
   - [Setup Bootstrap]({% link _chapters/setup-bootstrap.md %})
 - [Handle routes with React Router]({% link _chapters/handle-routes-with-react-router.md %})
   - [Create containers]({% link _chapters/create-containers.md %})
+  - [Adding links in the navbar]({% link _chapters/adding-links-in-the-navbar.md %})
   - [Handle 404s]({% link _chapters/handle-404s.md %})
 
 ### Building the Frontend
@@ -95,8 +96,8 @@ Our comprehensive tutorials include
   - [Save changes to a note]({% link _chapters/save-changes-to-a-note.md %})
   - [Delete a note]({% link _chapters/delete-a-note.md %})
 - [Setup secure pages]({% link _chapters/setup-secure-pages.md %})
-  - [Create a HOC that checks auth]({% link _chapters/create-a-hoc-that-checks-auth.md %})
-  - [Use the HOC in the routes]({% link _chapters/use-the-hoc-in-the-routes.md %})
+  - [Create a route that redirects]({% link _chapters/create-a-route-that-redirects.md %})
+  - [Use the redirect routes]({% link _chapters/use-the-redirect-routes.md %})
   - [Redirect on login]({% link _chapters/redirect-on-login.md %})
 
 ### Deploying the Frontend

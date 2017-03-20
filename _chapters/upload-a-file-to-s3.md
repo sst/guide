@@ -85,7 +85,7 @@ export async function s3Upload(file, userToken) {
   const filename = `${AWS.config.credentials.identityId}-${Date.now()}-${file.name}`;
 
   return new Promise((resolve, reject) => (
-    s3.putObject({
+    s3.upload({
       Key: filename,
       Body: file,
       ContentType: file.type,
@@ -97,7 +97,7 @@ export async function s3Upload(file, userToken) {
         return;
       }
 
-      resolve(`${config.s3.DOMAIN}/${config.s3.BUCKET}/${filename}`);
+      resolve(result.Location);
     })
   ));
 }
@@ -107,12 +107,9 @@ export async function s3Upload(file, userToken) {
 
 ```
 s3: {
-  BUCKET: 'YOUR_S3_UPLOADS_BUCKET_NAME',
-  DOMAIN: 'https://s3.amazonaws.com'
+  BUCKET: 'YOUR_S3_UPLOADS_BUCKET_NAME'
 },
 ```
-
-Be sure to replace the `BUCKET` with your own bucket name from the S3 File Upload chapter.
 
 The above method does a couple of things.
 
@@ -150,7 +147,7 @@ handleSubmit = async (event) => {
       content: this.state.content,
       attachment: uploadedFilename,
     });
-    this.props.router.push('/');
+    this.props.history.push('/');
   }
   catch(e) {
     alert(e);
@@ -163,7 +160,7 @@ handleSubmit = async (event) => {
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And make sure to include `s3Upload` in the header by doing this:
 
 ``` javascript
-import { invokeApig, s3Upload } from '../libs/awsLib.js';
+import { invokeApig, s3Upload } from '../libs/awsLib';
 ```
 
 The change we've made in the `handleSubmit` is that:

@@ -24,7 +24,7 @@ import {
 } from 'react-bootstrap';
 import './Login.css';
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -80,6 +80,8 @@ export default class Login extends Component {
     );
   }
 }
+
+export default Login;
 ```
 
 We are introducing a couple of new concepts in this.
@@ -115,10 +117,10 @@ These styles roughly target any non-mobile screen sizes.
 
 ### Add the Route
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Now we link this container up with the rest of our app by adding the following line to `src/Routes.js` below our `<IndexRoute>`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Now we link this container up with the rest of our app by adding the following line to `src/Routes.js` below our home `<Route>`.
 
 ``` coffee
-<Route path="login" component={Login} />
+<Route path="/login" exact component={Login} />
 ```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And include our component in the header.

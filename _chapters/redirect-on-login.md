@@ -2,18 +2,18 @@
 layout: post
 title: Redirect on Login
 date: 2017-02-04 00:00:00
-description: Tutorial on how to redirect to the original page after a user logs in to your React.js app.
+description: Tutorial on how to redirect to the original page after a user logs in to your React.js app using React Router v4.
 code: frontend
 ---
 
-Our secured pages redirect to the login page when the user is not logged in, with a referral to the originating page. To redirect back after they login, we need to add a couple of things to our `Login` container.
+Our secured pages redirect to the login page when the user is not logged in, with a referral to the originating page. To redirect back after they login, we need to do a couple of more things. Currently, our `Login` component does the redirecting after the user logs in. We are going to move this to the newly created `UnauthenticatedRoute` component.
 
 Let's start by adding a method to read the `redirect` URL from the querystring.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following method to your `src/containers/Login.js` below the `constructor` method.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following method to your `src/components/UnauthenticatedRoute.js` below the imports.
 
 ``` javascript
-querystring(name, url = window.location.href) {
+function querystring(name, url = window.location.href) {
   name = name.replace(/[\[\]]/g, "\\$&");
 
   const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)", "i");
@@ -28,30 +28,29 @@ querystring(name, url = window.location.href) {
 
 This method takes the querystring param we want to read and returns it.
 
-Now let's update our `handleSubmit` method to redirect to the new `redirect` URL upon login.
+Now let's update our `Redirect` component to use this when it redirects.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace our current `handleSubmit` with the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace our current `export default ({ component: C, props: cProps, ...rest }) => {` method with the following.
 
-``` javascript
-handleSubmit = async (event) => {
-  event.preventDefault();
+``` coffee
+export default ({ component: C, props: cProps, ...rest }) => {
+  const redirect = querystring('redirect');
+  return (
+    <Route {...rest} render={props => (
+      cProps.userToken === null
+        ? <C {...props} {...cProps} />
+        : <Redirect to={(redirect === '' || redirect === null)
+            ? '/'
+            : redirect} />
+    )}/>
+  );
+};
+```
 
-  this.setState({ isLoading: true });
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And remove the following from the `handleSubmit` method in `src/containers/Login.js`.
 
-  try {
-    const userToken = await this.login(this.state.username, this.state.password);
-    const redirect = this.querystring('redirect');
-
-    this.props.updateUserToken(userToken);
-    this.props.router.push(redirect === '' || redirect === null
-      ? '/'
-      : redirect);
-  }
-  catch(e) {
-    alert(e);
-    this.setState({ isLoading: false });
-  }
-}
+``` coffee
+this.props.history.push('/');
 ```
 
 Now our login page should redirect after we login.

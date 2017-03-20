@@ -14,7 +14,7 @@ Currently, our Home containers is very simple. Let's add the conditional renderi
 
 ``` coffee
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import {
   PageHeader,
   ListGroup,

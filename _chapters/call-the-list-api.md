@@ -39,7 +39,7 @@ notes() {
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And include our API Gateway Client helper in the header.
 
 ``` javascript
-import { invokeApig } from '../libs/awsLib.js';
+import { invokeApig } from '../libs/awsLib';
 ```
 
 All this does, is make a GET request to `/notes` on `componentWillMount` and puts the results in the `notes` object in the state.
@@ -57,22 +57,22 @@ renderNotesList(notes) {
       ? ( <ListGroupItem
             key={note.noteId}
             href={`/notes/${note.noteId}`}
-            onClick={this.onNoteClick}
+            onClick={this.handleNoteClick}
             header={note.content.trim().split('\n')[0]}>
               { "Created: " + (new Date(note.createdAt)).toLocaleString() }
           </ListGroupItem> )
       : ( <ListGroupItem
             key="new"
             href="/notes/new"
-            onClick={this.onNoteClick}>
-              <h4><b>&#65291;</b> Create a new note</h4>
+            onClick={this.handleNoteClick}>
+              <h4><b>{'\uFF0B'}</b> Create a new note</h4>
           </ListGroupItem> )
   ));
 }
 
-onNoteClick = (event) => {
+handleNoteClick = (event) => {
   event.preventDefault();
-  this.props.router.push(event.currentTarget.getAttribute('href'));
+  this.props.history.push(event.currentTarget.getAttribute('href'));
 }
 ```
 

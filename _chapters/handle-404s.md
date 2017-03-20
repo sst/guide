@@ -15,18 +15,14 @@ Let's start by creating a component that will handle this for us.
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new component at `src/containers/NotFound.js` and add the following.
 
 ``` coffee
-import React, { Component } from 'react';
+import React from 'react';
 import './NotFound.css';
 
-export default class NotFound extends Component {
-  render() {
-    return (
-      <div className="NotFound">
-        <h3>Sorry, page not found!</h3>
-      </div>
-    );
-  }
-}
+export default () => (
+  <div className="NotFound">
+    <h3>Sorry, page not found!</h3>
+  </div>
+);
 ```
 
 All this component does is print out a simple message for us.
@@ -44,11 +40,11 @@ All this component does is print out a simple message for us.
 
 Now we just need to add this component to our routes to handle our 404s.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Find the `<Route>` block in `src/Routes.js` and add it as the last line in that section.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Find the `<Switch>` block in `src/Routes.js` and add it as the last line in that section.
 
 ``` coffee
 { /* Finally, catch all unmatched routes */ }
-<Route path="*" component={NotFound} />
+<Route component={NotFound} />
 ```
 
 This needs to always be the last line in the `<Route>` block. You can think of it as the route that handles requests in case all the other routes before it have failed.

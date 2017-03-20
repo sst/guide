@@ -12,15 +12,17 @@ The first thing we are going to need to do is load the note when our container l
 
 ### Add the Route
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's add a route for the note page that we are going to create by adding the following line to `src/Routes.js` below our `notes/new` route.
+Let's add a route for the note page that we are going to create.
+
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following line to `src/Routes.js` below our `/notes/new` route. We are using the `AppliedRoute` component that we created in the [Add the user token to the state]({% link _chapters/add-the-user-token-to-the-state.md %}) chapter.
 
 ``` coffee
-<Route path="notes/:id" component={Notes} />
+<AppliedRoute path="/notes/:id" exact component={Notes} props={childProps} />
 ```
 
 This is important because we are going to be pattern matching to extract our note id from the URL.
 
-By using the route path `notes/:id` we are telling the router to send all matching routes to our component `Notes`. This will also end up matching the route `notes/new` with an `id` of `new`. To ensure that doesn't happen, we put our `notes/new` route before the pattern matching one.
+By using the route path `/notes/:id` we are telling the router to send all matching routes to our component `Notes`. This will also end up matching the route `/notes/new` with an `id` of `new`. To ensure that doesn't happen, we put our `/notes/new` route before the pattern matching one.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And include our component in the header.
 
@@ -36,8 +38,8 @@ Of course this component doesn't exist yet and we are going to create it now.
 
 ``` coffee
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
-import { invokeApig } from '../libs/awsLib.js';
+import { withRouter } from 'react-router-dom';
+import { invokeApig } from '../libs/awsLib';
 
 class Notes extends Component {
   constructor(props) {
@@ -65,7 +67,7 @@ class Notes extends Component {
   }
 
   getNote() {
-    return invokeApig({ path: `/notes/${this.props.params.id}` }, this.props.userToken);
+    return invokeApig({ path: `/notes/${this.props.match.params.id}` }, this.props.userToken);
   }
 
   render() {
@@ -79,7 +81,7 @@ class Notes extends Component {
 export default withRouter(Notes);
 ```
 
-All this does is load the note on `componentWillMount` and save it to the state. We get the `id` of our note from the URL using the props automatically passed to us by React-Router in `this.props.params.id`. The keyword `id` is a part of the pattern matching in our route (`notes/:id`).
+All this does is load the note on `componentWillMount` and save it to the state. We get the `id` of our note from the URL using the props automatically passed to us by React-Router in `this.props.match.params.id`. The keyword `id` is a part of the pattern matching in our route (`/notes/:id`).
 
 And now if you switch over to your browser and navigate to a note that we previously created, you'll notice that the page renders an empty container.
 

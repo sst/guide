@@ -14,14 +14,14 @@ Let's start by creating the signup form that'll get the user's email and passwor
 
 ``` coffee
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import {
   HelpBlock,
   FormGroup,
   FormControl,
   ControlLabel,
 } from 'react-bootstrap';
-import LoaderButton from '../components/LoaderButton.js';
+import LoaderButton from '../components/LoaderButton';
 import './Signup.css';
 
 class Signup extends Component {
@@ -182,10 +182,10 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 ### Add the Route
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our login route.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our login route. We are using the `AppliedRoute` component that we created in the [Add the user token to the state]({% link _chapters/add-the-user-token-to-the-state.md %}) chapter.
 
 ``` coffee
-<Route path="signup" component={Signup} />
+<AppliedRoute path="/signup" exact component={Signup} props={childProps} />
 ```
 
 And include our component in the header.

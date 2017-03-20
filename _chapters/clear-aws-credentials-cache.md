@@ -34,9 +34,7 @@ handleLogout = (event) => {
 
   this.updateUserToken(null);
 
-  if (this.props.location.pathname !== '/login') {
-    this.props.router.push('/login');
-  }
+  this.props.history.push('/login');
 }
 ```
 

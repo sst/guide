@@ -16,13 +16,13 @@ First we are going to create the form for a note. It'll take some content and a 
 
 ``` coffee
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import {
   FormGroup,
   FormControl,
   ControlLabel,
 } from 'react-bootstrap';
-import LoaderButton from '../components/LoaderButton.js';
+import LoaderButton from '../components/LoaderButton';
 import config from '../config.js';
 import './NewNote.css';
 
@@ -122,10 +122,10 @@ MAX_ATTACHMENT_SIZE: 5000000,
 
 ### Add the Route
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our signup route.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our signup route. We are using the `AppliedRoute` component that we created in the [Add the user token to the state]({% link _chapters/add-the-user-token-to-the-state.md %}) chapter.
 
 ``` coffee
-<Route path="notes/new" component={NewNote} />
+<AppliedRoute path="/notes/new" exact component={NewNote} props={childProps} />
 ```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And include our component in the header.

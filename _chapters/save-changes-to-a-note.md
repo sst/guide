@@ -13,7 +13,7 @@ Now that our note loads into our form, let's work on saving the changes we make 
 ``` coffee
 saveNote(note) {
   return invokeApig({
-    path: `/notes/${this.props.params.id}`,
+    path: `/notes/${this.props.match.params.id}`,
     method: 'PUT',
     body: note,
   }, this.props.userToken);
@@ -42,7 +42,7 @@ handleSubmit = async (event) => {
       content: this.state.content,
       attachment: uploadedFilename || this.state.note.attachment,
     });
-    this.props.router.push('/');
+    this.props.history.push('/');
   }
   catch(e) {
     alert(e);
@@ -54,14 +54,14 @@ handleSubmit = async (event) => {
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And include our `s3Upload` helper method in the header:
 
 ``` javascript
-import { invokeApig, s3Upload } from '../libs/awsLib.js';
+import { invokeApig, s3Upload } from '../libs/awsLib';
 ```
 
 The code above is doing a couple of things that should be very similar to what we did in the `NewNote` container.
 
 1. If there is a file to upload we call `s3Upload` to upload it and return the URL.
 
-2. We save the note by making `PUT` request with the note object to `/notes/note_id` where we get the note_id from `this.props.params.id`.
+2. We save the note by making `PUT` request with the note object to `/notes/note_id` where we get the note_id from `this.props.match.params.id`.
 
 3. And on success we redirect the user to the homepage.
 

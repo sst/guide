@@ -58,7 +58,7 @@ Now we are ready to make our create call in our form.
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's include our `awsLib` by adding the following to the header of `src/containers/NewNote.js`.
 
 ``` javascript
-import { invokeApig } from '../libs/awsLib.js';
+import { invokeApig } from '../libs/awsLib';
 ```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And replace our `handleSubmit` function with the following.
@@ -78,7 +78,7 @@ handleSubmit = async (event) => {
     await this.createNote({
       content: this.state.content,
     });
-    this.props.router.push('/');
+    this.props.history.push('/');
   }
   catch(e) {
     alert(e);

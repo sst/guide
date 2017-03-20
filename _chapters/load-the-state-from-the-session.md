@@ -47,7 +47,7 @@ These two methods are pretty self-explanatory. In `getCurrentUser`, we use the C
 
 We want to ensure that when the user refreshes the app, we load the user token from the session. We are going to do this in `componentWillMount`. And since `getUserToken` is going to be called async; we need to ensure that the rest of our app is only ready to go after this has been loaded.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />To do this, let's add a flag to our `src/App.js` state called `isLoadingUserToken`. The initial state in our constructor should look like the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />To do this, let's add a flag to our `src/App.js` state called `isLoadingUserToken`. The initial state in our `constructor` should look like the following.
 
 ``` javascript
 this.state = {
@@ -97,34 +97,28 @@ render() {
   };
 
   return ! this.state.isLoadingUserToken
-    &&
-    (
-      <div className="App container">
-        <Navbar fluid collapseOnSelect>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <IndexLink to="/">Scratch</IndexLink>
-            </Navbar.Brand>
-            <Navbar.Toggle />
-          </Navbar.Header>
-          <Navbar.Collapse>
-            <Nav pullRight>
+  &&
+  (
+    <div className="App container">
+      <Navbar fluid collapseOnSelect>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <Link to="/">Scratch</Link>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav pullRight>
             { this.state.userToken
               ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
-              : [ <LinkContainer key="1" to="/signup">
-                    <NavItem>Signup</NavItem>
-                  </LinkContainer>,
-                  <LinkContainer key="2" to="/login">
-                    <NavItem>Login</NavItem>
-                  </LinkContainer> ] }
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-        <div>
-          { React.cloneElement(this.props.children, childProps) }
-        </div>
-      </div>
-    );
+              : [ <RouteNavItem key={1} onClick={this.handleNavLink} href="/signup">Signup</RouteNavItem>,
+                  <RouteNavItem key={2} onClick={this.handleNavLink} href="/login">Login</RouteNavItem> ] }
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+      <Routes childProps={childProps} />
+    </div>
+  );
 }
 ```
 
@@ -132,4 +126,4 @@ Now if you head over to your browser and refresh the page, you should see that a
 
 ![Login from session loaded screenshot]({{ site.url }}/assets/login-from-session-loaded.png)
 
-Unfortunately, when we hit **Logout** and refresh the page; we are still logged in. To fix this we are going to clear the session on logout next.
+Unfortunately, when we hit Logout and refresh the page; we are still logged in. To fix this we are going to clear the session on logout next.

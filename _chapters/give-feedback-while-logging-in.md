@@ -31,7 +31,7 @@ handleSubmit = async (event) => {
   try {
     const userToken = await this.login(this.state.username, this.state.password);
     this.props.updateUserToken(userToken);
-    this.props.router.push('/');
+    this.props.history.push('/');
   }
   catch(e) {
     alert(e);
@@ -44,20 +44,18 @@ handleSubmit = async (event) => {
 
 Now to reflect the state change in our button we are going to render it differently based on the `isLoading` flag. But we are going to need this piece of code in a lot of different places. So it makes sense that we create a reusable component out of it.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a `src/components/` directory and add the following in `src/components/LoaderButton.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following in `src/components/LoaderButton.js`.
 
 ``` coffee
 import React from 'react';
 import { Button, Glyphicon } from 'react-bootstrap';
 
-export default function LoaderButton({ isLoading, text, loadingText, disabled = false, ...props }) {
-  return (
-    <Button disabled={ disabled || isLoading } {...props}>
-      { isLoading && <Glyphicon glyph="refresh" className="spinning" /> }
-      { ! isLoading ? text : loadingText }
-    </Button>
-  );
-}
+export default ({ isLoading, text, loadingText, disabled = false, ...props }) => (
+  <Button disabled={ disabled || isLoading } {...props}>
+    { isLoading && <Glyphicon glyph="refresh" className="spinning" /> }
+    { ! isLoading ? text : loadingText }
+  </Button>
+);
 ```
 
 This is a really simple component that takes a `isLoading` flag and the text that the button displays in the two states (the default state and the loading state). The `disabled` prop is a result of what we have currently in our `Login` button. And we ensure that the button is disabled when `isLoading` is `true`. This makes it so that the user can't click it while we are in the process of logging them in.
@@ -80,9 +78,23 @@ This spins the refresh Glyphicon for the duration of a second.
 
 ### Render Using the isLoading Flag
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Now we can use our new component in our `src/containers/Login.js`. Let's start by replacing the `<Button>` element in the `render` method with the following.
+Now we can use our new component in our `Login` container.
 
-``` javascript
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />In `src/containers/Login.js` find the `<Button>` component in the `render` method.
+
+``` coffee
+<Button
+  block
+  bsSize="large"
+  disabled={ ! this.validateForm() }
+  type="submit">
+  Login
+</Button>
+```
+
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And replace it with this.
+
+``` coffee
 <LoaderButton
   block
   bsSize="large"
@@ -93,7 +105,7 @@ This spins the refresh Glyphicon for the duration of a second.
   loadingText="Logging in…" />
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Import the `LoaderButton` in the header. And remove the reference to the `Button` component.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Also, import the `LoaderButton` in the header. And remove the reference to the `Button` component.
 
 ``` javascript
 import {
@@ -101,7 +113,7 @@ import {
   FormControl,
   ControlLabel,
 } from 'react-bootstrap';
-import LoaderButton from '../components/LoaderButton.js';
+import LoaderButton from '../components/LoaderButton';
 ```
 
 And now when we switch over to the browser and try logging in, you should see the intermediate state before the login completes.

@@ -30,7 +30,7 @@ renderLander() {
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And import the `Link` component from React-Router, so that our import looks like the following.
 
 ``` javascript
-import { withRouter, Link } from 'react-router';
+import { withRouter, Link } from 'react-router-dom';
 ```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Also, add a couple of styles to `src/containers/Home.css`.

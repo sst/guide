@@ -13,7 +13,7 @@ The last thing we need to do on the note page is allowing users to delete their 
 ``` coffee
 deleteNote() {
   return invokeApig({
-    path: `/notes/${this.props.params.id}`,
+    path: `/notes/${this.props.match.params.id}`,
     method: 'DELETE',
   }, this.props.userToken);
 }
@@ -31,7 +31,7 @@ handleDelete = async (event) => {
 
   try {
     await this.deleteNote();
-    this.props.router.push('/');
+    this.props.history.push('/');
   }
   catch(e) {
     alert(e);
@@ -40,7 +40,7 @@ handleDelete = async (event) => {
 }
 ```
 
-We are simply making a `DELETE` request to `/notes/note_id` where we get the `id` from `this.props.params.id`. This calls our delete API and we redirect to the homepage on success.
+We are simply making a `DELETE` request to `/notes/note_id` where we get the `id` from `this.props.match.params.id`. This calls our delete API and we redirect to the homepage on success.
 
 Now if you switch over to your browser and try deleting a note you should see it confirm your action and then delete the note.
 
