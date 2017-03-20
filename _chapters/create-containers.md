@@ -2,7 +2,7 @@
 layout: post
 title: Create Containers
 date: 2017-01-11 00:00:00
-description: Tutorial on how to add a container and a Navbar and routes to your React.js app with React Router v4.
+description: Tutorial on how to add a container, a Navbar, and routes to your React.js app with React Router v4.
 code: frontend
 ---
 
@@ -125,7 +125,7 @@ export default () => (
 );
 ```
 
-This component creates a `Switch` component from the React-Router that renders the first matching route that is defined within it. For now we only have a single route, it looks for `/` and renders the `Home` component when matched. We are also using the `exact` prop to ensure that it matches the `/` route exactly. This is because the path `/` will also match any route that starts with a `/`.
+This component uses this `Switch` component from React-Router that renders the first matching route that is defined within it. For now we only have a single route, it looks for `/` and renders the `Home` component when matched. We are also using the `exact` prop to ensure that it matches the `/` route exactly. This is because the path `/` will also match any route that starts with a `/`.
 
 ### Render the Routes
 
@@ -143,7 +143,7 @@ import Routes from './Routes';
 <Routes />
 ```
 
-So the `render` method of our `src/App.js` should now like this.
+So the `render` method of our `src/App.js` should now look like this.
 
 ``` coffee
 render() {
@@ -169,4 +169,4 @@ Finally, head over to your browser and your app should show the brand new home p
 
 ![New homepage loaded screenshot]({{ site.url }}/assets/new-homepage-loaded.png)
 
-Next we are going add login and signup links to our navbar.
+Next we are going to add login and signup links to our navbar.

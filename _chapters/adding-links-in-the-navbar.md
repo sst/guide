@@ -82,7 +82,7 @@ Now if you flip over to your browser, you should see the two links in our navbar
 
 ![Navbar links added screenshot]({{ site.url }}/assets/navbar-links-added.png)
 
-Unfortunately, they are are not highlighted to reflect the change in the URL. To fix this we are going to use another useful feature of the React-Router. We are going to use the `Route` component to detect when we are on a certain page and then render based on it. And since we are going to do this twice, let's make this into a component that can be re-used.
+Unfortunately, they are not highlighted to reflect the change in the URL. To fix this we are going to use another useful feature of the React-Router. We are going to use the `Route` component to detect when we are on a certain page and then render based on it. And since we are going to do this twice, let's make this into a component that can be re-used.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a `src/components/` directory and add the following inside `src/components/RouteNavItem.js`.
 

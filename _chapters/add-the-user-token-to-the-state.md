@@ -59,7 +59,7 @@ const childProps = {
 
 Currently, our `Routes` component does not do anything with the passed in `childProps`. We need it to apply these props to the child component it is going to render. In this case we need it to apply them to our `Login` component.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />To do this create a new component in `src/components/AppliedRoute.js` and add the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />To do this, create a new component in `src/components/AppliedRoute.js` and add the following.
 
 ``` coffee
 import React from 'react';
@@ -72,7 +72,7 @@ export default ({ component: C, props: cProps, ...rest }) => (
 
 This simple component creates a `Route` where the child component that it renders contains the passed in props.
 
-Now to use this component, we are going to use it in the routes where we need to have the `childProps` passed in.
+Now to use this component, we are going to include it in the routes where we need to have the `childProps` passed in.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace the `export default () => (` method in `src/Routes.js` with the following.
 

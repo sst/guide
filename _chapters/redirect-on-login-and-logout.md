@@ -62,7 +62,7 @@ Now if you head over to your browser and try logging in, you should be redirecte
 
 ### Redirect to Login After Logout
 
-Now we'll do something very similar for the logout process. Since we are already using the `withRouter` HOC for our App component, we can go ahead and the bit that does the redirect.
+Now we'll do something very similar for the logout process. Since we are already using the `withRouter` HOC for our App component, we can go ahead and add the bit that does the redirect.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following to the bottom of the `handleLogout` method in our `src/App.js`.
 
