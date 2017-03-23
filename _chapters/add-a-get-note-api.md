@@ -67,15 +67,6 @@ This follows exactly the same structure as our previous `create.js` function. Th
 
 This defines our get note API. It adds a GET request handler with the endpoint `/notes/{id}`. And just as before we use our Cognito User Pool as the authorizer.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `webpack.config.js` file and update the `entry` block to include our newly created file. The `entry` block should now look like the following.
-
-```
-  entry: {
-    create: './create.js',
-    get: './get.js',
-  },
-```
-
 ### Test
 
 To test our get note API we need to mock passing in the `noteId` parameter. We are going to use the `noteId` of the note we created in the previous chapter and add in a `pathParameters` block to our `events.json`. So it should look similar to the one below.

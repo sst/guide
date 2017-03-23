@@ -61,18 +61,6 @@ This makes a DynamoDB `delete` call with the `userId` & `noteId` key to delete t
 
 This adds a DELETE request handler to the `/notes/{id}` endpoint.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `webpack.config.js` file and update the `entry` block to include our newly created file. The `entry` block should now look like the following.
-
-```
-  entry: {
-    create: './create.js',
-    get: './get.js',
-    list: './list.js',
-    update: './update.js',
-    delete: './delete.js',
-  },
-```
-
 ### Test
 
 Replace the `events.json` with the following. Just like before we'll use the `noteId` of our note in place of the `id` in the `pathParameters` block.

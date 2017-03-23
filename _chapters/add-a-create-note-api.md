@@ -135,14 +135,6 @@ functions:
 
 Here we are adding our newly added create function to the configuration. We specify that it handles `post` requests at the `/notes` endpoint. We set CORS support to true. This is because our frontend is going to be served from a different domain. We also specify that we want this API to authenticate via the Cognito User Pool that we had previously setup.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `webpack.config.js` file and update the `entry` block to include our newly created file.
-
-```
-  entry: {
-    create: './create.js',
-  },
-```
-
 ### Test
 
 Now we are ready to test our new API. To be able to test it on our local we are going to mock the input parameters.

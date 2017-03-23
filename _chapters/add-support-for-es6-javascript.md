@@ -21,27 +21,34 @@ $ npm install --save-dev \
     babel-plugin-transform-runtime \
     babel-preset-react-app \
     serverless-webpack \
+    glob \
     webpack \
     webpack-node-externals
 
 $ npm install --save babel-runtime
 ```
 
+Most of the above packages are only need while we are building our project and they won't be deployed along with our Lambda functions.
+
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a file called `webpack.config.js` in the root with the following.
 
 ``` javascript
-var nodeExternals = require('webpack-node-externals');
+var glob = require('glob');
 var path = require('path');
+var nodeExternals = require('webpack-node-externals');
+
+// Required for Create React App Babel transform
 process.env.NODE_ENV = 'production';
 
 module.exports = {
-  entry: {
-  },
+  // Use all js files in project root (except
+  // the webpack config) as an entry
+  entry: globEntries('!(webpack.config).js'),
   target: 'node',
-  // because 'aws-sdk' is not compatible with webpack,
+  // Since 'aws-sdk' is not compatible with webpack,
   // we exclude all node dependencies
   externals: [nodeExternals()],
-  // run babel on all .js files and skip those in node_modules
+  // Run babel on all .js files and skip those in node_modules
   module: {
     loaders: [{
       test: /\.js$/,
@@ -50,7 +57,7 @@ module.exports = {
       exclude: /node_modules/,
     }]
   },
-  // since we are going to create multiple APIs in this guide, and we are 
+  // We are going to create multiple APIs in this guide, and we are 
   // going to create a js file to for each, we need this output block
   output: {
     libraryTarget: 'commonjs',
@@ -58,9 +65,21 @@ module.exports = {
     filename: '[name].js'
   },
 };
+
+function globEntries(globPath) {
+  var files = glob.sync(globPath);
+  var entries = {};
+
+  for (var i = 0; i < files.length; i++) {
+    var entry = files[i];
+    entries[path.basename(entry, path.extname(entry))] = './' + entry;
+  }
+
+  return entries;
+}
 ```
 
-This is the configuration Webpack will use to package our app.
+This is the configuration Webpack will use to package our app. The main part of this config is the `entry` attribute that we are automatically building up by looking for the relevant files in our project root.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a file called `.babelrc` in the root with the following. We are using the same Babel preset (**react-app**) as the one we are going to use in the frontend.
 
@@ -74,7 +93,7 @@ This is the configuration Webpack will use to package our app.
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Open `serverless.yml` and replace it with the following.
 
 ``` yaml
-service: react-notes-app-api
+service: notes-app-api
 
 # use serverless-webpack plugin to transpile ES6
 plugins:

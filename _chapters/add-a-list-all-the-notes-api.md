@@ -63,16 +63,6 @@ This is pretty much the same as our `get.js` except we only pass in the `userId`
 
 This defines the `/notes` endpoint that takes a GET request with the same Cognito User Pool authorizer.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `webpack.config.js` file and update the `entry` block to include our newly created file. The `entry` block should now look like the following.
-
-```
-  entry: {
-    create: './create.js',
-    get: './get.js',
-    list: './list.js',
-  },
-```
-
 ### Test
 
 Update `event.json` file with following.

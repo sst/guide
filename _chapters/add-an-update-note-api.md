@@ -70,17 +70,6 @@ This should look similar to the `create.js` function. Here we make an `update` D
 
 Here we are adding a handler for the PUT request to the `/notes/{id}` endpoint.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `webpack.config.js` file and update the `entry` block to include our newly created file. The `entry` block should now look like the following.
-
-```
-  entry: {
-    create: './create.js',
-    get: './get.js',
-    list: './list.js',
-    update: './update.js',
-  },
-```
-
 ### Test
 
 To test our function replace the `events.json` with the following. Also, don't forget to use the `noteId` of the note we have been using in place of the `id` in the `pathParameters` block.
