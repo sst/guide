@@ -28,7 +28,7 @@ $ npm install --save-dev \
 $ npm install --save babel-runtime
 ```
 
-Most of the above packages are only need while we are building our project and they won't be deployed along with our Lambda functions.
+Most of the above packages are only needed while we are building our project and they won't be deployed to our Lambda functions.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a file called `webpack.config.js` in the root with the following.
 
@@ -79,7 +79,7 @@ function globEntries(globPath) {
 }
 ```
 
-This is the configuration Webpack will use to package our app. The main part of this config is the `entry` attribute that we are automatically building up by looking for the relevant files in our project root.
+This is the configuration Webpack will use to package our app. The main part of this config is the `entry` attribute that we are automatically generating by looking for the relevant files in our project root.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a file called `.babelrc` in the root with the following. We are using the same Babel preset (**react-app**) as the one we are going to use in the frontend.
 
