@@ -288,7 +288,7 @@ a.post-info {
   & > a {
     @extend %a-secondary;
     font-weight: bold;
-    line-height: 84px;
+    line-height: 138px;
 
     @include media-query($on-palm) {
       padding-bottom: 30px;
@@ -329,6 +329,22 @@ a.post-info {
 
       ul.share-buttons li {
         padding: 0 5px;
+      }
+
+      a.newsletter {
+        margin-top: 10px;
+        padding: 14px 0;
+        font-weight: bold;
+        font-size: 13px;
+        width: 194px;
+        border-radius: 4px;
+        line-height: 1.2;
+        display: inline-block;
+        background-color: $brand-color;
+        color: white;
+        &:hover {
+          background-color: darken($brand-color, 10%);
+        }
       }
     }
   }
