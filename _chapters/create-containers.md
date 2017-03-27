@@ -86,7 +86,9 @@ class Home extends Component {
 export default Home;
 ```
 
-This simply renders our home page given that the user is not currently signed in. Let's add a few lines to style this.
+This simply renders our home page given that the user is not currently signed in.
+
+Now let's add a few lines to style this.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following into `src/containers/Home.css`.
 
