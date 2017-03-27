@@ -16,7 +16,7 @@ The biggest benefit by far is that you only need to worry about your code and no
 The main reason it's cheaper to run serverless applications is that you are effectively only paying per request. So when your application is not being used, you are not being charged for it. Let's do a quick breakdown of what it would cost for us to run our note taking application. We'll assume that we have 1000 daily active users making 20 requests per day to our API and storing around 10MB of files on S3. Here is a very rough calculation of our costs.
 
 {: .cost-table }
-| Service             | Rates         | Cost  |
+| Service             | Rate          | Cost  |
 | ------------------- | ------------- | -----:|
 | Cognito             | Free<sup>[1]</sup> | $0.00 |
 | API Gateway         | $3.5/M reqs + $0.09/GB transfer | $2.20 |
