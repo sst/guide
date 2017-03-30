@@ -48,7 +48,7 @@ Our comprehensive tutorials include
   - [Create a Cognito test user]({% link _chapters/create-a-cognito-test-user.md %})
 - [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %})
 - [Setup the Serverless Framework]({% link _chapters/setup-the-serverless-framework.md %})
-  - [Add support for ES6 JavaScript]({% link _chapters/add-support-for-es6-javascript.md %})
+  - [Add support for ES6/ES7 JavaScript]({% link _chapters/add-support-for-es6-javascript.md %})
 
 ### Building the Backend
 
@@ -116,6 +116,12 @@ Our comprehensive tutorials include
 ### Conclusion
 
 - [Wrapping up]({% link _chapters/wrapping-up.md %})
+
+<hr class="tools" />
+
+### Tools
+
+- [Serverless ES7 Service]({% link _chapters/serverless-es7-service.md %})
 
 <div class="extras">
   <div class="container">

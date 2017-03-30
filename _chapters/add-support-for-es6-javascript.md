@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Add Support for ES6 JavaScript
+title: Add Support for ES6/ES7 JavaScript
 date: 2016-12-30 12:00:00
-description: Tutorial on adding support for ES6 JavaScript in the Serverless Framework using Babel and Webpack.
+description: Tutorial on adding support for ES6/ES7 JavaScript in the Serverless Framework using Babel and Webpack.
 code: backend
 ---
 
-By default, AWS Lambda only supports a specific version of JavaScript. It doesn't have an up-to-date Node.js engine. And looking a bit further ahead, we'll be using a more advanced flavor of JavaScript in the frontend called ES6. So it would make sense to follow the same syntax on the backend and have a transpiler to compile it down to the Lambda supported version for us. This would mean that we won't need to worry about writing different types of code on the backend or the frontend. 
+By default, AWS Lambda only supports a specific version of JavaScript. It doesn't have an up-to-date Node.js engine. And looking a bit further ahead, we'll be using a more advanced flavor of JavaScript with ES6/ES7 features. So it would make sense to follow the same syntax on the backend and have a transpiler to compile it down to the Lambda supported version for us. This would mean that we won't need to worry about writing different types of code on the backend or the frontend.
 
 In this chapter, we are going to enable ES6 capabilities by setting up [Babel](https://babeljs.io) and [Webpack](https://webpack.github.io) to transpile and package our project. If you would like to code with Lambda's default JavaScript version, you can skip this chapter. But you will not be able to directly use the sample code in the later chapters, as they are written in ES6 syntax.
 

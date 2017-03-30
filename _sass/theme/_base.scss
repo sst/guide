@@ -243,3 +243,17 @@ thead {
 tr:nth-child(even) {
   background-color: lighten($grey-color-light, 10%);
 }
+
+
+
+/**
+ * Horizontal Rule
+ */
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid $grey-color-light;
+  margin: 1em 0;
+  padding: 0;
+}
