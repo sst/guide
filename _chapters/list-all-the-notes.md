@@ -6,7 +6,7 @@ description: Tutorial on how to render conditionally in a component in your Reac
 code: frontend
 ---
 
-Now that we are able to create a new note. Let's create a page where we can see a list of all the notes a user has created. It makes sense that this would be the home page (even though we use the `/` route for the landing page). So we just need to conditionally render the landing page or the home page depending on the user session.
+Now that we are able to create a new note. Let's create a page where we can see a list of all the notes a user has created. It makes sense that this would be the homepage (even though we use the `/` route for the landing page). So we just need to conditionally render the landing page or the homepage depending on the user session.
 
 Currently, our Home containers is very simple. Let's add the conditional rendering in there.
 
@@ -81,6 +81,6 @@ We are doing a few things of note here:
 
 And that's our basic setup! Head over to the browser and the homepage of our app should render out an empty list.
 
-![Empty home page loaded screenshot]({{ site.url }}/assets/empty-home-page-loaded.png)
+![Empty homepage loaded screenshot]({{ site.url }}/assets/empty-homepage-loaded.png)
 
 Next we are going to fill it up with our API.

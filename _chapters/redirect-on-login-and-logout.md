@@ -8,7 +8,7 @@ code: frontend
 
 To complete the login flow we are going to need to do two more things.
 
-1. Redirect the user to the home page after they login.
+1. Redirect the user to the homepage after they login.
 2. And redirect them back to the login page after they logout.
 
 We are going to use the `withRouter` HOC that comes with React-Router.
@@ -56,7 +56,7 @@ handleSubmit = async (event) => {
 }
 ```
 
-Now if you head over to your browser and try logging in, you should be redirected to the home page after you've been logged in.
+Now if you head over to your browser and try logging in, you should be redirected to the homepage after you've been logged in.
 
 ![Redirect home after login screenshot]({{ site.url }}/assets/redirect-home-after-login.png)
 

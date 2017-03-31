@@ -169,6 +169,6 @@ The change we've made in the `handleSubmit` is that:
 
 2. Use the returned URL and add that to the note object when we create the note.
 
-Now when we switch over to our browser and submit the form with an uploaded file we should see the note being created successfully. And the app being redirected to the home page.
+Now when we switch over to our browser and submit the form with an uploaded file we should see the note being created successfully. And the app being redirected to the homepage.
 
 Next up we are going to make sure we clear out AWS credentials that are cached by the AWS JS SDK before we move on.

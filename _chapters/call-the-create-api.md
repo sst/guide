@@ -102,9 +102,9 @@ This does a couple of simple things.
 
 2. For now the note object is simply the content of the note. We are creating these notes without an attachment for now.
 
-3. Finally, after the note is created we redirect to our home page.
+3. Finally, after the note is created we redirect to our homepage.
 
-And that's it; if you switch over to your browser and try submitting your form, it should successfully navigate over to our home page.
+And that's it; if you switch over to your browser and try submitting your form, it should successfully navigate over to our homepage.
 
 ![New note created screenshot]({{ site.url }}/assets/new-note-created.png)
 

@@ -6,7 +6,7 @@ description: Tutorial on how to call an API and render a list using React Bootst
 code: frontend
 ---
 
-Now that we have our basic home page setup, let's make the API call to render our list of notes.
+Now that we have our basic homepage setup, let's make the API call to render our list of notes.
 
 ### Make the Request
 
@@ -112,7 +112,7 @@ The code above does a few things.
 
 Now head over to your browser and you should see your list displayed.
 
-![Home page list loaded screenshot]({{ site.url }}/assets/home-page-list-loaded.png)
+![Homepage list loaded screenshot]({{ site.url }}/assets/homepage-list-loaded.png)
 
 And if you click on the links they should take you to their respective pages.
 

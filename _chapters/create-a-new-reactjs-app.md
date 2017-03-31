@@ -10,7 +10,7 @@ Let's get started with our frontend. We are going to create a single page app us
 
 ### Install Create React App
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Run the following command.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new project in directory separate from the backend. Run the following command.
 
 ``` bash
 $ npm install -g create-react-app

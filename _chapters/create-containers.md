@@ -44,7 +44,7 @@ We are doing a few things here:
 
 1. Creating a fixed width container using Bootstrap in `div.container`.
 2. Adding a Navbar inside the container that fits to it's container's width using the attribute `fluid`.
-3. Using `Link` component from the React-Router to handle the link to our app's home page (without forcing the page to refresh).
+3. Using `Link` component from the React-Router to handle the link to our app's homepage (without forcing the page to refresh).
 
 Let's also add a couple of line of styles to space things out a bit more.
 
@@ -62,7 +62,7 @@ Let's also add a couple of line of styles to space things out a bit more.
 
 ### Add the Home container
 
-Now that we have the outer chrome of our application ready, let's add the container for the home page of our app.  It'll respond to the `/` route.
+Now that we have the outer chrome of our application ready, let's add the container for the homepage of our app.  It'll respond to the `/` route.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a `src/containers` directory and add the following inside `src/containers/Home.js`.
 
@@ -86,7 +86,7 @@ class Home extends Component {
 export default Home;
 ```
 
-This simply renders our home page given that the user is not currently signed in.
+This simply renders our homepage given that the user is not currently signed in.
 
 Now let's add a few lines to style this.
 
@@ -167,7 +167,7 @@ render() {
 
 This ensures that as we navigate to different routes in our app, the portion below the navbar will change to reflect that.
 
-Finally, head over to your browser and your app should show the brand new home page of your app.
+Finally, head over to your browser and your app should show the brand new homepage of your app.
 
 ![New homepage loaded screenshot]({{ site.url }}/assets/new-homepage-loaded.png)
 
