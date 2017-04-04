@@ -223,20 +223,11 @@ AWS.config.update({region:'us-east-1'});
 export function call(action, params) {
   const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-  return new Promise((resolve, reject) => {
-    dynamoDb[action](params, (error, result) => {
-      if (error) {
-        reject(error);
-        return;
-      }
-
-      resolve(result);
-    });
-  });
+  return dynamoDb[action](params).promise();
 }
 ```
 
-Here we are adding a helper function to convert the DynamoDB callbacks to use the ES6 Promise syntax. Promises are a method for managing asynchronous code that serve as an alternative to the standard callback function syntax. It will make our code a lot easier to read.
+Here we are using the promise form of the DynamoDB methods. Promises are a method for managing asynchronous code that serve as an alternative to the standard callback function syntax. It will make our code a lot easier to read.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Now, we'll go back to our `create.js` and use the helper functions we created. Our `create.js` should now look like the following.
 
@@ -268,4 +259,4 @@ export async function main(event, context, callback) {
 };
 ```
 
-Next, we are going to write the API to get a note given it's id.
+Next, we are going to write the API to get a note given its' id.
