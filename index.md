@@ -3,26 +3,7 @@ layout: home
 description: Step-by-step tutorials for creating full-stack serverless applications. Learn to build a CRUD app using React.js, AWS Lambda, API Gateway, DynamoDB, and Cognito.
 ---
 
-{: .pitch }
-# Serverless Stack is a comprehensive guide to creating full-stack serverless applications. Create a [note taking app](https://demo.serverless-stack.com) from scratch using React.js, AWS Lambda, API Gateway, DynamoDB, and Cognito. Follow our step-by-step tutorials and use our live chat if you have any questions.
-
-<div class="feature-divider"></div>
-
-{: .feature-pitch }
-Tired of reading multiple blog posts to create your serverless app?
-
-<div class="feature-divider"></div>
-
-{: .feature-desc }
-Our comprehensive tutorials include
-
-{: .feature-list }
-- Step-by-step **instructions with screenshots** for setting up your AWS serverless API backend
-- **Easy to understand** explanations for creating a **React.js** single page app without using a ton of other external packages
-- **Over 50 tutorials** that take you all the way from creating your AWS account to setting up your app with your own domain
-- **Complete code samples** hosted on GitHub for both the backend and frontend
-- **Live chat** to answer your questions and help you along the way
-- And it’s all **free!**
+{% include lander.html %}
 
 {: .toc }
 ## Table of Contents

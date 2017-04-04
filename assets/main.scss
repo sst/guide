@@ -135,15 +135,16 @@ div.home .feature-pitch {
   font-weight: 700;
   text-align: center;
 }
-div.home .feature-desc {
+div.home .feature-desc,
+div.home .quotes-desc {
   font-size: 18px;
   text-align: center;
   color: $secondary-text-color;
 }
 div.home .feature-list {
   font-size: 18px;
-  margin-bottom: 2 * $spacing-unit - 6px;
   padding: 0 90px;
+  margin-bottom: $spacing-unit + 5px;
 
   strong {
     background-color: $hilight-background-color;
@@ -152,6 +153,32 @@ div.home .feature-list {
   @include media-query($on-palm) {
     margin-bottom: $spacing-unit - 5px;
     padding: 0 10px;
+  }
+}
+div.home ul.quotes {
+  margin-left: 0;
+  margin-top: $spacing-unit - 5px;
+  margin-bottom: 2 * $spacing-unit - 6px;
+  list-style-type: none;
+  padding: 0 60px;
+
+  @include media-query($on-palm) {
+    margin-bottom: $spacing-unit - 5px;
+    padding: 0 10px;
+  }
+}
+div.home ul.quotes li {
+  margin-bottom: $spacing-unit;
+}
+div.home ul.quotes p {
+  margin-bottom: 0;
+
+  &:first-child {
+    margin-bottom: 7px;
+  }
+  &:last-child {
+    font-size: 14px;
+    font-weight: bold;
   }
 }
 div.home .toc {
