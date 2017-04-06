@@ -2,6 +2,7 @@
 layout: post
 title: Add Support for ES6/ES7 JavaScript
 date: 2016-12-30 12:00:00
+redirect_from: /chapters/add-support-for-es6-javascript.html
 description: Tutorial on adding support for ES6/ES7 JavaScript in the Serverless Framework using Babel and Webpack.
 code: backend
 ---
@@ -95,17 +96,17 @@ This is the configuration Webpack will use to package our app. The main part of 
 ``` yaml
 service: notes-app-api
 
-# use serverless-webpack plugin to transpile ES6
+# Use serverless-webpack plugin to transpile ES6/ES7
 plugins:
   - serverless-webpack
 
-# enable auto-packing of external modules
+# Enable auto-packing of external modules
 custom:
   webpackIncludeModules: true
 
 provider:
   name: aws
-  runtime: nodejs4.3
+  runtime: nodejs6.10
   stage: prod
   region: us-east-1
 ```
