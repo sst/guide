@@ -28,6 +28,7 @@ description: Step-by-step tutorials for creating full-stack serverless applicati
 - [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %})
   - [Create a Cognito test user]({% link _chapters/create-a-cognito-test-user.md %})
 - [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %})
+  - [Cognito user pool vs identity pool]({% link _chapters/cognito-user-pool-vs-identity-pool.md %})
 - [Setup the Serverless Framework]({% link _chapters/setup-the-serverless-framework.md %})
   - [Add support for ES6/ES7 JavaScript]({% link _chapters/add-support-for-es6-es7-javascript.md %})
 

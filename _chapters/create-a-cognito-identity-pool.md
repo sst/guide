@@ -87,4 +87,4 @@ Take a note of the **Identity pool ID** which will be required in the later chap
 
 ![Identity Pool Created Screenshot]({{ site.url }}/assets/cognito-identity-pool/identity-pool-id.png)
 
-Next we'll setup the Serverless Framework to create our backend APIs.
+Now before we set up the Serverless Framework let's take a deeper look at the Cognito User Pool and Identity Pool to get a better understanding of how we handle our users.
