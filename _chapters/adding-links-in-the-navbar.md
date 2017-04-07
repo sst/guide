@@ -6,7 +6,7 @@ description: Tutorial on how to add links to the Navbar of your React.js app usi
 code: frontend
 ---
 
-Now that we have our first route setup, let's add a couple of links to the navbar of our app. These will direct users to login or signup for our app when they first visit it.
+Now that we have our first route set up, let's add a couple of links to the navbar of our app. These will direct users to login or signup for our app when they first visit it.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace the `render` method in `src/App.js` with the following.
 

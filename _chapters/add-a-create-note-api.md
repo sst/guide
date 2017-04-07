@@ -133,7 +133,7 @@ functions:
             arn: YOUR_USER_POOL_ARN
 ```
 
-Here we are adding our newly added create function to the configuration. We specify that it handles `post` requests at the `/notes` endpoint. We set CORS support to true. This is because our frontend is going to be served from a different domain. We also specify that we want this API to authenticate via the Cognito User Pool that we had previously setup.
+Here we are adding our newly added create function to the configuration. We specify that it handles `post` requests at the `/notes` endpoint. We set CORS support to true. This is because our frontend is going to be served from a different domain. We also specify that we want this API to authenticate via the Cognito User Pool that we had previously set up.
 
 ### Test
 

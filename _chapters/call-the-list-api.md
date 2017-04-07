@@ -6,7 +6,7 @@ description: Tutorial on how to call an API and render a list using React Bootst
 code: frontend
 ---
 
-Now that we have our basic homepage setup, let's make the API call to render our list of notes.
+Now that we have our basic homepage set up, let's make the API call to render our list of notes.
 
 ### Make the Request
 

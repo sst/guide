@@ -23,7 +23,7 @@ This installs the NPM package and adds the dependency to your `package.json`.
 
 ### Setting up the Router
 
-Even though we don't have any routes setup in our app, we can get the basic structure up and running. Our app currently runs from the `App` component in `src/App.js`. We are going to be using this component as the container for our entire app. To do that we'll encapsulate our `App` component within a `Router`.
+Even though we don't have any routes set up in our app, we can get the basic structure up and running. Our app currently runs from the `App` component in `src/App.js`. We are going to be using this component as the container for our entire app. To do that we'll encapsulate our `App` component within a `Router`.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace code in `src/index.js` with the following.
 

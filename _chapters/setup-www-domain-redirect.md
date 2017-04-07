@@ -1,11 +1,11 @@
 ---
 layout: post
-title: Setup WWW Domain Redirect
+title: Set up WWW Domain Redirect
 date: 2017-02-10 00:00:00
 description: Tutorial on how to create a www domain redirect using S3, CloudFront, and AWS Route 53.
 ---
 
-There's plenty of debate over the www vs non-www domains and while both sides have merit; we'll go over how to setup another domain (in this case the www) and redirect it to our original. If you prefer having the www domain as the default simply swap this step with the last one where we created a bare domain (non-www).
+There's plenty of debate over the www vs non-www domains and while both sides have merit; we'll go over how to set up another domain (in this case the www) and redirect it to our original. If you prefer having the www domain as the default simply swap this step with the last one where we created a bare domain (non-www).
 
 To create a new domain and have it redirect we are going to use the redirection feature that S3 Buckets have. So let's start by creating a new S3 Bucket for this.
 
@@ -23,7 +23,7 @@ Now go into the **Properties** of the new bucket and click on the **Static websi
 
 ![Select static website hosting screenshot]({{ site.url }}/assets/select-static-website-hosting-2.png)
 
-But unlike last time we are going to select the **Redirect requests** option and fill in the domain we are going to be redirecting towards. This is the domain that we setup in our last chapter.
+But unlike last time we are going to select the **Redirect requests** option and fill in the domain we are going to be redirecting towards. This is the domain that we set up in our last chapter.
 
 Also, make sure to copy the **Endpoint** as we'll be needing this later.
 
@@ -55,4 +55,4 @@ This time fill in `www` as the **Name** and select **Alias** as **Yes**. And pic
 
 And that's it! Just give it some time for the DNS to propagate and if you visit your www version of your domain, it should redirect you to your non-www version.
 
-Next, we'll setup SSL and add HTTPS support for our domains.
+Next, we'll set up SSL and add HTTPS support for our domains.

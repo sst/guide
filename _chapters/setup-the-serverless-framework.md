@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Setup the Serverless Framework
+title: Set up the Serverless Framework
 date: 2016-12-30 00:00:00
 description: Tutorial on how to install the Serverless Framework.
 code: backend
@@ -10,7 +10,7 @@ We are going to be using [AWS Lambda](https://aws.amazon.com/lambda/) and [Amazo
 
 The Serverless Framework enables developers to deploy backend applications as independent functions that will be deployed to AWS Lambda. It also configures AWS Lambda to run your code in response to HTTP requests using Amazon API Gateway.
 
-In this chapter, we are going to setup the Serverless Framework on our local development environment.
+In this chapter, we are going to set up the Serverless Framework on our local development environment.
 
 ### Install Serverless
 
@@ -75,4 +75,4 @@ handler.js    node_modules    package.json    serverless.yml
 - **node_modules** contains the Node.js dependencies that we just installed.
 - **package.json** contains the Node.js configuration for our project.
 
-Next, we are going to setup a standard JavaScript environment for us by adding support for ES6.
+Next, we are going to set up a standard JavaScript environment for us by adding support for ES6.

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Setup Custom Fonts
+title: Set up Custom Fonts
 date: 2017-01-08 00:00:00
 description: Tutorial on how to add custom fonts using Google Fonts to your React.js app.
 code: frontend
@@ -48,4 +48,4 @@ Now if you just flip over to your browser with our new app, you should see the n
 
 ![Custom fonts updated screenshot]({{ site.url }}/assets/custom-fonts-updated.png)
 
-We'll stay on the theme of adding styles and setup our project with Bootstrap to ensure that we have a consistent UI Kit to work with while building our app.
+We'll stay on the theme of adding styles and set up our project with Bootstrap to ensure that we have a consistent UI Kit to work with while building our app.

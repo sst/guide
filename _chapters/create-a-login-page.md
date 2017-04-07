@@ -133,4 +133,4 @@ Now if we switch to our browser and navigate to the login page we should see our
 
 ![Login page added screenshot]({{ site.url }}/assets/login-page-added.png)
 
-Next, let's connect our login form to our AWS Cognito setup.
+Next, let's connect our login form to our AWS Cognito set up.

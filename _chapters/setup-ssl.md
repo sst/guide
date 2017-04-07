@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Setup SSL
+title: Set up SSL
 date: 2017-02-11 00:00:00
 description: Tutorial on how to add HTTPS support for your React.js single page application hosted on S3 using AWS Certificate Manager.
 ---

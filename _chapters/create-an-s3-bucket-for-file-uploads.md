@@ -6,7 +6,7 @@ redirect_from: /chapters/create-a-s3-bucket-for-file-uploads.html
 description: Tutorial on how to create and configure an S3 bucket for file uploads.
 ---
 
-Now that we have our database table ready; let's get things setup for handling file uploads. We need to handle file uploads because each note can have an uploaded file as an attachment.
+Now that we have our database table ready; let's get things set up for handling file uploads. We need to handle file uploads because each note can have an uploaded file as an attachment.
 
 [Amazon S3](https://aws.amazon.com/s3/) (Simple Storage Service) provides storage service through web services interfaces like REST. You can store any object on S3, including images, videos, files, etc. Objects are organized into buckets, and identified within each bucket by a unique, user-assigned key.
 
@@ -65,5 +65,5 @@ Add the following CORS configuration into the editor, then hit **Save**.
 
 ![Save S3 Bucket CORS Configuration screenshot]({{ site.url }}/assets/s3/save-s3-bucket-cors-configuration.png)
 
-Now that our S3 bucket is ready, let's get setup to handle user authentication.
+Now that our S3 bucket is ready, let's get set up to handle user authentication.
 

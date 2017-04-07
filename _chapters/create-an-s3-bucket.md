@@ -74,4 +74,4 @@ This panel also shows us where our app will be accessible. AWS assigns us a URL 
 
 ![Edit static web hosting properties screenshot]({{ site.url }}/assets/edit-static-web-hosting-properties.png)
 
-Now that our bucket is all setup and ready, let's go ahead and upload our assets to it.
+Now that our bucket is all set up and ready, let's go ahead and upload our assets to it.

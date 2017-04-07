@@ -15,7 +15,7 @@ description: Step-by-step tutorials for creating full-stack serverless applicati
 - [How to get help?]({% link _chapters/how-to-get-help.md %})
 - [Why create serverless apps?]({% link _chapters/why-create-serverless-apps.md %})
 
-### Setup your AWS account
+### Set up your AWS account
 
 - [Create an AWS account]({% link _chapters/create-an-aws-account.md %})
 - [Create an IAM user]({% link _chapters/create-an-iam-user.md %})
@@ -29,7 +29,7 @@ description: Step-by-step tutorials for creating full-stack serverless applicati
   - [Create a Cognito test user]({% link _chapters/create-a-cognito-test-user.md %})
 - [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %})
   - [Cognito user pool vs identity pool]({% link _chapters/cognito-user-pool-vs-identity-pool.md %})
-- [Setup the Serverless Framework]({% link _chapters/setup-the-serverless-framework.md %})
+- [Set up the Serverless Framework]({% link _chapters/setup-the-serverless-framework.md %})
   - [Add support for ES6/ES7 JavaScript]({% link _chapters/add-support-for-es6-es7-javascript.md %})
 
 ### Building the Backend
@@ -48,8 +48,8 @@ description: Step-by-step tutorials for creating full-stack serverless applicati
 
 - [Create a new React.js app]({% link _chapters/create-a-new-reactjs-app.md %})
   - [Add app favicons]({% link _chapters/add-app-favicons.md %})
-  - [Setup custom fonts]({% link _chapters/setup-custom-fonts.md %})
-  - [Setup Bootstrap]({% link _chapters/setup-bootstrap.md %})
+  - [Set up custom fonts]({% link _chapters/setup-custom-fonts.md %})
+  - [Set up Bootstrap]({% link _chapters/setup-bootstrap.md %})
 - [Handle routes with React Router]({% link _chapters/handle-routes-with-react-router.md %})
   - [Create containers]({% link _chapters/create-containers.md %})
   - [Adding links in the navbar]({% link _chapters/adding-links-in-the-navbar.md %})
@@ -77,7 +77,7 @@ description: Step-by-step tutorials for creating full-stack serverless applicati
   - [Render the note form]({% link _chapters/render-the-note-form.md %})
   - [Save changes to a note]({% link _chapters/save-changes-to-a-note.md %})
   - [Delete a note]({% link _chapters/delete-a-note.md %})
-- [Setup secure pages]({% link _chapters/setup-secure-pages.md %})
+- [Set up secure pages]({% link _chapters/setup-secure-pages.md %})
   - [Create a route that redirects]({% link _chapters/create-a-route-that-redirects.md %})
   - [Use the redirect routes]({% link _chapters/use-the-redirect-routes.md %})
   - [Redirect on login]({% link _chapters/redirect-on-login.md %})
@@ -88,9 +88,9 @@ description: Step-by-step tutorials for creating full-stack serverless applicati
   - [Create an S3 bucket]({% link _chapters/create-an-s3-bucket.md %})
   - [Deploy to S3]({% link _chapters/deploy-to-s3.md %})
   - [Create a CloudFront distribution]({% link _chapters/create-a-cloudfront-distribution.md %})
-  - [Setup your domain with CloudFront]({% link _chapters/setup-your-domain-with-cloudfront.md %})
-  - [Setup www domain redirect]({% link _chapters/setup-www-domain-redirect.md %})
-  - [Setup SSL]({% link _chapters/setup-ssl.md %})
+  - [Set up your domain with CloudFront]({% link _chapters/setup-your-domain-with-cloudfront.md %})
+  - [Set up www domain redirect]({% link _chapters/setup-www-domain-redirect.md %})
+  - [Set up SSL]({% link _chapters/setup-ssl.md %})
 - [Deploy updates]({% link _chapters/deploy-updates.md %})
   - [Update the app]({% link _chapters/update-the-app.md %})
   - [Deploy again]({% link _chapters/deploy-again.md %})

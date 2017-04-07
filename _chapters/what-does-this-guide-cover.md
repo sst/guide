@@ -42,24 +42,24 @@ For the backend:
 
 - Configure your AWS account
 - Create your database using DynamoDB
-- Setup S3 for file uploads
-- Setup Cognito User Pools to manage user accounts
-- Setup Cognito Identity Pool to secure our file uploads
-- Setup the Serverless Framework to work with Lambda & API Gateway
+- Set up S3 for file uploads
+- Set up Cognito User Pools to manage user accounts
+- Set up Cognito Identity Pool to secure our file uploads
+- Set up the Serverless Framework to work with Lambda & API Gateway
 - Write the various backend APIs
 
 For the frontend:
 
-- Setup our project with Create React App
+- Set up our project with Create React App
 - Add favicons, fonts, and a UI Kit using Bootstrap
-- Setup routes using React-Router
+- Set up routes using React-Router
 - Use AWS Cognito SDK to login and signup users
 - Plugin to the backend APIs to manage our notes
 - Use the AWS JS SDK to upload files 
 - Create an S3 bucket to upload our app
 - Configure CloudFront to serve out our app
 - Point our domain with Route 53 to CloudFront
-- Setup SSL to serve our app over HTTPS
+- Set up SSL to serve our app over HTTPS
 
 We think this will give you a good foundation on building full-stack serverless applications. If there are any other concepts or technologies you'd like us to cover, feel free to let us know via [email](mailto:{{ site.email }}).
 

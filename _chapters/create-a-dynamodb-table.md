@@ -44,6 +44,6 @@ The `notes` table has now been created. If you find yourself stuck with the **Ta
 
 ![Select DynamoDB Service screenshot]({{ site.url }}/assets/dynamodb/dynamodb-table-created.png)
 
-Next we'll setup an S3 bucket to handle file uploads.
+Next we'll set up an S3 bucket to handle file uploads.
 
 [dynamodb-components]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html

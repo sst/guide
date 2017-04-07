@@ -5,7 +5,7 @@ date: 2016-12-29 00:00:00
 description: Tutorial on how to create a Cognito Identity Pool with your User Pool as the authentication provider for your app.
 ---
 
-Now that we have our Cognito User Pool setup to handle authentication, we can use that to secure other AWS resources. In our case we need to secure the S3 bucket we created in one of the previous chapters.
+Now that we have our Cognito User Pool set up to handle authentication, we can use that to secure other AWS resources. In our case we need to secure the S3 bucket we created in one of the previous chapters.
 
 Amazon Cognito Federated Identities enables developers to create unique identities for your users and authenticate them with federated identity providers. With a federated identity, you can obtain temporary, limited-privilege AWS credentials to securely access other AWS services such as Amazon DynamoDB, Amazon S3, and Amazon API Gateway.
 

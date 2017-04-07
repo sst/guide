@@ -108,9 +108,9 @@ Now let's add a few lines to style this.
 }
 ```
 
-### Setup the Routes
+### Set up the Routes
 
-Now we'll setup the routes so that we can have this container respond to the `/` route.
+Now we'll set up the routes so that we can have this container respond to the `/` route.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create `src/Routes.js` and add the following into it.
 

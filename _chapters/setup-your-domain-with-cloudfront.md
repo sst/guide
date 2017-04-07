@@ -1,11 +1,11 @@
 ---
 layout: post
-title: Setup Your Domain with CloudFront
+title: Set up Your Domain with CloudFront
 date: 2017-02-09 00:00:00
 description: Tutorial on how to point your domain to a CloudFront Distribution using AWS Route 53.
 ---
 
-Now that we have our CloudFront distribution live, let's setup our domain with it. You can purchase a domain right from the [AWS Console](https://console.aws.amazon.com) by heading to the Route 53 section in the list of services.
+Now that we have our CloudFront distribution live, let's set up our domain with it. You can purchase a domain right from the [AWS Console](https://console.aws.amazon.com) by heading to the Route 53 section in the list of services.
 
 ![Select Route 53 service screenshot]({{ site.url }}/assets/select-route-53-service.png)
 

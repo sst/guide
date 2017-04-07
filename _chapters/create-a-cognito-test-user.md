@@ -33,4 +33,4 @@ $ aws cognito-idp admin-confirm-sign-up \
 
 Now our test user is ready.
 
-Next, let's setup Cognito Identity Pools to secure the S3 Bucket we created for file uploads.
+Next, let's set up Cognito Identity Pools to secure the S3 Bucket we created for file uploads.
