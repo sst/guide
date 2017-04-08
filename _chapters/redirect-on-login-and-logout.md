@@ -2,7 +2,7 @@
 layout: post
 title: Redirect on Login and Logout
 date: 2017-01-17 00:00:00
-description: Tutorial on how to redirect to a page using the React Router withRouter Higher-Order Component in your React.js app.
+description: Tutorial on how to redirect to a page using the React Router v4 withRouter Higher-Order Component in your React.js app.
 code: frontend
 ---
 
@@ -11,7 +11,7 @@ To complete the login flow we are going to need to do two more things.
 1. Redirect the user to the homepage after they login.
 2. And redirect them back to the login page after they logout.
 
-We are going to use the `withRouter` HOC that comes with React-Router.
+We are going to use the `withRouter` HOC and the `this.props.history.push` method that comes with React Router v4.
 
 ### Redirect to Home on Login
 
@@ -33,7 +33,7 @@ export default withRouter(Login);
 import { withRouter } from 'react-router-dom';
 ```
 
-Now we can use the router after a successful login by doing the following.
+This Higher-Order Component adds the `history` prop to our component. Now we can redirect using the `this.props.history.push` method.
 
 ``` javascript
 this.props.history.push('/');
@@ -58,7 +58,7 @@ handleSubmit = async (event) => {
 
 Now if you head over to your browser and try logging in, you should be redirected to the homepage after you've been logged in.
 
-![Redirect home after login screenshot]({{ site.url }}/assets/redirect-home-after-login.png)
+![React Router v4 redirect home after login screenshot]({{ site.url }}/assets/redirect-home-after-login.png)
 
 ### Redirect to Login After Logout
 

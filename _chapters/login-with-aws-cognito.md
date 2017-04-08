@@ -2,7 +2,7 @@
 layout: post
 title: Login with AWS Cognito
 date: 2017-01-14 00:00:00
-description: Tutorial on how to login to AWS Cognito in your React.js app using the AWS JS SDK.
+description: Tutorial on how to login to AWS Cognito in your React.js app using amazon-cognito-identity-js and AWS JS SDK.
 code: frontend
 ---
 

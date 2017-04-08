@@ -3,7 +3,7 @@ layout: post
 title: Create an S3 Bucket
 date: 2017-02-06 00:00:00
 redirect_from:  /chapters/create-a-s3-bucket.html
-description: Tutorial on how to create an S3 bucket to host a React.js single page application.
+description: Tutorial on how to create an AWS S3 static website bucket to host a React.js single page application. And change the AWS S3 Bucket permission to make it publicly accessible.
 ---
 
 To be able to host our note taking app, we need to upload the assets that are going to be served out statically on S3. S3 has a concept of buckets (or folders) to separate different types of files.
@@ -18,25 +18,25 @@ First, log in to your [AWS Console](https://console.aws.amazon.com) and select S
 
 Select **Create Bucket** and pick a name for your application and select the **US East (N. Virginia) Region** Region. Since our application is being served out using a CDN, the region should not matter to us.
 
-![Create S3 Bucket screenshot]({{ site.url }}/assets/create-s3-bucket.png)
+![Create S3 static website Bucket screenshot]({{ site.url }}/assets/create-s3-bucket.png)
 
 Go through the next steps and leave the defaults by clicking **Next**.
 
-![Create S3 Bucket next properties screenshot]({{ site.url }}/assets/create-s3-bucket-next-properties.png)
+![Create S3 static website Bucket next properties screenshot]({{ site.url }}/assets/create-s3-bucket-next-properties.png)
 
-![Create S3 Bucket next permissions screenshot]({{ site.url }}/assets/create-s3-bucket-next-permissions.png)
+![Create S3 static website Bucket next permissions screenshot]({{ site.url }}/assets/create-s3-bucket-next-permissions.png)
 
-![Create S3 Bucket next review screenshot]({{ site.url }}/assets/create-s3-bucket-next-review.png)
+![Create S3 static website Bucket next review screenshot]({{ site.url }}/assets/create-s3-bucket-next-review.png)
 
 Now click on your newly created bucket from the list and navigate to it's permissions panel by clicking **Permissions**.
 
-![Select Bucket properties screenshot]({{ site.url }}/assets/select-bucket-permissions.png)
+![Select AWS S3 static website Bucket permissions screenshot]({{ site.url }}/assets/select-bucket-permissions.png)
 
 ### Add Permissions
 
-Buckets by default are not publicly accessible, so we need to change its permissions. Select the **Bucket Policy** from the permissions panel.
+Buckets by default are not publicly accessible, so we need to change the S3 Bucket Permission. Select the **Bucket Policy** from the permissions panel.
 
-![Add bucket policy screenshot]({{ site.url }}/assets/add-bucket-policy.png)
+![Add AWS S3 Bucket permission screenshot]({{ site.url }}/assets/add-bucket-policy.png)
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following bucket policy into the editor. Where `notes-app-client` is the name of our S3 bucket. Make sure to use the name of your bucket here.
 
@@ -66,12 +66,12 @@ And finally we need to turn our bucket into a static website. Select the **Prope
 
 Select **Static website hosting**. 
 
-![Select static web hosting screenshot]({{ site.url }}/assets/select-static-website-hosting.png)
+![Select static website hosting screenshot]({{ site.url }}/assets/select-static-website-hosting.png)
 
 Now select **Use this bucket to host a website** and add our `index.html` as the **Index Document** and the **Error Document**. Since we are letting React handle 404s, we can simply redirect our errors to our `index.html` as well. Hit **Save** once you are done.
 
 This panel also shows us where our app will be accessible. AWS assigns us a URL for our static website. In this case the URL assigned to me is `notes-app-client.s3-website-us-east-1.amazonaws.com`.
 
-![Edit static web hosting properties screenshot]({{ site.url }}/assets/edit-static-web-hosting-properties.png)
+![Edit static website hosting properties screenshot]({{ site.url }}/assets/edit-static-web-hosting-properties.png)
 
 Now that our bucket is all set up and ready, let's go ahead and upload our assets to it.

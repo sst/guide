@@ -2,18 +2,18 @@
 layout: post
 title: Create a CloudFront Distribution
 date: 2017-02-08 00:00:00
-description: Tutorial on how to create a CloudFront Distribution for a React.js single page application hosted on S3.
+description: Tutorial on how to create a AWS CloudFront Distribution for a React.js single page application hosted on S3.
 ---
 
-Now that we have our app up and running on S3, let's serve it out globally through CloudFront. To do this we need to create a CloudFront Distribution.
+Now that we have our app up and running on S3, let's serve it out globally through CloudFront. To do this we need to create an AWS CloudFront Distribution.
 
 Select CloudFront from the list of services in your [AWS Console](https://console.aws.amazon.com).
 
-![Select CloudFront service screenshot]({{ site.url }}/assets/select-cloudfront-service.png)
+![Select AWS CloudFront service screenshot]({{ site.url }}/assets/select-cloudfront-service.png)
 
 Then select **Create Distribution**.
 
-![Create CloudFront Distribution screenshot]({{ site.url }}/assets/create-cloudfront-distribution.png)
+![Create AWS CloudFront Distribution screenshot]({{ site.url }}/assets/create-cloudfront-distribution.png)
 
 And then in the **Web** section select **Get Started**.
 
@@ -43,7 +43,7 @@ And finally, hit **Create Distribution**.
 
 It takes AWS a little while to create a distribution. But once it is complete you can find your CloudFront Distribution by clicking on your newly created distribution from the list and looking up its domain name.
 
-![CloudFront Distribution doamin name screenshot]({{ site.url }}/assets/cloudfront-distribution-domain-name.png)
+![AWS CloudFront Distribution doamin name screenshot]({{ site.url }}/assets/cloudfront-distribution-domain-name.png)
 
 And if you navigate over to that in your browser, you should see your app live.
 

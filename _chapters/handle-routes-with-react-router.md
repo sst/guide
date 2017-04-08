@@ -2,16 +2,16 @@
 layout: post
 title: Handle Routes with React Router
 date: 2017-01-10 00:00:00
-description: Tutorial on how to handle routes in your React.js app using React Router v4.
+description: React Router v4 tutorial on how to handle routes in your React.js app built with Create React App.
 code: frontend
 ---
 
 Create React App sets a lot of things up by default but it does not come with a built-in way to handle routes. And since we are building a single page app, we are going to use [React Router](https://reacttraining.com/react-router/) to handle them for us.
 
 
-Let's start by installing React Router. React Router can be used on the web and in native. So let's install the one for the web.
+Let's start by installing React Router. We are going to be using the React Router v4, the newest version of React Router. React Router v4 can be used on the web and in native. So let's install the one for the web.
 
-### Installing React Router
+### Installing React Router v4
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Run the following command in your working directory.
 
@@ -21,7 +21,7 @@ $ npm install react-router-dom --save
 
 This installs the NPM package and adds the dependency to your `package.json`.
 
-### Setting up the Router
+### Setting up React Router
 
 Even though we don't have any routes set up in our app, we can get the basic structure up and running. Our app currently runs from the `App` component in `src/App.js`. We are going to be using this component as the container for our entire app. To do that we'll encapsulate our `App` component within a `Router`.
 
