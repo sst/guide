@@ -1,12 +1,19 @@
-{% if page.code == 'backend' or page.code == 'frontend' or page.code == 'backend_full' or page.code == 'frontend_full' %}
-<div class="post-code-link">
+<div class="post-links">
+
+  <p>For help and discussion</p>
+  <a target="_blank" href="{{ site.github_repo }}{{ site.github_issues_prefix }}{{ page.comments_id }}">
+    <i class="fa fa-comments" aria-hidden="true"></i>
+    Comments on this chapter
+  </a>
+
+  {% if page.code == 'backend' or page.code == 'frontend' or page.code == 'backend_full' or page.code == 'frontend_full' %}
   {% capture chapter_name %}{{ page.id | replace: '/chapters/', '' }}{% endcapture %}
   {% if page.code == 'backend_full' or page.code == 'frontend_full' %}
-  {% capture repo_desc %}For reference, here is the complete code.{% endcapture %}
+  {% capture repo_desc %}For reference, here is the complete code{% endcapture %}
   {% else %}
-  {% capture repo_desc %}For reference, here is the code so far.{% endcapture %}
+  {% capture repo_desc %}For reference, here is the code so far{% endcapture %}
   {% endif %}
-  <p>{{ repo_desc }}</p>
+  <p class="code">{{ repo_desc }}</p>
   {% if page.code == 'backend' %}
   {% capture repo_url %}{{ site.backend_github_repo }}/tree/{{ chapter_name }}{% endcapture %}
   {% capture repo_tag %}Backend Source :{{ chapter_name }}{% endcapture %}
@@ -23,10 +30,10 @@
   {% capture repo_url %}{{ site.frontend_github_repo }}{% endcapture %}
   {% capture repo_tag %}Frontend Source{% endcapture %}
   {% endif %}
-  <a class="previous" target="_blank" href="{{ repo_url }}">
+  <a target="_blank" href="{{ repo_url }}">
     <i class="fa fa-github" aria-hidden="true"></i>
     {{ repo_tag }}
   </a>
-</div>
-{% endif %}
+  {% endif %}
 
+</div>

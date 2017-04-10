@@ -4,6 +4,7 @@ title: Save Changes to a Note
 date: 2017-01-30 00:00:00
 description: Tutorial on how to upload a file to S3 and call a AWS API Gateway endpoint in your React.js app.
 code: frontend
+comments_id: 55
 ---
 
 Now that our note loads into our form, let's work on saving the changes we make to that note.

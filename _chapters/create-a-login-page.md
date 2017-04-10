@@ -4,6 +4,7 @@ title: Create a Login Page
 date: 2017-01-13 00:00:00
 description: Tutorial on how to add a login page to your React.js app.
 code: frontend
+comments_id: 37
 ---
 
 Let's create a page where the users of our app can login with their credentials. AWS Cognito needs a username and password to authenticate a user. To keep things simple we are going to use the user's email as their username (as opposed to asking them to create a username). We'll be touching on this further when we create the signup form.

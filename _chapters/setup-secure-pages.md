@@ -3,6 +3,7 @@ layout: post
 title: Set up Secure Pages
 description: Tutorial on how to set up secure pages in your React.js app using React-Router v4 route components.
 date: 2017-02-01 00:00:00
+comments_id: 57
 ---
 
 We are almost done putting together our app. All the pages are done but there are a few pages that should not be accessible if a user is not logged in. For example, a page with the note should not load if a user is not logged in. Currently, we get an error when we do this. This is because the page loads and since the user token does not exist, the call to our API fails.

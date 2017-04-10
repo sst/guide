@@ -4,6 +4,7 @@ title: Redirect on Login
 date: 2017-02-04 00:00:00
 description: Tutorial on how to redirect to the original page after a user logs in to your React.js app using React Router v4.
 code: frontend
+comments_id: 60
 ---
 
 Our secured pages redirect to the login page when the user is not logged in, with a referral to the originating page. To redirect back after they login, we need to do a couple of more things. Currently, our `Login` component does the redirecting after the user logs in. We are going to move this to the newly created `UnauthenticatedRoute` component.

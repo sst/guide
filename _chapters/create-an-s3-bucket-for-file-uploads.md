@@ -4,6 +4,7 @@ title: Create an S3 Bucket for File Uploads
 date: 2016-12-27 00:00:00
 redirect_from: /chapters/create-a-s3-bucket-for-file-uploads.html
 description: Tutorial on how to create and configure an S3 bucket for file uploads.
+comments_id: 16
 ---
 
 Now that we have our database table ready; let's get things set up for handling file uploads. We need to handle file uploads because each note can have an uploaded file as an attachment.

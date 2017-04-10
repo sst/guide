@@ -4,6 +4,7 @@ title: Call the List API
 date: 2017-01-27 00:00:00
 description: Tutorial on how to call an API and render a list using React Bootstrap in your React.js app.
 code: frontend
+comments_id: 52
 ---
 
 Now that we have our basic homepage set up, let's make the API call to render our list of notes.

@@ -87,13 +87,18 @@ img.code-marker {
 }
 
 // Source Code Links
-div.post-code-link {
+div.post-links {
   border: 2px solid darken($background-color, 5%);
   border-radius: 5px;
   padding: $spacing-unit - 5px;
 
   p {
+    margin-bottom: 8px;
     color: $secondary-text-color;
+
+    &.code {
+      margin-top: 15px;
+    }
   }
 
   a {

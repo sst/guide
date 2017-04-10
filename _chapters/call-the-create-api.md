@@ -4,6 +4,7 @@ title: Call the Create API
 date: 2017-01-23 00:00:00
 description: Tutorial on how to call an AWS API Gateway endpoint from your React.js app.
 code: frontend
+comments_id: 48
 ---
 
 Now that we have our basic create note form working, let's connect it to our API. We'll do the upload to S3 a little bit later.

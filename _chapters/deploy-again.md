@@ -4,6 +4,7 @@ title: Deploy Again
 date: 2017-02-14 00:00:00
 code: frontend_full
 description: Tutorial on how to deploy updates to your React.js single page application on AWS S3 and invalidating the CloudFront edge cache using the AWS CLI.
+comments_id: 70
 ---
 
 Now that we've made some changes to our app, let's deploy the updates. This is the process we are going to repeat every time we need to deploy any updates.

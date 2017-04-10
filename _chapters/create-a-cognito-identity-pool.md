@@ -3,6 +3,7 @@ layout: post
 title: Create a Cognito Identity Pool
 date: 2016-12-29 00:00:00
 description: Tutorial on how to create an Amazon Cognito Identity Pool with your User Pool as the authentication provider for your app.
+comments_id: 19
 ---
 
 Now that we have our Cognito User Pool set up to handle authentication, we can use that to secure other AWS resources. In our case we need to secure the S3 bucket we created in one of the previous chapters.

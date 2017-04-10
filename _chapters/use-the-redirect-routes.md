@@ -5,6 +5,7 @@ date: 2017-02-03 00:00:00
 redirect_from: /chapters/use-the-hoc-in-the-routes.html
 description: Tutorial on how to use a route that redirects in your React Router v4 routes for your React.js app.
 code: frontend
+comments_id: 59
 ---
 
 Now that we created the `AuthenticatedRoute` and `UnauthenticatedRoute` in the last chapter, let's use them on the containers we want to secure.

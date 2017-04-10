@@ -4,6 +4,7 @@ title: Adding Links in the Navbar
 date: 2017-01-11 12:00:00
 description: Tutorial on how to add links to the Navbar of your React.js app using React Router v4.
 code: frontend
+comments_id: 35
 ---
 
 Now that we have our first route set up, let's add a couple of links to the navbar of our app. These will direct users to login or signup for our app when they first visit it.

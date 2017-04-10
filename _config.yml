@@ -24,6 +24,7 @@ logo: /assets/og-image.jpg
 
 github_repo: "https://github.com/AnomalyInnovations/serverless-stack-com"
 github_edit_prefix: "/edit/master/"
+github_issues_prefix: "/issues/"
 
 backend_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-demo-api"
 frontend_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-demo-client"

@@ -4,6 +4,7 @@ title: Signup with AWS Cognito
 date: 2017-01-21 00:00:00
 description: Tutorial on how to signup a user to the AWS Cognito User Pool using the AWS JS SDK in your React.js app.
 code: frontend
+comments_id: 46
 ---
 
 Now let's go ahead and implement the `handleSubmit` and `handleConfirmationSubmit` methods and connect it up with our AWS Cognito setup.

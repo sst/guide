@@ -4,6 +4,7 @@ title: Add the Create Note Page
 date: 2017-01-22 00:00:00
 description: Tutorial on how to create a file upload form using an input field with type file to your React.js app.
 code: frontend
+comments_id: 47
 ---
 
 Now that we can signup users and also log them in. Let's get started with the most important part of our note taking app; the creation of a note.

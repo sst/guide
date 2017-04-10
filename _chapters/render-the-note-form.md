@@ -4,6 +4,7 @@ title: Render the Note Form
 date: 2017-01-29 00:00:00
 description: Tutorial on how to render a React Bootstrap form in your React.js app.
 code: frontend
+comments_id: 54
 ---
 
 Now that our container loads a note on `componentWillMount`, let's go ahead and render the form that we'll use to edit it.

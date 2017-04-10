@@ -3,6 +3,7 @@ layout: post
 title: Serverless ES7 Service
 date: 2017-02-16 00:00:00
 description: A Serverless Service that adds support for ES6/ES7 async/await methods to your Serverless Framework project.
+comments_id: 72
 ---
 
 While we were creating our backend, we went through a few steps to ensure that we could use async/await methods in our handler functions. We also used a Babel preset to ensure that we could use the same flavor of JavaScript on the frontend and the backend. We know that a few of you have used our demo backend as a starting point for your project. But there are a couple of limitations with our setup.

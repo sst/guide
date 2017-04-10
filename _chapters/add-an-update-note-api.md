@@ -4,6 +4,7 @@ title: Add an Update Note API
 date: 2017-01-03 00:00:00
 description: Tutorial on adding a HTTP PUT endpoint with CORS support to AWS Lambda and API Gateway using the Serverless Framework.
 code: backend
+comments_id: 26
 ---
 
 Now let's create an API that allows a user to update a note with a new note object given it's id.

@@ -4,6 +4,7 @@ title: Display a Note
 date: 2017-01-28 00:00:00
 description: Tutorial on how to call an API with the React Router path parameter in your React.js app.
 code: frontend
+comments_id: 53
 ---
 
 Now that we have a listing of all the notes, let's create a page that displays a note and let's the user edit it.

@@ -4,6 +4,7 @@ title: Create a New React.js App
 date: 2017-01-06 00:00:00
 description: Tutorial on how to create a new React.js app using Create React App.
 code: frontend
+comments_id: 29
 ---
 
 Let's get started with our frontend. We are going to create a single page app using [React.js](https://facebook.github.io/react/). We'll use the [Create React App](https://github.com/facebookincubator/create-react-app) project to set everything up. It is officially supported by the React team and conveniently packages all the dependencies for a React.js project.

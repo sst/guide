@@ -4,6 +4,7 @@ title: Create Containers
 date: 2017-01-11 00:00:00
 description: Tutorial on how to add a container, a Navbar, and routes to your React.js app with React Router v4.
 code: frontend
+comments_id: 34
 ---
 
 Currently, our app has a single component that renders our content. For creating our note taking app, we need to create a few different pages to load/edit/create notes. Before we can do that we will put the outer chrome of our app inside a component and render all the top level components inside them. These top level components that represent the various pages will be called containers.

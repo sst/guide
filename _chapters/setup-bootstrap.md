@@ -4,6 +4,7 @@ title: Set up Bootstrap
 date: 2017-01-09 00:00:00
 description: Tutorial on how to add and configure Bootstrap for your React.js app using React-Bootstrap.
 code: frontend
+comments_id: 32
 ---
 
 A big part of writing web applications is having a UI Kit to help create the interface of the application. We are going to use [Bootstrap](http://getbootstrap.com) for our note taking app. While Bootstrap can be used directly with React; the preferred way is to use it with the [React-Bootstrap](https://react-bootstrap.github.io) package. This makes our markup a lot simpler to implement and understand.

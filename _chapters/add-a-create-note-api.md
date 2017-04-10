@@ -4,6 +4,7 @@ title: Add a Create Note API
 date: 2016-12-31 00:00:00
 description: Tutorial on adding a HTTP POST endpoint with CORS support to AWS Lambda and API Gateway using the Serverless Framework.
 code: backend
+comments_id: 23
 ---
 
 Let's get started on our backend by first adding an API to create a note. This API will take the note object as the input and store it in the database with a new id. The note object will contain the `content` field (the content of the note) and an `attachment` field (the URL to the uploaded file).

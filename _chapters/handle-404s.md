@@ -4,6 +4,7 @@ title: Handle 404s
 date: 2017-01-12 00:00:00
 description: Tutorial on how to handle 404s in your React.js app using React Router.
 code: frontend
+comments_id: 36
 ---
 
 Now that we know how to handle the basic routes; let's look at handling 404s with the React Router.

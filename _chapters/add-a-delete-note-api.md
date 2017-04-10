@@ -4,6 +4,7 @@ title: Add a Delete Note API
 date: 2017-01-04 00:00:00
 description: Tutorial on adding a HTTP DELETE endpoint with CORS support to AWS Lambda and API Gateway using the Serverless Framework.
 code: backend
+comments_id: 27
 ---
 
 Finally, we are going to create an API that allows a user to delete a given note.

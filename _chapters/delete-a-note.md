@@ -4,6 +4,7 @@ title: Delete a Note
 date: 2017-01-31 00:00:00
 description: Tutorial on how to make a DELETE request to a AWS API Gateway endpoint in your React.js app.
 code: frontend
+comments_id: 56
 ---
 
 The last thing we need to do on the note page is allowing users to delete their note. We have the button all set up already. All that needs to be done is to hook it up with the API.

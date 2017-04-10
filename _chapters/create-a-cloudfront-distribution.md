@@ -3,6 +3,7 @@ layout: post
 title: Create a CloudFront Distribution
 date: 2017-02-08 00:00:00
 description: Tutorial on how to create a AWS CloudFront Distribution for a React.js single page application hosted on S3.
+comments_id: 64
 ---
 
 Now that we have our app up and running on S3, let's serve it out globally through CloudFront. To do this we need to create an AWS CloudFront Distribution.

@@ -3,6 +3,7 @@ layout: post
 title: Wrapping Up
 description: Wrapping up the tutorial and going over the next steps.
 date: 2017-02-15 00:00:00
+comments_id: 71
 ---
 
 So we've covered how to build and deploy our backend serverless API and our frontend serverless app. And not only does it work well on the desktop.

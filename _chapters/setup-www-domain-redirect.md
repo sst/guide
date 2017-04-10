@@ -3,6 +3,7 @@ layout: post
 title: Set up WWW Domain Redirect
 date: 2017-02-10 00:00:00
 description: Tutorial on how to create a www domain redirect using S3 redirect, CloudFront, and AWS Route 53.
+comments_id: 66
 ---
 
 There's plenty of debate over the www vs non-www domains and while both sides have merit; we'll go over how to set up another domain (in this case the www) and redirect it to our original. If you prefer having the www domain as the default simply swap this step with the last one where we created a bare domain (non-www).

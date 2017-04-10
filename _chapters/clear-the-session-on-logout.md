@@ -4,6 +4,7 @@ title: Clear the Session on Logout
 date: 2017-01-16 00:00:00
 description: Tutorial on how to sign out the current user using the AWS JS SDK in your React.js app.
 code: frontend
+comments_id: 41
 ---
 
 Currently we are only removing the user token from our app's state. But when we refresh the page, we load the user token from the browser session, in effect logging them back in.

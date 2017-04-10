@@ -4,6 +4,7 @@ title: Add the User Token to the State
 date: 2017-01-15 00:00:00
 description: Tutorial on how to store the AWS Cognito user ID token in your React.js app.
 code: frontend
+comments_id: 39
 ---
 
 To complete the login process we would need to store the user token and update the app to reflect that the user has logged in.

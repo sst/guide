@@ -2,6 +2,7 @@
 layout: post
 title: What Does This Guide Cover?
 date: 2016-12-22 00:00:00
+comments_id: 9
 ---
 
 To step through the major concepts involved in building web applications, we are going to be building a simple note taking app called [Scratch](https://demo.serverless-stack.com).

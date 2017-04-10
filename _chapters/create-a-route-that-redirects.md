@@ -5,6 +5,7 @@ date: 2017-02-02 00:00:00
 redirect_from: /chapters/create-a-hoc-that-checks-auth.html
 description: Tutorial on how to create a React Router v4 route component that checks if a user is logged in to your React.js app and redirects.
 code: frontend
+comments_id: 58
 ---
 
 Let's first create a route that will check if the user is logged in before routing.
