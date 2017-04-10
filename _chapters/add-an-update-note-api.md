@@ -73,7 +73,7 @@ Here we are adding a handler for the PUT request to the `/notes/{id}` endpoint.
 
 ### Test
 
-To test our function replace the `events.json` with the following. Also, don't forget to use the `noteId` of the note we have been using in place of the `id` in the `pathParameters` block.
+To test our function replace the `event.json` with the following. Also, don't forget to use the `noteId` of the note we have been using in place of the `id` in the `pathParameters` block.
 
 ``` json
 {
