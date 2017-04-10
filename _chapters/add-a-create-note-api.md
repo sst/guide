@@ -97,7 +97,7 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs4.3
+  runtime: nodejs6.10
   stage: prod
   region: us-east-1
 
