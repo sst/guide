@@ -64,7 +64,7 @@ This adds a DELETE request handler to the `/notes/{id}` endpoint.
 
 ### Test
 
-Replace the `events.json` with the following. Just like before we'll use the `noteId` of our note in place of the `id` in the `pathParameters` block.
+Replace the `event.json` with the following. Just like before we'll use the `noteId` of our note in place of the `id` in the `pathParameters` block.
 
 ``` json
 {
