@@ -105,16 +105,4 @@ description: Step-by-step tutorials for creating full-stack serverless applicati
 
 - [Serverless ES7 Service]({% link _chapters/serverless-es7-service.md %})
 
-<div class="extras">
-  <div class="container">
-    <div class="newsletter">
-      <p>Get email updates on any new articles we publish</p>
-      <a href="{{ site.mailchimp_signup_form }}" target="_blank">Subscribe to our newsletter</a>
-    </div>
-    <div class="share">
-      <p>Share this guide</p>
-      {% capture full_title %}{{ site.title }} - {{ site.description }}{% endcapture %}
-      {% include share-buttons.html url=site.url title=full_title %}
-    </div>
-  </div>
-</div>
+{% include share-index.html %}

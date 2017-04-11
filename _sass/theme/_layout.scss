@@ -337,14 +337,8 @@ a.post-info {
         font-weight: bold;
         font-size: 13px;
         width: 194px;
-        border-radius: 4px;
         line-height: 1.2;
         display: inline-block;
-        background-color: $brand-color;
-        color: white;
-        &:hover {
-          background-color: darken($brand-color, 10%);
-        }
       }
     }
   }

@@ -107,6 +107,18 @@ div.post-links {
   }
 }
 
+// Link Buttons
+a.button {
+  border-radius: 4px;
+  line-height: 1.2;
+  background-color: $brand-color;
+  color: white;
+
+  &:hover {
+    background-color: darken($brand-color, 10%);
+  }
+}
+
 
 
 /**
@@ -233,14 +245,8 @@ div.home .extras {
       a {
         padding: 14px 22px;
         font-weight: bold;
-        border-radius: 4px;
         line-height: 1.2;
         display: inline-block;
-        background-color: $brand-color;
-        color: white;
-        &:hover {
-          background-color: darken($brand-color, 10%);
-        }
       }
     }
 
@@ -254,6 +260,20 @@ div.home .extras {
 
 hr.tools {
   margin: $spacing-unit 0;
+}
+
+div.home .about-us {
+  font-size: 36px;
+  letter-spacing: -1px;
+  line-height: 1.3;
+}
+div.home a.contact {
+  margin: 2 * $spacing-unit auto $spacing-unit;
+  text-align: center;
+  padding: 14px 0;
+  width: 230px;
+  font-size: 20px;
+  display: block;
 }
 
 

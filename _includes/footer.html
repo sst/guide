@@ -5,25 +5,24 @@
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
         <ul class="link-list">
-					<li class="site-title">
-						{{ site.title | escape }}
-					</li>
+          <li class="site-title">
+            {{ site.title | escape }}
+          </li>
           <li><a class="page-link" href="/#table-of-contents">Table of Contents</a></li>
-          <li><a class="page-link" target="_blank" href="{{ site.mailchimp_signup_form }}">Newsletter</a></li>
-					{% if site.github_repo %}
-					<li><a class="email-link" href="{{ site.github_repo }}">GitHub</a></li>
-					{% endif %}
-					{% if site.email %}
-					<li><a class="email-link" href="mailto:{{ site.email }}">Email</a></li>
-					{% endif %}
+          {% if site.github_repo %}
+          <li><a class="email-link" href="{% link about.md %}">About Us</a></li>
+          {% endif %}
+          <li><a class="email-link" href="{{ site.github_repo }}">GitHub</a></li>
+          {% if site.email %}
+          <li><a class="email-link" href="mailto:{{ site.email }}">Email</a></li>
+          {% endif %}
         </ul>
       </div>
 
       <div class="footer-col footer-col-2">
         <ul class="contact-list">
           <li class="site-description">{{ site.description | escape }}</li>
-					<li class="site-author">Created by <a target="_blank" href="http://anoma.ly">Anomaly Innovations</a></li>
-					<li class="site-author">Frank <a target="_blank" href="https://twitter.com/fanjiewang">@fanjiewang</a> &amp; Jay <a target="_blank" href="https://twitter.com/jayair">@jayair</a></li>
+          <li class="site-author">Created by <a href="{% link about.md %}">Anomaly Innovations</a></li>
         </ul>
       </div>
 
