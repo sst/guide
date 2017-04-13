@@ -303,7 +303,7 @@ a.post-info {
     float: right;
   }
 
-  .clear {
+  .clearfix {
     @extend %clearfix;
     display: none;
     @include media-query($on-palm) {
@@ -311,35 +311,82 @@ a.post-info {
     }
   }
 
-  .share-container {
+  .extras-container {
     text-align: center;
 
-    .share {
+    .extras {
       display: inline-block;
-      padding: 10px;
+      padding: 20px;
       border-radius: 5px;
       background-color: darken($background-color, 5%);
 
-      p {
-        color: $tertiary-text-color;
-        font-weight: bold;
-        font-size: 14px;
-        margin-bottom: 10px;
-      }
+      div.share {
+        p {
+          color: $tertiary-text-color;
+          font-weight: bold;
+          font-size: 14px;
+          margin-bottom: 10px;
+        }
 
-      ul.share-buttons li {
-        padding: 0 5px;
+        ul.share-buttons li {
+          padding: 0 5px;
+        }
       }
+    }
+  }
+}
 
-      a.newsletter {
-        margin-top: 10px;
-        padding: 14px 0;
-        font-weight: bold;
-        font-size: 13px;
-        width: 194px;
-        line-height: 1.2;
-        display: inline-block;
-      }
+div.post-footer .extras div.newsletter {
+  $width: 260px;
+
+  margin-bottom: 15px;
+
+  p {
+    margin-bottom: 10px;
+    max-width: 240px;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  div.mc-field-group input {
+    padding: 10px;
+    box-sizing: border-box;
+    color: #555;
+    width: $width;
+    font-size: 14px;
+    font-family: $base-font-family;
+    background-color: white;
+    border-radius: 3px;
+    border: 2px solid $grey-color-light;
+    text-align: center;
+
+    &:focus {
+      border-color: darken($grey-color-light, 10%);
+      outline: none;
+    }
+  }
+  input.button {
+    margin-top: 7px;
+    width: $width;
+    border-radius: 4px;
+    line-height: 1.2;
+    background-color: $brand-color;
+    color: white;
+    padding: 14px 22px;
+    font-family: $base-font-family;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+    border: 0;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      background-color: darken($brand-color, 10%);
     }
   }
 }
