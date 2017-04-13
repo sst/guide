@@ -10,6 +10,6 @@ description: Serverless Stack is brought to you by Frank Wang (@fanjiewang) and 
 
 Over the years we've accumulated a ton of experience on how to build, deploy, and maintain applications on the AWS Platform. The serverless approach has been a giant revelation to us. If we had a chance to go back and do this all over again, there is no doubt we would have taken the serverless approach. The [pros]({% link _chapters/why-create-serverless-apps.md %}) simply outweigh the cons. And while we recognize that it is not for everybody; we wanted to create a resource that makes it easy to learn and get started. Serverless Stack is completely free and the website and comments are hosted on [GitHub](https://github.com/AnomalyInnovations/serverless-stack-com).
 
-Moving forward we're planning to build services that can help developers (and companies) build and maintain serverless applications. If you are considering adopting this approach at your organisation; we'd love to hear from you. Send us an [email](mailto:{{ site.email }}) and let's chat.
+Moving forward we're planning to build services that can help developers (and companies) build and maintain serverless applications. If you are considering adopting this approach at your organisation; we'd love to hear from you. Send us an [email](mailto:{{ site.email }}?subject=Hi, I would like to build serverless applications) and let's chat.
 
-<a class="button contact" href="mailto:{{ site.email }}">Get in Touch with Us</a>
+<a class="button contact" href="mailto:{{ site.email }}?subject=Hi, I would like to build serverless applications">Get in Touch with Us</a>
