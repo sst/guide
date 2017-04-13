@@ -119,6 +119,43 @@ a.button {
   }
 }
 
+// Newsletter Form Chrome
+%newsletter-input {
+  box-sizing: border-box;
+  color: #555;
+  font-family: $base-font-family;
+  background-color: white;
+  border-radius: 3px;
+  border: 2px solid $grey-color-light;
+  text-align: center;
+  -webkit-appearance: none;
+
+  &:focus {
+    border-color: darken($grey-color-light, 10%);
+    outline: none;
+  }
+}
+
+%newsletter-button {
+  border-radius: 4px;
+  line-height: 1.2;
+  color: white;
+  background-color: $brand-color;
+  font-family: $base-font-family;
+  display: inline-block;
+  border: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    background-color: darken($brand-color, 10%);
+  }
+}
+
 
 
 /**
@@ -236,6 +273,10 @@ div.home .extras {
     background-color: darken($background-color, 5%);
     border-radius: 5px;
 
+    @include media-query($on-palm) {
+      padding: 20px;
+    }
+
     div.share {
       p {
         font-size: 18px;
@@ -250,7 +291,7 @@ div.home .extras {
 }
 
 div.home .extras div.newsletter {
-  $width: 270px;
+  $width: 220px;
 
   margin-bottom: 25px;
 
@@ -262,43 +303,18 @@ div.home .extras div.newsletter {
 
   div.mc-field-group input {
     padding: 10px;
-    box-sizing: border-box;
-    color: #555;
     width: $width;
     font-size: 20px;
-    font-family: $base-font-family;
-    background-color: white;
-    border-radius: 3px;
-    border: 2px solid $grey-color-light;
-    text-align: center;
-
-    &:focus {
-      border-color: darken($grey-color-light, 10%);
-      outline: none;
-    }
+    @extend %newsletter-input;
   }
+
   input.button {
     margin-top: 7px;
     width: $width;
-    border-radius: 4px;
-    line-height: 1.2;
-    background-color: $brand-color;
-    color: white;
     padding: 14px 22px;
-    font-family: $base-font-family;
     font-size: 16px;
     font-weight: bold;
-    display: inline-block;
-    border: 0;
-    cursor: pointer;
-
-    &:focus {
-      outline: none;
-    }
-
-    &:hover {
-      background-color: darken($brand-color, 10%);
-    }
+    @extend %newsletter-button;
   }
 }
 

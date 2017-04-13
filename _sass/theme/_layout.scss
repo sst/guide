@@ -337,7 +337,8 @@ a.post-info {
 }
 
 div.post-footer .extras div.newsletter {
-  $width: 260px;
+  $width-on-palm: 220px;
+  $width: 270px;
 
   margin-bottom: 15px;
 
@@ -351,42 +352,24 @@ div.post-footer .extras div.newsletter {
 
   div.mc-field-group input {
     padding: 10px;
-    box-sizing: border-box;
-    color: #555;
     width: $width;
-    font-size: 14px;
-    font-family: $base-font-family;
-    background-color: white;
-    border-radius: 3px;
-    border: 2px solid $grey-color-light;
-    text-align: center;
+    font-size: 16px;
+    @extend %newsletter-input;
 
-    &:focus {
-      border-color: darken($grey-color-light, 10%);
-      outline: none;
+    @include media-query($on-palm) {
+      width: $width-on-palm;
     }
   }
   input.button {
     margin-top: 7px;
     width: $width;
-    border-radius: 4px;
-    line-height: 1.2;
-    background-color: $brand-color;
-    color: white;
     padding: 14px 22px;
-    font-family: $base-font-family;
     font-size: 14px;
     font-weight: bold;
-    display: inline-block;
-    border: 0;
-    cursor: pointer;
+    @extend %newsletter-button;
 
-    &:focus {
-      outline: none;
-    }
-
-    &:hover {
-      background-color: darken($brand-color, 10%);
+    @include media-query($on-palm) {
+      width: $width-on-palm;
     }
   }
 }
