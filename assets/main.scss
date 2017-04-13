@@ -225,9 +225,10 @@ div.home .share-container {
   }
 }
 
+
 div.home .extras {
   text-align: center;
-  margin-top: $spacing-unit + 10px;
+  margin-top: $spacing-unit + 15px;
 
   div.container {
     display: inline-block;
@@ -235,26 +236,68 @@ div.home .extras {
     background-color: darken($background-color, 5%);
     border-radius: 5px;
 
-    p {
-      font-size: 18px;
-      font-weight: 300;
-    }
-
-    div.newsletter {
-      margin-bottom: 25px;
-      max-width: 340px;
-      a {
-        padding: 14px 22px;
-        font-weight: bold;
-        line-height: 1.2;
-        display: inline-block;
-      }
-    }
-
     div.share {
+      p {
+        font-size: 18px;
+        font-weight: 300;
+      }
+
       ul.share-buttons li {
         padding: 0 5px;
       }
+    }
+  }
+}
+
+div.home .extras div.newsletter {
+  $width: 270px;
+
+  margin-bottom: 25px;
+
+  p {
+    display: inline-block;
+    max-width: 330px;
+    font-size: 20px;
+  }
+
+  div.mc-field-group input {
+    padding: 10px;
+    box-sizing: border-box;
+    color: #555;
+    width: $width;
+    font-size: 20px;
+    font-family: $base-font-family;
+    background-color: white;
+    border-radius: 3px;
+    border: 2px solid $grey-color-light;
+    text-align: center;
+
+    &:focus {
+      border-color: darken($grey-color-light, 10%);
+      outline: none;
+    }
+  }
+  input.button {
+    margin-top: 7px;
+    width: $width;
+    border-radius: 4px;
+    line-height: 1.2;
+    background-color: $brand-color;
+    color: white;
+    padding: 14px 22px;
+    font-family: $base-font-family;
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-block;
+    border: 0;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      background-color: darken($brand-color, 10%);
     }
   }
 }
