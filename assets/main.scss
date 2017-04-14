@@ -157,6 +157,75 @@ a.button {
 }
 
 
+%extras-section {
+  text-align: center;
+  margin-top: $spacing-unit + 15px;
+
+  div.container {
+    display: block;
+    padding: $spacing-unit 20px $spacing-unit + 7px;
+    background-color: darken($background-color, 5%);
+    border-radius: 5px;
+
+    @include media-query($on-palm) {
+      padding: 20px;
+    }
+
+    div.share {
+      p {
+        font-size: 18px;
+        font-weight: 300;
+      }
+
+      ul.share-buttons li {
+        padding: 0 5px;
+      }
+    }
+  }
+
+  div.newsletter {
+    $width-on-palm: 240px;
+    $width: 380px;
+
+    margin-bottom: 25px;
+
+    p {
+      margin-bottom: 20px;
+      display: inline-block;
+      font-size: 22px;
+
+      @include media-query($on-palm) {
+        font-size: 20px;
+      }
+    }
+
+    div.mc-field-group input {
+      padding: 10px;
+      width: $width;
+      font-size: 20px;
+      @extend %newsletter-input;
+
+      @include media-query($on-palm) {
+        width: $width-on-palm;
+      }
+    }
+
+    input.button {
+      margin-top: 7px;
+      width: $width;
+      padding: 14px 22px;
+      font-size: 18px;
+      font-weight: bold;
+      @extend %newsletter-button;
+
+      @include media-query($on-palm) {
+        width: $width-on-palm;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
 
 /**
  * Homepage
@@ -262,60 +331,8 @@ div.home .share-container {
   }
 }
 
-
 div.home .extras {
-  text-align: center;
-  margin-top: $spacing-unit + 15px;
-
-  div.container {
-    display: inline-block;
-    padding: $spacing-unit $spacing-unit + 15px $spacing-unit + 7px;
-    background-color: darken($background-color, 5%);
-    border-radius: 5px;
-
-    @include media-query($on-palm) {
-      padding: 20px;
-    }
-
-    div.share {
-      p {
-        font-size: 18px;
-        font-weight: 300;
-      }
-
-      ul.share-buttons li {
-        padding: 0 5px;
-      }
-    }
-  }
-}
-
-div.home .extras div.newsletter {
-  $width: 220px;
-
-  margin-bottom: 25px;
-
-  p {
-    display: inline-block;
-    max-width: 330px;
-    font-size: 20px;
-  }
-
-  div.mc-field-group input {
-    padding: 10px;
-    width: $width;
-    font-size: 20px;
-    @extend %newsletter-input;
-  }
-
-  input.button {
-    margin-top: 7px;
-    width: $width;
-    padding: 14px 22px;
-    font-size: 16px;
-    font-weight: bold;
-    @extend %newsletter-button;
-  }
+  @extend %extras-section;
 }
 
 hr.tools {

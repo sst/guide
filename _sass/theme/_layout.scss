@@ -285,14 +285,16 @@ a.post-info {
   @extend %clearfix;
   margin-top: 54px;
 
+  text-align: center;
+
   & > a {
     @extend %a-secondary;
     font-weight: bold;
-    line-height: 138px;
+    line-height: 54px;
+    display: inline-block;
 
     @include media-query($on-palm) {
-      padding-bottom: 30px;
-      line-height: 1.5;
+      font-size: 14px;
     }
   }
 
@@ -302,74 +304,8 @@ a.post-info {
   .next {
     float: right;
   }
-
-  .clearfix {
-    @extend %clearfix;
-    display: none;
-    @include media-query($on-palm) {
-      display: block;
-    }
-  }
-
-  .extras-container {
-    text-align: center;
-
-    .extras {
-      display: inline-block;
-      padding: 20px;
-      border-radius: 5px;
-      background-color: darken($background-color, 5%);
-
-      div.share {
-        p {
-          color: $tertiary-text-color;
-          font-weight: bold;
-          font-size: 14px;
-          margin-bottom: 10px;
-        }
-
-        ul.share-buttons li {
-          padding: 0 5px;
-        }
-      }
-    }
-  }
 }
 
-div.post-footer .extras div.newsletter {
-  $width-on-palm: 220px;
-  $width: 270px;
-
-  margin-bottom: 15px;
-
-  p {
-    margin-bottom: 10px;
-    max-width: 240px;
-    display: inline-block;
-    font-size: 16px;
-    font-weight: bold;
-  }
-
-  div.mc-field-group input {
-    padding: 10px;
-    width: $width;
-    font-size: 16px;
-    @extend %newsletter-input;
-
-    @include media-query($on-palm) {
-      width: $width-on-palm;
-    }
-  }
-  input.button {
-    margin-top: 7px;
-    width: $width;
-    padding: 14px 22px;
-    font-size: 14px;
-    font-weight: bold;
-    @extend %newsletter-button;
-
-    @include media-query($on-palm) {
-      width: $width-on-palm;
-    }
-  }
+.post .extras {
+  @extend %extras-section;
 }
