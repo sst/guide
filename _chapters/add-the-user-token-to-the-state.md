@@ -11,7 +11,7 @@ To complete the login process we would need to store the user token and update t
 
 ### Store the User Token
 
-First we'll start by storing the user token in the state. We might be tempted to store this in the `Login` container, but since we are going to use this in a lot of other places, it makes sense to lift up the state. The most logical place to do this will in our `App` component.
+First we'll start by storing the user token in the state. We might be tempted to store this in the `Login` container, but since we are going to use this in a lot of other places, it makes sense to lift up the state. The most logical place to do this will be in our `App` component.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following to `src/App.js` right below the `class App extends Component {` line.
 
