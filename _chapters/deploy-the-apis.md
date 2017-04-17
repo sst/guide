@@ -84,7 +84,7 @@ The identity token can be found in the `IdToken` field of the response.
 }
 ```
 
-Now we can use that as the `Authorization` header to make a request to our API using the following.
+Now we can use that as the `Authorization` header to make a request to our API (at the POST endpoint returned after running `serverless deploy` above) using the following.
 
 ``` bash
 $ curl https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes \
