@@ -14,7 +14,7 @@ Now that we have our basic homepage set up, let's make the API call to render ou
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following below the `constructor` block in `src/containers/Home.js`.
 
 ``` javascript
-async componentWillMount() {
+async componentDidMount() {
   if (this.props.userToken === null) {
     return;
   }
@@ -43,7 +43,7 @@ notes() {
 import { invokeApig } from '../libs/awsLib';
 ```
 
-All this does, is make a GET request to `/notes` on `componentWillMount` and puts the results in the `notes` object in the state.
+All this does, is make a GET request to `/notes` on `componentDidMount` and puts the results in the `notes` object in the state.
 
 Now let's render the results.
 

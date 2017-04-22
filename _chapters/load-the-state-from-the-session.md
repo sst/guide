@@ -46,7 +46,7 @@ These two methods are pretty self-explanatory. In `getCurrentUser`, we use the C
 
 ### Load User Token in to the State
 
-We want to ensure that when the user refreshes the app, we load the user token from the session. We are going to do this in `componentWillMount`. And since `getUserToken` is going to be called async; we need to ensure that the rest of our app is only ready to go after this has been loaded.
+We want to ensure that when the user refreshes the app, we load the user token from the session. We are going to do this in `componentDidMount`. And since `getUserToken` is going to be called async; we need to ensure that the rest of our app is only ready to go after this has been loaded.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />To do this, let's add a flag to our `src/App.js` state called `isLoadingUserToken`. The initial state in our `constructor` should look like the following.
 
@@ -60,7 +60,7 @@ this.state = {
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Now to load the user token we'll add the following to our `src/App.js`.
 
 ``` javascript
-async componentWillMount() {
+async componentDidMount() {
   const currentUser = this.getCurrentUser();
 
   if (currentUser === null) {

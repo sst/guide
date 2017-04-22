@@ -54,7 +54,7 @@ class Notes extends Component {
     };
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     try {
       const results = await this.getNote();
       this.setState({
@@ -82,7 +82,7 @@ class Notes extends Component {
 export default withRouter(Notes);
 ```
 
-All this does is load the note on `componentWillMount` and save it to the state. We get the `id` of our note from the URL using the props automatically passed to us by React-Router in `this.props.match.params.id`. The keyword `id` is a part of the pattern matching in our route (`/notes/:id`).
+All this does is load the note on `componentDidMount` and save it to the state. We get the `id` of our note from the URL using the props automatically passed to us by React-Router in `this.props.match.params.id`. The keyword `id` is a part of the pattern matching in our route (`/notes/:id`).
 
 And now if you switch over to your browser and navigate to a note that we previously created, you'll notice that the page renders an empty container.
 

@@ -7,7 +7,7 @@ code: frontend
 comments_id: 54
 ---
 
-Now that our container loads a note on `componentWillMount`, let's go ahead and render the form that we'll use to edit it.
+Now that our container loads a note on `componentDidMount`, let's go ahead and render the form that we'll use to edit it.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace our placeholder `render` method in `src/containers/Notes.js` with the following.
 
