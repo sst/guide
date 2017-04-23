@@ -36,6 +36,10 @@ export async function invokeApig(
     headers
   });
 
+  if (results.status !== 200) {
+    throw new Error(await results.text());
+  }
+
   return results.json();
 }
 ```
