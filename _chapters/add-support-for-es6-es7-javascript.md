@@ -81,7 +81,7 @@ function globEntries(globPath) {
 }
 ```
 
-This is the configuration Webpack will use to package our app. The main part of this config is the `entry` attribute that we are automatically generating by looking for the relevant files in our project root.
+This is the configuration Webpack will use to package our app. The main part of this config is the `entry` attribute that we are automatically generating by looking for the relevant files in our project root. If you are wondering how we would handle files that are not in the project root, we touch on this at the [end of our guide]({% link _chapters/serverless-es7-service.md %}).
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a file called `.babelrc` in the root with the following. We are using the same Babel preset (**react-app**) as the one we are going to use in the frontend.
 
