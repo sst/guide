@@ -47,6 +47,8 @@ Now if you switch over to your browser and try deleting a note you should see it
 
 ![Note page deleting screenshot]({{ site.url }}/assets/note-page-deleting.png)
 
+Again, you might have noticed that we are not deleting the attachment when we are deleting a note. We are leaving that up to you to keep things simple. Here is how you delete a file in S3 using the [AWS JS SDK](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#deleteObject-property).
+
 Now with our app nearly complete, we'll look at securing some the pages of our app that require a login. Currently if you visit a note page while you are logged out, it throws an ugly error.
 
 ![Note page logged out error screenshot]({{ site.url }}/assets/note-page-logged-out-error.png)
