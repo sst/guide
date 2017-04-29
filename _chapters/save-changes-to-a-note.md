@@ -70,6 +70,6 @@ Let's switch over to our browser and give it a try by saving some changes.
 
 ![Notes page saving screenshot]({{ site.url }}/assets/notes-page-saving.png)
 
-You might have noticed that we are not deleting the old attachment when we upload a new one. To keep things simple, we are leaving that bit of detail up to you. It should be pretty straightforward. Here is how you delete a file in S3 using the [AWS JS SDK](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#deleteObject-property).
+You might have noticed that we are not deleting the old attachment when we upload a new one. To keep things simple, we are leaving that bit of detail up to you. It should be pretty straightforward. Check the [AWS JS SDK Docs](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#deleteObject-property) on how to a delete file from S3.
 
 Next up, let's allow users to delete their note.
