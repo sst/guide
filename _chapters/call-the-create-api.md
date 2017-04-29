@@ -48,13 +48,15 @@ We just made it so that we can call `invokeApig` from now on and only pass in th
 
 Now to call our API we need the API Gateway URL that was generated back in the [Deploy the APIs]({% link _chapters/deploy-the-apis.md %}) chapter.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's add that to our `src/config.js` above the `cognito: {` line. Make sure to replace `https://YOUR_API_GATEWAY_URL` with your URL.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's add that to our `src/config.js` above the `cognito: {` line.
 
 ```
 apiGateway: {
   URL: 'https://YOUR_API_GATEWAY_URL',
 },
 ```
+
+Make sure to replace `https://YOUR_API_GATEWAY_URL` with your URL from the [Deploy the APIs]({% link _chapters/deploy-the-apis.md %}) chapter. In our case the URL is `https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod`.
 
 ### Make the Call
 
