@@ -33,7 +33,7 @@ Our changes should be live on S3.
 
 Now to ensure that CloudFront is serving out the updated version of our app, let's invalidate the CloudFront cache.
 
-### Invalidating CloudFront Cache
+### Invalidate the CloudFront Cache
 
 CloudFront allows you to invalidate objects in the distribution by passing in the path of the object. But it also allows you to use a wildcard (`/*`) to invalidate the entire distribution in a single command. This is recommended when we are deploying a new version of our app.
 
@@ -62,4 +62,26 @@ It can take a few minutes to complete. But once it is done, the updated version 
 
 ![App update live screenshot]({{ site.url }}/assets/app-update-live.png)
 
-And that's it! We now have a simple set of commands we can run (or script) to deploy our updates.
+And that’s it! We now have a set of commands we can run to deploy our updates. Let's quickly put them together so we can do it with one command.
+
+### Add a Deploy Command
+
+NPM allows us to add a `deploy` command in our `package.json`.
+
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following in the `scripts` block above `eject` in the `package.json`.
+
+``` coffee
+"predeploy": "npm run build",
+"deploy": "aws s3 sync build/ s3://YOUR_S3_DEPLOY_BUCKET_NAME",
+"postdeploy": "aws cloudfront create-invalidation --distribution-id YOUR_CF_DISTRIBUTION_ID --paths '/*' && aws cloudfront create-invalidation --distribution-id YOUR_WWW_CF_DISTRIBUTION_ID --paths '/*'",
+```
+
+Make sure to replace `YOUR_S3_DEPLOY_BUCKET_NAME`, `YOUR_CF_DISTRIBUTION_ID`, and `YOUR_WWW_CF_DISTRIBUTION_ID` with the ones from above.
+
+Now simply run the following command from your project root when you want to deploy your updates. It'll build your app, upload it to S3, and invalidate the CloudFront cache.
+
+``` bash
+$ npm run deploy
+```
+
+Our app is now complete. And we have an easy way to update it!
