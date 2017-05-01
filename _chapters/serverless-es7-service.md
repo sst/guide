@@ -60,13 +60,13 @@ const message = ({ time, ...rest }) => new Promise((resolve, reject) =>
 To create a new Serverless project with ES7 support.
 
 ``` bash
-$ serverless install --url https://github.com/AnomalyInnovations/serverless-es7
+$ serverless install --url https://github.com/AnomalyInnovations/serverless-es7 --name my-project
 ```
 
 Enter the new directory.
 
 ``` bash
-$ cd serverless-es7
+$ cd my-project
 ```
 
 Install the Node.js packages.
