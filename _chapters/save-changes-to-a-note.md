@@ -35,7 +35,7 @@ handleSubmit = async (event) => {
   try {
 
     if (this.file) {
-      uploadedFilename = await s3Upload(this.file, this.props.userToken);
+      uploadedFilename = (await s3Upload(this.file, this.props.userToken)).Location;
     }
 
     await this.saveNote({
@@ -60,7 +60,7 @@ import { invokeApig, s3Upload } from '../libs/awsLib';
 
 The code above is doing a couple of things that should be very similar to what we did in the `NewNote` container.
 
-1. If there is a file to upload we call `s3Upload` to upload it and return the URL.
+1. If there is a file to upload we call `s3Upload` to upload it and save the URL.
 
 2. We save the note by making `PUT` request with the note object to `/notes/note_id` where we get the note_id from `this.props.match.params.id`.
 

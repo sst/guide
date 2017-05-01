@@ -42,16 +42,7 @@ export function getAwsCredentials(userToken) {
     }
   });
 
-  return new Promise((resolve, reject) => (
-    AWS.config.credentials.get((err) => {
-      if (err) {
-        reject(err);
-        return;
-      }
-
-      resolve();
-    })
-  ));
+  return AWS.config.credentials.getPromise();
 }
 ```
 
@@ -85,22 +76,12 @@ export async function s3Upload(file, userToken) {
   });
   const filename = `${AWS.config.credentials.identityId}-${Date.now()}-${file.name}`;
 
-  return new Promise((resolve, reject) => (
-    s3.upload({
-      Key: filename,
-      Body: file,
-      ContentType: file.type,
-      ACL: 'public-read',
-    },
-    (error, result) => {
-      if (error) {
-        reject(error);
-        return;
-      }
-
-      resolve(result.Location);
-    })
-  ));
+  return s3.upload({
+    Key: filename,
+    Body: file,
+    ContentType: file.type,
+    ACL: 'public-read',
+  }).promise();
 }
 ```
 
@@ -120,7 +101,7 @@ The above method does a couple of things.
 
 3. Upload the file to S3 and set it's permissions to `public-read` to ensure that we can download it later.
 
-4. And return the public URL.
+4. And return a Promise object.
 
 ### Upload Before Creating a Note
 
@@ -141,7 +122,7 @@ handleSubmit = async (event) => {
 
   try {
     const uploadedFilename = (this.file)
-      ? await s3Upload(this.file, this.props.userToken)
+      ? (await s3Upload(this.file, this.props.userToken)).Location
       : null;
 
     await this.createNote({
