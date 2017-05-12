@@ -4,8 +4,6 @@
   </a>
 </p>
 
-<h3 align="center"><a href="http://serverless-stack.com">Serverless-Stack.com</a></h3>
-
 <p align="center">
   <b>Learn to Build Full-Stack Serverless Applications</b>
 </p>
