@@ -54,6 +54,14 @@ This time fill in `www` as the **Name** and select **Alias** as **Yes**. And pic
 
 ![Fill in record set detials screenshot]({{ site.url }}/assets/fill-in-record-set-details.png)
 
+### Add IPv6 Support
+
+Just as before, we need to add an AAAA record to support IPv6.
+
+Create a new Record Set with the exact same settings as before, except make sure to pick **AAAA - IPv6 address** as the **Type**.
+
+![Fill in AAAA IPv6 record set details screenshot]({{ site.url }}/assets/fill-in-aaaa-ipv6-record-set-details.png)
+
 And that's it! Just give it some time for the DNS to propagate and if you visit your www version of your domain, it should redirect you to your non-www version.
 
 Next, we'll set up SSL and add HTTPS support for our domains.

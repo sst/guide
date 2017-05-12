@@ -74,7 +74,17 @@ In the **Alias Target** dropdown, select your CloudFront Distribution.
 
 Finally, hit **Create** to add your new record set.
 
-![Select create to add record set  screenshot]({{ site.url }}/assets/select-create-to-add-record-set.png)
+![Select create to add record set screenshot]({{ site.url }}/assets/select-create-to-add-record-set.png)
+
+### Add IPv6 Support
+
+CloudFront Distributions have IPv6 enabled by default and this means that we need to create an AAAA record as well. It is set up exactly the same way as the Alias record.
+
+Create a new Record Set with the exact settings as before, except make sure to pick **AAAA - IPv6 address** as the **Type**.
+
+![Select AAAA IPv6 record set screenshot]({{ site.url }}/assets/select-create-aaaa-ipv6-record-set.png)
+
+And hit **Create** to add your AAAA record set.
 
 It can take around an hour to update the DNS records but once it's done, you should be able to access your app through your domain.
 
