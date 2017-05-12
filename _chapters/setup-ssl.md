@@ -58,7 +58,21 @@ Now let's do the same for our other CloudFront Distribution.
 
 ![Select custom SSL Certificate screenshot]({{ site.url }}/assets/select-custom-ssl-certificate-2.png)
 
-![Switch Viewer Protocol Policy screenshot]({{ site.url }}/assets/switch-viewer-protocol-policy-2.png)
+But leave the **Viewer Protocol Policy** as **HTTP and HTTPS**. This is because we want our users to go straight to the HTTPS version of our non-www domain. As opposed to redirecting to the HTTPS version of our www domain before redirecting again.
+
+![Dont switch Viewer Protocol Policy for www distribution screenshot]({{ site.url }}/assets/dont-switch-viewer-protocol-policy-for-www-distribution.png)
+
+### Update S3 Redirect Bucket
+
+The S3 Redirect Bucket that we created in the last chapter is redirecting to the HTTP version of our non-www domain. We should switch this to the HTTPS version to prevent the extra redirect.
+
+Open up the S3 Redirect Bucket we created in the last chapter. Head over to the **Properties** tab and select **Static website hosting**.
+
+![Open S3 Redirect Bucket Properties screenshot]({{ site.url }}/assets/open-s3-redirect-bucket-properties.png)
+
+Change the **Protocol** to **https** and hit **Save**.
+
+![Change S3 Redirect to HTTPS screenshot]({{ site.url }}/assets/change-s3-redirect-to-https.png)
 
 And that's it. Our app should be served out on our domain through HTTPS.
 
