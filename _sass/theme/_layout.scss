@@ -253,6 +253,12 @@ a.post-info {
   @extend %a-tertiary;
 }
 
+span.post-info-separator {
+  font-size: 14px;
+  font-weight: 300;
+  color: $tertiary-text-color;
+}
+
 .post-content {
   margin-bottom: $spacing-unit;
 
