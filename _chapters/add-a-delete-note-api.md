@@ -64,7 +64,9 @@ This adds a DELETE request handler to the `/notes/{id}` endpoint.
 
 ### Test
 
-Replace the `event.json` with the following. Just like before we'll use the `noteId` of our note in place of the `id` in the `pathParameters` block.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />In our `mocks/` directory create a `delete-event.json` file and add the following.
+
+Just like before we'll use the `noteId` of our note in place of the `id` in the `pathParameters` block.
 
 ``` json
 {
@@ -81,10 +83,10 @@ Replace the `event.json` with the following. Just like before we'll use the `not
 }
 ```
 
-Invoke our newly created function.
+Invoke our newly created function from the root directory.
 
 ``` bash
-$ serverless webpack invoke --function delete --path event.json
+$ serverless webpack invoke --function delete --path mocks/delete-event.json
 ```
 
 And the response should look similar to this.

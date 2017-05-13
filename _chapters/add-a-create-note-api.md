@@ -140,7 +140,14 @@ Here we are adding our newly added create function to the configuration. We spec
 
 Now we are ready to test our new API. To be able to test it on our local we are going to mock the input parameters.
 
-Create an `event.json` file and add the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />In our project root, create a `mocks/` directory.
+
+``` bash
+$ mkdir mocks
+$ cd mocks
+```
+
+Create a `create-event.json` file and add the following.
 
 ``` json
 {
@@ -157,10 +164,10 @@ Create an `event.json` file and add the following.
 
 You might have noticed that the `body` and `requestContext` fields are the ones we used in our create function. In this case the `sub` field is just a string we are going to use as our `userId`. We can use any string here; just make sure to use the same one when we test our other functions.
 
-And to invoke our function we run the following.
+And to invoke our function we run the following in the root directory.
 
 ``` bash
-$ serverless webpack invoke --function create --path event.json
+$ serverless webpack invoke --function create --path /mocks/create-event.json
 ```
 
 The response should look similar to this.

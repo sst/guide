@@ -70,7 +70,9 @@ This defines our get note API. It adds a GET request handler with the endpoint `
 
 ### Test
 
-To test our get note API we need to mock passing in the `noteId` parameter. We are going to use the `noteId` of the note we created in the previous chapter and add in a `pathParameters` block to our `event.json`. So it should look similar to the one below.
+To test our get note API we need to mock passing in the `noteId` parameter. We are going to use the `noteId` of the note we created in the previous chapter and add in a `pathParameters` block to our mock. So it should look similar to the one below.
+
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />In our `mocks/` directory create a `get-event.json` file and add the following.
 
 ``` json
 {
@@ -90,7 +92,7 @@ To test our get note API we need to mock passing in the `noteId` parameter. We a
 And we invoke our newly created function.
 
 ``` bash
-$ serverless webpack invoke --function get --path event.json
+$ serverless webpack invoke --function get --path mocks/get-event.json
 ```
 
 The response should look similar to this.
