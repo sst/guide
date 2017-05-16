@@ -66,7 +66,7 @@ This defines the `/notes` endpoint that takes a GET request with the same Cognit
 
 ### Test
 
-Update `event.json` file with following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />In our `mocks/` directory create a `list-event.json` file and add the following.
 
 ``` json
 {
@@ -80,10 +80,10 @@ Update `event.json` file with following.
 }
 ```
 
-And invoke our function.
+And invoke our function from the root directory of the project.
 
 ``` bash
-$ serverless webpack invoke --function list --path event.json
+$ serverless webpack invoke --function list --path mocks/list-event.json
 ```
 
 The response should look similar to this.

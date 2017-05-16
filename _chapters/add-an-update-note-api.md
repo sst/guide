@@ -73,7 +73,9 @@ Here we are adding a handler for the PUT request to the `/notes/{id}` endpoint.
 
 ### Test
 
-To test our function replace the `event.json` with the following. Also, don't forget to use the `noteId` of the note we have been using in place of the `id` in the `pathParameters` block.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />In our `mocks/` directory create a `update-event.json` file and add the following.
+
+Also, don't forget to use the `noteId` of the note we have been using in place of the `id` in the `pathParameters` block.
 
 ``` json
 {
@@ -91,10 +93,10 @@ To test our function replace the `event.json` with the following. Also, don't fo
 }
 ```
 
-And we invoke our newly created function.
+And we invoke our newly created function from the root directory.
 
 ``` bash
-$ serverless webpack invoke --function update --path event.json
+$ serverless webpack invoke --function update --path mocks/update-event.json
 ```
 
 The response should look similar to this.
