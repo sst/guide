@@ -3,7 +3,7 @@ layout: post
 title: What is IAM
 date: 2016-12-25 16:00:00
 description: An explanation of what is AWS IAM (Identity and Access Management). And the differences between an IAM Policy, IAM User, IAM Role, and an IAM Group.
-comments_id: 73
+comments_id: 85
 ---
 
 In the last chapter, we created an IAM user so that our AWS CLI can operate on our account without using the AWS Console. But the IAM concept is used very frequently when dealing with security for AWS services, so it is worth understanding it in a bit more detail. Unfortunately, IAM is made up of a lot of different parts and it can be very confusing for folks that first come across it. In this chapter we are going to take a look at IAM and it’s concepts in a bit more detail.
