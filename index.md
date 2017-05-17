@@ -19,6 +19,8 @@ description: Free step-by-step tutorials for creating full-stack serverless appl
 
 - [Create an AWS account]({% link _chapters/create-an-aws-account.md %})
 - [Create an IAM user]({% link _chapters/create-an-iam-user.md %})
+  - [What is IAM]({% link _chapters/what-is-iam.md %})
+  - [What is an ARN]({% link _chapters/what-is-an-arn.md %})
 - [Configure the AWS CLI]({% link _chapters/configure-the-aws-cli.md %})
 
 ### Setting up the Backend

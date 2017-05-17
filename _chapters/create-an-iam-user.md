@@ -52,4 +52,4 @@ Take a note of the **Access key ID** and **Secret access key**. We will be needi
 
 ![IAM User Credentials Screenshot]({{ site.url }}/assets/iam-user/iam-user-credentials.png)
 
-Next we'll be using this info to configure the AWS CLI.
+The concept of IAM pops up very frequently when working with AWS services. So it is worth taking a better look at what IAM is and how it can help us secure our serverless setup.
