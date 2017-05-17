@@ -5,6 +5,8 @@ description: Free step-by-step tutorials for creating full-stack serverless appl
 
 {% include lander.html %}
 
+{% include share-index.html %}
+
 {: .toc }
 ## Table of Contents
 
@@ -106,5 +108,3 @@ description: Free step-by-step tutorials for creating full-stack serverless appl
 ### Tools
 
 - [Serverless ES7 Service]({% link _chapters/serverless-es7-service.md %})
-
-{% include share-index.html %}

@@ -31,11 +31,6 @@ layout: default
       <div class="newsletter">
         {% include newsletter-form.html %}
       </div>
-      <div class="share">
-        <p>Share this chapter</p>
-        {% capture full_url %}{{ site.url }}{{ page.url }}{% endcapture %}
-        {% include share-buttons.html url=full_url title=page.title %}
-      </div>
     </div>
   </div>
 
