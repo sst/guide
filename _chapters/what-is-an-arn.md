@@ -3,7 +3,7 @@ layout: post
 title: What is an ARN
 date: 2016-12-25 20:00:00
 description: An explanation of what is an AWS ARN (Amazon Resource Names) and it's format. And some of the common use cases for ARN.
-comments_id: 74
+comments_id: 86
 ---
 
 In the last chapter while we were looking at IAM policies we looked at how you can specify a resource using it's ARN. Let's take a better look at what ARN is.
