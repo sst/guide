@@ -16,6 +16,14 @@ layout: default
 
   {% include post-links.html %}
 
+  <div class="extras">
+    <div class="container">
+      <div class="newsletter">
+        {% include newsletter-form.html %}
+      </div>
+    </div>
+  </div>
+
   <div class="post-footer">
     {% if page.previous.url %}
     <a class="previous" href="{{ page.previous.url }}">&larr; Previous</a>
@@ -24,14 +32,6 @@ layout: default
     {% if page.next.url %}
     <a class="next" href="{{ page.next.url }}">Next &rarr;</a>
     {% endif %}
-  </div>
-
-  <div class="extras">
-    <div class="container">
-      <div class="newsletter">
-        {% include newsletter-form.html %}
-      </div>
-    </div>
   </div>
 
 </article>

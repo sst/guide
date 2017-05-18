@@ -303,6 +303,24 @@ div.home ul.quotes {
 }
 div.home ul.quotes li {
   margin-bottom: $spacing-unit;
+  &:nth-child(odd) {
+    padding-left: 78px;
+    background: {
+      image: url('/assets/left-quote-icon.png');
+      repeat: no-repeat;
+      size: 68px 50px;
+      position: 0px 7px;
+    }
+  }
+  &:nth-child(even) {
+    padding-right: 77px;
+    background: {
+      image: url('/assets/right-quote-icon.png');
+      repeat: no-repeat;
+      size: 68px 50px;
+      position: right 7px;
+    }
+  }
 }
 div.home ul.quotes p {
   margin-bottom: 0;
