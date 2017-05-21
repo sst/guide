@@ -27,7 +27,7 @@ Once you upload your icon, it'll show you a preview of your icon on various plat
 
 This should generate your favicon package and the accompanying code.
 
-Click **Favicon package** to download the generated favicons. And copy all the files over to your `public/` directory.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Click **Favicon package** to download the generated favicons. And copy all the files over to your `public/` directory.
 
 ![Realfavicongenerator.net completed screenshot]({{ site.url }}/assets/realfavicongenerator-completed.png)
 
