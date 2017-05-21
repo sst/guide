@@ -4,7 +4,7 @@ title: Code Splitting in Create React App
 description: Tutorial on code splitting in React.js using Create React App and React Router v4. Setting up routes to load asynchronously using the dynamic import() in Create React App 1.0.
 date: 2017-02-14 12:00:00
 code: frontend
-comments_id: 71
+comments_id: 90
 ---
 
 This chapter is an extra step that can help speed up the initial load time of your React app. It is not a required step to complete this guide. But feel free to follow along if you are curious about what Code Splitting is and how it can help larger React.js apps.
