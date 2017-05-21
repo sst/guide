@@ -304,7 +304,7 @@ div.home ul.quotes {
 div.home ul.quotes li {
   margin-bottom: $spacing-unit;
   &:nth-child(odd) {
-    padding-left: 78px;
+    padding-left: 80px;
     background: {
       image: url('/assets/left-quote-icon.png');
       repeat: no-repeat;
