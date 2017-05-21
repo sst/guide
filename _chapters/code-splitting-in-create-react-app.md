@@ -52,7 +52,7 @@ The `AppliedRoute` simply applies the `props` attribute to the `component`. And 
 
 However, `src/Routes.js` imports all of the components in the route statically at the top. This means, that all these components are loaded regardless of which route is matched. To implement Code Splittig here we are going to want to only load the component that responds to the matched route.
 
-### Async Component
+### Create an Async Component
 
 To do this we are going to dynamically import the required component.
 
@@ -101,6 +101,8 @@ We are doing a few things here:
 2. On `componentDidMount` we use the dynamic `import()` to load the container with the given name. In this case we are assuming the component we are trying to load is in the `containers/` directory. If this is not the case for your project, you can pass in the full path to this function.
 3. Finally, we conditionally render the component if it has completed loading. If not we simply render `null`. But instead of rendering null, you could render a loading spinner. This would give the user some feedback while a part of your app is still loading.
 
+### Use the Async Component
+
 Now let's use this component in our routes. Instead of passing in the statically imported component to our routes like so.
 
 ``` coffee
@@ -142,8 +144,9 @@ Now if you build your app using `npm run build`; you'll see the code splitting i
 
 ![Create React App Code Splitting build screenshot]({{ site.url }}/assets/create-react-app-code-splitting-build.png)
 
-Each of those `.chunk.js` files are the different dynamic `import()` calls that we have. 
-And if we deploy our app using `npm run deploy`; you can see the browser load the different chunks on-demand as we browse around.
+Each of those `.chunk.js` files are the different dynamic `import()` calls that we have.  Of course, our app is quite small and the various parts that are split up are not significant at all. However, if the page that we use to edit our note included a rich text editor; you can imagine how that would grow in size. And it would unfortunately affect the initial load time of our app.
+
+Now if we deploy our app using `npm run deploy`; you can see the browser load the different chunks on-demand as we browse around.
 
 ![Create React App loading Code Splitting screenshot]({{ site.url }}/assets/create-react-app-loading-code-splitting.png)
 
