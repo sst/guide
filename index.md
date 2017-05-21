@@ -99,6 +99,10 @@ description: Free step-by-step tutorials for creating full-stack serverless appl
   - [Update the app]({% link _chapters/update-the-app.md %})
   - [Deploy again]({% link _chapters/deploy-again.md %})
 
+### Extra Credit
+
+- [Code Splitting in Create React App]({% link _chapters/code-splitting-in-create-react-app.md %})
+
 ### Conclusion
 
 - [Wrapping up]({% link _chapters/wrapping-up.md %})
