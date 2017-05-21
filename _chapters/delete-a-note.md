@@ -22,7 +22,7 @@ deleteNote() {
 handleDelete = async (event) => {
   event.preventDefault();
 
-  const confirmed = confirm('Are you sure you want to delete this note?');
+  const confirmed = window.confirm('Are you sure you want to delete this note?');
 
   if ( ! confirmed) {
     return;
