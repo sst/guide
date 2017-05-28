@@ -84,4 +84,13 @@ Now simply run the following command from your project root when you want to dep
 $ npm run deploy
 ```
 
+For Windows users, if `postdeploy` returns an error like
+```
+An error occurred (InvalidArgument) when calling the CreateInvalidation operation: Your request contains one or more invalid invalidation paths.
+```
+Make sure that there is no quote in the `/*`
+``` coffee
+"postdeploy": "aws cloudfront create-invalidation --distribution-id YOUR_CF_DISTRIBUTION_ID --paths /* && aws cloudfront create-invalidation --distribution-id YOUR_WWW_CF_DISTRIBUTION_ID --paths /*",
+```
+
 Our app is now complete. And we have an easy way to update it!
