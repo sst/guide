@@ -24,33 +24,25 @@ While, the dynamic `import()` can be used for any component in our React app; it
 The usual structure used by React Router to set up routing for your app looks something like this.
 
 ``` coffee
-<Switch>
-  <Route path="/" exact component={Home} />
-  <Route path="/posts/:id" exact component={Posts} />
+/* Import the components */
+import Home from './containers/Home';
+import Posts from './containers/Posts';
+import NotFound from './containers/NotFound';
 
-  { /* Rest of our routes ...  */ }
 
-  <Route component={NotFound} />
-</Switch>
+/* Use components to define routes */
+export default () => (
+  <Switch>
+    <Route path="/" exact component={Home} />
+    <Route path="/posts/:id" exact component={Posts} />
+    <Route component={NotFound} />
+  </Switch>
+);
 ```
 
-The top portion of the `Switch` matches the specific routes and we end by adding a Route that handles any failed matches. If you recall, we do something very similar in our Notes app. In our `src/Routes.js`, our `Switch` block looks like the following.
+We start by importing the components that will respond to our routes. And then use them to define our routes. The `Switch` component renders the route that matches the path.
 
-``` coffee
-<Switch>
-  <AppliedRoute path="/" exact component={Home} props={childProps} />
-  <UnauthenticatedRoute path="/login" exact component={Login} props={childProps} />
-  <UnauthenticatedRoute path="/signup" exact component={Signup} props={childProps} />
-  <AuthenticatedRoute path="/notes/new" exact component={NewNote} props={childProps} />
-  <AuthenticatedRoute path="/notes/:id" exact component={Notes} props={childProps} />
-  { /* Finally, catch all unmatched routes */ }
-  <Route component={NotFound} />
-</Switch>
-```
-
-The `AppliedRoute` simply applies the `props` attribute to the `component`. And the `UnauthenticatedRoute` and `AuthenticatedRoute` components handle checking the auth details before proceeding.
-
-However, `src/Routes.js` imports all of the components in the route statically at the top. This means, that all these components are loaded regardless of which route is matched. To implement Code Splitting here we are going to want to only load the component that responds to the matched route.
+However, we import all of the components in the route statically at the top. This means, that all these components are loaded regardless of which route is matched. To implement Code Splitting here we are going to want to only load the component that responds to the matched route.
 
 ### Create an Async Component
 
@@ -103,21 +95,31 @@ We are doing a few things here:
 
 ### Use the Async Component
 
-Now let's use this component in our routes. Instead of passing in the statically imported component to our routes like so.
+Now let's use this component in our routes. Instead of statically importing our component.
 
 ``` coffee
-<Route path="/" exact component={Home} />
+import Home from './containers/Home';
 ```
 
-We are going to wrap it up with our `asyncComponent` method and pass in a function that will dynamically import the component we need.
+We are going to use the `asyncComponent` to dynamically import the component we want.
 
 ``` coffee
-<Route path="/" exact component={asyncComponent(() => import('./containers/Home'))} />
+const AsyncHome = asyncComponent(() => import('./containers/Home'));
 ```
 
-It might seem weird that we are passing a function here. Why not just pass in a string (say `./containers/Home`) and then do the dynamic `import()` inside the `AsyncComponent`? This is because we want to explicitly state the component we are dynamically importing. Webpack splits our app based on this. It looks at these imports and generates the required parts (or chunks). This was pointed out by [@wSokra](https://twitter.com/wSokra/status/866703557323632640) and [@dan_abramov](https://twitter.com/dan_abramov/status/866646657437491201). This syntax seems more verbose but we can make it a little more readable.
+It's important to note that we are not doing an import here. We are only passing in a function to `asyncComponent` that will dynamically `import()` when the `AsyncHome` component is created.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Your `src/Routes.js` should look like this, after a bit of refactoring.
+Also, it might seem weird that we are passing a function here. Why not just pass in a string (say `./containers/Home`) and then do the dynamic `import()` inside the `AsyncComponent`? This is because we want to explicitly state the component we are dynamically importing. Webpack splits our app based on this. It looks at these imports and generates the required parts (or chunks). This was pointed out by [@wSokra](https://twitter.com/wSokra/status/866703557323632640) and [@dan_abramov](https://twitter.com/dan_abramov/status/866646657437491201).
+
+We are then going to use the `AsyncHome` component just like before in our routes. React Router will create the `AsyncHome` component when the route is matched and that will in turn dynamically import the `Home` component and continue just like before.
+
+``` coffee
+<Route path="/" exact component={AsyncHome} />
+```
+
+Now let's go back to our Notes project and apply these changes.
+
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Your `src/Routes.js` should look like this after the changes.
 
 ``` coffee
 import React from 'react';
@@ -127,22 +129,22 @@ import AppliedRoute from './components/AppliedRoute';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
 import UnauthenticatedRoute from './components/UnauthenticatedRoute';
 
-const importHome      = () => import('./containers/Home');
-const importLogin     = () => import('./containers/Login');
-const importNotes     = () => import('./containers/Notes');
-const importSignup    = () => import('./containers/Signup');
-const importNewNote   = () => import('./containers/NewNote');
-const importNotFound  = () => import('./containers/NotFound');
+const AsyncHome     = asyncComponent(() => import('./containers/Home'));
+const AsyncLogin    = asyncComponent(() => import('./containers/Login'));
+const AsyncNotes    = asyncComponent(() => import('./containers/Notes'));
+const AsyncSignup   = asyncComponent(() => import('./containers/Signup'));
+const AsyncNewNote  = asyncComponent(() => import('./containers/NewNote'));
+const AsyncNotFound = asyncComponent(() => import('./containers/NotFound'));
 
 export default ({ childProps }) => (
   <Switch>
-    <AppliedRoute path="/" exact component={asyncComponent(importHome)} props={childProps} />
-    <UnauthenticatedRoute path="/login" exact component={asyncComponent(importLogin)} props={childProps} />
-    <UnauthenticatedRoute path="/signup" exact component={asyncComponent(importSignup)} props={childProps} />
-    <AuthenticatedRoute path="/notes/new" exact component={asyncComponent(importNewNote)} props={childProps} />
-    <AuthenticatedRoute path="/notes/:id" exact component={asyncComponent(importNotes)} props={childProps} />
+    <AppliedRoute path="/" exact component={AsyncHome} props={childProps} />
+    <UnauthenticatedRoute path="/login" exact component={AsyncLogin} props={childProps} />
+    <UnauthenticatedRoute path="/signup" exact component={AsyncSignup} props={childProps} />
+    <AuthenticatedRoute path="/notes/new" exact component={AsyncNewNote} props={childProps} />
+    <AuthenticatedRoute path="/notes/:id" exact component={AsyncNotes} props={childProps} />
     { /* Finally, catch all unmatched routes */ }
-    <Route component={asyncComponent(importNotFound)} />
+    <Route component={AsyncNotFound} />
   </Switch>
 );
 ```
