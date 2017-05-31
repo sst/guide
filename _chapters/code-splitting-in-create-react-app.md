@@ -191,3 +191,46 @@ Now if we deploy our app using `npm run deploy`; you can see the browser load th
 ![Create React App loading Code Splitting screenshot]({{ site.url }}/assets/create-react-app-loading-code-splitting.png)
 
 That's it! With just a few simple changes our app is completely set up to use the code splitting feature that Create React App has.
+
+### Next Steps
+
+Now this seems really easy to implement but you might be wondering what happens if the request to import the new component takes too long, or fails. Or maybe you want to preload certain components. For example, a user is on your login page about to login and you want to preload the homepage.
+
+It was mentioned above that you can add a loading spinner while the import is in progress. But we can take it a step further and address some of these edge cases. There is an excellent higher order component that does a lot of this well; it's called [**react-loadable**](https://github.com/thejameskyle/react-loadable).
+
+All you need to do to use it is install it.
+
+``` bash
+$ npm install --save react-loadable
+```
+
+Use it instead of the `asyncComponent` that we had above.
+
+``` javascript
+const AsyncHome = Loadable({
+  loader: () => import('./containers/Home'),
+  LoadingComponent: MyLoadingComponent
+});
+```
+
+And `AsyncHome` is used exactly as before. Here the `MyLoadingComponent` would look something like this.
+
+``` coffee
+const MyLoadingComponent = ({isLoading, error}) => {
+  // Handle the loading state
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  // Handle the error state
+  else if (error) {
+    return <div>Sorry, there was a problem loading the page.</div>;
+  }
+  else {
+    return null;
+  }
+};
+```
+
+It's a simple component that handles all the different edge cases gracefully.
+
+To add preloading and to further customize this; make sure to check out the other options and features that [react-loadable](https://github.com/thejameskyle/react-loadable) has. And have fun code splitting!
