@@ -206,7 +206,7 @@ $ npm install --save react-loadable
 
 Use it instead of the `asyncComponent` that we had above.
 
-``` javascript
+``` coffee
 const AsyncHome = Loadable({
   loader: () => import('./containers/Home'),
   LoadingComponent: MyLoadingComponent
