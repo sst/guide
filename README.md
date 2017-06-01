@@ -32,4 +32,4 @@ The entire guide is hosted through GitHub Pages and we use [GitHub Issues][GHIss
 - Send us an [email](mailto:contact@anoma.ly) if you have any other questions or feedback
 - If you've found a typo, edit the chapter and submit a pull request
 
-[GHIssues]: https://github.com/AnomalyInnovations/serverless-stack-com/issues?q=is%3Aissue+is%3Aopen+label%3ADiscussion
+[GHIssues]: https://github.com/AnomalyInnovations/serverless-stack-com/issues?q=is%3Aissue+is%3Aopen+label%3ADiscussion+sort%3Aupdated-desc
