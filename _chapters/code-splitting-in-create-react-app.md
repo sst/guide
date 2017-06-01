@@ -201,7 +201,7 @@ It was mentioned above that you can add a loading spinner while the import is in
 All you need to do to use it is install it.
 
 ``` bash
-$ npm install --save react-loadable
+$ npm install react-loadable
 ```
 
 Use it instead of the `asyncComponent` that we had above.
