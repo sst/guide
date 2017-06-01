@@ -35,7 +35,7 @@ We are going to use the NPM module `amazon-cognito-identity-js` to login to Cogn
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Install it by running the following in your project root.
 
 ``` bash
-$ npm install amazon-cognito-identity-js --save
+$ npm install amazon-cognito-identity-js
 ```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And include the following in the header of our `src/containers/Login.js`.
