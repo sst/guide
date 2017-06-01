@@ -28,7 +28,7 @@ $ npm install --save-dev \
     webpack \
     webpack-node-externals
 
-$ npm install --save babel-runtime
+$ npm install babel-runtime
 ```
 
 Most of the above packages are only needed while we are building our project and they won't be deployed to our Lambda functions. We are using the `serverless-webpack` plugin to help trigger the Webpack build when we run our Serverless commands. The `webpack-node-externals` is necessary because we do not want Webpack to bundle our `aws-sdk` module, since it is not compatible.
