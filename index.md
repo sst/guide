@@ -106,6 +106,7 @@ description: Free step-by-step tutorials for creating full-stack serverless appl
 ### Conclusion
 
 - [Wrapping up]({% link _chapters/wrapping-up.md %})
+- [Giving back]({% link _chapters/giving-back.md %})
 
 <hr class="tools" />
 
