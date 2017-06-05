@@ -9,6 +9,12 @@ comments_id: 35
 
 Now that we have our first route set up, let's add a couple of links to the navbar of our app. These will direct users to login or signup for our app when they first visit it.
 
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace the `import` statement for `react-bootstrap` in `src/App.js` with the following to add the `Nav` and `NavItem` components.
+
+```
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
+```
+
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace the `render` method in `src/App.js` with the following.
 
 ``` coffee
