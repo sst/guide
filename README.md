@@ -35,8 +35,8 @@ The entire guide is hosted through GitHub Pages and we use [GitHub Issues][GHIss
 
 - If you are running into issues with a specific chapter, post in the comments for that [chapter][GHIssues].
 - Open a [new issue](../../issues/new) if you've found a bug or have some suggestions.
-- Send us an [email](mailto:contact@anoma.ly) if you have any other questions or feedback.
-- If you've found a typo, edit the chapter and submit a [pull request](PR).
+- Send us an [email][Email] if you have any other questions or feedback.
+- If you've found a typo, edit the chapter and submit a [pull request][PR].
 
 #### Contributing
 
@@ -45,8 +45,9 @@ The entire guide is hosted through GitHub Pages and we use [GitHub Issues][GHIss
 
 #### Maintainers
 
-Serverless Stack is authored and maintained by Frank Wang ([@fanjiewang](https://twitter.com/fanjiewang)) & Jay V ([@jayair](https://twitter.com/jayair)). [**Subscribe to our newsletter**](http://eepurl.com/cEaBlf) for news and updates on Serverless Stack. Or send us an [email](mailto:contact@anoma.ly) if you have any questions.
+Serverless Stack is authored and maintained by Frank Wang ([@fanjiewang](https://twitter.com/fanjiewang)) & Jay V ([@jayair](https://twitter.com/jayair)). [**Subscribe to our newsletter**](http://eepurl.com/cEaBlf) for news and updates on Serverless Stack. Or send us an [email][Email] if you have any questions.
 
 
 [GHIssues]: ../../issues?q=is%3Aissue+is%3Aopen+label%3ADiscussion+sort%3Aupdated-desc
 [PR]: ../../compare
+[Email]: mailto:contact@anoma.ly
