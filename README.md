@@ -40,7 +40,7 @@ The entire guide is hosted through GitHub Pages and we use [GitHub Issues][GHIss
 
 #### Contributing
 
-- To fix typos or make minor corrections; just navigate to the chapter, edit it, and submit a [pull request](PR).
+- To fix typos or make minor corrections; just navigate to the chapter, edit it, and submit a [pull request][PR].
 - To make a larger changes, you need to set up the repo on local. Make sure you have [Jekyll](https://github.com/jekyll/jekyll) installed and run `bundle exec jekyll serve` from the project root.
 
 #### Maintainers
