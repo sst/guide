@@ -12,7 +12,7 @@
 
 Serverless Stack is a free comprehensive guide to creating full-stack serverless applications.
 
-We are going to create a note taking app from scratch using React.js, AWS Lambda, API Gateway, DynamoDB, and Cognito.
+We are going to create a [note taking app](https://demo.serverless-stack.com) from scratch using React.js, AWS Lambda, API Gateway, DynamoDB, and Cognito.
 
 ![Demo App](assets/completed-app-desktop.png)
 
