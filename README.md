@@ -45,7 +45,7 @@ The entire guide is hosted through GitHub Pages and we use [GitHub Issues][GHIss
 
 #### Maintainers
 
-Serverless Stack is authored and maintained by Frank Wang ([@fanjiewang](https://twitter.com/fanjiewang)) & Jay V ([@jayair](https://twitter.com/jayair)). [**Subscribe to our newsletter**](http://eepurl.com/cEaBlf) for news and updates on Serverless Stack. Or send us an [email][Email] if you have any questions.
+Serverless Stack is authored and maintained by Frank Wang ([@fanjiewang](https://twitter.com/fanjiewang)) & Jay V ([@jayair](https://twitter.com/jayair)). [**Subscribe to our newsletter**](http://eepurl.com/cEaBlf) for updates on Serverless Stack. Send us an [email][Email] if you have any questions.
 
 
 [GHIssues]: ../../issues?q=is%3Aissue+is%3Aopen+label%3ADiscussion+sort%3Aupdated-desc
