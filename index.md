@@ -1,6 +1,6 @@
 ---
 layout: home
-description: Free step-by-step tutorials for creating full-stack serverless applications. Learn to build a CRUD app using React.js, AWS Lambda, API Gateway, DynamoDB, and Cognito.
+description: Free step-by-step tutorials for creating full-stack serverless applications. A combination of a Serverless tutorial for the backend REST API and a React.js tutorial using Create React App for the frontend single-page application. Learn to build a CRUD app using React.js, AWS Lambda, API Gateway, DynamoDB, and Cognito.
 ---
 
 {% include lander.html %}
