@@ -55,10 +55,10 @@ class Login extends Component {
       <div className="Login">
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="username" bsSize="large">
-            <ControlLabel>Email</ControlLabel>
+            <ControlLabel>Username</ControlLabel>
             <FormControl
               autoFocus
-              type="email"
+              type="text"
               value={this.state.username}
               onChange={this.handleChange} />
           </FormGroup>
