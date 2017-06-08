@@ -50,4 +50,24 @@ And if you navigate over to that in your browser, you should see your app live.
 
 ![App live on CloudFront screenshot]({{ site.url }}/assets/app-live-on-cloudfront.png)
 
+Now before we move on there is one last thing we need to do. Currently, our static website returns our `index.html` as the error page. We set this up back in the chapter where we created our S3 bucket. However, it returns a HTTP status code of 404 when it does so. We want to return the `index.html` but since the routing is handled by React Router; it does not make sense that we return the 404 HTTP status code. One of the issues with this is that certain corporate firewalls and proxies tend to block 4xx and 5xx responses.
+
+### Custom Error Responses
+
+So we are going to create a custom error response and return a 200 status code instead. The downside of this approach is that we are going to be returning 200 even for cases where we don't have a route in our React Router. Unfortunately, there isn't a way around this. This is because CloudFront or S3 are not aware of the routes in our React Router.
+
+To set up a custom error response, head over to the **Error Pages** tab in our Distribution.
+
+![Error Pages in CloudFront screenshot]({{ site.url }}/assets/error-pages-in-cloudfront.png)
+
+And select **Create Custom Error Response**.
+
+![Select Create Custom Error Response in CloudFront screenshot]({{ site.url }}/assets/select-create-custom-error-response.png)
+
+Pick **404** for the **HTTP Error Code** and select **Customize Error Response**. Enter `/index.html` for the **Response Page Path** and **200** for the **HTTP Response Code**.
+
+![Create Custom Error Response screenshot]({{ site.url }}/assets/create-custom-error-response.png)
+
+And hit **Create**. This is basically telling CloudFront to respond to any 404 responses from our S3 bucket with the `index.html` and a 200 status code. Creating a custom error response should take a couple of minutes to complete.
+
 Next up, let's point our domain to our CloudFront Distribution.
