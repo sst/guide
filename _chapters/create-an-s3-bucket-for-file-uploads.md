@@ -26,7 +26,7 @@ Select **Create Bucket**.
 Pick a name of the bucket and select a region. Then select **Create**.
 
 - **Bucket names** are globally unique, which means you cannot pick the same name as this tutorial.
-- **Region** is the physical geographical region where the files are stored. We will use **US East (N. Virginia)** for this guide.
+- **Region** is the physical geographical region where the files are stored. We will use **US East (N. Virginia)** for this guide. This is required because Cognito User Pools (covered in the next section) are currently only available in that region. When another region is selected, errors may not indicate the region support limitation.
 
 ![Enter S3 Bucket Info screenshot]({{ site.url }}/assets/s3/enter-s3-bucket-info.png)
 
@@ -67,4 +67,3 @@ Add the following CORS configuration into the editor, then hit **Save**.
 ![Save S3 Bucket CORS Configuration screenshot]({{ site.url }}/assets/s3/save-s3-bucket-cors-configuration.png)
 
 Now that our S3 bucket is ready, let's get set up to handle user authentication.
-
