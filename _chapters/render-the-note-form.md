@@ -46,7 +46,7 @@ handleSubmit = async (event) => {
 handleDelete = async (event) => {
   event.preventDefault();
 
-  const confirmed = confirm('Are you sure you want to delete this note?');
+  const confirmed = window.confirm('Are you sure you want to delete this note?');
 
   if ( ! confirmed) {
     return;
@@ -70,7 +70,7 @@ render() {
             ( <FormGroup>
               <ControlLabel>Attachment</ControlLabel>
               <FormControl.Static>
-                <a target="_blank" href={ this.state.note.attachment }>
+                <a target="_blank" rel="noopener noreferrer" href={ this.state.note.attachment }>
                   { this.formatFilename(this.state.note.attachment) }
                 </a>
               </FormControl.Static>

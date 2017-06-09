@@ -21,7 +21,7 @@ export async function main(event, context, callback) {
   const data = JSON.parse(event.body);
   const params = {
     TableName: 'notes',
-    // 'Key' defines the partition key and sort key of the time to be updated
+    // 'Key' defines the partition key and sort key of the item to be updated
     // - 'userId': User Pool sub of the authenticated user
     // - 'noteId': path parameter
     Key: {

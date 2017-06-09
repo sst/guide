@@ -16,8 +16,8 @@
 title: Serverless Stack
 email: contact@anoma.ly
 description: > # this means to ignore newlines until "baseurl:"
-  Free step-by-step tutorials for creating
-  serverless React.js apps
+  Free tutorials for building
+  serverless React.js full-stack apps
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://serverless-stack.com" # the base hostname & protocol for your site, e.g. http://example.com
 logo: /assets/og-image.jpg

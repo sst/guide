@@ -20,7 +20,7 @@ import { success, failure } from './libs/response-lib';
 export async function main(event, context, callback) {
   const params = {
     TableName: 'notes',
-    // 'Key' defines the partition key and sort key of the time to be removed
+    // 'Key' defines the partition key and sort key of the item to be removed
     // - 'userId': User Pool sub of the authenticated user
     // - 'noteId': path parameter
     Key: {
@@ -94,7 +94,7 @@ And the response should look similar to this.
 ``` bash
 {
   statusCode: 200,
-  headers: 
+  headers:
   headers: {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Credentials': true

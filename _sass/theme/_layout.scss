@@ -287,6 +287,38 @@ span.post-info-separator {
   }
 }
 
+.post-closing {
+  margin-top: 2 * $spacing-unit;
+  margin-bottom: $spacing-unit;
+  text-align: center;
+
+  hr {
+    font-size: 28px;
+    letter-spacing: .6em;
+    display: block;
+    border: 0;
+    color: $tertiary-text-color;
+
+    &:before {
+      content: '...';
+      display: inline-block;
+      margin-left: .6em;
+      color: rgba(0, 0, 0, .6);
+      position: relative;
+      top: -1.5 * $spacing-unit;
+    }
+  }
+
+  p {
+    font-style: italic;
+    font-size: 18px;
+    a {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  }
+}
+
 .post-footer {
   @extend %clearfix;
   margin-top: 54px;

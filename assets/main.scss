@@ -21,6 +21,7 @@ $background-color:          #f2efe8;
 $code-background-color:     #f0eaf7;
 $hilight-background-color:  #fff694;
 $brand-color:               #9068BE;
+$important-color:           #F39C12;
 
 $grey-color:                #828282;
 $grey-color-light:          lighten($grey-color, 30%);
@@ -140,7 +141,7 @@ a.button {
   border-radius: 4px;
   line-height: 1.2;
   color: white;
-  background-color: $brand-color;
+  background-color: $important-color;
   font-family: $base-font-family;
   display: inline-block;
   border: 0;
@@ -152,7 +153,7 @@ a.button {
   }
 
   &:hover {
-    background-color: darken($brand-color, 10%);
+    background-color: lighten($important-color, 5%);
   }
 }
 
@@ -165,6 +166,8 @@ a.button {
     display: block;
     padding: $spacing-unit 20px $spacing-unit + 7px;
     background-color: darken($background-color, 5%);
+    background-color: $brand-color;
+    color: white;
     border-radius: 5px;
 
     @include media-query($on-palm) {
@@ -172,6 +175,8 @@ a.button {
     }
 
     div.share {
+      margin-top: 25px;
+
       p {
         font-size: 18px;
         font-weight: 300;
@@ -179,6 +184,14 @@ a.button {
 
       ul.share-buttons li {
         padding: 0 5px;
+
+        a {
+          color: white;
+
+          &:hover {
+            color: #EEE;
+          }
+        }
       }
     }
   }
@@ -186,8 +199,6 @@ a.button {
   div.newsletter {
     $width-on-palm: 240px;
     $width: 380px;
-
-    margin-bottom: 25px;
 
     p {
       margin-bottom: 20px;
@@ -292,11 +303,31 @@ div.home ul.quotes {
 }
 div.home ul.quotes li {
   margin-bottom: $spacing-unit;
+  &:nth-child(odd) {
+    padding-left: 80px;
+    background: {
+      image: url('/assets/left-quote-icon.png');
+      repeat: no-repeat;
+      size: 68px 50px;
+      position: 0px 7px;
+    }
+  }
+  &:nth-child(even) {
+    padding-right: 77px;
+    background: {
+      image: url('/assets/right-quote-icon.png');
+      repeat: no-repeat;
+      size: 68px 50px;
+      position: right 7px;
+    }
+  }
 }
 div.home ul.quotes p {
   margin-bottom: 0;
 
   &:first-child {
+    font-style: italic;
+    font-size: 20px;
     margin-bottom: 7px;
   }
   &:last-child {
@@ -307,7 +338,6 @@ div.home ul.quotes p {
 div.home .toc {
   padding-top: 2 * $spacing-unit - 10px;
   margin-bottom: $spacing-unit;
-  border-top: 4px solid darken($background-color, 10%);
   text-align: center;
   font-weight: bold;
   font-size: 24px;
@@ -343,6 +373,11 @@ div.home .about-us {
   font-size: 36px;
   letter-spacing: -1px;
   line-height: 1.3;
+}
+div.home .about-us-image-desc {
+  text-align: center;
+  color: $tertiary-text-color;
+  font-size: 14px;
 }
 div.home a.contact {
   margin: 2 * $spacing-unit auto $spacing-unit;

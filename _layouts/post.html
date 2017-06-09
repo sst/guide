@@ -14,7 +14,20 @@ layout: default
     {{ content }}
   </div>
 
+  <div class="post-closing">
+    <hr />
+    <p>If you liked this post, please <a target="_blank" href="{{ site.mailchimp_signup_form }}">subscribe to our newsletter</a> and <a target="_blank" href="{{ site.github_repo }}">give us a star on GitHub</a>.</p>
+  </div>
+
   {% include post-links.html %}
+
+  <div class="extras">
+    <div class="container">
+      <div class="newsletter">
+        {% include newsletter-form.html %}
+      </div>
+    </div>
+  </div>
 
   <div class="post-footer">
     {% if page.previous.url %}
@@ -24,19 +37,6 @@ layout: default
     {% if page.next.url %}
     <a class="next" href="{{ page.next.url }}">Next &rarr;</a>
     {% endif %}
-  </div>
-
-  <div class="extras">
-    <div class="container">
-      <div class="newsletter">
-        {% include newsletter-form.html %}
-      </div>
-      <div class="share">
-        <p>Share this chapter</p>
-        {% capture full_url %}{{ site.url }}{{ page.url }}{% endcapture %}
-        {% include share-buttons.html url=full_url title=page.title %}
-      </div>
-    </div>
   </div>
 
 </article>

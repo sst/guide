@@ -20,7 +20,7 @@ import { success, failure } from './libs/response-lib';
 export async function main(event, context, callback) {
   const params = {
     TableName: 'notes',
-    // 'Key' defines the partition key and sort key of the time to be retrieved
+    // 'Key' defines the partition key and sort key of the item to be retrieved
     // - 'userId': federated identity ID of the authenticated user
     // - 'noteId': path parameter
     Key: {

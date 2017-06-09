@@ -10,7 +10,7 @@ comments_id: 22
 
 By default, AWS Lambda only supports a specific version of JavaScript. It doesn't have an up-to-date Node.js engine. And looking a bit further ahead, we'll be using a more advanced flavor of JavaScript with ES6/ES7 features. So it would make sense to follow the same syntax on the backend and have a transpiler convert it to the target syntax. This would mean that we won't need to worry about writing different types of code on the backend or the frontend.
 
-In this chapter, we are going to enable ES6/ES7 capabilities to AWS Lambda using the Serverless Framework. We will do this by setting up [Babel](https://babeljs.io) and [Webpack](https://webpack.github.io) to transpile and package our project. If you would like to code with AWS Lambda's default JavaScript version, you can skip this chapter. But you will not be able to directly use the sample code in the later chapters, as they are written in ES6 syntax.
+In this chapter, we are going to enable ES6/ES7 for AWS Lambda using the Serverless Framework. We will do this by setting up [Babel](https://babeljs.io) and [Webpack](https://webpack.github.io) to transpile and package our project. If you would like to code with AWS Lambda's default JavaScript version, you can skip this chapter. But you will not be able to directly use the sample code in the later chapters, as they are written in ES6 syntax.
 
 ### Install Babel and Webpack
 
@@ -21,7 +21,8 @@ $ npm install --save-dev \
     babel-core \
     babel-loader \
     babel-plugin-transform-runtime \
-    babel-preset-react-app \
+    babel-preset-es2015 \
+    babel-preset-stage-3 \
     serverless-webpack \
     glob \
     webpack \
@@ -83,14 +84,16 @@ function globEntries(globPath) {
 
 This is the configuration Webpack will use to package our app. The main part of this config is the `entry` attribute that we are automatically generating by looking for the relevant files in our project root. If you are wondering how we would handle files that are not in the project root, we touch on this at the [end of our guide]({% link _chapters/serverless-es7-service.md %}).
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a file called `.babelrc` in the root with the following. We are using the same Babel preset (**react-app**) as the one we are going to use in the frontend.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a file called `.babelrc` in the root with the following.
 
 ``` json
 {
   "plugins": ["transform-runtime"],
-  "presets": ["react-app"]
+  "presets": ["es2015", "stage-3"]
 }
 ```
+
+The presets are telling Babel the type of JavaScript we are going to be using.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Open `serverless.yml` and replace it with the following.
 

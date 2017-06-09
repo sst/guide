@@ -1,9 +1,11 @@
 ---
 layout: home
-description: Free step-by-step tutorials for creating full-stack serverless applications. Learn to build a CRUD app using React.js, AWS Lambda, API Gateway, DynamoDB, and Cognito.
+description: Free step-by-step tutorials for creating full-stack serverless applications. A combination of a Serverless tutorial for the backend REST API and a React.js tutorial using Create React App for the frontend single-page application. Learn to build a CRUD app using React.js, AWS Lambda, API Gateway, DynamoDB, and Cognito.
 ---
 
 {% include lander.html %}
+
+{% include share-index.html %}
 
 {: .toc }
 ## Table of Contents
@@ -19,6 +21,8 @@ description: Free step-by-step tutorials for creating full-stack serverless appl
 
 - [Create an AWS account]({% link _chapters/create-an-aws-account.md %})
 - [Create an IAM user]({% link _chapters/create-an-iam-user.md %})
+  - [What is IAM]({% link _chapters/what-is-iam.md %})
+  - [What is an ARN]({% link _chapters/what-is-an-arn.md %})
 - [Configure the AWS CLI]({% link _chapters/configure-the-aws-cli.md %})
 
 ### Setting up the Backend
@@ -95,14 +99,17 @@ description: Free step-by-step tutorials for creating full-stack serverless appl
   - [Update the app]({% link _chapters/update-the-app.md %})
   - [Deploy again]({% link _chapters/deploy-again.md %})
 
+### Extra Credit
+
+- [Code Splitting in Create React App]({% link _chapters/code-splitting-in-create-react-app.md %})
+
 ### Conclusion
 
 - [Wrapping up]({% link _chapters/wrapping-up.md %})
+- [Giving back]({% link _chapters/giving-back.md %})
 
 <hr class="tools" />
 
 ### Tools
 
 - [Serverless ES7 Service]({% link _chapters/serverless-es7-service.md %})
-
-{% include share-index.html %}
