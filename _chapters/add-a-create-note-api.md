@@ -147,7 +147,7 @@ $ mkdir mocks
 $ cd mocks
 ```
 
-Create a `create-event.json` file and add the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a `mocks/create-event.json` file and add the following.
 
 ``` json
 {
@@ -167,7 +167,7 @@ You might have noticed that the `body` and `requestContext` fields are the ones 
 And to invoke our function we run the following in the root directory.
 
 ``` bash
-$ serverless webpack invoke --function create --path /mocks/create-event.json
+$ serverless webpack invoke --function create --path mocks/create-event.json
 ```
 
 The response should look similar to this.

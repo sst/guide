@@ -73,7 +73,7 @@ Here we are adding a handler for the PUT request to the `/notes/{id}` endpoint.
 
 ### Test
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />In our `mocks/` directory create a `update-event.json` file and add the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a `mocks/update-event.json` file and add the following.
 
 Also, don't forget to use the `noteId` of the note we have been using in place of the `id` in the `pathParameters` block.
 

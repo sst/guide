@@ -64,7 +64,7 @@ This adds a DELETE request handler to the `/notes/{id}` endpoint.
 
 ### Test
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />In our `mocks/` directory create a `delete-event.json` file and add the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a `mocks/delete-event.json` file and add the following.
 
 Just like before we'll use the `noteId` of our note in place of the `id` in the `pathParameters` block.
 

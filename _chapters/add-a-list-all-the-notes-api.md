@@ -66,7 +66,7 @@ This defines the `/notes` endpoint that takes a GET request with the same Cognit
 
 ### Test
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />In our `mocks/` directory create a `list-event.json` file and add the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a `mocks/list-event.json` file and add the following.
 
 ``` json
 {
