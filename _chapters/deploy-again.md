@@ -78,19 +78,22 @@ NPM allows us to add a `deploy` command in our `package.json`.
 
 Make sure to replace `YOUR_S3_DEPLOY_BUCKET_NAME`, `YOUR_CF_DISTRIBUTION_ID`, and `YOUR_WWW_CF_DISTRIBUTION_ID` with the ones from above.
 
+For Windows users, if `postdeploy` returns an error like.
+
+```
+An error occurred (InvalidArgument) when calling the CreateInvalidation operation: Your request contains one or more invalid invalidation paths.
+```
+
+Make sure that there is no quote in the `/*`.
+
+``` coffee
+"postdeploy": "aws cloudfront create-invalidation --distribution-id YOUR_CF_DISTRIBUTION_ID --paths /* && aws cloudfront create-invalidation --distribution-id YOUR_WWW_CF_DISTRIBUTION_ID --paths /*",
+```
+
 Now simply run the following command from your project root when you want to deploy your updates. It'll build your app, upload it to S3, and invalidate the CloudFront cache.
 
 ``` bash
 $ npm run deploy
-```
-
-For Windows users, if `postdeploy` returns an error like
-```
-An error occurred (InvalidArgument) when calling the CreateInvalidation operation: Your request contains one or more invalid invalidation paths.
-```
-Make sure that there is no quote in the `/*`
-``` coffee
-"postdeploy": "aws cloudfront create-invalidation --distribution-id YOUR_CF_DISTRIBUTION_ID --paths /* && aws cloudfront create-invalidation --distribution-id YOUR_WWW_CF_DISTRIBUTION_ID --paths /*",
 ```
 
 Our app is now complete. And we have an easy way to update it!
