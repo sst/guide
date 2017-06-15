@@ -1,6 +1,6 @@
 ---
 layout: home
-description: Free step-by-step tutorials for creating full-stack serverless applications. A combination of a Serverless tutorial for the backend REST API and a React.js tutorial using Create React App for the frontend single-page application. Learn to build a CRUD app using React.js, AWS Lambda, API Gateway, DynamoDB, and Cognito.
+description: Free step-by-step tutorials for creating full-stack apps with Serverless Framework and React.js. Build a Serverless REST API with our Serverless tutorial and connect it to a React single-page application with our React.js tutorial. Use our AWS tutorial with screenshots to deploy your full-stack app.
 ---
 
 {% include lander.html %}
@@ -25,7 +25,7 @@ description: Free step-by-step tutorials for creating full-stack serverless appl
   - [What is an ARN]({% link _chapters/what-is-an-arn.md %})
 - [Configure the AWS CLI]({% link _chapters/configure-the-aws-cli.md %})
 
-### Setting up the Backend
+### Setting up the Serverless Backend
 
 - [Create a DynamoDB table]({% link _chapters/create-a-dynamodb-table.md %})
 - [Create an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %})
@@ -36,7 +36,7 @@ description: Free step-by-step tutorials for creating full-stack serverless appl
 - [Set up the Serverless Framework]({% link _chapters/setup-the-serverless-framework.md %})
   - [Add support for ES6/ES7 JavaScript]({% link _chapters/add-support-for-es6-es7-javascript.md %})
 
-### Building the Backend
+### Building a Serverless REST API
 
 - [Add a create note API]({% link _chapters/add-a-create-note-api.md %})
 - [Add a get note API]({% link _chapters/add-a-get-note-api.md %})
@@ -48,7 +48,7 @@ description: Free step-by-step tutorials for creating full-stack serverless appl
 
 - [Deploy the APIs]({% link _chapters/deploy-the-apis.md %})
 
-### Setting up the Frontend
+### Setting up a React App
 
 - [Create a new React.js app]({% link _chapters/create-a-new-reactjs-app.md %})
   - [Add app favicons]({% link _chapters/add-app-favicons.md %})
@@ -59,7 +59,7 @@ description: Free step-by-step tutorials for creating full-stack serverless appl
   - [Adding links in the navbar]({% link _chapters/adding-links-in-the-navbar.md %})
   - [Handle 404s]({% link _chapters/handle-404s.md %})
 
-### Building the Frontend
+### Building a React App
 
 - [Create a login page]({% link _chapters/create-a-login-page.md %})
   - [Login with AWS Cognito]({% link _chapters/login-with-aws-cognito.md %})
@@ -86,7 +86,7 @@ description: Free step-by-step tutorials for creating full-stack serverless appl
   - [Use the redirect routes]({% link _chapters/use-the-redirect-routes.md %})
   - [Redirect on login]({% link _chapters/redirect-on-login.md %})
 
-### Deploying the Frontend
+### Deploying a React app on AWS
 
 - [Deploy the Frontend]({% link _chapters/deploy-the-frontend.md %})
   - [Create an S3 bucket]({% link _chapters/create-an-s3-bucket.md %})

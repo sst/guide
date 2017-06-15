@@ -1,5 +1,6 @@
 ---
 layout: home
+title: About Us
 description: Serverless Stack is brought to you by Frank Wang (@fanjiewang) and Jay V (@jayair) from Anomaly Innovations.
 ---
 
