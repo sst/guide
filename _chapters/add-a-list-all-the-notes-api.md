@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Add a List All the Notes API
+title: Add a List All to the Notes API
 date: 2017-01-02 00:00:00
 description: Tutorial on adding a HTTP GET endpoint with CORS support to AWS Lambda and API Gateway using the Serverless Framework.
 code: backend
