@@ -120,6 +120,15 @@ a.button {
   }
 }
 
+a.contact {
+  margin: 2 * $spacing-unit auto $spacing-unit;
+  text-align: center;
+  padding: 14px 0;
+  width: 230px;
+  font-size: 20px;
+  display: block;
+}
+
 // Newsletter Form Chrome
 %newsletter-input {
   box-sizing: border-box;
@@ -378,14 +387,6 @@ div.home .about-us-image-desc {
   text-align: center;
   color: $tertiary-text-color;
   font-size: 14px;
-}
-div.home a.contact {
-  margin: 2 * $spacing-unit auto $spacing-unit;
-  text-align: center;
-  padding: 14px 0;
-  width: 230px;
-  font-size: 20px;
-  display: block;
 }
 
 

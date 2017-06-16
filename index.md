@@ -15,6 +15,7 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
 - [Who is this guide for?]({% link _chapters/who-is-this-guide-for.md %})
 - [What does this guide cover?]({% link _chapters/what-does-this-guide-cover.md %})
 - [How to get help?]({% link _chapters/how-to-get-help.md %})
+- [What is serverless?]({% link _chapters/what-is-serverless.md %})
 - [Why create serverless apps?]({% link _chapters/why-create-serverless-apps.md %})
 
 ### Set up your AWS account
@@ -107,6 +108,7 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
 
 - [Wrapping up]({% link _chapters/wrapping-up.md %})
 - [Giving back]({% link _chapters/giving-back.md %})
+- [Staying up to date]({% link _chapters/staying-up-to-date.md %})
 
 <hr class="tools" />
 
