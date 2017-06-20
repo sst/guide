@@ -130,6 +130,17 @@ Now if you were to switch over to your browser and try signing up for a new acco
 
 ![Redirect home after signup screenshot]({{ site.url }}/assets/redirect-home-after-signup.png)
 
-A quick note on the signup flow here. If the user refreshes their page at the confirm step, they won't be able to get back and confirm that account. It forces them to create a new account instead. We are keeping things intentionally simple here but you can fix this by creating a separate page that handles the confirm step based on the email address. [Here](http://docs.aws.amazon.com/cognito/latest/developerguide/using-amazon-cognito-user-identity-pools-javascript-examples.html#using-amazon-cognito-identity-user-pools-javascript-example-confirming-user) is some sample code that you can use to confirm an unauthenticated user.
+A quick note on the signup flow here. If the user refreshes their page at the confirm step, they won't be able to get back and confirm that account. It forces them to create a new account instead. We are keeping things intentionally simple here but you can fix this by creating a separate page that handles the confirm step based on the email address.
+
+[Here](http://docs.aws.amazon.com/cognito/latest/developerguide/using-amazon-cognito-user-identity-pools-javascript-examples.html#using-amazon-cognito-identity-user-pools-javascript-example-confirming-user) is some sample code that you can use to confirm an unauthenticated user.
+
+You can also confirm an unauthenticated user from the command line, using AWS CLI:
+
+```bash
+aws cognito-idp admin-confirm-sign-up \
+   --region us-east-1 \
+   --user-pool-id {USER_POOL_ID} \
+   --username {USERNAME}
+```
 
 Next up, we are going to create our first note.
