@@ -5,12 +5,12 @@
 </p>
 
 <p align="center">
-  <b>Learn to Build Full-Stack Serverless Applications</b>
+  <b>Learn to Build Full-Stack Apps with Serverless and React</b>
 </p>
 
 ------------------------------------------------------------------------------------
 
-[Serverless Stack](http://serverless-stack.com) is a free comprehensive guide to creating full-stack serverless applications.
+[Serverless Stack](http://serverless-stack.com) is an open source guide for building and deploying full-stack apps using Serverless and React on AWS.
 
 We are going to create a [note taking app](https://demo.serverless-stack.com) from scratch using React.js, AWS Lambda, API Gateway, DynamoDB, and Cognito.
 
