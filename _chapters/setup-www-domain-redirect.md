@@ -6,7 +6,7 @@ description: Tutorial on how to create a www domain redirect using S3 redirect, 
 comments_id: 66
 ---
 
-There's plenty of debate over the www vs non-www domains and while both sides have merit; we'll go over how to set up another domain (in this case the www) and redirect it to our original. If you prefer having the www domain as the default simply swap this step with the last one where we created a bare domain (non-www).
+There's plenty of debate over the www vs non-www domains and while both sides have merit; we'll go over how to set up another domain (in this case the www) and redirect it to our original. The reason we do a redirect is to tell the search engines that we only want one version of our domain to appear in the search results. If you prefer having the www domain as the default simply swap this step with the last one where we created a bare domain (non-www).
 
 To create a new domain and have it redirect we are going to use the redirection feature that S3 Buckets have. So let's start by creating a new S3 redirect Bucket for this.
 
