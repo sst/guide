@@ -2,7 +2,7 @@
 layout: post
 title: Add a List All the Notes API
 date: 2017-01-02 00:00:00
-description: Tutorial on adding a HTTP GET endpoint with CORS support to AWS Lambda and API Gateway using the Serverless Framework.
+description: To allow users to retrieve their notes in our note taking app, we are going to add a list note GET API. To do this we will add a new Lambda function to our Serverless Framework project. The Lambda function will retrieve all the user’s notes from the DynamoDB table. We also need to ensure to set the Access-Control headers to enable CORS for our serverless backend API.
 code: backend
 comments_id: 25
 ---

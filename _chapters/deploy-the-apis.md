@@ -2,7 +2,7 @@
 layout: post
 title: Deploy the APIs
 date: 2017-01-05 00:00:00
-description: Tutorial on how to deploy your entire Serverless project or a single function to AWS Lambda and API Gateway.
+description: Use the serverless deploy command to deploy to AWS Lambda and API Gateway using the Serverless Framework. We can also test our serverless API backend that is using Cognito User Pool as an authorizer with the aws cognito-idp admin-initiate-auth command.
 code: backend_full
 comments_id: 28
 ---

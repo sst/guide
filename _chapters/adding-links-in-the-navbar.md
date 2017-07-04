@@ -2,7 +2,7 @@
 layout: post
 title: Adding Links in the Navbar
 date: 2017-01-11 12:00:00
-description: Tutorial on how to add links to the Navbar of your React.js app using React Router v4.
+description: To allow the App container in our React.js app to navigate to a link, we are going to use the withRouter higher-order component. The withRouter HOC from React Router adds the route related props to our component. With this we can call history.push to navigate around our app.
 code: frontend
 comments_id: 35
 ---

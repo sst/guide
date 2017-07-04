@@ -2,7 +2,7 @@
 layout: post
 title: Create Containers
 date: 2017-01-11 00:00:00
-description: Tutorial on how to add a container, a Navbar, and routes to your React.js app with React Router v4.
+description: To split up our React.js app into different routes we are going to structure it using containers in React Router v4. We are also going to add the Navbar React-Bootstrap component to our App container.
 code: frontend
 comments_id: 34
 ---

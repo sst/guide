@@ -2,7 +2,7 @@
 layout: post
 title: Create a Cognito User Pool
 date: 2016-12-28 00:00:00
-description: Tutorial on how to create an Amazon Cognito User Pool to handle user accounts and authentication for your app.
+description: Amazon Cognito User Pool handles sign-up and sign-in functionality for web and mobile apps. We are going to create a Cognito User Pool to store and manage the users for our serverless app. We are also going to set up our app as an App Client for our Cognito User Pool.
 comments_id: 17
 ---
 

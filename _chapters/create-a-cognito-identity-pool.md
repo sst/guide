@@ -2,7 +2,7 @@
 layout: post
 title: Create a Cognito Identity Pool
 date: 2016-12-29 00:00:00
-description: Tutorial on how to create an Amazon Cognito Identity Pool with your User Pool as the authentication provider for your app.
+description: Amazon Cognito Federated Identities helps us secure our AWS resources. We can use the Cognito User Pool as an identity provider for our serverless backend. To allow users to be able to upload files to our S3 bucket we need to create an Identity Pool. We will assign it an Identity Pool Policy with the name of our S3 bucket and prefix our files with the cognito-identity.amazonaws.com:sub.
 comments_id: 19
 ---
 

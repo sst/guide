@@ -2,7 +2,7 @@
 layout: post
 title: Cognito User Pool vs Identity Pool
 date: 2016-12-29 12:00:00
-description: The differences between Amazon Cognito User Pool and Amazon Cognito Identity Pool.
+description: Amazon Cognito User Pool and Cognito Identity Pool can be confusing concepts. Cognito User Pool is a service that helps manage your users and the sign-up and sign-in functionality for your mobile or web app. Cognito Identity Pool or Cognito Federated Identities is a service that uses identity providers (like Google, Facebook, or Cognito User Pool) to secure access to other AWS resources.
 comments_id: 20
 ---
 

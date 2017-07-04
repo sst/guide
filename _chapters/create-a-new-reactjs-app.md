@@ -2,7 +2,7 @@
 layout: post
 title: Create a New React.js App
 date: 2017-01-06 00:00:00
-description: React.js tutorial on creating a new app using Create React App.
+description: Create React App helps you build React.js app with no configuration. Install the Create React App CLI using the NPM package and use the command to start a new React.js project.
 code: frontend
 comments_id: 29
 ---
