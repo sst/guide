@@ -2,7 +2,6 @@
 layout: post
 title: Create a Signup Page
 date: 2017-01-19 00:00:00
-description: Tutorial on how to set up a signup page using AWS Cognito in your React.js app.
 comments_id: 44
 ---
 

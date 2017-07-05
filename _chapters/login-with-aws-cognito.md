@@ -2,14 +2,14 @@
 layout: post
 title: Login with AWS Cognito
 date: 2017-01-14 00:00:00
-description: Tutorial on how to login to AWS Cognito in your React.js app using amazon-cognito-identity-js and AWS JS SDK.
+description: To allow users to login using Amazon Cognito in our React.js app, we are going to use the amazon-cognito-identity-js NPM package. We need the Cognito User Pool Id and our App Client Id as well. We login in the user by calling the authenticateUser method and it returns a user JWT session token back.
 code: frontend
 comments_id: 38
 ---
 
-Before we link up our login form with our AWS Cognito setup let's grab our Cognito details and load it into our application as a part of it's config.
+Before we link up our login form with our Amazon Cognito setup let's grab our Cognito details and load it into our application as a part of it's config.
 
-### Load AWS Cognito Details
+### Load Cognito Details
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Save the following into `src/config.js` and replace `YOUR_COGNITO_USER_POOL_ID` and `YOUR_COGNITO_APP_CLIENT_ID` with the Cognito **Pool Id** and **App Client id** from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
 
@@ -28,7 +28,7 @@ export default {
 import config from '../config.js';
 ```
 
-### Login to AWS Cognito
+### Login to Amazon Cognito
 
 We are going to use the NPM module `amazon-cognito-identity-js` to login to Cognito.
 
