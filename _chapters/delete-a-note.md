@@ -3,6 +3,7 @@ layout: post
 title: Delete a Note
 date: 2017-01-31 00:00:00
 description: We want users to be able to delete their note in our React.js app. To do this we are going to make a DELETE request to our serverless API backend.
+context: frontend
 code: frontend
 comments_id: 56
 ---
