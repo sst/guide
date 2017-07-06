@@ -3,6 +3,7 @@ layout: post
 title: Set up Your Domain with CloudFront
 date: 2017-02-09 00:00:00
 description: To host our React.js app under our own domain name in AWS we are going to purchase a domain using Route 53. We will point the domain to our CloudFront Distribution with an Alias Resource Record Set. We also need to create an AAAA Record Set to support IPv6.
+context: all
 comments_id: 65
 ---
 
