@@ -3,6 +3,7 @@ layout: post
 title: Save Changes to a Note
 date: 2017-01-30 00:00:00
 description: For a user to be able to edit a note in our React.js app, we need to make a PUT request to our severless backend API. We also need to allow them to upload files directly to S3 and add that as an attachment to the note.
+context: frontend
 code: frontend
 comments_id: 55
 ---
