@@ -3,6 +3,7 @@ layout: post
 title: Signup with AWS Cognito
 date: 2017-01-21 00:00:00
 description: To implement a signup form in our React.js app using Amazon Cognito we are going to use the amazon-cognito-identity-js NPM package. We are going to call the signUp method to sign a user up and call the confirmRegistration method with the confirmation cade to complete the process.
+context: frontend
 code: frontend
 comments_id: 46
 ---
