@@ -3,6 +3,7 @@ layout: post
 title: Login with AWS Cognito
 date: 2017-01-14 00:00:00
 description: To allow users to login using Amazon Cognito in our React.js app, we are going to use the amazon-cognito-identity-js NPM package. We need the Cognito User Pool Id and our App Client Id as well. We login in the user by calling the authenticateUser method and it returns a user JWT session token back.
+context: frontend
 code: frontend
 comments_id: 38
 ---
