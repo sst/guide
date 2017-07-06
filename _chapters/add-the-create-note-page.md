@@ -3,6 +3,7 @@ layout: post
 title: Add the Create Note Page
 date: 2017-01-22 00:00:00
 description: We would like users to be able to create a note in our React.js app and upload a file as an attachment. To do so we are first going to create a form using the FormGroup and FormControl React-Bootstrap components.
+context: frontend
 code: frontend
 comments_id: 47
 ---
