@@ -7,7 +7,7 @@ code: frontend
 comments_id: 90
 ---
 
-This chapter is an extra step that can help speed up the initial load time of your React app. It is not a required step to complete this guide. But feel free to follow along if you are curious about what Code Splitting is and how it can help larger React.js apps.
+Code Splitting is not a necessary step for building React apps. But feel free to follow along if you are curious about what Code Splitting is and how it can help larger React apps.
 
 ### Code Splitting
 
