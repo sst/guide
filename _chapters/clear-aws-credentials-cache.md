@@ -3,6 +3,7 @@ layout: post
 title: Clear AWS Credentials Cache
 date: 2017-01-25 00:00:00
 description: Once a user logs out of our React.js app we need to ensure that we clear the AWS SDK temporary credentials. To do this we are going to call the AWS.config.credentials.clearCachedId method in our App component.
+context: frontend
 code: frontend
 comments_id: 50
 ---
