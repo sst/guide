@@ -3,6 +3,7 @@ layout: post
 title: Call the Create API
 date: 2017-01-23 00:00:00
 description: To let users create a note in our React.js app, we need to connect our form to our serverless API backend. Since we are using Amazon Cognito User Pool to secure our APIs, we’ll have to send the Cognito JWT user token as the Authorization header along with our request.
+context: frontend
 code: frontend
 comments_id: 48
 ---
