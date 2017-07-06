@@ -3,6 +3,7 @@ layout: post
 title: Create an AWS Account
 date: 2016-12-25 00:00:00
 description: To create a serverless app using Lambda we are going to first need to create an AWS (Amazon Web Services) account.
+context: all
 comments_id: 12
 ---
 

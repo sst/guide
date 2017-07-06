@@ -3,6 +3,7 @@ layout: post
 title: Add a Get Note API
 date: 2017-01-01 00:00:00
 description: To allow users to retrieve a note in our note taking app, we are going to add a GET note API. To do this we will add a new Lambda function to our Serverless Framework project. The Lambda function will retrieve the note from our DynamoDB table. We also need to ensure to set the Access-Control headers to enable CORS for our serverless backend API.
+context: backend
 code: backend
 comments_id: 24
 ---

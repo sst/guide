@@ -234,6 +234,8 @@
  */
 .post-header {
   margin-bottom: $spacing-unit;
+  padding-bottom: $spacing-unit / 2;
+  border-bottom: 1px solid $grey-color-light;
 }
 
 .post-title {
@@ -257,6 +259,13 @@ span.post-info-separator {
   font-size: 10px;
   font-weight: 300;
   color: $tertiary-text-color;
+}
+
+.post-context {
+  margin-top: 20px;
+  color: $tertiary-text-color;
+  font-weight: 300;
+  font-style: italic;
 }
 
 .post-content {
@@ -311,7 +320,7 @@ span.post-info-separator {
 
   p {
     font-style: italic;
-    font-size: 18px;
+    color: $secondary-text-color;
     a {
       font-weight: bold;
       text-decoration: underline;

@@ -3,6 +3,7 @@ layout: post
 title: Add a Create Note API
 date: 2016-12-31 00:00:00
 description: To allow users to create notes in our note taking app, we are going to add a create note POST API. To do this we are going to add a new Lambda function to our Serverless Framework project. The Lambda function will save the note to our DynamoDB table and return the newly created note. We also need to ensure to set the Access-Control headers to enable CORS for our serverless backend API.
+context: backend
 code: backend
 comments_id: 23
 ---

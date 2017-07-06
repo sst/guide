@@ -3,6 +3,7 @@ layout: post
 title: Create an IAM User
 date: 2016-12-25 12:00:00
 description: To interact with AWS using some command line tools we need to create an IAM user through the AWS console.
+context: all
 comments_id: 13
 ---
 

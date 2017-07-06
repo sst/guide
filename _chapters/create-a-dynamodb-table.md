@@ -3,6 +3,7 @@ layout: post
 title: Create a DynamoDB Table
 date: 2016-12-27 00:00:00
 description: Amazon DynamoDB is a fully managed NoSQL database that we are going to use to power our serverless API backend. DynamoDB stores data in tables and each table has a primary key that cannot be changed once set. We are also going to provision the throughput capacity by setting reads and writes for our DynamoDB table.
+context: all
 comments_id: 15
 ---
 
