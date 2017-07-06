@@ -3,6 +3,7 @@ layout: post
 title: List All the Notes
 date: 2017-01-26 00:00:00
 description: We want to display all the notes a user has in our React.js app. To do this we are going to use our Home container and render a list if a user is logged in.
+context: frontend
 code: frontend
 comments_id: 51
 ---
