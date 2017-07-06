@@ -3,6 +3,7 @@ layout: post
 title: Call the List API
 date: 2017-01-27 00:00:00
 description: To display a list of all of the user’s notes in our React.js app, we are going to make a GET request to our serverless API backend. We are also going to use the ListGroup and ListGroupItem React-Bootstrap components to render the list.
+context: frontend
 code: frontend
 comments_id: 52
 ---
