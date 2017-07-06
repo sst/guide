@@ -4,6 +4,7 @@ title: Deploy Again
 date: 2017-02-14 00:00:00
 code: frontend_full
 description: To be able to deploy updates to our React.js app hosted on S3 and CloudFront, we need to uploads our app to S3 and invalidate the CloudFront cache. We can do this using the “aws cloudfront create-invalidation” command in our AWS CLI. To automate these steps by running “npm run deploy”, we will add these commands to predeploy, deploy, and postdeploy scripts in our package.json.
+context: all
 comments_id: 70
 ---
 
