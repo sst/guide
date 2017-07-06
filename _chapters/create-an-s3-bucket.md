@@ -4,6 +4,7 @@ title: Create an S3 Bucket
 date: 2017-02-06 00:00:00
 redirect_from:  /chapters/create-a-s3-bucket.html
 description: We are going to use S3 to host our React.js app on AWS. We first need to configure our S3 bucket with the correct Bucket Policy and enable Static Web Hosting through the AWS console before we can upload our app.
+context: all
 comments_id: 62
 ---
 
