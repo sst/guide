@@ -140,3 +140,5 @@ And that's it for the backend! Next we are going to move on to creating the fron
   ```
 
   And deploy it using `serverless deploy`. But we can't see this output when we curl it, since the console logs are not sent in our HTTP responses. We need to check the logs to see this. Head over to your AWS Console > CloudWatch > click Logs in the sidebar > select the Log Group named `/aws/lambda/notes-app-api-prod-create` > and expand the events. This should give you an idea of the error and help you debug it.
+
+  A common source of errors here is an improperly indented `serverless.yml`. Make sure to double-check the indenting in your `serverless.yml` to the one from [this chapter](https://github.com/AnomalyInnovations/serverless-stack-demo-api/blob/master/serverless.yml).
