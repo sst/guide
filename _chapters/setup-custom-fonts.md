@@ -3,6 +3,7 @@ layout: post
 title: Set up Custom Fonts
 date: 2017-01-08 00:00:00
 description: To use custom fonts in our React.js project we are going to use Google Fonts and include it in our public/index.html.
+context: frontend
 code: frontend
 comments_id: 31
 ---
