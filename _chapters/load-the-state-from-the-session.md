@@ -3,6 +3,7 @@ layout: post
 title: Load the State from the Session
 date: 2017-01-15 00:00:00
 description: To keep a user logged in to Amazon Cognito in our React.js app, we are going to save the user’s JWT session token in the App component state. And we load this token from the session in componentDidMount using the getCurrentUser and getUserToken methods.
+context: frontend
 code: frontend
 comments_id: 40
 ---
