@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Set up Secure Pages
-description: Tutorial on how to set up secure pages in your React.js app using React-Router v4 route components.
 date: 2017-02-01 00:00:00
 comments_id: 57
 ---

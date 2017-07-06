@@ -2,7 +2,7 @@
 layout: post
 title: Set up SSL
 date: 2017-02-11 00:00:00
-description: Tutorial on how to add HTTPS support for your React.js single page application hosted on S3 using AWS Certificate Manager.
+description: We want to enable SSL or HTTPS for our React.js app on AWS. To do so we are going to request a certificate using the Certificate Manager service from AWS. We are then going to use the new certificate in our CloudFront Distributions.
 comments_id: 67
 ---
 

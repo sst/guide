@@ -2,7 +2,7 @@
 layout: post
 title: Display a Note
 date: 2017-01-28 00:00:00
-description: Tutorial on how to call an API with the React Router path parameter in your React.js app.
+description: We want to create a page in our React.js app that will display a user’s note based on the id in the URL. We are going to use the React Router v4 Route component’s URL parameters to get the id. And using this id we are going to request our note from the serverless backend API.
 code: frontend
 comments_id: 53
 ---

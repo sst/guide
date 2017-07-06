@@ -2,7 +2,7 @@
 layout: post
 title: Render the Note Form
 date: 2017-01-29 00:00:00
-description: Tutorial on how to render a React Bootstrap form in your React.js app.
+description: We are going to render a user’s note in a form in our React.js app. To render the form fields, we’ll use React-Bootstrap’s FormGroup and FormControl components.
 code: frontend
 comments_id: 54
 ---

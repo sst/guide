@@ -2,7 +2,7 @@
 layout: post
 title: Upload a File to S3
 date: 2017-01-24 00:00:00
-description: Tutorial on how to upload a file directly to S3 from a React.js app using the AWS JS SDK and Cognito Identity Pool Credentials.
+description: We want users to be able to upload a file in our React.js app and add it as an attachment to their note. To upload files to S3 directly from our React.js app we first need to get temporary credentials using the AWS SDK. We’ll use the Identity Pool we previously created and use our User Pool as the authenticator.
 code: frontend
 comments_id: 49
 ---

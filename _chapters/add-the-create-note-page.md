@@ -2,7 +2,7 @@
 layout: post
 title: Add the Create Note Page
 date: 2017-01-22 00:00:00
-description: Tutorial on how to create a file upload form using an input field with type file to your React.js app.
+description: We would like users to be able to create a note in our React.js app and upload a file as an attachment. To do so we are first going to create a form using the FormGroup and FormControl React-Bootstrap components.
 code: frontend
 comments_id: 47
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: Redirect on Login
 date: 2017-02-04 00:00:00
-description: Tutorial on how to redirect to the original page after a user logs in to your React.js app using React Router v4.
+description: To make sure that our React.js redirects a user to the right page after they login, we are going to use the React Router v4 Redirect component.
 code: frontend
 comments_id: 60
 ---

@@ -3,7 +3,7 @@ layout: post
 title: Create an S3 Bucket
 date: 2017-02-06 00:00:00
 redirect_from:  /chapters/create-a-s3-bucket.html
-description: Tutorial on how to create an AWS S3 static website bucket to host a React.js single page application. And change the AWS S3 Bucket permission to make it publicly accessible.
+description: We are going to use S3 to host our React.js app on AWS. We first need to configure our S3 bucket with the correct Bucket Policy and enable Static Web Hosting through the AWS console before we can upload our app.
 comments_id: 62
 ---
 

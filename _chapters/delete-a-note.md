@@ -2,7 +2,7 @@
 layout: post
 title: Delete a Note
 date: 2017-01-31 00:00:00
-description: Tutorial on how to make a DELETE request to a AWS API Gateway endpoint in your React.js app.
+description: We want users to be able to delete their note in our React.js app. To do this we are going to make a DELETE request to our serverless API backend.
 code: frontend
 comments_id: 56
 ---
