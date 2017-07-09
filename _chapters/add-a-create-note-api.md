@@ -30,14 +30,15 @@ export function main(event, context, callback) {
   const params = {
     TableName: 'notes',
     // 'Item' contains the attributes of the item to be created
-    // - 'userId': because users are authenticated via Cognito User Pool, we
-    //             will use the User Pool sub (a UUID) of the authenticated user
+    // - 'userId': user identities are federated through the
+    //             Cognito Identity Pool, we will use the identity id
+    //             as the user id of the authenticated user
     // - 'noteId': a unique uuid
     // - 'content': parsed from request body
     // - 'attachment': parsed from request body
     // - 'createdAt': current Unix timestamp
     Item: {
-      userId: event.requestContext.authorizer.claims.sub,
+      userId: event.requestContext.identity.cognitoIdentityId,
       noteId: uuid.v1(),
       content: data.content,
       attachment: data.attachment,
@@ -77,6 +78,7 @@ export function main(event, context, callback) {
 There are some helpful comments in the code but we are doing a few simple things here.
 
 - Parse the input from the `event.body`. This represents the HTTP request parameters.
+- The `userId` is the one we get from the Cognito Identity Pool that we are using. Our API is called after the authentication is taken care of and the authentication info is a part of the event that triggers our API.
 - Make a call to DynamoDB to put a new object with a generated `noteId` and the current date as the `createdAt`.
 - Upon success, return the newly create note object with the HTTP status code `200` and response headers to enable **CORS (Cross-Origin Resource Sharing)**.
 - And if the DynamoDB call fails then return an error with the HTTP status code `500`.
@@ -85,7 +87,7 @@ There are some helpful comments in the code but we are doing a few simple things
 
 Now let's define the API endpoint for our function.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `serverless.yml` file and replace it with the following. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `serverless.yml` file and replace it with the following.
 
 ``` yaml
 service: notes-app-api
@@ -122,8 +124,7 @@ functions:
   # - method: POST request
   # - cors: enabled CORS (Cross-Origin Resource Sharing) for browser cross
   #     domain api call
-  # - authorizer: authenticate the api via Cognito User Pool. Update the 'arn'
-  #     with your own User Pool ARN
+  # - authorizer: authenticate using the AWS IAM role
   create:
     handler: create.main
     events:
@@ -131,11 +132,10 @@ functions:
           path: notes
           method: post
           cors: true
-          authorizer:
-            arn: YOUR_USER_POOL_ARN
+          authorizer: aws_iam
 ```
 
-Here we are adding our newly added create function to the configuration. We specify that it handles `post` requests at the `/notes` endpoint. We set CORS support to true. This is because our frontend is going to be served from a different domain. We also specify that we want this API to authenticate via the Cognito User Pool that we had previously set up.
+Here we are adding our newly added create function to the configuration. We specify that it handles `post` requests at the `/notes` endpoint. We set CORS support to true. This is because our frontend is going to be served from a different domain. For authentication we are going to use the Cognito Identity Pool and we let Serverless Framework know this by setting the `authorizer` to `aws_iam`.
 
 ### Test
 
@@ -154,16 +154,14 @@ $ cd mocks
 {
   "body": "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}",
   "requestContext": {
-    "authorizer": {
-      "claims": {
-        "sub": "USER-SUB-1234"
-      }
+    "identity": {
+      "cognitoIdentityId": "USER-SUB-1234"
     }
   }
 }
 ```
 
-You might have noticed that the `body` and `requestContext` fields are the ones we used in our create function. In this case the `sub` field is just a string we are going to use as our `userId`. We can use any string here; just make sure to use the same one when we test our other functions.
+You might have noticed that the `body` and `requestContext` fields are the ones we used in our create function. In this case the `cognitoIdentityId` field is just a string we are going to use as our `userId`. We can use any string here; just make sure to use the same one when we test our other functions.
 
 And to invoke our function we run the following in the root directory.
 
@@ -250,7 +248,7 @@ export async function main(event, context, callback) {
   const params = {
     TableName: 'notes',
     Item: {
-      userId: event.requestContext.authorizer.claims.sub,
+      userId: event.requestContext.identity.cognitoIdentityId,
       noteId: uuid.v1(),
       content: data.content,
       attachment: data.attachment,

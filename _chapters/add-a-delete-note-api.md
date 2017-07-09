@@ -22,10 +22,10 @@ export async function main(event, context, callback) {
   const params = {
     TableName: 'notes',
     // 'Key' defines the partition key and sort key of the item to be removed
-    // - 'userId': User Pool sub of the authenticated user
+    // - 'userId': Identity Pool identity id of the authenticated user
     // - 'noteId': path parameter
     Key: {
-      userId: event.requestContext.authorizer.claims.sub,
+      userId: event.requestContext.identity.cognitoIdentityId,
       noteId: event.pathParameters.id,
     },
   };
@@ -44,7 +44,7 @@ This makes a DynamoDB `delete` call with the `userId` & `noteId` key to delete t
 
 ### Configure the API Endpoint
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `serverless.yml` file and append the following to it. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `serverless.yml` file and append the following to it.
 
 ``` yaml
   delete:
@@ -57,8 +57,7 @@ This makes a DynamoDB `delete` call with the `userId` & `noteId` key to delete t
           path: notes/{id}
           method: delete
           cors: true
-          authorizer:
-            arn: YOUR_USER_POOL_ARN
+          authorizer: aws_iam
 ```
 
 This adds a DELETE request handler to the `/notes/{id}` endpoint.
@@ -75,10 +74,8 @@ Just like before we'll use the `noteId` of our note in place of the `id` in the 
     "id": "578eb840-f70f-11e6-9d1a-1359b3b22944"
   },
   "requestContext": {
-    "authorizer": {
-      "claims": {
-        "sub": "USER-SUB-1234"
-      }
+    "identity": {
+      "cognitoIdentityId": "USER-SUB-1234"
     }
   }
 }
