@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Add a Create Note API
-date: 2016-12-31 00:00:00
+date: 2016-12-30 00:00:00
 description: To allow users to create notes in our note taking app, we are going to add a create note POST API. To do this we are going to add a new Lambda function to our Serverless Framework project. The Lambda function will save the note to our DynamoDB table and return the newly created note. We also need to ensure to set the Access-Control headers to enable CORS for our serverless backend API.
 context: backend
 code: backend
@@ -78,7 +78,7 @@ export function main(event, context, callback) {
 There are some helpful comments in the code but we are doing a few simple things here.
 
 - Parse the input from the `event.body`. This represents the HTTP request parameters.
-- The `userId` is the one we get from the Cognito Identity Pool that we are using. Our API is called after the authentication is taken care of and the authentication info is a part of the event that triggers our API.
+- The `userId` is a Federated Identity ID that comes in as a part of the request. This is set after our user has been authenticated via the User Pool. We are going to expand more on where this id in the coming chapters when we set up our Cognito Identity Pool.
 - Make a call to DynamoDB to put a new object with a generated `noteId` and the current date as the `createdAt`.
 - Upon success, return the newly create note object with the HTTP status code `200` and response headers to enable **CORS (Cross-Origin Resource Sharing)**.
 - And if the DynamoDB call fails then return an error with the HTTP status code `500`.
@@ -135,7 +135,7 @@ functions:
           authorizer: aws_iam
 ```
 
-Here we are adding our newly added create function to the configuration. We specify that it handles `post` requests at the `/notes` endpoint. We set CORS support to true. This is because our frontend is going to be served from a different domain. For authentication we are going to use the Cognito Identity Pool and we let Serverless Framework know this by setting the `authorizer` to `aws_iam`.
+Here we are adding our newly added create function to the configuration. We specify that it handles `post` requests at the `/notes` endpoint. We set CORS support to true. This is because our frontend is going to be served from a different domain. As the authorizer we are going to restrict access to our API based on the user's IAM credentials. We will touch on this and how our User Pool works with this, in the Cognito Identity Pool chapter.
 
 ### Test
 

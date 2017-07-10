@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Add Support for ES6/ES7 JavaScript
-date: 2016-12-30 12:00:00
+date: 2016-12-29 12:00:00
 redirect_from: /chapters/add-support-for-es6-javascript.html
 description: AWS Lambda supports Node.js 6.10 and so to use async/await and other ES6/ES7 features in our Serverless Framework project we need to use Babel and Webpack to transpile our code. We can do this by adding the serverless-webpack plugin to our project and setting it up to automatically transpile our handler functions.
 context: backend

@@ -57,7 +57,7 @@ apiGateway: {
 },
 ```
 
-Make sure to replace `https://YOUR_API_GATEWAY_URL` with your URL from the [Deploy the APIs]({% link _chapters/deploy-the-apis.md %}) chapter. In our case the URL is `https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod`.
+Make sure to replace `https://YOUR_API_GATEWAY_URL` with your URL from the [Deploy the APIs]({% link _chapters/deploy-the-apis.md %}) chapter. In our case the URL is `ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod`.
 
 ### Make the Call
 

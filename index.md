@@ -32,8 +32,6 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
 - [Create an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %})
 - [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %})
   - [Create a Cognito test user]({% link _chapters/create-a-cognito-test-user.md %})
-- [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %})
-  - [Cognito user pool vs identity pool]({% link _chapters/cognito-user-pool-vs-identity-pool.md %})
 - [Set up the Serverless Framework]({% link _chapters/setup-the-serverless-framework.md %})
   - [Add support for ES6/ES7 JavaScript]({% link _chapters/add-support-for-es6-es7-javascript.md %})
 
@@ -48,6 +46,9 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
 ### Deploying the Backend
 
 - [Deploy the APIs]({% link _chapters/deploy-the-apis.md %})
+- [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %})
+  - [Cognito user pool vs identity pool]({% link _chapters/cognito-user-pool-vs-identity-pool.md %})
+- [Test the APIs]({% link _chapters/test-the-apis.md %})
 
 ### Setting up a React App
 
