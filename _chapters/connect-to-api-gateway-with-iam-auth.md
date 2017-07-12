@@ -9,9 +9,9 @@ comments_id: 48
 
 Now that we have our basic create note form working, let's connect it to our API. We'll do the upload to S3 a little bit later. Our APIs are secured using AWS IAM and Cognito User Pool is our authentication provider. As we had done while testing our APIs, we need to follow these steps.
 
-1. Authenticate against our User Pool and acquire a user token
-2. Use the user token to get temporary IAM credentials
-3. Sign our API request with [Signature Version 4](http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
+1. Authenticate against our User Pool and acquire a user token.
+2. With the user token get temporary IAM credentials from our Identity Pool.
+3. Use the IAM credentials to sign our API request with [Signature Version 4](http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 
 In our React app we do step 1 once the user logs in and we store the `userToken` in our App component state. So let's do step 2; use the `userToken` to generate temporary IAM credentials. 
 
@@ -445,6 +445,6 @@ apiGateway: {
 },
 ```
 
-In our case the URL is `ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod` and the region is `YOUR_API_GATEWAY_REGION`.
+In our case the URL is `https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod` and the region is `us-east-1`.
 
 We are now ready to use this to make a request to our create API.

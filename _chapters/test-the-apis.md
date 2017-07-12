@@ -11,9 +11,9 @@ Now that we have our backend completely set up and secured, let's test the API w
 
 To be able to hit our API endpoints securely, we need to follow these steps.
 
-1. Authenticate against our User Pool and acquire a user token
-2. Use the user token to get temporary IAM credentials
-3. Sign our API request with [Signature Version 4](http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
+1. Authenticate against our User Pool and acquire a user token.
+2. With the user token get temporary IAM credentials from our Identity Pool.
+3. Use the IAM credentials to sign our API request with [Signature Version 4](http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 
 These steps can be a bit tricky to do by hand. So we created a simple helper CLI called [AWS API Gateway Test CLI](https://github.com/AnomalyInnovations/aws-api-gateway-cli-test).
 
