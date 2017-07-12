@@ -2,66 +2,12 @@
 layout: post
 title: Call the Create API
 date: 2017-01-23 00:00:00
-description: To let users create a note in our React.js app, we need to connect our form to our serverless API backend. Since we are using Amazon Cognito User Pool to secure our APIs, we’ll have to send the Cognito JWT user token as the Authorization header along with our request.
 context: frontend
 code: frontend
 comments_id: 48
 ---
 
-Now that we have our basic create note form working, let's connect it to our API. We'll do the upload to S3 a little bit later.
-
-### Calling API Gateway
-
-Since we are going to be calling API Gateway a few times in our app, let's first create a little helper function for it.
-
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's create a helper function in `src/libs/awsLib.js` and add the following. Make sure to create the `src/libs/` directory first.
-
-``` coffee
-import config from '../config.js';
-
-export async function invokeApig(
-  { path,
-    method = 'GET',
-    body }, userToken) {
-
-  const url = `${config.apiGateway.URL}${path}`;
-  const headers = {
-    Authorization: userToken,
-  };
-
-  body = (body) ? JSON.stringify(body) : body;
-
-  const results = await fetch(url, {
-    method,
-    body,
-    headers
-  });
-
-  if (results.status !== 200) {
-    throw new Error(await results.text());
-  }
-
-  return results.json();
-}
-```
-
-We just made it so that we can call `invokeApig` from now on and only pass in the parameters that are necessary. Also, it adds our user token to the header of the request.
-
-Now to call our API we need the API Gateway URL that was generated back in the [Deploy the APIs]({% link _chapters/deploy-the-apis.md %}) chapter.
-
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's add that to our `src/config.js` above the `cognito: {` line.
-
-```
-apiGateway: {
-  URL: 'https://YOUR_API_GATEWAY_URL',
-},
-```
-
-Make sure to replace `https://YOUR_API_GATEWAY_URL` with your URL from the [Deploy the APIs]({% link _chapters/deploy-the-apis.md %}) chapter. In our case the URL is `ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod`.
-
-### Make the Call
-
-Now we are ready to make our create call in our form.
+Now that we know how to connect to API Gateway securely, let's make the API call to create our note.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's include our `awsLib` by adding the following to the header of `src/containers/NewNote.js`.
 

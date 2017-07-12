@@ -74,6 +74,7 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
   - [Create the signup form]({% link _chapters/create-the-signup-form.md %})
   - [Signup with AWS Cognito]({% link _chapters/signup-with-aws-cognito.md %})
 - [Add the create note page]({% link _chapters/add-the-create-note-page.md %})
+  - [Connect to API Gateway with IAM auth]({% link _chapters/connect-to-api-gateway-with-iam-auth.md %})
   - [Call the create API]({% link _chapters/call-the-create-api.md %})
   - [Upload a file to S3]({% link _chapters/upload-a-file-to-s3.md %})
   - [Clear AWS Credentials Cache]({% link _chapters/clear-aws-credentials-cache.md %})
