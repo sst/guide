@@ -92,9 +92,9 @@ We are introducing a couple of new concepts in this.
 
 2. We then connect the state to our two fields in the form by setting `this.state.username` and `this.state.password` as the `value` in our input fields. This means that when the state changes, React will re-render these components with the updated value.
 
-3. But to update the state when the user types something into these fields; we'll call a handle function called `handleChange`. This function grabs the `id` (set as `controlId` for the `<FormGroup>`) of the field being changed and updates it's state with the value the user is typing in. Also, to have access to the `this` keyword inside `handleChange` we store the reference to an anonymous function like so: `handleChange = (event) => { } `.
+3. But to update the state when the user types something into these fields, we'll call a handle function named `handleChange`. This function grabs the `id` (set as `controlId` for the `<FormGroup>`) of the field being changed and updates its state with the value the user is typing in. Also, to have access to the `this` keyword inside `handleChange` we store the reference to an anonymous function like so: `handleChange = (event) => { } `.
 
-4. We are setting the `autoFocus` flag for our username field. So that when our form loads, it sets focus to it.
+4. We are setting the `autoFocus` flag for our username field, so that when our form loads, it sets focus to this field.
 
 5. We also link up our submit button with our state by using a validate function called `validateForm`. This simply checks if our fields are non-empty, but can easily do something more complicated.
 
