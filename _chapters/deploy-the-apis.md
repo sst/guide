@@ -2,7 +2,7 @@
 layout: post
 title: Deploy the APIs
 date: 2017-01-04 00:00:00
-description: Use the serverless deploy command to deploy to AWS Lambda and API Gateway using the Serverless Framework. We can also test our serverless API backend that is using Cognito User Pool as an authorizer with the aws cognito-idp admin-initiate-auth command.
+description: Use the “serverless deploy” command to deploy to AWS Lambda and API Gateway using the Serverless Framework. Running this command will display the list of deployed API endpoints and the AWS region it was deployed to.
 context: backend
 code: backend_full
 comments_id: 28
@@ -39,7 +39,7 @@ functions:
   notes-app-api-prod-delete
 ```
 
-This has a list of the endpoints of the APIs that were created. Make a note of these endpoints as we are going to use them later while creating our frontend. Also make a note of the region and the id in these endpoints, we are going to use them in the coming chapters. In our case, `us-east-1` is our API Gateway Region and `ly55wbovq4` is our API Gateway ID.
+This has a list of the API endpoints that were created. Make a note of these endpoints as we are going to use them later while creating our frontend. Also make a note of the region and the id in these endpoints, we are going to use them in the coming chapters. In our case, `us-east-1` is our API Gateway Region and `ly55wbovq4` is our API Gateway ID.
 
 <!--
 ### Deploy a Single Function

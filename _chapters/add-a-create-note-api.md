@@ -78,7 +78,7 @@ export function main(event, context, callback) {
 There are some helpful comments in the code but we are doing a few simple things here.
 
 - Parse the input from the `event.body`. This represents the HTTP request parameters.
-- The `userId` is a Federated Identity ID that comes in as a part of the request. This is set after our user has been authenticated via the User Pool. We are going to expand more on where this id in the coming chapters when we set up our Cognito Identity Pool.
+- The `userId` is a Federated Identity id that comes in as a part of the request. This is set after our user has been authenticated via the User Pool. We are going to expand more on where this id in the coming chapters when we set up our Cognito Identity Pool.
 - Make a call to DynamoDB to put a new object with a generated `noteId` and the current date as the `createdAt`.
 - Upon success, return the newly create note object with the HTTP status code `200` and response headers to enable **CORS (Cross-Origin Resource Sharing)**.
 - And if the DynamoDB call fails then return an error with the HTTP status code `500`.

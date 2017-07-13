@@ -2,6 +2,7 @@
 layout: post
 title: Test the APIs
 date: 2017-01-05 18:00:00
+description: To test a serverless backend API secured using IAM and Cognito User Pool you need to follow a few steps. First, generate a user token by authenticating with the User Pool. Then use the user token to get a set of temporary IAM credentials using the Identity Pool. Finally, sign the API request using the IAM credentials using Signature Version 4 and make the request. To simplify this process we are going to use the “aws-api-gateway-cli-test” tool.
 context: backend
 code: backend_full
 comments_id: 28
@@ -15,7 +16,7 @@ To be able to hit our API endpoints securely, we need to follow these steps.
 2. With the user token get temporary IAM credentials from our Identity Pool.
 3. Use the IAM credentials to sign our API request with [Signature Version 4](http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 
-These steps can be a bit tricky to do by hand. So we created a simple helper CLI called [AWS API Gateway Test CLI](https://github.com/AnomalyInnovations/aws-api-gateway-cli-test).
+These steps can be a bit tricky to do by hand. So we created a simple tool called [AWS API Gateway Test CLI](https://github.com/AnomalyInnovations/aws-api-gateway-cli-test).
 
 You can install it by running the following.
 

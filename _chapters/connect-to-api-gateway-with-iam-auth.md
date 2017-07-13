@@ -2,6 +2,7 @@
 layout: post
 title: Connect to API Gateway with IAM Auth
 date: 2017-01-22 12:00:00
+description: For our React.js app to make requests to a serverless backend API secured using AWS IAM, we need to sign our requests using Signature Version 4. But to be able to do that we need to use our User Pool user token and get temporary IAM credentials from our Identity Pool. Using these temporary IAM credentials we can then generate the Signature Version 4 security headers and make a request using HTTP fetch.
 context: frontend
 code: frontend
 comments_id: 48
@@ -17,7 +18,7 @@ In our React app we do step 1 once the user logs in and we store the `userToken`
 
 ### Generate Temporary IAM Credentials
 
-Our authenticated users can get a set of temporary IAM credentials to access the AWS resources that we've previoulsly sepcified. We can do this using the AWS JS SDK.
+Our authenticated users can get a set of temporary IAM credentials to access the AWS resources that we've previously specified. We can do this using the AWS JS SDK.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Install it by running the following in your project root.
 
@@ -64,11 +65,11 @@ REGION: 'YOUR_COGNITO_REGION',
 IDENTITY_POOL_ID: 'YOUR_IDENTITY_POOL_ID',
 ```
 
-Next let's sign our request using [Signature Version 4](http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+Next let's sign our request using Signature Version 4.
 
 ### Sign API Gateway Requests with Signature Version 4
 
-All secure AWS API requests need to be signed using Signature Version 4. We could use API Gateway to generate an SDK and use that to make our requests. But that can be a bit annoying to use during development since we would need to regenerate it every time we made a change to our API. So we re-worked the generated SDK to make a little helper function that can sign the requests for us.
+All secure AWS API requests need to be signed using [Signature Version 4](http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html). We could use API Gateway to generate an SDK and use that to make our requests. But that can be a bit annoying to use during development since we would need to regenerate it every time we made a change to our API. So we re-worked the generated SDK to make a little helper function that can sign the requests for us.
 
 To create this signature we are going to need the Crypto NPM package.
 
@@ -447,4 +448,4 @@ apiGateway: {
 
 In our case the URL is `https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod` and the region is `us-east-1`.
 
-We are now ready to use this to make a request to our create API.
+We are now ready to use this to make a request to our create note API.

@@ -2,6 +2,7 @@
 layout: post
 title: Upload a File to S3
 date: 2017-01-24 00:00:00
+description: We want users to be able to upload a file in our React.js app and add it as an attachment to their note. To upload files to S3 directly from our React.js app we first need to get temporary IAM credentials using the AWS JS SDK. We can then use the AWS.S3 “upload” method to upload a file.
 context: frontend
 code: frontend
 comments_id: 49
@@ -13,7 +14,7 @@ Let's now add an attachment to our note. The flow we are using here is very simp
 2. The file is uploaded to S3 under the user's space and we get a URL back. 
 3. Create a note with the file URL as the attachment.
 
-We are going to use the AWS SDK to upload our files to S3. The S3 Bucket that we created previously, is secured using our Cognito Identity Pool. So to be able to upload, we first need to generate our Cognito Identity temporary credentials with our user token.
+We are going to use the AWS JS SDK to upload our files to S3. The S3 Bucket that we created previously, is secured using our Cognito Identity Pool. So to be able to upload, we first need to generate a set of temporary IAM credentials with our user token.
 
 We created the `getAwsCredentials` method in the [Connect to API Gateway with IAM auth]({% link _chapters/connect-to-api-gateway-with-iam-auth.md %}) chapter, so let's go ahead and use that.
 
