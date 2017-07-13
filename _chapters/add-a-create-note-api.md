@@ -76,6 +76,8 @@ export function main(event, context, callback) {
 
 There are some helpful comments in the code but we are doing a few simple things here.
 
+- We are setting the AWS JS SDK to use the region `us-east-1` while connecting to DynamoDB.
+- If you have multiple profiles for your AWS SDK credentials, you will need to explicitly pick one. Add the following above the `AWS.config.update` line. `const credentials = new AWS.SharedIniFileCredentials({profile: 'my-profile'}); AWS.config.credentials = credentials;`
 - Parse the input from the `event.body`. This represents the HTTP request parameters.
 - Make a call to DynamoDB to put a new object with a generated `noteId` and the current date as the `createdAt`.
 - Upon success, return the newly create note object with the HTTP status code `200` and response headers to enable **CORS (Cross-Origin Resource Sharing)**.
