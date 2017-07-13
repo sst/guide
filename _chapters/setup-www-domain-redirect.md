@@ -9,11 +9,13 @@ comments_id: 66
 
 There's plenty of debate over the www vs non-www domains and while both sides have merit; we'll go over how to set up another domain (in this case the www) and redirect it to our original. The reason we do a redirect is to tell the search engines that we only want one version of our domain to appear in the search results. If you prefer having the www domain as the default simply swap this step with the last one where we created a bare domain (non-www).
 
-To create a new domain and have it redirect we are going to use the redirection feature that S3 Buckets have. So let's start by creating a new S3 redirect Bucket for this.
+To create a www version of our domain and have it redirect we are going to create a new S3 Bucket and a new CloudFront Distribution. This new S3 Bucket will simply respond with a redirect to our main domain using the redirection feature that S3 Buckets have.
+
+So let's start by creating a new S3 redirect Bucket for this.
 
 ### Create S3 Redirect Bucket
 
-Create a new S3 Bucket through the [AWS Console](https://console.aws.amazon.com). The name doesn't really matter but it pick something that helps us distinguish between the two.
+Create a **new S3 Bucket** through the [AWS Console](https://console.aws.amazon.com). The name doesn't really matter but it pick something that helps us distinguish between the two. Again, remember that we need a separate S3 Bucket for this step and we cannot use the original one we had previously created.
 
 ![Create S3 Redirect Bucket screenshot]({{ site.url }}/assets/create-s3-redirect-bucket.png)
 
@@ -35,7 +37,7 @@ And hit **Save** to make the changes. Next we'll create a CloudFront Distributio
 
 ### Create a CloudFront Distribution
 
-Create a new CloudFront Distribution. And copy the S3 **Endpoint** from the step above as the **Origin Domain Name**. Make sure to **not** use the one from the dropdown. In my case, it is `http://www-notes-app-client.s3-website-us-east-1.amazonaws.com`.
+Create **a new CloudFront Distribution**. And copy the S3 **Endpoint** from the step above as the **Origin Domain Name**. Make sure to **not** use the one from the dropdown. In my case, it is `http://www-notes-app-client.s3-website-us-east-1.amazonaws.com`.
 
 ![Set origin domain name screenshot]({{ site.url }}/assets/set-origin-domain-name.png)
 
