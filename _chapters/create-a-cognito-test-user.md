@@ -35,6 +35,4 @@ $ aws cognito-idp admin-confirm-sign-up \
   --username admin@example.com
 ```
 
-Now our test user is ready.
-
-Next, let's set up Cognito Identity Pools to secure the S3 Bucket we created for file uploads.
+Now our test user is ready.  Next, let's set up the Serverless Framework to create our backend APIs.

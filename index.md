@@ -32,8 +32,6 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
 - [Create an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %})
 - [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %})
   - [Create a Cognito test user]({% link _chapters/create-a-cognito-test-user.md %})
-- [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %})
-  - [Cognito user pool vs identity pool]({% link _chapters/cognito-user-pool-vs-identity-pool.md %})
 - [Set up the Serverless Framework]({% link _chapters/setup-the-serverless-framework.md %})
   - [Add support for ES6/ES7 JavaScript]({% link _chapters/add-support-for-es6-es7-javascript.md %})
 
@@ -48,6 +46,9 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
 ### Deploying the Backend
 
 - [Deploy the APIs]({% link _chapters/deploy-the-apis.md %})
+- [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %})
+  - [Cognito user pool vs identity pool]({% link _chapters/cognito-user-pool-vs-identity-pool.md %})
+- [Test the APIs]({% link _chapters/test-the-apis.md %})
 
 ### Setting up a React App
 
@@ -73,6 +74,7 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
   - [Create the signup form]({% link _chapters/create-the-signup-form.md %})
   - [Signup with AWS Cognito]({% link _chapters/signup-with-aws-cognito.md %})
 - [Add the create note page]({% link _chapters/add-the-create-note-page.md %})
+  - [Connect to API Gateway with IAM auth]({% link _chapters/connect-to-api-gateway-with-iam-auth.md %})
   - [Call the create API]({% link _chapters/call-the-create-api.md %})
   - [Upload a file to S3]({% link _chapters/upload-a-file-to-s3.md %})
   - [Clear AWS Credentials Cache]({% link _chapters/clear-aws-credentials-cache.md %})

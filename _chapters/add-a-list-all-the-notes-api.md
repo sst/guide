@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Add a List All the Notes API
-date: 2017-01-02 00:00:00
-description: To allow users to retrieve their notes in our note taking app, we are going to add a list note GET API. To do this we will add a new Lambda function to our Serverless Framework project. The Lambda function will retrieve all the user’s notes from the DynamoDB table. We also need to ensure to set the Access-Control headers to enable CORS for our serverless backend API.
+date: 2017-01-01 00:00:00
+description: To allow users to retrieve their notes in our note taking app, we are going to add a list note GET API. To do this we will add a new Lambda function to our Serverless Framework project. The Lambda function will retrieve all the user’s notes from the DynamoDB table.
 context: backend
 code: backend
 comments_id: 25
@@ -24,10 +24,10 @@ export async function main(event, context, callback) {
     // 'KeyConditionExpression' defines the condition for the query
     // - 'userId = :userId': only return items with matching 'userId' partition key
     // 'ExpressionAttributeValues' defines the value in the condition
-    // - ':userId': defines 'userId' to be User Pool sub of the authenticated user
+    // - ':userId': defines 'userId' to be Identity Pool identity id of the authenticated user
     KeyConditionExpression: "userId = :userId",
     ExpressionAttributeValues: {
-      ":userId": event.requestContext.authorizer.claims.sub,
+      ":userId": event.requestContext.identity.cognitoIdentityId,
     }
   };
 
@@ -46,7 +46,7 @@ This is pretty much the same as our `get.js` except we only pass in the `userId`
 
 ### Configure the API Endpoint
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `serverless.yml` file and append the following. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `serverless.yml` file and append the following.
 
 ``` yaml
   list:
@@ -59,11 +59,10 @@ This is pretty much the same as our `get.js` except we only pass in the `userId`
           path: notes
           method: get
           cors: true
-          authorizer:
-            arn: YOUR_USER_POOL_ARN
+          authorizer: aws_iam
 ```
 
-This defines the `/notes` endpoint that takes a GET request with the same Cognito User Pool authorizer.
+This defines the `/notes` endpoint that takes a GET request.
 
 ### Test
 
@@ -72,10 +71,8 @@ This defines the `/notes` endpoint that takes a GET request with the same Cognit
 ``` json
 {
   "requestContext": {
-    "authorizer": {
-      "claims": {
-        "sub": "USER-SUB-1234"
-      }
+    "identity": {
+      "cognitoIdentityId": "USER-SUB-1234"
     }
   }
 }

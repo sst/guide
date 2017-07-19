@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Add an Update Note API
-date: 2017-01-03 00:00:00
-description: To allow users to update their notes in our note taking app, we are going to add an update note PUT API. To do this we will add a new Lambda function to our Serverless Framework project. The Lambda function will update a user’s note in the DynamoDB table. We also need to ensure to set the Access-Control headers to enable CORS for our serverless backend API.
+date: 2017-01-02 00:00:00
+description: To allow users to update their notes in our note taking app, we are going to add an update note PUT API. To do this we will add a new Lambda function to our Serverless Framework project. The Lambda function will update a user’s note in the DynamoDB table.
 context: backend
 code: backend
 comments_id: 26
@@ -23,10 +23,10 @@ export async function main(event, context, callback) {
   const params = {
     TableName: 'notes',
     // 'Key' defines the partition key and sort key of the item to be updated
-    // - 'userId': User Pool sub of the authenticated user
+    // - 'userId': Identity Pool identity id of the authenticated user
     // - 'noteId': path parameter
     Key: {
-      userId: event.requestContext.authorizer.claims.sub,
+      userId: event.requestContext.identity.cognitoIdentityId,
       noteId: event.pathParameters.id,
     },
     // 'UpdateExpression' defines the attributes to be updated
@@ -53,7 +53,7 @@ This should look similar to the `create.js` function. Here we make an `update` D
 
 ### Configure the API Endpoint
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `serverless.yml` file and append the following to it. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `serverless.yml` file and append the following to it.
 
 ``` yaml
   update:
@@ -66,8 +66,7 @@ This should look similar to the `create.js` function. Here we make an `update` D
           path: notes/{id}
           method: put
           cors: true
-          authorizer:
-            arn: YOUR_USER_POOL_ARN
+          authorizer: aws_iam
 ```
 
 Here we are adding a handler for the PUT request to the `/notes/{id}` endpoint.
@@ -85,10 +84,8 @@ Also, don't forget to use the `noteId` of the note we have been using in place o
     "id": "578eb840-f70f-11e6-9d1a-1359b3b22944"
   },
   "requestContext": {
-    "authorizer": {
-      "claims": {
-        "sub": "USER-SUB-1234"
-      }
+    "identity": {
+      "cognitoIdentityId": "USER-SUB-1234"
     }
   }
 }

@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Add a Get Note API
-date: 2017-01-01 00:00:00
-description: To allow users to retrieve a note in our note taking app, we are going to add a GET note API. To do this we will add a new Lambda function to our Serverless Framework project. The Lambda function will retrieve the note from our DynamoDB table. We also need to ensure to set the Access-Control headers to enable CORS for our serverless backend API.
+date: 2016-12-31 00:00:00
+description: To allow users to retrieve a note in our note taking app, we are going to add a GET note API. To do this we will add a new Lambda function to our Serverless Framework project. The Lambda function will retrieve the note from our DynamoDB table.
 context: backend
 code: backend
 comments_id: 24
@@ -22,10 +22,10 @@ export async function main(event, context, callback) {
   const params = {
     TableName: 'notes',
     // 'Key' defines the partition key and sort key of the item to be retrieved
-    // - 'userId': federated identity ID of the authenticated user
+    // - 'userId': Identity Pool identity id of the authenticated user
     // - 'noteId': path parameter
     Key: {
-      userId: event.requestContext.authorizer.claims.sub,
+      userId: event.requestContext.identity.cognitoIdentityId,
       noteId: event.pathParameters.id,
     },
   };
@@ -50,7 +50,7 @@ This follows exactly the same structure as our previous `create.js` function. Th
 
 ### Configure the API Endpoint
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `serverless.yml` file and append the following to it. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `serverless.yml` file and append the following to it.
 
 ``` yaml
   get:
@@ -63,11 +63,10 @@ This follows exactly the same structure as our previous `create.js` function. Th
           path: notes/{id}
           method: get
           cors: true
-          authorizer:
-            arn: YOUR_USER_POOL_ARN
+          authorizer: aws_iam
 ```
 
-This defines our get note API. It adds a GET request handler with the endpoint `/notes/{id}`. And just as before we use our Cognito User Pool as the authorizer.
+This defines our get note API. It adds a GET request handler with the endpoint `/notes/{id}`.
 
 ### Test
 
@@ -81,10 +80,8 @@ To test our get note API we need to mock passing in the `noteId` parameter. We a
     "id": "578eb840-f70f-11e6-9d1a-1359b3b22944"
   },
   "requestContext": {
-    "authorizer": {
-      "claims": {
-        "sub": "USER-SUB-1234"
-      }
+    "identity": {
+      "cognitoIdentityId": "USER-SUB-1234"
     }
   }
 }

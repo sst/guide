@@ -1,17 +1,19 @@
 ---
 layout: post
 title: Create a Cognito Identity Pool
-date: 2016-12-29 00:00:00
-description: Amazon Cognito Federated Identities helps us secure our AWS resources. We can use the Cognito User Pool as an identity provider for our serverless backend. To allow users to be able to upload files to our S3 bucket we need to create an Identity Pool. We will assign it an Identity Pool Policy with the name of our S3 bucket and prefix our files with the cognito-identity.amazonaws.com:sub.
+date: 2017-01-05 00:00:00
+description: Amazon Cognito Federated Identities helps us secure our AWS resources. We can use the Cognito User Pool as an identity provider for our serverless backend. To allow users to be able to upload files to our S3 bucket and connect to API Gateway we need to create an Identity Pool. We will assign it an IAM Policy with the name of our S3 bucket and prefix our files with the cognito-identity.amazonaws.com:sub. And we’ll add our API Gateway endpoint as a resource as well.
 context: all
 comments_id: 19
 ---
 
-Now that we have our Cognito User Pool set up to handle authentication, we can use that to secure other AWS resources. In our case we need to secure the S3 bucket we created in one of the previous chapters.
+Now that we have deployed our backend API; we almost have all the pieces we need for our backend. We have the User Pool that is going to store all of our users and help sign in and sign them up. We also have an S3 bucket that we will use to help our users upload files as attachments for their notes. The final piece is that is one that ties all these services together in a secure way. It is called Amazon Cognito Federated Identities.
 
 Amazon Cognito Federated Identities enables developers to create unique identities for your users and authenticate them with federated identity providers. With a federated identity, you can obtain temporary, limited-privilege AWS credentials to securely access other AWS services such as Amazon DynamoDB, Amazon S3, and Amazon API Gateway.
 
-In this chapter, we are going to create a federated Cognito identity pool using the User Pool acting as the federated identity provider. Once users log into our notes app, we'll grant them limited access to the S3 Bucket for uploading files.
+In this chapter, we are going to create a federated Cognito Identity Pool. We will be using our User Pool as the identity provider. We could also use Facebook, Google, or our own custom identity provider. Once a user is authenticated via our User Pool, the Identity Pool will attach an IAM Role to the user. We will define a policy for this IAM Role to grant access to the S3 bucket and our API. This is the Amazon way of securing your resources.
+
+Let's get started.
 
 ### Create Pool
 
@@ -43,7 +45,7 @@ It will warn you to read the documentation. Select **Ok** to edit.
 
 ![Select Confirm Edit Policy Screenshot]({{ site.url }}/assets/cognito-identity-pool/select-confirm-edit-policy.png)
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following policy into the editor. Replace `YOUR_S3_UPLOADS_BUCKET_NAME` with the **bucket name** from the [Create an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}) chapter.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following policy into the editor. Replace `YOUR_S3_UPLOADS_BUCKET_NAME` with the **bucket name** from the [Create an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}) chapter. And replace the `YOUR_API_GATEWAY_REGION` and `YOUR_API_GATEWAY_ID` with the ones that you get after you deployed your API in the last chapter.
 
 ``` json
 {
@@ -68,12 +70,28 @@ It will warn you to read the documentation. Select **Ok** to edit.
       "Resource": [
         "arn:aws:s3:::YOUR_S3_UPLOADS_BUCKET_NAME/${cognito-identity.amazonaws.com:sub}*"
       ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "execute-api:Invoke"
+      ],
+      "Resource": [
+        "arn:aws:execute-api:YOUR_API_GATEWAY_REGION:*:YOUR_API_GATEWAY_ID/*"
+      ]
     }
   ]
 }
 ```
 
 Note **cognito-identity.amazonaws.com:sub** is the authenticated user's federated identity ID. This policy grants the authenticated user access to files with filenames prefixed by the user's id in the S3 bucket as a security measure.
+
+So effectively we are telling AWS that an authenticated user has access to two resources.
+
+1. Files in our S3 bucket that are prefixed with their federated identity id
+2. And, the APIs we deployed using API Gateway
+
+One other thing to note is that the federated identity id is a UUID that is assigned by our Identity Pool. This is the id (`event.requestContext.identity.cognitoIdentityId`) that we were using as our user id back when we were creating our APIs.
 
 Select **Allow**.
 
@@ -89,4 +107,4 @@ Take a note of the **Identity pool ID** which will be required in the later chap
 
 ![Cognito Identity Pool Created Screenshot]({{ site.url }}/assets/cognito-identity-pool/identity-pool-id.png)
 
-Now before we set up the Serverless Framework let's take a deeper look at the Cognito User Pool and Cognito Identity Pool to get a better understanding of how we handle our users.
+Now before we test our serverless API let's take a quick look at the Cognito User Pool and Cognito Identity Pool and make sure we've got a good idea of the two concepts and the differences between them.

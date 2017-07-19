@@ -2,7 +2,7 @@
 layout: post
 title: Upload a File to S3
 date: 2017-01-24 00:00:00
-description: We want users to be able to upload a file in our React.js app and add it as an attachment to their note. To upload files to S3 directly from our React.js app we first need to get temporary credentials using the AWS SDK. We’ll use the Identity Pool we previously created and use our User Pool as the authenticator.
+description: We want users to be able to upload a file in our React.js app and add it as an attachment to their note. To upload files to S3 directly from our React.js app we first need to get temporary IAM credentials using the AWS JS SDK. We can then use the AWS.S3 “upload” method to upload a file.
 context: frontend
 code: frontend
 comments_id: 49
@@ -11,56 +11,12 @@ comments_id: 49
 Let's now add an attachment to our note. The flow we are using here is very simple.
 
 1. The user selects a file to upload.
-
 2. The file is uploaded to S3 under the user's space and we get a URL back. 
-
 3. Create a note with the file URL as the attachment.
 
-We are going to use the AWS SDK to upload our files to S3. The S3 Bucket that we created previously, is secured using our Cognito Identity Pool. So to be able to upload, we first need to generate our Cognito Identity temporary credentials with our user token.
+We are going to use the AWS JS SDK to upload our files to S3. The S3 Bucket that we created previously, is secured using our Cognito Identity Pool. So to be able to upload, we first need to generate a set of temporary IAM credentials with our user token.
 
-### Get Cognito Identity Pool Credentials
-
-We are going to use the NPM module `aws-sdk` to help us get the Identity Pool credentials.
-
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Install it by running the following in your project root.
-
-``` bash
-$ npm install aws-sdk --save
-```
-
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Next, let's append the following to our `src/libs/awsLib.js`.
-
-``` coffee
-export function getAwsCredentials(userToken) {
-  const authenticator = `cognito-idp.${config.cognito.REGION}.amazonaws.com/${config.cognito.USER_POOL_ID}`;
-
-  AWS.config.update({ region: config.cognito.REGION });
-
-  AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-    IdentityPoolId: config.cognito.IDENTITY_POOL_ID,
-    Logins: {
-      [authenticator]: userToken
-    }
-  });
-
-  return AWS.config.credentials.getPromise();
-}
-```
-
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />And include the **AWS SDK** in our header.
-
-``` javascript
-import AWS from 'aws-sdk';
-```
-
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />To get our AWS credentials we need to add the following to our `src/config.js` in the `cognito` block. Make sure to replace `YOUR_IDENTITY_POOL_ID` with your **Identity pool ID** from the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter.
-
-```
-REGION: 'us-east-1',
-IDENTITY_POOL_ID: 'YOUR_IDENTITY_POOL_ID',
-```
-
-Now we are ready to upload a file to S3.
+We created the `getAwsCredentials` method in the [Connect to API Gateway with IAM auth]({% link _chapters/connect-to-api-gateway-with-iam-auth.md %}) chapter, so let's go ahead and use that.
 
 ### Upload to S3
 
