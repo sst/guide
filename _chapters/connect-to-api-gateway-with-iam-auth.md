@@ -441,7 +441,7 @@ import sigV4Client from './sigV4Client';
 
 ```
 apiGateway: {
-  URL: 'https://YOUR_API_GATEWAY_URL',
+  URL: 'YOUR_API_GATEWAY_URL',
   REGION: 'YOUR_API_GATEWAY_REGION',
 },
 ```
