@@ -49,7 +49,7 @@ handleDelete = async (event) => {
 
   const confirmed = window.confirm('Are you sure you want to delete this note?');
 
-  if ( ! confirmed) {
+  if ( ! confirmed ) {
     return;
   }
 
@@ -98,8 +98,8 @@ render() {
               bsSize="large"
               isLoading={this.state.isDeleting}
               onClick={this.handleDelete}
-                text="Delete"
-                loadingText="Deleting…" />
+              text="Delete"
+              loadingText="Deleting…" />
           </form> )}
       </div>
     );
@@ -114,7 +114,7 @@ We are doing a few things here:
 
 3. We form the attachment URL using `formatFilename` (since S3 gives us some very long URLs).
 
-4. We also added a delete button to allow users to delete the note. And just like the submit button it too needs a flag that signals that the call is in progress. We call it `isLoading`.
+4. We also added a delete button to allow users to delete the note. And just like the submit button it too needs a flag that signals that the call is in progress. We call it `isDeleting`.
 
 5. We handle attachments with a file input exactly like we did in the `NewNote` component.
 
