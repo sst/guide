@@ -14,7 +14,7 @@ Let's get started on our backend by first adding an API to create a note. This A
 
 Let's add our first function.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new file called `create.js` with the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new file called `create.js` in our project root with the following.
 
 ``` javascript
 import uuid from 'uuid';
