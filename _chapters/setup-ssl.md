@@ -11,7 +11,7 @@ Now that our app is being served through our domain, let's add a layer of securi
 
 ### Request a Certificate
 
-Select **Certificate Manager** from the list of services in your [AWS Console](https://console.aws.amazon.com).
+Select **Certificate Manager** from the list of services in your [AWS Console](https://console.aws.amazon.com). Ensure that you are in the **US East (N. Virginia)** region. This is because a certificate needs to be from this region for it to [work with CloudFront](http://docs.aws.amazon.com/acm/latest/userguide/acm-regions.html). 
 
 ![Select Certificate Manager service screenshot]({{ site.url }}/assets/select-certificate-manager-service.png)
 
