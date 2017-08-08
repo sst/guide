@@ -5,11 +5,7 @@ date: 2017-01-05 18:00:00
 description: To test a serverless backend API secured using IAM and Cognito User Pool you need to follow a few steps. First, generate a user token by authenticating with the User Pool. Then use the user token to get a set of temporary IAM credentials using the Identity Pool. Finally, sign the API request using the IAM credentials using Signature Version 4 and make the request. To simplify this process we are going to use the “aws-api-gateway-cli-test” tool.
 context: backend
 code: backend_full
-<<<<<<< HEAD
-comments_id: 28
-=======
 comments_id: 112
->>>>>>> master
 ---
 
 Now that we have our backend completely set up and secured, let's test the API we just deployed.
@@ -33,11 +29,7 @@ We need to pass in quite a bit of our info to complete the above steps.
 - Use the username and password of the user created in the [Create a Cognito test user]({% link _chapters/create-a-cognito-test-user.md %}) chapter.
 - Replace **YOUR_COGNITO_USER_POOL_ID**, **YOUR_COGNITO_APP_CLIENT_ID**, and **YOUR_COGNITO_REGION** with the values from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter. In our case the region is `us-east-1`.
 - Replace **YOUR_IDENTITY_POOL_ID** with the one from the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter.
-<<<<<<< HEAD
-- Use the **YOUR_API_GATEWAY_URL** and **YOUR_API_GATEWAY_REGION** with the ones from the [Deploy the APIs]({% link _chapters/deploy-the-apis.md %}) chapter.
-=======
 - Use the **YOUR_API_GATEWAY_URL** and **YOUR_API_GATEWAY_REGION** with the ones from the [Deploy the APIs]({% link _chapters/deploy-the-apis.md %}) chapter. In our case the URL is `https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod` and the region is `us-east-1`.
->>>>>>> master
 
 And run the following.
 

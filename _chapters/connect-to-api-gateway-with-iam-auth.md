@@ -5,11 +5,7 @@ date: 2017-01-22 12:00:00
 description: For our React.js app to make requests to a serverless backend API secured using AWS IAM, we need to sign our requests using Signature Version 4. But to be able to do that we need to use our User Pool user token and get temporary IAM credentials from our Identity Pool. Using these temporary IAM credentials we can then generate the Signature Version 4 security headers and make a request using HTTP fetch.
 context: frontend
 code: frontend
-<<<<<<< HEAD
-comments_id: 48
-=======
 comments_id: 113
->>>>>>> master
 ---
 
 Now that we have our basic create note form working, let's connect it to our API. We'll do the upload to S3 a little bit later. Our APIs are secured using AWS IAM and Cognito User Pool is our authentication provider. As we had done while testing our APIs, we need to follow these steps.
@@ -445,11 +441,7 @@ import sigV4Client from './sigV4Client';
 
 ```
 apiGateway: {
-<<<<<<< HEAD
-  URL: 'https://YOUR_API_GATEWAY_URL',
-=======
   URL: 'YOUR_API_GATEWAY_URL',
->>>>>>> master
   REGION: 'YOUR_API_GATEWAY_REGION',
 },
 ```
