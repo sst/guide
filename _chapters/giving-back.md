@@ -10,7 +10,7 @@ If you've found this guide helpful please consider helping us out by doing the f
 
 - **Helping others in the comments**
 
-  If you've found yourself using the [GitHub comments]({{ site.github_repo }}/issues?q=is%3Aissue+is%3Aopen+label%3ADiscussion+sort%3Aupdated-desc) to get help, please consider helping anybody else with issues that you might have run into.
+  If you've found yourself using the [GitHub issues]({{ site.github_repo }}/issues?q=is%3Aissue+is%3Aopen+label%3ADiscussion+sort%3Aupdated-desc) to get help, please consider helping anybody else with issues that you might have run into.
 
 - **Fixing typos and errors**
 
