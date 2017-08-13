@@ -11,7 +11,7 @@ In this chapter, we are going to create a test user for our Cognito User Pool. W
 
 ### Create User
 
-First, we will use AWS CLI to sign up a user with username, password and email. To keep things simple we are going to have people use their email as their username (as opposed to creating a username) while creating their account.
+First, we will use AWS CLI to sign up a user with their email and password.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />In your terminal, run.
 
@@ -21,7 +21,6 @@ $ aws cognito-idp sign-up \
   --client-id YOUR_COGNITO_APP_CLIENT_ID \
   --username admin@example.com \
   --password Passw0rd! \
-  --user-attributes Name=email,Value=admin@example.com
 ```
 
 Now, the user is created in Cognito User Pool. However, before the user can authenticate with the User Pool, the account needs to be verified. Let's quickly verify the user using an administrator command.
@@ -35,4 +34,4 @@ $ aws cognito-idp admin-confirm-sign-up \
   --username admin@example.com
 ```
 
-Now our test user is ready.  Next, let's set up the Serverless Framework to create our backend APIs.
+Now our test user is ready. Next, let's set up the Serverless Framework to create our backend APIs.

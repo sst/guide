@@ -31,7 +31,23 @@ Enter **Pool name** and select **Review defaults**.
 
 ![Fill in Cognito User Pool info screenshot]({{ site.url }}/assets/cognito-user-pool/fill-in-user-pool-info.png)
 
-Select **Create pool** at the bottom of the page.
+Select **Choose username attributes...**.
+
+![Choose username attribute screenshot]({{ site.url }}/assets/cognito-user-pool/choose-username-attributes.png)
+
+And select **Email address or phone numbers** and **Allow email addresses**. This is telling Cognito User Pool that we want our users to be able to sign up and login with their email as their username.
+
+![Select email address as username screenshot]({{ site.url }}/assets/cognito-user-pool/select-email-address-as-username.png)
+
+Scroll down and select **Next step**.
+
+![Select attributes next step screenshot]({{ site.url }}/assets/cognito-user-pool/select-next-step-attributes.png)
+
+Hit **Review** in the side panel and make sure that the **Username attributes** is set to **email**.
+
+![Review User Pool settings screenshot]({{ site.url }}/assets/cognito-user-pool/review-user-pool-settings.png)
+
+Now hit **Create pool** at the bottom of the page.
 
 ![Select Create pool screenshot]({{ site.url }}/assets/cognito-user-pool/select-create-pool.png)
 
