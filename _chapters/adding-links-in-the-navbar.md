@@ -43,12 +43,8 @@ And let's include the necessary components in the header.
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace the `react-router-dom` and `react-bootstrap` import in `src/App.js` with this.
 
 ``` coffee
-import { Link } from 'react-router-dom';
-import {
-  Nav,
-  Navbar,
-  NavItem
-} from 'react-bootstrap';
+import { Link } from "react-router-dom";
+import { Nav, Navbar, NavItem } from "react-bootstrap";
 ```
 
 Now if you flip over to your browser, you should see the two links in our navbar.
@@ -60,21 +56,23 @@ Unfortunately, they don't do a whole lot when you click on them. We also need th
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a `src/components/` directory and add the following inside `src/components/RouteNavItem.js`.
 
 ``` coffee
-import React from 'react';
-import { Route } from 'react-router-dom';
-import { NavItem } from 'react-bootstrap';
+import React from "react";
+import { Route } from "react-router-dom";
+import { NavItem } from "react-bootstrap";
 
 export default props =>
-  <Route path={ props.href } exact children={({ match, history }) => (
-    <NavItem
-      onClick={ e => history.push(e.currentTarget.getAttribute('href')) }
-      { ...props }
-      active={ match ? true : false }
-    >
-      { props.children }
-    </NavItem>
-  )}/>
-;
+  <Route
+    path={props.href}
+    exact
+    children={({ match, history }) =>
+      <NavItem
+        onClick={e => history.push(e.currentTarget.getAttribute("href"))}
+        {...props}
+        active={match ? true : false}
+      >
+        {props.children}
+      </NavItem>}
+  />;
 ```
 
 This is doing a couple of things here:
@@ -90,16 +88,13 @@ Now let's use this component.
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Import this component in the header of our `src/App.js`.
 
 ``` coffee
-import RouteNavItem from './components/RouteNavItem';
+import RouteNavItem from "./components/RouteNavItem";
 ```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And remove the `NavItem` from the header of `src/App.js`, so that the `react-bootstrap` import looks like this.
 
 ``` coffee
-import {
-  Nav,
-  Navbar
-} from 'react-bootstrap';
+import { Nav, Navbar } from "react-bootstrap";
 ```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Now replace the `NavItem` components in `src/App.js`.

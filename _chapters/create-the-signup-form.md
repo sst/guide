@@ -15,15 +15,15 @@ Let's start by creating the signup form that'll get the user's email and passwor
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new container at `src/containers/Signup.js` with the following.
 
 ``` coffee
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   HelpBlock,
   FormGroup,
   FormControl,
-  ControlLabel,
-} from 'react-bootstrap';
-import LoaderButton from '../components/LoaderButton';
-import './Signup.css';
+  ControlLabel
+} from "react-bootstrap";
+import LoaderButton from "../components/LoaderButton";
+import "./Signup.css";
 
 export default class Signup extends Component {
   constructor(props) {
@@ -31,45 +31,47 @@ export default class Signup extends Component {
 
     this.state = {
       isLoading: false,
-      email: '',
-      password: '',
-      confirmPassword: '',
-      confirmationCode: '',
-      newUser: null,
+      email: "",
+      password: "",
+      confirmPassword: "",
+      confirmationCode: "",
+      newUser: null
     };
   }
 
   validateForm() {
-    return this.state.email.length > 0
-      && this.state.password.length > 0
-      && this.state.password === this.state.confirmPassword;
+    return (
+      this.state.email.length > 0 &&
+      this.state.password.length > 0 &&
+      this.state.password === this.state.confirmPassword
+    );
   }
 
   validateConfirmationForm() {
     return this.state.confirmationCode.length > 0;
   }
 
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({
       [event.target.id]: event.target.value
     });
-  }
+  };
 
-  handleSubmit = async (event) => {
+  handleSubmit = async event => {
     event.preventDefault();
 
     this.setState({ isLoading: true });
 
-    this.setState({ newUser: 'test' });
+    this.setState({ newUser: "test" });
 
     this.setState({ isLoading: false });
-  }
+  };
 
-  handleConfirmationSubmit = async (event) => {
+  handleConfirmationSubmit = async event => {
     event.preventDefault();
 
     this.setState({ isLoading: true });
-  }
+  };
 
   renderConfirmationForm() {
     return (
@@ -80,17 +82,19 @@ export default class Signup extends Component {
             autoFocus
             type="tel"
             value={this.state.confirmationCode}
-            onChange={this.handleChange} />
+            onChange={this.handleChange}
+          />
           <HelpBlock>Please check your email for the code.</HelpBlock>
         </FormGroup>
         <LoaderButton
           block
           bsSize="large"
-          disabled={ ! this.validateConfirmationForm() }
+          disabled={!this.validateConfirmationForm()}
           type="submit"
           isLoading={this.state.isLoading}
           text="Verify"
-          loadingText="Verifying…" />
+          loadingText="Verifying…"
+        />
       </form>
     );
   }
@@ -104,30 +108,34 @@ export default class Signup extends Component {
             autoFocus
             type="email"
             value={this.state.email}
-            onChange={this.handleChange} />
+            onChange={this.handleChange}
+          />
         </FormGroup>
         <FormGroup controlId="password" bsSize="large">
           <ControlLabel>Password</ControlLabel>
           <FormControl
             value={this.state.password}
             onChange={this.handleChange}
-            type="password" />
+            type="password"
+          />
         </FormGroup>
         <FormGroup controlId="confirmPassword" bsSize="large">
           <ControlLabel>Confirm Password</ControlLabel>
           <FormControl
             value={this.state.confirmPassword}
             onChange={this.handleChange}
-            type="password" />
+            type="password"
+          />
         </FormGroup>
         <LoaderButton
           block
           bsSize="large"
-          disabled={ ! this.validateForm() }
+          disabled={!this.validateForm()}
           type="submit"
           isLoading={this.state.isLoading}
           text="Signup"
-          loadingText="Signing up…" />
+          loadingText="Signing up…"
+        />
       </form>
     );
   }
@@ -135,9 +143,9 @@ export default class Signup extends Component {
   render() {
     return (
       <div className="Signup">
-        { this.state.newUser === null
+        {this.state.newUser === null
           ? this.renderForm()
-          : this.renderConfirmationForm() }
+          : this.renderConfirmationForm()}
       </div>
     );
   }
@@ -188,7 +196,7 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 And include our component in the header.
 
 ``` javascript
-import Signup from './containers/Signup';
+import Signup from "./containers/Signup";
 ```
 
 Now if we switch to our browser and navigate to the signup page we should see our newly created form. Try filling it in and ensure that it shows the confirmation code form as well.

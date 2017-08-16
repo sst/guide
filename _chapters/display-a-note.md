@@ -29,7 +29,7 @@ By using the route path `/notes/:id` we are telling the router to send all match
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And include our component in the header.
 
 ``` javascript
-import Notes from './containers/Notes';
+import Notes from "./containers/Notes";
 ```
 
 Of course this component doesn't exist yet and we are going to create it now.
@@ -39,8 +39,8 @@ Of course this component doesn't exist yet and we are going to create it now.
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new file `src/containers/Notes.js` and add the following.
 
 ``` coffee
-import React, { Component } from 'react';
-import { invokeApig } from '../libs/awsLib';
+import React, { Component } from "react";
+import { invokeApig } from "../libs/awsLib";
 
 export default class Notes extends Component {
   constructor(props) {
@@ -50,7 +50,7 @@ export default class Notes extends Component {
 
     this.state = {
       note: null,
-      content: '',
+      content: ""
     };
   }
 
@@ -59,10 +59,9 @@ export default class Notes extends Component {
       const results = await this.getNote();
       this.setState({
         note: results,
-        content: results.content,
+        content: results.content
       });
-    }
-    catch(e) {
+    } catch (e) {
       alert(e);
     }
   }
@@ -72,10 +71,7 @@ export default class Notes extends Component {
   }
 
   render() {
-    return (
-      <div className="Notes">
-      </div>
-    );
+    return <div className="Notes" />;
   }
 }
 ```

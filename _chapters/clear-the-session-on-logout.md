@@ -27,7 +27,7 @@ Here we are using the AWS Cognito JS SDK to log the user out by calling `current
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Next we'll include that in our `App` component. Replace the `import { authUser }` line in the header of `src/App.js` with:
 
 ``` javascript
-import { authUser, signOutUser } from './libs/awsLib';
+import { authUser, signOutUser } from "./libs/awsLib";
 ```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And replace the `handleLogout` method in our `src/App.js` with this:

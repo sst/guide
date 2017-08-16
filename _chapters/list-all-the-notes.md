@@ -15,21 +15,17 @@ Currently, our Home containers is very simple. Let's add the conditional renderi
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace our `src/containers/Home.js` with the following.
 
 ``` coffee
-import React, { Component } from 'react';
-import {
-  PageHeader,
-  ListGroup,
-} from 'react-bootstrap';
-import './Home.css';
+import React, { Component } from "react";
+import { PageHeader, ListGroup } from "react-bootstrap";
+import "./Home.css";
 
 export default class Home extends Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
       isLoading: true,
-      notes: [],
+      notes: []
     };
   }
 
@@ -51,8 +47,7 @@ export default class Home extends Component {
       <div className="notes">
         <PageHeader>Your Notes</PageHeader>
         <ListGroup>
-          { ! this.state.isLoading
-            && this.renderNotesList(this.state.notes) }
+          {!this.state.isLoading && this.renderNotesList(this.state.notes)}
         </ListGroup>
       </div>
     );
@@ -61,9 +56,7 @@ export default class Home extends Component {
   render() {
     return (
       <div className="Home">
-        { this.props.isAuthenticated
-          ? this.renderNotes()
-          : this.renderLander() }
+        {this.props.isAuthenticated ? this.renderNotes() : this.renderLander()}
       </div>
     );
   }

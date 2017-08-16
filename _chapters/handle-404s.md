@@ -17,14 +17,13 @@ Let's start by creating a component that will handle this for us.
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new component at `src/containers/NotFound.js` and add the following.
 
 ``` coffee
-import React from 'react';
-import './NotFound.css';
+import React from "react";
+import "./NotFound.css";
 
-export default () => (
+export default () =>
   <div className="NotFound">
     <h3>Sorry, page not found!</h3>
-  </div>
-);
+  </div>;
 ```
 
 All this component does is print out a simple message for us.
@@ -54,7 +53,7 @@ This needs to always be the last line in the `<Route>` block. You can think of i
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And include the `NotFound` component in the header by adding the following:
 
 ``` javascript
-import NotFound from './containers/NotFound';
+import NotFound from "./containers/NotFound";
 ```
 
 And that's it! Now if you were to switch over to your browser and try clicking on the Login or Signup buttons in the Nav you should see the 404 message that we have.

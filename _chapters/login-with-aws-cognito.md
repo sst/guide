@@ -17,8 +17,8 @@ Before we link up our login form with our Amazon Cognito setup let's grab our Co
 ``` javascript
 export default {
   cognito: {
-    USER_POOL_ID : 'YOUR_COGNITO_USER_POOL_ID',
-    APP_CLIENT_ID : 'YOUR_COGNITO_APP_CLIENT_ID',
+    USER_POOL_ID: "YOUR_COGNITO_USER_POOL_ID",
+    APP_CLIENT_ID: "YOUR_COGNITO_APP_CLIENT_ID"
   }
 };
 ```
@@ -26,7 +26,7 @@ export default {
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And to load it into our login form simply import it by adding the following to the header of our Login container in `src/containers/Login.js`.
 
 ``` javascript
-import config from '../config';
+import config from "../config";
 ```
 
 ### Login to Amazon Cognito
@@ -46,7 +46,7 @@ import {
   CognitoUserPool,
   AuthenticationDetails,
   CognitoUser
-} from 'amazon-cognito-identity-js';
+} from "amazon-cognito-identity-js";
 ```
 
 The login code itself is relatively simple.
@@ -66,7 +66,7 @@ login(email, password) {
   return new Promise((resolve, reject) =>
     user.authenticateUser(authenticationDetails, {
       onSuccess: result => resolve(),
-      onFailure: err => reject(err),
+      onFailure: err => reject(err)
     })
   );
 }
@@ -85,14 +85,13 @@ This function does a few things for us:
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />To connect the above `login` method to our form simply replace our placeholder `handleSubmit` method in `src/containers/Login.js` with the following.
 
 ``` javascript
-handleSubmit = async (event) => {
+handleSubmit = async event => {
   event.preventDefault();
 
   try {
     await this.login(this.state.email, this.state.password);
-    alert('Logged in');
-  }
-  catch(e) {
+    alert("Logged in");
+  } catch (e) {
     alert(e);
   }
 }

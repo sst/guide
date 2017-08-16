@@ -17,8 +17,8 @@ It's important that we give the user some feedback while we are logging them in.
 ``` javascript
 this.state = {
   isLoading: false,
-  email: '',
-  password: '',
+  email: "",
+  password: ""
 };
 ```
 
@@ -33,8 +33,7 @@ handleSubmit = async event => {
   try {
     await this.login(this.state.email, this.state.password);
     this.props.userHasAuthenticated(true);
-  }
-  catch(e) {
+  } catch (e) {
     alert(e);
     this.setState({ isLoading: false });
   }
@@ -48,9 +47,9 @@ Now to reflect the state change in our button we are going to render it differen
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following in `src/components/LoaderButton.js`.
 
 ``` coffee
-import React from 'react';
-import { Button, Glyphicon } from 'react-bootstrap';
-import './LoaderButton.css';
+import React from "react";
+import { Button, Glyphicon } from "react-bootstrap";
+import "./LoaderButton.css";
 
 export default ({
   isLoading,
@@ -100,8 +99,9 @@ Now we can use our new component in our `Login` container.
 <Button
   block
   bsSize="large"
-  disabled={ ! this.validateForm() }
-  type="submit">
+  disabled={!this.validateForm()}
+  type="submit"
+>
   Login
 </Button>
 ```
@@ -112,22 +112,19 @@ Now we can use our new component in our `Login` container.
 <LoaderButton
   block
   bsSize="large"
-  disabled={ ! this.validateForm() }
+  disabled={!this.validateForm()}
   type="submit"
   isLoading={this.state.isLoading}
   text="Login"
-  loadingText="Logging in…" />
+  loadingText="Logging in…"
+/>
 ```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Also, import the `LoaderButton` in the header. And remove the reference to the `Button` component.
 
 ``` javascript
-import {
-  FormGroup,
-  FormControl,
-  ControlLabel,
-} from 'react-bootstrap';
-import LoaderButton from '../components/LoaderButton';
+import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import LoaderButton from "../components/LoaderButton";
 ```
 
 And now when we switch over to the browser and try logging in, you should see the intermediate state before the login completes.

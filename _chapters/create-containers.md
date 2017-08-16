@@ -17,10 +17,10 @@ Let's start by creating the outer chrome of our application by first adding a na
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And go ahead and remove the code inside `src/App.js` and replace it with the following. Also, you can go ahead and remove `src/logo.svg`.
 
 ``` coffee
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Navbar } from 'react-bootstrap';
-import './App.css';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { Navbar } from "react-bootstrap";
+import "./App.css";
 
 class App extends Component {
   render() {
@@ -69,8 +69,8 @@ Now that we have the outer chrome of our application ready, let's add the contai
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a `src/containers` directory and add the following inside `src/containers/Home.js`.
 
 ``` coffee
-import React, { Component } from 'react';
-import './Home.css';
+import React, { Component } from "react";
+import "./Home.css";
 
 class Home extends Component {
   render() {
@@ -117,16 +117,14 @@ Now we'll set up the routes so that we can have this container respond to the `/
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create `src/Routes.js` and add the following into it.
 
 ``` coffee
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import Home from "./containers/Home";
 
-import Home from './containers/Home';
-
-export default () => (
+export default () =>
   <Switch>
     <Route path="/" exact component={Home} />
-  </Switch>
-);
+  </Switch>;
 ```
 
 This component uses this `Switch` component from React-Router that renders the first matching route that is defined within it. For now we only have a single route, it looks for `/` and renders the `Home` component when matched. We are also using the `exact` prop to ensure that it matches the `/` route exactly. This is because the path `/` will also match any route that starts with a `/`.
@@ -138,7 +136,7 @@ Now let's render the routes into our App component.
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following to the header of your `src/App.js`.
 
 ``` coffee
-import Routes from './Routes';
+import Routes from "./Routes";
 ```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And add the following line below our `Navbar` component inside the `render` of `src/App.js`.

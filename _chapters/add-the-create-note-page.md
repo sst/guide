@@ -17,15 +17,11 @@ First we are going to create the form for a note. It'll take some content and a 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new file `src/containers/NewNote.js` and add the following.
 
 ``` coffee
-import React, { Component } from 'react';
-import {
-  FormGroup,
-  FormControl,
-  ControlLabel,
-} from 'react-bootstrap';
-import LoaderButton from '../components/LoaderButton';
-import config from '../config';
-import './NewNote.css';
+import React, { Component } from "react";
+import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import LoaderButton from "../components/LoaderButton";
+import config from "../config";
+import "./NewNote.css";
 
 export default class NewNote extends Component {
   constructor(props) {
@@ -35,7 +31,7 @@ export default class NewNote extends Component {
 
     this.state = {
       isLoading: null,
-      content: '',
+      content: ""
     };
   }
 
@@ -43,26 +39,26 @@ export default class NewNote extends Component {
     return this.state.content.length > 0;
   }
 
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({
       [event.target.id]: event.target.value
     });
-  }
+  };
 
-  handleFileChange = (event) => {
+  handleFileChange = event => {
     this.file = event.target.files[0];
-  }
+  };
 
-  handleSubmit = async (event) => {
+  handleSubmit = async event => {
     event.preventDefault();
 
     if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
-      alert('Please pick a file smaller than 5MB');
+      alert("Please pick a file smaller than 5MB");
       return;
     }
 
     this.setState({ isLoading: true });
-  }
+  };
 
   render() {
     return (
@@ -72,23 +68,23 @@ export default class NewNote extends Component {
             <FormControl
               onChange={this.handleChange}
               value={this.state.content}
-              componentClass="textarea" />
+              componentClass="textarea"
+            />
           </FormGroup>
           <FormGroup controlId="file">
             <ControlLabel>Attachment</ControlLabel>
-            <FormControl
-              onChange={this.handleFileChange}
-              type="file" />
+            <FormControl onChange={this.handleFileChange} type="file" />
           </FormGroup>
           <LoaderButton
             block
             bsStyle="primary"
             bsSize="large"
-            disabled={ ! this.validateForm() }
+            disabled={!this.validateForm()}
             type="submit"
             isLoading={this.state.isLoading}
             text="Create"
-            loadingText="Creating…" />
+            loadingText="Creating…"
+          />
         </form>
       </div>
     );
@@ -130,7 +126,7 @@ MAX_ATTACHMENT_SIZE: 5000000,
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And include our component in the header.
 
 ``` javascript
-import NewNote from './containers/NewNote';
+import NewNote from "./containers/NewNote";
 ```
 
 Now if we switch to our browser and navigate `http://localhost:3000/notes/new` we should see our newly created form. Try adding some content, uploading a file, and hitting submit to see it in action.

@@ -17,39 +17,33 @@ So let's start by creating the basic form that'll take the user's email (as thei
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new file `src/containers/Login.js` and add the following.
 
 ``` coffee
-import React, { Component } from 'react';
-import {
-  Button,
-  FormGroup,
-  FormControl,
-  ControlLabel,
-} from 'react-bootstrap';
-import './Login.css';
+import React, { Component } from "react";
+import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import "./Login.css";
 
 class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: '',
-      password: '',
+      email: "",
+      password: ""
     };
   }
 
   validateForm() {
-    return this.state.email.length > 0
-      && this.state.password.length > 0;
+    return this.state.email.length > 0 && this.state.password.length > 0;
   }
 
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({
       [event.target.id]: event.target.value
     });
-  }
+  };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
-  }
+  };
 
   render() {
     return (
@@ -61,20 +55,23 @@ class Login extends Component {
               autoFocus
               type="email"
               value={this.state.email}
-              onChange={this.handleChange} />
+              onChange={this.handleChange}
+            />
           </FormGroup>
           <FormGroup controlId="password" bsSize="large">
             <ControlLabel>Password</ControlLabel>
             <FormControl
               value={this.state.password}
               onChange={this.handleChange}
-              type="password" />
+              type="password"
+            />
           </FormGroup>
           <Button
             block
             bsSize="large"
-            disabled={ ! this.validateForm() }
-            type="submit">
+            disabled={!this.validateForm()}
+            type="submit"
+          >
             Login
           </Button>
         </form>
@@ -128,7 +125,7 @@ These styles roughly target any non-mobile screen sizes.
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And include our component in the header.
 
 ``` javascript
-import Login from './containers/Login';
+import Login from "./containers/Login";
 ```
 
 Now if we switch to our browser and navigate to the login page we should see our newly created form.

@@ -18,9 +18,9 @@ validateForm() {
 }
 
 formatFilename(str) {
-  return (str.length < 50)
+  return str.length < 50
     ? str
-    : str.substr(0, 20) + '...' + str.substr(str.length - 20, str.length);
+    : str.substr(0, 20) + "..." + str.substr(str.length - 20, str.length);
 }
 
 handleChange = event => {
@@ -37,7 +37,7 @@ handleSubmit = async event => {
   event.preventDefault();
 
   if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
-    alert('Please pick a file smaller than 5MB');
+    alert("Please pick a file smaller than 5MB");
     return;
   }
 
@@ -47,9 +47,11 @@ handleSubmit = async event => {
 handleDelete = async event => {
   event.preventDefault();
 
-  const confirmed = window.confirm('Are you sure you want to delete this note?');
+  const confirmed = window.confirm(
+    "Are you sure you want to delete this note?"
+  );
 
-  if ( ! confirmed ) {
+  if (!confirmed) {
     return;
   }
 
@@ -59,50 +61,55 @@ handleDelete = async event => {
 render() {
   return (
     <div className="Notes">
-      { this.state.note &&
-        ( <form onSubmit={this.handleSubmit}>
-            <FormGroup controlId="content">
-              <FormControl
-                onChange={this.handleChange}
-                value={this.state.content}
-                componentClass="textarea" />
-            </FormGroup>
-            { this.state.note.attachment &&
-            ( <FormGroup>
+      {this.state.note &&
+        <form onSubmit={this.handleSubmit}>
+          <FormGroup controlId="content">
+            <FormControl
+              onChange={this.handleChange}
+              value={this.state.content}
+              componentClass="textarea"
+            />
+          </FormGroup>
+          {this.state.note.attachment &&
+            <FormGroup>
               <ControlLabel>Attachment</ControlLabel>
               <FormControl.Static>
-                <a target="_blank" rel="noopener noreferrer" href={ this.state.note.attachment }>
-                  { this.formatFilename(this.state.note.attachment) }
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={this.state.note.attachment}
+                >
+                  {this.formatFilename(this.state.note.attachment)}
                 </a>
               </FormControl.Static>
-            </FormGroup> )}
-            <FormGroup controlId="file">
-              { ! this.state.note.attachment &&
-              <ControlLabel>Attachment</ControlLabel> }
-              <FormControl
-                onChange={this.handleFileChange}
-                type="file" />
-            </FormGroup>
-            <LoaderButton
-              block
-              bsStyle="primary"
-              bsSize="large"
-              disabled={ ! this.validateForm() }
-              type="submit"
-              isLoading={this.state.isLoading}
-              text="Save"
-              loadingText="Saving…" />
-            <LoaderButton
-              block
-              bsStyle="danger"
-              bsSize="large"
-              isLoading={this.state.isDeleting}
-              onClick={this.handleDelete}
-              text="Delete"
-              loadingText="Deleting…" />
-          </form> )}
-      </div>
-    );
+            </FormGroup>}
+          <FormGroup controlId="file">
+            {!this.state.note.attachment &&
+              <ControlLabel>Attachment</ControlLabel>}
+            <FormControl onChange={this.handleFileChange} type="file" />
+          </FormGroup>
+          <LoaderButton
+            block
+            bsStyle="primary"
+            bsSize="large"
+            disabled={!this.validateForm()}
+            type="submit"
+            isLoading={this.state.isLoading}
+            text="Save"
+            loadingText="Saving…"
+          />
+          <LoaderButton
+            block
+            bsStyle="danger"
+            bsSize="large"
+            isLoading={this.state.isDeleting}
+            onClick={this.handleDelete}
+            text="Delete"
+            loadingText="Deleting…"
+          />
+        </form>}
+    </div>
+  );
 }
 ```
 
@@ -129,7 +136,7 @@ this.state = {
   isLoading: null,
   isDeleting: null,
   note: null,
-  content: '',
+  content: ""
 };
 ```
 
@@ -149,14 +156,10 @@ this.state = {
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Also, let's include the React-Bootstrap components that we are using here by adding the following to our header. And our styles, the `LoaderButton`, and the `config`.
 
 ``` javascript
-import {
-  FormGroup,
-  FormControl,
-  ControlLabel,
-} from 'react-bootstrap';
-import LoaderButton from '../components/LoaderButton';
-import config from '../config';
-import './Notes.css';
+import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import LoaderButton from "../components/LoaderButton";
+import config from "../config";
+import "./Notes.css";
 ```
 
 And that's it. If you switch over to your browser, you should see the note loaded.

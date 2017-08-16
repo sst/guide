@@ -13,7 +13,7 @@ Now let's go ahead and implement the `handleSubmit` and `handleConfirmationSubmi
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace our `handleSubmit` and `handleConfirmationSubmit` methods in `src/containers/Signup.js` with the following.
 
 ``` javascript
-handleSubmit = async (event) => {
+handleSubmit = async event => {
   event.preventDefault();
 
   this.setState({ isLoading: true });
@@ -23,15 +23,14 @@ handleSubmit = async (event) => {
     this.setState({
       newUser: newUser
     });
-  }
-  catch(e) {
+  } catch (e) {
     alert(e);
   }
 
   this.setState({ isLoading: false });
 }
 
-handleConfirmationSubmit = async (event) => {
+handleConfirmationSubmit = async event => {
   event.preventDefault();
 
   this.setState({ isLoading: true });
@@ -45,9 +44,8 @@ handleConfirmationSubmit = async (event) => {
     );
 
     this.props.updateUserToken(userToken);
-    this.props.history.push('/');
-  }
-  catch(e) {
+    this.props.history.push("/");
+  } catch (e) {
     alert(e);
     this.setState({ isLoading: false });
   }
@@ -59,7 +57,7 @@ signup(email, password) {
     ClientId: config.cognito.APP_CLIENT_ID
   });
 
-  return new Promise((resolve, reject) => (
+  return new Promise((resolve, reject) =>
     userPool.signUp(email, password, [], null, (err, result) => {
       if (err) {
         reject(err);
@@ -68,11 +66,11 @@ signup(email, password) {
 
       resolve(result.user);
     })
-  ));
+  );
 }
 
 confirm(user, confirmationCode) {
-  return new Promise((resolve, reject) => (
+  return new Promise((resolve, reject) =>
     user.confirmRegistration(confirmationCode, true, function(err, result) {
       if (err) {
         reject(err);
@@ -80,7 +78,7 @@ confirm(user, confirmationCode) {
       }
       resolve(result);
     })
-  ));
+  );
 }
 
 authenticate(user, email, password) {
@@ -90,12 +88,12 @@ authenticate(user, email, password) {
   };
   const authenticationDetails = new AuthenticationDetails(authenticationData);
 
-  return new Promise((resolve, reject) => (
+  return new Promise((resolve, reject) =>
     user.authenticateUser(authenticationDetails, {
-      onSuccess: (result) => resolve(result.getIdToken().getJwtToken()),
-      onFailure: (err) => reject(err),
+      onSuccess: result => resolve(result.getIdToken().getJwtToken()),
+      onFailure: err => reject(err)
     })
-  ));
+  );
 }
 ```
 
@@ -105,8 +103,8 @@ authenticate(user, email, password) {
 import {
   AuthenticationDetails,
   CognitoUserPool
-} from 'amazon-cognito-identity-js';
-import config from '../config';
+} from "amazon-cognito-identity-js";
+import config from "../config";
 ```
 
 The flow here is pretty simple:

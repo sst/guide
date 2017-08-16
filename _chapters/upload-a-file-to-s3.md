@@ -22,23 +22,26 @@ We are going to use the AWS JS SDK to upload our files to S3. The S3 Bucket that
 
 ``` coffee
 export async function s3Upload(file) {
-  if ( ! await authUser()) {
-    throw new Error('User is not logged in');
+  if (!await authUser()) {
+    throw new Error("User is not logged in");
   }
 
   const s3 = new AWS.S3({
     params: {
-      Bucket: config.s3.BUCKET,
+      Bucket: config.s3.BUCKET
     }
   });
-  const filename = `${AWS.config.credentials.identityId}-${Date.now()}-${file.name}`;
+  const filename = `${AWS.config.credentials
+    .identityId}-${Date.now()}-${file.name}`;
 
-  return s3.upload({
-    Key: filename,
-    Body: file,
-    ContentType: file.type,
-    ACL: 'public-read',
-  }).promise();
+  return s3
+    .upload({
+      Key: filename,
+      Body: file,
+      ContentType: file.type,
+      ACL: "public-read"
+    })
+    .promise();
 }
 ```
 
@@ -46,7 +49,7 @@ export async function s3Upload(file) {
 
 ```
 s3: {
-  BUCKET: 'YOUR_S3_UPLOADS_BUCKET_NAME'
+  BUCKET: "YOUR_S3_UPLOADS_BUCKET_NAME"
 },
 ```
 
@@ -67,39 +70,37 @@ Now that we have our upload methods ready, let's call them from the create note 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace the `handleSubmit` method in `src/containers/NewNote.js` with the following.
 
 ``` javascript
-handleSubmit = async (event) => {
+handleSubmit = async event => {
   event.preventDefault();
 
   if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
-    alert('Please pick a file smaller than 5MB');
+    alert("Please pick a file smaller than 5MB");
     return;
   }
 
   this.setState({ isLoading: true });
 
   try {
-    const uploadedFilename = (this.file)
+    const uploadedFilename = this.file
       ? (await s3Upload(this.file, this.props.userToken)).Location
       : null;
 
     await this.createNote({
       content: this.state.content,
-      attachment: uploadedFilename,
+      attachment: uploadedFilename
     });
-    this.props.history.push('/');
-  }
-  catch(e) {
+    this.props.history.push("/");
+  } catch (e) {
     alert(e);
     this.setState({ isLoading: false });
   }
-
 }
 ```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And make sure to include `s3Upload` in the header by doing this:
 
 ``` javascript
-import { invokeApig, s3Upload } from '../libs/awsLib';
+import { invokeApig, s3Upload } from "../libs/awsLib";
 ```
 
 The change we've made in the `handleSubmit` is that:

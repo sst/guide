@@ -13,17 +13,17 @@ Now that we know how to connect to API Gateway securely, let's make the API call
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's include our `awsLib` by adding the following to the header of `src/containers/NewNote.js`.
 
 ``` javascript
-import { invokeApig } from '../libs/awsLib';
+import { invokeApig } from "../libs/awsLib";
 ```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And replace our `handleSubmit` function with the following.
 
 ``` javascript
-handleSubmit = async (event) => {
+handleSubmit = async event => {
   event.preventDefault();
 
   if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
-    alert('Please pick a file smaller than 5MB');
+    alert("Please pick a file smaller than 5MB");
     return;
   }
 
@@ -31,21 +31,19 @@ handleSubmit = async (event) => {
 
   try {
     await this.createNote({
-      content: this.state.content,
+      content: this.state.content
     });
-    this.props.history.push('/');
-  }
-  catch(e) {
+    this.props.history.push("/");
+  } catch (e) {
     alert(e);
     this.setState({ isLoading: false });
   }
-
 }
 
 createNote(note) {
   return invokeApig({
-    path: '/notes',
-    method: 'POST',
+    path: "/notes",
+    method: "POST",
     body: note
   });
 }

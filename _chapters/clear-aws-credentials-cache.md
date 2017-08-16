@@ -24,7 +24,7 @@ export function signOutUser() {
 
   if (AWS.config.credentials) {
     AWS.config.credentials.clearCachedId();
-    AWS.config.credentials = new AWS.CognitoIdentityCredentials({ });
+    AWS.config.credentials = new AWS.CognitoIdentityCredentials({});
   }
 }
 ```

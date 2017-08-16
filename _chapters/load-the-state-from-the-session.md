@@ -17,8 +17,8 @@ We are going to do this step a couple of times, so let's create a helper functio
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following to `src/libs/awsLib.js`. Make sure to create the `src/libs/` directory first.
 
 ``` coffee
-import { CognitoUserPool } from 'amazon-cognito-identity-js';
-import config from './config';
+import { CognitoUserPool } from "amazon-cognito-identity-js";
+import config from "./config";
 
 export async function authUser() {
   const currentUser = getCurrentUser();
@@ -64,14 +64,14 @@ Now that we can ensure the session user is authenticated using the `authUser` me
 ``` javascript
 this.state = {
   isAuthenticated: false,
-  isAuthenticating: true,
+  isAuthenticating: true
 };
 ```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's include the `authUser` method that we created by adding it to the header of `src/App.js`. 
 
 ``` javascript
-import { authUser } from './libs/awsLib';
+import { authUser } from "./libs/awsLib";
 ```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Now to load the user token we'll add the following to our `src/App.js`.
@@ -105,11 +105,11 @@ We'll conditionally render our app based on the `isAuthenticating` flag.
 render() {
   const childProps = {
     isAuthenticated: this.state.isAuthenticated,
-    userHasAuthenticated: this.userHasAuthenticated,
+    userHasAuthenticated: this.userHasAuthenticated
   };
 
-  return ! this.state.isAuthenticating &&
-  (
+  return (
+    !this.state.isAuthenticating &&
     <div className="App container">
       <Navbar fluid collapseOnSelect>
         <Navbar.Header>
@@ -120,10 +120,16 @@ render() {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            { this.state.isAuthenticated
+            {this.state.isAuthenticated
               ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
-              : [ <RouteNavItem key={1} href="/signup">Signup</RouteNavItem>,
-                  <RouteNavItem key={2} href="/login">Login</RouteNavItem> ] }
+              : [
+                  <RouteNavItem key={1} href="/signup">
+                    Signup
+                  </RouteNavItem>,
+                  <RouteNavItem key={2} href="/login">
+                    Login
+                  </RouteNavItem>
+                ]}
           </Nav>
         </Navbar.Collapse>
       </Navbar>

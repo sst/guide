@@ -63,12 +63,11 @@ Currently, our `Routes` component does not do anything with the passed in `child
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />To do this, create a new component in `src/components/AppliedRoute.js` and add the following.
 
 ``` coffee
-import React from 'react';
-import { Route } from 'react-router-dom';
+import React from "react";
+import { Route } from "react-router-dom";
 
 export default ({ component: C, props: cProps, ...rest }) =>
-  <Route {...rest} render={ props => <C {...props} {...cProps} /> } />
-;
+  <Route {...rest} render={props => <C {...props} {...cProps} />} />;
 ```
 
 This simple component creates a `Route` where the child component that it renders contains the passed in props.
@@ -78,19 +77,18 @@ Now to use this component, we are going to include it in the routes where we nee
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace the `export default () => (` method in `src/Routes.js` with the following.
 
 ``` coffee
-export default ({ childProps }) => (
+export default ({ childProps }) =>
   <Switch>
     <AppliedRoute path="/" exact component={Home} props={childProps} />
     <AppliedRoute path="/login" exact component={Login} props={childProps} />
     <Route component={NotFound} />
-  </Switch>
-);
+  </Switch>;
 ```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And import the new component in the header of `src/Routes.js`.
 
 ``` coffee
-import AppliedRoute from './components/AppliedRoute';
+import AppliedRoute from "./components/AppliedRoute";
 ```
 
 Now in the `Login` container we'll call the `userHasAuthenticated` method.
@@ -113,10 +111,18 @@ We can now use this to display a Logout button once the user logs in. Find the f
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And replace it with this:
 
 ``` coffee
-{ this.state.isAuthenticated
-  ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
-  : [ <RouteNavItem key={1} href="/signup">Signup</RouteNavItem>,
-      <RouteNavItem key={2} href="/login">Login</RouteNavItem> ] }
+{
+  this.state.isAuthenticated
+    ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
+    : [
+        <RouteNavItem key={1} href="/signup">
+          Signup
+        </RouteNavItem>,
+        <RouteNavItem key={2} href="/login">
+          Login
+        </RouteNavItem>
+      ];
+}
 ```
 
 Also, import the `NavItem` in the header.
@@ -124,11 +130,7 @@ Also, import the `NavItem` in the header.
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace the `react-bootstrap` import in the header of `src/App.js` with the following.
 
 ``` coffee
-import {
-  Nav,
-  NavItem,
-  Navbar
-} from 'react-bootstrap';
+import { Nav, NavItem, Navbar } from "react-bootstrap";
 ```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And add this `handleLogout` method to `src/App.js` above the `render() {` line as well.

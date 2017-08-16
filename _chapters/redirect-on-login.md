@@ -21,8 +21,12 @@ function querystring(name, url = window.location.href) {
   const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)", "i");
   const results = regex.exec(url);
 
-  if ( ! results) { return null; }
-  if ( ! results[2]) { return ''; }
+  if (!results) {
+    return null;
+  }
+  if (!results[2]) {
+    return "";
+  }
 
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
@@ -36,15 +40,17 @@ Now let's update our `Redirect` component to use this when it redirects.
 
 ``` coffee
 export default ({ component: C, props: cProps, ...rest }) => {
-  const redirect = querystring('redirect');
+  const redirect = querystring("redirect");
   return (
-    <Route {...rest} render={props => (
-      ! cProps.isAuthenticated
-        ? <C {...props} {...cProps} />
-        : <Redirect to={(redirect === '' || redirect === null)
-            ? '/'
-            : redirect} />
-    )}/>
+    <Route
+      {...rest}
+      render={props =>
+        !cProps.isAuthenticated
+          ? <C {...props} {...cProps} />
+          : <Redirect
+              to={redirect === "" || redirect === null ? "/" : redirect}
+            />}
+    />
   );
 };
 ```
@@ -52,7 +58,7 @@ export default ({ component: C, props: cProps, ...rest }) => {
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And remove the following from the `handleSubmit` method in `src/containers/Login.js`.
 
 ``` coffee
-this.props.history.push('/');
+this.props.history.push("/");
 ```
 
 Now our login page should redirect after we login.
