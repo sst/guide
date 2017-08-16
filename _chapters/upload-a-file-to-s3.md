@@ -14,17 +14,17 @@ Let's now add an attachment to our note. The flow we are using here is very simp
 2. The file is uploaded to S3 under the user's space and we get a URL back. 
 3. Create a note with the file URL as the attachment.
 
-We are going to use the AWS JS SDK to upload our files to S3. The S3 Bucket that we created previously, is secured using our Cognito Identity Pool. So to be able to upload, we first need to generate a set of temporary IAM credentials with our user token.
-
-We created the `getAwsCredentials` method in the [Connect to API Gateway with IAM auth]({% link _chapters/connect-to-api-gateway-with-iam-auth.md %}) chapter, so let's go ahead and use that.
+We are going to use the AWS JS SDK to upload our files to S3. The S3 Bucket that we created previously, is secured using our Cognito Identity Pool. So before we can upload a file we should ensure that our user is authenticated and has a set of temporary IAM credentials. This is exactly the same process as when we were making secured requests to our API in the [Connect to API Gateway with IAM auth]({% link _chapters/connect-to-api-gateway-with-iam-auth.md %}) chapter.
 
 ### Upload to S3
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Append the following in `src/awsLib.js`.
 
 ``` coffee
-export async function s3Upload(file, userToken) {
-  await getAwsCredentials(userToken);
+export async function s3Upload(file) {
+  if ( ! await authUser()) {
+    throw new Error('User is not logged in');
+  }
 
   const s3 = new AWS.S3({
     params: {

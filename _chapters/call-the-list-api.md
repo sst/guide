@@ -16,11 +16,9 @@ Now that we have our basic homepage set up, let's make the API call to render ou
 
 ``` javascript
 async componentDidMount() {
-  if (this.props.userToken === null) {
+  if ( ! this.props.isAuthenticated) {
     return;
   }
-
-  this.setState({ isLoading: true });
 
   try {
     const results = await this.notes();
@@ -34,7 +32,7 @@ async componentDidMount() {
 }
 
 notes() {
-  return invokeApig({ path: '/notes' }, this.props.userToken);
+  return invokeApig({ path: '/notes' });
 }
 ```
 
@@ -72,7 +70,7 @@ renderNotesList(notes) {
   ));
 }
 
-handleNoteClick = (event) => {
+handleNoteClick = event => {
   event.preventDefault();
   this.props.history.push(event.currentTarget.getAttribute('href'));
 }

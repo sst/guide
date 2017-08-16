@@ -17,11 +17,11 @@ saveNote(note) {
   return invokeApig({
     path: `/notes/${this.props.match.params.id}`,
     method: 'PUT',
-    body: note,
-  }, this.props.userToken);
+    body: note
+  });
 }
 
-handleSubmit = async (event) => {
+handleSubmit = async event => {
   let uploadedFilename;
 
   event.preventDefault();

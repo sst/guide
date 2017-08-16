@@ -1,18 +1,19 @@
 ---
 layout: post
-title: Add the User Token to the State
+title: Add the Session to the State
 date: 2017-01-15 00:00:00
+redirect_from: /chapters/add-the-user-token-to-the-state.html
 description: Tutorial on how to store the AWS Cognito user ID token in your React.js app.
 context: frontend
 code: frontend
 comments_id: 39
 ---
 
-To complete the login process we would need to store the user token and update the app to reflect that the user has logged in.
+To complete the login process we would need to update the app state with the session to reflect that the user has logged in.
 
-### Store the User Token
+### Update the App State
 
-First we'll start by storing the user token in the state. We might be tempted to store this in the `Login` container, but since we are going to use this in a lot of other places, it makes sense to lift up the state. The most logical place to do this will be in our `App` component.
+First we'll start by updating the application state by setting that the user is logged in. We might be tempted to store this in the `Login` container, but since we are going to use this in a lot of other places, it makes sense to lift up the state. The most logical place to do this will be in our `App` component.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following to `src/App.js` right below the `class App extends Component {` line.
 
@@ -21,20 +22,18 @@ constructor(props) {
   super(props);
 
   this.state = {
-    userToken: null,
+    isAuthenticated: false
   };
 }
 
-updateUserToken = (userToken) => {
-  this.setState({
-    userToken: userToken
-  });
+userHasAuthenticated = authenticated => {
+  this.setState({ isAuthenticated: authenticated });
 }
 ```
 
-This initializes the `userToken` in the App's state. And calling `updateUserToken` updates it. But for the `Login` container to call this method we need to pass a reference of this method to it.
+This initializes the `isAuthenticated` flag in the App's state. And calling `userHasAuthenticated` updates it. But for the `Login` container to call this method we need to pass a reference of this method to it.
 
-### Pass the User Token to the Routes
+### Pass the Session State to the Routes
 
 We can do this by passing in a couple of props to the child component of the routes that the `App` component creates.
 
@@ -42,8 +41,8 @@ We can do this by passing in a couple of props to the child component of the rou
 
 ``` javascript
 const childProps = {
-  userToken: this.state.userToken,
-  updateUserToken: this.updateUserToken,
+  isAuthenticated: this.state.isAuthenticated,
+  userHasAuthenticated: this.userHasAuthenticated
 };
 ```
 
@@ -67,9 +66,9 @@ Currently, our `Routes` component does not do anything with the passed in `child
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-export default ({ component: C, props: cProps, ...rest }) => (
+export default ({ component: C, props: cProps, ...rest }) =>
   <Route {...rest} render={ props => <C {...props} {...cProps} /> } />
-);
+;
 ```
 
 This simple component creates a `Route` where the child component that it renders contains the passed in props.
@@ -94,12 +93,12 @@ export default ({ childProps }) => (
 import AppliedRoute from './components/AppliedRoute';
 ```
 
-Now in the `Login` container we'll call the `updateUserToken` method.
+Now in the `Login` container we'll call the `userHasAuthenticated` method.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace the `alert(userToken);` line with the following in `src/containers/Login.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace the `alert('Logged in');` line with the following in `src/containers/Login.js`.
 
 ``` javascript
-this.props.updateUserToken(userToken);
+this.props.updateUserToken(true);
 ```
 
 ### Create a Logout Button
@@ -107,17 +106,17 @@ this.props.updateUserToken(userToken);
 We can now use this to display a Logout button once the user logs in. Find the following in our `src/App.js`.
 
 ``` coffee
-<RouteNavItem onClick={this.handleNavLink} href="/signup">Signup</RouteNavItem>
-<RouteNavItem onClick={this.handleNavLink} href="/login">Login</RouteNavItem>
+<RouteNavItem href="/signup">Signup</RouteNavItem>
+<RouteNavItem href="/login">Login</RouteNavItem>
 ```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And replace it with this:
 
 ``` coffee
-{ this.state.userToken
+{ this.state.isAuthenticated
   ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
-  : [ <RouteNavItem key={1} onClick={this.handleNavLink} href="/signup">Signup</RouteNavItem>,
-      <RouteNavItem key={2} onClick={this.handleNavLink} href="/login">Login</RouteNavItem> ] }
+  : [ <RouteNavItem key={1} href="/signup">Signup</RouteNavItem>,
+      <RouteNavItem key={2} href="/login">Login</RouteNavItem> ] }
 ```
 
 Also, import the `NavItem` in the header.
@@ -135,8 +134,8 @@ import {
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And add this `handleLogout` method to `src/App.js` above the `render() {` line as well.
 
 ``` coffee
-handleLogout = (event) => {
-  this.updateUserToken(null);
+handleLogout = event => {
+  this.userHasAuthenticated(false);
 }
 ```
 

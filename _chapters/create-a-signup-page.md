@@ -5,9 +5,9 @@ date: 2017-01-19 00:00:00
 comments_id: 44
 ---
 
-The signup page is quite similar to the login page that we just created. But it has a couple of key differences. When we sign the user up, AWS Cognito sends them a confirmation code via email. And we need to authenticate the new user once it's been confirmed.
+The signup page is quite similar to the login page that we just created. But it has a couple of key differences. When we sign the user up, AWS Cognito sends them a confirmation code via email. We also need to authenticate the new user once they've confirmed their account.
 
-And so the signup flow will look something like this:
+So the signup flow will look something like this:
 
 1. The user types in their email, password, and confirms their password.
 
@@ -17,8 +17,8 @@ And so the signup flow will look something like this:
 
 4. We send the confirmation code to AWS Cognito.
 
-5. We authenticate the user and get a user token in return.
+5. We authenticate the newly created user.
 
-6. Finally, we update the app state with the user token.
+6. Finally, we update the app state with the session.
 
 So let's get started by creating the basic sign up form first.

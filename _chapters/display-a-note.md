@@ -16,7 +16,7 @@ The first thing we are going to need to do is load the note when our container l
 
 Let's add a route for the note page that we are going to create.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following line to `src/Routes.js` below our `/notes/new` route. We are using the `AppliedRoute` component that we created in the [Add the user token to the state]({% link _chapters/add-the-user-token-to-the-state.md %}) chapter.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following line to `src/Routes.js` below our `/notes/new` route. We are using the `AppliedRoute` component that we created in the [Add the user token to the state]({% link _chapters/add-the-session-to-the-state.md %}) chapter.
 
 ``` coffee
 <AppliedRoute path="/notes/:id" exact component={Notes} props={childProps} />
@@ -40,10 +40,9 @@ Of course this component doesn't exist yet and we are going to create it now.
 
 ``` coffee
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import { invokeApig } from '../libs/awsLib';
 
-class Notes extends Component {
+export default class Notes extends Component {
   constructor(props) {
     super(props);
 
@@ -69,7 +68,7 @@ class Notes extends Component {
   }
 
   getNote() {
-    return invokeApig({ path: `/notes/${this.props.match.params.id}` }, this.props.userToken);
+    return invokeApig({ path: `/notes/${this.props.match.params.id}` });
   }
 
   render() {
@@ -79,8 +78,6 @@ class Notes extends Component {
     );
   }
 }
-
-export default withRouter(Notes);
 ```
 
 All this does is load the note on `componentDidMount` and save it to the state. We get the `id` of our note from the URL using the props automatically passed to us by React-Router in `this.props.match.params.id`. The keyword `id` is a part of the pattern matching in our route (`/notes/:id`).

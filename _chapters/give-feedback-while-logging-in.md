@@ -17,7 +17,7 @@ It's important that we give the user some feedback while we are logging them in.
 ``` javascript
 this.state = {
   isLoading: false,
-  username: '',
+  email: '',
   password: '',
 };
 ```
@@ -25,15 +25,14 @@ this.state = {
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And we'll update it while we are logging in. So our `handleSubmit` method now looks like so:
 
 ``` javascript
-handleSubmit = async (event) => {
+handleSubmit = async event => {
   event.preventDefault();
 
   this.setState({ isLoading: true });
 
   try {
-    const userToken = await this.login(this.state.username, this.state.password);
-    this.props.updateUserToken(userToken);
-    this.props.history.push('/');
+    await this.login(this.state.email, this.state.password);
+    this.props.userHasAuthenticated(true);
   }
   catch(e) {
     alert(e);
@@ -51,21 +50,34 @@ Now to reflect the state change in our button we are going to render it differen
 ``` coffee
 import React from 'react';
 import { Button, Glyphicon } from 'react-bootstrap';
+import './LoaderButton.css';
 
-export default ({ isLoading, text, loadingText, disabled = false, ...props }) => (
-  <Button disabled={ disabled || isLoading } {...props}>
-    { isLoading && <Glyphicon glyph="refresh" className="spinning" /> }
-    { ! isLoading ? text : loadingText }
-  </Button>
-);
+export default ({
+  isLoading,
+  text,
+  loadingText,
+  className = "",
+  disabled = false,
+  ...props
+}) =>
+  <Button
+    className={`LoaderButton ${className}`}
+    disabled={disabled || isLoading}
+    {...props}
+  >
+    {isLoading && <Glyphicon glyph="refresh" className="spinning" />}
+    {!isLoading ? text : loadingText}
+  </Button>;
 ```
 
 This is a really simple component that takes a `isLoading` flag and the text that the button displays in the two states (the default state and the loading state). The `disabled` prop is a result of what we have currently in our `Login` button. And we ensure that the button is disabled when `isLoading` is `true`. This makes it so that the user can't click it while we are in the process of logging them in.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />And let's add a couple of styles to animate our loading icon. Add the following to `src/index.css`.
+And let's add a couple of styles to animate our loading icon.
+
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following to `src/components/LoaderButton.css`.
 
 ``` css
-.spinning.glyphicon {
+.LoaderButton .spinning.glyphicon {
   margin-right: 7px;
   top: 2px;
   animation: spin 1s infinite linear;
@@ -76,7 +88,7 @@ This is a really simple component that takes a `isLoading` flag and the text tha
 }
 ```
 
-This spins the refresh Glyphicon for the duration of a second.
+This spins the refresh Glyphicon infinitely with each sping taking a second. And by adding these styles as a part of the `LoaderButton` we keep them self contained within the component.
 
 ### Render Using the isLoading Flag
 

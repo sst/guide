@@ -18,17 +18,16 @@ First we are going to create the form for a note. It'll take some content and a 
 
 ``` coffee
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import {
   FormGroup,
   FormControl,
   ControlLabel,
 } from 'react-bootstrap';
 import LoaderButton from '../components/LoaderButton';
-import config from '../config.js';
+import config from '../config';
 import './NewNote.css';
 
-class NewNote extends Component {
+export default class NewNote extends Component {
   constructor(props) {
     super(props);
 
@@ -95,8 +94,6 @@ class NewNote extends Component {
     );
   }
 }
-
-export default withRouter(NewNote);
 ```
 
 Everything is fairly standard here, except for the file input. Our form elements so far have been [controlled components](https://facebook.github.io/react/docs/forms.html), as in their value is directly controlled by the state of the component. The file input simply calls a different `onChange` handler (`handleFileChange`) that saves the file object as a class property. We use a class property instead of saving it in the state because the file object we save does not change or drive the rendering of our component.
@@ -124,7 +121,7 @@ MAX_ATTACHMENT_SIZE: 5000000,
 
 ### Add the Route
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our signup route. We are using the `AppliedRoute` component that we created in the [Add the user token to the state]({% link _chapters/add-the-user-token-to-the-state.md %}) chapter.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our signup route. We are using the `AppliedRoute` component that we created in the [Add the user token to the state]({% link _chapters/add-the-session-to-the-state.md %}) chapter.
 
 ``` coffee
 <AppliedRoute path="/notes/new" exact component={NewNote} props={childProps} />

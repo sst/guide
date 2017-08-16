@@ -16,7 +16,6 @@ Let's start by creating the signup form that'll get the user's email and passwor
 
 ``` coffee
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import {
   HelpBlock,
   FormGroup,
@@ -26,13 +25,13 @@ import {
 import LoaderButton from '../components/LoaderButton';
 import './Signup.css';
 
-class Signup extends Component {
+export default class Signup extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       isLoading: false,
-      username: '',
+      email: '',
       password: '',
       confirmPassword: '',
       confirmationCode: '',
@@ -41,7 +40,7 @@ class Signup extends Component {
   }
 
   validateForm() {
-    return this.state.username.length > 0
+    return this.state.email.length > 0
       && this.state.password.length > 0
       && this.state.password === this.state.confirmPassword;
   }
@@ -99,12 +98,12 @@ class Signup extends Component {
   renderForm() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <FormGroup controlId="username" bsSize="large">
+        <FormGroup controlId="email" bsSize="large">
           <ControlLabel>Email</ControlLabel>
           <FormControl
             autoFocus
             type="email"
-            value={this.state.username}
+            value={this.state.email}
             onChange={this.handleChange} />
         </FormGroup>
         <FormGroup controlId="password" bsSize="large">
@@ -143,8 +142,6 @@ class Signup extends Component {
     );
   }
 }
-
-export default withRouter(Signup);
 ```
 
 Most of the things we are doing here are fairly straightforward but let's go over them quickly.
@@ -153,13 +150,11 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 2. We are using the `LoaderButton` component that we created earlier for our submit buttons.
 
-3. We are also using the `withRouter` HOC on our `Signup` component.
+3. Since we have two forms we have two validation methods called `validateForm` and `validateConfirmationForm`.
 
-4. Since we have two forms we have two validation methods called `validateForm` and `validateConfirmationForm`.
+4. We are setting the `autoFocus` flags on our email and the confirmation code fields.
 
-5. We are setting the `autoFocus` flags on our username and the confirmation code fields.
-
-6. For now our `handleSubmit` and `handleConfirmationSubmit` don't do a whole lot besides setting the `isLoading` state and a dummy value for the `newUser` state.
+5. For now our `handleSubmit` and `handleConfirmationSubmit` don't do a whole lot besides setting the `isLoading` state and a dummy value for the `newUser` state.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Also, let's add a couple of styles in `src/containers/Signup.css`.
 
@@ -184,7 +179,7 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 ### Add the Route
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our login route. We are using the `AppliedRoute` component that we created in the [Add the user token to the state]({% link _chapters/add-the-user-token-to-the-state.md %}) chapter.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our login route. We are using the `AppliedRoute` component that we created in the [Add the user token to the state]({% link _chapters/add-the-session-to-the-state.md %}) chapter.
 
 ``` coffee
 <AppliedRoute path="/signup" exact component={Signup} props={childProps} />

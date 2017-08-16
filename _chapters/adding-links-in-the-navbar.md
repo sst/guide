@@ -25,8 +25,8 @@ render() {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            <NavItem onClick={this.handleNavLink} href="/signup">Signup</NavItem>
-            <NavItem onClick={this.handleNavLink} href="/login">Login</NavItem>
+            <NavItem href="/signup">Signup</NavItem>
+            <NavItem href="/login">Login</NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -38,41 +38,12 @@ render() {
 
 This adds two links to our navbar using the `NavItem` Bootstrap component. The `Navbar.Collapse` component ensures that on mobile devices the two links will be collapsed.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />And to handle directing to those pages, let's add the following above the `render` method in our `src/App.js`.
-
-``` coffee
-handleNavLink = (event) => {
-  event.preventDefault();
-  this.props.history.push(event.currentTarget.getAttribute('href'));
-}
-```
-
-To handle this redirect, we are using `this.props.history.push`. This method is a part of the React-Router. To be able to use this in our component we will need to use the `withRouter` [Higher-Order Component](https://facebook.github.io/react/docs/higher-order-components.html) (or HOC). You can read more about the `withRouter` HOC [here](https://reacttraining.com/react-router/web/api/withRouter).
-
-To use this HOC, we'll change the way we export our App component.
-
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace the following line in `src/App.js`.
-
-``` coffee
-export default App;
-```
-
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />With this.
-
-
-``` coffee
-export default withRouter(App);
-```
-
 And let's include the necessary components in the header.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace the `react-router-dom` and `react-bootstrap` import in `src/App.js` with this.
 
 ``` coffee
-import {
-  withRouter,
-  Link
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   Nav,
   Navbar,
@@ -80,11 +51,11 @@ import {
 } from 'react-bootstrap';
 ```
 
-Now if you flip over to your browser, you should see the two links in our navbar. And they should direct you to the right pages when they are clicked.
+Now if you flip over to your browser, you should see the two links in our navbar.
 
 ![Navbar links added screenshot]({{ site.url }}/assets/navbar-links-added.png)
 
-Unfortunately, they are not highlighted to reflect the change in the URL. To fix this we are going to use another useful feature of the React-Router. We are going to use the `Route` component to detect when we are on a certain page and then render based on it. And since we are going to do this twice, let's make this into a component that can be re-used.
+Unfortunately, they don't do a whole lot when you click on them. We also need them to highlight when we navigate to them. To fix this we are going to use a useful feature of the React-Router. We are going to use the `Route` component to detect when we are on a certain page and then render based on it. Since we are going to do this twice, let's make this into a component that can be re-used.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a `src/components/` directory and add the following inside `src/components/RouteNavItem.js`.
 
@@ -93,11 +64,17 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { NavItem } from 'react-bootstrap';
 
-export default (props) => (
-  <Route path={props.href} exact children={({ match }) => (
-    <NavItem {...props} active={ match ? true : false }>{ props.children }</NavItem>
+export default props =>
+  <Route path={ props.href } exact children={({ match, history }) => (
+    <NavItem
+      onClick={ e => history.push(e.currentTarget.getAttribute('href')) }
+      { ...props }
+      active={ match ? true : false }
+    >
+      { props.children }
+    </NavItem>
   )}/>
-);
+;
 ```
 
 This is doing a couple of things here:
@@ -105,6 +82,8 @@ This is doing a couple of things here:
 1. We look at the `href` for the `NavItem` and check if there is a match.
 
 2. React-Router passes in a `match` object in case there is a match. We use that and set the `active` prop for the `NavItem`.
+
+3. React-Router also passes us a `history` object. We use this to navigate to the new page using `history.push`.
 
 Now let's use this component.
 
@@ -126,15 +105,15 @@ import {
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Now replace the `NavItem` components in `src/App.js`.
 
 ``` coffee
-<NavItem onClick={this.handleNavLink} href="/signup">Signup</NavItem>
-<NavItem onClick={this.handleNavLink} href="/login">Login</NavItem>
+<NavItem href="/signup">Signup</NavItem>
+<NavItem href="/login">Login</NavItem>
 ```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />With the following.
 
 ``` coffee
-<RouteNavItem onClick={this.handleNavLink} href="/signup">Signup</RouteNavItem>
-<RouteNavItem onClick={this.handleNavLink} href="/login">Login</RouteNavItem>
+<RouteNavItem href="/signup">Signup</RouteNavItem>
+<RouteNavItem href="/login">Login</RouteNavItem>
 ```
 
 And that's it! Now if you flip over to your browser and click on the login link, you should see the link highlighted in the navbar.

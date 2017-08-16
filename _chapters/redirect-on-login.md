@@ -39,7 +39,7 @@ export default ({ component: C, props: cProps, ...rest }) => {
   const redirect = querystring('redirect');
   return (
     <Route {...rest} render={props => (
-      cProps.userToken === null
+      ! cProps.isAuthenticated
         ? <C {...props} {...cProps} />
         : <Redirect to={(redirect === '' || redirect === null)
             ? '/'

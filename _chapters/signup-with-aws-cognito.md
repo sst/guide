@@ -19,7 +19,7 @@ handleSubmit = async (event) => {
   this.setState({ isLoading: true });
 
   try {
-    const newUser = await this.signup(this.state.username, this.state.password);
+    const newUser = await this.signup(this.state.email, this.state.password);
     this.setState({
       newUser: newUser
     });
@@ -40,7 +40,7 @@ handleConfirmationSubmit = async (event) => {
     await this.confirm(this.state.newUser, this.state.confirmationCode);
     const userToken = await this.authenticate(
       this.state.newUser,
-      this.state.username,
+      this.state.email,
       this.state.password
     );
 
@@ -53,15 +53,14 @@ handleConfirmationSubmit = async (event) => {
   }
 }
 
-signup(username, password) {
+signup(email, password) {
   const userPool = new CognitoUserPool({
     UserPoolId: config.cognito.USER_POOL_ID,
     ClientId: config.cognito.APP_CLIENT_ID
   });
-  const attributeEmail = new CognitoUserAttribute({ Name : 'email', Value : username });
 
   return new Promise((resolve, reject) => (
-    userPool.signUp(username, password, [attributeEmail], null, (err, result) => {
+    userPool.signUp(email, password, [], null, (err, result) => {
       if (err) {
         reject(err);
         return;
@@ -84,9 +83,9 @@ confirm(user, confirmationCode) {
   ));
 }
 
-authenticate(user, username, password) {
+authenticate(user, email, password) {
   const authenticationData = {
-    Username: username,
+    Username: email,
     Password: password
   };
   const authenticationDetails = new AuthenticationDetails(authenticationData);
@@ -105,10 +104,9 @@ authenticate(user, username, password) {
 ``` javascript
 import {
   AuthenticationDetails,
-  CognitoUserPool,
-  CognitoUserAttribute,
+  CognitoUserPool
 } from 'amazon-cognito-identity-js';
-import config from '../config.js';
+import config from '../config';
 ```
 
 The flow here is pretty simple:
@@ -121,9 +119,9 @@ The flow here is pretty simple:
 
 4. With the user now confirmed, Cognito now knows that we have a new user that can login to our app.
 
-5. Use the username and password to authenticate the newly created user. We use the `newUser` object that we had previously saved in the state. The `authenticate` call returns the user token of our new user.
+5. Use the email and password to authenticate the newly created user using the `newUser` object that we had previously saved in the state. The `authenticate` call returns the user token of our new user.
 
-6. Save the `userToken` to the app's state using the `updateUserToken` call. This is the same call we made back in our `Login` component.
+6. Update the App's state using `userHasAuthenticated` method.
 
 7. Finally, redirect to the homepage.
 

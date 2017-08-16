@@ -23,17 +23,17 @@ formatFilename(str) {
     : str.substr(0, 20) + '...' + str.substr(str.length - 20, str.length);
 }
 
-handleChange = (event) => {
+handleChange = event => {
   this.setState({
     [event.target.id]: event.target.value
   });
 }
 
-handleFileChange = (event) => {
+handleFileChange = event => {
   this.file = event.target.files[0];
 }
 
-handleSubmit = async (event) => {
+handleSubmit = async event => {
   event.preventDefault();
 
   if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
@@ -44,7 +44,7 @@ handleSubmit = async (event) => {
   this.setState({ isLoading: true });
 }
 
-handleDelete = async (event) => {
+handleDelete = async event => {
   event.preventDefault();
 
   const confirmed = window.confirm('Are you sure you want to delete this note?');
@@ -155,7 +155,7 @@ import {
   ControlLabel,
 } from 'react-bootstrap';
 import LoaderButton from '../components/LoaderButton';
-import config from '../config.js';
+import config from '../config';
 import './Notes.css';
 ```
 

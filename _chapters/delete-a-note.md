@@ -16,11 +16,11 @@ The last thing we need to do on the note page is allowing users to delete their 
 deleteNote() {
   return invokeApig({
     path: `/notes/${this.props.match.params.id}`,
-    method: 'DELETE',
-  }, this.props.userToken);
+    method: 'DELETE'
+  });
 }
 
-handleDelete = async (event) => {
+handleDelete = async event => {
   event.preventDefault();
 
   const confirmed = window.confirm('Are you sure you want to delete this note?');

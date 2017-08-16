@@ -16,20 +16,19 @@ Currently, our Home containers is very simple. Let's add the conditional renderi
 
 ``` coffee
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import {
   PageHeader,
   ListGroup,
 } from 'react-bootstrap';
 import './Home.css';
 
-class Home extends Component {
+export default class Home extends Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      isLoading: false,
+      isLoading: true,
       notes: [],
     };
   }
@@ -62,20 +61,18 @@ class Home extends Component {
   render() {
     return (
       <div className="Home">
-        { this.props.userToken === null
-          ? this.renderLander()
-          : this.renderNotes() }
+        { this.props.isAuthenticated
+          ? this.renderNotes()
+          : this.renderLander() }
       </div>
     );
   }
 }
-
-export default withRouter(Home);
 ```
 
 We are doing a few things of note here:
 
-1. Rendering the lander or the list of notes based on `this.props.userToken`.
+1. Rendering the lander or the list of notes based on `this.props.isAuthenticated`.
 
 2. Store our notes in the state. Currently, it's empty but we'll be calling our API for it.
 

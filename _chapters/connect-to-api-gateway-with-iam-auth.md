@@ -14,7 +14,7 @@ Now that we have our basic create note form working, let's connect it to our API
 2. With the user token get temporary IAM credentials from our Identity Pool.
 3. Use the IAM credentials to sign our API request with [Signature Version 4](http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 
-In our React app we do step 1 once the user logs in and we store the `userToken` in our App component state. So let's do step 2; use the `userToken` to generate temporary IAM credentials. 
+In our React app we do step 1 by calling the `authUser` method when the App component loads. So let's do step 2 and use the `userToken` to generate temporary IAM credentials. 
 
 ### Generate Temporary IAM Credentials
 
@@ -26,14 +26,10 @@ Our authenticated users can get a set of temporary IAM credentials to access the
 $ npm install aws-sdk --save
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's create a helper function in `src/libs/awsLib.js` and add the following. Make sure to create the `src/libs/` directory first.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's add a helper function in `src/libs/awsLib.js`.
 
 ``` coffee
-export function getAwsCredentials(userToken) {
-  if (AWS.config.credentials && Date.now() < AWS.config.credentials.expireTime - 60000) {
-    return;
-  }
-
+function getAwsCredentials(userToken) {
   const authenticator = `cognito-idp.${config.cognito.REGION}.amazonaws.com/${config.cognito.USER_POOL_ID}`;
 
   AWS.config.update({ region: config.cognito.REGION });
@@ -49,13 +45,12 @@ export function getAwsCredentials(userToken) {
 }
 ```
 
-This method takes the `userToken` and uses our Cognito User Pool as the authenticator to request a set of temporary credentials. These credentials are valid till the `AWS.config.credentials.expireTime`. So we simply check to ensure our credentials are still valid before requesting a new set.
+This method takes the `userToken` and uses our Cognito User Pool as the authenticator to request a set of temporary credentials.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Also include the **AWS SDK** in our header.
 
 ``` javascript
 import AWS from 'aws-sdk';
-import config from '../config.js';
 ```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />To get our AWS credentials we need to add the following to our `src/config.js` in the `cognito` block. Make sure to replace `YOUR_IDENTITY_POOL_ID` with your **Identity pool ID** from the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter and `YOUR_COGNITO_REGION` with the region your Cognito User Pool is in.
@@ -64,6 +59,32 @@ import config from '../config.js';
 REGION: 'YOUR_COGNITO_REGION',
 IDENTITY_POOL_ID: 'YOUR_IDENTITY_POOL_ID',
 ```
+
+Now let's use the `getAwsCredentials` helper function.
+
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace the `authUser` in `src/libs/awsLib.js` with the following:
+
+``` javascript
+export async function authUser() {
+  if (AWS.config.credentials && Date.now() < AWS.config.credentials.expireTime - 60000) {
+    return true;
+  }
+
+  const currentUser = getCurrentUser();
+
+  if (currentUser === null) {
+    return false;
+  }
+
+  const userToken = await getUserToken(currentUser);
+
+  await getAwsCredentials(userToken);
+
+  return true;
+}
+```
+
+We are passing `getAwsCredentials` the `userToken` that Cognito gives us to generate the temporary credentials. These credentials are valid till the `AWS.config.credentials.expireTime`. So we simply check to ensure our credentials are still valid before requesting a new set. This also ensures that we don't generate the `userToken` every time the `authUser` method is called.
 
 Next let's sign our request using Signature Version 4.
 
@@ -392,9 +413,11 @@ export async function invokeApig(
     method = 'GET',
     headers = {},
     queryParams = {},
-    body }, userToken) {
+    body }) {
 
-  await getAwsCredentials(userToken);
+  if ( ! await authUser()) {
+    throw new Error('User is not logged in');
+  }
 
   const signedRequest = sigV4Client
     .newClient({
@@ -429,7 +452,7 @@ export async function invokeApig(
 }
 ```
 
-We are simply following the steps to make a signed request to API Gateway here. We first get our temporary credentials using `getAwsCredentials` and then using the `sigV4Client` we sign our request. We then use the signed headers to make a HTTP `fetch` request.
+We are simply following the steps to make a signed request to API Gateway here. We first ensure the user is authenticated and we generate their temporary credentials using `authUser`. Then using the `sigV4Client` we sign our request. We then use the signed headers to make a HTTP `fetch` request.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Include the `sigV4Client` by adding this to the header of our file.
 

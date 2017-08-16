@@ -46,8 +46,8 @@ createNote(note) {
   return invokeApig({
     path: '/notes',
     method: 'POST',
-    body: note,
-  }, this.props.userToken);
+    body: note
+  });
 }
 ```
 
