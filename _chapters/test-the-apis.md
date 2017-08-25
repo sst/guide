@@ -47,6 +47,11 @@ apig-test \
 --method='POST' \
 --body='{"content":"hello world","attachment":"hello.jpg"}'
 ```
+For Windows users (the space between each command is very important): 
+
+``` bash
+apig-test --username admin@example.com --password Passw0rd! --user-pool-id YOUR_COGNITO_USER_POOL_ID --app-client-id YOUR_COGNITO_APP_CLIENT_ID --cognito-region YOUR_COGNITO_REGION --identity-pool-id YOUR_IDENTITY_POOL_ID --invoke-url YOUR_API_GATEWAY_URL --api-gateway-region YOUR_API_GATEWAY_REGION --path-template notes --method POST --body "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}"
+```
 
 While this might look intimidating, just keep in mind that behind the scenes all we are doing is generating some security headers before making a basic HTTP request. You'll see more of this process when we connect our React.js app to our API backend.
 
@@ -86,3 +91,37 @@ And that's it for the backend! Next we are going to move on to creating the fron
   And deploy it using `serverless deploy`. But we can't see this output when we make an HTTP request to it, since the console logs are not sent in our HTTP responses. We need to check the logs to see this. Head over to your AWS Console > CloudWatch > click Logs in the sidebar > select the Log Group named `/aws/lambda/notes-app-api-prod-create` > and expand the events. This should give you an idea of the error and help you debug it.
 
   A common source of errors here is an improperly indented `serverless.yml`. Make sure to double-check the indenting in your `serverless.yml` to the one from [this chapter](https://github.com/AnomalyInnovations/serverless-stack-demo-api/blob/master/serverless.yml).
+  
+- Response `{ status: 403,
+  statusText: 'Forbidden'}`
+**Things you can try:**  
+  1. Most probably 403 is coming from API Gateway. API Gateway logs are not on by default and are a little trickier to turn on. Can you try this - https://kennbrodhagen.net/2016/07/23/how-to-enable-logging-for-api-gateway/
+  
+  2. Whenever you deploy, in order for your Lambda to write events to CloudWatch, Serverless creates an IAM ROLE policy that grants this permission, and you usualy find it by going to AWS/IAM/Roles witht the name `appName-prod-eu-west-1-lambdaRole`. Click on it and you will see a list of actions you can take.
+  
+   Open the IAM policy simulator
+
+   ![Imgur](http://i.imgur.com/iEpjQfi.png)
+
+    Select DynamoDB
+
+    ![Imgur](http://i.imgur.com/YzHAvXO.png)
+
+    Select PUT from the actions bar
+
+    ![Imgur](http://i.imgur.com/91EFV5C.png)
+
+    Insert the ARN of the database table you want to test
+
+    ![Imgur](http://i.imgur.com/upSgT4w.png)
+
+    Then click Run Simulation.
+
+    ![Imgur](http://i.imgur.com/m3kiEI6.png)
+  
+3. Check the policy permisions for you're Lambda Role
+  
+  ![Imgur](http://i.imgur.com/cxHB6iI.png)
+  
+  
+
