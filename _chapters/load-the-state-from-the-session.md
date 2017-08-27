@@ -18,7 +18,7 @@ We are going to do this step a couple of times, so let's create a helper functio
 
 ``` coffee
 import { CognitoUserPool } from "amazon-cognito-identity-js";
-import config from "./config";
+import config from "../config";
 
 export async function authUser() {
   const currentUser = getCurrentUser();

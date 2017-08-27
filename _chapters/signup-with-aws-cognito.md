@@ -37,13 +37,13 @@ handleConfirmationSubmit = async event => {
 
   try {
     await this.confirm(this.state.newUser, this.state.confirmationCode);
-    const userToken = await this.authenticate(
+    await this.authenticate(
       this.state.newUser,
       this.state.email,
       this.state.password
     );
 
-    this.props.updateUserToken(userToken);
+    this.props.userHasAuthenticated(true);
     this.props.history.push("/");
   } catch (e) {
     alert(e);
@@ -90,7 +90,7 @@ authenticate(user, email, password) {
 
   return new Promise((resolve, reject) =>
     user.authenticateUser(authenticationDetails, {
-      onSuccess: result => resolve(result.getIdToken().getJwtToken()),
+      onSuccess: result => resolve(),
       onFailure: err => reject(err)
     })
   );
@@ -117,7 +117,7 @@ The flow here is pretty simple:
 
 4. With the user now confirmed, Cognito now knows that we have a new user that can login to our app.
 
-5. Use the email and password to authenticate the newly created user using the `newUser` object that we had previously saved in the state. The `authenticate` call returns the user token of our new user.
+5. Use the email and password to authenticate the newly created user using the `newUser` object that we had previously saved in the state.
 
 6. Update the App's state using `userHasAuthenticated` method.
 

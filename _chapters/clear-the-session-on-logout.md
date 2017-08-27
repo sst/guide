@@ -8,7 +8,7 @@ code: frontend
 comments_id: 41
 ---
 
-Currently we are only removing the user token from our app's state. But when we refresh the page, we load the user session from the browser Local Storage, in effect logging them back in.
+Currently we are only removing the user session from our app's state. But when we refresh the page, we load the user session from the browser Local Storage, in effect logging them back in.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's create a `signOutUser` method and add it to our `src/libs/awsLib.js`.
 

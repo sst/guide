@@ -16,7 +16,7 @@ The first thing we are going to need to do is load the note when our container l
 
 Let's add a route for the note page that we are going to create.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following line to `src/Routes.js` below our `/notes/new` route. We are using the `AppliedRoute` component that we created in the [Add the user token to the state]({% link _chapters/add-the-session-to-the-state.md %}) chapter.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following line to `src/Routes.js` below our `/notes/new` route. We are using the `AppliedRoute` component that we created in the [Add the session to the state]({% link _chapters/add-the-session-to-the-state.md %}) chapter.
 
 ``` coffee
 <AppliedRoute path="/notes/:id" exact component={Notes} props={childProps} />

@@ -33,6 +33,7 @@ handleSubmit = async event => {
   try {
     await this.login(this.state.email, this.state.password);
     this.props.userHasAuthenticated(true);
+    this.props.history.push("/");
   } catch (e) {
     alert(e);
     this.setState({ isLoading: false });
@@ -95,7 +96,7 @@ Now we can use our new component in our `Login` container.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />In `src/containers/Login.js` find the `<Button>` component in the `render` method.
 
-``` coffee
+``` html
 <Button
   block
   bsSize="large"
@@ -108,7 +109,7 @@ Now we can use our new component in our `Login` container.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And replace it with this.
 
-``` coffee
+``` html
 <LoaderButton
   block
   bsSize="large"

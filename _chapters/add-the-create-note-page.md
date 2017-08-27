@@ -43,11 +43,11 @@ export default class NewNote extends Component {
     this.setState({
       [event.target.id]: event.target.value
     });
-  };
+  }
 
   handleFileChange = event => {
     this.file = event.target.files[0];
-  };
+  }
 
   handleSubmit = async event => {
     event.preventDefault();
@@ -58,7 +58,7 @@ export default class NewNote extends Component {
     }
 
     this.setState({ isLoading: true });
-  };
+  }
 
   render() {
     return (
@@ -117,7 +117,7 @@ MAX_ATTACHMENT_SIZE: 5000000,
 
 ### Add the Route
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our signup route. We are using the `AppliedRoute` component that we created in the [Add the user token to the state]({% link _chapters/add-the-session-to-the-state.md %}) chapter.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our signup route. We are using the `AppliedRoute` component that we created in the [Add the session to the state]({% link _chapters/add-the-session-to-the-state.md %}) chapter.
 
 ``` coffee
 <AppliedRoute path="/notes/new" exact component={NewNote} props={childProps} />

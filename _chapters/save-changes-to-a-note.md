@@ -35,7 +35,7 @@ handleSubmit = async event => {
 
   try {
     if (this.file) {
-      uploadedFilename = (await s3Upload(this.file, this.props.userToken))
+      uploadedFilename = (await s3Upload(this.file))
         .Location;
     }
 

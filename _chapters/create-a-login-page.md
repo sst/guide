@@ -21,7 +21,7 @@ import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
 
-class Login extends Component {
+export default class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -39,11 +39,11 @@ class Login extends Component {
     this.setState({
       [event.target.id]: event.target.value
     });
-  };
+  }
 
   handleSubmit = event => {
     event.preventDefault();
-  };
+  }
 
   render() {
     return (
@@ -79,8 +79,6 @@ class Login extends Component {
     );
   }
 }
-
-export default Login;
 ```
 
 We are introducing a couple of new concepts in this.

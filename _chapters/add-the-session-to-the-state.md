@@ -81,6 +81,7 @@ export default ({ childProps }) =>
   <Switch>
     <AppliedRoute path="/" exact component={Home} props={childProps} />
     <AppliedRoute path="/login" exact component={Login} props={childProps} />
+    { /* Finally, catch all unmatched routes */ }
     <Route component={NotFound} />
   </Switch>;
 ```
@@ -96,7 +97,7 @@ Now in the `Login` container we'll call the `userHasAuthenticated` method.
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace the `alert('Logged in');` line with the following in `src/containers/Login.js`.
 
 ``` javascript
-this.props.updateUserToken(true);
+this.props.userHasAuthenticated(true);
 ```
 
 ### Create a Logout Button
@@ -111,18 +112,16 @@ We can now use this to display a Logout button once the user logs in. Find the f
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And replace it with this:
 
 ``` coffee
-{
-  this.state.isAuthenticated
-    ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
-    : [
-        <RouteNavItem key={1} href="/signup">
-          Signup
-        </RouteNavItem>,
-        <RouteNavItem key={2} href="/login">
-          Login
-        </RouteNavItem>
-      ];
-}
+{this.state.isAuthenticated
+  ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
+  : [
+      <RouteNavItem key={1} href="/signup">
+        Signup
+      </RouteNavItem>,
+      <RouteNavItem key={2} href="/login">
+        Login
+      </RouteNavItem>
+    ]}
 ```
 
 Also, import the `NavItem` in the header.

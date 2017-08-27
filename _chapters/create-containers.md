@@ -72,7 +72,7 @@ Now that we have the outer chrome of our application ready, let's add the contai
 import React, { Component } from "react";
 import "./Home.css";
 
-class Home extends Component {
+export default class Home extends Component {
   render() {
     return (
       <div className="Home">
@@ -84,8 +84,6 @@ class Home extends Component {
     );
   }
 }
-
-export default Home;
 ```
 
 This simply renders our homepage given that the user is not currently signed in.

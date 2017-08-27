@@ -57,9 +57,14 @@ export default App;
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />With this.
 
-
 ``` coffee
 export default withRouter(App);
+```
+
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And import `withRouter` by replacing the `import { Link }` line in the header of `src/App.js` with this:
+
+``` coffee
+import { Link, withRouter } from "react-router-dom";
 ```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following to the bottom of the `handleLogout` method in our `src/App.js`.

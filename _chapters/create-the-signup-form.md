@@ -55,7 +55,7 @@ export default class Signup extends Component {
     this.setState({
       [event.target.id]: event.target.value
     });
-  };
+  }
 
   handleSubmit = async event => {
     event.preventDefault();
@@ -65,13 +65,13 @@ export default class Signup extends Component {
     this.setState({ newUser: "test" });
 
     this.setState({ isLoading: false });
-  };
+  }
 
   handleConfirmationSubmit = async event => {
     event.preventDefault();
 
     this.setState({ isLoading: true });
-  };
+  }
 
   renderConfirmationForm() {
     return (

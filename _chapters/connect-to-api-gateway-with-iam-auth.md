@@ -326,7 +326,8 @@ sigV4Client.newClient = function(config) {
       body = JSON.stringify(body);
     }
 
-    // If there is no body remove the content-type header so it is not included in SigV4 calculation
+    // If there is no body remove the content-type header so it is not
+    // included in SigV4 calculation
     if (body === "" || body === undefined || body === null) {
       delete headers["Content-Type"];
     }
@@ -469,7 +470,7 @@ import sigV4Client from "./sigV4Client";
 ```
 apiGateway: {
   URL: "YOUR_API_GATEWAY_URL",
-  REGION: "YOUR_API_GATEWAY_REGION",
+  REGION: "YOUR_API_GATEWAY_REGION"
 },
 ```
 

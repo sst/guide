@@ -55,7 +55,7 @@ s3: {
 
 The above method does a couple of things.
 
-1. It takes a file object and the user token as parameters.
+1. It takes a file object as a parameter.
 
 2. Generates a unique file name prefixed with the `identityId`. This is necessary to secure the files on a per-user basis.
 
@@ -82,7 +82,7 @@ handleSubmit = async event => {
 
   try {
     const uploadedFilename = this.file
-      ? (await s3Upload(this.file, this.props.userToken)).Location
+      ? (await s3Upload(this.file)).Location
       : null;
 
     await this.createNote({
@@ -97,7 +97,7 @@ handleSubmit = async event => {
 }
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />And make sure to include `s3Upload` in the header by doing this:
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And make sure to include `s3Upload` in the header by replacing the `import { invokeApig }` line with this:
 
 ``` javascript
 import { invokeApig, s3Upload } from "../libs/awsLib";

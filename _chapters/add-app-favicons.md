@@ -32,24 +32,47 @@ This should generate your favicon package and the accompanying code.
 
 ![Realfavicongenerator.net completed screenshot]({{ site.url }}/assets/realfavicongenerator-completed.png)
 
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Then replace the contents of `public/manifest.json` with the following:
+
+``` json
+{
+  "short_name": "Scratch",
+  "name": "Scratch Note Taking App",
+  "icons": [
+    {
+      "src": "android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "android-chrome-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff"
+}
+```
+
 To include a file from the `public/` directory in your HTML, Create React App needs the `%PUBLIC_URL%` prefix.
 
-Copy the generated code and add the `%PUBLIC_URL%` prefix to all the URLs. It should look something like the following.
-
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add it to your `public/index.html`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add this to your `public/index.html`.
 
 ``` html
 <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="%PUBLIC_URL%/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="%PUBLIC_URL%/favicon-16x16.png" sizes="16x16">
-<link rel="manifest" href="%PUBLIC_URL%/manifest.json">
 <link rel="mask-icon" href="%PUBLIC_URL%/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="theme-color" content="#ffffff">
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />And **remove** the following line that references the original favicon.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And **remove** the following lines that reference the original favicon and theme color.
 
 ``` html
+<meta name="theme-color" content="#000000">
 <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
 ```
 
