@@ -2,7 +2,7 @@
 layout: post
 title: Call the Create API
 date: 2017-01-23 00:00:00
-description: To let users create a note in our React.js app, we need to connect our form to our serverless API backend. We are going to use our API Gateway helper to make the request by passing in the Cognito User Pool user token.
+description: To let users create a note in our React.js app, we need to connect our form to our serverless API backend. We are going to use our API Gateway helper to make the request.
 context: frontend
 code: frontend
 comments_id: 48

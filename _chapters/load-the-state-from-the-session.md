@@ -2,7 +2,7 @@
 layout: post
 title: Load the State from the Session
 date: 2017-01-15 00:00:00
-description: To keep a user logged in to Amazon Cognito in our React.js app, we are going to save the user’s JWT session token in the App component state. And we load this token from the session in componentDidMount using the getCurrentUser and getUserToken methods.
+description: To keep a user logged in to Amazon Cognito in our React.js app, we are going to load the user session in the App component state. We load the session in componentDidMount using the getCurrentUser and getUserToken Cognito JS SDK methods.
 context: frontend
 code: frontend
 comments_id: 40
@@ -55,7 +55,7 @@ function getCurrentUser() {
 
 The `authUser` method is getting the current user from the Local Storage using the Cognito JS SDK. We then get that user's session and their user token in `getUserToken`. The `currentUser.getSession` also refreshes the user session in case it has expired. Finally in the `authUser` method we return `true` if we are able to authenticate the user and `false` if the user is not logged in.
 
-### Load User Token in to the State
+### Load User Session in to the State
 
 Now that we can ensure the session user is authenticated using the `authUser` method, let's load this when our app loads. We are going to do this in `componentDidMount`. And since `authUser` is going to be called async; we need to ensure that the rest of our app is only ready to go after this has been loaded.
 
@@ -74,7 +74,7 @@ this.state = {
 import { authUser } from "./libs/awsLib";
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Now to load the user token we'll add the following to our `src/App.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Now to load the user session we'll add the following to our `src/App.js`.
 
 ``` javascript
 async componentDidMount() {
@@ -95,7 +95,7 @@ All this does is check if there is a valid user in the session. It then updates 
 
 ### Render When the State Is Ready
 
-Since loading the user token is an asynchronous process, we want to ensure that our app does not change states when it first loads. To do this we'll hold off rendering our app till `isAuthenticating` is `false`.
+Since loading the user session is an asynchronous process, we want to ensure that our app does not change states when it first loads. To do this we'll hold off rendering our app till `isAuthenticating` is `false`.
 
 We'll conditionally render our app based on the `isAuthenticating` flag.
 

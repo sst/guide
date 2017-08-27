@@ -2,7 +2,7 @@
 layout: post
 title: Adding Links in the Navbar
 date: 2017-01-11 12:00:00
-description: To allow the App container in our React.js app to navigate to a link, we are going to use the withRouter higher-order component. The withRouter HOC from React Router adds the route related props to our component. With this we can call history.push to navigate around our app.
+description: To add links to the Navbar of our React.js app we’ll be using the NavItem React-Bootstrap component. And to allow users to navigate using these links we are going to use React-Router's Route component and call the history.push method.
 context: frontend
 code: frontend
 comments_id: 35
@@ -51,7 +51,7 @@ Now if you flip over to your browser, you should see the two links in our navbar
 
 ![Navbar links added screenshot]({{ site.url }}/assets/navbar-links-added.png)
 
-Unfortunately, they don't do a whole lot when you click on them. We also need them to highlight when we navigate to them. To fix this we are going to use a useful feature of the React-Router. We are going to use the `Route` component to detect when we are on a certain page and then render based on it. Since we are going to do this twice, let's make this into a component that can be re-used.
+Unfortunately, they don't do a whole lot when you click on them. We also need them to highlight when we navigate to that page. To fix this we are going to use a useful feature of the React-Router. We are going to use the `Route` component to detect when we are on a certain page and then render based on it. Since we are going to do this twice, let's make this into a component that can be re-used.
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a `src/components/` directory and add the following inside `src/components/RouteNavItem.js`.
 

@@ -88,7 +88,7 @@ And let's add a couple of styles to animate our loading icon.
 }
 ```
 
-This spins the refresh Glyphicon infinitely with each sping taking a second. And by adding these styles as a part of the `LoaderButton` we keep them self contained within the component.
+This spins the refresh Glyphicon infinitely with each spin taking a second. And by adding these styles as a part of the `LoaderButton` we keep them self contained within the component.
 
 ### Render Using the isLoading Flag
 

@@ -160,7 +160,7 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 3. Since we have two forms we have two validation methods called `validateForm` and `validateConfirmationForm`.
 
-4. We are setting the `autoFocus` flags on our email and the confirmation code fields.
+4. We are setting the `autoFocus` flags on the email and the confirmation code fields.
 
 5. For now our `handleSubmit` and `handleConfirmationSubmit` don't do a whole lot besides setting the `isLoading` state and a dummy value for the `newUser` state.
 
@@ -187,7 +187,7 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 ### Add the Route
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our login route. We are using the `AppliedRoute` component that we created in the [Add the user token to the state]({% link _chapters/add-the-session-to-the-state.md %}) chapter.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our login route. We are using the `AppliedRoute` component that we created in the [Add the session to the state]({% link _chapters/add-the-session-to-the-state.md %}) chapter.
 
 ``` coffee
 <AppliedRoute path="/signup" exact component={Signup} props={childProps} />

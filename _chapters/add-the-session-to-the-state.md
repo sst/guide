@@ -3,7 +3,7 @@ layout: post
 title: Add the Session to the State
 date: 2017-01-15 00:00:00
 redirect_from: /chapters/add-the-user-token-to-the-state.html
-description: Tutorial on how to store the AWS Cognito user ID token in your React.js app.
+description: We need to add the user session to the state of our App component in our React.js app. By lifting the state up we can pass the session to all the child containers.
 context: frontend
 code: frontend
 comments_id: 39
