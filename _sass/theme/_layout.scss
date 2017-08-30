@@ -369,3 +369,12 @@ span.post-info-separator {
 .post .extras {
   @extend %extras-section;
 }
+
+/**
+ * 404
+ */
+.not-found {
+  padding: 100px 0 130px;
+  font-size: 20px;
+  text-align: center;
+}
