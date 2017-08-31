@@ -3,7 +3,7 @@ layout: post
 title: Older Versions
 date: 2017-02-17 00:00:00
 description: A list of all the older versions of Serverless Stack for reference.
-comments_id: 72
+comments_id: 124
 ---
 
 As we continue to update Serverless Stack, we want to make sure that we leave the older versions up in case you need a reference. This is also useful for readers who are working through the tutorial while it gets updated.
