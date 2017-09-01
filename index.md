@@ -110,11 +110,11 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
 
 - [Wrapping up]({% link _chapters/wrapping-up.md %})
 - [Giving back]({% link _chapters/giving-back.md %})
+- [Older Versions]({% link _chapters/older-versions.md %})
 - [Staying up to date]({% link _chapters/staying-up-to-date.md %})
 
 <hr class="tools" />
 
-### Extras
+### Tools
 
 - [Serverless ES7 Service]({% link _chapters/serverless-es7-service.md %})
-- [Older Versions]({% link _chapters/older-versions.md %})

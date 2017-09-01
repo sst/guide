@@ -6,7 +6,7 @@ description: A list of all the older versions of Serverless Stack for reference.
 comments_id: 124
 ---
 
-As we continue to update Serverless Stack, we want to make sure that we leave the older versions up in case you need a reference. This is also useful for readers who are working through the tutorial while it gets updated.
+As we continue to update Serverless Stack, we want to make sure that we leave the older versions up in case you need a reference. Below are the updates we’ve made to Serveress Stack, each with a **unique URL**. This is also useful for readers who are working through the tutorial while it gets updated.
 
 While the hosted version of the tutorial and the code snippets are accurate, the sample project repo that is linked at the bottom of each chapter is unfortunately not. We do however maintain the past versions of the completed sample project repo. So you should be able to use those to figure things out. All this info is also available on the [releases page]({{ site.github_repo }}/releases) of our [GitHub repo]({{ site.github_repo }}).
 
