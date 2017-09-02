@@ -20,7 +20,7 @@ $ aws cognito-idp sign-up \
   --region us-east-1 \
   --client-id YOUR_COGNITO_APP_CLIENT_ID \
   --username admin@example.com \
-  --password Passw0rd! \
+  --password Passw0rd!
 ```
 
 Now, the user is created in Cognito User Pool. However, before the user can authenticate with the User Pool, the account needs to be verified. Let's quickly verify the user using an administrator command.
