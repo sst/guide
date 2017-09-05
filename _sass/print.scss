@@ -19,6 +19,11 @@
   main div.home .toc {
     padding-top: 0;
   }
+  main div.home ul li {
+    a[href]:after {
+      content: none !important;
+    }
+  }
   p a {
     text-decoration: underline;
   }

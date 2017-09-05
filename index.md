@@ -7,7 +7,7 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
 
 {% include share-index.html %}
 
-{: .toc }
+{: .toc-header }
 ## Table of Contents
 
 ### Introduction
