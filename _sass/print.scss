@@ -1,0 +1,17 @@
+@media print {
+  body > header,
+  body > footer,
+  article > .extras,
+  article > .lander-info,
+  article > .post-footer,
+  article > .post-closing,
+  article header .post-info,
+  article a.button.contact,
+  article header .post-context
+  {
+    display: none;
+  }
+  p a {
+    text-decoration: underline;
+  }
+}
