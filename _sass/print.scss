@@ -1,6 +1,11 @@
 @media print {
+  html, body {
+    background-color: white;
+  }
   body > header,
   body > footer,
+  main .home .lander,
+  main .home .extras,
   article > .extras,
   article > .lander-info,
   article > .post-footer,
@@ -10,6 +15,9 @@
   article header .post-context
   {
     display: none;
+  }
+  main div.home .toc {
+    padding-top: 0;
   }
   p a {
     text-decoration: underline;
