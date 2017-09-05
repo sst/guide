@@ -105,6 +105,12 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
 ### Extra Credit
 
 - [Code Splitting in Create React App]({% link _chapters/code-splitting-in-create-react-app.md %})
+- [Stages]({% link _chapters/stages.md %})
+- [Multiple Credentials]({% link _chapters/multiple-credentials.md %})
+- [Logging]({% link _chapters/logging.md %})
+- [Debugging]({% link _chapters/debugging.md %})
+- [Unit Tests]({% link _chapters/unit-tests.md %})
+- [CloudFormation]({% link _chapters/cloudformation.md %})
 
 ### Conclusion
 
