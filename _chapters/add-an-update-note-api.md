@@ -110,4 +110,4 @@ The response should look similar to this.
 }
 ```
 
-Next we are going to add an API to delete a note given it's id.
+Next we are going to add an API to delete a note given its id.
