@@ -132,14 +132,40 @@ const AsyncNotFound = asyncComponent(() => import("./containers/NotFound"));
 
 export default ({ childProps }) =>
   <Switch>
-    <AppliedRoute path="/" exact component={AsyncHome} props={childProps} />
-    <UnauthenticatedRoute path="/login" exact component={AsyncLogin} props={childProps} />
-    <UnauthenticatedRoute path="/signup" exact component={AsyncSignup} props={childProps} />
-    <AuthenticatedRoute path="/notes/new" exact component={AsyncNewNote} props={childProps} />
-    <AuthenticatedRoute path="/notes/:id" exact component={AsyncNotes} props={childProps} />
-    { /* Finally, catch all unmatched routes */ }
+    <AppliedRoute
+      path="/"
+      exact
+      component={AsyncHome}
+      props={childProps}
+    />
+    <UnauthenticatedRoute
+      path="/login"
+      exact
+      component={AsyncLogin}
+      props={childProps}
+    />
+    <UnauthenticatedRoute
+      path="/signup"
+      exact
+      component={AsyncSignup}
+      props={childProps}
+    />
+    <AuthenticatedRoute
+      path="/notes/new"
+      exact
+      component={AsyncNewNote}
+      props={childProps}
+    />
+    <AuthenticatedRoute
+      path="/notes/:id"
+      exact
+      component={AsyncNotes}
+      props={childProps}
+    />
+    {/* Finally, catch all unmatched routes */}
     <Route component={AsyncNotFound} />
-  </Switch>;
+  </Switch>
+;
 ```
 
 It is pretty cool that with just a couple of changes, our app is all set up for code splitting. And without adding a whole lot more complexity either! Here is what our `src/Routes.js` looked like before.
@@ -160,14 +186,40 @@ import NotFound from "./containers/NotFound";
 
 export default ({ childProps }) =>
   <Switch>
-    <AppliedRoute path="/" exact component={Home} props={childProps} />
-    <UnauthenticatedRoute path="/login" exact component={Login} props={childProps} />
-    <UnauthenticatedRoute path="/signup" exact component={Signup} props={childProps} />
-    <AuthenticatedRoute path="/notes/new" exact component={NewNote} props={childProps} />
-    <AuthenticatedRoute path="/notes/:id" exact component={Notes} props={childProps} />
-    { /* Finally, catch all unmatched routes */ }
+    <AppliedRoute
+      path="/"
+      exact
+      component={Home}
+      props={childProps}
+    />
+    <UnauthenticatedRoute
+      path="/login"
+      exact
+      component={Login}
+      props={childProps}
+    />
+    <UnauthenticatedRoute
+      path="/signup"
+      exact
+      component={Signup}
+      props={childProps}
+    />
+    <AuthenticatedRoute
+      path="/notes/new"
+      exact
+      component={NewNote}
+      props={childProps}
+    />
+    <AuthenticatedRoute
+      path="/notes/:id"
+      exact
+      component={Notes}
+      props={childProps}
+    />
+    {/* Finally, catch all unmatched routes */}
     <Route component={NotFound} />
-  </Switch>;
+  </Switch>
+;
 ```
 
 Notice that instead of doing the static imports for all the containers at the top, we are creating these functions that are going to do the dynamic imports for us when necessary.
