@@ -2,6 +2,12 @@
   html, body {
     background-color: white;
   }
+  body {
+    margin-top: 10mm;
+    margin-bottom: 10mm;
+    margin-left: 0mm;
+    margin-right: 0mm;
+  }
   body > header,
   body > footer,
   main .home .lander,
@@ -17,10 +23,22 @@
   {
     display: none;
   }
+  main.page-content {
+    padding: 0 !important;
+  }
+  pre {
+   white-space: pre-wrap !important;
+  }
   main div.home .toc {
     padding-top: 0;
   }
   a {
     color: $text-color !important;
+  }
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  main div.home ul li a[href]:after {
+    content: none;
   }
 }
