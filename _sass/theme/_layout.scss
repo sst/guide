@@ -262,16 +262,18 @@
   }
 }
 
-a.post-info {
-  font-size: 14px;
-  font-weight: 300;
-  @extend %a-tertiary;
-}
+.post-info {
+  a {
+    font-size: 14px;
+    font-weight: 300;
+    @extend %a-tertiary;
+  }
 
-span.post-info-separator {
-  font-size: 10px;
-  font-weight: 300;
-  color: $tertiary-text-color;
+  span.separator {
+    font-size: 10px;
+    font-weight: 300;
+    color: $tertiary-text-color;
+  }
 }
 
 .post-context {
