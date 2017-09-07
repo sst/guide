@@ -157,6 +157,8 @@ a.contact {
   border: 0;
   cursor: pointer;
   -webkit-appearance: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 
   &:focus {
     outline: none;
