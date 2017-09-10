@@ -259,7 +259,7 @@ export async function main(event, context, callback) {
   };
 
   try {
-    const result = await dynamoDbLib.call('put', params);
+    await dynamoDbLib.call('put', params);
     callback(null, success(params.Item));
   }
   catch(e) {
