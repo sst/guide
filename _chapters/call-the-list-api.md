@@ -16,17 +16,14 @@ Now that we have our basic homepage set up, let's make the API call to render ou
 
 ``` javascript
 async componentDidMount() {
-  if (this.props.userToken === null) {
+  if (!this.props.isAuthenticated) {
     return;
   }
-
-  this.setState({ isLoading: true });
 
   try {
     const results = await this.notes();
     this.setState({ notes: results });
-  }
-  catch(e) {
+  } catch (e) {
     alert(e);
   }
 
@@ -34,7 +31,7 @@ async componentDidMount() {
 }
 
 notes() {
-  return invokeApig({ path: '/notes' }, this.props.userToken);
+  return invokeApig({ path: "/notes" });
 }
 ```
 
@@ -54,38 +51,39 @@ Now let's render the results.
 
 ``` coffee
 renderNotesList(notes) {
-  return [{}].concat(notes).map((note, i) => (
-    i !== 0
-      ? ( <ListGroupItem
+  return [{}].concat(notes).map(
+    (note, i) =>
+      i !== 0
+        ? <ListGroupItem
             key={note.noteId}
             href={`/notes/${note.noteId}`}
             onClick={this.handleNoteClick}
-            header={note.content.trim().split('\n')[0]}>
-              { "Created: " + (new Date(note.createdAt)).toLocaleString() }
-          </ListGroupItem> )
-      : ( <ListGroupItem
+            header={note.content.trim().split("\n")[0]}
+          >
+            {"Created: " + new Date(note.createdAt).toLocaleString()}
+          </ListGroupItem>
+        : <ListGroupItem
             key="new"
             href="/notes/new"
-            onClick={this.handleNoteClick}>
-              <h4><b>{'\uFF0B'}</b> Create a new note</h4>
-          </ListGroupItem> )
-  ));
+            onClick={this.handleNoteClick}
+          >
+            <h4>
+              <b>{"\uFF0B"}</b> Create a new note
+            </h4>
+          </ListGroupItem>
+  );
 }
 
-handleNoteClick = (event) => {
+handleNoteClick = event => {
   event.preventDefault();
-  this.props.history.push(event.currentTarget.getAttribute('href'));
+  this.props.history.push(event.currentTarget.getAttribute("href"));
 }
 ```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And include the `ListGroupItem` in the header so that our `react-bootstrap` import looks like so.
 
 ``` javascript
-import {
-  PageHeader,
-  ListGroup,
-  ListGroupItem,
-} from 'react-bootstrap';
+import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
 ```
 
 The code above does a few things.

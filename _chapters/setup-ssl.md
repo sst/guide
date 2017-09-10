@@ -15,7 +15,11 @@ Select **Certificate Manager** from the list of services in your [AWS Console](h
 
 ![Select Certificate Manager service screenshot]({{ site.url }}/assets/select-certificate-manager-service.png)
 
-Hit **Request a certificate** from the top and type in the name of our domain. Hit **Add another name to this certificate** and add our www version of our domain as well. Hit **Review and request** once you are done.
+If this is your first certificate, you'll need to hit **Get started**. If not they hit **Request a certificate** from the top.
+
+![Get started with Certificate Manager screenshot]({{ site.url }}/assets/get-started-certificate-manager.png)
+
+And type in the name of our domain. Hit **Add another name to this certificate** and add our www version of our domain as well. Hit **Review and request** once you are done.
 
 ![Add domain names to certificate screenshot]({{ site.url }}/assets/add-domain-names-to-certificate.png)
 

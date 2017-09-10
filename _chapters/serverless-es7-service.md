@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Serverless ES7 Service
-date: 2017-02-16 00:00:00
+date: 2017-02-19 00:00:00
 description: A Serverless Service that adds support for ES6/ES7 async/await methods to your Serverless Framework project.
 context: all
 comments_id: 72

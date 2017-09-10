@@ -17,18 +17,13 @@ First we are going to create the form for a note. It'll take some content and a 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new file `src/containers/NewNote.js` and add the following.
 
 ``` coffee
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import {
-  FormGroup,
-  FormControl,
-  ControlLabel,
-} from 'react-bootstrap';
-import LoaderButton from '../components/LoaderButton';
-import config from '../config.js';
-import './NewNote.css';
+import React, { Component } from "react";
+import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import LoaderButton from "../components/LoaderButton";
+import config from "../config";
+import "./NewNote.css";
 
-class NewNote extends Component {
+export default class NewNote extends Component {
   constructor(props) {
     super(props);
 
@@ -36,7 +31,7 @@ class NewNote extends Component {
 
     this.state = {
       isLoading: null,
-      content: '',
+      content: ""
     };
   }
 
@@ -44,21 +39,21 @@ class NewNote extends Component {
     return this.state.content.length > 0;
   }
 
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({
       [event.target.id]: event.target.value
     });
   }
 
-  handleFileChange = (event) => {
+  handleFileChange = event => {
     this.file = event.target.files[0];
   }
 
-  handleSubmit = async (event) => {
+  handleSubmit = async event => {
     event.preventDefault();
 
     if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
-      alert('Please pick a file smaller than 5MB');
+      alert("Please pick a file smaller than 5MB");
       return;
     }
 
@@ -73,30 +68,28 @@ class NewNote extends Component {
             <FormControl
               onChange={this.handleChange}
               value={this.state.content}
-              componentClass="textarea" />
+              componentClass="textarea"
+            />
           </FormGroup>
           <FormGroup controlId="file">
             <ControlLabel>Attachment</ControlLabel>
-            <FormControl
-              onChange={this.handleFileChange}
-              type="file" />
+            <FormControl onChange={this.handleFileChange} type="file" />
           </FormGroup>
           <LoaderButton
             block
             bsStyle="primary"
             bsSize="large"
-            disabled={ ! this.validateForm() }
+            disabled={!this.validateForm()}
             type="submit"
             isLoading={this.state.isLoading}
             text="Create"
-            loadingText="Creating…" />
+            loadingText="Creating…"
+          />
         </form>
       </div>
     );
   }
 }
-
-export default withRouter(NewNote);
 ```
 
 Everything is fairly standard here, except for the file input. Our form elements so far have been [controlled components](https://facebook.github.io/react/docs/forms.html), as in their value is directly controlled by the state of the component. The file input simply calls a different `onChange` handler (`handleFileChange`) that saves the file object as a class property. We use a class property instead of saving it in the state because the file object we save does not change or drive the rendering of our component.
@@ -124,7 +117,7 @@ MAX_ATTACHMENT_SIZE: 5000000,
 
 ### Add the Route
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our signup route. We are using the `AppliedRoute` component that we created in the [Add the user token to the state]({% link _chapters/add-the-user-token-to-the-state.md %}) chapter.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our signup route. We are using the `AppliedRoute` component that we created in the [Add the session to the state]({% link _chapters/add-the-session-to-the-state.md %}) chapter.
 
 ``` coffee
 <AppliedRoute path="/notes/new" exact component={NewNote} props={childProps} />
@@ -133,7 +126,7 @@ MAX_ATTACHMENT_SIZE: 5000000,
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And include our component in the header.
 
 ``` javascript
-import NewNote from './containers/NewNote';
+import NewNote from "./containers/NewNote";
 ```
 
 Now if we switch to our browser and navigate `http://localhost:3000/notes/new` we should see our newly created form. Try adding some content, uploading a file, and hitting submit to see it in action.

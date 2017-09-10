@@ -14,8 +14,8 @@ Now that we created the `AuthenticatedRoute` and `UnauthenticatedRoute` in the l
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />First import them in the header of `src/Routes.js`.
 
 ``` javascript
-import AuthenticatedRoute from './components/AuthenticatedRoute';
-import UnauthenticatedRoute from './components/UnauthenticatedRoute';
+import AuthenticatedRoute from "./components/AuthenticatedRoute";
+import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
 ```
 
 Next, we simply switch to our new redirect routes.

@@ -12,19 +12,11 @@ To be able to upload our files to S3 we needed to get the AWS credentials first.
 
 But we need to make sure that we clear out those credentials when we logout. If we don't, the next user that logs in on the same browser, might end up with the incorrect credentials.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />To do that let's add the following lines to the `handleLogout` method in our `src/App.js` above the `this.updateUserToken(null);` line.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />To do that let's replace the `signOutUser` method in our `src/libs/awsLib.js` with this:
 
 ``` javascript
-if (AWS.config.credentials) {
-  AWS.config.credentials.clearCachedId();
-}
-```
-
-So our `handleLogout` as a result should now look like so:
-
-``` javascript
-handleLogout = (event) => {
-  const currentUser = this.getCurrentUser();
+export function signOutUser() {
+  const currentUser = getCurrentUser();
 
   if (currentUser !== null) {
     currentUser.signOut();
@@ -32,18 +24,11 @@ handleLogout = (event) => {
 
   if (AWS.config.credentials) {
     AWS.config.credentials.clearCachedId();
+    AWS.config.credentials = new AWS.CognitoIdentityCredentials({});
   }
-
-  this.updateUserToken(null);
-
-  this.props.history.push('/login');
 }
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />And include the **AWS SDK** in the header.
-
-``` javascript
-import AWS from 'aws-sdk';
-```
+Here we are clearing the AWS JS SDK cache and resetting the credentials that it saves in the browser's Local Storage.
 
 Next up we are going to allow users to see a list of the notes they've created.

@@ -26,7 +26,7 @@ $ cd notes-app-api
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Install Serverless globally.
 
 ``` bash
-$ npm install serverless@1.17.0 -g
+$ npm install serverless -g
 ```
 
 The above command needs [NPM](https://www.npmjs.com), a package manager for JavaScript. Follow [this](https://docs.npmjs.com/getting-started/installing-node) if you need help installing NPM.

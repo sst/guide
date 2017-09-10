@@ -24,7 +24,7 @@ $ npm install --save-dev \
     babel-plugin-transform-runtime \
     babel-preset-es2015 \
     babel-preset-stage-3 \
-    serverless-webpack \
+    serverless-webpack@2.0.0 \
     glob \
     webpack \
     webpack-node-externals

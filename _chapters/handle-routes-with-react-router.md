@@ -30,18 +30,20 @@ Even though we don't have any routes set up in our app, we can get the basic str
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace code in `src/index.js` with the following.
 
 ``` coffee
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
-import App from './App';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import App from "./App";
+import registerServiceWorker from "./registerServiceWorker";
+import "./index.css";
 
 ReactDOM.render(
   <Router>
     <App />
   </Router>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
+registerServiceWorker();
 ```
 
 We've made two small changes here.

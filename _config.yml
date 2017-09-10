@@ -19,7 +19,7 @@ description: > # this means to ignore newlines until "baseurl:"
   Building a Full-Stack App
   with Serverless and React
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://serverless-stack.com" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://serverless-stack.com" # the base hostname & protocol for your site, e.g. http://example.com
 logo: /assets/og-image.jpg
 
 github_repo: "https://github.com/AnomalyInnovations/serverless-stack-com"
@@ -36,7 +36,7 @@ google_analytics: "UA-3536629-11"
 
 collections:
   chapters:
-   output: true
+    output: true
 
 # Build settings
 markdown: kramdown

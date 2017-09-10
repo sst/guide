@@ -26,19 +26,17 @@ The usual structure used by React Router to set up routing for your app looks so
 
 ``` coffee
 /* Import the components */
-import Home from './containers/Home';
-import Posts from './containers/Posts';
-import NotFound from './containers/NotFound';
-
+import Home from "./containers/Home";
+import Posts from "./containers/Posts";
+import NotFound from "./containers/NotFound";
 
 /* Use components to define routes */
-export default () => (
+export default () =>
   <Switch>
     <Route path="/" exact component={Home} />
     <Route path="/posts/:id" exact component={Posts} />
     <Route component={NotFound} />
-  </Switch>
-);
+  </Switch>;
 ```
 
 We start by importing the components that will respond to our routes. And then use them to define our routes. The `Switch` component renders the route that matches the path.
@@ -52,17 +50,15 @@ To do this we are going to dynamically import the required component.
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following to `src/components/AsyncComponent.js`.
 
 ``` coffee
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 export default function asyncComponent(importComponent) {
-
   class AsyncComponent extends Component {
-
     constructor(props) {
       super(props);
 
       this.state = {
-        component: null,
+        component: null
       };
     }
 
@@ -77,11 +73,8 @@ export default function asyncComponent(importComponent) {
     render() {
       const C = this.state.component;
 
-      return C
-        ? <C {...this.props} />
-        : null;
+      return C ? <C {...this.props} /> : null;
     }
-
   }
 
   return AsyncComponent;
@@ -99,13 +92,13 @@ We are doing a few things here:
 Now let's use this component in our routes. Instead of statically importing our component.
 
 ``` coffee
-import Home from './containers/Home';
+import Home from "./containers/Home";
 ```
 
 We are going to use the `asyncComponent` to dynamically import the component we want.
 
 ``` coffee
-const AsyncHome = asyncComponent(() => import('./containers/Home'));
+const AsyncHome = asyncComponent(() => import("./containers/Home"));
 ```
 
 It's important to note that we are not doing an import here. We are only passing in a function to `asyncComponent` that will dynamically `import()` when the `AsyncHome` component is created.
@@ -123,60 +116,110 @@ Now let's go back to our Notes project and apply these changes.
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Your `src/Routes.js` should look like this after the changes.
 
 ``` coffee
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import asyncComponent from './components/AsyncComponent';
-import AppliedRoute from './components/AppliedRoute';
-import AuthenticatedRoute from './components/AuthenticatedRoute';
-import UnauthenticatedRoute from './components/UnauthenticatedRoute';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import asyncComponent from "./components/AsyncComponent";
+import AppliedRoute from "./components/AppliedRoute";
+import AuthenticatedRoute from "./components/AuthenticatedRoute";
+import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
 
-const AsyncHome     = asyncComponent(() => import('./containers/Home'));
-const AsyncLogin    = asyncComponent(() => import('./containers/Login'));
-const AsyncNotes    = asyncComponent(() => import('./containers/Notes'));
-const AsyncSignup   = asyncComponent(() => import('./containers/Signup'));
-const AsyncNewNote  = asyncComponent(() => import('./containers/NewNote'));
-const AsyncNotFound = asyncComponent(() => import('./containers/NotFound'));
+const AsyncHome = asyncComponent(() => import("./containers/Home"));
+const AsyncLogin = asyncComponent(() => import("./containers/Login"));
+const AsyncNotes = asyncComponent(() => import("./containers/Notes"));
+const AsyncSignup = asyncComponent(() => import("./containers/Signup"));
+const AsyncNewNote = asyncComponent(() => import("./containers/NewNote"));
+const AsyncNotFound = asyncComponent(() => import("./containers/NotFound"));
 
-export default ({ childProps }) => (
+export default ({ childProps }) =>
   <Switch>
-    <AppliedRoute path="/" exact component={AsyncHome} props={childProps} />
-    <UnauthenticatedRoute path="/login" exact component={AsyncLogin} props={childProps} />
-    <UnauthenticatedRoute path="/signup" exact component={AsyncSignup} props={childProps} />
-    <AuthenticatedRoute path="/notes/new" exact component={AsyncNewNote} props={childProps} />
-    <AuthenticatedRoute path="/notes/:id" exact component={AsyncNotes} props={childProps} />
-    { /* Finally, catch all unmatched routes */ }
+    <AppliedRoute
+      path="/"
+      exact
+      component={AsyncHome}
+      props={childProps}
+    />
+    <UnauthenticatedRoute
+      path="/login"
+      exact
+      component={AsyncLogin}
+      props={childProps}
+    />
+    <UnauthenticatedRoute
+      path="/signup"
+      exact
+      component={AsyncSignup}
+      props={childProps}
+    />
+    <AuthenticatedRoute
+      path="/notes/new"
+      exact
+      component={AsyncNewNote}
+      props={childProps}
+    />
+    <AuthenticatedRoute
+      path="/notes/:id"
+      exact
+      component={AsyncNotes}
+      props={childProps}
+    />
+    {/* Finally, catch all unmatched routes */}
     <Route component={AsyncNotFound} />
   </Switch>
-);
+;
 ```
 
 It is pretty cool that with just a couple of changes, our app is all set up for code splitting. And without adding a whole lot more complexity either! Here is what our `src/Routes.js` looked like before.
 
 ``` coffee
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import AppliedRoute from './components/AppliedRoute';
-import AuthenticatedRoute from './components/AuthenticatedRoute';
-import UnauthenticatedRoute from './components/UnauthenticatedRoute';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import AppliedRoute from "./components/AppliedRoute";
+import AuthenticatedRoute from "./components/AuthenticatedRoute";
+import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
 
-import Home from './containers/Home';
-import Login from './containers/Login';
-import Notes from './containers/Notes';
-import Signup from './containers/Signup';
-import NewNote from './containers/NewNote';
-import NotFound from './containers/NotFound';
+import Home from "./containers/Home";
+import Login from "./containers/Login";
+import Notes from "./containers/Notes";
+import Signup from "./containers/Signup";
+import NewNote from "./containers/NewNote";
+import NotFound from "./containers/NotFound";
 
-export default ({ childProps }) => (
+export default ({ childProps }) =>
   <Switch>
-    <AppliedRoute path="/" exact component={Home} props={childProps} />
-    <UnauthenticatedRoute path="/login" exact component={Login} props={childProps} />
-    <UnauthenticatedRoute path="/signup" exact component={Signup} props={childProps} />
-    <AuthenticatedRoute path="/notes/new" exact component={NewNote} props={childProps} />
-    <AuthenticatedRoute path="/notes/:id" exact component={Notes} props={childProps} />
-    { /* Finally, catch all unmatched routes */ }
+    <AppliedRoute
+      path="/"
+      exact
+      component={Home}
+      props={childProps}
+    />
+    <UnauthenticatedRoute
+      path="/login"
+      exact
+      component={Login}
+      props={childProps}
+    />
+    <UnauthenticatedRoute
+      path="/signup"
+      exact
+      component={Signup}
+      props={childProps}
+    />
+    <AuthenticatedRoute
+      path="/notes/new"
+      exact
+      component={NewNote}
+      props={childProps}
+    />
+    <AuthenticatedRoute
+      path="/notes/:id"
+      exact
+      component={Notes}
+      props={childProps}
+    />
+    {/* Finally, catch all unmatched routes */}
     <Route component={NotFound} />
   </Switch>
-);
+;
 ```
 
 Notice that instead of doing the static imports for all the containers at the top, we are creating these functions that are going to do the dynamic imports for us when necessary.
@@ -209,8 +252,8 @@ Use it instead of the `asyncComponent` that we had above.
 
 ``` coffee
 const AsyncHome = Loadable({
-  loader: () => import('./containers/Home'),
-  LoadingComponent: MyLoadingComponent
+  loader: () => import("./containers/Home"),
+  loading: MyLoadingComponent
 });
 ```
 

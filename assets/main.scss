@@ -44,6 +44,7 @@ $on-laptop:                 800px;
 
 // Import partials from the `minima` theme.
 @import "theme";
+@import "print";
 
 
 
@@ -156,6 +157,8 @@ a.contact {
   border: 0;
   cursor: pointer;
   -webkit-appearance: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 
   &:focus {
     outline: none;
@@ -344,7 +347,7 @@ div.home ul.quotes p {
     font-weight: bold;
   }
 }
-div.home .toc {
+div.home .toc-header {
   padding-top: 2 * $spacing-unit - 10px;
   margin-bottom: $spacing-unit;
   text-align: center;

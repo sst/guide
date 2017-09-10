@@ -2,7 +2,7 @@
 layout: post
 title: Call the Create API
 date: 2017-01-23 00:00:00
-description: To let users create a note in our React.js app, we need to connect our form to our serverless API backend. We are going to use our API Gateway helper to make the request by passing in the Cognito User Pool user token.
+description: To let users create a note in our React.js app, we need to connect our form to our serverless API backend. We are going to use our API Gateway helper to make the request.
 context: frontend
 code: frontend
 comments_id: 48
@@ -13,17 +13,17 @@ Now that we know how to connect to API Gateway securely, let's make the API call
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's include our `awsLib` by adding the following to the header of `src/containers/NewNote.js`.
 
 ``` javascript
-import { invokeApig } from '../libs/awsLib';
+import { invokeApig } from "../libs/awsLib";
 ```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And replace our `handleSubmit` function with the following.
 
 ``` javascript
-handleSubmit = async (event) => {
+handleSubmit = async event => {
   event.preventDefault();
 
   if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
-    alert('Please pick a file smaller than 5MB');
+    alert("Please pick a file smaller than 5MB");
     return;
   }
 
@@ -31,23 +31,21 @@ handleSubmit = async (event) => {
 
   try {
     await this.createNote({
-      content: this.state.content,
+      content: this.state.content
     });
-    this.props.history.push('/');
-  }
-  catch(e) {
+    this.props.history.push("/");
+  } catch (e) {
     alert(e);
     this.setState({ isLoading: false });
   }
-
 }
 
 createNote(note) {
   return invokeApig({
-    path: '/notes',
-    method: 'POST',
-    body: note,
-  }, this.props.userToken);
+    path: "/notes",
+    method: "POST",
+    body: note
+  });
 }
 ```
 

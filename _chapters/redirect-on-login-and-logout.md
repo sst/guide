@@ -13,46 +13,27 @@ To complete the login flow we are going to need to do two more things.
 1. Redirect the user to the homepage after they login.
 2. And redirect them back to the login page after they logout.
 
-We are going to use the `withRouter` HOC and the `this.props.history.push` method that comes with React Router v4.
+We are going to use the `history.push` method that comes with React Router v4.
 
 ### Redirect to Home on Login
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />To use it in our `src/containers/Login.js`, let's replace the line that exports our component.
+Since our `Login` component is rendered using a `Route`, it adds the router props to it. So we can redirect using the `this.props.history.push` method.
 
 ``` javascript
-export default Login;
+this.props.history.push("/");
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />with the following:
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Update the `handleSubmit` method in `src/containers/Login.js` to look like this:
 
 ``` javascript
-export default withRouter(Login);
-```
-
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Also, import `withRouter` in the header.
-
-``` javascript
-import { withRouter } from 'react-router-dom';
-```
-
-This Higher-Order Component adds the `history` prop to our component. Now we can redirect using the `this.props.history.push` method.
-
-``` javascript
-this.props.history.push('/');
-```
-
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Our updated `handleSubmit` method in `src/containers/Login.js` should look like this:
-
-``` javascript
-handleSubmit = async (event) => {
+handleSubmit = async event => {
   event.preventDefault();
 
   try {
-    const userToken = await this.login(this.state.username, this.state.password);
-    this.props.updateUserToken(userToken);
-    this.props.history.push('/');
-  }
-  catch(e) {
+    await this.login(this.state.email, this.state.password);
+    this.props.userHasAuthenticated(true);
+    this.props.history.push("/");
+  } catch (e) {
     alert(e);
   }
 }
@@ -64,27 +45,43 @@ Now if you head over to your browser and try logging in, you should be redirecte
 
 ### Redirect to Login After Logout
 
-Now we'll do something very similar for the logout process. Since we are already using the `withRouter` HOC for our App component, we can go ahead and add the bit that does the redirect.
+Now we'll do something very similar for the logout process. However, the `App` component does not have access to the router props directly since it is not rendered inside a `Route` component. To be able to use the router props in our `App` component we will need to use the `withRouter` [Higher-Order Component](https://facebook.github.io/react/docs/higher-order-components.html) (or HOC). You can read more about the `withRouter` HOC [here](https://reacttraining.com/react-router/web/api/withRouter).
+
+To use this HOC, we'll change the way we export our App component.
+
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace the following line in `src/App.js`.
+
+``` coffee
+export default App;
+```
+
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />With this.
+
+``` coffee
+export default withRouter(App);
+```
+
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />And import `withRouter` by replacing the `import { Link }` line in the header of `src/App.js` with this:
+
+``` coffee
+import { Link, withRouter } from "react-router-dom";
+```
 
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following to the bottom of the `handleLogout` method in our `src/App.js`.
 
 ``` coffee
-this.props.history.push('/login');
+this.props.history.push("/login");
 ```
 
 So our `handleLogout` method should now look like this.
 
 ``` coffee
-handleLogout = (event) => {
-  const currentUser = this.getCurrentUser();
+handleLogout = event => {
+  signOutUser();
 
-  if (currentUser !== null) {
-    currentUser.signOut();
-  }
+  this.userHasAuthenticated(false);
 
-  this.updateUserToken(null);
-
-  this.props.history.push('/login');
+  this.props.history.push("/login");
 }
 ```
 

@@ -16,37 +16,36 @@ Now that our note loads into our form, let's work on saving the changes we make 
 saveNote(note) {
   return invokeApig({
     path: `/notes/${this.props.match.params.id}`,
-    method: 'PUT',
-    body: note,
-  }, this.props.userToken);
+    method: "PUT",
+    body: note
+  });
 }
 
-handleSubmit = async (event) => {
+handleSubmit = async event => {
   let uploadedFilename;
 
   event.preventDefault();
 
   if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
-    alert('Please pick a file smaller than 5MB');
+    alert("Please pick a file smaller than 5MB");
     return;
   }
 
   this.setState({ isLoading: true });
 
   try {
-
     if (this.file) {
-      uploadedFilename = (await s3Upload(this.file, this.props.userToken)).Location;
+      uploadedFilename = (await s3Upload(this.file))
+        .Location;
     }
 
     await this.saveNote({
       ...this.state.note,
       content: this.state.content,
-      attachment: uploadedFilename || this.state.note.attachment,
+      attachment: uploadedFilename || this.state.note.attachment
     });
-    this.props.history.push('/');
-  }
-  catch(e) {
+    this.props.history.push("/");
+  } catch (e) {
     alert(e);
     this.setState({ isLoading: false });
   }
@@ -56,7 +55,7 @@ handleSubmit = async (event) => {
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />And include our `s3Upload` helper method in the header:
 
 ``` javascript
-import { invokeApig, s3Upload } from '../libs/awsLib';
+import { invokeApig, s3Upload } from "../libs/awsLib";
 ```
 
 The code above is doing a couple of things that should be very similar to what we did in the `NewNote` container.
