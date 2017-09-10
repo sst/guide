@@ -47,13 +47,14 @@ apig-test \
 --method='POST' \
 --body='{"content":"hello world","attachment":"hello.jpg"}'
 ```
-For Windows users (the space between each command is very important): 
+
+While this might look intimidating, just keep in mind that behind the scenes all we are doing is generating some security headers before making a basic HTTP request. You'll see more of this process when we connect our React.js app to our API backend.
+
+If you are on Windows, use the command below. The space between each option is very important.
 
 ``` bash
 apig-test --username admin@example.com --password Passw0rd! --user-pool-id YOUR_COGNITO_USER_POOL_ID --app-client-id YOUR_COGNITO_APP_CLIENT_ID --cognito-region YOUR_COGNITO_REGION --identity-pool-id YOUR_IDENTITY_POOL_ID --invoke-url YOUR_API_GATEWAY_URL --api-gateway-region YOUR_API_GATEWAY_REGION --path-template notes --method POST --body "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}"
 ```
-
-While this might look intimidating, just keep in mind that behind the scenes all we are doing is generating some security headers before making a basic HTTP request. You'll see more of this process when we connect our React.js app to our API backend.
 
 If the command is successful, the response will look similar to this.
 
@@ -92,8 +93,10 @@ And that's it for the backend! Next we are going to move on to creating the fron
 
   A common source of errors here is an improperly indented `serverless.yml`. Make sure to double-check the indenting in your `serverless.yml` to the one from [this chapter](https://github.com/AnomalyInnovations/serverless-stack-demo-api/blob/master/serverless.yml).
   
+<!--
 - Response `{ status: 403,
   statusText: 'Forbidden'}`
+
 **Things you can try:**  
   1. Most probably 403 is coming from API Gateway. API Gateway logs are not on by default and are a little trickier to turn on. Can you try this - https://kennbrodhagen.net/2016/07/23/how-to-enable-logging-for-api-gateway/
   
@@ -122,6 +125,4 @@ And that's it for the backend! Next we are going to move on to creating the fron
 3. Check the policy permisions for you're Lambda Role
   
   ![Imgur](http://i.imgur.com/cxHB6iI.png)
-  
-  
-
+-->
