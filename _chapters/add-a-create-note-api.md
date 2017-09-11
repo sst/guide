@@ -17,10 +17,10 @@ Let's add our first function.
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new file called `create.js` in our project root with the following.
 
 ``` javascript
-import uuid from 'uuid';
-import AWS from 'aws-sdk';
+import uuid from "uuid";
+import AWS from "aws-sdk";
 
-AWS.config.update({region:'us-east-1'});
+AWS.config.update({ region: "us-east-1" });
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 export function main(event, context, callback) {
@@ -28,7 +28,7 @@ export function main(event, context, callback) {
   const data = JSON.parse(event.body);
 
   const params = {
-    TableName: 'notes',
+    TableName: "notes",
     // 'Item' contains the attributes of the item to be created
     // - 'userId': user identities are federated through the
     //             Cognito Identity Pool, we will use the identity id
@@ -42,15 +42,15 @@ export function main(event, context, callback) {
       noteId: uuid.v1(),
       content: data.content,
       attachment: data.attachment,
-      createdAt: new Date().getTime(),
-    },
+      createdAt: new Date().getTime()
+    }
   };
 
   dynamoDb.put(params, (error, data) => {
     // Set response headers to enable CORS (Cross-Origin Resource Sharing)
     const headers = {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': true,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": true
     };
 
     // Return status code 500 on error
@@ -58,7 +58,7 @@ export function main(event, context, callback) {
       const response = {
         statusCode: 500,
         headers: headers,
-        body: JSON.stringify({status: false}),
+        body: JSON.stringify({ status: false })
       };
       callback(null, response);
       return;
@@ -68,11 +68,11 @@ export function main(event, context, callback) {
     const response = {
       statusCode: 200,
       headers: headers,
-      body: JSON.stringify(params.Item),
-    }
+      body: JSON.stringify(params.Item)
+    };
     callback(null, response);
   });
-};
+}
 ```
 
 There are some helpful comments in the code but we are doing a few simple things here.
@@ -94,9 +94,11 @@ Now let's define the API endpoint for our function.
 ``` yaml
 service: notes-app-api
 
+# Use serverless-webpack plugin to transpile ES6/ES7
 plugins:
   - serverless-webpack
 
+# Enable auto-packing of external modules
 custom:
   webpackIncludeModules: true
 
@@ -168,7 +170,7 @@ You might have noticed that the `body` and `requestContext` fields are the ones 
 And to invoke our function we run the following in the root directory.
 
 ``` bash
-$ serverless webpack invoke --function create --path mocks/create-event.json
+$ serverless invoke local --function create --path mocks/create-event.json
 ```
 
 The response should look similar to this.
@@ -212,10 +214,10 @@ function buildResponse(statusCode, body) {
   return {
     statusCode: statusCode,
     headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': true,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": true
     },
-    body: JSON.stringify(body),
+    body: JSON.stringify(body)
   };
 }
 ```
@@ -225,9 +227,9 @@ This will manage building the response objects for both success and failure case
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Again inside `libs/`, create a `dynamodb-lib.js` file.
 
 ``` javascript
-import AWS from 'aws-sdk';
+import AWS from "aws-sdk";
 
-AWS.config.update({region:'us-east-1'});
+AWS.config.update({ region: "us-east-1" });
 
 export function call(action, params) {
   const dynamoDb = new AWS.DynamoDB.DocumentClient();
@@ -241,31 +243,30 @@ Here we are using the promise form of the DynamoDB methods. Promises are a metho
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Now, we'll go back to our `create.js` and use the helper functions we created. Our `create.js` should now look like the following.
 
 ``` javascript
-import uuid from 'uuid';
-import * as dynamoDbLib from './libs/dynamodb-lib';
-import { success, failure } from './libs/response-lib';
+import uuid from "uuid";
+import * as dynamoDbLib from "./libs/dynamodb-lib";
+import { success, failure } from "./libs/response-lib";
 
 export async function main(event, context, callback) {
   const data = JSON.parse(event.body);
   const params = {
-    TableName: 'notes',
+    TableName: "notes",
     Item: {
       userId: event.requestContext.identity.cognitoIdentityId,
       noteId: uuid.v1(),
       content: data.content,
       attachment: data.attachment,
-      createdAt: new Date().getTime(),
-    },
+      createdAt: new Date().getTime()
+    }
   };
 
   try {
-    await dynamoDbLib.call('put', params);
+    await dynamoDbLib.call("put", params);
     callback(null, success(params.Item));
+  } catch (e) {
+    callback(null, failure({ status: false }));
   }
-  catch(e) {
-    callback(null, failure({status: false}));
-  }
-};
+}
 ```
 
 Next, we are going to write the API to get a note given its' id.
