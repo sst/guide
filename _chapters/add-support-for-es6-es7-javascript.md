@@ -59,9 +59,9 @@ module.exports = {
 };
 ```
 
-This is the configuration Webpack will use to package our app. The main part of this config is the `entry` attribute that we are automatically generating using the `sls.lib.entries` that is a part of the `serverless-webpack` plugin. We expand on config at the [end of our guide]({% link _chapters/serverless-es7-service.md %}) to make it easier to use while development.
+This is the configuration Webpack will use to package our app. The main part of this config is the `entry` attribute that we are automatically generating using the `sls.lib.entries` that is a part of the `serverless-webpack` plugin. This automatically picks up all our handler functions and packages them (we expand on this config at the [end of our guide]({% link _chapters/serverless-es7-service.md %}) to make it a bit more easier to use).
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a file called `.babelrc` in the root with the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Next create a file called `.babelrc` in the root with the following.
 
 ``` json
 {
