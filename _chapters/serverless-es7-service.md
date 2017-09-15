@@ -14,7 +14,7 @@ While we were creating our backend, we went through a [few steps]({% link _chapt
 
 To fix these issues and to create a good starting point for your Serverless projects, we created a [Serverless service](https://serverless.com/framework/docs/providers/aws/guide/services/). It's called [**Serverless ES7**](https://github.com/AnomalyInnovations/serverless-es7) and it can get you up and running without any configuration.
 
-[Serverless ES7](https://github.com/AnomalyInnovations/serverless-es7) uses the [serverless-webpack](https://github.com/elastic-coders/serverless-webpack) plugin and Babel. It supports:
+[Serverless ES7](https://github.com/AnomalyInnovations/serverless-es7) uses the [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) plugin and Babel. It supports:
 
 - **ES7 syntax in your handler functions**
   - Use async/await

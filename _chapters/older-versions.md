@@ -12,7 +12,12 @@ While the hosted version of the tutorial and the code snippets are accurate, the
 
 ### Versions
 
-#### [v1.1: Improved Session Handling](https://59a70f9b0752d02b19c62a85--serverless-stack.netlify.com/) (Current)
+#### [v1.2: Upgrade to Serverless Webpack v3](https://59bc41176f4c5012ed03ed32--serverless-stack.netlify.com) (Current)
+
+- [API]({{ site.backend_github_repo }}/releases/tag/v1.2)
+- [Client]({{ site.frontend_github_repo }}/releases/tag/v1.2) (unchanged)
+
+#### [v1.1: Improved Session Handling](https://59a70f9b0752d02b19c62a85--serverless-stack.netlify.com/)
 
 - [API]({{ site.backend_github_repo }}/releases/tag/v1.1) (unchanged)
 - [Client]({{ site.frontend_github_repo }}/releases/tag/v1.1)
