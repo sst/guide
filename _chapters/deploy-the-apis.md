@@ -2,7 +2,7 @@
 layout: post
 title: Deploy the APIs
 date: 2017-01-04 00:00:00
-description: Use the “serverless deploy” command to deploy to AWS Lambda and API Gateway using the Serverless Framework. Running this command will display the list of deployed API endpoints and the AWS region it was deployed to.
+description: Use the “serverless deploy” command to deploy to AWS Lambda and API Gateway using the Serverless Framework. Running this command will display the list of deployed API endpoints and the AWS region it was deployed to. And we can run the "serverless deploy function" command when we want to update an individual Lambda function.
 context: backend
 code: backend_full
 comments_id: 28
@@ -41,16 +41,14 @@ functions:
 
 This has a list of the API endpoints that were created. Make a note of these endpoints as we are going to use them later while creating our frontend. Also make a note of the region and the id in these endpoints, we are going to use them in the coming chapters. In our case, `us-east-1` is our API Gateway Region and `ly55wbovq4` is our API Gateway ID.
 
-<!--
 ### Deploy a Single Function
 
-There are going to be cases where you might want to deploy just a single API as opposed to all of them. The `serverless deploy function` command deploys an individual function without going through the entire deployment cycle. This is a much faster way of deploying the changes we make.
+There are going to be cases where you might want to deploy just a single API endpoing as opposed to all of them. The `serverless deploy function` command deploys an individual function without going through the entire deployment cycle. This is a much faster way of deploying the changes we make.
 
 For example, to deploy the list function again, we can run the following.
 
 ``` bash
 $ serverless deploy function -f list
 ```
--->
 
 Now before we test our APIs we have one final thing to set up. We need to ensure that our users can securely access the AWS resources we have created so far. Let's look at setting up a Cognito Identity Pool.

@@ -7,27 +7,27 @@ context: all
 comments_id: 72
 ---
 
-While we were creating our backend, we went through a few steps to ensure that we could use async/await methods in our handler functions. We also used a Babel preset to ensure that we could use the same flavor of JavaScript on the frontend and the backend. We know that a few of you have used our demo backend as a starting point for your project. But there are a couple of limitations with our setup.
+While we were creating our backend, we went through a [few steps]({% link _chapters/add-support-for-es6-es7-javascript.md %}) to ensure that we could use async/await methods in our handler functions. We also used a Babel preset to ensure that we could use the same flavor of JavaScript on the frontend and the backend. We know that a few of you have used our demo backend as a starting point for your project. But there are a couple of limitations with our setup.
 
-- It doesn't automatically transpile handler files not placed in our project root.
 - Error messages don't show the proper line numbers.
 - Async handler functions don't show any error messages.
 
 To fix these issues and to create a good starting point for your Serverless projects, we created a [Serverless service](https://serverless.com/framework/docs/providers/aws/guide/services/). It's called [**Serverless ES7**](https://github.com/AnomalyInnovations/serverless-es7) and it can get you up and running without any configuration.
 
-[**Serverless ES7**](https://github.com/AnomalyInnovations/serverless-es7) uses the [serverless-webpack](https://github.com/elastic-coders/serverless-webpack) plugin and Babel. It supports:
+[Serverless ES7](https://github.com/AnomalyInnovations/serverless-es7) uses the [serverless-webpack](https://github.com/elastic-coders/serverless-webpack) plugin and Babel. It supports:
 
-- ES7 syntax in your handler functions
-  - Async/await and much more
-- Sourcemaps for proper error messages
+- **ES7 syntax in your handler functions**
+  - Use async/await
+  - And much more!
+- **Sourcemaps for proper error messages**
   - Error message show the correct line numbers
   - Works in production with CloudWatch
-- Automatic support for multiple handler files
+- **Automatic support for multiple handler files**
   - No need to add a new entry to your `webpack.config.js`
 
 ### Demo
 
-A demo version of this service is hosted on AWS - [https://ndgmy14knc.execute-api.us-east-1.amazonaws.com/dev/hello](https://ndgmy14knc.execute-api.us-east-1.amazonaws.com/dev/hello).
+A demo version of this service is hosted on AWS - [`https://2njfspcvna.execute-api.us-east-1.amazonaws.com/dev/hello`](https://2njfspcvna.execute-api.us-east-1.amazonaws.com/dev/hello).
 
 And here is the ES7 source behind it.
 
@@ -78,25 +78,31 @@ $ npm install
 
 ### Usage
 
-Run a function on your local.
+To run a function on your local
 
 ``` bash
-$ serverless webpack invoke --function hello
+$ serverless invoke local --function hello
 ```
 
-And to deploy.
+Deploy your project
 
 ``` bash
 $ serverless deploy
+```
+
+Deploy a single function
+
+``` bash
+$ serverless deploy function --function hello
 ```
 
 ### How It Works
 
 To ensure that you get all the ES7 capabilities while showing proper error messages and seamlessly integrating with the rest of your project, we do the following:
 
-- The `webpack.config.js` loads all your handlers from the `serverless.yml` and transpiles them using Babel. This means that you don't have to edit the `webpack.config.js` when you add a new handler file.
+- The `webpack.config.js` loads all your handlers using the `slsw.lib.entries` from the serverless-webpack plugin. This means that you don't have to edit the `webpack.config.js` when you add a new handler file.
 - Generate the sourcemaps for all the transpiled files and load the sourcemaps in each of the handler files.
-- Catch and log any unhandled exceptions to ensure that async handler functions display error messages.
+- Catch and log any unhandled exceptions to ensure that async functions can log errors.
 
 The result is that you should see proper error messages in your CloudWatch or console logs.
 

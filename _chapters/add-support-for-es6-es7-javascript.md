@@ -24,8 +24,7 @@ $ npm install --save-dev \
     babel-plugin-transform-runtime \
     babel-preset-es2015 \
     babel-preset-stage-3 \
-    serverless-webpack@2.0.0 \
-    glob \
+    serverless-webpack \
     webpack \
     webpack-node-externals
 
@@ -37,55 +36,32 @@ Most of the above packages are only needed while we are building our project and
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a file called `webpack.config.js` in the root with the following.
 
 ``` javascript
-var glob = require('glob');
-var path = require('path');
-var nodeExternals = require('webpack-node-externals');
-
-// Required for Create React App Babel transform
-process.env.NODE_ENV = 'production';
+const slsw = require("serverless-webpack");
+const nodeExternals = require("webpack-node-externals");
 
 module.exports = {
-  // Use all js files in project root (except
-  // the webpack config) as an entry
-  entry: globEntries('!(webpack.config).js'),
-  target: 'node',
+  entry: slsw.lib.entries,
+  target: "node",
   // Since 'aws-sdk' is not compatible with webpack,
   // we exclude all node dependencies
   externals: [nodeExternals()],
   // Run babel on all .js files and skip those in node_modules
   module: {
-    rules: [{
-      test: /\.js$/,
-      loader: 'babel-loader',
-      include: __dirname,
-      exclude: /node_modules/,
-    }]
-  },
-  // We are going to create multiple APIs in this guide, and we are 
-  // going to create a js file to for each, we need this output block
-  output: {
-    libraryTarget: 'commonjs',
-    path: path.join(__dirname, '.webpack'),
-    filename: '[name].js'
-  },
-};
-
-function globEntries(globPath) {
-  var files = glob.sync(globPath);
-  var entries = {};
-
-  for (var i = 0; i < files.length; i++) {
-    var entry = files[i];
-    entries[path.basename(entry, path.extname(entry))] = './' + entry;
+    rules: [
+      {
+        test: /\.js$/,
+        loader: "babel-loader",
+        include: __dirname,
+        exclude: /node_modules/
+      }
+    ]
   }
-
-  return entries;
-}
+};
 ```
 
-This is the configuration Webpack will use to package our app. The main part of this config is the `entry` attribute that we are automatically generating by looking for the relevant files in our project root. If you are wondering how we would handle files that are not in the project root, we touch on this at the [end of our guide]({% link _chapters/serverless-es7-service.md %}).
+This is the configuration Webpack will use to package our app. The main part of this config is the `entry` attribute that we are automatically generating using the `sls.lib.entries` that is a part of the `serverless-webpack` plugin. This automatically picks up all our handler functions and packages them (we expand on this config at the [end of our guide]({% link _chapters/serverless-es7-service.md %}) to make it a bit more easier to use).
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a file called `.babelrc` in the root with the following.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Next create a file called `.babelrc` in the root with the following.
 
 ``` json
 {
