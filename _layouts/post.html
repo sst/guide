@@ -6,10 +6,10 @@ layout: default
   <header class="post-header">
     <h1 class="post-title">{{ page.title | escape }}</h1>
 
-    <div>
-      <a class="post-info" target="_blank" href="{{ site.github_repo }}{{ site.github_edit_prefix }}{{ page.path }}">Improve this page</a>
-      <span class="post-info-separator">&nbsp;&bull;&nbsp;</span>
-      <a class="post-info" target="_blank" href="{{ site.github_repo }}{{ site.github_history_prefix }}{{ page.path }}">View history</a>
+    <div class="post-info">
+      <a target="_blank" href="{{ site.github_repo }}{{ site.github_edit_prefix }}{{ page.path }}">Improve this page</a>
+      <span class="separator">&nbsp;&bull;&nbsp;</span>
+      <a target="_blank" href="{{ site.github_repo }}{{ site.github_history_prefix }}{{ page.path }}">View history</a>
     </div>
 
     {% if page.context == 'backend' or page.context == 'frontend' or page.context == 'all' %}

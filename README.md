@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://serverless-stack.com/">
+  <a href="https://serverless-stack.com/">
     <img alt="Serverless Stack" src="https://github.com/AnomalyInnovations/serverless-stack-com/raw/master/assets/logo-large.png" width="377" />
   </a>
 </p>
@@ -10,7 +10,7 @@
 
 ------------------------------------------------------------------------------------
 
-[Serverless Stack](http://serverless-stack.com) is an open source guide for building and deploying full-stack apps using Serverless and React on AWS.
+[Serverless Stack](https://serverless-stack.com) is an open source guide for building and deploying full-stack apps using Serverless and React on AWS.
 
 We are going to create a [note taking app](https://demo.serverless-stack.com) from scratch using React.js, AWS Lambda, API Gateway, DynamoDB, and Cognito.
 
@@ -18,7 +18,7 @@ We are going to create a [note taking app](https://demo.serverless-stack.com) fr
 
 It is a single-page React app powered by a serverless CRUD API. We also cover how add user authentication and handle file uploads.
 
-The entire guide is hosted through GitHub Pages and we use [GitHub Issues][GHIssues] for our comments. With the help of the community we keep the guide accurate and up to date.
+The entire guide is hosted on GitHub and we use [GitHub Issues][GHIssues] for our comments. With the help of the community we keep the guide accurate and up to date.
 
 #### Source for the Demo App
 

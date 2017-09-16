@@ -15,29 +15,28 @@ Finally, we are going to create an API that allows a user to delete a given note
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new file `delete.js` and paste the following code
 
 ``` javascript
-import * as dynamoDbLib from './libs/dynamodb-lib';
-import { success, failure } from './libs/response-lib';
+import * as dynamoDbLib from "./libs/dynamodb-lib";
+import { success, failure } from "./libs/response-lib";
 
 export async function main(event, context, callback) {
   const params = {
-    TableName: 'notes',
+    TableName: "notes",
     // 'Key' defines the partition key and sort key of the item to be removed
     // - 'userId': Identity Pool identity id of the authenticated user
     // - 'noteId': path parameter
     Key: {
       userId: event.requestContext.identity.cognitoIdentityId,
-      noteId: event.pathParameters.id,
-    },
+      noteId: event.pathParameters.id
+    }
   };
 
   try {
-    const result = await dynamoDbLib.call('delete', params);
-    callback(null, success({status: true}));
+    const result = await dynamoDbLib.call("delete", params);
+    callback(null, success({ status: true }));
+  } catch (e) {
+    callback(null, failure({ status: false }));
   }
-  catch(e) {
-    callback(null, failure({status: false}));
-  }
-};
+}
 ```
 
 This makes a DynamoDB `delete` call with the `userId` & `noteId` key to delete the note.
@@ -84,7 +83,7 @@ Just like before we'll use the `noteId` of our note in place of the `id` in the 
 Invoke our newly created function from the root directory.
 
 ``` bash
-$ serverless webpack invoke --function delete --path mocks/delete-event.json
+$ serverless invoke local --function delete --path mocks/delete-event.json
 ```
 
 And the response should look similar to this.

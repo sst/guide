@@ -45,6 +45,10 @@ Scroll down to the **Alternate Domain Names (CNAMEs)** and use the www version o
 
 ![Set alternate domain name screenshot]({{ site.url }}/assets/set-alternate-domain-name-2.png)
 
+And hit **Create Distribution**.
+
+![Hit create distribution screenshot]({{ site.url }}/assets/hit-create-distribution.png)
+
 Finally, we'll point our www domain to this CloudFront Distribution.
 
 ### Point WWW Domain to CloudFront Distribution

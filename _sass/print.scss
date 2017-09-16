@@ -1,0 +1,44 @@
+@media print {
+  html, body {
+    background-color: white;
+  }
+  body {
+    margin-top: 10mm;
+    margin-bottom: 0mm;
+    margin-left: 0mm;
+    margin-right: 0mm;
+  }
+  body > header,
+  body > footer,
+  main .home .lander,
+  main .home .extras,
+  article > .extras,
+  article > .lander-info,
+  article > .post-links,
+  article > .post-footer,
+  article > .post-closing,
+  article header .post-info,
+  article a.button.contact,
+  article header .post-context
+  {
+    display: none;
+  }
+  main.page-content {
+    padding: 0 !important;
+  }
+  pre {
+   white-space: pre-wrap !important;
+  }
+  main div.home .toc {
+    padding-top: 0;
+  }
+  a {
+    color: $text-color !important;
+  }
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  main div.home ul li a[href]:after {
+    content: none;
+  }
+}
