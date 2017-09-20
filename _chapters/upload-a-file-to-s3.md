@@ -18,7 +18,7 @@ We are going to use the AWS JS SDK to upload our files to S3. The S3 Bucket that
 
 ### Upload to S3
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Append the following in `src/awsLib.js`.
+<img class="code-marker" src="{{ site.url }}/assets/s.png" />Append the following in `src/libs/awsLib.js`.
 
 ``` coffee
 export async function s3Upload(file) {
