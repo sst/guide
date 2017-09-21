@@ -13,8 +13,9 @@ To help people stay up to date with the changes, we run the <a href="{{ site.mai
 - Outlines the recent updates to Serverless Stack
 - Never sent out more than once a week
 - One click unsubscribe
+- And you get the entire guide as a 300 page PDF
 
 We hope you subscribe to it and find it useful.
 
-<a class="button contact" href="{{ site.mailchimp_signup_form }}" target="_blank">Stay up-to-date with Serverless Stack</a>
+<a class="button contact" href="{{ site.mailchimp_signup_form }}" target="_blank">Subscribe</a>
 

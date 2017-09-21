@@ -15,35 +15,33 @@ Now that we created a note and saved it to our database. Let's add an API to ret
 <img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new file `get.js` and paste the following code
 
 ``` javascript
-import * as dynamoDbLib from './libs/dynamodb-lib';
-import { success, failure } from './libs/response-lib';
+import * as dynamoDbLib from "./libs/dynamodb-lib";
+import { success, failure } from "./libs/response-lib";
 
 export async function main(event, context, callback) {
   const params = {
-    TableName: 'notes',
+    TableName: "notes",
     // 'Key' defines the partition key and sort key of the item to be retrieved
     // - 'userId': Identity Pool identity id of the authenticated user
     // - 'noteId': path parameter
     Key: {
       userId: event.requestContext.identity.cognitoIdentityId,
-      noteId: event.pathParameters.id,
-    },
+      noteId: event.pathParameters.id
+    }
   };
 
   try {
-    const result = await dynamoDbLib.call('get', params);
+    const result = await dynamoDbLib.call("get", params);
     if (result.Item) {
       // Return the retrieved item
       callback(null, success(result.Item));
+    } else {
+      callback(null, failure({ status: false, error: "Item not found." }));
     }
-    else {
-      callback(null, failure({status: false, error: 'Item not found.'}));
-    }
+  } catch (e) {
+    callback(null, failure({ status: false }));
   }
-  catch(e) {
-    callback(null, failure({status: false}));
-  }
-};
+}
 ```
 
 This follows exactly the same structure as our previous `create.js` function. The major difference here is that we are doing a `dynamoDbLib.call('get', params)` to get a note object given the `noteId` and `userId` that is passed in through the request.
@@ -90,7 +88,7 @@ To test our get note API we need to mock passing in the `noteId` parameter. We a
 And we invoke our newly created function.
 
 ``` bash
-$ serverless webpack invoke --function get --path mocks/get-event.json
+$ serverless invoke local --function get --path mocks/get-event.json
 ```
 
 The response should look similar to this.
