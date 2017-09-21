@@ -1,10 +1,11 @@
 ############################
 # How to generate the PDFs #
 ############################
-# 1. Generate Cover.pdf with latest version date
-# 2. Place Cover.pdf in ~/Downloads folder
-# 3. Ensure "Downloads" folder is an option when "Export to PDF…" in Safari
-# 4. In terminal, run "osascript pdf.scpt"
+# 1. Update cover.html with the new version date
+# 2. Open cover.html in safari and generate Cover.pdf
+# 3. Place Cover.pdf in ~/Downloads folder
+# 4. Ensure "Downloads" folder is an option when "Export to PDF…" in Safari
+# 5. In terminal, run "osascript pdf.scpt"
 
 
 set theChaptersStr to "index
@@ -92,9 +93,9 @@ set theChapters to text items of theChaptersStr
 #################
 # Download PDFs #
 #################
-repeat with theCurrentChapter in theChapters
-  downloadPdf(theCurrentChapter)
-end repeat
+#repeat with theCurrentChapter in theChapters
+#  downloadPdf(theCurrentChapter)
+#end repeat
 
 ##############
 # Merge PDFs #
