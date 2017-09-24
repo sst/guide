@@ -11,7 +11,7 @@ To build the backend for our notes app, it makes sense that we first start by th
 
 ### About DynamoDB
 
-Amazon DynamoDB is a fully managed NoSQL database that provides fast and predictable performance with seamless scalability. Similar to other database, DynamoDB stores data in tables. Each table contains multiple items, and each item is composed of one or more attributes.
+Amazon DynamoDB is a fully managed NoSQL database that provides fast and predictable performance with seamless scalability. Similar to other databases, DynamoDB stores data in tables. Each table contains multiple items, and each item is composed of one or more attributes.
 
 ### Create Table
 
