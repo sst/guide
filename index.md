@@ -102,22 +102,19 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
   - [Update the app]({% link _chapters/update-the-app.md %})
   - [Deploy again]({% link _chapters/deploy-again.md %})
 
-### Extra Credit
-
-- [Code Splitting in Create React App]({% link _chapters/code-splitting-in-create-react-app.md %})
-- [Stages]({% link _chapters/stages.md %})
-- [Multiple Credentials]({% link _chapters/multiple-credentials.md %})
-- [Logging]({% link _chapters/logging.md %})
-- [Debugging]({% link _chapters/debugging.md %})
-- [Unit Tests]({% link _chapters/unit-tests.md %})
-- [CloudFormation]({% link _chapters/cloudformation.md %})
-
 ### Conclusion
 
 - [Wrapping up]({% link _chapters/wrapping-up.md %})
 - [Giving back]({% link _chapters/giving-back.md %})
 - [Older Versions]({% link _chapters/older-versions.md %})
 - [Staying up to date]({% link _chapters/staying-up-to-date.md %})
+
+### Extra Credit
+
+- Backend
+  - [API Gateway and Lambda Logs]({% link _chapters/api-gateway-and-lambda-logs.md %})
+- Frontend
+  - [Code Splitting in Create React App]({% link _chapters/code-splitting-in-create-react-app.md %})
 
 <hr class="tools" />
 
