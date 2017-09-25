@@ -31,57 +31,57 @@ This is a two step process. First, we need to create an IAM role that allows API
 
 First, log in to your [AWS Console](https://console.aws.amazon.com) and select IAM from the list of services.
 
-![Select IAM Service Screenshot]({{ site.url }}/assets/logging/select-iam-service.png)
+![Select IAM Service Screenshot](/assets/logging/select-iam-service.png)
 
 Select **Roles** on the left menu.
 
-![Select IAM Roles Screenshot]({{ site.url }}/assets/logging/select-iam-roles.png)
+![Select IAM Roles Screenshot](/assets/logging/select-iam-roles.png)
 
 Select **Create Role**.
 
-![Select Create IAM Role Screenshot]({{ site.url }}/assets/logging/select-create-iam-role.png)
+![Select Create IAM Role Screenshot](/assets/logging/select-create-iam-role.png)
 
 Under **AWS service**, select **API Gateway**.
 
-![Select API Gateway IAM Role Screenshot]({{ site.url }}/assets/logging/select-api-gateway-iam-role.png)
+![Select API Gateway IAM Role Screenshot](/assets/logging/select-api-gateway-iam-role.png)
 
 Click **Next: Permissions**.
 
-![Select IAM Role Attach Permissions Screenshot]({{ site.url }}/assets/logging/select-iam-role-attach-permissions.png)
+![Select IAM Role Attach Permissions Screenshot](/assets/logging/select-iam-role-attach-permissions.png)
 
 Click **Next: Review**.
 
-![Select Review IAM Role Screenshot]({{ site.url }}/assets/logging/select-review-iam-role.png)
+![Select Review IAM Role Screenshot](/assets/logging/select-review-iam-role.png)
 
 Enter a **Role name** and select **Create role**. In our case, we called our role `APIGatewayCloudWatchLogs`.
 
-![Fill in IAM Role Info Screenshot]({{ site.url }}/assets/logging/fill-in-iam-role-info.png)
+![Fill in IAM Role Info Screenshot](/assets/logging/fill-in-iam-role-info.png)
 
 Click on the role we just created.
 
-![Select Created API Gateway IAM Role Screenshot]({{ site.url }}/assets/logging/select-created-api-gateway-iam-role.png)
+![Select Created API Gateway IAM Role Screenshot](/assets/logging/select-created-api-gateway-iam-role.png)
 
 Take a note of the **Role ARN**. We will be needing this soon.
 
-![IAM Role ARN Screenshot]({{ site.url }}/assets/logging/iam-role-arn.png)
+![IAM Role ARN Screenshot](/assets/logging/iam-role-arn.png)
 
 Now that we have created our IAM role, let's turn on logging for our API Gateway project.
 
 Go back to your [AWS Console](https://console.aws.amazon.com) and select API Gateway from the list of services.
 
-![Select API Gateway Service Screenshot]({{ site.url }}/assets/logging/select-api-gateway-service.png)
+![Select API Gateway Service Screenshot](/assets/logging/select-api-gateway-service.png)
 
 Select **Settings** from the left panel.
 
-![Select API Gateway Settings Screenshot]({{ site.url }}/assets/logging/select-api-gateway-settings.png)
+![Select API Gateway Settings Screenshot](/assets/logging/select-api-gateway-settings.png)
 
 Enter the ARN of the IAM role we just created in the **CloudWatch log role ARN** field and hit **Save**.
 
-![Fill in API Gateway CloudWatch Info Screenshot]({{ site.url }}/assets/logging/fill-in-api-gateway-cloudwatch-info.png)
+![Fill in API Gateway CloudWatch Info Screenshot](/assets/logging/fill-in-api-gateway-cloudwatch-info.png)
 
 Select your API project from the left panel, select **Stages**, then pick the stage you want to enable logging for. For the case of our [Notes App API]({{ site.backend_github_repo }}), we deployed to the `prod` stage.
 
-![Select API Gateway Stage Screenshot]({{ site.url }}/assets/logging/select-api-gateway-stage.png)
+![Select API Gateway Stage Screenshot](/assets/logging/select-api-gateway-stage.png)
 
 In the **Settings** tab:
 
@@ -90,11 +90,11 @@ In the **Settings** tab:
 - Check **Log full requests/responses data** to include entire request and response body in the log.
 - Check **Enable Detailed CloudWatch Metrics** to track latencies and errors in CloudWatch metrics.
 
-![Fill in API Gateway Logging Info Screenshot]({{ site.url }}/assets/logging/fill-in-api-gateway-logging-info.png)
+![Fill in API Gateway Logging Info Screenshot](/assets/logging/fill-in-api-gateway-logging-info.png)
 
 Scroll to the bottom of the page and click **Save Changes**.
 
-![Update API Gateway Logging Screenshot]({{ site.url }}/assets/logging/update-api-gateway-logging.png)
+![Update API Gateway Logging Screenshot](/assets/logging/update-api-gateway-logging.png)
 
 Now our API Gateway requests should be logged via CloudWatch.
 
@@ -117,23 +117,23 @@ CloudWatch groups log entries into **Log Groups** and then further into **Log St
 
 To view API Gateway logs, log in to your [AWS Console](https://console.aws.amazon.com) and select CloudWatch from the list of services.
 
-![Select CloudWatch Service Screenshot]({{ site.url }}/assets/logging/select-cloudwatch-service.png)
+![Select CloudWatch Service Screenshot](/assets/logging/select-cloudwatch-service.png)
 
 Select **Logs** from the left panel.
 
-![Select CloudWatch Logs Screenshot]({{ site.url }}/assets/logging/select-cloudwatch-logs.png)
+![Select CloudWatch Logs Screenshot](/assets/logging/select-cloudwatch-logs.png)
 
 Select the log group prefixed with **API-Gateway-Execution-Logs_** followed by the API Gateway id.
 
-![Select CloudWatch API Gateway Log Group Screenshot]({{ site.url }}/assets/logging/select-cloudwatch-api-gateway-log-group.png)
+![Select CloudWatch API Gateway Log Group Screenshot](/assets/logging/select-cloudwatch-api-gateway-log-group.png)
 
 You should see 300 log streams ordered by the last event time. This is the last time a request was recorded. Select the first stream.
 
-![Select CloudWatch API Gateway Log Stream Screenshot]({{ site.url }}/assets/logging/select-cloudwatch-api-gateway-log-stream.png)
+![Select CloudWatch API Gateway Log Stream Screenshot](/assets/logging/select-cloudwatch-api-gateway-log-stream.png)
 
 This shows you the log entries grouped by request.
 
-![CloudWatch API Gateway Log Entries Screenshot]({{ site.url }}/assets/logging/cloudwatch-api-gateway-log-entries.png)
+![CloudWatch API Gateway Log Entries Screenshot](/assets/logging/cloudwatch-api-gateway-log-entries.png)
 
 Note that two consecutive groups of logs are not necessarily two consecutive requests in real time. This is because there might be other requests that are processed in between these two that were picked up by one of the other log streams.
 
@@ -144,15 +144,15 @@ For Lambda, each function has its own log group. And the log stream rotates if a
 
 To view Lambda logs, select **Logs** again from the left panel. Then select the first log group prefixed with **/aws/lambda/** followed by the function name.
 
-![Select CloudWatch Lambda Log Group Screenshot]({{ site.url }}/assets/logging/select-cloudwatch-lambda-log-group.png)
+![Select CloudWatch Lambda Log Group Screenshot](/assets/logging/select-cloudwatch-lambda-log-group.png)
 
 Select the first stream.
 
-![Select CloudWatch Lambda Log Stream Screenshot]({{ site.url }}/assets/logging/select-cloudwatch-lambda-log-stream.png)
+![Select CloudWatch Lambda Log Stream Screenshot](/assets/logging/select-cloudwatch-lambda-log-stream.png)
 
 You should see **START**, **END** and **REPORT** with basic execution information for each function invocation. You can also see content logged via `console.log` in your Lambda code.
 
-![CloudWatch Lambda Log Entries Screenshot]({{ site.url }}/assets/logging/cloudwatch-lambda-log-entries.png)
+![CloudWatch Lambda Log Entries Screenshot](/assets/logging/cloudwatch-lambda-log-entries.png)
 
 You can also use the Serverless CLI to view CloudWatch logs for a Lambda function.
 
