@@ -14,7 +14,6 @@
   main .home .extras,
   article > .extras,
   article > .lander-info,
-  article > .post-links,
   article > .post-footer,
   article > .post-closing,
   article header .post-info,
@@ -22,6 +21,9 @@
   article header .post-context
   {
     display: none;
+  }
+  article > .post-links {
+    margin-bottom: $spacing-unit;
   }
   main.page-content {
     padding: 0 !important;
