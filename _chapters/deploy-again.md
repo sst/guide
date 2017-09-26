@@ -30,7 +30,7 @@ $ aws s3 sync build/ s3://YOUR_S3_DEPLOY_BUCKET_NAME
 
 Our changes should be live on S3.
 
-![App updated live on S3 screenshot]({{ site.url }}/assets/app-updated-live-on-s3.png)
+![App updated live on S3 screenshot](/assets/app-updated-live-on-s3.png)
 
 Now to ensure that CloudFront is serving out the updated version of our app, let's invalidate the CloudFront cache.
 
@@ -40,7 +40,7 @@ CloudFront allows you to invalidate objects in the distribution by passing in th
 
 To do this we'll need the **Distribution ID** of **both** of our CloudFront Distributions. You can get it by clicking on the distribution from the list of CloudFront Distributions.
 
-![CloudFront Distributions ID screenshot]({{ site.url }}/assets/cloudfront-distribution-id.png)
+![CloudFront Distributions ID screenshot](/assets/cloudfront-distribution-id.png)
 
 Now we can use the AWS CLI to invalidate the cache of the two distributions. As of writing this, the CloudFront portion of the CLI is in preview and needs to be enabled by running the following. This only needs to be run once and not every time we deploy.
 
@@ -57,11 +57,11 @@ $ aws cloudfront create-invalidation --distribution-id YOUR_WWW_CF_DISTRIBUTION_
 
 This invalidates our distribution for both the www and non-www versions of our domain. If you click on the **Invalidations** tab, you should see your invalidation request being processed.
 
-![CloudFront Invalidation in progress screenshot]({{ site.url }}/assets/cloudfront-invalidation-in-progress.png)
+![CloudFront Invalidation in progress screenshot](/assets/cloudfront-invalidation-in-progress.png)
 
 It can take a few minutes to complete. But once it is done, the updated version of our app should be live.
 
-![App update live screenshot]({{ site.url }}/assets/app-update-live.png)
+![App update live screenshot](/assets/app-update-live.png)
 
 And that’s it! We now have a set of commands we can run to deploy our updates. Let's quickly put them together so we can do it with one command.
 
@@ -69,7 +69,7 @@ And that’s it! We now have a set of commands we can run to deploy our updates.
 
 NPM allows us to add a `deploy` command in our `package.json`.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following in the `scripts` block above `eject` in the `package.json`.
+<img class="code-marker" src="/assets/s.png" />Add the following in the `scripts` block above `eject` in the `package.json`.
 
 ``` coffee
 "predeploy": "npm run build",

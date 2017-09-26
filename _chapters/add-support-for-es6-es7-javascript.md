@@ -15,7 +15,7 @@ In this chapter, we are going to enable ES6/ES7 for AWS Lambda using the Serverl
 
 ### Install Babel and Webpack
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />At the root of the project, run.
+<img class="code-marker" src="/assets/s.png" />At the root of the project, run.
 
 ``` bash
 $ npm install --save-dev \
@@ -33,7 +33,7 @@ $ npm install --save babel-runtime
 
 Most of the above packages are only needed while we are building our project and they won't be deployed to our Lambda functions. We are using the `serverless-webpack` plugin to help trigger the Webpack build when we run our Serverless commands. The `webpack-node-externals` is necessary because we do not want Webpack to bundle our `aws-sdk` module, since it is not compatible.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a file called `webpack.config.js` in the root with the following.
+<img class="code-marker" src="/assets/s.png" />Create a file called `webpack.config.js` in the root with the following.
 
 ``` javascript
 const slsw = require("serverless-webpack");
@@ -61,7 +61,7 @@ module.exports = {
 
 This is the configuration Webpack will use to package our app. The main part of this config is the `entry` attribute that we are automatically generating using the `sls.lib.entries` that is a part of the `serverless-webpack` plugin. This automatically picks up all our handler functions and packages them (we expand on this config at the [end of our guide]({% link _chapters/serverless-es7-service.md %}) to make it a bit more easier to use).
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Next create a file called `.babelrc` in the root with the following.
+<img class="code-marker" src="/assets/s.png" />Next create a file called `.babelrc` in the root with the following.
 
 ``` json
 {
@@ -72,7 +72,7 @@ This is the configuration Webpack will use to package our app. The main part of 
 
 The presets are telling Babel the type of JavaScript we are going to be using.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open `serverless.yml` and replace it with the following.
+<img class="code-marker" src="/assets/s.png" />Open `serverless.yml` and replace it with the following.
 
 ``` yaml
 service: notes-app-api

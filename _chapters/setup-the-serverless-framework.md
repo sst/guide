@@ -16,14 +16,14 @@ In this chapter, we are going to set up the Serverless Framework on our local de
 
 ### Install Serverless
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a directory for our API backend.
+<img class="code-marker" src="/assets/s.png" />Create a directory for our API backend.
 
 ``` bash
 $ mkdir notes-app-api
 $ cd notes-app-api
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Install Serverless globally.
+<img class="code-marker" src="/assets/s.png" />Install Serverless globally.
 
 ``` bash
 $ npm install serverless -g
@@ -31,7 +31,7 @@ $ npm install serverless -g
 
 The above command needs [NPM](https://www.npmjs.com), a package manager for JavaScript. Follow [this](https://docs.npmjs.com/getting-started/installing-node) if you need help installing NPM.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />At the root of the project; create an AWS Node.js service.
+<img class="code-marker" src="/assets/s.png" />At the root of the project; create an AWS Node.js service.
 
 ``` bash
 $ serverless create --template aws-nodejs
@@ -49,7 +49,7 @@ handler.js    serverless.yml
 
 ### Install AWS Related Dependencies
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />At the root of the project, run.
+<img class="code-marker" src="/assets/s.png" />At the root of the project, run.
 
 ``` bash
 $ npm init -y
@@ -57,7 +57,7 @@ $ npm init -y
 
 This creates a new Node.js project for you. This will help us manage any dependencies our project might have.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Next, install these two packages.
+<img class="code-marker" src="/assets/s.png" />Next, install these two packages.
 
 ``` bash
 $ npm install aws-sdk --save-dev

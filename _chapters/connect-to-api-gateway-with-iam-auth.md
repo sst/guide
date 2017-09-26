@@ -20,13 +20,13 @@ In our React app we do step 1 by calling the `authUser` method when the App comp
 
 Our authenticated users can get a set of temporary IAM credentials to access the AWS resources that we've previously specified. We can do this using the AWS JS SDK.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Install it by running the following in your project root.
+<img class="code-marker" src="/assets/s.png" />Install it by running the following in your project root.
 
 ``` bash
 $ npm install aws-sdk --save
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's add a helper function in `src/libs/awsLib.js`.
+<img class="code-marker" src="/assets/s.png" />Let's add a helper function in `src/libs/awsLib.js`.
 
 ``` coffee
 function getAwsCredentials(userToken) {
@@ -48,13 +48,13 @@ function getAwsCredentials(userToken) {
 
 This method takes the `userToken` and uses our Cognito User Pool as the authenticator to request a set of temporary credentials.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Also include the **AWS SDK** in our header.
+<img class="code-marker" src="/assets/s.png" />Also include the **AWS SDK** in our header.
 
 ``` javascript
 import AWS from "aws-sdk";
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />To get our AWS credentials we need to add the following to our `src/config.js` in the `cognito` block. Make sure to replace `YOUR_IDENTITY_POOL_ID` with your **Identity pool ID** from the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter and `YOUR_COGNITO_REGION` with the region your Cognito User Pool is in.
+<img class="code-marker" src="/assets/s.png" />To get our AWS credentials we need to add the following to our `src/config.js` in the `cognito` block. Make sure to replace `YOUR_IDENTITY_POOL_ID` with your **Identity pool ID** from the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter and `YOUR_COGNITO_REGION` with the region your Cognito User Pool is in.
 
 ```
 REGION: "YOUR_COGNITO_REGION",
@@ -63,7 +63,7 @@ IDENTITY_POOL_ID: "YOUR_IDENTITY_POOL_ID",
 
 Now let's use the `getAwsCredentials` helper function.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace the `authUser` in `src/libs/awsLib.js` with the following:
+<img class="code-marker" src="/assets/s.png" />Replace the `authUser` in `src/libs/awsLib.js` with the following:
 
 ``` javascript
 export async function authUser() {
@@ -98,13 +98,13 @@ All secure AWS API requests need to be signed using [Signature Version 4](http:/
 
 To create this signature we are going to need the Crypto NPM package.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Install it by running the following in your project root.
+<img class="code-marker" src="/assets/s.png" />Install it by running the following in your project root.
 
 ``` bash
 $ npm install crypto-js --save
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following to `src/libs/sigV4Client.js`.
+<img class="code-marker" src="/assets/s.png" />Add the following to `src/libs/sigV4Client.js`.
 
 ``` javascript
 /*
@@ -410,7 +410,7 @@ Now let's go ahead and invoke API Gateway.
 
 We are going to call the code from above to make our request. Let's write a helper function to do that.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following to `src/libs/awsLib.js`.
+<img class="code-marker" src="/assets/s.png" />Add the following to `src/libs/awsLib.js`.
 
 ``` coffee
 export async function invokeApig({
@@ -459,13 +459,13 @@ export async function invokeApig({
 
 We are simply following the steps to make a signed request to API Gateway here. We first ensure the user is authenticated and we generate their temporary credentials using `authUser`. Then using the `sigV4Client` we sign our request. We then use the signed headers to make a HTTP `fetch` request.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Include the `sigV4Client` by adding this to the header of our file.
+<img class="code-marker" src="/assets/s.png" />Include the `sigV4Client` by adding this to the header of our file.
 
 ``` javascript
 import sigV4Client from "./sigV4Client";
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Also, add the details of our API to `src/config.js` above the `cognito: {` line. Remember to replace `YOUR_API_GATEWAY_URL` and `YOUR_API_GATEWAY_REGION` with the ones from the [Deploy the APIs]({% link _chapters/deploy-the-apis.md %}) chapter.
+<img class="code-marker" src="/assets/s.png" />Also, add the details of our API to `src/config.js` above the `cognito: {` line. Remember to replace `YOUR_API_GATEWAY_URL` and `YOUR_API_GATEWAY_REGION` with the ones from the [Deploy the APIs]({% link _chapters/deploy-the-apis.md %}) chapter.
 
 ```
 apiGateway: {

@@ -11,7 +11,7 @@ Let's make a couple of quick changes to test the process of deploying updates to
 
 We are going to add a Login and Signup button to our lander to give users a clear call to action.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />To do this update our `renderLander` method in `src/containers/Home.js`.
+<img class="code-marker" src="/assets/s.png" />To do this update our `renderLander` method in `src/containers/Home.js`.
 
 ``` coffee
 renderLander() {
@@ -32,13 +32,13 @@ renderLander() {
 }
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />And import the `Link` component from React-Router in the header.
+<img class="code-marker" src="/assets/s.png" />And import the `Link` component from React-Router in the header.
 
 ``` javascript
 import { Link } from "react-router-dom";
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Also, add a couple of styles to `src/containers/Home.css`.
+<img class="code-marker" src="/assets/s.png" />Also, add a couple of styles to `src/containers/Home.css`.
 
 ``` css
 .Home .lander div {
@@ -51,6 +51,6 @@ import { Link } from "react-router-dom";
 
 And our lander should look something like this.
 
-![App updated lander screenshot]({{ site.url }}/assets/app-updated-lander.png)
+![App updated lander screenshot](/assets/app-updated-lander.png)
 
 Next, let's deploy these updates.

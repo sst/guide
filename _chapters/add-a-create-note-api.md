@@ -14,7 +14,7 @@ Let's get started on our backend by first adding an API to create a note. This A
 
 Let's add our first function.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new file called `create.js` in our project root with the following.
+<img class="code-marker" src="/assets/s.png" />Create a new file called `create.js` in our project root with the following.
 
 ``` javascript
 import uuid from "uuid";
@@ -89,7 +89,7 @@ There are some helpful comments in the code but we are doing a few simple things
 
 Now let's define the API endpoint for our function.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `serverless.yml` file and replace it with the following.
+<img class="code-marker" src="/assets/s.png" />Open the `serverless.yml` file and replace it with the following.
 
 ``` yaml
 service: notes-app-api
@@ -145,14 +145,14 @@ Here we are adding our newly added create function to the configuration. We spec
 
 Now we are ready to test our new API. To be able to test it on our local we are going to mock the input parameters.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />In our project root, create a `mocks/` directory.
+<img class="code-marker" src="/assets/s.png" />In our project root, create a `mocks/` directory.
 
 ``` bash
 $ mkdir mocks
 $ cd mocks
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a `mocks/create-event.json` file and add the following.
+<img class="code-marker" src="/assets/s.png" />Create a `mocks/create-event.json` file and add the following.
 
 ``` json
 {
@@ -192,14 +192,14 @@ Make a note of the `noteId` in the response. We are going to use this newly crea
 
 Before we move on to the next chapter, let's quickly refactor the code since we are going to be doing much of the same for all of our APIs.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />In our project root, create a `libs/` directory.
+<img class="code-marker" src="/assets/s.png" />In our project root, create a `libs/` directory.
 
 ``` bash
 $ mkdir libs
 $ cd libs
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />And create a `libs/response-lib.js` file. 
+<img class="code-marker" src="/assets/s.png" />And create a `libs/response-lib.js` file.
 
 ``` javascript
 export function success(body) {
@@ -224,7 +224,7 @@ function buildResponse(statusCode, body) {
 
 This will manage building the response objects for both success and failure cases with the proper HTTP status code and headers.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Again inside `libs/`, create a `dynamodb-lib.js` file.
+<img class="code-marker" src="/assets/s.png" />Again inside `libs/`, create a `dynamodb-lib.js` file.
 
 ``` javascript
 import AWS from "aws-sdk";
@@ -240,7 +240,7 @@ export function call(action, params) {
 
 Here we are using the promise form of the DynamoDB methods. Promises are a method for managing asynchronous code that serve as an alternative to the standard callback function syntax. It will make our code a lot easier to read.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Now, we'll go back to our `create.js` and use the helper functions we created. Our `create.js` should now look like the following.
+<img class="code-marker" src="/assets/s.png" />Now, we'll go back to our `create.js` and use the helper functions we created. Our `create.js` should now look like the following.
 
 ``` javascript
 import uuid from "uuid";

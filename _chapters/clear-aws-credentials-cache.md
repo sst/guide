@@ -12,7 +12,7 @@ To be able to upload our files to S3 we needed to get the AWS credentials first.
 
 But we need to make sure that we clear out those credentials when we logout. If we don't, the next user that logs in on the same browser, might end up with the incorrect credentials.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />To do that let's replace the `signOutUser` method in our `src/libs/awsLib.js` with this:
+<img class="code-marker" src="/assets/s.png" />To do that let's replace the `signOutUser` method in our `src/libs/awsLib.js` with this:
 
 ``` javascript
 export function signOutUser() {

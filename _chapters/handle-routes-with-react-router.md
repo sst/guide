@@ -15,7 +15,7 @@ Let's start by installing React Router. We are going to be using the React Route
 
 ### Installing React Router v4
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Run the following command in your working directory.
+<img class="code-marker" src="/assets/s.png" />Run the following command in your working directory.
 
 ``` bash
 $ npm install react-router-dom --save
@@ -27,7 +27,7 @@ This installs the NPM package and adds the dependency to your `package.json`.
 
 Even though we don't have any routes set up in our app, we can get the basic structure up and running. Our app currently runs from the `App` component in `src/App.js`. We are going to be using this component as the container for our entire app. To do that we'll encapsulate our `App` component within a `Router`.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace code in `src/index.js` with the following.
+<img class="code-marker" src="/assets/s.png" />Replace code in `src/index.js` with the following.
 
 ``` coffee
 import React from "react";
