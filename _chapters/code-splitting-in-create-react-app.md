@@ -49,7 +49,7 @@ However, we import all of the components in the route statically at the top. Thi
 
 To do this we are going to dynamically import the required component.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following to `src/components/AsyncComponent.js`.
+<img class="code-marker" src="/assets/s.png" />Add the following to `src/components/AsyncComponent.js`.
 
 ``` coffee
 import React, { Component } from 'react';
@@ -120,7 +120,7 @@ We are then going to use the `AsyncHome` component in our routes. React Router w
 
 Now let's go back to our Notes project and apply these changes.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Your `src/Routes.js` should look like this after the changes.
+<img class="code-marker" src="/assets/s.png" />Your `src/Routes.js` should look like this after the changes.
 
 ``` coffee
 import React from 'react';
@@ -183,13 +183,13 @@ Notice that instead of doing the static imports for all the containers at the to
 
 Now if you build your app using `npm run build`; you'll see the code splitting in action.
 
-![Create React App Code Splitting build screenshot]({{ site.url }}/assets/create-react-app-code-splitting-build.png)
+![Create React App Code Splitting build screenshot](/assets/create-react-app-code-splitting-build.png)
 
 Each of those `.chunk.js` files are the different dynamic `import()` calls that we have.  Of course, our app is quite small and the various parts that are split up are not significant at all. However, if the page that we use to edit our note included a rich text editor; you can imagine how that would grow in size. And it would unfortunately affect the initial load time of our app.
 
 Now if we deploy our app using `npm run deploy`; you can see the browser load the different chunks on-demand as we browse around in the [demo](https://demo.serverless-stack.com). 
 
-![Create React App loading Code Splitting screenshot]({{ site.url }}/assets/create-react-app-loading-code-splitting.png)
+![Create React App loading Code Splitting screenshot](/assets/create-react-app-loading-code-splitting.png)
 
 That's it! With just a few simple changes our app is completely set up to use the code splitting feature that Create React App has.
 

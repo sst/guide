@@ -14,7 +14,7 @@ So let's start by creating the basic form that'll take the user's email (as thei
 
 ### Add the Container
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new file `src/containers/Login.js` and add the following.
+<img class="code-marker" src="/assets/s.png" />Create a new file `src/containers/Login.js` and add the following.
 
 ``` coffee
 import React, { Component } from 'react';
@@ -100,7 +100,7 @@ We are introducing a couple of new concepts in this.
 
 6. Finally, we trigger our callback `handleSubmit` when the form is submitted. For now we are simply suppressing the browsers default behavior on submit but we'll do more here later.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's add a couple of styles to this in the file `src/containers/Login.css`.
+<img class="code-marker" src="/assets/s.png" />Let's add a couple of styles to this in the file `src/containers/Login.css`.
 
 ``` css
 @media all and (min-width: 480px) {
@@ -119,13 +119,13 @@ These styles roughly target any non-mobile screen sizes.
 
 ### Add the Route
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Now we link this container up with the rest of our app by adding the following line to `src/Routes.js` below our home `<Route>`.
+<img class="code-marker" src="/assets/s.png" />Now we link this container up with the rest of our app by adding the following line to `src/Routes.js` below our home `<Route>`.
 
 ``` coffee
 <Route path="/login" exact component={Login} />
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />And include our component in the header.
+<img class="code-marker" src="/assets/s.png" />And include our component in the header.
 
 ``` javascript
 import Login from './containers/Login';
@@ -133,6 +133,6 @@ import Login from './containers/Login';
 
 Now if we switch to our browser and navigate to the login page we should see our newly created form.
 
-![Login page added screenshot]({{ site.url }}/assets/login-page-added.png)
+![Login page added screenshot](/assets/login-page-added.png)
 
 Next, let's connect our login form to our AWS Cognito set up.

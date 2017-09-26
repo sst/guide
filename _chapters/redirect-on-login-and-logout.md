@@ -17,19 +17,19 @@ We are going to use the `withRouter` HOC and the `this.props.history.push` metho
 
 ### Redirect to Home on Login
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />To use it in our `src/containers/Login.js`, let's replace the line that exports our component.
+<img class="code-marker" src="/assets/s.png" />To use it in our `src/containers/Login.js`, let's replace the line that exports our component.
 
 ``` javascript
 export default Login;
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />with the following:
+<img class="code-marker" src="/assets/s.png" />with the following:
 
 ``` javascript
 export default withRouter(Login);
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Also, import `withRouter` in the header.
+<img class="code-marker" src="/assets/s.png" />Also, import `withRouter` in the header.
 
 ``` javascript
 import { withRouter } from 'react-router-dom';
@@ -41,7 +41,7 @@ This Higher-Order Component adds the `history` prop to our component. Now we can
 this.props.history.push('/');
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Our updated `handleSubmit` method in `src/containers/Login.js` should look like this:
+<img class="code-marker" src="/assets/s.png" />Our updated `handleSubmit` method in `src/containers/Login.js` should look like this:
 
 ``` javascript
 handleSubmit = async (event) => {
@@ -60,13 +60,13 @@ handleSubmit = async (event) => {
 
 Now if you head over to your browser and try logging in, you should be redirected to the homepage after you've been logged in.
 
-![React Router v4 redirect home after login screenshot]({{ site.url }}/assets/redirect-home-after-login.png)
+![React Router v4 redirect home after login screenshot](/assets/redirect-home-after-login.png)
 
 ### Redirect to Login After Logout
 
 Now we'll do something very similar for the logout process. Since we are already using the `withRouter` HOC for our App component, we can go ahead and add the bit that does the redirect.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following to the bottom of the `handleLogout` method in our `src/App.js`.
+<img class="code-marker" src="/assets/s.png" />Add the following to the bottom of the `handleLogout` method in our `src/App.js`.
 
 ``` coffee
 this.props.history.push('/login');

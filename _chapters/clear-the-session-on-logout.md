@@ -10,7 +10,7 @@ comments_id: 41
 
 Currently we are only removing the user token from our app's state. But when we refresh the page, we load the user token from the browser session, in effect logging them back in.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />To clear the browser session on logout, replace the `handleLogout` method in our `src/App.js` with this:
+<img class="code-marker" src="/assets/s.png" />To clear the browser session on logout, replace the `handleLogout` method in our `src/App.js` with this:
 
 ``` javascript
 handleLogout = (event) => {

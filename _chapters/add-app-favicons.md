@@ -14,29 +14,29 @@ For our example, we are going to start with a simple image and generate the vari
 
 **Right-click to download** the following image.
 
-<img alt="App Icon" width="130" height="130" src="{{ site.url }}/assets/scratch-icon.png" />
+<img alt="App Icon" width="130" height="130" src="/assets/scratch-icon.png" />
 
 To ensure that our icon works for most of our targeted platforms we'll use a service called the [Favicon Generator](http://realfavicongenerator.net).
 
 Click **Select your Favicon picture** to upload our icon.
 
-![Realfavicongenerator.net screenshot]({{ site.url }}/assets/realfavicongenerator.png)
+![Realfavicongenerator.net screenshot](/assets/realfavicongenerator.png)
 
 Once you upload your icon, it'll show you a preview of your icon on various platforms. Scroll down the page and hit the **Generate your Favicons and HTML code** button.
 
-![Realfavicongenerator.net screenshot]({{ site.url }}/assets/realfavicongenerator-generate.png)
+![Realfavicongenerator.net screenshot](/assets/realfavicongenerator-generate.png)
 
 This should generate your favicon package and the accompanying code.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Click **Favicon package** to download the generated favicons. And copy all the files over to your `public/` directory.
+<img class="code-marker" src="/assets/s.png" />Click **Favicon package** to download the generated favicons. And copy all the files over to your `public/` directory.
 
-![Realfavicongenerator.net completed screenshot]({{ site.url }}/assets/realfavicongenerator-completed.png)
+![Realfavicongenerator.net completed screenshot](/assets/realfavicongenerator-completed.png)
 
 To include a file from the `public/` directory in your HTML, Create React App needs the `%PUBLIC_URL%` prefix.
 
 Copy the generated code and add the `%PUBLIC_URL%` prefix to all the URLs. It should look something like the following.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add it to your `public/index.html`.
+<img class="code-marker" src="/assets/s.png" />Add it to your `public/index.html`.
 
 ``` html
 <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png">
@@ -47,7 +47,7 @@ Copy the generated code and add the `%PUBLIC_URL%` prefix to all the URLs. It sh
 <meta name="theme-color" content="#ffffff">
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />And **remove** the following line that references the original favicon.
+<img class="code-marker" src="/assets/s.png" />And **remove** the following line that references the original favicon.
 
 ``` html
 <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">

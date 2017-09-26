@@ -12,7 +12,7 @@ In case you find yourself having problems with a certain step, we want to make s
 - Use the message button on the bottom right of the page to send us your questions.
 - Or send us an [email](mailto:{{ site.email }}) directly.
 
-![Message us button screenshot]({{ site.url }}/assets/message-us-button.png)
+![Message us button screenshot](/assets/message-us-button.png)
 
 Also, this entire guide is hosted on [GitHub](https://github.com/AnomalyInnovations/serverless-stack-com). So you can always:
 

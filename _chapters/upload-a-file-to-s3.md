@@ -20,7 +20,7 @@ We created the `getAwsCredentials` method in the [Connect to API Gateway with IA
 
 ### Upload to S3
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Append the following in `src/awsLib.js`.
+<img class="code-marker" src="/assets/s.png" />Append the following in `src/awsLib.js`.
 
 ``` coffee
 export async function s3Upload(file, userToken) {
@@ -42,7 +42,7 @@ export async function s3Upload(file, userToken) {
 }
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />And add this to our `src/config.js` above the `apiGateway` block. Make sure to replace `YOUR_S3_UPLOADS_BUCKET_NAME` with the your S3 Bucket name from the [Create an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}) chapter.
+<img class="code-marker" src="/assets/s.png" />And add this to our `src/config.js` above the `apiGateway` block. Make sure to replace `YOUR_S3_UPLOADS_BUCKET_NAME` with the your S3 Bucket name from the [Create an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}) chapter.
 
 ```
 s3: {
@@ -64,7 +64,7 @@ The above method does a couple of things.
 
 Now that we have our upload methods ready, let's call them from the create note method.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace the `handleSubmit` method in `src/containers/NewNote.js` with the following.
+<img class="code-marker" src="/assets/s.png" />Replace the `handleSubmit` method in `src/containers/NewNote.js` with the following.
 
 ``` javascript
 handleSubmit = async (event) => {
@@ -96,7 +96,7 @@ handleSubmit = async (event) => {
 }
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />And make sure to include `s3Upload` in the header by doing this:
+<img class="code-marker" src="/assets/s.png" />And make sure to include `s3Upload` in the header by doing this:
 
 ``` javascript
 import { invokeApig, s3Upload } from '../libs/awsLib';

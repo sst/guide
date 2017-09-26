@@ -12,7 +12,7 @@ To make our login information persist we need to store and load it from the brow
 
 ### Get Current User and Token
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following to your `src/App.js`.
+<img class="code-marker" src="/assets/s.png" />Add the following to your `src/App.js`.
 
 ``` javascript
 getCurrentUser() {
@@ -36,7 +36,7 @@ getUserToken(currentUser) {
 }
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />And include this in it's header:
+<img class="code-marker" src="/assets/s.png" />And include this in it's header:
 
 ``` javascript
 import { CognitoUserPool, } from 'amazon-cognito-identity-js';
@@ -49,7 +49,7 @@ These two methods are pretty self-explanatory. In `getCurrentUser`, we use the C
 
 We want to ensure that when the user refreshes the app, we load the user token from the session. We are going to do this in `componentDidMount`. And since `getUserToken` is going to be called async; we need to ensure that the rest of our app is only ready to go after this has been loaded.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />To do this, let's add a flag to our `src/App.js` state called `isLoadingUserToken`. The initial state in our `constructor` should look like the following.
+<img class="code-marker" src="/assets/s.png" />To do this, let's add a flag to our `src/App.js` state called `isLoadingUserToken`. The initial state in our `constructor` should look like the following.
 
 ``` javascript
 this.state = {
@@ -58,7 +58,7 @@ this.state = {
 };
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Now to load the user token we'll add the following to our `src/App.js`.
+<img class="code-marker" src="/assets/s.png" />Now to load the user token we'll add the following to our `src/App.js`.
 
 ``` javascript
 async componentDidMount() {
@@ -89,7 +89,7 @@ Since loading the user token is an asynchronous process, we want to ensure that 
 
 We'll conditionally render our app based on the `isLoadingUserToken` flag.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Our `render` method in `src/App.js` should be as follows.
+<img class="code-marker" src="/assets/s.png" />Our `render` method in `src/App.js` should be as follows.
 
 ``` coffee
 render() {
@@ -126,6 +126,6 @@ render() {
 
 Now if you head over to your browser and refresh the page, you should see that a user is logged in.
 
-![Login from session loaded screenshot]({{ site.url }}/assets/login-from-session-loaded.png)
+![Login from session loaded screenshot](/assets/login-from-session-loaded.png)
 
 Unfortunately, when we hit Logout and refresh the page; we are still logged in. To fix this we are going to clear the session on logout next.
