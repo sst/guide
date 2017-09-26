@@ -12,7 +12,7 @@ Our secured pages redirect to the login page when the user is not logged in, wit
 
 Let's start by adding a method to read the `redirect` URL from the querystring.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following method to your `src/components/UnauthenticatedRoute.js` below the imports.
+<img class="code-marker" src="/assets/s.png" />Add the following method to your `src/components/UnauthenticatedRoute.js` below the imports.
 
 ``` javascript
 function querystring(name, url = window.location.href) {
@@ -36,7 +36,7 @@ This method takes the querystring param we want to read and returns it.
 
 Now let's update our `Redirect` component to use this when it redirects.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace our current `export default ({ component: C, props: cProps, ...rest }) => {` method with the following.
+<img class="code-marker" src="/assets/s.png" />Replace our current `export default ({ component: C, props: cProps, ...rest }) => {` method with the following.
 
 ``` coffee
 export default ({ component: C, props: cProps, ...rest }) => {
@@ -55,7 +55,7 @@ export default ({ component: C, props: cProps, ...rest }) => {
 };
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />And remove the following from the `handleSubmit` method in `src/containers/Login.js`.
+<img class="code-marker" src="/assets/s.png" />And remove the following from the `handleSubmit` method in `src/containers/Login.js`.
 
 ``` coffee
 this.props.history.push("/");

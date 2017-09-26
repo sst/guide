@@ -10,7 +10,7 @@ comments_id: 46
 
 Now let's go ahead and implement the `handleSubmit` and `handleConfirmationSubmit` methods and connect it up with our AWS Cognito setup.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace our `handleSubmit` and `handleConfirmationSubmit` methods in `src/containers/Signup.js` with the following.
+<img class="code-marker" src="/assets/s.png" />Replace our `handleSubmit` and `handleConfirmationSubmit` methods in `src/containers/Signup.js` with the following.
 
 ``` javascript
 handleSubmit = async event => {
@@ -97,7 +97,7 @@ authenticate(user, email, password) {
 }
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Also, include the following in our header.
+<img class="code-marker" src="/assets/s.png" />Also, include the following in our header.
 
 ``` javascript
 import {
@@ -125,7 +125,7 @@ The flow here is pretty simple:
 
 Now if you were to switch over to your browser and try signing up for a new account it should redirect you to the homepage after sign up successfully completes.
 
-![Redirect home after signup screenshot]({{ site.url }}/assets/redirect-home-after-signup.png)
+![Redirect home after signup screenshot](/assets/redirect-home-after-signup.png)
 
 A quick note on the signup flow here. If the user refreshes their page at the confirm step, they won't be able to get back and confirm that account. It forces them to create a new account instead. We are keeping things intentionally simple here but you can fix this by creating a separate page that handles the confirm step based on the email address. [Here](http://docs.aws.amazon.com/cognito/latest/developerguide/using-amazon-cognito-user-identity-pools-javascript-examples.html#using-amazon-cognito-identity-user-pools-javascript-example-confirming-user) is some sample code that you can use to confirm an unauthenticated user.
 

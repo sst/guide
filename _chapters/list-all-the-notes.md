@@ -12,7 +12,7 @@ Now that we are able to create a new note. Let's create a page where we can see 
 
 Currently, our Home containers is very simple. Let's add the conditional rendering in there.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace our `src/containers/Home.js` with the following.
+<img class="code-marker" src="/assets/s.png" />Replace our `src/containers/Home.js` with the following.
 
 ``` coffee
 import React, { Component } from "react";
@@ -73,6 +73,6 @@ We are doing a few things of note here:
 
 And that's our basic setup! Head over to the browser and the homepage of our app should render out an empty list.
 
-![Empty homepage loaded screenshot]({{ site.url }}/assets/empty-homepage-loaded.png)
+![Empty homepage loaded screenshot](/assets/empty-homepage-loaded.png)
 
 Next we are going to fill it up with our API.

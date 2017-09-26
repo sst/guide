@@ -11,7 +11,7 @@ In case you find yourself having problems with a certain step, we want to make s
 - Post in the comments detailing your issue and one of us will respond.
 - Or send us an [email](mailto:{{ site.email }}) directly.
 
-![Message us button screenshot]({{ site.url }}/assets/github-issues.png)
+![Message us button screenshot](/assets/github-issues.png)
 
 Also, this entire guide is hosted on [GitHub]({{ site.github_repo }}). So you can always:
 
