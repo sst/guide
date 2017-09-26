@@ -32,31 +32,31 @@ This is a tricky issue to debug because the request still has not reached API Ga
 
 Open [IAM Policy Simulator](https://policysim.aws.amazon.com).
 
-![Open IAM Policy Simulator]({{ site.url }}/assets/debugging/open-iam-policy-simulator.png)
+![Open IAM Policy Simulator](/assets/debugging/open-iam-policy-simulator.png)
 
 Select **Roles**.
 
-![Select IAM Service Simulator Roles]({{ site.url }}/assets/debugging/select-iam-policy-simulator-roles.png)
+![Select IAM Service Simulator Roles](/assets/debugging/select-iam-policy-simulator-roles.png)
 
 Select the IAM role assigned to the Cognito Identity Pool. To look up the name of the IAM role, refer to the [Create a Cognito identity pool](/chapters/create-a-cognito-identity-pool.html) chapter and identify the **Authenticated role** name of the Cognito Identity Pool.
 
-![Select IAM Service Simulator Role]({{ site.url }}/assets/debugging/select-iam-policy-simulator-role.png)
+![Select IAM Service Simulator Role](/assets/debugging/select-iam-policy-simulator-role.png)
 
 Select the **API Gateway** service and the **Invoke** action.
 
-![Select IAM Service Simulator Action]({{ site.url }}/assets/debugging/select-iam-policy-simulator-action.png)
+![Select IAM Service Simulator Action](/assets/debugging/select-iam-policy-simulator-action.png)
 
 Expand the service and enter the API Gateway endpoint ARN, then select **Run Simulation**.
 
-![Enter API Gateway Endpoint ARN]({{ site.url }}/assets/debugging/enter-api-gateway-endpoint-arn.png)
+![Enter API Gateway Endpoint ARN](/assets/debugging/enter-api-gateway-endpoint-arn.png)
 
 You should see **allowed** under **Permission**.
 
-![IAM Service Simulator Permission Allowed]({{ site.url }}/assets/debugging/iam-policy-simulator-permission-allowed.png)
+![IAM Service Simulator Permission Allowed](/assets/debugging/iam-policy-simulator-permission-allowed.png)
 
 In the case permission is not granted, you will see **denied**.
 
-![IAM Service Simulator Permission Denied]({{ site.url }}/assets/debugging/iam-policy-simulator-permission-denied.png)
+![IAM Service Simulator Permission Denied](/assets/debugging/iam-policy-simulator-permission-denied.png)
 
 To grant the permission, recall the [Create a Cognito identity pool](/chapters/create-a-cognito-identity-pool.html) chapter. The IAM policy assigned to the Cognito Identity Pool include
 
