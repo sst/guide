@@ -26,7 +26,7 @@ In serverless applications we are not responsible for handling the requests that
 
 In the AWS world the serverless function is called [AWS Lambda](https://aws.amazon.com/lambda/) and our serverless backend is simply a collection of Lambdas. Here is what a Lambda function looks like.
 
-![Anatomy of a Lambda Function image]({{ site.url }}/assets/anatomy-of-a-lambda-function.png)
+![Anatomy of a Lambda Function image](/assets/anatomy-of-a-lambda-function.png)
 
 Here `myHandler` is the name of our Lambda function. The `event` object contains all the information about the event that triggered this Lambda. In our case it'll be information about the HTTP request. The `context` object contains info about the runtime our Lambda function is executing in. After we do all the work inside our Lambda function, we simply call the `callback` function with the results (or the error) and AWS will respond to the HTTP request with it. 
 

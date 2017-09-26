@@ -11,7 +11,7 @@ comments_id: 58
 
 Let's first create a route that will check if the user is logged in before routing.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following to `src/components/AuthenticatedRoute.js`.
+<img class="code-marker" src="/assets/s.png" />Add the following to `src/components/AuthenticatedRoute.js`.
 
 ``` coffee
 import React from "react";
@@ -34,7 +34,7 @@ This component is similar to the `AppliedRoute` component that we created in the
 
 We'll do something similar to ensure that the user is not authenticated.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following to `src/components/UnauthenticatedRoute.js`.
+<img class="code-marker" src="/assets/s.png" />Add the following to `src/components/UnauthenticatedRoute.js`.
 
 ``` coffee
 import React from "react";

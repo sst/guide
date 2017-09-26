@@ -17,63 +17,63 @@ In this chapter, we are going to create a User Pool for our notes app.
 
 From your [AWS Console](https://console.aws.amazon.com), select **Cognito** from the list of services.
 
-![Select Amazon Cognito Service screenshot]({{ site.url }}/assets/cognito-user-pool/select-cognito-service.png)
+![Select Amazon Cognito Service screenshot](/assets/cognito-user-pool/select-cognito-service.png)
 
 Select **Manage your User Pools**.
 
-![Select Manage Your Cognito User Pools screenshot]({{ site.url }}/assets/cognito-user-pool/select-manage-your-user-pools.png)
+![Select Manage Your Cognito User Pools screenshot](/assets/cognito-user-pool/select-manage-your-user-pools.png)
 
 Select **Create a User Pool**.
 
-![Select Create a Cognito User Pool screenshot]({{ site.url }}/assets/cognito-user-pool/select-create-a-user-pool.png)
+![Select Create a Cognito User Pool screenshot](/assets/cognito-user-pool/select-create-a-user-pool.png)
 
 Enter **Pool name** and select **Review defaults**.
 
-![Fill in Cognito User Pool info screenshot]({{ site.url }}/assets/cognito-user-pool/fill-in-user-pool-info.png)
+![Fill in Cognito User Pool info screenshot](/assets/cognito-user-pool/fill-in-user-pool-info.png)
 
 Select **Choose username attributes...**.
 
-![Choose username attribute screenshot]({{ site.url }}/assets/cognito-user-pool/choose-username-attributes.png)
+![Choose username attribute screenshot](/assets/cognito-user-pool/choose-username-attributes.png)
 
 And select **Email address or phone numbers** and **Allow email addresses**. This is telling Cognito User Pool that we want our users to be able to sign up and login with their email as their username.
 
-![Select email address as username screenshot]({{ site.url }}/assets/cognito-user-pool/select-email-address-as-username.png)
+![Select email address as username screenshot](/assets/cognito-user-pool/select-email-address-as-username.png)
 
 Scroll down and select **Next step**.
 
-![Select attributes next step screenshot]({{ site.url }}/assets/cognito-user-pool/select-next-step-attributes.png)
+![Select attributes next step screenshot](/assets/cognito-user-pool/select-next-step-attributes.png)
 
 Hit **Review** in the side panel and make sure that the **Username attributes** is set to **email**.
 
-![Review User Pool settings screenshot]({{ site.url }}/assets/cognito-user-pool/review-user-pool-settings.png)
+![Review User Pool settings screenshot](/assets/cognito-user-pool/review-user-pool-settings.png)
 
 Now hit **Create pool** at the bottom of the page.
 
-![Select Create pool screenshot]({{ site.url }}/assets/cognito-user-pool/select-create-pool.png)
+![Select Create pool screenshot](/assets/cognito-user-pool/select-create-pool.png)
 
 Now that the User Pool is created. Take a note of the **Pool Id** and **Pool ARN** which will be required later.
 
-![Cognito User Pool Created Screenshot]({{ site.url }}/assets/cognito-user-pool/user-pool-created.png)
+![Cognito User Pool Created Screenshot](/assets/cognito-user-pool/user-pool-created.png)
 
 ### Create App Client
 
 Select **App clients** from the left panel.
 
-![Select Congito User Pool Apps Screenshot]({{ site.url }}/assets/cognito-user-pool/select-user-pool-apps.png)
+![Select Congito User Pool Apps Screenshot](/assets/cognito-user-pool/select-user-pool-apps.png)
 
 Select **Add an app client**.
 
-![Select Add An App Screenshot]({{ site.url }}/assets/cognito-user-pool/select-add-an-app.png)
+![Select Add An App Screenshot](/assets/cognito-user-pool/select-add-an-app.png)
 
 Enter **App client name**, un-select **Generate client secret**, select **Enable sign-in API for server-based authentication**, then select **Create app client**.
 
 - **Generate client secret**: user pool apps with a client secret are not supported by JavaScript SDK. We need to un-select the option.
 - **Enable sign-in API for server-based authentication**: required by AWS CLI when managing the pool users via command line interface. We will be creating a test user through command line interface in the next chapter.
 
-![Fill Cognito User Pool App Info Screenshot]({{ site.url }}/assets/cognito-user-pool/fill-user-pool-app-info.png)
+![Fill Cognito User Pool App Info Screenshot](/assets/cognito-user-pool/fill-user-pool-app-info.png)
 
 Now that the app client is created. Take a note of the **App client id** which will be required in the later chapters.
 
-![Cognito User Pool App Created Screenshot]({{ site.url }}/assets/cognito-user-pool/user-pool-app-created.png)
+![Cognito User Pool App Created Screenshot](/assets/cognito-user-pool/user-pool-app-created.png)
 
 Now our Cognito User Pool is ready. It will maintain a user directory for our notes app. It will also be used to authenticate access to our API. Next let's set up a test user within the pool.

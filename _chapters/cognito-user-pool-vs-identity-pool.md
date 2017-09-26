@@ -31,7 +31,7 @@ Cognito Identity Pool (or Cognito Federated Identities) on the other hand is a w
 
 To clarify this a bit more, let's put these two services in context of each other. Here is how they play together.
 
-![Amazon Cognito User Pool vs Identity Pool screenshot]({{ site.url }}/assets/cognito-user-pool-vs-identity-pool.png)
+![Amazon Cognito User Pool vs Identity Pool screenshot](/assets/cognito-user-pool-vs-identity-pool.png)
 
 Notice how we could use the User Pool, social networks, or even our own custom authentication system as the identity provider for the Cognito Identity Pool. The Cognito Identity Pool simply takes all your identity providers and puts them together (federates them). And with all of this it can now give your users secure access to your AWS services, regardless of where they come from.
 
