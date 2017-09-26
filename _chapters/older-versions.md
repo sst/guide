@@ -12,22 +12,22 @@ While the hosted version of the tutorial and the code snippets are accurate, the
 
 ### Versions
 
-#### [v1.2: Upgrade to Serverless Webpack v3](https://59bc41176f4c5012ed03ed32--serverless-stack.netlify.com) (Current)
+#### [v1.2: Upgrade to Serverless Webpack v3](https://59caac9bcf321c5b78f2c3e2--serverless-stack.netlify.com/) (Current)
 
 - [API]({{ site.backend_github_repo }}/releases/tag/v1.2)
 - [Client]({{ site.frontend_github_repo }}/releases/tag/v1.2) (unchanged)
 
-#### [v1.1: Improved Session Handling](https://59a70f9b0752d02b19c62a85--serverless-stack.netlify.com/)
+#### [v1.1: Improved Session Handling](https://59caae1e6f4c50416e86701d--serverless-stack.netlify.com/)
 
 - [API]({{ site.backend_github_repo }}/releases/tag/v1.1) (unchanged)
 - [Client]({{ site.frontend_github_repo }}/releases/tag/v1.1)
 
-#### [v1.0: IAM as authorizer](https://59a70f2ccf321c2ccb15113f--serverless-stack.netlify.com/)
+#### [v1.0: IAM as authorizer](https://59caae01424ef20727c342ce--serverless-stack.netlify.com/)
 
 - [API]({{ site.backend_github_repo }}/releases/tag/v1.0)
 - [Client]({{ site.frontend_github_repo }}/releases/tag/v1.0)
 
-#### [v0.9: Cognito User Pool as authorizer](https://59a70d98cf321c5b77151144--serverless-stack.netlify.com/)
+#### [v0.9: Cognito User Pool as authorizer](https://59caadbd424ef20abdc342b4--serverless-stack.netlify.com/)
 
 - [API]({{ site.backend_github_repo }}/releases/tag/v0.9)
 - [Client]({{ site.frontend_github_repo }}/releases/tag/v0.9)
