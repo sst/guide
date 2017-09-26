@@ -10,7 +10,7 @@ comments_id: 41
 
 Currently we are only removing the user session from our app's state. But when we refresh the page, we load the user session from the browser Local Storage, in effect logging them back in.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's create a `signOutUser` method and add it to our `src/libs/awsLib.js`.
+<img class="code-marker" src="/assets/s.png" />Let's create a `signOutUser` method and add it to our `src/libs/awsLib.js`.
 
 ``` coffee
 export function signOutUser() {
@@ -24,13 +24,13 @@ export function signOutUser() {
 
 Here we are using the AWS Cognito JS SDK to log the user out by calling `currentUser.signOut()`.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Next we'll include that in our `App` component. Replace the `import { authUser }` line in the header of `src/App.js` with:
+<img class="code-marker" src="/assets/s.png" />Next we'll include that in our `App` component. Replace the `import { authUser }` line in the header of `src/App.js` with:
 
 ``` javascript
 import { authUser, signOutUser } from "./libs/awsLib";
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />And replace the `handleLogout` method in our `src/App.js` with this:
+<img class="code-marker" src="/assets/s.png" />And replace the `handleLogout` method in our `src/App.js` with this:
 
 ``` javascript
 handleLogout = event => {

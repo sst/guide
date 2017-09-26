@@ -10,7 +10,7 @@ comments_id: 35
 
 Now that we have our first route set up, let's add a couple of links to the navbar of our app. These will direct users to login or signup for our app when they first visit it.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace the `render` method in `src/App.js` with the following.
+<img class="code-marker" src="/assets/s.png" />Replace the `render` method in `src/App.js` with the following.
 
 ``` coffee
 render() {
@@ -40,7 +40,7 @@ This adds two links to our navbar using the `NavItem` Bootstrap component. The `
 
 And let's include the necessary components in the header.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace the `react-router-dom` and `react-bootstrap` import in `src/App.js` with this.
+<img class="code-marker" src="/assets/s.png" />Replace the `react-router-dom` and `react-bootstrap` import in `src/App.js` with this.
 
 ``` coffee
 import { Link } from "react-router-dom";
@@ -49,11 +49,11 @@ import { Nav, Navbar, NavItem } from "react-bootstrap";
 
 Now if you flip over to your browser, you should see the two links in our navbar.
 
-![Navbar links added screenshot]({{ site.url }}/assets/navbar-links-added.png)
+![Navbar links added screenshot](/assets/navbar-links-added.png)
 
 Unfortunately, they don't do a whole lot when you click on them. We also need them to highlight when we navigate to that page. To fix this we are going to use a useful feature of the React-Router. We are going to use the `Route` component to detect when we are on a certain page and then render based on it. Since we are going to do this twice, let's make this into a component that can be re-used.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a `src/components/` directory and add the following inside `src/components/RouteNavItem.js`.
+<img class="code-marker" src="/assets/s.png" />Create a `src/components/` directory and add the following inside `src/components/RouteNavItem.js`.
 
 ``` coffee
 import React from "react";
@@ -85,26 +85,26 @@ This is doing a couple of things here:
 
 Now let's use this component.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Import this component in the header of our `src/App.js`.
+<img class="code-marker" src="/assets/s.png" />Import this component in the header of our `src/App.js`.
 
 ``` coffee
 import RouteNavItem from "./components/RouteNavItem";
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />And remove the `NavItem` from the header of `src/App.js`, so that the `react-bootstrap` import looks like this.
+<img class="code-marker" src="/assets/s.png" />And remove the `NavItem` from the header of `src/App.js`, so that the `react-bootstrap` import looks like this.
 
 ``` coffee
 import { Nav, Navbar } from "react-bootstrap";
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Now replace the `NavItem` components in `src/App.js`.
+<img class="code-marker" src="/assets/s.png" />Now replace the `NavItem` components in `src/App.js`.
 
 ``` coffee
 <NavItem href="/signup">Signup</NavItem>
 <NavItem href="/login">Login</NavItem>
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />With the following.
+<img class="code-marker" src="/assets/s.png" />With the following.
 
 ``` coffee
 <RouteNavItem href="/signup">Signup</RouteNavItem>
@@ -113,7 +113,7 @@ import { Nav, Navbar } from "react-bootstrap";
 
 And that's it! Now if you flip over to your browser and click on the login link, you should see the link highlighted in the navbar.
 
-![Navbar link highlighted screenshot]({{ site.url }}/assets/navbar-link-highlighted.png)
+![Navbar link highlighted screenshot](/assets/navbar-link-highlighted.png)
 
 You'll notice that we are not rendering anything on the page because we don't have a login page currently. We should handle the case when a requested page is not found.
 

@@ -10,13 +10,13 @@ comments_id: 48
 
 Now that we know how to connect to API Gateway securely, let's make the API call to create our note.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's include our `awsLib` by adding the following to the header of `src/containers/NewNote.js`.
+<img class="code-marker" src="/assets/s.png" />Let's include our `awsLib` by adding the following to the header of `src/containers/NewNote.js`.
 
 ``` javascript
 import { invokeApig } from "../libs/awsLib";
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />And replace our `handleSubmit` function with the following.
+<img class="code-marker" src="/assets/s.png" />And replace our `handleSubmit` function with the following.
 
 ``` javascript
 handleSubmit = async event => {
@@ -59,6 +59,6 @@ This does a couple of simple things.
 
 And that's it; if you switch over to your browser and try submitting your form, it should successfully navigate over to our homepage.
 
-![New note created screenshot]({{ site.url }}/assets/new-note-created.png)
+![New note created screenshot](/assets/new-note-created.png)
 
 Next let's upload our file to S3 and add an attachment to our note.

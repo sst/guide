@@ -29,10 +29,10 @@ $ aws s3 sync build/ s3://YOUR_S3_DEPLOY_BUCKET_NAME
 
 All this command does is that it syncs the `build/` directory with our bucket on S3. Just as a sanity check, go into the S3 section in your [AWS Console](https://console.aws.amazon.com/console/home) and check if your bucket has the files we just uploaded.
 
-![Uploaded to S3 screenshot]({{ site.url }}/assets/uploaded-to-s3.png)
+![Uploaded to S3 screenshot](/assets/uploaded-to-s3.png)
 
 And our app should be live on S3! If you head over to the URL assigned to you (in my case it is [http://notes-app-client.s3-website-us-east-1.amazonaws.com](http://notes-app-client.s3-website-us-east-1.amazonaws.com)), you should see it live.
 
-![App live on S3 screenshot]({{ site.url }}/assets/app-live-on-s3.png)
+![App live on S3 screenshot](/assets/app-live-on-s3.png)
 
 Next we'll configure CloudFront to serve our app out globally.

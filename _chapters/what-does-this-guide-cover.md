@@ -7,9 +7,9 @@ comments_id: 9
 
 To step through the major concepts involved in building web applications, we are going to be building a simple note taking app called [Scratch](https://demo.serverless-stack.com).
 
-![Completed app desktop screenshot]({{ site.url }}/assets/completed-app-desktop.png)
+![Completed app desktop screenshot](/assets/completed-app-desktop.png)
 
-<img alt="Completed app mobile screenshot" src="{{ site.url }}/assets/completed-app-mobile.png" width="432" />
+<img alt="Completed app mobile screenshot" src="/assets/completed-app-mobile.png" width="432" />
 
 It is a single page application powered by a serverless API written completely in JavaScript. Here is the complete source for the [backend]({{ site.backend_github_repo }}) and the [frontend]({{ site.frontend_github_repo }}). It is a relatively simple application but we are going need to address the following requirements.
 
