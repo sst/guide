@@ -12,7 +12,7 @@ Now that our APIs are complete, let's deploy them.
 
 ### Deploy
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Run the following in your working directory.
+<img class="code-marker" src="/assets/s.png" />Run the following in your working directory.
 
 ``` bash
 $ serverless deploy

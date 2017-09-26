@@ -12,7 +12,7 @@ Finally, we are going to create an API that allows a user to delete a given note
 
 ### Add the Function
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new file `delete.js` and paste the following code
+<img class="code-marker" src="/assets/s.png" />Create a new file `delete.js` and paste the following code
 
 ``` javascript
 import * as dynamoDbLib from './libs/dynamodb-lib';
@@ -44,7 +44,7 @@ This makes a DynamoDB `delete` call with the `userId` & `noteId` key to delete t
 
 ### Configure the API Endpoint
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `serverless.yml` file and append the following to it. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
+<img class="code-marker" src="/assets/s.png" />Open the `serverless.yml` file and append the following to it. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
 
 ``` yaml
   delete:
@@ -65,7 +65,7 @@ This adds a DELETE request handler to the `/notes/{id}` endpoint.
 
 ### Test
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a `mocks/delete-event.json` file and add the following.
+<img class="code-marker" src="/assets/s.png" />Create a `mocks/delete-event.json` file and add the following.
 
 Just like before we'll use the `noteId` of our note in place of the `id` in the `pathParameters` block.
 

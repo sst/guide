@@ -12,7 +12,7 @@ Now let's create an API that allows a user to update a note with a new note obje
 
 ### Add the Function
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new file `update.js` and paste the following code
+<img class="code-marker" src="/assets/s.png" />Create a new file `update.js` and paste the following code
 
 ``` javascript
 import * as dynamoDbLib from './libs/dynamodb-lib';
@@ -53,7 +53,7 @@ This should look similar to the `create.js` function. Here we make an `update` D
 
 ### Configure the API Endpoint
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `serverless.yml` file and append the following to it. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
+<img class="code-marker" src="/assets/s.png" />Open the `serverless.yml` file and append the following to it. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
 
 ``` yaml
   update:
@@ -74,7 +74,7 @@ Here we are adding a handler for the PUT request to the `/notes/{id}` endpoint.
 
 ### Test
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a `mocks/update-event.json` file and add the following.
+<img class="code-marker" src="/assets/s.png" />Create a `mocks/update-event.json` file and add the following.
 
 Also, don't forget to use the `noteId` of the note we have been using in place of the `id` in the `pathParameters` block.
 

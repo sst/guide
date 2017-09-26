@@ -12,7 +12,7 @@ To be able to upload our files to S3 we needed to get the AWS credentials first.
 
 But we need to make sure that we clear out those credentials when we logout. If we don't, the next user that logs in on the same browser, might end up with the incorrect credentials.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />To do that let's add the following lines to the `handleLogout` method in our `src/App.js` above the `this.updateUserToken(null);` line.
+<img class="code-marker" src="/assets/s.png" />To do that let's add the following lines to the `handleLogout` method in our `src/App.js` above the `this.updateUserToken(null);` line.
 
 ``` javascript
 if (AWS.config.credentials) {
@@ -40,7 +40,7 @@ handleLogout = (event) => {
 }
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />And include the **AWS SDK** in the header.
+<img class="code-marker" src="/assets/s.png" />And include the **AWS SDK** in the header.
 
 ``` javascript
 import AWS from 'aws-sdk';

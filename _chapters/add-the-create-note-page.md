@@ -14,7 +14,7 @@ First we are going to create the form for a note. It'll take some content and a 
 
 ### Add the Container
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new file `src/containers/NewNote.js` and add the following.
+<img class="code-marker" src="/assets/s.png" />Create a new file `src/containers/NewNote.js` and add the following.
 
 ``` coffee
 import React, { Component } from 'react';
@@ -103,13 +103,13 @@ Everything is fairly standard here, except for the file input. Our form elements
 
 Currently, our `handleSubmit` does not do a whole lot other than limiting the file size of our attachment. We are going to define this in our config.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />So add the following to our `src/config.js` below the `export default {` line.
+<img class="code-marker" src="/assets/s.png" />So add the following to our `src/config.js` below the `export default {` line.
 
 ```
 MAX_ATTACHMENT_SIZE: 5000000,
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's also add the styles for our form in `src/containers/NewNote.css`.
+<img class="code-marker" src="/assets/s.png" />Let's also add the styles for our form in `src/containers/NewNote.css`.
 
 ``` css
 .NewNote form {
@@ -124,13 +124,13 @@ MAX_ATTACHMENT_SIZE: 5000000,
 
 ### Add the Route
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our signup route. We are using the `AppliedRoute` component that we created in the [Add the user token to the state]({% link _chapters/add-the-user-token-to-the-state.md %}) chapter.
+<img class="code-marker" src="/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our signup route. We are using the `AppliedRoute` component that we created in the [Add the user token to the state]({% link _chapters/add-the-user-token-to-the-state.md %}) chapter.
 
 ``` coffee
 <AppliedRoute path="/notes/new" exact component={NewNote} props={childProps} />
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />And include our component in the header.
+<img class="code-marker" src="/assets/s.png" />And include our component in the header.
 
 ``` javascript
 import NewNote from './containers/NewNote';
@@ -138,6 +138,6 @@ import NewNote from './containers/NewNote';
 
 Now if we switch to our browser and navigate `http://localhost:3000/notes/new` we should see our newly created form. Try adding some content, uploading a file, and hitting submit to see it in action.
 
-![New note page added screenshot]({{ site.url }}/assets/new-note-page-added.png)
+![New note page added screenshot](/assets/new-note-page-added.png)
 
 Next, let's get into connecting this form to our API.

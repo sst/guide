@@ -12,7 +12,7 @@ Now that we have our basic homepage set up, let's make the API call to render ou
 
 ### Make the Request
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following below the `constructor` block in `src/containers/Home.js`.
+<img class="code-marker" src="/assets/s.png" />Add the following below the `constructor` block in `src/containers/Home.js`.
 
 ``` javascript
 async componentDidMount() {
@@ -38,7 +38,7 @@ notes() {
 }
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />And include our API Gateway Client helper in the header.
+<img class="code-marker" src="/assets/s.png" />And include our API Gateway Client helper in the header.
 
 ``` javascript
 import { invokeApig } from '../libs/awsLib';
@@ -50,7 +50,7 @@ Now let's render the results.
 
 ### Render the List
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Replace our `renderNotesList` placeholder method with the following.
+<img class="code-marker" src="/assets/s.png" />Replace our `renderNotesList` placeholder method with the following.
 
 ``` coffee
 renderNotesList(notes) {
@@ -78,7 +78,7 @@ handleNoteClick = (event) => {
 }
 ```
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />And include the `ListGroupItem` in the header so that our `react-bootstrap` import looks like so.
+<img class="code-marker" src="/assets/s.png" />And include the `ListGroupItem` in the header so that our `react-bootstrap` import looks like so.
 
 ``` javascript
 import {
@@ -96,7 +96,7 @@ The code above does a few things.
 
 3. And `onClick` for each of the list items we navigate to their respective pages.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Let's also add a couple of styles to our `src/containers/Home.css`.
+<img class="code-marker" src="/assets/s.png" />Let's also add a couple of styles to our `src/containers/Home.css`.
 
 ``` css
 .Home .notes h4 {
@@ -114,7 +114,7 @@ The code above does a few things.
 
 Now head over to your browser and you should see your list displayed.
 
-![Homepage list loaded screenshot]({{ site.url }}/assets/homepage-list-loaded.png)
+![Homepage list loaded screenshot](/assets/homepage-list-loaded.png)
 
 And if you click on the links they should take you to their respective pages.
 

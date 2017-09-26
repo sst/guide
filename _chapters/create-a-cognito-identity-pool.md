@@ -17,19 +17,19 @@ In this chapter, we are going to create a federated Cognito identity pool using 
 
 From your [AWS Console](https://console.aws.amazon.com) and select **Cognito** from the list of services.
 
-![Select Cognito Service screenshot]({{ site.url }}/assets/cognito-identity-pool/select-cognito-service.png)
+![Select Cognito Service screenshot](/assets/cognito-identity-pool/select-cognito-service.png)
 
 Select **Manage Federated Identities**.
 
-![Select Manage Federated Identities Screenshot]({{ site.url }}/assets/cognito-identity-pool/select-manage-federated-identities.png)
+![Select Manage Federated Identities Screenshot](/assets/cognito-identity-pool/select-manage-federated-identities.png)
 
 Enter an **Identity pool name**.
 
-![Fill Cognito Identity Pool Info Screenshot]({{ site.url }}/assets/cognito-identity-pool/fill-identity-pool-info.png)
+![Fill Cognito Identity Pool Info Screenshot](/assets/cognito-identity-pool/fill-identity-pool-info.png)
 
 Select **Authentication providers**. Under **Cognito** tab, enter **User Pool ID** and **App Client ID** of the User Pool created in the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter. Select **Create Pool**.
 
-![Fill Authentication Provider Info Screenshot]({{ site.url }}/assets/cognito-identity-pool/fill-authentication-provider-info.png)
+![Fill Authentication Provider Info Screenshot](/assets/cognito-identity-pool/fill-authentication-provider-info.png)
 
 Now we need to specify what AWS resources are accessible for users with temporary credentials obtained from the Cognito Identity Pool.
 
@@ -37,13 +37,13 @@ Select **View Details**. Two **Role Summary** sections are expanded. The top sec
 
 Select **View Policy Document** in the top section. Then select **Edit**.
 
-![Select Edit Policy Document Screenshot]({{ site.url }}/assets/cognito-identity-pool/select-edit-policy-document.png)
+![Select Edit Policy Document Screenshot](/assets/cognito-identity-pool/select-edit-policy-document.png)
 
 It will warn you to read the documentation. Select **Ok** to edit.
 
-![Select Confirm Edit Policy Screenshot]({{ site.url }}/assets/cognito-identity-pool/select-confirm-edit-policy.png)
+![Select Confirm Edit Policy Screenshot](/assets/cognito-identity-pool/select-confirm-edit-policy.png)
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Add the following policy into the editor. Replace `YOUR_S3_UPLOADS_BUCKET_NAME` with the **bucket name** from the [Create an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}) chapter.
+<img class="code-marker" src="/assets/s.png" />Add the following policy into the editor. Replace `YOUR_S3_UPLOADS_BUCKET_NAME` with the **bucket name** from the [Create an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}) chapter.
 
 ``` json
 {
@@ -77,16 +77,16 @@ Note **cognito-identity.amazonaws.com:sub** is the authenticated user's federate
 
 Select **Allow**.
 
-![Submit Cognito Identity Pool Policy Screenshot]({{ site.url }}/assets/cognito-identity-pool/submit-identity-pool-policy.png)
+![Submit Cognito Identity Pool Policy Screenshot](/assets/cognito-identity-pool/submit-identity-pool-policy.png)
 
 Our Cognito Identity Pool should now be created. Let's find out the Identity Pool ID.
 
 Select **Dashboard** from the left panel, then select **Edit identity pool**.
 
-![Cognito Identity Pool Created Screenshot]({{ site.url }}/assets/cognito-identity-pool/identity-pool-created.png)
+![Cognito Identity Pool Created Screenshot](/assets/cognito-identity-pool/identity-pool-created.png)
 
 Take a note of the **Identity pool ID** which will be required in the later chapters.
 
-![Cognito Identity Pool Created Screenshot]({{ site.url }}/assets/cognito-identity-pool/identity-pool-id.png)
+![Cognito Identity Pool Created Screenshot](/assets/cognito-identity-pool/identity-pool-id.png)
 
 Now before we set up the Serverless Framework let's take a deeper look at the Cognito User Pool and Cognito Identity Pool to get a better understanding of how we handle our users.

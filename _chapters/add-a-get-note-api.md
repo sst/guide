@@ -12,7 +12,7 @@ Now that we created a note and saved it to our database. Let's add an API to ret
 
 ### Add the Function
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a new file `get.js` and paste the following code
+<img class="code-marker" src="/assets/s.png" />Create a new file `get.js` and paste the following code
 
 ``` javascript
 import * as dynamoDbLib from './libs/dynamodb-lib';
@@ -50,7 +50,7 @@ This follows exactly the same structure as our previous `create.js` function. Th
 
 ### Configure the API Endpoint
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Open the `serverless.yml` file and append the following to it. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
+<img class="code-marker" src="/assets/s.png" />Open the `serverless.yml` file and append the following to it. Replace `YOUR_USER_POOL_ARN` with the **Pool ARN** from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
 
 ``` yaml
   get:
@@ -73,7 +73,7 @@ This defines our get note API. It adds a GET request handler with the endpoint `
 
 To test our get note API we need to mock passing in the `noteId` parameter. We are going to use the `noteId` of the note we created in the previous chapter and add in a `pathParameters` block to our mock. So it should look similar to the one below. Replace the value of `id` with the id you received when you invoked the previous `create.js` function.
 
-<img class="code-marker" src="{{ site.url }}/assets/s.png" />Create a `mocks/get-event.json` file and add the following.
+<img class="code-marker" src="/assets/s.png" />Create a `mocks/get-event.json` file and add the following.
 
 ``` json
 {
