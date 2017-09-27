@@ -113,6 +113,7 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
 
 - Backend
   - [API Gateway and Lambda Logs]({% link _chapters/api-gateway-and-lambda-logs.md %})
+  - [Debugging Serverless API Issues]({% link _chapters/debugging-serverless-api-issues.md %})
 - Frontend
   - [Code Splitting in Create React App]({% link _chapters/code-splitting-in-create-react-app.md %})
 

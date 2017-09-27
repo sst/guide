@@ -22,8 +22,16 @@ There are 2 types of logs we usually take for granted in a monolithic environmen
 
   Application logs are a file of events that are logged by the web application. It usually contains errors, warnings, and informational events. It could contain everything from unexpected function failures, to key events for understanding how users behave.
 
-In the serverless environment, we have lesser control over the underlying infrastructure, logging is the only way to acquire knowledge on how the application is performing. [Amazon CloudWatch](https://aws.amazon.com/cloudwatch/) is a monitoring service to help you collect and track metrics for your resources. We are going to look at how to enable CloudWatch logging for API Gateway and Lambda. Using the analogy of server logs and application logs, you can roughly think of the API Gateway logs as your server logs and Lambda logs as your application logs.
+In the serverless environment, we have lesser control over the underlying infrastructure, logging is the only way to acquire knowledge on how the application is performing. [Amazon CloudWatch](https://aws.amazon.com/cloudwatch/) is a monitoring service to help you collect and track metrics for your resources. Using the analogy of server logs and application logs, you can roughly think of the API Gateway logs as your server logs and Lambda logs as your application logs.
 
+In the chapter we are going to look to do the following:
+
+- [Enable API Gateway CloudWatch Logs](#enable-api-gateway-cloudwatch-logs)
+- [Enable Lambda CloudWatch Logs](#enable-lambda-cloudwatch-logs)
+- [Viewing API Gateway CloudWatch Logs](#viewing-api-gateway-cloudwatch-logs)
+- [Viewing Lambda CloudWatch Logs](#viewing-lambda-cloudwatch-logs)
+
+Let's get started.
 
 ### Enable API Gateway CloudWatch Logs
 
