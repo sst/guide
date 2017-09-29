@@ -33,7 +33,7 @@ The entire guide is hosted on GitHub and we use [GitHub Issues][GHIssues] for ou
 
 #### Sponsors
 
-If you've found this guide useful or would like to be an official supporter, please consider [sponsoring Serverless Stack on Patreon](https://www.patreon.com/serverless_stack).
+[**Sponsor Serverless Stack on Patreon**](https://www.patreon.com/serverless_stack) if you've found this guide useful or would like to be an official supporter. Thank you!
 
 #### Getting Help
 
