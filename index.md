@@ -117,8 +117,11 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
 - Frontend
   - [Code Splitting in Create React App]({% link _chapters/code-splitting-in-create-react-app.md %})
 
-<hr class="tools" />
-
 ### Tools
 
 - [Serverless ES7 Service]({% link _chapters/serverless-es7-service.md %})
+
+<div class="support-footer">
+  <hr />
+  <a class="button support home" href="{{ site.patreon_url }}">Support us on Patreon</a>
+</div>

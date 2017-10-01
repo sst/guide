@@ -121,13 +121,18 @@ a.button {
   }
 }
 
-a.contact {
+a.contact,
+a.support {
   margin: 2 * $spacing-unit auto $spacing-unit;
   text-align: center;
   padding: 14px 20px;
   width: 200px;
   font-size: 20px;
   display: block;
+
+  &.home {
+    margin-top: 3 * $spacing-unit;
+  }
 }
 
 // Newsletter Form Chrome
