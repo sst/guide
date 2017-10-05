@@ -111,15 +111,18 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
 
 ### Extra Credit
 
-- Backend
+Backend
+
   - [API Gateway and Lambda Logs]({% link _chapters/api-gateway-and-lambda-logs.md %})
   - [Debugging Serverless API Issues]({% link _chapters/debugging-serverless-api-issues.md %})
 
-  - [Environment variables]({% link _chapters/environment-variables.md %})
-  - [Stages in Serverless]({% link _chapters/stages.md %})
+  - [Serverless environment variables]({% link _chapters/serverless-environment-variables.md %})
+  - [Stages in Serverless Framework]({% link _chapters/stages-in-serverless-framework.md %})
 
-  - [Working with multiple AWS profiles]({% link _chapters/multiple-credentials.md %})
-- Frontend
+  - [Configure multiple AWS profiles]({% link _chapters/configure-multiple-aws-profiles.md %})
+
+Frontend
+
   - [Code Splitting in Create React App]({% link _chapters/code-splitting-in-create-react-app.md %})
 
 ### Tools

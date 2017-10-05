@@ -1,5 +1,10 @@
 ---
 layout: post
+title: Configure Multiple AWS Profiles
+description: To use multiple IAM credentials to deploy your Serverless application you need to create a new AWS CLI profile. On local set the default AWS profile using the AWS_PROFILE bash variable. To deploy using your new profile use the "--aws-profile" option for the "serverless deploy" command. Alternatively, you can use the "profile:" setting in your serverless.yml.
+date: 2017-03-21 00:00:00
+context: all
+comments_id: 90
 ---
 
 When we configured our AWS CLI in the [Configure the AWS CLI]({% link _chapters/configure-the-aws-cli.md %}) chapter, we used the `aws configure` command to set the IAM credentials of the AWS account we wanted to use to deploy our serverless application to.
@@ -10,9 +15,9 @@ There are cases where you might have multiple credentials configured in your AWS
 
 In this chapter let's take a look at how you can work with multiple AWS credentials.
 
-### Create a new AWS Profile
+### Create a New AWS Profile
 
-Let's say you want to create a new AWS profile to work with. Follow the steps outlined in the [Create an IAM user]({% link _chapters/create-an-iam-user.md %}) chapter to create an IAM user in another AWS account and take a note of the **Access key ID** and **Secret access key**.
+Let's say you want to create a new AWS profile to work with. Follow the steps outlined in the [Create an IAM User]({% link _chapters/create-an-iam-user.md %}) chapter to create an IAM user in another AWS account and take a note of the **Access key ID** and **Secret access key**.
 
 To configure the new profile in your AWS CLI use:
 
@@ -23,7 +28,7 @@ $ aws configure --profile newAccount
 Where `newAccount` is the name of the new profile you are creating. You can leave the **Default region name** and **Default output format** the way they are.
 
 
-### Set a profile on local
+### Set a Profile on Local
 
 We mentioned how the Serverless Framework uses your AWS profile to deploy your resources on your behalf. But while developing on your local using the `serverless invoke local` command things are a little different.
 
@@ -48,7 +53,7 @@ Where `newAccount` is the profile you want to switch to. Now for the rest of you
 You can read more about this in the AWS Docs [here](http://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html).
 
 
-### Set a profile while deploying
+### Set a Profile While Deploying
 
 Now if we want to deploy using this newly created profile we can use the `--aws-profile` option for the `serverless deploy` command.
 
@@ -72,11 +77,11 @@ provider:
 Note the `profile: newAccount` line here. This is telling Serverless to use the `newAccount` profile while running `serverless deploy`.
 
 
-### Set profiles per stage
+### Set Profiles per Stage
 
 There are cases where you would like to specify a different AWS profile per stage. A common scenario for this is when you have a completely separate staging environment than your production one. Each environment has its own API endpoint, database tables, and more importantly, the IAM policies to secure the environment. A simple yet effective way to achieve this is to keep the environments in separate AWS accounts. [AWS Organizations](https://aws.amazon.com/organizations/) was in fact introduced to help teams to create and manage these accounts and consolidate the usage charges into a single bill.
 
-Let's look at a quick example of how to work with multiple profiles per stage. So following the examples from before, if you wanted to deploy to your production environment, yu would:
+Let's look at a quick example of how to work with multiple profiles per stage. So following the examples from before, if you wanted to deploy to your production environment, you would:
 
 ``` bash
 $ serverless deploy --stage prod --aws-profile prodAccount
@@ -104,16 +109,16 @@ custom:
 provider:
   name: aws
   stage: dev
-  profile: ${self:custom.myProfile.${self.custom.myStage}}
+  profile: ${self:custom.myProfile.${self:custom.myStage}}
 ```
 
 There are a couple of things happening here.
 
-- We first defined `custom.myStage` as `${opt:stage, self:provider.stage}`. This is telling Serverless Framework to use the calue from the `--stage` CLI option if it exists. If not, use the default stage specified in `provider.stage`.
+- We first defined `custom.myStage` as `${opt:stage, self:provider.stage}`. This is telling Serverless Framework to use the value from the `--stage` CLI option if it exists. If not, use the default stage specified in `provider.stage`.
 - We also defined `custom.myProfile`, which contains the AWS profiles we want to use to deploy for each stage. Just as before we want to use the `prodAccount` profile if we are deploying to stage `prod` and the `devAccount` profile if we are deploying to stage `dev`.
-- Finally, we set the `provider.profile` to `${self:custom.myProfile.${self.custom.myStage}}`. This picks the value of our profile depending on the current stage defined in `custom.myStage`.
+- Finally, we set the `provider.profile` to `${self:custom.myProfile.${self:custom.myStage}}`. This picks the value of our profile depending on the current stage defined in `custom.myStage`.
 
-We used the concept of variables in Serverless Framework in this example. You can read more about this in the chapter on [environment variables](XXXXXXXXXXXXXXXXXXXX).
+We used the concept of variables in Serverless Framework in this example. You can read more about this in the chapter on [Serverless Environment Variables]({% link _chapters/serverless-environment-variables.md %}).
 
 Now, when you deploy to production, Serverless Framework is going to use the `prodAccount` profile. And the resources will be provisioned inside `prodAccount` profile user's AWS account.
 
@@ -127,4 +132,4 @@ And when you deploy to staging, the exact same set of AWS resources will be prov
 $ serverless deploy --stage dev
 ```
 
-Notice that we did not have to set the `--aws-profile` option.  
+Notice that we did not have to set the `--aws-profile` option. And that's it, this should give you a good understanding of how to work with multiple AWS profiles and credentials.
