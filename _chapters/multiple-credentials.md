@@ -32,7 +32,15 @@ In this case your Lambda function is run locally and has not been deployed yet. 
 To switch the default AWS profile to a new profile for the `serverless invoke local` command, you can run the following:
 
 ``` bash
-export AWS_PROFILE=newAccount
+$ AWS_PROFILE=newAccount serverless invoke local --function hello
+```
+
+Here `newAccount` is the name of the profile you want to switch to and `hello` is the name of the function that is being invoked locally. By adding `AWS_PROFILE=newAccount` at the beginning of our `serverless invoke local` command we are setting the variable that the AWS SDK will use to figure out what your default AWS profile is.
+
+If you want to set this so that you don't add it to each of your commands, you can use the following command:
+
+``` bash
+$ export AWS_PROFILE=newAccount
 ```
 
 Where `newAccount` is the profile you want to switch to. Now for the rest of your shell session, `newAccount` will be your default profile.
@@ -77,10 +85,10 @@ $ serverless deploy --stage prod --aws-profile prodAccount
 And to deploy to the staging environment you would:
 
 ``` bash
-$ serverless deploy --stage staging --aws-profile stagingAccount
+$ serverless deploy --stage dev --aws-profile devAccount
 ```
 
-Here, `prodAccount` and `stagingAccount` are the AWS profiles for the production and staging environment respectively.
+Here, `prodAccount` and `devAccount` are the AWS profiles for the production and staging environment respectively.
 
 To simplify this process you can add the profiles to your `serverless.yml`. So you don't have to specify them in your `serverless deploy` commands.
 
@@ -91,19 +99,21 @@ custom:
   myStage: ${opt:stage, self:provider.stage}
   myProfile:
     prod: prodAccount
-    staging: stagingAccount
+    dev: devAccount
 
 provider:
   name: aws
-  stage: staging
+  stage: dev
   profile: ${self:custom.myProfile.${self.custom.myStage}}
 ```
 
 There are a couple of things happening here.
 
 - We first defined `custom.myStage` as `${opt:stage, self:provider.stage}`. This is telling Serverless Framework to use the calue from the `--stage` CLI option if it exists. If not, use the default stage specified in `provider.stage`.
-- We also defined `custom.myProfile`, which contains the AWS profiles we want to use to deploy for each stage. Just as before we want to use the `prodAccount` profile if we are deploying to stage `prod` and the `stagingAccount` profile if we are deploying to stage `staging`.
+- We also defined `custom.myProfile`, which contains the AWS profiles we want to use to deploy for each stage. Just as before we want to use the `prodAccount` profile if we are deploying to stage `prod` and the `devAccount` profile if we are deploying to stage `dev`.
 - Finally, we set the `provider.profile` to `${self:custom.myProfile.${self.custom.myStage}}`. This picks the value of our profile depending on the current stage defined in `custom.myStage`.
+
+We used the concept of variables in Serverless Framework in this example. You can read more about this in the chapter on [environment variables](XXXXXXXXXXXXXXXXXXXX).
 
 Now, when you deploy to production, Serverless Framework is going to use the `prodAccount` profile. And the resources will be provisioned inside `prodAccount` profile user's AWS account.
 
@@ -111,10 +121,10 @@ Now, when you deploy to production, Serverless Framework is going to use the `pr
 $ serverless deploy --stage prod
 ```
 
-And when you deploy to staging, the exact same set of AWS resources will be provisioned inside `stagingAccount` profile user's AWS account.
+And when you deploy to staging, the exact same set of AWS resources will be provisioned inside `devAccount` profile user's AWS account.
 
 ``` bash
-$ serverless deploy --stage staging
+$ serverless deploy --stage dev
 ```
 
 Notice that we did not have to set the `--aws-profile` option.  
