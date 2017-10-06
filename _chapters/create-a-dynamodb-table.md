@@ -36,9 +36,15 @@ We are going to use the composite primary key which gives us additional flexibil
 
 To get a further understanding on how indexes work in DynamoDB, you can read more here [DynamoDB Core Components][dynamodb-components].
 
-Ensure **Use default settings** is checked, then select **Create**.
+If you see the following message, deselect **Use default settings**.
+
+![Auto Scaling IAM Role Warning screenshot](/assets/dynamodb/auto-scaling-iam-role-warning.png)
+
+Scroll to the bottom, ensure that **New role: DynamoDBAutoscaleRole** is selected, and select **Create**.
 
 ![Set Table Provisioned Capacity screenshot](/assets/dynamodb/set-table-provisioned-capacity.png)
+
+Otherwise, simply ensure that **Use default settings** is checked, then select **Create**.
 
 Note that the default setting provisions 5 reads and 5 writes. When you create a table, you specify how much provisioned throughput capacity you want to reserve for reads and writes. DynamoDB will reserve the necessary resources to meet your throughput needs while ensuring consistent, low-latency performance. One read capacity unit can read up to 8 KB per second and one write capacity unit can write up to 1 KB per second. You can change your provisioned throughput settings, increasing or decreasing capacity as needed.
 
