@@ -9,10 +9,9 @@
             {{ site.title | escape }}
           </li>
           <li><a class="page-link" href="/#table-of-contents">Table of Contents</a></li>
-          {% if site.github_repo %}
-          <li><a class="email-link" href="{% link about.md %}">About Us</a></li>
-          {% endif %}
-          <li><a class="email-link" href="{{ site.github_repo }}">GitHub</a></li>
+          <li><a class="page-link" href="{% link about.md %}">About us</a></li>
+          <li><a class="page-link" href="{% link sponsors.md %}">Sponsors</a></li>
+          <li><a class="page-link" href="{{ site.github_repo }}">GitHub</a></li>
           {% if site.email %}
           <li><a class="email-link" href="mailto:{{ site.email }}">Email</a></li>
           {% endif %}

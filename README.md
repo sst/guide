@@ -31,6 +31,10 @@ The entire guide is hosted on GitHub and we use [GitHub Issues][GHIssues] for ou
 - Keep the content accurate and up to date
 - Help people resolve their issues
 
+#### Sponsors
+
+[**Sponsor Serverless Stack on Patreon**](https://www.patreon.com/serverless_stack) if you've found this guide useful or would like to be an official supporter. Thank you!
+
 #### Getting Help
 
 - If you are running into issues with a specific chapter, post in the comments for that [chapter][GHIssues].

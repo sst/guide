@@ -121,13 +121,18 @@ a.button {
   }
 }
 
-a.contact {
+a.contact,
+a.support {
   margin: 2 * $spacing-unit auto $spacing-unit;
   text-align: center;
-  padding: 14px 0;
-  width: 230px;
+  padding: 14px 20px;
+  width: 200px;
   font-size: 20px;
   display: block;
+
+  &.home {
+    margin-top: 3 * $spacing-unit;
+  }
 }
 
 // Newsletter Form Chrome
@@ -381,6 +386,7 @@ hr.tools {
   margin: $spacing-unit 0;
 }
 
+div.home .sponsors,
 div.home .about-us {
   font-size: 36px;
   letter-spacing: -1px;

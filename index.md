@@ -102,10 +102,6 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
   - [Update the app]({% link _chapters/update-the-app.md %})
   - [Deploy again]({% link _chapters/deploy-again.md %})
 
-### Extra Credit
-
-- [Code Splitting in Create React App]({% link _chapters/code-splitting-in-create-react-app.md %})
-
 ### Conclusion
 
 - [Wrapping up]({% link _chapters/wrapping-up.md %})
@@ -113,8 +109,27 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
 - [Older Versions]({% link _chapters/older-versions.md %})
 - [Staying up to date]({% link _chapters/staying-up-to-date.md %})
 
-<hr class="tools" />
+### Extra Credit
+
+Backend
+
+  - [API Gateway and Lambda Logs]({% link _chapters/api-gateway-and-lambda-logs.md %})
+  - [Debugging Serverless API Issues]({% link _chapters/debugging-serverless-api-issues.md %})
+
+  - [Serverless environment variables]({% link _chapters/serverless-environment-variables.md %})
+  - [Stages in Serverless Framework]({% link _chapters/stages-in-serverless-framework.md %})
+
+  - [Configure multiple AWS profiles]({% link _chapters/configure-multiple-aws-profiles.md %})
+
+Frontend
+
+  - [Code Splitting in Create React App]({% link _chapters/code-splitting-in-create-react-app.md %})
 
 ### Tools
 
 - [Serverless ES7 Service]({% link _chapters/serverless-es7-service.md %})
+
+<div class="support-footer">
+  <hr />
+  <a class="button support home" href="{{ site.patreon_url }}">Support us on Patreon</a>
+</div>

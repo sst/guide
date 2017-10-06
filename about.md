@@ -7,7 +7,7 @@ description: Serverless Stack is an open source guide brought to you by Frank Wa
 {: .about-us }
 ## About Us
 
-[Serverless Stack](/) is an open source guide to building and deploying full-stack serverless applications using Serverless and React. It's completely free and the content and comments are hosted on [GitHub](https://github.com/AnomalyInnovations/serverless-stack-com). While working with these technologies we found that very few of the resources out there focussed on full-stack and even if they did they ended up being out of date and possibly inaccurate. By making this guide open source we hope to keep it up to date and accurate with the help of our readers. We also rely on our community to help people resolve their issues while they work through the tutorial.
+[Serverless Stack](/) is an open source guide to building and deploying full-stack serverless applications using Serverless and React. It's completely free and the content and comments are hosted on [GitHub]({{ site.github_repo }}). While working with these technologies we found that very few of the resources out there focussed on full-stack and even if they did they ended up being out of date and possibly inaccurate. By making this guide open source we hope to keep it up to date and accurate with the help of our readers. We also rely on our community to help people resolve their issues while they work through the tutorial.
 
 <p style="text-align: center;"><img src="/assets/team-at-aws-meetup.jpg" alt="Frank and Jay at the AWS Users Group" /></p>
 <p class="about-us-image-desc">Frank and Jay speaking at the AWS Users Group on the Serverless Stack</p>

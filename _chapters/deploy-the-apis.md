@@ -16,6 +16,14 @@ Now that our APIs are complete, let's deploy them.
 $ serverless deploy
 ```
 
+If you have multiple profiles for your AWS SDK credentials, you will need to explicitly pick one. Use the following command instead:
+
+``` bash
+$ serverless deploy --aws-profile myProfile
+```
+
+Where `myProfile` is the name of the AWS profile you want to use. If you need more info on how to work with AWS profiles in Serverless, refer to our [Configure multiple AWS profiles]({% link _chapters/configure-multiple-aws-profiles.md %}) chapter.
+
 Near the bottom of the output for this command, you will find the **Service Information**.
 
 ``` bash
