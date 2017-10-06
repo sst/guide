@@ -1,10 +1,10 @@
 ---
 layout: post
-title: Environment Variables in Serverless
+title: Serverless Environment Variables
 description: To set environment variables for AWS Lambda using the Serverless Framework we need to use the "environment:" option in the serverless.yml. Serverless Framework also allows you to further configure them using custom variables.
 date: 2017-03-20 00:00:00
 context: all
-comments_id: 90
+comments_id: 148
 ---
 
 In Node.js we use the `process.env` to get access to environment variables of the current process. In AWS Lambda, we can set environment variables that we can access via the `process.env` object.

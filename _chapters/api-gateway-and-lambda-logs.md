@@ -4,7 +4,7 @@ title: API Gateway and Lambda Logs
 description: To view logs for your serverless APIs on AWS, CloudWatch needs to be enabled for API Gateway and Lambda. CloudWatch logs are ordered by Log Groups and Log Stream. Lambda CloudWatch logs can also be viewed using the Serverless CLI with the “serverless logs” command.
 date: 2017-03-17 00:00:00
 context: all
-comments_id: 90
+comments_id: 146
 ---
 
 Logging is an essential part of building backends and it is no different for a serverless API. It gives us visibility into how we are processing and responding to incoming requests.
