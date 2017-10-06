@@ -78,7 +78,6 @@ export function main(event, context, callback) {
 There are some helpful comments in the code but we are doing a few simple things here.
 
 - We are setting the AWS JS SDK to use the region `us-east-1` while connecting to DynamoDB.
-- If you have multiple profiles for your AWS SDK credentials, you will need to explicitly pick one. Add the following above the `AWS.config.update` line. `const credentials = new AWS.SharedIniFileCredentials({profile: 'my-profile'}); AWS.config.credentials = credentials;`
 - Parse the input from the `event.body`. This represents the HTTP request parameters.
 - The `userId` is a Federated Identity id that comes in as a part of the request. This is set after our user has been authenticated via the User Pool. We are going to expand more on this in the coming chapters when we set up our Cognito Identity Pool.
 - Make a call to DynamoDB to put a new object with a generated `noteId` and the current date as the `createdAt`.
@@ -172,6 +171,14 @@ And to invoke our function we run the following in the root directory.
 ``` bash
 $ serverless invoke local --function create --path mocks/create-event.json
 ```
+
+If you have multiple profiles for your AWS SDK credentials, you will need to explicitly pick one. Use the following command instead:
+
+``` bash
+$ AWS_PROFILE=myProfile serverless invoke local --function create --path mocks/create-event.json
+```
+
+Where `myProfile` is the name of the AWS profile you want to use. If you need more info on how to work with AWS profiles in Serverless, refer to our [Configure multiple AWS profiles]({% link _chapters/configure-multiple-aws-profiles.md %}) chapter.
 
 The response should look similar to this.
 
