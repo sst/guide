@@ -20,6 +20,5 @@ We are currently working on [**_SEED_**](https://seed.run); a fully-configured c
 
 Over the years we've accumulated a ton of experience on how to build, deploy, and maintain applications on the AWS Platform. The serverless approach has been a giant revelation to us. If we had a chance to go back and do this all over again, there is no doubt we would have taken the serverless approach. The [pros]({% link _chapters/why-create-serverless-apps.md %}) simply outweigh the cons. And while we recognize that it is not for everybody; we wanted to create a resource that makes it easy to learn and get started.
 
-If you have any questions or have any feedback, feel free to get in youch with us.
 
-<a class="button contact" href="mailto:{{ site.email }}">Contact Us</a>
+<a class="button support" target="_blank" href="{{ site.patreon_url }}">Support us on Patreon</a>

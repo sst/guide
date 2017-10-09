@@ -127,7 +127,7 @@ a.support {
   text-align: center;
   padding: 14px 20px;
   width: 200px;
-  font-size: 20px;
+  font-size: 18px;
   display: block;
 
   &.home {
@@ -217,7 +217,7 @@ a.support {
     $width-on-palm: 240px;
     $width: 380px;
 
-    p {
+    form p {
       margin-bottom: 20px;
       display: inline-block;
       font-size: 22px;
@@ -250,6 +250,65 @@ a.support {
         width: $width-on-palm;
         font-size: 16px;
       }
+    }
+  }
+}
+
+div.newsletter div.divider {
+  $width-on-palm: 240px;
+  $width: 380px;
+  $color: lighten($brand-color, 20%);
+
+  margin: $spacing-unit / 2 auto;
+  position: relative;
+  width: $width;
+
+  @include media-query($on-palm) {
+    width: $width-on-palm;
+  }
+
+  div {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    border-top: 1px solid $color;
+  }
+  span {
+    margin: 0;
+    font-size: 12px;
+    padding: 2px 16px;
+    background-color: $brand-color;
+    display: inline-block;
+    position: relative;
+    color: $color;
+  }
+}
+
+div.newsletter div.support {
+  a.button {
+    $width-on-palm: 240px;
+    $width: 380px;
+
+    margin: 0 auto;
+    box-sizing: border-box;
+    border-radius: 4px;
+    line-height: 1.2;
+    background-color: darken($brand-color, 5%);
+    border: 2px solid darken($brand-color, 10%);
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    width: $width;
+    font-size: 18px;
+    display: block;
+
+    @include media-query($on-palm) {
+      width: $width-on-palm;
+    }
+
+    &:hover {
+      background-color: darken($brand-color, 10%);
+      border-color: darken($brand-color, 15%);
     }
   }
 }
