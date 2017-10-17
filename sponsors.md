@@ -22,6 +22,7 @@ Serverless Stack is written and maintained by Frank Wang ([@fanjiewang](https://
 ## Backers
 
 - [Nikos Katsikanis](http://quantumjs.com/)
+- [Andrey Povazhnyi](https://www.tradingview.com)
 
 
 <a class="button support" target="_blank" href="{{ site.patreon_url }}">Support us on Patreon</a>
