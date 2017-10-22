@@ -93,4 +93,4 @@ An IAM group is simply a collection of IAM users. You can use groups to specify 
 
 ![Complete IAM Group, IAM Role, IAM User, and IAM Policy diagram](/assets/iam/complete-iam-concepts.png)
 
-This should give you a quick idea of IAM and some of it's concepts. We will be referring to a few of these in the coming chapters. Next let's quickly look at another AWS concept; the ARN.
+This should give you a quick idea of IAM and some of its concepts. We will be referring to a few of these in the coming chapters. Next let's quickly look at another AWS concept; the ARN.

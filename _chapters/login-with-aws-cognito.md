@@ -8,7 +8,7 @@ code: frontend
 comments_id: 38
 ---
 
-Before we link up our login form with our Amazon Cognito setup let's grab our Cognito details and load it into our application as a part of it's config.
+Before we link up our login form with our Amazon Cognito setup let's grab our Cognito details and load it into our application as a part of its config.
 
 ### Load Cognito Details
 

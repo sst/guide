@@ -59,7 +59,7 @@ The above method does a couple of things.
 
 2. Generates a unique file name prefixed with the `identityId`. This is necessary to secure the files on a per-user basis.
 
-3. Upload the file to S3 and set it's permissions to `public-read` to ensure that we can download it later.
+3. Upload the file to S3 and set its permissions to `public-read` to ensure that we can download it later.
 
 4. And return a Promise object.
 

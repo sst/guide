@@ -30,7 +30,7 @@ Go through the next steps and leave the defaults by clicking **Next**.
 
 ![Create S3 static website Bucket next review screenshot](/assets/create-s3-bucket-next-review.png)
 
-Now click on your newly created bucket from the list and navigate to it's permissions panel by clicking **Permissions**.
+Now click on your newly created bucket from the list and navigate to its permissions panel by clicking **Permissions**.
 
 ![Select AWS S3 static website Bucket permissions screenshot](/assets/select-bucket-permissions.png)
 

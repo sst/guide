@@ -8,7 +8,7 @@ code: backend
 comments_id: 24
 ---
 
-Now that we created a note and saved it to our database. Let's add an API to retrieve a note given it's id.
+Now that we created a note and saved it to our database. Let's add an API to retrieve a note given its id.
 
 ### Add the Function
 

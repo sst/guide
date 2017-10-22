@@ -132,6 +132,18 @@ a.support {
 
   &.home {
     margin-top: 3 * $spacing-unit;
+    margin-bottom: 0;
+  }
+}
+
+div.support-footer {
+  p {
+    text-align: center;
+
+    a {
+      padding-top: 5px;
+      font-size: 14px;
+    }
   }
 }
 

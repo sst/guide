@@ -276,7 +276,7 @@ export async function main(event, context, callback) {
 }
 ```
 
-Next, we are going to write the API to get a note given its' id.
+Next, we are going to write the API to get a note given its id.
 
 ---
 

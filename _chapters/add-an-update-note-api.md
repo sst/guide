@@ -8,7 +8,7 @@ code: backend
 comments_id: 26
 ---
 
-Now let's create an API that allows a user to update a note with a new note object given it's id.
+Now let's create an API that allows a user to update a note with a new note object given its id.
 
 ### Add the Function
 
