@@ -9,7 +9,7 @@ comments_id: 147
 
 In this chapter we are going to take a brief look at some common API Gateway and Lambda issues we come across and how to debug them.
 
-When a request is made to your serverless API, it starts by hitting API Gateway and makes it's way through to Lambda and invokes your function. It takes quite a few hops along the way and each hop can be a point of failure. And since we don't have great visibility over each of the specific hops, pinpointing the issue can be a bit tricky. We are going to take a look at the following issues:
+When a request is made to your serverless API, it starts by hitting API Gateway and makes its way through to Lambda and invokes your function. It takes quite a few hops along the way and each hop can be a point of failure. And since we don't have great visibility over each of the specific hops, pinpointing the issue can be a bit tricky. We are going to take a look at the following issues:
 
 - [Invalid API Endpoint](#invalid-api-endpoint)
 - [Missing IAM Policy](#missing-iam-policy)

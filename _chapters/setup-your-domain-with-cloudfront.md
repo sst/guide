@@ -17,7 +17,7 @@ Type in your domain in the **Register domain** section and click **Check**.
 
 ![Search available domain screenshot](/assets/search-available-domain.png)
 
-After checking it's availability, click **Add to cart**.
+After checking its availability, click **Add to cart**.
 
 ![Add domain to cart screenshot](/assets/add-domain-to-cart.png)
 

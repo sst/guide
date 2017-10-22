@@ -30,7 +30,7 @@ functions:
       SYSTEM_URL: http://example.com/api/v1
 ```
 
-Here `SYSTEM_URL` is the name of the environment variable we are defining and `http://example.com/api/v1` is it's value. We can access this in our `hello` Lambda function using `process.env.SYSTEM_URL`, like so:
+Here `SYSTEM_URL` is the name of the environment variable we are defining and `http://example.com/api/v1` is its value. We can access this in our `hello` Lambda function using `process.env.SYSTEM_URL`, like so:
 
 ``` javascript
 export function hello(event, context, callback) {

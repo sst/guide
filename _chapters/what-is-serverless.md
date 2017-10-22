@@ -10,7 +10,7 @@ Traditionally, we've built and deployed web applications where we have some degr
 
 1. We are charged for keeping the server up even when we are not serving out any requests.
 
-2. We are responsible for uptime and maintenance of the server and all it's resources.
+2. We are responsible for uptime and maintenance of the server and all its resources.
 
 3. We are also responsible for applying the appropriate security updates to the server.
 

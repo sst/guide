@@ -7,7 +7,7 @@ context: all
 comments_id: 86
 ---
 
-In the last chapter while we were looking at IAM policies we looked at how you can specify a resource using it's ARN. Let's take a better look at what ARN is.
+In the last chapter while we were looking at IAM policies we looked at how you can specify a resource using its ARN. Let's take a better look at what ARN is.
 
 Here is the official definition:
 

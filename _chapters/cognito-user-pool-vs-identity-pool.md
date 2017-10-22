@@ -25,7 +25,7 @@ Say you were creating a new web or mobile app and you were thinking about how to
 
 ### Identity Pool
 
-Cognito Identity Pool (or Cognito Federated Identities) on the other hand is a way to authorize your users to use the various AWS services. Say you wanted to allow a user to have access to your S3 bucket so that they could upload a file; you could specify that while creating an Identity Pool. And to create these levels of access, the Identity Pool has it's own concept of an identity (or user). The source of these identities (or users) could be a Cognito User Pool or even Facebook or Google.
+Cognito Identity Pool (or Cognito Federated Identities) on the other hand is a way to authorize your users to use the various AWS services. Say you wanted to allow a user to have access to your S3 bucket so that they could upload a file; you could specify that while creating an Identity Pool. And to create these levels of access, the Identity Pool has its own concept of an identity (or user). The source of these identities (or users) could be a Cognito User Pool or even Facebook or Google.
 
 ### User Pool vs Identity Pool
 

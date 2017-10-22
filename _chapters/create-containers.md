@@ -45,7 +45,7 @@ export default App;
 We are doing a few things here:
 
 1. Creating a fixed width container using Bootstrap in `div.container`.
-2. Adding a Navbar inside the container that fits to it's container's width using the attribute `fluid`.
+2. Adding a Navbar inside the container that fits to its container's width using the attribute `fluid`.
 3. Using `Link` component from the React-Router to handle the link to our app's homepage (without forcing the page to refresh).
 
 Let's also add a couple of line of styles to space things out a bit more.

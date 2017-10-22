@@ -12,6 +12,6 @@ Now let's look at how we make changes and update our app. The process is very si
 2. Deploy to the main S3 Bucket
 3. Invalidate the cache in both our CloudFront Distributions
 
-We need to do the last step since CloudFront caches our objects in it's edge locations. So to make sure that our users see the latest version, we need to tell CloudFront to invalidate it's cache in the edge locations.
+We need to do the last step since CloudFront caches our objects in its edge locations. So to make sure that our users see the latest version, we need to tell CloudFront to invalidate it's cache in the edge locations.
 
 Let's start by making a couple of changes to our app and go through the process of deploying them.
