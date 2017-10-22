@@ -132,4 +132,5 @@ Frontend
 <div class="support-footer">
   <hr />
   <a class="button support home" href="{{ site.patreon_url }}">Support us on Patreon</a>
+  <p><a href="{% link sponsors.md %}#backers">Check out our supporters</a></p>
 </div>
