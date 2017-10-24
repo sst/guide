@@ -51,7 +51,7 @@ This has a list of the API endpoints that were created. Make a note of these end
 
 ### Deploy a Single Function
 
-There are going to be cases where you might want to deploy just a single API endpoing as opposed to all of them. The `serverless deploy function` command deploys an individual function without going through the entire deployment cycle. This is a much faster way of deploying the changes we make.
+There are going to be cases where you might want to deploy just a single API endpoint as opposed to all of them. The `serverless deploy function` command deploys an individual function without going through the entire deployment cycle. This is a much faster way of deploying the changes we make.
 
 For example, to deploy the list function again, we can run the following.
 
