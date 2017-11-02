@@ -18,7 +18,7 @@ First let's prepare our app for production by building it. Run the following in 
 $ npm run build
 ```
 
-Now that are app is build and ready in the `build/` directory, let's deploy to S3.
+Now that our app is built and ready in the `build/` directory, let's deploy to S3.
 
 ### Upload to S3
 
