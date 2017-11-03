@@ -150,12 +150,12 @@ Now if you are able to invoke your Lambda function but it fails to execute prope
 
 Sometimes we might run into a case where the Lambda function just times out. Normally, a Lambda function will end its execution by invoking the **callback** function that was passed in. By default, the callback will wait until the Node.js runtime event loop is empty before returning the results to the caller. If the Lambda function has an open connection to, let's say a database server, the event loop is not empty, and the callback will wait indefinitely until the connection is closed or the Lambda function times out.
 
-To get around this issue, you can set this **callbackwaitsforemptyeventloop** property to false to request AWS Lambda to freeze the process as soon as the callback is called, even if there are events in the event loop.
+To get around this issue, you can set this **callbackWaitsForEmptyEventLoop** property to false to request AWS Lambda to freeze the process as soon as the callback is called, even if there are events in the event loop.
 
 ``` javascript
 export async function handler(event, context, callback) {
 
-  context.callbackwaitsforemptyeventloop = false;
+  context.callbackWaitsForEmptyEventLoop = false;
   
   ...
 };
