@@ -7,7 +7,7 @@ context: all
 comments_id: 151
 ---
 
-Serverless Framework deploys using the policy attached to the IAM credentials in your AWS CLI profile. Back in the [Create an IAM User](% link _chapters/create-an-iam-user.md %}) chapter we created a user that the Serverless Framework will use to deploy our project. This user was assinged **AdministratorAccess**. This means that Serverless Framework and your project has complete access to your AWS account. This is fine in trusted environments but if you are working as a part of a team you might want to fine-tune the level of access based on who is using your project.
+Serverless Framework deploys using the policy attached to the IAM credentials in your AWS CLI profile. Back in the [Create an IAM User](% link _chapters/create-an-iam-user.md %}) chapter we created a user that the Serverless Framework will use to deploy our project. This user was assigned **AdministratorAccess**. This means that Serverless Framework and your project has complete access to your AWS account. This is fine in trusted environments but if you are working as a part of a team you might want to fine-tune the level of access based on who is using your project.
 
 In this chapter we will take a look at how to customize the IAM Policy that Serverless Framework is going to use.
 
@@ -21,7 +21,7 @@ Granting **AdministratorAccess** policy ensures that your project will always ha
 
 A basic Serverless project needs permissions to the following AWS services:
 
-- **CloudFormation** to create changeset and update stack
+- **CloudFormation** to create change set and update stack
 - **S3** to upload and store Serverless artifacts and Lambda source code
 - **CloudWatch Logs** to store Lambda execution logs
 - **IAM** to manage policies for the Lambda IAM Role
