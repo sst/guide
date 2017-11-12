@@ -126,6 +126,7 @@ Backend
 Frontend
 
   - [Code Splitting in Create React App]({% link _chapters/code-splitting-in-create-react-app.md %})
+  - [Environments in Create React App]({% link _chapters/environments-in-create-react-app.md %})
 
 ### Tools
 
