@@ -62,7 +62,7 @@ To set our two environments we can change this to:
 "scripts": {
   "start": "REACT_APP_STAGE=dev react-scripts start",
   "build": "react-scripts build",
-  "test": "REACT_APP_STAGE=dev react-scripts test --env=jsdom",
+  "test": "react-scripts test --env=jsdom",
 
   "predeploy": "REACT_APP_STAGE=dev npm run build",
   "deploy": "aws s3 sync build/ s3://YOUR_DEV_S3_DEPLOY_BUCKET_NAME",
@@ -78,7 +78,7 @@ To set our two environments we can change this to:
 
 We are doing a few things of note here:
 
-1. We use the `REACT_APP_STAGE=dev` for our `npm start` and `npm test` commands.
+1. We use the `REACT_APP_STAGE=dev` for our `npm start` command.
 2. We also have dev versions of our S3 and CloudFront Distributions called `YOUR_DEV_S3_DEPLOY_BUCKET_NAME`, `YOUR_DEV_CF_DISTRIBUTION_ID`, and `YOUR_DEV_WWW_CF_DISTRIBUTION_ID`.
 3. We default `npm run deploy` to the dev environment and dev versions of our S3 and CloudFront Distributions. We also build using the `REACT_APP_STAGE=dev` environment variable.
 4. We have production versions of our S3 and CloudFront Distributions called `YOUR_PROD_S3_DEPLOY_BUCKET_NAME`, `YOUR_PROD_CF_DISTRIBUTION_ID`, and `YOUR_PROD_WWW_CF_DISTRIBUTION_ID`.
