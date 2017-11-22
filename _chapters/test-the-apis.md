@@ -86,7 +86,7 @@ And that's it for the backend! Next we are going to move on to creating the fron
 
   - There are no trailing slashes for `YOUR_API_GATEWAY_URL`. In our case, the URL is `https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod`. Notice that it does not end with a `/`.
   
-  - If you're on Windows and are using Git Bash, try adding a trailing slash to `YOUR_API_GATEWAY_URL` while removing the leading slash from `--path-template`. In our case, it would result in `--invoke-url https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/ --path-template notes`.
+  - If you're on Windows and are using Git Bash, try adding a trailing slash to `YOUR_API_GATEWAY_URL` while removing the leading slash from `--path-template`. In our case, it would result in `--invoke-url https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/ --path-template notes`. You can follow the discussion on this [here](https://github.com/AnomalyInnovations/serverless-stack-com/issues/112#issuecomment-345996566).
 
   There is a good chance that this error is happening even before our Lambda functions are invoked. So we can start by making sure our IAM Roles are configured properly for our Identity Pool. Follow the steps as detailed in our [Debugging Serverless API Issues]({% link _chapters/debugging-serverless-api-issues.md %}#missing-iam-policy) chapter to ensure that your IAM Roles have the right set of permissions. 
 
