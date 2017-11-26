@@ -55,7 +55,7 @@ const childProps = {
 <img class="code-marker" src="/assets/s.png" />With this.
 
 ``` coffee
-<Routes props={childProps} />
+<Routes childProps={childProps} />
 ```
 
 Currently, our `Routes` component does not do anything with the passed in `childProps`. We need it to apply these props to the child component it is going to render. In this case we need it to apply them to our `Login` component.
