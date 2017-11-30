@@ -137,9 +137,14 @@ a.support {
 }
 
 div.support-footer {
-  p {
-    text-align: center;
+  text-align: center;
 
+  p.copy {
+    color: $tertiary-text-color;
+    font-size: 14px;
+  }
+
+  p {
     a {
       padding-top: 5px;
       font-size: 14px;
@@ -347,6 +352,22 @@ div.home .feature-divider {
   width: 300px;
   height: 1px;
   background-color: darken($background-color, 15%);
+}
+
+div.home div.support-lander {
+  text-align: center;
+
+  & > a {
+    display: inline-block;
+  }
+
+  p {
+    color: $tertiary-text-color;
+    font-size: 14px;
+    &:last-child {
+      padding-top: 5px;
+    }
+  }
 }
 
 div.home .feature-pitch {
