@@ -2,9 +2,12 @@
 # How to generate the PDFs #
 ############################
 # 1. Generate Cover.pdf with latest version date
-# 2. Place Cover.pdf in ~/Downloads folder
-# 3. Ensure "Downloads" folder is an option when "Export to PDF…" in Safari
-# 4. In terminal, run "osascript pdf.scpt"
+#    a. update date in cover.html
+#    b. open in safari file:///Users/frank/Sites/ServerlessStackCom/etc/cover.html
+#    c. "Export to PDF…"
+#    d. Place Cover.pdf in ~/Downloads folder
+# 2. Ensure "Downloads" folder is an option when "Export to PDF…" in Safari
+# 3. In terminal, run "osascript pdf.scpt"
 
 
 set theChaptersStr to "index
@@ -76,12 +79,19 @@ setup-ssl
 deploy-updates
 update-the-app
 deploy-again
-code-splitting-in-create-react-app
 wrapping-up
 giving-back
 older-versions
 staying-up-to-date
-serverless-es7-service"
+api-gateway-and-lambda-logs
+debugging-serverless-api-issues
+serverless-environment-variables
+stages-in-serverless-framework
+configure-multiple-aws-profiles
+customize-the-serverless-iam-policy
+code-splitting-in-create-react-app
+environments-in-create-react-app
+serverless-nodejs-starter"
 
 set text item delimiters to "
 "
@@ -92,9 +102,9 @@ set theChapters to text items of theChaptersStr
 #################
 # Download PDFs #
 #################
-repeat with theCurrentChapter in theChapters
-  downloadPdf(theCurrentChapter)
-end repeat
+#repeat with theCurrentChapter in theChapters
+#  downloadPdf(theCurrentChapter)
+#end repeat
 
 ##############
 # Merge PDFs #
