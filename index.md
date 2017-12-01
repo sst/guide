@@ -130,4 +130,4 @@ Frontend
 
 ### Tools
 
-- [Serverless ES7 Service]({% link _chapters/serverless-es7-service.md %})
+- [Serverless Node.js Starter]({% link _chapters/serverless-nodejs-starter.md %})
