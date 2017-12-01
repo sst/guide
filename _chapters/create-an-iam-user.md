@@ -37,7 +37,7 @@ Select **Attach existing policies directly**.
 
 Search for **AdministratorAccess** and select the policy, then select **Next: Review**.
 
-We can provide a more finely grained policy but this will do for now.
+We can provide a more fine-grained policy here and we cover this later in the [Customize the Serverless IAM Policy]({% link _chapters/customize-the-serverless-iam-policy.md %}) chapter. But for now, let's continue with this.
 
 ![Added Admin Policy Screenshot](/assets/iam-user/added-admin-policy.png)
 

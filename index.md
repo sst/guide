@@ -121,10 +121,13 @@ Backend
 
   - [Configure multiple AWS profiles]({% link _chapters/configure-multiple-aws-profiles.md %})
 
+  - [Customize the Serverless IAM Policy]({% link _chapters/customize-the-serverless-iam-policy.md %})
+
 Frontend
 
   - [Code Splitting in Create React App]({% link _chapters/code-splitting-in-create-react-app.md %})
+  - [Environments in Create React App]({% link _chapters/environments-in-create-react-app.md %})
 
 ### Tools
 
-- [Serverless ES7 Service]({% link _chapters/serverless-es7-service.md %})
+- [Serverless Node.js Starter]({% link _chapters/serverless-nodejs-starter.md %})
