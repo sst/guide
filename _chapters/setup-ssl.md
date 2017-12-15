@@ -15,7 +15,7 @@ Select **Certificate Manager** from the list of services in your [AWS Console](h
 
 ![Select Certificate Manager service screenshot](/assets/select-certificate-manager-service.png)
 
-If this is your first certificate, you'll need to hit **Get started**. If not they hit **Request a certificate** from the top.
+If this is your first certificate, you'll need to hit **Get started**. If not then hit **Request a certificate** from the top.
 
 ![Get started with Certificate Manager screenshot](/assets/get-started-certificate-manager.png)
 
