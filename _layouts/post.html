@@ -30,9 +30,13 @@ layout: default
     {{ content }}
   </div>
 
-  <div class="post-closing">
+  <div class="post-sponsor">
     <hr />
-    <p>If you liked this post, please <a target="_blank" href="{{ site.mailchimp_signup_form }}">subscribe to our newsletter</a> and <a target="_blank" href="{{ site.github_repo }}">give us a star on GitHub</a>.</p>
+    <a target="_blank" href="https://seed.run"><img width="435" alt="A fully-configured CI/CD pipeline for Serverless" src="/assets/seed-serverless-ci-cd.png" /></a>
+  </div>
+
+  <div class="post-closing">
+    <p>If you liked this post, please <a target="_blank" href="{{ site.mailchimp_signup_form }}">subscribe to our newsletter</a>, <a target="_blank" href="{{ site.github_repo }}">give us a star on GitHub</a>, and <a href="{% link sponsors.md %}#backers">check out our sponsors</a>.</p>
   </div>
 
   {% include post-links.html %}

@@ -311,7 +311,7 @@
   }
 }
 
-.post-closing {
+.post-sponsor {
   margin-top: 2 * $spacing-unit;
   margin-bottom: $spacing-unit;
   text-align: center;
@@ -332,13 +332,17 @@
       top: -1.5 * $spacing-unit;
     }
   }
+}
+
+.post-closing {
+  margin-bottom: $spacing-unit;
+  text-align: center;
 
   p {
     font-style: italic;
     color: $secondary-text-color;
     a {
       font-weight: bold;
-      text-decoration: underline;
     }
   }
 }
