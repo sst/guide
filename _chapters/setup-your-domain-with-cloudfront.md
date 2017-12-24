@@ -53,7 +53,7 @@ Next, let's point our domain to the CloudFront Distribution.
 
 ### Point Domain to CloudFront Distribution
 
-Head back into Route 53 and hit the **Hosted Zones** button.
+Head back into Route 53 and hit the **Hosted Zones** button. If you don't have an existing **Hosted Zone**, you'll need to create one by adding the **Domain Name** and selecting **Public Hosted Zone** as the **Type**.
 
 ![Select Route 53 hosted zones screenshot](/assets/select-route-53-hosted-zones.png)
 

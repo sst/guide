@@ -30,6 +30,6 @@ In the AWS world the serverless function is called [AWS Lambda](https://aws.amaz
 
 Here `myHandler` is the name of our Lambda function. The `event` object contains all the information about the event that triggered this Lambda. In our case it'll be information about the HTTP request. The `context` object contains info about the runtime our Lambda function is executing in. After we do all the work inside our Lambda function, we simply call the `callback` function with the results (or the error) and AWS will respond to the HTTP request with it. 
 
-While this example is in JavaScript (or Node.js), AWS Lambda supports Python, Java, and C# as well. Lambda functions are charged for every 100ms that it uses and as mentioned above they automatically scale to respond to the usage. The Lambda runtime also comes with 512MB of ephemeral disk space and up to 1536MB of memory.
+While this example is in JavaScript (or Node.js), AWS Lambda supports Python, Java, and C# as well. Lambda functions are charged for every 100ms that it uses and as mentioned above they automatically scale to respond to the usage. The Lambda runtime also comes with 512MB of ephemeral disk space and up to 3008MB of memory.
 
 Next, let's take a deeper look into the advantages of serverless including the cost of running our demo app.
