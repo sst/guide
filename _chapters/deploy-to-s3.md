@@ -35,4 +35,19 @@ And our app should be live on S3! If you head over to the URL assigned to you (i
 
 ![App live on S3 screenshot](/assets/app-live-on-s3.png)
 
+### App Bundle Size
+
+Just a quick note on the size of our frontend app. The main JS file in our app is under `build/static/js/main.id.js` and it is quite large because of our AWS import. One of our readers did a bit of research on this and found a simple way to almost half the size of the bundle.
+
+This step is optional for completing the tutorial but can be helpful if you are basing your projects on it. In our `src/libs/awsLib.js` you can replace the `import AWS from "aws-sdk";` with the following:
+
+``` js
+import AWS from 'aws-sdk/global';
+import S3 from 'aws-sdk/clients/s3';
+```
+
+And when uploading a file to S3, replace `new AWS.S3({` with `new S3({` instead. You can read more about the changes [here]({{ site.frontend_github_repo }}/pull/15).
+
+If you try deploying again, you should notice that your app bundle is a lot smaller.
+
 Next we'll configure CloudFront to serve our app out globally.
