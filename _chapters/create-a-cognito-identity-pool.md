@@ -25,7 +25,7 @@ Select **Manage Federated Identities**.
 
 ![Select Manage Federated Identities Screenshot](/assets/cognito-identity-pool/select-manage-federated-identities.png)
 
-Enter an **Identity pool name**.
+Enter an **Identity pool name**. If you have any existing Identity Pools, you'll need to click the **Create new identity pool** button.
 
 ![Fill Cognito Identity Pool Info Screenshot](/assets/cognito-identity-pool/fill-identity-pool-info.png)
 
