@@ -106,7 +106,7 @@ $ npm install crypto-js --save
 
 <img class="code-marker" src="/assets/s.png" />Copy the following file to `src/libs/sigV4Client.js`.
 
-&rarr; [**`sigV4Client.js`**](https://raw.githubusercontent.com/AnomalyInnovations/serverless-stack-demo-client/8e808f02c8ccd3037b35af4da257f0d47e1c9fe9/src/libs/sigV4Client.js)
+&rarr; [**`sigV4Client.js`**](https://raw.githubusercontent.com/AnomalyInnovations/serverless-stack-demo-client/master/src/libs/sigV4Client.js)
 
 This file can look a bit intimidating at first but it is just using the temporary credentials and the request parameters to create the necessary signed headers. To create a new `sigV4Client` we need to pass in the following:
 
