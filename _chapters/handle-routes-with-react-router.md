@@ -49,7 +49,7 @@ registerServiceWorker();
 We've made two small changes here.
 
 1. Use `BrowserRouter` as our router. This uses the browser's [History](https://developer.mozilla.org/en-US/docs/Web/API/History) API to create real URLs.
-2. Use the `Router` to render our `App` component. This will alow us to create the routes we need inside our `App` component.
+2. Use the `Router` to render our `App` component. This will allow us to create the routes we need inside our `App` component.
 
 Now if you head over to your browser, your app should load just like before. The only difference being that we are using React Router to serve out our pages.
 
