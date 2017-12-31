@@ -22,8 +22,7 @@ $ npm install --save-dev \
     babel-core \
     babel-loader \
     babel-plugin-transform-runtime \
-    babel-preset-es2015 \
-    babel-preset-stage-3 \
+    babel-preset-env \
     serverless-webpack \
     webpack \
     webpack-node-externals
@@ -66,7 +65,7 @@ This is the configuration Webpack will use to package our app. The main part of 
 ``` json
 {
   "plugins": ["transform-runtime"],
-  "presets": ["es2015", "stage-3"]
+  "presets": ["env"]
 }
 ```
 
