@@ -23,47 +23,56 @@ You can get these updates emailed to you via our [newsletter]({{ site.mailchimp_
 
 #### [v1.2.4: Updating to React 16](https://5a4993f3a6188f5a88e0c777--serverless-stack.netlify.com/) (Current)
 
-Dec 31, 2017: Updated to React 16 and fixed `sigv4Client.js` IE11 issue.
+Dec 31, 2017: Updated to React 16 and fixed `sigv4Client.js` [IE11 issue]({{ site.github_repo }}/issues/114#issuecomment-349938586).
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v1.2.3...v1.2.4)
 - [Client]({{ site.frontend_github_repo }}/compare/v1.2...v1.2.4)
 
 #### [v1.2.3: Updating to babel-preset-env](https://5a4993898198761218a1279f--serverless-stack.netlify.com/)
 
-Dec 30, 2017: Updated serverless backend to use babel-preset-env and added a note on reducing React app bundle size.
+Dec 30, 2017: Updated serverless backend to use babel-preset-env plugin and added a note to the Deploy to S3 chapter on reducing React app bundle size.
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v1.2.2...v1.2.3)
 - [API]({{ site.backend_github_repo }}/compare/v1.2...v1.2.3)
 
 #### [v1.2.2: Adding new chapters](https://5a499324a6188f5a88e0c76d--serverless-stack.netlify.com/)
 
-Dec 1, 2017: Added new chapters on environments in Create React App and customizing IAM policies for serverless.
+Dec 1, 2017: Added the following *Extra Credit* chapters.
+
+1. Customize the Serverless IAM Policy
+2. Environments in Create React App
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v1.2.1...v1.2.2)
 
 #### [v1.2.1: Adding new chapters](https://5a4992e70b79b76fb0948300--serverless-stack.netlify.com/)
 
-Oct 7, 2017: Added new chapters on environment variables and stages in Serverless Framework, working with multiple AWS profiles and CloudWatch logs, and debugging Lambda issues.
+Oct 7, 2017: Added the following *Extra Credit* chapters.
+
+1. API Gateway and Lambda Logs
+2. Debugging Serverless API Issues
+3. Serverless environment variables
+4. Stages in Serverless Framework
+5. Configure multiple AWS profiles
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v1.2...v1.2.1)
 
 #### [v1.2: Upgrade to Serverless Webpack v3](https://59caac9bcf321c5b78f2c3e2--serverless-stack.netlify.com/)
 
-Sep 16, 2017: Upgrading serverless backend to using serverless-webpack plugin v3
+Sep 16, 2017: Upgrading serverless backend to using serverless-webpack plugin v3. The new version of the plugin changes some of the commands used to test the serverless backend. You can read more about it [here]({{ site.github_repo }}/issues/130).
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v1.1...v1.2)
 - [API]({{ site.backend_github_repo }}/compare/v1.1...v1.2)
 
 #### [v1.1: Improved Session Handling](https://59caae1e6f4c50416e86701d--serverless-stack.netlify.com/)
 
-Aug 30, 2017: Fixing some issues with session handling in the React app.
+Aug 30, 2017: Fixing some issues with session handling in the React app. A few minor updates bundled together. You can read more about it [here]({{ site.github_repo }}/issues/123).
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v1.0...v1.1)
 - [Client]({{ site.frontend_github_repo }}/compare/v1.0...v1.1)
 
 #### [v1.0: IAM as authorizer](https://59caae01424ef20727c342ce--serverless-stack.netlify.com/)
 
-July 19, 2017: Switching to using IAM as an authorizer instead of the authenticating directly with User Pool.
+July 19, 2017: Switching to using IAM as an authorizer instead of the authenticating directly with User Pool. This was a major update to the tutorial. You can read more about it [here]({{ site.github_repo }}/issues/108).
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v0.9...v1.0)
 - [API]({{ site.backend_github_repo }}/compare/v0.9...v1.0)
