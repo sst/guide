@@ -199,7 +199,7 @@ And include our component in the header.
 import Signup from "./containers/Signup";
 ```
 
-Now if we switch to our browser and navigate to the signup page we should see our newly created form. Try filling it in and ensure that it shows the confirmation code form as well.
+Now if we switch to our browser and navigate to the signup page we should see our newly created form. Our form doesn't do anything when we enter in our info but you can still try to fill in an email address, password, and the confirmation code. It'll give you an idea of how the form will behave once we connect it to Cognito.
 
 ![Signup page added screenshot](/assets/signup-page-added.png)
 
