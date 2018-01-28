@@ -76,4 +76,12 @@ Now that the app client is created. Take a note of the **App client id** which w
 
 ![Cognito User Pool App Created Screenshot](/assets/cognito-user-pool/user-pool-app-created.png)
 
+
+### Create Domain Name
+
+Finally, select **Domain name** from the left panel. Enter your unique domain name and select **Save changes**. In our case we are using `notes-app`.
+
+![Select Congito User Pool Apps Screenshot](/assets/cognito-user-pool/user-pool-domain-name.png)
+
+
 Now our Cognito User Pool is ready. It will maintain a user directory for our notes app. It will also be used to authenticate access to our API. Next let's set up a test user within the pool.
