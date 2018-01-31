@@ -37,7 +37,7 @@ The above command needs [NPM](https://www.npmjs.com), a package manager for Java
 $ serverless create --template aws-nodejs
 ```
 
-Now the directory should contain 2 files, namely **handler.js** and **serverless.yml**.
+Now the directory should contain the two following files, namely **handler.js** and **serverless.yml**.
 
 ``` bash
 $ ls
