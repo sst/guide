@@ -11,7 +11,7 @@ To step through the major concepts involved in building web applications, we are
 
 <img alt="Completed app mobile screenshot" src="/assets/completed-app-mobile.png" width="432" />
 
-It is a single page application powered by a serverless API written completely in JavaScript. Here is the complete source for the [backend]({{ site.backend_github_repo }}) and the [frontend]({{ site.frontend_github_repo }}). It is a relatively simple application but we are going need to address the following requirements.
+It is a single page application powered by a serverless API written completely in JavaScript. Here is the complete source for the [backend]({{ site.backend_github_repo }}) and the [frontend]({{ site.frontend_github_repo }}). It is a relatively simple application but we are going to address the following requirements.
 
 - Should allow users to signup and login to their accounts
 - Users should be able to create notes with some content
