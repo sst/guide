@@ -21,7 +21,14 @@ You can get these updates emailed to you via our [newsletter]({{ site.mailchimp_
 
 ### Changes
 
-#### [v1.2.4: Updating to React 16](https://5a4993f3a6188f5a88e0c777--serverless-stack.netlify.com/) (Current)
+#### [v1.2.5: Using specific Bootstrap CSS version](https://branchv125--serverless-stack.netlify.com) (Current)
+
+Feb 5, 2018: Using specific Bootstrap CSS version since `latest` now points to Bootstrap v4. But React-Bootstrap uses v3.
+
+- [Tutorial changes]({{ site.github_repo }}/compare/v1.2.4...v1.2.5)
+- [Client]({{ site.frontend_github_repo }}/compare/v1.2.4...v1.2.5)
+
+#### [v1.2.4: Updating to React 16](https://5a4993f3a6188f5a88e0c777--serverless-stack.netlify.com/)
 
 Dec 31, 2017: Updated to React 16 and fixed `sigv4Client.js` [IE11 issue]({{ site.github_repo }}/issues/114#issuecomment-349938586).
 
