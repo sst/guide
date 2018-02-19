@@ -234,9 +234,9 @@ div.support-footer {
     $width-on-palm: 240px;
     $width: 380px;
 
-    form p {
+    p.copy {
       margin-bottom: 20px;
-      display: inline-block;
+      text-align: center;
       font-size: 22px;
 
       @include media-query($on-palm) {
@@ -244,10 +244,23 @@ div.support-footer {
       }
     }
 
-    div.mc-field-group input {
+    p.email-octopus-error-message {
+      color: white;
+    }
+
+    div.email-octopus-form-row {
+      margin-bottom: 0;
+    }
+
+    div.email-octopus-form-row-subscribe {
+      margin-top: 0;
+    }
+
+    form input {
       padding: 10px;
       width: $width;
       font-size: 20px;
+      height: auto;
       @extend %newsletter-input;
 
       @include media-query($on-palm) {
@@ -255,7 +268,7 @@ div.support-footer {
       }
     }
 
-    input.button {
+    form button {
       margin-top: 7px;
       width: $width;
       padding: 14px 22px;
