@@ -17,7 +17,7 @@ Below are the updates we’ve made to Serverless Stack, each with:
 
 While the hosted version of the tutorial and the code snippets are accurate, the sample project repo that is linked at the bottom of each chapter is unfortunately not. We do however maintain the past versions of the completed sample project repo. So you should be able to use those to figure things out. All this info is also available on the [releases page]({{ site.github_repo }}/releases) of our [GitHub repo]({{ site.github_repo }}).
 
-You can get these updates emailed to you via our [newsletter]({{ site.mailchimp_signup_form }}).
+You can get these updates emailed to you via our [newsletter]({{ site.newsletter_signup_form }}).
 
 ### Changes
 
