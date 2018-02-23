@@ -91,7 +91,7 @@ Select your API project from the left panel, select **Stages**, then pick the st
 
 ![Select API Gateway Stage Screenshot](/assets/logging/select-api-gateway-stage.png)
 
-In the **Settings** tab:
+In the **Logs** tab:
 
 - Check **Enable CloudWatch Logs**.
 - Select **INFO** for **Log level** to log every request.
@@ -100,11 +100,7 @@ In the **Settings** tab:
 
 ![Fill in API Gateway Logging Info Screenshot](/assets/logging/fill-in-api-gateway-logging-info.png)
 
-Scroll to the bottom of the page and click **Save Changes**.
-
-![Update API Gateway Logging Screenshot](/assets/logging/update-api-gateway-logging.png)
-
-Now our API Gateway requests should be logged via CloudWatch.
+Scroll to the bottom of the page and click **Save Changes**. Now our API Gateway requests should be logged via CloudWatch.
 
 
 ### Enable Lambda CloudWatch Logs
