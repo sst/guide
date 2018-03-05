@@ -16,7 +16,17 @@ Serverless Stack is written and maintained by Frank Wang ([@fanjiewang](https://
 
 We are currently working on [**_SEED_**](https://seed.run); a fully-configured code pipeline for Serverless apps. Seed is the simplest way for teams to build and deploy Serverless apps on AWS. If you are using the Serverless Stack for your projects give Seed a try and let us know what you think. Seed is also completely built using the Serverless Stack!
 
-[![SEED Serverless CI/CD promo gif](/assets/seed-serverless-ci-cd-promo.gif)](https://seed.run)
+<iframe
+  width="640"
+  height="360"
+  frameborder="0"
+  allowfullscreen
+  allow="autoplay; encrypted-media"
+  style="display: block; margin: 0 auto 15px;"
+  src="https://www.youtube.com/embed/n8N8zRVM5tE?rel=0&amp;controls=1&amp;showinfo=0&amp;autoplay=0&amp;loop=1"
+>
+</iframe>
+
 
 Over the years we've accumulated a ton of experience on how to build, deploy, and maintain applications on the AWS Platform. The serverless approach has been a giant revelation to us. If we had a chance to go back and do this all over again, there is no doubt we would have taken the serverless approach. The [pros]({% link _chapters/why-create-serverless-apps.md %}) simply outweigh the cons. And while we recognize that it is not for everybody; we wanted to create a resource that makes it easy to learn and get started.
 
