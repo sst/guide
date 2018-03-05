@@ -25,8 +25,8 @@ $ npm install --save-dev \
     babel-preset-env \
     babel-preset-stage-3 \
     serverless-webpack \
-    webpack \
-    webpack-node-externals
+    webpack@3.11.0 \
+    webpack-node-externals@1.6.0
 
 $ npm install --save babel-runtime
 ```
