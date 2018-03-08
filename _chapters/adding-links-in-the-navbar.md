@@ -66,7 +66,10 @@ export default props =>
     exact
     children={({ match, history }) =>
       <NavItem
-        onClick={e => history.push(e.currentTarget.getAttribute("href"))}
+        onClick={(e) => {
+          e.preventDefault();
+          history.push(props.href);
+        }}
         {...props}
         active={match ? true : false}
       >
@@ -81,7 +84,7 @@ This is doing a couple of things here:
 
 2. React-Router passes in a `match` object in case there is a match. We use that and set the `active` prop for the `NavItem`.
 
-3. React-Router also passes us a `history` object. We use this to navigate to the new page using `history.push`.
+3. React-Router also passes us a `history` object. We use this to navigate to the new page using `history.push`. We are also preventing the browser's default `anchor` on click behavior.
 
 Now let's use this component.
 
