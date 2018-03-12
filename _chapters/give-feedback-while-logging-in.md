@@ -31,11 +31,11 @@ handleSubmit = async event => {
   this.setState({ isLoading: true });
 
   try {
-    await this.login(this.state.email, this.state.password);
+    await Auth.signIn(this.state.email, this.state.password);
     this.props.userHasAuthenticated(true);
     this.props.history.push("/");
   } catch (e) {
-    alert(e);
+    alert(e.message);
     this.setState({ isLoading: false });
   }
 }
@@ -45,7 +45,7 @@ handleSubmit = async event => {
 
 Now to reflect the state change in our button we are going to render it differently based on the `isLoading` flag. But we are going to need this piece of code in a lot of different places. So it makes sense that we create a reusable component out of it.
 
-<img class="code-marker" src="/assets/s.png" />Add the following in `src/components/LoaderButton.js`.
+<img class="code-marker" src="/assets/s.png" />Create a new file and add the following in `src/components/LoaderButton.js`.
 
 ``` coffee
 import React from "react";

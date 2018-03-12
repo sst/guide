@@ -30,11 +30,11 @@ handleSubmit = async event => {
   event.preventDefault();
 
   try {
-    await this.login(this.state.email, this.state.password);
+    await Auth.signIn(this.state.email, this.state.password);
     this.props.userHasAuthenticated(true);
     this.props.history.push("/");
   } catch (e) {
-    alert(e);
+    alert(e.message);
   }
 }
 ```
@@ -76,8 +76,8 @@ this.props.history.push("/login");
 So our `handleLogout` method should now look like this.
 
 ``` coffee
-handleLogout = event => {
-  signOutUser();
+handleLogout = async event => {
+  await Auth.signOut();
 
   this.userHasAuthenticated(false);
 

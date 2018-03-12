@@ -29,6 +29,8 @@ Pick a name of the bucket and select a region. Then select **Create**.
 - **Bucket names** are globally unique, which means you cannot pick the same name as this tutorial.
 - **Region** is the physical geographical region where the files are stored. We will use **US East (N. Virginia)** for this guide.
 
+Make a note of the name and region as we'll be using it later in the guide.
+
 ![Enter S3 Bucket Info screenshot](/assets/s3/enter-s3-bucket-info.png)
 
 Step through the next steps and leave the defaults by clicking **Next**, and then click **Create Bucket** on the last step.
@@ -68,5 +70,17 @@ Add the following CORS configuration into the editor, then hit **Save**.
 Note that you can edit this configuration to use your own domain or a list of domains when you use this in production.
 
 ![Save S3 Bucket CORS Configuration screenshot](/assets/s3/save-s3-bucket-cors-configuration.png)
+
+### Create Folders
+
+We will also create a folder that we'll use while uploading files through our notes app. We'll expand more on why we are structuring our S3 Bucket this way a bit later.
+
+Hit the **Create folder** button.
+
+![Select Create folder screenshot](/assets/s3/select-create-folder.png)
+
+And type in the folder name `private` and hit **Save** to create it.
+
+![Fill in folder name screenshot](/assets/s3/fill-in-folder-name.png)
 
 Now that our S3 bucket is ready, let's get set up to handle user authentication.

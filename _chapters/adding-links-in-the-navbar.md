@@ -51,67 +51,48 @@ Now if you flip over to your browser, you should see the two links in our navbar
 
 ![Navbar links added screenshot](/assets/navbar-links-added.png)
 
-Unfortunately, they don't do a whole lot when you click on them. We also need them to highlight when we navigate to that page. To fix this we are going to use a useful feature of the React-Router. We are going to use the `Route` component to detect when we are on a certain page and then render based on it. Since we are going to do this twice, let's make this into a component that can be re-used.
+Unfortunately, they don't do a whole lot when you click on them. To fix this we need a component that works with React Router and React Bootstrap. It can wrap around your `Navbar` links and use the React Router to route your app to the required link without refreshing the browser.
 
-<img class="code-marker" src="/assets/s.png" />Create a `src/components/` directory and add the following inside `src/components/RouteNavItem.js`.
+<img class="code-marker" src="/assets/s.png" />Run the following command in your working directory.
 
-``` coffee
-import React from "react";
-import { Route } from "react-router-dom";
-import { NavItem } from "react-bootstrap";
-
-export default props =>
-  <Route
-    path={props.href}
-    exact
-    children={({ match, history }) =>
-      <NavItem
-        onClick={(e) => {
-          e.preventDefault();
-          history.push(props.href);
-        }}
-        {...props}
-        active={match ? true : false}
-      >
-        {props.children}
-      </NavItem>}
-  />;
+``` bash
+$ npm install react-router-bootstrap --save
 ```
 
-This is doing a couple of things here:
-
-1. We look at the `href` for the `NavItem` and check if there is a match.
-
-2. React-Router passes in a `match` object in case there is a match. We use that and set the `active` prop for the `NavItem`.
-
-3. React-Router also passes us a `history` object. We use this to navigate to the new page using `history.push`. We are also preventing the browser's default `anchor` on click behavior.
-
-Now let's use this component.
-
-<img class="code-marker" src="/assets/s.png" />Import this component in the header of our `src/App.js`.
+<img class="code-marker" src="/assets/s.png" />And include it at the top of your `src/App.js`.
 
 ``` coffee
-import RouteNavItem from "./components/RouteNavItem";
+import { LinkContainer } from "react-router-bootstrap";
 ```
 
-<img class="code-marker" src="/assets/s.png" />And remove the `NavItem` from the header of `src/App.js`, so that the `react-bootstrap` import looks like this.
+<img class="code-marker" src="/assets/s.png" />We will now wrap our links with the `LinkContainer`. Replace the `render` method in your `src/App.js` with this.
 
 ``` coffee
-import { Nav, Navbar } from "react-bootstrap";
-```
-
-<img class="code-marker" src="/assets/s.png" />Now replace the `NavItem` components in `src/App.js`.
-
-``` coffee
-<NavItem href="/signup">Signup</NavItem>
-<NavItem href="/login">Login</NavItem>
-```
-
-<img class="code-marker" src="/assets/s.png" />With the following.
-
-``` coffee
-<RouteNavItem href="/signup">Signup</RouteNavItem>
-<RouteNavItem href="/login">Login</RouteNavItem>
+render() {
+  return (
+    <div className="App container">
+      <Navbar fluid collapseOnSelect>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <Link to="/">Scratch</Link>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav pullRight>
+            <LinkContainer to="/signup">
+              <NavItem>Signup</NavItem>
+            </LinkContainer>
+            <LinkContainer to="/login">
+              <NavItem>Login</NavItem>
+            </LinkContainer>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+      <Routes />
+    </div>
+  );
+}
 ```
 
 And that's it! Now if you flip over to your browser and click on the login link, you should see the link highlighted in the navbar.
