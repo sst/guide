@@ -59,7 +59,7 @@ The code above is doing a couple of things that should be very similar to what w
 
 1. If there is a file to upload we call `s3Upload` to upload it and save the key we get from S3.
 
-2. We save the note by making `PUT` request with the note object to `/notes/note_id` where we get the note_id from `this.props.match.params.id`. We use the `API.put()` method from AWS Amplify.
+2. We save the note by making a `PUT` request with the note object to `/notes/:id` where we get the `id` from `this.props.match.params.id`. We use the `API.put()` method from AWS Amplify.
 
 3. And on success we redirect the user to the homepage.
 

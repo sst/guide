@@ -2,13 +2,13 @@
 layout: post
 title: Configure AWS Amplify
 date: 2017-01-12 12:00:00
-description: Use the information of our AWS resources to configure AWS Amplify in our React app. We'll call the Amplify.configure() method when our app first loads.
+description: We are going to use the information of our AWS resources to configure AWS Amplify in our React app. We'll call the Amplify.configure() method when our app first loads.
 context: frontend
 code: frontend
 comments_id: 37
 ---
 
-To allow our React app to talk to the AWS resources that we created while creating our backend, we'll be using a library called [AWS Amplify](https://github.com/aws/aws-amplify). 
+To allow our React app to talk to the AWS resources that we created (in the backend section of the tutorial), we'll be using a library called [AWS Amplify](https://github.com/aws/aws-amplify). 
 
 AWS Amplify provides a few simple modules (Auth, API, and Storage) to help us easily connect to our backend. Let's get started.
 
@@ -69,7 +69,7 @@ import Amplify from "aws-amplify";
 
 And import the config we created above. 
 
-<img class="code-marker" src="/assets/s.png" />Add the following also to the header of your `src/index.js`.
+<img class="code-marker" src="/assets/s.png" />Add the following, also to the header of your `src/index.js`.
 
 ``` coffee
 import config from "./config";
@@ -111,6 +111,6 @@ A couple of notes here.
 
 - The `name: "notes"` is basically telling Amplify that we want to name our API. Amplify allows you to add multiple APIs that you your app is going to work with. In our case our entire backend is just one single API.
 
-- The `Amplify.configure()` is just setting the various AWS resources that we want to interact with. It isn't doing anything else special here beside configuration. So while this might look initmidating, just remember this is just setting things up. 
+- The `Amplify.configure()` is just setting the various AWS resources that we want to interact with. It isn't doing anything else special here beside configuration. So while this might look intimidating, just remember this is only setting things up. 
 
 Next up, we are going to work on creating our login and sign up forms.

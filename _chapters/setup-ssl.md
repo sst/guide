@@ -23,7 +23,7 @@ And type in the name of our domain. Hit **Add another name to this certificate**
 
 ![Add domain names to certificate screenshot](/assets/add-domain-names-to-certificate.png)
 
-Now to confirm that we control the doman, select the **DNS validation** method and hit **Review**.
+Now to confirm that we control the domain, select the **DNS validation** method and hit **Review**.
 
 ![Select dns validation for certificate screenshot](/assets/select-dns-validation-for-certificate.png)
 

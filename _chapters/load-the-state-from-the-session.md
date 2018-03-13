@@ -2,7 +2,7 @@
 layout: post
 title: Load the State from the Session
 date: 2017-01-15 00:00:00
-description: To keep a user logged in to Amazon Cognito in our React.js app, we are going to load the user session in the App component state. We load the session in componentDidMount using the Auth.currentSession() Amplify method.
+description: To keep a user logged in to Amazon Cognito in our React.js app, we are going to load the user session in the App component state. We load the session in componentDidMount using the AWS Amplify Auth.currentSession() method.
 context: frontend
 code: frontend
 comments_id: 40
@@ -14,7 +14,7 @@ Amplify gives us a way to get the current user session using the `Auth.currentSe
 
 ### Load User Session
 
-Let's load this when our app loads. We are going to do this in `componentDidMount`. Since `Auth.currentSession()` returns a promise, this means that we need to ensure that the rest of our app is only ready to go after this has been loaded.
+Let's load this when our app loads. We are going to do this in `componentDidMount`. Since `Auth.currentSession()` returns a promise, it means that we need to ensure that the rest of our app is only ready to go after this has been loaded.
 
 <img class="code-marker" src="/assets/s.png" />To do this, let's add a flag to our `src/App.js` state called `isAuthenticating`. The initial state in our `constructor` should look like the following.
 

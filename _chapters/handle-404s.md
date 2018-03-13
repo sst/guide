@@ -60,4 +60,4 @@ And that's it! Now if you were to switch over to your browser and try clicking o
 
 ![Router 404 page screenshot](/assets/router-404-page.png)
 
-Next up, we are going to configure our app with the resources we created on the backend.
+Next up, we are going to configure our app with the info of our backend resources.

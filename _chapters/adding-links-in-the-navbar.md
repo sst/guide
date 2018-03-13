@@ -53,7 +53,7 @@ Now if you flip over to your browser, you should see the two links in our navbar
 
 Unfortunately, when you click on them they refresh your browser while redirecting to the link. We need it to route it to the new link without refreshing the page since we are building a single page app.
 
-To fix this we need a component that works with React Router and React Bootstrap. It can wrap around your `Navbar` links and use the React Router to route your app to the required link without refreshing the browser.
+To fix this we need a component that works with React Router and React Bootstrap called [React Router Bootstrap](https://github.com/react-bootstrap/react-router-bootstrap). It can wrap around your `Navbar` links and use the React Router to route your app to the required link without refreshing the browser.
 
 <img class="code-marker" src="/assets/s.png" />Run the following command in your working directory.
 
@@ -97,7 +97,7 @@ render() {
 }
 ```
 
-And that's it! Now if you flip over to your browser and click on the login link, you should see the link highlighted in the navbar. Also, it doesn't refresh the page anymore while redirecting.
+And that's it! Now if you flip over to your browser and click on the login link, you should see the link highlighted in the navbar. Also, it doesn't refresh the page while redirecting.
 
 ![Navbar link highlighted screenshot](/assets/navbar-link-highlighted.png)
 

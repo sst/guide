@@ -40,7 +40,7 @@ handleDelete = async event => {
 }
 ```
 
-We are simply making a `DELETE` request to `/notes/note_id` where we get the `id` from `this.props.match.params.id`. We use the `API.del` method from AWS Amplify to do so. This calls our delete API and we redirect to the homepage on success.
+We are simply making a `DELETE` request to `/notes/:id` where we get the `id` from `this.props.match.params.id`. We use the `API.del` method from AWS Amplify to do so. This calls our delete API and we redirect to the homepage on success.
 
 Now if you switch over to your browser and try deleting a note you should see it confirm your action and then delete the note.
 

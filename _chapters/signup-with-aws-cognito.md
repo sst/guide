@@ -77,7 +77,7 @@ Now if you were to switch over to your browser and try signing up for a new acco
 
 ![Redirect home after signup screenshot](/assets/redirect-home-after-signup.png)
 
-A quick note on the signup flow here. If the user refreshes their page at the confirm step, they won't be able to get back and confirm that account. It forces them to create a new account instead. We are keeping things intentionally simple here but here are a couple of hints on how to fix it.
+A quick note on the signup flow here. If the user refreshes their page at the confirm step, they won't be able to get back and confirm that account. It forces them to create a new account instead. We are keeping things intentionally simple but here are a couple of hints on how to fix it.
 
 1. Check for the `UsernameExistsException` in the `handleSubmit` method's `catch` block.
 

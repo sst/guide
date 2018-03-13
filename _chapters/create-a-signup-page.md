@@ -11,7 +11,7 @@ So the signup flow will look something like this:
 
 1. The user types in their email, password, and confirms their password.
 
-2. We sign them up using AWS Cognito using the Amplify library and get a user object in return.
+2. We sign them up with Amazon Cognito using the AWS Amplify library and get a user object in return.
 
 3. We then render a form to accept the confirmation code that AWS Cognito has emailed to them.
 

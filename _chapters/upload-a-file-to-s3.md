@@ -14,9 +14,9 @@ Let's now add an attachment to our note. The flow we are using here is very simp
 2. The file is uploaded to S3 under the user's folder and we get a key back. 
 3. Create a note with the file key as the attachment.
 
-We are going to use the Storage module that AWS Amplify has. If you recall that back in the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter we allow a logged in user access to a folder inside our S3 Bucket. AWS Amplify stores directly to this folder if we want to *privately* store a file.
+We are going to use the Storage module that AWS Amplify has. If you recall, that back in the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter we allow a logged in user access to a folder inside our S3 Bucket. AWS Amplify stores directly to this folder if we want to *privately* store a file.
 
-Also, just looking ahead a bit; we will be uploading files when a note is created and when a note is editted. So let's create a simple convinience method to help with that.
+Also, just looking ahead a bit; we will be uploading files when a note is created and when a note is edited. So let's create a simple convenience method to help with that.
 
 
 ### Upload to S3
@@ -49,7 +49,7 @@ The above method does a couple of things.
 
 2. Generates a unique file name using the current timestamp (`Date.now()`). Of course, if your app is being used heavily this might not be the best way to create a unique filename. But this should be fine for now.
 
-3. Upload the file to user's folder in S3 using the `Storage.vault.put()` object. Alternatively, if we were uploading to it publicly you can directly use the `Storage.put()` method.
+3. Upload the file to the user's folder in S3 using the `Storage.vault.put()` object. Alternatively, if we were uploading publicly you can use the `Storage.put()` method.
 
 4. And return the stored object's key.
 

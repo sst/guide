@@ -62,7 +62,7 @@ Currently, our `Routes` component does not do anything with the passed in `child
 
 To do this we are going to create a new component.
 
-<img class="code-marker" src="/assets/s.png" />Create a `src/components/` directory by running the following in your working directory.
+<img class="code-marker" src="/assets/s.png" />Create a `src/components/` directory by running this command in your working directory.
 
 ``` bash
 $ mkdir src/components/
@@ -155,7 +155,7 @@ Also, import the `Fragment` in the header.
 import React, { Component, Fragment } from "react";
 ```
 
-The `Fragment` component can be thought of as a placeholder component. We need this because in the case the user is not logged in, we want to render two links and to do this we would need to wrap it inside a single component, like a `div`. But by using the `Fragment` component it tells React that the two links are inside this component but we don't want to render any extra HTML.
+The `Fragment` component can be thought of as a placeholder component. We need this because in the case the user is not logged in, we want to render two links. To do this we would need to wrap it inside a single component, like a `div`. But by using the `Fragment` component it tells React that the two links are inside this component but we don't want to render any extra HTML.
 
 <img class="code-marker" src="/assets/s.png" />And add this `handleLogout` method to `src/App.js` above the `render() {` line as well.
 

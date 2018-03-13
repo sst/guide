@@ -71,16 +71,4 @@ Note that you can edit this configuration to use your own domain or a list of do
 
 ![Save S3 Bucket CORS Configuration screenshot](/assets/s3/save-s3-bucket-cors-configuration.png)
 
-### Create Folders
-
-We will also create a folder that we'll use while uploading files through our notes app. We'll expand more on why we are structuring our S3 Bucket this way a bit later.
-
-Hit the **Create folder** button.
-
-![Select Create folder screenshot](/assets/s3/select-create-folder.png)
-
-And type in the folder name `private` and hit **Save** to create it.
-
-![Fill in folder name screenshot](/assets/s3/fill-in-folder-name.png)
-
 Now that our S3 bucket is ready, let's get set up to handle user authentication.
