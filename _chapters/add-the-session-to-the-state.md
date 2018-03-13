@@ -60,7 +60,17 @@ const childProps = {
 
 Currently, our `Routes` component does not do anything with the passed in `childProps`. We need it to apply these props to the child component it is going to render. In this case we need it to apply them to our `Login` component.
 
-<img class="code-marker" src="/assets/s.png" />To do this, create a new component in `src/components/AppliedRoute.js` and add the following.
+To do this we are going to create a new component.
+
+<img class="code-marker" src="/assets/s.png" />Create a `src/components/` directory by running the following in your working directory.
+
+``` bash
+$ mkdir src/components/
+```
+
+Here we'll be storing all our React components that are not dealing directly with our API or responding to routes.
+
+<img class="code-marker" src="/assets/s.png" />Create a new component in `src/components/AppliedRoute.js` and add the following.
 
 ``` coffee
 import React from "react";

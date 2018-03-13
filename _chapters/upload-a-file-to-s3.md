@@ -21,10 +21,16 @@ Also, just looking ahead a bit; we will be uploading files when a note is create
 
 ### Upload to S3
 
-<img class="code-marker" src="/assets/s.png" />Add the following to a new file in `src/libs/awsLib.js`.
+<img class="code-marker" src="/assets/s.png" />Create a `src/libs/` directory for this.
+
+``` bash
+$ mkdir src/libs/
+```
+
+<img class="code-marker" src="/assets/s.png" />Add the following to `src/libs/awsLib.js`.
 
 ``` coffee
-import { Storage } from 'aws-amplify';
+import { Storage } from "aws-amplify";
 
 export async function s3Upload(file) {
   const filename = `${Date.now()}-${file.name}`;

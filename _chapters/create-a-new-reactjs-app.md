@@ -12,6 +12,12 @@ Let's get started with our frontend. We are going to create a single page app us
 
 ### Install Create React App
 
+<img class="code-marker" src="/assets/s.png" />Move out of the directory that we were working in for the backend.
+
+``` bash
+$ cd ../
+```
+
 <img class="code-marker" src="/assets/s.png" />Create a new project in directory separate from the backend. Run the following command.
 
 ``` bash

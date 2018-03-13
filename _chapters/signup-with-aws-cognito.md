@@ -27,7 +27,7 @@ handleSubmit = async event => {
       newUser
     });
   } catch (e) {
-    alert(e);
+    alert(e.message);
   }
 
   this.setState({ isLoading: false });
@@ -45,7 +45,7 @@ handleConfirmationSubmit = async event => {
     this.props.userHasAuthenticated(true);
     this.props.history.push("/");
   } catch (e) {
-    alert(e);
+    alert(e.message);
     this.setState({ isLoading: false });
   }
 }
@@ -54,7 +54,7 @@ handleConfirmationSubmit = async event => {
 <img class="code-marker" src="/assets/s.png" />Also, include the Amplify Auth in our header.
 
 ``` javascript
-import { Auth } from 'aws-amplify';
+import { Auth } from "aws-amplify";
 ```
 
 The flow here is pretty simple:
@@ -79,11 +79,11 @@ Now if you were to switch over to your browser and try signing up for a new acco
 
 A quick note on the signup flow here. If the user refreshes their page at the confirm step, they won't be able to get back and confirm that account. It forces them to create a new account instead. We are keeping things intentionally simple here but here are a couple of hints on how to fix it.
 
-- Check for the `UsernameExistsException` in the `handleSubmit` method's `catch` block.
+1. Check for the `UsernameExistsException` in the `handleSubmit` method's `catch` block.
 
-- Use the `Auth.resendSignUp()` method to resend the code if the user has not been previously confirmed. Here is a link to the [Amplify API docs](https://aws.github.io/aws-amplify/api/classes/authclass.html#resendsignup).
+2. Use the `Auth.resendSignUp()` method to resend the code if the user has not been previously confirmed. Here is a link to the [Amplify API docs](https://aws.github.io/aws-amplify/api/classes/authclass.html#resendsignup).
 
-- Confirm the code just as we did before.
+3. Confirm the code just as we did before.
 
 Give this a try and post in the comments if you have any questions.
 

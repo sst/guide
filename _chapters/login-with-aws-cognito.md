@@ -17,7 +17,7 @@ Recall that the `Auth` module from Amplify let's us connect to our Cognito setup
 <img class="code-marker" src="/assets/s.png" />Add the following to the header of our Login container in `src/containers/Login.js`.
 
 ``` coffee
-import { Auth } from 'aws-amplify';
+import { Auth } from "aws-amplify";
 ```
 
 ### Login to Amazon Cognito

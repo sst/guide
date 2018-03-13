@@ -31,7 +31,7 @@ this.state = {
 import { Auth } from "aws-amplify";
 ```
 
-<img class="code-marker" src="/assets/s.png" />Now to load the user session we'll add the following to our `src/App.js`.
+<img class="code-marker" src="/assets/s.png" />Now to load the user session we'll add the following to our `src/App.js` below our `constructor` method.
 
 ``` javascript
 async componentDidMount() {
@@ -41,14 +41,16 @@ async componentDidMount() {
     }
   }
   catch(e) {
-    alert(e);
+    if (e !== 'No current user') {
+      alert(e);
+    }
   }
 
   this.setState({ isAuthenticating: false });
 }
 ```
 
-All this does is check if a session object is returned. If so, then it updates the `isAuthenticating` flag once the process is complete.
+All this does is check if a session object is returned. If so, then it updates the `isAuthenticating` flag once the process is complete. Also, the `Auth.currentSession()` method throws an error `No current user` if nobody is currently logged in. We don't want to show this error to users when they load up our app and are not signed in.
 
 ### Render When the State Is Ready
 

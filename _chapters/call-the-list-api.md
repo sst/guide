@@ -38,7 +38,7 @@ notes() {
 <img class="code-marker" src="/assets/s.png" />And include our Amplify API module in the header.
 
 ``` javascript
-import { API } from 'aws-amplify';
+import { API } from "aws-amplify";
 ```
 
 All this does, is make a GET request to `/notes` on `componentDidMount` and puts the results in the `notes` object in the state.
