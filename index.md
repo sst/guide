@@ -130,7 +130,4 @@ Frontend
 ### Reference
 
 - [Connect to API Gateway with IAM auth]({% link _chapters/connect-to-api-gateway-with-iam-auth.md %})
-
-### Tools
-
 - [Serverless Node.js Starter]({% link _chapters/serverless-nodejs-starter.md %})
