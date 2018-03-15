@@ -5,7 +5,7 @@ date: 2017-01-12 12:00:00
 description: We are going to use the information of our AWS resources to configure AWS Amplify in our React app. We'll call the Amplify.configure() method when our app first loads.
 context: frontend
 code: frontend
-comments_id: 37
+comments_id: 208
 ---
 
 To allow our React app to talk to the AWS resources that we created (in the backend section of the tutorial), we'll be using a library called [AWS Amplify](https://github.com/aws/aws-amplify). 
