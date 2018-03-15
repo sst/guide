@@ -2,39 +2,20 @@
 layout: post
 title: Clear the Session on Logout
 date: 2017-01-16 00:00:00
-description: We need to make sure to clear the logged in session using the Amazon Cognito JS SDK in our React.js app when the user logs out. We can do this using the signOut method.
+description: We need to make sure to clear the logged in user's Amazon Cognito session in our React.js app when the user logs out. We can do this using AWS Amplify's Auth.signOut() method.
 context: frontend
-code: frontend
 comments_id: 41
 ---
 
-Currently we are only removing the user session from our app's state. But when we refresh the page, we load the user session from the browser Local Storage, in effect logging them back in.
+Currently we are only removing the user session from our app's state. But when we refresh the page, we load the user session from the browser Local Storage (using Amplify), in effect logging them back in.
 
-<img class="code-marker" src="/assets/s.png" />Let's create a `signOutUser` method and add it to our `src/libs/awsLib.js`.
+AWS Amplify has a `Auth.signOut()` method that helps clear it out.
 
-``` coffee
-export function signOutUser() {
-  const currentUser = getCurrentUser();
-
-  if (currentUser !== null) {
-    currentUser.signOut();
-  }
-}
-```
-
-Here we are using the AWS Cognito JS SDK to log the user out by calling `currentUser.signOut()`.
-
-<img class="code-marker" src="/assets/s.png" />Next we'll include that in our `App` component. Replace the `import { authUser }` line in the header of `src/App.js` with:
+<img class="code-marker" src="/assets/s.png" />Let's replace the `handleLogout` method in our `src/App.js` with this:
 
 ``` javascript
-import { authUser, signOutUser } from "./libs/awsLib";
-```
-
-<img class="code-marker" src="/assets/s.png" />And replace the `handleLogout` method in our `src/App.js` with this:
-
-``` javascript
-handleLogout = event => {
-  signOutUser();
+handleLogout = async event => {
+  await Auth.signOut();
 
   this.userHasAuthenticated(false);
 }

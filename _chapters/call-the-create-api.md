@@ -2,18 +2,19 @@
 layout: post
 title: Call the Create API
 date: 2017-01-23 00:00:00
-description: To let users create a note in our React.js app, we need to connect our form to our serverless API backend. We are going to use our API Gateway helper to make the request.
+description: To let our users create a note in our React.js app, we need to connect our form to our serverless API backend. We are going to use AWS Amplify's API module for this.
 context: frontend
-code: frontend
 comments_id: 48
 ---
 
-Now that we know how to connect to API Gateway securely, let's make the API call to create our note.
+Now that we have our basic create note form working, let's connect it to our API. We'll do the upload to S3 a little bit later. Our APIs are secured using AWS IAM and Cognito User Pool is our authentication provider. Thankfully, Amplify takes care of this for us by using the logged in user's session.
 
-<img class="code-marker" src="/assets/s.png" />Let's include our `awsLib` by adding the following to the header of `src/containers/NewNote.js`.
+We just need to use the `API` module that AWS Amplify has.
+
+<img class="code-marker" src="/assets/s.png" />Let's include the `API` module by adding the following to the header of `src/containers/NewNote.js`.
 
 ``` javascript
-import { invokeApig } from "../libs/awsLib";
+import { API } from "aws-amplify";
 ```
 
 <img class="code-marker" src="/assets/s.png" />And replace our `handleSubmit` function with the following.
@@ -41,9 +42,7 @@ handleSubmit = async event => {
 }
 
 createNote(note) {
-  return invokeApig({
-    path: "/notes",
-    method: "POST",
+  return API.post("notes", "/notes", {
     body: note
   });
 }
@@ -51,7 +50,7 @@ createNote(note) {
 
 This does a couple of simple things.
 
-1. We make our create call in `createNote` by making a POST request to `/notes` and passing in our note object.
+1. We make our create call in `createNote` by making a POST request to `/notes` and passing in our note object. Notice that the first two arguments to the `API.post()` method are `notes` and `/notes`. This is because back in the [Configure AWS Amplify]({% link _chapters/configure-aws-amplify.md %}) chapter we called these set of APIs by the name `notes`.
 
 2. For now the note object is simply the content of the note. We are creating these notes without an attachment for now.
 

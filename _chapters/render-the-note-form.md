@@ -4,7 +4,6 @@ title: Render the Note Form
 date: 2017-01-29 00:00:00
 description: We are going to render a user’s note in a form in our React.js app. To render the form fields, we’ll use React-Bootstrap’s FormGroup and FormControl components.
 context: frontend
-code: frontend
 comments_id: 54
 ---
 
@@ -18,9 +17,7 @@ validateForm() {
 }
 
 formatFilename(str) {
-  return str.length < 50
-    ? str
-    : str.substr(0, 20) + "..." + str.substr(str.length - 20, str.length);
+  return str.replace(/^\w+-/, "");
 }
 
 handleChange = event => {
@@ -77,7 +74,7 @@ render() {
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
-                  href={this.state.note.attachment}
+                  href={this.state.attachmentURL}
                 >
                   {this.formatFilename(this.state.note.attachment)}
                 </a>
@@ -119,7 +116,7 @@ We are doing a few things here:
 
 2. Inside the form we conditionally render the part where we display the attachment by using `this.state.note.attachment`.
 
-3. We form the attachment URL using `formatFilename` (since S3 gives us some very long URLs).
+3. We format the attachment URL using `formatFilename` by stripping the timestamp we had added to the filename while uploading it.
 
 4. We also added a delete button to allow users to delete the note. And just like the submit button it too needs a flag that signals that the call is in progress. We call it `isDeleting`.
 
@@ -136,7 +133,8 @@ this.state = {
   isLoading: null,
   isDeleting: null,
   note: null,
-  content: ""
+  content: "",
+  attachmentURL: null
 };
 ```
 

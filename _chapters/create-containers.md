@@ -4,7 +4,6 @@ title: Create Containers
 date: 2017-01-11 00:00:00
 description: To split up our React.js app into different routes we are going to structure it using containers in React Router v4. We are also going to add the Navbar React-Bootstrap component to our App container.
 context: frontend
-code: frontend
 comments_id: 34
 ---
 
@@ -14,7 +13,13 @@ Currently, our app has a single component that renders our content. For creating
 
 Let's start by creating the outer chrome of our application by first adding a navigation bar to it. We are going to use the [Navbar](https://react-bootstrap.github.io/components.html#navbars) React-Bootstrap component.
 
-<img class="code-marker" src="/assets/s.png" />And go ahead and remove the code inside `src/App.js` and replace it with the following. Also, you can go ahead and remove `src/logo.svg`.
+<img class="code-marker" src="/assets/s.png" />To start, you can go remove the `src/logo.svg` that is placed there by Create React App.
+
+``` bash
+$ rm src/logo.svg
+```
+
+<img class="code-marker" src="/assets/s.png" />And go ahead and remove the code inside `src/App.js` and replace it with the following.
 
 ``` coffee
 import React, { Component } from "react";
@@ -66,7 +71,15 @@ Let's also add a couple of line of styles to space things out a bit more.
 
 Now that we have the outer chrome of our application ready, let's add the container for the homepage of our app.  It'll respond to the `/` route.
 
-<img class="code-marker" src="/assets/s.png" />Create a `src/containers` directory and add the following inside `src/containers/Home.js`.
+<img class="code-marker" src="/assets/s.png" />Create a `src/containers/` directory by running the following in your working directory.
+
+``` bash
+$ mkdir src/containers/
+```
+
+We'll be storing all of our top level components here. These are components that will respond to our routes and make requests to our API. We will be calling them *containers* through the rest of this tutorial.
+
+<img class="code-marker" src="/assets/s.png" />Create a new container and add the following to `src/containers/Home.js`.
 
 ``` coffee
 import React, { Component } from "react";

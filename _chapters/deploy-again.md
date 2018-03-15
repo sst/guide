@@ -2,9 +2,9 @@
 layout: post
 title: Deploy Again
 date: 2017-02-14 00:00:00
-code: frontend_full
 description: To be able to deploy updates to our React.js app hosted on S3 and CloudFront, we need to uploads our app to S3 and invalidate the CloudFront cache. We can do this using the “aws cloudfront create-invalidation” command in our AWS CLI. To automate these steps by running “npm run deploy”, we will add these commands to predeploy, deploy, and postdeploy scripts in our package.json.
 context: all
+code: frontend_full
 comments_id: 70
 ---
 
@@ -25,8 +25,10 @@ Now that our app is built and ready in the `build/` directory, let's deploy to S
 Run the following from our working directory to upload our app to our main S3 Bucket. Make sure to replace `YOUR_S3_DEPLOY_BUCKET_NAME` with the S3 Bucket we created in the [Create an S3 bucket]({% link _chapters/create-an-s3-bucket.md %}) chapter.
 
 ``` bash
-$ aws s3 sync build/ s3://YOUR_S3_DEPLOY_BUCKET_NAME
+$ aws s3 sync build/ s3://YOUR_S3_DEPLOY_BUCKET_NAME --delete
 ```
+
+Note the `--delete` flag here; this is telling S3 to delete all the files that are in the bucket that we aren't uploading this time around. Create React App generates unique bundles when we build it and without this flag we'll end up retaining all the files from the previous builds.
 
 Our changes should be live on S3.
 
@@ -73,7 +75,7 @@ NPM allows us to add a `deploy` command in our `package.json`.
 
 ``` coffee
 "predeploy": "npm run build",
-"deploy": "aws s3 sync build/ s3://YOUR_S3_DEPLOY_BUCKET_NAME",
+"deploy": "aws s3 sync build/ s3://YOUR_S3_DEPLOY_BUCKET_NAME --delete",
 "postdeploy": "aws cloudfront create-invalidation --distribution-id YOUR_CF_DISTRIBUTION_ID --paths '/*' && aws cloudfront create-invalidation --distribution-id YOUR_WWW_CF_DISTRIBUTION_ID --paths '/*'",
 ```
 

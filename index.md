@@ -60,6 +60,7 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
   - [Create containers]({% link _chapters/create-containers.md %})
   - [Adding links in the navbar]({% link _chapters/adding-links-in-the-navbar.md %})
   - [Handle 404s]({% link _chapters/handle-404s.md %})
+- [Configure AWS Amplify]({% link _chapters/configure-aws-amplify.md %})
 
 ### Building a React App
 
@@ -74,10 +75,8 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
   - [Create the signup form]({% link _chapters/create-the-signup-form.md %})
   - [Signup with AWS Cognito]({% link _chapters/signup-with-aws-cognito.md %})
 - [Add the create note page]({% link _chapters/add-the-create-note-page.md %})
-  - [Connect to API Gateway with IAM auth]({% link _chapters/connect-to-api-gateway-with-iam-auth.md %})
   - [Call the create API]({% link _chapters/call-the-create-api.md %})
   - [Upload a file to S3]({% link _chapters/upload-a-file-to-s3.md %})
-  - [Clear AWS Credentials Cache]({% link _chapters/clear-aws-credentials-cache.md %})
 - [List all the notes]({% link _chapters/list-all-the-notes.md %})
   - [Call the list API]({% link _chapters/call-the-list-api.md %})
 - [Display a note]({% link _chapters/display-a-note.md %})
@@ -128,6 +127,7 @@ Frontend
   - [Code Splitting in Create React App]({% link _chapters/code-splitting-in-create-react-app.md %})
   - [Environments in Create React App]({% link _chapters/environments-in-create-react-app.md %})
 
-### Tools
+### Reference
 
+- [Connect to API Gateway with IAM auth]({% link _chapters/connect-to-api-gateway-with-iam-auth.md %})
 - [Serverless Node.js Starter]({% link _chapters/serverless-nodejs-starter.md %})

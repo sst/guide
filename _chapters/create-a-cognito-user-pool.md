@@ -51,7 +51,7 @@ Now hit **Create pool** at the bottom of the page.
 
 ![Select Create pool screenshot](/assets/cognito-user-pool/select-create-pool.png)
 
-Now that the User Pool is created. Take a note of the **Pool Id** and **Pool ARN** which will be required later.
+Now that the User Pool is created. Take a note of the **Pool Id** and **Pool ARN** which will be required later. Also, note the region that your User Pool is created in. In our case it is in `us-east-1`.
 
 ![Cognito User Pool Created Screenshot](/assets/cognito-user-pool/user-pool-created.png)
 

@@ -502,6 +502,14 @@ div.home .about-us-image-desc {
   color: $tertiary-text-color;
   font-size: 14px;
 }
+div.home iframe.seed-demo-video {
+  width: 640px;
+  height: 360px;
+  @include media-query($on-palm) {
+    width: 100%;
+    height: auto;
+  }
+}
 
 
 

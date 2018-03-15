@@ -23,17 +23,25 @@ And type in the name of our domain. Hit **Add another name to this certificate**
 
 ![Add domain names to certificate screenshot](/assets/add-domain-names-to-certificate.png)
 
-On the next screen review to make sure you filled in the right domain names and hit **Confirm and request**.
+Now to confirm that we control the domain, select the **DNS validation** method and hit **Review**.
 
-![Review domain name details screenshot](/assets/review-domain-name-details.png)
+![Select dns validation for certificate screenshot](/assets/select-dns-validation-for-certificate.png)
 
-And finally on the **Validation** screen, AWS let's you know which email addresses it's going to send emails to verify that it is your domain. Hit **Continue**, to send the verification emails.
+On the validation screen expand the two domains we are trying to validate.
 
-![Validation for domains screenshot](/assets/validation-for-domains.png)
+![Expand dns validation details screenshot](/assets/expand-dns-validation-details.png)
 
-Now since we are setting up a certificate for two domains (the non-www and www versions), we'll be receiving two emails with a link to verify that you own the domains. Make sure to hit **I Approve** on both the emails.
+Since we control the domain through Route 53, we can directly create the DNS record through here by hitting **Create record in Route 53**.
 
-![Domain verification screen screenshot](/assets/domain-verification.png)
+![Create Route 53 dns record screenshot](/assets/create-route-53-dns-record.png)
+
+And confirm that you want the record to be created by hitting **Create**.
+
+![Confirm Route 53 dns record screenshot](/assets/confirm-route-53-dns-record.png)
+
+Also, make sure to do this for the other domain.
+
+The process of creating a DNS record and validating it can take around 30 minutes.
 
 Next, we'll associate this certificate with our CloudFront Distributions.
 

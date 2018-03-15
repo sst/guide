@@ -2,9 +2,8 @@
 layout: post
 title: Display a Note
 date: 2017-01-28 00:00:00
-description: We want to create a page in our React.js app that will display a user’s note based on the id in the URL. We are going to use the React Router v4 Route component’s URL parameters to get the id. And using this id we are going to request our note from the serverless backend API.
+description: We want to create a page in our React.js app that will display a user’s note based on the id in the URL. We are going to use the React Router v4 Route component’s URL parameters to get the id. Using this id we are going to request our note from the serverless backend API. And use AWS Amplify's Storage.vault.get() method to get a secure link to download our attachment.
 context: frontend
-code: frontend
 comments_id: 53
 ---
 
@@ -40,7 +39,7 @@ Of course this component doesn't exist yet and we are going to create it now.
 
 ``` coffee
 import React, { Component } from "react";
-import { invokeApig } from "../libs/awsLib";
+import { API, Storage } from "aws-amplify";
 
 export default class Notes extends Component {
   constructor(props) {
@@ -50,16 +49,25 @@ export default class Notes extends Component {
 
     this.state = {
       note: null,
-      content: ""
+      content: "",
+      attachmentURL: null
     };
   }
 
   async componentDidMount() {
     try {
-      const results = await this.getNote();
+      let attachmentURL;
+      const note = await this.getNote();
+      const { content, attachment } = note;
+
+      if (attachment) {
+        attachmentURL = await Storage.vault.get(attachment);
+      }
+
       this.setState({
-        note: results,
-        content: results.content
+        note,
+        content,
+        attachmentURL
       });
     } catch (e) {
       alert(e);
@@ -67,18 +75,24 @@ export default class Notes extends Component {
   }
 
   getNote() {
-    return invokeApig({ path: `/notes/${this.props.match.params.id}` });
+    return API.get("notes", `/notes/${this.props.match.params.id}`);
   }
 
   render() {
-    return <div className="Notes" />;
+    return <div className="Notes"></div>;
   }
 }
 ```
 
-All this does is load the note on `componentDidMount` and save it to the state. We get the `id` of our note from the URL using the props automatically passed to us by React-Router in `this.props.match.params.id`. The keyword `id` is a part of the pattern matching in our route (`/notes/:id`).
+We are doing a couple of things here.
 
-And now if you switch over to your browser and navigate to a note that we previously created, you'll notice that the page renders an empty container.
+1. Load the note on `componentDidMount` and save it to the state. We get the `id` of our note from the URL using the props automatically passed to us by React-Router in `this.props.match.params.id`. The keyword `id` is a part of the pattern matching in our route (`/notes/:id`).
+
+2. If there is an attachment, we use the key to get a secure link to the file we uploaded to S3. We then store this to the component's state as `attachmentURL`.
+
+3. The reason why we have the `note` object in the state along with the `content` and the `attachmentURL` is because we will be using this later when the user edits the note.
+
+Now if you switch over to your browser and navigate to a note that we previously created, you'll notice that the page renders an empty container.
 
 ![Empty notes page loaded screenshot](/assets/empty-notes-page-loaded.png)
 

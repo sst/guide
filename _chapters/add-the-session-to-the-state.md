@@ -5,7 +5,6 @@ date: 2017-01-15 00:00:00
 redirect_from: /chapters/add-the-user-token-to-the-state.html
 description: We need to add the user session to the state of our App component in our React.js app. By lifting the state up we can pass the session to all the child containers.
 context: frontend
-code: frontend
 comments_id: 39
 ---
 
@@ -60,7 +59,17 @@ const childProps = {
 
 Currently, our `Routes` component does not do anything with the passed in `childProps`. We need it to apply these props to the child component it is going to render. In this case we need it to apply them to our `Login` component.
 
-<img class="code-marker" src="/assets/s.png" />To do this, create a new component in `src/components/AppliedRoute.js` and add the following.
+To do this we are going to create a new component.
+
+<img class="code-marker" src="/assets/s.png" />Create a `src/components/` directory by running this command in your working directory.
+
+``` bash
+$ mkdir src/components/
+```
+
+Here we'll be storing all our React components that are not dealing directly with our API or responding to routes.
+
+<img class="code-marker" src="/assets/s.png" />Create a new component in `src/components/AppliedRoute.js` and add the following.
 
 ``` coffee
 import React from "react";
@@ -113,8 +122,12 @@ this.props.userHasAuthenticated(true);
 We can now use this to display a Logout button once the user logs in. Find the following in our `src/App.js`.
 
 ``` coffee
-<RouteNavItem href="/signup">Signup</RouteNavItem>
-<RouteNavItem href="/login">Login</RouteNavItem>
+<LinkContainer to="/signup">
+  <NavItem>Signup</NavItem>
+</LinkContainer>
+<LinkContainer to="/login">
+  <NavItem>Login</NavItem>
+</LinkContainer>
 ```
 
 <img class="code-marker" src="/assets/s.png" />And replace it with this:
@@ -122,23 +135,26 @@ We can now use this to display a Logout button once the user logs in. Find the f
 ``` coffee
 {this.state.isAuthenticated
   ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
-  : [
-      <RouteNavItem key={1} href="/signup">
-        Signup
-      </RouteNavItem>,
-      <RouteNavItem key={2} href="/login">
-        Login
-      </RouteNavItem>
-    ]}
+  : <Fragment>
+      <LinkContainer to="/signup">
+        <NavItem>Signup</NavItem>
+      </LinkContainer>
+      <LinkContainer to="/login">
+        <NavItem>Login</NavItem>
+      </LinkContainer>
+    </Fragment>
+}
 ```
 
-Also, import the `NavItem` in the header.
+Also, import the `Fragment` in the header.
 
-<img class="code-marker" src="/assets/s.png" />Replace the `react-bootstrap` import in the header of `src/App.js` with the following.
+<img class="code-marker" src="/assets/s.png" />Replace the `import React` line in the header of `src/App.js` with the following.
 
 ``` coffee
-import { Nav, NavItem, Navbar } from "react-bootstrap";
+import React, { Component, Fragment } from "react";
 ```
+
+The `Fragment` component can be thought of as a placeholder component. We need this because in the case the user is not logged in, we want to render two links. To do this we would need to wrap it inside a single component, like a `div`. But by using the `Fragment` component it tells React that the two links are inside this component but we don't want to render any extra HTML.
 
 <img class="code-marker" src="/assets/s.png" />And add this `handleLogout` method to `src/App.js` above the `render() {` line as well.
 

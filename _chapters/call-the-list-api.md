@@ -2,7 +2,7 @@
 layout: post
 title: Call the List API
 date: 2017-01-27 00:00:00
-description: To display a list of all of the user’s notes in our React.js app, we are going to make a GET request to our serverless API backend. We are also going to use the ListGroup and ListGroupItem React-Bootstrap components to render the list.
+description: To display a list of all of the user’s notes in our React.js app, we are going to make a GET request to our serverless API backend using the AWS Amplify API module. We are also going to use the ListGroup and ListGroupItem React-Bootstrap components to render the list.
 context: frontend
 code: frontend
 comments_id: 52
@@ -21,8 +21,8 @@ async componentDidMount() {
   }
 
   try {
-    const results = await this.notes();
-    this.setState({ notes: results });
+    const notes = await this.notes();
+    this.setState({ notes });
   } catch (e) {
     alert(e);
   }
@@ -31,14 +31,14 @@ async componentDidMount() {
 }
 
 notes() {
-  return invokeApig({ path: "/notes" });
+  return API.get("notes", "/notes");
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />And include our API Gateway Client helper in the header.
+<img class="code-marker" src="/assets/s.png" />And include our Amplify API module in the header.
 
 ``` javascript
-import { invokeApig } from '../libs/awsLib';
+import { API } from "aws-amplify";
 ```
 
 All this does, is make a GET request to `/notes` on `componentDidMount` and puts the results in the `notes` object in the state.

@@ -4,13 +4,18 @@ title: Create a New React.js App
 date: 2017-01-06 00:00:00
 description: Create React App helps you build React.js app with no configuration. Install the Create React App CLI using the NPM package and use the command to start a new React.js project.
 context: all
-code: frontend
 comments_id: 29
 ---
 
 Let's get started with our frontend. We are going to create a single page app using [React.js](https://facebook.github.io/react/). We'll use the [Create React App](https://github.com/facebookincubator/create-react-app) project to set everything up. It is officially supported by the React team and conveniently packages all the dependencies for a React.js project.
 
 ### Install Create React App
+
+<img class="code-marker" src="/assets/s.png" />Move out of the directory that we were working in for the backend.
+
+``` bash
+$ cd ../
+```
 
 <img class="code-marker" src="/assets/s.png" />Create a new project in directory separate from the backend. Run the following command.
 

@@ -29,6 +29,8 @@ Pick a name of the bucket and select a region. Then select **Create**.
 - **Bucket names** are globally unique, which means you cannot pick the same name as this tutorial.
 - **Region** is the physical geographical region where the files are stored. We will use **US East (N. Virginia)** for this guide.
 
+Make a note of the name and region as we'll be using it later in the guide.
+
 ![Enter S3 Bucket Info screenshot](/assets/s3/enter-s3-bucket-info.png)
 
 Step through the next steps and leave the defaults by clicking **Next**, and then click **Create Bucket** on the last step.

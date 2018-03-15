@@ -2,7 +2,7 @@
 layout: post
 title: Signup with AWS Cognito
 date: 2017-01-21 00:00:00
-description: To implement a signup form in our React.js app using Amazon Cognito we are going to use the amazon-cognito-identity-js NPM package. We are going to call the signUp method to sign a user up and call the confirmRegistration method with the confirmation code to complete the process.
+description: To implement a signup form in our React.js app using Amazon Cognito we are going to use AWS Amplify. We are going to call the Auth.signUp() method to sign a user up and call the Auth.confirmSignUp() method with the confirmation code to complete the process.
 context: frontend
 code: frontend
 comments_id: 46
@@ -19,12 +19,15 @@ handleSubmit = async event => {
   this.setState({ isLoading: true });
 
   try {
-    const newUser = await this.signup(this.state.email, this.state.password);
+    const newUser = await Auth.signUp({
+      username: this.state.email,
+      password: this.state.password
+    });
     this.setState({
-      newUser: newUser
+      newUser
     });
   } catch (e) {
-    alert(e);
+    alert(e.message);
   }
 
   this.setState({ isLoading: false });
@@ -36,75 +39,22 @@ handleConfirmationSubmit = async event => {
   this.setState({ isLoading: true });
 
   try {
-    await this.confirm(this.state.newUser, this.state.confirmationCode);
-    await this.authenticate(
-      this.state.newUser,
-      this.state.email,
-      this.state.password
-    );
+    await Auth.confirmSignUp(this.state.email, this.state.confirmationCode);
+    await Auth.signIn(this.state.email, this.state.password);
 
     this.props.userHasAuthenticated(true);
     this.props.history.push("/");
   } catch (e) {
-    alert(e);
+    alert(e.message);
     this.setState({ isLoading: false });
   }
 }
-
-signup(email, password) {
-  const userPool = new CognitoUserPool({
-    UserPoolId: config.cognito.USER_POOL_ID,
-    ClientId: config.cognito.APP_CLIENT_ID
-  });
-
-  return new Promise((resolve, reject) =>
-    userPool.signUp(email, password, [], null, (err, result) => {
-      if (err) {
-        reject(err);
-        return;
-      }
-
-      resolve(result.user);
-    })
-  );
-}
-
-confirm(user, confirmationCode) {
-  return new Promise((resolve, reject) =>
-    user.confirmRegistration(confirmationCode, true, function(err, result) {
-      if (err) {
-        reject(err);
-        return;
-      }
-      resolve(result);
-    })
-  );
-}
-
-authenticate(user, email, password) {
-  const authenticationData = {
-    Username: email,
-    Password: password
-  };
-  const authenticationDetails = new AuthenticationDetails(authenticationData);
-
-  return new Promise((resolve, reject) =>
-    user.authenticateUser(authenticationDetails, {
-      onSuccess: result => resolve(),
-      onFailure: err => reject(err)
-    })
-  );
-}
 ```
 
-<img class="code-marker" src="/assets/s.png" />Also, include the following in our header.
+<img class="code-marker" src="/assets/s.png" />Also, include the Amplify Auth in our header.
 
 ``` javascript
-import {
-  AuthenticationDetails,
-  CognitoUserPool
-} from "amazon-cognito-identity-js";
-import config from "../config";
+import { Auth } from "aws-amplify";
 ```
 
 The flow here is pretty simple:
@@ -117,7 +67,7 @@ The flow here is pretty simple:
 
 4. With the user now confirmed, Cognito now knows that we have a new user that can login to our app.
 
-5. Use the email and password to authenticate the newly created user using the `newUser` object that we had previously saved in the state.
+5. Use the email and password to authenticate exactly the same way we did in the login page.
 
 6. Update the App's state using the `userHasAuthenticated` method.
 
@@ -127,14 +77,22 @@ Now if you were to switch over to your browser and try signing up for a new acco
 
 ![Redirect home after signup screenshot](/assets/redirect-home-after-signup.png)
 
-A quick note on the signup flow here. If the user refreshes their page at the confirm step, they won't be able to get back and confirm that account. It forces them to create a new account instead. We are keeping things intentionally simple here but you can fix this by creating a separate page that handles the confirm step based on the email address. [Here](http://docs.aws.amazon.com/cognito/latest/developerguide/using-amazon-cognito-user-identity-pools-javascript-examples.html#using-amazon-cognito-identity-user-pools-javascript-example-confirming-user) is some sample code that you can use to confirm an unauthenticated user.
+A quick note on the signup flow here. If the user refreshes their page at the confirm step, they won't be able to get back and confirm that account. It forces them to create a new account instead. We are keeping things intentionally simple but here are a couple of hints on how to fix it.
 
-However, while developing you might run into cases where you need to manually confirm an unauthenticated user. You can do that with the AWS CLI using the following command.
+1. Check for the `UsernameExistsException` in the `handleSubmit` method's `catch` block.
+
+2. Use the `Auth.resendSignUp()` method to resend the code if the user has not been previously confirmed. Here is a link to the [Amplify API docs](https://aws.github.io/aws-amplify/api/classes/authclass.html#resendsignup).
+
+3. Confirm the code just as we did before.
+
+Give this a try and post in the comments if you have any questions.
+
+Now while developing you might run into cases where you need to manually confirm an unauthenticated user. You can do that with the AWS CLI using the following command.
 
 ```bash
 aws cognito-idp admin-confirm-sign-up \
-   --region us-east-1 \
-   --user-pool-id YOUR_USER_POOL_ID \
+   --region YOUR_COGNITO_REGION \
+   --user-pool-id YOUR_COGNITO_USER_POOL_ID \
    --username YOUR_USER_EMAIL
 ```
 

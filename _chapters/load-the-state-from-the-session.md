@@ -2,62 +2,18 @@
 layout: post
 title: Load the State from the Session
 date: 2017-01-15 00:00:00
-description: To keep a user logged in to Amazon Cognito in our React.js app, we are going to load the user session in the App component state. We load the session in componentDidMount using the getCurrentUser and getUserToken Cognito JS SDK methods.
+description: To keep a user logged in to Amazon Cognito in our React.js app, we are going to load the user session in the App component state. We load the session in componentDidMount using the AWS Amplify Auth.currentSession() method.
 context: frontend
-code: frontend
 comments_id: 40
 ---
 
-To make our login information persist we need to store and load it from the browser session. There are a few different ways we can do this, using Cookies or Local Storage. Thankfully the AWS Cognito JS SDK does that for us automatically and we just need to read from it and load it into our application state.
+To make our login information persist we need to store and load it from the browser session. There are a few different ways we can do this, using Cookies or Local Storage. Thankfully the AWS Amplify does this for us automatically and we just need to read from it and load it into our application state.
 
-### Get Current User and Token
+Amplify gives us a way to get the current user session using the `Auth.currentSession()` method. It returns a promise that resolves to the session object (if there is one).
 
-We are going to do this step a couple of times, so let's create a helper function for it.
+### Load User Session
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `src/libs/awsLib.js`. Make sure to create the `src/libs/` directory first.
-
-``` coffee
-import { CognitoUserPool } from "amazon-cognito-identity-js";
-import config from "../config";
-
-export async function authUser() {
-  const currentUser = getCurrentUser();
-
-  if (currentUser === null) {
-    return false;
-  }
-
-  await getUserToken(currentUser);
-
-  return true;
-}
-
-function getUserToken(currentUser) {
-  return new Promise((resolve, reject) => {
-    currentUser.getSession(function(err, session) {
-      if (err) {
-        reject(err);
-        return;
-      }
-      resolve(session.getIdToken().getJwtToken());
-    });
-  });
-}
-
-function getCurrentUser() {
-  const userPool = new CognitoUserPool({
-    UserPoolId: config.cognito.USER_POOL_ID,
-    ClientId: config.cognito.APP_CLIENT_ID
-  });
-  return userPool.getCurrentUser();
-}
-```
-
-The `authUser` method is getting the current user from the Local Storage using the Cognito JS SDK. We then get that user's session and their user token in `getUserToken`. The `currentUser.getSession` also refreshes the user session in case it has expired. Finally in the `authUser` method we return `true` if we are able to authenticate the user and `false` if the user is not logged in.
-
-### Load User Session in to the State
-
-Now that we can ensure the session user is authenticated using the `authUser` method, let's load this when our app loads. We are going to do this in `componentDidMount`. And since `authUser` is going to be called async; we need to ensure that the rest of our app is only ready to go after this has been loaded.
+Let's load this when our app loads. We are going to do this in `componentDidMount`. Since `Auth.currentSession()` returns a promise, it means that we need to ensure that the rest of our app is only ready to go after this has been loaded.
 
 <img class="code-marker" src="/assets/s.png" />To do this, let's add a flag to our `src/App.js` state called `isAuthenticating`. The initial state in our `constructor` should look like the following.
 
@@ -68,30 +24,32 @@ this.state = {
 };
 ```
 
-<img class="code-marker" src="/assets/s.png" />Let's include the `authUser` method that we created by adding it to the header of `src/App.js`.
+<img class="code-marker" src="/assets/s.png" />Let's include the `Auth` module by adding the following to the header of `src/App.js`.
 
 ``` javascript
-import { authUser } from "./libs/awsLib";
+import { Auth } from "aws-amplify";
 ```
 
-<img class="code-marker" src="/assets/s.png" />Now to load the user session we'll add the following to our `src/App.js`.
+<img class="code-marker" src="/assets/s.png" />Now to load the user session we'll add the following to our `src/App.js` below our `constructor` method.
 
 ``` javascript
 async componentDidMount() {
   try {
-    if (await authUser()) {
+    if (await Auth.currentSession()) {
       this.userHasAuthenticated(true);
     }
   }
   catch(e) {
-    alert(e);
+    if (e !== 'No current user') {
+      alert(e);
+    }
   }
 
   this.setState({ isAuthenticating: false });
 }
 ```
 
-All this does is check if there is a valid user in the session. It then updates the `isAuthenticating` flag once the process is complete.
+All this does is check if a session object is returned. If so, then it updates the `isAuthenticating` flag once the process is complete. Also, the `Auth.currentSession()` method throws an error `No current user` if nobody is currently logged in. We don't want to show this error to users when they load up our app and are not signed in.
 
 ### Render When the State Is Ready
 
@@ -122,14 +80,15 @@ render() {
           <Nav pullRight>
             {this.state.isAuthenticated
               ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
-              : [
-                  <RouteNavItem key={1} href="/signup">
-                    Signup
-                  </RouteNavItem>,
-                  <RouteNavItem key={2} href="/login">
-                    Login
-                  </RouteNavItem>
-                ]}
+              : <Fragment>
+                  <LinkContainer to="/signup">
+                    <NavItem>Signup</NavItem>
+                  </LinkContainer>
+                  <LinkContainer to="/login">
+                    <NavItem>Login</NavItem>
+                  </LinkContainer>
+                </Fragment>
+            }
           </Nav>
         </Navbar.Collapse>
       </Navbar>

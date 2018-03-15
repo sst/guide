@@ -4,7 +4,6 @@ title: Handle 404s
 date: 2017-01-12 00:00:00
 description: To handle 404s in a React.js app with React Router v4 we need to set up a catch all Route at the bottom of our Switch block. A catch all Route does not have a path prop and responds to all routes.
 context: frontend
-code: frontend
 comments_id: 36
 ---
 
@@ -60,4 +59,4 @@ And that's it! Now if you were to switch over to your browser and try clicking o
 
 ![Router 404 page screenshot](/assets/router-404-page.png)
 
-Next up, we are going to work on creating our login and sign up forms.
+Next up, we are going to configure our app with the info of our backend resources.
