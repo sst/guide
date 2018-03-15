@@ -4,7 +4,6 @@ title: Login with AWS Cognito
 date: 2017-01-14 00:00:00
 description: To allow users to login using Amazon Cognito in our React.js app, we are going to use AWS Amplify. We need the Cognito User Pool Id and our App Client Id. We login the user by calling the Auth.signIn() method from AWS Amplify.
 context: frontend
-code: frontend
 comments_id: 38
 ---
 

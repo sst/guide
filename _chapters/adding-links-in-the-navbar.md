@@ -4,7 +4,6 @@ title: Adding Links in the Navbar
 date: 2017-01-11 12:00:00
 description: To add links to the Navbar of our React.js app we’ll be using the NavItem React-Bootstrap component. And to allow users to navigate using these links we are going to use React-Router's Route component and call the history.push method.
 context: frontend
-code: frontend
 comments_id: 35
 ---
 

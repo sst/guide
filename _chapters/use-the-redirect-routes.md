@@ -5,7 +5,6 @@ date: 2017-02-03 00:00:00
 redirect_from: /chapters/use-the-hoc-in-the-routes.html
 description: In our React.js app we can use the AuthenticatedRoute and UnauthenticatedRoute in place of the Routes that we want secured. We’ll do this inside React Router v4’s Switch component.
 context: frontend
-code: frontend
 comments_id: 59
 ---
 
