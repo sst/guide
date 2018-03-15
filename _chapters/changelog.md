@@ -21,7 +21,14 @@ You can get these updates emailed to you via our [newsletter]({{ site.newsletter
 
 ### Changes
 
-#### [v1.2.5: Using specific Bootstrap CSS version](https://branchv125--serverless-stack.netlify.com) (Current)
+#### [v2.0: AWS Amplify update](https://branchv20--serverless-stack.netlify.com) (Current)
+
+Mar 15, 2018: Updating frontend to use AWS Amplify. Verifying SSL certificate now uses DNS validation.
+
+- [Tutorial changes]({{ site.github_repo }}/compare/v1.2.5...v2.0)
+- [Client]({{ site.frontend_github_repo }}/compare/v1.2.5...v2.0)
+
+#### [v1.2.5: Using specific Bootstrap CSS version](https://branchv125--serverless-stack.netlify.com)
 
 Feb 5, 2018: Using specific Bootstrap CSS version since `latest` now points to Bootstrap v4. But React-Bootstrap uses v3.
 
