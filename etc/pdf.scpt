@@ -42,6 +42,7 @@ handle-routes-with-react-router
 create-containers
 adding-links-in-the-navbar
 handle-404s
+configure-aws-amplify
 create-a-login-page
 login-with-aws-cognito
 add-the-session-to-the-state
@@ -53,10 +54,8 @@ create-a-signup-page
 create-the-signup-form
 signup-with-aws-cognito
 add-the-create-note-page
-connect-to-api-gateway-with-iam-auth
 call-the-create-api
 upload-a-file-to-s3
-clear-aws-credentials-cache
 list-all-the-notes
 call-the-list-api
 display-a-note
@@ -77,12 +76,20 @@ setup-ssl
 deploy-updates
 update-the-app
 deploy-again
-code-splitting-in-create-react-app
 wrapping-up
 giving-back
-older-versions
+changelog
 staying-up-to-date
-serverless-es7-service"
+api-gateway-and-lambda-logs
+debugging-serverless-api-issues
+serverless-environment-variables
+stages-in-serverless-framework
+configure-multiple-aws-profiles
+customize-the-serverless-iam-policy
+code-splitting-in-create-react-app
+environments-in-create-react-app
+connect-to-api-gateway-with-iam-auth
+serverless-nodejs-starter"
 
 set text item delimiters to "
 "
