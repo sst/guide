@@ -13,9 +13,8 @@ To help people stay up to date with the changes, we run the <a href="{{ site.new
 - Outlines the recent updates to Serverless Stack
 - Never sent out more than once a week
 - One click unsubscribe
-- And you get the entire guide as a 300 page PDF
+- And you get the entire guide as a 400 page PDF
 
-We hope you subscribe to it and find it useful.
+You can also <a target="_blank" href="{{ site.twitter_url }}">follow us on Twitter</a>.
 
 <a class="button contact" href="{{ site.newsletter_signup_form }}" target="_blank">Subscribe</a>
-
