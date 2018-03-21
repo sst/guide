@@ -21,7 +21,14 @@ You can get these updates emailed to you via our [newsletter]({{ site.newsletter
 
 ### Changes
 
-#### [v2.0: AWS Amplify update](https://branchv20--serverless-stack.netlify.com) (Current)
+#### [v2.1: Updating to Webpack 4](https://branchv21--serverless-stack.netlify.com) (Current)
+
+Mar 21, 2018: Updating the backend to use Webpack 4 and serverless-webpack 5.
+
+- [Tutorial changes]({{ site.github_repo }}/compare/v2.0...v2.1)
+- [API]({{ site.backend_github_repo }}/compare/v1.2.3...v2.1)
+
+#### [v2.0: AWS Amplify update](https://branchv20--serverless-stack.netlify.com)
 
 Mar 15, 2018: Updating frontend to use AWS Amplify. Verifying SSL certificate now uses DNS validation.
 
