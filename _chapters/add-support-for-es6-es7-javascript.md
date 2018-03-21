@@ -3,7 +3,7 @@ layout: post
 title: Add Support for ES6/ES7 JavaScript
 date: 2016-12-29 12:00:00
 redirect_from: /chapters/add-support-for-es6-javascript.html
-description: AWS Lambda supports Node.js 6.10 and so to use async/await and other ES6/ES7 features in our Serverless Framework project we need to use Babel and Webpack to transpile our code. We can do this by adding the serverless-webpack plugin to our project and setting it up to automatically transpile our handler functions.
+description: AWS Lambda supports Node.js 6.10 and so to use async/await and other ES6/ES7 features in our Serverless Framework project we need to use Babel and Webpack 4 to transpile our code. We can do this by adding the serverless-webpack plugin to our project and setting it up to automatically transpile our handler functions.
 context: backend
 code: backend
 comments_id: 22
@@ -11,7 +11,7 @@ comments_id: 22
 
 By default, AWS Lambda only supports a specific version of JavaScript. It doesn't have an up-to-date Node.js engine. And looking a bit further ahead, we'll be using a more advanced flavor of JavaScript with ES6/ES7 features. So it would make sense to follow the same syntax on the backend and have a transpiler convert it to the target syntax. This would mean that we won't need to worry about writing different types of code on the backend or the frontend.
 
-In this chapter, we are going to enable ES6/ES7 for AWS Lambda using the Serverless Framework. We will do this by setting up [Babel](https://babeljs.io) and [Webpack](https://webpack.github.io) to transpile and package our project. If you would like to code with AWS Lambda's default JavaScript version, you can skip this chapter. But you will not be able to directly use the sample code in the later chapters, as they are written in ES6 syntax.
+In this chapter, we are going to enable ES6/ES7 for AWS Lambda using the Serverless Framework. We will do this by setting up [Babel](https://babeljs.io) and [Webpack](https://webpack.github.io) 4 to transpile and package our project. If you would like to code with AWS Lambda's default JavaScript version, you can skip this chapter. But you will not be able to directly use the sample code in the later chapters, as they are written in ES6 syntax.
 
 ### Install Babel and Webpack
 
@@ -25,8 +25,8 @@ $ npm install --save-dev \
     babel-preset-env \
     babel-preset-stage-3 \
     serverless-webpack \
-    webpack@3.11.0 \
-    webpack-node-externals@1.6.0
+    webpack \
+    webpack-node-externals
 
 $ npm install --save babel-runtime
 ```
@@ -45,6 +45,15 @@ module.exports = {
   // Since 'aws-sdk' is not compatible with webpack,
   // we exclude all node dependencies
   externals: [nodeExternals()],
+  mode: slsw.lib.webpack.isLocal ? "development" : "production",
+  optimization: {
+    // We no not want to minimize our code.
+    minimize: false
+  },
+  performance: {
+    // Turn off size warnings for entry points
+    hints: false
+  },
   // Run babel on all .js files and skip those in node_modules
   module: {
     rules: [
@@ -66,7 +75,10 @@ This is the configuration Webpack will use to package our app. The main part of 
 ``` json
 {
   "plugins": ["transform-runtime"],
-  "presets": ["env", "stage-3"]
+  "presets": [
+    ["env", { "node": "6.10" }],
+    "stage-3"
+  ]
 }
 ```
 
@@ -81,9 +93,12 @@ service: notes-app-api
 plugins:
   - serverless-webpack
 
+# Configuration for serverless-webpack
 # Enable auto-packing of external modules
 custom:
-  webpackIncludeModules: true
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
 
 provider:
   name: aws

@@ -100,9 +100,9 @@ set theChapters to text items of theChaptersStr
 #################
 # Download PDFs #
 #################
-#repeat with theCurrentChapter in theChapters
-#  downloadPdf(theCurrentChapter)
-#end repeat
+repeat with theCurrentChapter in theChapters
+  downloadPdf(theCurrentChapter)
+end repeat
 
 ##############
 # Merge PDFs #
