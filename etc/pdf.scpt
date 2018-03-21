@@ -81,7 +81,7 @@ update-the-app
 deploy-again
 wrapping-up
 giving-back
-older-versions
+changelog
 staying-up-to-date
 api-gateway-and-lambda-logs
 debugging-serverless-api-issues
@@ -102,9 +102,9 @@ set theChapters to text items of theChaptersStr
 #################
 # Download PDFs #
 #################
-#repeat with theCurrentChapter in theChapters
-#  downloadPdf(theCurrentChapter)
-#end repeat
+repeat with theCurrentChapter in theChapters
+  downloadPdf(theCurrentChapter)
+end repeat
 
 ##############
 # Merge PDFs #
