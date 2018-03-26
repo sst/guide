@@ -10,9 +10,9 @@ comments_id: 43
 
 It's important that we give the user some feedback while we are logging them in. So they get the sense that the app is still working, as opposed to being unresponsive.
 
-### Use a isLoading Flag
+### Use an isLoading Flag
 
-<img class="code-marker" src="/assets/s.png" />To do this we are going to add a `isLoading` flag to the state of our `src/containers/Login.js`. So the initial state in the `constructor` looks like the following.
+<img class="code-marker" src="/assets/s.png" />To do this we are going to add an `isLoading` flag to the state of our `src/containers/Login.js`. So the initial state in the `constructor` looks like the following.
 
 ``` javascript
 this.state = {
@@ -70,7 +70,7 @@ export default ({
   </Button>;
 ```
 
-This is a really simple component that takes a `isLoading` flag and the text that the button displays in the two states (the default state and the loading state). The `disabled` prop is a result of what we have currently in our `Login` button. And we ensure that the button is disabled when `isLoading` is `true`. This makes it so that the user can't click it while we are in the process of logging them in.
+This is a really simple component that takes an `isLoading` flag and the text that the button displays in the two states (the default state and the loading state). The `disabled` prop is a result of what we have currently in our `Login` button. And we ensure that the button is disabled when `isLoading` is `true`. This makes it so that the user can't click it while we are in the process of logging them in.
 
 And let's add a couple of styles to animate our loading icon.
 
