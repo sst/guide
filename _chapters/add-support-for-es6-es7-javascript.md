@@ -68,7 +68,9 @@ module.exports = {
 };
 ```
 
-This is the configuration Webpack will use to package our app. The main part of this config is the `entry` attribute that we are automatically generating using the `slsw.lib.entries` that is a part of the `serverless-webpack` plugin. This automatically picks up all our handler functions and packages them (we expand on this config at the [end of our guide]({% link _chapters/serverless-nodejs-starter.md %}) to make it a bit easier to use).
+This is the configuration Webpack will use to package our app. The main part of this config is the `entry` attribute that we are automatically generating using the `slsw.lib.entries` that is a part of the `serverless-webpack` plugin. This automatically picks up all our handler functions and packages them.
+
+Note that, you won't have to do this for your new projects, we created a [starter project]({% link _chapters/serverless-nodejs-starter.md %}) for you to use without any of the configuration.
 
 <img class="code-marker" src="/assets/s.png" />Next create a file called `.babelrc` in the root with the following.
 

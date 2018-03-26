@@ -10,9 +10,11 @@ comments_id: 72
 
 Now that we know how to set our Serverless projects up, it makes sense that we have a good starting point for our future projects. For this we created a couple of Serverless starter projects that you can use called, [Serverless Node.js Starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter). We also have a Python version called [Serverless Python Starter](https://github.com/AnomalyInnovations/serverless-python-starter). Our starter projects also work really well with [Seed](https://seed.run); a fully-configured CI/CD pipeline for Serverless Framework.
 
-[Serverless Node.js Starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter) uses the [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) plugin, [Babel](https://babeljs.io), and [Jest](https://facebook.github.io/jest/). It supports:
+[Serverless Node.js Starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter) uses the [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) plugin, the [serverless-offline](https://github.com/dherault/serverless-offline) plugin, [Babel](https://babeljs.io), and [Jest](https://facebook.github.io/jest/). It supports:
 
 - **Use async/await in your handler functions**
+- **Run API Gateway locally**
+  - Use `serverless offline start`
 - **Support for unit tests**
   - Run `npm test` to run your tests
 - **Sourcemaps for proper error messages**
@@ -20,10 +22,11 @@ Now that we know how to set our Serverless projects up, it makes sense that we h
   - Works in production with CloudWatch
 - **Automatic support for multiple handler files**
   - No need to add a new entry to your `webpack.config.js`
+- **Add environment variables for your stages**
 
 ### Demo
 
-A demo version of this service is hosted on AWS - [`https://cvps1pt354.execute-api.us-east-1.amazonaws.com/dev/hello`](https://cvps1pt354.execute-api.us-east-1.amazonaws.com/dev/hello).
+A demo version of this service is hosted on AWS - [`https://z6pv80ao4l.execute-api.us-east-1.amazonaws.com/dev/hello`](https://z6pv80ao4l.execute-api.us-east-1.amazonaws.com/dev/hello).
 
 And here is the ES7 source behind it.
 
@@ -80,6 +83,12 @@ To run a function on your local
 $ serverless invoke local --function hello
 ```
 
+To simulate API Gateway locally using [serverless-offline](https://github.com/dherault/serverless-offline)
+
+``` bash
+$ serverless offline start
+```
+
 Run your tests
 
 ``` bash
@@ -99,6 +108,13 @@ Deploy a single function
 ``` bash
 $ serverless deploy function --function hello
 ```
+
+To add environment variables to your project
+
+1. Rename `env.example` to `env.yml`.
+2. Add environment variables for the various stages to `env.yml`.
+3. Uncomment `environment: ${file(env.yml):${self:provider.stage}}` in the `serverless.yml`.
+4. Make sure to not commit your `env.yml`.
 
 So give it a try and send us an [email](mailto:contact@anoma.ly) if you have any questions or open a [new issue](https://github.com/AnomalyInnovations/serverless-nodejs-starter/issues/new) if you've found a bug.
 
