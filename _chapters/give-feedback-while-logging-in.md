@@ -10,7 +10,7 @@ comments_id: 43
 
 It's important that we give the user some feedback while we are logging them in. So they get the sense that the app is still working, as opposed to being unresponsive.
 
-### Use an Flag
+### Use an isLoading Flag
 
 <img class="code-marker" src="/assets/s.png" />To do this we are going to add an `isLoading` flag to the state of our `src/containers/Login.js`. So the initial state in the `constructor` looks like the following.
 
