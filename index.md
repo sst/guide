@@ -101,6 +101,27 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
   - [Update the app]({% link _chapters/update-the-app.md %})
   - [Deploy again]({% link _chapters/deploy-again.md %})
 
+### Serverless Stack Extension
+
+- [Introduction to the Extension]({% link _chapters/introduction-to-the-extension.md %})
+
+### Backend
+
+- [Initialize the backend repo]({% link _chapters/initialize-the-backend-repo.md %})
+- [Infrastructure as code]({% link _chapters/infrastructure-as-code.md %})
+  - [Configure DynamoDB in Serverless]({% link _chapters/configure-dynamodb-in-serverless.md %})
+  - [Configure S3 in Serverless]({% link _chapters/configure-s3-in-serverless.md %})
+  - [Configure Cognito User Pool in Serverless]({% link _chapters/configure-s3-in-serverless.md %})
+  - [Configure Cognito Identity Pool in Serverless]({% link _chapters/configure-s3-in-serverless.md %})
+  - [Add environment variables in Lambda functions]({% link _chapters/add-environment-variables-in-lambda-functions.md %})
+  - [Deploy your serverless infrastructure]({% link _chapters/deploy-your-serverless-infrastructure.md %})
+- [Working with 3rd party APIs]({% link _chapters/working-with-3rd-party-apis.md %})
+  - [Setup a Stripe account]({% link _chapters/setup-a-stripe-account.md %})
+  - [Add a billing API]({% link _chapters/add-a-billing-api.md %})
+  - [Load secrets from env.yml]({% link _chapters/load-secrets-from-env-yml.md %})
+  - [Test the billing API]({% link _chapters/test-the-billing-api.md %})
+- [Unit tests in Serverless]({% link _chapters/test-the-billing-api.md %})
+
 ### Conclusion
 
 - [Wrapping up]({% link _chapters/wrapping-up.md %})
