@@ -108,19 +108,39 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
 ### Backend
 
 - [Initialize the backend repo]({% link _chapters/initialize-the-backend-repo.md %})
+
 - [Infrastructure as code]({% link _chapters/infrastructure-as-code.md %})
   - [Configure DynamoDB in Serverless]({% link _chapters/configure-dynamodb-in-serverless.md %})
   - [Configure S3 in Serverless]({% link _chapters/configure-s3-in-serverless.md %})
-  - [Configure Cognito User Pool in Serverless]({% link _chapters/configure-s3-in-serverless.md %})
-  - [Configure Cognito Identity Pool in Serverless]({% link _chapters/configure-s3-in-serverless.md %})
+  - [Configure Cognito User Pool in Serverless]({% link _chapters/configure-cognito-user-pool.md %})
+  - [Configure Cognito Identity Pool in Serverless]({% link _chapters/configure-cognito-identity-pool.md %})
   - [Add environment variables in Lambda functions]({% link _chapters/add-environment-variables-in-lambda-functions.md %})
   - [Deploy your serverless infrastructure]({% link _chapters/deploy-your-serverless-infrastructure.md %})
+
 - [Working with 3rd party APIs]({% link _chapters/working-with-3rd-party-apis.md %})
   - [Setup a Stripe account]({% link _chapters/setup-a-stripe-account.md %})
   - [Add a billing API]({% link _chapters/add-a-billing-api.md %})
   - [Load secrets from env.yml]({% link _chapters/load-secrets-from-env-yml.md %})
   - [Test the billing API]({% link _chapters/test-the-billing-api.md %})
+
 - [Unit tests in Serverless]({% link _chapters/test-the-billing-api.md %})
+
+- [Automating Serverless Deployments]({% link _chapters/automating-serverless-deployments.md %})
+  - [Setting up your project on Seed]({% link _chapters/setting-up-your-project-on-seed.md %})
+  - [Configure secrets in Seed]({% link _chapters/configure-secrets-in-seed.md %})
+  - [Deploying through Seed]({% link _chapters/deploying-through-seed.md %})
+  - [Custom Domains for API Gateway]({% link _chapters/custom-domains-for-api-gateway.md %})
+  - [Test the configured APIs]({% link _chapters/test-the-configured-apis.md %})
+  - [Monitoring deployments in Seed]({% link _chapters/monitoring-deployments-in-seed.md %})
+
+### Frontend
+
+- [Initialize the frontend repo]({% link _chapters/initialize-the-frontend-repo.md %})
+  - [Manage environments in Create React App]({% link _chapters/manage-environments-in-create-react-app.md %})
+  - [Signup with email alias]({% link _chapters/signup-with-email-alias.md %})
+
+- [Adding a settings page]({% link _chapters/adding-a-settings-page.md %})
+  - [Add Stripe keys to config]({% link _chapters/add-stripe-keys-to-config.md %})
 
 ### Conclusion
 

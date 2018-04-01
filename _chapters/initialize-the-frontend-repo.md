@@ -1,20 +1,20 @@
 ---
 layout: post
-title: Initialize the backend repo
+title: Initialize the frontend repo
 date: 2017-05-30 00:00:00
 description:
 comments_id:
 ---
 
-To start with we are going to create our new project and add it to GitHub. We are going to be working off the code we've created so far. Don't worry if you haven't worked through the initial tutorial.
+Just as we did in the backend portion, we'll start by creating our project and adding it to GitHub. We will use what we had in part 1 as a starting point.
 
 ### Clone the original repo
 
-In your working directory, start by cloning the [original repo]((% site.backend_github_repo %}).
+In your working directory, start by cloning the [original repo]((% site.frontend_github_repo %}). Make sure this is not inside the directory for our backend.
 
 ``` bash
-$ git clone --depth 1 https://github.com/AnomalyInnovations/serverless-stack-demo-api.git serverless-stack-ext-api/
-$ cd serverles-stack-ext-api/
+$ git clone --depth 1 https://github.com/AnomalyInnovations/serverless-stack-demo-client.git serverless-stack-ext-client/
+$ cd serverles-stack-ext-client/
 ```
 
 And remove the `.git/` dir.
@@ -73,4 +73,4 @@ Finally, let's push our first commit to GitHub using:
 $ git push -u origin master
 ```
 
-Next let's look into configuring our entire notes app backend via our `serverless.yml`. This is commonly known as **Infratrcture as code**.
+Next let's look into configuring our frontend client with the environments that we have in our backend.

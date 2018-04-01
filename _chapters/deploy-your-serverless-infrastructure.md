@@ -42,7 +42,7 @@ A couple of things to note here:
 
 - We are deploying to a stage called `dev`. This has been set in our `serverless.yml` under the `provider:` block. We can override this by explicitly passing it in by running the `serverless deploy --stage dev` command instead.
 
-- Our deploy command prints out the output we had requested in our resource. Make note of xxxxx, xxxxxx, xxxxx, xxxx, xxxx. We are going to be using this later when we configure our frontend.
+- Our deploy command prints out the output we had requested in our resource.
 
 - Finally, you can run the deploy command and CloudFormation will only update the parts that have changed. So you can confidently run this command without worrying about it re-creating your entire infrastructure from scratch.
 

@@ -17,7 +17,7 @@ First, we will use AWS CLI to sign up a user with their email and password.
 
 ``` bash
 $ aws cognito-idp sign-up \
-  --region us-east-1 \
+  --region YOUR_COGNITO_REGION \
   --client-id YOUR_COGNITO_APP_CLIENT_ID \
   --username admin@example.com \
   --password Passw0rd!
@@ -29,8 +29,8 @@ Now, the user is created in Cognito User Pool. However, before the user can auth
 
 ``` bash
 $ aws cognito-idp admin-confirm-sign-up \
-  --region us-east-1 \
-  --user-pool-id YOUR_USER_POOL_ID \
+  --region YOUR_COGNITO_REGION \
+  --user-pool-id YOUR_COGNITO_USER_POOL_ID \
   --username admin@example.com
 ```
 
