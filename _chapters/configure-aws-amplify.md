@@ -109,7 +109,7 @@ A couple of notes here.
 
 - The `mandatorySignIn` flag for `Auth` is set to true because we want our users to be signed in before they can interact with our app.
 
-- The `name: "notes"` is basically telling Amplify that we want to name our API. Amplify allows you to add multiple APIs that you your app is going to work with. In our case our entire backend is just one single API.
+- The `name: "notes"` is basically telling Amplify that we want to name our API. Amplify allows you to add multiple APIs that your app is going to work with. In our case our entire backend is just one single API.
 
 - The `Amplify.configure()` is just setting the various AWS resources that we want to interact with. It isn't doing anything else special here beside configuration. So while this might look intimidating, just remember this is only setting things up. 
 
