@@ -139,8 +139,10 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
   - [Manage environments in Create React App]({% link _chapters/manage-environments-in-create-react-app.md %})
   - [Signup with email alias]({% link _chapters/signup-with-email-alias.md %})
 
-- [Adding a settings page]({% link _chapters/adding-a-settings-page.md %})
+- [Create a settings page]({% link _chapters/create-a-settings-page.md %})
   - [Add Stripe keys to config]({% link _chapters/add-stripe-keys-to-config.md %})
+  - [Create a billing form]({% link _chapters/create-a-billing-form.md %})
+  - [Connect the billing form]({% link _chapters/connect-the-billing-form.md %})
 
 ### Conclusion
 

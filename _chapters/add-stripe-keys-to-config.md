@@ -33,4 +33,4 @@ $ git add.
 $ git commit -m "Adding Stripe keys to config"
 ```
 
-Next, we'll build our settings page.
+Next, we'll build our billing form.

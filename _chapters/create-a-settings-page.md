@@ -20,15 +20,13 @@ Create a new file in `src/containers/Settings.js` and add the following.
 ``` js
 import React, { Component } from "react";
 import { API } from "aws-amplify";
-import BillingForm from "../components/BillingForm";
-import config from "../config";
 
 export default class Settings extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isLoading: false,
+      isLoading: false
     };
   }
 
