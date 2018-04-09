@@ -97,9 +97,12 @@ service: notes-app-api
 plugins:
   - serverless-webpack
 
+# Configuration for serverless-webpack
 # Enable auto-packing of external modules
 custom:
-  webpackIncludeModules: true
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
 
 provider:
   name: aws
