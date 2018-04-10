@@ -11,7 +11,7 @@ Currently, our app has a single component that renders our content. For creating
 
 ### Add a Navbar
 
-Let's start by creating the outer chrome of our application by first adding a navigation bar to it. We are going to use the [Navbar](https://react-bootstrap.github.io/components.html#navbars) React-Bootstrap component.
+Let's start by creating the outer chrome of our application by first adding a navigation bar to it. We are going to use the [Navbar](https://react-bootstrap.github.io/components/navbar/) React-Bootstrap component.
 
 <img class="code-marker" src="/assets/s.png" />To start, you can go remove the `src/logo.svg` that is placed there by Create React App.
 
