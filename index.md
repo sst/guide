@@ -144,6 +144,12 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
   - [Create a billing form]({% link _chapters/create-a-billing-form.md %})
   - [Connect the billing form]({% link _chapters/connect-the-billing-form.md %})
 
+- [Automating React Deployments]({% link _chapters/automating-react-deployments.md %})
+  - [Create a build script]({% link _chapters/create-a-build-script.md %})
+  - [Setting up your project on Netlify]({% link _chapters/setting-up-your-project-on-netlify.md %})
+  - [Custom Domains in Netlify]({% link _chapters/custom-domain-in-netlify.md %})
+  - [Frontend workflow]({% link _chapters/frontend-workflow.md %})
+
 ### Conclusion
 
 - [Wrapping up]({% link _chapters/wrapping-up.md %})
