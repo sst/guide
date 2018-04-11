@@ -24,19 +24,19 @@ $ npm install serverless -g
 
 The above command needs [NPM](https://www.npmjs.com), a package manager for JavaScript. Follow [this](https://docs.npmjs.com/getting-started/installing-node) if you need help installing NPM.
 
-<img class="code-marker" src="/assets/s.png" />At the root of the project; create a project using a Node.js starter. We'll go over some of the details of this starter project in the next chapter.
+<img class="code-marker" src="/assets/s.png" />In your working directory; create a project using a Node.js starter. We'll go over some of the details of this starter project in the next chapter.
 
 ``` bash
 $ serverless install --url https://github.com/AnomalyInnovations/serverless-nodejs-starter --name notes-app-api
 ```
 
-<img class="code-marker" src="/assets/s.png" />Go into the directory for our api.
+<img class="code-marker" src="/assets/s.png" />Go into the directory for our backend api project.
 
 ``` bash
 $ cd notes-app-api
 ```
 
-Now the directory should contain the a few files including, the **handler.js** and **serverless.yml**.
+Now the directory should contain a few files including, the **handler.js** and **serverless.yml**.
 
 - **handler.js** file contains actual code for the services/functions that will be deployed to AWS Lambda.
 - **serverless.yml** file contains the configuration on what AWS services Serverless will provision and how to configure them.
