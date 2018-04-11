@@ -9,28 +9,18 @@ comments_id: 29
 
 Let's get started with our frontend. We are going to create a single page app using [React.js](https://facebook.github.io/react/). We'll use the [Create React App](https://github.com/facebookincubator/create-react-app) project to set everything up. It is officially supported by the React team and conveniently packages all the dependencies for a React.js project.
 
-### Install Create React App
-
 <img class="code-marker" src="/assets/s.png" />Move out of the directory that we were working in for the backend.
 
 ``` bash
 $ cd ../
 ```
 
-<img class="code-marker" src="/assets/s.png" />Create a new project in directory separate from the backend. Run the following command.
+### Create a New React App
+
+<img class="code-marker" src="/assets/s.png" />Run the following command to create the client for our notes app.
 
 ``` bash
-$ npm install -g create-react-app
-```
-
-This installs the Create React App NPM package globally.
-
-### Create a New App
-
-<img class="code-marker" src="/assets/s.png" />From your working directory, run the following command to create the client for our notes app.
-
-``` bash
-$ create-react-app notes-app-client
+$ npx create-react-app notes-app-client
 ```
 
 This should take a second to run, and it will create your new project and your new working directory.

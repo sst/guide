@@ -3,16 +3,17 @@ layout: post
 title: Serverless Node.js Starter
 redirect_from: /chapters/serverless-es7-service.html
 date: 2017-05-30 00:00:00
-description: A Serverless Node.js starter project that adds support for ES6/ES7 async/await methods and unit tests to your Serverless Framework project.
+description: A Serverless Node.js starter project that adds support for ES6/ES7 async/await methods, import/export, and unit tests to your Serverless Framework project.
 context: all
 comments_id: 72
 ---
 
-Now that we know how to set our Serverless projects up, it makes sense that we have a good starting point for our future projects. For this we created a couple of Serverless starter projects that you can use called, [Serverless Node.js Starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter). We also have a Python version called [Serverless Python Starter](https://github.com/AnomalyInnovations/serverless-python-starter). Our starter projects also work really well with [Seed](https://seed.run); a fully-configured CI/CD pipeline for Serverless Framework.
+Based on what we have gone through in this guide, it makes sense that we have a good starting point for our future projects. For this we created a couple of Serverless starter projects that you can use called, [Serverless Node.js Starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter). We also have a Python version called [Serverless Python Starter](https://github.com/AnomalyInnovations/serverless-python-starter). Our starter projects also work really well with [Seed](https://seed.run); a fully-configured CI/CD pipeline for Serverless Framework.
 
 [Serverless Node.js Starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter) uses the [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) plugin, the [serverless-offline](https://github.com/dherault/serverless-offline) plugin, [Babel](https://babeljs.io), and [Jest](https://facebook.github.io/jest/). It supports:
 
-- **Use async/await in your handler functions**
+- **Use ES7 syntax in your handler functions**
+- **Package your functions using Webpack**
 - **Run API Gateway locally**
   - Use `serverless offline start`
 - **Support for unit tests**
@@ -57,7 +58,7 @@ const message = ({ time, ...rest }) => new Promise((resolve, reject) =>
 
 ### Installation
 
-To create a new Serverless project with ES7 support.
+To create a new Serverless project.
 
 ``` bash
 $ serverless install --url https://github.com/AnomalyInnovations/serverless-nodejs-starter --name my-project
@@ -117,5 +118,3 @@ To add environment variables to your project
 4. Make sure to not commit your `env.yml`.
 
 So give it a try and send us an [email](mailto:contact@anoma.ly) if you have any questions or open a [new issue](https://github.com/AnomalyInnovations/serverless-nodejs-starter/issues/new) if you've found a bug.
-
-
