@@ -18,11 +18,13 @@ To be able to hit our API endpoints securely, we need to follow these steps.
 
 These steps can be a bit tricky to do by hand. So we created a simple tool called [AWS API Gateway Test CLI](https://github.com/AnomalyInnovations/aws-api-gateway-cli-test).
 
-You can install it by running the following.
+You can run it using.
 
 ``` bash
-$ npm install -g aws-api-gateway-cli-test
+$ npx aws-api-gateway-cli-test
 ```
+
+The `npx` command is just a convenient way of running a NPM module without installing it globally.
 
 We need to pass in quite a bit of our info to complete the above steps.
 
@@ -34,7 +36,7 @@ We need to pass in quite a bit of our info to complete the above steps.
 And run the following.
 
 ``` bash
-$ apig-test \
+$ npx aws-api-gateway-cli-test \
 --username='admin@example.com' \
 --password='Passw0rd!' \
 --user-pool-id='YOUR_COGNITO_USER_POOL_ID' \
@@ -53,7 +55,7 @@ While this might look intimidating, just keep in mind that behind the scenes all
 If you are on Windows, use the command below. The space between each option is very important.
 
 ``` bash
-$ apig-test --username admin@example.com --password Passw0rd! --user-pool-id YOUR_COGNITO_USER_POOL_ID --app-client-id YOUR_COGNITO_APP_CLIENT_ID --cognito-region YOUR_COGNITO_REGION --identity-pool-id YOUR_IDENTITY_POOL_ID --invoke-url YOUR_API_GATEWAY_URL --api-gateway-region YOUR_API_GATEWAY_REGION --path-template /notes --method POST --body "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}"
+$ npx aws-api-gateway-cli-test --username admin@example.com --password Passw0rd! --user-pool-id YOUR_COGNITO_USER_POOL_ID --app-client-id YOUR_COGNITO_APP_CLIENT_ID --cognito-region YOUR_COGNITO_REGION --identity-pool-id YOUR_IDENTITY_POOL_ID --invoke-url YOUR_API_GATEWAY_URL --api-gateway-region YOUR_API_GATEWAY_REGION --path-template /notes --method POST --body "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}"
 ```
 
 If the command is successful, the response will look similar to this.

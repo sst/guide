@@ -16,13 +16,6 @@ In this chapter, we are going to set up the Serverless Framework on our local de
 
 ### Install Serverless
 
-<img class="code-marker" src="/assets/s.png" />Create a directory for our API backend.
-
-``` bash
-$ mkdir notes-app-api
-$ cd notes-app-api
-```
-
 <img class="code-marker" src="/assets/s.png" />Install Serverless globally.
 
 ``` bash
@@ -31,33 +24,36 @@ $ npm install serverless -g
 
 The above command needs [NPM](https://www.npmjs.com), a package manager for JavaScript. Follow [this](https://docs.npmjs.com/getting-started/installing-node) if you need help installing NPM.
 
-<img class="code-marker" src="/assets/s.png" />At the root of the project; create an AWS Node.js service.
+<img class="code-marker" src="/assets/s.png" />In your working directory; create a project using a Node.js starter. We'll go over some of the details of this starter project in the next chapter.
 
 ``` bash
-$ serverless create --template aws-nodejs
+$ serverless install --url https://github.com/AnomalyInnovations/serverless-nodejs-starter --name notes-app-api
 ```
 
-Now the directory should contain the two following files, namely **handler.js** and **serverless.yml**.
+<img class="code-marker" src="/assets/s.png" />Go into the directory for our backend api project.
 
 ``` bash
-$ ls
-handler.js    serverless.yml
+$ cd notes-app-api
 ```
+
+Now the directory should contain a few files including, the **handler.js** and **serverless.yml**.
 
 - **handler.js** file contains actual code for the services/functions that will be deployed to AWS Lambda.
 - **serverless.yml** file contains the configuration on what AWS services Serverless will provision and how to configure them.
 
-### Install AWS Related Dependencies
+We also have a `tests/` directory where we can add our unit tests.
+
+### Install Node.js packages
+
+The starter project relies on a few dependecies that are listed in the `package.json`.
 
 <img class="code-marker" src="/assets/s.png" />At the root of the project, run.
 
 ``` bash
-$ npm init -y
+$ npm install
 ```
 
-This creates a new Node.js project for you. This will help us manage any dependencies our project might have.
-
-<img class="code-marker" src="/assets/s.png" />Next, install these two packages.
+<img class="code-marker" src="/assets/s.png" />Next, we'll install a couple of other packages specifically for our backend.
 
 ``` bash
 $ npm install aws-sdk --save-dev
@@ -67,14 +63,4 @@ $ npm install uuid --save
 - **aws-sdk** allows us to talk to the various AWS services.
 - **uuid** generates unique ids. We need this for storing things to DynamoDB.
 
-Now the directory should contain three files and one directory.
-
-``` bash
-$ ls
-handler.js    node_modules    package.json    serverless.yml
-```
-
-- **node_modules** contains the Node.js dependencies that we just installed.
-- **package.json** contains the Node.js configuration for our project.
-
-Next, we are going to set up a standard JavaScript environment for us by adding support for ES6.
+The starter project that we are using allows us to use the version of JavaScript that we'll be using in our frontend app later. Let's look at exactly how it does this.

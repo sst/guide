@@ -64,6 +64,8 @@ This follows exactly the same structure as our previous `create.js` function. Th
           authorizer: aws_iam
 ```
 
+Make sure that this block is indented exactly the same way as the preceding `create` block.
+
 This defines our get note API. It adds a GET request handler with the endpoint `/notes/{id}`.
 
 ### Test
