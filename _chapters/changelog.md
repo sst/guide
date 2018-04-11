@@ -21,7 +21,14 @@ You can get these updates emailed to you via our [newsletter]({{ site.newsletter
 
 ### Changes
 
-#### [v2.1: Updating to Webpack 4](https://branchv21--serverless-stack.netlify.com) (Current)
+#### [v2.2: Updating to user Node.js starter and v8.10](https://branchv22--serverless-stack.netlify.com) (Current)
+
+Apr 11, 2018: Updating the backend to use Node.js starter and Lambda Node v8.10
+
+- [Tutorial changes]({{ site.github_repo }}/compare/v2.1...v2.2)
+- [API]({{ site.backend_github_repo }}/tree/v2.2)
+
+#### [v2.1: Updating to Webpack 4](https://branchv21--serverless-stack.netlify.com)
 
 Mar 21, 2018: Updating the backend to use Webpack 4 and serverless-webpack 5.
 
