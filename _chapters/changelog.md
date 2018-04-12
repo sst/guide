@@ -23,10 +23,10 @@ You can get these updates emailed to you via our [newsletter]({{ site.newsletter
 
 #### [v2.2: Updating to user Node.js starter and v8.10](https://branchv22--serverless-stack.netlify.com) (Current)
 
-Apr 11, 2018: Updating the backend to use Node.js starter and Lambda Node v8.10
+Apr 11, 2018: Updating the backend to use Node.js starter and Lambda Node v8.10. [Discussion on the update]({{ site.github_repo }}/issues/223).
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v2.1...v2.2)
-- [API]({{ site.backend_github_repo }}/tree/v2.2)
+- [API]({{ site.backend_github_repo }}/compare/v2.1...v2.2)
 
 #### [v2.1: Updating to Webpack 4](https://branchv21--serverless-stack.netlify.com)
 
@@ -37,7 +37,7 @@ Mar 21, 2018: Updating the backend to use Webpack 4 and serverless-webpack 5.
 
 #### [v2.0: AWS Amplify update](https://branchv20--serverless-stack.netlify.com)
 
-Mar 15, 2018: Updating frontend to use AWS Amplify. Verifying SSL certificate now uses DNS validation.
+Mar 15, 2018: Updating frontend to use AWS Amplify. Verifying SSL certificate now uses DNS validation. [Discussion on the update]({{ site.github_repo }}/issues/123).
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v1.2.5...v2.0)
 - [Client]({{ site.frontend_github_repo }}/compare/v1.2.5...v2.0)
@@ -86,21 +86,21 @@ Oct 7, 2017: Added the following *Extra Credit* chapters.
 
 #### [v1.2: Upgrade to Serverless Webpack v3](https://59caac9bcf321c5b78f2c3e2--serverless-stack.netlify.com/)
 
-Sep 16, 2017: Upgrading serverless backend to using serverless-webpack plugin v3. The new version of the plugin changes some of the commands used to test the serverless backend. You can read more about it [here]({{ site.github_repo }}/issues/130).
+Sep 16, 2017: Upgrading serverless backend to using serverless-webpack plugin v3. The new version of the plugin changes some of the commands used to test the serverless backend. [Discussion on the update]({{ site.github_repo }}/issues/130).
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v1.1...v1.2)
 - [API]({{ site.backend_github_repo }}/compare/v1.1...v1.2)
 
 #### [v1.1: Improved Session Handling](https://59caae1e6f4c50416e86701d--serverless-stack.netlify.com/)
 
-Aug 30, 2017: Fixing some issues with session handling in the React app. A few minor updates bundled together. You can read more about it [here]({{ site.github_repo }}/issues/123).
+Aug 30, 2017: Fixing some issues with session handling in the React app. A few minor updates bundled together. [Discussion on the update]({{ site.github_repo }}/issues/123).
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v1.0...v1.1)
 - [Client]({{ site.frontend_github_repo }}/compare/v1.0...v1.1)
 
 #### [v1.0: IAM as authorizer](https://59caae01424ef20727c342ce--serverless-stack.netlify.com/)
 
-July 19, 2017: Switching to using IAM as an authorizer instead of the authenticating directly with User Pool. This was a major update to the tutorial. You can read more about it [here]({{ site.github_repo }}/issues/108).
+July 19, 2017: Switching to using IAM as an authorizer instead of the authenticating directly with User Pool. This was a major update to the tutorial. [Discussion on the update]({{ site.github_repo }}/issues/108).
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v0.9...v1.0)
 - [API]({{ site.backend_github_repo }}/compare/v0.9...v1.0)
