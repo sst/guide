@@ -93,17 +93,21 @@ Now let's define the API endpoint for our function.
 ``` yaml
 service: notes-app-api
 
-# Use serverless-webpack plugin to transpile ES6/ES7
+# Use the serverless-webpack plugin to transpile ES6
 plugins:
   - serverless-webpack
+  - serverless-offline
 
+# serverless-webpack configuration
 # Enable auto-packing of external modules
 custom:
-  webpackIncludeModules: true
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
 
 provider:
   name: aws
-  runtime: nodejs6.10
+  runtime: nodejs8.10
   stage: prod
   region: us-east-1
 
@@ -247,7 +251,7 @@ export function call(action, params) {
 
 Here we are using the promise form of the DynamoDB methods. Promises are a method for managing asynchronous code that serve as an alternative to the standard callback function syntax. It will make our code a lot easier to read.
 
-<img class="code-marker" src="/assets/s.png" />Now, we'll go back to our `create.js` and use the helper functions we created. Our `create.js` should now look like the following.
+<img class="code-marker" src="/assets/s.png" />Now, we'll go back to our `create.js` and use the helper functions we created. Replace our `create.js` with the following.
 
 ``` javascript
 import uuid from "uuid";

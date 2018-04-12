@@ -3,45 +3,68 @@ layout: post
 title: Add Support for ES6/ES7 JavaScript
 date: 2016-12-29 12:00:00
 redirect_from: /chapters/add-support-for-es6-javascript.html
-description: AWS Lambda supports Node.js 6.10 and so to use async/await and other ES6/ES7 features in our Serverless Framework project we need to use Babel and Webpack 4 to transpile our code. We can do this by adding the serverless-webpack plugin to our project and setting it up to automatically transpile our handler functions.
+description: AWS Lambda supports Node.js v8.10 and so to use ES import/exports in our Serverless Framework project we need to use Babel and Webpack 4 to transpile our code. We can do this by using the serverless-webpack plugin to our project. We will use the serverless-nodejs-starter to set this up for us.
 context: backend
 code: backend
 comments_id: 22
 ---
 
-By default, AWS Lambda only supports a specific version of JavaScript. It doesn't have an up-to-date Node.js engine. And looking a bit further ahead, we'll be using a more advanced flavor of JavaScript with ES6/ES7 features. So it would make sense to follow the same syntax on the backend and have a transpiler convert it to the target syntax. This would mean that we won't need to worry about writing different types of code on the backend or the frontend.
+AWS Lambda recently added support for Node.js v8.10. The supported syntax is a little different compared the frontend React app that we'll be working on a little later. It makes sense to use similar ES features. Specifically, we'll be relying on ES import/exports in our handler functions. To do this we will be transpiling our code using [Babel](https://babeljs.io) and [Webpack 4](https://webpack.github.io). Serverless Framework supports plugins to do this automatically. We are going to use the [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) plugin.
 
-In this chapter, we are going to enable ES6/ES7 for AWS Lambda using the Serverless Framework. We will do this by setting up [Babel](https://babeljs.io) and [Webpack](https://webpack.github.io) 4 to transpile and package our project. If you would like to code with AWS Lambda's default JavaScript version, you can skip this chapter. But you will not be able to directly use the sample code in the later chapters, as they are written in ES6 syntax.
+All this has been added in the previous chapter using the [`serverless-nodejs-starter`]({% link _chapters/serverless-nodejs-starter.md %}). We created this starter for a couple of reasons:
 
-### Install Babel and Webpack
+- Use a similar version of JavaScript in the frontend and backend
+- Ensure transpiled code still has the right line numbers for error messages
+- Allow you to run your backend API locally
+- And add support for unit tests
 
-<img class="code-marker" src="/assets/s.png" />At the root of the project, run.
+If you recall we installed this starter using the `serverless install --url https://github.com/AnomalyInnovations/serverless-nodejs-starter --name my-project` command. This is telling Serverless Framework to use the [starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter) as a template to create our project.
 
-``` bash
-$ npm install --save-dev \
-    babel-core \
-    babel-loader \
-    babel-plugin-transform-runtime \
-    babel-preset-env \
-    babel-preset-stage-3 \
-    serverless-webpack \
-    webpack \
-    webpack-node-externals
+In this chapter, let's quickly go over how it is doing this. So you'll be able to make changes to this in the future if you need to.
 
-$ npm install --save babel-runtime
+### Serverless Webpack
+
+The transpiling process of converting our ES code to Node v8.10 JavaScript is done by the serverless-webpack plugin. This plugin was added in our `serverless.yml`. Let's take a look at it in more detail.
+
+<img class="code-marker" src="/assets/s.png" />Open `serverless.yml` and replace the default with the following.
+
+``` yaml
+service: notes-app-api
+
+# Use the serverless-webpack plugin to transpile ES6
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+# serverless-webpack configuration
+# Enable auto-packing of external modules
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: prod
+  region: us-east-1
 ```
 
-Most of the above packages are only needed while we are building our project and they won't be deployed to our Lambda functions. We are using the `serverless-webpack` plugin to help trigger the Webpack build when we run our Serverless commands. The `webpack-node-externals` is necessary because we do not want Webpack to bundle our `aws-sdk` module, since it is not compatible.
+The `service` option is pretty important. We are calling our service the `notes-app-api`. Serverless Framework creates your stack on AWS using this as the name. This means that if you change the name and deploy your project, it will create a completely new project.
 
-<img class="code-marker" src="/assets/s.png" />Create a file called `webpack.config.js` in the root with the following.
+You'll notice the `serverless-webpack` plugin that is included. We also have a `webpack.config.js` that configures the plugin.
 
-``` javascript
+Here is what your `webpack.config.js` should look like. You don't need to make any changes to it. We are just going to take a quick look.
+
+``` js
 const slsw = require("serverless-webpack");
 const nodeExternals = require("webpack-node-externals");
 
 module.exports = {
   entry: slsw.lib.entries,
   target: "node",
+  // Generate sourcemaps for proper error messages
+  devtool: 'source-map',
   // Since 'aws-sdk' is not compatible with webpack,
   // we exclude all node dependencies
   externals: [nodeExternals()],
@@ -68,45 +91,20 @@ module.exports = {
 };
 ```
 
-This is the configuration Webpack will use to package our app. The main part of this config is the `entry` attribute that we are automatically generating using the `slsw.lib.entries` that is a part of the `serverless-webpack` plugin. This automatically picks up all our handler functions and packages them.
+The main part of this config is the `entry` attribute that we are automatically generating using the `slsw.lib.entries` that is a part of the `serverless-webpack` plugin. This automatically picks up all our handler functions and packages them. We also use the `babel-loader` on each of these to transpile our code. One other thing to note here is that we are using `nodeExternals` because we do not want Webpack to bundle our `aws-sdk` module. Since it is not compatible with Webpack.
 
-Note that, you won't have to do this for your new projects, we created a [starter project]({% link _chapters/serverless-nodejs-starter.md %}) for you to use without any of the configuration.
-
-<img class="code-marker" src="/assets/s.png" />Next create a file called `.babelrc` in the root with the following.
+Finally, let's take a quick look at our Babel config. Again you don't need to change it. Just open the `.babelrc` file in your project root. It should look something like this.
 
 ``` json
 {
-  "plugins": ["transform-runtime"],
+  "plugins": ["source-map-support", "transform-runtime"],
   "presets": [
-    ["env", { "node": "6.10" }],
+    ["env", { "node": "8.10" }],
     "stage-3"
   ]
 }
 ```
 
-The presets are telling Babel the type of JavaScript we are going to be using.
-
-<img class="code-marker" src="/assets/s.png" />Open `serverless.yml` and replace it with the following.
-
-``` yaml
-service: notes-app-api
-
-# Use serverless-webpack plugin to transpile ES6/ES7
-plugins:
-  - serverless-webpack
-
-# Configuration for serverless-webpack
-# Enable auto-packing of external modules
-custom:
-  webpack:
-    webpackConfig: ./webpack.config.js
-    includeModules: true
-
-provider:
-  name: aws
-  runtime: nodejs6.10
-  stage: prod
-  region: us-east-1
-```
+Here we are telling Babel to transpile our code to target Node v8.10.
 
 And now we are ready to build our backend.
