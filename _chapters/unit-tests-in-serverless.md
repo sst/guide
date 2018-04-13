@@ -1,31 +1,19 @@
 ---
 layout: post
 title: Unit tests in serverless
-date: 2017-05-30 00:00:00
+date: 2018-03-10 00:00:00
 description:
 comments_id:
 ---
 
 So we have some simple business logic that figures out exactly how much to charge our user based on the number of notes they want to store. We want to make sure that we test all the possible cases for this before we start chargin people. To do this we are going to configure unit tests for our Serverless Framework project.
 
-We are going to use [Jest](https://facebook.github.io/jest/) for this.
+We are going to use [Jest](https://facebook.github.io/jest/) for this and it is a part of our starter project.
 
-### Install Jest
+You'll see this as a part your `scripts` block in the `package.json`.
 
-Let's start by installing the NPM package.
-
-In your project root, run the following.
-
-``` bash
-$ npm install --save-dev jest
 ```
-
-Next replace your `scripts` block in the `package.json` with.
-
-``` json
-"scripts": {
-  "test": "jest"
-},
+"test": "jest"
 ```
 
 This will allow us to run our tests using `npm test`.
@@ -99,7 +87,7 @@ And that's it! We have unit tests all configured.
 Let's commit these changes.
 
 ``` bash
-$ git add.
+$ git add .
 $ git commit -m "Adding unit tests"
 ```
 

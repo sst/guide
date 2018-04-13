@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Add a billing API
-date: 2017-05-30 00:00:00
+date: 2018-03-07 00:00:00
 description:
 comments_id:
 ---
@@ -14,12 +14,12 @@ Start by installing the Stripe NPM package. Run the following in the root of our
 $ npm install --save stripe
 ```
 
-Next, add the following to `functions/billing.js`.
+Next, add the following to `billing.js`.
 
 ``` js
 import stripePackage from "stripe";
-import { calculateCost } from "../libs/billing-lib";
-import { success, failure } from "../libs/response-lib";
+import { calculateCost } from "./libs/billing-lib";
+import { success, failure } from "./libs/response-lib";
 
 export async function main(event, context, callback) {
   const { storage, source } = JSON.parse(event.body);
@@ -80,14 +80,14 @@ Let's add a reference to our new API and Lambda function.
 Add the following above the `resources:` block in the `serverless.yml`.
 
 ``` yml
-billing:
-  handler: functions/billing.main
-  events:
-    - http:
-        path: billing
-        method: post
-        cors: true
-        authorizer: aws_iam
+  billing:
+    handler: billing.main
+    events:
+      - http:
+          path: billing
+          method: post
+          cors: true
+          authorizer: aws_iam
 ```
 
 ### Commit our changes
@@ -95,7 +95,7 @@ billing:
 Let's quickly commit these to git.
 
 ``` bash
-$ git add.
+$ git add .
 $ git commit -m "Adding a billing API"
 ```
 

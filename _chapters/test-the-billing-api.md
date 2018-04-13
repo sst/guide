@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Test the billing API
-date: 2017-05-30 00:00:00
+date: 2018-03-09 00:00:00
 description:
 comments_id:
 ---
@@ -47,7 +47,7 @@ The response should look similar to this.
 Let's quickly commit these to git.
 
 ``` bash
-$ git add.
+$ git add .
 $ git commit -m "Adding a mock event for the billing API"
 ```
 

@@ -1,14 +1,16 @@
 ---
 layout: post
 title: Load secrets from env.yml
-date: 2017-05-30 00:00:00
+date: 2018-03-08 00:00:00
 description:
 comments_id:
 ---
 
 As we had previously mentioned, we do not want to store our secret environment variables in our code. In our case it is the Stripe secret key. In this chapter, we'll look at how to do that.
 
-Start by creating a new file and adding the following to `env.yml`.
+We have a `env.example` file for this.
+
+Start by renaming the file to `env.yml` and add the following to it.
 
 ``` yml
 # Add the environment variables for the various stages
@@ -32,10 +34,42 @@ Add the following in the `custom:` block of `serverless.yml`.
 environment: ${file(env.yml):${self:custom.stage}, file(env.yml):default}
 ```
 
+Replace the `custom:` block of `serverless.yml` with the following.
+
+``` yml
+custom:
+  # Our stage is based on what is passed in when running serverless
+  # commands. Or fallsback to what we have set in the provider section.
+  stage: ${opt:stage, self:provider.stage}
+  # Set our DynamoDB throughput for prod and all other non-prod stages.
+  tableThroughputs:
+    prod: 5
+    default: 1
+  tableThroughput: ${self:custom.tableThroughputs.${self:custom.stage}, self:custom.tableThroughputs.default}
+  # Load our webpack config
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+  # Load our secret environment variables based on the current stage.
+  # Fallback to default if it is not in prod.
+  environment: ${file(env.yml):${self:custom.stage}, file(env.yml):default}
+```
+
 And add the following in the `environment:` block in your `serverless.yml`.
 
 ``` yml
-stripeSecretKey: ${self:custom.environment.stripeSecretKey}
+  stripeSecretKey: ${self:custom.environment.stripeSecretKey}
+```
+
+Replace the following in the `environment:` block in your `serverless.yml`.
+
+``` yml
+  # These environment variables are made available to our functions
+  # under process.env.
+  environment:
+    tableName:
+      Ref: NotesTable
+    stripeSecretKey: ${self:custom.environment.stripeSecretKey}
 ```
 
 A quick explanation on the above:
@@ -46,9 +80,7 @@ A quick explanation on the above:
 
 ### Commit our changes
 
-Now we need to ensure that we don't commit our `env.yml` file to git.
-
-Open the `.gitignore` file in the root of your project and add the following at the bottom.
+Now we need to ensure that we don't commit our `env.yml` file to git. The starter project that we are using has the following in the `.gitignore`.
 
 ```
 # Env
@@ -60,7 +92,7 @@ This will tell git to not commit this file.
 Next let's commit our changes so far.
 
 ``` bash
-$ git add.
+$ git add .
 $ git commit -m "Adding stripe environment variable"
 ```
 

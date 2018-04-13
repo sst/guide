@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Create a billing form
-date: 2017-05-30 00:00:00
+date: 2018-03-23 00:00:00
 description:
 comments_id:
 ---
@@ -18,6 +18,7 @@ Next let's create our billing form component.
 
 Add the following to a new file in `src/components/BillingForm.js`.
 
+{% raw %}
 ``` js
 import React, { Component } from "react";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
@@ -120,6 +121,7 @@ class BillingForm extends Component {
 
 export default injectStripe(BillingForm);
 ```
+{% endraw %}
 
 Let's quickly go over what we are doing here:
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Configure S3 in Serverless
-date: 2017-05-30 00:00:00
+date: 2018-02-28 00:00:00
 description:
 comments_id:
 ---

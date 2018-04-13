@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Initialize the frontend repo
-date: 2017-05-30 00:00:00
+date: 2018-03-18 00:00:00
 description:
 comments_id:
 ---

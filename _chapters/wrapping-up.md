@@ -2,7 +2,7 @@
 layout: post
 title: Wrapping Up
 description: Wrapping up the tutorial and going over the next steps.
-date: 2017-02-15 00:00:00
+date: 2018-03-30 00:00:00
 comments_id: 71
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Deploy your serverless infrastructure
-date: 2017-05-30 00:00:00
+date: 2018-03-04 00:00:00
 description:
 comments_id:
 ---
@@ -21,21 +21,26 @@ $ serverless deploy
 Your output should look something like this:
 
 ``` bash
-
-x
-x
-x
-x
-x
-x
-x
-x
-x
-x
-x
-x
-
-
+Serverless: Stack update finished...
+Service Information
+service: notes-app-2-api
+stage: dev
+region: us-east-1
+stack: notes-app-2-api-dev
+api keys:
+  None
+endpoints:
+  POST - https://mqqmkwnpbc.execute-api.us-east-1.amazonaws.com/dev/notes
+  GET - https://mqqmkwnpbc.execute-api.us-east-1.amazonaws.com/dev/notes/{id}
+  GET - https://mqqmkwnpbc.execute-api.us-east-1.amazonaws.com/dev/notes
+  PUT - https://mqqmkwnpbc.execute-api.us-east-1.amazonaws.com/dev/notes/{id}
+  DELETE - https://mqqmkwnpbc.execute-api.us-east-1.amazonaws.com/dev/notes/{id}
+functions:
+  create: notes-app-2-api-dev-create
+  get: notes-app-2-api-dev-get
+  list: notes-app-2-api-dev-list
+  update: notes-app-2-api-dev-update
+  delete: notes-app-2-api-dev-delete
 ```
 
 A couple of things to note here:

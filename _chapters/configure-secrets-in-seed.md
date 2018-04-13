@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Configure secrets in Seed
-date: 2017-05-30 00:00:00
+date: 2018-03-13 00:00:00
 description:
 comments_id:
 ---
@@ -10,34 +10,30 @@ Before we can do our first deployment, we need to make sure to configure our sec
 
 To do that, hit the **Settings** button in our **dev** stage.
 
-- Screenshot
+![Select Settings in dev stage screenshot](/assets/part2/select-settings-in-dev-stage.png)
 
 Here click **Show Env Variables**.
 
-- Screenshot
+![Show dev env variables settings screenshot](/assets/part2/show-dev-env-variables-settings.png)
 
 And type in `stripeSecretKey` as the **Key** and the value should be the `STRIPE_TEST_SECRET_KEY` back from the [Load secrets from env.yml]({% link _chapters/load-secrets-from-env-yml.md %}) chapter. Hit **Add** to save your secret key.
 
-- Screenshot
+![Add secret dev environment variable screenshot](/assets/part2/add-secret-dev-environment-variable.png)
 
-Next we need to configure our secrets for the `prod` stage. Click the project name from the breadcrumb.
+Next we need to configure our secrets for the `prod` stage. Head back to the project page and click on **prod**.
 
-- Screenshot
-
-And hit **prod** from the list of stages.
-
-- Screenshot
+![Click on prod stage in Seed screenshot](/assets/part2/click-on-prod-stage-in-seed.png)
 
 Hit the **Settings** button.
 
-- Screenshot
+![Select Settings in prod stage screenshot](/assets/part2/select-settings-in-prod-stage.png)
 
 Click **Show Env Variables**.
 
-- Screenshot
+![Show prod env variables settings screenshot](/assets/part2/show-prod-env-variables-settings.png)
 
 And type in `stripeSecretKey` as the **Key** and the value should be the `STRIPE_PROD_SECRET_KEY` back from the [Load secrets from env.yml]({% link _chapters/load-secrets-from-env-yml.md %}) chapter. Hit **Add** to save your secret key.
 
-- Screenshot
+![Add secret prod environment variable screenshot](/assets/part2/add-secret-prod-environment-variable.png)
 
 Next, we'll trigger our first dpeloyment on Seed.

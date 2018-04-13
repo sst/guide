@@ -2,7 +2,7 @@
 layout: post
 title: Debugging Serverless API Issues
 description: Debugging serverless APIs can be tricky because there isn’t enough visibility on all the steps a request goes through. A very common issue is an invalid or missing IAM Role while using aws_iam as an authorizer for API Gateway and Lambda. To fix this use the Policy Simulator to ensure that your IAM Role has access to API Gateway.
-date: 2017-03-18 00:00:00
+date: 2018-04-04 00:00:00
 context: all
 comments_id: 147
 ---

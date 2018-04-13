@@ -2,7 +2,7 @@
 layout: post
 title: Stages in Serverless Framework
 description: Stages in Serverless Framework can be configured using the "stage:" setting in serverless.yml. You can also deploy to a stage using the "--stage" option in the "serverless deploy" command. To configure environment variables for the different stages, use the custom variables in the serverless.yml.
-date: 2017-03-19 00:00:00
+date: 2018-04-06 00:00:00
 context: all
 comments_id: 149
 ---

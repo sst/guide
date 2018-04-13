@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Add environment variables in Lambda functions
-date: 2017-05-30 00:00:00
+date: 2018-03-03 00:00:00
 description:
 comments_id:
 ---

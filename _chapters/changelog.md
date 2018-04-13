@@ -2,7 +2,7 @@
 layout: post
 title: Changelog
 redirect_from: /chapters/older-versions.html
-date: 2017-02-17 00:00:00
+date: 2018-04-01 00:00:00
 description: A list of all the updates made to Serverless Stack
 comments_id: 124
 ---

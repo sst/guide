@@ -18,6 +18,8 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
 - [What is serverless?]({% link _chapters/what-is-serverless.md %})
 - [Why create serverless apps?]({% link _chapters/why-create-serverless-apps.md %})
 
+### Part I
+
 ### Set up your AWS account
 
 - [Create an AWS account]({% link _chapters/create-an-aws-account.md %})
@@ -101,13 +103,15 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
   - [Update the app]({% link _chapters/update-the-app.md %})
   - [Deploy again]({% link _chapters/deploy-again.md %})
 
-### Serverless Stack Extension
+### Part II
 
-- [Introduction to the Extension]({% link _chapters/introduction-to-the-extension.md %})
+- [Introduction to Part II]({% link _chapters/introduction-to-the-extension.md %})
 
-### Backend
+### Set up a Backend Repo
 
 - [Initialize the backend repo]({% link _chapters/initialize-the-backend-repo.md %})
+
+### Infrastructure as Code
 
 - [Infrastructure as code]({% link _chapters/infrastructure-as-code.md %})
   - [Configure DynamoDB in Serverless]({% link _chapters/configure-dynamodb-in-serverless.md %})
@@ -117,13 +121,19 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
   - [Add environment variables in Lambda functions]({% link _chapters/add-environment-variables-in-lambda-functions.md %})
   - [Deploy your serverless infrastructure]({% link _chapters/deploy-your-serverless-infrastructure.md %})
 
+### Adding a Billing API
+
 - [Working with 3rd party APIs]({% link _chapters/working-with-3rd-party-apis.md %})
   - [Setup a Stripe account]({% link _chapters/setup-a-stripe-account.md %})
   - [Add a billing API]({% link _chapters/add-a-billing-api.md %})
   - [Load secrets from env.yml]({% link _chapters/load-secrets-from-env-yml.md %})
   - [Test the billing API]({% link _chapters/test-the-billing-api.md %})
 
-- [Unit tests in Serverless]({% link _chapters/test-the-billing-api.md %})
+### Unit Tests in Serverless
+
+- [Unit tests in Serverless]({% link _chapters/unit-tests-in-serverless.md %})
+
+### Automating Serverless Deployments
 
 - [Automating Serverless Deployments]({% link _chapters/automating-serverless-deployments.md %})
   - [Setting up your project on Seed]({% link _chapters/setting-up-your-project-on-seed.md %})
@@ -133,16 +143,20 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
   - [Test the configured APIs]({% link _chapters/test-the-configured-apis.md %})
   - [Monitoring deployments in Seed]({% link _chapters/monitoring-deployments-in-seed.md %})
 
-### Frontend
+### Set up a Frontend Repo
 
 - [Initialize the frontend repo]({% link _chapters/initialize-the-frontend-repo.md %})
   - [Manage environments in Create React App]({% link _chapters/manage-environments-in-create-react-app.md %})
   - [Signup with email alias]({% link _chapters/signup-with-email-alias.md %})
 
+### Adding a Billing Form
+
 - [Create a settings page]({% link _chapters/create-a-settings-page.md %})
   - [Add Stripe keys to config]({% link _chapters/add-stripe-keys-to-config.md %})
   - [Create a billing form]({% link _chapters/create-a-billing-form.md %})
   - [Connect the billing form]({% link _chapters/connect-the-billing-form.md %})
+
+### Automating React App Deployments
 
 - [Automating React Deployments]({% link _chapters/automating-react-deployments.md %})
   - [Create a build script]({% link _chapters/create-a-build-script.md %})

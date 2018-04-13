@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Configure DynamoDB in Serverless
-date: 2017-05-30 00:00:00
+date: 2018-02-27 00:00:00
 description:
 comments_id:
 ---
@@ -97,27 +97,29 @@ We are also going to make a quick tweak to reference this DynamoDB that we are c
 Replace the `iamRoleStatements:` block in your `serverless.yml` with the following.
 
 ``` yml
-# These environment variables are made available to our functions
-# under process.env.
-environment:
-  tableName:
-    Ref: NotesTable
+  # These environment variables are made available to our functions
+  # under process.env.
+  environment:
+    tableName:
+      Ref: NotesTable
 
-iamRoleStatements:
-  - Effect: Allow
-    Action:
-      - dynamodb:DescribeTable
-      - dynamodb:Query
-      - dynamodb:Scan
-      - dynamodb:GetItem
-      - dynamodb:PutItem
-      - dynamodb:UpdateItem
-      - dynamodb:DeleteItem
-    # Restrict our IAM role permissions to
-    # the specific table for the stage
-    Resource:
-      - "Fn::GetAtt": [ NotesTable, Arn ]
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      # Restrict our IAM role permissions to
+      # the specific table for the stage
+      Resource:
+        - "Fn::GetAtt": [ NotesTable, Arn ]
 ```
+
+Make sure to copy the indentation properly. These two blocks fall under the `provider` block and need to be indented as such.
 
 A couple of interesting things we are doing here:
 

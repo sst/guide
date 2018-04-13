@@ -10,11 +10,11 @@ To start with we are going to create our new project and add it to GitHub. We ar
 
 ### Clone the original repo
 
-In your working directory, start by cloning the [original repo]((% site.backend_github_repo %}).
+In your working directory, start by cloning the [original repo]({{ site.backend_github_repo }}).
 
 ``` bash
-$ git clone --depth 1 https://github.com/AnomalyInnovations/serverless-stack-demo-api.git serverless-stack-ext-api/
-$ cd serverles-stack-ext-api/
+$ git clone --depth 1 https://github.com/AnomalyInnovations/serverless-stack-demo-api.git serverless-stack-2-api/
+$ cd serverles-stack-2-api/
 ```
 
 And remove the `.git/` dir.
@@ -23,17 +23,36 @@ And remove the `.git/` dir.
 $ rm -rf .git/
 ```
 
+Let's install our Node modules as well.
+
+``` bash
+$ npm install
+```
+
+### Organize the project
+
+We have a couple of files as a part of the starter project that we can now remove.
+
+``` bash
+$ rm handler.js
+$ rm tests/handler.test.js
+```
+
 ### Create a new GitHub repo
 
-Let's head over to [GitHub](https://github.com). Make sure you are signed in and hit **New repository**. Give your repository a name, in our case we are calling it `serverless-stack-ext-api`.
+Let's head over to [GitHub](https://github.com). Make sure you are signed in and hit **New repository**.
 
-Next hit **Create repository**.
+![Create new GitHub repository screenshot](/assets/part2/create-new-github-repository.png)
 
-- Screenshot
+Give your repository a name, in our case we are calling it `serverless-stack-2-api`. Next hit **New repository**.
+
+![Name new GitHub repository screenshot](/assets/part2/name-new-github-repository.png)
 
 Once your repository is created, copy the repository URL. We'll need this soon.
 
-- Screenshot
+![Copy new GitHub repo url screenshot](/assets/part2/copy-new-github-repo-url.png)
+
+In our case the URL is `https://github.com/jayair/serverless-stack-2-api.git`.
 
 ### Initialize your new repo
 
@@ -58,7 +77,7 @@ $ git commit -m "First commit"
 Link it to the repo you created on GitHub.
 
 ``` bash
-$ git remote add origin remote REPO_URL
+$ git remote add origin REPO_URL
 ```
 
 Here `REPO_URL` is the URL we copied from GitHub in the steps above. You can verify that it has been set correctly by doing the following.

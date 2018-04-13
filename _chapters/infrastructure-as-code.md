@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Infrastructure as code
-date: 2017-05-30 00:00:00
+date: 2018-02-26 00:00:00
 description:
 comments_id:
 ---
@@ -16,34 +16,33 @@ In the next few chapters we are going to configure our various infrastrcuture pi
 
 ### Organize the project
 
-Before we get started let's do some quick house cleaning. From the original tutorial we didn't really bother organzing our functions. Let's do that really quickly.
-
-``` bash
-$ mkdir functions/
-$ mv -t functions/ create.js delete.js get.js list.js update.js
-```
+Let's make a couple of quick changes to our project before we get started.
  
- And fix the paths to these functions by replacing your `serverless.yml` with the following:
+Replace your `serverless.yml` with the following:
 
- ``` yml
-service: notes-app-ext-api
+``` yml
+service: notes-app-2-api
 
+# Use the serverless-webpack plugin to transpile ES6
 plugins:
   - serverless-webpack
+  - serverless-offline
 
+# serverless-webpack configuration
+# Enable auto-packing of external modules
 custom:
-  # Load our webpack config
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
 
 provider:
   name: aws
-  runtime: nodejs6.10
-  # Set our default stage
+  runtime: nodejs8.10
   stage: dev
   region: us-east-1
 
+  # 'iamRoleStatement' defines the permission policy for the Lambda function.
+  # In this case Lambda functions are granted with permissions to access DynamoDB.
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -58,7 +57,7 @@ provider:
 
 functions:
   create:
-    handler: functions/create.main
+    handler: create.main
     events:
       - http:
           path: notes
@@ -67,7 +66,7 @@ functions:
           authorizer: aws_iam
 
   get:
-    handler: functions/get.main
+    handler: get.main
     events:
       - http:
           path: notes/{id}
@@ -76,7 +75,7 @@ functions:
           authorizer: aws_iam
 
   list:
-    handler: functions/list.main
+    handler: list.main
     events:
       - http:
           path: notes
@@ -85,7 +84,7 @@ functions:
           authorizer: aws_iam
 
   update:
-    handler: functions/update.main
+    handler: update.main
     events:
       - http:
           path: notes/{id}
@@ -93,8 +92,8 @@ functions:
           cors: true
           authorizer: aws_iam
 
- delete:
-    handler: functions/delete.main
+  delete:
+    handler: delete.main
     events:
       - http:
           path: notes/{id}
@@ -103,7 +102,7 @@ functions:
           authorizer: aws_iam
 ```
 
-Aside from changing the path of our handler functions (for example, `get.main` to `functions/get.main`); we are using a different service name. We renamed:
+We are using a different service name. We renamed:
 
 ``` yml
 service: notes-app-api
@@ -112,10 +111,24 @@ service: notes-app-api
 to this:
 
 ``` yml
-service: notes-app-ext-api
+service: notes-app-2-api
 ```
 
 The reason we are doing this is because Serverless Framework uses the `service` name to identify projects. Since we are creating a new project we want to ensure that we use a different name from the original. Now we could have simply overwritten the existing project but the resources were previously created by hand and will conflict when we try to create them through code.
+
+We are also using the default stage as `dev` by renaming
+
+``` yml
+stage: prod
+``` 
+
+to:
+
+``` yml
+stage: dev
+```
+
+This will become clear later when we add different environments.
 
 Let's quickly commit these changes.
 
