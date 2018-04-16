@@ -75,7 +75,7 @@ And import the config we created above.
 import config from "./config";
 ```
 
-<img class="code-marker" src="/assets/s.png" />And to initialize AWS Amplify, add the following below your imports in the `src/index.js`.
+<img class="code-marker" src="/assets/s.png" />And to initialize AWS Amplify; add the following above the `ReactDOM.render` line in `src/index.js`.
 
 ``` coffee
 Amplify.configure({
