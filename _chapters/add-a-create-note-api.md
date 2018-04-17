@@ -42,7 +42,7 @@ export function main(event, context, callback) {
       noteId: uuid.v1(),
       content: data.content,
       attachment: data.attachment,
-      createdAt: new Date().getTime()
+      createdAt: Date.now()
     }
   };
 
@@ -81,7 +81,7 @@ There are some helpful comments in the code but we are doing a few simple things
 - Parse the input from the `event.body`. This represents the HTTP request parameters.
 - The `userId` is a Federated Identity id that comes in as a part of the request. This is set after our user has been authenticated via the User Pool. We are going to expand more on this in the coming chapters when we set up our Cognito Identity Pool.
 - Make a call to DynamoDB to put a new object with a generated `noteId` and the current date as the `createdAt`.
-- Upon success, return the newly create note object with the HTTP status code `200` and response headers to enable **CORS (Cross-Origin Resource Sharing)**.
+- Upon success, return the newly created note object with the HTTP status code `200` and response headers to enable **CORS (Cross-Origin Resource Sharing)**.
 - And if the DynamoDB call fails then return an error with the HTTP status code `500`.
 
 ### Configure the API Endpoint
@@ -111,7 +111,7 @@ provider:
   stage: prod
   region: us-east-1
 
-  # 'iamRoleStatement' defines the permission policy for the Lambda function.
+  # 'iamRoleStatements' defines the permission policy for the Lambda function.
   # In this case Lambda functions are granted with permissions to access DynamoDB.
   iamRoleStatements:
     - Effect: Allow
@@ -267,7 +267,7 @@ export async function main(event, context, callback) {
       noteId: uuid.v1(),
       content: data.content,
       attachment: data.attachment,
-      createdAt: new Date().getTime()
+      createdAt: Date.now()
     }
   };
 
