@@ -20,11 +20,12 @@ We are going to use the AWS CLI for this.
 $ aws cognito-idp sign-up \
   --region YOUR_COGNITO_REGION \
   --client-id YOUR_COGNITO_APP_CLIENT_ID \
-  --username admin@example.com \
+  --username admintestuser \
+  --user-attributes Name=email,Value=admin@example.com \
   --password Passw0rd!
 ```
 
-Refer back to the [Deploying through Seed]({% link _chapters/deploying-through-seed.md %}) chapter to look up the **dev** version of your Cognito App Client Id.
+Refer back to the [Deploying through Seed]({% link _chapters/deploying-through-seed.md %}) chapter to look up the **dev** version of your Cognito App Client Id and the [Configure Cognito User Pool in Serverless]({% link _chapters/configure-cognito-user-pool.md %}) chapter for the Cognito User Pool region you used. We are also using the email as an alias, this means that we need to set an generated `username`. We won't be using this in our code so you can use any valid string. In this case we are using `admintestuser`.
 
 <img class="code-marker" src="/assets/s.png" />Next we'll confirm the user through the Cognito Admin CLI.
 
@@ -32,20 +33,44 @@ Refer back to the [Deploying through Seed]({% link _chapters/deploying-through-s
 $ aws cognito-idp admin-confirm-sign-up \
   --region YOUR_COGNITO_REGION \
   --user-pool-id YOUR_COGNITO_USER_POOL_ID \
-  --username admin@example.com
+  --username admintestuser
 ```
 
-Again, replace `YOUR_COGNITO_USER_POOL_ID` with the **dev** version of your Cognito User Pool Id from the [Deploying through Seed]({% link _chapters/deploying-through-seed.md %}) chapter.
+Again, replace `YOUR_COGNITO_USER_POOL_ID` with the **dev** version of your Cognito User Pool Id from the [Deploying through Seed]({% link _chapters/deploying-through-seed.md %}) chapter and the region from the previous command. We are using the generated username `admintestuser` as well.
 
 Let's quickly do the same with **prod** versions as well. Now we are ready to test our APIs.
 
-### Testing Dev
-
-First let's test our dev endpoint. Run the following command:
+<img class="code-marker" src="/assets/s.png" />In your terminal, run.
 
 ``` bash
-$ apig-test \
---username='admin@example.com' \
+$ aws cognito-idp sign-up \
+  --region YOUR_COGNITO_REGION \
+  --client-id YOUR_COGNITO_APP_CLIENT_ID \
+  --username admintestuser \
+  --user-attributes Name=email,Value=admin@example.com \
+  --password Passw0rd!
+```
+
+Here use your prod version of you Cognito details.
+
+<img class="code-marker" src="/assets/s.png" />And confirm the user.
+
+``` bash
+$ aws cognito-idp admin-confirm-sign-up \
+  --region YOUR_COGNITO_REGION \
+  --user-pool-id YOUR_COGNITO_USER_POOL_ID \
+  --username admintestuser
+```
+
+Make sure to use the prod versions here as well.
+
+### Test the API
+
+Let's test our dev endpoint. Run the following command:
+
+``` bash
+$ npx aws-api-gateway-cli-test \
+--username='admintestuser' \
 --password='Passw0rd!' \
 --user-pool-id='YOUR_COGNITO_USER_POOL_ID' \
 --app-client-id='YOUR_COGNITO_APP_CLIENT_ID' \
@@ -81,13 +106,11 @@ Making API request
      createdAt: 1499648598452 } }
 ```
 
-### Testing Prod
-
-Testing prod should be pretty much the same. Run the following command.
+Also run the same command for prod. Make sure to use the prod versions.
 
 ``` bash
-$ apig-test \
---username='admin@example.com' \
+$ npx aws-api-gateway-cli-test \
+--username='admintestuser' \
 --password='Passw0rd!' \
 --user-pool-id='YOUR_COGNITO_USER_POOL_ID' \
 --app-client-id='YOUR_COGNITO_APP_CLIENT_ID' \
@@ -100,6 +123,6 @@ $ apig-test \
 --body='{"content":"hello world","attachment":"hello.jpg"}'
 ```
 
-Just use the set of values that you have for prod.
+And you should see it give a similar output as dev.
 
 Now that our APIs our tested we are ready to plug these into our frontend. But before we do that, let's do a quick test to see what will happen if we make a mistake and push some faulty code to production.
