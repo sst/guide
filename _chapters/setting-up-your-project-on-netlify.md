@@ -8,34 +8,30 @@ comments_id:
 
 Now we are going to set our React app on [Netlify](https://www.netlify.com). Start by [creating an account](https://app.netlify.com/signup).
 
-- Screenshot
+![Signup for Netlify screenshot](/assets/part2/signup-for-netlify.png)
 
-Next, create a new site.
+Next, create a new site by hitting the **New site from Git** button.
 
-- Screenshot
+![Hit new site from git button screenshot](/assets/part2/hit-new-site-from-git-button.png)
 
 Pick **GitHub** as your provider.
 
-- Screenshot
+![Select GitHub as provider screenshot](/assets/part2/select-github-as-provider.png)
 
 Then pick your project from the list.
 
-- Screenshot
+![Select GitHub repo from list screenshot](/assets/part2/select-github-repo-from-list.png)
 
-It'll default the branch to `master`. And since we are configuring our project through the `netlify.toml`, we can leave the rest as is. Hit **Deploy site**.
+It'll default the branch to `master`. We can now deploy our app! Hit **Deploy site**.
 
-- Screenshot
+![Hit Deploy site screenshot](/assets/part2/hit-deploy-site.png)
 
 This should be deploying our app. Once, it is done click on the deployment.
 
-- Screenshot
-
-And hit **Preview deploy**.
-
-- Screenshot
+![View deployed site screenshot](/assets/part2/view-deployed-site.png)
 
 And you should see your app in action!
 
-- Screenshot
+![Netlify deployed notes app screenshot](/assets/part2/netlify-deployed-notes-app.png)
 
 Of course, it is hosted on a Netlify URL. We'll change that by configuring custom domains next.

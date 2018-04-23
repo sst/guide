@@ -29,7 +29,7 @@ Make sure to replace, `YOUR_STRIPE_DEV_PUBLIC_KEY` and `YOUR_STRIPE_PROD_PUBLIC_
 Let's quickly commit these to git.
 
 ``` bash
-$ git add.
+$ git add .
 $ git commit -m "Adding Stripe keys to config"
 ```
 

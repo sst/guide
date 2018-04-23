@@ -13,8 +13,8 @@ Just as we did in the backend portion, we'll start by creating our project and a
 In your working directory, start by cloning the [original repo]((% site.frontend_github_repo %}). Make sure this is not inside the directory for our backend.
 
 ``` bash
-$ git clone --depth 1 https://github.com/AnomalyInnovations/serverless-stack-demo-client.git serverless-stack-ext-client/
-$ cd serverles-stack-ext-client/
+$ git clone --depth 1 https://github.com/AnomalyInnovations/serverless-stack-demo-client.git serverless-stack-2-client/
+$ cd serverles-stack-2-client/
 ```
 
 And remove the `.git/` dir.
@@ -23,17 +23,29 @@ And remove the `.git/` dir.
 $ rm -rf .git/
 ```
 
+Let's install our Node modules.
+
+``` bash
+$ npm install
+```
+
 ### Create a new GitHub repo
 
 Let's head over to [GitHub](https://github.com). Make sure you are signed in and hit **New repository**. Give your repository a name, in our case we are calling it `serverless-stack-ext-api`.
 
 Next hit **Create repository**.
 
-- Screenshot
+![Create new GitHub repository screenshot](/assets/part2/create-new-github-repository.png)
+
+Give your repository a name, in our case we are calling it `serverless-stack-2-client`. Next hit **New repository**.
+
+![Name new client GitHub repository screenshot](/assets/part2/name-new-client-github-repository.png)
 
 Once your repository is created, copy the repository URL. We'll need this soon.
 
-- Screenshot
+![Copy new client GitHub repo url screenshot](/assets/part2/copy-new-client-github-repo-url.png)
+
+In our case the URL is `https://github.com/jayair/https://github.com/jayair/serverless-stack-2-client.git`.
 
 ### Initialize your new repo
 
@@ -58,7 +70,7 @@ $ git commit -m "First commit"
 Link it to the repo you created on GitHub.
 
 ``` bash
-$ git remote add origin remote REPO_URL
+$ git remote add origin REPO_URL
 ```
 
 Here `REPO_URL` is the URL we copied from GitHub in the steps above. You can verify that it has been set correctly by doing the following.

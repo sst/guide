@@ -43,7 +43,17 @@ const newUser = await Auth.signUp({
 });
 ```
 
-This is telling Cognito that we are going to use a random UUID as the username. And since we have set email to be an alias, we can still login with our username.
+Also replace this line in the `handleConfirmationSubmit` mehtod.
+
+``` js
+await Auth.confirmSignUp(this.state.email, this.state.confirmationCode);
+```
+
+``` js
+await Auth.confirmSignUp(this.state.newUser.user.username, this.state.confirmationCode);
+```
+
+This is telling Cognito that we are going to use a random UUID as the username. And since we have set email to be an alias, we can still login with our username. For the confirm case, we are going to use the generated username as well.
 
 You can quickly test this by signing up for a new account. If you are successfuly signed in, we know it worked. This is because we log you in as a part of the sign up process.
 
@@ -52,7 +62,7 @@ You can quickly test this by signing up for a new account. If you are successful
 Let's quickly commit these to git.
 
 ``` bash
-$ git add.
+$ git add .
 $ git commit -m "Using UUID as username on signup"
 ```
 

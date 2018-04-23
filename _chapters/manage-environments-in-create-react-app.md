@@ -122,7 +122,7 @@ We should see our app in development mode and it'll be connected to the dev vers
 Let's quickly commit these to git.
 
 ``` bash
-$ git add.
+$ git add .
 $ git commit -m "Configuring environments"
 ```
 

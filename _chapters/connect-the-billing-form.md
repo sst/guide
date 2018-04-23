@@ -8,7 +8,15 @@ comments_id:
 
 Now all we have left to do is to connect our billing form to our billing API.
 
-Let's replace our `render` method in `src/containers/Settings.js` with this.
+Let's start by including Stripe.js in our HTML.
+
+Append the following the the `<head>` block in our `public/index.html`.
+
+``` html
+<script src="https://js.stripe.com/v3/"></script>
+```
+
+Next replace our `render` method in `src/containers/Settings.js` with this.
 
 ``` js
 handleFormSubmit = async (storage, { token, error }) => {
@@ -81,14 +89,7 @@ Add the following to `src/containers/Settings.css`.
 
 This ensures that our form displays properly for larger screens.
 
-### Commit our changes
-
-Let's quickly commit these to git.
-
-``` bash
-$ git add.
-$ git commit -m "Connecting the billing form"
-```
+![Settings screen with billing form screenshot](/assets/part2/settings-screen-with-billing-form.png)
 
 And that's it. We are ready to test our Stripe form. Head over to your browser and try picking the number of notes you want to store and use the following for your card details:
 
@@ -98,6 +99,15 @@ And that's it. We are ready to test our Stripe form. Head over to your browser a
 
 If everything is set correctly, you should see the success message and you'll be re-directed to the home page.
 
-- Screenshot
+![Settings screen billing success screenshot](/assets/part2/settings-screen-billing-success.png)
+
+### Commit our changes
+
+Let's quickly commit these to git.
+
+``` bash
+$ git add .
+$ git commit -m "Connecting the billing form"
+```
 
 Next, we'll set up automatic deployments for our React app using a service called [Netlify](https://www.netlify.com). This will be fairly similar in concepts to what we did for our serverless backend API.

@@ -82,7 +82,7 @@ You'll notice we are getting rid of our old build and deploy scripts. We are not
 Let's quickly commit these to git.
 
 ``` bash
-$ git add.
+$ git add .
 $ git commit -m "Adding a Netlify build script"
 ```
 

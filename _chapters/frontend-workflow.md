@@ -46,11 +46,23 @@ renderLander() {
 And to commit this change to git.
 
 ``` bash
-$ git add.
+$ git add .
 $ git commit -m "Commiting a typo"
 ```
 
 ### Create a branch deployment
+
+To be able to preview this change in its own environment we need to turn on branch deployments in Netlify. From the **Site settings** sidebar select **Build & deploy**.
+
+![Select Build & deploy screenshot](/assets/part2/select-build-and-deploy.png)
+
+And hit **Edit settings**.
+
+![Edit build settings screenshot](/assets/part2/edit-build-settings.png)
+
+Set **Branch deploys** to **All** and hit **Save**.
+
+![Set branch deploys to all screenshot](/assets/part2/set-branch-deploys-to-all.png)
 
 Now comes the fun part, we can deploy this to staging so we can test it right away. All we need to do is push it to git.
 
@@ -58,13 +70,17 @@ Now comes the fun part, we can deploy this to staging so we can test it right aw
 $ git push -u origin new-feature
 ```
 
-Now if you hop over to your Netlify project page; you'll see a new branch deploy in action.
+Now if you hop over to your Netlify project page; you'll see a new branch deploy in action. Wait for it to complete and click on it.
 
-- Screenshot
+![Click on new branch deploy screenshot](/assets/part2/click-on-new-branch-deploy.png)
 
-Once it is complete, you'll see that it gives you a new URL.
+Hit **Preview deploy**.
 
-- Screenshot
+![Preview new branch deploy screenshot](/assets/part2/preview-new-branch-deploy.png)
+
+And you can see a new version of your app in action!
+
+![Preview deploy in action screenshot](/assets/part2/preview-deploy-in-action.png)
 
 You can test around this version of our frontend app. It is connected to the staging version of our backend API. The idea is that we can test and play around with the changes here without affecting our production users.
 
@@ -80,31 +96,27 @@ $ git push
 
 You should see this deployment in action in Netlify.
 
-- Screenshot
+![Production deploy after merge screenshot](/assets/part2/production-deploy-after-merge.png)
 
 And once it is done, your changes should be live!
 
-- Screenshot
+![Production deploy is live screenshot](/assets/part2/production-deploy-is-live.png)
 
 ### Rolling back in production
 
 Now for some reason we aren't happy with the build in production, we can rollback.
 
-Head over to the **Production deploys**.
+Click on the older production depoyment.
 
-- Screenshot
-
-Click on the older depoyment.
-
-- Screenshot
+![Click on old production deployment screenshot](/assets/part2/click-on-old-production-deployment.png)
 
 And hit **Publish deploy**.
 
-- Screenshot
+![Publish old production deployment screenshot](/assets/part2/publish-old-production-deployment.png)
 
 This will publish our previous version again.
 
-- Screenshot
+![Old production deploy is live screenshot](/assets/part2/old-production-deploy-is-live.png)
 
 And that's it! Now you have a automated workflow for building and deploying your Create React App with serverless.
 
@@ -136,7 +148,7 @@ renderLander() {
 Commit these changes and push them by running the following.
 
 ``` bash
-$ git add.
+$ git add .
 $ git commit -m "Fixing a typo"
 $ git push
 ```

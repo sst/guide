@@ -118,14 +118,14 @@ You'll notice that we added anther link in the navbar for the case a user is log
 
 Now if you head over to your app, you'll see a new **Settings** link at the top. Of course, the page is pretty empty right now.
 
-- Screenshot
+![Add empty settings page screenshot](/assets/part2/add-empty-settings-page.png)
 
 ### Commit our changes
 
 Let's quickly commit these to git.
 
 ``` bash
-$ git add.
+$ git add .
 $ git commit -m "Adding settings page"
 ```
 

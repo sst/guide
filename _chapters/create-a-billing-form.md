@@ -163,7 +163,7 @@ Create a file at `src/components/BillingForm.css`.
 Let's quickly commit these to git.
 
 ``` bash
-$ git add.
+$ git add .
 $ git commit -m "Adding a billing form"
 ```
 
