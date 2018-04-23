@@ -1,11 +1,14 @@
 ############################
 # How to generate the PDFs #
 ############################
-# 1. Update cover.html with the new version date
-# 2. Open cover.html in safari and generate Cover.pdf
-# 3. Place Cover.pdf in ~/Downloads folder
-# 4. Ensure "Downloads" folder is an option when "Export to PDF…" in Safari
-# 5. In terminal, run "osascript pdf.scpt"
+# 1. Generate Cover.pdf with latest version date
+#    a. Create "ebook" folder in ~/Downloads
+#    b. update date in cover.html
+#    c. open in safari file:///Users/frank/Sites/ServerlessStackCom/etc/cover.html
+#    d. "Export to PDF…"
+#    e. Place Cover.pdf in ~/ebook folder
+# 2. Ensure "ebook" folder is an option when "Export to PDF…" in Safari
+# 3. In terminal, run "osascript pdf.scpt"
 
 
 set theChaptersStr to "index
@@ -100,18 +103,18 @@ set theChapters to text items of theChaptersStr
 #################
 # Download PDFs #
 #################
-repeat with theCurrentChapter in theChapters
-  downloadPdf(theCurrentChapter)
-end repeat
+#repeat with theCurrentChapter in theChapters
+#  downloadPdf(theCurrentChapter)
+#end repeat
 
 ##############
 # Merge PDFs #
 ##############
-set outputFile to "~/Downloads/ServerlessStack.pdf"
+set outputFile to "~/Downloads/ebook/ServerlessStack.pdf"
 
-set pdfFiles to "~/Downloads/Cover.pdf"
+set pdfFiles to "~/Downloads/ebook/Cover.pdf"
 repeat with theCurrentChapter in theChapters
-  set pdfFiles to pdfFiles & " ~/Downloads/" & theCurrentChapter & ".pdf"
+  set pdfFiles to pdfFiles & " ~/Downloads/ebook/" & theCurrentChapter & ".pdf"
 end repeat
 
 do shell script "/System/Library/Automator/Combine\\ PDF\\ Pages.action/Contents/Resources/join.py " & "-o " & outputFile & " " & pdfFiles
@@ -150,7 +153,7 @@ on downloadPdf(theChapterName)
 
           repeat until menu 1 of pop up button "Where:" exists
           end repeat
-          click menu item "Downloads" of menu 1 of pop up button "Where:"
+          click menu item "ebook" of menu 1 of pop up button "Where:"
           click button "Save"
         end tell
 
