@@ -8,9 +8,9 @@ comments_id:
 
 Now that we have DynamoDB configured, let's look at how we can configure the S3 file uploads bucket through our `serverless.yml`.
 
-### Add the resource
+### Create the Resource
 
-Add the following to `resources/s3-bucket.yml`.
+<img class="code-marker" src="/assets/s.png" />Add the following to `resources/s3-bucket.yml`.
 
 ``` yml
 Resources:
@@ -42,11 +42,11 @@ Outputs:
 
 If you recall from the [Create an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}) chapter, we had created a bucket and configured the CORS policy for it. We needed to do this because we are going to be uploading directly from our frontend client. We configure the same policy here.
 
-S3 buckets (unlike DynamoDB tables) are globally named. So it is not really possible for us to know what it going to be called before hand. Hence, we let CloudFormation generate the name for us and we just add the `Outputs:` block to tell it to print it out so we can use it later.
+S3 buckets (unlike DynamoDB tables) are globally named. So it is not really possible for us to know what it is going to be called before hand. Hence, we let CloudFormation generate the name for us and we just add the `Outputs:` block to tell it to print it out so we can use it later.
 
-### Add resource to serverless.yml
+### Add the Resource
 
-Let's reference the resource in our `serverless.yml` by adding the following line in the `resources:`. So it should now look something like this:
+<img class="code-marker" src="/assets/s.png" />Let's reference the resource in our `serverless.yml`. Replace your `resources:` block with the following.
 
 ``` yml
 # Create our resources with separate CloudFormation templates
@@ -57,9 +57,9 @@ resources:
   - ${file(resources/s3-bucket.yml)}
 ```
 
-### Commit your code
+### Commit Your Code
 
-Let's commit the changes we've made so far.
+<img class="code-marker" src="/assets/s.png" />Let's commit the changes we've made so far.
 
 ``` bash
 $ git add .

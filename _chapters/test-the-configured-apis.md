@@ -88,7 +88,7 @@ Make sure to refer back to the [Deploying through Seed]({% link _chapters/deploy
 - `YOUR_COGNITO_USER_POOL_ID`, `YOUR_COGNITO_APP_CLIENT_ID`, and `YOUR_COGNITO_REGION` are all related to your Cognito User Pool.
 - `YOUR_IDENTITY_POOL_ID` is for your Cognito Identity Pool.
 - `YOUR_API_GATEWAY_REGION` is the region your API Gateway is deployed to.
-- And `YOUR_API_GATEWAY_URL` is your API Gateway endpoint. It looks something likes this `https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/dev`. But if you have confgiured it with a custom domain use the one from that [chapter]({% link _chapters/custom-domains-for-api-gateway.md %}).
+- And `YOUR_API_GATEWAY_URL` is your API Gateway endpoint. It looks something likes this `https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/dev`. But if you have confgiured it with a custom domain use the one from that [chapter]({% link _chapters/configure-custom-domains-through-seed.md %}).
 
 If the command is successful, it's look something like this.
 

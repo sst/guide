@@ -99,4 +99,4 @@ Now simply run the following command from your project root when you want to dep
 $ npm run deploy
 ```
 
-Our app is now complete. And we have an easy way to update it!
+Our app is now complete. And this is the end of Part I. Next we'll be looking at how to automate this stack so we can use it for our future projects.

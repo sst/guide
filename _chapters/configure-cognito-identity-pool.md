@@ -6,11 +6,11 @@ description:
 comments_id:
 ---
 
-If you recall from the first part of tutorial, we the Cognito Identity Pool as a way to control which AWS resources our logged in users will have access to. And also tie in our Cognito User Pool as our authentication provider.
+If you recall from the first part of tutorial, we use the Cognito Identity Pool as a way to control which AWS resources our logged in users will have access to. And also tie in our Cognito User Pool as our authentication provider.
 
-### Add the resource
+### Create the Resource
 
-Add the following to `resources/cognito-identity-pool.yml`.
+<img class="code-marker" src="/assets/s.png" />Add the following to `resources/cognito-identity-pool.yml`.
 
 ``` yml
 Resources:
@@ -125,9 +125,9 @@ Let's quickly go over the various sections of this configuration:
 
 7. Finally, we print out the generated Identity Pool Id in the `Outputs:` block.
 
-### Add resource to serverless.yml
+### Add the Resource
 
-Now let's add a reference to this resource by replacing the `resources:` block in our `serverless.yml`.
+<img class="code-marker" src="/assets/s.png" />Let's reference the resource in our `serverless.yml`. Replace your `resources:` block with the following.
 
 ``` yml
 # Create our resources with separate CloudFormation templates
@@ -141,9 +141,9 @@ resources:
   - ${file(resources/cognito-identity-pool.yml)}
 ```
 
-### Commit your code
+### Commit Your Code
 
-Let's commit the changes we've made so far.
+<img class="code-marker" src="/assets/s.png" />Let's commit the changes we've made so far.
 
 ``` bash
 $ git add .

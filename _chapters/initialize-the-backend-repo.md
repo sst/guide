@@ -1,50 +1,41 @@
 ---
 layout: post
-title: Initialize the backend repo
-date: 2017-05-30 00:00:00
+title: Initialize the Backend Repo
+date: 2018-02-24 00:00:00
 description:
 comments_id:
 ---
 
-To start with we are going to create our new project and add it to GitHub. We are going to be working off the code we've created so far. Don't worry if you haven't worked through the initial tutorial.
+To start with we are going to create our new project and add it to GitHub. We are going to be working off the code we've created so far.
 
-### Clone the original repo
+### Clone the Code so Far
 
-In your working directory, start by cloning the [original repo]({{ site.backend_github_repo }}).
+<img class="code-marker" src="/assets/s.png" />In your working directory, start by cloning the [original repo]({{ site.backend_github_repo }}).
 
 ``` bash
 $ git clone --depth 1 https://github.com/AnomalyInnovations/serverless-stack-demo-api.git serverless-stack-2-api/
 $ cd serverles-stack-2-api/
 ```
 
-And remove the `.git/` dir.
+<img class="code-marker" src="/assets/s.png" />And remove the `.git/` dir.
 
 ``` bash
 $ rm -rf .git/
 ```
 
-Let's install our Node modules as well.
+<img class="code-marker" src="/assets/s.png" />Let's install our Node modules as well.
 
 ``` bash
 $ npm install
 ```
 
-### Organize the project
-
-We have a couple of files as a part of the starter project that we can now remove.
-
-``` bash
-$ rm handler.js
-$ rm tests/handler.test.js
-```
-
-### Create a new GitHub repo
+### Create a New Github Repo
 
 Let's head over to [GitHub](https://github.com). Make sure you are signed in and hit **New repository**.
 
 ![Create new GitHub repository screenshot](/assets/part2/create-new-github-repository.png)
 
-Give your repository a name, in our case we are calling it `serverless-stack-2-api`. Next hit **New repository**.
+Give your repository a name, in our case we are calling it `serverless-stack-2-api`. Next hit **Create repository**.
 
 ![Name new GitHub repository screenshot](/assets/part2/name-new-github-repository.png)
 
@@ -54,27 +45,27 @@ Once your repository is created, copy the repository URL. We'll need this soon.
 
 In our case the URL is `https://github.com/jayair/serverless-stack-2-api.git`.
 
-### Initialize your new repo
+### Initialize Your New Repo
 
-Now head back to your project and use the following command to initialize your new repo.
+<img class="code-marker" src="/assets/s.png" />Now head back to your project and use the following command to initialize your new repo.
 
 ``` bash
 $ git init
 ```
 
-Add the existing files.
+<img class="code-marker" src="/assets/s.png" />Add the existing files.
 
 ``` bash
 $ git add .
 ```
 
-Create your first commit.
+<img class="code-marker" src="/assets/s.png" />Create your first commit.
 
 ``` bash
 $ git commit -m "First commit"
 ```
 
-Link it to the repo you created on GitHub.
+<img class="code-marker" src="/assets/s.png" />Link it to the repo you created on GitHub.
 
 ``` bash
 $ git remote add origin REPO_URL
@@ -86,10 +77,10 @@ Here `REPO_URL` is the URL we copied from GitHub in the steps above. You can ver
 $ git remote -v
 ```
 
-Finally, let's push our first commit to GitHub using:
+<img class="code-marker" src="/assets/s.png" />Finally, let's push our first commit to GitHub using:
 
 ``` bash
 $ git push -u origin master
 ```
 
-Next let's look into configuring our entire notes app backend via our `serverless.yml`. This is commonly known as **Infratrcture as code**.
+Next, let's make a couple of quick changes to our project to get organized.

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Custom Domains for API Gateway
+title: Configure Custom Domains through Seed
 date: 2018-03-15 00:00:00
 description:
 comments_id:

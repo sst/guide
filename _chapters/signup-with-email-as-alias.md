@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Signup with email alias
+title: Signup with email as alias
 date: 2018-03-20 00:00:00
 description:
 comments_id:

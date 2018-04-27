@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Add a billing API
+title: Add a Billing API
 date: 2018-03-07 00:00:00
 description:
 comments_id:
@@ -8,13 +8,15 @@ comments_id:
 
 Now let's get started with creating our billing API. It is going to take a Stripe token and the number of notes the user wants to store.
 
-Start by installing the Stripe NPM package. Run the following in the root of our project.
+### Add a Billing Lambda
+
+<img class="code-marker" src="/assets/s.png" />Start by installing the Stripe NPM package. Run the following in the root of our project.
 
 ``` bash
 $ npm install --save stripe
 ```
 
-Next, add the following to `billing.js`.
+<img class="code-marker" src="/assets/s.png" />Next, add the following to `billing.js`.
 
 ``` js
 import stripePackage from "stripe";
@@ -45,19 +47,19 @@ export async function main(event, context, callback) {
 
 Most of this is fairly straightforward but let's go over it quickly:
 
-- We get the `storage` and `source` from the request body. The `storage` is the number of notes the user would like to store in his account. And `source` is the Stripe token for the card that we are going to charge.
+- We get the `storage` and `source` from the request body. The `storage` variable is the number of notes the user would like to store in his account. And `source` is the Stripe token for the card that we are going to charge.
 
 - We are using a `calculateCost(storage)` function (that we are going to add soon) to figure out how much to charge a user based on the number of notes that are going to be stored.
 
 - We create a new Stripe object using our Stripe Secret key. We are going to get this as an environment variable. We do not want to put our secret keys in our code and commit that to git. This is a security issue.
 
-- Finally we use the `stripe.charges.create` method to charge the user and respond to the request if everything went through successfuly.
+- Finally, we use the `stripe.charges.create` method to charge the user and respond to the request if everything went through successfully.
 
-### Add the business logic
+### Add the Business Logic
 
 Now let's implement our `calculateCost` method. This is primarily our *business logic*.
 
-Create a `libs/billing-lib.js` and add the following.
+<img class="code-marker" src="/assets/s.png" />Create a `libs/billing-lib.js` and add the following.
 
 ``` js
 export function calculateCost(storage) {
@@ -77,7 +79,7 @@ This is basically saying that if a user wants to store 10 or fewer notes, we'll 
 
 Let's add a reference to our new API and Lambda function.
 
-Add the following above the `resources:` block in the `serverless.yml`.
+<img class="code-marker" src="/assets/s.png" />Add the following above the `resources:` block in the `serverless.yml`.
 
 ``` yml
   billing:
@@ -90,9 +92,11 @@ Add the following above the `resources:` block in the `serverless.yml`.
           authorizer: aws_iam
 ```
 
-### Commit our changes
+Make sure this is indented correctly.
 
-Let's quickly commit these to git.
+### Commit Our Changes
+
+<img class="code-marker" src="/assets/s.png" />Let's quickly commit these to git.
 
 ``` bash
 $ git add .
