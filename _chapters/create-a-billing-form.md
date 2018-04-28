@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Create a billing form
+title: Create a Billing Form
 date: 2018-03-23 00:00:00
 description:
 comments_id:
@@ -8,7 +8,7 @@ comments_id:
 
 Now our settings page is going to have a form that will take a user's credit card details, get a stripe token and call our billing API with it. Let's start by adding the Stripe React SDK to our project.
 
-From our project root, run the following.
+<img class="code-marker" src="/assets/s.png" />From our project root, run the following.
 
 ``` bash
 $ npm install --save react-stripe-elements
@@ -16,10 +16,10 @@ $ npm install --save react-stripe-elements
 
 Next let's create our billing form component.
 
-Add the following to a new file in `src/components/BillingForm.js`.
+<img class="code-marker" src="/assets/s.png" />Add the following to a new file in `src/components/BillingForm.js`.
 
 {% raw %}
-``` js
+``` coffee
 import React, { Component } from "react";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { CardElement, injectStripe } from "react-stripe-elements";
@@ -133,13 +133,15 @@ Let's quickly go over what we are doing here:
 
 - The submit button has a loading state that is set to true when we call Stripe to get a token and when we call our billing API. However, since our Settings container is calling the billing API we use the `this.props.loading` to set the state of the button from the Settings container.
 
-- We also validate this form by checking if the name, the number of notes, and the card details are complete. For the card details, we use the `CardElement` `onChange` method.
+- We also validate this form by checking if the name, the number of notes, and the card details are complete. For the card details, we use the CardElement's `onChange` method.
 
 - Finally, once the user completes and submits the form we make a call to Stripe by passing in the credit card name and the credit card details (this is handled by the Stripe SDK). We call the `this.props.stripe.createToken` method and in return we get the token or an error back. We simply pass this and the number of notes to be stored to the settings page via the `this.props.onSubmit` method. We will be setting this up shortly.
 
+You can read more about how to use the [React Stripe Elements here](https://github.com/stripe/react-stripe-elements).
+
 Also, let's add some styles to the card field so it matches the rest of our UI.
 
-Create a file at `src/components/BillingForm.css`.
+<img class="code-marker" src="/assets/s.png" />Create a file at `src/components/BillingForm.css`.
 
 ``` css
 .BillingForm .card-field {
@@ -158,13 +160,13 @@ Create a file at `src/components/BillingForm.css`.
 }
 ```
 
-### Commit our changes
+### Commit the Changes
 
-Let's quickly commit these to git.
+<img class="code-marker" src="/assets/s.png" />Let's quickly commit these to Git.
 
 ``` bash
 $ git add .
 $ git commit -m "Adding a billing form"
 ```
 
-Next let's plug our form into the settings page.
+Next we'll plug our form into the settings page.

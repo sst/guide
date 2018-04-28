@@ -87,7 +87,7 @@ Now we need to ensure that we don't commit our `env.yml` file to git. The starte
 env.yml
 ```
 
-This will tell git to not commit this file.
+This will tell Git to not commit this file.
 
 <img class="code-marker" src="/assets/s.png" />Next let's commit the rest of our changes.
 

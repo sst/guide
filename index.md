@@ -7,7 +7,6 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
 
 {% include share-index.html %}
 
-{: .toc-header }
 ## Table of Contents
 
 ### Introduction
@@ -140,7 +139,7 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
   - [Setting up your project on Seed]({% link _chapters/setting-up-your-project-on-seed.md %})
   - [Configure secrets in Seed]({% link _chapters/configure-secrets-in-seed.md %})
   - [Deploying through Seed]({% link _chapters/deploying-through-seed.md %})
-  - [Configure custom domains through Seed]({% link _chapters/configure-custom-domains-through-seed.md %})
+  - [Set custom domains through Seed]({% link _chapters/set-custom-domains-through-seed.md %})
   - [Test the configured APIs]({% link _chapters/test-the-configured-apis.md %})
   - [Monitoring deployments in Seed]({% link _chapters/monitoring-deployments-in-seed.md %})
 
@@ -195,3 +194,4 @@ Frontend
 
 - [Connect to API Gateway with IAM auth]({% link _chapters/connect-to-api-gateway-with-iam-auth.md %})
 - [Serverless Node.js Starter]({% link _chapters/serverless-nodejs-starter.md %})
+

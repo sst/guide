@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Signup with email as alias
+title: Signup with Email as Alias
 date: 2018-03-20 00:00:00
 description:
 comments_id:
@@ -10,19 +10,21 @@ Back in the [Configure Cognito User Pool in Serverless]({% link _chapters/config
 
 To make this work in our frontend, we need to set a random UUID as the user's username. Let's make that change really quickly.
 
-Run the following in our project root.
+### Generate a UUID Username
+
+<img class="code-marker" src="/assets/s.png" />Run the following in our project root.
 
 ``` bash
 $ npm install --save uuid
 ```
 
-Next, import this in your `src/containers/Signup.js` by adding this to the header.
+<img class="code-marker" src="/assets/s.png" />Next, import this in your `src/containers/Signup.js` by adding this to the header.
 
 ``` js
 import uuidv4 from "uuid/v4";
 ```
 
-And replace the following lines in the `handleSubmit` method.
+<img class="code-marker" src="/assets/s.png" />And replace the following lines in the `handleSubmit` method.
 
 ``` js
 const newUser = await Auth.signUp({
@@ -31,7 +33,7 @@ const newUser = await Auth.signUp({
 });
 ```
 
-With this.
+<img class="code-marker" src="/assets/s.png" />With this.
 
 ``` js
 const newUser = await Auth.signUp({
@@ -43,11 +45,13 @@ const newUser = await Auth.signUp({
 });
 ```
 
-Also replace this line in the `handleConfirmationSubmit` mehtod.
+<img class="code-marker" src="/assets/s.png" />Also replace this line in the `handleConfirmationSubmit` method of `src/containers/Signup.js`.
 
 ``` js
 await Auth.confirmSignUp(this.state.email, this.state.confirmationCode);
 ```
+
+<img class="code-marker" src="/assets/s.png" />With:
 
 ``` js
 await Auth.confirmSignUp(this.state.newUser.user.username, this.state.confirmationCode);
@@ -55,15 +59,15 @@ await Auth.confirmSignUp(this.state.newUser.user.username, this.state.confirmati
 
 This is telling Cognito that we are going to use a random UUID as the username. And since we have set email to be an alias, we can still login with our username. For the confirm case, we are going to use the generated username as well.
 
-You can quickly test this by signing up for a new account. If you are successfuly signed in, we know it worked. This is because we log you in as a part of the sign up process.
+You can quickly test this by signing up for a new account. If you are successfully signed in, we know it worked. This is because we log you in as a part of the sign up process.
 
-### Commit our changes
+### Commit the Changes
 
-Let's quickly commit these to git.
+Let's quickly commit these to Git.
 
 ``` bash
 $ git add .
 $ git commit -m "Using UUID as username on signup"
 ```
 
-Next, let's add a setting page to our app. This is where a user will be able to pay for our service!
+Next, let's add a settings page to our app. This is where a user will be able to pay for our service!

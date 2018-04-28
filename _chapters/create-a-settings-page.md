@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Adding a settings page
+title: Create a Settings Page
 date: 2018-03-21 00:00:00
 description:
 comments_id:
@@ -8,16 +8,16 @@ comments_id:
 
 We are going to add a settings page to our app. This is going to allow users to pay for our service. The flow will look something like this:
 
-- Users put in their credit card info and the number of notes they want to store.
-- We call Stirpe on the frontend to generate a token for the credit card.
-- We then call our billing API with the token and the number of notes.
-- Our billing API calculates the amount and bills the card!
+1. Users put in their credit card info and the number of notes they want to store.
+2. We call Stripe on the frontend to generate a token for the credit card.
+3. We then call our billing API with the token and the number of notes.
+4. Our billing API calculates the amount and bills the card!
 
 To get started let's add our settings page.
 
-Create a new file in `src/containers/Settings.js` and add the following.
+<img class="code-marker" src="/assets/s.png" />Create a new file in `src/containers/Settings.js` and add the following.
 
-``` js
+``` coffee
 import React, { Component } from "react";
 import { API } from "aws-amplify";
 
@@ -45,15 +45,15 @@ export default class Settings extends Component {
 }
 ```
 
-Next import this component in the header of `src/Routes.js`.
+<img class="code-marker" src="/assets/s.png" />Next import this component in the header of `src/Routes.js`.
 
 ``` js
 import Settings from "./containers/Settings";
 ```
 
-And replace our `<Switch>` block in `src/Routes.js` with this.
+<img class="code-marker" src="/assets/s.png" />And replace our `<Switch>` block in `src/Routes.js` with this.
 
-``` js
+``` coffee
 <Switch>
   <AppliedRoute path="/" exact component={Home} props={childProps} />
   <UnauthenticatedRoute path="/login" exact component={Login} props={childProps} />
@@ -68,9 +68,9 @@ And replace our `<Switch>` block in `src/Routes.js` with this.
 
 Notice that we added a route for our new settings page.
 
-Next add a link to our settings page in the navbar by replaceing the `render` method in `src/App.js` with this.
+<img class="code-marker" src="/assets/s.png" />Next add a link to our settings page in the navbar by replacing the `render` method in `src/App.js` with this.
 
-``` js
+``` coffee
 render() {
   const childProps = {
     isAuthenticated: this.state.isAuthenticated,
@@ -114,15 +114,15 @@ render() {
 }
 ```
 
-You'll notice that we added anther link in the navbar for the case a user is logged in.
+You'll notice that we added another link in the navbar for the case a user is logged in.
 
 Now if you head over to your app, you'll see a new **Settings** link at the top. Of course, the page is pretty empty right now.
 
 ![Add empty settings page screenshot](/assets/part2/add-empty-settings-page.png)
 
-### Commit our changes
+### Commit the Changes
 
-Let's quickly commit these to git.
+<img class="code-marker" src="/assets/s.png" />Let's quickly commit these to Git.
 
 ``` bash
 $ git add .

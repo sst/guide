@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Setting up your project on Netlify
+title: Setting up Your Project on Netlify
 date: 2018-03-27 00:00:00
 description:
 comments_id:
 ---
 
-Now we are going to set our React app on [Netlify](https://www.netlify.com). Start by [creating an account](https://app.netlify.com/signup).
+Now we are going to set our React app on [Netlify](https://www.netlify.com). Start by [creating a free account](https://app.netlify.com/signup).
 
 ![Signup for Netlify screenshot](/assets/part2/signup-for-netlify.png)
 
@@ -26,7 +26,7 @@ It'll default the branch to `master`. We can now deploy our app! Hit **Deploy si
 
 ![Hit Deploy site screenshot](/assets/part2/hit-deploy-site.png)
 
-This should be deploying our app. Once, it is done click on the deployment.
+This should be deploying our app. Once it is done, click on the deployment.
 
 ![View deployed site screenshot](/assets/part2/view-deployed-site.png)
 

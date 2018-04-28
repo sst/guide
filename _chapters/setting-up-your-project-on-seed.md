@@ -1,14 +1,14 @@
 ---
 layout: post
-title: Setting up your project on Seed
+title: Setting up Your Project on Seed
 date: 2018-03-12 00:00:00
 description:
 comments_id:
 ---
 
-We are going to be using [Seed](https://seed.run) to automate our serverless dpeloyments and manage our environments.
+We are going to use [Seed](https://seed.run) to automate our serverless deployments and manage our environments.
 
-Start by signing up for an account [here](https://console.seed.run/signup-account).
+Start by signing up for a free account [here](https://console.seed.run/signup-account).
 
 ![Create new Seed account screenshot](/assets/part2/create-new-seed-account.png)
 
@@ -18,13 +18,13 @@ Let's **Create your first project**.
 
 Now to add your project, select **GitHub** as your git provider. You'll be asked to give Seed permission to your GitHub account.
 
-![Select git provider screenshot](/assets/part2/select-git-provider.png)
+![Select Git provider screenshot](/assets/part2/select-git-provider.png)
 
 Select the repo we've been using so far.
 
-Seed deploys to your AWS account on your behalf. You should create a separate IAM user with exact permissions that your project needs. But for now we'll simply use the one we've used in this tutorial so far.
+Seed deploys to your AWS account on your behalf. You should create a separate IAM user with exact permissions that your project needs. You can read more about this [here](https://seed.run/docs/customizing-your-iam-policy). But for now we'll simply use the one we've used in this tutorial.
 
-Run the following command.
+<img class="code-marker" src="/assets/s.png" />Run the following command.
 
 ``` bash
 $ cat ~/.aws/credentials
@@ -38,7 +38,7 @@ aws_access_key_id = YOUR_IAM_ACCESS_KEY
 aws_secret_access_key = YOUR_IAM_SECRET_KEY
 ```
 
-Fill these in to the form. And click **Create**.
+Fill these in and click **Create**.
 
 ![Select GitHub repo screenshot](/assets/part2/select-github-repo.png)
 

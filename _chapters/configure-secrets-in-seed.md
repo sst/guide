@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Configure secrets in Seed
+title: Configure Secrets in Seed
 date: 2018-03-13 00:00:00
 description:
 comments_id:
 ---
 
-Before we can do our first deployment, we need to make sure to configure our secret environment variables. If you'll recall, we have explicitly not stored these in our code. This means that if soembody else on our team needs to deploy, we'll need to pass the `env.yml` file around. That is not a good practice. Instead we'll configure [Seed](https://seed.run) to deploy with our secrets for us.
+Before we can do our first deployment, we need to make sure to configure our secret environment variables. If you'll recall, we have explicitly not stored these in our code (or in Git). This means that if somebody else on our team needs to deploy, we'll need to pass the `env.yml` file around. Instead we'll configure [Seed](https://seed.run) to deploy with our secrets for us.
 
 To do that, hit the **Settings** button in our **dev** stage.
 
@@ -36,4 +36,4 @@ And type in `stripeSecretKey` as the **Key** and the value should be the `STRIPE
 
 ![Add secret prod environment variable screenshot](/assets/part2/add-secret-prod-environment-variable.png)
 
-Next, we'll trigger our first dpeloyment on Seed.
+Next, we'll trigger our first deployment on Seed.

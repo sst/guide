@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Configure Custom Domains through Seed
+title: Set Custom Domains Through Seed
 date: 2018-03-15 00:00:00
 description:
 comments_id:
 ---
 
-Our serverless API uses API Gateway and it gives us some auto-generated endpoints. We would like to configure them to use a scheme like `api.my-domain.com` or something similar. This can take a few different steps through the AWS Console, but it is pretty straightforward through [Seed](https://seed.run).
+Our serverless API uses API Gateway and it gives us some auto-generated endpoints. We would like to configure them to use a scheme like `api.my-domain.com` or something similar. This can take a few different steps through the AWS Console, but it is pretty straightforward to configure through [Seed](https://seed.run).
 
 From our **prod** stage, click on **View Deployment**.
 
@@ -28,10 +28,10 @@ And hit **Update**.
 
 Seed will now go through and configure the domain for this API Gateway endpoint, create the SSL certificate and attach it to the domain. This process can take up to 40 mins.
 
-While we wait, we can do the same for our `dev` stage. Go into the **dev** stage > click **View Deployment** > click **Settings** > and hit **Update Custom Domain**. And select the domain, sub-domain, and base path. In our case we'll use something like `api.mu-domain.com/dev`.
+While we wait, we can do the same for our `dev` stage. Go into the **dev** stage > click **View Deployment** > click **Settings** > and hit **Update Custom Domain**. And select the domain, sub-domain, and base path. In our case we'll use something like `api.my-domain.com/dev`.
 
 ![Custom domain details dev screenshot](/assets/part2/custom-domain-details-dev.png)
 
 Hit **Update** and wait for the changes to take place.
 
-Now we are ready to test our fully-configured serverless API backend!
+Once complete, we are ready to test our fully-configured serverless API backend!

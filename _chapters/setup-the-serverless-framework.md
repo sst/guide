@@ -45,7 +45,7 @@ We also have a `tests/` directory where we can add our unit tests.
 
 ### Install Node.js packages
 
-The starter project relies on a few dependecies that are listed in the `package.json`.
+The starter project relies on a few dependencies that are listed in the `package.json`.
 
 <img class="code-marker" src="/assets/s.png" />At the root of the project, run.
 

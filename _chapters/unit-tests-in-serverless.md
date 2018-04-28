@@ -1,26 +1,34 @@
 ---
 layout: post
-title: Unit tests in serverless
+title: Unit Tests in Serverless
 date: 2018-03-10 00:00:00
 description:
 comments_id:
 ---
 
-So we have some simple business logic that figures out exactly how much to charge our user based on the number of notes they want to store. We want to make sure that we test all the possible cases for this before we start chargin people. To do this we are going to configure unit tests for our Serverless Framework project.
+So we have some simple business logic that figures out exactly how much to charge our user based on the number of notes they want to store. We want to make sure that we test all the possible cases for this before we start charging people. To do this we are going to configure unit tests for our Serverless Framework project.
 
-We are going to use [Jest](https://facebook.github.io/jest/) for this and it is a part of our starter project.
+We are going to use [Jest](https://facebook.github.io/jest/) for this and it is already a part of [our starter project](https://github.com/AnomalyInnovations/serverless-nodejs-starter).
 
-You'll see this as a part your `scripts` block in the `package.json`.
+However, if you are starting a new Serverless Framework project. Add Jest to your dev dependencies by running the following.
+
+``` bash
+$ npm install --save-dev jest
+```
+
+And update the `scripts` block in your `package.json` with the following:
 
 ```
-"test": "jest"
+"scripts": {
+  "test": "jest"
+},
 ```
 
-This will allow us to run our tests using `npm test`.
+This will allow you to run your tests using the command `npm test`.
 
-### Add unit tests
+### Add Unit Tests
 
-Now create a new file in `tests/billing.test.js` and add.
+<img class="code-marker" src="/assets/s.png" />Now create a new file in `tests/billing.test.js` and add the following.
 
 ``` js
 import { calculateCost } from "../libs/billing-lib";
@@ -53,7 +61,7 @@ test("Highest tier", () => {
 });
 ```
 
-This should be straightforward. We are adding 3 tests. They are testing the different tiers of our pricing structure. We test the case where a user is trying to store 10, 100, and 101 notes. And comparing the calculated cost to the one we are expecting.
+This should be straightforward. We are adding 3 tests. They are testing the different tiers of our pricing structure. We test the case where a user is trying to store 10, 100, and 101 notes. And comparing the calculated cost to the one we are expecting. You can read more about using Jest in the [Jest docs here](https://facebook.github.io/jest/docs/en/getting-started.html). 
 
 ### Run tests
 
@@ -82,21 +90,21 @@ Ran all test suites.
 
 And that's it! We have unit tests all configured.
 
-### Commit our changes
+### Commit the Changes
 
-Let's commit these changes.
+<img class="code-marker" src="/assets/s.png" />Let's commit these changes.
 
 ``` bash
 $ git add .
 $ git commit -m "Adding unit tests"
 ```
 
-### Push our changes
+### Push the Changes
 
-We are done making changes to our project, so let's go ahead and push them to GitHub.
+<img class="code-marker" src="/assets/s.png" />We are done making changes to our project, so let's go ahead and push them to GitHub.
 
 ``` bash
 $ git push
 ```
 
-Next we'll use our Git repo to automate our deployments. This will ensure that when we push our changes to git, it will run our tests, and deploy them for us automatically. We'll also configure multiple environments and promote our code to production.
+Next we'll use our Git repo to automate our deployments. This will ensure that when we push our changes to Git, it will run our tests, and deploy them for us automatically. We'll also learn to configure multiple environments.

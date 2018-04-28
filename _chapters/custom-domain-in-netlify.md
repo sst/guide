@@ -18,11 +18,11 @@ Under **Site information** hit **Change site name**.
 
 ![Hit Change site name screenshot](/assets/part2/hit-change-site-name.png)
 
-The site names as global, so pick a unique one. In our case we are using `serverless-stack-2-client`. And hit **Save**.
+The site names are global, so pick a unique one. In our case we are using `serverless-stack-2-client`. And hit **Save**.
 
 ![Save change site name screenshot](/assets/part2/save-change-site-name.png)
 
-This means that our Netlify site URL is now going to be `https://serverless-stack-demo.netlify.com`. Make a note of this as we will use this later in this chapter.
+This means that our Netlify site URL is now going to be `https://serverless-stack-2-client.netlify.com`. Make a note of this as we will use this later in this chapter.
 
 ### Domain Settings in Netlify
 
@@ -60,13 +60,13 @@ Here click on **Create Record Set**.
 
 ![Create first Route 53 record set screenshot](/assets/part2/create-first-route-53-record-set.png)
 
-Select **Type** as **A - IPv4 address** and set the **Value** to **104.198.14.52**. And hit **Save Record Set**.
+Select **Type** as **A - IPv4 address** and set the **Value** to **104.198.14.52**. And hit **Create**.
 
 ![Add A record screenshot](/assets/part2/add-a-record.png)
 
 Next hit **Create Record Set** again.
 
-Set **Name** to `www`, **Type** to **CNAME - Canonical name**, and the value to the Netlify site name as we noted above. In our case it is `https://serverless-stack-demo.netlify.com`. Hit **Save Record Set**.
+Set **Name** to `www`, **Type** to **CNAME - Canonical name**, and the value to the Netlify site name as we noted above. In our case it is `https://serverless-stack-2-client.netlify.com`. Hit **Create**.
 
 ![Add CNAME record screenshot](/assets/part2/add-cname-record.png)
 
@@ -74,11 +74,11 @@ And give the DNS around 30 minutes to update.
 
 ### Configure SSL
 
-From the side panel hit **HTTPS**. And hit **Verify DNS configuration**.
+Back in Netlify, hit **HTTPS** in the side panel. And hit **Verify DNS configuration**.
 
 ![Verify DNS configuration screenshot](/assets/part2/verify-dns-configuration.png)
 
-If everything has been confgured properly, you should be able to hit **Let's Encrypt Certificate**.
+If everything has been configured properly, you should be able to hit **Let's Encrypt Certificate**.
 
 ![Setup Let's Encrypt Certificate screenshot](/assets/part2/setup-lets-encrypt-certificate.png)
 
@@ -96,4 +96,4 @@ Now if you head over to your browser and go to your custom domain, your notes ap
 
 ![Notes app on custom domain screenshot](/assets/part2/notes-app-on-custom-domain.png)
 
-Now we have our production deploy. But we haven't had a chance to go through our workflow just yet. Let's take a look at that next.
+We have our app in production but we haven't had a chance to go through our workflow just yet. Let's take a look at that next.

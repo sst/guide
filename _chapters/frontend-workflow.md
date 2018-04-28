@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Frontend workflow
+title: Frontend Workflow
 date: 2018-03-29 00:00:00
 description:
 comments_id:
@@ -8,11 +8,11 @@ comments_id:
 
 Now that we have our frontend deployed and configured, let's go over what our development workflow will look like.
 
-### Working in a dev branch
+### Working in a Dev Branch
 
 A good practise is to create a branch when we are working on something new.
 
-Run the following in the root of your project.
+<img class="code-marker" src="/assets/s.png" />Run the following in the root of your project.
 
 ``` bash
 $ git checkout -b "new-feature"
@@ -22,9 +22,9 @@ This creates a new branch for us called `new-feature`.
 
 Let's make a faulty commit just so we can go over the process of rolling back as well.
 
-Replace the `renderLander` method in `src/containers/Home.js` with the following.
+<img class="code-marker" src="/assets/s.png" />Replace the `renderLander` method in `src/containers/Home.js` with the following.
 
-``` js
+``` coffee
 renderLander() {
   return (
     <div className="lander">
@@ -43,14 +43,14 @@ renderLander() {
 }
 ```
 
-And to commit this change to git.
+<img class="code-marker" src="/assets/s.png" />And commit this change to Git.
 
 ``` bash
 $ git add .
 $ git commit -m "Commiting a typo"
 ```
 
-### Create a branch deployment
+### Create a Branch Deployment
 
 To be able to preview this change in its own environment we need to turn on branch deployments in Netlify. From the **Site settings** sidebar select **Build & deploy**.
 
@@ -64,7 +64,7 @@ Set **Branch deploys** to **All** and hit **Save**.
 
 ![Set branch deploys to all screenshot](/assets/part2/set-branch-deploys-to-all.png)
 
-Now comes the fun part, we can deploy this to staging so we can test it right away. All we need to do is push it to git.
+<img class="code-marker" src="/assets/s.png" />Now comes the fun part, we can deploy this to dev so we can test it right away. All we need to do is push it to Git.
 
 ``` bash
 $ git push -u origin new-feature
@@ -82,11 +82,11 @@ And you can see a new version of your app in action!
 
 ![Preview deploy in action screenshot](/assets/part2/preview-deploy-in-action.png)
 
-You can test around this version of our frontend app. It is connected to the staging version of our backend API. The idea is that we can test and play around with the changes here without affecting our production users.
+You can test around this version of our frontend app. It is connected to the dev version of our backend API. The idea is that we can test and play around with the changes here without affecting our production users.
 
-### Push to production
+### Push to Production
 
-Now if we feel happy with the changes we can push this to production just by merging to master.
+<img class="code-marker" src="/assets/s.png" />Now if we feel happy with the changes we can push this to production just by merging to master.
 
 ``` bash
 $ git checkout master
@@ -102,11 +102,11 @@ And once it is done, your changes should be live!
 
 ![Production deploy is live screenshot](/assets/part2/production-deploy-is-live.png)
 
-### Rolling back in production
+### Rolling Back in Production
 
-Now for some reason we aren't happy with the build in production, we can rollback.
+Now for some reason if we aren't happy with the build in production, we can rollback.
 
-Click on the older production depoyment.
+Click on the older production deployment.
 
 ![Click on old production deployment screenshot](/assets/part2/click-on-old-production-deployment.png)
 
@@ -124,9 +124,9 @@ And that's it! Now you have a automated workflow for building and deploying your
 
 Let's quickly cleanup our changes.
 
-Replace the `renderLander` method in `src/containers/Home.js` with the original.
+<img class="code-marker" src="/assets/s.png" />Replace the `renderLander` method in `src/containers/Home.js` with the original.
 
-``` js
+``` coffee
 renderLander() {
   return (
     <div className="lander">
@@ -145,7 +145,7 @@ renderLander() {
 }
 ```
 
-Commit these changes and push them by running the following.
+<img class="code-marker" src="/assets/s.png" />Commit these changes and push them by running the following.
 
 ``` bash
 $ git add .
@@ -153,4 +153,4 @@ $ git commit -m "Fixing a typo"
 $ git push
 ```
 
-This will create a new deployment and we are done. Let's wrap up the guide next.
+This will create a new deployment to live! Let's wrap up the guide next.

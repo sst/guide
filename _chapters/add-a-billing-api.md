@@ -51,7 +51,7 @@ Most of this is fairly straightforward but let's go over it quickly:
 
 - We are using a `calculateCost(storage)` function (that we are going to add soon) to figure out how much to charge a user based on the number of notes that are going to be stored.
 
-- We create a new Stripe object using our Stripe Secret key. We are going to get this as an environment variable. We do not want to put our secret keys in our code and commit that to git. This is a security issue.
+- We create a new Stripe object using our Stripe Secret key. We are going to get this as an environment variable. We do not want to put our secret keys in our code and commit that to Git. This is a security issue.
 
 - Finally, we use the `stripe.charges.create` method to charge the user and respond to the request if everything went through successfully.
 
@@ -96,7 +96,7 @@ Make sure this is indented correctly.
 
 ### Commit Our Changes
 
-<img class="code-marker" src="/assets/s.png" />Let's quickly commit these to git.
+<img class="code-marker" src="/assets/s.png" />Let's quickly commit these to Git.
 
 ``` bash
 $ git add .

@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Manage environments in Create React App
+title: Manage Environments in Create React App
 date: 2018-03-19 00:00:00
 description:
 comments_id:
 ---
 
-Recall from our backend section that we create two environments (dev and prod) for our serverless backend API. In this chapter we'll configure our frontend Create React App to connect to it.
+Recall from our backend section that we created two environments (dev and prod) for our serverless backend API. In this chapter we'll configure our frontend Create React App to connect to it.
 
 Let's start by looking at how our app is configured currently. Our `src/config.js` stores the info to all of our backend resources.
 
@@ -30,9 +30,9 @@ export default {
 };
 ```
 
-We need to change this so that when we *push* our app to **dev** it connectes to the dev environment of our backend and for **prod** it connects to the prod environment. Of course you can add many more environments, but let's stick to just these two for now.
+We need to change this so that when we *push* our app to **dev** it connectes to the dev environment of our backend and for **prod** it connects to the prod environment. Of course you can add many more environments, but let's just stick to these for now.
 
-### Environment variables in Create React App
+### Environment Variables in Create React App
 
 Our React app is a static single page app. This means that once a *build* is created for a certain environment it persists for that environment.
 
@@ -54,9 +54,9 @@ Note that, these variables are embedded during build time. Also, only the variab
 
 ### Stage Environment Variable
 
-For our purpose let's use an environment variable called `REACT_APP_STAGE`. This variable can take the values `dev` and `prod`. And by default it is set to `dev`. Now we can rewrite our config with this.
+For our purpose let's use an environment variable called `REACT_APP_STAGE`. This variable will take the values `dev` and `prod`. And by default it is set to `dev`. Now we can rewrite our config with this.
 
-Replace `src/config.js` with this.
+<img class="code-marker" src="/assets/s.png" />Replace `src/config.js` with this.
 
 ``` js
 const dev = {
@@ -107,23 +107,25 @@ export default {
 
 Make sure to replace the different version of the resources with the ones from the [Deploying through Seed]({% link _chapters/deploying-through-seed.md %}) chapter.
 
-Also, note that we are defaulting our environment to dev if the `REACT_APP_STAGE` is not set. And for config values like `MAX_ATTACHMENT_SIZE` that are common to both environments we moved it in a different section.
+Note that we are defaulting our environment to dev if the `REACT_APP_STAGE` is not set. This means that our current build process (`npm start` and `npm run build`) will default to the `dev` environment. And for config values like `MAX_ATTACHMENT_SIZE` that are common to both environments we moved it in a different section.
 
-Now if run the following from the root of our frontend project.
+If we switch over to our app, we should see it in development mode and it'll be connected to the dev version of our backend. We haven't changed the deployment process yet but in the coming chapters we'll change this when we automate our frontend deployments.
+
+In this case, if we run the following:
 
 ``` bash
-$ npm start
+$ REACT_APP_STAGE=prod npm run build
 ```
 
-We should see our app in development mode and it'll be connected to the dev version of our backend. We haven't changed the deployment process yet but in the coming chapters we'll change this when we automate our frontend deployments.
+It will build our app using the prod version of our resources.
 
-### Commit our changes
+### Commit the Changes
 
-Let's quickly commit these to git.
+Let's quickly commit these to Git.
 
 ``` bash
 $ git add .
 $ git commit -m "Configuring environments"
 ```
 
-Next, we need to make a quick change to the way sign up our users. If you recall from the [Configure Cognito User Pool in Serverless]({% link _chapters/configure-s3-in-serverless.md %}) chapter, we had to use a workaround to allow users to login with their email address.
+Next, we need to make a quick change to the way we sign up our users. If you recall from the [Configure Cognito User Pool in Serverless]({% link _chapters/configure-s3-in-serverless.md %}) chapter, we had to use a workaround to allow users to login with their email address.
