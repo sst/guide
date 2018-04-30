@@ -14,9 +14,9 @@ $base-line-height:          1.6;
 
 $spacing-unit:              30px;
 
-$text-color:                #333;
-$secondary-text-color:      #666;
-$tertiary-text-color:  	    #999;
+$text-color:                #383736;
+$secondary-text-color:      #62615E;
+$tertiary-text-color:  	    #9A9894;
 $background-color:          #f2efe8;
 $code-background-color:     #f0eaf7;
 $hilight-background-color:  #fff694;
@@ -29,6 +29,7 @@ $grey-color-dark:           darken($grey-color, 25%);
 
 // Width of the content     area
 $content-width:             800px;
+$post-content-width:        1100px;
 
 $on-palm:                   600px;
 $on-laptop:                 800px;
@@ -457,12 +458,102 @@ div.home ul.quotes p {
     font-weight: bold;
   }
 }
-div.home .toc-header {
-  padding-top: 2 * $spacing-unit - 10px;
-  margin-bottom: $spacing-unit;
-  text-align: center;
-  font-weight: bold;
-  font-size: 24px;
+
+/**
+ * Home Table of Contents
+ */
+div.home .table-of-contents {
+  margin-top: $spacing-unit;
+  padding-bottom: $spacing-unit * 1.5;
+  border-radius: 4px;
+  background-color: lighten($background-color, 5%);
+  border: 1px solid darken($background-color, 20%);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+
+  @include media-query($on-palm) {
+    padding-bottom: $spacing-unit;
+  }
+
+  div.header {
+    padding: 16px 0;
+    background-color: white;
+    border-radius: 4px 4px 0 0;
+
+    h6 {
+      margin: 0;
+      font-size: 36px;
+      font-weight: 500;
+      text-align: center;
+    }
+  }
+
+  & > h3 {
+    margin: $spacing-unit * 1.5 $spacing-unit / 2 0;
+    padding: 10px 0;
+    font-size: 30px;
+    font-weight: 500;
+    text-align: center;
+    border: {
+      width: 3px 0;
+      color: darken($background-color, 8%);
+      style: solid;
+    }
+
+    @include media-query($on-palm) {
+      margin-top: $spacing-unit;
+    }
+  }
+
+  div.toc-section {
+    display: flex;
+    align-items: center;
+    padding: $spacing-unit * 1.5 0 0;
+
+    @include media-query($on-palm) {
+      display: block;
+      padding-top: $spacing-unit;
+    }
+
+    h3 {
+      margin: 0;
+      padding: 0 $spacing-unit / 2;
+      font-family: $base-font-family;
+      flex: 0 0 240px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: $tertiary-text-color;
+      font-size: 18px;
+      text-align: right;
+
+      @include media-query($on-palm) {
+        text-align: center;
+      }
+    }
+
+    ul {
+      li {
+        padding: 4px 0;
+        a {
+          font-size: 20px;
+        }
+      }
+    }
+
+    & > ul {
+      margin: 0;
+      padding: $spacing-unit / 2;
+      border-left: 3px solid darken($background-color, 8%);
+
+      @include media-query($on-palm) {
+        padding: $spacing-unit / 2;
+        border: none;
+      }
+
+      & > li {
+        list-style-type: none;
+      }
+    }
+  }
 }
 
 div.home .share-container {
