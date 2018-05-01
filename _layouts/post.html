@@ -1,104 +1,70 @@
 ---
-layout: default-post
+layout: default
 ---
-<div class="post-container">
+<div class="wrapper wrapper-post">
+  <div class="post-container">
 
-  <article class="post">
+    <article class="post">
 
-    <header class="post-header">
-      <h1 class="post-title">{{ page.title | escape }}</h1>
+      <header class="post-header">
+        <h1 class="post-title">{{ page.title | escape }}</h1>
 
-      <div class="post-info">
-        <a target="_blank" href="{{ site.github_repo }}{{ site.github_edit_prefix }}{{ page.path }}">Improve this page</a>
-        <span class="separator">&nbsp;&bull;&nbsp;</span>
-        <a target="_blank" href="{{ site.github_repo }}{{ site.github_history_prefix }}{{ page.path }}">View history</a>
-      </div>
+        <div class="post-info">
+          <a target="_blank" href="{{ site.github_repo }}{{ site.github_edit_prefix }}{{ page.path }}">Improve this page</a>
+          <span class="separator">&nbsp;&bull;&nbsp;</span>
+          <a target="_blank" href="{{ site.github_repo }}{{ site.github_history_prefix }}{{ page.path }}">View history</a>
+        </div>
 
-      {% if page.context == 'backend' or page.context == 'frontend' or page.context == 'all' %}
-      <div class="post-context">
-        {% if page.context == 'backend' %}
-          This article is a part of the <a href="{% link _chapters/setup-the-serverless-framework.md %}">Serverless section</a> of a <a href="/">guide to building full-stack apps</a> with Serverless and React.
-        {% elsif page.context == 'frontend' %}
-          This article is a part of the <a href="{% link _chapters/create-a-new-reactjs-app.md %}">React.js section</a> of a <a href="/">guide to building full-stack apps</a> with Serverless and React.
-        {% else %}
-          This article is a part of a <a href="/">guide to building full-stack apps</a> with Serverless and React.
+        {% if page.context == 'backend' or page.context == 'frontend' or page.context == 'all' %}
+        <div class="post-context">
+          {% if page.context == 'backend' %}
+            This article is a part of the <a href="{% link _chapters/setup-the-serverless-framework.md %}">Serverless section</a> of a <a href="/">guide to building full-stack apps</a> with Serverless and React.
+          {% elsif page.context == 'frontend' %}
+            This article is a part of the <a href="{% link _chapters/create-a-new-reactjs-app.md %}">React.js section</a> of a <a href="/">guide to building full-stack apps</a> with Serverless and React.
+          {% else %}
+            This article is a part of a <a href="/">guide to building full-stack apps</a> with Serverless and React.
+          {% endif %}
+        </div>
         {% endif %}
+
+      </header>
+
+      <div class="post-content">
+        {{ content }}
       </div>
-      {% endif %}
 
-    </header>
+      <div class="post-sponsor">
+        <hr />
+        <a target="_blank" href="https://seed.run"><img width="435" alt="A fully-configured CI/CD pipeline for Serverless" src="/assets/seed-serverless-ci-cd.png" /></a>
+      </div>
 
-    <div class="post-content">
-      {{ content }}
-    </div>
+      <div class="post-closing">
+        <p>If you liked this post, please <a target="_blank" href="{{ site.newsletter_signup_form }}">subscribe to our newsletter</a>, <a target="_blank" href="{{ site.github_repo }}">give us a star on GitHub</a>, and <a target="_blank" href="{{ site.twitter_url }}">follow us on Twitter</a>.</p>
+      </div>
 
-    <div class="post-sponsor">
-      <hr />
-      <a target="_blank" href="https://seed.run"><img width="435" alt="A fully-configured CI/CD pipeline for Serverless" src="/assets/seed-serverless-ci-cd.png" /></a>
-    </div>
+      {% include post-links.html %}
 
-    <div class="post-closing">
-      <p>If you liked this post, please <a target="_blank" href="{{ site.newsletter_signup_form }}">subscribe to our newsletter</a>, <a target="_blank" href="{{ site.github_repo }}">give us a star on GitHub</a>, and <a target="_blank" href="{{ site.twitter_url }}">follow us on Twitter</a>.</p>
-    </div>
-
-    {% include post-links.html %}
-
-    <div class="extras">
-      <div class="container">
-        <div class="newsletter">
-          {% include newsletter-form.html %}
+      <div class="extras">
+        <div class="container">
+          <div class="newsletter">
+            {% include newsletter-form.html %}
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="post-footer">
-      {% if page.previous.url %}
-      <a class="previous" href="{{ page.previous.url }}">&larr; Previous</a>
-      {% endif %}
-      <a class="toc" href="/#table-of-contents">Table of Contents</a>
-      {% if page.next.url %}
-      <a class="next" href="{{ page.next.url }}">Next &rarr;</a>
-      {% endif %}
-    </div>
+      <div class="post-footer">
+        {% if page.previous.url %}
+        <a class="previous" href="{{ page.previous.url }}">&larr; Previous</a>
+        {% endif %}
+        <a class="toc" href="/#table-of-contents">Table of Contents</a>
+        {% if page.next.url %}
+        <a class="next" href="{{ page.next.url }}">Next &rarr;</a>
+        {% endif %}
+      </div>
 
-  </article>
+    </article>
 
-  <aside class="sidebar">
+    {% include post-sidebar.html %}
 
-    <p class="section"><a href="/#table-of-contents">Table of Contents</a></p>
-
-    {% include toc-sidebar.html items=site.data.chapterlist.preface id="preface" %}
-
-    <p class="section"><a href="/#part-1">Part I - The Basics</a></p>
-
-    {% include toc-sidebar.html items=site.data.chapterlist.intro-part1 id="intro-part1" %}
-    {% include toc-sidebar.html items=site.data.chapterlist.setup-aws id="setup-aws" %}
-    {% include toc-sidebar.html items=site.data.chapterlist.setup-backend id="setup-backend" %}
-    {% include toc-sidebar.html items=site.data.chapterlist.build-api id="build-api" %}
-    {% include toc-sidebar.html items=site.data.chapterlist.deploy-backend id="deploy-backend" %}
-    {% include toc-sidebar.html items=site.data.chapterlist.setup-react id="setup-react" %}
-    {% include toc-sidebar.html items=site.data.chapterlist.build-react id="build-react" %}
-    {% include toc-sidebar.html items=site.data.chapterlist.deploy-react id="deploy-react" %}
-
-    <p class="section"><a href="/#part-2">Part II - Automation</a></p>
-
-    {% include toc-sidebar.html items=site.data.chapterlist.intro-part2 id="intro-part2" %}
-    {% include toc-sidebar.html items=site.data.chapterlist.new-backend id="new-backend" %}
-    {% include toc-sidebar.html items=site.data.chapterlist.infrastructure-code id="infrastructure-code" %}
-    {% include toc-sidebar.html items=site.data.chapterlist.stripe-api id="stripe-api" %}
-    {% include toc-sidebar.html items=site.data.chapterlist.unit-tests id="unit-tests" %}
-    {% include toc-sidebar.html items=site.data.chapterlist.serverless-deployments id="serverless-deployments" %}
-    {% include toc-sidebar.html items=site.data.chapterlist.connect-frontend id="connect-frontend" %}
-    {% include toc-sidebar.html items=site.data.chapterlist.add-billing-form id="add-billing-form" %}
-    {% include toc-sidebar.html items=site.data.chapterlist.react-deployments id="react-deployments" %}
-    {% include toc-sidebar.html items=site.data.chapterlist.conclusion id="conclusion" %}
-
-    <p class="section"><a href="/#extra-credit">Extra Credit</a></p>
-
-    {% include toc-sidebar.html items=site.data.chapterlist.extra-backend id="extra-backend" %}
-    {% include toc-sidebar.html items=site.data.chapterlist.extra-frontend id="extra-frontend" %}
-
-  </aside>
-
+  </div>
 </div>
-

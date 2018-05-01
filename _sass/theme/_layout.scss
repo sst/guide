@@ -53,6 +53,124 @@
   }
 
 }
+.lander-header {
+  padding-top: 2.5 * $spacing-unit;
+	text-align: center;
+
+  & .wrapper {
+    padding-bottom: 2.5 * $spacing-unit;
+    border-bottom: 2px solid darken($background-color, 15%);
+  }
+
+  .site-title {
+    line-height: 80px;
+    margin-bottom: 0;
+
+    img {
+      margin-right: 5px;
+      display: inline-block;
+      vertical-align: middle; 
+    }
+
+    span {
+      font-size: 30px;
+      vertical-align: middle; 
+      font-weight: 700;
+      color: $text-color;
+    }
+
+    & img,
+    &:visited img {
+      color: $brand-color;
+    }
+  }
+
+  .site-description {
+    margin: 0 auto;
+    padding: 10px $spacing-unit / 2 0;
+    line-height: 1.4;
+    max-width: 560px;
+    font-size: 36px;
+    color: $text-color;
+    font-family: $base-font-family;
+  }
+
+  .site-description-full {
+    margin: 0 auto;
+    padding-top: 5px;
+    max-width: 560px;
+    line-height: 1.5;
+    font-size: 22px;
+    color: $tertiary-text-color;
+    font-family: $base-font-family;
+
+    a {
+      font-weight: 700;
+      color: $tertiary-text-color;
+    }
+  }
+
+  .controls {
+    margin-top: $spacing-unit;
+    a.button {
+      text-transform: uppercase;
+      font-family: $base-font-family;
+      padding: 19px 28px;
+      display: inline-block;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 1px;
+
+      &:first-child {
+        margin-right: 10px;
+        background-color: $important-color;
+      }
+      &:first-child:hover {
+        background-color: lighten($important-color, 5%);
+      }
+    }
+  }
+
+  .social {
+    margin-top: $spacing-unit / 2;
+    .button {
+      margin-right: 6px;
+      background-color: transparent;
+      border: 3px solid darken($background-color, 20%);
+      padding: 6px 12px;
+      font-size: 14px;
+      font-weight: 700;
+      display: inline-block;
+      color: $secondary-text-color;
+
+      i {
+        margin-right: 4px;
+      }
+
+      &:hover {
+        background-color: darken($background-color, 5%);
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .site-announcement {
+    margin-top: 25px;
+    display: inline-block;
+    border-radius: 4px;
+    background-color: $announcement-color;
+    color: white;
+    padding: 8px 14px;
+
+    i {
+      margin-right: 4px;
+    }
+  }
+
+}
 
 /*
 .site-nav {

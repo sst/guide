@@ -1,11 +1,8 @@
 ---
-layout: home
+layout: page
 title: About Us
 description: Serverless Stack is an open source guide brought to you by Frank Wang (@fanjiewang) and Jay V (@jayair) from Anomaly Innovations.
 ---
-
-{: .about-us }
-## About Us
 
 [Serverless Stack](/) is an open source guide to building and deploying full-stack serverless applications using Serverless and React. It's completely free and the content and comments are hosted on [GitHub]({{ site.github_repo }}). We receive thousands of visitors every single day and we have a few thousand folks on our newsletter.
 

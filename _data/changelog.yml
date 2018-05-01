@@ -1,0 +1,43 @@
+current:
+  title: "Updating to user Node.js starter and v8.10"
+  desc: "Apr 11, 2018: Updating the backend to use Node.js starter and Lambda Node v8.10."
+
+v2-1:
+  title: "Updating to Webpack 4"
+  desc: "Mar 21, 2018: Updating the backend to use Webpack 4 and serverless-webpack 5."
+
+v2-0:
+  title: "AWS Amplify update"
+  desc: "Updating frontend to use AWS Amplify. Verifying SSL certificate now uses DNS validation."
+
+v1-2-5:
+  title: "Using specific Bootstrap CSS version"
+  desc: "Feb 5, 2018: Using specific Bootstrap CSS version since `latest` now points to Bootstrap v4. But React-Bootstrap uses v3."
+
+v1-2-4:
+  title: "Updating to React 16"
+  desc: "Dec 31, 2017: Updated to React 16 and fixed `sigv4Client.js` [IE11 issue]({{ site.github_repo }}/issues/114#issuecomment-349938586)."
+
+v1-2-3:
+  title: "Updating to babel-preset-env"
+  desc: "Dec 30, 2017: Updated serverless backend to use babel-preset-env plugin and added a note to the Deploy to S3 chapter on reducing React app bundle size."
+
+v1-2-2:
+  title: "Adding new chapters"
+  desc: "Dec 1, 2017: Added the following *Extra Credit* chapters."
+
+v1-2-1:
+  title: "Adding new chapters"
+  desc: "Oct 7, 2017: Added the following *Extra Credit* chapters."
+
+v1-2:
+  title: "Upgrade to Serverless Webpack v3"
+  desc: "Sep 16, 2017: Upgrading serverless backend to using serverless-webpack plugin v3. The new version of the plugin changes some of the commands used to test the serverless backend."
+
+v1-1:
+  title: "Improved Session Handling"
+  desc: "Aug 30, 2017: Fixing some issues with session handling in the React app. A few minor updates bundled together."
+
+v1-0:
+  title: "IAM as authorizer"
+  desc: "July 19, 2017: Switching to using IAM as an authorizer instead of the authenticating directly with User Pool. This was a major update to the tutorial."
