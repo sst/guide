@@ -15,15 +15,9 @@ layout: default
           <a target="_blank" href="{{ site.github_repo }}{{ site.github_history_prefix }}{{ page.path }}">View history</a>
         </div>
 
-        {% if page.context == 'backend' or page.context == 'frontend' or page.context == 'all' %}
+        {% if page.context == 'true' %}
         <div class="post-context">
-          {% if page.context == 'backend' %}
-            This article is a part of the <a href="{% link _chapters/setup-the-serverless-framework.md %}">Serverless section</a> of a <a href="/">guide to building full-stack apps</a> with Serverless and React.
-          {% elsif page.context == 'frontend' %}
-            This article is a part of the <a href="{% link _chapters/create-a-new-reactjs-app.md %}">React.js section</a> of a <a href="/">guide to building full-stack apps</a> with Serverless and React.
-          {% else %}
-            This article is a part of a <a href="/">guide to building full-stack apps</a> with Serverless and React.
-          {% endif %}
+          This article is a part of a <a href="/">guide to building full-stack apps</a> with Serverless and React.
         </div>
         {% endif %}
 

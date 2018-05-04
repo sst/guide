@@ -350,7 +350,7 @@ div.newsletter div.support {
  */
 div.home .feature-divider {
   margin: $spacing-unit auto;
-  width: 300px;
+  max-width: 300px;
   height: 1px;
   background-color: darken($background-color, 15%);
 }
@@ -404,6 +404,12 @@ div.home .updates {
   padding: 5px 2 * $spacing-unit 0;
   display: flex;
 
+  @include media-query($on-palm) {
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 5px 10px 0;
+  }
+
   .icon {
     $size: 54px;
     margin-top: 7px;
@@ -419,10 +425,19 @@ div.home .updates {
     i {
       line-height: $size;
     }
+    @include media-query($on-palm) {
+      margin-top: 0;
+    }
   }
 
   .copy {
     margin-left: $spacing-unit / 2 + 8px;
+
+    @include media-query($on-palm) {
+      margin-top: 7px;
+      margin-left: 0;
+    }
+
     h6 {
       margin-bottom: 1px;
       font-family: $base-font-family;
@@ -509,6 +524,10 @@ div.home .table-of-contents {
       font-size: 36px;
       font-weight: 500;
       text-align: center;
+
+      @include media-query($on-palm) {
+        font-size: 32px;
+      }
     }
   }
 
@@ -526,6 +545,7 @@ div.home .table-of-contents {
 
     @include media-query($on-palm) {
       margin-top: $spacing-unit;
+      font-size: 26px;
     }
   }
 

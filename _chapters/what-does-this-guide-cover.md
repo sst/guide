@@ -48,7 +48,7 @@ While the list above might look daunting, we are trying to ensure that upon comp
 
 ### Requirements
 
-You need Node v8.10+ and NPM v5.5+. You also need to have basic knowledge of how to use the command line. And a [GitHub][GitHub] account.
+You need [Node v8.10+ and NPM v5.5+](https://nodejs.org/en/). You also need to have basic knowledge of how to use the command line. And a [GitHub][GitHub] account.
 
 The services that we are going to be using for the purpose of the tutorial should fall in their respective free tiers. This of course does not apply to purchasing a new domain to host your app. Also for AWS, you are required to put in a credit card while creating an account. So if you happen to be creating resources above and beyond what we cover in this tutorial, you might end up getting charged.
 
@@ -56,7 +56,7 @@ The services that we are going to be using for the purpose of the tutorial shoul
 
 The guide is split into two separate parts. They are both relatively standalone. The first part covers the basics while the second covers a couple of advanced topics along with a way to automate the setup. We launched this guide in early 2017 with just the first part. The Serverless Stack community has grown and many of our readers have used the setup described in this guide to build apps that power their businesses.
 
-So we decided to extend the guide and add a second part to it. This is targetting folks that are intending to use this setup for their projects. It automates all the manual steps from part 1 and helps you create a production ready workflow that you can use for all your serverless projects. Here is what we cover in the two parts.
+So we decided to extend the guide and add a second part to it. This is targeting folks that are intending to use this setup for their projects. It automates all the manual steps from part 1 and helps you create a production ready workflow that you can use for all your serverless projects. Here is what we cover in the two parts.
 
 #### Part I
 
@@ -87,7 +87,7 @@ For the frontend:
 
 #### Part II
 
-Aimed at folks who are looking to use the Serverless Stack for their day-to-day projcts. We automate all the steps from the first part. Here is what is covered in order.
+Aimed at folks who are looking to use the Serverless Stack for their day-to-day projects. We automate all the steps from the first part. Here is what is covered in order.
 
 For the backend:
 
@@ -100,7 +100,7 @@ For the backend:
 - Working with secrets in Serverless Framework
 - Unit tests in Serverless
 - Automating deployments using Seed
-- Configure custom domains through Seed
+- Configuring custom domains through Seed
 - Monitoring deployments through Seed
 
 For the frontend
@@ -110,7 +110,7 @@ For the frontend
 - Automating deployments using Netlify
 - Configure custom domains through Netlify
 
-We think this will give you a good foundation on building full-stack serverless applications. If there are any other concepts or technologies you'd like us to cover, feel free to let us know via [email](mailto:{{ site.email }}).
+We think this will give you a good foundation on building full-stack production ready serverless applications. If there are any other concepts or technologies you'd like us to cover, feel free to let us know on our [forums]({{ site.forum_url }}).
 
 
 [Cognito]: https://aws.amazon.com/cognito/
