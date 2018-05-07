@@ -2,7 +2,6 @@
 layout: post
 title: Initialize the Backend Repo
 date: 2018-02-24 00:00:00
-description:
 comments_id:
 ---
 

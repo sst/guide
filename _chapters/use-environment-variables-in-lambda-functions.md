@@ -2,7 +2,6 @@
 layout: post
 title: Use Environment Variables in Lambda Functions
 date: 2018-03-03 00:00:00
-description:
 comments_id:
 ---
 

@@ -2,7 +2,8 @@
 layout: post
 title: What Is Infrastructure as Code
 date: 2018-02-26 00:00:00
-description:
+description: Infrastructure as code in Serverless is a way of programmatically defining the resources your project is going to use. In the case of Serverless Framework, these are defined in the serverless.yml.
+context: true
 comments_id:
 ---
 

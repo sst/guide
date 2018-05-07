@@ -2,7 +2,6 @@
 layout: post
 title: Organize the Backend Repo
 date: 2018-02-25 00:00:00
-description:
 comments_id:
 ---
 

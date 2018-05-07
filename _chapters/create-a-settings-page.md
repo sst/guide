@@ -2,7 +2,8 @@
 layout: post
 title: Create a Settings Page
 date: 2018-03-21 00:00:00
-description:
+description: Our notes app needs a settings page for our users to input their credit card details and sign up for a pricing plan.
+context: true
 comments_id:
 ---
 

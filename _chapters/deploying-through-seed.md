@@ -2,7 +2,8 @@
 layout: post
 title: Deploying Through Seed
 date: 2018-03-14 00:00:00
-description:
+description: We are going to trigger a deployment in Seed by pushing a commit to our Serverless project in Git. In the Seed console you can view the build logs and look at the CloudFormation output.
+context: true
 comments_id:
 ---
 

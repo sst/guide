@@ -4,6 +4,7 @@ title: Frontend Workflow
 date: 2018-03-29 00:00:00
 description:
 comments_id:
+code: frontend_full
 ---
 
 Now that we have our frontend deployed and configured, let's go over what our development workflow will look like.

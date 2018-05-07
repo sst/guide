@@ -2,7 +2,8 @@
 layout: post
 title: Add a Billing API
 date: 2018-03-07 00:00:00
-description:
+description: We are going to create a Lambda function for our serverless billing API. It will take the Stripe token that is passed in from our app and use the Stripe JS SDK to process the payment.
+context: true
 comments_id:
 ---
 

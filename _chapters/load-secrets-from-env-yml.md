@@ -2,7 +2,8 @@
 layout: post
 title: Load Secrets from env.yml
 date: 2018-03-08 00:00:00
-description:
+description: We should not store secret environment variables in our serverless.yml. For this we will create a env.yml file that will not be checked into source control. We load this file in our serverless.yml.
+context: true
 comments_id:
 ---
 
@@ -29,9 +30,9 @@ Next, let's add a reference to these.
 <img class="code-marker" src="/assets/s.png" />Add the following in the `custom:` block of `serverless.yml`.
 
 ``` yml
-# Load our secret environment variables based on the current stage.
-# Fallback to default if it is not in prod.
-environment: ${file(env.yml):${self:custom.stage}, file(env.yml):default}
+  # Load our secret environment variables based on the current stage.
+  # Fallback to default if it is not in prod.
+  environment: ${file(env.yml):${self:custom.stage}, file(env.yml):default}
 ```
 
 The `custom:` block of our `serverless.yml` should look like the following:

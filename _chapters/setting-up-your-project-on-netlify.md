@@ -2,7 +2,8 @@
 layout: post
 title: Setting up Your Project on Netlify
 date: 2018-03-27 00:00:00
-description:
+description: To automate deployments for our Create React App on Netlify start by signing up for a free account and adding your Git repository.
+context: true
 comments_id:
 ---
 
