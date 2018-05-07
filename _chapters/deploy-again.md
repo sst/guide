@@ -44,13 +44,7 @@ To do this we'll need the **Distribution ID** of **both** of our CloudFront Dist
 
 ![CloudFront Distributions ID screenshot](/assets/cloudfront-distribution-id.png)
 
-Now we can use the AWS CLI to invalidate the cache of the two distributions. As of writing this, the CloudFront portion of the CLI is in preview and needs to be enabled by running the following. This only needs to be run once and not every time we deploy.
-
-``` bash
-$ aws configure set preview.cloudfront true
-```
-
-And to invalidate the cache we run the following. Make sure to replace `YOUR_CF_DISTRIBUTION_ID` and `YOUR_WWW_CF_DISTRIBUTION_ID` with the ones from above.
+Now we can use the AWS CLI to invalidate the cache of the two distributions. Make sure to replace `YOUR_CF_DISTRIBUTION_ID` and `YOUR_WWW_CF_DISTRIBUTION_ID` with the ones from above.
 
 ``` bash
 $ aws cloudfront create-invalidation --distribution-id YOUR_CF_DISTRIBUTION_ID --paths "/*"
