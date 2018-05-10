@@ -19,7 +19,7 @@ Now that we've gone through the basics of creating a Serverless Stack, you are p
 
   We will also look at how to configure unit tests for our backend using [Jest](https://facebook.github.io/jest/).
 
-- **Automating Deployments**
+- **Automating deployments**
 
   In the current tutorial you need to deploy through your command line using the `serverless deploy` command. This can be a bit tricky when you have a team working on your project. To start with, we'll add our frontend and backend projects to GitHub. We'll then go over how to automate your deployments using [Seed](https://seed.run) (for the backend) and [Netlify](https://netlify.com) (for the frontend).
 
