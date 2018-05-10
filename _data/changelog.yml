@@ -1,4 +1,8 @@
 current:
+  title: "Adding Part II"
+  desc: "May 10, 2018: Adding a new part to the guide to help create a production ready version of the note taking app."
+
+v2-2:
   title: "Updating to user Node.js starter and v8.10"
   desc: "Apr 11, 2018: Updating the backend to use Node.js starter and Lambda Node v8.10."
 
