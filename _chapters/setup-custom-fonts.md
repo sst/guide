@@ -4,7 +4,7 @@ title: Set up Custom Fonts
 date: 2017-01-08 00:00:00
 description: To use custom fonts in our React.js project we are going to use Google Fonts and include it in our public/index.html.
 context: true
-comments_id: 31
+comments_id: set-up-custom-fonts/81
 ---
 
 Custom Fonts are now an almost standard part of modern web applications. We'll be setting it up for our note taking app using [Google Fonts](https://fonts.google.com).

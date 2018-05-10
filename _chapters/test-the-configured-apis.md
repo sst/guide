@@ -3,7 +3,7 @@ layout: post
 title: Test the Configured APIs
 date: 2018-03-16 00:00:00
 description:
-comments_id:
+comments_id: test-the-configured-apis/179
 ---
 
 Now we have two sets of APIs (prod and dev), let's quickly test them to make sure they are working fine before we plug our frontend into them. Back in the [Test the APIs]({% link _chapters/test-the-apis.md %}) chapter, we used a simple utility called [AWS API Gateway Test CLI](https://github.com/AnomalyInnovations/aws-api-gateway-cli-test).

@@ -4,7 +4,7 @@ title: Create a Settings Page
 date: 2018-03-21 00:00:00
 description: Our notes app needs a settings page for our users to input their credit card details and sign up for a pricing plan.
 context: true
-comments_id:
+comments_id: create-a-settings-page/184
 ---
 
 We are going to add a settings page to our app. This is going to allow users to pay for our service. The flow will look something like this:

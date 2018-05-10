@@ -4,7 +4,7 @@ title: Signup with Email as Alias
 date: 2018-03-20 00:00:00
 description: AWS Cognito User Pool has a setting that allows users to login with their email as their username. To implement this we need to set the username to a auto-generated unique id and set the email attribute.
 context: true
-comments_id:
+comments_id: signup-with-email-as-alias/183
 ---
 
 Back in the [Configure Cognito User Pool in Serverless]({% link _chapters/configure-s3-in-serverless.md %}) chapter, we set the email as an alias. This is because CloudFormation does not allow setting email as the username directly.

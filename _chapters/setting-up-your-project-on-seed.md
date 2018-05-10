@@ -4,7 +4,7 @@ title: Setting up Your Project on Seed
 date: 2018-03-12 00:00:00
 description: To automate our Serverless deployments, we will use a service called Seed (https://seed.run). We will sign up for a free account, add our project repository, and set our AWS IAM credentials.
 context: true
-comments_id:
+comments_id: setting-up-your-project-on-seed/175
 ---
 
 We are going to use [Seed](https://seed.run) to automate our serverless deployments and manage our environments.

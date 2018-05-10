@@ -2,7 +2,7 @@
 layout: post
 title: Getting Production Ready
 date: 2018-02-23 00:00:00
-comments_id:
+comments_id: getting-production-ready/158
 ---
 
 Now that we've gone through the basics of creating a Serverless Stack, you are probably wondering if you need to do all these manual steps everytime you create a new project. Plenty of our readers have used this stack for their personal and professional projects. So in Part II we are going to address some of the common issues that they run into. Specifically, we will go over the following:

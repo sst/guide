@@ -5,7 +5,7 @@ date: 2018-03-10 00:00:00
 description: To test our business logic in Serverless, we will use Jest to add unit tests to our project. We can run these tests using the "npm test" command.
 context: true
 code: backend
-comments_id:
+comments_id: unit-tests-in-serverless/173
 ---
 
 So we have some simple business logic that figures out exactly how much to charge our user based on the number of notes they want to store. We want to make sure that we test all the possible cases for this before we start charging people. To do this we are going to configure unit tests for our Serverless Framework project.

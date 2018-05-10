@@ -4,7 +4,7 @@ title: Changelog
 redirect_from: /chapters/older-versions.html
 date: 2018-04-01 00:00:00
 description: A list of all the updates made to Serverless Stack
-comments_id: 124
+comments_id: comments-for-changelog/17
 ---
 
 As we continue to update Serverless Stack, we want to make sure that we give you a clear idea of all the changes that are being made. This is to ensure that you won't have to go through the entire tutorial again to get caught up on the updates. We also want to leave the older versions up in case you need a reference. This is also useful for readers who are working through the tutorial while it gets updated.

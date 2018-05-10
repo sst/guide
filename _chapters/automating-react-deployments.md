@@ -4,7 +4,7 @@ title: Automating React Deployments
 date: 2018-03-25 00:00:00
 description: We want to automatically deploy our Create React App when we push any changes to our Git repository. To do this, we will need to set our project up on Netlify.
 context: true
-comments_id:
+comments_id: automating-react-deployments/188
 ---
 
 If you've followed along with the first part of this guide, you'll have noticed that we deployed our Create React App to S3 and used CloudFront as a CDN in front of it. Then we used Route 53 to configure our domain with it. We also had to configure the www version of our domain and this needed another S3 and CloudFront distribution. This process can be a bit cumbersome.

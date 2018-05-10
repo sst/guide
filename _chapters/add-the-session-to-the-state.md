@@ -5,7 +5,7 @@ date: 2017-01-15 00:00:00
 redirect_from: /chapters/add-the-user-token-to-the-state.html
 description: We need to add the user session to the state of our App component in our React.js app. By lifting the state up we can pass the session to all the child containers.
 context: true
-comments_id: 39
+comments_id: add-the-session-to-the-state/136
 ---
 
 To complete the login process we would need to update the app state with the session to reflect that the user has logged in.

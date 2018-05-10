@@ -5,7 +5,7 @@ description: Code splitting in Create React App is an easy way to reduce the siz
 date: 2018-04-09 00:00:00
 code: frontend
 context: true
-comments_id: 90
+comments_id: code-splitting-in-create-react-app/98
 ---
 
 Code Splitting is not a necessary step for building React apps. But feel free to follow along if you are curious about what Code Splitting is and how it can help larger React apps.

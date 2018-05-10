@@ -3,7 +3,7 @@ layout: post
 title: Add Stripe Keys to Config
 date: 2018-03-22 00:00:00
 description:
-comments_id:
+comments_id: add-stripe-keys-to-config/185
 ---
 
 Back in the [Setup a Stripe account]({% link _chapters/setup-a-stripe-account.md %}) chapter, we had two keys in the Stripe console. The **Secret key** that we used in the backend and the **Publishable key**. The **Publishable key** is meant to be used in the frontend.

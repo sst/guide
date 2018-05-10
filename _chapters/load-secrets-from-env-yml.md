@@ -4,7 +4,7 @@ title: Load Secrets from env.yml
 date: 2018-03-08 00:00:00
 description: We should not store secret environment variables in our serverless.yml. For this we will create a env.yml file that will not be checked into source control. We load this file in our serverless.yml.
 context: true
-comments_id:
+comments_id: load-secrets-from-env-yml/171
 ---
 
 As we had previously mentioned, we do not want to store our secret environment variables in our code. In our case it is the Stripe secret key. In this chapter, we'll look at how to do that.

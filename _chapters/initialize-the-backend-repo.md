@@ -2,7 +2,7 @@
 layout: post
 title: Initialize the Backend Repo
 date: 2018-02-24 00:00:00
-comments_id:
+comments_id: initialize-the-backend-repo/159
 ---
 
 To start with we are going to create our new project and add it to GitHub. We are going to be working off the code we've created so far.

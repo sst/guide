@@ -3,7 +3,7 @@ layout: post
 title: Frontend Workflow
 date: 2018-03-29 00:00:00
 description:
-comments_id:
+comments_id: frontend-workflow/192
 code: frontend_full
 ---
 

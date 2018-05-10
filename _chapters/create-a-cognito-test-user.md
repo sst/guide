@@ -4,7 +4,7 @@ title: Create a Cognito Test User
 date: 2016-12-28 12:00:00
 description: To test using the Cognito User Pool as an authorizer for our serverless API backend, we are going to create a test user. We can create a user from the AWS CLI using the aws cognito-idp sign-up and admin-confirm-sign-up command.
 context: true
-comments_id: 18
+comments_id: create-a-cognito-test-user/126
 ---
 
 In this chapter, we are going to create a test user for our Cognito User Pool. We are going to need this user to test the authentication portion of our app later.

@@ -3,7 +3,7 @@ layout: post
 title: Wrapping Up
 description: Wrapping up the tutorial and going over the next steps.
 date: 2018-03-30 00:00:00
-comments_id: 71
+comments_id: comments-for-wrapping-up/100
 ---
 
 Congratulations on completing the guide!

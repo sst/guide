@@ -4,7 +4,7 @@ title: Connect the Billing Form
 date: 2018-03-24 00:00:00
 description: To add our Stripe billing form to our React app container we need to wrap it inside a StripeProvider component. We also need to include Stripe.js in our HTML page.
 context: true
-comments_id:
+comments_id: connect-the-billing-form/187
 ---
 
 Now all we have left to do is to connect our billing form to our billing API.

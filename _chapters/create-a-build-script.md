@@ -3,7 +3,7 @@ layout: post
 title: Create a Build Script
 date: 2018-03-26 00:00:00
 code: frontend
-comments_id:
+comments_id: create-a-build-script/189
 ---
 
 Before we can add our project to [Netlify](https://www.netlify.com) we just need to set up a build script. If you recall, we had configured our app to use the `REACT_APP_STAGE` build environment variable. We are going to create a build script to tell Netlify to set this variable up for the different deployment cases.

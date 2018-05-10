@@ -3,7 +3,7 @@ layout: post
 title: Deploy Updates
 date: 2017-02-12 00:00:00
 description: Tutorial on how to deploy updates to your React.js single page application hosted on AWS S3 and CloudFront.
-comments_id: 68
+comments_id: deploy-updates/16
 ---
 
 Now let's look at how we make changes and update our app. The process is very similar to how we deployed our code to S3 but with a few changes. Here is what it looks like.

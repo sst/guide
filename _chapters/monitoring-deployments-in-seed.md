@@ -5,7 +5,7 @@ date: 2018-03-17 00:00:00
 description: We can monitor our Serverless deployments in Seed by viewing CloudWatch logs and metrics for our Lambda functions and our API Gateway endpoints. We can also enable access logs for API Gateway from the Seed console.
 context: true
 code: backend_full
-comments_id:
+comments_id: monitoring-deployments-in-seed/180
 ---
 
 Despite our best intentions we might run into cases where some faulty code ends up in production. We want to make sure we have a plan for that. Let's go through what this would look like in [Seed](https://seed.run).

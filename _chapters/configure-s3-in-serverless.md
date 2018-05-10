@@ -4,7 +4,7 @@ title: Configure S3 in Serverless
 date: 2018-02-28 00:00:00
 description: We can define our S3 Buckets using the Infrastructure as Code pattern by using CloudFormation in our serverless.yml. We are going to set the CORS policy and output the name of the bucket that's created.
 context: true
-comments_id:
+comments_id: configure-s3-in-serverless/163
 ---
 
 Now that we have DynamoDB configured, let's look at how we can configure the S3 file uploads bucket through our `serverless.yml`.

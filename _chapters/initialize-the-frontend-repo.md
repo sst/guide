@@ -3,7 +3,7 @@ layout: post
 title: Initialize the Frontend Repo
 date: 2018-03-18 00:00:00
 description:
-comments_id:
+comments_id: initialize-the-frontend-repo/181
 ---
 
 Just as we did in the backend portion, we'll start by creating our project and adding it to GitHub. We will use what we had in part 1 as a starting point.

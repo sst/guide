@@ -3,7 +3,7 @@ layout: post
 title: Working with 3rd Party APIs
 date: 2018-03-05 00:00:00
 description:
-comments_id:
+comments_id: working-with-3rd-party-apis/168
 ---
 
 In the first part of the tutorial, we created a basic CRUD API. We are going to make a small addition to this by adding an endpoint that works with a 3rd party API. This section is also going to illustrate how to work with secret environment variables and how to accept credit card payments using Stripe.

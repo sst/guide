@@ -2,7 +2,7 @@
 layout: post
 title: How to Get Help?
 date: 2016-12-23 00:00:00
-comments_id: 10
+comments_id: how-to-get-help/95
 ---
 
 In case you find yourself having problems with a certain step, we want to make sure that we are around to help you fix it and figure it out. There are a few ways to get help.

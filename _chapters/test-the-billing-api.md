@@ -3,7 +3,7 @@ layout: post
 title: Test the Billing API
 date: 2018-03-09 00:00:00
 description:
-comments_id:
+comments_id: test-the-billing-api/172
 ---
 
 Now that we have our billing API all set up, let's do a quick test in our local environment.

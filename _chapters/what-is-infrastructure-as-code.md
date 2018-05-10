@@ -4,7 +4,7 @@ title: What Is Infrastructure as Code
 date: 2018-02-26 00:00:00
 description: Infrastructure as code in Serverless is a way of programmatically defining the resources your project is going to use. In the case of Serverless Framework, these are defined in the serverless.yml.
 context: true
-comments_id:
+comments_id: what-is-infrastructure-as-code/161
 ---
 
 [Serverless Framework](https://serverless.com) converts your `serverless.yml` into a [CloudFormation](https://aws.amazon.com/cloudformation) template. This is a description of the infrastructure that you are trying to configure as a part of your serverless project. In our case we were describing the Lambda functions and API Gateway endpoints that we were trying to configure.

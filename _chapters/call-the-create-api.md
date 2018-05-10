@@ -4,7 +4,7 @@ title: Call the Create API
 date: 2017-01-23 00:00:00
 description: To let our users create a note in our React.js app, we need to connect our form to our serverless API backend. We are going to use AWS Amplify's API module for this.
 context: true
-comments_id: 48
+comments_id: call-the-create-api/124
 ---
 
 Now that we have our basic create note form working, let's connect it to our API. We'll do the upload to S3 a little bit later. Our APIs are secured using AWS IAM and Cognito User Pool is our authentication provider. Thankfully, Amplify takes care of this for us by using the logged in user's session.

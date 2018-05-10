@@ -4,7 +4,7 @@ title: Configure Cognito Identity Pool in Serverless
 date: 2018-03-02 00:00:00
 description: We can define our Cognito Identity Pool using the Infrastructure as Code pattern by using CloudFormation in our serverless.yml. We are going to set the User Pool as the Cognito Identity Provider. And define the Auth Role with a policy allowing access to our S3 Bucket and API Gateway endpoint.
 context: true
-comments_id:
+comments_id: configure-cognito-identity-pool-in-serverless/165
 ---
 
 If you recall from the first part of tutorial, we use the Cognito Identity Pool as a way to control which AWS resources our logged in users will have access to. And also tie in our Cognito User Pool as our authentication provider.
