@@ -3,8 +3,8 @@ layout: post
 title: Save Changes to a Note
 date: 2017-01-30 00:00:00
 description: For a user to be able to edit a note in our React.js app, we need to make a PUT request to our severless backend API using AWS Amplify. We also need to allow them to upload files directly to S3 and add that as an attachment to the note.
-context: frontend
-comments_id: 55
+context: true
+comments_id: save-changes-to-a-note/131
 ---
 
 Now that our note loads into our form, let's work on saving the changes we make to that note.

@@ -3,8 +3,8 @@ layout: post
 title: Clear the Session on Logout
 date: 2017-01-16 00:00:00
 description: We need to make sure to clear the logged in user's Amazon Cognito session in our React.js app when the user logs out. We can do this using AWS Amplify's Auth.signOut() method.
-context: frontend
-comments_id: 41
+context: true
+comments_id: clear-the-session-on-logout/70
 ---
 
 Currently we are only removing the user session from our app's state. But when we refresh the page, we load the user session from the browser Local Storage (using Amplify), in effect logging them back in.

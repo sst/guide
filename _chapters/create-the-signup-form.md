@@ -3,8 +3,8 @@ layout: post
 title: Create the Signup Form
 date: 2017-01-20 00:00:00
 description: We are going to create a signup page for our React.js app. To sign up users with Amazon Cognito, we need to create a form that allows users to enter a cofirmation code that is emailed to them.
-context: frontend
-comments_id: 45
+context: true
+comments_id: create-the-signup-form/52
 ---
 
 Let's start by creating the signup form that'll get the user's email and password.

@@ -3,8 +3,8 @@ layout: post
 title: What is an ARN
 date: 2016-12-25 20:00:00
 description: Amazon Resource Names (or ARNs) uniquely identify AWS resources. It is a globally unique identifier and follows a couple of pre-defined formats. ARNs are used primarily for communicating the reference to a resource and for defining IAM policies.
-context: all
-comments_id: 86
+context: true
+comments_id: what-is-an-arn/34
 ---
 
 In the last chapter while we were looking at IAM policies we looked at how you can specify a resource using its ARN. Let's take a better look at what ARN is.

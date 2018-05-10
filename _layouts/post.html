@@ -1,62 +1,64 @@
 ---
 layout: default
 ---
-<article class="post">
+<div class="wrapper wrapper-post">
+  <div class="post-container">
 
-  <header class="post-header">
-    <h1 class="post-title">{{ page.title | escape }}</h1>
+    <article class="post">
 
-    <div class="post-info">
-      <a target="_blank" href="{{ site.github_repo }}{{ site.github_edit_prefix }}{{ page.path }}">Improve this page</a>
-      <span class="separator">&nbsp;&bull;&nbsp;</span>
-      <a target="_blank" href="{{ site.github_repo }}{{ site.github_history_prefix }}{{ page.path }}">View history</a>
-    </div>
+      <header class="post-header">
+        <h1 class="post-title">{{ page.title | escape }}</h1>
 
-    {% if page.context == 'backend' or page.context == 'frontend' or page.context == 'all' %}
-    <div class="post-context">
-      {% if page.context == 'backend' %}
-        This article is a part of the <a href="{% link _chapters/setup-the-serverless-framework.md %}">Serverless section</a> of a <a href="/">guide to building full-stack apps</a> with Serverless and React.
-      {% elsif page.context == 'frontend' %}
-        This article is a part of the <a href="{% link _chapters/create-a-new-reactjs-app.md %}">React.js section</a> of a <a href="/">guide to building full-stack apps</a> with Serverless and React.
-      {% else %}
-        This article is a part of a <a href="/">guide to building full-stack apps</a> with Serverless and React.
-      {% endif %}
-    </div>
-    {% endif %}
+        <div class="post-info">
+          <a target="_blank" href="{{ site.github_repo }}{{ site.github_edit_prefix }}{{ page.path }}">Improve this page</a>
+          <span class="separator">&nbsp;&bull;&nbsp;</span>
+          <a target="_blank" href="{{ site.github_repo }}{{ site.github_history_prefix }}{{ page.path }}">View history</a>
+        </div>
 
-  </header>
+        {% if page.context == true %}
+        <div class="post-context">
+          This article is a part of a <a href="/">guide to building full-stack apps</a> with Serverless and React.
+        </div>
+        {% endif %}
 
-  <div class="post-content">
-    {{ content }}
-  </div>
+      </header>
 
-  <div class="post-sponsor">
-    <hr />
-    <a target="_blank" href="https://seed.run"><img width="435" alt="A fully-configured CI/CD pipeline for Serverless" src="/assets/seed-serverless-ci-cd.png" /></a>
-  </div>
-
-  <div class="post-closing">
-    <p>If you liked this post, please <a target="_blank" href="{{ site.newsletter_signup_form }}">subscribe to our newsletter</a>, <a target="_blank" href="{{ site.github_repo }}">give us a star on GitHub</a>, and <a target="_blank" href="{{ site.twitter_url }}">follow us on Twitter</a>.</p>
-  </div>
-
-  {% include post-links.html %}
-
-  <div class="extras">
-    <div class="container">
-      <div class="newsletter">
-        {% include newsletter-form.html %}
+      <div class="post-content">
+        {{ content }}
       </div>
-    </div>
-  </div>
 
-  <div class="post-footer">
-    {% if page.previous.url %}
-    <a class="previous" href="{{ page.previous.url }}">&larr; Previous</a>
-    {% endif %}
-    <a class="toc" href="/#table-of-contents">Table of Contents</a>
-    {% if page.next.url %}
-    <a class="next" href="{{ page.next.url }}">Next &rarr;</a>
-    {% endif %}
-  </div>
+      <div class="post-sponsor">
+        <hr />
+        <a target="_blank" href="https://seed.run"><img width="435" alt="A fully-configured CI/CD pipeline for Serverless" src="/assets/seed-serverless-ci-cd.png" /></a>
+      </div>
 
-</article>
+      <div class="post-closing">
+        <p>If you liked this post, please <a target="_blank" href="{{ site.newsletter_signup_form }}">subscribe to our newsletter</a>, <a target="_blank" href="{{ site.github_repo }}">give us a star on GitHub</a>, and <a target="_blank" href="{{ site.twitter_url }}">follow us on Twitter</a>.</p>
+      </div>
+
+      {% include post-links.html %}
+
+      <div class="extras">
+        <div class="container">
+          <div class="newsletter">
+            {% include newsletter-form.html %}
+          </div>
+        </div>
+      </div>
+
+      <div class="post-footer">
+        {% if page.previous.url %}
+        <a class="previous" href="{{ page.previous.url }}">&larr; Previous</a>
+        {% endif %}
+        <a class="toc" href="/#table-of-contents">Table of Contents</a>
+        {% if page.next.url %}
+        <a class="next" href="{{ page.next.url }}">Next &rarr;</a>
+        {% endif %}
+      </div>
+
+    </article>
+
+    {% include post-sidebar.html %}
+
+  </div>
+</div>

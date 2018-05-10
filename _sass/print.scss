@@ -24,11 +24,22 @@
   {
     display: none;
   }
+  main div.home .table-of-contents {
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
   article > .post-links {
     margin-bottom: $spacing-unit;
   }
   main.page-content {
     padding: 0 !important;
+  }
+  main.page-content .post-container {
+    display: block;
+  }
+  main.page-content .post-container > .sidebar {
+    display: none;
   }
   pre {
    white-space: pre-wrap !important;

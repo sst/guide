@@ -3,7 +3,7 @@ layout: post
 title: Why Create Serverless Apps?
 date: 2016-12-24 00:00:00
 description: Serverless apps are easier to maintain and scale, since the resources necessary to complete a request is fully managed by the cloud provider. Serverless apps are also billed only when they are actually in use; meaning that they can be a lot cheaper for most common workloads.
-comments_id: 11
+comments_id: why-create-serverless-apps/87
 ---
 
 It is important to address why it is worth learning how to create serverless apps. There are a couple of reasons why serverless apps are favored over traditional server hosted apps.

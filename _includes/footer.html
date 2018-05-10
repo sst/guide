@@ -1,6 +1,6 @@
 <footer class="site-footer">
 
-  <div class="wrapper">
+  <div class="wrapper wrapper-footer">
 
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
@@ -11,11 +11,9 @@
           <li><a class="page-link" href="/#table-of-contents">Table of Contents</a></li>
           <li><a class="page-link" href="{% link about.md %}">About us</a></li>
           <li><a class="page-link" href="{% link sponsors.md %}">Sponsors</a></li>
-          <li><a class="page-link" href="{{ site.twitter_url }}">Twitter</a></li>
           <li><a class="page-link" href="{{ site.github_repo }}">GitHub</a></li>
-          {% if site.email %}
-          <li><a class="email-link" href="mailto:{{ site.email }}">Email</a></li>
-          {% endif %}
+          <li><a class="page-link" href="{{ site.forum_url }}">Forums</a></li>
+          <li><a class="page-link" href="{{ site.twitter_url }}">Twitter</a></li>
         </ul>
       </div>
 

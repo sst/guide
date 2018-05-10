@@ -3,9 +3,9 @@ layout: post
 title: Set up the Serverless Framework
 date: 2016-12-29 00:00:00
 description: To create our serverless backend API using AWS Lambda and API Gateway, we are going to use the Serverless Framework (https://serverless.com). Serverless Framework helps developers build and manage serverless apps on AWS and other cloud providers. We can install the Serverless Framework CLI from it’s NPM package and use it to create a new Serverless Framework project.
-context: all
+context: true
 code: backend
-comments_id: 21
+comments_id: set-up-the-serverless-framework/145
 ---
 
 We are going to be using [AWS Lambda](https://aws.amazon.com/lambda/) and [Amazon API Gateway](https://aws.amazon.com/api-gateway/) to create our backend. AWS Lambda is a compute service that lets you run code without provisioning or managing servers. You pay only for the compute time you consume - there is no charge when your code is not running. And API Gateway makes it easy for developers to create, publish, maintain, monitor, and secure APIs. Working directly with AWS Lambda and configuring API Gateway can be a bit cumbersome; so we are going to use the [Serverless Framework](https://serverless.com) to help us with it.
@@ -45,7 +45,7 @@ We also have a `tests/` directory where we can add our unit tests.
 
 ### Install Node.js packages
 
-The starter project relies on a few dependecies that are listed in the `package.json`.
+The starter project relies on a few dependencies that are listed in the `package.json`.
 
 <img class="code-marker" src="/assets/s.png" />At the root of the project, run.
 

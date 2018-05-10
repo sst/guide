@@ -2,18 +2,17 @@
 layout: post
 title: How to Get Help?
 date: 2016-12-23 00:00:00
-comments_id: 10
+comments_id: how-to-get-help/95
 ---
 
 In case you find yourself having problems with a certain step, we want to make sure that we are around to help you fix it and figure it out. There are a few ways to get help.
 
-- We use [GitHub issues]({{ site.github_repo }}/issues?q=is%3Aissue+is%3Aopen+label%3ADiscussion+sort%3Aupdated-desc) as our comments and we've helped resolve quite a few issues in the past. So make sure to check the comments under each chapter to see if somebody else has run into the same issue as you have.
-- Post in the comments detailing your issue and one of us will respond.
-- Or send us an [email](mailto:{{ site.email }}) directly.
+- We use [Discourse forum topics]({{ site.forum_url }}) as our comments and we've helped resolve quite a few issues in the past. So make sure to check the comments under each chapter to see if somebody else has run into the same issue as you have.
+- Post in the comments for the specific chapter detailing your issue and one of us will respond.
 
-![Message us button screenshot](/assets/github-issues.png)
+![Serverless Stack Discourse Forums screenshot](/assets/serverless-stack-discourse-forums.png)
 
-Also, this entire guide is hosted on [GitHub]({{ site.github_repo }}). So you can always:
+This entire guide is hosted on [GitHub]({{ site.github_repo }}). So if you find an error you can always:
 
-- Open a [new issue]({{ site.github_repo }}/issues/new) if you've found a bug or have some suggestions.
+- Open a [new issue]({{ site.github_repo }}/issues/new)
 - Or if you've found a typo, edit the page and submit a pull request!

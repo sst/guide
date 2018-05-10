@@ -3,9 +3,9 @@ layout: post
 title: Deploy Again
 date: 2017-02-14 00:00:00
 description: To be able to deploy updates to our React.js app hosted on S3 and CloudFront, we need to uploads our app to S3 and invalidate the CloudFront cache. We can do this using the “aws cloudfront create-invalidation” command in our AWS CLI. To automate these steps by running “npm run deploy”, we will add these commands to predeploy, deploy, and postdeploy scripts in our package.json.
-context: all
-code: frontend_full
-comments_id: 70
+context: true
+code: frontend_part1
+comments_id: deploy-again/138
 ---
 
 Now that we've made some changes to our app, let's deploy the updates. This is the process we are going to repeat every time we need to deploy any updates.
@@ -44,13 +44,7 @@ To do this we'll need the **Distribution ID** of **both** of our CloudFront Dist
 
 ![CloudFront Distributions ID screenshot](/assets/cloudfront-distribution-id.png)
 
-Now we can use the AWS CLI to invalidate the cache of the two distributions. As of writing this, the CloudFront portion of the CLI is in preview and needs to be enabled by running the following. This only needs to be run once and not every time we deploy.
-
-``` bash
-$ aws configure set preview.cloudfront true
-```
-
-And to invalidate the cache we run the following. Make sure to replace `YOUR_CF_DISTRIBUTION_ID` and `YOUR_WWW_CF_DISTRIBUTION_ID` with the ones from above.
+Now we can use the AWS CLI to invalidate the cache of the two distributions. Make sure to replace `YOUR_CF_DISTRIBUTION_ID` and `YOUR_WWW_CF_DISTRIBUTION_ID` with the ones from above.
 
 ``` bash
 $ aws cloudfront create-invalidation --distribution-id YOUR_CF_DISTRIBUTION_ID --paths "/*"
@@ -99,4 +93,4 @@ Now simply run the following command from your project root when you want to dep
 $ npm run deploy
 ```
 
-Our app is now complete. And we have an easy way to update it!
+Our app is now complete. And this is the end of Part I. Next we'll be looking at how to automate this stack so we can use it for our future projects.

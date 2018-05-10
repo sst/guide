@@ -3,8 +3,8 @@ layout: post
 title: Handle Routes with React Router
 date: 2017-01-10 00:00:00
 description: Create React App does not ship with a way to set up routes in your app. To do so, we are going to use React Router. The latest version of React Router, React Router v4 embraces the composable nature of React’s components and makes it easy to work with routes in our single page app.
-context: frontend
-comments_id: 33
+context: true
+comments_id: handle-routes-with-react-router/116
 ---
 
 Create React App sets a lot of things up by default but it does not come with a built-in way to handle routes. And since we are building a single page app, we are going to use [React Router](https://reacttraining.com/react-router/) to handle them for us.

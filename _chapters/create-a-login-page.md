@@ -3,8 +3,8 @@ layout: post
 title: Create a Login Page
 date: 2017-01-13 00:00:00
 description: We are going to add a login page to our React.js app. To create the login form we are using the FormGroup and FormControl React-Bootstrap components.
-context: frontend
-comments_id: 37
+context: true
+comments_id: create-a-login-page/71
 ---
 
 Let's create a page where the users of our app can login with their credentials. When we created our User Pool we asked it to allow a user to sign in and sign up with their email as their username. We'll be touching on this further when we create the signup form.

@@ -1,0 +1,21 @@
+<div id="{{ include.id }}" class="toc-section">
+  <h3>{{ include.items.title }}</h3>
+  <ul>
+  {% for chapter in include.items.chapters %}
+    <li>
+      {% if chapter.subchapters %}
+        <a href="{{ chapter.url }}">{{ chapter.page }}</a>
+        <ul>
+          {% for subchapter in chapter.subchapters %}
+            <li>
+              <a href="{{ subchapter.url }}">{{ subchapter.page }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <a href="{{ chapter.url }}">{{ chapter.page }}</a>
+      {% endif %}
+    </li>
+  {% endfor %}
+  </ul>
+</div>

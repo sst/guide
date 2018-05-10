@@ -1,0 +1,31 @@
+<header class="lander-header" role="banner">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="{{ "/" | relative_url}}">
+      <img src="/assets/logo.png" height="32" />
+      <span>{{ site.title | escape }}</span>
+    </a>
+
+		<h1 class="site-description">Learn to Build Full-Stack Apps with Serverless and React on AWS</h1>
+
+    <!--
+    <a class="site-announcement" target="_blank" href="{{ site.github_repo }}{{ site.github_issues_prefix }}193">
+      <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> We recently updated our guide. Read about it here.
+    </a>
+    -->
+
+    <h4 class="site-description-full">
+      Build a full-stack production ready <a href="https://demo2.serverless-stack.com">note taking app</a> using <a href="https://serverless.com">Serverless</a> and <a href="https://reactjs.org">React</a> on <a href="https://aws.amazon.com">AWS</a>. Follow our step-by-step <a href="{{ site.github_repo }}">open-source</a> tutorials with screenshots and code samples.
+    </h4>
+
+    <div class="controls">
+      <a class="button" href="#download-pdf">Get the PDF</a>
+      <a class="button" href="#table-of-contents">Read Online</a>
+    </div>
+
+    {% include social-buttons.html %}
+
+  </div>
+
+</header>

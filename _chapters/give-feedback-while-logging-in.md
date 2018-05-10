@@ -3,9 +3,9 @@ layout: post
 title: Give Feedback While Logging In
 date: 2017-01-18 00:00:00
 description: We should give users some feedback while we are logging them in to our React.js app. To do so we are going to create a component that animates a Glyphicon refresh icon inside a React-Bootstrap Button component. We’ll do the animation while the log in call is in progress.
-context: frontend
+context: true
 code: frontend
-comments_id: 43
+comments_id: give-feedback-while-logging-in/46
 ---
 
 It's important that we give the user some feedback while we are logging them in. So they get the sense that the app is still working, as opposed to being unresponsive.

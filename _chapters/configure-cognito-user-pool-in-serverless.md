@@ -1,0 +1,83 @@
+---
+layout: post
+title: Configure Cognito User Pool in Serverless
+date: 2018-03-01 00:00:00
+description: We can define our Cognito User Pool using the Infrastructure as Code pattern by using CloudFormation in our serverless.yml. We are going to set the User Pool and App Client name based on the stage we are deploying to. We will also output the User Pool and App Client Id.
+context: true
+comments_id: configure-cognito-user-pool-in-serverless/164
+---
+
+Now let's look into setting up Cognito User Pool through the `serverless.yml`. It should be noted that due to a limitation CloudFormation, the setup here is going to differ a little from the one we did by hand in the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
+
+### Create the Resource
+
+<img class="code-marker" src="/assets/s.png" />Add the following to `resources/cognito-user-pool.yml`.
+
+``` yml
+Resources:
+  CognitoUserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      # Generate a name based on the stage
+      UserPoolName: ${self:custom.stage}-user-pool
+      # Set email as an alias
+      AliasAttributes:
+        - email
+      AutoVerifiedAttributes:
+        - email
+
+  CognitoUserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      # Generate an app client name based on the stage
+      ClientName: ${self:custom.stage}-user-pool-client
+      UserPoolId:
+        Ref: CognitoUserPool
+      ExplicitAuthFlows:
+        - ADMIN_NO_SRP_AUTH
+      GenerateSecret: false
+
+# Print out the Id of the User Pool that is created
+Outputs:
+  UserPoolId:
+    Value:
+      Ref: CognitoUserPool
+
+  UserPoolClientId:
+    Value:
+      Ref: CognitoUserPoolClient
+```
+
+Let's quickly go over what we are doing here:
+
+- We are naming our User Pool (and the User Pool app client) based on the stage by using the custom variable `${self:custom.stage}`.
+
+- We are setting the user's email as an alias. This means that the user can log in with either their username or their email. This is different from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter, where we explicitly use a setting that allows users to login with their email. The reason we are using the alias is because CloudFormation does not currently support this. You can read a bit more about it [here](https://forums.aws.amazon.com/thread.jspa?threadID=259349&tstart=0). This change also means that we have to tweak our frontend a little bit.
+
+- Just like our S3 bucket, we want CloudFormation to tell us the User Pool Id and the User Pool Client Id that is generated. We do this in the `Outputs:` block at the end.
+
+### Add the Resource
+
+<img class="code-marker" src="/assets/s.png" />Let's reference the resource in our `serverless.yml`. Replace your `resources:` block with the following.
+
+``` yml
+# Create our resources with separate CloudFormation templates
+resources:
+  # DynamoDB
+  - ${file(resources/dynamodb-table.yml)}
+  # S3
+  - ${file(resources/s3-bucket.yml)}
+  # Cognito
+  - ${file(resources/cognito-user-pool.yml)}
+```
+
+### Commit Your Code
+
+<img class="code-marker" src="/assets/s.png" />Let's commit the changes we've made so far.
+
+``` bash
+$ git add .
+$ git commit -m "Adding our Cognito User Pool resource"
+```
+
+And next let's tie all of this together by configuring our Cognito Identity Pool.
