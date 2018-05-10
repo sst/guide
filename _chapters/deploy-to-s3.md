@@ -3,8 +3,8 @@ layout: post
 title: Deploy to S3
 date: 2017-02-07 00:00:00
 description: To use our React.js app in production we are going to use Create React App’s build command to create a production build of our app. And to upload our React.js app to an S3 Bucket on AWS, we are going to use the AWS CLI s3 sync command. 
-context: all
-comments_id: 63
+context: true
+comments_id: deploy-to-s3/134
 ---
 
 Now that our S3 Bucket is created we are ready to upload the assets of our app.

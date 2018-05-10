@@ -7,127 +7,38 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
 
 {% include share-index.html %}
 
-{: .toc-header }
-## Table of Contents
+<div id="table-of-contents" class="table-of-contents">
 
-### Introduction
+  <div class="header"><h6>Table of Contents</h6></div>
 
-- [Who is this guide for?]({% link _chapters/who-is-this-guide-for.md %})
-- [What does this guide cover?]({% link _chapters/what-does-this-guide-cover.md %})
-- [How to get help?]({% link _chapters/how-to-get-help.md %})
-- [What is serverless?]({% link _chapters/what-is-serverless.md %})
-- [Why create serverless apps?]({% link _chapters/why-create-serverless-apps.md %})
+  {% include toc-chapters.html items=site.data.chapterlist.preface id="preface" %}
 
-### Set up your AWS account
+  <h3 id="part-1">Part I - The Basics</h3>
 
-- [Create an AWS account]({% link _chapters/create-an-aws-account.md %})
-- [Create an IAM user]({% link _chapters/create-an-iam-user.md %})
-  - [What is IAM]({% link _chapters/what-is-iam.md %})
-  - [What is an ARN]({% link _chapters/what-is-an-arn.md %})
-- [Configure the AWS CLI]({% link _chapters/configure-the-aws-cli.md %})
+  {% include toc-chapters.html items=site.data.chapterlist.intro-part1 id="intro-part1" %}
+  {% include toc-chapters.html items=site.data.chapterlist.setup-aws id="setup-aws" %}
+  {% include toc-chapters.html items=site.data.chapterlist.setup-backend id="setup-backend" %}
+  {% include toc-chapters.html items=site.data.chapterlist.build-api id="build-api" %}
+  {% include toc-chapters.html items=site.data.chapterlist.deploy-backend id="deploy-backend" %}
+  {% include toc-chapters.html items=site.data.chapterlist.setup-react id="setup-react" %}
+  {% include toc-chapters.html items=site.data.chapterlist.build-react id="build-react" %}
+  {% include toc-chapters.html items=site.data.chapterlist.deploy-react id="deploy-react" %}
 
-### Setting up the Serverless Backend
+  <h3 id="part-2">Part II - Automation</h3>
 
-- [Create a DynamoDB table]({% link _chapters/create-a-dynamodb-table.md %})
-- [Create an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %})
-- [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %})
-  - [Create a Cognito test user]({% link _chapters/create-a-cognito-test-user.md %})
-- [Set up the Serverless Framework]({% link _chapters/setup-the-serverless-framework.md %})
-  - [Add support for ES6/ES7 JavaScript]({% link _chapters/add-support-for-es6-es7-javascript.md %})
+  {% include toc-chapters.html items=site.data.chapterlist.intro-part2 id="intro-part2" %}
+  {% include toc-chapters.html items=site.data.chapterlist.new-backend id="new-backend" %}
+  {% include toc-chapters.html items=site.data.chapterlist.infrastructure-code id="infrastructure-code" %}
+  {% include toc-chapters.html items=site.data.chapterlist.stripe-api id="stripe-api" %}
+  {% include toc-chapters.html items=site.data.chapterlist.unit-tests id="unit-tests" %}
+  {% include toc-chapters.html items=site.data.chapterlist.serverless-deployments id="serverless-deployments" %}
+  {% include toc-chapters.html items=site.data.chapterlist.connect-frontend id="connect-frontend" %}
+  {% include toc-chapters.html items=site.data.chapterlist.add-billing-form id="add-billing-form" %}
+  {% include toc-chapters.html items=site.data.chapterlist.react-deployments id="react-deployments" %}
+  {% include toc-chapters.html items=site.data.chapterlist.conclusion id="conclusion" %}
 
-### Building a Serverless REST API
+  <h3 id="extra-credit">Extra Credit</h3>
 
-- [Add a create note API]({% link _chapters/add-a-create-note-api.md %})
-- [Add a get note API]({% link _chapters/add-a-get-note-api.md %})
-- [Add a list all the notes API]({% link _chapters/add-a-list-all-the-notes-api.md %})
-- [Add an update note API]({% link _chapters/add-an-update-note-api.md %})
-- [Add a delete note API]({% link _chapters/add-a-delete-note-api.md %})
-
-### Deploying the Backend
-
-- [Deploy the APIs]({% link _chapters/deploy-the-apis.md %})
-- [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %})
-  - [Cognito user pool vs identity pool]({% link _chapters/cognito-user-pool-vs-identity-pool.md %})
-- [Test the APIs]({% link _chapters/test-the-apis.md %})
-
-### Setting up a React App
-
-- [Create a new React.js app]({% link _chapters/create-a-new-reactjs-app.md %})
-  - [Add app favicons]({% link _chapters/add-app-favicons.md %})
-  - [Set up custom fonts]({% link _chapters/setup-custom-fonts.md %})
-  - [Set up Bootstrap]({% link _chapters/setup-bootstrap.md %})
-- [Handle routes with React Router]({% link _chapters/handle-routes-with-react-router.md %})
-  - [Create containers]({% link _chapters/create-containers.md %})
-  - [Adding links in the navbar]({% link _chapters/adding-links-in-the-navbar.md %})
-  - [Handle 404s]({% link _chapters/handle-404s.md %})
-- [Configure AWS Amplify]({% link _chapters/configure-aws-amplify.md %})
-
-### Building a React App
-
-- [Create a login page]({% link _chapters/create-a-login-page.md %})
-  - [Login with AWS Cognito]({% link _chapters/login-with-aws-cognito.md %})
-  - [Add the session to the state]({% link _chapters/add-the-session-to-the-state.md %})
-  - [Load the state from the session]({% link _chapters/load-the-state-from-the-session.md %})
-  - [Clear the session on logout]({% link _chapters/clear-the-session-on-logout.md %})
-  - [Redirect on login and logout]({% link _chapters/redirect-on-login-and-logout.md %})
-  - [Give feedback while logging in]({% link _chapters/give-feedback-while-logging-in.md %})
-- [Create a signup page]({% link _chapters/create-a-signup-page.md %})
-  - [Create the signup form]({% link _chapters/create-the-signup-form.md %})
-  - [Signup with AWS Cognito]({% link _chapters/signup-with-aws-cognito.md %})
-- [Add the create note page]({% link _chapters/add-the-create-note-page.md %})
-  - [Call the create API]({% link _chapters/call-the-create-api.md %})
-  - [Upload a file to S3]({% link _chapters/upload-a-file-to-s3.md %})
-- [List all the notes]({% link _chapters/list-all-the-notes.md %})
-  - [Call the list API]({% link _chapters/call-the-list-api.md %})
-- [Display a note]({% link _chapters/display-a-note.md %})
-  - [Render the note form]({% link _chapters/render-the-note-form.md %})
-  - [Save changes to a note]({% link _chapters/save-changes-to-a-note.md %})
-  - [Delete a note]({% link _chapters/delete-a-note.md %})
-- [Set up secure pages]({% link _chapters/setup-secure-pages.md %})
-  - [Create a route that redirects]({% link _chapters/create-a-route-that-redirects.md %})
-  - [Use the redirect routes]({% link _chapters/use-the-redirect-routes.md %})
-  - [Redirect on login]({% link _chapters/redirect-on-login.md %})
-
-### Deploying a React app on AWS
-
-- [Deploy the Frontend]({% link _chapters/deploy-the-frontend.md %})
-  - [Create an S3 bucket]({% link _chapters/create-an-s3-bucket.md %})
-  - [Deploy to S3]({% link _chapters/deploy-to-s3.md %})
-  - [Create a CloudFront distribution]({% link _chapters/create-a-cloudfront-distribution.md %})
-  - [Set up your domain with CloudFront]({% link _chapters/setup-your-domain-with-cloudfront.md %})
-  - [Set up www domain redirect]({% link _chapters/setup-www-domain-redirect.md %})
-  - [Set up SSL]({% link _chapters/setup-ssl.md %})
-- [Deploy updates]({% link _chapters/deploy-updates.md %})
-  - [Update the app]({% link _chapters/update-the-app.md %})
-  - [Deploy again]({% link _chapters/deploy-again.md %})
-
-### Conclusion
-
-- [Wrapping up]({% link _chapters/wrapping-up.md %})
-- [Giving back]({% link _chapters/giving-back.md %})
-- [Changelog]({% link _chapters/changelog.md %})
-- [Staying up to date]({% link _chapters/staying-up-to-date.md %})
-
-### Extra Credit
-
-Backend
-
-  - [API Gateway and Lambda Logs]({% link _chapters/api-gateway-and-lambda-logs.md %})
-  - [Debugging Serverless API Issues]({% link _chapters/debugging-serverless-api-issues.md %})
-
-  - [Serverless environment variables]({% link _chapters/serverless-environment-variables.md %})
-  - [Stages in Serverless Framework]({% link _chapters/stages-in-serverless-framework.md %})
-
-  - [Configure multiple AWS profiles]({% link _chapters/configure-multiple-aws-profiles.md %})
-
-  - [Customize the Serverless IAM Policy]({% link _chapters/customize-the-serverless-iam-policy.md %})
-
-Frontend
-
-  - [Code Splitting in Create React App]({% link _chapters/code-splitting-in-create-react-app.md %})
-  - [Environments in Create React App]({% link _chapters/environments-in-create-react-app.md %})
-
-### Reference
-
-- [Connect to API Gateway with IAM auth]({% link _chapters/connect-to-api-gateway-with-iam-auth.md %})
-- [Serverless Node.js Starter]({% link _chapters/serverless-nodejs-starter.md %})
+  {% include toc-chapters.html items=site.data.chapterlist.extra-backend id="extra-backend" %}
+  {% include toc-chapters.html items=site.data.chapterlist.extra-frontend id="extra-frontend" %}
+</div>

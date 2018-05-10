@@ -3,9 +3,9 @@ layout: post
 title: Delete a Note
 date: 2017-01-31 00:00:00
 description: We want users to be able to delete their note in our React.js app. To do this we are going to make a DELETE request to our serverless API backend using AWS Amplify.
-context: frontend
+context: true
 code: frontend
-comments_id: 56
+comments_id: comments-for-delete-a-note/137
 ---
 
 The last thing we need to do on the note page is allowing users to delete their note. We have the button all set up already. All that needs to be done is to hook it up with the API.

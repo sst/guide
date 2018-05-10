@@ -2,7 +2,7 @@
 layout: post
 title: Set up Secure Pages
 date: 2017-02-01 00:00:00
-comments_id: 57
+comments_id: set-up-secure-pages/42
 ---
 
 We are almost done putting together our app. All the pages are done but there are a few pages that should not be accessible if a user is not logged in. For example, a page with the note should not load if a user is not logged in. Currently, we get an error when we do this. This is because the page loads and since there is no user in the session, the call to our API fails.

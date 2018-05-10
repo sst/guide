@@ -3,8 +3,8 @@ layout: post
 title: Load the State from the Session
 date: 2017-01-15 00:00:00
 description: To keep a user logged in to Amazon Cognito in our React.js app, we are going to load the user session in the App component state. We load the session in componentDidMount using the AWS Amplify Auth.currentSession() method.
-context: frontend
-comments_id: 40
+context: true
+comments_id: load-the-state-from-the-session/157
 ---
 
 To make our login information persist we need to store and load it from the browser session. There are a few different ways we can do this, using Cookies or Local Storage. Thankfully the AWS Amplify does this for us automatically and we just need to read from it and load it into our application state.

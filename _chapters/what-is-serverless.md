@@ -3,7 +3,7 @@ layout: post
 title: What is Serverless
 date: 2016-12-23 12:00:00
 description: Serverless refers to applications where the management and allocation of servers and resources are completely managed by the cloud provider. And the billing is based on the actual consumption of those resources.
-comments_id: 101
+comments_id: what-is-serverless/27
 ---
 
 Traditionally, we've built and deployed web applications where we have some degree of control over the HTTP requests that are made to our server. Our application runs on that server and we are responsible for provisioning and managing the resources for it. There are a few issues with this.

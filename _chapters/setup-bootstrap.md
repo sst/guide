@@ -3,8 +3,8 @@ layout: post
 title: Set up Bootstrap
 date: 2017-01-09 00:00:00
 description: Bootstrap is a UI framework that makes it easy to build consistent responsive web apps. We are going to use Bootstrap with our React.js project using the React-Bootstrap library. React-Bootstrap allows you to use Bootstrap in the form of standard React components.
-context: frontend
-comments_id: 32
+context: true
+comments_id: set-up-bootstrap/118
 ---
 
 A big part of writing web applications is having a UI Kit to help create the interface of the application. We are going to use [Bootstrap](http://getbootstrap.com) for our note taking app. While Bootstrap can be used directly with React; the preferred way is to use it with the [React-Bootstrap](https://react-bootstrap.github.io) package. This makes our markup a lot simpler to implement and understand.

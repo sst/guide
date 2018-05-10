@@ -2,8 +2,8 @@
 layout: post
 title: Giving Back
 description: Contributing to Serverless Stack by supporting us on GitHub and helping keep the content up to date.
-date: 2017-02-16 00:00:00
-comments_id: 71
+date: 2018-03-31 00:00:00
+comments_id: comments-for-giving-back/193
 ---
 
 If you've found this guide helpful please consider helping us out by doing the following.

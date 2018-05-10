@@ -3,8 +3,8 @@ layout: post
 title: List All the Notes
 date: 2017-01-26 00:00:00
 description: We want to display all the notes a user has in our React.js app. To do this we are going to use our Home container and render a list if a user is logged in.
-context: frontend
-comments_id: 51
+context: true
+comments_id: list-all-the-notes/156
 ---
 
 Now that we are able to create a new note, let's create a page where we can see a list of all the notes a user has created. It makes sense that this would be the homepage (even though we use the `/` route for the landing page). So we just need to conditionally render the landing page or the homepage depending on the user session.

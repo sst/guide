@@ -3,9 +3,9 @@ layout: post
 title: Add a Delete Note API
 date: 2017-01-03 00:00:00
 description: To allow users to delete their notes in our note taking app, we are going to add a DELETE note API. To do this we will add a new Lambda function to our Serverless Framework project. The Lambda function will delete a user’s note in the DynamoDB table.
-context: backend
+context: true
 code: backend
-comments_id: 27
+comments_id: add-a-delete-note-api/153
 ---
 
 Finally, we are going to create an API that allows a user to delete a given note.

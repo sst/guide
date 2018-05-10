@@ -4,7 +4,7 @@ title: Update the App
 date: 2017-02-13 00:00:00
 code: frontend
 description: Tutorial on how to make changes to your React.js single page application.
-comments_id: 69
+comments_id: comments-for-update-the-app/43
 ---
 
 Let's make a couple of quick changes to test the process of deploying updates to our app.
