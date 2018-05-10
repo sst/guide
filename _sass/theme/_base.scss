@@ -194,7 +194,8 @@ pre {
     padding-left: $spacing-unit / 2;
   }
 }
-.wrapper-post {
+.wrapper-post,
+.wrapper-footer {
   max-width: -webkit-calc(#{$post-content-width} - (#{$spacing-unit} * 2));
   max-width:         calc(#{$post-content-width} - (#{$spacing-unit} * 2));
   margin-right: auto;
