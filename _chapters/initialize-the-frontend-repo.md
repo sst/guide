@@ -6,7 +6,7 @@ description:
 comments_id: initialize-the-frontend-repo/181
 ---
 
-Just as we did in the backend portion, we'll start by creating our project and adding it to GitHub. We will use what we had in part 1 as a starting point.
+Just as we did in the backend portion, we'll start by creating our project and adding it to GitHub. We will use what we had in Part I as a starting point.
 
 ### Clone the Original Repo
 
@@ -43,7 +43,11 @@ Once your repository is created, copy the repository URL. We'll need this soon.
 
 ![Copy new client GitHub repo url screenshot](/assets/part2/copy-new-client-github-repo-url.png)
 
-In our case the URL is `https://github.com/jayair/https://github.com/jayair/serverless-stack-2-client.git`.
+In our case the URL is:
+
+```
+https://github.com/jayair/https://github.com/jayair/serverless-stack-2-client.git
+```
 
 ### Initialize Your New Repo
 

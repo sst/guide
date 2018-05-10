@@ -42,7 +42,11 @@ Once your repository is created, copy the repository URL. We'll need this soon.
 
 ![Copy new GitHub repo url screenshot](/assets/part2/copy-new-github-repo-url.png)
 
-In our case the URL is `https://github.com/jayair/serverless-stack-2-api.git`.
+In our case the URL is:
+
+```
+https://github.com/jayair/serverless-stack-2-api.git
+```
 
 ### Initialize Your New Repo
 
