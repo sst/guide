@@ -135,25 +135,44 @@ set text item delimiters to "
 set theChapters to text items of theChaptersStr
 
 
-#################
-# Download PDFs #
-#################
-repeat with theCurrentChapter in theChapters
-  downloadPdf(theCurrentChapter)
-end repeat
+########
+# Main #
+########
+downloadPdfs(theChapters)
+mergePdfs(theChapters)
 
 ##############
 # Merge PDFs #
 ##############
-set outputFile to "~/Downloads/ebook/ServerlessStack.pdf"
+on mergePdfs(theChapters)
+  set outputFile to "~/Downloads/ebook/ServerlessStack.pdf"
 
-set pdfFiles to "~/Downloads/ebook/Cover.pdf"
-repeat with theCurrentChapter in theChapters
-  set pdfFiles to pdfFiles & " ~/Downloads/ebook/" & theCurrentChapter & ".pdf"
-end repeat
+  set pdfFiles to "~/Downloads/ebook/Cover.pdf"
+  repeat with theCurrentChapter in theChapters
+    set pdfFiles to pdfFiles & " ~/Downloads/ebook/" & theCurrentChapter & ".pdf"
+  end repeat
 
-do shell script "/System/Library/Automator/Combine\\ PDF\\ Pages.action/Contents/Resources/join.py " & "-o " & outputFile & " " & pdfFiles
+  do shell script "/System/Library/Automator/Combine\\ PDF\\ Pages.action/Contents/Resources/join.py " & "-o " & outputFile & " " & pdfFiles
+end mergePdfs
 
+#################
+# Download PDFs #
+#################
+on downloadPdfs(theChapters)
+  repeat with theCurrentChapter in theChapters
+    if not(checkFileExist(theCurrentChapter)) then
+      downloadPdf(theCurrentChapter)
+    end if
+  end repeat
+end downloadPdfs
+
+on checkFileExist(theChapterName)
+  set basePath to POSIX path of (path to home folder) & "Downloads/ebook/"
+
+  tell application "Finder"
+    return exists basePath & theChapterName & ".pdf" as POSIX file
+  end tell
+end checkFileExist
 
 on downloadPdf(theChapterName)
   tell application "System Events"
