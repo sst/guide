@@ -2,7 +2,7 @@
 layout: post
 title: Initialize the Frontend Repo
 date: 2018-03-18 00:00:00
-description:
+description: By automating deployments for our React app, we can simply git push to deploy our app to production. To do so, start by adding your React app repo to Git.
 comments_id: initialize-the-frontend-repo/181
 ---
 

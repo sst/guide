@@ -93,7 +93,7 @@ Let's add a reference to our new API and Lambda function.
           authorizer: aws_iam
 ```
 
-Make sure this is indented correctly.
+Make sure this is **indented correctly**. This block falls under the `functions` block.
 
 ### Commit Our Changes
 

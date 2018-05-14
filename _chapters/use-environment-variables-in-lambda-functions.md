@@ -2,6 +2,7 @@
 layout: post
 title: Use Environment Variables in Lambda Functions
 date: 2018-03-03 00:00:00
+description: To configure our Serverless Framework project to deploy our resources as infrastructure as code, we need to make a couple of changes to our Lambda functions. Instead of hardcoding the resources, we can reference them using the "process.env" variable.
 comments_id: use-environment-variables-in-lambda-functions/166
 ---
 

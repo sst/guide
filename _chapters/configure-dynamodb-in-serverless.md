@@ -120,7 +120,7 @@ We are also going to make a quick tweak to reference the DynamoDB resource that 
         - "Fn::GetAtt": [ NotesTable, Arn ]
 ```
 
-Make sure to copy the indentation properly. These two blocks fall under the `provider` block and need to be indented as such.
+Make sure to **copy the indentation properly**. These two blocks fall under the `provider` block and need to be indented as such.
 
 A couple of interesting things we are doing here:
 

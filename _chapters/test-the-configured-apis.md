@@ -2,7 +2,7 @@
 layout: post
 title: Test the Configured APIs
 date: 2018-03-16 00:00:00
-description:
+description: Test the Serverless APIs that have been deployed using Seed. To do so use the "aws-api-gateway-cli-test" NPM package and test both the production and dev environments.
 comments_id: test-the-configured-apis/179
 ---
 
