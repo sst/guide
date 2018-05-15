@@ -61,6 +61,7 @@ Add the following CORS configuration into the editor, then hit **Save**.
 		<AllowedMethod>PUT</AllowedMethod>
 		<AllowedMethod>POST</AllowedMethod>
 		<AllowedMethod>HEAD</AllowedMethod>
+		<AllowedMethod>DELETE</AllowedMethod>
 		<MaxAgeSeconds>3000</MaxAgeSeconds>
 		<AllowedHeader>*</AllowedHeader>
 	</CORSRule>
