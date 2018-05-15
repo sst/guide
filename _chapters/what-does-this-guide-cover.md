@@ -44,13 +44,13 @@ We'll be using the following set of technologies and services to build our serve
 - [Netlify][Netlify] for automating React deployments
 - [GitHub][GitHub] for hosting our project repos.
 
+We are going to be using the **free tiers** for the above services. So you should be able to sign up for them for free. This of course does not apply to purchasing a new domain to host your app. Also for AWS, you are required to put in a credit card while creating an account. So if you happen to be creating resources above and beyond what we cover in this tutorial, you might end up getting charged.
+
 While the list above might look daunting, we are trying to ensure that upon completing the guide you'll be ready to build **real-world**, **secure**, and **fully-functional** web apps. And don't worry we'll be around to help!
 
 ### Requirements
 
-You need [Node v8.10+ and NPM v5.5+](https://nodejs.org/en/). You also need to have basic knowledge of how to use the command line. And a [GitHub][GitHub] account.
-
-The services that we are going to be using for the purpose of the tutorial should fall in their respective free tiers. This of course does not apply to purchasing a new domain to host your app. Also for AWS, you are required to put in a credit card while creating an account. So if you happen to be creating resources above and beyond what we cover in this tutorial, you might end up getting charged.
+You need [Node v8.10+ and NPM v5.5+](https://nodejs.org/en/). You also need to have basic knowledge of how to use the command line. 
 
 ### How This Guide Is Structured
 
