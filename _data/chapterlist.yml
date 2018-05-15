@@ -300,6 +300,8 @@ conclusion:
   chapters:
     - page: Wrapping up
       url: /chapters/wrapping-up.html
+    - page: Futher reading
+      url: /chapters/further-reading.html
     - page: Giving back
       url: /chapters/giving-back.html
     - page: Changelog
