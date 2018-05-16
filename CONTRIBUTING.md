@@ -49,9 +49,9 @@ We want to keep the screenshots as consistent as possible to reduce any source o
 
 - Use Safari with a window size of 1280x778 (or similar ratio).
 - Mock any account details or private info on the screen using Safari's dev tools.
-- Don't have any tabs or extra toolbars. Try to use the default Safari chrome. [Here is an example].
+- Don't have any tabs or extra toolbars. Try to use the default Safari chrome. [Here is an example](https://raw.githubusercontent.com/AnomalyInnovations/serverless-stack-com/master/assets/contributing/safari-chrome.png).
 - Take a screenshot of the browser window with the CMD+SHIFT+4 SPACE command.
-- Use the Preview app to add pointers for input fields or buttons that need to be highlighted. [Here are the specific settings used].
+- Use the Preview app to add pointers for input fields or buttons that need to be highlighted. [Here are the specific settings used](https://raw.githubusercontent.com/AnomalyInnovations/serverless-stack-com/master/assets/contributing/preview-arrow.png).
 
 ### Updating dependencies
 
