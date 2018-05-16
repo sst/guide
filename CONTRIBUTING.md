@@ -32,14 +32,14 @@ There are quite a few ways to help.
 
 - Fix typos, grammatical errors, broken links, etc. in the current guide
 - Help answer questions that people have in the forums
-- [Keep the core guide up to date]
-- [Add an extra credit chapter]
-- [Improve tooling]
+- [Keep the core guide updated](#keep-the-core-guide-updated)
+- [Add an extra credit chapter](#add-an-extra-credit-chapter)
+- [Improve tooling](#improve-tooling)
 
 Additionally, you are welcome to provide general feedback and suggestions via our forums.
 
 
-### Keep the core guide up to date
+### Keep the core guide updated
 
 Serverless Stack is reliant on a large number of services and open source libraries and projects. Here is what needs updating:
 
