@@ -102,7 +102,7 @@ For any changes to the demo app:
 - Update the README to reflect that this is an extension to the tutorial demo app
 - Reference the new forked repo in the chapter
 
-Finally, submit a PR to the tutorial repo with the new changes. We'll review it, maybe suggest some edits or give you some feedback. Once everything looks okay we'll merge with master and publish it.
+Finally, submit a PR to the tutorial repo with the new changes. We'll review it, maybe suggest some edits or give you some feedback. Once everything looks okay we'll merge with master and publish it. We'll also create comments threads for your chapter in the forums and link to it.
 
 
 ## Update Tooling
@@ -116,6 +116,10 @@ Currently we do a lot of manual work to publish updates and maintain the tutoria
 - Creating a pipeline
 
   We would like to create a Circle CI setup that automatically generates the PDF and uploads the latest version to S3 (where it is hosted) every time a new release is created to the tutorial. We would also like to run a simple suite of tests to ensure that the changes to the demo app repos are correct.
+
+- Compress screenshots
+
+  The images for the screenshots are quite large. It would be ideal if they can be compressed as a part of the build process.
 
 
 
