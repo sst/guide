@@ -21,6 +21,12 @@ layout: default
         </div>
         {% endif %}
 
+        {% if page.bio %}
+        <div class="post-author">
+          This chapter is contributed by: {{ page.bio }}
+        </div>
+        {% endif %}
+
       </header>
 
       <div class="post-content">
