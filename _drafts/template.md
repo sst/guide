@@ -14,6 +14,12 @@ The content of a chapter goes here. Section titles are formatted as so:
 
 When adding a screenshot make sure to use a descriptive filename and alt-text. For example, here we use the alt-text to describe what this screenshot is about and the filename is just the [Kebab Case](http://wiki.c2.com/?KebabCase) version of that.
 
+```
+![Click this button on this screen screenshot](/assets/chapter-name/click-this-button-on-this-screen.png)
+```
+
+And here it is in action.
+
 ![Select Cognito Service screenshot](/assets/cognito-identity-pool/select-cognito-service.png)
 
 ### Code Snippets
