@@ -32,14 +32,14 @@ There are quite a few ways to help.
 
 - Fix typos, grammatical errors, broken links, etc. in the current guide
 - Help answer questions that people have in the forums
-- [Keep the core guide up to date]
-- [Add an extra credit chapter]
-- [Improve tooling]
+- [Keep the core guide updated](#keep-the-core-guide-updated)
+- [Add an extra credit chapter](#add-an-extra-credit-chapter)
+- [Improve tooling](#improve-tooling)
 
 Additionally, you are welcome to provide general feedback and suggestions via our forums.
 
 
-### Keep the core guide up to date
+### Keep the core guide updated
 
 Serverless Stack is reliant on a large number of services and open source libraries and projects. Here is what needs updating:
 
@@ -49,9 +49,9 @@ We want to keep the screenshots as consistent as possible to reduce any source o
 
 - Use Safari with a window size of 1280x778 (or similar ratio).
 - Mock any account details or private info on the screen using Safari's dev tools.
-- Don't have any tabs or extra toolbars. Try to use the default Safari chrome. [Here is an example].
+- Don't have any tabs or extra toolbars. Try to use the default Safari chrome. [Here is an example](https://raw.githubusercontent.com/AnomalyInnovations/serverless-stack-com/master/assets/contributing/safari-chrome.png).
 - Take a screenshot of the browser window with the CMD+SHIFT+4 SPACE command.
-- Use the Preview app to add pointers for input fields or buttons that need to be highlighted. [Here are the specific settings used].
+- Use the Preview app to add pointers for input fields or buttons that need to be highlighted. [Here are the specific settings used](https://raw.githubusercontent.com/AnomalyInnovations/serverless-stack-com/master/assets/contributing/preview-arrow.png).
 
 ### Updating dependencies
 
@@ -105,7 +105,7 @@ For any changes to the demo app:
 Finally, submit a PR to the tutorial repo with the new changes. We'll review it, maybe suggest some edits or give you some feedback. Once everything looks okay we'll merge with master and publish it. We'll also create comments threads for your chapter in the forums and link to it.
 
 
-## Update Tooling
+## Improve Tooling
 
 Currently we do a lot of manual work to publish updates and maintain the tutorial. You can help by contributing to improve the process. Feel free to get in touch if you're interested in helping out. Here is roughly what we need help with:
 
@@ -120,26 +120,3 @@ Currently we do a lot of manual work to publish updates and maintain the tutoria
 - Compress screenshots
 
   The images for the screenshots are quite large. It would be ideal if they can be compressed as a part of the build process.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
