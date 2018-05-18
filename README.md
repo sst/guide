@@ -43,10 +43,31 @@ The entire guide is hosted on GitHub and we use [Discourse][Discourse] for our c
 - Send us an [email][Email] if you have any other questions or feedback.
 - If you've found a typo, edit the chapter and submit a [pull request][PR].
 
+#### Local Usage
+
+Serverless Stack is built using [Jekyll](https://jekyllrb.com). To install, run the following in the root of the project.
+
+``` bash
+$ bundle install
+```
+
+And to view locally.
+
+``` bash
+$ bundle exec jekyll serve --incremental
+```
+
+This can be viewed by visiting `http://localhost:4000/`.
+
+You can also turn on live reloading while editing.
+
+``` bash
+$ bundle exec jekyll serve --incremental --livereloading
+```
+
 #### Contributing
 
-- To fix typos or make minor corrections; just navigate to the chapter, edit it, and submit a [pull request][PR].
-- To make a larger changes, you need to set up the repo on local. Make sure you have [Jekyll](https://github.com/jekyll/jekyll) installed and run `bundle exec jekyll serve` from the project root.
+Thank you for your considering to contribute. [Read more about contributing](blob/master/CONTRIBUTING.md).
 
 #### Maintainers
 
