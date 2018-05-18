@@ -69,7 +69,7 @@ For the steps in the tutorial:
 Once all the PRs are merged, we'll tag the repo (tutorial & demo app) with the new version number and update the Changelog chapter.
 
 
-## Add an Extra Credit Chapter
+### Add an Extra Credit Chapter
 
 The core chapters are missing some extra details (for the sake of simplicity) that are necessary once you start customizing the Serverless Stack setup. Additionally, there are cases that we just don't handle in the core chapters. Here is a rough list of topics that get requested fairly frequently:
 
@@ -105,7 +105,7 @@ For any changes to the demo app:
 Finally, submit a PR to the tutorial repo with the new changes. We'll review it, maybe suggest some edits or give you some feedback. Once everything looks okay we'll merge with master and publish it. We'll also create comments threads for your chapter in the forums and link to it.
 
 
-## Improve Tooling
+### Improve Tooling
 
 Currently we do a lot of manual work to publish updates and maintain the tutorial. You can help by contributing to improve the process. Feel free to get in touch if you're interested in helping out. Here is roughly what we need help with:
 
