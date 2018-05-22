@@ -51,7 +51,7 @@ Thank you for your considering to contribute. [Read more about how you can contr
 
 ## Running Locally
 
-Serverless Stack is built using [Jekyll](https://jekyllrb.com).
+Serverless Stack is built using [Jekyll](https://jekyllrb.com). [Follow these steps to install Jekyll](https://jekyllrb.com/docs/installation/).
 
 #### Viewing Locally
 
