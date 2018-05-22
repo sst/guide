@@ -8,6 +8,12 @@
   <b>Learn to Build Full-Stack Apps with Serverless and React</b>
 </p>
 
+<p align="center">
+  <a href="https://discourse.serverless-stack.com"><img alt="Discourse posts" src="https://img.shields.io/discourse/https/discourse.serverless-stack.com/posts.svg?style=for-the-badge" /></a>
+  <a href="https://twitter.com/Anomaly_Inv"><img alt="Twitter follow" src="https://img.shields.io/twitter/follow/anomaly_inv.svg?label=twitter&style=for-the-badge" /></a>
+  <a href="https://gitter.im/serverless-stack/Lobby"><img alt="Chat on Gitter" src="https://img.shields.io/gitter/room/serverless-stack/serverless-stack.svg?style=for-the-badge" /></a>
+</p>
+
 ------------------------------------------------------------------------------------
 
 [Serverless Stack](https://serverless-stack.com) is an open source guide for building and deploying full-stack apps using Serverless and React on AWS.
@@ -96,3 +102,4 @@ Serverless Stack is authored and maintained by Frank Wang ([@fanjiewang](https:/
 [Discourse]: https://discourse.serverless-stack.com
 [Contributing]: CONTRIBUTING.md
 [PR]: ../../compare
+
