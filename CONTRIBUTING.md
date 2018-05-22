@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for considering to contribute. Here is what Serverless Stack is trying to accomplish and how you can help.
+Thank you for considering to contribute. Here is what Serverless Stack is trying to accomplish and how you can help. We use our [Gitter chat room][Gitter] for our contributors, feel free to join us there.
 
 ## Project Goals
 
@@ -85,7 +85,7 @@ The core chapters are missing some extra details (for the sake of simplicity) th
 
 This is not an exhaustive list. If you have some ideas to extend some of the demo app functionality, feel free to get in touch with us. Here is how to go about adding a new extra credit chapter:
 
-- Let us know via Gitter or GitHub that you are planning to work on it
+- Let us know via [Gitter][Gitter] that you are planning to work on it
 - Create a new issue in GitHub to track progress
 - Fork the tutorial repo
 - Copy the `_drafts/template.md` as a starting point for the chapter
@@ -120,3 +120,5 @@ Currently we do a lot of manual work to publish updates and maintain the tutoria
 - Compress screenshots
 
   The images for the screenshots are quite large. It would be ideal if they can be compressed as a part of the build process.
+
+[Gitter]: https://gitter.im/serverless-stack/Lobby
