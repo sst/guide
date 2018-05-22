@@ -20,32 +20,36 @@ It is a single-page React app powered by a serverless CRUD API. We also cover ho
 
 The entire guide is hosted on GitHub and we use [Discourse][Discourse] for our comments. With the help of the community we keep the guide accurate and up to date.
 
-#### Source for the Demo App
-
-- [Backend Serverless API](https://github.com/AnomalyInnovations/serverless-stack-demo-api)
-- [Frontend React app](https://github.com/AnomalyInnovations/serverless-stack-demo-client)
-
-#### Project Goals
+## Project Goals
 
 - Provide a free comprehensive resource
+- Add more content to build on core concepts
 - Keep the content accurate and up to date
 - Help people resolve their issues
 
-#### Sponsors
-
-[**Sponsor Serverless Stack on Patreon**](https://www.patreon.com/serverless_stack) if you've found this guide useful or would like to be an official supporter. [A big thanks to our supporters](https://serverless-stack.com/sponsors.html#backers)!
-
-#### Getting Help
+## Getting Help
 
 - If you are running into issues with a specific chapter, post in the comments for that [chapter][Discourse].
 - Open a [new issue](../../issues/new) if you've found a bug
 - Or if you have a suggestion create a [new topic][Discourse] in our forums
-- Send us an [email][Email] if you have any other questions or feedback.
 - If you've found a typo, edit the chapter and submit a [pull request][PR].
 
-#### Local Usage
+## Source for the Demo App
 
-Serverless Stack is built using [Jekyll](https://jekyllrb.com). To install, run the following in the root of the project.
+- [Backend Serverless API](https://github.com/AnomalyInnovations/serverless-stack-demo-api)
+- [Frontend React app](https://github.com/AnomalyInnovations/serverless-stack-demo-client)
+
+## Contributing
+
+Thank you for your considering to contribute. [Read more about how you can contribute to Serverless Stack][Contributing].
+
+## Running Locally
+
+Serverless Stack is built using [Jekyll](https://jekyllrb.com).
+
+#### Viewing Locally
+
+To install, run the following in the root of the project.
 
 ``` bash
 $ bundle install
@@ -54,26 +58,41 @@ $ bundle install
 And to view locally.
 
 ``` bash
-$ bundle exec jekyll serve --incremental
+$ bundle exec jekyll serve
 ```
 
-This can be viewed by visiting `http://localhost:4000/`.
+You can now view the guide locally by visiting `http://localhost:4000/`.
 
-You can also turn on live reloading while editing.
+You can also turn on live reloading and incremental builds while editing.
 
 ``` bash
 $ bundle exec jekyll serve --incremental --livereloading
 ```
 
-#### Contributing
+#### Generating the PDF
 
-Thank you for your considering to contribute. [Read more about contributing](blob/master/CONTRIBUTING.md).
+You can generate the PDF locally on macOS by following these steps.
 
-#### Maintainers
+1. Generate a `Cover.pdf` with latest version and date
+   1. Create an `ebook` folder in `~/Downloads` (for example).
+   2. Update the date and version in the `etc/cover.html`
+   3. Open the cover page locally in Safari by going to `file:///Users/frank/Sites/ServerlessStackCom/etc/cover.html`.
+   4. Hit the **Export to PDF…** button.
+   5. Place `Cover.pdf` in the `~/Downloads/ebook` folder.
+2. Ensure `ebook` folder is an option when hitting the **Export to PDF…** button in Safari.
+3. In the terminal, run `osascript pdf.scpt` in the `etc/` directory of this repository.
 
-Serverless Stack is authored and maintained by Frank Wang ([@fanjiewang](https://twitter.com/fanjiewang)) & Jay V ([@jayair](https://twitter.com/jayair)). [**Subscribe to our newsletter**](https://emailoctopus.com/lists/1c11b9a8-1500-11e8-a3c9-06b79b628af2/forms/subscribe) for updates on Serverless Stack. Send us an [email][Email] if you have any questions.
+We are looking for a better way to generate the PDF (and other eBook) formats. If you've got any ideas [consider contributing][Contributing].
+
+## Sponsors
+
+[**Sponsor Serverless Stack on Patreon**](https://www.patreon.com/serverless_stack) if you've found this guide useful or would like to be an official supporter. [A big thanks to our supporters](https://serverless-stack.com/sponsors.html#backers)!
+
+## Maintainers
+
+Serverless Stack is authored and maintained by Frank Wang ([@fanjiewang](https://twitter.com/fanjiewang)) & Jay V ([@jayair](https://twitter.com/jayair)). [**Subscribe to our newsletter**](https://emailoctopus.com/lists/1c11b9a8-1500-11e8-a3c9-06b79b628af2/forms/subscribe) for updates on Serverless Stack.
 
 
 [Discourse]: https://discourse.serverless-stack.com
+[Contributing]: CONTRIBUTING.md
 [PR]: ../../compare
-[Email]: mailto:contact@anoma.ly
