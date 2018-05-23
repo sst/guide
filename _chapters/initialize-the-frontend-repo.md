@@ -13,7 +13,7 @@ Just as we did in the backend portion, we'll start by creating our project and a
 <img class="code-marker" src="/assets/s.png" />In your working directory, start by cloning the [original repo]({{ site.frontend_github_repo }}). Make sure this is not inside the directory for our backend.
 
 ``` bash
-$ git clone --depth 1 https://github.com/AnomalyInnovations/serverless-stack-demo-client.git serverless-stack-2-client/
+$ git clone --branch update-the-app --depth 1 https://github.com/AnomalyInnovations/serverless-stack-demo-client.git serverless-stack-2-client/
 $ cd serverles-stack-2-client/
 ```
 
