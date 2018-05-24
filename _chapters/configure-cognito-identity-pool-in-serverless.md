@@ -116,7 +116,7 @@ Let's quickly go over the various sections of this configuration:
 
 2. We set that we only want logged in users by adding `AllowUnauthenticatedIdentities: false`.
 
-3. Next we state that we want to use our User Pool as the identity provider. We are doing this specifically using the `Ref: CognitoUserPoolClient` line. If you refer back to the [Configure Cognito User Pool in Serverless]({% link _chapters/configure-s3-in-serverless.md %}) chapter, you'll notice we have a block under `CognitoUserPoolClient` that we are referencing here.
+3. Next we state that we want to use our User Pool as the identity provider. We are doing this specifically using the `Ref: CognitoUserPoolClient` line. If you refer back to the [Configure Cognito User Pool in Serverless]({% link _chapters/configure-cognito-user-pool-in-serverless.md %}) chapter, you'll notice we have a block under `CognitoUserPoolClient` that we are referencing here.
 
 4. We then attach a IAM role to our authenticated users.
 
