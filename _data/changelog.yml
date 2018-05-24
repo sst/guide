@@ -1,4 +1,8 @@
 current:
+  title: "Update to use UsernameAttributes"
+  desc: "May 24, 2018: CloudFormation now supports UsernameAttributes. This means that we don't need the email as alias work around."
+
+v3-0:
   title: "Adding Part II"
   desc: "May 10, 2018: Adding a new part to the guide to help create a production ready version of the note taking app."
 
