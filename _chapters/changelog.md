@@ -23,7 +23,7 @@ You can get these updates emailed to you via our [newsletter]({{ site.newsletter
 
 #### [v3.1: {{ site.data.changelog.current.title }}](https://branchv31--serverless-stack.netlify.com) (Current)
 
-{{ site.data.changelog.current.desc }} [Discussion on the update]({{ site.forum_url }}{{ site.forum_thread_prefix }}serverless-stack-update-part-ii/194).
+{{ site.data.changelog.current.desc }} [Discussion on the update]({{ site.forum_url }}{{ site.github_repo }}/issues/240).
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v3.0...v3.1)
 - [API]({{ site.backend_github_repo }}/compare/v3.0...v3.1)
