@@ -129,4 +129,4 @@ $ git add .
 $ git commit -m "Configuring environments"
 ```
 
-Next, we need to make a quick change to the way we sign up our users. If you recall from the [Configure Cognito User Pool in Serverless]({% link _chapters/configure-s3-in-serverless.md %}) chapter, we had to use a workaround to allow users to login with their email address.
+Next, let’s add a settings page to our app. This is where a user will be able to pay for our service!

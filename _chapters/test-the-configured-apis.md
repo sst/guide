@@ -20,14 +20,11 @@ We are going to use the AWS CLI for this.
 $ aws cognito-idp sign-up \
   --region YOUR_DEV_COGNITO_REGION \
   --client-id YOUR_DEV_COGNITO_APP_CLIENT_ID \
-  --username admintestuser \
-  --user-attributes Name=email,Value=admin@example.com \
+  --username admin@example.com \
   --password Passw0rd!
 ```
 
 Refer back to the [Deploying through Seed]({% link _chapters/deploying-through-seed.md %}) chapter to look up the **dev** version of your Cognito App Client Id. And replace `YOUR_DEV_COGNITO_REGION` with the region that you deployed to.
-
-We are also using the email as an alias, this means that we need to set a generated `username`. We won't be using this in our code so you can use any valid string. In this case we are using `admintestuser`.
 
 <img class="code-marker" src="/assets/s.png" />Next we'll confirm the user through the Cognito Admin CLI.
 
@@ -35,10 +32,10 @@ We are also using the email as an alias, this means that we need to set a genera
 $ aws cognito-idp admin-confirm-sign-up \
   --region YOUR_DEV_COGNITO_REGION \
   --user-pool-id YOUR_DEV_COGNITO_USER_POOL_ID \
-  --username admintestuser
+  --username admin@example.com
 ```
 
-Again, replace `YOUR_DEV_COGNITO_USER_POOL_ID` with the **dev** version of your Cognito User Pool Id from the [Deploying through Seed]({% link _chapters/deploying-through-seed.md %}) chapter and the region from the previous command. We are using the generated username `admintestuser` as well.
+Again, replace `YOUR_DEV_COGNITO_USER_POOL_ID` with the **dev** version of your Cognito User Pool Id from the [Deploying through Seed]({% link _chapters/deploying-through-seed.md %}) chapter and the region from the previous command.
 
 Let's quickly do the same with **prod** versions as well.
 
@@ -48,8 +45,7 @@ Let's quickly do the same with **prod** versions as well.
 $ aws cognito-idp sign-up \
   --region YOUR_PROD_COGNITO_REGION \
   --client-id YOUR_PROD_COGNITO_APP_CLIENT_ID \
-  --username admintestuser \
-  --user-attributes Name=email,Value=admin@example.com \
+  --username admin@example.com \
   --password Passw0rd!
 ```
 
@@ -61,7 +57,7 @@ Here use your prod version of your Cognito details.
 $ aws cognito-idp admin-confirm-sign-up \
   --region YOUR_PROD_COGNITO_REGION \
   --user-pool-id YOUR_PROD_COGNITO_USER_POOL_ID \
-  --username admintestuser
+  --username admin@example.com
 ```
 
 Make sure to use the prod versions here as well.
@@ -74,7 +70,7 @@ Let's test our dev endpoint. Run the following command:
 
 ``` bash
 $ npx aws-api-gateway-cli-test \
---username='admintestuser' \
+--username='admin@example.com' \
 --password='Passw0rd!' \
 --user-pool-id='YOUR_DEV_COGNITO_USER_POOL_ID' \
 --app-client-id='YOUR_DEV_COGNITO_APP_CLIENT_ID' \
@@ -114,7 +110,7 @@ Also run the same command for prod. Make sure to use the prod versions.
 
 ``` bash
 $ npx aws-api-gateway-cli-test \
---username='admintestuser' \
+--username='admin@example.com' \
 --password='Passw0rd!' \
 --user-pool-id='YOUR_PROD_COGNITO_USER_POOL_ID' \
 --app-client-id='YOUR_PROD_COGNITO_APP_CLIENT_ID' \
