@@ -264,8 +264,6 @@ connect-frontend:
       subchapters:
       - page: Manage environments in Create React App
         url: /chapters/manage-environments-in-create-react-app.html
-      - page: Signup with email as alias
-        url: /chapters/signup-with-email-as-alias.html
 
 add-billing-form:
   title: Adding a billing form

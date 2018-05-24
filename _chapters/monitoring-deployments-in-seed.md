@@ -62,7 +62,7 @@ Now to test our code, run the same command from [the last chapter]({% link _chap
 
 ``` bash
 $ npx aws-api-gateway-cli-test \
---username='admintestuser' \
+--username='admin@example.com' \
 --password='Passw0rd!' \
 --user-pool-id='YOUR_PROD_COGNITO_USER_POOL_ID' \
 --app-client-id='YOUR_PROD_COGNITO_APP_CLIENT_ID' \
@@ -134,7 +134,7 @@ And now if you run your test command from before.
 
 ``` bash
 $ npx aws-api-gateway-cli-test \
---username='admintestuser' \
+--username='admin@example.com' \
 --password='Passw0rd!' \
 --user-pool-id='YOUR_PROD_COGNITO_USER_POOL_ID' \
 --app-client-id='YOUR_PROD_COGNITO_APP_CLIENT_ID' \
