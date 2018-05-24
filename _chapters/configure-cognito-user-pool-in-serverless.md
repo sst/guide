@@ -21,7 +21,7 @@ Resources:
       # Generate a name based on the stage
       UserPoolName: ${self:custom.stage}-user-pool
       # Set email as an alias
-      AliasAttributes:
+      UsernameAttributes:
         - email
       AutoVerifiedAttributes:
         - email
