@@ -82,6 +82,8 @@ The core chapters are missing some extra details (for the sake of simplicity) th
 - Exploring DynamoDB in detail
 - More details on how JSX works
 - Exploring CloudFormation in more detail
+- Using Redux on the frontend
+- Using AppSync
 
 This is not an exhaustive list. If you have some ideas to extend some of the demo app functionality, feel free to get in touch with us. Here is how to go about adding a new extra credit chapter:
 
