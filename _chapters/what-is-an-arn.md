@@ -7,13 +7,13 @@ context: true
 comments_id: what-is-an-arn/34
 ---
 
-In the last chapter while we were looking at IAM policies we looked at how you can specify a resource using its ARN. Let's take a better look at what ARN is.
+In the last chapter while we were looking at IAM policies we looked at how you can specify a resource using its ARN. Let's take a closer look at what an ARN is.
 
 Here is the official definition:
 
 > Amazon Resource Names (ARNs) uniquely identify AWS resources. We require an ARN when you need to specify a resource unambiguously across all of AWS, such as in IAM policies, Amazon Relational Database Service (Amazon RDS) tags, and API calls.
 
-ARN is really just a globally unique identifier for an individual AWS resource. It takes one of the following formats.
+An ARN is really just a globally unique identifier for an individual AWS resource. It takes one of the following formats.
 
 ```
 arn:partition:service:region:account-id:resource
@@ -21,7 +21,7 @@ arn:partition:service:region:account-id:resourcetype/resource
 arn:partition:service:region:account-id:resourcetype:resource
 ```
 
-Let's look at some examples of ARN. Note the different formats used.
+Let's look at some examples of ARNs. Note the different formats used.
 
 ```
 <!-- Elastic Beanstalk application version -->
@@ -37,11 +37,11 @@ arn:aws:rds:eu-west-1:123456789012:db:mysql-db
 arn:aws:s3:::my_corporate_bucket/exampleobject.png
 ```
 
-Finally, let's look at the common use cases for ARN.
+Finally, let's look at the common use cases for ARNs.
 
 1. Communication
 
-   ARN is used to reference a specific resource when you orchestrate a system involving multiple AWS resources. For example, you have an API Gateway listening for RESTful APIs and invoking the corresponding Lambda function based on the API path and request method. The routing looks like the following.
+   An ARN is used to reference a specific resource when you orchestrate a system involving multiple AWS resources. For example, when you have an API Gateway listening for RESTful APIs and invoking the corresponding Lambda function based on the API path and request method. The routing looks like the following.
 
    ```
    GET /hello_world => arn:aws:lambda:us-east-1:123456789012:function:lambda-hello-world
@@ -49,7 +49,7 @@ Finally, let's look at the common use cases for ARN.
 
 2. IAM Policy
 
-   We had looked at this in detail in the last chapter but here is an example of a policy definition.
+   We looked at this in detail in the last chapter but here is an example of a policy definition.
 
    ``` json
    {
@@ -61,6 +61,6 @@ Finally, let's look at the common use cases for ARN.
    }
    ```
    
-   ARN is used to define which resource (S3 bucket in this case) the access is granted for. The wildcard `*` character is used here to match all resources inside the *Hello-bucket*.
+   An ARN is used to define which resource (an S3 bucket in this case) access is granted for. The wildcard `*` character is used here to match all resources inside the *Hello-bucket*.
 
 Next let's configure our AWS CLI. We'll be using the info from the IAM user account we created previously.

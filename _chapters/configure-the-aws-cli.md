@@ -7,7 +7,7 @@ context: true
 comments_id: configure-the-aws-cli/86
 ---
 
-To make it easier to work with a lot of the AWS services, we are going to use the [AWS CLI](https://aws.amazon.com/cli/).
+To make it easier to work with a lot of AWS services, we are going to use the [AWS CLI](https://aws.amazon.com/cli/).
 
 ### Install the AWS CLI
 
@@ -22,7 +22,7 @@ AWS CLI needs Python 2 version 2.6.5+ or Python 3 version 3.3+ and [Pip](https:/
 $ sudo pip install awscli
 ```
 
-If you are having some problems installing the AWS CLI or need Windows install instructions, refer to the [complete install instructions](http://docs.aws.amazon.com/cli/latest/userguide/installing.html).
+If you are having problems installing the AWS CLI or need Windows install instructions, refer to the [complete install instructions](http://docs.aws.amazon.com/cli/latest/userguide/installing.html).
 
 ### Add Your Access Key to AWS CLI
 
