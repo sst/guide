@@ -24,7 +24,7 @@ We are going to create a [note taking app](https://demo2.serverless-stack.com) f
 
 It is a single-page React app powered by a serverless CRUD API. We also cover how add user authentication and handle file uploads.
 
-The entire guide is hosted on GitHub and we use [Discourse][Discourse] for our comments. With the help of the community we grow the guide accurate and keep it up to date.
+The entire guide is hosted on GitHub and we use [Discourse][Discourse] for our comments. With the help of the community we add more detail to the guide and keep it up to date.
 
 ## Project Goals
 
