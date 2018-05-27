@@ -51,7 +51,7 @@ Now hit **Create pool** at the bottom of the page.
 
 ![Select Create pool screenshot](/assets/cognito-user-pool/select-create-pool.png)
 
-Now that the User Pool is created. Take a note of the **Pool Id** and **Pool ARN** which will be required later. Also, note the region that your User Pool is created in. In our case it is in `us-east-1`.
+Your User Pool has been created. Take a note of the **Pool Id** and **Pool ARN** which will be required later. Also, note the region that your User Pool is created in – in our case it's `us-east-1`.
 
 ![Cognito User Pool Created Screenshot](/assets/cognito-user-pool/user-pool-created.png)
 
@@ -67,12 +67,12 @@ Select **Add an app client**.
 
 Enter **App client name**, un-select **Generate client secret**, select **Enable sign-in API for server-based authentication**, then select **Create app client**.
 
-- **Generate client secret**: user pool apps with a client secret are not supported by JavaScript SDK. We need to un-select the option.
-- **Enable sign-in API for server-based authentication**: required by AWS CLI when managing the pool users via command line interface. We will be creating a test user through command line interface in the next chapter.
+- **Generate client secret**: user pool apps with a client secret are not supported by the JavaScript SDK. We need to un-select the option.
+- **Enable sign-in API for server-based authentication**: required by AWS CLI when managing the pool users via command line interface. We will be creating a test user through the command line interface in the next chapter.
 
 ![Fill Cognito User Pool App Info Screenshot](/assets/cognito-user-pool/fill-user-pool-app-info.png)
 
-Now that the app client is created. Take a note of the **App client id** which will be required in the later chapters.
+Your app client has been created. Take note of the **App client id** which will be required in the later chapters.
 
 ![Cognito User Pool App Created Screenshot](/assets/cognito-user-pool/user-pool-app-created.png)
 
