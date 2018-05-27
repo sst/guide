@@ -68,21 +68,21 @@ And here is a policy that grants more granular access, only allowing retrieval o
 }
 ```
 
-We are using S3 resources in the above examples. But a policy looks similar for any of the AWS services. It just depends on the resource ARN described by the `Resource` property. An ARN (Amazon Resource Name) is an identifier for a resource in AWS and we'll look at it in more detail in the next chapter. We also add the corresponding service actions and condition context keys in the `Action` and `Condition` properties. You can find all the available AWS Service actions and condition context keys for use in IAM Policies [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actionsconditions.html). Aside from attaching a policy to a user, you can also attach them to a role or a group.
+We are using S3 resources in the above examples. But a policy looks similar for any of the AWS services. It just depends on the resource ARN for `Resource` property. An ARN is an identifier for a resource in AWS and we'll look at it in more detail in the next chapter. We also add the corresponding service actions and condition context keys in `Action` and `Condition` property. You can find all the available AWS Service actions and condition context keys for use in IAM Policies [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actionsconditions.html). Aside from attaching a policy to a user, you can attach them to a role or a group.
 
 ### What is an IAM Role
 
-Sometimes your AWS resources need to access other resources in your account. For example, you have a Lambda function that queries your DynamoDB to retrieve some data, process it, and then send Bob an email with the results. In this case, we want Lambda to only be able to make read queries so it does not change the database by mistake. We also want to restrict Lambda to be able to email Bob so it does not spam other people. This can be done by creating an IAM user and assigning the user’s credentials to the Lambda function, or embedding the credentials in the Lambda code. But this is not secure – if somebody was to get hold of these credentials, they could make those calls on your behalf. This is where IAM roles come in to play. 
+Sometimes your AWS resources need to access other resources in your account. For example, you have a Lambda function that queries your DynamoDB to retrieve some data, process it, and then send Bob an email with the results. In this case, we want Lambda to only be able to make read queries so it does not change the database by mistake. We also want to restrict Lambda to be able to email Bob so it does not spam other people. This can be done by creating an IAM user and putting the user’s credentials to the Lambda function or embed the credentials in the Lambda code. But this is just not secure. If somebody was to get hold of these credentials, they could make those calls on your behalf. This is where IAM role comes in to play. 
 
-An IAM role is very similar to a user, in that it is an *identity* with permission policies that determine what the identity can and cannot do in AWS. However, a role does not have any credentials (password or access keys) associated with it. Instead of being uniquely associated with one person, a role can be taken on by anyone (or any service) requiring it. In this case, the Lambda function will be assigned a role allowing it to temporarily take on the desired permissions.
+An IAM role is very similar to a user, in that it is an *identity* with permission policies that determine what the identity can and cannot do in AWS. However, a role does not have any credentials (password or access keys) associated with it. Instead of being uniquely associated with one person, a role can be taken on by anyone who needs it. In this case, the Lambda function will be assigned with a role to temporarily take on the permission.
 
 ![AWS service with IAM Role diagram](/assets/iam/service-as-iam-role.png)
 
-Roles can be applied to users as well. In this case, the user is taking on the policy set for the IAM role. This is useful for cases where a user is wearing multiple "hats" in the organization. Roles make this easy since you only need to create each role once; they can then be re-used by anyone else who needs to take those permissions on.
+Roles can be applied to users as well. In this case, the user is taking on the policy set for the IAM role. This is useful for cases where a user is wearing multiple "hats" in the organization. Roles make this easy since you only need to create these roles once and they can be re-used for anybody else that wants to take it on.
 
 ![IAM User with IAM Role diagram](/assets/iam/iam-user-as-iam-role.png)
 
-You can also have a role tied to the ARN of a user from a different organization. This allows the external user to assume that role as a part of your organization. This is typically used when you have a third party service that is acting on your AWS Organization. You'll be asked to create a Cross-Account IAM Role and add the external user as a *Trust Relationship*. The *Trust Relationship* tells AWS that the specified external user can assume this role.
+You can also have a role tied to the ARN of a user from a different organization. This allows the external user to assume that role as a part of your organization. This is typically used when you have a third party service that is acting on your AWS Organization. You'll be asked to create a Cross-Account IAM Role and add the external user as a *Trust Relationship*. The *Trust Relationship* is telling AWS that the specified external user can assume this role.
 
 ![External IAM User with IAM Role diagram](/assets/iam/external-user-with-iam-role.png)
 
@@ -93,4 +93,4 @@ An IAM group is simply a collection of IAM users. You can use groups to specify 
 
 ![Complete IAM Group, IAM Role, IAM User, and IAM Policy diagram](/assets/iam/complete-iam-concepts.png)
 
-This should give you a quick idea of IAM and some of its concepts. We will be referring to a few of these in the coming chapters. Next let's quickly look at another AWS concept: the ARN.
+This should give you a quick idea of IAM and some of its concepts. We will be referring to a few of these in the coming chapters. Next let's quickly look at another AWS concept; the ARN.
