@@ -71,19 +71,7 @@ Once all the PRs are merged, we'll tag the repo (tutorial & demo app) with the n
 
 ### Add an Extra Credit Chapter
 
-The core chapters are missing some extra details (for the sake of simplicity) that are necessary once you start customizing the Serverless Stack setup. Additionally, there are cases that we just don't handle in the core chapters. Here is a rough list of topics that get requested fairly frequently:
-
-- Social logins using Facebook or Google
-- Handle the forgot/reset password functionality
-- Allow users to change their password
-- Allow users to update their email
-- Handle public anonymous access to notes
-- Create multiple user roles
-- Exploring DynamoDB in detail
-- More details on how JSX works
-- Exploring CloudFormation in more detail
-
-This is not an exhaustive list. If you have some ideas to extend some of the demo app functionality, feel free to get in touch with us. Here is how to go about adding a new extra credit chapter:
+The core chapters are missing some extra details (for the sake of simplicity) that are necessary once you start customizing the Serverless Stack setup. Additionally, there are cases that we just don't handle in the core chapters. [Here is a rough list of topics that have been requested](https://github.com/AnomalyInnovations/serverless-stack-com/projects/1#column-2785572). This is not an exhaustive list. If you have some ideas to extend some of the demo app functionality, feel free to get in touch with us. Here is how to go about adding a new extra credit chapter:
 
 - Let us know via [Gitter][Gitter] that you are planning to work on it
 - Create a new issue in GitHub to track progress

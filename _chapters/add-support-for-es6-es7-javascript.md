@@ -9,7 +9,7 @@ code: backend
 comments_id: add-support-for-es6-es7-javascript/128
 ---
 
-AWS Lambda recently added support for Node.js v8.10. The supported syntax is a little different compared the frontend React app that we'll be working on a little later. It makes sense to use similar ES features. Specifically, we'll be relying on ES import/exports in our handler functions. To do this we will be transpiling our code using [Babel](https://babeljs.io) and [Webpack 4](https://webpack.github.io). Serverless Framework supports plugins to do this automatically. We are going to use the [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) plugin.
+AWS Lambda recently added support for Node.js v8.10. The supported syntax is a little different when compared to the frontend React app we'll be working on a little later. It makes sense to use similar ES features across both parts of the project – specifically, we'll be relying on ES imports/exports in our handler functions. To do this we will be transpiling our code using [Babel](https://babeljs.io) and [Webpack 4](https://webpack.github.io). Serverless Framework supports plugins to do this automatically. We are going to use the [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) plugin.
 
 All this has been added in the previous chapter using the [`serverless-nodejs-starter`]({% link _chapters/serverless-nodejs-starter.md %}). We created this starter for a couple of reasons:
 
@@ -20,7 +20,7 @@ All this has been added in the previous chapter using the [`serverless-nodejs-st
 
 If you recall we installed this starter using the `serverless install --url https://github.com/AnomalyInnovations/serverless-nodejs-starter --name my-project` command. This is telling Serverless Framework to use the [starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter) as a template to create our project.
 
-In this chapter, let's quickly go over how it is doing this. So you'll be able to make changes to this in the future if you need to.
+In this chapter, let's quickly go over how it's doing this so you'll be able to make changes in the future if you need to.
 
 ### Serverless Webpack
 
@@ -91,9 +91,9 @@ module.exports = {
 };
 ```
 
-The main part of this config is the `entry` attribute that we are automatically generating using the `slsw.lib.entries` that is a part of the `serverless-webpack` plugin. This automatically picks up all our handler functions and packages them. We also use the `babel-loader` on each of these to transpile our code. One other thing to note here is that we are using `nodeExternals` because we do not want Webpack to bundle our `aws-sdk` module. Since it is not compatible with Webpack.
+The main part of this config is the `entry` attribute that we are automatically generating using the `slsw.lib.entries` that is a part of the `serverless-webpack` plugin. This automatically picks up all our handler functions and packages them. We also use the `babel-loader` on each of these to transpile our code. One other thing to note here is that we are using `nodeExternals` because we do not want Webpack to bundle our `aws-sdk` module – it is not compatible with Webpack.
 
-Finally, let's take a quick look at our Babel config. Again you don't need to change it. Just open the `.babelrc` file in your project root. It should look something like this.
+Finally, let's take a quick look at our Babel config. Again you don't need to change it. Just open the `.babelrc` file in your project root – it should look something like this.
 
 ``` json
 {
