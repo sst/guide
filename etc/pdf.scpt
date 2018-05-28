@@ -104,7 +104,6 @@ test-the-configured-apis
 monitoring-deployments-in-seed
 initialize-the-frontend-repo
 manage-environments-in-create-react-app
-signup-with-email-as-alias
 create-a-settings-page
 add-stripe-keys-to-config
 create-a-billing-form
@@ -115,6 +114,7 @@ setting-up-your-project-on-netlify
 custom-domain-in-netlify
 frontend-workflow
 wrapping-up
+further-reading
 giving-back
 changelog
 staying-up-to-date
