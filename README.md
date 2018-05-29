@@ -72,7 +72,7 @@ You can now view the guide locally by visiting `http://localhost:4000/`.
 You can also turn on live reloading and incremental builds while editing.
 
 ``` bash
-$ bundle exec jekyll serve --incremental --livereloading
+$ bundle exec jekyll serve --incremental --livereload
 ```
 
 #### Generating the PDF
