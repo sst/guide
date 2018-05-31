@@ -7,7 +7,7 @@ context: true
 comments_id: configure-cognito-user-pool-in-serverless/164
 ---
 
-Now let's look into setting up Cognito User Pool through the `serverless.yml`. It should be noted that due to a limitation of CloudFormation, the setup here is going to differ a little from the one we did by hand in the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
+Now let's look into setting up Cognito User Pool through the `serverless.yml`. It should be very similar to the one we did by hand in the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
 
 ### Create the Resource
 
