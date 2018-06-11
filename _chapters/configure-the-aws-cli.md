@@ -22,7 +22,7 @@ AWS CLI needs Python 2 version 2.6.5+ or Python 3 version 3.3+ and [Pip](https:/
 $ sudo pip install awscli
 ```
 
-Or using Brew on MacOs
+Or using [Homebrew](https://brew.sh) on macOS
 
 ``` bash
 $ brew install awscli
