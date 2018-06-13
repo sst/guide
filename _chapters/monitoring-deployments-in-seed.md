@@ -38,11 +38,11 @@ Confirm the Change Set by hitting **Confirm**.
 
 ![Confirm Change Set to prod screenshot](/assets/part2/confirm-changeset-to-prod.png)
 
-Head over to the **prod** stage and let it complete.
+Head back to the service page and let it complete.
 
 ### Enable Access Logs
 
-Now before we test our faulty code, we'll turn on API Gateway access logs so we can see the error. Click on **View Deployment**.
+Now before we test our faulty code, we'll turn on API Gateway access logs so we can see the error. Click on the **prod** stage **View Deployment**.
 
 ![Click View Deployment in prod screenshot](/assets/part2/click-view-deployment-in-prod.png)
 

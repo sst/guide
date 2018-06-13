@@ -13,9 +13,9 @@ Start by signing up for a free account [here](https://console.seed.run/signup-ac
 
 ![Create new Seed account screenshot](/assets/part2/create-new-seed-account.png)
 
-Let's **Create your first project**.
+Let's **Add your first app**.
 
-![Create your first Seed project screenshot](/assets/part2/create-your-first-seed-project.png)
+![Add your first Seed app screenshot](/assets/part2/add-your-first-seed-app.png)
 
 Now to add your project, select **GitHub** as your git provider. You'll be asked to give Seed permission to your GitHub account.
 
@@ -39,21 +39,25 @@ aws_access_key_id = YOUR_IAM_ACCESS_KEY
 aws_secret_access_key = YOUR_IAM_SECRET_KEY
 ```
 
-Fill these in and click **Create**.
+Fill these in and click **Add**.
 
 ![Select GitHub repo screenshot](/assets/part2/select-github-repo.png)
 
-Click on your newly created project.
+Click on your newly created app.
 
-![Click on new Seed project screenshot](/assets/part2/click-on-new-seed-project.png)
+![Click on new Seed app screenshot](/assets/part2/click-on-new-seed-app.png)
 
-You'll notice we have two stages (environments) set up by default. Our **dev** stage is hooked up to master. This means that any commits to master will trigger a build in dev.
+You'll notice a few things here. First, we have a service called **default**. A Serverless app can have multiple services within it. A service (roughly speaking) is a reference to a `serverless.yml` file. In our case we have one service in the root of our repo. Second, we have two stages (environments) set up for our app. Our **dev** stage is hooked up to master. This means that any commits to master will trigger a build in dev.
 
-Click on **dev**.
+Click on **default**.
 
-![Stages in Seed project screenshot](/assets/part2/stages-in-seed-project.png)
+![Click default service in Seed project screenshot](/assets/part2/click-default-service-in-seed-project.png)
 
-You'll see that the stage is waiting to be deployed.
+You'll see that the stages this service has. Next click **dev**.
+
+![Click dev stage in Seed project screenshot](/assets/part2/click-dev-stage-in-seed-project.png)
+
+You'll see that we haven't deployed to this stage yet.
 
 ![Dev stage in Seed project screenshot](/assets/part2/dev-stage-in-seed-project.png)
 

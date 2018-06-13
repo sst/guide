@@ -21,7 +21,7 @@ And type in `stripeSecretKey` as the **Key** and the value should be the `STRIPE
 
 ![Add secret dev environment variable screenshot](/assets/part2/add-secret-dev-environment-variable.png)
 
-Next we need to configure our secrets for the `prod` stage. Head back to the project page and click on **prod**.
+Next we need to configure our secrets for the `prod` stage. Head back to the service page and click on **prod**.
 
 ![Click on prod stage in Seed screenshot](/assets/part2/click-on-prod-stage-in-seed.png)
 
