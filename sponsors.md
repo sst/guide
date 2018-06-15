@@ -25,6 +25,7 @@ Serverless Stack is written and maintained by Frank Wang ([@fanjiewang](https://
 - [Leon Gilyadov](https://www.linkedin.com/in/leongilyadov/)
 - [Zoran Maravic](https://www.patreon.com/user/creators?u=10942419)
 - [Darryl Taylor](http://www.reversetelephonedirectoryinfo.com/)
+- [ArtificialChat](https://twitter.com/artificialchat)
 
 
 <a class="button support" target="_blank" href="{{ site.patreon_url }}">Support us on Patreon</a>
