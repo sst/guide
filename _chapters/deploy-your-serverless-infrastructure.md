@@ -61,7 +61,7 @@ A couple of things to note here:
 
 - We are deploying to a stage called `dev`. This has been set in our `serverless.yml` under the `provider:` block. We can override this by explicitly passing it in by running the `serverless deploy --stage $STAGE_NAME` command instead.
 
-- Our deploy command (with the `-v` option) prints out the output we had requested in our resources. For example, `AttachmentsBucketName` is the S3 file uploads bucket thatwas created and the `UserPoolId` is the Id of our User Pool.
+- Our deploy command (with the `-v` option) prints out the output we had requested in our resources. For example, `AttachmentsBucketName` is the S3 file uploads bucket that was created and the `UserPoolId` is the Id of our User Pool.
 
 - Finally, you can run the deploy command and CloudFormation will only update the parts that have changed. So you can confidently run this command without worrying about it re-creating your entire infrastructure from scratch.
 
