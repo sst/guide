@@ -50,10 +50,6 @@ gems:
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-redirect-from
-exclude:
-  - Session.vim
-  - Gemfile
-  - Gemfile.lock
 
 # Front Matter defaults
 defaults:
