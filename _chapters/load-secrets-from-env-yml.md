@@ -11,7 +11,7 @@ As we had previously mentioned, we do not want to store our secret environment v
 
 We have a `env.example` file for this exact purpose.
 
-<img class="code-marker" src="/assets/s.png" />Start by renaming the `env.example` file to `env.yml` and add the following to it.
+<img class="code-marker" src="/assets/s.png" />Start by renaming the `env.example` file to `env.yml` and replace its contents with the following.
 
 ``` yml
 # Add the environment variables for the various stages
