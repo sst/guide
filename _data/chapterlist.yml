@@ -13,6 +13,8 @@ intro-part1:
   chapters:
     - page: What is serverless?
       url: /chapters/what-is-serverless.html
+    - page: What is AWS Lambda?
+      url: /chapters/what-is-aws-lambda.html
     - page: Why create serverless apps?
       url: /chapters/why-create-serverless-apps.html
 

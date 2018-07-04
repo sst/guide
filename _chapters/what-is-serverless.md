@@ -16,20 +16,36 @@ Traditionally, we've built and deployed web applications where we have some degr
 
 4. As our usage scales we need to manage scaling up our server as well. And as a result manage scaling it down when we don't have as much usage.
 
-For smaller companies and individual developers this can be a lot to handle. This ends up distracting from the more important job that we have; building and maintaining the actual application. At larger organisations this is handled by the infrastructure team and usually it is not the responsibility of the individual developer. However, the processes necessary to support this can end up slowing down development times. As you cannot just go ahead and build your application without working with the infrastructure team to help you get up and running. 
+For smaller companies and individual developers this can be a lot to handle. This ends up distracting from the more important job that we have; building and maintaining the actual application. At larger organizations this is handled by the infrastructure team and usually it is not the responsibility of the individual developer. However, the processes necessary to support this can end up slowing down development times. As you cannot just go ahead and build your application without working with the infrastructure team to help you get up and running. As developers we've been looking for a solution to these problems and this is where serverless comes in.
 
-As developers we've been looking for a solution to these problems and this is where serverless comes in. Serverless allows us to build applications where we simply hand the cloud provider (AWS, Azure, or Google Cloud) our code and it runs it for us. It also allocates the appropriate amount of resources to respond to the usage. On our end we only get charged for the time it took our code to execute and the resources it consumed. If we are undergoing a spike of usage, the cloud provider simply creates more instances of our code to respond to the requests. Additionally, our code runs in a secured environment where the cloud provider takes care of keeping the server up to date and secure.
+### Serverless Computing
 
-### AWS Lambda
+Serverless computing (or serverless for short), is an execution model where the cloud provider (AWS, Azure, or Google Cloud) is responsible for executing a piece of code by dynamically allocating the resources. And only charging for the amount of resources used to run the code. The code is typically run inside stateless containers that can be triggered by a variety of events including http requests, database events, queuing services, monitoring alerts, file uploads, scheduled events (cron jobs), etc. The code that is sent to the cloud provider for execution is usually in the form of a function. Hence serverless is sometime referred to as _"Functions as a Service"_ or _"FaaS"_. Following are the FaaS offerings of the major cloud providers:
 
-In serverless applications we are not responsible for handling the requests that come in to our server. Instead the cloud provider handles the requests and sends us an object that contains the relevant info and asks us how we want to respond to it. The request is treated as an event and our code is simply a function that takes this as the input. As a result we are writing functions that are meant to respond to these events. So when a user makes a request, the cloud provider creates a container and runs our function inside it. If there are two concurrent requests, then two separate containers are created to respond to the requests.
+- AWS: [AWS Lambda](https://aws.amazon.com/lambda/)
+- Microsoft Azure: [Azure Functions](https://azure.microsoft.com/en-us/services/functions/)
+- Google Cloud: [Cloud Functions](https://cloud.google.com/functions/)
 
-In the AWS world the serverless function is called [AWS Lambda](https://aws.amazon.com/lambda/) and our serverless backend is simply a collection of Lambdas. Here is what a Lambda function looks like.
+While serverless abstracts the underlying infrastructure away from the developer, servers are still involved in executing our functions.
 
-![Anatomy of a Lambda Function image](/assets/anatomy-of-a-lambda-function.png)
+Since your code is going to be executed as individual functions, there are a couple of things that we need to be aware of.
 
-Here `myHandler` is the name of our Lambda function. The `event` object contains all the information about the event that triggered this Lambda. In our case it'll be information about the HTTP request. The `context` object contains info about the runtime our Lambda function is executing in. After we do all the work inside our Lambda function, we simply call the `callback` function with the results (or the error) and AWS will respond to the HTTP request with it. 
+### Microservices
 
-While this example is in JavaScript (or Node.js), AWS Lambda supports Python, Java, and C# as well. Lambda functions are charged for every 100ms that it uses and as mentioned above they automatically scale to respond to the usage. The Lambda runtime also comes with 512MB of ephemeral disk space and up to 3008MB of memory.
+The biggest change that we are faced with while considering while transitioning to a serverless world is that our application needs to be architectured in the form of functions. You might be used to deploying your application as a single Rails or Express monolith app. But in the serverless world you are typically required to adopt a more microservice based architecture. You can get around this by running your entire application inside a single function as a monolith and by handling the routing yourself. But this isn't recommended since it is better to reduce the size of your functions. We'll talk about this below.
 
-Next, let's take a deeper look into the advantages of serverless including the cost of running our demo app.
+### Stateless Functions
+
+Your functions are typically run inside secure (almost) stateless containers. This means that you won't be able to run code in your application server that executes long after an event has completed or uses a prior execution context to serve a request. You have to effectively assume that your function is invoked anew every single time it runs.
+
+There are some subtleties to this that we will discuss in the [What is AWS Lambda]({% link _chapters/what-is-aws-lambda.md %}) chapter.
+
+### Cold Starts
+
+Since your functions are run inside a container that is brought up on demand to respond to an event, there is some latency associated with it. This is referred to a _Cold Start_. Your container might be kept around for a little while after your function is executed. If another event is triggered made during this time it responds far more quickly and this is typically known as a _Warm Start_.
+
+The duration of a cold starts depends on the implementation of the specific cloud provider. On AWS Lambda it can range from anywhere between a few hundred milliseconds to a few seconds. It can depend on the runtime (or language) used, the size of the function (as a package), and of course the cloud provider in question. Cloud starts have drastically improved over the years as cloud providers have gotten much better at optimizing for lower latency times.
+
+Aside from optimizing your functions, you can use simple tricks like a separate scheduled function to invoke your function every few minutes to keep it warm. [Serverless Framework](https://serverless.com) which we are going to be using in this tutorial has a few plugins to [help keep your functions warm](https://github.com/FidelLimited/serverless-plugin-warmup).
+
+Now that we have a good idea of serverless computing, let's take a deeper look at what is a Lambda function and how your code is going to be executed.
