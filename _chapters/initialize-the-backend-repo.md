@@ -14,7 +14,7 @@ To start with we are going to create our new project and add it to GitHub. We ar
 
 ``` bash
 $ git clone --branch add-a-delete-note-api --depth 1 https://github.com/AnomalyInnovations/serverless-stack-demo-api.git serverless-stack-2-api/
-$ cd serverles-stack-2-api/
+$ cd serverless-stack-2-api/
 ```
 
 <img class="code-marker" src="/assets/s.png" />And remove the `.git/` dir.
