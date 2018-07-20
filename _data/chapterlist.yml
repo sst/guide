@@ -11,11 +11,11 @@ preface:
 intro-part1:
   title: Introduction
   chapters:
-    - page: What is serverless?
+    - page: What is Serverless?
       url: /chapters/what-is-serverless.html
     - page: What is AWS Lambda?
       url: /chapters/what-is-aws-lambda.html
-    - page: Why create serverless apps?
+    - page: Why create Serverless apps?
       url: /chapters/why-create-serverless-apps.html
 
 setup-aws:
@@ -215,7 +215,7 @@ infrastructure-code:
           url: /chapters/configure-cognito-identity-pool-in-serverless.html
     - page: Use environment variables in Lambda functions
       url: /chapters/use-environment-variables-in-lambda-functions.html
-    - page: Deploy your serverless infrastructure
+    - page: Deploy your Serverless infrastructure
       url: /chapters/deploy-your-serverless-infrastructure.html
 
 stripe-api:
@@ -240,9 +240,9 @@ unit-tests:
       url: /chapters/unit-tests-in-serverless.html
 
 serverless-deployments:
-  title: Automating serverless deployments
+  title: Automating Serverless deployments
   chapters:
-    - page: Automating serverless deployments
+    - page: Automating Serverless deployments
       url: /chapters/automating-serverless-deployments.html
       subchapters:
         - page: Setting up your project on Seed
@@ -312,6 +312,8 @@ conclusion:
 extra-backend:
   title: Backend
   chapters:
+    - page: Organizing Serverless projects
+      url: /chapters/organizing-serverless-projects.html
     - page: API Gateway and Lambda Logs
       url: /chapters/api-gateway-and-lambda-logs.html
     - page: Debugging Serverless API Issues
