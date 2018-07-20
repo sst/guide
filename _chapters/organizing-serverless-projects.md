@@ -4,7 +4,7 @@ title: Organizing Serverless Projects
 description: The Microservices + Mono-Repo pattern is the most common way to organize your Serverless Framework application. In this chapter we'll also examine the Multi-Repo and Monolith approach.
 date: 2018-04-02 12:00:00
 context: true
-comments_id:
+comments_id: organizing-serverless-projects/350
 ---
 
 Once your serverless projects start to grow, you are faced with some choices on how to organize your growing projects. In this chapter we'll examine some of the most common ways to structure your projects at a services and application (multiple services) level.
