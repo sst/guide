@@ -3,7 +3,7 @@ layout: post
 title: Create a Build Script
 date: 2018-03-26 00:00:00
 code: frontend
-description: To configure our Create React App with Netlify, we need to add a build script to our project root. And to ensure that we return a HTTP status code of 200 for our React Router routes, add a _redirects file as well.
+description: To configure our Create React App with Netlify, we need to add a build script to our project root. To make sure that we return a HTTP status code of 200 for our React Router routes we will be adding a redirects rule.
 comments_id: create-a-build-script/189
 ---
 
@@ -22,22 +22,22 @@ Before we can add our project to [Netlify](https://www.netlify.com) we just need
 [build]
   base    = ""
   publish = "build"
-  command = "REACT_APP_STAGE=dev npm run build:netlify"
+  command = "REACT_APP_STAGE=dev npm run build"
 
 # Production context: All deploys to the main
 # repository branch will inherit these settings.
 [context.production]
-  command = "REACT_APP_STAGE=prod npm run build:netlify"
+  command = "REACT_APP_STAGE=prod npm run build"
 
 # Deploy Preview context: All Deploy Previews
 # will inherit these settings.
 [context.deploy-preview]
-  command = "REACT_APP_STAGE=dev npm run build:netlify"
+  command = "REACT_APP_STAGE=dev npm run build"
 
 # Branch Deploy context: All deploys that are not in
 # an active Deploy Preview will inherit these settings.
 [context.branch-deploy]
-  command = "REACT_APP_STAGE=dev npm run build:netlify"
+  command = "REACT_APP_STAGE=dev npm run build"
 ```
 
 The build script is configured based on contexts. There is a default one right up top. There are three parts to this:
@@ -46,7 +46,7 @@ The build script is configured based on contexts. There is a default one right u
 
 2. The `publish` option points to where our build is generated. In the case of Create React App it is the `build` directory in our project root.
 
-3. The `command` option is the build command that Netlify will use. If you recall the [Manage environments in Create React App]({% link _chapters/manage-environments-in-create-react-app.md %}) chapter, this will seem familiar. In the default context the command is `REACT_APP_STAGE=dev npm run build:netlify`. The `npm run build:netlify` is something we still need to set up. But the `REACT_APP_STAGE` is defaulted to `dev` here.
+3. The `command` option is the build command that Netlify will use. If you recall the [Manage environments in Create React App]({% link _chapters/manage-environments-in-create-react-app.md %}) chapter, this will seem familiar. In the default context the command is `REACT_APP_STAGE=dev npm run build`.
 
 The production context labelled, `context.production` is the only one where we set the `REACT_APP_STAGE` variable to `prod`. This is when we push to `master`. The `branch-deploy` is what we will be using when we push to any other non-production branch. The `deploy-preview` is for pull requests.
 
@@ -54,15 +54,20 @@ The production context labelled, `context.production` is the only one where we s
 
 Just as the first part of the tutorial, we'll need to handle requests to any non-root paths of our app. Our frontend is a single-page app and the routing is handled on the client side. We need to tell Netlify to always redirect any request to our `index.html` and return the 200 status code for it.
 
-<img class="code-marker" src="/assets/s.png" />To do this, create a file called `_redirects` in your project root and add the following.
+<img class="code-marker" src="/assets/s.png" />To do this, add a redirects rule at the bottom of `netlify.toml`:
 
-```
-/*    /index.html   200
+``` toml
+# Always redirect any request to our index.html
+# and return the status code 200.
+[[redirects]]
+    from    = "/*"
+    to      = "/index.html"
+    status  = 200
 ```
 
 ### Modify the Build Command
 
-Now as a part of our build process we need to move this `_redirects` file to the build directory, so that Netlify can pick it up. We need to modify the build commands in our `package.json`.
+To deploy our app to Netlify we need to modify the build commands in our `package.json`.
 
 <img class="code-marker" src="/assets/s.png" />Replace the `scripts` block in your `package.json` with this.
 
@@ -71,12 +76,11 @@ Now as a part of our build process we need to move this `_redirects` file to the
   "start": "react-scripts start",
   "build": "react-scripts build",
   "test": "react-scripts test --env=jsdom",
-  "build:netlify": "npm run build && cp _redirects build/_redirects",
   "eject": "react-scripts eject"
 }
 ```
 
-You'll notice we are getting rid of our old build and deploy scripts. We are not going to be deploying to S3. And our `build` command is simply running the standard Create React App build command followed by copying the `_redirects` file to the `build/` directory.
+You'll notice we are getting rid of our old build and deploy scripts. We are not going to be deploying to S3.
 
 ### Commit the Changes
 
@@ -95,4 +99,4 @@ $ git commit -m "Adding a Netlify build script"
 $ git push
 ```
 
- Now we are ready to add our project to Netlify. 
+ Now we are ready to add our project to Netlify.
