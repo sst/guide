@@ -22,22 +22,22 @@ Before we can add our project to [Netlify](https://www.netlify.com) we just need
 [build]
   base    = ""
   publish = "build"
-  command = "REACT_APP_STAGE=dev npm run build:netlify"
+  command = "REACT_APP_STAGE=dev npm run build"
 
 # Production context: All deploys to the main
 # repository branch will inherit these settings.
 [context.production]
-  command = "REACT_APP_STAGE=prod npm run build:netlify"
+  command = "REACT_APP_STAGE=prod npm run build"
 
 # Deploy Preview context: All Deploy Previews
 # will inherit these settings.
 [context.deploy-preview]
-  command = "REACT_APP_STAGE=dev npm run build:netlify"
+  command = "REACT_APP_STAGE=dev npm run build"
 
 # Branch Deploy context: All deploys that are not in
 # an active Deploy Preview will inherit these settings.
 [context.branch-deploy]
-  command = "REACT_APP_STAGE=dev npm run build:netlify"
+  command = "REACT_APP_STAGE=dev npm run build"
 ```
 
 The build script is configured based on contexts. There is a default one right up top. There are three parts to this:
@@ -46,7 +46,7 @@ The build script is configured based on contexts. There is a default one right u
 
 2. The `publish` option points to where our build is generated. In the case of Create React App it is the `build` directory in our project root.
 
-3. The `command` option is the build command that Netlify will use. If you recall the [Manage environments in Create React App]({% link _chapters/manage-environments-in-create-react-app.md %}) chapter, this will seem familiar. In the default context the command is `REACT_APP_STAGE=dev npm run build:netlify`. The `npm run build:netlify` is something we still need to set up. But the `REACT_APP_STAGE` is defaulted to `dev` here.
+3. The `command` option is the build command that Netlify will use. If you recall the [Manage environments in Create React App]({% link _chapters/manage-environments-in-create-react-app.md %}) chapter, this will seem familiar. In the default context the command is `REACT_APP_STAGE=dev npm run build`.
 
 The production context labelled, `context.production` is the only one where we set the `REACT_APP_STAGE` variable to `prod`. This is when we push to `master`. The `branch-deploy` is what we will be using when we push to any other non-production branch. The `deploy-preview` is for pull requests.
 
@@ -76,12 +76,11 @@ To deploy our app to Netlify we need to modify the build commands in our `packag
   "start": "react-scripts start",
   "build": "react-scripts build",
   "test": "react-scripts test --env=jsdom",
-  "build:netlify": "npm run build",
   "eject": "react-scripts eject"
 }
 ```
 
-You'll notice we are getting rid of our old build and deploy scripts. We are not going to be deploying to S3. And our `build` command is simply running the standard Create React App build command.
+You'll notice we are getting rid of our old build and deploy scripts. We are not going to be deploying to S3.
 
 ### Commit the Changes
 
