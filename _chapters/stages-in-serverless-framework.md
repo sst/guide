@@ -95,7 +95,7 @@ provider:
     MESSAGE: ${self:custom.myEnvironment.MESSAGE.${self:custom.myStage}}
 ```
 
-There are a couple of things happening here. We first defined the `custom.myStage` variable as `${opt:stage, self:provider.stage}`. This is telling Serverless Framework to use the `--stage` CLI option if it exists. And if it does not, then use the default stage specified by `provider.stage`. We also define the `custom.myEnvironment` section. This contains the value for `MESSAGE` defined for each stage. Finally, we set the environment variable `MESSAGE` as `${self:custom.myEnvironment.MESSAGE.${self.custom.myStage}}`. This sets the variable to pick the value of `self.custom.myEnvironment` depending on the current stage defined in `custom.myStage`.
+There are a couple of things happening here. We first defined the `custom.myStage` variable as `${opt:stage, self:provider.stage}`. This is telling Serverless Framework to use the `--stage` CLI option if it exists. And if it does not, then use the default stage specified by `provider.stage`. We also define the `custom.myEnvironment` section. This contains the value for `MESSAGE` defined for each stage. Finally, we set the environment variable `MESSAGE` as `${self:custom.myEnvironment.MESSAGE.${self:custom.myStage}}`. This sets the variable to pick the value of `self:custom.myEnvironment` depending on the current stage defined in `custom.myStage`.
 
 You can easily extend this format to create separate sets of environment variables for the stages you are deploying to.
 
