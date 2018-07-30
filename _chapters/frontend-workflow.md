@@ -48,7 +48,7 @@ renderLander() {
 
 ``` bash
 $ git add .
-$ git commit -m "Commiting a typo"
+$ git commit -m "Committing a typo"
 ```
 
 ### Create a Branch Deployment
@@ -119,7 +119,7 @@ This will publish our previous version again.
 
 ![Old production deploy is live screenshot](/assets/part2/old-production-deploy-is-live.png)
 
-And that's it! Now you have a automated workflow for building and deploying your Create React App with serverless.
+And that's it! Now you have an automated workflow for building and deploying your Create React App with serverless.
 
 ### Cleanup
 
@@ -132,7 +132,7 @@ renderLander() {
   return (
     <div className="lander">
       <h1>Scratch</h1>
-      <p>A simply note taking app</p>
+      <p>A simple note taking app</p>
       <div>
         <Link to="/login" className="btn btn-info btn-lg">
           Login
