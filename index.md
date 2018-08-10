@@ -39,6 +39,7 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
 
   <h3 id="extra-credit">Extra Credit</h3>
 
+  {% include toc-chapters.html items=site.data.chapterlist.extra-sls-architecture id="extra-sls-architecture" %}
   {% include toc-chapters.html items=site.data.chapterlist.extra-backend id="extra-backend" %}
   {% include toc-chapters.html items=site.data.chapterlist.extra-frontend id="extra-frontend" %}
 </div>
