@@ -130,3 +130,5 @@ Where the `main` function in your `app.js` is responsible for parsing the routes
 The biggest drawback here is that the size of your functions keeps growing. And this can affect the performance of your functions. It also makes it harder to debug your Lambda functions.
 
 And that should roughly cover the main ways to organize your Serverless Framework applications. Hopefully, this chapter has given you a good overview of the various approaches involved along with their benefits and drawbacks.
+
+In the next series of chapters we'll be looking at how to work with multiple services in your Serverless Framework application.
