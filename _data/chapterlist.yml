@@ -325,8 +325,8 @@ extra-sls-architecture:
           url: /chapters/api-gateway-domains-across-services.html
         - page: Cognito as a Serverless service
           url: /chapters/cognito-as-a-serverless-service.html
-    - page: Deploying your microservices
-      url: /chapters/deploying-your-microservices.html
+    - page: Deploying multiple services in Serverless
+      url: /chapters/deploying-multiple-services-in-serverless.html
 
 extra-backend:
   title: Backend
