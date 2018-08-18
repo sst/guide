@@ -1,15 +1,16 @@
 ---
 layout: post
 title: API Gateway Domains Across Services
-description:
+description: To share the same API Gateway domain across multiple services in Serverless we need to "Export" the API Gateway Rest API Id and the API Gateway "RootResourceId" as a CloudFormation cross-stack reference. This will allow us to share the same API Gateway URL across Serverless projects.
 date: 2018-04-02 16:00:00
 context: true
+code: mono-repo
 comments_id: 
 ---
 
-So to summarize so far, we've looked at how to create a Serverless application with multiple services and to link them together using cross-stack references. We've created a separate service for DynamoDB and one with S3.
+So to summarize so far, we are looking at how to create a Serverless application with multiple services and to [link them together using cross-stack references]({% link _chapters/cross-stack-references-in-serverless.md %}). We've created a separate services for [DynamoDB]({% link _chapters/dynamodb-as-a-serverless-service.md %}) and our [S3 file uploads bucket]({% link _chapters/s3-as-a-serverless-service.md %}).
 
-In this chapter we will look at how to work with API Gateway across multiple services. A challenge that you run into when splitting your APIs into multiple services is sharing the same domain for them. You might recall that APIs that are created as a part of the Serverless service get their own unique URL that looks something like:
+In this chapter we will look at how to work with API Gateway across multiple services. A challenge that you run into when splitting your APIs into multiple services, is sharing the same domain for them. You might recall that APIs that are created as a part of the Serverless service get their own unique URL that looks something like:
 
 ```
 https://z6pv80ao4l.execute-api.us-east-1.amazonaws.com/dev
@@ -19,19 +20,19 @@ When you attach a custom domain for your API, it is attached to a specific endpo
 
 You can assign different base paths for your custom domains. For example, `api.example.com/notes` can point to one service while `api.example.com/users` can point to another. But if you try to split your `notes` service up, you'll face the challenge of sharing the custom domain across them.
 
-In the chapter we will look at how to share the API Gateway project across multiple services. For this we will create two separate Serverless services for our APIs. The first is the _notes_ service. This is the same one we've used in our note taking app so far. But for this chapter we will simplify the number of endpoints to focus on the cross-stack aspects of it. For the second service, we'll create a simple _users_ service. This service isn't a part of our note taking app. We just need it for demonstrating the concepts in this chapter.
+In this chapter we will look at how to share the API Gateway project across multiple services. For this we will create two separate Serverless services for our APIs. The first is the _notes_ service. This is the same one we've used in our [note taking app](https://demo2.serverless-stack.com) so far. But for this chapter we will simplify the number of endpoints to focus on the cross-stack aspects of it. For the second service, we'll create a simple _users_ service. This service isn't a part of our note taking app. We just need it to demonstrate the concepts in this chapter.
 
 ### Multiple API Services
 
 We are going to be creating a _notes_ and a _users_ service using the following setup.
 
-- The _notes_ service is going to be our main API service and the _users_ service is going to link to it. This means that the _users_ service will refer to the _notes_ one.
+- The _notes_ service is going to be our main API service and the _users_ service is going to link to it. This means that the _users_ service will refer to the _notes_ service.
 
-- The _notes_ service will be under `/notes` and the _users_ service will be under `/users`.
+- The _notes_ service will be under `/notes` dir and the _users_ service will be under the `/users` dir.
 
 ### Notes Service
 
-First let's look at the _notes_ service. We need to connect it to the [DynamoDB service that we previously created]({% link _chapters/dynamodb-as-a-serverless-service.md %}). In the [example repo]({ site.backend_mono_github_repo }), you'll notice that we have a `notes` service in the `services/` directory. And the `serverless.yml` in this service looks like the following.
+First let's look at the _notes_ service. We need to connect it to the [DynamoDB service that we previously created]({% link _chapters/dynamodb-as-a-serverless-service.md %}). In the [example repo]({{ site.backend_mono_github_repo }}), you'll notice that we have a `notes` service in the `services/` directory with a `serverless.yml`.
 
 ``` yml
 service: notes-app-mono-notes
@@ -104,11 +105,11 @@ resources:
         Name: ${self:custom.stage}-ApiGatewayRestApiRootResourceId
 ```
 
-Let's over some of the details of this service.
+Let's go over some of the details of this service.
 
-1. The Lambda functions in our service need to know which DynamoDB table to connect to. To do this we create an environment variable called `tableName` with the value `'Fn::ImportValue': ${self:custom.stage}-NotesTable`. This is the first time we are using the the import portion of our cross-stack reference. Back in the chapter where we [create the DynamoDB service]({% link _chapters/dynamodb-as-a-serverless-service.md %}), we exported `${self:custom.stage}-NotesTable`. The value for this cross-stack reference is the name of the table. And we are importing it here using the `Fn::ImportValue` CloudFormation method. So in our Lambda function `process.env.tableName` should be the generated name of our notes table.
+1. The Lambda functions in our service need to know which DynamoDB table to connect to. To do this we create an environment variable called `tableName` with the value `'Fn::ImportValue': ${self:custom.stage}-NotesTable`. This is the first time we are using the import portion of our cross-stack reference. Back in the chapter where we [created the DynamoDB service]({% link _chapters/dynamodb-as-a-serverless-service.md %}), we exported `${self:custom.stage}-NotesTable`. The value for this cross-stack reference is the name of the table. And we are importing it here using the `Fn::ImportValue` CloudFormation method. So in our Lambda function, `process.env.tableName` should be the generated name of our notes table.
 
-2. Next, we need to give our Lambda function permission to talk to this table by adding an IAM policy. The IAM policy needs the [ARN]({% link _chapters/what-is-an-arn.md %}) of the table. We had exported this value in our DynamoDB service as well. And just as above, we can refer to it by `'Fn::ImportValue': ${self:custom.stage}-NotesTableArn`.
+2. Next, we need to give our Lambda function permission to talk to this table by adding an IAM policy. The IAM policy needs the [ARN]({% link _chapters/what-is-an-arn.md %}) of the table. We had exported this value in our [DynamoDB service]({% link _chapters/dynamodb-as-a-serverless-service.md %}) as well. And just as above, we can refer to it by `'Fn::ImportValue': ${self:custom.stage}-NotesTableArn`.
 
 3. We are going to export a couple values in this service to be able to share this API Gateway resource in our _users_ service.
 
@@ -118,7 +119,7 @@ Let's over some of the details of this service.
 
 ### Users Service
 
-In the [example repo]({ site.backend_mono_github_repo }), open the `users` service in the `services/` directory.
+In the [example repo]({{ site.backend_mono_github_repo }}), open the `users` service in the `services/` directory.
 
 ``` yml
 service: notes-app-mono-users
@@ -187,12 +188,12 @@ Let's go over this quickly.
 
 - To share the same API Gateway domain as our _notes_ service, we are adding a `apiGateway:` section to the `provider:` block.
 
-  1. We state that we want to use the `restApiId` of our _notes_ service. We do this by using the cross-stack refernce `'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiId` that we had exported above.
+  1. Here we state that we want to use the `restApiId` of our _notes_ service. We do this by using the cross-stack reference `'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiId` that we had exported above.
 
-  2. We also state that we want all the APIs in our service to be linked under the root path of our _notes_ service. We do this by setting the `restApiRootResourceId` to the corss-stack reference `'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiRootResourceId` from above.
+  2. We also state that we want all the APIs in our service to be linked under the root path of our _notes_ service. We do this by setting the `restApiRootResourceId` to the cross-stack reference `'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiRootResourceId` from above.
 
-- Finally, we don't need to export anything in this service since we are really creating new services here that need to be referenced.
+- Finally, we don't need to export anything in this service since we aren't creating any new resources that need to be referenced.
 
 The key thing to note in this setup is that API Gateway needs to know where to attach the routes that are created in this service. We want the `/users` path to be attached to the root of our API Gateway project. Hence the `restApiRootResourceId` points to the root resource of our _notes_ service. Of course we don't have to do it this way. We can organize our service such that the `/users` path is created in our main API service and we link to it here.
 
-And that's it. Next let's tie our entire stack together and secure it using Cognito User Pool and Identity Pool.
+Next let's tie our entire stack together and secure it using Cognito User Pool and Identity Pool.

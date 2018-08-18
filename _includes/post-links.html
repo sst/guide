@@ -36,6 +36,10 @@
     {% capture repo_url %}{{ site.backend_github_repo }}{% endcapture %}
     {% capture repo_tag %}Backend Part II Source{% endcapture %}
 
+  {% elsif page.code == 'mono-repo' %}
+    {% capture repo_url %}{{ site.backend_mono_github_repo }}{% endcapture %}
+    {% capture repo_tag %}Mono-repo Backend Source{% endcapture %}
+
   {% elsif page.code == 'frontend_full' %}
     {% capture repo_url %}{{ site.frontend_github_repo }}{% endcapture %}
     {% capture repo_tag %}Frontend Part II Source{% endcapture %}

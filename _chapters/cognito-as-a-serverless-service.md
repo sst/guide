@@ -1,15 +1,16 @@
 ---
 layout: post
 title: Cognito as a Serverless Service
-description:
+description: To generate the Cognito Identity Pool IAM role dynamically across services in Serverless, we need to use cross-stack references and import them using the "Fn::ImportValue" CloudFormation function.
 date: 2018-04-02 17:00:00
 context: true
+code: mono-repo
 comments_id: 
 ---
 
-Now that we have all of our resources created ([API]({% link _chapters/api-gateway-domains-across-services.md %}), [uploads]({% link _chapters/s3-as-a-serverless-service.md %}), [database]({% link _chapters/dynamodb-as-a-serverless-service.md %})), let's secure them using Cognito User Pool as an authentication provider and Cognito Federated Identities to control access. In this chapter we are going to create a Serverless service that will use cross-stack references to tie all of our services together.
+Now that we have all of our resources created ([API]({% link _chapters/api-gateway-domains-across-services.md %}), [uploads]({% link _chapters/s3-as-a-serverless-service.md %}), [database]({% link _chapters/dynamodb-as-a-serverless-service.md %})), let's secure them using Cognito User Pool as an authentication provider and Cognito Federated Identities to control access. In this chapter we are going to create a Serverless service that will use cross-stack references to tie all of our resources together.
 
-In the [example repo]({ site.backend_mono_github_repo }), open the `auth` service in the `services/` directory.
+In the [example repo]({{ site.backend_mono_github_repo }}), open the `auth` service in the `services/` directory.
 
 ``` yml
 service: notes-app-mono-auth
@@ -150,7 +151,7 @@ resources:
         Ref: CognitoIdentityPool
 ```
 
-This can seem like a lot but both the `CognitoUserPool:` and the `CognitoUserPoolClient:` section are simply creating our Cognito User Pool. And you'll notice that both these sections are not using any cross-stack references. They are effectively standlone.
+This can seem like a lot but both the `CognitoUserPool:` and the `CognitoUserPoolClient:` section are simply creating our Cognito User Pool. And you'll notice that both these sections are not using any cross-stack references. They are effectively standalone. If you are looking for more details on this, [refer to the Part II of this guide]({% link _chapters/configure-cognito-user-pool-in-serverless.md %}).
 
 ### Cognito Identity Pool
 
@@ -158,7 +159,7 @@ The Cognito Identity Pool on the other hand needs to reference all the resources
 
 - `CognitoIdentityPool:` creates the role and states that the Cognito User Pool that we created above is going to be our auth provider.
 
-- The Identity Pool has an IAM role attached to it's authenticated and unauthenticated users. Since, we only allow authenticated users to our note taking app; we only have one role. The `CognitoIdentityPoolRoles:` section states that we have an authenicated user role that we are going to create below and we are referencing it here by doing `Fn::GetAtt: [CognitoAuthRole, Arn]`.
+- The Identity Pool has an IAM role attached to its authenticated and unauthenticated users. Since, we only allow authenticated users to our note taking app; we only have one role. The `CognitoIdentityPoolRoles:` section states that we have an authenticated user role that we are going to create below and we are referencing it here by doing `Fn::GetAtt: [CognitoAuthRole, Arn]`.
 
 - Finally, the `CognitoAuthRole:` section creates the IAM role that will allow access to our API and S3 file uploads bucket.
 
@@ -202,13 +203,13 @@ This is the relevant section from the above `serverless.yml`.
         - '{cognito-identity.amazonaws.com:sub}/*'
 ```
 
-The API Gateway resource in our IAM role looks like something like:
+The API Gateway resource in our IAM role looks something like:
 
 ```
 arn:aws:execute-api:us-east-1:12345678:qwe123rty456/*
 ```
 
-Where `us-east-1` is the region, `12345678` is the AWS account Id, and `qwe123rty456` is the API Gateway Resource Id. To construct this we need the cross-stack reference of the API Gateway Resource Id that we exported in the [API Gateway chapter]({% link _chapters/api-gateway-domains-across-services.md %}). And we can import it like so:
+Where `us-east-1` is the region, `12345678` is the AWS account Id, and `qwe123rty456` is the API Gateway Resource Id. To construct this dynamically we need the cross-stack reference of the API Gateway Resource Id that we exported in the [API Gateway chapter]({% link _chapters/api-gateway-domains-across-services.md %}). And we can import it like so:
 
 ```
 'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiId
@@ -228,7 +229,7 @@ Where `my_s3_bucket` is the name of the bucket. We are going to use the generate
 'Fn::ImportValue': ${self:custom.stage}-AttachmentsBucketArn
 ```
 
-And finally, you'll notice that we are outputting a couple of things in this service. We need the Ids of the Cognito resources created in our frontend. But we don't have to export anything else.
+And finally, you'll notice that we are outputting a couple of things in this service. We need the Ids of the Cognito resources created in our frontend. But we don't have to export any cross-stack values.
 
-Now all of our resources are complete. Next we'll look at how to deploy all of our services. There is a bit of a wrinkle here since we have some dependencies between our services.
+Now that all of our resources are complete, we'll look at how to deploy them. There is a bit of a wrinkle here since we have some dependencies between our services.
 

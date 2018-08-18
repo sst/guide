@@ -1,15 +1,16 @@
 ---
 layout: post
 title: DynamoDB as a Serverless Service
-description:
+description: To use CloudFormation cross-stack references for DynamoDB in Serverless we need to "Export" the table name using the "Ref" and the ARN of the table using "Fn::GetAtt".
 date: 2018-04-02 14:00:00
 context: true
+code: mono-repo
 comments_id: 
 ---
 
-While creating a Serverless application with multiple services, you might want to split the DynamoDB portion out separately. This can be useful because you are probably not going to be making changes to this very frequently. Also, if you have multiple development environments, it is not likely that you are going to connect them to different database environments. For example, you might give your the developers on your team their on environment but they might all connect to the same DynamoDB environment. So it would make sense to configure DynamoDB along with the other similar services in your application.
+While creating a Serverless application with multiple services, you might want to split the DynamoDB portion out separately. This can be useful because you are probably not going to be making changes to this very frequently. Also, if you have multiple development environments, it is not likely that you are going to connect them to different database environments. For example, you might give the developers on your team their own environment but they might all connect to the same DynamoDB environment. So it would make sense to configure DynamoDB separately from the application API services.
 
-In the [example repo]({ site.backend_mono_github_repo }), you'll notice that we have a `database` service in the `services/` directory. And the `serverless.yml` in this service helps us manage our DynamoDB table.
+In the [example repo]({{ site.backend_mono_github_repo }}), you'll notice that we have a `database` service in the `services/` directory. And the `serverless.yml` in this service helps us manage our DynamoDB table.
 
 ``` yml
 service: notes-app-mono-database
@@ -68,9 +69,9 @@ resources:
         Name: ${self:custom.stage}-NotesTable
 ```
 
-If you have followed along with [Part 2](/#part-2) of our guide, the `Resources:` section should seem familiar. It is creating the Notes table that we use in our note taking application. The key addition here in regards to the cross-stack references is in the `Outputs:` section. Let's go over them quickly.
+If you have followed along with [Part II of our guide]({% link _chapters/configure-dynamodb-in-serverless.md %}), the `Resources:` section should seem familiar. It is creating the Notes table that we use in our [note taking application]({{ site.backend_github_repo }}). The key addition here in regards to the cross-stack references is in the `Outputs:` section. Let's go over them quickly.
 
-1. We are exporting two value here. The `NotesTableArn` is the [ARN]({% link _chapters/what-is-an-arn.md %}) of the DynamoDB table that we are creating. And the `NotesTableName` which is the name of the table being created. The ARN is necessary for any IAM roles that are going to reference the DynamoDB table. The table name on the other hand is what we need in our Lambda functions while making queries to it.
+1. We are exporting two values here. The `NotesTableArn` is the [ARN]({% link _chapters/what-is-an-arn.md %}) of the DynamoDB table that we are creating. And the `NotesTableName` which is the name of the table being created. The ARN is necessary for any IAM roles that are going to reference the DynamoDB table. The table name on the other hand is what we need in our Lambda functions while making queries to it.
 
 2. The export names for both the values is based on the stage we are using to deploy this service - `${self:custom.stage}`. This is important because we want our entire application to be easily replicable across multiple stages. If we don't include the stage name the exports will thrash when we deploy to multiple stages.
 

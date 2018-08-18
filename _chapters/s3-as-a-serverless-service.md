@@ -1,22 +1,23 @@
 ---
 layout: post
 title: S3 as a Serverless Service
-description:
+description: To use CloudFormation cross-stack references for S3 in Serverless we need to "Export" the S3 bucket name using the "Ref" and the ARN of the S3 bucket using "Fn::GetAtt".
 date: 2018-04-02 15:00:00
 context: true
+code: mono-repo
 comments_id: 
 ---
 
-Just as we did with DynamoDB, we'll look at splitting S3 into a separate Serverless service. It should be noted that for our simple note taking application, it does make too much sense to split S3 into its own service. But it is useful to over the case to better understand cross-stack references in Serverless.
+Just as we did with [DynamoDB in the last chapter]({% link _chapters/dynamodb-as-a-serverless-service.md %}), we'll look at splitting S3 into a separate Serverless service. It should be noted that for our simple note taking application, it does make too much sense to split S3 into its own service. But it is useful to go over the case to better understand cross-stack references in Serverless.
 
-In the [example repo]({ site.backend_mono_github_repo }), you'll notice that we have a `uploads` service in the `services/` directory. And the `serverless.yml` in this service looks like the following.
+In the [example repo]({{ site.backend_mono_github_repo }}), you'll notice that we have a `uploads` service in the `services/` directory. And the `serverless.yml` in this service looks like the following.
 
 ``` yml
 service: notes-app-mono-uploads
 
 custom:
   # Our stage is based on what is passed in when running serverless
-  # commands. Or fallsback to what we have set in the provider section.
+  # commands. Or falls back to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
 
 provider:
@@ -63,7 +64,7 @@ resources:
         Name: ${self:custom.stage}-AttachmentsBucket
 ```
 
-Most of the `Resources:` section should be fairly straightforward. So let's go over the cross-stack exports in the `Outputs:` section.
+Most of the `Resources:` section should be fairly straightforward and is based on [Part II of this guide]({% link _chapters/configure-s3-in-serverless.md %}). So let's go over the cross-stack exports in the `Outputs:` section.
 
 1. Just as in the [DynamoDB service]({% link _chapters/dynamodb-as-a-serverless-service.md %}), we are exporting the [ARN]({% link _chapters/what-is-an-arn.md %}) (`AttachmentsBucketArn`) and the name of the bucket (`AttachmentsBucketName`).
 
