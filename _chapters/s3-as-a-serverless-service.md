@@ -5,7 +5,7 @@ description: To use CloudFormation cross-stack references for S3 in Serverless w
 date: 2018-04-02 15:00:00
 context: true
 code: mono-repo
-comments_id: 
+comments_id: s3-as-a-serverless-service/407
 ---
 
 Just as we did with [DynamoDB in the last chapter]({% link _chapters/dynamodb-as-a-serverless-service.md %}), we'll look at splitting S3 into a separate Serverless service. It should be noted that for our simple note taking application, it does make too much sense to split S3 into its own service. But it is useful to go over the case to better understand cross-stack references in Serverless.

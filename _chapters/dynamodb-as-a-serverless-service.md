@@ -5,7 +5,7 @@ description: To use CloudFormation cross-stack references for DynamoDB in Server
 date: 2018-04-02 14:00:00
 context: true
 code: mono-repo
-comments_id: 
+comments_id: dynamodb-as-a-serverless-service/406
 ---
 
 While creating a Serverless application with multiple services, you might want to split the DynamoDB portion out separately. This can be useful because you are probably not going to be making changes to this very frequently. Also, if you have multiple development environments, it is not likely that you are going to connect them to different database environments. For example, you might give the developers on your team their own environment but they might all connect to the same DynamoDB environment. So it would make sense to configure DynamoDB separately from the application API services.

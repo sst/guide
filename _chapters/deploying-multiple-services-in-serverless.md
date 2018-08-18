@@ -5,7 +5,7 @@ description: To deploy multiple Serverless services that are using CloudFormatio
 date: 2018-04-02 18:00:00
 context: true
 code: mono-repo
-comments_id: 
+comments_id: deploying-multiple-services-in-serverless/410
 ---
 
 Over the last few chapters we have looked at how to:

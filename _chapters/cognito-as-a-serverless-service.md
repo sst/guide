@@ -5,7 +5,7 @@ description: To generate the Cognito Identity Pool IAM role dynamically across s
 date: 2018-04-02 17:00:00
 context: true
 code: mono-repo
-comments_id: 
+comments_id: cognito-as-a-serverless-service/409
 ---
 
 Now that we have all of our resources created ([API]({% link _chapters/api-gateway-domains-across-services.md %}), [uploads]({% link _chapters/s3-as-a-serverless-service.md %}), [database]({% link _chapters/dynamodb-as-a-serverless-service.md %})), let's secure them using Cognito User Pool as an authentication provider and Cognito Federated Identities to control access. In this chapter we are going to create a Serverless service that will use cross-stack references to tie all of our resources together.
