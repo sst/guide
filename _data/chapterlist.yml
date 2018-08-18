@@ -309,11 +309,28 @@ conclusion:
     - page: Staying up to date
       url: /chapters/staying-up-to-date.html
 
-extra-backend:
-  title: Backend
+extra-sls-architecture:
+  title: Serverless architecture
   chapters:
     - page: Organizing Serverless projects
       url: /chapters/organizing-serverless-projects.html
+    - page: Cross-stack references in Serverless
+      url: /chapters/cross-stack-references-in-serverless.html
+      subchapters:
+        - page: DyanamoDB as a Serverless service
+          url: /chapters/dynamodb-as-a-serverless-service.html
+        - page: S3 as a Serverless service
+          url: /chapters/s3-as-a-serverless-service.html
+        - page: API Gateway domains across services
+          url: /chapters/api-gateway-domains-across-services.html
+        - page: Cognito as a Serverless service
+          url: /chapters/cognito-as-a-serverless-service.html
+    - page: Deploying multiple services in Serverless
+      url: /chapters/deploying-multiple-services-in-serverless.html
+
+extra-backend:
+  title: Backend
+  chapters:
     - page: API Gateway and Lambda Logs
       url: /chapters/api-gateway-and-lambda-logs.html
     - page: Debugging Serverless API Issues
