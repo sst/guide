@@ -447,7 +447,7 @@ div.home .updates {
       margin-bottom: 8px;
       color: $secondary-text-color;
     }
-    a {
+    & > a {
       font-size: 14px;
     }
   }

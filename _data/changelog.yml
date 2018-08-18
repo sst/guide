@@ -1,4 +1,8 @@
 current:
+  title: "Added section on Serverless architecture"
+  desc: "Aug 18, 2018: Adding a new section on organizing Serverless applications. Outlining how to use CloudFormation cross-stack references to link multiple Serverless services."
+
+v3-1:
   title: "Update to use UsernameAttributes"
   desc: "May 24, 2018: CloudFormation now supports UsernameAttributes. This means that we don't need the email as alias work around."
 
