@@ -118,6 +118,13 @@ further-reading
 giving-back
 changelog
 staying-up-to-date
+organizing-serverless-projects
+cross-stack-references-in-serverless
+dynamodb-as-a-serverless-service
+s3-as-a-serverless-service
+api-gateway-domains-across-services
+cognito-as-a-serverless-service
+deploying-multiple-services-in-serverless
 api-gateway-and-lambda-logs
 debugging-serverless-api-issues
 serverless-environment-variables
