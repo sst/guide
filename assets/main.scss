@@ -381,7 +381,8 @@ div.home .feature-pitch {
 }
 div.home .feature-desc,
 div.home .updates-desc,
-div.home .quotes-desc {
+div.home .quotes-desc,
+div.home .readers-desc {
   font-size: 18px;
   text-align: center;
   color: $secondary-text-color;
@@ -497,6 +498,44 @@ div.home ul.quotes p {
     font-size: 14px;
     font-weight: bold;
   }
+}
+div.home div.readers {
+}
+div.home div.readers ul.logos {
+  margin-left: 0;
+  margin-bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  @include media-query($on-palm) {
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    justify-content: flex-start;
+  }
+}
+div.home div.readers ul.logos li {
+  list-style-type: none;
+  width: 200px;
+  height: 100px;
+  flex-shrink: 0;
+  margin: $spacing-unit / 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include media-query($on-palm) {
+    margin: $spacing-unit / 2 0;
+  }
+}
+div.home div.readers ul.logos li img {
+  width: 120px;
+  height: auto;
+}
+div.home div.readers ul.logos li.tall img {
+  width: auto;
+  height: 50px;
 }
 
 /**
