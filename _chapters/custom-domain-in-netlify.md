@@ -61,7 +61,7 @@ Here click on **Create Record Set**.
 
 ![Create first Route 53 record set screenshot](/assets/part2/create-first-route-53-record-set.png)
 
-Select **Type** as **A - IPv4 address** and set the **Value** to **104.198.14.52**. And hit **Create**.
+Select **Type** as **A - IPv4 address** and set the **Value** to **104.198.14.52**. And hit **Create**. We get this IP from the [Netlify docs on adding custom domains](https://www.netlify.com/docs/custom-domains/).
 
 ![Add A record screenshot](/assets/part2/add-a-record.png)
 
