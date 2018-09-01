@@ -517,10 +517,10 @@ div.home div.readers ul.logos {
 }
 div.home div.readers ul.logos li {
   list-style-type: none;
-  width: 200px;
+  width: 185px;
   height: 100px;
   flex-shrink: 0;
-  margin: $spacing-unit / 2;
+  margin: 10px 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -530,12 +530,12 @@ div.home div.readers ul.logos li {
   }
 }
 div.home div.readers ul.logos li img {
-  width: 120px;
+  width: 90px;
   height: auto;
 }
 div.home div.readers ul.logos li.tall img {
   width: auto;
-  height: 50px;
+  height: 35px;
 }
 
 /**
