@@ -527,6 +527,7 @@ div.home div.readers ul.logos li {
 
   @include media-query($on-palm) {
     margin: $spacing-unit / 2 0;
+    width: 140px;
   }
 }
 div.home div.readers ul.logos li img {
