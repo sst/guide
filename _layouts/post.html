@@ -33,26 +33,8 @@ layout: default
         {{ content }}
       </div>
 
-      <div class="post-sponsor">
-        <hr />
-        <a target="_blank" href="https://seed.run"><img width="435" alt="A fully-managed CI/CD pipeline for Serverless" src="/assets/seed-serverless-ci-cd.png" /></a>
-      </div>
-
-      <div class="post-closing">
-        <p>If you liked this post, please <a target="_blank" href="{{ site.newsletter_signup_form }}">subscribe to our newsletter</a>, <a target="_blank" href="{{ site.github_repo }}">give us a star on GitHub</a>, and <a target="_blank" href="{{ site.twitter_url }}">follow us on Twitter</a>.</p>
-      </div>
-
-      {% include post-links.html %}
-
-      <div class="extras">
-        <div class="container">
-          <div class="newsletter">
-            {% include newsletter-form.html %}
-          </div>
-        </div>
-      </div>
-
       <div class="post-footer">
+        <hr />
         {% if page.previous.url %}
         <a class="previous" href="{{ page.previous.url }}">&larr; Previous</a>
         {% endif %}
@@ -60,6 +42,25 @@ layout: default
         {% if page.next.url %}
         <a class="next" href="{{ page.next.url }}">Next &rarr;</a>
         {% endif %}
+      </div>
+
+      {% include post-links.html %}
+
+      <div class="post-closing">
+        <p>If you liked this post, please <a target="_blank" href="{{ site.newsletter_signup_form }}">subscribe to our newsletter</a>, <a target="_blank" href="{{ site.github_repo }}">give us a star on GitHub</a>, and <a target="_blank" href="{{ site.twitter_url }}">follow us on Twitter</a>.</p>
+      </div>
+
+      <div class="post-sponsor">
+        <p>Brought to you by</p>
+        <a target="_blank" href="https://seed.run"><img width="435" alt="A fully-managed CI/CD pipeline for Serverless" src="/assets/seed-serverless-ci-cd.png" /></a>
+      </div>
+
+      <div class="extras">
+        <div class="container">
+          <div class="newsletter">
+            {% include newsletter-form.html %}
+          </div>
+        </div>
       </div>
 
     </article>

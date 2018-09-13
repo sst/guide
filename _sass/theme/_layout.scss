@@ -540,8 +540,37 @@
 }
 
 .post-sponsor {
-  margin-top: 2 * $spacing-unit;
+  margin-top: 1.5 * $spacing-unit;
   margin-bottom: $spacing-unit;
+  text-align: center;
+
+  p {
+    color: $tertiary-text-color;
+    font-size: 14px;
+    &:last-child {
+      padding-top: 5px;
+    }
+  }
+}
+
+.post-closing {
+  margin-top: $spacing-unit / 2;
+  text-align: center;
+
+  p {
+    font-style: italic;
+    color: $secondary-text-color;
+    a {
+      font-weight: bold;
+    }
+  }
+}
+
+.post-footer {
+  @extend %clearfix;
+  margin-top: 2 * $spacing-unit;
+  margin-bottom: $spacing-unit / 2;
+
   text-align: center;
 
   hr {
@@ -560,26 +589,6 @@
       top: -1.5 * $spacing-unit;
     }
   }
-}
-
-.post-closing {
-  margin-bottom: $spacing-unit;
-  text-align: center;
-
-  p {
-    font-style: italic;
-    color: $secondary-text-color;
-    a {
-      font-weight: bold;
-    }
-  }
-}
-
-.post-footer {
-  @extend %clearfix;
-  margin-top: 54px;
-
-  text-align: center;
 
   & > a {
     @extend %a-secondary;
@@ -601,6 +610,7 @@
 }
 
 .post .extras {
+  margin-bottom: $spacing-unit;
   @extend %extras-section;
 }
 

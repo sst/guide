@@ -195,7 +195,6 @@ div.support-footer {
 
 %extras-section {
   text-align: center;
-  margin-top: $spacing-unit + 15px;
 
   div.container {
     display: block;
@@ -660,6 +659,7 @@ div.home .share-container {
 }
 
 div.home .extras {
+  margin-top: $spacing-unit + 15px;
   @extend %extras-section;
 }
 
