@@ -355,3 +355,5 @@ extra-frontend:
       url: /chapters/code-splitting-in-create-react-app.html
     - page: Environments in Create React App
       url: /chapters/environments-in-create-react-app.html
+    - page: Facebook Login with Cognito using AWS Amplify
+      url: /chapters/facebook-login-with-cognito-using-aws-amplify.html
