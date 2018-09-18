@@ -2,8 +2,8 @@
 layout: post
 title: Serverless Node.js Starter
 redirect_from: /chapters/serverless-es7-service.html
-date: 2018-04-12 00:00:00
 description: A Serverless Node.js starter project that adds support for ES6/ES7 async/await methods, import/export, and unit tests to your Serverless Framework project.
+date: 2018-04-12 00:00:00
 context: true
 comments_id: 72
 ---

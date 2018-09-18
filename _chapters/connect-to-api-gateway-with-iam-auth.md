@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Connect to API Gateway with IAM Auth
-date: 2018-04-11 00:00:00
 description: For our React.js app to make requests to a serverless backend API secured using AWS IAM, we need to sign our requests using Signature Version 4. But to be able to do that we need to use our User Pool user token and get temporary IAM credentials from our Identity Pool. Using these temporary IAM credentials we can then generate the Signature Version 4 security headers and make a request using HTTP fetch.
+date: 2018-04-11 00:00:00
 context: true
 code: frontend
 comments_id: 113
