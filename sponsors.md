@@ -27,6 +27,7 @@ Serverless Stack is written and maintained by Frank Wang ([@fanjiewang](https://
 - [Darryl Taylor](http://www.reversetelephonedirectoryinfo.com/)
 - [ArtificialChat](https://twitter.com/artificialchat)
 - [Sasha Klien](https://sashafklein.com)
+- [Alex Vainberg](https://www.youtube.com/arooly)
 
 
 <a class="button support" target="_blank" href="{{ site.patreon_url }}">Support us on Patreon</a>
