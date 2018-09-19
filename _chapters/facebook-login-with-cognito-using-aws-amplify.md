@@ -125,7 +125,7 @@ async componentDidMount() {
 loadFacebookSDK() {
   window.fbAsyncInit = function() {
     window.FB.init({
-      appId            : config.social.facebook,
+      appId            : config.social.FB,
       autoLogAppEvents : true,
       xfbml            : true,
       version          : 'v3.1'
@@ -143,6 +143,12 @@ loadFacebookSDK() {
 ```
 
 And we also load the current authenticated user using the `Auth.currentAuthenticatedUser` method. Where `Auth` is a part of the AWS Amplify package.
+
+<img class="code-marker" src="/assets/s.png" />Make sure to import the config at the top of `src/App.js`.
+
+``` coffee
+import config from "./config";
+```
 
 <img class="code-marker" src="/assets/s.png" />Now we'll create a Facebook login button component in `src/components/FacebookButton.js`.
 
