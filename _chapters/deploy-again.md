@@ -93,4 +93,4 @@ Now simply run the following command from your project root when you want to dep
 $ npm run deploy
 ```
 
-Our app is now complete. And this is the end of Part I. Next we'll be looking at how to automate this stack so we can use it for our future projects.
+Our app is now complete. And this is the end of Part I. Next we'll be looking at how to automate this stack so we can use it for our future projects. You can also take a look at how to add a Login with Facebook option in the [Facebook Login with Cognito using AWS Amplify]({% link _chapters/facebook-login-with-cognito-using-aws-amplify.md %}) chapter. It builds on what we have covered in Part I so far.
