@@ -24,8 +24,7 @@ Resources:
   NotesTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      # Generate a name based on the stage
-      TableName: ${self:custom.stage}-notes
+      TableName: ${self:custom.tableName}
       AttributeDefinitions:
         - AttributeName: userId
           AttributeType: S
@@ -46,7 +45,7 @@ Let's quickly go over what we are doing here.
 
 1. We are describing a DynamoDB table resource called `NotesTable`.
 
-2. The table name is based on the stage we are deploying to - `${self:custom.stage}-notes`. The reason this is dynamically set is because we want to create a separate table when we deploy to a new stage (environment). So when we deploy to `dev` we will create a DynamoDB table called `dev-notes` and when we deploy to `prod`, it'll be called `prod-notes`. This allows us to clearly separate the resources (and data) we use in our various environments.
+2. The table we get from a custom variable `${self:custom.tableName}`. This is generated dynamically in our `serverless.yml`. We will look at this in detail below.
 
 3. We are also configuring the two attributes of our table as `userId` and `noteId`.
 
@@ -72,6 +71,8 @@ custom:
   # Our stage is based on what is passed in when running serverless
   # commands. Or fallsback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
+  # Set the table name here so we can use it while testing locally
+  tableName: ${self:custom.stage}-notes
   # Set our DynamoDB throughput for prod and all other non-prod stages.
   tableThroughputs:
     prod: 5
@@ -87,6 +88,8 @@ We added a couple of things here that are worth spending some time on:
 
 - We first create a custom variable called `stage`. You might be wondering why we need a custom variable for this when we already have `stage: dev` in the `provider:` block. This is because we want to set the current stage of our project based on what is set through the `serverless deploy --stage $STAGE` command. And if a stage is not set when we deploy, we want to fallback to the one we have set in the provider block. So `${opt:stage, self:provider.stage}`, is telling Serverless to first look for the `opt:stage` (the one passed in through the command line), and then fallback to `self:provider.stage` (the one in the provider block.
 
+- The table name is based on the stage we are deploying to - `${self:custom.stage}-notes`. The reason this is dynamically set is because we want to create a separate table when we deploy to a new stage (environment). So when we deploy to `dev` we will create a DynamoDB table called `dev-notes` and when we deploy to `prod`, it'll be called `prod-notes`. This allows us to clearly separate the resources (and data) we use in our various environments.
+
 - Now we want to configure how we provision the read/write capacity for our table. Specifically, we want to let our production environment have a higher throughput than our dev (or any other non-prod environment). To do this we created a custom variable called `tableThroughputs`, that has two separate settings called `prod` and `default`. The `prod` option is set to `5` while `default` (which will be used for all non-prod cases) is set to `1`.
 
 - Finally, to implement the two options we use `tableThroughput: ${self:custom.tableThroughputs.${self:custom.stage}, self:custom.tableThroughputs.default}`. This is creating a custom variable called `tableThroughput` (which we used in our DynamoDB resource above). This is set to look for the relevant option in the `tableThroughputs` variable (note the plural form). So for example, if we are in prod, the throughput will be based on `self:custom.tableThroughputs.prod`. But if you are in a stage called `alpha` it'll be set to `self:custom.tableThroughputs.alpha`, which does not exist. So it'll fallback to `self:custom.tableThroughputs.default`, which is set to `1`.
@@ -101,8 +104,7 @@ We are also going to make a quick tweak to reference the DynamoDB resource that 
   # These environment variables are made available to our functions
   # under process.env.
   environment:
-    tableName:
-      Ref: NotesTable
+    tableName: ${self:custom.tableName}
 
   iamRoleStatements:
     - Effect: Allow
@@ -126,7 +128,7 @@ A couple of interesting things we are doing here:
 
 1. The `environment:` block here is basically telling Serverless Framework to make the variables available as `process.env` in our Lambda functions. For example, `process.env.tableName` would be set to the DynamoDB table name for this stage. We will need this later when we are connecting to our database.
 
-2. For the `tableName` specifically, we are getting it by referencing the `NotesTable` resource that we created above. By using a reference we allow Serverless Framework to figure out the exact name of our resource and use it.
+2. For the `tableName` specifically, we are getting it by referencing our custom variable from above.
 
 3. For the case of our `iamRoleStatements:` we are now specifically stating which table we want to connect to. This block is telling AWS that these are the only resources that our Lambda functions have access to.
 

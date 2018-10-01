@@ -42,6 +42,8 @@ custom:
   # Our stage is based on what is passed in when running serverless
   # commands. Or fallsback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
+  # Set the table name here so we can use it while testing locally
+  tableName: ${self:custom.stage}-notes
   # Set our DynamoDB throughput for prod and all other non-prod stages.
   tableThroughputs:
     prod: 5
@@ -68,8 +70,7 @@ Your `environment:` block should look like this:
   # These environment variables are made available to our functions
   # under process.env.
   environment:
-    tableName:
-      Ref: NotesTable
+    tableName: ${self:custom.tableName}
     stripeSecretKey: ${self:custom.environment.stripeSecretKey}
 ```
 
