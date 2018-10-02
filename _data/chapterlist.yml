@@ -343,6 +343,8 @@ extra-backend:
       url: /chapters/configure-multiple-aws-profiles.html
     - page: Customize the Serverless IAM Policy
       url: /chapters/customize-the-serverless-iam-policy.html
+    - page: Mapping Cognito Identity Id and User Pool Id
+      url: /chapters/mapping-cognito-identity-id-and-user-pool-id.html
     - page: Connect to API Gateway with IAM auth
       url: /chapters/connect-to-api-gateway-with-iam-auth.html
     - page: Serverless Node.js Starter
