@@ -52,7 +52,7 @@ provider:
   # under process.env.
   environment:
     tableName:
-      'Fn::ImportValue': ${self:custom.stage}-NotesTable
+      ${file(../database/serverless.yml):custom.tableName}
 
   iamRoleStatements:
     - Effect: Allow
@@ -107,9 +107,9 @@ resources:
 
 Let's go over some of the details of this service.
 
-1. The Lambda functions in our service need to know which DynamoDB table to connect to. To do this we create an environment variable called `tableName` with the value `'Fn::ImportValue': ${self:custom.stage}-NotesTable`. This is the first time we are using the import portion of our cross-stack reference. Back in the chapter where we [created the DynamoDB service]({% link _chapters/dynamodb-as-a-serverless-service.md %}), we exported `${self:custom.stage}-NotesTable`. The value for this cross-stack reference is the name of the table. And we are importing it here using the `Fn::ImportValue` CloudFormation method. So in our Lambda function, `process.env.tableName` should be the generated name of our notes table.
+1. The Lambda functions in our service need to know which DynamoDB table to connect to. To do this we are importing the table name we use from the `serverless.yml` of that service. We do this using `${file(../database/serverless.yml):custom.tableName}`. This is basically telling Serverless Framework to look for the `serverless.yml` file in the `services/database/` directory. And in that file look for the custom variable called `tableName`. We set this value as an environment variable so that we can use `process.env.tableName` in our Lambda function to find the generated name of our notes table.
 
-2. Next, we need to give our Lambda function permission to talk to this table by adding an IAM policy. The IAM policy needs the [ARN]({% link _chapters/what-is-an-arn.md %}) of the table. We had exported this value in our [DynamoDB service]({% link _chapters/dynamodb-as-a-serverless-service.md %}) as well. And just as above, we can refer to it by `'Fn::ImportValue': ${self:custom.stage}-NotesTableArn`.
+2. Next, we need to give our Lambda function permission to talk to this table by adding an IAM policy. The IAM policy needs the [ARN]({% link _chapters/what-is-an-arn.md %}) of the table. This is the first time we are using the import portion of our cross-stack reference. Back in the chapter where we [created the DynamoDB service]({% link _chapters/dynamodb-as-a-serverless-service.md %}), we exported `${self:custom.stage}-NotesTableArn`. And we can refer to it by `'Fn::ImportValue': ${self:custom.stage}-NotesTableArn`.
 
 3. We are going to export a couple values in this service to be able to share this API Gateway resource in our _users_ service.
 
@@ -145,7 +145,7 @@ provider:
   # under process.env.
   environment:
     tableName:
-      'Fn::ImportValue': ${self:custom.stage}-NotesTable
+      ${file(../database/serverless.yml):custom.tableName}
 
   iamRoleStatements:
     - Effect: Allow
@@ -184,7 +184,7 @@ functions:
 
 Let's go over this quickly.
 
-- Just as the _notes_ service we are referencing our DynamoDB table using `'Fn::ImportValue': ${self:custom.stage}-NotesTable` and `'Fn::ImportValue': ${self:custom.stage}-NotesTableArn`.
+- Just as the _notes_ service we are referencing our DynamoDB table name using `${file(../database/serverless.yml):custom.tableName}` and the table ARN using `'Fn::ImportValue': ${self:custom.stage}-NotesTableArn`.
 
 - To share the same API Gateway domain as our _notes_ service, we are adding a `apiGateway:` section to the `provider:` block.
 

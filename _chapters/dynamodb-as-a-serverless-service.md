@@ -19,6 +19,8 @@ custom:
   # Our stage is based on what is passed in when running serverless
   # commands. Or fallsback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
+  # Set the table name here so we can use it while testing locally
+  tableName: ${self:custom.stage}-mono-notes
   # Set our DynamoDB throughput for prod and all other non-prod stages.
   tableThroughputs:
     prod: 5
@@ -37,7 +39,7 @@ resources:
       Type: AWS::DynamoDB::Table
       Properties:
         # Generate a name based on the stage
-        TableName: ${self:custom.stage}-mono-notes
+        TableName: ${self:custom.tableName}
         AttributeDefinitions:
           - AttributeName: userId
             AttributeType: S
@@ -61,25 +63,17 @@ resources:
           - Arn
       Export:
         Name: ${self:custom.stage}-NotesTableArn
-
-    NotesTableName:
-      Value:
-        Ref: NotesTable
-      Export:
-        Name: ${self:custom.stage}-NotesTable
 ```
 
 If you have followed along with [Part II of our guide]({% link _chapters/configure-dynamodb-in-serverless.md %}), the `Resources:` section should seem familiar. It is creating the Notes table that we use in our [note taking application]({{ site.backend_github_repo }}). The key addition here in regards to the cross-stack references is in the `Outputs:` section. Let's go over them quickly.
 
-1. We are exporting two values here. The `NotesTableArn` is the [ARN]({% link _chapters/what-is-an-arn.md %}) of the DynamoDB table that we are creating. And the `NotesTableName` which is the name of the table being created. The ARN is necessary for any IAM roles that are going to reference the DynamoDB table. The table name on the other hand is what we need in our Lambda functions while making queries to it.
+1. We are exporting one value here. The `NotesTableArn` is the [ARN]({% link _chapters/what-is-an-arn.md %}) of the DynamoDB table that we are creating. And the `NotesTableName` which is the name of the table being created. The ARN is necessary for any IAM roles that are going to reference the DynamoDB table.
 
-2. The export names for both the values is based on the stage we are using to deploy this service - `${self:custom.stage}`. This is important because we want our entire application to be easily replicable across multiple stages. If we don't include the stage name the exports will thrash when we deploy to multiple stages.
+2. The export name is based on the stage we are using to deploy this service - `${self:custom.stage}`. This is important because we want our entire application to be easily replicable across multiple stages. If we don't include the stage name the exports will thrash when we deploy to multiple stages.
 
-3. The names of the exported values are `${self:custom.stage}-NotesTableArn` and `${self:custom.stage}-NotesTable`.
+3. The names of the exported values is `${self:custom.stage}-NotesTableArn`.
 
 4. We get the table ARN by using the `Fn::GetAtt` CloudFormation function. This function takes a reference from the current service and the attribute we need. The reference in this case is `NotesTable`. You'll notice that the table we created in the `Resources:` section is created using `NotesTable` as the name.
-
-5. And finally, for a DynamoDB table resource the ref returns the generated table name. We use this value when we are exporting the table name.
 
 When we deploy this service we'll notice the exported values in the output and we can reference these cross-stack in our other services. 
 
