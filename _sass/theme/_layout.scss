@@ -568,17 +568,26 @@
 
 .post-footer {
   @extend %clearfix;
-  margin-top: 2 * $spacing-unit;
+  margin-top: 3 * $spacing-unit;
   margin-bottom: $spacing-unit / 2;
 
   text-align: center;
 
+  @include media-query($on-palm) {
+    margin-top: 2 * $spacing-unit;
+  }
+
   hr {
+    margin-bottom: 1.5 * $spacing-unit;
     font-size: 28px;
     letter-spacing: .6em;
     display: block;
     border: 0;
     color: $tertiary-text-color;
+
+    @include media-query($on-palm) {
+      margin-top: $spacing-unit;
+    }
 
     &:before {
       content: '...';

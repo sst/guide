@@ -2,7 +2,7 @@
 layout: post
 title: Environments in Create React App
 description: Use custom environment variables in Create React App to add staging, dev, or production environments to your React app. Custom environment variables are supported by default in Create React App. And by editing our NPM scripts we can easily deploy to multiple environments.
-date: 2018-04-14 00:00:00
+date: 2018-04-18 00:00:00
 context: true
 comments_id: environments-in-create-react-app/30
 ---

@@ -13,7 +13,7 @@
   {% elsif page.code == 'backend_part1' or page.code == 'frontend_part1' %}
   {% capture repo_desc %}For reference, here is the code for Part I{% endcapture %}
   {% else %}
-  {% capture repo_desc %}For reference, here is the code so far{% endcapture %}
+  {% capture repo_desc %}For reference, here is the code we are using{% endcapture %}
   {% endif %}
   <p class="code">{{ repo_desc }}</p>
   {% if page.code == 'backend' %}
@@ -43,6 +43,10 @@
   {% elsif page.code == 'facebook-login' %}
     {% capture repo_url %}{{ site.frontend_fb_login_github_repo }}{% endcapture %}
     {% capture repo_tag %}Facebook Login Frontend Source{% endcapture %}
+
+  {% elsif page.code == 'user-management' %}
+    {% capture repo_url %}{{ site.frontend_user_mgmt_github_repo }}{% endcapture %}
+    {% capture repo_tag %}User Management Frontend Source{% endcapture %}
 
   {% elsif page.code == 'frontend_full' %}
     {% capture repo_url %}{{ site.frontend_github_repo }}{% endcapture %}

@@ -2,15 +2,20 @@
 layout: post
 title: Facebook Login with Cognito using AWS Amplify
 description: To allow your users to login using Facebook to your Serverless React app, use the AWS Amplify Auth.federatedSignIn method and Cognito Identity Pool.
-date: 2018-04-15 00:00:00
+date: 2018-04-19 00:00:00
 context: true
 code: facebook-login
 comments_id: facebook-login-with-cognito-using-aws-amplify/466
 ---
 
-In our guide so far we have used the [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to sign up users to our [demo notes app](https://demo2.serverless-stack.com). This means that our users have to sign up for an account with their email and password. But you might want your users to use their Facebook or Google account to sign up for your app. It also means that your users won't have to remember another email and password combination for the sites they use. In this chapter we will look at how to add a _"Login with Facebook"_ option to our demo app.
+In our guide so far we have used the [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to sign up users to our [demo notes app](https://demo.serverless-stack.com). This means that our users have to sign up for an account with their email and password. But you might want your users to use their Facebook or Google account to sign up for your app. It also means that your users won't have to remember another email and password combination for the sites they use. In this chapter we will look at how to add a _"Login with Facebook"_ option to our demo app.
 
-The version of the notes app used in this chapter is hosted in [a separate GitHub repository]({{ site.frontend_fb_login_github_repo }}) and can be accessed through [a different URL](https://demo-fb-login.serverless-stack.com). The main ideas and code for this chapter have been contributed by our long time reader and contributor [Peter Eman Paver Abastillas](https://github.com/jatazoulja).
+The version of the notes app used in this chapter is hosted in :
+
+- A separate GitHub repository: [**{{ site.frontend_fb_login_github_repo }}**]({{ site.frontend_fb_login_github_repo }})
+- And can be accessed through: [**https://demo-fb-login.serverless-stack.com**](https://demo-fb-login.serverless-stack.com)
+
+The main ideas and code for this chapter have been contributed by our long time reader and contributor [Peter Eman Paver Abastillas](https://github.com/jatazoulja).
 
 To get started let's create a Facebook app that our users will use to login.
 
@@ -251,7 +256,7 @@ Let's look at what we are doing here very quickly.
 
 <img class="code-marker" src="/assets/s.png" />Finally, we can use the `FacebookButton.js` in our `src/components/Login.js` and `src/components/Signup.js`.
 
-```
+``` html
 <FacebookButton
   onLogin={this.handleFbLogin}
 />

@@ -132,4 +132,6 @@ And now when we switch over to the browser and try logging in, you should see th
 
 ![Login loading state screenshot](/assets/login-loading-state.png)
 
+If you would like to add _Forgot Password_ functionality for your users, you can refer to our [Extra Credit series of chapters on user management]({% link _chapters/manage-user-accounts-in-aws-amplify.md %}).
+
 Next let's implement the sign up process for our app.

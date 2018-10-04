@@ -2,7 +2,7 @@
 layout: post
 title: Code Splitting in Create React App
 description: Code splitting in Create React App is an easy way to reduce the size of your React.js app bundle. To do this in an app using React Router v4, we can asynchronously load our routes using the dynamic import() method that Create React App supports.
-date: 2018-04-13 00:00:00
+date: 2018-04-17 00:00:00
 code: frontend
 context: true
 comments_id: code-splitting-in-create-react-app/98

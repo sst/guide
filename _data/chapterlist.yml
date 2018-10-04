@@ -350,6 +350,19 @@ extra-backend:
     - page: Serverless Node.js Starter
       url: /chapters/serverless-nodejs-starter.html
 
+extra-user-mgmt:
+  title: User Management
+  chapters:
+    - page: Manage User Accounts in AWS Amplify
+      url: /chapters/manage-user-accounts-in-aws-amplify.html
+      subchapters:
+        - page: Handle Forgot and Reset Password
+          url: /chapters/handle-forgot-and-reset-password.html
+        - page: Allow Users to Change Passwords
+          url: /chapters/allow-users-to-change-passwords.html
+        - page: Allow Users to Change Their Email
+          url: /chapters/allow-users-to-change-their-email.html
+
 extra-frontend:
   title: Frontend
   chapters:
