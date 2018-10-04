@@ -317,7 +317,7 @@ extra-sls-architecture:
     - page: Cross-stack references in Serverless
       url: /chapters/cross-stack-references-in-serverless.html
       subchapters:
-        - page: DyanamoDB as a Serverless service
+        - page: DynamoDB as a Serverless service
           url: /chapters/dynamodb-as-a-serverless-service.html
         - page: S3 as a Serverless service
           url: /chapters/s3-as-a-serverless-service.html
