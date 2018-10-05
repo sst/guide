@@ -141,8 +141,7 @@ allow-users-to-change-passwords
 allow-users-to-change-their-email
 code-splitting-in-create-react-app
 environments-in-create-react-app
-facebook-login-with-cognito-using-aws-amplify
-"
+facebook-login-with-cognito-using-aws-amplify"
 
 set text item delimiters to "
 "
