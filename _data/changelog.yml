@@ -1,4 +1,8 @@
 current:
+  title: "Added new chapters"
+  desc: "Oct 5, 2018: Added new chapters on Facebook login with AWS Amplify and mapping Identity Id with User Pool Id. Also, added a new series of chapters on forgot password, change email and password."
+
+v3-2:
   title: "Added section on Serverless architecture"
   desc: "Aug 18, 2018: Adding a new section on organizing Serverless applications. Outlining how to use CloudFormation cross-stack references to link multiple Serverless services."
 

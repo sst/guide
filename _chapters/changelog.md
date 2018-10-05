@@ -21,16 +21,24 @@ You can get these updates emailed to you via our [newsletter]({{ site.newsletter
 
 ### Changes
 
-#### [v3.2: {{ site.data.changelog.current.title }}](https://branchv32--serverless-stack.netlify.com) (Current)
+#### [v3.3: {{ site.data.changelog.current.title }}](https://branchv33--serverless-stack.netlify.com) (Current)
 
 {{ site.data.changelog.current.desc }}
+
+- [Tutorial changes]({{ site.github_repo }}/compare/v3.2...v3.3)
+- [Facebook Login Client]({{ site.frontend_fb_login_github_repo }})
+- [User Management Client]({{ site.frontend_user_mgmt_github_repo }})
+
+#### [v3.2: {{ site.data.changelog.v3-2.title }}](https://branchv32--serverless-stack.netlify.com)
+
+{{ site.data.changelog.v3-2.desc }}
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v3.1...v3.2)
 - [Mono-repo API]({{ site.backend_mono_github_repo }})
 
-#### [v3.1: {{ site.data.changelog.current.title }}](https://branchv31--serverless-stack.netlify.com)
+#### [v3.1: {{ site.data.changelog.v3-1.title }}](https://branchv31--serverless-stack.netlify.com)
 
-{{ site.data.changelog.current.desc }}
+{{ site.data.changelog.v3-1.desc }}
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v3.0...v3.1)
 - [API]({{ site.backend_github_repo }}/compare/v3.0...v3.1)

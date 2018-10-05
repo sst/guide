@@ -16,6 +16,7 @@ who-is-this-guide-for
 what-does-this-guide-cover
 how-to-get-help
 what-is-serverless
+what-is-aws-lambda
 why-create-serverless-apps
 create-an-aws-account
 create-an-iam-user
@@ -131,10 +132,17 @@ serverless-environment-variables
 stages-in-serverless-framework
 configure-multiple-aws-profiles
 customize-the-serverless-iam-policy
+mapping-cognito-identity-id-and-user-pool-id
 connect-to-api-gateway-with-iam-auth
 serverless-nodejs-starter
+manage-user-accounts-in-aws-amplify
+handle-forgot-and-reset-password
+allow-users-to-change-passwords
+allow-users-to-change-their-email
 code-splitting-in-create-react-app
-environments-in-create-react-app"
+environments-in-create-react-app
+facebook-login-with-cognito-using-aws-amplify
+"
 
 set text item delimiters to "
 "
