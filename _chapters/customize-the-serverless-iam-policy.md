@@ -92,7 +92,6 @@ Below is a more nuanced policy template that restricts access to the Serverless 
         "cloudformation:Describe*",
         "cloudformation:List*",
         "cloudformation:Get*",
-        "cloudformation:PreviewStackUpdate",
         "cloudformation:CreateStack",
         "cloudformation:UpdateStack",
         "cloudformation:DeleteStack"
