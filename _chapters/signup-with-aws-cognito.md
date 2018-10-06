@@ -4,7 +4,6 @@ title: Signup with AWS Cognito
 date: 2017-01-21 00:00:00
 description: To implement a signup form in our React.js app using Amazon Cognito we are going to use AWS Amplify. We are going to call the Auth.signUp() method to sign a user up and call the Auth.confirmSignUp() method with the confirmation code to complete the process.
 context: true
-code: frontend
 comments_id: signup-with-aws-cognito/130
 ---
 

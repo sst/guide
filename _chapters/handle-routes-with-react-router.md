@@ -26,23 +26,27 @@ This installs the NPM package and adds the dependency to your `package.json`.
 
 Even though we don't have any routes set up in our app, we can get the basic structure up and running. Our app currently runs from the `App` component in `src/App.js`. We are going to be using this component as the container for our entire app. To do that we'll encapsulate our `App` component within a `Router`.
 
-<img class="code-marker" src="/assets/s.png" />Replace code in `src/index.js` with the following.
+<img class="code-marker" src="/assets/s.png" />Replace the following code in `src/index.js`:
 
 ``` coffee
-import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter as Router } from "react-router-dom";
-import App from "./App";
-import registerServiceWorker from "./registerServiceWorker";
-import "./index.css";
+ReactDOM.render(<App />, document.getElementById('root'));
+```
 
+<img class="code-marker" src="/assets/s.png" />With this:
+
+``` coffee
 ReactDOM.render(
   <Router>
     <App />
   </Router>,
   document.getElementById("root")
 );
-registerServiceWorker();
+```
+
+<img class="code-marker" src="/assets/s.png" />And import this in the header of `src/index.js`.
+
+``` coffee
+import { BrowserRouter as Router } from "react-router-dom";
 ```
 
 We've made two small changes here.

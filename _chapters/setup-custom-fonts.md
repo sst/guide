@@ -29,12 +29,18 @@ Here we are referencing all the 5 different weights (300, 400, 600, 700, and 800
 
 Now we are ready to add our newly added fonts to our stylesheets. Create React App helps separate the styles for our individual components and has a master stylesheet for the project located in `src/index.css`.
 
-<img class="code-marker" src="/assets/s.png" />Let's change the current font in `src/index.css` for the `body` tag from `font-family: sans-serif;` to the following.
+<img class="code-marker" src="/assets/s.png" />Let's change the current font in `src/index.css` for the `body` tag to the following.
 
 ``` css
-font-family: "Open Sans", sans-serif;
-font-size: 16px;
-color: #333;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 ```
 
 <img class="code-marker" src="/assets/s.png" />And let's change the fonts for the header tags to our new Serif font by adding this block to the css file.

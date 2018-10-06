@@ -4,7 +4,6 @@ title: Call the List API
 date: 2017-01-27 00:00:00
 description: To display a list of all of the user’s notes in our React.js app, we are going to make a GET request to our serverless API backend using the AWS Amplify API module. We are also going to use the ListGroup and ListGroupItem React-Bootstrap components to render the list.
 context: true
-code: frontend
 comments_id: call-the-list-api/127
 ---
 
@@ -54,23 +53,24 @@ renderNotesList(notes) {
   return [{}].concat(notes).map(
     (note, i) =>
       i !== 0
-        ? <ListGroupItem
+        ? <LinkContainer
             key={note.noteId}
-            href={`/notes/${note.noteId}`}
-            onClick={this.handleNoteClick}
-            header={note.content.trim().split("\n")[0]}
+            to={`/notes/${note.noteId}`}
           >
-            {"Created: " + new Date(note.createdAt).toLocaleString()}
-          </ListGroupItem>
-        : <ListGroupItem
+            <ListGroupItem header={note.content.trim().split("\n")[0]}>
+              {"Created: " + new Date(note.createdAt).toLocaleString()}
+            </ListGroupItem>
+          </LinkContainer>
+        : <LinkContainer
             key="new"
-            href="/notes/new"
-            onClick={this.handleNoteClick}
+            to="/notes/new"
           >
-            <h4>
-              <b>{"\uFF0B"}</b> Create a new note
-            </h4>
-          </ListGroupItem>
+            <ListGroupItem>
+              <h4>
+                <b>{"\uFF0B"}</b> Create a new note
+              </h4>
+            </ListGroupItem>
+          </LinkContainer>
   );
 }
 
@@ -86,13 +86,19 @@ handleNoteClick = event => {
 import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
 ```
 
+<img class="code-marker" src="/assets/s.png" />Also include the `LinkContainer` from `react-router-bootstrap`.
+
+``` javascript
+import { LinkContainer } from "react-router-bootstrap";
+```
+
 The code above does a few things.
 
 1. It always renders a **Create a new note** button as the first item in the list (even if the list is empty). We do this by concatenating an array with an empty object with our `notes` array.
 
 2. We render the first line of each note as the `ListGroupItem` header by doing `note.content.trim().split('\n')[0]`.
 
-3. And `onClick` for each of the list items we navigate to their respective pages.
+3. And the `LinkContainer` component directs our app to each of the items.
 
 <img class="code-marker" src="/assets/s.png" />Let's also add a couple of styles to our `src/containers/Home.css`.
 

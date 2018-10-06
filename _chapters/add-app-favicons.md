@@ -49,7 +49,7 @@ This should generate your favicon package and the accompanying code.
       "type": "image/png"
     }
   ],
-  "start_url": "./index.html",
+  "start_url": ".",
   "display": "standalone",
   "theme_color": "#ffffff",
   "background_color": "#ffffff"

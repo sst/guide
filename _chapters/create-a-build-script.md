@@ -2,7 +2,7 @@
 layout: post
 title: Create a Build Script
 date: 2018-03-26 00:00:00
-code: frontend
+code: frontend_full
 description: To configure our Create React App with Netlify, we need to add a build script to our project root. To make sure that we return a HTTP status code of 200 for our React Router routes we will be adding a redirects rule.
 comments_id: create-a-build-script/189
 ---
