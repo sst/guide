@@ -21,7 +21,7 @@ You can get these updates emailed to you via our [newsletter]({{ site.newsletter
 
 ### Changes
 
-#### [v3.3: {{ site.data.changelog.current.title }}](https://branchv331--serverless-stack.netlify.com) (Current)
+#### [v3.3.1: {{ site.data.changelog.current.title }}](https://branchv331--serverless-stack.netlify.com) (Current)
 
 {{ site.data.changelog.current.desc }}
 
