@@ -34,7 +34,7 @@ export async function main(event, context, callback) {
   };
 
   try {
-    const result = await dynamoDbLib.call("query", params);
+    const result = await dynamoDbLib.call("scan", params);
     // Return the matching list of items in response body
     callback(null, success(result.Items));
   } catch (e) {
