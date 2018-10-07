@@ -39,9 +39,17 @@ Type in the name of our domain, for example it might be `demo-serverless-stack.c
 
 ![Enter custom domain screenshot](/assets/part2/enter-custom-domain.png)
 
-This will automatically add the www version as well and will ask you to configure your DNS.
+This will ask you to verify that you are the owner of this domain and to add it. Click **Yes, add domain**.
 
-![Custom domain settings added screenshot](/assets/part2/custom-domain-settings-added.png)
+![Add root domain screenshot](/assets/part2/add-root-domain.png)
+
+Next hit **Check DNS configuration**.
+
+![Hit check DNS configuration screenshot](/assets/part2/hit-check-dns-configuration.png)
+
+This will show you the instructions for setting up your domain through Route 53. 
+
+![DNS configuration dialog screenshot](/assets/part2/dns-configuration-dialog.png)
 
 ### DNS Settings in Route 53
 
@@ -75,23 +83,17 @@ And give the DNS around 30 minutes to update.
 
 ### Configure SSL
 
-Back in Netlify, hit **HTTPS** in the side panel. And hit **Verify DNS configuration**.
+Back in Netlify, hit **HTTPS** in the side panel. And it should say that it is waiting for the DNS to propagate.
 
-![Verify DNS configuration screenshot](/assets/part2/verify-dns-configuration.png)
+![Waiting on DNS propagation screenshot](/assets/part2/waiting-on-dns-propagation.png)
 
-If everything has been configured properly, you should be able to hit **Let's Encrypt Certificate**.
+Once that is complete, Netlify will automatically provision your SSL ceritificate using Let's Encrypt.
 
-![Setup Let's Encrypt Certificate screenshot](/assets/part2/setup-lets-encrypt-certificate.png)
+![Provisioning Let's Encrypt Certificate screenshot](/assets/part2/provisioning-lets-encrypt-certificate.png)
 
-Next, confirm this by hitting **Provision certificate**.
+Wait a few seconds for the ceritificate to be provisioned.
 
-![Select Provision certificate screenshot](/assets/part2/select-provision-certificate.png)
-
-This process might take around 10 minutes to complete. But once complete, scroll down and hit **Force HTTPS**.
-
-![Set Force HTTPS screenshot](/assets/part2/set-force-https.png)
-
-This forces your users to only use HTTPS to communicate with your app.
+![SSL certificate provisioned screenshot](/assets/part2/ssl-certificate-provisioned.png)
 
 Now if you head over to your browser and go to your custom domain, your notes app should be up and running!
 
