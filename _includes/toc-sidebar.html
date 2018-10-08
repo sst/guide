@@ -1,6 +1,12 @@
+{% if include.page_en_url %}
+  {% assign current_page_en_url = include.page_en_url %}
+{% else %}
+  {% assign current_page_en_url = page.url %}
+{% endif %}
+
 <p><a href="/#{{ include.id }}">{{ include.items.title }}</a></p>
 {% for chapter in include.items.chapters %}
-  {% if chapter.url == page.url %}
+  {% if chapter.url == current_page_en_url %}
     <ul>
       <li class="active">
         <a href="{{ chapter.url }}">{{ chapter.page }}</a>
@@ -9,7 +15,7 @@
   {% else %}
     {% if chapter.subchapters %}
       {% for subchapter in chapter.subchapters %}
-        {% if subchapter.url == page.url %}
+        {% if subchapter.url == current_page_en_url %}
           <ul>
             <li class="active">
               <a href="{{ subchapter.url }}">{{ subchapter.page }}</a>
