@@ -48,7 +48,7 @@ async componentDidMount() {
 }
 ```
 
-All this does is check if a session object is returned. If so, then it updates the `isAuthenticating` flag once the process is complete. Also, the `Auth.currentSession()` method throws an error `No current user` if nobody is currently logged in. We don't want to show this error to users when they load up our app and are not signed in.
+All this does is load the current session. If it loads, then it updates the `isAuthenticating` flag once the process is complete. The `Auth.currentSession()` method throws an error `No current user` if nobody is currently logged in. We don't want to show this error to users when they load up our app and are not signed in.
 
 ### Render When the State Is Ready
 
