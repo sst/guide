@@ -490,15 +490,34 @@
 }
 
 .post-info {
+
   a {
     font-size: 14px;
-    font-weight: 300;
     @extend %a-tertiary;
+  }
+
+  span.copy {
+    font-size: 14px;
+    color: $tertiary-text-color;
+  }
+
+  a.lang {
+    font-weight: bold;
+    font-size: 16px;
+    padding-left: 4px;
+    text-transform: uppercase;
+
+    &.en:lang(en),
+    &.pt:lang(pt),
+    &.es:lang(es) {
+      color: $secondary-text-color;
+    }
   }
 
   span.separator {
     font-size: 10px;
     font-weight: 300;
+    vertical-align: 1px;
     color: $tertiary-text-color;
   }
 }

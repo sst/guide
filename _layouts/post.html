@@ -10,7 +10,24 @@ layout: default
         <h1 class="post-title">{{ page.title | escape }}</h1>
 
         <div class="post-info">
-          <a target="_blank" href="{{ site.github_repo }}{{ site.github_edit_prefix }}{{ page.path }}">Improve this page</a>
+
+          {% if page.ref %}
+            {% assign pages = site.chapters | where:"ref", page.ref | sort: 'lang' %}
+            {% if pages[1] %}
+              <span class="copy">View this page in: </span>
+              {% for page in pages %}
+                {% if page.lang == "en" %}
+                  {% assign page_en_url = page.url %}
+                {% endif %}
+                <a class="lang {{ page.lang }}" href="{{ page.url }}" class="{{ page.lang }}">
+                  {{ page.lang }}
+                </a>
+              {% endfor %}
+              <span class="separator">&nbsp;&bull;&nbsp;</span>
+            {% endif %}
+          {% endif %}
+
+          <a target="_blank" href="{{ site.github_repo }}{{ site.github_edit_prefix }}{{ page.path }}">Edit this page</a>
           <span class="separator">&nbsp;&bull;&nbsp;</span>
           <a target="_blank" href="{{ site.github_repo }}{{ site.github_history_prefix }}{{ page.path }}">View history</a>
         </div>
@@ -33,16 +50,7 @@ layout: default
         {{ content }}
       </div>
 
-      <div class="post-footer">
-        <hr />
-        {% if page.previous.url %}
-        <a class="previous" href="{{ page.previous.url }}">&larr; Previous</a>
-        {% endif %}
-        <a class="toc" href="/#table-of-contents">Table of Contents</a>
-        {% if page.next.url %}
-        <a class="next" href="{{ page.next.url }}">Next &rarr;</a>
-        {% endif %}
-      </div>
+      {% include post-footer.html page_en_url=page_en_url %}
 
       {% include post-links.html %}
 

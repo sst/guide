@@ -1,5 +1,7 @@
 ---
 layout: post
+lang: en
+ref: how-to-get-help
 title: How to Get Help?
 date: 2016-12-23 00:00:00
 comments_id: how-to-get-help/95

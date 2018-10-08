@@ -8,6 +8,15 @@
   <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
   -->
 
+  <!-- Localization -->
+  {% if page.ref %}
+    {% assign pages=site.chapters | where:"ref", page.ref | sort: 'lang' %}
+    {% for page in pages %}
+    <link rel="alternate" hreflang="{{ page.lang }}" href="{{ page.url }}" />
+    {% endfor %}
+  {% endif %}
+
+  <!-- Styles -->
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
 
   <!-- Fonts -->
