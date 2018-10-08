@@ -1,0 +1,98 @@
+{% if include.page_en_url %}
+  {% assign current_page_en_url = include.page_en_url %}
+{% else %}
+  {% assign current_page_en_url = page.url %}
+{% endif %}
+
+{% comment %}
+  Loop through all the chapters in order to:
+    - create full array of chapters
+    - index english version of current chapter
+{% endcomment %}
+
+{% assign all_chapters = "" | split: "" %}
+{% assign current = 0 %}
+{% for sections in site.data.chapterlist %}
+  {% assign chapters = sections[1].chapters %}
+  {% for chapter in chapters %}
+    {% if chapter.url == current_page_en_url %}
+      {% assign index = current %}
+    {% endif %}
+    {% assign all_chapters = all_chapters | push: chapter %}
+    {% assign current = current | plus: 1 %}
+    {% for subchapter in chapter.subchapters %}
+      {% if subchapter.url == current_page_en_url %}
+        {% assign index = current %}
+      {% endif %}
+      {% assign all_chapters = all_chapters | push: subchapter %}
+      {% assign current = current | plus: 1 %}
+    {% endfor %}
+  {% endfor %}
+{% endfor %}
+
+{% assign size = all_chapters | size %}
+
+<div class="post-footer">
+  <hr />
+
+  {% assign previous = index | minus: 1 %}
+  {% if previous != -1 %}
+
+    {% comment %} Set previous page based on current index {% endcomment %}
+
+    {% assign previous_url = all_chapters[previous].url %}
+
+    {% comment %} If non-english, find page same language previous page {% endcomment %}
+    {% if page.lang != "en" %}
+
+      {% comment %} If non-english, find ref of previous page {% endcomment %}
+
+      {% assign prev_pages = site.chapters | where:"url", previous_url %}
+      {% assign prev_page_ref = prev_pages[0].ref %}
+      {% if prev_page_ref %}
+
+        {% comment %} Find chapter of matching language and ref {% endcomment %}
+
+        {% assign cur_lang_pages = site.chapters | where:"ref", prev_page_ref | where:"lang", page.lang %}
+        {% if cur_lang_pages[0] %}
+          {% assign previous_url = cur_lang_pages[0].url %}
+        {% endif %}
+      {% endif %}
+    {% endif %}
+
+    <a class="previous" href="{{ previous_url }}">
+      &larr; Previous
+    </a>
+  {% endif %}
+
+  <a class="toc" href="/#table-of-contents">Table of Contents</a>
+
+  {% assign next = index | plus: 1 %}
+  {% if next != size %}
+
+    {% comment %} Set next page based on current index {% endcomment %}
+
+    {% assign next_url = all_chapters[next].url %}
+
+    {% comment %} If non-english, find page same language next page {% endcomment %}
+    {% if page.lang != "en" %}
+
+      {% comment %} If non-english, find ref of next page {% endcomment %}
+
+      {% assign next_pages = site.chapters | where:"url", next_url %}
+      {% assign next_page_ref = next_pages[0].ref %}
+      {% if next_page_ref %}
+
+        {% comment %} Find chapter of matching language and ref {% endcomment %}
+
+        {% assign cur_lang_pages = site.chapters | where:"ref", next_page_ref | where:"lang", page.lang %}
+        {% if cur_lang_pages[0] %}
+          {% assign next_url = cur_lang_pages[0].url %}
+        {% endif %}
+      {% endif %}
+    {% endif %}
+
+    <a class="next" href="{{ next_url }}">Next &rarr;</a>
+  {% endif %}
+
+</div>

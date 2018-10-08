@@ -1,5 +1,6 @@
 ---
 layout: post
+ref: what-does-this-guide-cover
 title: What Does This Guide Cover?
 date: 2016-12-22 00:00:00
 comments_id: what-does-this-guide-cover/83
