@@ -8,7 +8,7 @@ description: Serverless se refere a aplicações onde a configuração e gerenci
 comments_id: what-is-serverless/27
 ---
 
-Geralmente, nós desenvolvemos e fazemos deploy de aplicações que possuem um certo grau de controle das resquisições HTTP que são feitas para o nosso servidor. Essas aplicações rodam nesse servidor e nós somos responsáveis por cuidar e gerenciar os recursos dessa máquina. Porém existem alguns problemas que envolvem esse modelo de software.
+Geralmente, nós desenvolvemos e fazemos deploy de aplicações que possuem um certo grau de controle das resquisições HTTP que são feitas para o nosso servidor. Essas aplicações rodam nesse servidor e nós somos responsáveis por cuidar e gerenciar os recursos dessa máquina. Porém existem alguns problemas com esse tipo de gerenciamento:
 
 1. Somos cobrados pelo servidor/hospedagem mesmo quando o software não está sendo utilizado.
 
@@ -20,17 +20,17 @@ Geralmente, nós desenvolvemos e fazemos deploy de aplicações que possuem um c
 
 Para pequenas empresas e desenvolvedores que trabalham sozinhos todo esse gerenciamento pode tomar muito tempo e ser muito trabalhoso. Isso acaba acarretando muita distração em relação ao trabalho mais importante que deveria estar sendo feito naquele momento: desenvolver e manter o software. Em grande empresas isso geralmente é mantido por uma equipe dedicada a função e o desenvolvedor não terá de se preocupar com isso. Entretando, todo o processo necessário que o desenvolvedor provavelmente terá de dar a equipe de infraestrutura pode acabar diminuindo a velocidade do fluxo do desenvolvimento do software. Como desenvolvedores, nós buscamos uma maneira de enfrentar esses problemas de forma efetiva, ai que entra a arquitetura Serverless.
 
-### Serverless Computing
+### Arquitetura Serverless
 
-Serverless computing (or serverless for short), is an execution model where the cloud provider (AWS, Azure, or Google Cloud) is responsible for executing a piece of code by dynamically allocating the resources. And only charging for the amount of resources used to run the code. The code is typically run inside stateless containers that can be triggered by a variety of events including http requests, database events, queuing services, monitoring alerts, file uploads, scheduled events (cron jobs), etc. The code that is sent to the cloud provider for execution is usually in the form of a function. Hence serverless is sometimes referred to as _"Functions as a Service"_ or _"FaaS"_. Following are the FaaS offerings of the major cloud providers:
+Arquitetura Serverless, ou apenas Serverless, é um módelo de execução onde o provedor de cloud (AWS, Azure ou Google Cloud) será o responsável por executar pedaços de código com recursos que irão ser alocados dinâmicamente e cobrando apenas pelos recursos usados para executar aquele código em específico. Geralmente o código será executado em containers stateless que podem ser ativados de diversos modos, como requisições HTTP, eventos do banco de dados, serviços de filas, alertas de monitoramento, upload de arquivos, eventos agendados, etc. O código que será enviado ao provedor é geralmente escrito em forma de funções. Por conta disso podemos ver a arquitetura Serverless ser referênciada como _"Functions as a Service"_ (Funções como Serviço) ou _"FaaS"_. Esses são os maiores provedores de FaaS do mercado atual: 
 
 - AWS: [AWS Lambda](https://aws.amazon.com/lambda/)
 - Microsoft Azure: [Azure Functions](https://azure.microsoft.com/en-us/services/functions/)
 - Google Cloud: [Cloud Functions](https://cloud.google.com/functions/)
 
-While serverless abstracts the underlying infrastructure away from the developer, servers are still involved in executing our functions.
+Embora o Serverless abstraia a infraestrutra implícita do desenvolvedor, os servidores continuam envolvidos na hora de executar as funções
 
-Since your code is going to be executed as individual functions, there are a couple of things that we need to be aware of.
+Tendo em mente que o seu código será executado em funções individuais, alguns pontos devem ser levados em consideração.
 
 ### Microservices
 
