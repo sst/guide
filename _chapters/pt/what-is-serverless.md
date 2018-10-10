@@ -32,9 +32,9 @@ Embora o Serverless abstraia a infraestrutra implícita do desenvolvedor, os ser
 
 Tendo em mente que o seu código será executado em funções individuais, alguns pontos devem ser levados em consideração.
 
-### Microservices
+### Microsserviços
 
-The biggest change that we are faced with while transitioning to a serverless world is that our application needs to be architectured in the form of functions. You might be used to deploying your application as a single Rails or Express monolith app. But in the serverless world you are typically required to adopt a more microservice based architecture. You can get around this by running your entire application inside a single function as a monolith and handling the routing yourself. But this isn't recommended since it is better to reduce the size of your functions. We'll talk about this below.
+A primeira grande mudança que temos de enfrentar ao entrar no mundo Serverless é que precisamos criar as aplicação tendo em mente que ela será executada na forma de funções. A maioria das pessoas estam acostumadas em fazer deploy da aplicação em forma de grandes monólitos. Porém com Serverless o desenvolvimento do software deverá ser feito voltado mais a microsserviços. Uma maneira de contornar o que provavelmente poderá ser algo muito trabalhoso é executar a aplicação dentro de uma única e enorme função, porém isso não é nem um pouco recomendo visto que quanto menor sua função e menos trabalhos em paralelo uma única função fazer, melhor. Falaremos mais sobre isto abaixo.
 
 ### Stateless Functions
 
