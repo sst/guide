@@ -1,53 +1,53 @@
 ---
 layout: post
-title: O que é o Serverless?
+title: O que é Serverless?
 date: 2016-12-23 12:00:00
 lang: pt
 ref: what-is-serverless
-description: Sem servidor refere-se a aplicativos em que o gerenciamento e a alocação de servidores e recursos são completamente gerenciados pelo provedor de nuvem. E o faturamento é baseado no consumo real desses recursos.
+description: Serverless se refere a aplicações onde a configuração e gerenciamento dos servidores fica todo por conta do provedor de nuvem que você está contratando e o custo da hospedagem é cobrado conforme sua aplicação é acessada/usada.
 comments_id: what-is-serverless/27
 ---
 
-Tradicionalmente, criamos e implementamos aplicativos da web nos quais temos algum grau de controle sobre as solicitações HTTP que são feitas em nosso servidor. Nosso aplicativo é executado nesse servidor e somos responsáveis ​​por provisionar e gerenciar os recursos para ele. Existem alguns problemas com isso.
+Geralmente, nós desenvolvemos e fazemos deploy de aplicações que possuem um certo grau de controle das resquisições HTTP que são feitas para o nosso servidor. Essas aplicações rodam nesse servidor e nós somos responsáveis por cuidar e gerenciar os recursos dessa máquina. Porém existem alguns problemas com esse tipo de gerenciamento:
 
-1. Somos cobrados por manter o servidor ativo mesmo quando não estamos atendendo a solicitações.
+1. Somos cobrados pelo servidor/hospedagem mesmo quando o software não está sendo utilizado.
 
-2. Somos responsáveis ​​pelo tempo de atividade e manutenção do servidor e todos os seus recursos.
+2. Somos responsáveis pela manutenção dos servidores e de manter o servidor online.
 
-3. Também somos responsáveis ​​por aplicar as atualizações de segurança apropriadas ao servidor.
+3. Também somos responsáveis por toda a segurança do servidor.
 
-4. Como nossas escalas de uso, precisamos gerenciar o escalonamento de nosso servidor também. E como resultado, reduzi-lo quando não temos o mesmo uso.
+4. Conforme a demanda de uso aumenta, precisamos aumentar os recursos do servidor. O mesmo pode acontecer caso tenhamos poucos acessos, temos de diminuir o hardware do servidor.
 
-Para empresas menores e desenvolvedores individuais, isso pode ser muito difícil de lidar. Isso acaba distraindo o trabalho mais importante que temos; construir e manter a aplicação real. Em organizações maiores, isso é tratado pela equipe de infraestrutura e, geralmente, não é responsabilidade do desenvolvedor individual. No entanto, os processos necessários para suportar isso podem acabar diminuindo o tempo de desenvolvimento. Como você não pode simplesmente seguir em frente e criar seu aplicativo sem trabalhar com a equipe de infraestrutura para ajudá-lo a começar a trabalhar. Como desenvolvedores, procuramos uma solução para esses problemas e é aí que entra o servidor.
+Para pequenas empresas e desenvolvedores que trabalham sozinhos todo esse gerenciamento pode tomar muito tempo e ser muito trabalhoso. Isso acaba acarretando muita distração em relação ao trabalho mais importante que deveria estar sendo feito naquele momento: desenvolver e manter o software. Em grande empresas isso geralmente é mantido por uma equipe dedicada a função e o desenvolvedor não terá de se preocupar com isso. Entretando, todo o processo necessário que o desenvolvedor provavelmente terá de dar a equipe de infraestrutura pode acabar diminuindo a velocidade do fluxo do desenvolvimento do software. Como desenvolvedores, nós buscamos uma maneira de enfrentar esses problemas de forma efetiva, ai que entra a arquitetura Serverless.
 
-### Computação sem servidor
+### Arquitetura Serverless
 
-A computação sem servidor (ou abreviadamente sem servidor) é um modelo de execução no qual o provedor de nuvem (AWS, Azure ou Google Cloud) é responsável pela execução de uma parte do código, alocando dinamicamente os recursos. E cobrando apenas pela quantidade de recursos usados ​​para executar o código. O código é normalmente executado dentro de contêineres sem estado que podem ser acionados por uma variedade de eventos, incluindo solicitações http, eventos de banco de dados, serviços de enfileiramento, alertas de monitoramento, uploads de arquivos, eventos agendados (cron jobs) etc. O código enviado para a nuvem provedor para execução é geralmente na forma de uma função. Daí serverless é por vezes referido como "Funções como um serviço" ou "FaaS". A seguir estão as ofertas FaaS dos principais provedores de nuvem:
+Arquitetura Serverless, ou apenas Serverless, é um módelo de execução onde o provedor de cloud (AWS, Azure ou Google Cloud) será o responsável por executar pedaços de código com recursos que irão ser alocados dinâmicamente e cobrando apenas pelos recursos usados para executar aquele código em específico. Geralmente o código será executado em containers stateless que podem ser ativados de diversos modos, como requisições HTTP, eventos do banco de dados, serviços de filas, alertas de monitoramento, upload de arquivos, eventos agendados, etc. O código que será enviado ao provedor é geralmente escrito em forma de funções. Por conta disso podemos ver a arquitetura Serverless ser referênciada como _"Functions as a Service"_ (Funções como Serviço) ou _"FaaS"_. Esses são os maiores provedores de FaaS do mercado atualmente: 
 
 - AWS: [AWS Lambda](https://aws.amazon.com/lambda/)
-- Microsoft Azure: [Funções do Azure](https://azure.microsoft.com/en-us/services/functions/)
-- Google Cloud: [funções da nuvem](https://cloud.google.com/functions/)
+- Microsoft Azure: [Azure Functions](https://azure.microsoft.com/en-us/services/functions/)
+- Google Cloud: [Cloud Functions](https://cloud.google.com/functions/)
 
-Embora o serverless abstraia a infraestrutura subjacente do desenvolvedor, os servidores ainda estão envolvidos na execução de nossas funções.
+Embora o Serverless abstraia o gerenciamento direto de um servidor do desenvolvedor, os servidores continuam envolvidos na hora de executar as funções
 
-Como seu código será executado como funções individuais, há algumas coisas que precisamos estar cientes.
+Tendo em mente que o seu código será executado em funções individuais, alguns pontos devem ser levados em consideração.
 
 ### Microsserviços
 
-A maior mudança que enfrentamos ao fazer a transição para um mundo sem servidor é que nosso aplicativo precisa ser arquitetado na forma de funções. Você pode estar acostumado a implantar seu aplicativo como um único aplicativo monolítico Rails ou Express. Mas no mundo sem servidor você normalmente é obrigado a adotar uma arquitetura baseada em microsserviço. Você pode contornar isso executando toda a sua aplicação dentro de uma única função como um monólito e gerenciando o roteamento sozinho. Mas isso não é recomendado, pois é melhor reduzir o tamanho de suas funções. Nós vamos falar sobre isso abaixo.
+A primeira grande mudança que temos de enfrentar ao entrar no mundo Serverless é que precisamos criar as aplicação tendo em mente que ela será executada na forma de funções. A maioria das pessoas estam acostumadas em fazer deploy da aplicação em forma de grandes monólitos. Porém com Serverless o desenvolvimento do software deverá ser feito voltado pensando na arquitetura de microsserviços. Uma maneira de contornar o que provavelmente poderá ser algo muito trabalhoso é executar a aplicação dentro de uma única e enorme função, porém isso não é nem um pouco recomendo visto que quanto menor sua função e menos trabalhos em paralelo uma única função fazer, melhor. Falaremos mais sobre isto abaixo.
 
-### Funções sem estado
+### Funções Stateless
 
-Suas funções são normalmente executadas em contêineres seguros (quase) sem estado. Isso significa que você não poderá executar o código no servidor de aplicativos que é executado muito tempo depois que um evento é concluído ou usa um contexto de execução anterior para atender a uma solicitação. Você tem que assumir efetivamente que sua função é invocada novamente a cada vez.
+Geralmente suas funções irão ser executas dentro de containers stateless. Isso significa que você não será capaz de executar funções que permaneçam sendo executadas após o evento principal ser concluído ou usar a execução anterior para atender uma nova requisição. Você precisa ter em mente que sua função irá executar e logo após a requisição ser completada o container que ela estava sendo hospedada será apagado.
 
-Há algumas sutilezas para isso e discutiremos no capítulo O [que é o AWS Lambda]({% link _chapters/what-is-aws-lambda.md %}).
+Existem alguns poréns sobre esse assunto que vamos discurtir no capítulo [O que é AWS Lambda]({% link _chapters/what-is-aws-lambda.md %}).
 
-### Começos frios
+### Funções inativas
 
-Como suas funções são executadas dentro de um contêiner que é exibido sob demanda para responder a um evento, há alguma latência associada a ele. Isso é chamado de partida a frio. Seu contêiner pode ser mantido por um tempo após a conclusão da execução da sua função. Se outro evento for acionado durante esse tempo, ele responderá muito mais rapidamente e isso é normalmente conhecido como Warm Start.
+No momento que suas funções são executadas dentro de containers que sobem conforme a demanda das requisições, provavelmente a sua aplicação passará por algum delay relacionado a isto. Isso é o que chamamos de _Cold Start_. O seu container talvez fique um tempo online após a requisição ter finalizado. Caso outra requisição seja feita para esta mesma função naturalmente a aplicação vai responder mais rapidamente e isso é conhecido como _Warm Start_.
 
-A duração de partidas a frio depende da implementação do provedor de nuvem específico. No AWS Lambda, o intervalo pode variar entre algumas centenas de milissegundos e alguns segundos. Pode depender do tempo de execução (ou idioma) usado, do tamanho da função (como um pacote) e, é claro, do provedor de nuvem em questão. As inicializações a frio melhoraram drasticamente ao longo dos anos, pois os provedores de nuvem ficaram muito melhores em otimizar para tempos de latência mais baixos.
+A duração do Cold Start depende de como cada provedor de cloud lida com isso. Com a AWS Lambda a requisição pode ser respondida dentro de alguns centésimos de segundos até alguns poucos segundos. Isso depende do tempo de execução, ou linguagem, utilizado, o tamanho da função e claro, o provedor cloud em questão. Cold stars vem se aperfeiçoando cada vez mais com o passar dos anos e com isso o tempo de respostas vem diminuindo consideravelmente.	
 
-Além de otimizar suas funções, você pode usar truques simples como uma função programada separada para invocar sua função a cada poucos minutos para mantê-la aquecida. O [Serverless Framework](https://serverless.com] que vamos usar neste tutorial tem alguns plugins para ajudar a manter [suas funções aquecidas](https://github.com/FidelLimited/serverless-plugin-warmup).
+Pensando em otimizar a resposta das suas funções, existem alguns pequenos truques que podem ajudar a manter suas funções executando. Para colocar isso em prática vamos utilizar [Serverless Framework](https://serverless.com), a qual possui alguns plugins que [vão ajudar a manter sua função funcionamento para futuras requisições](https://github.com/FidelLimited/serverless-plugin-warmup).
 
-Agora que temos uma boa ideia da computação sem servidor, vamos dar uma olhada mais profunda no que é uma função do Lambda e como seu código será executado.
+Agora que já começamos a entender as ideias da arquitetura Serverless, vamos nos apronfundar mais um pouco e começar a aprender mais sobre Lambda Functions e como o seu código será executado.
