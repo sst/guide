@@ -40,7 +40,7 @@ A primeira grande mudança que temos de enfrentar ao entrar no mundo Serverless 
 
 Geralmente suas funções irão ser executas dentro de containers stateless. Isso significa que você não será capaz de executar funções que permaneçam sendo executadas após o evento principal ser concluído ou usar a execução anterior para atender uma nova requisição. Você precisa ter em mente que sua função irá executar e logo após a requisição ser completada o container que ela estava sendo hospedada será apagado.
 
-Existem alguns poréns sobre esse assunto que vamos discurtir no capítulo [What is AWS Lambda]({% link _chapters/what-is-aws-lambda.md %}).
+Existem alguns poréns sobre esse assunto que vamos discurtir no capítulo [O que é AWS Lambda]({% link _chapters/what-is-aws-lambda.md %}).
 
 ### Funções inativas
 
