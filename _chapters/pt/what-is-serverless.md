@@ -22,32 +22,32 @@ Para pequenas empresas e desenvolvedores que trabalham sozinhos todo esse gerenc
 
 ### Arquitetura Serverless
 
-Arquitetura Serverless, ou apenas Serverless, é um módelo de execução onde o provedor de cloud (AWS, Azure ou Google Cloud) será o responsável por executar pedaços de código com recursos que irão ser alocados dinâmicamente e cobrando apenas pelos recursos usados para executar aquele código em específico. Geralmente o código será executado em containers stateless que podem ser ativados de diversos modos, como requisições HTTP, eventos do banco de dados, serviços de filas, alertas de monitoramento, upload de arquivos, eventos agendados, etc. O código que será enviado ao provedor é geralmente escrito em forma de funções. Por conta disso podemos ver a arquitetura Serverless ser referênciada como _"Functions as a Service"_ (Funções como Serviço) ou _"FaaS"_. Esses são os maiores provedores de FaaS do mercado atual: 
+Arquitetura Serverless, ou apenas Serverless, é um módelo de execução onde o provedor de cloud (AWS, Azure ou Google Cloud) será o responsável por executar pedaços de código com recursos que irão ser alocados dinâmicamente e cobrando apenas pelos recursos usados para executar aquele código em específico. Geralmente o código será executado em containers stateless que podem ser ativados de diversos modos, como requisições HTTP, eventos do banco de dados, serviços de filas, alertas de monitoramento, upload de arquivos, eventos agendados, etc. O código que será enviado ao provedor é geralmente escrito em forma de funções. Por conta disso podemos ver a arquitetura Serverless ser referênciada como _"Functions as a Service"_ (Funções como Serviço) ou _"FaaS"_. Esses são os maiores provedores de FaaS do mercado atualmente: 
 
 - AWS: [AWS Lambda](https://aws.amazon.com/lambda/)
 - Microsoft Azure: [Azure Functions](https://azure.microsoft.com/en-us/services/functions/)
 - Google Cloud: [Cloud Functions](https://cloud.google.com/functions/)
 
-Embora o Serverless abstraia a infraestrutra implícita do desenvolvedor, os servidores continuam envolvidos na hora de executar as funções
+Embora o Serverless abstraia o gerenciamento direto de um servidor do desenvolvedor, os servidores continuam envolvidos na hora de executar as funções
 
 Tendo em mente que o seu código será executado em funções individuais, alguns pontos devem ser levados em consideração.
 
 ### Microsserviços
 
-A primeira grande mudança que temos de enfrentar ao entrar no mundo Serverless é que precisamos criar as aplicação tendo em mente que ela será executada na forma de funções. A maioria das pessoas estam acostumadas em fazer deploy da aplicação em forma de grandes monólitos. Porém com Serverless o desenvolvimento do software deverá ser feito voltado mais a microsserviços. Uma maneira de contornar o que provavelmente poderá ser algo muito trabalhoso é executar a aplicação dentro de uma única e enorme função, porém isso não é nem um pouco recomendo visto que quanto menor sua função e menos trabalhos em paralelo uma única função fazer, melhor. Falaremos mais sobre isto abaixo.
+A primeira grande mudança que temos de enfrentar ao entrar no mundo Serverless é que precisamos criar as aplicação tendo em mente que ela será executada na forma de funções. A maioria das pessoas estam acostumadas em fazer deploy da aplicação em forma de grandes monólitos. Porém com Serverless o desenvolvimento do software deverá ser feito voltado pensando na arquitetura de microsserviços. Uma maneira de contornar o que provavelmente poderá ser algo muito trabalhoso é executar a aplicação dentro de uma única e enorme função, porém isso não é nem um pouco recomendo visto que quanto menor sua função e menos trabalhos em paralelo uma única função fazer, melhor. Falaremos mais sobre isto abaixo.
 
-### Stateless Functions
+### Funções Stateless
 
-Your functions are typically run inside secure (almost) stateless containers. This means that you won't be able to run code in your application server that executes long after an event has completed or uses a prior execution context to serve a request. You have to effectively assume that your function is invoked anew every single time.
+Geralmente suas funções irão ser executas dentro de containers stateless. Isso significa que você não será capaz de executar funções que permaneçam sendo executadas após o evento principal ser concluído ou usar a execução anterior para atender uma nova requisição. Você precisa ter em mente que sua função irá executar e logo após a requisição ser completada o container que ela estava sendo hospedada será apagado.
 
-There are some subtleties to this and we will discuss in the [What is AWS Lambda]({% link _chapters/what-is-aws-lambda.md %}) chapter.
+Existem alguns poréns sobre esse assunto que vamos discurtir no capítulo [What is AWS Lambda]({% link _chapters/what-is-aws-lambda.md %}).
 
-### Cold Starts
+### Funções inativas
 
-Since your functions are run inside a container that is brought up on demand to respond to an event, there is some latency associated with it. This is referred to as a _Cold Start_. Your container might be kept around for a little while after your function has completed execution. If another event is triggered during this time it responds far more quickly and this is typically known as a _Warm Start_.
+No momento que suas funções são executadas dentro de containers que sobem conforme a demanda das requisições, provavelmente a sua aplicação passará por algum delay relacionado a isto. Isso é o que chamamos de _Cold Start_. O seu container talvez fique um tempo online após a requisição ter finalizado. Caso outra requisição seja feita para esta mesma função naturalmente a aplicação vai responder mais rapidamente e isso é conhecido como _Warm Start_.
 
-The duration of cold starts depends on the implementation of the specific cloud provider. On AWS Lambda it can range from anywhere between a few hundred milliseconds to a few seconds. It can depend on the runtime (or language) used, the size of the function (as a package), and of course the cloud provider in question. Cold starts have drastically improved over the years as cloud providers have gotten much better at optimizing for lower latency times.
+A duração do Cold Start depende de como cada provedor de cloud lida com isso. Com a AWS Lambda a requisição pode ser respondida dentro de alguns centésimos de segundos até alguns poucos segundos. Isso depende do tempo de execução, ou linguagem, utilizado, o tamanho da função e claro, o provedor cloud em questão. Cold stars vem se aperfeiçoando cada vez mais com o passar dos anos e com isso o tempo de respostas vem diminuindo consideravelmente.	
 
-Aside from optimizing your functions, you can use simple tricks like a separate scheduled function to invoke your function every few minutes to keep it warm. [Serverless Framework](https://serverless.com) which we are going to be using in this tutorial has a few plugins to [help keep your functions warm](https://github.com/FidelLimited/serverless-plugin-warmup).
+Pensando em otimizar a resposta das suas funções, existem alguns pequenos truques que podem ajudar a manter suas funções executando. Para colocar isso em prática vamos utilizar [Serverless Framework](https://serverless.com), a qual possui alguns plugins que [vão ajudar a manter sua função funcionamento para futuras requisições](https://github.com/FidelLimited/serverless-plugin-warmup).
 
-Now that we have a good idea of serverless computing, let's take a deeper look at what is a Lambda function and how your code is going to be executed.
+Agora que já começamos a entender as ideias da arquitetura Serverless, vamos nos apronfundar mais um pouco e começar a aprender mais sobre Lambda Functions e como o seu código será executado.
