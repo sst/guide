@@ -87,7 +87,7 @@ This simple component creates a `Route` where the child component that it render
 
 - Based on this we can create a component that returns a `Route` and takes a `component` and `childProps` prop. This allows us to pass in the component we want rendered and the props that we want applied.
 
-- Finally, we take `component` (set as `C`) and `props` (set as `cProps`) and render inside our `Route` using the inline function; `props => <C {...props} {...cProps} />`. Note, the `props` variable in this case is what the Route component passes us. Whereas, the `cProps` is the `childProps` that want to set.
+- Finally, we take `component` (set as `C`) and `props` (set as `cProps`) and render inside our `Route` using the inline function; `props => <C {...props} {...cProps} />`. Note, the `props` variable in this case is what the Route component passes us. Whereas, the `cProps` is the `childProps` that we want to set.
 
 Now to use this component, we are going to include it in the routes where we need to have the `childProps` passed in.
 
