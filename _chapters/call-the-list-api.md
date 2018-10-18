@@ -73,11 +73,6 @@ renderNotesList(notes) {
           </LinkContainer>
   );
 }
-
-handleNoteClick = event => {
-  event.preventDefault();
-  this.props.history.push(event.currentTarget.getAttribute("href"));
-}
 ```
 
 <img class="code-marker" src="/assets/s.png" />And include the `ListGroupItem` in the header so that our `react-bootstrap` import looks like so.
