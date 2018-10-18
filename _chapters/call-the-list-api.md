@@ -48,7 +48,7 @@ Now let's render the results.
 
 <img class="code-marker" src="/assets/s.png" />Replace our `renderNotesList` placeholder method with the following.
 
-``` coffee
+``` javascript
 renderNotesList(notes) {
   return [{}].concat(notes).map(
     (note, i) =>
@@ -72,11 +72,6 @@ renderNotesList(notes) {
             </ListGroupItem>
           </LinkContainer>
   );
-}
-
-handleNoteClick = event => {
-  event.preventDefault();
-  this.props.history.push(event.currentTarget.getAttribute("href"));
 }
 ```
 
