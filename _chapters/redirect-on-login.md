@@ -15,9 +15,7 @@ Let's start by adding a method to read the `redirect` URL from the querystring.
 
 ``` coffee
 function querystring(name, url = window.location.href) {
-  name = name.replace(/[[]]/g, "\\$&");
-
-  const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)", "i");
+  const regex = new RegExp("[?&]" + name + "(=([^&#]*))", "i");
   const results = regex.exec(url);
 
   if (!results) {
@@ -27,7 +25,7 @@ function querystring(name, url = window.location.href) {
     return "";
   }
 
-  return decodeURIComponent(results[2].replace(/\+/g, " "));
+  return decodeURI(results[2].replace(/\+/g, " "));
 }
 ```
 
