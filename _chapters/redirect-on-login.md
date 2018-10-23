@@ -52,7 +52,7 @@ export default ({ component: C, props: cProps, ...rest }) => {
 };
 ```
 
-<img class="code-marker" src="/assets/s.png" />And remove the following from the `handleSubmit` method in `src/containers/Login.js`.
+<img class="code-marker" src="/assets/s.png" />And remove the following from the `handleSubmit` method in `src/containers/Login.js` and from the `handleConfirmationSubmit` method in `src/containers/Signup.js`.
 
 ``` coffee
 this.props.history.push("/");
