@@ -117,8 +117,9 @@ In this case, if we run the following:
 ``` bash
 $ REACT_APP_STAGE=prod npm run build
 ```
+
 OR for Windows
-``` Windows cmd
+``` bash
 set "REACT_APP_STAGE=prod" && npm start
 ```
 
