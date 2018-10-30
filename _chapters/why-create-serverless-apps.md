@@ -2,6 +2,8 @@
 layout: post
 title: Why Create Serverless Apps?
 date: 2016-12-24 00:00:00
+lang: en
+ref: why-create-serverless-apps
 description: Serverless apps are easier to maintain and scale, since the resources necessary to complete a request is fully managed by the cloud provider. Serverless apps are also billed only when they are actually in use; meaning that they can be a lot cheaper for most common workloads.
 comments_id: why-create-serverless-apps/87
 ---
@@ -38,4 +40,4 @@ So that comes out to $6.10 per month. Additionally, a .com domain would cost us 
 
 Finally, the ease of scaling is thanks in part to DynamoDB which gives us near infinite scale and Lambda that simply scales up to meet the demand. And of course our frontend is a simple static single page app that is almost guaranteed to always respond instantly thanks to CloudFront.
 
-Great! now that you are convinced on why you should build serverless apps; let's get started.
+Great! Now that you are convinced on why you should build serverless apps; let's get started.
