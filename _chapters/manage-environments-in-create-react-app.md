@@ -117,6 +117,10 @@ In this case, if we run the following:
 ``` bash
 $ REACT_APP_STAGE=prod npm run build
 ```
+OR for Windows
+``` Windows cmd
+set "REACT_APP_STAGE=prod" && npm start
+```
 
 It will build our app using the prod version of our resources.
 
