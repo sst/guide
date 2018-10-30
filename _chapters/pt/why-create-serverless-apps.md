@@ -31,13 +31,13 @@ O principal motivo é o preço de se executar aplicações Serverless, onde voc�
 | Gerenciador de Certificado | Free | $0.00 |
 | **Total** | | **$6.10** |
 
-[1] Cognito é gratuito por < 50K MAUs e $0.00550/MAU após esgotar o limite gratuito.
-[2] Lambda é gratuita por < 1M de requisições e 400000GB-seg de recurso (RAM).
-[3] DynamoDB oferece 25GB/mês de armazenamento gratuito.
-[4] S3 oferece 1GB gratuito de transferência.  
+[1] Cognito é gratuito por < 50K MAUs e $0.00550/MAU após esgotar o limite gratuito.  
+[2] Lambda é gratuita por < 1M de requisições e 400000GB-seg de recurso (RAM).  
+[3] DynamoDB oferece 25GB/mês de armazenamento gratuito.  
+[4] S3 oferece 1GB gratuito de transferência.    
 
 Chegamos em um valor de $6.10 (cerca de R$ 22,67 na cotação atual do dólar em relação ao real). Adicionalmente, um domínio .com custa $12 por ano (cerca de R$ 30 dependendo do site), esse último sendo o mais caro. Mas tenha em mente que essas estimativas não são exatas e podem ter inúmeras variações. O uso no mundo real podem seguir por outros caminhos. Entretanto, essas estimativas conseguem nos mostrar o quão barato pode ser ter uma aplicação Serverless.
 
 Por fim, todo o esquema de escalonamento se deve em parte pelo DynamoDB que nos entrega escalonamento infinito e a Lambda que escala conforme a demanda. Claro que o nosso frontend é apenas uma simples página estática e isso garantirá que nossa aplicação responda quase que instantaneamente graças ao CloudFront.
 
-Great! now that you are convinced on why you should build serverless apps; let's get started.
+Perfeito! Agora que você está convencido que é uma boa criar aplicações Serverless, mãos na massa!
