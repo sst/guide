@@ -110,3 +110,7 @@ And that's it for the backend! Next we are going to move on to creating the fron
   And deploy it using `serverless deploy function -f create`. But we can't see this output when we make an HTTP request to it, since the console logs are not sent in our HTTP responses. We need to check the logs to see this. We have a [detailed chapter]({% link _chapters/api-gateway-and-lambda-logs.md %}#viewing-lambda-cloudwatch-logs) on working with API Gateway and Lambda logs and you can read about how to check your debug messages [here]({% link _chapters/api-gateway-and-lambda-logs.md %}#viewing-lambda-cloudwatch-logs).
 
   A common source of errors here is an improperly indented `serverless.yml`. Make sure to double-check the indenting in your `serverless.yml` by comparing it to the one from [this chapter](https://github.com/AnomalyInnovations/serverless-stack-demo-api/blob/master/serverless.yml).
+
+- `‘User: arn:aws:... is not authorized to perform: dynamodb:PutItem on resource: arn:aws:dynamodb:...’`
+
+  This error is basically saying that our Lambda function does not have the right permissions to make a DynamoDB request. Recall that, the IAM role that allows your Lambda function to make requests to DynamoDB are set in the `serverless.yml`. And a common source of this error is when the `iamRoleStatements:` are improperly indented. Make sure to compare it to [the one in the repo]({{ site.backend_github_repo }}).

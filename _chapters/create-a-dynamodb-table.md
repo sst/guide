@@ -40,7 +40,7 @@ If you see the following message, deselect **Use default settings**.
 
 ![Auto Scaling IAM Role Warning screenshot](/assets/dynamodb/auto-scaling-iam-role-warning.png)
 
-Scroll to the bottom, ensure that **New role: DynamoDBAutoscaleRole** is selected, and select **Create**.
+Scroll to the bottom, ensure that **DynamoDB AutoScaling Service Linked Role** is selected, and select **Create**.
 
 ![Set Table Provisioned Capacity screenshot](/assets/dynamodb/set-table-provisioned-capacity.png)
 

@@ -132,14 +132,6 @@ A couple of interesting things we are doing here:
 
 3. For the case of our `iamRoleStatements:` we are now specifically stating which table we want to connect to. This block is telling AWS that these are the only resources that our Lambda functions have access to.
 
-Finally, we need to make a quick change to our code. We were hardcoding the region in the DynamoDB lib.
-
-<img class="code-marker" src="/assets/s.png" />Remove the following line from the top of `libs/dynamodb-lib.js`.
-
-``` js
-AWS.config.update({ region: "us-east-1" });
-```
-
 ### Commit Your Code
 
 <img class="code-marker" src="/assets/s.png" />Let's commit the changes we've made so far.

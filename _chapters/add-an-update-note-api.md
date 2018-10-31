@@ -18,7 +18,7 @@ Now let's create an API that allows a user to update a note with a new note obje
 import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
 
-export async function main(event, context, callback) {
+export async function main(event, context) {
   const data = JSON.parse(event.body);
   const params = {
     TableName: "notes",
@@ -41,9 +41,9 @@ export async function main(event, context, callback) {
 
   try {
     const result = await dynamoDbLib.call("update", params);
-    callback(null, success({ status: true }));
+    return success({ status: true });
   } catch (e) {
-    callback(null, failure({ status: false }));
+    return failure({ status: false });
   }
 }
 ```
