@@ -21,9 +21,16 @@ You can get these updates emailed to you via our [newsletter]({{ site.newsletter
 
 ### Changes
 
-#### [v3.3.1: {{ site.data.changelog.current.title }}](https://branchv331--serverless-stack.netlify.com) (Current)
+#### [v3.3.2: {{ site.data.changelog.current.title }}](https://branchv332--serverless-stack.netlify.com) (Current)
 
 {{ site.data.changelog.current.desc }}
+
+- [Tutorial changes]({{ site.github_repo }}/compare/v3.3.1...v3.3.2)
+- [API]({{ site.backend_github_repo }}/compare/v3.1...v3.3.2)
+
+#### [v3.3.1: {{ site.data.changelog.v3-3-1.title }}](https://branchv331--serverless-stack.netlify.com)
+
+{{ site.data.changelog.v3-3-1.desc }}
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v3.3...v3.3.1)
 - [Client]({{ site.frontend_github_repo }}/compare/v3.1...v3.3.1)

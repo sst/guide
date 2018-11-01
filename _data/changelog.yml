@@ -1,8 +1,12 @@
 current:
+  title: "Refactoring async Lambda functions"
+  desc: "Nov 1, 2018: Refactoring async Lambda functions to return instead of using the callback."
+
+v3-3-1:
   title: "Updated to Create React App v2"
   desc: "Oct 5, 2018: Updated the frontend React app to use Create React App v2."
 
-v3-3-1:
+v3-3:
   title: "Added new chapters"
   desc: "Oct 5, 2018: Added new chapters on Facebook login with AWS Amplify and mapping Identity Id with User Pool Id. Also, added a new series of chapters on forgot password, change email and password."
 
