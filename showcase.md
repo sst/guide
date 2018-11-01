@@ -4,11 +4,11 @@ title: Built with Serverless Stack
 description: Serverless Stack is used to build all kinds of apps, from SaaS services to weekend projects. Here we are showcasing a few apps built by our readers.
 ---
 
-[Serverless Stack](/) is used to build all kinds of apps, from SaaS services to weekend projects. Here are just a few apps that our readers have built. If you'd like to share something you've built, just [send us an email with a link and a short description](mailto:{{ site.email }}?subject=Built%20with%20Serverless%20Stack).
+[Serverless Stack](/) is used to build all kinds of apps, from SaaS services to weekend projects. Here are just a few apps that our readers have built. If you'd like to share your project, just [**send us an email with a link and a short description**](mailto:{{ site.email }}?subject=Built%20with%20Serverless%20Stack).
 
 #### [QuickNote](https://quicknote.io/)
 
-[QuickNote](https://quicknote.io) is a simple anonymous note-taking app built by [Manuel Frigerio](https://twitter.com/@mnlfrgr). It was built in two days and Mauel [wrote about his motivation and experience here](https://manuel.friger.io/blog/quicknote). 
+[QuickNote](https://quicknote.io) is a simple anonymous note-taking app built by [Manuel Frigerio](https://twitter.com/@mnlfrgr). It was built in two days and Manuel [wrote about his motivation and experience here](https://manuel.friger.io/blog/quicknote). 
 
 ![QuickNote screenshot](/assets/showcase/quicknote.png)
 
