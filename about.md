@@ -6,7 +6,7 @@ description: Serverless Stack is an open source guide brought to you by Frank Wa
 
 [Serverless Stack](/) is an open source guide to building and deploying full-stack production ready serverless applications using Serverless and React. It's completely free and the content is hosted on [GitHub]({{ site.github_repo }}).
 
-Serverless Stack was launched in March 2017 with a simple goal of creating the most comprehensive resource for building full-stack serverless applications. It is the way we have built our applications and we wanted to share our learnings with the world. Over the past year we have seen our readers use the stack to build their projects and to power their businesses. Most folks don't just complete the tutorial, they use it to build something significant. It has had an impact far greater than we could have imagined. This has also shown in terms of the traffic to the site.
+Serverless Stack was launched in March 2017 with a simple goal of creating the most comprehensive resource for building full-stack serverless applications. It is the way we have built our applications and we wanted to share our learnings with the world. Over the past year we have seen our readers use the stack to build their projects and to power their businesses. Most folks don't just complete the tutorial, they use it to build something significant. [Here is just a small sample of what folks have built with Serverless Stack]({% link showcase.md %}). It has had an impact far greater than we could have imagined. This has also shown in terms of the traffic to the site.
 
 ![Serverless Stack Traffic Graph screenshot](/assets/serverless-stack-traffic-graph.png)
 
