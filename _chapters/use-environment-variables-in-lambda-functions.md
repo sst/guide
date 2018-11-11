@@ -29,8 +29,7 @@ We need to change the `TableName: "notes"` line to use the relevant table name. 
 # These environment variables are made available to our functions
 # under process.env.
 environment:
-  tableName:
-    Ref: NotesTable
+  tableName: ${self:custom.tableName}
 ```
 
 As we noted there, we can reference this in our Lambda functions as `process.env.tableName`.
