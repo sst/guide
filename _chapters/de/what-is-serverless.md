@@ -8,33 +8,33 @@ description: Serverlos bezieht sich auf Anwendungen, bei denen die Verwaltung un
 comments_id: what-is-serverless/27
 ---
 
-Traditionell haben wir Webanwendungen entwickelt und bereitgestellt, bei denen wir die HTTP-Anforderungen, die an unseren Server gesendet werden, in gewissem Umfang kontrollieren können. Unsere Anwendung läuft auf diesem Server und wir sind für die Bereitstellung und Verwaltung der Ressourcen dafür verantwortlich. Hier gibt es einige Probleme.
+Web-Apps wurden traditionell so entwickelt, dass wir - die Entwickler - ein gewisses Maß an Kontrolle über die HTTP-Anfragen, die an unseren Server gemacht werden, haben. Unsere App läuft auf diesem Server und wir sind ebenfalls für die Bereitstellung, Wartung und Verwaltung dessen Resourcen verantwortlich. Bei diesem Modell gibt es mehrere Probleme:
 
-1. Das Aufrechterhalten des Servers ist selbst dann kostenpflichtig, wenn wir keine Anfragen versenden.
+1. Wir haben Kosten selbst dann, wenn der Server keine Anfragen erfüllt.
 
-2. Wir sind für die Verfügbarkeit und Wartung des Servers und aller seiner Ressourcen verantwortlich.
+2. Wir sind für die Verfügbarkeit und Wartung des Servers inklusive aller seiner Ressourcen verantwortlich.
 
-3. Wir sind auch dafür verantwortlich, die entsprechenden Sicherheitsupdates auf den Server anzuwenden.
+3. Wir sind auch dafür verantwortlich, immer die aktuellsten Sicherheits-Updates auf den Server anuwenden.
 
-4. Als unsere Nutzungsskalen müssen wir auch die Server-Skalierung verwalten. Wenn Sie also nicht so viel verwenden, können Sie die Skalierung reduzieren.
+4. Wenn die Anforderungen an unseren Server mehr werden, müssen wir den Server dementsprechend selbst skalieren. Daraus resultierend müssen wir uns auch darum kümmern, das wir den Server runter-skalieren, wenn er nicht viel Verkehr bekommt.
 
-Für kleinere Unternehmen und einzelne Entwickler kann dies eine Menge sein. Dies lenkt am Ende von der wichtigeren Arbeit ab, die wir haben. Aufbau und Pflege der eigentlichen Anwendung. In größeren Organisationen wird dies vom Infrastrukturteam erledigt, und normalerweise liegt es nicht in der Verantwortung des einzelnen Entwicklers. Die dazu erforderlichen Prozesse können jedoch die Entwicklungszeiten verlangsamen. Sie können Ihre Anwendung nicht einfach weiterentwickeln, ohne mit dem Infrastruktur-Team zusammenzuarbeiten, um Sie bei der Inbetriebnahme zu unterstützen. Als Entwickler haben wir nach einer Lösung für diese Probleme gesucht, und hier setzt serverlos an.
+Für kleinere Unternehmen und einzelne Entwickler kann das sehr viel Aufwand bedeuten. Das lenkt am Ende von der wichtigeren Arbeit ab, die wir haben: Den Aufbau und die Verwaltung der eigentlichen App. In größeren Organisationen wird dies von einem Infrastrukturteam erledigt, und normalerweise liegt es nicht in der Verantwortung des einzelnen Entwicklers. Die dazu erforderlichen Prozesse können jedoch die Entwicklungszeiten verlangsamen. Du musst dich von der eigentlichen entwicklung der App abwenden, damit das Infrastruktur-Team dir hilft alles aufzusetzen. Als Entwickler haben wir nach einer Lösung für diese Probleme gesucht, und genau da setzt _serverless_ an.
 
 ### Serverless Computing
 
-Serverless Computing (kurz Serverless Computing) ist ein Ausführungsmodell, bei dem der Cloud-Anbieter (AWS, Azure oder Google Cloud) für die Ausführung eines Codes verantwortlich ist, indem er die Ressourcen dynamisch zuweist. Und nur für die Menge an Ressourcen, die zur Ausführung des Codes verwendet werden. Der Code wird normalerweise in stateless Containern ausgeführt, die durch eine Vielzahl von Ereignissen ausgelöst werden können, z. B. HTTP-Anforderungen, Datenbankereignisse, Warteschlangendienste, Überwachungsalarme, Dateiuploads, geplante Ereignisse (Cron-Jobs) usw. Der Code, der an die Cloud gesendet wird Anbieter für die Ausführung ist in der Regel in Form einer Funktion. Serverlos wird daher manchmal als _"Funktionen als Dienst"_ oder _"FaaS"_ bezeichnet. Nachfolgend die FaaS-Angebote der großen Cloud-Anbieter:
+_Serverless_ (zu Deutsch: Serverlos, ohne Server) ist ein Ausführungsmodell, bei dem der Cloud-Anbieter (AWS, Azure oder Google Cloud) für die Ausführung von Code verantwortlich ist, indem er die Ressourcen dynamisch zuweist. Es werden nur Kosten verrechnet, für die Zeit und Ressourcen die der Code tatsächlich zum ausführen gebraucht hat. Der Code wird normalerweise in _stateless containerns_ (zu Deutsch: Hüllen ohne Speicher) ausgeführt, die durch eine Vielzahl von Events ausgelöst werden können, z. B. HTTP-Anfragen, Datenbank-Events, Warteschlangendienste, Überwachungsalarme, Datei-Uploads, geplante Ereignisse (Cron-Jobs) usw. Der Code, der an die Cloud-Anbieter gesendet wird ist in der Regel in der Form einer Funktion. _Serverless_ wird daher manchmal als _Functions as a Service_ (zu Deutsch: _"Funktionen als Dienstleistung"_) oder _"FaaS"_ bezeichnet. Hier sind ein paar der FaaS-Angebote der großen Cloud-Anbieter:
 
 - AWS: [AWS Lambda](https://aws.amazon.com/lambda/)
 - Microsoft Azure: [Azure Functions](https://azure.microsoft.com/en-us/services/functions/)
 - Google Cloud: [Cloud Functions](https://cloud.google.com/functions/)
 
-Während serverlos die zugrunde liegende Infrastruktur vom Entwickler abstrahiert, sind Server immer noch an der Ausführung unserer Funktionen beteiligt.
+Obwohl _serverless_ die dahinterliegende Infrastruktur vom Entwickler wegabstrahiert, sind trotzdem noch Server involviert, um unsere Funktionen auszuführen.
 
-Da Ihr Code als einzelne Funktionen ausgeführt wird, müssen wir einige Dinge beachten.
+Da dein Code als einzelne Funktionen ausgeführt wird, müssen wir einige Dinge beachten.
 
 ### Microservices
 
-Die größte Änderung, der wir uns beim Übergang in eine Server-freie Welt gegenübersehen, besteht darin, dass unsere Anwendung in Form von Funktionen gestaltet werden muss. Sie können es gewohnt sein, Ihre Anwendung als einzelne Rails- oder Express-Monolith-App bereitzustellen. In der Welt ohne Server ist es jedoch normalerweise erforderlich, eine auf Microservice basierende Architektur zu implementieren. Sie können dies umgehen, indem Sie Ihre gesamte Anwendung in einer einzigen Funktion als Monolith ausführen und das Routing selbst übernehmen. Dies wird jedoch nicht empfohlen, da es besser ist, die Größe Ihrer Funktionen zu reduzieren. Wir werden weiter unten darüber sprechen.
+Die größte Änderung, der wir uns beim Übergang in das _serverless_-Paradigma gegenübersehen, besteht darin, dass unsere Anwendung in Form von Funktionen gestaltet werden muss. Sie können es gewohnt sein, Ihre Anwendung als einzelne Rails- oder Express-Monolith-App bereitzustellen. In der Welt ohne Server ist es jedoch normalerweise erforderlich, eine auf Microservice basierende Architektur zu implementieren. Sie können dies umgehen, indem Sie Ihre gesamte Anwendung in einer einzigen Funktion als Monolith ausführen und das Routing selbst übernehmen. Dies wird jedoch nicht empfohlen, da es besser ist, die Größe Ihrer Funktionen zu reduzieren. Wir werden weiter unten darüber sprechen.
 
 ### Zustandslose Funktionen
 
