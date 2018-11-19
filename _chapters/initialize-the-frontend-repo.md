@@ -14,7 +14,7 @@ Just as we did in the backend portion, we'll start by creating our project and a
 
 ``` bash
 $ git clone --branch part-1 --depth 1 https://github.com/AnomalyInnovations/serverless-stack-demo-client.git serverless-stack-2-client/
-$ cd serverles-stack-2-client/
+$ cd serverless-stack-2-client/
 ```
 
 <img class="code-marker" src="/assets/s.png" />And remove the `.git/` dir.
