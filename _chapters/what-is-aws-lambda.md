@@ -20,6 +20,7 @@ Let's start by quickly looking at the technical specifications of AWS Lambda. La
 - .NET Core: 1.0.1 and 2.0
 - Go 1.x
 - Ruby 2.5
+- Rust
 
 Each function runs inside a container with a 64-bit Amazon Linux AMI. And the execution environment has:
 
