@@ -24,9 +24,9 @@ Let's start by quickly looking at the technical specifications of AWS Lambda. La
 
 Each function runs inside a container with a 64-bit Amazon Linux AMI. And the execution environment has:
 
-- Memory: 128MB - 3008MB
+- Memory: 128MB - 3008MB, in 64 MB increments
 - Ephemeral disk space: 512MB
-- Max execution duration: 300 seconds
+- Max execution duration: 900 seconds
 - Compressed package size: 50MB
 - Uncompressed package size: 250MB
 
