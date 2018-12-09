@@ -20,7 +20,7 @@ First, log in to your [AWS Console](https://console.aws.amazon.com) and select *
 
 ![Select S3 Service screenshot](/assets/s3/select-s3-service.png)
 
-Select **Create Bucket**.
+Select **Create bucket**.
 
 ![Select Create Bucket screenshot](/assets/s3/select-create-bucket.png)
 
@@ -33,7 +33,7 @@ Make a note of the name and region as we'll be using it later in the guide.
 
 ![Enter S3 Bucket Info screenshot](/assets/s3/enter-s3-bucket-info.png)
 
-Step through the next steps and leave the defaults by clicking **Next**, and then click **Create Bucket** on the last step.
+Step through the next steps and leave the defaults by clicking **Next**, and then click **Create bucket** on the last step.
 
 ![Set S3 Bucket Properties screenshot](/assets/s3/set-s3-bucket-properties.png)
 ![Set S3 Bucket Permissions screenshot](/assets/s3/set-s3-bucket-permissions.png)

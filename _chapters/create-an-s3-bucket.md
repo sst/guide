@@ -26,11 +26,11 @@ Click **Next** through the configure options step.
 
 ![Create S3 static website Bucket next configure options screenshot](/assets/create-s3-bucket-2-configure-options.png)
 
-In the permissions step, make sure the that the **public bucket policy options are unchcecked**. Making buckets public is a common security error, but in our case we'll be serving our React files from the bucket, so want it to be public.
+In the permissions step, make sure to uncheck **Block new public bucket policies** and **Block public and cross-account access if bucket has public policies**. Making buckets public is a common security error, but in our case we'll be serving our app from the bucket, so want it to be public.
 
 ![Create S3 static website Bucket next permissions screenshot](/assets/create-s3-bucket-3-permissions.png)
 
-Click **Next** on the review page to create the bucket.
+Click **Create bucket** on the review page to create the bucket.
 
 ![Create S3 static website Bucket next review screenshot](/assets/create-s3-bucket-4-review.png)
 
