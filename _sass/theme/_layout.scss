@@ -557,14 +557,6 @@
       font-size: 18px;
     }
   }
-
-  img[src*="#shadow"] {
-    box-shadow: 0px 15px 20px rgba(0,0,0,0.33);
-    margin: 0 30px;
-    @include media-query($on-palm) {
-      margin: 0 13px;
-    }
-  }
 }
 
 .post-sponsor {
