@@ -2,19 +2,40 @@
 layout: post
 title: DynamoDB Paging
 date: 2016-12-30 00:00:00
-description: To allow users to create notes in our note taking app, we are going to add a create note POST API. To do this we are going to add a new Lambda function to our Serverless Framework project. The Lambda function will save the note to our DynamoDB table and return the newly created note. We also need to ensure to set the Access-Control headers to enable CORS for our serverless backend API.
+description: 
 context: true
 code: backend
 comments_id: add-a-create-note-api/125
 ---
 
-- Can apply paging for both 'Query' and 'Scan' operations
-- You can specify page size by passing in 'Limit'
-- If there are more items beyong the page size, the results will include 'LastEvaluatedKey' indicating the index key of the last item it returned.
-- If you make the same query/scan and pass in the key as 'ExclusiveStartKey', you will get the next page of items
-- If 'Limit' is not passed in, the default page size is 1MB (how many ever items that fit into 1MB)
+For the [notes app](https://demo.serverless-stack.com) that we have created, we allow our users to see a list of all the notes they have. But we left out a detail that needs to be handled when a user has a lot of notes. DynamoDB by default returns the amount of results that can fit in 1MB. So in this case where the number of notes exceeds the 1MB query result size, we need to be able to page through the rest of the notes.
 
-### Backend
+In this chapter we are going to look at how to add paging to DynamoDB tables and how to use that in your React app.
+
+The version of the notes app used in this chapter:
+
+- Has a separate GitHub repository for the Serverless backend app:
+- A separate GitHub repository for the React frontend app:
+- And a hosted version here: 
+
+Let's get started by understanding how DynamoDB handles pagination.
+
+### Paging in DynamoDB
+
+DynamoDB handles paging in a very simple way:
+
+- Firstly, you can apply paging for both `Query` and `Scan` operations in DynamoDB. And you can specify page size by passing in `Limit`.
+- If there are more items beyong the page size, the results will include a `LastEvaluatedKey` indicating the index key of the last item that was returned.
+- And if you make the same query and pass in the key as `ExclusiveStartKey`, you will get the next page of items.
+- And finally, if the `Limit` is not passed in, the default page size is 1MB. Ie, how many ever items that fit into 1MB.
+
+Now that we have a good idea of how paging works, let's move on to implementing it in our Serverless backend API.
+
+### Handle Paging in a Lambda Function
+
+Working off of our Lambda function that gets the list of a user's notes, we are going to add the ability to page through them.
+
+<img class="code-marker" src="/assets/s.png" />Replace `list.js` with the following.
 
 ``` javascript
 import * as dynamoDbLib from "./libs/dynamodb-lib";
@@ -32,11 +53,11 @@ export async function main(event, context) {
       ":userId": event.requestContext.identity.cognitoIdentityId
     },
     ExclusiveStartKey: startKey,
+    Limit: 10,
   };
 
   try {
     const result = await dynamoDbLib.call("query", params);
-    // Return the matching list of items in response body
     return success({
       items: result.Items,
       paging_token: result.LastEvaluatedKey ? JSON.stringify(result.LastEvaluatedKey) : undefined,
@@ -47,9 +68,21 @@ export async function main(event, context) {
 }
 ```
 
-### Frontend
+This should be pretty straightforward:
 
-Store the paging token in the state
+- We look for the `paging_token` querystring variable.
+- If it is available, we JSON parse it and set it as the `ExclusiveStartKey` in our query params. If it isn't available, we leave it as `undefined`.
+- We make the query by setting the page size we want as the `Limit`. In this case we are setting it to 10. Alternatively, you can let the frontend specify this.
+- After we make the query we check if the `LastEvaluatedKey` is set in the results. If it's set, this means that there are more than one page of results. We then JSON encode it, set it as the `paging_token`, and return it as a part of the response.
+- This `paging_token` is what the frontend will return back to us when we want to display the next page of results.
+
+Next let's look at the changes that we need to make on the frontend.
+
+### Add a Load More Button
+
+If you've followed through the backend portion, it should be clear that the frontend is only responsbile for getting the `paging_token` from the API response. And making the request to get the next page, with the `paging_token` set.
+
+<img class="code-marker" src="/assets/s.png" />Replace the `src/containers/Home.js` with the following.
 
 ``` javascript
 import React, { Component } from "react";
@@ -181,3 +214,10 @@ export default class Home extends Component {
   }
 }
 ```
+
+Let's quickly go over what we are doing here:
+- 
+- 
+
+Now you should be able to click the _Load More_ button to page through all the notes for that user.
+
