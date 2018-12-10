@@ -49,11 +49,7 @@ Click on your newly created app.
 
 You'll notice a few things here. First, we have a service called **default**. A Serverless app can have multiple services within it. A service (roughly speaking) is a reference to a `serverless.yml` file. In our case we have one service in the root of our repo. Second, we have two stages (environments) set up for our app. Our **dev** stage is hooked up to master. This means that any commits to master will trigger a build in dev.
 
-Click on **default**.
-
-![Click default service in Seed project screenshot](/assets/part2/click-default-service-in-seed-project.png)
-
-You'll see that the stages this service has. Next click **dev**.
+Click on **dev**.
 
 ![Click dev stage in Seed project screenshot](/assets/part2/click-dev-stage-in-seed-project.png)
 

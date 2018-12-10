@@ -86,11 +86,7 @@ Hit **Confirm**.
 
 ![Confirm promote dev build screenshot](/assets/part2/confirm-promote-dev-build.png)
 
-And if you head over to the **prod** stage, you should see your prod deployment in action.
-
-![Seed prod build in progress screenshot](/assets/part2/seed-prod-build-in-progress.png)
-
-It should take a second to deploy to production. And just like before, make a note of the following.
+And if you head over to the **prod** stage, you should see your prod deployment in action. It should take a second to deploy to production. And just like before, make a note of the following.
 
 - Region: `region`
 - Cognito User Pool Id: `UserPoolId`
