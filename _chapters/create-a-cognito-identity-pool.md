@@ -21,9 +21,9 @@ From your [AWS Console](https://console.aws.amazon.com) and select **Cognito** f
 
 ![Select Cognito Service screenshot](/assets/cognito-identity-pool/select-cognito-service.png)
 
-Select **Manage Federated Identities**.
+Select **Manage Identity Pools**.
 
-![Select Manage Federated Identities Screenshot](/assets/cognito-identity-pool/select-manage-federated-identities.png)
+![Select Manage Identity Pools Screenshot](/assets/cognito-identity-pool/select-manage-identity-pools.png)
 
 Enter an **Identity pool name**. If you have any existing Identity Pools, you'll need to click the **Create new identity pool** button.
 
