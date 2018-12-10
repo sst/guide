@@ -33,6 +33,8 @@ Select **Authentication providers**. Under **Cognito** tab, enter **User Pool ID
 
 ![Fill Authentication Provider Info Screenshot](/assets/cognito-identity-pool/fill-authentication-provider-info.png)
 
+Select **Create Pool**.
+
 Now we need to specify what AWS resources are accessible for users with temporary credentials obtained from the Cognito Identity Pool.
 
 Select **View Details**. Two **Role Summary** sections are expanded. The top section summarizes the permission policy for authenticated users, and the bottom section summarizes that for unauthenticated users.
