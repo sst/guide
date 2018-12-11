@@ -34,7 +34,7 @@ You might notice that CPU is not mentioned as a part of the container specificat
 
 The ephemeral disk space is available in the form of the `/tmp` directory. You can only use this space for temporary storage since subsequent invocations will not have access to this. We'll talk a bit more on the stateless nature of the Lambda functions below.
 
-The execution duration means that your Lambda function can run for a maximum of 300 seconds or 5 minutes. This means that Lambda isn't meant for long running processes.
+The execution duration means that your Lambda function can run for a maximum of 900 seconds or 15 minutes. This means that Lambda isn't meant for long running processes.
 
 The package size refers to all your code necessary to run your function. This includes any dependencies (`node_modules/` directory in case of Node.js) that your function might import. There is a limit of 250MB on the uncompressed package and a 50MB limit once it has been compressed. We'll take a look at the packaging process below.
 
