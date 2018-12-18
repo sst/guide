@@ -20,15 +20,19 @@ First, log in to your [AWS Console](https://console.aws.amazon.com) and select S
 
 Select **Create Bucket** and pick a name for your application and select the **US East (N. Virginia) Region** Region. Since our application is being served out using a CDN, the region should not matter to us.
 
-![Create S3 static website Bucket screenshot](/assets/create-s3-bucket.png)
+![Create S3 static website Bucket screenshot](/assets/create-s3-bucket-1-name.png)
 
-Go through the next steps and leave the defaults by clicking **Next**.
+Click **Next** through the configure options step.
 
-![Create S3 static website Bucket next properties screenshot](/assets/create-s3-bucket-next-properties.png)
+![Create S3 static website Bucket next configure options screenshot](/assets/create-s3-bucket-2-configure-options.png)
 
-![Create S3 static website Bucket next permissions screenshot](/assets/create-s3-bucket-next-permissions.png)
+In the permissions step, make sure to uncheck **Block new public bucket policies** and **Block public and cross-account access if bucket has public policies**. Making buckets public is a common security error, but in our case we'll be serving our app from the bucket, so want it to be public.
 
-![Create S3 static website Bucket next review screenshot](/assets/create-s3-bucket-next-review.png)
+![Create S3 static website Bucket next permissions screenshot](/assets/create-s3-bucket-3-permissions.png)
+
+Click **Create bucket** on the review page to create the bucket.
+
+![Create S3 static website Bucket next review screenshot](/assets/create-s3-bucket-4-review.png)
 
 Now click on your newly created bucket from the list and navigate to its permissions panel by clicking **Permissions**.
 
@@ -66,7 +70,7 @@ And finally we need to turn our bucket into a static website. Select the **Prope
 
 ![Select properties tab screenshot](/assets/select-bucket-properties.png)
 
-Select **Static website hosting**. 
+Select **Static website hosting**.
 
 ![Select static website hosting screenshot](/assets/select-static-website-hosting.png)
 

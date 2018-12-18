@@ -65,7 +65,25 @@ Given the rough dependency graph above, you can script your CI/CD pipeline to en
 
 It is very likely that your `auth`, `database`, and `uploads` service don't change very often. You might also need to follow some strict policies across your team to make sure no haphazard changes are made to it. So by separating out these resources into their own services (like we have done in the past few chapters) you can carry out updates to these services by using a manual approval step as a part of the deployment process. This leaves the API services. These need to be deployed manually once and can later be automated.
 
-It should also be noted that while you won't be able to automatically deploy using [Seed](https://seed.run) as we talked about in [Part II of this guide]({% link _chapters/automating-serverless-deployments.md %}). We are working on a way to handle this automatically and feel free to [get in touch with us if you are interested](mailto:contact@seed.run).
+### Service Dependencies in Seed
+
+[Seed](/) has a concept of [Deploy Phases](https://seed.run/docs/configuring-deploy-phases) to handle service dependencies.
+
+You can configure this by heading to the app settings and hitting **Manage Deploy Phases**.
+
+![Hit Manage Deploy Phases screenshot](/assets/mono-repo/hit-manage-deploy-phases.png)
+
+Here you'll notice that by default all the services are deployed concurrently.
+
+![Default Deploy Phase screenshot](/assets/mono-repo/default-deploy-phase.png)
+
+We can configure our service dependencies by adding the necessary deploy phases and moving the services around.
+
+![Edit Deploy Phase screenshot](/assets/mono-repo/edit-deploy-phase.png)
+
+And when you deploy your app, the deployments are carried out according to the deploy phases specified.
+
+![Deploying with Deploy Phase screenshot](/assets/mono-repo/deploying-with-deploy-phase.png)
 
 ### Environments
 
