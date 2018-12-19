@@ -52,9 +52,9 @@ Les fonctions Lambda doivent être packagées et envoyées à AWS. Il s'agit gé
 
 ### Execution Model
 
-The container (and the resources used by it) that runs our function is managed completely by AWS. It is brought up when an event takes place and is turned off if it is not being used. If additional requests are made while the original event is being served, a new container is brought up to serve a request. This means that if we are undergoing a usage spike, the cloud provider simply creates multiple instances of the container with our function to serve those requests.
+Le conteneur (et les ressources qu'il utilise) qui exécute notre fonction est entièrement géré par AWS. Il est instancié lorsqu'un événement a lieu et est désactivé s'il n'est pas utilisé. Si des requêtes supplémentaires sont effectuées pendant que l'événement d'origine est servi, un nouveau conteneur est créé pour répondre à une demande. Cela signifie que si nous connaissons un pic d'utilisation, le fournisseur de cloud crée simplement plusieurs instances du conteneur avec notre fonction pour répondre à ces requêtes.
 
-This has some interesting implications. Firstly, our functions are effectively stateless. Secondly, each request (or event) is served by a single instance of a Lambda function. This means that you are not going to be handling concurrent requests in your code. AWS brings up a container whenever there is a new request. It does make some optimizations here. It will hang on to the container for a few minutes (5 - 15mins depending on the load) so it can respond to subsequent requests without a cold start.
+Cela a des implications intéressantes. Premièrement, nos fonctions sont effectivement sans état. Deuxièmement, chaque demande (ou événement) est servi par une seule instance d'une fonction Lambda. Cela signifie que vous ne traiterez pas de demandes concurrent dans votre code. AWS crée un conteneur chaque fois qu'il y a une nouvelle requête. Il y a quelques optimisations de ce côté là. Les conteneurs restent en veille pendant quelques minutes (5 à 15 minutes en fonction de la charge) afin de pouvoir répondre aux demandes ultérieures sans démarrage à froid.
 
 ### Stateless Functions
 
