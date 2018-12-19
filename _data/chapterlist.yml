@@ -339,6 +339,8 @@ extra-backend:
       url: /chapters/serverless-environment-variables.html
     - page: Stages in Serverless Framework
       url: /chapters/stages-in-serverless-framework.html
+    - page: Backups in DynamoDB
+      url: /chapters/backups-in-dynamodb.html
     - page: Configure multiple AWS profiles
       url: /chapters/configure-multiple-aws-profiles.html
     - page: Customize the Serverless IAM Policy
