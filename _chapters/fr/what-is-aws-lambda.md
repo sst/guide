@@ -2,7 +2,7 @@
 layout: post
 title: Qu'est-ce qu'AWS Lambda ?
 date: 2016-12-23 18:00:00
-lang: en
+lang: fr
 ref: what-is-aws-lambda
 description: AWS Lambda est un service serverless fourni par Amazon Web Services. Il exécute des morceaux de code (appelés fonctions Lambda) dans des conteneurs sans état qui sont générés à la demande pour répondre à des événements (tels que des requêtes HTTP). Les conteneurs sont ensuite supprimer lorsque l'exécution de la fonction est terminée. Les utilisateurs ne sont facturés que pour le temps nécessaire à l'exécution de la fonction.
 comments_id: what-is-aws-lambda/308
@@ -44,7 +44,7 @@ Voici enfin ce à quoi ressemble une fonction Lambda (en Node.js).
 
 ![Anatomy of a Lambda Function image](/assets/anatomy-of-a-lambda-function.png)
 
-Le nom de la fonction Lambda est `myHandler`. L'objet `event` contient toutes les informations à propos de l'évenement qui à déclanché la Lambda. Dans le cas d'une requête HTTP, il contient toutes les informations de la requête. L'objet `context` contient les informations de runtime de la Lambda qui s'exécute. Après avoir traiter l'évenement dans la fonction Lambda, il suffit d'appeler la méthode `callback` avec les résulats (ou erreurs) et AWS se charge de les rajouter à la réponse.
+Le nom de la fonction Lambda est `myHandler`. L'objet `event` contient toutes les informations à propos de l'évenement qui a déclanché la Lambda. Dans le cas d'une requête HTTP, il contient toutes les informations de la requête. L'objet `context` contient les informations de runtime de la Lambda qui s'exécute. Après avoir traiter l'évenement dans la fonction Lambda, il suffit d'appeler la méthode `callback` avec les résulats (ou erreurs) et AWS se charge de les rajouter à la réponse.
 
 ### Packaging Functions
 
