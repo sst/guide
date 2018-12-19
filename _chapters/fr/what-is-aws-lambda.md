@@ -38,13 +38,13 @@ Le temps maximum d'exécution signifie que les fonctions Lambda ne peuvent pas t
 
 La taille du package correspond à tout le code nécessaire pour éxécuter la fonction. Cela inclut toutes les dépendances (le dossier `node_modules/` dans le cas de Node.js) dont votre fonction a besoin, Il y a une limite à 250MB non-compressé et 50MB après compression. On va s'intéresser au processus de packaging un peu plus tard.
 
-### Lambda Function
+### Fonction Lambda 
 
-Finally here is what a Lambda function (a Node.js version) looks like.
+Voici enfin ce à quoi ressemble une fonction Lambda (en Node.js).
 
 ![Anatomy of a Lambda Function image](/assets/anatomy-of-a-lambda-function.png)
 
-Here `myHandler` is the name of our Lambda function. The `event` object contains all the information about the event that triggered this Lambda. In the case of a HTTP request it'll be information about the specific HTTP request. The `context` object contains info about the runtime our Lambda function is executing in. After we do all the work inside our Lambda function, we simply call the `callback` function with the results (or the error) and AWS will respond to the HTTP request with it. 
+Le nom de la fonction Lambda est `myHandler`. L'objet `event` contient toutes les informations à propos de l'évenement qui à déclanché la Lambda. Dans le cas d'une requête HTTP, il contient toutes les informations de la requête. L'objet `context` contient les informations de runtime de la Lambda qui s'exécute. Après avoir traiter l'évenement dans la fonction Lambda, il suffit d'appeler la méthode `callback` avec les résulats (ou erreurs) et AWS se charge de les rajouter à la réponse.
 
 ### Packaging Functions
 
