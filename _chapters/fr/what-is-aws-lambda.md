@@ -10,33 +10,33 @@ comments_id: what-is-aws-lambda/308
 
 [AWS Lambda](https://aws.amazon.com/lambda/) (ou tout simplement Lambda) est un service de serverless proposé par AWS. Dans ce chapitre, on va utiliser Lambda pour construire nos applications. Bien qu'il ne soit pas nécessaire d'expliquer le fonctionnement interne de Lambda, il est important d’avoir une idée générale de la façon dont vos fonctions seront exécutées.
 
-### Lambda Specs
+### Spécifications de Lambda
 
-Let's start by quickly looking at the technical specifications of AWS Lambda. Lambda supports the following runtimes.
+Voici les spécifications techniques d'AWS Lambda. Lambda supporte les langages suivants :
 
-- Node.js: v8.10 and v6.10
+- Node.js: v8.10 et v6.10
 - Java 8
-- Python: 3.6 and 2.7
-- .NET Core: 1.0.1 and 2.0
+- Python: 3.6 et 2.7
+- .NET Core: 1.0.1 et 2.0
 - Go 1.x
 - Ruby 2.5
 - Rust
 
-Each function runs inside a container with a 64-bit Amazon Linux AMI. And the execution environment has:
+Chaque fonction s'exécute dans un conteneur 64-bit Amazon Linux AMI. Et l'environnement d'exécution a :
 
-- Memory: 128MB - 3008MB, in 64 MB increments
-- Ephemeral disk space: 512MB
-- Max execution duration: 900 seconds
-- Compressed package size: 50MB
-- Uncompressed package size: 250MB
+- Entre 128 MB et 3008 MB de RAM, par incrément de 64 MB
+- Disque dur éphémère de 512MB
+- Temps maximum d'exécution 900 secondes (15 minutes)
+- Taille du package compressé : 50MB
+- Taille du package non-compressé : 250MB
 
-You might notice that CPU is not mentioned as a part of the container specification. This is because you cannot control the CPU directly. As you increase the memory, the CPU is increased as well.
+On peut remarquer que le CPU n'est pas mentionné dans les spécifications du container. C'est parce que l'on a pas directement le contrôle sur le CPU. Le CPU augmente en même temps que la RAM.
 
-The ephemeral disk space is available in the form of the `/tmp` directory. You can only use this space for temporary storage since subsequent invocations will not have access to this. We'll talk a bit more on the stateless nature of the Lambda functions below.
+Le répertoire `/tmp` du disque dur est disponible. On ne peut utiliser cet espace que pour du stockage temporaire. Les invocations suivantes n'y auront pas accès. On parlera plus en détail de la nature "sans état" des fonctions Lambda dans les prochaines sections.
 
-The execution duration means that your Lambda function can run for a maximum of 900 seconds or 15 minutes. This means that Lambda isn't meant for long running processes.
+Le temps maximum d'exécution signifie que les fonctions Lambda ne peuvent pas tourner pendant plus de 900 secondes ou 15 minutes. Lambda n'est donc pas fait pour exécuter des programmes longs.
 
-The package size refers to all your code necessary to run your function. This includes any dependencies (`node_modules/` directory in case of Node.js) that your function might import. There is a limit of 250MB on the uncompressed package and a 50MB limit once it has been compressed. We'll take a look at the packaging process below.
+La taille du package correspond à tout le code nécessaire pour éxécuter la fonction. Cela inclut toutes les dépendances (le dossier `node_modules/` dans le cas de Node.js) dont votre fonction a besoin, Il y a une limite à 250MB non-compressé et 50MB après compression. On va s'intéresser au processus de packaging un peu plus tard.
 
 ### Lambda Function
 
