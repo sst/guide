@@ -46,9 +46,9 @@ Voici enfin ce à quoi ressemble une fonction Lambda (en Node.js).
 
 Le nom de la fonction Lambda est `myHandler`. L'objet `event` contient toutes les informations à propos de l'évenement qui a déclanché la Lambda. Dans le cas d'une requête HTTP, il contient toutes les informations de la requête. L'objet `context` contient les informations de runtime de la Lambda qui s'exécute. Après avoir traiter l'évenement dans la fonction Lambda, il suffit d'appeler la méthode `callback` avec les résulats (ou erreurs) et AWS se charge de les rajouter à la réponse.
 
-### Packaging Functions
+### Packaging des fonctions
 
-Lambda functions need to be packaged and sent to AWS. This is usually a process of compressing the function and all its dependencies and uploading it to a S3 bucket. And letting AWS know that you want to use this package when a specific event takes place. To help us with this process we use the [Serverless Framework](https://serverless.com). We'll go over this in detail later on in this guide.
+Les fonctions Lambda doivent être packagées et envoyées à AWS. Il s'agit généralement d'un processus de compression de la fonction et de toutes ses dépendances, puis de son transfer vers un bucket S3. Il faut ensuite indiquer à AWS qu'on souhaite utiliser ce package lorsqu'un événement spécifique se produit. Pour simplifier ce processus, on utilise le [Framework Serverless](https://serverless.com). On reviendra sur cela plus tard dans ce guide.
 
 ### Execution Model
 
