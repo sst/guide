@@ -50,19 +50,19 @@ Le nom de la fonction Lambda est `myHandler`. L'objet `event` contient toutes le
 
 Les fonctions Lambda doivent être packagées et envoyées à AWS. Il s'agit généralement d'un processus de compression de la fonction et de toutes ses dépendances, puis de son transfer vers un bucket S3. Il faut ensuite indiquer à AWS qu'on souhaite utiliser ce package lorsqu'un événement spécifique se produit. Pour simplifier ce processus, on utilise le [Framework Serverless](https://serverless.com). On reviendra sur cela plus tard dans ce guide.
 
-### Execution Model
+### Modèle d'execution
 
 Le conteneur (et les ressources qu'il utilise) qui exécute notre fonction est entièrement géré par AWS. Il est instancié lorsqu'un événement a lieu et est désactivé s'il n'est pas utilisé. Si des requêtes supplémentaires sont effectuées pendant que l'événement d'origine est servi, un nouveau conteneur est créé pour répondre à une demande. Cela signifie que si nous connaissons un pic d'utilisation, le fournisseur de cloud crée simplement plusieurs instances du conteneur avec notre fonction pour répondre à ces requêtes.
 
 Cela a des implications intéressantes. Premièrement, nos fonctions sont effectivement sans état. Deuxièmement, chaque demande (ou événement) est servi par une seule instance d'une fonction Lambda. Cela signifie que vous ne traiterez pas de demandes concurrent dans votre code. AWS crée un conteneur chaque fois qu'il y a une nouvelle requête. Il y a quelques optimisations de ce côté là. Les conteneurs restent en veille pendant quelques minutes (5 à 15 minutes en fonction de la charge) afin de pouvoir répondre aux demandes ultérieures sans démarrage à froid.
 
-### Stateless Functions
+### Fonctions sans état
 
-The above execution model makes Lambda functions effectively stateless. This means that every time your Lambda function is triggered by an event it is invoked in a completely new environment. You don't have access to the execution context of the previous event.
+Le modèle d'exécution ci-dessus rend les fonctions Lambda efficaces sans état. Cela signifie que chaque fois que votre fonction Lambda est déclenchée par un événement, elle est appelée dans un nouvel environnement. Vous n'avez pas accès au contexte d'exécution de l'événement précédent.
 
-However, due to the optimization noted above, the actual Lambda function is invoked only once per container instantiation. Recall that our functions are run inside containers. So when a function is first invoked, all the code in our handler function gets executed and the handler function gets invoked. If the container is still available for subsequent requests, your function will get invoked and not the code around it.
+Cependant, en raison de l'optimisation précédement décrite, la fonction Lambda n'est appelée qu'une fois par instanciation de conteneur. Il faut se rappeler que les fonctions sont exécutées dans des conteneurs. Ainsi, lorsqu'une fonction est appelée pour la première fois, tout le code de la Lambda est exécuté et la fonction est invoquée. Si le conteneur est toujours disponible pour les requêtes suivantes, seule la fonction sera invoquée et non le code qui l'entoure.
 
-For example, the `createNewDbConnection` method below is called once per container instantiation and not every time the Lambda function is invoked. The `myHandler` function on the other hand is called on every invocation.
+Par exemple, la méthode `createNewDbConnection` ci-dessous est appelée une fois par instanciation de conteneur et non à chaque fois que la fonction Lambda est appelée. En revanche, la fonction `myHandler` est appelée à chaque appel.
 
 ``` javascript
 var dbConnection = createNewDbConnection();
@@ -73,9 +73,9 @@ exports.myHandler = function(event, context, callback) {
 };
 ```
 
-This caching effect of containers also applies to the `/tmp` directory that we talked about above. It is available as long as the container is being cached.
+Cet mise en cache des conteneurs s'applique également au répertoire `/ tmp` évoquée plus haut. Il est disponible tant que le conteneur est en cache.
 
-Now you can guess that this isn't a very reliable way to make our Lambda functions stateful. This is because we just don't control the underlying process by which Lambda is invoked or it's containers are cached.
+On comprend maintenant pourquoi ce n'est pas très fiable de garder l'état des fonctions Lambda. En effet, on ne contrôle tout simplement pas le processus sous-jacent par lequel Lambda est appelé ou ses conteneurs sont mis en cache.
 
 ### Pricing
 
