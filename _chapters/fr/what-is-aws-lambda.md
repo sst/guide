@@ -30,13 +30,13 @@ Chaque fonction s'exécute dans un conteneur 64-bit Amazon Linux AMI. Et l'envir
 - Taille du package compressé : 50MB
 - Taille du package non-compressé : 250MB
 
-On peut remarquer que le CPU n'est pas mentionné dans les spécifications du container. C'est parce que l'on a pas directement le contrôle sur le CPU. Le CPU augmente en même temps que la RAM.
+On peut remarquer que le CPU n'est pas mentionné dans les spécifications du container. C'est parce que l'on n'a pas directement le contrôle sur le CPU. Le CPU augmente en même temps que la RAM.
 
 Le répertoire `/tmp` du disque dur est disponible. On ne peut utiliser cet espace que pour du stockage temporaire. Les invocations suivantes n'y auront pas accès. On parlera plus en détail de la nature "sans état" des fonctions Lambda dans les prochaines sections.
 
 Le temps maximum d'exécution signifie que les fonctions Lambda ne peuvent pas tourner pendant plus de 900 secondes ou 15 minutes. Lambda n'est donc pas fait pour exécuter des programmes longs.
 
-La taille du package correspond à tout le code nécessaire pour éxécuter la fonction. Cela inclut toutes les dépendances (le dossier `node_modules/` dans le cas de Node.js) dont votre fonction a besoin, Il y a une limite à 250MB non-compressé et 50MB après compression. On va s'intéresser au processus de packaging un peu plus tard.
+La taille du package correspond à tout le code nécessaire pour exécuter la fonction. Cela inclut toutes les dépendances (le dossier `node_modules/` dans le cas de Node.js) dont votre fonction a besoin, Il y a une limite à 250MB non-compressé et 50MB après compression. On va s'intéresser au processus de packaging un peu plus tard.
 
 ### Fonction Lambda 
 
@@ -44,23 +44,23 @@ Voici enfin ce à quoi ressemble une fonction Lambda (en Node.js).
 
 ![Anatomy of a Lambda Function image](/assets/anatomy-of-a-lambda-function.png)
 
-Le nom de la fonction Lambda est `myHandler`. L'objet `event` contient toutes les informations à propos de l'évenement qui a déclanché la Lambda. Dans le cas d'une requête HTTP, il contient toutes les informations de la requête. L'objet `context` contient les informations de runtime de la Lambda qui s'exécute. Après avoir traiter l'évenement dans la fonction Lambda, il suffit d'appeler la méthode `callback` avec les résulats (ou erreurs) et AWS se charge de les rajouter à la réponse.
+Le nom de la fonction Lambda est `myHandler`. L'objet `event` contient toutes les informations à propos de l'événement qui a déclenché la Lambda. Dans le cas d'une requête HTTP, il contient toutes les informations de la requête. L'objet `context` contient les informations de runtime de la Lambda qui s'exécute. Après avoir traité l'événement dans la fonction Lambda, il suffit d'appeler la méthode `callback` avec les résultats (ou erreurs) et AWS se charge de les rajouter à la réponse.
 
 ### Packaging des fonctions
 
-Les fonctions Lambda doivent être packagées et envoyées à AWS. Il s'agit généralement d'un processus de compression de la fonction et de toutes ses dépendances, puis de son transfer vers un bucket S3. Il faut ensuite indiquer à AWS qu'on souhaite utiliser ce package lorsqu'un événement spécifique se produit. Pour simplifier ce processus, on utilise le [Framework Serverless](https://serverless.com). On reviendra sur cela plus tard dans ce guide.
+Les fonctions Lambda doivent être packagées et envoyées à AWS. Il s'agit généralement d'un processus de compression de la fonction et de toutes ses dépendances, puis de son transfert vers un bucket S3. Il faut ensuite indiquer à AWS qu'on souhaite utiliser ce package lorsqu'un événement spécifique se produit. Pour simplifier ce processus, on utilise le [Framework Serverless](https://serverless.com). On reviendra sur cela plus tard dans ce guide.
 
 ### Modèle d'execution
 
 Le conteneur (et les ressources qu'il utilise) qui exécute notre fonction est entièrement géré par AWS. Il est instancié lorsqu'un événement a lieu et est désactivé s'il n'est pas utilisé. Si des requêtes supplémentaires sont effectuées pendant que l'événement d'origine est servi, un nouveau conteneur est créé pour répondre à une demande. Cela signifie que si nous connaissons un pic d'utilisation, le fournisseur de cloud crée simplement plusieurs instances du conteneur avec notre fonction pour répondre à ces requêtes.
 
-Cela a des implications intéressantes. Premièrement, nos fonctions sont effectivement sans état. Deuxièmement, chaque demande (ou événement) est servi par une seule instance d'une fonction Lambda. Cela signifie que vous ne traiterez pas de demandes concurrent dans votre code. AWS crée un conteneur chaque fois qu'il y a une nouvelle requête. Il y a quelques optimisations de ce côté là. Les conteneurs restent en veille pendant quelques minutes (5 à 15 minutes en fonction de la charge) afin de pouvoir répondre aux demandes ultérieures sans démarrage à froid.
+Cela a des implications intéressantes. Premièrement, nos fonctions sont effectivement sans état. Deuxièmement, chaque requête (ou événement) est servi par une seule instance d'une fonction Lambda. Cela signifie que vous ne traiterez pas de requête concurrente dans votre code. AWS crée un conteneur chaque fois qu'il y a une nouvelle requête. Il y a quelques optimisations de ce côté-là. Les conteneurs restent en veille pendant quelques minutes (5 à 15 minutes en fonction de la charge) afin de pouvoir répondre aux requêtes ultérieures sans démarrage à froid.
 
 ### Fonctions sans état
 
 Le modèle d'exécution ci-dessus rend les fonctions Lambda efficaces sans état. Cela signifie que chaque fois que votre fonction Lambda est déclenchée par un événement, elle est appelée dans un nouvel environnement. Vous n'avez pas accès au contexte d'exécution de l'événement précédent.
 
-Cependant, en raison de l'optimisation précédement décrite, la fonction Lambda n'est appelée qu'une fois par instanciation de conteneur. Il faut se rappeler que les fonctions sont exécutées dans des conteneurs. Ainsi, lorsqu'une fonction est appelée pour la première fois, tout le code de la Lambda est exécuté et la fonction est invoquée. Si le conteneur est toujours disponible pour les requêtes suivantes, seule la fonction sera invoquée et non le code qui l'entoure.
+Cependant, en raison de l'optimisation précédemment décrite, la fonction Lambda n'est appelée qu'une fois par instanciation de conteneur. Il faut se rappeler que les fonctions sont exécutées dans des conteneurs. Ainsi, lorsqu'une fonction est appelée pour la première fois, tout le code de la Lambda est exécuté et la fonction est invoquée. Si le conteneur est toujours disponible pour les requêtes suivantes, seule la fonction sera invoquée et non le code qui l'entoure.
 
 Par exemple, la méthode `createNewDbConnection` ci-dessous est appelée une fois par instanciation de conteneur et non à chaque fois que la fonction Lambda est appelée. En revanche, la fonction `myHandler` est appelée à chaque appel.
 
@@ -73,7 +73,7 @@ exports.myHandler = function(event, context, callback) {
 };
 ```
 
-Cet mise en cache des conteneurs s'applique également au répertoire `/ tmp` évoquée plus haut. Il est disponible tant que le conteneur est en cache.
+Cette mise en cache des conteneurs s'applique également au répertoire `/tmp` évoqué plus haut. Il est disponible tant que le conteneur est en cache.
 
 On comprend maintenant pourquoi ce n'est pas très fiable de garder l'état des fonctions Lambda. En effet, on ne contrôle tout simplement pas le processus sous-jacent par lequel Lambda est appelé ou ses conteneurs sont mis en cache.
 
@@ -85,6 +85,6 @@ Notez que même si AWS peut conserver le conteneur avec votre fonction Lambda ap
 
 Lambda est livré avec un niveau gratuit très généreux et il est peu probable que vous le dépassiez en suivant sur ce guide.
 
-Le niveau gratuit Lambda comprend 1 million de requêtes gratuites par mois et 400 000 Go de secondes de temps de calcul par mois. Au-delà, cela coûte 0,20 USD par million de demandes et 0,00001667 USD par Go-seconde. Les GB-secondes sont basées sur la consommation de mémoire de la fonction Lambda. Pour plus de détails, consultez la page [Tarifs Lambda](https://aws.amazon.com/lambda/pricing/).
+Le niveau gratuit Lambda comprend 1 million de requêtes gratuites par mois et 400 000 GB de secondes de temps de calcul par mois. Au-delà, cela coûte 0,20 USD par million de demandes et 0,00001667 USD par Go-seconde. Les GB-secondes sont basées sur la consommation de mémoire de la fonction Lambda. Pour plus de détails, consultez la page [Tarifs Lambda](https://aws.amazon.com/lambda/pricing/).
 
 D'après notre expérience, Lambda est généralement la partie la moins coûteuse des coûts d'infrastructure.
