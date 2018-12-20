@@ -77,17 +77,14 @@ Cet mise en cache des conteneurs s'applique également au répertoire `/ tmp` é
 
 On comprend maintenant pourquoi ce n'est pas très fiable de garder l'état des fonctions Lambda. En effet, on ne contrôle tout simplement pas le processus sous-jacent par lequel Lambda est appelé ou ses conteneurs sont mis en cache.
 
-### Pricing
+### Tarifs
 
-Finally, Lambda functions are billed only for the time it takes to execute your function. And it is calculated from the time it begins executing till when it returns or terminates. It is rounded up to the nearest 100ms.
+Enfin, les fonctions Lambda ne sont facturées que pour le temps nécessaire à l’exécution de votre fonction. Et il est calculé à partir du moment où la fonction commence à s'exécuter jusqu'au moment où elle retourne le résultat ou se termine. Il est arrondi au dixième de seconde le plus proche.
 
-Note that while AWS might keep the container with your Lambda function around after it has completed; you are not going to be charged for this.
+Notez que même si AWS peut conserver le conteneur avec votre fonction Lambda après son achèvement, vous ne serez pas facturé pour cela.
 
-Lambda comes with a very generous free tier and it is unlikely that you will go over this while working on this guide.
+Lambda est livré avec un niveau gratuit très généreux et il est peu probable que vous le dépassiez en suivant sur ce guide.
 
-The Lambda free tier includes 1M free requests per month and 400,000 GB-seconds of compute time per month. Past this, it costs $0.20 per 1 million requests and $0.00001667 for every GB-seconds. The GB-seconds is based on the memory consumption of the Lambda function. For further details check out the [Lambda pricing page](https://aws.amazon.com/lambda/pricing/).
+Le niveau gratuit Lambda comprend 1 million de requêtes gratuites par mois et 400 000 Go de secondes de temps de calcul par mois. Au-delà, cela coûte 0,20 USD par million de demandes et 0,00001667 USD par Go-seconde. Les GB-secondes sont basées sur la consommation de mémoire de la fonction Lambda. Pour plus de détails, consultez la page [Tarifs Lambda](https://aws.amazon.com/lambda/pricing/).
 
-In our experience, Lambda is usually the least expensive part of our infrastructure costs.
-
-Next, let's take a deeper look into the advantages of serverless, including the total cost of running our demo app.
-
+D'après notre expérience, Lambda est généralement la partie la moins coûteuse des coûts d'infrastructure.
