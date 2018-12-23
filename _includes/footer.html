@@ -32,56 +32,19 @@
 </footer>
 
 <style>
-  /* Copy code button styles */
-  div.highlighter-rouge {
-    position: relative;
-  }
-
-  div.highlighter-rouge code.copied {
-    animation: shot .3s ease-in-out;
-  }
-
-  @keyframes shot {
-    from { opacity: .5; }
-    to { opacity: 1; }
-  }
-
-  .highlighter-rouge .clipbutton {
-    position: absolute;
-    top: 9px;
-    right: 13px;
-    z-index: 1;
-    opacity: 0;
-    padding: 4px 8px;
-    border: none;
-    border-radius: 3px;
-    background-color: #9068BE;
-    color: #fff;
-    transition: opacity .3s ease-in-out;
-  }
-
-  .clipbutton:hover {
-    background-color: #7649aa;
-  }
-
-  .clipbutton:focus {
-    outline: none;
-  }
-
-  .highlighter-rouge:hover .clipbutton {
-    opacity: 1;
-    cursor: pointer;
-  }
 </style>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<!-- Newsletter Form JS -->
+<script src="https://emailoctopus.com/bundles/emailoctopuslist/js/formEmbed.js?1519058398"></script>
+<!-- Code Snippet Copy JS -->
 <script src="https://unpkg.com/clipboard@2.0.0/dist/clipboard.min.js"></script>
 <script>
-
-  const codeElements = document.querySelectorAll(".highlighter-rouge code");
+  var codeElements = document.querySelectorAll(".highlighter-rouge code");
 
   for (i = 0; i < codeElements.length; i++) {
-    const currentItem = codeElements[i];
-    const clipButton = `<button class="clipbutton">Copy</button>`;
+    var currentItem = codeElements[i];
+    var clipButton = '<button class="clipbutton">Copy</button>';
     currentItem.insertAdjacentHTML("beforebegin", clipButton);
   }
 
@@ -91,30 +54,13 @@
     }
   });
 
-  clipboard.on("success", function (e) {
+  clipboard.on("success", function(e) {
     e.clearSelection();
-    e.trigger.nextElementSibling.classList.add('copied');
+    e.trigger.nextElementSibling.classList.add("copied");
     e.trigger.innerText = "Copied!";
     let t = setTimeout(function() {
-      e.trigger.nextElementSibling.classList.remove('copied');
+      e.trigger.nextElementSibling.classList.remove("copied");
       e.trigger.innerText = "Copy";
     }, 300);
   });
-
 </script>
-
-{% if jekyll.environment == 'production' %}
-<!--
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/58b60cd55b8fe5150ee934ea/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
--->
-{% endif %}
