@@ -31,18 +31,33 @@
 
 </footer>
 
-{% if jekyll.environment == 'production' %}
-<!--
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/58b60cd55b8fe5150ee934ea/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<!-- Newsletter Form JS -->
+<script src="https://emailoctopus.com/bundles/emailoctopuslist/js/formEmbed.js?1519058398"></script>
+<!-- Code Snippet Copy JS -->
+<script src="https://unpkg.com/clipboard@2.0.0/dist/clipboard.min.js"></script>
+<script>
+  var codeElements = document.querySelectorAll(".highlighter-rouge code");
+
+  for (i = 0; i < codeElements.length; i++) {
+    var currentItem = codeElements[i];
+    var clipButton = '<button class="clipbutton">Copy</button>';
+    currentItem.insertAdjacentHTML("beforebegin", clipButton);
+  }
+
+  var clipboard = new ClipboardJS(".clipbutton", {
+    target: function(trigger) {
+      return trigger.nextElementSibling;
+    }
+  });
+
+  clipboard.on("success", function(e) {
+    e.clearSelection();
+    e.trigger.nextElementSibling.classList.add("copied");
+    e.trigger.innerText = "Copied!";
+    let t = setTimeout(function() {
+      e.trigger.nextElementSibling.classList.remove("copied");
+      e.trigger.innerText = "Copy";
+    }, 300);
+  });
 </script>
--->
-{% endif %}
