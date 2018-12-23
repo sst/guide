@@ -97,7 +97,7 @@ You can read more about the details of [Point-in-time Recovery here](https://doc
 
 ### Conclusion
 
-Given, the two above types; a good strategy is to enable Point-in-time recovery and maintain a schedule of longer term On-demand backups.
+Given, the two above types; a good strategy is to enable Point-in-time recovery and maintain a schedule of longer term On-demand backups. There are quite a few plugins and scripts that can help you with scheduling On-demand backups, here is one created by one of our readers - https://github.com/UnlyEd/serverless-plugin-dynamodb-backups.
 
 Also worth noting, DynamoDB's backup and restore actions have no impact on the table performance or availability. No worrying about long backup processes that slow down performance for your active users.
 
