@@ -2,6 +2,7 @@
 layout: post
 title: Who Is This Guide For?
 date: 2016-12-21 00:00:00
+lang: en
 comments_id: who-is-this-guide-for/96
 ---
 
