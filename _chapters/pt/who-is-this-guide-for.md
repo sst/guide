@@ -3,6 +3,8 @@ layout: post
 title: Who Is This Guide For?
 date: 2016-12-21 00:00:00
 lang: pt
+ref: who-is-this-guide-for
+context: true
 comments_id: who-is-this-guide-for/96
 ---
 
