@@ -8,7 +8,7 @@ description: AWS Lambda es un servicio de computación sin servidor proporcionad
 comments_id: what-is-aws-lambda/308
 ---
 
-[AWS Lambda] (https://aws.amazon.com/lambda/) (o Lambda para abreviar) es un servicio de computación sin servidor proporcionado por AWS. En este capítulo vamos a utilizar Lambda para construir nuestra aplicación serverless. Y si bien no necesitamos tratar los aspectos internos de cómo funciona Lambda, es importante tener una idea general de cómo se ejecutarán estas funciones.
+[AWS Lambda](https://aws.amazon.com/lambda/) (o Lambda para abreviar) es un servicio de computación sin servidor proporcionado por AWS. En este capítulo vamos a utilizar Lambda para construir nuestra aplicación serverless. Y si bien no necesitamos tratar los aspectos internos de cómo funciona Lambda, es importante tener una idea general de cómo se ejecutarán estas funciones.
 
 ### Especificaciones de Lambda
 
@@ -48,7 +48,7 @@ Finalmente, así es como se ve una función Lambda (una versión en Node.js).
 
 ### Empaquetando funciones
 
-Las funciones Lambda se deben empaquetar y enviar a AWS. Este suele ser un proceso que comprime la función y todas sus dependencias y la carga en un contenedor S3. Se le dice a AWS que deseas utilizar este paquete cuando se realice un evento específico. Para ayudarnos con este proceso, usaremos [Serverless Framework] (https://serverless.com). Repasaremos esto en detalle más adelante en esta guía.
+Las funciones Lambda se deben empaquetar y enviar a AWS. Este suele ser un proceso que comprime la función y todas sus dependencias y la carga en un contenedor S3. Se le dice a AWS que deseas utilizar este paquete cuando se realice un evento específico. Para ayudarnos con este proceso, usaremos [Serverless Framework](https://serverless.com). Repasaremos esto en detalle más adelante en esta guía.
 
 ### Modelo de ejecución
 
@@ -85,7 +85,7 @@ Ten en cuenta que, mientras AWS pueda mantener el contenedor con tu función Lam
 
 Lambda viene con una tarifa gratuita muy generosa y es poco probable que sobrepases este límite mientras trabajas en esta guía.
 
-La tarifa gratuita de Lambda incluye 1 millón de solicitudes gratuitas por mes y 400,000 GB-segundos de tiempo de cómputo por mes. Más allá de esto, cuesta $0.20 por 1 millón de solicitudes y $0.00001667 por cada GB-segundo. Los segundos en GB se basan en el consumo de memoria de la función Lambda. Para obtener más información, consulta la [página de precios de Lambda] (https://aws.amazon.com/lambda/pricing/).
+La tarifa gratuita de Lambda incluye 1 millón de solicitudes gratuitas por mes y 400,000 GB-segundos de tiempo de cómputo por mes. Más allá de esto, cuesta $0.20 por 1 millón de solicitudes y $0.00001667 por cada GB-segundo. Los segundos en GB se basan en el consumo de memoria de la función Lambda. Para obtener más información, consulta la [página de precios de Lambda](https://aws.amazon.com/lambda/pricing/).
 
 En nuestra experiencia, Lambda suele ser la parte más barata de los costos de infraestructura.
 
