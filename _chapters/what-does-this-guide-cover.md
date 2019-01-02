@@ -3,6 +3,9 @@ layout: post
 ref: what-does-this-guide-cover
 title: What Does This Guide Cover?
 date: 2016-12-22 00:00:00
+lang: en
+ref: what-does-this-guide-cover
+context: true
 comments_id: what-does-this-guide-cover/83
 ---
 
