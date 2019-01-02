@@ -42,7 +42,7 @@ La taille du package correspond à tout le code nécessaire pour exécuter la fo
 
 Voici enfin ce à quoi ressemble une fonction Lambda (en Node.js).
 
-![Anatomy of a Lambda Function image](/assets/anatomy-of-a-lambda-function.png)
+![Anatomie d'une fonction Lambda](/assets/anatomy-of-a-lambda-function.png)
 
 Le nom de la fonction Lambda est `myHandler`. L'objet `event` contient toutes les informations à propos de l'événement qui a déclenché la Lambda. Dans le cas d'une requête HTTP, il contient toutes les informations de la requête. L'objet `context` contient les informations de runtime de la Lambda qui s'exécute. Après avoir traité l'événement dans la fonction Lambda, il suffit d'appeler la méthode `callback` avec les résultats (ou erreurs) et AWS se charge de les rajouter à la réponse.
 
