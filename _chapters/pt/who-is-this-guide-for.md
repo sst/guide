@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Who Is This Guide For?
+title: Para quem é este guia?
 date: 2016-12-21 00:00:00
 lang: pt
 ref: who-is-this-guide-for
