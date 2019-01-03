@@ -28,7 +28,7 @@ In this chapter we'll go over how to use the the `sigV4Client.js`. The basic flo
 The following method can authenticate a user to Cognito User Pool.
 
 ``` js
-funtcion login(username, password) {
+function login(username, password) {
   const userPool = new CognitoUserPool({
     UserPoolId: USER_POOL_ID,
     ClientId: APP_CLIENT_ID

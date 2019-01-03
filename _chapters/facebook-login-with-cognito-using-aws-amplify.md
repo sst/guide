@@ -254,7 +254,7 @@ Let's look at what we are doing here very quickly.
 
 3. If the user has given our app the permissions, then we use the information we receive from Facebook (the user's email) and call the `Auth.federatedSignIn` AWS Amplify method. This effectively logs the user in.
 
-<img class="code-marker" src="/assets/s.png" />Finally, we can use the `FacebookButton.js` in our `src/components/Login.js` and `src/components/Signup.js`.
+<img class="code-marker" src="/assets/s.png" />Finally, we can use the `FacebookButton.js` in our `src/containers/Login.js` and `src/containers/Signup.js`.
 
 ``` html
 <FacebookButton
@@ -273,7 +273,7 @@ handleFbLogin = () => {
 };
 ```
 
-The above logs the user in to our React app, once the Facebook sign up process is complete. Make sure to add these to `src/components/Signup.js` as well.
+The above logs the user in to our React app, once the Facebook sign up process is complete. Make sure to add these to `src/containers/Signup.js` as well.
 
 And that's it, if you head over to your app you should see the login with Facebook option.
 
