@@ -61,7 +61,7 @@ O guia é separado em duas partes. Ambas são relativamente "únicas". A primeir
 
 Então nós decidimos extender esse guia e adicionar uma segunda parte a ele. Essa sendo destinada para pessoas que prentendem usar essa tecnologia para seus próprios projetos. Essa segunda parte ensina a automatizar todas as partes manuais da parte 1 e ajuda você a criar um fluxo de trabalho completo para produção.
 
-#### Part I
+#### Parte I
 
 Criar uma aplicação de notas e fazer deploy dela. Nós vamos cobrir todo o básico. Cada serviço será criado do zero. Em ordem, essa é a lista do que vamos fazer.
 
@@ -88,7 +88,7 @@ Para o frontend:
 - Apontar o nosso domínio com o Route 53 para o CloudFront
 - Configurar o SSL para entregar nossa aplicação via HTTPS
 
-#### Part II
+#### Parte II
 
 Focando nos leitores que estão procurando uma maneira de utilizar o Serverless Stack para os projetos do dia-a-dia. Nós automatizamos todos os passos da primeira etapa. A seguir é o que nós vamos cobrir, por ordem.
 
