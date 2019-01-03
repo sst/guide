@@ -9,7 +9,7 @@ comments_id: set-custom-domains-through-seed/178
 
 Our serverless API uses API Gateway and it gives us some auto-generated endpoints. We would like to configure them to use a scheme like `api.my-domain.com` or something similar. This can take a few different steps through the AWS Console, but it is pretty straightforward to configure through [Seed](https://seed.run).
 
-From our **prod** stage, click on **View Deployment**.
+From our **prod** stage, click on **View Resources**.
 
 ![Prod stage view deployment screenshot](/assets/part2/prod-stage-view-deployment.png)
 

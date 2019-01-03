@@ -30,7 +30,7 @@ $ git commit -m "Making a mistake"
 $ git push
 ```
 
-Now if you head over to the **dev** stage in Seed you can see the build in progress. Wait for it to complete and hit **Promote**.
+Now you can see a build in progress. Wait for it to complete and hit **Promote**.
 
 ![Promote changes to prod screenshot](/assets/part2/promote-changes-to-prod.png)
 
@@ -38,11 +38,9 @@ Confirm the Change Set by hitting **Confirm**.
 
 ![Confirm Change Set to prod screenshot](/assets/part2/confirm-changeset-to-prod.png)
 
-Head back to the service page and let it complete.
-
 ### Enable Access Logs
 
-Now before we test our faulty code, we'll turn on API Gateway access logs so we can see the error. Click on the **prod** stage **View Deployment**.
+Now before we test our faulty code, we'll turn on API Gateway access logs so we can see the error. Click on the **prod** stage **View Resources**.
 
 ![Click View Deployment in prod screenshot](/assets/part2/click-view-deployment-in-prod.png)
 

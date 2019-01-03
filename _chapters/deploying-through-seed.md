@@ -29,7 +29,11 @@ Now if you head into the **dev** stage in Seed, you should see a build in progre
 
 ![Seed dev build in progress screenshot](/assets/part2/seed-dev-build-in-progress.png)
 
-Here you'll see the build taking place live.
+Here you'll see the build taking place live. Click on the service that is being deployed. In this case, we only have one service.
+
+![Dev build page in progress screenshot](/assets/part2/dev-build-page-in-progress.png)
+
+You'll see the build logs for the in progress build here.
 
 ![Dev build logs in progress screenshot](/assets/part2/dev-build-logs-in-progress.png)
 
@@ -72,19 +76,23 @@ We'll be needing these later in our frontend and when we test our APIs.
 
 ![Dev build stack output screenshot](/assets/part2/dev-build-stack-output.png)
 
-You'll also notice that we are ready to promote to production.
+Now head over to the app home page. You'll notice that we are ready to promote to production.
 
 We have a manual promotion step so that you get a chance to review the changes and ensure that you are ready to push to production.
 
 Hit the **Promote** button.
 
-![Promote dev build screenshot](/assets/part2/promote-dev-build.png)
+![Dev build ready to promote screenshot](/assets/part2/dev-build-ready-to-promote.png)
 
 This brings up a dialog that will generate what is called a CloudFormation Change Set. It compares the resources that are being updated with respect to what you have in production. In this case, it is our first commit so we don't have anything to compare to.
 
 Hit **Confirm**.
 
 ![Confirm promote dev build screenshot](/assets/part2/confirm-promote-dev-build.png)
+
+You'll notice that the build is being promoted to the **prod** stage.
+
+![prod build in progress screenshot](/assets/part2/prod-build-in-progress.png)
 
 And if you head over to the **prod** stage, you should see your prod deployment in action. It should take a second to deploy to production. And just like before, make a note of the following.
 
