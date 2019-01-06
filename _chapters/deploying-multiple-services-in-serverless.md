@@ -77,6 +77,10 @@ Here you'll notice that by default all the services are deployed concurrently.
 
 ![Default Deploy Phase screenshot](/assets/mono-repo/default-deploy-phase.png)
 
+Note that, you'll need to add your services first. To do this, head over to the app **Settings** and hit **Add a Service**.
+
+![Click Add Service screenshot](/assets/mono-repo/click-add-service.png)
+
 We can configure our service dependencies by adding the necessary deploy phases and moving the services around.
 
 ![Edit Deploy Phase screenshot](/assets/mono-repo/edit-deploy-phase.png)
