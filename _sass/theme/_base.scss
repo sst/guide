@@ -157,6 +157,11 @@ code {
   word-break: normal;
 }
 
+p code {
+  // Clip long inline code blocks
+  word-break: break-word;
+}
+
 code {
   padding: 1px 5px;
   font-family: $code-font-family;
