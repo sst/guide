@@ -11,9 +11,9 @@ comments_id: what-does-this-guide-cover/83
 
 Para repasar los principales conceptos involucrados en la creación de aplicaciones web, vamos a crear una aplicación sencilla para tomar notas llamada [**Scratch**](https://demo2.serverless-stack.com).
 
-![Completed app desktop screenshot](/assets/completed-app-desktop.png)
+![Captura de aplicación completada en escritorio](/assets/completed-app-desktop.png)
 
-<img alt="Completed app mobile screenshot" src="/assets/completed-app-mobile.png" width="432" />
+<img alt="Captura de aplicación completada en movíl" src="/assets/completed-app-mobile.png" width="432" />
 
 Es una aplicación de una SPA (Single Page Application) basada en una API sin servidor escrita completamente en JavaScript. Aquí está la fuente completa para el [backend]({{site.backend_github_repo}}) y el [frontend]({{site.frontend_github_repo}}). Es una aplicación relativamente simple, pero vamos a abordar los siguientes requisitos.
 
