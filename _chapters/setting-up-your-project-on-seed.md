@@ -47,7 +47,15 @@ Click on your newly created app.
 
 ![Click on new Seed app screenshot](/assets/part2/click-on-new-seed-app.png)
 
-You'll notice a few things here. First, we have a service called **default**. A Serverless app can have multiple services within it. A service (roughly speaking) is a reference to a `serverless.yml` file. In our case we have one service in the root of our repo. Second, we have two stages (environments) set up for our app. Our **dev** stage is hooked up to master. This means that any commits to master will trigger a build in dev.
+You'll notice a few things here. First, we have a service called **default**. A Serverless app can have multiple services within it. A service (roughly speaking) is a reference to a `serverless.yml` file. In our case we have one service in the root of our repo. Second, we have two stages (environments) set up for our app.
+
+Now before we proceed to deploying our app, we need to enable running unit tests as a part of our build process. You'll recall that we had added a couple of tests back in the [unit tests]({% link _chapters/unit-tests-in-serverless.md %}) chapter. And we want to run those before we deploy our app.
+
+To do this, hit the **Settings** button and click **Enable Unit Tests**.
+
+![Click Enable Unit Tests in Seed screenshot](/assets/part2/click-enable-unit-tsts-in-seed.png)
+
+You'll notice that our **dev** stage is hooked up to master. This means that any commits to master will trigger a build in dev.
 
 Click on **dev**.
 
