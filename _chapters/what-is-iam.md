@@ -2,6 +2,8 @@
 layout: post
 title: What is IAM
 date: 2016-12-25 16:00:00
+lang: en
+ref: what-is-iam
 description: AWS Identity and Access Management (or IAM) is a service that helps you securely control access to AWS resources. You can create IAM users and apply IAM policies to them. An IAM policy is a rule or set of rules defining the operations allowed/denied to be performed on a resource. An IAM role is very similar to a IAM user in that it is an identity with permissions but unlike a user it does not have any credentials tied to it. Instead an IAM role can be taken on by any user or resource that temporarily needs those permissions.
 context: true
 comments_id: what-is-iam/23

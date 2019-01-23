@@ -96,7 +96,7 @@ We are looking for a better way to generate the PDF (and other eBook) formats. I
 
 ## Maintainers
 
-Serverless Stack is authored and maintained by Frank Wang ([@fanjiewang](https://twitter.com/fanjiewang)) & Jay V ([@jayair](https://twitter.com/jayair)). [**Subscribe to our newsletter**](https://emailoctopus.com/lists/1c11b9a8-1500-11e8-a3c9-06b79b628af2/forms/subscribe) for updates on Serverless Stack.
+Serverless Stack is maintained by [Anomaly Innovations](https://anoma.ly/). [**Subscribe to our newsletter**](https://emailoctopus.com/lists/1c11b9a8-1500-11e8-a3c9-06b79b628af2/forms/subscribe) for updates on Serverless Stack.
 
 ## Contributors
 

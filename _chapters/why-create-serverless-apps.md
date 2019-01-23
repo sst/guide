@@ -8,15 +8,15 @@ description: Serverless apps are easier to maintain and scale, since the resourc
 comments_id: why-create-serverless-apps/87
 ---
 
-It is important to address why it is worth learning how to create serverless apps. There are a couple of reasons why serverless apps are favored over traditional server hosted apps.
+It is important to address why it is worth learning how to create serverless apps. There are a few reasons why serverless apps are favored over traditional server hosted apps:
 
 1. Low maintenance
 2. Low cost
 3. Easy to scale
 
-The biggest benefit by far is that you only need to worry about your code and nothing else. And the low maintenance is a result of not having any servers to manage. You don't need to actively ensure that your server is running properly or that you have the right security updates on it. You deal with your own application code and nothing else.
+The biggest benefit by far is that you only need to worry about your code and nothing else. The low maintenance is a result of not having any servers to manage. You don't need to actively ensure that your server is running properly, or that you have the right security updates on it. You deal with your own application code and nothing else.
 
-The main reason it's cheaper to run serverless applications is that you are effectively only paying per request. So when your application is not being used, you are not being charged for it. Let's do a quick breakdown of what it would cost for us to run our note taking application. We'll assume that we have 1000 daily active users making 20 requests per day to our API and storing around 10MB of files on S3. Here is a very rough calculation of our costs.
+The main reason it's cheaper to run serverless applications is that you are effectively only paying per request. So when your application is not being used, you are not being charged for it. Let's do a quick breakdown of what it would cost for us to run our note taking application. We'll assume that we have 1000 daily active users making 20 requests per day to our API, and storing around 10MB of files on S3. Here is a very rough calculation of our costs.
 
 {: .cost-table }
 | Service             | Rate          | Cost  |
@@ -38,6 +38,6 @@ The main reason it's cheaper to run serverless applications is that you are effe
 
 So that comes out to $6.10 per month. Additionally, a .com domain would cost us $12 per year, making that the biggest up front cost for us. But just keep in mind that these are very rough estimates. Real-world usage patterns are going to be very different. However, these rates should give you a sense of how the cost of running a serverless application is calculated.
 
-Finally, the ease of scaling is thanks in part to DynamoDB which gives us near infinite scale and Lambda that simply scales up to meet the demand. And of course our frontend is a simple static single page app that is almost guaranteed to always respond instantly thanks to CloudFront.
+Finally, the ease of scaling is thanks in part to DynamoDB which gives us near infinite scale and Lambda that simply scales up to meet the demand. And of course our front end is a simple static single page app that is almost guaranteed to always respond instantly thanks to CloudFront.
 
 Great! Now that you are convinced on why you should build serverless apps; let's get started.
