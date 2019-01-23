@@ -50,4 +50,4 @@ The duration of cold starts depends on the implementation of the specific cloud 
 
 Aside from optimizing your functions, you can use simple tricks like a separate scheduled function to invoke your function every few minutes to keep it warm. [Serverless Framework](https://serverless.com) which we are going to be using in this tutorial has a few plugins to [help keep your functions warm](https://github.com/FidelLimited/serverless-plugin-warmup).
 
-Now that we have a good idea of serverless computing, let's take a deeper look at what is a Lambda function and how your code is going to be executed.
+Now that we have a good idea of serverless computing, let's take a deeper look at what a Lambda function is and how your code will be executed.
