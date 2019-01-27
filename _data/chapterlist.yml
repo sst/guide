@@ -64,6 +64,8 @@ build-api:
       url: /chapters/add-an-update-note-api.html
     - page: Add a delete note API
       url: /chapters/add-a-delete-note-api.html
+    - page: Handle API Gateway CORS errors
+      url: /chapters/handle-api-gateway-cors-errors.html
 
 deploy-backend:
   title: Deploying the Backend
