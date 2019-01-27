@@ -63,6 +63,8 @@ Let's quickly go over what we are doing here:
 ``` yml
 # Create our resources with separate CloudFormation templates
 resources:
+  # API Gateway Errors
+  - ${file(resources/api-gateway-errors.yml)}
   # DynamoDB
   - ${file(resources/dynamodb-table.yml)}
   # S3
