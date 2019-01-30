@@ -33,7 +33,7 @@ function querystring(name, url = window.location.href) {
 
 This method takes the querystring param we want to read and returns it.
 
-Now let's update our `Redirect` component to use this when it redirects.
+Now let's update our component to use this parameter when it redirects.
 
 <img class="code-marker" src="/assets/s.png" />Replace our current `export default ({ component: C, props: cProps, ...rest }) => {` method with the following.
 
