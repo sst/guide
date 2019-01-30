@@ -108,6 +108,7 @@ Thanks to these folks for their contributions to the content of Serverless Stack
 - [Vincent Oliveira](https://github.com/vincentoliveira): Translating chapters to French
 - [Leonardo Gonzalez](https://github.com/leogonzalez): Translating chapters to Portuguese
 - [Vieko Franetovic](https://github.com/vieko): Translating chapters to Spanish
+- [Christian Kaindl](https://github.com/christiankaindl): Translating chapters to German
 
 
 [Discourse]: https://discourse.serverless-stack.com
