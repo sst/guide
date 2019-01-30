@@ -14,7 +14,7 @@ A big part of writing web applications is having a UI Kit to help create the int
 <img class="code-marker" src="/assets/s.png" />Run the following command in your working directory.
 
 ``` bash
-$ npm install react-bootstrap --save
+$ npm install react-bootstrap@0.32.4 --save
 ```
 
 This installs the NPM package and adds the dependency to your `package.json`.
