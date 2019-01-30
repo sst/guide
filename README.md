@@ -105,6 +105,10 @@ Thanks to these folks for their contributions to the content of Serverless Stack
 - [Peter Eman Paver Abastillas](https://github.com/jatazoulja): Social login chapters
 - [Bernardo Bugmann](https://github.com/bernardobugmann): Translating chapters to Portuguese
 - [Sebastian Gutierrez](https://github.com/pepas24): Translating chapters to Spanish and adding copy button for code snippets
+- [Vincent Oliveira](https://github.com/vincentoliveira): Translating chapters to French
+- [Leonardo Gonzalez](https://github.com/leogonzalez): Translating chapters to Portuguese
+- [Vieko Franetovic](https://github.com/vieko): Translating chapters to Spanish
+- [Christian Kaindl](https://github.com/christiankaindl): Translating chapters to German
 
 
 [Discourse]: https://discourse.serverless-stack.com
