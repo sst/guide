@@ -37,6 +37,7 @@
 <!-- Code Snippet Copy JS -->
 <script src="https://unpkg.com/clipboard@2.0.0/dist/clipboard.min.js"></script>
 <script>
+  /** Start copy snippet code **/
   var codeElements = document.querySelectorAll(".highlighter-rouge code");
 
   for (i = 0; i < codeElements.length; i++) {
@@ -60,4 +61,14 @@
       e.trigger.innerText = "Copy";
     }, 300);
   });
+  /** End copy snippet code **/
+
+  /** Start sidebar ToC code **/
+  $('#toc-sidebar ul.steps:has(a.active)').addClass('open');
+
+  $('#toc-sidebar p.step a').click(function(e) {
+    e.preventDefault();
+    $(this).parent().next().toggleClass('open');
+  });
+  /** End sidebar ToC code **/
 </script>
