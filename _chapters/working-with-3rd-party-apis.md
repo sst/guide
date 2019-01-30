@@ -2,6 +2,7 @@
 layout: post
 title: Working with 3rd Party APIs
 date: 2018-03-05 00:00:00
+lang: en
 description: To learn how to use a 3rd party API in our AWS Lambda functions, we are going to create a billing API using Stripe.
 comments_id: working-with-3rd-party-apis/168
 ---
