@@ -5,7 +5,11 @@ date: 2018-03-30 12:00:00
 comments_id: comments-translations/788
 ---
 
-Our guide is available in several languages thanks to contributions by our incredible readers. Below is a list of all the chapters that are available in multiple languages. If you are interested in helping with our translation efforts, leave us a [comment here](https://discourse.serverless-stack.com/t/help-us-translate-serverless-stack/596/15).
+Our guide is available in several languages thanks to contributions by our incredible readers. You can view the translated versions of a chapter by clicking on the links below the chapter title.
+
+![Chapter translation links Screenshot](/assets/chapter-translation-links.png)
+
+Below is a list of all the chapters that are available in multiple languages. If you are interested in helping with our translation efforts, leave us a [comment here](https://discourse.serverless-stack.com/t/help-us-translate-serverless-stack/596/15).  
 
 ---
 
