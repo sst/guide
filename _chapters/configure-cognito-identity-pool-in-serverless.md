@@ -135,6 +135,8 @@ Let's quickly go over the various sections of this configuration:
 ``` yml
 # Create our resources with separate CloudFormation templates
 resources:
+  # API Gateway Errors
+  - ${file(resources/api-gateway-errors.yml)}
   # DynamoDB
   - ${file(resources/dynamodb-table.yml)}
   # S3

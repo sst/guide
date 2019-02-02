@@ -416,30 +416,24 @@
   flex: 0 0 220px;
   font-size: 14px;
 
-  p {
+  p.section {
+    margin-top: $spacing-unit;
+    margin-bottom: $spacing-unit / 2;
+    font-family: $heading-font-family;
+    font-weight: 700;
+    a {
+      color: $text-color;
+    }
+
+    &:first-child {
+      margin-top: 0;
+      font-size: 18px;
+      font-family: $base-font-family;
+    }
+  }
+
+  p.step {
     margin-bottom: 10px;
-
-    &.active a {
-      font-weight: 500;
-    }
-    &.title {
-      margin-bottom: 0;
-    }
-    &.section {
-      margin-top: $spacing-unit;
-      margin-bottom: $spacing-unit / 2;
-      font-family: $heading-font-family;
-      font-weight: 700;
-      a {
-        color: $text-color;
-      }
-
-      &:first-child {
-        margin-top: 0;
-        font-size: 18px;
-        font-family: $base-font-family;
-      }
-    }
   }
 
   ul {
@@ -459,9 +453,17 @@
         color: $grey-color-light;
       }
 
-      &.active a {
-        font-weight: 500;
+      a.active {
+        font-weight: bold;
       }
+    }
+
+    &.steps {
+      display: none;
+    }
+
+    &.steps.open {
+      display: block;
     }
   }
 

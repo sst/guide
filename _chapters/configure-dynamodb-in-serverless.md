@@ -11,13 +11,7 @@ We are now going to start creating our resources through our `serverless.yml`. S
 
 ### Create the Resource
 
-<img class="code-marker" src="/assets/s.png" />To do this, let's create a directory where we will keep all the resources for our infrastructure.
-
-``` bash
-$ mkdir resources/
-```
-
-<img class="code-marker" src="/assets/s.png" />And add the following to `resources/dynamodb-table.yml`.
+<img class="code-marker" src="/assets/s.png" />Add the following to `resources/dynamodb-table.yml`.
 
 ``` yml
 Resources:
@@ -55,11 +49,13 @@ Let's quickly go over what we are doing here.
 
 Now let's add a reference to this resource in our project.
 
-<img class="code-marker" src="/assets/s.png" />Add the following to the bottom of our `serverless.yml`.
+<img class="code-marker" src="/assets/s.png" />Replace the `resources:` block at the bottom of our `serverless.yml` with the following:
 
 ``` yml
 # Create our resources with separate CloudFormation templates
 resources:
+  # API Gateway Errors
+  - ${file(resources/api-gateway-errors.yml)}
   # DynamoDB
   - ${file(resources/dynamodb-table.yml)}
 ```

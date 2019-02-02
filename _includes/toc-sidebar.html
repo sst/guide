@@ -4,25 +4,34 @@
   {% assign current_page_en_url = page.url %}
 {% endif %}
 
-<p><a href="/#{{ include.id }}">{{ include.items.title }}</a></p>
+<p class="step"><a href="/#{{ include.id }}">{{ include.items.title }}</a></p>
+<ul class="steps">
 {% for chapter in include.items.chapters %}
-  {% if chapter.url == current_page_en_url %}
+  <li>
+  {% if chapter.subchapters %}
+    {% if chapter.url == current_page_en_url %}
+      <a class="active" href="{{ chapter.url }}">{{ chapter.page }}</a>
+    {% else %}
+      <a href="{{ chapter.url }}">{{ chapter.page }}</a>
+    {% endif %}
     <ul>
-      <li class="active">
-        <a href="{{ chapter.url }}">{{ chapter.page }}</a>
+    {% for subchapter in chapter.subchapters %}
+      <li>
+        {% if subchapter.url == current_page_en_url %}
+          <a class="active" href="{{ subchapter.url }}">{{ subchapter.page }}</a>
+        {% else %}
+          <a href="{{ subchapter.url }}">{{ subchapter.page }}</a>
+        {% endif %}
       </li>
+    {% endfor %}
     </ul>
   {% else %}
-    {% if chapter.subchapters %}
-      {% for subchapter in chapter.subchapters %}
-        {% if subchapter.url == current_page_en_url %}
-          <ul>
-            <li class="active">
-              <a href="{{ subchapter.url }}">{{ subchapter.page }}</a>
-            </li>
-          </ul>
-        {% endif %}
-      {% endfor %}
+    {% if chapter.url == current_page_en_url %}
+      <a class="active" href="{{ chapter.url }}">{{ chapter.page }}</a>
+    {% else %}
+      <a href="{{ chapter.url }}">{{ chapter.page }}</a>
     {% endif %}
   {% endif %}
+  </li>
 {% endfor %}
+</ul>

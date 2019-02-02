@@ -1,4 +1,8 @@
 current:
+  title: "Handling API Gateway CORS errors"
+  desc: "Jan 27, 2019: Adding CORS headers to API Gateway 4xx and 5xx errors."
+
+v3-3-2:
   title: "Refactoring async Lambda functions"
   desc: "Nov 1, 2018: Refactoring async Lambda functions to return instead of using the callback."
 

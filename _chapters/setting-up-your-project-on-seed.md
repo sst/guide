@@ -21,7 +21,11 @@ Now to add your project, select **GitHub** as your git provider. You'll be asked
 
 ![Select Git provider screenshot](/assets/part2/select-git-provider.png)
 
-Select the repo we've been using so far.
+Select the repo we've been using so far. Seed will then pull up the `serverless.yml` from your project root. Hit **Add the service** to confirm this.
+
+![Serverless.yml detected screenshot](/assets/part2/serverless-yml-detected.png)
+
+Note that, if your `serverless.yml` is not in your project root, you will need to change the path.
 
 Seed deploys to your AWS account on your behalf. You should create a separate IAM user with exact permissions that your project needs. You can read more about this [here](https://seed.run/docs/customizing-your-iam-policy). But for now we'll simply use the one we've used in this tutorial.
 
@@ -39,15 +43,23 @@ aws_access_key_id = YOUR_IAM_ACCESS_KEY
 aws_secret_access_key = YOUR_IAM_SECRET_KEY
 ```
 
-Fill these in and click **Add**.
+Fill these in and click **Add App**.
 
-![Select GitHub repo screenshot](/assets/part2/select-github-repo.png)
+![Add AWS IAM credentials screenshot](/assets/part2/add-aws-iam-credentials.png)
 
 Click on your newly created app.
 
 ![Click on new Seed app screenshot](/assets/part2/click-on-new-seed-app.png)
 
-You'll notice a few things here. First, we have a service called **default**. A Serverless app can have multiple services within it. A service (roughly speaking) is a reference to a `serverless.yml` file. In our case we have one service in the root of our repo. Second, we have two stages (environments) set up for our app. Our **dev** stage is hooked up to master. This means that any commits to master will trigger a build in dev.
+You'll notice a few things here. First, we have a service called **default**. A Serverless app can have multiple services within it. A service (roughly speaking) is a reference to a `serverless.yml` file. In our case we have one service in the root of our repo. Second, we have two stages (environments) set up for our app.
+
+Now before we proceed to deploying our app, we need to enable running unit tests as a part of our build process. You'll recall that we had added a couple of tests back in the [unit tests]({% link _chapters/unit-tests-in-serverless.md %}) chapter. And we want to run those before we deploy our app.
+
+To do this, hit the **Settings** button and click **Enable Unit Tests**.
+
+![Click Enable Unit Tests in Seed screenshot](/assets/part2/click-enable-unit-tsts-in-seed.png)
+
+You'll notice that our **dev** stage is hooked up to master. This means that any commits to master will trigger a build in dev.
 
 Click on **dev**.
 

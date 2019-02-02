@@ -52,6 +52,8 @@ S3 buckets (unlike DynamoDB tables) are globally named. So it is not really poss
 ``` yml
 # Create our resources with separate CloudFormation templates
 resources:
+  # API Gateway Errors
+  - ${file(resources/api-gateway-errors.yml)}
   # DynamoDB
   - ${file(resources/dynamodb-table.yml)}
   # S3
