@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Configure the AWS CLI
+title: Configurar AWS CLI
 date: 2019-01-11 13:40:00
 lang: es
 ref: configure-the-aws-cli
