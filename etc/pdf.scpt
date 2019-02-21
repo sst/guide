@@ -34,6 +34,7 @@ add-a-get-note-api
 add-a-list-all-the-notes-api
 add-an-update-note-api
 add-a-delete-note-api
+handle-api-gateway-cors-errors
 deploy-the-apis
 create-a-cognito-identity-pool
 cognito-user-pool-vs-identity-pool
@@ -116,6 +117,7 @@ custom-domain-in-netlify
 frontend-workflow
 wrapping-up
 further-reading
+translations
 giving-back
 changelog
 staying-up-to-date
