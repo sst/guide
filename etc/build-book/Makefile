@@ -45,6 +45,6 @@ test-epub: test-book.md
 	pandoc test-book.md -o $(PDF_NAME)-test.epub
 
 clean:
-	rm -f _temp
+	rm -fr _temp
 
 .PHONY: all merge_chapters pdf epub clean test test-epub test-book
