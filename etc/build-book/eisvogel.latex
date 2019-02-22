@@ -363,6 +363,10 @@ $if(pagestyle)$
 \pagestyle{$pagestyle$}
 $endif$
 
+% Avoid cutting of code blocks https://tex.stackexchange.com/a/412316
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+
 % Make use of float-package and set default placement for figures to H
 \usepackage{float}
 \floatplacement{figure}{H}
