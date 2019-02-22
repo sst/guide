@@ -34,10 +34,10 @@ File.open('full-book.md', 'w') do |file|
 
         # Replace ✓ character in jest snippet to avoid pandoc error
         # Realy its an issue of the monofont selected, because hasn't this character
-        if ( chapter_name === 'unit-tests-in-serverless')
-            chapter.force_encoding(::Encoding::UTF_8)
-            chapter = chapter.gsub('✓', '[passed]')
-        end
+        # if ( chapter_name === 'unit-tests-in-serverless')
+        #     chapter.force_encoding(::Encoding::UTF_8)
+        #     chapter = chapter.gsub('✓', '[passed]')
+        # end
 
         # Add some additional break lines
         file << chapter.chomp << "\n\n\n"

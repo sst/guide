@@ -18,7 +18,7 @@
 
 PDF_NAME = serverless-stack
 PDF_OPTIONS = --pdf-engine=xelatex --from=markdown -V book -V classoption=oneside --toc --toc-depth=2 --top-level-division=chapter
-PDF_FONTS = -V mainfont="Source Sans Pro" -V monofont="Courier" -V monofontoptions="Scale=0.9"
+PDF_FONTS = -V mainfont="Source Sans Pro" -V monofont="IBM Plex Mono" -V monofontoptions="Scale=0.9"
 PDF_STYLE = --template=./eisvogel --highlight-style="tango"
 
 all: merge_chapters pdf epub clean
