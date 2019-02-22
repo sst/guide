@@ -2,7 +2,7 @@ chapters_order = File.readlines('chapters-order.txt')
 
 # Discourse link at end of chapters
 def discourse_link chapter_name
-    link = "\n**For help and discussion**\n[Comments on this chapter](https://discourse.serverless-stack.com/t/#{chapter_name})"
+    link = "\n**For help and discussion**\n\n[Comments on this chapter](https://discourse.serverless-stack.com/t/#{chapter_name})"
 end
 
 File.open('full-book.md', 'w') do |file|
@@ -12,8 +12,10 @@ File.open('full-book.md', 'w') do |file|
 
     # Loop in chapters
     chapters_order.each do |chapter_name|
+        chapter_name = chapter_name.chomp
+
         # Read chapter file
-        chapter = File.read("_temp/#{chapter_name.chomp}.md")
+        chapter = File.read("_temp/#{chapter_name}.md")
 
         # Replace front matter data with only markdown title
         chapter = chapter.gsub(/---[\s\S]*?title:([^\r\n]*)[\s\S]*?---/, '# \1')
@@ -28,7 +30,7 @@ File.open('full-book.md', 'w') do |file|
         chapter = chapter.gsub('{: .cost-table }', '')
 
         # Add discourse link
-        chapter << discourse_link(chapter_name.chomp)
+        chapter << discourse_link(chapter_name)
 
         # Replace ✓ character in jest snippet to avoid pandoc error
         if ( chapter_name === 'getting-production-ready')
