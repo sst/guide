@@ -33,7 +33,8 @@ File.open('full-book.md', 'w') do |file|
         chapter << discourse_link(chapter_name)
 
         # Replace ✓ character in jest snippet to avoid pandoc error
-        if ( chapter_name === 'getting-production-ready')
+        # Realy its a issue of the monofont selected, because hasn't this character
+        if ( chapter_name === 'unit-tests-in-serverless')
             chapter.force_encoding(::Encoding::UTF_8)
             chapter = chapter.gsub('✓', '[passed]')
         end
