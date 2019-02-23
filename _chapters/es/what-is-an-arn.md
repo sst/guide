@@ -1,6 +1,6 @@
 ---
 layout: post
-title: What is an ARN
+title: ¿Qué es un ARN?
 date: 2019-01-11 11:40:00
 lang: es
 ref: what-is-an-arn

@@ -42,6 +42,7 @@ Serverless Stack is written and maintained by Frank Wang ([@fanjiewang](https://
 - [Sasha Klien](https://sashafklein.com)
 - [Alex Vainberg](https://www.youtube.com/arooly)
 - [Klete Rittger](https://www.patreon.com/user/creators?u=14067972)
+- [Malcolm Taylor](https://www.patreon.com/user/creators?u=17550173)
 
 
 We'd like thank our sponsors and backers for supporting us!
