@@ -92,7 +92,7 @@ We are looking for a better way to generate the PDF (and other eBook) formats. I
 
 ## Sponsors
 
-[**Sponsor Serverless Stack on Patreon**](https://www.patreon.com/serverless_stack) if you've found this guide useful or would like to be an official supporter. [A big thanks to our supporters](https://serverless-stack.com/sponsors.html#backers)!
+[**Sponsor Serverless Stack on Patreon**](https://www.patreon.com/serverless_stack) if you've found this guide useful or would like to be an official supporter. [A big thanks to our supporters](https://serverless-stack.com/sponsors.html#sponsors)!
 
 ## Maintainers
 
