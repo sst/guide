@@ -67,7 +67,7 @@ It is very likely that your `auth`, `database`, and `uploads` service don't chan
 
 ### Service Dependencies in Seed
 
-[Seed](/) has a concept of [Deploy Phases](https://seed.run/docs/configuring-deploy-phases) to handle service dependencies.
+[Seed](https://seed.run) has a concept of [Deploy Phases](https://seed.run/docs/configuring-deploy-phases) to handle service dependencies.
 
 You can configure this by heading to the app settings and hitting **Manage Deploy Phases**.
 
