@@ -112,7 +112,7 @@ Note that we are defaulting our environment to dev if the `REACT_APP_STAGE` is n
 
 If we switch over to our app, we should see it in development mode and it'll be connected to the dev version of our backend. We haven't changed the deployment process yet but in the coming chapters we'll change this when we automate our frontend deployments.
 
-In this case, if we run the following:
+We don't need to worry about the prod version just yet. But as an example, if we wanted to build the prod version of our app we'd have to run the following:
 
 ``` bash
 $ REACT_APP_STAGE=prod npm run build
@@ -123,7 +123,6 @@ OR for Windows
 set "REACT_APP_STAGE=prod" && npm start
 ```
 
-It will build our app using the prod version of our resources.
 
 ### Commit the Changes
 
