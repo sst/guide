@@ -7,7 +7,27 @@ context: true
 comments_id: custom-domains-in-netlify/191
 ---
 
-Now that we have our first deployment, let's configure a custom domain for our app through Netlify. This step is assuming you have a domain in Route 53 back from the first part of the tutorial.
+Now that we have our first deployment, let's configure a custom domain for our app through Netlify.
+
+---
+
+**A Note to Readers from Part I**
+
+The following section is assuming that you completed [Part I](/#part-1) independently and that the custom domains below are being set up from scratch. However, if you've just completed Part I, then you have a couple of options:
+
+1. Configure a new custom domain
+
+   Let's say your domain from Part I is something like `https://notes-app.my-domain.com`. Then for the following section you can configure something like `https://notes-app-2.my-domain.com`. This is the preferred option since it does not interfere with what you had configured previously. This is what we do for the tutorial demo app as well. You can see the [Part I version here](https://demo.serverless-stack.com) and the [Part II version here](https://demo2.serverless-stack.com). The downside is that you'll have two different versions of the frontend React app.
+
+2. Replace the old domain
+
+   You might be working through this guide to build an app as opposed to learning how to build one. If that's the case, it doesn't make sense that you have two versions of the frontend floating around. You'll need to disconnect the domain from Part I. To do that, remove the Route 53 records sets that we created for the [apex domain]({% link _chapters/setup-your-domain-with-cloudfront.md %}#point-domain-to-cloudfront-distribution) and the [www domain]({% link _chapters/setup-www-domain-redirect.md %}#point-www-domain-to-cloudfront-distribution) in Part I.
+
+If you are not sure about the two above options or have any questions, post a comment in the discussion thread that we link to at the bottom of the chapter.
+
+---
+
+Let's get started!
 
 ### Pick a Netlify Site Name
 
