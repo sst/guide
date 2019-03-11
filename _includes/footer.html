@@ -47,8 +47,9 @@
   }
 
   var clipboard = new ClipboardJS(".clipbutton", {
-    target: function(trigger) {
-      return trigger.nextElementSibling;
+    text: function(trigger) {
+      // Remove "$" from "$ mkdir some-command"
+      return trigger.nextElementSibling.innerText.replace(/^\$ /gm, '');
     }
   });
 
