@@ -5,6 +5,7 @@ description: For our React.js app to make requests to a serverless backend API s
 date: 2018-04-11 00:00:00
 context: true
 comments_id: 113
+comments_id: comments-signup-with-aws-cognito/113
 ---
 
 
