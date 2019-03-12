@@ -13,7 +13,7 @@ To start with we are going to create our new project and add it to GitHub. We ar
 <img class="code-marker" src="/assets/s.png" />In your working directory, start by cloning the [original repo]({{ site.backend_github_repo }}).
 
 ``` bash
-$ git clone --branch add-a-delete-note-api --depth 1 https://github.com/AnomalyInnovations/serverless-stack-demo-api.git serverless-stack-2-api/
+$ git clone --branch handle-api-gateway-cors-errors --depth 1 https://github.com/AnomalyInnovations/serverless-stack-demo-api.git serverless-stack-2-api/
 $ cd serverless-stack-2-api/
 ```
 
