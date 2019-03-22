@@ -17,7 +17,7 @@ Let's start by installing React Router. We are going to be using the React Route
 <img class="code-marker" src="/assets/s.png" />Run the following command in your working directory.
 
 ``` bash
-$ npm install react-router-dom --save
+$ npm install react-router-dom@4.3.1 --save
 ```
 
 This installs the NPM package and adds the dependency to your `package.json`.
