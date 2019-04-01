@@ -70,7 +70,7 @@ And hit **Select** in the **Create Your Own Policy** section.
 
 ![Select Create your own IAM Policy Screenshot](/assets/customize-iam-policy/select-create-your-own-iam-policy.png)
 
-Here fill pick a name for your new policy and paste the policy created above in the **Policy Document** field.
+Here pick a name for your new policy and paste the policy created above in the **Policy Document** field.
 
 ![Create your own IAM Policy Screenshot](/assets/customize-iam-policy/create-your-own-iam-policy.png)
 
