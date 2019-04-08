@@ -12,6 +12,12 @@ description: Serverless Stack is used to build all kinds of apps, from SaaS serv
 
 ![QuickNote screenshot](/assets/showcase/quicknote.png)
 
+#### [Take Issue](https://takeissue.app)
+
+[Take Issue](https://takeissue.app) is a platform that empowers citizens to collectively determine the most important issues in their community. 
+
+![Take Issue screenshot](/assets/showcase/take-issue.png)
+
 #### [Seed](https://seed.run)
 
 [Seed](https://seed.run) is a service that helps you deploy, manage, and monitor your Serverless Framework applications on AWS. It is built completely on the Serverless Stack.
