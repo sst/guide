@@ -22,9 +22,7 @@ Serverless Stack is written and maintained by Frank Wang ([@fanjiewang](https://
 
 ## Sponsors
 
-<a href="https://www.puresec.io" target="_blank">
-  <img alt="PureSec Logo" src="/assets/sponsors/puresec.png" width="125" />
-</a>
+<a href="mailto:{{ site.email }}">Contact us if you'd like to sponsor Serverless Stack.</a>
 
 <br />
 
