@@ -153,7 +153,6 @@ Now we are ready to test our new API. To be able to test it on our local we are 
 
 ``` bash
 $ mkdir mocks
-$ cd mocks
 ```
 
 <img class="code-marker" src="/assets/s.png" />Create a `mocks/create-event.json` file and add the following.
