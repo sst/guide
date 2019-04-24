@@ -4,7 +4,7 @@ title: Apa itu Serverless?
 date: 2019-04-24 15:00:00
 lang: id
 ref: what-is-serverless
-description: Serverless refers to applications where the management and allocation of servers and resources are completely managed by the cloud provider. And the billing is based on the actual consumption of those resources.
+description: Serverless merujuk pada aplikasi di mana manajemen dan alokasi server dan sumber daya dikelola sepenuhnya oleh penyedia cloud. Dan penagihannya didasarkan pada konsumsi aktual sumber daya tersebut.
 comments_id: what-is-serverless/27
 ---
 
