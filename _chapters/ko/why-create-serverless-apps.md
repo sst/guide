@@ -1,5 +1,5 @@
 ---
-lang: en
+lang: ko
 ref: why-create-serverless-apps
 ---
 
