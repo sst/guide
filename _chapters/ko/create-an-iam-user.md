@@ -1,6 +1,11 @@
 ---
-lang: ko 
+layout: post
+title: Create an IAM User
+date: 2016-12-25 12:00:00
+lang: ko
 ref: create-an-iam-user
+context: true
+comments_id: create-an-iam-user/92
 ---
 
 Amazon IAM (Identity and Access Management)을 사용하면 AWS에서 사용자 및 사용자 권한을 관리할 수 있습니다. AWS 계정에 하나 이상의 IAM 사용자를 만들 수 있습니다. AWS 콘솔에 대한 액세스가 필요한 사용자 또는 AWS에 API를 호출해야하는 새 애플리케이션이 있는 경우 IAM 사용자를 만들 수 있습니다. 이것은 AWS 계정에 보안 계층을 추가하는 것입니다.

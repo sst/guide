@@ -1,7 +1,13 @@
 ---
+layout: post
+title: Create an S3 Bucket for File Uploads
+date: 2016-12-27 00:00:00
 lang: ko 
 ref: create-an-s3-bucket-for-file-uploads
+context: true
+comments_id: create-an-s3-bucket-for-file-uploads/150
 ---
+
 
 이제 데이터베이스 테이블을 준비했습니다. 파일 업로드를 처리하도록 설정해 보겠습니다. 각 노트는 업로드된 파일을 첨부 파일로 가질 수 있기 때문에 파일 업로드를 처리할 수 있습니다.
 

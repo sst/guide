@@ -1,6 +1,11 @@
 ---
-lang: ko 
+layout: post
+title: Create a DynamoDB Table
+date: 2016-12-27 00:00:00
+lang: ko
 ref: create-a-dynamodb-table
+context: true
+comments_id: create-a-dynamodb-table/139
 ---
 
 노트 앱의 백앤드를 구축하려면 제일 먼저 데이터 저장 방법을 고려하는 것이 좋습니다. 여기에서는 [DynamoDB](https://aws.amazon.com/dynamodb/)를 사용하여 이 작업을 수행할 것입니다.

@@ -1,6 +1,11 @@
 ---
-lang: ko 
+layout: post
+title: Create an AWS Account
+date: 2016-12-25 00:00:00
+lang: ko
 ref: create-an-aws-account
+context: true
+comments_id: create-an-aws-account/88
 ---
 
 먼저 AWS(Amazon Web Services) 계정을 만들어 보겠습니다. 물론 이미 가지고 있다면 이 장을 건너 뛰셔도 됩니다. [AWS 홈페이지](https://aws.amazon.com)로 가서 **무료 계정 만들기**를 클릭하고 단계에 따라 계정을 만드십시오.

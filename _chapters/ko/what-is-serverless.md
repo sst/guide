@@ -1,6 +1,10 @@
 ---
-lang: ko 
+layout: post
+title: What is Serverless?
+date: 2016-12-23 12:00:00
+lang: ko
 ref: what-is-serverless
+comments_id: what-is-serverless/27
 ---
 
 일반적으로 HTTP 요청을 처리하기 위해 어느정도 제어할 수 있는 서버를 통해 웹 응용프로그램을 구축하고 배포했습니다. 이렇게 배포된 응용프로그램은 해당 서버에서 실행되며 해당 서버의 자원을 구성하고 관리하는 것은 우리의 책임입니다. 여기에는 몇 가지 이슈들이 있습니다.

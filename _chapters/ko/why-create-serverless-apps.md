@@ -1,6 +1,10 @@
 ---
+layout: post
+title: Why Create Serverless Apps?
+date: 2016-12-24 00:00:00
 lang: ko
 ref: why-create-serverless-apps
+comments_id: why-create-serverless-apps/87
 ---
 
 서버리스 앱을 만드는 방법을 배우는 것이 왜 가치가 있는지를 설명하는 것은 중요합니다. 특히 서버 없는 앱이 기존의 서버 호스팅 앱 보다 선호되는 몇 가지 이유가 있습니다.

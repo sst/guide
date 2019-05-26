@@ -1,6 +1,11 @@
 ---
+layout: post
+title: What is an ARN
+date: 2016-12-25 20:00:00
 lang: ko
 ref: what-is-an-arn
+context: true
+comments_id: what-is-an-arn/34
 ---
 
 지난 장에서 IAM 정책을 살펴볼 때 ARN을 사용하여 리소스를 지정하는 방법을 알아 봤습니다. ARN이 무엇인지 더 자세히 살펴 보겠습니다.

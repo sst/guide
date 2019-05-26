@@ -1,6 +1,11 @@
 ---
+layout: post
+title: What is IAM
+date: 2016-12-25 16:00:00
 lang: ko
 ref: what-is-iam
+context: true
+comments_id: what-is-iam/23
 ---
 
 이전 장에서 우리는 AWS 콘솔을 사용하지 않고 AWS CLI를 이용해 계정에서 작동할 수 있도록 IAM 사용자를 만들었습니다. 그러나 IAM 개념은 AWS 서비스의 보안을 처리 할 때 매우 자주 사용되므로 좀 더 자세히 이해해야 합니다. 불행히도 IAM은 많은 다른 부분들로 이루어져 있으며, 처음 접한 사람들에게는 IAM이 매우 혼란스러울 수 있습니다. 이 장에서는 IAM과 그 개념을 좀 더 자세하게 살펴 보겠습니다.

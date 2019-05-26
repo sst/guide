@@ -1,6 +1,10 @@
 ---
+layout: post
+title: What is AWS Lambda?
+date: 2016-12-23 18:00:00
 lang: ko
 ref: what-is-aws-lambda
+comments_id: what-is-aws-lambda/308
 ---
 
 [AWS Lambda](https://aws.amazon.com/lambda/) (또는 줄여서 Lambda)는 AWS에서 제공하는 서버리스 컴퓨팅 서비스입니다. 이번 장에서 우리는 Lambda를 사용하여 serverless 응용 프로그램을 구축할 것입니다. 그리고 Lambda가 어떻게 내부적으로 작동하는 것까지는 다룰 필요가 없지만 함수가 어떻게 실행되는 것인지에 대해서 고민해보는 것은 아주 중요합니다.
