@@ -3,6 +3,8 @@ layout: post
 title: Create a Cognito User Pool
 date: 2016-12-28 00:00:00
 description: Amazon Cognito User Pool은 웹 및 모바일 앱용 가입 및 로그인 기능을 처리합니다. 우리는 서버리스 앱을위한 사용자를 저장하고 관리하기 위해 Cognito User Pool을 만들 예정입니다. 우리는 사용자가 이메일로 로그인하기를 원하기 때문에 이메일 주소를 사용자 이름 옵션으로 사용합니다. 또한 Cognito 사용자 풀의 앱 클라이언트로 앱을 설정할 예정입니다.
+lang: ko
+ref: create-a-cognito-user-pool
 context: true
 comments_id: create-a-cognito-user-pool/148
 ---
