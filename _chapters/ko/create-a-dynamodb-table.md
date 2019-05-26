@@ -4,6 +4,7 @@ title: Create a DynamoDB Table
 date: 2016-12-27 00:00:00
 lang: ko
 ref: create-a-dynamodb-table
+description: Amazon DynamoDB는 완벽하게 관리되는 NoSQL 데이터베이스로 서버리스 API 백엔드에 동력을 공급합니다. DynamoDB는 테이블에 데이터를 저장하고 각 테이블에는 설정된 후에는 변경할 수없는 기본 키가 있습니다. 또한 DynamoDB 테이블에 대한 읽기 및 쓰기 설정을 통해 처리량 용량을 프로비저닝 할 예정입니다.
 context: true
 comments_id: create-a-dynamodb-table/139
 ---

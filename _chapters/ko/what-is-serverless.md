@@ -3,6 +3,7 @@ layout: post
 title: What is Serverless?
 date: 2016-12-23 12:00:00
 lang: ko
+description: Serverless는 클라우드 제공자가 서버 및 자원을 완벽하게 관리하고 관리하는 애플리케이션을 의미합니다. 청구서는 해당 자원의 실제 소비량을 기반으로합니다.
 ref: what-is-serverless
 comments_id: what-is-serverless/27
 ---

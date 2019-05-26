@@ -4,6 +4,7 @@ title: Configure the AWS CLI
 date: 2016-12-26 00:00:00
 lang: ko 
 ref: configure-the-aws-cli
+description: 명령 줄을 사용하여 AWS와 상호 작용하려면 AWS 명령 행 인터페이스 (또는 AWS CLI)를 설치해야합니다. 또한 AWS 콘솔의 IAM 사용자 액세스 키 ID 및 비밀 액세스 키를 사용하여 구성해야합니다.
 context: true
 comments_id: configure-the-aws-cli/86
 ---

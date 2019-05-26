@@ -4,6 +4,7 @@ title: Why Create Serverless Apps?
 date: 2016-12-24 00:00:00
 lang: ko
 ref: why-create-serverless-apps
+description: 서버 없는 응용 프로그램은 요청을 완료하는 데 필요한 자원이 클라우드 제공자에 의해 완전히 관리되므로 유지 보수 및 확장이 더 쉽습니다. 서버리스 앱은 실제로 사용중인 경우에만 비용이 청구됩니다. 이는 대부분의 공통 워크로드에 대해 훨씬 저렴할 수 있음을 의미합니다.
 comments_id: why-create-serverless-apps/87
 ---
 

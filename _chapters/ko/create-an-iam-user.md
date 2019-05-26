@@ -4,6 +4,7 @@ title: Create an IAM User
 date: 2016-12-25 12:00:00
 lang: ko
 ref: create-an-iam-user
+description: 일부 명령 행 도구를 사용하여 AWS와 상호 작용하려면 AWS 콘솔을 통해 IAM 사용자를 작성해야합니다.
 context: true
 comments_id: create-an-iam-user/92
 ---

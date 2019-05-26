@@ -4,6 +4,7 @@ title: Create an S3 Bucket for File Uploads
 date: 2016-12-27 00:00:00
 lang: ko 
 ref: create-an-s3-bucket-for-file-uploads
+description: 사용자가 serverless 앱에 파일을 업로드 할 수 있도록 Amazon S3 (Simple Storage Service)를 사용합니다. S3를 사용하면 파일을 저장하고 버킷으로 구성 할 수 있습니다. S3 버킷을 만들고 CORS (Cross-Origin Resource Sharing)를 활성화하여 React.js 앱이 파일을 업로드 할 수 있도록 할 예정입니다.
 context: true
 comments_id: create-an-s3-bucket-for-file-uploads/150
 ---

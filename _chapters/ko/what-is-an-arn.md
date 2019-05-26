@@ -4,6 +4,7 @@ title: What is an ARN
 date: 2016-12-25 20:00:00
 lang: ko
 ref: what-is-an-arn
+description: Amazon Resource Names (또는 ARN)은 AWS 리소스를 고유하게 식별합니다. 전 세계적으로 고유 한 식별자이며 몇 가지 미리 정의 된 형식을 따릅니다. ARN은 주로 리소스에 대한 참조를 전달하고 IAM 정책을 정의하는 데 사용됩니다.
 context: true
 comments_id: what-is-an-arn/34
 ---

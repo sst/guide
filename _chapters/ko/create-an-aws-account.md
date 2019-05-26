@@ -4,6 +4,7 @@ title: Create an AWS Account
 date: 2016-12-25 00:00:00
 lang: ko
 ref: create-an-aws-account
+description: Lambda를 사용하여 서버리스 앱을 만들려면 먼저 AWS (Amazon Web Services) 계정을 만들어야합니다.
 context: true
 comments_id: create-an-aws-account/88
 ---

@@ -4,6 +4,7 @@ title: What is IAM
 date: 2016-12-25 16:00:00
 lang: ko
 ref: what-is-iam
+description: AWS ID 및 액세스 관리 (또는 IAM)는 AWS 리소스에 대한 액세스를 안전하게 제어하는 데 도움이되는 서비스입니다. IAM 사용자를 생성하고 IAM 사용자를 적용 할 수 있습니다. IAM 정책은 리소스에 대해 수행 할 수있는 작업을 정의하는 규칙 또는 규칙 집합입니다. IAM 역할은 권한이있는 ID이지만 사용자와 달리 자격 증명이 연결되지 않은 IAM 사용자와 매우 유사합니다. 대신 일시적으로 해당 사용 권한이 필요한 사용자 나 리소스가 IAM 역할을 수행 할 수 있습니다.
 context: true
 comments_id: what-is-iam/23
 ---
