@@ -1,22 +1,28 @@
 <header class="site-header" role="banner">
 
-  <div class="wrapper">
+<div class="wrapper wrapper-header">
+  <div class="content">
 
-    <a class="site-title" href="{{ "/" | relative_url}}">
-      <img src="/assets/logo.png" height="32" />
-      <span>{{ site.title | escape }}</span>
-    </a>
+    <div class="col1">
+      <a class="site-title" href="{{ "/" | relative_url}}">
+        <img src="/assets/logo.png" height="32" />
+        <span>{{ site.title | escape }}</span>
+      </a>
 
-		<p class="site-description">Learn to Build Full-Stack Apps with Serverless and React on AWS</p>
+      {% include social-buttons.html %}
+    </div>
+
+    <div class="col2">
+      {% include search-field.html %}
+    </div>
+
+  </div>
 
     <!--
     <a class="site-announcement" target="_blank" href="{{ site.github_repo }}{{ site.github_issues_prefix }}193">
       <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> We recently updated our guide. Read about it here.
     </a>
     -->
-
-    {% include social-buttons.html %}
-
-  </div>
+</div>
 
 </header>

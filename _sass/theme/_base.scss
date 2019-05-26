@@ -96,6 +96,7 @@ h1, h2, h3, h4, h5, h6 {
 a {
   color: $brand-color;
   text-decoration: none;
+  transition: .3s;
 
   &:visited {
     color: darken($brand-color, 15%);
@@ -200,6 +201,7 @@ pre {
   }
 }
 .wrapper-post,
+.wrapper-header,
 .wrapper-footer {
   max-width: -webkit-calc(#{$post-content-width} - (#{$spacing-unit} * 2));
   max-width:         calc(#{$post-content-width} - (#{$spacing-unit} * 2));
