@@ -1,6 +1,12 @@
 ---
+layout: post
+title: Configure the AWS CLI
+date: 2016-12-26 00:00:00
 lang: ko 
 ref: configure-the-aws-cli
+description: To interact with AWS using the command line we need to install the AWS command line interface (or AWS CLI). It also needs to be configured with our IAM user Access key ID and Secret Access key from the AWS console.
+context: true
+comments_id: configure-the-aws-cli/86
 ---
 
 AWS의 많은 서비스를 보다 쉽게 사용하기 위해 [AWS CLI](https://aws.amazon.com/cli/)를 사용하겠습니다.
