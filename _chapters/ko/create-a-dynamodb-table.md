@@ -52,4 +52,4 @@ DynamoDB 테이블에 대한 백업을 설정하는 것이 좋습니다. 특히 
 
 다음으로 파일 업로드를 처리할 수 있는 S3 버킷을 설정합니다.
 
-[dynamodb-컴포넌트]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html
+[dynamodb-components]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html
