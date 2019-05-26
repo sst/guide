@@ -3,6 +3,7 @@
  */
 
 %social-buttons {
+  white-space: nowrap;
   .button {
     margin-right: 6px;
     background-color: darken($background-color, 10%);
@@ -95,6 +96,19 @@
       .col1 {
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .col2 {
+        margin-left: $spacing-unit / 2;
+      }
+
+      @include media-query($on-laptop) {
+        .col1 {
+          .social {
+            margin-top: 5px;
+          }
+        }
       }
 
       @include media-query($on-palm) {
@@ -103,11 +117,15 @@
 
         .col1 {
           display: block;
+          .site-title {
+            margin-right: 0;
+          }
           .social {
             margin: 5px 0 0;
           }
         }
         .col2 {
+          margin-left: 0;
           margin-top: 5px;
           input {
             width: 290px;
@@ -119,6 +137,7 @@
 
   .site-title {
     margin-bottom: 0;
+    margin-right: $spacing-unit / 2;
     white-space: nowrap;
 
     img {
@@ -141,7 +160,6 @@
   }
 
   .social {
-    margin-left: $spacing-unit / 2;
     @extend %social-buttons;
 
     .button {
