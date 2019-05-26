@@ -1,44 +1,50 @@
 ---
-lang: ko
+layout: post
+title: What is IAM
+date: 2016-12-25 16:00:00
+lang: en
 ref: what-is-iam
+description: AWS Identity and Access Management (or IAM) is a service that helps you securely control access to AWS resources. You can create IAM users and apply IAM policies to them. An IAM policy is a rule or set of rules defining the operations allowed/denied to be performed on a resource. An IAM role is very similar to a IAM user in that it is an identity with permissions but unlike a user it does not have any credentials tied to it. Instead an IAM role can be taken on by any user or resource that temporarily needs those permissions.
+context: true
+comments_id: what-is-iam/23
 ---
 
-이전 장에서 우리는 AWS 콘솔을 사용하지 않고 AWS CLI를 이용해 계정에서 작동할 수 있도록 IAM 사용자를 만들었습니다. 그러나 IAM 개념은 AWS 서비스의 보안을 처리 할 때 매우 자주 사용되므로 좀 더 자세히 이해해야 합니다. 불행히도 IAM은 많은 다른 부분들로 이루어져 있으며, 처음 접한 사람들에게는 IAM이 매우 혼란스러울 수 있습니다. 이 장에서는 IAM과 그 개념을 좀 더 자세하게 살펴 보겠습니다.
+In the last chapter, we created an IAM user so that our AWS CLI can operate on our account without using the AWS Console. But the IAM concept is used very frequently when dealing with security for AWS services, so it is worth understanding it in a bit more detail. Unfortunately, IAM is made up of a lot of different parts and it can be very confusing for folks that first come across it. In this chapter we are going to take a look at IAM and its concepts in a bit more detail.
 
-IAM의 공식적인 정의부터 시작해보겠습니다.
+Let's start with the official definition of IAM.
 
-AWS ID 및 액세스 관리(IAM)는 사용자를 위해 AWS 리소스에 대한 액세스를 안전하게 제어할 수 있게 해주는 웹 서비스입니다. IAM을 사용하여 AWS 리소스를 이용할 수 있는 사용자(인증:authentication)와 사용자가 접근 가능한 리소스를 어떤 방식으로(권한부여:authorization) 이용할 수 있는지를 제어합니다.
+> AWS Identity and Access Management (IAM) is a web service that helps you securely control access to AWS resources for your users. You use IAM to control who can use your AWS resources (authentication) and what resources they can use and in what ways (authorization).
 
-여기서 주목해야 할 첫 번째 점은 IAM은 AWS에 있는 다른 모든 서비스와 마찬가지로 그냥 하나의 서비스입니다. 하지만 어떤면에서는 안전한 방법으로 모든 서비스들을 아우를 수 있게 도와줍니다. IAM은 몇 가지 다른 부분들로 이루어져 있으므로 처음부터 가장 기본적인 것을 먼저 살펴 보겠습니다.
+The first thing to notice here is that IAM is a service just like all the other services that AWS has. But in some ways it helps bring them all together in a secure way. IAM is made up of a few different parts, so let's start by looking at the first and most basic one.
 
-### IAM 사용자는 무엇입니까?
+### What is an IAM User
 
-AWS 계정을 처음 생성하면 루트 사용자가 됩니다. 계정을 만들때 사용한 전자 메일 주소와 암호를 루트 게정 자격 증명이라고합니다. 이를 사용해 AWS 관리 콘솔에 로그인할 수 있습니다. 그렇게하면 결제 정보에 대한 액세스 및 비밀번호 변경 기능을 포함하여 AWS 계정의 모든 리소스에 대한 무제한 액세스 권한을 갖게 됩니다.
+When you first create an AWS account, you are the root user. The email address and password you used to create the account is called your root account credentials. You can use them to sign in to the AWS Management Console. When you do, you have complete, unrestricted access to all resources in your AWS account, including access to your billing information and the ability to change your password.
 
-![IAM Root 사용자 다이어그램](/assets/iam/iam-root-user.png)
+![IAM Root user diagram](/assets/iam/iam-root-user.png)
 
-이 수준의 액세스 권한을 가지고 정기적으로 계정에 액세스하는 것은 좋지 않지만 계정에 유일한 사람인 경우 문제가 되지 않습니다. 그러나 다른 사람이 AWS 계정에 액세스하고 관리해야할 경우, 루트 자격 증명을 제공하지 않을 것입니다. 대신 IAM 사용자를 생성합니다.
+Though it is not a good practice to regularly access your account with this level of access, it is not a problem when you are the only person who works in your account. However, when another person needs to access and manage your AWS account, you definitely don't want to give out your root credentials. Instead you create an IAM user.
 
-IAM 사용자는 AWS 관리 콘솔에 로그인하기 위한 이름, 비밀번호 및 API 또는 CLI와 함께 사용할 수 있는 최대 2개의 액세스 키로 구성됩니다.
+An IAM user consists of a name, a password to sign into the AWS Management Console, and up to two access keys that can be used with the API or CLI.
 
-![IAM 사용자 다이어그램](/assets/iam/iam-user.png)
+![IAM user diagram](/assets/iam/iam-user.png)
 
-기본적으로 사용자는 계정의 모든 서비스 항목에 액세스할 수 없습니다. 여러분이 직접 정책을 작성하고 사용자에게 해당 정책을 첨부하여 권한을 부여해야합니다. 이러한 정책 중 하나 이상을 부여하여 사용자가 액세스할 수 있는 것과 액세스할 수 없는 것을 제한할 수 있습니다.
+By default, users can't access anything in your account. You grant permissions to a user by creating a policy and attaching the policy to the user. You can grant one or more of these policies to restrict what the user can and cannot access.
 
-### IAM 정책은 무엇인가요?
+### What is an IAM Policy?
 
-IAM 정책은 AWS 리소스에서 수행할 수 있는 작업을 정의하는 규칙 또는 규칙의 집합입니다.
+An IAM policy is a rule or set of rules defining the operations allowed/denied to be performed on an AWS resource.
 
-정책은 여러가지 방법으로 부여될 수 있습니다:
+Policies can be granted in a number of ways:
 
-- *관리되는 정책*을 첨부하기. AWS는 *AmazonS3ReadOnlyAccess*와 같은 사전 정의된 정책 목록을 제공합니다.
-- *인라인 정책*을 첨후하기. 인라인 정책은 여러분이 직접 손으로 작성한 사용자 지정 정책입니다.
-- 적절한 권한 정책이 첨부된 그룹에 사용자를 추가하기. 아래에 그룹에 관련해서 보다 자세히 살펴 보겠습니다.
-- 기존 IAM 사용자의 권한을 복제하기.
+- Attaching a *managed policy*. AWS provides a list of pre-defined policies such as *AmazonS3ReadOnlyAccess*.
+- Attaching an *inline policy*. An inline policy is a custom policy created by hand.
+- Adding the user to a group that has appropriate permission policies attached. We'll look at groups in detail below.
+- Cloning the permission of an existing IAM user.
 
-![IAM 정책 다이어그램](/assets/iam/iam-policy.png)
+![IAM policy diagram](/assets/iam/iam-policy.png)
 
-예를들어, 모든 S3 버킷에 모든 작업을 부여하는 정책은 다음과 같습니다.
+As an example, here is a policy that grants all operations to all S3 buckets.
 
 ``` json
 {
@@ -51,7 +57,7 @@ IAM 정책은 AWS 리소스에서 수행할 수 있는 작업을 정의하는 �
 }
 ```
 
-그리고 더 세분화된 접근을 허락하는 정책은 `Hello-bucket` 이라는 버킷에서 문자열 `Bobs-`로 시작하는 파일의 검색만 허용합니다.
+And here is a policy that grants more granular access, only allowing retrieval of files prefixed by the string `Bobs-` in the bucket called `Hello-bucket`.
 
 ``` json
 {
@@ -64,29 +70,29 @@ IAM 정책은 AWS 리소스에서 수행할 수 있는 작업을 정의하는 �
 }
 ```
 
-우리는 위의 예에서 S3 리소스를 사용하고 있습니다. 그러나 정책은 다른 AWS 서비스들과 모두 비슷합니다. 단지 `Resource` 속성에 대한 리소스 ARN 값만 다릅니다. ARN은 AWS의 리소스에 대한 식별자이며 다음 장에서 더 자세히 살펴볼 것입니다. `Action`과 `Condition` 속성에 해당 서비스에 대한 액션과 조건 컨텍스트 키를 추가합니다. IAM 정책들[여기](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actionsconditions.html)에서 사용 가능한 모든 AWS 서비스 작업 및 조건 컨텍스트 키를 찾을 수 있습니다. 정책을 사용자에게 연결하는 것 이외에도 역할이나 그룹에 정책을 직접 첨부할 수 있습니다.
+We are using S3 resources in the above examples. But a policy looks similar for any of the AWS services. It just depends on the resource ARN for `Resource` property. An ARN is an identifier for a resource in AWS and we'll look at it in more detail in the next chapter. We also add the corresponding service actions and condition context keys in `Action` and `Condition` property. You can find all the available AWS Service actions and condition context keys for use in IAM Policies [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actionsconditions.html). Aside from attaching a policy to a user, you can attach them to a role or a group.
 
-### IAM 역할은 무엇인가요? 
+### What is an IAM Role
 
-AWS 리소스가 계정의 다른 리소스에 액세스해야하는 경우가 있습니다. 예를 들어 DynamoDB를 쿼리하여 일부 테이터를 검색하고 처리한 다음 Bob에게 결과가 포함된 전자 메일을 보내는 Lambda 함수가 있습니다. 이 경우 Lambda는 실수로 데이터베이스를 변경하지 않도록 읽기 쿼리만 만들 수 있기를 원합니다. Lambda에게 이메일을 보낼 수 있도록 Lambda를 제한하여 다른 사람들에게 스팸 메일을 발송하지 못하도록 하고 싶습니다. 이러한 작업은 IAM 사용자를 만들고 사용자의 자격증명을 Lambda 함수에 넣거나 코드에 자격증명을 포함 시키면 모두 가능하지만 이것은 안전한 방법이 아닙니다. 누군가 이 자격 증명을 얻는다면, 당신을 대신하여 전화를 걸 수 있습니다. 바로 여기에서 IAM 역할이 필요합니다.
+Sometimes your AWS resources need to access other resources in your account. For example, you have a Lambda function that queries your DynamoDB to retrieve some data, process it, and then send Bob an email with the results. In this case, we want Lambda to only be able to make read queries so it does not change the database by mistake. We also want to restrict Lambda to be able to email Bob so it does not spam other people. While this could be done by creating an IAM user and putting the user’s credentials to the Lambda function or embed the credentials in the Lambda code, this is just not secure. If somebody was to get hold of these credentials, they could make those calls on your behalf. This is where IAM role comes in to play. 
 
-IAM 역할은 AWS에서 ID를 이용해 인증된 사용자가 수행할 수 있는 작업과 수행할 수 없는 작업을 결정하는 권한 정책이 *ID 인증*에 있는 것 처럼 IAM 사용자와 매우 유사합니다. 그러나 역할에는 이와 관련된 자격 증명(암호 또는 액세스 키)이 없습니다. 한 사람과 고유하게 연결되는 대신, 필요한 사람이 역할을 수행할 수 있습니다. 이 경우 Lambda 함수는 일시적으로 권한을 수행하기 위해 역할을 할당 받는 것입니다.
+An IAM role is very similar to a user, in that it is an *identity* with permission policies that determine what the identity can and cannot do in AWS. However, a role does not have any credentials (password or access keys) associated with it. Instead of being uniquely associated with one person, a role can be taken on by anyone who needs it. In this case, the Lambda function will be assigned with a role to temporarily take on the permission.
 
-![AWS IAM 역할 서비스에 대한 다이어그램](/assets/iam/service-as-iam-role.png)
+![AWS service with IAM Role diagram](/assets/iam/service-as-iam-role.png)
 
-역할은 사용자에게도 적용될 수 있습니다. 이 경우 사용자는 IAM 역할에 대한 정책 세트를 사용하고 있습니다. 이 기능은 사용자가 조직에서 여러 개의 "모자"를 쓰고 있는 경우에 유용합니다. 어떤 특정한 역할을 수행하기 위해 이러한 역할을 한 번만 만들면 되기 때문에 훨씬 수월하며 이러한 작업을 수행하려는 다른 사람들에게 다시 사용할 수 있습니다.
+Roles can be applied to users as well. In this case, the user is taking on the policy set for the IAM role. This is useful for cases where a user is wearing multiple "hats" in the organization. Roles make this easy since you only need to create these roles once and they can be re-used for anybody else that wants to take it on.
 
-![IAM 역할을 가진 IAM 사용자 다이어그램](/assets/iam/iam-user-as-iam-role.png)
+![IAM User with IAM Role diagram](/assets/iam/iam-user-as-iam-role.png)
 
-다른 조직의 사용자 ARN에 연결된 역할을 가질 수도 있습니다. 이렇게하면 외부 사용자가 해당 역할을 조직의 일부로 간주할 수 있습니다. 일반적으로 AWS 조직에서 작동하는 타사 서비스를 사용하는 경우에 유용합니다. 교차 계정 IAM 역할을 만들고 외부 사용자를 *신뢰 관계(Trust Relationship)*로 추가하면 됩니다. *신뢰 관계*는 지정된 외부 사용자가 이 역할을 맡을 수 있음 AWS에 알리는 것입니다.
+You can also have a role tied to the ARN of a user from a different organization. This allows the external user to assume that role as a part of your organization. This is typically used when you have a third party service that is acting on your AWS Organization. You'll be asked to create a Cross-Account IAM Role and add the external user as a *Trust Relationship*. The *Trust Relationship* is telling AWS that the specified external user can assume this role.
 
-![IAM 역할을 가진 외부 IAM 사용자 다이어그램](/assets/iam/external-user-with-iam-role.png)
+![External IAM User with IAM Role diagram](/assets/iam/external-user-with-iam-role.png)
 
-### IAM 그룹은 무엇인가요? 
-	
-IAM 그룹은 단순히 IAM 사용사들의 모음입니다. 그룹을 사용하여 사용자들의 모음에 대한 사용 권한을 지정할 수 있습니다. 예를 들어 Admins라는 그룹을 만들어 관리자에게 일반적으로 필요한 권한 유형을 부여 할 수 있습니다. 해당 그룹의 모든 사용자는 그룹에 할당 된 사용 권한을 자동으로 갖습니다. 새 사용자가 조직에 참여하고 관리자 권한이 있어야하는 경우 해당 그룹에 사용자를 추가하여 적절한 권한을 할당 할 수 있습니다. 마찬가지로 사용자가 조직의 작업을 변경하는 경우 해당 사용자의 권한을 편집하는 대신 이전 그룹에서 해당 사용자를 제거하고 적절한 새 그룹에 추가 할 수 있습니다. 
 
-![IAM 그룹, IAM 역할, IAM 사용자, IAM 정책 완성 다이어그램](/assets/iam/complete-iam-concepts.png)
-	
-이러한 정보들은 여러분이 IAM과 그 개념들에 대한 빠른 이해를 도울 수 있을 것이라고 생각합니다. 다음 장에서 이들 중 몇 가지를 다시 언급할 예정이며 계속해서 다른 AWS 개념인 ARN에 대해서 빠르게 살펴 보겠습니다.
+### What is an IAM Group
 
+An IAM group is simply a collection of IAM users. You can use groups to specify permissions for a collection of users, which can make those permissions easier to manage for those users. For example, you could have a group called Admins and give that group the types of permissions that administrators typically need. Any user in that group automatically has the permissions that are assigned to the group. If a new user joins your organization and should have administrator privileges, you can assign the appropriate permissions by adding the user to that group. Similarly, if a person changes jobs in your organization, instead of editing that user's permissions, you can remove him or her from the old groups and add him or her to the appropriate new groups.
+
+![Complete IAM Group, IAM Role, IAM User, and IAM Policy diagram](/assets/iam/complete-iam-concepts.png)
+
+This should give you a quick idea of IAM and some of its concepts. We will be referring to a few of these in the coming chapters. Next let's quickly look at another AWS concept; the ARN.
