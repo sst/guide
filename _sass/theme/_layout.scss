@@ -64,7 +64,7 @@
 
   @include media-query($on-palm) {
     .algolia-autocomplete .ds-dropdown-menu {
-      min-width: 320px;
+      min-width: 300px;
     }
   }
 }
