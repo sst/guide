@@ -76,9 +76,9 @@ export function main(event, context, callback) {
 
 코드에도 몇 가지 주석을 달았지만 여기서는 간단한 몇 가지 작업을 처리합니다.
 
-- AWS JS SDK는 람다 함수의 현재 리전을 기반으로 작업 리전을 가정합니다. 따라서 DynamoDB 테이블이 다른 리전에있는 경우 DynamoDB 클라이언트를 초기화하기 전에 AWS.config.update ({region : "my-region"});를 호출하여 설정해야합니다.
--`event.body`에서 입력을 파싱합니다. 이것은 HTTP 요청 매개변수를 나타냅니다.
-- `userId`는 요청의 일부로 들어오는 연합 ID입니다. 이것은 접속자가 사용자 풀을 통해 인증 된 후에 설정됩니다. 우리는 Cognito 인증 풀을 설정할 다음 장에서 이에 대해 더 자세히 설명하겠습니다. 별도로 사용자 풀에 있는 사용자 ID를 이용하려는 경우; [Cognito ID 매핑 및 사용자 풀 ID] ({% link _chapters/mapping-cognito-identity-id-and-user-pool-id.md %}) 장을 살펴보십시오.
+- AWS JS SDK는 람다 함수의 현재 리전을 기반으로 작업 리전을 가정합니다. 따라서 DynamoDB 테이블이 다른 리전에있는 경우 DynamoDB 클라이언트를 초기화하기 전에 AWS.config.update ({region : "my-region"})를 호출하여 설정해야합니다.
+- `event.body`에서 입력을 파싱합니다. 이것은 HTTP 요청 매개변수를 나타냅니다.
+- `userId`는 요청의 일부로 들어오는 연합 ID입니다. 이것은 접속자가 사용자 풀을 통해 인증 된 후에 설정됩니다. 우리는 Cognito 인증 풀을 설정할 다음 장에서 이에 대해 더 자세히 설명하겠습니다. 별도로 사용자 풀에 있는 사용자 ID를 이용하려는 경우; [Cognito ID 매핑 및 사용자 풀 ID]({% link _chapters/mapping-cognito-identity-id-and-user-pool-id.md %}) 장을 살펴보십시오.
 - DynamoDB를 호출하여 생성 된 `noteId` 및 현재 날짜가 `createdAt`인 새 객체를 넣습니다.
 - 성공하면 HTTP 상태 코드가 `200`인 새로 생성 된 노트 객체와 응답 헤더를 반환하여 **CORS(Cross-Origin Resource Sharing)** 를 사용하도록 설정합니다.
 - 그리고 DynamoDB 호출이 실패하면 HTTP 상태 코드가 '500'인 오류를 반환합니다.
@@ -249,7 +249,7 @@ export function call(action, params) {
 
 여기서는 DynamoDB 메소드의 promise 형식을 사용하고 있습니다. Promise는 표준 콜백함수 구문 대신 사용할 비동기 코드를 관리하는 방법입니다. 코드를 훨씬 쉽게 읽을 수 있습니다.
 
-<img class="code-marker" src="/assets/s.png" />이제 우리는`create.js`로 돌아가서 우리가 만든 도우미 함수를 사용할 것입니다. `create.js`를 다음으로 대체하십시오.
+<img class="code-marker" src="/assets/s.png" />이제 우리는`create.js`로 돌아가서 우리가 만든 Helper 함수를 사용할 것입니다. `create.js`를 다음으로 대체하십시오.
 
 ``` javascript
 import uuid from "uuid";
