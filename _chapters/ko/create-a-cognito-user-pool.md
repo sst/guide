@@ -9,7 +9,7 @@ context: true
 comments_id: create-a-cognito-user-pool/148
 ---
 
-우리 노트 애플 리케이션은 안전하고 신뢰할 수있는 방법으로 사용자 계정과 인증을 처리해야합니다. 이를 위해 우리는 [Amazon Cognito] (https://aws.amazon.com/cognito/)를 사용하려고 합니다.
+우리 노트 애플 리케이션은 안전하고 신뢰할 수있는 방법으로 사용자 계정과 인증을 처리해야합니다. 이를 위해 우리는 [Amazon Cognito](https://aws.amazon.com/cognito/)를 사용하려고 합니다.
 
 Amazon Cognito User Pool을 사용하면 개발자가 웹 및 모바일 애플리케이션에 등록 및 로그인 기능을 쉽게 추가 할 수 있습니다. 사용자 디렉토리를 유지 관리하는 고유 한 ID 제공 업체 역할을합니다. 사용자 로그인 및 로그인을 지원하고 로그인 한 사용자의 인증 토큰을 프로비저닝합니다.
 
@@ -33,7 +33,7 @@ Amazon Cognito User Pool을 사용하면 개발자가 웹 및 모바일 애플�
 
 ![사용자 풀 입력 화면](/assets/cognito-user-pool/fill-in-user-pool-info.png)
 
-**사용자 이름 속성 선택...**을 클릭합니다.
+**사용자 이름 속성 선택**을 클릭합니다.
 
 ![사용자 이름 속성 선택 화면](/assets/cognito-user-pool/choose-username-attributes.png)
 
