@@ -3,7 +3,7 @@ layout: post
 title: What is AWS Lambda?
 date: 2016-12-23 18:00:00
 lang: ko
-description: AWS Lambda는 Amazon Web Services에서 제공하는 서버가없는 컴퓨팅 서비스입니다. 이벤트 (예 : HTTP 요청)에 응답하도록 요구되는 상태를 저장하지 않는 컨테이너에서 코드 조각 (람다 함수라고 함)을 실행합니다. 기능 실행이 완료되면 컨테이너가 꺼집니다. 사용자는 기능을 실행하는 데 걸리는 시간 동안 만 청구됩니다.
+description: AWS Lambda는 Amazon Web Services에서 제공하는 서버가없는 컴퓨팅 서비스입니다. 이벤트 (예 - HTTP 요청)에 응답하도록 요구되는 상태를 저장하지 않는 컨테이너에서 코드 조각 (람다 함수라고 함)을 실행합니다. 기능 실행이 완료되면 컨테이너가 꺼집니다. 사용자는 기능을 실행하는 데 걸리는 시간 동안 만 청구됩니다.
 ref: what-is-aws-lambda
 comments_id: what-is-aws-lambda/308
 ---
