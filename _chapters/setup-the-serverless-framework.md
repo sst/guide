@@ -2,6 +2,8 @@
 layout: post
 title: Set up the Serverless Framework
 date: 2016-12-29 00:00:00
+lang: en
+ref: setup-the-serverless-framework
 description: To create our serverless backend API using AWS Lambda and API Gateway, we are going to use the Serverless Framework (https://serverless.com). Serverless Framework helps developers build and manage serverless apps on AWS and other cloud providers. We can install the Serverless Framework CLI from it’s NPM package and use it to create a new Serverless Framework project.
 context: true
 code: backend
