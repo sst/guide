@@ -80,7 +80,7 @@ export function main(event, context, callback) {
 -`event.body`에서 입력을 파싱합니다. 이것은 HTTP 요청 매개변수를 나타냅니다.
 - `userId`는 요청의 일부로 들어오는 연합 ID입니다. 이것은 접속자가 사용자 풀을 통해 인증 된 후에 설정됩니다. 우리는 Cognito 인증 풀을 설정할 다음 장에서 이에 대해 더 자세히 설명하겠습니다. 별도로 사용자 풀에 있는 사용자 ID를 이용하려는 경우; [Cognito ID 매핑 및 사용자 풀 ID] ({% link _chapters/mapping-cognito-identity-id-and-user-pool-id.md %}) 장을 살펴보십시오.
 - DynamoDB를 호출하여 생성 된 `noteId` 및 현재 날짜가 `createdAt`인 새 객체를 넣습니다.
-- 성공하면 HTTP 상태 코드가 `200`인 새로 생성 된 노트 객체와 응답 헤더를 반환하여 **CORS (Cross-Origin Resource Sharing)**를 사용하도록 설정합니다.
+- 성공하면 HTTP 상태 코드가 `200`인 새로 생성 된 노트 객체와 응답 헤더를 반환하여 **CORS(Cross-Origin Resource Sharing)** 를 사용하도록 설정합니다.
 - 그리고 DynamoDB 호출이 실패하면 HTTP 상태 코드가 '500'인 오류를 반환합니다.
 
 ### API 엔드포인트 구성
