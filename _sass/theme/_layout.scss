@@ -29,27 +29,27 @@
 
 %search {
   position: relative;
-  font-size: 18px;
+  font-size: 15px;
   display: inline-block;
 
   label {
     position: absolute;
-    left: 14px;
+    left: 13px;
     top: 8px;
     z-index: 10;
     opacity: 0.6;
   }
 
   input {
-    padding: 10px 10px 10px 36px;
+    padding: 5px 10px 5px 34px;
     border-radius: 8px;
-    height: 46px;
+    height: 42px;
     width: 226px;
     color: $secondary-text-color;
     background-color: darken($background-color, 7%);
     border: 1px solid transparent;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 1.3333333;
     box-sizing: border-box;
 
@@ -58,7 +58,13 @@
       outline: 0;
       color: $text-color;
       background-color: white;
-      box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+    }
+  }
+
+  @include media-query($on-palm) {
+    .algolia-autocomplete .ds-dropdown-menu {
+      min-width: 320px;
     }
   }
 }
@@ -274,6 +280,11 @@
   .social {
     margin-top: 10px;
     @extend %social-buttons;
+  }
+
+  section.search {
+    margin-top: 10px;
+    @extend %search;
   }
 
   .site-announcement {
@@ -616,6 +627,8 @@
 
 .post-content {
   margin-bottom: $spacing-unit;
+  word-wrap: break-word;
+  word-break: break-word;
 
   h2 {
     font-size: 32px;
