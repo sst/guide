@@ -53,7 +53,7 @@ export async function main(event, context) {
 }
 ```
 
-이것은 `lcreate.js` 함수와 비슷하게 보일 것입니다. 여기서 우리는 `매개 변수`에 새로운`content` 와 `attachment` 값으로 `update` DynamoDB를 호출합니다.
+이것은 `create.js` 함수와 비슷하게 보일 것입니다. 여기서 우리는 `매개 변수`에 새로운`content` 와 `attachment` 값으로 `update` DynamoDB를 호출합니다.
 
 ### API 엔드포인트 구서하기 
 
