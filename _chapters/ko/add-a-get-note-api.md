@@ -95,7 +95,7 @@ Get note API를 테스트하려면`noteId` 매개 변수를 전달해야합니�
 $ serverless invoke local --function get --path mocks/get-event.json
 ```
 
-반환된 응답은 아래와 같아야합니다.
+반환된 응답은 아래와 유사해야 합니다.
 
 ``` bash
 {
