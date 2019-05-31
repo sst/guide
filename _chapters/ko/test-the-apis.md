@@ -76,7 +76,7 @@ Making API request
      attachment: 'hello.jpg',
      createdAt: 1499648598452 } }
 ```
-j
+
 이제 백엔드를 완성했습니다! 다음으로 앱의 프론트 엔드를 만드는 단계로 넘어가겠습니다.
 
 ---
