@@ -2,6 +2,8 @@
 layout: post
 title: Configure AWS Amplify
 date: 2017-01-12 12:00:00
+lang: en
+ref: configure-aws-amplify
 description: We are going to use the information of our AWS resources to configure AWS Amplify in our React app. We'll call the Amplify.configure() method when our app first loads.
 context: true
 comments_id: configure-aws-amplify/151

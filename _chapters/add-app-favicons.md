@@ -2,6 +2,8 @@
 layout: post
 title: Add App Favicons
 date: 2017-01-07 00:00:00
+lang: en
+ref: add-app-favicons
 description: To generate app icons and favicons for our React.js app we will use the Realfavicongenerator.net service. This will replace the default favicon that Create React App comes with.
 context: true
 comments_id: add-app-favicons/155

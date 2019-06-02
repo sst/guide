@@ -2,6 +2,8 @@
 layout: post
 title: Create a New React.js App
 date: 2017-01-06 00:00:00
+lang: en
+ref: create-a-new-react-js-app
 description: Create React App helps you build React.js app with no configuration. Install the Create React App CLI using the NPM package and use the command to start a new React.js project.
 context: true
 comments_id: create-a-new-react-js-app/68
