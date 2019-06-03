@@ -46,7 +46,7 @@ $ npm start
 <title>Scratch - A simple note taking app</title>
 ```
 
-Create React App은 매우 편리하면서도 최소한의 개발 환경으로 미리 로딩되어 있습니다. 라이브 리로딩, 테스트 프레임 워크, ES6 지원 그리고 [다양한 기능](https://github.com/facebookincubator/create-react-app#why-use-this)을 포함하고 있습니다. 
+Create React App은 매우 편리하면서도 최소한의 개발 환경으로 미리 로딩되어 있습니다. 라이브 리로딩, 테스트 프레임 워크, ES6 지원 그리고 [기타 다양한 기능](https://github.com/facebookincubator/create-react-app#why-use-this)을 포함하고 있습니다. 
 
-계속해서 우리는 앱 아이콘을 만들고 favicon을 업데이트 하겠습니다.
+계속해서 앱 아이콘을 만들고 favicon을 업데이트 해보겠습니다.
 
