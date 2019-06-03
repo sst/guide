@@ -9,7 +9,7 @@ context: true
 comments_id: add-app-favicons/155
 ---
 
-Create React App은 앱에 대한 간단한 favicon을 생성하고`public/favicon.ico`에 저장합니다. 그러나 모든 브라우저와 모바일 플랫폼에서 작동하도록 favicon을 가져 오려면 조금 더 많은 작업이 필요합니다. 몇 가지 요구 사항과 사이즈가 있습니다. 이러한 내용은 앱의`public/` 디렉토리에 파일을 포함시키는 법을 배울 좋은 기회입니다.
+Create React App은 앱에 대한 간단한 favicon을 생성하고`public/favicon.ico`에 저장할 수 있습니다. 그러나 모든 브라우저와 모바일 플랫폼에서 작동하도록 favicon을 가져 오려면 조금 더 많은 작업이 필요합니다. 몇 가지 요구 사항과 사이즈가 있는데, 이러한 내용은 앱의`public/` 디렉토리에 파일을 포함시키는 법을 배울 좋은 기회입니다.
 
 예를 들어, 간단한 이미지로 시작하여 다양한 이미지를 생성 할 것입니다.
 
@@ -19,7 +19,7 @@ Create React App은 앱에 대한 간단한 favicon을 생성하고`public/favic
 
 대부분의 타겟 플랫폼에서 아이콘이 작동하도록하기 위해 [Favicon Generator](http://realfavicongenerator.net)라는 서비스를 사용합니다.
 
-**Favicon 사진 선택**을 클릭하여 아이콘을 업로드하십시오.
+**Favicon 사진 선택**을 클릭하여 앞에서 다운로드한 아이콘을 업로드하십시오.
 
 ![Realfavicongenerator.net 화면](/assets/realfavicongenerator.png)
 
@@ -77,7 +77,7 @@ Create React App은 앱에 대한 간단한 favicon을 생성하고`public/favic
 <meta name="theme-color" content="#000000">
 <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
 ```
-마지막으로 브라우저로 가서 `/favicon-32x32.png` 경로에 파일이 올바르게 추가되었는지 확인하십시오.
+마지막으로 브라우저로 가서 입력된 주소 뒤에 `/favicon-32x32.png`을 입력해서 파일이 올바르게 추가되었는지 확인하십시오.
 
-다음으로 우리 앱에서 맞춤 글꼴을 설정하는 방법을 살펴 보겠습니다.
+다음으로 앱에서 맞춤 글꼴을 설정하는 방법을 살펴 보겠습니다.
 
