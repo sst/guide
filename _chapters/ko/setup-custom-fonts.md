@@ -11,7 +11,7 @@ comments_id: set-up-custom-fonts/81
 
 사용자 정의 글꼴은 이제 모던 웹 애플리케이션의 거의 표준적인 부분입니다. [Google 글꼴](https://fonts.google.com)를 사용하여 작성된 노트를 위해 앱을 설정하려고 합니다.
 
-이 또한 새로 만든 React.js 앱의 구조를 탐색할 기회를 제공합니다.
+이 부분도 React.js 앱의 구조를 탐색할 좋은 기회입니다.
 
 ### Google 글꼴 추가하기 
 
