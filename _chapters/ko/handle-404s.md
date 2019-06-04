@@ -9,7 +9,7 @@ context: true
 comments_id: handle-404s/75
 ---
 
-지금까지 기본 경로를 처리하는 방법을 알아봤습니다. React Router로 404를 처리하는 방법을 살펴 보겠습니다.
+지금까지 기본 경로를 처리하는 방법을 알아봤습니다. 이제 React Router로 404를 처리하는 방법을 살펴 보겠습니다.
 
 ### 컴포넌트 만들기
 
@@ -49,9 +49,9 @@ export default () =>
 <Route component={NotFound} />
 ```
 
-언제나 `<Route>` 블록의 마지막 줄에 위치해야합니다. 그래야 다른 경로들에 대한 요청 실패 전에 이를 처리하는 경로라고 생각할 수 있습니다.
+항상 `<Route>` 블록의 마지막 줄에 위치해야합니다. 그래야 다른 경로들에 대한 요청 실패 전에 이를 처리하는 경로라고 생각할 수 있습니다.
 
-<img class="code-marker" src="/assets/s.png" />그리고 `NotFound` 컴포넌트의 헤더 부분에 다음 내용을 추가합니다:
+<img class="code-marker" src="/assets/s.png" />그리고 `NotFound` 컴포넌트를 import하기 위해 헤더 부분에 다음 내용을 추가합니다:
 
 ``` javascript
 import NotFound from "./containers/NotFound";
