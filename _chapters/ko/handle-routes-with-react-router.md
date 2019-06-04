@@ -9,7 +9,7 @@ context: true
 comments_id: handle-routes-with-react-router/116
 ---
 
-Create React App은 기본적으로 많은 것을 설정하지만 경로를 처리하는 기본 방법은 제공되지 않습니다. 따라서 단일 페이지 앱을 개발하기 위해 [React Router](https://reacttraining.com/react-router/)를 사용하여 처리 할 것입니다.
+Create React App은 기본적으로 많은 것이 이미 설정되어 있지만, 경로에 대한 처리는 기본으로 제공되지 않습니다. 따라서 단일 페이지 앱을 개발하기 위해 [React Router](https://reacttraining.com/react-router/)를 사용하여 처리 할 것입니다.
 
 
 먼저 React Router를 설치해 보겠습니다. React Router의 최신 버전인 React Router v4를 사용할 것입니다. React Router v4는 웹과 네이티브에서 사용할 수 있습니다. 여기서는 웹 용으로 설치하십시오.
@@ -45,16 +45,16 @@ ReactDOM.render(
 );
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 `src/index.js`의 header에 붙여 넣습니다.
+<img class="code-marker" src="/assets/s.png" />그리고 `src/index.js`에 아래 내용을 맨 윗 부분에 붙여 넣습니다.
 
 ``` coffee
 import { BrowserRouter as Router } from "react-router-dom";
 ```
 
-그리고 아래 두 곳을 조금 수정하겠습니다.
+우리는 위에서 다음 두 가지를 조금 수정했습니다.
 
-1. 라우터로`BrowserRouter`를 사용하십시오. 브라우저의 [History](https://developer.mozilla.org/en-US/docs/Web/API/History) API를 사용하여 실제 URL을 만듭니다.
-2.`Router`를 사용하여 우리의 `App` 컴포넌트를 렌더링하십시오. 이렇게하면 우리가 필요한 경로를 우리의 `App` 구성 요소 안에 만들 수 있습니다.
+1. 라우터로 `BrowserRouter`를 사용합니다. 브라우저의 [History](https://developer.mozilla.org/en-US/docs/Web/API/History) API를 사용하여 실제 URL을 만듭니다.
+2. `Router`를 사용하여 우리의 `App` 컴포넌트를 렌더링합니다. 이렇게하면 우리가 필요한 경로를 우리의 `App` 구성 요소 안에 만들 수 있습니다.
 
 이제 브라우저로 이동하면 앱이 이전과 마찬가지로 로드됩니다. 유일한 차이점은 React Router를 사용하여 페이지를 제공한다는 것입니다.
 
