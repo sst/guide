@@ -9,7 +9,7 @@ context: true
 comments_id: set-up-bootstrap/118
 ---
 
-웹 응용 프로그램을 작성하는 경우, 응용 프로그램의 인터페이스를 만드는데 도움이되는 UI Kit가 있습니다. 우리의 노트 작성 앱에 [부트 스트랩](http://getbootstrap.com)을 사용하려고 합니다. 부트스트랩은 React와 함께 직접 사용할 수도 있지만 가장 좋은 방법은 [React-Bootstrap](https://react-bootstrap.github.io) 패키지와 함께 사용하는 것입니다. 이럴 경우 마크 업을 훨씬 쉽게 구현하고 이해할 수 있습니다.
+웹 응용 프로그램을 작성하는 경우, 응용 프로그램의 인터페이스를 만드는데 도움이되는 UI Kit가 있습니다. 우리의 노트 작성 앱에 [부트 스트랩](http://getbootstrap.com)을 사용하려고 합니다. 부트스트랩은 React와 함께 직접 사용할 수도 있지만 가장 좋은 방법은 [React-Bootstrap](https://react-bootstrap.github.io) 패키지와 함께 사용하는 것입니다. 이럴 경우 마크업을 훨씬 쉽게 구현하고 이해할 수 있습니다.
 
 ### React Bootstrap 설치하기
 
