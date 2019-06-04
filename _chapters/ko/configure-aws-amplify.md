@@ -49,13 +49,13 @@ export default {
 ```
 여기에서 다음을 대체해야합니다.
 
-1. [파일 업로드를위한 S3 버킷 생성]({% link_chapters/create-an-s3-bucket-for-file-uploads.md %}) 챕터에서 S3 버킷 이름 및 리전을 나타내는 `YOUR_S3_UPLOADS_BUCKET_NAME` 및 `YOUR_S3_UPLOADS_BUCKET_REGION` 값을 대체합니다. 여기서는`notes-app-uploads`와`us-east-1`입니다.
+1. [파일 업로드를위한 S3 버킷 생성]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}) 챕터에서 S3 버킷 이름 및 리전을 나타내는 `YOUR_S3_UPLOADS_BUCKET_NAME` 및 `YOUR_S3_UPLOADS_BUCKET_REGION` 값을 대체합니다. 여기서는`notes-app-uploads`와`us-east-1`입니다.
 
-2. [API 배포] ({% link_chapters/deploy-the-apis.md %}) 챕터에서 설명한 `YOUR_API_GATEWAY_URL` 및 `YOUR_API_GATEWAY_REGION` 값을 대체합니다. 여기에서 URL은`https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod`이고 리전은 `us-east-1`입니다.
+2. [API 배포] ({% link _chapters/deploy-the-apis.md %}) 챕터에서 설명한 `YOUR_API_GATEWAY_URL` 및 `YOUR_API_GATEWAY_REGION` 값을 대체합니다. 여기에서 URL은`https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod`이고 리전은 `us-east-1`입니다.
 
-3. Cognito **Pool Id**, **App Client id** 및 [Cognito 사용자 풀 만들기]({% link_chapters/create-a-cognito-user-pool.md %}) 챕터를 참조하여 `YOUR_COGNITO_USER_POOL_ID`, `YOUR_COGNITO_APP_CLIENT_ID` 및 `YOUR_COGNITO_REGION` 값을 대체합니다.
+3. Cognito **Pool Id**, **App Client id** 및 [Cognito 사용자 풀 만들기]({% link _chapters/create-a-cognito-user-pool.md %}) 챕터를 참조하여 `YOUR_COGNITO_USER_POOL_ID`, `YOUR_COGNITO_APP_CLIENT_ID` 및 `YOUR_COGNITO_REGION` 값을 대체합니다.
 
-4. [Cognito ID 풀 만들기] ({% link_chapters/create-a-cognito-identity-pool.md %}) 챕터의 **자격 증명 풀 ID**를 참조하여 `YOUR_IDENTITY_POOL_ID` 값을 대체합니다.
+4. [Cognito ID 풀 만들기] ({% link _chapters/create-a-cognito-identity-pool.md %}) 챕터의 **자격 증명 풀 ID**를 참조하여 `YOUR_IDENTITY_POOL_ID` 값을 대체합니다.
 
 ### AWS Amplify 추가하기
 
