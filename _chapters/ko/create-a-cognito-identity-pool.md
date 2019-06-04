@@ -4,7 +4,7 @@ title: Create a Cognito Identity Pool
 date: 2017-01-05 00:00:00
 description: Amazon Cognito 연동 자격증명(Federated Identities)은 AWS 리소스를 보호하는 데 도움이됩니다. Cognito 사용자 풀은 서버리스 백엔드의 ID 제공 프로바이더로 사용할 수 있습니다. 사용자가 S3 버킷에 파일을 업로드하고 API 게이트웨이에 연결할 수 있게하려면 ID 풀을 만들어야합니다. IAM 정책에 S3 버킷의 이름을 지정하고 파일에 cognito-identity.amazonaws.com:sub 접두어를 붙입니다. 또한 API 게이트웨이 엔드포인트를 리소스로 추가할 것입니다.
 lang: ko
-ref: create-a-cognito-indentity-pool
+ref: create-a-cognito-identity-pool
 context: true
 comments_id: create-a-cognito-identity-pool/135
 ---
