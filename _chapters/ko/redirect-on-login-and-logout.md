@@ -46,7 +46,7 @@ handleSubmit = async event => {
 
 ### 로그아웃 한 후에 로그인 화면으로 리디렉션
 
-이제 실제와 같은 로그아웃 프로세스와 동일한 처리를 할 것입니다. 그러나 `App` 컴포넌트는 `Route` 컴포넌트 내부에서 렌더링되지 않기 때문에 라우터 속성에 직접 접근 할 수 없습니다. `App` 컴포넌트에서 라우터 속성을 사용하기 위해서는 `withRouter` [Higher-Order 컴포넌트](https://facebook.github.io/react/docs/higher-order-components)(또는 HOC)를 사용할 필요가 있습니다.  [여기서](https://reacttraining.com/react-router/web/api/withRouter)에 `withRouter` HOC에 대한 자세한 내용을 볼 수 있습니다.
+이제 실제와 같은 로그아웃 프로세스와 동일한 처리를 하겠습니다. 그러나 `App` 컴포넌트는 `Route` 컴포넌트 내부에서 렌더링되지 않기 때문에 라우터 속성에 직접 접근 할 수 없습니다. `App` 컴포넌트에서 라우터 속성을 사용하기 위해서는 `withRouter` [Higher-Order 컴포넌트](https://facebook.github.io/react/docs/higher-order-components)(또는 HOC)를 사용할 필요가 있습니다.  [여기서](https://reacttraining.com/react-router/web/api/withRouter)에 `withRouter` HOC에 대한 자세한 내용을 볼 수 있습니다.
 
 이 HOC를 사용하기 위해 App 컴포넌트를 내보내는 방식을 변경하겠습니다.
 
