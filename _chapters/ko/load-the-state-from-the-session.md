@@ -15,7 +15,7 @@ Amplify는 `Auth.currentSession()` 메소드를 사용하여 현재 사용자 �
 
 ### 사용자 세션 불러오기
 
-앱이 브라우저에 로드 될 때 이것을 불러오겠습니다. `componentDidMount`에서 이것을 처리할 것입니다. `Auth.currentSession()`이 promise를 반환하므로 앱이 완전히 로드가 완료된 상태로 준비가 되어 있어야합니다.
+앱이 브라우저에 로드 될 때 사용자 세션을 불러오겠습니다. 먼저 `componentDidMount`에서 이를 처리합니다. `Auth.currentSession()`이 promise를 반환하므로 앱이 완전히 로드가 완료된 상태로 준비가 되어 있어야합니다.
 
 <img class="code-marker" src="/assets/s.png" />이를 위해 `isAuthenticating`라고 하는 `src/App.js`의 state에 플래그를 추가합니다. 생성자의 초기 상태는 다음과 같아야합니다.
 
@@ -50,11 +50,11 @@ async componentDidMount() {
 }
 ```
 
-이 모든 것은 현재 세션을 불러오는 것입니다. 일단 로드가 되고 나면, `isAuthenticating` 플래그를 갱신합니다. `Auth.currentSession()` 메소드는 만일 아무도 현재 로그인하지 않았다면 `현재 사용자 없음` 오류를 던집니다. 우리는 앱을 로드하고 로그인하지 않은 상태에서 이 오류를 사용자에게 보여주고 싶지 않습니다.
+위 코드는 현재 세션을 불러오는 것입니다. 일단 로드가 되고 나면 `isAuthenticating` 플래그를 갱신합니다. 만일 아무도 현재 로그인하지 않았다면 `Auth.currentSession()` 메소드는 `현재 사용자 없음` 오류를 던질겁니다. 그러나 여기서는 로그인하지 않은 상태에서 이 오류를 사용자에게 보여주고 싶지 않습니다.
 
 ### 준비가 되면 렌더링하기
 
-사용자 세션을 로드하는 것은 비동기 프로세스이기 때문에 처음 로드 할 때 앱이 state를 변경하지 않도록 해야합니다. 이렇게하기 위해 `isAuthenticating`가 `false`가 될 때까지 앱을 렌더링하지 말아야 합니다.
+사용자 세션을 로드하는 것은 비동기 프로세스이기 때문에 처음 로드 할 때 앱이 state를 변경하지 않도록 해야합니다. 이렇게 하기 위해 `isAuthenticating`가 `false`가 될 때까지 앱을 렌더링하지 말아야 합니다.
 
 여기서는`isAuthenticating` 플래그에 기반하여 앱을 조건부로 렌더링합니다.
 
