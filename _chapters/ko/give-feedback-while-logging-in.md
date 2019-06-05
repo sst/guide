@@ -129,7 +129,7 @@ import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 ```
 
-이제 브라우저로 전환하여 로그인을 시도하면 로그인이 완료되기 전에 중간 상태가 표시됩니다.
+이제 브라우저로 전환하여 로그인을 시도하면 로그인이 완료되기 전에 로딩이 진행중인 상태가 표시됩니다.
 
 ![로그인 로딩 상태 화면](/assets/login-loading-state.png)
 
