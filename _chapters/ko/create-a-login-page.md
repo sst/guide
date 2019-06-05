@@ -1,4 +1,3 @@
----
 layout: post
 title: Create a Login Page
 date: 2017-01-13 00:00:00
@@ -115,7 +114,7 @@ export default class Login extends Component {
 
 ### Add the Route
 
-<img class="code-marker" src="/assets/s.png" />이제 `<Route>` 컨테이너 아래의 `src/Routes.js`에 다음 줄을 추가하여 이 컨테이너를 나머지 응용 프로그램과 연결합니다.
+<img class="code-marker" src="/assets/s.png" />이제 `src/Routes.js`의 `<Route>` 바로 아래에 다음 줄(`반드시 <Route component={NotFound} />` 보다는 위에 줄)을 추가하여 이 컨테이너를 나머지 응용 프로그램과 연결합니다.
 
 ``` coffee
 <Route path="/login" exact component={Login} />
