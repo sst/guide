@@ -89,7 +89,7 @@ export default ({ component: C, props: cProps, ...rest }) =>
 
 - 결과적으로 우리는 `Route`를 리턴하고`component` 와 `childProps` 속성을 가지는 컴포넌트를 생성 할 수 있습니다. 이를 통해 렌더링하고자하는 컴포넌트와 적용하고자하는 속성들을 전달할 수 있습니다.
 
-마지막으로 `component`(`C`로 설정)과 `props`(`cProps`으로 설정)을 가져 와서 `Route` 내부에서 인라인 함수를 사용하여 렌더링합니다. `props => <C {... props} {... cProps} />`라고합니다. 이 경우 `props` 변수는 Route 컴포넌트가 우리에게 전달하는 변수입니다. 반면, `cProps`는 우리가 설정하고자하는 `childProps`입니다.
+마지막으로 `component`(`C`로 설정)과 `props`(`cProps`으로 설정)을 가져 와서 `Route` 내부에서 인라인 함수를 사용하여 렌더링합니다. `props => <C {... props} {... cProps} />` 에서 말이죠. 이 경우 `props` 변수는 Route 컴포넌트가 우리에게 전달하는 변수입니다. 반면, `cProps`는 우리가 설정하고자하는 `childProps`입니다.
 
 이제 이 컴포넌트를 사용하기 위해 우리는 `childProps`를 전달해야 할 경로에 이 컴포넌트를 포함시킵니다.
 
@@ -170,4 +170,4 @@ handleLogout = event => {
 
 ![로그인 상태 업데이트 스크린 샷](/assets/login-state-updated.png)
 
-이제 페이지를 새로 고침하면 다시 로그아웃해야 합니다. 이것은 브라우저 세션에서 상태를 초기화하지 않기 때문입니다. 다음에 그 방법을 살펴 보도록 하겠습니다.
+이제 페이지를 새로 고침하면 다시 로그아웃해야 합니다. 이것은 브라우저 세션에서 실제로는 상태를 초기화하지 않기 때문입니다. 다음에 그 방법을 살펴 보도록 하겠습니다.
