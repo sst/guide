@@ -33,7 +33,6 @@ comments_id: create-an-s3-bucket-for-file-uploads/150
 - **리전**은 파일이 저장된 실제 지리적 영역입니다. 이 가이드는 **미국 동부(버지니아 북부)**를 이용합니다. 
 
 버킷 이름과 리전을 적어 두십시오. 나중에 안내에서 사용하게 될 것입니다.
-Make a note of the name and region as we'll be using it later in the guide.
 
 ![S3 버킷 정보 스크린샷](/assets/s3/enter-s3-bucket-info.png)
 
