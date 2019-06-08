@@ -75,7 +75,7 @@ exports.myHandler = function(event, context, callback) {
 
 This caching effect of containers also applies to the `/tmp` directory that we talked about above. It is available as long as the container is being cached.
 
-Now you can guess that this isn't a very reliable way to make our Lambda functions stateful. This is because we just don't control the underlying process by which Lambda is invoked or it's containers are cached.
+Now you can guess that this isn't a very reliable way to make our Lambda functions stateful. This is because we just don't control the underlying process by which Lambda is invoked or its containers are cached.
 
 ### Pricing
 
