@@ -2,7 +2,7 @@
 layout: post
 title: Give Feedback While Logging In
 date: 2017-01-18 00:00:00
-lang: ko
+lang: kr
 ref: give-feedback-while-logging-in
 description: React.js 앱에 로그인하는 동안 사용자에게 몇 가지 피드백을 제공해야합니다. 이렇게하려면 React-Bootstrap Button 구성 요소 내에서 Glyphicon 새로 고침 아이콘을 움직이는 컴포넌트를 만듭니다. 로그인 호출이 진행되는 동안 애니메이션을 수행합니다. 
 context: true
