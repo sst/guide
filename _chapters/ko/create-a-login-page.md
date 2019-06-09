@@ -1,7 +1,7 @@
 layout: post
 title: Create a Login Page
 date: 2017-01-13 00:00:00
-lang: ko
+lang: kr
 ref: create-a-login-page
 description: React.js 앱에 로그인 페이지를 추가합니다. 로그인 양식을 만들기 위해서 FormGroup과 FormControl React-Bootstrap 컴포넌트들을 사용합니다.
 context: true
