@@ -2,7 +2,7 @@
 layout: post
 title: Configure AWS Amplify
 date: 2017-01-12 12:00:00
-lang: ko 
+lang: kr 
 ref: configure-aws-amplify
 description: React 앱에서 AWS Amplify를 구성하기 위해 AWS 리소스의 정보를 사용하려고합니다. 앱을 처음 로드 할 때 Amplify.configure() 메소드를 호출합니다. 
 context: true
