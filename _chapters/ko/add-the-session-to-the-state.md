@@ -2,7 +2,7 @@
 layout: post
 title: Add the Session to the State
 date: 2017-01-15 00:00:00
-lang: ko
+lang: kr
 ref: add-the-session-to-the-state
 redirect_from: /chapters/add-the-user-token-to-the-state.html
 description: React.js 앱에서 App 세션 상태에 사용자 세션을 추가해야합니다. 상태를 추가하게 되면 해당 사용자 세션을 모든 하위 컨테이너에 전달할 수 있습니다. 
