@@ -2,7 +2,7 @@
 layout: post
 title: Handle 404s
 date: 2017-01-12 00:00:00
-lang: ko
+lang: kr
 ref: handle-404s
 description: React.js 앱에서 React Router v4를 사용하여 404를 처리하려면 Switch 블록 하단에 모든 경로에 대한 감지 설정을 해야합니다. 모든 경로 감지에는 경로 속성 없이 모든 경로에 응답합니다.
 context: true
