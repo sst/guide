@@ -2,7 +2,7 @@
 layout: post
 title: Login with AWS Cognito
 date: 2017-01-14 00:00:00
-lang: ko
+lang: kr
 ref: login-with-aws-cognito
 description: 사용자가 React.js 앱에서 Amazon Cognito를 사용하여 로그인 할 수있게하려면 AWS Amplify를 사용합니다. Cognito 사용자 풀 ID와 앱 클라이언트 ID가 필요합니다. AWS Amplify에서 Auth.signIn() 메소드를 호출하여 로그인합니다.
 context: true
