@@ -2,7 +2,7 @@
 layout: post
 title: Redirect on Login and Logout
 date: 2017-01-17 00:00:00
-lang: kr
+lang: ko
 ref: redirect-on-login-and-logout
 description: 로그인 후 사용자가 React.js 앱에서 로그아웃 한 후 리디렉션 되도록 React Router v4의 withRouter higher-order 컴포넌트를 사용하고 history.push 메서드를 사용하여 앱을 탐색합니다. 
 context: true

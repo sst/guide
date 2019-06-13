@@ -2,7 +2,7 @@
 layout: post
 title: Load the State from the Session
 date: 2017-01-15 00:00:00
-lang: kr
+lang: ko
 ref: load-the-state-from-the-session
 description: 사용자가 React.js 앱에서 Amazon Cognito에 로그인 한 상태로 유지하려면 App 세션 state에서 사용자 세션을 로드해야합니다. AWS Amplify Auth.currentSession() 메소드를 사용하여 componentDidMount에 세션을로드합니다.
 context: true

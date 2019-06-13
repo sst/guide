@@ -2,7 +2,7 @@
 layout: post
 title: Clear the Session on Logout
 date: 2017-01-16 00:00:00
-lang: kr
+lang: ko
 ref: clear-the-session-on-logout
 description: 사용자가 로그아웃 할 때 React.js 앱에서 로그인 한 사용자의 Amazon Cognito 세션을 삭제해야합니다. AWS Amplify의 Auth.signOut() 메소드를 사용하여 이를 수행 할 수 있습니다. 
 context: true
