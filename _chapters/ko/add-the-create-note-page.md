@@ -93,7 +93,7 @@ export default class NewNote extends Component {
 }
 ```
 
-파일 입력을 제외하고 대부분 표준적인 내용들입니다. 지금까지의 양식 요소는 그 값이 구성 요소의 상태에 의해 직접 제어되므로 [제어되는 컴포넌트](https://facebook.github.io/react/docs/forms.html)입니다. 파일 입력은 파일 객체를 클래스 프로퍼티로 저장하는 다른 `onChange` 핸들러(`handleFileChange`)를 호출합니다. 저장한 파일 객체가 구성 요소의 렌더링을 변경하거나 구동하지 않기 때문에 클래스 속성을 state로 저장하는 대신 클래스 속성을 사용합니다.
+파일 입력을 제외하고 대부분 표준적인 내용들입니다. 지금까지의 양식 요소는 그 값이 구성 요소의 상태에 의해 직접 제어되므로 [제어되는 컴포넌트](https://facebook.github.io/react/docs/forms.html)입니다. 파일 입력은 파일 객체를 클래스 프로퍼티로 저장하는 다른 `onChange` 핸들러(`handleFileChange`)를 호출합니다. 저장한 파일 객체가 구성 요소의 렌더링을 구동하거나 변경시키지 않기 때문에 클래스 속성을 state로 저장하는 대신 클래스 속성을 사용합니다.
 
 현재, `handleSubmit`은 첨부 파일의 파일 크기를 제한하는 것 외에는 별다른 기능이 없습니다. 우리는 이것을 config에서 정의 할 예정입니다.
 
