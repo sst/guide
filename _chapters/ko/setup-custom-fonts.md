@@ -2,7 +2,7 @@
 layout: post
 title: Set up Custom Fonts
 date: 2017-01-08 00:00:00
-lang: kr 
+lang: ko 
 ref: set-up-custom-fonts
 description: React.js 프로젝트에서 맞춤 글꼴을 사용하려면 Google 글꼴을 사용하고 public/index.html에 포함 시키십시오. 
 context: true

@@ -2,7 +2,7 @@
 layout: post
 title: Add App Favicons
 date: 2017-01-07 00:00:00
-lang: kr 
+lang: ko 
 ref: add-app-favicons
 description: React.js 앱에 대한 앱 아이콘과 favicon을 생성하기 위해 Realfavicongenerator.net 서비스를 사용합니다. 이 서비스는 Create React App과 함께 제공되는 기본 favicon을 대체합니다. 
 context: true

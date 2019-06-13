@@ -2,7 +2,7 @@
 layout: post
 title: Set up Bootstrap
 date: 2017-01-09 00:00:00
-lang: kr 
+lang: ko 
 ref: set-up-bootstrap
 description: 부트스트랩은 일관된 반응형 웹 응용 프로그램을 쉽게 만들 수 있도록 도와주는 UI 프레임워크입니다. React-Bootstrap 라이브러리를 사용하여 React.js 프로젝트에서 Bootstrap을 사용할 것입니다. React-Bootstrap을 사용하면 표준 React 구성 요소의 형태로 부트스트랩을 사용할 수 있습니다. 
 context: true

@@ -2,7 +2,7 @@
 layout: post
 title: Handle Routes with React Router
 date: 2017-01-10 00:00:00
-lang: kr 
+lang: ko 
 ref: handle-routes-with-react-router
 description: Create React App은 경로가 설정된 상태로 제공되지 않습니다. 이를 위해 React Router를 사용할 것입니다. React Router의 최신 버전인 React Router v4는 React 구성 요소의 조합 가능한 특성을 포함하며 단일 페이지 응용 프로그램에서 경로 작업을 하기가 쉽습니다.
 context: true

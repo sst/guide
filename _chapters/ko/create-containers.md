@@ -2,7 +2,7 @@
 layout: post
 title: Create Containers
 date: 2017-01-11 00:00:00
-lang: kr
+lang: ko
 ref: create-containers
 description: React.js 앱을 여러 경로로 나누기 위해 React Router v4의 컨테이너를 사용하여 구조화 할 것이다. 또한 Navbar React-Bootstrap 구성 요소를 App 컨테이너에 추가 할 예정입니다.
 context: true

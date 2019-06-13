@@ -2,7 +2,7 @@
 layout: post
 title: Create a New React.js App
 date: 2017-01-06 00:00:00
-lang: kr 
+lang: ko 
 ref: create-a-new-react-js-app
 description: React Create App은 설정 없이 React.js 앱을 쉽게 빌드할 수 있습니다. NPM 패키지를 사용하여 Create React App CLI를 설치하고 명령을 사용하여 새로운 React.js 프로젝트를 시작합니다. 
 context: true
