@@ -9,7 +9,7 @@ context: true
 comments_id: call-the-create-api/124
 ---
 
-이제 기본적인 작성 노트 양식을 사용할 수 있으니 API에 연결해 보겠습니다. 잠시 후에 S3에 업로드를 수행 할 것입니다. 사용할 API는 AWS IAM을 사용하여 보안 설정되며 Cognito User Pool은 인증 공급자입니다. 고맙게도 Amplify는 로그인 한 사용자의 세션을 사용하여이 문제를 처리합니다.
+이제 기본적인 작성 노트 양식을 사용할 수 있으니 API에 연결해 보겠습니다. 잠시 후에 S3에 업로드를 수행 할 것입니다. 사용할 API는 AWS IAM을 사용하여 보안 설정되며 Cognito User Pool은 인증 공급자입니다. 고맙게도 Amplify는 로그인 한 사용자의 세션을 사용하여 이 문제를 처리합니다.
 
 AWS Amplify가 가지고있는`API` 모듈을 사용할 필요가 있습니다.
 
@@ -52,11 +52,11 @@ createNote(note) {
 
 위 내용은 몇 가지 간단한 일을 처리합니다.
 
-1. `/notes`에 POST 요청을 하면서 노트 객체를 전달함으로써 `createNote`를 호출을 합니다. `API.post()` 메쏘드의 처음 두 인자는`notes` 와 `/notes`입니다. 이것은 [AWS Amplify 설정하기]({% link _chapters/configure-aws-amplify.md %})  챕터에서 우리가 `notes`라는 이름으로 이러한 API 세트를 호출했기 때문입니다.
+1. `/notes`에 POST 요청을 하면서 노트 객체를 전달함으로써 `createNote`를 호출을 합니다. `API.post()` 메쏘드의 처음 두 인자는`notes` 와 `/notes`입니다. 이것은 [AWS Amplify 설정하기]({% link _chapters/configure-aws-amplify.md %})  챕터에서 우리가 `notes`라는 이름으로 API 세트를 호출했기 때문입니다.
 
 2. 현재 노트 오브젝트는 단순한 노트의 내용뿐입니다. 일단 첨부 파일없이 노트를 작성하겠습니다.
 
-3. 마지막으로 노트를 작성한 후에는 홈페이지로 리디렉션됩니다.
+3. 마지막으로 노트를 작성한 후에는 홈페이지로 리디렉션됩니다.(로그아웃 상태에서는 에러가 발생)
 
 이제 브라우저로 전환하여 작성된 양식을 전송하면 홈페이지로 성공적으로 이동해야합니다.
 
