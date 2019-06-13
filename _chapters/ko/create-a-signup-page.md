@@ -2,7 +2,7 @@
 layout: post
 title: Create a Signup Page
 date: 2017-01-19 00:00:00
-lang: kr
+lang: ko
 ref: create-a-signup-page
 comments_id: create-a-signup-page/65
 ---

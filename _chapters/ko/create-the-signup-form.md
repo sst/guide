@@ -2,7 +2,7 @@
 layout: post
 title: Create the Signup Form
 date: 2017-01-20 00:00:00
-lang: kr
+lang: ko
 ref: create-the-signup-form
 description: 우리는 React.js 앱을 위한 가입 페이지를 만들 예정입니다. Amazon Cognito를 사용하여 사용자를 등록하려면 사용자가 이메일로 전송된 인증 코드를 입력할 수있는 양식을 만들어야합니다. 
 context: true

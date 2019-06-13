@@ -2,7 +2,7 @@
 layout: post
 title: Signup with AWS Cognito
 date: 2017-01-21 00:00:00
-lang: kr
+lang: ko
 ref: signup-with-aws-cognito
 description: Amazon Cognito를 사용하여 React.js 앱에 가입 양식을 구현하기 위해 AWS Amplify를 사용하려고합니다. 우리는 Auth.signUp() 메서드를 호출하여 사용자를 서명하고 인증 코드를 사용하여 Auth.confirmSignUp() 메서드를 호출하여 프로세스를 완료합니다.
 context: true

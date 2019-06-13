@@ -2,7 +2,7 @@
 layout: post
 title: Add the Create Note Page
 date: 2017-01-22 00:00:00
-lang: kr
+lang: ko
 ref: add-the-create-note-page
 description: 사용자가 React.js 앱에서 노트를 만들고 파일을 첨부 파일로 업로드 할 수 있도록 합니다. 그렇게하기 위해 FormGroup 및 FormControl React-Bootstrap 구성 요소를 사용하여 양식을 작성합니다. 
 context: true
