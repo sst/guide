@@ -9,11 +9,11 @@ context: true
 comments_id: list-all-the-notes/156
 ---
 
-이제 새로운 노트를 만들 수 있게 되었으니 사용자가 작성한 모든 노트 목록을 볼 수있는 페이지를 만들어 보겠습니다. 이 페이지가 홈페이지가 될 것입니다.(방문 페이지에 `/` 경로를 사용하더라도) 따라서 사용자 세션에 따라 방문자 페이지 또는 홈페이지를 조건부로 렌더링하면 됩니다.
+이제 새로운 노트를 만들 수 있게 되었으니 사용자가 작성한 모든 노트 목록을 볼 수있는 페이지를 만들어 보겠습니다. 이 페이지가 홈페이지가 될 것입니다.(`/` 경로를 사용한 페이지에) 따라서 사용자 세션에 따라 방문자 페이지 또는 홈페이지를 조건부로 렌더링하면 됩니다.
 
 현재 Home 컨테이너는 매우 간단합니다. 여기에 조건부로 렌더링을 추가합니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Home.js` 파일에 다음 내용을 추가합니다.
+<img class="code-marker" src="/assets/s.png" />`src/containers/Home.js` 파일을 다음 내용으로 변경합니다.
 
 ``` coffee
 import React, { Component } from "react";
@@ -68,9 +68,9 @@ export default class Home extends Component {
 
 1. `this.props.isAuthenticated`를 기반으로 시작 페이지 또는 노트 목록을 렌더링합니다.
 
-2. 노트를 state에 보관하십시오. 현재 비어 있지만 이를 우해 API를 호출할 예정입니다.
+2. 노트를 state에 보관합니다. 현재는 비어 있지만 이를 위해 API를 호출할 예정입니다.
 
-3. 일단 목록을 가져 오면 해당 목록의 항목들을 렌더링하기 위해 `renderNotesList` 메서드를 사용합니다.
+3. 일단 목록을 가져 오면 해당 목록의 항목들을 렌더링하기 위해 `renderNotesList` 메소드를 사용합니다.
 
 여기까지가 기본 설정입니다. 브라우저로 가서 앱의 홈페이지를 접속하면 빈 목록을 렌더링해야합니다.
 
