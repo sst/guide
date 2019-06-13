@@ -2,6 +2,8 @@
 layout: post
 title: Call the Create API
 date: 2017-01-23 00:00:00
+lang: en
+ref: call-the-create-api
 description: To let our users create a note in our React.js app, we need to connect our form to our serverless API backend. We are going to use AWS Amplify's API module for this.
 context: true
 comments_id: call-the-create-api/124

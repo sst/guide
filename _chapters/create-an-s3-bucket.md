@@ -2,10 +2,12 @@
 layout: post
 title: Create an S3 Bucket
 date: 2017-02-06 00:00:00
+lang: en
 redirect_from:  /chapters/create-a-s3-bucket.html
 description: We are going to use S3 to host our React.js app on AWS. We first need to configure our S3 bucket with the correct Bucket Policy and enable Static Web Hosting through the AWS console before we can upload our app.
 context: true
 comments_id: create-an-s3-bucket/48
+ref: create-an-s3-bucket
 ---
 
 To be able to host our note taking app, we need to upload the assets that are going to be served out statically on S3. S3 has a concept of buckets (or folders) to separate different types of files.
