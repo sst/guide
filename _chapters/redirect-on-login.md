@@ -2,9 +2,11 @@
 layout: post
 title: Redirect on Login
 date: 2017-02-04 00:00:00
+lang: en
 description: To make sure that our React.js redirects a user to the right page after they login, we are going to use the React Router v4 Redirect component.
 context: true
 comments_id: redirect-on-login/24
+ref: redirect-on-login
 ---
 
 Our secured pages redirect to the login page when the user is not logged in, with a referral to the originating page. To redirect back after they login, we need to do a couple of more things. Currently, our `Login` component does the redirecting after the user logs in. We are going to move this to the newly created `UnauthenticatedRoute` component.

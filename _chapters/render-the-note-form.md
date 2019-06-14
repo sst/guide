@@ -2,9 +2,11 @@
 layout: post
 title: Render the Note Form
 date: 2017-01-29 00:00:00
+lang: en
 description: We are going to render a user’s note in a form in our React.js app. To render the form fields, we’ll use React-Bootstrap’s FormGroup and FormControl components.
 context: true
 comments_id: render-the-note-form/140
+ref: render-the-note-form
 ---
 
 Now that our container loads a note on `componentDidMount`, let's go ahead and render the form that we'll use to edit it.

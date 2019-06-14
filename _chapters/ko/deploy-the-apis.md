@@ -2,7 +2,7 @@
 layout: post
 title: Deploy the APIs
 date: 2017-01-04 00:00:00
-description: “serverless deploy” 명령을 사용하면 Serverless Framework를 사용하여 AWS Lambda 및 API Gateway에 배포 할 수 있습니다. 이 명령을 실행하면 배포된 API 엔드포인트와 AWS 영역의 목록이 표시됩니다. 그리고 개별 람다 함수를 업데이트하고자 할 때에는 "serverless deploy function" 명령을 실행할 수 있습니다.
+description: serverless deploy 명령을 사용하면 Serverless Framework를 사용하여 AWS Lambda 및 API Gateway에 배포 할 수 있습니다. 이 명령을 실행하면 배포된 API 엔드포인트와 AWS 영역의 목록이 표시됩니다. 그리고 개별 람다 함수를 업데이트하고자 할 때에는 serverless deploy function 명령을 실행할 수 있습니다.
 lang: ko
 ref: deploy-the-apis
 context: true

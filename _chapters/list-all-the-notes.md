@@ -2,6 +2,8 @@
 layout: post
 title: List All the Notes
 date: 2017-01-26 00:00:00
+lang: en
+ref: list-all-the-notes
 description: We want to display all the notes a user has in our React.js app. To do this we are going to use our Home container and render a list if a user is logged in.
 context: true
 comments_id: list-all-the-notes/156

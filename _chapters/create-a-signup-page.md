@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Create a Signup Page
+lang: en
+ref: create-a-signup-page
 date: 2017-01-19 00:00:00
 comments_id: create-a-signup-page/65
 ---

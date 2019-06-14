@@ -2,6 +2,8 @@
 layout: post
 title: Redirect on Login and Logout
 date: 2017-01-17 00:00:00
+lang: en
+ref: redirect-on-login-and-logout
 description: To ensure that the user is redirected after logging in and logging out of our React.js app, we are going to use the withRouter higher-order component from React Router v4. And we’ll use the history.push method to navigate the app.
 context: true
 comments_id: redirect-on-login-and-logout/154

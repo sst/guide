@@ -2,9 +2,11 @@
 layout: post
 title: Set up WWW Domain Redirect
 date: 2017-02-10 00:00:00
+lang: en
 description: To create a www version of our domain for our React.js app on AWS we need to redirect it to our apex (or naked) domain. To create a domain that redirects we are going to create a new S3 Bucket and enable the “Redirect requests” option from the Static Website Hosting section in the AWS console. And we need to create a CloudFront Distribution for this and point our www domain to it.
 context: true
-comments_id: 66
+comments_id: set-up-www-domain-redirect/142
+ref: setup-www-domain-redirect
 ---
 
 There's plenty of debate over the www vs non-www domains and while both sides have merit; we'll go over how to set up another domain (in this case the www) and redirect it to our original. The reason we do a redirect is to tell the search engines that we only want one version of our domain to appear in the search results. If you prefer having the www domain as the default simply swap this step with the last one where we created a bare domain (non-www).
