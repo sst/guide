@@ -16,7 +16,7 @@ ref: display-a-note
 
 ### 경로 추가하기 
 
-노트 만들기 화면의 경로를 추가 합니다.
+노트 불러오기 화면의 경로를 추가 합니다.
 
 <img class="code-marker" src="/assets/s.png" />`src/Routes.js` 파일의 `/notes/new` 경로 아래에 다음 행을 추가하십시오. 우리는 [세션을 상태에 추가하기]({% link _chapters/add-the-session-to-the-state.md %}) 챕터에서 작성한 `AppliedRoute` 컴포넌트를 사용하고 있습니다.
 
@@ -26,7 +26,7 @@ ref: display-a-note
 
 URL에서 노트 ID를 추출하기 위해 패턴 매칭을 이용하는 부분으로 매우 중요합니다.
 
-루트 경로 `/notes/:id`를 사용함으로써 우리는 라우터에게 컴포넌트인 `Notes`에 일치하는 모든 경로를 보내도록 하고 있습니다. 하지만 이것은 `/notes/new` 경로를`new`의 `id`와 매칭 시킨 결과도 가져올 수 있습니다. 따라서 이를 방지하기 위해 `/notes/new` 경로를 패턴 일치 앞에 놓습니다.
+루트 경로 `/notes/:id`를 사용함으로써 우리는 라우터에게 해당되는 경로에 컴포넌트인 `Notes`를 설정합니다. 하지만 이것은 `/notes/new` 경로의 `new`의 `id`와 매칭 시킨 결과도 가져올 수 있습니다. 따라서 이를 방지하기 위해 `/notes/new` 경로의 뒤에 놓입니다.
 
 <img class="code-marker" src="/assets/s.png" />그리고 헤더에 컴포넌트를 추가합니다.
 
@@ -34,7 +34,7 @@ URL에서 노트 ID를 추출하기 위해 패턴 매칭을 이용하는 부분�
 import Notes from "./containers/Notes";
 ```
 
-물론 아직 해당 컴포넌트는 없지만 곧 만들 예정입니다.
+물론 아직 해당 컴포넌트는 없지만 이제 만들어 보겠습니다.
 
 ### 컨테이너 추가하기
 
@@ -91,7 +91,7 @@ export default class Notes extends Component {
 
 1. `componentDidMount`에 노트를 로드하고 state에 저장합니다. 그리고 `this.props.match.params.id`에서 React-Router에 의해 자동으로 전달 된 속성을 사용하여 URL에서 노트의 `id`를 얻습니다. 키워드 `id`는 우리 경로(`/notes/:id`)에서 사용하는 패턴 매칭의 일부입니다.
 
-2. 첨부 파일이 있는 경우 키를 사용하여 S3에 업로드 한 파일에 대한 보안 링크를 가져옵니다. 이것을 컴포넌트의 state인 `attachmentURL`에 저장합니다.
+2. 첨부 파일이 있는 경우 키를 사용하여 S3에 업로드 한 파일에 대한 암호화된 링크를 가져옵니다. 이것을 컴포넌트의 state인 `attachmentURL`에 저장합니다.
 
 3. `content` 와 `attachmentURL`과 함께 state에 `note` 객체를 갖는 이유는 나중에 사용자가 메모를 편집 할 때 이를 사용할 것이기 때문입니다.
 
