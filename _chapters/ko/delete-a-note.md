@@ -9,7 +9,7 @@ comments_id: comments-for-delete-a-note/137
 ref: delete-a-note
 ---
 
-노트 페이지에서 마지막으로 해야할 일은 사용자가 노트를 삭제할 수 있게하는 것입니다. 버튼이 이미 설정되어 있습니다. API에 연결해서 마무리할 일만 남았습니다.
+노트 페이지에서 마지막으로 해야할 일은 사용자가 노트를 삭제할 수 있게하는 것입니다. 버튼은 이미 설정되어 있습니다. API에 연결해서 마무리할 일만 남았습니다.
 
 <img class="code-marker" src="/assets/s.png" /> `src/containers/Notes.js`에서 `handleDelete` 메소드를 대체합니다.
 
@@ -49,7 +49,7 @@ handleDelete = async event => {
 
 다시 말씀드리지만 노트를 삭제할 때 첨부 파일을 삭제하지는 않을 것입니다. 역시 모든 것을 단순하게 유지하기 위해 여러분에게 맡기겠습니다. S3에서 파일을 삭제하는 방법은 [AWS Amplify API Docs](https://aws.github.io/aws-amplify/api/classes/storageclass.html#remove)에서 확인하십시오.
 
-이제 앱이 거의 완료되면 로그인이 필요한 몇 개의 앱 페이지에 대해 인증을 요청하는 방법을 살펴 보겠습니다. 그리고 현재 로그 아웃 상태에서 노트 페이지를 방문하면 별로 예쁘지 않은 오류가 발생합니다.
+앱이 거의 완료되어 갑니다. 이제 로그인이 필요한 몇 개의 앱 페이지에 대해 인증을 요청하는 방법을 살펴 보겠습니다. 현재 로그 아웃 상태에서 노트 페이지를 방문하면 별로 예쁘지 않은 오류가 발생합니다.
 
 ![로그 아웃 상태에서 노트 페이지 에러 화면](/assets/note-page-logged-out-error.png)
 
