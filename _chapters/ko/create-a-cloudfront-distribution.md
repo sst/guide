@@ -23,7 +23,7 @@ S3에서 앱을 실행 했으므로 이제 CloudFront를 통해 전 세계에 �
 
 ![Get started 선택 화면](/assets/select-get-started-web.png)
 
-Create Distribution 작성 양식에서 OCloudFront를 통한 웹 배포를 위해 Origin Domain Name을 지정하여 시작해야합니다. 이 필드는 우리가 앞서 만든 S3 버킷을 포함하여 몇 가지 옵션으로 미리 채워져 있습니다. 그러나 우리는 드롭 다운의 옵션을 선택하지 **않을** 것입니다. 이는 정적 웹 사이트로 설정된 것이 아닌 S3 버킷의 REST API 엔드포인트이기 때문입니다.
+Create Distribution 작성 양식에서 CloudFront를 통한 웹 배포를 위해 Origin Domain Name을 지정하여 시작해야 합니다. 이 필드는 우리가 앞서 만든 S3 버킷을 포함하여 몇 가지 옵션으로 미리 채워져 있습니다. 그러나 우리는 드롭 다운의 옵션을 선택하지 **않을** 것입니다. 이는 정적 웹 사이트로 설정된 것이 아닌 S3 버킷의 REST API 엔드포인트이기 때문입니다.
 
 S3 버킷의 **정적 웹 호스팅** 패널에서 S3 웹 사이트 엔드포인트를 찾을 수 있습니다. 이전 챕터에서 이 작업을 설정했습니다. **Endpoint** 필드에 URL을 복사하십시오.
 
@@ -33,9 +33,9 @@ S3 버킷의 **정적 웹 호스팅** 패널에서 S3 웹 사이트 엔드포인
 
 ![Origin domain name 필드 입력 화면](/assets/fill-origin-domain-name-field.png)
 
-And now scroll down the form and switch **Compress Objects Automatically** to **Yes**. This will automatically Gzip compress the files that can be compressed and speed up the delivery of our app.
+이제 양식을 아래로 스크롤하여 **Compress Objects Automatically**을 **Yes**로 전환하십시오. 이렇게하면 압축 할 수있는 파일을 자동으로 Gzip으로 압축하여 앱 전송 속도를 높일 수 있습니다.
 
-![Select compress objects automatically screenshot](/assets/select-compress-objects-automatically.png)
+![자동으로 개체 압축 선택 화면](/assets/select-compress-objects-automatically.png)
 
 다음으로, 아래로 스크롤해서 **Default Root Object**를 `index.html`로 설정합니다.
 
@@ -45,7 +45,7 @@ And now scroll down the form and switch **Compress Objects Automatically** to **
 
 ![Create distribution 화면](/assets/hit-create-distribution.png)
 
-AWS에 배포를 하려면 약간의 시간이  필요합니다. 그러나 일단 완료되면 목록에서 새로 생성 된 배포를 클릭하고 도메인 이름을 찾아 CloudFront 배포를 찾을 수 있습니다.
+AWS에 배포를 하려면 약간의 시간이  필요합니다. 그러나 일단 완료되면 목록에서 새로 생성 된 배포를 클릭하고 Domain Name을 찾아 새로운 CloudFront 배포를 찾을 수 있습니다.
 
 ![AWS CloudFront Distribution 도메인 이름 화면](/assets/cloudfront-distribution-domain-name.png)
 
@@ -71,6 +71,6 @@ AWS에 배포를 하려면 약간의 시간이  필요합니다. 그러나 일�
 
 ![사용자 정의 에러 응답 만들기 화면](/assets/create-custom-error-response.png)
 
-그리고 **Create **을 누르십시오. 이것은 기본적으로 CloudFront에게 S3 버킷의 404 응답에 `index.html` 및 200 상태 코드로 응답하도록 지시합니다. 사용자 정의 오류 응답이 반영되려면 몇 분이 걸릴 것입니다.
+그리고 **Create**을 누르십시오. 이것은 기본적으로 CloudFront에게 S3 버킷의 404 응답에 `index.html` 및 200 상태 코드로 응답하도록 지시합니다. 사용자 정의 오류 응답이 반영되려면 몇 분이 걸릴 것입니다.
 
 다음으로 도메인을 CloudFront Distribution에 연결해 보겠습니다.
