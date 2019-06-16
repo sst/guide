@@ -45,8 +45,3 @@ import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
 
 다음으로, 우리는 로그인 후 바로 노트 페이지로 리디렉션하는 참조를 사용해 보겠습니다.
 
-And now if we tried to load a note page while not logged in, we would be redirected to the login page with a reference to the note page.
-
-![Note page redirected to login screenshot](/assets/note-page-redirected-to-login.png)
-
-Next, we are going to use the reference to redirect to the note page after we login.
