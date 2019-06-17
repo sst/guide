@@ -12,7 +12,7 @@ ref: initialize-the-backend-repo
 
 ### 코드 복제하기 
 
-<img class="code-marker" src="/assets/s.png" />작업 디렉토링에서 [original 저장소]({{ site.backend_github_repo }})를 복제합니다.
+<img class="code-marker" src="/assets/s.png" />작업 디렉토리에서 [original 저장소]({{ site.backend_github_repo }})를 복제합니다.
 
 ``` bash
 $ git clone --branch handle-api-gateway-cors-errors --depth 1 https://github.com/AnomalyInnovations/serverless-stack-demo-api.git serverless-stack-2-api/
