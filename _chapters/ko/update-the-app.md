@@ -11,7 +11,7 @@ ref: update-the-app
 
 앱의 업데이트를 배포하는 프로세스를 테스트하기 위해 몇 가지 빠른 변경을 수행해 보겠습니다.
 
-우리는 첫 페이지에 로그인 및 가입 버튼을 추가하여 사용자에게 명확한 가읻즈를 제공할 것입니다.
+우리는 첫 페이지에 로그인 및 가입 버튼을 추가하여 사용자에게 명확한 가이드를 제공할 것입니다.
 
 <img class="code-marker" src="/assets/s.png" />`src/containers/Home.js`의 `renderLander` 메소드를 다음과 같이 변경합니다.
 
