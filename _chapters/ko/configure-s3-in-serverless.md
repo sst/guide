@@ -3,7 +3,7 @@ layout: post
 title: Configure S3 in Serverless
 date: 2018-02-28 00:00:00
 lang: ko
-description: We can define our S3 Buckets using the Infrastructure as Code pattern by using CloudFormation in our serverless.yml. We are going to set the CORS policy and output the name of the bucket that's created.
+description: serverless.yml에서 CloudFormation을 사용하여 Infrastructure as Code 패턴으로 사용하여 S3 버킷을 정의 할 수 있습니다. 우리는 CORS 정책을 설정하고 생성된 버켓의 이름을 출력 할 것입니다.
 context: true
 comments_id: configure-s3-in-serverless/163
 ref: configure-s3-in-serverless
