@@ -37,11 +37,11 @@ Resources:
         WriteCapacityUnits: ${self:custom.tableThroughput}
 ```
 
-여기서하려는 일을 빨리 알아 보겠습니다.
+여기서 하려는 작업을 빨리 알아 보겠습니다.
 
 1. 우리는 `NotesTable`이라고하는 DynamoDB 테이블 리소스를 기술합니다.
 
-2. 커스텀 변수 `${self:custom.tableName}`으로부터 얻을 수있는 테이블. 이것은 `serverless.yml`에서 동적으로 생성됩니다. 이에 대해서는 아래에서 자세히 살펴 보겠습니다.
+2. 커스텀 변수 `${self:custom.tableName}`으로부터 테이블 이름을 받아 `serverless.yml`에서 동적으로 생성됩니다. 이에 대해서는 아래에서 자세히 살펴 보겠습니다.
 
 3. 테이블의 두 속성을 `userId` 와`noteId`로 설정하고 있습니다.
 
@@ -51,7 +51,7 @@ Resources:
 
 이제 프로젝트에서 이 리소스에 대한 참조를 추가해 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`serverless.yml` 아래에 `resources:` 블럭을 다음 내용으로 대체합니다.:
+<img class="code-marker" src="/assets/s.png" />`serverless.yml` 파일의 아래쪽에 있는 `resources:` 블럭 내용을 다음으로 대체합니다.:
 
 ``` yml
 # Create our resources with separate CloudFormation templates
@@ -62,7 +62,7 @@ resources:
   - ${file(resources/dynamodb-table.yml)}
 ```
 
-<img class="code-marker" src="/assets/s.png" />`serverless.yml` 위에 `custom:` 블럭을 다음 내용으로 대체합니다.:
+<img class="code-marker" src="/assets/s.png" />`serverless.yml` 위쪽에 `custom:` 블럭을 다음 내용으로 대체합니다.:
 
 ``` yml
 custom:
@@ -82,17 +82,17 @@ custom:
     includeModules: true
 ```
 
-여기에 몇 가지 시간을 투자할만한 가치가 있는 몇 가지를 추가했습니다.
+여기에 시간을 투자할만한 가치가 있는 몇 가지를 추가했습니다.
 
-- 먼저 `stage`라는 사용자 정의 변수를 만듭니다. `provider:` 블럭에 `stage: dev`가 이미 있는데 이것을 위해 커스텀 변수가 필요한 이유가 궁금 할 것입니다. `serverless deploy --stage $ STAGE` 명령을 통해 설정한 값을 기반으로 프로젝트의 현재 단계를 구성하기 때문입니다. 또한 배포할 때 stage가 설정되지 않은 경우 provider 블럭에서 설정된 stage 값으로 대체됩니다. 그래서 `${opt:stage, self:provider.stage}`는 Serverless로 하여금 `opt:stage`(명령줄을 통해 전달된 값)를 먼저 체크하고, 만일 없다면 `self:provider.stage`(provider 블럭에 있는 값)를 참조하라는 내용입니다.
+- 먼저 `stage`라는 사용자 정의 변수를 만듭니다. `provider:` 블럭에 `stage: dev`가 이미 있는데 이것을 위해 커스텀 변수가 필요한 이유가 궁금 할 것입니다. `serverless deploy --stage $STAGE` 명령을 통해 설정한 값을 기반으로 프로젝트의 현재 stage를 구성하기 때문입니다. 또한 배포할 때 stage가 설정되지 않은 경우 provider 블럭에서 설정된 stage 값으로 대체됩니다. 그래서 `${opt:stage, self:provider.stage}`는 Serverless로 하여금 `opt:stage`(명령줄을 통해 전달된 값)를 먼저 체크하고, 만일 없다면 `self:provider.stage`(provider 블럭에 있는 값)를 참조하라는 내용입니다.
 
-- 테이블 이름은 배포 할 단계-`${self:custom.stage}-notes`에 따라 달라집니다. 이것이 동적으로 설정되는 이유는 새로운 stage(환경)에 배포할 때 별도의 테이블을 만들기 때문입니다. 그래서 우리가 `dev`에 전개할 때에는 `dev-notes`라는 DynamoDB 테이블을 생성 할 것이고 `prod`에 전개 할 때에는 `prod-notes`를 생성할 것입니다. 이를 통해 우리는 다양한 환경에서 사용하는 리소스(및 데이터)를 명확하게 구분할 수 있습니다.
+- 테이블 이름은 배포할 stage-`${self:custom.stage}-notes`에 따라 달라집니다. 이것이 동적으로 설정되는 이유는 새로운 stage(환경)에 배포할 때, 별도의 테이블을 만들기 때문입니다. 그래서 우리가 `dev`에 전개할 때에는 `dev-notes`라는 DynamoDB 테이블을 생성 할 것이고 `prod`에 전개 할 때에는 `prod-notes`를 생성할 것입니다. 이를 통해 우리는 다양한 환경에서 사용하는 리소스(및 데이터)를 명확하게 구분할 수 있습니다.
 
 - 이제 테이블에 대한 읽기/쓰기 용량을 프로비저닝하는 방법을 구성하려고 합니다. 특히 우리는 프로덕션 환경이 dev(프로덕션 환경이 아닌 다른 환경) 보다 높은 처리량을 갖도록하고 싶습니다. 이를 위해 우리는`tableThroughputs`라는 커스텀 변수를 만들었습니다. 이 변수는 `prod` 와 `default`라고하는 두 개의 개별적인 설정을 가지고 있습니다. `prod` 옵션은 `5`로 설정되어 있고 `default`(프로덕션 환경이 아닌 모든 경우에 사용)는 `1`로 설정되어 있습니다.
 
-- 마지막으로, 우리는 `tableThroughput: ${self:custom.tableThroughputs.${self:custom.stage}, self:custom.tableThroughputs.default}`을 위 두 가지 옵션을 구현하기 위해 사용합니다. 위의 DynamoDB 리소스에서 사용한 `tableThroughput`이라는 사용자 정의 변수를 만듭니다. 이것은 `tableThroughputs` 변수에서 관련 옵션을 찾도록 설정됩니다(복수형 참고). 예를 들어, 우리가 프로덕션 stage라면 처리량은 `self:custom.tableThroughputs.prod`에 기준으로할 것입니다. 그러나 'alpha'라는 stage에 있다면 존재하지 않는 `self:custom.tableThroughputs.alpha`를 참조하려고 할 것입니다. 그래서 `self:custom.tableThroughputs.default`로 대체 될 것이고, `1`로 설정되어 있습니다.
+- 마지막으로, 우리는 `tableThroughput: ${self:custom.tableThroughputs.${self:custom.stage}, self:custom.tableThroughputs.default}`을 위 두 가지 옵션을 구현하기 위해 사용합니다. 위의 DynamoDB 리소스에서 사용한 `tableThroughput`이라는 사용자 정의 변수를 만듭니다. 이것은 `tableThroughputs` 변수에서 관련 옵션을 찾도록 설정됩니다(복수형 참고). 예를 들어, 우리가 프로덕션 stage라면 처리량은 `self:custom.tableThroughputs.prod`에 기준으로 설정할 것입니다. 그러나 `alpha`라는 stage에 있다면 존재하지 않는 `self:custom.tableThroughputs.alpha`를 참조하려고 할 것입니다. 그래서 `self:custom.tableThroughputs.default`로 대체 될 것이고, `1`로 설정되어 있습니다.
 
-위의 많은 내용들은 꽤 까다롭고 지나치게 복잡하게 보일지도 모릅니다. 그러나 우리는 전체 설정을 자동화하고 복제할 수 있도록 설정하고 있습니다.
+위의 많은 내용들은 꽤 까다롭고 지나치게 복잡하게 보일지도 모릅니다. 그러나 우리는 전체 설정을 자동화하고 복제할 수 있도록 설정하고자 합니다 .
 
 또한 생성하려는 DynamoDB 리소스를 참조할 수 있도록 변경을 빠르게 처리하겠습니다.
 
