@@ -80,6 +80,7 @@
     apiKey: '8c4851deee70ce502cd648d92706f4dc',
     indexName: 'serverless-stack',
     inputSelector: '.search-input',
+    algoliaOptions: { 'facetFilters': ["lang:{{ page.lang | default: site.lang | default: "en" }}"] },
     debug: false
   });
 </script>
