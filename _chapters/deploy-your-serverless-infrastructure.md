@@ -2,7 +2,9 @@
 layout: post
 title: Deploy Your Serverless Infrastructure
 date: 2018-03-04 00:00:00
+lang: en
 description: To deploy your Serverless Framework project along with your infrastructure to AWS, use the "serverless deploy -v" command. This will display the Stack Outputs as a part of the deployment.
+ref: deploy-your-serverless-infrastructure
 comments_id: deploy-your-serverless-infrastructure/167
 ---
 

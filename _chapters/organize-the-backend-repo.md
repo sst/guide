@@ -2,7 +2,9 @@
 layout: post
 title: Organize the Backend Repo
 date: 2018-02-25 00:00:00
+lang: en
 description: Serverless Framework uses the service name to identify projects. Since we are creating a new project we want to ensure that we use a different name from the original.
+ref: organize-the-backend-repo
 comments_id: organize-the-backend-repo/160
 ---
 
