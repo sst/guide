@@ -84,9 +84,11 @@ Hit the **Promote** button.
 
 ![Dev build ready to promote screenshot](/assets/part2/dev-build-ready-to-promote.png)
 
-This brings up a dialog that will generate what is called a CloudFormation Change Set. It compares the resources that are being updated with respect to what you have in production. In this case, it is our first commit so we don't have anything to compare to.
+This brings up a dialog that will generate a Change Set. It compares the resources that are being updated with respect to what you have in production. It's a great way to compare the infrastructure changes that are being promoted.
 
-Hit **Confirm**.
+![Review promote change set screenshot](/assets/part2/review-promote-change-set.png)
+
+Scroll down and hit **Promote to Production**.
 
 ![Confirm promote dev build screenshot](/assets/part2/confirm-promote-dev-build.png)
 
