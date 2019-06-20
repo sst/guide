@@ -9,9 +9,9 @@ comments_id: load-secrets-from-env-yml/171
 ref: load-secrets-from-env-yml
 ---
 
-이전에 언급했듯이 우리는 비밀 환경 변수를 코드에 저장하지 않습니다. 이 경우에는 Stripe 비밀 키입니다. 이 장에서는 이를 수행하는 방법을 살펴 보겠습니다.
+이전에 언급했듯이 우리는 비밀 환경 변수를 코드에 저장하지 않습니다. 이 경우에는 Stripe 비밀 키가 이에 해당됩니다. 이 챕터에서는 이를 수행하는 방법을 살펴 보겠습니다.
 
-이러한 용도로 `env.example` 파일이 있습니다.
+이러한 용도로 사용하기 위해 미리 `env.example` 파일을 준비해놨습니다.
 
 <img class="code-marker" src="/assets/s.png" />`env.example` 파일을 `env.yml`로 이름을 바꾸고 내용을 다음과 같이 변경합니다.
 
@@ -78,7 +78,7 @@ custom:
 
 위 작업 내용에 대한 간단한 설명 :
 
-- 우리는 `env.yml` 파일에서 `environment`라는 커스텀 변수를 로드합니다. 이는 `file(env.yml):${self:custom.stage}`를 사용하여 stage(우리가 배포 할)를 기반으로 합니다. 그러나 그 단계가 `env.yml`에 정의되어 있지 않으면 `file:env.yml:default`를 사용하여 `default:`블록 아래에있는 내용을 로딩합니다. 따라서 Serverless Framework는 첫 번째 서버가 사용 가능한지 확인한 후 두 번째 서버를 자동으로 확인합니다.
+- 우리는 `env.yml` 파일에서 `environment`라는 커스텀 변수를 로드합니다. 이는 `file(env.yml):${self:custom.stage}`를 사용하여 stage(우리가 배포 할)를 기반으로 합니다. 그러나 그 단계가 `env.yml`에 정의되어 있지 않으면 `file:env.yml:default`를 사용하여 `default:`블록 아래에있는 내용을 로딩합니다. 따라서 Serverless Framework는 첫 번째 stage가 사용 가능한지 확인한 후 두 번째 stage를 자동으로 확인합니다.
 
 - 다음으로 이것을 사용하여`${self:custom.environment.stripeSecretKey}`를 `environment:` 블럭에 `stripeSecretKey`를 환경 변수에 추가합니다. 이를 통해 람다 함수에서 `process.env.stripeSecretKey`로 사용할 수 있습니다. 이전 챕터에서 다뤘던 내용을 기억할 것입니다.
 
