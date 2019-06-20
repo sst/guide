@@ -12,7 +12,7 @@ ref: unit-tests-in-serverless
 
 이제 우리는 사용자들이 저장하고 싶은 노트의 수를 기반으로 사용자에게 청구할 금액을 정확하게 파악하는 간단한 비즈니스 로직을 작성하였습니다. 사용자들에게 요금을 부과하기 전에 가능한 모든 케이스를 시험해보기를 원합니다. 이를 위해 우리는 Serverless Framework 프로젝트를 위한 단위 테스트를 구성할 것입니다.
 
-이를 위해 [Jest](https://facebook.github.io/jest/)를 사용할 것이고 이미 [우리의 스타터 프로젝트] (https://github.com/AnomalyInnovations/serverless-nodejs)의 일부입니다.
+이를 위해 [Jest](https://facebook.github.io/jest/)를 사용할 것이고 이미 [우리의 스타터 프로젝트](https://github.com/AnomalyInnovations/serverless-nodejs)의 일부입니다.
 
 그러나 만약에 새로운 Serverless Framework 프로젝트를 시작한다면 다음을 실행하여 Jest를 dev 환경에 추가하십시오.
 
