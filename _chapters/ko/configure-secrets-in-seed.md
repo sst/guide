@@ -9,7 +9,7 @@ comments_id: configure-secrets-in-seed/176
 ref: configure-secrets-in-seed
 ---
 
-첫 번째 배포를 수행하기 전에 비밀 환경 변수를 구성해야합니다. 우리는 명시적으로 코드(또는 Git)에 이것을 저장하지 않았습니다. 즉, 우리 팀의 다른 누군가가 배포하려고 할 경우 `env.yml` 파일을 전달해야만 합니다. 대신 우리는 [Seed](https://seed.run)를 구성하여 보안이 필요한 정보를 함께 배포하려고 합니다.
+첫 번째 배포를 수행하기 전에 비밀 환경 변수를 구성해야합니다. 우리는 명시적으로 코드(또는 Git)에 이를 저장하지 않았습니다. 즉, 우리 팀의 다른 누군가가 배포하려고 할 경우 `env.yml` 파일을 전달해야만 합니다. 대신 우리는 [Seed](https://seed.run)를 구성하여 보안이 필요한 정보를 함께 배포하려고 합니다.
 
 그렇게하려면 **dev** 스테이지의 **Setting** 버튼을 누르십시오.
 
@@ -19,7 +19,7 @@ ref: configure-secrets-in-seed
 
 ![dev env 변수 설정 화면](/assets/part2/show-dev-env-variables-settings.png)
 
-그리고 **Key**로 `stripeSecretKey`를 입력하고 그 값은 [env.yml에서 비밀 키 불러오기]({% link _chapters/load-secrets-from-env-yml.md %}) 챕터의 `STRIPE_TEST_SECRET_KEY`가 되어야합니다. 비밀 키를 저장하려면 **추가**를 누르십시오.
+그리고 **Key**로 `stripeSecretKey`를 입력하고 그 값은 [env.yml에서 비밀 키 불러오기]({% link _chapters/load-secrets-from-env-yml.md %}) 챕터의 `STRIPE_TEST_SECRET_KEY` 값을 입력합니다. 비밀 키를 저장하려면 **추가**를 누르십시오.
 
 ![dev 환경 변수로 비밀 키 추가 화면](/assets/part2/add-secret-dev-environment-variable.png)
 
@@ -31,8 +31,8 @@ ref: configure-secrets-in-seed
 
 ![Show prod env 변수 설정 화면](/assets/part2/show-prod-env-variables-settings.png)
 
-그리고 **Key**로 `stripeSecretKey`를 입력하고 그 값은 [env.yml에서 비밀 키 불러오기]({% link _chapters/load-secrets-from-env-yml.md %}) 챕터의 `STRIPE_PROD_SECRET_KEY`가 되어야합니다. 비밀 키를 저장하려면 **추가**를 누르십시오.
+그리고 **Key**로 `stripeSecretKey`를 입력하고 그 값은 [env.yml에서 비밀 키 불러오기]({% link _chapters/load-secrets-from-env-yml.md %}) 챕터의 `STRIPE_PROD_SECRET_KEY` 값을 입력합니다. 비밀 키를 저장하려면 **추가**를 누르십시오.
 
 ![prod 환경 변수로 비밀 키 추가 화면](/assets/part2/add-secret-prod-environment-variable.png)
 
-다음으로 Seed에서 첫 배포를 시작합니다.
+다음으로 Seed에서 첫 배포를 시작하겠습니다.
