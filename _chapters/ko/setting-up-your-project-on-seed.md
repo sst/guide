@@ -11,7 +11,7 @@ ref: setting-up-your-project-on-seed
 
 [Seed](https://seed.run)를 사용하여 serverless 배포를 자동화하고 환경을 관리합니다.
 
-무료 계정 [여기](https://console.seed.run/signup-account)에 가입하십시오.
+[여기](https://console.seed.run/signup-account)에서 무료 계정에 가입하십시오.
 
 ![신규 Seed 계정 만들기 화면](/assets/part2/create-new-seed-account.png)
 
@@ -23,7 +23,7 @@ ref: setting-up-your-project-on-seed
 
 ![Git 제공 업체 선택 화면](/assets/part2/select-git-provider.png)
 
-지금까지 사용했던 저장소를 선택하십시오. Seed는 프로젝트 루트에서 `serverless.yml`을 가져옵니다. 이를 확인하도 **서비스 추가**를 클릭 하십시오.
+지금까지 사용했던 저장소를 선택하십시오. Seed는 프로젝트 루트에서 `serverless.yml`을 가져옵니다. 이를 확인하고 **서비스 추가**를 클릭 하십시오.
 
 ![Serverless.yml 발견 화면](/assets/part2/serverless-yml-detected.png)
 
@@ -71,4 +71,4 @@ aws_secret_access_key = YOUR_IAM_SECRET_KEY
 
 ![Seed 프로젝트의 개발 stage 화면](/assets/part2/dev-stage-in-seed-project.png)
 
-그러나 먼저 비밀 환경 변수를 추가해야합니다.
+배포하기 전에 먼저 비밀 환경 변수를 추가해야합니다.
