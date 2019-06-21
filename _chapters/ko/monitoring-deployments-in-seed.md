@@ -175,7 +175,7 @@ gibberish.what;
 
 <img class="code-marker" src="/assets/s.png"/> 변경을 커밋하고 푸시합니다.
 
-``bash
+```bash
 $ git add.
 $ git commit -m "실수 수정"
 $ git push
