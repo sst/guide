@@ -83,13 +83,16 @@ A valid service attribute to satisfy the declaration 'self:custom.environment.st
 
 수동 배포 단계를 통해 변경 사항을 검토하고 운영 환경으로 push를 할 준비가 되었는지 확인할 수 있습니다.
 
+
 **Promote** 버튼을 클릭하십시오.
 
 ![Promote 준비된 Dev build 화면](/assets/part2/dev-build-ready-to-promote.png)
 
-그러면 CloudFormation Change Set이 생성되는 대화 상자가 나타납니다. 이것은 운영중인 배포와 관련하여 업데이트되는 리소스를 비교합니다. 이 경우에는 첫 번째 커밋이므로 비교할 항목이 없습니다.
+그러면 CloudFormation Change Set이 생성되는 대화 상자가 나타납니다. 이것은 운영중인 배포와 관련하여 업데이트되는 리소스를 비교합니다. 배포하려는 인프라의 변경 사항을 비교할 수있는 좋은 방법입니다.
 
-**확인**을 누르십시오.
+![promote 변경 사항 검토 화면](/assets/part2/review-promote-change-set.png)
+
+스크롤 다운해서 **Promote to Production**을 클릭합니다.
 
 ![dev build promote 확인 화면](/assets/part2/confirm-promote-dev-build.png)
 
