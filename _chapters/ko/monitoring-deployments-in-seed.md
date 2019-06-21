@@ -176,9 +176,11 @@ gibberish.what;
 <img class="code-marker" src="/assets/s.png"/> 변경을 커밋하고 푸시합니다.
 
 ```bash
+
 $ git add.
-$ git commit -m "실수 수정"
+$ git commit -m "Fixing the mistake"
 $ git push
+
 ```
 
 됐습니다! 이제 프론트엔드에 연결할 준비가되었습니다.
