@@ -79,7 +79,7 @@ A valid service attribute to satisfy the declaration 'self:custom.environment.st
 
 ![Dev build 스택 결과 화면](/assets/part2/dev-build-stack-output.png)
 
-이제 앱 홈페이지로 이동하십시오. 우리는 운영으로 배포할 준비가되었음을 알 수 있습니다.
+이제 앱 홈페이지로 이동하십시오. 바로 운영으로 배포할 준비가 되었습니다.
 
 수동 배포 단계를 통해 변경 사항을 검토하고 운영 환경으로 push를 할 준비가 되었는지 확인할 수 있습니다.
 
