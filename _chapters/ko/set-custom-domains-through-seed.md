@@ -9,7 +9,7 @@ comments_id: set-custom-domains-through-seed/178
 ref: set-custom-domains-through-seed
 ---
 
-Severless API는 API 게이트웨이를 사용해 자동 생성 된 엔드포인트를 제공합니다. `api.my-domain.com` 같은 도메인을 사용하도록 구성하고 싶습니다. 이 작업은 AWS Console을 통해 몇 가지 단계를 거칠 수 있지만 [Seed](https://seed.run)를 통해 구성하는 것은 매우 간단합니다.
+Severless API는 API 게이트웨이를 사용해 자동 생성된 엔드포인트를 제공합니다. `api.my-domain.com` 같은 도메인을 사용하도록 구성하고 싶습니다. 이 작업은 AWS Console을 통해 몇 가지 단계를 거칠 수 있지만 [Seed](https://seed.run)를 통해 구성하면 매우 간단합니다.
 
 **prod** state에서 **View Resources**를 클릭하십시오.
 
@@ -23,7 +23,7 @@ Severless API는 API 게이트웨이를 사용해 자동 생성 된 엔드포인
 
 ![사용자 정의 도메인 패널 앱 화면](/assets/part2/custom-domain-panel-prod.png)
 
-튜토리얼의 첫 번째 부분에서는 Route 53에 도메인을 추가했습니다. 그렇게하지 않았다면 [여기에 대해 자세히 알아보세요](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide /MigratingDNS.html). **Select a domain**을 클릭하면 모든 Route 53 도메인의 목록이 표시됩니다. 사용하려는 도메인을 선택하십시오. 하위 도메인 및 기본 경로를 채웁니다. 예를 들어, `api.my-domain.com/prod`를 사용할 수 있습니다. 여기서 `api`는 하위 도메인이고 `prod`는 기본 경로입니다.
+튜토리얼의 첫 번째 부분에서는 Route 53에 도메인을 추가했습니다. 그렇게하지 않았다면 [여기에 대해 자세히 알아보세요](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html). **Select a domain**을 클릭하면 모든 Route 53 도메인의 목록이 표시됩니다. 사용하려는 도메인을 선택하십시오. 하위 도메인 및 기본 경로를 채웁니다. 예를 들어, `api.my-domain.com/prod`를 사용할 수 있습니다. 여기서 `api`는 하위 도메인이고 `prod`는 기본 경로입니다.
 
 **Update**를 클릭하십시오.
 
