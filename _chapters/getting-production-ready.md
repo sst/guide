@@ -2,7 +2,9 @@
 layout: post
 title: Getting Production Ready
 date: 2018-02-23 00:00:00
+lang: en
 description: To get our serverless app production ready, we are going to have to configure it using Infrastructure as Code. We are also going to need to configure separate environments for dev/production and automate our deployments.
+ref: getting-production-ready
 comments_id: getting-production-ready/158
 ---
 

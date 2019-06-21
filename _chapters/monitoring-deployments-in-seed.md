@@ -34,7 +34,7 @@ Now you can see a build in progress. Wait for it to complete and hit **Promote**
 
 ![Promote changes to prod screenshot](/assets/part2/promote-changes-to-prod.png)
 
-Confirm the Change Set by hitting **Confirm**.
+Confirm the Change Set by hitting **Promote to Production**.
 
 ![Confirm Change Set to prod screenshot](/assets/part2/confirm-changeset-to-prod.png)
 
