@@ -2,7 +2,7 @@
 layout: post
 title: Crie um bucket no S3 para upload de arquivos
 date: 2016-12-27 00:00:00
-lang: en
+lang: pt
 ref: create-an-s3-bucket-for-file-uploads
 description: Para permitir que os usuários façam upload de arquivos para nosso app serverless, vamos usar o Amazon S3. O S3 permite o upload de arquivos e usa buckets para organizá-los. Nós vamos criar um bucket e ativar o CORS (cross-origin resource sharing) que é necessário para que nosso app em React.js consiga fazer uploads nele.
 redirect_from: /chapters/create-a-s3-bucket-for-file-uploads.html

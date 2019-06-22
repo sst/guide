@@ -2,7 +2,7 @@
 layout: post
 title: Crie um grupo de usuários no Cognito
 date: 2016-12-28 00:00:00
-lang: en
+lang: pt
 ref: create-a-cognito-user-pool
 description: O grupo de usuários do Amazon Cognito lida com o cadastro e login de usuários para apps web e mobile. Nós vamos criar um grupo de usuários no Cognito para armazenar e gerenciar os usuários do nosso app serverless. Vamos usar o e-mail como usuário na hora do login e vamos configurar nosso app como um cliente do nosso grupo de usuários.
 context: true
