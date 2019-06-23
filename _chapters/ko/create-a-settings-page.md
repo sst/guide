@@ -69,9 +69,9 @@ import Settings from "./containers/Settings";
 </Switch>
 ```
 
-새로만든 설정 페이지에 대한 경로를 추가한 것을 주목하십시오.
+새로 만든 설정 페이지에 대한 경로를 추가한 것을 주목하십시오.
 
-<img class="code-marker" src="/assets/s.png" />다음으로 `src/App.js`의 `render` 메쏘드를 이용하여 navbar의 설정 페이지에 링크를 추가하십시오.
+<img class="code-marker" src="/assets/s.png" />다음으로 `src/App.js`의 `render` 메쏘드를 이용하여 Navbar의 설정 페이지에 링크를 추가하십시오.
 
 ``` coffee
 render() {
@@ -117,7 +117,7 @@ render() {
 }
 ```
 
-사용자가 로그인한 경우, navbar에 다른 링크를 추가했음을 알 수 있습니다.
+사용자가 로그인한 경우, Navbar에 새로운 링크를 추가했음을 알 수 있습니다.
 
 이제 앱으로 이동하면 상단에 새로운 **Settings** 링크가 표시됩니다. 물론, 페이지는 지금 꽤 썰렁합니다.
 
