@@ -2,8 +2,10 @@
 layout: post
 title: Set Custom Domains Through Seed
 date: 2018-03-15 00:00:00
+lang: en
 description: We will use the Seed console to configure our API Gateway endpoints in our Serverless project with custom domains. To configure a stage with a custom domain go to the stage settings, select the Route 53 domain, a sub-domain, and the base path.
 context: true
+ref: set-custom-domains-through-seed
 comments_id: set-custom-domains-through-seed/178
 ---
 

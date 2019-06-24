@@ -2,7 +2,9 @@
 layout: post
 title: Test the Billing API
 date: 2018-03-09 00:00:00
+lang: en
 description: To test our Serverless Stripe billing API, we are going to mock the Lambda HTTP event. Pass in the Stripe test token and call the "serverless invoke local" command.
+ref: test-the-billing-api
 comments_id: test-the-billing-api/172
 ---
 

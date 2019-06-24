@@ -2,8 +2,10 @@
 layout: post
 title: Setup a Stripe Account
 date: 2018-03-06 00:00:00
+lang: en
 description: We are going to use Stripe to process our credit card payments. To do this let's first create a free Stripe account.
 context: true
+ref: setup-a-stripe-account
 comments_id: setup-a-stripe-account/169
 ---
 

@@ -2,8 +2,10 @@
 layout: post
 title: Automating Serverless Deployments
 date: 2018-03-11 00:00:00
+lang: en
 description: We would like to automatically deploy our Serverless Framework project when we commit any changes to our Git repository. To do this we are going to use a service called Seed (https://seed.run) to automate our serverless deployments. It will configure a CI/CD pipeline and setup our environments.
 context: true
+ref: automating-serverless-deployments
 comments_id: automating-serverless-deployments/174
 ---
 
