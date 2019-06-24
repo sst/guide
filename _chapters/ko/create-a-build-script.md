@@ -48,7 +48,7 @@ ref: create-a-build-script
 
 2. `publish` 옵션은 빌드가 생성되는 곳을 가리 킵니다. React Create App의 경우 프로젝트 루트의 `build` 디렉토리입니다.
 
-3. `command` 옵션은 Netlify가 사용할 빌드 명령입니다. [Create React App의 환경 관리]({% link _chapters/manage-environments-in-create-react-app.md %}) 챕터를 떠올려보십시오. 기본 컨텍스트에서 명령은 `REACT_APP_STAGE = dev npm run build`입니다.
+3. `command` 옵션은 Netlify가 사용할 빌드 명령입니다. [Create React App의 환경 관리]({% link _chapters/manage-environments-in-create-react-app.md %}) 챕터를 떠올려보십시오. 기본 컨텍스트에서 명령은 `REACT_APP_STAGE=dev npm run build`입니다.
 
 `context.production`이라는 운영 컨텍스트는 `REACT_APP_STAGE` 변수를 `prod`로 설정한 유일한 컨텍스트입니다. 이것은 우리가 `마스터`에게 푸시할 때 실행됩니다. `branch-deploy`는 다른 비 운영 브랜치로 푸시할 때 사용할 것입니다. 그리고 `deploy-preview`는 PR 요청을위한 것입니다.
 
