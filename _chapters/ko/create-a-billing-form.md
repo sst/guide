@@ -132,7 +132,7 @@ export default injectStripe(BillingForm);
 
 - 양식의 필드는 사용자가 저장할 노트 수를 입력할 수있는 `number` 타입의 입력 필드가 있습니다. 또한 신용카드상의 이름을 사용합니다. 이것들은 `this.handleFieldChange` 메서드를 통해 state에 저장됩니다.
 
-- 신용카드 번호 양식은 헤더에서 가져 오는 'CardElement` 구성 요소를 통해 Stripe React SDK에 의해 제공됩니다.
+- 신용카드 번호 양식은 헤더에서 가져 오는 `CardElement` 구성 요소를 통해 Stripe React SDK에 의해 제공됩니다.
 
 - 전송 버튼에는 Stripe을 호출하여 토큰을 얻고 결제 API를 호출할 때 로딩 상태를 true로 설정합니다. 그러나 Setting 컨테이너가 결제 API를 호출하므로 `this.props.loading`을 사용하여 버튼의 상태를 Setting 컨테이너에서 설정합니다.
 
