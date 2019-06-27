@@ -5,7 +5,7 @@ description: 컨텐츠를 최신 상태로 유지할 수 있도록 GitHub에서 
 lang: ko
 date: 2018-03-31 00:00:00
 comments_id: comments-for-giving-back/193
-ref: comments-for-giving-back
+ref: giving-back
 ---
 
 이 가이드가 도움이 되었다면 다음을 통해서 저희를 도와주십시오. [CONTRIBUTING.md]({{ site.github_repo }}/blob/master/CONTRIBUTING.md)에서 자세히 알아볼 수 있습니다.

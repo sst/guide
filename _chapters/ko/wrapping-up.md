@@ -5,7 +5,7 @@ lang: ko
 description: 튜토리얼을 마무리하고 다음 단계를 진행합니다.
 date: 2018-03-30 00:00:00
 comments_id: comments-for-wrapping-up/100
-ref: comments-for-wrapping-up
+ref: wrapping-up
 ---
 
  축하합니다! 드디어 가이드를 완성했습니다. 

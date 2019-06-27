@@ -4,7 +4,7 @@ title: 번역
 date: 2018-03-30 12:00:00
 lang: ko
 comments_id: comments-translations/788
-ref: comments-translations
+ref: translations
 ---
 
 저희 가이드는 소중한 독자들의 도움으로 다양한 언어로 제공됩니다. 챕터 제목 아래에 있는 링크를 클릭하여 챕터의 번역된 버전을 볼 수 있습니다.
