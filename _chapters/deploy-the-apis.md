@@ -50,6 +50,8 @@ functions:
 
 This has a list of the API endpoints that were created. Make a note of these endpoints as we are going to use them later while creating our frontend. Also make a note of the region and the id in these endpoints, we are going to use them in the coming chapters. In our case, `us-east-1` is our API Gateway Region and `ly55wbovq4` is our API Gateway ID.
 
+If you are running into some issues while deploying your app, we have [a compilation of some of the most common Serverless errors](https://seed.run/docs/serverless-errors/) over on [Seed](https://seed.run).
+
 ### Deploy a Single Function
 
 There are going to be cases where you might want to deploy just a single API endpoint as opposed to all of them. The `serverless deploy function` command deploys an individual function without going through the entire deployment cycle. This is a much faster way of deploying the changes we make.
