@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Custom Domains in Netlify
+title: Netlify에서 사용자 정의 도메인 설정
 date: 2018-03-28 00:00:00
 lang: ko
 description: Netlify 및 AWS에서 사용자 정의 도메인으로 React 응용 프로그램을 구성하려면 Route 53 DNS에서 Netlify를 가리켜 야합니다. 새 Netlify 프로젝트에 대해 새 레코드 세트를 작성하고 A 레코드 및 CNAME을 추가하십시오. 
@@ -13,7 +13,7 @@ ref: custom-domains-in-netlify
 
 ---
 
-**파트 I의 독자에게 보내는 메모**
+**Part I의 독자에게 보내는 메모**
 
 다음 섹션에서는 [Part I](/#part-1)을 독자적으로 작성하고 아래 사용자 정의 도메인을 처음부터 설정한다고 가정합니다. 그러나 Part I을 방금 완성한 경우 다음 두 가지 옵션을 사용할 수 있습니다.
 
