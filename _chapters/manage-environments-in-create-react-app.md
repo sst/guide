@@ -2,8 +2,10 @@
 layout: post
 title: Manage Environments in Create React App
 date: 2018-03-19 00:00:00
+lang: en
 description: To configure environments in our Create React App, we will create a new custom environment variable. We will use this as a part of our build process and set the config based on environment that we are targeting.
 context: true
+ref: manage-environments-in-create-react-app
 comments_id: manage-environments-in-create-react-app/182
 ---
 

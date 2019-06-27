@@ -1,8 +1,10 @@
 ---
 layout: post
 title: Further Reading
+lang: en
 description: List of articles and docs that will be useful when trying to extend this guide.
 date: 2018-03-30 12:00:00
+ref: further-reading
 comments_id: further-reading/209
 ---
 

@@ -1,8 +1,10 @@
 ---
 layout: post
 title: Giving Back
+lang: en
 description: Contributing to Serverless Stack by supporting us on GitHub and helping keep the content up to date.
 date: 2018-03-31 00:00:00
+ref: giving-back
 comments_id: comments-for-giving-back/193
 ---
 

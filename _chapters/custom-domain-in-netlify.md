@@ -2,8 +2,10 @@
 layout: post
 title: Custom Domains in Netlify
 date: 2018-03-28 00:00:00
+lang: en
 description: To configure your React app with custom domains on Netlify and AWS, you need to point the Route 53 DNS to Netlify. Create a new Record set, add an A Record, and a CNAME for your new Netlify project.
 context: true
+ref: custom-domains-in-netlify
 comments_id: custom-domains-in-netlify/191
 ---
 

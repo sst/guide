@@ -2,8 +2,10 @@
 layout: post
 title: Automating React Deployments
 date: 2018-03-25 00:00:00
+lang: en
 description: We want to automatically deploy our Create React App when we push any changes to our Git repository. To do this, we will need to set our project up on Netlify.
 context: true
+ref: automating-react-deployments
 comments_id: automating-react-deployments/188
 ---
 

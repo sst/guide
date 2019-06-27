@@ -1,7 +1,9 @@
 ---
 layout: post
 title: Translations
+lang: en
 date: 2018-03-30 12:00:00
+ref: translations
 comments_id: comments-translations/788
 ---
 

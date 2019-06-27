@@ -1,9 +1,11 @@
 ---
 layout: post
 title: Changelog
+lang: en
 redirect_from: /chapters/older-versions.html
 date: 2018-04-01 00:00:00
 description: A list of all the updates made to Serverless Stack
+ref: changelog
 comments_id: comments-for-changelog/17
 ---
 

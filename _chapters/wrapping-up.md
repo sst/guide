@@ -1,8 +1,10 @@
 ---
 layout: post
 title: Wrapping Up
+lang: en
 description: Wrapping up the tutorial and going over the next steps.
 date: 2018-03-30 00:00:00
+ref: wrapping-up
 comments_id: comments-for-wrapping-up/100
 ---
 

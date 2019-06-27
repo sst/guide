@@ -2,7 +2,9 @@
 layout: post
 title: Frontend Workflow
 date: 2018-03-29 00:00:00
+lang: en
 description: There are three steps that are a part of workflow for a Create React App configured with Netlify. To work on new features create a new branch and enable branch deployments. And merge to master to deploy to production. Finally, publish an old deployment through the Netlify console to rollback in production.
+ref: frontend-workflow
 comments_id: frontend-workflow/192
 code: frontend_full
 ---

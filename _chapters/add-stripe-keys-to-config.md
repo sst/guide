@@ -1,8 +1,10 @@
 ---
 layout: post
 title: Add Stripe Keys to Config
+lang: en
 date: 2018-03-22 00:00:00
 description: We are going to use the Stripe React JS SDK in our Create React App. To do so, we are going to store our Stripe Publishable API Key in our React app config.
+ref: add-stripe-keys-to-config
 comments_id: add-stripe-keys-to-config/185
 ---
 
