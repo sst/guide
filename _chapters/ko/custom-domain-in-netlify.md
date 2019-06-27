@@ -23,7 +23,7 @@ ref: custom-domains-in-netlify
 
 2. 이전 도메인 바꾸기
 
-이 가이드를 통해 앱을 만드는 방법을 배우는 대신 바로 앱을 만들 수 있습니다. 그렇다면 프런트엔드의 두 가지 버전이 주위에 운영되는 것은 이해가 되지 않습니다. Part 1에서 생성된 도메인 연결을 해제 해야합니다. 그렇게하려면 [apex 도메인]({% link _chapters/setup-your-domain-with-cloudfront.md#point-domain-to-cloudfront-distribution %})과 [www 도메인]({% link _chapters/setup-www-domain-redirect.md %})에서 만든 Route53 레코드 세트를 제거하십시오.
+이 가이드를 통해 앱을 만드는 방법을 배우는 대신 바로 앱을 만들 수 있습니다. 그렇다면 프런트엔드의 두 가지 버전이 주위에 운영되는 것은 이해가 되지 않습니다. Part 1에서 생성된 도메인 연결을 해제 해야합니다. 그렇게하려면 [apex 도메인]({% link _chapters/setup-your-domain-with-cloudfront.md %}#point-domain-to-cloudfront-distribution)과 [www 도메인]({% link _chapters/setup-www-domain-redirect.md %})에서 만든 Route53 레코드 세트를 제거하십시오.
 
 위의 두 가지 옵션에 대해 잘 모르거나 질문이있는 경우, 이 챕터의 맨 아래에 있는 토론 스레드에 의견을 게시하십시오.
 
