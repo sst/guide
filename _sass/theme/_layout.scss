@@ -599,14 +599,6 @@
     font-weight: bold;
     font-size: 16px;
     padding-left: 4px;
-    text-transform: uppercase;
-
-    &.en:lang(en),
-    &.pt:lang(pt),
-    &.de:lang(de),
-    &.es:lang(es) {
-      color: $secondary-text-color;
-    }
   }
 
   span.separator {

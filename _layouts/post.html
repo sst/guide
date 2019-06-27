@@ -11,25 +11,28 @@ layout: default
 
         <div class="post-info">
 
-          {% if page.ref %}
-            {% assign pages = site.chapters | where:"ref", page.ref | sort: 'lang' %}
-            {% if pages[1] %}
-              <span class="copy">View this page in: </span>
-              {% for page in pages %}
-                {% if page.lang == "en" %}
-                  {% assign page_en_url = page.url %}
-                {% endif %}
-                <a class="lang {{ page.lang }}" href="{{ page.url }}" class="{{ page.lang }}">
-                  {{ page.lang }}
-                </a>
-              {% endfor %}
-              <span class="separator">&nbsp;&bull;&nbsp;</span>
-            {% endif %}
-          {% endif %}
-
           <a target="_blank" href="{{ site.github_repo }}{{ site.github_edit_prefix }}{{ page.path }}">Edit this page</a>
           <span class="separator">&nbsp;&bull;&nbsp;</span>
           <a target="_blank" href="{{ site.github_repo }}{{ site.github_history_prefix }}{{ page.path }}">View history</a>
+
+          {% if page.ref %}
+            {% assign pages = site.chapters | where:"ref", page.ref | sort: 'lang' %}
+            {% if pages[1] %}
+              <span class="separator">&nbsp;&bull;&nbsp;</span>
+              <span class="copy">View this page in: </span>
+              {% for other in pages %}
+                {% if other.lang == "en" %}
+                  {% assign page_en_url = other.url %}
+                {% endif %}
+                {% if other.lang != page.lang %}
+                  <a class="lang {{ other.lang }}" href="{{ other.url }}" class="{{ other.lang }}">
+                    {{ site.data.languages[other.lang] }}
+                  </a>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+
         </div>
 
         {% if page.context == true %}
