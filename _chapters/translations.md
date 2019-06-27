@@ -41,3 +41,4 @@ A big thanks to our contributors for helping make Serverless Stack more accessib
 - [Leonardo Gonzalez](https://github.com/leogonzalez)
 - [Vieko Franetovic](https://github.com/vieko)
 - [Christian Kaindl](https://github.com/christiankaindl)
+- [Jae Chul Kim](https://github.com/bsg-bob)
