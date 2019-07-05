@@ -44,7 +44,7 @@ Finally here is what a Lambda function (a Node.js version) looks like.
 
 ![Anatomy of a Lambda Function image](/assets/anatomy-of-a-lambda-function.png)
 
-Here `myHandler` is the name of our Lambda function. The `event` object contains all the information about the event that triggered this Lambda. In the case of a HTTP request it'll be information about the specific HTTP request. The `context` object contains info about the runtime our Lambda function is executing in. After we do all the work inside our Lambda function, we simply call the `callback` function with the results (or the error) and AWS will respond to the HTTP request with it. 
+Here `myHandler` is the name of our Lambda function. The `event` object contains all the information about the event that triggered this Lambda. In the case of an HTTP request it'll be information about the specific HTTP request. The `context` object contains info about the runtime our Lambda function is executing in. After we do all the work inside our Lambda function, we simply call the `callback` function with the results (or the error) and AWS will respond to the HTTP request with it. 
 
 ### Packaging Functions
 
