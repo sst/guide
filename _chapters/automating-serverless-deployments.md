@@ -21,6 +21,6 @@ Next we are going to use our Git repo to automate our deployments. This essentia
 
 Along with automating deployments, we are also going to look at working with multiple environments. We want to create clear separation between our production environment and our dev environment. We are going to create a workflow where we continually deploy to our dev (or any non-prod) environment. But we will be using a manual promotion step when we promote to production. We'll also look at configuring custom domains for APIs.
 
-For automating our serverless backend, we are going to be using a service called [Seed](https://seed.run). Full disclosure, we also built Seed. You can replace most of this section with a service like [Travis CI](https://travis-ci.org) or [Circle CI](https://circleci.com). It is a bit more cumbersome and needs some scripting but we might cover this in the future.
+For automating our serverless backend, we are going to be using a service called [Seed](https://seed.run). Full disclosure, we also built Seed. You can replace most of this section with a service like [Travis CI](https://travis-ci.org) or [CircleCI](https://circleci.com). It is a bit more cumbersome and needs some scripting. We have a detailed post on [how to configure a CI/CD pipeline for a monorepo Serverless app on CircleCI here](https://seed.run/blog/how-to-build-a-cicd-pipeline-for-serverless-apps-with-circleci).
 
 Let's get started with setting up your project on Seed.
