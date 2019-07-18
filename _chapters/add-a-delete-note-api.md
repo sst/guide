@@ -33,7 +33,7 @@ export async function main(event, context) {
   };
 
   try {
-    const result = await dynamoDbLib.call("delete", params);
+    await dynamoDbLib.call("delete", params);
     return success({ status: true });
   } catch (e) {
     return failure({ status: false });

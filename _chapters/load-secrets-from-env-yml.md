@@ -46,15 +46,6 @@ custom:
   stage: ${opt:stage, self:provider.stage}
   # Set the table name here so we can use it while testing locally
   tableName: ${self:custom.stage}-notes
-  # Set our DynamoDB throughput for prod and all other non-prod stages.
-  tableThroughputs:
-    prod: 5
-    default: 1
-  tableThroughput: ${self:custom.tableThroughputs.${self:custom.stage}, self:custom.tableThroughputs.default}
-  # Load our webpack config
-  webpack:
-    webpackConfig: ./webpack.config.js
-    includeModules: true
   # Load our secret environment variables based on the current stage.
   # Fallback to default if it is not in prod.
   environment: ${file(env.yml):${self:custom.stage}, file(env.yml):default}
@@ -63,7 +54,7 @@ custom:
 <img class="code-marker" src="/assets/s.png" />And add the following in the `environment:` block in your `serverless.yml`.
 
 ``` yml
-  stripeSecretKey: ${self:custom.environment.stripeSecretKey}
+    stripeSecretKey: ${self:custom.environment.stripeSecretKey}
 ```
 
 Your `environment:` block should look like this:
