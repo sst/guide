@@ -94,17 +94,13 @@ Now let's define the API endpoint for our function.
 ``` yaml
 service: notes-app-api
 
-# Use the serverless-webpack plugin to transpile ES6
-plugins:
-  - serverless-webpack
-  - serverless-offline
+# Create an optimized package for our functions
+package:
+  individually: true
 
-# serverless-webpack configuration
-# Enable auto-packing of external modules
-custom:
-  webpack:
-    webpackConfig: ./webpack.config.js
-    includeModules: true
+plugins:
+  - serverless-bundle # Package our functions with Webpack
+  - serverless-offline
 
 provider:
   name: aws

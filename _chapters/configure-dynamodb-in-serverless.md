@@ -31,10 +31,8 @@ Resources:
           KeyType: HASH
         - AttributeName: noteId
           KeyType: RANGE
-      # Set the capacity based on the stage
-      ProvisionedThroughput:
-        ReadCapacityUnits: ${self:custom.tableThroughput}
-        WriteCapacityUnits: ${self:custom.tableThroughput}
+      # Set the capacity to auto-scale
+      BillingMode: PAY_PER_REQUEST
 ```
 
 Let's quickly go over what we are doing here.
@@ -62,7 +60,7 @@ resources:
   - ${file(resources/dynamodb-table.yml)}
 ```
 
-<img class="code-marker" src="/assets/s.png" />And replace the `custom:` block at the top of our `serverless.yml` with the following:
+<img class="code-marker" src="/assets/s.png" />Add the following `custom:` block at the top of our `serverless.yml` above the `provider:` block.
 
 ``` yml
 custom:
@@ -71,15 +69,6 @@ custom:
   stage: ${opt:stage, self:provider.stage}
   # Set the table name here so we can use it while testing locally
   tableName: ${self:custom.stage}-notes
-  # Set our DynamoDB throughput for prod and all other non-prod stages.
-  tableThroughputs:
-    prod: 5
-    default: 1
-  tableThroughput: ${self:custom.tableThroughputs.${self:custom.stage}, self:custom.tableThroughputs.default}
-  # Load our webpack config
-  webpack:
-    webpackConfig: ./webpack.config.js
-    includeModules: true
 ```
 
 We added a couple of things here that are worth spending some time on:
@@ -88,9 +77,7 @@ We added a couple of things here that are worth spending some time on:
 
 - The table name is based on the stage we are deploying to - `${self:custom.stage}-notes`. The reason this is dynamically set is because we want to create a separate table when we deploy to a new stage (environment). So when we deploy to `dev` we will create a DynamoDB table called `dev-notes` and when we deploy to `prod`, it'll be called `prod-notes`. This allows us to clearly separate the resources (and data) we use in our various environments.
 
-- Now we want to configure how we provision the read/write capacity for our table. Specifically, we want to let our production environment have a higher throughput than our dev (or any other non-prod environment). To do this we created a custom variable called `tableThroughputs`, that has two separate settings called `prod` and `default`. The `prod` option is set to `5` while `default` (which will be used for all non-prod cases) is set to `1`.
-
-- Finally, to implement the two options we use `tableThroughput: ${self:custom.tableThroughputs.${self:custom.stage}, self:custom.tableThroughputs.default}`. This is creating a custom variable called `tableThroughput` (which we used in our DynamoDB resource above). This is set to look for the relevant option in the `tableThroughputs` variable (note the plural form). So for example, if we are in prod, the throughput will be based on `self:custom.tableThroughputs.prod`. But if you are in a stage called `alpha` it'll be set to `self:custom.tableThroughputs.alpha`, which does not exist. So it'll fallback to `self:custom.tableThroughputs.default`, which is set to `1`.
+- Finally, we are using the `PAY_PER_REQUEST` setting for the `BillingMode`. This tells DynamoDB that we want to pay per request and use the [On-Demand Capacity](https://aws.amazon.com/dynamodb/pricing/on-demand/) option. With DynamoDB in On-Demand mode, our database is now truly Serverless. This option can be very cost-effective, especially if you are just starting out and your workloads are not very predictable or stable. On the other hand, if you know exactly how much capacity you need, the [Provisioned Capacity](https://aws.amazon.com/dynamodb/pricing/provisioned/) mode would work out to be cheaper.
 
 A lot of the above might sound tricky and overly complicated right now. But we are setting it up so that we can automate and replicate our entire setup with ease. Note that, Serverless Framework (and CloudFormation behind the scenes) will be completely managing our resources based on the `serverless.yml`. This means that if you have a typo in your table name, the old table will be removed and a new one will be created in place. To prevent accidentally deleting serverless resources (like DynamoDB tables), you need to set the `DeletionPolicy: Retain` flag. We have a [detailed post on this over on the Seed blog](https://seed.run/blog/how-to-prevent-accidentally-deleting-serverless-resources).
 

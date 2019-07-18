@@ -30,6 +30,14 @@ And update the `scripts` block in your `package.json` with the following:
 
 This will allow you to run your tests using the command `npm test`.
 
+Alternatively, if you are using the [serverless-bundle](https://github.com/AnomalyInnovations/serverless-bundle) plugin to package your functions, it comes with a built-in script to transpile your code and run your tests. Add the following to your `package.json` instead.
+
+```
+"scripts": {
+  "test": "serverless-bundle test"
+},
+```
+
 ### Add Unit Tests
 
 <img class="code-marker" src="/assets/s.png" />Now create a new file in `tests/billing.test.js` and add the following.
@@ -78,8 +86,6 @@ $ npm test
 You should see something like this:
 
 ``` bash
-> jest
-
  PASS  tests/billing.test.js
   ✓ Lowest tier (4ms)
   ✓ Middle tier

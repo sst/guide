@@ -40,13 +40,13 @@ The reason we are doing this is because Serverless Framework uses the `service` 
 <img class="code-marker" src="/assets/s.png" />Also, find this line in the `serverless.yml`:
 
 ``` yml
-stage: prod
+  stage: prod
 ``` 
 
 <img class="code-marker" src="/assets/s.png" />And replace it with:
 
 ``` yml
-stage: dev
+  stage: dev
 ```
 
 We are defaulting the stage to `dev` instead of `prod`. This will become clear later when we create multiple environments.
