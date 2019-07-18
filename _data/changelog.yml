@@ -1,4 +1,8 @@
 current:
+  title: "Updating to serverless-bundle and on-demand DynamoDB"
+  desc: "Jul 18, 2019: Updating to serverless-bundle plugin and On-Demand Capacity for DynamoDB."
+
+v3-3-3:
   title: "Handling API Gateway CORS errors"
   desc: "Jan 27, 2019: Adding CORS headers to API Gateway 4xx and 5xx errors."
 
