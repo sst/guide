@@ -355,6 +355,8 @@ extra-backend:
       url: /chapters/connect-to-api-gateway-with-iam-auth.html
     - page: Serverless Node.js Starter
       url: /chapters/serverless-nodejs-starter.html
+    - page: Package Lambdas with serverless-bundle
+      url: /chapters/package-lambdas-with-serverless-bundle.html
 
 extra-user-mgmt:
   title: User Management
