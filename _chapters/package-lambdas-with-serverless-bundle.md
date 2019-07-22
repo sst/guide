@@ -64,7 +64,7 @@ Enter [serverless-bundle](https://github.com/AnomalyInnovations/serverless-bundl
 -    "@babel/plugin-transform-runtime"
 -    "babel-plugin-source-map-support"
 
-+    "serverless-bundle": "^1.1.12"
++    "serverless-bundle": "^1.2.2"
 ```
 
 The serverless-bundle plugin supports:
@@ -98,4 +98,4 @@ And to run your tests using the same Babel config used in the plugin add the fol
 
 You can read more on the advanced options over on [the GitHub README](https://github.com/AnomalyInnovations/serverless-bundle/blob/master/README.md).
 
-Our ever popular [Serverless Node.js Starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter) has now been updated to use the serverless-bundle plugin. We would love for you to give it a try and give us your feedback.
+Our ever popular [Serverless Node.js Starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter) has now been updated to use the serverless-bundle plugin.
