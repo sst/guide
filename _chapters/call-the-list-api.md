@@ -117,6 +117,6 @@ Now head over to your browser and you should see your list displayed.
 
 ![Homepage list loaded screenshot](/assets/homepage-list-loaded.png)
 
-If you click on each entry the links should generate URLs with appropriate noteIds. For now, these URLs will take you to our 404 page.  We'll fix that in the next section.
+If you click on each entry, the links should generate URLs with appropriate _noteIds_. For now, these URLs will take you to our 404 page.  We'll fix that in the next section.
 
 Next up we are going to allow users to view and edit their notes.
