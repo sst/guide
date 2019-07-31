@@ -9,7 +9,7 @@ comments_id: display-a-note/112
 ref: display-a-note
 ---
 
-Now that we have a listing of all the notes, let's create a page that displays a note and let's the user edit it.
+Now that we have a listing of all the notes, let's create a page that displays a note and lets the user edit it.
 
 The first thing we are going to need to do is load the note when our container loads. Just like what we did in the `Home` container. So let's get started.
 
