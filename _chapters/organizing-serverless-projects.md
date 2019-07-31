@@ -52,18 +52,18 @@ The directory structure of your entire application under the microservice + mono
 A couple of things to notice here:
 
 1. We are going over a Node.js project here but this pattern applies to other languages as well.
-2. The `services/` dir at the root is made up of a collection of services. Where a service contains a single `serverless.yml` file.
+2. The `services/` directory at the root is made up of a collection of services, each in a separate subdirectory. Each service subdirectory contains a single `serverless.yml` file.
 3. Each service deals with a relatively small and self-contained function. So for example, the `posts` service deals with everything from creating to deleting posts. Of course, the degree to which you want to separate your application is entirely up to you.
 4. The `package.json` (and the `node_modules/` dir) are at the root of the repo. However, it is fairly common to have a separate `package.json` inside each service directory.
 5. The `lib/` dir is just to illustrate that any common code that might be used across all services can be placed in here.
-6. To deploy this application you are going to need to run `serverless deploy` separately in each of the services.
+6. To deploy this application you are going to need to run `serverless deploy` separately in each of the `services/` subdirectories.
 7. [Environments (or stages)]({% link _chapters/stages-in-serverless-framework.md %}) need to be co-ordinated across all the different services. So if your team is using a `dev`, `staging`, and `prod` environment, then you are going to need to define the specifics of this in each of the services.
 
 #### Advantages of Mono-Repo
 
 The microservice + mono-repo pattern has grown in popularity for a couple of reasons:
 
-1. Lambda functions are a natural fit for a microservice based architecture. This is due to a few of reasons. Firstly, the performance of Lambda functions is related to the size of the function. Secondly, debugging a Lambda function that deals with a specific event is much easier. Finally, it is just easier to conceptually relate a Lambda function with a single event.
+1. [Lambda]({% link _chapters/what-is-aws-lambda.md %}) functions are a natural fit for a microservice based architecture. This is due to a few reasons. Firstly, the performance of a Lambda function is related to the size of the function. Secondly, debugging a Lambda function that deals with a specific event is much easier. Finally, it is just easier to conceptually relate a Lambda function with a single event.
 
 2. The easiest way to share code between services is by having them all together in a single repository. Even though your services end up dealing with separate portions of your app, they still might need to share some code between them. Say for example; you have some code that formats your requests and responses in your Lambda functions. This would ideally be used across the board and it would not make sense to replicate this code in all the services.
 
