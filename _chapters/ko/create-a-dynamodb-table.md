@@ -40,13 +40,17 @@ DynamoDB에서 인덱스가 작동하는 방식에 대한 이해를 돕기 위�
 
 다음 메시지가 표시되는 화면에서 **기본 설정 사용**을 선택 취소하십시오.
 
-![자동 스케일링 IAM 역할 경고 스크린샷](/assets/dynamodb/auto-scaling-iam-role-warning.png)
+![기본 설정 사용 선택 취소 스크린샷](/assets/dynamodb/deselect-use-default-settings.png)
 
-맨 아래로 스크롤하여 **DynamoDB AutoScaling Service Linked Role**이 선택되었는지 확인하고 **생성**을 선택하십시오.
+맨 아래로 스크롤하여 Provisioned 대신 **On-demand**가 선택되었는지 확인하십시오.
 
-![프로비저닝 된 용량 테이블 설정 스크린샷](/assets/dynamodb/set-table-provisioned-capacity.png)
+![프로비저닝대신 온디맨드 선택 스크린샷](/assets/dynamodb/select-on-demand-capacity.png)
 
-그렇지 않으면 **기본 설정 사용**이 선택되어 있는지 확인한 다음 **생성**을 선택합니다.
+기본적으로 우리는 온디맨드를 사용하겠습니다. 프로비저닝에 관한 [더 많은 정보는 여기](https://aws.amazon.com/dynamodb/pricing/provisioned/)에 있습니다.
+
+그 다음 **기본 설정 사용**이 선택되어 있는지 확인한 다음 **생성**을 선택합니다.
+
+![디폴트 선택하고 생성하는 스크린샷](/assets/dynamodb/create-dynamodb-table.png)
 
 기본 설정은 5개의 읽기와 5개의 쓰기를 제공합니다. 테이블을 작성할 때 읽기와 쓰기에 예약할 처리 용량을 지정합니다. DynamoDB는 처리 요구량을 충족시키는 데 필요한 리소스를 예약하는 동시에 일관성 있고 짧은 지연 시간에 대한 성능을 보장합니다. 하나의 읽기 용량 단위는 초당 최대 8KB를 읽을 수 있으며 하나의 쓰기 용량 단위는 초당 최대 1KB를 쓸 수 있습니다. 프로비저닝된 처리량 설정을 변경하여 필요에 따라 용량을 늘리거나 줄일 수 있습니다.
 
