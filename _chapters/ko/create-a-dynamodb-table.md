@@ -46,7 +46,7 @@ DynamoDB에서 인덱스가 작동하는 방식에 대한 이해를 돕기 위�
 
 ![프로비저닝대신 온디맨드 선택 스크린샷](/assets/dynamodb/select-on-demand-capacity.png)
 
-프로비저닝은 주로 예측이 불가능한 서비스에 사용됩니다. 기본적으로 우리는 온디맨드를 사용하겠습니다. 프로비저닝에 관한 [더 많은 정보는 여기](https://aws.amazon.com/dynamodb/pricing/provisioned/)에 있습니다.
+기본적으로 우리는 온디맨드를 사용하겠습니다. 프로비저닝에 관한 [더 많은 정보는 여기](https://aws.amazon.com/dynamodb/pricing/provisioned/)에 있습니다.
 
 그 다음 **기본 설정 사용**이 선택되어 있는지 확인한 다음 **생성**을 선택합니다.
 
