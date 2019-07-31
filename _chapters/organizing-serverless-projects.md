@@ -63,7 +63,7 @@ A couple of things to notice here:
 
 The microservice + mono-repo pattern has grown in popularity for a couple of reasons:
 
-1. [Lambda]({% link _chapters/what-is-aws-lambda.md %}) functions are a natural fit for a microservice based architecture. This is due to a few reasons. Firstly, the performance of a Lambda function is related to the size of the function. Secondly, debugging a Lambda function that deals with a specific event is much easier. Finally, it is just easier to conceptually relate a Lambda function with a single event.
+1. [Lambda functions]({% link _chapters/what-is-aws-lambda.md %}) are a natural fit for a microservice based architecture. This is due to a few reasons. Firstly, the performance of a Lambda function is related to the size of the function. Secondly, debugging a Lambda function that deals with a specific event is much easier. Finally, it is just easier to conceptually relate a Lambda function with a single event.
 
 2. The easiest way to share code between services is by having them all together in a single repository. Even though your services end up dealing with separate portions of your app, they still might need to share some code between them. Say for example; you have some code that formats your requests and responses in your Lambda functions. This would ideally be used across the board and it would not make sense to replicate this code in all the services.
 
