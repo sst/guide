@@ -8,9 +8,9 @@ code: mono-repo
 comments_id: api-gateway-domains-across-services/408
 ---
 
-So to summarize so far, we are looking at how to create a Serverless application with multiple services and to [link them together using cross-stack references]({% link _chapters/cross-stack-references-in-serverless.md %}). We've created a separate services for [DynamoDB]({% link _chapters/dynamodb-as-a-serverless-service.md %}) and our [S3 file uploads bucket]({% link _chapters/s3-as-a-serverless-service.md %}).
+So to summarize so far, we are looking at how to create a Serverless application with multiple services and to [link them together using cross-stack references]({% link _chapters/cross-stack-references-in-serverless.md %}). We've created separate services for [DynamoDB]({% link _chapters/dynamodb-as-a-serverless-service.md %}) and our [S3 file uploads bucket]({% link _chapters/s3-as-a-serverless-service.md %}).
 
-In this chapter we will look at how to work with API Gateway across multiple services. A challenge that you run into when splitting your APIs into multiple services, is sharing the same domain for them. You might recall that APIs that are created as a part of the Serverless service get their own unique URL that looks something like:
+In this chapter we will look at how to work with API Gateway across multiple services. A challenge that you run into when splitting your APIs into multiple services is sharing the same domain for them. You might recall that APIs that are created as a part of the Serverless service get their own unique URL that looks something like:
 
 ```
 https://z6pv80ao4l.execute-api.us-east-1.amazonaws.com/dev
@@ -107,15 +107,14 @@ resources:
 
 Let's go over some of the details of this service.
 
-1. The Lambda functions in our service need to know which DynamoDB table to connect to. To do this we are importing the table name we use from the `serverless.yml` of that service. We do this using `${file(../database/serverless.yml):custom.tableName}`. This is basically telling Serverless Framework to look for the `serverless.yml` file in the `services/database/` directory. And in that file look for the custom variable called `tableName`. We set this value as an environment variable so that we can use `process.env.tableName` in our Lambda function to find the generated name of our notes table.
+- The Lambda functions in our service need to know which DynamoDB table to connect to. To do this we are importing the table name we use from the `serverless.yml` of that service. We do this using `${file(../database/serverless.yml):custom.tableName}`. This is basically telling Serverless Framework to look for the `serverless.yml` file in the `services/database/` directory, and in that file look for the custom variable called `tableName`. We set this value as an environment variable so that we can use `process.env.tableName` in our Lambda function to find the generated name of our notes table.
 
-2. Next, we need to give our Lambda function permission to talk to this table by adding an IAM policy. The IAM policy needs the [ARN]({% link _chapters/what-is-an-arn.md %}) of the table. This is the first time we are using the import portion of our cross-stack reference. Back in the chapter where we [created the DynamoDB service]({% link _chapters/dynamodb-as-a-serverless-service.md %}), we exported `${self:custom.stage}-NotesTableArn`. And we can refer to it by `'Fn::ImportValue': ${self:custom.stage}-NotesTableArn`.
+- Next, we need to give our Lambda function permission to talk to this table by adding an IAM policy. The IAM policy needs the [ARN]({% link _chapters/what-is-an-arn.md %}) of the table. This is the first time we are using the import portion of our cross-stack reference. Back in the chapter where we [created the DynamoDB service]({% link _chapters/dynamodb-as-a-serverless-service.md %}), we exported `${self:custom.stage}-NotesTableArn`. And we can refer to it by `'Fn::ImportValue': ${self:custom.stage}-NotesTableArn`.
 
-3. We are going to export a couple values in this service to be able to share this API Gateway resource in our _users_ service.
+- We are going to export a couple of values in this service to be able to share this API Gateway resource in our _users_ service:
 
-4. The first cross-stack reference that needs to be shared is the API Gateway Id that is created as a part of this service. We are going to export it with the name `${self:custom.stage}-ApiGatewayRestApiId`. Again, we want the exports to work across all our environments/stages and so we include the stage name as a part of it. The value of this export is available as a reference in our current stack called `ApiGatewayRestApi`.
-
-5. Finally, we also need to export the `RootResourceId`. This is a reference to the `/` path of this API Gateway project. To this Id we use the `Fn::GetAtt` CloudFormation function and pass in the current `ApiGatewayRestApi` and look up the attribute `RootResourceId`. We export this using the name `${self:custom.stage}-ApiGatewayRestApiRootResourceId`.
+  1. The first cross-stack reference that needs to be shared is the API Gateway Id that is created as a part of this service. We are going to export it with the name `${self:custom.stage}-ApiGatewayRestApiId`. Again, we want the exports to work across all our environments/stages and so we include the stage name as a part of it. The value of this export is available as a reference in our current stack called `ApiGatewayRestApi`.
+  2. We also need to export the `RootResourceId`. This is a reference to the `/` path of this API Gateway project. To retrieve this Id we use the `Fn::GetAtt` CloudFormation function and pass in the current `ApiGatewayRestApi` and look up the attribute `RootResourceId`. We export this using the name `${self:custom.stage}-ApiGatewayRestApiRootResourceId`.
 
 ### Users Service
 
@@ -184,9 +183,9 @@ functions:
 
 Let's go over this quickly.
 
-- Just as the _notes_ service we are referencing our DynamoDB table name using `${file(../database/serverless.yml):custom.tableName}` and the table ARN using `'Fn::ImportValue': ${self:custom.stage}-NotesTableArn`.
+- Just as with our _notes_ service we are referencing our DynamoDB table name using `${file(../database/serverless.yml):custom.tableName}` and the table ARN using `'Fn::ImportValue': ${self:custom.stage}-NotesTableArn`.
 
-- To share the same API Gateway domain as our _notes_ service, we are adding a `apiGateway:` section to the `provider:` block.
+- To share the same API Gateway domain as our _notes_ service, we are adding an `apiGateway:` section to the `provider:` block.
 
   1. Here we state that we want to use the `restApiId` of our _notes_ service. We do this by using the cross-stack reference `'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiId` that we had exported above.
 
