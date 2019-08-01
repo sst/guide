@@ -42,7 +42,7 @@ Next scroll down and deselect **Use default settings**.
 
 ![Deselect Use default settings screenshot](/assets/dynamodb/deselect-use-default-settings.png)
 
-Scroll down further and **On-demand** instead of **Provisioned**.
+Scroll down further and select **On-demand** instead of **Provisioned**.
 
 ![Select On-Demand Capacity screenshot](/assets/dynamodb/select-on-demand-capacity.png)
 
@@ -58,6 +58,6 @@ The `notes` table has now been created. If you find yourself stuck with the **Ta
 
 It is also a good idea to set up backups for your DynamoDB table, especially if you are planning to use it in production. We cover this in an extra-credit chapter, [Backups in DynamoDB]({% link _chapters/backups-in-dynamodb.md %}).
 
-Next we'll set up an S3 bucket to handle file uploads.
+Next, we'll set up an S3 bucket to handle file uploads.
 
 [dynamodb-components]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html
