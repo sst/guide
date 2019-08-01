@@ -67,7 +67,7 @@ resources:
 
 If you have followed along with [Part II of our guide]({% link _chapters/configure-dynamodb-in-serverless.md %}), the `Resources:` section should seem familiar. It is creating the Notes table that we use in our [note taking application]({{ site.backend_github_repo }}). The key addition here in regards to the cross-stack references is in the `Outputs:` section. Let's go over them quickly.
 
-1. We are exporting one value here. The `NotesTableArn` is the [ARN]({% link _chapters/what-is-an-arn.md %}) of the DynamoDB table that we are creating. And the `NotesTableName` which is the name of the table being created. The ARN is necessary for any IAM roles that are going to reference the DynamoDB table.
+1. We are exporting one value here. The `NotesTableArn` is the [ARN]({% link _chapters/what-is-an-arn.md %}) of the DynamoDB table that we are creating. The ARN is necessary for any IAM roles that are going to reference the DynamoDB table.
 
 2. The export name is based on the stage we are using to deploy this service - `${self:custom.stage}`. This is important because we want our entire application to be easily replicable across multiple stages. If we don't include the stage name the exports will thrash when we deploy to multiple stages.
 
