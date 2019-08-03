@@ -45,7 +45,7 @@ Outputs:
 
 If you recall from the [Create an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}) chapter, we had created a bucket and configured the CORS policy for it. We needed to do this because we are going to be uploading directly from our frontend client. We configure the same policy here.
 
-S3 buckets (unlike DynamoDB tables) are globally named. So it is not really possible for us to know what it is going to be called before hand. Hence, we let CloudFormation generate the name for us and we just add the `Outputs:` block to tell it to print it out so we can use it later.
+S3 buckets (unlike DynamoDB tables) are globally named, so it is not really possible for us to know what our bucket is going to be called beforehand. Hence, we let CloudFormation generate the name for us and we just add the `Outputs:` block to tell it to print it out so we can use it later.
 
 ### Add the Resource
 
