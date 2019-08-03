@@ -39,9 +39,9 @@ Let's quickly go over what we are doing here.
 
 1. We are describing a DynamoDB table resource called `NotesTable`.
 
-2. The table we get from a custom variable `${self:custom.tableName}`. This is generated dynamically in our `serverless.yml`. We will look at this in detail below.
+2. We get the table name from the custom variable `${self:custom.tableName}`. This is generated dynamically in our `serverless.yml`. We will look at this in detail below.
 
-3. We are also configuring the two attributes of our table as `userId` and `noteId`.
+3. We are also configuring the two attributes of our table as `userId` and `noteId`and specifying them as our primary key.
 
 4. Finally, we are provisioning the read/write capacity for our table through a couple of custom variables as well. We will be defining this shortly.
 
