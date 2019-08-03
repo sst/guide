@@ -9,7 +9,7 @@ ref: configure-cognito-identity-pool-in-serverless
 comments_id: configure-cognito-identity-pool-in-serverless/165
 ---
 
-If you recall from the first part of tutorial, we use the Cognito Identity Pool as a way to control which AWS resources our logged in users will have access to. And also tie in our Cognito User Pool as our authentication provider.
+If you recall from the first part of this tutorial, we use the Cognito Identity Pool as a way to control which AWS resources our logged in users will have access to. We also tie in our Cognito User Pool as our authentication provider.
 
 ### Create the Resource
 
@@ -110,17 +110,17 @@ Outputs:
       Ref: CognitoIdentityPool
 ```
 
-Now it looks like there is a whole lot going on here. But it is pretty much exactly what we did back in the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter. It's just that CloudFormation can be a bit verbose and can end up looking a bit intimidating.
+While it looks like there's a whole lot going on here, it's pretty much exactly what we did back in the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter. It's just that CloudFormation can be a bit verbose and can end up looking a bit intimidating.
 
 Let's quickly go over the various sections of this configuration:
 
 1. First we name our Identity Pool based on the stage name using `${self:custom.stage}`.
 
-2. We set that we only want logged in users by adding `AllowUnauthenticatedIdentities: false`.
+2. We specify that we only want logged in users by adding `AllowUnauthenticatedIdentities: false`.
 
 3. Next we state that we want to use our User Pool as the identity provider. We are doing this specifically using the `Ref: CognitoUserPoolClient` line. If you refer back to the [Configure Cognito User Pool in Serverless]({% link _chapters/configure-cognito-user-pool-in-serverless.md %}) chapter, you'll notice we have a block under `CognitoUserPoolClient` that we are referencing here.
 
-4. We then attach a IAM role to our authenticated users.
+4. We then attach an IAM role to our authenticated users.
 
 5. We add the various parts to this role. This is exactly what we use in the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter. It just needs to be formatted this way to work with CloudFormation.
 
