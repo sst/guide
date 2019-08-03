@@ -76,7 +76,7 @@ export function calculateCost(storage) {
 }
 ```
 
-This is basically saying that if a user wants to store 10 or fewer notes, we'll charge them $4 per note. For 100 or fewer, we'll charge $2 and anything more than a 100 is $1 per note. Clearly, our serverless infrastructure might be cheap but our service isn't!
+This is basically saying that if a user wants to store 10 or fewer notes, we'll charge them $4 per note. For 11 to 100 notes, we'll charge $2 and any more than 100 is $1 per note. Since Stripe expects us to provide the amount in pennies (the currency’s smallest unit) we multiply the result by 100. Clearly, our serverless infrastructure might be cheap but our service isn't!
 
 ### Configure the API Endpoint
 
