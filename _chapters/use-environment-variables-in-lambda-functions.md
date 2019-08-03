@@ -8,7 +8,7 @@ ref: use-environment-variables-in-lambda-functions
 comments_id: use-environment-variables-in-lambda-functions/166
 ---
 
-Back in the [Configure DynamoDB in Serverless]({% link _chapters/configure-dynamodb-in-serverless.md %}) chapter, we are creating our table through CloudFormation. The table that is created is based on the stage we are currently in. This means that in our Lambda functions when we talk to our database, we cannot simply hard code the table names. Since, in the `dev` stage it would be called `dev-notes` and in `prod` it'll be called `prod-notes`.
+Back in the [Configure DynamoDB in Serverless]({% link _chapters/configure-dynamodb-in-serverless.md %}) chapter, we created our table through CloudFormation. The table name is based on the stage we are currently in. This means that when we talk to our database in our Lambda functions we cannot simply hard code the table name since in the `dev` stage it would be called `dev-notes` and in `prod` it'll be called `prod-notes`.
 
 This requires us to use environment variables in our Lambda functions to figure out which table we should be talking to. Currently, if you pull up `create.js` you'll notice the following section.
 
