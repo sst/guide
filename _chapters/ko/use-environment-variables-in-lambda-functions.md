@@ -20,7 +20,7 @@ const params = {
     noteId: uuid.v1(),
     content: data.content,
     attachment: data.attachment,
-    createdAt: new Date().getTime()
+    createdAt: Date.now()
   }
 };
 ```
