@@ -117,7 +117,7 @@ render() {
 }
 ```
 
-You'll notice that we added another link in the navbar for the case a user is logged in.
+You'll notice that we added another link in the navbar that only displays when a user is logged in.
 
 Now if you head over to your app, you'll see a new **Settings** link at the top. Of course, the page is pretty empty right now.
 
