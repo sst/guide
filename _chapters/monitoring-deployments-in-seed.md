@@ -19,10 +19,10 @@ First start by pushing an obvious mistake.
 <img class="code-marker" src="/assets/s.png" />Add the following to `functions/create.js` right at the top of our function.
 
 ``` js
-gibberish.what;
+uuid.abc.gibberish;
 ```
 
-Now there is no such variable as `gibberish` so this code should fail.
+Now there is no such property `abc.gibberish` in `uuid` so this code should fail.
 
 <img class="code-marker" src="/assets/s.png" />Let's commit and push this to dev.
 
