@@ -54,7 +54,7 @@ A couple of things to notice here:
 1. We are going over a Node.js project here but this pattern applies to other languages as well.
 2. The `services/` dir at the root is made up of a collection of services. Where a service contains a single `serverless.yml` file.
 3. Each service deals with a relatively small and self-contained function. So for example, the `posts` service deals with everything from creating to deleting posts. Of course, the degree to which you want to separate your application is entirely up to you.
-4. The `package.json` (and the `node_modules/` dir) are at the root of the repo. However, it is fairly common to have a separate `package.json` inside each service directory.
+4. The `package.json` (and the `node_modules/` dir) are at the root of the repo. However, it is fairly common to have a separate `package.json` inside each service directory. We go [in-depth into that pattern in this post here](https://seed.run/blog/how-to-structure-a-real-world-monorepo-serverless-app).
 5. The `lib/` dir is just to illustrate that any common code that might be used across all services can be placed in here.
 6. To deploy this application you are going to need to run `serverless deploy` separately in each of the services.
 7. [Environments (or stages)]({% link _chapters/stages-in-serverless-framework.md %}) need to be co-ordinated across all the different services. So if your team is using a `dev`, `staging`, and `prod` environment, then you are going to need to define the specifics of this in each of the services.
