@@ -10,7 +10,7 @@ ref: unit-tests-in-serverless
 comments_id: unit-tests-in-serverless/173
 ---
 
-So we have some simple business logic that figures out exactly how much to charge our user based on the number of notes they want to store. We want to make sure that we test all the possible cases for this before we start charging people. To do this we are going to configure unit tests for our Serverless Framework project.
+So we have some simple business logic that figures out exactly how much to charge our user based on the number of notes they want to store. We want to make sure that we test all the possible cases for this before we start charging people. To do this we are going to configure unit tests for our Serverless Framework project. However, if you are looking for other strategies to test your Serverless applications, [we talk about them in detail here](https://seed.run/blog/testing-your-serverless-app).
 
 We are going to use [Jest](https://facebook.github.io/jest/) for this and it is already a part of [our starter project](https://github.com/AnomalyInnovations/serverless-nodejs-starter).
 
