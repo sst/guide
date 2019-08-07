@@ -54,7 +54,7 @@ The production context labelled, `context.production` is the only one where we s
 
 ### Handle HTTP Status Codes
 
-Just as the first part of the tutorial, we'll need to handle requests to any non-root paths of our app. Our frontend is a single-page app and the routing is handled on the client side. We need to tell Netlify to always redirect any request to our `index.html` and return the 200 status code for it.
+Just as in the first part of the tutorial, we'll need to handle requests to any non-root paths of our app. Our frontend is a single-page app and the routing is handled on the client side. We need to tell Netlify to always redirect any request to our `index.html` and return the 200 status code for it.
 
 <img class="code-marker" src="/assets/s.png" />To do this, add a redirects rule at the bottom of `netlify.toml`:
 
