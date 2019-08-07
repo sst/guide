@@ -13,7 +13,7 @@ Now all we have left to do is to connect our billing form to our billing API.
 
 Let's start by including Stripe.js in our HTML.
 
-<img class="code-marker" src="/assets/s.png" />Append the following the the `<head>` block in our `public/index.html`.
+<img class="code-marker" src="/assets/s.png" />Append the following to the `<head>` block in our `public/index.html`.
 
 ``` html
 <script src="https://js.stripe.com/v3/"></script>
@@ -75,7 +75,7 @@ An important detail here is about the `StripeProvider` and the `Elements` compon
 
 Finally, let's handle some styles for our settings page as a whole.
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `src/containers/Settings.css`.
+<img class="code-marker" src="/assets/s.png" />Create a file named `src/containers/Settings.css` and add the following.
 
 ``` css
 @media all and (min-width: 480px) {
