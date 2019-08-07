@@ -11,7 +11,7 @@ comments_id: manage-environments-in-create-react-app/182
 
 Recall from our backend section that we created two environments (dev and prod) for our serverless backend API. In this chapter we'll configure our frontend Create React App to connect to it.
 
-Let's start by looking at how our app is configured currently. Our `src/config.js` stores the info to all of our backend resources.
+Let's start by looking at how our app is configured currently. Our `src/config.js` stores the info for all of our backend resources.
 
 ``` js
 export default {
@@ -110,7 +110,7 @@ export default {
 
 Make sure to replace the different version of the resources with the ones from the [Deploying through Seed]({% link _chapters/deploying-through-seed.md %}) chapter.
 
-Note that we are defaulting our environment to dev if the `REACT_APP_STAGE` is not set. This means that our current build process (`npm start` and `npm run build`) will default to the `dev` environment. And for config values like `MAX_ATTACHMENT_SIZE` that are common to both environments we moved it in a different section.
+Note that we are defaulting our environment to dev if the `REACT_APP_STAGE` is not set. This means that our current build process (`npm start` and `npm run build`) will default to the `dev` environment. Also note that we've moved config values that are common to both environments (like `MAX_ATTACHMENT_SIZE`) to a different section.
 
 If we switch over to our app, we should see it in development mode and it'll be connected to the dev version of our backend. We haven't changed the deployment process yet but in the coming chapters we'll change this when we automate our frontend deployments.
 
