@@ -14,15 +14,15 @@ Despite our best intentions we might run into cases where some faulty code ends 
 
 ### Push Some Faulty Code
 
-First start by pushing an obvious mistake.
+Let's start by pushing an obvious mistake.
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `functions/create.js` right at the top of our function.
+<img class="code-marker" src="/assets/s.png" />Add the following to `functions/create.js` as the first line of our `main` function.
 
 ``` js
 uuid.abc.gibberish;
 ```
 
-Now there is no such property `abc.gibberish` in `uuid` so this code should fail.
+Since there is no property `abc.gibberish` in `uuid`, this code should fail.
 
 <img class="code-marker" src="/assets/s.png" />Let's commit and push this to dev.
 
@@ -165,10 +165,10 @@ Making API request
 
 ### Revert the Code
 
-<img class="code-marker" src="/assets/s.png" />Finally, don't forget to revert your code in `functions/create.js`.
+<img class="code-marker" src="/assets/s.png" />Finally, don't forget to revert your code in `functions/create.js`. Remove the faulty code:
 
 ``` js
-gibberish.what;
+uuid.abc.gibberish;
 ```
 
 <img class="code-marker" src="/assets/s.png" />And commit and push the changes.
