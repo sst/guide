@@ -132,11 +132,13 @@ api-gateway-and-lambda-logs
 debugging-serverless-api-issues
 serverless-environment-variables
 stages-in-serverless-framework
+backups-in-dynamodb
 configure-multiple-aws-profiles
 customize-the-serverless-iam-policy
 mapping-cognito-identity-id-and-user-pool-id
 connect-to-api-gateway-with-iam-auth
 serverless-nodejs-starter
+package-lambdas-with-serverless-bundle
 manage-user-accounts-in-aws-amplify
 handle-forgot-and-reset-password
 allow-users-to-change-passwords

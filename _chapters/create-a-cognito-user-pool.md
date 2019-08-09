@@ -53,6 +53,10 @@ Now hit **Create pool** at the bottom of the page.
 
 ![Select Create pool screenshot](/assets/cognito-user-pool/select-create-pool.png)
 
+If you get an error with a message, `1 validation error detected: Value '[]' at 'schema' failed to satisfy constraint: Member must have length greater than or equal to 1`; then scroll up and click on **Choose required attributes...**. And select **email** as a required attribute and try again.
+
+![Select email as required attribute screenshot](/assets/cognito-user-pool/select-email-as-required-attribute.png)
+
 Your User Pool has been created. Take a note of the **Pool Id** and **Pool ARN** which will be required later. Also, note the region that your User Pool is created in – in our case it's `us-east-1`.
 
 ![Cognito User Pool Created Screenshot](/assets/cognito-user-pool/user-pool-created.png)
