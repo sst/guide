@@ -21,32 +21,26 @@ To get started let's add our settings page.
 <img class="code-marker" src="/assets/s.png" />Create a new file in `src/containers/Settings.js` and add the following.
 
 ``` coffee
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { API } from "aws-amplify";
 
-export default class Settings extends Component {
-  constructor(props) {
-    super(props);
+export default function Settings(props) {
+  const [isLoading, setIsLoading] = useState(false);
 
-    this.state = {
-      isLoading: false
-    };
-  }
-
-  billUser(details) {
+  function billUser(details) {
     return API.post("notes", "/billing", {
       body: details
     });
   }
 
-  render() {
-    return (
-      <div className="Settings">
-      </div>
-    );
-  }
+  return (
+    <div className="Settings">
+    </div>
+  );
 }
 ```
+
+REWRITE
 
 <img class="code-marker" src="/assets/s.png" />Next import this component in the header of `src/Routes.js`.
 
@@ -73,15 +67,11 @@ Notice that we added a route for our new settings page.
 
 <img class="code-marker" src="/assets/s.png" />Next add a link to our settings page in the navbar by replacing the `render` method in `src/App.js` with this.
 
-``` coffee
-render() {
-  const childProps = {
-    isAuthenticated: this.state.isAuthenticated,
-    userHasAuthenticated: this.userHasAuthenticated
-  };
+REWRITE
 
-  return (
-    !this.state.isAuthenticating &&
+``` coffee
+return (
+  !isAuthenticating && (
     <div className="App container">
       <Navbar fluid collapseOnSelect>
         <Navbar.Header>
@@ -92,29 +82,30 @@ render() {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            {this.state.isAuthenticated
-              ? <Fragment>
-                  <LinkContainer to="/settings">
-                    <NavItem>Settings</NavItem>
-                  </LinkContainer>
-                  <NavItem onClick={this.handleLogout}>Logout</NavItem>
-                </Fragment>
-              : <Fragment>
-                  <LinkContainer to="/signup">
-                    <NavItem>Signup</NavItem>
-                  </LinkContainer>
-                  <LinkContainer to="/login">
-                    <NavItem>Login</NavItem>
-                  </LinkContainer>
-                </Fragment>
-            }
+            {isAuthenticated ? (
+              <>
+                <LinkContainer to="/settings">
+                  <NavItem>Settings</NavItem>
+                </LinkContainer>
+                <NavItem onClick={handleLogout}>Logout</NavItem>
+              </>
+            ) : (
+              <>
+                <LinkContainer to="/signup">
+                  <NavItem>Signup</NavItem>
+                </LinkContainer>
+                <LinkContainer to="/login">
+                  <NavItem>Login</NavItem>
+                </LinkContainer>
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Routes childProps={childProps} />
+      <Routes childProps={{ isAuthenticated, userHasAuthenticated }} />
     </div>
-  );
-}
+  )
+);
 ```
 
 You'll notice that we added another link in the navbar that only displays when a user is logged in.

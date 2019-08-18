@@ -35,10 +35,14 @@ import { Auth } from "aws-amplify";
 <img class="code-marker" src="/assets/s.png" />Now to load the user session we'll add the following to our `src/App.js` below our `constructor` method.
 
 ``` javascript
-async componentDidMount() {
+useEffect(() => {
+  onLoad();
+}, []);
+
+async function onLoad() {
   try {
     await Auth.currentSession();
-    this.userHasAuthenticated(true);
+    userHasAuthenticated(true);
   }
   catch(e) {
     if (e !== 'No current user') {
@@ -46,9 +50,11 @@ async componentDidMount() {
     }
   }
 
-  this.setState({ isAuthenticating: false });
+  setIsAuthenticating(false);
 }
 ```
+
+REWRITE
 
 All this does is load the current session. If it loads, then it updates the `isAuthenticating` flag once the process is complete. The `Auth.currentSession()` method throws an error `No current user` if nobody is currently logged in. We don't want to show this error to users when they load up our app and are not signed in.
 
@@ -58,45 +64,38 @@ Since loading the user session is an asynchronous process, we want to ensure tha
 
 We'll conditionally render our app based on the `isAuthenticating` flag.
 
-<img class="code-marker" src="/assets/s.png" />Our `render` method in `src/App.js` should be as follows.
+<img class="code-marker" src="/assets/s.png" />Our `return` statement in `src/App.js` should be as follows.
 
-``` coffee
-render() {
-  const childProps = {
-    isAuthenticated: this.state.isAuthenticated,
-    userHasAuthenticated: this.userHasAuthenticated
-  };
-
-  return (
-    !this.state.isAuthenticating &&
-    <div className="App container">
-      <Navbar fluid collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Link to="/">Scratch</Link>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav pullRight>
-            {this.state.isAuthenticated
-              ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
-              : <Fragment>
-                  <LinkContainer to="/signup">
-                    <NavItem>Signup</NavItem>
-                  </LinkContainer>
-                  <LinkContainer to="/login">
-                    <NavItem>Login</NavItem>
-                  </LinkContainer>
-                </Fragment>
-            }
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-      <Routes childProps={childProps} />
-    </div>
-  );
-}
+``` javascript
+return (
+  !isAuthenticating &&
+  <div className="App container">
+    <Navbar fluid collapseOnSelect>
+      <Navbar.Header>
+        <Navbar.Brand>
+          <Link to="/">Scratch</Link>
+        </Navbar.Brand>
+        <Navbar.Toggle />
+      </Navbar.Header>
+      <Navbar.Collapse>
+        <Nav pullRight>
+          {isAuthenticated
+            ? <NavItem onClick={handleLogout}>Logout</NavItem>
+            : <>
+                <LinkContainer to="/signup">
+                  <NavItem>Signup</NavItem>
+                </LinkContainer>
+                <LinkContainer to="/login">
+                  <NavItem>Login</NavItem>
+                </LinkContainer>
+              </>
+          }
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+    <Routes childProps={{ isAuthenticated, userHasAuthenticated }} />
+  </div>
+);
 ```
 
 Now if you head over to your browser and refresh the page, you should see that a user is logged in.

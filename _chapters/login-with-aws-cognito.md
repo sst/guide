@@ -26,17 +26,19 @@ The login code itself is relatively simple.
 <img class="code-marker" src="/assets/s.png" />Simply replace our placeholder `handleSubmit` method in `src/containers/Login.js` with the following.
 
 ``` javascript
-handleSubmit = async event => {
+async function handleSubmit(event) {
   event.preventDefault();
 
   try {
-    await Auth.signIn(this.state.email, this.state.password);
+    await Auth.signIn(email, password);
     alert("Logged in");
   } catch (e) {
     alert(e.message);
   }
 }
 ```
+
+REWRITE THIS
 
 We are doing two things of note here.
 

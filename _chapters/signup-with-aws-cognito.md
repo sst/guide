@@ -14,40 +14,38 @@ Now let's go ahead and implement the `handleSubmit` and `handleConfirmationSubmi
 <img class="code-marker" src="/assets/s.png" />Replace our `handleSubmit` and `handleConfirmationSubmit` methods in `src/containers/Signup.js` with the following.
 
 ``` javascript
-handleSubmit = async event => {
+async function handleSubmit(event) {
   event.preventDefault();
 
-  this.setState({ isLoading: true });
+  dispatch({ type: "submitting" });
 
   try {
     const newUser = await Auth.signUp({
-      username: this.state.email,
-      password: this.state.password
+      username: state.email,
+      password: state.password
     });
-    this.setState({
-      newUser
-    });
+    dispatch({ type: "submitted", newUser });
   } catch (e) {
     alert(e.message);
+    dispatch({ type: "submit-failed" });
   }
 
-  this.setState({ isLoading: false });
 }
 
-handleConfirmationSubmit = async event => {
+async function handleConfirmationSubmit(event) {
   event.preventDefault();
 
-  this.setState({ isLoading: true });
+  dispatch({ type: "confirming" });
 
   try {
-    await Auth.confirmSignUp(this.state.email, this.state.confirmationCode);
-    await Auth.signIn(this.state.email, this.state.password);
+    await Auth.confirmSignUp(state.email, state.confirmationCode);
+    await Auth.signIn(state.email, state.password);
 
-    this.props.userHasAuthenticated(true);
-    this.props.history.push("/");
+    props.userHasAuthenticated(true);
+    props.history.push("/");
   } catch (e) {
     alert(e.message);
-    this.setState({ isLoading: false });
+    dispatch({ type: "confirm-failed" });
   }
 }
 ```
@@ -57,6 +55,8 @@ handleConfirmationSubmit = async event => {
 ``` javascript
 import { Auth } from "aws-amplify";
 ```
+
+REWRITE
 
 The flow here is pretty simple:
 

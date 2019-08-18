@@ -23,108 +23,137 @@ Next let's create our billing form component.
 
 {% raw %}
 ``` coffee
-import React, { Component } from "react";
+import React, { useReducer } from "react";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import LoaderButton from "./LoaderButton";
 import "./BillingForm.css";
 
-class BillingForm extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      name: "",
-      storage: "",
-      isProcessing: false,
-      isCardComplete: false
-    };
+function reducer(state, action) {
+  switch (action.type) {
+    case "change":
+      return {
+        ...state,
+        [action.field]: action.value
+      };
+    case "card-change":
+      return {
+        ...state,
+        isCardComplete: action.isCardComplete
+      };
+    case "processing":
+      return {
+        ...state,
+        isProcessing: true
+      };
+    case "processed":
+      return {
+        ...state,
+        isProcessing: false
+      };
+    default:
+      throw new Error();
   }
+}
 
-  validateForm() {
+function BillingForm({
+  loading,
+  onSubmit,
+  ...props
+}) {
+  const [state, dispatch] = useReducer(reducer, {
+    name: "",
+    storage: "",
+    isProcessing: false,
+    isCardComplete: false
+  });
+  const isLoading = state.isProcessing || props.loading;
+
+  function validateForm() {
     return (
-      this.state.name !== "" &&
-      this.state.storage !== "" &&
-      this.state.isCardComplete
+      state.name !== "" &&
+      state.storage !== "" &&
+      state.isCardComplete
     );
   }
 
-  handleFieldChange = event => {
-    this.setState({
-      [event.target.id]: event.target.value
+  function handleFieldChange(event) {
+    dispatch({
+      type: "change",
+      field: event.target.id,
+      value: event.target.value
     });
   }
 
-  handleCardFieldChange = event => {
-    this.setState({
+  function handleCardFieldChange(event) {
+    dispatch({
+      type: "card-change",
       isCardComplete: event.complete
     });
   }
 
-  handleSubmitClick = async event => {
+  async function handleSubmitClick(event) {
     event.preventDefault();
 
-    const { name } = this.state;
+    const { name } = state;
 
-    this.setState({ isProcessing: true });
+    dispatch({ type: "processing" });
 
-    const { token, error } = await this.props.stripe.createToken({ name });
+    const { token, error } = await props.stripe.createToken({ name });
 
-    this.setState({ isProcessing: false });
+    dispatch({ type: "processed" });
 
-    this.props.onSubmit(this.state.storage, { token, error });
+    onSubmit(state.storage, { token, error });
   }
 
-  render() {
-    const loading = this.state.isProcessing || this.props.loading;
-
-    return (
-      <form className="BillingForm" onSubmit={this.handleSubmitClick}>
-        <FormGroup bsSize="large" controlId="storage">
-          <ControlLabel>Storage</ControlLabel>
-          <FormControl
-            min="0"
-            type="number"
-            value={this.state.storage}
-            onChange={this.handleFieldChange}
-            placeholder="Number of notes to store"
-          />
-        </FormGroup>
-        <hr />
-        <FormGroup bsSize="large" controlId="name">
-          <ControlLabel>Cardholder&apos;s name</ControlLabel>
-          <FormControl
-            type="text"
-            value={this.state.name}
-            onChange={this.handleFieldChange}
-            placeholder="Name on the card"
-          />
-        </FormGroup>
-        <ControlLabel>Credit Card Info</ControlLabel>
-        <CardElement
-          className="card-field"
-          onChange={this.handleCardFieldChange}
-          style={{
-            base: { fontSize: "18px", fontFamily: '"Open Sans", sans-serif' }
-          }}
+  return (
+    <form className="BillingForm" onSubmit={handleSubmitClick}>
+      <FormGroup bsSize="large" controlId="storage">
+        <ControlLabel>Storage</ControlLabel>
+        <FormControl
+          min="0"
+          type="number"
+          value={state.storage}
+          onChange={handleFieldChange}
+          placeholder="Number of notes to store"
         />
-        <LoaderButton
-          block
-          bsSize="large"
-          type="submit"
-          text="Purchase"
-          isLoading={loading}
-          loadingText="Purchasing…"
-          disabled={!this.validateForm()}
+      </FormGroup>
+      <hr />
+      <FormGroup bsSize="large" controlId="name">
+        <ControlLabel>Cardholder&apos;s name</ControlLabel>
+        <FormControl
+          type="text"
+          value={state.name}
+          onChange={handleFieldChange}
+          placeholder="Name on the card"
         />
-      </form>
-    );
-  }
+      </FormGroup>
+      <ControlLabel>Credit Card Info</ControlLabel>
+      <CardElement
+        className="card-field"
+        onChange={handleCardFieldChange}
+        style={{
+          base: { fontSize: "18px", fontFamily: '"Open Sans", sans-serif' }
+        }}
+      />
+      <LoaderButton
+        block
+        bsSize="large"
+        type="submit"
+        text="Purchase"
+        isLoading={isLoading}
+        loadingText="Purchasing…"
+        disabled={!validateForm()}
+      />
+    </form>
+  );
 }
 
 export default injectStripe(BillingForm);
 ```
 {% endraw %}
+
+REWRITE
 
 Let's quickly go over what we are doing here:
 

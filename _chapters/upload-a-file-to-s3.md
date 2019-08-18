@@ -30,7 +30,7 @@ $ mkdir src/libs/
 
 <img class="code-marker" src="/assets/s.png" />Add the following to `src/libs/awsLib.js`.
 
-``` coffee
+``` javascript
 import { Storage } from "aws-amplify";
 
 export async function s3Upload(file) {
@@ -61,29 +61,26 @@ Now that we have our upload methods ready, let's call them from the create note 
 <img class="code-marker" src="/assets/s.png" />Replace the `handleSubmit` method in `src/containers/NewNote.js` with the following.
 
 ``` javascript
-handleSubmit = async event => {
+async function handleSubmit(event) {
   event.preventDefault();
 
-  if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
+  if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
     alert(`Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE/1000000} MB.`);
     return;
   }
 
-  this.setState({ isLoading: true });
+  setIsLoading(true);
 
   try {
-    const attachment = this.file
-      ? await s3Upload(this.file)
+    const attachment = file.current
+      ? await s3Upload(file.current)
       : null;
 
-    await this.createNote({
-      attachment,
-      content: this.state.content
-    });
-    this.props.history.push("/");
+    await createNote({ content, attachment });
+    props.history.push("/");
   } catch (e) {
     alert(e);
-    this.setState({ isLoading: false });
+    setIsLoading(false);
   }
 }
 ```
@@ -93,6 +90,8 @@ handleSubmit = async event => {
 ``` javascript
 import { s3Upload } from "../libs/awsLib";
 ```
+
+REWRITE
 
 The change we've made in the `handleSubmit` is that:
 

@@ -19,45 +19,45 @@ Let's start by including Stripe.js in our HTML.
 <script src="https://js.stripe.com/v3/"></script>
 ```
 
+REWRITE
+
 <img class="code-marker" src="/assets/s.png" />Replace our `render` method in `src/containers/Settings.js` with this.
 
 ``` coffee
-handleFormSubmit = async (storage, { token, error }) => {
+async function handleFormSubmit(storage, { token, error }) {
   if (error) {
     alert(error);
     return;
   }
 
-  this.setState({ isLoading: true });
+  setIsLoading(true);
 
   try {
-    await this.billUser({
+    await billUser({
       storage,
       source: token.id
     });
 
     alert("Your card has been charged successfully!");
-    this.props.history.push("/");
+    props.history.push("/");
   } catch (e) {
     alert(e);
-    this.setState({ isLoading: false });
+    setIsLoading(false);
   }
 }
 
-render() {
-  return (
-    <div className="Settings">
-      <StripeProvider apiKey={config.STRIPE_KEY}>
-        <Elements>
-          <BillingForm
-            loading={this.state.isLoading}
-            onSubmit={this.handleFormSubmit}
-          />
-        </Elements>
-      </StripeProvider>
-    </div>
-  );
-}
+return (
+  <div className="Settings">
+    <StripeProvider apiKey={config.STRIPE_KEY}>
+      <Elements>
+        <BillingForm
+          loading={isLoading}
+          onSubmit={handleFormSubmit}
+        />
+      </Elements>
+    </StripeProvider>
+  </div>
+);
 ```
 
 <img class="code-marker" src="/assets/s.png" />And add the following to the header.

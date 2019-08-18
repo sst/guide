@@ -65,7 +65,7 @@ Next we'll set up AWS Amplify.
 <img class="code-marker" src="/assets/s.png" />Import it by adding the following to the header of your `src/index.js`.
 
 ``` coffee
-import Amplify from "aws-amplify";
+import Amplify from 'aws-amplify';
 ```
 
 And import the config we created above. 
@@ -73,7 +73,7 @@ And import the config we created above.
 <img class="code-marker" src="/assets/s.png" />Add the following, also to the header of your `src/index.js`.
 
 ``` coffee
-import config from "./config";
+import config from './config';
 ```
 
 <img class="code-marker" src="/assets/s.png" />And to initialize AWS Amplify; add the following above the `ReactDOM.render` line in `src/index.js`.

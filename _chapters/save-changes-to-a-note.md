@@ -13,42 +13,79 @@ Now that our note loads into our form, let's work on saving the changes we make 
 
 <img class="code-marker" src="/assets/s.png" />Replace the `handleSubmit` method in `src/containers/Notes.js` with the following.
 
-``` coffee
-saveNote(note) {
-  return API.put("notes", `/notes/${this.props.match.params.id}`, {
+``` javascript
+function saveNote(note) {
+  return API.put("notes", `/notes/${props.match.params.id}`, {
     body: note
   });
 }
 
-handleSubmit = async event => {
+async function handleSubmit(event) {
   let attachment;
 
   event.preventDefault();
 
-  if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
+  if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
     alert(`Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE/1000000} MB.`);
     return;
   }
 
-  this.setState({ isLoading: true });
+  dispatch({ type: "submitting" });
 
   try {
-    if (this.file) {
-      attachment = await s3Upload(this.file);
+    if (file.current) {
+      attachment = await s3Upload(file.current);
     }
 
-    await this.saveNote({
-      content: this.state.content,
-      attachment: attachment || this.state.note.attachment
+    await saveNote({
+      content: state.content,
+      attachment: attachment || state.note.attachment
     });
-    this.props.history.push("/");
+    props.history.push("/");
   } catch (e) {
     alert(e);
-    this.setState({ isLoading: false });
+    dispatch({ type: "submit-failed" });
   }
 }
-
 ```
+
+``` javascript
+function reducer(state, action) {
+  switch (action.type) {
+    case "load":
+      return {
+        ...state,
+        note: action.note,
+        content: action.content,
+        attachmentURL: action.attachmentURL
+      };
+    case "change":
+      return {
+        ...state,
+        [action.field]: action.value
+      };
+    case "submitting":
+      return {
+        ...state,
+        isLoading: true
+      };
+    case "submit-failed":
+      return {
+        ...state,
+        isLoading: false
+      };
+    case "deleting":
+      return {
+        ...state,
+        isDeleting: true
+      };
+    default:
+      throw new Error();
+  }
+}
+```
+
+REWRITE
 
 <img class="code-marker" src="/assets/s.png" />And include our `s3Upload` helper method in the header:
 

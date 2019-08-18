@@ -39,52 +39,66 @@ Of course this component doesn't exist yet and we are going to create it now.
 
 <img class="code-marker" src="/assets/s.png" />Create a new file `src/containers/Notes.js` and add the following.
 
-``` coffee
-import React, { Component } from "react";
+``` javascript
+import React, { useRef, useEffect, useReducer } from "react";
 import { API, Storage } from "aws-amplify";
 
-export default class Notes extends Component {
-  constructor(props) {
-    super(props);
-
-    this.file = null;
-
-    this.state = {
-      note: null,
-      content: "",
-      attachmentURL: null
-    };
-  }
-
-  async componentDidMount() {
-    try {
-      let attachmentURL;
-      const note = await this.getNote();
-      const { content, attachment } = note;
-
-      if (attachment) {
-        attachmentURL = await Storage.vault.get(attachment);
-      }
-
-      this.setState({
-        note,
-        content,
-        attachmentURL
-      });
-    } catch (e) {
-      alert(e);
-    }
-  }
-
-  getNote() {
-    return API.get("notes", `/notes/${this.props.match.params.id}`);
-  }
-
-  render() {
-    return <div className="Notes"></div>;
+function reducer(state, action) {
+  switch (action.type) {
+    case "load":
+      return {
+        ...state,
+        note: action.note,
+        content: action.content,
+        attachmentURL: action.attachmentURL
+      };
+    default:
+      throw new Error();
   }
 }
+
+export default function Notes(props) {
+  const file = useRef(null);
+  const [state, dispatch] = useReducer(reducer, {
+    note: null,
+    content: "",
+    attachmentURL: null
+  });
+
+  useEffect(() => {
+    function loadNote() {
+      return API.get("notes", `/notes/${props.match.params.id}`);
+    }
+
+    async function onLoad() {
+      try {
+        let attachmentURL;
+        const note = await loadNote();
+        const { content, attachment } = note;
+
+        if (attachment) {
+          attachmentURL = await Storage.vault.get(attachment);
+        }
+
+        dispatch({
+          type: "load",
+          note,
+          content,
+          attachmentURL
+        });
+      } catch (e) {
+        alert(e);
+      }
+    }
+
+    onLoad();
+  }, [props.match.params.id]);
+
+  return <div className="Notes"></div>;
+}
 ```
+
+REWRITE
 
 We are doing a couple of things here.
 

@@ -13,37 +13,39 @@ Now that our container loads a note on `componentDidMount`, let's go ahead and r
 
 <img class="code-marker" src="/assets/s.png" />Replace our placeholder `render` method in `src/containers/Notes.js` with the following.
 
-``` coffee
-validateForm() {
-  return this.state.content.length > 0;
+``` javascript
+function validateForm() {
+  return state.content.length > 0;
 }
 
-formatFilename(str) {
+function formatFilename(str) {
   return str.replace(/^\w+-/, "");
 }
 
-handleChange = event => {
-  this.setState({
-    [event.target.id]: event.target.value
+function handleChange(event) {
+  dispatch({
+    type: "change",
+    field: event.target.id,
+    value: event.target.value
   });
 }
 
-handleFileChange = event => {
-  this.file = event.target.files[0];
+function handleFileChange(event) {
+  file.current = event.target.files[0];
 }
 
-handleSubmit = async event => {
+async function handleSubmit(event) {
   event.preventDefault();
 
-  if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
+  if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
     alert(`Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE/1000000} MB.`);
     return;
   }
 
-  this.setState({ isLoading: true });
+  dispatch({ type: "submitting" });
 }
 
-handleDelete = async event => {
+async function handleDelete(event) {
   event.preventDefault();
 
   const confirmed = window.confirm(
@@ -54,63 +56,63 @@ handleDelete = async event => {
     return;
   }
 
-  this.setState({ isDeleting: true });
+  dispatch({ type: "deleting" });
 }
 
-render() {
-  return (
-    <div className="Notes">
-      {this.state.note &&
-        <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="content">
-            <FormControl
-              onChange={this.handleChange}
-              value={this.state.content}
-              componentClass="textarea"
-            />
-          </FormGroup>
-          {this.state.note.attachment &&
-            <FormGroup>
-              <ControlLabel>Attachment</ControlLabel>
-              <FormControl.Static>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={this.state.attachmentURL}
-                >
-                  {this.formatFilename(this.state.note.attachment)}
-                </a>
-              </FormControl.Static>
-            </FormGroup>}
-          <FormGroup controlId="file">
-            {!this.state.note.attachment &&
-              <ControlLabel>Attachment</ControlLabel>}
-            <FormControl onChange={this.handleFileChange} type="file" />
-          </FormGroup>
-          <LoaderButton
-            block
-            bsStyle="primary"
-            bsSize="large"
-            disabled={!this.validateForm()}
-            type="submit"
-            isLoading={this.state.isLoading}
-            text="Save"
-            loadingText="Saving…"
+return (
+  <div className="Notes">
+    {state.note &&
+      <form onSubmit={handleSubmit}>
+        <FormGroup controlId="content">
+          <FormControl
+            value={state.content}
+            componentClass="textarea"
+            onChange={handleChange}
           />
-          <LoaderButton
-            block
-            bsStyle="danger"
-            bsSize="large"
-            isLoading={this.state.isDeleting}
-            onClick={this.handleDelete}
-            text="Delete"
-            loadingText="Deleting…"
-          />
-        </form>}
-    </div>
-  );
-}
+        </FormGroup>
+        {state.note.attachment &&
+          <FormGroup>
+            <ControlLabel>Attachment</ControlLabel>
+            <FormControl.Static>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={state.attachmentURL}
+              >
+                {formatFilename(state.note.attachment)}
+              </a>
+            </FormControl.Static>
+          </FormGroup>}
+        <FormGroup controlId="file">
+          {!state.note.attachment &&
+            <ControlLabel>Attachment</ControlLabel>}
+          <FormControl onChange={handleFileChange} type="file" />
+        </FormGroup>
+        <LoaderButton
+          block
+          text="Save"
+          type="submit"
+          bsSize="large"
+          bsStyle="primary"
+          loadingText="Saving…"
+          isLoading={state.isLoading}
+          disabled={!validateForm()}
+        />
+        <LoaderButton
+          block
+          text="Delete"
+          bsSize="large"
+          bsStyle="danger"
+          loadingText="Deleting…"
+          onClick={handleDelete}
+          isLoading={state.isDeleting}
+        />
+      </form>}
+  </div>
+);
 ```
+
+REWRITE
 
 We are doing a few things here:
 
@@ -131,13 +133,46 @@ To complete this code, let's add `isLoading` and `isDeleting` to the state.
 <img class="code-marker" src="/assets/s.png" />So our new initial state in the `constructor` looks like so.
 
 ``` javascript
-this.state = {
-  isLoading: null,
-  isDeleting: null,
+const [state, dispatch] = useReducer(reducer, {
   note: null,
   content: "",
+  isLoading: null,
+  isDeleting: null,
   attachmentURL: null
-};
+});
+```
+
+REWRITE
+
+``` javascript
+function reducer(state, action) {
+  switch (action.type) {
+    case "load":
+      return {
+        ...state,
+        note: action.note,
+        content: action.content,
+        attachmentURL: action.attachmentURL
+      };
+    case "change":
+      return {
+        ...state,
+        [action.field]: action.value
+      };
+    case "submitting":
+      return {
+        ...state,
+        isLoading: true
+      };
+    case "deleting":
+      return {
+        ...state,
+        isDeleting: true
+      };
+    default:
+      throw new Error();
+  }
+}
 ```
 
 <img class="code-marker" src="/assets/s.png" />Let's also add some styles by adding the following to `src/containers/Notes.css`.

@@ -16,25 +16,31 @@ Now that we have our basic homepage set up, let's make the API call to render ou
 <img class="code-marker" src="/assets/s.png" />Add the following below the `constructor` block in `src/containers/Home.js`.
 
 ``` javascript
-async componentDidMount() {
-  if (!this.props.isAuthenticated) {
-    return;
+useEffect(() => {
+  async function onLoad() {
+    if (!props.isAuthenticated) {
+      return;
+    }
+
+    try {
+      const notes = await loadNotes();
+      setNotes(notes);
+    } catch (e) {
+      alert(e);
+    }
+
+    setIsLoading(false);
   }
 
-  try {
-    const notes = await this.notes();
-    this.setState({ notes });
-  } catch (e) {
-    alert(e);
-  }
+  onLoad();
+}, [props.isAuthenticated]);
 
-  this.setState({ isLoading: false });
-}
-
-notes() {
+function loadNotes() {
   return API.get("notes", "/notes");
 }
 ```
+
+REWRITE
 
 <img class="code-marker" src="/assets/s.png" />And include our Amplify API module in the header.
 
@@ -50,29 +56,24 @@ Now let's render the results.
 
 <img class="code-marker" src="/assets/s.png" />Replace our `renderNotesList` placeholder method with the following.
 
-``` coffee
-renderNotesList(notes) {
-  return [{}].concat(notes).map(
-    (note, i) =>
-      i !== 0
-        ? <LinkContainer
-            key={note.noteId}
-            to={`/notes/${note.noteId}`}
-          >
-            <ListGroupItem header={note.content.trim().split("\n")[0]}>
-              {"Created: " + new Date(note.createdAt).toLocaleString()}
-            </ListGroupItem>
-          </LinkContainer>
-        : <LinkContainer
-            key="new"
-            to="/notes/new"
-          >
-            <ListGroupItem>
-              <h4>
-                <b>{"\uFF0B"}</b> Create a new note
-              </h4>
-            </ListGroupItem>
-          </LinkContainer>
+``` javascript
+function renderNotesList(notes) {
+  return [{}].concat(notes).map((note, i) =>
+    i !== 0 ? (
+      <LinkContainer key={note.noteId} to={`/notes/${note.noteId}`}>
+        <ListGroupItem header={note.content.trim().split("\n")[0]}>
+          {"Created: " + new Date(note.createdAt).toLocaleString()}
+        </ListGroupItem>
+      </LinkContainer>
+    ) : (
+      <LinkContainer key="new" to="/notes/new">
+        <ListGroupItem>
+          <h4>
+            <b>{"\uFF0B"}</b> Create a new note
+          </h4>
+        </ListGroupItem>
+      </LinkContainer>
+    )
   );
 }
 ```
@@ -88,6 +89,8 @@ import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
 ``` javascript
 import { LinkContainer } from "react-router-bootstrap";
 ```
+
+REWRITE
 
 The code above does a few things.
 

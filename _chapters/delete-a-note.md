@@ -13,12 +13,12 @@ The last thing we need to do on the note page is allowing users to delete their 
 
 <img class="code-marker" src="/assets/s.png" />Replace our `handleDelete` method in `src/containers/Notes.js`.
 
-``` coffee
-deleteNote() {
-  return API.del("notes", `/notes/${this.props.match.params.id}`);
+``` javascript
+function deleteNote() {
+  return API.del("notes", `/notes/${props.match.params.id}`);
 }
 
-handleDelete = async event => {
+async function handleDelete(event) {
   event.preventDefault();
 
   const confirmed = window.confirm(
@@ -29,17 +29,60 @@ handleDelete = async event => {
     return;
   }
 
-  this.setState({ isDeleting: true });
+  dispatch({ type: "deleting" });
 
   try {
-    await this.deleteNote();
-    this.props.history.push("/");
+    await deleteNote();
+    props.history.push("/");
   } catch (e) {
     alert(e);
-    this.setState({ isDeleting: false });
+    dispatch({ type: "delete-failed" });
   }
 }
 ```
+
+``` javascript
+function reducer(state, action) {
+  switch (action.type) {
+    case "load":
+      return {
+        ...state,
+        note: action.note,
+        content: action.content,
+        attachmentURL: action.attachmentURL
+      };
+    case "change":
+      return {
+        ...state,
+        [action.field]: action.value
+      };
+    case "submitting":
+      return {
+        ...state,
+        isLoading: true
+      };
+    case "submit-failed":
+      return {
+        ...state,
+        isLoading: false
+      };
+    case "deleting":
+      return {
+        ...state,
+        isDeleting: true
+      };
+    case "delete-failed":
+      return {
+        ...state,
+        isDeleting: false
+      };
+    default:
+      throw new Error();
+  }
+}
+```
+
+REWRITE
 
 We are simply making a `DELETE` request to `/notes/:id` where we get the `id` from `this.props.match.params.id`. We use the `API.del` method from AWS Amplify to do so. This calls our delete API and we redirect to the homepage on success.
 

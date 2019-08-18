@@ -15,29 +15,27 @@ It's important that we give the user some feedback while we are logging them in.
 
 <img class="code-marker" src="/assets/s.png" />To do this we are going to add an `isLoading` flag to the state of our `src/containers/Login.js`. So the initial state in the `constructor` looks like the following.
 
+REWRITE
+
 ``` javascript
-this.state = {
-  isLoading: false,
-  email: "",
-  password: ""
-};
+const [isLoading, setIsLoading] = useState(false);
 ```
 
 <img class="code-marker" src="/assets/s.png" />And we'll update it while we are logging in. So our `handleSubmit` method now looks like so:
 
 ``` javascript
-handleSubmit = async event => {
+async function handleSubmit(event) {
   event.preventDefault();
 
-  this.setState({ isLoading: true });
+  setIsLoading(true);
 
   try {
-    await Auth.signIn(this.state.email, this.state.password);
-    this.props.userHasAuthenticated(true);
-    this.props.history.push("/");
+    await Auth.signIn(email, password);
+    props.userHasAuthenticated(true);
+    props.history.push("/");
   } catch (e) {
     alert(e.message);
-    this.setState({ isLoading: false });
+    setIsLoading(false);
   }
 }
 ```
@@ -48,27 +46,30 @@ Now to reflect the state change in our button we are going to render it differen
 
 <img class="code-marker" src="/assets/s.png" />Create a new file and add the following in `src/components/LoaderButton.js`.
 
-``` coffee
+``` javascript
 import React from "react";
 import { Button, Glyphicon } from "react-bootstrap";
 import "./LoaderButton.css";
 
-export default ({
-  isLoading,
+export default function LoaderButton({
   text,
+  isLoading,
   loadingText,
   className = "",
   disabled = false,
   ...props
-}) =>
-  <Button
-    className={`LoaderButton ${className}`}
-    disabled={disabled || isLoading}
-    {...props}
-  >
-    {isLoading && <Glyphicon glyph="refresh" className="spinning" />}
-    {!isLoading ? text : loadingText}
-  </Button>;
+}) {
+  return (
+    <Button
+      className={`LoaderButton ${className}`}
+      disabled={disabled || isLoading}
+      {...props}
+    >
+      {isLoading && <Glyphicon glyph="refresh" className="spinning" />}
+      {!isLoading ? text : loadingText}
+    </Button>
+  );
+}
 ```
 
 This is a really simple component that takes an `isLoading` flag and the text that the button displays in the two states (the default state and the loading state). The `disabled` prop is a result of what we have currently in our `Login` button. And we ensure that the button is disabled when `isLoading` is `true`. This makes it so that the user can't click it while we are in the process of logging them in.
@@ -97,6 +98,8 @@ Now we can use our new component in our `Login` container.
 
 <img class="code-marker" src="/assets/s.png" />In `src/containers/Login.js` find the `<Button>` component in the `render` method.
 
+REWRITE
+
 ``` html
 <Button
   block
@@ -113,12 +116,12 @@ Now we can use our new component in our `Login` container.
 ``` html
 <LoaderButton
   block
-  bsSize="large"
-  disabled={!this.validateForm()}
-  type="submit"
-  isLoading={this.state.isLoading}
   text="Login"
+  type="submit"
+  bsSize="large"
+  isLoading={isLoading}
   loadingText="Logging in…"
+  disabled={!validateForm()}
 />
 ```
 
