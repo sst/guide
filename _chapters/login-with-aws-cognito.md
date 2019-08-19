@@ -38,11 +38,9 @@ async function handleSubmit(event) {
 }
 ```
 
-REWRITE THIS
-
 We are doing two things of note here.
 
-1. We grab the `email` and `password` from `this.state` and call Amplify's `Auth.signIn()` method with it. This method returns a promise since it will be logging the user asynchronously.
+1. We grab the `email` and `password` and call Amplify's `Auth.signIn()` method. This method returns a promise since it will be logging in the user asynchronously.
 
 2. We use the `await` keyword to invoke the `Auth.signIn()` method that returns a promise. And we need to label our `handleSubmit` method as `async`.
 

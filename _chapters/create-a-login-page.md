@@ -63,15 +63,13 @@ export default function Login(props) {
 }
 ```
 
-REWRITE THIS
-
 We are introducing a couple of new concepts in this.
 
-1. In the constructor of our component we create a state object. This will be where we'll store what the user enters in the form.
+1. Right at the top of our component, we are using the [useState hook](https://reactjs.org/docs/hooks-state.html) to store what the user enters in the form. The `useState` hook just gives you the current value of the variable you want to store in the state and a function to set the new value. 
 
-2. We then connect the state to our two fields in the form by setting `this.state.email` and `this.state.password` as the `value` in our input fields. This means that when the state changes, React will re-render these components with the updated value.
+2. We then connect the state to our two fields in the form using the `setEmail` and `setPassword` functions to store what the user types in — `e.target.value`. Once we set the new state, our component gets re-rendered. The variables `email` and `password` now have the new values.
 
-3. But to update the state when the user types something into these fields, we'll call a handle function named `handleChange`. This function grabs the `id` (set as `controlId` for the `<FormGroup>`) of the field being changed and updates its state with the value the user is typing in. Also, to have access to the `this` keyword inside `handleChange` we store the reference to an anonymous function like so: `handleChange = (event) => { } `.
+3. We are setting the form controls to show the value of our two state variables `email` and `password`. In React, this pattern of displaying the current form value as a state variable and setting the new one when a user types something, is called a [Controlled Component](https://reactjs.org/docs/forms.html#controlled-components).
 
 4. We are setting the `autoFocus` flag for our email field, so that when our form loads, it sets focus to this field.
 
