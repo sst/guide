@@ -44,6 +44,7 @@ Serverless Stack is written and maintained by Frank Wang ([@fanjiewang](https://
 - [Matt Welke](https://mattwelke.com)
 - [Jamie Peebles](https://www.patreon.com/user/creators?u=19140426)
 - [Bernie Camus](https://www.lernard.com)
+- [Tekeste Kidanu](https://cleanmock.com)
 
 
 We'd like thank our sponsors and backers for supporting us!
