@@ -11,30 +11,30 @@ comments_id: set-custom-domains-through-seed/178
 
 Our serverless API uses API Gateway and it gives us some auto-generated endpoints. We would like to configure them to use a scheme like `api.my-domain.com` or something similar. This can take a few different steps through the AWS Console, but it is pretty straightforward to configure through [Seed](https://seed.run).
 
-From our **prod** stage, click on **View Resources**.
+Head over to our app settings.
 
-![Prod stage view deployment screenshot](/assets/part2/prod-stage-view-deployment.png)
+![Seed app pipeline screenshot](/assets/part2/seed-app-pipeline.png)
 
-This shows you a list of the API endpoints and Lambda functions that are a part of this deployment. Now click on **Settings**.
+Here click on **Edit Custom Domains**.
 
-![Prod stage deployment screenshot](/assets/part2/prod-stage-deployment.png)
+![Click Edit Custom Domains in app settings screenshot](/assets/part2/click-edit-custom-domains-in-app-settings.png)
 
-And hit **Update Custom Domain**.
+And click **Add** for our production endpoint.
 
-![Custom domain panel prod screenshot](/assets/part2/custom-domain-panel-prod.png)
+![Click Add for production endpoint in custom domain settings](/assets/part2/click-add-for-production-endpoint-in-custom-domain-settings.png)
 
 In the first part of the tutorial we had added our domain to Route 53. If you haven't done so you can [read more about it here](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html). Hit **Select a domain** and you should see a list of all your Route 53 domains. Select the one you intend to use. And fill in the sub-domain and base path. For example, you could use `api.my-domain.com/prod`; where `api` is the sub-domain and `prod` is the base path.
 
-And hit **Update**.
+And hit **Add Custom Domain**.
 
-![Custom domain details prod screenshot](/assets/part2/custom-domain-details-prod.png)
+![Click Add Custom Domain button for prod endpoint](/assets/part2/click-add-custom-domain-button-for-prod-endpoint.png)
 
 Seed will now go through and configure the domain for this API Gateway endpoint, create the SSL certificate and attach it to the domain. This process can take up to 40 mins.
 
-While we wait, we can do the same for our `dev` stage. Go into the **dev** stage > click **View Deployment** > click **Settings** > and hit **Update Custom Domain**. And select the domain, sub-domain, and base path. In our case we'll use something like `api.my-domain.com/dev`.
+While we wait, we can do the same for our `dev` endpoint. Select the domain, sub-domain, and base path. In our case we'll use something like `api.my-domain.com/dev`.
 
-![Custom domain details dev screenshot](/assets/part2/custom-domain-details-dev.png)
+![Click Add Custom Domain button for dev endpoint](/assets/part2/click-add-custom-domain-button-for-dev-endpoint.png)
 
-Hit **Update** and wait for the changes to take place.
+Hit **Add Custom Domain** and wait for the changes to take place.
 
 Once complete, we are ready to test our fully-configured serverless API backend!

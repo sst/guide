@@ -46,10 +46,6 @@ Now before we test our faulty code, we'll turn on API Gateway access logs so we 
 
 ![Click View Deployment in prod screenshot](/assets/part2/click-view-deployment-in-prod.png)
 
-Hit **Settings**.
-
-![Click deployment settings in prod screenshot](/assets/part2/click-deployment-settings-in-prod.png)
-
 Hit **Enable Access Logs**.
 
 ![Enable access logs in prod screenshot](/assets/part2/enable-access-logs-in-prod.png)
