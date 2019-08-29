@@ -15,8 +15,8 @@ Let's start by creating the signup form that'll get the user's email and passwor
 
 <img class="code-marker" src="/assets/s.png" />Create a new container at `src/containers/Signup.js` with the following.
 
-``` javascript
-import React, { useReducer } from "react";
+``` coffee
+import React, { useState } from "react";
 import {
   HelpBlock,
   FormGroup,
@@ -24,80 +24,45 @@ import {
   ControlLabel
 } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
+import { useFormFields } from "../libs/hooksLib";
 import "./Signup.css";
 
-function reducer(state, action) {
-  switch (action.type) {
-    case "change":
-      return {
-        ...state,
-        [action.field]: action.value
-      };
-    case "submitting":
-    case "confirming":
-      return {
-        ...state,
-        isLoading: true
-      };
-    case "submitted":
-      return {
-        ...state,
-        isLoading: false,
-        newUser: action.newUser
-      };
-    case "submit-failed":
-    case "confirm-failed":
-      return {
-        ...state,
-        isLoading: false
-      };
-    default:
-      throw new Error();
-  }
-}
-
 export default function Signup(props) {
-  const [state, dispatch] = useReducer(reducer, {
+  const [fields, handleFieldChange] = useFormFields({
     email: "",
     password: "",
-    newUser: null,
-    isLoading: false,
     confirmPassword: "",
     confirmationCode: ""
   });
+  const [newUser, setNewUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   function validateForm() {
     return (
-      state.email.length > 0 &&
-      state.password.length > 0 &&
-      state.password === state.confirmPassword
+      fields.email.length > 0 &&
+      fields.password.length > 0 &&
+      fields.password === fields.confirmPassword
     );
   }
 
   function validateConfirmationForm() {
-    return state.confirmationCode.length > 0;
-  }
-
-  function handleChange(event) {
-    dispatch({
-      type: "change",
-      field: event.target.id,
-      value: event.target.value
-    });
+    return fields.confirmationCode.length > 0;
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
 
-    dispatch({ type: "submitting" });
+    setIsLoading(true);
 
-    dispatch({ type: "submitted", newUser: "test" });
+    setNewUser("test");
+
+    setIsLoading(false);
   }
 
   async function handleConfirmationSubmit(event) {
     event.preventDefault();
 
-    dispatch({ type: "confirming" });
+    setIsLoading(true);
   }
 
   function renderConfirmationForm() {
@@ -108,20 +73,20 @@ export default function Signup(props) {
           <FormControl
             autoFocus
             type="tel"
-            value={state.confirmationCode}
-            onChange={handleChange}
+            onChange={handleFieldChange}
+            value={fields.confirmationCode}
           />
           <HelpBlock>Please check your email for the code.</HelpBlock>
         </FormGroup>
         <LoaderButton
           block
-          bsSize="large"
-          disabled={!validateConfirmationForm()}
           type="submit"
-          isLoading={state.isLoading}
-          text="Verify"
-          loadingText="Verifying…"
-        />
+          bsSize="large"
+          isLoading={isLoading}
+          disabled={!validateConfirmationForm()}
+        >
+          Verify
+        </LoaderButton>
       </form>
     );
   }
@@ -134,48 +99,46 @@ export default function Signup(props) {
           <FormControl
             autoFocus
             type="email"
-            value={state.email}
-            onChange={handleChange}
+            value={fields.email}
+            onChange={handleFieldChange}
           />
         </FormGroup>
         <FormGroup controlId="password" bsSize="large">
           <ControlLabel>Password</ControlLabel>
           <FormControl
-            value={state.password}
-            onChange={handleChange}
             type="password"
+            value={fields.password}
+            onChange={handleFieldChange}
           />
         </FormGroup>
         <FormGroup controlId="confirmPassword" bsSize="large">
           <ControlLabel>Confirm Password</ControlLabel>
           <FormControl
-            value={state.confirmPassword}
-            onChange={handleChange}
             type="password"
+            onChange={handleFieldChange}
+            value={fields.confirmPassword}
           />
         </FormGroup>
         <LoaderButton
           block
-          bsSize="large"
-          disabled={!validateForm()}
           type="submit"
-          isLoading={state.isLoading}
-          text="Signup"
-          loadingText="Signing up…"
-        />
+          bsSize="large"
+          isLoading={isLoading}
+          disabled={!validateForm()}
+        >
+          Signup
+        </LoaderButton>
       </form>
     );
   }
 
   return (
     <div className="Signup">
-      {state.newUser === null ? renderForm() : renderConfirmationForm()}
+      {newUser === null ? renderForm() : renderConfirmationForm()}
     </div>
   );
 }
 ```
-
-REWRITE
 
 Most of the things we are doing here are fairly straightforward but let's go over them quickly.
 
@@ -183,11 +146,13 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 2. We are using the `LoaderButton` component that we created earlier for our submit buttons.
 
-3. Since we have two forms we have two validation methods called `validateForm` and `validateConfirmationForm`.
+3. Since we have two forms we have two validation functions called `validateForm` and `validateConfirmationForm`.
 
 4. We are setting the `autoFocus` flags on the email and the confirmation code fields.
 
 5. For now our `handleSubmit` and `handleConfirmationSubmit` don't do a whole lot besides setting the `isLoading` state and a dummy value for the `newUser` state.
+
+6. And you'll notice we are using the `useFormFields` custom React Hook that we [previously created]({% link _chapters/create-a-custom-react-hook-to-handle-form-fields.md %}) to handle our form fields.
 
 <img class="code-marker" src="/assets/s.png" />Also, let's add a couple of styles in `src/containers/Signup.css`.
 

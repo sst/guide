@@ -13,7 +13,7 @@ Currently we are only removing the user session from our app's state. But when w
 
 AWS Amplify has a `Auth.signOut()` method that helps clear it out.
 
-<img class="code-marker" src="/assets/s.png" />Let's replace the `handleLogout` method in our `src/App.js` with this:
+<img class="code-marker" src="/assets/s.png" />Let's replace the `handleLogout` function in our `src/App.js` with this:
 
 ``` javascript
 async function handleLogout() {

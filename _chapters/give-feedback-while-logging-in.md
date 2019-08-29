@@ -13,15 +13,13 @@ It's important that we give the user some feedback while we are logging them in.
 
 ### Use an isLoading Flag
 
-<img class="code-marker" src="/assets/s.png" />To do this we are going to add an `isLoading` flag to the state of our `src/containers/Login.js`. So the initial state in the `constructor` looks like the following.
-
-REWRITE
+<img class="code-marker" src="/assets/s.png" />To do this we are going to add an `isLoading` flag to the state of our `src/containers/Login.js`. Add the following to the top of our `Login` function component.
 
 ``` javascript
 const [isLoading, setIsLoading] = useState(false);
 ```
 
-<img class="code-marker" src="/assets/s.png" />And we'll update it while we are logging in. So our `handleSubmit` method now looks like so:
+<img class="code-marker" src="/assets/s.png" />And we'll update it while we are logging in. So our `handleSubmit` function now looks like so:
 
 ``` javascript
 async function handleSubmit(event) {
@@ -46,15 +44,13 @@ Now to reflect the state change in our button we are going to render it differen
 
 <img class="code-marker" src="/assets/s.png" />Create a new file and add the following in `src/components/LoaderButton.js`.
 
-``` javascript
+``` coffee
 import React from "react";
 import { Button, Glyphicon } from "react-bootstrap";
 import "./LoaderButton.css";
 
 export default function LoaderButton({
-  text,
   isLoading,
-  loadingText,
   className = "",
   disabled = false,
   ...props
@@ -66,7 +62,7 @@ export default function LoaderButton({
       {...props}
     >
       {isLoading && <Glyphicon glyph="refresh" className="spinning" />}
-      {!isLoading ? text : loadingText}
+      {props.children}
     </Button>
   );
 }
@@ -96,15 +92,13 @@ This spins the refresh Glyphicon infinitely with each spin taking a second. And 
 
 Now we can use our new component in our `Login` container.
 
-<img class="code-marker" src="/assets/s.png" />In `src/containers/Login.js` find the `<Button>` component in the `render` method.
-
-REWRITE
+<img class="code-marker" src="/assets/s.png" />In `src/containers/Login.js` find the `<Button>` component in the `return` statement.
 
 ``` html
 <Button
   block
   bsSize="large"
-  disabled={!this.validateForm()}
+  disabled={!validateForm()}
   type="submit"
 >
   Login
@@ -116,13 +110,13 @@ REWRITE
 ``` html
 <LoaderButton
   block
-  text="Login"
   type="submit"
   bsSize="large"
   isLoading={isLoading}
-  loadingText="Logging in…"
   disabled={!validateForm()}
-/>
+>
+  Login
+</LoaderButton>
 ```
 
 <img class="code-marker" src="/assets/s.png" />Also, import the `LoaderButton` in the header. And remove the reference to the `Button` component.

@@ -122,6 +122,8 @@ build-react:
           url: /chapters/redirect-on-login-and-logout.html
         - page: Give feedback while logging in
           url: /chapters/give-feedback-while-logging-in.html
+        - page: Create a Custom React Hook to Handle Form Fields
+          url: /chapters/create-a-custom-react-hook-to-handle-form-fields.html
     - page: Create a signup page
       url: /chapters/create-a-signup-page.html
       subchapters:

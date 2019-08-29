@@ -69,6 +69,7 @@ Notice that we added a route for our new settings page.
 
 REWRITE
 
+{% raw %}
 ``` coffee
 return (
   !isAuthenticating && (
@@ -107,6 +108,7 @@ return (
   )
 );
 ```
+{% endraw %}
 
 You'll notice that we added another link in the navbar that only displays when a user is logged in.
 
