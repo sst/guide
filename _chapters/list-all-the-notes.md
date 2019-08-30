@@ -15,7 +15,7 @@ Currently, our Home container is very simple. Let's add the conditional renderin
 
 <img class="code-marker" src="/assets/s.png" />Replace our `src/containers/Home.js` with the following.
 
-``` javascript
+``` coffee
 import React, { useState } from "react";
 import { PageHeader, ListGroup } from "react-bootstrap";
 import "./Home.css";
@@ -56,11 +56,9 @@ export default function Home(props) {
 }
 ```
 
-REWRITE
-
 We are doing a few things of note here:
 
-1. Rendering the lander or the list of notes based on `this.props.isAuthenticated`.
+1. Rendering the lander or the list of notes based on `props.isAuthenticated`.
 
 2. Store our notes in the state. Currently, it's empty but we'll be calling our API for it.
 

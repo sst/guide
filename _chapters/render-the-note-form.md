@@ -11,23 +11,15 @@ ref: render-the-note-form
 
 Now that our container loads a note on `componentDidMount`, let's go ahead and render the form that we'll use to edit it.
 
-<img class="code-marker" src="/assets/s.png" />Replace our placeholder `render` method in `src/containers/Notes.js` with the following.
+<img class="code-marker" src="/assets/s.png" />Replace our placeholder `return` statement in `src/containers/Notes.js` with the following.
 
-``` javascript
+``` coffee
 function validateForm() {
-  return state.content.length > 0;
+  return content.length > 0;
 }
 
 function formatFilename(str) {
   return str.replace(/^\w+-/, "");
-}
-
-function handleChange(event) {
-  dispatch({
-    type: "change",
-    field: event.target.id,
-    value: event.target.value
-  });
 }
 
 function handleFileChange(event) {
@@ -35,14 +27,19 @@ function handleFileChange(event) {
 }
 
 async function handleSubmit(event) {
+  let attachment;
+
   event.preventDefault();
 
   if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
-    alert(`Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE/1000000} MB.`);
+    alert(
+      `Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE /
+        1000000} MB.`
+    );
     return;
   }
 
-  dispatch({ type: "submitting" });
+  setIsLoading(true);
 }
 
 async function handleDelete(event) {
@@ -56,69 +53,68 @@ async function handleDelete(event) {
     return;
   }
 
-  dispatch({ type: "deleting" });
+  setIsDeleting(true);
 }
 
 return (
   <div className="Notes">
-    {state.note &&
+    {note && (
       <form onSubmit={handleSubmit}>
         <FormGroup controlId="content">
           <FormControl
-            value={state.content}
+            value={content}
             componentClass="textarea"
-            onChange={handleChange}
+            onChange={e => setContent(e.target.value)}
           />
         </FormGroup>
-        {state.note.attachment &&
+        {note.attachment && (
           <FormGroup>
             <ControlLabel>Attachment</ControlLabel>
             <FormControl.Static>
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                href={state.attachmentURL}
+                href={note.attachmentURL}
               >
-                {formatFilename(state.note.attachment)}
+                {formatFilename(note.attachment)}
               </a>
             </FormControl.Static>
-          </FormGroup>}
+          </FormGroup>
+        )}
         <FormGroup controlId="file">
-          {!state.note.attachment &&
-            <ControlLabel>Attachment</ControlLabel>}
+          {!note.attachment && <ControlLabel>Attachment</ControlLabel>}
           <FormControl onChange={handleFileChange} type="file" />
         </FormGroup>
         <LoaderButton
           block
-          text="Save"
           type="submit"
           bsSize="large"
           bsStyle="primary"
-          loadingText="Saving…"
-          isLoading={state.isLoading}
+          isLoading={isLoading}
           disabled={!validateForm()}
-        />
+        >
+          Save
+        </LoaderButton>
         <LoaderButton
           block
-          text="Delete"
           bsSize="large"
           bsStyle="danger"
-          loadingText="Deleting…"
           onClick={handleDelete}
-          isLoading={state.isDeleting}
-        />
-      </form>}
+          isLoading={isDeleting}
+        >
+          Delete
+        </LoaderButton>
+      </form>
+    )}
   </div>
 );
 ```
 
-REWRITE
-
 We are doing a few things here:
 
-1. We render our form only when `this.state.note` is available.
+1. We render our form only when the `note` state variable is set.
 
-2. Inside the form we conditionally render the part where we display the attachment by using `this.state.note.attachment`.
+2. Inside the form we conditionally render the part where we display the attachment by using `note.attachment`.
 
 3. We format the attachment URL using `formatFilename` by stripping the timestamp we had added to the filename while uploading it.
 
@@ -130,49 +126,14 @@ We are doing a few things here:
 
 To complete this code, let's add `isLoading` and `isDeleting` to the state.
 
-<img class="code-marker" src="/assets/s.png" />So our new initial state in the `constructor` looks like so.
+<img class="code-marker" src="/assets/s.png" />So our new state and ref declarations at the top of our `Notes` component function look like this.
 
 ``` javascript
-const [state, dispatch] = useReducer(reducer, {
-  note: null,
-  content: "",
-  isLoading: null,
-  isDeleting: null,
-  attachmentURL: null
-});
-```
-
-REWRITE
-
-``` javascript
-function reducer(state, action) {
-  switch (action.type) {
-    case "load":
-      return {
-        ...state,
-        note: action.note,
-        content: action.content,
-        attachmentURL: action.attachmentURL
-      };
-    case "change":
-      return {
-        ...state,
-        [action.field]: action.value
-      };
-    case "submitting":
-      return {
-        ...state,
-        isLoading: true
-      };
-    case "deleting":
-      return {
-        ...state,
-        isDeleting: true
-      };
-    default:
-      throw new Error();
-  }
-}
+const file = useRef(null);
+const [note, setNote] = useState(null);
+const [content, setContent] = useState("");
+const [isLoading, setIsLoading] = useState(false);
+const [isDeleting, setIsDeleting] = useState(false);
 ```
 
 <img class="code-marker" src="/assets/s.png" />Let's also add some styles by adding the following to `src/containers/Notes.css`.

@@ -13,10 +13,10 @@ Let's make a couple of quick changes to test the process of deploying updates to
 
 We are going to add a Login and Signup button to our lander to give users a clear call to action.
 
-<img class="code-marker" src="/assets/s.png" />To do this update our `renderLander` method in `src/containers/Home.js`.
+<img class="code-marker" src="/assets/s.png" />To do this update our `renderLander` function in `src/containers/Home.js`.
 
 ``` coffee
-renderLander() {
+function renderLander() {
   return (
     <div className="lander">
       <h1>Scratch</h1>

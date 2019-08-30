@@ -19,9 +19,7 @@ Let's start by including Stripe.js in our HTML.
 <script src="https://js.stripe.com/v3/"></script>
 ```
 
-REWRITE
-
-<img class="code-marker" src="/assets/s.png" />Replace our `render` method in `src/containers/Settings.js` with this.
+<img class="code-marker" src="/assets/s.png" />Replace our `return` statement in `src/containers/Settings.js` with this.
 
 ``` coffee
 async function handleFormSubmit(storage, { token, error }) {
@@ -51,7 +49,7 @@ return (
     <StripeProvider apiKey={config.STRIPE_KEY}>
       <Elements>
         <BillingForm
-          loading={isLoading}
+          isLoading={isLoading}
           onSubmit={handleFormSubmit}
         />
       </Elements>
@@ -69,7 +67,7 @@ import config from "../config";
 import "./Settings.css";
 ```
 
-We are adding the `BillingForm` component that we previously created here and passing in the `loading` and `onSubmit` prop that we referenced in the last chapter. In the `handleFormSubmit` method, we are checking if the Stripe method from the last chapter returned an error. And if things looked okay then we call our billing API and redirect to the home page after letting the user know.
+We are adding the `BillingForm` component that we previously created here and passing in the `isLoading` and `onSubmit` prop that we referenced in the previous chapter. In the `handleFormSubmit` method, we are checking if the Stripe method returned an error. And if things looked okay then we call our billing API and redirect to the home page after letting the user know.
 
 An important detail here is about the `StripeProvider` and the `Elements` component that we are using. The `StripeProvider` component let's the Stripe SDK know that we want to call the Stripe methods using `config.STRIPE_KEY`. And it needs to wrap around at the top level of our billing form. Similarly, the `Elements` component needs to wrap around any component that is going to be using the `CardElement` Stripe component.
 

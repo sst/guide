@@ -23,87 +23,41 @@ Next let's create our billing form component.
 
 {% raw %}
 ``` coffee
-import React, { useReducer } from "react";
+import React, { useState } from "react";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import LoaderButton from "./LoaderButton";
+import { useFormFields } from "../libs/hooksLib";
 import "./BillingForm.css";
 
-function reducer(state, action) {
-  switch (action.type) {
-    case "change":
-      return {
-        ...state,
-        [action.field]: action.value
-      };
-    case "card-change":
-      return {
-        ...state,
-        isCardComplete: action.isCardComplete
-      };
-    case "processing":
-      return {
-        ...state,
-        isProcessing: true
-      };
-    case "processed":
-      return {
-        ...state,
-        isProcessing: false
-      };
-    default:
-      throw new Error();
-  }
-}
-
-function BillingForm({
-  loading,
-  onSubmit,
-  ...props
-}) {
-  const [state, dispatch] = useReducer(reducer, {
+function BillingForm({ isLoading, onSubmit, ...props }) {
+  const [fields, handleFieldChange] = useFormFields({
     name: "",
-    storage: "",
-    isProcessing: false,
-    isCardComplete: false
+    storage: ""
   });
-  const isLoading = state.isProcessing || props.loading;
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isCardComplete, setIsCardComplete] = useState(false);
+
+  isLoading = isProcessing || isLoading;
 
   function validateForm() {
     return (
-      state.name !== "" &&
-      state.storage !== "" &&
-      state.isCardComplete
+      fields.name !== "" &&
+      fields.storage !== "" &&
+      isCardComplete
     );
-  }
-
-  function handleFieldChange(event) {
-    dispatch({
-      type: "change",
-      field: event.target.id,
-      value: event.target.value
-    });
-  }
-
-  function handleCardFieldChange(event) {
-    dispatch({
-      type: "card-change",
-      isCardComplete: event.complete
-    });
   }
 
   async function handleSubmitClick(event) {
     event.preventDefault();
 
-    const { name } = state;
+    setIsProcessing(true);
 
-    dispatch({ type: "processing" });
+    const { token, error } = await props.stripe.createToken({ name: fields.name });
 
-    const { token, error } = await props.stripe.createToken({ name });
+    setIsProcessing(false);
 
-    dispatch({ type: "processed" });
-
-    onSubmit(state.storage, { token, error });
+    onSubmit(fields.storage, { token, error });
   }
 
   return (
@@ -113,7 +67,7 @@ function BillingForm({
         <FormControl
           min="0"
           type="number"
-          value={state.storage}
+          value={fields.storage}
           onChange={handleFieldChange}
           placeholder="Number of notes to store"
         />
@@ -123,7 +77,7 @@ function BillingForm({
         <ControlLabel>Cardholder&apos;s name</ControlLabel>
         <FormControl
           type="text"
-          value={state.name}
+          value={fields.name}
           onChange={handleFieldChange}
           placeholder="Name on the card"
         />
@@ -131,20 +85,20 @@ function BillingForm({
       <ControlLabel>Credit Card Info</ControlLabel>
       <CardElement
         className="card-field"
-        onChange={handleCardFieldChange}
+        onChange={e => setIsCardComplete(e.complete)}
         style={{
           base: { fontSize: "18px", fontFamily: '"Open Sans", sans-serif' }
         }}
       />
       <LoaderButton
         block
-        bsSize="large"
         type="submit"
-        text="Purchase"
+        bsSize="large"
         isLoading={isLoading}
-        loadingText="Purchasing…"
         disabled={!validateForm()}
-      />
+      >
+        Purchase
+      </LoaderButton>
     </form>
   );
 }
@@ -153,21 +107,19 @@ export default injectStripe(BillingForm);
 ```
 {% endraw %}
 
-REWRITE
-
 Let's quickly go over what we are doing here:
 
-- To begin with we are going to wrap our component with a Stripe module using the `injectStripe` HOC. This gives our component access to the `this.props.stripe.createToken` method.
+- To begin with we are going to wrap our component with a Stripe module using the `injectStripe` HOC. This gives our component access to the `props.stripe.createToken` method.
 
-- As for the fields in our form, we have input field of type `number` that allows a user to enter the number of notes they want to store. We also take the name on the credit card. These are stored in the state through the `this.handleFieldChange` method.
+- As for the fields in our form, we have input field of type `number` that allows a user to enter the number of notes they want to store. We also take the name on the credit card. These are stored in the state through the `handleFieldChange` method that we get from our `useFormFields` custom React Hook.
 
 - The credit card number form is provided by the Stripe React SDK through the `CardElement` component that we import in the header.
 
-- The submit button has a loading state that is set to true when we call Stripe to get a token and when we call our billing API. However, since our Settings container is calling the billing API we use the `this.props.loading` to set the state of the button from the Settings container.
+- The submit button has a loading state that is set to true when we call Stripe to get a token and when we call our billing API. However, since our Settings container is calling the billing API we use the `props.isLoading` to set the state of the button from the Settings container.
 
 - We also validate this form by checking if the name, the number of notes, and the card details are complete. For the card details, we use the CardElement's `onChange` method.
 
-- Finally, once the user completes and submits the form we make a call to Stripe by passing in the credit card name and the credit card details (this is handled by the Stripe SDK). We call the `this.props.stripe.createToken` method and in return we get the token or an error back. We simply pass this and the number of notes to be stored to the settings page via the `this.props.onSubmit` method. We will be setting this up shortly.
+- Finally, once the user completes and submits the form we make a call to Stripe by passing in the credit card name and the credit card details (this is handled by the Stripe SDK). We call the `props.stripe.createToken` method and in return we get the token or an error back. We simply pass this and the number of notes to be stored to the settings page via the `onSubmit` method. We will be setting this up shortly.
 
 You can read more about how to use the [React Stripe Elements here](https://github.com/stripe/react-stripe-elements).
 

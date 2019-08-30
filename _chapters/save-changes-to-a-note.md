@@ -11,7 +11,7 @@ ref: save-changes-to-a-note
 
 Now that our note loads into our form, let's work on saving the changes we make to that note.
 
-<img class="code-marker" src="/assets/s.png" />Replace the `handleSubmit` method in `src/containers/Notes.js` with the following.
+<img class="code-marker" src="/assets/s.png" />Replace the `handleSubmit` function in `src/containers/Notes.js` with the following.
 
 ``` javascript
 function saveNote(note) {
@@ -26,11 +26,14 @@ async function handleSubmit(event) {
   event.preventDefault();
 
   if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
-    alert(`Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE/1000000} MB.`);
+    alert(
+      `Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE /
+        1000000} MB.`
+    );
     return;
   }
 
-  dispatch({ type: "submitting" });
+  setIsLoading(true);
 
   try {
     if (file.current) {
@@ -38,54 +41,16 @@ async function handleSubmit(event) {
     }
 
     await saveNote({
-      content: state.content,
-      attachment: attachment || state.note.attachment
+      content,
+      attachment: attachment || note.attachment
     });
     props.history.push("/");
   } catch (e) {
     alert(e);
-    dispatch({ type: "submit-failed" });
+    setIsLoading(false);
   }
 }
 ```
-
-``` javascript
-function reducer(state, action) {
-  switch (action.type) {
-    case "load":
-      return {
-        ...state,
-        note: action.note,
-        content: action.content,
-        attachmentURL: action.attachmentURL
-      };
-    case "change":
-      return {
-        ...state,
-        [action.field]: action.value
-      };
-    case "submitting":
-      return {
-        ...state,
-        isLoading: true
-      };
-    case "submit-failed":
-      return {
-        ...state,
-        isLoading: false
-      };
-    case "deleting":
-      return {
-        ...state,
-        isDeleting: true
-      };
-    default:
-      throw new Error();
-  }
-}
-```
-
-REWRITE
 
 <img class="code-marker" src="/assets/s.png" />And include our `s3Upload` helper method in the header:
 
@@ -95,9 +60,9 @@ import { s3Upload } from "../libs/awsLib";
 
 The code above is doing a couple of things that should be very similar to what we did in the `NewNote` container.
 
-1. If there is a file to upload we call `s3Upload` to upload it and save the key we get from S3.
+1. If there is a file to upload we call `s3Upload` to upload it and save the key we get from S3. If there isn't then we simply save the existing attachment object, `note.attachment`.
 
-2. We save the note by making a `PUT` request with the note object to `/notes/:id` where we get the `id` from `this.props.match.params.id`. We use the `API.put()` method from AWS Amplify.
+2. We save the note by making a `PUT` request with the note object to `/notes/:id` where we get the `id` from `props.match.params.id`. We use the `API.put()` method from AWS Amplify.
 
 3. And on success we redirect the user to the homepage.
 

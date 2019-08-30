@@ -13,7 +13,7 @@ Now that we have our basic homepage set up, let's make the API call to render ou
 
 ### Make the Request
 
-<img class="code-marker" src="/assets/s.png" />Add the following below the `constructor` block in `src/containers/Home.js`.
+<img class="code-marker" src="/assets/s.png" />Add the following right below the state variable declarations in `src/containers/Home.js`.
 
 ``` javascript
 useEffect(() => {
@@ -40,7 +40,9 @@ function loadNotes() {
 }
 ```
 
-REWRITE
+We are using the [useEffect React Hook](https://reactjs.org/docs/hooks-effect.html). We covered how this works back in the [Load the State from the Session]({% link _chapters/load-the-state-from-the-session.md %}) chapter.
+
+Let's quickly go over how we are using it here. We want to make a request to our `/notes` API to get the list of notes when our component first loads. But only if the user is authenticated. Since our hook relies on `props.isAuthenticated`, we need to pass it in as the second argument in the `useEffect` call as an element in the array. This is basically telling React that we only want to run our Hook again when the `props.isAuthenticated` value changes.
 
 <img class="code-marker" src="/assets/s.png" />And include our Amplify API module in the header.
 
@@ -48,15 +50,13 @@ REWRITE
 import { API } from "aws-amplify";
 ```
 
-All this does, is make a GET request to `/notes` on `componentDidMount` and puts the results in the `notes` object in the state.
-
 Now let's render the results.
 
 ### Render the List
 
 <img class="code-marker" src="/assets/s.png" />Replace our `renderNotesList` placeholder method with the following.
 
-``` javascript
+``` coffee
 function renderNotesList(notes) {
   return [{}].concat(notes).map((note, i) =>
     i !== 0 ? (
@@ -89,8 +89,6 @@ import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
 ``` javascript
 import { LinkContainer } from "react-router-bootstrap";
 ```
-
-REWRITE
 
 The code above does a few things.
 

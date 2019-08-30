@@ -48,8 +48,11 @@
 
   var clipboard = new ClipboardJS(".clipbutton", {
     text: function(trigger) {
-      // Remove "$" from "$ mkdir some-command"
-      return trigger.nextElementSibling.innerText.replace(/^\$ /gm, '');
+      return trigger.nextElementSibling.innerText
+        // Remove extra line at the end
+        .replace(/\n$/, '')
+        // Remove "$" from "$ mkdir some-command"
+        .replace(/^\$ /gm, '');
     }
   });
 

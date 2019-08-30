@@ -37,29 +37,29 @@ This method takes the querystring param we want to read and returns it.
 
 Now let's update our component to use this parameter when it redirects.
 
-<img class="code-marker" src="/assets/s.png" />Replace our current `export default ({ component: C, props: cProps, ...rest }) => {` method with the following.
+<img class="code-marker" src="/assets/s.png" />Replace our current `UnauthenticatedRoute` function component with the following.
 
 ``` coffee
-export default ({ component: C, props: cProps, ...rest }) => {
+export default function UnauthenticatedRoute({ component: C, appProps, ...rest }) {
   const redirect = querystring("redirect");
   return (
     <Route
       {...rest}
       render={props =>
-        !cProps.isAuthenticated
-          ? <C {...props} {...cProps} />
+        !appProps.isAuthenticated
+          ? <C {...props} {...appProps} />
           : <Redirect
               to={redirect === "" || redirect === null ? "/" : redirect}
             />}
     />
   );
-};
+}
 ```
 
 <img class="code-marker" src="/assets/s.png" />And remove the following from the `handleSubmit` method in `src/containers/Login.js`.
 
 ``` coffee
-this.props.history.push("/");
+props.history.push("/");
 ```
 
 Now our login page should redirect after we login.

@@ -20,7 +20,7 @@ Let's add a route for the note page that we are going to create.
 <img class="code-marker" src="/assets/s.png" />Add the following line to `src/Routes.js` below our `/notes/new` route. We are using the `AppliedRoute` component that we created in the [Add the session to the state]({% link _chapters/add-the-session-to-the-state.md %}) chapter.
 
 ``` coffee
-<AppliedRoute path="/notes/:id" exact component={Notes} props={childProps} />
+<AppliedRoute path="/notes/:id" exact component={Notes} appProps={appProps} />
 ```
 
 This is important because we are going to be pattern matching to extract our note id from the URL.
@@ -39,31 +39,14 @@ Of course this component doesn't exist yet and we are going to create it now.
 
 <img class="code-marker" src="/assets/s.png" />Create a new file `src/containers/Notes.js` and add the following.
 
-``` javascript
-import React, { useRef, useEffect, useReducer } from "react";
+``` coffee
+import React, { useRef, useState, useEffect } from "react";
 import { API, Storage } from "aws-amplify";
-
-function reducer(state, action) {
-  switch (action.type) {
-    case "load":
-      return {
-        ...state,
-        note: action.note,
-        content: action.content,
-        attachmentURL: action.attachmentURL
-      };
-    default:
-      throw new Error();
-  }
-}
 
 export default function Notes(props) {
   const file = useRef(null);
-  const [state, dispatch] = useReducer(reducer, {
-    note: null,
-    content: "",
-    attachmentURL: null
-  });
+  const [note, setNote] = useState(null);
+  const [content, setContent] = useState("");
 
   useEffect(() => {
     function loadNote() {
@@ -72,20 +55,15 @@ export default function Notes(props) {
 
     async function onLoad() {
       try {
-        let attachmentURL;
         const note = await loadNote();
         const { content, attachment } = note;
 
         if (attachment) {
-          attachmentURL = await Storage.vault.get(attachment);
+          note.attachmentURL = await Storage.vault.get(attachment);
         }
 
-        dispatch({
-          type: "load",
-          note,
-          content,
-          attachmentURL
-        });
+        setContent(content);
+        setNote(note);
       } catch (e) {
         alert(e);
       }
@@ -94,17 +72,17 @@ export default function Notes(props) {
     onLoad();
   }, [props.match.params.id]);
 
-  return <div className="Notes"></div>;
+  return (
+    <div className="Notes"></div>
+  );
 }
 ```
 
-REWRITE
-
 We are doing a couple of things here.
 
-1. Load the note on `componentDidMount` and save it to the state. We get the `id` of our note from the URL using the props automatically passed to us by React-Router in `this.props.match.params.id`. The keyword `id` is a part of the pattern matching in our route (`/notes/:id`).
+1. We are using the `useEffect` Hook to load the note when our component first loads. We then save it to the state. We get the `id` of our note from the URL using the props automatically passed to us by React-Router in `props.match.params.id`. The keyword `id` is a part of the pattern matching in our route (`/notes/:id`).
 
-2. If there is an attachment, we use the key to get a secure link to the file we uploaded to S3. We then store this to the component's state as `attachmentURL`.
+2. If there is an attachment, we use the key to get a secure link to the file we uploaded to S3. We then store this in the new note object as `note.attachmentURL`.
 
 3. The reason why we have the `note` object in the state along with the `content` and the `attachmentURL` is because we will be using this later when the user edits the note.
 

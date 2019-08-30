@@ -18,13 +18,13 @@ Let's first create a route that will check if the user is logged in before routi
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-export default function AuthenticatedRoute({ component: C, props: cProps, ...rest }) {
+export default function AuthenticatedRoute({ component: C, appProps, ...rest }) {
   return (
     <Route
       {...rest}
       render={props =>
-        cProps.isAuthenticated
-          ? <C {...props} {...cProps} />
+        appProps.isAuthenticated
+          ? <C {...props} {...appProps} />
           : <Redirect
               to={`/login?redirect=${props.location.pathname}${props.location
                 .search}`}
@@ -40,17 +40,17 @@ We'll do something similar to ensure that the user is not authenticated.
 
 <img class="code-marker" src="/assets/s.png" />Add the following to `src/components/UnauthenticatedRoute.js`.
 
-``` javascript
+``` coffee
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-export default function UnauthenticatedRoute({ component: C, props: cProps, ...rest }) {
+export default function UnauthenticatedRoute({ component: C, appProps, ...rest }) {
   return (
     <Route
       {...rest}
       render={props =>
-        !cProps.isAuthenticated
-          ? <C {...props} {...cProps} />
+        !appProps.isAuthenticated
+          ? <C {...props} {...appProps} />
           : <Redirect to="/" />}
     />
   );

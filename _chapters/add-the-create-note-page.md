@@ -113,7 +113,7 @@ MAX_ATTACHMENT_SIZE: 5000000,
 <img class="code-marker" src="/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our signup route. We are using the `AppliedRoute` component that we created in the [Add the session to the state]({% link _chapters/add-the-session-to-the-state.md %}) chapter.
 
 ``` coffee
-<AppliedRoute path="/notes/new" exact component={NewNote} props={childProps} />
+<AppliedRoute path="/notes/new" exact component={NewNote} appProps={appProps} />
 ```
 
 <img class="code-marker" src="/assets/s.png" />And include our component in the header.

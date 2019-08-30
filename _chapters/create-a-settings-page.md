@@ -40,8 +40,6 @@ export default function Settings(props) {
 }
 ```
 
-REWRITE
-
 <img class="code-marker" src="/assets/s.png" />Next import this component in the header of `src/Routes.js`.
 
 ``` js
@@ -52,13 +50,13 @@ import Settings from "./containers/Settings";
 
 ``` coffee
 <Switch>
-  <AppliedRoute path="/" exact component={Home} props={childProps} />
-  <UnauthenticatedRoute path="/login" exact component={Login} props={childProps} />
-  <UnauthenticatedRoute path="/signup" exact component={Signup} props={childProps} />
-  <AuthenticatedRoute path="/settings" exact component={Settings} props={childProps} />
-  <AuthenticatedRoute path="/notes/new" exact component={NewNote} props={childProps} />
-  <AuthenticatedRoute path="/notes/:id" exact component={Notes} props={childProps} />
-  { /* Finally, catch all unmatched routes */ }
+  <AppliedRoute path="/" exact component={Home} appProps={appProps} />
+  <UnauthenticatedRoute path="/login" exact component={Login} appProps={appProps} />
+  <UnauthenticatedRoute path="/signup" exact component={Signup} appProps={appProps} />
+  <AuthenticatedRoute path="/settings" exact component={Settings} appProps={appProps} />
+  <AuthenticatedRoute path="/notes/new" exact component={NewNote} appProps={appProps} />
+  <AuthenticatedRoute path="/notes/:id" exact component={Notes} appProps={appProps} />
+  {/* Finally, catch all unmatched routes */}
   <Route component={NotFound} />
 </Switch>
 ```
@@ -66,8 +64,6 @@ import Settings from "./containers/Settings";
 Notice that we added a route for our new settings page.
 
 <img class="code-marker" src="/assets/s.png" />Next add a link to our settings page in the navbar by replacing the `render` method in `src/App.js` with this.
-
-REWRITE
 
 {% raw %}
 ``` coffee
@@ -103,7 +99,7 @@ return (
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Routes childProps={{ isAuthenticated, userHasAuthenticated }} />
+      <Routes appProps={{ isAuthenticated, userHasAuthenticated }} />
     </div>
   )
 );

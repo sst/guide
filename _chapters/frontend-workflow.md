@@ -25,10 +25,10 @@ This creates a new branch for us called `new-feature`.
 
 Let's make a faulty commit just so we can go over the process of rolling back as well.
 
-<img class="code-marker" src="/assets/s.png" />Replace the `renderLander` method in `src/containers/Home.js` with the following.
+<img class="code-marker" src="/assets/s.png" />Replace the `renderLander` function in `src/containers/Home.js` with the following.
 
 ``` coffee
-renderLander() {
+function renderLander() {
   return (
     <div className="lander">
       <h1>Scratch</h1>
@@ -127,10 +127,10 @@ And that's it! Now you have an automated workflow for building and deploying you
 
 Let's quickly cleanup our changes.
 
-<img class="code-marker" src="/assets/s.png" />Replace the `renderLander` method in `src/containers/Home.js` with the original.
+<img class="code-marker" src="/assets/s.png" />Replace the `renderLander` function in `src/containers/Home.js` with the original.
 
 ``` coffee
-renderLander() {
+function renderLander() {
   return (
     <div className="lander">
       <h1>Scratch</h1>

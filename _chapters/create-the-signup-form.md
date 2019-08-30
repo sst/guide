@@ -180,7 +180,7 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 <img class="code-marker" src="/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our login route. We are using the `AppliedRoute` component that we created in the [Add the session to the state]({% link _chapters/add-the-session-to-the-state.md %}) chapter.
 
 ``` coffee
-<AppliedRoute path="/signup" exact component={Signup} props={childProps} />
+<AppliedRoute path="/signup" exact component={Signup} appProps={appProps} />
 ```
 
 And include our component in the header.
