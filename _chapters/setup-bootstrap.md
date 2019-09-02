@@ -21,14 +21,6 @@ $ npm install react-bootstrap@0.32.4 --save
 
 This installs the NPM package and adds the dependency to your `package.json`.
 
-Note that using `0.32.4` might give you a couple of warnings in your browser console.
-
-```
-Warning: componentWillMount has been renamed, and is not recommended for use. 
-```
-
-We can ignore them for now while we wait for React Bootstrap to fix them. Also, we'll be upgrading the guide to React Bootstrap v1 once it is out of beta.
-
 ### Add Bootstrap Styles
 
 <img class="code-marker" src="/assets/s.png" />React Bootstrap uses the standard Bootstrap v3 styles; so just add the following styles to your `public/index.html`.

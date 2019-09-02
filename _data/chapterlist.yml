@@ -376,6 +376,8 @@ extra-user-mgmt:
 extra-frontend:
   title: Frontend
   chapters:
+    - page: Understanding React Hooks
+      url: /chapters/understanding-react-hooks.html
     - page: Code Splitting in Create React App
       url: /chapters/code-splitting-in-create-react-app.html
     - page: Environments in Create React App

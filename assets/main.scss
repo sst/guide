@@ -4,35 +4,35 @@
 @charset "utf-8";
 
 // Our variables
-$base-font-family:          Lato, sans-serif;
-$heading-font-family:       "PT Serif", serif;
-$code-font-family:          "Source Pro", monospace;
-$base-font-size:            16px;
-$base-font-weight:          400;
-$small-font-size:           $base-font-size * 0.875;
-$base-line-height:          1.6;
+$base-font-family:            Lato, sans-serif;
+$heading-font-family:         "PT Serif", serif;
+$code-font-family:            "Source Pro", monospace;
+$base-font-size:              16px;
+$base-font-weight:            400;
+$small-font-size:             $base-font-size * 0.875;
+$base-line-height:            1.6;
 
-$spacing-unit:              30px;
+$spacing-unit:                30px;
 
-$text-color:                #383736;
-$secondary-text-color:      #706F6C;
-$tertiary-text-color:  	    #9A9894;
-$background-color:          #f2efe8;
-$code-background-color:     #f0eaf7;
-$hilight-background-color:  #fff694;
-$brand-color:               #9068BE;
-$important-color:           #F39C12;
+$text-color:                  #383736;
+$secondary-text-color:        #706F6C;
+$tertiary-text-color:  	      #9A9894;
+$background-color:            #f2efe8;
+$code-background-color:       #f0eaf7;
+$highlight-background-color:  #fff694;
+$brand-color:                 #9068BE;
+$important-color:             #F39C12;
 
-$grey-color:                #828282;
-$grey-color-light:          lighten($grey-color, 30%);
-$grey-color-dark:           darken($grey-color, 25%);
+$grey-color:                  #828282;
+$grey-color-light:            lighten($grey-color, 30%);
+$grey-color-dark:             darken($grey-color, 25%);
 
-// Width of the content     area
-$content-width:             800px;
-$post-content-width:        1100px;
+// Width of the content       area
+$content-width:               800px;
+$post-content-width:          1100px;
 
-$on-palm:                   600px;
-$on-laptop:                 800px;
+$on-palm:                     600px;
+$on-laptop:                   800px;
 
 // Minima also includes a mixin for defining media queries.
 // Use media queries like this:
@@ -87,27 +87,6 @@ img.code-marker {
   background-size: $width $height;
   display: inline-block;
   vertical-align: middle; 
-}
-
-// Source Code Links
-div.post-links {
-  border: 2px solid darken($background-color, 5%);
-  border-radius: 5px;
-  padding: $spacing-unit - 5px;
-
-  p {
-    margin-bottom: 8px;
-    color: $secondary-text-color;
-
-    &.code {
-      margin-top: 15px;
-    }
-  }
-
-  a {
-    font-family: $code-font-family;
-    font-size: 18px;
-  }
 }
 
 // Link Buttons
@@ -392,7 +371,7 @@ div.home .feature-list {
   margin-bottom: $spacing-unit + 5px;
 
   strong {
-    background-color: $hilight-background-color;
+    background-color: $highlight-background-color;
   }
 
   @include media-query($on-palm) {
