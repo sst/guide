@@ -43,6 +43,10 @@ We can provide a more fine-grained policy here and we cover this later in the [C
 
 ![Added Admin Policy Screenshot](/assets/iam-user/added-admin-policy.png)
 
+We can optionally add some info to our IAM user. But we'll skip this for now. Click **Next: Review**.
+
+![Skip IAM tags Screenshot](/assets/iam-user/skip-iam-tags.png)
+
 Select **Create user**.
 
 ![Reivew IAM User Screenshot](/assets/iam-user/review-iam-user.png)
