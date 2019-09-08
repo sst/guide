@@ -649,7 +649,7 @@
 }
 
 .post-sponsor {
-  margin-top: 1.5 * $spacing-unit;
+  margin-top: $spacing-unit;
   margin-bottom: $spacing-unit;
   text-align: center;
 
@@ -751,6 +751,7 @@
     font-weight: bold;
     line-height: 54px;
     display: inline-block;
+    font-size: 18px;
 
     @include media-query($on-palm) {
       font-size: 14px;
@@ -766,7 +767,7 @@
 }
 
 .post-links {
-  border: 2px solid darken($background-color, 5%);
+  background-color: darken($background-color, 5%);
   border-radius: 5px;
   padding: $spacing-unit - 5px;
 
