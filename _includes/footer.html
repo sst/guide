@@ -32,6 +32,8 @@
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<!-- Lander Certificate Tilt -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
 <!-- Newsletter Form JS -->
 <script src="https://emailoctopus.com/bundles/emailoctopuslist/js/formEmbed.js?1519058398"></script>
 <!-- Code Snippet Copy JS -->
@@ -75,6 +77,10 @@
     $(this).parent().next().toggleClass('open');
   });
   /** End sidebar ToC code **/
+
+  /** Start tilt settings **/
+  $('.certificate.tilt').tilt({ perspective: 3000 });
+  /** End tilt settings **/
 </script>
 <!-- Docsearch -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script> 
