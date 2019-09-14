@@ -1,9 +1,7 @@
 ---
-layout: home
+layout: lander
 description: Free step-by-step tutorials for creating full-stack apps with Serverless Framework and React.js. Build a Serverless REST API with our Serverless tutorial and connect it to a React single-page application with our React.js tutorial. Use our AWS tutorial with screenshots to deploy your full-stack app.
 ---
-
-{% include lander.html %}
 
 <div id="table-of-contents" class="table-of-contents">
 
@@ -17,7 +15,7 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
           <h3>Part I - The Basics</h3>
           <p>Build your first Serverless app using AWS Lambda and React.</p>
         </div>
-        <div class="chapters">
+        <div class="chapters part-1">
           {% include toc-chapters.html items=site.data.chapterlist.preface id="preface" %}
 
           {% include toc-chapters.html items=site.data.chapterlist.intro-part1 id="intro-part1" %}
@@ -28,6 +26,7 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
           {% include toc-chapters.html items=site.data.chapterlist.setup-react id="setup-react" %}
           {% include toc-chapters.html items=site.data.chapterlist.build-react id="build-react" %}
           {% include toc-chapters.html items=site.data.chapterlist.deploy-react id="deploy-react" %}
+          <a class="expand"><span>Show all chapters</span></a>
         </div>
       </div>
     </div>
@@ -49,6 +48,7 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
           {% include toc-chapters.html items=site.data.chapterlist.add-billing-form id="add-billing-form" %}
           {% include toc-chapters.html items=site.data.chapterlist.react-deployments id="react-deployments" %}
           {% include toc-chapters.html items=site.data.chapterlist.conclusion id="conclusion" %}
+          <a class="expand"><span>Show all chapters</span></a>
         </div>
       </div>
 
@@ -62,6 +62,7 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
           {% include toc-chapters.html items=site.data.chapterlist.extra-backend id="extra-backend" %}
           {% include toc-chapters.html items=site.data.chapterlist.extra-user-mgmt id="extra-user-management" %}
           {% include toc-chapters.html items=site.data.chapterlist.extra-frontend id="extra-frontend" %}
+          <a class="expand"><span>Show all chapters</span></a>
         </div>
       </div>
     </div>

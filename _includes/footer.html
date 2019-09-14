@@ -79,8 +79,14 @@
   /** End sidebar ToC code **/
 
   /** Start tilt settings **/
-  $('.certificate.tilt').tilt({ perspective: 3000 });
+  $('.certificate.tilt').tilt({ reset: false, perspective: 3000 });
   /** End tilt settings **/
+
+  /** Start ToC lander code **/
+  $('.table-of-contents .chapters .expand').click(function() {
+    $(this).closest('.chapters').addClass('expanded');
+  });
+  /** Edn ToC lander code **/
 </script>
 <!-- Docsearch -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script> 
