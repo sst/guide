@@ -471,7 +471,7 @@
       position: relative;
 
       @include media-query($on-palm) {
-        padding-bottom: $spacing-unit;
+        padding-bottom: 10px;
       }
 
       div.toc-section {
