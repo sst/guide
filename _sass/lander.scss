@@ -39,7 +39,7 @@
     font-family: $base-font-family;
 
     @include media-query($on-palm) {
-      font-size: 44px;
+      font-size: 32px;
     }
   }
 
@@ -66,7 +66,6 @@
 
     @include media-query($on-palm) {
       margin-top: 20px;
-      flex-direction: column;
     }
 
     a.button {
@@ -79,7 +78,10 @@
       letter-spacing: 1px;
 
       @include media-query($on-palm) {
-        min-width: 250px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        max-width: 250px;
       }
 
       &:first-child {
@@ -87,7 +89,7 @@
         background-color: darken($brand-color, 25%);
 
         @include media-query($on-palm) {
-          margin-right: 0;
+          margin-right: auto;
           margin-bottom: 10px;
         }
       }
