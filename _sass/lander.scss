@@ -474,6 +474,7 @@
 
       @include media-query($on-palm) {
         padding-bottom: 10px;
+        max-height: 1.5 * $max-height;
       }
 
       div.toc-section {
@@ -522,6 +523,10 @@
 
       &.part-1 {
         max-height: 2 * $max-height + 165px;
+
+        @include media-query($on-palm) {
+          max-height: 1.5 * $max-height;
+        }
       }
 
       &.expanded {
