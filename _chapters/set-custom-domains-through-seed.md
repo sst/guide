@@ -37,4 +37,4 @@ While we wait, we can do the same for our `dev` endpoint. Select the domain, sub
 
 Hit **Add Custom Domain** and wait for the changes to take place.
 
-Once complete, we are ready to test our fully-configured serverless API backend!
+Now that we've automated our deployments, let’s do a quick test to see what will happen if we make a mistake and push some faulty code to production.

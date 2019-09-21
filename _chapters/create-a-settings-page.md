@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Create a Settings Page
-date: 2018-03-21 00:00:00
+date: 2017-01-31 06:00:00
 lang: en
 description: Our notes app needs a settings page for our users to input their credit card details and sign up for a pricing plan.
 context: true
@@ -51,11 +51,11 @@ import Settings from "./containers/Settings";
 ``` coffee
 <Switch>
   <AppliedRoute path="/" exact component={Home} appProps={appProps} />
-  <UnauthenticatedRoute path="/login" exact component={Login} appProps={appProps} />
-  <UnauthenticatedRoute path="/signup" exact component={Signup} appProps={appProps} />
-  <AuthenticatedRoute path="/settings" exact component={Settings} appProps={appProps} />
-  <AuthenticatedRoute path="/notes/new" exact component={NewNote} appProps={appProps} />
-  <AuthenticatedRoute path="/notes/:id" exact component={Notes} appProps={appProps} />
+  <AppliedRoute path="/login" exact component={Login} appProps={appProps} />
+  <AppliedRoute path="/signup" exact component={Signup} appProps={appProps} />
+  <AppliedRoute path="/settings" exact component={Settings} appProps={appProps} />
+  <AppliedRoute path="/notes/new" exact component={NewNote} appProps={appProps} />
+  <AppliedRoute path="/notes/:id" exact component={Notes} appProps={appProps} />
   {/* Finally, catch all unmatched routes */}
   <Route component={NotFound} />
 </Switch>

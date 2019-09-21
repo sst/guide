@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Create a Billing Form
-date: 2018-03-23 00:00:00
+date: 2017-01-31 12:00:00
 lang: en
 description: We will create a billing form in our React app using the Stripe React SDK. We will use the CardElement to let the user input their credit card details and call the createToken method to generate a token that we can pass to our serverless billing API.
 context: true

@@ -117,4 +117,4 @@ $ git commit -m "Adding unit tests"
 $ git push
 ```
 
-Next we'll use our Git repo to automate our deployments. This will ensure that when we push our changes to Git, it will run our tests, and deploy them for us automatically. We'll also learn to configure multiple environments.
+Now we are almost ready to deploy our backend.

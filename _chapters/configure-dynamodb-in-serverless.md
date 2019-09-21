@@ -83,14 +83,19 @@ A lot of the above might sound tricky and overly complicated right now. But we a
 
 We are also going to make a quick tweak to reference the DynamoDB resource that we are creating.
 
-<img class="code-marker" src="/assets/s.png" />Replace the `iamRoleStatements:` block in your `serverless.yml` with the following.
+<img class="code-marker" src="/assets/s.png" />Update our environment variables with the new generated table name. Replace the `environment:` block with the following:
 
 ``` yml
   # These environment variables are made available to our functions
   # under process.env.
   environment:
     tableName: ${self:custom.tableName}
+    stripeSecretKey: ${env:STRIPE_SECRET_KEY}
+```
 
+<img class="code-marker" src="/assets/s.png" />Replace the `iamRoleStatements:` block in your `serverless.yml` with the following.
+
+``` yml
   iamRoleStatements:
     - Effect: Allow
       Action:

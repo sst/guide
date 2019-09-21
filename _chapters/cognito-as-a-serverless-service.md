@@ -151,7 +151,7 @@ resources:
         Ref: CognitoIdentityPool
 ```
 
-This can seem like a lot but both the `CognitoUserPool:` and the `CognitoUserPoolClient:` section are simply creating our Cognito User Pool. And you'll notice that both these sections are not using any cross-stack references. They are effectively standalone. If you are looking for more details on this, [refer to the Part II of this guide]({% link _chapters/configure-cognito-user-pool-in-serverless.md %}).
+This can seem like a lot but both the `CognitoUserPool:` and the `CognitoUserPoolClient:` section are simply creating our Cognito User Pool. And you'll notice that both these sections are not using any cross-stack references. They are effectively standalone. If you are looking for more details on this, refer to the earlier part of this guide]({% link _chapters/configure-cognito-user-pool-in-serverless.md %}).
 
 ### Cognito Identity Pool
 

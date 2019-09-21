@@ -175,4 +175,4 @@ $ git commit -m "Fixing the mistake"
 $ git push
 ```
 
-And that's it! We are now ready to plug this into our frontend.
+And that's it! Now let's do a quick test on our newly deployed APIs and plug them into our frontend.

@@ -48,4 +48,4 @@ This should fire up the newly created app in your browser.
 
 Create React App comes pre-loaded with a pretty convenient yet minimal development environment. It includes live reloading, a testing framework, ES6 support, and [much more](https://github.com/facebookincubator/create-react-app#why-use-this).
 
-Next, we are going to create our app icon and update the favicons.
+Now we are ready to build our frontend. But just like we did with the backend, let's first create a GitHub repo to store our code.

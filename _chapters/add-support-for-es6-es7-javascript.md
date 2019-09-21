@@ -63,4 +63,4 @@ package:
 
 By default, Serverless Framework creates one large package for all the Lambda functions in your app. Large Lambda function packages can cause longer cold starts. By setting `individually: true`, we are telling Serverless Framework to create a single package per Lambda function. This in combination with serverless-bundle (and Webpack) will generate optimized packages. Note that, this'll slow down our builds but the performance benefit is well worth it.
 
-And now we are ready to build our backend.
+Now we are ready to write our backend code. But before that, let's create a GitHub repo to store our code.

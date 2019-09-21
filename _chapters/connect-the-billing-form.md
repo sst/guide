@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Connect the Billing Form
-date: 2018-03-24 00:00:00
+date: 2017-01-31 18:00:00
 lang: en
 description: To add our Stripe billing form to our React app container we need to wrap it inside a StripeProvider component. We also need to include Stripe.js in our HTML page.
 context: true
@@ -104,13 +104,8 @@ If everything is set correctly, you should see the success message and you'll be
 
 ![Settings screen billing success screenshot](/assets/part2/settings-screen-billing-success.png)
 
-### Commit the Changes
+Now with our app nearly complete, we'll look at securing some the pages of our app that require a login. Currently if you visit a note page while you are logged out, it throws an ugly error.
 
-<img class="code-marker" src="/assets/s.png" />Let's quickly commit these to Git.
+![Note page logged out error screenshot](/assets/note-page-logged-out-error.png)
 
-``` bash
-$ git add .
-$ git commit -m "Connecting the billing form"
-```
-
-Next, we'll set up automatic deployments for our React app using a service called [Netlify](https://www.netlify.com). This will be fairly similar to what we did for our serverless backend API.
+Instead, we would like it to redirect us to the login page and then redirect us back after we login. Let's look at how to do that next.

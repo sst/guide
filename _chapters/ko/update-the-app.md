@@ -4,7 +4,6 @@ title: Update the App
 date: 2017-02-13 00:00:00
 lang: ko 
 description: React.js 단일 페이지 응용 프로그램을 변경하는 방법에 대한 자습서.
-code: frontend_part1
 comments_id: comments-for-update-the-app/43
 ref: update-the-app
 ---

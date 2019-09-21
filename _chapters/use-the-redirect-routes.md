@@ -26,6 +26,7 @@ So the following routes in `src/Routes.js` would be affected.
 ``` coffee
 <AppliedRoute path="/login" exact component={Login} appProps={appProps} />
 <AppliedRoute path="/signup" exact component={Signup} appProps={appProps} />
+<AppliedRoute path="/settings" exact component={Settings} appProps={appProps} />
 <AppliedRoute path="/notes/new" exact component={NewNote} appProps={appProps} />
 <AppliedRoute path="/notes/:id" exact component={Notes} appProps={appProps} />
 ```
@@ -35,6 +36,7 @@ So the following routes in `src/Routes.js` would be affected.
 ``` coffee
 <UnauthenticatedRoute path="/login" exact component={Login} appProps={appProps} />
 <UnauthenticatedRoute path="/signup" exact component={Signup} appProps={appProps} />
+<AuthenticatedRoute path="/settings" exact component={Settings} appProps={appProps} />
 <AuthenticatedRoute path="/notes/new" exact component={NewNote} appProps={appProps} />
 <AuthenticatedRoute path="/notes/:id" exact component={Notes} appProps={appProps} />
 ```

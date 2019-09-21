@@ -62,6 +62,6 @@ export default function UnauthenticatedRoute({ component: C, appProps, ...rest }
 props.history.push("/");
 ```
 
-Now our login page should redirect after we login.
+Now our login page should redirect after we login. And that's it! Our app is ready to go live.
 
-And that's it! Our app is ready to go live. Let's look at how we are going to deploy it using our serverless setup.
+Next we'll be looking at how to automate this stack so we can use it for our future projects. You can also take a look at how to add a Login with Facebook option in the [Facebook Login with Cognito using AWS Amplify]({% link _chapters/facebook-login-with-cognito-using-aws-amplify.md %}) chapter. It builds on what we have covered so far.
