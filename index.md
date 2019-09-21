@@ -11,11 +11,11 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
 
     <div class="col1">
       <div class="part">
-        <div id="part-1" class="header">
+        <div id="the-basics" class="header">
           <h3>The Basics</h3>
           <p>Build your first Serverless app using AWS Lambda and React.</p>
         </div>
-        <div class="chapters part-1">
+        <div class="chapters the-basics">
           {% include toc-chapters.html items=site.data.chapterlist.preface id="preface" %}
 
           {% include toc-chapters.html items=site.data.chapterlist.intro id="intro" %}
@@ -35,7 +35,7 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
 
     <div class="col2">
       <div class="part">
-        <div id="part-2" class="header">
+        <div id="best-practices" class="header">
           <h3>Best Practices</h3>
           <p>The best practices for running Serverless apps in production.</p>
         </div>

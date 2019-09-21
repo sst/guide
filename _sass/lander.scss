@@ -521,7 +521,7 @@
         }
       }
 
-      &.part-1 {
+      &.the-basics {
         max-height: 2 * $max-height + 165px;
 
         @include media-query($on-palm) {

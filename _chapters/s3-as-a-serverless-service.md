@@ -64,7 +64,7 @@ resources:
         Name: ${self:custom.stage}-AttachmentsBucket
 ```
 
-Most of the `Resources:` section should be fairly straightforward and is based on [Part II of this guide]({% link _chapters/configure-s3-in-serverless.md %}). So let's go over the cross-stack exports in the `Outputs:` section.
+Most of the `Resources:` section should be fairly straightforward and is based on [first part of this guide]({% link _chapters/configure-s3-in-serverless.md %}). So let's go over the cross-stack exports in the `Outputs:` section.
 
 1. Just as in the [DynamoDB service]({% link _chapters/dynamodb-as-a-serverless-service.md %}), we are exporting the [ARN]({% link _chapters/what-is-an-arn.md %}) (`AttachmentsBucketArn`). For this service, we are also exporting the name of the bucket (`AttachmentsBucketName`).
 
