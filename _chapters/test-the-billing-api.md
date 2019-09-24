@@ -33,24 +33,15 @@ $ serverless invoke local --function billing --path mocks/billing-event.json
 
 The response should look similar to this.
 
-``` json
+``` bash
 {
     "statusCode": 200,
     "headers": {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Credentials": true
     },
-    "body": "{\"status\":true}"
+    "body": "{"status":true}"
 }
-```
-
-### Commit the Changes
-
-<img class="code-marker" src="/assets/s.png" />Let's commit these to Git.
-
-``` bash
-$ git add .
-$ git commit -m "Adding a mock event for the billing API"
 ```
 
 Now that we have our new billing API ready. Let's look at how to setup unit tests to ensure that our business logic has been configured correctly.

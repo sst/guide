@@ -62,13 +62,4 @@ resources:
   - ${file(resources/s3-bucket.yml)}
 ```
 
-### Commit Your Code
-
-<img class="code-marker" src="/assets/s.png" />Let's commit the changes we've made so far.
-
-``` bash
-$ git add .
-$ git commit -m "Adding our S3 resource"
-```
-
 And that's it. Next let's look into configuring our Cognito User Pool.

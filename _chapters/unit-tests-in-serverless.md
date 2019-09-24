@@ -5,7 +5,6 @@ date: 2018-03-10 00:00:00
 lang: en
 description: To test our business logic in Serverless, we will use Jest to add unit tests to our project. We can run these tests using the "npm test" command.
 context: true
-code: backend
 ref: unit-tests-in-serverless
 comments_id: unit-tests-in-serverless/173
 ---
@@ -75,6 +74,17 @@ test("Highest tier", () => {
 
 This should be straightforward. We are adding 3 tests. They are testing the different tiers of our pricing structure. We test the case where a user is trying to store 10, 100, and 101 notes. And comparing the calculated cost to the one we are expecting. You can read more about using Jest in the [Jest docs here](https://facebook.github.io/jest/docs/en/getting-started.html). 
 
+You might have noticed a `handler.test.js` file in the `tests/` directory. This was a part of our starter that we can now remove.
+
+### Remove Unused Files
+
+<img class="code-marker" src="/assets/s.png" />Remove the starter files by running the following.
+
+``` bash
+$ rm handler.js
+$ rm tests/handler.test.js
+```
+
 ### Run tests
 
 And we can run our tests by using the following command in the root of our project.
@@ -99,22 +109,5 @@ Ran all test suites.
 ```
 
 And that's it! We have unit tests all configured.
-
-### Commit the Changes
-
-<img class="code-marker" src="/assets/s.png" />Let's commit these changes.
-
-``` bash
-$ git add .
-$ git commit -m "Adding unit tests"
-```
-
-### Push the Changes
-
-<img class="code-marker" src="/assets/s.png" />We are done making changes to our project, so let's go ahead and push them to GitHub.
-
-``` bash
-$ git push
-```
 
 Now we are almost ready to deploy our backend.

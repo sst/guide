@@ -175,4 +175,4 @@ $ git commit -m "Fixing the mistake"
 $ git push
 ```
 
-And that's it! Now let's do a quick test on our newly deployed APIs and plug them into our frontend.
+And that's it! Now we are ready to plug our new backend into our React app.

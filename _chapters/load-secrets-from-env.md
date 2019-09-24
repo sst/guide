@@ -12,9 +12,17 @@ comments_id: load-secrets-from-env-yml/171
 
 As we had previously mentioned, we do not want to store our secret environment variables in our code. In our case it is the Stripe secret key. In this chapter, we'll look at how to do that.
 
-<img class="code-marker" src="/assets/s.png" />Start by creating a `.env` file in your project root.
+We have a `env.example` file for this exact purpose.
 
+<img class="code-marker" src="/assets/s.png" />Start by renaming the `env.example` file to `.env`.
+
+``` bash
+$ mv env.example .env
 ```
+
+<img class="code-marker" src="/assets/s.png" />Replace its contents with the following.
+
+``` bash
 STRIPE_SECRET_KEY=STRIPE_TEST_SECRET_KEY
 ```
 
@@ -56,12 +64,5 @@ Now we need to ensure that we don't commit our `env.yml` file to git. The starte
 ```
 
 This will tell Git to not commit this file.
-
-<img class="code-marker" src="/assets/s.png" />Next let's commit the rest of our changes.
-
-``` bash
-$ git add .
-$ git commit -m "Adding stripe environment variable"
-```
 
 Now we are ready to test our billing API.

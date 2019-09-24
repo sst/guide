@@ -4,6 +4,7 @@ title: Initialize the Backend Repo
 date: 2016-12-29 18:00:00
 lang: en
 description: By automating deployments for our Serverless Framework app, we can simply git push to deploy our app to production. To do so, start by adding your serverless app repo to Git.
+code: backend
 ref: initialize-the-backend-repo
 comments_id: initialize-the-backend-repo/159
 ---

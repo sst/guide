@@ -206,6 +206,7 @@ deploy-backend-prod:
         - page: Configure Cognito Identity Pool in Serverless
           url: /chapters/configure-cognito-identity-pool-in-serverless.html
     - page: Deploy your Serverless infrastructure
+      url: /chapters/deploy-your-serverless-infrastructure.html
     - page: Automating Serverless deployments
       url: /chapters/automating-serverless-deployments.html
       subchapters:
@@ -217,10 +218,10 @@ deploy-backend-prod:
           url: /chapters/deploying-through-seed.html
         - page: Set custom domains through Seed
           url: /chapters/set-custom-domains-through-seed.html
-        - page: Monitoring deployments in Seed
-          url: /chapters/monitoring-deployments-in-seed.html
     - page: Test the configured APIs
       url: /chapters/test-the-configured-apis.html
+    - page: Monitoring deployments in Seed
+      url: /chapters/monitoring-deployments-in-seed.html
 
 deploy-frontend-prod:
   title: Deploying the frontend to production

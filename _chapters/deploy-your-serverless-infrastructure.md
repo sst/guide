@@ -33,31 +33,35 @@ stack: notes-app-2-api-dev
 api keys:
   None
 endpoints:
-  POST - https://mqqmkwnpbc.execute-api.us-east-1.amazonaws.com/dev/notes
-  GET - https://mqqmkwnpbc.execute-api.us-east-1.amazonaws.com/dev/notes/{id}
-  GET - https://mqqmkwnpbc.execute-api.us-east-1.amazonaws.com/dev/notes
-  PUT - https://mqqmkwnpbc.execute-api.us-east-1.amazonaws.com/dev/notes/{id}
-  DELETE - https://mqqmkwnpbc.execute-api.us-east-1.amazonaws.com/dev/notes/{id}
+  POST - https://8lugdaec03.execute-api.us-east-1.amazonaws.com/dev/notes
+  GET - https://8lugdaec03.execute-api.us-east-1.amazonaws.com/dev/notes/{id}
+  GET - https://8lugdaec03.execute-api.us-east-1.amazonaws.com/dev/notes
+  PUT - https://8lugdaec03.execute-api.us-east-1.amazonaws.com/dev/notes/{id}
+  DELETE - https://8lugdaec03.execute-api.us-east-1.amazonaws.com/dev/notes/{id}
+  POST - https://8lugdaec03.execute-api.us-east-1.amazonaws.com/dev/billing
 functions:
   create: notes-app-2-api-dev-create
   get: notes-app-2-api-dev-get
   list: notes-app-2-api-dev-list
   update: notes-app-2-api-dev-update
   delete: notes-app-2-api-dev-delete
+  billing: notes-app-2-api-dev-billing
+layers:
+  None
 
 Stack Outputs
-AttachmentsBucketName: notes-app-2-api-dev-attachmentsbucket-oj4rfiumzqf5
-UserPoolClientId: ft93dvu3cv8p42bjdiip7sjqr
-UserPoolId: us-east-1_yxO5ed0tq
-DeleteLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:232771856781:function:notes-app-2-api-dev-delete:2
-CreateLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:232771856781:function:notes-app-2-api-dev-create:2
-GetLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:232771856781:function:notes-app-2-api-dev-get:2
-UpdateLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:232771856781:function:notes-app-2-api-dev-update:2
-IdentityPoolId: us-east-1:64495ad1-617e-490e-a6cf-fd85e7c8327e
+AttachmentsBucketName: notes-app-2-api-dev-attachmentsbucket-1fs6m3jt1vyjd
+UserPoolClientId: 3j27ho9tmja8r3irrv6eh514fn
+UserPoolId: us-east-1_bNip3CCUi
+DeleteLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:232771856781:function:notes-app-2-api-dev-delete:1
+CreateLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:232771856781:function:notes-app-2-api-dev-create:1
+GetLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:232771856781:function:notes-app-2-api-dev-get:1
+UpdateLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:232771856781:function:notes-app-2-api-dev-update:1
+IdentityPoolId: us-east-1:346c5a95-467b-47a9-ab2b-059fb3c31215
 BillingLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:232771856781:function:notes-app-2-api-dev-billing:1
-ListLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:232771856781:function:notes-app-2-api-dev-list:2
-ServiceEndpoint: https://mqqmkwnpbc.execute-api.us-east-1.amazonaws.com/dev
-ServerlessDeploymentBucketName: notes-app-2-api-dev-serverlessdeploymentbucket-1p2o0dshaz2qc
+ListLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:232771856781:function:notes-app-2-api-dev-list:1
+ServiceEndpoint: https://8lugdaec03.execute-api.us-east-1.amazonaws.com/dev
+ServerlessDeploymentBucketName: notes-app-2-api-dev-serverlessdeploymentbucket-heebnceeapbg
 ```
 
 A couple of things to note here:
@@ -70,4 +74,14 @@ A couple of things to note here:
 
 And that's it! Our entire infrastructure is completely configured and deployed automatically.
 
-Next, we will add a new API (and Lambda function) to work with 3rd party APIs. In our case we are going to add an API that will use Stripe to bill the users of our notes app!
+Next, we will look at how we can automate our deployments. We want to set it up so that when we `git push` our changes and our app will deploy automatically. We'll also be setting up our environments so that when we work on our app, it does not affect our users.
+
+### Commit the Changes
+
+<img class="code-marker" src="/assets/s.png" />Let's commit our code so far and push it to GitHub.
+
+``` bash
+$ git add .
+$ git commit -m "Setting up our Serverless infrastructure"
+$ git push
+```

@@ -148,13 +148,4 @@ resources:
   - ${file(resources/cognito-identity-pool.yml)}
 ```
 
-### Commit Your Code
-
-<img class="code-marker" src="/assets/s.png" />Let's commit the changes we've made so far.
-
-``` bash
-$ git add .
-$ git commit -m "Adding our Cognito Identity Pool resource"
-```
-
-Next, let's quickly reference our DynamoDB table in our Lambda functions using environment variables.
+Now we are ready to deploy our new Serverless infrastructure.

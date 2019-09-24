@@ -6,7 +6,6 @@ lang: en
 ref: add-a-get-note-api
 description: To allow users to retrieve a note in our note taking app, we are going to add a GET note API. To do this we will add a new Lambda function to our Serverless Framework project. The Lambda function will retrieve the note from our DynamoDB table.
 context: true
-code: backend
 comments_id: add-a-get-note-api/132
 ---
 

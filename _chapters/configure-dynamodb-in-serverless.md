@@ -122,13 +122,4 @@ A couple of interesting things we are doing here:
 
 3. For the case of our `iamRoleStatements:` we are now specifically stating which table we want to connect to. This block is telling AWS that these are the only resources that our Lambda functions have access to.
 
-### Commit Your Code
-
-<img class="code-marker" src="/assets/s.png" />Let's commit the changes we've made so far.
-
-``` bash
-$ git add .
-$ git commit -m "Adding our DynamoDB resource"
-```
-
 Next, let's add our S3 bucket for file uploads.

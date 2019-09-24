@@ -6,7 +6,6 @@ lang: en
 ref: add-a-create-note-api
 description: To allow users to create notes in our note taking app, we are going to add a create note POST API. To do this we are going to add a new Lambda function to our Serverless Framework project. The Lambda function will save the note to our DynamoDB table and return the newly created note. We also need to ensure to set the Access-Control headers to enable CORS for our serverless backend API.
 context: true
-code: backend
 comments_id: add-a-create-note-api/125
 ---
 
@@ -102,11 +101,11 @@ package:
 plugins:
   - serverless-bundle # Package our functions with Webpack
   - serverless-offline
-  - serverless-dotenv-plugin
+  - serverless-dotenv-plugin # Load .env as environment variables
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs10.x
   stage: prod
   region: us-east-1
 

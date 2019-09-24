@@ -97,13 +97,4 @@ Let's add a reference to our new API and Lambda function.
 
 Make sure this is **indented correctly**. This block falls under the `functions` block.
 
-### Commit Our Changes
-
-<img class="code-marker" src="/assets/s.png" />Let's quickly commit these to Git.
-
-``` bash
-$ git add .
-$ git commit -m "Adding a billing API"
-```
-
 Now before we can test our API we need to load our Stripe secret key in our environment.
