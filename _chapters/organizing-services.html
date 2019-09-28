@@ -1,0 +1,51 @@
+# Organizing Services
+
+Monorepo (monolithic repository) means you have a single repository to store the code for many projects. Creating a new project is very easy, you just add create a new directory in the repo and add the code in there. It is been famously adopted by Google and Facebook. On the other hand, multi-repo means you create a repository for each project.
+
+What does this mean in the Serverless/Micro-Service world? Imaging you are making a shopping cart and your app has 2 API services, each has their well defined business logic:
+
+- **carts-api** service handling adding to and removing from shopping cart
+- **checkout-api** service handling making a purchase
+
+And your app also 2 jobs:
+
+- **confirmation-job** service handling sending user confirmation emails after successfully making a purchase
+- **reset-cart-job** service handling resetting a shopping cart after a purchase is made
+
+And also:
+
+- **dynamodb** service defining a DynamoDB table `carts` used to store shopping cart data
+- **s3** service defining a S3 bucket used to store transaction receipts
+
+In the Multi-repo setup, you are likely to have 6 repositories, one for each service. 
+
+In the Monorepo setup, you have one repository with all 6 repositories.
+
+It is not the goal of this post to evaluate which setup is better. Instead, I want to layout what we think is a good setup and that has worked out for most teams. We are taking the middle ground and creating two repositories, **my-cart-resources** and **my-cart-app**.
+
+In **my-cart-resources**, you have:
+```
+    /
+      services/
+        dynamodb/
+        s3/
+```
+And in **my-cart-app**, you have
+```
+    /
+      libs/
+      services/
+        carts-api/
+        checkout-api/
+    		confirmation-job/
+    		reset-cart-job/
+```
+Why? Mostly of the code changes are going to happen in the **my-cart-app** repo. When your team is making rapid changes, you are likely going to have many feature branches, bug fixes and pull requests. A bonus with serverless is that you can spin up new environment at zero cost (You only pay for usage, not provisioning). For example, a team can have dozens of stages such as: prod, staging, dev, feature-x, feature-y, feature-z, bugfix-x, bugfix-y, pr-128, pr-132, etc. This ensures each change is tested on real infrastructure before promoted to production.
+
+On the other hand, changes are going to happen less frequently in the **my-cart-resources** app. And most likely you don't need a completely set of standalone Dynamodb tables for each feature branch. In fact, a team can have three stages such as: prod, staging and dev. And the feature/bugfix/pr stages of the **my-cart-app** can all connect to the dev stag of the **my-cart-resources.**
+
+[](https://www.notion.so/0732c75893e2443ebbbe438cbf5c3217#c14d95147d4944c09aa6710d03c9e33d)
+
+In fact, this is what we have been seeing teams tend to do. And this setup scales well.
+
+Now we have decided to place all of our API services inside the same repo **my-cart-app**, now let's take a look at how to organize the code inside it.
