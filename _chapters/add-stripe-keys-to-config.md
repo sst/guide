@@ -18,13 +18,4 @@ STRIPE_KEY: "YOUR_STRIPE_PUBLIC_KEY",
 
 Make sure to replace, `YOUR_STRIPE_PUBLIC_KEY` with the **Publishable key** from the [Setup a Stripe account]({% link _chapters/setup-a-stripe-account.md %}) chapter.
 
-### Commit the Changes
-
-<img class="code-marker" src="/assets/s.png" />Let's quickly commit these to Git.
-
-``` bash
-$ git add .
-$ git commit -m "Adding Stripe keys to config"
-```
-
 Next, we'll build our billing form.

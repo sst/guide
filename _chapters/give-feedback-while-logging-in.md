@@ -95,12 +95,7 @@ Now we can use our new component in our `Login` container.
 <img class="code-marker" src="/assets/s.png" />In `src/containers/Login.js` find the `<Button>` component in the `return` statement.
 
 ``` html
-<Button
-  block
-  bsSize="large"
-  disabled={!validateForm()}
-  type="submit"
->
+<Button block bsSize="large" disabled={!validateForm()} type="submit">
   Login
 </Button>
 ```

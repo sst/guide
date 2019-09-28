@@ -99,8 +99,8 @@ Now to use this component, we are going to include it in the routes where we nee
 export default function Routes({ appProps }) {
   return (
     <Switch>
-      <AppliedRoute path="/" exact component={Home} props={appProps} />
-      <AppliedRoute path="/login" exact component={Login} props={appProps} />
+      <AppliedRoute path="/" exact component={Home} appProps={appProps} />
+      <AppliedRoute path="/login" exact component={Login} appProps={appProps} />
       { /* Finally, catch all unmatched routes */ }
       <Route component={NotFound} />
     </Switch>

@@ -144,13 +144,4 @@ Also, let's add some styles to the card field so it matches the rest of our UI.
 }
 ```
 
-### Commit the Changes
-
-<img class="code-marker" src="/assets/s.png" />Let's quickly commit these to Git.
-
-``` bash
-$ git add .
-$ git commit -m "Adding a billing form"
-```
-
 Next we'll plug our form into the settings page.

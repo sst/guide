@@ -16,7 +16,7 @@ Currently, our Home container is very simple. Let's add the conditional renderin
 <img class="code-marker" src="/assets/s.png" />Replace our `src/containers/Home.js` with the following.
 
 ``` coffee
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { PageHeader, ListGroup } from "react-bootstrap";
 import "./Home.css";
 

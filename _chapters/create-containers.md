@@ -29,7 +29,7 @@ import { Link } from "react-router-dom";
 import { Navbar } from "react-bootstrap";
 import "./App.css";
 
-function App() {
+function App(props) {
   return (
     <div className="App container">
       <Navbar fluid collapseOnSelect>
@@ -168,7 +168,7 @@ import Routes from "./Routes";
 So the `App` function component of our `src/App.js` should now look like this.
 
 ``` coffee
-function App() {
+function App(props) {
   return (
     <div className="App container">
       <Navbar fluid collapseOnSelect>

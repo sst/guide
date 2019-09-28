@@ -35,6 +35,11 @@ This should generate your favicon package and the accompanying code.
 
 <img class="code-marker" src="/assets/s.png" />Remove the `public/logo192.png` and `public/logo512.png` files.
 
+``` bash
+$ rm public/logo192.png
+$ rm public/logo512.png
+```
+
 <img class="code-marker" src="/assets/s.png" />Then replace the contents of `public/manifest.json` with the following:
 
 ``` json

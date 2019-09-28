@@ -79,6 +79,12 @@ function App(props) {
   ...
 ```
 
+<img class="code-marker" src="/assets/s.png" />Let's make sure to include the `useEffect` hook by replacing the React import in the header of `src/App.js` with:
+
+``` javascript
+import React, { useState, useEffect } from "react";
+```
+
 ### Render When the State Is Ready
 
 Since loading the user session is an asynchronous process, we want to ensure that our app does not change states when it first loads. To do this we'll hold off rendering our app till `isAuthenticating` is `false`.

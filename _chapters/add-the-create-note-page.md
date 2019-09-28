@@ -67,14 +67,14 @@ export default function NewNote(props) {
         </FormGroup>
         <LoaderButton
           block
-          text="Create"
           type="submit"
           bsSize="large"
           bsStyle="primary"
           isLoading={isLoading}
-          loadingText="Creating…"
           disabled={!validateForm()}
-        />
+        >
+          Create
+        </LoaderButton>
       </form>
     </div>
   );

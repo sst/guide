@@ -22,7 +22,7 @@ $ cd ../
 <img class="code-marker" src="/assets/s.png" />Run the following command to create the client for our notes app.
 
 ``` bash
-$ npx create-react-app notes-app-client
+$ npx create-react-app notes-app-client --use-npm
 ```
 
 This should take a second to run, and it will create your new project and your new working directory.

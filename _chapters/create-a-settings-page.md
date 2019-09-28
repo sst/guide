@@ -46,24 +46,13 @@ export default function Settings(props) {
 import Settings from "./containers/Settings";
 ```
 
-<img class="code-marker" src="/assets/s.png" />And replace our `<Switch>` block in `src/Routes.js` with this.
+<img class="code-marker" src="/assets/s.png" />Add the following below the `/signup` route in our `<Switch>` block in `src/Routes.js`.
 
 ``` coffee
-<Switch>
-  <AppliedRoute path="/" exact component={Home} appProps={appProps} />
-  <AppliedRoute path="/login" exact component={Login} appProps={appProps} />
-  <AppliedRoute path="/signup" exact component={Signup} appProps={appProps} />
-  <AppliedRoute path="/settings" exact component={Settings} appProps={appProps} />
-  <AppliedRoute path="/notes/new" exact component={NewNote} appProps={appProps} />
-  <AppliedRoute path="/notes/:id" exact component={Notes} appProps={appProps} />
-  {/* Finally, catch all unmatched routes */}
-  <Route component={NotFound} />
-</Switch>
+<AppliedRoute path="/settings" exact component={Settings} appProps={appProps} />
 ```
 
-Notice that we added a route for our new settings page.
-
-<img class="code-marker" src="/assets/s.png" />Next add a link to our settings page in the navbar by replacing the `render` method in `src/App.js` with this.
+<img class="code-marker" src="/assets/s.png" />Next add a link to our settings page in the navbar by replacing the `return` statement in `src/App.js` with this.
 
 {% raw %}
 ``` coffee
@@ -111,14 +100,5 @@ You'll notice that we added another link in the navbar that only displays when a
 Now if you head over to your app, you'll see a new **Settings** link at the top. Of course, the page is pretty empty right now.
 
 ![Add empty settings page screenshot](/assets/part2/add-empty-settings-page.png)
-
-### Commit the Changes
-
-<img class="code-marker" src="/assets/s.png" />Let's quickly commit these to Git.
-
-``` bash
-$ git add .
-$ git commit -m "Adding settings page"
-```
 
 Next, we'll add our Stripe SDK keys to our config.

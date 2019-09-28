@@ -5,6 +5,7 @@ date: 2017-01-12 12:00:00
 lang: en
 ref: configure-aws-amplify
 description: We are going to use the information of our AWS resources to configure AWS Amplify in our React app. We'll call the Amplify.configure() method when our app first loads.
+code: frontend
 context: true
 comments_id: configure-aws-amplify/151
 ---
@@ -113,5 +114,15 @@ A couple of notes here.
 - The `name: "notes"` is basically telling Amplify that we want to name our API. Amplify allows you to add multiple APIs that your app is going to work with. In our case our entire backend is just one single API.
 
 - The `Amplify.configure()` is just setting the various AWS resources that we want to interact with. It isn't doing anything else special here beside configuration. So while this might look intimidating, just remember this is only setting things up. 
+
+### Commit the Changes
+
+<img class="code-marker" src="/assets/s.png" />Let's commit our code so far and push it to GitHub.
+
+``` bash
+$ git add .
+$ git commit -m "Setting up our React app"
+$ git push
+```
 
 Next up, we are going to work on creating our login and sign up forms.

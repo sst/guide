@@ -183,7 +183,7 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 <AppliedRoute path="/signup" exact component={Signup} appProps={appProps} />
 ```
 
-And include our component in the header.
+<img class="code-marker" src="/assets/s.png" />And include our component in the header.
 
 ``` javascript
 import Signup from "./containers/Signup";

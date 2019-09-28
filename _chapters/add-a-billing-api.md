@@ -82,10 +82,13 @@ This is basically saying that if a user wants to store 10 or fewer notes, we'll 
 
 Let's add a reference to our new API and Lambda function.
 
-<img class="code-marker" src="/assets/s.png" />Add the following above the `resources:` block in the `serverless.yml`.
+<img class="code-marker" src="/assets/s.png" />Open the `serverless.yml` file and append the following to it.
 
 ``` yml
   billing:
+    # Defines an HTTP API endpoint that calls the main function in billing.js
+    # - path: url path is /billing
+    # - method: POST request
     handler: billing.main
     events:
       - http:

@@ -70,6 +70,8 @@ resources:
   - ${file(resources/api-gateway-errors.yml)}
 ```
 
+Make sure this is **indented correctly**. The `resources:` block is a top level property.
+
 And that's it. We are ready to deploy our APIs.
 
 ### Commit the Changes
