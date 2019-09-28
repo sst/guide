@@ -255,6 +255,20 @@ conclusion:
       url: /chapters/changelog.html
     - page: Staying up to date
       url: /chapters/staying-up-to-date.html
+      
+extra-organize-repo:
+  title: Organize Repoo
+  chapters:
+    - page: Organizing services (Monorepo vs Multi-repo)
+      url: /chapters/organizing-services.html
+    - page: Sharing code and config between services
+      url: /chapters/sharing-code-and-config-between-services.html
+    - page: Inter-service dependency
+      url: /chapters/inter-service-dependency.html
+    - page: Deploying services with dependency in phases
+      url: /chapters/deploying-services-with-dependency-in-phases.html
+    - page: Sharing API endpoint between services
+      url: /chapters/sharing-api-endpoint-between-services.html
 
 extra-sls-architecture:
   title: Serverless architecture
