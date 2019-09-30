@@ -1,60 +1,73 @@
-# Sharing API endpoint between API services
+---
+layout: post
+title: Sharing API endpoint between API services
+description: 
+date: 2019-09-29 00:00:00
+comments_id: 
+---
 
 In our example, we have two services with API endpoints, `carts-api` and `checkout-api`. In this chapter, we are going to look at how to configure API Gateway such that both services are served out via a single API endpoint.
 
 The API path we want to setup is:
 
-- `carts-api` list all carts ⇒ GET [https://base...domain/carts](https://base...domain/carts)
-- `carts-api` get one cart ⇒ GET [https://base...domain/carts](https://base...domain/carts)/{cartId}
-- `carts-api` update cart ⇒ POST [https://base...domain/carts](https://base...domain/carts)/{cartId}
-- `checkout-api` checkout ⇒ POST [https://base...domain/carts](https://base...domain/carts)/{cartId}/checkout
+- `carts-api` list all carts ⇒ GET `https://api.example.com/carts`
+- `carts-api` get one cart ⇒ GET `https://api.example.com/carts/{cartId}`
+- `carts-api` update cart ⇒ POST `https://api.example.com/carts/{cartId}`
+- `checkout-api` checkout ⇒ POST `https://api.example.com/carts/{cartId}/checkout`
 
-API Gateway is structured such that each path part is an API Gateway resource object. And is a child resource of the previous part. For example:
+### How paths work in API Gateway
 
-- `/carts` is a child of `/`; and
-- `/carts/{cartId}` is a child of `/carts`
+API Gateway is structured in a slightly tricky way. Let's look at this in detail.
 
-And we are going to make
+- Each path part is a separate API Gateway resource object.
+- And a path part is a child resource of the preceding part.
 
-- `/carts/{cartId}/checkout` is a child of `/carts/{cartId}`
+Let's look at an example. So `/carts` is a child of `/`. And `/carts/{cartId}` is a child of `/carts`.
 
-# Sharing API Gateway Project
+Based on our setup, we want the `checkout-api` to have the `/carts/{cartId}/checkout` path. And this would be a child resource of `/carts/{cartId}`. However, `/carts/{cartId}` is created in the `carts-api` service. So we'll need to find a way to share the resource across services.
 
-To do that, `carts-api` needs to share the API Gateway settings and the parent part `/carts/{cartId}`.
+### Sharing API Gateway projects
 
-Open `carts-api`'s serverless.yml and add the following outputs:
+To do this, the `carts-api` needs to share the API Gateway settings and the parent part `/carts/{cartId}`.
+
+We'll add the following outputs to the `carts-api`'s `serverless.yml`:
+
+TODO: FORMAT THESE SNIPPETS
+
+``` yml
+service: carts-api
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+
+...
+
+resource:
+  - Outputs:
+      ApiGatewayRestApiId:
+        Value:
+          Ref: ApiGatewayRestApi
+        Export:
+          Name: ApiGatewayRestApiId-${self:custom.stage}
+
+      ApiGatewayRestApiRootResourceId:                                                                
+        Value:                                                                                        
+           Fn::GetAtt:                                                                                
+            - ApiGatewayRestApi                                                                       
+            - RootResourceId                                                                          
+        Export:                                                                                       
+          Name: ApiGatewayRestApiRootResourceId-${self:custom.stage}
+
+      ApiGatewayResourceCartsVarResourceId:
+        Value:
+          Ref: ApiGatewayResourceCartsVar
+        Export:
+          Name: ApiGatewayResourceCartsVarResourceId-${self:custom.stage}
 ```
-    service: carts-api
-    
-    custom:
-      stage: ${opt:stage, self:provider.stage}
-    
-    ...
-    
-    resource:
-    	- Outputs:
-    			ApiGatewayRestApiId:
-            Value:
-              Ref: ApiGatewayRestApi
-            Export:
-              Name: ApiGatewayRestApiId-${self:custom.stage}
-    
-    			ApiGatewayRestApiRootResourceId:                                                                
-            Value:                                                                                        
-               Fn::GetAtt:                                                                                
-                - ApiGatewayRestApi                                                                       
-                - RootResourceId                                                                          
-            Export:                                                                                       
-              Name: ApiGatewayRestApiRootResourceId-${self:custom.stage}
-    
-          ApiGatewayResourceCartsVarResourceId:
-            Value:
-    					Ref: ApiGatewayResourceCartsVar
-            Export:
-              Name: ApiGatewayResourceCartsVarResourceId-${self:custom.stage}
-```
-Then open `checkout-api`'s serverless.yml and tell Serverless Framework to import and reuse the API Gateway settings.
-```
+
+Then open `checkout-api`'s serverless.yml and tell Serverless Framework to import and reuse the API Gateway settings from the `carts-api` service.
+
+``` yml
     service: checkout-api
     
     custom:
@@ -82,21 +95,25 @@ Then open `checkout-api`'s serverless.yml and tell Serverless Framework to impor
 
 Now when you deploy the `checkout-api` service, instead of creating a new API Gateway project, Serverless Framework is going to reuse the project you imported.
 
-# Dependency
+#### Dependency
 
 By sharing API Gateway project, we are making the `checkout-api` depend on the `carts-api`. When deploying, you need to ensure the `carts-api` is deployed first.
 
-# What you cannot do?
+#### Limitations
 
-A path part can only be created once. For example, if you need to add another api service. And the Lambda gets triggered by
+Note that, a path part can only be created **ONCE**. Let's look at an example to understand how this works. Say you need to add another API service that uses the following endpoint.
 
-[https://base...domain/carts](https://base...domain/carts)/{cartId}/checkout/xyz
+```
+https://api.example.com/carts/{cartId}/checkout/xyz
+```
 
-This new service **CANNOT** import `/carts/{cartId}` from `carts-api`. Serverless Framework is going to create two parts:
+This new service **CANNOT** import `/carts/{cartId}` from the `carts-api`.
 
-- `/carts/{cartId}/checkout`; and
-- `/carts/{cartId}/checkout/xyz`
+This is because, Serverless Framework tries to create the following two path parts:
 
-But `/carts/{cartId}/checkout` is already created in the `checkout-api`, and if you were to deploy the new service, CloudFormation will fail and complain resource already exists.
+1. `/carts/{cartId}/checkout`
+2. `/carts/{cartId}/checkout/xyz`
 
-You **HAVE TO** import `/carts/{cartId}/checkout` from the `checkout-api`, so the new service will only need to create `/carts/{cartId}/checkout/xyz`.
+But `/carts/{cartId}/checkout` has already been created in the `checkout-api` service. So if you were to deploy this new service, CloudFormation will fail and complain that the resource already exists.
+
+You **HAVE TO** import `/carts/{cartId}/checkout` from the `checkout-api`, so the new service will only need to create the `/carts/{cartId}/checkout/xyz` part.
