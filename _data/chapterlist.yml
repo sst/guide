@@ -270,6 +270,28 @@ extra-organize-repo:
     - page: Sharing API endpoint between services
       url: /chapters/sharing-api-endpoint-between-services.html
 
+extra-configure-environments:
+  title: Configure Environments
+  chapters:
+    - page: Many development stages
+      url: /chapters/many-development-stages.html
+    - page: Structure environments across AWS accounts
+      url: /chapters/structure-environments-across-aws-accounts.html
+    - page: Create and manage AWS accounts using AWS Organizations
+      url: /chapters/create-and-manage-aws-accounts-using-aws-organizations.html
+    - page: Parameterize resources names
+      url: /chapters/parameterize-resources-names.html
+    - page: Deploy environments to multiple AWS accounts
+      url: /chapters/deploy-environments-to-multiple-aws-accounts.html
+    - page: Manage environment specific config
+      url: /chapters/manage-environment-specific-config.html
+    - page: Manage environment specific secrets
+      url: /chapters/manage-environment-specific-secrets.html
+    - page: Sharing Route 53 domain across AWS accounts
+      url: /chapters/sharing-route-53-domain-across-aws-accounts.html
+    - page: Manage cost and usage for AWS accounts
+      url: /chapters/manage-cost-and-usage-for-aws-accounts.html
+
 extra-sls-architecture:
   title: Serverless architecture
   chapters:
