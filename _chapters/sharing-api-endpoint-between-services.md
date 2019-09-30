@@ -58,11 +58,11 @@ resource:
         Export:                                                                                       
           Name: ApiGatewayRestApiRootResourceId-${self:custom.stage}
 
-      ApiGatewayResourceCartsVarResourceId:
+      ApiGatewayResourceCartsCartidVarResourceId:
         Value:
-          Ref: ApiGatewayResourceCartsVar
+          Ref: ApiGatewayResourceCartsCartidVar
         Export:
-          Name: ApiGatewayResourceCartsVarResourceId-${self:custom.stage}
+          Name: ApiGatewayResourceCartsCartidVarResourceId-${self:custom.stage}
 ```
 
 Then open `checkout-api`'s serverless.yml and tell Serverless Framework to import and reuse the API Gateway settings from the `carts-api` service.
@@ -74,19 +74,19 @@ Then open `checkout-api`'s serverless.yml and tell Serverless Framework to impor
       stage: ${opt:stage, self:provider.stage}
     
     provider:
-    	apiGateway:
+      apiGateway:
         restApiId:
           'Fn::ImportValue': ApiGatewayRestApiId-${self:custom.stage}
         restApiRootResourceId:
           'Fn::ImportValue': ApiGatewayRestApiRootResourceId-${self:custom.stage}
-    		restApiResources:
+        restApiResources:
           /carts/{cartId}:                                                                         
-            'Fn::ImportValue': ApiGatewayResourceCartsVarResourceId-${self:custom.stage}
+            'Fn::ImportValue': ApiGatewayResourceCartsCartidVarResourceId-${self:custom.stage}
     ...
     
     functions:
-    	checkout:
-    		handler: checkout.main
+      checkout:
+        handler: checkout.main
         events:
           - http:
               path: /carts/{cartId}/checkout                                                       
