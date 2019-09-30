@@ -50,12 +50,12 @@ resource:
         Export:
           Name: ApiGatewayRestApiId-${self:custom.stage}
 
-      ApiGatewayRestApiRootResourceId:                                                                
-        Value:                                                                                        
-           Fn::GetAtt:                                                                                
-            - ApiGatewayRestApi                                                                       
-            - RootResourceId                                                                          
-        Export:                                                                                       
+      ApiGatewayRestApiRootResourceId:
+        Value:
+           Fn::GetAtt:
+            - ApiGatewayRestApi
+            - RootResourceId
+        Export:
           Name: ApiGatewayRestApiRootResourceId-${self:custom.stage}
 
       ApiGatewayResourceCartsCartidVarResourceId:
@@ -68,29 +68,29 @@ resource:
 Then open `checkout-api`'s serverless.yml and tell Serverless Framework to import and reuse the API Gateway settings from the `carts-api` service.
 
 ``` yml
-    service: checkout-api
-    
-    custom:
-      stage: ${opt:stage, self:provider.stage}
-    
-    provider:
-      apiGateway:
-        restApiId:
-          'Fn::ImportValue': ApiGatewayRestApiId-${self:custom.stage}
-        restApiRootResourceId:
-          'Fn::ImportValue': ApiGatewayRestApiRootResourceId-${self:custom.stage}
-        restApiResources:
-          /carts/{cartId}:                                                                         
-            'Fn::ImportValue': ApiGatewayResourceCartsCartidVarResourceId-${self:custom.stage}
-    ...
-    
-    functions:
-      checkout:
-        handler: checkout.main
-        events:
-          - http:
-              path: /carts/{cartId}/checkout                                                       
-              method: post
+service: checkout-api
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+
+provider:
+  apiGateway:
+    restApiId:
+      'Fn::ImportValue': ApiGatewayRestApiId-${self:custom.stage}
+    restApiRootResourceId:
+      'Fn::ImportValue': ApiGatewayRestApiRootResourceId-${self:custom.stage}
+    restApiResources:
+      /carts/{cartId}:
+        'Fn::ImportValue': ApiGatewayResourceCartsCartidVarResourceId-${self:custom.stage}
+...
+
+functions:
+  checkout:
+    handler: checkout.main
+    events:
+      - http:
+          path: /carts/{cartId}/checkout
+          method: post
 ```
 
 Now when you deploy the `checkout-api` service, instead of creating a new API Gateway project, Serverless Framework is going to reuse the project you imported.
@@ -117,3 +117,5 @@ This is because, Serverless Framework tries to create the following two path par
 But `/carts/{cartId}/checkout` has already been created in the `checkout-api` service. So if you were to deploy this new service, CloudFormation will fail and complain that the resource already exists.
 
 You **HAVE TO** import `/carts/{cartId}/checkout` from the `checkout-api`, so the new service will only need to create the `/carts/{cartId}/checkout/xyz` part.
+
+Now we are done organizing our services and we are ready to deploy them. To recap, our jobs services share a resource — an SNS topic. And our API services share a resource as well — the API Gatway endpoint. Next we'll look at how to deploy services with dependencies.

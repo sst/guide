@@ -99,4 +99,4 @@ provider:
 
 You can do something similar for any other `serverless.yml` config that needs to be shared.
 
-In the next post, we are going to look at what happens if a service is dependent on another service. And how this affects the deployment process.
+In the next chapter, we are going to look at what happens if a service is dependent on another service. And how this affects the deployment process.
