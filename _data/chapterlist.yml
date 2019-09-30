@@ -278,7 +278,7 @@ extra-configure-environments:
     - page: Structure environments across AWS accounts
       url: /chapters/structure-environments-across-aws-accounts.html
     - page: Create and manage AWS accounts using AWS Organizations
-      url: /chapters/create-and-manage-aws-accounts-using-aws-Organizations.html
+      url: /chapters/create-and-manage-aws-accounts-using-aws-organizations.html
     - page: Parameterize resources names
       url: /chapters/parameterize-resources-names.html
     - page: Deploy environments to multiple AWS accounts
