@@ -59,3 +59,5 @@ functions:
 TODO: UPDATE LINK
 
 Note that we are using `${opt:stage}` here because we want to parameterize our resources using the name of the stage we are deploying to. We'll cover this in detail in the [Parameterize resources] chapter.
+
+Next, let's look at what happens when multiple API services need to share the same API endpoint.
