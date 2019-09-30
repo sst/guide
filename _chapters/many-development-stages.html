@@ -1,0 +1,22 @@
+### Pay per use = multiple dev environments
+
+Serverless apps and their associated services (Lambda, API Gateway, DynamoDB, etc.) all have a pay per use model. And it seems very likely that more AWS services are moving towards that model. Also, thanks to the [infrastructure as code](https://serverless-stack.com/chapters/what-is-infrastructure-as-code.html) idea that Serverless uses, it is very easy to replicate environments. So creating multiple dev/staging environments is something that is highly recommended.
+
+### Long-Lived Stages
+
+Serverless doesn't changes how you setup the long-lived stages. You still have the usual `dev` stage, `prod` stage. And the intermediate stages in between such as `staging`, `qa`, `preprod`, etc. Larger the team, more intermediate stages you have.
+
+### Transient Stages
+
+There are two costs for setting up a new environment:
+
+- mirroring the production environment as much as possible;
+- infrastructure cost to host the environment
+
+During development, you usually have a number of development git branches like feature branches and hot fix branches. In the traditional world, many teams don't setup an environment for each of the branches, simply due to the overhead cost mentioned above for setting one up, and then also tearing them down.
+
+In addition, once a branch is ready to be merged, a pull request is created. Ideally you want to deploy the temporarily merged version of code to a pull request environment. If you have used Heroku in the past, this is the idea behind their Review Apps.
+
+As mentioned in the beginning of the chapter, since creating an environment is convenient and cheap, it is the best practice to create these transient stages, test against them, and then tear them down.
+
+Seed can automatically create stages for a feature branch on branch creation and for PRs on PR creation. And automatically the stages up on branch removal and PR close.
