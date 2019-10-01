@@ -61,7 +61,8 @@ Why? Most of the code changes are going to happen in the **my-cart-app** repo. W
 
 On the other hand, changes are going to happen less frequently in the **my-cart-resources** repo. And most likely you don't need a complete set of standalone DynamoDB tables for each feature branch. In fact, a team can have three stages such as: prod, staging, and dev. And the feature/bugfix/pr stages of the **my-cart-app** can all connect to the dev stage of the **my-cart-resources.**
 
-[](/assets/best-practices/organizing-services-1.png)
+TODO: UPDATE SCREENSHOT
+![](/assets/best-practices/organizing-services-1.png)
 
 This is what we have seen most teams do. And this setup scales well as your project and team grows.
 

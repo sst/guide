@@ -22,7 +22,7 @@ API Gateway is structured in a slightly tricky way. Let's look at this in detail
 - Each path part is a separate API Gateway resource object.
 - And a path part is a child resource of the preceding part.
 
-Let's look at an example. So `/carts` is a child of `/`. And `/carts/{cartId}` is a child of `/carts`.
+So the part path `/carts`, is a child resource of `/`. And `/carts/{cartId}` is a child resource of `/carts`.
 
 Based on our setup, we want the `checkout-api` to have the `/carts/{cartId}/checkout` path. And this would be a child resource of `/carts/{cartId}`. However, `/carts/{cartId}` is created in the `carts-api` service. So we'll need to find a way to share the resource across services.
 

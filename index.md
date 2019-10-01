@@ -40,7 +40,8 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
           <p>The best practices for running Serverless apps in production.</p>
         </div>
         <div class="chapters">
-          {% include toc-chapters.html items=site.data.chapterlist.extra-sls-architecture id="extra-sls-architecture" %}
+          {% include toc-chapters.html items=site.data.chapterlist.organize-serverless-apps id="organize-serverless-apps" %}
+          {% include toc-chapters.html items=site.data.chapterlist.configure-environments id="configure-environments" %}
           <a class="expand"><span>Show all chapters</span></a>
         </div>
       </div>
@@ -52,7 +53,6 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
         </div>
         <div class="chapters">
           {% include toc-chapters.html items=site.data.chapterlist.extra-backend id="extra-backend" %}
-          {% include toc-chapters.html items=site.data.chapterlist.extra-user-mgmt id="extra-user-management" %}
           {% include toc-chapters.html items=site.data.chapterlist.extra-frontend id="extra-frontend" %}
           <a class="expand"><span>Show all chapters</span></a>
         </div>

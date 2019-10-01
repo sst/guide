@@ -189,7 +189,6 @@ build-react:
           url: /chapters/redirect-on-login.html
 
 deploy-backend-prod:
-  title: Serverless apps in production
   title: Deploying the backend to production 
   chapters:
     - page: Getting production ready
@@ -256,8 +255,8 @@ conclusion:
     - page: Staying up to date
       url: /chapters/staying-up-to-date.html
       
-extra-organize-repo:
-  title: Organize Repoo
+organize-serverless-apps:
+  title: Organize a Serverless app
   chapters:
     - page: Organizing services (Monorepo vs Multi-repo)
       url: /chapters/organizing-services.html
@@ -265,13 +264,13 @@ extra-organize-repo:
       url: /chapters/sharing-code-and-config-between-services.html
     - page: Inter-service dependency
       url: /chapters/inter-service-dependency.html
-    - page: Deploying services with dependency in phases
-      url: /chapters/deploying-services-with-dependency-in-phases.html
     - page: Sharing API endpoint between services
       url: /chapters/sharing-api-endpoint-between-services.html
+    - page: Deploying services with dependency in phases
+      url: /chapters/deploying-services-with-dependency-in-phases.html
 
-extra-configure-environments:
-  title: Configure Environments
+configure-environments:
+  title: Configure environments
   chapters:
     - page: Many development stages
       url: /chapters/many-development-stages.html
@@ -292,27 +291,8 @@ extra-configure-environments:
     - page: Manage cost and usage for AWS accounts
       url: /chapters/manage-cost-and-usage-for-aws-accounts.html
 
-extra-sls-architecture:
-  title: Serverless architecture
-  chapters:
-    - page: Organizing Serverless projects
-      url: /chapters/organizing-serverless-projects.html
-    - page: Cross-stack references in Serverless
-      url: /chapters/cross-stack-references-in-serverless.html
-      subchapters:
-        - page: DynamoDB as a Serverless service
-          url: /chapters/dynamodb-as-a-serverless-service.html
-        - page: S3 as a Serverless service
-          url: /chapters/s3-as-a-serverless-service.html
-        - page: API Gateway domains across services
-          url: /chapters/api-gateway-domains-across-services.html
-        - page: Cognito as a Serverless service
-          url: /chapters/cognito-as-a-serverless-service.html
-    - page: Deploying multiple services in Serverless
-      url: /chapters/deploying-multiple-services-in-serverless.html
-
 extra-backend:
-  title: Backend
+  title: Serverless
   chapters:
     - page: API Gateway and Lambda Logs
       url: /chapters/api-gateway-and-lambda-logs.html
@@ -336,21 +316,21 @@ extra-backend:
       url: /chapters/serverless-nodejs-starter.html
     - page: Package Lambdas with serverless-bundle
       url: /chapters/package-lambdas-with-serverless-bundle.html
-
-extra-user-mgmt:
-  title: User Management
-  chapters:
-    - page: Manage User Accounts in AWS Amplify
-      url: /chapters/manage-user-accounts-in-aws-amplify.html
+    - page: Organizing Serverless projects
+      url: /chapters/organizing-serverless-projects.html
       subchapters:
-        - page: Handle Forgot and Reset Password
-          url: /chapters/handle-forgot-and-reset-password.html
-        - page: Allow Users to Change Passwords
-          url: /chapters/allow-users-to-change-passwords.html
-        - page: Allow Users to Change Their Email
-          url: /chapters/allow-users-to-change-their-email.html
-    - page: Facebook Login with Cognito using AWS Amplify
-      url: /chapters/facebook-login-with-cognito-using-aws-amplify.html
+        - page: Cross-stack references in Serverless
+          url: /chapters/cross-stack-references-in-serverless.html
+        - page: DynamoDB as a Serverless service
+          url: /chapters/dynamodb-as-a-serverless-service.html
+        - page: S3 as a Serverless service
+          url: /chapters/s3-as-a-serverless-service.html
+        - page: API Gateway domains across services
+          url: /chapters/api-gateway-domains-across-services.html
+        - page: Cognito as a Serverless service
+          url: /chapters/cognito-as-a-serverless-service.html
+        - page: Deploying multiple services in Serverless
+          url: /chapters/deploying-multiple-services-in-serverless.html
 
 extra-frontend:
   title: React
@@ -378,3 +358,14 @@ extra-frontend:
           url: /chapters/setup-ssl.html
         - page: Deploy updates
           url: /chapters/deploy-updates.html
+    - page: Manage User Accounts in AWS Amplify
+      url: /chapters/manage-user-accounts-in-aws-amplify.html
+      subchapters:
+        - page: Handle Forgot and Reset Password
+          url: /chapters/handle-forgot-and-reset-password.html
+        - page: Allow Users to Change Passwords
+          url: /chapters/allow-users-to-change-passwords.html
+        - page: Allow Users to Change Their Email
+          url: /chapters/allow-users-to-change-their-email.html
+    - page: Facebook Login with Cognito using AWS Amplify
+      url: /chapters/facebook-login-with-cognito-using-aws-amplify.html

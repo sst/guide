@@ -1,33 +1,45 @@
+---
+layout: post
+title: Deploy environments to multiple AWS accounts
+description: 
+date: 2019-09-30 00:00:00
+comments_id: 
+---
+
 Now you have AWS accounts created and resources parameterized. In this chapter, we will deploy the `carts-api` service in our `my-cart-app` app to 3 environments: `featureX`, `hotfixY` and `prod`. The former two will be deployed into our `Development` account and the `prod` environment will be deployed into our `Production` account.
 
 **Note**: in reality you should never deploy to production environment from your local machine. But for the purpose of this chapter, we will do it anyways.
 
-# Configure AWS Profiles
+### Configure AWS Profiles
 
 Follow [setup up IAM users] chapter to create an IAM user in your `Production` account. And take a note of the **Access key ID** and **Secret access key** for the user.
 
 Setup the credentials using the AWS CLI:
-```
-    $ aws configure --profile Production
+
+``` bash
+$ aws configure --profile Production
 ```
 
 Repeat the step to create an IAM user in your `Development` account. And setup the credentials using the AWS CLI again:
-```
-    $ aws configure --profile Development
+
+``` bash
+$ aws configure --profile Development
 ```
 
-# Deploy
+### Deploy
 
 To deploy to the `featureX` environment, navigate to the root of the `carts-api` directory:
-```
-    $ cd services/carts-api
+
+``` bash
+$ cd services/carts-api
 ```
 
 You should see the `serverless.yml` file for the `carts-api` service in this directory.
 
 Then deploy:
-```
-    $ sls deploy -s featureX --aws-profile Development
+
+``` bash
+$ serverless deploy -s featureX --aws-profile Development
 ```
 
 Serverless Framework has a concept of stages. They are synonyms for environments. Recall in the previous chapter, we used this stage name to parameter our resource names. 
@@ -35,13 +47,15 @@ Serverless Framework has a concept of stages. They are synonyms for environments
 The above command parameterizes the resource names using the stage name `featureX` and deploys the CloudFormation template to our `Development` account by using the IAM credentials we previous configured using AWS CLI.
 
 Deploy again to the `hotfixY` environment:
-```
-    $ sls deploy -s hotfixY --aws-profile Development
+
+``` bash
+$ serverless deploy -s hotfixY --aws-profile Development
 ```
 
 This command parameterizes the resource names using the stage name `hotfixY` and deploys to our `Development`. Note, if we forgot to parameterize the name of a resource, this command will fail.
 
 Finally, deploy again to the `prod` environment
-```
-    $ sls deploy -s prod --aws-profile Production
+
+``` bash
+$ serverless deploy -s prod --aws-profile Production
 ```
