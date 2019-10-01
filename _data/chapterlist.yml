@@ -291,6 +291,32 @@ configure-environments:
     - page: Manage cost and usage for AWS accounts
       url: /chapters/manage-cost-and-usage-for-aws-accounts.html
 
+deployment-lifecycle:
+  title: Development Lifecycle
+  chapters:
+    - page: Invoking Lambda locally
+      url: /chapters/invoking-lambda-locally.html
+    - page: Invoking API endpoint locally
+      url: /chapters/invoking-api-endpoint-locally.html
+    - page: Creating Pull Request environments
+      url: /chapters/creating-pull-request-environments.html
+    - page: Working in Pull Request environments
+      url: /chapters/working-in-pull-request-environments.html
+    - page: Merging to master
+      url: /chapters/merging-to-master.html
+    - page: Promote to production
+      url: /chapters/promote-to-production.html
+    - page: Rollback
+      url: /chapters/rollback.html
+    - page: Deploy only changed services
+      url: /chapters/deploy-only-changed-services.html
+
+debugging:
+  title: Debugging
+  chapters:
+    - page: Tracing Lambda functions with X-Ray
+      url: /chapters/tracing-lambda-functions-with-x-ray.html
+
 extra-backend:
   title: Serverless
   chapters:
