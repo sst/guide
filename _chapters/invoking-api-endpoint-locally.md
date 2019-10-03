@@ -1,3 +1,11 @@
+---
+layout: post
+title: Invoking API endpoint locally
+description: 
+date: 2019-10-02 00:00:00
+comments_id: 
+---
+
 You will use the `serverless-offline` plugin [https://github.com/dherault/serverless- offline](https://github.com/dherault/serverless-offline) to start a web server locally and emulate.
 
 # Invoke API locally

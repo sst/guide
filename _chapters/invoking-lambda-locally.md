@@ -1,3 +1,11 @@
+---
+layout: post
+title: Invoking Lambda locally
+description: 
+date: 2019-10-02 00:00:00
+comments_id: 
+---
+
 After you finish coding a function, you run it locally first its functionality.
 
 # Invoking Lambda locally

@@ -1,3 +1,11 @@
+---
+layout: post
+title: Deploy only changed services
+description: 
+date: 2019-10-02 00:00:00
+comments_id: 
+---
+
 Notice when we merged the `recommendations` branch to the `master` branch, on Seed app page, only the `recommendations-api` service showed a solid check. The other four services showed a greyed out check. Grey check means there is no change to be deployed for this service.
 
 ![](/assets/best-practices/deploy-only-changed-services-1.png)

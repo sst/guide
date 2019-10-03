@@ -1,54 +1,81 @@
-Recall we splitted our application into two repos `my-cart-resources` and `my-cart-app`. Each repo will be deployed into multiple environments. In our code, we need to let `my-cart-app` know which resources environment to talk to based on the environment the code is running in. 
+---
+layout: post
+title: Manage environment specific config
+description: 
+date: 2019-10-02 00:00:00
+comments_id: 
+---
 
-First, we need to let Lambda function know which environment it is running in. We are going to pass the name of the stage to Lambda functions as environment variables.
+In this chapter we'll look at how our services will connect to each other while they are deployed across multiple environments.
 
-Add environment variable in `serverless.yml`
-```
-    ...
-    
-    custom:
-      stage: ${opt:stage, self:provider.stage}
-    
-    provider:
-      environment:
-    		stage: ${self:custom.stage}
-    ...
-    
-```
-This add a `stage` environment variable to all Lambda functions in the service, which can be accessed via `process.env.stage` at runtime. And it is going to return the name of the stage it is running in, ie. `featureX`, `dev`, `prod`.
+Let's quickly review the setup that we've created back in the [Organizing services chapter]({% link _chapters/organizing-services.md %}).
 
-Then we add the parameter names in `config.js`
-```
-    const stageConfigs = {
-    	dev: {
-    		resourcesStage: 'dev',
-    	},
-    	prod: {
-    		resourcesStage: 'prod',
-    	},
-    };
-    
-    const config = stageConfigs[process.env.stage] || stageConfigs.dev;
-    
-    export default {
-    	...config
-    };
-```
-The code reads the current stage from the environment variable `process.env.stage`, and selects the corresponding config. Ie:
+1. We have two repos — `my-cart-resources` and `my-cart-app`. One has our infrastructure specific resources, while the other has all our Lambda functions.
+2. The `my-cart-resources` repo is deployed a couple of long lived environments; like `dev` and `prod`.
+3. While, the `my-cart-app` is deployed to a few ephemeral environments (like `featureX` that is connected to the `dev` environment), in addition to the long lived environments above.
 
-- when stage is `prod`, it exports `stageConfigs.prod`
-- when stage is `dev`, it exports `stageConfigs.dev`
-- when stage is `featureX`, it falls back to dev config and exports `stageConfigs.dev`
+We need to figure out a way to let the Lambda functions running in the `featureX` environment to connect to the `dev` environment of the `my-cart-resources` repo.
 
-Then when calling DynamoDB
+Let's look at how to do that.
+
+### Set a stage environment variable
+
+First, we need to let Lambda function know which environment it's running in. We are going to pass the name of the stage to the Lambda functions as environment variables.
+
+Add an environment variable in the `serverless.yml`.
+
+``` yml
+...
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+
+provider:
+  environment:
+    stage: ${self:custom.stage}
+...
 ```
-    const aws = import 'aws-sdk';
-    const config = import 'config.js';
-    
-    const dynamodb = new AWS.DynamoDB.DocumentClient();
-    const ret = dynamodb.get({
-    	TableName: `carts-${config.resourcesStage}`,
-    	...
-    }).promise();
-    ...
+
+This adds a `stage` environment variable to all the Lambda functions in the service. Recall that we can access this via the `process.env.stage` variable at runtime. And it's going to return the name of the stage it's running in, ie. `featureX`, `dev`, or `prod`.
+
+### Create a stage based config
+
+Now in our `config.js`, we'll use the stage to figure out which resources stage we want to use.
+
+``` js
+const stageConfigs = {
+  dev: {
+    resourcesStage: 'dev'
+  },
+  prod: {
+    resourcesStage: 'prod'
+  }
+};
+
+const config = stageConfigs[process.env.stage] || stageConfigs.dev;
+
+export default {
+  ...config
+};
+```
+
+The above code reads the current stage from the environment variable `process.env.stage`, and selects the corresponding config.
+
+- If the stage is `prod`, it exports `stageConfigs.prod`.
+- If the stage is `dev`, it exports `stageConfigs.dev`.
+- And if stage is `featureX`, it falls back to the dev config and exports `stageConfigs.dev`.
+
+Finally, while calling DynamoDB we can use the config to get the DynamoDB table we want to use.
+
+``` js
+import AWS from 'aws-sdk';
+import config from 'config';
+
+const dynamodb = new AWS.DynamoDB.DocumentClient();
+const ret = dynamodb.get({
+  TableName: `carts-${config.resourcesStage}`,
+  ...
+}).promise();
+
+...
 ```

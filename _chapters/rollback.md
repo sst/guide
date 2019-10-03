@@ -1,3 +1,11 @@
+---
+layout: post
+title: Rollback
+description: 
+date: 2019-10-02 00:00:00
+comments_id: 
+---
+
 Making sure that you are able to rollback your Serverless deployments is critical to managing your own CI/CD pipeline. In this chapter we’ll look at what the right rollback strategy is for your Serverless apps.
 
 # Rollback to previous build

@@ -1,3 +1,11 @@
+---
+layout: post
+title: Creating pull request environments
+description: 
+date: 2019-10-02 00:00:00
+comments_id: 
+---
+
 Beside Lambda and API Gateway, your project will have other AWS services. To run your code locally, you have to simulate the AWS services. Similar to `serverless-offline` simulates API Gateway, there are plugins like `serverless-dynamodb-local` and `serverless-offline-sns` that can simulate DynamoDB and SNS. However, mocking only takes you so far since they do not simulate IAM permission and they are not always updated with the services' latest changes. You want to test your code on real resources asap.
 
 Let's add a new feature that shows recommendation items based on the items in clear the cart (ie. similar to Amazon's customer who bought this also bought this). We will add a new API endpoint `/carts/{cartId}/recommendations`, let's take a look at what our pull request workflow looks like.

@@ -1,3 +1,11 @@
+---
+layout: post
+title: Promote to production
+description: 
+date: 2019-10-02 00:00:00
+comments_id: 
+---
+
 Once you have tested the code in `dev` stage, it is ready to deploy our code to the `prod` stage. We are going to do so by promoting our `dev` stage to `prod`.
 
 # Promote

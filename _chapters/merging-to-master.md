@@ -1,3 +1,11 @@
+---
+layout: post
+title: Merging to master
+description: 
+date: 2019-10-02 00:00:00
+comments_id: 
+---
+
 # Final deploy
 
 After local development is completed in the `recommendations` branch, before merging the branch into the `master` branch, make sure you don't have any un-pushed commits. Because you have been deploying locally while developing, if you have un-push commits, you want to do a git push and let Seed do a clean deployment of all services. Then do a final clean test before merging back to `master`.

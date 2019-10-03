@@ -1,3 +1,11 @@
+---
+layout: post
+title: Working in pull request environments
+description: 
+date: 2019-10-02 00:00:00
+comments_id: 
+---
+
 After commiting the initial version of code to the `recommendations` branch, you are going to keep working on it. A common problem people running into is `sls deploy` takes very long to execute. And running `sls deploy` for each small change just takes very long.
 
 # Why is 'sls deploy' slow?

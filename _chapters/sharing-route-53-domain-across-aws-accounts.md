@@ -1,65 +1,81 @@
-Our `my-cart-app` has an API Gateway endpoint. In this chapter, we are going to look at how to set up custom domain for the API in each of our environment.
+---
+layout: post
+title: Sharing Route 53 domains across AWS accounts
+description: 
+date: 2019-10-02 00:00:00
+comments_id: 
+---
 
-The custom domain scheme we are going to follow is:
+Our `my-cart-app` has an API Gateway endpoint. In this chapter, we are going to look at how to set up custom domains for each of our environments.
 
-- `prod` stage ⇒ api.my-cart-app.com
-- `dev` stage ⇒ dev.api.my-cart-app.com
+We are going to setup the following custom domain scheme:
 
-# Setup domain for prod
+- `prod` ⇒ api.my-cart-app.com
+- `dev` ⇒ dev.api.my-cart-app.com
 
-Note `prod` and `dev` are deployed to different AWS accounts. Assume we are hosting the domain [my-cart-app.com](http://my-cart-app.com) in the `Production` account. We can easily configure the custom domain for `prod`'s API endpoint.  Read [Set custom domains through Seed] to get familiar on how to create custom domains for your API Gateway endpoint.
+### Setup domain for prod
 
-# Setup domain for dev
+Recall that `prod` and `dev` are deployed to separate AWS accounts. Assume we are hosting the domain `my-cart-app.com` in the `Production` account. We can easily configure the custom domain for `prod`'s API endpoint. You can read about [how to setup a custom domain for API Gateway here](https://seed.run/blog/how-to-set-up-a-custom-domain-name-for-api-gateway-in-your-serverless-app). Alternatively, you can easily [set this up through Seed](https://seed.run/docs/configuring-custom-domains).
 
-We are going to delegate the subdomain `[dev.api.my-cart-app.com](http://dev.api.my-cart-app.com)` to be hosted in the `Development` account. As you follow the steps, whenever you are in doubt of which account the a step is performed in, pay attention to the account name shown at the top right corner of the screenshot.
+TODO: ADD SEED CUSTOM DOMAIN SCREENSHOT
 
-First, go into your Route 53 console in your `Development` account:
+### Setup domain for dev
 
-[](/assets/best-practices/sharing-route-53-domain-across-aws-accounts-1.png)
+However, using the same domain for our dev environments takes an extra step. This is because the `dev` environment is in a separate AWS account.
 
-Select **Hosted zones** on the left menu. Then select **Create Hosted Zone**.
+We are going to have to delegate the subdomain `dev.api.my-cart-app.com` to be hosted in the `Development` AWS account. Just a quick note, as you follow these steps, pay attention to the account name shown at the top right corner of the screenshot. It'll tell you which account we are working with.
 
-[](/assets/best-practices/sharing-route-53-domain-across-aws-accounts-2.png)
+First, go into your Route 53 console in your `Development` account.
+
+TODO: UPDATE SCREENSHOTS
+
+![](/assets/best-practices/sharing-route-53-domain-across-aws-accounts-1.png)
+
+Click **Hosted zones** in the left menu. Then select **Create Hosted Zone**.
+
+![](/assets/best-practices/sharing-route-53-domain-across-aws-accounts-2.png)
 
 Select **Create Hosted Zone** at the top. Enter:
 
 - **Domain Name**: dev.api.my-cart-app.com
 
-Then select **Create**.
+Then click **Create**.
 
-[](/assets/best-practices/sharing-route-53-domain-across-aws-accounts-3.png)
+![](/assets/best-practices/sharing-route-53-domain-across-aws-accounts-3.png)
 
 Select the zone you just created.
 
-[](/assets/best-practices/sharing-route-53-domain-across-aws-accounts-4.png)
+![](/assets/best-practices/sharing-route-53-domain-across-aws-accounts-4.png)
 
-Select on the row with **NS** type. And copy the 4 lines in the **Value** field. We need this in the steps after.
+Click on the row with **NS** type. And copy the 4 lines in the **Value** field. We need this in the steps after.
 
-[](/assets/best-practices/sharing-route-53-domain-across-aws-accounts-5.png)
+![](/assets/best-practices/sharing-route-53-domain-across-aws-accounts-5.png)
 
-Now, switch to the `Production` where the domain was hosted. And go into Route 53 console.
+Now, switch to the `Production` account where the domain is hosted. And go into Route 53 console.
 
 Select the domain.
 
-[](/assets/best-practices/sharing-route-53-domain-across-aws-accounts-6.png)
+![](/assets/best-practices/sharing-route-53-domain-across-aws-accounts-6.png)
 
-Select **Create Record Set**.
+Click **Create Record Set**.
 
-[](/assets/best-practices/sharing-route-53-domain-across-aws-accounts-7.png)
+![](/assets/best-practices/sharing-route-53-domain-across-aws-accounts-7.png)
 
 Fill in:
 
 - **Name**: dev.api
 - **Type**: NS - Name server
 
-And paste the 4 lines in the **Value** field.
+And paste the 4 lines from above in the **Value** field.
 
-Select **Create**.
+Click **Create**.
 
-[](/assets/best-practices/sharing-route-53-domain-across-aws-accounts-8.png)
+![](/assets/best-practices/sharing-route-53-domain-across-aws-accounts-8.png)
 
 You should see a new `dev.api.my-cart-app.com` row in the table.
 
-[](/assets/best-practices/sharing-route-53-domain-across-aws-accounts-9.png)
+![](/assets/best-practices/sharing-route-53-domain-across-aws-accounts-9.png)
 
-What we just did now is delegating the `dev.api` subdomain of `[my-cart-app.com](http://my-cart-app.com)` to our `Development` account. Now you can follow the [Set custom domains through Seed] chapter to set up `[dev.api.my-cart-app.com](http://dev.api.my-cart-app.com)` for the API Gateway endpoint for the `dev` stage.
+Now we've delegated the `dev.api` subdomain of `my-cart-app.com` to our `Development` AWS account. You can now head over to your app or to Seed and [add this as a custom domain](https://seed.run/docs/configuring-custom-domains) for the `dev` stage.
+
+TODO: ADD SEED CUSTOM DOMAIN SCREENSHOT

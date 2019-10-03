@@ -6,15 +6,15 @@ date: 2019-09-30 00:00:00
 comments_id: 
 ---
 
-Now you have AWS accounts created and resources parameterized. In this chapter, we will deploy the `carts-api` service in our `my-cart-app` app to 3 environments: `featureX`, `hotfixY` and `prod`. The former two will be deployed into our `Development` account and the `prod` environment will be deployed into our `Production` account.
+Now that you have a couple of AWS accounts created and your resources have been parameterized, let's look at how to deploy them. In this chapter, we'll deploy the `carts-api` service in our `my-cart-app` app to 3 environments: `featureX`, `hotfixY`, and `prod`. The first two environments will be deployed into our `Development` AWS account and the `prod` environment will be deployed into our `Production` AWS account.
 
-**Note**: in reality you should never deploy to production environment from your local machine. But for the purpose of this chapter, we will do it anyways.
+**Note that **, in reality you should never deploy to production environment from your local machine. You want this to go through your CI/CD pipeline instead. But for the purpose of this chapter, we'll do it anyways.
 
 ### Configure AWS Profiles
 
-Follow [setup up IAM users] chapter to create an IAM user in your `Production` account. And take a note of the **Access key ID** and **Secret access key** for the user.
+Follow [setup up IAM users]({% link _chapters/create-an-iam-user.md %}) chapter to create an IAM user in your `Production` account. And take a note of the **Access key ID** and **Secret access key** for the user.
 
-Setup the credentials using the AWS CLI:
+Setup the credentials in your local machine using the AWS CLI:
 
 ``` bash
 $ aws configure --profile Production
@@ -28,23 +28,21 @@ $ aws configure --profile Development
 
 ### Deploy
 
-To deploy to the `featureX` environment, navigate to the root of the `carts-api` directory:
+To deploy to the `featureX` environment, navigate to the root of the `carts-api` service:
 
 ``` bash
 $ cd services/carts-api
 ```
 
-You should see the `serverless.yml` file for the `carts-api` service in this directory.
-
-Then deploy:
+You should see the `serverless.yml` file for the `carts-api` service in this directory. And deploy it using:
 
 ``` bash
 $ serverless deploy -s featureX --aws-profile Development
 ```
 
-Serverless Framework has a concept of stages. They are synonyms for environments. Recall in the previous chapter, we used this stage name to parameter our resource names. 
+Serverless Framework has a concept of stages. They are synonymous with environments. Recall that, in the previous chapter we used this stage name to parameterize our resource names. 
 
-The above command parameterizes the resource names using the stage name `featureX` and deploys the CloudFormation template to our `Development` account by using the IAM credentials we previous configured using AWS CLI.
+The above command applies the stage name `featureX` and deploys the CloudFormation template to our `Development` account. It uses the IAM credentials we configured above.
 
 Deploy again to the `hotfixY` environment:
 
@@ -52,9 +50,9 @@ Deploy again to the `hotfixY` environment:
 $ serverless deploy -s hotfixY --aws-profile Development
 ```
 
-This command parameterizes the resource names using the stage name `hotfixY` and deploys to our `Development`. Note, if we forgot to parameterize the name of a resource, this command will fail.
+This command applies the stage name `hotfixY` and deploys to our `Development` account. Note, if we don't parameterize the name of a resource, this command will fail. Since both the `featureX` and `hotfixY` stages are deployed to the same AWS account, causing the resource names to thrash.
 
-Finally, deploy again to the `prod` environment
+Finally, we can deploy to the `prod` environment.
 
 ``` bash
 $ serverless deploy -s prod --aws-profile Production

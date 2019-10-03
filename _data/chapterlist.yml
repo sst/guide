@@ -291,8 +291,8 @@ configure-environments:
     - page: Manage cost and usage for AWS accounts
       url: /chapters/manage-cost-and-usage-for-aws-accounts.html
 
-deployment-lifecycle:
-  title: Development Lifecycle
+development-lifecycle:
+  title: Development lifecycle
   chapters:
     - page: Invoking Lambda locally
       url: /chapters/invoking-lambda-locally.html
@@ -311,17 +311,17 @@ deployment-lifecycle:
     - page: Deploy only changed services
       url: /chapters/deploy-only-changed-services.html
 
-debugging:
-  title: Debugging
+observability:
+  title: Observability
   chapters:
+    - page: API Gateway and Lambda Logs
+      url: /chapters/api-gateway-and-lambda-logs.html
     - page: Tracing Lambda functions with X-Ray
       url: /chapters/tracing-lambda-functions-with-x-ray.html
 
 extra-backend:
   title: Serverless
   chapters:
-    - page: API Gateway and Lambda Logs
-      url: /chapters/api-gateway-and-lambda-logs.html
     - page: Debugging Serverless API Issues
       url: /chapters/debugging-serverless-api-issues.html
     - page: Serverless environment variables

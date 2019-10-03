@@ -6,9 +6,9 @@ date: 2019-09-30 00:00:00
 comments_id: 
 ---
 
-When deploying multiple environments, some into the same AWS account, some across multiple AWS accounts, we need to ensure the resource names do not thrash across environments. For example, in our `checkout-api` service, we have a Lambda function called `checkout`. Now, if two developers are working on two different features, one deployed to the `featureA` environment and one deploys to the `featureB` environment, and both environments reside in the `Dev` AWS account, only one environment can be successfully deployed. The second environment will get an error indicating that a Lambda function with the name `checkout` already exists.
+When deploying multiple environments, some into the same AWS account, some across multiple AWS accounts, we need to ensure the resource names do not thrash across environments. For example, in our `checkout-api` service, we have a Lambda function called `checkout`. Now, if two developers are working on two different features, one deploys to the `featureA` environment and one deploys to the `featureB` environment, and both environments reside in the `Dev` AWS account, only one environment can be successfully deployed. The second environment will get an error indicating that a Lambda function with the name `checkout` already exists.
 
-AWS resources need to be uniquely named within a scope, and the scope is different for different resource types. Here are the rules for commonly used serverless resources:
+AWS resources need to be uniquely named within a scope, and the scope is different for different resource types. Here are the rules for some of the commonly used serverless resources:
 
 - Unique per account per region: Lambda functions, API Gateway projects, SNS Topic, etc.
 - Unique per account (across all regions): IAM users/roles
@@ -28,13 +28,13 @@ Luckily, Serverless Framework already parameterizes a few of the default resourc
 
 A couple of things to note here:
 
-- Resource names are parameterize with `$serviceName` to ensure resource names do not thrash when deploying multiple services
+- Resource names are parameterized with `$serviceName` to ensure resource names do not thrash when deploying multiple services
 - The IAM role is the one used by the Lambda functions. IAM role names are also parameterized with `$region` since the name needs to be unique across regions in an account.
-- S3 bucket is the one used by Serverless Framework to store the deployment artifacts. It is not given a name. In these cases, CloudFormation will automatically assign a unique name for it based on the name of the current stack — `$stackName`.
+- S3 bucket is the one used by Serverless Framework to store deployment artifacts. It is not given a name. In these cases, CloudFormation will automatically assign a unique name for it based on the name of the current stack — `$stackName`.
 
 For all the other resources we define in our `serverless.yml`, we are responsible for parameterizing them.
 
-Here are a couple examples of where we need to be aware of resource names being parameterized.
+Here are a couple of examples where we need to be aware of resource names being parameterized.
 
 ### SNS topic names in function events
 

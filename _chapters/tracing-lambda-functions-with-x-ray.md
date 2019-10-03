@@ -1,3 +1,11 @@
+---
+layout: post
+title: Tracing Lambda functions with X-Ray
+description: 
+date: 2019-10-02 00:00:00
+comments_id: 
+---
+
 AWS X-Ray is a service that records and visualizes requests made by your application. It provides an end-to-end view of requests as they travel through your Serverless application, and shows a map of your application’s underlying components.
 
 In this chapter we will show you how to set up AWS X-Ray to trace API requests and Lambda invocations for your Serverless Framework applications.

@@ -1,3 +1,11 @@
+---
+layout: post
+title: Manage cost and usage for AWS accounts
+description: 
+date: 2019-10-02 00:00:00
+comments_id: 
+---
+
 When organized under AWS Organizations, you don’t have to setup the billing details for each account. Billing is consolidated to the root account. You can also see a breakdown of usage and cost for each service in each account.
 
 # Free Tier
@@ -8,7 +16,7 @@ Each account in your AWS Organization benefits from the free tier. Lambda has a 
 
 Go into your root account. Select the account picker at the top. Then select **My Billing Dashboard**. 
 
-[](/assets/best-practices/manage-cost-and-usage-for-aws-accounts-1.png)
+![](/assets/best-practices/manage-cost-and-usage-for-aws-accounts-1.png)
 
 The Billing Dashboard home page shows you the cost to date of the current calendar month. A few very useful features on this page:
 
@@ -17,8 +25,8 @@ The Billing Dashboard home page shows you the cost to date of the current calend
 
 For the purpose of this chapter, select **Bill Details**.
 
-[](/assets/best-practices/manage-cost-and-usage-for-aws-accounts-2.png)
+![](/assets/best-practices/manage-cost-and-usage-for-aws-accounts-2.png)
 
 Select **Bill details by account**. You can see the cost allocation for each account.
 
-[](/assets/best-practices/manage-cost-and-usage-for-aws-accounts-3.png)
+![](/assets/best-practices/manage-cost-and-usage-for-aws-accounts-3.png)

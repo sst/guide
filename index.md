@@ -42,6 +42,8 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
         <div class="chapters">
           {% include toc-chapters.html items=site.data.chapterlist.organize-serverless-apps id="organize-serverless-apps" %}
           {% include toc-chapters.html items=site.data.chapterlist.configure-environments id="configure-environments" %}
+          {% include toc-chapters.html items=site.data.chapterlist.development-lifecycle id="development-lifecycle" %}
+          {% include toc-chapters.html items=site.data.chapterlist.observability id="observability" %}
           <a class="expand"><span>Show all chapters</span></a>
         </div>
       </div>
