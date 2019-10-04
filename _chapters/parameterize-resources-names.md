@@ -20,11 +20,11 @@ Luckily, Serverless Framework already parameterizes a few of the default resourc
 
 | Resource | Scheme | Example |
 |-----------|-----------|----------|
-| Lambda functions | `$serviceName-$stage-$functionName` | post-service-dev-create-post |
-| API Gateway project | `$stage-$serviceName` | dev-post-service |
-| CloudWatch log groups | `/aws/lambda/$serviceName-$stage-$functionName` | /aws/lambda/post-service-dev-create-post |
-| IAM roles | `$serviceName-$stage-$region-lambdaRole` | post-service-dev-us-east-1-lambdaRole |
-| S3 bucket | `$stackName-serverlessdeploymentbucket-$hash` | post-service-dev-serverlessdeploymentbucket-3cux6eq6iadj |
+| Lambda functions | `$serviceName-$stage-$functionName` | notes-app-mono-notes-api-dev-get |
+| API Gateway project | `$stage-$serviceName` | dev-notes-app-mono-notes-api |
+| CloudWatch log groups | `/aws/lambda/$serviceName-$stage-$functionName` | /aws/lambda/notes-app-mono-notes-api-dev-get |
+| IAM roles | `$serviceName-$stage-$region-lambdaRole` | notes-app-mono-notes-api-dev-us-east-1-lambdaRole |
+| S3 bucket | `$stackName-$resourceName-$hash` | notes-app-mono-notes-api-serverlessdeploymentbuck-19fhidl3prw0m |
 
 A couple of things to note here:
 
@@ -36,22 +36,7 @@ For all the other resources we define in our `serverless.yml`, we are responsibl
 
 Here are a couple of examples where we need to be aware of resource names being parameterized.
 
-### SNS topic names in function events
-
-``` yml
-...
-custom:
-  stage: ${opt:stage, self:provider.stage}
-
-...
-functions:
-  dispatcher:
-    handler: handler.main
-    events:
-      - sns: dispatch-${self:custom.stage}
-```
-
-### DynamoDB table names in resources
+### SNS topic names in `billing-api` service
 
 ``` yml
 ...
@@ -61,20 +46,41 @@ custom:
 ...
 resources:
   Resources:
-    AppsTable:
-      Type: AWS::DynamoDB::Table
+    NotePurchasedTopic:
+      Type: AWS::SNS::Topic
       Properties:
-        TableName: objects-${self:custom.stage}
-        AttributeDefinitions:
-          - AttributeName: objectId
-            AttributeType: S
-        KeySchema:
-          - AttributeName: appId
-            KeyType: HASH
-        BillingMode: 'PAY_PER_REQUEST'
+        TopicName: note-purchased-${self:custom.stage}
 ```
 
-### S3 bucket names in resources
+### DynamoDB table names in `database` service
+
+``` yml
+...
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  tableName: ${self:custom.stage}-mono-notes
+
+...
+resources:
+  Resources:
+    NotesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.tableName}
+        AttributeDefinitions:
+          - AttributeName: userId
+            AttributeType: S
+          - AttributeName: noteId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+          - AttributeName: noteId
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
+```
+
+### S3 bucket names in `uploads` service
 
 Since, S3 bucket names need to be globally unique; leave the bucket name empty and let CloudFormation auto generate it.
 
@@ -82,8 +88,24 @@ Since, S3 bucket names need to be globally unique; leave the bucket name empty a
 ...
 resources:
   Resources:
-    MyBucket:
+    S3Bucket:
       Type: AWS::S3::Bucket
+      Properties:
+        # Set the CORS policy
+        CorsConfiguration:
+          CorsRules:
+            -
+              AllowedOrigins:
+                - '*'
+              AllowedHeaders:
+                - '*'
+              AllowedMethods:
+                - GET
+                - PUT
+                - POST
+                - DELETE
+                - HEAD
+              MaxAge: 3000
 ```
 
 Parameterizing your resources allows your app to be deployed to multiple environments without naming conflicts.

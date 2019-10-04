@@ -104,19 +104,22 @@ If you need a refresher on the structure of our config, refer to the [Manage env
 Now we can access the SSM value in our Lambda function.
 
 ``` js
-import AWS from 'aws-sdk';
-import config from 'config';
+import AWS from '../../libs/aws-sdk';
+import config from "../../config";
 
-const ssm = new aws.SSM();
-const stripeSecretKey = await ssm.getParameter({
+// Load our secret key from SSM
+const ssm = new AWS.SSM();
+const stripeSecretKeyPromise = ssm.getParameter({
   Name: config.stripeKeyName,
   WithDecryption: true
 }).promise();
-const stripe = Stripe(stripeSecretKey.Parameter.Value);
-
-...
 
 export const handler = (event, context) => {
+  ...
+
+  // Charge via stripe
+  const stripeSecretKey = await stripeSecretKeyPromise;
+  const stripe = stripePackage(stripeSecretKey.Parameter.Value);
   ...
 };
 ```

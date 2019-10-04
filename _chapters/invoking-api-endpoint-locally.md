@@ -14,9 +14,9 @@ Install the plugin at the repo root, because all API services require the plugin
 ``` bash
 $ npm install --save-dev serverless-offline
 ```
-Let's first add the plugin for `carts-api`. Open `serverless.yml`, and add `serverless-offline` to the bottom of the plugins list.
+Let's first add the plugin for `notes-api`. Open `serverless.yml`, and add `serverless-offline` to the bottom of the plugins list.
 ``` yaml
-service: carts-api
+service: notes-api
 
 plugins:
   - serverless-offline
@@ -25,12 +25,12 @@ plugins:
 ```
 Now, you can start the server. 
 ```
-$ cd carts-api
+$ cd notes-api
 $ sls offline
 ```
 By default,  the server starts on `[localhost](http://localhost)` and on port `3000`. Let's try curling the endpoint:
 ```
-$ curl http://localhost:3000/carts
+$ curl http://localhost:3000/notes
 ```
 # Mocking Cognito Identity Pool authentication
 
@@ -39,14 +39,14 @@ Serverless Offline plugin allows you to pass in Cognito authentication informati
 To mock the user pool user id: 
 ``` bash
 $ curl --header "cognito-identity-id: 13179724-6380-41c4-8936-64bca3f3a25b" \
-    http://localhost:3000/carts
+    http://localhost:3000/notes
 ```
 And you can access the id via `event.requestContext.identity.cognitoIdentityId`
 
 To mock the identity pool user id:
 ``` bash
 $ curl --header "cognito-authentication-provider: cognito-idp.us-east-1.amazonaws.com/us-east-1_Jw6lUuyG2,cognito-idp.us-east-1.amazonaws.com/us-east-1_Jw6lUuyG2:CognitoSignIn:5f24dbc9-d3ab-4bce-8d5f-eafaeced67ff" \
-    http://localhost:3000/carts
+    http://localhost:3000/notes
 ```
 And you can access the id via `event.requestContext.identity.cognitoAuthenticationProvider`
 
@@ -62,8 +62,8 @@ const { spawn } = require('child_process');
 const http = require('http');
 const httpProxy = require('http-proxy');
 const services = [
-  {route:'/carts/{cartId}/*', path:'services/checkout-api', port:3002},
-  {route:'/*', path:'services/carts-api', port:3001},
+  {route:'/billing/*', path:'services/billing-api', port:3001},
+  {route:'/notes/*', path:'services/notes-api', port:3002},
 ];
 
 // Start `sls offline` for each service
@@ -74,6 +74,7 @@ services.forEach(service => {
   child.stderr.on('data', chunk => console.log(chunk));
   child.on('close', code => console.log(`child exited with code ${code}`));
 });
+
 
 // Start a proxy server on port 8080 forwarding based on url path
 const proxy = httpProxy.createProxyServer({});
@@ -95,8 +96,8 @@ const server = http.createServer(function(req, res) {
 server.listen(8080);
 
 // Check match route
-// - ie. url is '/carts/12'
-// - ie. route is '/carts/{cartId}/*'
+// - ie. url is '/notes/123'
+// - ie. route is '/notes/*'
 function urlMatchRoute(url, route) {
   const urlParts = url.split('/');
   const routeParts = route.split('/');
@@ -118,7 +119,7 @@ function urlMatchRoute(url, route) {
   }
 
   return true;
-}  
+}
 ```
 This script has 4 sections:
 

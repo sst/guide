@@ -14,69 +14,77 @@ Update `serverless.yml`:
 ``` yaml
 ...
 functions:
-  listCarts:
-    handler: listCarts.main
+  get:
+    handler: get.main
     events:
+      - http:
+          path: notes/{id}
+          method: get
+          cors: true
+          authorizer: aws_iam
 ...
 ```
-And `listCarts.js` looks like:
+And `get.js` looks like:
 ``` javascript
-module.exports.main = (event, context, callback) => {
-  const carts = [
-    {cartId: 'aaa', cost: 13299},
-    {cartId: 'bbb', cost: 7199},
-  ];
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify(carts),
+import * as dynamoDbLib from "../../libs/dynamodb-lib";
+import { success, failure } from "../../libs/response-lib";
+
+export async function main(event, context) {
+  const params = {
+    TableName: 'mono-notes',
+    Key: {
+      userId: event.requestContext.identity.cognitoIdentityId,
+      noteId: event.pathParameters.id
+    }
   };
-  callback(null, response);
-};
+
+  try {
+    const result = await dynamoDbLib.call("get", params);
+    if (result.Item) {
+      // Return the retrieved item
+      return success(result.Item);
+    } else {
+      return failure({ status: false, error: "Item not found." });
+    }
+  } catch (e) {
+    return failure({ status: false });
+  }
+}
+```
+
+And the Lambda function is invoked by an API Gateway GET http request, we need to mock the request parameters. Create a events folder inside the service's directory where `serverless.yml` is.
+``` bash
+mkdir events
+```
+
+Then create a mock event file `get-event.json` with the content:
+``` json
+{
+  "pathParameters": {
+    "id": "578eb840-f70f-11e6-9d1a-1359b3b22944"
+  },
+  "requestContext": {
+    "identity": {
+      "cognitoIdentityId": "USER-SUB-1234"
+    }
+  }
+}
 ```
 
 To invoke this function, this inside the service's directory where `serverless.yml` is:
 ``` bash
-$ sls invoke local -f listCarts
+$ sls invoke local -f get --path events/get-event.json
 ```
 
-# Invoking Lambda with Event Data
+You can also mock the event as if the Lambda function is invoked by other events ie. SNS, SQS, etc. The content in the mock event file is passed into the function's event object directly.
 
-Say the Lambda function is invoked by an API Gateway GET http request. And the API expects a query string variable `count`. For example:
-``` javascript
-module.exports.main = (event, context, callback) => {
-  const count = parseInt(event.queryStringParameters.count, 10);
-  const carts = [
-    {cartId: 'aaa', cost: 13299},
-    {cartId: 'bbb', cost: 7199},
-  ];
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify(carts.slice(0, count)),
-  };
-  callback(null, response);
-};
-```
-Create a mock event file `event-listCarts.json` with the content:
+### Example: Query string pararmeter
+
+To pass in query string parameter
 ``` json
 {
   "queryStringParameters": {
-    "count": "1"
-  }
-}
-```
-Invoke the function again:
-``` bash
-$ sls invoke local -f listCarts --path event-listCarts.json
-```
-You can also mock the event as if the Lambda function is invoked by other events ie. SNS, SQS, etc. The content in the mock event file is passed into the function's event object directly.
-
-### Example: Path pararmeter
-
-To pass in path parameter, ie. `/carts/{cartId}`
-``` json
-{
-  "pathParameters": {
-    "cartId": "aaa"
+    "key": "value"
   }
 }
 ```
@@ -94,9 +102,15 @@ You might want to distinguish if the Lambda function was triggered by `sls invok
 ``` bash
 $ IS_LOCAL=true sls invoke local -f listCarts --path event-listCarts.json
 ```
-And in your code, you can check the environment variable:
+And in your code, you can check the environment variable. We use this in our `libs/aws-sdk.js` to disable X-Ray tracing when invoked locally:
 ``` javascript
-if ( ! process.env.IS_LOCAL) {
-  // Send email
-}
+import aws from 'aws-sdk';
+import xray from 'aws-xray-sdk';
+
+// Do not enable tracing for 'invoke local'
+const awsWrapped = process.env.IS_LOCAL
+  ? aws
+  : xray.captureAWS(aws);
+
+export default awsWrapped;
 ```

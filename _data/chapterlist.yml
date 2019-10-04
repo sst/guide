@@ -298,10 +298,12 @@ development-lifecycle:
       url: /chapters/invoking-lambda-locally.html
     - page: Invoking API endpoint locally
       url: /chapters/invoking-api-endpoint-locally.html
+    - page: Creating feature environments
+      url: /chapters/creating-feature-environments.html
+    - page: Working in feature environments
+      url: /chapters/working-in-feature-environments.html
     - page: Creating Pull Request environments
       url: /chapters/creating-pull-request-environments.html
-    - page: Working in Pull Request environments
-      url: /chapters/working-in-pull-request-environments.html
     - page: Merging to master
       url: /chapters/merging-to-master.html
     - page: Promote to production
