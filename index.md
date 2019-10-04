@@ -40,6 +40,7 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
           <p>The best practices for running Serverless apps in production.</p>
         </div>
         <div class="chapters">
+          {% include toc-chapters.html items=site.data.chapterlist.best-practices-intro id="best-practices-intro" %}
           {% include toc-chapters.html items=site.data.chapterlist.organize-serverless-apps id="organize-serverless-apps" %}
           {% include toc-chapters.html items=site.data.chapterlist.configure-environments id="configure-environments" %}
           {% include toc-chapters.html items=site.data.chapterlist.development-lifecycle id="development-lifecycle" %}

@@ -255,6 +255,12 @@ conclusion:
     - page: Staying up to date
       url: /chapters/staying-up-to-date.html
       
+best-practices-intro:
+  title: Introduction
+  chapters:
+    - page: Best practices for building Serverless apps
+      url: /chapters/best-practices-for-building-serverless-apps.html
+      
 organize-serverless-apps:
   title: Organize a Serverless app
   chapters:
