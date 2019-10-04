@@ -132,8 +132,8 @@ To complete this code, let's add `isLoading` and `isDeleting` to the state.
 
 ``` javascript
 this.state = {
-  isLoading: null,
-  isDeleting: null,
+  isLoading: false,
+  isDeleting: false,
   note: null,
   content: "",
   attachmentURL: null

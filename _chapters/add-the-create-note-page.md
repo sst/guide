@@ -31,7 +31,7 @@ export default class NewNote extends Component {
     this.file = null;
 
     this.state = {
-      isLoading: null,
+      isLoading: false,
       content: ""
     };
   }
