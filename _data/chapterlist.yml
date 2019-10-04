@@ -266,6 +266,21 @@ organize-serverless-apps:
   chapters:
     - page: Organizing services (Monorepo vs Multi-repo)
       url: /chapters/organizing-services.html
+    - page: Organizing Serverless projects
+      url: /chapters/organizing-serverless-projects.html
+      subchapters:
+        - page: Cross-stack references in Serverless
+          url: /chapters/cross-stack-references-in-serverless.html
+        - page: DynamoDB as a Serverless service
+          url: /chapters/dynamodb-as-a-serverless-service.html
+        - page: S3 as a Serverless service
+          url: /chapters/s3-as-a-serverless-service.html
+        - page: API Gateway domains across services
+          url: /chapters/api-gateway-domains-across-services.html
+        - page: Cognito as a Serverless service
+          url: /chapters/cognito-as-a-serverless-service.html
+        - page: Deploying multiple services in Serverless
+          url: /chapters/deploying-multiple-services-in-serverless.html
     - page: Sharing code and config between services
       url: /chapters/sharing-code-and-config-between-services.html
     - page: Inter-service dependency
@@ -350,21 +365,6 @@ extra-backend:
       url: /chapters/serverless-nodejs-starter.html
     - page: Package Lambdas with serverless-bundle
       url: /chapters/package-lambdas-with-serverless-bundle.html
-    - page: Organizing Serverless projects
-      url: /chapters/organizing-serverless-projects.html
-      subchapters:
-        - page: Cross-stack references in Serverless
-          url: /chapters/cross-stack-references-in-serverless.html
-        - page: DynamoDB as a Serverless service
-          url: /chapters/dynamodb-as-a-serverless-service.html
-        - page: S3 as a Serverless service
-          url: /chapters/s3-as-a-serverless-service.html
-        - page: API Gateway domains across services
-          url: /chapters/api-gateway-domains-across-services.html
-        - page: Cognito as a Serverless service
-          url: /chapters/cognito-as-a-serverless-service.html
-        - page: Deploying multiple services in Serverless
-          url: /chapters/deploying-multiple-services-in-serverless.html
 
 extra-frontend:
   title: React
