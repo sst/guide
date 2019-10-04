@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Working in pull request environments
+title: Working in feature environments
 description: 
 date: 2019-10-02 00:00:00
 comments_id: 
 ---
 
-After commiting the initial version of code to the `recommendations` branch, you are going to keep working on it. A common problem people running into is `sls deploy` takes very long to execute. And running `sls deploy` for each small change just takes very long.
+After commiting the initial version of code to the `like` branch, you are going to keep working on it. A common problem people running into is `sls deploy` takes very long to execute. And running `sls deploy` for each small change just takes very long.
 
 # Why is 'sls deploy' slow?
 
@@ -41,10 +41,10 @@ module.exports.main = (event, context, callback) => {
   });                   
 };
 ```
-To deploy the code for this function, run (note: replace **pr6** with the stage name created for you):
+To deploy the code for this function, run:
 ``` bash
-$ cd services/recommendations-api
-$ sls deploy -f getRecommendations -s pr6
+$ cd services/like-api
+$ sls deploy -f like -s like
 ```
 Deploying an individual function should be much quicker than deploying the entire stack.
 
@@ -52,4 +52,4 @@ Deploying an individual function should be much quicker than deploying the entir
 
  Sometimes a code change can affect multiple functions at the same time. For example, if you changed a shared library, you have to re-deploy all the services importing the library.
 
-However, there isn't a convenient way to deploy multiple Lambda functions. If you can easily tell which Lambda functions are affected, deploy each functions individually. If there are many functions are involved, run `sls deploy -s pr6` to deploy all functions, just to be on the safe size.
+However, there isn't a convenient way to deploy multiple Lambda functions. If you can easily tell which Lambda functions are affected, deploy each functions individually. If there are many functions are involved, run `sls deploy -s like` to deploy all functions, just to be on the safe size.

@@ -6,7 +6,7 @@ date: 2019-09-30 00:00:00
 comments_id: 
 ---
 
-Now that you have a couple of AWS accounts created and your resources have been parameterized, let's look at how to deploy them. In this chapter, we'll deploy the `carts-api` service in our `my-cart-app` app to 3 environments: `featureX`, `hotfixY`, and `prod`. The first two environments will be deployed into our `Development` AWS account and the `prod` environment will be deployed into our `Production` AWS account.
+Now that you have a couple of AWS accounts created and your resources have been parameterized, let's look at how to deploy them. In this chapter, we'll deploy the `notes-api` service in our `notes-api` app to 3 environments: `featureX`, `dev`, and `prod`. The first two environments will be deployed into our `Development` AWS account and the `prod` environment will be deployed into our `Production` AWS account.
 
 **Note that **, in reality you should never deploy to production environment from your local machine. You want this to go through your CI/CD pipeline instead. But for the purpose of this chapter, we'll do it anyways.
 
@@ -28,13 +28,13 @@ $ aws configure --profile Development
 
 ### Deploy
 
-To deploy to the `featureX` environment, navigate to the root of the `carts-api` service:
+To deploy to the `featureX` environment, navigate to the root of the `notes-api` service:
 
 ``` bash
-$ cd services/carts-api
+$ cd services/notes-api
 ```
 
-You should see the `serverless.yml` file for the `carts-api` service in this directory. And deploy it using:
+You should see the `serverless.yml` file for the `notes-api` service in this directory. And deploy it using:
 
 ``` bash
 $ serverless deploy -s featureX --aws-profile Development
@@ -44,13 +44,13 @@ Serverless Framework has a concept of stages. They are synonymous with environme
 
 The above command applies the stage name `featureX` and deploys the CloudFormation template to our `Development` account. It uses the IAM credentials we configured above.
 
-Deploy again to the `hotfixY` environment:
+Deploy again to the `dev` environment:
 
 ``` bash
-$ serverless deploy -s hotfixY --aws-profile Development
+$ serverless deploy -s dev --aws-profile Development
 ```
 
-This command applies the stage name `hotfixY` and deploys to our `Development` account. Note, if we don't parameterize the name of a resource, this command will fail. Since both the `featureX` and `hotfixY` stages are deployed to the same AWS account, causing the resource names to thrash.
+This command applies the stage name `dev` and deploys to our `Development` account. Note, if we don't parameterize the name of a resource, this command will fail. Since both the `featureX` and `dev` stages are deployed to the same AWS account, causing the resource names to thrash.
 
 Finally, we can deploy to the `prod` environment.
 

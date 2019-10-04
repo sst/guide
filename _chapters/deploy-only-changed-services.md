@@ -6,7 +6,7 @@ date: 2019-10-02 00:00:00
 comments_id: 
 ---
 
-Notice when we merged the `recommendations` branch to the `master` branch, on Seed app page, only the `recommendations-api` service showed a solid check. The other four services showed a greyed out check. Grey check means there is no change to be deployed for this service.
+Notice when we merged the `like` branch to the `master` branch, on Seed app page, only the `like-api` service showed a solid check. The other four services showed a greyed out check. Grey check means there is no change to be deployed for this service.
 
 ![](/assets/best-practices/deploy-only-changed-services-1.png)
 
@@ -36,10 +36,10 @@ When some code is pushed, you can run the following command to get a list of upd
 ``` bash
 $ git diff --name-only **${**prevCommitSHA**}** **${**currentCommitSHA**}**
 ```
-This will give you a list of files that have changed between the two commits. With the list of changed files, there are three scenarios from the perspective of a given service. We are going to use `carts-api` as an example:
+This will give you a list of files that have changed between the two commits. With the list of changed files, there are three scenarios from the perspective of a given service. We are going to use `notes-api` as an example:
 
-1. A file was changed in my service folder (ie. `services/carts-api`) ⇒ deploy carts-api
-2. A file was changed in other service folder (ie. `services/recommendations-api`) ⇒ do not deploy carts-api
-3. Or, a file was changed in `libs/` ⇒ deploy carts-api
+1. A file was changed in my service folder (ie. `services/notes-api`) ⇒ deploy notes-api
+2. A file was changed in other service folder (ie. `services/like-api`) ⇒ do not deploy notes-api
+3. Or, a file was changed in `libs/` ⇒ deploy notes-api
 
 Your repo setup can look different, but the general concept holds true. You have to figure out which file change affect an individual service, and which affects all the services. The advantage of this strategy is that you know upfront which services can be skipped. Allowing you to skip the entire build process!
