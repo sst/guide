@@ -8,7 +8,7 @@ code: mono-repo
 comments_id: cognito-as-a-serverless-service/409
 ---
 
-Now that we have all of our resources created ([API]({% link _chapters/api-gateway-domains-across-services.md %}), [uploads]({% link _chapters/s3-as-a-serverless-service.md %}), [database]({% link _chapters/dynamodb-as-a-serverless-service.md %})), let's secure them using Cognito User Pool as an authentication provider and Cognito Federated Identities to control access. In this chapter we are going to create a Serverless service that will use cross-stack references to tie all of our resources together.
+Now let's look at splittiing Cognito User Pool and Cognito Federated Identities into a separate Serverless service. In this chapter we are going to create a Serverless service that will use cross-stack references to tie all of our resources together.
 
 In the [example repo]({{ site.backend_mono_github_repo }}), open the `auth` service in the `services/` directory.
 
@@ -63,7 +63,7 @@ resources:
               Ref: CognitoUserPoolClient
             ProviderName:
               Fn::GetAtt: [ "CognitoUserPool", "ProviderName" ]
-
+              
     # IAM roles
     CognitoIdentityPoolRoles:
       Type: AWS::Cognito::IdentityPoolRoleAttachment
@@ -73,7 +73,7 @@ resources:
         Roles:
           authenticated:
             Fn::GetAtt: [CognitoAuthRole, Arn]
-
+            
     # IAM role used for authenticated users
     CognitoAuthRole:
       Type: AWS::IAM::Role
@@ -104,7 +104,6 @@ resources:
                     - 'cognito-sync:*'
                     - 'cognito-identity:*'
                   Resource: '*'
-
                 # Allow users to upload attachments to their
                 # folder inside our S3 bucket
                 - Effect: 'Allow'
@@ -132,6 +131,12 @@ resources:
     IdentityPoolId:
       Value:
         Ref: CognitoIdentityPool
+
+    CognitoAuthRole:
+      Value:
+        Ref: CognitoAuthRole
+      Export:
+        Name: CognitoAuthRole-${self:custom.stage}
 ```
 
 This can seem like a lot but both the `CognitoUserPool:` and the `CognitoUserPoolClient:` section are simply creating our Cognito User Pool. And you'll notice that both these sections are not using any cross-stack references. They are effectively standalone. If you are looking for more details on this, refer to the earlier part of this guide]({% link _chapters/configure-cognito-user-pool-in-serverless.md %}).
@@ -184,7 +189,9 @@ Where `my_s3_bucket` is the name of the bucket. We are going to use the generate
 
 Again, all of our references are based on the stage we are deploying to.
 
-And finally, you'll notice that we are outputting a couple of things in this service. We need the Ids of the Cognito resources created in our frontend. But we don't have to export any cross-stack values.
+And finally, you'll notice that we are outputting:
+- A couple of things in this service. We need the Ids of the Cognito resources created in our frontend. But we don't have to export any cross-stack values.
+- The name of the CognitoAuthRole IAM role. We need it in our api service to grant permissions for the role to invoke the API Gateway endpoint that will be deployed.
 
 Now that all of our resources are complete, we'll look at how to deploy them. There is a bit of a wrinkle here since we have some dependencies between our services.
 

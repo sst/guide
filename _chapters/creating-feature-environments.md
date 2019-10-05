@@ -38,31 +38,42 @@ $ cd like-api
 ```
 Add a `serverless.yml`
 ``` yaml
-service: like-api
+service: notes-app-mono-like-api
 
 plugins:
+  - serverless-bundle
   - serverless-offline
 
 custom:
+  # Our stage is based on what is passed in when running serverless
+  # commands. Or fallsback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
-    
+
 package:
   individually: true
 
 provider:
   name: aws
-  region: us-east-1
   runtime: nodejs10.x
-  environment:
-    stage: ${self:custom.stage}
+  stage: dev
+  region: us-east-1
+  tracing:
+    lambda: true
+
   apiGateway:
     restApiId:
-      'Fn::ImportValue': ApiGatewayRestApiId-${self:custom.stage}
+      'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiId
     restApiRootResourceId:
-      'Fn::ImportValue': ApiGatewayRestApiRootResourceId-${self:custom.stage}
+      'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiRootResourceId
     restApiResources:
-      /carts/{cartId}:
-        'Fn::ImportValue': ApiGatewayResourceCartsCartidVarResourceId-${self:custom.stage}
+      /notes/{id}:
+        'Fn::ImportValue': ${self:custom.stage}-ApiGatewayResourceNotesIdVarId
+
+  environment:
+    stage: ${self:custom.stage}
+
+  iamRoleStatements:
+    - ${file(../../serverless.common.yml):lambdaPolicyXRay}
 
 functions:
   like:
@@ -70,17 +81,17 @@ functions:
     events:
       - http:
           path: /notes/{id}/like
-          method: get
+          method: post
           cors: true
+          authorizer: aws_iam
 ```
 Again, the `like-api` will share the same API endpoint as the `notes-api` service.
 
 Add the handler file `like.js`
 ``` javascript
-import { success, failure } from "../../libs/response-lib";
+import { success } from "../../libs/response-lib";
 
 export async function main(event, context) {
-
   // business logic code for liking a post
 
   return success({ status: true });

@@ -39,11 +39,6 @@ Here are a couple of examples where we need to be aware of resource names being 
 ### SNS topic names in `billing-api` service
 
 ``` yml
-...
-custom:
-  stage: ${opt:stage, self:provider.stage}
-
-...
 resources:
   Resources:
     NotePurchasedTopic:

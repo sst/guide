@@ -32,7 +32,7 @@ Let's take a look at how this is done.
 
 ### 2. How to reference resources in other services?
 
-We are going to create an SNS topic in the `billing-api` service, and export the topic's ARN. To do this, we need to add the following to the `serverless.yml` of the `billing-api`.
+We created an SNS topic in the `billing-api` service, and exported the topic's ARN. In the `serverless.yml` file of the `billing-api` service:
 
 ``` yml
 ...
@@ -51,7 +51,7 @@ resources:
         Name: NotePurchasedTopicArn-${self:custom.stage}
 ```
 
-And in the `notify-job` service, we are going to import the topic's ARN and create two Lambda functions to subscribe to this topic. In the `serverless.yml`, add the following:
+And in the `notify-job` service, we import the topic's ARN and created a Lambda function to subscribe to this topic. In the `serverless.yml` file of the `notify-job` service:
 
 ``` yml
 ...

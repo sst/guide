@@ -83,20 +83,23 @@ We are doing a couple of things here:
 Next we'll add the parameter names in our `config.js`.
 
 ``` js
+const adminPhoneNumber = "+14151234567";
+
 const stageConfigs = {
   dev: {
-    resourcesStage: 'dev',
-    stripeKeyName: '/stripeSecretKey/test'
+    resourcesStage: "dev",
+    stripeKeyName: "/stripeSecretKey/test"
   },
   prod: {
-    resourcesStage: 'prod',
-    stripeKeyName: '/stripeSecretKey/live'
+    resourcesStage: "prod",
+    stripeKeyName: "/stripeSecretKey/live"
   }
 };
 
 const config = stageConfigs[process.env.stage] || stageConfigs.dev;
 
 export default {
+  adminPhoneNumber,
   ...config
 };
 ```
@@ -111,10 +114,12 @@ import config from "../../config";
 
 // Load our secret key from SSM
 const ssm = new AWS.SSM();
-const stripeSecretKeyPromise = ssm.getParameter({
-  Name: config.stripeKeyName,
-  WithDecryption: true
-}).promise();
+const stripeSecretKeyPromise = ssm
+  .getParameter({
+    Name: config.stripeKeyName,
+    WithDecryption: true
+  })
+  .promise();
 
 export const handler = (event, context) => {
   ...
