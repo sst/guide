@@ -40,10 +40,62 @@ Once the three services have been successfully deployed, you can deploy them all
 
 Say you add a new SNS topic in `billing-api` service and you want the `notify-job` service to subscribe to that topic. The first deployment after the change, will again fail if all the services are deployed concurrently. You need to deploy the `billing-api` service first, and then deploy the `notify-job` service.
 
-### Managing deployment in phases
+### Managing deployment in phases for resoources
 
-A monorepo app usually has multiple API services and multiple background services (ie. cron jobs, step functions, SNS/SQS subscribers). A common dependency pattern is that the jobs services depend on the API services. This is simply because the API services always response synchronously to user requests, and they in turn invoke the jobs to do more work.
+Base on our cross-stack references in the resources repo, the dependencies look like:
+```
+uploads > auth
+database
+```
 
-So it's easier to visualize your services in phases. Deploy the services in each phase _concurrently_ while deploying the phases _sequentially_. With [Seed](https://seed.run), we handle this using a concept of [Deploy Phases](https://seed.run/docs/configuring-deploy-phases).
+Where the `a > b` symbolizes that service `a` needs to be deployed before service `b`. To break it down in detail:
+- The `auth` service relies on the `uploads` service for the S3 bucket cross-stack reference.
+- The `database` service does not depend on any service, nor any service depend on it.
 
-TODO: INSERT SEED DEPLOY PHASES SCREENSHOT
+So it's easier to visualize your services to be deployed in 2 phases:
+- Phase 1: `database` and `uploads`
+- Phase 2: `auth`
+
+Deploy the services in each phase _concurrently_ while deploying the phases _sequentially_. With [Seed](https://seed.run), we handle this using a concept of [Deploy Phases](https://seed.run/docs/configuring-deploy-phases).
+
+You can configure this by heading to the app settings and hitting **Manage Deploy Phases**.
+
+![Hit Manage Deploy Phases screenshot](/assets/mono-repo/hit-manage-deploy-phases.png)
+
+Here you'll notice that by default all the services are deployed concurrently.
+
+![Default Deploy Phase screenshot](/assets/mono-repo/default-deploy-phase.png)
+
+Note that, you'll need to add your services first. To do this, head over to the app **Settings** and hit **Add a Service**.
+
+![Click Add Service screenshot](/assets/mono-repo/click-add-service.png)
+
+We can configure our service dependencies by adding the necessary deploy phases and moving the services around.
+
+![Edit Deploy Phase screenshot](/assets/mono-repo/edit-deploy-phase.png)
+
+And when you deploy your app, the deployments are carried out according to the deploy phases specified.
+
+![Deploying with Deploy Phase screenshot](/assets/mono-repo/deploying-with-deploy-phase.png)
+
+### Managing deployment in phases for api
+
+For our api repo, the dependencies look like:
+```
+notes-api > billing-api > notify-job
+```
+To break it down in detail:
+- The `billing-api` service relies on the `notes-api` service for the API Gateway export.
+- The `notify-job` service relies on the `billing-api` service for the SNS Topic export.
+
+You can configure this by heading to the app settings and hitting **Manage Deploy Phases**.
+
+![Hit Manage Deploy Phases screenshot](/assets/mono-repo/hit-manage-deploy-phases.png)
+
+We can configure our service dependencies by adding the necessary deploy phases and moving the services around.
+
+![Edit Deploy Phase screenshot](/assets/mono-repo/edit-deploy-phase.png)
+
+And when you deploy your app, the deployments are carried out according to the deploy phases specified.
+
+![Deploying with Deploy Phase screenshot](/assets/mono-repo/deploying-with-deploy-phase.png)

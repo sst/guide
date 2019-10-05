@@ -12,9 +12,11 @@ The general idea behind secrets is to store them outside of your codebase — do
 
 [AWS Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html) (SSM) is an AWS service that lets you store configuration data and secrets as key-value pairs in a central place. The values can be stored as plain text or as encrypted data. When stored as encrypted data, the value is encrypted on write using your [AWS KMS key](https://aws.amazon.com/kms/), and decrypted on read.
 
-As an example, we are going to use SSM to store our Stripe secret key. Note that, Stripe gives us 2 keys: a **live** key and a **test** key. We are going to store both keys in our SSM, and then pick the right one to use based on the current environment.
+As an example, we are going to use SSM to store our Stripe secret key. Note that, Stripe gives us 2 keys: a **live** key and a **test** key. We are going to store:
+- the **live** key in the Production account's SSM console; and
+- the **test** key in the Development account's SSM console.
 
-First go to your Parameter Store console.
+First go in to your **Production** account, and go to your Parameter Store console.
 
 TODO: UPDATE SCREENSHOTS
 
@@ -39,7 +41,7 @@ Scroll to the bottom and hit **Create parameter**.
 
 ![](/assets/best-practices/manage-environment-specific-secrets-5.png)
 
-Repeat the steps to add the **test** Stripe key with:
+Then, switch to your **Development** account, and repeat the steps to add the **test** Stripe key with:
 
 - **Name**: /stripeSecretKey/test
 - **Description**: Stripe secret key - test

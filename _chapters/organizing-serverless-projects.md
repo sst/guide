@@ -7,6 +7,8 @@ context: true
 comments_id: organizing-serverless-projects/350
 ---
 
+TODO: Remove this chapter
+
 Once your serverless projects start to grow, you are faced with some choices on how to organize your growing projects. In this chapter we'll examine some of the most common ways to structure your projects at a services and application (multiple services) level.
 
 First let's start by quickly looking at the common terms used when talking about Serverless Framework projects.

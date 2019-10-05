@@ -8,6 +8,8 @@ code: mono-repo
 comments_id: api-gateway-domains-across-services/408
 ---
 
+TODO: Remove this chapter
+
 So to summarize so far, we are looking at how to create a Serverless application with multiple services and to [link them together using cross-stack references]({% link _chapters/cross-stack-references-in-serverless.md %}). We've created separate services for [DynamoDB]({% link _chapters/dynamodb-as-a-serverless-service.md %}) and our [S3 file uploads bucket]({% link _chapters/s3-as-a-serverless-service.md %}).
 
 In this chapter we will look at how to work with API Gateway across multiple services. A challenge that you run into when splitting your APIs into multiple services is sharing the same domain for them. You might recall that APIs that are created as a part of the Serverless service get their own unique URL that looks something like:

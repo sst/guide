@@ -6,7 +6,17 @@ date: 2019-09-29 00:00:00
 comments_id: 
 ---
 
-In our example, we have two services with API endpoints, `notes-api` and `billing-api`. In this chapter, we are going to look at how to configure API Gateway such that both services are served out via a single API endpoint.
+In this chapter we will look at how to work with API Gateway across multiple services. A challenge that you run into when splitting your APIs into multiple services is sharing the same domain for them. You might recall that APIs that are created as a part of the Serverless service get their own unique URL that looks something like:
+
+```
+https://z6pv80ao4l.execute-api.us-east-1.amazonaws.com/dev
+```
+
+When you attach a custom domain for your API, it is attached to a specific endpoint like the one above. This means that if you create multiple API services, they will all have unique endpoints.
+
+You can assign different base paths for your custom domains. For example, `api.example.com/notes` can point to one service while `api.example.com/billing` can point to another. But if you try to split your `notes` service up, you'll face the challenge of sharing the custom domain across them.
+
+In our notes app, we have two services with API endpoints, `notes-api` and `billing-api`. In this chapter, we are going to look at how to configure API Gateway such that both services are served out via a single API endpoint.
 
 The API path we want to setup is:
 
@@ -28,46 +38,44 @@ So the part path `/notes`, is a child resource of `/`. And `/notes/{noteId}` is 
 
 Based on our setup, we want the `billing-api` to have the `/billing` path. And this would be a child resource of `/`. However, `/` is created in the `notes-api` service. So we'll need to find a way to share the resource across services.
 
-### Sharing API Gateway projects
+### Notes Service
 
 To do this, the `notes-api` needs to share the API Gateway project and the root path `/`.
 
-We'll add the following outputs to the `notes-api`'s `serverless.yml`:
+In our `serverless-stack-demo-mono-api` repo, go into the `services/notes-api/` directory. In the `serverless.yml`, near the end, you will notice:
 
 TODO: FORMAT THESE SNIPPETS
 
 ``` yml
-service: notes-api
-
-custom:
-  stage: ${opt:stage, self:provider.stage}
-
 ...
 
-resource:
-  Outputs:
-    ApiGatewayRestApiId:
-      Value:
-        Ref: ApiGatewayRestApi
-      Export:
-        Name: ${self:custom.stage}-ApiGatewayRestApiId
-  
-    ApiGatewayRestApiRootResourceId:
-      Value:
-         Fn::GetAtt:
-          - ApiGatewayRestApi
-          - RootResourceId 
-      Export:
-        Name: ${self:custom.stage}-ApiGatewayRestApiRootResourceId
+  - Outputs:
+      ApiGatewayRestApiId:
+        Value:
+          Ref: ApiGatewayRestApi
+        Export:
+          Name: ${self:custom.stage}-ApiGatewayRestApiId
+    
+      ApiGatewayRestApiRootResourceId:
+        Value:
+           Fn::GetAtt:
+            - ApiGatewayRestApi
+            - RootResourceId 
+        Export:
+          Name: ${self:custom.stage}-ApiGatewayRestApiRootResourceId
 ```
 
-Then open `billing-api`'s serverless.yml and tell Serverless Framework to import and reuse the API Gateway settings from the `notes-api` service.
+We export a couple of values in this service to be able to share this API Gateway resource in our _billing_ service:
+
+  1. The first cross-stack reference that needs to be shared is the API Gateway Id that is created as a part of this service. We are going to export it with the name `${self:custom.stage}-ApiGatewayRestApiId`. Again, we want the exports to work across all our environments/stages and so we include the stage name as a part of it. The value of this export is available as a reference in our current stack called `ApiGatewayRestApi`.
+  2. We also need to export the `RootResourceId`. This is a reference to the `/` path of this API Gateway project. To retrieve this Id we use the `Fn::GetAtt` CloudFormation function and pass in the current `ApiGatewayRestApi` and look up the attribute `RootResourceId`. We export this using the name `${self:custom.stage}-ApiGatewayRestApiRootResourceId`.
+
+### Billing Service
+
+In the [example repo]({{ site.backend_mono_github_repo }}), open the `billing-api` service in the `services/` directory.
 
 ``` yml
-service: billing-api
-
-custom:
-  stage: ${opt:stage, self:provider.stage}
+...
 
 provider:
   apiGateway:
@@ -88,7 +96,15 @@ functions:
           authorizer: aws_iam
 ```
 
+To share the same API Gateway domain as our _notes-api_ service, we are adding an `apiGateway:` section to the `provider:` block.
+
+  1. Here we state that we want to use the `restApiId` of our _notes_ service. We do this by using the cross-stack reference `'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiId` that we had exported above.
+
+  2. We also state that we want all the APIs in our service to be linked under the root path of our _notes_ service. We do this by setting the `restApiRootResourceId` to the cross-stack reference `'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiRootResourceId` from above.
+
 Now when you deploy the `billing-api` service, instead of creating a new API Gateway project, Serverless Framework is going to reuse the project you imported.
+
+The key thing to note in this setup is that API Gateway needs to know where to attach the routes that are created in this service. We want the `/billing` path to be attached to the root of our API Gateway project. Hence the `restApiRootResourceId` points to the root resource of our _notes-api_ service. Of course we don't have to do it this way. We can organize our service such that the `/billing` path is created in our main API service and we link to it here.
 
 #### Dependency
 

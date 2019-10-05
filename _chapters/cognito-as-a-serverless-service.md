@@ -22,7 +22,6 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs8.10
   stage: dev
   region: us-east-1
 
@@ -64,7 +63,7 @@ resources:
               Ref: CognitoUserPoolClient
             ProviderName:
               Fn::GetAtt: [ "CognitoUserPool", "ProviderName" ]
-              
+
     # IAM roles
     CognitoIdentityPoolRoles:
       Type: AWS::Cognito::IdentityPoolRoleAttachment
@@ -74,7 +73,7 @@ resources:
         Roles:
           authenticated:
             Fn::GetAtt: [CognitoAuthRole, Arn]
-            
+
     # IAM role used for authenticated users
     CognitoAuthRole:
       Type: AWS::IAM::Role
@@ -105,23 +104,7 @@ resources:
                     - 'cognito-sync:*'
                     - 'cognito-identity:*'
                   Resource: '*'
-                
-                # Allow users to invoke our API
-                - Effect: 'Allow'
-                  Action:
-                    - 'execute-api:Invoke'
-                  Resource:
-                    Fn::Join:
-                      - ''
-                      -
-                        - 'arn:aws:execute-api:'
-                        - Ref: AWS::Region
-                        - ':'
-                        - Ref: AWS::AccountId
-                        - ':'
-                        - 'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiId
-                        - '/*'
-                
+
                 # Allow users to upload attachments to their
                 # folder inside our S3 bucket
                 - Effect: 'Allow'
@@ -167,27 +150,11 @@ Let's look at the Cognito auth IAM role in detail.
 
 ### Cognito Auth IAM Role
 
-The IAM role that our authenticated users are going to use needs to allow access to our API Gateway resource and our S3 file uploads bucket.
+The IAM role that our authenticated users are going to use needs to allow access to our S3 file uploads bucket.
 
 This is the relevant section from the above `serverless.yml`.
 
 ``` yml
-# Allow users to invoke our API
-- Effect: 'Allow'
-  Action:
-    - 'execute-api:Invoke'
-  Resource:
-    Fn::Join:
-      - ''
-      -
-        - 'arn:aws:execute-api:'
-        - Ref: AWS::Region
-        - ':'
-        - Ref: AWS::AccountId
-        - ':'
-        - 'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiId
-        - '/*'
-
 # Allow users to upload attachments to their
 # folder inside our S3 bucket
 - Effect: 'Allow'
@@ -203,21 +170,7 @@ This is the relevant section from the above `serverless.yml`.
         - '{cognito-identity.amazonaws.com:sub}/*'
 ```
 
-The API Gateway resource in our IAM role looks something like:
-
-```
-arn:aws:execute-api:us-east-1:12345678:qwe123rty456/*
-```
-
-Where `us-east-1` is the region, `12345678` is the AWS account Id, and `qwe123rty456` is the API Gateway Resource Id. To construct this dynamically we need the cross-stack reference of the API Gateway Resource Id that we exported in the [API Gateway chapter]({% link _chapters/api-gateway-domains-across-services.md %}). And we can import it like so:
-
-```
-'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiId
-```
-
-Again, all of our references are based on the stage we are deploying to.
-
-The S3 bucket on the other hand has a resource that looks something like:
+The S3 bucket resource in our IAM role looks something like:
 
 ```
 "arn:aws:s3:::my_s3_bucket/private/${cognito-identity.amazonaws.com:sub}/*"
@@ -228,6 +181,8 @@ Where `my_s3_bucket` is the name of the bucket. We are going to use the generate
 ```
 'Fn::ImportValue': ${self:custom.stage}-AttachmentsBucketArn
 ```
+
+Again, all of our references are based on the stage we are deploying to.
 
 And finally, you'll notice that we are outputting a couple of things in this service. We need the Ids of the Cognito resources created in our frontend. But we don't have to export any cross-stack values.
 
