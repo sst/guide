@@ -4,7 +4,6 @@ title: Cross-Stack References in Serverless
 description: AWS CloudFormation allows us to link multiple Serverless services using cross-stack references. A cross-stack reference consists of an "Export" and "Fn::ImportValue". Cross-stack references are useful for tracking the dependencies between Serverless services.
 date: 2018-04-02 13:00:00
 context: true
-code: mono-repo
 comments_id: cross-stack-references-in-serverless/405
 ---
 
@@ -71,7 +70,7 @@ The other advantage is that you can easily recreate the entire application (say 
 
 ### Example Setup
 
-Cross-stack references can be very useful but some aspects of it can be a little confusing and the documentation can make it hard to follow. To illustrate the various ways to use cross-stack references in serverless we are going to split up our [note taking app]({{ site.backend_github_repo }}) into a [mono-repo app with multiple services that are connected through cross-stack references]({{ site.backend_mono_github_repo }}).
+Cross-stack references can be very useful but some aspects of it can be a little confusing and the documentation can make it hard to follow. To illustrate the various ways to use cross-stack references in serverless we are going to split up our [note taking app]({{ site.backend_github_repo }}) into a [monorepo app with multiple services that are connected through cross-stack references]({{ site.backend_ext_api_github_repo }}).
 
 We are going to do the following:
 
@@ -89,6 +88,6 @@ We are going to do the following:
 
 We are splitting up our app this way mainly to illustrate how to use cross-stack references. But you can split it up in a way that makes more sense for you. For example, you might choose to have all your infrastructure resources (DynamoDB and S3) in one service, your APIs in another, and your auth in a separate service.
 
-We've also created a [separate GitHub repo with a working example]({{ site.backend_mono_github_repo }}) of the above setup that you can use for reference. We'll be linking to it at the bottom of each of the following chapters.
+We've also created a [separate GitHub repo with a working example]({{ site.backend_ext_api_github_repo }}) of the above setup that you can use for reference. We'll be linking to it at the bottom of each of the following chapters.
 
 In the next chapter let's look at setting up DynamoDB as a separate service.

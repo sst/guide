@@ -42,7 +42,7 @@ Based on our setup, we want the `billing-api` to have the `/billing` path. And t
 
 To do this, the `notes-api` needs to share the API Gateway project and the root path `/`.
 
-In our `serverless-stack-demo-mono-api` repo, go into the `services/notes-api/` directory. In the `serverless.yml`, near the end, you will notice:
+In our `serverless-stack-demo-ext-api` repo, go into the `services/notes-api/` directory. In the `serverless.yml`, near the end, you will notice:
 
 TODO: FORMAT THESE SNIPPETS
 
@@ -72,7 +72,7 @@ We export a couple of values in this service to be able to share this API Gatewa
 
 ### Billing Service
 
-In the [example repo]({{ site.backend_mono_github_repo }}), open the `billing-api` service in the `services/` directory.
+In the [example repo]({{ site.backend_ext_api_github_repo }}), open the `billing-api` service in the `services/` directory.
 
 ``` yml
 ...

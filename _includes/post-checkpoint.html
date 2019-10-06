@@ -28,10 +28,6 @@
     {% capture repo_url %}{{ site.backend_github_repo }}{% endcapture %}
     {% capture repo_tag %}Backend Source{% endcapture %}
 
-  {% elsif page.code == 'mono-repo' %}
-    {% capture repo_url %}{{ site.backend_mono_github_repo }}{% endcapture %}
-    {% capture repo_tag %}Mono-repo Backend Source{% endcapture %}
-
   {% elsif page.code == 'facebook-login' %}
     {% capture repo_url %}{{ site.frontend_fb_login_github_repo }}{% endcapture %}
     {% capture repo_tag %}Facebook Login Frontend Source{% endcapture %}

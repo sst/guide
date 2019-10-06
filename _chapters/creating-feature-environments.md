@@ -38,7 +38,7 @@ $ cd like-api
 ```
 Add a `serverless.yml`
 ``` yaml
-service: notes-app-mono-like-api
+service: notes-app-ext-like-api
 
 plugins:
   - serverless-bundle

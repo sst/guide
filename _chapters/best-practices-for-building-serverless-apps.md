@@ -73,11 +73,12 @@ This section of the guide has a fair bit of _theory_ when compared to the first 
 
 The following repos will serve as the centerpiece of this section:
 
-TODO: UPDATE LINKS
+1. [**Serverless Infrastructure**]({{ site.backend_ext_resources_github_repo }})
 
-1. [Serverless Infrastructure]
    A repo containing all the main infrastructure resources of our extended notes application.
-2. [Serverless Services]
+
+2. [**Serverless Services**]({{ site.backend_ext_api_github_repo }})
+
    A monorepo containing all the services in our extended notes application.
 
 We'll start by forking these repos but unlike the first section we won't be directly working on the code. Instead as we work through the sections we'll point out the key aspects of the codebase.
@@ -85,3 +86,13 @@ We'll start by forking these repos but unlike the first section we won't be dire
 We'll then go over step by step how to configure the environments through AWS. We'll use [Seed](https://seed.run) to illustrate how to deploy our application to our environments. Note that, you do not need Seed to configure your own setup. We'll only be using it as an example. Once you complete the guide you should be able to use your favorite CI/CD service to build a pipeline that follows the best practices. Finally, we'll go over the development workflow for you and your team.
 
 The end result of this will be that you'll have a fully functioning Serverless backend, hosted in your own GitHub repo, and deployed to your AWS environments. We want to make sure that you'll have a working setup in place, so you can always refer back to it when you need to!
+
+Let's get started.
+
+### Fork demo repos
+
+Start by forking the two demo repos that we have. We are going to be using these throughout this section of the guide. And we want to make sure that you are able to configure and deploy these on your own.
+
+TODO: INSET 2 SCREENSHOTS
+
+Now that we've forked these repos, let's look at how they are organized. This will give us a good idea of how to organize Serverless apps.

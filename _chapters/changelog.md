@@ -64,7 +64,7 @@ You can get these updates emailed to you via our [newsletter]({{ site.newsletter
 {{ site.data.changelog.v3-2.desc }}
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v3.1...v3.2)
-- [Mono-repo API]({{ site.backend_mono_github_repo }})
+- [Monorepo API]({{ site.backend_ext_api_github_repo }})
 
 #### [v3.1: {{ site.data.changelog.v3-1.title }}](https://branchv31--serverless-stack.netlify.com)
 

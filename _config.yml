@@ -31,7 +31,8 @@ backend_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-dem
 frontend_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-demo-client"
 frontend_fb_login_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-demo-fb-login-client"
 frontend_user_mgmt_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-demo-user-mgmt-client"
-backend_mono_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-demo-mono-api"
+backend_ext_api_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-demo-ext-api"
+backend_ext_resources_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-demo-ext-resources"
 
 newsletter_signup_form: "https://emailoctopus.com/lists/1c11b9a8-1500-11e8-a3c9-06b79b628af2/forms/subscribe"
 

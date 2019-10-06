@@ -4,7 +4,6 @@ title: API Gateway Domains Across Services
 description: To share the same API Gateway domain across multiple services in Serverless we need to "Export" the API Gateway Rest API Id and the API Gateway "RootResourceId" as a CloudFormation cross-stack reference. This will allow us to share the same API Gateway URL across Serverless projects.
 date: 2018-04-02 16:00:00
 context: true
-code: mono-repo
 comments_id: api-gateway-domains-across-services/408
 ---
 
@@ -34,10 +33,10 @@ We are going to be creating a _notes_ and a _users_ service using the following 
 
 ### Notes Service
 
-First let's look at the _notes_ service. We need to connect it to the [DynamoDB service that we previously created]({% link _chapters/dynamodb-as-a-serverless-service.md %}). In the [example repo]({{ site.backend_mono_github_repo }}), you'll notice that we have a `notes` service in the `services/` directory with a `serverless.yml`.
+First let's look at the _notes_ service. We need to connect it to the [DynamoDB service that we previously created]({% link _chapters/dynamodb-as-a-serverless-service.md %}). In the [example repo]({{ site.backend_ext_api_github_repo }}), you'll notice that we have a `notes` service in the `services/` directory with a `serverless.yml`.
 
 ``` yml
-service: notes-app-mono-notes
+service: notes-app-ext-notes
 
 custom:
   # Our stage is based on what is passed in when running serverless
@@ -120,10 +119,10 @@ Let's go over some of the details of this service.
 
 ### Users Service
 
-In the [example repo]({{ site.backend_mono_github_repo }}), open the `users` service in the `services/` directory.
+In the [example repo]({{ site.backend_ext_api_github_repo }}), open the `users` service in the `services/` directory.
 
 ``` yml
-service: notes-app-mono-users
+service: notes-app-ext-users
 
 custom:
   # Our stage is based on what is passed in when running serverless

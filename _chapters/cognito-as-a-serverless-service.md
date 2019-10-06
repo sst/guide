@@ -4,16 +4,15 @@ title: Cognito as a Serverless Service
 description: To generate the Cognito Identity Pool IAM role dynamically across services in Serverless, we need to use cross-stack references and import them using the "Fn::ImportValue" CloudFormation function.
 date: 2018-04-02 17:00:00
 context: true
-code: mono-repo
 comments_id: cognito-as-a-serverless-service/409
 ---
 
 Now let's look at splittiing Cognito User Pool and Cognito Federated Identities into a separate Serverless service. In this chapter we are going to create a Serverless service that will use cross-stack references to tie all of our resources together.
 
-In the [example repo]({{ site.backend_mono_github_repo }}), open the `auth` service in the `services/` directory.
+In the [example repo]({{ site.backend_ext_resources_github_repo }}), open the `auth` service in the `services/` directory.
 
 ``` yml
-service: notes-app-mono-auth
+service: notes-app-ext-auth
 
 custom:
   # Our stage is based on what is passed in when running serverless
@@ -139,7 +138,7 @@ resources:
         Name: CognitoAuthRole-${self:custom.stage}
 ```
 
-This can seem like a lot but both the `CognitoUserPool:` and the `CognitoUserPoolClient:` section are simply creating our Cognito User Pool. And you'll notice that both these sections are not using any cross-stack references. They are effectively standalone. If you are looking for more details on this, refer to the earlier part of this guide]({% link _chapters/configure-cognito-user-pool-in-serverless.md %}).
+This can seem like a lot but both the `CognitoUserPool:` and the `CognitoUserPoolClient:` section are simply creating our Cognito User Pool. And you'll notice that both these sections are not using any cross-stack references. They are effectively standalone. If you are looking for more details on this, refer to the [earlier part of this guide]({% link _chapters/configure-cognito-user-pool-in-serverless.md %}).
 
 ### Cognito Identity Pool
 
@@ -149,7 +148,7 @@ The Cognito Identity Pool on the other hand needs to reference all the resources
 
 - The Identity Pool has an IAM role attached to its authenticated and unauthenticated users. Since, we only allow authenticated users to our note taking app; we only have one role. The `CognitoIdentityPoolRoles:` section states that we have an authenticated user role that we are going to create below and we are referencing it here by doing `Fn::GetAtt: [CognitoAuthRole, Arn]`.
 
-- Finally, the `CognitoAuthRole:` section creates the IAM role that will allow access to our API and S3 file uploads bucket.
+- Finally, the `CognitoAuthRole:` section creates the IAM role that will allow access to our S3 file uploads bucket.
 
 Let's look at the Cognito auth IAM role in detail.
 
@@ -187,7 +186,7 @@ Where `my_s3_bucket` is the name of the bucket. We are going to use the generate
 'Fn::ImportValue': ${self:custom.stage}-AttachmentsBucketArn
 ```
 
-Again, all of our references are based on the stage we are deploying to.
+Again, all of our references are based on the stage we are deploying to. You'll notice that we don't have the IAM role here that allows access to our APIs. We are going to be doing that along side our API services.
 
 And finally, you'll notice that we are outputting:
 - A couple of things in this service. We need the Ids of the Cognito resources created in our frontend. But we don't have to export any cross-stack values.

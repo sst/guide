@@ -10,11 +10,11 @@ In this chapter we'll look at how our services will connect to each other while 
 
 Let's quickly review the setup that we've created back in the [Organizing services chapter]({% link _chapters/organizing-services.md %}).
 
-1. We have two repos — `serverless-stack-demo-mono-resources` and `serverless-stack-demo-mono-api`. One has our infrastructure specific resources, while the other has all our Lambda functions.
-2. The `serverless-stack-demo-mono-resources` repo is deployed a couple of long lived environments; like `dev` and `prod`.
-3. While, the `serverless-stack-demo-mono-api` is deployed to a few ephemeral environments (like `featureX` that is connected to the `dev` environment), in addition to the long lived environments above.
+1. We have two repos — `serverless-stack-demo-ext-resources` and `serverless-stack-demo-ext-api`. One has our infrastructure specific resources, while the other has all our Lambda functions.
+2. The `serverless-stack-demo-ext-resources` repo is deployed a couple of long lived environments; like `dev` and `prod`.
+3. While, the `serverless-stack-demo-ext-api` is deployed to a few ephemeral environments (like `featureX` that is connected to the `dev` environment), in addition to the long lived environments above.
 
-We need to figure out a way to let the Lambda functions running in the `featureX` environment to connect to the `dev` environment of the `serverless-stack-demo-mono-resources` repo.
+We need to figure out a way to let the Lambda functions running in the `featureX` environment to connect to the `dev` environment of the `serverless-stack-demo-ext-resources` repo.
 
 Let's look at how to do that.
 

@@ -20,11 +20,11 @@ Luckily, Serverless Framework already parameterizes a few of the default resourc
 
 | Resource | Scheme | Example |
 |-----------|-----------|----------|
-| Lambda functions | `$serviceName-$stage-$functionName` | notes-app-mono-notes-api-dev-get |
-| API Gateway project | `$stage-$serviceName` | dev-notes-app-mono-notes-api |
-| CloudWatch log groups | `/aws/lambda/$serviceName-$stage-$functionName` | /aws/lambda/notes-app-mono-notes-api-dev-get |
-| IAM roles | `$serviceName-$stage-$region-lambdaRole` | notes-app-mono-notes-api-dev-us-east-1-lambdaRole |
-| S3 bucket | `$stackName-$resourceName-$hash` | notes-app-mono-notes-api-serverlessdeploymentbuck-19fhidl3prw0m |
+| Lambda functions | `$serviceName-$stage-$functionName` | notes-app-ext-notes-api-dev-get |
+| API Gateway project | `$stage-$serviceName` | dev-notes-app-ext-notes-api |
+| CloudWatch log groups | `/aws/lambda/$serviceName-$stage-$functionName` | /aws/lambda/notes-app-ext-notes-api-dev-get |
+| IAM roles | `$serviceName-$stage-$region-lambdaRole` | notes-app-ext-notes-api-dev-us-east-1-lambdaRole |
+| S3 bucket | `$stackName-$resourceName-$hash` | notes-app-ext-notes-api-serverlessdeploymentbuck-19fhidl3prw0m |
 
 A couple of things to note here:
 

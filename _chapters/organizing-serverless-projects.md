@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Organizing Serverless Projects
-description: The Microservices + Mono-Repo pattern is the most common way to organize your Serverless Framework application. In this chapter we'll also examine the Multi-Repo and Monolith approach.
+description: The Microservices + Monorepo pattern is the most common way to organize your Serverless Framework application. In this chapter we'll also examine the Multi-Repo and Monolith approach.
 date: 2018-04-02 12:00:00
 context: true
 comments_id: organizing-serverless-projects/350
@@ -23,13 +23,13 @@ First let's start by quickly looking at the common terms used when talking about
 
 Now let's look at the most common pattern for organizing serverless projects.
 
-### Microservices + Mono-Repo
+### Microservices + Monorepo
 
 Mono-repo, as the term suggests is the idea of a single repository. This means that your entire application and all its services are in a single repository.
 
 The microservice pattern on the other hand is a concept of keeping each of your services modular and lightweight. So for example; if your app allows users to create profiles and submit posts; you could have a service that deals with user profiles and one that deals with posts.
 
-The directory structure of your entire application under the microservice + mono-repo pattern would look something like this.
+The directory structure of your entire application under the microservice + monorepo pattern would look something like this.
 
 ```
 |- services/
@@ -61,29 +61,29 @@ A couple of things to notice here:
 6. To deploy this application you are going to need to run `serverless deploy` separately in each of the services.
 7. [Environments (or stages)]({% link _chapters/stages-in-serverless-framework.md %}) need to be co-ordinated across all the different services. So if your team is using a `dev`, `staging`, and `prod` environment, then you are going to need to define the specifics of this in each of the services.
 
-#### Advantages of Mono-Repo
+#### Advantages of Monorepo
 
-The microservice + mono-repo pattern has grown in popularity for a couple of reasons:
+The microservice + monorepo pattern has grown in popularity for a couple of reasons:
 
 1. Lambda functions are a natural fit for a microservice based architecture. This is due to a few of reasons. Firstly, the performance of Lambda functions is related to the size of the function. Secondly, debugging a Lambda function that deals with a specific event is much easier. Finally, it is just easier to conceptually relate a Lambda function with a single event.
 
 2. The easiest way to share code between services is by having them all together in a single repository. Even though your services end up dealing with separate portions of your app, they still might need to share some code between them. Say for example; you have some code that formats your requests and responses in your Lambda functions. This would ideally be used across the board and it would not make sense to replicate this code in all the services.
 
-#### Disadvantages of Mono-Repo
+#### Disadvantages of Monorepo
 
-Before we go through alternative patterns, let's quickly look at the drawbacks of the microservice + mono-repo pattern.
+Before we go through alternative patterns, let's quickly look at the drawbacks of the microservice + monorepo pattern.
 
 1. Microservices can grow out of control and each added service increases the complexity of your application.
 2. This also means that you can end up with hundreds of Lambda functions.
 3. Managing deployments for all these services and functions can get complicated.
 
-Most of the issues described above start to appear when your application begins to grow. However, there are services that help you deal with some these issues. Services like [IOpipe](https://www.iopipe.com), [Epsagon](https://epsagon.com), and [Dashbird](https://dashbird.io) help you with observability of your Lambda functions. And our own [Seed](https://seed.run) helps you with managing deployments and environments of mono-repo Serverless Framework applications.
+Most of the issues described above start to appear when your application begins to grow. However, there are services that help you deal with some these issues. Services like [IOpipe](https://www.iopipe.com), [Epsagon](https://epsagon.com), and [Dashbird](https://dashbird.io) help you with observability of your Lambda functions. And our own [Seed](https://seed.run) helps you with managing deployments and environments of monorepo Serverless Framework applications.
 
 Now let's look at some alternative approaches.
 
 ### Multi-Repo
 
-The obvious counterpart to the mono-repo pattern is the multi-repo approach. In this pattern each of your repositories has a single Serverless Framework project.
+The obvious counterpart to the monorepo pattern is the multi-repo approach. In this pattern each of your repositories has a single Serverless Framework project.
 
 A couple of things to watch out for with the multi-repo pattern.
 
@@ -97,7 +97,7 @@ A couple of things to watch out for with the multi-repo pattern.
    The CloudFormation template is invalid: Template format error: Number of resources, 201, is greater than maximum allowed, 200
    ```
 
-Even with the disadvantages the multi-repo pattern does have its place. We have come across cases where some infrastructure related pieces (setting up DynamoDB, Cognito, etc) is done in a service that is placed in a separate repo. And since this typically doesn't need a lot of code or even share anything with the rest of your application, it can live on it's own. So in effect you can run a multi-repo setup where the standalone repos are for your _infrastructure_ and your _API endpoints_ live in a microservice + mono-repo setup.
+Even with the disadvantages the multi-repo pattern does have its place. We have come across cases where some infrastructure related pieces (setting up DynamoDB, Cognito, etc) is done in a service that is placed in a separate repo. And since this typically doesn't need a lot of code or even share anything with the rest of your application, it can live on it's own. So in effect you can run a multi-repo setup where the standalone repos are for your _infrastructure_ and your _API endpoints_ live in a microservice + monorepo setup.
 
 Finally, it's worth looking at the less common monolith pattern.
 

@@ -4,7 +4,6 @@ title: Deploying Multiple Services in Serverless
 description: To deploy multiple Serverless services that are using CloudFormation cross-stack references, we need to ensure that we deploy them in the order of their dependencies.
 date: 2018-04-02 18:00:00
 context: true
-code: mono-repo
 comments_id: deploying-multiple-services-in-serverless/410
 ---
 
@@ -18,7 +17,7 @@ Over the last few chapters we have looked at how to:
 - [Use the same API Gateway domain and resources across multiple Serverless services]({% link _chapters/api-gateway-domains-across-services.md %})
 - [Create a Serverless service for Cognito to authenticate and authorize our users]({% link _chapters/cognito-as-a-serverless-service.md %})
 
-All this is available in a [sample repo that you can deploy and test]({{ site.backend_mono_github_repo }}).
+All this is available in a [sample repo that you can deploy and test]({{ site.backend_ext_api_github_repo }}).
 
 Now we can finally look at how to deploy our services. The addition of cross-stack references to our services means that we have some built-in dependencies. This means that we need to deploy some services before we deploy certain others.
 
@@ -97,13 +96,13 @@ A quick word of handling environments across these services. The services that w
 
 However, when you are working on a new feature or you want to give a developer on your team their own environment, it might not make sense to replicate all of your services across them. It is more common to only replicate the API services as you create multiple _dev_ environments.
 
-### Mono-Repo vs Multi-Repo
+### Monorepo vs Multi-Repo
 
-Finally, when considering how to house these services in your repository, it is worth looking at how much code is shared across them. Typically, your _infrastructure_ services (`database`, `uploads` and `auth`) don't share any code between them. In fact they probably don't have any code in them to begin with. These services can be put in their own repos. Whereas the API services that might share some code (request and response handling) can be placed in the same repo and follow the mono-repo approach outlined in the [Organizing Serverless Projects chapter]({% link _chapters/organizing-serverless-projects.md %}).
+Finally, when considering how to house these services in your repository, it is worth looking at how much code is shared across them. Typically, your _infrastructure_ services (`database`, `uploads` and `auth`) don't share any code between them. In fact they probably don't have any code in them to begin with. These services can be put in their own repos. Whereas the API services that might share some code (request and response handling) can be placed in the same repo and follow the monorepo approach outlined in the [Organizing Serverless Projects chapter]({% link _chapters/organizing-serverless-projects.md %}).
 
-This combined way of using the multi-repo and mono-repo strategy also makes sense when you think about how we deploy them. As we stated above, the _infrastructure_ services are probably going to be deployed manually and with caution. While the API services can be automated (using [Seed](https://seed.run) or your own CI) for the mono-repo services and handle the others ones as a special case.
+This combined way of using the multi-repo and monorepo strategy also makes sense when you think about how we deploy them. As we stated above, the _infrastructure_ services are probably going to be deployed manually and with caution. While the API services can be automated (using [Seed](https://seed.run) or your own CI) for the mono-repo services and handle the others ones as a special case.
 
 ### Conclusion
 
-Hopefully these series of chapters have given you a sense of how to structure large Serverless applications using CloudFormation cross-stack references. And the [example repo]({{ site.backend_mono_github_repo }}) gives you a clear working demonstration of the concepts we've covered. Give the above setup a try and leave us your feedback in the comments.
+Hopefully these series of chapters have given you a sense of how to structure large Serverless applications using CloudFormation cross-stack references. And the [example repo]({{ site.backend_ext_api_github_repo }}) gives you a clear working demonstration of the concepts we've covered. Give the above setup a try and leave us your feedback in the comments.
 
