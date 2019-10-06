@@ -337,14 +337,14 @@ development-lifecycle:
 observability:
   title: Observability
   chapters:
-    - page: API Gateway and Lambda Logs
-      url: /chapters/api-gateway-and-lambda-logs.html
     - page: Tracing Lambda functions with X-Ray
       url: /chapters/tracing-lambda-functions-with-x-ray.html
 
 extra-backend:
   title: Serverless
   chapters:
+    - page: API Gateway and Lambda Logs
+      url: /chapters/api-gateway-and-lambda-logs.html
     - page: Debugging Serverless API Issues
       url: /chapters/debugging-serverless-api-issues.html
     - page: Serverless environment variables
