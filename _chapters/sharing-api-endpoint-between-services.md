@@ -42,7 +42,7 @@ Based on our setup, we want the `billing-api` to have the `/billing` path. And t
 
 To do this, the `notes-api` needs to share the API Gateway project and the root path `/`.
 
-In our `serverless-stack-demo-ext-api` repo, go into the `services/notes-api/` directory. In the `serverless.yml`, near the end, you will notice:
+In our [serverless-stack-demo-ext-api]({{ site.backend_ext_api_github_repo }}) repo, go into the `services/notes-api/` directory. In the `serverless.yml`, near the end, you will notice:
 
 TODO: FORMAT THESE SNIPPETS
 
@@ -65,14 +65,14 @@ TODO: FORMAT THESE SNIPPETS
           Name: ${self:custom.stage}-ApiGatewayRestApiRootResourceId
 ```
 
-We export a couple of values in this service to be able to share this API Gateway resource in our _billing_ service:
+Let's look at what we are doing here.
 
-  1. The first cross-stack reference that needs to be shared is the API Gateway Id that is created as a part of this service. We are going to export it with the name `${self:custom.stage}-ApiGatewayRestApiId`. Again, we want the exports to work across all our environments/stages and so we include the stage name as a part of it. The value of this export is available as a reference in our current stack called `ApiGatewayRestApi`.
-  2. We also need to export the `RootResourceId`. This is a reference to the `/` path of this API Gateway project. To retrieve this Id we use the `Fn::GetAtt` CloudFormation function and pass in the current `ApiGatewayRestApi` and look up the attribute `RootResourceId`. We export this using the name `${self:custom.stage}-ApiGatewayRestApiRootResourceId`.
+1. The first cross-stack reference that needs to be shared is the API Gateway Id that is created as a part of this service. We are going to export it with the name `${self:custom.stage}-ApiGatewayRestApiId`. Again, we want the exports to work across all our environments/stages and so we include the stage name as a part of it. The value of this export is available as a reference in our current stack called `ApiGatewayRestApi`.
+2. We also need to export the `RootResourceId`. This is a reference to the `/` path of this API Gateway project. To retrieve this Id we use the `Fn::GetAtt` CloudFormation function and pass in the current `ApiGatewayRestApi` and look up the attribute `RootResourceId`. We export this using the name `${self:custom.stage}-ApiGatewayRestApiRootResourceId`.
 
 ### Billing Service
 
-In the [example repo]({{ site.backend_ext_api_github_repo }}), open the `billing-api` service in the `services/` directory.
+Let's look at how we are importing the above. Open the `billing-api` service in the `services/` directory.
 
 ``` yml
 ...
@@ -96,15 +96,15 @@ functions:
           authorizer: aws_iam
 ```
 
-To share the same API Gateway domain as our _notes-api_ service, we are adding an `apiGateway:` section to the `provider:` block.
+To share the same API Gateway domain as our `notes-api` service, we are adding an `apiGateway:` section to the `provider:` block.
 
-  1. Here we state that we want to use the `restApiId` of our _notes_ service. We do this by using the cross-stack reference `'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiId` that we had exported above.
+  1. Here we state that we want to use the `restApiId` of our notes service. We do this by using the cross-stack reference `'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiId` that we had exported above.
 
-  2. We also state that we want all the APIs in our service to be linked under the root path of our _notes_ service. We do this by setting the `restApiRootResourceId` to the cross-stack reference `'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiRootResourceId` from above.
+  2. We also state that we want all the APIs in our service to be linked under the root path of our notes service. We do this by setting the `restApiRootResourceId` to the cross-stack reference `'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiRootResourceId` from above.
 
 Now when you deploy the `billing-api` service, instead of creating a new API Gateway project, Serverless Framework is going to reuse the project you imported.
 
-The key thing to note in this setup is that API Gateway needs to know where to attach the routes that are created in this service. We want the `/billing` path to be attached to the root of our API Gateway project. Hence the `restApiRootResourceId` points to the root resource of our _notes-api_ service. Of course we don't have to do it this way. We can organize our service such that the `/billing` path is created in our main API service and we link to it here.
+The key thing to note in this setup is that API Gateway needs to know where to attach the routes that are created in this service. We want the `/billing` path to be attached to the root of our API Gateway project. Hence the `restApiRootResourceId` points to the root resource of our `notes-api` service. Of course we don't have to do it this way. We can organize our service such that the `/billing` path is created in our main API service and we link to it here.
 
 #### Dependency
 
@@ -129,4 +129,4 @@ But `/billing` has already been created in the `billing-api` service. So if you 
 
 You **HAVE TO** import `/billing` from the `billing-api`, so the new service will only need to create the `/billing/xyz` part.
 
-Now we are done organizing our services and we are ready to deploy them. To recap, our jobs services share a resource — an SNS topic. And our API services share a resource as well — the API Gatway endpoint. Next we'll look at how to deploy services with dependencies.
+Now we are done organizing our services and we are ready to deploy them. To recap, we have a couple of dependencies in our resources repo and a couple in our API repo.

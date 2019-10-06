@@ -6,13 +6,13 @@ date: 2019-09-29 00:00:00
 comments_id: 
 ---
 
-In the previous chapter, we decided to put all our business logic services (APIs) in the same repo. In this chapter, we'll attempt to answer the following questions:
+In the previous few chapters, we looked at how to organize all our infrastructure resources in one repo. In these next couple of chapters we'll look at how to organize all our business logic services (APIs) in the same repo. We'll start by attempting to answer the following questions:
 
 1. Do I have just one or multiple `package.json` files?
 2. How do I share common code and config between services?
 3. How do I share common config between the various `serverless.yml`?
 
-Carrying on with the notes example from the previous chapter, the folder structure inside the repo looks something like this:
+We are using an extended version of the notes app for this section. You can find the [**sample repo here**]({{ site.backend_ext_api_github_repo }}). Let's take a quick look at how the repo is organized.
 
 ```
 /
@@ -33,10 +33,6 @@ Carrying on with the notes example from the previous chapter, the folder structu
       serverless.yml
       handler.js
 ```
-
-TODO: IS THIS THE REPO WE ARE USING??
-
-We’ll go over the details below. But you can find the source used in this post here - [**https://github.com/seed-run/serverless-example-monorepo-with-code-sharing**](https://github.com/seed-run/serverless-example-monorepo-with-code-sharing).
 
 ### 1. Structuring the package.json
 
@@ -74,7 +70,7 @@ Our Lambda functions will now import this instead of the standard AWS SDK.
 import AWS from '../../libs/aws-sdk';
 ```
 
-The great thing about this is that we can easily change any AWS related config and it’ll apply across all of our services.
+The great thing about this is that we can easily change any AWS related config and it’ll apply across all of our services. In this case, we are using [AWS X-Ray](https://aws.amazon.com/xray/) to enabled tracing across our entire application. You don't need to do this but we are going to be talking about this in one of the later chapters. And this is a good example of how to share the same AWS config across all our services.
 
 ### 3. Share common serverless.yml config
 
@@ -83,7 +79,7 @@ We have separate `serverless.yml` configs for our services. However, we end up
 1. Place the shared config values in a common yaml file at the root level.
 2. And reference them in your individual `serverless.yml` files.
 
-For example, we want to be able to use X-Ray to trace all of Lambda functions. To do that, we need to grant the necessary X-Ray permissions in the Lambda IAM role. We have a `serverless.common.yml` at the repo root.
+For example, to be able to use X-Ray, we need to grant the necessary X-Ray permissions in the Lambda IAM role. So we added a `serverless.common.yml` at the repo root.
 
 ``` yml
 lambdaPolicyXRay:
@@ -102,4 +98,4 @@ And in each of our service, we include the **lambdaPolicyXRay** IAM policy in th
 
 You can do something similar for any other `serverless.yml` config that needs to be shared.
 
-In the next chapter, we are going to look at what happens if a service is dependent on another service. And how this affects the deployment process.
+In the next chapter, we are going to look at how to share resources across services.

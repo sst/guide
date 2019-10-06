@@ -6,9 +6,15 @@ date: 2019-09-30 00:00:00
 comments_id: 
 ---
 
-Now that you have a couple of AWS accounts created and your resources have been parameterized, let's look at how to deploy them. In this chapter, we'll deploy the `notes-api` service in our `notes-api` app to 3 environments: `featureX`, `dev`, and `prod`. The first two environments will be deployed into our `Development` AWS account and the `prod` environment will be deployed into our `Production` AWS account.
+Now that you have a couple of AWS accounts created and your resources have been parameterized, let's look at how to deploy them. In this chapter, we'll deploy the following:
 
-**Note that **, in reality you should never deploy to production environment from your local machine. You want this to go through your CI/CD pipeline instead. But for the purpose of this chapter, we'll do it anyways.
+1. The [resources repo]({{ site.backend_ext_resources_github_repo }}) will be deployed in phases to the `dev` and `prod` stage. These two stages are configured in our `Development` and `Production` AWS accounts respectively.
+
+2. Do the same with the [APIs repo]({{ site.backend_ext_api_github_repo }}).
+
+We'll later configure a couple of ephemeral stages for our API services.
+
+TODO: UPDATE CREDENTIALS SECTION
 
 ### Configure AWS Profiles
 
@@ -61,3 +67,4 @@ Deploy to **dev**.
 Deploy to **prod**.
 [screenshots]
 
+Now that our entire app has been deployed, let's look at how we are sharing environment specific config across our services.
