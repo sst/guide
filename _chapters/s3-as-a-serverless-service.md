@@ -17,12 +17,11 @@ service: notes-app-mono-uploads
 
 custom:
   # Our stage is based on what is passed in when running serverless
-  # commands. Or falls back to what we have set in the provider section.
+  # commands. Or fallsback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
 
 provider:
   name: aws
-  runtime: nodejs8.10
   stage: dev
   region: us-east-1
 

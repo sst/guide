@@ -8,6 +8,8 @@ code: mono-repo
 comments_id: deploying-multiple-services-in-serverless/410
 ---
 
+TODO: Remove this chapter
+
 Over the last few chapters we have looked at how to:
 
 - [Link multiple Serverless services using CloudFormation cross-stack references]({% link _chapters/cross-stack-references-in-serverless.md %})

@@ -10,11 +10,8 @@ You will use the `serverless-offline` plugin [https://github.com/dherault/server
 
 # Invoke API locally
 
-Install the plugin at the repo root, because all API services require the plugin:
-``` bash
-$ npm install --save-dev serverless-offline
-```
-Let's first add the plugin for `notes-api`. Open `serverless.yml`, and add `serverless-offline` to the bottom of the plugins list.
+We installed the plugin at the repo root, because all API services require the plugin.
+Open `serverless.yml` in our `notes-api`, `serverless-offline` is listed in the plugins list.
 ``` yaml
 service: notes-api
 

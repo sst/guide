@@ -12,48 +12,52 @@ Now that you have a couple of AWS accounts created and your resources have been 
 
 ### Configure AWS Profiles
 
-Follow [setup up IAM users]({% link _chapters/create-an-iam-user.md %}) chapter to create an IAM user in your `Production` account. And take a note of the **Access key ID** and **Secret access key** for the user.
+Follow [setup up IAM users]({% link _chapters/create-an-iam-user.md %}) chapter to create an IAM user in your `Development` account. And take a note of the **Access key ID** and **Secret access key** for the user.
 
 Setup the credentials in your local machine using the AWS CLI:
 
 ``` bash
-$ aws configure --profile Production
+$ aws configure --profile default
 ```
 
-Repeat the step to create an IAM user in your `Development` account. And setup the credentials using the AWS CLI again:
+This sets the default IAM credentials to those of the Development account. Meaning when you run `sls deploy`, a service will get deployed into the Development account.
 
-``` bash
-$ aws configure --profile Development
-```
+Repeat the step to create an IAM user in your `Production` account. And take a note of the credentials. We will not add the IAM credentials for the Production account on our local machine. This is because we do not want us to be able to deploy code to the Production environment EVER from our local machine.
 
-### Deploy
+Production deployment should always go through our CI/CD pipeline.
 
-To deploy to the `featureX` environment, navigate to the root of the `notes-api` service:
-
-``` bash
-$ cd services/notes-api
-```
-
-You should see the `serverless.yml` file for the `notes-api` service in this directory. And deploy it using:
-
-``` bash
-$ serverless deploy -s featureX --aws-profile Development
-```
+### Configure environments on Seed
 
 Serverless Framework has a concept of stages. They are synonymous with environments. Recall that, in the previous chapter we used this stage name to parameterize our resource names. 
 
-The above command applies the stage name `featureX` and deploys the CloudFormation template to our `Development` account. It uses the IAM credentials we configured above.
+Add the resource repo on Seed with **dev** and **prod** stages.
+[screenshots]
 
-Deploy again to the `dev` environment:
+Add the 3 services.
+[screenshots]
 
-``` bash
-$ serverless deploy -s dev --aws-profile Development
-```
+Setup deploy phase
+[screenshots]
 
-This command applies the stage name `dev` and deploys to our `Development` account. Note, if we don't parameterize the name of a resource, this command will fail. Since both the `featureX` and `dev` stages are deployed to the same AWS account, causing the resource names to thrash.
+Deploy to **dev**.
+[screenshots]
 
-Finally, we can deploy to the `prod` environment.
+Deploy to **prod**.
+[screenshots]
 
-``` bash
-$ serverless deploy -s prod --aws-profile Production
-```
+
+Add the api repo on Seed with **dev** annd **prod** stages.
+[screenshots]
+
+Add the 3 services.
+[screenshots]
+
+Setup deploy phase
+[screenshots]
+
+Deploy to **dev**.
+[screenshots]
+
+Deploy to **prod**.
+[screenshots]
+

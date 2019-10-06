@@ -17,7 +17,8 @@ Carrying on with the notes example from the previous chapter, the folder structu
 ```
 /
   package.json
-  config.yml
+  config.js
+  serverless.common.yml
   libs/
   services/
     notes-api/
@@ -55,13 +56,16 @@ The biggest reason you are using a monorepo setup is because your services need 
 
 Alternatively, you could use a multi-repo approach where all your common code is published as private NPM packages. However, this adds an extra layer of complexity and it doesn’t make sense if you are a small team just wanting to share some common code.
 
-In our example, we want to share some common code. We’ll be placing these in a `libs/` directory. Our services need to make calls to various AWS services using the AWS SDK. And we are going to put the SDK configuration code in the `libs/aws-sdk.js` file.
+In our example, we want to share some common code. We’ll be placing these in a `libs/` directory. Our services need to make calls to various AWS services using the AWS SDK. And we have the common SDK configuration code in the `libs/aws-sdk.js` file.
 
 ``` js
-import aws from 'aws-sdk';
-import xray from 'aws-xray-sdk';
+import aws from "aws-sdk";
+import xray from "aws-xray-sdk";
 
-export default xray.captureAWS(aws);
+// Do not enable tracing for 'invoke local'
+const awsWrapped = process.env.IS_LOCAL ? aws : xray.captureAWS(aws);
+
+export default awsWrapped;
 ```
 
 Our Lambda functions will now import this instead of the standard AWS SDK.
@@ -79,24 +83,21 @@ We have separate `serverless.yml` configs for our services. However, we end up
 1. Place the shared config values in a common yaml file at the root level.
 2. And reference them in your individual `serverless.yml` files.
 
-We have a couple of settings like `custom` and `package` that is the same across all the services. Start by creating a `serverless.common.yml` at the repo root.
+For example, we want to be able to use X-Ray to trace all of Lambda functions. To do that, we need to grant the necessary X-Ray permissions in the Lambda IAM role. We have a `serverless.common.yml` at the repo root.
 
 ``` yml
-custom:
-  # Our stage is based on what is passed in when running serverless
-  # commands. Or fallsback to what we have set in the provider section.
-  stage: ${opt:stage, self:provider.stage}
-
-package:
-  individually: true
+lambdaPolicyXRay:
+  Effect: Allow
+  Action:
+    - xray:PutTraceSegments
+    - xray:PutTelemetryRecords
+  Resource: "*"
 ```
-And use the config in your service’s `serverless.yml`:
+And in each of our service, we include the **lambdaPolicyXRay** IAM policy in their `serverless.yml`:
 
 ``` yml
-...
-custom: ${file(../../serverless.common.yml):custom}
-package: ${file(../../serverless.common.yml):package}
-...
+  iamRoleStatements:
+    - ${file(../../serverless.common.yml):lambdaPolicyXRay}
 ```
 
 You can do something similar for any other `serverless.yml` config that needs to be shared.

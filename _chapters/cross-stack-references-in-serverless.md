@@ -8,6 +8,8 @@ code: mono-repo
 comments_id: cross-stack-references-in-serverless/405
 ---
 
+TODO: Remove this chapter
+
 In the previous chapter we looked at the [most common patterns for organizing your Serverless applications]({% link _chapters/organizing-serverless-projects.md %}). Now let's look at how to work with multiple services in your Serverless application.
 
 You might recall that a Serverless service is where a single `serverless.yml` is used to define the project. And the `serverless.yml` file is converted into a [CloudFormation template](https://aws.amazon.com/cloudformation/aws-cloudformation-templates/) using Serverless Framework. This means that in the case of multiple services you might need to reference a resource that is available in a different service. For example, you might have your DynamoDB tables created in one service and your APIs (which are in another service) need to refer to them. Of course you don't want to hard code this. And so over the next few chapters we will be breaking down the [note taking application]({{ site.backend_github_repo }}) into multiple resources to illustrate how to do this.

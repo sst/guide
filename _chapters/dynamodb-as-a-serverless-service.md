@@ -21,15 +21,9 @@ custom:
   stage: ${opt:stage, self:provider.stage}
   # Set the table name here so we can use it while testing locally
   tableName: ${self:custom.stage}-mono-notes
-  # Set our DynamoDB throughput for prod and all other non-prod stages.
-  tableThroughputs:
-    prod: 5
-    default: 1
-  tableThroughput: ${self:custom.tableThroughputs.${self:custom.stage}, self:custom.tableThroughputs.default}
 
 provider:
   name: aws
-  runtime: nodejs8.10
   stage: dev
   region: us-east-1
 
@@ -50,10 +44,8 @@ resources:
             KeyType: HASH
           - AttributeName: noteId
             KeyType: RANGE
-        # Set the capacity based on the stage
-        ProvisionedThroughput:
-          ReadCapacityUnits: ${self:custom.tableThroughput}
-          WriteCapacityUnits: ${self:custom.tableThroughput}
+        # Set the capacity to auto-scale
+        BillingMode: PAY_PER_REQUEST
 
   Outputs:
     NotesTableArn:
