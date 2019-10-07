@@ -73,4 +73,4 @@ Next, repeat the above steps to create the Development account and optionally th
 
 ![](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations-10.png)
 
-Now we have our AWS accounts created. Let's get ready to deploy.
+Now we have our AWS accounts created. Let's make sure we are using these environments correctly in the configuration of our app.

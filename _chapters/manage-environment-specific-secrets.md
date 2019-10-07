@@ -13,8 +13,9 @@ The general idea behind secrets is to store them outside of your codebase — do
 [AWS Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html) (SSM) is an AWS service that lets you store configuration data and secrets as key-value pairs in a central place. The values can be stored as plain text or as encrypted data. When stored as encrypted data, the value is encrypted on write using your [AWS KMS key](https://aws.amazon.com/kms/), and decrypted on read.
 
 As an example, we are going to use SSM to store our Stripe secret key. Note that, Stripe gives us 2 keys: a **live** key and a **test** key. We are going to store:
-- the **live** key in the Production account's SSM console; and
-- the **test** key in the Development account's SSM console.
+
+- The **live** key in the Production account's SSM console.
+- The **test** key in the Development account's SSM console.
 
 First go in to your **Production** account, and go to your Parameter Store console.
 
@@ -51,6 +52,8 @@ Then, switch to your **Development** account, and repeat the steps to add the **
 ### Access SSM Parameter in Lambda
 
 Now to use our SSM parameters, we need to let Lambda function know which environment it is running in. We are going to pass the name of the stage to Lambda functions as environment variables.
+
+TODO: ARE WE STILL USING THE PSEUDO PLUGIN?
 
 Update our `serverless.yml`.
 
@@ -136,3 +139,5 @@ By calling `ssm.getParameter` with `WithDecryption: true`, the value returned to
 Note that, you want to decrypt your secrets **outside** your Lambda function handler. This is because you only need to do this once per Lambda function invocation. Your secrets will get decrypted on the first invocation and you'll simply use the same value in subsequent invocations.
 
 So in summary, you want to store your sensitive data in SSM. Store the SSM parameter name in your config. When the Lambda function runs, use the environment it's running in to figure out which SSM parameter to use. Finally, decrypt the secret outside your Lambda handler function.
+
+Next, we'll look at how we can setup our API Gateway custom domains to work across environments.

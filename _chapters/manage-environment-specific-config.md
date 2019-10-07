@@ -10,11 +10,11 @@ In this chapter we'll look at how our services will connect to each other while 
 
 Let's quickly review the setup that we've created back in the [Organizing services chapter]({% link _chapters/organizing-services.md %}).
 
-1. We have two repos — `serverless-stack-demo-ext-resources` and `serverless-stack-demo-ext-api`. One has our infrastructure specific resources, while the other has all our Lambda functions.
+1. We have two repos — [serverless-stack-demo-ext-resources]({{ site.backend_ext_resources_github_repo }}) and [serverless-stack-demo-ext-api]({{ site.backend_ext_api_github_repo }}). One has our infrastructure specific resources, while the other has all our Lambda functions.
 2. The `serverless-stack-demo-ext-resources` repo is deployed a couple of long lived environments; like `dev` and `prod`.
-3. While, the `serverless-stack-demo-ext-api` is deployed to a few ephemeral environments (like `featureX` that is connected to the `dev` environment), in addition to the long lived environments above.
+3. While, the `serverless-stack-demo-ext-api` will be deployed to a few ephemeral environments (like `featureX` that is connected to the `dev` environment), in addition to the long lived environments above.
 
-We need to figure out a way to let the Lambda functions running in the `featureX` environment to connect to the `dev` environment of the `serverless-stack-demo-ext-resources` repo.
+But before we can deploy to an ephemeral environment like `featureX`, we need to figure out a way to let the Lambda functions connect to the `dev` environment of the resources repo.
 
 Let's look at how to do that.
 
@@ -84,3 +84,7 @@ export function call(action, params) {
   }).promise();
 }
 ```
+
+The above setup ensures that even when we create numerous ephemeral environments for our API services, they'll always connect back to the `dev` environment of our resources.
+
+Next, let's look at how to store secrets across our environments.

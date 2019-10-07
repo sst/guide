@@ -192,5 +192,5 @@ And finally, you'll notice that we are outputting:
 - A couple of things in this service. We need the Ids of the Cognito resources created in our frontend. But we don't have to export any cross-stack values.
 - The name of the CognitoAuthRole IAM role. We need it in our api service to grant permissions for the role to invoke the API Gateway endpoint that will be deployed.
 
-Now that all of our resources are complete, we'll look at how to deploy them. There is a bit of a wrinkle here since we have some dependencies between our services.
+Now that all of our resources are complete, let's look at the API services.
 

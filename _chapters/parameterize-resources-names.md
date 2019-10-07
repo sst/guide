@@ -103,4 +103,4 @@ resources:
               MaxAge: 3000
 ```
 
-Parameterizing your resources allows your app to be deployed to multiple environments without naming conflicts.
+Parameterizing your resources allows your app to be deployed to multiple environments without naming conflicts. Next, let's deploy our app!
