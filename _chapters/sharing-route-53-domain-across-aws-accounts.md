@@ -10,12 +10,12 @@ Our notes app has an API Gateway endpoint. In this chapter, we are going to look
 
 We are going to setup the following custom domain scheme:
 
-- `prod` ⇒ api.notes-app.com
-- `dev` ⇒ dev.api.notes-app.com
+- `prod` ⇒ ext-api.serverless-stack.com
+- `dev` ⇒ dev.ext-api.serverless-stack.com
 
 ### Setup domain for prod
 
-Recall that `prod` and `dev` are deployed to separate AWS accounts. Assume we are hosting the domain `notes-app.com` in the `Production` account. We can easily configure the custom domain for `prod`'s API endpoint. You can read about [how to setup a custom domain for API Gateway here](https://seed.run/blog/how-to-set-up-a-custom-domain-name-for-api-gateway-in-your-serverless-app). Alternatively, you can easily [set this up through Seed](https://seed.run/docs/configuring-custom-domains).
+Recall that `prod` and `dev` are deployed to separate AWS accounts. Assume we are hosting the domain `serverless-stack.com` in the `Production` account. We can easily configure the custom domain for `prod`'s API endpoint. You can read about [how to setup a custom domain for API Gateway here](https://seed.run/blog/how-to-set-up-a-custom-domain-name-for-api-gateway-in-your-serverless-app). Alternatively, you can easily [set this up through Seed](https://seed.run/docs/configuring-custom-domains).
 
 TODO: ADD SEED CUSTOM DOMAIN SCREENSHOT
 
@@ -23,7 +23,7 @@ TODO: ADD SEED CUSTOM DOMAIN SCREENSHOT
 
 However, using the same domain for our dev environments takes an extra step. This is because the `dev` environment is in a separate AWS account.
 
-We are going to have to delegate the subdomain `dev.api.notes-app.com` to be hosted in the `Development` AWS account. Just a quick note, as you follow these steps, pay attention to the account name shown at the top right corner of the screenshot. It'll tell you which account we are working with.
+We are going to have to delegate the subdomain `dev.ext-api.serverless-stack.com` to be hosted in the `Development` AWS account. Just a quick note, as you follow these steps, pay attention to the account name shown at the top right corner of the screenshot. It'll tell you which account we are working with.
 
 First, go into your Route 53 console in your `Development` account.
 
@@ -37,7 +37,7 @@ Click **Hosted zones** in the left menu. Then select **Create Hosted Zone**.
 
 Select **Create Hosted Zone** at the top. Enter:
 
-- **Domain Name**: dev.api.notes-app.com
+- **Domain Name**: dev.ext-api.serverless-stack.com
 
 Then click **Create**.
 
@@ -63,7 +63,7 @@ Click **Create Record Set**.
 
 Fill in:
 
-- **Name**: dev.api
+- **Name**: dev.ext-api
 - **Type**: NS - Name server
 
 And paste the 4 lines from above in the **Value** field.
@@ -72,10 +72,55 @@ Click **Create**.
 
 ![](/assets/best-practices/sharing-route-53-domain-across-aws-accounts-8.png)
 
-You should see a new `dev.api.notes-app.com` row in the table.
+You should see a new `dev.ext-api.serverless-stack.com` row in the table.
 
 ![](/assets/best-practices/sharing-route-53-domain-across-aws-accounts-9.png)
 
-Now we've delegated the `dev.api` subdomain of `notes-app.com` to our `Development` AWS account. You can now head over to your app or to Seed and [add this as a custom domain](https://seed.run/docs/configuring-custom-domains) for the `dev` stage.
+Now we've delegated the `dev.ext-api` subdomain of `serverless-stack.com` to our `Development` AWS account. You can now head over to your app or to Seed and [add this as a custom domain](https://seed.run/docs/configuring-custom-domains) for the `dev` stage.
 
 TODO: ADD SEED CUSTOM DOMAIN SCREENSHOT
+
+Go to the API app, and head into app settings.
+
+![](/assets/best-practices/sharing-route-53-10.png)
+
+Select **Edit Custom Domains**.
+
+![](/assets/best-practices/sharing-route-53-11.png)
+
+Both **dev** and **prod** endpoints are listed. Select **Add** on the **prod** endpoint.
+
+![](/assets/best-practices/sharing-route-53-12.png)
+
+Select the domain **serverless-stack.com** and enter the subdomain **ext-api**. Then select **Add Custom Domain**.
+
+![](/assets/best-practices/sharing-route-53-13.png)
+
+The creation process will go through a couple of phases of
+- validating the domain is hosted on Route 53;
+- creating the SSL certificate; and
+- creating the API Gateway custom domain.
+Some of the steps are short-lived so you might not see all of them.
+
+![](/assets/best-practices/sharing-route-53-14.png)
+
+The last step is update the CloudFront distribution, which can take up to 40 minutes. You will be waiting on this step.
+
+![](/assets/best-practices/sharing-route-53-15.png)
+
+While we wait, let's setup the domain for our **dev** api. Select **Add**.
+
+![](/assets/best-practices/sharing-route-53-16.png)
+
+Select the domain **dev.ext-api.serverless-stack.com** and leave the subdomain empty. Then select **Add Custom Domain**.
+
+![](/assets/best-practices/sharing-route-53-17.png)
+
+Similarly, you will wait for up to 40 minutes.
+
+![](/assets/best-practices/sharing-route-53-18.png)
+
+After 40 minutes, the domains will be ready.
+
+![](/assets/best-practices/sharing-route-53-19.png)
+
