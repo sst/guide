@@ -10,7 +10,7 @@ Making sure that you are able to rollback your Serverless deployments is critica
 
 # Rollback to previous build
 
-To rollback to a previous build, go to your Seed app. Notice we have pushed some faulty code to `dev` stage. Let's select `dev` to see a list of historical builds in the stage.
+To rollback to a previous build, go to your Seed app. Notice we have pushed some faulty code to `prod` stage. Let's select `prod` to see a list of historical builds in the stage.
 
 ![](/assets/best-practices/rollback-1.png)
 
