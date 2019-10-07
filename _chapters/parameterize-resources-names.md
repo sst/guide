@@ -53,7 +53,7 @@ resources:
 ...
 custom:
   stage: ${opt:stage, self:provider.stage}
-  tableName: ${self:custom.stage}-mono-notes
+  tableName: ${self:custom.stage}-ext-notes
 
 ...
 resources:
