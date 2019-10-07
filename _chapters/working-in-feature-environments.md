@@ -26,20 +26,17 @@ There are a couple of things that are causing the slowness here:
 
 Fortunately,  there is a way to deploy individual functions via `sls deploy -f`. Let's take a look at an example.
 
-Say we want to cap the number of recommendations returned to 6 items. Change the code to:
+Say we changed the code to:
 ``` javascript
-'use strict';
+import { success } from "../../libs/response-lib";
 
-module.exports.main = (event, context, callback) => {
-  const recommendations = [
-    // Add fancy machine learning code here
-  ];
+export async function main(event, context) {
+  // business logic code for liking a post
 
-  callback(null, {
-    statusCode: 200,
-    body: JSON.stringify(recommendations.slice(0, 6)),
-  });                   
-};
+  // updated business logic code for liking a post
+
+  return success({ status: true });
+}
 ```
 To deploy the code for this function, run:
 ``` bash

@@ -158,18 +158,15 @@ Now let's make our first deployment. You can see the deployments are carried out
 
 ![](/assets/best-practices/reploy-envs-29.png)
 
-Similarly, promote to **prod**.
-![](/assets/best-practices/deploy-envs-20a.png)
+Similarly, promote **dev** to **prod**.
 
-You will see a list of changes in resources. Since this is the first time we are deploying to the `prod` stage, the change list shows all the resources that will be created. We will go take a look at **promoting between environments** in details later in [promote-to-production] chapter.
+![](/assets/best-practices/reploy-envs-30.png)
 
 Select **Promote to Production**.
-![](/assets/best-practices/deploy-envs-20b.png)
 
-This will trigger the services to deploy in the same order we specified.
-![](/assets/best-practices/deploy-envs-20c.png)
+![](/assets/best-practices/reploy-envs-31.png)
 
-Now we have our resources deployed to both **dev** and **prod**.
-![](/assets/best-practices/deploy-envs-20d.png)
+Now we have the api deployed to both **dev** and **prod**.
+![](/assets/best-practices/deploy-envs-32.png)
 
 Now that our entire app has been deployed, let's look at how we are sharing environment specific config across our services.

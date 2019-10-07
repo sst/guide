@@ -96,7 +96,7 @@ To pass in body data for POST request
 
 You might want to distinguish if the Lambda function was triggered by `sls invoke local` during testing. For example, you don't want to send analytical events to your analytics server; or you don't want to send emails. You can simply add a runtime environment variable:
 ``` bash
-$ IS_LOCAL=true sls invoke local -f listCarts --path event-listCarts.json
+$ IS_LOCAL=true sls invoke local -f get --path events/get-event.json
 ```
 And in your code, you can check the environment variable. We use this in our `libs/aws-sdk.js` to disable X-Ray tracing when invoked locally:
 ``` javascript
