@@ -108,7 +108,7 @@ You can also mock the event as if the Lambda function is invoked by other events
 You might want to distinguish if the Lambda function was triggered by `serverless invoke local` during testing. For example, you don't want to send analytical events to your analytics server; or you don't want to send emails. You can simply add a runtime environment variable by doing the following:
 
 ``` bash
-$ IS_LOCAL=true serverless invoke local -f listCarts --path event-listCarts.json
+$ IS_LOCAL=true serverless invoke local -f get --path events/get-event.json
 ```
 
 And in your code, you can check the environment variable. We use this in our `libs/aws-sdk.js` to disable X-Ray tracing when invoking a function locally:

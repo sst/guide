@@ -14,15 +14,15 @@ Let's add a new feature that lets you like a note. We will add a new API endpoin
 
 Go to your app on Seed. Select **Settings**.
 
-![](/assets/best-practices/creating-pull-request-environments-1.png)
+![](/assets/best-practices/creating-feature-1.png)
 
 Scroll down to **Git Integration**. Then select **Enable Auto-Deploy Branches**.
 
-![](/assets/best-practices/creating-pull-request-environments-2.png)
+![](/assets/best-practices/creating-feature-2.png)
 
-Select **Enable**.
+Select the **dev** stage, since we want the stage to be deployed into the **Development stage. Select **Enable Auto-Deploy**.
 
-![](/assets/best-practices/creating-pull-request-environments-3.png)
+![](/assets/best-practices/creating-feature-3.png)
 
 # Add business logic code
 
@@ -30,6 +30,40 @@ We will create a new feature branch `like`.
 ``` bash
 $ git checkout -b like
 ```
+First, go into the `notes-api` and export the `/notes/{id}` API path.  Open the `serverless.yml` in the `notes-api` service, and append to the resource outputs.
+``` yaml
+ApiGatewayResourceNotesIdVarId:
+  Value:
+    Ref: ApiGatewayResourceNotesIdVar
+  Export:
+    Name: ${self:custom.stage}-ExtApiGatewayResourceNotesIdVarId
+```
+
+Resource outputs should look like:
+``` yaml
+...
+  - Outputs:
+      ApiGatewayRestApiId:
+        Value:
+          Ref: ApiGatewayRestApi
+        Export:
+          Name: ${self:custom.stage}-ExtApiGatewayRestApiId
+
+      ApiGatewayRestApiRootResourceId:
+        Value:
+           Fn::GetAtt:
+            - ApiGatewayRestApi
+            - RootResourceId
+        Export:
+          Name: ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId
+
+      ApiGatewayResourceNotesIdVarId:
+        Value:
+          Ref: ApiGatewayResourceNotesIdVar
+        Export:
+          Name: ${self:custom.stage}-ExtApiGatewayResourceNotesIdVarId
+```
+
 Create the `like-api` service.
 ``` bash
 $ cd services
@@ -62,12 +96,12 @@ provider:
 
   apiGateway:
     restApiId:
-      'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiId
+      'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiId
     restApiRootResourceId:
-      'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiRootResourceId
+      'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId
     restApiResources:
       /notes/{id}:
-        'Fn::ImportValue': ${self:custom.stage}-ApiGatewayResourceNotesIdVarId
+        'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayResourceNotesIdVarId
 
   environment:
     stage: ${self:custom.stage}
@@ -102,19 +136,23 @@ Then, go back to Seed and add the new service we just created.
 
 Select **Add a Service**.
 
-![](/assets/best-practices/creating-pull-request-environments-4.png)
+![](/assets/best-practices/creating-feature-4.png)
 
 Enter the path to the service `services/like-api` and select **Search**.
 
-![](/assets/best-practices/creating-pull-request-environments-5.png)
+![](/assets/best-practices/creating-feature-5.png)
 
 Since the code has not been committed to git yet, Seed is not able to find the serverless.yml of the service. That is totally fine. We will specify a name for the service `like-api`. Then select **Add Service**.
 
-![](/assets/best-practices/creating-pull-request-environments-6.png)
+![](/assets/best-practices/creating-feature-6.png)
 
-Now, we have the service added. By default, the new service is added to the latest deploy phase. Let's move it to Phase 2 as it is dependent on the API Gateway resources exported by `notes-api`.
+Now, we have the service added.
 
-![](/assets/best-practices/creating-pull-request-environments-7.png)
+![](/assets/best-practices/creating-feature-7.png)
+
+By default, the new service is added to the latest deploy phase. Let's head into the **Manage Deploy Phases** in the app settings, and move it to Phase 2 as it is dependent on the API Gateway resources exported by `notes-api`.
+
+![](/assets/best-practices/creating-feature-8.png)
 
 Go back to our command line, and then push the code to the `like` branch.
 ``` bash
@@ -125,9 +163,15 @@ $ git push --set-upstream origin like
 
 Now go back to Seed, a new stage **like** is created and is being deployed automatically.
 
-![](/assets/best-practices/creating-pull-request-environments-10.png)
+![](/assets/best-practices/creating-feature-9.png)
 
-After `like` stage successfully deploys, you can get the API endpoint in the stage's resources page. You can use the endpoint in your frontend for testing.
+After `like` stage successfully deploys, you can get the API endpoint in the stage's resources page. Select the **like** stage.
+![](/assets/best-practices/creating-feature-10.png)
 
-![](/assets/best-practices/creating-pull-request-environments-11.png)
+Select **View Resources** on **notes-api** service.
+![](/assets/best-practices/creating-feature-11.png)
 
+Scroll down and you will see the API Gateway endpoint for the **like** stage.
+![](/assets/best-practices/creating-feature-12.png)
+
+You can use the endpoint in your frontend for testing.
