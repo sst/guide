@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Invoking Lambda locally
-description: 
+description: In this chapter we look at how to develop and test Lambda functions locally. We look at the different types of event payloads to use for HTTP based Lambda functions.
 date: 2019-10-02 00:00:00
 comments_id: 
 ---

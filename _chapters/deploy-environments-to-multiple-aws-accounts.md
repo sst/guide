@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Deploy environments to multiple AWS accounts
-description: 
+description: Once you've configured the environments in your Serverless app across multiple AWS accounts, you'll want to deploy them. In this chapter, we look at how to create the AWS credentials and manage the environments using Seed.
 date: 2019-09-30 00:00:00
 comments_id: 
 ---

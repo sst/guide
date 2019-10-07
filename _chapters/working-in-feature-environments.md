@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Working in feature environments
-description: 
+description: In this chapter we'll look at how to work locally in a new feature environment for your Serverless app.
 date: 2019-10-02 00:00:00
 comments_id: 
 ---

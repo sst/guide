@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Parameterize resource names
-description: 
+description: When deploying your Serverless Framework app to multiple environments, we need to ensure the resource names do not thrash across environments. To do this we'll be parameterizing our resource names with the name of the stage we are deploying to.
 date: 2019-09-30 00:00:00
 comments_id: 
 ---

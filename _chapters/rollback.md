@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Rollback
-description: 
+description: In this chapter we look at how to rollback services in our monorepo Serverless app. If we are rolling back services with dependencies, we need to make sure to roll them back in the opposite order they were deployed in.
 date: 2019-10-02 00:00:00
 comments_id: 
 ---
