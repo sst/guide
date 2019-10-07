@@ -10,7 +10,7 @@ When organized under AWS Organizations, you don’t have to setup the billing de
 
 # Free Tier
 
-Each account in your AWS Organization benefits from the free tier. Lambda has a free tier that a 1GB Memory Lambda function can execute for 400,000 seconds per month. That is 400,000 seconds for each of your `Development`, `Staging` and `Production` account. If the usage is low in your `Development` and `Staging` accounts, it is likely you are not paying for them.
+Each account in your AWS Organization benefits from the free tier. Lambda has a free tier that a 1GB Memory Lambda function can execute for 400,000 seconds per month. That is 400,000 seconds for each of your `Development` and `Production` account. If the usage is low in your `Development` account, it is likely you are not paying for them.
 
 # Cost/Usage Breakdown by Account
 
