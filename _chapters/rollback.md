@@ -6,15 +6,17 @@ date: 2019-10-02 00:00:00
 comments_id: 
 ---
 
-Making sure that you are able to rollback your Serverless deployments is critical to managing your own CI/CD pipeline. In this chapter we’ll look at what the right rollback strategy is for your Serverless apps.
+So we've worked on a new feature, deployed it to a feature branch, created a PR for it, merged it to master, and promoted it to production! We are almost done going over the workflow. But before we move on we want to make sure that you are able to rollback your Serverless deployments in case there is a problem. We think this is a critical aspect of your CI/CD pipeline. In this chapter we’ll look at what the right rollback strategy is for your Serverless apps.
 
-# Rollback to previous build
+Let's quickly look at how to do that in Seed.
 
-To rollback to a previous build, go to your Seed app. Notice we have pushed some faulty code to `dev` stage. Let's select `dev` to see a list of historical builds in the stage.
+### Rollback to previous build
+
+To rollback to a previous build, go to your app in Seed. Let's suppose we've have pushed some faulty code to `dev` stage. Let's click on the `dev` stage to see a list of historical builds in the stage.
 
 ![](/assets/best-practices/rollback-1.png)
 
-Pick a previous build and select **Rollback**.
+Pick a previous successful build and hit **Rollback**.
 
 ![](/assets/best-practices/rollback-2.png)
 
@@ -22,11 +24,15 @@ Notice a new build is triggered for the `dev` stage.
 
 ![](/assets/best-practices/rollback-3.png)
 
-# Rollback infrastructure change
+### Rollback infrastructure change
 
-In our monorepo setup, our app is made up of multiple services, and some services are dependent on another. These dependencies require the services to be deployed in a specific order. We have talked about how to [Deploying services with dependency in phases]. We also need to watch out for deployment order when rolling back a change that involves dependency change.
+TODO: UPDATE LINK
 
-Let’s consider a simple example with just two services, `billing-api` and `notify-job`. And `billing-api` exports an SNS topic named `note-purchased` in ServiceA and exported the topic’s ARN. Here is an example of `billing-api`’s `serverless.yml`:
+In our monorepo setup, our app is made up of multiple services, and some services are dependent on each other. These dependencies require the services to be deployed in a specific order. Previously, we talked about how to [deploy services with dependencies]. We also need to watch out for the deployment order when rolling back a change that involves a dependency change.
+
+Let’s consider a simple example with just two services, `billing-api` and `notify-job`. Where `billing-api` exports an SNS topic named `note-purchased`. Here is an example of `billing-api`’s `serverless.yml`:
+
+
 ``` yaml
   Outputs:
     NotePurchasedTopicArn:
@@ -35,7 +41,9 @@ Let’s consider a simple example with just two services, `billing-api` and `not
       Export:
         Name: NotePurchasedTopicArn-${self:custom.stage}
 ```
+
 And the `notify-job` service imports the topic and uses it to trigger the `notify` function:
+
 ``` yaml
 functions:
   notify:
@@ -44,9 +52,10 @@ functions:
       - sns:
         'Fn::ImportValue': NotePurchasedTopicArn-${self:custom.stage}
 ```
-Note that the `billing-api` service had to be deployed first. This is to make sure that the export value `NotePurchasedTopicArn` exists, and then we deploy the `notify-job` service.
 
-Assume that after the services have been deployed, your Lambda functions start to error out and you have to rollback.
+Note that the `billing-api` service had to be deployed first. This is to make sure that the export value `NotePurchasedTopicArn` is created. Then we can deploy the `notify-job` service.
+
+Assume that after the services have been deployed, you push a faulty commit and you have to rollback.
 
 In this case, you need to: **rollback the services in the reverse order of the deployment**.
 

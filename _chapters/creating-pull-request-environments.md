@@ -6,42 +6,70 @@ date: 2019-10-02 00:00:00
 comments_id: 
 ---
 
-After local development is completed in the `like` branch, we are going to create a pull request.
+Now that we are done working on our new feature, we would like our team lead to review our work before promoting it to production. To do that we are going to create a pull request and Seed will automatically create an ephemeral environment for it.
 
-# Enable Pull Request workflow on Seed
+### Enable pull request workflow on Seed
 
-Go to your app on Seed. Select **Settings**.
+To enable auto-deploying pull requests, head over to your app on Seed. Click **Settings**.
 
 ![](/assets/best-practices/creating-pr-1.png)
 
-Scroll down to **Git Integration**. Then select **Enable Auto-Deploy PRs**.
+Scroll down to **Git Integration**. Then click **Enable Auto-Deploy PRs**.
 
 ![](/assets/best-practices/creating-pr-2.png)
 
-Select **Enable**.
+Hit **Enable**.
 
 ![](/assets/best-practices/creating-pr-3.png)
 
-# Create Pull Request
+### Create a pull request
 
-Go to GitHub, select the `like` branch. Then select **New pull request**.
-
-Select **Create pull request**.
+Go to GitHub, and select the **like** branch. Then hit **New pull request**.
 
 ![](/assets/best-practices/creating-pr-4.png)
 
-Select **Create pull request**.
+Click **Create pull request**.
 
 ![](/assets/best-practices/creating-pr-5.png)
 
-Now go back to Seed, a new stage **pr2** is created and is being deployed automatically.
+Now back in Seed, a new stage (in this case **pr2**) should be created and is being deployed automatically.
 
 ![](/assets/best-practices/creating-pr-6.png)
 
-After `pr2` stage successfully deploys, you can see the deployed API endpoint on the PR page. You can give the endpoint to your frontend team for testing.
+After the **pr2** stage successfully deploys, you can see the deployed API endpoint on the PR page. You can give the endpoint to your frontend team for testing.
 
 ![](/assets/best-practices/creating-pr-7.png)
 
-You can also access the `pr2` stage and the upstream `like` stage on Seed via the **View deployment** button. And you can see the deployment status for each service under **checks**.
+You can also access the **pr2** stage and the upstream **like** stage on Seed via the **View deployment** button. And you can see the deployment status for each service under the **checks** section.
 
 ![](/assets/best-practices/creating-pr-8.png)
+
+Now that our new feature has been reviewed, we are ready to merge it to master.
+
+### Merge to master
+
+Once your final test looks good, you are ready to merge the pull request. Go to GitHub's pr page and click **Merge pull request**.
+
+![](/assets/best-practices/merging-to-master-1.png)
+
+Back in Seed, this will trigger a deployment in the **dev** stage automatically, since the stage auto-deploys changes in the **master** branch. Also, since merging the pull request closes it, this will automatically remove the **pr2** stage.
+
+![](/assets/best-practices/merging-to-master-2.png)
+
+After the deployment completes and the **pr2** stage is removed, this is what your pipeline should look like:
+
+![](/assets/best-practices/merging-to-master-3.png)
+
+From GitHub's pull request screen, we can remove the **like** branch.
+
+![](/assets/best-practices/merging-to-master-4.png)
+
+Back in Seed, this will trigger the **like** stage to be automatically removed.
+
+![](/assets/best-practices/merging-to-master-5.png)
+
+After the removal is completed, your pipeline should now look like this.
+
+![](/assets/best-practices/merging-to-master-6.png)
+
+Next, we are ready to promote our new feature to production.
