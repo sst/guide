@@ -6,22 +6,16 @@ date: 2019-10-02 00:00:00
 comments_id: 
 ---
 
-Our notes app has an API Gateway endpoint. In this chapter, we are going to look at how to set up custom domains for each of our environments.
+Our notes app has an API Gateway endpoint. In this chapter, we are going to look at how to set up custom domains for each of our environments. Recall that our environments are split across multiple AWS accounts.
 
 We are going to setup the following custom domain scheme:
 
 - `prod` ⇒ ext-api.serverless-stack.com
 - `dev` ⇒ dev.ext-api.serverless-stack.com
 
-### Setup domain for prod
+Assuming that our domain is hosted in our `Production` AWS account. We want to set it up so that our `Development` AWS account can use the above subdomain. This takes an extra setup.
 
-Recall that `prod` and `dev` are deployed to separate AWS accounts. Assume we are hosting the domain `serverless-stack.com` in the `Production` account. We can easily configure the custom domain for `prod`'s API endpoint. You can read about [how to setup a custom domain for API Gateway here](https://seed.run/blog/how-to-set-up-a-custom-domain-name-for-api-gateway-in-your-serverless-app). Alternatively, you can easily [set this up through Seed](https://seed.run/docs/configuring-custom-domains).
-
-TODO: ADD SEED CUSTOM DOMAIN SCREENSHOT
-
-### Setup domain for dev
-
-However, using the same domain for our dev environments takes an extra step. This is because the `dev` environment is in a separate AWS account.
+### Delegate domains across AWS accounts
 
 We are going to have to delegate the subdomain `dev.ext-api.serverless-stack.com` to be hosted in the `Development` AWS account. Just a quick note, as you follow these steps, pay attention to the account name shown at the top right corner of the screenshot. It'll tell you which account we are working with.
 
@@ -78,8 +72,6 @@ You should see a new `dev.ext-api.serverless-stack.com` row in the table.
 
 Now we've delegated the `dev.ext-api` subdomain of `serverless-stack.com` to our `Development` AWS account. You can now head over to your app or to Seed and [add this as a custom domain](https://seed.run/docs/configuring-custom-domains) for the `dev` stage.
 
-TODO: ADD SEED CUSTOM DOMAIN SCREENSHOT
-
 Go to the API app, and head into app settings.
 
 ![](/assets/best-practices/sharing-route-53-10.png)
@@ -124,3 +116,8 @@ After 40 minutes, the domains will be ready.
 
 ![](/assets/best-practices/sharing-route-53-19.png)
 
+TODO: UPDATE LINK
+
+Now we've delegated the `dev.api` subdomain of `notes-app.com` to our `Development` AWS account. We'll be configuring our app to use [these domains in a later chapter].
+
+Next, let's quickly look at how you'll be managing the cost and usage for your two AWS accounts.

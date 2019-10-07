@@ -6,12 +6,12 @@ date: 2019-10-02 00:00:00
 comments_id: 
 ---
 
-You will use the `serverless-offline` plugin [https://github.com/dherault/serverless- offline](https://github.com/dherault/serverless-offline) to start a web server locally and emulate.
+Our notes app backend has an API Gateway endpoint. We want to be able to develop against this endpoint locally. To do this we'll use the [**serverless-offline** plugin](https://github.com/dherault/serverless- offline) to start a local web server.
 
-# Invoke API locally
+### Invoke API locally
 
-We installed the plugin at the repo root, because all API services require the plugin.
-Open `serverless.yml` in our `notes-api`, `serverless-offline` is listed in the plugins list.
+We installed the above plugin at the repo root, because all API services require the plugin. Open `serverless.yml` in our `notes-api`. You'll notice `serverless-offline` is listed under plugins.
+
 ``` yaml
 service: notes-api
 
@@ -20,38 +20,50 @@ plugins:
 
 ...
 ```
-Now, you can start the server. 
-```
+
+Let's start our local web server.
+
+``` bash
 $ cd notes-api
-$ sls offline
+$ serverless offline
 ```
-By default,  the server starts on `[localhost](http://localhost)` and on port `3000`. Let's try curling the endpoint:
-```
+
+By default,  the server starts on `http://localhost` and on port `3000`. Let's try making a request to the endpoint:
+
+``` bash
 $ curl http://localhost:3000/notes
 ```
-# Mocking Cognito Identity Pool authentication
 
-Serverless Offline plugin allows you to pass in Cognito authentication information through request headers, as if the Lambdas were authenticated by Cognito Identity pool.
+### Mocking Cognito Identity Pool authentication
 
-To mock the user pool user id: 
+Our API endpoint is secured using Cognito Identity Pool. The serverless-offline plugin allows you to pass in Cognito authentication information through the request headers. This allows you to invoke the Lambdas as if they were authenticated by Cognito Identity pool.
+
+To mock a User Pool user id: 
+
 ``` bash
 $ curl --header "cognito-identity-id: 13179724-6380-41c4-8936-64bca3f3a25b" \
-    http://localhost:3000/notes
+  http://localhost:3000/notes
 ```
-And you can access the id via `event.requestContext.identity.cognitoIdentityId`
 
-To mock the identity pool user id:
+You can access the id via `event.requestContext.identity.cognitoIdentityId` in your Lambda function.
+
+To mock the Identity Pool user id:
+
 ``` bash
 $ curl --header "cognito-authentication-provider: cognito-idp.us-east-1.amazonaws.com/us-east-1_Jw6lUuyG2,cognito-idp.us-east-1.amazonaws.com/us-east-1_Jw6lUuyG2:CognitoSignIn:5f24dbc9-d3ab-4bce-8d5f-eafaeced67ff" \
-    http://localhost:3000/notes
+  http://localhost:3000/notes
 ```
-And you can access the id via `event.requestContext.identity.cognitoAuthenticationProvider`
 
-# Downside
+And you can access this id via `event.requestContext.identity.cognitoAuthenticationProvider` in your Lambda function.
 
-The plugin cannot an overall API endpoint that access the request and route to the corresponding service that is responsible for it. This is because the plugin works on the service level, not the app level.
+### Working with multiple services
 
-That said, here is a quick and dirty script you can use to achieve the effect we just described.
+Our app is made up of multiple API services; `notes-api` and `billing-api`. They are two separate Serverless Framework services. They respond to `/notes` and `/billing` path respectively.
+
+The serverless-offline plugin cannot emulate an overall API endpoint. It cannot handle requests and route them to the corresponding service that is responsible for it. This is because the plugin works on the service level and not at the app level.
+
+That said, here is a quick script that lets you run a server on port `8080` while routing `/notes` and `/billing` to their separate services.
+
 ``` javascript
 #!/usr/bin/env node
 
@@ -63,15 +75,14 @@ const services = [
   {route:'/notes/*', path:'services/notes-api', port:3002},
 ];
 
-// Start `sls offline` for each service
+// Start `serverless offline` for each service
 services.forEach(service => {
-  const child = spawn('sls', ['offline', 'start', '--stage', 'dev', '--port', service.port], {cwd: service.path});
+  const child = spawn('serverless', ['offline', 'start', '--stage', 'dev', '--port', service.port], {cwd: service.path});
   child.stdout.setEncoding('utf8');
   child.stdout.on('data', chunk => console.log(chunk));
   child.stderr.on('data', chunk => console.log(chunk));
   child.on('close', code => console.log(`child exited with code ${code}`));
 });
-
 
 // Start a proxy server on port 8080 forwarding based on url path
 const proxy = httpProxy.createProxyServer({});
@@ -118,9 +129,18 @@ function urlMatchRoute(url, route) {
   return true;
 }
 ```
-This script has 4 sections:
 
-- At the very top, we define the services we are going to start. We just have to include our API services.
-- Then we start each services based on the port defined in each service.
-- Then we start a HTTP server on port 8080. In the request handling logic, we look for a service with matching route. If one is found, the server proxies the request to the service.
-- At the bottom, we have a function that checks if a route matches a url.
+This script is in included as `startServer` in the [sample repo]({{ site.backend_ext_api_github_repo }}). But let's quickly look at how it works. It has 4 sections:
+
+1. At the very top, we define the services we are going to start. Tweak this to include any new services that you add.
+2. We then start each service based on the port defined using the serverless-offline plugin.
+3. We start an HTTP server on port 8080. In the request handling logic, we look for a service with a matching route. If one is found, the server proxies the request to the service.
+4. At the bottom, we have a function that checks if a route matches a url.
+
+You can run this server locally from the project root using:
+
+``` bash
+$ ./startServer
+```
+
+Now that we have a good idea of how to develop our Lambda functions locally, Let's look at what happens when you want to create an environment for a new feature.

@@ -6,27 +6,35 @@ date: 2019-10-02 00:00:00
 comments_id: 
 ---
 
-When organized under AWS Organizations, you don’t have to setup the billing details for each account. Billing is consolidated to the root account. You can also see a breakdown of usage and cost for each service in each account.
+So far we've split the environments for our Serverless app across two AWS accounts. But before we go ahead and look at the development workflow, let's look at how to manage the cost and usage for them.
 
-# Free Tier
+Our accounts are organized under AWS Organizations. So you don’t have to setup the billing details for each account. Billing is consolidated to the root account. You can also see a breakdown of usage and cost for each service in each account.
 
-Each account in your AWS Organization benefits from the free tier. Lambda has a free tier that a 1GB Memory Lambda function can execute for 400,000 seconds per month. That is 400,000 seconds for each of your `Development` and `Production` account. If the usage is low in your `Development` account, it is likely you are not paying for them.
+### Free Tier
 
-# Cost/Usage Breakdown by Account
+An added bonus of splitting up environments by AWS accounts is that each account in your AWS Organization benefits from the free tier.
 
-Go into your root account. Select the account picker at the top. Then select **My Billing Dashboard**. 
+For example, Lambda's free tier includes 400 000 seconds per month for 1GB memory Lambda function. That is 400 000 seconds for each of your AWS accounts! If the usage in your `Development` account ends up being low, you'll likely not be paying for it.
+
+### Cost/Usage Breakdown by Account
+
+Go into your root account. Select the account picker at the top. Then click **My Billing Dashboard**. 
 
 ![](/assets/best-practices/manage-cost-and-usage-for-aws-accounts-1.png)
 
-The Billing Dashboard home page shows you the cost to date of the current calendar month. A few very useful features on this page:
+The Billing Dashboard homepage shows you the cost to date for the current calendar month. A couple of very useful features on this page are:
 
-- **Cost Explorer**: see cost break down by day/week/month; by account; by resource tag; by service; etc.
-- **Budgets**: set alert based by usage limit and cost limit.
+1. **Cost Explorer**: See the cost break down by day/week/month; by account; by resource tag; by service; etc.
+2. **Budgets**: Set alert based on usage limits and cost limits.
 
-For the purpose of this chapter, select **Bill Details**.
+Click on **Bill Details**.
 
 ![](/assets/best-practices/manage-cost-and-usage-for-aws-accounts-2.png)
 
-Select **Bill details by account**. You can see the cost allocation for each account.
+And click **Bill details by account**. Here you can see the cost allocation for each account.
 
 ![](/assets/best-practices/manage-cost-and-usage-for-aws-accounts-3.png)
+
+This should give you a really good idea of the usage and cost for each of your environments.
+
+Now we are ready to look at the development workflow for our app!

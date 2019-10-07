@@ -315,6 +315,8 @@ configure-environments:
 development-lifecycle:
   title: Development lifecycle
   chapters:
+    - page: Development workflow best practices
+      url: /chapters/development-workflow-best-practices.html
     - page: Invoking Lambda locally
       url: /chapters/invoking-lambda-locally.html
     - page: Invoking API endpoint locally
