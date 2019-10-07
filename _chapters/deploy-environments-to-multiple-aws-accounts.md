@@ -107,6 +107,20 @@ You can see the deployments are carried out according to the deploy phases speci
 
 ![Deploying with Deploy Phase screenshot](/assets/best-practices/deploy-envs-20.png)
 
+Go back to the app dashboard, and select **Promote** to deploy to the **prod** stage.
+![](/assets/best-practices/deploy-envs-20a.png)
+
+You will see a list of changes in resources. Since this is the first time we are deploying to the `prod` stage, the change list shows all the resources that will be created. We will go take a look at **promoting between environments** in details later in [promote-to-production] chapter.
+
+Select **Promote to Production**.
+![](/assets/best-practices/deploy-envs-20b.png)
+
+This will trigger the services to deploy in the same order we specified.
+![](/assets/best-practices/deploy-envs-20c.png)
+
+Now we have our resources deployed to both **dev** and **prod**.
+![](/assets/best-practices/deploy-envs-20d.png)
+
 
 ### Configure environments for the API repo
 
@@ -143,5 +157,19 @@ Since the **billing-api** service depends on the **notes-api** service, and in t
 Now let's make our first deployment. You can see the deployments are carried out according to the deploy phases specified.
 
 ![](/assets/best-practices/reploy-envs-29.png)
+
+Similarly, promote to **prod**.
+![](/assets/best-practices/deploy-envs-20a.png)
+
+You will see a list of changes in resources. Since this is the first time we are deploying to the `prod` stage, the change list shows all the resources that will be created. We will go take a look at **promoting between environments** in details later in [promote-to-production] chapter.
+
+Select **Promote to Production**.
+![](/assets/best-practices/deploy-envs-20b.png)
+
+This will trigger the services to deploy in the same order we specified.
+![](/assets/best-practices/deploy-envs-20c.png)
+
+Now we have our resources deployed to both **dev** and **prod**.
+![](/assets/best-practices/deploy-envs-20d.png)
 
 Now that our entire app has been deployed, let's look at how we are sharing environment specific config across our services.
