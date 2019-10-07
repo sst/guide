@@ -30,7 +30,7 @@ resources:
       Type: AWS::Cognito::UserPool
       Properties:
         # Generate a name based on the stage
-        UserPoolName: ${self:custom.stage}-mono-user-pool
+        UserPoolName: ${self:custom.stage}-ext-user-pool
         # Set email as an alias
         UsernameAttributes:
           - email
@@ -41,7 +41,7 @@ resources:
       Type: AWS::Cognito::UserPoolClient
       Properties:
         # Generate an app client name based on the stage
-        ClientName: ${self:custom.stage}-mono-user-pool-client
+        ClientName: ${self:custom.stage}-ext-user-pool-client
         UserPoolId:
           Ref: CognitoUserPool
         ExplicitAuthFlows:
@@ -53,7 +53,7 @@ resources:
       Type: AWS::Cognito::IdentityPool
       Properties:
         # Generate a name based on the stage
-        IdentityPoolName: ${self:custom.stage}MonoIdentityPool
+        IdentityPoolName: ${self:custom.stage}ExtIdentityPool
         # Don't allow unathenticated users
         AllowUnauthenticatedIdentities: false
         # Link to our User Pool
@@ -112,7 +112,7 @@ resources:
                     - Fn::Join:
                       - ''
                       -
-                        - 'Fn::ImportValue': ${self:custom.stage}-AttachmentsBucketArn
+                        - 'Fn::ImportValue': ${self:custom.stage}-ExtAttachmentsBucketArn
                         - '/private/'
                         - '$'
                         - '{cognito-identity.amazonaws.com:sub}/*'
@@ -135,7 +135,7 @@ resources:
       Value:
         Ref: CognitoAuthRole
       Export:
-        Name: CognitoAuthRole-${self:custom.stage}
+        Name: ExtCognitoAuthRole-${self:custom.stage}
 ```
 
 This can seem like a lot but both the `CognitoUserPool:` and the `CognitoUserPoolClient:` section are simply creating our Cognito User Pool. And you'll notice that both these sections are not using any cross-stack references. They are effectively standalone. If you are looking for more details on this, refer to the [earlier part of this guide]({% link _chapters/configure-cognito-user-pool-in-serverless.md %}).
@@ -168,7 +168,7 @@ This is the relevant section from the above `serverless.yml`.
     - Fn::Join:
       - ''
       -
-        - 'Fn::ImportValue': ${self:custom.stage}-AttachmentsBucketArn
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtAttachmentsBucketArn
         - '/private/'
         - '$'
         - '{cognito-identity.amazonaws.com:sub}/*'
@@ -183,7 +183,7 @@ The S3 bucket resource in our IAM role looks something like:
 Where `my_s3_bucket` is the name of the bucket. We are going to use the generated name that we exported back in the [S3 bucket chapter]({% link _chapters/s3-as-a-serverless-service.md %}). And we can import it using:
 
 ```
-'Fn::ImportValue': ${self:custom.stage}-AttachmentsBucketArn
+'Fn::ImportValue': ${self:custom.stage}-ExtAttachmentsBucketArn
 ```
 
 Again, all of our references are based on the stage we are deploying to. You'll notice that we don't have the IAM role here that allows access to our APIs. We are going to be doing that along side our API services.

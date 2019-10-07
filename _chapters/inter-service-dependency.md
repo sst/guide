@@ -48,7 +48,7 @@ resources:
       Value:
         Ref: NotePurchasedTopic
       Export:
-        Name: NotePurchasedTopicArn-${self:custom.stage}
+        Name: ExtNotePurchasedTopicArn-${self:custom.stage}
 ```
 
 And in the `notify-job` service, we import the topic's ARN and created a Lambda function to subscribe to this topic. In the `serverless.yml` file of the `notify-job` service:
@@ -60,7 +60,7 @@ functions:
     handler: notify.main
     events:
       - sns:
-        'Fn::ImportValue': NotePurchasedTopicArn-${self:custom.stage}
+        'Fn::ImportValue': ExtNotePurchasedTopicArn-${self:custom.stage}
 ```
 
 TODO: UPDATE LINK

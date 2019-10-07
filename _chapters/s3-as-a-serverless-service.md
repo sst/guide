@@ -53,20 +53,20 @@ resources:
           - S3Bucket
           - Arn
       Export:
-        Name: ${self:custom.stage}-AttachmentsBucketArn
+        Name: ${self:custom.stage}-ExtAttachmentsBucketArn
 
     AttachmentsBucketName:
       Value:
         Ref: S3Bucket
       Export:
-        Name: ${self:custom.stage}-AttachmentsBucket
+        Name: ${self:custom.stage}-ExtAttachmentsBucket
 ```
 
 Most of the `Resources:` section should be fairly straightforward and is based on [first part of this guide]({% link _chapters/configure-s3-in-serverless.md %}). So let's go over the cross-stack exports in the `Outputs:` section.
 
 1. Just as in the [DynamoDB service]({% link _chapters/dynamodb-as-a-serverless-service.md %}), we are exporting the [ARN]({% link _chapters/what-is-an-arn.md %}) (`AttachmentsBucketArn`). For this service, we are also exporting the name of the bucket (`AttachmentsBucketName`).
 
-2. The names of the exported values are based on the stage: `${self:custom.stage}-AttachmentsBucketArn` and `${self:custom.stage}-AttachmentsBucket`.
+2. The names of the exported values are based on the stage: `${self:custom.stage}-ExtAttachmentsBucketArn` and `${self:custom.stage}-ExtAttachmentsBucket`.
 
 3. We can get the ARN by using the `Fn::GetAtt` function by passing in the ref (`S3Bucket`) and the attribute we need (`Arn`).
 

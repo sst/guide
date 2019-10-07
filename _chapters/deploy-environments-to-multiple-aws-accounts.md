@@ -39,6 +39,26 @@ Add the 3 services.
 Setup deploy phase
 [screenshots]
 
+You can configure this by heading to the app settings and hitting **Manage Deploy Phases**.
+
+![Hit Manage Deploy Phases screenshot](/assets/mono-repo/hit-manage-deploy-phases.png)
+
+Here you'll notice that by default all the services are deployed concurrently.
+
+![Default Deploy Phase screenshot](/assets/mono-repo/default-deploy-phase.png)
+
+Note that, you'll need to add your services first. To do this, head over to the app **Settings** and hit **Add a Service**.
+
+![Click Add Service screenshot](/assets/mono-repo/click-add-service.png)
+
+We can configure our service dependencies by adding the necessary deploy phases and moving the services around.
+
+![Edit Deploy Phase screenshot](/assets/mono-repo/edit-deploy-phase.png)
+
+And when you deploy your app, the deployments are carried out according to the deploy phases specified.
+
+![Deploying with Deploy Phase screenshot](/assets/mono-repo/deploying-with-deploy-phase.png)
+
 Deploy to **dev**.
 [screenshots]
 
@@ -52,6 +72,17 @@ Add the api repo on Seed with **dev** annd **prod** stages.
 Add the 3 services.
 [screenshots]
 
+You can configure this by heading to the app settings and hitting **Manage Deploy Phases**.
+
+![Hit Manage Deploy Phases screenshot](/assets/mono-repo/hit-manage-deploy-phases.png)
+
+We can configure our service dependencies by adding the necessary deploy phases and moving the services around.
+
+![Edit Deploy Phase screenshot](/assets/mono-repo/edit-deploy-phase.png)
+
+And when you deploy your app, the deployments are carried out according to the deploy phases specified.
+
+![Deploying with Deploy Phase screenshot](/assets/mono-repo/deploying-with-deploy-phase.png)
 Setup deploy phase
 [screenshots]
 

@@ -54,7 +54,7 @@ TODO: FORMAT THESE SNIPPETS
         Value:
           Ref: ApiGatewayRestApi
         Export:
-          Name: ${self:custom.stage}-ApiGatewayRestApiId
+          Name: ${self:custom.stage}-ExtApiGatewayRestApiId
     
       ApiGatewayRestApiRootResourceId:
         Value:
@@ -62,13 +62,13 @@ TODO: FORMAT THESE SNIPPETS
             - ApiGatewayRestApi
             - RootResourceId 
         Export:
-          Name: ${self:custom.stage}-ApiGatewayRestApiRootResourceId
+          Name: ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId
 ```
 
 We export a couple of values in this service to be able to share this API Gateway resource in our _billing_ service:
 
-  1. The first cross-stack reference that needs to be shared is the API Gateway Id that is created as a part of this service. We are going to export it with the name `${self:custom.stage}-ApiGatewayRestApiId`. Again, we want the exports to work across all our environments/stages and so we include the stage name as a part of it. The value of this export is available as a reference in our current stack called `ApiGatewayRestApi`.
-  2. We also need to export the `RootResourceId`. This is a reference to the `/` path of this API Gateway project. To retrieve this Id we use the `Fn::GetAtt` CloudFormation function and pass in the current `ApiGatewayRestApi` and look up the attribute `RootResourceId`. We export this using the name `${self:custom.stage}-ApiGatewayRestApiRootResourceId`.
+  1. The first cross-stack reference that needs to be shared is the API Gateway Id that is created as a part of this service. We are going to export it with the name `${self:custom.stage}-ExtApiGatewayRestApiId`. Again, we want the exports to work across all our environments/stages and so we include the stage name as a part of it. The value of this export is available as a reference in our current stack called `ApiGatewayRestApi`.
+  2. We also need to export the `RootResourceId`. This is a reference to the `/` path of this API Gateway project. To retrieve this Id we use the `Fn::GetAtt` CloudFormation function and pass in the current `ApiGatewayRestApi` and look up the attribute `RootResourceId`. We export this using the name `${self:custom.stage}-ExtApiGatewayRestApiRootResourceId`.
 
 ### Billing Service
 
@@ -80,9 +80,9 @@ In the [example repo]({{ site.backend_ext_api_github_repo }}), open the `billing
 provider:
   apiGateway:
     restApiId:
-      'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiId
+      'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiId
     restApiRootResourceId:
-      'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiRootResourceId
+      'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId
 ...
 
 functions:
@@ -98,9 +98,9 @@ functions:
 
 To share the same API Gateway domain as our _notes-api_ service, we are adding an `apiGateway:` section to the `provider:` block.
 
-  1. Here we state that we want to use the `restApiId` of our _notes_ service. We do this by using the cross-stack reference `'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiId` that we had exported above.
+  1. Here we state that we want to use the `restApiId` of our _notes_ service. We do this by using the cross-stack reference `'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiId` that we had exported above.
 
-  2. We also state that we want all the APIs in our service to be linked under the root path of our _notes_ service. We do this by setting the `restApiRootResourceId` to the cross-stack reference `'Fn::ImportValue': ${self:custom.stage}-ApiGatewayRestApiRootResourceId` from above.
+  2. We also state that we want all the APIs in our service to be linked under the root path of our _notes_ service. We do this by setting the `restApiRootResourceId` to the cross-stack reference `'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId` from above.
 
 Now when you deploy the `billing-api` service, instead of creating a new API Gateway project, Serverless Framework is going to reuse the project you imported.
 

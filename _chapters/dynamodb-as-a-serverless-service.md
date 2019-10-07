@@ -19,7 +19,7 @@ custom:
   # commands. Or fallsback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
   # Set the table name here so we can use it while testing locally
-  tableName: ${self:custom.stage}-mono-notes
+  tableName: ${self:custom.stage}-ext-notes
 
 provider:
   name: aws
@@ -53,7 +53,7 @@ resources:
           - NotesTable
           - Arn
       Export:
-        Name: ${self:custom.stage}-NotesTableArn
+        Name: ${self:custom.stage}-ExtNotesTableArn
 ```
 
 If you have followed along with [the first part of our guide]({% link _chapters/configure-dynamodb-in-serverless.md %}), the `Resources:` section should seem familiar. It is creating the Notes table that we use in our [note taking application]({{ site.backend_github_repo }}). The key addition here in regards to the cross-stack references is in the `Outputs:` section. Let's go over them quickly.

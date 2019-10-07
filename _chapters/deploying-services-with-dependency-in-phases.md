@@ -18,8 +18,8 @@ The short version is that:
 TODO: UPDATE LINK
 
 If you are deploying [our sample app] for the first time, you have to:
-- Deploy the `notes-api` first. This will export the value `dev-ApiGatewayRestApiId` and `dev-ApiGatewayRestApiRootResourceId`.
-- Then deploy the `billing-api` next. This will export the value `NotePurchasedTopicArn-dev`.
+- Deploy the `notes-api` first. This will export the value `dev-ExtApiGatewayRestApiId` and `dev-ExtApiGatewayRestApiRootResourceId`.
+- Then deploy the `billing-api` next. This will export the value `ExtNotePurchasedTopicArn-dev`.
 - Then deploy the `notify-job`.
 
 Assuming that you are deploying to the `dev` stage.
@@ -27,7 +27,7 @@ Assuming that you are deploying to the `dev` stage.
 If you were to deploy `billing-api` and `notify-job` concurrently, the `notify-job` will fail with the following CloudFormation error:
 
 ```
-notify-job - No export named NotePurchasedTopicArn-dev found.
+notify-job - No export named ExtNotePurchasedTopicArn-dev found.
 ```
 
 This error is basically saying that the ARN referenced in its `serverless.yml` does not exist. This makes sense because we haven’t created it yet!
@@ -58,26 +58,6 @@ So it's easier to visualize your services to be deployed in 2 phases:
 
 Deploy the services in each phase _concurrently_ while deploying the phases _sequentially_. With [Seed](https://seed.run), we handle this using a concept of [Deploy Phases](https://seed.run/docs/configuring-deploy-phases).
 
-You can configure this by heading to the app settings and hitting **Manage Deploy Phases**.
-
-![Hit Manage Deploy Phases screenshot](/assets/mono-repo/hit-manage-deploy-phases.png)
-
-Here you'll notice that by default all the services are deployed concurrently.
-
-![Default Deploy Phase screenshot](/assets/mono-repo/default-deploy-phase.png)
-
-Note that, you'll need to add your services first. To do this, head over to the app **Settings** and hit **Add a Service**.
-
-![Click Add Service screenshot](/assets/mono-repo/click-add-service.png)
-
-We can configure our service dependencies by adding the necessary deploy phases and moving the services around.
-
-![Edit Deploy Phase screenshot](/assets/mono-repo/edit-deploy-phase.png)
-
-And when you deploy your app, the deployments are carried out according to the deploy phases specified.
-
-![Deploying with Deploy Phase screenshot](/assets/mono-repo/deploying-with-deploy-phase.png)
-
 ### Managing deployment in phases for api
 
 For our api repo, the dependencies look like:
@@ -88,14 +68,3 @@ To break it down in detail:
 - The `billing-api` service relies on the `notes-api` service for the API Gateway export.
 - The `notify-job` service relies on the `billing-api` service for the SNS Topic export.
 
-You can configure this by heading to the app settings and hitting **Manage Deploy Phases**.
-
-![Hit Manage Deploy Phases screenshot](/assets/mono-repo/hit-manage-deploy-phases.png)
-
-We can configure our service dependencies by adding the necessary deploy phases and moving the services around.
-
-![Edit Deploy Phase screenshot](/assets/mono-repo/edit-deploy-phase.png)
-
-And when you deploy your app, the deployments are carried out according to the deploy phases specified.
-
-![Deploying with Deploy Phase screenshot](/assets/mono-repo/deploying-with-deploy-phase.png)
