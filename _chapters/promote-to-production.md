@@ -14,17 +14,15 @@ Head to the Seed page. And then select **Promote** at the bottom of the `dev` st
 
 ![](/assets/best-practices/promote-to-production-1.png)
 
-You will see a list of changes in resources. Note only the major changes are shown here. In this case, since this is the first time we are deploying to the `prod` stage, the change list shows that Lambda functions, API paths and an SNS topic will be created. 
+You will see a list of changes in resources. Note only the major changes are shown here. The change list shows that we added a Lambda functions and an API Gateway method. In reality, there are other resources added behind the scene like the Lambda execution IAM role, Lambda's CloudWatch log group, etc.
+
+Select **Promote to Production**.
 
 ![](/assets/best-practices/promote-to-production-2.png)
 
- Scroll to the bottom of the change list and select **Promote to Production**.
-
-![](/assets/best-practices/promote-to-production-3.png)
-
 This will trigger the `prod` stage to start building.
 
-![](/assets/best-practices/promote-to-production-4.png)
+![](/assets/best-practices/promote-to-production-3.png)
 
 # Why manual promote?
 
