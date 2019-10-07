@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Promote to production
-description: 
+description: In this chapter we'll look at the process of promoting your Serverless app to production using Seed. We'll look at why a manual promote is recommended and how change sets can help us review our changes.
 date: 2019-10-02 00:00:00
 comments_id: 
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Development workflow best practices
-description: 
+description: In this section of the guide we look at the development workflow of a real world Serverless app.
 date: 2019-10-07 00:00:00
 comments_id: 
 ---

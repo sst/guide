@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Merging to master
-description: 
+description: In this chapter we'll look at how to merge a pull request environment for your Serverless app in Seed.
 date: 2019-10-02 00:00:00
 comments_id: 
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Tracing Lambda functions with X-Ray
-description: 
+description: In this chapter we look at how to trace Serverless apps using AWS X-Ray. Since your app is made up of multiple services, it's important to configure X-Ray to get visibility over a request as it flows through the system.
 date: 2019-10-02 00:00:00
 comments_id: 
 ---

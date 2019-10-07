@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Inter-service Dependency
-description: 
+description: In this chapter we look at how to reference AWS resources across multiple services in a Serverless Framework app. We'll export the ARN of the resource and import it using 'Fn::ImportValue'.
 date: 2019-09-29 00:00:00
 comments_id: 
 ---

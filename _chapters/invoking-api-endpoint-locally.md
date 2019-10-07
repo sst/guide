@@ -1,12 +1,12 @@
 ---
 layout: post
 title: Invoking API endpoint locally
-description: 
+description: In this chapter we look at testing API Gateway endpoints locally in your Serverless app. We also look at how to mock Cognito authentication info. We'll create a local web server for all the services in our monorepo app.
 date: 2019-10-02 00:00:00
 comments_id: 
 ---
 
-Our notes app backend has an API Gateway endpoint. We want to be able to develop against this endpoint locally. To do this we'll use the [**serverless-offline** plugin](https://github.com/dherault/serverless- offline) to start a local web server.
+Our notes app backend has an API Gateway endpoint. We want to be able to develop against this endpoint locally. To do this we'll use the [**serverless-offline plugin**](https://github.com/dherault/serverless-offline) to start a local web server.
 
 ### Invoke API locally
 

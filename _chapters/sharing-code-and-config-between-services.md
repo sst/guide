@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Sharing code and config between services
-description: 
+description: In this chapter we look at how to share common code and config between services in your Serverless app. We'll look at how to structure the package.json and share config between multiple serverless.yml files.
 date: 2019-09-29 00:00:00
 comments_id: 
 ---
