@@ -69,7 +69,7 @@ You can switch back to the root account by clicking on the account picker and se
 
 ![](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations-9.png)
 
-Next, repeat the above steps to create the Development account and optionally the Staging account.
+Next, repeat the above steps to create the Development account.
 
 ![](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations-10.png)
 
