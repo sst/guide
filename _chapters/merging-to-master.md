@@ -23,3 +23,15 @@ Go back to Seed, this will trigger a deployment in the `dev` stage automatically
 After the deployment completes and the `pr2` stage is removed, the pipeline looks like
 
 ![](/assets/best-practices/merging-to-master-3.png)
+
+From GitHub's pull request screen, also remove the **like** branch.
+
+![](/assets/best-practices/merging-to-master-4.png)
+
+Go back to Seed, this will trigger the `like` stage to be automatically removed.
+
+![](/assets/best-practices/merging-to-master-5.png)
+
+After the removal is completed, your app should look like this.
+
+![](/assets/best-practices/merging-to-master-6.png)
