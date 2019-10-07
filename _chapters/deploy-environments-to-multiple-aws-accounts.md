@@ -123,22 +123,25 @@ Since the environment setup for our api repo is identical to our resources repo.
 Select **Copy Settings** tab, and select the resources app. Then select **Add a New App**.
 ![](/assets/best-practices/deploy-envs-23.png)
 
-Select **Add a service** to add the **billing-api** service at the `services/billing-api` path. And then repeat the step to add the **notify-job** service at the `services/notify-job` path.
+The api app is created.
 ![](/assets/best-practices/deploy-envs-24.png)
 
+Select **Add a service** to add the **billing-api** service at the `services/billing-api` path. And then repeat the step to add the **notify-job** service at the `services/notify-job` path.
+![](/assets/best-practices/deploy-envs-25.png)
+
 Heading to the app settings and go in to **Manage Deploy Phases**.
-![](/assets/best-practices/reploy-envs-25.png)
+![](/assets/best-practices/reploy-envs-26.png)
 
 Again you'll notice that by default all the services are deployed concurrently.
 
-![](/assets/best-practices/reploy-envs-26.png)
+![](/assets/best-practices/reploy-envs-27.png)
 
 Since the **billing-api** service depends on the **notes-api** service, and in turn the **notify-job** service depends on the **billing-api** service, we are going too add 2 phases. And move the **billing-api** service to **Phase 2**, and the **notify-job** service to **Phase 3**. Then select **Update Phases**.
 
-![](/assets/best-practices/reploy-envs-27.png)
+![](/assets/best-practices/reploy-envs-28.png)
 
 Now let's make our first deployment. You can see the deployments are carried out according to the deploy phases specified.
 
-![](/assets/best-practices/reploy-envs-28.png)
+![](/assets/best-practices/reploy-envs-29.png)
 
 Now that our entire app has been deployed, let's look at how we are sharing environment specific config across our services.

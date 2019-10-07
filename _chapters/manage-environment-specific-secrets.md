@@ -42,12 +42,16 @@ Scroll to the bottom and hit **Create parameter**.
 
 ![](/assets/best-practices/manage-environment-specific-secrets-5.png)
 
+The key is added.
+
+![](/assets/best-practices/manage-environment-specific-secrets-6.png)
+
 Then, switch to your **Development** account, and repeat the steps to add the **test** Stripe key with:
 
 - **Name**: /stripeSecretKey/test
 - **Description**: Stripe secret key - test
 
-![](/assets/best-practices/manage-environment-specific-secrets-6.png)
+![](/assets/best-practices/manage-environment-specific-secrets-7.png)
 
 ### Access SSM Parameter in Lambda
 
