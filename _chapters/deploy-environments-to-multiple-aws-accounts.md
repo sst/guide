@@ -81,15 +81,15 @@ Before we deploy, let's make sure the services will deploy in the desired order.
 ![](/assets/best-practices/deploy-envs-12.png)
 
 Scroll down and select **Manage Deploy Phases**.
-![Hit Manage Deploy Phases screenshot](/assets/best-practices/reploy-envs-13.png)
+![Hit Manage Deploy Phases screenshot](/assets/best-practices/deploy-envs-13.png)
 
 Here you'll notice that by default all the services are deployed concurrently.
 
-![Default Deploy Phase screenshot](/assets/best-practices/reploy-envs-14.png)
+![Default Deploy Phase screenshot](/assets/best-practices/deploy-envs-14.png)
 
 Select **Add a phase** and move the **auth** service to **Phase 2**. And select **Update Phases**.
 
-![Edit Deploy Phase screenshot](/assets/best-practices/reploy-envs-15.png)
+![Edit Deploy Phase screenshot](/assets/best-practices/deploy-envs-15.png)
 
 Now let's make our first deployment. Select **Deploy** under the **dev** stage.
 ![](/assets/best-practices/deploy-envs-16.png)
@@ -144,27 +144,27 @@ Select **Add a service** to add the **billing-api** service at the `services/bil
 ![](/assets/best-practices/deploy-envs-25.png)
 
 Heading to the app settings and go in to **Manage Deploy Phases**.
-![](/assets/best-practices/reploy-envs-26.png)
+![](/assets/best-practices/deploy-envs-26.png)
 
 Again you'll notice that by default all the services are deployed concurrently.
 
-![](/assets/best-practices/reploy-envs-27.png)
+![](/assets/best-practices/deploy-envs-27.png)
 
 Since the **billing-api** service depends on the **notes-api** service, and in turn the **notify-job** service depends on the **billing-api** service, we are going too add 2 phases. And move the **billing-api** service to **Phase 2**, and the **notify-job** service to **Phase 3**. Then select **Update Phases**.
 
-![](/assets/best-practices/reploy-envs-28.png)
+![](/assets/best-practices/deploy-envs-28.png)
 
 Now let's make our first deployment. You can see the deployments are carried out according to the deploy phases specified.
 
-![](/assets/best-practices/reploy-envs-29.png)
+![](/assets/best-practices/deploy-envs-29.png)
 
 Similarly, promote **dev** to **prod**.
 
-![](/assets/best-practices/reploy-envs-30.png)
+![](/assets/best-practices/deploy-envs-30.png)
 
 Select **Promote to Production**.
 
-![](/assets/best-practices/reploy-envs-31.png)
+![](/assets/best-practices/deploy-envs-31.png)
 
 Now we have the api deployed to both **dev** and **prod**.
 ![](/assets/best-practices/deploy-envs-32.png)
