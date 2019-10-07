@@ -34,14 +34,14 @@ Select **Create pull request**.
 
 ![](/assets/best-practices/creating-pr-5.png)
 
-Now go back to Seed, a new stage **pr6** is created and is being deployed automatically.
+Now go back to Seed, a new stage **pr2** is created and is being deployed automatically.
 
 ![](/assets/best-practices/creating-pr-6.png)
 
-After `pr6` stage successfully deploys, you can see the deployed API endpoint on the PR page. You can give the endpoint to your frontend team for testing.
+After `pr2` stage successfully deploys, you can see the deployed API endpoint on the PR page. You can give the endpoint to your frontend team for testing.
 
 ![](/assets/best-practices/creating-pr-7.png)
 
-You can also access the `pr6` stage and the upstream `like` stage on Seed via the **View deployment** button. And you can see the deployment status for each service under **checks**.
+You can also access the `pr2` stage and the upstream `like` stage on Seed via the **View deployment** button. And you can see the deployment status for each service under **checks**.
 
 ![](/assets/best-practices/creating-pr-8.png)

@@ -16,10 +16,10 @@ Once final test looks good, merge the pull request. Go to GitHub's pr page and s
 
 ![](/assets/best-practices/merging-to-master-1.png)
 
-Go back to Seed, this will trigger a deployment in the `dev` stage automatically, since the stage auto-deploys changes in the `master` branch. Also, since by merging the pull request, the pull request is closed. This automatically removes the `pr6` stage.
+Go back to Seed, this will trigger a deployment in the `dev` stage automatically, since the stage auto-deploys changes in the `master` branch. Also, since by merging the pull request, the pull request is closed. This automatically removes the `pr2` stage.
 
 ![](/assets/best-practices/merging-to-master-2.png)
 
-After the deployment completes and the `pr6` stage is removed, the pipeline looks like
+After the deployment completes and the `pr2` stage is removed, the pipeline looks like
 
 ![](/assets/best-practices/merging-to-master-3.png)
