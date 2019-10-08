@@ -12,7 +12,7 @@ In this chapter we'll look at how to do that.
 
 Note that, we are doing this by default in Seed. Recall that when we merged the **like** branch to the **master** branch, only the `like-api` service and the `notes-api` showed a solid check. The other two services showed a greyed out check mark. This means that there were no changes to be deployed for this service.
 
-![Show deployment skipped in Seed](/assets/best-practices/deploy-only-changed-services-1.png)
+![Show deployment skipped in Seed](/assets/best-practices/deploy-only-changed-services/show-deployment-skipped-in-seed.png)
 
 In a Serverless app with a single service, the deployment strategy in your CI/CD pipeline is straight forward: deploy my app on every git push.
 

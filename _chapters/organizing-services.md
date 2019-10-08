@@ -167,7 +167,7 @@ Why? Most of the code changes are going to happen in the **serverless-stack-demo
 
 On the other hand, changes are going to happen less frequently in the **serverless-stack-demo-ext-resources** repo. And most likely you don't need a complete set of standalone DynamoDB tables for each feature branch. In fact, a team can have three stages such as: prod, staging, and dev. And the feature/bugfix/pr stages of the **serverless-stack-demo-ext-api** can all connect to the dev stage of the **serverless-stack-demo-ext-resources**.
 
-![Organize serverless projects in an app](/assets/best-practices/organizing-services-1.png)
+![Organize serverless projects in an app](/assets/best-practices/organizing-services/organize-serverless-services-in-an-app.png)
 
 So if you have a service that doesn't make sense to replicate in an ephemeral environment, we would suggest moving it to the repo with all the infrastructure services. This is what we have seen most teams do. And this setup scales well as your project and team grows.
 

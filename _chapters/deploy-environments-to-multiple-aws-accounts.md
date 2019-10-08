@@ -36,10 +36,10 @@ So let's start by forking our demo repos from GitHub.
 
 Let's first fork [the resources repo]({{ site.backend_ext_resources_github_repo }}).
 
-![Fork demo resources repo on GitHub](/assets/best-practices/fork-demo-resources-repo-on-github.png)
+![Fork demo resources repo on GitHub](/assets/best-practices/deploy-environments-to-multiple-aws-accounts/fork-demo-resources-repo-on-github.png)
 
 And do the same for [the API services repo]({{ site.backend_ext_api_github_repo }}).
 
-![Fork demo API services repo on GitHub](/assets/best-practices/fork-demo-api-services-repo-on-github.png)
+![Fork demo API services repo on GitHub](/assets/best-practices/deploy-environments-to-multiple-aws-accounts/fork-demo-api-services-repo-on-github.png)
 
 Now that we've forked these repos, let's deploy them to our environments. We are going to use [Seed](https://seed.run) to do this but you can set this up later with your favorite CI/CD tool.

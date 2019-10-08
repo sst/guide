@@ -21,37 +21,37 @@ First go in to your **Production** account, and go to your Systems Manager conso
 
 TODO: UPDATE SCREENSHOTS
 
-![Select Systems Manager service](/assets/best-practices/manage-environment-specific-secrets-1.png)
+![Select Systems Manager service](/assets/best-practices/manage-environment-specific-secrets/select-systems-manager-service.png)
 
 Select **Parameter Store** from the left menu, and select **Create parameter**.
 
-![Create parameter in Parameter Store](/assets/best-practices/manage-environment-specific-secrets-2.png)
+![Select Create parameter in Parameter Store](/assets/best-practices/manage-environment-specific-secrets/select-create-parameter-in-parameter-store.png)
 
 Fill in:
 
 - **Name**: /stripeSecretKey/live
 - **Description**: Stripe secret key - live
 
-![Set parameter details in Parameter Store](/assets/best-practices/manage-environment-specific-secrets-3.png)
+![Set parameter details in Parameter Store](/assets/best-practices/manage-environment-specific-secrets/set-parameter-details-in-parameter-store.png)
 
 Select **SecureString**, and paste your live Stripe key in **Value**.
 
-![Select SecureString parameter type](/assets/best-practices/manage-environment-specific-secrets-4.png)
+![Select SecureString parameter type](/assets/best-practices/manage-environment-specific-secrets/select-securestring-parameter-type.png)
 
 Scroll to the bottom and hit **Create parameter**.
 
-![Create parameter in Parameter Store](/assets/best-practices/manage-environment-specific-secrets-5.png)
+![Create parameter in Parameter Store](/assets/best-practices/manage-environment-specific-secrets/create-parameter-in-parameter-store.png)
 
 The key is added.
 
-![Show parameter created screenshot](/assets/best-practices/manage-environment-specific-secrets-6.png)
+![Show parameter created screenshot](/assets/best-practices/manage-environment-specific-secrets/show-parameter-created-screenshot.png)
 
 Then, switch to your **Development** account, and repeat the steps to add the **test** Stripe key with:
 
 - **Name**: /stripeSecretKey/test
 - **Description**: Stripe secret key - test
 
-![Create parameter in Development account](/assets/best-practices/manage-environment-specific-secrets-7.png)
+![Create parameter in Development account](/assets/best-practices/manage-environment-specific-secrets/create-parameter-in-development-account.png)
 
 ### Access SSM Parameter in Lambda
 

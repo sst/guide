@@ -20,7 +20,7 @@ For example, Lambda's free tier includes 400 000 seconds per month for 1GB memor
 
 Go into your master account. Select the account picker at the top. Then click **My Billing Dashboard**. 
 
-![Select My Billing Dashboard](/assets/best-practices/manage-cost-and-usage-for-aws-accounts-1.png)
+![Select My Billing Dashboard](/assets/best-practices/manage-cost-and-usage-for-aws-accounts/select-my-billing-dashboard.png)
 
 The Billing Dashboard homepage shows you the cost to date for the current calendar month. A couple of very useful features on this page are:
 
@@ -29,11 +29,11 @@ The Billing Dashboard homepage shows you the cost to date for the current calend
 
 Click on **Bill Details**.
 
-![Select Bill Details screenshot](/assets/best-practices/manage-cost-and-usage-for-aws-accounts-2.png)
+![Select Bill Details screenshot](/assets/best-practices/manage-cost-and-usage-for-aws-accounts/select-bill-details-screenshot.png)
 
 And click **Bill details by account**. Here you can see the cost allocation for each account.
 
-![Select Bill details by account screenshot](/assets/best-practices/manage-cost-and-usage-for-aws-accounts-3.png)
+![Select Bill details by account screenshot](/assets/best-practices/manage-cost-and-usage-for-aws-accounts/select-bill-details-by-account-screenshot.png)
 
 This should give you a really good idea of the usage and cost for each of your environments.
 

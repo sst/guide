@@ -12,19 +12,19 @@ With AWS Organizations, you can create and manage all the AWS accounts in your m
 
 Go to the AWS Organizations console.
 
-![Select AWS Organizations service](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations-1.png)
+![Select AWS Organizations service](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations/select-aws-organizations-service.png)
 
 The account labeled with the star is your **master** AWS account. This account cannot be removed from the organization.
 
 Select **Add account**.
 
-![Add account in AWS Organizations](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations-2.png)
+![Add account in AWS Organizations](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations/add-account-in-aws-organizations.png)
 
 You can either create a new AWS account or if you already have multiple standalone AWS accounts, you can add them into your organization.
 
 Select **Create account**.
 
-![Create account in AWS Organizations](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations-3.png)
+![Create account in AWS Organizations](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations/create-account-in-aws-organizations.png)
 
 Let's create our Production account first. Fill out the following:
 
@@ -32,11 +32,11 @@ Let's create our Production account first. Fill out the following:
 - **Email**: Each account requires a unique email address. Emails with the '+' sign are allowed.
 - **IAM role name**: Leave this empty. When creating a new account, AWS Organizations automatically creates an IAM role in the new account that allows the master account to be able to assume into it. Actually, it's the only way to access a newly created account. By default, the IAM role is named **OrganizationAccountAccessRole**, you can give it another name.
 
-![Set Production account detail](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations-4.png)
+![Set Production account detail](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations/set-production-account-detail.png)
 
 Now, you have 2 AWS accounts in your organization.
 
-![Production account created in AWS Organizations](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations-5.png)
+![Production account created in AWS Organizations](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations/production-account-created-in-aws-organizations.png)
 
 ### Access AWS accounts
 
@@ -44,11 +44,11 @@ Next, let's try switch into the Production account. First, take a note of the ne
 
 Then, select the account picker at the top.
 
-![Select account picker in AWS console](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations-6.png)
+![Select account picker in AWS console](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations/select-account-picker-in-aws-console.png)
 
 Select **Switch Role**.
 
-![Select switch role in AWS console](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations-7.png)
+![Select switch role in AWS console](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations/select-switch-role-in-aws-console.png)
 
 Fill in the following:
 
@@ -61,16 +61,16 @@ Note that the Display Name and Color fields are personal to you. Your team membe
 
 Then select **Switch Role**.
 
-![Assume role in Production account](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations-8.png)
+![Assume role in Production account](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations/assume-role-in-production-account.png)
 
 Now, you are in the **Prod** account. You can check which account you are currently assumed into by looking at the top bar.
 
 You can switch back to the master account by clicking on the account picker and selecting **Back to master** .
 
-![Switch back to master account](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations-9.png)
+![Switch back to master account](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations/switch-back-to-master-account.png)
 
 Next, repeat the above steps to create the Development account.
 
-![Create Development account in AWS Organizations](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations-10.png)
+![Create Development account in AWS Organizations](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations/create-development-account-in-aws-organizations.png)
 
 Now we have our AWS accounts created. Let's make sure we are using these environments correctly in the configuration of our app.
