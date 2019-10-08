@@ -264,7 +264,7 @@ best-practices-intro:
 organize-serverless-apps:
   title: Organize a Serverless app
   chapters:
-    - page: Organizing Serverless services
+    - page: Organizing Serverless projects
       url: /chapters/organizing-services.html
     - page: DynamoDB as a Serverless service
       url: /chapters/dynamodb-as-a-serverless-service.html
@@ -272,13 +272,13 @@ organize-serverless-apps:
       url: /chapters/s3-as-a-serverless-service.html
     - page: Cognito as a Serverless service
       url: /chapters/cognito-as-a-serverless-service.html
-    - page: Sharing code and config between services
+    - page: Share code between services
       url: /chapters/sharing-code-and-config-between-services.html
-    - page: Inter-service dependency
+    - page: Share resources between services
       url: /chapters/inter-service-dependency.html
-    - page: Sharing API endpoint between services
+    - page: Share an API endpoint between services
       url: /chapters/sharing-api-endpoint-between-services.html
-    - page: Deploying services with dependency in phases
+    - page: Deploy a Serverless app with dependencies
       url: /chapters/deploying-services-with-dependency-in-phases.html
     # REMOVE
     - page: (REMOVE) Organizing Serverless projects
@@ -291,57 +291,63 @@ organize-serverless-apps:
       url: /chapters/deploying-multiple-services-in-serverless.html
 
 configure-environments:
-  title: Configure environments
+  title: Manage environments
   chapters:
-    - page: Many development stages
+    - page: Environments in Serverless apps
       url: /chapters/many-development-stages.html
     - page: Structure environments across AWS accounts
       url: /chapters/structure-environments-across-aws-accounts.html
-    - page: Create and manage AWS accounts using AWS Organizations
+    - page: Manage AWS accounts using AWS Organizations
       url: /chapters/create-and-manage-aws-accounts-using-aws-organizations.html
-    - page: Parameterize resources names
+    - page: Parameterize Serverless resources names
       url: /chapters/parameterize-resources-names.html
-    - page: Deploy environments to multiple AWS accounts
+    - page: Deploying to multiple AWS accounts
       url: /chapters/deploy-environments-to-multiple-aws-accounts.html
       subchapters: 
-        - page: Deploy resources repo to Seed
+        - page: Deploy the resources repo
           url: /chapters/deploy-resources-repo-to-seed.html
-        - page: Deploy API services repo to Seed
+        - page: Deploy the API services repo
           url: /chapters/deploy-api-services-repo-to-seed.html
-    - page: Manage environment specific config
+    - page: Manage environment related config
       url: /chapters/manage-environment-specific-config.html
-    - page: Manage environment specific secrets
+    - page: Storing secrets in Serverless apps
       url: /chapters/manage-environment-specific-secrets.html
-    - page: Sharing Route 53 domain across AWS accounts
+    - page: Share Route 53 domains across AWS accounts
       url: /chapters/sharing-route-53-domain-across-aws-accounts.html
-    - page: Manage cost and usage for AWS accounts
+    - page: Monitor usage for environments
       url: /chapters/manage-cost-and-usage-for-aws-accounts.html
 
 development-lifecycle:
   title: Development lifecycle
   chapters:
-    - page: Development workflow best practices
+    - page: Working on Serverless apps
       url: /chapters/development-workflow-best-practices.html
-    - page: Invoking Lambda locally
+    - page: Invoke Lambda functions locally
       url: /chapters/invoking-lambda-locally.html
-    - page: Invoking API endpoint locally
+    - page: Invoke API Gateway endpoints locally
       url: /chapters/invoking-api-endpoint-locally.html
     - page: Creating feature environments
       url: /chapters/creating-feature-environments.html
     - page: Creating Pull Request environments
       url: /chapters/creating-pull-request-environments.html
-    - page: Promote to production
+    - page: Promoting to production
       url: /chapters/promote-to-production.html
-    - page: Rollback
+    - page: Rollback changes
       url: /chapters/rollback.html
-    - page: Deploy only changed services
+    - page: Deploying only updated services
       url: /chapters/deploy-only-changed-services.html
 
 observability:
   title: Observability
   chapters:
-    - page: Tracing Lambda functions with X-Ray
+    - page: Tracing Serverless apps with X-Ray
       url: /chapters/tracing-lambda-functions-with-x-ray.html
+
+best-practices-conclusion:
+  title: Conclusion
+  chapters:
+    - page: Wrapping up the best practices
+      url: /chapters/wrapping-up-the-best-practices.html
 
 extra-backend:
   title: Serverless

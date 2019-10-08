@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Deploy API services repo to Seed
+title: Deploy the API Services Repo
 description: In this chapter we'll deploy our demo API services GitHub repo of our Serverless app to multiple AWS environments. We'll be using Seed to manage our deployments and environments.
 date: 2019-10-08 00:00:00
 comments_id: 

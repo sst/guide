@@ -1,7 +1,8 @@
 ---
 layout: post
-title: Organizing Services
+title: Organizing Serverless Projects
 description: In this chapter we will look at the common patterns for organizing Serverless Framework applications. We'll go over the microservice, monorepo, multi-repo, and monolith pattern. Finally, we'll make some recommendations on the best way to organize real world Serverless apps.
+redirect_from: /chapters/organizing-serverless-projects.html
 date: 2019-09-29 00:00:00
 comments_id: organizing-serverless-projects/350
 ---

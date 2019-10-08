@@ -18,7 +18,9 @@ It's mobile optimized as well!
 
 <img alt="Mobile app homescreen screenshot" src="/assets/mobile-app-homescreen.png" width="432" />
 
-The entire workflow and the ideas covered in this guide are in production at a number of companies. We hope what you've learned here can be adapted to fit the use case you have in mind. We are going to be covering a few other topics in the future while we keep this guide up to date.
+We hope what you've learned here can be adapted to fit the use case you have in mind. We are going to be covering a few other topics in the future while we keep this guide up to date.
+
+If you are looking to use Serverless at your company and are wondering how best to structure a large Serverless project, make sure to check out our [best practices section]({% link _chapters/best-practices-for-building-serverless-apps.md %}). The entire workflow and the ideas covered are in production at a number of companies.
 
 We'd love to hear from you about your experience following this guide. Please send us any comments or feedback you might have, via [email](mailto:{{ site.email }}). We'd love to feature your comments here. Also, if you'd like us to cover any of the chapters or concepts in a bit more detail, feel free to [let us know](mailto:{{ site.email }}).
 
