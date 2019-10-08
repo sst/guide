@@ -38,7 +38,7 @@ The above code reads the current stage from the `serverless` commands, and selec
 - If the stage is `dev`, it uses the `dev` infrastructure.
 - And if stage is `featureX`, it falls back to the dev config and uses the `dev` infrastructure.
 
-And then in each service, we are going to pass the name of the stage, and the name of the infrastructure stage to the Lambda functions as environment variables. Open up the `serverless.yml` file in any service.
+And then in each service, we are going to pass the `resourcesStage` to the Lambda functions as environment variable. Open up the `serverless.yml` file in any service.
 
 ``` yml
 ...
@@ -52,11 +52,11 @@ provider:
 ...
 ```
 
-This adds a `stage` and `resourcesStage` environment variables to all the Lambda functions in the service. Recall that we can access this via the `process.env.stage` variable at runtime. And it's going to return the name of the stage it's running in, ie. `featureX`, `dev`, or `prod`.
+This adds `resourcesStage` environment variables to all the Lambda functions in the service. Recall that we can access this via the `process.env.resourcesStage` variable at runtime.
 
 ### Create a stage based config
 
-Now in our `config.js`, we'll use the stage to figure out which resources stage we want to use.
+Now in our `config.js`, we'll read the `resourcesStage` from the environment variable `process.env.resourcesStage`.
 
 ``` js
 const stage = process.env.stage;
@@ -81,8 +81,6 @@ export default {
   ...config
 };
 ```
-
-The above code reads the `stage` and `resourcesStage` from the environment variable `process.env.stage` and `process.env.resourcesStage`.
 
 Finally, while calling DynamoDB we can use the config to get the DynamoDB table we want to use. In `libs/dynamodb-lib.js`:
 
