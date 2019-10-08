@@ -1,6 +1,16 @@
 /**
  * Hero
  */
+
+%toc-expanded {
+  max-height: none;
+  overflow: visible;
+
+  .expand {
+    display: none;
+  }
+}
+
 .home .lander-header {
   padding: 2 * $spacing-unit 0;
 
@@ -522,7 +532,7 @@
       }
 
       &.the-basics {
-        max-height: 2 * $max-height + 165px;
+        max-height: 2203px;
 
         @include media-query($on-palm) {
           max-height: 1.5 * $max-height;
@@ -535,6 +545,28 @@
 
         .expand {
           display: none;
+        }
+      }
+
+      &.best-practices {
+        @extend %toc-expanded;
+
+        @include media-query($on-palm) {
+          max-height: 1.5 * $max-height;
+          overflow: hidden;
+
+          .expand {
+            display: flex;
+          }
+
+          &.expanded {
+            max-height: none;
+            overflow: visible;
+
+            .expand {
+              display: none;
+            }
+          }
         }
       }
 
