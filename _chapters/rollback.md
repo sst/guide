@@ -12,11 +12,11 @@ Let's quickly look at how to do that in Seed.
 
 ### Rollback to previous build
 
-To rollback to a previous build, go to your app in Seed. Let's suppose we've have pushed some faulty code to `dev` stage. Let's click on the `dev` stage to see a list of historical builds in the stage.
+To rollback to a previous build, go to your app in Seed. Let's suppose we've pushed some faulty code to `dev` stage. Click on the `dev` stage to see a list of historical builds in the stage.
 
 ![](/assets/best-practices/rollback-1.png)
 
-Pick a previous successful build and hit **Rollback**.
+Pick an older successful build and hit **Rollback**.
 
 ![](/assets/best-practices/rollback-2.png)
 
@@ -28,18 +28,18 @@ Notice a new build is triggered for the `dev` stage.
 
 TODO: UPDATE LINK
 
-In our monorepo setup, our app is made up of multiple services, and some services are dependent on each other. These dependencies require the services to be deployed in a specific order. Previously, we talked about how to [deploy services with dependencies]. We also need to watch out for the deployment order when rolling back a change that involves a dependency change.
+In our monorepo setup, our app is made up of multiple services, and some services are dependent on each other. These dependencies require the services to be deployed in a specific order. Previously, we talked about how to [deploy services with dependencies]. We also need to watch out for the deployment order when rolling back a change.
 
 Let’s consider a simple example with just two services, `billing-api` and `notify-job`. Where `billing-api` exports an SNS topic named `note-purchased`. Here is an example of `billing-api`’s `serverless.yml`:
 
 
 ``` yaml
-  Outputs:
-    NotePurchasedTopicArn:
-      Value:
-        Ref: NotePurchasedTopic
-      Export:
-        Name: NotePurchasedTopicArn-${self:custom.stage}
+Outputs:
+  NotePurchasedTopicArn:
+    Value:
+      Ref: NotePurchasedTopic
+    Export:
+      Name: NotePurchasedTopicArn-${self:custom.stage}
 ```
 
 And the `notify-job` service imports the topic and uses it to trigger the `notify` function:
@@ -53,10 +53,12 @@ functions:
         'Fn::ImportValue': NotePurchasedTopicArn-${self:custom.stage}
 ```
 
-Note that the `billing-api` service had to be deployed first. This is to make sure that the export value `NotePurchasedTopicArn` is created. Then we can deploy the `notify-job` service.
+Note that the `billing-api` service had to be deployed first. This is to make sure that the export value `NotePurchasedTopicArn` has first been created. Then we can deploy the `notify-job` service.
 
 Assume that after the services have been deployed, you push a faulty commit and you have to rollback.
 
 In this case, you need to: **rollback the services in the reverse order of the deployment**.
 
 Meaning `notify-job` needs to be rolled back first, such that the exported value `NotePurchasedTopicArn` is not used by other services, and then rollback the `billing-api` service to remove the SNS topic along with the export.
+
+Next we are going to look at an optimization that you can make to speed up your builds.
