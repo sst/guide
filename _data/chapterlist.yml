@@ -303,6 +303,11 @@ configure-environments:
       url: /chapters/parameterize-resources-names.html
     - page: Deploy environments to multiple AWS accounts
       url: /chapters/deploy-environments-to-multiple-aws-accounts.html
+      subchapters: 
+        - page: Deploy resources repo to Seed
+          url: /chapters/deploy-resources-repo-to-seed.html
+        - page: Deploy API services repo to Seed
+          url: /chapters/deploy-api-services-repo-to-seed.html
     - page: Manage environment specific config
       url: /chapters/manage-environment-specific-config.html
     - page: Manage environment specific secrets

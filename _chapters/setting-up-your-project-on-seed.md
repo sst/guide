@@ -11,7 +11,7 @@ comments_id: setting-up-your-project-on-seed/175
 
 We are going to use [Seed](https://seed.run) to automate our serverless deployments and manage our environments.
 
-Start by signing up for a free account [here](https://console.seed.run/signup-account).
+Start by signing up for a free account [here](https://console.seed.run/signup).
 
 ![Create new Seed account screenshot](/assets/part2/create-new-seed-account.png)
 

@@ -88,11 +88,3 @@ We'll then go over step by step how to configure the environments through AWS. W
 The end result of this will be that you'll have a fully functioning Serverless backend, hosted in your own GitHub repo, and deployed to your AWS environments. We want to make sure that you'll have a working setup in place, so you can always refer back to it when you need to!
 
 Let's get started.
-
-### Fork demo repos
-
-Start by forking the two demo repos that we have. We are going to be using these throughout this section of the guide. And we want to make sure that you are able to configure and deploy these on your own.
-
-TODO: INSET 2 SCREENSHOTS
-
-Now that we've forked these repos, let's look at how they are organized. This will give us a good idea of how to organize Serverless apps.

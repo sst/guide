@@ -38,7 +38,7 @@ The above code reads the current stage from the `serverless` commands, and selec
 - If the stage is `dev`, it uses the `dev` infrastructure.
 - And if stage is `featureX`, it falls back to the dev config and uses the `dev` infrastructure.
 
-And then in each service, we are going to pass the `resourcesStage` to the Lambda functions as environment variable. Open up the `serverless.yml` file in any service.
+And then in each service, we are going to pass the `resourcesStage` to the Lambda functions as an environment variable. Open up the `serverless.yml` file in a service.
 
 ``` yml
 ...
@@ -52,7 +52,7 @@ provider:
 ...
 ```
 
-This adds `resourcesStage` environment variables to all the Lambda functions in the service. Recall that we can access this via the `process.env.resourcesStage` variable at runtime.
+This adds a `resourcesStage` environment variable to all the Lambda functions in the service. Recall that we can access this via the `process.env.resourcesStage` variable at runtime.
 
 ### Create a stage based config
 

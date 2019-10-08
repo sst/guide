@@ -89,7 +89,7 @@ provider:
 ...
 ```
 
-We are granting Lambda functions permissions to fetch and decrypt the SSM parameters.
+We are granting Lambda functions permission to fetch and decrypt the SSM parameters.
 
 Next we'll add the parameter names in our `config.js`.
 
