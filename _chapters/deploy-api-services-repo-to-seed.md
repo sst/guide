@@ -10,54 +10,54 @@ Just as the previous chapter we'll add the API repo on Seed and deploy it to our
 
 Click **Add an App** again, and select your Git provider. This time, select the API repo.
 
-![](/assets/best-practices/deploy-envs-21.png)
+![Select Add an App in Seed](/assets/best-practices/deploy-envs-21.png)
 
 After detection, let's select the **notes-api** service.
 
-![](/assets/best-practices/deploy-envs-22.png)
+![Select Serverless service to add](/assets/best-practices/deploy-envs-22.png)
 
 The environments for our API repo are identical to our resources repo. So instead of manually configuring them, we'll copy the settings.
 
 Select **Copy Settings** tab, and select the resources app. Then hit **Add a New App**.
 
-![](/assets/best-practices/deploy-envs-23.png)
+![Set app settings from resources](/assets/best-practices/deploy-envs-23.png)
 
 The API app has been created.
 
-![](/assets/best-practices/deploy-envs-24.png)
+![Create an App in Seed](/assets/best-practices/deploy-envs-24.png)
 
 Click **Add a service** to add the **billing-api** service at the `services/billing-api` path. And then repeat the step to add the **notify-job** service at the `services/notify-job` path.
 
-![](/assets/best-practices/deploy-envs-25.png)
+![[Added all services in Seed](/assets/best-practices/deploy-envs-25.png)
 
 Head over to the app settings and click on **Manage Deploy Phases**.
 
-![](/assets/best-practices/deploy-envs-26.png)
+![Hit Manage Deploy Phases screenshot](/assets/best-practices/deploy-envs-26.png)
 
 Again you'll notice that by default all the services are deployed concurrently.
 
-![](/assets/best-practices/deploy-envs-27.png)
+![Default Deploy Phase screenshot](/assets/best-practices/deploy-envs-27.png)
 
 Since the **billing-api** service depends on the **notes-api** service, and in turn the **notify-job** service depends on the **billing-api** service, we are going too add 2 phases. And move the **billing-api** service to **Phase 2**, and the **notify-job** service to **Phase 3**. Finally, click **Update Phases**.
 
-![](/assets/best-practices/deploy-envs-28.png)
+![Edit Deploy Phase screenshot](/assets/best-practices/deploy-envs-28.png)
 
 Now let's make our first deployment.
 
-![](/assets/best-practices/deploy-envs-29.png)
+![Show services are deploying in dev stage](/assets/best-practices/deploy-envs-29.png)
 
 You can see the deployments are carried out according to the deploy phases specified.
 
 Just as before, promote **dev** to **prod**.
 
-![](/assets/best-practices/deploy-envs-30.png)
+![Select Promote in dev stage](/assets/best-practices/deploy-envs-30.png)
 
 Hit **Promote to Production**.
 
-![](/assets/best-practices/deploy-envs-31.png)
+![Promote dev stage to prod stage](/assets/best-practices/deploy-envs-31.png)
 
 Now we have the API deployed to both **dev** and **prod**.
 
-![](/assets/best-practices/deploy-envs-32.png)
+![Show services are deployed in prod stage](/assets/best-practices/deploy-envs-32.png)
 
 Now that our entire app has been deployed, let's look at how we are sharing environment specific configs across our services.

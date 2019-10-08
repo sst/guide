@@ -12,17 +12,17 @@ Let's quickly look at how to do that in Seed.
 
 ### Rollback to previous build
 
-To rollback to a previous build, go to your app in Seed. Let's suppose we've pushed some faulty code to `dev` stage. Click on the `dev` stage to see a list of historical builds in the stage.
+To rollback to a previous build, go to your app in Seed. Let's suppose we've pushed some faulty code to `prod` stage. Click on the `prod` stage to see a list of historical builds in the stage.
 
-![](/assets/best-practices/rollback-1.png)
+![Select prod stage in Seed](/assets/best-practices/rollback-1.png)
 
 Pick an older successful build and hit **Rollback**.
 
-![](/assets/best-practices/rollback-2.png)
+![Select Rollback in prod stage](/assets/best-practices/rollback-2.png)
 
-Notice a new build is triggered for the `dev` stage.
+Notice a new build is triggered for the `prod` stage.
 
-![](/assets/best-practices/rollback-3.png)
+![Show rolling back in prod stage](/assets/best-practices/rollback-3.png)
 
 ### Rollback infrastructure change
 

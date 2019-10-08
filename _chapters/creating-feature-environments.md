@@ -133,37 +133,37 @@ Now before we push our Git branch, let's enable the branch workflow in Seed.
 
 Go to your app on Seed. Click **Settings**.
 
-![](/assets/best-practices/creating-feature-1.png)
+![Select app settings in Seed](/assets/best-practices/creating-feature-1.png)
 
 Scroll down to **Git Integration**. Then select **Enable Auto-Deploy Branches**.
 
-![](/assets/best-practices/creating-feature-2.png)
+![Select Enable Auto-Deploy Branches](/assets/best-practices/creating-feature-2.png)
 
 Select the **dev** stage, since we want the stage to be deployed into the **Development** AWS account. Click **Enable Auto-Deploy**.
 
-![](/assets/best-practices/creating-feature-3.png)
+![Select Enable Auto-Deploy](/assets/best-practices/creating-feature-3.png)
 
 ### Add the new service to Seed
 
 Back in our app, click on **Add a Service**.
 
-![](/assets/best-practices/creating-feature-4.png)
+![Select Add a service](/assets/best-practices/creating-feature-4.png)
 
 Enter the path to the service `services/like-api` and click **Search**.
 
-![](/assets/best-practices/creating-feature-5.png)
+![Select search new service path](/assets/best-practices/creating-feature-5.png)
 
 Since the code has not been committed to Git yet, Seed is not able to find the `serverless.yml` of the service. That's totally fine. We'll specify a name for the service `like-api`. Then hit **Add Service**.
 
-![](/assets/best-practices/creating-feature-6.png)
+![Set new service name](/assets/best-practices/creating-feature-6.png)
 
 Now, we have the service added.
 
-![](/assets/best-practices/creating-feature-7.png)
+![Added new service in Seed](/assets/best-practices/creating-feature-7.png)
 
 By default, the new service is added to the latest deploy phase. Let's head into the **Manage Deploy Phases** in the app **Settings**, and move it to Phase 2. This is because it's dependent on the API Gateway resources exported by `notes-api`.
 
-![](/assets/best-practices/creating-feature-8.png)
+![Show default Deploy Phase](/assets/best-practices/creating-feature-8.png)
 
 ### Git push to deploy new feature
 
@@ -177,19 +177,19 @@ $ git push --set-upstream origin like
 
 Back in Seed, a new stage called **like** is created and is being deployed automatically.
 
-![](/assets/best-practices/creating-feature-9.png)
+![Show new feature stage created](/assets/best-practices/creating-feature-9.png)
 
 After the new stage successfully deploys, you can get the API endpoint in the stage's resources page. Click on the **like** stage.
 
-![](/assets/best-practices/creating-feature-10.png)
+![Select feature stage](/assets/best-practices/creating-feature-10.png)
 
 Select **View Resources** for the **notes-api** service.
 
-![](/assets/best-practices/creating-feature-11.png)
+![Select View Resources in feature stage](/assets/best-practices/creating-feature-11.png)
 
 Scroll down and you will see the API Gateway endpoint for the **like** stage.
 
-![](/assets/best-practices/creating-feature-12.png)
+![Show API Gateway endpoint in feature stage](/assets/best-practices/creating-feature-12.png)
 
 You can now use the endpoint in your frontend for further testing and development.
 

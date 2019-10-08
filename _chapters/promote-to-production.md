@@ -10,17 +10,17 @@ Now that our new feature has been tested and merged to master, we are ready to p
 
 Head over to Seed. And then hit **Promote** at the bottom of the `dev` stage.
 
-![](/assets/best-practices/promote-to-production-1.png)
+![Select Promote in dev stage](/assets/best-practices/promote-to-production-1.png)
 
 You will see a list of changes. Note, only the major changes are shown here. The change list shows that we added a Lambda functions and an API Gateway method. A couple of other minor resources like the Lambda execution IAM role and Lambda's CloudWatch log group were also added but those are hidden by default.
 
 Hit **Promote to Production**.
 
-![](/assets/best-practices/promote-to-production-2.png)
+![Select Promote to Production](/assets/best-practices/promote-to-production-2.png)
 
 This will trigger the `prod` stage to start building.
 
-![](/assets/best-practices/promote-to-production-3.png)
+![Show deploying in prod stage](/assets/best-practices/promote-to-production-3.png)
 
 ### Why manual promote?
 
