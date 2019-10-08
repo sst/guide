@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Manage cost and usage for AWS accounts
+title: Monitor Usage for Environments
 description: AWS Organization gives us a good way to manage cost and usage for our AWS accounts. It allows us to easily manage the environments of our Serverless app.
 date: 2019-10-02 00:00:00
 comments_id: 

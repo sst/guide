@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Creating feature environments
+title: Creating Feature Environments
 description: In this chapter we look at how to create feature environments for your Serverless app. We'll go over the process of creating a new feature branch in Git and adding a new Serverless service using Seed.
 date: 2019-10-02 00:00:00
 comments_id: 

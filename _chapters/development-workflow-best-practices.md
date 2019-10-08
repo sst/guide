@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Development workflow best practices
+title: Working on Serverless Apps
 description: In this section of the guide we look at the development workflow of a real world Serverless app.
 date: 2019-10-07 00:00:00
 comments_id: 
@@ -10,6 +10,7 @@ So to quickly recap, we've split our real world Serverless app into two repos, [
 
 We've also split our environments across two AWS accounts; `Development` and `Production`. In this section, we are going to look at the development workflow for a real world Serverless app.
 
+TODO: ADD LINKS TO CHAPTERS
 Here is roughly what we are going to be covering:
 
 - Developing your Lambda functions locally

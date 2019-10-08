@@ -45,6 +45,7 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
           {% include toc-chapters.html items=site.data.chapterlist.configure-environments id="configure-environments" %}
           {% include toc-chapters.html items=site.data.chapterlist.development-lifecycle id="development-lifecycle" %}
           {% include toc-chapters.html items=site.data.chapterlist.observability id="observability" %}
+          {% include toc-chapters.html items=site.data.chapterlist.best-practices-conclusion id="best-practices-conclusion" %}
           <a class="expand"><span>Show all chapters</span></a>
         </div>
       </div>

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Create and manage AWS accounts using AWS Organizations
+title: Manage AWS Accounts Using AWS Organizations
 description: In this chapter we look at how to create multiple AWS accounts for the environments in your Serverless Framework app. We'll be using the AWS Organizations console for this.
 date: 2019-09-30 00:00:00
 comments_id: 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Manage environment specific config
+title: Manage Environment Related Config
 description: In this chapter we'll look at how our services will connect to each other while they are deployed across multiple environments.
 date: 2019-10-02 00:00:00
 comments_id: 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Best practices for building Serverless apps
+title: Best Practices for Building Serverless Apps
 description: In this section of the guide we'll be covering the best practices for developing and maintaining large Serverless applications. It builds on what we've covered so far and it extends the demo notes app that we built in the first section. It's intended for teams as opposed to individual developers. It's meant to give you a foundation that scales as your app (and team) grows.
 date: 2019-10-03 00:00:00
 comments_id: 
