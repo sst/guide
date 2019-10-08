@@ -33,11 +33,11 @@ By using multiple AWS accounts, you can be sure that the service limits will not
 
 ### Consolidated billing
 
-Finally, having separate accounts for your environments is recommended by AWS. And AWS has great support for it as well. In the AWS Organizations console, you can view and manage all the AWS accounts in your root account.
+Finally, having separate accounts for your environments is recommended by AWS. And AWS has great support for it as well. In the AWS Organizations console, you can view and manage all the AWS accounts in your master account.
 
 TODO: UPDATE SCREENSHOT
 ![Accounts in AWS Organization console](/assets/best-practices/structure-environments-across-aws-accounts/accounts-in-aws-organizations-console.png)
 
-You don’t have to setup the billing details for each account. Billing is consolidated to the root account. You can also view a breakdown of usage and cost for each service in each account.
+You don’t have to setup the billing details for each account. Billing is consolidated to the master account. You can also view a breakdown of usage and cost for each service in each account.
 
 In the next chapter, we are going to look at how to setup these AWS accounts using AWS Organizations.
