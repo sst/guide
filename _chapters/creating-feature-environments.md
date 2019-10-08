@@ -73,10 +73,7 @@ plugins:
   - serverless-bundle
   - serverless-offline
 
-custom:
-  # Our stage is based on what is passed in when running serverless
-  # commands. Or fallsback to what we have set in the provider section.
-  stage: ${opt:stage, self:provider.stage}
+custom: ${file(../../serverless.common.yml):custom}
 
 package:
   individually: true
@@ -100,6 +97,7 @@ provider:
 
   environment:
     stage: ${self:custom.stage}
+    resourcesStage: ${self:custom.stage}
 
   iamRoleStatements:
     - ${file(../../serverless.common.yml):lambdaPolicyXRay}

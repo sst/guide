@@ -39,7 +39,7 @@ Outputs:
     Value:
       Ref: NotePurchasedTopic
     Export:
-      Name: NotePurchasedTopicArn-${self:custom.stage}
+      Name: ExtNotePurchasedTopicArn-${self:custom.stage}
 ```
 
 And the `notify-job` service imports the topic and uses it to trigger the `notify` function:
@@ -50,15 +50,15 @@ functions:
     handler: notify.main
     events:
       - sns:
-        'Fn::ImportValue': NotePurchasedTopicArn-${self:custom.stage}
+        'Fn::ImportValue': ExtNotePurchasedTopicArn-${self:custom.stage}
 ```
 
-Note that the `billing-api` service had to be deployed first. This is to make sure that the export value `NotePurchasedTopicArn` has first been created. Then we can deploy the `notify-job` service.
+Note that the `billing-api` service had to be deployed first. This is to make sure that the export value `ExtNotePurchasedTopicArn` has first been created. Then we can deploy the `notify-job` service.
 
 Assume that after the services have been deployed, you push a faulty commit and you have to rollback.
 
 In this case, you need to: **rollback the services in the reverse order of the deployment**.
 
-Meaning `notify-job` needs to be rolled back first, such that the exported value `NotePurchasedTopicArn` is not used by other services, and then rollback the `billing-api` service to remove the SNS topic along with the export.
+Meaning `notify-job` needs to be rolled back first, such that the exported value `ExtNotePurchasedTopicArn` is not used by other services, and then rollback the `billing-api` service to remove the SNS topic along with the export.
 
 Next we are going to look at an optimization that you can make to speed up your builds.
