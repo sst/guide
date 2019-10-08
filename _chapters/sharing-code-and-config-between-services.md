@@ -79,9 +79,18 @@ We have separate `serverless.yml` configs for our services. However, we end up
 1. Place the shared config values in a common yaml file at the root level.
 2. And reference them in your individual `serverless.yml` files.
 
-For example, to be able to use X-Ray, we need to grant the necessary X-Ray permissions in the Lambda IAM role. So we added a `serverless.common.yml` at the repo root.
+For example, we want to define the current stage and the resources stage we want to connect to across all of our services. Also, to be able to use X-Ray, we need to grant the necessary X-Ray permissions in the Lambda IAM role. So we added a `serverless.common.yml` at the repo root.
 
 ``` yml
+custom:
+  # Our stage is based on what is passed in when running serverless
+  # commands. Or fallsback to what we have set in the provider section.
+  stage: ${opt:stage, self:provider.stage}
+  resourcesStages:
+    prod: prod
+    dev: dev
+  resourcesStage: ${self:custom.resourcesStages.${self:custom.stage}, self:custom.resourcesStages.dev}
+
 lambdaPolicyXRay:
   Effect: Allow
   Action:
@@ -89,7 +98,12 @@ lambdaPolicyXRay:
     - xray:PutTelemetryRecords
   Resource: "*"
 ```
-And in each of our service, we include the **lambdaPolicyXRay** IAM policy in their `serverless.yml`:
+And in each of our service, we include the **custom** definition in their `serverless.yml`:
+``` yml
+custom: ${file(../../serverless.common.yml):custom}
+```
+
+And we include the **lambdaPolicyXRay** IAM policy:
 
 ``` yml
   iamRoleStatements:

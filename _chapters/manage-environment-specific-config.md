@@ -14,59 +14,75 @@ Let's quickly review the setup that we've created back in the [Organizing servic
 2. The `serverless-stack-demo-ext-resources` repo is deployed a couple of long lived environments; like `dev` and `prod`.
 3. While, the `serverless-stack-demo-ext-api` will be deployed to a few ephemeral environments (like `featureX` that is connected to the `dev` environment), in addition to the long lived environments above.
 
-But before we can deploy to an ephemeral environment like `featureX`, we need to figure out a way to let the Lambda functions connect to the `dev` environment of the resources repo.
+But before we can deploy to an ephemeral environment like `featureX`, we need to figure out a way to let our services know which infrastructure environment they need to talk to.
 
 Let's look at how to do that.
 
 ### Set a stage environment variable
 
-First, we need to let Lambda function know which environment it's running in. We are going to pass the name of the stage to the Lambda functions as environment variables. Open up the `serverless.yml` file in any service.
+In the `serverless.common.yml` file, we defined:
+``` yml
+custom:
+  # Our stage is based on what is passed in when running serverless
+  # commands. Or fallsback to what we have set in the provider section.
+  stage: ${opt:stage, self:provider.stage}
+  resourcesStages:
+    prod: prod
+    dev: dev
+  resourcesStage: ${self:custom.resourcesStages.${self:custom.stage}, self:custom.resourcesStages.dev}
+```
+
+The above code reads the current stage from the `serverless` commands, and selects the corresponding `resourcesStage` config.
+
+- If the stage is `prod`, it uses the `prod` infrastructure.
+- If the stage is `dev`, it uses the `dev` infrastructure.
+- And if stage is `featureX`, it falls back to the dev config and uses the `dev` infrastructure.
+
+And then in each service, we are going to pass the name of the stage, and the name of the infrastructure stage to the Lambda functions as environment variables. Open up the `serverless.yml` file in any service.
 
 ``` yml
 ...
 
-custom:
-  stage: ${opt:stage, self:provider.stage}
+custom: ${file(../../serverless.common.yml):custom}
 
 provider:
   environment:
     stage: ${self:custom.stage}
+    resourcesStage: ${self:custom.stage}
 ...
 ```
 
-This adds a `stage` environment variable to all the Lambda functions in the service. Recall that we can access this via the `process.env.stage` variable at runtime. And it's going to return the name of the stage it's running in, ie. `featureX`, `dev`, or `prod`.
+This adds a `stage` and `resourcesStage` environment variables to all the Lambda functions in the service. Recall that we can access this via the `process.env.stage` variable at runtime. And it's going to return the name of the stage it's running in, ie. `featureX`, `dev`, or `prod`.
 
 ### Create a stage based config
 
 Now in our `config.js`, we'll use the stage to figure out which resources stage we want to use.
 
 ``` js
+const stage = process.env.stage;
+const resourcesStage = process.env.resourcesStage;
 const adminPhoneNumber = "+14151234567";
 
 const stageConfigs = {
   dev: {
-    resourcesStage: "dev",
     stripeKeyName: "/stripeSecretKey/test"
   },
   prod: {
-    resourcesStage: "prod",
     stripeKeyName: "/stripeSecretKey/live"
   }
 };
 
-const config = stageConfigs[process.env.stage] || stageConfigs.dev;
+const config = stageConfigs[stage] || stageConfigs.dev;
 
 export default {
+  stage,
+  resourcesStage,
   adminPhoneNumber,
   ...config
 };
 ```
 
-The above code reads the current stage from the environment variable `process.env.stage`, and selects the corresponding config.
-
-- If the stage is `prod`, it exports `stageConfigs.prod`.
-- If the stage is `dev`, it exports `stageConfigs.dev`.
-- And if stage is `featureX`, it falls back to the dev config and exports `stageConfigs.dev`.
+The above code reads the `stage` and `resourcesStage` from the environment variable `process.env.stage` and `process.env.resourcesStage`.
 
 Finally, while calling DynamoDB we can use the config to get the DynamoDB table we want to use. In `libs/dynamodb-lib.js`:
 

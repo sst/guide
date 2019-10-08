@@ -57,59 +57,71 @@ Then, switch to your **Development** account, and repeat the steps to add the **
 
 Now to use our SSM parameters, we need to let Lambda function know which environment it is running in. We are going to pass the name of the stage to Lambda functions as environment variables.
 
-TODO: ARE WE STILL USING THE PSEUDO PLUGIN?
-
 Update our `serverless.yml`.
 
 ``` yml
 ...
 
-plugins:
-  - serverless-pseudo-parameters
 
-custom:
-  stage: ${opt:stage, self:provider.stage}
+custom: ${file(../../serverless.common.yml):custom}
 
 provider:
   environment:
     stage: ${self:custom.stage}
+    resourcesStage: ${self:custom.stage}
+    notePurchasedTopicArn:
+      Ref: NotePurchasedTopic
 
   iamRoleStatements:
+    - ${file(../../serverless.common.yml):lambdaPolicyXRay}
     - Effect: Allow
       Action:
         - ssm:GetParameter
-      Resource: "arn:aws:ssm:#{AWS::Region}:#{AWS::AccountId}:parameter/stripeSecretKey/*"
+      Resource:
+        Fn::Join:
+          - ''
+          -
+            - 'arn:aws:ssm:'
+            - Ref: AWS::Region
+            - ':'
+            - Ref: AWS::AccountId
+            - ':parameter/stripeSecretKey/*'
 ...
 ```
 
-We are doing a couple of things here:
-
-- We are using the [serverless-pseudo-parameters plugin](https://github.com/svdgraaf/serverless-pseudo-parameters) to help us easily refer to pseudo parameters like the deployed AWS `account id` and  `region`.
-- We are granting Lambda functions permissions to fetch and decrypt the SSM parameters.
+We are granting Lambda functions permissions to fetch and decrypt the SSM parameters.
 
 Next we'll add the parameter names in our `config.js`.
 
 ``` js
+const stage = process.env.stage;
+const resourcesStage = process.env.resourcesStage;
 const adminPhoneNumber = "+14151234567";
 
 const stageConfigs = {
   dev: {
-    resourcesStage: "dev",
     stripeKeyName: "/stripeSecretKey/test"
   },
   prod: {
-    resourcesStage: "prod",
     stripeKeyName: "/stripeSecretKey/live"
   }
 };
 
-const config = stageConfigs[process.env.stage] || stageConfigs.dev;
+const config = stageConfigs[stage] || stageConfigs.dev;
 
 export default {
+  stage,
+  resourcesStage,
   adminPhoneNumber,
   ...config
 };
 ```
+
+The above code reads the current stage from the environment variable `process.env.stage`, and selects the corresponding config.
+
+- If the stage is `prod`, it exports `stageConfigs.prod`.
+- If the stage is `dev`, it exports `stageConfigs.dev`.
+- And if stage is `featureX`, it falls back to the dev config and exports `stageConfigs.dev`.
 
 If you need a refresher on the structure of our config, refer to the [Manage environment specific config chapter]({% link _chapters/manage-environment-specific-config.md %}).
 
