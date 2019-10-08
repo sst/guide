@@ -36,7 +36,7 @@ By using multiple AWS accounts, you can be sure that the service limits will not
 Finally, having separate accounts for your environments is recommended by AWS. And AWS has great support for it as well. In the AWS Organizations console, you can view and manage all the AWS accounts in your root account.
 
 TODO: UPDATE SCREENSHOT
-![](https://d33wubrfki0l68.cloudfront.net/9a3f07f072d2a0fb3cb6596b15b1f2d2f2b4783e/b382a/assets/blog/why-deploy-your-serverless-app-into-multiple-aws-accounts/aws-organizations-console-screenshot.png)
+![Accounts in AWS Organization console](/assets/best-practices/structure-environments-across-aws-accounts/accounts-in-aws-organizations-console.png)
 
 You don’t have to setup the billing details for each account. Billing is consolidated to the root account. You can also view a breakdown of usage and cost for each service in each account.
 

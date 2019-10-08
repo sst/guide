@@ -12,7 +12,7 @@ With AWS Organizations, you can create and manage all the AWS accounts in your r
 
 Go to the AWS Organizations console.
 
-![](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations-1.png)
+![Select AWS Organizations ](/assets/best-practices/create-and-manage-aws-accounts-using-aws-organizations-1.png)
 
 The account labeled with the star is your **root** AWS account. This account cannot be removed from the organization.
 

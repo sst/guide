@@ -72,13 +72,13 @@ $ curl https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/xxx
 
 Head over to your AWS X-Ray console, and select **Traces** from the left menu.
 
-![](https://d33wubrfki0l68.cloudfront.net/c1d8500a769f1e288e785aa96e8271690fc818f6/fcf5e/assets/blog/how-to-trace-serverless-apps-with-aws-x-ray/select-traces-from-the-aws-x-ray-console.png)
+![Select Traces from AWS X-Ray console](/assets/best-practices/tracing-lambda-functions-with-x-ray/select-traces-from-the-aws-x-ray-console.png)
 
 The **Trace overview** section at the top shows all the URLs that initiated the trace. And the **Trace list** section at the bottom shows each individual trace. By default, it shows all the traces within the last 5 minutes. However, you can pick a different time range.
 
 Click on a trace in the **Trace list**. Note: it might take up to 30 seconds before a trace shows up after a request has been made.
 
-![](https://d33wubrfki0l68.cloudfront.net/b54850c4a920f0adeb359392e6c5701b35717d3d/c1197/assets/blog/how-to-trace-serverless-apps-with-aws-x-ray/click-on-a-trace-from-the-aws-x-ray-console.png)
+![Select a trace in AWS X-Ray console](/assets/best-practices/tracing-lambda-functions-with-x-ray/click-on-a-trace-from-the-aws-x-ray-console.png)
 
 Here are a couple of things you can see:
 
@@ -128,11 +128,11 @@ $ curl https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/xxx
 
 Go back to your AWS X-Ray console, wait for the new trace to show up. It might take up to 30 seconds to do so. You can tell if a trace is recent by looking at its **Age**:
 
-![](https://d33wubrfki0l68.cloudfront.net/0606d31c215492b62d775ff845df96cbfb10f620/f4f38/assets/blog/how-to-trace-serverless-apps-with-aws-x-ray/click-recent-trace-from-the-aws-x-ray-console.png)
+![Select recent trace in AWS X-Ray console](/assets/best-practices/tracing-lambda-functions-with-x-ray/click-recent-trace-from-the-aws-x-ray-console.png)
 
 Select the new trace.
 
-![](https://d33wubrfki0l68.cloudfront.net/b1d4358be7cc86f7d771d70cd0e074c2d96d4c62/c2a54/assets/blog/how-to-trace-serverless-apps-with-aws-x-ray/view-updated-trace-from-the-aws-x-ray-console.png)
+![View updated trace in AWS X-Ray console](/assets/best-practices/tracing-lambda-functions-with-x-ray/view-updated-trace-from-the-aws-x-ray-console.png)
 
 This time:
 
