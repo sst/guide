@@ -3,12 +3,13 @@ layout: post
 title: Manage Environment Related Config
 description: In this chapter we'll look at how our services will connect to each other while they are deployed across multiple environments.
 date: 2019-10-02 00:00:00
+redirect_from: /chapters/use-environment-variables-in-lambda-functions.html
 comments_id: 
 ---
 
 In this chapter we'll look at how our services will connect to each other while they are deployed across multiple environments.
 
-Let's quickly review the setup that we've created back in the [Organizing services chapter]({% link _chapters/organizing-services.md %}).
+Let's quickly review the setup that we've created back in the [Organizing services chapter]({% link _chapters/organizing-serverless-projects.md %}).
 
 1. We have two repos — [serverless-stack-demo-ext-resources]({{ site.backend_ext_resources_github_repo }}) and [serverless-stack-demo-ext-api]({{ site.backend_ext_api_github_repo }}). One has our infrastructure specific resources, while the other has all our Lambda functions.
 2. The `serverless-stack-demo-ext-resources` repo is deployed a couple of long lived environments; like `dev` and `prod`.

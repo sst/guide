@@ -112,4 +112,4 @@ And we include the **lambdaPolicyXRay** IAM policy:
 
 You can do something similar for any other `serverless.yml` config that needs to be shared.
 
-In the next chapter, we are going to look at how to share resources across services.
+Next, let's look at what happens when multiple API services need to share the same API endpoint.

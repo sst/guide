@@ -265,83 +265,75 @@ organize-serverless-apps:
   title: Organize a Serverless app
   chapters:
     - page: Organizing Serverless projects
-      url: /chapters/organizing-services.html
-    - page: DynamoDB as a Serverless service
-      url: /chapters/dynamodb-as-a-serverless-service.html
-    - page: S3 as a Serverless service
-      url: /chapters/s3-as-a-serverless-service.html
-    - page: Cognito as a Serverless service
-      url: /chapters/cognito-as-a-serverless-service.html
-    - page: Share code between services
-      url: /chapters/sharing-code-and-config-between-services.html
-    - page: Share resources between services
-      url: /chapters/inter-service-dependency.html
-    - page: Share an API endpoint between services
-      url: /chapters/sharing-api-endpoint-between-services.html
-    - page: Deploy a Serverless app with dependencies
-      url: /chapters/deploying-services-with-dependency-in-phases.html
-    # REMOVE
-    - page: (REMOVE) Organizing Serverless projects
       url: /chapters/organizing-serverless-projects.html
-    - page: (REMOVE) Cross-stack references in Serverless
+    - page: Cross-stack references in Serverless
       url: /chapters/cross-stack-references-in-serverless.html
-    - page: (REMOVE) API Gateway domains across services
-      url: /chapters/api-gateway-domains-across-services.html
-    - page: (REMOVE) Deploying multiple services in Serverless
-      url: /chapters/deploying-multiple-services-in-serverless.html
+      subchapters: 
+        - page: DynamoDB as a Serverless service
+          url: /chapters/dynamodb-as-a-serverless-service.html
+        - page: S3 as a Serverless service
+          url: /chapters/s3-as-a-serverless-service.html
+        - page: Cognito as a Serverless service
+          url: /chapters/cognito-as-a-serverless-service.html
+    - page: Share code between services
+      url: /chapters/share-code-between-services.html
+    - page: Share an API endpoint between services
+      url: /chapters/share-an-api-endpoint-between-services.html
+    - page: Deploy a Serverless app with dependencies
+      url: /chapters/deploy-a-serverless-app-with-dependencies.html
 
 configure-environments:
   title: Manage environments
   chapters:
     - page: Environments in Serverless apps
-      url: /chapters/many-development-stages.html
+      url: /chapters/environments-in-serverless-apps.html
     - page: Structure environments across AWS accounts
       url: /chapters/structure-environments-across-aws-accounts.html
     - page: Manage AWS accounts using AWS Organizations
-      url: /chapters/create-and-manage-aws-accounts-using-aws-organizations.html
+      url: /chapters/manage-aws-accounts-using-aws-organizations.html
     - page: Parameterize Serverless resources names
-      url: /chapters/parameterize-resources-names.html
+      url: /chapters/parameterize-serverless-resources-names.html
     - page: Deploying to multiple AWS accounts
-      url: /chapters/deploy-environments-to-multiple-aws-accounts.html
+      url: /chapters/deploying-to-multiple-aws-accounts.html
       subchapters: 
         - page: Deploy the resources repo
-          url: /chapters/deploy-resources-repo-to-seed.html
+          url: /chapters/deploy-the-resources-repo.html
         - page: Deploy the API services repo
-          url: /chapters/deploy-api-services-repo-to-seed.html
+          url: /chapters/deploy-the-api-services-repo.html
     - page: Manage environment related config
-      url: /chapters/manage-environment-specific-config.html
+      url: /chapters/manage-environment-related-config.html
     - page: Storing secrets in Serverless apps
-      url: /chapters/manage-environment-specific-secrets.html
+      url: /chapters/storing-secrets-in-serverless-apps.html
     - page: Share Route 53 domains across AWS accounts
-      url: /chapters/sharing-route-53-domain-across-aws-accounts.html
+      url: /chapters/share-route-53-domains-across-aws-accounts.html
     - page: Monitor usage for environments
-      url: /chapters/manage-cost-and-usage-for-aws-accounts.html
+      url: /chapters/monitor-usage-for-environments.html
 
 development-lifecycle:
   title: Development lifecycle
   chapters:
     - page: Working on Serverless apps
-      url: /chapters/development-workflow-best-practices.html
+      url: /chapters/working-on-serverless-apps.html
     - page: Invoke Lambda functions locally
-      url: /chapters/invoking-lambda-locally.html
+      url: /chapters/invoke-lambda-functions-locally.html
     - page: Invoke API Gateway endpoints locally
-      url: /chapters/invoking-api-endpoint-locally.html
+      url: /chapters/invoke-api-gateway-endpoints-locally.html
     - page: Creating feature environments
       url: /chapters/creating-feature-environments.html
     - page: Creating Pull Request environments
       url: /chapters/creating-pull-request-environments.html
     - page: Promoting to production
-      url: /chapters/promote-to-production.html
+      url: /chapters/promoting-to-production.html
     - page: Rollback changes
-      url: /chapters/rollback.html
+      url: /chapters/rollback-changes.html
     - page: Deploying only updated services
-      url: /chapters/deploy-only-changed-services.html
+      url: /chapters/deploying-only-updated-services.html
 
 observability:
   title: Observability
   chapters:
     - page: Tracing Serverless apps with X-Ray
-      url: /chapters/tracing-lambda-functions-with-x-ray.html
+      url: /chapters/tracing-serverless-apps-with-x-ray.html
 
 best-practices-conclusion:
   title: Conclusion

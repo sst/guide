@@ -2,8 +2,9 @@
 layout: post
 title: Deploy a Serverless App with Dependencies
 description: In this chapter we go over how to locally deploy a Serverless app with multiple interdependent services. So you'll need to ensure that you deploy the service that is exporting the reference before deploying the one that imports it. You'll only need to do this for the first time.
+redirect_from: /chapters/deploying-multiple-services-in-serverless.html
 date: 2019-09-29 00:00:00
-comments_id: 
+comments_id: deploying-multiple-services-in-serverless/410
 ---
 
 So now that we have a couple of downstream services that are referencing a resource deployed in an upstream service; let's look at how this dependency affects the way we deploy our app.
