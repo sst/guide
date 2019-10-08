@@ -35,7 +35,6 @@ By using multiple AWS accounts, you can be sure that the service limits will not
 
 Finally, having separate accounts for your environments is recommended by AWS. And AWS has great support for it as well. In the AWS Organizations console, you can view and manage all the AWS accounts in your master account.
 
-TODO: UPDATE SCREENSHOT
 ![Accounts in AWS Organization console](/assets/best-practices/structure-environments-across-aws-accounts/accounts-in-aws-organizations-console.png)
 
 You don’t have to setup the billing details for each account. Billing is consolidated to the master account. You can also view a breakdown of usage and cost for each service in each account.

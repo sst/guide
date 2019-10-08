@@ -45,25 +45,23 @@ To do this, the `notes-api` needs to share the API Gateway project and the root 
 
 In our [serverless-stack-demo-ext-api]({{ site.backend_ext_api_github_repo }}) repo, go into the `services/notes-api/` directory. In the `serverless.yml`, near the end, you will notice:
 
-TODO: FORMAT THESE SNIPPETS
-
 ``` yml
 ...
 
-  - Outputs:
-      ApiGatewayRestApiId:
-        Value:
-          Ref: ApiGatewayRestApi
-        Export:
-          Name: ${self:custom.stage}-ExtApiGatewayRestApiId
-    
-      ApiGatewayRestApiRootResourceId:
-        Value:
-           Fn::GetAtt:
-            - ApiGatewayRestApi
-            - RootResourceId 
-        Export:
-          Name: ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId
+- Outputs:
+    ApiGatewayRestApiId:
+      Value:
+        Ref: ApiGatewayRestApi
+      Export:
+        Name: ${self:custom.stage}-ExtApiGatewayRestApiId
+  
+    ApiGatewayRestApiRootResourceId:
+      Value:
+         Fn::GetAtt:
+          - ApiGatewayRestApi
+          - RootResourceId 
+      Export:
+        Name: ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId
 ```
 
 Let's look at what we are doing here.

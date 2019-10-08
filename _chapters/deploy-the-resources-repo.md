@@ -60,9 +60,7 @@ Repeat the process and add the **uploads** service in `services/uploads`.
 
 ![Added all services in Seed](/assets/best-practices/deploy-resources-repo-to-seed/added-all-services-in-seed.png)
 
-TODO: UPDATE LINK
-
-Before we deploy, let's make sure the services will deploy in the desired order. Recall from the [deploying-in-phases] chapter that you can configure the phases by heading to the app settings.
+Before we deploy, let's make sure the services will deploy in the desired order. Recall from the [Deploy a Serverless app with dependencies]({% link _chapters/deploy-a-serverless-app-with-dependencies.md %}) chapter that you can configure the phases by heading to the app settings.
 
 ![Select app settings in Seed](/assets/best-practices/deploy-resources-repo-to-seed/select-app-settings-in-seed.png)
 
@@ -102,9 +100,7 @@ Go back to the app dashboard, and hit **Promote** to deploy this to the **prod**
 
 ![Select Promote in dev stage](/assets/best-practices/deploy-resources-repo-to-seed/select-promote-in-dev-stage.png)
 
-TODO: UPDATE LINK
-
-You will see a list of changes in resources. Since this is the first time we are deploying to the `prod` stage, the change list shows all the resources that will be created. We'll take a look at this in detail later in the [promote-to-production] chapter.
+You will see a list of changes in resources. Since this is the first time we are deploying to the `prod` stage, the change list shows all the resources that will be created. We'll take a look at this in detail later in the [Promoting to production]({% link _chapters/promoting-to-production.md %}) chapter.
 
 Click **Promote to Production**.
 

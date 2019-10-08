@@ -19,8 +19,6 @@ As an example, we are going to use SSM to store our Stripe secret key. Note that
 
 First go in to your **Production** account, and go to your Systems Manager console.
 
-TODO: UPDATE SCREENSHOTS
-
 ![Select Systems Manager service](/assets/best-practices/manage-environment-specific-secrets/select-systems-manager-service.png)
 
 Select **Parameter Store** from the left menu, and select **Create parameter**.

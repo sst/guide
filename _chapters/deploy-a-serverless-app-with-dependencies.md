@@ -21,8 +21,6 @@ In our [resources repo]({{ site.backend_ext_resources_github_repo }}) we need to
 - Deploy the `database` and `uploads` service. These can be deployed concurrently.
 - Then we can deploy the `auth` service.
 
-TODO: UPDATE LINK
-
 Next for the [API repo]({{ site.backend_ext_api_github_repo }}) for the first time, you have to:
 
 - Deploy the `notes-api` first. This will export the value `dev-ExtApiGatewayRestApiId` and `dev-ExtApiGatewayRestApiRootResourceId`.
@@ -48,8 +46,6 @@ Once all the services have been successfully deployed, you can deploy them all c
 Say you add a new SNS topic in `billing-api` service and you want the `notify-job` service to subscribe to that topic. The first deployment after the change, will again fail if all the services are deployed concurrently. You need to deploy the `billing-api` service first, and then deploy the `notify-job` service.
 
 We are almost ready to deploy our extended notes app. But before we can do that, let's configure our environments.
-
-TODO: MOVE THE FOLLOWING SECTION TO AFTER THE ENVIRONMENTS HAVE BEEN CONFIGURED IN SEED
 
 ### Deploying through a CI
 

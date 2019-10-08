@@ -21,8 +21,6 @@ We are going to have to delegate the subdomain `dev.ext-api.serverless-stack.com
 
 First, go into your Route 53 console in your `Development` account.
 
-TODO: UPDATE SCREENSHOTS
-
 ![Select Route 53 service](/assets/best-practices/sharing-route-53-domain-across-aws-accounts/select-route-53-service.png)
 
 Click **Hosted zones** in the left menu. Then select **Create Hosted Zone**.
@@ -116,8 +114,6 @@ After 40 minutes, the domains will be ready.
 
 ![Show custom domain created](/assets/best-practices/sharing-route-53-domain-across-aws-accounts/show-custom-domain-created.png)
 
-TODO: UPDATE LINK
-
-Now we've delegated the `dev.api` subdomain of `notes-app.com` to our `Development` AWS account. We'll be configuring our app to use [these domains in a later chapter].
+Now we've delegated the `dev.api` subdomain of `notes-app.com` to our `Development` AWS account. We'll be configuring our app to use [these domains in a later chapter]({% link _chapters/share-route-53-domains-across-aws-accounts.md %}).
 
 Next, let's quickly look at how you'll be managing the cost and usage for your two AWS accounts.
