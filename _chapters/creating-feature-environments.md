@@ -97,7 +97,7 @@ provider:
 
   environment:
     stage: ${self:custom.stage}
-    resourcesStage: ${self:custom.stage}
+    resourcesStage: ${self:custom.resourcesStage}
 
   iamRoleStatements:
     - ${file(../../serverless.common.yml):lambdaPolicyXRay}

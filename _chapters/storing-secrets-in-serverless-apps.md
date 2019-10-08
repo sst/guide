@@ -66,7 +66,7 @@ custom: ${file(../../serverless.common.yml):custom}
 provider:
   environment:
     stage: ${self:custom.stage}
-    resourcesStage: ${self:custom.stage}
+    resourcesStage: ${self:custom.resourcesStage}
     notePurchasedTopicArn:
       Ref: NotePurchasedTopic
 
