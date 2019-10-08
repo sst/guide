@@ -41,29 +41,23 @@ Here is a rough rundown of the topics covered in this section of the guide.
 
 We are covering primarily the backend Serverless portion. The frontend flow works relatively the same way as what we covered in the first section. We also found that there is a distinct lack of best practices for building Serverless backends as opposed to React apps.
 
-TODO: UPDATE LINKS UPDATE FLOW
-
-- Organizing large Serverless apps
-  - Sharing resources using cross-stack references
-  - Sharing code and config between services
-  - Sharing API endpoints across services
-- Configuring environments
-  - Best practices for environments in Serverless
-  - Using separate AWS accounts to manage environments 
-  - Parameterizing resource names
-  - Managing environment specific configs
-  - Sharing domains across environments
-- Best practices for handling secrets
-- Development lifecycle
-  - Working locally
-  - Creating pull requests for review
-  - Merging to master or the dev environment 
-  - Promoting to production
-  - Handling rollbacks
-  - Deploying only updated services
-- Best practices for debugging Serverless apps
-  - Using Lambda and API Gateway logs
-  - Using AWS X-Ray to trace Lambda functions
+- [Organizing large Serverless apps]({% link _chapters/organizing-serverless-projects.md %})
+  - [Sharing resources using cross-stack references]({ link _chapters/cross-stack-references-in-serverless.md %})
+  - [Sharing code between services]({% link _chapters/share-code-between-services.md %})
+  - [Sharing API endpoints across services]({% link _chapters/share-an-api-endpoint-between-services.md %})
+- [Configuring environments]({% link _chapters/environments-in-serverless-apps.md %})
+  - [Using separate AWS accounts to manage environments ]({% link _chapters/structure-environments-across-aws-accounts.md %})
+  - [Parameterizing resource names]({% link _chapters/parameterize-serverless-resources-names.md %})
+  - [Managing environment specific configs]({% link _chapters/manage-environment-related-config.md %})
+  - [Best practices for handling secrets]({% link _chapters/storing-secrets-in-serverless-apps.md %})
+  - [Sharing domains across environments]({% link _chapters/share-route-53-domains-across-aws-accounts.md %})
+- [Development lifecycle]({% link _chapters/working-on-serverless-apps.md %})
+  - [Working locally]({% link _chapters/invoke-api-gateway-endpoints-locally.md %})
+  - [Creating feature environments]({% link _chapters/creating-feature-environments.md %})
+  - [Creating pull request environments]({% link _chapters/creating-pull-request-environments.md %})
+  - [Promoting to production]({% link _chapters/promoting-to-production.md %})
+  - [Handling rollbacks]({% link _chapters/rollback-changes.md %})
+- [Using AWS X-Ray to trace Lambda functions]({% link _chapters/tracing-serverless-apps-with-x-ray.md %})
 
 We think these concepts should be a good starting point for your projects and you should be able to adapt them to fit your use case!
 
