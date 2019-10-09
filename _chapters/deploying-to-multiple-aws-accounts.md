@@ -30,16 +30,24 @@ Production deployments should always go through our CI/CD pipeline.
 
 Next we are going to deploy our two repos to our environments. We want you to follow along so you can get a really good sense of what the workflow is like.
 
-So let's start by forking our demo repos from GitHub.
+So let's start by using the demo repo templates from GitHub.
 
-### Fork demo repos
+### Create demo repos
 
-Let's first fork [the resources repo]({{ site.backend_ext_resources_github_repo }}).
+Let's first create [the resources repo]({{ site.backend_ext_resources_github_repo }}). Click **Use this template**.
 
-![Fork demo resources repo on GitHub](/assets/best-practices/deploy-environments-to-multiple-aws-accounts/fork-demo-resources-repo-on-github.png)
+![Use demo resources repo template](/assets/best-practices/deploy-environments-to-multiple-aws-accounts/use-demo-resources-repo-template.png)
+
+Enter Repository name **serverless-stack-demo-ext-resources** and click **Create repository from template**.
+
+![Create demo resources repo on GitHub](/assets/best-practices/deploy-environments-to-multiple-aws-accounts/create-demo-resources-repo-on-github.png)
 
 And do the same for [the API services repo]({{ site.backend_ext_api_github_repo }}).
 
-![Fork demo API services repo on GitHub](/assets/best-practices/deploy-environments-to-multiple-aws-accounts/fork-demo-api-services-repo-on-github.png)
+![Create demo API services repo template](/assets/best-practices/deploy-environments-to-multiple-aws-accounts/use-demo-api-services-repo-template.png)
+
+Enter Repository name **serverless-stack-demo-ext-api** and click **Create repository from template**.
+
+![Create demo API services repo on GitHub](/assets/best-practices/deploy-environments-to-multiple-aws-accounts/create-demo-api-services-repo-on-github.png)
 
 Now that we've forked these repos, let's deploy them to our environments. We are going to use [Seed](https://seed.run) to do this but you can set this up later with your favorite CI/CD tool.
