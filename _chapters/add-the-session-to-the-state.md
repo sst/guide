@@ -16,38 +16,33 @@ To complete the login process we would need to update the app state with the ses
 
 First we'll start by updating the application state by setting that the user is logged in. We might be tempted to store this in the `Login` container, but since we are going to use this in a lot of other places, it makes sense to lift up the state. The most logical place to do this will be in our `App` component.
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `src/App.js` right below the `class App extends Component {` line.
+To save the user's login state, let's include the `useState` hook in `src/App.js`.
+
+<img class="code-marker" src="/assets/s.png" />Replace, the `React` import:
 
 ``` javascript
-constructor(props) {
-  super(props);
-
-  this.state = {
-    isAuthenticated: false
-  };
-}
-
-userHasAuthenticated = authenticated => {
-  this.setState({ isAuthenticated: authenticated });
-}
+import React from "react";
 ```
 
-This initializes the `isAuthenticated` flag in the App's state. And calling `userHasAuthenticated` updates it. But for the `Login` container to call this method we need to pass a reference of this method to it.
+<img class="code-marker" src="/assets/s.png" />With the following:
+
+``` javascript
+import React, { useState } from "react";
+```
+
+<img class="code-marker" src="/assets/s.png" />Add the following to the top of our `App` component function.
+
+``` javascript
+const [isAuthenticated, userHasAuthenticated] = useState(false);
+```
+
+This initializes the `isAuthenticated` state variable to `false`, as in the user is not logged in. And calling `userHasAuthenticated` updates it. But for the `Login` container to call this method we need to pass a reference of this method to it.
 
 ### Pass the Session State to the Routes
 
 We can do this by passing in a couple of props to the child component of the routes that the `App` component creates.
 
-<img class="code-marker" src="/assets/s.png" />Add the following right below the `render() {` line in `src/App.js`.
-
-``` javascript
-const childProps = {
-  isAuthenticated: this.state.isAuthenticated,
-  userHasAuthenticated: this.userHasAuthenticated
-};
-```
-
-<img class="code-marker" src="/assets/s.png" />And pass them into our `Routes` component by replacing the following line in the `render` method of `src/App.js`.
+<img class="code-marker" src="/assets/s.png" />Replace our `Routes` component by replacing the following line in the `return` statement of `src/App.js`.
 
 ``` coffee
 <Routes />
@@ -55,13 +50,15 @@ const childProps = {
 
 <img class="code-marker" src="/assets/s.png" />With this.
 
+{% raw %}
 ``` coffee
-<Routes childProps={childProps} />
+<Routes appProps={{ isAuthenticated, userHasAuthenticated }} />
 ```
+{% endraw %}
 
-Currently, our `Routes` component does not do anything with the passed in `childProps`. We need it to apply these props to the child component it is going to render. In this case we need it to apply them to our `Login` component.
+Currently, our `Routes` component don't do anything with the passed in `appProps`. We need it to apply these props to the child component it is going to render. In this case we need it to apply them to our `Login` component.
 
-To do this we are going to create a new component.
+To do this we are going to create a new component that'll extend the standard Route component and apply the `appProps`.
 
 <img class="code-marker" src="/assets/s.png" />Create a `src/components/` directory by running this command in your working directory.
 
@@ -77,32 +74,38 @@ Here we'll be storing all our React components that are not dealing directly wit
 import React from "react";
 import { Route } from "react-router-dom";
 
-export default ({ component: C, props: cProps, ...rest }) =>
-  <Route {...rest} render={props => <C {...props} {...cProps} />} />;
+export default function AppliedRoute({ component: C, appProps, ...rest }) {
+  return (
+    <Route {...rest} render={props => <C {...props} {...appProps} />} />
+  );
+}
 ```
 
 This simple component creates a `Route` where the child component that it renders contains the passed in props. Let's take a quick look at how this being done.
 
-- The `Route` component takes a prop called `component` that represents the component that will be rendered when a matching route is found. We want our `childProps` to be sent to this component.
+- The `Route` component takes a prop called `component` that represents the component that will be rendered when a matching route is found. We want our `appProps` to be applied to this component.
 
 - The `Route` component can also take a `render` method in place of the `component`. This allows us to control what is passed in to our component.
 
-- Based on this we can create a component that returns a `Route` and takes a `component` and `childProps` prop. This allows us to pass in the component we want rendered and the props that we want applied.
+- Based on this we can create a component that returns a `Route` that takes a `component` and `appProps` prop. This allows us to pass in the component we want rendered and the props that we want applied.
 
-- Finally, we take `component` (set as `C`) and `props` (set as `cProps`) and render inside our `Route` using the inline function; `props => <C {...props} {...cProps} />`. Note, the `props` variable in this case is what the Route component passes us. Whereas, the `cProps` is the `childProps` that we want to set.
+- Finally, we take `component` (set as `C`) and `appProps` and render inside our `Route` using the inline function; `props => <C {...props} {...appProps} />`. Note, the `props` variable in this case is what the Route component passes us. Whereas, the `appProps` are the props that we are trying to set in our `App` component.
 
-Now to use this component, we are going to include it in the routes where we need to have the `childProps` passed in.
+Now to use this component, we are going to include it in the routes where we need to have the `appProps` passed in.
 
-<img class="code-marker" src="/assets/s.png" />Replace the `export default () => (` method in `src/Routes.js` with the following.
+<img class="code-marker" src="/assets/s.png" />Replace the `Routes` function in `src/Routes.js` with the following.
 
 ``` coffee
-export default ({ childProps }) =>
-  <Switch>
-    <AppliedRoute path="/" exact component={Home} props={childProps} />
-    <AppliedRoute path="/login" exact component={Login} props={childProps} />
-    { /* Finally, catch all unmatched routes */ }
-    <Route component={NotFound} />
-  </Switch>;
+export default function Routes({ appProps }) {
+  return (
+    <Switch>
+      <AppliedRoute path="/" exact component={Home} appProps={appProps} />
+      <AppliedRoute path="/login" exact component={Login} appProps={appProps} />
+      { /* Finally, catch all unmatched routes */ }
+      <Route component={NotFound} />
+    </Switch>
+  );
+}
 ```
 
 <img class="code-marker" src="/assets/s.png" />And import the new component in the header of `src/Routes.js`.
@@ -116,7 +119,7 @@ Now in the `Login` container we'll call the `userHasAuthenticated` method.
 <img class="code-marker" src="/assets/s.png" />Replace the `alert('Logged in');` line with the following in `src/containers/Login.js`.
 
 ``` javascript
-this.props.userHasAuthenticated(true);
+props.userHasAuthenticated(true);
 ```
 
 ### Create a Logout Button
@@ -135,34 +138,26 @@ We can now use this to display a Logout button once the user logs in. Find the f
 <img class="code-marker" src="/assets/s.png" />And replace it with this:
 
 ``` coffee
-{this.state.isAuthenticated
-  ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
-  : <Fragment>
+{isAuthenticated
+  ? <NavItem onClick={handleLogout}>Logout</NavItem>
+  : <>
       <LinkContainer to="/signup">
         <NavItem>Signup</NavItem>
       </LinkContainer>
       <LinkContainer to="/login">
         <NavItem>Login</NavItem>
       </LinkContainer>
-    </Fragment>
+    </>
 }
 ```
 
-Also, import the `Fragment` in the header.
-
-<img class="code-marker" src="/assets/s.png" />Replace the `import React` line in the header of `src/App.js` with the following.
-
-``` coffee
-import React, { Component, Fragment } from "react";
-```
-
-The `Fragment` component can be thought of as a placeholder component. We need this because in the case the user is not logged in, we want to render two links. To do this we would need to wrap it inside a single component, like a `div`. But by using the `Fragment` component it tells React that the two links are inside this component but we don't want to render any extra HTML.
+The `<>` or [Fragment component](https://reactjs.org/docs/fragments.html) can be thought of as a placeholder component. We need this because in the case the user is not logged in, we want to render two links. To do this we would need to wrap it inside a single component, like a `div`. But by using the Fragment component it tells React that the two links are inside this component but we don't want to render any extra HTML.
 
 <img class="code-marker" src="/assets/s.png" />And add this `handleLogout` method to `src/App.js` above the `render() {` line as well.
 
-``` coffee
-handleLogout = event => {
-  this.userHasAuthenticated(false);
+``` javascript
+function handleLogout() {
+  userHasAuthenticated(false);
 }
 ```
 

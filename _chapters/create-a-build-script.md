@@ -3,8 +3,8 @@ layout: post
 title: Create a Build Script
 date: 2018-03-26 00:00:00
 lang: en
-code: frontend_full
 description: To configure our Create React App with Netlify, we need to add a build script to our project root. To make sure that we return a HTTP status code of 200 for our React Router routes we will be adding a redirects rule.
+code: frontend
 ref: create-a-build-script
 comments_id: create-a-build-script/189
 ---
@@ -66,23 +66,6 @@ Just as in the first part of the tutorial, we'll need to handle requests to any 
     to      = "/index.html"
     status  = 200
 ```
-
-### Modify the Build Command
-
-To deploy our app to Netlify we need to modify the build commands in our `package.json`.
-
-<img class="code-marker" src="/assets/s.png" />Replace the `scripts` block in your `package.json` with this.
-
-``` coffee
-"scripts": {
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-  "test": "react-scripts test --env=jsdom",
-  "eject": "react-scripts eject"
-}
-```
-
-You'll notice we are getting rid of our old build and deploy scripts. We are not going to be deploying to S3.
 
 ### Commit the Changes
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Create a Settings Page
-date: 2018-03-21 00:00:00
+date: 2017-01-31 06:00:00
 lang: en
 description: Our notes app needs a settings page for our users to input their credit card details and sign up for a pricing plan.
 context: true
@@ -21,30 +21,22 @@ To get started let's add our settings page.
 <img class="code-marker" src="/assets/s.png" />Create a new file in `src/containers/Settings.js` and add the following.
 
 ``` coffee
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { API } from "aws-amplify";
 
-export default class Settings extends Component {
-  constructor(props) {
-    super(props);
+export default function Settings(props) {
+  const [isLoading, setIsLoading] = useState(false);
 
-    this.state = {
-      isLoading: false
-    };
-  }
-
-  billUser(details) {
+  function billUser(details) {
     return API.post("notes", "/billing", {
       body: details
     });
   }
 
-  render() {
-    return (
-      <div className="Settings">
-      </div>
-    );
-  }
+  return (
+    <div className="Settings">
+    </div>
+  );
 }
 ```
 
@@ -54,34 +46,18 @@ export default class Settings extends Component {
 import Settings from "./containers/Settings";
 ```
 
-<img class="code-marker" src="/assets/s.png" />And replace our `<Switch>` block in `src/Routes.js` with this.
+<img class="code-marker" src="/assets/s.png" />Add the following below the `/signup` route in our `<Switch>` block in `src/Routes.js`.
 
 ``` coffee
-<Switch>
-  <AppliedRoute path="/" exact component={Home} props={childProps} />
-  <UnauthenticatedRoute path="/login" exact component={Login} props={childProps} />
-  <UnauthenticatedRoute path="/signup" exact component={Signup} props={childProps} />
-  <AuthenticatedRoute path="/settings" exact component={Settings} props={childProps} />
-  <AuthenticatedRoute path="/notes/new" exact component={NewNote} props={childProps} />
-  <AuthenticatedRoute path="/notes/:id" exact component={Notes} props={childProps} />
-  { /* Finally, catch all unmatched routes */ }
-  <Route component={NotFound} />
-</Switch>
+<AppliedRoute path="/settings" exact component={Settings} appProps={appProps} />
 ```
 
-Notice that we added a route for our new settings page.
+<img class="code-marker" src="/assets/s.png" />Next add a link to our settings page in the navbar by replacing the `return` statement in `src/App.js` with this.
 
-<img class="code-marker" src="/assets/s.png" />Next add a link to our settings page in the navbar by replacing the `render` method in `src/App.js` with this.
-
+{% raw %}
 ``` coffee
-render() {
-  const childProps = {
-    isAuthenticated: this.state.isAuthenticated,
-    userHasAuthenticated: this.userHasAuthenticated
-  };
-
-  return (
-    !this.state.isAuthenticating &&
+return (
+  !isAuthenticating && (
     <div className="App container">
       <Navbar fluid collapseOnSelect>
         <Navbar.Header>
@@ -92,44 +68,37 @@ render() {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            {this.state.isAuthenticated
-              ? <Fragment>
-                  <LinkContainer to="/settings">
-                    <NavItem>Settings</NavItem>
-                  </LinkContainer>
-                  <NavItem onClick={this.handleLogout}>Logout</NavItem>
-                </Fragment>
-              : <Fragment>
-                  <LinkContainer to="/signup">
-                    <NavItem>Signup</NavItem>
-                  </LinkContainer>
-                  <LinkContainer to="/login">
-                    <NavItem>Login</NavItem>
-                  </LinkContainer>
-                </Fragment>
-            }
+            {isAuthenticated ? (
+              <>
+                <LinkContainer to="/settings">
+                  <NavItem>Settings</NavItem>
+                </LinkContainer>
+                <NavItem onClick={handleLogout}>Logout</NavItem>
+              </>
+            ) : (
+              <>
+                <LinkContainer to="/signup">
+                  <NavItem>Signup</NavItem>
+                </LinkContainer>
+                <LinkContainer to="/login">
+                  <NavItem>Login</NavItem>
+                </LinkContainer>
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Routes childProps={childProps} />
+      <Routes appProps={{ isAuthenticated, userHasAuthenticated }} />
     </div>
-  );
-}
+  )
+);
 ```
+{% endraw %}
 
 You'll notice that we added another link in the navbar that only displays when a user is logged in.
 
 Now if you head over to your app, you'll see a new **Settings** link at the top. Of course, the page is pretty empty right now.
 
 ![Add empty settings page screenshot](/assets/part2/add-empty-settings-page.png)
-
-### Commit the Changes
-
-<img class="code-marker" src="/assets/s.png" />Let's quickly commit these to Git.
-
-``` bash
-$ git add .
-$ git commit -m "Adding settings page"
-```
 
 Next, we'll add our Stripe SDK keys to our config.

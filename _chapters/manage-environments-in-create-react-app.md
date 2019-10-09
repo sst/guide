@@ -16,6 +16,7 @@ Let's start by looking at how our app is configured currently. Our `src/config.j
 ``` js
 export default {
   MAX_ATTACHMENT_SIZE: 5000000,
+  STRIPE_KEY: "pk_test_1234567890",
   s3: {
     REGION: "us-east-1",
     BUCKET: "notes-app-uploads"
@@ -63,6 +64,7 @@ For our purpose let's use an environment variable called `REACT_APP_STAGE`. This
 
 ``` js
 const dev = {
+  STRIPE_KEY: "YOUR_STRIPE_DEV_PUBLIC_KEY",
   s3: {
     REGION: "YOUR_DEV_S3_UPLOADS_BUCKET_REGION",
     BUCKET: "YOUR_DEV_S3_UPLOADS_BUCKET_NAME"
@@ -80,6 +82,7 @@ const dev = {
 };
 
 const prod = {
+  STRIPE_KEY: "YOUR_STRIPE_PROD_PUBLIC_KEY",
   s3: {
     REGION: "YOUR_PROD_S3_UPLOADS_BUCKET_REGION",
     BUCKET: "YOUR_PROD_S3_UPLOADS_BUCKET_NAME"
@@ -110,6 +113,8 @@ export default {
 
 Make sure to replace the different version of the resources with the ones from the [Deploying through Seed]({% link _chapters/deploying-through-seed.md %}) chapter.
 
+We did not complete our Stripe account setup back then, so we don't have the production version of this key. For now we'll just assume that we have two versions of the same key. So `YOUR_STRIPE_DEV_PUBLIC_KEY` and `YOUR_STRIPE_PROD_PUBLIC_KEY` are the same ones for now.
+
 Note that we are defaulting our environment to dev if the `REACT_APP_STAGE` is not set. This means that our current build process (`npm start` and `npm run build`) will default to the `dev` environment. Also note that we've moved config values that are common to both environments (like `MAX_ATTACHMENT_SIZE`) to a different section.
 
 If we switch over to our app, we should see it in development mode and it'll be connected to the dev version of our backend. We haven't changed the deployment process yet but in the coming chapters we'll change this when we automate our frontend deployments.
@@ -125,14 +130,4 @@ OR for Windows
 set "REACT_APP_STAGE=prod" && npm start
 ```
 
-
-### Commit the Changes
-
-Let's quickly commit these to Git.
-
-``` bash
-$ git add .
-$ git commit -m "Configuring environments"
-```
-
-Next, let’s add a settings page to our app. This is where a user will be able to pay for our service!
+Next, we'll set up automatic deployments for our React app using a service called [Netlify](https://www.netlify.com). This will be fairly similar to what we did for our serverless backend API.

@@ -21,19 +21,19 @@ We are going to use the `history.push` method that comes with React Router v4.
 Since our `Login` component is rendered using a `Route`, it adds the router props to it. So we can redirect using the `this.props.history.push` method.
 
 ``` javascript
-this.props.history.push("/");
+props.history.push("/");
 ```
 
 <img class="code-marker" src="/assets/s.png" />Update the `handleSubmit` method in `src/containers/Login.js` to look like this:
 
 ``` javascript
-handleSubmit = async event => {
+async function handleSubmit(event) {
   event.preventDefault();
 
   try {
-    await Auth.signIn(this.state.email, this.state.password);
-    this.props.userHasAuthenticated(true);
-    this.props.history.push("/");
+    await Auth.signIn(email, password);
+    props.userHasAuthenticated(true);
+    props.history.push("/");
   } catch (e) {
     alert(e.message);
   }
@@ -68,21 +68,21 @@ export default withRouter(App);
 import { Link, withRouter } from "react-router-dom";
 ```
 
-<img class="code-marker" src="/assets/s.png" />Add the following to the bottom of the `handleLogout` method in our `src/App.js`.
+<img class="code-marker" src="/assets/s.png" />Add the following to the bottom of the `handleLogout` function in our `src/App.js`.
 
 ``` coffee
-this.props.history.push("/login");
+props.history.push("/login");
 ```
 
 So our `handleLogout` method should now look like this.
 
-``` coffee
-handleLogout = async event => {
+``` javascript
+async function handleLogout() {
   await Auth.signOut();
 
-  this.userHasAuthenticated(false);
+  userHasAuthenticated(false);
 
-  this.props.history.push("/login");
+  props.history.push("/login");
 }
 ```
 

@@ -24,26 +24,24 @@ $ rm src/logo.svg
 <img class="code-marker" src="/assets/s.png" />And go ahead and remove the code inside `src/App.js` and replace it with the following.
 
 ``` coffee
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Navbar } from "react-bootstrap";
 import "./App.css";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App container">
-        <Navbar fluid collapseOnSelect>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <Link to="/">Scratch</Link>
-            </Navbar.Brand>
-            <Navbar.Toggle />
-          </Navbar.Header>
-        </Navbar>
-      </div>
-    );
-  }
+function App(props) {
+  return (
+    <div className="App container">
+      <Navbar fluid collapseOnSelect>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <Link to="/">Scratch</Link>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+      </Navbar>
+    </div>
+  );
 }
 
 export default App;
@@ -54,6 +52,14 @@ We are doing a few things here:
 1. Creating a fixed width container using Bootstrap in `div.container`.
 2. Adding a Navbar inside the container that fits to its container's width using the attribute `fluid`.
 3. Using `Link` component from the React-Router to handle the link to our app's homepage (without forcing the page to refresh).
+
+Note that React Bootstrap might give you a couple of warnings in your browser console.
+
+```
+Warning: componentWillMount has been renamed, and is not recommended for use. 
+```
+
+We can ignore them for now while we wait for React Bootstrap to fix them. Also, we'll be upgrading the guide to React Bootstrap v1 once it is out of beta.
 
 Let's also add a couple of line of styles to space things out a bit more.
 
@@ -84,20 +90,18 @@ We'll be storing all of our top level components here. These are components that
 <img class="code-marker" src="/assets/s.png" />Create a new container and add the following to `src/containers/Home.js`.
 
 ``` coffee
-import React, { Component } from "react";
+import React from "react";
 import "./Home.css";
 
-export default class Home extends Component {
-  render() {
-    return (
-      <div className="Home">
-        <div className="lander">
-          <h1>Scratch</h1>
-          <p>A simple note taking app</p>
-        </div>
+export default function Home() {
+  return (
+    <div className="Home">
+      <div className="lander">
+        <h1>Scratch</h1>
+        <p>A simple note taking app</p>
       </div>
-    );
-  }
+    </div>
+  );
 }
 ```
 
@@ -134,10 +138,13 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "./containers/Home";
 
-export default () =>
-  <Switch>
-    <Route path="/" exact component={Home} />
-  </Switch>;
+export default function Routes() {
+  return (
+    <Switch>
+      <Route path="/" exact component={Home} />
+    </Switch>
+  );
+}
 ```
 
 This component uses this `Switch` component from React-Router that renders the first matching route that is defined within it. For now we only have a single route, it looks for `/` and renders the `Home` component when matched. We are also using the `exact` prop to ensure that it matches the `/` route exactly. This is because the path `/` will also match any route that starts with a `/`.
@@ -158,10 +165,10 @@ import Routes from "./Routes";
 <Routes />
 ```
 
-So the `render` method of our `src/App.js` should now look like this.
+So the `App` function component of our `src/App.js` should now look like this.
 
 ``` coffee
-render() {
+function App(props) {
   return (
     <div className="App container">
       <Navbar fluid collapseOnSelect>

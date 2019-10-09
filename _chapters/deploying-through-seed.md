@@ -43,28 +43,6 @@ Notice the tests are being run as a part of the build.
 
 ![Dev build run tests screenshot](/assets/part2/dev-build-run-tests.png)
 
-Something cool to note here is that, the build process is split into a few parts. First the code is checked out through Git and the tests are run. But we don't directly deploy. Instead, we create a package for the `dev` stage and the `prod` stage. And finally we deploy to `dev` with that package. The reason this is split up is because we want avoid the build process while promoting to `prod`. This ensures that if we have a tested working build, it should just work when we promote to production.
-
-You might also notice a couple of warnings that look like the following.
-
-``` bash
-Serverless Warning --------------------------------------
-
-A valid file to satisfy the declaration 'file(env.yml):dev,file(env.yml):default' could not be found.
-
-
-Serverless Warning --------------------------------------
-
-A valid file to satisfy the declaration 'file(env.yml):dev,file(env.yml):default' could not be found.
-
-
-Serverless Warning --------------------------------------
-
-A valid service attribute to satisfy the declaration 'self:custom.environment.stripeSecretKey' could not be found.
-```
-
-These are expected since the `env.yml` is not a part of our Git repo and is not available in the build process. The Stripe key is instead set directly in the Seed console.
-
 Once the build is complete, take a look at the build log and make a note of the following:
 
 - Region: `region`

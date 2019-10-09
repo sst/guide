@@ -83,14 +83,19 @@ A lot of the above might sound tricky and overly complicated right now. But we a
 
 We are also going to make a quick tweak to reference the DynamoDB resource that we are creating.
 
-<img class="code-marker" src="/assets/s.png" />Replace the `iamRoleStatements:` block in your `serverless.yml` with the following.
+<img class="code-marker" src="/assets/s.png" />Update our environment variables with the new generated table name. Replace the `environment:` block with the following:
 
 ``` yml
   # These environment variables are made available to our functions
   # under process.env.
   environment:
     tableName: ${self:custom.tableName}
+    stripeSecretKey: ${env:STRIPE_SECRET_KEY}
+```
 
+<img class="code-marker" src="/assets/s.png" />Replace the `iamRoleStatements:` block in your `serverless.yml` with the following.
+
+``` yml
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -116,14 +121,5 @@ A couple of interesting things we are doing here:
 2. For the `tableName` specifically, we are getting it by referencing our custom variable from above.
 
 3. For the case of our `iamRoleStatements:` we are now specifically stating which table we want to connect to. This block is telling AWS that these are the only resources that our Lambda functions have access to.
-
-### Commit Your Code
-
-<img class="code-marker" src="/assets/s.png" />Let's commit the changes we've made so far.
-
-``` bash
-$ git add .
-$ git commit -m "Adding our DynamoDB resource"
-```
 
 Next, let's add our S3 bucket for file uploads.

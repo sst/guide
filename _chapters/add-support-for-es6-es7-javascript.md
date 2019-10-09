@@ -27,7 +27,7 @@ In this chapter, let's quickly go over how it's doing this so you'll be able to 
 
 ### Serverless Webpack
 
-The transpiling process of converting our ES code to Node v8.10 JavaScript is done by the serverless-bundle plugin. This plugin was added in our `serverless.yml`.
+The transpiling process of converting our ES code to Node v10.x JavaScript is done by the `serverless-bundle` plugin. This plugin was added in our `serverless.yml`.
 
 <img class="code-marker" src="/assets/s.png" />Open `serverless.yml` and replace the default with the following.
 
@@ -41,17 +41,18 @@ package:
 plugins:
   - serverless-bundle # Package our functions with Webpack
   - serverless-offline
+  - serverless-dotenv-plugin # Load .env as environment variables
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs10.x
   stage: prod
   region: us-east-1
 ```
 
 The `service` option is pretty important. We are calling our service the `notes-app-api`. Serverless Framework creates your stack on AWS using this as the name. This means that if you change the name and deploy your project, it will create a completely new project.
 
-You'll notice the plugins `serverless-bundle` and `serverless-offline` that we have included. The first plugin we talked about above, while the [serverless-offline](https://github.com/dherault/serverless-offline) is helpful for local development.
+You'll notice the plugins — `serverless-bundle`, `serverless-offline`, and `serverless-dotenv-plugin`, that we have included. The first plugin we talked about above, while the [serverless-offline](https://github.com/dherault/serverless-offline) is helpful for local development and [serverless-dotenv-plugin](https://github.com/colynb/serverless-dotenv-plugin) that we'll use later loads the `.env` files as Lambda environment variables.
 
 We are also using this option:
 
@@ -63,4 +64,4 @@ package:
 
 By default, Serverless Framework creates one large package for all the Lambda functions in your app. Large Lambda function packages can cause longer cold starts. By setting `individually: true`, we are telling Serverless Framework to create a single package per Lambda function. This in combination with serverless-bundle (and Webpack) will generate optimized packages. Note that, this'll slow down our builds but the performance benefit is well worth it.
 
-And now we are ready to build our backend.
+Now we are ready to write our backend code. But before that, let's create a GitHub repo to store our code.

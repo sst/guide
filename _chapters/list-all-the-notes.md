@@ -16,25 +16,19 @@ Currently, our Home container is very simple. Let's add the conditional renderin
 <img class="code-marker" src="/assets/s.png" />Replace our `src/containers/Home.js` with the following.
 
 ``` coffee
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { PageHeader, ListGroup } from "react-bootstrap";
 import "./Home.css";
 
-export default class Home extends Component {
-  constructor(props) {
-    super(props);
+export default function Home(props) {
+  const [notes, setNotes] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-    this.state = {
-      isLoading: true,
-      notes: []
-    };
-  }
-
-  renderNotesList(notes) {
+  function renderNotesList(notes) {
     return null;
   }
 
-  renderLander() {
+  function renderLander() {
     return (
       <div className="lander">
         <h1>Scratch</h1>
@@ -43,30 +37,28 @@ export default class Home extends Component {
     );
   }
 
-  renderNotes() {
+  function renderNotes() {
     return (
       <div className="notes">
         <PageHeader>Your Notes</PageHeader>
         <ListGroup>
-          {!this.state.isLoading && this.renderNotesList(this.state.notes)}
+          {!isLoading && renderNotesList(notes)}
         </ListGroup>
       </div>
     );
   }
 
-  render() {
-    return (
-      <div className="Home">
-        {this.props.isAuthenticated ? this.renderNotes() : this.renderLander()}
-      </div>
-    );
-  }
+  return (
+    <div className="Home">
+      {props.isAuthenticated ? renderNotes() : renderLander()}
+    </div>
+  );
 }
 ```
 
 We are doing a few things of note here:
 
-1. Rendering the lander or the list of notes based on `this.props.isAuthenticated`.
+1. Rendering the lander or the list of notes based on `props.isAuthenticated`.
 
 2. Store our notes in the state. Currently, it's empty but we'll be calling our API for it.
 

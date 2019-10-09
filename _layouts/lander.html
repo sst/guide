@@ -5,10 +5,16 @@
 
   <body>
 
-    {% include lander-header.html %}
+    {% include header.html %}
 
-    <main class="page-content" aria-label="Content">
-      {{ content }}
+    <main class="page-content lander" aria-label="Content">
+      <div class="home">
+        {% include hero.html %}
+
+        {{ content }}
+
+        {% include testimonials.html %}
+      </div>
     </main>
 
     {% include footer.html %}
@@ -16,3 +22,4 @@
   </body>
 
 </html>
+

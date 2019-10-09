@@ -6,7 +6,6 @@ lang: en
 ref: add-an-update-note-api
 description: To allow users to update their notes in our note taking app, we are going to add an update note PUT API. To do this we will add a new Lambda function to our Serverless Framework project. The Lambda function will update a user’s note in the DynamoDB table.
 context: true
-code: backend
 comments_id: add-an-update-note-api/144
 ---
 
@@ -23,7 +22,7 @@ import { success, failure } from "./libs/response-lib";
 export async function main(event, context) {
   const data = JSON.parse(event.body);
   const params = {
-    TableName: "notes",
+    TableName: process.env.tableName,
     // 'Key' defines the partition key and sort key of the item to be updated
     // - 'userId': Identity Pool identity id of the authenticated user
     // - 'noteId': path parameter

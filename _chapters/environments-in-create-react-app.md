@@ -11,7 +11,7 @@ While developing your frontend React app and working with an API backend, you'll
 
 Aside from isolating the resources used, having a separate environment that mimics your production version can really help with testing your changes before they go live. You can take this idea of environments further by having a staging environment that can even have snapshots of the live database to give you as close to a production setup as possible. This type of setup can sometimes help track down bugs and issues that you might run into only on our live environment and not on local.
 
-In this chapter we will look at some simple ways to configure multiple environments in our React app. There are many different ways to do this but here is a simple one based on what we have built in [Part 1 of this guide](/#part-1).
+In this chapter we will look at some simple ways to configure multiple environments in our React app. There are many different ways to do this but here is a simple one based on what we have built in [first part of this guide](/#the-basics).
 
 ### Custom Environment Variables
 

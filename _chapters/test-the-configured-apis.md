@@ -127,4 +127,4 @@ $ npx aws-api-gateway-cli-test \
 
 And you should see it give a similar output as dev.
 
-Now that our APIs our tested we are ready to plug these into our frontend. But before we do that, let's do a quick test to see what will happen if we make a mistake and push some faulty code to production.
+Now that our APIs our tested we are ready to plug these into our frontend. Before we do that, let's quickly go over what happens if we push some faulty code to our app.

@@ -11,43 +11,45 @@ ref: save-changes-to-a-note
 
 Now that our note loads into our form, let's work on saving the changes we make to that note.
 
-<img class="code-marker" src="/assets/s.png" />Replace the `handleSubmit` method in `src/containers/Notes.js` with the following.
+<img class="code-marker" src="/assets/s.png" />Replace the `handleSubmit` function in `src/containers/Notes.js` with the following.
 
-``` coffee
-saveNote(note) {
-  return API.put("notes", `/notes/${this.props.match.params.id}`, {
+``` javascript
+function saveNote(note) {
+  return API.put("notes", `/notes/${props.match.params.id}`, {
     body: note
   });
 }
 
-handleSubmit = async event => {
+async function handleSubmit(event) {
   let attachment;
 
   event.preventDefault();
 
-  if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
-    alert(`Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE/1000000} MB.`);
+  if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
+    alert(
+      `Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE /
+        1000000} MB.`
+    );
     return;
   }
 
-  this.setState({ isLoading: true });
+  setIsLoading(true);
 
   try {
-    if (this.file) {
-      attachment = await s3Upload(this.file);
+    if (file.current) {
+      attachment = await s3Upload(file.current);
     }
 
-    await this.saveNote({
-      content: this.state.content,
-      attachment: attachment || this.state.note.attachment
+    await saveNote({
+      content,
+      attachment: attachment || note.attachment
     });
-    this.props.history.push("/");
+    props.history.push("/");
   } catch (e) {
     alert(e);
-    this.setState({ isLoading: false });
+    setIsLoading(false);
   }
 }
-
 ```
 
 <img class="code-marker" src="/assets/s.png" />And include our `s3Upload` helper method in the header:
@@ -58,9 +60,9 @@ import { s3Upload } from "../libs/awsLib";
 
 The code above is doing a couple of things that should be very similar to what we did in the `NewNote` container.
 
-1. If there is a file to upload we call `s3Upload` to upload it and save the key we get from S3.
+1. If there is a file to upload we call `s3Upload` to upload it and save the key we get from S3. If there isn't then we simply save the existing attachment object, `note.attachment`.
 
-2. We save the note by making a `PUT` request with the note object to `/notes/:id` where we get the `id` from `this.props.match.params.id`. We use the `API.put()` method from AWS Amplify.
+2. We save the note by making a `PUT` request with the note object to `/notes/:id` where we get the `id` from `props.match.params.id`. We use the `API.put()` method from AWS Amplify.
 
 3. And on success we redirect the user to the homepage.
 

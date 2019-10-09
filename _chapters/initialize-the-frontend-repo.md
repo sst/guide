@@ -3,33 +3,13 @@ layout: post
 title: Initialize the Frontend Repo
 date: 2018-03-18 00:00:00
 lang: en
-description: By automating deployments for our React app, we can simply git push to deploy our app to production. To do so, start by adding your React app repo to Git.
+description: For this guide we are going to add our React app to a Git repo. We do this so that we can automate our deployments later by just pushing to Git.
+code: frontend
 ref: initialize-the-frontend-repo
 comments_id: initialize-the-frontend-repo/181
 ---
 
-Just as we did in the backend portion, we'll start by creating our project and adding it to GitHub. We will use what we had in Part I as a starting point.
-
-### Clone the Original Repo
-
-<img class="code-marker" src="/assets/s.png" />In your working directory, start by cloning the [original repo]({{ site.frontend_github_repo }}). Make sure this is not inside the directory for our backend.
-
-``` bash
-$ git clone --branch part-1 --depth 1 https://github.com/AnomalyInnovations/serverless-stack-demo-client.git serverless-stack-2-client/
-$ cd serverless-stack-2-client/
-```
-
-<img class="code-marker" src="/assets/s.png" />And remove the `.git/` dir.
-
-``` bash
-$ rm -rf .git/
-```
-
-<img class="code-marker" src="/assets/s.png" />Let's install our Node modules.
-
-``` bash
-$ npm install
-```
+Just as we did in the backend portion, we'll start by adding our project to a GitHub repo. We need this to store our code and we'll use this later to automate our deployments.
 
 ### Create a New GitHub Repo
 
@@ -37,7 +17,7 @@ Let's head over to [GitHub](https://github.com). Make sure you are signed in and
 
 ![Create new GitHub repository screenshot](/assets/part2/create-new-github-repository.png)
 
-Give your repository a name, in our case we are calling it `serverless-stack-2-client`. And hit **Create repository**.
+Give your repository a name, in our case we are calling it `serverless-stack-client`. And hit **Create repository**.
 
 ![Name new client GitHub repository screenshot](/assets/part2/name-new-client-github-repository.png)
 
@@ -48,7 +28,7 @@ Once your repository is created, copy the repository URL. We'll need this soon.
 In our case the URL is:
 
 ```
-https://github.com/jayair/serverless-stack-2-client.git
+https://github.com/jayair/serverless-stack-client.git
 ```
 
 ### Initialize Your New Repo
@@ -89,4 +69,4 @@ $ git remote -v
 $ git push -u origin master
 ```
 
-Next let's look into configuring our frontend client with the environments that we have in our backend.
+Now we are ready to build our frontend! We are going start by creating our app icon and updating the favicons.

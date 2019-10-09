@@ -70,4 +70,16 @@ resources:
   - ${file(resources/api-gateway-errors.yml)}
 ```
 
+Make sure this is **indented correctly**. The `resources:` block is a top level property.
+
 And that's it. We are ready to deploy our APIs.
+
+### Commit the Changes
+
+<img class="code-marker" src="/assets/s.png" />Let's commit our code so far and push it to GitHub.
+
+``` bash
+$ git add .
+$ git commit -m "Adding our Serverless API"
+$ git push
+```

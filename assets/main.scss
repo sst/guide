@@ -4,35 +4,35 @@
 @charset "utf-8";
 
 // Our variables
-$base-font-family:          Lato, sans-serif;
-$heading-font-family:       "PT Serif", serif;
-$code-font-family:          "Source Pro", monospace;
-$base-font-size:            16px;
-$base-font-weight:          400;
-$small-font-size:           $base-font-size * 0.875;
-$base-line-height:          1.6;
+$base-font-family:            Lato, sans-serif;
+$heading-font-family:         "PT Serif", serif;
+$code-font-family:            "Source Pro", monospace;
+$base-font-size:              16px;
+$base-font-weight:            400;
+$small-font-size:             $base-font-size * 0.875;
+$base-line-height:            1.6;
 
-$spacing-unit:              30px;
+$spacing-unit:                30px;
 
-$text-color:                #383736;
-$secondary-text-color:      #706F6C;
-$tertiary-text-color:  	    #9A9894;
-$background-color:          #f2efe8;
-$code-background-color:     #f0eaf7;
-$hilight-background-color:  #fff694;
-$brand-color:               #9068BE;
-$important-color:           #F39C12;
+$text-color:                  #383736;
+$secondary-text-color:        #706F6C;
+$tertiary-text-color:  	      #9A9894;
+$background-color:            #f2efe8;
+$code-background-color:       #f0eaf7;
+$highlight-background-color:  #fff694;
+$brand-color:                 #9068BE;
+$important-color:             #F39C12;
 
-$grey-color:                #828282;
-$grey-color-light:          lighten($grey-color, 30%);
-$grey-color-dark:           darken($grey-color, 25%);
+$grey-color:                  #828282;
+$grey-color-light:            lighten($grey-color, 30%);
+$grey-color-dark:             darken($grey-color, 25%);
 
-// Width of the content     area
-$content-width:             800px;
-$post-content-width:        1100px;
+// Width of the content       area
+$content-width:               1280px;
+$post-content-width:          1280px;
 
-$on-palm:                   600px;
-$on-laptop:                 800px;
+$on-palm:                     600px;
+$on-laptop:                   800px;
 
 // Minima also includes a mixin for defining media queries.
 // Use media queries like this:
@@ -46,6 +46,7 @@ $on-laptop:                 800px;
 // Import partials from the `minima` theme.
 @import "theme";
 @import "print";
+@import "lander";
 
 
 
@@ -87,27 +88,6 @@ img.code-marker {
   background-size: $width $height;
   display: inline-block;
   vertical-align: middle; 
-}
-
-// Source Code Links
-div.post-links {
-  border: 2px solid darken($background-color, 5%);
-  border-radius: 5px;
-  padding: $spacing-unit - 5px;
-
-  p {
-    margin-bottom: 8px;
-    color: $secondary-text-color;
-
-    &.code {
-      margin-top: 15px;
-    }
-  }
-
-  a {
-    font-family: $code-font-family;
-    font-size: 18px;
-  }
 }
 
 // Link Buttons
@@ -341,326 +321,6 @@ div.newsletter div.support {
       border-color: darken($brand-color, 15%);
     }
   }
-}
-
-
-/**
- * Homepage
- */
-div.home .feature-divider {
-  margin: $spacing-unit auto;
-  max-width: 300px;
-  height: 1px;
-  background-color: darken($background-color, 15%);
-}
-
-div.home div.support-lander {
-  text-align: center;
-
-  & > a {
-    display: inline-block;
-  }
-
-  p {
-    color: $tertiary-text-color;
-    font-size: 14px;
-    &:last-child {
-      padding-top: 5px;
-    }
-  }
-}
-
-div.home .feature-pitch {
-  margin-bottom: 2px;
-  padding: 0 10px;
-  font-size: 20px;
-  font-family: $heading-font-family;
-  font-weight: 700;
-  text-align: center;
-}
-div.home .feature-desc,
-div.home .updates-desc,
-div.home .quotes-desc,
-div.home .readers-desc {
-  font-size: 18px;
-  text-align: center;
-  color: $secondary-text-color;
-}
-div.home .feature-list {
-  font-size: 18px;
-  padding: 0 3 * $spacing-unit;
-  margin-bottom: $spacing-unit + 5px;
-
-  strong {
-    background-color: $hilight-background-color;
-  }
-
-  @include media-query($on-palm) {
-    margin-bottom: $spacing-unit - 5px;
-    padding: 0 10px;
-  }
-}
-div.home .updates {
-  padding: 5px 2 * $spacing-unit 0;
-  display: flex;
-
-  @include media-query($on-palm) {
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 5px 10px 0;
-  }
-
-  .icon {
-    $size: 54px;
-    margin-top: 7px;
-    background-color: lighten($brand-color, 10%);
-    border-radius: 50%;
-    color: white;
-    font-size: 28px;
-    width: $size;
-    height: $size;
-    text-align: center;
-    flex: 0 0 $size;
-
-    i {
-      line-height: $size;
-    }
-    @include media-query($on-palm) {
-      margin-top: 0;
-    }
-  }
-
-  .copy {
-    margin-left: $spacing-unit / 2 + 8px;
-
-    @include media-query($on-palm) {
-      margin-top: 7px;
-      margin-left: 0;
-    }
-
-    h6 {
-      margin-bottom: 1px;
-      font-family: $base-font-family;
-      font-size: 24px;
-    }
-    p {
-      margin-bottom: 8px;
-      color: $secondary-text-color;
-    }
-    & > a {
-      font-size: 14px;
-    }
-  }
-}
-div.home ul.quotes {
-  margin-left: 0;
-  margin-top: $spacing-unit - 5px;
-  margin-bottom: 2 * $spacing-unit - 6px;
-  list-style-type: none;
-  padding: 0 60px;
-
-  @include media-query($on-palm) {
-    margin-bottom: $spacing-unit - 5px;
-    padding: 0 10px;
-  }
-}
-div.home ul.quotes li {
-  margin-bottom: $spacing-unit;
-  &:nth-child(odd) {
-    padding-left: 80px;
-    background: {
-      image: url('/assets/left-quote-icon.png');
-      repeat: no-repeat;
-      size: 68px 50px;
-      position: 0px 7px;
-    }
-  }
-  &:nth-child(even) {
-    padding-right: 77px;
-    background: {
-      image: url('/assets/right-quote-icon.png');
-      repeat: no-repeat;
-      size: 68px 50px;
-      position: right 7px;
-    }
-  }
-}
-div.home ul.quotes p {
-  margin-bottom: 0;
-
-  &:first-child {
-    font-style: italic;
-    font-size: 20px;
-    margin-bottom: 7px;
-  }
-  &:last-child {
-    font-size: 14px;
-    font-weight: bold;
-  }
-}
-div.home div.readers {
-}
-div.home div.readers ul.logos {
-  margin-left: 0;
-  margin-bottom: 0;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-
-  @include media-query($on-palm) {
-    flex-wrap: nowrap;
-    overflow-x: scroll;
-    justify-content: flex-start;
-  }
-}
-div.home div.readers ul.logos li {
-  list-style-type: none;
-  width: 185px;
-  height: 100px;
-  flex-shrink: 0;
-  margin: 10px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  @include media-query($on-palm) {
-    margin: $spacing-unit / 2 0;
-    width: 140px;
-  }
-}
-div.home div.readers ul.logos li img {
-  width: 90px;
-  height: auto;
-}
-div.home div.readers ul.logos li.tall img {
-  width: auto;
-  height: 35px;
-}
-
-/**
- * Home Table of Contents
- */
-div.home .table-of-contents {
-  margin-top: $spacing-unit;
-  padding-bottom: $spacing-unit * 1.5;
-  border-radius: 4px;
-  background-color: lighten($background-color, 5%);
-  border: 1px solid darken($background-color, 20%);
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
-
-  @include media-query($on-palm) {
-    padding-bottom: $spacing-unit;
-  }
-
-  div.header {
-    padding: 16px 0;
-    background-color: white;
-    border-radius: 4px 4px 0 0;
-
-    h6 {
-      margin: 0;
-      font-size: 36px;
-      font-weight: 500;
-      text-align: center;
-
-      @include media-query($on-palm) {
-        font-size: 32px;
-      }
-    }
-  }
-
-  & > h3 {
-    margin: $spacing-unit * 1.5 $spacing-unit / 2 0;
-    padding: 10px 0;
-    font-size: 30px;
-    font-weight: 500;
-    text-align: center;
-    border: {
-      width: 3px 0;
-      color: darken($background-color, 8%);
-      style: solid;
-    }
-
-    @include media-query($on-palm) {
-      margin-top: $spacing-unit;
-      font-size: 26px;
-    }
-  }
-
-  div.toc-section {
-    display: flex;
-    align-items: center;
-    padding: $spacing-unit * 1.5 0 0;
-
-    @include media-query($on-palm) {
-      display: block;
-      padding-top: $spacing-unit;
-    }
-
-    h3 {
-      margin: 0;
-      padding: 0 $spacing-unit / 2;
-      font-family: $base-font-family;
-      flex: 0 0 240px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: $tertiary-text-color;
-      font-size: 18px;
-      text-align: right;
-
-      @include media-query($on-palm) {
-        text-align: center;
-      }
-    }
-
-    ul {
-      li {
-        padding: 4px 0;
-        a {
-          font-size: 20px;
-        }
-      }
-    }
-
-    & > ul {
-      margin: 0;
-      padding: $spacing-unit / 2;
-      border-left: 3px solid darken($background-color, 8%);
-
-      @include media-query($on-palm) {
-        padding: $spacing-unit / 2;
-        border: none;
-      }
-
-      & > li {
-        list-style-type: none;
-      }
-    }
-  }
-}
-
-div.home .share-container {
-  text-align: center;
-
-  .share {
-    display: inline-block;
-    border-top: 1px solid darken($background-color, 10%);
-    padding: 22px 40px 2 * $spacing-unit - 10px;
-
-    @include media-query($on-palm) {
-      padding: 15px 40px $spacing-unit - 10px;
-    }
-
-    ul li {
-      padding: 0 5px;
-    }
-  }
-}
-
-div.home .extras {
-  margin-top: $spacing-unit + 15px;
-  @extend %extras-section;
 }
 
 hr.tools {

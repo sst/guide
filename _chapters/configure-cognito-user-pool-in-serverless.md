@@ -75,13 +75,4 @@ resources:
   - ${file(resources/cognito-user-pool.yml)}
 ```
 
-### Commit Your Code
-
-<img class="code-marker" src="/assets/s.png" />Let's commit the changes we've made so far.
-
-``` bash
-$ git add .
-$ git commit -m "Adding our Cognito User Pool resource"
-```
-
 And next let's tie all of this together by configuring our Cognito Identity Pool.

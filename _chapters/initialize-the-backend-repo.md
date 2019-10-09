@@ -1,35 +1,15 @@
 ---
 layout: post
 title: Initialize the Backend Repo
-date: 2018-02-24 00:00:00
+date: 2016-12-29 18:00:00
 lang: en
-description: By automating deployments for our Serverless Framework app, we can simply git push to deploy our app to production. To do so, start by adding your serverless app repo to Git.
+description: For this guide we are going to add our Serverless Framework app to a Git repo. We do this so that we can automate our deployments later by just pushing to Git.
+code: backend
 ref: initialize-the-backend-repo
 comments_id: initialize-the-backend-repo/159
 ---
 
-To start with we are going to create our new project and add it to GitHub. We are going to be working off the code we've created so far.
-
-### Clone the Code so Far
-
-<img class="code-marker" src="/assets/s.png" />In your working directory, start by cloning the [original repo]({{ site.backend_github_repo }}).
-
-``` bash
-$ git clone --branch handle-api-gateway-cors-errors --depth 1 https://github.com/AnomalyInnovations/serverless-stack-demo-api.git serverless-stack-2-api/
-$ cd serverless-stack-2-api/
-```
-
-<img class="code-marker" src="/assets/s.png" />And remove the `.git/` dir.
-
-``` bash
-$ rm -rf .git/
-```
-
-<img class="code-marker" src="/assets/s.png" />Let's install our Node modules as well.
-
-``` bash
-$ npm install
-```
+Before we start working on our app, let's create a GitHub repository for this project. It's a good way to store our code and we'll use this repository later to automate deploying our app.
 
 ### Create a New Github Repo
 
@@ -37,7 +17,7 @@ Let's head over to [GitHub](https://github.com). Make sure you are signed in and
 
 ![Create new GitHub repository screenshot](/assets/part2/create-new-github-repository.png)
 
-Give your repository a name, in our case we are calling it `serverless-stack-2-api`. Next hit **Create repository**.
+Give your repository a name, in our case we are calling it `serverless-stack-api`. Next hit **Create repository**.
 
 ![Name new GitHub repository screenshot](/assets/part2/name-new-github-repository.png)
 
@@ -48,7 +28,7 @@ Once your repository is created, copy the repository URL. We'll need this soon.
 In our case the URL is:
 
 ```
-https://github.com/jayair/serverless-stack-2-api.git
+https://github.com/jayair/serverless-stack-api.git
 ```
 
 ### Initialize Your New Repo
@@ -89,4 +69,4 @@ $ git remote -v
 $ git push -u origin master
 ```
 
-Next, let's make a couple of quick changes to our project to get organized.
+Now we are ready to build our backend!

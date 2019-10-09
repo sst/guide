@@ -33,6 +33,13 @@ This should generate your favicon package and the accompanying code.
 
 ![Realfavicongenerator.net completed screenshot](/assets/realfavicongenerator-completed.png)
 
+<img class="code-marker" src="/assets/s.png" />Remove the `public/logo192.png` and `public/logo512.png` files.
+
+``` bash
+$ rm public/logo192.png
+$ rm public/logo512.png
+```
+
 <img class="code-marker" src="/assets/s.png" />Then replace the contents of `public/manifest.json` with the following:
 
 ``` json
@@ -67,6 +74,7 @@ To include a file from the `public/` directory in your HTML, Create React App ne
 <link rel="icon" type="image/png" href="%PUBLIC_URL%/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="%PUBLIC_URL%/favicon-16x16.png" sizes="16x16">
 <link rel="mask-icon" href="%PUBLIC_URL%/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="description" content="A simple note taking app" />
 <meta name="theme-color" content="#ffffff">
 ```
 
@@ -75,6 +83,11 @@ To include a file from the `public/` directory in your HTML, Create React App ne
 ``` html
 <meta name="theme-color" content="#000000">
 <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+<link rel="apple-touch-icon" href="logo192.png" />
+<meta
+  name="description"
+  content="Web site created using create-react-app"
+/>
 ```
 
 Finally head over to your browser and try the `/favicon-32x32.png` path to ensure that the files were added correctly.

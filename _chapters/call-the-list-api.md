@@ -13,36 +13,42 @@ Now that we have our basic homepage set up, let's make the API call to render ou
 
 ### Make the Request
 
-<img class="code-marker" src="/assets/s.png" />Add the following below the `constructor` block in `src/containers/Home.js`.
+<img class="code-marker" src="/assets/s.png" />Add the following right below the state variable declarations in `src/containers/Home.js`.
 
 ``` javascript
-async componentDidMount() {
-  if (!this.props.isAuthenticated) {
-    return;
+useEffect(() => {
+  async function onLoad() {
+    if (!props.isAuthenticated) {
+      return;
+    }
+
+    try {
+      const notes = await loadNotes();
+      setNotes(notes);
+    } catch (e) {
+      alert(e);
+    }
+
+    setIsLoading(false);
   }
 
-  try {
-    const notes = await this.notes();
-    this.setState({ notes });
-  } catch (e) {
-    alert(e);
-  }
+  onLoad();
+}, [props.isAuthenticated]);
 
-  this.setState({ isLoading: false });
-}
-
-notes() {
+function loadNotes() {
   return API.get("notes", "/notes");
 }
 ```
+
+We are using the [useEffect React Hook](https://reactjs.org/docs/hooks-effect.html). We covered how this works back in the [Load the State from the Session]({% link _chapters/load-the-state-from-the-session.md %}) chapter.
+
+Let's quickly go over how we are using it here. We want to make a request to our `/notes` API to get the list of notes when our component first loads. But only if the user is authenticated. Since our hook relies on `props.isAuthenticated`, we need to pass it in as the second argument in the `useEffect` call as an element in the array. This is basically telling React that we only want to run our Hook again when the `props.isAuthenticated` value changes.
 
 <img class="code-marker" src="/assets/s.png" />And include our Amplify API module in the header.
 
 ``` javascript
 import { API } from "aws-amplify";
 ```
-
-All this does, is make a GET request to `/notes` on `componentDidMount` and puts the results in the `notes` object in the state.
 
 Now let's render the results.
 
@@ -51,28 +57,23 @@ Now let's render the results.
 <img class="code-marker" src="/assets/s.png" />Replace our `renderNotesList` placeholder method with the following.
 
 ``` coffee
-renderNotesList(notes) {
-  return [{}].concat(notes).map(
-    (note, i) =>
-      i !== 0
-        ? <LinkContainer
-            key={note.noteId}
-            to={`/notes/${note.noteId}`}
-          >
-            <ListGroupItem header={note.content.trim().split("\n")[0]}>
-              {"Created: " + new Date(note.createdAt).toLocaleString()}
-            </ListGroupItem>
-          </LinkContainer>
-        : <LinkContainer
-            key="new"
-            to="/notes/new"
-          >
-            <ListGroupItem>
-              <h4>
-                <b>{"\uFF0B"}</b> Create a new note
-              </h4>
-            </ListGroupItem>
-          </LinkContainer>
+function renderNotesList(notes) {
+  return [{}].concat(notes).map((note, i) =>
+    i !== 0 ? (
+      <LinkContainer key={note.noteId} to={`/notes/${note.noteId}`}>
+        <ListGroupItem header={note.content.trim().split("\n")[0]}>
+          {"Created: " + new Date(note.createdAt).toLocaleString()}
+        </ListGroupItem>
+      </LinkContainer>
+    ) : (
+      <LinkContainer key="new" to="/notes/new">
+        <ListGroupItem>
+          <h4>
+            <b>{"\uFF0B"}</b> Create a new note
+          </h4>
+        </ListGroupItem>
+      </LinkContainer>
+    )
   );
 }
 ```

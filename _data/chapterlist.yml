@@ -8,7 +8,7 @@ preface:
     - page: How to get help?
       url: /chapters/how-to-get-help.html
 
-intro-part1:
+intro:
   title: Introduction
   chapters:
     - page: What is Serverless?
@@ -34,7 +34,7 @@ setup-aws:
       url: /chapters/configure-the-aws-cli.html
 
 setup-backend:
-  title: Setting up the Serverless Backend
+  title: Setting up the Serverless backend
   chapters:
     - page: Create a DynamoDB table
       url: /chapters/create-a-dynamodb-table.html
@@ -50,6 +50,8 @@ setup-backend:
       subchapters:
         - page: Add support for ES6/ES7 JavaScript
           url: /chapters/add-support-for-es6-es7-javascript.html
+    - page: Initialize the backend repo
+      url: /chapters/initialize-the-backend-repo.html
 
 build-api:
   title: Building a Serverless REST API
@@ -64,11 +66,24 @@ build-api:
       url: /chapters/add-an-update-note-api.html
     - page: Add a delete note API
       url: /chapters/add-a-delete-note-api.html
+    - page: Working with 3rd party APIs
+      url: /chapters/working-with-3rd-party-apis.html
+      subchapters:
+        - page: Setup a Stripe account
+          url: /chapters/setup-a-stripe-account.html
+        - page: Add a billing API
+          url: /chapters/add-a-billing-api.html
+        - page: Load secrets from .env
+          url: /chapters/load-secrets-from-env.html
+        - page: Test the billing API
+          url: /chapters/test-the-billing-api.html
+    - page: Unit tests in Serverless
+      url: /chapters/unit-tests-in-serverless.html
     - page: Handle API Gateway CORS errors
       url: /chapters/handle-api-gateway-cors-errors.html
 
 deploy-backend:
-  title: Deploying the Backend
+  title: Deploying the backend
   chapters:
     - page: Deploy the APIs
       url: /chapters/deploy-the-apis.html
@@ -81,11 +96,13 @@ deploy-backend:
       url: /chapters/test-the-apis.html
 
 setup-react:
-  title: Setting up a React App
+  title: Setting up a React app
   chapters:
     - page: Create a new React.js app
       url: /chapters/create-a-new-reactjs-app.html
       subchapters:
+        - page: Initialize the frontend repo
+          url: /chapters/initialize-the-frontend-repo.html
         - page: Add app favicons
           url: /chapters/add-app-favicons.html
         - page: Set up custom fonts
@@ -105,7 +122,7 @@ setup-react:
       url: /chapters/configure-aws-amplify.html
 
 build-react:
-  title: Building a React App
+  title: Building a React app
   chapters:
     - page: Create a login page
       url: /chapters/create-a-login-page.html
@@ -122,6 +139,8 @@ build-react:
           url: /chapters/redirect-on-login-and-logout.html
         - page: Give feedback while logging in
           url: /chapters/give-feedback-while-logging-in.html
+        - page: Create a Custom React Hook to Handle Form Fields
+          url: /chapters/create-a-custom-react-hook-to-handle-form-fields.html
     - page: Create a signup page
       url: /chapters/create-a-signup-page.html
       subchapters:
@@ -150,6 +169,15 @@ build-react:
           url: /chapters/save-changes-to-a-note.html
         - page: Delete a note
           url: /chapters/delete-a-note.html
+    - page: Create a settings page
+      url: /chapters/create-a-settings-page.html
+      subchapters:
+        - page: Add Stripe keys to config
+          url: /chapters/add-stripe-keys-to-config.html
+        - page: Create a billing form
+          url: /chapters/create-a-billing-form.html
+        - page: Connect the billing form
+          url: /chapters/connect-the-billing-form.html
     - page: Set up secure pages
       url: /chapters/setup-secure-pages.html
       subchapters:
@@ -160,50 +188,11 @@ build-react:
         - page: Redirect on login
           url: /chapters/redirect-on-login.html
 
-deploy-react:
-  title: Deploying a React app on AWS
-  chapters:
-    - page: Deploy the Frontend
-      url: /chapters/deploy-the-frontend.html
-      subchapters:
-        - page: Create an S3 bucket
-          url: /chapters/create-an-s3-bucket.html
-        - page: Deploy to S3
-          url: /chapters/deploy-to-s3.html
-        - page: Create a CloudFront distribution
-          url: /chapters/create-a-cloudfront-distribution.html
-        - page: Set up your domain with CloudFront
-          url: /chapters/setup-your-domain-with-cloudfront.html
-        - page: Set up www domain redirect
-          url: /chapters/setup-www-domain-redirect.html
-        - page: Set up SSL
-          url: /chapters/setup-ssl.html
-    - page: Deploy updates
-      url: /chapters/deploy-updates.html
-      subchapters:
-        - page: Update the app
-          url: /chapters/update-the-app.html
-        - page: Deploy again
-          url: /chapters/deploy-again.html
-
-intro-part2:
-  title: Introduction
+deploy-backend-prod:
+  title: Deploying the backend to production 
   chapters:
     - page: Getting production ready
       url: /chapters/getting-production-ready.html
-
-new-backend:
-  title: Create a new backend
-  chapters:
-    - page: Initialize the backend repo
-      url: /chapters/initialize-the-backend-repo.html
-      subchapters:
-        - page: Organize the backend repo
-          url: /chapters/organize-the-backend-repo.html
-
-infrastructure-code:
-  title: Infrastructure as Code
-  chapters:
     - page: What is Infrastructure as Code?
       url: /chapters/what-is-infrastructure-as-code.html
       subchapters:
@@ -215,35 +204,8 @@ infrastructure-code:
           url: /chapters/configure-cognito-user-pool-in-serverless.html
         - page: Configure Cognito Identity Pool in Serverless
           url: /chapters/configure-cognito-identity-pool-in-serverless.html
-    - page: Use environment variables in Lambda functions
-      url: /chapters/use-environment-variables-in-lambda-functions.html
     - page: Deploy your Serverless infrastructure
       url: /chapters/deploy-your-serverless-infrastructure.html
-
-stripe-api:
-  title: Adding a Stripe billing API
-  chapters:
-    - page: Working with 3rd party APIs
-      url: /chapters/working-with-3rd-party-apis.html
-      subchapters:
-        - page: Setup a Stripe account
-          url: /chapters/setup-a-stripe-account.html
-        - page: Add a billing API
-          url: /chapters/add-a-billing-api.html
-        - page: Load secrets from env.yml
-          url: /chapters/load-secrets-from-env-yml.html
-    - page: Test the billing API
-      url: /chapters/test-the-billing-api.html
-
-unit-tests:
-  title: Adding unit tests
-  chapters:
-    - page: Unit tests in Serverless
-      url: /chapters/unit-tests-in-serverless.html
-
-serverless-deployments:
-  title: Automating Serverless deployments
-  chapters:
     - page: Automating Serverless deployments
       url: /chapters/automating-serverless-deployments.html
       subchapters:
@@ -260,34 +222,14 @@ serverless-deployments:
     - page: Monitoring deployments in Seed
       url: /chapters/monitoring-deployments-in-seed.html
 
-connect-frontend:
-  title: Connect to the new backend
-  chapters:
-    - page: Initialize the frontend repo
-      url: /chapters/initialize-the-frontend-repo.html
-      subchapters:
-      - page: Manage environments in Create React App
-        url: /chapters/manage-environments-in-create-react-app.html
-
-add-billing-form:
-  title: Adding a billing form
-  chapters:
-    - page: Create a settings page
-      url: /chapters/create-a-settings-page.html
-      subchapters:
-        - page: Add Stripe keys to config
-          url: /chapters/add-stripe-keys-to-config.html
-        - page: Create a billing form
-          url: /chapters/create-a-billing-form.html
-        - page: Connect the billing form
-          url: /chapters/connect-the-billing-form.html
-
-react-deployments:
-  title: Automating React App deployments
+deploy-frontend-prod:
+  title: Deploying the frontend to production
   chapters:
     - page: Automating React Deployments
       url: /chapters/automating-react-deployments.html
       subchapters: 
+        - page: Manage environments in Create React App
+          url: /chapters/manage-environments-in-create-react-app.html
         - page: Create a build script
           url: /chapters/create-a-build-script.html
         - page: Setting up your project on Netlify
@@ -312,28 +254,95 @@ conclusion:
       url: /chapters/changelog.html
     - page: Staying up to date
       url: /chapters/staying-up-to-date.html
-
-extra-sls-architecture:
-  title: Serverless architecture
+      
+best-practices-intro:
+  title: Introduction
+  chapters:
+    - page: Best practices for building Serverless apps
+      url: /chapters/best-practices-for-building-serverless-apps.html
+      
+organize-serverless-apps:
+  title: Organize a Serverless app
   chapters:
     - page: Organizing Serverless projects
       url: /chapters/organizing-serverless-projects.html
     - page: Cross-stack references in Serverless
       url: /chapters/cross-stack-references-in-serverless.html
-      subchapters:
+      subchapters: 
         - page: DynamoDB as a Serverless service
           url: /chapters/dynamodb-as-a-serverless-service.html
         - page: S3 as a Serverless service
           url: /chapters/s3-as-a-serverless-service.html
-        - page: API Gateway domains across services
-          url: /chapters/api-gateway-domains-across-services.html
         - page: Cognito as a Serverless service
           url: /chapters/cognito-as-a-serverless-service.html
-    - page: Deploying multiple services in Serverless
-      url: /chapters/deploying-multiple-services-in-serverless.html
+    - page: Share code between services
+      url: /chapters/share-code-between-services.html
+    - page: Share an API endpoint between services
+      url: /chapters/share-an-api-endpoint-between-services.html
+    - page: Deploy a Serverless app with dependencies
+      url: /chapters/deploy-a-serverless-app-with-dependencies.html
+
+configure-environments:
+  title: Manage environments
+  chapters:
+    - page: Environments in Serverless apps
+      url: /chapters/environments-in-serverless-apps.html
+    - page: Structure environments across AWS accounts
+      url: /chapters/structure-environments-across-aws-accounts.html
+    - page: Manage AWS accounts using AWS Organizations
+      url: /chapters/manage-aws-accounts-using-aws-organizations.html
+    - page: Parameterize Serverless resources names
+      url: /chapters/parameterize-serverless-resources-names.html
+    - page: Deploying to multiple AWS accounts
+      url: /chapters/deploying-to-multiple-aws-accounts.html
+      subchapters: 
+        - page: Deploy the resources repo
+          url: /chapters/deploy-the-resources-repo.html
+        - page: Deploy the API services repo
+          url: /chapters/deploy-the-api-services-repo.html
+    - page: Manage environment related config
+      url: /chapters/manage-environment-related-config.html
+    - page: Storing secrets in Serverless apps
+      url: /chapters/storing-secrets-in-serverless-apps.html
+    - page: Share Route 53 domains across AWS accounts
+      url: /chapters/share-route-53-domains-across-aws-accounts.html
+    - page: Monitor usage for environments
+      url: /chapters/monitor-usage-for-environments.html
+
+development-lifecycle:
+  title: Development lifecycle
+  chapters:
+    - page: Working on Serverless apps
+      url: /chapters/working-on-serverless-apps.html
+    - page: Invoke Lambda functions locally
+      url: /chapters/invoke-lambda-functions-locally.html
+    - page: Invoke API Gateway endpoints locally
+      url: /chapters/invoke-api-gateway-endpoints-locally.html
+    - page: Creating feature environments
+      url: /chapters/creating-feature-environments.html
+    - page: Creating Pull Request environments
+      url: /chapters/creating-pull-request-environments.html
+    - page: Promoting to production
+      url: /chapters/promoting-to-production.html
+    - page: Rollback changes
+      url: /chapters/rollback-changes.html
+    - page: Deploying only updated services
+      url: /chapters/deploying-only-updated-services.html
+
+observability:
+  title: Observability
+  chapters:
+    - page: Tracing Serverless apps with X-Ray
+      url: /chapters/tracing-serverless-apps-with-x-ray.html
+
+best-practices-conclusion:
+  title: Conclusion
+  chapters:
+    - page: Wrapping up the best practices
+      url: /chapters/wrapping-up-the-best-practices.html
 
 extra-backend:
-  title: Backend
+  title: Serverless
   chapters:
     - page: API Gateway and Lambda Logs
       url: /chapters/api-gateway-and-lambda-logs.html
@@ -358,9 +367,32 @@ extra-backend:
     - page: Package Lambdas with serverless-bundle
       url: /chapters/package-lambdas-with-serverless-bundle.html
 
-extra-user-mgmt:
-  title: User Management
+extra-frontend:
+  title: React
   chapters:
+    - page: Understanding React Hooks
+      url: /chapters/understanding-react-hooks.html
+    - page: Code Splitting in Create React App
+      url: /chapters/code-splitting-in-create-react-app.html
+    - page: Environments in Create React App
+      url: /chapters/environments-in-create-react-app.html
+    - page: Deploying a React app to AWS
+      url: /chapters/deploying-a-react-app-to-aws.html
+      subchapters:
+        - page: Create an S3 bucket
+          url: /chapters/create-an-s3-bucket.html
+        - page: Deploy to S3
+          url: /chapters/deploy-to-s3.html
+        - page: Create a CloudFront distribution
+          url: /chapters/create-a-cloudfront-distribution.html
+        - page: Set up your domain with CloudFront
+          url: /chapters/setup-your-domain-with-cloudfront.html
+        - page: Set up www domain redirect
+          url: /chapters/setup-www-domain-redirect.html
+        - page: Set up SSL
+          url: /chapters/setup-ssl.html
+        - page: Deploy updates
+          url: /chapters/deploy-updates.html
     - page: Manage User Accounts in AWS Amplify
       url: /chapters/manage-user-accounts-in-aws-amplify.html
       subchapters:
@@ -370,13 +402,5 @@ extra-user-mgmt:
           url: /chapters/allow-users-to-change-passwords.html
         - page: Allow Users to Change Their Email
           url: /chapters/allow-users-to-change-their-email.html
-
-extra-frontend:
-  title: Frontend
-  chapters:
-    - page: Code Splitting in Create React App
-      url: /chapters/code-splitting-in-create-react-app.html
-    - page: Environments in Create React App
-      url: /chapters/environments-in-create-react-app.html
     - page: Facebook Login with Cognito using AWS Amplify
       url: /chapters/facebook-login-with-cognito-using-aws-amplify.html

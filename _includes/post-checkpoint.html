@@ -1,0 +1,48 @@
+{% if page.code %}
+{% capture chapter_name %}{{ page.id | replace: '/chapters/', '' }}{% endcapture %}
+
+{% if page.code == 'backend_full' %}
+{% capture repo_desc %}For reference, here is the complete code for the backend.{% endcapture %}
+{% elsif page.code == 'frontend_full' %}
+{% capture repo_desc %}For reference, here is the complete code for the frontend.{% endcapture %}
+{% else %}
+{% capture repo_desc %}For reference, here is the code we have so far.{% endcapture %}
+{% endif %}
+
+<div class="post-checkpoint">
+
+  <div class="header">
+    <i class="fa fa-map-marker" aria-hidden="true"></i>
+    <span>Checkpoint</span>
+  </div>
+  <p>{{ repo_desc }}</p>
+  {% if page.code == 'backend' %}
+    {% capture repo_url %}{{ site.backend_github_repo }}/tree/{{ chapter_name }}{% endcapture %}
+    {% capture repo_tag %}Backend Source :{{ chapter_name }}{% endcapture %}
+
+  {% elsif page.code == 'frontend' %}
+    {% capture repo_url %}{{ site.frontend_github_repo }}/tree/{{ chapter_name }}{% endcapture %}
+    {% capture repo_tag %}Frontend Source :{{ chapter_name }}{% endcapture %}
+
+  {% elsif page.code == 'backend_full' %}
+    {% capture repo_url %}{{ site.backend_github_repo }}{% endcapture %}
+    {% capture repo_tag %}Backend Source{% endcapture %}
+
+  {% elsif page.code == 'facebook-login' %}
+    {% capture repo_url %}{{ site.frontend_fb_login_github_repo }}{% endcapture %}
+    {% capture repo_tag %}Facebook Login Frontend Source{% endcapture %}
+
+  {% elsif page.code == 'user-management' %}
+    {% capture repo_url %}{{ site.frontend_user_mgmt_github_repo }}{% endcapture %}
+    {% capture repo_tag %}User Management Frontend Source{% endcapture %}
+
+  {% elsif page.code == 'frontend_full' %}
+    {% capture repo_url %}{{ site.frontend_github_repo }}{% endcapture %}
+    {% capture repo_tag %}Frontend Source{% endcapture %}
+  {% endif %}
+  <a target="_blank" href="{{ repo_url }}">
+    <i class="fa fa-github" aria-hidden="true"></i>
+    {{ repo_tag }}
+  </a>
+</div>
+{% endif %}

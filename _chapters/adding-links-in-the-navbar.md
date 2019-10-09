@@ -11,10 +11,10 @@ comments_id: adding-links-in-the-navbar/141
 
 Now that we have our first route set up, let's add a couple of links to the navbar of our app. These will direct users to login or signup for our app when they first visit it.
 
-<img class="code-marker" src="/assets/s.png" />Replace the `render` method in `src/App.js` with the following.
+<img class="code-marker" src="/assets/s.png" />Replace the `App` function component in `src/App.js` with the following.
 
 ``` coffee
-render() {
+function App(props) {
   return (
     <div className="App container">
       <Navbar fluid collapseOnSelect>
@@ -68,10 +68,10 @@ $ npm install react-router-bootstrap --save
 import { LinkContainer } from "react-router-bootstrap";
 ```
 
-<img class="code-marker" src="/assets/s.png" />We will now wrap our links with the `LinkContainer`. Replace the `render` method in your `src/App.js` with this.
+<img class="code-marker" src="/assets/s.png" />We will now wrap our links with the `LinkContainer`. Replace the `App` function component in your `src/App.js` with this.
 
 ``` coffee
-render() {
+function App(props) {
   return (
     <div className="App container">
       <Navbar fluid collapseOnSelect>

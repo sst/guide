@@ -1,0 +1,124 @@
+<header class="lander-header" role="banner">
+
+  <div class="wrapper">
+
+    <div class="columns">
+      <div class="col1">
+        <h1 class="site-description">Learn to build full-stack Serverless apps</h1>
+
+        <h4 class="site-description-full">
+          Serverless Stack is a <a href="{{ site.github_repo }}">completely free resource</a> to help you build full-stack production ready Serverless applications. First, you'll learn how to build a <a href="https://demo2.serverless-stack.com">note taking app</a> using <a href="https://serverless.com">Serverless</a> and <a href="https://reactjs.org">React</a> on <a href="https://aws.amazon.com">AWS</a>. Then you'll learn the best practices to run your app in production.
+        </h4>
+
+        <div class="controls">
+          <a class="button" href="#download-pdf">Download PDF</a>
+          <a class="button" href="#table-of-contents">Start learning</a>
+        </div>
+      </div>
+
+      <div class="col2">
+        <div class="certificate tilt">
+          <div class="wreath"></div>
+          <div class="border">
+            <p class="title">Serverless Stack Certificate</p>
+            <div class="separator"></div>
+            <ul>
+              <li>
+                <span class="icon">
+                  <i class="fa fa-pencil fa-inverse"></i>
+                </span>
+                Build your first Serverless app
+              </li>
+              <li>
+                <span class="icon">
+                  <i class="fa fa-rocket fa-inverse"></i>
+                </span>
+                Deploy your app to production
+              </li>
+              <li>
+                <span class="icon">
+                  <i class="fa fa-shield fa-inverse"></i>
+                </span>
+                Learn Serverless best practices
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</header>
+
+<div id="readers" class="readers">
+
+  <p class="readers-desc">
+    Our readers are from some of the biggest companies in the world
+  </p>
+
+  <div class="readers-list">
+    <ul class="logos">
+      <li class=""><img src="/assets/readers/ibm.svg" /></li>
+      <li class=""><img src="/assets/readers/intel.svg" /></li>
+      <li class=""><img src="/assets/readers/microsoft.svg" /></li>
+      <li class=""><img src="/assets/readers/amazon.svg" /></li>
+      <li class="tall"><img src="/assets/readers/hp.svg" /></li>
+      <li class="tall"><img src="/assets/readers/cisco.svg" /></li>
+      <li class="tall"><img src="/assets/readers/dell.svg" /></li>
+      <li class=""><img src="/assets/readers/accenture.svg" /></li>
+      <li class="tall"><img src="/assets/readers/adobe.svg" /></li>
+      <li class=""><img src="/assets/readers/airbus.svg" /></li>
+      <li class=""><img src="/assets/readers/alibaba.svg" /></li>
+      <li class=""><img src="/assets/readers/autodesk.svg" /></li>
+      <li class="tall"><img src="/assets/readers/best-buy.svg" /></li>
+      <li class=""><img src="/assets/readers/cbs.svg" /></li>
+      <li class="tall"><img src="/assets/readers/emirates.svg" /></li>
+      <li class=""><img src="/assets/readers/exxon-mobil.svg" /></li>
+      <li class=""><img src="/assets/readers/fujifilm.svg" /></li>
+      <li class="tall"><img src="/assets/readers/hilton.svg" /></li>
+      <li class=""><img src="/assets/readers/nasdaq.svg" /></li>
+      <li class=""><img src="/assets/readers/new-york-times.svg" /></li>
+      <li class=""><img src="/assets/readers/nike.svg" /></li>
+      <li class="tall"><img src="/assets/readers/pwc.svg" /></li>
+      <li class=""><img src="/assets/readers/shaw.svg" /></li>
+      <li class=""><img src="/assets/readers/sky-bet.svg" /></li>
+      <li class=""><img src="/assets/readers/staples.svg" /></li>
+      <li class=""><img src="/assets/readers/tesco.svg" /></li>
+      <li class=""><img src="/assets/readers/twilio.svg" /></li>
+      <li class=""><img src="/assets/readers/verizon.svg" /></li>
+    </ul>
+  </div>
+</div>
+
+<div class="updates">
+  <p class="updates-desc">
+    Recent updates
+  </p>
+
+  <div class="section">
+    <div class="icon">
+      <i class="fa fa-flag" aria-hidden="true"></i>
+    </div>
+    <div class="copy">
+      <h6><a href="{% link _chapters/changelog.md %}#changes">{{ site.data.changelog.current.title }}</a></h6>
+      <p>{{ site.data.changelog.current.desc }}</p>
+      <a href="{% link _chapters/changelog.md %}">View all the past updates</a>
+    </div>
+  </div>
+</div>
+
+<div id="download-pdf" class="extras">
+  <div class="divider">
+  </div>
+  <div class="container">
+    <div class="newsletter">
+      {% include newsletter-form.html %}
+    </div>
+    <div class="share">
+      <p>Share this guide</p>
+      {% capture full_title %}{{ site.title }} - {{ site.description }}{% endcapture %}
+      {% include share-buttons.html url=site.url title=full_title %}
+    </div>
+  </div>
+</div>

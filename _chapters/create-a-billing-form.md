@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Create a Billing Form
-date: 2018-03-23 00:00:00
+date: 2017-01-31 12:00:00
 lang: en
 description: We will create a billing form in our React app using the Stripe React SDK. We will use the CardElement to let the user input their credit card details and call the createToken method to generate a token that we can pass to our serverless billing API.
 context: true
@@ -23,103 +23,84 @@ Next let's create our billing form component.
 
 {% raw %}
 ``` coffee
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import LoaderButton from "./LoaderButton";
+import { useFormFields } from "../libs/hooksLib";
 import "./BillingForm.css";
 
-class BillingForm extends Component {
-  constructor(props) {
-    super(props);
+function BillingForm({ isLoading, onSubmit, ...props }) {
+  const [fields, handleFieldChange] = useFormFields({
+    name: "",
+    storage: ""
+  });
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isCardComplete, setIsCardComplete] = useState(false);
 
-    this.state = {
-      name: "",
-      storage: "",
-      isProcessing: false,
-      isCardComplete: false
-    };
-  }
+  isLoading = isProcessing || isLoading;
 
-  validateForm() {
+  function validateForm() {
     return (
-      this.state.name !== "" &&
-      this.state.storage !== "" &&
-      this.state.isCardComplete
+      fields.name !== "" &&
+      fields.storage !== "" &&
+      isCardComplete
     );
   }
 
-  handleFieldChange = event => {
-    this.setState({
-      [event.target.id]: event.target.value
-    });
-  }
-
-  handleCardFieldChange = event => {
-    this.setState({
-      isCardComplete: event.complete
-    });
-  }
-
-  handleSubmitClick = async event => {
+  async function handleSubmitClick(event) {
     event.preventDefault();
 
-    const { name } = this.state;
+    setIsProcessing(true);
 
-    this.setState({ isProcessing: true });
+    const { token, error } = await props.stripe.createToken({ name: fields.name });
 
-    const { token, error } = await this.props.stripe.createToken({ name });
+    setIsProcessing(false);
 
-    this.setState({ isProcessing: false });
-
-    this.props.onSubmit(this.state.storage, { token, error });
+    onSubmit(fields.storage, { token, error });
   }
 
-  render() {
-    const loading = this.state.isProcessing || this.props.loading;
-
-    return (
-      <form className="BillingForm" onSubmit={this.handleSubmitClick}>
-        <FormGroup bsSize="large" controlId="storage">
-          <ControlLabel>Storage</ControlLabel>
-          <FormControl
-            min="0"
-            type="number"
-            value={this.state.storage}
-            onChange={this.handleFieldChange}
-            placeholder="Number of notes to store"
-          />
-        </FormGroup>
-        <hr />
-        <FormGroup bsSize="large" controlId="name">
-          <ControlLabel>Cardholder&apos;s name</ControlLabel>
-          <FormControl
-            type="text"
-            value={this.state.name}
-            onChange={this.handleFieldChange}
-            placeholder="Name on the card"
-          />
-        </FormGroup>
-        <ControlLabel>Credit Card Info</ControlLabel>
-        <CardElement
-          className="card-field"
-          onChange={this.handleCardFieldChange}
-          style={{
-            base: { fontSize: "18px", fontFamily: '"Open Sans", sans-serif' }
-          }}
+  return (
+    <form className="BillingForm" onSubmit={handleSubmitClick}>
+      <FormGroup bsSize="large" controlId="storage">
+        <ControlLabel>Storage</ControlLabel>
+        <FormControl
+          min="0"
+          type="number"
+          value={fields.storage}
+          onChange={handleFieldChange}
+          placeholder="Number of notes to store"
         />
-        <LoaderButton
-          block
-          bsSize="large"
-          type="submit"
-          text="Purchase"
-          isLoading={loading}
-          loadingText="Purchasing…"
-          disabled={!this.validateForm()}
+      </FormGroup>
+      <hr />
+      <FormGroup bsSize="large" controlId="name">
+        <ControlLabel>Cardholder&apos;s name</ControlLabel>
+        <FormControl
+          type="text"
+          value={fields.name}
+          onChange={handleFieldChange}
+          placeholder="Name on the card"
         />
-      </form>
-    );
-  }
+      </FormGroup>
+      <ControlLabel>Credit Card Info</ControlLabel>
+      <CardElement
+        className="card-field"
+        onChange={e => setIsCardComplete(e.complete)}
+        style={{
+          base: { fontSize: "18px", fontFamily: '"Open Sans", sans-serif' }
+        }}
+      />
+      <LoaderButton
+        block
+        type="submit"
+        bsSize="large"
+        isLoading={isLoading}
+        disabled={!validateForm()}
+      >
+        Purchase
+      </LoaderButton>
+    </form>
+  );
 }
 
 export default injectStripe(BillingForm);
@@ -128,17 +109,17 @@ export default injectStripe(BillingForm);
 
 Let's quickly go over what we are doing here:
 
-- To begin with we are going to wrap our component with a Stripe module using the `injectStripe` HOC. This gives our component access to the `this.props.stripe.createToken` method.
+- To begin with we are going to wrap our component with a Stripe module using the `injectStripe` HOC. This gives our component access to the `props.stripe.createToken` method.
 
-- As for the fields in our form, we have input field of type `number` that allows a user to enter the number of notes they want to store. We also take the name on the credit card. These are stored in the state through the `this.handleFieldChange` method.
+- As for the fields in our form, we have input field of type `number` that allows a user to enter the number of notes they want to store. We also take the name on the credit card. These are stored in the state through the `handleFieldChange` method that we get from our `useFormFields` custom React Hook.
 
 - The credit card number form is provided by the Stripe React SDK through the `CardElement` component that we import in the header.
 
-- The submit button has a loading state that is set to true when we call Stripe to get a token and when we call our billing API. However, since our Settings container is calling the billing API we use the `this.props.loading` to set the state of the button from the Settings container.
+- The submit button has a loading state that is set to true when we call Stripe to get a token and when we call our billing API. However, since our Settings container is calling the billing API we use the `props.isLoading` to set the state of the button from the Settings container.
 
 - We also validate this form by checking if the name, the number of notes, and the card details are complete. For the card details, we use the CardElement's `onChange` method.
 
-- Finally, once the user completes and submits the form we make a call to Stripe by passing in the credit card name and the credit card details (this is handled by the Stripe SDK). We call the `this.props.stripe.createToken` method and in return we get the token or an error back. We simply pass this and the number of notes to be stored to the settings page via the `this.props.onSubmit` method. We will be setting this up shortly.
+- Finally, once the user completes and submits the form we make a call to Stripe by passing in the credit card name and the credit card details (this is handled by the Stripe SDK). We call the `props.stripe.createToken` method and in return we get the token or an error back. We simply pass this and the number of notes to be stored to the settings page via the `onSubmit` method. We will be setting this up shortly.
 
 You can read more about how to use the [React Stripe Elements here](https://github.com/stripe/react-stripe-elements).
 
@@ -161,15 +142,6 @@ Also, let's add some styles to the card field so it matches the rest of our UI.
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
   border-color: #66AFE9;
 }
-```
-
-### Commit the Changes
-
-<img class="code-marker" src="/assets/s.png" />Let's quickly commit these to Git.
-
-``` bash
-$ git add .
-$ git commit -m "Adding a billing form"
 ```
 
 Next we'll plug our form into the settings page.

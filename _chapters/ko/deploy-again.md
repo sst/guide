@@ -5,7 +5,6 @@ date: 2017-02-14 00:00:00
 lang: ko 
 description: S3 및 CloudFront에서 호스팅되는 React.js 앱에 업데이트를 배포하려면 S3에 앱을 업로드하고 CloudFront 캐시를 무효화해야합니다. AWS CLI에서 “aws cloudfront create-invalidation” 명령을 사용하여 이 작업을 수행 할 수 있습니다. “npm run deploy”를 실행하여 이러한 단계를 자동화하려면 이 명령을 추가하여 package.json에 사전 배포, 배포 및 사후 배포를 수행합니다.
 context: true
-code: frontend_part1
 comments_id: deploy-again/138
 ref: deploy-again
 ---

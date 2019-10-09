@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Connect the Billing Form
-date: 2018-03-24 00:00:00
+date: 2017-01-31 18:00:00
 lang: en
 description: To add our Stripe billing form to our React app container we need to wrap it inside a StripeProvider component. We also need to include Stripe.js in our HTML page.
 context: true
@@ -19,45 +19,43 @@ Let's start by including Stripe.js in our HTML.
 <script src="https://js.stripe.com/v3/"></script>
 ```
 
-<img class="code-marker" src="/assets/s.png" />Replace our `render` method in `src/containers/Settings.js` with this.
+<img class="code-marker" src="/assets/s.png" />Replace our `return` statement in `src/containers/Settings.js` with this.
 
 ``` coffee
-handleFormSubmit = async (storage, { token, error }) => {
+async function handleFormSubmit(storage, { token, error }) {
   if (error) {
     alert(error);
     return;
   }
 
-  this.setState({ isLoading: true });
+  setIsLoading(true);
 
   try {
-    await this.billUser({
+    await billUser({
       storage,
       source: token.id
     });
 
     alert("Your card has been charged successfully!");
-    this.props.history.push("/");
+    props.history.push("/");
   } catch (e) {
     alert(e);
-    this.setState({ isLoading: false });
+    setIsLoading(false);
   }
 }
 
-render() {
-  return (
-    <div className="Settings">
-      <StripeProvider apiKey={config.STRIPE_KEY}>
-        <Elements>
-          <BillingForm
-            loading={this.state.isLoading}
-            onSubmit={this.handleFormSubmit}
-          />
-        </Elements>
-      </StripeProvider>
-    </div>
-  );
-}
+return (
+  <div className="Settings">
+    <StripeProvider apiKey={config.STRIPE_KEY}>
+      <Elements>
+        <BillingForm
+          isLoading={isLoading}
+          onSubmit={handleFormSubmit}
+        />
+      </Elements>
+    </StripeProvider>
+  </div>
+);
 ```
 
 <img class="code-marker" src="/assets/s.png" />And add the following to the header.
@@ -69,7 +67,7 @@ import config from "../config";
 import "./Settings.css";
 ```
 
-We are adding the `BillingForm` component that we previously created here and passing in the `loading` and `onSubmit` prop that we referenced in the last chapter. In the `handleFormSubmit` method, we are checking if the Stripe method from the last chapter returned an error. And if things looked okay then we call our billing API and redirect to the home page after letting the user know.
+We are adding the `BillingForm` component that we previously created here and passing in the `isLoading` and `onSubmit` prop that we referenced in the previous chapter. In the `handleFormSubmit` method, we are checking if the Stripe method returned an error. And if things looked okay then we call our billing API and redirect to the home page after letting the user know.
 
 An important detail here is about the `StripeProvider` and the `Elements` component that we are using. The `StripeProvider` component let's the Stripe SDK know that we want to call the Stripe methods using `config.STRIPE_KEY`. And it needs to wrap around at the top level of our billing form. Similarly, the `Elements` component needs to wrap around any component that is going to be using the `CardElement` Stripe component.
 
@@ -106,13 +104,8 @@ If everything is set correctly, you should see the success message and you'll be
 
 ![Settings screen billing success screenshot](/assets/part2/settings-screen-billing-success.png)
 
-### Commit the Changes
+Now with our app nearly complete, we'll look at securing some the pages of our app that require a login. Currently if you visit a note page while you are logged out, it throws an ugly error.
 
-<img class="code-marker" src="/assets/s.png" />Let's quickly commit these to Git.
+![Note page logged out error screenshot](/assets/note-page-logged-out-error.png)
 
-``` bash
-$ git add .
-$ git commit -m "Connecting the billing form"
-```
-
-Next, we'll set up automatic deployments for our React app using a service called [Netlify](https://www.netlify.com). This will be fairly similar to what we did for our serverless backend API.
+Instead, we would like it to redirect us to the login page and then redirect us back after we login. Let's look at how to do that next.

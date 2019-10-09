@@ -19,7 +19,7 @@ ref: configure-secrets-in-seed
 
 ![dev env 변수 설정 화면](/assets/part2/show-dev-env-variables-settings.png)
 
-그리고 **Key**로 `stripeSecretKey`를 입력하고 그 값은 [env.yml에서 비밀 키 불러오기]({% link _chapters/load-secrets-from-env-yml.md %}) 챕터의 `STRIPE_TEST_SECRET_KEY` 값을 입력합니다. 비밀 키를 저장하려면 **추가**를 누르십시오.
+그리고 **Key**로 `stripeSecretKey`를 입력하고 그 값은 [env.yml에서 비밀 키 불러오기]({% link _chapters/load-secrets-from-env.md %}) 챕터의 `STRIPE_TEST_SECRET_KEY` 값을 입력합니다. 비밀 키를 저장하려면 **추가**를 누르십시오.
 
 ![dev 환경 변수로 비밀 키 추가 화면](/assets/part2/add-secret-dev-environment-variable.png)
 
@@ -31,7 +31,7 @@ ref: configure-secrets-in-seed
 
 ![Show prod env 변수 설정 화면](/assets/part2/show-prod-env-variables-settings.png)
 
-그리고 **Key**로 `stripeSecretKey`를 입력하고 그 값은 [env.yml에서 비밀 키 불러오기]({% link _chapters/load-secrets-from-env-yml.md %}) 챕터의 `STRIPE_PROD_SECRET_KEY` 값을 입력합니다. 비밀 키를 저장하려면 **추가**를 누르십시오.
+그리고 **Key**로 `stripeSecretKey`를 입력하고 그 값은 [env.yml에서 비밀 키 불러오기]({% link _chapters/load-secrets-from-env.md %}) 챕터의 `STRIPE_PROD_SECRET_KEY` 값을 입력합니다. 비밀 키를 저장하려면 **추가**를 누르십시오.
 
 ![prod 환경 변수로 비밀 키 추가 화면](/assets/part2/add-secret-prod-environment-variable.png)
 

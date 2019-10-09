@@ -53,9 +53,19 @@ layout: default
         {{ content }}
       </div>
 
+      {% include post-checkpoint.html %}
+
       {% include post-footer.html page_en_url=page_en_url %}
 
-      {% include post-links.html %}
+      <div class="post-links">
+
+        <p>For help and discussion</p>
+        <a target="_blank" href="{{ site.forum_url }}{{ site.forum_thread_prefix }}{{ page.comments_id }}">
+          <i class="fa fa-comments" aria-hidden="true"></i>
+          Comments on this chapter
+        </a>
+
+      </div>
 
       <div class="post-closing">
         <p>If you liked this post, please <a target="_blank" href="{{ site.newsletter_signup_form }}">subscribe to our newsletter</a>, <a target="_blank" href="{{ site.github_repo }}">give us a star on GitHub</a>, and <a target="_blank" href="{{ site.twitter_url }}">follow us on Twitter</a>.</p>

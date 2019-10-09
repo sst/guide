@@ -15,16 +15,15 @@ Amplify gives us a way to get the current user session using the `Auth.currentSe
 
 ### Load User Session
 
-Let's load this when our app loads. We are going to do this in `componentDidMount`. Since `Auth.currentSession()` returns a promise, it means that we need to ensure that the rest of our app is only ready to go after this has been loaded.
+Let's load this when our app loads. To do this we are going to use another React hook, called [useEffect](https://reactjs.org/docs/hooks-effect.html). Since `Auth.currentSession()` returns a promise, it means that we need to ensure that the rest of our app is only ready to go after this has been loaded.
 
-<img class="code-marker" src="/assets/s.png" />To do this, let's add a flag to our `src/App.js` state called `isAuthenticating`. The initial state in our `constructor` should look like the following.
+<img class="code-marker" src="/assets/s.png" />To do this, let's add another state variable to our `src/App.js` state called `isAuthenticating`. Add it to the top of our `App` function.
 
 ``` javascript
-this.state = {
-  isAuthenticated: false,
-  isAuthenticating: true
-};
+const [isAuthenticating, setIsAuthenticating] = useState(true);
 ```
+
+We start with the value set to `true` because as we first load our app, it'll start by checking the current authentication state.
 
 <img class="code-marker" src="/assets/s.png" />Let's include the `Auth` module by adding the following to the header of `src/App.js`.
 
@@ -32,13 +31,17 @@ this.state = {
 import { Auth } from "aws-amplify";
 ```
 
-<img class="code-marker" src="/assets/s.png" />Now to load the user session we'll add the following to our `src/App.js` below our `constructor` method.
+<img class="code-marker" src="/assets/s.png" />Now to load the user session we'll add the following to our `src/App.js` right below our variable declarations.
 
 ``` javascript
-async componentDidMount() {
+useEffect(() => {
+  onLoad();
+}, []);
+
+async function onLoad() {
   try {
     await Auth.currentSession();
-    this.userHasAuthenticated(true);
+    userHasAuthenticated(true);
   }
   catch(e) {
     if (e !== 'No current user') {
@@ -46,11 +49,41 @@ async componentDidMount() {
     }
   }
 
-  this.setState({ isAuthenticating: false });
+  setIsAuthenticating(false);
 }
 ```
 
-All this does is load the current session. If it loads, then it updates the `isAuthenticating` flag once the process is complete. The `Auth.currentSession()` method throws an error `No current user` if nobody is currently logged in. We don't want to show this error to users when they load up our app and are not signed in.
+Let's understand how this and the `useEffect` hook works.
+
+The `useEffect` hook take a function and an array of variables. The function will be called every time the component is rendered. And the array of variables tell React to only re-run our function if the passed in array of variables have changed. This allows us to control when our function gets run. This has some neat consequences:
+
+1. If we don't pass in an array of variables, our hook get's executed everytime our component is rendered.
+2. If we pass in some variables, on every render React will first check if those variables have changed, before running our function.
+3. If we pass in an empty list of variables, then it'll only run our function on the FIRST render.
+
+In our case, we only want to check the user's authentication state when our app first loads. So we'll use the third option; just pass in an empty list of variables — `[]`.
+
+When our app first loads, it'll run the `onLoad` function. All this does is load the current session. If it loads, then it updates the `isAuthenticating` state variable once the process is complete. It does so by calling `setIsAuthenticating(false)`. The `Auth.currentSession()` method throws an error `No current user` if nobody is currently logged in. We don't want to show this error to users when they load up our app and are not signed in. Once `Auth.currentSession()` runs successfully, we call `userHasAuthenticated(true)` to set that the user is logged in.
+
+So the top of our `App` function should now look like this:
+
+``` javascript
+function App(props) {
+  const [isAuthenticating, setIsAuthenticating] = useState(true);
+  const [isAuthenticated, userHasAuthenticated] = useState(false);
+
+  useEffect(() => {
+    onLoad();
+  }, []);
+
+  ...
+```
+
+<img class="code-marker" src="/assets/s.png" />Let's make sure to include the `useEffect` hook by replacing the React import in the header of `src/App.js` with:
+
+``` javascript
+import React, { useState, useEffect } from "react";
+```
 
 ### Render When the State Is Ready
 
@@ -58,46 +91,41 @@ Since loading the user session is an asynchronous process, we want to ensure tha
 
 We'll conditionally render our app based on the `isAuthenticating` flag.
 
-<img class="code-marker" src="/assets/s.png" />Our `render` method in `src/App.js` should be as follows.
+<img class="code-marker" src="/assets/s.png" />Our `return` statement in `src/App.js` should be as follows.
 
+{% raw %}
 ``` coffee
-render() {
-  const childProps = {
-    isAuthenticated: this.state.isAuthenticated,
-    userHasAuthenticated: this.userHasAuthenticated
-  };
-
-  return (
-    !this.state.isAuthenticating &&
-    <div className="App container">
-      <Navbar fluid collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Link to="/">Scratch</Link>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav pullRight>
-            {this.state.isAuthenticated
-              ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
-              : <Fragment>
-                  <LinkContainer to="/signup">
-                    <NavItem>Signup</NavItem>
-                  </LinkContainer>
-                  <LinkContainer to="/login">
-                    <NavItem>Login</NavItem>
-                  </LinkContainer>
-                </Fragment>
-            }
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-      <Routes childProps={childProps} />
-    </div>
-  );
-}
+return (
+  !isAuthenticating &&
+  <div className="App container">
+    <Navbar fluid collapseOnSelect>
+      <Navbar.Header>
+        <Navbar.Brand>
+          <Link to="/">Scratch</Link>
+        </Navbar.Brand>
+        <Navbar.Toggle />
+      </Navbar.Header>
+      <Navbar.Collapse>
+        <Nav pullRight>
+          {isAuthenticated
+            ? <NavItem onClick={handleLogout}>Logout</NavItem>
+            : <>
+                <LinkContainer to="/signup">
+                  <NavItem>Signup</NavItem>
+                </LinkContainer>
+                <LinkContainer to="/login">
+                  <NavItem>Login</NavItem>
+                </LinkContainer>
+              </>
+          }
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+    <Routes appProps={{ isAuthenticated, userHasAuthenticated }} />
+  </div>
+);
 ```
+{% endraw %}
 
 Now if you head over to your browser and refresh the page, you should see that a user is logged in.
 

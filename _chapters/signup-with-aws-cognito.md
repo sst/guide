@@ -9,45 +9,43 @@ context: true
 comments_id: signup-with-aws-cognito/130
 ---
 
-Now let's go ahead and implement the `handleSubmit` and `handleConfirmationSubmit` methods and connect it up with our AWS Cognito setup.
+Now let's go ahead and implement the `handleSubmit` and `handleConfirmationSubmit` functions and connect it up with our AWS Cognito setup.
 
-<img class="code-marker" src="/assets/s.png" />Replace our `handleSubmit` and `handleConfirmationSubmit` methods in `src/containers/Signup.js` with the following.
+<img class="code-marker" src="/assets/s.png" />Replace our `handleSubmit` and `handleConfirmationSubmit` functions in `src/containers/Signup.js` with the following.
 
 ``` javascript
-handleSubmit = async event => {
+async function handleSubmit(event) {
   event.preventDefault();
 
-  this.setState({ isLoading: true });
+  setIsLoading(true);
 
   try {
     const newUser = await Auth.signUp({
-      username: this.state.email,
-      password: this.state.password
+      username: fields.email,
+      password: fields.password
     });
-    this.setState({
-      newUser
-    });
+    setIsLoading(false);
+    setNewUser(newUser);
   } catch (e) {
     alert(e.message);
+    setIsLoading(false);
   }
-
-  this.setState({ isLoading: false });
 }
 
-handleConfirmationSubmit = async event => {
+async function handleConfirmationSubmit(event) {
   event.preventDefault();
 
-  this.setState({ isLoading: true });
+  setIsLoading(true);
 
   try {
-    await Auth.confirmSignUp(this.state.email, this.state.confirmationCode);
-    await Auth.signIn(this.state.email, this.state.password);
+    await Auth.confirmSignUp(fields.email, fields.confirmationCode);
+    await Auth.signIn(fields.email, fields.password);
 
-    this.props.userHasAuthenticated(true);
-    this.props.history.push("/");
+    props.userHasAuthenticated(true);
+    props.history.push("/");
   } catch (e) {
     alert(e.message);
-    this.setState({ isLoading: false });
+    setIsLoading(false);
   }
 }
 ```
@@ -62,7 +60,7 @@ The flow here is pretty simple:
 
 1. In `handleSubmit` we make a call to signup a user. This creates a new user object.
 
-2. Save that user object to the state as `newUser`.
+2. Save that user object to the state using `setNewUser`.
 
 3. In `handleConfirmationSubmit` use the confirmation code to confirm the user.
 
@@ -70,7 +68,7 @@ The flow here is pretty simple:
 
 5. Use the email and password to authenticate exactly the same way we did in the login page.
 
-6. Update the App's state using the `userHasAuthenticated` method.
+6. Update the App's state using the `userHasAuthenticated` function.
 
 7. Finally, redirect to the homepage.
 
@@ -80,7 +78,7 @@ Now if you were to switch over to your browser and try signing up for a new acco
 
 A quick note on the signup flow here. If the user refreshes their page at the confirm step, they won't be able to get back and confirm that account. It forces them to create a new account instead. We are keeping things intentionally simple but here are a couple of hints on how to fix it.
 
-1. Check for the `UsernameExistsException` in the `handleSubmit` method's `catch` block.
+1. Check for the `UsernameExistsException` in the `handleSubmit` function's `catch` block.
 
 2. Use the `Auth.resendSignUp()` method to resend the code if the user has not been previously confirmed. Here is a link to the [Amplify API docs](https://aws.github.io/aws-amplify/api/classes/authclass.html#resendsignup).
 

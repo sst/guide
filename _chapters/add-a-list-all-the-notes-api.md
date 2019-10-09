@@ -6,7 +6,6 @@ lang: en
 ref: add-a-list-all-the-notes-api
 description: To allow users to retrieve their notes in our note taking app, we are going to add a list note GET API. To do this we will add a new Lambda function to our Serverless Framework project. The Lambda function will retrieve all the user’s notes from the DynamoDB table.
 context: true
-code: backend
 comments_id: add-a-list-all-the-notes-api/147
 ---
 
@@ -22,7 +21,7 @@ import { success, failure } from "./libs/response-lib";
 
 export async function main(event, context) {
   const params = {
-    TableName: "notes",
+    TableName: process.env.tableName,
     // 'KeyConditionExpression' defines the condition for the query
     // - 'userId = :userId': only return items with matching 'userId'
     //   partition key

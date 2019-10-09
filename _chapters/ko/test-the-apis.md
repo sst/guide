@@ -6,7 +6,6 @@ description: IAM 및 Cognito 사용자 풀을 사용하여 인증 요청이 반�
 lang: ko
 ref: test-the-apis
 context: true
-code: backend_part1
 comments_id: comments-for-test-the-apis/122
 ---
 

@@ -4,6 +4,7 @@ title: Frontend Workflow
 date: 2018-03-29 00:00:00
 lang: en
 description: There are three steps that are a part of workflow for a Create React App configured with Netlify. To work on new features create a new branch and enable branch deployments. And merge to master to deploy to production. Finally, publish an old deployment through the Netlify console to rollback in production.
+redirect_from: /chapters/update-the-app.html
 ref: frontend-workflow
 comments_id: frontend-workflow/192
 code: frontend_full
@@ -23,16 +24,18 @@ $ git checkout -b "new-feature"
 
 This creates a new branch for us called `new-feature`.
 
-Let's make a faulty commit just so we can go over the process of rolling back as well.
+Let's make a couple of quick changes to test the process of deploying updates to our app.
 
-<img class="code-marker" src="/assets/s.png" />Replace the `renderLander` method in `src/containers/Home.js` with the following.
+We are going to add a Login and Signup button to our lander to give users a clear call to action.
+
+<img class="code-marker" src="/assets/s.png" />To do this update our `renderLander` function in `src/containers/Home.js`.
 
 ``` coffee
-renderLander() {
+function renderLander() {
   return (
     <div className="lander">
       <h1>Scratch</h1>
-      <p>A very expensive note taking app</p>
+      <p>A simple note taking app</p>
       <div>
         <Link to="/login" className="btn btn-info btn-lg">
           Login
@@ -46,11 +49,32 @@ renderLander() {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />And commit this change to Git.
+<img class="code-marker" src="/assets/s.png" />And import the `Link` component from React-Router in the header.
+
+``` javascript
+import { Link } from "react-router-dom";
+```
+
+<img class="code-marker" src="/assets/s.png" />Also, add a couple of styles to `src/containers/Home.css`.
+
+``` css
+.Home .lander div {
+  padding-top: 20px;
+}
+.Home .lander div a:first-child {
+  margin-right: 20px;
+}
+```
+
+And our lander should look something like this.
+
+![App updated lander screenshot](/assets/app-updated-lander.png)
+
+<img class="code-marker" src="/assets/s.png" />Let's commit these changes to Git.
 
 ``` bash
 $ git add .
-$ git commit -m "Committing a typo"
+$ git commit -m "Updating the lander"
 ```
 
 ### Create a Branch Deployment
@@ -113,47 +137,10 @@ Click on the older production deployment.
 
 ![Click on old production deployment screenshot](/assets/part2/click-on-old-production-deployment.png)
 
-And hit **Publish deploy**.
+And hit **Publish deploy**. This will publish our previous version again.
 
 ![Publish old production deployment screenshot](/assets/part2/publish-old-production-deployment.png)
 
-This will publish our previous version again.
-
-![Old production deploy is live screenshot](/assets/part2/old-production-deploy-is-live.png)
-
 And that's it! Now you have an automated workflow for building and deploying your Create React App with serverless.
 
-### Cleanup
-
-Let's quickly cleanup our changes.
-
-<img class="code-marker" src="/assets/s.png" />Replace the `renderLander` method in `src/containers/Home.js` with the original.
-
-``` coffee
-renderLander() {
-  return (
-    <div className="lander">
-      <h1>Scratch</h1>
-      <p>A simple note taking app</p>
-      <div>
-        <Link to="/login" className="btn btn-info btn-lg">
-          Login
-        </Link>
-        <Link to="/signup" className="btn btn-success btn-lg">
-          Signup
-        </Link>
-      </div>
-    </div>
-  );
-}
-```
-
-<img class="code-marker" src="/assets/s.png" />Commit these changes and push them by running the following.
-
-``` bash
-$ git add .
-$ git commit -m "Fixing a typo"
-$ git push
-```
-
-This will create a new deployment to live! Let's wrap up the guide next.
+Let's wrap up the guide next.

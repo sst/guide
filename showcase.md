@@ -6,6 +6,12 @@ description: Serverless Stack is used to build all kinds of apps, from SaaS serv
 
 [Serverless Stack](/) is used to build all kinds of apps, from SaaS services to weekend projects. Here are just a few apps that our readers have built. If you'd like to share your project, just [**send us an email with a link and a short description**](mailto:{{ site.email }}?subject=Built%20with%20Serverless%20Stack).
 
+#### [Spendwise](https://spendwise.io)
+
+[Spendwise](https://spendwise.io) is a complete finance management tool that helps you track your incomes, expenses, debts, budgets and more! Created by [Mohsin](https://twitter.com/spendwise_io).
+
+![Spendwise screenshot](/assets/showcase/spendwise.png)
+
 #### [QuickNote](https://quicknote.io/)
 
 [QuickNote](https://quicknote.io) is a simple anonymous note-taking app built by [Manuel Frigerio](https://twitter.com/@mnlfrgr). It was built in two days and Manuel [wrote about his motivation and experience here](https://manuel.friger.io/blog/quicknote). 
