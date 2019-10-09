@@ -5,7 +5,6 @@ date: 2017-02-04 00:00:00
 lang: en
 description: To make sure that our React.js redirects a user to the right page after they login, we are going to use the React Router v4 Redirect component.
 code: backend
-context: true
 comments_id: redirect-on-login/24
 ref: redirect-on-login
 ---

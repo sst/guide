@@ -3,7 +3,6 @@ layout: post
 title: Manage User Accounts in AWS Amplify
 description: In the next series of chapters we will look at how to manage user accounts for our Serverless React app with Cognito and AWS Amplify.
 date: 2018-04-13 00:00:00
-context: true
 code: user-management
 comments_id: manage-user-accounts-in-aws-amplify/505
 ---

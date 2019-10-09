@@ -3,7 +3,6 @@ layout: post
 title: Handle Forgot and Reset Password
 description: Use the AWS Amplify Auth.forgotPassword method to support forgot password functionality in our Serverless React app. This triggers Cognito to help our users reset their password.
 date: 2018-04-14 00:00:00
-context: true
 code: user-management
 comments_id: handle-forgot-and-reset-password/506
 ---

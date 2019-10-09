@@ -5,7 +5,6 @@ date: 2016-12-25 00:00:00
 lang: en
 ref: create-an-aws-account
 description: To create a serverless app using Lambda we are going to first need to create an AWS (Amazon Web Services) account.
-context: true
 comments_id: create-an-aws-account/88
 ---
 

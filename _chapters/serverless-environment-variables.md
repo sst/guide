@@ -3,7 +3,6 @@ layout: post
 title: Serverless Environment Variables
 description: To set environment variables for AWS Lambda using the Serverless Framework we need to use the "environment:" option in the serverless.yml. Serverless Framework also allows you to further configure them using custom variables.
 date: 2018-04-05 00:00:00
-context: true
 comments_id: serverless-environment-variables/25
 ---
 

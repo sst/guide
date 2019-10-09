@@ -6,7 +6,6 @@ lang: en
 ref: create-an-s3-bucket-for-file-uploads
 description: To allow users to upload files to our serverless app we are going to use Amazon S3 (Simple Storage Service). S3 allows you to store files and organize them into buckets. We are going to create an S3 bucket and enable CORS (cross-origin resource sharing) to ensure that our React.js app can upload files to it.
 redirect_from: /chapters/create-a-s3-bucket-for-file-uploads.html
-context: true
 comments_id: create-an-s3-bucket-for-file-uploads/150
 ---
 

@@ -3,7 +3,6 @@ layout: post
 title: Cross-Stack References in Serverless
 description: AWS CloudFormation allows us to link multiple Serverless services using cross-stack references. A cross-stack reference consists of an "Export" and "Fn::ImportValue". Cross-stack references are useful for tracking the dependencies between Serverless services.
 date: 2018-04-02 13:00:00
-context: true
 comments_id: cross-stack-references-in-serverless/405
 ---
 

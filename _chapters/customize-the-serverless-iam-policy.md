@@ -3,7 +3,6 @@ layout: post
 title: Customize the Serverless IAM Policy
 description: Serverless Framework deploys using the policy attached to the IAM credentials in your AWS CLI profile. To customize the IAM Policy used, access can be restricted to the services that Serverless Framework needs, and to the project that is being deployed.
 date: 2018-04-08 00:00:00
-context: true
 comments_id: customize-the-serverless-iam-policy/18
 ---
 

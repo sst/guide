@@ -5,7 +5,6 @@ date: 2017-01-05 12:00:00
 lang: en
 ref: cognito-user-pool-vs-identity-pool
 description: Amazon Cognito User Pool is a service that helps manage your users and the sign-up and sign-in functionality for your mobile or web app. Cognito Identity Pool or Cognito Federated Identities is a service that uses identity providers (like Google, Facebook, or Cognito User Pool) to secure access to other AWS resources.
-context: true
 comments_id: cognito-user-pool-vs-identity-pool/146
 ---
 

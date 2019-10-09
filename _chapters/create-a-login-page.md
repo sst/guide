@@ -5,7 +5,6 @@ date: 2017-01-13 00:00:00
 lang: en
 comments_id: create-a-login-page
 description: We are going to add a login page to our React.js app. To create the login form we are using the FormGroup and FormControl React-Bootstrap components.
-context: true
 comments_id: create-a-login-page/71
 ---
 

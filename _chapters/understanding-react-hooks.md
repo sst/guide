@@ -3,7 +3,6 @@ layout: post
 title: Understanding React Hooks
 description: Transitioning from Class components in React to using function components with React Hooks can be a little tricky. In this post we go over the React lifecycle and help you develop a simple mental model for understanding React Hooks. 
 date: 2018-04-16 12:00:00
-context: true
 comments_id: understanding-react-hooks/1338
 ---
 

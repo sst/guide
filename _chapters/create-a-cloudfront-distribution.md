@@ -4,7 +4,6 @@ title: Create a CloudFront Distribution
 date: 2017-02-08 00:00:00
 lang: en
 description: To server out our React.js app hosted on Amazon S3 through a CDN we are going to use CloudFront. We will create a CloudFront Distribution and point it to our S3 Bucket. We are also going to enable Gzip compression using the “Compress Objects Automatically” setting in the AWS console. And to ensure that our React.js app responds with the right HTTP headers, we will create a Custom Error Response.
-context: true
 comments_id: create-a-cloudfront-distribution/104
 ref: create-a-cloudfront-distribution
 ---

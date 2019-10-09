@@ -3,7 +3,6 @@ layout: post
 title: Package Lambdas with serverless-bundle
 description: The serverless-bundle plugin uses serverless-webpack to generate optimized Lambda function packages without you having to maintain any Webpack configs or plugins.
 date: 2018-04-12 12:00:00
-context: true
 comments_id: package-lambdas-with-serverless-bundle/1150
 ---
 

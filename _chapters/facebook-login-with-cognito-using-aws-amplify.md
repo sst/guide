@@ -3,7 +3,6 @@ layout: post
 title: Facebook Login with Cognito using AWS Amplify
 description: To allow your users to login using Facebook to your Serverless React app, use the AWS Amplify Auth.federatedSignIn method and Cognito Identity Pool.
 date: 2018-04-19 00:00:00
-context: true
 code: facebook-login
 comments_id: facebook-login-with-cognito-using-aws-amplify/466
 ---

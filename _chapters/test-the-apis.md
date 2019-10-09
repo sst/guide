@@ -5,7 +5,6 @@ date: 2017-01-05 18:00:00
 lang: en
 ref: test-the-apis
 description: To test a serverless backend API secured using IAM and Cognito User Pool you need to follow a few steps. First, generate a user token by authenticating with the User Pool. Then use the user token to get a set of temporary IAM credentials using the Identity Pool. Finally, sign the API request using the IAM credentials using Signature Version 4 and make the request. To simplify this process we are going to use the “aws-api-gateway-cli-test” tool.
-context: true
 comments_id: comments-for-test-the-apis/122
 ---
 

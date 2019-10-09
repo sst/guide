@@ -5,7 +5,6 @@ date: 2017-02-02 00:00:00
 lang: en
 redirect_from: /chapters/create-a-hoc-that-checks-auth.html
 description: In our React.js app we want to redirect users to the login page if they are not logged in and redirect them away from the login page if they are logged in. To do so we are going to use the Redirect component from React Router v4.
-context: true
 comments_id: create-a-route-that-redirects/47
 ref: create-a-route-that-redirects
 ---

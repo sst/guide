@@ -6,7 +6,6 @@ lang: en
 ref: add-support-for-es6-es7-javascript
 redirect_from: /chapters/add-support-for-es6-javascript.html
 description: AWS Lambda supports Node.js v8.10 and so to use ES import/exports in our Serverless Framework project we need to use Babel and Webpack 4 to transpile our code. We can do this by using the serverless-webpack plugin to our project. We will use the serverless-nodejs-starter to set this up for us.
-context: true
 comments_id: add-support-for-es6-es7-javascript/128
 ---
 

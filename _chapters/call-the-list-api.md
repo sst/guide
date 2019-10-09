@@ -4,7 +4,6 @@ title: Call the List API
 date: 2017-01-27 00:00:00
 lang: en
 description: To display a list of all of the user’s notes in our React.js app, we are going to make a GET request to our serverless API backend using the AWS Amplify API module. We are also going to use the ListGroup and ListGroupItem React-Bootstrap components to render the list.
-context: true
 comments_id: call-the-list-api/127
 ref: call-the-list-api
 ---

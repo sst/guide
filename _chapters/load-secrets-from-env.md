@@ -4,7 +4,6 @@ title: Load Secrets from .env
 date: 2018-03-08 00:00:00
 lang: en
 description: We should not store secret environment variables in our serverless.yml. For this we will use a .env file that will not be checked into source control. This file will be loaded automatically using the serverless-dotenv-plugin.
-context: true
 redirect_from: /chapters/load-secrets-from-env-yml.html
 ref: load-secrets-from-env-yml
 comments_id: load-secrets-from-env-yml/171

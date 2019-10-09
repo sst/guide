@@ -3,7 +3,6 @@ layout: post
 title: Allow Users to Change Their Email
 description: Use the AWS Amplify Auth.updateUserAttributes method to support change email functionality in our Serverless React app. This triggers Cognito to help our users change their email.
 date: 2018-04-16 00:00:00
-context: true
 code: user-management
 comments_id: allow-users-to-change-their-email/508
 ---

@@ -3,7 +3,6 @@ layout: post
 title: Allow Users to Change Passwords
 description: Use the AWS Amplify Auth.changePassword method to support change password functionality in our Serverless React app. This triggers Cognito to help our users change their password.
 date: 2018-04-15 00:00:00
-context: true
 code: user-management
 comments_id: allow-users-to-change-passwords/507
 ---

@@ -3,7 +3,6 @@ layout: post
 title: DynamoDB as a Serverless Service
 description: To use CloudFormation cross-stack references for DynamoDB in Serverless we need to "Export" the table name using the "Ref" and the ARN of the table using "Fn::GetAtt".
 date: 2018-04-02 14:00:00
-context: true
 comments_id: dynamodb-as-a-serverless-service/406
 ---
 

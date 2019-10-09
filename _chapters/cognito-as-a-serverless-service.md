@@ -3,7 +3,6 @@ layout: post
 title: Cognito as a Serverless Service
 description: To generate the Cognito Identity Pool IAM role dynamically across services in Serverless, we need to use cross-stack references and import them using the "Fn::ImportValue" CloudFormation function.
 date: 2018-04-02 17:00:00
-context: true
 comments_id: cognito-as-a-serverless-service/409
 ---
 

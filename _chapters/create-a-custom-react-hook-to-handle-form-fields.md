@@ -5,7 +5,6 @@ date: 2017-01-18 12:00:00
 lang: en
 ref: create-a-custom-react-hook-to-handle-form-fields
 description: In this chapter we are going to create a custom React Hook to make it easier to handle form fields in our React app.
-context: true
 comments_id: create-a-custom-react-hook-to-handle-form-fields/1316
 ---
 

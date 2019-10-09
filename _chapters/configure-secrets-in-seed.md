@@ -4,7 +4,6 @@ title: Configure Secrets in Seed
 lang: en
 date: 2018-03-13 00:00:00
 description: To automate our Serverless deployments with Seed (https://seed.run), we will need to set our secrets in the Seed console. Move the environment variables from your .env to the stage we are deploying to.
-context: true
 ref: configure-secrets-in-seed
 comments_id: configure-secrets-in-seed/176
 ---
