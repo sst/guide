@@ -334,7 +334,7 @@
  * Page content
  */
 .page-content {
-  padding: 1.5 * $spacing-unit 0 2 * $spacing-unit;
+  padding: 1.5 * $spacing-unit 0 $spacing-unit;
 
   @include media-query($on-palm) {
     padding: $spacing-unit - 5px 0;
