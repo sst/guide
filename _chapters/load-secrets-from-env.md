@@ -54,7 +54,7 @@ A quick explanation on the above:
 
 - This allows us to add a Lambda environment variables called `stripeSecretKey`. We do this using the `stripeSecretKey: ${env:STRIPE_SECRET_KEY}` line. And just like our `tableName` environment variable, we can reference it in our Lambda function using `process.env.stripeSecretKey`.
 
-Now we need to ensure that we don't commit our `env.yml` file to git. The starter project that we are using has the following in the `.gitignore`.
+Now we need to ensure that we don't commit our `.env` file to git. The starter project that we are using has the following in the `.gitignore`.
 
 ```
 # Env
