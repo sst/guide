@@ -3,7 +3,7 @@ layout: post
 title: Environments in Serverless Apps
 description: In this chapter, we are going to be looking at the best practices of configuring environments for your Serverless app. Serverless allows us to easily create new environments since it's completely pay per use. This makes it ideal for creating ephemeral environments for new features, bugfixes, or pull requests.
 date: 2019-09-30 00:00:00
-comments_id: 
+comments_id: environments-in-serverless-apps/1323
 ---
 
 In this section, we are going to be looking at the best practices of configuring environments for your Serverless app. But before we do that, let's quickly go over some of the concepts involved.

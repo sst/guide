@@ -3,7 +3,7 @@ layout: post
 title: Share Code Between Services
 description: In this chapter we look at how to share common code and config between services in your Serverless app. We'll look at how to structure the package.json and share config between multiple serverless.yml files.
 date: 2019-09-29 00:00:00
-comments_id: 
+comments_id: share-code-between-services/1333
 ---
 
 In the previous few chapters, we looked at how to organize all our infrastructure resources in one repo. In these next couple of chapters we'll look at how to organize all our business logic services (APIs) in the same repo. We'll start by attempting to answer the following questions:

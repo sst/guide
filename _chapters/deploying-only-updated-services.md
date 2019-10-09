@@ -3,7 +3,7 @@ layout: post
 title: Deploying Only Updated Services
 description: In this chapter we look at how to speed up deployments to our monorepo Serverless app by only redeploying the services that have been updated. We can do this by relying on the check Serverless Framework does. Or by looking at the Git log for the directories that have been updated.
 date: 2019-10-02 00:00:00
-comments_id: 
+comments_id: deploying-only-updated-services/1321
 ---
 
 Once you are repeatedly deploying your Serverless application, you might notice that the Serverless deployments are not very fast. This is especially true if your app has a ton of service. There are a couple of things you can do here to speed up your builds. One of them is to only deploy the services that've been updated.

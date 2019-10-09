@@ -3,7 +3,7 @@ layout: post
 title: Parameterize Serverless Resources Names
 description: When deploying your Serverless Framework app to multiple environments, we need to ensure the resource names do not thrash across environments. To do this we'll be parameterizing our resource names with the name of the stage we are deploying to.
 date: 2019-09-30 00:00:00
-comments_id: 
+comments_id: parameterize-serverless-resources-names/1329
 ---
 
 When deploying multiple environments, some into the same AWS account, some across multiple AWS accounts, we need to ensure the resource names do not thrash across environments. For example, in our `checkout-api` service, we have a Lambda function called `checkout`. Now, if two developers are working on two different features, one deploys to the `featureA` environment and one deploys to the `featureB` environment, and both environments reside in the `Dev` AWS account, only one environment can be successfully deployed. The second environment will get an error indicating that a Lambda function with the name `checkout` already exists.

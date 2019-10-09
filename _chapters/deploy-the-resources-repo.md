@@ -3,7 +3,7 @@ layout: post
 title: Deploy the Resources Repo
 description: In this chapter we'll deploy our demo resources GitHub repo of our Serverless app to multiple AWS environments. We'll be using Seed to manage our deployments and environments.
 date: 2019-10-08 00:00:00
-comments_id: 
+comments_id: deploy-the-resources-repo/1320
 ---
 
 First, add the resources repo on Seed. If you haven't yet, you can create a free account [here](https://console.seed.run/signup).

@@ -4,7 +4,7 @@ title: Understanding React Hooks
 description: Transitioning from Class components in React to using function components with React Hooks can be a little tricky. In this post we go over the React lifecycle and help you develop a simple mental model for understanding React Hooks. 
 date: 2018-04-16 12:00:00
 context: true
-comments_id: 
+comments_id: understanding-react-hooks/1338
 ---
 
 React Hooks are a way for your function components to "hook" into React's lifecycle and state. They were introduced in [React 16.8.0](https://github.com/facebook/react/releases/tag/v16.8.0). Previously, only Class based components were able to use React's lifecycle and state. Aside from enabling function components to do this, Hooks make it incredibly easy to reuse stateful logic between components.

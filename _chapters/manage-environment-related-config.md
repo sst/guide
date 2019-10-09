@@ -4,7 +4,7 @@ title: Manage Environment Related Config
 description: In this chapter we'll look at how our services will connect to each other while they are deployed across multiple environments.
 date: 2019-10-02 00:00:00
 redirect_from: /chapters/use-environment-variables-in-lambda-functions.html
-comments_id: 
+comments_id: manage-environment-related-config/1327
 ---
 
 In this chapter we'll look at how our services will connect to each other while they are deployed across multiple environments.

@@ -4,9 +4,9 @@ title: Create a Custom React Hook to Handle Form Fields
 date: 2017-01-18 12:00:00
 lang: en
 ref: create-a-custom-react-hook-to-handle-form-fields
-description: 
+description: In this chapter we are going to create a custom React Hook to make it easier to handle form fields in our React app.
 context: true
-comments_id: 
+comments_id: create-a-custom-react-hook-to-handle-form-fields/1316
 ---
 
 Now before we move on to creating our sign up page, we are going to take a short detour to simplify how we handle form fields in React. We built a form as a part of our login page and we are going to do the same for our sign up page. You'll recall that in our login component we were creating two state variables to store the username and password.

@@ -4,7 +4,7 @@ title: Wrapping up the Best Practices
 lang: en
 description: Wrapping up the best practices section of the tutorial and going over the next steps.
 date: 2019-10-08 00:00:00
-comments_id: 
+comments_id: wrapping-up-the-best-practices/1340
 ---
 
 Congratulations on completing this best practices section of the guide!

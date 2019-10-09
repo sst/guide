@@ -3,7 +3,7 @@ layout: post
 title: Rollback Changes
 description: In this chapter we look at how to rollback services in our monorepo Serverless app. If we are rolling back services with dependencies, we need to make sure to roll them back in the opposite order they were deployed in.
 date: 2019-10-02 00:00:00
-comments_id: 
+comments_id: rollback-changes/1331
 ---
 
 So we've worked on a new feature, deployed it to a feature branch, created a PR for it, merged it to master, and promoted it to production! We are almost done going over the workflow. But before we move on we want to make sure that you are able to rollback your Serverless deployments in case there is a problem. We think this is a critical aspect of your CI/CD pipeline. In this chapter we’ll look at what the right rollback strategy is for your Serverless apps.

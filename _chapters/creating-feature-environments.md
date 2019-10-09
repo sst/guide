@@ -3,7 +3,7 @@ layout: post
 title: Creating Feature Environments
 description: In this chapter we look at how to create feature environments for your Serverless app. We'll go over the process of creating a new feature branch in Git and adding a new Serverless service using Seed.
 date: 2019-10-02 00:00:00
-comments_id: 
+comments_id: creating-feature-environments/1317
 ---
 
 Over the last couple of chapters we looked at how to work on Lambda and API Gateway locally. However, besides Lambda and API Gateway, your project will have other AWS services. To run your code locally, you have to simulate all the AWS services. Similar to [serverless-offline](https://www.github.com/dherault/serverless-offline), there are plugins like [serverless-dynamodb-local](https://www.github.com/99xt/serverless-dynamodb-local) and [serverless-offline-sns](https://github.com/mj1618/serverless-offline-sns) that can simulate DynamoDB and SNS. However, mocking only takes you so far since they do not simulate IAM permissions and they are not always up to date with the services' latest changes. You want to test your code with the real resources.
