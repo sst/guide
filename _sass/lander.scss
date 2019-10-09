@@ -36,6 +36,10 @@
 
     .col2 {
       flex: 1 1 45%;
+      // Bug in Safari
+      // Need to keep the search dropdown from being overlapped
+      // https://stackoverflow.com/a/18167565/3369702
+      -webkit-transform: translateZ(-1px);
     }
   }
 
