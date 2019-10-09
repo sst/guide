@@ -1,4 +1,8 @@
 current:
+  title: "New edition of Serverless Stack"
+  desc: "Oct 8, 2019: Adding a new section for Serverless best practices. Updating to React Hooks. Reorganizing chapters. Updating backend to Node 10."
+
+v3-4:
   title: "Updating to serverless-bundle and on-demand DynamoDB"
   desc: "Jul 18, 2019: Updating to serverless-bundle plugin and On-Demand Capacity for DynamoDB."
 
