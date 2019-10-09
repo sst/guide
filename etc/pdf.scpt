@@ -11,8 +11,7 @@
 # 3. In terminal, run "osascript pdf.scpt"
 
 
-set theChaptersStr to "index
-who-is-this-guide-for
+set theChaptersStr to "who-is-this-guide-for
 what-does-this-guide-cover
 how-to-get-help
 what-is-serverless
