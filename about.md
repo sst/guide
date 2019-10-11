@@ -1,7 +1,7 @@
 ---
 layout: page
 title: About Us
-description: Serverless Stack is an open source guide brought to you by Frank Wang (@fanjiewang) and Jay V (@jayair) from Anomaly Innovations.
+description: Serverless Stack is an open source guide brought to you by Frank (@fanjiewang) and Jay (@jayair) from Anomaly Innovations.
 ---
 
 [Serverless Stack](/) is an open source guide to building and deploying full-stack production ready serverless applications using Serverless and React. It's completely free and the content is hosted on [GitHub]({{ site.github_repo }}).
@@ -10,10 +10,10 @@ Serverless Stack was launched in March 2017 with a simple goal of creating the m
 
 ![Serverless Stack Traffic Graph screenshot](/assets/serverless-stack-traffic-graph.png)
 
-Today Serverless Stack is read by thousands of people every single day and tens of thousands every month. We have a few thousand people on our mailing list. And these numbers continue to rise.
+Today Serverless Stack is read by thousands of people every single day and tens of thousands every month. We also have over twenty thousand people on our mailing list. And these numbers continue to rise.
 
 By making this guide open source we hope to keep it up to date and accurate with the help of our readers. We also rely on our community to help people resolve their issues and help extend the tutorial to serve other use cases. You can join our community in our forums - [{{ site.forum_url }}]({{ site.forum_url }}).
 
-Serverless Stack is written and maintained mainly by [Anomaly Innovations](http://anoma.ly).
+Serverless Stack is written and maintained mainly by Frank Wang ([@fanjiewang](https://twitter.com/fanjiewang)) & Jay V ([@jayair](https://twitter.com/jayair)) from [Anomaly Innovations](https://anoma.ly).
 
 <a class="button support" target="_blank" href="{{ site.patreon_url }}">Support us on Patreon</a>
