@@ -109,7 +109,7 @@ Now we can use our new component in our `Login` container.
   isLoading={isLoading}
   disabled={!validateForm()}
 >
-  Login
+  { isLoading ? "Logging in..." : "Login" }
 </LoaderButton>
 ```
 
