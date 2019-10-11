@@ -8,7 +8,7 @@ comments_id: render-the-note-form/140
 ref: render-the-note-form
 ---
 
-Now that our container loads a note on `componentDidMount`, let's go ahead and render the form that we'll use to edit it.
+Now that our container loads a note using the 'useEffect()' method, let's go ahead and render the form that we'll use to edit it.
 
 <img class="code-marker" src="/assets/s.png" />Replace our placeholder `return` statement in `src/containers/Notes.js` with the following.
 
