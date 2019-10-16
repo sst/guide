@@ -8,7 +8,7 @@ ref: automating-react-deployments
 comments_id: automating-react-deployments/188
 ---
 
-Now that we have our backend deployed to production, we are ready to deploy our frotend to production as well! We'll be using a service called [Netlify](https://www.netlify.com) to do this. Netlify will not only host our React app, it'll also help automate our deployments. It's a little like what we did for our serverless API backend. We'll configure it so that it'll deploy our React app when we push our changes to Git. However, there are a couple of subtle differences between the way we configure our backend and frontend deployments.
+Now that we have our backend deployed to production, we are ready to deploy our frontend to production as well! We'll be using a service called [Netlify](https://www.netlify.com) to do this. Netlify will not only host our React app, it'll also help automate our deployments. It's a little like what we did for our serverless API backend. We'll configure it so that it'll deploy our React app when we push our changes to Git. However, there are a couple of subtle differences between the way we configure our backend and frontend deployments.
 
 1. Netlify hosts the React app on their infrastructure. In the case of our serverless API backend, it was hosted on our AWS account.
 
