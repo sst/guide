@@ -240,10 +240,24 @@ $if(verbatim-in-note)$
 \usepackage{fancyvrb}
 $endif$
 \usepackage{xcolor}
-\definecolor{default-linkcolor}{HTML}{A50000}
-\definecolor{default-filecolor}{HTML}{A50000}
-\definecolor{default-citecolor}{HTML}{4077C0}
-\definecolor{default-urlcolor}{HTML}{4077C0}
+\definecolor{serverless-purple}{HTML}{9068BE}
+\definecolor{default-linkcolor}{HTML}{9068BE}
+\definecolor{default-filecolor}{HTML}{9068BE}
+\definecolor{default-citecolor}{HTML}{9068BE}
+\definecolor{default-urlcolor}{HTML}{9068BE}
+
+% \definecolor{ttcolor}{HTML}{333333}
+% \renewcommand{\texttt}[1]{%
+%   \begingroup
+%   \ttfamily
+%   \begingroup\lccode`~=`/\lowercase{\endgroup\def~}{/\discretionary{}{}{}}%
+%   \begingroup\lccode`~=`[\lowercase{\endgroup\def~}{[\discretionary{}{}{}}%
+%   \begingroup\lccode`~=`.\lowercase{\endgroup\def~}{.\discretionary{}{}{}}%
+%   \catcode`/=\active\catcode`[=\active\catcode`.=\active
+%   \scantokens{\color{ttcolor}#1\noexpand}%
+%   \endgroup
+% }
+
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
@@ -290,6 +304,8 @@ $if(listings)$
 \newcommand{\passthrough}[1]{#1}
 \lstset{defaultdialect=[5.3]Lua}
 \lstset{defaultdialect=[x86masm]Assembler}
+\lstset{breakatwhitespace=false, breaklines=true}
+
 $endif$
 $if(listings-no-page-break)$
 \usepackage{etoolbox}
@@ -365,7 +381,13 @@ $endif$
 
 % Avoid cutting of code blocks https://tex.stackexchange.com/a/412316
 \usepackage{fvextra}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines=true,breakanywhere=true,commandchars=\\\{\}}
+
+\usepackage{soul}
+
+\usepackage{awesomebox}
+\setlength{\aweboxleftmargin}{0.09\linewidth}
+\setlength{\aweboxvskip}{3mm}
 
 % Make use of float-package and set default placement for figures to H
 \usepackage{float}
@@ -575,7 +597,7 @@ $endif$
 \addtokomafont{section}{\color{heading-color}}
 % When using the classes report, scrreprt, book,
 % scrbook or memoir, uncomment the following line.
-%\addtokomafont{chapter}{\color{heading-color}}
+\addtokomafont{chapter}{\color{heading-color}}
 
 %
 % variables for title and author
@@ -703,7 +725,7 @@ $else$
 \fancypagestyle{eisvogel-header-footer}{
   \fancyhead{}
   \fancyfoot{}
-  \lhead[$if(header-right)$$header-right$$else$$date$$endif$]{$if(header-left)$$header-left$$else$$title$$endif$}
+  \lhead[$if(header-right)$$header-right$$endif$]{$if(header-left)$$header-left$$else$$title$$endif$}
   \chead[$if(header-center)$$header-center$$else$$endif$]{$if(header-center)$$header-center$$else$$endif$}
   \rhead[$if(header-left)$$header-left$$else$$title$$endif$]{$if(header-right)$$header-right$$else$$date$$endif$}
   \lfoot[$if(footer-right)$$footer-right$$else$\thepage$endif$]{$if(footer-left)$$footer-left$$else$$for(author)$$author$$sep$, $endfor$$endif$}
@@ -714,6 +736,12 @@ $else$
 }
 \pagestyle{eisvogel-header-footer}
 $endif$
+
+% Force justifying of text
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
 
 %%
 %% end added

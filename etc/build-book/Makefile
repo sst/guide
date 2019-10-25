@@ -19,12 +19,12 @@
 PDF_NAME = serverless-stack
 PDF_OPTIONS = --pdf-engine=xelatex --from=markdown -V book -V classoption=oneside --toc --toc-depth=2 --top-level-division=chapter
 PDF_FONTS = -V mainfont="Source Sans Pro" -V monofont="IBM Plex Mono" -V monofontoptions="Scale=0.9"
-PDF_STYLE = --template=./eisvogel --highlight-style="tango"
+PDF_STYLE = --template="./eisvogel" --highlight-style="tango" -V urlcolor="serverless-purple"
 
 all: merge_chapters pdf epub clean
 
 merge_chapters:
-	mkdir _temp
+	mkdir -p _temp
 	cp -r ../../_chapters/* _temp/
 	ruby build-book.rb
 
@@ -38,7 +38,7 @@ test: test-book.md
 	pandoc test-book.md -o $(PDF_NAME)-test.pdf $(PDF_OPTIONS) $(PDF_FONTS) $(PDF_STYLE)
 	pandoc test-book.md -o $(PDF_NAME).epub
 
-test-pdf: clean test-book.md
+test-pdf: test-book.md
 	pandoc test-book.md -o $(PDF_NAME)-test.pdf $(PDF_OPTIONS) $(PDF_FONTS) $(PDF_STYLE)
 
 test-epub: test-book.md
