@@ -65,7 +65,7 @@ The guide is split roughly into a couple of parts:
 
 1. **The Basics**
 
-   Here we go over how to create your first full-stack Serverless application. These chapters are roughly split up between the backend (Serverless) and the frontend (React). We also talk about how to dpeloy your serverless app and React app into production.
+   Here we go over how to create your first full-stack Serverless application. These chapters are roughly split up between the backend (Serverless) and the frontend (React). We also talk about how to deploy your serverless app and React app into production.
 
    This section of the guide is carefully designed to be completed in its entirety. We go into all the steps in detail and have tons of screenshots to help you build your first app.
 
