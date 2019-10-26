@@ -19,7 +19,7 @@ At first glance, this might just seem like a whole lot of extra work and you mig
 
 Imagine that you (or somebody on your team) removes a DynamoDB table or Lambda function in your `serverless.yml` definition. Now, instead of deploying it to your _dev_ environment, you accidentally deploy it to _production_. This happens more often than you think!
 
-To avoid mishaps like these, not every developer on your team should have access or direct access from their terminal to the _production_ environment. However, if all your environments are in the same AWS account, you need to carefully craft a detailed IAM policy to restrict/grant access to specific resources. This can be hard to do and you are likely to make mistakes.
+To avoid mishaps like these, not every developer on your team should have _write_ access from their terminal to the _production_ environment. However, if all your environments are in the same AWS account, you need to carefully craft a detailed IAM policy to restrict/grant access to specific resources. This can be hard to do and you are likely to make mistakes.
 
 By keeping each environment in a separate account, you can manage user access on a per account basis. And for _dev_ environments you could potentially grant your developers _AdministratorAccess_ without worrying about the specific resources.
 
