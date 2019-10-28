@@ -111,7 +111,7 @@ Para o frontend
 - Ambientes no Create React App
 - Aceitando pagamento com cartão de crédito no React
 - Automatizando as entregas com Netlify
-- Configurando domínios customizados atrvés do Netlify
+- Configurando domínios customizados através do Netlify
 
 Nós acreditamos que tudo isso vai lhe dar uma ótima base para a criação de uma aplicação com Serverless para o mundo real. Se existe algum outro conceito ou tecnologias que você gostaria que nós cobríssemos nesse guia, sinta-se a vontade para comentar no nosso [forum]({{ site.forum_url }}) (em inglês).
 
