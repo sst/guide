@@ -68,7 +68,7 @@ return (
         </FormGroup>
         {note.attachment && (
           <FormGroup>
-            <ControlLabel>Attachment</ControlLabel>
+            <FormLabel>Attachment</FormLabel>
             <FormControl.Static>
               <a
                 target="_blank"
@@ -81,7 +81,7 @@ return (
           </FormGroup>
         )}
         <FormGroup controlId="file">
-          {!note.attachment && <ControlLabel>Attachment</ControlLabel>}
+          {!note.attachment && <FormLabel>Attachment</FormLabel>}
           <FormControl onChange={handleFileChange} type="file" />
         </FormGroup>
         <LoaderButton
@@ -151,7 +151,7 @@ const [isDeleting, setIsDeleting] = useState(false);
 <img class="code-marker" src="/assets/s.png" />Also, let's include the React-Bootstrap components that we are using here by adding the following to our header. And our styles, the `LoaderButton`, and the `config`.
 
 ``` javascript
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import config from "../config";
 import "./Notes.css";

@@ -27,7 +27,7 @@ import {
   HelpBlock,
   FormGroup,
   FormControl,
-  ControlLabel
+  FormLabel
 } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import "./ChangeEmail.css";
@@ -94,7 +94,7 @@ export default class ChangeEmail extends Component {
     return (
       <form onSubmit={this.handleUpdateClick}>
         <FormGroup bsSize="large" controlId="email">
-          <ControlLabel>Email</ControlLabel>
+          <FormLabel>Email</FormLabel>
           <FormControl
             autoFocus
             type="email"
@@ -119,7 +119,7 @@ export default class ChangeEmail extends Component {
     return (
       <form onSubmit={this.handleConfirmClick}>
         <FormGroup bsSize="large" controlId="code">
-          <ControlLabel>Confirmation Code</ControlLabel>
+          <FormLabel>Confirmation Code</FormLabel>
           <FormControl
             autoFocus
             type="tel"

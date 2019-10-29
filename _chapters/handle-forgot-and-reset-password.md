@@ -29,7 +29,7 @@ import {
   FormGroup,
   Glyphicon,
   FormControl,
-  ControlLabel
+  FormLabel
 } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import "./ResetPassword.css";
@@ -104,7 +104,7 @@ export default class ResetPassword extends Component {
     return (
       <form onSubmit={this.handleSendCodeClick}>
         <FormGroup bsSize="large" controlId="email">
-          <ControlLabel>Email</ControlLabel>
+          <FormLabel>Email</FormLabel>
           <FormControl
             autoFocus
             type="email"
@@ -129,7 +129,7 @@ export default class ResetPassword extends Component {
     return (
       <form onSubmit={this.handleConfirmClick}>
         <FormGroup bsSize="large" controlId="code">
-          <ControlLabel>Confirmation Code</ControlLabel>
+          <FormLabel>Confirmation Code</FormLabel>
           <FormControl
             autoFocus
             type="tel"
@@ -143,7 +143,7 @@ export default class ResetPassword extends Component {
         </FormGroup>
         <hr />
         <FormGroup bsSize="large" controlId="password">
-          <ControlLabel>New Password</ControlLabel>
+          <FormLabel>New Password</FormLabel>
           <FormControl
             type="password"
             value={this.state.password}
@@ -151,7 +151,7 @@ export default class ResetPassword extends Component {
           />
         </FormGroup>
         <FormGroup bsSize="large" controlId="confirmPassword">
-          <ControlLabel>Confirm Password</ControlLabel>
+          <FormLabel>Confirm Password</FormLabel>
           <FormControl
             type="password"
             onChange={this.handleChange}
