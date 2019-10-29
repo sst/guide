@@ -4,15 +4,18 @@ title: Sponsors
 description: Serverless Stack is a free open source guide brought to you by Frank Wang (@fanjiewang) and Jay V (@jayair) from Anomaly Innovations. Show your support by sponsoring Serverless Stack.
 ---
 
-[Serverless Stack](/) is an open source 950+ page guide to building and deploying full-stack serverless applications using Serverless and React. It's completely free and the content and comments are hosted on [Discourse]({{ site.forum_url }}). The guide attracts over 3K daily, 50K monthly visitors, and has nearly 20K newsletter subscribers.
+[Serverless Stack](https://serverless-stack.com) is a free open source 950+ page guide for building full-stack apps using Serverless and React on AWS. It attracts over 3.5K daily and 60K monthly visitors with over 230K page views per month. And we have over 20K email subscribers.
 
-Serverless Stack is written and maintained by Frank Wang ([@fanjiewang](https://twitter.com/fanjiewang)) &amp; Jay V ([@jayair](https://twitter.com/jayair)) from [Anomaly Innovations](https://anoma.ly). It takes considerable effort to create such a detailed tutorial. We spend our spare time (and more) working on the tutorial and helping folks work through it. If you've found this guide useful or would like to be an official supporter, please consider sponsoring Serverless Stack. By supporting us you are helping us:
+Learn to create a note taking app from scratch using Serverless and React. Follow our step-by-step tutorials with screenshots and code samples. And use [our forums](https://discourse.serverless-stack.com) to ask us any questions.
 
-- **Create** the **most comprehensive** serverless tutorial
-- **Add** chapters on more **advanced** topics
-- **Keep it up to date** with screenshots and code samples
-- **Help** people **resolve** their issues in the comments
-- Keep our readers **updated** with our **newsletter**
+Serverless Stack is written and maintained by [Frank Wang](https://github.com/fwang) & [Jay V](https://github.com/jayair). It takes considerable effort to create and maintain such a detailed tutorial. We spend our spare time (and more) working on the tutorial and helping folks work through the steps. If you’ve found this guide useful or would like to support our work, please consider sponsoring Serverless Stack. Your sponsorship helps us:
+
+1. Create the most comprehensive serverless resource on the web
+2. Build tools to help with the development process
+3. Add additional chapters on advanced topics
+4. Keep it up to date with screenshots and code samples
+5. Help people resolve their issues in the comments
+6. Keep our readers updated with our newsletter
 
 <a class="button support" target="_blank" href="{{ site.patreon_url }}">Support us on Patreon</a>
 
@@ -20,9 +23,15 @@ Serverless Stack is written and maintained by Frank Wang ([@fanjiewang](https://
 
 ---
 
+## Gold Sponsors
+
+Your **banner** will be placed on **ALL** the chapters of the guide. And your **company logo** and link will be placed here. [Contact us if you'd like to be a Gold Sponsor](mailto:{{ site.email }}).
+
+<br />
+
 ## Sponsors
 
-<a href="mailto:{{ site.email }}">Contact us if you'd like to sponsor Serverless Stack.</a>
+Your **company logo** and link will be placed here. [Contact us if you'd like to be a Silver Sponsor](mailto:{{ site.email }}).
 
 <br />
 
