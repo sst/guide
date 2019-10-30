@@ -73,7 +73,7 @@ The guide is split roughly into a couple of parts:
 
    We launched this guide in early 2017 with just the first part. The Serverless Stack community has grown and many of our readers have used the setup described in this guide to build apps that power their businesses. In this section, we cover the best practices of running production applications. These really begin to matter once your application codebase grows or when you add more folks to your team.
 
-   The chapters in this section are relatively standalone and tend to revolve around specific topcis.
+   The chapters in this section are relatively standalone and tend to revolve around specific topics.
 
 3. **Reference**
 
