@@ -28,4 +28,6 @@ We'd love to hear from you about your experience following this guide. Please [f
 
 Also, we'd love to feature what you've built with Serverless Stack, please [send us a URL and brief description](mailto:{{ site.email }}).
 
+Finally, if you've found this guide helpful, [please consider sponsoring us on GitHub]({% link sponsors.md %}).
+
 Thank you and we hope you found this guide helpful!

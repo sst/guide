@@ -29,4 +29,6 @@ We'd love to hear from you about your experience following this guide. Please [f
 
 Also, if there are any other topics you'd like us to cover, please leave a comment in the discussion thread below!
 
+Finally, if you've found this guide helpful, [please consider sponsoring us on GitHub]({% link sponsors.md %}).
+
 Thank you and we hope you found this guide helpful!

@@ -16,4 +16,4 @@ By making this guide open source we hope to keep it up to date and accurate with
 
 Serverless Stack is written and maintained mainly by Frank Wang ([@fanjiewang](https://twitter.com/fanjiewang)) & Jay V ([@jayair](https://twitter.com/jayair)) from [Anomaly Innovations](https://anoma.ly).
 
-<a class="button support" target="_blank" href="{{ site.patreon_url }}">Support us on Patreon</a>
+<a class="button support" target="_blank" href="{{ site.github_sponsor_url }}">Sponsor us on GitHub</a>

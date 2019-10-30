@@ -17,7 +17,7 @@ Serverless Stack is written and maintained by [Frank Wang](https://github.com/fw
 5. Help people resolve their issues in the comments
 6. Keep our readers updated with our newsletter
 
-<a class="button support" target="_blank" href="{{ site.patreon_url }}">Support us on Patreon</a>
+<a class="button support" target="_blank" href="{{ site.github_sponsor_url }}">Sponsor us on GitHub</a>
 
 <br />
 
