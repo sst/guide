@@ -48,7 +48,7 @@ Next hit **Check DNS configuration**.
 
 ![Hit check DNS configuration screenshot](/assets/part2/hit-check-dns-configuration.png)
 
-This will show you the instructions for setting up your domain through Route 53. 
+This will show you the instructions for setting up your domain through Route 53.
 
 ![DNS configuration dialog screenshot](/assets/part2/dns-configuration-dialog.png)
 
@@ -88,11 +88,11 @@ Back in Netlify, hit **HTTPS** in the side panel. And it should say that it is w
 
 ![Waiting on DNS propagation screenshot](/assets/part2/waiting-on-dns-propagation.png)
 
-Once that is complete, Netlify will automatically provision your SSL ceritificate using Let's Encrypt.
+Once that is complete, Netlify will automatically provision your SSL certificate using Let's Encrypt.
 
 ![Provisioning Let's Encrypt Certificate screenshot](/assets/part2/provisioning-lets-encrypt-certificate.png)
 
-Wait a few seconds for the ceritificate to be provisioned.
+Wait a few seconds for the certificate to be provisioned.
 
 ![SSL certificate provisioned screenshot](/assets/part2/ssl-certificate-provisioned.png)
 
