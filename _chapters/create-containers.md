@@ -52,14 +52,6 @@ We are doing a few things here:
 2. Adding a Navbar inside the container that fits to its container's width using the attribute `fluid`.
 3. Using `Link` component from the React-Router to handle the link to our app's homepage (without forcing the page to refresh).
 
-Note that React Bootstrap might give you a couple of warnings in your browser console.
-
-```
-Warning: componentWillMount has been renamed, and is not recommended for use. 
-```
-
-We can ignore them for now while we wait for React Bootstrap to fix them. Also, we'll be upgrading the guide to React Bootstrap v1 once it is out of beta.
-
 Let's also add a couple of line of styles to space things out a bit more.
 
 <img class="code-marker" src="/assets/s.png" />Remove all the code inside `src/App.css` and replace it with the following:
