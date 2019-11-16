@@ -15,7 +15,7 @@ Despite our best intentions we might run into cases where some faulty code ends 
 
 Let's start by pushing an obvious mistake.
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `functions/create.js` as the first line of our `main` function.
+<img class="code-marker" src="/assets/s.png" />Add the following to `create.js` as the first line of our `main` function.
 
 ``` js
 uuid.abc.gibberish;
