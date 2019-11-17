@@ -548,6 +548,14 @@
   margin-bottom: $spacing-unit;
   text-align: center;
 
+  @include media-query($on-laptop) {
+    margin-bottom: $spacing-unit / 2;
+  }
+
+  img {
+    border-radius: 4px;
+  }
+
   p {
     color: $tertiary-text-color;
     font-size: 14px;

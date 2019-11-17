@@ -363,3 +363,55 @@ table.cost-table {
     background-color: lighten($grey-color-light, 10%);
   }
 }
+
+/**
+ * Carbon Ads
+ */
+#carbonads {
+  margin-top: $spacing-unit;
+  display: flex;
+  max-width: 130px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#carbonads a {
+  color: $text-color;
+  text-decoration: none;
+}
+
+#carbonads a:hover {
+  color: $text-color;
+}
+
+.carbon-img {
+  display: block;
+  margin-bottom: 8px;
+  max-width: 130px;
+  line-height: 1;
+}
+
+.carbon-img img {
+  display: block;
+  margin: 0 auto;
+  max-width: 130px;
+  width: 130px;
+  height: auto;
+}
+
+.carbon-text {
+  display: block;
+  text-align: left;
+  line-height: 1.35;
+}
+
+.carbon-poweredby {
+  display: block;
+  padding: 10px 0;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-weight: 600;
+  font-size: 8px;
+  line-height: 0;
+}
