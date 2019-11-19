@@ -69,9 +69,13 @@ Select **Add an app client**.
 Enter **App client name**, un-select **Generate client secret**, select **Enable sign-in API for server-based authentication**, then select **Create app client**.
 
 - **Generate client secret**: user pool apps with a client secret are not supported by the JavaScript SDK. We need to un-select the option.
-- **Enable sign-in API for server-based authentication**: required by AWS CLI when managing the pool users via command line interface. We will be creating a test user through the command line interface in the next chapter.
+- **Enable username password auth for admin APIs for authentication**: required by AWS CLI when managing the pool users via command line interface. We will be creating a test user through the command line interface in the next chapter.
 
 ![Fill Cognito User Pool App Info Screenshot](/assets/cognito-user-pool/fill-user-pool-app-info.png)
+
+Now select **Create app client**.
+
+![Fill Cognito User Pool Create App Client Screenshot](/assets/cognito-user-pool/fill-user-pool-create-app-client.png)
 
 Your app client has been created. Take note of the **App client id** which will be required in the later chapters.
 
