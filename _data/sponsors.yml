@@ -1,0 +1,17 @@
+list:
+#  - link: "https://seed.run"
+#    alt: "A fully-managed CI/CD pipeline for Serverless"
+#    image: "/assets/sponsors/seed-serverless-ci-cd.png"
+#    width: 435
+  - link: "https://epsagon.com/?utm_source=Advertisement&utm_medium=ServerlessStack&utm_campaign=ServerlessStack-Campaign1&utm_content=BannerA"
+    alt: "Automated tracing for cloud microservices"
+    image: "/assets/sponsors/epsagon-banner-a.png"
+    width: 420
+  - link: "https://epsagon.com/?utm_source=Advertisement&utm_medium=ServerlessStack&utm_campaign=ServerlessStack-Campaign1&utm_content=BannerB"
+    alt: "Automated tracing for cloud microservices"
+    image: "/assets/sponsors/epsagon-banner-b.png"
+    width: 420
+  - link: "https://epsagon.com/?utm_source=Advertisement&utm_medium=ServerlessStack&utm_campaign=ServerlessStack-Campaign1&utm_content=BannerC"
+    alt: "Automated tracing for cloud microservices"
+    image: "/assets/sponsors/epsagon-banner-c.png"
+    width: 420
