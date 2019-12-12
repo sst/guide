@@ -59,6 +59,7 @@ Your **company logo** and link will be placed here. [Contact us if you'd like to
 - [Bernie Camus](https://www.lernard.com)
 - [Tekeste Kidanu](https://cleanmock.com)
 - [WiSEO](https://www.whatisseo.com)
+- [Trevor Dorsey](https://www.foyyay.com/)
 - [Cuspy Software](https://cuspy.io)
 
 
