@@ -49,9 +49,9 @@ Your `environment:` block should look like this:
 
 A quick explanation on the above:
 
-- The `STRIPE_SECRET_KEY` from the `.env` file above gets loading as an environment variable when we test our code locally.
+- The `STRIPE_SECRET_KEY` from the `.env` file above gets loaded as an environment variable when we test our code locally.
 
-- This allows us to add a Lambda environment variables called `stripeSecretKey`. We do this using the `stripeSecretKey: ${env:STRIPE_SECRET_KEY}` line. And just like our `tableName` environment variable, we can reference it in our Lambda function using `process.env.stripeSecretKey`.
+- This allows us to add a Lambda environment variable called `stripeSecretKey`. We do this using the `stripeSecretKey: ${env:STRIPE_SECRET_KEY}` line. And just like our `tableName` environment variable, we can reference it in our Lambda function using `process.env.stripeSecretKey`.
 
 Now we need to ensure that we don't commit our `.env` file to git. The starter project that we are using has the following in the `.gitignore`.
 
