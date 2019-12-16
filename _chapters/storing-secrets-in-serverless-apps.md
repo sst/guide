@@ -6,7 +6,7 @@ date: 2019-10-02 00:00:00
 comments_id: storing-secrets-in-serverless-apps/1335
 ---
 
-The general idea behind secrets is to store them outside of your codebase — don't commit them to Git! And to make them available at runtime. There are many ways people tend to do this, some are less secure than others. This chapter is going to layout the best practice for storing secrets and managing them across multiple environments.
+The general idea behind secrets is to store them outside of your codebase — don't commit them to Git! And to make them available at runtime. There are many ways people tend to do this, some are less secure than others. This chapter is going to lay out the best practice for storing secrets and managing them across multiple environments.
 
 ### Store Secrets in AWS Parameter Store
 
@@ -89,7 +89,7 @@ provider:
 
 We are granting Lambda functions permission to fetch and decrypt the SSM parameters.
 
-Next we'll add the parameter names in our `config.js`.
+Next, we'll add the parameter names in our `config.js`.
 
 ``` js
 const stage = process.env.stage;
@@ -152,6 +152,6 @@ By calling `ssm.getParameter` with `WithDecryption: true`, the value returned to
 
 Note that, you want to decrypt your secrets **outside** your Lambda function handler. This is because you only need to do this once per Lambda function invocation. Your secrets will get decrypted on the first invocation and you'll simply use the same value in subsequent invocations.
 
-So in summary, you want to store your sensitive data in SSM. Store the SSM parameter name in your config. When the Lambda function runs, use the environment it's running in to figure out which SSM parameter to use. Finally, decrypt the secret outside your Lambda handler function.
+So, in summary, you want to store your sensitive data in SSM. Store the SSM parameter name in your config. When the Lambda function runs, use the environment it's running in to figure out which SSM parameter to use. Finally, decrypt the secret outside your Lambda handler function.
 
 Next, we'll look at how we can setup our API Gateway custom domains to work across environments.
