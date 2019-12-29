@@ -22,7 +22,9 @@ And click **Add** for our production endpoint.
 
 ![Click Add for production endpoint in custom domain settings](/assets/part2/click-add-for-production-endpoint-in-custom-domain-settings.png)
 
-In the first part of the tutorial we had added our domain to Route 53. If you haven't done so you can [read more about it here](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html). Hit **Select a domain** and you should see a list of all your Route 53 domains. Select the one you intend to use. And fill in the sub-domain and base path. For example, you could use `api.my-domain.com/prod`; where `api` is the sub-domain and `prod` is the base path.
+Seed will pull up any domains you have configured in [Route 53](https://aws.amazon.com/route53/). If you want to purchase a domain in Route 53, we have an [extra credit chapter]({% link _chapters/setup-your-domain-with-cloudfront.md %}) to help you. You can also migrate any existing domains to Route 53; you can [read about it here](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html).  
+
+Hit **Select a domain** and you should see a list of all your Route 53 domains. Select the one you intend to use. And fill in the sub-domain and base path. For example, you could use `api.my-domain.com/prod`; where `api` is the sub-domain and `prod` is the base path.
 
 And hit **Add Custom Domain**.
 
