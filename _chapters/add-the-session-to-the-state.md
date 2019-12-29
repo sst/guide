@@ -80,7 +80,7 @@ export default function AppliedRoute({ component: C, appProps, ...rest }) {
 }
 ```
 
-This simple component creates a `Route` where the child component that it renders contains the passed in props. Let's take a quick look at how this being done.
+This simple component creates a `Route` where the child component that it renders contains the passed in props. Let's take a quick look at how this is being done.
 
 - The `Route` component takes a prop called `component` that represents the component that will be rendered when a matching route is found. We want our `appProps` to be applied to this component.
 

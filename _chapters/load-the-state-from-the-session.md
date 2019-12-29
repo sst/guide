@@ -54,9 +54,9 @@ async function onLoad() {
 
 Let's understand how this and the `useEffect` hook works.
 
-The `useEffect` hook take a function and an array of variables. The function will be called every time the component is rendered. And the array of variables tell React to only re-run our function if the passed in array of variables have changed. This allows us to control when our function gets run. This has some neat consequences:
+The `useEffect` hook takes a function and an array of variables. The function will be called every time the component is rendered. And the array of variables tell React to only re-run our function if the passed in array of variables have changed. This allows us to control when our function gets run. This has some neat consequences:
 
-1. If we don't pass in an array of variables, our hook get's executed everytime our component is rendered.
+1. If we don't pass in an array of variables, our hook gets executed everytime our component is rendered.
 2. If we pass in some variables, on every render React will first check if those variables have changed, before running our function.
 3. If we pass in an empty list of variables, then it'll only run our function on the FIRST render.
 

@@ -21,7 +21,7 @@ Also, just looking ahead a bit; we will be uploading files when a note is create
 
 ### Upload to S3
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `src/libs/awsLib.js`.
+<img class="code-marker" src="/assets/s.png" />Create `src/libs/awsLib.js` and add the following:
 
 ``` javascript
 import { Storage } from "aws-amplify";
