@@ -9,7 +9,7 @@ context: true
 comments_id: what-does-this-guide-cover/83
 ---
 
-为了逐步了解构建 web 应用程序所涉及的主要概念，我们将要构建一个叫做 [**Scratch**](https://demo2.serverless-stack.com) 的简单笔记聊天程序。
+为了逐步了解构建 web 应用程序所涉及的主要概念，我们将要构建一个叫做 [**Scratch**](https://demo2.serverless-stack.com) 的简单笔记程序。
 
 ![Completed app desktop screenshot](/assets/completed-app-desktop.png)
 
