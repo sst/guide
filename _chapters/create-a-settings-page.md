@@ -48,7 +48,7 @@ import Settings from "./containers/Settings";
 <img class="code-marker" src="/assets/s.png" />Add the following below the `/signup` route in our `<Switch>` block in `src/Routes.js`.
 
 ``` coffee
-<Route path="/settings" exact />
+<Route path="/settings" exact>
   <Settings />
 </Route>
 ```
