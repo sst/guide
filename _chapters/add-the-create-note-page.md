@@ -113,7 +113,7 @@ MAX_ATTACHMENT_SIZE: 5000000,
 
 ``` coffee
 <Route path="/notes/new" exact>
-  <NewNote {...appProps} />
+  <NewNote />
 </Route>
 ```
 
