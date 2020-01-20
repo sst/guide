@@ -98,7 +98,9 @@ These styles roughly target any non-mobile screen sizes.
 <img class="code-marker" src="/assets/s.png" />Now we link this container up with the rest of our app by adding the following line to `src/Routes.js` below our home `<Route>`.
 
 ``` coffee
-<Route path="/login" exact component={Login} />
+<Route path="/login">
+  <Login />
+</Route>
 ```
 
 <img class="code-marker" src="/assets/s.png" />And include our component in the header.
