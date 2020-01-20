@@ -19,7 +19,7 @@ Let's add a route for the note page that we are going to create.
 <img class="code-marker" src="/assets/s.png" />Add the following line to `src/Routes.js` **below** our `/notes/new` route. 
 
 ``` coffee
-<Route path="/notes/:id" exact />
+<Route path="/notes/:id" exact>
   <Notes />
 </Route>
 ```
