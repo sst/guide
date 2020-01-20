@@ -8,7 +8,7 @@ ref: getting-production-ready
 comments_id: getting-production-ready/158
 ---
 
-Now that we've gone through the basics of creating a Serverless app, you are ready to deploy your app to production. This means that we would like to have a couple of environments (development and production) and we want to be able to automate our deployments. While setting up the backend we did a bunch of manual work to create all the resources. And you might be wondering if you need to do that everytime you create a new environment or app. Thankfuly, there is a better way!
+Now that we've gone through the basics of creating a Serverless app, you are ready to deploy your app to production. This means that we would like to have a couple of environments (development and production) and we want to be able to automate our deployments. While setting up the backend we did a bunch of manual work to create all the resources. And you might be wondering if you need to do that everytime you create a new environment or app. Thankfully, there is a better way!
 
 Over the next few chapters we will look at how to get your app ready for production, starting with:
 
