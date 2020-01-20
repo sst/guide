@@ -33,7 +33,7 @@ export default function AuthenticatedRoute({ children, appProps, ...rest }) {
 
 ```
 
-This simple component creates a `Route` where its childred are rendered only if the user is authenticated. If the user is not authenticated, then it redirects to login page. Let's take a closer look at it:
+This simple component creates a `Route` where its children are rendered only if the user is authenticated. If the user is not authenticated, then it redirects to login page. Let's take a closer look at it:
 
 - Like all components in React, `AuthenticatedRoute` has a prop called `children` that represents all child components. Example child components in our case would be `NewNote`, `Notes` and `Settings`.
 
