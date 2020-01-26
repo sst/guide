@@ -13,7 +13,7 @@ Create React App sets a lot of things up by default but it does not come with a 
 
 Let's start by installing React Router. We are going to be using the React Router v4, the newest version of React Router. React Router v4 can be used on the web and in native. So let's install the one for the web.
 
-### Installing React Router v4
+### Installing React Router
 
 <img class="code-marker" src="/assets/s.png" />Run the following command in your working directory.
 
