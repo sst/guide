@@ -276,6 +276,15 @@ Now we want to make sure that our users are directed to this page when they are 
 import { Link } from "react-router-dom";
 ```
 
+<img class="code-marker" src="/assets/s.png" />And finally add some style to the link by adding the following to `src/containers/Login.css`
+
+``` css
+.Login form a {
+  margin-bottom: 15px;
+  display: block;
+  font-size: 14px;
+```
+
 That's it! We should now be able to navigate to `/login/reset` or go to it from the login page in case we need to reset our password.
 
 ![Login page forgot password link screenshot](/assets/user-management/login-page-forgot-password-link.png)
