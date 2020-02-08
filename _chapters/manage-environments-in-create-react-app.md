@@ -33,7 +33,7 @@ export default {
 };
 ```
 
-We need to change this so that when we *push* our app to **dev** it connectes to the dev environment of our backend and for **prod** it connects to the prod environment. Of course you can add many more environments, but let's just stick to these for now.
+We need to change this so that when we *push* our app to **dev** it connects to the dev environment of our backend and for **prod** it connects to the prod environment. Of course you can add many more environments, but let's just stick to these for now.
 
 ### Environment Variables in Create React App
 
