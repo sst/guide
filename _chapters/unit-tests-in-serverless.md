@@ -77,7 +77,7 @@ You might have noticed a `handler.test.js` file in the `tests/` directory. This 
 
 ### Remove Unused Files
 
-<img class="code-marker" src="/assets/s.png" />Remove the starter files by running the following.
+<img class="code-marker" src="/assets/s.png" />Remove the starter files by running the following command in the root of our project.
 
 ``` bash
 $ rm handler.js
