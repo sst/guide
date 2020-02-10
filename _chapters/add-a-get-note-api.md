@@ -87,7 +87,7 @@ To test our get note API we need to mock passing in the `noteId` parameter. We a
 }
 ```
 
-And we invoke our newly created function.
+And invoke our newly created function from the root directory of the project.
 
 ``` bash
 $ serverless invoke local --function get --path mocks/get-event.json
