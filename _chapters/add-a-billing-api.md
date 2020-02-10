@@ -18,7 +18,7 @@ Now let's get started with creating our billing API. It is going to take a Strip
 $ npm install --save stripe
 ```
 
-<img class="code-marker" src="/assets/s.png" />Next, add the following to `billing.js`.
+<img class="code-marker" src="/assets/s.png" />Create a new file called 'billing.js' with the following.
 
 ``` js
 import stripePackage from "stripe";
