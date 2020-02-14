@@ -117,10 +117,11 @@ export default class ResetPassword extends Component {
           type="submit"
           bsSize="large"
           loadingText="Sending…"
-          text="Send Confirmation"
           isLoading={this.state.isSendingCode}
           disabled={!this.validateCodeForm()}
         />
+          Send Confirmation
+        </LoaderButton>
       </form>
     );
   }
@@ -162,11 +163,12 @@ export default class ResetPassword extends Component {
           block
           type="submit"
           bsSize="large"
-          text="Confirm"
           loadingText="Confirm…"
           isLoading={this.state.isConfirming}
           disabled={!this.validateResetForm()}
         />
+          Confirm
+        </LoaderButton>
       </form>
     );
   }
@@ -246,12 +248,7 @@ Finally, let's link this up with the rest of our app.
 <img class="code-marker" src="/assets/s.png" />Add the route to `src/Routes.js`.
 
 ``` html
-<UnauthenticatedRoute
-  path="/login/reset"
-  exact
-  component={ResetPassword}
-  props={childProps}
-/>
+<UnauthenticatedRoute path="/login/reset" exact component={ResetPassword} appProps={appProps} />
 ```
 
 <img class="code-marker" src="/assets/s.png" />And import it in the header.
