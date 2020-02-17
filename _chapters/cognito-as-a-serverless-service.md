@@ -6,7 +6,7 @@ date: 2018-04-02 17:00:00
 comments_id: cognito-as-a-serverless-service/409
 ---
 
-Now let's look at splittiing Cognito User Pool and Cognito Federated Identities into a separate Serverless service. In this chapter we are going to create a Serverless service that will use cross-stack references to tie all of our resources together.
+Now let's look at splitting Cognito User Pool and Cognito Federated Identities into a separate Serverless service. In this chapter we are going to create a Serverless service that will use cross-stack references to tie all of our resources together.
 
 In the [example repo]({{ site.backend_ext_resources_github_repo }}), open the `auth` service in the `services/` directory.
 
