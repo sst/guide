@@ -83,7 +83,7 @@ Before we go through alternative patterns, let's quickly look at the drawbacks o
 2. This also means that you can end up with hundreds of Lambda functions.
 3. Managing deployments for all these services and functions can get complicated.
 
-Most of the issues described above start to appear when your application begins to grow. However, there are services that help you deal with some these issues. Services like [IOpipe](https://www.iopipe.com), [Epsagon](https://epsagon.com), and [Dashbird](https://dashbird.io) help you with observability of your Lambda functions. And our own [Seed](https://seed.run) helps you with managing deployments and environments of monorepo Serverless Framework applications.
+Most of the issues described above start to appear when your application begins to grow. However, there are services that help you deal with some of these issues. Services like [IOpipe](https://www.iopipe.com), [Epsagon](https://epsagon.com), and [Dashbird](https://dashbird.io) help you with observability of your Lambda functions. And our own [Seed](https://seed.run) helps you with managing deployments and environments of monorepo Serverless Framework applications.
 
 Now let's look at some alternative approaches.
 
