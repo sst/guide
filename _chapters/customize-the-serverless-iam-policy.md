@@ -113,7 +113,7 @@ Below is a more nuanced policy template that restricts access to the Serverless 
         "s3:List*"
       ],
       "Resource": [
-        "arn:aws:s3:::*"
+        "arn:aws:s3:::<service_name>*"
       ]
     },
     {
@@ -122,7 +122,7 @@ Below is a more nuanced policy template that restricts access to the Serverless 
         "s3:*"
       ],
       "Resource": [
-        "arn:aws:s3:::*/*"
+        "arn:aws:s3:::<service_name>*/*"
       ]
     },
     {
@@ -164,6 +164,7 @@ Below is a more nuanced policy template that restricts access to the Serverless 
       "Effect": "Allow",
       "Action": [
         "apigateway:GET",
+        "apigateway:PATCH",
         "apigateway:POST",
         "apigateway:PUT",
         "apigateway:DELETE"
@@ -176,6 +177,7 @@ Below is a more nuanced policy template that restricts access to the Serverless 
       "Effect": "Allow",
       "Action": [
         "apigateway:GET",
+        "apigateway:PATCH",
         "apigateway:POST",
         "apigateway:PUT",
         "apigateway:DELETE"
