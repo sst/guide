@@ -12,7 +12,7 @@ So we have some simple business logic that figures out exactly how much to charg
 
 We are going to use [Jest](https://facebook.github.io/jest/) for this and it is already a part of [our starter project](https://github.com/AnomalyInnovations/serverless-nodejs-starter).
 
-However, if you are starting a new Serverless Framework project. Add Jest to your dev dependencies by running the following.
+However, if you are starting a new Serverless Framework project, add Jest to your dev dependencies by running the following.
 
 ``` bash
 $ npm install --save-dev jest
