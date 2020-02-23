@@ -78,7 +78,7 @@ We are introducing a couple of new concepts in this.
 
 <img class="code-marker" src="/assets/s.png" />Let's add a couple of styles to this in the file `src/containers/Login.css`.
 
-``` css'
+``` css
 @media all and (min-width: 480px) {
   .Login {
     padding: 60px 0;
