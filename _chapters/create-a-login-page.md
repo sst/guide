@@ -74,7 +74,7 @@ We are introducing a couple of new concepts in this.
 
 5. We also link up our submit button with our state by using a validate function called `validateForm`. This simply checks if our fields are non-empty, but can easily do something more complicated.
 
-6. Finally, we trigger our callback `handleSubmit` when the form is submitted. For now we are simply suppressing the browsers default behavior on submit but we'll do more here later.
+6. Finally, we trigger our callback `handleSubmit` when the form is submitted. For now we are simply suppressing the browser's default behavior on submit but we'll do more here later.
 
 <img class="code-marker" src="/assets/s.png" />Let's add a couple of styles to this in the file `src/containers/Login.css`.
 
