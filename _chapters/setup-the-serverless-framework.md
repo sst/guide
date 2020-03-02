@@ -57,7 +57,7 @@ $ npm install
 
 ``` bash
 $ npm install aws-sdk --save-dev
-$ npm install uuid --save
+$ npm install uuid@3.4.0 --save
 ```
 
 - **aws-sdk** allows us to talk to the various AWS services.
