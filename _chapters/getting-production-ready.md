@@ -28,6 +28,6 @@ Over the next few chapters we will look at how to get your app ready for product
 
   Once your app is in production, you want it hosted under your domain name. This applies both to the React app (my-domain.com) and backend APIs (api.my-domain.com).
 
-The goal of next few sections is to make sure that you have a setup that you can easily replicate and use for your future projects. This is almost exactly what we and a few of our readers have been using.
+The goal of the next few sections is to make sure that you have a setup that you can easily replicate and use for your future projects. This is almost exactly what we and a few of our readers have been using.
 
 Let's get started by first converting our backend infrastructure into code.
