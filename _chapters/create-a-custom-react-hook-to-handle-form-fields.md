@@ -39,15 +39,15 @@ $ mkdir src/libs/
 import { useState } from "react";
 
 export function useFormFields(initialState) {
-  const [fields, setValues] = useState(initialState);
-
+  const [fields, setFields] = useState(initialState);
   return [
     fields,
     function(event) {
-      setValues({
-        ...fields,
-        [event.target.id]: event.target.value
-      });
+      const { id, value } = event.target;
+      setFields(prevFields => ({
+        ...prevFields,
+        [id]: value
+      }));
     }
   ];
 }
