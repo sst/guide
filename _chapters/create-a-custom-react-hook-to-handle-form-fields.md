@@ -59,7 +59,19 @@ Creating a custom hook is amazingly simple. Let's go over how this works:
 
 2. Our Hook takes the initial state of our form fields as an object and saves it as a state variable called `fields`.
 
-3. It returns an array with `fields` and a function that sets the new state based on the event object. The only difference here is that we are using `event.target.id` (which contains the id of our form field) to store the value (`event.target.value`).
+3. It returns an array with `fields` and a function that sets the new state based on the event object. The only difference here is that we are using `event.target.id` (which contains the id of our form field) to store the value (`event.target.value`). In the case of our form the elements, the `event.target.id` is set as the the `controlId`:
+
+   ``` coffee
+   <FormGroup controlId="email" bsSize="large">
+     <ControlLabel>Email</ControlLabel>
+     <FormControl
+       autoFocus
+       type="email"
+       value={email}
+       onChange={e => setEmail(e.target.value)}
+     />
+   </FormGroup>
+   ```
 
 And that's it! We can now use this in our Login component.
 
