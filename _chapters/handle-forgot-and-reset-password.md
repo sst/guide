@@ -20,7 +20,7 @@ Let's look at the main changes we need to make to allow users to reset their pas
 
 <img class="code-marker" src="/assets/s.png" />We are going to create a `src/containers/ResetPassword.js`.
 
-``` coffee
+```coffee
 import React, { Component } from "react";
 import { Auth } from "aws-amplify";
 import { Link } from "react-router-dom";
@@ -34,111 +34,99 @@ import {
 import LoaderButton from "../components/LoaderButton";
 import "./ResetPassword.css";
 
-export default class ResetPassword extends Component {
-  constructor(props) {
-    super(props);
+export default function ResetPassword() {
+  const [fields, setFields] = useFormFields({
+    code: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  });
+  const [codeSent, setCodeSent] = useState(false);
+  const [confirmed, setConfirmed] = useState(false);
+  const [isConfirming, setIsConfirming] = useState(false);
+  const [isSendingCode, setIsSendingCode] = useState(false);
 
-    this.state = {
-      code: "",
-      email: "",
-      password: "",
-      codeSent: false,
-      confirmed: false,
-      confirmPassword: "",
-      isConfirming: false,
-      isSendingCode: false
-    };
+  function validateCodeForm() {
+    return fields.email.length > 0;
   }
-
-  validateCodeForm() {
-    return this.state.email.length > 0;
-  }
-
-  validateResetForm() {
+  function validateResetForm() {
     return (
-      this.state.code.length > 0 &&
-      this.state.password.length > 0 &&
-      this.state.password === this.state.confirmPassword
+      fields.code.length > 0 &&
+      fields.password.length > 0 &&
+      fields.password === fields.confirmPassword
     );
   }
 
-  handleChange = event => {
-    this.setState({
-      [event.target.id]: event.target.value
-    });
-  };
-
-  handleSendCodeClick = async event => {
+  async function handleSendCodeClick(event) {
     event.preventDefault();
 
-    this.setState({ isSendingCode: true });
+    setIsSendingCode(true);
 
     try {
-      await Auth.forgotPassword(this.state.email);
-      this.setState({ codeSent: true });
-    } catch (e) {
-      alert(e.message);
-      this.setState({ isSendingCode: false });
+      await Auth.forgotPassword(fields.email);
+      setCodeSent(true);
+    } catch (error) {
+      alert(error.message);
+      setIsSendingCode(false);
     }
-  };
+  }
 
-  handleConfirmClick = async event => {
+  async function handleConfirmClick(event) {
     event.preventDefault();
 
-    this.setState({ isConfirming: true });
+    setIsConfirming(true);
 
     try {
       await Auth.forgotPasswordSubmit(
-        this.state.email,
-        this.state.code,
-        this.state.password
+        fields.email,
+        fields.code,
+        fields.password
       );
-      this.setState({ confirmed: true });
-    } catch (e) {
-      alert(e.message);
-      this.setState({ isConfirming: false });
+      setConfirmed(true);
+    } catch (error) {
+      alert(error.message);
+      setIsConfirming(false);
     }
-  };
+  }
 
-  renderRequestCodeForm() {
+  function renderRequestCodeForm() {
     return (
-      <form onSubmit={this.handleSendCodeClick}>
+      <form onSubmit={handleSendCodeClick}>
         <FormGroup bsSize="large" controlId="email">
           <ControlLabel>Email</ControlLabel>
           <FormControl
             autoFocus
             type="email"
-            value={this.state.email}
-            onChange={this.handleChange}
+            value={fields.email}
+            onChange={setFields}
           />
         </FormGroup>
         <LoaderButton
           block
           type="submit"
           bsSize="large"
-          loadingText="Sending…"
-          text="Send Confirmation"
-          isLoading={this.state.isSendingCode}
-          disabled={!this.validateCodeForm()}
-        />
+          isLoading={isSendingCode}
+          disabled={!validateCodeForm()}
+        >
+          Send Confirmation
+        </LoaderButton>
       </form>
     );
   }
 
-  renderConfirmationForm() {
+  function renderConfirmationForm() {
     return (
-      <form onSubmit={this.handleConfirmClick}>
+      <form onSubmit={handleConfirmClick}>
         <FormGroup bsSize="large" controlId="code">
           <ControlLabel>Confirmation Code</ControlLabel>
           <FormControl
             autoFocus
             type="tel"
-            value={this.state.code}
-            onChange={this.handleChange}
+            value={fields.code}
+            onChange={setFields}
           />
           <HelpBlock>
-            Please check your email ({this.state.email}) for the confirmation
-            code.
+            Please check your email ({fields.email}) for the confirmation code.
           </HelpBlock>
         </FormGroup>
         <hr />
@@ -146,73 +134,69 @@ export default class ResetPassword extends Component {
           <ControlLabel>New Password</ControlLabel>
           <FormControl
             type="password"
-            value={this.state.password}
-            onChange={this.handleChange}
+            value={fields.password}
+            onChange={setFields}
           />
         </FormGroup>
         <FormGroup bsSize="large" controlId="confirmPassword">
           <ControlLabel>Confirm Password</ControlLabel>
           <FormControl
             type="password"
-            onChange={this.handleChange}
-            value={this.state.confirmPassword}
+            value={fields.confirmPassword}
+            onChange={setFields}
           />
         </FormGroup>
         <LoaderButton
           block
           type="submit"
           bsSize="large"
-          text="Confirm"
-          loadingText="Confirm…"
-          isLoading={this.state.isConfirming}
-          disabled={!this.validateResetForm()}
-        />
+          isLoading={isConfirming}
+          disabled={!validateResetForm()}
+        >
+          Confirm
+        </LoaderButton>
       </form>
     );
   }
 
-  renderSuccessMessage() {
+  function renderSuccessMessage() {
     return (
       <div className="success">
         <Glyphicon glyph="ok" />
         <p>Your password has been reset.</p>
         <p>
-          <Link to="/login">
-            Click here to login with your new credentials.
-          </Link>
+          <Link to="/login">Click here to login with your credentials.</Link>
         </p>
       </div>
     );
   }
 
-  render() {
-    return (
-      <div className="ResetPassword">
-        {!this.state.codeSent
-          ? this.renderRequestCodeForm()
-          : !this.state.confirmed
-            ? this.renderConfirmationForm()
-            : this.renderSuccessMessage()}
-      </div>
-    );
-  }
+  return (
+    <div className="ResetPassword">
+      {!codeSent
+        ? renderRequestCodeForm()
+        : !confirmed
+        ? renderConfirmationForm()
+        : renderSuccessMessage()}
+    </div>
+  );
 }
 ```
 
 Let's quickly go over the flow here:
 
-- We ask the user to put in the email address for their account in the `this.renderRequestCodeForm()`.
-- Once the user submits this form, we start the process by calling `Auth.forgotPassword(this.state.email)`. Where `Auth` is a part of the AWS Amplify library.
+- We ask the user to put in the email address for their account in the `renderRequestCodeForm()`.
+- Once the user submits this form, we start the process by calling `Auth.forgotPassword(fields.email)`. Where `Auth` is a part of the AWS Amplify library.
 - This triggers Cognito to send a verification code to the specified email address.
-- Then we present a form where the user can input the code that Cognito sends them. This form is rendered in `this.renderConfirmationForm()`. And it also allows the user to put in their new password.
-- Once they submit this form with the code and their new password, we call `Auth.forgotPasswordSubmit(this.state.email, this.state.code, this.state.password)`. This resets the password for the account.
+- Then we present a form where the user can input the code that Cognito sends them. This form is rendered in `renderConfirmationForm()`. And it also allows the user to put in their new password.
+- Once they submit this form with the code and their new password, we call `Auth.forgotPasswordSubmit(fields.email, fields.code, fields.password)`. This resets the password for the account.
 - Finally, we show the user a sign telling them that their password has been successfully reset. We also link them to the login page where they can login using their new details.
 
 Let's also add a couple of styles.
 
 <img class="code-marker" src="/assets/s.png" />Add the following to `src/containers/ResetPassword.css`.
 
-``` css
+```css
 @media all and (min-width: 480px) {
   .ResetPassword {
     padding: 60px 0;
@@ -245,18 +229,18 @@ Finally, let's link this up with the rest of our app.
 
 <img class="code-marker" src="/assets/s.png" />Add the route to `src/Routes.js`.
 
-``` html
+```html
 <UnauthenticatedRoute
   path="/login/reset"
   exact
-  component={ResetPassword}
-  props={childProps}
+  component="{ResetPassword}"
+  appProps="{appProps}"
 />
 ```
 
 <img class="code-marker" src="/assets/s.png" />And import it in the header.
 
-``` coffee
+```coffee
 import ResetPassword from "./containers/ResetPassword";
 ```
 
@@ -266,19 +250,19 @@ Now we want to make sure that our users are directed to this page when they are 
 
 <img class="code-marker" src="/assets/s.png" />So let's add a link in our `src/containers/Login.js`. Add it above our login button.
 
-``` coffee
+```coffee
 <Link to="/login/reset">Forgot password?</Link>
 ```
 
 <img class="code-marker" src="/assets/s.png" />And import the `Link` component in the header.
 
-``` coffee
+```coffee
 import { Link } from "react-router-dom";
 ```
 
 <img class="code-marker" src="/assets/s.png" />And finally add some style to the link by adding the following to `src/containers/Login.css`
 
-``` css
+```css
 .Login form a {
   margin-bottom: 15px;
   display: block;
