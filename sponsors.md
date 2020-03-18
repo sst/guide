@@ -28,6 +28,10 @@ Serverless Stack is written and maintained by [Frank Wang](https://github.com/fw
 <a target="_blank" href="https://epsagon.com">
   <img height="30" alt="Epsagon" src="/assets/sponsors/epsagon.png" />
 </a>
+&nbsp;&nbsp;
+<a target="_blank" href="https://www.thundra.io">
+  <img height="30" alt="Thundra" src="/assets/sponsors/thundra.png" />
+</a>
 
 Your **banner** will be placed on **ALL** the chapters of the guide. And your **company logo** and link will be placed here. [Contact us if you'd like to be a Gold Sponsor](mailto:{{ site.email }}).
 
@@ -61,6 +65,10 @@ Your **company logo** and link will be placed here. [Contact us if you'd like to
 - [WiSEO](https://www.whatisseo.com)
 - [Trevor Dorsey](https://www.foyyay.com/)
 - [Cuspy Software](https://cuspy.io)
+- [humanoit](https://github.com/humanoit)
+- [Amir Arafat](https://github.com/amir5000)
+- [Vince Fulco](https://github.com/weisisheng)
+- [Peter Miller](https://github.com/phm200)
 
 
 We'd like thank our sponsors and backers for supporting us!

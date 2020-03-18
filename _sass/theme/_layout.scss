@@ -552,11 +552,21 @@
     margin-bottom: $spacing-unit / 2;
   }
 
-  img {
-    border-radius: 4px;
+  .banners {
+    a {
+      margin-top: 10px;
+      display: inline-block;
+    }
+    a+a {
+      margin-left: 5px;
+    }
+    img {
+      border-radius: 4px;
+    }
   }
 
   p {
+    margin-bottom: 0;
     color: $tertiary-text-color;
     font-size: 14px;
     &:last-child {
