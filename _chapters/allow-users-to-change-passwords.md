@@ -14,52 +14,87 @@ For reference, we are using a forked version of the notes app with:
 - A separate GitHub repository: [**{{ site.frontend_user_mgmt_github_repo }}**]({{ site.frontend_user_mgmt_github_repo }})
 - And it can be accessed through: [**https://demo-user-mgmt.serverless-stack.com**](https://demo-user-mgmt.serverless-stack.com)
 
-Let's start by creating a settings page that our users can use to change their password.
+Let's start by adding a feature to the settings page that our users can use to change their password.
 
-### Add a Settings Page
+### The Settings Page
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `src/containers/Settings.js`.
+<img class="code-marker" src="/assets/s.png" />Replace the contents of `src/containers/Settings.js` with the following:
 
 ``` coffee
-import React, { Component } from "react";
+import React, { useState } from "react";
+import { API } from "aws-amplify";
+import { Elements, StripeProvider } from "react-stripe-elements";
 import { LinkContainer } from "react-router-bootstrap";
 import LoaderButton from "../components/LoaderButton";
+import BillingForm from "../components/BillingForm";
+import config from "../config";
 import "./Settings.css";
 
-export default class Settings extends Component {
-  constructor(props) {
-    super(props);
+export default function Settings(props) {
+  const [isLoading, setIsLoading] = useState(false);
 
-    this.state = {
-    };
+  function billUser(details) {
+    return API.post("notes", "/billing", {
+      body: details
+    });
   }
 
-  render() {
-    return (
-      <div className="Settings">
-        <LinkContainer to="/settings/email">
+  async function handleFormSubmit(storage, { token, error }) {
+    if (error) {
+      alert(error);
+      return;
+    }
+  
+    setIsLoading(true);
+  
+    try {
+      await billUser({
+        storage,
+        source: token.id
+      });
+  
+      alert("Your card has been charged successfully!");
+      props.history.push("/");
+    } catch (e) {
+      alert(e);
+      setIsLoading(false);
+    }
+  }
+  
+  return (
+    <div className="Settings">
+      <LinkContainer to="/settings/email">
           <LoaderButton
             block
             bsSize="large"
-            text="Change Email"
-          />
+          >
+            Change Email
+          </LoaderButton>
         </LinkContainer>
         <LinkContainer to="/settings/password">
           <LoaderButton
             block
             bsSize="large"
-            text="Change Password"
-          />
+          >
+            Change Password
+          </LoaderButton>
         </LinkContainer>
-      </div>
-    );
-  }
+      <StripeProvider apiKey={config.STRIPE_KEY}>
+        <Elements>
+          <BillingForm
+            isLoading={isLoading}
+            onSubmit={handleFormSubmit}
+          />
+        </Elements>
+      </StripeProvider>
+    </div>
+  );
 }
 ```
 
-All this does is add two links to a page that allows our users to change their password and email.
+With this change we add two links to a page that allows our users to change their password and email just above the billing form that we created in the section starting with [Create a Settings Page](https://serverless-stack.com/chapters/create-a-settings-page.html).
 
-<img class="code-marker" src="/assets/s.png" />Let's also add a couple of styles for this page.
+<img class="code-marker" src="/assets/s.png" />Let's also replace the contents of `src/containers/Settings.css`  with the following to add some styles to our changes.
 
 ``` css
 @media all and (min-width: 480px) {
@@ -68,10 +103,16 @@ All this does is add two links to a page that allows our users to change their p
     margin: 0 auto;
     max-width: 320px;
   }
-}
-.Settings .LoaderButton:last-child {
-  margin-top: 15px;
-}
+  
+  .Settings .LoaderButton:last-child {
+    margin-top: 5px;
+  }
+
+  .Settings form {
+     margin: 0 auto;
+     max-width: 480px;
+    }
+  }
 ```
 
 <img class="code-marker" src="/assets/s.png" />Add a link to this settings page to the navbar of our app by changing `src/App.js`.
@@ -220,11 +261,12 @@ export default class ChangePassword extends Component {
             block
             type="submit"
             bsSize="large"
-            text="Change Password"
             loadingText="Changing…"
             disabled={!this.validateForm()}
             isLoading={this.state.isChanging}
           />
+            Change Password
+          </LoaderButton>
         </form>
       </div>
     );
@@ -263,12 +305,7 @@ The above snippet uses the `Auth` module from Amplify to get the current user. A
 <img class="code-marker" src="/assets/s.png" />Let's add our new page to `src/Routes.js`.
 
 ``` html
-<AuthenticatedRoute
-  path="/settings/password"
-  exact
-  component={ChangePassword}
-  props={childProps}
-/>
+<AuthenticatedRoute path="/settings/password" exact component={ChangePassword} appProps={appProps} />
 ```
 
 <img class="code-marker" src="/assets/s.png" />And import it.
