@@ -23,7 +23,7 @@ Next let's create our billing form component.
 {% raw %}
 ``` coffee
 import React, { useState } from "react";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import LoaderButton from "./LoaderButton";
 import { useFormFields } from "../libs/hooksLib";
@@ -62,7 +62,7 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
   return (
     <form className="BillingForm" onSubmit={handleSubmitClick}>
       <FormGroup bsSize="large" controlId="storage">
-        <ControlLabel>Storage</ControlLabel>
+        <FormLabel>Storage</FormLabel>
         <FormControl
           min="0"
           type="number"
@@ -73,7 +73,7 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
       </FormGroup>
       <hr />
       <FormGroup bsSize="large" controlId="name">
-        <ControlLabel>Cardholder&apos;s name</ControlLabel>
+        <FormLabel>Cardholder&apos;s name</FormLabel>
         <FormControl
           type="text"
           value={fields.name}
@@ -81,7 +81,7 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
           placeholder="Name on the card"
         />
       </FormGroup>
-      <ControlLabel>Credit Card Info</ControlLabel>
+      <FormLabel>Credit Card Info</FormLabel>
       <CardElement
         className="card-field"
         onChange={e => setIsCardComplete(e.complete)}

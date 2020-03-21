@@ -82,7 +82,7 @@ And that's it! We can now use this in our Login component.
 ``` coffee
 import React, { useState } from "react";
 import { Auth } from "aws-amplify";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import { useFormFields } from "../libs/hooksLib";
 import "./Login.css";
@@ -117,7 +117,7 @@ export default function Login(props) {
     <div className="Login">
       <form onSubmit={handleSubmit}>
         <FormGroup controlId="email" bsSize="large">
-          <ControlLabel>Email</ControlLabel>
+          <FormLabel>Email</FormLabel>
           <FormControl
             autoFocus
             type="email"
@@ -126,7 +126,7 @@ export default function Login(props) {
           />
         </FormGroup>
         <FormGroup controlId="password" bsSize="large">
-          <ControlLabel>Password</ControlLabel>
+          <FormLabel>Password</FormLabel>
           <FormControl
             type="password"
             value={fields.password}

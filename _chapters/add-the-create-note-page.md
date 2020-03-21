@@ -18,7 +18,7 @@ First we are going to create the form for a note. It'll take some content and a 
 
 ``` coffee
 import React, { useRef, useState } from "react";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import config from "../config";
 import "./NewNote.css";
@@ -61,7 +61,7 @@ export default function NewNote(props) {
           />
         </FormGroup>
         <FormGroup controlId="file">
-          <ControlLabel>Attachment</ControlLabel>
+          <FormLabel>Attachment</FormLabel>
           <FormControl onChange={handleFileChange} type="file" />
         </FormGroup>
         <LoaderButton
