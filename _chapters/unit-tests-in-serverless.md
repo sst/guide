@@ -46,28 +46,28 @@ import { calculateCost } from "../libs/billing-lib";
 test("Lowest tier", () => {
   const storage = 10;
 
-  const cost = 4000;
-  const expectedCost = calculateCost(storage);
+  const actualCost = calculateCost(storage);
+  const expectedCost = 4000;
 
-  expect(cost).toEqual(expectedCost);
+  expect(actualCost).toBe(expectedCost);
 });
 
 test("Middle tier", () => {
   const storage = 100;
 
-  const cost = 20000;
-  const expectedCost = calculateCost(storage);
+  const actualCost = calculateCost(storage);
+  const expectedCost = 20000;
 
-  expect(cost).toEqual(expectedCost);
+  expect(actualCost).toBe(expectedCost);
 });
 
 test("Highest tier", () => {
   const storage = 101;
 
-  const cost = 10100;
-  const expectedCost = calculateCost(storage);
+  const actualCost = calculateCost(storage);
+  const expectedCost = 10100;
 
-  expect(cost).toEqual(expectedCost);
+  expect(actualCost).toBe(expectedCost);
 });
 ```
 
