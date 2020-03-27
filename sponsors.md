@@ -69,6 +69,8 @@ Your **company logo** and link will be placed here. [Contact us if you'd like to
 - [Amir Arafat](https://github.com/amir5000)
 - [Vince Fulco](https://github.com/weisisheng)
 - [Peter Miller](https://github.com/phm200)
+- [marxtrader](https://www.chrisranni.com)
+- [Luis Ocasio](https://github.com/LuisOcasio)
 
 
 We'd like thank our sponsors and backers for supporting us!
