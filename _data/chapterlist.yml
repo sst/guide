@@ -189,7 +189,7 @@ build-react:
           url: /chapters/redirect-on-login.html
 
 deploy-backend-prod:
-  title: Deploying the backend to production 
+  title: Deploying the backend to production
   chapters:
     - page: Getting production ready
       url: /chapters/getting-production-ready.html
@@ -227,7 +227,7 @@ deploy-frontend-prod:
   chapters:
     - page: Automating React Deployments
       url: /chapters/automating-react-deployments.html
-      subchapters: 
+      subchapters:
         - page: Manage environments in Create React App
           url: /chapters/manage-environments-in-create-react-app.html
         - page: Create a build script
@@ -238,6 +238,37 @@ deploy-frontend-prod:
           url: /chapters/custom-domain-in-netlify.html
     - page: Frontend workflow
       url: /chapters/frontend-workflow.html
+
+monitor-debug-errors:
+  title: Monitor and debug errors
+  chapters:
+    - page: Setup error reporting in React
+      url: /chapters/setup-error-reporting-in-react.html
+      subchapters:
+        - page: Get started with Sentry
+          url: /chapters/get-started-with-sentry.html
+        - page: Report API errors in React
+          url: /chapters/report-api-errors-in-react.html
+        - page: Configure an error boundary in React
+          url: /chapters/setup-an-error-boundary-in-react.html
+    - page: Setup error logging in Serverless
+      url: /chapters/setup-error-logging-in-serverless.html
+      subchapters:
+        - page: Log errors in Lambda functions
+          url: /chapters/log-errors-in-lambda-functions.html
+        - page: Configure AWS SDK logging
+          url: /chapters/configure-aws-sdk-logging.html
+        - page: Configure context logging on error
+          url: /chapters/configure-context-logging-on-error.html
+    - page: Debugging workflow for Serverless apps
+      url: /chapters/debugging-workflow-for-serverless-apps.html
+      subchapters:
+        - page: Errors in Lambda functions
+          url: /chapters/errors-in-lambda-functions.html
+        - page: Errors outside Lambda functions
+          url: /chapters/errors-outside-lambda-functions.html
+        - page: Errors in API Gateway
+          url: /chapters/errors-in-api-gateway.html
 
 conclusion:
   title: Conclusion
@@ -254,13 +285,13 @@ conclusion:
       url: /chapters/changelog.html
     - page: Staying up to date
       url: /chapters/staying-up-to-date.html
-      
+
 best-practices-intro:
   title: Introduction
   chapters:
     - page: Best practices for building Serverless apps
       url: /chapters/best-practices-for-building-serverless-apps.html
-      
+
 organize-serverless-apps:
   title: Organize a Serverless app
   chapters:
@@ -268,7 +299,7 @@ organize-serverless-apps:
       url: /chapters/organizing-serverless-projects.html
     - page: Cross-stack references in Serverless
       url: /chapters/cross-stack-references-in-serverless.html
-      subchapters: 
+      subchapters:
         - page: DynamoDB as a Serverless service
           url: /chapters/dynamodb-as-a-serverless-service.html
         - page: S3 as a Serverless service
@@ -295,7 +326,7 @@ configure-environments:
       url: /chapters/parameterize-serverless-resources-names.html
     - page: Deploying to multiple AWS accounts
       url: /chapters/deploying-to-multiple-aws-accounts.html
-      subchapters: 
+      subchapters:
         - page: Deploy the resources repo
           url: /chapters/deploy-the-resources-repo.html
         - page: Deploy the API services repo
