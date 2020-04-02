@@ -29,7 +29,7 @@ async function handleSubmit(event) {
   try {
     await Auth.signIn(email, password);
     props.userHasAuthenticated(true);
-    props.history.push("/");
+    history.push("/");
   } catch (e) {
     alert(e.message);
     setIsLoading(false);
@@ -40,6 +40,14 @@ async function handleSubmit(event) {
 ### Create a Loader Button
 
 Now to reflect the state change in our button we are going to render it differently based on the `isLoading` flag. But we are going to need this piece of code in a lot of different places. So it makes sense that we create a reusable component out of it.
+
+<img class="code-marker" src="/assets/s.png" />Create a `src/components/` directory by running this command in your working directory.
+
+``` bash
+$ mkdir src/components/
+```
+
+Here we'll be storing all our React components that are not dealing directly with our API or responding to routes.
 
 <img class="code-marker" src="/assets/s.png" />Create a new file and add the following in `src/components/LoaderButton.js`.
 

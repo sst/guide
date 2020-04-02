@@ -36,7 +36,7 @@ async function handleSubmit(event) {
 
   try {
     await createNote({ content });
-    props.history.push("/");
+    history.push("/");
   } catch (e) {
     alert(e);
     setIsLoading(false);
