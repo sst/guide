@@ -13,17 +13,17 @@ To complete the login flow we are going to need to do two more things.
 1. Redirect the user to the homepage after they login.
 2. And redirect them back to the login page after they logout.
 
-We are going to use the `history.push` method that comes with React Router v4.
+We are going to use the `useHistory` hook that comes with React Router v4.
 
 ### Redirect to Home on Login
 
-Since our `Login` component is rendered using a `Route`, it adds the router props to it. So we can redirect using the `this.props.history.push` method.
+<img class="code-marker" src="/assets/s.png" />First, initialize `useHistory` hook in the beginning of `Login` component.
 
 ``` javascript
-props.history.push("/");
+const history = useHistory();
 ```
 
-<img class="code-marker" src="/assets/s.png" />Update the `handleSubmit` method in `src/containers/Login.js` to look like this:
+<img class="code-marker" src="/assets/s.png" />Then update the `handleSubmit` method in `src/containers/Login.js` to look like this:
 
 ``` javascript
 async function handleSubmit(event) {
@@ -32,11 +32,16 @@ async function handleSubmit(event) {
   try {
     await Auth.signIn(email, password);
     props.userHasAuthenticated(true);
-    props.history.push("/");
+    history.push("/");
   } catch (e) {
     alert(e.message);
   }
 }
+```
+
+<img class="code-marker" src="/assets/s.png" /> Also, import `useHistory` depenency in `src/containers/Login.js`.
+``` javascript
+import { useHistory } from "react-router-dom";
 ```
 
 Now if you head over to your browser and try logging in, you should be redirected to the homepage after you've been logged in.
@@ -45,32 +50,24 @@ Now if you head over to your browser and try logging in, you should be redirecte
 
 ### Redirect to Login After Logout
 
-Now we'll do something very similar for the logout process. However, the `App` component does not have access to the router props directly since it is not rendered inside a `Route` component. To be able to use the router props in our `App` component we will need to use the `withRouter` [Higher-Order Component](https://facebook.github.io/react/docs/higher-order-components.html) (or HOC). You can read more about the `withRouter` HOC [here](https://reacttraining.com/react-router/web/api/withRouter).
+Now we'll do something very similar for the logout process. 
 
-To use this HOC, we'll change the way we export our App component.
+<img class="code-marker" src="/assets/s.png" />Add `useHistory` hook in the beginning of `App` component.
 
-<img class="code-marker" src="/assets/s.png" />Replace the following line in `src/App.js`.
-
-``` coffee
-export default App;
+``` javascript
+const history = useHistory();
 ```
 
-<img class="code-marker" src="/assets/s.png" />With this.
+<img class="code-marker" src="/assets/s.png" />Import `useHistory` by replacing the `import { Link }` line in the header of `src/App.js` with this:
 
 ``` coffee
-export default withRouter(App);
-```
-
-<img class="code-marker" src="/assets/s.png" />And import `withRouter` by replacing the `import { Link }` line in the header of `src/App.js` with this:
-
-``` coffee
-import { Link, withRouter } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 ```
 
 <img class="code-marker" src="/assets/s.png" />Add the following to the bottom of the `handleLogout` function in our `src/App.js`.
 
 ``` coffee
-props.history.push("/login");
+history.push("/login");
 ```
 
 So our `handleLogout` method should now look like this.
@@ -81,7 +78,7 @@ async function handleLogout() {
 
   userHasAuthenticated(false);
 
-  props.history.push("/login");
+  history.push("/login");
 }
 ```
 

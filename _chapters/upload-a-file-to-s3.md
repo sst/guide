@@ -73,7 +73,7 @@ async function handleSubmit(event) {
       : null;
 
     await createNote({ content, attachment });
-    props.history.push("/");
+    history.push("/");
   } catch (e) {
     alert(e);
     setIsLoading(false);

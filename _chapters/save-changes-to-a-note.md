@@ -14,7 +14,7 @@ Now that our note loads into our form, let's work on saving the changes we make 
 
 ``` javascript
 function saveNote(note) {
-  return API.put("notes", `/notes/${props.match.params.id}`, {
+  return API.put("notes", `/notes/${id}`, {
     body: note
   });
 }
@@ -43,7 +43,7 @@ async function handleSubmit(event) {
       content,
       attachment: attachment || note.attachment
     });
-    props.history.push("/");
+    history.push("/");
   } catch (e) {
     alert(e);
     setIsLoading(false);
@@ -51,9 +51,10 @@ async function handleSubmit(event) {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />And include our `s3Upload` helper method in the header:
+<img class="code-marker" src="/assets/s.png" />And include our `s3Upload` helper method in the header as well as `useHistory` hook:
 
 ``` javascript
+import { useParams, useHistory } from "react-router-dom";
 import { s3Upload } from "../libs/awsLib";
 ```
 

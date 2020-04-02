@@ -48,7 +48,9 @@ import Settings from "./containers/Settings";
 <img class="code-marker" src="/assets/s.png" />Add the following below the `/signup` route in our `<Switch>` block in `src/Routes.js`.
 
 ``` coffee
-<AppliedRoute path="/settings" exact component={Settings} appProps={appProps} />
+<Route path="/settings" exact>
+  <Settings />
+</Route>
 ```
 
 <img class="code-marker" src="/assets/s.png" />Next add a link to our settings page in the navbar by replacing the `return` statement in `src/App.js` with this.
