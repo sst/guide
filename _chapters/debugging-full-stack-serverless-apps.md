@@ -49,9 +49,10 @@ Here's what we'll be going over in the next few chapters:
 3. Reporting unexpected React errors with an Error Boundary.
 4. Setting up detailed error reporting in Lambda.
 5. Going over how to debug:
-   1. Errors in our Lambda functions.
-   2. Errors outside our Lambda functions.
-   3. Errors in API Gateway.
+   1. Logic errors in our Lambda functions.
+   2. Unexpected errors in our Lambda functions.
+   3. Errors outside our Lambda functions.
+   4. Errors in API Gateway.
 
 This should give you a good foundation to be able to monitor your app as it goes into production. There are plenty of other great tools out there that can improve on this setup. We want to make sure we cover the basics here. Let's get started! 
 

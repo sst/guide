@@ -255,18 +255,13 @@ monitor-debug-errors:
           url: /chapters/setup-an-error-boundary-in-react.html
     - page: Setup error logging in Serverless
       url: /chapters/setup-error-logging-in-serverless.html
-      subchapters:
-        - page: Log errors in Lambda functions
-          url: /chapters/log-errors-in-lambda-functions.html
-        - page: Configure AWS SDK logging
-          url: /chapters/configure-aws-sdk-logging.html
-        - page: Configure context logging on error
-          url: /chapters/configure-context-logging-on-error.html
     - page: Debugging workflow for Serverless apps
       url: /chapters/debugging-workflow-for-serverless-apps.html
       subchapters:
-        - page: Errors in Lambda functions
-          url: /chapters/errors-in-lambda-functions.html
+        - page: Logic errors in Lambda functions
+          url: /chapters/logic-errors-in-lambda-functions.html
+        - page: Unexpected errors in Lambda functions
+          url: /chapters/unexpected-errors-in-lambda-functions.html
         - page: Errors outside Lambda functions
           url: /chapters/errors-outside-lambda-functions.html
         - page: Errors in API Gateway
