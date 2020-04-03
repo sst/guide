@@ -23,19 +23,19 @@ Next, we simply switch to our new redirect routes.
 So the following routes in `src/Routes.js` would be affected.
 
 ``` coffee
-<Route path="/login" exact>
-  <Login {...appProps} />
+<Route exact path="/login">
+  <Login />
 </Route>
-<Route path="/signup" exact>
-  <Signup {...appProps} />
+<Route exact path="/signup">
+  <Signup />
 </Route>
-<Route path="/settings" exact>
+<Route exact path="/settings">
   <Settings />
 </Route>
-<Route path="/notes/new" exact>
+<Route exact path="/notes/new">
   <NewNote />
 </Route>
-<Route path="/notes/:id" exact>
+<Route exact path="/notes/:id">
   <Notes />
 </Route>
 ```
@@ -43,19 +43,19 @@ So the following routes in `src/Routes.js` would be affected.
 <img class="code-marker" src="/assets/s.png" />They should now look like so:
 
 ``` coffee
-<UnauthenticatedRoute path="/login" exact appProps={appProps}>
-  <Login {...appProps} />
+<UnauthenticatedRoute exact path="/login">
+  <Login />
 </UnauthenticatedRoute>
-<UnauthenticatedRoute path="/signup" exact appProps={appProps}>
-  <Signup {...appProps} />
+<UnauthenticatedRoute exact path="/signup">
+  <Signup />
 </UnauthenticatedRoute>
-<AuthenticatedRoute path="/settings" exact appProps={appProps}>
+<AuthenticatedRoute exact path="/settings">
   <Settings />
 </AuthenticatedRoute>
-<AuthenticatedRoute path="/notes/new" exact appProps={appProps}>
+<AuthenticatedRoute exact path="/notes/new">
   <NewNote />
 </AuthenticatedRoute>
-<AuthenticatedRoute path="/notes/:id" exact appProps={appProps}>
+<AuthenticatedRoute exact path="/notes/:id">
   <Notes />
 </AuthenticatedRoute>
 ```

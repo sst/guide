@@ -47,8 +47,10 @@ Now we just need to add this component to our routes to handle our 404s.
 <img class="code-marker" src="/assets/s.png" />Find the `<Switch>` block in `src/Routes.js` and add it as the last line in that section.
 
 ``` coffee
-{ /* Finally, catch all unmatched routes */ }
-<Route component={NotFound} />
+{/* Finally, catch all unmatched routes */}
+<Route>
+  <NotFound />
+</Route>
 ```
 
 This needs to always be the last line in the `<Route>` block. You can think of it as the route that handles requests in case all the other routes before it have failed.

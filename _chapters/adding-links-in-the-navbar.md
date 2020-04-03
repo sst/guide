@@ -13,7 +13,7 @@ Now that we have our first route set up, let's add a couple of links to the navb
 <img class="code-marker" src="/assets/s.png" />Replace the `App` function component in `src/App.js` with the following.
 
 ``` coffee
-function App(props) {
+function App() {
   return (
     <div className="App container">
       <Navbar fluid collapseOnSelect>
@@ -70,7 +70,7 @@ import { LinkContainer } from "react-router-bootstrap";
 <img class="code-marker" src="/assets/s.png" />We will now wrap our links with the `LinkContainer`. Replace the `App` function component in your `src/App.js` with this.
 
 ``` coffee
-function App(props) {
+function App() {
   return (
     <div className="App container">
       <Navbar fluid collapseOnSelect>

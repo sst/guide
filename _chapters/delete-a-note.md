@@ -34,13 +34,13 @@ async function handleDelete(event) {
     await deleteNote();
     history.push("/");
   } catch (e) {
-    alert(e);
+    onError(e);
     setIsDeleting(false);
   }
 }
 ```
 
-We are simply making a `DELETE` request to `/notes/:id` where we get the `id` from `useParams` hook provided by React-Router. We use the `API.del` method from AWS Amplify to do so. This calls our delete API and we redirect to the homepage on success.
+We are simply making a `DELETE` request to `/notes/:id` where we get the `id` from `useParams` hook provided by React Router. We use the `API.del` method from AWS Amplify to do so. This calls our delete API and we redirect to the homepage on success.
 
 Now if you switch over to your browser and try deleting a note you should see it confirm your action and then delete the note.
 

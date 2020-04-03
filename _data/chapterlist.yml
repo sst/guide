@@ -240,8 +240,10 @@ deploy-frontend-prod:
       url: /chapters/frontend-workflow.html
 
 monitor-debug-errors:
-  title: Monitor and debug errors
+  title: Monitoring and debugging errors
   chapters:
+    - page: Debugging full-stack Serverless apps
+      url: /chapters/debugging-full-stack-serverless-apps.html
     - page: Setup error reporting in React
       url: /chapters/setup-error-reporting-in-react.html
       subchapters:

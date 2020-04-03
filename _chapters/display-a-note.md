@@ -19,7 +19,7 @@ Let's add a route for the note page that we are going to create.
 <img class="code-marker" src="/assets/s.png" />Add the following line to `src/Routes.js` **below** our `/notes/new` route. 
 
 ``` coffee
-<Route path="/notes/:id" exact>
+<Route exact path="/notes/:id">
   <Notes />
 </Route>
 ```
@@ -42,14 +42,17 @@ Of course this component doesn't exist yet and we are going to create it now.
 
 ``` coffee
 import React, { useRef, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { API, Storage } from "aws-amplify";
+import { useParams, useHistory } from "react-router-dom";
+import API from "@aws-amplify/api";
+import Storage from "@aws-amplify/storage";
+import { onError } from "../libs/errorLib";
 
-export default function Notes(props) {
+export default function Notes() {
   const file = useRef(null);
+  const { id } = useParams();
+  const history = useHistory();
   const [note, setNote] = useState(null);
   const [content, setContent] = useState("");
-  const { id } = useParams();
 
   useEffect(() => {
     function loadNote() {
@@ -68,7 +71,7 @@ export default function Notes(props) {
         setContent(content);
         setNote(note);
       } catch (e) {
-        alert(e);
+        onError(e);
       }
     }
 
@@ -83,7 +86,7 @@ export default function Notes(props) {
 
 We are doing a couple of things here.
 
-1. We are using the `useEffect` Hook to load the note when our component first loads. We then save it to the state. We get the `id` of our note from the URL using `useParams` hook that comes with React-Router. The keyword `id` is a part of the pattern matching in our route (`/notes/:id`).
+1. We are using the `useEffect` Hook to load the note when our component first loads. We then save it to the state. We get the `id` of our note from the URL using `useParams` hook that comes with React Router. The `id` is a part of the pattern matching in our route (`/notes/:id`).
 
 2. If there is an attachment, we use the key to get a secure link to the file we uploaded to S3. We then store this in the new note object as `note.attachmentURL`.
 

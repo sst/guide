@@ -20,10 +20,13 @@ To get started let's add our settings page.
 <img class="code-marker" src="/assets/s.png" />Create a new file in `src/containers/Settings.js` and add the following.
 
 ``` coffee
-import React, { useState } from "react";
-import { API } from "aws-amplify";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import API from "@aws-amplify/api";
+import { onError } from "../libs/errorLib";
 
-export default function Settings(props) {
+export default function Settings() {
+  const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
 
   function billUser(details) {
@@ -48,7 +51,7 @@ import Settings from "./containers/Settings";
 <img class="code-marker" src="/assets/s.png" />Add the following below the `/signup` route in our `<Switch>` block in `src/Routes.js`.
 
 ``` coffee
-<Route path="/settings" exact>
+<Route exact path="/settings">
   <Settings />
 </Route>
 ```
@@ -89,7 +92,11 @@ return (
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Routes appProps={{ isAuthenticated, userHasAuthenticated }} />
+      <AppContext.Provider
+        value={{ isAuthenticated, userHasAuthenticated }}
+      >
+        <Routes />
+      </AppContext.Provider>
     </div>
   )
 );

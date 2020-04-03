@@ -21,12 +21,12 @@ async function handleSubmit(event) {
   try {
     const newUser = await Auth.signUp({
       username: fields.email,
-      password: fields.password
+      password: fields.password,
     });
     setIsLoading(false);
     setNewUser(newUser);
   } catch (e) {
-    alert(e.message);
+    onError(e);
     setIsLoading(false);
   }
 }
@@ -40,10 +40,10 @@ async function handleConfirmationSubmit(event) {
     await Auth.confirmSignUp(fields.email, fields.confirmationCode);
     await Auth.signIn(fields.email, fields.password);
 
-    props.userHasAuthenticated(true);
+    userHasAuthenticated(true);
     history.push("/");
   } catch (e) {
-    alert(e.message);
+    onError(e);
     setIsLoading(false);
   }
 }
@@ -52,7 +52,7 @@ async function handleConfirmationSubmit(event) {
 <img class="code-marker" src="/assets/s.png" />Also, include the Amplify Auth in our header.
 
 ``` javascript
-import { Auth } from "aws-amplify";
+import Auth from "@aws-amplify/auth";
 ```
 
 The flow here is pretty simple:
@@ -67,7 +67,7 @@ The flow here is pretty simple:
 
 5. Use the email and password to authenticate exactly the same way we did in the login page.
 
-6. Update the App's state using the `userHasAuthenticated` function.
+6. Update the App's context using the `userHasAuthenticated` function.
 
 7. Finally, redirect to the homepage.
 

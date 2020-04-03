@@ -15,7 +15,7 @@ We just need to use the `API` module that AWS Amplify has.
 <img class="code-marker" src="/assets/s.png" />Let's include the `API` module by adding the following to the header of `src/containers/NewNote.js`.
 
 ``` javascript
-import { API } from "aws-amplify";
+import API from "@aws-amplify/api";
 ```
 
 <img class="code-marker" src="/assets/s.png" />And replace our `handleSubmit` function with the following.
@@ -38,7 +38,7 @@ async function handleSubmit(event) {
     await createNote({ content });
     history.push("/");
   } catch (e) {
-    alert(e);
+    onError(e);
     setIsLoading(false);
   }
 }

@@ -143,4 +143,4 @@ And hit **Publish deploy**. This will publish our previous version again.
 
 And that's it! Now you have an automated workflow for building and deploying your Create React App with serverless.
 
-Let's wrap up the guide next.
+We are almost ready to wrap things up. But before we do, we want to cover one final really important topic; how to monitor and debug errors when your app is live.

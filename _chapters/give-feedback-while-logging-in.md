@@ -28,7 +28,7 @@ async function handleSubmit(event) {
 
   try {
     await Auth.signIn(email, password);
-    props.userHasAuthenticated(true);
+    userHasAuthenticated(true);
     history.push("/");
   } catch (e) {
     alert(e.message);
@@ -132,6 +132,57 @@ And now when we switch over to the browser and try logging in, you should see th
 
 ![Login loading state screenshot](/assets/login-loading-state.png)
 
-If you would like to add _Forgot Password_ functionality for your users, you can refer to our [Extra Credit series of chapters on user management]({% link _chapters/manage-user-accounts-in-aws-amplify.md %}).
+### Handling Errors
 
-Next let's implement the sign up process for our app.
+You might have noticed in our Login and App components that we simply `alert` when there is an error. For this section of the guide we are going to keep it simple. But it'll help us further down the line if we handle all of our errors in one place.
+
+<img class="code-marker" src="/assets/s.png" />To do that, add the following to `src/libs/errorLib.js`.
+
+``` javascript
+export function onError(error) {
+  let message = error.toString();
+
+  // Auth errors
+  if (!(error instanceof Error) && error.message) {
+    message = error.message;
+  }
+
+  alert(message);
+}
+```
+
+The `Auth` package throws errors in different formats, so all this does is `alert` the error message we need. And in all other cases simply `alert` the error oject itself.
+
+Let's use this in our Login container.
+
+<img class="code-marker" src="/assets/s.png" />Import the new error lib in the header of `src/containers/Login.js`.
+
+``` javascript
+import { onError } from "../libs/errorLib";
+```
+
+<img class="code-marker" src="/assets/s.png" />And replace of `alert(e.message);` with:
+
+``` javascript
+onError(e);
+```
+
+We'll do something similar in the App component.
+
+<img class="code-marker" src="/assets/s.png" />Import the error lib in the header of `src/App.js`.
+
+``` javascript
+import { onError } from "./libs/errorLib";
+```
+
+<img class="code-marker" src="/assets/s.png" />And replace of `alert(e);` with:
+
+``` javascript
+onError(e);
+```
+
+We'll improve our error handling a little later on in the guide.
+
+Also, if you would like to add _Forgot Password_ functionality for your users, you can refer to our [Extra Credit series of chapters on user management]({% link _chapters/manage-user-accounts-in-aws-amplify.md %}).
+
+For now, we are ready to move on to the sign up process for our app.

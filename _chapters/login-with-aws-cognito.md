@@ -10,12 +10,20 @@ comments_id: login-with-aws-cognito/129
 
 We are going to use AWS Amplify to login to our Amazon Cognito setup. Let's start by importing it. 
 
+### Install AWS Amplify Auth
+
+<img class="code-marker" src="/assets/s.png" />Run the following command in your working directory.
+
+``` bash
+$ npm install @aws-amplify/auth --save
+```
+
 ### Import Auth from AWS Amplify
 
-<img class="code-marker" src="/assets/s.png" />Add the following to the header of our Login container in `src/containers/Login.js`.
+<img class="code-marker" src="/assets/s.png" />Add the Auth module to the header of our Login container in `src/containers/Login.js`.
 
 ``` coffee
-import { Auth } from "aws-amplify";
+import Auth from "@aws-amplify/auth";
 ```
 
 ### Login to Amazon Cognito

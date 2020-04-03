@@ -40,18 +40,17 @@ Now let's update our component to use this parameter when it redirects.
 <img class="code-marker" src="/assets/s.png" />Replace our current `UnauthenticatedRoute` function component with the following.
 
 ``` coffee
-export default function UnauthenticatedRoute({ children, appProps, ...rest }) {
+export default function UnauthenticatedRoute({ children, ...rest }) {
+  const { isAuthenticated } = useAppContext();
   const redirect = querystring("redirect");
   return (
-    <Route
-      {...rest}
-      render={() =>
-        !appProps.isAuthenticated
-          ? children
-          : <Redirect
-              to={redirect === "" || redirect === null ? "/" : redirect}
-            />}
-    />
+    <Route {...rest}>
+      {!isAuthenticated ? (
+        children
+      ) : (
+        <Redirect to={redirect === "" || redirect === null ? "/" : redirect} />
+      )}
+    </Route>
   );
 }
 ```

@@ -11,14 +11,14 @@ comments_id: configure-aws-amplify/151
 
 To allow our React app to talk to the AWS resources that we created (in the backend section of the tutorial), we'll be using a library called [AWS Amplify](https://github.com/aws/aws-amplify). 
 
-AWS Amplify provides a few simple modules (Auth, API, and Storage) to help us easily connect to our backend. Let's get started.
+AWS Amplify provides a few simple modules (Auth, API, and Storage) to help us easily connect to our backend. It uses a modular package system, so we'll install them separately. Start by installing the Core package that ties them all together.
 
-### Install AWS Amplify
+### Install AWS Amplify Core
 
 <img class="code-marker" src="/assets/s.png" />Run the following command in your working directory.
 
 ``` bash
-$ npm install aws-amplify --save
+$ npm install @aws-amplify/core --save
 ```
 
 This installs the NPM package and adds the dependency to your `package.json`.
@@ -65,7 +65,7 @@ Next we'll set up AWS Amplify.
 <img class="code-marker" src="/assets/s.png" />Import it by adding the following to the header of your `src/index.js`.
 
 ``` coffee
-import Amplify from 'aws-amplify';
+import Amplify from '@aws-amplify/core';
 ```
 
 And import the config we created above. 

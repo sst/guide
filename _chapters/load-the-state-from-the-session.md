@@ -27,7 +27,7 @@ We start with the value set to `true` because as we first load our app, it'll st
 <img class="code-marker" src="/assets/s.png" />Let's include the `Auth` module by adding the following to the header of `src/App.js`.
 
 ``` javascript
-import { Auth } from "aws-amplify";
+import Auth from "@aws-amplify/auth";
 ```
 
 <img class="code-marker" src="/assets/s.png" />Now to load the user session we'll add the following to our `src/App.js` right below our variable declarations.
@@ -67,7 +67,7 @@ When our app first loads, it'll run the `onLoad` function. All this does is load
 So the top of our `App` function should now look like this:
 
 ``` javascript
-function App(props) {
+function App() {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isAuthenticated, userHasAuthenticated] = useState(false);
 
@@ -120,7 +120,11 @@ return (
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-    <Routes appProps={{ isAuthenticated, userHasAuthenticated }} />
+    <AppContext.Provider
+      value={{ isAuthenticated, userHasAuthenticated }}
+    >
+      <Routes />
+    </AppContext.Provider>
   </div>
 );
 ```

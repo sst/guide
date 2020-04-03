@@ -13,7 +13,7 @@ To complete the login flow we are going to need to do two more things.
 1. Redirect the user to the homepage after they login.
 2. And redirect them back to the login page after they logout.
 
-We are going to use the `useHistory` hook that comes with React Router v4.
+We are going to use the `useHistory` hook that comes with React Router.
 
 ### Redirect to Home on Login
 
@@ -31,7 +31,7 @@ async function handleSubmit(event) {
 
   try {
     await Auth.signIn(email, password);
-    props.userHasAuthenticated(true);
+    userHasAuthenticated(true);
     history.push("/");
   } catch (e) {
     alert(e.message);
@@ -39,7 +39,8 @@ async function handleSubmit(event) {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" /> Also, import `useHistory` depenency in `src/containers/Login.js`.
+<img class="code-marker" src="/assets/s.png" /> Also, import `useHistory` from React Router in the header of `src/containers/Login.js`.
+
 ``` javascript
 import { useHistory } from "react-router-dom";
 ```
@@ -52,7 +53,7 @@ Now if you head over to your browser and try logging in, you should be redirecte
 
 Now we'll do something very similar for the logout process. 
 
-<img class="code-marker" src="/assets/s.png" />Add `useHistory` hook in the beginning of `App` component.
+<img class="code-marker" src="/assets/s.png" />Add the `useHistory` hook in the beginning of `App` component.
 
 ``` javascript
 const history = useHistory();
@@ -70,7 +71,7 @@ import { Link, useHistory } from "react-router-dom";
 history.push("/login");
 ```
 
-So our `handleLogout` method should now look like this.
+So our `handleLogout` function should now look like this.
 
 ``` javascript
 async function handleLogout() {
@@ -86,4 +87,4 @@ This redirects us back to the login page once the user logs out.
 
 Now if you switch over to your browser and try logging out, you should be redirected to the login page.
 
-You might have noticed while testing this flow that since the login call has a bit of a delay, we might need to give some feedback to the user that the login call is in progress. Let's do that next.
+You might have noticed while testing this flow that since the login call has a bit of a delay, we might need to give some feedback to the user that the login call is in progress. Also, we are not doing a whole lot with the errors that the `Auth` package might throw. Let's look at those next.
