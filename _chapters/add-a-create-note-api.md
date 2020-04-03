@@ -215,30 +215,34 @@ $ mkdir libs
 $ cd libs
 ```
 
-<img class="code-marker" src="/assets/s.png" />And create a `libs/response-lib.js` file.
+<img class="code-marker" src="/assets/s.png" />And create a `libs/handler-lib.js` file.
 
 ``` javascript
-export function success(body) {
-  return buildResponse(200, body);
-}
-
-export function failure(body) {
-  return buildResponse(500, body);
-}
-
-function buildResponse(statusCode, body) {
-  return {
-    statusCode: statusCode,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Credentials": true
-    },
-    body: JSON.stringify(body)
+export default function handler(lambda) {
+  return function (event, context) {
+    return Promise.resolve()
+      // Run the Lambda
+      .then(() => lambda(event, context))
+      // On success
+      .then((responseBody) => [200, responseBody])
+      // On failure
+      .catch((e) => [500, { error: e.message }])
+      // Return HTTP response
+      .then(([statusCode, body]) => ({
+        statusCode,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": true,
+        },
+        body: JSON.stringify(body),
+      }));
   };
 }
 ```
 
-This will manage building the response objects for both success and failure cases with the proper HTTP status code and headers.
+This will:
+- capture error in a central place, so each Lambda function do not need to wrap their logic in a try catch block.
+- manage building the response objects for both success and failure cases with the proper HTTP status code and headers.
 
 <img class="code-marker" src="/assets/s.png" />Again inside `libs/`, create a `dynamodb-lib.js` file.
 
@@ -257,11 +261,11 @@ Here we are using the promise form of the DynamoDB methods. Promises are a metho
 <img class="code-marker" src="/assets/s.png" />Now, we'll go back to our `create.js` and use the helper functions we created. Replace our `create.js` with the following.
 
 ``` javascript
-import uuid from "uuid";
+import * as uuid from "uuid";
+import handler from "./libs/handler-lib";
 import * as dynamoDbLib from "./libs/dynamodb-lib";
-import { success, failure } from "./libs/response-lib";
 
-export async function main(event, context) {
+export const main = handler(async (event, context) => {
   const data = JSON.parse(event.body);
   const params = {
     TableName: process.env.tableName,
@@ -274,14 +278,12 @@ export async function main(event, context) {
     }
   };
 
-  try {
-    await dynamoDbLib.call("put", params);
-    return success(params.Item);
-  } catch (e) {
-    return failure({ status: false });
-  }
+  await dynamoDbLib.call("put", params);
+  return params.Item;
 }
 ```
+
+We are wrapping the Lambda function with our handler wrapper. If the DyanmoDB call throws an error, the wrapper will catch it and build the 500 HTTP response.
 
 We are also using the `async/await` pattern here to refactor our Lambda function. This allows us to return once we are done processing; instead of using the callback function.
 
