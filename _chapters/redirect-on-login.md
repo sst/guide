@@ -40,14 +40,14 @@ Now let's update our component to use this parameter when it redirects.
 <img class="code-marker" src="/assets/s.png" />Replace our current `UnauthenticatedRoute` function component with the following.
 
 ``` coffee
-export default function UnauthenticatedRoute({ component: C, appProps, ...rest }) {
+export default function UnauthenticatedRoute({ children, appProps, ...rest }) {
   const redirect = querystring("redirect");
   return (
     <Route
       {...rest}
-      render={props =>
+      render={() =>
         !appProps.isAuthenticated
-          ? <C {...props} {...appProps} />
+          ? children
           : <Redirect
               to={redirect === "" || redirect === null ? "/" : redirect}
             />}
@@ -59,7 +59,7 @@ export default function UnauthenticatedRoute({ component: C, appProps, ...rest }
 <img class="code-marker" src="/assets/s.png" />And remove the following from the `handleSubmit` method in `src/containers/Login.js`.
 
 ``` coffee
-props.history.push("/");
+history.push("/");
 ```
 
 Now our login page should redirect after we login. And that's it! Our app is ready to go live.

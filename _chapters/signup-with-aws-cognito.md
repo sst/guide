@@ -41,7 +41,7 @@ async function handleConfirmationSubmit(event) {
     await Auth.signIn(fields.email, fields.password);
 
     props.userHasAuthenticated(true);
-    props.history.push("/");
+    history.push("/");
   } catch (e) {
     alert(e.message);
     setIsLoading(false);
