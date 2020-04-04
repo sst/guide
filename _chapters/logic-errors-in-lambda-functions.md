@@ -38,15 +38,13 @@ export const main = handler(async (event, context) => {
 });
 ```
 
-TODO
+Head over to your notes app, and select a note. You will notice the page fails to load with an error alert.
 
-You see an error with the alert.
+![SCREENSHOT](https://i.imgur.com/2q7vcCq.png)
 
-![SCREENSHOT]()
+Go to Sentry and you should see the error showing at the top. Select the error.
 
-Go to Sentry and click on the first error.
-
-![SCREENSHOT]()
+![SCREENSHOT](https://i.imgur.com/JV6qmdS.png)
 
 You will get an error in Sentry that looks like this:
 
@@ -75,41 +73,4 @@ You should see the 'ValidationException' was caught by our handler.
 Scroll down, you shoud see the debug log there was flushed. From the debug message, we can see there was a DynamoDB getItem call failed with 400 status code. We can also see the request parameters sent in the getItem call. By cross referencing the value sent in `Key` against the exception message 'The provided key element does not match the schema' to quickly pinpoint that the Key was missing  the 'noteId' field which was defined in our table schema.
 
 ![Select Amazon Cognito Service screenshot](https://i.imgur.com/80GKgYV.png)
-
-
-### Timeout
-
-In `get.js`, add code:
-```
-  await new Promise(resolve => setTimeout(resolve, 10000));
-```
-
-This will sleep for 10 seconds.
-
-You will get an error in Sentry that looks like this:
-
-[ SCREENSHOT ]
-
-
-### Out of Memory
-
-In `get.js`, add code:
-```
-  ...
-
-  allocMem(); 
-
-  ...
-
-  function allocMem() {
-    let bigList = Array(4096000).fill(1);
-    return bigList.concat(allocMem());
-  }  
-```
-
-This will keep allocating memory until the Lambda goes out of memory.
-
-You will get an error in Sentry that looks like this:
-
-[ SCREENSHOT ]
 
