@@ -38,6 +38,16 @@ export const main = handler(async (event, context) => {
 });
 ```
 
+TODO
+
+You see an error with the alert.
+
+![SCREENSHOT]()
+
+Go to Sentry and click on the first error.
+
+![SCREENSHOT]()
+
 You will get an error in Sentry that looks like this:
 
 ![Select Amazon Cognito Service screenshot](https://i.imgur.com/SLdLiE0.png)
