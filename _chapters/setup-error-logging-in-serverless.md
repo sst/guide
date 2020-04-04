@@ -11,7 +11,6 @@ comments_id: comments-for-upload-a-file-to-s3/123
 We need to setup logging to be able to:
 - catch errors in our business logic
 - catch errors calling AWS services
-- catch errors calling third-party services via HTTP API
 - catch unexpected runtime errors like timeout and out of memory
 
 We are going to look at how to setup a debugging framework to catch above errors, and have enough context for us to easily pinpoint and fix the issue.
@@ -68,7 +67,7 @@ export default function debug() {
 
 This debugger does 3 things:
 
- 1. let's you call debug() to log messages, and the messages only gets printed out when flush() is called. This allows us to log very detailed context information about what has been done such as:
+ 1. let's you call debug() to log messages, and the messages only gets printed out when flush() is called. This allows us to log very detailed context information about what has been done leading up to the error:
   - arguments and return values for function calls
   - reqeust/response data for HTTP requests made
 
