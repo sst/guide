@@ -1,12 +1,14 @@
 ---
 layout: post
-title: Debugging Full-Stack Serverless Apps
+title: Setup Error Reporting in React
 date: 2020-04-03 00:00:00
 lang: en
 description: 
 comments_id: 
 ref: setup-error-reporting-in-react
 ---
+
+Let's start by setting up error reporting in React. To do so, we'll be using [Sentry](https://sentry.io).
 
 Now that we are ready to go live with our app, we need to make sure we are setup to monitor and debug errors. This is important because unlike our local environment where we can look at the console (browser or terminal), make changes and fix errors, we cannot do that when our app is live.
 
