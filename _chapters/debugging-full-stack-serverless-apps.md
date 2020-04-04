@@ -48,11 +48,11 @@ Here's what we'll be going over in the next few chapters:
 2. [Reporting API errors in React]({% link _chapters/report-api-errors-in-react.md %})
 3. [Reporting unexpected React errors with an Error Boundary]({% link _chapters/setup-an-error-boundary-in-react.md %})
 4. [Setting up detailed error reporting in Lambda]({% link _chapters/setup-error-logging-in-serverless.md %})
-5. How to debug:
-   1. [Logic errors in our Lambda functions]({% link _chapters/logic-errors-in-lambda-functions.md %})
-   2. [Unexpected errors in our Lambda functions]({% link _chapters/unexpected-errors-in-lambda-functions.md %})
-   3. [Errors outside our Lambda functions]({% link _chapters/errors-outside-lambda-functions.md %})
-   4. [Errors in API Gateway]({% link _chapters/errors-in-api-gateway.d %})
+5. [Debugging workflow for Serverless apps]({% link _chapters/debugging-workflow-for-serverless-apps.md %})
+   - [Logic errors in our Lambda functions]({% link _chapters/logic-errors-in-lambda-functions.md %})
+   - [Unexpected errors in our Lambda functions]({% link _chapters/unexpected-errors-in-lambda-functions.md %})
+   - [Errors outside our Lambda functions]({% link _chapters/errors-outside-lambda-functions.md %})
+   - [Errors in API Gateway]({% link _chapters/errors-in-api-gateway.md %})
 
 This should give you a good foundation to be able to monitor your app as it goes into production. There are plenty of other great tools out there that can improve on this setup. We want to make sure we cover the basics here. Let's get started! 
 

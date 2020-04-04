@@ -10,50 +10,64 @@ ref: setup-error-reporting-in-react
 
 Let's start by setting up error reporting in React. To do so, we'll be using [Sentry](https://sentry.io).
 
-Now that we are ready to go live with our app, we need to make sure we are setup to monitor and debug errors. This is important because unlike our local environment where we can look at the console (browser or terminal), make changes and fix errors, we cannot do that when our app is live.
+In this chapter we'll sign up for a free Sentry account and configure it in our React app. And in the coming chapters we'll be reporting the various frontend errors to it. 
 
-### Debugging Workflow
+Let's get started.
 
-We need to make sure we have a couple of things setup before we can confidently ask others to use your app:
+### Create a Sentry Account
 
-- Frontend
-  - Be alerted when a user runs into an error.
-  - Get all the error details, including the stack trace.
-  - In the case of a backend error, get the API that failed.
+Head over to — [Sentry](https://sentry.io) and hit **Get Started**.
 
-- Backend
-  - Look up the logs for an API endpoint.
-  - Get detailed debug logs for all the AWS services.
-  - Catch any unexpected errors (out-of-memory, timeouts, etc.).
+![Sentry landing page](/assets/monitor-debug-errors/sentry-landing-page.png)
 
-It is important that we have a good view of our production environments. It allows us to keep track of what our users are experiencing.
+Then enter your info and hit **Create Your Account**.
 
-Note that, for the frontend the setup is pretty much what you would do for any React application. But we are covering it here because we want to go over the entire debugging workflow. Right from when you are alerted that a user has gotten an error while using your app.
+![Sentry create an account](/assets/monitor-debug-errors/sentry-create-an-account.png)
 
-### Debugging Setup
+Next hit **Create project**.
 
-Here is what we'll be doing in the next few chapters to help with the above workflow.
+![Sentry hit create project](/assets/monitor-debug-errors/sentry-hit-create-project.png)
 
-- Frontend
+For the type of project, select **React**.
 
-  On the frontend, we'll be setting up [Sentry](https://sentry.io). Sentry has a great free tier that we can use. We'll be integrating it into our React app by reporting any expected errors and unexpected errors. We'll do this by using the [React Error Boundary](https://reactjs.org/docs/error-boundaries.html).
+![Sentry select React project](/assets/monitor-debug-errors/sentry-select-react-project.png)
 
-- Backend
+Give your project a name.
 
-  On the backend, AWS has some great logging and monitoring tools thanks to [CloudWatch](https://aws.amazon.com/cloudwatch/). We'll be using CloudWatch through [Seed](https://seed.run) console. We'll also be configuring some debugging tools for our Lambda functions.
+![Sentry name React project](/assets/monitor-debug-errors/sentry-name-react-project.png)
 
-### Looking Ahead
+And that's it. Scroll down and copy the `Sentry.init` line.
 
-Here's what we'll be going over in the next few chapters:
+![Sentry init code snippet](/assets/monitor-debug-errors/sentry-init-code-snippet.png)
 
-1. Sign up for a new Sentry account.
-2. Reporting API errors in React.
-3. Reporting unexpected React errors with an Error Boundary.
-4. Setting up detailed error reporting in Lambda.
-5. Going over how to debug:
-   1. Errors in our Lambda functions.
-   2. Errors outside our Lambda functions.
-   3. Errors in API Gateway.
+### Install Sentry
 
-This should give you a good foundation to be able to monitor your app as it goes into production. There are plenty of other great tools out there that can improve on this setup. We want to make sure we cover the basics here. Let's get started! 
+<img class="code-marker" src="/assets/s.png" />Now head over to the project root for your React app and install Sentry.
+
+``` bash
+$ npm install @sentry/browser --save
+```
+
+We are going to be using Sentry across our app. So it makes sense to keep all the Sentry related code in one place.
+
+<img class="code-marker" src="/assets/s.png" />Add the following to the top of your `src/libs/error-lib.js`.
+
+``` javascript
+import * as Sentry from "@sentry/browser";
+
+const isLocal = process.env.NODE_ENV === "development";
+
+export function initSentry() {
+  if (isLocal) {
+    return;
+  }
+
+  Sentry.init({ dsn: "https://your-dsn-id-here@sentry.io/123456" });
+}
+```
+
+Make sure to replace `Sentry.init({ dsn: "https://your-dsn-id-here@sentry.io/123456" });` with the line we copied from the Sentry dashboard above.
+
+We are using the `isLocal` flag to conditionally enable Sentry because we don't want to report errors when we are developing locally. Even though we all know that we rarely ever make mistakes while developing…
+
 

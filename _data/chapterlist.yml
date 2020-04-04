@@ -247,8 +247,6 @@ monitor-debug-errors:
     - page: Setup error reporting in React
       url: /chapters/setup-error-reporting-in-react.html
       subchapters:
-        - page: Get started with Sentry
-          url: /chapters/get-started-with-sentry.html
         - page: Report API errors in React
           url: /chapters/report-api-errors-in-react.html
         - page: Configure an error boundary in React
