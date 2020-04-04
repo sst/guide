@@ -64,10 +64,36 @@ export function initSentry() {
 
   Sentry.init({ dsn: "https://your-dsn-id-here@sentry.io/123456" });
 }
+
+export function logError(error, errorInfo = null) {
+  if (isLocal) {
+    return;
+  }
+
+  Sentry.withScope((scope) => {
+    errorInfo && scope.setExtras(errorInfo);
+    Sentry.captureException(error);
+  });
+}
 ```
 
 Make sure to replace `Sentry.init({ dsn: "https://your-dsn-id-here@sentry.io/123456" });` with the line we copied from the Sentry dashboard above.
 
 We are using the `isLocal` flag to conditionally enable Sentry because we don't want to report errors when we are developing locally. Even though we all know that we rarely ever make mistakes while developing…
 
+The `logError` method is what we are going to call when we want to report an error to Sentry. It takes:
 
+- An Error object in `error`.
+- And, an object with key-value pairs of additional info in `errorInfo`.
+
+Next, let's initialize our app with Sentry.
+
+<img class="code-marker" src="/assets/s.png" />Add the following to the end of the imports in `src/index.js`.
+
+``` javascript
+import { initSentry } from './libs/errorLib';
+
+initSentry();
+```
+
+Now we are ready to start reporting errors in our React app! Let's start with the API errors.
