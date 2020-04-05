@@ -17,7 +17,7 @@ Let's add our first function.
 <img class="code-marker" src="/assets/s.png" />Create a new file called `create.js` in our project root with the following.
 
 ``` javascript
-import uuid from "uuid";
+import * as uuid from "uuid";
 import AWS from "aws-sdk";
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();

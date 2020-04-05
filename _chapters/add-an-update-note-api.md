@@ -16,9 +16,9 @@ Now let's create an API that allows a user to update a note with a new note obje
 
 ``` javascript
 import * as dynamoDbLib from "./libs/dynamodb-lib";
-import { success, failure } from "./libs/response-lib";
+import handler from "./libs/handler-lib";
 
-export async function main(event, context) {
+export const main = handler(async (event, context) => {
   const data = JSON.parse(event.body);
   const params = {
     TableName: process.env.tableName,
@@ -42,13 +42,9 @@ export async function main(event, context) {
     ReturnValues: "ALL_NEW"
   };
 
-  try {
-    await dynamoDbLib.call("update", params);
-    return success({ status: true });
-  } catch (e) {
-    return failure({ status: false });
-  }
-}
+  await dynamoDbLib.call("update", params);
+  return { status: true };
+});
 ```
 
 This should look similar to the `create.js` function. Here we make an `update` DynamoDB call with the new `content` and `attachment` values in the `params`.
