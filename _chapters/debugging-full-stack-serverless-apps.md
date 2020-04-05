@@ -55,5 +55,3 @@ Here's what we'll be going over in the next few chapters:
    - [Errors in API Gateway]({% link _chapters/errors-in-api-gateway.md %})
 
 This should give you a good foundation to be able to monitor your app as it goes into production. There are plenty of other great tools out there that can improve on this setup. We want to make sure we cover the basics here. Let's get started! 
-
-

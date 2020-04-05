@@ -67,13 +67,17 @@ To use the Error Boundary component that we created, we'll need to add it to our
 
 <img class="code-marker" src="/assets/s.png" />Find the following in `src/App.js`.
 
+{% raw %}
 ``` coffee
 <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
   <Routes />
 </AppContext.Provider>
 ```
+{% endraw %}
+
 <img class="code-marker" src="/assets/s.png" />And replace it with:
 
+{% raw %}
 ``` coffee
 <ErrorBoundary>
   <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
@@ -81,6 +85,7 @@ To use the Error Boundary component that we created, we'll need to add it to our
   </AppContext.Provider>
 </ErrorBoundary>
 ```
+{% endraw %}
 
 <img class="code-marker" src="/assets/s.png" />Also, make sure to import it in header of `src/App.js`.
 
@@ -90,7 +95,28 @@ import ErrorBoundary from "./components/ErrorBoundary";
 
 And that's it! Now an unhandled error in our containers will show a nice error message. While reporting the error to Sentry.
 
-To do a quick test, replace the following in `src/containers/Home.js`.
+### Commit the Changes
+
+<img class="code-marker" src="/assets/s.png" />Let's quickly commit these to Git.
+
+``` bash
+$ git add .
+$ git commit -m "Adding error reporting"
+```
+
+### Push the Changes
+
+<img class="code-marker" src="/assets/s.png" />Let's also push these changes to GitHub and deploy our app.
+
+``` bash
+$ git push
+```
+
+### Test the Error Boundary
+
+Before we move on, lets do a quick test.
+
+Replace the following in `src/containers/Home.js`.
 
 ``` javascript
 {isAuthenticated ? renderNotes() : renderLander()}
@@ -98,10 +124,12 @@ To do a quick test, replace the following in `src/containers/Home.js`.
 
 With these faulty lines:
 
+{% raw %}
 ``` javascript
 {isAuthenticated ? renderNotes() : renderLander()}
 { isAuthenticated.none.no }
 ```
+{% endraw %}
 
 Now in your browser you should see something like this.
 
@@ -133,4 +161,13 @@ And if you click through, you can see the error in detail.
 
 ![Error details in Sentry](/assets/monitor-debug-errors/error-details-in-sentry.png)
 
-Now our React app is ready to handle the errors that are thrown its way. Next, let's look at handling errors in our Serverless app.
+Now our React app is ready to handle the errors that are thrown its way!
+
+Let's cleanup all the changes we made for the test.
+
+
+``` bash
+$ git checkout .
+```
+
+Next, let's look at handling errors in our Serverless app.

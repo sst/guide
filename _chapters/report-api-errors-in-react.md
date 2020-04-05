@@ -27,7 +27,7 @@ export function onError(error) {
 
 For most errors we simply alert the error message. But Amplify's Auth package doesn't throw `Error` objects, it throws objects with a couple of properties, including the `message`. So we just alert that instead.
 
-For API errors we want to report both the error and the API path that caused the error. On the other hand, for Auth errors we need to create an `Error` object because Sentry needs actual errors sent to it.
+For API errors we want to report both the error and the API endpoint that caused the error. On the other hand, for Auth errors we need to create an `Error` object because Sentry needs actual errors sent to it.
 
 <img class="code-marker" src="/assets/s.png" />Replace the `onError` method in `src/libs/error-lib.js` with the following:
 
@@ -42,8 +42,8 @@ export function onError(error) {
     message = error.message;
     error = new Error(message);
     // API errors
-  } else if (error.config && error.config.path) {
-    errorInfo.path = error.config.path;
+  } else if (error.config && error.config.url) {
+    errorInfo.url = error.config.url;
   }
 
   logError(error, errorInfo);
@@ -52,7 +52,7 @@ export function onError(error) {
 }
 ```
 
-You'll notice that in the case of an Auth error we create an `Error` object and add the object that we get as the `errorInfo`. For API errors, Amplify uses [Axios](https://github.com/axios/axios). This has a config object that contains the API path that generated the error.
+You'll notice that in the case of an Auth error we create an `Error` object and add the object that we get as the `errorInfo`. For API errors, Amplify uses [Axios](https://github.com/axios/axios). This has a config object that contains the API endpoint that generated the error.
 
 We report this to Sentry by calling `logError(error, errorInfo)`. And just as before we simply alert the message to the user. It would be a good idea to further customize what you show the user. But we'll leave this as an exercise for you.
 
