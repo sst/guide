@@ -1,12 +1,14 @@
 ---
 layout: post
-title: Upload a File to S3
-date: 2017-01-24 00:00:00
+title: Setup Error Logging in Serverless
+date: 2020-04-01 00:00:00
 lang: en
-ref: upload-a-file-to-s3
-description: We want users to be able to upload a file in our React.js app and add it as an attachment to their note. To upload files to S3 directly from our React.js app we are going to use AWS Amplify's Storage.put() method.
-comments_id: comments-for-upload-a-file-to-s3/123
+description: 
+comments_id: 
+ref: setup-error-logging-in-serverless
 ---
+
+Now that we have our React app configured to report errors, let's move on to our Serverless backend. Our React app is reporting API 
 
 We need to setup logging to be able to:
 - catch errors in our business logic
