@@ -175,6 +175,8 @@ $ mkdir mocks
 
 You might have noticed that the `body` and `requestContext` fields are the ones we used in our create function. In this case the `cognitoIdentityId` field is just a string we are going to use as our `userId`. We can use any string here; just make sure to use the same one when we test our other functions.
 
+In the project root, rename `env.example` to `.env`.  This allows your local machine to properly use the environment variables.  If you do not update this file name, invoking the command below will result in a `Serverless: DOTENV: Could not find .env file.` error.
+
 And to invoke our function we run the following in the root directory.
 
 ``` bash
