@@ -48,7 +48,6 @@ Here's what we'll be going over in the next few chapters:
   - [Reporting API errors in React]({% link _chapters/report-api-errors-in-react.md %})
   - [Reporting unexpected React errors with an Error Boundary]({% link _chapters/setup-an-error-boundary-in-react.md %})
 2. [Setting up detailed error reporting in Lambda]({% link _chapters/setup-error-logging-in-serverless.md %})
-3. [Debugging workflow for Serverless apps]({% link _chapters/debugging-workflow-for-serverless-apps.md %})
    - [Logic errors in our Lambda functions]({% link _chapters/logic-errors-in-lambda-functions.md %})
    - [Unexpected errors in our Lambda functions]({% link _chapters/unexpected-errors-in-lambda-functions.md %})
    - [Errors outside our Lambda functions]({% link _chapters/errors-outside-lambda-functions.md %})

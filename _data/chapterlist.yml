@@ -253,8 +253,6 @@ monitor-debug-errors:
           url: /chapters/setup-an-error-boundary-in-react.html
     - page: Setup error logging in Serverless
       url: /chapters/setup-error-logging-in-serverless.html
-    - page: Debugging workflow for Serverless apps
-      url: /chapters/debugging-workflow-for-serverless-apps.html
       subchapters:
         - page: Logic errors in Lambda functions
           url: /chapters/logic-errors-in-lambda-functions.html
