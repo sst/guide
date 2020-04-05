@@ -8,54 +8,76 @@ comments_id:
 ref: errors-in-api-gateway
 ---
 
+Your APIs can also fail before the request reaches the Lambda function. When failed, you will not see any request in the Lambda logs on Seed, since the Lambda functions were not invoked.
+
+Two common causes are:
+- Wrong API path
+- Wrong API method
+
+You can debug by looking at the error response from the API.
+
 ### Wrong API Path
 
-You Lambda function could also fail not because of an error inside your handler code, but before your Lambda function was invoked.
-
-In `get.js`, we are going to call a function that does not exist.
+Open `src/containers/Home.js` in your clients code, and locate the loadNotes() function. Change the API path to an invalid path.
 ```
-import * as dynamoDbLib from "./libs/dynamodb-lib";
-import handler from "./libs/handler-lib";
+...
 
-dynamoDbLib.init();
+  function loadNotes() {
+    return API.get("notes", "/invalid_path");
+  }
 
 ...
 ```
 
-Head over to your notes app, and select a note. You will notice the page fails with an error alert.
+Head over to your notes app, and load the home page. You will notice the page fails with an error alert sayinig "Network Alert".
 
-...
+![SCREENSHOT](https://i.imgur.com/2aRFFYg.png)
 
-There seem to be 3 rows printed out in the logs. Note only one of them has memory and duration information available. This is because the Lambda runtime prints out the error message multiple times. Click on the complete request to expand.
+What happens behind the scene is:
+- the browser first make OPTIONS request to /invalid_path
+- API Gateway returns a 403 response indicating the path is not found
+- the browser does not continue to make the GET request
 
-![Select Amazon Cognito Service screenshot](https://i.imgur.com/a3YAlx8.png)
+If you have API Access logs enabled on Seed, you can head over to Seed dashboard and click on search log.
 
-You should also see an exception 'TypeError: undefined is not a function', along with the stacktrace. This exception is printed out by Lambda runtime, not within our handler-lib, because our Lambda fuunction has not been executed. You can see the error message does not have a request ID. In fact, the request ID is 'undefined'.
+![SCREENSHOT](https://i.imgur.com/GSTIKBX.png)
 
-Also note the message at the bottom 'Unknown application error occurred'.
+Search `debug api` and select the API access log
 
-![Select Amazon Cognito Service screenshot](https://i.imgur.com/WVqwoNo.png)
+![SCREENSHOT](https://i.imgur.com/EoEuMrH.png)
+
+
+Also you should see a OPTIONS request with path '/debug/invalid_path'. The request fails with 403 status code.
+
+![SCREENSHOT](https://i.imgur.com/icxyKr4.png)
 
 
 ### Wrong API method
 
-When you are setting up the Lambda function for the first time, you might mis-named your Lambda function. This can also trigger an error before the function gets invoked.
-
-In `get.js`, rename the handler from `main` to `main2`:
+Open `src/containers/Home.js` in your clients code, and locate the loadNotes() function. Change the API method to put.
 ```
-export const main2 = debugHandler(async (event, context) => {
-```
-
-Head over to your notes app, and select a note. You will notice the page fails with an error alert.
-
 ...
 
-Again, there seem to be 3 rows printed out in the logs. Click on the complete request to expand.
+  function loadNotes() {
+    return API.put("notes", "/notes");
+  }
 
-![Select Amazon Cognito Service screenshot](https://i.imgur.com/DhPIwWL.png)
+...
+```
 
-You should also see an exception 'Runtime.HandlerNotFound', along with the stacktrace.
-Also note the message at the bottom 'Unknown application error occurred'.
+Head over to your notes app, and load the home page. You will notice the page fails with an error alert sayinig "Network Alert".
 
-![Select Amazon Cognito Service screenshot](https://i.imgur.com/oKs10E4.png)
+![SCREENSHOT](https://i.imgur.com/2aRFFYg.png)
+
+The error looks similar, but what happens behind the scene is:
+- the browser first make OPTIONS request to /notes
+- API Gateway returns a successful 200 response with the HTTP methods allowed for the path
+- the allowed HTTP methods are GET and POST. This is because we defined
+  - GET request on /notes to list all the notes; and
+  - POST request on /notes to create a new note
+- the browser reports the error because the request method PUT is not allowed
+
+In this case, you will only see an OPTIONS request in your access log, but not the PUT request.
+
+![SCREENSHOT](https://i.imgur.com/2C3Uvz3.png)
 
