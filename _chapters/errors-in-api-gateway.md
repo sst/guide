@@ -33,6 +33,14 @@ Head over to your notes app, and load the home page. You will notice the page fa
 
 ![SCREENSHOT](https://i.imgur.com/2aRFFYg.png)
 
+Head over to Sentry and you will see the Network Error.
+
+![SCREENSHOT](https://i.imgur.com/YwkMGdj.png)
+
+Select the error and you will see the GET request failed with 0 status code.
+
+![SCREENSHOT](https://i.imgur.com/ImX8Biv.png)
+
 What happens behind the scene is:
 - the browser first make OPTIONS request to /invalid_path
 - API Gateway returns a 403 response indicating the path is not found
@@ -68,6 +76,10 @@ Open `src/containers/Home.js` in your clients code, and locate the loadNotes() f
 Head over to your notes app, and load the home page. You will notice the page fails with an error alert sayinig "Network Alert".
 
 ![SCREENSHOT](https://i.imgur.com/2aRFFYg.png)
+
+You should see a similar Network Error on Sentry.  Select the error and you will see the PUT request failed with 0 status code.
+
+![SCREENSHOT](https://i.imgur.com/ImX8Biv.png)
 
 The error looks similar, but what happens behind the scene is:
 - the browser first make OPTIONS request to /notes
