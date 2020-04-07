@@ -6,6 +6,7 @@ lang: en
 description: 
 code: backend_full
 comments_id: 
+redirect_from: /chapters/monitoring-deployments-in-seed.html
 ref: setup-error-logging-in-serverless
 ---
 

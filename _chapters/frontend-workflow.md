@@ -7,7 +7,6 @@ description: There are three steps that are a part of workflow for a Create Reac
 redirect_from: /chapters/update-the-app.html
 ref: frontend-workflow
 comments_id: frontend-workflow/192
-code: frontend_full
 ---
 
 Now that we have our frontend deployed and configured, let's go over what our development workflow will look like.

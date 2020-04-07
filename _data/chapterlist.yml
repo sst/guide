@@ -219,8 +219,6 @@ deploy-backend-prod:
           url: /chapters/set-custom-domains-through-seed.html
     - page: Test the configured APIs
       url: /chapters/test-the-configured-apis.html
-    - page: Monitoring deployments in Seed
-      url: /chapters/monitoring-deployments-in-seed.html
 
 deploy-frontend-prod:
   title: Deploying the frontend to production
