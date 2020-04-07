@@ -8,7 +8,7 @@ ref: what-does-this-guide-cover
 comments_id: what-does-this-guide-cover/83
 ---
 
-To step through the major concepts involved in building web applications, we are going to be building a simple note taking app called [**Scratch**](https://demo2.serverless-stack.com).
+To step through the major concepts involved in building web applications, we are going to be building a simple note taking app called [**Scratch**](https://demo2.serverless-stack.com). However, unlike most tutorials out there, our goal is to go into the details of what it takes to build a full-stack application for production.
 
 ![Completed app desktop screenshot](/assets/completed-app-desktop.png)
 
@@ -25,6 +25,8 @@ It is a single page application powered by a serverless API written completely i
 - App should be served over HTTPS on a custom domain
 - The backend APIs need to be secure
 - The app needs to be responsive
+- The app should be deployed when we `git push`
+- We should be able to monitor and debug any errors
 
 We'll be using the AWS Platform to build it. We might expand further and cover a few other platforms but we figured the AWS Platform would be a good place to start.
 
@@ -39,13 +41,15 @@ We'll be using the following set of technologies and services to build our serve
 - [CloudFront][CF] for serving out our app
 - [Route 53][R53] for our domain
 - [Certificate Manager][CM] for SSL
+- [CloudWatch][CloudWatch] for Lambda and API access logs
 - [React.js][React] for our single page app
 - [React Router][RR] for routing
 - [Bootstrap][Bootstrap] for the UI Kit
 - [Stripe][Stripe] for processing credit card payments
 - [Seed][Seed] for automating Serverless deployments
 - [Netlify][Netlify] for automating React deployments
-- [GitHub][GitHub] for hosting our project repos.
+- [GitHub][GitHub] for hosting our project repos
+- [Sentry][Sentry] for error reporting
 
 We are going to be using the **free tiers** for the above services. So you should be able to sign up for them for free. This of course does not apply to purchasing a new domain to host your app. Also for AWS, you are required to put in a credit card while creating an account. So if you happen to be creating resources above and beyond what we cover in this tutorial, you might end up getting charged.
 
@@ -109,6 +113,7 @@ For the frontend:
 - Configure custom domains through Netlify
 
 Automate backend deployments:
+
 - Configure DynamoDB through code
 - Configure S3 through code
 - Configure Cognito User Pool through code
@@ -118,7 +123,13 @@ Automate backend deployments:
 - Unit tests in Serverless
 - Automating deployments using Seed
 - Configuring custom domains through Seed
-- Monitoring deployments through Seed
+
+Monitoring and debugging Serverless apps:
+
+- Set up error reporting in React using Sentry
+- Configure an Error Boundary in React
+- Add error logging to our Serverless APIs
+- Cover the debugging workflow for common Serverless errors
 
 
 We think this will give you a good foundation on building full-stack production ready serverless applications. If there are any other concepts or technologies you'd like us to cover, feel free to let us know on our [forums]({{ site.forum_url }}).
@@ -128,6 +139,7 @@ We think this will give you a good foundation on building full-stack production 
 [R53]: https://aws.amazon.com/route53/
 [CF]: https://aws.amazon.com/cloudfront/
 [S3]: https://aws.amazon.com/s3/
+[CloudWatch]: https://aws.amazon.com/cloudwatch/
 [Bootstrap]: http://getbootstrap.com
 [RR]: https://github.com/ReactTraining/react-router
 [React]: https://facebook.github.io/react/
@@ -138,3 +150,4 @@ We think this will give you a good foundation on building full-stack production 
 [Seed]: https://seed.run
 [Netlify]: https://netlify.com
 [GitHub]: https://github.com
+[Sentry]: https://sentry.io
