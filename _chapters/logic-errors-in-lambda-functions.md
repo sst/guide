@@ -29,7 +29,7 @@ Let's trigger an error in `get.js` by commenting out the `noteId` field in the D
 <img class="code-marker" src="/assets/s.png" />Replace `get.js` with the following.
 
 ``` javascript
-import * as dynamoDbLib from "./libs/dynamodb-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
 
 export const main = handler(async (event, context) => {
@@ -44,7 +44,7 @@ export const main = handler(async (event, context) => {
     }
   };
 
-  const result = await dynamoDbLib.call("get", params);
+  const result = await dynamoD.get(params);
   if ( ! result.Item) {
     throw new Error("Note not found.");
   }

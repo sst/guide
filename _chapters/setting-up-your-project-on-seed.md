@@ -52,7 +52,7 @@ Fill in the credentials and click **Add a New App**.
 
 ![Add AWS IAM credentials screenshot](/assets/part2/add-aws-iam-credentials.png)
 
-You new app is ready to go!
+Your new app is ready to go!
 
 ![View new Seed app screenshot](/assets/part2/view-new-seed-app.png)
 

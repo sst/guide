@@ -15,7 +15,7 @@ Now we are going to add an API that returns a list of all the notes a user has.
 <img class="code-marker" src="/assets/s.png" />Create a new file called `list.js` with the following.
 
 ``` javascript
-import * as dynamoDbLib from "./libs/dynamodb-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
 
 export const main = handler(async (event, context) => {
@@ -33,7 +33,8 @@ export const main = handler(async (event, context) => {
     }
   };
 
-  const result = await dynamoDbLib.call("query", params);
+  const result = await dynamoDb.query(params);
+
   // Return the matching list of items in response body
   return result.Items;
 });

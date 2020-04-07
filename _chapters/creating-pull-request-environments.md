@@ -34,7 +34,7 @@ Click **Create pull request**.
 
 Now back in Seed, a new stage (in this case **pr2**) should be created and is being deployed automatically.
 
-![Shoow pull request stage created](/assets/best-practices/creating-pull-request-environments/shoow-pull-request-stage-created.png)
+![Shoow pull request stage created](/assets/best-practices/creating-pull-request-environments/show-pull-request-stage-created.png)
 
 After the **pr2** stage successfully deploys, you can see the deployed API endpoint on the PR page. You can give the endpoint to your frontend team for testing.
 

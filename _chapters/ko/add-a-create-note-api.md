@@ -210,25 +210,27 @@ $ mkdir libs
 $ cd libs
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 아래 내용으로 `libs/response-lib.js` 파일을 만듭니다.
+<img class="code-marker" src="/assets/s.png" />그리고 아래 내용으로 `libs/handler-lib.js` 파일을 만듭니다.
 
 ``` javascript
-export function success(body) {
-  return buildResponse(200, body);
-}
-
-export function failure(body) {
-  return buildResponse(500, body);
-}
-
-function buildResponse(statusCode, body) {
-  return {
-    statusCode: statusCode,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Credentials": true
-    },
-    body: JSON.stringify(body)
+export default function handler(lambda) {
+  return function (event, context) {
+    return Promise.resolve()
+      // Run the Lambda
+      .then(() => lambda(event, context))
+      // On success
+      .then((responseBody) => [200, responseBody])
+      // On failure
+      .catch((e) => [500, { error: e.message }])
+      // Return HTTP response
+      .then(([statusCode, body]) => ({
+        statusCode,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": true,
+        },
+        body: JSON.stringify(body),
+      }));
   };
 }
 ```
@@ -253,13 +255,13 @@ export function call(action, params) {
 
 ``` javascript
 import * as uuid from "uuid";
-import * as dynamoDbLib from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 
 export const main = handler(async (event, context) => {
   const data = JSON.parse(event.body);
   const params = {
-    TableName: "notes",
+    TableName: process.env.tableName,
     Item: {
       userId: event.requestContext.identity.cognitoIdentityId,
       noteId: uuid.v1(),
@@ -269,7 +271,7 @@ export const main = handler(async (event, context) => {
     }
   };
 
-  await dynamoDbLib.call("put", params);
+  await dynamoDb.put(params);
   return params.Item;
 });
 ```

@@ -19,7 +19,7 @@ Let's simulate a timeout using `setTimeout`.
 <img class="code-marker" src="/assets/s.png" />Replace our `get.js` with the following:
 
 ``` javascript
-import * as dynamoDbLib from "./libs/dynamodb-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
 
 export const main = handler(async (event, context) => {
@@ -34,7 +34,7 @@ export const main = handler(async (event, context) => {
     }
   };
 
-  const result = await dynamoDbLib.call("get", params);
+  const result = await dynamoDb.get(params);
   if ( ! result.Item) {
     throw new Error("Note not found.");
   }
@@ -87,8 +87,8 @@ By default, a Lambda functions has 1024MB of memory. You can allocate any amuont
 
 <img class="code-marker" src="/assets/s.png" />Replace your `get.js` with:
 
-``` javascript
-import * as dynamoDbLib from "./libs/dynamodb-lib";
+```
+import dynamoDb from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
 
 export const main = handler(async (event, context) => {
@@ -103,7 +103,7 @@ export const main = handler(async (event, context) => {
     }
   };
 
-  const result = await dynamoDbLib.call("get", params);
+  const result = await dynamoDb.get(params);
   if ( ! result.Item) {
     throw new Error("Note not found.");
   }

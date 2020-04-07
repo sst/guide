@@ -17,7 +17,7 @@ comments_id: add-an-update-note-api/144
 <img class="code-marker" src="/assets/s.png" />`update.js` 파일을 새로 만들고 아래 코드 내용을 붙여 넣으세요. 
 
 ``` javascript
-import * as dynamoDbLib from "./libs/dynamodb-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
 
 export const main = handler(async (event, context) => {
@@ -44,7 +44,7 @@ export const main = handler(async (event, context) => {
     ReturnValues: "ALL_NEW"
   };
 
-  await dynamoDbLib.call("update", params);
+  await dynamoDb.update(params);
   return { status: true };
 });
 ```
