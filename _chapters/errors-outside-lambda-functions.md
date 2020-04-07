@@ -1,61 +1,157 @@
 ---
 layout: post
 title: Errors Outside Lambda Functions
-date: 2017-01-24 00:00:00
+date: 2020-04-06 00:00:00
 lang: en
 ref: errors-outside-lambda-functions
 description: 
 comments_id: 
 ---
 
-### Initialization Error
+We've covered debugging [errors in our Lambda functions]({% link _chapters/logic-errors-in-lambda-functions.md %}) and [unexpected errors in Lambda functions]({% link _chapters/unexpected-errors-in-lambda-functions.md %}). Now let's look at what happens when an error happens outside our Lambda function.
 
-You Lambda function could also fail not because of an error inside your handler code, but before your Lambda function was invoked.
+### Initialization Errors
 
-In `get.js`, we are going to call a function that does not exist.
-```
+Lambda functions could fail not because of an error inside your handler code, but before your Lambda function is invoked. Let's add some fault code outside our handler function.
+
+<img class="code-marker" src="/assets/s.png" />Replace our `get.js` with the following.
+
+``` javascript
 import dynamoDb from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
 
-dynamoDb.init();
+// Some faulty code
+dynamoDb.notExist();
 
-...
+export const main = handler(async (event, context) => {
+  const params = {
+    TableName: process.env.tableName,
+    // 'Key' defines the partition key and sort key of the item to be retrieved
+    // - 'userId': Identity Pool identity id of the authenticated user
+    // - 'noteId': path parameter
+    Key: {
+      userId: event.requestContext.identity.cognitoIdentityId,
+      noteId: event.pathParameters.id
+    }
+  };
+
+  const result = await dynamoDb.get(params);
+  if ( ! result.Item) {
+    throw new Error("Note not found.");
+  }
+
+  // Return the retrieved item
+  return result.Item;
+});
 ```
 
-Head over to your notes app, and select a note. You will notice the page fails with an error alert.
+<img class="code-marker" src="/assets/s.png" />Commit this code.
 
-...
+``` bash
+$ git add .
+$ git commit -m "Adding an init error"
+$ git push
+```
 
-There seem to be 3 rows printed out in the logs. Note only one of them has memory and duration information available. This is because the Lambda runtime prints out the error message multiple times. Click on the complete request to expand.
+Head over to your Seed dashboard, and deploy it.
 
+![Deploy debug branch once more in Seed](/assets/monitor-debug-errors/deploy-debug-branch-once-more-in-seed.png)
+
+Now if you select a note in your notes app, you'll notice that it fails with an error.
+
+![Init error in notes app note page](/assets/monitor-debug-errors/init-error-in-notes-app-note-page.png)
+
+You should see an error in Sentry. So if you head over to the Lambda logs in Seed.
+
+![Init error log request in Seed](/assets/monitor-debug-errors/init-error-log-request-in-seed.png)
 ![Select Amazon Cognito Service screenshot](https://i.imgur.com/a3YAlx8.png)
 
-You should also see an exception 'TypeError: undefined is not a function', along with the stacktrace. This exception is printed out by Lambda runtime, not within our handler-lib, because our Lambda fuunction has not been executed. You can see the error message does not have a request ID. In fact, the request ID is 'undefined'.
+There seem to be 3 rows printed out in the logs. Note only one of them has memory and duration information available. This is because the Lambda runtime prints out the error message multiple times. Click on the complete request to expand it.
 
-Also note the message at the bottom 'Unknown application error occurred'.
-
+![Init error log detail request in Seed](/assets/monitor-debug-errors/init-error-log-request-detail-in-seed.png)
 ![Select Amazon Cognito Service screenshot](https://i.imgur.com/WVqwoNo.png)
 
+You should also see an exception `TypeError: undefined is not a function`, along with the stacktrace. This exception is printed out by the Lambda runtime and not by our debug handler. This is because the Lambda fuunction has not been executed. You can see the error message does not have a request ID. In fact, the request ID is `undefined`. Also note the message at the bottom `Unknown application error occurred`.
 
-### Handler Function Error
+### Handler Function Errors
 
-When you are setting up the Lambda function for the first time, you might mis-named your Lambda function. This can also trigger an error before the function gets invoked.
+Another error that can happen is if the handler function has been misnamed. 
 
-In `get.js`, rename the handler from `main` to `main2`:
+<img class="code-marker" src="/assets/s.png" />Replace our `get.js` with the following.
+
+``` javascript
+import * as dynamoDbLib from "./libs/dynamodb-lib";
+import handler from "./libs/handler-lib";
+
+// Wrong handler function name
+export const main2 = handler(async (event, context) => {
+  const params = {
+    TableName: process.env.tableName,
+    // 'Key' defines the partition key and sort key of the item to be retrieved
+    // - 'userId': Identity Pool identity id of the authenticated user
+    // - 'noteId': path parameter
+    Key: {
+      userId: event.requestContext.identity.cognitoIdentityId,
+      noteId: event.pathParameters.id
+    }
+  };
+
+  const result = await dynamoDbLib.call("get", params);
+  if ( ! result.Item) {
+    throw new Error("Note not found.");
+  }
+
+  // Return the retrieved item
+  return result.Item;
+});
 ```
-export const main2 = debugHandler(async (event, context) => {
+<img class="code-marker" src="/assets/s.png" />Let's commit this.
+
+``` bash
+$ git add .
+$ git commit -m "Adding a handler error"
+$ git push
 ```
 
-Head over to your notes app, and select a note. You will notice the page fails with an error alert.
+Head over to your Seed dashboard and deploy it. Then, in your notes app, try and load a note. It should fail with an error alert.
 
-...
+Just as before, you'll see the error in Sentry. Head over to the Lambda logs in Seed.
 
-Again, there seem to be 3 rows printed out in the logs. Click on the complete request to expand.
+Again, there seem to be 3 rows printed out in the logs.
 
+![Handler error log request in Seed](/assets/monitor-debug-errors/handler-error-log-request-in-seed.png)
 ![Select Amazon Cognito Service screenshot](https://i.imgur.com/DhPIwWL.png)
 
-You should also see an exception 'Runtime.HandlerNotFound', along with the stacktrace.
-Also note the message at the bottom 'Unknown application error occurred'.
+Click on the complete request to expand.
 
+![Handler error log detail request in Seed](/assets/monitor-debug-errors/handler-error-log-request-detail-in-seed.png)
 ![Select Amazon Cognito Service screenshot](https://i.imgur.com/oKs10E4.png)
 
+You should see an exception `Runtime.HandlerNotFound`, along with the stacktrace. Also, note the message at the bottom `Unknown application error occurred`.
+
+And that about covers the main Lambda function errors. Next we'll look at how we'll debug errors in API Gateway.
+
+### Rollback the Changes
+
+<img class="code-marker" src="/assets/s.png" />Let's revert all the faulty code that we created.
+
+``` bash
+$ git checkout master
+$ git branch -D debug
+```
+
+And rollback the prod build in Seed. Click on **Activity** in the Seed dashboard.
+
+![Click activity in Seed](/assets/monitor-debug-errors/click-activity-in-seed.png)
+
+Then click on **prod** over of the right. This shows us all the deployments made to our prod stage.
+
+![Click on prod activity in Seed](/assets/monitor-debug-errors/click-on-prod-activity-in-seed.png)
+
+Scroll down to the last deployment from the `master` branch, past all the ones made from the `debug` branch. Hit **Rollback**.
+
+![Rollback on prod build in Seed](/assets/monitor-debug-errors/rollback-on-prod-build-in-seed.png)
+
+This will rollback our app to the state it was in before we deployed all of our fault code.
+
+Now let's move on to debugging API Gateway errors.

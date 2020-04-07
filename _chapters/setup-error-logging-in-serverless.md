@@ -57,8 +57,8 @@ export function end() {
 }
 
 export function flush(e) {
-  console.error(e);
   logs.forEach(({ date, string }) => console.debug(date, string));
+  console.error(e);
 }
 
 export default function debug() {
@@ -172,6 +172,35 @@ This should be fairly straightforward:
 3. We format the success response.
 4. In the case of an error, we first write out our debug logs by calling `debug.flush(e)`. Where `e` is the error that caused our Lambda function to fail.
 5. We format our HTTP response.
-6. We clean up our debugger by calling `debug.end()`;
+6. We clean up our debugger by calling `debug.end()`.
+
+### Using the Error Handler
+
+You might recall the way we are currently using the above error handler in our Lambda functions.
+
+``` javascript
+import handler from "./libs/handler-lib";
+
+export const main = handler((event, context) => {
+  // Do some work
+  const a = 1 + 1;
+  // Return a result
+  return { result: a };
+});
+```
+
+We wrap all of our wrap functions using the error handler.
+
+### Enable Access Logs
+
+The combination of our new error handler and Lambda logs will help us catch most of the errors. However, we can run into errors that don't make it to our Lambda functions. To debug these errors we'll need to look at the API Gateway logs. So let's go head and enable access logs for our API.
+
+From the dashboard for your app on Seed, select the **prod** stage.
+
+![Click prod stage in Seed dashboard](/assets/monitor-debug-errors/click-prod-stage-in-seed-dashboard.png)
+
+Then hit **Enable Access Logs** for your API.
+
+![Enable access logs in Seed](/assets/monitor-debug-errors/enable-access-logs-in-seed.png)
 
 And that's pretty much it! With these simple steps in place, we are now ready to look at some examples of how to debug our Serverless app.

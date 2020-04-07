@@ -1,18 +1,33 @@
 ---
 layout: post
 title: Logic Errors in Lambda Functions
-date: 2017-01-24 00:00:00
+date: 2020-04-06 00:00:00
 lang: en
 description: 
 comments_id: 
 ref: logic-errors-in-lambda-functions
 ---
 
-### Business Logic Error
+Now that we've [setup error logging for our API]({% link _chapters/setup-error-logging-in-serverless.md %}), we are ready to go over the workflow for debugging the various types of errors we'll run into.
 
-We should be very confident because we just implemented our logging framework.
+First up, are errors that can happen in our code in our Lambda functions. Now we all know that we almost never make mistakes in our code. However, it's still worth going over this very _"unlikely"_ scenario.
 
-Let's trigger an error in `get.js` by commenting out the `noteId` field in the DynamoDB call's Key definition. This will make the DynamoDB call to fail and in turn cause the Lambda function to fail.
+### Create a New Branch
+
+Let's start by creating a new branch that we'll use while working through the following examples.
+
+<img class="code-marker" src="/assets/s.png" />In the project root for your backend repo.
+
+``` bash
+$ git checkout -b debug
+```
+
+### Push Some Faulty Code
+
+Let's trigger an error in `get.js` by commenting out the `noteId` field in the DynamoDB call's Key definition. This will cause the DynamoDB call to fail and in turn cause the Lambda function to fail.
+
+<img class="code-marker" src="/assets/s.png" />Replace `get.js` with the following.
+
 ``` javascript
 import dynamoDb from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
@@ -25,6 +40,7 @@ export const main = handler(async (event, context) => {
     // - 'noteId': path parameter
     Key: {
       userId: event.requestContext.identity.cognitoIdentityId,
+      // noteId: event.pathParameters.id
     }
   };
 
@@ -38,39 +54,73 @@ export const main = handler(async (event, context) => {
 });
 ```
 
-Head over to your notes app, and select a note. You will notice the page fails to load with an error alert.
+<img class="code-marker" src="/assets/s.png" />Note the line that we've commented out.
 
+``` bash
+$ git add .
+$ git commit -m "Adding some faulty code"
+$ git push --set-upstream origin debug
+```
+
+### Deploy the Faulty Code
+
+Head over to your Seed dashboard and select the **prod** stage in the pipeline and hit **Deploy**.
+
+![Click deploy in Seed pipeline](/assets/monitor-debug-errors/click-deploy-in-seed-pipeline.png)
+
+Select the **debug** branch from the dropdown and hit **Deploy**.
+
+![Select branch and confirm deploy in Seed](/assets/monitor-debug-errors/select-branch-and-confirm-deploy-in-seed.png)
+
+This will deploy our faulty code to production.
+
+Now over on your notes app, and select a note. You'll notice the page fails to load with an error alert.
+
+![Error alert in notes app note page](/assets/monitor-debug-errors/error-alert-in-notes-app-note-page.png)
 ![SCREENSHOT](https://i.imgur.com/2q7vcCq.png)
 
-Go to Sentry and you should see the error showing at the top. Select the error.
+### Debug Logic Errors
 
+To start with, you should get an email from Sentry about this error. Go to Sentry and you should see the error showing at the top. Select the error.
+
+![New network error in Sentry](/assets/monitor-debug-errors/new-network-error-in-sentry.png)
 ![SCREENSHOT](https://i.imgur.com/JV6qmdS.png)
 
-You will get an error in Sentry that looks like this:
+You'll see that our frontend error handler is logging the API endpoint that failed. Copy the URL.
 
+![Error details in Sentry](/assets/monitor-debug-errors/error-details-in-sentry.png)
 ![Select Amazon Cognito Service screenshot](https://i.imgur.com/SLdLiE0.png)
 
-Copy the url that returned 500. And then go to Seed console and select the search box:
+Then we'll search for the Lambda logs for that endpoint on Seed. Click **View Lambda logs**.
 
+![Click view lambda logs in Seed](/assets/monitor-debug-errors/click-view-lambda-logs-in-seed.png)
 ![Select Amazon Cognito Service screenshot](https://i.imgur.com/giPv1EG.png)
 
-Paste in the url and select the row with `GET` method.
+Paste the URL and select the row with `GET` method.
 
+![Search lambda logs by URL in Seed](/assets/monitor-debug-errors/search-lambda-logs-by-url-in-seed.png)
 ![Select Amazon Cognito Service screenshot](https://i.imgur.com/ccYJMzn.png)
 
-By default, the logs page shows you the request logs from a few minutes ago, and tails for any new requests. You should see the failed request in the logs if it just happened. If it did not happen in the last few minutes, select the time field, and paste the time from Sentry. Ensure to add UTC at the end of the time because Seed assumes the time in your local timezone if entered without a timezone.
+By default, the logs page shows you the request from a few minutes ago, and it automtically waits for any new requests. You should see the failed request in the logs if it just happened. If it did not happen in the last few minutes, select the time field, and copy and paste the time from Sentry. Ensure to add UTC at the end of the time because Seed assumes that the time is in your local timezone if it's entered without a timezone.
 
+![Search by log request by time in Seed](/assets/monitor-debug-errors/search-by-log-request-by-time-in-seed.png)
 ![Select Amazon Cognito Service screenshot](https://i.imgur.com/UvJ7a11.png)
 
-You should see a failed request highlighted in red. Multiple failed requests might show up if you tried to fetched the note multiple times. Click to expand the request.
+You should see a failed request highlighted in red. Multiple failed requests might show up if you tried to load the note multiple times. Click to expand the request.
 
+![Expand log request details in Seed](/assets/monitor-debug-errors/expand-log-request-details-in-seed.png)
 ![Select Amazon Cognito Service screenshot](https://i.imgur.com/HAaBOov.png)
 
-You should see the 'ValidationException' was caught by our handler.
+In the error details, you'll see a debug log of all the actions. Starting with the AWS DynamoDB call. You can see all the parameters sent in the call.
 
-![Select Amazon Cognito Service screenshot](https://i.imgur.com/XnMoV7o.png)
-
-Scroll down, you shoud see the debug log there was flushed. From the debug message, we can see there was a DynamoDB getItem call failed with 400 status code. We can also see the request parameters sent in the getItem call. By cross referencing the value sent in `Key` against the exception message 'The provided key element does not match the schema' to quickly pinpoint that the Key was missing  the 'noteId' field which was defined in our table schema.
-
+![View log request details in Seed](/assets/monitor-debug-errors/view-log-request-details-in-seed.png)
 ![Select Amazon Cognito Service screenshot](https://i.imgur.com/80GKgYV.png)
 
+If you scroll down, you should see the `ValidationException` error that was caught by our handler.
+
+![View log request error message in Seed](/assets/monitor-debug-errors/view-log-request-error-message-in-seed.png)
+![Select Amazon Cognito Service screenshot](https://i.imgur.com/XnMoV7o.png)
+
+The message is `The provided key element does not match the schema` says that there is something wrong with the `Key` that we passed in. Our debug messages helped guide us to the source of the problem.
+
+Next let's look at how we can debug unexpected errors in our Lambda functions.

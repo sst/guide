@@ -8,88 +8,134 @@ comments_id:
 ref: errors-in-api-gateway
 ---
 
-Your APIs can also fail before the request reaches the Lambda function. When failed, you will not see any request in the Lambda logs on Seed, since the Lambda functions were not invoked.
+In the past few chapters we looked at how to debug errors in our Lambda functions. However, our APIs can fail before our Lambda function has been invoked. In these cases, we won't be able to debug using the Lambda logs. Since, there won't be any requests available in our Lambda functions.
 
-Two common causes are:
-- Wrong API path
-- Wrong API method
+The two common causes for these errors are:
 
-You can debug by looking at the error response from the API.
+1. Invalid API path
+2. Invalid API method
 
-### Wrong API Path
+Let's look at how to debug these.
 
-Open `src/containers/Home.js` in your clients code, and locate the loadNotes() function. Change the API path to an invalid path.
+### Invalid API Path
+
+Head over to the frontend repo.
+
+<img class="code-marker" src="/assets/s.png" />Open `src/containers/Home.js`, and replace the `loadNotes()` function with:
+
+``` javascript
+function loadNotes() {
+  return API.get("notes", "/invalid_path");
+}
 ```
-...
 
-  function loadNotes() {
-    return API.get("notes", "/invalid_path");
-  }
+<img class="code-marker" src="/assets/s.png" />Let's commit this and deploy it.
 
-...
+``` bash
+$ git add .
+$ git commit -m "Adding fault paths"
+$ git push
 ```
 
-Head over to your notes app, and load the home page. You will notice the page fails with an error alert sayinig "Network Alert".
+Head over to your notes app, and load the home page. You'll notice the page fails with an error alert sayinig `Network Alert`.
 
+![Invalid path error in notes app](/assets/monitor-debug-errors/invalid-path-error-in-notes-app.png)
 ![SCREENSHOT](https://i.imgur.com/2aRFFYg.png)
 
-Head over to Sentry and you will see the Network Error.
+On Sentry, the error will show that a `GET` request failed with status code `0`.
 
-![SCREENSHOT](https://i.imgur.com/YwkMGdj.png)
-
-Select the error and you will see the GET request failed with 0 status code.
-
+![Invalid path error in Sentry](/assets/monitor-debug-errors/invalid-path-error-in-sentry.png)
 ![SCREENSHOT](https://i.imgur.com/ImX8Biv.png)
 
-What happens behind the scene is:
-- the browser first make OPTIONS request to /invalid_path
-- API Gateway returns a 403 response indicating the path is not found
-- the browser does not continue to make the GET request
+What happens here is that:
+- The browser first makes `OPTIONS` request to `/invalid_path`.
+- API Gateway returns a `403` response.
+- The browser throws an error and does not continue to make the `GET` request.
 
-If you have API Access logs enabled on Seed, you can head over to Seed dashboard and click on search log.
+This means that our Lambda function was not invoked. So we'll need to check our API access logs instead.
 
+Click on **View Lambda logs or API logs** in the your Seed dashboard.
+
+![Click API logs search in Seed dashboard](/assets/monitor-debug-errors/click-api-logs-search-in-seed-dashboard.png)
 ![SCREENSHOT](https://i.imgur.com/GSTIKBX.png)
 
-Search `debug api` and select the API access log
+Search `prod api` and select the API access log.
 
+![Search for API log in Seed dashboard](/assets/monitor-debug-errors/search-for-api-log-in-seed-dashboard.png)
 ![SCREENSHOT](https://i.imgur.com/EoEuMrH.png)
 
+You should see an `OPTIONS` request with path `/prod/invalid_path`. You'll notice the request failed with a `403` status code.
 
-Also you should see a OPTIONS request with path '/debug/invalid_path'. The request fails with 403 status code.
-
+![Invalid API path request error in Seed](/assets/monitor-debug-errors/invalid-api-path-request-error-in-seed.png)
 ![SCREENSHOT](https://i.imgur.com/icxyKr4.png)
 
+This will tell you that for some reason our frontend is making a request to an invalid API path. We can use the error details in Sentry to figure out where that request is being made.
 
-### Wrong API method
+### Invalid API method
 
-Open `src/containers/Home.js` in your clients code, and locate the loadNotes() function. Change the API method to put.
+Now let's look at what happens when we use an invalid HTTP method for our API requests. Instead of a `GET` request we are going to make a `PUT` request.
+
+<img class="code-marker" src="/assets/s.png" />In `src/containers/Home.js` replace the `loadNotes()` function with:
+
+``` javascript
+function loadNotes() {
+  return API.put("notes", "/notes");
+}
 ```
-...
 
-  function loadNotes() {
-    return API.put("notes", "/notes");
-  }
+<img class="code-marker" src="/assets/s.png" />Let's deploy our code.
 
-...
+``` bash
+$ git add .
+$ git commit -m "Adding invalid method"
+$ git push
 ```
 
-Head over to your notes app, and load the home page. You will notice the page fails with an error alert sayinig "Network Alert".
+Over notes app should fail to load the home page.
 
+![Invalid method error in notes app](/assets/monitor-debug-errors/invalid-method-error-in-notes-app.png)
 ![SCREENSHOT](https://i.imgur.com/2aRFFYg.png)
 
-You should see a similar Network Error on Sentry.  Select the error and you will see the PUT request failed with 0 status code.
+You should see a similar Network Error as the one above in Sentry. Select the error and you will see the `PUT` request failed with `0` status code.
 
+![Invalid method error in Sentry](/assets/monitor-debug-errors/invalid-method-error-in-sentry.png)
 ![SCREENSHOT](https://i.imgur.com/ImX8Biv.png)
 
-The error looks similar, but what happens behind the scene is:
-- the browser first make OPTIONS request to /notes
-- API Gateway returns a successful 200 response with the HTTP methods allowed for the path
-- the allowed HTTP methods are GET and POST. This is because we defined
-  - GET request on /notes to list all the notes; and
-  - POST request on /notes to create a new note
-- the browser reports the error because the request method PUT is not allowed
+Here's what's going on behind the scenes:
+- The browser first makes an `OPTIONS` request to `/notes`.
+- API Gateway returns a successful `200` response with the HTTP methods allowed for the path.
+- The allowed HTTP methods are `GET` and `POST`. This is because we defined:
+  - `GET` request on `/notes` to list all the notes
+  - `POST` request on `/notes` to create a new note
+- The browser reports the error because the request method `PUT` is not allowed.
 
-In this case, you will only see an OPTIONS request in your access log, but not the PUT request.
+So in this case over on Seed, you'll only see an `OPTIONS` request in your access log, and not the `PUT` request.
 
+![Invalid API method request error in Seed](/assets/monitor-debug-errors/invalid-api-method-request-error-in-seed.png)
 ![SCREENSHOT](https://i.imgur.com/2C3Uvz3.png)
 
+The access log combined with the Sentry error details should tell us what we need to do to fix the error. 
+
+And that covers all the major types of Serverless errors and how to debug them. Let's revert our changes.
+
+### Remove the Faulty Code
+
+Let's cleanup all the faulty code.
+
+<img class="code-marker" src="/assets/s.png" />In `src/containers/Home.js` replace the `loadNotes()` function with the original:
+
+``` javascript
+function loadNotes() {
+  return API.get("notes", "/notes");
+}
+```
+
+Deploy the code.
+
+``` bash
+$ git add .
+$ git commit -m "Reverting fault code"
+$ git push
+```
+
+Now you are all set! Let's wrap things up next!
