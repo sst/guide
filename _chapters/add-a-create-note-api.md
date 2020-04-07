@@ -208,6 +208,50 @@ Make a note of the `noteId` in the response. We are going to use this newly crea
 
 Before we move on to the next chapter, let's quickly refactor the code since we are going to be doing much of the same for all of our APIs.
 
+<img class="code-marker" src="/assets/s.png" />Start by replacing our `create.js` with the following.
+
+``` javascript
+import * as uuid from "uuid";
+import handler from "./libs/handler-lib";
+import dynamoDb from "./libs/dynamodb-lib";
+
+export const main = handler(async (event, context) => {
+  const data = JSON.parse(event.body);
+  const params = {
+    TableName: process.env.tableName,
+    // 'Item' contains the attributes of the item to be created
+    // - 'userId': user identities are federated through the
+    //             Cognito Identity Pool, we will use the identity id
+    //             as the user id of the authenticated user
+    // - 'noteId': a unique uuid
+    // - 'content': parsed from request body
+    // - 'attachment': parsed from request body
+    // - 'createdAt': current Unix timestamp
+    TableName: process.env.tableName,
+    Item: {
+      userId: event.requestContext.identity.cognitoIdentityId,
+      noteId: uuid.v1(),
+      content: data.content,
+      attachment: data.attachment,
+      createdAt: Date.now()
+    }
+  };
+
+  await dynamoDb.put(params);
+
+  return params.Item;
+});
+```
+
+This code doesn't work just yet but it shows you what we want to accomplish:
+
+- We want to make our Lambda function `async`, and simply return the results. Without having to call the `callback` method. 
+- We want to simplify how we make calls to DynamoDB. We don't want to have to create a `new AWS.DynamoDB.DocumentClient()`. We also want to use async/await when working with our database calls.
+- We want to centrally handle any errors in our Lambda functions.
+- Finally, since all of our Lambda functions will be handling API endpoints, we want to handle our HTTP responses in one place.
+
+To do all of this let's first create our `dynamodb-lib`.
+
 <img class="code-marker" src="/assets/s.png" />In our project root, create a `libs/` directory.
 
 ``` bash
@@ -215,7 +259,25 @@ $ mkdir libs
 $ cd libs
 ```
 
-<img class="code-marker" src="/assets/s.png" />And create a `libs/handler-lib.js` file.
+<img class="code-marker" src="/assets/s.png" />Create a `libs/dynamodb-lib.js` file with:
+
+``` javascript
+import AWS from "aws-sdk";
+
+const client = new AWS.DynamoDB.DocumentClient();
+
+export default {
+  get   : (params) => client.get(params).promise(),
+  put   : (params) => client.put(params).promise(),
+  query : (params) => client.query(params).promise(),
+  update: (params) => client.update(params).promise(),
+  delete: (params) => client.delete(params).promise(),
+};
+```
+
+Here we are using the promise form of the DynamoDB methods. Promises are a method for managing asynchronous code that serve as an alternative to the standard callback function syntax. It will make our code a lot easier to read. And we are exposing the DynamoDB client methods that we are going to need in this guide.
+
+<img class="code-marker" src="/assets/s.png" />Also create a `libs/handler-lib.js` file with the following.
 
 ``` javascript
 export default function handler(lambda) {
@@ -226,7 +288,9 @@ export default function handler(lambda) {
       // On success
       .then((responseBody) => [200, responseBody])
       // On failure
-      .catch((e) => [500, { error: e.message }])
+      .catch((e) => {
+        return [500, { error: e.message }];
+      })
       // Return HTTP response
       .then(([statusCode, body]) => ({
         statusCode,
@@ -240,52 +304,16 @@ export default function handler(lambda) {
 }
 ```
 
-This will:
-- capture error in a central place, so each Lambda function do not need to wrap their logic in a try catch block.
-- manage building the response objects for both success and failure cases with the proper HTTP status code and headers.
+Let's go over this in detail.
 
-<img class="code-marker" src="/assets/s.png" />Again inside `libs/`, create a `dynamodb-lib.js` file.
+- We are creating a `handler` function that we'll use as a wrapper around our Lambda functions.
+- It takes our Lambda function as the argument.
+- It uses the `Promise.resolve()` pattern here because our Lambda functions could be return a Promise (be asynchronous) or not. This let's us treat them as if they are both asynchronous.
+- It'll first run our Lambda function. If successful, it'll set the return value as the `responseBody`.
+- It'll capture any errors that happen in our functions and return the error message.
+- Finally, we format the response with HTTP status code and headers. 
 
-``` javascript
-import AWS from "aws-sdk";
-
-export function call(action, params) {
-  const dynamoDb = new AWS.DynamoDB.DocumentClient();
-
-  return dynamoDb[action](params).promise();
-}
-```
-
-Here we are using the promise form of the DynamoDB methods. Promises are a method for managing asynchronous code that serve as an alternative to the standard callback function syntax. It will make our code a lot easier to read.
-
-<img class="code-marker" src="/assets/s.png" />Now, we'll go back to our `create.js` and use the helper functions we created. Replace our `create.js` with the following.
-
-``` javascript
-import * as uuid from "uuid";
-import handler from "./libs/handler-lib";
-import dynamoDb from "./libs/dynamodb-lib";
-
-export const main = handler(async (event, context) => {
-  const data = JSON.parse(event.body);
-  const params = {
-    TableName: process.env.tableName,
-    Item: {
-      userId: event.requestContext.identity.cognitoIdentityId,
-      noteId: uuid.v1(),
-      content: data.content,
-      attachment: data.attachment,
-      createdAt: Date.now()
-    }
-  };
-
-  await dynamoDb.put(params);
-  return params.Item;
-});
-```
-
-We are wrapping the Lambda function with our handler wrapper. If the DyanmoDB call throws an error, the wrapper will catch it and build the 500 HTTP response.
-
-We are also using the `async/await` pattern here to refactor our Lambda function. This allows us to return once we are done processing; instead of using the callback function.
+The above pattern of using Promises will make more sense in our later chapters when we want to do a better job with error handling. 
 
 Next, we are going to write the API to get a note given its id.
 
@@ -295,11 +323,12 @@ Next, we are going to write the API to get a note given its id.
 
 - Response `statusCode: 500`
 
-  If you see a `statusCode: 500` response when you invoke your function, here is how to debug it. The error is generated by our code in the `catch` block. Adding a `console.log` like so, should give you a clue about what the issue is.
+  If you see a `statusCode: 500` response when you invoke your function, here is how to debug it. The error is generated by our code in the `catch` block. Adding a `console.log` in our `libs/handler-lib.js`, should give you a clue about what the issue is.
 
   ``` javascript
-  catch(e) {
+  // On failure
+  .catch((e) => {
     console.log(e);
-    return failure({status: false});
-  }
+    return [500, { error: e.message }];
+  })
   ```
