@@ -118,6 +118,30 @@ The access log combined with the Sentry error details should tell us what we nee
 
 And that covers all the major types of Serverless errors and how to debug them. Let's revert our changes.
 
+### Summary
+
+To quickly summarize the different type of errors that we looked at over the last few chapters, let's put them in a table to compare.
+
+{:.serverless-errors}
+| Error                        | Sentry   | Access Log | Lambda Log | Debug Info | Action |
+|------------------------------|----------|------------|------------|------------|--------|
+| Errors in your code          | &#10003; | &#10003;   | &#10003;   | &#10003;   | Look at the debug info in the Lambda logs. |
+| Lambda timeout               | &#10003; | &#10003;   | &#10003;   | &#10003;   | Look at the last debug message in the Lambda logs. |
+| Lambda timeout               | &#10003; | &#10003;   | &#10003;   | &#10007;   | Look for the error message `Runtime exited with error: signal: killed` in Lambda logs. |
+| Lambda initialization errors | &#10003; | &#10003;   | &#10003;   | &#10007;   | Look for the error message `Unknown application error occurred` in Lambda logs. |
+| Lambda handler errors        | &#10003; | &#10003;   | &#10003;   | &#10007;   | Look for the error message `Runtime.HandlerNotFound` in Lambda logs. |
+| Invalid API path             | &#10003; | &#10003;   | &#10007;   | &#10007;   | Look for failed `OPTIONS` request in access logs. |
+| Invalid API method           | &#10003; | &#10003;   | &#10007;   | &#10007;   | Look for a single `OPTIONS` request. |
+
+<style type="text/css">
+  table.serverless-errors thead th:nth-child(2),
+  table.serverless-errors thead th:nth-child(3),
+  table.serverless-errors thead th:nth-child(4),
+  table.serverless-errors thead th:nth-child(5) {
+    min-width: 60px;
+  }
+</style>
+
 ### Remove the Faulty Code
 
 Let's cleanup all the faulty code.
@@ -138,4 +162,6 @@ $ git commit -m "Reverting fault code"
 $ git push
 ```
 
-Now you are all set! Let's wrap things up next!
+Now you are all set to go live with your brand new Serverless app!
+
+Let's wrap things up next.

@@ -103,6 +103,8 @@ Paste the URL and select the row with `GET` method.
 
 By default, the logs page shows you the request from a few minutes ago, and it automtically waits for any new requests. You should see the failed request in the logs if it just happened. If it did not happen in the last few minutes, select the time field, and copy and paste the time from Sentry. Ensure to add UTC at the end of the time because Seed assumes that the time is in your local timezone if it's entered without a timezone.
 
+Note that we are using Seed to look up the Lambda logs for our Serverless app. However, you can just use CloudWatch logs directly as well. It's a little harder to find your logs but all the logged info is available there.
+
 ![Search by log request by time in Seed](/assets/monitor-debug-errors/search-by-log-request-by-time-in-seed.png)
 ![Select Amazon Cognito Service screenshot](https://i.imgur.com/UvJ7a11.png)
 
