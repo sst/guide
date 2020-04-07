@@ -77,6 +77,7 @@ This will deploy our faulty code to production.
 Now over on your notes app, and select a note. You'll notice the page fails to load with an error alert.
 
 ![Error alert in notes app note page](/assets/monitor-debug-errors/error-alert-in-notes-app-note-page.png)
+
 ![SCREENSHOT](https://i.imgur.com/2q7vcCq.png)
 
 ### Debug Logic Errors
@@ -84,6 +85,7 @@ Now over on your notes app, and select a note. You'll notice the page fails to l
 To start with, you should get an email from Sentry about this error. Go to Sentry and you should see the error showing at the top. Select the error.
 
 ![New network error in Sentry](/assets/monitor-debug-errors/new-network-error-in-sentry.png)
+
 ![SCREENSHOT](https://i.imgur.com/JV6qmdS.png)
 
 You'll see that our frontend error handler is logging the API endpoint that failed. Copy the URL.
