@@ -4,6 +4,7 @@ title: Setup Error Logging in Serverless
 date: 2020-04-01 00:00:00
 lang: en
 description: 
+code: backend_full
 comments_id: 
 ref: setup-error-logging-in-serverless
 ---
@@ -190,6 +191,22 @@ export const main = handler((event, context) => {
 ```
 
 We wrap all of our wrap functions using the error handler.
+
+### Commit the Code
+
+Let's push our changes  
+
+<img class="code-marker" src="/assets/s.png" />Let's commit the code we have so far.
+
+``` bash
+$ git add .
+$ git commit -m "Adding error logging"
+$ git push
+```
+
+And promote the changes to production.
+
+![Promote error logging to prod in Seed](/assets/monitor-debug-errors/promote-error-logging-to-prod-in-seed.png)
 
 ### Enable Access Logs
 
