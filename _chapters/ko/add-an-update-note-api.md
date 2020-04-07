@@ -17,8 +17,8 @@ comments_id: add-an-update-note-api/144
 <img class="code-marker" src="/assets/s.png" />`update.js` 파일을 새로 만들고 아래 코드 내용을 붙여 넣으세요. 
 
 ``` javascript
-import dynamoDb from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 
 export const main = handler(async (event, context) => {
   const data = JSON.parse(event.body);

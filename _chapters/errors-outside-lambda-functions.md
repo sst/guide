@@ -17,8 +17,8 @@ Lambda functions could fail not because of an error inside your handler code, bu
 <img class="code-marker" src="/assets/s.png" />Replace our `get.js` with the following.
 
 ``` javascript
-import dynamoDb from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 
 // Some faulty code
 dynamoDb.notExist();
@@ -37,7 +37,7 @@ export const main = handler(async (event, context) => {
 
   const result = await dynamoDb.get(params);
   if ( ! result.Item) {
-    throw new Error("Note not found.");
+    throw new Error("Item not found.");
   }
 
   // Return the retrieved item
@@ -78,8 +78,8 @@ Another error that can happen is if the handler function has been misnamed.
 <img class="code-marker" src="/assets/s.png" />Replace our `get.js` with the following.
 
 ``` javascript
-import * as dynamoDbLib from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
+import * as dynamoDbLib from "./libs/dynamodb-lib";
 
 // Wrong handler function name
 export const main2 = handler(async (event, context) => {
@@ -96,7 +96,7 @@ export const main2 = handler(async (event, context) => {
 
   const result = await dynamoDbLib.call("get", params);
   if ( ! result.Item) {
-    throw new Error("Note not found.");
+    throw new Error("Item not found.");
   }
 
   // Return the retrieved item

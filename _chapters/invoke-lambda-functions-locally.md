@@ -27,8 +27,8 @@ functions:
 And `get.js` looks like:
 
 ``` javascript
-import dynamoDb from "../../libs/dynamodb-lib";
 import handler from "../../libs/handler-lib";
+import dynamoDb from "../../libs/dynamodb-lib";
 
 export const main = handler(async (event, context) => {
   const params = {

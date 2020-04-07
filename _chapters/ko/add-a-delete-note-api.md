@@ -17,8 +17,8 @@ comments_id: add-a-delete-note-api/153
 <img class="code-marker" src="/assets/s.png" />`delete.js` 파일을 생성하고 아래 코드를 붙여 넣기 합니다.
 
 ``` javascript
-import dynamoDb from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 
 export const main = handler(async (event, context) => {
   const params = {

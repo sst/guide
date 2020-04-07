@@ -17,8 +17,8 @@ comments_id: add-a-get-note-api/132
 <img class="code-marker" src="/assets/s.png" />신규 파일인 `get.js`를 생성하고 아래 코드를 붙여넣기 합니다.
 
 ``` javascript
-import dynamoDb from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 
 export const main = handler(async (event, context) => {
   const params = {

@@ -15,8 +15,8 @@ Now let's create an API that allows a user to update a note with a new note obje
 <img class="code-marker" src="/assets/s.png" />Create a new file `update.js` and paste the following code
 
 ``` javascript
-import dynamoDb from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 
 export const main = handler(async (event, context) => {
   const data = JSON.parse(event.body);

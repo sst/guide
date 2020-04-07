@@ -15,8 +15,8 @@ Now that we created a note and saved it to our database. Let's add an API to ret
 <img class="code-marker" src="/assets/s.png" />Create a new file `get.js` and paste the following code
 
 ``` javascript
-import dynamoDb from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 
 export const main = handler(async (event, context) => {
   const params = {

@@ -17,8 +17,8 @@ comments_id: add-a-list-all-the-notes-api/147
 <img class="code-marker" src="/assets/s.png" />아래 내용을 가진 `list.js` 파일을 신규로 생성합니다.
 
 ``` javascript
-import dynamoDb from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 
 export const main = handler(async (event, context) => {
   const params = {

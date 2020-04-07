@@ -15,8 +15,8 @@ Finally, we are going to create an API that allows a user to delete a given note
 <img class="code-marker" src="/assets/s.png" />Create a new file `delete.js` and paste the following code
 
 ``` javascript
-import dynamoDb from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 
 export const main = handler(async (event, context) => {
   const params = {
