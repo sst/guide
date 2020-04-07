@@ -17,7 +17,7 @@ comments_id: add-a-get-note-api/132
 <img class="code-marker" src="/assets/s.png" />신규 파일인 `get.js`를 생성하고 아래 코드를 붙여넣기 합니다.
 
 ``` javascript
-import * as dynamoDbLib from "./libs/dynamodb-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
 
 export const main = handler(async (event, context) => {
@@ -32,7 +32,7 @@ export const main = handler(async (event, context) => {
     }
   };
 
-  const result = await dynamoDbLib.call("get", params);
+  const result = await dynamoDb.get(params);
   if ( ! result.Item) {
     throw new Error("Item not found.");
   }
@@ -42,7 +42,7 @@ export const main = handler(async (event, context) => {
 });
 ```
 
-이 파일은 이전의 `create.js` 함수와 똑같은 구조를 따릅니다. 가장 큰 차이점은 요청을 통해 전달되는`noteId` 와 `userId`가 주어진 노트 객체를 얻기 위해 `dynamoDbLib.call ( 'get', params)`을 수행한다는 것입니다.
+이 파일은 이전의 `create.js` 함수와 똑같은 구조를 따릅니다. 가장 큰 차이점은 요청을 통해 전달되는`noteId` 와 `userId`가 주어진 노트 객체를 얻기 위해 `dynamoDb.get(params)`을 수행한다는 것입니다.
 
 ### API 엔드포인트 구성하기 
 

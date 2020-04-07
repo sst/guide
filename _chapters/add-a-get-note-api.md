@@ -15,7 +15,7 @@ Now that we created a note and saved it to our database. Let's add an API to ret
 <img class="code-marker" src="/assets/s.png" />Create a new file `get.js` and paste the following code
 
 ``` javascript
-import * as dynamoDbLib from "./libs/dynamodb-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
 
 export const main = handler(async (event, context) => {
@@ -30,7 +30,7 @@ export const main = handler(async (event, context) => {
     }
   };
 
-  const result = await dynamoDbLib.call("get", params);
+  const result = await dynamoDb.get(params);
   if ( ! result.Item) {
     throw new Error("Item not found.");
   }
@@ -38,9 +38,10 @@ export const main = handler(async (event, context) => {
   // Return the retrieved item
   return result.Item;
 });
+
 ```
 
-This follows exactly the same structure as our previous `create.js` function. The major difference here is that we are doing a `dynamoDbLib.call('get', params)` to get a note object given the `noteId` and `userId` that is passed in through the request.
+This follows exactly the same structure as our previous `create.js` function. The major difference here is that we are doing a `dynamoDb.get(params)` to get a note object given the `noteId` and `userId` that is passed in through the request.
 
 ### Configure the API Endpoint
 

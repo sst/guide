@@ -14,10 +14,10 @@ You Lambda function could also fail not because of an error inside your handler 
 
 In `get.js`, we are going to call a function that does not exist.
 ```
-import * as dynamoDbLib from "./libs/dynamodb-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
 
-dynamoDbLib.init();
+dynamoDb.init();
 
 ...
 ```

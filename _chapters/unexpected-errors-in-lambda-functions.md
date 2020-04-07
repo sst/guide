@@ -14,7 +14,7 @@ Our Lambda functions often make API requests to interact with other services. In
 
 In `get.js`, we are going to sleep for 10 seconds to simulate the timeout.
 ```
-import * as dynamoDbLib from "./libs/dynamodb-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
 
 export const main = handler(async (event, context) => {
@@ -29,7 +29,7 @@ export const main = handler(async (event, context) => {
     }
   };
 
-  const result = await dynamoDbLib.call("get", params);
+  const result = await dynamoDb.get(params);
   if ( ! result.Item) {
     throw new Error("Note not found.");
   }
@@ -66,7 +66,7 @@ By default, a Lambda functions has 1024MB of memory. You can allocate any amuont
 
 In `get.js`, we are going to keep allocating memory until the Lambda goes out of memory.
 ```
-import * as dynamoDbLib from "./libs/dynamodb-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
 
 export const main = handler(async (event, context) => {
@@ -81,7 +81,7 @@ export const main = handler(async (event, context) => {
     }
   };
 
-  const result = await dynamoDbLib.call("get", params);
+  const result = await dynamoDb.get(params);
   if ( ! result.Item) {
     throw new Error("Note not found.");
   }

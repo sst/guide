@@ -14,7 +14,7 @@ We should be very confident because we just implemented our logging framework.
 
 Let's trigger an error in `get.js` by commenting out the `noteId` field in the DynamoDB call's Key definition. This will make the DynamoDB call to fail and in turn cause the Lambda function to fail.
 ``` javascript
-import * as dynamoDbLib from "./libs/dynamodb-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
 
 export const main = handler(async (event, context) => {
@@ -28,7 +28,7 @@ export const main = handler(async (event, context) => {
     }
   };
 
-  const result = await dynamoDbLib.call("get", params);
+  const result = await dynamoD.get(params);
   if ( ! result.Item) {
     throw new Error("Note not found.");
   }

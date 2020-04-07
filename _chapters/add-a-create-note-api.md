@@ -263,7 +263,7 @@ Here we are using the promise form of the DynamoDB methods. Promises are a metho
 ``` javascript
 import * as uuid from "uuid";
 import handler from "./libs/handler-lib";
-import * as dynamoDbLib from "./libs/dynamodb-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 
 export const main = handler(async (event, context) => {
   const data = JSON.parse(event.body);
@@ -278,9 +278,9 @@ export const main = handler(async (event, context) => {
     }
   };
 
-  await dynamoDbLib.call("put", params);
+  await dynamoDb.put(params);
   return params.Item;
-}
+});
 ```
 
 We are wrapping the Lambda function with our handler wrapper. If the DyanmoDB call throws an error, the wrapper will catch it and build the 500 HTTP response.

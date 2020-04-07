@@ -40,7 +40,11 @@ Finally hit **Add a New App**.
 
 ![Create an App in Seed](/assets/best-practices/deploy-resources-repo-to-seed/create-an-app-in-seed.png)
 
-Now, let's add the other services in the resources repo. Click **Add a Service**.
+Now, let's add the other services in the resources repo. Click **Pipeline**.
+
+![Select Add a Service](/assets/best-practices/deploy-resources-repo-to-seed/select-pipeline.png)
+
+Click **Add a Service**.
 
 ![Select Add a Service](/assets/best-practices/deploy-resources-repo-to-seed/select-add-a-service.png)
 
