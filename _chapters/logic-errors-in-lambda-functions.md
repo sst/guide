@@ -78,52 +78,41 @@ Now over on your notes app, and select a note. You'll notice the page fails to l
 
 ![Error alert in notes app note page](/assets/monitor-debug-errors/error-alert-in-notes-app-note-page.png)
 
-![SCREENSHOT](https://i.imgur.com/2q7vcCq.png)
-
 ### Debug Logic Errors
 
 To start with, you should get an email from Sentry about this error. Go to Sentry and you should see the error showing at the top. Select the error.
 
 ![New network error in Sentry](/assets/monitor-debug-errors/new-network-error-in-sentry.png)
 
-![SCREENSHOT](https://i.imgur.com/JV6qmdS.png)
-
 You'll see that our frontend error handler is logging the API endpoint that failed. Copy the URL.
 
 ![Error details in Sentry](/assets/monitor-debug-errors/error-details-in-sentry.png)
-![Select Amazon Cognito Service screenshot](https://i.imgur.com/SLdLiE0.png)
 
 Then we'll search for the Lambda logs for that endpoint on Seed. Click **View Lambda logs**.
 
 ![Click view lambda logs in Seed](/assets/monitor-debug-errors/click-view-lambda-logs-in-seed.png)
-![Select Amazon Cognito Service screenshot](https://i.imgur.com/giPv1EG.png)
 
 Paste the URL and select the row with `GET` method.
 
 ![Search lambda logs by URL in Seed](/assets/monitor-debug-errors/search-lambda-logs-by-url-in-seed.png)
-![Select Amazon Cognito Service screenshot](https://i.imgur.com/ccYJMzn.png)
 
 By default, the logs page shows you the request from a few minutes ago, and it automtically waits for any new requests. You should see the failed request in the logs if it just happened. If it did not happen in the last few minutes, select the time field, and copy and paste the time from Sentry. Ensure to add UTC at the end of the time because Seed assumes that the time is in your local timezone if it's entered without a timezone.
 
 Note that we are using Seed to look up the Lambda logs for our Serverless app. However, you can just use CloudWatch logs directly as well. It's a little harder to find your logs but all the logged info is available there.
 
 ![Search by log request by time in Seed](/assets/monitor-debug-errors/search-by-log-request-by-time-in-seed.png)
-![Select Amazon Cognito Service screenshot](https://i.imgur.com/UvJ7a11.png)
 
 You should see a failed request highlighted in red. Multiple failed requests might show up if you tried to load the note multiple times. Click to expand the request.
 
 ![Expand log request details in Seed](/assets/monitor-debug-errors/expand-log-request-details-in-seed.png)
-![Select Amazon Cognito Service screenshot](https://i.imgur.com/HAaBOov.png)
 
 In the error details, you'll see a debug log of all the actions. Starting with the AWS DynamoDB call. You can see all the parameters sent in the call.
 
 ![View log request details in Seed](/assets/monitor-debug-errors/view-log-request-details-in-seed.png)
-![Select Amazon Cognito Service screenshot](https://i.imgur.com/80GKgYV.png)
 
 If you scroll down, you should see the `ValidationException` error that was caught by our handler.
 
 ![View log request error message in Seed](/assets/monitor-debug-errors/view-log-request-error-message-in-seed.png)
-![Select Amazon Cognito Service screenshot](https://i.imgur.com/XnMoV7o.png)
 
 The message is `The provided key element does not match the schema` says that there is something wrong with the `Key` that we passed in. Our debug messages helped guide us to the source of the problem.
 

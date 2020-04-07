@@ -40,12 +40,10 @@ $ git push
 Head over to your notes app, and load the home page. You'll notice the page fails with an error alert sayinig `Network Alert`.
 
 ![Invalid path error in notes app](/assets/monitor-debug-errors/invalid-path-error-in-notes-app.png)
-![SCREENSHOT](https://i.imgur.com/2aRFFYg.png)
 
 On Sentry, the error will show that a `GET` request failed with status code `0`.
 
 ![Invalid path error in Sentry](/assets/monitor-debug-errors/invalid-path-error-in-sentry.png)
-![SCREENSHOT](https://i.imgur.com/ImX8Biv.png)
 
 What happens here is that:
 - The browser first makes `OPTIONS` request to `/invalid_path`.
@@ -57,17 +55,14 @@ This means that our Lambda function was not invoked. So we'll need to check our 
 Click on **View Lambda logs or API logs** in the your Seed dashboard.
 
 ![Click API logs search in Seed dashboard](/assets/monitor-debug-errors/click-api-logs-search-in-seed-dashboard.png)
-![SCREENSHOT](https://i.imgur.com/GSTIKBX.png)
 
 Search `prod api` and select the API access log.
 
 ![Search for API log in Seed dashboard](/assets/monitor-debug-errors/search-for-api-log-in-seed-dashboard.png)
-![SCREENSHOT](https://i.imgur.com/EoEuMrH.png)
 
 You should see an `OPTIONS` request with path `/prod/invalid_path`. You'll notice the request failed with a `403` status code.
 
 ![Invalid API path request error in Seed](/assets/monitor-debug-errors/invalid-api-path-request-error-in-seed.png)
-![SCREENSHOT](https://i.imgur.com/icxyKr4.png)
 
 This will tell you that for some reason our frontend is making a request to an invalid API path. We can use the error details in Sentry to figure out where that request is being made.
 
@@ -94,12 +89,10 @@ $ git push
 Over notes app should fail to load the home page.
 
 ![Invalid method error in notes app](/assets/monitor-debug-errors/invalid-method-error-in-notes-app.png)
-![SCREENSHOT](https://i.imgur.com/2aRFFYg.png)
 
 You should see a similar Network Error as the one above in Sentry. Select the error and you will see the `PUT` request failed with `0` status code.
 
 ![Invalid method error in Sentry](/assets/monitor-debug-errors/invalid-method-error-in-sentry.png)
-![SCREENSHOT](https://i.imgur.com/ImX8Biv.png)
 
 Here's what's going on behind the scenes:
 - The browser first makes an `OPTIONS` request to `/notes`.
@@ -112,7 +105,6 @@ Here's what's going on behind the scenes:
 So in this case over on Seed, you'll only see an `OPTIONS` request in your access log, and not the `PUT` request.
 
 ![Invalid API method request error in Seed](/assets/monitor-debug-errors/invalid-api-method-request-error-in-seed.png)
-![SCREENSHOT](https://i.imgur.com/2C3Uvz3.png)
 
 The access log combined with the Sentry error details should tell us what we need to do to fix the error. 
 
@@ -127,7 +119,7 @@ To quickly summarize the different type of errors that we looked at over the las
 |------------------------------|----------|------------|------------|------------|--------|
 | Errors in your code          | &#10003; | &#10003;   | &#10003;   | &#10003;   | Look at the debug info in the Lambda logs. |
 | Lambda timeout               | &#10003; | &#10003;   | &#10003;   | &#10003;   | Look at the last debug message in the Lambda logs. |
-| Lambda timeout               | &#10003; | &#10003;   | &#10003;   | &#10007;   | Look for the error message `Runtime exited with error: signal: killed` in Lambda logs. |
+| Lambda out of memory         | &#10003; | &#10003;   | &#10003;   | &#10007;   | Look for the error message `Runtime exited with error: signal: killed` in Lambda logs. |
 | Lambda initialization errors | &#10003; | &#10003;   | &#10003;   | &#10007;   | Look for the error message `Unknown application error occurred` in Lambda logs. |
 | Lambda handler errors        | &#10003; | &#10003;   | &#10003;   | &#10007;   | Look for the error message `Runtime.HandlerNotFound` in Lambda logs. |
 | Invalid API path             | &#10003; | &#10003;   | &#10007;   | &#10007;   | Look for failed `OPTIONS` request in access logs. |

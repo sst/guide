@@ -68,12 +68,10 @@ You'll get an error alert in Sentry. And just like the previous chapter, head ov
 Here you'll notice that the request took 6006.18ms. And since the Lambda timeout is 6 seconds by default, meaning that the function timed out.
 
 ![Timeout error log request in Seed](/assets/monitor-debug-errors/timeout-error-log-request-in-seed.png)
-![Select Amazon Cognito Service screenshot](https://i.imgur.com/04bfzkO.png)
 
 Click to expand the request and scroll down to the end of the request.
 
 ![Timeout error log detail request in Seed](/assets/monitor-debug-errors/timeout-error-log-request-detail-in-seed.png)
-![Select Amazon Cognito Service screenshot](https://i.imgur.com/MLs7BBd.png)
 
 You should see `Error: Lambda will timeout in 100 ms`. Note, this is printed by the timeout timer in our debugger. We print it out when there is only `100ms` left in the Lambda execution.
 
@@ -151,12 +149,10 @@ Head over to your Seed dashboard and deploy it. Then, in your notes app, try and
 Just as before, you'll see the error in Sentry. Head over to the Lambda logs in Seed.
 
 ![Memory error log request in Seed](/assets/monitor-debug-errors/memory-error-log-request-in-seed.png)
-![Select Amazon Cognito Service screenshot](https://i.imgur.com/XRWHbpn.png)
 
 Note the request took all of 128MB of memory. Click to expand the request.
 
 ![Memory error log detail request in Seed](/assets/monitor-debug-errors/memory-error-log-request-detail-in-seed.png)
-![Select Amazon Cognito Service screenshot](https://i.imgur.com/WVqwoNo.png)
 
 You'll see `Error: Runtime exited with error: signal: killed` which is printed out by Lambda runtime indicating the runtime was killed. Unfortunately, our debug messages are not printed out because the Lambda container was killed without an exception being thrown.
 
