@@ -1,19 +1,24 @@
 ---
 layout: post
 title: Unexpected Errors in Lambda Functions
-date: 2017-01-24 00:00:00
+date: 2020-04-06 00:00:00
 lang: en
 description: 
 comments_id: 
 ref: unexpected-errors-in-lambda-functions
 ---
 
-### Timeout
+Previously, we looked at [how to debug errors in our Lambda function code]({% link _chapters/logic-errors-in-lambda-functions.md %}). In this chapter let's look at how to debug some unexpected errors. Starting with what happens if a Lambda function timesout.
 
-Our Lambda functions often make API requests to interact with other services. In our notes app, we talk to DynamoDB to store and fetch data; and we also talk to Stripe to process payments. Whenever we make a request, there is the chance the HTTP connection times out or the remote service takes long to respond. We are going to look at how to detect and debug the issue. 
+### Debugging Lambda Timeouts
 
-In `get.js`, we are going to sleep for 10 seconds to simulate the timeout.
-```
+Our Lambda functions often makes API requests to interact with other services. In our notes app, we talk to DynamoDB to store and fetch data; and we also talk to Stripe to process payments. When we make an API request, there is the chance the HTTP connection times out or the remote service takes long to respond. We are going to look at how to detect and debug the issue. The default timeout for Lambda functions are 6 seconds.
+
+Let's simulate a timeout using `setTimeout`.
+
+<img class="code-marker" src="/assets/s.png" />Replace our `get.js` with the following:
+
+``` javascript
 import * as dynamoDbLib from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
 
@@ -34,6 +39,7 @@ export const main = handler(async (event, context) => {
     throw new Error("Note not found.");
   }
 
+  // Set a timeout
   await new Promise(resolve => setTimeout(resolve, 10000));
 
   // Return the retrieved item
@@ -41,31 +47,47 @@ export const main = handler(async (event, context) => {
 });
 ```
 
+<img class="code-marker" src="/assets/s.png" />Let's commit this code.
+
+``` bash
+$ git add .
+$ git commit -m "Adding a timeout"
+$ git push
+```
+
+Head over to your Seed dashboard, select the **prod** stage in the pipeline and deploy the `debug` branch.
+
+![Deploy debug branch in Seed](/assets/monitor-debug-errors/deploy-debug-branch-in-seed.png)
+
 Head over to your notes app, and select a note. You will notice the page tries to load for a couple of seconds, and then fails with an error alert.
 
-...
+![Timeout error in notes app note page](/assets/monitor-debug-errors/timeout-error-in-notes-app-note-page.png)
 
-Note the request took 6006.18ms. And the Lambda timeout is 6 seconds by default. This means the Lambda function was timed out. Click to expand the request.
+You'll get an error alert in Sentry. And just like the previous chapter, head over to the logs for the Lambda function in question.
 
+Here you'll notice that the request took 6006.18ms. And since the Lambda timeout is 6 seconds by default, meaning that the function timed out.
+
+![Timeout error log request in Seed](/assets/monitor-debug-errors/timeout-error-log-request-in-seed.png)
 ![Select Amazon Cognito Service screenshot](https://i.imgur.com/04bfzkO.png)
 
-You should see 'Error: Lambda will timeout in 100 ms'. Note this is printed out from our timeout timer when there is only 100ms left in the Lambda execution.
+Click to expand the request and scroll down to the end of the request.
 
-![Select Amazon Cognito Service screenshot](https://i.imgur.com/5U85RSu.png)
-
-Scroll down, you shoud see the debug log there was flushed. From the debug message, we can see there was a DynamoDB getItem call succeeded with 200 status code. So we know the timeout happened after the DynamoDB call.
-
-You should also see 'Task timed out after 6.01 seconds' which is printed out by Lambda runtime.
-
+![Timeout error log detail request in Seed](/assets/monitor-debug-errors/timeout-error-log-request-detail-in-seed.png)
 ![Select Amazon Cognito Service screenshot](https://i.imgur.com/MLs7BBd.png)
 
+You should see `Error: Lambda will timeout in 100 ms`. Note, this is printed by the timeout timer in our debugger. We print it out when there is only `100ms` left in the Lambda execution.
 
-### Out of Memory
+Also from the debug messages you'll notice that the last DynamoDB `getItem` was successful. Meaning that the timeout happened after that!
 
-By default, a Lambda functions has 1024MB of memory. You can allocate any amuont of memory between 128MB and 3008MB in 64MB increment. Let's see how to detect a function call was out of memory, so we can increase the memory limit.
+Next let's look at what happens when our Lambda function runs out of memory.
 
-In `get.js`, we are going to keep allocating memory until the Lambda goes out of memory.
-```
+### Debugging Out of Memory Errors
+
+By default, a Lambda functions has 1024MB of memory. You can allocate any amuont of memory between 128MB and 3008MB in 64MB increments. Let's try and allocate more memory till it runs out of memory.
+
+<img class="code-marker" src="/assets/s.png" />Replace your `get.js` with:
+
+``` javascript
 import * as dynamoDbLib from "./libs/dynamodb-lib";
 import handler from "./libs/handler-lib";
 
@@ -96,9 +118,11 @@ export const main = handler(async (event, context) => {
 });
 ```
 
-In `serverless.yml`, reduce the memory allocation for the Lambda function. We will also extend the timeout to give the Lambda function enough time to allocate the memory.
-```
-...
+Now we'll set our Lambda function to use the lowest memory allowed and increase the timeout to give it time to allocate the memory.
+
+<img class="code-marker" src="/assets/s.png" />Replace the `get` function block in your `serverless.yml`.
+
+``` yml
   get:
     # Defines an HTTP API endpoint that calls the main function in get.js
     # - path: url path is /notes/{id}
@@ -112,20 +136,28 @@ In `serverless.yml`, reduce the memory allocation for the Lambda function. We wi
           method: get
           cors: true
           authorizer: aws_iam
-...
 ```
 
-Head over to your notes app, and select a note. You will notice the page tries to load for a couple of seconds, and then fails with an error alert.
+<img class="code-marker" src="/assets/s.png" />Let's commit this.
 
-...
+``` bash
+$ git add .
+$ git commit -m "Adding a memory error"
+$ git push
+```
+
+Head over to your Seed dashboard and deploy it. Then, in your notes app, try and load a note. It should fail with an error alert.
+
+Just as before, you'll see the error in Sentry. Head over to the Lambda logs in Seed.
+
+![Memory error log request in Seed](/assets/monitor-debug-errors/memory-error-log-request-in-seed.png)
+![Select Amazon Cognito Service screenshot](https://i.imgur.com/XRWHbpn.png)
 
 Note the request took all of 128MB of memory. Click to expand the request.
 
-![Select Amazon Cognito Service screenshot](https://i.imgur.com/XRWHbpn.png)
-
-You should also see 'Error: Runtime exited with error: signal: killed' which is printed out by Lambda runtime indicating the runtime was killed.
-
+![Memory error log detail request in Seed](/assets/monitor-debug-errors/memory-error-log-request-detail-in-seed.png)
 ![Select Amazon Cognito Service screenshot](https://i.imgur.com/WVqwoNo.png)
 
-Note that the debug messages are not flushed in this case because no exception was thrown. The Lambda container was killed.
+You'll see `Error: Runtime exited with error: signal: killed` which is printed out by Lambda runtime indicating the runtime was killed. Unfortunately, our debug messages are not printed out because the Lambda container was killed without an exception being thrown.
 
+Next, we'll look at how to debug errors that happen outside your Lambda function handler code.
