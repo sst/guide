@@ -45,19 +45,12 @@ return (
   </div>
 );
 ```
-<img class="code-marker" src="/assets/s.png" />Initialize `useHistory` hook at the beginning of `Settings` component.
-``` js
-const history = useHistory();
-```
-
 
 <img class="code-marker" src="/assets/s.png" />And add the following to the header.
 
 ``` js
 import { Elements, StripeProvider } from "react-stripe-elements";
-import { useHistory } from "react-router-dom";
 import BillingForm from "../components/BillingForm";
-import config from "../config";
 import "./Settings.css";
 ```
 

@@ -17,7 +17,7 @@ We are going to use the `useHistory` hook that comes with React Router.
 
 ### Redirect to Home on Login
 
-<img class="code-marker" src="/assets/s.png" />First, initialize `useHistory` hook in the beginning of `Login` component.
+<img class="code-marker" src="/assets/s.png" />First, initialize `useHistory` hook in the beginning of `src/containers/Login.js`.
 
 ``` javascript
 const history = useHistory();

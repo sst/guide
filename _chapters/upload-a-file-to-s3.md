@@ -24,7 +24,7 @@ Also, just looking ahead a bit; we will be uploading files when a note is create
 <img class="code-marker" src="/assets/s.png" />Create `src/libs/awsLib.js` and add the following:
 
 ``` javascript
-import Storage from "@aws-amplify/storage";
+import { Storage } from "aws-amplify";
 
 export async function s3Upload(file) {
   const filename = `${Date.now()}-${file.name}`;

@@ -10,12 +10,10 @@ comments_id: call-the-create-api/124
 
 Now that we have our basic create note form working, let's connect it to our API. We'll do the upload to S3 a little bit later. Our APIs are secured using AWS IAM and Cognito User Pool is our authentication provider. Thankfully, Amplify takes care of this for us by using the logged in user's session.
 
-We just need to use the `API` module that AWS Amplify has.
-
 <img class="code-marker" src="/assets/s.png" />Let's include the `API` module by adding the following to the header of `src/containers/NewNote.js`.
 
 ``` javascript
-import API from "@aws-amplify/api";
+import { API } from "aws-amplify";
 ```
 
 <img class="code-marker" src="/assets/s.png" />And replace our `handleSubmit` function with the following.

@@ -27,7 +27,7 @@ We start with the value set to `true` because as we first load our app, it'll st
 <img class="code-marker" src="/assets/s.png" />Let's include the `Auth` module by adding the following to the header of `src/App.js`.
 
 ``` javascript
-import Auth from "@aws-amplify/auth";
+import { Auth } from "aws-amplify";
 ```
 
 <img class="code-marker" src="/assets/s.png" />Now to load the user session we'll add the following to our `src/App.js` right below our variable declarations.

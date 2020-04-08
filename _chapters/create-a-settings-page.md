@@ -22,8 +22,9 @@ To get started let's add our settings page.
 ``` coffee
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import API from "@aws-amplify/api";
+import { API } from "aws-amplify";
 import { onError } from "../libs/errorLib";
+import config from "../config";
 
 export default function Settings() {
   const history = useHistory();

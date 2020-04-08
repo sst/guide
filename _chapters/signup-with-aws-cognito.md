@@ -52,7 +52,7 @@ async function handleConfirmationSubmit(event) {
 <img class="code-marker" src="/assets/s.png" />Also, include the Amplify Auth in our header.
 
 ``` javascript
-import Auth from "@aws-amplify/auth";
+import { Auth } from "aws-amplify";
 ```
 
 The flow here is pretty simple:
