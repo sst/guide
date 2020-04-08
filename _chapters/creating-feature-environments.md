@@ -80,7 +80,7 @@ package:
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
   stage: dev
   region: us-east-1
   tracing:
