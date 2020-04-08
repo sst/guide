@@ -69,7 +69,6 @@ export default function debug() {
     string: util.format.apply(null, arguments),
   });
 }
-
 ```
 
 We are doing a few things of note in this simple debugger library.

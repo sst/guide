@@ -104,7 +104,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
   stage: prod
   region: us-east-1
 
@@ -227,7 +227,6 @@ export const main = handler(async (event, context) => {
     // - 'content': parsed from request body
     // - 'attachment': parsed from request body
     // - 'createdAt': current Unix timestamp
-    TableName: process.env.tableName,
     Item: {
       userId: event.requestContext.identity.cognitoIdentityId,
       noteId: uuid.v1(),
