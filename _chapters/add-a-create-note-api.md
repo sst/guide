@@ -308,14 +308,14 @@ Let's go over this in detail.
 
 - We are creating a `handler` function that we'll use as a wrapper around our Lambda functions.
 - It takes our Lambda function as the argument.
-- It uses the `Promise.resolve()` pattern here because our Lambda functions could be return a Promise (be asynchronous) or not. This let's us treat them as if they are both asynchronous.
+- It uses the `Promise.resolve()` pattern here because our Lambda functions could return a Promise (be asynchronous) or not. This lets us handle both the cases.
 - It'll first run our Lambda function. If successful, it'll set the return value as the `responseBody`.
 - It'll capture any errors that happen in our functions and return the error message.
 - Finally, we format the response with HTTP status code and headers. 
 
 The above pattern of using Promises will make more sense in our later chapters when we want to do a better job with error handling. 
 
-It's **important to note** that that the `handler-lib.js` needs to be **imported before we import anything else**.
+It's **important to note** that the `handler-lib.js` needs to be **imported before we import anything else**. This is because we'll be adding some error handling to it later that needs to be initialized when our Lambda function is first invoked.
 
 Next, we are going to write the API to get a note given its id.
 
