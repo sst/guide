@@ -175,6 +175,8 @@ This should be fairly straightforward:
 5. We format our HTTP response.
 6. We clean up our debugger by calling `debug.end()`.
 
+Recall that the `handler-lib.js` needs to be **imported before we import anything else**. This is because the `debug-lib.js` that it imports needs to initialize AWS SDK logging before it's used anywhere else.
+
 ### Using the Error Handler
 
 You might recall the way we are currently using the above error handler in our Lambda functions.
