@@ -314,6 +314,8 @@ Let's go over this in detail.
 
 The above pattern of using Promises will make more sense in our later chapters when we want to do a better job with error handling. 
 
+It's **important to note** that that the `handler-lib.js` needs to be **imported before we import anything else**.
+
 Next, we are going to write the API to get a note given its id.
 
 ---

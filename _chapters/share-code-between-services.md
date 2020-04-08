@@ -112,4 +112,34 @@ And we include the **lambdaPolicyXRay** IAM policy:
 
 You can do something similar for any other `serverless.yml` config that needs to be shared.
 
+For simplifying our `serverless.yml` config within a service, we split it up further. In our `services/notes-api/serverless.yml` in our [sample repo]({{ site.backend_ext_api_github_repo }}) you'll notice the following:
+
+``` yml
+resources:
+  # API Gateway Errors
+  - ${file(resources/api-gateway-errors.yml)}
+  # Cognito Identity Pool Policy
+  - ${file(resources/cognito-policy.yml)}
+```
+
+The `api-gateway-errors.yml` adds the headers for 4xx and 5xx API errors. While the `cognito-policy.yml` adds the IAM policy for allowing our Cognito authenticated users to access the Notes API.
+
+``` yml
+Statement:
+  - Effect: 'Allow'
+    Action:
+      - 'execute-api:Invoke'
+    Resource:
+      Fn::Join:
+        - ''
+        -
+          - 'arn:aws:execute-api:'
+          - Ref: AWS::Region
+          - ':'
+          - Ref: AWS::AccountId
+          - ':'
+          - Ref: ApiGatewayRestApi
+          - '/*'
+```
+
 Next, let's look at what happens when multiple API services need to share the same API endpoint.

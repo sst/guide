@@ -46,7 +46,7 @@ Let's quickly go over how we are using it here. We want to make a request to our
 <img class="code-marker" src="/assets/s.png" />And include our Amplify API module in the header.
 
 ``` javascript
-import API from "@aws-amplify/api";
+import { API } from "aws-amplify";
 ```
 
 Now let's render the results.
@@ -77,13 +77,7 @@ function renderNotesList(notes) {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />And include the `ListGroupItem` in the header so that our `react-bootstrap` import looks like so.
-
-``` javascript
-import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
-```
-
-<img class="code-marker" src="/assets/s.png" />Also include the `LinkContainer` from `react-router-bootstrap`.
+<img class="code-marker" src="/assets/s.png" />Include the `LinkContainer` from `react-router-bootstrap`.
 
 ``` javascript
 import { LinkContainer } from "react-router-bootstrap";

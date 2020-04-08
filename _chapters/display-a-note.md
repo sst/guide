@@ -43,8 +43,7 @@ Of course this component doesn't exist yet and we are going to create it now.
 ``` coffee
 import React, { useRef, useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import API from "@aws-amplify/api";
-import Storage from "@aws-amplify/storage";
+import { API, Storage } from "aws-amplify";
 import { onError } from "../libs/errorLib";
 
 export default function Notes() {

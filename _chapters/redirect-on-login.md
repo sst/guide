@@ -61,6 +61,18 @@ export default function UnauthenticatedRoute({ children, ...rest }) {
 history.push("/");
 ```
 
+<img class="code-marker" src="/assets/s.png" />Also, remove the hook declaration.
+
+``` coffee
+const history = useHistory();
+```
+
+<img class="code-marker" src="/assets/s.png" />Finally, remove the import.
+
+``` coffee
+import { useHistory } from "react-router-dom";
+```
+
 Now our login page should redirect after we login. And that's it! Our app is ready to go live.
 
 ### Commit the Changes

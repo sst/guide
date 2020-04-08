@@ -161,7 +161,7 @@ Let's use this in our Login container.
 import { onError } from "../libs/errorLib";
 ```
 
-<img class="code-marker" src="/assets/s.png" />And replace of `alert(e.message);` with:
+<img class="code-marker" src="/assets/s.png" />And replace of `alert(e.message);` in the `handleSubmit` function with:
 
 ``` javascript
 onError(e);
@@ -175,7 +175,7 @@ We'll do something similar in the App component.
 import { onError } from "./libs/errorLib";
 ```
 
-<img class="code-marker" src="/assets/s.png" />And replace of `alert(e);` with:
+<img class="code-marker" src="/assets/s.png" />And replace of `alert(e);` in the `onLoad` function with:
 
 ``` javascript
 onError(e);

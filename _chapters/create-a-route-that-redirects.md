@@ -33,7 +33,6 @@ export default function AuthenticatedRoute({ children, ...rest }) {
     </Route>
   );
 }
-
 ```
 
 This simple component creates a `Route` where its children are rendered only if the user is authenticated. If the user is not authenticated, then it redirects to login page. Let's take a closer look at it:
