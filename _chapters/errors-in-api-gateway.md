@@ -126,11 +126,13 @@ Let's put the different type of errors we've covered into a table. This'll give 
 | Invalid API method           | &#10003; | &#10003;   | &#10007;   | &#10007;   | Look for a single successful `OPTIONS` request in the access logs. |
 
 <style type="text/css">
-  table.serverless-errors thead th:nth-child(2),
-  table.serverless-errors thead th:nth-child(3),
-  table.serverless-errors thead th:nth-child(4),
-  table.serverless-errors thead th:nth-child(5) {
-    min-width: 60px;
+  @media (min-width: 640px) {
+    table.serverless-errors thead th:nth-child(2),
+    table.serverless-errors thead th:nth-child(3),
+    table.serverless-errors thead th:nth-child(4),
+    table.serverless-errors thead th:nth-child(5) {
+      min-width: 60px;
+    }
   }
 </style>
 
