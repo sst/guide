@@ -238,7 +238,10 @@ on downloadPdf(theChapterName)
       repeat until menu item "Export as PDF…" of menu "File" of menu bar 1 exists
         delay 0.2
       end repeat
-      repeat until menu item "Export as PDF…" of menu "File" of menu bar 1 is enabled
+      repeat
+        if ((value of menu item "Export as PDF…" of menu "File" of menu bar 1 is enabled) = true)
+          exit repeat
+        end if
         delay 0.2
       end repeat
       click menu item "Export as PDF…" of menu "File" of menu bar 1
