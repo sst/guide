@@ -98,7 +98,7 @@ lambdaPolicyXRay:
     - xray:PutTelemetryRecords
   Resource: "*"
 ```
-And in each of our service, we include the **custom** definition in their `serverless.yml`:
+And in each of our services, we include the **custom** definition in their `serverless.yml`:
 ``` yml
 custom: ${file(../../serverless.common.yml):custom}
 ```
