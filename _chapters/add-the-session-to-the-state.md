@@ -5,7 +5,7 @@ date: 2017-01-15 00:00:00
 lang: en
 comments_id: add-the-session-to-the-state
 redirect_from: /chapters/add-the-user-token-to-the-state.html
-description: We need to add the user session to the state of our App component in our React.js app. By lifting the state up we can pass the session to all the child containers.
+description: We need to add the user session to the state of our App component in our React.js app. We are going to use React context through the useContext hook to store it and pass it to all our child components. 
 comments_id: add-the-session-to-the-state/136
 ---
 
@@ -39,9 +39,9 @@ This initializes the `isAuthenticated` state variable to `false`, as in the user
 
 ### Store the Session in the Context
 
-We are going to have to pass the session related info to all of our containers in the future. This is going to be tedious if we pass it in as a prop. Instead let's use [React Context](https://reactjs.org/docs/context.html) for this.
+We are going to have to pass the session related info to all of our containers. This is going to be tedious if we pass it in as a prop. Since we'll have to do that manually for each component. Instead let's use [React Context](https://reactjs.org/docs/context.html) for this.
 
-We'll create a context for our entire app that all of our containers can use.
+We'll create a context for our entire app that all of our containers will use.
 
 <img class="code-marker" src="/assets/s.png" />Create a `src/libs/` directory. We'll use this to store all our common code.
 
@@ -63,7 +63,7 @@ export function useAppContext() {
 
 This really simple bit of code is creating and exporting two things:
 1. Using the `createContext` API to create a new context for our app.
-2. Using the `useContext` React Hook to access the context that we created for our app.
+2. Using the `useContext` React Hook to access the context.
 
 If you are not sure how Contexts work, don't worry, it'll make more sense once we use it.
 
@@ -107,7 +107,7 @@ The second part of the Context API is the consumer. We'll add that to the Login 
 import { useAppContext } from "../libs/contextLib";
 ```
 
-<img class="code-marker" src="/assets/s.png" />Include the hook adding it below the `export default function Login() {` line.
+<img class="code-marker" src="/assets/s.png" />Include the hook by adding it below the `export default function Login() {` line.
 
 ``` javascript
 const { userHasAuthenticated } = useAppContext();

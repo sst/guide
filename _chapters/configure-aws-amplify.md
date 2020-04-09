@@ -13,7 +13,7 @@ To allow our React app to talk to the AWS resources that we created (in the back
 
 AWS Amplify provides a few simple modules (Auth, API, and Storage) to help us easily connect to our backend.
 
-### Install AWS Amplify Core
+### Install AWS Amplify
 
 <img class="code-marker" src="/assets/s.png" />Run the following command in your working directory.
 

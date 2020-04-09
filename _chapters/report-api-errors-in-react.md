@@ -3,8 +3,8 @@ layout: post
 title: Report API Errors in React
 date: 2020-04-03 00:00:00
 lang: en
-description: 
-comments_id: 
+description: In this chapter we look at how to report AWS Amplify API errors in our React app to Sentry. We use the config object from Axios to log the API endpoint that triggered the error.
+comments_id: report-api-errors-in-react/1731
 ref: report-api-errors-in-react
 ---
 
@@ -25,7 +25,7 @@ export function onError(error) {
 }
 ```
 
-For most errors we simply alert the error message. But Amplify's Auth package doesn't throw `Error` objects, it throws objects with a couple of properties, including the `message`. So we just alert that instead.
+For most errors we simply alert the error message. But Amplify's Auth package doesn't throw `Error` objects, it throws objects with a couple of properties, including the `message`. So we alert that instead.
 
 For API errors we want to report both the error and the API endpoint that caused the error. On the other hand, for Auth errors we need to create an `Error` object because Sentry needs actual errors sent to it.
 
@@ -52,8 +52,8 @@ export function onError(error) {
 }
 ```
 
-You'll notice that in the case of an Auth error we create an `Error` object and add the object that we get as the `errorInfo`. For API errors, Amplify uses [Axios](https://github.com/axios/axios). This has a config object that contains the API endpoint that generated the error.
+You'll notice that in the case of an Auth error we create an `Error` object and add the object that we get as the `errorInfo`. For API errors, Amplify uses [Axios](https://github.com/axios/axios). This has a `config` object that contains the API endpoint that generated the error.
 
-We report this to Sentry by calling `logError(error, errorInfo)`. And just as before we simply alert the message to the user. It would be a good idea to further customize what you show the user. But we'll leave this as an exercise for you.
+We report this to Sentry by calling `logError(error, errorInfo)` that we added in the [previous chapter]({% link _chapters/setup-error-reporting-in-react.md %}). And just as before we simply alert the message to the user. It would be a good idea to further customize what you show the user. But we'll leave this as an exercise for you.
 
-This handles all the expected errors in our React app. However, there are a lot of other things that can go wrong while rendering our app. To handle this we are going to setup a [React Error Boundary](https://reactjs.org/docs/error-boundaries.html) in the next chapter.
+This handles all the expected errors in our React app. However, there are a lot of other things that can go wrong while rendering our app. To handle them we are going to setup a [React Error Boundary](https://reactjs.org/docs/error-boundaries.html) in the next chapter.

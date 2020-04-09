@@ -4,7 +4,7 @@ title: Give Feedback While Logging In
 date: 2017-01-18 00:00:00
 lang: en
 ref: give-feedback-while-logging-in
-description: We should give users some feedback while we are logging them in to our React.js app. To do so we are going to create a component that animates a Glyphicon refresh icon inside a React-Bootstrap Button component. We’ll do the animation while the log in call is in progress.
+description: We should give users some feedback while we are logging them in to our React.js app. To do so we are going to create a component that animates a Glyphicon refresh icon inside a React-Bootstrap Button component. We’ll do the animation while the log in call is in progress. We'll also add some basic error handling to our app.
 comments_id: give-feedback-while-logging-in/46
 ---
 
@@ -134,7 +134,7 @@ And now when we switch over to the browser and try logging in, you should see th
 
 ### Handling Errors
 
-You might have noticed in our Login and App components that we simply `alert` when there is an error. For this section of the guide we are going to keep it simple. But it'll help us further down the line if we handle all of our errors in one place.
+You might have noticed in our Login and App components that we simply `alert` when there is an error. We are going to keep our error handling simple. But it'll help us further down the line if we handle all of our errors in one place.
 
 <img class="code-marker" src="/assets/s.png" />To do that, add the following to `src/libs/errorLib.js`.
 
@@ -151,7 +151,7 @@ export function onError(error) {
 }
 ```
 
-The `Auth` package throws errors in different formats, so all this does is `alert` the error message we need. And in all other cases simply `alert` the error oject itself.
+The `Auth` package throws errors in a different format, so all this code does is `alert` the error message we need. And in all other cases simply `alert` the error object itself.
 
 Let's use this in our Login container.
 
@@ -161,7 +161,7 @@ Let's use this in our Login container.
 import { onError } from "../libs/errorLib";
 ```
 
-<img class="code-marker" src="/assets/s.png" />And replace of `alert(e.message);` in the `handleSubmit` function with:
+<img class="code-marker" src="/assets/s.png" />And replace `alert(e.message);` in the `handleSubmit` function with:
 
 ``` javascript
 onError(e);
@@ -175,7 +175,7 @@ We'll do something similar in the App component.
 import { onError } from "./libs/errorLib";
 ```
 
-<img class="code-marker" src="/assets/s.png" />And replace of `alert(e);` in the `onLoad` function with:
+<img class="code-marker" src="/assets/s.png" />And replace `alert(e);` in the `onLoad` function with:
 
 ``` javascript
 onError(e);

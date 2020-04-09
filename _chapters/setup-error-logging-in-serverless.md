@@ -3,9 +3,9 @@ layout: post
 title: Setup Error Logging in Serverless
 date: 2020-04-01 00:00:00
 lang: en
-description: 
+description: In this chapter we'll look at how to handle errors in our Lambda functions. We'll also handle Lambda timeouts and enable logging for the AWS SDK.
 code: backend_full
-comments_id: 
+comments_id: setup-error-logging-in-serverless/1733
 redirect_from: /chapters/monitoring-deployments-in-seed.html
 ref: setup-error-logging-in-serverless
 ---
@@ -18,11 +18,11 @@ To do this, we'll setup the error logging in our backend to catch:
 - Errors while calling AWS services
 - Unexpected errors like Lambda functions timing out or running out of memory
 
-We are going to look at how to setup a debugging framework to catch the above errors, and have enough context for us to easily pinpoint and fix the issue. We are going to be using [CloudWatch](https://aws.amazon.com/cloudwatch/) to write our logs, and we'll be using the log viewer in [Seed](https://seed.run) to read them.
+We are going to look at how to setup a debugging framework to catch the above errors, and have enough context for us to easily pinpoint and fix the issue. We'll be using [CloudWatch](https://aws.amazon.com/cloudwatch/) to write our logs, and we'll be using the log viewer in [Seed](https://seed.run) to view them.
 
 ### Setup a Debug Lib
 
-Let's start by adding some code that'll help us with that.
+Let's start by adding some code to help us with that.
 
 <img class="code-marker" src="/assets/s.png" />Create a `libs/debug-lib.js` file and add the following to it.
 
@@ -71,11 +71,11 @@ export default function debug() {
 }
 ```
 
-We are doing a few things of note in this simple debugger library.
+We are doing a few things of note in this simple helper.
 
 - **Enable AWS SDK logging**
   
-  We start by enabling logging for the AWS SDK. We do so by running `AWS.config.logger = { log: debug }`. This is telling the AWS SDK to log using our logger, the `debug()` method. We'll look at this below.  So when you make a call to an AWS service, ie. a query call to the DynamoDB table `dev-notes`, this will log:
+  We start by enabling logging for the AWS SDK. We do so by running `AWS.config.logger = { log: debug }`. This is telling the AWS SDK to log using our logger, the `debug()` method (we'll look at this below).  So when you make a call to an AWS service, ie. a query call to the DynamoDB table `dev-notes`, this will log:
 
   ````
   [AWS dynamodb 200 0.296s 0 retries] query({ TableName: 'dev-notes',
@@ -86,13 +86,13 @@ We are doing a few things of note in this simple debugger library.
 
 - **Log API request info**
 
-  We initialize our debugger by calling `init()`. We log the API request info, including the path parameters, querystring parameters, and request body. We do so using our internal `debug()` method.
+  We initialize our debugger by calling `init()`. We log the API request info, including the path parameters, query string parameters, and request body. We do so using our internal `debug()` method.
 
 - **Log Lambda timeouts**
 
   If your code takes long to run and it reaches the timeout value for the Lambda function, the function will timeout. By default, this value is set to 6s. When this happens, we won't get a chance to handle it in our debugger. To get around this, we can find out how much time there is left in the current execution by calling `context.getRemainingTimeInMillis()`. This is an internal Lambda function. We then create a timer that will automatically print our log message 100ms before the Lambda times out.
 
-  Note there could be false positives where the Lambda finishes executing within the last 100ms of the execution time. But that should be a very rare event.
+  Note, there could be false positives where the Lambda finishes executing within the last 100ms of the execution time. But that should be a very rare event.
 
   Finally, we cancel this timer in the case where the Lambda function completed execution within the timeout.
 
@@ -100,14 +100,14 @@ We are doing a few things of note in this simple debugger library.
 
   We log messages using our special `debug()` method. Debug messages logged using this method only get printed out when we call the `flush()` method. This allows us to log very detailed contextual information about what was being done leading up to the error. We can log:
   - Arguments and return values for function calls.
-  - And, reqeust/response data for HTTP requests made.
+  - And, request/response data for HTTP requests made.
   
-  We only want to print out our debug messages to the console when run into an error. This is helps us reduce clutter in the case of successful requests. And, keep our CloudWatch costs low!
+  We only want to print out debug messages to the console when we run into an error. This helps us reduce clutter in the case of successful requests. And, keeps our CloudWatch costs low!
 
-  To do this, we store the log info (when calling `debug()`) in memory inside the `logs` array. Finally, when we call `flush()` (in the case of an error), we `console.debug()` all those stored log messages.
+  To do this, we store the log info (when calling `debug()`) in memory inside the `logs` array. And when we call `flush()` (in the case of an error), we `console.debug()` all those stored log messages.
 
 
-So in our Lambda function code, if we want to log some debug information that only get printed out if we have an error, we'll do the following:
+So in our Lambda function code, if we want to log some debug information that only gets printed out if we have an error, we'll do the following:
 
 ``` javascript
 import { log } from "../libs/debug-lib";
@@ -127,7 +127,7 @@ Now let's use the debug library in our Lambda functions.
 
 ### Setup Handler Lib
 
-You'll recall that all our Lambda functions are wrapped using a `handler()` method. We use this to format what our Lambda functions return as a HTTP response. It also, handles any errors that our Lambda functions throws.
+You'll recall that all our Lambda functions are wrapped using a `handler()` method. We use this to format what our Lambda functions return as their HTTP response. It also, handles any errors that our Lambda functions throws.
 
 We'll use the debug lib that we added above to improve our error handling. 
 
@@ -173,9 +173,7 @@ This should be fairly straightforward:
 3. We format the success response.
 4. In the case of an error, we first write out our debug logs by calling `debug.flush(e)`. Where `e` is the error that caused our Lambda function to fail.
 5. We format our HTTP response.
-6. We clean up our debugger by calling `debug.end()`.
-
-Recall that the `handler-lib.js` needs to be **imported before we import anything else**. This is because the `debug-lib.js` that it imports needs to initialize AWS SDK logging before it's used anywhere else.
+6. And finally, we clean up our debugger by calling `debug.end()`.
 
 ### Using the Error Handler
 
@@ -192,7 +190,9 @@ export const main = handler((event, context) => {
 });
 ```
 
-We wrap all of our wrap functions using the error handler.
+We wrap all of our Lambda functions using the error handler.
+
+Note that, the `handler-lib.js` needs to be **imported before we import anything else**. This is because the `debug-lib.js` that it imports needs to initialize AWS SDK logging before it's used anywhere else.
 
 ### Commit the Code
 
@@ -208,6 +208,8 @@ $ git push
 
 And promote the changes to production.
 
+Head over to the Seed console and hit **Promote to prod** once your changes are deployed to to dev.
+
 ![Promote error logging to prod in Seed](/assets/monitor-debug-errors/promote-error-logging-to-prod-in-seed.png)
 
 ### Enable Access Logs
@@ -222,4 +224,4 @@ Then hit **Enable Access Logs** for your API.
 
 ![Enable access logs in Seed](/assets/monitor-debug-errors/enable-access-logs-in-seed.png)
 
-And that's pretty much it! With these simple steps in place, we are now ready to look at some examples of how to debug our Serverless app.
+And that's pretty much it! With these simple steps, we are now ready to look at some examples of how to debug our Serverless app.

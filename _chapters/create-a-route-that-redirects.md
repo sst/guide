@@ -4,7 +4,7 @@ title: Create a Route That Redirects
 date: 2017-02-02 00:00:00
 lang: en
 redirect_from: /chapters/create-a-hoc-that-checks-auth.html
-description: In our React.js app we want to redirect users to the login page if they are not logged in and redirect them away from the login page if they are logged in. To do so we are going to use the Redirect component from React Router v4.
+description: In our React.js app we want to redirect users to the login page if they are not logged in and redirect them away from the login page if they are logged in. To do so we are going to use the Redirect component and useLocation hook from React Router. While, the session will be stored in our app Context using the useContext hook.
 comments_id: create-a-route-that-redirects/47
 ref: create-a-route-that-redirects
 ---
@@ -35,17 +35,17 @@ export default function AuthenticatedRoute({ children, ...rest }) {
 }
 ```
 
-This simple component creates a `Route` where its children are rendered only if the user is authenticated. If the user is not authenticated, then it redirects to login page. Let's take a closer look at it:
+This simple component creates a `Route` where its children are rendered only if the user is authenticated. If the user is not authenticated, then it redirects to the login page. Let's take a closer look at it:
 
 - Like all components in React, `AuthenticatedRoute` has a prop called `children` that represents all child components. Example child components in our case would be `NewNote`, `Notes` and `Settings`.
 
-- The `AuthenticatedRoute` component returns a `Route` component.
+- The `AuthenticatedRoute` component returns a React Router `Route` component.
 
-- We check if the user is authenticated by using the `useAppContext` hook.
+- We use the `useAppContext` hook to check if the user is authenticated.
 
-- If the user is authenticated, then we simply render `children`. And if the user is not authenticated, then we use the `Redirect` React Router component to redirect the user to the login page. 
+- If the user is authenticated, then we simply render the `children` component. And if the user is not authenticated, then we use the `Redirect` React Router component to redirect the user to the login page. 
 
-- We also pass in the current path to the login page (`redirect` in the querystring). We will use this later to redirect us back after the user logs in. We get this by using the `useLocation` React Router hook.
+- We also pass in the current path to the login page (`redirect` in the query string). We will use this later to redirect us back after the user logs in. We use the `useLocation` React Router hook to get this info.
 
 We'll do something similar to ensure that the user is not authenticated.
 
@@ -70,6 +70,6 @@ export default function UnauthenticatedRoute({ children, ...rest }) {
 }
 ```
 
-Here we are checking to ensure that the user is **not** authenticated before we render child components. Example child components here would be `Login` and `Signup`. And in the case where the user is authenticated, we use the `Redirect` component to simply send the user to the homepage.
+Here we are checking to ensure that the user is **not** authenticated before we render the child components. Example child components here would be `Login` and `Signup`. And in the case where the user is authenticated, we use the `Redirect` component to simply send the user to the homepage.
 
 Next, let's use these components in our app.

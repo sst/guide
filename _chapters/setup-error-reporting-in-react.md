@@ -3,12 +3,12 @@ layout: post
 title: Setup Error Reporting in React
 date: 2020-04-03 00:00:00
 lang: en
-description: 
-comments_id: 
+description: In this chapter we signup for a free Sentry account and set it up in our React app. We also configure our app to not report any errors when we are developing locally.
+comments_id: setup-error-reporting-in-react/1734
 ref: setup-error-reporting-in-react
 ---
 
-Let's start by setting up error reporting in React. To do so, we'll be using [Sentry](https://sentry.io).
+Let's start by setting up error reporting in React. To do so, we'll be using [Sentry](https://sentry.io). Sentry is a great service for reporting and debugging errors. And it comes with a very generous free tier.
 
 In this chapter we'll sign up for a free Sentry account and configure it in our React app. And in the coming chapters we'll be reporting the various frontend errors to it. 
 
@@ -16,7 +16,7 @@ Let's get started.
 
 ### Create a Sentry Account
 
-Head over to — [Sentry](https://sentry.io) and hit **Get Started**.
+Head over to [Sentry](https://sentry.io) and hit **Get Started**.
 
 ![Sentry landing page](/assets/monitor-debug-errors/sentry-landing-page.png)
 
@@ -79,7 +79,7 @@ export function logError(error, errorInfo = null) {
 
 Make sure to replace `Sentry.init({ dsn: "https://your-dsn-id-here@sentry.io/123456" });` with the line we copied from the Sentry dashboard above.
 
-We are using the `isLocal` flag to conditionally enable Sentry because we don't want to report errors when we are developing locally. Even though we all know that we rarely ever make mistakes while developing…
+We are using the `isLocal` flag to conditionally enable Sentry because we don't want to report errors when we are developing locally. Even though we all know that we _rarely_ ever make mistakes while developing…
 
 The `logError` method is what we are going to call when we want to report an error to Sentry. It takes:
 

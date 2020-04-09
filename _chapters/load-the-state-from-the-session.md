@@ -4,7 +4,7 @@ title: Load the State from the Session
 date: 2017-01-15 00:00:00
 lang: en
 ref: load-the-state-from-the-session
-description: To keep a user logged in to Amazon Cognito in our React.js app, we are going to load the user session in the App component state. We load the session in componentDidMount using the AWS Amplify Auth.currentSession() method.
+description: To keep a user logged in to Amazon Cognito in our React.js app, we are going to load the user session in the App component state using a React Context. We load the session in componentDidMount using the AWS Amplify Auth.currentSession() method.
 comments_id: load-the-state-from-the-session/157
 ---
 

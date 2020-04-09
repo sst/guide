@@ -3,16 +3,16 @@ layout: post
 title: Errors Outside Lambda Functions
 date: 2020-04-06 00:00:00
 lang: en
+description: In this chapter we look at how to debug errors that happen outside your Lambda function handler code. We use the CloudWatch logs through Seed to help us debug it.  
+comments_id: errors-outside-lambda-functions/1729
 ref: errors-outside-lambda-functions
-description: 
-comments_id: 
 ---
 
-We've covered debugging [errors in our Lambda functions]({% link _chapters/logic-errors-in-lambda-functions.md %}) and [unexpected errors in Lambda functions]({% link _chapters/unexpected-errors-in-lambda-functions.md %}). Now let's look at what happens when an error happens outside our Lambda function.
+We've covered debugging [errors in our code]({% link _chapters/logic-errors-in-lambda-functions.md %}) and [unexpected errors]({% link _chapters/unexpected-errors-in-lambda-functions.md %}) in Lambda functions. Now let's look at how to debug errors that happen outside our Lambda functions.
 
 ### Initialization Errors
 
-Lambda functions could fail not because of an error inside your handler code, but before your Lambda function is invoked. Let's add some fault code outside our handler function.
+Lambda functions could fail not because of an error inside your handler code, but because of an error outside it. In this case, your Lambda function won't be invoked. Let's add some faulty code outside our handler function.
 
 <img class="code-marker" src="/assets/s.png" />Replace our `get.js` with the following.
 
@@ -61,19 +61,19 @@ Now if you select a note in your notes app, you'll notice that it fails with an 
 
 ![Init error in notes app note page](/assets/monitor-debug-errors/init-error-in-notes-app-note-page.png)
 
-You should see an error in Sentry. So if you head over to the Lambda logs in Seed.
+You should see an error in Sentry. And if you head over to the Lambda logs in Seed.
 
 ![Init error log request in Seed](/assets/monitor-debug-errors/init-error-log-request-in-seed.png)
 
-There seem to be 3 rows printed out in the logs. Note only one of them has memory and duration information available. This is because the Lambda runtime prints out the error message multiple times. Click on the complete request to expand it.
+You'll notice that 3 rows have been printed out in the logs. This is because the Lambda runtime prints out the error message multiple times. Note that, only one of them has memory and duration information available. Click on the complete request to expand it.
 
 ![Init error log detail request in Seed](/assets/monitor-debug-errors/init-error-log-request-detail-in-seed.png)
 
-You should also see an exception `TypeError: dynamodb_lib.notExist is not a function`, along with the stacktrace. This exception is printed out by the Lambda runtime and not by our debug handler. This is because the Lambda function has not been executed. You can see the error message does not have a request ID. In fact, the request ID is `undefined`. Also note the message at the bottom `Unknown application error occurred`.
+You should also see an exception `TypeError: dynamodb_lib.notExist is not a function`, along with the stack trace. This exception is printed out by the Lambda runtime and not by our debug handler. This is because the Lambda function has not been executed.  Also note the message at the bottom `Unknown application error occurred`.
 
 ### Handler Function Errors
 
-Another error that can happen is if the handler function has been misnamed. 
+Another error that can happen outside a Lambda function is when the handler has been misnamed. 
 
 <img class="code-marker" src="/assets/s.png" />Replace our `get.js` with the following.
 
@@ -123,9 +123,9 @@ Click on the complete request to expand.
 
 ![Handler error log detail request in Seed](/assets/monitor-debug-errors/handler-error-log-request-detail-in-seed.png)
 
-You should see an exception `Runtime.HandlerNotFound`, along with the stacktrace. Also, note the message at the bottom `Unknown application error occurred`.
+You should see an exception `Runtime.HandlerNotFound`, along with the stack trace. Also, note the message at the bottom `Unknown application error occurred`.
 
-And that about covers the main Lambda function errors. Next we'll look at how we'll debug errors in API Gateway.
+And that about covers the main Lambda function errors. So the next time you see one of the above error messages, you'll know what's going on.
 
 ### Rollback the Changes
 
@@ -140,7 +140,7 @@ And rollback the prod build in Seed. Click on **Activity** in the Seed dashboard
 
 ![Click activity in Seed](/assets/monitor-debug-errors/click-activity-in-seed.png)
 
-Then click on **prod** over of the right. This shows us all the deployments made to our prod stage.
+Then click on **prod** over on the right. This shows us all the deployments made to our prod stage.
 
 ![Click on prod activity in Seed](/assets/monitor-debug-errors/click-on-prod-activity-in-seed.png)
 
@@ -148,6 +148,6 @@ Scroll down to the last deployment from the `master` branch, past all the ones m
 
 ![Rollback on prod build in Seed](/assets/monitor-debug-errors/rollback-on-prod-build-in-seed.png)
 
-This will rollback our app to the state it was in before we deployed all of our fault code.
+This will rollback our app to the state it was in before we deployed all of our faulty code.
 
 Now let's move on to debugging API Gateway errors.

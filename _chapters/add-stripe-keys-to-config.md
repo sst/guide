@@ -26,9 +26,9 @@ Let's also include Stripe.js in our HTML.
 <script src="https://js.stripe.com/v3/"></script>
 ```
 
-Finally, let's load the Stripe config in our settings page.
+And load the Stripe config in our settings page.
 
-<img class="code-marker" src="/assets/s.png" />Add the following in the declarations of `src/containers/Settings.js`.
+<img class="code-marker" src="/assets/s.png" />Add the following at top of the `Settings` function in `src/containers/Settings.js`.
 
 ``` javascript
 const [stripe, setStripe] = useState(null);
@@ -38,6 +38,6 @@ useEffect(() => {
 }, []);
 ```
 
-This loads the Stripe object from the Stripe.js with our Stripe key when our settings page loads. And saves it to the state. 
+This loads the Stripe object from Stripe.js with the Stripe key when our settings page loads. And saves it to the state. 
 
 Next, we'll build our billing form.

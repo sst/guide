@@ -3,12 +3,12 @@ layout: post
 title: Errors in API Gateway
 date: 2020-04-03 00:00:00
 lang: en
-description: 
-comments_id: 
+description: In this chapter we'll look at how to debug errors that happen only in API Gateway in your Serverless app. These errors are only logged to your API Gateway access logs, and not your Lambda logs in CloudWatch.
+comments_id: errors-in-api-gateway/1728
 ref: errors-in-api-gateway
 ---
 
-In the past few chapters we looked at how to debug errors in our Lambda functions. However, our APIs can fail before our Lambda function has been invoked. In these cases, we won't be able to debug using the Lambda logs. Since, there won't be any requests available in our Lambda functions.
+In the past few chapters we looked at how to debug errors in our Lambda functions. However, our APIs can fail before our Lambda function has been invoked. In these cases, we won't be able to debug using the Lambda logs. Since there won't be any requests made to our Lambda functions.
 
 The two common causes for these errors are:
 
@@ -37,7 +37,7 @@ $ git commit -m "Adding fault paths"
 $ git push
 ```
 
-Head over to your notes app, and load the home page. You'll notice the page fails with an error alert sayinig `Network Alert`.
+Head over to your notes app, and load the home page. You'll notice the page fails with an error alert saying `Network Alert`.
 
 ![Invalid path error in notes app](/assets/monitor-debug-errors/invalid-path-error-in-notes-app.png)
 
@@ -46,13 +46,13 @@ On Sentry, the error will show that a `GET` request failed with status code `0`.
 ![Invalid path error in Sentry](/assets/monitor-debug-errors/invalid-path-error-in-sentry.png)
 
 What happens here is that:
-- The browser first makes `OPTIONS` request to `/invalid_path`.
+- The browser first makes an `OPTIONS` request to `/invalid_path`.
 - API Gateway returns a `403` response.
 - The browser throws an error and does not continue to make the `GET` request.
 
 This means that our Lambda function was not invoked. So we'll need to check our API access logs instead.
 
-Click on **View Lambda logs or API logs** in the your Seed dashboard.
+Click on **View Lambda logs or API logs** in your Seed dashboard.
 
 ![Click API logs search in Seed dashboard](/assets/monitor-debug-errors/click-api-logs-search-in-seed-dashboard.png)
 
@@ -86,11 +86,11 @@ $ git commit -m "Adding invalid method"
 $ git push
 ```
 
-Over notes app should fail to load the home page.
+Our notes app should fail to load the home page.
 
 ![Invalid method error in notes app](/assets/monitor-debug-errors/invalid-method-error-in-notes-app.png)
 
-You should see a similar Network Error as the one above in Sentry. Select the error and you will see the `PUT` request failed with `0` status code.
+You should see a similar Network Error as the one above in Sentry. Select the error and you will see that the `PUT` request failed with `0` status code.
 
 ![Invalid method error in Sentry](/assets/monitor-debug-errors/invalid-method-error-in-sentry.png)
 
@@ -108,22 +108,22 @@ So in this case over on Seed, you'll only see an `OPTIONS` request in your acces
 
 The access log combined with the Sentry error details should tell us what we need to do to fix the error. 
 
-And that covers all the major types of Serverless errors and how to debug them. Let's revert our changes.
+And that covers all the major types of Serverless errors and how to debug them.
 
 ### Summary
 
-To quickly summarize the different type of errors that we looked at over the last few chapters, let's put them in a table to compare.
+Let's put the different type of errors we've covered into a table. This'll give us a good idea of what to do when we run into one of these in the future. 
 
 {:.serverless-errors}
 | Error                        | Sentry   | Access Log | Lambda Log | Debug Info | Action |
 |------------------------------|----------|------------|------------|------------|--------|
 | Errors in your code          | &#10003; | &#10003;   | &#10003;   | &#10003;   | Look at the debug info in the Lambda logs. |
 | Lambda timeout               | &#10003; | &#10003;   | &#10003;   | &#10003;   | Look at the last debug message in the Lambda logs. |
-| Lambda out of memory         | &#10003; | &#10003;   | &#10003;   | &#10007;   | Look for the error message `Runtime exited with error: signal: killed` in Lambda logs. |
-| Lambda initialization errors | &#10003; | &#10003;   | &#10003;   | &#10007;   | Look for the error message `Unknown application error occurred` in Lambda logs. |
-| Lambda handler errors        | &#10003; | &#10003;   | &#10003;   | &#10007;   | Look for the error message `Runtime.HandlerNotFound` in Lambda logs. |
-| Invalid API path             | &#10003; | &#10003;   | &#10007;   | &#10007;   | Look for failed `OPTIONS` request in access logs. |
-| Invalid API method           | &#10003; | &#10003;   | &#10007;   | &#10007;   | Look for a single `OPTIONS` request. |
+| Lambda out of memory         | &#10003; | &#10003;   | &#10003;   | &#10007;   | Look for the error message `Runtime exited with error: signal: killed` in the Lambda logs. |
+| Lambda initialization errors | &#10003; | &#10003;   | &#10003;   | &#10007;   | Look for the error message `Unknown application error occurred` in the Lambda logs. |
+| Lambda handler errors        | &#10003; | &#10003;   | &#10003;   | &#10007;   | Look for the error message `Runtime.HandlerNotFound` in the Lambda logs. |
+| Invalid API path             | &#10003; | &#10003;   | &#10007;   | &#10007;   | Look for a single failed `OPTIONS` request in the access logs. |
+| Invalid API method           | &#10003; | &#10003;   | &#10007;   | &#10007;   | Look for a single successful `OPTIONS` request in the access logs. |
 
 <style type="text/css">
   table.serverless-errors thead th:nth-child(2),
@@ -150,7 +150,7 @@ Deploy the code.
 
 ``` bash
 $ git add .
-$ git commit -m "Reverting fault code"
+$ git commit -m "Reverting faulty code"
 $ git push
 ```
 

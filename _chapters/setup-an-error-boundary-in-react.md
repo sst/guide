@@ -3,7 +3,7 @@ layout: post
 title: Setup an Error Boundary in React
 date: 2020-04-03 00:00:00
 lang: en
-description: 
+description: In this chapter we look at how to handle unexpected errors in our React app using an Error Boundary component. It lets us catch any errors, log it to Sentry, and show a fallback UI.
 code: frontend_full
 comments_id: 
 ref: setup-an-error-boundary-in-react
@@ -11,7 +11,7 @@ ref: setup-an-error-boundary-in-react
 
 In the previous chapter we looked at how to [report API errors to Sentry in our React app]({% link _chapters/report-api-errors-in-react.md %}). Now let's report all those unexpected errors that might happen using a [React Error Boundary](https://reactjs.org/docs/error-boundaries.html).
 
-An Error Boundary is component that allows us to catch any errors that might happen in the child components tree, log those errors, and show a fallback UI.
+An Error Boundary is a component that allows us to catch any errors that might happen in the child components tree, log those errors, and show a fallback UI.
 
 ### Create an Error Boundary
 
@@ -60,7 +60,7 @@ Let's include some simple styles for this.
 }
 ```
 
-The styles we are using is very similar to our `NotFound` component. We use that when a user navigates to a page that we don't have a route for. 
+The styles we are using are very similar to our `NotFound` component. We use that when a user navigates to a page that we don't have a route for. 
 
 ### Use the Error Boundary
 
@@ -88,7 +88,7 @@ To use the Error Boundary component that we created, we'll need to add it to our
 ```
 {% endraw %}
 
-<img class="code-marker" src="/assets/s.png" />Also, make sure to import it in header of `src/App.js`.
+<img class="code-marker" src="/assets/s.png" />Also, make sure to import it in the header of `src/App.js`.
 
 ``` javascript
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -115,7 +115,7 @@ $ git push
 
 ### Test the Error Boundary
 
-Before we move on, lets do a quick test.
+Before we move on, let's do a quick test.
 
 Replace the following in `src/containers/Home.js`.
 
@@ -154,21 +154,21 @@ With:
 const isLocal = false;
 ```
 
-Now if we head over to our browser, we should see the error as before. And we should see the error being reported to Sentry as well!
+Now if we head over to our browser, we should see the error as before. And we should see the error being reported to Sentry as well! It might take a moment or two before it shows up.
 
 ![First error in Sentry](/assets/monitor-debug-errors/first-error-in-sentry.png)
 
 And if you click through, you can see the error in detail.
 
-![Error details in Sentry](/assets/monitor-debug-errors/error-details-in-sentry.png)
+![Error details in Sentry](/assets/monitor-debug-errors/error-boundary-error-details-in-sentry.png)
 
 Now our React app is ready to handle the errors that are thrown its way!
 
-Let's cleanup all the changes we made for the test.
+Let's cleanup all the testing changes we made above.
 
 
 ``` bash
 $ git checkout .
 ```
 
-Next, let's look at handling errors in our Serverless app.
+Next, let's look at how to handle errors in our Serverless app.
