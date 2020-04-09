@@ -262,6 +262,8 @@ on downloadPdf(theChapterName)
 
       end tell
 
+      delay 2
+
       click menu item "Close Tab" of menu "File" of menu bar 1
 
     end tell
