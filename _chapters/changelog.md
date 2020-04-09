@@ -23,11 +23,21 @@ You can get these updates emailed to you via our [newsletter]({{ site.newsletter
 
 ### Changes
 
-#### [v4.0: {{ site.data.changelog.current.title }}](https://branchv40--serverless-stack.netlify.com/) (Current)
+#### [v4.1: {{ site.data.changelog.current.title }}](https://branchv41--serverless-stack.netlify.com/) (Current)
+
+{{ site.data.changelog.current.desc }}
+
+- [Tutorial changes]({{ site.github_repo }}/compare/v4.0...v4.1)
+- [API]({{ site.backend_github_repo }}/compare/v4.0...v4.1)
+- [Client]({{ site.frontend_github_repo }}/compare/v4.0...v4.1)
+
+#### [v4.0: {{ site.data.changelog.v4-0.title }}](https://branchv40--serverless-stack.netlify.com/)
 
 {{ site.data.changelog.current.desc }}
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v3.4...v4.0)
+- [API]({{ site.backend_github_repo }}/compare/v3.4...v4.0)
+- [Client]({{ site.frontend_github_repo }}/compare/v3.3.1...v4.0)
 
 #### [v3.4: {{ site.data.changelog.v3-4.title }}](https://branchv34--serverless-stack.netlify.com/)
 

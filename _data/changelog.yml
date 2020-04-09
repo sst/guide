@@ -1,4 +1,8 @@
 current:
+  title: "Adding new monitoring and debugging section"
+  desc: "Apr 8, 2020: Adding a new section on monitoring and debugging full-stack Serverless apps. Updating React Router. Using React Context to manage app state."
+
+v4-0:
   title: "New edition of Serverless Stack"
   desc: "Oct 8, 2019: Adding a new section for Serverless best practices. Updating to React Hooks. Reorganizing chapters. Updating backend to Node 10."
 
