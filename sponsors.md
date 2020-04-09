@@ -4,7 +4,7 @@ title: Sponsors
 description: Serverless Stack is a free open source guide brought to you by Frank Wang (@fanjiewang) and Jay V (@jayair) from Anomaly Innovations. Show your support by sponsoring Serverless Stack.
 ---
 
-[Serverless Stack](https://serverless-stack.com) is a free open source 950+ page guide for building full-stack apps using Serverless and React on AWS. It attracts over 3.5K daily and 60K monthly visitors with over 230K page views per month. And we have over 20K email subscribers.
+[Serverless Stack](https://serverless-stack.com) is a free open source 1000+ page guide for building full-stack apps using Serverless and React on AWS. It attracts over 3.5K daily and 60K monthly visitors with over 230K page views per month. And we have over 20K email subscribers.
 
 Learn to create a note taking app from scratch using Serverless and React. Follow our step-by-step tutorials with screenshots and code samples. And use [our forums](https://discourse.serverless-stack.com) to ask us any questions.
 
