@@ -21,7 +21,7 @@ import React, { useState } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
 
-export default function Login(props) {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -98,7 +98,9 @@ These styles roughly target any non-mobile screen sizes.
 <img class="code-marker" src="/assets/s.png" />Now we link this container up with the rest of our app by adding the following line to `src/Routes.js` below our home `<Route>`.
 
 ``` coffee
-<Route path="/login" exact component={Login} />
+<Route exact path="/login">
+  <Login />
+</Route>
 ```
 
 <img class="code-marker" src="/assets/s.png" />And include our component in the header.

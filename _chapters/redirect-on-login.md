@@ -3,7 +3,7 @@ layout: post
 title: Redirect on Login
 date: 2017-02-04 00:00:00
 lang: en
-description: To make sure that our React.js redirects a user to the right page after they login, we are going to use the React Router v4 Redirect component.
+description: To make sure that our React.js redirects a user to the right page after they login, we are going to use the React Router useHistory hook.
 code: frontend
 comments_id: redirect-on-login/24
 ref: redirect-on-login
@@ -40,18 +40,17 @@ Now let's update our component to use this parameter when it redirects.
 <img class="code-marker" src="/assets/s.png" />Replace our current `UnauthenticatedRoute` function component with the following.
 
 ``` coffee
-export default function UnauthenticatedRoute({ component: C, appProps, ...rest }) {
+export default function UnauthenticatedRoute({ children, ...rest }) {
+  const { isAuthenticated } = useAppContext();
   const redirect = querystring("redirect");
   return (
-    <Route
-      {...rest}
-      render={props =>
-        !appProps.isAuthenticated
-          ? <C {...props} {...appProps} />
-          : <Redirect
-              to={redirect === "" || redirect === null ? "/" : redirect}
-            />}
-    />
+    <Route {...rest}>
+      {!isAuthenticated ? (
+        children
+      ) : (
+        <Redirect to={redirect === "" || redirect === null ? "/" : redirect} />
+      )}
+    </Route>
   );
 }
 ```
@@ -59,7 +58,19 @@ export default function UnauthenticatedRoute({ component: C, appProps, ...rest }
 <img class="code-marker" src="/assets/s.png" />And remove the following from the `handleSubmit` method in `src/containers/Login.js`.
 
 ``` coffee
-props.history.push("/");
+history.push("/");
+```
+
+<img class="code-marker" src="/assets/s.png" />Also, remove the hook declaration.
+
+``` coffee
+const history = useHistory();
+```
+
+<img class="code-marker" src="/assets/s.png" />Finally, remove the import.
+
+``` coffee
+import { useHistory } from "react-router-dom";
 ```
 
 Now our login page should redirect after we login. And that's it! Our app is ready to go live.

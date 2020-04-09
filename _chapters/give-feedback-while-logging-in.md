@@ -4,7 +4,7 @@ title: Give Feedback While Logging In
 date: 2017-01-18 00:00:00
 lang: en
 ref: give-feedback-while-logging-in
-description: We should give users some feedback while we are logging them in to our React.js app. To do so we are going to create a component that animates a Glyphicon refresh icon inside a React-Bootstrap Button component. We’ll do the animation while the log in call is in progress.
+description: We should give users some feedback while we are logging them in to our React.js app. To do so we are going to create a component that animates a Glyphicon refresh icon inside a React-Bootstrap Button component. We’ll do the animation while the log in call is in progress. We'll also add some basic error handling to our app.
 comments_id: give-feedback-while-logging-in/46
 ---
 
@@ -28,8 +28,8 @@ async function handleSubmit(event) {
 
   try {
     await Auth.signIn(email, password);
-    props.userHasAuthenticated(true);
-    props.history.push("/");
+    userHasAuthenticated(true);
+    history.push("/");
   } catch (e) {
     alert(e.message);
     setIsLoading(false);
@@ -40,6 +40,14 @@ async function handleSubmit(event) {
 ### Create a Loader Button
 
 Now to reflect the state change in our button we are going to render it differently based on the `isLoading` flag. But we are going to need this piece of code in a lot of different places. So it makes sense that we create a reusable component out of it.
+
+<img class="code-marker" src="/assets/s.png" />Create a `src/components/` directory by running this command in your working directory.
+
+``` bash
+$ mkdir src/components/
+```
+
+Here we'll be storing all our React components that are not dealing directly with our API or responding to routes.
 
 <img class="code-marker" src="/assets/s.png" />Create a new file and add the following in `src/components/LoaderButton.js`.
 
@@ -124,6 +132,57 @@ And now when we switch over to the browser and try logging in, you should see th
 
 ![Login loading state screenshot](/assets/login-loading-state.png)
 
-If you would like to add _Forgot Password_ functionality for your users, you can refer to our [Extra Credit series of chapters on user management]({% link _chapters/manage-user-accounts-in-aws-amplify.md %}).
+### Handling Errors
 
-Next let's implement the sign up process for our app.
+You might have noticed in our Login and App components that we simply `alert` when there is an error. We are going to keep our error handling simple. But it'll help us further down the line if we handle all of our errors in one place.
+
+<img class="code-marker" src="/assets/s.png" />To do that, add the following to `src/libs/errorLib.js`.
+
+``` javascript
+export function onError(error) {
+  let message = error.toString();
+
+  // Auth errors
+  if (!(error instanceof Error) && error.message) {
+    message = error.message;
+  }
+
+  alert(message);
+}
+```
+
+The `Auth` package throws errors in a different format, so all this code does is `alert` the error message we need. And in all other cases simply `alert` the error object itself.
+
+Let's use this in our Login container.
+
+<img class="code-marker" src="/assets/s.png" />Import the new error lib in the header of `src/containers/Login.js`.
+
+``` javascript
+import { onError } from "../libs/errorLib";
+```
+
+<img class="code-marker" src="/assets/s.png" />And replace `alert(e.message);` in the `handleSubmit` function with:
+
+``` javascript
+onError(e);
+```
+
+We'll do something similar in the App component.
+
+<img class="code-marker" src="/assets/s.png" />Import the error lib in the header of `src/App.js`.
+
+``` javascript
+import { onError } from "./libs/errorLib";
+```
+
+<img class="code-marker" src="/assets/s.png" />And replace `alert(e);` in the `onLoad` function with:
+
+``` javascript
+onError(e);
+```
+
+We'll improve our error handling a little later on in the guide.
+
+Also, if you would like to add _Forgot Password_ functionality for your users, you can refer to our [Extra Credit series of chapters on user management]({% link _chapters/manage-user-accounts-in-aws-amplify.md %}).
+
+For now, we are ready to move on to the sign up process for our app.

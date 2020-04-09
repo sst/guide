@@ -17,10 +17,10 @@ comments_id: add-a-list-all-the-notes-api/147
 <img class="code-marker" src="/assets/s.png" />아래 내용을 가진 `list.js` 파일을 신규로 생성합니다.
 
 ``` javascript
-import * as dynamoDbLib from "./libs/dynamodb-lib";
-import { success, failure } from "./libs/response-lib";
+import handler from "./libs/handler-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 
-export async function main(event, context) {
+export const main = handler(async (event, context) => {
   const params = {
     TableName: "notes",
     // 'KeyConditionExpression' 조건을 가진 쿼리를 정의합니다.
@@ -34,14 +34,10 @@ export async function main(event, context) {
     }
   };
 
-  try {
-    const result = await dynamoDbLib.call("query", params);
-    // 응답 본문에 일치하는 아이템의 목록을 반환합니다.
-    return success(result.Items);
-  } catch (e) {
-    return failure({ status: false });
-  }
-}
+  const result = await dynamoDb.query(params);
+  // 응답 본문에 일치하는 아이템의 목록을 반환합니다.
+  return result.Items;
+});
 ```
 
 이 파일은 DynamoDB의 `query` 호출 내용에 `userId` 값을 전달한다는 것을 제외하면 `get.js`와 매우 유사합니다.

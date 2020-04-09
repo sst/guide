@@ -18,13 +18,16 @@ First we are going to create the form for a note. It'll take some content and a 
 
 ``` coffee
 import React, { useRef, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
+import { onError } from "../libs/errorLib";
 import config from "../config";
 import "./NewNote.css";
 
-export default function NewNote(props) {
+export default function NewNote() {
   const file = useRef(null);
+  const history = useHistory();
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -109,10 +112,12 @@ MAX_ATTACHMENT_SIZE: 5000000,
 
 ### Add the Route
 
-<img class="code-marker" src="/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our signup route. We are using the `AppliedRoute` component that we created in the [Add the session to the state]({% link _chapters/add-the-session-to-the-state.md %}) chapter.
+<img class="code-marker" src="/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our signup route.
 
 ``` coffee
-<AppliedRoute path="/notes/new" exact component={NewNote} appProps={appProps} />
+<Route exact path="/notes/new">
+  <NewNote />
+</Route>
 ```
 
 <img class="code-marker" src="/assets/s.png" />And include our component in the header.

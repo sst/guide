@@ -17,10 +17,10 @@ comments_id: add-a-delete-note-api/153
 <img class="code-marker" src="/assets/s.png" />`delete.js` 파일을 생성하고 아래 코드를 붙여 넣기 합니다.
 
 ``` javascript
-import * as dynamoDbLib from "./libs/dynamodb-lib";
-import { success, failure } from "./libs/response-lib";
+import handler from "./libs/handler-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 
-export async function main(event, context) {
+export const main = handler(async (event, context) => {
   const params = {
     TableName: "notes",
     // 'Key' 삭제할 아이템의 파티션 키와 정렬 키를 정의합니다.
@@ -32,13 +32,9 @@ export async function main(event, context) {
     }
   };
 
-  try {
-    const result = await dynamoDbLib.call("delete", params);
-    return success({ status: true });
-  } catch (e) {
-    return failure({ status: false });
-  }
-}
+  await dynamoDb.delete(params);
+  return { status: true };
+});
 ```
 
 이 파일은 삭제할 노트의 `userId` 와 `noteId` 값을 이용해 DynamoDB에 `delete`를 호출합니다. 

@@ -22,10 +22,10 @@ $ npm install --save stripe
 
 ``` js
 import stripePackage from "stripe";
+import handler from "./libs/handler-lib";
 import { calculateCost } from "./libs/billing-lib";
-import { success, failure } from "./libs/response-lib";
 
-export async function main(event, context) {
+export const main = handler(async (event, context) => {
   const { storage, source } = JSON.parse(event.body);
   const amount = calculateCost(storage);
   const description = "Scratch charge";
@@ -33,18 +33,14 @@ export async function main(event, context) {
   // Load our secret key from the  environment variables
   const stripe = stripePackage(process.env.stripeSecretKey);
 
-  try {
-    await stripe.charges.create({
-      source,
-      amount,
-      description,
-      currency: "usd"
-    });
-    return success({ status: true });
-  } catch (e) {
-    return failure({ message: e.message });
-  }
-}
+  await stripe.charges.create({
+    source,
+    amount,
+    description,
+    currency: "usd"
+  });
+  return { status: true };
+});
 ```
 
 Most of this is fairly straightforward but let's go over it quickly:

@@ -22,13 +22,13 @@ Select **Copy Settings** tab, and select the resources app. Then hit **Add a New
 
 ![Set app settings from resources](/assets/best-practices/deploy-api-services-repo-to-seed/set-app-settings-from-resources.png)
 
-The API app has been created.
+The API app has been created. Now, let's add the other services. Click **Pipeline**.
 
 ![Create an App in Seed](/assets/best-practices/deploy-api-services-repo-to-seed/create-an-app-in-seed.png)
 
 Click **Add a service** to add the **billing-api** service at the `services/billing-api` path. And then repeat the step to add the **notify-job** service at the `services/notify-job` path.
 
-![[Added all services in Seed](/assets/best-practices/deploy-api-services-repo-to-seed/[added-all-services-in-seed.png)
+![Added all services in Seed](/assets/best-practices/deploy-api-services-repo-to-seed/added-all-services-in-seed.png)
 
 Head over to the app settings and click on **Manage Deploy Phases**.
 

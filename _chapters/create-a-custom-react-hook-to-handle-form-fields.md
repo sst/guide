@@ -25,14 +25,6 @@ Now we are going to do something similar for our sign up page and it'll have a f
 
 ### Creating a Custom React Hook
 
-Let's pull the above logic into a custom React Hook.
-
-<img class="code-marker" src="/assets/s.png" />Create a `src/libs/` directory to store all our common code.
-
-``` bash
-$ mkdir src/libs/
-```
-
 <img class="code-marker" src="/assets/s.png" />Add the following to `src/libs/hooksLib.js`.
 
 ``` javascript
@@ -53,7 +45,7 @@ export function useFormFields(initialState) {
 }
 ```
 
-Creating a custom hook is amazingly simple. Let's go over how this works:
+Creating a custom hook is amazingly simple. In fact, we did this back when we created our app context. But let's go over in detail how this works:
 
 1. A custom React Hook starts with the word `use` in its name. So ours is called `useFormFields`.
 
@@ -82,12 +74,17 @@ And that's it! We can now use this in our Login component.
 ``` coffee
 import React, { useState } from "react";
 import { Auth } from "aws-amplify";
+import { useHistory } from "react-router-dom";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
+import { useAppContext } from "../libs/contextLib";
 import { useFormFields } from "../libs/hooksLib";
+import { onError } from "../libs/errorLib";
 import "./Login.css";
 
-export default function Login(props) {
+export default function Login() {
+  const history = useHistory();
+  const { userHasAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
     email: "",
@@ -105,10 +102,10 @@ export default function Login(props) {
 
     try {
       await Auth.signIn(fields.email, fields.password);
-      props.userHasAuthenticated(true);
-      props.history.push("/");
+      userHasAuthenticated(true);
+      history.push("/");
     } catch (e) {
-      alert(e.message);
+      onError(e);
       setIsLoading(false);
     }
   }

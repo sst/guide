@@ -28,7 +28,7 @@ import { Link } from "react-router-dom";
 import { Navbar } from "react-bootstrap";
 import "./App.css";
 
-function App(props) {
+function App() {
   return (
     <div className="App container">
       <Navbar fluid collapseOnSelect>
@@ -132,7 +132,9 @@ import Home from "./containers/Home";
 export default function Routes() {
   return (
     <Switch>
-      <Route path="/" exact component={Home} />
+      <Route exact path="/">
+        <Home />
+      </Route>
     </Switch>
   );
 }
@@ -159,7 +161,7 @@ import Routes from "./Routes";
 So the `App` function component of our `src/App.js` should now look like this.
 
 ``` coffee
-function App(props) {
+function App() {
   return (
     <div className="App container">
       <Navbar fluid collapseOnSelect>

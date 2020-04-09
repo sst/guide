@@ -14,7 +14,7 @@ The last thing we need to do on the note page is allowing users to delete their 
 
 ``` javascript
 function deleteNote() {
-  return API.del("notes", `/notes/${props.match.params.id}`);
+  return API.del("notes", `/notes/${id}`);
 }
 
 async function handleDelete(event) {
@@ -32,15 +32,15 @@ async function handleDelete(event) {
 
   try {
     await deleteNote();
-    props.history.push("/");
+    history.push("/");
   } catch (e) {
-    alert(e);
+    onError(e);
     setIsDeleting(false);
   }
 }
 ```
 
-We are simply making a `DELETE` request to `/notes/:id` where we get the `id` from `props.match.params.id`. We use the `API.del` method from AWS Amplify to do so. This calls our delete API and we redirect to the homepage on success.
+We are simply making a `DELETE` request to `/notes/:id` where we get the `id` from `useParams` hook provided by React Router. We use the `API.del` method from AWS Amplify to do so. This calls our delete API and we redirect to the homepage on success.
 
 Now if you switch over to your browser and try deleting a note you should see it confirm your action and then delete the note.
 

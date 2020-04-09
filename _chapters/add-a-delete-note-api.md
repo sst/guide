@@ -15,10 +15,10 @@ Finally, we are going to create an API that allows a user to delete a given note
 <img class="code-marker" src="/assets/s.png" />Create a new file `delete.js` and paste the following code
 
 ``` javascript
-import * as dynamoDbLib from "./libs/dynamodb-lib";
-import { success, failure } from "./libs/response-lib";
+import handler from "./libs/handler-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 
-export async function main(event, context) {
+export const main = handler(async (event, context) => {
   const params = {
     TableName: process.env.tableName,
     // 'Key' defines the partition key and sort key of the item to be removed
@@ -30,13 +30,10 @@ export async function main(event, context) {
     }
   };
 
-  try {
-    await dynamoDbLib.call("delete", params);
-    return success({ status: true });
-  } catch (e) {
-    return failure({ status: false });
-  }
-}
+  await dynamoDb.delete(params);
+
+  return { status: true };
+});
 ```
 
 This makes a DynamoDB `delete` call with the `userId` & `noteId` key to delete the note.

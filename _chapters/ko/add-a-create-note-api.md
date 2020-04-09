@@ -19,7 +19,7 @@ comments_id: add-a-create-note-api/125
 <img class="code-marker" src="/assets/s.png" />프로젝트 루트에 다음과 같이`create.js`라는 새로운 파일을 만듭니다.
 
 ``` javascript
-import uuid from "uuid";
+import * as uuid from "uuid";
 import AWS from "aws-sdk";
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
@@ -210,25 +210,27 @@ $ mkdir libs
 $ cd libs
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 아래 내용으로 `libs/response-lib.js` 파일을 만듭니다.
+<img class="code-marker" src="/assets/s.png" />그리고 아래 내용으로 `libs/handler-lib.js` 파일을 만듭니다.
 
 ``` javascript
-export function success(body) {
-  return buildResponse(200, body);
-}
-
-export function failure(body) {
-  return buildResponse(500, body);
-}
-
-function buildResponse(statusCode, body) {
-  return {
-    statusCode: statusCode,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Credentials": true
-    },
-    body: JSON.stringify(body)
+export default function handler(lambda) {
+  return function (event, context) {
+    return Promise.resolve()
+      // Run the Lambda
+      .then(() => lambda(event, context))
+      // On success
+      .then((responseBody) => [200, responseBody])
+      // On failure
+      .catch((e) => [500, { error: e.message }])
+      // Return HTTP response
+      .then(([statusCode, body]) => ({
+        statusCode,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": true,
+        },
+        body: JSON.stringify(body),
+      }));
   };
 }
 ```
@@ -252,14 +254,14 @@ export function call(action, params) {
 <img class="code-marker" src="/assets/s.png" />이제 우리는`create.js`로 돌아가서 우리가 만든 Helper 함수를 사용할 것입니다. `create.js`를 다음으로 대체하십시오.
 
 ``` javascript
-import uuid from "uuid";
-import * as dynamoDbLib from "./libs/dynamodb-lib";
-import { success, failure } from "./libs/response-lib";
+import * as uuid from "uuid";
+import handler from "./libs/handler-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 
-export async function main(event, context) {
+export const main = handler(async (event, context) => {
   const data = JSON.parse(event.body);
   const params = {
-    TableName: "notes",
+    TableName: process.env.tableName,
     Item: {
       userId: event.requestContext.identity.cognitoIdentityId,
       noteId: uuid.v1(),
@@ -269,13 +271,9 @@ export async function main(event, context) {
     }
   };
 
-  try {
-    await dynamoDbLib.call("put", params);
-    return success(params.Item);
-  } catch (e) {
-    return failure({ status: false });
-  }
-}
+  await dynamoDb.put(params);
+  return params.Item;
+});
 ```
 
 또한 람다 함수를 리팩토링하기 위해 여기 `async/await` 패턴을 사용하고 있습니다. 이렇게하면 처리가 완료되면 다시 돌아올 수 있습니다. 콜백 함수를 사용하는 대신말이죠.

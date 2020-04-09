@@ -7,7 +7,6 @@ description: There are three steps that are a part of workflow for a Create Reac
 redirect_from: /chapters/update-the-app.html
 ref: frontend-workflow
 comments_id: frontend-workflow/192
-code: frontend_full
 ---
 
 Now that we have our frontend deployed and configured, let's go over what our development workflow will look like.
@@ -143,4 +142,4 @@ And hit **Publish deploy**. This will publish our previous version again.
 
 And that's it! Now you have an automated workflow for building and deploying your Create React App with serverless.
 
-Let's wrap up the guide next.
+We are almost ready to wrap things up. But before we do, we want to cover one final really important topic; how to monitor and debug errors when your app is live.

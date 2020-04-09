@@ -8,7 +8,7 @@ ref: custom-domains-in-netlify
 comments_id: custom-domains-in-netlify/191
 ---
 
-Now that we have our first deployment, let's configure a custom domain for our app through Netlify.
+Now that we have our first deployment, let's configure a custom domain for our app through Netlify. Recall that back in the [Set custom domains through Seed]({% link _chapters/set-custom-domains-through-seed.md %}) chapter we purchased a domain on [Amazon Route 53](https://aws.amazon.com/route53/). 
 
 ### Pick a Netlify Site Name
 

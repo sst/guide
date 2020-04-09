@@ -89,14 +89,21 @@ Finally, while calling DynamoDB we can use the config to get the DynamoDB table 
 import AWS from "./aws-sdk";
 import config from "../config";
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const client = new AWS.DynamoDB.DocumentClient();
 
-export function call(action, params) {
-  // Parameterize table names with stage name
-  return dynamoDb[action]({
+export default {
+  get: (params) => client.get(updateTableName(params)).promise(),
+  query: (params) => client.query(updateTableName(params)).promise(),
+  put: (params) => client.put(updateTableName(params)).promise(),
+  update: (params) => client.update(updateTableName(params)).promise(),
+  delete: (params) => client.delete(updateTableName(params)).promise(),
+};
+
+function updateTableName(params) {
+  return {
     ...params,
-    TableName: `${config.resourcesStage}-${params.TableName}`
-  }).promise();
+    TableName: `${config.resourcesStage}-${params.TableName}`,
+  };
 }
 ```
 

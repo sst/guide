@@ -16,6 +16,7 @@ Let's start by creating the signup form that'll get the user's email and passwor
 
 ``` coffee
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import {
   HelpBlock,
   FormGroup,
@@ -23,17 +24,21 @@ import {
   ControlLabel
 } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
+import { useAppContext } from "../libs/contextLib";
 import { useFormFields } from "../libs/hooksLib";
+import { onError } from "../libs/errorLib";
 import "./Signup.css";
 
-export default function Signup(props) {
+export default function Signup() {
   const [fields, handleFieldChange] = useFormFields({
     email: "",
     password: "",
     confirmPassword: "",
-    confirmationCode: ""
+    confirmationCode: "",
   });
+  const history = useHistory();
   const [newUser, setNewUser] = useState(null);
+  const { userHasAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
 
   function validateForm() {
@@ -176,10 +181,12 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 ### Add the Route
 
-<img class="code-marker" src="/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our login route. We are using the `AppliedRoute` component that we created in the [Add the session to the state]({% link _chapters/add-the-session-to-the-state.md %}) chapter.
+<img class="code-marker" src="/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our login route.
 
 ``` coffee
-<AppliedRoute path="/signup" exact component={Signup} appProps={appProps} />
+<Route exact path="/signup">
+  <Signup />
+</Route>
 ```
 
 <img class="code-marker" src="/assets/s.png" />And include our component in the header.

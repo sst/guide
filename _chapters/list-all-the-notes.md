@@ -16,11 +16,15 @@ Currently, our Home container is very simple. Let's add the conditional renderin
 
 ``` coffee
 import React, { useState, useEffect } from "react";
-import { PageHeader, ListGroup } from "react-bootstrap";
+import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
+import { useAppContext } from "../libs/contextLib";
+import { onError } from "../libs/errorLib";
 import "./Home.css";
 
-export default function Home(props) {
+
+export default function Home() {
   const [notes, setNotes] = useState([]);
+  const { isAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
 
   function renderNotesList(notes) {
@@ -49,7 +53,7 @@ export default function Home(props) {
 
   return (
     <div className="Home">
-      {props.isAuthenticated ? renderNotes() : renderLander()}
+      {isAuthenticated ? renderNotes() : renderLander()}
     </div>
   );
 }
@@ -57,7 +61,7 @@ export default function Home(props) {
 
 We are doing a few things of note here:
 
-1. Rendering the lander or the list of notes based on `props.isAuthenticated`.
+1. Rendering the lander or the list of notes based on `isAuthenticated` flag in our app context.
 
 2. Store our notes in the state. Currently, it's empty but we'll be calling our API for it.
 

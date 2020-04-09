@@ -16,10 +16,12 @@ The first thing we are going to need to do is load the note when our container l
 
 Let's add a route for the note page that we are going to create.
 
-<img class="code-marker" src="/assets/s.png" />Add the following line to `src/Routes.js` **below** our `/notes/new` route. We are using the `AppliedRoute` component that we created in the [Add the session to the state]({% link _chapters/add-the-session-to-the-state.md %}) chapter.
+<img class="code-marker" src="/assets/s.png" />Add the following line to `src/Routes.js` **below** our `/notes/new` route. 
 
 ``` coffee
-<AppliedRoute path="/notes/:id" exact component={Notes} appProps={appProps} />
+<Route exact path="/notes/:id">
+  <Notes />
+</Route>
 ```
 
 This is important because we are going to be pattern matching to extract our note id from the URL.
@@ -40,16 +42,20 @@ Of course this component doesn't exist yet and we are going to create it now.
 
 ``` coffee
 import React, { useRef, useState, useEffect } from "react";
+import { useParams, useHistory } from "react-router-dom";
 import { API, Storage } from "aws-amplify";
+import { onError } from "../libs/errorLib";
 
-export default function Notes(props) {
+export default function Notes() {
   const file = useRef(null);
+  const { id } = useParams();
+  const history = useHistory();
   const [note, setNote] = useState(null);
   const [content, setContent] = useState("");
 
   useEffect(() => {
     function loadNote() {
-      return API.get("notes", `/notes/${props.match.params.id}`);
+      return API.get("notes", `/notes/${id}`);
     }
 
     async function onLoad() {
@@ -64,12 +70,12 @@ export default function Notes(props) {
         setContent(content);
         setNote(note);
       } catch (e) {
-        alert(e);
+        onError(e);
       }
     }
 
     onLoad();
-  }, [props.match.params.id]);
+  }, [id]);
 
   return (
     <div className="Notes"></div>
@@ -79,7 +85,7 @@ export default function Notes(props) {
 
 We are doing a couple of things here.
 
-1. We are using the `useEffect` Hook to load the note when our component first loads. We then save it to the state. We get the `id` of our note from the URL using the props automatically passed to us by React-Router in `props.match.params.id`. The keyword `id` is a part of the pattern matching in our route (`/notes/:id`).
+1. We are using the `useEffect` Hook to load the note when our component first loads. We then save it to the state. We get the `id` of our note from the URL using `useParams` hook that comes with React Router. The `id` is a part of the pattern matching in our route (`/notes/:id`).
 
 2. If there is an attachment, we use the key to get a secure link to the file we uploaded to S3. We then store this in the new note object as `note.attachmentURL`.
 

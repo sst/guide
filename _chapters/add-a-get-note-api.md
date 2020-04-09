@@ -15,10 +15,10 @@ Now that we created a note and saved it to our database. Let's add an API to ret
 <img class="code-marker" src="/assets/s.png" />Create a new file `get.js` and paste the following code
 
 ``` javascript
-import * as dynamoDbLib from "./libs/dynamodb-lib";
-import { success, failure } from "./libs/response-lib";
+import handler from "./libs/handler-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 
-export async function main(event, context) {
+export const main = handler(async (event, context) => {
   const params = {
     TableName: process.env.tableName,
     // 'Key' defines the partition key and sort key of the item to be retrieved
@@ -30,21 +30,18 @@ export async function main(event, context) {
     }
   };
 
-  try {
-    const result = await dynamoDbLib.call("get", params);
-    if (result.Item) {
-      // Return the retrieved item
-      return success(result.Item);
-    } else {
-      return failure({ status: false, error: "Item not found." });
-    }
-  } catch (e) {
-    return failure({ status: false });
+  const result = await dynamoDb.get(params);
+  if ( ! result.Item) {
+    throw new Error("Item not found.");
   }
-}
+
+  // Return the retrieved item
+  return result.Item;
+});
+
 ```
 
-This follows exactly the same structure as our previous `create.js` function. The major difference here is that we are doing a `dynamoDbLib.call('get', params)` to get a note object given the `noteId` and `userId` that is passed in through the request.
+This follows exactly the same structure as our previous `create.js` function. The major difference here is that we are doing a `dynamoDb.get(params)` to get a note object given the `noteId` and `userId` that is passed in through the request.
 
 ### Configure the API Endpoint
 

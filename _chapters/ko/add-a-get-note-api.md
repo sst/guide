@@ -17,10 +17,10 @@ comments_id: add-a-get-note-api/132
 <img class="code-marker" src="/assets/s.png" />신규 파일인 `get.js`를 생성하고 아래 코드를 붙여넣기 합니다.
 
 ``` javascript
-import * as dynamoDbLib from "./libs/dynamodb-lib";
-import { success, failure } from "./libs/response-lib";
+import handler from "./libs/handler-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 
-export async function main(event, context) {
+export const main = handler(async (event, context) => {
   const params = {
     TableName: "notes",
 	 // 'Key'는 검색 할 항목의 파티션 키와 정렬 키를 정의합니다.
@@ -32,21 +32,17 @@ export async function main(event, context) {
     }
   };
 
-  try {
-    const result = await dynamoDbLib.call("get", params);
-    if (result.Item) {
-	  // 불러온 아이템을 반환합니다.
-      return success(result.Item);
-    } else {
-      return failure({ status: false, error: "Item not found." });
-    }
-  } catch (e) {
-    return failure({ status: false });
+  const result = await dynamoDb.get(params);
+  if ( ! result.Item) {
+    throw new Error("Item not found.");
   }
-}
+
+  // 불러온 아이템을 반환합니다.
+  return result.Item;
+});
 ```
 
-이 파일은 이전의 `create.js` 함수와 똑같은 구조를 따릅니다. 가장 큰 차이점은 요청을 통해 전달되는`noteId` 와 `userId`가 주어진 노트 객체를 얻기 위해 `dynamoDbLib.call ( 'get', params)`을 수행한다는 것입니다.
+이 파일은 이전의 `create.js` 함수와 똑같은 구조를 따릅니다. 가장 큰 차이점은 요청을 통해 전달되는`noteId` 와 `userId`가 주어진 노트 객체를 얻기 위해 `dynamoDb.get(params)`을 수행한다는 것입니다.
 
 ### API 엔드포인트 구성하기 
 

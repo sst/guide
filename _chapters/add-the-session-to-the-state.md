@@ -5,7 +5,7 @@ date: 2017-01-15 00:00:00
 lang: en
 comments_id: add-the-session-to-the-state
 redirect_from: /chapters/add-the-user-token-to-the-state.html
-description: We need to add the user session to the state of our App component in our React.js app. By lifting the state up we can pass the session to all the child containers.
+description: We need to add the user session to the state of our App component in our React.js app. We are going to use React context through the useContext hook to store it and pass it to all our child components. 
 comments_id: add-the-session-to-the-state/136
 ---
 
@@ -37,11 +37,45 @@ const [isAuthenticated, userHasAuthenticated] = useState(false);
 
 This initializes the `isAuthenticated` state variable to `false`, as in the user is not logged in. And calling `userHasAuthenticated` updates it. But for the `Login` container to call this method we need to pass a reference of this method to it.
 
-### Pass the Session State to the Routes
+### Store the Session in the Context
 
-We can do this by passing in a couple of props to the child component of the routes that the `App` component creates.
+We are going to have to pass the session related info to all of our containers. This is going to be tedious if we pass it in as a prop. Since we'll have to do that manually for each component. Instead let's use [React Context](https://reactjs.org/docs/context.html) for this.
 
-<img class="code-marker" src="/assets/s.png" />Replace our `Routes` component by replacing the following line in the `return` statement of `src/App.js`.
+We'll create a context for our entire app that all of our containers will use.
+
+<img class="code-marker" src="/assets/s.png" />Create a `src/libs/` directory. We'll use this to store all our common code.
+
+``` bash
+$ mkdir src/libs/
+```
+
+<img class="code-marker" src="/assets/s.png" />Add the following to `src/libs/contextLib.js`.
+
+``` javascript
+import { useContext, createContext } from "react";
+
+export const AppContext = createContext(null);
+
+export function useAppContext() {
+  return useContext(AppContext);
+}
+```
+
+This really simple bit of code is creating and exporting two things:
+1. Using the `createContext` API to create a new context for our app.
+2. Using the `useContext` React Hook to access the context.
+
+If you are not sure how Contexts work, don't worry, it'll make more sense once we use it.
+
+<img class="code-marker" src="/assets/s.png" />Import our new app context in the header of `src/App.js`.
+
+``` javascript
+import { AppContext } from "./libs/contextLib";
+```
+
+Now to add our session to the context and to pass it to our containers:
+
+<img class="code-marker" src="/assets/s.png" />Wrap our `Routes` component in the `return` statement of `src/App.js`.
 
 ``` coffee
 <Routes />
@@ -51,74 +85,40 @@ We can do this by passing in a couple of props to the child component of the rou
 
 {% raw %}
 ``` coffee
-<Routes appProps={{ isAuthenticated, userHasAuthenticated }} />
+<AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+  <Routes />
+</AppContext.Provider>
 ```
 {% endraw %}
 
-Currently, our `Routes` component don't do anything with the passed in `appProps`. We need it to apply these props to the child component it is going to render. In this case we need it to apply them to our `Login` component.
-
-To do this we are going to create a new component that'll extend the standard Route component and apply the `appProps`.
-
-<img class="code-marker" src="/assets/s.png" />Create a `src/components/` directory by running this command in your working directory.
-
-``` bash
-$ mkdir src/components/
-```
-
-Here we'll be storing all our React components that are not dealing directly with our API or responding to routes.
-
-<img class="code-marker" src="/assets/s.png" />Create a new component in `src/components/AppliedRoute.js` and add the following.
-
-``` coffee
-import React from "react";
-import { Route } from "react-router-dom";
-
-export default function AppliedRoute({ component: C, appProps, ...rest }) {
-  return (
-    <Route {...rest} render={props => <C {...props} {...appProps} />} />
-  );
-}
-```
-
-This simple component creates a `Route` where the child component that it renders contains the passed in props. Let's take a quick look at how this is being done.
-
-- The `Route` component takes a prop called `component` that represents the component that will be rendered when a matching route is found. We want our `appProps` to be applied to this component.
-
-- The `Route` component can also take a `render` method in place of the `component`. This allows us to control what is passed in to our component.
-
-- Based on this we can create a component that returns a `Route` that takes a `component` and `appProps` prop. This allows us to pass in the component we want rendered and the props that we want applied.
-
-- Finally, we take `component` (set as `C`) and `appProps` and render inside our `Route` using the inline function; `props => <C {...props} {...appProps} />`. Note, the `props` variable in this case is what the Route component passes us. Whereas, the `appProps` are the props that we are trying to set in our `App` component.
-
-Now to use this component, we are going to include it in the routes where we need to have the `appProps` passed in.
-
-<img class="code-marker" src="/assets/s.png" />Replace the `Routes` function in `src/Routes.js` with the following.
-
-``` coffee
-export default function Routes({ appProps }) {
-  return (
-    <Switch>
-      <AppliedRoute path="/" exact component={Home} appProps={appProps} />
-      <AppliedRoute path="/login" exact component={Login} appProps={appProps} />
-      { /* Finally, catch all unmatched routes */ }
-      <Route component={NotFound} />
-    </Switch>
-  );
-}
-```
-
-<img class="code-marker" src="/assets/s.png" />And import the new component in the header of `src/Routes.js`.
-
-``` coffee
-import AppliedRoute from "./components/AppliedRoute";
-```
-
-Now in the `Login` container we'll call the `userHasAuthenticated` method.
-
-<img class="code-marker" src="/assets/s.png" />Replace the `alert('Logged in');` line with the following in `src/containers/Login.js`.
+React Context's are made up of two parts. The first is the Provider. This is telling React that all the child components inside the Context Provider should be able to access what we put in it. In this case we are putting in the following object:
 
 ``` javascript
-props.userHasAuthenticated(true);
+{ isAuthenticated, userHasAuthenticated }
+```
+
+### Use the Context to Update the State
+
+The second part of the Context API is the consumer. We'll add that to the Login container:
+
+<img class="code-marker" src="/assets/s.png" />Start by importing it in the header of `src/containers/Login.js`.
+
+``` javascript
+import { useAppContext } from "../libs/contextLib";
+```
+
+<img class="code-marker" src="/assets/s.png" />Include the hook by adding it below the `export default function Login() {` line.
+
+``` javascript
+const { userHasAuthenticated } = useAppContext();
+```
+
+This is telling React that we want to use our app context here and that we want to be able to use the `userHasAuthenticated` function.
+
+<img class="code-marker" src="/assets/s.png" />Finally, replace the `alert('Logged in');` line with the following in `src/containers/Login.js`.
+
+``` javascript
+userHasAuthenticated(true);
 ```
 
 ### Create a Logout Button

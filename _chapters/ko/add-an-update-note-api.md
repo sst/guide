@@ -17,10 +17,10 @@ comments_id: add-an-update-note-api/144
 <img class="code-marker" src="/assets/s.png" />`update.js` 파일을 새로 만들고 아래 코드 내용을 붙여 넣으세요. 
 
 ``` javascript
-import * as dynamoDbLib from "./libs/dynamodb-lib";
-import { success, failure } from "./libs/response-lib";
+import handler from "./libs/handler-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 
-export async function main(event, context) {
+export const main = handler(async (event, context) => {
   const data = JSON.parse(event.body);
   const params = {
     TableName: "notes",
@@ -44,13 +44,9 @@ export async function main(event, context) {
     ReturnValues: "ALL_NEW"
   };
 
-  try {
-    const result = await dynamoDbLib.call("update", params);
-    return success({ status: true });
-  } catch (e) {
-    return failure({ status: false });
-  }
-}
+  await dynamoDb.update(params);
+  return { status: true };
+});
 ```
 
 이것은 `create.js` 함수와 비슷하게 보일 것입니다. 여기서 우리는 `매개 변수`에 새로운`content` 와 `attachment` 값으로 `update` DynamoDB를 호출합니다.

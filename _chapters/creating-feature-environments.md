@@ -80,7 +80,7 @@ package:
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
   stage: dev
   region: us-east-1
   tracing:
@@ -118,13 +118,13 @@ Again, the `like-api` will share the same API endpoint as the `notes-api` servic
 Add the handler file `like.js`.
 
 ``` javascript
-import { success } from "../../libs/response-lib";
+import handler from "../../libs/handler-lib";
 
-export async function main(event, context) {
+export const main = handler(async (event, context) => {
   // business logic code for liking a post
 
-  return success({ status: true });
-}
+  return { status: true };
+});
 ```
 
 Now before we push our Git branch, let's enable the branch workflow in Seed.
@@ -183,13 +183,13 @@ After the new stage successfully deploys, you can get the API endpoint in the st
 
 ![Select feature stage](/assets/best-practices/creating-feature-environments/select-feature-stage.png)
 
-Select **View Resources** for the **notes-api** service.
-
-![Select View Resources in feature stage](/assets/best-practices/creating-feature-environments/select-view-resources-in-feature-stage.png)
-
-Scroll down and you will see the API Gateway endpoint for the **like** stage.
+You will see the API Gateway endpoint for the **like** stage.
 
 ![Show API Gateway endpoint in feature stage](/assets/best-practices/creating-feature-environments/show-api-gateway-endpoint-in-feature-stage.png)
+
+Scroll down and you will see the API path for the **like** handler.
+
+![Show API path in feature stage](/assets/best-practices/creating-feature-environments/show-api-path-in-feature-stage.png)
 
 You can now use the endpoint in your frontend for further testing and development.
 
@@ -220,15 +220,15 @@ Fortunately, there is a way to deploy individual functions using the `serverless
 Say we change our new `like.js` code to:
 
 ``` javascript
-import { success } from "../../libs/response-lib";
+import handler from "../../libs/handler-lib";
 
-export async function main(event, context) {
+export const main = handler(async (event, context) => {
   // business logic code for liking a post
 
   console.log("adding some debug code to test");
 
-  return success({ status: true });
-}
+  return { status: true };
+});
 ```
 
 To deploy the code for this function, run:

@@ -23,21 +23,41 @@ Next, we simply switch to our new redirect routes.
 So the following routes in `src/Routes.js` would be affected.
 
 ``` coffee
-<AppliedRoute path="/login" exact component={Login} appProps={appProps} />
-<AppliedRoute path="/signup" exact component={Signup} appProps={appProps} />
-<AppliedRoute path="/settings" exact component={Settings} appProps={appProps} />
-<AppliedRoute path="/notes/new" exact component={NewNote} appProps={appProps} />
-<AppliedRoute path="/notes/:id" exact component={Notes} appProps={appProps} />
+<Route exact path="/login">
+  <Login />
+</Route>
+<Route exact path="/signup">
+  <Signup />
+</Route>
+<Route exact path="/settings">
+  <Settings />
+</Route>
+<Route exact path="/notes/new">
+  <NewNote />
+</Route>
+<Route exact path="/notes/:id">
+  <Notes />
+</Route>
 ```
 
 <img class="code-marker" src="/assets/s.png" />They should now look like so:
 
 ``` coffee
-<UnauthenticatedRoute path="/login" exact component={Login} appProps={appProps} />
-<UnauthenticatedRoute path="/signup" exact component={Signup} appProps={appProps} />
-<AuthenticatedRoute path="/settings" exact component={Settings} appProps={appProps} />
-<AuthenticatedRoute path="/notes/new" exact component={NewNote} appProps={appProps} />
-<AuthenticatedRoute path="/notes/:id" exact component={Notes} appProps={appProps} />
+<UnauthenticatedRoute exact path="/login">
+  <Login />
+</UnauthenticatedRoute>
+<UnauthenticatedRoute exact path="/signup">
+  <Signup />
+</UnauthenticatedRoute>
+<AuthenticatedRoute exact path="/settings">
+  <Settings />
+</AuthenticatedRoute>
+<AuthenticatedRoute exact path="/notes/new">
+  <NewNote />
+</AuthenticatedRoute>
+<AuthenticatedRoute exact path="/notes/:id">
+  <Notes />
+</AuthenticatedRoute>
 ```
 
 And now if we tried to load a note page while not logged in, we would be redirected to the login page with a reference to the note page.

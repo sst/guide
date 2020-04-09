@@ -30,7 +30,7 @@ export async function s3Upload(file) {
   const filename = `${Date.now()}-${file.name}`;
 
   const stored = await Storage.vault.put(filename, file, {
-    contentType: file.type
+    contentType: file.type,
   });
 
   return stored.key;
@@ -59,8 +59,9 @@ async function handleSubmit(event) {
 
   if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
     alert(
-      `Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE /
-        1000000} MB.`
+      `Please pick a file smaller than ${
+        config.MAX_ATTACHMENT_SIZE / 1000000
+      } MB.`
     );
     return;
   }
@@ -68,17 +69,16 @@ async function handleSubmit(event) {
   setIsLoading(true);
 
   try {
-    const attachment = file.current
-      ? await s3Upload(file.current)
-      : null;
+    const attachment = file.current ? await s3Upload(file.current) : null;
 
     await createNote({ content, attachment });
-    props.history.push("/");
+    history.push("/");
   } catch (e) {
-    alert(e);
+    onError(e);
     setIsLoading(false);
   }
 }
+
 ```
 
 <img class="code-marker" src="/assets/s.png" />And make sure to include `s3Upload` by adding the following to the header of `src/containers/NewNote.js`.
