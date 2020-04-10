@@ -92,9 +92,6 @@ We are looking for a better way to generate the PDF (and other eBook) formats. I
 
 ## Sponsors
 
-<a target="_blank" href="https://epsagon.com">
-  <img height="30" alt="Epsagon" src="https://raw.githubusercontent.com/AnomalyInnovations/serverless-stack-com/master/assets/sponsors/epsagon.png" />
-</a>
 <a target="_blank" href="https://www.thundra.io">
   <img height="30" alt="Thundra" src="https://raw.githubusercontent.com/AnomalyInnovations/serverless-stack-com/master/assets/sponsors/thundra.png" />
 </a>
