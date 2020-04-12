@@ -61,7 +61,7 @@ If you have followed along with [the first part of our guide]({% link _chapters/
 
 2. The export name is based on the stage we are using to deploy this service - `${self:custom.stage}`. This is important because we want our entire application to be easily replicable across multiple stages. If we don't include the stage name the exports will thrash when we deploy to multiple stages.
 
-3. The names of the exported values is `${self:custom.stage}-ExtNotesTableArn`.
+3. The name of the exported values is `${self:custom.stage}-ExtNotesTableArn`.
 
 4. We get the table ARN by using the `Fn::GetAtt` CloudFormation function. This function takes a reference from the current service and the attribute we need. The reference in this case is `NotesTable`. You'll notice that the table we created in the `Resources:` section is created using `NotesTable` as the name.
 
