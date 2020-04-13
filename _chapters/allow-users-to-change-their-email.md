@@ -32,8 +32,9 @@ import {
 import LoaderButton from "../components/LoaderButton";
 import "./ChangeEmail.css";
 import { useFormFields } from "../libs/hooksLib";
+import { useHistory } from "react-router-dom";
 
-export default function ChangeEmail(props) {
+export default function ChangeEmail() {
   const [fields, setFields] = useFormFields({
     code: "",
     email: ""
@@ -41,6 +42,7 @@ export default function ChangeEmail(props) {
   const [codeSent, setCodeSent] = useState(false);
   const [isConfirming, setIsConfirming] = useState(false);
   const [isSendingCode, setIsSendingCode] = useState(false);
+  const history = useHistory();
 
   function validateEmailForm() {
     return fields.email.length > 0;
@@ -73,7 +75,7 @@ export default function ChangeEmail(props) {
     try {
       await Auth.verifyCurrentUserAttributeSubmit("email", fields.code);
 
-      props.history.push("/settings");
+      history.push("/settings");
     } catch (error) {
       alert(error.message);
       setIsConfirming(false);
@@ -180,12 +182,7 @@ This confirms the change on Cognito's side. Finally, we redirect the user to the
 <img class="code-marker" src="/assets/s.png" />Finally, let's add our new page to `src/Routes.js`.
 
 ``` html
-<AuthenticatedRoute
-  path="/settings/email"
-  exact
-  component={ChangeEmail}
-  appProps={appProps}
-/>
+<AuthenticatedRoute path="/settings/email" exact><ChangeEmail /></AuthenticatedRoute>
 ```
 
 <img class="code-marker" src="/assets/s.png" />And import it in the header.

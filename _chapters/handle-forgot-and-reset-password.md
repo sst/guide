@@ -231,12 +231,7 @@ Finally, let's link this up with the rest of our app.
 <img class="code-marker" src="/assets/s.png" />Add the route to `src/Routes.js`.
 
 ``` html
-<UnauthenticatedRoute
-  path="/login/reset"
-  exact
-  component={ResetPassword}
-  appProps={appProps}
-/>
+<UnauthenticatedRoute exact path="/login/reset"><ResetPassword /></UnauthenticatedRoute>
 ```
 
 <img class="code-marker" src="/assets/s.png" />And import it in the header.

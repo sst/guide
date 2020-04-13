@@ -97,12 +97,7 @@ All this does is add two links to a page that allows our users to change their p
 <img class="code-marker" src="/assets/s.png" />Also, add the route to our `src/Routes.js`.
 
 ``` html
-<AuthenticatedRoute
-  path="/settings"
-  exact
-  component={Settings}
-  appProps={appProps}
-/>
+<AuthenticatedRoute path="/settings" exact><Settings /></AuthenticatedRoute>
 ```
 
 <img class="code-marker" src="/assets/s.png" />And don't forget to import it.
@@ -128,15 +123,16 @@ import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import "./ChangePassword.css";
 import { useFormFields } from "../libs/hooksLib";
+import { useHistory } from "react-router-dom";
 
-
-export default function ChangePassword(props) {
+export default function ChangePassword() {
   const [fields, setFields] = useFormFields({
     password: "",
     oldPassword: "",
     confirmPassword: ""
   });
   const [isChanging, setIsChanging] = useState(false);
+  const history = useHistory();
 
   function validateForm() {
     return (
@@ -159,7 +155,7 @@ export default function ChangePassword(props) {
         fields.password
       );
 
-      props.history.push("/settings");
+      history.push("/settings");
     } catch (error) {
       alert(error.message);
       setIsChanging(false);
@@ -240,12 +236,7 @@ The above snippet uses the `Auth` module from Amplify to get the current user. A
 <img class="code-marker" src="/assets/s.png" />Let's add our new page to `src/Routes.js`.
 
 ``` html
-<AuthenticatedRoute
-  path="/settings/password"
-  exact
-  component={ChangePassword}
-  appProps={appProps}
-/>
+<AuthenticatedRoute path="/settings/password" exact><ChangePassword /></AuthenticatedRoute>
 ```
 
 <img class="code-marker" src="/assets/s.png" />And import it.
