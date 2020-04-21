@@ -14,7 +14,20 @@ Amplify gives us a way to get the current user session using the `Auth.currentSe
 
 ### Load User Session
 
-Let's load this when our app loads. To do this we are going to use another React hook, called [useEffect](https://reactjs.org/docs/hooks-effect.html). Since `Auth.currentSession()` returns a promise, it means that we need to ensure that the rest of our app is only ready to go after this has been loaded.
+Let's load this when our app loads. To do this we are going to use another React hook, called [useEffect](https://reactjs.org/docs/hooks-effect.html). Let's include the `useEffect` hook in `src/App.js`.
+
+<img class="code-marker" src="/assets/s.png" />Replace the `React` import:
+
+``` javascript
+import React, { useState } from "react";
+```
+
+<img class="code-marker" src="/assets/s.png" />With the following:
+
+``` javascript
+import React, { useState, useEffect } from "react";
+```
+Since `Auth.currentSession()` returns a promise, it means that we need to ensure that the rest of our app is only ready to go after this has been loaded.
 
 <img class="code-marker" src="/assets/s.png" />To do this, let's add another state variable to our `src/App.js` state called `isAuthenticating`. Add it to the top of our `App` function.
 
