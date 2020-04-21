@@ -17,7 +17,7 @@ First we'll start by updating the application state by setting that the user is 
 
 To save the user's login state, let's include the `useState` hook in `src/App.js`.
 
-<img class="code-marker" src="/assets/s.png" />Replace, the `React` import:
+<img class="code-marker" src="/assets/s.png" />Replace the `React` import:
 
 ``` javascript
 import React from "react";
