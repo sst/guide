@@ -142,7 +142,7 @@ While developing, React doesn't show your Error Boundary fallback UI by default.
 
 Since we are developing locally, we don't report this error to Sentry. But let's do a quick test to make sure it's hooked up properly.
 
-Replace the following from the top of `src/libs/error-lib.js`.
+Replace the following from the top of `src/libs/errorLib.js`.
 
 ``` javascript
 const isLocal = process.env.NODE_ENV === "development";
