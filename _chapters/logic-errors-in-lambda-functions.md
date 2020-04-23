@@ -10,7 +10,7 @@ ref: logic-errors-in-lambda-functions
 
 Now that we've [setup error logging for our API]({% link _chapters/setup-error-logging-in-serverless.md %}), we are ready to go over the workflow for debugging the various types of errors we'll run into.
 
-First up, are errors that can happen in our Lambda function code. Now we all know that we almost never make mistakes in our code. However, it's still worth going over this very _"unlikely"_ scenario.
+First up, there are errors that can happen in our Lambda function code. Now we all know that we almost never make mistakes in our code. However, it's still worth going over this very _"unlikely"_ scenario.
 
 ### Create a New Branch
 
