@@ -23,26 +23,27 @@ In the previous chapter we created a settings page that links to `/settings/emai
 ``` coffee
 import React, { useState } from "react";
 import { Auth } from "aws-amplify";
+import { useHistory } from "react-router-dom";
 import {
   HelpBlock,
   FormGroup,
   FormControl,
-  ControlLabel
+  ControlLabel,
 } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
-import "./ChangeEmail.css";
 import { useFormFields } from "../libs/hooksLib";
-import { useHistory } from "react-router-dom";
+import { onError } from "../libs/errorLib";
+import "./ChangeEmail.css";
 
 export default function ChangeEmail() {
-  const [fields, setFields] = useFormFields({
-    code: "",
-    email: ""
-  });
+  const history = useHistory();
   const [codeSent, setCodeSent] = useState(false);
+  const [fields, handleFieldChange] = useFormFields({
+    code: "",
+    email: "",
+  });
   const [isConfirming, setIsConfirming] = useState(false);
   const [isSendingCode, setIsSendingCode] = useState(false);
-  const history = useHistory();
 
   function validateEmailForm() {
     return fields.email.length > 0;
@@ -62,7 +63,7 @@ export default function ChangeEmail() {
       await Auth.updateUserAttributes(user, { email: fields.email });
       setCodeSent(true);
     } catch (error) {
-      alert(error.message);
+      onError(error);
       setIsSendingCode(false);
     }
   }
@@ -77,7 +78,7 @@ export default function ChangeEmail() {
 
       history.push("/settings");
     } catch (error) {
-      alert(error.message);
+      onError(error);
       setIsConfirming(false);
     }
   }
@@ -91,7 +92,7 @@ export default function ChangeEmail() {
             autoFocus
             type="email"
             value={fields.email}
-            onChange={setFields}
+            onChange={handleFieldChange}
           />
         </FormGroup>
         <LoaderButton
@@ -116,7 +117,7 @@ export default function ChangeEmail() {
             autoFocus
             type="tel"
             value={fields.code}
-            onChange={setFields}
+            onChange={handleFieldChange}
           />
           <HelpBlock>
             Please check your email ({fields.email}) for the confirmation code.
@@ -182,7 +183,9 @@ This confirms the change on Cognito's side. Finally, we redirect the user to the
 <img class="code-marker" src="/assets/s.png" />Finally, let's add our new page to `src/Routes.js`.
 
 ``` html
-<AuthenticatedRoute path="/settings/email" exact><ChangeEmail /></AuthenticatedRoute>
+<AuthenticatedRoute exact path="/settings/email">
+  <ChangeEmail />
+</AuthenticatedRoute>
 ```
 
 <img class="code-marker" src="/assets/s.png" />And import it in the header.

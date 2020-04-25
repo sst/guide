@@ -29,18 +29,19 @@ import {
   FormGroup,
   Glyphicon,
   FormControl,
-  ControlLabel
+  ControlLabel,
 } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
-import "./ResetPassword.css";
 import { useFormFields } from "../libs/hooksLib";
+import { onError } from "../libs/errorLib";
+import "./ResetPassword.css";
 
 export default function ResetPassword() {
-  const [fields, setFields] = useFormFields({
+  const [fields, handleFieldChange] = useFormFields({
     code: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
   const [codeSent, setCodeSent] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
@@ -50,6 +51,7 @@ export default function ResetPassword() {
   function validateCodeForm() {
     return fields.email.length > 0;
   }
+
   function validateResetForm() {
     return (
       fields.code.length > 0 &&
@@ -67,7 +69,7 @@ export default function ResetPassword() {
       await Auth.forgotPassword(fields.email);
       setCodeSent(true);
     } catch (error) {
-      alert(error.message);
+      onError(error);
       setIsSendingCode(false);
     }
   }
@@ -85,7 +87,7 @@ export default function ResetPassword() {
       );
       setConfirmed(true);
     } catch (error) {
-      alert(error.message);
+      onError(error);
       setIsConfirming(false);
     }
   }
@@ -99,7 +101,7 @@ export default function ResetPassword() {
             autoFocus
             type="email"
             value={fields.email}
-            onChange={setFields}
+            onChange={handleFieldChange}
           />
         </FormGroup>
         <LoaderButton
@@ -124,7 +126,7 @@ export default function ResetPassword() {
             autoFocus
             type="tel"
             value={fields.code}
-            onChange={setFields}
+            onChange={handleFieldChange}
           />
           <HelpBlock>
             Please check your email ({fields.email}) for the confirmation code.
@@ -136,7 +138,7 @@ export default function ResetPassword() {
           <FormControl
             type="password"
             value={fields.password}
-            onChange={setFields}
+            onChange={handleFieldChange}
           />
         </FormGroup>
         <FormGroup bsSize="large" controlId="confirmPassword">
@@ -144,7 +146,7 @@ export default function ResetPassword() {
           <FormControl
             type="password"
             value={fields.confirmPassword}
-            onChange={setFields}
+            onChange={handleFieldChange}
           />
         </FormGroup>
         <LoaderButton
@@ -166,7 +168,9 @@ export default function ResetPassword() {
         <Glyphicon glyph="ok" />
         <p>Your password has been reset.</p>
         <p>
-          <Link to="/login">Click here to login with your new credentials.</Link>
+          <Link to="/login">
+            Click here to login with your new credentials.
+          </Link>
         </p>
       </div>
     );
@@ -231,7 +235,9 @@ Finally, let's link this up with the rest of our app.
 <img class="code-marker" src="/assets/s.png" />Add the route to `src/Routes.js`.
 
 ``` html
-<UnauthenticatedRoute exact path="/login/reset"><ResetPassword /></UnauthenticatedRoute>
+<UnauthenticatedRoute exact path="/login/reset">
+  <ResetPassword />
+</UnauthenticatedRoute>
 ```
 
 <img class="code-marker" src="/assets/s.png" />And import it in the header.
@@ -263,6 +269,7 @@ import { Link } from "react-router-dom";
   margin-bottom: 15px;
   display: block;
   font-size: 14px;
+}
 ```
 
 That's it! We should now be able to navigate to `/login/reset` or go to it from the login page in case we need to reset our password.

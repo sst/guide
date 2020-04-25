@@ -14,99 +14,59 @@ For reference, we are using a forked version of the notes app with:
 - A separate GitHub repository: [**{{ site.frontend_user_mgmt_github_repo }}**]({{ site.frontend_user_mgmt_github_repo }})
 - And it can be accessed through: [**https://demo-user-mgmt.serverless-stack.com**](https://demo-user-mgmt.serverless-stack.com)
 
-Let's start by creating a settings page that our users can use to change their password.
+Let's start by editing our settings page so that our users can use to change their password.
 
 ### Add a Settings Page
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `src/containers/Settings.js`.
+<img class="code-marker" src="/assets/s.png" />Replace the `return` statement in `src/containers/Settings.js` with.
 
 ``` coffee
-import React, { Component } from "react";
+return (
+  <div className="Settings">
+    <LinkContainer to="/settings/email">
+      <LoaderButton block bsSize="large">
+        Change Email
+      </LoaderButton>
+    </LinkContainer>
+    <LinkContainer to="/settings/password">
+      <LoaderButton block bsSize="large">
+        Change Password
+      </LoaderButton>
+    </LinkContainer>
+    <hr />
+    <StripeProvider stripe={stripe}>
+      <Elements>
+        <BillingForm isLoading={isLoading} onSubmit={handleFormSubmit} />
+      </Elements>
+    </StripeProvider>
+  </div>
+);
+```
+
+<img class="code-marker" src="/assets/s.png" />And import the following as well.
+
+``` coffee
 import { LinkContainer } from "react-router-bootstrap";
 import LoaderButton from "../components/LoaderButton";
-import "./Settings.css";
-
-export default function Settings() {
-  return (
-    <div className="Settings">
-      <LinkContainer to="/settings/email">
-        <LoaderButton block bsSize="large">
-          Change Email
-        </LoaderButton>
-      </LinkContainer>
-      <LinkContainer to="/settings/password">
-        <LoaderButton block bsSize="large">
-          Change Password
-        </LoaderButton>
-      </LinkContainer>
-    </div>
-  );
-}
 ```
 
 All this does is add two links to a page that allows our users to change their password and email.
 
-<img class="code-marker" src="/assets/s.png" />Let's also add a couple of styles for this page.
+<img class="code-marker" src="/assets/s.png" />Replace our `src/containers/Settings.css` with the following.
 
 ``` css
 @media all and (min-width: 480px) {
   .Settings {
     padding: 60px 0;
     margin: 0 auto;
-    max-width: 320px;
+    max-width: 480px;
+  }
+
+  .Settings > .LoaderButton:first-child {
+    margin-bottom: 15px;
   }
 }
-.Settings .LoaderButton:last-child {
-  margin-top: 15px;
-}
 ```
-
-<img class="code-marker" src="/assets/s.png" />Add a link to this settings page to the navbar of our app by changing `src/App.js`.
-
-``` coffee
-<Navbar fluid collapseOnSelect>
-  <Navbar.Header>
-    <Navbar.Brand>
-      <Link to="/">Scratch</Link>
-    </Navbar.Brand>
-    <Navbar.Toggle />
-  </Navbar.Header>
-  <Navbar.Collapse>
-    <Nav pullRight>
-      {isAuthenticated
-        ? <>
-            <LinkContainer to="/settings">
-              <NavItem>Settings</NavItem>
-            </LinkContainer>
-            <NavItem onClick={handleLogout}>Logout</NavItem>
-          </>
-        : <>
-            <LinkContainer to="/signup">
-              <NavItem>Signup</NavItem>
-            </LinkContainer>
-            <LinkContainer to="/login">
-              <NavItem>Login</NavItem>
-            </LinkContainer>
-          </>
-      }
-    </Nav>
-  </Navbar.Collapse>
-</Navbar>
-```
-
-<img class="code-marker" src="/assets/s.png" />Also, add the route to our `src/Routes.js`.
-
-``` html
-<AuthenticatedRoute path="/settings" exact><Settings /></AuthenticatedRoute>
-```
-
-<img class="code-marker" src="/assets/s.png" />And don't forget to import it.
-
-``` coffee
-import Settings from "./containers/Settings";
-```
-
-This should give us a settings page that our users can get to from the app navbar.
 
 ![Settings page screenshot](/assets/user-management/settings-page.png)
 
@@ -119,20 +79,21 @@ Now let's create the form that allows our users to change their password.
 ``` coffee
 import React, { useState } from "react";
 import { Auth } from "aws-amplify";
+import { useHistory } from "react-router-dom";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
-import "./ChangePassword.css";
 import { useFormFields } from "../libs/hooksLib";
-import { useHistory } from "react-router-dom";
+import { onError } from "../libs/errorLib";
+import "./ChangePassword.css";
 
 export default function ChangePassword() {
-  const [fields, setFields] = useFormFields({
+  const history = useHistory();
+  const [fields, handleFieldChange] = useFormFields({
     password: "",
     oldPassword: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
   const [isChanging, setIsChanging] = useState(false);
-  const history = useHistory();
 
   function validateForm() {
     return (
@@ -157,7 +118,7 @@ export default function ChangePassword() {
 
       history.push("/settings");
     } catch (error) {
-      alert(error.message);
+      onError(error);
       setIsChanging(false);
     }
   }
@@ -169,7 +130,7 @@ export default function ChangePassword() {
           <ControlLabel>Old Password</ControlLabel>
           <FormControl
             type="password"
-            onChange={setFields}
+            onChange={handleFieldChange}
             value={fields.oldPassword}
           />
         </FormGroup>
@@ -178,7 +139,7 @@ export default function ChangePassword() {
           <ControlLabel>New Password</ControlLabel>
           <FormControl
             type="password"
-            onChange={setFields}
+            onChange={handleFieldChange}
             value={fields.password}
           />
         </FormGroup>
@@ -186,7 +147,7 @@ export default function ChangePassword() {
           <ControlLabel>Confirm Password</ControlLabel>
           <FormControl
             type="password"
-            onChange={setFields}
+            onChange={handleFieldChange}
             value={fields.confirmPassword}
           />
         </FormGroup>
@@ -236,7 +197,9 @@ The above snippet uses the `Auth` module from Amplify to get the current user. A
 <img class="code-marker" src="/assets/s.png" />Let's add our new page to `src/Routes.js`.
 
 ``` html
-<AuthenticatedRoute path="/settings/password" exact><ChangePassword /></AuthenticatedRoute>
+<AuthenticatedRoute exact path="/settings/password">
+  <ChangePassword />
+</AuthenticatedRoute>
 ```
 
 <img class="code-marker" src="/assets/s.png" />And import it.
