@@ -21,7 +21,7 @@ In the previous chapter we created a settings page that links to `/settings/emai
 <img class="code-marker" src="/assets/s.png" />Add the following to `src/containers/ChangeEmail.js`.
 
 ``` coffee
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Auth } from "aws-amplify";
 import {
   HelpBlock,
@@ -31,128 +31,115 @@ import {
 } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import "./ChangeEmail.css";
+import { useFormFields } from "../libs/hooksLib";
+import { useHistory } from "react-router-dom";
 
-export default class ChangeEmail extends Component {
-  constructor(props) {
-    super(props);
+export default function ChangeEmail() {
+  const [fields, setFields] = useFormFields({
+    code: "",
+    email: ""
+  });
+  const [codeSent, setCodeSent] = useState(false);
+  const [isConfirming, setIsConfirming] = useState(false);
+  const [isSendingCode, setIsSendingCode] = useState(false);
+  const history = useHistory();
 
-    this.state = {
-      code: "",
-      email: "",
-      codeSent: false,
-      isConfirming: false,
-      isSendingCode: false
-    };
+  function validateEmailForm() {
+    return fields.email.length > 0;
   }
 
-  validatEmailForm() {
-    return this.state.email.length > 0;
+  function validateConfirmForm() {
+    return fields.code.length > 0;
   }
 
-  validateConfirmForm() {
-    return this.state.code.length > 0;
-  }
-
-  handleChange = event => {
-    this.setState({
-      [event.target.id]: event.target.value
-    });
-  };
-
-  handleUpdateClick = async event => {
+  async function handleUpdateClick(event) {
     event.preventDefault();
 
-    this.setState({ isSendingCode: true });
+    setIsSendingCode(true);
 
     try {
       const user = await Auth.currentAuthenticatedUser();
-      await Auth.updateUserAttributes(user, { email: this.state.email });
-
-      this.setState({ codeSent: true });
-    } catch (e) {
-      alert(e.message);
-      this.setState({ isSendingCode: false });
+      await Auth.updateUserAttributes(user, { email: fields.email });
+      setCodeSent(true);
+    } catch (error) {
+      alert(error.message);
+      setIsSendingCode(false);
     }
-  };
+  }
 
-  handleConfirmClick = async event => {
+  async function handleConfirmClick(event) {
     event.preventDefault();
 
-    this.setState({ isConfirming: true });
+    setIsConfirming(true);
 
     try {
-      await Auth.verifyCurrentUserAttributeSubmit("email", this.state.code);
+      await Auth.verifyCurrentUserAttributeSubmit("email", fields.code);
 
-      this.props.history.push("/settings");
-    } catch (e) {
-      alert(e.message);
-      this.setState({ isConfirming: false });
+      history.push("/settings");
+    } catch (error) {
+      alert(error.message);
+      setIsConfirming(false);
     }
-  };
+  }
 
-  renderUpdateForm() {
+  function renderUpdateForm() {
     return (
-      <form onSubmit={this.handleUpdateClick}>
+      <form onSubmit={handleUpdateClick}>
         <FormGroup bsSize="large" controlId="email">
           <ControlLabel>Email</ControlLabel>
           <FormControl
             autoFocus
             type="email"
-            value={this.state.email}
-            onChange={this.handleChange}
+            value={fields.email}
+            onChange={setFields}
           />
         </FormGroup>
         <LoaderButton
           block
           type="submit"
           bsSize="large"
-          text="Update Email"
-          loadingText="Updating…"
-          disabled={!this.validatEmailForm()}
-          isLoading={this.state.isSendingCode}
-        />
+          isLoading={isSendingCode}
+          disabled={!validateEmailForm()}
+        >
+          Update Email
+        </LoaderButton>
       </form>
     );
   }
 
-  renderConfirmationForm() {
+  function renderConfirmationForm() {
     return (
-      <form onSubmit={this.handleConfirmClick}>
+      <form onSubmit={handleConfirmClick}>
         <FormGroup bsSize="large" controlId="code">
           <ControlLabel>Confirmation Code</ControlLabel>
           <FormControl
             autoFocus
             type="tel"
-            value={this.state.code}
-            onChange={this.handleChange}
+            value={fields.code}
+            onChange={setFields}
           />
           <HelpBlock>
-            Please check your email ({this.state.email}) for the confirmation
-            code.
+            Please check your email ({fields.email}) for the confirmation code.
           </HelpBlock>
         </FormGroup>
         <LoaderButton
           block
           type="submit"
           bsSize="large"
-          text="Confirm"
-          loadingText="Confirm…"
-          isLoading={this.state.isConfirming}
-          disabled={!this.validateConfirmForm()}
-        />
+          isLoading={isConfirming}
+          disabled={!validateConfirmForm()}
+        >
+          Confirm
+        </LoaderButton>
       </form>
     );
   }
 
-  render() {
-    return (
-      <div className="ChangeEmail">
-        {!this.state.codeSent
-          ? this.renderUpdateForm()
-          : this.renderConfirmationForm()}
-      </div>
-    );
-  }
+  return (
+    <div className="ChangeEmail">
+      {!codeSent ? renderUpdateForm() : renderConfirmationForm()}
+    </div>
+  );
 }
 ```
 
@@ -162,17 +149,17 @@ The flow for changing a user's email is pretty similar to how we sign a user up.
 2. Cognito sends them a verification code.
 3. They enter the code and we confirm that their email has been changed.
 
-We start by rendering a form that asks our user to enter their new email in `this.renderUpdateForm()`. Once the user submits this form, we call:
+We start by rendering a form that asks our user to enter their new email in `renderUpdateForm()`. Once the user submits this form, we call:
 
 ``` js
 const user = await Auth.currentAuthenticatedUser();
-Auth.updateUserAttributes(user, { email: this.state.email });
+Auth.updateUserAttributes(user, { email: fields.email });
 ```
 
-This gets the current user and updates their email using the `Auth` module from Amplify. Next we render the form where they can enter the code in `this.renderConfirmationForm()`. Upon submitting this form we call:
+This gets the current user and updates their email using the `Auth` module from Amplify. Next we render the form where they can enter the code in `renderConfirmationForm()`. Upon submitting this form we call:
 
 ``` js
-Auth.verifyCurrentUserAttributeSubmit("email", this.state.code);
+Auth.verifyCurrentUserAttributeSubmit("email", fields.code);
 ```
 
 This confirms the change on Cognito's side. Finally, we redirect the user to the settings page.
@@ -195,12 +182,7 @@ This confirms the change on Cognito's side. Finally, we redirect the user to the
 <img class="code-marker" src="/assets/s.png" />Finally, let's add our new page to `src/Routes.js`.
 
 ``` html
-<AuthenticatedRoute
-  path="/settings/email"
-  exact
-  component={ChangeEmail}
-  props={childProps}
-/>
+<AuthenticatedRoute path="/settings/email" exact><ChangeEmail /></AuthenticatedRoute>
 ```
 
 <img class="code-marker" src="/assets/s.png" />And import it in the header.
@@ -221,6 +203,6 @@ You might notice that the change email flow is interrupted if the user does not 
 
 - In this case show a simple sign that allows users to resend the verification code. You can do this by calling `Auth.verifyCurrentUserAttribute("email")`.
 
-- Next you can simply display the confirm code form from above and follow the same flow by calling `Auth.verifyCurrentUserAttributeSubmit("email", this.state.code)`.
+- Next you can simply display the confirm code form from above and follow the same flow by calling `Auth.verifyCurrentUserAttributeSubmit("email", fields.code)`.
 
 This can make your change email flow more robust and handle the case where a user forgets to verify their new email.

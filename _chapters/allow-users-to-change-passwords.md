@@ -26,34 +26,21 @@ import { LinkContainer } from "react-router-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import "./Settings.css";
 
-export default class Settings extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-    };
-  }
-
-  render() {
-    return (
-      <div className="Settings">
-        <LinkContainer to="/settings/email">
-          <LoaderButton
-            block
-            bsSize="large"
-            text="Change Email"
-          />
-        </LinkContainer>
-        <LinkContainer to="/settings/password">
-          <LoaderButton
-            block
-            bsSize="large"
-            text="Change Password"
-          />
-        </LinkContainer>
-      </div>
-    );
-  }
+export default function Settings() {
+  return (
+    <div className="Settings">
+      <LinkContainer to="/settings/email">
+        <LoaderButton block bsSize="large">
+          Change Email
+        </LoaderButton>
+      </LinkContainer>
+      <LinkContainer to="/settings/password">
+        <LoaderButton block bsSize="large">
+          Change Password
+        </LoaderButton>
+      </LinkContainer>
+    </div>
+  );
 }
 ```
 
@@ -86,21 +73,21 @@ All this does is add two links to a page that allows our users to change their p
   </Navbar.Header>
   <Navbar.Collapse>
     <Nav pullRight>
-      {this.state.isAuthenticated
-        ? <Fragment>
+      {isAuthenticated
+        ? <>
             <LinkContainer to="/settings">
               <NavItem>Settings</NavItem>
             </LinkContainer>
-            <NavItem onClick={this.handleLogout}>Logout</NavItem>
-          </Fragment>
-        : <Fragment>
+            <NavItem onClick={handleLogout}>Logout</NavItem>
+          </>
+        : <>
             <LinkContainer to="/signup">
               <NavItem>Signup</NavItem>
             </LinkContainer>
             <LinkContainer to="/login">
               <NavItem>Login</NavItem>
             </LinkContainer>
-          </Fragment>
+          </>
       }
     </Nav>
   </Navbar.Collapse>
@@ -110,12 +97,7 @@ All this does is add two links to a page that allows our users to change their p
 <img class="code-marker" src="/assets/s.png" />Also, add the route to our `src/Routes.js`.
 
 ``` html
-<AuthenticatedRoute
-  path="/settings"
-  exact
-  component={Settings}
-  props={childProps}
-/>
+<AuthenticatedRoute path="/settings" exact><Settings /></AuthenticatedRoute>
 ```
 
 <img class="code-marker" src="/assets/s.png" />And don't forget to import it.
@@ -135,100 +117,91 @@ Now let's create the form that allows our users to change their password.
 <img class="code-marker" src="/assets/s.png" />Add the following to `src/containers/ChangePassword.js`.
 
 ``` coffee
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Auth } from "aws-amplify";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import "./ChangePassword.css";
+import { useFormFields } from "../libs/hooksLib";
+import { useHistory } from "react-router-dom";
 
-export default class ChangePassword extends Component {
-  constructor(props) {
-    super(props);
+export default function ChangePassword() {
+  const [fields, setFields] = useFormFields({
+    password: "",
+    oldPassword: "",
+    confirmPassword: ""
+  });
+  const [isChanging, setIsChanging] = useState(false);
+  const history = useHistory();
 
-    this.state = {
-      password: "",
-      oldPassword: "",
-      isChanging: false,
-      confirmPassword: ""
-    };
-  }
-
-  validateForm() {
+  function validateForm() {
     return (
-      this.state.oldPassword.length > 0 &&
-      this.state.password.length > 0 &&
-      this.state.password === this.state.confirmPassword
+      fields.oldPassword.length > 0 &&
+      fields.password.length > 0 &&
+      fields.password === fields.confirmPassword
     );
   }
 
-  handleChange = event => {
-    this.setState({
-      [event.target.id]: event.target.value
-    });
-  };
-
-  handleChangeClick = async event => {
+  async function handleChangeClick(event) {
     event.preventDefault();
 
-    this.setState({ isChanging: true });
+    setIsChanging(true);
 
     try {
       const currentUser = await Auth.currentAuthenticatedUser();
       await Auth.changePassword(
         currentUser,
-        this.state.oldPassword,
-        this.state.password
+        fields.oldPassword,
+        fields.password
       );
 
-      this.props.history.push("/settings");
-    } catch (e) {
-      alert(e.message);
-      this.setState({ isChanging: false });
+      history.push("/settings");
+    } catch (error) {
+      alert(error.message);
+      setIsChanging(false);
     }
-  };
-
-  render() {
-    return (
-      <div className="ChangePassword">
-        <form onSubmit={this.handleChangeClick}>
-          <FormGroup bsSize="large" controlId="oldPassword">
-            <ControlLabel>Old Password</ControlLabel>
-            <FormControl
-              type="password"
-              onChange={this.handleChange}
-              value={this.state.oldPassword}
-            />
-          </FormGroup>
-          <hr />
-          <FormGroup bsSize="large" controlId="password">
-            <ControlLabel>New Password</ControlLabel>
-            <FormControl
-              type="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup bsSize="large" controlId="confirmPassword">
-            <ControlLabel>Confirm Password</ControlLabel>
-            <FormControl
-              type="password"
-              onChange={this.handleChange}
-              value={this.state.confirmPassword}
-            />
-          </FormGroup>
-          <LoaderButton
-            block
-            type="submit"
-            bsSize="large"
-            text="Change Password"
-            loadingText="Changing…"
-            disabled={!this.validateForm()}
-            isLoading={this.state.isChanging}
-          />
-        </form>
-      </div>
-    );
   }
+
+  return (
+    <div className="ChangePassword">
+      <form onSubmit={handleChangeClick}>
+        <FormGroup bsSize="large" controlId="oldPassword">
+          <ControlLabel>Old Password</ControlLabel>
+          <FormControl
+            type="password"
+            onChange={setFields}
+            value={fields.oldPassword}
+          />
+        </FormGroup>
+        <hr />
+        <FormGroup bsSize="large" controlId="password">
+          <ControlLabel>New Password</ControlLabel>
+          <FormControl
+            type="password"
+            onChange={setFields}
+            value={fields.password}
+          />
+        </FormGroup>
+        <FormGroup bsSize="large" controlId="confirmPassword">
+          <ControlLabel>Confirm Password</ControlLabel>
+          <FormControl
+            type="password"
+            onChange={setFields}
+            value={fields.confirmPassword}
+          />
+        </FormGroup>
+        <LoaderButton
+          block
+          type="submit"
+          bsSize="large"
+          disabled={!validateForm()}
+          isLoading={isChanging}
+        >
+          Change Password
+        </LoaderButton>
+      </form>
+    </div>
+  );
 }
 ```
 
@@ -238,8 +211,8 @@ Most of this should be very straightforward. The key part of the flow here is th
 const currentUser = await Auth.currentAuthenticatedUser();
 await Auth.changePassword(
   currentUser,
-  this.state.oldPassword,
-  this.state.password
+  fields.oldPassword,
+  fields.password
 );
 ```
 
@@ -263,12 +236,7 @@ The above snippet uses the `Auth` module from Amplify to get the current user. A
 <img class="code-marker" src="/assets/s.png" />Let's add our new page to `src/Routes.js`.
 
 ``` html
-<AuthenticatedRoute
-  path="/settings/password"
-  exact
-  component={ChangePassword}
-  props={childProps}
-/>
+<AuthenticatedRoute path="/settings/password" exact><ChangePassword /></AuthenticatedRoute>
 ```
 
 <img class="code-marker" src="/assets/s.png" />And import it.
