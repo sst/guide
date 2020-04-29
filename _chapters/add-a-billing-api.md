@@ -12,13 +12,13 @@ Now let's get started with creating our billing API. It is going to take a Strip
 
 ### Add a Billing Lambda
 
-<img class="code-marker" src="/assets/s.png" />Start by installing the Stripe NPM package. Run the following in the root of our project.
+{%change%}Start by installing the Stripe NPM package. Run the following in the root of our project.
 
 ``` bash
 $ npm install --save stripe
 ```
 
-<img class="code-marker" src="/assets/s.png" />Create a new file called 'billing.js' with the following.
+{%change%}Create a new file called 'billing.js' with the following.
 
 ``` js
 import stripePackage from "stripe";
