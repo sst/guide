@@ -42,7 +42,8 @@ Let's quickly go over what we are doing here.
 
 3. We are also configuring the two attributes of our table as `userId` and `noteId`and specifying them as our primary key.
 
-4. Finally, we are provisioning the read/write capacity for our table through a couple of custom variables as well. We will be defining this shortly.
+4. Finally, we are using the `PAY_PER_REQUEST` setting for the `BillingMode`. This tells DynamoDB that we want to pay per request and use the [On-Demand Capacity](https://aws.amazon.com/dynamodb/pricing/on-demand/) option. With DynamoDB in On-Demand mode, our database is now truly Serverless. This option can be very cost-effective, especially if you are just starting out and your workloads are not very predictable or stable. On the other hand, if you know exactly how much capacity you need, the [Provisioned Capacity](https://aws.amazon.com/dynamodb/pricing/provisioned/) mode would work out to be cheaper.
+
 
 ### Add the Resource
 
@@ -75,8 +76,6 @@ We added a couple of things here that are worth spending some time on:
 - We first create a custom variable called `stage`. You might be wondering why we need a custom variable for this when we already have `stage: dev` in the `provider:` block. This is because we want to set the current stage of our project based on what is set through the `serverless deploy --stage $STAGE` command. And if a stage is not set when we deploy, we want to fallback to the one we have set in the provider block. So `${opt:stage, self:provider.stage}`, is telling Serverless to first look for the `opt:stage` (the one passed in through the command line), and then fallback to `self:provider.stage` (the one in the provider block).
 
 - The table name is based on the stage we are deploying to - `${self:custom.stage}-notes`. The reason this is dynamically set is because we want to create a separate table when we deploy to a new stage (environment). So when we deploy to `dev` we will create a DynamoDB table called `dev-notes` and when we deploy to `prod`, it'll be called `prod-notes`. This allows us to clearly separate the resources (and data) we use in our various environments.
-
-- Finally, we are using the `PAY_PER_REQUEST` setting for the `BillingMode`. This tells DynamoDB that we want to pay per request and use the [On-Demand Capacity](https://aws.amazon.com/dynamodb/pricing/on-demand/) option. With DynamoDB in On-Demand mode, our database is now truly Serverless. This option can be very cost-effective, especially if you are just starting out and your workloads are not very predictable or stable. On the other hand, if you know exactly how much capacity you need, the [Provisioned Capacity](https://aws.amazon.com/dynamodb/pricing/provisioned/) mode would work out to be cheaper.
 
 A lot of the above might sound tricky and overly complicated right now. But we are setting it up so that we can automate and replicate our entire setup with ease. Note that, Serverless Framework (and CloudFormation behind the scenes) will be completely managing our resources based on the `serverless.yml`. This means that if you have a typo in your table name, the old table will be removed and a new one will be created in place. To prevent accidentally deleting serverless resources (like DynamoDB tables), you need to set the `DeletionPolicy: Retain` flag. We have a [detailed post on this over on the Seed blog](https://seed.run/blog/how-to-prevent-accidentally-deleting-serverless-resources).
 
