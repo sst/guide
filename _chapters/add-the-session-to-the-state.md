@@ -17,7 +17,7 @@ First we'll start by updating the application state by setting that the user is 
 
 To save the user's login state, let's include the `useState` hook in `src/App.js`.
 
-<img class="code-marker" src="/assets/s.png" />Replace, the `React` import:
+<img class="code-marker" src="/assets/s.png" />Replace the `React` import:
 
 ``` javascript
 import React from "react";
@@ -39,7 +39,7 @@ This initializes the `isAuthenticated` state variable to `false`, as in the user
 
 ### Store the Session in the Context
 
-We are going to have to pass the session related info to all of our containers. This is going to be tedious if we pass it in as a prop. Since we'll have to do that manually for each component. Instead let's use [React Context](https://reactjs.org/docs/context.html) for this.
+We are going to have to pass the session related info to all of our containers. This is going to be tedious if we pass it in as a prop, since we'll have to do that manually for each component. Instead let's use [React Context](https://reactjs.org/docs/context.html) for this.
 
 We'll create a context for our entire app that all of our containers will use.
 
