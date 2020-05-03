@@ -50,7 +50,7 @@ $ npm install @sentry/browser --save
 
 We are going to be using Sentry across our app. So it makes sense to keep all the Sentry related code in one place.
 
-<img class="code-marker" src="/assets/s.png" />Add the following to the top of your `src/libs/error-lib.js`.
+<img class="code-marker" src="/assets/s.png" />Add the following to the top of your `src/libs/errorLib.js`.
 
 ``` javascript
 import * as Sentry from "@sentry/browser";
