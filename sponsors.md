@@ -67,6 +67,7 @@ Your **company logo** and link will be placed here. [Contact us if you'd like to
 - [Peter Miller](https://github.com/phm200)
 - [marxtrader](https://www.chrisranni.com)
 - [Luis Ocasio](https://github.com/LuisOcasio)
+- [Dynobase](https://dynobase.dev)
 
 
 We'd like thank our sponsors and backers for supporting us!
