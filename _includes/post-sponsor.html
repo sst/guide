@@ -3,11 +3,7 @@
   <div class="banners">
     {% assign data = site.data.sponsors.list.thundra || sample %}
     <a target="_blank" href="{{ data.link }}">
-      <img width="{{ data.width }}" alt="{{ data.alt }}" src="{{ data.image }}" />
-    </a>
-    {% assign data = site.data.sponsors.list.epsagon || sample %}
-    <a target="_blank" href="{{ data.link }}">
-      <img width="{{ data.width }}" alt="{{ data.alt }}" src="{{ data.image }}" />
+      <img width="{{ data.width }}" alt="{{ data.alt }}" src="{{ data.image }}" importance="low" />
     </a>
   </div>
 </div>
