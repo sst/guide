@@ -68,7 +68,7 @@ Your **company logo** and link will be placed here. [Contact us if you'd like to
 - [marxtrader](https://www.chrisranni.com)
 - [Luis Ocasio](https://github.com/LuisOcasio)
 - [Ryan Jackson](https://github.com/ryanauj)
-- [Rafal Wilinski](https://dynobase.dev/)
+- [Dynobase](https://dynobase.dev/)
 
 
 We'd like thank our sponsors and backers for supporting us!
