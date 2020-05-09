@@ -69,6 +69,7 @@ Your **company logo** and link will be placed here. [Contact us if you'd like to
 - [Luis Ocasio](https://github.com/LuisOcasio)
 - [Ryan Jackson](https://github.com/ryanauj)
 - [Dynobase](https://dynobase.dev/)
+- [Tim Shnaider](https://twitter.com/TimShnaider)
 
 
 We'd like thank our sponsors and backers for supporting us!
