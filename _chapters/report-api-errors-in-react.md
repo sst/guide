@@ -10,7 +10,7 @@ ref: report-api-errors-in-react
 
 Now that we have our [React app configured with Sentry]({% link _chapters/setup-error-reporting-in-react.md %}), let's go ahead and start sending it some errors.
 
-So far we've been using the `onError` method in `src/libs/error-lib.js` to handle errors. Recall that it doesn't do a whole lot outside of alerting the error.
+So far we've been using the `onError` method in `src/libs/errorLib.js` to handle errors. Recall that it doesn't do a whole lot outside of alerting the error.
 
 ``` javascript
 export function onError(error) {
@@ -29,7 +29,7 @@ For most errors we simply alert the error message. But Amplify's Auth package do
 
 For API errors we want to report both the error and the API endpoint that caused the error. On the other hand, for Auth errors we need to create an `Error` object because Sentry needs actual errors sent to it.
 
-<img class="code-marker" src="/assets/s.png" />Replace the `onError` method in `src/libs/error-lib.js` with the following:
+<img class="code-marker" src="/assets/s.png" />Replace the `onError` method in `src/libs/errorLib.js` with the following:
 
 ``` javascript
 export function onError(error) {
