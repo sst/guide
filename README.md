@@ -92,10 +92,6 @@ We are looking for a better way to generate the PDF (and other eBook) formats. I
 
 ## Sponsors
 
-<a target="_blank" href="https://www.thundra.io">
-  <img height="30" alt="Thundra" src="https://raw.githubusercontent.com/AnomalyInnovations/serverless-stack-com/master/assets/sponsors/thundra.png" />
-</a>
-
 [**Sponsor Serverless Stack on GitHub**](https://github.com/sponsors/jayair) if you've found this guide useful or would like to be an official supporter. [A big thanks to our supporters](https://serverless-stack.com/sponsors.html)!
 
 ## Maintainers

@@ -1,13 +1,14 @@
 list:
-#  - link: "https://seed.run"
-#    alt: "A fully-managed CI/CD pipeline for Serverless"
-#    image: "/assets/sponsors/seed-serverless-ci-cd.png"
-#    width: 435
-  thundra:
-    - link: "https://www.thundra.io/aws-solution-brief?utm_source=serverlessStack&utm_medium=banner&utm_campaign=Solution%20Brief"
-      alt: "Thundra — Application Observability & Security Platform"
-      image: "/assets/sponsors/thundra-banner.gif"
-      width: 420
+  seed:
+    - link: "https://seed.run"
+      alt: "Deploy, manage, and monitor Serverless applications."
+      image: "/assets/sponsors/seed-serverless-ci-cd.png"
+      width: 435
+#  thundra:
+#    - link: "https://www.thundra.io/aws-solution-brief?utm_source=serverlessStack&utm_medium=banner&utm_campaign=Solution%20Brief"
+#      alt: "Thundra — Application Observability & Security Platform"
+#      image: "/assets/sponsors/thundra-banner.gif"
+#      width: 420
 #  epsagon:
 #    - link: "https://epsagon.com/?utm_source=Advertisement&utm_medium=ServerlessStack&utm_campaign=ServerlessStack-Campaign1&utm_content=BannerA"
 #      alt: "Automated tracing for cloud microservices"
