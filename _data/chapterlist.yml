@@ -411,8 +411,6 @@ extra-frontend:
           url: /chapters/setup-your-domain-with-cloudfront.html
         - page: Set up www domain redirect
           url: /chapters/setup-www-domain-redirect.html
-        - page: Set up SSL
-          url: /chapters/setup-ssl.html
         - page: Deploy updates
           url: /chapters/deploy-updates.html
     - page: Manage User Accounts in AWS Amplify

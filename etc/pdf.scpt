@@ -167,7 +167,6 @@ deploy-to-s3
 create-a-cloudfront-distribution
 setup-your-domain-with-cloudfront
 setup-www-domain-redirect
-setup-ssl
 deploy-updates
 manage-user-accounts-in-aws-amplify
 handle-forgot-and-reset-password
