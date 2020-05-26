@@ -1,14 +1,14 @@
 ---
 layout: post
-title: Setup SSL
+title: Set up SSL
 date: 2017-02-08 02:00:00
 lang: en
-description: Using the Certificate Manager service from AWS, we will request a certificate so we can enable HTTPS for our app.
+description: We want to enable SSL or HTTPS for our React.js app on AWS. To do so we are going to request a certificate using the Certificate Manager service from AWS.
 comments_id: setup-ssl/133
 ref: setup-ssl
 ---
 
-Now that we have our domain, let's set up SSL to make sure we can add a layer of security by using HTTPS. AWS makes this fairly easy to do, thanks to Certificate Manager.
+Now that we have our domain, request a certificate to enable us to use SSL or HTTPS with our domain. AWS makes this fairly easy to do, thanks to Certificate Manager.
 
 Select **Certificate Manager** from the list of services in your [AWS Console](https://console.aws.amazon.com). Ensure that you are in the **US East (N. Virginia)** region. This is because a certificate needs to be from this region for it to [work with CloudFront](http://docs.aws.amazon.com/acm/latest/userguide/acm-regions.html). 
 
