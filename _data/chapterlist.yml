@@ -407,6 +407,10 @@ extra-frontend:
           url: /chapters/deploy-to-s3.html
         - page: Create a CloudFront distribution
           url: /chapters/create-a-cloudfront-distribution.html
+        - page: Purchase a Domain with Route53
+          url: /chapters/purchase-a-domain-with-route53.html
+        - page: Setup SSL
+          url: /chapters/setup-ssl.html
         - page: Set up your domain with CloudFront
           url: /chapters/setup-your-domain-with-cloudfront.html
         - page: Set up www domain redirect
