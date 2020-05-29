@@ -4,7 +4,7 @@ title: Set up SSL
 date: 2017-02-08 02:00:00
 lang: en
 description: We want to enable SSL or HTTPS for our React.js app on AWS. To do so we are going to request a certificate using the Certificate Manager service from AWS.
-comments_id: setup-ssl/133
+comments_id: chapter-comments-set-up-ssl/1868
 ref: setup-ssl
 ---
 

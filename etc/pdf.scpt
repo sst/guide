@@ -165,7 +165,7 @@ deploying-a-react-app-to-aws
 create-an-s3-bucket
 deploy-to-s3
 create-a-cloudfront-distribution
-purchase-a-domain-with-route53
+purchase-a-domain-with-route-53
 setup-ssl
 setup-your-domain-with-cloudfront
 setup-www-domain-redirect

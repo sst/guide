@@ -4,8 +4,8 @@ title: Purchase a Domain with Route 53
 date: 2017-02-08 01:00:00
 lang: en
 description: To host our React.js app under our own domain name in AWS we are going to purchase a domain using Route 53.
-comments_id: purchase-a-domain-with-route53/143
-ref: purchase-a-domain-with-route53
+comments_id: purchase-a-domain-with-route-53/1867
+ref: purchase-a-domain-with-route-53
 ---
 
 Now that we have our CloudFront distribution live, let's set up our domain with it. You can purchase a domain right from the [AWS Console](https://console.aws.amazon.com) by heading to the Route 53 section in the list of services.
