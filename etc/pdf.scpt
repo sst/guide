@@ -165,9 +165,10 @@ deploying-a-react-app-to-aws
 create-an-s3-bucket
 deploy-to-s3
 create-a-cloudfront-distribution
+purchase-a-domain-with-route53
+setup-ssl
 setup-your-domain-with-cloudfront
 setup-www-domain-redirect
-setup-ssl
 deploy-updates
 manage-user-accounts-in-aws-amplify
 handle-forgot-and-reset-password
