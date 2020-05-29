@@ -407,12 +407,14 @@ extra-frontend:
           url: /chapters/deploy-to-s3.html
         - page: Create a CloudFront distribution
           url: /chapters/create-a-cloudfront-distribution.html
+        - page: Purchase a Domain with Route 53
+          url: /chapters/purchase-a-domain-with-route-53.html
+        - page: Setup SSL
+          url: /chapters/setup-ssl.html
         - page: Set up your domain with CloudFront
           url: /chapters/setup-your-domain-with-cloudfront.html
         - page: Set up www domain redirect
           url: /chapters/setup-www-domain-redirect.html
-        - page: Set up SSL
-          url: /chapters/setup-ssl.html
         - page: Deploy updates
           url: /chapters/deploy-updates.html
     - page: Manage User Accounts in AWS Amplify

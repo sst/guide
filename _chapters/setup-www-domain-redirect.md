@@ -34,19 +34,31 @@ Also, make sure to copy the **Endpoint** as we'll be needing this later.
 
 ![Select redirect requests screenshot](/assets/select-redirect-requests.png)
 
+Change the **Protocol** to **https** and hit **Save**.
+
+![Change S3 Redirect to HTTPS screenshot](/assets/change-s3-redirect-to-https.png)
+
 And hit **Save** to make the changes. Next we'll create a CloudFront Distribution to point to this S3 redirect Bucket.
 
 ### Create a CloudFront Distribution
 
-Create **a new CloudFront Distribution**. And copy the S3 **Endpoint** from the step above as the **Origin Domain Name**. Make sure to **not** use the one from the dropdown. In my case, it is `http://www-notes-app-client.s3-website-us-east-1.amazonaws.com`.
+Create **a new CloudFront Distribution**. And copy the S3 **Endpoint** from the step above as the **Origin Domain Name**. Make sure to **not** use the one from the dropdown. In my case, it is `http://www-notes-app-client.s3-website-us-east-1.amazonaws.com`. In addition, select **HTTPS Only** as the Protocol Policy.
 
-![Set origin domain name screenshot](/assets/set-origin-domain-name.png)
+![Set origin domain name and protocol policy screenshot](/assets/set-origin-domain-name-and-protocol-policy.png)
 
-Scroll down to the **Alternate Domain Names (CNAMEs)** and use the www version of our domain name here.
+Set the Viewer Protocol Policy to **Redirect HTTP to HTTPS**.
+
+![Set viewer protocol policy screenshot](/assets/set-viewer-protocol-policy.png)
+
+Next, scroll down to the **Alternate Domain Names (CNAMEs)** and use the www version of our domain name here.
 
 ![Set alternate domain name screenshot](/assets/set-alternate-domain-name-2.png)
 
-And hit **Create Distribution**.
+As before, switch the **SSL Certificate** to **Custom SSL Certificate** and select the certificate we created from the drop down.
+
+![Select custom SSL certificate](/assets/select-custom-SSL-certificate-on-creation.png)
+
+Then hit **Create Distribution**.
 
 ![Hit create distribution screenshot](/assets/hit-create-distribution.png)
 
@@ -72,4 +84,4 @@ Create a new Record Set with the exact same settings as before, except make sure
 
 And that's it! Just give it some time for the DNS to propagate and if you visit your www version of your domain, it should redirect you to your non-www version.
 
-Next, we'll set up SSL and add HTTPS support for our domains.
+Next up, let’s look at the process of deploying updates to our app.
