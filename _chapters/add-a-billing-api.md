@@ -53,6 +53,8 @@ Most of this is fairly straightforward but let's go over it quickly:
 
 - Finally, we use the `stripe.charges.create` method to charge the user and respond to the request if everything went through successfully.
 
+Note, if you are testing this from India, you'll need to add some shipping information as well. Check out the [details from our forums](https://discourse.serverless-stack.com/t/test-the-billing-api/172/20).
+
 ### Add the Business Logic
 
 Now let's implement our `calculateCost` method. This is primarily our *business logic*.
