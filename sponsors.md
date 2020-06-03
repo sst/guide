@@ -25,7 +25,7 @@ Serverless Stack is written and maintained by [Frank Wang](https://github.com/fw
 
 ## Gold Sponsors
 
-<a target="_blank" href="https://www.datadoghq.com">
+<a target="_blank" href="https://www.datadoghq.com/dg/monitor/serverless-ts/?utm_source=Advertisement&utm_medium=Advertisement&utm_campaign=ServerlessStack-DisplayTshirt">
   <img height="50" alt="Thundra" src="/assets/sponsors/datadog.png" />
 </a>
 
