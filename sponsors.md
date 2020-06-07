@@ -70,6 +70,7 @@ Your **company logo** and link will be placed here. [Contact us if you'd like to
 - [Ryan Jackson](https://github.com/ryanauj)
 - [Dynobase](https://dynobase.dev/)
 - [Tim Shnaider](https://twitter.com/TimShnaider)
+- [MichaelGMalek](https://github.com/MichaelGMalek)
 
 
 We'd like thank our sponsors and backers for supporting us!
