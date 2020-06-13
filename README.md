@@ -83,7 +83,7 @@ You can generate the PDF locally on macOS by following these steps.
    1. Create an `ebook` folder in `~/Downloads` (for example).
    2. Update the date and version in the `etc/cover.html`
    3. Open the cover page locally in Safari by going to `file:///Users/frank/Sites/ServerlessStackCom/etc/cover.html`.
-   4. Hit the **Export to PDF…** button.
+   4. In the Safari Menu on the File Menu, hit the **Export to PDF…** button.
    5. Place `Cover.pdf` in the `~/Downloads/ebook` folder.
 2. Ensure `ebook` folder is an option when hitting the **Export to PDF…** button in Safari.
 3. In the terminal, run `osascript pdf.scpt` in the `etc/` directory of this repository.
