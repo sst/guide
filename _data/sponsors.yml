@@ -6,7 +6,7 @@ list:
       width: 435
   datadog:
     - link: "https://www.datadoghq.com/dg/monitor/serverless-ts/?utm_source=Advertisement&utm_medium=Advertisement&utm_campaign=ServerlessStack-DisplayTshirt"
-      alt: "Cloud Monitoring as a Service"
+      alt: "Monitor all your serverless functions in one place"
       image: "/assets/sponsors/datadog-banner.png"
       width: 440
 #  thundra:
