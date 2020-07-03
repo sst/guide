@@ -83,7 +83,7 @@ By default, a Lambda function has 1024MB of memory. You can assing any amount of
 
 <img class="code-marker" src="/assets/s.png" />Replace your `get.js` with:
 
-```
+``` javascript
 import handler from "./libs/handler-lib";
 import dynamoDb from "./libs/dynamodb-lib";
 
