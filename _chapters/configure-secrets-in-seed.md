@@ -10,9 +10,9 @@ comments_id: configure-secrets-in-seed/176
 
 Before we can do our first deployment, we need to make sure to configure our secret environment variables. If you'll recall, we have explicitly not stored these in our code (or in Git). This means that if somebody else on our team needs to deploy, we'll need to pass the `.env` file around. Instead we'll configure [Seed](https://seed.run) to deploy with our secrets for us.
 
-To do that, hit the **Settings** button in our **dev** stage.
+To do that, hit **dev** in your app **Settings**.
 
-![Select Settings in dev stage screenshot](/assets/part2/select-settings-in-dev-stage.png)
+![Select dev stage in Settings screenshot](/assets/part2/select-dev-stage-in-settings.png)
 
 Here click **Show Env Variables**.
 
@@ -22,9 +22,9 @@ And type in `STRIPE_SECRET_KEY` as the **Key** and the value should be the `STRI
 
 ![Add secret dev environment variable screenshot](/assets/part2/add-secret-dev-environment-variable.png)
 
-Next we need to configure our secrets for the `prod` stage. Head over there and hit the **Settings** button.
+Next we need to configure our secrets for the `prod` stage. Head over the **prod** stage in your app **Settings**.
 
-![Select Settings in prod stage screenshot](/assets/part2/select-settings-in-prod-stage.png)
+![Select prod stage in Settings screenshot](/assets/part2/select-prod-stage-in-settings.png)
 
 Click **Show Env Variables**.
 

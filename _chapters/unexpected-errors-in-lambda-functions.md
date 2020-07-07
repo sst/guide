@@ -61,19 +61,13 @@ On your notes app, try and select a note. You will notice the page tries to load
 
 ![Timeout error in notes app note page](/assets/monitor-debug-errors/timeout-error-in-notes-app-note-page.png)
 
-You'll get an error alert in Sentry. And just like the previous chapter, head over to the logs for the Lambda function in question.
+You'll get an error alert in Sentry. And if you head over to the **Issues** tab in Seed you'll notice a new error — `Lambda Timeout Error`.
 
-Here you'll notice that the request took 6006.18ms. And since the Lambda timeout is 6 seconds by default. This means that the function timed out.
+If you click on the new error, you'll notice that the request took 6006.18ms. And since the Lambda timeout is 6 seconds by default. This means that the function timed out.
 
-![Timeout error log request in Seed](/assets/monitor-debug-errors/timeout-error-log-request-in-seed.png)
+![Timeout error details in Seed](/assets/monitor-debug-errors/timeout-error-details-in-seed.png)
 
-Click to expand the request and scroll down to the end of the request.
-
-![Timeout error log detail request in Seed](/assets/monitor-debug-errors/timeout-error-log-request-detail-in-seed.png)
-
-You should see `Error: Lambda will timeout in 100 ms`. Note, this is printed by the timeout timer in our debugger. We print it out when there is only `100ms` left in the Lambda execution.
-
-Also from the debug messages you'll notice that the last DynamoDB `getItem` was successful. Meaning that the timeout happened after that!
+To drill into this issue further, add a `console.log` in your Lambda function. This messages will show in the request log and it'll give you a sense of where the timeout is taking place.
 
 Next let's look at what happens when our Lambda function runs out of memory.
 
@@ -83,9 +77,14 @@ By default, a Lambda function has 1024MB of memory. You can assing any amount of
 
 <img class="code-marker" src="/assets/s.png" />Replace your `get.js` with:
 
-```
+``` javascript
 import handler from "./libs/handler-lib";
 import dynamoDb from "./libs/dynamodb-lib";
+
+function allocMem() {
+  let bigList = Array(4096000).fill(1);
+  return bigList.concat(allocMem());
+}
 
 export const main = handler(async (event, context) => {
   const params = {
@@ -104,17 +103,14 @@ export const main = handler(async (event, context) => {
     throw new Error("Item not found.");
   }
 
-  const allocations = [];
-  while(true) {
-    allocations.concat(Array(4096000).fill(1));
-  }
+  allocMem();
 
   // Return the retrieved item
   return result.Item;
 });
 ```
 
-Now we'll set our Lambda function to use the lowest memory allowed and increase the timeout to give it time to allocate the memory.
+Now we'll set our Lambda function to use the lowest memory allowed and make sure it has time to allocate the memory.
 
 <img class="code-marker" src="/assets/s.png" />Replace the `get` function block in your `serverless.yml`.
 
@@ -125,7 +121,7 @@ Now we'll set our Lambda function to use the lowest memory allowed and increase 
     # - method: GET request
     handler: get.main
     memorySize: 128
-    timeout: 20
+    timeout: 10
     events:
       - http:
           path: notes/{id}
@@ -144,14 +140,12 @@ $ git push
 
 Head over to your Seed dashboard and deploy it. Then, in your notes app, try and load a note. It should fail with an error alert.
 
-Just as before, you'll see the error in Sentry. Head over to the Lambda logs in Seed.
+Just as before, you'll see the error in Sentry. And head over to new issue in Seed.
 
-![Memory error log request in Seed](/assets/monitor-debug-errors/memory-error-log-request-in-seed.png)
+![Memory error details in Seed](/assets/monitor-debug-errors/memory-error-details-in-seed.png)
 
 Note the request took all of 128MB of memory. Click to expand the request.
 
-![Memory error log detail request in Seed](/assets/monitor-debug-errors/memory-error-log-request-detail-in-seed.png)
-
-You'll see `Error: Runtime exited with error: signal: killed`. This is printed out by Lambda runtime indicating the runtime was killed. Unfortunately, our debug messages are not printed out because the Lambda container was killed without an exception being thrown. But this should give you an idea that your function either needs more memory or that your code is leaking memory.
+You'll see `exited with error: signal: killed Runtime.ExitError`. This is printed out by Lambda runtime indicating the runtime was killed. This means that you should give your function more memory or that your code is leaking memory.
 
 Next, we'll look at how to debug errors that happen outside your Lambda function handler code.

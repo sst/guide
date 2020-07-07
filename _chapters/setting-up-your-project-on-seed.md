@@ -66,12 +66,4 @@ To do this, hit the **Settings** link and click **Enable Unit Tests**.
 
 Back in our pipeline, you'll notice that our **dev** stage is hooked up to master. This means that any commits to master will trigger a build in dev.
 
-Click on **dev**.
-
-![Click dev stage in Seed project screenshot](/assets/part2/click-dev-stage-in-seed-project.png)
-
-You'll see that we haven't deployed to this stage yet.
-
-![Dev stage in Seed project screenshot](/assets/part2/dev-stage-in-seed-project.png)
-
 However, before we do that, we'll need to add our secret environment variables.

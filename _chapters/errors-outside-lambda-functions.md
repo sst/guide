@@ -55,21 +55,17 @@ $ git push
 
 Head over to your Seed dashboard, and deploy it.
 
-![Deploy debug branch once more in Seed](/assets/monitor-debug-errors/deploy-debug-branch-once-more-in-seed.png)
-
 Now if you select a note in your notes app, you'll notice that it fails with an error.
 
 ![Init error in notes app note page](/assets/monitor-debug-errors/init-error-in-notes-app-note-page.png)
 
-You should see an error in Sentry. And if you head over to the Lambda logs in Seed.
+You should see an error in Sentry. And if you head over to the Issues in Seed and click on the new error.
 
-![Init error log request in Seed](/assets/monitor-debug-errors/init-error-log-request-in-seed.png)
+![Init error details in Seed](/assets/monitor-debug-errors/init-error-details-in-seed.png)
 
-You'll notice that 3 rows have been printed out in the logs. This is because the Lambda runtime prints out the error message multiple times. Note that, only one of them has memory and duration information available. Click on the complete request to expand it.
+You'll notice the error message `dynamodb_lib.notExist is not a function`.
 
-![Init error log detail request in Seed](/assets/monitor-debug-errors/init-error-log-request-detail-in-seed.png)
-
-You should also see an exception `TypeError: dynamodb_lib.notExist is not a function`, along with the stack trace. This exception is printed out by the Lambda runtime and not by our debug handler. This is because the Lambda function has not been executed.  Also note the message at the bottom `Unknown application error occurred`.
+Note that, you might see there are 3 events for this error. This is because the Lambda runtime prints out the error message multiple times.
 
 ### Handler Function Errors
 
@@ -113,17 +109,11 @@ $ git push
 
 Head over to your Seed dashboard and deploy it. Then, in your notes app, try and load a note. It should fail with an error alert.
 
-Just as before, you'll see the error in Sentry. Head over to the Lambda logs in Seed.
+Just as before, you'll see the error in Sentry. Head over to the new error in Seed.
 
-Again, there seem to be 3 rows printed out in the logs.
+![Handler error details in Seed](/assets/monitor-debug-errors/handler-error-details-in-seed.png)
 
-![Handler error log request in Seed](/assets/monitor-debug-errors/handler-error-log-request-in-seed.png)
-
-Click on the complete request to expand.
-
-![Handler error log detail request in Seed](/assets/monitor-debug-errors/handler-error-log-request-detail-in-seed.png)
-
-You should see an exception `Runtime.HandlerNotFound`, along with the stack trace. Also, note the message at the bottom `Unknown application error occurred`.
+You should see the error `Runtime.HandlerNotFound`, along with message `get.main is undefined or not exported`.
 
 And that about covers the main Lambda function errors. So the next time you see one of the above error messages, you'll know what's going on.
 

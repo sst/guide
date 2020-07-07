@@ -27,14 +27,20 @@ Let's start by adding some code to help us with that.
 <img class="code-marker" src="/assets/s.png" />Create a `libs/debug-lib.js` file and add the following to it.
 
 ``` javascript
-import AWS from "aws-sdk";
 import util from "util";
+import AWS from "aws-sdk";
+
+let logs;
 
 // Log AWS SDK calls
 AWS.config.logger = { log: debug };
 
-let logs;
-let timeoutTimer;
+export default function debug() {
+  logs.push({
+    date: new Date(),
+    string: util.format.apply(null, arguments),
+  });
+}
 
 export function init(event, context) {
   logs = [];
@@ -45,29 +51,11 @@ export function init(event, context) {
     pathParameters: event.pathParameters,
     queryStringParameters: event.queryStringParameters,
   });
-
-  // Start timeout timer
-  timeoutTimer = setTimeout(() => {
-    timeoutTimer && flush(new Error("Lambda will timeout in 100 ms"));
-  }, context.getRemainingTimeInMillis() - 100);
-}
-
-export function end() {
-  // Clear timeout timer
-  clearTimeout(timeoutTimer);
-  timeoutTimer = null;
 }
 
 export function flush(e) {
   logs.forEach(({ date, string }) => console.debug(date, string));
   console.error(e);
-}
-
-export default function debug() {
-  logs.push({
-    date: new Date(),
-    string: util.format.apply(null, arguments),
-  });
 }
 ```
 
@@ -88,14 +76,6 @@ We are doing a few things of note in this simple helper.
 
   We initialize our debugger by calling `init()`. We log the API request info, including the path parameters, query string parameters, and request body. We do so using our internal `debug()` method.
 
-- **Log Lambda timeouts**
-
-  If your code takes long to run and it reaches the timeout value for the Lambda function, the function will timeout. By default, this value is set to 6s. When this happens, we won't get a chance to handle it in our debugger. To get around this, we can find out how much time there is left in the current execution by calling `context.getRemainingTimeInMillis()`. This is an internal Lambda function. We then create a timer that will automatically print our log message 100ms before the Lambda times out.
-
-  Note, there could be false positives where the Lambda finishes executing within the last 100ms of the execution time. But that should be a very rare event.
-
-  Finally, we cancel this timer in the case where the Lambda function completed execution within the timeout.
-
 - **Log only on error**
 
   We log messages using our special `debug()` method. Debug messages logged using this method only get printed out when we call the `flush()` method. This allows us to log very detailed contextual information about what was being done leading up to the error. We can log:
@@ -110,9 +90,9 @@ We are doing a few things of note in this simple helper.
 So in our Lambda function code, if we want to log some debug information that only gets printed out if we have an error, we'll do the following:
 
 ``` javascript
-import { log } from "../libs/debug-lib";
+import debug from "../libs/debug-lib";
 
-log('This stores the message and prints to CloudWatch if Lambda function later throws an exception');
+debug('This stores the message and prints to CloudWatch if Lambda function later throws an exception');
 ```
 
 In contrast, if we always want to log to CloudWatch, we'll:
@@ -137,31 +117,33 @@ We'll use the debug lib that we added above to improve our error handling.
 import * as debug from "./debug-lib";
 
 export default function handler(lambda) {
-  return function (event, context) {
-    return Promise.resolve()
-      // Start debugger
-      .then(() => debug.init(event, context))
+  return async function (event, context) {
+    let body, statusCode;
+
+    // Start debugger
+    debug.init(event, context);
+
+    try {
       // Run the Lambda
-      .then(() => lambda(event, context))
-      // On success
-      .then((responseBody) => [200, responseBody])
-      // On failure
-      .catch((e) => {
-        // Print debug messages
-        debug.flush(e);
-        return [500, { error: e.message }];
-      })
-      // Return HTTP response
-      .then(([statusCode, body]) => ({
-        statusCode,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Credentials": true,
-        },
-        body: JSON.stringify(body),
-      }))
-      // Cleanup debugger
-      .finally(debug.end);
+      body = await lambda(event, context);
+      statusCode = 200;
+    } catch (e) {
+      // Print debug messages
+      debug.flush(e);
+
+      body = { error: e.message };
+      statusCode = 500;
+    }
+
+    // Return HTTP response
+    return {
+      statusCode,
+      body: JSON.stringify(body),
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true,
+      },
+    };
   };
 }
 ```
@@ -172,8 +154,7 @@ This should be fairly straightforward:
 2. We run our Lambda function.
 3. We format the success response.
 4. In the case of an error, we first write out our debug logs by calling `debug.flush(e)`. Where `e` is the error that caused our Lambda function to fail.
-5. We format our HTTP response.
-6. And finally, we clean up our debugger by calling `debug.end()`.
+5. We format and return our HTTP response.
 
 ### Using the Error Handler
 
@@ -216,9 +197,9 @@ Head over to the Seed console and hit **Promote to prod** once your changes are 
 
 The combination of our new error handler and Lambda logs will help us catch most of the errors. However, we can run into errors that don't make it to our Lambda functions. To debug these errors we'll need to look at the API Gateway logs. So let's go head and enable access logs for our API.
 
-From the dashboard for your app on Seed, select the **prod** stage.
+From the dashboard for your app on Seed, select the **Resources** tab.
 
-![Click prod stage in Seed dashboard](/assets/monitor-debug-errors/click-prod-stage-in-seed-dashboard.png)
+![Click Resources tab in Seed dashboard](/assets/monitor-debug-errors/click-resources-tab-in-seed-dashboard.png)
 
 Then hit **Enable Access Logs** for your API.
 
