@@ -22,7 +22,7 @@ And type in `STRIPE_SECRET_KEY` as the **Key** and the value should be the `STRI
 
 ![Add secret dev environment variable screenshot](/assets/part2/add-secret-dev-environment-variable.png)
 
-Next we need to configure our secrets for the `prod` stage. Head over the **prod** stage in your app **Settings**.
+Next we need to configure our secrets for the `prod` stage. Head over to the **prod** stage in your app **Settings**.
 
 ![Select prod stage in Settings screenshot](/assets/part2/select-prod-stage-in-settings.png)
 
