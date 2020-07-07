@@ -12,7 +12,7 @@ Click **Add an App** again, and select your Git provider. This time, select the 
 
 ![Select Add an App in Seed](/assets/best-practices/deploy-api-services-repo-to-seed/select-add-an-app-in-seed.png)
 
-After detection, let's select the **notes-api** service.
+Select the **notes-api** service from the list of services.
 
 ![Select Serverless service to add](/assets/best-practices/deploy-api-services-repo-to-seed/select-serverless-service-to-add.png)
 
@@ -22,7 +22,7 @@ Select **Copy Settings** tab, and select the resources app. Then hit **Add a New
 
 ![Set app settings from resources](/assets/best-practices/deploy-api-services-repo-to-seed/set-app-settings-from-resources.png)
 
-The API app has been created. Now, let's add the other services. Click **Pipeline**.
+The API app has been created. Now, let's add the other services. Head over to the **Pipeline** tab.
 
 ![Create an App in Seed](/assets/best-practices/deploy-api-services-repo-to-seed/create-an-app-in-seed.png)
 
@@ -30,7 +30,7 @@ Click **Add a service** to add the **billing-api** service at the `services/bill
 
 ![Added all services in Seed](/assets/best-practices/deploy-api-services-repo-to-seed/added-all-services-in-seed.png)
 
-Head over to the app settings and click on **Manage Deploy Phases**.
+Next, click on **Manage Deploy Phases**.
 
 ![Hit Manage Deploy Phases screenshot](/assets/best-practices/deploy-api-services-repo-to-seed/hit-manage-deploy-phases-screenshot.png)
 
@@ -46,7 +46,7 @@ Now let's make our first deployment.
 
 ![Show services are deploying in dev stage](/assets/best-practices/deploy-api-services-repo-to-seed/show-services-are-deploying-in-dev-stage.png)
 
-You can see the deployments are carried out according to the deploy phases specified.
+You can see the deployments were carried out according to the specified deploy phases.
 
 Just as before, promote **dev** to **prod**.
 

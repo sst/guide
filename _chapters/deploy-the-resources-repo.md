@@ -8,17 +8,9 @@ comments_id: deploy-the-resources-repo/1320
 
 First, add the resources repo on Seed. If you haven't yet, you can create a free account [here](https://console.seed.run/signup).
 
-Go in to your [Seed account](https://console.seed.run) and click **Add an App**, and select your Git provider.
-
-![Select Add an App in Seed](/assets/best-practices/deploy-resources-repo-to-seed/select-add-an-app-in-seed.png)
-
-After authenticating GitHub, search for the resources repo, and select it.
+Go in to your [Seed account](https://console.seed.run), add a new app, authenticate with GitHub, search for the resources repo, and select it.
 
 ![Search for Git repository](/assets/best-practices/deploy-resources-repo-to-seed/search-for-git-repository.png)
-
-Click **Select Repo**.
-
-![Select Git repository to add](/assets/best-practices/deploy-resources-repo-to-seed/select-git-repository-to-add.png)
 
 Seed will now automatically detect the Serverless services in the repo. After detection, select a service. Let's select the **auth** service. Then click **Add Service**.
 
@@ -64,11 +56,7 @@ Repeat the process and add the **uploads** service in `services/uploads`.
 
 ![Added all services in Seed](/assets/best-practices/deploy-resources-repo-to-seed/added-all-services-in-seed.png)
 
-Before we deploy, let's make sure the services will deploy in the desired order. Recall from the [Deploy a Serverless app with dependencies]({% link _chapters/deploy-a-serverless-app-with-dependencies.md %}) chapter that you can configure the phases by heading to the app settings.
-
-![Select app settings in Seed](/assets/best-practices/deploy-resources-repo-to-seed/select-app-settings-in-seed.png)
-
-Scroll down and select **Manage Deploy Phases**.
+Before we deploy, let's make sure the services will deploy in the desired order. Recall from the [Deploy a Serverless app with dependencies]({% link _chapters/deploy-a-serverless-app-with-dependencies.md %}) chapter. To do this click on **Manage Deploy Phases**.
 
 ![Hit Manage Deploy Phases screenshot](/assets/best-practices/deploy-resources-repo-to-seed/hit-manage-deploy-phases-screenshot.png)
 
@@ -106,13 +94,9 @@ Go back to the app dashboard, and hit **Promote** to deploy this to the **prod**
 
 You will see a list of changes in resources. Since this is the first time we are deploying to the `prod` stage, the change list shows all the resources that will be created. We'll take a look at this in detail later in the [Promoting to production]({% link _chapters/promoting-to-production.md %}) chapter.
 
-Click **Promote to Production**.
+Click **Promote to Production**. This will trigger the services to deploy in the same order we specified.
 
 ![Promote dev stage to prod stage](/assets/best-practices/deploy-resources-repo-to-seed/promote-dev-stage-to-prod-stage.png)
-
-This will trigger the services to deploy in the same order we specified.
-
-![Show services are deploying in prod stage](/assets/best-practices/deploy-resources-repo-to-seed/show-services-are-deploying-in-prod-stage.png)
 
 Now our resources have been deployed to both **dev** and **prod**.
 
