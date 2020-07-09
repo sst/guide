@@ -171,4 +171,6 @@ On the other hand, changes are going to happen less frequently in the **serverle
 
 So if you have a service that doesn't make sense to replicate in an ephemeral environment, we would suggest moving it to the repo with all the infrastructure services. This is what we have seen most teams do. And this setup scales well as your project and team grows.
 
+Note that, we build on this monorepo setup further by using [Lerna](https://lerna.js.org) and [Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) in our [Using Lerna and Yarn Workspaces with Serverless]({% link _chapters/using-lerna-and-yarn-workspaces-with-serverless.md %}) extra credit chapter.
+
 Now that we have figured out how to organize our application into repos, let's look at how we split our app into the various services. We'll start with creating a separate service for our DynamoDB tables.

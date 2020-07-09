@@ -388,6 +388,8 @@ extra-backend:
       url: /chapters/serverless-nodejs-starter.html
     - page: Package Lambdas with serverless-bundle
       url: /chapters/package-lambdas-with-serverless-bundle.html
+    - page: Using Lerna and Yarn Workspaces with Serverless
+      url: /chapters/using-lerna-and-yarn-workspaces-with-serverless.html
 
 extra-frontend:
   title: React
