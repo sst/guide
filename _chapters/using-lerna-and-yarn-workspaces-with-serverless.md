@@ -191,7 +191,7 @@ We want to ensure that only the services that have been updated get deployed. Th
 To implement the above, use the following algorithm in your CI:
 
 1. Run `lerna ls --since ${prevCommitSHA} -all` to list all packages that have changed since the last successful deployment. If this list includes one of the services, then deploy it.
-2. Run `git diff --name-only ${prevCommitSHA} ${currentCommitSHA}` to get a list of all the updated files. If any of them don't belong to your Yarn Workspaces (listed in the root `package.json`), deploy all the services.
+2. Run `git diff --name-only ${prevCommitSHA} ${currentCommitSHA}` to get a list of all the updated files. If they don't belong to any of your Lerna packages (`lerna ls -all`), deploy all the services.
 3. Otherwise skip the deployment.
 
 
