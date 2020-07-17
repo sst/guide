@@ -27,7 +27,7 @@ STRIPE_SECRET_KEY=STRIPE_TEST_SECRET_KEY
 
 Make sure to replace the `STRIPE_TEST_SECRET_KEY` with the **Secret key** from the [Setup a Stripe account]({% link _chapters/setup-a-stripe-account.md %}) chapter.
 
-We are using the [serverless-dotenv-plugin](https://github.com/colynb/serverless-dotenv-plugin) to load these as an environment variable when our Lambda function runs locally. This allows us to reference them in our `serverless.yml`. We will not be commiting the `.env` file to Git as we are only going to use these locally. When we look at automating deployments, we'll be adding our secrets to the CI, so they'll be made available through there instead.
+We are using the [serverless-dotenv-plugin](https://github.com/colynb/serverless-dotenv-plugin) to load these as an environment variable when our Lambda function runs locally. This allows us to reference them in our `serverless.yml`. We will not be committing the `.env` file to Git as we are only going to use these locally. When we look at automating deployments, we'll be adding our secrets to the CI, so they'll be made available through there instead.
 
 Next, let's add a reference to these.
 
