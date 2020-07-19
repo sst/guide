@@ -12,7 +12,7 @@ In this section of the guide we'll be covering the best practices for developing
 
 Serverless Stack was launched back in March 2017. Since then thousands of folks have used the guide to build their first full-stack Serverless app. Many of you have used this as a starting point to build really large applications. Applications that are made up of scores of services worked on by a team of developers.
 
-However, the challenges that teams face while developing large scale Serverless applications are very different from the one an individual faces while building his first app. You've to deal with architectural design decisions and questions that can be hard to answer if you haven't built and managed a large scale Serverless app before. Questions like:
+However, the challenges that teams face while developing large scale Serverless applications are very different from the one an individual faces while building his or her first app. You've to deal with architectural design decisions and questions that can be hard to answer if you haven't built and managed a large scale Serverless app before. Questions like:
 
 - How should my project be structured when I have dozens of interdependent services?
 - How should I manage my environments?
