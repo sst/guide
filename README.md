@@ -119,3 +119,4 @@ Thanks to these folks for their contributions to the content of Serverless Stack
 [Discourse]: https://discourse.serverless-stack.com
 [Contributing]: CONTRIBUTING.md
 [PR]: ../../compare
+
