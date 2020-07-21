@@ -3,7 +3,7 @@ layout: post
 title: Add Support for ES6/ES7 JavaScript
 date: 2016-12-29 12:00:00
 lang: pt
-ref: add-support-for-es6-es7-javascript
+ref: add-support-for-es6-and-typescript
 redirect_from: /chapters/add-support-for-es6-javascript.html
 description: O AWS Lambda suporta até o Node.js v8.10 e para usarmos as funções import/exports no nosso projeto, nós vamos precisar do Babel e Webpack 4 para transpilar o código. Podemos fazer isso utilizando o plugin serverless-webpack. Vamos usar o serverless-nodejs-starter para começar.
 context: true

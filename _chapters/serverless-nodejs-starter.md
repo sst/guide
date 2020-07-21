@@ -2,7 +2,7 @@
 layout: post
 title: Serverless Node.js Starter
 redirect_from: /chapters/serverless-es7-service.html
-description: A Serverless Node.js starter project that adds support for ES6/ES7 async/await methods, import/export, and unit tests to your Serverless Framework project.
+description: A Serverless Node.js starter project that adds support for ES6 and TypeScript, linting, and unit tests to your Serverless Framework project.
 date: 2018-04-12 00:00:00
 comments_id: serverless-node-js-starter/22
 ---
@@ -11,8 +11,8 @@ Based on what we have gone through in this guide, it makes sense that we have a 
 
 [Serverless Node.js Starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter) uses the [serverless-bundle](https://github.com/AnomalyInnovations/serverless-bundle) plugin (an extension of the [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) plugin) and the [serverless-offline](https://github.com/dherault/serverless-offline) plugin. It supports:
 
-- **Generating optimized Lambda packages with Webpack**
-- **Use ES7 syntax in your handler functions**
+- **Using ES6 or TypeScript in your Lambda function code**
+- **Generating optimized packages with Webpack**
 - **Run API Gateway locally**
   - Use `serverless offline start`
 - **Support for unit tests**

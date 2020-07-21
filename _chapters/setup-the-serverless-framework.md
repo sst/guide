@@ -63,4 +63,35 @@ $ npm install uuid@7.0.3 --save
 - **aws-sdk** allows us to talk to the various AWS services.
 - **uuid** generates unique ids. We need this for storing things to DynamoDB.
 
-The starter project that we are using allows us to use the version of JavaScript that we'll be using in our frontend app later. Let's look at exactly how it does this.
+### Update Service Name
+
+Let's change the name of our service from the one in the starter.
+
+<img class="code-marker" src="/assets/s.png" />Open `serverless.yml` and replace the default with the following.
+
+``` yaml
+service: notes-app-api
+
+# Create an optimized package for our functions
+package:
+  individually: true
+
+plugins:
+  - serverless-bundle # Package our functions with Webpack
+  - serverless-offline
+  - serverless-dotenv-plugin # Load .env as environment variables
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: prod
+  region: us-east-1
+```
+
+The `service` name is pretty important. We are calling our service the `notes-app-api`. Serverless Framework creates your stack on AWS using this as the name. This means that if you change the name and deploy your project, it will create a **completely new project**!
+
+You'll notice the plugins that we've included — `serverless-bundle`, `serverless-offline`, and `serverless-dotenv-plugin`. The [serverless-offline](https://github.com/dherault/serverless-offline) plugin is helpful for local development. While the [serverless-dotenv-plugin](https://github.com/colynb/serverless-dotenv-plugin) will be used later to load the `.env` files as Lambda environment variables.
+
+On the other hand, we use the [serverless-bundle](https://github.com/AnomalyInnovations/serverless-bundle) plugin to allow us to write our Lambda functions using a flavor of JavaScript that's similar to the one we'll be using in our frontend React app.
+
+Let's look at this in detail.

@@ -48,8 +48,8 @@ setup-backend:
     - page: Set up the Serverless Framework
       url: /chapters/setup-the-serverless-framework.html
       subchapters:
-        - page: Add support for ES6/ES7 JavaScript
-          url: /chapters/add-support-for-es6-es7-javascript.html
+        - page: Add support for ES6 and TypeScript
+          url: /chapters/add-support-for-es6-and-typescript.html
     - page: Initialize the backend repo
       url: /chapters/initialize-the-backend-repo.html
 

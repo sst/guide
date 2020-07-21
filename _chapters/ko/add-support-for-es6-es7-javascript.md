@@ -5,7 +5,7 @@ date: 2016-12-29 12:00:00
 redirect_from: /chapters/add-support-for-es6-javascript.html
 description: AWS Lambda는 Node.js v8.10을 지원하므로 Serverless Framework 프로젝트에서 ES 가져 오기/내보내기를 사용하기 위해 Babel과 Webpack 4를 사용하여 코드를 추출해야합니다. 프로젝트에 serverless-webpack 플러그인을 사용하면됩니다. 이를 위해 serverless-nodejs-startter를 사용합니다.
 lang: ko
-ref: add-support-for-es6-es7-javascript
+ref: add-support-for-es6-and-typescript
 context: true
 code: backend
 comments_id: add-support-for-es6-es7-javascript/128
