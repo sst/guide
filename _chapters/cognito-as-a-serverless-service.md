@@ -185,7 +185,7 @@ Where `my_s3_bucket` is the name of the bucket. We are going to use the generate
 'Fn::ImportValue': ${self:custom.stage}-ExtAttachmentsBucketArn
 ```
 
-Again, all of our references are based on the stage we are deploying to. You'll notice that we don't have the IAM role here that allows access to our APIs. We are going to be doing that along side our API services.
+Again, all of our references are based on the stage we are deploying to. You'll notice that we don't have the IAM role here that allows access to our APIs. We are going to be doing that alongside our API services.
 
 And finally, you'll notice that we are outputting:
 - A couple of things in this service. We need the Ids of the Cognito resources created in our frontend. But we don't have to export any cross-stack values.

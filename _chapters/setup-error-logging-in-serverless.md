@@ -189,7 +189,7 @@ $ git push
 
 And promote the changes to production.
 
-Head over to the Seed console and hit **Promote to prod** once your changes are deployed to to dev.
+Head over to the Seed console and hit **Promote to prod** once your changes are deployed to dev.
 
 ![Promote error logging to prod in Seed](/assets/monitor-debug-errors/promote-error-logging-to-prod-in-seed.png)
 

@@ -175,7 +175,7 @@ You can read about [useEffect in detail here](https://reactjs.org/docs/hooks-eff
 
 ### React Hooks Mental Model
 
-So when you are thinking about Function components with Hooks, they are very simple in that they are rerun every time. As you are looking at your code, imagine that it is run in order every single time. And since there is no local state for your functions, the values available are only what React has stored in it's state.
+So when you are thinking about Function components with Hooks, they are very simple in that they are rerun every time. As you are looking at your code, imagine that it is run in order every single time. And since there is no local state for your functions, the values available are only what React has stored in its state.
 
 As opposed to Class components, where specific methods in your class are called upon render. Additionally, you might have stored some state locally in a state variable. This means that as you are debugging your code, you have to keep in mind what the current value of a local state variable is.
 
