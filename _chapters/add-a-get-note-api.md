@@ -104,3 +104,15 @@ The response should look similar to this.
 ```
 
 Next, let's create an API to list all the notes a user has.
+
+---
+
+#### Common Issues
+
+- No response
+
+  If you get no response when you invoke your function, check if you are in the base directory and not inside the /libs directory. If so, run this to move up a directory:
+
+``` bash
+$ cd ..
+```
