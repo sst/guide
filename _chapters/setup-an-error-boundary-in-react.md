@@ -5,8 +5,8 @@ date: 2020-04-03 00:00:00
 lang: en
 description: In this chapter we look at how to handle unexpected errors in our React app using an Error Boundary component. It lets us catch any errors, log it to Sentry, and show a fallback UI.
 code: frontend_full
-comments_id: 
-ref: setup-an-error-boundary-in-react/1732
+comments_id: setup-an-error-boundary-in-react/1732
+ref: setup-an-error-boundary-in-react
 ---
 
 In the previous chapter we looked at how to [report API errors to Sentry in our React app]({% link _chapters/report-api-errors-in-react.md %}). Now let's report all those unexpected errors that might happen using a [React Error Boundary](https://reactjs.org/docs/error-boundaries.html).
