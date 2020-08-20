@@ -22,6 +22,8 @@ Let's start by quickly looking at the technical specifications of AWS Lambda. La
 - Ruby 2.5
 - Rust
 
+Note that, [.NET Core 2.2 and 3.0 are supported through custom runtimes](https://aws.amazon.com/blogs/developer/announcing-amazon-lambda-runtimesupport/).
+
 Each function runs inside a container with a 64-bit Amazon Linux AMI. And the execution environment has:
 
 - Memory: 128MB - 3008MB, in 64 MB increments
