@@ -55,6 +55,8 @@ We'll be needing these later in our frontend and when we test our APIs.
 
 ![Dev build stack output screenshot](/assets/part2/dev-build-stack-output.png)
 
+If you don't see the above info, expand the deploy step in the build log.
+
 Now head over to the app home page. You'll notice that we are ready to promote to production.
 
 We have a manual promotion step so that you get a chance to review the changes and ensure that you are ready to push to production.
