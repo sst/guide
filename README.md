@@ -92,8 +92,8 @@ We are looking for a better way to generate the PDF (and other eBook) formats. I
 
 ## Sponsors
 
-<a target="_blank" href="https://www.datadoghq.com/dg/monitor/serverless-ts/?utm_source=Advertisement&utm_medium=Advertisement&utm_campaign=ServerlessStack-DisplayTshirt">
-  <img height="50" alt="Datadog" src="https://raw.githubusercontent.com/AnomalyInnovations/serverless-stack-com/master/assets/sponsors/datadog.png" />
+<a target="_blank" href="https://epsagon.com/serverless-stack/?utm_source=Advertisement&utm_medium=cpm&utm_campaign=ServerlessStack">
+  <img height="50" alt="Epsagon" src="https://raw.githubusercontent.com/AnomalyInnovations/serverless-stack-com/master/assets/sponsors/epsagon.png" />
 </a>
 
 [**Sponsor Serverless Stack on GitHub**](https://github.com/sponsors/jayair) if you've found this guide useful or would like to be an official supporter. [A big thanks to our supporters](https://serverless-stack.com/sponsors.html)!
