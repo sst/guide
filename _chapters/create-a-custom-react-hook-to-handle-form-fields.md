@@ -49,7 +49,7 @@ Creating a custom hook is amazingly simple. In fact, we did this back when we cr
 
 1. A custom React Hook starts with the word `use` in its name. So ours is called `useFormFields`.
 
-2. Our Hook takes the initial state of our form fields as an object and saves it as a state variable called `fields`. The initial state in our case is a an object where the _keys_ are the ids of the form fields and the _values_ are what the user enters.
+2. Our Hook takes the initial state of our form fields as an object and saves it as a state variable called `fields`. The initial state in our case is an object where the _keys_ are the ids of the form fields and the _values_ are what the user enters.
 
 3. So our hook returns an array with `fields` and a callback function that sets the new state based on the event object. The callback function takes the event object and gets the form field id from `event.target.id` and the value from `event.target.value`. In the case of our form the elements, the `event.target.id` comes from the `controlId` thats set in the `FormGroup` element:
 
