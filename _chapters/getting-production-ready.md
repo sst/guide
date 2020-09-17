@@ -30,4 +30,38 @@ Over the next few chapters we will look at how to get your app ready for product
 
 The goal of the next few sections is to make sure that you have a setup that you can easily replicate and use for your future projects. This is almost exactly what we and a few of our readers have been using.
 
-Let's get started by first converting our backend infrastructure into code.
+### Update the serverless.yml
+
+In the next few chapters we are going to configure our various infrastructure pieces through our `serverless.yml`. Note that, since we had previously created our resources using the console, we will not be able to configure them through code. To do this, we'll create a new project.
+
+Serverless Framework uses the `service` name to identify projects. Since we are creating a new project we want to ensure that we use a different name from the original. Now we could have simply overwritten the existing project but the resources were previously created by hand and will conflict when we try to create them through code.
+
+<img class="code-marker" src="/assets/s.png" />Open the `serverless.yml` and find the following line:
+
+``` yml
+service: notes-app-api
+```
+
+<img class="code-marker" src="/assets/s.png" />And replace it with this:
+
+``` yml
+service: notes-app-2-api
+```
+
+<img class="code-marker" src="/assets/s.png" />Also, find this line in the `serverless.yml`:
+
+``` yml
+  stage: prod
+``` 
+
+<img class="code-marker" src="/assets/s.png" />And replace it with:
+
+``` yml
+  stage: dev
+```
+
+We are defaulting the stage to `dev` instead of `prod`. This will become clear later when we create multiple environments.
+
+Note that, we are going to be creating new versions of our resources (DynamoDB, Cognito, etc.). Instead of using the ones that we created in the previous sections. This is because we want to define and create them programmatically. You can remove the resources we previously created. But for the purpose of this guide, we are going to leave it as is. In case you want to refer back to it at some point.
+
+Let's get started by getting a quick feel for how _infrastructure as code_ works.

@@ -196,6 +196,10 @@ deploy-backend-prod:
     - page: What is Infrastructure as Code?
       url: /chapters/what-is-infrastructure-as-code.html
       subchapters:
+        - page: What is AWS CDK?
+          url: /chapters/what-is-aws-cdk.html
+        - page: Using AWS CDK with Serverless Framework
+          url: /chapters/using-aws-cdk-with-serverless-framework.html
         - page: Configure DynamoDB in Serverless
           url: /chapters/configure-dynamodb-in-serverless.html
         - page: Configure S3 in Serverless
