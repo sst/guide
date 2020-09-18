@@ -203,8 +203,8 @@ deploy-backend-prod:
     - page: Building a CDK app with SST
       url: /chapters/building-a-cdk-app-with-sst.html
       subchapters:
-        - page: Configure DynamoDB in Serverless
-          url: /chapters/configure-dynamodb-in-serverless.html
+        - page: Configure DynamoDB in CDK
+          url: /chapters/configure-dynamodb-in-cdk.html
         - page: Configure S3 in Serverless
           url: /chapters/configure-s3-in-serverless.html
         - page: Configure Cognito User Pool in Serverless

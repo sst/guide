@@ -1,37 +1,49 @@
 ---
 layout: post
-title: Configure DynamoDB in Serverless
+title: Configure DynamoDB in CDK
 date: 2018-02-27 00:00:00
 lang: en
-description: We can define our DynamoDB table using the Infrastructure as Code pattern by using CloudFormation in our serverless.yml. We are going to define the AttributeDefinitions, KeySchema, and ProvisionedThroughput.
-ref: configure-dynamodb-in-serverless
-comments_id: configure-dynamodb-in-serverless/162
+redirect_from: /chapters/configure-dynamodb-in-serverless.html
+description: 
+ref: configure-dynamodb-in-cdk
+comments_id: 
 ---
 
-We are now going to start creating our resources through our `serverless.yml`. Starting with DynamoDB.
+We are now going to start creating our resources using CDK. Starting with DynamoDB.
 
-### Create the Resource
+### Create a Stack
 
-{%change%} Add the following to `resources/dynamodb-table.yml`.
+{%change%} Add the following to `infrastructure/lib/DynamoDBStack.js`.
 
-``` yml
-Resources:
-  NotesTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      TableName: ${self:custom.tableName}
-      AttributeDefinitions:
-        - AttributeName: userId
-          AttributeType: S
-        - AttributeName: noteId
-          AttributeType: S
-      KeySchema:
-        - AttributeName: userId
-          KeyType: HASH
-        - AttributeName: noteId
-          KeyType: RANGE
-      # Set the capacity to auto-scale
-      BillingMode: PAY_PER_REQUEST
+``` javascript
+import { CfnOutput } from '@aws-cdk/core';
+import * as dynamodb from '@aws-cdk/aws-dynamodb';
+import * as sst from "@serverless-stack/resources";
+
+export default class DynamoDBStack extends sst.Stack {
+
+  constructor(scope, id, props) {
+    super(scope, id, props);
+
+    const app = this.node.root;
+
+    const table = new dynamodb.Table(this, app.logicalPrefixedName("table"), {
+      partitionKey: { name: 'userId', type: dynamodb.AttributeType.STRING },
+      sortKey: { name: 'noteId', type: dynamodb.AttributeType.STRING },
+      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+    });
+
+    // Output values
+    new CfnOutput(this, 'tableName', {
+      exportName: app.logicalPrefixedName("TableName"),
+      value: table.tableName,
+    });
+    new CfnOutput(this, 'tableArn', {
+      exportName: app.logicalPrefixedName("TableArn"),
+      value: table.tableArn,
+    });
+  }
+}
 ```
 
 Let's quickly go over what we are doing here.
