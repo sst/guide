@@ -200,6 +200,9 @@ deploy-backend-prod:
           url: /chapters/what-is-aws-cdk.html
         - page: Using AWS CDK with Serverless Framework
           url: /chapters/using-aws-cdk-with-serverless-framework.html
+    - page: Building a CDK app with SST
+      url: /chapters/building-a-cdk-app-with-sst.html
+      subchapters:
         - page: Configure DynamoDB in Serverless
           url: /chapters/configure-dynamodb-in-serverless.html
         - page: Configure S3 in Serverless
