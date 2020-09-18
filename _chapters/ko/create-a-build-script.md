@@ -13,7 +13,7 @@ ref: create-a-build-script
 
 ### Netlify 빌드 스크립트 추가
 
-<img class="code-marker" src="/assets/s.png" />프로젝트 루트에  `netlify.toml` 파일을 생성 후 다음 내용을 추가합니다.
+{%change%} 프로젝트 루트에  `netlify.toml` 파일을 생성 후 다음 내용을 추가합니다.
 
 ``` toml
 # Global settings applied to the whole site.
@@ -56,7 +56,7 @@ ref: create-a-build-script
 
 튜토리얼의 첫 번째 파트와 마찬가지로 앱의 경로가 루트가 아닌 경우, 이에 대한 요청을 처리해야합니다. 프론트엔드는 단일 페이지 앱이며 라우팅은 클라이언트측에서 처리됩니다. 우리는 Netlify에게 요청을 항상 우리의`index.html`에 리다이렉트시키고 200 상태 코드를 리턴 할 필요가 있습니다.
 
-<img class="code-marker" src="/assets/s.png" />이를 위해, `netlify.toml` 아래에 리디렉션 규칙을 추가합니다.:
+{%change%} 이를 위해, `netlify.toml` 아래에 리디렉션 규칙을 추가합니다.:
 
 ``` toml
 # Always redirect any request to our index.html
@@ -72,7 +72,7 @@ ref: create-a-build-script
 애플리케이션을 Netlify에 배포하기 위해 우리는`package.json`의 빌드 명령어를 수정해야 합니다.
 
 
-<img class="code-marker" src="/assets/s.png" />`package.json`에 있는`scripts` 블록을 이것으로 바꾸십시오.
+{%change%} `package.json`에 있는`scripts` 블록을 이것으로 바꾸십시오.
 
 ``` coffee
 "scripts": {
@@ -87,7 +87,7 @@ ref: create-a-build-script
 
 ### 변경 사항 커밋 
 
-<img class="code-marker" src="/assets/s.png" />Git에 빠르게 커밋합니다.
+{%change%} Git에 빠르게 커밋합니다.
 
 ``` bash
 $ git add .
@@ -96,7 +96,7 @@ $ git commit -m "Adding a Netlify build script"
 
 ### 변경 사항 푸시 
 
-<img class="code-marker" src="/assets/s.png" />우리는 프로젝트에 많은 변경들을 반영했습니다. 이제 GitHub으로 이동해 봅시다.
+{%change%} 우리는 프로젝트에 많은 변경들을 반영했습니다. 이제 GitHub으로 이동해 봅시다.
 
 ``` bash
 $ git push

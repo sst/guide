@@ -13,7 +13,7 @@ Before we can add our project to [Netlify](https://www.netlify.com) we just need
 
 ### Add the Netlify Build Script
 
-<img class="code-marker" src="/assets/s.png" />Start by adding the following to a file called `netlify.toml` to your project root.
+{%change%} Start by adding the following to a file called `netlify.toml` to your project root.
 
 ``` toml
 # Global settings applied to the whole site.
@@ -56,7 +56,7 @@ The production context labelled, `context.production` is the only one where we s
 
 Just as in the first part of the tutorial, we'll need to handle requests to any non-root paths of our app. Our frontend is a single-page app and the routing is handled on the client side. We need to tell Netlify to always redirect any request to our `index.html` and return the 200 status code for it.
 
-<img class="code-marker" src="/assets/s.png" />To do this, add a redirects rule at the bottom of `netlify.toml`:
+{%change%} To do this, add a redirects rule at the bottom of `netlify.toml`:
 
 ``` toml
 # Always redirect any request to our index.html
@@ -69,7 +69,7 @@ Just as in the first part of the tutorial, we'll need to handle requests to any 
 
 ### Commit the Changes
 
-<img class="code-marker" src="/assets/s.png" />Let's quickly commit these to Git.
+{%change%} Let's quickly commit these to Git.
 
 ``` bash
 $ git add .
@@ -78,7 +78,7 @@ $ git commit -m "Adding a Netlify build script"
 
 ### Push the Changes
 
-<img class="code-marker" src="/assets/s.png" />We are pretty much done making changes to our project. So let's go ahead and push them to GitHub.
+{%change%} We are pretty much done making changes to our project. So let's go ahead and push them to GitHub.
 
 ``` bash
 $ git push

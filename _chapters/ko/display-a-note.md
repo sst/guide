@@ -18,7 +18,7 @@ ref: display-a-note
 
 노트 불러오기 화면의 경로를 추가 합니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/Routes.js` 파일의 `/notes/new` 경로 아래에 다음 행을 추가하십시오. 우리는 [세션을 상태에 추가하기]({% link _chapters/add-the-session-to-the-state.md %}) 챕터에서 작성한 `AppliedRoute` 컴포넌트를 사용하고 있습니다.
+{%change%} `src/Routes.js` 파일의 `/notes/new` 경로 아래에 다음 행을 추가하십시오. 우리는 [세션을 상태에 추가하기]({% link _chapters/add-the-session-to-the-state.md %}) 챕터에서 작성한 `AppliedRoute` 컴포넌트를 사용하고 있습니다.
 
 ``` coffee
 <AppliedRoute path="/notes/:id" exact component={Notes} props={childProps} />
@@ -28,7 +28,7 @@ URL에서 노트 ID를 추출하기 위해 패턴 매칭을 이용하는 부분�
 
 루트 경로 `/notes/:id`를 사용함으로써 우리는 라우터에게 해당되는 경로에 컴포넌트인 `Notes`를 설정합니다. 하지만 이것은 `/notes/new` 경로의 `new`의 `id`와 매칭 시킨 결과도 가져올 수 있습니다. 따라서 이를 방지하기 위해 `/notes/new` 경로의 뒤에 놓입니다.
 
-<img class="code-marker" src="/assets/s.png" />그리고 헤더에 컴포넌트를 추가합니다.
+{%change%} 그리고 헤더에 컴포넌트를 추가합니다.
 
 ``` javascript
 import Notes from "./containers/Notes";
@@ -38,7 +38,7 @@ import Notes from "./containers/Notes";
 
 ### 컨테이너 추가하기
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Notes.js` 파일을 만들고 아래 내용을 추가합니다.
+{%change%} `src/containers/Notes.js` 파일을 만들고 아래 내용을 추가합니다.
 
 ``` coffee
 import React, { Component } from "react";

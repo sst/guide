@@ -25,7 +25,7 @@ Now we are going to do something similar for our sign up page and it'll have a f
 
 ### Creating a Custom React Hook
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `src/libs/hooksLib.js`.
+{%change%} Add the following to `src/libs/hooksLib.js`.
 
 ``` javascript
 import { useState } from "react";
@@ -71,7 +71,7 @@ And that's it! We can now use this in our Login component.
 
 ### Using Our Custom Hook
 
-<img class="code-marker" src="/assets/s.png" />Replace our `src/containers/Login.js` with the following:
+{%change%} Replace our `src/containers/Login.js` with the following:
 
 ``` coffee
 import React, { useState } from "react";

@@ -14,7 +14,7 @@ ref: configure-s3-in-serverless
 ### 리소스 만들기
 
 
-<img class="code-marker" src="/assets/s.png" />`resources/s3-bucket.yml` 파일을 만들고 아래 내용을 추가합니다.
+{%change%} `resources/s3-bucket.yml` 파일을 만들고 아래 내용을 추가합니다.
 
 ``` yml
 Resources:
@@ -50,7 +50,7 @@ S3 버킷(DynamoDB 테이블과 달리)은 전역적으로 이름이 지정됩�
 
 ### 리소스 추가
 
-<img class="code-marker" src="/assets/s.png" />`serverless.yml`에서 자원을 참조합니다. `resources :` 블럭을 다음으로 대체하십시오.
+{%change%} `serverless.yml`에서 자원을 참조합니다. `resources :` 블럭을 다음으로 대체하십시오.
 
 ``` yml
 # Create our resources with separate CloudFormation templates
@@ -65,7 +65,7 @@ resources:
 
 ### 코드 커밋
 
-<img class="code-marker" src="/assets/s.png" />지금까지 변경한 내용을 커밋합니다.
+{%change%} 지금까지 변경한 내용을 커밋합니다.
 
 ``` bash
 $ git add .

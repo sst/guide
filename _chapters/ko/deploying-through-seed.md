@@ -13,7 +13,7 @@ ref: deploying-through-seed
 
 Git을 통해 해보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />프로젝트 루트로 돌아가서 다음을 실행합니다.
+{%change%} 프로젝트 루트로 돌아가서 다음을 실행합니다.
 
 ``` bash
 $ npm version patch
@@ -21,7 +21,7 @@ $ npm version patch
 
 이것은 단순히 프로젝트의 NPM 버전을 업데이트하는 것입니다. 프로젝트의 변경 사항을 추적하는 좋은 방법입니다. 그리고 그것은 Seed를 통한 자동 배포를 위한 Git 커밋을 빠르게 만들어줍니다.
 
-<img class="code-marker" src="/assets/s.png" />변경 사항을 Push합니다.
+{%change%} 변경 사항을 Push합니다.
 
 ``` bash
 $ git push

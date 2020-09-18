@@ -15,7 +15,7 @@ AWS Amplify는 백엔드에 쉽게 연결할 수 있도록 몇 가지 간단한 
 
 ### AWS Amplify 설치하기
 
-<img class="code-marker" src="/assets/s.png" />작업 디렉토리에서 다음 명령을 실행합니다.
+{%change%} 작업 디렉토리에서 다음 명령을 실행합니다.
 
 ``` bash
 $ npm install aws-amplify --save
@@ -27,7 +27,7 @@ NPM 패키지를 설치하면 `package.json`에 의존성이 추가됩니다.
 
 먼저 우리가 만든 모든 리소스를 참조 할 수 있도록 앱의 구성 파일을 만들어 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/config.js` 파일을 만들고 다음 내용을 추가합니다. 
+{%change%} `src/config.js` 파일을 만들고 다음 내용을 추가합니다. 
 
 ``` coffee
 export default {
@@ -61,7 +61,7 @@ export default {
 
 다음으로 AWS Amplify를 설정합니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/index.js`의 헤더에 다음 내용을 추가하여 import합니다.
+{%change%} `src/index.js`의 헤더에 다음 내용을 추가하여 import합니다.
 
 ``` coffee
 import Amplify from "aws-amplify";
@@ -69,13 +69,13 @@ import Amplify from "aws-amplify";
 
 그리고 위에서 만든 config를 불러옵니다.
 
-<img class="code-marker" src="/assets/s.png" />역시 `src/index.js` 헤더에 다음 내용을 추가합니다.
+{%change%} 역시 `src/index.js` 헤더에 다음 내용을 추가합니다.
 
 ``` coffee
 import config from "./config";
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 AWS Amplify를 초기화합니다. `src/index.js`의`ReactDOM.render` 행 위에 다음을 추가하십시오.
+{%change%} 그리고 AWS Amplify를 초기화합니다. `src/index.js`의`ReactDOM.render` 행 위에 다음을 추가하십시오.
 
 ``` coffee
 Amplify.configure({

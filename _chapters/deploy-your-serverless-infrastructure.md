@@ -78,7 +78,7 @@ Next, we will look at how we can automate our deployments. We want to set it up 
 
 ### Commit the Changes
 
-<img class="code-marker" src="/assets/s.png" />Let's commit our code so far and push it to GitHub.
+{%change%} Let's commit our code so far and push it to GitHub.
 
 ``` bash
 $ git add .

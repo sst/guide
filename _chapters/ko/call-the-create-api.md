@@ -13,13 +13,13 @@ comments_id: call-the-create-api/124
 
 AWS Amplify가 가지고있는`API` 모듈을 사용할 필요가 있습니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/NewNote.js` 헤더에 다음을 추가하여 API 모듈을 포함 시키십시오.
+{%change%} `src/containers/NewNote.js` 헤더에 다음을 추가하여 API 모듈을 포함 시키십시오.
 
 ``` javascript
 import { API } from "aws-amplify";
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 `handleSubmit` 함수를 아래와 같이 바꾸십시오.
+{%change%} 그리고 `handleSubmit` 함수를 아래와 같이 바꾸십시오.
 
 ``` javascript
 handleSubmit = async event => {

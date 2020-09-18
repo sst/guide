@@ -12,7 +12,7 @@ If you recall from the first part of this tutorial, we use the Cognito Identity 
 
 ### Create the Resource
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `resources/cognito-identity-pool.yml`.
+{%change%} Add the following to `resources/cognito-identity-pool.yml`.
 
 ``` yml
 Resources:
@@ -131,7 +131,7 @@ Let's quickly go over the various sections of this configuration:
 
 ### Add the Resource
 
-<img class="code-marker" src="/assets/s.png" />Let's reference the resource in our `serverless.yml`. Replace your `resources:` block with the following.
+{%change%} Let's reference the resource in our `serverless.yml`. Replace your `resources:` block with the following.
 
 ``` yml
 # Create our resources with separate CloudFormation templates

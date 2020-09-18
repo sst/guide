@@ -12,7 +12,7 @@ Now that we have DynamoDB configured, let's look at how we can configure the S3 
 
 ### Create the Resource
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `resources/s3-bucket.yml`.
+{%change%} Add the following to `resources/s3-bucket.yml`.
 
 ``` yml
 Resources:
@@ -48,7 +48,7 @@ S3 buckets (unlike DynamoDB tables) are globally named, so it is not really poss
 
 ### Add the Resource
 
-<img class="code-marker" src="/assets/s.png" />Let's reference the resource in our `serverless.yml`. Replace your `resources:` block with the following.
+{%change%} Let's reference the resource in our `serverless.yml`. Replace your `resources:` block with the following.
 
 ``` yml
 # Create our resources with separate CloudFormation templates

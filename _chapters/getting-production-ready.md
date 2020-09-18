@@ -36,25 +36,25 @@ In the next few chapters we are going to configure our various infrastructure pi
 
 Serverless Framework uses the `service` name to identify projects. Since we are creating a new project we want to ensure that we use a different name from the original. Now we could have simply overwritten the existing project but the resources were previously created by hand and will conflict when we try to create them through code.
 
-<img class="code-marker" src="/assets/s.png" />Open the `serverless.yml` and find the following line:
+{%change%} Open the `serverless.yml` and find the following line:
 
 ``` yml
 service: notes-app-api
 ```
 
-<img class="code-marker" src="/assets/s.png" />And replace it with this:
+{%change%} And replace it with this:
 
 ``` yml
 service: notes-app-2-api
 ```
 
-<img class="code-marker" src="/assets/s.png" />Also, find this line in the `serverless.yml`:
+{%change%} Also, find this line in the `serverless.yml`:
 
 ``` yml
   stage: prod
 ``` 
 
-<img class="code-marker" src="/assets/s.png" />And replace it with:
+{%change%} And replace it with:
 
 ``` yml
   stage: dev

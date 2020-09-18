@@ -18,7 +18,7 @@ AWS CLI는 Python 2 버전 2.6.5+ 또는 Python 3 버전 3.3+ 와 [Pip](https://
 - [Python 인스톨하기](https://www.python.org/downloads/)
 - [Pip 인스톨하기](https://pip.pypa.io/en/stable/installing/)
 
-<img class="code-marker" src="/assets/s.png" />이제 Pip를 실행서 AWS CLI (Linux, macOS, 또는 Unix)를 설치할 수 있습니다:
+{%change%} 이제 Pip를 실행서 AWS CLI (Linux, macOS, 또는 Unix)를 설치할 수 있습니다:
 
 ``` bash
 $ sudo pip install awscli
@@ -41,7 +41,7 @@ $ brew install awscli
 - 액세스 키 ID **AKIAIOSFODNN7EXAMPLE**
 - 보안 액세스 키 **wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY**
 
-<img class="code-marker" src="/assets/s.png" />비밀 키 ID와 액세스 키를 설정하기 위해 다음을 실행하면됩니다.
+{%change%} 비밀 키 ID와 액세스 키를 설정하기 위해 다음을 실행하면됩니다.
 
 ``` bash
 $ aws configure

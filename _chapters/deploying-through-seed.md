@@ -12,7 +12,7 @@ Now, we are ready to make our first deployment. You can either Git push a new ch
 
 Let's do it through Git.
 
-<img class="code-marker" src="/assets/s.png" />Go back to your project root and run the following.
+{%change%} Go back to your project root and run the following.
 
 ``` bash
 $ npm version patch
@@ -20,7 +20,7 @@ $ npm version patch
 
 This is simply updating the NPM version for your project. It is a good way to keep track of the changes you are making to your project. And it also creates a quick Git commit for us.
 
-<img class="code-marker" src="/assets/s.png" />Push the change using.
+{%change%} Push the change using.
 
 ``` bash
 $ git push

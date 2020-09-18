@@ -15,7 +15,7 @@ comments_id: create-a-cognito-test-user/126
 
 먼저 AWS CLI를 사용하여 이메일과 비밀번호로 사용자를 등록합니다.
 
-<img class="code-marker" src="/assets/s.png" />여러분의 터미널에서 실행합니다.
+{%change%} 여러분의 터미널에서 실행합니다.
 
 ``` bash
 $ aws cognito-idp sign-up \
@@ -27,7 +27,7 @@ $ aws cognito-idp sign-up \
 
 이제 사용자는 Cognito 사용자 풀에서 생성됩니다. 그러나 사용자가 사용자 풀을 사용하여 인증을 받기 전에 계정을 확인해야합니다. 관리자 명령을 사용하여 사용자를 신속하게 확인해 봅시다.
 
-<img class="code-marker" src="/assets/s.png" />여러분의 터미널에서 실행합니다.
+{%change%} 여러분의 터미널에서 실행합니다.
 
 ``` bash
 $ aws cognito-idp admin-confirm-sign-up \

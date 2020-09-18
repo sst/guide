@@ -11,7 +11,7 @@ comments_id: deploy-the-apis/121
 
 이제 API가 완성되었으니 배포를 진행합니다.
 
-<img class="code-marker" src="/assets/s.png" />현재 작업 디렉토리에서 아래 명령어를 실행합니다.
+{%change%} 현재 작업 디렉토리에서 아래 명령어를 실행합니다.
 
 ``` bash
 $ serverless deploy

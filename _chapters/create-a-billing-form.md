@@ -10,7 +10,7 @@ comments_id: create-a-billing-form/186
 
 Now our settings page is going to have a form that will take a user's credit card details, get a stripe token and call our billing API with it. Let's start by adding the Stripe React SDK to our project.
 
-<img class="code-marker" src="/assets/s.png" />From our project root, run the following.
+{%change%} From our project root, run the following.
 
 ``` bash
 $ npm install --save react-stripe-elements
@@ -18,7 +18,7 @@ $ npm install --save react-stripe-elements
 
 Next let's create our billing form component.
 
-<img class="code-marker" src="/assets/s.png" />Add the following to a new file in `src/components/BillingForm.js`.
+{%change%} Add the following to a new file in `src/components/BillingForm.js`.
 
 {% raw %}
 ``` coffee
@@ -124,7 +124,7 @@ You can read more about how to use the [React Stripe Elements here](https://gith
 
 Also, let's add some styles to the card field so it matches the rest of our UI.
 
-<img class="code-marker" src="/assets/s.png" />Create a file at `src/components/BillingForm.css`.
+{%change%} Create a file at `src/components/BillingForm.css`.
 
 ``` css
 .BillingForm .card-field {

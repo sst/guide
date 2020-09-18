@@ -12,7 +12,7 @@ Now let's look into setting up the Cognito User Pool through the `serverless.yml
 
 ### Create the Resource
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `resources/cognito-user-pool.yml`.
+{%change%} Add the following to `resources/cognito-user-pool.yml`.
 
 ``` yml
 Resources:
@@ -59,7 +59,7 @@ Let's quickly go over what we are doing here:
 
 ### Add the Resource
 
-<img class="code-marker" src="/assets/s.png" />Let's reference the resource in our `serverless.yml`. Replace your `resources:` block with the following.
+{%change%} Let's reference the resource in our `serverless.yml`. Replace your `resources:` block with the following.
 
 ``` yml
 # Create our resources with separate CloudFormation templates

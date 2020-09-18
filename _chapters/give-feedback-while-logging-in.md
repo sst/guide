@@ -12,13 +12,13 @@ It's important that we give the user some feedback while we are logging them in.
 
 ### Use an isLoading Flag
 
-<img class="code-marker" src="/assets/s.png" />To do this we are going to add an `isLoading` flag to the state of our `src/containers/Login.js`. Add the following to the top of our `Login` function component.
+{%change%} To do this we are going to add an `isLoading` flag to the state of our `src/containers/Login.js`. Add the following to the top of our `Login` function component.
 
 ``` javascript
 const [isLoading, setIsLoading] = useState(false);
 ```
 
-<img class="code-marker" src="/assets/s.png" />And we'll update it while we are logging in. So our `handleSubmit` function now looks like so:
+{%change%} And we'll update it while we are logging in. So our `handleSubmit` function now looks like so:
 
 ``` javascript
 async function handleSubmit(event) {
@@ -41,7 +41,7 @@ async function handleSubmit(event) {
 
 Now to reflect the state change in our button we are going to render it differently based on the `isLoading` flag. But we are going to need this piece of code in a lot of different places. So it makes sense that we create a reusable component out of it.
 
-<img class="code-marker" src="/assets/s.png" />Create a `src/components/` directory by running this command in your working directory.
+{%change%} Create a `src/components/` directory by running this command in your working directory.
 
 ``` bash
 $ mkdir src/components/
@@ -49,7 +49,7 @@ $ mkdir src/components/
 
 Here we'll be storing all our React components that are not dealing directly with our API or responding to routes.
 
-<img class="code-marker" src="/assets/s.png" />Create a new file and add the following in `src/components/LoaderButton.js`.
+{%change%} Create a new file and add the following in `src/components/LoaderButton.js`.
 
 ``` coffee
 import React from "react";
@@ -79,7 +79,7 @@ This is a really simple component that takes an `isLoading` flag and the text th
 
 And let's add a couple of styles to animate our loading icon.
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `src/components/LoaderButton.css`.
+{%change%} Add the following to `src/components/LoaderButton.css`.
 
 ``` css
 .LoaderButton .spinning.glyphicon {
@@ -99,7 +99,7 @@ This spins the refresh Glyphicon infinitely with each spin taking a second. And 
 
 Now we can use our new component in our `Login` container.
 
-<img class="code-marker" src="/assets/s.png" />In `src/containers/Login.js` find the `<Button>` component in the `return` statement.
+{%change%} In `src/containers/Login.js` find the `<Button>` component in the `return` statement.
 
 ``` html
 <Button block bsSize="large" disabled={!validateForm()} type="submit">
@@ -107,7 +107,7 @@ Now we can use our new component in our `Login` container.
 </Button>
 ```
 
-<img class="code-marker" src="/assets/s.png" />And replace it with this.
+{%change%} And replace it with this.
 
 ``` html
 <LoaderButton
@@ -121,7 +121,7 @@ Now we can use our new component in our `Login` container.
 </LoaderButton>
 ```
 
-<img class="code-marker" src="/assets/s.png" />Also, import the `LoaderButton` in the header. And remove the reference to the `Button` component.
+{%change%} Also, import the `LoaderButton` in the header. And remove the reference to the `Button` component.
 
 ``` javascript
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
@@ -136,7 +136,7 @@ And now when we switch over to the browser and try logging in, you should see th
 
 You might have noticed in our Login and App components that we simply `alert` when there is an error. We are going to keep our error handling simple. But it'll help us further down the line if we handle all of our errors in one place.
 
-<img class="code-marker" src="/assets/s.png" />To do that, add the following to `src/libs/errorLib.js`.
+{%change%} To do that, add the following to `src/libs/errorLib.js`.
 
 ``` javascript
 export function onError(error) {
@@ -155,13 +155,13 @@ The `Auth` package throws errors in a different format, so all this code does is
 
 Let's use this in our Login container.
 
-<img class="code-marker" src="/assets/s.png" />Import the new error lib in the header of `src/containers/Login.js`.
+{%change%} Import the new error lib in the header of `src/containers/Login.js`.
 
 ``` javascript
 import { onError } from "../libs/errorLib";
 ```
 
-<img class="code-marker" src="/assets/s.png" />And replace `alert(e.message);` in the `handleSubmit` function with:
+{%change%} And replace `alert(e.message);` in the `handleSubmit` function with:
 
 ``` javascript
 onError(e);
@@ -169,13 +169,13 @@ onError(e);
 
 We'll do something similar in the App component.
 
-<img class="code-marker" src="/assets/s.png" />Import the error lib in the header of `src/App.js`.
+{%change%} Import the error lib in the header of `src/App.js`.
 
 ``` javascript
 import { onError } from "./libs/errorLib";
 ```
 
-<img class="code-marker" src="/assets/s.png" />And replace `alert(e);` in the `onLoad` function with:
+{%change%} And replace `alert(e);` in the `onLoad` function with:
 
 ``` javascript
 onError(e);

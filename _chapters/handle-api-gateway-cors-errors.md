@@ -23,13 +23,13 @@ These CORS related errors are one of the most common Serverless API errors. In t
 
 To configure API Gateway errors we are going to add a few things to our `serverless.yml`. By default, [Serverless Framework](https://serverless.com) supports [CloudFormation](https://aws.amazon.com/cloudformation/) to help us configure our API Gateway instance through code.
 
-<img class="code-marker" src="/assets/s.png" />Let’s create a directory to add our resources. We'll be adding to this later in the guide.
+{%change%} Let’s create a directory to add our resources. We'll be adding to this later in the guide.
 
 ``` bash
 $ mkdir resources/
 ```
 
-<img class="code-marker" src="/assets/s.png" />And add the following to `resources/api-gateway-errors.yml`.
+{%change%} And add the following to `resources/api-gateway-errors.yml`.
 
 ``` yml
 Resources:
@@ -60,7 +60,7 @@ The above might look a little intimidating. It's a CloudFormation resource and i
 Now let's include the above CloudFormation resource in our `serverless.yml`.
 
 
-<img class="code-marker" src="/assets/s.png" />Add the following to the bottom of our `serverless.yml`.
+{%change%} Add the following to the bottom of our `serverless.yml`.
 
 ``` yml
 # Create our resources with separate CloudFormation templates
@@ -75,7 +75,7 @@ And that's it. We are ready to deploy our APIs.
 
 ### Commit the Changes
 
-<img class="code-marker" src="/assets/s.png" />Let's commit our code so far and push it to GitHub.
+{%change%} Let's commit our code so far and push it to GitHub.
 
 ``` bash
 $ git add .

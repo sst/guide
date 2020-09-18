@@ -30,7 +30,7 @@ AWS Lambda는 최근 Node.js v8.10와 v10.x에 대한 지원을 추가했습니�
 
 ES 코드를 Node.js v8.10 JavaScript로 변환하는 과정은 serverless-bundle 플러그인에 의해 수행됩니다. 이 플러그인은`serverless.yml`에 추가되었습니다. 좀 더 자세히 살펴 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`serverless.yml`을 열고 아래와 같이 기본값으로 대체하십시오.
+{%change%} `serverless.yml`을 열고 아래와 같이 기본값으로 대체하십시오.
 
 ``` yaml
 service: notes-app-api

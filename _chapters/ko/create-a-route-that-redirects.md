@@ -12,7 +12,7 @@ ref: create-a-route-that-redirects
 
 먼저 사용자가 라우팅하기 전에 로그인했는지 확인하는 경로를 만들어 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/components/AuthenticatedRoute.js`에 다음을 추가합니다.
+{%change%} `src/components/AuthenticatedRoute.js`에 다음을 추가합니다.
 
 ``` coffee
 import React from "react";
@@ -35,7 +35,7 @@ export default ({ component: C, props: cProps, ...rest }) =>
 
 사용자가 인증되지 않았음을 보장하기 위한 검증에서도 비슷한 방법을 사용할 것입니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/components/UnauthenticatedRoute.js`에 다음 내용을 추가합니다.
+{%change%} `src/components/UnauthenticatedRoute.js`에 다음 내용을 추가합니다.
 
 ``` coffee
 import React from "react";

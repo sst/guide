@@ -11,7 +11,7 @@ ref: render-the-note-form
 
 이제 컨테이너가 `componentDidMount`에 메모를 적재 했으므로 편집을 위해 사용할 양식을 렌더링 해 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Notes.js` 파일에 아래 내용과 같이 메소드를 추가하고 `render` 메소드를 변경합니다.
+{%change%} `src/containers/Notes.js` 파일에 아래 내용과 같이 메소드를 추가하고 `render` 메소드를 변경합니다.
 
 ``` coffee
 validateForm() {
@@ -128,7 +128,7 @@ render() {
 
 이 코드를 완성하기 위해 `lisLoading`과 `isDeleting`을 state에 추가합니다.
 
-<img class="code-marker" src="/assets/s.png" />그럼 `constructor`의 state는 다음 처럼 설정되어 있어야 합니다. 
+{%change%} 그럼 `constructor`의 state는 다음 처럼 설정되어 있어야 합니다. 
 
 ``` javascript
 this.state = {
@@ -140,7 +140,7 @@ this.state = {
 };
 ```
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Notes.css`에 다음을 추가해서 약간의 스타일을 반영하겠습니다.
+{%change%} `src/containers/Notes.css`에 다음을 추가해서 약간의 스타일을 반영하겠습니다.
 
 ``` css
 .Notes form {
@@ -153,7 +153,7 @@ this.state = {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />또한 헤더에 다음을 추가하여 여기에서 사용중인 React-Bootstrap 구성 요소와 스타일인 `LoaderButton` 그리고 `config`를 포함 시키십시오. 
+{%change%} 또한 헤더에 다음을 추가하여 여기에서 사용중인 React-Bootstrap 구성 요소와 스타일인 `LoaderButton` 그리고 `config`를 포함 시키십시오. 
 
 
 ``` javascript

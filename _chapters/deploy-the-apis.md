@@ -10,7 +10,7 @@ comments_id: deploy-the-apis/121
 
 Now that our APIs are complete, let's deploy them.
 
-<img class="code-marker" src="/assets/s.png" />Run the following in your working directory.
+{%change%} Run the following in your working directory.
 
 ``` bash
 $ serverless deploy

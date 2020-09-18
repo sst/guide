@@ -46,7 +46,7 @@ It will warn you to read the documentation. Select **Ok** to edit.
 
 ![Select Confirm Edit Policy Screenshot](/assets/cognito-identity-pool/select-confirm-edit-policy.png)
 
-<img class="code-marker" src="/assets/s.png" />Add the following policy into the editor. Replace `YOUR_S3_UPLOADS_BUCKET_NAME` with the **bucket name** from the [Create an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}) chapter. And replace the `YOUR_API_GATEWAY_REGION` and `YOUR_API_GATEWAY_ID` with the ones that you get after you deployed your API in the last chapter.
+{%change%} Add the following policy into the editor. Replace `YOUR_S3_UPLOADS_BUCKET_NAME` with the **bucket name** from the [Create an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}) chapter. And replace the `YOUR_API_GATEWAY_REGION` and `YOUR_API_GATEWAY_ID` with the ones that you get after you deployed your API in the last chapter.
 
 In our case `YOUR_S3_UPLOADS_BUCKET_NAME` is `notes-app-uploads`, `YOUR_API_GATEWAY_ID` is `ly55wbovq4`, and `YOUR_API_GATEWAY_REGION` is `us-east-1`.
 

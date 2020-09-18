@@ -18,7 +18,7 @@ Let's start by editing our settings page so that our users can use to change the
 
 ### Add a Settings Page
 
-<img class="code-marker" src="/assets/s.png" />Replace the `return` statement in `src/containers/Settings.js` with.
+{%change%} Replace the `return` statement in `src/containers/Settings.js` with.
 
 ``` coffee
 return (
@@ -43,7 +43,7 @@ return (
 );
 ```
 
-<img class="code-marker" src="/assets/s.png" />And import the following as well.
+{%change%} And import the following as well.
 
 ``` coffee
 import { LinkContainer } from "react-router-bootstrap";
@@ -52,7 +52,7 @@ import LoaderButton from "../components/LoaderButton";
 
 All this does is add two links to a page that allows our users to change their password and email.
 
-<img class="code-marker" src="/assets/s.png" />Replace our `src/containers/Settings.css` with the following.
+{%change%} Replace our `src/containers/Settings.css` with the following.
 
 ``` css
 @media all and (min-width: 480px) {
@@ -74,7 +74,7 @@ All this does is add two links to a page that allows our users to change their p
 
 Now let's create the form that allows our users to change their password. 
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `src/containers/ChangePassword.js`.
+{%change%} Add the following to `src/containers/ChangePassword.js`.
 
 ``` coffee
 import React, { useState } from "react";
@@ -179,7 +179,7 @@ await Auth.changePassword(
 
 The above snippet uses the `Auth` module from Amplify to get the current user. And then uses that to change their password by passing in the old and new password. Once the `Auth.changePassword` method completes, we redirect the user to the settings page.
 
-<img class="code-marker" src="/assets/s.png" />Let's also add a couple of styles.
+{%change%} Let's also add a couple of styles.
 
 ``` css
 @media all and (min-width: 480px) {
@@ -194,7 +194,7 @@ The above snippet uses the `Auth` module from Amplify to get the current user. A
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />Let's add our new page to `src/Routes.js`.
+{%change%} Let's add our new page to `src/Routes.js`.
 
 ``` html
 <AuthenticatedRoute exact path="/settings/password">
@@ -202,7 +202,7 @@ The above snippet uses the `Auth` module from Amplify to get the current user. A
 </AuthenticatedRoute>
 ```
 
-<img class="code-marker" src="/assets/s.png" />And import it.
+{%change%} And import it.
 
 ``` coffee
 import ChangePassword from "./containers/ChangePassword";

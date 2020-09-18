@@ -13,7 +13,7 @@ Our secured pages redirect to the login page when the user is not logged in, wit
 
 Let's start by adding a method to read the `redirect` URL from the querystring.
 
-<img class="code-marker" src="/assets/s.png" />Add the following method to your `src/components/UnauthenticatedRoute.js` below the imports.
+{%change%} Add the following method to your `src/components/UnauthenticatedRoute.js` below the imports.
 
 ``` coffee
 function querystring(name, url = window.location.href) {
@@ -37,7 +37,7 @@ This method takes the querystring param we want to read and returns it.
 
 Now let's update our component to use this parameter when it redirects.
 
-<img class="code-marker" src="/assets/s.png" />Replace our current `UnauthenticatedRoute` function component with the following.
+{%change%} Replace our current `UnauthenticatedRoute` function component with the following.
 
 ``` coffee
 export default function UnauthenticatedRoute({ children, ...rest }) {
@@ -55,19 +55,19 @@ export default function UnauthenticatedRoute({ children, ...rest }) {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />And remove the following from the `handleSubmit` method in `src/containers/Login.js`.
+{%change%} And remove the following from the `handleSubmit` method in `src/containers/Login.js`.
 
 ``` coffee
 history.push("/");
 ```
 
-<img class="code-marker" src="/assets/s.png" />Also, remove the hook declaration.
+{%change%} Also, remove the hook declaration.
 
 ``` coffee
 const history = useHistory();
 ```
 
-<img class="code-marker" src="/assets/s.png" />Finally, remove the import.
+{%change%} Finally, remove the import.
 
 ``` coffee
 import { useHistory } from "react-router-dom";
@@ -77,7 +77,7 @@ Now our login page should redirect after we login. And that's it! Our app is rea
 
 ### Commit the Changes
 
-<img class="code-marker" src="/assets/s.png" />Let's commit our code so far and push it to GitHub.
+{%change%} Let's commit our code so far and push it to GitHub.
 
 ``` bash
 $ git add .

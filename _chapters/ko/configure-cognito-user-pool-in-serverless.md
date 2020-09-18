@@ -13,7 +13,7 @@ ref: configure-cognito-user-pool-in-serverless
 
 ### 리소스 만들기
 
-<img class="code-marker" src="/assets/s.png" />`resources/cognito-user-pool.yml`에 아래 내용을 추가합니다.
+{%change%} `resources/cognito-user-pool.yml`에 아래 내용을 추가합니다.
 
 ``` yml
 Resources:
@@ -60,7 +60,7 @@ Outputs:
 
 ### 리소스 추가
 
-<img class="code-marker" src="/assets/s.png" />`serverless.yml`에서 자원을 참조합니다. `resources:` 블럭을 다음으로 대체하십시오.
+{%change%} `serverless.yml`에서 자원을 참조합니다. `resources:` 블럭을 다음으로 대체하십시오.
 
 ``` yml
 # Create our resources with separate CloudFormation templates
@@ -77,7 +77,7 @@ resources:
 
 ### 코드 커밋 
 
-<img class="code-marker" src="/assets/s.png" />지금까지 변경 내용을 커밋합니다.
+{%change%} 지금까지 변경 내용을 커밋합니다.
 
 ``` bash
 $ git add .

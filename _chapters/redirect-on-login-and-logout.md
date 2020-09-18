@@ -17,13 +17,13 @@ We are going to use the `useHistory` hook that comes with React Router.
 
 ### Redirect to Home on Login
 
-<img class="code-marker" src="/assets/s.png" />First, initialize `useHistory` hook in the beginning of `src/containers/Login.js`.
+{%change%} First, initialize `useHistory` hook in the beginning of `src/containers/Login.js`.
 
 ``` javascript
 const history = useHistory();
 ```
 
-<img class="code-marker" src="/assets/s.png" />Then update the `handleSubmit` method in `src/containers/Login.js` to look like this:
+{%change%} Then update the `handleSubmit` method in `src/containers/Login.js` to look like this:
 
 ``` javascript
 async function handleSubmit(event) {
@@ -39,7 +39,7 @@ async function handleSubmit(event) {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" /> Also, import `useHistory` from React Router in the header of `src/containers/Login.js`.
+{%change%}  Also, import `useHistory` from React Router in the header of `src/containers/Login.js`.
 
 ``` javascript
 import { useHistory } from "react-router-dom";
@@ -53,19 +53,19 @@ Now if you head over to your browser and try logging in, you should be redirecte
 
 Now we'll do something very similar for the logout process. 
 
-<img class="code-marker" src="/assets/s.png" />Add the `useHistory` hook in the beginning of `App` component.
+{%change%} Add the `useHistory` hook in the beginning of `App` component.
 
 ``` javascript
 const history = useHistory();
 ```
 
-<img class="code-marker" src="/assets/s.png" />Import `useHistory` by replacing the `import { Link }` line in the header of `src/App.js` with this:
+{%change%} Import `useHistory` by replacing the `import { Link }` line in the header of `src/App.js` with this:
 
 ``` coffee
 import { Link, useHistory } from "react-router-dom";
 ```
 
-<img class="code-marker" src="/assets/s.png" />Add the following to the bottom of the `handleLogout` function in our `src/App.js`.
+{%change%} Add the following to the bottom of the `handleLogout` function in our `src/App.js`.
 
 ``` coffee
 history.push("/login");
