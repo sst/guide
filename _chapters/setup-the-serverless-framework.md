@@ -27,13 +27,13 @@ The above command needs [NPM](https://www.npmjs.com), a package manager for Java
 {%change%} In your working directory; create a project using a Node.js starter. We'll go over some of the details of this starter project in the next chapter.
 
 ``` bash
-$ serverless install --url https://github.com/AnomalyInnovations/serverless-nodejs-starter --name notes-app-api
+$ serverless install --url https://github.com/AnomalyInnovations/serverless-nodejs-starter --name notes-api
 ```
 
 {%change%} Go into the directory for our backend api project.
 
 ``` bash
-$ cd notes-app-api
+$ cd notes-api
 ```
 
 Now the directory should contain a few files including, the **handler.js** and **serverless.yml**.
@@ -70,7 +70,7 @@ Let's change the name of our service from the one in the starter.
 {%change%} Open `serverless.yml` and replace the default with the following.
 
 ``` yaml
-service: notes-app-api
+service: notes-api
 
 # Create an optimized package for our functions
 package:

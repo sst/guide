@@ -47,7 +47,7 @@ Let's also quickly change the config a bit. It has your app name, the default st
 
 ``` json
 {
-  "name": "notes",
+  "name": "notes-infra",
   "type": "@serverless-stack/resources",
   "stage": "dev",
   "region": "us-east-1"
