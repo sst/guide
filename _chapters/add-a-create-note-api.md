@@ -118,13 +118,13 @@ provider:
   iamRoleStatements:
     - Effect: Allow
       Action:
-        - dynamodb:DescribeTable
-        - dynamodb:Query
         - dynamodb:Scan
+        - dynamodb:Query
         - dynamodb:GetItem
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
+        - dynamodb:DescribeTable
       Resource: "arn:aws:dynamodb:us-east-1:*:*"
 
 functions:

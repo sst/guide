@@ -59,6 +59,14 @@ Let's quickly go over what we are doing here.
 
 Note that, we don't need to create a separate stack for each resource. We could use a single stack for all our resources. But for the purpose of illustration, we are going to split them all up.
 
+{%change%} Let's add the DynamoDB CDK package. Run the following in your `infrastructure/` directory.
+
+``` bash
+$ npx sst add-cdk @aws-cdk/aws-dynamodb
+```
+
+The reason we are using the [**add-cdk**](https://github.com/serverless-stack/serverless-stack/tree/master/packages/cli#add-cdk-packages) command instead of using an `npm install` is because of [a known issue AWS CDK](https://github.com/serverless-stack/serverless-stack#cdk-version-mismatch). Using mismatched versions of CDK packages can cause some unexpected problems down the road. The `sst add-cdk` command ensures that we install the right version of the package.
+
 
 ### Add the Stack
 
@@ -91,14 +99,16 @@ You should see something like this at the end of the deploy process.
 Stack dev-notes-infra-dynamodb
   Status: deployed
   Outputs:
-  - TableName: dev-notes-infra-dynamodb-TableCD117FA1-RBR93WLG5IQH
-  - TableArn: arn:aws:dynamodb:us-east-1:087220554750:table/dev-notes-infra-dynamodb-TableCD117FA1-RBR93WLG5IQH
+    TableName: dev-notes-infra-dynamodb-TableCD117FA1-RBR93WLG5IQH
+    TableArn: arn:aws:dynamodb:us-east-1:087220554750:table/dev-notes-infra-dynamodb-TableCD117FA1-RBR93WLG5IQH
   Exports:
-  - dev-notes-infra-TableName: dev-notes-infra-dynamodb-TableCD117FA1-RBR93WLG5IQH
-  - dev-notes-infra-TableArn: arn:aws:dynamodb:us-east-1:087220554750:table/dev-notes-infra-dynamodb-TableCD117FA1-RBR93WLG5IQH
+    dev-notes-infra-TableName: dev-notes-infra-dynamodb-TableCD117FA1-RBR93WLG5IQH
+    dev-notes-infra-TableArn: arn:aws:dynamodb:us-east-1:087220554750:table/dev-notes-infra-dynamodb-TableCD117FA1-RBR93WLG5IQH
 ```
 
 You'll notice the table name and ARN in the output and exported values.
+
+Note that, we are created a completely new DynamoDB table here. If you want to remove the old table we created manually through the console, you can do so now. We are going to leave it as is, in case you want to refer back to it at some point.
 
 ### Remove Template Files
 
@@ -151,7 +161,7 @@ $ npx sst test
 You should see something like this as your test output.
 
 ``` bash
- PASS  test/DynamoDBStack.test.js
+PASS  test/DynamoDBStack.test.js
   ✓ Test Stack (1022 ms)
 
 Test Suites: 1 passed, 1 total
@@ -161,66 +171,6 @@ Time:        5.473 s
 Ran all test suites.
 ```
 
-### Add to Serverless 
-
-Now that our new table has been created programmatically, let's add this to our Serverless API.
-
-{%change%} Add the following `custom:` block at the top of our `services/notes/serverless.yml` above the `provider:` block.
-
-``` yml
-custom:
-  # Our stage is based on what is passed in when running serverless
-  # commands. Or fallsback to what we have set in the provider section.
-  stage: ${opt:stage, self:provider.stage}
-  # Name of the SST app that's deploying our infrastructure
-  sstApp: ${self:custom.stage}-notes-infra
-```
-
-{%change%} And replace the `environment` and `iamRoleStatements` block with.
-
-``` yml
-  # These environment variables are made available to our functions
-  # under process.env.
-  environment:
-    stripeSecretKey: ${env:STRIPE_SECRET_KEY}
-    tableName: !ImportValue '${self:custom.sstApp}-TableName'
-
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:DescribeTable
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-      # Restrict our IAM role permissions to
-      # the specific table for the stage
-      Resource:
-        - !ImportValue '${self:custom.sstApp}-TableArn'
-```
-
-Make sure to **copy the indentation** correctly.
-
-We added a couple of things here that are worth spending some time on:
-
-- We first create a custom variable called `stage`. You might be wondering why we need a custom variable for this when we already have `stage: dev` in the `provider:` block. This is because we want to set the current stage of our project based on what is set through the `serverless deploy --stage $STAGE` command. And if a stage is not set when we deploy, we want to fallback to the one we have set in the provider block. So `${opt:stage, self:provider.stage}`, is telling Serverless to first look for the `opt:stage` (the one passed in through the command line), and then fallback to `self:provider.stage` (the one in the provider block).
-
-- Next, we set the name of our SST app as a custom variable. This includes the name of the stage as well — `${self:custom.stage}-notes-infra`. It's configured such that it references the SST app for the stage the current Serverless app is deployed to. So if you deploy your API app to `dev`, it'll reference the dev version of the SST notes app.
-
-- Then we use the name of SST app to import the CloudFormation exports that we setup in our `DynamoDBStack` class at the beginning of this chapter.
-
-- We first change the `tableName` from the hardcoded `notes` to `!ImportValue '${self:custom.sstApp}-TableName'`. This imports the previously exported table name from our SST app.
-
-- Similarly, we import the table ARN using `!ImportValue '${self:custom.sstApp}-TableArn'`. Previously, we were giving our Lambda functions access to all DynamoDB tables in our region. Now we are able to lockdown our permissions a bit more specifically.
-
-You might have picked up that we are using the stage name extensively in our seutp. This is because we want to ensure that we can deploy our app to multiple environments simultaneously. This setup allows us to create and destroy new environments simply by changing the stage name.
-
-This also means that if you have a typo in your resources (for example, the table name), the old table will be removed and a new one will be created in place. To prevent accidentally deleting serverless resources (like DynamoDB tables), you need to set the `DeletionPolicy: Retain` flag. We have a [detailed post on this over on the Seed blog](https://seed.run/blog/how-to-prevent-accidentally-deleting-serverless-resources).
-
-Note that, we are using our newly created DynamoDB table here. If you want to remove the old table we created manually through the console, you can do so now. We are going to leave it as is, in case you want to refer back to it at some point.
-
-We'll hold off deploying the changes to our Serverless API for now. We'll do that once we create all our infrastructure resources programmatically.
+You can build on these tests later on when you stack becomes more complicated.
 
 Next, let's add our S3 bucket for file uploads.
