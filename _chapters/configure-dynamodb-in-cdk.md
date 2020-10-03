@@ -3,8 +3,8 @@ layout: post
 title: Configure DynamoDB in CDK
 date: 2018-02-27 00:00:00
 lang: en
-redirect_from: /chapters/configure-dynamodb-in-serverless.html
 description: 
+redirect_from: /chapters/configure-dynamodb-in-serverless.html
 ref: configure-dynamodb-in-cdk
 comments_id: 
 ---
@@ -56,6 +56,8 @@ Let's quickly go over what we are doing here.
 4. We also set our `BillingMode` to `PAY_PER_REQUEST`. This is the **On-demand** option that we had selected in the AWS console.
 
 5. We need to use the table name in our API. Also, we'll use the table ARN to ensure that our Lambda functions have access to this table. We don't want to hardcode these values. So we'll use a CloudFormation export, using the `CfnOutput` method with the `exportName` option. The output names need to be unique per stack. While the `exportName` needs to be unique for a given region in the AWS account. To ensure that it'll be unique when we deploy to multiple environments, we'll use the `app.logicalPrefixedName` method. It's a convenience method in `sst.App` that prefixes a given name with the name of stage (environment) and the name of the app. We'll use this method whenever we need to ensure uniqueness across environments.
+
+You can refer to the CDK docs for more details on the [**dynamodb.Table**](https://docs.aws.amazon.com/cdk/api/latest/docs/@aws-cdk_aws-dynamodb.Table.html) construct.
 
 Note that, we don't need to create a separate stack for each resource. We could use a single stack for all our resources. But for the purpose of illustration, we are going to split them all up.
 
@@ -118,6 +120,7 @@ There are a couple of files that come with the template, that we can now remove.
 
 ``` bash
 $ rm lib/MyStack.js
+$ rm README.md
 ```
 
 ### Fix the Unit Tests

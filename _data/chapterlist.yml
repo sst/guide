@@ -205,12 +205,12 @@ deploy-backend-prod:
       subchapters:
         - page: Configure DynamoDB in CDK
           url: /chapters/configure-dynamodb-in-cdk.html
-        - page: Configure S3 in Serverless
-          url: /chapters/configure-s3-in-serverless.html
-        - page: Configure Cognito User Pool in Serverless
-          url: /chapters/configure-cognito-user-pool-in-serverless.html
-        - page: Configure Cognito Identity Pool in Serverless
-          url: /chapters/configure-cognito-identity-pool-in-serverless.html
+        - page: Configure S3 in CDK
+          url: /chapters/configure-s3-in-cdk.html
+        - page: Configure Cognito User Pool in CDK
+          url: /chapters/configure-cognito-user-pool-in-cdk.html
+        - page: Configure Cognito Identity Pool in CDK
+          url: /chapters/configure-cognito-identity-pool-in-cdk.html
         - page: Connect Serverless Framework and CDK with SST
           url: /chapters/connect-serverless-framework-and-cdk-with-sst.html
     - page: Deploy your Serverless infrastructure
