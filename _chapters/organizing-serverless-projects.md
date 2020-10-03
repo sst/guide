@@ -31,6 +31,7 @@ And your app also has a job service:
 
 - **notify-job** service: Sends you a text message after a user successfully makes a purchase.
 
+> TODO: infrastructure is not made up of services
 The infrastructure is created by the following services:
 
 - **auth** service: Defines a Cognito User and Identity pool used to store user data.
@@ -48,12 +49,10 @@ The directory structure of your entire application under the microservice + mono
 
 ```
 |- services/
-|--- auth/
 |--- billing-api/
-|--- database/
 |--- notes-api/
 |--- notify-job/
-|--- uploads/
+|- infrastructure/
 |- libs/
 |- package.json
 ```
@@ -142,14 +141,11 @@ It's not the goal of this section to evaluate which setup is better. Instead, I 
 1. [**serverless-stack-demo-ext-resources**]({{ site.backend_ext_resources_github_repo }})
 2. [**serverless-stack-demo-ext-api**]({{ site.backend_ext_api_github_repo }})
 
+> TODO: review folder structure
 In **serverless-stack-demo-ext-resources**, you have:
 
 ```
 /
-  services/
-    auth/
-    database/
-    uploads/
 ```
 
 And in **serverless-stack-demo-ext-api**, you have:

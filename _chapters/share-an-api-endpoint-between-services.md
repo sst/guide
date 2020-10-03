@@ -78,10 +78,8 @@ Let's look at how we are importing the above. Open the `billing-api` service in 
 
 provider:
   apiGateway:
-    restApiId:
-      'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiId
-    restApiRootResourceId:
-      'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId
+    restApiId: !ImportValue ${self:custom.stage}-ExtApiGatewayRestApiId
+    restApiRootResourceId: !ImportValue ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId
 ...
 
 functions:
@@ -97,9 +95,9 @@ functions:
 
 To share the same API Gateway domain as our `notes-api` service, we are adding an `apiGateway:` section to the `provider:` block.
 
-  1. Here we state that we want to use the `restApiId` of our notes service. We do this by using the cross-stack reference `'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiId` that we had exported above.
+  1. Here we state that we want to use the `restApiId` of our notes service. We do this by using the cross-stack reference `!ImportValue ${self:custom.stage}-ExtApiGatewayRestApiId` that we had exported above.
 
-  2. We also state that we want all the APIs in our service to be linked under the root path of our notes service. We do this by setting the `restApiRootResourceId` to the cross-stack reference `'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId` from above.
+  2. We also state that we want all the APIs in our service to be linked under the root path of our notes service. We do this by setting the `restApiRootResourceId` to the cross-stack reference `!ImportValue ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId` from above.
 
 Now when you deploy the `billing-api` service, instead of creating a new API Gateway project, Serverless Framework is going to reuse the project you imported.
 

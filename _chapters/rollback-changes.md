@@ -37,7 +37,7 @@ Outputs:
     Value:
       Ref: NotePurchasedTopic
     Export:
-      Name: ExtNotePurchasedTopicArn-${self:custom.stage}
+      Name: ${self:custom.stage}-ExtNotePurchasedTopicArn
 ```
 
 And the `notify-job` service imports the topic and uses it to trigger the `notify` function:
@@ -48,7 +48,8 @@ functions:
     handler: notify.main
     events:
       - sns:
-        'Fn::ImportValue': ExtNotePurchasedTopicArn-${self:custom.stage}
+          arn: !ImportValue ${self:custom.stage}-ExtNotePurchasedTopicArn
+          topicName: ${self:custom.stage}-note-purchased
 ```
 
 Note that the `billing-api` service had to be deployed first. This is to make sure that the export value `ExtNotePurchasedTopicArn` has first been created. Then we can deploy the `notify-job` service.
