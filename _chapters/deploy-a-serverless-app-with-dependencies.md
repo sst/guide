@@ -16,6 +16,8 @@ The short version is that:
 
 #### First deployment
 
+> TODO: update this section
+
 In our [resources repo]({{ site.backend_ext_resources_github_repo }}) we need to:
 
 - Deploy the `database` and `uploads` service. These can be deployed concurrently.
@@ -24,7 +26,7 @@ In our [resources repo]({{ site.backend_ext_resources_github_repo }}) we need to
 Next for the [API repo]({{ site.backend_ext_api_github_repo }}) for the first time, you have to:
 
 - Deploy the `notes-api` first. This will export the value `dev-ExtApiGatewayRestApiId` and `dev-ExtApiGatewayRestApiRootResourceId`.
-- Then deploy the `billing-api` next. This will export the value `ExtNotePurchasedTopicArn-dev`.
+- Then deploy the `billing-api` next. This will export the value `dev-ExtNotePurchasedTopicArn`.
 - Then deploy the `notify-job`.
 
 Assuming that you are deploying to the `dev` stage.
@@ -32,7 +34,7 @@ Assuming that you are deploying to the `dev` stage.
 If you were to deploy `billing-api` and `notify-job` concurrently, the `notify-job` will fail with the following CloudFormation error:
 
 ```
-notify-job - No export named ExtNotePurchasedTopicArn-dev found.
+notify-job - No export named dev-ExtNotePurchasedTopicArn found.
 ```
 
 This error is basically saying that the ARN referenced in its `serverless.yml` does not exist. This makes sense because we haven’t created it yet!

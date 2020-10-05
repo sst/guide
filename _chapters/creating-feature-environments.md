@@ -87,17 +87,13 @@ provider:
     lambda: true
 
   apiGateway:
-    restApiId:
-      'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiId
-    restApiRootResourceId:
-      'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId
+    restApiId: !ImportValue ${self:custom.stage}-ExtApiGatewayRestApiId
+    restApiRootResourceId: !ImportValue ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId
     restApiResources:
-      /notes/{id}:
-        'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayResourceNotesIdVarId
+      /notes/{id}: !ImportValue ${self:custom.stage}-ExtApiGatewayResourceNotesIdVarId
 
   environment:
     stage: ${self:custom.stage}
-    resourcesStage: ${self:custom.resourcesStage}
 
   iamRoleStatements:
     - ${file(../../serverless.common.yml):lambdaPolicyXRay}

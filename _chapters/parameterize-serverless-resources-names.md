@@ -44,10 +44,12 @@ resources:
     NotePurchasedTopic:
       Type: AWS::SNS::Topic
       Properties:
-        TopicName: note-purchased-${self:custom.stage}
+        TopicName: ${self:custom.stage}-note-purchased
 ```
 
 ### DynamoDB table names in `database` service
+
+> TODO: we are now letting CloudFormation to generate the table name, remove the DynamoDB example?
 
 ``` yml
 ...
@@ -79,28 +81,17 @@ resources:
 
 Since, S3 bucket names need to be globally unique; leave the bucket name empty and let CloudFormation auto generate it.
 
-``` yml
-...
-resources:
-  Resources:
-    S3Bucket:
-      Type: AWS::S3::Bucket
-      Properties:
-        # Set the CORS policy
-        CorsConfiguration:
-          CorsRules:
-            -
-              AllowedOrigins:
-                - '*'
-              AllowedHeaders:
-                - '*'
-              AllowedMethods:
-                - GET
-                - PUT
-                - POST
-                - DELETE
-                - HEAD
-              MaxAge: 3000
+``` javascript
+this.bucket = new s3.Bucket(this, "Uploads", {
+  cors: [
+    {
+      maxAge: 3000,
+      allowedOrigins: ["*"],
+      allowedHeaders: ["*"],
+      allowedMethods: ["GET", "PUT", "POST", "DELETE", "HEAD"],
+    },
+  ],
+});
 ```
 
 Parameterizing your resources allows your app to be deployed to multiple environments without naming conflicts. Next, let's deploy our app!

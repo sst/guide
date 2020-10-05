@@ -86,10 +86,10 @@ custom:
   # Our stage is based on what is passed in when running serverless
   # commands. Or fallsback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
-  resourcesStages:
+  sstAppMapping:
     prod: prod
     dev: dev
-  resourcesStage: ${self:custom.resourcesStages.${self:custom.stage}, self:custom.resourcesStages.dev}
+  sstApp: ${self:custom.sstAppMapping.${self:custom.stage}, self:custom.sstAppMapping.dev}-notes-ext-infra
 
 lambdaPolicyXRay:
   Effect: Allow
@@ -130,16 +130,7 @@ Statement:
     Action:
       - 'execute-api:Invoke'
     Resource:
-      Fn::Join:
-        - ''
-        -
-          - 'arn:aws:execute-api:'
-          - Ref: AWS::Region
-          - ':'
-          - Ref: AWS::AccountId
-          - ':'
-          - Ref: ApiGatewayRestApi
-          - '/*'
+      !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGatewayRestApi}/*'
 ```
 
 Next, let's look at what happens when multiple API services need to share the same API endpoint.

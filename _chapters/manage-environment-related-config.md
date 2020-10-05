@@ -19,7 +19,7 @@ But before we can deploy to an ephemeral environment like `featureX`, we need to
 
 Let's look at how to do that.
 
-### Set a stage environment variable
+### Set a resources stage environment variable
 
 In the `serverless.common.yml` file, we defined:
 ``` yml
@@ -27,19 +27,19 @@ custom:
   # Our stage is based on what is passed in when running serverless
   # commands. Or fallsback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
-  resourcesStages:
+  sstAppMapping:
     prod: prod
     dev: dev
-  resourcesStage: ${self:custom.resourcesStages.${self:custom.stage}, self:custom.resourcesStages.dev}
+  sstApp: ${self:custom.sstAppMapping.${self:custom.stage}, self:custom.sstAppMapping.dev}-notes-ext-infra
 ```
 
-The above code reads the current stage from the `serverless` commands, and selects the corresponding `resourcesStage` config.
+The above code reads the current stage from the `serverless` commands, and selects the corresponding `sstApp` config.
 
 - If the stage is `prod`, it uses the `prod` infrastructure.
 - If the stage is `dev`, it uses the `dev` infrastructure.
 - And if stage is `featureX`, it falls back to the dev config and uses the `dev` infrastructure.
 
-And then in each service, we are going to pass the `resourcesStage` to the Lambda functions as an environment variable. Open up the `serverless.yml` file in a service.
+And we are going to use the resources based on the `sstApp`. Open up the `serverless.yml` file in the `notes-api` service.
 
 ``` yml
 ...
@@ -49,62 +49,24 @@ custom: ${file(../../serverless.common.yml):custom}
 provider:
   environment:
     stage: ${self:custom.stage}
-    resourcesStage: ${self:custom.resourcesStage}
+    tableName: !ImportValue ${self:custom.sstApp}-ExtTableName
 ...
 ```
 
-This adds a `resourcesStage` environment variable to all the Lambda functions in the service. Recall that we can access this via the `process.env.resourcesStage` variable at runtime.
+This adds a `tableName` environment variable to all the Lambda functions in the service. Recall that we can access this via the `process.env.tableName` variable at runtime.
 
-### Create a stage based config
+### Using a resources stage environment variable
 
-Now in our `config.js`, we'll read the `resourcesStage` from the environment variable `process.env.resourcesStage`.
+Now in our `list.js`, we'll read the `tableName` from the environment variable `process.env.tableName`.
 
 ``` js
-const stage = process.env.stage;
-const resourcesStage = process.env.resourcesStage;
-const adminPhoneNumber = "+14151234567";
-
-const stageConfigs = {
-  dev: {
-    stripeKeyName: "/stripeSecretKey/test"
-  },
-  prod: {
-    stripeKeyName: "/stripeSecretKey/live"
+const params = {
+  TableName: process.env.tableName,
+  KeyConditionExpression: "userId = :userId",
+  ExpressionAttributeValues: {
+    ":userId": event.requestContext.identity.cognitoIdentityId
   }
 };
-
-const config = stageConfigs[stage] || stageConfigs.dev;
-
-export default {
-  stage,
-  resourcesStage,
-  adminPhoneNumber,
-  ...config
-};
-```
-
-Finally, while calling DynamoDB we can use the config to get the DynamoDB table we want to use. In `libs/dynamodb-lib.js`:
-
-``` js
-import AWS from "./aws-sdk";
-import config from "../config";
-
-const client = new AWS.DynamoDB.DocumentClient();
-
-export default {
-  get: (params) => client.get(updateTableName(params)).promise(),
-  query: (params) => client.query(updateTableName(params)).promise(),
-  put: (params) => client.put(updateTableName(params)).promise(),
-  update: (params) => client.update(updateTableName(params)).promise(),
-  delete: (params) => client.delete(updateTableName(params)).promise(),
-};
-
-function updateTableName(params) {
-  return {
-    ...params,
-    TableName: `${config.resourcesStage}-${params.TableName}`,
-  };
-}
 ```
 
 The above setup ensures that even when we create numerous ephemeral environments for our API services, they'll always connect back to the `dev` environment of our resources.
