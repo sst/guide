@@ -54,5 +54,6 @@ In a CloudFormation template you need to define all the resources that your app 
 YAML and JSON are really easy to get started with. But it can be really hard to maintain large CloudFormation templates. And since these are just simple definition files, it makes it hard to reuse and compose them.
 
 Finally, the learning curve for CloudFormation templates can be really steep. You'll find yourself constantly looking at the documentation to figure out how to define your resources. 
+### Introducing AWS CDK
 
 To fix these issues, AWS launched the [AWS CDK project back in August 2018](https://aws.amazon.com/blogs/developer/aws-cdk-developer-preview/). It allows you to use modern programming languages like JavaScript or Python, instead of YAML or JSON. We'll be using CDK in the coming chapters. So let's take a quick look at how it works.

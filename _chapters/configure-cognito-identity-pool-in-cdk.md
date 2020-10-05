@@ -63,24 +63,26 @@ export default class CognitoStack extends sst.Stack {
 Let's quickly highlight the changes and go over them.
 
 ``` javascript
-+     const identityPool = new cognito.CfnIdentityPool(this, "IdentityPool", {
-+       allowUnauthenticatedIdentities: false, // Don't allow unathenticated users
-+       cognitoIdentityProviders: [
-+         {
-+           clientId: userPoolClient.userPoolClientId,
-+           providerName: userPool.userPoolProviderName,
-+         },
-+       ],
-+     });
-
-...
-
-+     new CfnOutput(this, "IdentityPoolId", {
-+       value: identityPool.ref,
-+     });
++ const identityPool = new cognito.CfnIdentityPool(this, "IdentityPool", {
++   allowUnauthenticatedIdentities: false, // Don't allow unathenticated users
++   cognitoIdentityProviders: [
++     {
++       clientId: userPoolClient.userPoolClientId,
++       providerName: userPool.userPoolProviderName,
++     },
++   ],
++ });
 ```
 
-We are creating a new `CfnIdentityPool` and link it to the User Pool that we created in the last chapter. And we output the id of Identity Pool that we just created.
+We are creating a new `CfnIdentityPool` and link it to the User Pool that we created [in the last chapter]({% link _chapters/configure-cognito-user-pool-in-cdk.md %}).
+
+``` javascript
++ new CfnOutput(this, "IdentityPoolId", {
++   value: identityPool.ref,
++ });
+```
+
+And we output the id of Identity Pool that we just created.
 
 You can refer to the CDK docs to about the [**cognito.CfnIdentityPool**](https://docs.aws.amazon.com/cdk/api/latest/docs/@aws-cdk_aws-cognito.CfnIdentityPool.html) construct.
 
@@ -264,46 +266,46 @@ export default class CognitoStack extends sst.Stack {
 Let's go over the changes we are making here.
 
 ``` javascript
-import CognitoAuthRole from "./CognitoAuthRole";
++ import CognitoAuthRole from "./CognitoAuthRole";
 ```
 
 We first import our new construct.
 
 ``` javascript
-const { bucketArn } = props;
++ const { bucketArn } = props;
 
-const app = this.node.root;
++ const app = this.node.root;
 ```
 
 We then get a reference to the `bucketArn` of our previously created S3 bucket. We'll be passing this in shortly.
 
 ``` javascript
-const authenticatedRole = new CognitoAuthRole(this, "CognitoAuthRole", {
-  identityPool,
-});
++ const authenticatedRole = new CognitoAuthRole(this, "CognitoAuthRole", {
++   identityPool,
++ });
 ```
 
 Then we create a new instance of our `CognitoAuthRole` and assigning it to `authenticatedRole`.
 
 ``` javascript
-authenticatedRole.role.addToPolicy(
-  new iam.PolicyStatement({
-    actions: ["s3:*"],
-    effect: iam.Effect.ALLOW,
-    resources: [
-      bucketArn + "/private/${cognito-identity.amazonaws.com:sub}/*",
-    ],
-  })
-);
++ authenticatedRole.role.addToPolicy(
++   new iam.PolicyStatement({
++     actions: ["s3:*"],
++     effect: iam.Effect.ALLOW,
++     resources: [
++       bucketArn + "/private/${cognito-identity.amazonaws.com:sub}/*",
++     ],
++   })
++ );
 ```
 
 We access the new IAM role we are creating through `authenticatedRole.role`. And add a new policy to it. It grants permission to a sepcific folder in the S3 bucket we created. This ensures that authenticated users can only access their uploaded files (and not any other user's uploads). We talked about how this works back in the [Create a Cognito Identity Pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter.
 
 ``` javascript
-new CfnOutput(this, "AuthenticatedRoleName", {
-  value: authenticatedRole.role.roleName,
-  exportName: app.logicalPrefixedName("CognitoAuthRole"),
-});
++ new CfnOutput(this, "AuthenticatedRoleName", {
++   value: authenticatedRole.role.roleName,
++   exportName: app.logicalPrefixedName("CognitoAuthRole"),
++ });
 ```
 
 Finally, we export the name of the role that we just created. We'll use this later in our Serverless API. We use the `app.logicalPrefixedName` method to ensure that our exported name is unique across multiple environments.
@@ -312,7 +314,7 @@ Now let's pass in the S3 bucket info from our other stack.
 
 {%change%} Replace your `infrastructure/lib/index.js` with this.
 
-``` yml
+``` javascript
 import S3Stack from "./S3Stack";
 import CognitoStack from "./CognitoStack";
 import DynamoDBStack from "./DynamoDBStack";
