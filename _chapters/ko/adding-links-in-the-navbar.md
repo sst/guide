@@ -11,7 +11,7 @@ comments_id: adding-links-in-the-navbar/141
 
 이제 첫 번째 경로를 설정 했으므로 앱의 navbar에 몇 가지 링크를 더 추가해 보겠습니다. 사용자가 처음 방문했을 때 로그인 또는 가입하도록 안내합니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/App.js`에 있는`render` 메쏘드를 다음으로 대체하십시오.
+{%change%} `src/App.js`에 있는`render` 메쏘드를 다음으로 대체하십시오.
 
 ``` coffee
 render() {
@@ -41,7 +41,7 @@ render() {
 
 헤더에 필요한 구성 요소를 포함시켜 봅시다.
 
-<img class="code-marker" src="/assets/s.png" />import 항목인 `react-router-dom`와 `react-bootstrap`를 `src/App.js`에서 제거하고 아래 내용으로 대체합니다.
+{%change%} import 항목인 `react-router-dom`와 `react-bootstrap`를 `src/App.js`에서 제거하고 아래 내용으로 대체합니다.
 
 ``` coffee
 import { Link } from "react-router-dom";
@@ -55,19 +55,19 @@ import { Nav, Navbar, NavItem } from "react-bootstrap";
 
 이 문제를 해결하려면 [React Router Bootstrap](https://github.com/react-bootstrap/react-router-bootstrap)이라는 React Router 및 React Bootstrap에서 작동하는 컴포넌트가 필요합니다. 이 컴포넌트는 `Navbar` 링크를 감쌀뿐만 아니라 React Router를 사용하여 브라우저를 새로 고치지 않고도 앱을 필요한 링크에 연결할 수 있습니다.
 
-<img class="code-marker" src="/assets/s.png" />작업 디렉토리에서 다음 명령을 실행하십시오.
+{%change%} 작업 디렉토리에서 다음 명령을 실행하십시오.
 
 ``` bash
 $ npm install react-router-bootstrap --save
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 `src/App.js`의 최상단에 아래 내용을 추가합니다.
+{%change%} 그리고 `src/App.js`의 최상단에 아래 내용을 추가합니다.
 
 ``` coffee
 import { LinkContainer } from "react-router-bootstrap";
 ```
 
-<img class="code-marker" src="/assets/s.png" />이제 링크를`LinkContainer`로 감쌉니다. `src/App.js`에 있는 `render` 메쏘드를 아래 내용으로 바꾸십시오.
+{%change%} 이제 링크를`LinkContainer`로 감쌉니다. `src/App.js`에 있는 `render` 메쏘드를 아래 내용으로 바꾸십시오.
 
 ``` coffee
 render() {

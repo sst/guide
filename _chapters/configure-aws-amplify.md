@@ -15,7 +15,7 @@ AWS Amplify provides a few simple modules (Auth, API, and Storage) to help us ea
 
 ### Install AWS Amplify
 
-<img class="code-marker" src="/assets/s.png" />Run the following command in your working directory.
+{%change%} Run the following command in your working directory.
 
 ``` bash
 $ npm install aws-amplify --save
@@ -27,7 +27,7 @@ This installs the NPM package and adds the dependency to your `package.json`.
 
 Let's first create a configuration file for our app that'll reference all the resources we have created.
 
-<img class="code-marker" src="/assets/s.png" />Create a file at `src/config.js` and add the following.
+{%change%} Create a file at `src/config.js` and add the following.
 
 ``` coffee
 export default {
@@ -62,7 +62,7 @@ Here you need to replace the following:
 
 Next we'll set up AWS Amplify.
 
-<img class="code-marker" src="/assets/s.png" />Import it by adding the following to the header of your `src/index.js`.
+{%change%} Import it by adding the following to the header of your `src/index.js`.
 
 ``` coffee
 import { Amplify } from 'aws-amplify';
@@ -70,13 +70,13 @@ import { Amplify } from 'aws-amplify';
 
 And import the config we created above. 
 
-<img class="code-marker" src="/assets/s.png" />Add the following, also to the header of your `src/index.js`.
+{%change%} Add the following, also to the header of your `src/index.js`.
 
 ``` coffee
 import config from './config';
 ```
 
-<img class="code-marker" src="/assets/s.png" />And to initialize AWS Amplify; add the following above the `ReactDOM.render` line in `src/index.js`.
+{%change%} And to initialize AWS Amplify; add the following above the `ReactDOM.render` line in `src/index.js`.
 
 ``` coffee
 Amplify.configure({
@@ -116,7 +116,7 @@ A couple of notes here.
 
 ### Commit the Changes
 
-<img class="code-marker" src="/assets/s.png" />Let's commit our code so far and push it to GitHub.
+{%change%} Let's commit our code so far and push it to GitHub.
 
 ``` bash
 $ git add .

@@ -12,7 +12,7 @@ Now we are going to add an API that returns a list of all the notes a user has.
 
 ### Add the Function
 
-<img class="code-marker" src="/assets/s.png" />Create a new file called `list.js` with the following.
+{%change%} Create a new file called `list.js` with the following.
 
 ``` javascript
 import handler from "./libs/handler-lib";
@@ -44,7 +44,7 @@ This is pretty much the same as our `get.js` except we only pass in the `userId`
 
 ### Configure the API Endpoint
 
-<img class="code-marker" src="/assets/s.png" />Open the `serverless.yml` file and append the following.
+{%change%} Open the `serverless.yml` file and append the following.
 
 ``` yaml
   list:
@@ -64,7 +64,7 @@ This defines the `/notes` endpoint that takes a GET request.
 
 ### Test
 
-<img class="code-marker" src="/assets/s.png" />Create a `mocks/list-event.json` file and add the following.
+{%change%} Create a `mocks/list-event.json` file and add the following.
 
 ``` json
 {

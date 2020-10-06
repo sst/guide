@@ -12,7 +12,7 @@ Now that we are able to create a new note, let's create a page where we can see 
 
 Currently, our Home container is very simple. Let's add the conditional rendering in there.
 
-<img class="code-marker" src="/assets/s.png" />Replace our `src/containers/Home.js` with the following.
+{%change%} Replace our `src/containers/Home.js` with the following.
 
 ``` coffee
 import React, { useState, useEffect } from "react";

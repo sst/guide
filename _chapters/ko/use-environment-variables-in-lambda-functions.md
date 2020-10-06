@@ -38,61 +38,61 @@ environment:
 
 그럼 해당 내용으로 변경해보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`create.js`의 아래 행을
+{%change%} `create.js`의 아래 행을
 
 ```
 TableName: "notes",
 ```
 
-<img class="code-marker" src="/assets/s.png" />다음 내용으로 바꿉니다.:
+{%change%} 다음 내용으로 바꿉니다.:
 
 ```
 TableName: process.env.tableName,
 ```
 
-<img class="code-marker" src="/assets/s.png" />같은 방법으로, `get.js` 파일도 수정합니다.:
+{%change%} 같은 방법으로, `get.js` 파일도 수정합니다.:
 
 ```
 TableName: "notes",
 ```
 
-<img class="code-marker" src="/assets/s.png" />다음 내용으로 바꿉니다.:
+{%change%} 다음 내용으로 바꿉니다.:
 
 ```
 TableName: process.env.tableName,
 ```
 
-<img class="code-marker" src="/assets/s.png" />`list.js` 파일도 마찬가지로:
+{%change%} `list.js` 파일도 마찬가지로:
 
 ```
 TableName: "notes",
 ```
 
-<img class="code-marker" src="/assets/s.png" />수정합니다.:
+{%change%} 수정합니다.:
 
 ```
 TableName: process.env.tableName,
 ```
 
-<img class="code-marker" src="/assets/s.png" />`update.js` 파일:
+{%change%} `update.js` 파일:
 
 ```
 TableName: "notes",
 ```
 
-<img class="code-marker" src="/assets/s.png" />마찬가지로 수정합니다.:
+{%change%} 마찬가지로 수정합니다.:
 
 ```
 TableName: process.env.tableName,
 ```
 
-<img class="code-marker" src="/assets/s.png" />마지막으로 `delete.js` 파일도:
+{%change%} 마지막으로 `delete.js` 파일도:
 
 ```
 TableName: "notes",
 ```
 
-<img class="code-marker" src="/assets/s.png" />아래 내용으로 수정합니다.:
+{%change%} 아래 내용으로 수정합니다.:
 
 ```
 TableName: process.env.tableName,
@@ -100,7 +100,7 @@ TableName: process.env.tableName,
 
 ### 코드 커밋
 
-<img class="code-marker" src="/assets/s.png" />지금까지 수정한 내용을 커밋합니다.:
+{%change%} 지금까지 수정한 내용을 커밋합니다.:
 
 ``` bash
 $ git add .

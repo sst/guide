@@ -24,7 +24,7 @@ React Router v4와 함께 제공되는 `history.push` 메소드를 사용합니�
 this.props.history.push("/");
 ```
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Login.js`의 `handleSubmit` 메소드를 다음과 같이 갱신하십시오:
+{%change%} `src/containers/Login.js`의 `handleSubmit` 메소드를 다음과 같이 갱신하십시오:
 
 ``` javascript
 handleSubmit = async event => {
@@ -50,25 +50,25 @@ handleSubmit = async event => {
 
 이 HOC를 사용하기 위해 App 컴포넌트를 내보내는 방식을 변경하겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/App.js`에서 아래 행을 변경합니다.
+{%change%} `src/App.js`에서 아래 행을 변경합니다.
 
 ``` coffee
 export default App;
 ```
 
-<img class="code-marker" src="/assets/s.png" />위 내용을 다음으로 바꿉니다.
+{%change%} 위 내용을 다음으로 바꿉니다.
 
 ``` coffee
 export default withRouter(App);
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 `src/App.js`의 헤더에 있는 `import {Link}` 행을 다음과 같이 바꾸어 `withRouter`를 가져옵니다:
+{%change%} 그리고 `src/App.js`의 헤더에 있는 `import {Link}` 행을 다음과 같이 바꾸어 `withRouter`를 가져옵니다:
 
 ``` coffee
 import { Link, withRouter } from "react-router-dom";
 ```
 
-<img class="code-marker" src="/assets/s.png" />`src/App.js`에 있는 `handleLogout` 메소드의 맨 아래에 다음을 추가하십시오.
+{%change%} `src/App.js`에 있는 `handleLogout` 메소드의 맨 아래에 다음을 추가하십시오.
 
 ``` coffee
 this.props.history.push("/login");

@@ -10,7 +10,7 @@ ref: save-changes-to-a-note
 
 Now that our note loads into our form, let's work on saving the changes we make to that note.
 
-<img class="code-marker" src="/assets/s.png" />Replace the `handleSubmit` function in `src/containers/Notes.js` with the following.
+{%change%} Replace the `handleSubmit` function in `src/containers/Notes.js` with the following.
 
 ``` javascript
 function saveNote(note) {
@@ -52,7 +52,7 @@ async function handleSubmit(event) {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />And include our `s3Upload` helper method in the header:
+{%change%} And include our `s3Upload` helper method in the header:
 
 ``` javascript
 import { s3Upload } from "../libs/awsLib";

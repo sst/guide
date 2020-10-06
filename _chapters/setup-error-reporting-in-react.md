@@ -42,7 +42,7 @@ And that's it. Scroll down and copy the `Sentry.init` line.
 
 ### Install Sentry
 
-<img class="code-marker" src="/assets/s.png" />Now head over to the project root for your React app and install Sentry.
+{%change%} Now head over to the project root for your React app and install Sentry.
 
 ``` bash
 $ npm install @sentry/browser --save
@@ -50,7 +50,7 @@ $ npm install @sentry/browser --save
 
 We are going to be using Sentry across our app. So it makes sense to keep all the Sentry related code in one place.
 
-<img class="code-marker" src="/assets/s.png" />Add the following to the top of your `src/libs/errorLib.js`.
+{%change%} Add the following to the top of your `src/libs/errorLib.js`.
 
 ``` javascript
 import * as Sentry from "@sentry/browser";
@@ -88,7 +88,7 @@ The `logError` method is what we are going to call when we want to report an err
 
 Next, let's initialize our app with Sentry.
 
-<img class="code-marker" src="/assets/s.png" />Add the following to the end of the imports in `src/index.js`.
+{%change%} Add the following to the end of the imports in `src/index.js`.
 
 ``` javascript
 import { initSentry } from './libs/errorLib';

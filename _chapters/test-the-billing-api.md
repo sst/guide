@@ -10,7 +10,7 @@ comments_id: test-the-billing-api/172
 
 Now that we have our billing API all set up, let's do a quick test in our local environment.
 
-<img class="code-marker" src="/assets/s.png" />Create a `mocks/billing-event.json` file and add the following.
+{%change%} Create a `mocks/billing-event.json` file and add the following.
 
 ``` json
 {

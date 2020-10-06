@@ -13,7 +13,7 @@ comments_id: create-the-signup-form/52
 
 ### 컨테이너 추가
 
-<img class="code-marker" src="/assets/s.png" />다음과 같이 `src/containers/Signup.js`에 새 컨테이너를 만듭니다.
+{%change%} 다음과 같이 `src/containers/Signup.js`에 새 컨테이너를 만듭니다.
 
 ``` coffee
 import React, { Component } from "react";
@@ -166,7 +166,7 @@ export default class Signup extends Component {
 
 5. `handleSubmit` 과 `handleConfirmationSubmit`은 `isLoading` 상태와 `newUser` 상태를 위한 더미 값을 설정하는 것 외에 별다른 기능이 없습니다.
 
-<img class="code-marker" src="/assets/s.png" />그리고 `src/containers/Signup.css`에 몇 가지 스타일을 추가해 보겠습니다.
+{%change%} 그리고 `src/containers/Signup.css`에 몇 가지 스타일을 추가해 보겠습니다.
 
 
 ``` css
@@ -190,7 +190,7 @@ export default class Signup extends Component {
 
 ### 경로 추가
 
-<img class="code-marker" src="/assets/s.png" />마지막으로 컨테이너를 로그인 경로 아래의 `src/Routes.js`에있는 경로로 추가하십시오. 참고로 ["세션을 state에 추가하기"]({% link _chapters/add-the-session-to-the-state.md %}) 챕터에서 작성한 `AppliedRoute` 컴포넌트를 사용하고 있습니다.
+{%change%} 마지막으로 컨테이너를 로그인 경로 아래의 `src/Routes.js`에있는 경로로 추가하십시오. 참고로 ["세션을 state에 추가하기"]({% link _chapters/add-the-session-to-the-state.md %}) 챕터에서 작성한 `AppliedRoute` 컴포넌트를 사용하고 있습니다.
 
 ``` coffee
 <AppliedRoute path="/signup" exact component={Signup} props={childProps} />

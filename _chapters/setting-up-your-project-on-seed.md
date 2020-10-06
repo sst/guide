@@ -34,7 +34,7 @@ Note that, if your `sst.json` is not in your project root, you will need to chan
 
 Seed deploys to your AWS account on your behalf. You should create a separate IAM user with exact permissions that your project needs. You can read more about this [here](https://seed.run/docs/customizing-your-iam-policy). But for now we'll simply use the one we've used in this tutorial.
 
-<img class="code-marker" src="/assets/s.png" />Run the following command.
+{%change%} Run the following command.
 
 ``` bash
 $ cat ~/.aws/credentials

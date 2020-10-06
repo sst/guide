@@ -28,7 +28,7 @@ Neste capítulo vamos ver com mais detalhes sobre o que foi feito, assim você p
 
 O processo de transpilação que converte nosso código para o Node v8.10 é feito pelo plugin serverless-webpack. Esse plugin foi adicionado no arquivo `serverless.yml`. Vamos ver com mais detalhes.
 
-<img class="code-marker" src="/assets/s.png" />Abra o `serverless.yml` e substitua tudo pelas linhas abaixo.
+{%change%} Abra o `serverless.yml` e substitua tudo pelas linhas abaixo.
 
 ```yaml
 service: notes-app-api

@@ -18,7 +18,7 @@ Neste capítulo nós vamos configurar o Serverless Framework em nosso ambiente d
 
 ### Instalando Serverless
 
-<img class="code-marker" src="/assets/s.png" />Instala o Serverless globalmente.
+{%change%} Instala o Serverless globalmente.
 
 ```bash
 $ npm install serverless -g
@@ -26,13 +26,13 @@ $ npm install serverless -g
 
 O comando acima precisa do [NPM](https://www.npmjs.com) instalado, um gerenciador de pacotes. Acesse [esse link](https://docs.npmjs.com/getting-started/installing-node) se precisar de ajuda para instalar.
 
-<img class="code-marker" src="/assets/s.png" />No diretório onde vai colocar os arquivos do projeto, crie um projeto base do Node.js. Nós vamos ver alguns detalhes desse projeto no próximo capítulo.
+{%change%} No diretório onde vai colocar os arquivos do projeto, crie um projeto base do Node.js. Nós vamos ver alguns detalhes desse projeto no próximo capítulo.
 
 ```bash
 $ serverless install --url https://github.com/AnomalyInnovations/serverless-nodejs-starter --name notes-app-api
 ```
 
-<img class="code-marker" src="/assets/s.png" />Vá até o diretório do backend de nossa API.
+{%change%} Vá até o diretório do backend de nossa API.
 
 ```bash
 $ cd notes-app-api
@@ -49,13 +49,13 @@ Também temos um diretório `tests/` onde nós podemos adicionar testes unitári
 
 O projeto inicial requisita algumas dependências que são listadas no arquivo `package.json`.
 
-<img class="code-marker" src="/assets/s.png" />Na raíz do projeto, execute.
+{%change%} Na raíz do projeto, execute.
 
 ```bash
 $ npm install
 ```
 
-<img class="code-marker" src="/assets/s.png" />Agora vamos instalar alguns outros pacotes específicos para nosso backend.
+{%change%} Agora vamos instalar alguns outros pacotes específicos para nosso backend.
 
 ```bash
 $ npm install aws-sdk --save-dev

@@ -68,7 +68,7 @@ And that’s it! We now have a set of commands we can run to deploy our updates.
 
 NPM allows us to add a `deploy` command in our `package.json`.
 
-<img class="code-marker" src="/assets/s.png" />Add the following in the `scripts` block above `eject` in the `package.json`.
+{%change%} Add the following in the `scripts` block above `eject` in the `package.json`.
 
 ``` coffee
 "predeploy": "npm run build",

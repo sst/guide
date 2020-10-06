@@ -1,3 +1,5 @@
+# Replace {%change%} with an image
+# Indicates that the reader needs to make this change 
 module Jekyll
   class Change < Liquid::Tag
     def render(context)

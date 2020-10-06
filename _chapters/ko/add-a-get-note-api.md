@@ -14,7 +14,7 @@ comments_id: add-a-get-note-api/132
 
 ### 함수 추가하기 
 
-<img class="code-marker" src="/assets/s.png" />신규 파일인 `get.js`를 생성하고 아래 코드를 붙여넣기 합니다.
+{%change%} 신규 파일인 `get.js`를 생성하고 아래 코드를 붙여넣기 합니다.
 
 ``` javascript
 import handler from "./libs/handler-lib";
@@ -46,7 +46,7 @@ export const main = handler(async (event, context) => {
 
 ### API 엔드포인트 구성하기 
 
-<img class="code-marker" src="/assets/s.png" />`serverless.yml` 파일을 열고 아래 코드를 추가합니다.
+{%change%} `serverless.yml` 파일을 열고 아래 코드를 추가합니다.
 
 ``` yaml
   get:
@@ -70,7 +70,7 @@ export const main = handler(async (event, context) => {
 
 Get note API를 테스트하려면`noteId` 매개 변수를 전달해야합니다. 우리는 이전 장에서 작성한 노트의 `noteId`를 사용하고`pathParameters` 블록을 모의 객체에 추가 할 것입니다. 그러면 해당 내용은 아래와 유사하게 보일 것입니다. `id`의 값을 이전의 `create.js` 함수를 호출 할 때 받았던 ID로 대체하십시오.
 
-<img class="code-marker" src="/assets/s.png" />`mocks/get-event.json` 파일을 만들고 아래 코드를 추가합니다.
+{%change%} `mocks/get-event.json` 파일을 만들고 아래 코드를 추가합니다.
 
 ``` json
 {

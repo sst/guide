@@ -13,14 +13,14 @@ ref: add-a-billing-api
 
 ### 결제 람다 추가
 
-<img class="code-marker" src="/assets/s.png" />Stripe NPM 패키지를 설치합니다. 프로젝트의 루트에서 다음을 실행하십시오.
+{%change%} Stripe NPM 패키지를 설치합니다. 프로젝트의 루트에서 다음을 실행하십시오.
 
 
 ``` bash
 $ npm install --save stripe
 ```
 
-<img class="code-marker" src="/assets/s.png" />다음으로 `billing.js`에 다음 내용을 추가합니다.
+{%change%} 다음으로 `billing.js`에 다음 내용을 추가합니다.
 
 ``` js
 import stripePackage from "stripe";
@@ -59,7 +59,7 @@ export const main = handler(async (event, context) => {
 
 이제 `calculateCost` 메소드를 구현해 보겠습니다. 이것은 주로 *비즈니스 로직*입니다.
 
-<img class="code-marker" src="/assets/s.png" />`libs/billing-lib.js` 파일을 만들고 아래 내용을 추가합니다.
+{%change%} `libs/billing-lib.js` 파일을 만들고 아래 내용을 추가합니다.
 
 ``` js
 export function calculateCost(storage) {
@@ -79,7 +79,7 @@ export function calculateCost(storage) {
 
 새로운 API 및 Lambda 함수에 대한 참조를 추가해 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`serverless.yml`의 `resources :`블럭 위에 다음을 추가하십시오.
+{%change%} `serverless.yml`의 `resources :`블럭 위에 다음을 추가하십시오.
 
 ``` yml
   billing:
@@ -96,7 +96,7 @@ export function calculateCost(storage) {
 
 ### 변경 사항 커밋 
 
-<img class="code-marker" src="/assets/s.png" />Git으로 빠르게 커밋합니다.
+{%change%} Git으로 빠르게 커밋합니다.
 
 ``` bash
 $ git add .

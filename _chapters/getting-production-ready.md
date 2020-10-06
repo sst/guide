@@ -30,37 +30,53 @@ Over the next few chapters we will look at how to get your app ready for product
 
 The goal of the next few sections is to make sure that you have a setup that you can easily replicate and use for your future projects. This is almost exactly what we and a few of our readers have been using.
 
+### Reorganize Your Repo
+
+In the next few chapters we are going to using [AWS CDK](https://aws.amazon.com/cdk/) to configure our Serverless infrastructure. So let's reorganize our backend repo around a bit.
+
+{%change%} Create a new `services/notes/` directory. Run the following in our repo root.
+
+``` bash
+$ mkdir -p services/notes
+```
+
+This is a common organizational pattern in Serverless Framework projects. You'll have multiple services in the future. So we'll create a services directory and add a notes service in it.
+
+{%change%} Let's move our files to the new directory.
+
+``` bash
+$ mv *.js *.json *.yml *.env services/notes
+$ mv tests libs mocks node_modules -t services/notes
+```
+
+In the coming chapters, we'll be creating an `infrastructure/` directory for our CDK app.
+
 ### Update the serverless.yml
 
-In the next few chapters we are going to configure our various infrastructure pieces through our `serverless.yml`. Note that, since we had previously created our resources using the console, we will not be able to configure them through code. To do this, we'll create a new project.
+We'll also be deploying our app to multiple environments. This is so that when we make changes or test our app while developing, we don't affect our users. So let's start by defaulting our API to deploy to the development environment, instead of production.
 
-Serverless Framework uses the `service` name to identify projects. Since we are creating a new project we want to ensure that we use a different name from the original. Now we could have simply overwritten the existing project but the resources were previously created by hand and will conflict when we try to create them through code.
-
-<img class="code-marker" src="/assets/s.png" />Open the `serverless.yml` and find the following line:
-
-``` yml
-service: notes-app-api
-```
-
-<img class="code-marker" src="/assets/s.png" />And replace it with this:
-
-``` yml
-service: notes-app-2-api
-```
-
-<img class="code-marker" src="/assets/s.png" />Also, find this line in the `serverless.yml`:
+{%change%} Open the `services/notes/serverless.yml` and find the following line:
 
 ``` yml
   stage: prod
 ``` 
 
-<img class="code-marker" src="/assets/s.png" />And replace it with:
+{%change%} And replace it with:
 
 ``` yml
   stage: dev
 ```
 
-We are defaulting the stage to `dev` instead of `prod`. This will become clear later when we create multiple environments.
+We are defaulting the stage to `dev` instead of `prod`. This will become more clear later when we create multiple environments.
+
+### Commit the Changes
+
+Let’s quickly commit these to Git.
+
+``` bash
+$ git add .
+$ git commit -m "Reorganizing the repo"
+```
 
 Note that, we are going to be creating new versions of our resources (DynamoDB, Cognito, etc.). Instead of using the ones that we created in the previous sections. This is because we want to define and create them programmatically. You can remove the resources we previously created. But for the purpose of this guide, we are going to leave it as is. In case you want to refer back to it at some point.
 

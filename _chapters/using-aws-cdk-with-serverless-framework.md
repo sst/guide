@@ -81,5 +81,3 @@ Here, just like the Serverless Framework example above; our app is made up of th
 We'll be deploying it using the `sst deploy` command, instead of the standard `cdk deploy` command. This'll make more sense in the coming chapters once we look at our infrastructure code.
 
 Let's start by creating our SST project.
-
-Now, let's start by configuring our infrastructure. We'll look at DynamoDB first.

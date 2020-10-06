@@ -17,7 +17,7 @@ An Error Boundary is a component that allows us to catch any errors that might h
 
 It's incredibly straightforward to setup. So let's get started.
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `src/components/ErrorBoundary.js`.
+{%change%} Add the following to `src/components/ErrorBoundary.js`.
 
 ``` coffee
 import React from "react";
@@ -51,7 +51,7 @@ The key part of this component is the `componentDidCatch` and `getDerivedStateFr
 
 Let's include some simple styles for this.
 
-<img class="code-marker" src="/assets/s.png" />Create a `src/components/ErrorBoundary.css` file and add:
+{%change%} Create a `src/components/ErrorBoundary.css` file and add:
 
 ``` css
 .ErrorBoundary {
@@ -66,7 +66,7 @@ The styles we are using are very similar to our `NotFound` component. We use tha
 
 To use the Error Boundary component that we created, we'll need to add it to our app component.
 
-<img class="code-marker" src="/assets/s.png" />Find the following in `src/App.js`.
+{%change%} Find the following in `src/App.js`.
 
 {% raw %}
 ``` coffee
@@ -76,7 +76,7 @@ To use the Error Boundary component that we created, we'll need to add it to our
 ```
 {% endraw %}
 
-<img class="code-marker" src="/assets/s.png" />And replace it with:
+{%change%} And replace it with:
 
 {% raw %}
 ``` coffee
@@ -88,7 +88,7 @@ To use the Error Boundary component that we created, we'll need to add it to our
 ```
 {% endraw %}
 
-<img class="code-marker" src="/assets/s.png" />Also, make sure to import it in the header of `src/App.js`.
+{%change%} Also, make sure to import it in the header of `src/App.js`.
 
 ``` javascript
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -98,7 +98,7 @@ And that's it! Now an unhandled error in our containers will show a nice error m
 
 ### Commit the Changes
 
-<img class="code-marker" src="/assets/s.png" />Let's quickly commit these to Git.
+{%change%} Let's quickly commit these to Git.
 
 ``` bash
 $ git add .
@@ -107,7 +107,7 @@ $ git commit -m "Adding error reporting"
 
 ### Push the Changes
 
-<img class="code-marker" src="/assets/s.png" />Let's also push these changes to GitHub and deploy our app.
+{%change%} Let's also push these changes to GitHub and deploy our app.
 
 ``` bash
 $ git push

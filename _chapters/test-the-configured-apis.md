@@ -16,7 +16,7 @@ Before we do the test let's create a test user for both the environments. We'll 
 
 We are going to use the AWS CLI for this.
 
-<img class="code-marker" src="/assets/s.png" />In your terminal, run.
+{%change%} In your terminal, run.
 
 ``` bash
 $ aws cognito-idp sign-up \
@@ -28,7 +28,7 @@ $ aws cognito-idp sign-up \
 
 Refer back to the [Deploying through Seed]({% link _chapters/deploying-through-seed.md %}) chapter to look up the **dev** version of your Cognito App Client Id. And replace `YOUR_DEV_COGNITO_REGION` with the region that you deployed to.
 
-<img class="code-marker" src="/assets/s.png" />Next we'll confirm the user through the Cognito Admin CLI.
+{%change%} Next we'll confirm the user through the Cognito Admin CLI.
 
 ``` bash
 $ aws cognito-idp admin-confirm-sign-up \
@@ -41,7 +41,7 @@ Again, replace `YOUR_DEV_COGNITO_USER_POOL_ID` with the **dev** version of your 
 
 Let's quickly do the same with **prod** versions as well.
 
-<img class="code-marker" src="/assets/s.png" />In your terminal, run.
+{%change%} In your terminal, run.
 
 ``` bash
 $ aws cognito-idp sign-up \
@@ -53,7 +53,7 @@ $ aws cognito-idp sign-up \
 
 Here use your prod version of your Cognito details.
 
-<img class="code-marker" src="/assets/s.png" />And confirm the user.
+{%change%} And confirm the user.
 
 ``` bash
 $ aws cognito-idp admin-confirm-sign-up \
