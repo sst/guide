@@ -47,51 +47,41 @@ resources:
         TopicName: ${self:custom.stage}-note-purchased
 ```
 
-### DynamoDB table names in `database` service
+### Parameterize Resources in CDK With SST
 
-> TODO: we are now letting CloudFormation to generate the table name, remove the DynamoDB example?
+For CDK on the other hand we use [SST](https://github.com/serverless-stack/serverless-stack) to automatically parameterize our stack names. And use a helper method to parameterize specific resource names.
 
-``` yml
-...
-custom:
-  stage: ${opt:stage, self:provider.stage}
-  tableName: ${self:custom.stage}-ext-notes
-
-...
-resources:
-  Resources:
-    NotesTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: ${self:custom.tableName}
-        AttributeDefinitions:
-          - AttributeName: userId
-            AttributeType: S
-          - AttributeName: noteId
-            AttributeType: S
-        KeySchema:
-          - AttributeName: userId
-            KeyType: HASH
-          - AttributeName: noteId
-            KeyType: RANGE
-        BillingMode: PAY_PER_REQUEST
-```
-
-### S3 bucket names in `uploads` service
-
-Since, S3 bucket names need to be globally unique; leave the bucket name empty and let CloudFormation auto generate it.
+So for example in the `lib/index.js` file in our [resources repo]({{ site.backend_ext_resources_github_repo }}).
 
 ``` javascript
-this.bucket = new s3.Bucket(this, "Uploads", {
-  cors: [
-    {
-      maxAge: 3000,
-      allowedOrigins: ["*"],
-      allowedHeaders: ["*"],
-      allowedMethods: ["GET", "PUT", "POST", "DELETE", "HEAD"],
-    },
-  ],
+export default function main(app) {
+  new DynamoDBStack(app, "dynamodb");
+
+  const s3 = new S3Stack(app, "s3");
+
+  new CognitoStack(app, "cognito", { bucketArn: s3.bucket.bucketArn });
+}
+```
+
+Our stack names are called `dynamodb`, `s3`, and `cognito`. But when these are deployed, they are deployed as:
+
+``` bash
+dev-notes-ext-infra-dynamodb
+dev-notes-ext-infra-s3
+dev-notes-ext-infra-cognito
+```
+
+Where `dev` is the stage we are deploying to and `notes-ext-infra` is the name of our SST app, as specified in our `sst.json`.
+
+For specific resources, such as CloudFormation exports, we use the `app.logicalPrefixedName` helper method. Here's an example from `lib/DynamoDBStack.js`.
+
+``` javascript
+new CfnOutput(this, "TableName", {
+  value: table.tableName,
+  exportName: app.logicalPrefixedName("ExtTableName"),
 });
 ```
+
+The `app.logicalPrefixedName` prefixes our export name with the name of the stage and the app.
 
 Parameterizing your resources allows your app to be deployed to multiple environments without naming conflicts. Next, let's deploy our app!

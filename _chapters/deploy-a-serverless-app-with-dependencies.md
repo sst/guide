@@ -16,12 +16,23 @@ The short version is that:
 
 #### First deployment
 
-> TODO: update this section
+In our [resources repo]({{ site.backend_ext_resources_github_repo }}) we are using SST to deploy our CDK app. CDK internally keeps track of the dependencies between stacks.
 
-In our [resources repo]({{ site.backend_ext_resources_github_repo }}) we need to:
+Our `lib/index.js` looks like this.
 
-- Deploy the `database` and `uploads` service. These can be deployed concurrently.
-- Then we can deploy the `auth` service.
+``` javascript
+export default function main(app) {
+  new DynamoDBStack(app, "dynamodb");
+
+  const s3 = new S3Stack(app, "s3");
+
+  new CognitoStack(app, "cognito", { bucketArn: s3.bucket.bucketArn });
+}
+```
+
+Here CDK knows that the `CognitoStack` depends on the `S3Stack`. And it needs to wait for the `S3Stack` to complete first.
+
+[SST](https://github.com/serverless-stack/serverless-stack) will deploy the stacks in our CDK app concurrently while ensuring that the dependencies are respected.
 
 Next for the [API repo]({{ site.backend_ext_api_github_repo }}) for the first time, you have to:
 

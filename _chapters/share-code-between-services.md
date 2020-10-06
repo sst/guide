@@ -6,7 +6,7 @@ date: 2019-09-29 00:00:00
 comments_id: share-code-between-services/1333
 ---
 
-In the previous few chapters, we looked at how to organize all our infrastructure resources in one repo. In these next couple of chapters we'll look at how to organize all our business logic services (APIs) in the same repo. We'll start by attempting to answer the following questions:
+In these next couple of chapters we'll look at how to organize all our business logic services (APIs) in the same repo. We'll start by attempting to answer the following questions:
 
 1. Do I have just one or multiple `package.json` files?
 2. How do I share common code and config between services?
@@ -43,6 +43,8 @@ We use the `package.json` at the project root to install the dependencies that
 On the other hand, dependencies that are specific to a single service are installed in the `package.json` for that service. In our example, the `billing-api` service uses the `stripe` NPM package. So it’s added just to that `package.json`. Similarly, the `notes-api` service uses the `uuid` NPM package, and it’s added just to that `package.json`.
 
 This setup implies that when you are deploying your app through a CI; you’ll need to do an `npm install` twice. Once in the root level and once in a specific service. [Seed](https://seed.run/) does this automatically for you.
+
+You can also use [Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) (and [Lerna](https://lerna.js.org/)) to manage the dependencies for your monorepo setup. We cover this setup in a separate chapter — [Using Lerna and Yarn Workspaces with Serverless]({% link _chapters/using-lerna-and-yarn-workspaces-with-serverless.md %}).
 
 Usually, you might have to manually pick and choose the modules that need to be packaged with your Lambda function. Simply packaging all the dependencies will increase the code size of your Lambda function and this leads to longer cold start times. However, in our example we are using the `serverless-bundle` plugin that internally uses [Webpack](https://webpack.js.org/)’s tree shaking algorithm to only package the code that our Lambda function needs.
 
