@@ -14,6 +14,10 @@ First let's start by quickly looking at the common terms used when talking about
 
   A service is what you might call a Serverless project. It has a single `serverless.yml` file driving it.
 
+- **Stack**
+
+  A stack is what CloudFormation stack. In our case it is defined using [CDK](https://github.com/serverless/serverless).
+
 - **Application**
 
   An application or app is a collection of multiple services.
@@ -31,12 +35,11 @@ And your app also has a job service:
 
 - **notify-job** service: Sends you a text message after a user successfully makes a purchase.
 
-> TODO: infrastructure is not made up of services
-The infrastructure is created by the following services:
+The infrastructure on the other hand is created by the following stacks in CDK:
 
-- **auth** service: Defines a Cognito User and Identity pool used to store user data.
-- **database** service: Defines a DynamoDB table called `notes` used to store notes data.
-- **uploads** service: Defines an S3 bucket used to store note images.
+- **CognitoStack**: Defines a Cognito User and Identity pool used to store user data.
+- **DynamoDBStack**: Defines a DynamoDB table called `notes` used to store notes data.
+- **S3Stack**: Defines an S3 bucket used to store note images.
 
 
 ### Microservices + Monorepo
@@ -61,6 +64,7 @@ A couple of things to notice here:
 1. We are going over a Node.js project here but this pattern applies to other languages as well.
 2. The `services/` dir at the root is made up of a collection of services. Where a service contains a single `serverless.yml` file.
 3. Each service deals with a relatively small and self-contained function. So for example, the `notes-api` service deals with everything from creating to deleting notes. Of course, the degree to which you want to separate your application is entirely up to you.
+4. The `infrastructure/` directory is a CDK app that is made up of multiple stacks.
 4. The `package.json` (and the `node_modules/` dir) are at the root of the repo. However, it is fairly common to have a separate `package.json` inside each service directory.
 5. The `libs/` dir is just to illustrate that any common code that might be used across all services can be placed in here.
 6. To deploy this application you are going to need to run `serverless deploy` separately in each of the services.
@@ -141,11 +145,14 @@ It's not the goal of this section to evaluate which setup is better. Instead, I 
 1. [**serverless-stack-demo-ext-resources**]({{ site.backend_ext_resources_github_repo }})
 2. [**serverless-stack-demo-ext-api**]({{ site.backend_ext_api_github_repo }})
 
-> TODO: review folder structure
 In **serverless-stack-demo-ext-resources**, you have:
 
 ```
 /
+  lib/
+    CognitoStack.js
+    DynamoDBStack.js
+    S3Stack.js
 ```
 
 And in **serverless-stack-demo-ext-api**, you have:

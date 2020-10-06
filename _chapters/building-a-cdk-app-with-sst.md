@@ -8,7 +8,7 @@ ref: building-a-cdk-app-with-sst
 comments_id: 
 ---
 
-We are going to be using [AWS CDK](https://aws.amazon.com/cdk/) to create and deploy the infrastructure our Serverless app is going to need. We are using [Serverless Framework](https://github.com/serverless/serverless) for our APIs. And to use CDK with it, we'll be using the [**Serverless Stack Toolkit**](https://github.com/serverless-stack/serverless-stack) (SST). It's an extension of CDK that allows us to deploy it alongside our Serverless Framework service.
+We are going to be using [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}) to create and deploy the infrastructure our Serverless app is going to need. We are using [Serverless Framework](https://github.com/serverless/serverless) for our APIs. And to use CDK with it, we'll be using the [**Serverless Stack Toolkit**](https://github.com/serverless-stack/serverless-stack) (SST). It's an extension of CDK that allows us to deploy it alongside our Serverless Framework service.
 
 Let's get started.
 

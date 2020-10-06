@@ -4,7 +4,9 @@ title: Configure Cognito Identity Pool in CDK
 date: 2018-03-02 00:00:00
 lang: en
 description: 
-redirect_from: /chapters/configure-cognito-identity-pool-in-serverless.html
+redirect_from:
+  - /chapters/configure-cognito-identity-pool-in-serverless.html
+  - /chapters/cognito-as-a-serverless-service.html
 ref: configure-cognito-identity-pool-in-cdk
 comments_id: 
 ---

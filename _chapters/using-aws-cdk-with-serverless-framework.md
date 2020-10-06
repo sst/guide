@@ -8,7 +8,7 @@ ref: using-aws-cdk-with-serverless-framework
 comments_id: 
 ---
 
-To quickly recap, we are using [Serverless Framework](https://github.com/serverless/serverless) to deploy our Serverless backend API. And we are going to use [AWS CDK](https://aws.amazon.com/cdk/) to deploy the rest of the infrastructure for our notes app. 
+To quickly recap, we are using [Serverless Framework](https://github.com/serverless/serverless) to deploy our Serverless backend API. And we are going to use [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}) to deploy the rest of the infrastructure for our notes app. 
 
 In this chapter we'll look at how we can use the two together.
 

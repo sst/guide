@@ -4,7 +4,9 @@ title: Configure S3 in CDK
 date: 2018-02-28 00:00:00
 lang: en
 description: 
-redirect_from: /chapters/configure-s3-in-serverless.html
+redirect_from:
+  - /chapters/configure-s3-in-serverless.html
+  - /chapters/s3-as-a-serverless-service.html
 ref: configure-s3-in-cdk
 comments_id: 
 ---
