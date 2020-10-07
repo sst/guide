@@ -86,7 +86,7 @@ For example, we want to define the current stage and the resources stage we want
 ``` yml
 custom:
   # Our stage is based on what is passed in when running serverless
-  # commands. Or fallsback to what we have set in the provider section.
+  # commands. Or falls back to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
   sstAppMapping:
     prod: prod

@@ -40,7 +40,7 @@ First we start by defining the stage that our Serverless services are going to b
 ``` yml
 custom:
   # Our stage is based on what is passed in when running serverless
-  # commands. Or fallsback to what we have set in the provider section.
+  # commands. Or falls back to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
 ```
 
@@ -79,7 +79,7 @@ For reference, here's what the top of our `serverless.common.yml` looks like:
 ``` yml
 custom:
   # Our stage is based on what is passed in when running serverless
-  # commands. Or fallsback to what we have set in the provider section.
+  # commands. Or falls back to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
   sstAppMapping:
     prod: prod

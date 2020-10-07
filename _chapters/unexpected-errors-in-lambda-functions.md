@@ -14,7 +14,7 @@ Previously, we looked at [how to debug errors in our Lambda function code]({% li
 
 Our Lambda functions often make API requests to interact with other services. In our notes app, we talk to DynamoDB to store and fetch data; and we also talk to Stripe to process payments. When we make an API request, there is the chance the HTTP connection times out or the remote service takes too long to respond. We are going to look at how to detect and debug the issue. The default timeout for Lambda functions are 6 seconds. So let's simulate a timeout using `setTimeout`.
 
-{%change%} Replace our `get.js` with the following:
+{%change%} Replace our `services/notes/get.js` with the following:
 
 ``` javascript
 import handler from "./libs/handler-lib";
@@ -112,7 +112,7 @@ export const main = handler(async (event, context) => {
 
 Now we'll set our Lambda function to use the lowest memory allowed and make sure it has time to allocate the memory.
 
-{%change%} Replace the `get` function block in your `serverless.yml`.
+{%change%} Replace the `get` function block in your `services/notes/serverless.yml`.
 
 ``` yml
   get:

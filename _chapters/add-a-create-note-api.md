@@ -91,7 +91,7 @@ Now let's define the API endpoint for our function.
 {%change%} Open the `serverless.yml` file and replace it with the following.
 
 ``` yaml
-service: notes-app-api
+service: notes-api
 
 # Create an optimized package for our functions
 package:

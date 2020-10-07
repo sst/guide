@@ -88,7 +88,7 @@ provider:
   region: us-east-1
 ```
 
-The `service` name is pretty important. We are calling our service the `notes-app-api`. Serverless Framework creates your stack on AWS using this as the name. This means that if you change the name and deploy your project, it will create a **completely new project**!
+The `service` name is pretty important. We are calling our service the `notes-api`. Serverless Framework creates your stack on AWS using this as the name. This means that if you change the name and deploy your project, it will create a **completely new project**!
 
 You'll notice the plugins that we've included — `serverless-bundle`, `serverless-offline`, and `serverless-dotenv-plugin`. The [serverless-offline](https://github.com/dherault/serverless-offline) plugin is helpful for local development. While the [serverless-dotenv-plugin](https://github.com/colynb/serverless-dotenv-plugin) will be used later to load the `.env` files as Lambda environment variables.
 

@@ -29,13 +29,13 @@ $ npm install serverless -g
 <img class="code-marker" src="/assets/s.png"/> 작업 디렉토리에서 Node.js 스타터를 사용하여 프로젝트를 생성하십시오. 다음 장에서이 스타터 프로젝트의 세부 사항을 살펴 보겠습니다.
 
 ``` bash
-$ serverless install --url https://github.com/AnomalyInnovations/serverless-nodejs-starter --name notes-app-api
+$ serverless install --url https://github.com/AnomalyInnovations/serverless-nodejs-starter --name notes-api
 ```
 
 {%change%} 백앤드 API 프로젝트 디렉토리로 이동합니다.
 
 ``` bash
-$ cd notes-app-api
+$ cd notes-api
 ```
 
 이제 디렉토리에는 **handler.js** 및 **serverless.yml**과 같은 몇 개의 파일이 있어야합니다.

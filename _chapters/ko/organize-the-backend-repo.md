@@ -26,7 +26,7 @@ $ rm tests/handler.test.js
 {%change%} `serverless.yml` 파일을 열어서 다음 행을 찾습니다.:
 
 ``` yml
-service: notes-app-api
+service: notes-api
 ```
 
 {%change%} 그리고 아래 내용으로 변경합니다.:

@@ -24,13 +24,9 @@ Now to add your project, select **GitHub** as your git provider. You'll be asked
 
 Select the repo we've been using so far.
 
-Next, Seed will automatically detect `sst.json` and `serverless.yml` files in your repo. After detection, select the **infrastructure** service. Then click **Add Service**.
+Next, Seed will automatically detect `sst.json` and `serverless.yml` files in your repo. Select the **infrastructure** service. Then click **Add Service**. We'll add our API later.
 
 ![Serverless.yml detected screenshot](/assets/part2/sst-json-detected.png)
-
-> TODO: remove next line?
-
-Note that, if your `sst.json` is not in your project root, you will need to change the path.
 
 Seed deploys to your AWS account on your behalf. You should create a separate IAM user with exact permissions that your project needs. You can read more about this [here](https://seed.run/docs/customizing-your-iam-policy). But for now we'll simply use the one we've used in this tutorial.
 
@@ -56,7 +52,7 @@ Fill in the credentials and click **Add a New App**.
 
 Your new app is created. You'll notice a few things here. First, we have a service called **notes-infra**. It's picking up the service name from our `sst.json`. You can choose to change this by clicking on the service and editing its name.  You'll also notice the two stages that have been created.
 
-A Serverless app can have multiple services within it. A service (roughly speaking) is a reference to a `sst.json` or `serverless.yml` file. In our case we have two services in our repo. Let’s add the notes* service. Click **Pipeline**.
+A Serverless app can have multiple services within it. A service (roughly speaking) is a reference to a `sst.json` or `serverless.yml` file. In our case we have two services in our repo. Let’s add the API service. Click **Pipeline**.
 
 ![Click pipeline screenshot](/assets/part2/click-pipeline.png)
 
@@ -64,11 +60,11 @@ Click **New Service**.
 
 ![Add new service screenshot](/assets/part2/add-new-service.png)
 
-Enter the path to the notes service services/notes. Then hit Search.
+Enter the path to the notes service services/notes. Then hit **Search**.
 
 ![Search new service screenshot](/assets/part2/search-new-service.png)
 
-Seed will search for the serverless.yml file in the path, to ensure you entered the right path. Hit Add Service.
+Seed will search for the `serverless.yml` file in the path, to ensure you entered the right path. Hit **Add Service**.
 
 ![Serverless.yml detected screenshot](/assets/part2/serverless-yml-detected.png)
 
@@ -76,7 +72,7 @@ Now you have 2 services.
 
 ![Added notes service screenshot](/assets/part2/added-notes-service.png)
 
-Before we deploy, let’s make sure the services will deploy in the desired order. To do this click on **Manage Deploy Phases**.
+Before we deploy, let’s make sure the services will be deployed in the desired order. To do this click on **Manage Deploy Phases**.
 
 ![Manage Deploy Phases screenshot](/assets/part2/manage-deploy-phases.png)
 
@@ -84,7 +80,7 @@ Here you’ll notice that by default all the services are deployed concurrently.
 
 ![One deploy phase screenshot](/assets/part2/one-deploy-phase.png)
 
-Select **Add a phase** and move the **notes** service to **Phase 2**. And hit Update Phases.
+Select **Add a phase** and move the API service to **Phase 2**. And hit Update Phases.
 
 ![Multiple deploy phases screenshot](/assets/part2/multiple-deploy-phases.png)
 

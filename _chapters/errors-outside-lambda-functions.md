@@ -14,7 +14,7 @@ We've covered debugging [errors in our code]({% link _chapters/logic-errors-in-l
 
 Lambda functions could fail not because of an error inside your handler code, but because of an error outside it. In this case, your Lambda function won't be invoked. Let's add some faulty code outside our handler function.
 
-{%change%} Replace our `get.js` with the following.
+{%change%} Replace our `services/notes/get.js` with the following.
 
 ``` javascript
 import handler from "./libs/handler-lib";

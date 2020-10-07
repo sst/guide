@@ -90,7 +90,7 @@ export function main(event, context, callback) {
 {%change%} `serverless.yml` 파일을 열어서 아래 코드로 대치하십시오.
 
 ``` yaml
-service: notes-app-api
+service: notes-api
 
 # ES6 변환을 위해 serverless-webpack 플러그인 사용
 plugins:

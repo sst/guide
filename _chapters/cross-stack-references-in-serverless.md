@@ -62,7 +62,7 @@ The `${self:custom.stage}` is a custom variable that we define at the top of our
 
 ``` yml
 # Our stage is based on what is passed in when running serverless
-# commands. Or fallsback to what we have set in the provider section.
+# commands. Or falls back to what we have set in the provider section.
 stage: ${opt:stage, self:provider.stage}
 ```
 
