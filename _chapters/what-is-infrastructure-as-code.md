@@ -22,7 +22,7 @@ To do this we are going to be using [AWS CloudFormation](https://aws.amazon.com/
 
 It creates a CloudFormation **stack** from the submitted **template**, and that stack is directly tied to the resources that have been created. So if you remove the stack, the services that it created will be removed as well.
 
-As an example, here is what the CloudFormation template for a DynamoDB table (like the one we created manually before) looks like.
+As an example, here is what the CloudFormation template for a DynamoDB table (like the one [we created manually before]({% link _chapters/create-a-dynamodb-table.md %})) looks like.
 
 ``` yml
 Resources:

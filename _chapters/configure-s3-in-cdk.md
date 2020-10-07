@@ -3,7 +3,7 @@ layout: post
 title: Configure S3 in CDK
 date: 2018-02-28 00:00:00
 lang: en
-description: 
+description: In this chapter we'll be using AWS CDK to configure a S3 bucket for our Serverless app using the s3.Bucket construct. We'll also be using the Serverless Stack Toolkit (SST) to make sure that we can deploy it alongside our Serverless Framework services.
 redirect_from:
   - /chapters/configure-s3-in-serverless.html
   - /chapters/s3-as-a-serverless-service.html
@@ -11,7 +11,7 @@ ref: configure-s3-in-cdk
 comments_id: 
 ---
 
-Now that we have [our DynamoDB table]({% link _chapters/configure-dynamodb-in-cdk.md %}) configured, let's look at how we can configure the S3 file uploads bucket using CDK.
+Now that we have [our DynamoDB table]({% link _chapters/configure-dynamodb-in-cdk.md %}) configured, let's look at how we can configure our S3 file uploads bucket using CDK.
 
 ### Create a Stack
 
@@ -48,11 +48,11 @@ export default class S3Stack extends sst.Stack {
 }
 ```
 
-If you recall from the [Create an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}) chapter, we had created a bucket and configured the CORS policy for it. We needed to do this because we are going to be uploading directly from our frontend client. We configure the same policy here.
+If you recall from the [Create an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}) chapter, we had created a bucket and configured the CORS policy for it. The CORS policy is necessary because we are uploading directly from our frontend client. We'll configure the same policy here.
 
-Just like our the DynamoDB stack that [we created in the last chapter]({% link _chapters/configure-dynamodb-in-cdk.md %}), we are going to output the name of the bucket that we created. However, we don't need to create a CloudFormation export because we need this value in our React app. And there isn't really a way to import CloudFormation exports there.
+Just like the DynamoDB stack that [we created in the last chapter]({% link _chapters/configure-dynamodb-in-cdk.md %}), we are going to output the name of the bucket that we created. However, we don't need to create a CloudFormation export because we need this value in our React app. And there isn't really a way to import CloudFormation exports there.
 
-The one thing that we are doing differently here is that we are creating a public class property called `bucket`. It holds a reference to the bucket that is created in this stack. We refer to this later when creating our Cognito IAM policies.
+The one thing that we are doing differently here is that we are creating a public class property called `bucket`. It holds a reference to the bucket that is created in this stack. We'll refer to this later when [creating our Cognito IAM policies]({% link _chapters/configure-cognito-identity-pool-in-cdk.md %}).
 
 You can refer to the CDK docs for more details on the [**s3.Bucket**](https://docs.aws.amazon.com/cdk/api/latest/docs/@aws-cdk_aws-s3.Bucket.html) construct.
 

@@ -11,7 +11,7 @@ ref: configure-cognito-identity-pool-in-cdk
 comments_id: 
 ---
 
-Over the past few chapters we've created [our DynamoDB table]({% link _chapters/configure-dynamodb-in-cdk.md %}), [S3 bucket]({% link _chapters/configure-s3-in-cdk.md %}), and [Cognito User Pool in CDK]({% link _chapters/configure-cognito-user-pool-in-cdk.md %}). We are now ready to connect them all together using a Cognito Identity Pool. This tells AWS which of our resources are available to our logged in users. You can read more about this back in the [Cognito user pool vs identity pool]({% link _chapters/cognito-user-pool-vs-identity-pool.md %}) chapter.
+Over the past few chapters we've created [our DynamoDB table]({% link _chapters/configure-dynamodb-in-cdk.md %}), [S3 bucket]({% link _chapters/configure-s3-in-cdk.md %}), and [Cognito User Pool in CDK]({% link _chapters/configure-cognito-user-pool-in-cdk.md %}). We are now ready to tie them together using a Cognito Identity Pool. This tells AWS which of our resources are available to our logged in users. You can read more about Identity Pools in the [Cognito User Pool vs Identity Pool]({% link _chapters/cognito-user-pool-vs-identity-pool.md %}) chapter.
 
 ### Add the Identity Pool
 
@@ -64,6 +64,8 @@ export default class CognitoStack extends sst.Stack {
 
 Let's quickly highlight the changes and go over them.
 
+We are creating a new `CfnIdentityPool` and linking it to the User Pool that we created [in the last chapter]({% link _chapters/configure-cognito-user-pool-in-cdk.md %}).
+
 ``` javascript
 + const identityPool = new cognito.CfnIdentityPool(this, "IdentityPool", {
 +   allowUnauthenticatedIdentities: false, // Don't allow unathenticated users
@@ -76,7 +78,7 @@ Let's quickly highlight the changes and go over them.
 + });
 ```
 
-We are creating a new `CfnIdentityPool` and link it to the User Pool that we created [in the last chapter]({% link _chapters/configure-cognito-user-pool-in-cdk.md %}).
+And we output the id of the Identity Pool that we just created.
 
 ``` javascript
 + new CfnOutput(this, "IdentityPoolId", {
@@ -84,9 +86,7 @@ We are creating a new `CfnIdentityPool` and link it to the User Pool that we cre
 + });
 ```
 
-And we output the id of Identity Pool that we just created.
-
-You can refer to the CDK docs to about the [**cognito.CfnIdentityPool**](https://docs.aws.amazon.com/cdk/api/latest/docs/@aws-cdk_aws-cognito.CfnIdentityPool.html) construct.
+You can refer to the CDK docs to learn more about the [**cognito.CfnIdentityPool**](https://docs.aws.amazon.com/cdk/api/latest/docs/@aws-cdk_aws-cognito.CfnIdentityPool.html) construct.
 
 ### Deploy the Stack
 
@@ -109,11 +109,11 @@ Stack dev-notes-infra-cognito
 
 ### Add the Cognito Authenticated Role
 
-Now we are ready to add the IAM role our authenticated users will assume. We could simply add it directly in the `CognitoStack` class. But let's use this oppurtunity to explore an aspect of CDK that really sets it apart from the old CloudFormation way of using YAML or JSON. The ability to easily create custom constructs.
+Now we are ready to add the IAM role our authenticated users will assume. We could simply add it directly in the `CognitoStack` class. But let's use this opportunity to explore an aspect of CDK that really sets it apart from the old CloudFormation way of using YAML or JSON. The ability to easily create custom constructs.
 
 #### Create a Construct in CDK
 
-So far we've been using the built-in constructs that come with AWS CDK. Now let's create one of our own. We are going to abstract out the process of creating an authenticated role into its own construct. It allows us to separate the complexity involved in creating this role and ensure that we can resuse it later when we are working with Identity Pools. 
+So far we've been using the built-in constructs that come with AWS CDK. Now let's create one of our own. We are going to abstract out the process of creating an authenticated IAM role. It allows us to separate the complexity involved in creating this role and ensure that we can reuse it later when we are working with Identity Pools. 
 
 {%change%} Create a new file in `infrastructure/lib/CognitoAuthRole.js` and add:
 
@@ -176,11 +176,15 @@ Here's what we are doing here:
 
 - It takes an `identityPool` as a prop.
 
-- Then we add a new IAM role for our authenticated users. Assign it to `this.role`, a public class property. We also import the `aws-iam` construct up top. This IAM role has a reference to the Identity Pool that we created.
+- Then we create a new IAM role using `iam.Role`. We also specify that it can be assumed by users that our authenticated with the Identity Pool that's passed in.
 
-- We add a policies to this role, using the `addToPolicy` method. It's a standard Cognito related policy.
+- We assign our newly created role to `this.role`, a public class property. This is so that we can access this role in our Cognito stack.
 
-- Finally, we attach this newly created role to our Identity Pool using by creating a new `cognito.CfnIdentityPoolRoleAttachment`.
+- We also import the `aws-iam` construct up top.
+
+- We add a policy to this role, using the `addToPolicy` method. It's a standard Cognito related policy. We did this back in the [Create a Cognito Identity Pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter.
+
+- Finally, we attach this newly created role to our Identity Pool by creating a new `cognito.CfnIdentityPoolRoleAttachment`.
 
 You can refer to the CDK docs to learn more about the [**iam.Role**](https://docs.aws.amazon.com/cdk/api/latest/docs/@aws-cdk_aws-iam.Role.html) and [**cognito.CfnIdentityPoolRoleAttachment**](https://docs.aws.amazon.com/cdk/api/latest/docs/@aws-cdk_aws-cognito.CfnIdentityPoolRoleAttachment.html) constructs.
 
@@ -267,11 +271,13 @@ export default class CognitoStack extends sst.Stack {
 
 Let's go over the changes we are making here.
 
+We first import our new construct.
+
 ``` javascript
 + import CognitoAuthRole from "./CognitoAuthRole";
 ```
 
-We first import our new construct.
+We then get a reference to the `bucketArn` of our previously created S3 bucket. We'll be passing this in shortly.
 
 ``` javascript
 + const { bucketArn } = props;
@@ -279,7 +285,7 @@ We first import our new construct.
 + const app = this.node.root;
 ```
 
-We then get a reference to the `bucketArn` of our previously created S3 bucket. We'll be passing this in shortly.
+Then we create a new instance of our `CognitoAuthRole` and assign it to `authenticatedRole`.
 
 ``` javascript
 + const authenticatedRole = new CognitoAuthRole(this, "CognitoAuthRole", {
@@ -287,7 +293,7 @@ We then get a reference to the `bucketArn` of our previously created S3 bucket. 
 + });
 ```
 
-Then we create a new instance of our `CognitoAuthRole` and assigning it to `authenticatedRole`.
+We access the new IAM role we are creating through `authenticatedRole.role`. And add a new policy to it. It grants permission to a specific folder in the S3 bucket we created. This ensures that authenticated users can only access their uploaded files (and not any other user's uploads). We talked about how this works back in the [Create a Cognito Identity Pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter.
 
 ``` javascript
 + authenticatedRole.role.addToPolicy(
@@ -301,7 +307,7 @@ Then we create a new instance of our `CognitoAuthRole` and assigning it to `auth
 + );
 ```
 
-We access the new IAM role we are creating through `authenticatedRole.role`. And add a new policy to it. It grants permission to a sepcific folder in the S3 bucket we created. This ensures that authenticated users can only access their uploaded files (and not any other user's uploads). We talked about how this works back in the [Create a Cognito Identity Pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter.
+Finally, we export the name of the role that we just created. We'll use this later in our Serverless API. We use the `app.logicalPrefixedName` method to ensure that our exported name is unique across multiple environments.
 
 ``` javascript
 + new CfnOutput(this, "AuthenticatedRoleName", {
@@ -309,8 +315,6 @@ We access the new IAM role we are creating through `authenticatedRole.role`. And
 +   exportName: app.logicalPrefixedName("CognitoAuthRole"),
 + });
 ```
-
-Finally, we export the name of the role that we just created. We'll use this later in our Serverless API. We use the `app.logicalPrefixedName` method to ensure that our exported name is unique across multiple environments.
 
 Now let's pass in the S3 bucket info from our other stack.
 
@@ -357,6 +361,6 @@ Stack dev-notes-infra-cognito
     dev-notes-infra-CognitoAuthRole: dev-notes-infra-cognito-CognitoAuthRoleCognitoDefa-14TSUK0GNJIBU
 ```
 
-And the infrastructure of our app has now been completely configured in code, thanks to CDK. And it's deployed in a way that is compatible with Serverless Framework, thanks to SST.
+And the infrastructure of our app has now been completely configured in code, thanks to CDK! And it's deployed in a way that is compatible with Serverless Framework, thanks to SST!
 
 Next let's connect Serverless Framework to our CDK SST app.

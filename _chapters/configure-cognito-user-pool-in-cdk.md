@@ -3,13 +3,13 @@ layout: post
 title: Configure Cognito User Pool in CDK
 date: 2018-03-01 00:00:00
 lang: en
-description: 
+description: In this chapter we'll be using AWS CDK to configure a Cognito User Pool for our Serverless app using the cognito.UserPool and cognito.UserPoolClient constructs. We'll also be using the Serverless Stack Toolkit (SST) to make sure that we can deploy it alongside our Serverless Framework services.
 redirect_from: /chapters/configure-cognito-user-pool-in-serverless.html
 ref: configure-cognito-user-pool-in-cdk
 comments_id: 
 ---
 
-So far we've configured [our DynamoDB table]({% link _chapters/configure-dynamodb-in-cdk.md %}) and [S3 bucket in CDK]({% link _chapters/configure-s3-in-cdk.md %}). We are now ready to setup our Cognito User Pool. The User Pool stores our user credentials and allows them to sign up and login to our app.
+So far we've configured [our DynamoDB table]({% link _chapters/configure-dynamodb-in-cdk.md %}) and [S3 bucket in CDK]({% link _chapters/configure-s3-in-cdk.md %}). We are now ready to setup our Cognito User Pool. The User Pool stores our user credentials and allows our users to sign up and login to our app.
 
 ### Create a Stack
 
