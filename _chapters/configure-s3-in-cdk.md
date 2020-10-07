@@ -30,6 +30,7 @@ export default class S3Stack extends sst.Stack {
     super(scope, id, props);
 
     this.bucket = new s3.Bucket(this, "Uploads", {
+      // Allow client side access to the bucket from a different domain
       cors: [
         {
           maxAge: 3000,

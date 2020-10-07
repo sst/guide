@@ -27,15 +27,14 @@ export default class CognitoStack extends sst.Stack {
     super(scope, id, props);
 
     const userPool = new cognito.UserPool(this, "UserPool", {
-      selfSignUpEnabled: true,
-      autoVerify: { email: true },
+      selfSignUpEnabled: true, // Allow users to sign up
+      autoVerify: { email: true }, // Verify email addresses by sending a verification code
       signInAliases: { email: true }, // Set email as an alias
     });
 
     const userPoolClient = new cognito.UserPoolClient(this, "UserPoolClient", {
       userPool,
-      generateSecret: false,
-      authFlows: { adminUserPassword: false },
+      generateSecret: false, // Don't need to generate secret for web app running on browsers
     });
 
     const identityPool = new cognito.CfnIdentityPool(this, "IdentityPool", {
@@ -216,15 +215,14 @@ export default class CognitoStack extends sst.Stack {
     const app = this.node.root;
 
     const userPool = new cognito.UserPool(this, "UserPool", {
-      selfSignUpEnabled: true,
-      autoVerify: { email: true },
+      selfSignUpEnabled: true, // Allow users to sign up
+      autoVerify: { email: true }, // Verify email addresses by sending a verification code
       signInAliases: { email: true }, // Set email as an alias
     });
 
     const userPoolClient = new cognito.UserPoolClient(this, "UserPoolClient", {
       userPool,
-      generateSecret: false,
-      authFlows: { adminUserPassword: false },
+      generateSecret: false, // Don't need to generate secret for web app running on browsers
     });
 
     const identityPool = new cognito.CfnIdentityPool(this, "IdentityPool", {
@@ -242,6 +240,7 @@ export default class CognitoStack extends sst.Stack {
     });
 
     authenticatedRole.role.addToPolicy(
+      // IAM policy granting users permission to a specific folder in the S3 bucket
       new iam.PolicyStatement({
         actions: ["s3:*"],
         effect: iam.Effect.ALLOW,
