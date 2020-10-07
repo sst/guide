@@ -52,7 +52,7 @@ sstAppMapping:
   dev: dev
 ```
 
-This seems a bit redundant because the stages names we are using across the two repos is going to be the same.
+This seems a bit redundant because the stage names we are using across the two repos are the same. But you might choose to call it `dev` in your Serverless services. And call it `development` in your SST app.
 
 Next, we create the reference to our SST app. 
 
@@ -68,7 +68,7 @@ Let's look at this in detail.
 
 - The `${VARIABLE}` format allows us to also specify a fallback. So in the case of `${VARIABLE_1, VARIABLE_2}`, it'll first try `VARIABLE_1`. If it doesn't resolve then it'll try `VARIABLE_2`.
 
-- So Serverless will first try to resolve, `self:custom.sstAppMapping.${self:custom.stage}`. It'll check if the stage we are currently deploying to (`self:custom.stage`) has mapping set in `self:custom.sstAppMapping`. If it does, then it uses it. In other words, if we are currently deploying to `dev` or `prod`, then name of the corresponding stage in our SST app.
+- So Serverless will first try to resolve, `self:custom.sstAppMapping.${self:custom.stage}`. It'll check if the stage we are currently deploying to (`self:custom.stage`) has a mapping set in `self:custom.sstAppMapping`. If it does, then it uses it. In other words, if we are currently deploying to `dev` or `prod`, then use the corresponding stage in our SST app.
 
 - If the stage we are currently deploying to does not have a corresponding stage in our SST app (not `dev` or `prod`), then we fallback to `self:custom.sstAppMapping.dev`. As in, we fallback to using the `dev` stage of our SST app.
 
@@ -103,7 +103,7 @@ provider:
 
 The `!ImportValue ${self:custom.sstApp}-ExtTableName` line allows us to import the CloudFormation export from the appropriate stage of our SST app. In this case we are importing the name of the DynamoDB table that's been created.
 
-The `provider:` and `environment:` options allow us to add environment variables to our Lambda functions. Recall that we can now access this via the `process.env.tableName` variable at runtime.
+The `provider:` and `environment:` options allow us to add environment variables to our Lambda functions. Recall that we can access this via the `process.env.tableName` variable at runtime.
 
 So in our `list.js`, we'll read the `tableName` from the environment variable `process.env.tableName`.
 

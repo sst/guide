@@ -16,7 +16,7 @@ First let's start by quickly looking at the common terms used when talking about
 
 - **Stack**
 
-  A stack is what CloudFormation stack. In our case it is defined using [CDK](https://github.com/serverless/serverless).
+  A stack is what CloudFormation stack. In our case it is defined using [CDK]({% link _chapters/what-is-aws-cdk.md %}).
 
 - **Application**
 
@@ -65,10 +65,10 @@ A couple of things to notice here:
 2. The `services/` dir at the root is made up of a collection of services. Where a service contains a single `serverless.yml` file.
 3. Each service deals with a relatively small and self-contained function. So for example, the `notes-api` service deals with everything from creating to deleting notes. Of course, the degree to which you want to separate your application is entirely up to you.
 4. The `infrastructure/` directory is a CDK app that is made up of multiple stacks.
-4. The `package.json` (and the `node_modules/` dir) are at the root of the repo. However, it is fairly common to have a separate `package.json` inside each service directory.
-5. The `libs/` dir is just to illustrate that any common code that might be used across all services can be placed in here.
-6. To deploy this application you are going to need to run `serverless deploy` separately in each of the services.
-7. [Environments (or stages)]({% link _chapters/stages-in-serverless-framework.md %}) need to be co-ordinated across all the different services. So if your team is using a `dev`, `staging`, and `prod` environment, then you are going to need to define the specifics of this in each of the services.
+5. The `package.json` (and the `node_modules/` dir) are at the root of the repo. However, it is fairly common to have a separate `package.json` inside each service directory.
+6. The `libs/` dir is just to illustrate that any common code that might be used across all services can be placed in here.
+7. To deploy this application you are going to need to run `serverless deploy` separately in each of the services.
+8. [Environments (or stages)]({% link _chapters/stages-in-serverless-framework.md %}) need to be co-ordinated across all the different services. So if your team is using a `dev`, `staging`, and `prod` environment, then you are going to need to define the specifics of this in each of the services.
 
 #### Advantages of Monorepo
 

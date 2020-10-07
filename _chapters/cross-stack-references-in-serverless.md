@@ -1,13 +1,13 @@
 ---
 layout: post
 title: Cross-Stack References in Serverless
-description: 
+description: AWS CloudFormation allows us to link multiple Serverless services using cross-stack references. To create a cross-stack reference, export a value using the "Export:" option in CloudFormation or CfnOutput construct in CDK. To import it in your serverless.yml, use "Fn::ImportValue".
 date: 2018-04-02 13:00:00
 ref: cross-stack-references-in-serverless
 comments_id: cross-stack-references-in-serverless/405
 ---
 
-In the previous chapter we looked at the [most common patterns for organizing your Serverless applications]({% link _chapters/organizing-serverless-projects.md %}). Now let's look at how to work with multiple services in your Serverless application.
+In the previous chapter we looked at [some of the most common patterns for organizing your Serverless applications]({% link _chapters/organizing-serverless-projects.md %}). Now let's look at how to work with multiple services in your Serverless application.
 
 You might recall that a Serverless service is where a single `serverless.yml` is used to define the project. And the `serverless.yml` file is converted into a [CloudFormation template](https://aws.amazon.com/cloudformation/aws-cloudformation-templates/) using Serverless Framework. This means that in the case of multiple services you might need to reference a resource that is available in a different service.
 
@@ -21,7 +21,7 @@ A cross-stack reference is a way for one CloudFormation template to refer to the
 - Cross-stack references only apply within the same region.
 - The name needs to be unique for a given region in an AWS account.
 
-A reference is created when one stack creates a CloudFormation export and another imports it. So for example, our `DynamoDBStack.js` might export the name of our DynamoDB table, and our `notes-api` might import it. Once the reference has been created, you cannot remove the DynamoDB stack without first removing the stack that is referencing it (the `notes-api`).
+A reference is created when one stack creates a CloudFormation export and another imports it. So for example, our `DynamoDBStack.js` is exporting the name of our DynamoDB table, and our `notes-api` service is importing it. Once the reference has been created, you cannot remove the DynamoDB stack without first removing the stack that is referencing it (the `notes-api`).
 
 The above relationship between two stacks means that they need to be deployed and removed in a specific order. We'll be looking at this later.
 
@@ -36,7 +36,7 @@ new CfnOutput(this, "TableName", {
 });
 ```
 
-The above is an example from our `DynamoDBStack.js`.
+The above is a CDK example from our `DynamoDBStack.js`.
 
 Here the `exportName` is the name of the CloudFormation export. We use a convenience method from [SST](https://github.com/serverless-stack/serverless-stack) called `app.logicalPrefixedName` that prefixes our export name with the name of the stage we are deploying to, and the name of our SST app. This ensures that our export name is unique when we deploy our stack across multiple environments.
 
@@ -54,7 +54,7 @@ resources:
         Name: ${self:custom.stage}-ExtNotePurchasedTopicArn
 ```
 
-The above is an example from the `serverless.yml` of our `billing-api`. We can add a `resources:` section to our `serverless.yml` and the `Outputs:` allows to add CloudFormation exports.
+The above is an example from the `serverless.yml` of our `billing-api`. We can add a `resources:` section to our `serverless.yml` and the `Outputs:` allows us to add CloudFormation exports.
 
 Just as above we need to name our CloudFormation export. We do it using the `Name:` property. Here we are prefixing our export name with the stage name (`${self:custom.stage}`) to make it unique across environments.
 
