@@ -29,7 +29,6 @@ You can get these updates emailed to you via our [newsletter]({{ site.newsletter
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v4.1...v5.0)
 - [API]({{ site.backend_github_repo }}/compare/v4.1...v5.0)
-- [Client]({{ site.frontend_github_repo }}/compare/v4.1...v5.0)
 
 #### [v4.1: {{ site.data.changelog.v4-1.title }}](https://branchv41--serverless-stack.netlify.com/)
 
