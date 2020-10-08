@@ -5,7 +5,7 @@ date: 2020-10-01 00:00:00
 lang: en
 description: In this chapter we'll look at how to connect our Serverless Framework service with our CDK app. Our CDK app is being deployed using Serverless Stack Toolkit (SST). We simply need to reference the name of our SST app in our serverless.yml and import the appropriate resources.
 ref: connect-serverless-framework-and-cdk-with-sst
-comments_id: 
+comments_id: connect-serverless-framework-and-cdk-with-sst/2100
 ---
 
 Now that we have configured the infrastructure for our Serverless app using CDK. Let's look at how we can connect it to our Serverless Framework project. The conventions enforced by [SST](https://github.com/serverless-stack/serverless-stack) makes this easy to do.

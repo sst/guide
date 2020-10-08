@@ -45,9 +45,11 @@ This is a common organizational pattern in Serverless Framework projects. You'll
 {%change%} Let's move our files to the new directory.
 
 ``` bash
-$ mv *.js *.json *.yml *.env services/notes
-$ mv tests libs mocks node_modules -t services/notes
+$ mv *.js *.json *.yml .env services/notes
+$ mv tests libs mocks node_modules services/notes
 ```
+
+If you are on Windows or if the above commands don't work, make sure to copy over these files and directories to `services/notes`.
 
 In the coming chapters, we'll also be creating an `infrastructure/` directory for our CDK app.
 

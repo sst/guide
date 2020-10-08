@@ -8,7 +8,7 @@ redirect_from:
   - /chapters/configure-s3-in-serverless.html
   - /chapters/s3-as-a-serverless-service.html
 ref: configure-s3-in-cdk
-comments_id: 
+comments_id: configure-s3-in-cdk/2099
 ---
 
 Now that we have [our DynamoDB table]({% link _chapters/configure-dynamodb-in-cdk.md %}) configured, let's look at how we can configure our S3 file uploads bucket using CDK.

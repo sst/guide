@@ -5,7 +5,7 @@ date: 2020-09-14 00:00:00
 lang: en
 description: AWS CDK (Cloud Developer Kit) is an Infrastructure as Code tool that allows you to use modern programming languages to define and provision resources on AWS. It supports JavaScript, TypeScript, Java, .NET, and Python.
 ref: what-is-aws-cdk
-comments_id: 
+comments_id: what-is-aws-cdk/2102
 ---
 
 [AWS CDK](https://aws.amazon.com/cdk/) (Cloud Development Kit), [released in Developer Preview back in August 2018](https://aws.amazon.com/blogs/developer/aws-cdk-developer-preview/); allows you to use TypeScript, JavaScript, Java, .NET, and Python to create AWS infrastructure.

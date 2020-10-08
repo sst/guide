@@ -8,7 +8,7 @@ redirect_from:
   - /chapters/configure-dynamodb-in-serverless.html
   - /chapters/dynamodb-as-a-serverless-service.html
 ref: configure-dynamodb-in-cdk
-comments_id: 
+comments_id: configure-dynamodb-in-cdk/2098
 ---
 
 We are now going to start creating our resources using CDK. Starting with DynamoDB.

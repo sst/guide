@@ -8,7 +8,7 @@ redirect_from:
   - /chapters/configure-cognito-identity-pool-in-serverless.html
   - /chapters/cognito-as-a-serverless-service.html
 ref: configure-cognito-identity-pool-in-cdk
-comments_id: 
+comments_id: configure-cognito-identity-pool-in-cdk/2096
 ---
 
 Over the past few chapters we've created [our DynamoDB table]({% link _chapters/configure-dynamodb-in-cdk.md %}), [S3 bucket]({% link _chapters/configure-s3-in-cdk.md %}), and [Cognito User Pool in CDK]({% link _chapters/configure-cognito-user-pool-in-cdk.md %}). We are now ready to tie them together using a Cognito Identity Pool. This tells AWS which of our resources are available to our logged in users. You can read more about Identity Pools in the [Cognito User Pool vs Identity Pool]({% link _chapters/cognito-user-pool-vs-identity-pool.md %}) chapter.
