@@ -28,18 +28,18 @@ Once you upload your icon, it'll show you a preview of your icon on various plat
 
 This should generate your favicon package and the accompanying code.
 
-<img class="code-marker" src="/assets/s.png" />Click **Favicon package** to download the generated favicons. And copy all the files over to your `public/` directory.
+{%change%} Click **Favicon package** to download the generated favicons. And copy all the files over to your `public/` directory.
 
 ![Realfavicongenerator.net completed screenshot](/assets/realfavicongenerator-completed.png)
 
-<img class="code-marker" src="/assets/s.png" />Remove the `public/logo192.png` and `public/logo512.png` files.
+{%change%} Remove the `public/logo192.png` and `public/logo512.png` files.
 
 ``` bash
 $ rm public/logo192.png
 $ rm public/logo512.png
 ```
 
-<img class="code-marker" src="/assets/s.png" />Then replace the contents of `public/manifest.json` with the following:
+{%change%} Then replace the contents of `public/manifest.json` with the following:
 
 ``` json
 {
@@ -66,7 +66,7 @@ $ rm public/logo512.png
 
 To include a file from the `public/` directory in your HTML, Create React App needs the `%PUBLIC_URL%` prefix.
 
-<img class="code-marker" src="/assets/s.png" />Add this to your `public/index.html`.
+{%change%} Add this to your `public/index.html`.
 
 ``` html
 <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png">
@@ -77,7 +77,7 @@ To include a file from the `public/` directory in your HTML, Create React App ne
 <meta name="theme-color" content="#ffffff">
 ```
 
-<img class="code-marker" src="/assets/s.png" />And **remove** the following lines that reference the original favicon and theme color.
+{%change%} And **remove** the following lines that reference the original favicon and theme color.
 
 ``` html
 <meta name="theme-color" content="#000000">

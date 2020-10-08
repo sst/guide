@@ -14,7 +14,7 @@ Previously, we looked at [how to debug errors in our Lambda function code]({% li
 
 Our Lambda functions often make API requests to interact with other services. In our notes app, we talk to DynamoDB to store and fetch data; and we also talk to Stripe to process payments. When we make an API request, there is the chance the HTTP connection times out or the remote service takes too long to respond. We are going to look at how to detect and debug the issue. The default timeout for Lambda functions are 6 seconds. So let's simulate a timeout using `setTimeout`.
 
-<img class="code-marker" src="/assets/s.png" />Replace our `get.js` with the following:
+{%change%} Replace our `services/notes/get.js` with the following:
 
 ``` javascript
 import handler from "./libs/handler-lib";
@@ -45,7 +45,7 @@ export const main = handler(async (event, context) => {
 });
 ```
 
-<img class="code-marker" src="/assets/s.png" />Let's commit this code.
+{%change%} Let's commit this code.
 
 ``` bash
 $ git add .
@@ -75,7 +75,7 @@ Next let's look at what happens when our Lambda function runs out of memory.
 
 By default, a Lambda function has 1024MB of memory. You can assing any amount of memory between 128MB and 3008MB in 64MB increments. So in our code, let's try and allocate more memory till it runs out of memory.
 
-<img class="code-marker" src="/assets/s.png" />Replace your `get.js` with:
+{%change%} Replace your `get.js` with:
 
 ``` javascript
 import handler from "./libs/handler-lib";
@@ -112,7 +112,7 @@ export const main = handler(async (event, context) => {
 
 Now we'll set our Lambda function to use the lowest memory allowed and make sure it has time to allocate the memory.
 
-<img class="code-marker" src="/assets/s.png" />Replace the `get` function block in your `serverless.yml`.
+{%change%} Replace the `get` function block in your `services/notes/serverless.yml`.
 
 ``` yml
   get:
@@ -130,7 +130,7 @@ Now we'll set our Lambda function to use the lowest memory allowed and make sure
           authorizer: aws_iam
 ```
 
-<img class="code-marker" src="/assets/s.png" />Let's commit this.
+{%change%} Let's commit this.
 
 ``` bash
 $ git add .

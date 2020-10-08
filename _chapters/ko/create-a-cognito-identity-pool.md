@@ -47,7 +47,7 @@ Amazon Cognito 연동 자격증명은 개발자가 사용자에 대해 고유 �
 
 ![정책 편집 확인 버튼 선택 화면](/assets/cognito-identity-pool/select-confirm-edit-policy.png)
 
-<img class="code-marker" src="/assets/s.png" />아래 정책을 편집화면에 추가합니다. 그리고 `YOUR_S3_UPLOADS_BUCKET_NAME`을 [S3 파일 업로드 버킷 만들기]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}) 챕터에서 만든 **버킷 이름**으로 대체합니다. 그리고 지난 장에서 여러분이 만든 API 배포시 확인한 `YOUR_API_GATEWAY_REGION` 와 `YOUR_API_GATEWAY_ID`을 입력합니다. 
+{%change%} 아래 정책을 편집화면에 추가합니다. 그리고 `YOUR_S3_UPLOADS_BUCKET_NAME`을 [S3 파일 업로드 버킷 만들기]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}) 챕터에서 만든 **버킷 이름**으로 대체합니다. 그리고 지난 장에서 여러분이 만든 API 배포시 확인한 `YOUR_API_GATEWAY_REGION` 와 `YOUR_API_GATEWAY_ID`을 입력합니다. 
 
 여기에서는 `YOUR_S3_UPLOADS_BUCKET_NAME` 는 `notes-app-uploads`로, `YOUR_API_GATEWAY_ID` 는 `ly55wbovq4`, 그리고 `YOUR_API_GATEWAY_REGION` 는 `us-east-1`로 입력합니다.
 

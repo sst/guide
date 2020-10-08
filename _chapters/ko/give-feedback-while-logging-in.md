@@ -13,7 +13,7 @@ comments_id: give-feedback-while-logging-in/46
 
 ### isLoading 플래그 사용하기
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Login.js`의 state에 `isLoading` 플래그를 추가합니다. 그러면 `constructor`의 초기 state는 다음과 같습니다.
+{%change%} `src/containers/Login.js`의 state에 `isLoading` 플래그를 추가합니다. 그러면 `constructor`의 초기 state는 다음과 같습니다.
 
 ``` javascript
 this.state = {
@@ -23,7 +23,7 @@ this.state = {
 };
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 로그인하는 동안 업데이트합니다. 그러면 `handleSubmit` 메쏘드는 다음과 같습니다:
+{%change%} 그리고 로그인하는 동안 업데이트합니다. 그러면 `handleSubmit` 메쏘드는 다음과 같습니다:
 
 ``` javascript
 handleSubmit = async event => {
@@ -46,7 +46,7 @@ handleSubmit = async event => {
 
 이제 버튼의 상태 변화를 반영하기 위해 `isLoading` 플래그에 따라 다르게 렌더링 합니다. 그리고 우리는 다른 곳들에서 이 코드를 사용할 예정입니다. 따라서 재사용 가능한 컴포넌트를 만드는 것이 보다 합리적입니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/components/LoaderButton.js` 파일을 만들고 아래 내용을 추가합니다.
+{%change%} `src/components/LoaderButton.js` 파일을 만들고 아래 내용을 추가합니다.
 
 ``` coffee
 import React from "react";
@@ -75,7 +75,7 @@ export default ({
 
 로딩 아이콘에 애니메이션을 적용하는 몇 가지 스타일을 추가해 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/components/LoaderButton.css` 파일에 아래 내용을 추가합니다.
+{%change%} `src/components/LoaderButton.css` 파일에 아래 내용을 추가합니다.
 
 ``` css
 .LoaderButton .spinning.glyphicon {
@@ -95,7 +95,7 @@ export default ({
 
 이제 우리의 새로운 컴포넌트를 `Login` 컨테이너에서 사용할 수 있습니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Login.js` 파일의 `render` 함수에서 `<Button>` 컴포넌트를 찾습니다.
+{%change%} `src/containers/Login.js` 파일의 `render` 함수에서 `<Button>` 컴포넌트를 찾습니다.
 
 ``` html
 <Button
@@ -108,7 +108,7 @@ export default ({
 </Button>
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 위 내용을 아래와 같이 바꿉니다.
+{%change%} 그리고 위 내용을 아래와 같이 바꿉니다.
 
 ``` html
 <LoaderButton
@@ -122,7 +122,7 @@ export default ({
 />
 ```
 
-<img class="code-marker" src="/assets/s.png" />또한 헤더에서 `LoaderButton`을 import 합니다. 그리고 `Button`에 대한 참조를 제거합니다.
+{%change%} 또한 헤더에서 `LoaderButton`을 import 합니다. 그리고 `Button`에 대한 참조를 제거합니다.
 
 ``` javascript
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";

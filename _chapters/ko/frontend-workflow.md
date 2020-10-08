@@ -15,7 +15,7 @@ code: frontend_full
 
 좋은 연습이 되려면 새로운 기능을 개발할 때 새로운 브랜치를 만드는 것입니다.
 
-<img class="code-marker" src="/assets/s.png" />프로젝트 루트에서 다음 명령을 실행하세요.
+{%change%} 프로젝트 루트에서 다음 명령을 실행하세요.
 
 ``` bash
 $ git checkout -b "new-feature"
@@ -25,7 +25,7 @@ $ git checkout -b "new-feature"
 
 오류가있는 커밋을 만들어서 롤백하는 과정을 살펴 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Home.js`의 `renderLander` 메소드를 다음으로 대체합니다.
+{%change%} `src/containers/Home.js`의 `renderLander` 메소드를 다음으로 대체합니다.
 
 ``` coffee
 renderLander() {
@@ -46,7 +46,7 @@ renderLander() {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 이 변경사항을 Git에 커밋합니다.
+{%change%} 그리고 이 변경사항을 Git에 커밋합니다.
 
 ``` bash
 $ git add .
@@ -127,7 +127,7 @@ Netlify에서 배포중인 화면.
 
 변경 사항을 신속하게 정리합시다.
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Home.js`의 `renderLander` 메소드를 원래 코드로 대체합니다.
+{%change%} `src/containers/Home.js`의 `renderLander` 메소드를 원래 코드로 대체합니다.
 
 ``` coffee
 renderLander() {
@@ -148,7 +148,7 @@ renderLander() {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />위 변경 사항을 적용하고 푸시해서 변경 내용을 적용하십시오.
+{%change%} 위 변경 사항을 적용하고 푸시해서 변경 내용을 적용하십시오.
 
 ``` bash
 $ git add .

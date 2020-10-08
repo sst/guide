@@ -16,7 +16,7 @@ Create React App은 기본적으로 많은 것이 이미 설정되어 있지만,
 
 ### React Router v4 설치하기
 
-<img class="code-marker" src="/assets/s.png" />작업 디렉토리에서 아래 명령어를 실행하세요.
+{%change%} 작업 디렉토리에서 아래 명령어를 실행하세요.
 
 ``` bash
 $ npm install react-router-dom@4.3.1 --save
@@ -28,13 +28,13 @@ $ npm install react-router-dom@4.3.1 --save
 
 앱에 경로가 설정되어 있지는 않지만 기본 구조를 구성하고 실행할 수 있습니다. 우리의 앱은 현재 `src/App.js`의 `App` 컴포넌트에서 실행됩니다. 우리는 이 구성 요소를 전체 앱의 컨테이너로 사용하려고합니다. 이를 위해 우리는 `Router` 내에 `App` 컴포넌트를 캡슐화 할 것입니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/index.js` 에서 아래 코드를 대체합니다:
+{%change%} `src/index.js` 에서 아래 코드를 대체합니다:
 
 ``` coffee
 ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
-<img class="code-marker" src="/assets/s.png" />바꿀 내용:
+{%change%} 바꿀 내용:
 
 ``` coffee
 ReactDOM.render(
@@ -45,7 +45,7 @@ ReactDOM.render(
 );
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 `src/index.js`에 아래 내용을 맨 윗 부분에 붙여 넣습니다.
+{%change%} 그리고 `src/index.js`에 아래 내용을 맨 윗 부분에 붙여 넣습니다.
 
 ``` coffee
 import { BrowserRouter as Router } from "react-router-dom";

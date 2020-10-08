@@ -11,7 +11,7 @@ ref: save-changes-to-a-note
 
 이제 노트가 양식에 로드되었으므로 변경 사항을 노트에 저장해 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Notes.js`에 있는 `handleSubmit` 메소드를 다음으로 대체하십시오.
+{%change%} `src/containers/Notes.js`에 있는 `handleSubmit` 메소드를 다음으로 대체하십시오.
 
 ``` coffee
 saveNote(note) {
@@ -50,7 +50,7 @@ handleSubmit = async event => {
 
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 헤더에 `s3Upload` helper 메소드를 추가합니다.:
+{%change%} 그리고 헤더에 `s3Upload` helper 메소드를 추가합니다.:
 
 ``` javascript
 import { s3Upload } from "../libs/awsLib";

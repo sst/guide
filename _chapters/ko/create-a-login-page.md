@@ -14,7 +14,7 @@ comments_id: create-a-login-page/71
 
 ### 컨테이너 추가하기 
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Login.js` 파일을 만들고 다음 내용을 추가합니다.
+{%change%} `src/containers/Login.js` 파일을 만들고 다음 내용을 추가합니다.
 
 ``` coffee
 import React, { Component } from "react";
@@ -95,7 +95,7 @@ export default class Login extends Component {
 
 6. 마지막으로 양식이 제출 될 때 콜백 `handleSubmit` 함수를 트리거합니다. 지금은 양식 제출시 브라우저의 기본 동작을 막아놨지만 나중에 이와 관련해서 더 자세히 설명하겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Login.css` 파일 안에 몇 가지 스타일을 추가해 보겠습니다.
+{%change%} `src/containers/Login.css` 파일 안에 몇 가지 스타일을 추가해 보겠습니다.
 
 ``` css
 @media all and (min-width: 480px) {
@@ -114,13 +114,13 @@ export default class Login extends Component {
 
 ### Add the Route
 
-<img class="code-marker" src="/assets/s.png" />이제 `src/Routes.js`의 `<Route>` 바로 아래에 다음 줄(`반드시 <Route component={NotFound} />` 보다는 위에 줄)을 추가하여 이 컨테이너를 나머지 응용 프로그램과 연결합니다.
+{%change%} 이제 `src/Routes.js`의 `<Route>` 바로 아래에 다음 줄(`반드시 <Route component={NotFound} />` 보다는 위에 줄)을 추가하여 이 컨테이너를 나머지 응용 프로그램과 연결합니다.
 
 ``` coffee
 <Route path="/login" exact component={Login} />
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 헤더 부분에 컴포넌트를 추가합니다.
+{%change%} 그리고 헤더 부분에 컴포넌트를 추가합니다.
 
 ``` javascript
 import Login from "./containers/Login";

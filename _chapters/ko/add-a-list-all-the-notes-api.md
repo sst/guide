@@ -14,7 +14,7 @@ comments_id: add-a-list-all-the-notes-api/147
 
 ### 함수 추가하기 
 
-<img class="code-marker" src="/assets/s.png" />아래 내용을 가진 `list.js` 파일을 신규로 생성합니다.
+{%change%} 아래 내용을 가진 `list.js` 파일을 신규로 생성합니다.
 
 ``` javascript
 import handler from "./libs/handler-lib";
@@ -44,7 +44,7 @@ export const main = handler(async (event, context) => {
 
 ### API 엔드포인트 구성하기 
 
-<img class="code-marker" src="/assets/s.png" />`serverless.yml` 파일을 열고 아래 내용을 추가합니다.
+{%change%} `serverless.yml` 파일을 열고 아래 내용을 추가합니다.
 
 ``` yaml
   list:
@@ -65,7 +65,7 @@ export const main = handler(async (event, context) => {
 
 ### 테스트 
 
-<img class="code-marker" src="/assets/s.png" />`mocks/list-event.json` 파일을 생성하고 아래 내용을 추가합니다.
+{%change%} `mocks/list-event.json` 파일을 생성하고 아래 내용을 추가합니다.
 
 ``` json
 {

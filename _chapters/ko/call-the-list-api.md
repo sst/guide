@@ -13,7 +13,7 @@ comments_id: call-the-list-api/127
 
 ### 요청 만들기
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Home.js` 파일의 `constructor` 블럭 아래에 다음 내용을 추가합니다.
+{%change%} `src/containers/Home.js` 파일의 `constructor` 블럭 아래에 다음 내용을 추가합니다.
 
 ``` javascript
 async componentDidMount() {
@@ -36,7 +36,7 @@ notes() {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 헤더에 Amplify API을 추가합니다. 
+{%change%} 그리고 헤더에 Amplify API을 추가합니다. 
 
 ``` javascript
 import { API } from "aws-amplify";
@@ -48,7 +48,7 @@ import { API } from "aws-amplify";
 
 ### 목록을 렌더링하기
 
-<img class="code-marker" src="/assets/s.png" />`renderNotesList` 메소드를 다음 내용으로 바꿉니다.
+{%change%} `renderNotesList` 메소드를 다음 내용으로 바꿉니다.
 
 ``` coffee
 renderNotesList(notes) {
@@ -77,13 +77,13 @@ renderNotesList(notes) {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />`react-bootstrap` 파일의 헤더에`ListGroupItem`을 포함 시키십시오.
+{%change%} `react-bootstrap` 파일의 헤더에`ListGroupItem`을 포함 시키십시오.
 
 ``` javascript
 import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
 ```
 
-<img class="code-marker" src="/assets/s.png" />또한 `react-router-bootstrap`에서 `LinkContainer`를 포함시킵니다.
+{%change%} 또한 `react-router-bootstrap`에서 `LinkContainer`를 포함시킵니다.
 
 ``` javascript
 import { LinkContainer } from "react-router-bootstrap";
@@ -97,7 +97,7 @@ import { LinkContainer } from "react-router-bootstrap";
 
 3. 그리고 `LinkContainer` 컴포넌트는 앱에서 각각의 노트 아이템으로 이동합니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Home.css`에 몇 가지 스타일을 추가합니다.
+{%change%} `src/containers/Home.css`에 몇 가지 스타일을 추가합니다.
 
 ``` css
 .Home .notes h4 {

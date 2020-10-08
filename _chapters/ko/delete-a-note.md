@@ -11,7 +11,7 @@ ref: delete-a-note
 
 노트 페이지에서 마지막으로 해야할 일은 사용자가 노트를 삭제할 수 있게하는 것입니다. 버튼은 이미 설정되어 있습니다. API에 연결해서 마무리할 일만 남았습니다.
 
-<img class="code-marker" src="/assets/s.png" /> `src/containers/Notes.js`에서 `handleDelete` 메소드를 대체합니다.
+{%change%}  `src/containers/Notes.js`에서 `handleDelete` 메소드를 대체합니다.
 
 ``` coffee
 deleteNote() {

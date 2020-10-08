@@ -12,13 +12,13 @@ ref: add-stripe-keys-to-config
 
 그때 Stripe 계정 설정은 완료되지 않았으므로 이 키의 운영 버전은 아직 없습니다. 지금은 동일한 키의 두 가지 버전이 있다고 가정합니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/config.js`의 `dev` 블럭에 다음 내용을 추가합니다.
+{%change%} `src/config.js`의 `dev` 블럭에 다음 내용을 추가합니다.
 
 ```
 STRIPE_KEY: "YOUR_STRIPE_DEV_PUBLIC_KEY",
 ```
 
-<img class="code-marker" src="/assets/s.png" />`src/config.js`의 `prod` 블럭에 다음 내용을 추가합니다.
+{%change%} `src/config.js`의 `prod` 블럭에 다음 내용을 추가합니다.
 
 ```
 STRIPE_KEY: "YOUR_STRIPE_PROD_PUBLIC_KEY",
@@ -28,7 +28,7 @@ STRIPE_KEY: "YOUR_STRIPE_PROD_PUBLIC_KEY",
 
 ### 변경 사항 커밋 
 
-<img class="code-marker" src="/assets/s.png" />Git에 빠르게 커밋합니다.
+{%change%} Git에 빠르게 커밋합니다.
 
 ``` bash
 $ git add .

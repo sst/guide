@@ -3,7 +3,7 @@ layout: post
 title: What Is Infrastructure as Code
 date: 2018-02-26 00:00:00
 lang: en
-description: Infrastructure as code in Serverless is a way of programmatically defining the resources your project is going to use. In the case of Serverless Framework, these are defined in the serverless.yml.
+description: Infrastructure as code in Serverless is a way of programmatically defining the resources your project is going to use. In the case of AWS, we'll be using AWS CloudFormation.
 ref: what-is-infrastructure-as-code
 comments_id: what-is-infrastructure-as-code/161
 ---
@@ -14,36 +14,46 @@ However, in earlier part of this guide we created our DynamoDB table, Cognito Us
 
 This general pattern is called **Infrastructure as code** and it has some massive benefits. Firstly, it allows us to simply replicate our setup with a couple of simple commands. Secondly, it is not as error prone as doing it by hand. We know a few of you have run into configuration related issues by simply following the steps in the tutorial. Additionally, describing our entire infrastructure as code allows us to create multiple environments with ease. For example, you can create a dev environment where you can make and test all your changes as you work on it. And this can be kept separate from your production environment that your users are interacting with.
 
-In the next few chapters we are going to configure our various infrastructure pieces through our `serverless.yml`. Note that, since we had previously created our resources using the console, we will not be able to configure them through code. To do this, we'll create a new project.
+### AWS CloudFormation
 
-Serverless Framework uses the `service` name to identify projects. Since we are creating a new project we want to ensure that we use a different name from the original. Now we could have simply overwritten the existing project but the resources were previously created by hand and will conflict when we try to create them through code.
+To do this we are going to be using [AWS CloudFormation](https://aws.amazon.com/cloudformation/). CloudFormation is an AWS service that takes a template (written  in JSON or YAML), and provisions your resources based on that. 
 
-### Update the serverless.yml
+![How CloudFormation works](/assets/diagrams/how-cloudformation-works.png)
 
-<img class="code-marker" src="/assets/s.png" />Open the `serverless.yml` and find the following line:
+It creates a CloudFormation **stack** from the submitted **template**, and that stack is directly tied to the resources that have been created. So if you remove the stack, the services that it created will be removed as well.
+
+As an example, here is what the CloudFormation template for a DynamoDB table (like the one [we created manually before]({% link _chapters/create-a-dynamodb-table.md %})) looks like.
 
 ``` yml
-service: notes-app-api
+Resources:
+  NotesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.tableName}
+      AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: noteId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: userId
+          KeyType: HASH
+        - AttributeName: noteId
+          KeyType: RANGE
+      BillingMode: PAY_PER_REQUEST
 ```
 
-<img class="code-marker" src="/assets/s.png" />And replace it with this:
+Serverless Framework internally uses CloudFormation as well. It converts your `serverless.yml` into a CloudFormation template and submits it to AWS when you run `serverless deploy`. And when you run `serverless remove`, it'll ask CloudFormation to remove the stack that it previously created.
 
-``` yml
-service: notes-app-2-api
-```
+### Problems with CloudFormation
 
-<img class="code-marker" src="/assets/s.png" />Also, find this line in the `serverless.yml`:
+CloudFormation is great for defining your AWS resources. However it has a few major drawbacks. 
 
-``` yml
-  stage: prod
-``` 
+In a CloudFormation template you need to define all the resources that your app needs. This includes quite a large number of minor resources that you won't be directly interacting with. So your templates can easily be a few hundred lines long.
 
-<img class="code-marker" src="/assets/s.png" />And replace it with:
+YAML and JSON are really easy to get started with. But it can be really hard to maintain large CloudFormation templates. And since these are just simple definition files, it makes it hard to reuse and compose them.
 
-``` yml
-  stage: dev
-```
+Finally, the learning curve for CloudFormation templates can be really steep. You'll find yourself constantly looking at the documentation to figure out how to define your resources. 
+### Introducing AWS CDK
 
-We are defaulting the stage to `dev` instead of `prod`. This will become clear later when we create multiple environments.
-
-Let's start by configuring our DynamoDB in our `serverless.yml`. 
+To fix these issues, AWS launched the [AWS CDK project back in August 2018](https://aws.amazon.com/blogs/developer/aws-cdk-developer-preview/). It allows you to use modern programming languages like JavaScript or Python, instead of YAML or JSON. We'll be using CDK in the coming chapters. So let's take a quick look at how it works.

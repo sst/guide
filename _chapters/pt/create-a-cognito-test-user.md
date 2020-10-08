@@ -15,7 +15,7 @@ Neste capítulo, vamos criar um usuário teste para nosso grupo de usuários do 
 
 Primeiro, vamos usar o AWS CLI para registrar um usuário com seu email e senha.
 
-<img class="code-marker" src="/assets/s.png" />Execute em seu terminal.
+{%change%} Execute em seu terminal.
 
 ```bash
 $ aws cognito-idp sign-up \
@@ -27,7 +27,7 @@ $ aws cognito-idp sign-up \
 
 O usuário está criado no grupo de usuários. Entretanto, antes de podermos usar o usuário para autenticar no grupo, a conta precisa ser verificada. Vamos agora verificar a conta usando um comando de administrador.
 
-<img class="code-marker" src="/assets/s.png" />Execute em seu terminal.
+{%change%} Execute em seu terminal.
 
 ```bash
 $ aws cognito-idp admin-confirm-sign-up \

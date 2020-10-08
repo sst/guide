@@ -13,7 +13,7 @@ ref: load-secrets-from-env-yml
 
 이러한 용도로 사용하기 위해 미리 `env.example` 파일을 준비해놨습니다.
 
-<img class="code-marker" src="/assets/s.png" />`env.example` 파일을 `env.yml`로 이름을 바꾸고 내용을 다음과 같이 변경합니다.
+{%change%} `env.example` 파일을 `env.yml`로 이름을 바꾸고 내용을 다음과 같이 변경합니다.
 
 ``` yml
 # Add the environment variables for the various stages
@@ -29,7 +29,7 @@ default:
 
 다음으로 이들에 대한 참조를 추가해 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`serverless.yml`의 `custom:` 블럭에 다음 내용을 추가합니다.
+{%change%} `serverless.yml`의 `custom:` 블럭에 다음 내용을 추가합니다.
 
 ``` yml
   # Load our secret environment variables based on the current stage.
@@ -42,7 +42,7 @@ default:
 ``` yml
 custom:
   # Our stage is based on what is passed in when running serverless
-  # commands. Or fallsback to what we have set in the provider section.
+  # commands. Or falls back to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
   # Set the table name here so we can use it while testing locally
   tableName: ${self:custom.stage}-notes
@@ -60,7 +60,7 @@ custom:
   environment: ${file(env.yml):${self:custom.stage}, file(env.yml):default}
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 `serverless.yml`의 `environment:` 블럭에 다음 내용을 추가합니다. 
+{%change%} 그리고 `serverless.yml`의 `environment:` 블럭에 다음 내용을 추가합니다. 
 
 ``` yml
   stripeSecretKey: ${self:custom.environment.stripeSecretKey}
@@ -93,7 +93,7 @@ env.yml
 
 위 파일은 Git으로 하여금 커밋할 경우, `env.yml` 파일을 제외하도록 합니다.
 
-<img class="code-marker" src="/assets/s.png" />그럼 나머지 변경사항들을 커밋하겠습니다.
+{%change%} 그럼 나머지 변경사항들을 커밋하겠습니다.
 
 ``` bash
 $ git add .

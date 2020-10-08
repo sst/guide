@@ -14,7 +14,7 @@ We've covered debugging [errors in our code]({% link _chapters/logic-errors-in-l
 
 Lambda functions could fail not because of an error inside your handler code, but because of an error outside it. In this case, your Lambda function won't be invoked. Let's add some faulty code outside our handler function.
 
-<img class="code-marker" src="/assets/s.png" />Replace our `get.js` with the following.
+{%change%} Replace our `services/notes/get.js` with the following.
 
 ``` javascript
 import handler from "./libs/handler-lib";
@@ -45,7 +45,7 @@ export const main = handler(async (event, context) => {
 });
 ```
 
-<img class="code-marker" src="/assets/s.png" />Commit this code.
+{%change%} Commit this code.
 
 ``` bash
 $ git add .
@@ -71,7 +71,7 @@ Note that, you might see there are 3 events for this error. This is because the 
 
 Another error that can happen outside a Lambda function is when the handler has been misnamed. 
 
-<img class="code-marker" src="/assets/s.png" />Replace our `get.js` with the following.
+{%change%} Replace our `get.js` with the following.
 
 ``` javascript
 import handler from "./libs/handler-lib";
@@ -99,7 +99,7 @@ export const main2 = handler(async (event, context) => {
   return result.Item;
 });
 ```
-<img class="code-marker" src="/assets/s.png" />Let's commit this.
+{%change%} Let's commit this.
 
 ``` bash
 $ git add .
@@ -119,7 +119,7 @@ And that about covers the main Lambda function errors. So the next time you see 
 
 ### Rollback the Changes
 
-<img class="code-marker" src="/assets/s.png" />Let's revert all the faulty code that we created.
+{%change%} Let's revert all the faulty code that we created.
 
 ``` bash
 $ git checkout master

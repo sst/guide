@@ -14,7 +14,7 @@ Let's get started on our backend by first adding an API to create a note. This A
 
 Let's add our first function.
 
-<img class="code-marker" src="/assets/s.png" />Create a new file called `create.js` in our project root with the following.
+{%change%} Create a new file called `create.js` in our project root with the following.
 
 ``` javascript
 import * as uuid from "uuid";
@@ -88,10 +88,10 @@ There are some helpful comments in the code but we are doing a few simple things
 
 Now let's define the API endpoint for our function.
 
-<img class="code-marker" src="/assets/s.png" />Open the `serverless.yml` file and replace it with the following.
+{%change%} Open the `serverless.yml` file and replace it with the following.
 
 ``` yaml
-service: notes-app-api
+service: notes-api
 
 # Create an optimized package for our functions
 package:
@@ -118,13 +118,13 @@ provider:
   iamRoleStatements:
     - Effect: Allow
       Action:
-        - dynamodb:DescribeTable
-        - dynamodb:Query
         - dynamodb:Scan
+        - dynamodb:Query
         - dynamodb:GetItem
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
+        - dynamodb:DescribeTable
       Resource: "arn:aws:dynamodb:us-east-1:*:*"
 
 functions:
@@ -154,13 +154,13 @@ The `iamRoleStatements` section is telling AWS which resources our Lambda functi
 
 Now we are ready to test our new API. To be able to test it on our local we are going to mock the input parameters.
 
-<img class="code-marker" src="/assets/s.png" />In our project root, create a `mocks/` directory.
+{%change%} In our project root, create a `mocks/` directory.
 
 ``` bash
 $ mkdir mocks
 ```
 
-<img class="code-marker" src="/assets/s.png" />Create a `mocks/create-event.json` file and add the following.
+{%change%} Create a `mocks/create-event.json` file and add the following.
 
 ``` json
 {
@@ -208,7 +208,7 @@ Make a note of the `noteId` in the response. We are going to use this newly crea
 
 Before we move on to the next chapter, let's quickly refactor the code since we are going to be doing much of the same for all of our APIs.
 
-<img class="code-marker" src="/assets/s.png" />Start by replacing our `create.js` with the following.
+{%change%} Start by replacing our `create.js` with the following.
 
 ``` javascript
 import * as uuid from "uuid";
@@ -251,14 +251,14 @@ This code doesn't work just yet but it shows you what we want to accomplish:
 
 To do all of this let's first create our `dynamodb-lib`.
 
-<img class="code-marker" src="/assets/s.png" />In our project root, create a `libs/` directory.
+{%change%} In our project root, create a `libs/` directory.
 
 ``` bash
 $ mkdir libs
 $ cd libs
 ```
 
-<img class="code-marker" src="/assets/s.png" />Create a `libs/dynamodb-lib.js` file with:
+{%change%} Create a `libs/dynamodb-lib.js` file with:
 
 ``` javascript
 import AWS from "aws-sdk";
@@ -276,7 +276,7 @@ export default {
 
 Here we are using the promise form of the DynamoDB methods. Promises are a method for managing asynchronous code that serve as an alternative to the standard callback function syntax. It will make our code a lot easier to read. And we are exposing the DynamoDB client methods that we are going to need in this guide.
 
-<img class="code-marker" src="/assets/s.png" />Also create a `libs/handler-lib.js` file with the following.
+{%change%} Also create a `libs/handler-lib.js` file with the following.
 
 ``` javascript
 export default function handler(lambda) {

@@ -10,7 +10,7 @@ ref: render-the-note-form
 
 Now that our container loads a note using the `useEffect` method, let's go ahead and render the form that we'll use to edit it.
 
-<img class="code-marker" src="/assets/s.png" />Replace our placeholder `return` statement in `src/containers/Notes.js` with the following.
+{%change%} Replace our placeholder `return` statement in `src/containers/Notes.js` with the following.
 
 ``` coffee
 function validateForm() {
@@ -125,7 +125,7 @@ We are doing a few things here:
 
 To complete this code, let's add `isLoading` and `isDeleting` to the state.
 
-<img class="code-marker" src="/assets/s.png" />So our new state and ref declarations at the top of our `Notes` component function look like this.
+{%change%} So our new state and ref declarations at the top of our `Notes` component function look like this.
 
 ``` javascript
 const file = useRef(null);
@@ -137,7 +137,7 @@ const [isLoading, setIsLoading] = useState(false);
 const [isDeleting, setIsDeleting] = useState(false);
 ```
 
-<img class="code-marker" src="/assets/s.png" />Let's also add some styles by adding the following to `src/containers/Notes.css`.
+{%change%} Let's also add some styles by adding the following to `src/containers/Notes.css`.
 
 ``` css
 .Notes form {
@@ -150,7 +150,7 @@ const [isDeleting, setIsDeleting] = useState(false);
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />Also, let's include the React-Bootstrap components that we are using here by adding the following to our header. And our styles, the `LoaderButton`, and the `config`.
+{%change%} Also, let's include the React-Bootstrap components that we are using here by adding the following to our header. And our styles, the `LoaderButton`, and the `config`.
 
 ``` javascript
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";

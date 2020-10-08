@@ -13,13 +13,13 @@ As we had previously mentioned, we do not want to store our secret environment v
 
 We have a `env.example` file for this exact purpose.
 
-<img class="code-marker" src="/assets/s.png" />Start by renaming the `env.example` file to `.env`.
+{%change%} Start by renaming the `env.example` file to `.env`.
 
 ``` bash
 $ mv env.example .env
 ```
 
-<img class="code-marker" src="/assets/s.png" />Replace its contents with the following.
+{%change%} Replace its contents with the following.
 
 ``` bash
 STRIPE_SECRET_KEY=STRIPE_TEST_SECRET_KEY
@@ -31,7 +31,7 @@ We are using the [serverless-dotenv-plugin](https://github.com/colynb/serverless
 
 Next, let's add a reference to these.
 
-<img class="code-marker" src="/assets/s.png" />And add the following in the `environment:` block in your `serverless.yml`.
+{%change%} And add the following in the `environment:` block in your `serverless.yml`.
 
 ``` yml
     stripeSecretKey: ${env:STRIPE_SECRET_KEY}

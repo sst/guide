@@ -31,7 +31,7 @@ ref: setting-up-your-project-on-seed
 
 이제 Seed가 대신해서 AWS 계정에 배포합니다. 프로젝트에 필요한 정확한 권한을 가진 별도의 IAM 사용자를 만들어야합니다. 이에 대한 자세한 내용은 [여기](https://seed.run/docs/customizing-your-iam-policy)를 참조하십시오. 하지만 여기서는 간단히 이 튜토리얼에서 사용했던 것을 사용한다.
 
-<img class="code-marker" src="/assets/s.png" />다음 명령을 실행합니다.
+{%change%} 다음 명령을 실행합니다.
 
 ``` bash
 $ cat ~/.aws/credentials

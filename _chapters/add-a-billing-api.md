@@ -12,13 +12,13 @@ Now let's get started with creating our billing API. It is going to take a Strip
 
 ### Add a Billing Lambda
 
-<img class="code-marker" src="/assets/s.png" />Start by installing the Stripe NPM package. Run the following in the root of our project.
+{%change%} Start by installing the Stripe NPM package. Run the following in the root of our project.
 
 ``` bash
 $ npm install --save stripe
 ```
 
-<img class="code-marker" src="/assets/s.png" />Create a new file called 'billing.js' with the following.
+{%change%} Create a new file called 'billing.js' with the following.
 
 ``` js
 import stripePackage from "stripe";
@@ -59,7 +59,7 @@ Note, if you are testing this from India, you'll need to add some shipping infor
 
 Now let's implement our `calculateCost` method. This is primarily our *business logic*.
 
-<img class="code-marker" src="/assets/s.png" />Create a `libs/billing-lib.js` and add the following.
+{%change%} Create a `libs/billing-lib.js` and add the following.
 
 ``` js
 export function calculateCost(storage) {
@@ -79,7 +79,7 @@ This is basically saying that if a user wants to store 10 or fewer notes, we'll 
 
 Let's add a reference to our new API and Lambda function.
 
-<img class="code-marker" src="/assets/s.png" />Open the `serverless.yml` file and append the following to it.
+{%change%} Open the `serverless.yml` file and append the following to it.
 
 ``` yml
   billing:

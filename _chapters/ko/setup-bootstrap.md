@@ -13,7 +13,7 @@ comments_id: set-up-bootstrap/118
 
 ### React Bootstrap 설치하기
 
-<img class="code-marker" src="/assets/s.png" />작업 디렉토리에서 다음 명령을 실행하십시오.
+{%change%} 작업 디렉토리에서 다음 명령을 실행하십시오.
 
 ``` bash
 $ npm install react-bootstrap@0.32.4 --save
@@ -23,7 +23,7 @@ $ npm install react-bootstrap@0.32.4 --save
 
 ### 부트스트랩 스타일 추가하기
 
-<img class="code-marker" src="/assets/s.png" />React Bootstrap은 표준 부트스트랩 v3 스타일을 사용합니다. 그래서 `public/index.html`에 다음 스타일을 추가하십시오.
+{%change%} React Bootstrap은 표준 부트스트랩 v3 스타일을 사용합니다. 그래서 `public/index.html`에 다음 스타일을 추가하십시오.
 
 ``` html
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -31,7 +31,7 @@ $ npm install react-bootstrap@0.32.4 --save
 
 또한 양식 필드의 스타일을 조정하여 모바일 브라우저가 포커스를 확대하지 않도록합니다. 확대/축소를 방지하려면 글꼴 크기를 최소 `16px`로 지정하면됩니다.
 
-<img class="code-marker" src="/assets/s.png" />그러기 위해 `src/index.css`에 아래 내용을 추가합니다.
+{%change%} 그러기 위해 `src/index.css`에 아래 내용을 추가합니다.
 
 ``` css
 select.form-control,

@@ -17,7 +17,7 @@ We are going to add a settings page to our app. This is going to allow users to 
 
 To get started let's add our settings page.
 
-<img class="code-marker" src="/assets/s.png" />Create a new file in `src/containers/Settings.js` and add the following.
+{%change%} Create a new file in `src/containers/Settings.js` and add the following.
 
 ``` coffee
 import React, { useState, useEffect } from "react";
@@ -43,13 +43,13 @@ export default function Settings() {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />Next import this component in the header of `src/Routes.js`.
+{%change%} Next import this component in the header of `src/Routes.js`.
 
 ``` js
 import Settings from "./containers/Settings";
 ```
 
-<img class="code-marker" src="/assets/s.png" />Add the following below the `/signup` route in our `<Switch>` block in `src/Routes.js`.
+{%change%} Add the following below the `/signup` route in our `<Switch>` block in `src/Routes.js`.
 
 ``` coffee
 <Route exact path="/settings">
@@ -57,7 +57,7 @@ import Settings from "./containers/Settings";
 </Route>
 ```
 
-<img class="code-marker" src="/assets/s.png" />Next add a link to our settings page in the navbar by replacing the `return` statement in `src/App.js` with this.
+{%change%} Next add a link to our settings page in the navbar by replacing the `return` statement in `src/App.js` with this.
 
 {% raw %}
 ``` coffee

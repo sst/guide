@@ -13,7 +13,7 @@ comments_id: list-all-the-notes/156
 
 현재 Home 컨테이너는 매우 간단합니다. 여기에 조건부로 렌더링을 추가합니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Home.js` 파일을 다음 내용으로 변경합니다.
+{%change%} `src/containers/Home.js` 파일을 다음 내용으로 변경합니다.
 
 ``` coffee
 import React, { Component } from "react";

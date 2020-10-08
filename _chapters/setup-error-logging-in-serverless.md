@@ -24,7 +24,7 @@ We are going to look at how to setup a debugging framework to catch the above er
 
 Let's start by adding some code to help us with that.
 
-<img class="code-marker" src="/assets/s.png" />Create a `libs/debug-lib.js` file and add the following to it.
+{%change%} Create a `services/notes/libs/debug-lib.js` file and add the following to it.
 
 ``` javascript
 import util from "util";
@@ -111,7 +111,7 @@ You'll recall that all our Lambda functions are wrapped using a `handler()` meth
 
 We'll use the debug lib that we added above to improve our error handling. 
 
-<img class="code-marker" src="/assets/s.png" />Replace our `handler-lib.js` with the following.
+{%change%} Replace our `services/notes/libs/handler-lib.js` with the following.
 
 ``` javascript
 import * as debug from "./debug-lib";
@@ -179,7 +179,7 @@ Note that, the `handler-lib.js` needs to be **imported before we import anything
 
 Let's push our changes  
 
-<img class="code-marker" src="/assets/s.png" />Let's commit the code we have so far.
+{%change%} Let's commit the code we have so far.
 
 ``` bash
 $ git add .
