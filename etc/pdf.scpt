@@ -209,31 +209,43 @@ on downloadPdf(theChapterName)
 
       delay 1
 
-      repeat until menu item "Export as PDF…" of menu "File" of menu bar 1 exists
+      # Click on Print…
+      repeat until menu item "Print…" of menu "File" of menu bar 1 exists
         delay 0.2
       end repeat
       repeat
-        if ((value of menu item "Export as PDF…" of menu "File" of menu bar 1 is enabled) = true)
+        if ((value of menu item "Print…" of menu "File" of menu bar 1 is enabled) = true)
           exit repeat
         end if
         delay 0.2
       end repeat
-      click menu item "Export as PDF…" of menu "File" of menu bar 1
+      click menu item "Print…" of menu "File" of menu bar 1
 
-      tell window 1
+      # Click on Save to PDF
+      tell front window
+        repeat until exists sheet 1
+          delay 0.02
+        end repeat
+        tell sheet 1
+          click menu button "PDF"
+          repeat until exists menu 1 of menu button "PDF"
+            delay 0.02
+          end repeat
+          click menu item "Save as PDF" of menu 1 of menu button "PDF"
+        end tell
+      end tell
+
+      # Type in file name and save
+      tell front window
         repeat until sheet 1 exists
+          delay 0.02
         end repeat
 
-        tell sheet 1
+        tell front sheet
           keystroke theChapterName
-          click pop up button "Where:"
-
-          repeat until menu 1 of pop up button "Where:" exists
-          end repeat
-          click menu item "ebook" of menu 1 of pop up button "Where:"
-          click button "Save"
+          delay 1
+          key code 36
         end tell
-
       end tell
 
       delay 2
