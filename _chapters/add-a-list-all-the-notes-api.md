@@ -2,9 +2,9 @@
 layout: post
 title: Add a List All the Notes API
 date: 2017-01-01 00:00:00
+lang: en
+ref: add-a-list-all-the-notes-api
 description: To allow users to retrieve their notes in our note taking app, we are going to add a list note GET API. To do this we will add a new Lambda function to our Serverless Framework project. The Lambda function will retrieve all the user’s notes from the DynamoDB table.
-context: true
-code: backend
 comments_id: add-a-list-all-the-notes-api/147
 ---
 
@@ -12,15 +12,15 @@ Now we are going to add an API that returns a list of all the notes a user has.
 
 ### Add the Function
 
-<img class="code-marker" src="/assets/s.png" />Create a new file called `list.js` with the following.
+{%change%} Create a new file called `list.js` with the following.
 
 ``` javascript
-import * as dynamoDbLib from "./libs/dynamodb-lib";
-import { success, failure } from "./libs/response-lib";
+import handler from "./libs/handler-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 
-export async function main(event, context) {
+export const main = handler(async (event, context) => {
   const params = {
-    TableName: "notes",
+    TableName: process.env.tableName,
     // 'KeyConditionExpression' defines the condition for the query
     // - 'userId = :userId': only return items with matching 'userId'
     //   partition key
@@ -33,21 +33,18 @@ export async function main(event, context) {
     }
   };
 
-  try {
-    const result = await dynamoDbLib.call("query", params);
-    // Return the matching list of items in response body
-    return success(result.Items);
-  } catch (e) {
-    return failure({ status: false });
-  }
-}
+  const result = await dynamoDb.query(params);
+
+  // Return the matching list of items in response body
+  return result.Items;
+});
 ```
 
 This is pretty much the same as our `get.js` except we only pass in the `userId` in the DynamoDB `query` call.
 
 ### Configure the API Endpoint
 
-<img class="code-marker" src="/assets/s.png" />Open the `serverless.yml` file and append the following.
+{%change%} Open the `serverless.yml` file and append the following.
 
 ``` yaml
   list:
@@ -67,7 +64,7 @@ This defines the `/notes` endpoint that takes a GET request.
 
 ### Test
 
-<img class="code-marker" src="/assets/s.png" />Create a `mocks/list-event.json` file and add the following.
+{%change%} Create a `mocks/list-event.json` file and add the following.
 
 ``` json
 {

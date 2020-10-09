@@ -2,8 +2,9 @@
 layout: post
 title: List All the Notes
 date: 2017-01-26 00:00:00
+lang: en
+ref: list-all-the-notes
 description: We want to display all the notes a user has in our React.js app. To do this we are going to use our Home container and render a list if a user is logged in.
-context: true
 comments_id: list-all-the-notes/156
 ---
 
@@ -11,28 +12,26 @@ Now that we are able to create a new note, let's create a page where we can see 
 
 Currently, our Home container is very simple. Let's add the conditional rendering in there.
 
-<img class="code-marker" src="/assets/s.png" />Replace our `src/containers/Home.js` with the following.
+{%change%} Replace our `src/containers/Home.js` with the following.
 
 ``` coffee
-import React, { Component } from "react";
-import { PageHeader, ListGroup } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
+import { useAppContext } from "../libs/contextLib";
+import { onError } from "../libs/errorLib";
 import "./Home.css";
 
-export default class Home extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      isLoading: true,
-      notes: []
-    };
-  }
+export default function Home() {
+  const [notes, setNotes] = useState([]);
+  const { isAuthenticated } = useAppContext();
+  const [isLoading, setIsLoading] = useState(true);
 
-  renderNotesList(notes) {
+  function renderNotesList(notes) {
     return null;
   }
 
-  renderLander() {
+  function renderLander() {
     return (
       <div className="lander">
         <h1>Scratch</h1>
@@ -41,30 +40,28 @@ export default class Home extends Component {
     );
   }
 
-  renderNotes() {
+  function renderNotes() {
     return (
       <div className="notes">
         <PageHeader>Your Notes</PageHeader>
         <ListGroup>
-          {!this.state.isLoading && this.renderNotesList(this.state.notes)}
+          {!isLoading && renderNotesList(notes)}
         </ListGroup>
       </div>
     );
   }
 
-  render() {
-    return (
-      <div className="Home">
-        {this.props.isAuthenticated ? this.renderNotes() : this.renderLander()}
-      </div>
-    );
-  }
+  return (
+    <div className="Home">
+      {isAuthenticated ? renderNotes() : renderLander()}
+    </div>
+  );
 }
 ```
 
 We are doing a few things of note here:
 
-1. Rendering the lander or the list of notes based on `this.props.isAuthenticated`.
+1. Rendering the lander or the list of notes based on `isAuthenticated` flag in our app context.
 
 2. Store our notes in the state. Currently, it's empty but we'll be calling our API for it.
 

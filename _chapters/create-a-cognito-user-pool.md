@@ -2,8 +2,9 @@
 layout: post
 title: Create a Cognito User Pool
 date: 2016-12-28 00:00:00
+lang: en
+ref: create-a-cognito-user-pool
 description: Amazon Cognito User Pool handles sign-up and sign-in functionality for web and mobile apps. We are going to create a Cognito User Pool to store and manage the users for our serverless app. We'll use the email address as username option since we want our users to login with their email. We are also going to set up our app as an App Client for our Cognito User Pool.
-context: true
 comments_id: create-a-cognito-user-pool/148
 ---
 
@@ -67,10 +68,14 @@ Select **Add an app client**.
 
 Enter **App client name**, un-select **Generate client secret**, select **Enable sign-in API for server-based authentication**, then select **Create app client**.
 
-- **Generate client secret**: user pool apps with a client secret are not supported by the JavaScript SDK. We need to un-select the option.
-- **Enable sign-in API for server-based authentication**: required by AWS CLI when managing the pool users via command line interface. We will be creating a test user through the command line interface in the next chapter.
+- **DISABLE client secret generation**: user pool apps with a client secret are not supported by the JavaScript SDK. We need to un-select the option.
+- **Enable username password auth for admin APIs for authentication**: required by AWS CLI when managing the pool users via command line interface. We will be creating a test user through the command line interface in the next chapter.
 
 ![Fill Cognito User Pool App Info Screenshot](/assets/cognito-user-pool/fill-user-pool-app-info.png)
+
+Now select **Create app client**.
+
+![Fill Cognito User Pool Create App Client Screenshot](/assets/cognito-user-pool/fill-user-pool-create-app-client.png)
 
 Your app client has been created. Take note of the **App client id** which will be required in the later chapters.
 

@@ -11,8 +11,7 @@
 # 3. In terminal, run "osascript pdf.scpt"
 
 
-set theChaptersStr to "index
-who-is-this-guide-for
+set theChaptersStr to "who-is-this-guide-for
 what-does-this-guide-cover
 how-to-get-help
 what-is-serverless
@@ -28,18 +27,26 @@ create-an-s3-bucket-for-file-uploads
 create-a-cognito-user-pool
 create-a-cognito-test-user
 setup-the-serverless-framework
-add-support-for-es6-es7-javascript
+add-support-for-es6-and-typescript
+initialize-the-backend-repo
 add-a-create-note-api
 add-a-get-note-api
 add-a-list-all-the-notes-api
 add-an-update-note-api
 add-a-delete-note-api
+working-with-3rd-party-apis
+setup-a-stripe-account
+add-a-billing-api
+load-secrets-from-env
+test-the-billing-api
+unit-tests-in-serverless
 handle-api-gateway-cors-errors
 deploy-the-apis
 create-a-cognito-identity-pool
 cognito-user-pool-vs-identity-pool
 test-the-apis
 create-a-new-reactjs-app
+initialize-the-frontend-repo
 add-app-favicons
 setup-custom-fonts
 setup-bootstrap
@@ -55,6 +62,7 @@ load-the-state-from-the-session
 clear-the-session-on-logout
 redirect-on-login-and-logout
 give-feedback-while-logging-in
+create-a-custom-react-hook-to-handle-form-fields
 create-a-signup-page
 create-the-signup-form
 signup-with-aws-cognito
@@ -67,83 +75,79 @@ display-a-note
 render-the-note-form
 save-changes-to-a-note
 delete-a-note
+create-a-settings-page
+add-stripe-keys-to-config
+create-a-billing-form
+connect-the-billing-form
 setup-secure-pages
 create-a-route-that-redirects
 use-the-redirect-routes
 redirect-on-login
-deploy-the-frontend
-create-an-s3-bucket
-deploy-to-s3
-create-a-cloudfront-distribution
-setup-your-domain-with-cloudfront
-setup-www-domain-redirect
-setup-ssl
-deploy-updates
-update-the-app
-deploy-again
 getting-production-ready
-initialize-the-backend-repo
-organize-the-backend-repo
 what-is-infrastructure-as-code
-configure-dynamodb-in-serverless
-configure-s3-in-serverless
-configure-cognito-user-pool-in-serverless
-configure-cognito-identity-pool-in-serverless
-use-environment-variables-in-lambda-functions
+what-is-aws-cdk
+using-aws-cdk-with-serverless-framework
+building-a-cdk-app-with-sst
+configure-dynamodb-in-cdk
+configure-s3-in-cdk
+configure-cognito-user-pool-in-cdk
+configure-cognito-identity-pool-in-cdk
+connect-serverless-framework-and-cdk-with-sst
 deploy-your-serverless-infrastructure
-working-with-3rd-party-apis
-setup-a-stripe-account
-add-a-billing-api
-load-secrets-from-env-yml
-test-the-billing-api
-unit-tests-in-serverless
 automating-serverless-deployments
 setting-up-your-project-on-seed
 configure-secrets-in-seed
 deploying-through-seed
 set-custom-domains-through-seed
 test-the-configured-apis
-monitoring-deployments-in-seed
-initialize-the-frontend-repo
-manage-environments-in-create-react-app
-create-a-settings-page
-add-stripe-keys-to-config
-create-a-billing-form
-connect-the-billing-form
 automating-react-deployments
+manage-environments-in-create-react-app
 create-a-build-script
 setting-up-your-project-on-netlify
 custom-domain-in-netlify
 frontend-workflow
+debugging-full-stack-serverless-apps
+setup-error-reporting-in-react
+report-api-errors-in-react
+setup-an-error-boundary-in-react
+setup-error-logging-in-serverless
+logic-errors-in-lambda-functions
+unexpected-errors-in-lambda-functions
+errors-outside-lambda-functions
+errors-in-api-gateway
 wrapping-up
 further-reading
 translations
 giving-back
 changelog
 staying-up-to-date
+best-practices-for-building-serverless-apps
 organizing-serverless-projects
 cross-stack-references-in-serverless
-dynamodb-as-a-serverless-service
-s3-as-a-serverless-service
-api-gateway-domains-across-services
-cognito-as-a-serverless-service
-deploying-multiple-services-in-serverless
-api-gateway-and-lambda-logs
-debugging-serverless-api-issues
-serverless-environment-variables
-stages-in-serverless-framework
-configure-multiple-aws-profiles
-customize-the-serverless-iam-policy
-mapping-cognito-identity-id-and-user-pool-id
-connect-to-api-gateway-with-iam-auth
-serverless-nodejs-starter
-manage-user-accounts-in-aws-amplify
-handle-forgot-and-reset-password
-allow-users-to-change-passwords
-allow-users-to-change-their-email
-code-splitting-in-create-react-app
-environments-in-create-react-app
-facebook-login-with-cognito-using-aws-amplify"
+share-code-between-services
+share-an-api-endpoint-between-services
+deploy-a-serverless-app-with-dependencies
+environments-in-serverless-apps
+structure-environments-across-aws-accounts
+manage-aws-accounts-using-aws-organizations
+parameterize-serverless-resources-names
+deploying-to-multiple-aws-accounts
+deploy-the-resources-repo
+deploy-the-api-services-repo
+manage-environment-related-config
+storing-secrets-in-serverless-apps
+share-route-53-domains-across-aws-accounts
+monitor-usage-for-environments
+working-on-serverless-apps
+invoke-lambda-functions-locally
+invoke-api-gateway-endpoints-locally
+creating-feature-environments
+creating-pull-request-environments
+promoting-to-production
+rollback-changes
+deploying-only-updated-services
+tracing-serverless-apps-with-x-ray
+wrapping-up-the-best-practices"
 
 set text item delimiters to "
 "
@@ -205,29 +209,46 @@ on downloadPdf(theChapterName)
 
       delay 1
 
-      repeat until menu item "Export as PDF…" of menu "File" of menu bar 1 exists
+      # Click on Print…
+      repeat until menu item "Print…" of menu "File" of menu bar 1 exists
         delay 0.2
       end repeat
-      repeat until menu item "Export as PDF…" of menu "File" of menu bar 1 is enabled
+      repeat
+        if ((value of menu item "Print…" of menu "File" of menu bar 1 is enabled) = true)
+          exit repeat
+        end if
         delay 0.2
       end repeat
-      click menu item "Export as PDF…" of menu "File" of menu bar 1
+      click menu item "Print…" of menu "File" of menu bar 1
 
-      tell window 1
+      # Click on Save to PDF
+      tell front window
+        repeat until exists sheet 1
+          delay 0.02
+        end repeat
+        tell sheet 1
+          click menu button "PDF"
+          repeat until exists menu 1 of menu button "PDF"
+            delay 0.02
+          end repeat
+          click menu item "Save as PDF" of menu 1 of menu button "PDF"
+        end tell
+      end tell
+
+      # Type in file name and save
+      tell front window
         repeat until sheet 1 exists
+          delay 0.02
         end repeat
 
-        tell sheet 1
+        tell front sheet
           keystroke theChapterName
-          click pop up button "Where:"
-
-          repeat until menu 1 of pop up button "Where:" exists
-          end repeat
-          click menu item "ebook" of menu 1 of pop up button "Where:"
-          click button "Save"
+          delay 1
+          key code 36
         end tell
-
       end tell
+
+      delay 2
 
       click menu item "Close Tab" of menu "File" of menu bar 1
 

@@ -2,9 +2,9 @@
 layout: post
 title: Add an Update Note API
 date: 2017-01-02 00:00:00
+lang: en
+ref: add-an-update-note-api
 description: To allow users to update their notes in our note taking app, we are going to add an update note PUT API. To do this we will add a new Lambda function to our Serverless Framework project. The Lambda function will update a user’s note in the DynamoDB table.
-context: true
-code: backend
 comments_id: add-an-update-note-api/144
 ---
 
@@ -12,16 +12,16 @@ Now let's create an API that allows a user to update a note with a new note obje
 
 ### Add the Function
 
-<img class="code-marker" src="/assets/s.png" />Create a new file `update.js` and paste the following code
+{%change%} Create a new file `update.js` and paste the following code
 
 ``` javascript
-import * as dynamoDbLib from "./libs/dynamodb-lib";
-import { success, failure } from "./libs/response-lib";
+import handler from "./libs/handler-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 
-export async function main(event, context) {
+export const main = handler(async (event, context) => {
   const data = JSON.parse(event.body);
   const params = {
-    TableName: "notes",
+    TableName: process.env.tableName,
     // 'Key' defines the partition key and sort key of the item to be updated
     // - 'userId': Identity Pool identity id of the authenticated user
     // - 'noteId': path parameter
@@ -42,20 +42,17 @@ export async function main(event, context) {
     ReturnValues: "ALL_NEW"
   };
 
-  try {
-    const result = await dynamoDbLib.call("update", params);
-    return success({ status: true });
-  } catch (e) {
-    return failure({ status: false });
-  }
-}
+  await dynamoDb.update(params);
+
+  return { status: true };
+});
 ```
 
 This should look similar to the `create.js` function. Here we make an `update` DynamoDB call with the new `content` and `attachment` values in the `params`.
 
 ### Configure the API Endpoint
 
-<img class="code-marker" src="/assets/s.png" />Open the `serverless.yml` file and append the following to it.
+{%change%} Open the `serverless.yml` file and append the following to it.
 
 ``` yaml
   update:
@@ -75,7 +72,7 @@ Here we are adding a handler for the PUT request to the `/notes/{id}` endpoint.
 
 ### Test
 
-<img class="code-marker" src="/assets/s.png" />Create a `mocks/update-event.json` file and add the following.
+{%change%} Create a `mocks/update-event.json` file and add the following.
 
 Also, don't forget to use the `noteId` of the note we have been using in place of the `id` in the `pathParameters` block.
 

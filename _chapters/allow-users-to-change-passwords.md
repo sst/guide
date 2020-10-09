@@ -3,7 +3,6 @@ layout: post
 title: Allow Users to Change Passwords
 description: Use the AWS Amplify Auth.changePassword method to support change password functionality in our Serverless React app. This triggers Cognito to help our users change their password.
 date: 2018-04-15 00:00:00
-context: true
 code: user-management
 comments_id: allow-users-to-change-passwords/507
 ---
@@ -15,117 +14,59 @@ For reference, we are using a forked version of the notes app with:
 - A separate GitHub repository: [**{{ site.frontend_user_mgmt_github_repo }}**]({{ site.frontend_user_mgmt_github_repo }})
 - And it can be accessed through: [**https://demo-user-mgmt.serverless-stack.com**](https://demo-user-mgmt.serverless-stack.com)
 
-Let's start by creating a settings page that our users can use to change their password.
+Let's start by editing our settings page so that our users can use to change their password.
 
 ### Add a Settings Page
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `src/containers/Settings.js`.
+{%change%} Replace the `return` statement in `src/containers/Settings.js` with.
 
 ``` coffee
-import React, { Component } from "react";
+return (
+  <div className="Settings">
+    <LinkContainer to="/settings/email">
+      <LoaderButton block bsSize="large">
+        Change Email
+      </LoaderButton>
+    </LinkContainer>
+    <LinkContainer to="/settings/password">
+      <LoaderButton block bsSize="large">
+        Change Password
+      </LoaderButton>
+    </LinkContainer>
+    <hr />
+    <StripeProvider stripe={stripe}>
+      <Elements>
+        <BillingForm isLoading={isLoading} onSubmit={handleFormSubmit} />
+      </Elements>
+    </StripeProvider>
+  </div>
+);
+```
+
+{%change%} And import the following as well.
+
+``` coffee
 import { LinkContainer } from "react-router-bootstrap";
 import LoaderButton from "../components/LoaderButton";
-import "./Settings.css";
-
-export default class Settings extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-    };
-  }
-
-  render() {
-    return (
-      <div className="Settings">
-        <LinkContainer to="/settings/email">
-          <LoaderButton
-            block
-            bsSize="large"
-            text="Change Email"
-          />
-        </LinkContainer>
-        <LinkContainer to="/settings/password">
-          <LoaderButton
-            block
-            bsSize="large"
-            text="Change Password"
-          />
-        </LinkContainer>
-      </div>
-    );
-  }
-}
 ```
 
 All this does is add two links to a page that allows our users to change their password and email.
 
-<img class="code-marker" src="/assets/s.png" />Let's also add a couple of styles for this page.
+{%change%} Replace our `src/containers/Settings.css` with the following.
 
 ``` css
 @media all and (min-width: 480px) {
   .Settings {
     padding: 60px 0;
     margin: 0 auto;
-    max-width: 320px;
+    max-width: 480px;
+  }
+
+  .Settings > .LoaderButton:first-child {
+    margin-bottom: 15px;
   }
 }
-.Settings .LoaderButton:last-child {
-  margin-top: 15px;
-}
 ```
-
-<img class="code-marker" src="/assets/s.png" />Add a link to this settings page to the navbar of our app by changing `src/App.js`.
-
-``` coffee
-<Navbar fluid collapseOnSelect>
-  <Navbar.Header>
-    <Navbar.Brand>
-      <Link to="/">Scratch</Link>
-    </Navbar.Brand>
-    <Navbar.Toggle />
-  </Navbar.Header>
-  <Navbar.Collapse>
-    <Nav pullRight>
-      {this.state.isAuthenticated
-        ? <Fragment>
-            <LinkContainer to="/settings">
-              <NavItem>Settings</NavItem>
-            </LinkContainer>
-            <NavItem onClick={this.handleLogout}>Logout</NavItem>
-          </Fragment>
-        : <Fragment>
-            <LinkContainer to="/signup">
-              <NavItem>Signup</NavItem>
-            </LinkContainer>
-            <LinkContainer to="/login">
-              <NavItem>Login</NavItem>
-            </LinkContainer>
-          </Fragment>
-      }
-    </Nav>
-  </Navbar.Collapse>
-</Navbar>
-```
-
-<img class="code-marker" src="/assets/s.png" />Also, add the route to our `src/Routes.js`.
-
-``` html
-<AuthenticatedRoute
-  path="/settings"
-  exact
-  component={Settings}
-  props={childProps}
-/>
-```
-
-<img class="code-marker" src="/assets/s.png" />And don't forget to import it.
-
-``` coffee
-import Settings from "./containers/Settings";
-```
-
-This should give us a settings page that our users can get to from the app navbar.
 
 ![Settings page screenshot](/assets/user-management/settings-page.png)
 
@@ -133,103 +74,95 @@ This should give us a settings page that our users can get to from the app navba
 
 Now let's create the form that allows our users to change their password. 
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `src/containers/ChangePassword.js`.
+{%change%} Add the following to `src/containers/ChangePassword.js`.
 
 ``` coffee
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Auth } from "aws-amplify";
+import { useHistory } from "react-router-dom";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
+import { useFormFields } from "../libs/hooksLib";
+import { onError } from "../libs/errorLib";
 import "./ChangePassword.css";
 
-export default class ChangePassword extends Component {
-  constructor(props) {
-    super(props);
+export default function ChangePassword() {
+  const history = useHistory();
+  const [fields, handleFieldChange] = useFormFields({
+    password: "",
+    oldPassword: "",
+    confirmPassword: "",
+  });
+  const [isChanging, setIsChanging] = useState(false);
 
-    this.state = {
-      password: "",
-      oldPassword: "",
-      isChanging: false,
-      confirmPassword: ""
-    };
-  }
-
-  validateForm() {
+  function validateForm() {
     return (
-      this.state.oldPassword.length > 0 &&
-      this.state.password.length > 0 &&
-      this.state.password === this.state.confirmPassword
+      fields.oldPassword.length > 0 &&
+      fields.password.length > 0 &&
+      fields.password === fields.confirmPassword
     );
   }
 
-  handleChange = event => {
-    this.setState({
-      [event.target.id]: event.target.value
-    });
-  };
-
-  handleChangeClick = async event => {
+  async function handleChangeClick(event) {
     event.preventDefault();
 
-    this.setState({ isChanging: true });
+    setIsChanging(true);
 
     try {
       const currentUser = await Auth.currentAuthenticatedUser();
       await Auth.changePassword(
         currentUser,
-        this.state.oldPassword,
-        this.state.password
+        fields.oldPassword,
+        fields.password
       );
 
-      this.props.history.push("/settings");
-    } catch (e) {
-      alert(e.message);
-      this.setState({ isChanging: false });
+      history.push("/settings");
+    } catch (error) {
+      onError(error);
+      setIsChanging(false);
     }
-  };
-
-  render() {
-    return (
-      <div className="ChangePassword">
-        <form onSubmit={this.handleChangeClick}>
-          <FormGroup bsSize="large" controlId="oldPassword">
-            <ControlLabel>Old Password</ControlLabel>
-            <FormControl
-              type="password"
-              onChange={this.handleChange}
-              value={this.state.oldPassword}
-            />
-          </FormGroup>
-          <hr />
-          <FormGroup bsSize="large" controlId="password">
-            <ControlLabel>New Password</ControlLabel>
-            <FormControl
-              type="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup bsSize="large" controlId="confirmPassword">
-            <ControlLabel>Confirm Password</ControlLabel>
-            <FormControl
-              type="password"
-              onChange={this.handleChange}
-              value={this.state.confirmPassword}
-            />
-          </FormGroup>
-          <LoaderButton
-            block
-            type="submit"
-            bsSize="large"
-            text="Change Password"
-            loadingText="Changing…"
-            disabled={!this.validateForm()}
-            isLoading={this.state.isChanging}
-          />
-        </form>
-      </div>
-    );
   }
+
+  return (
+    <div className="ChangePassword">
+      <form onSubmit={handleChangeClick}>
+        <FormGroup bsSize="large" controlId="oldPassword">
+          <ControlLabel>Old Password</ControlLabel>
+          <FormControl
+            type="password"
+            onChange={handleFieldChange}
+            value={fields.oldPassword}
+          />
+        </FormGroup>
+        <hr />
+        <FormGroup bsSize="large" controlId="password">
+          <ControlLabel>New Password</ControlLabel>
+          <FormControl
+            type="password"
+            onChange={handleFieldChange}
+            value={fields.password}
+          />
+        </FormGroup>
+        <FormGroup bsSize="large" controlId="confirmPassword">
+          <ControlLabel>Confirm Password</ControlLabel>
+          <FormControl
+            type="password"
+            onChange={handleFieldChange}
+            value={fields.confirmPassword}
+          />
+        </FormGroup>
+        <LoaderButton
+          block
+          type="submit"
+          bsSize="large"
+          disabled={!validateForm()}
+          isLoading={isChanging}
+        >
+          Change Password
+        </LoaderButton>
+      </form>
+    </div>
+  );
 }
 ```
 
@@ -239,14 +172,14 @@ Most of this should be very straightforward. The key part of the flow here is th
 const currentUser = await Auth.currentAuthenticatedUser();
 await Auth.changePassword(
   currentUser,
-  this.state.oldPassword,
-  this.state.password
+  fields.oldPassword,
+  fields.password
 );
 ```
 
 The above snippet uses the `Auth` module from Amplify to get the current user. And then uses that to change their password by passing in the old and new password. Once the `Auth.changePassword` method completes, we redirect the user to the settings page.
 
-<img class="code-marker" src="/assets/s.png" />Let's also add a couple of styles.
+{%change%} Let's also add a couple of styles.
 
 ``` css
 @media all and (min-width: 480px) {
@@ -261,18 +194,15 @@ The above snippet uses the `Auth` module from Amplify to get the current user. A
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />Let's add our new page to `src/Routes.js`.
+{%change%} Let's add our new page to `src/Routes.js`.
 
 ``` html
-<AuthenticatedRoute
-  path="/settings/password"
-  exact
-  component={ChangePassword}
-  props={childProps}
-/>
+<AuthenticatedRoute exact path="/settings/password">
+  <ChangePassword />
+</AuthenticatedRoute>
 ```
 
-<img class="code-marker" src="/assets/s.png" />And import it.
+{%change%} And import it.
 
 ``` coffee
 import ChangePassword from "./containers/ChangePassword";

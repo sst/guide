@@ -83,7 +83,7 @@ You can generate the PDF locally on macOS by following these steps.
    1. Create an `ebook` folder in `~/Downloads` (for example).
    2. Update the date and version in the `etc/cover.html`
    3. Open the cover page locally in Safari by going to `file:///Users/frank/Sites/ServerlessStackCom/etc/cover.html`.
-   4. Hit the **Export to PDF…** button.
+   4. In the Safari Menu on the File Menu, hit the **Export to PDF…** button.
    5. Place `Cover.pdf` in the `~/Downloads/ebook` folder.
 2. Ensure `ebook` folder is an option when hitting the **Export to PDF…** button in Safari.
 3. In the terminal, run `osascript pdf.scpt` in the `etc/` directory of this repository.
@@ -92,7 +92,11 @@ We are looking for a better way to generate the PDF (and other eBook) formats. I
 
 ## Sponsors
 
-[**Sponsor Serverless Stack on Patreon**](https://www.patreon.com/serverless_stack) if you've found this guide useful or would like to be an official supporter. [A big thanks to our supporters](https://serverless-stack.com/sponsors.html#backers)!
+<a target="_blank" href="https://epsagon.com/serverless-stack/?utm_source=Advertisement&utm_medium=cpm&utm_campaign=ServerlessStack">
+  <img height="50" alt="Epsagon" src="https://raw.githubusercontent.com/AnomalyInnovations/serverless-stack-com/master/assets/sponsors/epsagon.png" />
+</a>
+
+[**Sponsor Serverless Stack on GitHub**](https://github.com/sponsors/jayair) if you've found this guide useful or would like to be an official supporter. [A big thanks to our supporters](https://serverless-stack.com/sponsors.html)!
 
 ## Maintainers
 
@@ -109,8 +113,10 @@ Thanks to these folks for their contributions to the content of Serverless Stack
 - [Leonardo Gonzalez](https://github.com/leogonzalez): Translating chapters to Portuguese
 - [Vieko Franetovic](https://github.com/vieko): Translating chapters to Spanish
 - [Christian Kaindl](https://github.com/christiankaindl): Translating chapters to German
+- [Jae Chul Kim](https://github.com/bsg-bob): Translating chapters to Korean
 
 
 [Discourse]: https://discourse.serverless-stack.com
 [Contributing]: CONTRIBUTING.md
 [PR]: ../../compare
+

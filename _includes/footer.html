@@ -32,6 +32,8 @@
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<!-- Lander Certificate Tilt -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
 <!-- Newsletter Form JS -->
 <script src="https://emailoctopus.com/bundles/emailoctopuslist/js/formEmbed.js?1519058398"></script>
 <!-- Code Snippet Copy JS -->
@@ -47,8 +49,12 @@
   }
 
   var clipboard = new ClipboardJS(".clipbutton", {
-    target: function(trigger) {
-      return trigger.nextElementSibling;
+    text: function(trigger) {
+      return trigger.nextElementSibling.innerText
+        // Remove extra line at the end
+        .replace(/\n$/, '')
+        // Remove "$" from "$ mkdir some-command"
+        .replace(/^\$ /gm, '');
     }
   });
 
@@ -71,6 +77,27 @@
     $(this).parent().next().toggleClass('open');
   });
   /** End sidebar ToC code **/
+
+  /** Start tilt settings **/
+  $('.certificate.tilt').tilt({ reset: false, perspective: 3000 });
+  /** End tilt settings **/
+
+  /** Start ToC lander code **/
+  $('.table-of-contents .chapters .expand').click(function() {
+    $(this).closest('.chapters').addClass('expanded');
+  });
+  /** Edn ToC lander code **/
+</script>
+<!-- Docsearch -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script> 
+<script type="text/javascript">
+  docsearch({
+    apiKey: '8c4851deee70ce502cd648d92706f4dc',
+    indexName: 'serverless-stack',
+    inputSelector: '.search-input',
+    algoliaOptions: { 'facetFilters': ["lang:{{ page.lang | default: site.lang | default: "en" }}"] },
+    debug: false
+  });
 </script>
 <!-- instant.page pre-loading -->
 <script src="//instant.page/1.0.0" type="module" integrity="sha384-6w2SekMzCkuMQ9sEbq0cLviD/yR2HfA/+ekmKiBnFlsoSvb/VmQFSi/umVShadQI"></script>

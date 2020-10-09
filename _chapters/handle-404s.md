@@ -2,8 +2,9 @@
 layout: post
 title: Handle 404s
 date: 2017-01-12 00:00:00
+lang: en
+ref: handle-404s
 description: To handle 404s in a React.js app with React Router v4 we need to set up a catch all Route at the bottom of our Switch block. A catch all Route does not have a path prop and responds to all routes.
-context: true
 comments_id: handle-404s/75
 ---
 
@@ -13,21 +14,24 @@ Now that we know how to handle the basic routes; let's look at handling 404s wit
 
 Let's start by creating a component that will handle this for us.
 
-<img class="code-marker" src="/assets/s.png" />Create a new component at `src/containers/NotFound.js` and add the following.
+{%change%} Create a new component at `src/containers/NotFound.js` and add the following.
 
 ``` coffee
 import React from "react";
 import "./NotFound.css";
 
-export default () =>
-  <div className="NotFound">
-    <h3>Sorry, page not found!</h3>
-  </div>;
+export default function NotFound() {
+  return (
+    <div className="NotFound">
+      <h3>Sorry, page not found!</h3>
+    </div>
+  );
+}
 ```
 
 All this component does is print out a simple message for us.
 
-<img class="code-marker" src="/assets/s.png" />Let's add a couple of styles for it in `src/containers/NotFound.css`.
+{%change%} Let's add a couple of styles for it in `src/containers/NotFound.css`.
 
 ``` css
 .NotFound {
@@ -40,16 +44,18 @@ All this component does is print out a simple message for us.
 
 Now we just need to add this component to our routes to handle our 404s.
 
-<img class="code-marker" src="/assets/s.png" />Find the `<Switch>` block in `src/Routes.js` and add it as the last line in that section.
+{%change%} Find the `<Switch>` block in `src/Routes.js` and add it as the last line in that section.
 
 ``` coffee
-{ /* Finally, catch all unmatched routes */ }
-<Route component={NotFound} />
+{/* Finally, catch all unmatched routes */}
+<Route>
+  <NotFound />
+</Route>
 ```
 
 This needs to always be the last line in the `<Route>` block. You can think of it as the route that handles requests in case all the other routes before it have failed.
 
-<img class="code-marker" src="/assets/s.png" />And include the `NotFound` component in the header by adding the following:
+{%change%} And include the `NotFound` component in the header by adding the following:
 
 ``` javascript
 import NotFound from "./containers/NotFound";

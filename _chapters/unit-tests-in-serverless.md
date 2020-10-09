@@ -2,17 +2,17 @@
 layout: post
 title: Unit Tests in Serverless
 date: 2018-03-10 00:00:00
+lang: en
 description: To test our business logic in Serverless, we will use Jest to add unit tests to our project. We can run these tests using the "npm test" command.
-context: true
-code: backend
+ref: unit-tests-in-serverless
 comments_id: unit-tests-in-serverless/173
 ---
 
-So we have some simple business logic that figures out exactly how much to charge our user based on the number of notes they want to store. We want to make sure that we test all the possible cases for this before we start charging people. To do this we are going to configure unit tests for our Serverless Framework project.
+So we have some simple business logic that figures out exactly how much to charge our user based on the number of notes they want to store. We want to make sure that we test all the possible cases for this before we start charging people. To do this we are going to configure unit tests for our Serverless Framework project. However, if you are looking for other strategies to test your Serverless applications, [we talk about them in detail here](https://seed.run/blog/testing-your-serverless-app).
 
 We are going to use [Jest](https://facebook.github.io/jest/) for this and it is already a part of [our starter project](https://github.com/AnomalyInnovations/serverless-nodejs-starter).
 
-However, if you are starting a new Serverless Framework project. Add Jest to your dev dependencies by running the following.
+However, if you are starting a new Serverless Framework project, add Jest to your dev dependencies by running the following.
 
 ``` bash
 $ npm install --save-dev jest
@@ -28,9 +28,17 @@ And update the `scripts` block in your `package.json` with the following:
 
 This will allow you to run your tests using the command `npm test`.
 
+Alternatively, if you are using the [serverless-bundle](https://github.com/AnomalyInnovations/serverless-bundle) plugin to package your functions, it comes with a built-in script to transpile your code and run your tests. Add the following to your `package.json` instead.
+
+```
+"scripts": {
+  "test": "serverless-bundle test"
+},
+```
+
 ### Add Unit Tests
 
-<img class="code-marker" src="/assets/s.png" />Now create a new file in `tests/billing.test.js` and add the following.
+{%change%} Now create a new file in `tests/billing.test.js` and add the following.
 
 ``` js
 import { calculateCost } from "../libs/billing-lib";
@@ -65,6 +73,17 @@ test("Highest tier", () => {
 
 This should be straightforward. We are adding 3 tests. They are testing the different tiers of our pricing structure. We test the case where a user is trying to store 10, 100, and 101 notes. And comparing the calculated cost to the one we are expecting. You can read more about using Jest in the [Jest docs here](https://facebook.github.io/jest/docs/en/getting-started.html). 
 
+You might have noticed a `handler.test.js` file in the `tests/` directory. This was a part of our starter that we can now remove.
+
+### Remove Unused Files
+
+{%change%} Remove the starter files by running the following command in the root of our project.
+
+``` bash
+$ rm handler.js
+$ rm tests/handler.test.js
+```
+
 ### Run tests
 
 And we can run our tests by using the following command in the root of our project.
@@ -76,8 +95,6 @@ $ npm test
 You should see something like this:
 
 ``` bash
-> jest
-
  PASS  tests/billing.test.js
   ✓ Lowest tier (4ms)
   ✓ Middle tier
@@ -92,21 +109,4 @@ Ran all test suites.
 
 And that's it! We have unit tests all configured.
 
-### Commit the Changes
-
-<img class="code-marker" src="/assets/s.png" />Let's commit these changes.
-
-``` bash
-$ git add .
-$ git commit -m "Adding unit tests"
-```
-
-### Push the Changes
-
-<img class="code-marker" src="/assets/s.png" />We are done making changes to our project, so let's go ahead and push them to GitHub.
-
-``` bash
-$ git push
-```
-
-Next we'll use our Git repo to automate our deployments. This will ensure that when we push our changes to Git, it will run our tests, and deploy them for us automatically. We'll also learn to configure multiple environments.
+Now we are almost ready to deploy our backend.

@@ -3,7 +3,6 @@ layout: post
 title: Mapping Cognito Identity Id and User Pool Id
 description: Access a user's Cognito User Pool user Id in an AWS Lambda function that is secured using AWS IAM and Federated Identities using the event.requestContext.identity.cognitoAuthenticationProvider string.
 date: 2018-04-09 00:00:00
-context: true
 comments_id: mapping-cognito-identity-id-and-user-pool-id/500
 ---
 

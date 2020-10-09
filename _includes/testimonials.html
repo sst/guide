@@ -1,0 +1,20 @@
+<div class="testimonials">
+  <p class="desc">❤️</p>
+
+  <div class="tweets">
+    {% for tweet in site.data.testimonials.tweets %}
+      <div class="tweet">
+        <i class="fa fa-twitter" aria-hidden="true"></i>
+        <div class="author">
+          <img src="/assets/lander/testimonials/{{ tweet.username }}.jpg" />
+          <div>
+            <p>{{ tweet.name }}</p>
+            <p>@{{ tweet.username }}</p>
+          </div>
+        </div>
+        <div class="content">{{ tweet.content }}</div>
+        <a class="tweet-link" target="_blank" href="{{ tweet.link }}"></a>
+      </div>
+    {% endfor %}
+  </div>
+</div>

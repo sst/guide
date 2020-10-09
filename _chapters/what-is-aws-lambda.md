@@ -14,13 +14,15 @@ comments_id: what-is-aws-lambda/308
 
 Let's start by quickly looking at the technical specifications of AWS Lambda. Lambda supports the following runtimes.
 
-- Node.js: v8.10 and v6.10
-- Java 8
-- Python: 3.6 and 2.7
-- .NET Core: 1.0.1 and 2.0
+- Node.js 12.13.0, 10.16.3, and 8.10
+- Java 11 and 8
+- Python 3.8, 3.7, 3.6, and 2.7
+- .NET Core 2.1, 2.2, 3.0, and 3.1
 - Go 1.x
 - Ruby 2.5
 - Rust
+
+Note that, [.NET Core 2.2 and 3.0 are supported through custom runtimes](https://aws.amazon.com/blogs/developer/announcing-amazon-lambda-runtimesupport/).
 
 Each function runs inside a container with a 64-bit Amazon Linux AMI. And the execution environment has:
 
@@ -44,11 +46,11 @@ Finally here is what a Lambda function (a Node.js version) looks like.
 
 ![Anatomy of a Lambda Function image](/assets/anatomy-of-a-lambda-function.png)
 
-Here `myHandler` is the name of our Lambda function. The `event` object contains all the information about the event that triggered this Lambda. In the case of a HTTP request it'll be information about the specific HTTP request. The `context` object contains info about the runtime our Lambda function is executing in. After we do all the work inside our Lambda function, we simply call the `callback` function with the results (or the error) and AWS will respond to the HTTP request with it. 
+Here `myHandler` is the name of our Lambda function. The `event` object contains all the information about the event that triggered this Lambda. In the case of an HTTP request it'll be information about the specific HTTP request. The `context` object contains info about the runtime our Lambda function is executing in. After we do all the work inside our Lambda function, we simply call the `callback` function with the results (or the error) and AWS will respond to the HTTP request with it.
 
 ### Packaging Functions
 
-Lambda functions need to be packaged and sent to AWS. This is usually a process of compressing the function and all its dependencies and uploading it to a S3 bucket. And letting AWS know that you want to use this package when a specific event takes place. To help us with this process we use the [Serverless Framework](https://serverless.com). We'll go over this in detail later on in this guide.
+Lambda functions need to be packaged and sent to AWS. This is usually a process of compressing the function and all its dependencies and uploading it to an S3 bucket. And letting AWS know that you want to use this package when a specific event takes place. To help us with this process we use the [Serverless Framework](https://serverless.com). We'll go over this in detail later on in this guide.
 
 ### Execution Model
 
@@ -75,7 +77,7 @@ exports.myHandler = function(event, context, callback) {
 
 This caching effect of containers also applies to the `/tmp` directory that we talked about above. It is available as long as the container is being cached.
 
-Now you can guess that this isn't a very reliable way to make our Lambda functions stateful. This is because we just don't control the underlying process by which Lambda is invoked or it's containers are cached.
+Now you can guess that this isn't a very reliable way to make our Lambda functions stateful. This is because we just don't control the underlying process by which Lambda is invoked or its containers are cached.
 
 ### Pricing
 

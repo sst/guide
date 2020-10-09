@@ -11,32 +11,29 @@ layout: default
 
         <div class="post-info">
 
-          {% if page.ref %}
-            {% assign pages = site.chapters | where:"ref", page.ref | sort: 'lang' %}
-            {% if pages[1] %}
-              <span class="copy">View this page in: </span>
-              {% for page in pages %}
-                {% if page.lang == "en" %}
-                  {% assign page_en_url = page.url %}
-                {% endif %}
-                <a class="lang {{ page.lang }}" href="{{ page.url }}" class="{{ page.lang }}">
-                  {{ page.lang }}
-                </a>
-              {% endfor %}
-              <span class="separator">&nbsp;&bull;&nbsp;</span>
-            {% endif %}
-          {% endif %}
-
           <a target="_blank" href="{{ site.github_repo }}{{ site.github_edit_prefix }}{{ page.path }}">Edit this page</a>
           <span class="separator">&nbsp;&bull;&nbsp;</span>
           <a target="_blank" href="{{ site.github_repo }}{{ site.github_history_prefix }}{{ page.path }}">View history</a>
-        </div>
 
-        {% if page.context == true %}
-        <div class="post-context">
-          This article is a part of a <a href="/">guide to building full-stack apps</a> with Serverless and React.
+          {% if page.ref %}
+            {% assign pages = site.chapters | where:"ref", page.ref | sort: 'lang' %}
+            {% if pages[1] %}
+              <span class="separator">&nbsp;&bull;&nbsp;</span>
+              <span class="copy">View this page in: </span>
+              {% for other in pages %}
+                {% if other.lang == "en" %}
+                  {% assign page_en_url = other.url %}
+                {% endif %}
+                {% if other.lang != page.lang %}
+                  <a class="lang {{ other.lang }}" href="{{ other.url }}" class="{{ other.lang }}">
+                    {{ site.data.languages[other.lang] }}
+                  </a>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+
         </div>
-        {% endif %}
 
         {% if page.bio %}
         <div class="post-author">
@@ -50,18 +47,21 @@ layout: default
         {{ content }}
       </div>
 
+      {% include post-checkpoint.html %}
+
       {% include post-footer.html page_en_url=page_en_url %}
 
-      {% include post-links.html %}
+      <div class="post-links">
 
-      <div class="post-closing">
-        <p>If you liked this post, please <a target="_blank" href="{{ site.newsletter_signup_form }}">subscribe to our newsletter</a>, <a target="_blank" href="{{ site.github_repo }}">give us a star on GitHub</a>, and <a target="_blank" href="{{ site.twitter_url }}">follow us on Twitter</a>.</p>
+        <p>For help and discussion</p>
+        <a target="_blank" href="{{ site.forum_url }}{{ site.forum_thread_prefix }}{{ page.comments_id }}">
+          <i class="fa fa-comments" aria-hidden="true"></i>
+          Comments on this chapter
+        </a>
+
       </div>
 
-      <div class="post-sponsor">
-        <p>Brought to you by</p>
-        <a target="_blank" href="https://seed.run"><img width="435" alt="A fully-managed CI/CD pipeline for Serverless" src="/assets/seed-serverless-ci-cd.png" /></a>
-      </div>
+      {% include post-sponsor.html %}
 
       <div class="extras">
         <div class="container">

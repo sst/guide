@@ -2,9 +2,9 @@
 layout: post
 title: Add a Get Note API
 date: 2016-12-31 00:00:00
+lang: en
+ref: add-a-get-note-api
 description: To allow users to retrieve a note in our note taking app, we are going to add a GET note API. To do this we will add a new Lambda function to our Serverless Framework project. The Lambda function will retrieve the note from our DynamoDB table.
-context: true
-code: backend
 comments_id: add-a-get-note-api/132
 ---
 
@@ -12,15 +12,15 @@ Now that we created a note and saved it to our database. Let's add an API to ret
 
 ### Add the Function
 
-<img class="code-marker" src="/assets/s.png" />Create a new file `get.js` and paste the following code
+{%change%} Create a new file `get.js` and paste the following code
 
 ``` javascript
-import * as dynamoDbLib from "./libs/dynamodb-lib";
-import { success, failure } from "./libs/response-lib";
+import handler from "./libs/handler-lib";
+import dynamoDb from "./libs/dynamodb-lib";
 
-export async function main(event, context) {
+export const main = handler(async (event, context) => {
   const params = {
-    TableName: "notes",
+    TableName: process.env.tableName,
     // 'Key' defines the partition key and sort key of the item to be retrieved
     // - 'userId': Identity Pool identity id of the authenticated user
     // - 'noteId': path parameter
@@ -30,25 +30,22 @@ export async function main(event, context) {
     }
   };
 
-  try {
-    const result = await dynamoDbLib.call("get", params);
-    if (result.Item) {
-      // Return the retrieved item
-      return success(result.Item);
-    } else {
-      return failure({ status: false, error: "Item not found." });
-    }
-  } catch (e) {
-    return failure({ status: false });
+  const result = await dynamoDb.get(params);
+  if ( ! result.Item) {
+    throw new Error("Item not found.");
   }
-}
+
+  // Return the retrieved item
+  return result.Item;
+});
+
 ```
 
-This follows exactly the same structure as our previous `create.js` function. The major difference here is that we are doing a `dynamoDbLib.call('get', params)` to get a note object given the `noteId` and `userId` that is passed in through the request.
+This follows exactly the same structure as our previous `create.js` function. The major difference here is that we are doing a `dynamoDb.get(params)` to get a note object given the `noteId` and `userId` that is passed in through the request.
 
 ### Configure the API Endpoint
 
-<img class="code-marker" src="/assets/s.png" />Open the `serverless.yml` file and append the following to it.
+{%change%} Open the `serverless.yml` file and append the following to it.
 
 ``` yaml
   get:
@@ -72,7 +69,7 @@ This defines our get note API. It adds a GET request handler with the endpoint `
 
 To test our get note API we need to mock passing in the `noteId` parameter. We are going to use the `noteId` of the note we created in the previous chapter and add in a `pathParameters` block to our mock. So it should look similar to the one below. Replace the value of `id` with the id you received when you invoked the previous `create.js` function.
 
-<img class="code-marker" src="/assets/s.png" />Create a `mocks/get-event.json` file and add the following.
+{%change%} Create a `mocks/get-event.json` file and add the following.
 
 ``` json
 {
@@ -87,7 +84,7 @@ To test our get note API we need to mock passing in the `noteId` parameter. We a
 }
 ```
 
-And we invoke our newly created function.
+And invoke our newly created function from the root directory of the project.
 
 ``` bash
 $ serverless invoke local --function get --path mocks/get-event.json

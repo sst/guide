@@ -2,8 +2,9 @@
 layout: post
 title: Add App Favicons
 date: 2017-01-07 00:00:00
+lang: en
+ref: add-app-favicons
 description: To generate app icons and favicons for our React.js app we will use the Realfavicongenerator.net service. This will replace the default favicon that Create React App comes with.
-context: true
 comments_id: add-app-favicons/155
 ---
 
@@ -27,11 +28,18 @@ Once you upload your icon, it'll show you a preview of your icon on various plat
 
 This should generate your favicon package and the accompanying code.
 
-<img class="code-marker" src="/assets/s.png" />Click **Favicon package** to download the generated favicons. And copy all the files over to your `public/` directory.
+{%change%} Click **Favicon package** to download the generated favicons. And copy all the files over to your `public/` directory.
 
 ![Realfavicongenerator.net completed screenshot](/assets/realfavicongenerator-completed.png)
 
-<img class="code-marker" src="/assets/s.png" />Then replace the contents of `public/manifest.json` with the following:
+{%change%} Remove the `public/logo192.png` and `public/logo512.png` files.
+
+``` bash
+$ rm public/logo192.png
+$ rm public/logo512.png
+```
+
+{%change%} Then replace the contents of `public/manifest.json` with the following:
 
 ``` json
 {
@@ -58,21 +66,27 @@ This should generate your favicon package and the accompanying code.
 
 To include a file from the `public/` directory in your HTML, Create React App needs the `%PUBLIC_URL%` prefix.
 
-<img class="code-marker" src="/assets/s.png" />Add this to your `public/index.html`.
+{%change%} Add this to your `public/index.html`.
 
 ``` html
 <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="%PUBLIC_URL%/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="%PUBLIC_URL%/favicon-16x16.png" sizes="16x16">
 <link rel="mask-icon" href="%PUBLIC_URL%/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="description" content="A simple note taking app" />
 <meta name="theme-color" content="#ffffff">
 ```
 
-<img class="code-marker" src="/assets/s.png" />And **remove** the following lines that reference the original favicon and theme color.
+{%change%} And **remove** the following lines that reference the original favicon and theme color.
 
 ``` html
 <meta name="theme-color" content="#000000">
 <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+<link rel="apple-touch-icon" href="logo192.png" />
+<meta
+  name="description"
+  content="Web site created using create-react-app"
+/>
 ```
 
 Finally head over to your browser and try the `/favicon-32x32.png` path to ensure that the files were added correctly.

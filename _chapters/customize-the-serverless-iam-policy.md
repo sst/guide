@@ -3,7 +3,6 @@ layout: post
 title: Customize the Serverless IAM Policy
 description: Serverless Framework deploys using the policy attached to the IAM credentials in your AWS CLI profile. To customize the IAM Policy used, access can be restricted to the services that Serverless Framework needs, and to the project that is being deployed.
 date: 2018-04-08 00:00:00
-context: true
 comments_id: customize-the-serverless-iam-policy/18
 ---
 
@@ -70,7 +69,7 @@ And hit **Select** in the **Create Your Own Policy** section.
 
 ![Select Create your own IAM Policy Screenshot](/assets/customize-iam-policy/select-create-your-own-iam-policy.png)
 
-Here fill pick a name for your new policy and paste the policy created above in the **Policy Document** field.
+Here pick a name for your new policy and paste the policy created above in the **Policy Document** field.
 
 ![Create your own IAM Policy Screenshot](/assets/customize-iam-policy/create-your-own-iam-policy.png)
 
@@ -114,7 +113,7 @@ Below is a more nuanced policy template that restricts access to the Serverless 
         "s3:List*"
       ],
       "Resource": [
-        "arn:aws:s3:::*"
+        "arn:aws:s3:::<service_name>*"
       ]
     },
     {
@@ -123,7 +122,7 @@ Below is a more nuanced policy template that restricts access to the Serverless 
         "s3:*"
       ],
       "Resource": [
-        "arn:aws:s3:::*/*"
+        "arn:aws:s3:::<service_name>*/*"
       ]
     },
     {
@@ -165,6 +164,7 @@ Below is a more nuanced policy template that restricts access to the Serverless 
       "Effect": "Allow",
       "Action": [
         "apigateway:GET",
+        "apigateway:PATCH",
         "apigateway:POST",
         "apigateway:PUT",
         "apigateway:DELETE"
@@ -177,6 +177,7 @@ Below is a more nuanced policy template that restricts access to the Serverless 
       "Effect": "Allow",
       "Action": [
         "apigateway:GET",
+        "apigateway:PATCH",
         "apigateway:POST",
         "apigateway:PUT",
         "apigateway:DELETE"

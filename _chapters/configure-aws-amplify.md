@@ -2,18 +2,20 @@
 layout: post
 title: Configure AWS Amplify
 date: 2017-01-12 12:00:00
+lang: en
+ref: configure-aws-amplify
 description: We are going to use the information of our AWS resources to configure AWS Amplify in our React app. We'll call the Amplify.configure() method when our app first loads.
-context: true
+code: frontend
 comments_id: configure-aws-amplify/151
 ---
 
 To allow our React app to talk to the AWS resources that we created (in the backend section of the tutorial), we'll be using a library called [AWS Amplify](https://github.com/aws/aws-amplify). 
 
-AWS Amplify provides a few simple modules (Auth, API, and Storage) to help us easily connect to our backend. Let's get started.
+AWS Amplify provides a few simple modules (Auth, API, and Storage) to help us easily connect to our backend.
 
 ### Install AWS Amplify
 
-<img class="code-marker" src="/assets/s.png" />Run the following command in your working directory.
+{%change%} Run the following command in your working directory.
 
 ``` bash
 $ npm install aws-amplify --save
@@ -25,7 +27,7 @@ This installs the NPM package and adds the dependency to your `package.json`.
 
 Let's first create a configuration file for our app that'll reference all the resources we have created.
 
-<img class="code-marker" src="/assets/s.png" />Create a file at `src/config.js` and add the following.
+{%change%} Create a file at `src/config.js` and add the following.
 
 ``` coffee
 export default {
@@ -60,21 +62,21 @@ Here you need to replace the following:
 
 Next we'll set up AWS Amplify.
 
-<img class="code-marker" src="/assets/s.png" />Import it by adding the following to the header of your `src/index.js`.
+{%change%} Import it by adding the following to the header of your `src/index.js`.
 
 ``` coffee
-import Amplify from "aws-amplify";
+import { Amplify } from 'aws-amplify';
 ```
 
 And import the config we created above. 
 
-<img class="code-marker" src="/assets/s.png" />Add the following, also to the header of your `src/index.js`.
+{%change%} Add the following, also to the header of your `src/index.js`.
 
 ``` coffee
-import config from "./config";
+import config from './config';
 ```
 
-<img class="code-marker" src="/assets/s.png" />And to initialize AWS Amplify; add the following above the `ReactDOM.render` line in `src/index.js`.
+{%change%} And to initialize AWS Amplify; add the following above the `ReactDOM.render` line in `src/index.js`.
 
 ``` coffee
 Amplify.configure({
@@ -111,5 +113,15 @@ A couple of notes here.
 - The `name: "notes"` is basically telling Amplify that we want to name our API. Amplify allows you to add multiple APIs that your app is going to work with. In our case our entire backend is just one single API.
 
 - The `Amplify.configure()` is just setting the various AWS resources that we want to interact with. It isn't doing anything else special here beside configuration. So while this might look intimidating, just remember this is only setting things up. 
+
+### Commit the Changes
+
+{%change%} Let's commit our code so far and push it to GitHub.
+
+``` bash
+$ git add .
+$ git commit -m "Setting up our React app"
+$ git push
+```
 
 Next up, we are going to work on creating our login and sign up forms.

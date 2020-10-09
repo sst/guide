@@ -3,8 +3,8 @@ layout: post
 title: Connect to API Gateway with IAM Auth
 description: For our React.js app to make requests to a serverless backend API secured using AWS IAM, we need to sign our requests using Signature Version 4. But to be able to do that we need to use our User Pool user token and get temporary IAM credentials from our Identity Pool. Using these temporary IAM credentials we can then generate the Signature Version 4 security headers and make a request using HTTP fetch.
 date: 2018-04-11 00:00:00
-context: true
 comments_id: 113
+comments_id: comments-signup-with-aws-cognito/113
 ---
 
 
@@ -17,7 +17,7 @@ The generated SDK can be hard to use since you need to re-generate it every time
 
 However if you are looking to simply connect to API Gateway using the AWS JS SDK, we've create a standalone [**`sigV4Client.js`**](https://github.com/AnomalyInnovations/sigV4Client) that you can use. It is based on the client that comes pre-packaged with the generated SDK.
 
-In this chapter we'll go over how to use the the `sigV4Client.js`. The basic flow looks like this:
+In this chapter we'll go over how to use the `sigV4Client.js`. The basic flow looks like this:
 
 1. Authenticate a user with Cognito User Pool and acquire a user token.
 2. With the user token get temporary IAM credentials from the Identity Pool.

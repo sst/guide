@@ -5,7 +5,6 @@ date: 2016-12-25 12:00:00
 lang: en
 ref: create-an-iam-user
 description: To interact with AWS using some command line tools we need to create an IAM user through the AWS console.
-context: true
 comments_id: create-an-iam-user/92
 ---
 
@@ -37,11 +36,15 @@ Select **Attach existing policies directly**.
 
 ![Add IAM User Policy Screenshot](/assets/iam-user/add-iam-user-policy.png)
 
-Search for **AdministratorAccess** and select the policy, then select **Next: Review**.
+Search for **AdministratorAccess** and select the policy, then select **Next: Tags**.
 
 We can provide a more fine-grained policy here and we cover this later in the [Customize the Serverless IAM Policy]({% link _chapters/customize-the-serverless-iam-policy.md %}) chapter. But for now, let's continue with this.
 
 ![Added Admin Policy Screenshot](/assets/iam-user/added-admin-policy.png)
+
+We can optionally add some info to our IAM user. But we'll skip this for now. Click **Next: Review**.
+
+![Skip IAM tags Screenshot](/assets/iam-user/skip-iam-tags.png)
 
 Select **Create user**.
 

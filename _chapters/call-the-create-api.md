@@ -2,46 +2,46 @@
 layout: post
 title: Call the Create API
 date: 2017-01-23 00:00:00
+lang: en
+ref: call-the-create-api
 description: To let our users create a note in our React.js app, we need to connect our form to our serverless API backend. We are going to use AWS Amplify's API module for this.
-context: true
 comments_id: call-the-create-api/124
 ---
 
 Now that we have our basic create note form working, let's connect it to our API. We'll do the upload to S3 a little bit later. Our APIs are secured using AWS IAM and Cognito User Pool is our authentication provider. Thankfully, Amplify takes care of this for us by using the logged in user's session.
 
-We just need to use the `API` module that AWS Amplify has.
-
-<img class="code-marker" src="/assets/s.png" />Let's include the `API` module by adding the following to the header of `src/containers/NewNote.js`.
+{%change%} Let's include the `API` module by adding the following to the header of `src/containers/NewNote.js`.
 
 ``` javascript
 import { API } from "aws-amplify";
 ```
 
-<img class="code-marker" src="/assets/s.png" />And replace our `handleSubmit` function with the following.
+{%change%} And replace our `handleSubmit` function with the following.
 
 ``` javascript
-handleSubmit = async event => {
+async function handleSubmit(event) {
   event.preventDefault();
 
-  if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
-    alert(`Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE/1000000} MB.`);
+  if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
+    alert(
+      `Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE /
+        1000000} MB.`
+    );
     return;
   }
 
-  this.setState({ isLoading: true });
+  setIsLoading(true);
 
   try {
-    await this.createNote({
-      content: this.state.content
-    });
-    this.props.history.push("/");
+    await createNote({ content });
+    history.push("/");
   } catch (e) {
-    alert(e);
-    this.setState({ isLoading: false });
+    onError(e);
+    setIsLoading(false);
   }
 }
 
-createNote(note) {
+function createNote(note) {
   return API.post("notes", "/notes", {
     body: note
   });

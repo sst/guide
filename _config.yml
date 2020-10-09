@@ -31,15 +31,19 @@ backend_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-dem
 frontend_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-demo-client"
 frontend_fb_login_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-demo-fb-login-client"
 frontend_user_mgmt_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-demo-user-mgmt-client"
-backend_mono_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-demo-mono-api"
+backend_ext_api_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-demo-ext-api"
+backend_ext_resources_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-demo-ext-resources"
 
 newsletter_signup_form: "https://emailoctopus.com/lists/1c11b9a8-1500-11e8-a3c9-06b79b628af2/forms/subscribe"
+
+survey_url: "https://serverless-stack.typeform.com/to/xiPdCW"
 
 google_analytics: "UA-3536629-11"
 
 forum_url: "https://discourse.serverless-stack.com"
 forum_thread_prefix: "/t/"
 patreon_url: "https://www.patreon.com/serverless_stack"
+github_sponsor_url: "https://github.com/sponsors/jayair"
 twitter_url: "https://twitter.com/anomaly_inv"
 
 collections:

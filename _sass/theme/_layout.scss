@@ -3,14 +3,12 @@
  */
 
 %social-buttons {
-  margin-top: $spacing-unit / 2;
+  white-space: nowrap;
   .button {
     margin-right: 6px;
-    margin-bottom: 5px;
-    background-color: transparent;
-    border: 3px solid darken($background-color, 20%);
-    padding: 6px 12px;
-    font-size: 14px;
+    background-color: darken($background-color, 10%);
+    padding: 7px 12px;
+    font-size: 13px;
     font-weight: 700;
     display: inline-block;
     color: $secondary-text-color;
@@ -20,11 +18,54 @@
     }
 
     &:hover {
-      background-color: darken($background-color, 5%);
+      background-color: darken($background-color, 14%);
     }
 
     &:last-child {
       margin-right: 0;
+    }
+  }
+}
+
+%search {
+  position: relative;
+  font-size: 15px;
+  display: inline-block;
+
+  label {
+    position: absolute;
+    left: 13px;
+    top: 8px;
+    z-index: 10;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  input {
+    padding: 4px 10px 4px 34px;
+    border-radius: 8px;
+    height: 42px;
+    width: 236px;
+    color: $secondary-text-color;
+    background-color: darken($background-color, 7%);
+    border: 1px solid transparent;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    font-size: 16px;
+    line-height: 1.3333333;
+    box-sizing: border-box;
+
+    &:focus {
+      border-color: #66afe9;
+      outline: 0;
+      color: $text-color;
+      background-color: white;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+    }
+  }
+
+  @include media-query($on-palm) {
+    .algolia-autocomplete .ds-dropdown-menu {
+      min-width: 300px;
     }
   }
 }
@@ -41,12 +82,71 @@
     margin-right: 4px;
   }
 }
+
 .site-header {
-	text-align: center;
-  padding-top: $spacing-unit / 2;
+  border-bottom: 1px solid darken($background-color, 40%);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+
+  & > .wrapper-header {
+    margin: 0 auto;
+    padding: $spacing-unit / 2 + 5px $spacing-unit / 2;
+
+    @include media-query($on-palm) {
+      padding-top: $spacing-unit / 2;
+      padding-bottom: $spacing-unit / 2;
+    }
+
+    & > .content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .col1 {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .col2 {
+        margin-left: $spacing-unit / 2;
+      }
+
+      @include media-query($on-laptop) {
+        .col1 {
+          .social {
+            margin-top: 5px;
+          }
+        }
+      }
+
+      @include media-query($on-palm) {
+        display: block;
+        text-align: center;
+
+        .col1 {
+          display: block;
+          .site-title {
+            margin-right: 0;
+          }
+          .social {
+            margin: 5px 0 0;
+          }
+        }
+        .col2 {
+          margin-left: 0;
+          margin-top: 5px;
+          input {
+            width: 290px;
+          }
+        }
+      }
+    }
+  }
 
   .site-title {
     margin-bottom: 0;
+    margin-right: $spacing-unit / 2;
+    white-space: nowrap;
 
     img {
       margin-right: 5px;
@@ -67,132 +167,16 @@
     }
   }
 
-  .site-description {
-    margin: 10px auto 0;
-    padding: $spacing-unit / 2 10px;
-    max-width: 380px;
-    font-size: 13px;
-    font-weight: 300;
-    color: $secondary-text-color;
-    border-width: 1px 0;
-    border-style: solid;
-    border-color: darken($background-color, 10%);
-  }
-
   .social {
     @extend %social-buttons;
 
     .button {
       font-weight: 500;
     }
-
-    @include media-query($on-palm) {
-      display: none;
-    }
   }
 
-  .site-announcement {
-    @extend %site-announcement;
-  }
-
-}
-.lander-header {
-  padding-top: 2.5 * $spacing-unit;
-	text-align: center;
-
-  @include media-query($on-palm) {
-    padding: $spacing-unit 0;
-  }
-
-  & .wrapper {
-    padding-bottom: 2.5 * $spacing-unit;
-    border-bottom: 2px solid darken($background-color, 15%);
-  }
-
-  .site-title {
-    line-height: 80px;
-    margin-bottom: 0;
-
-    img {
-      margin-right: 5px;
-      display: inline-block;
-      vertical-align: middle;
-    }
-
-    span {
-      font-size: 30px;
-      vertical-align: middle;
-      font-weight: 700;
-      color: $text-color;
-    }
-
-    & img,
-    &:visited img {
-      color: $brand-color;
-    }
-  }
-
-  .site-description {
-    margin: 0 auto;
-    padding: 10px $spacing-unit / 2 0;
-    line-height: 1.4;
-    max-width: 560px;
-    font-size: 36px;
-    color: $text-color;
-    font-family: $base-font-family;
-  }
-
-  .site-description-full {
-    margin: 0 auto;
-    padding-top: 5px;
-    max-width: 560px;
-    line-height: 1.5;
-    font-size: 22px;
-    color: $tertiary-text-color;
-    font-family: $base-font-family;
-
-    a {
-      font-weight: 700;
-      color: $tertiary-text-color;
-    }
-  }
-
-  .controls {
-    margin-top: $spacing-unit;
-    display: flex;
-    justify-content: center;
-
-    @include media-query($on-palm) {
-      flex-direction: column;
-    }
-
-    a.button {
-      padding: 19px 28px;
-      text-transform: uppercase;
-      font-family: $base-font-family;
-      display: inline-block;
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 1px;
-
-      &:first-child {
-        margin-right: 10px;
-        background-color: $important-color;
-
-        @include media-query($on-palm) {
-          margin-right: 0;
-          margin-bottom: 10px;
-        }
-      }
-      &:first-child:hover {
-        background-color: lighten($important-color, 5%);
-      }
-    }
-
-  }
-
-  .social {
-    @extend %social-buttons;
+  section.search {
+    @extend %search;
   }
 
   .site-announcement {
@@ -350,7 +334,7 @@
  * Page content
  */
 .page-content {
-  padding: 2 * $spacing-unit 0;
+  padding: 1.5 * $spacing-unit 0 $spacing-unit;
 
   @include media-query($on-palm) {
     padding: $spacing-unit - 5px 0;
@@ -361,6 +345,10 @@
     font-size: 42px;
     text-align: center;
     padding: 200px 0 300px;
+  }
+
+  &.lander {
+    padding: 0;
   }
 }
 
@@ -507,14 +495,6 @@
     font-weight: bold;
     font-size: 16px;
     padding-left: 4px;
-    text-transform: uppercase;
-
-    &.en:lang(en),
-    &.pt:lang(pt),
-    &.de:lang(de),
-    &.es:lang(es) {
-      color: $secondary-text-color;
-    }
   }
 
   span.separator {
@@ -535,6 +515,8 @@
 
 .post-content {
   margin-bottom: $spacing-unit;
+  word-wrap: break-word;
+  word-break: break-word;
 
   h2 {
     font-size: 32px;
@@ -562,11 +544,29 @@
 }
 
 .post-sponsor {
-  margin-top: 1.5 * $spacing-unit;
+  margin-top: $spacing-unit;
   margin-bottom: $spacing-unit;
   text-align: center;
 
+  @include media-query($on-laptop) {
+    margin-bottom: $spacing-unit / 2;
+  }
+
+  .banners {
+    a {
+      margin-top: 10px;
+      display: inline-block;
+    }
+    a+a {
+      margin-left: 5px;
+    }
+    img {
+      border-radius: 4px;
+    }
+  }
+
   p {
+    margin-bottom: 0;
     color: $tertiary-text-color;
     font-size: 14px;
     &:last-child {
@@ -585,6 +585,43 @@
     a {
       font-weight: bold;
     }
+  }
+}
+
+.post-checkpoint {
+  margin-top: 2 * $spacing-unit;
+  border-top: 2px solid darken($background-color, 10%);
+  padding-top: $spacing-unit + 3px;
+  position: relative;
+
+  .header {
+    position: absolute;
+    top: -15px;
+    padding: 1px 9px;
+    border-radius: 4px;
+    background-color: darken($background-color, 20%);
+    color: white;
+
+    i.fa {
+      font-size: 15px;
+      vertical-align: 1px;
+    }
+    span {
+      margin-left: 4px;
+      vertical-align: 3px;
+      font-size: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
+
+  p {
+    margin-bottom: 8px;
+  }
+
+  a {
+    font-family: $code-font-family;
+    font-size: 18px;
   }
 }
 
@@ -626,6 +663,7 @@
     font-weight: bold;
     line-height: 54px;
     display: inline-block;
+    font-size: 18px;
 
     @include media-query($on-palm) {
       font-size: 14px;
@@ -637,6 +675,26 @@
   }
   .next {
     float: right;
+  }
+}
+
+.post-links {
+  background-color: darken($background-color, 5%);
+  border-radius: 5px;
+  padding: $spacing-unit - 5px;
+
+  p {
+    margin-bottom: 8px;
+    color: $secondary-text-color;
+
+    &.code {
+      margin-top: 15px;
+    }
+  }
+
+  a {
+    font-family: $code-font-family;
+    font-size: 18px;
   }
 }
 

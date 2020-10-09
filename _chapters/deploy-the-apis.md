@@ -2,14 +2,15 @@
 layout: post
 title: Deploy the APIs
 date: 2017-01-04 00:00:00
+lang: en
+ref: deploy-the-apis
 description: Use the “serverless deploy” command to deploy to AWS Lambda and API Gateway using the Serverless Framework. Running this command will display the list of deployed API endpoints and the AWS region it was deployed to. And we can run the "serverless deploy function" command when we want to update an individual Lambda function.
-context: true
 comments_id: deploy-the-apis/121
 ---
 
 Now that our APIs are complete, let's deploy them.
 
-<img class="code-marker" src="/assets/s.png" />Run the following in your working directory.
+{%change%} Run the following in your working directory.
 
 ``` bash
 $ serverless deploy
@@ -27,7 +28,7 @@ Near the bottom of the output for this command, you will find the **Service Info
 
 ``` bash
 Service Information
-service: notes-app-api
+service: notes-api
 stage: prod
 region: us-east-1
 api keys:
@@ -38,15 +39,19 @@ endpoints:
   GET - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes
   PUT - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
   DELETE - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
+  POST - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/billing
 functions:
-  notes-app-api-prod-create
-  notes-app-api-prod-get
-  notes-app-api-prod-list
-  notes-app-api-prod-update
-  notes-app-api-prod-delete
+  create: notes-api-prod-create
+  get: notes-api-prod-get
+  list: notes-api-prod-list
+  update: notes-api-prod-update
+  delete: notes-api-prod-delete
+  billing: notes-api-prod-billing
 ```
 
 This has a list of the API endpoints that were created. Make a note of these endpoints as we are going to use them later while creating our frontend. Also make a note of the region and the id in these endpoints, we are going to use them in the coming chapters. In our case, `us-east-1` is our API Gateway Region and `ly55wbovq4` is our API Gateway ID.
+
+If you are running into some issues while deploying your app, we have [a compilation of some of the most common Serverless errors](https://seed.run/docs/serverless-errors/) over on [Seed](https://seed.run).
 
 ### Deploy a Single Function
 

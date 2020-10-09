@@ -1,7 +1,9 @@
 ---
 layout: post
 title: Translations
+lang: en
 date: 2018-03-30 12:00:00
+ref: translations
 comments_id: comments-translations/788
 ---
 
@@ -39,3 +41,4 @@ A big thanks to our contributors for helping make Serverless Stack more accessib
 - [Leonardo Gonzalez](https://github.com/leogonzalez)
 - [Vieko Franetovic](https://github.com/vieko)
 - [Christian Kaindl](https://github.com/christiankaindl)
+- [Jae Chul Kim](https://github.com/bsg-bob)

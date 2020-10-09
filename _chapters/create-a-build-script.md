@@ -2,8 +2,10 @@
 layout: post
 title: Create a Build Script
 date: 2018-03-26 00:00:00
-code: frontend_full
+lang: en
 description: To configure our Create React App with Netlify, we need to add a build script to our project root. To make sure that we return a HTTP status code of 200 for our React Router routes we will be adding a redirects rule.
+code: frontend
+ref: create-a-build-script
 comments_id: create-a-build-script/189
 ---
 
@@ -11,7 +13,7 @@ Before we can add our project to [Netlify](https://www.netlify.com) we just need
 
 ### Add the Netlify Build Script
 
-<img class="code-marker" src="/assets/s.png" />Start by adding the following to a file called `netlify.toml` to your project root.
+{%change%} Start by adding the following to a file called `netlify.toml` to your project root.
 
 ``` toml
 # Global settings applied to the whole site.
@@ -52,9 +54,9 @@ The production context labelled, `context.production` is the only one where we s
 
 ### Handle HTTP Status Codes
 
-Just as the first part of the tutorial, we'll need to handle requests to any non-root paths of our app. Our frontend is a single-page app and the routing is handled on the client side. We need to tell Netlify to always redirect any request to our `index.html` and return the 200 status code for it.
+Just as in the first part of the tutorial, we'll need to handle requests to any non-root paths of our app. Our frontend is a single-page app and the routing is handled on the client side. We need to tell Netlify to always redirect any request to our `index.html` and return the 200 status code for it.
 
-<img class="code-marker" src="/assets/s.png" />To do this, add a redirects rule at the bottom of `netlify.toml`:
+{%change%} To do this, add a redirects rule at the bottom of `netlify.toml`:
 
 ``` toml
 # Always redirect any request to our index.html
@@ -65,26 +67,9 @@ Just as the first part of the tutorial, we'll need to handle requests to any non
     status  = 200
 ```
 
-### Modify the Build Command
-
-To deploy our app to Netlify we need to modify the build commands in our `package.json`.
-
-<img class="code-marker" src="/assets/s.png" />Replace the `scripts` block in your `package.json` with this.
-
-``` coffee
-"scripts": {
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-  "test": "react-scripts test --env=jsdom",
-  "eject": "react-scripts eject"
-}
-```
-
-You'll notice we are getting rid of our old build and deploy scripts. We are not going to be deploying to S3.
-
 ### Commit the Changes
 
-<img class="code-marker" src="/assets/s.png" />Let's quickly commit these to Git.
+{%change%} Let's quickly commit these to Git.
 
 ``` bash
 $ git add .
@@ -93,7 +78,7 @@ $ git commit -m "Adding a Netlify build script"
 
 ### Push the Changes
 
-<img class="code-marker" src="/assets/s.png" />We are pretty much done making changes to our project. So let's go ahead and push them to GitHub.
+{%change%} We are pretty much done making changes to our project. So let's go ahead and push them to GitHub.
 
 ``` bash
 $ git push

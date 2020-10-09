@@ -2,8 +2,9 @@
 layout: post
 title: Create the Signup Form
 date: 2017-01-20 00:00:00
+lang: en
+ref: create-the-signup-form
 description: We are going to create a signup page for our React.js app. To sign up users with Amazon Cognito, we need to create a form that allows users to enter a cofirmation code that is emailed to them.
-context: true
 comments_id: create-the-signup-form/52
 ---
 
@@ -11,10 +12,11 @@ Let's start by creating the signup form that'll get the user's email and passwor
 
 ### Add the Container
 
-<img class="code-marker" src="/assets/s.png" />Create a new container at `src/containers/Signup.js` with the following.
+{%change%} Create a new container at `src/containers/Signup.js` with the following.
 
 ``` coffee
-import React, { Component } from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import {
   HelpBlock,
   FormGroup,
@@ -22,132 +24,123 @@ import {
   ControlLabel
 } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
+import { useAppContext } from "../libs/contextLib";
+import { useFormFields } from "../libs/hooksLib";
+import { onError } from "../libs/errorLib";
 import "./Signup.css";
 
-export default class Signup extends Component {
-  constructor(props) {
-    super(props);
+export default function Signup() {
+  const [fields, handleFieldChange] = useFormFields({
+    email: "",
+    password: "",
+    confirmPassword: "",
+    confirmationCode: "",
+  });
+  const history = useHistory();
+  const [newUser, setNewUser] = useState(null);
+  const { userHasAuthenticated } = useAppContext();
+  const [isLoading, setIsLoading] = useState(false);
 
-    this.state = {
-      isLoading: false,
-      email: "",
-      password: "",
-      confirmPassword: "",
-      confirmationCode: "",
-      newUser: null
-    };
-  }
-
-  validateForm() {
+  function validateForm() {
     return (
-      this.state.email.length > 0 &&
-      this.state.password.length > 0 &&
-      this.state.password === this.state.confirmPassword
+      fields.email.length > 0 &&
+      fields.password.length > 0 &&
+      fields.password === fields.confirmPassword
     );
   }
 
-  validateConfirmationForm() {
-    return this.state.confirmationCode.length > 0;
+  function validateConfirmationForm() {
+    return fields.confirmationCode.length > 0;
   }
 
-  handleChange = event => {
-    this.setState({
-      [event.target.id]: event.target.value
-    });
-  }
-
-  handleSubmit = async event => {
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    this.setState({ isLoading: true });
+    setIsLoading(true);
 
-    this.setState({ newUser: "test" });
+    setNewUser("test");
 
-    this.setState({ isLoading: false });
+    setIsLoading(false);
   }
 
-  handleConfirmationSubmit = async event => {
+  async function handleConfirmationSubmit(event) {
     event.preventDefault();
 
-    this.setState({ isLoading: true });
+    setIsLoading(true);
   }
 
-  renderConfirmationForm() {
+  function renderConfirmationForm() {
     return (
-      <form onSubmit={this.handleConfirmationSubmit}>
+      <form onSubmit={handleConfirmationSubmit}>
         <FormGroup controlId="confirmationCode" bsSize="large">
           <ControlLabel>Confirmation Code</ControlLabel>
           <FormControl
             autoFocus
             type="tel"
-            value={this.state.confirmationCode}
-            onChange={this.handleChange}
+            onChange={handleFieldChange}
+            value={fields.confirmationCode}
           />
           <HelpBlock>Please check your email for the code.</HelpBlock>
         </FormGroup>
         <LoaderButton
           block
-          bsSize="large"
-          disabled={!this.validateConfirmationForm()}
           type="submit"
-          isLoading={this.state.isLoading}
-          text="Verify"
-          loadingText="Verifying…"
-        />
+          bsSize="large"
+          isLoading={isLoading}
+          disabled={!validateConfirmationForm()}
+        >
+          Verify
+        </LoaderButton>
       </form>
     );
   }
 
-  renderForm() {
+  function renderForm() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <FormGroup controlId="email" bsSize="large">
           <ControlLabel>Email</ControlLabel>
           <FormControl
             autoFocus
             type="email"
-            value={this.state.email}
-            onChange={this.handleChange}
+            value={fields.email}
+            onChange={handleFieldChange}
           />
         </FormGroup>
         <FormGroup controlId="password" bsSize="large">
           <ControlLabel>Password</ControlLabel>
           <FormControl
-            value={this.state.password}
-            onChange={this.handleChange}
             type="password"
+            value={fields.password}
+            onChange={handleFieldChange}
           />
         </FormGroup>
         <FormGroup controlId="confirmPassword" bsSize="large">
           <ControlLabel>Confirm Password</ControlLabel>
           <FormControl
-            value={this.state.confirmPassword}
-            onChange={this.handleChange}
             type="password"
+            onChange={handleFieldChange}
+            value={fields.confirmPassword}
           />
         </FormGroup>
         <LoaderButton
           block
-          bsSize="large"
-          disabled={!this.validateForm()}
           type="submit"
-          isLoading={this.state.isLoading}
-          text="Signup"
-          loadingText="Signing up…"
-        />
+          bsSize="large"
+          isLoading={isLoading}
+          disabled={!validateForm()}
+        >
+          Signup
+        </LoaderButton>
       </form>
     );
   }
 
-  render() {
-    return (
-      <div className="Signup">
-        {this.state.newUser === null
-          ? this.renderForm()
-          : this.renderConfirmationForm()}
-      </div>
-    );
-  }
+  return (
+    <div className="Signup">
+      {newUser === null ? renderForm() : renderConfirmationForm()}
+    </div>
+  );
 }
 ```
 
@@ -157,13 +150,15 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 2. We are using the `LoaderButton` component that we created earlier for our submit buttons.
 
-3. Since we have two forms we have two validation methods called `validateForm` and `validateConfirmationForm`.
+3. Since we have two forms we have two validation functions called `validateForm` and `validateConfirmationForm`.
 
 4. We are setting the `autoFocus` flags on the email and the confirmation code fields.
 
 5. For now our `handleSubmit` and `handleConfirmationSubmit` don't do a whole lot besides setting the `isLoading` state and a dummy value for the `newUser` state.
 
-<img class="code-marker" src="/assets/s.png" />Also, let's add a couple of styles in `src/containers/Signup.css`.
+6. And you'll notice we are using the `useFormFields` custom React Hook that we [previously created]({% link _chapters/create-a-custom-react-hook-to-handle-form-fields.md %}) to handle our form fields.
+
+{%change%} Also, let's add a couple of styles in `src/containers/Signup.css`.
 
 ``` css
 @media all and (min-width: 480px) {
@@ -186,13 +181,15 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 ### Add the Route
 
-<img class="code-marker" src="/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our login route. We are using the `AppliedRoute` component that we created in the [Add the session to the state]({% link _chapters/add-the-session-to-the-state.md %}) chapter.
+{%change%} Finally, add our container as a route in `src/Routes.js` below our login route.
 
 ``` coffee
-<AppliedRoute path="/signup" exact component={Signup} props={childProps} />
+<Route exact path="/signup">
+  <Signup />
+</Route>
 ```
 
-And include our component in the header.
+{%change%} And include our component in the header.
 
 ``` javascript
 import Signup from "./containers/Signup";

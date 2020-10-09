@@ -14,12 +14,14 @@ However while we want to be as comprehensive as possible, we also want to make s
 
 The guide is split up in the following way:
 
-The Core:
-- Part I: The basic aspects of creating a full-stack serverless app
-- Part II: Some advanced concepts when you are getting your app ready for production
+The Basics:
+- The basic aspects of creating a full-stack serverless app. And deploying your app to production.
+
+Best Practices:
+- Everything you need to run your app in production.
 
 The Extensions
-- Extra Credits: Standalone chapters/articles intended to supplement the first two parts and to extend some functionality of the demo app
+- Extra Credits: Standalone chapters/articles intended to supplement the first two parts and to extend some functionality of the demo app.
 
 Additionally, the demo app that people build as a part of the tutorial is split into the backend (a Serverless Framework project) and the frontend (a React app). Both these are in their separate Git repos.
 

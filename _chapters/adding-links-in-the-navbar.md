@@ -2,17 +2,18 @@
 layout: post
 title: Adding Links in the Navbar
 date: 2017-01-11 12:00:00
+lang: en
+ref: adding-links-in-the-navbar
 description: To add links to the Navbar of our React.js app we’ll be using the NavItem React-Bootstrap component. And to allow users to navigate using these links we are going to use React-Router's Route component and call the history.push method.
-context: true
 comments_id: adding-links-in-the-navbar/141
 ---
 
 Now that we have our first route set up, let's add a couple of links to the navbar of our app. These will direct users to login or signup for our app when they first visit it.
 
-<img class="code-marker" src="/assets/s.png" />Replace the `render` method in `src/App.js` with the following.
+{%change%} Replace the `App` function component in `src/App.js` with the following.
 
 ``` coffee
-render() {
+function App() {
   return (
     <div className="App container">
       <Navbar fluid collapseOnSelect>
@@ -39,7 +40,7 @@ This adds two links to our navbar using the `NavItem` Bootstrap component. The `
 
 And let's include the necessary components in the header.
 
-<img class="code-marker" src="/assets/s.png" />Replace the `react-router-dom` and `react-bootstrap` import in `src/App.js` with this.
+{%change%} Replace the `react-router-dom` and `react-bootstrap` import in `src/App.js` with this.
 
 ``` coffee
 import { Link } from "react-router-dom";
@@ -54,22 +55,22 @@ Unfortunately, when you click on them they refresh your browser while redirectin
 
 To fix this we need a component that works with React Router and React Bootstrap called [React Router Bootstrap](https://github.com/react-bootstrap/react-router-bootstrap). It can wrap around your `Navbar` links and use the React Router to route your app to the required link without refreshing the browser.
 
-<img class="code-marker" src="/assets/s.png" />Run the following command in your working directory.
+{%change%} Run the following command in your working directory.
 
 ``` bash
 $ npm install react-router-bootstrap --save
 ```
 
-<img class="code-marker" src="/assets/s.png" />And include it at the top of your `src/App.js`.
+{%change%} And include it at the top of your `src/App.js`.
 
 ``` coffee
 import { LinkContainer } from "react-router-bootstrap";
 ```
 
-<img class="code-marker" src="/assets/s.png" />We will now wrap our links with the `LinkContainer`. Replace the `render` method in your `src/App.js` with this.
+{%change%} We will now wrap our links with the `LinkContainer`. Replace the `App` function component in your `src/App.js` with this.
 
 ``` coffee
-render() {
+function App() {
   return (
     <div className="App container">
       <Navbar fluid collapseOnSelect>

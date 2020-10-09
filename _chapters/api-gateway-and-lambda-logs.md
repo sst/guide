@@ -3,7 +3,6 @@ layout: post
 title: API Gateway and Lambda Logs
 description: To view logs for your serverless APIs on AWS, CloudWatch needs to be enabled for API Gateway and Lambda. CloudWatch logs are ordered by Log Groups and Log Stream. Lambda CloudWatch logs can also be viewed using the Serverless CLI with the “serverless logs” command.
 date: 2018-04-03 00:00:00
-context: true
 comments_id: api-gateway-and-lambda-logs/31
 ---
 
@@ -101,6 +100,8 @@ In the **Logs** tab:
 ![Fill in API Gateway Logging Info Screenshot](/assets/logging/fill-in-api-gateway-logging-info.png)
 
 Scroll to the bottom of the page and click **Save Changes**. Now our API Gateway requests should be logged via CloudWatch.
+
+Note that, the execution logs can generate a ton of log data and it's not recommended to leave them on. They are much better for debugging. API Gateway does have support for access logs, which we recommend leaving on. Here is [how to enable access logs for your API Gateway project](https://seed.run/blog/how-to-enable-access-logs-for-api-gateway).
 
 
 ### Enable Lambda CloudWatch Logs

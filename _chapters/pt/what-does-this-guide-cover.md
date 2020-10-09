@@ -8,21 +8,21 @@ context: true
 comments_id: what-does-this-guide-cover/83
 ---
 
-Para entendermos os principais conceitos envolvidos na construção de aplicações web, nós iremos criar uma aplicativo de notas chamado [**Scratch**](https://demo2.serverless-stack.com).
+Para entendermos os principais conceitos envolvidos na construção de aplicações web, nós iremos criar um aplicativo de notas chamado [**Scratch**](https://demo2.serverless-stack.com).
 
 ![Completed app desktop screenshot](/assets/completed-app-desktop.png)
 
 <img alt="Versão de celular do aplicativo" src="/assets/completed-app-mobile.png" width="432" />
 
-A aplicação é uma Single Page Application feito utilizando a API Serverless escrita completamente em JavaScript. Aqui você pode ver o código completo do [backend]({{ site.backend_github_repo }}) e o [frontend]({{ site.frontend_github_repo }}). Essa aplicação é relativamente simples, porém nós temos alguns pré requisitos:
+A aplicação é uma Single Page Application feita utilizando a API Serverless escrita completamente em JavaScript. Aqui você pode ver o código completo do [backend]({{ site.backend_github_repo }}) e do [frontend]({{ site.frontend_github_repo }}). Essa aplicação é relativamente simples, porém nós temos alguns pré requisitos:
 
-- Os usuários poderão poder criar suas contas e logar nelas
+- Os usuários poderão criar suas contas e logar nelas
 - Os usuários poderão ser capazes de criar notas com algum tipo de conteúdo
 - Cada nota também poderá ter um arquivo anexado nela
 - Os usuários poderão editar suas notas e os arquivos anexados na mesma
 - Os usuários poderão deletar suas notas
-- O aplicativo deverá processar pagamentos utilizando cartão de cŕedito
-- O aplicaito deverá ter segurança HTTPS com um domínio próprio
+- O aplicativo deverá processar pagamentos utilizando cartão de crédito
+- O aplicativo deverá ter segurança HTTPS com um domínio próprio
 - A API do backend deverá ser segura
 - O aplicativo precisará ser responsivo
 
@@ -30,11 +30,11 @@ Nós usaremos a plataforma da AWS para construir a aplicação. Futuramente talv
 
 ### Tecnologias & Serviços
 
-Nos vamos utilizar o seguinte grupo de tecnologias e serviços para construir a nossa aplicação Serverless:
+Nós vamos utilizar o seguinte grupo de tecnologias e serviços para construir a nossa aplicação Serverless:
 
 - [Lambda][Lambda] & [API Gateway][APIG] para a nossa API Serveless
 - [DynamoDB][DynamoDB] para o nosso banco de dados
-- [Cognito][Cognito] para a autentição dos usuários e para a segurança das nossas APIs
+- [Cognito][Cognito] para a autenticação dos usuários e para a segurança das nossas APIs
 - [S3][S3] para a hospedagem da nossa aplicação e para o upload de arquivos
 - [CloudFront][CF] para entregar o conteúdo da nossa aplicação
 - [Route 53][R53] para nosso domínio
@@ -111,7 +111,7 @@ Para o frontend
 - Ambientes no Create React App
 - Aceitando pagamento com cartão de crédito no React
 - Automatizando as entregas com Netlify
-- Configurando domínios customizados atrvés do Netlify
+- Configurando domínios customizados através do Netlify
 
 Nós acreditamos que tudo isso vai lhe dar uma ótima base para a criação de uma aplicação com Serverless para o mundo real. Se existe algum outro conceito ou tecnologias que você gostaria que nós cobríssemos nesse guia, sinta-se a vontade para comentar no nosso [forum]({{ site.forum_url }}) (em inglês).
 

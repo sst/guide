@@ -2,12 +2,13 @@
 layout: post
 title: Custom Domains in Netlify
 date: 2018-03-28 00:00:00
+lang: en
 description: To configure your React app with custom domains on Netlify and AWS, you need to point the Route 53 DNS to Netlify. Create a new Record set, add an A Record, and a CNAME for your new Netlify project.
-context: true
+ref: custom-domains-in-netlify
 comments_id: custom-domains-in-netlify/191
 ---
 
-Now that we have our first deployment, let's configure a custom domain for our app through Netlify. This step is assuming you have a domain in Route 53 back from the first part of the tutorial.
+Now that we have our first deployment, let's configure a custom domain for our app through Netlify. Recall that back in the [Set custom domains through Seed]({% link _chapters/set-custom-domains-through-seed.md %}) chapter we purchased a domain on [Amazon Route 53](https://aws.amazon.com/route53/). 
 
 ### Pick a Netlify Site Name
 
@@ -47,7 +48,7 @@ Next hit **Check DNS configuration**.
 
 ![Hit check DNS configuration screenshot](/assets/part2/hit-check-dns-configuration.png)
 
-This will show you the instructions for setting up your domain through Route 53. 
+This will show you the instructions for setting up your domain through Route 53.
 
 ![DNS configuration dialog screenshot](/assets/part2/dns-configuration-dialog.png)
 
@@ -87,11 +88,11 @@ Back in Netlify, hit **HTTPS** in the side panel. And it should say that it is w
 
 ![Waiting on DNS propagation screenshot](/assets/part2/waiting-on-dns-propagation.png)
 
-Once that is complete, Netlify will automatically provision your SSL ceritificate using Let's Encrypt.
+Once that is complete, Netlify will automatically provision your SSL certificate using Let's Encrypt.
 
 ![Provisioning Let's Encrypt Certificate screenshot](/assets/part2/provisioning-lets-encrypt-certificate.png)
 
-Wait a few seconds for the ceritificate to be provisioned.
+Wait a few seconds for the certificate to be provisioned.
 
 ![SSL certificate provisioned screenshot](/assets/part2/ssl-certificate-provisioned.png)
 

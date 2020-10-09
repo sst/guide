@@ -1,4 +1,20 @@
 current:
+  title: "Using CDK to configure infrastructure resources"
+  desc: "Oct 7, 2020: Moving from CloudFormation to AWS CDK to configure infrastructure resources. And using Serverless Stack Toolkit (SST) to deploy CDK alongside Serverless Framework."
+
+v4-1:
+  title: "Adding new monitoring and debugging section"
+  desc: "Apr 8, 2020: Adding a new section on monitoring and debugging full-stack Serverless apps. Updating React Router. Using React Context to manage app state."
+
+v4-0:
+  title: "New edition of Serverless Stack"
+  desc: "Oct 8, 2019: Adding a new section for Serverless best practices. Updating to React Hooks. Reorganizing chapters. Updating backend to Node 10."
+
+v3-4:
+  title: "Updating to serverless-bundle and on-demand DynamoDB"
+  desc: "Jul 18, 2019: Updating to serverless-bundle plugin and On-Demand Capacity for DynamoDB."
+
+v3-3-3:
   title: "Handling API Gateway CORS errors"
   desc: "Jan 27, 2019: Adding CORS headers to API Gateway 4xx and 5xx errors."
 

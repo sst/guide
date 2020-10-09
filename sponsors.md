@@ -4,17 +4,40 @@ title: Sponsors
 description: Serverless Stack is a free open source guide brought to you by Frank Wang (@fanjiewang) and Jay V (@jayair) from Anomaly Innovations. Show your support by sponsoring Serverless Stack.
 ---
 
-[Serverless Stack](/) is an open source 300 page guide to building and deploying full-stack serverless applications using Serverless and React. It's completely free and the content and comments are hosted on [GitHub]({{ site.github_repo }}).
+[Serverless Stack](https://serverless-stack.com) is a free open source 1000+ page guide for building full-stack apps using Serverless and React on AWS. It attracts over 3.5K daily and 60K monthly visitors with over 230K page views per month. And we have over 20K email subscribers.
 
-Serverless Stack is written and maintained by Frank Wang ([@fanjiewang](https://twitter.com/fanjiewang)) &amp; Jay V ([@jayair](https://twitter.com/jayair)) from [Anomaly Innovations](http://anoma.ly). It takes considerable effort to create such a detailed tutorial. We spend our spare time (and more) working on the tutorial and helping folks work through it. If you've found this guide useful or would like to be an official supporter, please consider sponsoring Serverless Stack. By supporting us you are helping us:
+Learn to create a note taking app from scratch using Serverless and React. Follow our step-by-step tutorials with screenshots and code samples. And use [our forums](https://discourse.serverless-stack.com) to ask us any questions.
 
-- **Create** the **most comprehensive** serverless tutorial
-- **Add** chapters on more **advanced** topics
-- **Keep it up to date** with screenshots and code samples
-- **Help** people **resolve** their issues in the comments
-- Keep our readers **updated** with our **newsletter**
+Serverless Stack is written and maintained by [Frank Wang](https://github.com/fwang) & [Jay V](https://github.com/jayair). It takes considerable effort to create and maintain such a detailed tutorial. We spend our spare time (and more) working on the tutorial and helping folks work through the steps. If you’ve found this guide useful or would like to support our work, please consider sponsoring Serverless Stack. Your sponsorship helps us:
+
+1. Create the most comprehensive serverless resource on the web
+2. Build tools to help with the development process
+3. Add additional chapters on advanced topics
+4. Keep it up to date with screenshots and code samples
+5. Help people resolve their issues in the comments
+6. Keep our readers updated with our newsletter
+
+<a class="button support" target="_blank" href="{{ site.github_sponsor_url }}">Sponsor us on GitHub</a>
+
+<br />
 
 ---
+
+## Gold Sponsors
+
+<a target="_blank" href="https://epsagon.com/serverless-stack/?utm_source=Advertisement&utm_medium=cpm&utm_campaign=ServerlessStack">
+  <img height="50" alt="Epsagon" src="/assets/sponsors/epsagon.png" />
+</a>
+
+Your **banner** will be placed on **ALL** the chapters of the guide. And your **company logo** and link will be placed here. [Contact us if you'd like to be a Gold Sponsor](mailto:{{ site.email }}).
+
+<br />
+
+## Sponsors
+
+Your **company logo** and link will be placed here. [Contact us if you'd like to be a Silver Sponsor](mailto:{{ site.email }}).
+
+<br />
 
 ## Backers
 
@@ -31,6 +54,24 @@ Serverless Stack is written and maintained by Frank Wang ([@fanjiewang](https://
 - [Alex Vainberg](https://www.youtube.com/arooly)
 - [Klete Rittger](https://www.patreon.com/user/creators?u=14067972)
 - [Malcolm Taylor](https://www.patreon.com/user/creators?u=17550173)
+- [Matt Welke](https://mattwelke.com)
+- [Jamie Peebles](https://www.patreon.com/user/creators?u=19140426)
+- [Bernie Camus](https://www.lernard.com)
+- [Tekeste Kidanu](https://cleanmock.com)
+- [WiSEO](https://www.whatisseo.com)
+- [Trevor Dorsey](https://www.foyyay.com/)
+- [Cuspy Software](https://cuspy.io)
+- [humanoit](https://github.com/humanoit)
+- [Amir Arafat](https://github.com/amir5000)
+- [Vince Fulco](https://github.com/weisisheng)
+- [Peter Miller](https://github.com/phm200)
+- [marxtrader](https://www.chrisranni.com)
+- [Luis Ocasio](https://github.com/LuisOcasio)
+- [Ryan Jackson](https://github.com/ryanauj)
+- [Dynobase](https://dynobase.dev/)
+- [Tim Shnaider](https://twitter.com/TimShnaider)
+- [MichaelGMalek](https://github.com/MichaelGMalek)
+- [Craig Barr](https://github.com/m0un10)
 
 
-<a class="button support" target="_blank" href="{{ site.patreon_url }}">Support us on Patreon</a>
+We'd like thank our sponsors and backers for supporting us!

@@ -1,9 +1,11 @@
 ---
 layout: post
 title: Changelog
+lang: en
 redirect_from: /chapters/older-versions.html
 date: 2018-04-01 00:00:00
 description: A list of all the updates made to Serverless Stack
+ref: changelog
 comments_id: comments-for-changelog/17
 ---
 
@@ -21,16 +23,46 @@ You can get these updates emailed to you via our [newsletter]({{ site.newsletter
 
 ### Changes
 
-#### [v3.3.3: {{ site.data.changelog.current.title }}](https://branchv333--serverless-stack.netlify.com/) (Current)
+#### [v5.0: {{ site.data.changelog.current.title }}](https://branchv50--serverless-stack.netlify.app/) (Current)
 
 {{ site.data.changelog.current.desc }}
+
+- [Tutorial changes]({{ site.github_repo }}/compare/v4.1...v5.0)
+- [API]({{ site.backend_github_repo }}/compare/v4.1...v5.0)
+
+#### [v4.1: {{ site.data.changelog.v4-1.title }}](https://branchv41--serverless-stack.netlify.com/)
+
+{{ site.data.changelog.v4-1.desc }}
+
+- [Tutorial changes]({{ site.github_repo }}/compare/v4.0...v4.1)
+- [API]({{ site.backend_github_repo }}/compare/v4.0...v4.1)
+- [Client]({{ site.frontend_github_repo }}/compare/v4.0...v4.1)
+
+#### [v4.0: {{ site.data.changelog.v4-0.title }}](https://branchv40--serverless-stack.netlify.com/)
+
+{{ site.data.changelog.v4-0.desc }}
+
+- [Tutorial changes]({{ site.github_repo }}/compare/v3.4...v4.0)
+- [API]({{ site.backend_github_repo }}/compare/v3.4...v4.0)
+- [Client]({{ site.frontend_github_repo }}/compare/v3.3.1...v4.0)
+
+#### [v3.4: {{ site.data.changelog.v3-4.title }}](https://branchv34--serverless-stack.netlify.com/)
+
+{{ site.data.changelog.v3-4.desc }}
+
+- [Tutorial changes]({{ site.github_repo }}/compare/v3.3.3...v3.4)
+- [API]({{ site.backend_github_repo }}/compare/v3.3.3...v3.4)
+
+#### [v3.3.3: {{ site.data.changelog.v3-3-3.title }}](https://branchv333--serverless-stack.netlify.com/)
+
+{{ site.data.changelog.v3-3-3.desc }}
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v3.3.2...v3.3.3)
 - [API]({{ site.backend_github_repo }}/compare/v3.3.2...v3.3.3)
 
 #### [v3.3.2: {{ site.data.changelog.v3-3-2.title }}](https://branchv332--serverless-stack.netlify.com)
 
-{{ site.data.changelog.current.desc }}
+{{ site.data.changelog.v3-3-2.desc }}
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v3.3.1...v3.3.2)
 - [API]({{ site.backend_github_repo }}/compare/v3.1...v3.3.2)
@@ -55,7 +87,7 @@ You can get these updates emailed to you via our [newsletter]({{ site.newsletter
 {{ site.data.changelog.v3-2.desc }}
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v3.1...v3.2)
-- [Mono-repo API]({{ site.backend_mono_github_repo }})
+- [Monorepo API]({{ site.backend_ext_api_github_repo }})
 
 #### [v3.1: {{ site.data.changelog.v3-1.title }}](https://branchv31--serverless-stack.netlify.com)
 

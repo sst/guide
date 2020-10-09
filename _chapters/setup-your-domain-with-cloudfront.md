@@ -2,38 +2,13 @@
 layout: post
 title: Set up Your Domain with CloudFront
 date: 2017-02-09 00:00:00
-description: To host our React.js app under our own domain name in AWS we are going to purchase a domain using Route 53. We will point the domain to our CloudFront Distribution with an Alias Resource Record Set. We also need to create an AAAA Record Set to support IPv6.
-context: true
+lang: en
+description: We will add our domain and its certificate to our CloudFront Distribution. We will point the domain to our CloudFront Distribution with an Alias Resource Record Set. We also need to create an AAAA Record Set to support IPv6.
 comments_id: set-up-your-domain-with-cloudfront/149
+ref: set-up-your-domain-with-cloudfront
 ---
 
-Now that we have our CloudFront distribution live, let's set up our domain with it. You can purchase a domain right from the [AWS Console](https://console.aws.amazon.com) by heading to the Route 53 section in the list of services.
-
-![Select Route 53 service screenshot](/assets/select-route-53-service.png)
-
-### Purchase a Domain with Route 53
-
-Type in your domain in the **Register domain** section and click **Check**.
-
-![Search available domain screenshot](/assets/search-available-domain.png)
-
-After checking its availability, click **Add to cart**.
-
-![Add domain to cart screenshot](/assets/add-domain-to-cart.png)
-
-And hit **Continue** at the bottom of the page.
-
-![Continue to contact details screenshot](/assets/continue-to-contact-detials.png)
-
-Fill in your contact details and hit **Continue** once again.
-
-![Continue to confirm details screenshot](/assets/continue-to-confirm-detials.png)
-
-Finally, review your details and confirm the purchase by hitting **Complete Purchase**.
-
-![Confirm domain purchase screenshot](/assets/confirm-domain-purchase.png)
-
-Next, we'll add an alternate domain name for our CloudFront Distribution.
+Now that we have our domain and a certificate to serve it over HTTPS, let's associate these with our CloudFront Distribution
 
 ### Add Alternate Domain for CloudFront Distribution
 
@@ -45,9 +20,25 @@ And type in your new domain name in the **Alternate Domain Names (CNAMEs)** fiel
 
 ![Set alternate domain name screenshot](/assets/set-alternate-domain-name.png)
 
+Now switch the **SSL Certificate** to **Custom SSL Certificate** and select the certificate we just created from the drop down. And scroll down to the bottom and hit **Yes, Edit**.
+
+![Select custom SSL Certificate screenshot](/assets/select-custom-ssl-certificate.png)
+
 Scroll down and hit **Yes, Edit** to save the changes.
 
 ![Yes edit CloudFront changes screenshot](/assets/yes-edit-cloudfront-changes.png)
+
+Next, head over to the **Behaviors** tab from the top.
+
+![Select Behaviors tab screenshot](/assets/select-behaviors-tab.png)
+
+And select the only one we have and hit **Edit**.
+
+![Edit Distribution Behavior screenshot](/assets/edit-distribution-behavior.png)
+
+Then switch the **Viewer Protocol Policy** to **Redirect HTTP to HTTPS**. And scroll down to the bottom and hit **Yes, Edit**.
+
+![Switch Viewer Protocol Policy screenshot](/assets/switch-viewer-protocol-policy.png)
 
 Next, let's point our domain to the CloudFront Distribution.
 

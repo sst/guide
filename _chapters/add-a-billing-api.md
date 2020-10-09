@@ -2,8 +2,9 @@
 layout: post
 title: Add a Billing API
 date: 2018-03-07 00:00:00
+lang: en
 description: We are going to create a Lambda function for our serverless billing API. It will take the Stripe token that is passed in from our app and use the Stripe JS SDK to process the payment.
-context: true
+ref: add-a-billing-api
 comments_id: add-a-billing-api/170
 ---
 
@@ -11,20 +12,20 @@ Now let's get started with creating our billing API. It is going to take a Strip
 
 ### Add a Billing Lambda
 
-<img class="code-marker" src="/assets/s.png" />Start by installing the Stripe NPM package. Run the following in the root of our project.
+{%change%} Start by installing the Stripe NPM package. Run the following in the root of our project.
 
 ``` bash
 $ npm install --save stripe
 ```
 
-<img class="code-marker" src="/assets/s.png" />Next, add the following to `billing.js`.
+{%change%} Create a new file called 'billing.js' with the following.
 
 ``` js
 import stripePackage from "stripe";
+import handler from "./libs/handler-lib";
 import { calculateCost } from "./libs/billing-lib";
-import { success, failure } from "./libs/response-lib";
 
-export async function main(event, context) {
+export const main = handler(async (event, context) => {
   const { storage, source } = JSON.parse(event.body);
   const amount = calculateCost(storage);
   const description = "Scratch charge";
@@ -32,18 +33,14 @@ export async function main(event, context) {
   // Load our secret key from the  environment variables
   const stripe = stripePackage(process.env.stripeSecretKey);
 
-  try {
-    await stripe.charges.create({
-      source,
-      amount,
-      description,
-      currency: "usd"
-    });
-    return success({ status: true });
-  } catch (e) {
-    return failure({ message: e.message });
-  }
-}
+  await stripe.charges.create({
+    source,
+    amount,
+    description,
+    currency: "usd"
+  });
+  return { status: true };
+});
 ```
 
 Most of this is fairly straightforward but let's go over it quickly:
@@ -56,11 +53,13 @@ Most of this is fairly straightforward but let's go over it quickly:
 
 - Finally, we use the `stripe.charges.create` method to charge the user and respond to the request if everything went through successfully.
 
+Note, if you are testing this from India, you'll need to add some shipping information as well. Check out the [details from our forums](https://discourse.serverless-stack.com/t/test-the-billing-api/172/20).
+
 ### Add the Business Logic
 
 Now let's implement our `calculateCost` method. This is primarily our *business logic*.
 
-<img class="code-marker" src="/assets/s.png" />Create a `libs/billing-lib.js` and add the following.
+{%change%} Create a `libs/billing-lib.js` and add the following.
 
 ``` js
 export function calculateCost(storage) {
@@ -74,16 +73,19 @@ export function calculateCost(storage) {
 }
 ```
 
-This is basically saying that if a user wants to store 10 or fewer notes, we'll charge them $4 per note. For 100 or fewer, we'll charge $2 and anything more than a 100 is $1 per note. Clearly, our serverless infrastructure might be cheap but our service isn't!
+This is basically saying that if a user wants to store 10 or fewer notes, we'll charge them $4 per note. For 11 to 100 notes, we'll charge $2 and any more than 100 is $1 per note. Since Stripe expects us to provide the amount in pennies (the currency’s smallest unit) we multiply the result by 100. Clearly, our serverless infrastructure might be cheap but our service isn't!
 
 ### Configure the API Endpoint
 
 Let's add a reference to our new API and Lambda function.
 
-<img class="code-marker" src="/assets/s.png" />Add the following above the `resources:` block in the `serverless.yml`.
+{%change%} Open the `serverless.yml` file and append the following to it.
 
 ``` yml
   billing:
+    # Defines an HTTP API endpoint that calls the main function in billing.js
+    # - path: url path is /billing
+    # - method: POST request
     handler: billing.main
     events:
       - http:
@@ -94,14 +96,5 @@ Let's add a reference to our new API and Lambda function.
 ```
 
 Make sure this is **indented correctly**. This block falls under the `functions` block.
-
-### Commit Our Changes
-
-<img class="code-marker" src="/assets/s.png" />Let's quickly commit these to Git.
-
-``` bash
-$ git add .
-$ git commit -m "Adding a billing API"
-```
 
 Now before we can test our API we need to load our Stripe secret key in our environment.

@@ -2,8 +2,9 @@
 layout: post
 title: Automating Serverless Deployments
 date: 2018-03-11 00:00:00
+lang: en
 description: We would like to automatically deploy our Serverless Framework project when we commit any changes to our Git repository. To do this we are going to use a service called Seed (https://seed.run) to automate our serverless deployments. It will configure a CI/CD pipeline and setup our environments.
-context: true
+ref: automating-serverless-deployments
 comments_id: automating-serverless-deployments/174
 ---
 
@@ -19,6 +20,9 @@ Next we are going to use our Git repo to automate our deployments. This essentia
 
 Along with automating deployments, we are also going to look at working with multiple environments. We want to create clear separation between our production environment and our dev environment. We are going to create a workflow where we continually deploy to our dev (or any non-prod) environment. But we will be using a manual promotion step when we promote to production. We'll also look at configuring custom domains for APIs.
 
-For automating our serverless backend, we are going to be using a service called [Seed](https://seed.run). Full disclosure, we also built Seed. You can replace most of this section with a service like [Travis CI](https://travis-ci.org) or [Circle CI](https://circleci.com). It is a bit more cumbersome and needs some scripting but we might cover this in the future.
+For automating our serverless backend, we are going to be using a service called [Seed](https://seed.run). Full disclosure, we also built Seed. You can replace most of this section with a service like [Travis CI](https://travis-ci.org) or [CircleCI](https://circleci.com). Using a CI service (like Travis CI or CircleCI) can a bit more cumbersome and needs some scripting. But we have a couple of posts on this over on the [Seed](https://seed.run) blog to help you out:
+
+- [Configure a CI/CD pipeline for Serverless apps on CircleCI](https://seed.run/blog/how-to-build-a-cicd-pipeline-for-serverless-apps-with-circleci)
+- [Configure a CI/CD pipeline for Serverless apps on Travis CI](https://seed.run/blog/how-to-build-a-cicd-pipeline-for-serverless-apps-with-travis-ci)
 
 Let's get started with setting up your project on Seed.

@@ -2,18 +2,17 @@
 layout: post
 title: Serverless Node.js Starter
 redirect_from: /chapters/serverless-es7-service.html
-description: A Serverless Node.js starter project that adds support for ES6/ES7 async/await methods, import/export, and unit tests to your Serverless Framework project.
+description: A Serverless Node.js starter project that adds support for ES6 and TypeScript, linting, and unit tests to your Serverless Framework project.
 date: 2018-04-12 00:00:00
-context: true
 comments_id: serverless-node-js-starter/22
 ---
 
 Based on what we have gone through in this guide, it makes sense that we have a good starting point for our future projects. For this we created a couple of Serverless starter projects that you can use called, [Serverless Node.js Starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter). We also have a Python version called [Serverless Python Starter](https://github.com/AnomalyInnovations/serverless-python-starter). Our starter projects also work really well with [Seed](https://seed.run); a fully-configured CI/CD pipeline for Serverless Framework.
 
-[Serverless Node.js Starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter) uses the [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) plugin, the [serverless-offline](https://github.com/dherault/serverless-offline) plugin, [Babel](https://babeljs.io), and [Jest](https://facebook.github.io/jest/). It supports:
+[Serverless Node.js Starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter) uses the [serverless-bundle](https://github.com/AnomalyInnovations/serverless-bundle) plugin (an extension of the [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) plugin) and the [serverless-offline](https://github.com/dherault/serverless-offline) plugin. It supports:
 
-- **Use ES7 syntax in your handler functions**
-- **Package your functions using Webpack**
+- **Using ES6 or TypeScript in your Lambda function code**
+- **Generating optimized packages with Webpack**
 - **Run API Gateway locally**
   - Use `serverless offline start`
 - **Support for unit tests**
@@ -21,9 +20,8 @@ Based on what we have gone through in this guide, it makes sense that we have a 
 - **Sourcemaps for proper error messages**
   - Error message show the correct line numbers
   - Works in production with CloudWatch
-- **Automatic support for multiple handler files**
-  - No need to add a new entry to your `webpack.config.js`
 - **Add environment variables for your stages**
+- **No need to manage Webpack or Babel configs**
 
 ### Demo
 
@@ -112,9 +110,9 @@ $ serverless deploy function --function hello
 
 To add environment variables to your project
 
-1. Rename `env.example` to `env.yml`.
-2. Add environment variables for the various stages to `env.yml`.
-3. Uncomment `environment: ${file(env.yml):${self:provider.stage}}` in the `serverless.yml`.
-4. Make sure to not commit your `env.yml`.
+1. Rename `env.example` to `.env`.
+2. Add environment variables for your local stage to `.env`.
+3. Uncomment `environment:` block in the `serverless.yml` and reference the environment variable as `${env:MY_ENV_VAR}`. Where `MY_ENV_VAR` is added to your `.env` file.
+4. Make sure to not commit your `.env`.
 
 So give it a try and send us an [email](mailto:contact@anoma.ly) if you have any questions or open a [new issue](https://github.com/AnomalyInnovations/serverless-nodejs-starter/issues/new) if you've found a bug.
