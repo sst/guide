@@ -16,7 +16,7 @@ First up, there are errors that can happen in our Lambda function code. Now we a
 
 Let's start by creating a new branch that we'll use while working through the following examples.
 
-<img class="code-marker" src="/assets/s.png" />In the project root for your backend repo, run the following:
+{%change%} In the project root for your backend repo, run the following:
 
 ``` bash
 $ git checkout -b debug
@@ -26,7 +26,7 @@ $ git checkout -b debug
 
 Let's trigger an error in `get.js` by commenting out the `noteId` field in the DynamoDB call's Key definition. This will cause the DynamoDB call to fail and in turn cause the Lambda function to fail.
 
-<img class="code-marker" src="/assets/s.png" />Replace `get.js` with the following.
+{%change%} Replace `services/notes/get.js` with the following.
 
 ``` javascript
 import handler from "./libs/handler-lib";
@@ -56,7 +56,7 @@ export const main = handler(async (event, context) => {
 
 Note the line that we've commented out.
 
-<img class="code-marker" src="/assets/s.png" /> Let's commit our changes.
+{%change%}  Let's commit our changes.
 
 
 ``` bash

@@ -13,7 +13,7 @@ ref: redirect-on-login
 
 URL의 쿼리 문자열에서 `redirect`를 읽는 메소드를 추가해 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/components/UnauthenticatedRoute.js`의 import 구문 밑에 다음 메소드를 추가합니다.
+{%change%} `src/components/UnauthenticatedRoute.js`의 import 구문 밑에 다음 메소드를 추가합니다.
 
 ``` coffee
 function querystring(name, url = window.location.href) {
@@ -37,7 +37,7 @@ function querystring(name, url = window.location.href) {
 
 이제 리디렉션 할 때이 매개 변수를 사용하도록 컴포넌트를 업데이트 해 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />현재 `export default ({ component: C, props: cProps, ...rest }) =>` 메소드를 아래와 같이 수정합니다.
+{%change%} 현재 `export default ({ component: C, props: cProps, ...rest }) =>` 메소드를 아래와 같이 수정합니다.
 
 ``` coffee
 export default ({ component: C, props: cProps, ...rest }) => {
@@ -56,7 +56,7 @@ export default ({ component: C, props: cProps, ...rest }) => {
 };
 ```
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Login.js`의 `handleSubmit` 메소드에서 다음을 삭제합니다. .
+{%change%} `src/containers/Login.js`의 `handleSubmit` 메소드에서 다음을 삭제합니다. .
 
 ``` coffee
 this.props.history.push("/");

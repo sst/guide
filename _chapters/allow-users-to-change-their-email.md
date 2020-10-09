@@ -18,7 +18,7 @@ In the previous chapter we created a settings page that links to `/settings/emai
 
 ### Change Email Form
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `src/containers/ChangeEmail.js`.
+{%change%} Add the following to `src/containers/ChangeEmail.js`.
 
 ``` coffee
 import React, { useState } from "react";
@@ -165,7 +165,7 @@ Auth.verifyCurrentUserAttributeSubmit("email", fields.code);
 
 This confirms the change on Cognito's side. Finally, we redirect the user to the settings page.
 
-<img class="code-marker" src="/assets/s.png" />Let's add a couple of styles to `src/containers/ChangeEmail.css`.
+{%change%} Let's add a couple of styles to `src/containers/ChangeEmail.css`.
 
 ``` css
 @media all and (min-width: 480px) {
@@ -180,7 +180,7 @@ This confirms the change on Cognito's side. Finally, we redirect the user to the
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />Finally, let's add our new page to `src/Routes.js`.
+{%change%} Finally, let's add our new page to `src/Routes.js`.
 
 ``` html
 <AuthenticatedRoute exact path="/settings/email">
@@ -188,7 +188,7 @@ This confirms the change on Cognito's side. Finally, we redirect the user to the
 </AuthenticatedRoute>
 ```
 
-<img class="code-marker" src="/assets/s.png" />And import it in the header.
+{%change%} And import it in the header.
 
 ``` coffee
 import ChangeEmail from "./containers/ChangeEmail";

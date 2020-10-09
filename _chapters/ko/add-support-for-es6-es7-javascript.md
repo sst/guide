@@ -30,10 +30,10 @@ AWS Lambda는 최근 Node.js v8.10와 v10.x에 대한 지원을 추가했습니�
 
 ES 코드를 Node.js v8.10 JavaScript로 변환하는 과정은 serverless-bundle 플러그인에 의해 수행됩니다. 이 플러그인은`serverless.yml`에 추가되었습니다. 좀 더 자세히 살펴 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`serverless.yml`을 열고 아래와 같이 기본값으로 대체하십시오.
+{%change%} `serverless.yml`을 열고 아래와 같이 기본값으로 대체하십시오.
 
 ``` yaml
-service: notes-app-api
+service: notes-api
 
 # 우리가 사용할 함수에 최적화된 패키지를 생성합니다
 package:
@@ -50,7 +50,7 @@ provider:
   region: us-east-1
 ```
 
-`service` 옵션은 매우 중요합니다. 우리의 서비스는 `notes-app-api`라고 부르겠습니다. Serverless Framework는 이 이름을 사용하여 AWS에 스택을 만듭니다. 즉, 이름을 변경하고 프로젝트를 배포하면 완전히 새로운 프로젝트가 만들어집니다.
+`service` 옵션은 매우 중요합니다. 우리의 서비스는 `notes-api`라고 부르겠습니다. Serverless Framework는 이 이름을 사용하여 AWS에 스택을 만듭니다. 즉, 이름을 변경하고 프로젝트를 배포하면 완전히 새로운 프로젝트가 만들어집니다.
 
 우리가 포함한 `serverless-bundle`과 `serverless-offline` 플러그인을 주목하시기 바랍니다. `serverless-bundle`은 위에서 설명한 바와 같습니다. [`serverless-offline`](https://github.com/dherault/serverless-offline)은 로컬 개발 환경을 구성하는 데에 유용한 플러그인입니다.
 

@@ -16,7 +16,7 @@ The first thing we are going to need to do is load the note when our container l
 
 Let's add a route for the note page that we are going to create.
 
-<img class="code-marker" src="/assets/s.png" />Add the following line to `src/Routes.js` **below** our `/notes/new` route. 
+{%change%} Add the following line to `src/Routes.js` **below** our `/notes/new` route. 
 
 ``` coffee
 <Route exact path="/notes/:id">
@@ -28,7 +28,7 @@ This is important because we are going to be pattern matching to extract our not
 
 By using the route path `/notes/:id` we are telling the router to send all matching routes to our component `Notes`. This will also end up matching the route `/notes/new` with an `id` of `new`. To ensure that doesn't happen, we put our `/notes/new` route before the pattern matching one.
 
-<img class="code-marker" src="/assets/s.png" />And include our component in the header.
+{%change%} And include our component in the header.
 
 ``` javascript
 import Notes from "./containers/Notes";
@@ -38,7 +38,7 @@ Of course this component doesn't exist yet and we are going to create it now.
 
 ### Add the Container
 
-<img class="code-marker" src="/assets/s.png" />Create a new file `src/containers/Notes.js` and add the following.
+{%change%} Create a new file `src/containers/Notes.js` and add the following.
 
 ``` coffee
 import React, { useRef, useState, useEffect } from "react";

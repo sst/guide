@@ -13,7 +13,7 @@ ref: configure-dynamodb-in-serverless
 
 ### 리소스 만들기
 
-<img class="code-marker" src="/assets/s.png" />`resources/dynamodb-table.yml`에 아래 내용을 추가합니다.
+{%change%} `resources/dynamodb-table.yml`에 아래 내용을 추가합니다.
 
 ``` yml
 Resources:
@@ -51,7 +51,7 @@ Resources:
 
 이제 프로젝트에서 이 리소스에 대한 참조를 추가해 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`serverless.yml` 파일의 아래쪽에 있는 `resources:` 블럭 내용을 다음으로 대체합니다.:
+{%change%} `serverless.yml` 파일의 아래쪽에 있는 `resources:` 블럭 내용을 다음으로 대체합니다.:
 
 ``` yml
 # Create our resources with separate CloudFormation templates
@@ -62,12 +62,12 @@ resources:
   - ${file(resources/dynamodb-table.yml)}
 ```
 
-<img class="code-marker" src="/assets/s.png" />`serverless.yml` 위쪽에 `custom:` 블럭을 다음 내용으로 대체합니다.:
+{%change%} `serverless.yml` 위쪽에 `custom:` 블럭을 다음 내용으로 대체합니다.:
 
 ``` yml
 custom:
   # Our stage is based on what is passed in when running serverless
-  # commands. Or fallsback to what we have set in the provider section.
+  # commands. Or falls back to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
   # Set the table name here so we can use it while testing locally
   tableName: ${self:custom.stage}-notes
@@ -96,7 +96,7 @@ custom:
 
 또한 생성하려는 DynamoDB 리소스를 참조할 수 있도록 변경을 빠르게 처리하겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`serverless.yml`의 `iamRoleStatements:` 블럭을 다음으로 대체하십시오.
+{%change%} `serverless.yml`의 `iamRoleStatements:` 블럭을 다음으로 대체하십시오.
 
 ``` yml
   # These environment variables are made available to our functions
@@ -133,7 +133,7 @@ custom:
 ### 코드 커밋 
 
 
-<img class="code-marker" src="/assets/s.png" />지금까지 수정한 내용을 커밋합니다.
+{%change%} 지금까지 수정한 내용을 커밋합니다.
 
 ``` bash
 $ git add .

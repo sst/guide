@@ -12,7 +12,7 @@ ref: update-the-app
 
 우리는 첫 페이지에 로그인 및 가입 버튼을 추가하여 사용자에게 명확한 가이드를 제공할 것입니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Home.js`의 `renderLander` 메소드를 다음과 같이 변경합니다.
+{%change%} `src/containers/Home.js`의 `renderLander` 메소드를 다음과 같이 변경합니다.
 
 ``` coffee
 renderLander() {
@@ -33,13 +33,13 @@ renderLander() {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 React-Router 헤더에서 `Link` 컴포넌트를 import합니다.
+{%change%} 그리고 React-Router 헤더에서 `Link` 컴포넌트를 import합니다.
 
 ``` javascript
 import { Link } from "react-router-dom";
 ```
 
-<img class="code-marker" src="/assets/s.png" />또한 `src/containers/Home.css`에 몇 가지 스타일을 추가합니다.
+{%change%} 또한 `src/containers/Home.css`에 몇 가지 스타일을 추가합니다.
 
 ``` css
 .Home .lander div {

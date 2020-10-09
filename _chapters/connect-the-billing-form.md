@@ -10,7 +10,7 @@ comments_id: connect-the-billing-form/187
 
 Now all we have left to do is to connect our billing form to our billing API.
 
-<img class="code-marker" src="/assets/s.png" />Replace our `return` statement in `src/containers/Settings.js` with this.
+{%change%} Replace our `return` statement in `src/containers/Settings.js` with this.
 
 ``` coffee
 async function handleFormSubmit(storage, { token, error }) {
@@ -46,7 +46,7 @@ return (
 );
 ```
 
-<img class="code-marker" src="/assets/s.png" />And add the following to the header.
+{%change%} And add the following to the header.
 
 ``` js
 import { Elements, StripeProvider } from "react-stripe-elements";
@@ -60,7 +60,7 @@ An important detail here is about the `StripeProvider` and the `Elements` compon
 
 Finally, let's handle some styles for our settings page as a whole.
 
-<img class="code-marker" src="/assets/s.png" />Create a file named `src/containers/Settings.css` and add the following.
+{%change%} Create a file named `src/containers/Settings.css` and add the following.
 
 ``` css
 @media all and (min-width: 480px) {

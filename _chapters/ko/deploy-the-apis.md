@@ -11,7 +11,7 @@ comments_id: deploy-the-apis/121
 
 이제 API가 완성되었으니 배포를 진행합니다.
 
-<img class="code-marker" src="/assets/s.png" />현재 작업 디렉토리에서 아래 명령어를 실행합니다.
+{%change%} 현재 작업 디렉토리에서 아래 명령어를 실행합니다.
 
 ``` bash
 $ serverless deploy
@@ -29,7 +29,7 @@ $ serverless deploy --aws-profile myProfile
 
 ``` bash
 Service Information
-service: notes-app-api
+service: notes-api
 stage: prod
 region: us-east-1
 api keys:
@@ -41,11 +41,11 @@ endpoints:
   PUT - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
   DELETE - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
 functions:
-  notes-app-api-prod-create
-  notes-app-api-prod-get
-  notes-app-api-prod-list
-  notes-app-api-prod-update
-  notes-app-api-prod-delete
+  notes-api-prod-create
+  notes-api-prod-get
+  notes-api-prod-list
+  notes-api-prod-update
+  notes-api-prod-delete
 ```
 
 여기에는 작성된 API 엔드포인트 목록이 있습니다. 프런트엔드를 생성하고 나서 나중에 사용할 예정이기 때문에 이러한 엔드포인트 주소를 기록해 두십시오. 또한 이 엔드포인트에서 리전과 ID를 기록해두면 다음 장에서 사용할 수 있습니다. 여기서 `us-east-1`은 API 게이트웨이 리전이고`ly55wbovq4`는 API 게이트웨이 ID입니다.

@@ -16,7 +16,7 @@ comments_id: add-a-create-note-api/125
 
 첫 번째 함수를 추가해 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />프로젝트 루트에 다음과 같이`create.js`라는 새로운 파일을 만듭니다.
+{%change%} 프로젝트 루트에 다음과 같이`create.js`라는 새로운 파일을 만듭니다.
 
 ``` javascript
 import * as uuid from "uuid";
@@ -87,10 +87,10 @@ export function main(event, context, callback) {
 
 이제 우리 함수에 API 엔드포인트를 정의해 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`serverless.yml` 파일을 열어서 아래 코드로 대치하십시오.
+{%change%} `serverless.yml` 파일을 열어서 아래 코드로 대치하십시오.
 
 ``` yaml
-service: notes-app-api
+service: notes-api
 
 # ES6 변환을 위해 serverless-webpack 플러그인 사용
 plugins:
@@ -149,13 +149,13 @@ functions:
 
 자, 이제 새로운 API를 테스트할 준비가 되었습니다. 로컬에서 테스트하기 위해 입력 파라미터를 임의로 만들겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />프로젝트 루트에서 `mocks/` 디렉토리를 생성합니다.
+{%change%} 프로젝트 루트에서 `mocks/` 디렉토리를 생성합니다.
 
 ``` bash
 $ mkdir mocks
 ```
 
-<img class="code-marker" src="/assets/s.png" />`mocks/create-event.json` 파일을 만들고 아래 코드를 추가합니다.
+{%change%} `mocks/create-event.json` 파일을 만들고 아래 코드를 추가합니다.
 
 ``` json
 {
@@ -203,14 +203,14 @@ $ AWS_PROFILE=myProfile serverless invoke local --function create --path mocks/c
 
 다음 장으로 넘어가기 전에 앞으로 모든 API에 대해 많은 것을 처리해야 하므로 코드를 빠르게 리팩토링하겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />프로젝트 루트에서 `libs/` 디렉토리를 생성합니다.
+{%change%} 프로젝트 루트에서 `libs/` 디렉토리를 생성합니다.
 
 ``` bash
 $ mkdir libs
 $ cd libs
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 아래 내용으로 `libs/handler-lib.js` 파일을 만듭니다.
+{%change%} 그리고 아래 내용으로 `libs/handler-lib.js` 파일을 만듭니다.
 
 ``` javascript
 export default function handler(lambda) {
@@ -237,7 +237,7 @@ export default function handler(lambda) {
 
 이렇게하면 적절한 HTTP 상태 코드와 헤더를 사용하여 성공 및 실패 사례에 대한 응답 오브젝트를 작성할 수 있습니다.
 
-<img class="code-marker" src="/assets/s.png" />다시 `libs/` 디렉토리에서 아래 내용으로  `dynamodb-lib.js` 파일을 생성합니다.
+{%change%} 다시 `libs/` 디렉토리에서 아래 내용으로  `dynamodb-lib.js` 파일을 생성합니다.
 
 ``` javascript
 import AWS from "aws-sdk";
@@ -251,7 +251,7 @@ export function call(action, params) {
 
 여기서는 DynamoDB 메소드의 promise 형식을 사용하고 있습니다. Promise는 표준 콜백함수 구문 대신 사용할 비동기 코드를 관리하는 방법입니다. 코드를 훨씬 쉽게 읽을 수 있습니다.
 
-<img class="code-marker" src="/assets/s.png" />이제 우리는`create.js`로 돌아가서 우리가 만든 Helper 함수를 사용할 것입니다. `create.js`를 다음으로 대체하십시오.
+{%change%} 이제 우리는`create.js`로 돌아가서 우리가 만든 Helper 함수를 사용할 것입니다. `create.js`를 다음으로 대체하십시오.
 
 ``` javascript
 import * as uuid from "uuid";

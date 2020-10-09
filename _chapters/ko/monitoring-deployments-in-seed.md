@@ -16,7 +16,7 @@ ref: monitoring-deployments-in-seed
 
 먼저 분명히 잘못된 코드를 push 하십시오.
 
-<img class="code-marker" src="/assets/s.png" />`functions/create.js` 파일의 맨 위 함수에 다음을 추가합니다. 
+{%change%} `functions/create.js` 파일의 맨 위 함수에 다음을 추가합니다. 
 
 ``` js
 gibberish.what;
@@ -24,7 +24,7 @@ gibberish.what;
 
 `gibberish` 변수가 없기 때문에 이 코드는 실패해야합니다.
 
-<img class="code-marker" src="/assets/s.png" />dev에 커밋하고 푸시합니다.
+{%change%} dev에 커밋하고 푸시합니다.
 
 ``` bash
 $ git add .

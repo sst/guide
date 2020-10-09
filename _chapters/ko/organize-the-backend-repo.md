@@ -12,7 +12,7 @@ ref: organize-the-backend-repo
 
 ### 사용하지 않는 파일들 삭제하기
 
-<img class="code-marker" src="/assets/s.png" />이제 스타터 프로젝트에서 두 개의 파일을 제거할 수 있습니다.
+{%change%} 이제 스타터 프로젝트에서 두 개의 파일을 제거할 수 있습니다.
 
 ``` bash
 $ rm handler.js
@@ -23,13 +23,13 @@ $ rm tests/handler.test.js
 
 우리는 다른 서비스명을 사용할 것입니다.
 
-<img class="code-marker" src="/assets/s.png" />`serverless.yml` 파일을 열어서 다음 행을 찾습니다.:
+{%change%} `serverless.yml` 파일을 열어서 다음 행을 찾습니다.:
 
 ``` yml
-service: notes-app-api
+service: notes-api
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 아래 내용으로 변경합니다.:
+{%change%} 그리고 아래 내용으로 변경합니다.:
 
 ``` yml
 service: notes-app-2-api
@@ -37,13 +37,13 @@ service: notes-app-2-api
 
 이것을 하는 이유는 Serverless Framework가 프로젝트를 식별하기 위해 `service` 이름을 사용하기 때문입니다. 우리는 새로운 프로젝트를 만들었으므로 원래 이름과 다른 이름을 사용해야 합니다. 그냥 간단히 기존 프로젝트를 덮어 쓸 수 있지만 코드를 통해 생성하려고할 때 이전에 손으로 작성한 리소스가 충돌합니다.
 
-<img class="code-marker" src="/assets/s.png" />먼저 `serverless.yml`에서 아래 행을 찾습니다:
+{%change%} 먼저 `serverless.yml`에서 아래 행을 찾습니다:
 
 ``` yml
 stage: prod
 ``` 
 
-<img class="code-marker" src="/assets/s.png" />그리고 다음으로 바꿉니다.:
+{%change%} 그리고 다음으로 바꿉니다.:
 
 ``` yml
 stage: dev
@@ -51,7 +51,7 @@ stage: dev
 
 우리는 stage를 `prod` 대신 `dev`로 기본 설정하고 있습니다. 나중에 여러 환경을 만들 때 구분할 수 있습니다.
 
-<img class="code-marker" src="/assets/s.png" />변경 사항을 빠르게 커밋합니다.
+{%change%} 변경 사항을 빠르게 커밋합니다.
 
 ``` bash
 $ git add .

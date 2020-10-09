@@ -12,20 +12,20 @@ ref: initialize-the-backend-repo
 
 ### 코드 복제하기 
 
-<img class="code-marker" src="/assets/s.png" />작업 디렉토리에서 [original 저장소]({{ site.backend_github_repo }})를 복제합니다.
+{%change%} 작업 디렉토리에서 [original 저장소]({{ site.backend_github_repo }})를 복제합니다.
 
 ``` bash
 $ git clone --branch handle-api-gateway-cors-errors --depth 1 https://github.com/AnomalyInnovations/serverless-stack-demo-api.git serverless-stack-2-api/
 $ cd serverless-stack-2-api/
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 `.git/` 디렉토리를 삭제합니다.
+{%change%} 그리고 `.git/` 디렉토리를 삭제합니다.
 
 ``` bash
 $ rm -rf .git/
 ```
 
-<img class="code-marker" src="/assets/s.png" />Node 모듈을 설치합니다.
+{%change%} Node 모듈을 설치합니다.
 
 ``` bash
 $ npm install
@@ -53,25 +53,25 @@ https://github.com/jayair/serverless-stack-2-api.git
 
 ### 여러분의 신규 저장소 초기화하기 
 
-<img class="code-marker" src="/assets/s.png" />이제 프로젝트로 돌아가서 다음 명령을 사용하여 새 repo를 초기화하십시오.
+{%change%} 이제 프로젝트로 돌아가서 다음 명령을 사용하여 새 repo를 초기화하십시오.
 
 ``` bash
 $ git init
 ```
 
-<img class="code-marker" src="/assets/s.png" />기존 파일을 추가합니다.
+{%change%} 기존 파일을 추가합니다.
 
 ``` bash
 $ git add .
 ```
 
-<img class="code-marker" src="/assets/s.png" />여러분의 첫 커밋을 생성합니다.
+{%change%} 여러분의 첫 커밋을 생성합니다.
 
 ``` bash
 $ git commit -m "First commit"
 ```
 
-<img class="code-marker" src="/assets/s.png" />이제 여러분이 Github에 생성한 저장소로 링크합니다.
+{%change%} 이제 여러분이 Github에 생성한 저장소로 링크합니다.
 
 ``` bash
 $ git remote add origin REPO_URL
@@ -83,7 +83,7 @@ $ git remote add origin REPO_URL
 $ git remote -v
 ```
 
-<img class="code-marker" src="/assets/s.png" />마지막으로 첫 커밋을 GitHub에 푸시(Push)합니다:
+{%change%} 마지막으로 첫 커밋을 GitHub에 푸시(Push)합니다:
 
 ``` bash
 $ git push -u origin master

@@ -59,7 +59,7 @@ console.log(process.env.REACT_APP_TEST_VAR);
 
 우리의 목적을 위해 `REACT_APP_STAGE`라는 환경 변수를 사용합시다. 이 변수는 `dev` 와 `prod` 값을 취합니다. 그리고 기본적으로 `dev`로 설정되어 있습니다. 이제 우리는 config로 이것을 재 작성할 수 있습니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/config.js`를 다음 내용으로 대체합니다.
+{%change%} `src/config.js`를 다음 내용으로 대체합니다.
 
 ``` js
 const dev = {

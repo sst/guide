@@ -59,7 +59,7 @@ Note that, these variables are embedded during build time. Also, only the variab
 
 For our purpose let's use an environment variable called `REACT_APP_STAGE`. This variable will take the values `dev` and `prod`. And by default it is set to `dev`. Now we can rewrite our config with this.
 
-<img class="code-marker" src="/assets/s.png" />Replace `src/config.js` with this.
+{%change%} Replace `src/config.js` with this.
 
 ``` js
 const dev = {

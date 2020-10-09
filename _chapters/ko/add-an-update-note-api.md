@@ -14,7 +14,7 @@ comments_id: add-an-update-note-api/144
 
 ### 함수 추가하기
 
-<img class="code-marker" src="/assets/s.png" />`update.js` 파일을 새로 만들고 아래 코드 내용을 붙여 넣으세요. 
+{%change%} `update.js` 파일을 새로 만들고 아래 코드 내용을 붙여 넣으세요. 
 
 ``` javascript
 import handler from "./libs/handler-lib";
@@ -53,7 +53,7 @@ export const main = handler(async (event, context) => {
 
 ### API 엔드포인트 구서하기 
 
-<img class="code-marker" src="/assets/s.png" />`serverless.yml` 파일을 열어서 아래 코드를 추가합니다.
+{%change%} `serverless.yml` 파일을 열어서 아래 코드를 추가합니다.
 
 ``` yaml
   update:
@@ -73,7 +73,7 @@ export const main = handler(async (event, context) => {
 
 ### 테스트
 
-<img class="code-marker" src="/assets/s.png" />`mocks/update-event.json` 파일을 생성하고 아래 내용을 추가합니다.
+{%change%} `mocks/update-event.json` 파일을 생성하고 아래 내용을 추가합니다.
 
 그리고 `pathParameters` 블록에 있는 `id`에 이전에 사용했던 `noteId` 값으로 대체하는 것을 잊지 마세요.
 

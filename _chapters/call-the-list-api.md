@@ -12,7 +12,7 @@ Now that we have our basic homepage set up, let's make the API call to render ou
 
 ### Make the Request
 
-<img class="code-marker" src="/assets/s.png" />Add the following right below the state variable declarations in `src/containers/Home.js`.
+{%change%} Add the following right below the state variable declarations in `src/containers/Home.js`.
 
 ``` javascript
 useEffect(() => {
@@ -43,7 +43,7 @@ We are using the [useEffect React Hook](https://reactjs.org/docs/hooks-effect.ht
 
 Let's quickly go over how we are using it here. We want to make a request to our `/notes` API to get the list of notes when our component first loads. But only if the user is authenticated. Since our hook relies on `isAuthenticated`, we need to pass it in as the second argument in the `useEffect` call as an element in the array. This is basically telling React that we only want to run our Hook again when the `isAuthenticated` value changes.
 
-<img class="code-marker" src="/assets/s.png" />And include our Amplify API module in the header.
+{%change%} And include our Amplify API module in the header.
 
 ``` javascript
 import { API } from "aws-amplify";
@@ -53,7 +53,7 @@ Now let's render the results.
 
 ### Render the List
 
-<img class="code-marker" src="/assets/s.png" />Replace our `renderNotesList` placeholder method with the following.
+{%change%} Replace our `renderNotesList` placeholder method with the following.
 
 ``` coffee
 function renderNotesList(notes) {
@@ -77,7 +77,7 @@ function renderNotesList(notes) {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />Include the `LinkContainer` from `react-router-bootstrap`.
+{%change%} Include the `LinkContainer` from `react-router-bootstrap`.
 
 ``` javascript
 import { LinkContainer } from "react-router-bootstrap";
@@ -91,7 +91,7 @@ The code above does a few things.
 
 3. And the `LinkContainer` component directs our app to each of the items.
 
-<img class="code-marker" src="/assets/s.png" />Let's also add a couple of styles to our `src/containers/Home.css`.
+{%change%} Let's also add a couple of styles to our `src/containers/Home.css`.
 
 ``` css
 .Home .notes h4 {

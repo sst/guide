@@ -18,7 +18,7 @@ Serverless Framework를 사용하면 개발자가 AWS Lambda에 배포할 독립
 
 ### Serverless 설치하기
 
-<img class="code-marker" src="/assets/s.png" />Serverless를 전역으로 설치합니다.
+{%change%} Serverless를 전역으로 설치합니다.
 
 ``` bash
 $ npm install serverless -g
@@ -29,13 +29,13 @@ $ npm install serverless -g
 <img class="code-marker" src="/assets/s.png"/> 작업 디렉토리에서 Node.js 스타터를 사용하여 프로젝트를 생성하십시오. 다음 장에서이 스타터 프로젝트의 세부 사항을 살펴 보겠습니다.
 
 ``` bash
-$ serverless install --url https://github.com/AnomalyInnovations/serverless-nodejs-starter --name notes-app-api
+$ serverless install --url https://github.com/AnomalyInnovations/serverless-nodejs-starter --name notes-api
 ```
 
-<img class="code-marker" src="/assets/s.png" />백앤드 API 프로젝트 디렉토리로 이동합니다.
+{%change%} 백앤드 API 프로젝트 디렉토리로 이동합니다.
 
 ``` bash
-$ cd notes-app-api
+$ cd notes-api
 ```
 
 이제 디렉토리에는 **handler.js** 및 **serverless.yml**과 같은 몇 개의 파일이 있어야합니다.
@@ -49,13 +49,13 @@ $ cd notes-app-api
 
 이 스타터 프로젝트는 `package.json` 목록에서 볼 수 있듯이 몇 가지 의존성이 있습니다. 
 
-<img class="code-marker" src="/assets/s.png" />프로젝트의 루트 경로에서 아래 명령어를 실행합니다.
+{%change%} 프로젝트의 루트 경로에서 아래 명령어를 실행합니다.
 
 ``` bash
 $ npm install
 ```
 
-<img class="code-marker" src="/assets/s.png" />다음은 백앤드를 위해 특별한 몇 가지 패키지를 설치합니다.
+{%change%} 다음은 백앤드를 위해 특별한 몇 가지 패키지를 설치합니다.
 
 ``` bash
 $ npm install aws-sdk --save-dev

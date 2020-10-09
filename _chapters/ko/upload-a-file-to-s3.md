@@ -21,13 +21,13 @@ AWS Amplify의 스토리지 모듈을 사용할 예정입니다. [Cognito 자격
 
 ### S3에 업로드하기
 
-<img class="code-marker" src="/assets/s.png" />이를 위해 `src/libs/` 디렉토리를 만듭니다. 
+{%change%} 이를 위해 `src/libs/` 디렉토리를 만듭니다. 
 
 ``` bash
 $ mkdir src/libs/
 ```
 
-<img class="code-marker" src="/assets/s.png" />`src/libs/awsLib.js` 파일을 만들고 아래 내용을 작성합니다.
+{%change%} `src/libs/awsLib.js` 파일을 만들고 아래 내용을 작성합니다.
 
 ``` coffee
 import { Storage } from "aws-amplify";
@@ -57,7 +57,7 @@ export async function s3Upload(file) {
 
 업로드 메소드가 준비되었으므로 노트 작성 메소드에서 호출해 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/NewNote.js` 파일에서 `handleSubmit` 메소드를 다음 내용으로 바꿉니다.
+{%change%} `src/containers/NewNote.js` 파일에서 `handleSubmit` 메소드를 다음 내용으로 바꿉니다.
 
 ``` javascript
 handleSubmit = async event => {
@@ -87,7 +87,7 @@ handleSubmit = async event => {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 `src/containers/NewNote.js` 헤더에 다음과 같이 `s3Upload`를 추가합니다.
+{%change%} 그리고 `src/containers/NewNote.js` 헤더에 다음과 같이 `s3Upload`를 추가합니다.
 
 ``` javascript
 import { s3Upload } from "../libs/awsLib";

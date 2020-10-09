@@ -21,7 +21,7 @@ comments_id: create-containers/62
 $ rm src/logo.svg
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 `src/App.js`에서도 코드를 제거합니다. 그리고 아래 내용으로 대체합니다.
+{%change%} 그리고 `src/App.js`에서도 코드를 제거합니다. 그리고 아래 내용으로 대체합니다.
 
 ``` coffee
 import React, { Component } from "react";
@@ -57,7 +57,7 @@ export default App;
 
 또한 몇 줄의 스타일을 추가하여 좀 더 공간을 넓힙니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/App.css` 안에 모든 코드를 제거하고 아래 내용으로 바꿉니다:
+{%change%} `src/App.css` 안에 모든 코드를 제거하고 아래 내용으로 바꿉니다:
 
 ``` css
 .App {
@@ -73,7 +73,7 @@ export default App;
 
 이제 외부 컨텐트를 넣기 위한 준비가 되었으므로 홈페이지에 컨테이너를 추가해 봅시다. 홈페이지 컨테이너를 추가하면 `/` 경로에 응답합니다.
 
-<img class="code-marker" src="/assets/s.png" />작업 디렉토리에 아래 명령을 실행해서 `src/containers/` 디렉터리를 만듭니다.
+{%change%} 작업 디렉토리에 아래 명령을 실행해서 `src/containers/` 디렉터리를 만듭니다.
 
 ``` bash
 $ mkdir src/containers/
@@ -81,7 +81,7 @@ $ mkdir src/containers/
 
 최상위 레벨의 모든 구성 요소를 여기에 저장합니다. 이는 단일 페이지 앱의 경로에 응답하고 API 요청을 처리할 구성 요소들입니다. 이 자습서의 나머지 부분에서는 이들을 *컨테이너*라고 부르겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />새로운 컨테이너를 생성하기 위해 아래 코드를 새로 만든 파일인 `src/containers/Home.js`에 추가합니다.
+{%change%} 새로운 컨테이너를 생성하기 위해 아래 코드를 새로 만든 파일인 `src/containers/Home.js`에 추가합니다.
 
 ``` coffee
 import React, { Component } from "react";
@@ -105,7 +105,7 @@ export default class Home extends Component {
 
 이제 스타일을 지정하기 위해 몇 줄을 추가해 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Home.css`에 아래 내용을 추가합니다.
+{%change%} `src/containers/Home.css`에 아래 내용을 추가합니다.
 
 ``` css
 .Home .lander {
@@ -127,7 +127,7 @@ export default class Home extends Component {
 
 이제 `/`에 응답하는 컨테이너를 위해 경로를 설정하겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/Routes.js`를 만들고 아래 내용을 작성합니다.
+{%change%} `src/Routes.js`를 만들고 아래 내용을 작성합니다.
 
 ``` coffee
 import React from "react";
@@ -146,13 +146,13 @@ export default () =>
 
 이제 경로를 App 구성 요소로 렌더링 해 봅시다.
 
-<img class="code-marker" src="/assets/s.png" />`src/App.js`의 헤더 부분에 아래 내용을 추가합니다.
+{%change%} `src/App.js`의 헤더 부분에 아래 내용을 추가합니다.
 
 ``` coffee
 import Routes from "./Routes";
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 `src/App.js`의 `render` 내부에 있는 `Navbar` 컴포넌트 아래에 다음 내용을 추가합니다.
+{%change%} 그리고 `src/App.js`의 `render` 내부에 있는 `Navbar` 컴포넌트 아래에 다음 내용을 추가합니다.
 
 ``` coffee
 <Routes />

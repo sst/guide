@@ -21,7 +21,7 @@ Let's look at how to debug these.
 
 Head over to the frontend repo.
 
-<img class="code-marker" src="/assets/s.png" />Open `src/containers/Home.js`, and replace the `loadNotes()` function with:
+{%change%} Open `src/containers/Home.js`, and replace the `loadNotes()` function with:
 
 ``` javascript
 function loadNotes() {
@@ -29,7 +29,7 @@ function loadNotes() {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />Let's commit this and deploy it.
+{%change%} Let's commit this and deploy it.
 
 ``` bash
 $ git add .
@@ -70,7 +70,7 @@ This will tell you that for some reason our frontend is making a request to an i
 
 Now let's look at what happens when we use an invalid HTTP method for our API requests. Instead of a `GET` request we are going to make a `PUT` request.
 
-<img class="code-marker" src="/assets/s.png" />In `src/containers/Home.js` replace the `loadNotes()` function with:
+{%change%} In `src/containers/Home.js` replace the `loadNotes()` function with:
 
 ``` javascript
 function loadNotes() {
@@ -78,7 +78,7 @@ function loadNotes() {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />Let's deploy our code.
+{%change%} Let's deploy our code.
 
 ``` bash
 $ git add .
@@ -114,7 +114,7 @@ And that covers all the major types of Serverless errors and how to debug them.
 
 Let's cleanup all the faulty code.
 
-<img class="code-marker" src="/assets/s.png" />In `src/containers/Home.js` replace the `loadNotes()` function with the original:
+{%change%} In `src/containers/Home.js` replace the `loadNotes()` function with the original:
 
 ``` javascript
 function loadNotes() {

@@ -14,6 +14,10 @@ First let's start by quickly looking at the common terms used when talking about
 
   A service is what you might call a Serverless project. It has a single `serverless.yml` file driving it.
 
+- **Stack**
+
+  A stack is what CloudFormation stack. In our case it is defined using [CDK]({% link _chapters/what-is-aws-cdk.md %}).
+
 - **Application**
 
   An application or app is a collection of multiple services.
@@ -31,11 +35,11 @@ And your app also has a job service:
 
 - **notify-job** service: Sends you a text message after a user successfully makes a purchase.
 
-The infrastructure is created by the following services:
+The infrastructure on the other hand is created by the following stacks in CDK:
 
-- **auth** service: Defines a Cognito User and Identity pool used to store user data.
-- **database** service: Defines a DynamoDB table called `notes` used to store notes data.
-- **uploads** service: Defines an S3 bucket used to store note images.
+- **CognitoStack**: Defines a Cognito User and Identity pool used to store user data.
+- **DynamoDBStack**: Defines a DynamoDB table called `notes` used to store notes data.
+- **S3Stack**: Defines an S3 bucket used to store note images.
 
 
 ### Microservices + Monorepo
@@ -48,12 +52,10 @@ The directory structure of your entire application under the microservice + mono
 
 ```
 |- services/
-|--- auth/
 |--- billing-api/
-|--- database/
 |--- notes-api/
 |--- notify-job/
-|--- uploads/
+|- infrastructure/
 |- libs/
 |- package.json
 ```
@@ -62,10 +64,11 @@ A couple of things to notice here:
 1. We are going over a Node.js project here but this pattern applies to other languages as well.
 2. The `services/` dir at the root is made up of a collection of services. Where a service contains a single `serverless.yml` file.
 3. Each service deals with a relatively small and self-contained function. So for example, the `notes-api` service deals with everything from creating to deleting notes. Of course, the degree to which you want to separate your application is entirely up to you.
-4. The `package.json` (and the `node_modules/` dir) are at the root of the repo. However, it is fairly common to have a separate `package.json` inside each service directory.
-5. The `libs/` dir is just to illustrate that any common code that might be used across all services can be placed in here.
-6. To deploy this application you are going to need to run `serverless deploy` separately in each of the services.
-7. [Environments (or stages)]({% link _chapters/stages-in-serverless-framework.md %}) need to be co-ordinated across all the different services. So if your team is using a `dev`, `staging`, and `prod` environment, then you are going to need to define the specifics of this in each of the services.
+4. The `infrastructure/` directory is a CDK app that is made up of multiple stacks.
+5. The `package.json` (and the `node_modules/` dir) are at the root of the repo. However, it is fairly common to have a separate `package.json` inside each service directory.
+6. The `libs/` dir is just to illustrate that any common code that might be used across all services can be placed in here.
+7. To deploy this application you are going to need to run `serverless deploy` separately in each of the services.
+8. [Environments (or stages)]({% link _chapters/stages-in-serverless-framework.md %}) need to be co-ordinated across all the different services. So if your team is using a `dev`, `staging`, and `prod` environment, then you are going to need to define the specifics of this in each of the services.
 
 #### Advantages of Monorepo
 
@@ -146,10 +149,10 @@ In **serverless-stack-demo-ext-resources**, you have:
 
 ```
 /
-  services/
-    auth/
-    database/
-    uploads/
+  lib/
+    CognitoStack.js
+    DynamoDBStack.js
+    S3Stack.js
 ```
 
 And in **serverless-stack-demo-ext-api**, you have:

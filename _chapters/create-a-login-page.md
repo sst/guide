@@ -14,7 +14,7 @@ So let's start by creating the basic form that'll take the user's email (as thei
 
 ### Add the Container
 
-<img class="code-marker" src="/assets/s.png" />Create a new file `src/containers/Login.js` and add the following.
+{%change%} Create a new file `src/containers/Login.js` and add the following.
 
 ``` coffee
 import React, { useState } from "react";
@@ -76,7 +76,7 @@ We are introducing a couple of new concepts in this.
 
 6. Finally, we trigger our callback `handleSubmit` when the form is submitted. For now we are simply suppressing the browser's default behavior on submit but we'll do more here later.
 
-<img class="code-marker" src="/assets/s.png" />Let's add a couple of styles to this in the file `src/containers/Login.css`.
+{%change%} Let's add a couple of styles to this in the file `src/containers/Login.css`.
 
 ``` css
 @media all and (min-width: 480px) {
@@ -95,7 +95,7 @@ These styles roughly target any non-mobile screen sizes.
 
 ### Add the Route
 
-<img class="code-marker" src="/assets/s.png" />Now we link this container up with the rest of our app by adding the following line to `src/Routes.js` below our home `<Route>`.
+{%change%} Now we link this container up with the rest of our app by adding the following line to `src/Routes.js` below our home `<Route>`.
 
 ``` coffee
 <Route exact path="/login">
@@ -103,7 +103,7 @@ These styles roughly target any non-mobile screen sizes.
 </Route>
 ```
 
-<img class="code-marker" src="/assets/s.png" />And include our component in the header.
+{%change%} And include our component in the header.
 
 ``` javascript
 import Login from "./containers/Login";

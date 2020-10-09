@@ -11,7 +11,7 @@ ref: use-the-redirect-routes
 
 Now that we created the `AuthenticatedRoute` and `UnauthenticatedRoute` in the last chapter, let's use them on the containers we want to secure.
 
-<img class="code-marker" src="/assets/s.png" />First import them in the header of `src/Routes.js`.
+{%change%} First import them in the header of `src/Routes.js`.
 
 ``` javascript
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
@@ -40,7 +40,7 @@ So the following routes in `src/Routes.js` would be affected.
 </Route>
 ```
 
-<img class="code-marker" src="/assets/s.png" />They should now look like so:
+{%change%} They should now look like so:
 
 ``` coffee
 <UnauthenticatedRoute exact path="/login">

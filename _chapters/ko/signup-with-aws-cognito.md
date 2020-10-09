@@ -11,7 +11,7 @@ comments_id: signup-with-aws-cognito/130
 
 이제 `handleSubmit` 과 `handleConfirmationSubmit` 메소드를 구현해서 AWS Cognito 설정과 연결해 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Signup.js` 파일에서 `handleSubmit` 과 `handleConfirmationSubmit` 메소드를 아래 내용으로 변경합니다. 
+{%change%} `src/containers/Signup.js` 파일에서 `handleSubmit` 과 `handleConfirmationSubmit` 메소드를 아래 내용으로 변경합니다. 
 
 ``` javascript
 handleSubmit = async event => {
@@ -52,7 +52,7 @@ handleConfirmationSubmit = async event => {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 Amplify의 Auth를 헤더에 추가합니다.
+{%change%} 그리고 Amplify의 Auth를 헤더에 추가합니다.
 
 ``` javascript
 import { Auth } from "aws-amplify";

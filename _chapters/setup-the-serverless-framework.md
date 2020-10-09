@@ -16,7 +16,7 @@ In this chapter, we are going to set up the Serverless Framework on our local de
 
 ### Install Serverless
 
-<img class="code-marker" src="/assets/s.png" />Install Serverless globally.
+{%change%} Install Serverless globally.
 
 ``` bash
 $ npm install serverless -g
@@ -24,16 +24,16 @@ $ npm install serverless -g
 
 The above command needs [NPM](https://www.npmjs.com), a package manager for JavaScript. Follow [this](https://docs.npmjs.com/getting-started/installing-node) if you need help installing NPM.
 
-<img class="code-marker" src="/assets/s.png" />In your working directory; create a project using a Node.js starter. We'll go over some of the details of this starter project in the next chapter.
+{%change%} In your working directory; create a project using a Node.js starter. We'll go over some of the details of this starter project in the next chapter.
 
 ``` bash
-$ serverless install --url https://github.com/AnomalyInnovations/serverless-nodejs-starter --name notes-app-api
+$ serverless install --url https://github.com/AnomalyInnovations/serverless-nodejs-starter --name notes-api
 ```
 
-<img class="code-marker" src="/assets/s.png" />Go into the directory for our backend api project.
+{%change%} Go into the directory for our backend api project.
 
 ``` bash
-$ cd notes-app-api
+$ cd notes-api
 ```
 
 Now the directory should contain a few files including, the **handler.js** and **serverless.yml**.
@@ -47,13 +47,13 @@ We also have a `tests/` directory where we can add our unit tests.
 
 The starter project relies on a few dependencies that are listed in the `package.json`.
 
-<img class="code-marker" src="/assets/s.png" />At the root of the project, run.
+{%change%} At the root of the project, run.
 
 ``` bash
 $ npm install
 ```
 
-<img class="code-marker" src="/assets/s.png" />Next, we'll install a couple of other packages specifically for our backend.
+{%change%} Next, we'll install a couple of other packages specifically for our backend.
 
 ``` bash
 $ npm install aws-sdk --save-dev
@@ -67,10 +67,10 @@ $ npm install uuid@7.0.3 --save
 
 Let's change the name of our service from the one in the starter.
 
-<img class="code-marker" src="/assets/s.png" />Open `serverless.yml` and replace the default with the following.
+{%change%} Open `serverless.yml` and replace the default with the following.
 
 ``` yaml
-service: notes-app-api
+service: notes-api
 
 # Create an optimized package for our functions
 package:
@@ -88,7 +88,7 @@ provider:
   region: us-east-1
 ```
 
-The `service` name is pretty important. We are calling our service the `notes-app-api`. Serverless Framework creates your stack on AWS using this as the name. This means that if you change the name and deploy your project, it will create a **completely new project**!
+The `service` name is pretty important. We are calling our service the `notes-api`. Serverless Framework creates your stack on AWS using this as the name. This means that if you change the name and deploy your project, it will create a **completely new project**!
 
 You'll notice the plugins that we've included — `serverless-bundle`, `serverless-offline`, and `serverless-dotenv-plugin`. The [serverless-offline](https://github.com/dherault/serverless-offline) plugin is helpful for local development. While the [serverless-dotenv-plugin](https://github.com/colynb/serverless-dotenv-plugin) will be used later to load the `.env` files as Lambda environment variables.
 

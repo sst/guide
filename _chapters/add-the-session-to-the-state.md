@@ -17,19 +17,19 @@ First we'll start by updating the application state by setting that the user is 
 
 To save the user's login state, let's include the `useState` hook in `src/App.js`.
 
-<img class="code-marker" src="/assets/s.png" />Replace the `React` import:
+{%change%} Replace the `React` import:
 
 ``` javascript
 import React from "react";
 ```
 
-<img class="code-marker" src="/assets/s.png" />With the following:
+{%change%} With the following:
 
 ``` javascript
 import React, { useState } from "react";
 ```
 
-<img class="code-marker" src="/assets/s.png" />Add the following to the top of our `App` component function.
+{%change%} Add the following to the top of our `App` component function.
 
 ``` javascript
 const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -43,13 +43,13 @@ We are going to have to pass the session related info to all of our containers. 
 
 We'll create a context for our entire app that all of our containers will use.
 
-<img class="code-marker" src="/assets/s.png" />Create a `src/libs/` directory. We'll use this to store all our common code.
+{%change%} Create a `src/libs/` directory. We'll use this to store all our common code.
 
 ``` bash
 $ mkdir src/libs/
 ```
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `src/libs/contextLib.js`.
+{%change%} Add the following to `src/libs/contextLib.js`.
 
 ``` javascript
 import { useContext, createContext } from "react";
@@ -67,7 +67,7 @@ This really simple bit of code is creating and exporting two things:
 
 If you are not sure how Contexts work, don't worry, it'll make more sense once we use it.
 
-<img class="code-marker" src="/assets/s.png" />Import our new app context in the header of `src/App.js`.
+{%change%} Import our new app context in the header of `src/App.js`.
 
 ``` javascript
 import { AppContext } from "./libs/contextLib";
@@ -75,13 +75,13 @@ import { AppContext } from "./libs/contextLib";
 
 Now to add our session to the context and to pass it to our containers:
 
-<img class="code-marker" src="/assets/s.png" />Wrap our `Routes` component in the `return` statement of `src/App.js`.
+{%change%} Wrap our `Routes` component in the `return` statement of `src/App.js`.
 
 ``` coffee
 <Routes />
 ```
 
-<img class="code-marker" src="/assets/s.png" />With this.
+{%change%} With this.
 
 {% raw %}
 ``` coffee
@@ -101,13 +101,13 @@ React Context's are made up of two parts. The first is the Provider. This is tel
 
 The second part of the Context API is the consumer. We'll add that to the Login container:
 
-<img class="code-marker" src="/assets/s.png" />Start by importing it in the header of `src/containers/Login.js`.
+{%change%} Start by importing it in the header of `src/containers/Login.js`.
 
 ``` javascript
 import { useAppContext } from "../libs/contextLib";
 ```
 
-<img class="code-marker" src="/assets/s.png" />Include the hook by adding it below the `export default function Login() {` line.
+{%change%} Include the hook by adding it below the `export default function Login() {` line.
 
 ``` javascript
 const { userHasAuthenticated } = useAppContext();
@@ -115,7 +115,7 @@ const { userHasAuthenticated } = useAppContext();
 
 This is telling React that we want to use our app context here and that we want to be able to use the `userHasAuthenticated` function.
 
-<img class="code-marker" src="/assets/s.png" />Finally, replace the `alert('Logged in');` line with the following in `src/containers/Login.js`.
+{%change%} Finally, replace the `alert('Logged in');` line with the following in `src/containers/Login.js`.
 
 ``` javascript
 userHasAuthenticated(true);
@@ -134,7 +134,7 @@ We can now use this to display a Logout button once the user logs in. Find the f
 </LinkContainer>
 ```
 
-<img class="code-marker" src="/assets/s.png" />And replace it with this:
+{%change%} And replace it with this:
 
 ``` coffee
 {isAuthenticated
@@ -152,7 +152,7 @@ We can now use this to display a Logout button once the user logs in. Find the f
 
 The `<>` or [Fragment component](https://reactjs.org/docs/fragments.html) can be thought of as a placeholder component. We need this because in the case the user is not logged in, we want to render two links. To do this we would need to wrap it inside a single component, like a `div`. But by using the Fragment component it tells React that the two links are inside this component but we don't want to render any extra HTML.
 
-<img class="code-marker" src="/assets/s.png" />And add this `handleLogout` method to `src/App.js` above the `return` statement as well.
+{%change%} And add this `handleLogout` method to `src/App.js` above the `return` statement as well.
 
 ``` javascript
 function handleLogout() {

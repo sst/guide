@@ -12,7 +12,7 @@ A big part of writing web applications is having a UI Kit to help create the int
 
 ### Installing React Bootstrap
 
-<img class="code-marker" src="/assets/s.png" />Run the following command in your working directory.
+{%change%} Run the following command in your working directory.
 
 ``` bash
 $ npm install react-bootstrap@0.33.1 --save
@@ -24,7 +24,7 @@ Note that, we'll be upgrading the guide to React Bootstrap v1 once it is out of 
 
 ### Add Bootstrap Styles
 
-<img class="code-marker" src="/assets/s.png" />React Bootstrap uses the standard Bootstrap v3 styles; so just add the following styles to your `public/index.html`.
+{%change%} React Bootstrap uses the standard Bootstrap v3 styles; so just add the following styles to your `public/index.html`.
 
 ``` html
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -32,7 +32,7 @@ Note that, we'll be upgrading the guide to React Bootstrap v1 once it is out of 
 
 We'll also tweak the styles of the form fields so that the mobile browser does not zoom in on them on focus. We just need them to have a minimum font size of `16px` to prevent the zoom.
 
-<img class="code-marker" src="/assets/s.png" />To do that, let's add the following to our `src/index.css`.
+{%change%} To do that, let's add the following to our `src/index.css`.
 
 ``` css
 select.form-control,

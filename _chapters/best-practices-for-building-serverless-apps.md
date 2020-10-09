@@ -69,11 +69,11 @@ The following repos will serve as the centerpiece of this section:
 
 1. [**Serverless Infrastructure**]({{ site.backend_ext_resources_github_repo }})
 
-   A repo containing all the main infrastructure resources of our extended notes application. We are creating a DynamoDB table to store all the notes related info, an S3 bucket for uploading attachments, and a Cognito User Pool and Identity Pool to authenticate users.
+   A repo containing all the main infrastructure resources of our extended notes application. We are creating a DynamoDB table to store all the notes related info, an S3 bucket for uploading attachments, and a Cognito User Pool and Identity Pool to authenticate users. We'll be using [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}) with [SST](https://github.com/serverless-stack/serverless-stack).
 
 2. [**Serverless Services**]({{ site.backend_ext_api_github_repo }})
 
-   A monorepo containing all the services in our extended notes application. We have three different services here. The `notes-api` service that powers the notes CRUD API endpoint, the `billing-api` service that processes payment information through Stripe and publishes a message on an SNS topic. Finally, we have a `notify-job` service that listens to the SNS topic and sends us a text message when somebody makes a purchase.
+   A monorepo containing all the services in our extended notes application. We have three different services here. The `notes-api` service that powers the notes CRUD API endpoint, the `billing-api` service that processes payment information through Stripe and publishes a message on an SNS topic. Finally, we have a `notify-job` service that listens to the SNS topic and sends us a text message when somebody makes a purchase. We'll be using [Serverless Framework](https://github.com/serverless/serverless) for our services.
 
 We'll start by forking these repos but unlike the first section we won't be directly working on the code. Instead as we work through the sections we'll point out the key aspects of the codebase.
 

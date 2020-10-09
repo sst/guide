@@ -24,13 +24,13 @@ CORS 관련 오류는 가장 일반적인 Serverless API 오류 중 하나입니
 
 API Gateway 오류를 구성하기 위해 우리는`serverless.yml`에 몇 가지를 추가 할 것입니다. 기본적으로 [Serverless Framework](https://serverless.com)는 [CloudFormation] (https://aws.amazon.com/cloudformation/)을 지원하므로 코드를 통해 API Gateway를 구성 할 수 있습니다.
 
-<img class="code-marker" src="/assets/s.png" />리소스를 추가 할 디렉토리를 만들어 보겠습니다. 나중에이 가이드의 뒷부분에 추가하겠습니다.
+{%change%} 리소스를 추가 할 디렉토리를 만들어 보겠습니다. 나중에이 가이드의 뒷부분에 추가하겠습니다.
 
 ``` bash
 $ mkdir resources/
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 `resources/api-gateway-errors.yml`에 다음 내용을 추가합니다.
+{%change%} 그리고 `resources/api-gateway-errors.yml`에 다음 내용을 추가합니다.
 
 ``` yml
 Resources:
@@ -60,7 +60,7 @@ Resources:
 
 이제 위의 CloudFormation 리소스를`serverless.yml`에 포함시켜 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`serverless.yml` 파일에 아래 내용을 추가합니다.
+{%change%} `serverless.yml` 파일에 아래 내용을 추가합니다.
 
 ``` yml
 # 분리된 CloudFormation 템플릿을 생성합니다. 

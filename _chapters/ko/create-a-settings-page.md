@@ -18,7 +18,7 @@ ref: create-a-settings-page
 
 시작하려면 설정 페이지를 추가하십시오.
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Settings.js` 파일을 새로 만들어 다음 내용을 추가합니다.
+{%change%} `src/containers/Settings.js` 파일을 새로 만들어 다음 내용을 추가합니다.
 
 ``` coffee
 import React, { Component } from "react";
@@ -48,13 +48,13 @@ export default class Settings extends Component {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />다음으로 `src/Routes.js` 파일의 헤더에 다음 내용을 추가합니다.
+{%change%} 다음으로 `src/Routes.js` 파일의 헤더에 다음 내용을 추가합니다.
 
 ``` js
 import Settings from "./containers/Settings";
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 `src/Routes.js` 파일의 `<Switch>` 블럭을 다음 내용으로 바꿉니다.
+{%change%} 그리고 `src/Routes.js` 파일의 `<Switch>` 블럭을 다음 내용으로 바꿉니다.
 
 ``` coffee
 <Switch>
@@ -71,7 +71,7 @@ import Settings from "./containers/Settings";
 
 새로 만든 설정 페이지에 대한 경로를 추가한 것을 주목하십시오.
 
-<img class="code-marker" src="/assets/s.png" />다음으로 `src/App.js`의 `render` 메쏘드를 이용하여 Navbar의 설정 페이지에 링크를 추가하십시오.
+{%change%} 다음으로 `src/App.js`의 `render` 메쏘드를 이용하여 Navbar의 설정 페이지에 링크를 추가하십시오.
 
 ``` coffee
 render() {
@@ -125,7 +125,7 @@ render() {
 
 ### 변경 사항 커밋
 
-<img class="code-marker" src="/assets/s.png" />Git에 빠르게 커밋합니다.
+{%change%} Git에 빠르게 커밋합니다.
 
 ``` bash
 $ git add .

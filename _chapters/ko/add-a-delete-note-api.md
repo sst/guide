@@ -14,7 +14,7 @@ comments_id: add-a-delete-note-api/153
 
 ### 함수 추가하기
 
-<img class="code-marker" src="/assets/s.png" />`delete.js` 파일을 생성하고 아래 코드를 붙여 넣기 합니다.
+{%change%} `delete.js` 파일을 생성하고 아래 코드를 붙여 넣기 합니다.
 
 ``` javascript
 import handler from "./libs/handler-lib";
@@ -41,7 +41,7 @@ export const main = handler(async (event, context) => {
 
 ### API 엔드포인트 구성하기 
 
-<img class="code-marker" src="/assets/s.png" />`serverless.yml` 파일을 열어서 아래 내용을 추가합니다. 
+{%change%} `serverless.yml` 파일을 열어서 아래 내용을 추가합니다. 
 
 ``` yaml
   delete:
@@ -61,7 +61,7 @@ export const main = handler(async (event, context) => {
 
 ### 테스트
 
-<img class="code-marker" src="/assets/s.png" />`mocks/delete-event.json` 파일을 만들고 아래 내용을 붙여 넣기 합니다.
+{%change%} `mocks/delete-event.json` 파일을 만들고 아래 내용을 붙여 넣기 합니다.
 
 역시 이전과 같이 `pathParameters` 블록에 `id` 값은 `noteId` 값으로 대체합니다.
 

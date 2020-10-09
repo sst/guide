@@ -27,7 +27,7 @@ create-an-s3-bucket-for-file-uploads
 create-a-cognito-user-pool
 create-a-cognito-test-user
 setup-the-serverless-framework
-add-support-for-es6-es7-javascript
+add-support-for-es6-and-typescript
 initialize-the-backend-repo
 add-a-create-note-api
 add-a-get-note-api
@@ -85,10 +85,14 @@ use-the-redirect-routes
 redirect-on-login
 getting-production-ready
 what-is-infrastructure-as-code
-configure-dynamodb-in-serverless
-configure-s3-in-serverless
-configure-cognito-user-pool-in-serverless
-configure-cognito-identity-pool-in-serverless
+what-is-aws-cdk
+using-aws-cdk-with-serverless-framework
+building-a-cdk-app-with-sst
+configure-dynamodb-in-cdk
+configure-s3-in-cdk
+configure-cognito-user-pool-in-cdk
+configure-cognito-identity-pool-in-cdk
+connect-serverless-framework-and-cdk-with-sst
 deploy-your-serverless-infrastructure
 automating-serverless-deployments
 setting-up-your-project-on-seed
@@ -120,9 +124,6 @@ staying-up-to-date
 best-practices-for-building-serverless-apps
 organizing-serverless-projects
 cross-stack-references-in-serverless
-dynamodb-as-a-serverless-service
-s3-as-a-serverless-service
-cognito-as-a-serverless-service
 share-code-between-services
 share-an-api-endpoint-between-services
 deploy-a-serverless-app-with-dependencies
@@ -146,35 +147,7 @@ promoting-to-production
 rollback-changes
 deploying-only-updated-services
 tracing-serverless-apps-with-x-ray
-wrapping-up-the-best-practices
-api-gateway-and-lambda-logs
-debugging-serverless-api-issues
-serverless-environment-variables
-stages-in-serverless-framework
-backups-in-dynamodb
-configure-multiple-aws-profiles
-customize-the-serverless-iam-policy
-mapping-cognito-identity-id-and-user-pool-id
-connect-to-api-gateway-with-iam-auth
-serverless-nodejs-starter
-package-lambdas-with-serverless-bundle
-understanding-react-hooks
-code-splitting-in-create-react-app
-environments-in-create-react-app
-deploying-a-react-app-to-aws
-create-an-s3-bucket
-deploy-to-s3
-create-a-cloudfront-distribution
-purchase-a-domain-with-route-53
-setup-ssl
-setup-your-domain-with-cloudfront
-setup-www-domain-redirect
-deploy-updates
-manage-user-accounts-in-aws-amplify
-handle-forgot-and-reset-password
-allow-users-to-change-passwords
-allow-users-to-change-their-email
-facebook-login-with-cognito-using-aws-amplify"
+wrapping-up-the-best-practices"
 
 set text item delimiters to "
 "
@@ -236,31 +209,43 @@ on downloadPdf(theChapterName)
 
       delay 1
 
-      repeat until menu item "Export as PDF…" of menu "File" of menu bar 1 exists
+      # Click on Print…
+      repeat until menu item "Print…" of menu "File" of menu bar 1 exists
         delay 0.2
       end repeat
       repeat
-        if ((value of menu item "Export as PDF…" of menu "File" of menu bar 1 is enabled) = true)
+        if ((value of menu item "Print…" of menu "File" of menu bar 1 is enabled) = true)
           exit repeat
         end if
         delay 0.2
       end repeat
-      click menu item "Export as PDF…" of menu "File" of menu bar 1
+      click menu item "Print…" of menu "File" of menu bar 1
 
-      tell window 1
+      # Click on Save to PDF
+      tell front window
+        repeat until exists sheet 1
+          delay 0.02
+        end repeat
+        tell sheet 1
+          click menu button "PDF"
+          repeat until exists menu 1 of menu button "PDF"
+            delay 0.02
+          end repeat
+          click menu item "Save as PDF" of menu 1 of menu button "PDF"
+        end tell
+      end tell
+
+      # Type in file name and save
+      tell front window
         repeat until sheet 1 exists
+          delay 0.02
         end repeat
 
-        tell sheet 1
+        tell front sheet
           keystroke theChapterName
-          click pop up button "Where:"
-
-          repeat until menu 1 of pop up button "Where:" exists
-          end repeat
-          click menu item "ebook" of menu 1 of pop up button "Where:"
-          click button "Save"
+          delay 1
+          key code 36
         end tell
-
       end tell
 
       delay 2

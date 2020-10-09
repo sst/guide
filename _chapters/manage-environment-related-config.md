@@ -17,29 +17,77 @@ Let's quickly review the setup that we've created back in the [Organizing servic
 
 But before we can deploy to an ephemeral environment like `featureX`, we need to figure out a way to let our services know which infrastructure environment they need to talk to.
 
+We need our infrastructure resources and API services environments to be mapped according to this scheme.
+
+| API      | Resources |
+|----------|-----------|
+| prod     | prod      |
+| dev      | dev       |
+| featureX | dev       |
+| pr#12    | dev       |
+| _etc..._ | dev       |
+
+So we want all of the ephemeral stages in our API services to share the dev version of the resources.
+
 Let's look at how to do that.
 
-### Set a stage environment variable
+### Link The Environments Across Apps
 
-In the `serverless.common.yml` file, we defined:
+In our `serverless.common.yml` (the part of the config that is shared across all our Serverless services), we are going to link to our resources app. You'll recall that our resources are configured using CDK and deployed using SST.
+
+First we start by defining the stage that our Serverless services are going to be deployed to.
+
 ``` yml
 custom:
   # Our stage is based on what is passed in when running serverless
-  # commands. Or fallsback to what we have set in the provider section.
+  # commands. Or falls back to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
-  resourcesStages:
-    prod: prod
-    dev: dev
-  resourcesStage: ${self:custom.resourcesStages.${self:custom.stage}, self:custom.resourcesStages.dev}
 ```
 
-The above code reads the current stage from the `serverless` commands, and selects the corresponding `resourcesStage` config.
+Next we create a simple mapping of the `dev` and `prod` stage names between our Serverless services and SST app.
 
-- If the stage is `prod`, it uses the `prod` infrastructure.
-- If the stage is `dev`, it uses the `dev` infrastructure.
-- And if stage is `featureX`, it falls back to the dev config and uses the `dev` infrastructure.
+``` yml
+sstAppMapping:
+  prod: prod
+  dev: dev
+```
 
-And then in each service, we are going to pass the `resourcesStage` to the Lambda functions as an environment variable. Open up the `serverless.yml` file in a service.
+This seems a bit redundant because the stage names we are using across the two repos are the same. But you might choose to call it `dev` in your Serverless services. And call it `development` in your SST app.
+
+Next, we create the reference to our SST app. 
+
+``` yml
+sstApp: ${self:custom.sstAppMapping.${self:custom.stage}, self:custom.sstAppMapping.dev}-notes-ext-infra
+```
+
+Let's look at this in detail.
+
+- First let's understand the basic format, `${VARIABLE}-notes-ext-infra`.
+
+- The `notes-ext-infra` is hardcoded to the name of our SST app. As listed in the `sst.json` in our [resources repo]({{ site.backend_ext_resources_github_repo }}).
+
+- The `${VARIABLE}` format allows us to also specify a fallback. So in the case of `${VARIABLE_1, VARIABLE_2}`, it'll first try `VARIABLE_1`. If it doesn't resolve then it'll try `VARIABLE_2`.
+
+- So Serverless will first try to resolve, `self:custom.sstAppMapping.${self:custom.stage}`. It'll check if the stage we are currently deploying to (`self:custom.stage`) has a mapping set in `self:custom.sstAppMapping`. If it does, then it uses it. In other words, if we are currently deploying to `dev` or `prod`, then use the corresponding stage in our SST app.
+
+- If the stage we are currently deploying to does not have a corresponding stage in our SST app (not `dev` or `prod`), then we fallback to `self:custom.sstAppMapping.dev`. As in, we fallback to using the `dev` stage of our SST app.
+
+This allows us to map our environments correctly across our Serverless services and SST apps.
+
+For reference, here's what the top of our `serverless.common.yml` looks like: 
+
+``` yml
+custom:
+  # Our stage is based on what is passed in when running serverless
+  # commands. Or falls back to what we have set in the provider section.
+  stage: ${opt:stage, self:provider.stage}
+  sstAppMapping:
+    prod: prod
+    dev: dev
+  sstApp: ${self:custom.sstAppMapping.${self:custom.stage}, self:custom.sstAppMapping.dev}-notes-ext-infra
+```
+
+Now we are going to use the resources based on the `sstApp`. Open up the `serverless.yml` file in the `notes-api` service.
 
 ``` yml
 ...
@@ -49,62 +97,24 @@ custom: ${file(../../serverless.common.yml):custom}
 provider:
   environment:
     stage: ${self:custom.stage}
-    resourcesStage: ${self:custom.resourcesStage}
+    tableName: !ImportValue ${self:custom.sstApp}-ExtTableName
 ...
 ```
 
-This adds a `resourcesStage` environment variable to all the Lambda functions in the service. Recall that we can access this via the `process.env.resourcesStage` variable at runtime.
+The `!ImportValue ${self:custom.sstApp}-ExtTableName` line allows us to import the CloudFormation export from the appropriate stage of our SST app. In this case we are importing the name of the DynamoDB table that's been created.
 
-### Create a stage based config
+The `provider:` and `environment:` options allow us to add environment variables to our Lambda functions. Recall that we can access this via the `process.env.tableName` variable at runtime.
 
-Now in our `config.js`, we'll read the `resourcesStage` from the environment variable `process.env.resourcesStage`.
+So in our `list.js`, we'll read the `tableName` from the environment variable `process.env.tableName`.
 
 ``` js
-const stage = process.env.stage;
-const resourcesStage = process.env.resourcesStage;
-const adminPhoneNumber = "+14151234567";
-
-const stageConfigs = {
-  dev: {
-    stripeKeyName: "/stripeSecretKey/test"
-  },
-  prod: {
-    stripeKeyName: "/stripeSecretKey/live"
+const params = {
+  TableName: process.env.tableName,
+  KeyConditionExpression: "userId = :userId",
+  ExpressionAttributeValues: {
+    ":userId": event.requestContext.identity.cognitoIdentityId
   }
 };
-
-const config = stageConfigs[stage] || stageConfigs.dev;
-
-export default {
-  stage,
-  resourcesStage,
-  adminPhoneNumber,
-  ...config
-};
-```
-
-Finally, while calling DynamoDB we can use the config to get the DynamoDB table we want to use. In `libs/dynamodb-lib.js`:
-
-``` js
-import AWS from "./aws-sdk";
-import config from "../config";
-
-const client = new AWS.DynamoDB.DocumentClient();
-
-export default {
-  get: (params) => client.get(updateTableName(params)).promise(),
-  query: (params) => client.query(updateTableName(params)).promise(),
-  put: (params) => client.put(updateTableName(params)).promise(),
-  update: (params) => client.update(updateTableName(params)).promise(),
-  delete: (params) => client.delete(updateTableName(params)).promise(),
-};
-
-function updateTableName(params) {
-  return {
-    ...params,
-    TableName: `${config.resourcesStage}-${params.TableName}`,
-  };
-}
 ```
 
 The above setup ensures that even when we create numerous ephemeral environments for our API services, they'll always connect back to the `dev` environment of our resources.

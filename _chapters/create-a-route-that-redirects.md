@@ -11,7 +11,7 @@ ref: create-a-route-that-redirects
 
 Let's first create a route that will check if the user is logged in before routing.
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `src/components/AuthenticatedRoute.js`.
+{%change%} Add the following to `src/components/AuthenticatedRoute.js`.
 
 ``` coffee
 import React from "react";
@@ -49,7 +49,7 @@ This simple component creates a `Route` where its children are rendered only if 
 
 We'll do something similar to ensure that the user is not authenticated.
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `src/components/UnauthenticatedRoute.js`.
+{%change%} Add the following to `src/components/UnauthenticatedRoute.js`.
 
 ``` coffee
 import React from "react";
