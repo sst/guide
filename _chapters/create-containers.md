@@ -152,7 +152,7 @@ Now let's render the routes into our App component.
 import Routes from "./Routes";
 ```
 
-{%change%} And add the following line below our `Navbar` component inside the `render` of `src/App.js`.
+{%change%} And add the following line below our `Navbar` component inside `src/App.js`.
 
 ``` coffee
 <Routes />
