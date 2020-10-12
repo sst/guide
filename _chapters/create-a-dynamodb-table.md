@@ -22,7 +22,7 @@ First, log in to your [AWS Console](https://console.aws.amazon.com) and select *
 
 Select **Create table**.
 
-![Create DynamoDB Table screenshot](/assets/dynamodb/create-dynamodb-table.png)
+![Create DynamoDB Table screenshot](/assets/dynamodb/dynamodb-dashboard-create-table.png)
 
 Enter the **Table name** and **Primary key** info as shown below. Just make sure that `userId` and `noteId` are in camel case.
 
