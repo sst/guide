@@ -1,6 +1,10 @@
 ---
-ref: who-is-this-guide-for
+layout: post
+title: Dla kogo jest ten przewodnik?
+date: 2020-19-14 09:25:00
 lang: pl
+ref: who-is-this-guide-for
+comments_id: who-is-this-guide-for/96
 ---
 
 Ten przewodnik jest przeznaczony dla full-stack deweloperów lub deweloperów, którzy chcą tworzyć full-stackowe aplikacje bezserwerowe. Udostępniając przewodnik krok po kroku zarówno po części frontendowej, jak i backendowej, mamy nadzieję, że udało nam się uwzględnić wszystkie aspekty tworzenia aplikacji bezserwerowych. W sieci istnieje sporo innych samouczków, mimo to uważamy, że przydatne byłoby posiadanie jednego punktu odniesienia dla całego procesu. Ten przewodnik ma służyć jako źródło informacji o tym, jak tworzyć i wdrażać aplikacje bezserwerowe, w przeciwieństwie do omówienia najlepszego możliwego rozwiązania.
