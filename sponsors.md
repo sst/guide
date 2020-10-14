@@ -72,6 +72,7 @@ Your **company logo** and link will be placed here. [Contact us if you'd like to
 - [Tim Shnaider](https://twitter.com/TimShnaider)
 - [MichaelGMalek](https://github.com/MichaelGMalek)
 - [Craig Barr](https://github.com/m0un10)
+- [Dale Jacques](https://www.patreon.com/user/creators?u=43900227)
 
 
 We'd like thank our sponsors and backers for supporting us!
