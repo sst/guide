@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Dla kogo jest ten przewodnik?
-date: 2020-19-14 09:25:00
+date: 2020-10-14 09:25:00
 lang: pl
 ref: who-is-this-guide-for
 comments_id: who-is-this-guide-for/96
