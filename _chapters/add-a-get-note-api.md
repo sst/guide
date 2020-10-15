@@ -12,7 +12,7 @@ Now that we created a note and saved it to our database. Let's add an API to ret
 
 ### Add the Function
 
-{%change%} Create a new file `get.js` and paste the following code
+{%change%} Create a new file `get.js` in your project root and paste the following code:
 
 ``` javascript
 import handler from "./libs/handler-lib";
