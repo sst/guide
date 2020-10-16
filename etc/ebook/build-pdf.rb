@@ -111,6 +111,12 @@ def build_chapter chapter_data
     $config.each do |variable|
       chapter = chapter.gsub(/{{ site.#{variable[0].to_s} }}/, variable[1].to_s)
     end
+    if (chapter_name === 'changelog')
+      $changelog.each do |variable|
+        chapter = chapter.gsub(/{{ site.data.changelog.#{variable[0]}.title }}/, variable[1]['title'])
+        chapter = chapter.gsub(/{{ site.data.changelog.#{variable[0]}.desc }}/, variable[1]['desc'])
+      end
+    end
 
     #################
     # Replace links
@@ -134,20 +140,14 @@ def build_chapter chapter_data
       chapter << github_code_link(chapter_front_matter['code'], chapter_name)
     end
 
-    # Replace ⇒ character
-    chapter = chapter.gsub('⇒', '→')
+    # Replace Unicode characters
+    chapter = chapter
+      .gsub('→', '\faLongArrowAltRight')
+      .gsub('⇒', '\faLongArrowAltRight')
+      .gsub('✓', '\faCheck')
 
-    # Replace chapter specific
-    if ( chapter_name === 'unit-tests-in-serverless')
-      # Replace ✓ character in jest snippet to avoid pandoc error
-      chapter.force_encoding(::Encoding::UTF_8)
-      chapter = chapter.gsub('✓', '[passed]')
-    elsif (chapter_name === 'changelog')
-      $changelog.each do |variable|
-        chapter = chapter.gsub(/{{ site.data.changelog.#{variable[0]}.title }}/, variable[1]['title'])
-        chapter = chapter.gsub(/{{ site.data.changelog.#{variable[0]}.desc }}/, variable[1]['desc'])
-      end
-    elsif (chapter_name === 'wrapping-up-the-best-practices')
+    # Replace chapter specific content
+    if (chapter_name === 'wrapping-up-the-best-practices')
       # Remove the survey http link button. The survey link already exist in the paragraph
       # before it, it is redundant.
       chapter = chapter.gsub(/<a.*>Fill out our survey<\/a>/, "")
@@ -171,16 +171,12 @@ def merge_chapters
     File.open('output/pdf.md', 'w') do |file|
 
         # Add metadata and introduction
-        file << File.read('metadata-pdf.md').gsub('BOOK_VERSION', ENV['GIT_TAG'] || '')
+        file << File.read('metadata-pdf.md').gsub('BOOK_VERSION', ENV['BOOK_VERSION'] || '')
         file << "\n\n"
 
         # Load sections from chapter list
         chapter_list = YAML.load_file('../../_data/chapterlist.yml')
         chapter_list.each do |section_key, section|
-# TODO testing with first two chapters
-#if (section_key != 'preface' && section_key != 'intro')
-#  next
-#end
 
           # Add section header in table of content
           if (section_key === 'intro')
@@ -201,10 +197,10 @@ def merge_chapters
 
           # Handle each section
           section['chapters'].each do |chapter_data|
-# TODO testing with first two chapters
-#if (chapter_data["url"] != '/chapters/setup-error-logging-in-serverless.html')
-#  next
-#end
+            # Uncomment to generate for specific chapters
+            #if (chapter_data["url"] != '/chapters/setup-error-logging-in-serverless.html')
+            #  next
+            #end
             file << build_chapter(chapter_data)
           end
         end
