@@ -26,7 +26,7 @@ To help with this we created, [`serverless-bundle`](https://github.com/AnomalyIn
 - Supports transpiling unit tests with [babel-jest](https://github.com/facebook/jest/tree/master/packages/babel-jest)
 - Source map support for proper error messages
 
-It's automatically included in the starter project we used in the previous chapter — [`serverless-nodejs-starter`]({% link _chapters/serverless-nodejs-starter.md %}).
+It's automatically included in the starter project we used in the previous chapter — [`serverless-nodejs-starter`]({% link _chapters/serverless-nodejs-starter.md %}). For TypeScript, we have a starter for that as well — [`serverless-typescript-starter`](https://github.com/AnomalyInnovations/serverless-typescript-starter).
 
 However, if you are looking to add ES6 and TypeScript support to your existing Serverless Framework projects, you can do this by installing [serverless-bundle](https://github.com/AnomalyInnovations/serverless-bundle):
 
