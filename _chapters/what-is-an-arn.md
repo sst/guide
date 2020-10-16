@@ -16,7 +16,7 @@ Here is the official definition:
 
 ARN is really just a globally unique identifier for an individual AWS resource. It takes one of the following formats.
 
-```
+``` txt
 arn:partition:service:region:account-id:resource
 arn:partition:service:region:account-id:resourcetype/resource
 arn:partition:service:region:account-id:resourcetype:resource
@@ -24,7 +24,7 @@ arn:partition:service:region:account-id:resourcetype:resource
 
 Let's look at some examples of ARN. Note the different formats used.
 
-```
+``` txt
 <!-- Elastic Beanstalk application version -->
 arn:aws:elasticbeanstalk:us-east-1:123456789012:environment/My App/MyEnvironment
 
@@ -44,7 +44,7 @@ Finally, let's look at the common use cases for ARN.
 
    ARN is used to reference a specific resource when you orchestrate a system involving multiple AWS resources. For example, you have an API Gateway listening for RESTful APIs and invoking the corresponding Lambda function based on the API path and request method. The routing looks like the following.
 
-   ```
+   ``` txt
    GET /hello_world => arn:aws:lambda:us-east-1:123456789012:function:lambda-hello-world
    ```
 

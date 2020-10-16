@@ -38,7 +38,7 @@ $ cat ~/.aws/credentials
 
 The output should look something like this.
 
-```
+``` txt
 [default]
 aws_access_key_id = YOUR_IAM_ACCESS_KEY
 aws_secret_access_key = YOUR_IAM_SECRET_KEY

@@ -1,0 +1,49 @@
+name: Ebook
+
+on:
+  push:
+    branches: [ master ]
+    tags: [ v* ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get git tag
+      id: get_ref
+      run: echo ::set-output name=REF::${GITHUB_REF/refs\/tags\//}
+
+    - name: Assign book version
+      id: get_book_version
+      run: echo ::set-output name=BOOK_VERSION::${{ steps.get_ref.outputs.REF }}
+      if: ${{ startsWith(steps.get_ref.outputs.REF, 'v' ) }}
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+      
+    - uses: actions/checkout@v2
+    - run: sudo apt-get update
+    - run: sudo apt-get install -y wget texlive-xetex texlive-fonts-extra
+    - run: sudo wget https://github.com/jgm/pandoc/releases/download/2.10.1/pandoc-2.10.1-linux-amd64.tar.gz
+    - run: sudo tar xvzf pandoc-2.10.1-linux-amd64.tar.gz --strip-components 1 -C /usr
+    - run: sudo mkdir -p ~/.fonts
+    - run: sudo cp etc/ebook/fonts/Lato/*.ttf ~/.fonts
+    - run: sudo cp etc/ebook/fonts/PTSerif/*.ttf ~/.fonts
+    - run: sudo cp etc/ebook/fonts/SourceCodePro/*.ttf ~/.fonts
+    - run: cd etc/ebook && make pdf
+      env:
+        BOOK_VERSION: ${{ steps.get_book_version.outputs.BOOK_VERSION }}
+      
+    - name: Upload book to S3
+      run: sudo apt-get install -y awscli && aws s3 cp etc/ebook/output/serverless-stack.pdf s3://anomaly/ServerlessStack/ServerlessStack-${{ steps.get_book_version.outputs.BOOK_VERSION }}.pdf
+      if: ${{ startsWith(steps.get_ref.outputs.REF, 'v' ) }}
+            
+    - name: Archive pdf
+      uses: actions/upload-artifact@v2
+      with:
+        name: pdf
+        path: etc/ebook/output/serverless-stack.pdf

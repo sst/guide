@@ -63,7 +63,7 @@ $ yarn
 
 The directory structure roughly looks like:
 
-```
+``` txt
 package.json
 /libs
 /packages

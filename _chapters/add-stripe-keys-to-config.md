@@ -12,7 +12,7 @@ Back in the [Setup a Stripe account]({% link _chapters/setup-a-stripe-account.md
 
 {%change%} Add the following line to the `export` block of `src/config.js`.
 
-```
+``` txt
 STRIPE_KEY: "YOUR_STRIPE_PUBLIC_KEY",
 ```
 

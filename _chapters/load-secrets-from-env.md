@@ -55,7 +55,7 @@ A quick explanation on the above:
 
 Now we need to ensure that we don't commit our `.env` file to git. The starter project that we are using has the following in the `.gitignore`.
 
-```
+``` txt
 # Env
 .env
 ```

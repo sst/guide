@@ -13,7 +13,7 @@ Before we deploy our APIs we need to do one last thing to set them up. We need t
 
 Consequently, debugging such errors can be really hard. Our client won't be able to see the error message and instead will be presented with something like this:
 
-```
+``` txt
 No 'Access-Control-Allow-Origin' header is present on the requested resource
 ```
 
