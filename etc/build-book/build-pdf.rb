@@ -171,7 +171,7 @@ def merge_chapters
     File.open('output/pdf.md', 'w') do |file|
 
         # Add metadata and introduction
-        file << File.read('metadata-pdf.md')
+        file << File.read('metadata-pdf.md').gsub('BOOK_VERSION', ENV['GIT_TAG'] || '')
         file << "\n\n"
 
         # Load sections from chapter list
@@ -202,9 +202,9 @@ def merge_chapters
           # Handle each section
           section['chapters'].each do |chapter_data|
 # TODO testing with first two chapters
-if (chapter_data["url"] != '/chapters/setup-error-logging-in-serverless.html')
-  next
-end
+#if (chapter_data["url"] != '/chapters/setup-error-logging-in-serverless.html')
+#  next
+#end
             file << build_chapter(chapter_data)
           end
         end
