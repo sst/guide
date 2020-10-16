@@ -93,4 +93,4 @@ And to run your tests using the same Babel config used in the plugin add the fol
 
 You can read more on the advanced options over on [the GitHub README](https://github.com/AnomalyInnovations/serverless-bundle/blob/master/README.md).
 
-Our ever popular [Serverless Node.js Starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter) has now been updated to use the serverless-bundle plugin.
+Our ever popular [Serverless Node.js Starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter) has now been updated to use the serverless-bundle plugin. And we also have a TypeScript version of our starter — [Serverless TypeScript Starter](https://github.com/AnomalyInnovations/serverless-typescript-starter)
