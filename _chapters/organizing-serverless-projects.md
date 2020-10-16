@@ -50,7 +50,7 @@ The microservice pattern on the other hand is a concept of keeping each of your 
 
 The directory structure of your entire application under the microservice + monorepo pattern would look something like this.
 
-```
+``` txt
 |- services/
 |--- billing-api/
 |--- notes-api/
@@ -100,7 +100,7 @@ A couple of things to watch out for with the multi-repo pattern.
 
 2. Due to the friction involved in code sharing, we typically see each service (or repo) grow in the number of Lambda functions. This can cause you to hit the CloudFormation resource limit and get a deployment error that looks like:
 
-   ```
+   ``` txt
    Error --------------------------------------------------
 
    The CloudFormation template is invalid: Template format error: Number of resources, 201, is greater than maximum allowed, 200
@@ -114,7 +114,7 @@ Finally, it's worth looking at the less common monolith pattern.
 
 The monolith pattern involves taking advantage of API Gateway's `{proxy+}` and `ANY` method to route all the requests to a single Lambda function. In this Lambda function you can potentially run an application server like [Express](https://expressjs.com). So as an example, all the API requests below would be handled by the same Lambda function.
 
-```
+``` txt
 GET https://api.example.com/notes
 GET https://api.example.com/notes/{id}
 POST https://api.example.com/notes
@@ -147,7 +147,7 @@ It's not the goal of this section to evaluate which setup is better. Instead, I 
 
 In **serverless-stack-demo-ext-resources**, you have:
 
-```
+``` txt
 /
   lib/
     CognitoStack.js
@@ -157,7 +157,7 @@ In **serverless-stack-demo-ext-resources**, you have:
 
 And in **serverless-stack-demo-ext-api**, you have:
 
-```
+``` txt
 /
   libs/
   services/

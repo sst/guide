@@ -14,7 +14,3 @@ footer-left: "serverless-stack.com"
 logo: "logo.png"
 logo-width: "110"
 ---
-
-# Introduction
-
-**Serverless Stack** is an open source guide for building full-stack production ready apps using Serverless and React on AWS. Create a note taking app from scratch using the Serverless Framework and Create React App. Follow our step-by-step tutorials with screenshots and code samples. And use our forums if you have any questions.

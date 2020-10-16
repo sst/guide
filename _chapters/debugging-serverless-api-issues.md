@@ -24,7 +24,7 @@ This chapter assumes you have turned on CloudWatch logging for API Gateway and t
 
 The first and most basic issue we see is when the API Gateway endpoint that is requested is invalid. An API Gateway endpoint usually looks something like this:
 
-```
+``` txt
 https://API_ID.execute-api.REGION.amazonaws.com/STAGE/PATH
 ```
 

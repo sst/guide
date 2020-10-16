@@ -258,6 +258,26 @@ $endif$
 %   \endgroup
 % }
 
+%
+% Table of content
+%
+\usepackage{titletoc}
+\titlecontents{part}[2.3em]
+  {}
+  {\bfseries\contentslabel{2em}}
+  {\hspace*{-2.3em}}
+  {\titlerule*[1pc]{ }\contentspage}
+\titlecontents{chapter}[4.6em]
+  {}
+  {\bfseries\contentslabel{2em}}
+  {\hspace*{-2.3em}}
+  {\titlerule*[1pc]{.}\contentspage}
+\titlecontents{section}[4.6em]
+  {}
+  {\bfseries\contentslabel{2em}}
+  {\hspace*{-2.3em}\bfseries}
+  {\titlerule*[1pc]{.}\contentspage}
+
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
@@ -818,8 +838,8 @@ $endif$
 
 $for(include-before)$
 $include-before$
-
 $endfor$
+
 $if(toc)$
 $if(toc-title)$
 \renewcommand*\contentsname{$toc-title$}

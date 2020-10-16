@@ -1,50 +1,55 @@
 # ===== PDF generation ======================================================
 #
-# 1. Copy _chapters content to temporal folder
-# 2. Merge all chapters in one file and aply modifications with build-book.rb
-# 3. Run pandoc with pdf and epub options
+# 1. Merge all chapters in one file and aply modifications with build-book.rb
+# 2. Run pandoc with pdf and epub options
 #
 # ===== Usage ===============================================================
 #
 # make                   generate pdf and epub
+# make build             merge all chapters
 # make pdf               generate pdf
 # make ebup              generate epub
-# make test              use a short file as input for quick generation
-# make test-pdf
-# make test-epub
-# make clean             delete temporal folder
 # ===========================================================================
 
+OUTPUT_DIR = output
+FILE_NAME = serverless-stack
 
-PDF_NAME = serverless-stack
-PDF_OPTIONS = --pdf-engine=xelatex --from=markdown -V book -V classoption=oneside --toc --toc-depth=2 --top-level-division=chapter
-PDF_FONTS = -V mainfont="Source Sans Pro" -V monofont="IBM Plex Mono" -V monofontoptions="Scale=0.9"
-PDF_STYLE = --template="./eisvogel" --highlight-style="tango" -V urlcolor="serverless-purple"
+all: build-pdf build-epub pdf epub
 
-all: merge_chapters pdf epub clean
+build-pdf:
+	ruby build-pdf.rb
 
-merge_chapters:
-	mkdir -p _temp
-	cp -r ../../_chapters/* _temp/
-	ruby build-book.rb
+build-epub:
+	ruby build-epub.rb
 
-pdf: full-book.md
-	pandoc full-book.md -o $(PDF_NAME).pdf $(PDF_OPTIONS) $(PDF_FONTS) $(PDF_STYLE)
+pdf:
+	pandoc $(OUTPUT_DIR)/pdf.md -o $(OUTPUT_DIR)/$(FILE_NAME).pdf \
+		--pdf-engine=xelatex \
+		--from=markdown \
+		-V book \
+		-V classoption=oneside \
+		--toc \
+		--toc-depth=1 \
+		--top-level-division=chapter \
+		-V mainfont="Lato" \
+		-V monofont="Source Code Pro" \
+		-V monofontoptions="Scale=0.9" \
+		-V sansfont="PT Serif" \
+		--template="./eisvogel" \
+		--highlight-style="tango" \
+		-V urlcolor="serverless-purple" \
+		--fail-if-warnings
 
-epub: full-book.md
-	pandoc full-book.md -o $(PDF_NAME).epub
+epub:
+	pandoc metadata-epub.txt $(OUTPUT_DIR)/epub.md -o $(OUTPUT_DIR)/$(FILE_NAME).epub \
+		--epub-embed-font='fonts/Lato/*.ttf' \
+		--epub-embed-font='fonts/PTSerif/*.ttf' \
+		--epub-embed-font='fonts/SourceCodePro/*.ttf' \
+		--epub-chapter-level=2 \
+		--toc \
+		--toc-depth=2 \
+		--top-level-division=chapter \
+		--highlight-style="tango" \
+		--fail-if-warnings
 
-test: test-book.md
-	pandoc test-book.md -o $(PDF_NAME)-test.pdf $(PDF_OPTIONS) $(PDF_FONTS) $(PDF_STYLE)
-	pandoc test-book.md -o $(PDF_NAME).epub
-
-test-pdf: test-book.md
-	pandoc test-book.md -o $(PDF_NAME)-test.pdf $(PDF_OPTIONS) $(PDF_FONTS) $(PDF_STYLE)
-
-test-epub: test-book.md
-	pandoc test-book.md -o $(PDF_NAME)-test.epub
-
-clean:
-	rm -fr _temp
-
-.PHONY: all merge_chapters pdf epub clean test test-epub test-book
+.PHONY: all build pdf epub

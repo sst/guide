@@ -80,7 +80,7 @@ Make sure to replace `YOUR_S3_DEPLOY_BUCKET_NAME`, `YOUR_CF_DISTRIBUTION_ID`, an
 
 For Windows users, if `postdeploy` returns an error like.
 
-```
+``` txt
 An error occurred (InvalidArgument) when calling the CreateInvalidation operation: Your request contains one or more invalid invalidation paths.
 ```
 

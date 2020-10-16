@@ -42,7 +42,7 @@ export async function main(event, context, callback) {
 
 The `event.requestContext.identity.cognitoAuthenticationProvider` gives us a string that contains the authentication details from the User Pool. Note that this info will be different depending on the authentication provider you are using. This string has the following format:
 
-```
+``` txt
 cognito-idp.us-east-1.amazonaws.com/us-east-1_xxxxxxxxx,cognito-idp.us-east-1.amazonaws.com/us-east-1_aaaaaaaaa:CognitoSignIn:qqqqqqqq-1111-2222-3333-rrrrrrrrrrrr
 ```
 

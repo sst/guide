@@ -27,7 +27,7 @@ Once your repository is created, copy the repository URL. We'll need this soon.
 
 In our case the URL is:
 
-```
+``` txt
 https://github.com/jayair/serverless-stack-api.git
 ```
 
