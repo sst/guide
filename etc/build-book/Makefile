@@ -14,15 +14,19 @@
 OUTPUT_DIR = output
 FILE_NAME = serverless-stack
 
-all: build-pdf build-epub pdf epub
+pdf: prepare merge-pdf build-pdf
+epub: prepare merge-epub build-epub
 
-build-pdf:
+prepare:
+	mkdir -p $(OUTPUT_DIR)
+
+merge-pdf:
 	ruby build-pdf.rb
 
-build-epub:
+merge-epub:
 	ruby build-epub.rb
 
-pdf:
+build-pdf:
 	pandoc $(OUTPUT_DIR)/pdf.md -o $(OUTPUT_DIR)/$(FILE_NAME).pdf \
 		--pdf-engine=xelatex \
 		--from=markdown \
@@ -40,7 +44,7 @@ pdf:
 		-V urlcolor="serverless-purple" \
 		--fail-if-warnings
 
-epub:
+build-epub:
 	pandoc metadata-epub.txt $(OUTPUT_DIR)/epub.md -o $(OUTPUT_DIR)/$(FILE_NAME).epub \
 		--epub-embed-font='fonts/Lato/*.ttf' \
 		--epub-embed-font='fonts/PTSerif/*.ttf' \
