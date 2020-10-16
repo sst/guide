@@ -11,7 +11,7 @@ def discourse_link comments_id
 \\awesomebox[serverless-purple]{1pt}{\\faComments}{serverless-purple}{
 \\textbf{Help and discussion}
 
-View the \\href{#{$config['forum_url']+$config['forum_thread_prefix']}#{comments_id}}{comments for this chapter on our forums →}
+View the \\href{#{$config['forum_url']+$config['forum_thread_prefix']}#{comments_id}}{comments for this chapter on our forums}
 }
 "
 end
@@ -65,7 +65,7 @@ def github_code_link code_link, chapter_name
 \\awesomebox[serverless-purple]{1pt}{\\faGithub}{serverless-purple}{
 \\textbf{#{text}}
 
-\\href{#{link}}{#{link_text} →}
+\\href{#{link}}{#{link_text}}
 }"
 end
 
