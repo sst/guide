@@ -142,7 +142,7 @@ def build_chapter chapter_data
 
     # Replace Unicode characters
     chapter = chapter
-      .gsub('→', '\faLongArrowAltRight')
+      .gsub('&rarr;', '\faLongArrowAltRight')
       .gsub('⇒', '\faLongArrowAltRight')
       .gsub('✓', '\faCheck')
 
