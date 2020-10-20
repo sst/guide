@@ -75,12 +75,11 @@ This should be straightforward. We are adding 3 tests. They are testing the diff
 
 You might have noticed a `handler.test.js` file in the `tests/` directory. This was a part of our starter that we can now remove.
 
-### Remove Unused Files
+### Remove Template Files
 
 {%change%} Remove the starter files by running the following command in the root of our project.
 
 ``` bash
-$ rm handler.js
 $ rm tests/handler.test.js
 ```
 

@@ -8,6 +8,8 @@ description: To interact with AWS using some command line tools we need to creat
 comments_id: create-an-iam-user/92
 ---
 
+Once we have an AWS account, we'll need to create an IAM user to programmatically interact with it. We'll be using this later to configure our AWS CLI (command-line interface).
+
 Amazon IAM (Identity and Access Management) enables you to manage users and user permissions in AWS. You can create one or more IAM users in your AWS account. You might create an IAM user for someone who needs access to your AWS console, or when you have a new application that needs to make API calls to AWS. This is to add an extra layer of security to your AWS account.
 
 In this chapter, we are going to create a new IAM user for a couple of the AWS related tools we are going to be using later.
@@ -54,8 +56,8 @@ Select **Show** to reveal **Secret access key**.
 
 ![Added IAM User Screenshot](/assets/iam-user/added-iam-user.png)
 
-Take a note of the **Access key ID** and **Secret access key**. We will be needing this later.
+Take a note of the **Access key ID** and **Secret access key**. We will be needing this in the next chapter.
 
 ![IAM User Credentials Screenshot](/assets/iam-user/iam-user-credentials.png)
 
-The concept of IAM pops up very frequently when working with AWS services. So it is worth taking a better look at what IAM is and how it can help us secure our serverless setup.
+Now let's configure our AWS CLI so we can deploy our applications from our command line.

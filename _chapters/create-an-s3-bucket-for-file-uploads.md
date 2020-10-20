@@ -73,5 +73,4 @@ Note that you can edit this configuration to use your own domain or a list of do
 
 ![Save S3 Bucket CORS Configuration screenshot](/assets/s3/save-s3-bucket-cors-configuration.png)
 
-Now that our S3 bucket is ready, let's get set up to handle user authentication.
-
+Now we are ready to create our Serverless APIs for our app.

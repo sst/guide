@@ -22,26 +22,23 @@ export const main = handler(async (event, context) => {
   const params = {
     TableName: process.env.tableName,
     // 'Key' defines the partition key and sort key of the item to be retrieved
-    // - 'userId': Identity Pool identity id of the authenticated user
-    // - 'noteId': path parameter
     Key: {
-      userId: event.requestContext.identity.cognitoIdentityId,
-      noteId: event.pathParameters.id
-    }
+      userId: "123", // The id of the author
+      noteId: event.pathParameters.id, // The id of the note from the path
+    },
   };
 
   const result = await dynamoDb.get(params);
-  if ( ! result.Item) {
+  if (!result.Item) {
     throw new Error("Item not found.");
   }
 
   // Return the retrieved item
   return result.Item;
 });
-
 ```
 
-This follows exactly the same structure as our previous `create.js` function. The major difference here is that we are doing a `dynamoDb.get(params)` to get a note object given the `noteId` and `userId` that is passed in through the request.
+This follows exactly the same structure as our previous `create.js` function. The major difference here is that we are doing a `dynamoDb.get(params)` to get a note object given the `noteId` (still hardcoded) and `userId` that is passed in through the request.
 
 ### Configure the API Endpoint
 
@@ -57,13 +54,11 @@ This follows exactly the same structure as our previous `create.js` function. Th
       - http:
           path: notes/{id}
           method: get
-          cors: true
-          authorizer: aws_iam
 ```
 
 Make sure that this block is indented exactly the same way as the preceding `create` block.
 
-This defines our get note API. It adds a GET request handler with the endpoint `/notes/{id}`.
+This defines our get note API. It adds a GET request handler with the endpoint `/notes/{id}`. The `{id}` here translates to the `event.pathParameters.id` that we used in our function above.
 
 ### Test
 
@@ -74,12 +69,7 @@ To test our get note API we need to mock passing in the `noteId` parameter. We a
 ``` json
 {
   "pathParameters": {
-    "id": "578eb840-f70f-11e6-9d1a-1359b3b22944"
-  },
-  "requestContext": {
-    "identity": {
-      "cognitoIdentityId": "USER-SUB-1234"
-    }
+    "id": "a63c5450-1274-11eb-81db-b9d1e2c85f15"
   }
 }
 ```
@@ -94,12 +84,8 @@ The response should look similar to this.
 
 ``` bash
 {
-  statusCode: 200,
-  headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Credentials': true
-  },
-  body: '{"attachment":"hello.jpg","content":"hello world","createdAt":1487800950620,"noteId":"578eb840-f70f-11e6-9d1a-1359b3b22944","userId":"USER-SUB-1234"}'
+    "statusCode": 200,
+    "body": "{\"attachment\":\"hello.jpg\",\"content\":\"hello world\",\"createdAt\":1603157777941,\"noteId\":\"a63c5450-1274-11eb-81db-b9d1e2c85f15\",\"userId\":\"123\"}"
 }
 ```
 
