@@ -34,26 +34,50 @@ jobs:
     - run: sudo cp etc/ebook/fonts/Lato/*.ttf ~/.fonts
     - run: sudo cp etc/ebook/fonts/PTSerif/*.ttf ~/.fonts
     - run: sudo cp etc/ebook/fonts/SourceCodePro/*.ttf ~/.fonts
-
     - run: cd etc/ebook && make prepare
+
+    # Merge PDF
     - run: cd etc/ebook && make merge-pdf
       env:
         BOOK_VERSION: ${{ steps.get_book_version.outputs.BOOK_VERSION }}
-
     - name: Archive pdf md
       uses: actions/upload-artifact@v2
       with:
         name: pdf.md
         path: etc/ebook/output/pdf.md
       
+    # Merge EPUB
+    - run: cd etc/ebook && make merge-epub
+      env:
+        BOOK_VERSION: ${{ steps.get_book_version.outputs.BOOK_VERSION }}
+    - name: Archive epub md
+      uses: actions/upload-artifact@v2
+      with:
+        name: epub.md
+        path: etc/ebook/output/epub.md
+      
+    # Generate PDF
     - run: cd etc/ebook && make build-pdf
-            
     - name: Archive pdf
       uses: actions/upload-artifact@v2
       with:
         name: serverless-stack.pdf
         path: etc/ebook/output/serverless-stack.pdf
       
+    # Generate EPUB
+    - run: cd etc/ebook && make build-epub
+    - name: Archive epub
+      uses: actions/upload-artifact@v2
+      with:
+        name: serverless-stack.epub
+        path: etc/ebook/output/serverless-stack.epub
+      
+    # Upload PDF
     - name: Upload book to S3
       run: sudo apt-get install -y awscli && aws s3 cp etc/ebook/output/serverless-stack.pdf s3://anomaly/ServerlessStack/ServerlessStack-${{ steps.get_book_version.outputs.BOOK_VERSION }}.pdf
+      if: ${{ startsWith(steps.get_ref.outputs.REF, 'v' ) }}
+
+    # Upload EPUB
+    - name: Upload book to S3
+      run: sudo apt-get install -y awscli && aws s3 cp etc/ebook/output/serverless-stack.epub s3://anomaly/ServerlessStack/ServerlessStack-${{ steps.get_book_version.outputs.BOOK_VERSION }}.epub
       if: ${{ startsWith(steps.get_ref.outputs.REF, 'v' ) }}

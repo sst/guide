@@ -95,6 +95,9 @@ def build_chapter chapter_data
       end
     end
 
+    #################
+    # Replace content
+    #################
     # Replace front matter data with only markdown title
     chapter = chapter.gsub(/---[\s\S]*?title:([^\r\n]*)[\s\S]*?---/, "# \\1\n\\label{chap:#{chapter_name}}")
 
@@ -107,6 +110,9 @@ def build_chapter chapter_data
     # Remove class in table
     chapter = chapter.gsub('{: .cost-table }', '')
 
+    # Remove {% raw %} and {% endraw %} tags
+    chapter = chapter.gsub(/{% (raw|endraw) %}/, '')
+
     # Replace site variables
     $config.each do |variable|
       chapter = chapter.gsub(/{{ site.#{variable[0].to_s} }}/, variable[1].to_s)
@@ -118,9 +124,9 @@ def build_chapter chapter_data
       end
     end
 
-    #################
-    # Replace links
-    #################
+    # Replace codeblock change icon
+    chapter = chapter.gsub(/\{%\s*change\s*%}/, '\includegraphics[width=2cm, viewport=0 10 146 42]{../../assets/change-marker.png}')
+
     # Link to chapters (note: 'hyperlink' did not work because the link pointed to half a page
     # above the actual heading. Need to add a label for each chapter and link to the chapter label)
     #chapter = chapter.gsub(/\[([^\]]*)\]\({% link _chapters\/(.*?)\.md %}\)/, '\hyperlink{\2}{\1}')
@@ -132,7 +138,6 @@ def build_chapter chapter_data
     chapter = chapter.gsub(/\{% link ([A-Za-z0-9][^.]*)\.md %}/, "#{$config['url']}/\\1")
 
     # Discourse link
-    chapter = chapter.gsub(/\{%\s*change\s*%}/, '\includegraphics[width=2cm, viewport=0 10 146 42]{../../assets/change-marker.png}')
     chapter << discourse_link(chapter_front_matter['comments_id'])
 
     # GitHub link
@@ -171,8 +176,7 @@ def merge_chapters
     File.open('output/pdf.md', 'w') do |file|
 
         # Add metadata and introduction
-        file << File.read('metadata-pdf.md').gsub('BOOK_VERSION', ENV['BOOK_VERSION'] || '')
-        file << "\n\n"
+        file << File.read('metadata-pdf.md') << "\n\n"
 
         # Load sections from chapter list
         chapter_list = YAML.load_file('../../_data/chapterlist.yml')
@@ -198,6 +202,7 @@ def merge_chapters
           # Handle each section
           section['chapters'].each do |chapter_data|
             # Uncomment to generate for specific chapters
+            # TODO
             #if (chapter_data["url"] != '/chapters/setup-error-logging-in-serverless.html')
             #  next
             #end

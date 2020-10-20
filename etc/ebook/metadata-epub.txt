@@ -1,15 +1,9 @@
 ---
 title:
 - type: main
-  text: Serverless Stack
-- type: subtitle
   text: Open source guide to building full-stack apps using Serverless and React
-creator:
-- role: author
-  text: Anomaly Innovations
 language: en-US
 stylesheet: epub.css
 toc-title: Contents
-date: October 15, 2020
 
 ...

@@ -17,6 +17,10 @@ FILE_NAME = serverless-stack
 pdf: prepare merge-pdf build-pdf
 epub: prepare merge-epub build-epub
 
+start:
+	docker build -t serverless-stack-ebook .
+	docker run -it --rm --volume "`pwd`/../..:/data" --entrypoint /bin/bash serverless-stack-ebook
+
 prepare:
 	mkdir -p $(OUTPUT_DIR)
 
@@ -42,6 +46,7 @@ build-pdf:
 		--template="./eisvogel" \
 		--highlight-style="tango" \
 		-V urlcolor="serverless-purple" \
+		--metadata date="`date "+%B %e, %Y"` - $(BOOK_VERSION)" \
 		--fail-if-warnings
 
 build-epub:
@@ -50,10 +55,11 @@ build-epub:
 		--epub-embed-font='fonts/PTSerif/*.ttf' \
 		--epub-embed-font='fonts/SourceCodePro/*.ttf' \
 		--epub-chapter-level=2 \
-		--toc \
+		--epub-cover-image='cover.jpeg' \
 		--toc-depth=2 \
 		--top-level-division=chapter \
 		--highlight-style="tango" \
+		--metadata date="`date "+%B %e, %Y"` - $(BOOK_VERSION)" \
 		--fail-if-warnings
 
 .PHONY: all build pdf epub

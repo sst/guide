@@ -112,6 +112,8 @@ code {
   font-size: 100%;
   line-height: inherit;
   white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 pre {
@@ -164,8 +166,6 @@ section.titlepage {
   margin-top: 30%;
 }
 section.titlepage h1.main {
-}
-section.titlepage h1.subtitle {
   font-family: "Lato", serif;
   font-size: 1.5em;
 }
@@ -173,11 +173,57 @@ section.titlepage p.author {
   text-align: left;
 }
 
-
 /* Section title */
 section.level1 h1 {
   text-align: center;
   margin-top: 40%;
   font-size: 2em;
   text-decoration: underline;
+}
+
+/* Image marker */
+img.code-marker {
+  margin-right: 3px;
+  margin-bottom: 2px;
+  width: 68px;
+  height: 21px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+/* GitHub link */
+div.post-checkpoint {
+  display: block;
+  background-color: #e9e4d8;
+  border-radius: 5px;
+  padding: 1px 25px 12px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+div.post-checkpoint p {
+  margin-bottom: 5px;
+  color: #706f6c;
+}
+
+div.post-checkpoint a {
+  font-family: "Source Pro",monospace;
+}
+
+/* Discourse link */
+div.post-links {
+  display: block;
+  background-color: #e9e4d8;
+  border-radius: 5px;
+  padding: 1px 25px 12px;
+  text-align: left;
+}
+
+div.post-links p {
+  margin-bottom: 5px;
+  color: #706f6c;
+}
+
+div.post-links a {
+  font-family: "Source Pro",monospace;
 }
