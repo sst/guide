@@ -79,8 +79,8 @@ The response should look similar to this.
 
 ``` bash
 {
-  statusCode: 200,
-  body: '[{"attachment":"hello.jpg","content":"hello world","createdAt":1487800950620,"noteId":"578eb840-f70f-11e6-9d1a-1359b3b22944","userId":"USER-SUB-1234"}]'
+    "statusCode": 200,
+    "body": "[{\"attachment\":\"hello.jpg\",\"content\":\"hello world\",\"createdAt\":1602891322039,\"noteId\":\"42244c70-1008-11eb-8be9-4b88616c4b39\",\"userId\":\"123\"}]"
 }
 ```
 

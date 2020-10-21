@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Deploy your first Serverless API
+title: Deploy your Hello World API
 date: 2020-10-16 00:00:00
 lang: en
 ref: deploy-your-first-serverless-api
@@ -39,7 +39,7 @@ layers:
   None
 ```
 
-Notice that we have a new GET endpoint created. In our case it points to — [`https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod/hello`](https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod/hello)
+Notice that we have a new GET endpoint created. In our case it points to — [https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod/hello](https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod/hello)
 
 If you head over to that URL, you should see something like this:
 

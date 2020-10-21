@@ -36,18 +36,16 @@ setup-backend:
       subchapters:
         - page: Add support for ES6 and TypeScript
           url: /chapters/add-support-for-es6-and-typescript.html
-    - page: Deploy your first Serverless API
-      url: /chapters/deploy-your-first-serverless-api.html
+    - page: Deploy your Hello World API
+      url: /chapters/deploy-your-hello-world-api.html
     - page: Initialize the backend repo
       url: /chapters/initialize-the-backend-repo.html
 
 build-api:
-  title: Building a Serverless REST API
+  title: Building a Serverless API
   chapters:
     - page: Create a DynamoDB table
       url: /chapters/create-a-dynamodb-table.html
-    - page: Create an S3 bucket for file uploads
-      url: /chapters/create-an-s3-bucket-for-file-uploads.html
     - page: Add a create note API
       url: /chapters/add-a-create-note-api.html
     - page: Add a get note API
@@ -58,8 +56,8 @@ build-api:
       url: /chapters/add-an-update-note-api.html
     - page: Add a delete note API
       url: /chapters/add-a-delete-note-api.html
-    - page: Deploy your first Serverless REST API
-      url: /chapters/
+    - page: Deploy your Serverless REST API
+      url: /chapters/deploy-your-serverless-rest-api.html
 
 users-auth:
   title: Users and Authentication
@@ -74,6 +72,8 @@ users-auth:
       subchapters:
         - page: What is an ARN
           url: /chapters/what-is-an-arn.html
+    - page: Create an S3 bucket for file uploads
+      url: /chapters/create-an-s3-bucket-for-file-uploads.html
     - page: Create a Cognito identity pool
       url: /chapters/create-a-cognito-identity-pool.html
       subchapters:

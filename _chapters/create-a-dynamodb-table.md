@@ -63,6 +63,6 @@ The `notes` table has now been created. If you find yourself stuck with the **Ta
 
 It is also a good idea to set up backups for your DynamoDB table, especially if you are planning to use it in production. We cover this in an extra-credit chapter, [Backups in DynamoDB]({% link _chapters/backups-in-dynamodb.md %}).
 
-Next, we'll set up an S3 bucket to handle file uploads. Since our users are going to be uploading files as attachments for their notes.
+Now we are ready to start building a Serverless API for our notes app!
 
 [dynamodb-components]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html

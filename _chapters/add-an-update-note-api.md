@@ -91,8 +91,8 @@ The response should look similar to this.
 
 ``` bash
 {
-  statusCode: 200,
-  body: '{"status":true}'
+    "statusCode": 200,
+    "body": "{\"status\":true}"
 }
 ```
 
