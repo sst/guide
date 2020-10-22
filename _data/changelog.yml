@@ -1,4 +1,8 @@
 current:
+  title: "Updating to new eBook format"
+  desc: "Oct 21, 2020: Generating new eBook using Pandoc."
+
+v5-0:
   title: "Using CDK to configure infrastructure resources"
   desc: "Oct 7, 2020: Moving from CloudFormation to AWS CDK to configure infrastructure resources. And using Serverless Stack Toolkit (SST) to deploy CDK alongside Serverless Framework."
 

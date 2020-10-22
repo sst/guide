@@ -100,17 +100,13 @@ Finally, submit a PR to the tutorial repo with the new changes. We'll review it,
 
 Currently we do a lot of manual work to publish updates and maintain the tutorial. You can help by contributing to improve the process. Feel free to get in touch if you're interested in helping out. Here is roughly what we need help with:
 
-- Generating the Ebook
-
-  The PDF version of Serverless Stack is very popular. Unfortunately it is generated manually using a set of AppleScripts stored in the `etc/` directory. It opens up Safari and prints to PDF. It would be much better if we could use a headless Chrome script to generate this. In addition to the PDF we need to figure out how to generate the EPUB format.
-
-- Creating a pipeline
-
-  We would like to create a Circle CI setup that automatically generates the PDF and uploads the latest version to S3 (where it is hosted) every time a new release is created to the tutorial. We would also like to run a simple suite of tests to ensure that the changes to the demo app repos are correct.
-
 - Compress screenshots
 
   The images for the screenshots are quite large. It would be ideal if they can be compressed as a part of the build process.
+
+- ~~Generating the Ebook~~
+
+- ~~Creating a pipeline~~
 
 ### Translating to Other Languages
 

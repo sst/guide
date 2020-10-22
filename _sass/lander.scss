@@ -267,6 +267,10 @@
       & img {
         width: 90px;
         height: auto;
+        filter: grayscale(100%);
+        &:hover {
+          filter: none;
+        }
       }
       &.tall img {
         width: auto;
@@ -536,7 +540,7 @@
       }
 
       &.the-basics {
-        max-height: 2203px;
+        max-height: 2083px;
 
         @include media-query($on-palm) {
           max-height: 1.5 * $max-height;
