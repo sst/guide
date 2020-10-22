@@ -10,6 +10,7 @@ bodypage-color: "F2EFE8"
 header-left: "\\leftmark"
 header-right: "Serverless Stack"
 footer-left: "serverless-stack.com"
+caption-justification: "centering"
 logo: "logo.png"
 logo-width: "110"
 ---

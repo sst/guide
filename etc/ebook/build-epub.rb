@@ -53,7 +53,7 @@ def github_code_link code_link, chapter_name
         link = "#{backend_mono_github_repo}"
 
     elsif (code_link === 'facebook-login')
-        link_text = "Mono-repo Backend Source"
+        link_text = "Facebook Login Frontend Source"
         link = "#{frontend_fb_login_github_repo}"
 
     elsif (code_link === 'user-management')
