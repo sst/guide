@@ -1,4 +1,8 @@
 current:
+  title: "Fixing encoding issue in eBook"
+  desc: "Oct 23, 2020: Generating new eBook version to fix encoding issues."
+
+v5-0-1:
   title: "Updating to new eBook format"
   desc: "Oct 21, 2020: Generating new eBook using Pandoc."
 
