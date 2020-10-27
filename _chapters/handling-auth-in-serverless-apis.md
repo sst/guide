@@ -126,3 +126,5 @@ It's worth quickly mentioning that there are other ways to secure your APIs. We 
 You can also directly connect the User Pool to API Gateway. The downside with that is that you might not be able to manage access control centrally to the S3 bucket (or any other AWS resources in the future).
 
 Finally, you can manage your users and authentication yourself. This is a little bit more complicated and we are not covering it here. Though we might expand on it later.
+
+Now that we've got a good idea how we are going to handle users and authentication in our Serverless app, let's get started with creating a Cognito User Pool.

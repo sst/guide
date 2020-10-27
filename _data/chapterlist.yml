@@ -62,23 +62,17 @@ build-api:
 users-auth:
   title: Users and Authentication
   chapters:
+    - page: Handling Auth in Serverless APIs
+      url: /chapters/handling-auth-in-serverless-apis.html
     - page: Create a Cognito user pool
       url: /chapters/create-a-cognito-user-pool.html
       subchapters:
         - page: Create a Cognito test user
           url: /chapters/create-a-cognito-test-user.html
-    - page: What is IAM
-      url: /chapters/what-is-iam.html
-      subchapters:
-        - page: What is an ARN
-          url: /chapters/what-is-an-arn.html
     - page: Create an S3 bucket for file uploads
       url: /chapters/create-an-s3-bucket-for-file-uploads.html
     - page: Create a Cognito identity pool
       url: /chapters/create-a-cognito-identity-pool.html
-      subchapters:
-        - page: Cognito user pool vs identity pool
-          url: /chapters/cognito-user-pool-vs-identity-pool.html
     - page: Secure the APIs
       url: /chapters/secure-the-apis.html
     - page: Deploy the APIs
@@ -115,6 +109,8 @@ cors:
       url: /chapters/handle-cors-in-lambda-functions.html
     - page: Handle CORS in API Gateway
       url: /chapters/
+    - page: Handle CORS in S3 for File Uploads
+      url: /chapters/handle-cors-in-s3-for-file-uploads.html
     - page: Handle API Gateway CORS errors
       url: /chapters/handle-api-gateway-cors-errors.html
 
@@ -625,6 +621,12 @@ best-practices-conclusion:
 extra-backend:
   title: Serverless
   chapters:
+    - page: What is IAM
+      url: /chapters/what-is-iam.html
+    - page: What is an ARN
+      url: /chapters/what-is-an-arn.html
+    - page: Cognito user pool vs identity pool
+      url: /chapters/cognito-user-pool-vs-identity-pool.html
     - page: API Gateway and Lambda Logs
       url: /chapters/api-gateway-and-lambda-logs.html
     - page: Debugging Serverless API Issues

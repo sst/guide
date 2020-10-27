@@ -40,37 +40,6 @@ Step through the next steps and leave the defaults by clicking **Next**, and the
 ![Set S3 Bucket Permissions screenshot](/assets/s3/set-s3-bucket-permissions.png)
 ![Review S3 Bucket screenshot](/assets/s3/review-s3-bucket.png)
 
-### Enable CORS
+This should create your new S3 bucket.
 
-In the notes app we'll be building, users will be uploading files to the bucket we just created. And since our app will be served through our custom domain, it'll be communicating across domains while it does the uploads. By default, S3 does not allow its resources to be accessed from a different domain. However, cross-origin resource sharing (CORS) defines a way for client web applications that are loaded in one domain to interact with resources in a different domain. Let's enable CORS for our S3 bucket.
-
-Select the bucket we just created.
-
-![Select Created S3 Bucket screenshot](/assets/s3/select-created-s3-bucket.png)
-
-Select the **Permissions** tab, then select **CORS configuration**.
-
-![Select S3 Bucket CORS Configuration screenshot](/assets/s3/select-s3-bucket-cors-configuration.png)
-
-Add the following CORS configuration into the editor, then hit **Save**.
-
-``` xml
-<CORSConfiguration>
-	<CORSRule>
-		<AllowedOrigin>*</AllowedOrigin>
-		<AllowedMethod>GET</AllowedMethod>
-		<AllowedMethod>PUT</AllowedMethod>
-		<AllowedMethod>POST</AllowedMethod>
-		<AllowedMethod>HEAD</AllowedMethod>
-		<AllowedMethod>DELETE</AllowedMethod>
-		<MaxAgeSeconds>3000</MaxAgeSeconds>
-		<AllowedHeader>*</AllowedHeader>
-	</CORSRule>
-</CORSConfiguration>
-```
-
-Note that you can edit this configuration to use your own domain or a list of domains when you use this in production.
-
-![Save S3 Bucket CORS Configuration screenshot](/assets/s3/save-s3-bucket-cors-configuration.png)
-
-Now we are ready to create our Serverless APIs for our app.
+We now have (almost) all the resources we need for our Serverless backend: API, User Pool, and S3. Next we'll configure our Identity Pool to tie these all together and secure access to them.
