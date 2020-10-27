@@ -77,10 +77,10 @@ jobs:
       
     # Upload PDF
     - name: Upload book to S3
-      run: sudo apt-get install -y awscli && aws s3 cp etc/ebook/output/serverless-stack.pdf s3://anomaly/ServerlessStack/ServerlessStack-${{ steps.get_book_version.outputs.BOOK_VERSION }}.pdf
+      run: sudo apt-get install -y awscli && aws s3 cp etc/ebook/output/serverless-stack.pdf s3://anomaly/ServerlessStack/ServerlessStack-${{ steps.get_book_version.outputs.BOOK_VERSION }}.pdf --acl public-read
       if: ${{ startsWith(steps.get_ref.outputs.REF, 'v' ) }}
 
     # Upload EPUB
     - name: Upload book to S3
-      run: sudo apt-get install -y awscli && aws s3 cp etc/ebook/output/serverless-stack.epub s3://anomaly/ServerlessStack/ServerlessStack-${{ steps.get_book_version.outputs.BOOK_VERSION }}.epub
+      run: sudo apt-get install -y awscli && aws s3 cp etc/ebook/output/serverless-stack.epub s3://anomaly/ServerlessStack/ServerlessStack-${{ steps.get_book_version.outputs.BOOK_VERSION }}.epub --acl public-read
       if: ${{ startsWith(steps.get_ref.outputs.REF, 'v' ) }}
