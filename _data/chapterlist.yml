@@ -28,7 +28,7 @@ setup-aws:
     - page: Configure the AWS CLI
       url: /chapters/configure-the-aws-cli.html
 
-setup-backend:
+setup-serverless:
   title: Setting up a Serverless app
   chapters:
     - page: Set up the Serverless Framework
@@ -41,11 +41,19 @@ setup-backend:
     - page: Initialize the backend repo
       url: /chapters/initialize-the-backend-repo.html
 
-build-api:
-  title: Building a Serverless API
+setup-backend:
+  title: Create your AWS resources
   chapters:
     - page: Create a DynamoDB table
       url: /chapters/create-a-dynamodb-table.html
+    - page: Create an S3 bucket for file uploads
+      url: /chapters/create-an-s3-bucket-for-file-uploads.html
+
+build-api:
+  title: Building a Serverless API
+  chapters:
+    - page: Review our app architecture
+      url: /chapters/review-our-app-architecture.html
     - page: Add a create note API
       url: /chapters/add-a-create-note-api.html
     - page: Add a get note API
@@ -56,11 +64,11 @@ build-api:
       url: /chapters/add-an-update-note-api.html
     - page: Add a delete note API
       url: /chapters/add-a-delete-note-api.html
-    - page: Deploy your Serverless REST API
-      url: /chapters/deploy-your-serverless-rest-api.html
+    - page: Deploy the APIs
+      url: /chapters/deploy-the-apis.html
 
 users-auth:
-  title: Users and Authentication
+  title: Users and authentication
   chapters:
     - page: Handling Auth in Serverless APIs
       url: /chapters/handling-auth-in-serverless-apis.html
@@ -69,19 +77,15 @@ users-auth:
       subchapters:
         - page: Create a Cognito test user
           url: /chapters/create-a-cognito-test-user.html
-    - page: Create an S3 bucket for file uploads
-      url: /chapters/create-an-s3-bucket-for-file-uploads.html
     - page: Create a Cognito identity pool
       url: /chapters/create-a-cognito-identity-pool.html
     - page: Secure the APIs
       url: /chapters/secure-the-apis.html
-    - page: Deploy the APIs
-      url: /chapters/deploy-the-apis.html
     - page: Test the APIs
       url: /chapters/test-the-apis.html
 
 third-party-apis:
-  title: 3rd Party APIs & Secrets
+  title: Secrets and 3rd party APIs
   chapters:
     - page: Working with 3rd party APIs
       url: /chapters/working-with-3rd-party-apis.html
@@ -93,11 +97,10 @@ third-party-apis:
     - page: Load secrets from .env
       url: /chapters/load-secrets-from-env.html
     - page: Test the billing API
-      desc: Deploy the API and test it
       url: /chapters/test-the-billing-api.html
 
 unit-tests:
-  title: Serverless Unit Tests
+  title: Serverless unit tests
   chapters:
     - page: Unit tests in Serverless
       url: /chapters/unit-tests-in-serverless.html
@@ -105,14 +108,12 @@ unit-tests:
 cors:
   title: CORS in Serverless
   chapters:
-    - page: Handle CORS in Lambda functions
-      url: /chapters/handle-cors-in-lambda-functions.html
-    - page: Handle CORS in API Gateway
-      url: /chapters/
-    - page: Handle CORS in S3 for File Uploads
-      url: /chapters/handle-cors-in-s3-for-file-uploads.html
+    - page: Handle CORS in Serverless APIs
+      url: /chapters/handle-cors-in-serverless-apis.html
     - page: Handle API Gateway CORS errors
       url: /chapters/handle-api-gateway-cors-errors.html
+    - page: Handle CORS in S3 for File Uploads
+      url: /chapters/handle-cors-in-s3-for-file-uploads.html
 
 #setup-aws:
 #  title: Set up your AWS account

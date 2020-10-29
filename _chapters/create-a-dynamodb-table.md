@@ -8,9 +8,14 @@ description: Amazon DynamoDB is a fully managed NoSQL database that we are going
 comments_id: create-a-dynamodb-table/139
 ---
 
-We are going to build a REST API for our notes app. It's a simple [CRUD (create, read, update, and delete)](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) API. Meaning that we'll be performing these operations on our database.
+We are going to build a REST API for our notes app. It's a simple [CRUD (create, read, update, and delete)](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) API. Meaning that we'll be performing these operations on our database. We also want our users to be able to upload files as attachments to their notes.
 
-So it makes sense that we first start by thinking about how the data is going to be stored. We are going to use [DynamoDB](https://aws.amazon.com/dynamodb/) to do this.
+So in this section we'll be creating a couple of AWS resources:
+
+1. A database
+2. And a file storage service
+
+Let's first start by thinking about how the data is going to be stored. We are going to use [DynamoDB](https://aws.amazon.com/dynamodb/) to do this.
 
 ### About DynamoDB
 
@@ -63,6 +68,6 @@ The `notes` table has now been created. If you find yourself stuck with the **Ta
 
 It is also a good idea to set up backups for your DynamoDB table, especially if you are planning to use it in production. We cover this in an extra-credit chapter, [Backups in DynamoDB]({% link _chapters/backups-in-dynamodb.md %}).
 
-Now we are ready to start building a Serverless API for our notes app!
+Next let's look at how we are going to store the files that our users upload.
 
 [dynamodb-components]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html

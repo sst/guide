@@ -21,6 +21,7 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
           {% include toc-chapters.html items=site.data.chapterlist.intro id="intro" %}
 
           {% include toc-chapters.html items=site.data.chapterlist.setup-aws id="setup-aws" %}
+          {% include toc-chapters.html items=site.data.chapterlist.setup-serverless id="setup-serverless" %}
           {% include toc-chapters.html items=site.data.chapterlist.setup-backend id="setup-backend" %}
           {% include toc-chapters.html items=site.data.chapterlist.build-api id="build-api" %}
           {% include toc-chapters.html items=site.data.chapterlist.users-auth id="users-auth" %}

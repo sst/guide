@@ -35,4 +35,4 @@ $ aws cognito-idp admin-confirm-sign-up \
   --username admin@example.com
 ```
 
-Now that our User Pool has been configured and ready to use, let's create an S3 bucket that we'll use later for file uploads.
+Now that our User Pool has been configured and ready to use, let's create our Identity Pool to manage access to our AWS resources.

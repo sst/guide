@@ -4,7 +4,7 @@ title: Create an S3 Bucket for File Uploads
 date: 2016-12-27 00:00:00
 lang: en 
 ref: create-an-s3-bucket-for-file-uploads
-description: To allow users to upload files to our serverless app we are going to use Amazon S3 (Simple Storage Service). S3 allows you to store files and organize them into buckets. We are going to create an S3 bucket and enable CORS (cross-origin resource sharing) to ensure that our React.js app can upload files to it.
+description: To allow users to upload files to our serverless app we are going to use Amazon S3 (Simple Storage Service). S3 allows you to store files and organize them into buckets.
 redirect_from: /chapters/create-a-s3-bucket-for-file-uploads.html
 comments_id: create-an-s3-bucket-for-file-uploads/150
 ---
@@ -42,4 +42,4 @@ Step through the next steps and leave the defaults by clicking **Next**, and the
 
 This should create your new S3 bucket.
 
-We now have (almost) all the resources we need for our Serverless backend: API, User Pool, and S3. Next we'll configure our Identity Pool to tie these all together and secure access to them.
+Now before we start working on our Serverless API backend, let's get a quick sense of how all of our resources fit together.

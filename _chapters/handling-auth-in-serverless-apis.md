@@ -17,7 +17,7 @@ These two problems are connected. We need a way to allow users to sign up for ou
 
 In this section we are going to learn to do just that. Starting with getting a understanding of how authentication (and access control) works in the AWS world.
 
-### Public API Architecture
+## Public API Architecture
 
 For reference, here is what we have so far.
 
@@ -45,7 +45,9 @@ Here is the relevant block from our `serverless.yml`.
       Resource: "arn:aws:dynamodb:us-east-1:*:*"
 ```
 
-### Authenticated API Architecture
+For uploading files, our users will directly upload them to the [S3 bucket]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}). While we'll look at how our frontend React app uploads files later in the guide, in this section we need to make sure that we secure access to it as well.
+
+## Authenticated API Architecture
 
 To allow users to sign up for our notes app and to secure our infrastructure, we'll be moving to an architecture that looks something like this.
 
@@ -57,9 +59,7 @@ A couple of quick notes before we jump in:
 
 1. The _Serverless API_ portion in this diagram is exactly the same as the one we looked at before. It's just simplified for the purpose of this diagram.
 
-2. The _S3 Uploads_ part has not been covered yet. It's a [S3 Bucket](https://aws.amazon.com/s3/) that we'll be creating to allow our users to upload attachments with their notes. We'll be looking at it in the coming chapters. 
-
-3. Here the user effectively represents our React app or the _client_.
+2. Here the user effectively represents our React app or the _client_.
 
 #### Cognito User Pool
 
@@ -82,25 +82,13 @@ We've got a couple of chapters to help you better understand IAMs and ARNs in de
 
 But for now our authenticated users use the Auth Role in our Identity Pool to interact with our resources. This will help us ensure that our logged in users can only access our notes API. And not any other API in our AWS account.
 
-#### cognitoIdentityId
-
-When an authenticated user connects to our Serverless API, API Gateway will pass us a `requestContext.identity.cognitoIdentityId` as a part of the `event` object in our Lambda function.
-
-You'll recall a Lambda function has the following format:
-
-``` js
-export function main(event, context) { }
-```
-
-So the `event.requestContext.identity.cognitoIdentityId` will give us the Cognito Identity Pool user id.
-
-### Authentication Flow
+## Authentication Flow
 
 Now that we have the main pieces of our architecture in place, let's look at how it'll work in practice.
 
 #### Sign up
 
-A user will sign up for our notes app by creating a new User Pool account. They'll use their email and password. They'll be sent a code to verify their email. This will be handled completely through our React app.
+A user will sign up for our notes app by creating a new User Pool account. They'll use their email and password. They'll be sent a code to verify their email. This will be handled between our React app and User Pool. No other parts of our infrastructure are involved in this.
 
 #### Login
 
@@ -110,14 +98,14 @@ A signed up user can now login using their email and password. Our React app wil
 
 To connect to our API.
 
-1. The React client makes a request to API Gateway.
+1. The React client makes a request to API Gateway secured using IAM Auth.
 2. API Gateway will check with our Identity Pool if the user has authenticated with our User Pool.
 3. It'll use the Auth Role to figure out if this user can access this API.
-4. If everything looks good then our Lambda function is invoked with `event.requestContext.identity.cognitoIdentityId` as the Identity Pool user id.
+4. If everything looks good then our Lambda function is invoked and passes the Identity Pool user id.
 
 #### S3 File Uploads
 
-Our React client will be directly uploading files to our S3 bucket. It'll also check with the Identity Pool to see if we are authenticated with our User Pool. And if the Auth Role has access to upload files to the S3 bucket.
+Our React client will be directly uploading files to our S3 bucket. Similar to our API; it'll also check with the Identity Pool to see if we are authenticated with our User Pool. And if the Auth Role has access to upload files to the S3 bucket.
 
 ### Alternative Authentication Methods
 
