@@ -87,7 +87,15 @@ The code above does a few things.
 
 1. It always renders a **Create a new note** button as the first item in the list (even if the list is empty). We do this by concatenating an array with an empty object with our `notes` array.
 
-2. We render the first line of each note as the `ListGroupItem` header by doing `note.content.trim().split('\n')[0]`.
+   ``` javascript
+   [{}].concat(notes)
+   ```
+
+2. We render the first line of each note as the `ListGroupItem` header.
+
+   ``` javascript
+   note.content.trim().split('\n')[0]
+   ```
 
 3. And the `LinkContainer` component directs our app to each of the items.
 

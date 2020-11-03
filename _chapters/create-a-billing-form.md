@@ -110,6 +110,10 @@ Let's quickly go over what we are doing here:
 
 - To begin with we are going to wrap our component with a Stripe module using the `injectStripe` HOC. This gives our component access to the `props.stripe.createToken` method.
 
+  ``` javascript
+  export default injectStripe(BillingForm)
+  ```
+
 - As for the fields in our form, we have input field of type `number` that allows a user to enter the number of notes they want to store. We also take the name on the credit card. These are stored in the state through the `handleFieldChange` method that we get from our `useFormFields` custom React Hook.
 
 - The credit card number form is provided by the Stripe React SDK through the `CardElement` component that we import in the header.

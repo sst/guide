@@ -57,15 +57,15 @@ import { Auth } from "aws-amplify";
 
 The flow here is pretty simple:
 
-1. In `handleSubmit` we make a call to signup a user. This creates a new user object.
+1. In `handleSubmit` we make a call to signup a user using `Auth.signUp()`. This creates a new user object.
 
 2. Save that user object to the state using `setNewUser`.
 
-3. In `handleConfirmationSubmit` use the confirmation code to confirm the user.
+3. In `handleConfirmationSubmit` use the confirmation code to confirm the user with `Auth.confirmSignUp()`.
 
 4. With the user now confirmed, Cognito now knows that we have a new user that can login to our app.
 
-5. Use the email and password to authenticate exactly the same way we did in the login page.
+5. Use the email and password to authenticate exactly the same way we did in the login page. By calling `Auth.signIn()`.
 
 6. Update the App's context using the `userHasAuthenticated` function.
 

@@ -8,9 +8,13 @@ description: Create React App helps you build React.js app with no configuration
 comments_id: create-a-new-react-js-app/68
 ---
 
-Let's get started with our frontend. We are going to create a single page app using [React.js](https://facebook.github.io/react/). We'll use the [Create React App](https://github.com/facebookincubator/create-react-app) project to set everything up. It is officially supported by the React team and conveniently packages all the dependencies for a React.js project.
+We are now ready to work on our frontend. So far we've built and deployed our backend API and resources. We used Serverless for it. We are now going to build a web app that connects to our backend.
 
-{%change%} Move out of the directory that we were working in for the backend.
+We are going to create a single page app using [React.js](https://facebook.github.io/react/). We'll use the [Create React App](https://github.com/facebookincubator/create-react-app) project to set everything up. It is officially supported by the React team and conveniently packages all the dependencies for a React.js project.
+
+Let's move to a new directory.
+
+{%change%} From the project root of your backend repo, run the following.
 
 ``` bash
 $ cd ../
@@ -45,6 +49,6 @@ This should fire up the newly created app in your browser.
 <title>Scratch - A simple note taking app</title>
 ```
 
-Create React App comes pre-loaded with a pretty convenient yet minimal development environment. It includes live reloading, a testing framework, ES6 support, and [much more](https://github.com/facebookincubator/create-react-app#why-use-this).
+Create React App comes pre-loaded with a pretty convenient yet minimal development environment. It includes live reloading, a testing framework, ES6 support, and much more.
 
 Now we are ready to build our frontend. But just like we did with the backend, let's first create a GitHub repo to store our code.

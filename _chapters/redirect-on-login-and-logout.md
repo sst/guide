@@ -13,7 +13,7 @@ To complete the login flow we are going to need to do two more things.
 1. Redirect the user to the homepage after they login.
 2. And redirect them back to the login page after they logout.
 
-We are going to use the `useHistory` hook that comes with React Router.
+We are going to use the `useHistory` hook that comes with React Router. This will allow us to use the browser's [History API](https://developer.mozilla.org/en-US/docs/Web/API/History).
 
 ### Redirect to Home on Login
 

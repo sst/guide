@@ -9,9 +9,9 @@ code: frontend
 comments_id: configure-aws-amplify/151
 ---
 
-To allow our React app to talk to the AWS resources that we created (in the backend section of the tutorial), we'll be using a library called [AWS Amplify](https://github.com/aws/aws-amplify). 
+In this section we are going to allow our users to login and sign up for our app. To do this we are going to start connecting the AWS resources that we created in the backend section.
 
-AWS Amplify provides a few simple modules (Auth, API, and Storage) to help us easily connect to our backend.
+To do this we'll be using a library called [AWS Amplify](https://github.com/aws/aws-amplify). AWS Amplify provides a few simple modules (Auth, API, and Storage) to help us easily connect to our backend.
 
 ### Install AWS Amplify
 

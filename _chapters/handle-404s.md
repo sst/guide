@@ -8,7 +8,7 @@ description: To handle 404s in a React.js app with React Router v4 we need to se
 comments_id: handle-404s/75
 ---
 
-Now that we know how to handle the basic routes; let's look at handling 404s with the React Router.
+Now that we know how to handle the basic routes; let's look at handling 404s with the React Router. These are cases when a user goes to a URL that we are not explicitly handling. We want to show a helpful sign to our users when this happens.
 
 ### Create a Component
 
@@ -65,4 +65,4 @@ And that's it! Now if you were to switch over to your browser and try clicking o
 
 ![Router 404 page screenshot](/assets/router-404-page.png)
 
-Next up, we are going to configure our app with the info of our backend resources.
+Next up, we are going to allow our users to login and sign up for our app!

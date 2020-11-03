@@ -148,15 +148,35 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 1. Since we need to show the user a form to enter the confirmation code, we are conditionally rendering two forms based on if we have a user object or not.
 
+   ``` coffee
+   {newUser === null ? renderForm() : renderConfirmationForm()}
+   ```
+
 2. We are using the `LoaderButton` component that we created earlier for our submit buttons.
 
 3. Since we have two forms we have two validation functions called `validateForm` and `validateConfirmationForm`.
 
 4. We are setting the `autoFocus` flags on the email and the confirmation code fields.
 
+   ``` coffee
+   <FormControl
+     autoFocus
+     type="email"
+   ...
+   ```
+
 5. For now our `handleSubmit` and `handleConfirmationSubmit` don't do a whole lot besides setting the `isLoading` state and a dummy value for the `newUser` state.
 
 6. And you'll notice we are using the `useFormFields` custom React Hook that we [previously created]({% link _chapters/create-a-custom-react-hook-to-handle-form-fields.md %}) to handle our form fields.
+
+   ``` javascript
+   const [fields, handleFieldChange] = useFormFields({
+     email: "",
+     password: "",
+     confirmPassword: "",
+     confirmationCode: "",
+   });
+   ```
 
 {%change%} Also, let's add a couple of styles in `src/containers/Signup.css`.
 
