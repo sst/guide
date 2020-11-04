@@ -220,6 +220,18 @@ secure-pages:
         - page: Redirect on login
           url: /chapters/redirect-on-login.html
 
+domains-hosting:
+  title: Domains and hosting
+  chapters:
+    - page: Hosting your React app
+      url: /chapters/hosting-your-react-app.html
+    - page: Setting up your project on Netlify
+      url: /chapters/setting-up-your-project-on-netlify.html
+    - page: Purchase a domain with Route 53
+      url: /chapters/purchase-a-domain-with-route-53.html
+    - page: Custom domains in Netlify
+      url: /chapters/custom-domain-in-netlify.html
+
 infrastructure-as-code:
   title: Infrastructure as Code
   chapters:
@@ -275,15 +287,11 @@ deploy-frontend-prod:
           url: /chapters/manage-environments-in-create-react-app.html
         - page: Create a build script
           url: /chapters/create-a-build-script.html
-        - page: Setting up your project on Netlify
-          url: /chapters/setting-up-your-project-on-netlify.html
-        - page: Custom Domains in Netlify
-          url: /chapters/custom-domain-in-netlify.html
     - page: Frontend workflow
       url: /chapters/frontend-workflow.html
 
 monitor-debug-errors:
-  title: Monitoring and debugging errors
+  title: Monitoring and debugging
   chapters:
     - page: Debugging full-stack Serverless apps
       url: /chapters/debugging-full-stack-serverless-apps.html
@@ -460,10 +468,8 @@ extra-frontend:
           url: /chapters/deploy-to-s3.html
         - page: Create a CloudFront distribution
           url: /chapters/create-a-cloudfront-distribution.html
-        - page: Purchase a Domain with Route 53
-          url: /chapters/purchase-a-domain-with-route-53.html
-        - page: Setup SSL
-          url: /chapters/setup-ssl.html
+        - page: Set up a Custom Domain With SSL
+          url: /chapters/setup-a-custom-domain-with-ssl.html
         - page: Set up your domain with CloudFront
           url: /chapters/setup-your-domain-with-cloudfront.html
         - page: Set up www domain redirect

@@ -3,12 +3,12 @@ layout: post
 title: Setting up Your Project on Netlify
 date: 2018-03-27 00:00:00
 lang: en
-description: To automate deployments for our Create React App on Netlify start by signing up for a free account and adding your Git repository.
+description: To host our React app on Netlify start by signing up for a free account and adding your Git repository.
 ref: setting-up-your-project-on-netlify
 comments_id: setting-up-your-project-on-netlify/190
 ---
 
-Now we are going to set our React app on [Netlify](https://www.netlify.com). Start by [creating a free account](https://app.netlify.com/signup).
+Now we are going to host our React app on [Netlify](https://www.netlify.com). Start by [creating a free account](https://app.netlify.com/signup).
 
 ![Signup for Netlify screenshot](/assets/part2/signup-for-netlify.png)
 
@@ -24,7 +24,7 @@ Then pick your project from the list.
 
 ![Select GitHub repo from list screenshot](/assets/part2/select-github-repo-from-list.png)
 
-It'll default the branch to `master`. We can now deploy our app! Hit **Deploy site**.
+The default settings are exactly what we want for our React app. Hit **Deploy site**.
 
 ![Hit Deploy site screenshot](/assets/part2/hit-deploy-site.png)
 
@@ -36,4 +36,6 @@ And you should see your app in action!
 
 ![Netlify deployed notes app screenshot](/assets/part2/netlify-deployed-notes-app.png)
 
-Of course, it is hosted on a Netlify URL. We'll change that by configuring custom domains next.
+Just like that, our app is live! You can share it with your friends and the rest of world!
+
+By default, a site hosted on Netlify uses their domains. But we want to host our notes app on our own domain. To do that, let's first purchase a domain name. We'll be using AWS to do so because we'll be using this same domain later for our Serverless API.

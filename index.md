@@ -34,6 +34,7 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
           {% include toc-chapters.html items=site.data.chapterlist.setup-amplify id="setup-amplify" %}
           {% include toc-chapters.html items=site.data.chapterlist.build-react id="build-react" %}
           {% include toc-chapters.html items=site.data.chapterlist.secure-pages id="secure-pages" %}
+          {% include toc-chapters.html items=site.data.chapterlist.domains-hosting id="domains-hosting" %}
 
           {% include toc-chapters.html items=site.data.chapterlist.infrastructure-as-code id="infrastructure-as-code" %}
 
