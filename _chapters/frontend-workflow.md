@@ -9,7 +9,7 @@ ref: frontend-workflow
 comments_id: frontend-workflow/192
 ---
 
-Now that we have our frontend deployed and configured, let's go over what our development workflow will look like.
+Now that we have our frontend deployments configured, let's go over what our development workflow will look like.
 
 ### Working in a Dev Branch
 

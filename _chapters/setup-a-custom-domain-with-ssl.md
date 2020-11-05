@@ -6,7 +6,7 @@ lang: en
 description: We want to create a custom domain for our React.js app that is hosted on AWS. We also want to enable SSL or HTTPS. To do so, we are going to use Route 53 and request a certificate using the Certificate Manager service from AWS.
 comments_id: chapter-comments-set-up-ssl/1868
 redirect_from: /chapters/setup-ssl.html
-ref: setup-ssl
+ref: setup-a-custom-domain-with-ssl
 ---
 
 Now that our CloudFront Distribution has been created. Let's configure it with a custom domain and setup SSL.

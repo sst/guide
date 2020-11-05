@@ -6,7 +6,7 @@ lang: ko
 description: Git 저장소에 변경 사항을 적용할 때 Serverless Framework 프로젝트를 자동으로 배포하려고합니다. 이를 위해 Seed (https://seed.run)라는 서비스를 사용하여 serverless 배포를 자동화합니다. CI/CD 파이프 라인을 구성하고 환경을 설정합니다.
 context: true
 comments_id: automating-serverless-deployments/174
-ref: automating-serverless-deployments
+ref: creating-a-ci-cd-pipeline-for-serverless
 ---
 
 다음은 우리가 지금까지 구성한 것들을 요약한 내용입니다.:

@@ -212,13 +212,12 @@ secure-pages:
   chapters:
     - page: Set up secure pages
       url: /chapters/setup-secure-pages.html
-      subchapters:
-        - page: Create a route that redirects
-          url: /chapters/create-a-route-that-redirects.html
-        - page: Use the redirect routes
-          url: /chapters/use-the-redirect-routes.html
-        - page: Redirect on login
-          url: /chapters/redirect-on-login.html
+    - page: Create a route that redirects
+      url: /chapters/create-a-route-that-redirects.html
+    - page: Use the redirect routes
+      url: /chapters/use-the-redirect-routes.html
+    - page: Redirect on login
+      url: /chapters/redirect-on-login.html
 
 domains-hosting:
   title: Domains and hosting
@@ -260,33 +259,31 @@ infrastructure-as-code:
     - page: Deploy your Serverless infrastructure
       url: /chapters/deploy-your-serverless-infrastructure.html
 
-deploy-backend-prod:
-  title: Deploying the backend to production
+automating-backend-deploys:
+  title: Automating Serverless deployments
   chapters:
-    - page: Automating Serverless deployments
-      url: /chapters/automating-serverless-deployments.html
-      subchapters:
-        - page: Setting up your project on Seed
-          url: /chapters/setting-up-your-project-on-seed.html
-        - page: Configure secrets in Seed
-          url: /chapters/configure-secrets-in-seed.html
-        - page: Deploying through Seed
-          url: /chapters/deploying-through-seed.html
-        - page: Set custom domains through Seed
-          url: /chapters/set-custom-domains-through-seed.html
+    - page: Creating a CI/CD pipeline for Serverless
+      url: /chapters/creating-a-ci-cd-pipeline-for-serverless.html
+    - page: Setting up your project on Seed
+      url: /chapters/setting-up-your-project-on-seed.html
+    - page: Configure secrets in Seed
+      url: /chapters/configure-secrets-in-seed.html
+    - page: Deploying through Seed
+      url: /chapters/deploying-through-seed.html
+    - page: Set custom domains through Seed
+      url: /chapters/set-custom-domains-through-seed.html
     - page: Test the configured APIs
       url: /chapters/test-the-configured-apis.html
 
-deploy-frontend-prod:
-  title: Deploying the frontend to production
+automating-frontend-deploys:
+  title: Automating React deployments
   chapters:
-    - page: Automating React Deployments
-      url: /chapters/automating-react-deployments.html
-      subchapters:
-        - page: Manage environments in Create React App
-          url: /chapters/manage-environments-in-create-react-app.html
-        - page: Create a build script
-          url: /chapters/create-a-build-script.html
+    - page: Creating a CI/CD pipeline for React
+      url: /chapters/creating-a-ci-cd-pipeline-for-react.html
+    - page: Manage environments in Create React App
+      url: /chapters/manage-environments-in-create-react-app.html
+    - page: Create a build script
+      url: /chapters/create-a-build-script.html
     - page: Frontend workflow
       url: /chapters/frontend-workflow.html
 

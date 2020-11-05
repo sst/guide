@@ -51,7 +51,7 @@ CloudFormation is great for defining your AWS resources. However it has a few ma
 
 In a CloudFormation template you need to define all the resources that your app needs. This includes quite a large number of minor resources that you won't be directly interacting with. So your templates can easily be a few hundred lines long.
 
-YAML and JSON are really easy to get started with. But it can be really hard to maintain large CloudFormation templates. And since these are just simple definition files, it makes it hard to reuse and compose them.
+YAML and JSON are easy to get started with. But it can be really hard to maintain large CloudFormation templates. And since these are just simple definition files, it makes it hard to reuse and compose them.
 
 Finally, the learning curve for CloudFormation templates can be really steep. You'll find yourself constantly looking at the documentation to figure out how to define your resources. 
 ### Introducing AWS CDK
