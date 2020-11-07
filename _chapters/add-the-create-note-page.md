@@ -91,7 +91,7 @@ file.current = event.target.files[0];
 
 Currently, our `handleSubmit` does not do a whole lot other than limiting the file size of our attachment. We are going to define this in our config.
 
-{%change%} So add the following to our `src/config.js` below the `export default {` line.
+{%change%} So add the following to our `src/config.js` below the `const config = {` line.
 
 ```
 MAX_ATTACHMENT_SIZE: 5000000,

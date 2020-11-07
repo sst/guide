@@ -31,16 +31,23 @@ Even though we don't have any routes set up in our app, we can get the basic str
 {%change%} Replace the following code in `src/index.js`:
 
 ``` coffee
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
 ```
 
 {%change%} With this:
 
 ``` coffee
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <React.StrictMode>
+    <Router>
+      <App />
+    </Router>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 ```

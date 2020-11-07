@@ -10,7 +10,7 @@ comments_id: add-stripe-keys-to-config/185
 
 Back in the [Setup a Stripe account]({% link _chapters/setup-a-stripe-account.md %}) chapter, we had two keys in the Stripe console. The **Secret key** that we used in the backend and the **Publishable key**. The **Publishable key** is meant to be used in the frontend.
 
-{%change%} Add the following line to the `export` block of `src/config.js`.
+{%change%} Add the following line below the `const config = {` line in your `src/config.js`.
 
 ```
 STRIPE_KEY: "YOUR_STRIPE_PUBLIC_KEY",

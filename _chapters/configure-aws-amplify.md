@@ -30,22 +30,24 @@ Let's first create a configuration file for our app that'll reference all the re
 {%change%} Create a file at `src/config.js` and add the following.
 
 ``` coffee
-export default {
+const config = {
   s3: {
-    REGION: "YOUR_S3_UPLOADS_BUCKET_REGION",
-    BUCKET: "YOUR_S3_UPLOADS_BUCKET_NAME"
+    REGION: "us-east-1",
+    BUCKET: "notes-app-2-api-dev-attachmentsbucket-qvdowkch2uj1",
   },
   apiGateway: {
-    REGION: "YOUR_API_GATEWAY_REGION",
-    URL: "YOUR_API_GATEWAY_URL"
+    REGION: "us-east-1",
+    URL: "https://api.serverless-stack.seed-demo.club/dev",
   },
   cognito: {
-    REGION: "YOUR_COGNITO_REGION",
-    USER_POOL_ID: "YOUR_COGNITO_USER_POOL_ID",
-    APP_CLIENT_ID: "YOUR_COGNITO_APP_CLIENT_ID",
-    IDENTITY_POOL_ID: "YOUR_IDENTITY_POOL_ID"
-  }
+    REGION: "us-east-1",
+    USER_POOL_ID: "us-east-1_f8l0OHPtp",
+    APP_CLIENT_ID: "5r5o292r1n7s2vgje5u5c7vpq0",
+    IDENTITY_POOL_ID: "us-east-1:b718098b-fe72-410b-b4c6-0750f9135672",
+  },
 };
+
+export default config;
 ```
 
 Here you need to replace the following:

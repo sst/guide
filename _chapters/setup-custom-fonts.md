@@ -34,7 +34,7 @@ Here we are referencing all the 5 different weights (300, 400, 600, 700, and 800
 
 Now we are ready to add our newly added fonts to our stylesheets. Create React App helps separate the styles for our individual components and has a master stylesheet for the project located in `src/index.css`.
 
-{%change%} Let's change the current font in `src/index.css` for the `body` tag to the following.
+{%change%} Let's replace the current styles in `src/index.css` for the `body` tag to the following.
 
 ``` css
 body {

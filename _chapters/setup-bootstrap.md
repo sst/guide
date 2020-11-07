@@ -43,7 +43,7 @@ We'll also tweak the styles of the form fields so that the mobile browser does n
 select.form-control,
 textarea.form-control,
 input.form-control {
-  font-size: 16px;
+  font-size: 1rem;
 }
 input[type=file] {
   width: 100%;
