@@ -21,7 +21,11 @@ Let's first include them in the HTML. Our React.js app is using a single HTML fi
 {%change%} Go ahead and edit `public/index.html` and add the following line in the `<head>` section of the HTML to include the two typefaces.
 
 ``` html
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=PT+Serif|Open+Sans:300,400,600,700,800">
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://fonts.googleapis.com/css?family=PT+Serif|Open+Sans:300,400,600,700,800"
+/>
 ```
 
 Here we are referencing all the 5 different weights (300, 400, 600, 700, and 800) of the Open Sans typeface.
@@ -36,11 +40,11 @@ Now we are ready to add our newly added fonts to our stylesheets. Create React A
 body {
   margin: 0;
   padding: 0;
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
   color: #333;
-  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Open Sans", sans-serif;
 }
 ```
 

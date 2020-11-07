@@ -28,7 +28,7 @@ Let's also include Stripe.js in our HTML.
 
 And load the Stripe config in our settings page.
 
-{%change%} Add the following at top of the `Settings` function in `src/containers/Settings.js`.
+{%change%} Add the following at top of the `Settings` component in `src/containers/Settings.js` above the `billUser()` function.
 
 ``` javascript
 const [stripe, setStripe] = useState(null);

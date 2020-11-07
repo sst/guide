@@ -18,7 +18,8 @@ So let's start by creating the basic form that'll take the user's email (as thei
 
 ``` coffee
 import React, { useState } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 import "./Login.css";
 
 export default function Login() {
@@ -35,28 +36,28 @@ export default function Login() {
 
   return (
     <div className="Login">
-      <form onSubmit={handleSubmit}>
-        <FormGroup controlId="email" bsSize="large">
-          <ControlLabel>Email</ControlLabel>
-          <FormControl
+      <Form onSubmit={handleSubmit}>
+        <Form.Group size="lg" controlId="email">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
             autoFocus
             type="email"
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
-        </FormGroup>
-        <FormGroup controlId="password" bsSize="large">
-          <ControlLabel>Password</ControlLabel>
-          <FormControl
-            value={password}
-            onChange={e => setPassword(e.target.value)}
+        </Form.Group>
+        <Form.Group size="lg" controlId="password">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
             type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
-        </FormGroup>
-        <Button block bsSize="large" disabled={!validateForm()} type="submit">
+        </Form.Group>
+        <Button block size="lg" type="submit" disabled={!validateForm()}>
           Login
         </Button>
-      </form>
+      </Form>
     </div>
   );
 }

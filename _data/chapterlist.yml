@@ -259,33 +259,31 @@ infrastructure-as-code:
     - page: Deploy your Serverless infrastructure
       url: /chapters/deploy-your-serverless-infrastructure.html
 
-automating-backend-deploys:
-  title: Automating Serverless deployments
+automating-deployments:
+  title: Automating deployments
   chapters:
     - page: Creating a CI/CD pipeline for Serverless
       url: /chapters/creating-a-ci-cd-pipeline-for-serverless.html
-    - page: Setting up your project on Seed
-      url: /chapters/setting-up-your-project-on-seed.html
-    - page: Configure secrets in Seed
-      url: /chapters/configure-secrets-in-seed.html
-    - page: Deploying through Seed
-      url: /chapters/deploying-through-seed.html
-    - page: Set custom domains through Seed
-      url: /chapters/set-custom-domains-through-seed.html
-    - page: Test the configured APIs
-      url: /chapters/test-the-configured-apis.html
-
-automating-frontend-deploys:
-  title: Automating React deployments
-  chapters:
+      subchapters:
+      - page: Setting up your project on Seed
+        url: /chapters/setting-up-your-project-on-seed.html
+      - page: Configure secrets in Seed
+        url: /chapters/configure-secrets-in-seed.html
+      - page: Deploying through Seed
+        url: /chapters/deploying-through-seed.html
+      - page: Set custom domains through Seed
+        url: /chapters/set-custom-domains-through-seed.html
+      - page: Test the configured APIs
+        url: /chapters/test-the-configured-apis.html
     - page: Creating a CI/CD pipeline for React
       url: /chapters/creating-a-ci-cd-pipeline-for-react.html
-    - page: Manage environments in Create React App
-      url: /chapters/manage-environments-in-create-react-app.html
-    - page: Create a build script
-      url: /chapters/create-a-build-script.html
-    - page: Frontend workflow
-      url: /chapters/frontend-workflow.html
+      subchapters:
+      - page: Manage environments in Create React App
+        url: /chapters/manage-environments-in-create-react-app.html
+      - page: Create a Netlify build script
+        url: /chapters/create-a-netlify-build-script.html
+      - page: Frontend workflow
+        url: /chapters/frontend-workflow.html
 
 monitor-debug-errors:
   title: Monitoring and debugging

@@ -59,10 +59,10 @@ Now we'll do something very similar for the logout process.
 const history = useHistory();
 ```
 
-{%change%} Import `useHistory` by replacing the `import { Link }` line in the header of `src/App.js` with this:
+{%change%}  Import `useHistory` from React Router in the header of `src/App.js`.
 
-``` coffee
-import { Link, useHistory } from "react-router-dom";
+``` javascript
+import { useHistory } from "react-router-dom";
 ```
 
 {%change%} Add the following to the bottom of the `handleLogout` function in our `src/App.js`.

@@ -22,7 +22,7 @@ import "./NotFound.css";
 
 export default function NotFound() {
   return (
-    <div className="NotFound">
+    <div className="NotFound text-center">
       <h3>Sorry, page not found!</h3>
     </div>
   );
@@ -36,7 +36,6 @@ All this component does is print out a simple message for us.
 ``` css
 .NotFound {
   padding-top: 100px;
-  text-align: center;
 }
 ```
 

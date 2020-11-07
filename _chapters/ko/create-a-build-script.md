@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Create a Build Script
+title: Create a Netlify Build Script
 date: 2018-03-26 00:00:00
 lang: ko
 code: frontend_full
 description: Netlify로 Create React App을 구성하려면 프로젝트 루트에 빌드 스크립트를 추가해야합니다. 우리가 React Router 라우트에 대해 HTTP 상태 코드 200을 반환하도록하려면 리다이렉트 규칙을 추가해야합니다. 
 comments_id: create-a-build-script/189
-ref: create-a-build-script
+ref: create-a-netlify-build-script
 ---
 
 프로젝트를 [Netlify](https://www.netlify.com)에 추가하기 전에 빌드 스크립트를 설정합니다. 이전의 상황을 떠올려보면, 우리는 `REACT_APP_STAGE` 빌드 환경 변수를 사용하도록 애플리케이션을 구성했었습니다. 우리는 Netlify가 다른 배포 사례에 대해 이 변수를 설정하도록 빌드 스크립트를 작성하려고합니다.
