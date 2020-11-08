@@ -40,7 +40,7 @@ Największą zmianą, przed którą stoimy przechodząc do świata serverless, j
 
 Twoje funkcje są uruchamiane w bezpiecznych, (prawie) bezstanowych kontenerach. Oznacza to, że nie będziesz w stanie wykonać kodu na serwerze aplikacji długo po zakończeniu zdarzenia wyzwalającego, lub używając kontekstu poprzedniego wykonania do obsługi nowego żądania. Musisz założyć, że Twoja funkcja jest wywoływana za każdym razem w nowym kontenerze. 
 
-Istnieją jednak pewne niuanse z tym związane; omówimy je w rozdziale [Co to jest AWS Lambda?]({% link _chapters / what-is-aws-lambda.md%}).
+Istnieją jednak pewne niuanse z tym związane; omówimy je w rozdziale [Co to jest AWS Lambda?]({% link _chapters/what-is-aws-lambda.md %}).
 
 ### Cold start
 
