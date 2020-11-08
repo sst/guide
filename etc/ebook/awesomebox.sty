@@ -1,0 +1,159 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{awesomebox}[2019/07/27 v0.6]
+
+% Awesome Box has been written by Étienne Deparis and is released under
+% the WTFPL (http://www.wtfpl.net/txt/copying/).
+% A copy of this license is distributed in this package.
+%
+% Contributors:
+% v0.2: Vincent Goulet https://github.com/vigou3
+% v0.3: Gilbert Fuerer https://github.com/foreachthing
+% * Remove xelatex/luatex requirement and add pdflatex compatibility
+% v0.4: Marcel Krüger https://github.com/zauguin
+% * Fontawesome5 compatibility
+% Gilbert Fuerer
+% * Custom vertical rule color
+% v0.5: Georger Araújo https://github.com/georgerbr
+% * Horizontal rules at top and bottom, title
+% v0.6: Vincent Goulet https://github.com/vigou3
+% * Improving table cell rendering
+
+% https://ctan.org/pkg/fontawesome5
+\RequirePackage{fontawesome5}
+
+% Compatibility with old version of this package
+\def\abIconCheck{\faCheck}
+\def\abIconInfoCircle{\faInfoCircle}
+\def\abIconFire{\faFire}
+\def\abIconExclamationCircle{\faExclamationCircle}
+\def\abIconExclamationTriangle{\faExclamationTriangle}
+\def\abIconCogs{\faCogs}
+\def\abIconThumbsUp{\faThumbsUp}
+\def\abIconThumbsDown{\faThumbsDown}
+\def\abIconCertificate{\faCertificate}
+\def\abIconLightBulb{\faLightbulb[regular]}
+\def\abIconTwitter{\faTwitter}
+\def\abIconGithub{\faGithub}
+
+% https://ctan.org/pkg/xcolor
+\RequirePackage{xcolor}
+% Some basic colors
+\definecolor{abnote}{RGB}{25,64,122}
+\definecolor{abcaution}{RGB}{188,50,0}
+\definecolor{abwarning}{RGB}{188,103,0}
+\definecolor{abimportant}{RGB}{188,0,0}
+\definecolor{abvrulecolor}{RGB}{221,221,216}
+
+% Customizable length
+\newlength{\aweboxleftmargin}
+\newlength{\aweboxcontentwidth}
+\newlength{\aweboxvskip}
+\setlength{\aweboxvskip}{5mm}
+\newlength{\aweboxsignraise}
+\setlength{\aweboxsignraise}{-5mm}
+\newlength{\aweboxrulewidth}
+\setlength{\aweboxrulewidth}{2pt}
+
+\AtBeginDocument{%
+  \setlength{\aweboxleftmargin}{0.12\linewidth}%
+  \setlength{\aweboxcontentwidth}{0.88\linewidth}}
+
+\RequirePackage{array}
+
+% To allow for more than one optional argument
+\RequirePackage{xparse}
+
+% Horizontal rule definitions used with second optional argument [hrule]
+\def\abShortLine{\cline{2-2}}
+\def\abLongLine{\hline}
+
+% The following commands are used to adjust and restore awesome boxes
+% content width in respect to the current environment (e.g. lists).
+\RequirePackage{ifthen}
+\newlength{\aweboxlinewidthvar}
+\setlength{\aweboxlinewidthvar}{0pt}
+\newlength{\aweboxlinewidthref}
+\AtBeginDocument{\setlength{\aweboxlinewidthref}{\linewidth}}
+\newcommand{\awesomeboxadjustcontentwidth}{%
+  \ifthenelse{\lengthtest{\linewidth=\aweboxlinewidthref}}{}{%
+    \setlength{\aweboxlinewidthvar}{\dimexpr\aweboxlinewidthref-\linewidth}%
+    \setlength{\aweboxcontentwidth}{\dimexpr\aweboxcontentwidth-\aweboxlinewidthvar}}}%
+    %\aweboxdebug}}
+\newcommand{\awesomeboxrestorecontentwidth}{%
+  \ifthenelse{\lengthtest{\linewidth=\textwidth}}{}{%
+    \setlength{\aweboxcontentwidth}{\dimexpr\aweboxcontentwidth+\aweboxlinewidthvar}%
+    \setlength{\aweboxlinewidthvar}{0pt}}}
+
+% Commands API
+% \awesomebox[vrulecolor][hrule][title]{vrulewidth}{icon}{iconcolor}{content}
+\NewDocumentCommand \awesomebox { O{abvrulecolor} O{} o m m m +m }{%
+  {\vskip \aweboxvskip}\noindent\awesomeboxadjustcontentwidth%
+  \begin{tabular}%
+    {@{}>{\centering\arraybackslash}%
+    p{\aweboxleftmargin}@{}!{\color{#1}\vrule width #4}%
+    p{\dimexpr\aweboxcontentwidth-#4-\tabcolsep}@{}}
+    \IfValueTF {#3}
+      { & #3 \\ #2 \raisebox{\aweboxsignraise}{\textcolor{#6}{\Huge#5}} & #7 \\ #2}
+      {         #2 \raisebox{\aweboxsignraise}{\textcolor{#6}{\Huge#5}} & #7 \\ #2}
+  \end{tabular}{\vskip \aweboxvskip}\awesomeboxrestorecontentwidth}
+
+\newcommand{\notebox}[1]{%
+  \awesomebox[abnote]{\aweboxrulewidth}{\abIconInfoCircle}{abnote}{#1}}
+
+\newcommand{\tipbox}[1]{%
+  \awesomebox{\aweboxrulewidth}{\abIconLightBulb}{black}{#1}}
+
+\newcommand{\warningbox}[1]{%
+  \awesomebox[abwarning]{\aweboxrulewidth}{\abIconExclamationTriangle}{abwarning}{#1}}
+
+\newcommand{\cautionbox}[1]{%
+  \awesomebox[abcaution]{\aweboxrulewidth}{\abIconFire}{abcaution}{#1}}
+
+\newcommand{\importantbox}[1]{%
+  \awesomebox[abimportant]{\aweboxrulewidth}{\abIconExclamationCircle}{abimportant}{#1}}
+
+% Environments API
+% \begin{awesomeblock}[vrulecolor][hrule][title]{vrulewidth}{icon}{iconcolor}
+%   content
+% \end{awesomeblock}
+\NewDocumentEnvironment{awesomeblock}{ O{abvrulecolor} O{} o m m m }
+{{\vskip \aweboxvskip}\noindent\awesomeboxadjustcontentwidth%
+  \begin{tabular}%
+    {@{}>{\centering\arraybackslash}%
+    p{\aweboxleftmargin}@{}!{\color{#1}\vrule width #4}%
+    p{\dimexpr\aweboxcontentwidth-#4-\tabcolsep}@{}}
+    \IfValueTF {#3}
+      { & #3 \\ #2 \raisebox{\aweboxsignraise}{\textcolor{#6}{\Huge#5}} &}
+      {         #2 \raisebox{\aweboxsignraise}{\textcolor{#6}{\Huge#5}} &}}
+{\\ #2 \end{tabular}{\vskip \aweboxvskip}\awesomeboxrestorecontentwidth}
+
+\newenvironment{noteblock}%
+{\begin{awesomeblock}[abnote]{\aweboxrulewidth}{\abIconInfoCircle}{abnote}}
+  {\end{awesomeblock}}
+
+\newenvironment{tipblock}%
+{\begin{awesomeblock}{\aweboxrulewidth}{\abIconLightBulb}{black}}
+  {\end{awesomeblock}}
+
+\newenvironment{warningblock}%
+{\begin{awesomeblock}[abwarning]{\aweboxrulewidth}{\abIconExclamationTriangle}{abwarning}}
+  {\end{awesomeblock}}
+
+\newenvironment{cautionblock}%
+{\begin{awesomeblock}[abcaution]{\aweboxrulewidth}{\abIconFire}{abcaution}}
+  {\end{awesomeblock}}
+
+\newenvironment{importantblock}%
+{\begin{awesomeblock}[abimportant]{\aweboxrulewidth}{\abIconExclamationCircle}{abimportant}}
+  {\end{awesomeblock}}
+
+\newcommand{\aweboxdebug}{%
+  \typeout{**************************}%
+  \typeout{Line width: \the\linewidth}%
+  \typeout{Reference line width: \the\aweboxlinewidthref\space(text width: \the\textwidth)}%
+  \typeout{Width difference: \the\aweboxlinewidthvar}%
+  \typeout{Margin width: \the\aweboxleftmargin}%
+  \typeout{Content width: \the\aweboxcontentwidth}%
+  \typeout{**************************}}
+
+\endinput

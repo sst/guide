@@ -93,7 +93,7 @@ Currently, our `handleSubmit` does not do a whole lot other than limiting the fi
 
 {%change%} So add the following to our `src/config.js` below the `const config = {` line.
 
-```
+``` txt
 MAX_ATTACHMENT_SIZE: 5000000,
 ```
 

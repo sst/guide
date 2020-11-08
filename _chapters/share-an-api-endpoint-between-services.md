@@ -9,7 +9,7 @@ comments_id: api-gateway-domains-across-services/408
 
 In this chapter we will look at how to work with API Gateway across multiple services. A challenge that you run into when splitting your APIs into multiple services is sharing the same domain for them. You might recall that APIs that are created as a part of the Serverless service get their own unique URL that looks something like:
 
-```
+``` txt
 https://z6pv80ao4l.execute-api.us-east-1.amazonaws.com/dev
 ```
 
@@ -111,7 +111,7 @@ By sharing API Gateway project, we are making the `billing-api` depend on the `n
 
 Note that, a path part can only be created **ONCE**. Let's look at an example to understand how this works. Say you need to add another API service that uses the following endpoint.
 
-```
+``` txt
 https://api.example.com/billing/xyz
 ```
 

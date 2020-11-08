@@ -44,7 +44,7 @@ Assuming that you are deploying to the `dev` stage.
 
 If you were to deploy `billing-api` and `notify-job` concurrently, the `notify-job` will fail with the following CloudFormation error:
 
-```
+``` txt
 notify-job - No export named dev-ExtNotePurchasedTopicArn found.
 ```
 
@@ -67,7 +67,7 @@ If you are using a CI, you'll need to deploy the above in phases. With [Seed](ht
 ### Managing deployment in phases for api
 
 For our api repo, the dependencies look like:
-```
+``` txt
 notes-api > billing-api > notify-job
 ```
 To break it down in detail:

@@ -75,20 +75,26 @@ You can also turn on live reloading and incremental builds while editing.
 $ bundle exec jekyll serve --incremental --livereload
 ```
 
-#### Generating the PDF
+#### Generating the eBook
 
-You can generate the PDF locally on macOS by following these steps.
+We use [Pandoc](https://pandoc.org) to create the eBook. You can generate it locally by following these steps.
 
-1. Generate a `Cover.pdf` with latest version and date
-   1. Create an `ebook` folder in `~/Downloads` (for example).
-   2. Update the date and version in the `etc/cover.html`
-   3. Open the cover page locally in Safari by going to `file:///Users/frank/Sites/ServerlessStackCom/etc/cover.html`.
-   4. In the Safari Menu on the File Menu, hit the **Export to PDF…** button.
-   5. Place `Cover.pdf` in the `~/Downloads/ebook` folder.
-2. Ensure `ebook` folder is an option when hitting the **Export to PDF…** button in Safari.
-3. In the terminal, run `osascript pdf.scpt` in the `etc/` directory of this repository.
+``` bash
+$ cd ~/Sites/ServerlessStackCom/etc/ebook
+$ make start
+```
 
-We are looking for a better way to generate the PDF (and other eBook) formats. If you've got any ideas [consider contributing][Contributing].
+This'll start a Docker instance. Inside the Docker run:
+
+``` bash
+$ make pdf
+$ make epub
+```
+
+The above are run automatically through [Github Actions](https://github.com/AnomalyInnovations/serverless-stack-com/actions) in this repo:
+
+- When a new commit is pushed to master
+- And when a new tag is pushed, the generated eBook is uploaded to S3
 
 ## Sponsors
 
@@ -119,4 +125,5 @@ Thanks to these folks for their contributions to the content of Serverless Stack
 [Discourse]: https://discourse.serverless-stack.com
 [Contributing]: CONTRIBUTING.md
 [PR]: ../../compare
+
 

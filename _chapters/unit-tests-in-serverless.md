@@ -20,7 +20,7 @@ $ npm install --save-dev jest
 
 And update the `scripts` block in your `package.json` with the following:
 
-```
+``` json
 "scripts": {
   "test": "jest"
 },
@@ -30,7 +30,7 @@ This will allow you to run your tests using the command `npm test`.
 
 Alternatively, if you are using the [serverless-bundle](https://github.com/AnomalyInnovations/serverless-bundle) plugin to package your functions, it comes with a built-in script to transpile your code and run your tests. Add the following to your `package.json` instead.
 
-```
+``` json
 "scripts": {
   "test": "serverless-bundle test"
 },

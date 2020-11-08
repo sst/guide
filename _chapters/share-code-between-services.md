@@ -14,7 +14,7 @@ In these next couple of chapters we'll look at how to organize all our business 
 
 We are using an extended version of the notes app for this section. You can find the [**sample repo here**]({{ site.backend_ext_api_github_repo }}). Let's take a quick look at how the repo is organized.
 
-```
+``` txt
 /
   package.json
   config.js
