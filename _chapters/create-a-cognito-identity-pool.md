@@ -91,7 +91,7 @@ In our case `YOUR_S3_UPLOADS_BUCKET_NAME` is `notes-app-uploads`, `YOUR_API_GATE
 }
 ```
 
-This is the **Auth Role** that we were referring to our architecture diagram at the beginning of this chapter. Once a user has been authenticated with our User Pool and verified with our Identity Pool, he/she is assigned this [IAM role]({% link _chapters/what-is-iam.md %}). This role limits what our user has access to in our AWS account.
+This is the **Auth Role** that we were referring to in our architecture diagram at the beginning of this chapter. Once a user has been authenticated with our User Pool and verified with our Identity Pool, he/she is assigned this [IAM role]({% link _chapters/what-is-iam.md %}). This role limits what our user has access to in our AWS account.
 
 A quick note on the block that relates to the S3 Bucket. In the above policy we are granting our logged in users access to the path `private/${cognito-identity.amazonaws.com:sub}/`. Where `cognito-identity.amazonaws.com:sub` is the authenticated user's federated identity ID (their user id). So a user has access to only their folder within the bucket. This is how we are securing the uploads for each user.
 

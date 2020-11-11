@@ -4,8 +4,8 @@ title: Handle CORS in Serverless APIs
 date: 2020-10-16 00:00:00
 lang: en 
 ref: handle-cors-in-serverless-apis
-description: 
-comments_id: 
+description: In this chapter we'll be looking at how to configure CORS (or cross-origin resource sharing) for our Serverless API endpoint. We'll need to ensure that our API responds to the preflight OPTIONS requests and our Lambda functions return the right CORS headers.
+comments_id: handle-cors-in-serverless-apis/2175
 ---
 
 Let's take stock of our setup so far. We have a Serverless API backend that allows users to create notes and an S3 bucket where they can upload files. We are now almost ready to work on our frontend React app.
@@ -18,7 +18,7 @@ Let's quickly review our backend app architecture.
 
 ![Serverless Auth API architecture](/assets/diagrams/serverless-auth-api-architecture.png)
 
-Our client will be interacting with our API, S3 bucket, and User Pool. CORS in the User Pool part is taken care of by its interals. That leaves our API and S3 bucket. In the next couple of chapters we'll be doing extactly that.
+Our client will be interacting with our API, S3 bucket, and User Pool. CORS in the User Pool part is taken care of by its internals. That leaves our API and S3 bucket. In the next couple of chapters we'll be setting that up.
 
 Let's get a quick background on CORS.
 
@@ -27,12 +27,14 @@ Let's get a quick background on CORS.
 There are two things we need to do to support CORS in our Serverless API.
 
 1. Preflight OPTIONS requests
+
    For certain types of cross-domain requests (PUT, DELETE, ones with Authentication headers, etc.), your browser will first make a _preflight_ request using the request method OPTIONS. These need to respond with the domains that are allowed to access this API and the HTTP methods that are allowed.
 
 2. Respond with CORS headers
-   For all the other types of requests we need to make sure to include the appropriate CORS headers. These headers, just like above need to include the domains that are allowed.
 
-There's a bit more to CORS than the above, make sure to [check out the Wikipedia article for further details](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing).
+   For all the other types of requests we need to make sure to include the appropriate CORS headers. These headers, just like the one above, need to include the domains that are allowed.
+
+There's a bit more to CORS than what we have covered here. So make sure to [check out the Wikipedia article for further details](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing).
 
 If we don't set the above up, then we'll see something like this in our HTTP responses.
 
@@ -40,7 +42,7 @@ If we don't set the above up, then we'll see something like this in our HTTP res
 No 'Access-Control-Allow-Origin' header is present on the requested resource
 ```
 
-And our browser won't show us the HTTP response. This can make debugging issues with our API extremely hard.
+And our browser won't show us the HTTP response. This can make debugging our API extremely hard.
 
 ### Preflight Requests in API Gateway
 
@@ -146,7 +148,7 @@ cors:
   allowCredentials: false
 ```
 
-But for our purposes we'll just use the default option.
+But for our purposes, we'll just use the default option.
 
 ### CORS Headers in Lambda Functions
 
@@ -175,7 +177,7 @@ return {
 };
 ```
 
-Again you can customize the CORS headers but we'll go with the default ones.
+Again you can customize the CORS headers but we'll go with the default ones here.
 
 Let's quickly test the above. Run the following in your project root.
 
@@ -183,7 +185,7 @@ Let's quickly test the above. Run the following in your project root.
 $ serverless invoke local --function list --path mocks/list-event.json
 ```
 
-You should see something link this in your terminal. 
+You should see something like this in your terminal. 
 
 ``` bash
 {
@@ -198,7 +200,7 @@ You should see something link this in your terminal.
 
 Notice that we are now returning the CORS headers.
 
-The two steps we've taken above ensure that if our Lambda functions are invoked through API Gateway, we are handling CORS properly.
+The two steps we've taken above ensure that if our Lambda functions are invoked through API Gateway, it'll respond with the proper CORS config.
 
 However, there are cases where API Gateway might run into an error and our Lambda functions are not invoked. For example, if the authentication information is invalid. In these cases we want API Gateway to respond with the right CORS headers as well.
 

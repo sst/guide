@@ -8,7 +8,7 @@ description: To split up our React.js app into different routes we are going to 
 comments_id: create-containers/62
 ---
 
-Currently, our app has a single component that renders our content. For creating our note taking app, we need to create a few different pages to load/edit/create notes. Before we can do that we will put the outer "chrome" (or UI) of our app inside a component and render all the top level components inside them. We are calling these top level components that represent the various pages, containers.
+Currently, our app has a single component that renders our content. For creating our note taking app, we need to create a few different pages to load/edit/create notes. Before we can do that we will put the outer "chrome" (or UI) of our app inside a component and render all the top level components inside them. We are calling the top level components that represent the various pages, containers.
 
 ### Add a Navbar
 

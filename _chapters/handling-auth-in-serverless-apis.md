@@ -4,8 +4,8 @@ title: Handling Auth in Serverless APIs
 date: 2020-10-20 00:00:00
 lang: en
 ref: handling-auth-in-serverless-apis
-description: 
-comments_id: 
+description: In this chapter we'll be looking at how to handle authentication and users for our Serverless API. We'll be using a Cognito User Pool and Cognito Identity Pool. The User Pool will handle user signups and logins. While the Identity Pool, will be handling access control for our AWS resources.
+comments_id: handling-auth-in-serverless-apis/2176
 ---
 
 In the last section, we created a Serverless REST API and deployed it. But there are a couple of things missing.
@@ -13,9 +13,9 @@ In the last section, we created a Serverless REST API and deployed it. But there
 1. It's not secure
 2. And, it's not linked to a specific user
 
-These two problems are connected. We need a way to allow users to sign up for our notes app and then only allow authenticated users to access our Serverless app.
+These two problems are connected. We need a way to allow users to sign up for our notes app and then only allow authenticated users to access it.
 
-In this section we are going to learn to do just that. Starting with getting a understanding of how authentication (and access control) works in the AWS world.
+In this section we are going to learn to do just that. Starting with, getting a understanding of how authentication (and access control) works in the AWS world.
 
 ## Public API Architecture
 
@@ -25,7 +25,7 @@ For reference, here is what we have so far.
 
 Our users make a request to our Serverless API. It starts by hitting our API Gateway endpoint. And depending on the endpoint we request, it'll forward that request to the appropriate Lambda function.
 
-In terms of access control, our API Gateway endpoint is allowed to invoke the Lambda functions we listed in our `serverless.yml`. And if you'll recall, our Lambda function is allowed to connect to our DynamoDB tables.
+In terms of access control, our API Gateway endpoint is allowed to invoke the Lambda functions we listed in our `serverless.yml`. And if you'll recall, our Lambda function are allowed to connect to our DynamoDB tables.
 
 Here is the relevant block from our `serverless.yml`.
 
@@ -45,7 +45,7 @@ Here is the relevant block from our `serverless.yml`.
       Resource: "arn:aws:dynamodb:us-east-1:*:*"
 ```
 
-For uploading files, our users will directly upload them to the [S3 bucket]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}). While we'll look at how our frontend React app uploads files later in the guide, in this section we need to make sure that we secure access to it as well.
+For uploading files, our users will directly upload them to the [S3 bucket]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}). While we'll look at how our frontend React app uploads files later in the guide, in this section we need to make sure that we secure access to it.
 
 ## Authenticated API Architecture
 
@@ -53,7 +53,7 @@ To allow users to sign up for our notes app and to secure our infrastructure, we
 
 ![Serverless Auth API architecture](/assets/diagrams/serverless-auth-api-architecture.png)
 
-There's a little bit more going on here. So let's go over all the separate parts in detail.
+There's a bit more going on here. So let's go over all the separate parts in detail.
 
 A couple of quick notes before we jump in:
 
@@ -69,7 +69,7 @@ To manage sign up and login functionality for our users, we'll be using an AWS s
 
 To manage access control to our AWS infrastructure we use another service called [Amazon Cognito Identity Pools](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html). This service decides if our previously authenticated user has access to the resources he/she is trying to connect to. Identity Pools can have different authentication providers (like Cognito User Pools, Facebook, Google etc.). In our case, our Identity Pool will be connected to our User Pool.
 
-If you are a little confused about the difference between a User Pool and and Identity Pool, don't worry. We've got a chapter to help you with just that — [Cognito User Pool vs Identity Pool]({% link _chapters/cognito-user-pool-vs-identity-pool.md %})
+If you are a little confused about the differences between a User Pool and and Identity Pool, don't worry. We've got a chapter to help you with just that — [Cognito User Pool vs Identity Pool]({% link _chapters/cognito-user-pool-vs-identity-pool.md %})
 
 #### Auth Role
 
@@ -84,7 +84,7 @@ But for now our authenticated users use the Auth Role in our Identity Pool to in
 
 ## Authentication Flow
 
-Now that we have the main pieces of our architecture in place, let's look at how it'll work in practice.
+Let's look at how the above pieces work together in practice.
 
 #### Sign up
 
@@ -92,7 +92,7 @@ A user will sign up for our notes app by creating a new User Pool account. They'
 
 #### Login
 
-A signed up user can now login using their email and password. Our React app will send this info to the User Pool. If these are valid then a session is created in React.
+A signed up user can now login using their email and password. Our React app will send this info to the User Pool. If these are valid, then a session is created in React.
 
 #### Authenticated API Requests
 
@@ -101,7 +101,7 @@ To connect to our API.
 1. The React client makes a request to API Gateway secured using IAM Auth.
 2. API Gateway will check with our Identity Pool if the user has authenticated with our User Pool.
 3. It'll use the Auth Role to figure out if this user can access this API.
-4. If everything looks good then our Lambda function is invoked and passes the Identity Pool user id.
+4. If everything looks good, then our Lambda function is invoked and it'll pass in an Identity Pool user id.
 
 #### S3 File Uploads
 
@@ -113,6 +113,6 @@ It's worth quickly mentioning that there are other ways to secure your APIs. We 
 
 You can also directly connect the User Pool to API Gateway. The downside with that is that you might not be able to manage access control centrally to the S3 bucket (or any other AWS resources in the future).
 
-Finally, you can manage your users and authentication yourself. This is a little bit more complicated and we are not covering it here. Though we might expand on it later.
+Finally, you can manage your users and authentication yourself. This is a little bit more complicated and we are not covering it in this guide. Though we might expand on it later.
 
 Now that we've got a good idea how we are going to handle users and authentication in our Serverless app, let's get started with creating a Cognito User Pool.

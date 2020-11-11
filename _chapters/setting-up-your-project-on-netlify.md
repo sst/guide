@@ -3,13 +3,12 @@ layout: post
 title: Setting up Your Project on Netlify
 date: 2018-03-27 00:00:00
 lang: en
-description: To host our React app on Netlify start by signing up for a free account and adding your Git repository. We are also adding a catch all redirects file in our project root.
+description: To host our React app on Netlify start by signing up for a free account and adding your Git repository. We are also adding a catch all `_redirects` file in our project root.
 ref: setting-up-your-project-on-netlify
 comments_id: setting-up-your-project-on-netlify/190
 ---
 
-
-Now we are going to host our React app on [Netlify](https://www.netlify.com). Before we can do one more thing. Recall that our React app is a single page app. Where the routes in the app are handled by our client side JavaScript code. So we need to tell our hosting provider (in this case Netlify), to redirect any _other_ requests back to our app.
+Now we are going to host our React app on [Netlify](https://www.netlify.com). Before we can do that, we need to do one more thing. Recall that our React app is a single page app. Where the routes in the app are handled by our client side JavaScript code. We have a single `index.html` at the root of our app that handles all the routes. So we need to tell our hosting provider (in this case Netlify), to redirect any other requests back to this `index.html` file.
 
 ### Add a Redirects File
 
@@ -63,6 +62,6 @@ And you should see your app in action!
 
 ![Netlify deployed notes app screenshot](/assets/part2/netlify-deployed-notes-app.png)
 
-Just like that, our app is live! You can share it with your friends and the rest of world!
+Just like that, our app is live! You can share it with your friends and the rest of the world!
 
 By default, a site hosted on Netlify uses their domains. But we want to host our notes app on our own domain. To do that, let's first purchase a domain name. We'll be using AWS to do so because we'll be using this same domain later for our Serverless API.

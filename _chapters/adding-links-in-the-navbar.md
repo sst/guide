@@ -60,7 +60,7 @@ To fix this we need a component that works with React Router and React Bootstrap
 $ npm install react-router-bootstrap --save
 ```
 
-Let's import also import it.
+Let's also import it.
 
 {%change%} Add this to the top of your `src/App.js`.
 
@@ -98,7 +98,7 @@ function App() {
 }
 ```
 
-We are doing one other thing there. We are grabbing the current path the user is on from the `window.location` object. And we set it as the `activeKey` of our `Nav` component. This'll highlight the link when we are on that page.
+We are doing one other thing here. We are grabbing the current path the user is on from the `window.location` object. And we set it as the `activeKey` of our `Nav` component. This'll highlight the link when we are on that page.
 
 ``` coffee
 <Nav activeKey={window.location.pathname}>

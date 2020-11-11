@@ -53,7 +53,7 @@ Resources:
         Ref: 'ApiGatewayRestApi'
 ```
 
-The above might look a little intimidating. It's a CloudFormation resource and its syntax tends to be fairly verbose. But the details here aren't too important. We are adding the CORS headers to the `ApiGatewayRestApi` resource in our app. The `GatewayResponseDefault4XX` is for 4xx errors, while `GatewayResponseDefault5XX` is for 5xx errors.
+The above might look a little intimidating. It's a CloudFormation resource and their syntax tends to be fairly verbose. But the details here aren't too important. We are adding the CORS headers to the `ApiGatewayRestApi` resource in our app. The `GatewayResponseDefault4XX` is for 4xx errors, while `GatewayResponseDefault5XX` is for 5xx errors.
 
 This means that for 4xx and 5xx errors, we'll be returning the CORS headers.
 
@@ -109,7 +109,7 @@ layers:
   None
 ```
 
-The only change you'll notice compared to our past deploys is the `resources: 43` count. The number of resources tied to our stack have slowly increased as we have added more resources to it.
+The only change you'll notice compared to our past deploys is the `resources: 43` count. The number of resources tied to our stack has slowly increased as we have added more resources to it.
 
 ### Commit the Changes
 

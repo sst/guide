@@ -87,6 +87,6 @@ $ git push
 
 And that's it! Our app is ready to go live.
 
-Next we'll be looking at how to host our React app! And do it on our own domain!
+Next we'll be looking at how to host our React app! And we'll do it on our own domain!
 
-We should mention that if you want to use the setup we've described so far but add a  Facebook login, we have a separate chapter on that — [Facebook Login with Cognito using AWS Amplify]({% link _chapters/facebook-login-with-cognito-using-aws-amplify.md %}). It builds on what we've covered so far.
+We should mention that if you want to use the setup we've described so far but want to use a Facebook login, we have a separate chapter on that — [Facebook Login with Cognito using AWS Amplify]({% link _chapters/facebook-login-with-cognito-using-aws-amplify.md %}). It builds on what we've covered so far.

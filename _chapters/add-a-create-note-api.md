@@ -234,7 +234,7 @@ export default {
 };
 ```
 
-Here we are using the promise form of the DynamoDB methods. It will make our code a lot easier to read. And we are exposing the DynamoDB client methods that we are going to need in this guide.
+Here we are creating a convenience object that exposes the DynamoDB client methods that we are going to need in this guide.
 
 {%change%} Also create a `libs/handler-lib.js` file with the following.
 

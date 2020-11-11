@@ -93,4 +93,4 @@ $ git commit -m "Adding our Serverless API"
 $ git push
 ```
 
-So our API is publicly available, this means that anybody can access it and create notes. And it's always connecting to the `123` user id. Let's fix both of these next. We'll now handle users and authentication.
+So our API is publicly available, this means that anybody can access it and create notes. And it's always connecting to the `123` user id. Let's fix these next by handling users and authentication.

@@ -26,7 +26,7 @@ Over the next few chapters we will look at how to get your app ready for product
 
 - **Monitoring and debugging errors in production**
 
-  Debugging errors in your app can be tricky, once it's in production. You cannot expect your users to tell you when they see a problem. And you cannot ask them to send you what they see in the browser console. We'll be setting up our app so that we can monitor and debug any issues that come up on production.
+  Debugging errors in your app can be tricky, once it's in production. You cannot expect your users to tell you when they see a problem. And you cannot ask them to send you what they see in the browser console. We'll be setting up our app so that we can monitor and debug any issues that come up in production.
 
 The goal of the next few sections is to make sure that you have a setup that you can easily replicate and use for your future projects. This is almost exactly what we and a few of our readers have been using.
 

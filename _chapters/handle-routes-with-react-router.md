@@ -10,7 +10,7 @@ comments_id: handle-routes-with-react-router/116
 
 Create React App sets a lot of things up by default but it does not come with a built-in way to handle routes. And since we are building a single page app, we are going to use [React Router](https://reacttraining.com/react-router/) to handle them for us.
 
-React Router allows us to specify a route like: `https://my-notes-app.com/login` and specify a React Component to be loaded when a user goes to that page.
+React Router allows us to specify a route like: `/login`. And specify a React Component that should be loaded when a user goes to that page.
 
 Let's start by installing React Router.
 

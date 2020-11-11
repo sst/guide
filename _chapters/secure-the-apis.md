@@ -4,8 +4,8 @@ title: Secure the APIs
 date: 2020-10-16 00:00:00
 lang: en 
 ref: secure-the-apis
-description: 
-comments_id: 
+description: In this chapter we'll be using the `aws_iam` authorizer to secure our Serverless APIs. This uses a Cognito Identity Pool and Cognito User Pool for authentication. To identify our users, we'll be using the `cognitoIdentityId` that's passed in through the `event` object in our Lambda function.
+comments_id: secure-the-apis/2179
 ---
 
 Now that we have [created a User Pool]({% link _chapters/create-a-cognito-user-pool.md %}), [Identity Pool and an Auth Role]({% link _chapters/create-a-cognito-identity-pool.md %}); we are ready to use them to secure access to our APIs.
@@ -73,7 +73,7 @@ functions:
           authorizer: aws_iam
 ```
 
-The key change we are making here is:
+The key change here is the addition of the following line to each of our functions.
 
 ``` yml
 authorizer: aws_iam
@@ -81,13 +81,13 @@ authorizer: aws_iam
 
 This is telling Serverless Framework that our APIs are secured using an Identity Pool. Here is how it roughly works:
 
-- A request with some signed authentication headers will be sent to our API.
-- AWS will use the headers to figure out which Identity Pool is tied to it.
-- The Identity Pool will ensure that the request is signed by somebody that has authenticated with our User Pool. 
-- If so, then it'll assign the Auth IAM Role to this request.
-- Finally, IAM will check to ensure that this role has access to our API.
+1. A request with some signed authentication headers will be sent to our API.
+2. AWS will use the headers to figure out which Identity Pool is tied to it.
+3. The Identity Pool will ensure that the request is signed by somebody that has authenticated with our User Pool. 
+4. If so, then it'll assign the Auth IAM Role to this request.
+5. Finally, IAM will check to ensure that this role has access to our API.
 
-If all goes well, your Lambda function will be invoked and the `event` parameter in your function handler will contain information about the user that called your API. 
+If all goes well, your Lambda function will be invoked. And the `event` parameter in your function handler will contain information about the user that called your API. 
 
 ### Cognito Identity Id
 
@@ -110,6 +110,8 @@ Now we'll get the id of the authenticated user.
 ``` javascript
 event.requestContext.identity.cognitoIdentityId
 ```
+
+This is an id that's assigned to our user by our Cognito Identity Pool.
 
 You'll also recall that so far all of our APIs are hardcoded to interact with a single user (with user id `123`).
 
@@ -159,7 +161,7 @@ Keep in mind that the `userId` above is the Federated Identity id (or Identity P
 
 ### Testing Locally
 
-If you recall back in the chapters where we first [created our API endpoints]({% link _chapters/add-a-create-note-api.md %}), we were using a set of mock events to test our Lambda functions. We stored these in the `mocks/` directory.
+If you recall the chapters where we first [created our API endpoints]({% link _chapters/add-a-create-note-api.md %}), we were using a set of mock events to test our Lambda functions. We stored these in the `mocks/` directory.
 
 For example, the `create-event.json` looks like this.
 

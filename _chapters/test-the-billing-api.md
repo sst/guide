@@ -91,4 +91,4 @@ $ git commit -m "Adding a billing API"
 $ git push
 ```
 
-Now that we have our new billing API ready. Let's look at how to setup unit tests in Service. We'll be using that to ensure that our business logic has been configured correctly.
+Now that we have our new billing API ready. Let's look at how to setup unit tests in Serverless. We'll be using that to ensure that our business logic has been configured correctly.

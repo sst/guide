@@ -78,7 +78,7 @@ export default function LoaderButton({
 
 This is a really simple component that takes an `isLoading` prop and `disabled` prop. The latter is a result of what we have currently in our `Login` button. And we ensure that the button is disabled when `isLoading` is `true`. This makes it so that the user can't click it while we are in the process of logging them in.
 
-The `className` prop that we have is to ensure that an class we set for this component doesn't override the `LoaderButton` one we are using internally.
+The `className` prop that we have is to ensure that a CSS class that's set for this component, doesn't override the `LoaderButton` CSS class that we are using internally.
 
 When the `isLoading` flag is on, we show an icon. The icon we include is from the Bootstrap icon set of [React Icons](https://react-icons.github.io/icons?name=bs).
 

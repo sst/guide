@@ -72,7 +72,7 @@ const message = ({ time, ...rest }) => new Promise((resolve, reject) =>
 );
 ```
 
-Let's run this. In your repo root run:
+Let's run this. In your project root run:
 
 ``` bash
 $ serverless invoke local --function hello
@@ -91,7 +91,7 @@ In the above command we are asking Serverless Framework to (locally) invoke a La
 
 Here we are directly invoking the Lambda function. Though once deployed, we'll be invoking this function through the `/hello` API endpoint (as we [talked about in the last chapter]({% link _chapters/setup-the-serverless-framework.md %})).
 
-Now we are almost ready to deploy our Lambda function and API. But before we do that let's quickly look at one of the other things that's been setup for us in this starter project. 
+Now we are almost ready to deploy our Lambda function and API. But before we do that let's quickly look at one of the other things that's been set up for us in this starter project. 
 
 ### Optimized Packages
 

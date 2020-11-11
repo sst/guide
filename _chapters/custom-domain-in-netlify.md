@@ -8,7 +8,7 @@ ref: custom-domains-in-netlify
 comments_id: custom-domains-in-netlify/191
 ---
 
-Now that we have our React app hosted on Netlify, let's configure a custom domain. We'll be using the domain that we [purchased]({% link _chapters/purchase-a-domain-with-route-53.md %}).
+Now that we have our React app hosted on Netlify, let's configure a custom domain. We'll be using the domain that we [previously purchased]({% link _chapters/purchase-a-domain-with-route-53.md %}).
 
 If you didn't setup a domain back then, feel free to skip this chapter.
 
@@ -104,4 +104,4 @@ Now if you head over to your browser and go to your custom domain, your notes ap
 
 We've hit an important milestone here. Our fully functional React app is now live on our own custom domain. You've completed the main part of this guide!
 
-Over the next few sections, we'll work on taking our app into production. These are meant for folks that are using this guide to build an app for work or for business. We'll introduce you to concepts like _Infrastructure as Code_, environments, automating depoyments, and how to monitor and debug your app in production.
+Over the next few sections, we'll work on taking our app into production. These are meant for folks that are using this guide to build an app for work or for business. We'll introduce you to concepts like _Infrastructure as Code_, environments, automating deployments, and how to monitor and debug your app in production.

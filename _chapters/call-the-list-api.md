@@ -85,7 +85,7 @@ function renderNotesList(notes) {
 
 The code above does a few things.
 
-1. It always renders a **Create a new note** button as the first item in the list (even if the list is empty). And it links to [the create note page that previously created]({% link _chapters/add-the-create-note-page.md %}).
+1. It always renders a **Create a new note** button as the first item in the list (even if the list is empty). And it links to [the create note page that we previously created]({% link _chapters/add-the-create-note-page.md %}).
 
    ``` coffee
     <LinkContainer to="/notes/new">
@@ -110,7 +110,7 @@ The code above does a few things.
    note.content.trim().split('\n')[0]
    ```
 
-5. And we convert the date the note was created in a more friendly format.
+5. And we convert the date the note was created to a more friendly format.
 
    ``` javascript
    {new Date(createdAt).toLocaleString()}

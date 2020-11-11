@@ -20,7 +20,7 @@ We also need a couple of icons in our application. We'll be using the [React Ico
 $ npm install react-bootstrap@1.4.0 react-icons@3.11.0 --save
 ```
 
-This installs the npm packages and adds the dependency to your `package.json`.
+This installs the npm packages and adds the dependencies to your `package.json`.
 
 ### Add Bootstrap Styles
 
