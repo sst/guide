@@ -25,7 +25,7 @@ Now we are going to do something similar for our sign up page and it'll have a f
 
 ### Creating a Custom React Hook
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `src/libs/hooksLib.js`.
+{%change%} Add the following to `src/libs/hooksLib.js`.
 
 ``` javascript
 import { useState } from "react";
@@ -49,9 +49,9 @@ Creating a custom hook is amazingly simple. In fact, we did this back when we cr
 
 1. A custom React Hook starts with the word `use` in its name. So ours is called `useFormFields`.
 
-2. Our Hook takes the initial state of our form fields as an object and saves it as a state variable called `fields`.
+2. Our Hook takes the initial state of our form fields as an object and saves it as a state variable called `fields`. The initial state in our case is an object where the _keys_ are the ids of the form fields and the _values_ are what the user enters.
 
-3. It returns an array with `fields` and a function that sets the new state based on the event object. The only difference here is that we are using `event.target.id` (which contains the id of our form field) to store the value (`event.target.value`). In the case of our form the elements, the `event.target.id` is set as the the `controlId`:
+3. So our hook returns an array with `fields` and a callback function that sets the new state based on the event object. The callback function takes the event object and gets the form field id from `event.target.id` and the value from `event.target.value`. In the case of our form the elements, the `event.target.id` comes from the `controlId` thats set in the `FormGroup` element:
 
    ``` coffee
    <FormGroup controlId="email" bsSize="large">
@@ -65,11 +65,13 @@ Creating a custom hook is amazingly simple. In fact, we did this back when we cr
    </FormGroup>
    ```
 
+4. The callback function is directly using `setValues`, the function that we get from `useState`. So `onChange` we take what the user has entered and call `setValues` to update the state of `fields`, `{ ...fields, [event.target.id]: event.target.value }`. This updated object is now set as our new form field state.
+
 And that's it! We can now use this in our Login component.
 
 ### Using Our Custom Hook
 
-<img class="code-marker" src="/assets/s.png" />Replace our `src/containers/Login.js` with the following:
+{%change%} Replace our `src/containers/Login.js` with the following:
 
 ``` coffee
 import React, { useState } from "react";

@@ -14,7 +14,7 @@ In this chapter, we are going to create a test user for our Cognito User Pool. W
 
 First, we will use AWS CLI to sign up a user with their email and password.
 
-<img class="code-marker" src="/assets/s.png" />In your terminal, run.
+{%change%} In your terminal, run.
 
 ``` bash
 $ aws cognito-idp sign-up \
@@ -26,7 +26,7 @@ $ aws cognito-idp sign-up \
 
 Now, the user is created in Cognito User Pool. However, before the user can authenticate with the User Pool, the account needs to be verified. Let's quickly verify the user using an administrator command.
 
-<img class="code-marker" src="/assets/s.png" />In your terminal, run.
+{%change%} In your terminal, run.
 
 ``` bash
 $ aws cognito-idp admin-confirm-sign-up \

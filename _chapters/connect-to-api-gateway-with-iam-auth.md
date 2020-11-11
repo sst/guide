@@ -17,7 +17,7 @@ The generated SDK can be hard to use since you need to re-generate it every time
 
 However if you are looking to simply connect to API Gateway using the AWS JS SDK, we've create a standalone [**`sigV4Client.js`**](https://github.com/AnomalyInnovations/sigV4Client) that you can use. It is based on the client that comes pre-packaged with the generated SDK.
 
-In this chapter we'll go over how to use the the `sigV4Client.js`. The basic flow looks like this:
+In this chapter we'll go over how to use the `sigV4Client.js`. The basic flow looks like this:
 
 1. Authenticate a user with Cognito User Pool and acquire a user token.
 2. With the user token get temporary IAM credentials from the Identity Pool.

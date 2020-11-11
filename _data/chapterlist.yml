@@ -48,8 +48,8 @@ setup-backend:
     - page: Set up the Serverless Framework
       url: /chapters/setup-the-serverless-framework.html
       subchapters:
-        - page: Add support for ES6/ES7 JavaScript
-          url: /chapters/add-support-for-es6-es7-javascript.html
+        - page: Add support for ES6 and TypeScript
+          url: /chapters/add-support-for-es6-and-typescript.html
     - page: Initialize the backend repo
       url: /chapters/initialize-the-backend-repo.html
 
@@ -196,14 +196,23 @@ deploy-backend-prod:
     - page: What is Infrastructure as Code?
       url: /chapters/what-is-infrastructure-as-code.html
       subchapters:
-        - page: Configure DynamoDB in Serverless
-          url: /chapters/configure-dynamodb-in-serverless.html
-        - page: Configure S3 in Serverless
-          url: /chapters/configure-s3-in-serverless.html
-        - page: Configure Cognito User Pool in Serverless
-          url: /chapters/configure-cognito-user-pool-in-serverless.html
-        - page: Configure Cognito Identity Pool in Serverless
-          url: /chapters/configure-cognito-identity-pool-in-serverless.html
+        - page: What is AWS CDK?
+          url: /chapters/what-is-aws-cdk.html
+        - page: Using AWS CDK with Serverless Framework
+          url: /chapters/using-aws-cdk-with-serverless-framework.html
+    - page: Building a CDK app with SST
+      url: /chapters/building-a-cdk-app-with-sst.html
+      subchapters:
+        - page: Configure DynamoDB in CDK
+          url: /chapters/configure-dynamodb-in-cdk.html
+        - page: Configure S3 in CDK
+          url: /chapters/configure-s3-in-cdk.html
+        - page: Configure Cognito User Pool in CDK
+          url: /chapters/configure-cognito-user-pool-in-cdk.html
+        - page: Configure Cognito Identity Pool in CDK
+          url: /chapters/configure-cognito-identity-pool-in-cdk.html
+        - page: Connect Serverless Framework and CDK with SST
+          url: /chapters/connect-serverless-framework-and-cdk-with-sst.html
     - page: Deploy your Serverless infrastructure
       url: /chapters/deploy-your-serverless-infrastructure.html
     - page: Automating Serverless deployments
@@ -266,7 +275,7 @@ conclusion:
   chapters:
     - page: Wrapping up
       url: /chapters/wrapping-up.html
-    - page: Futher reading
+    - page: Further reading
       url: /chapters/further-reading.html
     - page: Translations
       url: /chapters/translations.html
@@ -290,13 +299,6 @@ organize-serverless-apps:
       url: /chapters/organizing-serverless-projects.html
     - page: Cross-stack references in Serverless
       url: /chapters/cross-stack-references-in-serverless.html
-      subchapters:
-        - page: DynamoDB as a Serverless service
-          url: /chapters/dynamodb-as-a-serverless-service.html
-        - page: S3 as a Serverless service
-          url: /chapters/s3-as-a-serverless-service.html
-        - page: Cognito as a Serverless service
-          url: /chapters/cognito-as-a-serverless-service.html
     - page: Share code between services
       url: /chapters/share-code-between-services.html
     - page: Share an API endpoint between services
@@ -388,6 +390,8 @@ extra-backend:
       url: /chapters/serverless-nodejs-starter.html
     - page: Package Lambdas with serverless-bundle
       url: /chapters/package-lambdas-with-serverless-bundle.html
+    - page: Using Lerna and Yarn Workspaces with Serverless
+      url: /chapters/using-lerna-and-yarn-workspaces-with-serverless.html
 
 extra-frontend:
   title: React

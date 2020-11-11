@@ -16,23 +16,36 @@ The short version is that:
 
 #### First deployment
 
-In our [resources repo]({{ site.backend_ext_resources_github_repo }}) we need to:
+In our [resources repo]({{ site.backend_ext_resources_github_repo }}) we are using SST to deploy our CDK app. CDK internally keeps track of the dependencies between stacks.
 
-- Deploy the `database` and `uploads` service. These can be deployed concurrently.
-- Then we can deploy the `auth` service.
+Our `lib/index.js` looks like this.
+
+``` javascript
+export default function main(app) {
+  new DynamoDBStack(app, "dynamodb");
+
+  const s3 = new S3Stack(app, "s3");
+
+  new CognitoStack(app, "cognito", { bucketArn: s3.bucket.bucketArn });
+}
+```
+
+Here CDK knows that the `CognitoStack` depends on the `S3Stack`. And it needs to wait for the `S3Stack` to complete first.
+
+[SST](https://github.com/serverless-stack/serverless-stack) will deploy the stacks in our CDK app concurrently while ensuring that the dependencies are respected.
 
 Next for the [API repo]({{ site.backend_ext_api_github_repo }}) for the first time, you have to:
 
 - Deploy the `notes-api` first. This will export the value `dev-ExtApiGatewayRestApiId` and `dev-ExtApiGatewayRestApiRootResourceId`.
-- Then deploy the `billing-api` next. This will export the value `ExtNotePurchasedTopicArn-dev`.
+- Then deploy the `billing-api` next. This will export the value `dev-ExtNotePurchasedTopicArn`.
 - Then deploy the `notify-job`.
 
 Assuming that you are deploying to the `dev` stage.
 
 If you were to deploy `billing-api` and `notify-job` concurrently, the `notify-job` will fail with the following CloudFormation error:
 
-```
-notify-job - No export named ExtNotePurchasedTopicArn-dev found.
+``` txt
+notify-job - No export named dev-ExtNotePurchasedTopicArn found.
 ```
 
 This error is basically saying that the ARN referenced in its `serverless.yml` does not exist. This makes sense because we haven’t created it yet!
@@ -54,7 +67,7 @@ If you are using a CI, you'll need to deploy the above in phases. With [Seed](ht
 ### Managing deployment in phases for api
 
 For our api repo, the dependencies look like:
-```
+``` txt
 notes-api > billing-api > notify-job
 ```
 To break it down in detail:

@@ -46,7 +46,7 @@ ref: create-an-s3-bucket
 
 ![AWS S3 버킷 권한 추가 화면](/assets/add-bucket-policy.png)
 
-<img class="code-marker" src="/assets/s.png" />편집기에 다음 버킷 정책을 추가하십시오. 여기서 `notes-app-client`는 S3 버킷의 이름입니다. 여기에 여러분의 버킷 이름을 사용하십시오. 
+{%change%} 편집기에 다음 버킷 정책을 추가하십시오. 여기서 `notes-app-client`는 S3 버킷의 이름입니다. 여기에 여러분의 버킷 이름을 사용하십시오. 
 
 ``` json
 {

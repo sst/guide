@@ -13,7 +13,7 @@ AWS Amplify를 사용하여 Amazon Cognito 설정에 로그인합니다. 가져 
 
 ### AWS Amplify에서 Auth 가져 오기
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Login.js`에 있는 Login 컨테이너의 헤더에 다음을 추가하십시오.
+{%change%} `src/containers/Login.js`에 있는 Login 컨테이너의 헤더에 다음을 추가하십시오.
 
 ``` coffee
 import { Auth } from "aws-amplify";
@@ -23,7 +23,7 @@ import { Auth } from "aws-amplify";
 
 로그인 코드 자체는 비교적 간단합니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Login.js` 파일의 `handleSubmit` 메소드를 다음과 같이 바꾸기만 하면 됩니다.
+{%change%} `src/containers/Login.js` 파일의 `handleSubmit` 메소드를 다음과 같이 바꾸기만 하면 됩니다.
 
 ``` javascript
 handleSubmit = async event => {

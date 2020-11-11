@@ -12,7 +12,7 @@ We are going to use AWS Amplify to login to our Amazon Cognito setup. Let's star
 
 ### Import Auth from AWS Amplify
 
-<img class="code-marker" src="/assets/s.png" />Add the Auth module to the header of our Login container in `src/containers/Login.js`.
+{%change%} Add the Auth module to the header of our Login container in `src/containers/Login.js`.
 
 ``` coffee
 import { Auth } from "aws-amplify";
@@ -22,7 +22,7 @@ import { Auth } from "aws-amplify";
 
 The login code itself is relatively simple.
 
-<img class="code-marker" src="/assets/s.png" />Simply replace our placeholder `handleSubmit` method in `src/containers/Login.js` with the following.
+{%change%} Simply replace our placeholder `handleSubmit` method in `src/containers/Login.js` with the following.
 
 ``` javascript
 async function handleSubmit(event) {

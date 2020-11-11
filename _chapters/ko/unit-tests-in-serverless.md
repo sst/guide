@@ -32,7 +32,7 @@ $ npm install --save-dev jest
 
 ### 단위 테스트 추가
 
-<img class="code-marker" src="/assets/s.png" />새로운 `tests/billing.test.js` 파일을 생성하고 다음 내용을 추가합니다.
+{%change%} 새로운 `tests/billing.test.js` 파일을 생성하고 다음 내용을 추가합니다.
 
 ``` js
 import { calculateCost } from "../libs/billing-lib";
@@ -96,7 +96,7 @@ Ran all test suites.
 
 ### 변경사항 커밋
 
-<img class="code-marker" src="/assets/s.png" />변경사항을 커밋합니다.
+{%change%} 변경사항을 커밋합니다.
 
 ``` bash
 $ git add .
@@ -105,7 +105,7 @@ $ git commit -m "Adding unit tests"
 
 ### 변경사항 푸시 
 
-<img class="code-marker" src="/assets/s.png" />프로젝트를 변경 했으므로 GitHub에 푸시(Push)하겠습니다.
+{%change%} 프로젝트를 변경 했으므로 GitHub에 푸시(Push)하겠습니다.
 
 ``` bash
 $ git push

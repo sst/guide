@@ -18,7 +18,7 @@ Let's look at the main changes we need to make to allow users to reset their pas
 
 ### Add a Reset Password Form
 
-<img class="code-marker" src="/assets/s.png" />We are going to create a `src/containers/ResetPassword.js`.
+{%change%} We are going to create a `src/containers/ResetPassword.js`.
 
 ``` coffee
 import React, { useState } from "react";
@@ -199,7 +199,7 @@ Let's quickly go over the flow here:
 
 Let's also add a couple of styles.
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `src/containers/ResetPassword.css`.
+{%change%} Add the following to `src/containers/ResetPassword.css`.
 
 ``` css
 @media all and (min-width: 480px) {
@@ -232,7 +232,7 @@ Let's also add a couple of styles.
 
 Finally, let's link this up with the rest of our app.
 
-<img class="code-marker" src="/assets/s.png" />Add the route to `src/Routes.js`.
+{%change%} Add the route to `src/Routes.js`.
 
 ``` html
 <UnauthenticatedRoute exact path="/login/reset">
@@ -240,7 +240,7 @@ Finally, let's link this up with the rest of our app.
 </UnauthenticatedRoute>
 ```
 
-<img class="code-marker" src="/assets/s.png" />And import it in the header.
+{%change%} And import it in the header.
 
 ``` coffee
 import ResetPassword from "./containers/ResetPassword";
@@ -250,19 +250,19 @@ import ResetPassword from "./containers/ResetPassword";
 
 Now we want to make sure that our users are directed to this page when they are trying to login.
 
-<img class="code-marker" src="/assets/s.png" />So let's add a link in our `src/containers/Login.js`. Add it above our login button.
+{%change%} So let's add a link in our `src/containers/Login.js`. Add it above our login button.
 
 ``` coffee
 <Link to="/login/reset">Forgot password?</Link>
 ```
 
-<img class="code-marker" src="/assets/s.png" />And import the `Link` component in the header.
+{%change%} And import the `Link` component in the header.
 
 ``` coffee
 import { Link } from "react-router-dom";
 ```
 
-<img class="code-marker" src="/assets/s.png" />And finally add some style to the link by adding the following to `src/containers/Login.css`
+{%change%} And finally add some style to the link by adding the following to `src/containers/Login.css`
 
 ``` css
 .Login form a {

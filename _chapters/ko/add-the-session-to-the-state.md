@@ -16,7 +16,7 @@ comments_id: add-the-session-to-the-state/136
 
 먼저 사용자 로그인을 한 상태에서 App state를 업데이트하는 것으로 시작합니다. 이 항목을 `Login` 컨테이너에 저장하고 싶지만 다른 곳에서도 이 항목을 사용하므로 가장 적합한 곳은 `App` 컨테이너입니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/App.js`를 열어서 `class App extends Component {` 줄 바로 아래에 다음 내용을 추가합니다.
+{%change%} `src/App.js`를 열어서 `class App extends Component {` 줄 바로 아래에 다음 내용을 추가합니다.
 
 ``` javascript
 constructor(props) {
@@ -38,7 +38,7 @@ userHasAuthenticated = authenticated => {
 
 우리는 `App` 컴포넌트에서 생성된 경로의 자식 컴포넌트에 두 개의 속성값을 전달함으로써 이를 수행 할 수 있습니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/App.js`의 `render() {` 줄 바로 아래에 다음 내용을 추가합니다 .
+{%change%} `src/App.js`의 `render() {` 줄 바로 아래에 다음 내용을 추가합니다 .
 
 ``` javascript
 const childProps = {
@@ -47,13 +47,13 @@ const childProps = {
 };
 ```
 
-<img class="code-marker" src="/assets/s.png" />`src/App.js`의 `render` 메쏘드에서 다음 라인을 대체하여 `Routes` 컴포넌트로 전달하십시오.
+{%change%} `src/App.js`의 `render` 메쏘드에서 다음 라인을 대체하여 `Routes` 컴포넌트로 전달하십시오.
 
 ``` coffee
 <Routes />
 ```
 
-<img class="code-marker" src="/assets/s.png" />위 내용을 다음 내용으로 변경
+{%change%} 위 내용을 다음 내용으로 변경
 
 ``` coffee
 <Routes childProps={childProps} />
@@ -63,7 +63,7 @@ const childProps = {
 
 이를 위해 새로운 컴포넌트를 생성합니다.
 
-<img class="code-marker" src="/assets/s.png" />작업 디렉토리에서 다음 명령을 실행하여 `src/components/` 디렉토리를 만듭니다.
+{%change%} 작업 디렉토리에서 다음 명령을 실행하여 `src/components/` 디렉토리를 만듭니다.
 
 ``` bash
 $ mkdir src/components/
@@ -71,7 +71,7 @@ $ mkdir src/components/
 
 이곳에 우리는 API를 직접 다루지 않거나 경로에 응답하는 모든 React 구성 요소들을 저장하겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/components/AppliedRoute.js`라는 새로운 컴포넌트를 만들고 다음을 추가하십시오.
+{%change%} `src/components/AppliedRoute.js`라는 새로운 컴포넌트를 만들고 다음을 추가하십시오.
 
 ``` coffee
 import React from "react";
@@ -93,7 +93,7 @@ export default ({ component: C, props: cProps, ...rest }) =>
 
 이제 이 컴포넌트를 사용하기 위해 우리는 `childProps`를 전달해야 할 경로에 이 컴포넌트를 포함시킵니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/Routes.js` 파일의 `export default () => (` 메소드를 다음으로 대체합니다. 
+{%change%} `src/Routes.js` 파일의 `export default () => (` 메소드를 다음으로 대체합니다. 
 
 ``` coffee
 export default ({ childProps }) =>
@@ -105,7 +105,7 @@ export default ({ childProps }) =>
   </Switch>;
 ```
 
-<img class="code-marker" src="/assets/s.png" />`src/Routes.js` 파일의 헤더에 새로운 컴포넌트를 추가합니다.
+{%change%} `src/Routes.js` 파일의 헤더에 새로운 컴포넌트를 추가합니다.
 
 ``` coffee
 import AppliedRoute from "./components/AppliedRoute";
@@ -113,7 +113,7 @@ import AppliedRoute from "./components/AppliedRoute";
 
 이제 `Login` 컨테이너에서 `userHasAuthenticated` 메소드를 호출 할 것입니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Login.js`에 `alert ( 'Logged in');` 행을 다음 행으로 대체하십시오.
+{%change%} `src/containers/Login.js`에 `alert ( 'Logged in');` 행을 다음 행으로 대체하십시오.
 
 ``` javascript
 this.props.userHasAuthenticated(true);
@@ -132,7 +132,7 @@ this.props.userHasAuthenticated(true);
 </LinkContainer>
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 다음 내용으로 대체합니다:
+{%change%} 그리고 다음 내용으로 대체합니다:
 
 ``` coffee
 {this.state.isAuthenticated
@@ -150,7 +150,7 @@ this.props.userHasAuthenticated(true);
 
 그리고 헤더에 `Fragment`를 import 합니다. 
 
-<img class="code-marker" src="/assets/s.png" />`src/App.js` 파일의 헤더에 `import React` 행을 다음으로 대체합니다. 
+{%change%} `src/App.js` 파일의 헤더에 `import React` 행을 다음으로 대체합니다. 
 
 ``` coffee
 import React, { Component, Fragment } from "react";
@@ -158,7 +158,7 @@ import React, { Component, Fragment } from "react";
 
 `Fragment` 컴포넌트는 placeholder 컴포넌트로 생각할 수 있습니다. 사용자가 로그인하지 않은 경우 두 개의 링크를 렌더링해야하기 때문에 이 정보가 필요합니다. 이렇게 하려면 'div'와 같은 단일 컴포넌트 안에 감쌀 필요가 있습니다. 그러나 `Fragment` 컴포넌트를 사용하여 React에 두 개의 링크가 이 컴포넌트 안에 있음을 알려주지만 추가 HTML은 렌더링하지 않습니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/App.js` 파일의 `handleLogout` 메소드를 추가하고 `render() {` 위에 다음 내용을 추가합니다.
+{%change%} `src/App.js` 파일의 `handleLogout` 메소드를 추가하고 `render() {` 위에 다음 내용을 추가합니다.
 
 ``` coffee
 handleLogout = event => {

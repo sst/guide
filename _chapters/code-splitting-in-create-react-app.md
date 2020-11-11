@@ -46,7 +46,7 @@ However, we import all of the components in the route statically at the top. Thi
 
 To do this we are going to dynamically import the required component.
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `src/components/AsyncComponent.js`.
+{%change%} Add the following to `src/components/AsyncComponent.js`.
 
 ``` coffee
 import React, { Component } from "react";
@@ -112,7 +112,7 @@ We are then going to use the `AsyncHome` component in our routes. React Router w
 
 Now let's go back to our Notes project and apply these changes.
 
-<img class="code-marker" src="/assets/s.png" />Your `src/Routes.js` should look like this after the changes.
+{%change%} Your `src/Routes.js` should look like this after the changes.
 
 ``` coffee
 import React from "react";

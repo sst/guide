@@ -13,7 +13,7 @@ ref: configure-cognito-identity-pool-in-serverless
 
 ### 리소스 만들기
 
-<img class="code-marker" src="/assets/s.png" />`resources/cognito-identity-pool.yml`에 다음 내용을 추가합니다.
+{%change%} `resources/cognito-identity-pool.yml`에 다음 내용을 추가합니다.
 
 ``` yml
 Resources:
@@ -118,7 +118,7 @@ Outputs:
 
 2. `AllowUnauthenticatedIdentities:false`를 추가하여 로그인한 사용자만 원한다고 설정했습니다.
 
-3. 다음으로 사용자 풀을 ID 공급자로 사용하겠다고 명시합니다. 우리는 특별히 `Ref:CognitoUserPoolClient` 라인을 사용하여 이를 수행합니다. 다시 [Serverless에서 Cognito 사용자 풀 만들기]({% link _chapters/configure-cognito-user-pool-in-serverless.md %}) 챕터를 참조하면 `CognitoUserPoolClient` 블럭이 있음을 알 수 있습니다. 그리고 여기에서 참조하고있다.
+3. 다음으로 사용자 풀을 ID 공급자로 사용하겠다고 명시합니다. 우리는 특별히 `Ref:CognitoUserPoolClient` 라인을 사용하여 이를 수행합니다. 다시 [Serverless에서 Cognito 사용자 풀 만들기]({% link _chapters/configure-cognito-user-pool-in-cdk.md %}) 챕터를 참조하면 `CognitoUserPoolClient` 블럭이 있음을 알 수 있습니다. 그리고 여기에서 참조하고있다.
 
 4. 그런 다음 인증된 사용자에게 IAM 역할을 부여합니다.
 
@@ -132,7 +132,7 @@ Outputs:
 
 ### 리소스 추가
 
-<img class="code-marker" src="/assets/s.png" />`serverless.yml`에서 `resources:` 블럭을 다음으로 대체하십시오.
+{%change%} `serverless.yml`에서 `resources:` 블럭을 다음으로 대체하십시오.
 
 ``` yml
 # Create our resources with separate CloudFormation templates
@@ -150,7 +150,7 @@ resources:
 
 ### 코드 커밋
 
-<img class="code-marker" src="/assets/s.png" />지금까지 변경 사항을 커밋합니다.
+{%change%} 지금까지 변경 사항을 커밋합니다.
 
 ``` bash
 $ git add .

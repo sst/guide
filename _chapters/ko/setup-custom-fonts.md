@@ -19,7 +19,7 @@ comments_id: set-up-custom-fonts/81
 
 먼저 HTML에 포함시켜 보겠습니다. 우리의 React.js 앱은 하나의 HTML 파일을 사용하고 있습니다.
 
-<img class="code-marker" src="/assets/s.png" />`public/index.html`을 편집하고, 이 두 서체를 추가하기 위해 HTML의 `<head>` 섹션에 다음 행을 추가하십시오.
+{%change%} `public/index.html`을 편집하고, 이 두 서체를 추가하기 위해 HTML의 `<head>` 섹션에 다음 행을 추가하십시오.
 
 ``` html
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=PT+Serif|Open+Sans:300,400,600,700,800">
@@ -31,7 +31,7 @@ comments_id: set-up-custom-fonts/81
 
 이제 새로 추가된 글꼴을 스타일 시트에 추가할 준비가되었습니다. Create React App은 개별 컴포넌트의 스타일을 분리하는 데 도움이되며 `src/index.css`에 위치한 프로젝트의 마스터 스타일 시트를 가지고 있습니다.
 
-<img class="code-marker" src="/assets/s.png" />`body` 태그에 대한 `src/index.css`의 현재 글꼴을 다음과 같이 변경합니다.
+{%change%} `body` 태그에 대한 `src/index.css`의 현재 글꼴을 다음과 같이 변경합니다.
 
 ``` css
 body {
@@ -45,7 +45,7 @@ body {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 css 파일에 아래 블록을 추가하여 헤더 태그의 글꼴을 새로운 Serif 글꼴로 변경해 봅시다.
+{%change%} 그리고 css 파일에 아래 블록을 추가하여 헤더 태그의 글꼴을 새로운 Serif 글꼴로 변경해 봅시다.
 
 ``` css
 h1, h2, h3, h4, h5, h6 {

@@ -90,15 +90,10 @@ The creation process will go through a couple of phases of
 - validating the domain is hosted on Route 53;
 - creating the SSL certificate; and
 - creating the API Gateway custom domain.
-Some of the steps are short-lived so you might not see all of them.
 
-![Show creating domain for prod stage](/assets/best-practices/sharing-route-53-domain-across-aws-accounts/show-creating-domain-for-prod-stage.png)
+The last step is update the CloudFront distribution, which can take up to 40 minutes.
 
-The last step is update the CloudFront distribution, which can take up to 40 minutes. You will be waiting on this step.
-
-![Show domain pending CloudFront update](/assets/best-practices/sharing-route-53-domain-across-aws-accounts/show-domain-pending-cloudfront-update.png)
-
-While we wait, let's setup the domain for our **dev** api. Select **Add**.
+Let's setup the domain for our **dev** api. Select **Add**.
 
 ![Select Add domain for dev stage](/assets/best-practices/sharing-route-53-domain-across-aws-accounts/select-add-domain-for-dev-stage.png)
 
@@ -106,13 +101,7 @@ Select the domain **dev.ext-api.serverless-stack.com** and leave the subdomain e
 
 ![Select base domain for dev stage](/assets/best-practices/sharing-route-53-domain-across-aws-accounts/select-base-domain-for-dev-stage.png)
 
-Similarly, you will wait for up to 40 minutes.
-
-![Show domain pending for dev stage](/assets/best-practices/sharing-route-53-domain-across-aws-accounts/show-domain-pending-for-dev-stage.png)
-
-After 40 minutes, the domains will be ready.
-
-![Show custom domain created](/assets/best-practices/sharing-route-53-domain-across-aws-accounts/show-custom-domain-created.png)
+Similarly, you might have to wait for up to 40 minutes.
 
 Now we've delegated the `dev.api` subdomain of `notes-app.com` to our `Development` AWS account. We'll be configuring our app to use [these domains in a later chapter]({% link _chapters/share-route-53-domains-across-aws-accounts.md %}).
 

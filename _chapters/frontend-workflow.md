@@ -15,7 +15,7 @@ Now that we have our frontend deployed and configured, let's go over what our de
 
 A good practise is to create a branch when we are working on something new.
 
-<img class="code-marker" src="/assets/s.png" />Run the following in the root of your project.
+{%change%} Run the following in the root of your project.
 
 ``` bash
 $ git checkout -b "new-feature"
@@ -27,7 +27,7 @@ Let's make a couple of quick changes to test the process of deploying updates to
 
 We are going to add a Login and Signup button to our lander to give users a clear call to action.
 
-<img class="code-marker" src="/assets/s.png" />To do this update our `renderLander` function in `src/containers/Home.js`.
+{%change%} To do this update our `renderLander` function in `src/containers/Home.js`.
 
 ``` coffee
 function renderLander() {
@@ -48,13 +48,13 @@ function renderLander() {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />And import the `Link` component from React-Router in the header.
+{%change%} And import the `Link` component from React-Router in the header.
 
 ``` javascript
 import { Link } from "react-router-dom";
 ```
 
-<img class="code-marker" src="/assets/s.png" />Also, add a couple of styles to `src/containers/Home.css`.
+{%change%} Also, add a couple of styles to `src/containers/Home.css`.
 
 ``` css
 .Home .lander div {
@@ -69,7 +69,7 @@ And our lander should look something like this.
 
 ![App updated lander screenshot](/assets/app-updated-lander.png)
 
-<img class="code-marker" src="/assets/s.png" />Let's commit these changes to Git.
+{%change%} Let's commit these changes to Git.
 
 ``` bash
 $ git add .
@@ -90,7 +90,7 @@ Set **Branch deploys** to **All** and hit **Save**.
 
 ![Set branch deploys to all screenshot](/assets/part2/set-branch-deploys-to-all.png)
 
-<img class="code-marker" src="/assets/s.png" />Now comes the fun part, we can deploy this to dev so we can test it right away. All we need to do is push it to Git.
+{%change%} Now comes the fun part, we can deploy this to dev so we can test it right away. All we need to do is push it to Git.
 
 ``` bash
 $ git push -u origin new-feature
@@ -112,7 +112,7 @@ You can test around this version of our frontend app. It is connected to the dev
 
 ### Push to Production
 
-<img class="code-marker" src="/assets/s.png" />Now if we feel happy with the changes we can push this to production just by merging to master.
+{%change%} Now if we feel happy with the changes we can push this to production just by merging to master.
 
 ``` bash
 $ git checkout master

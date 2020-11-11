@@ -16,7 +16,7 @@ First up, there are errors that can happen in our Lambda function code. Now we a
 
 Let's start by creating a new branch that we'll use while working through the following examples.
 
-<img class="code-marker" src="/assets/s.png" />In the project root for your backend repo, run the following:
+{%change%} In the project root for your backend repo, run the following:
 
 ``` bash
 $ git checkout -b debug
@@ -26,7 +26,7 @@ $ git checkout -b debug
 
 Let's trigger an error in `get.js` by commenting out the `noteId` field in the DynamoDB call's Key definition. This will cause the DynamoDB call to fail and in turn cause the Lambda function to fail.
 
-<img class="code-marker" src="/assets/s.png" />Replace `get.js` with the following.
+{%change%} Replace `services/notes/get.js` with the following.
 
 ``` javascript
 import handler from "./libs/handler-lib";
@@ -48,7 +48,7 @@ export const main = handler(async (event, context) => {
   if ( ! result.Item) {
     throw new Error("Item not found.");
   }
-  
+
   // Return the retrieved item
   return result.Item;
 });
@@ -56,7 +56,7 @@ export const main = handler(async (event, context) => {
 
 Note the line that we've commented out.
 
-<img class="code-marker" src="/assets/s.png" /> Let's commit our changes.
+{%change%}  Let's commit our changes.
 
 
 ``` bash
@@ -87,35 +87,21 @@ To start with, you should get an email from Sentry about this error. Go to Sentr
 
 ![New network error in Sentry](/assets/monitor-debug-errors/new-network-error-in-sentry.png)
 
-You'll see that our frontend error handler is logging the API endpoint that failed. **Copy** the URL.
+You'll see that our frontend error handler is logging the API endpoint that failed.
 
 ![Error details in Sentry](/assets/monitor-debug-errors/error-details-in-sentry.png)
 
-Then we'll search for the Lambda logs for that endpoint on Seed. Click **View Lambda logs**.
+You'll also get an email from Seed telling you that there was an error in your Lambda functions. If you click on the **Issues** tab you'll see the error at the top.
 
-![Click view lambda logs in Seed](/assets/monitor-debug-errors/click-view-lambda-logs-in-seed.png)
+![View Issues in Seed](/assets/monitor-debug-errors/view-issues-in-seed.png)
 
-Paste the URL and select the `GET` method row.
+And if you click on the error, you'll see the error message and stack trace.
 
-![Search lambda logs by URL in Seed](/assets/monitor-debug-errors/search-lambda-logs-by-url-in-seed.png)
+![Error details in Seed](/assets/monitor-debug-errors/error-details-in-seed.png)
 
-By default, the logs page shows you the request from a few minutes ago, and it automatically waits for any new requests. You should see the failed request in the logs if it just happened. If it did not happen in the last few minutes, select the time field, and copy and paste the time from Sentry. Ensure to add UTC at the end of the time because Seed assumes local time, if it's entered without a timezone.
+If you scroll down a bit further you'll notice the entire request log. Including debug messages from the AWS SDK as it tries to call DynamoDB.
 
-Note that we are using Seed to look up the Lambda logs for your Serverless app. However, you can just use CloudWatch logs directly as well. It's a little harder to find your logs but all the logged info is available there. We have a detailed [extra-credit chapter on this]({% link _chapters/api-gateway-and-lambda-logs.md %}).
-
-![Search by log request by time in Seed](/assets/monitor-debug-errors/search-by-log-request-by-time-in-seed.png)
-
-You should see a failed request highlighted in red. Multiple failed requests might show up if you tried to load the note multiple times. Click to expand the request.
-
-![Expand log request details in Seed](/assets/monitor-debug-errors/expand-log-request-details-in-seed.png)
-
-In the error details, you'll see a debug log of all the actions. Starting with the AWS DynamoDB call. You can see all the parameters sent in the call.
-
-![View log request details in Seed](/assets/monitor-debug-errors/view-log-request-details-in-seed.png)
-
-If you scroll down, you should see the `ValidationException` error that was caught by our handler.
-
-![View log request error message in Seed](/assets/monitor-debug-errors/view-log-request-error-message-in-seed.png)
+![Lambda request log in error details in Seed](/assets/monitor-debug-errors/lambda-request-log-in-error-details-in-seed.png)
 
 The message `The provided key element does not match the schema`, says that there is something wrong with the `Key` that we passed in. Our debug messages helped guide us to the source of the problem!
 

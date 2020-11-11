@@ -13,13 +13,13 @@ As we had previously mentioned, we do not want to store our secret environment v
 
 We have a `env.example` file for this exact purpose.
 
-<img class="code-marker" src="/assets/s.png" />Start by renaming the `env.example` file to `.env`.
+{%change%} Start by renaming the `env.example` file to `.env`.
 
 ``` bash
 $ mv env.example .env
 ```
 
-<img class="code-marker" src="/assets/s.png" />Replace its contents with the following.
+{%change%} Replace its contents with the following.
 
 ``` bash
 STRIPE_SECRET_KEY=STRIPE_TEST_SECRET_KEY
@@ -27,11 +27,11 @@ STRIPE_SECRET_KEY=STRIPE_TEST_SECRET_KEY
 
 Make sure to replace the `STRIPE_TEST_SECRET_KEY` with the **Secret key** from the [Setup a Stripe account]({% link _chapters/setup-a-stripe-account.md %}) chapter.
 
-We are using the [serverless-dotenv-plugin](https://github.com/colynb/serverless-dotenv-plugin) to load these as an environment variable when our Lambda function runs locally. This allows us to reference them in our `serverless.yml`. We will not be commiting the `.env` file to Git as we are only going to use these locally. When we look at automating deployments, we'll be adding our secrets to the CI, so they'll be made available through there instead.
+We are using the [serverless-dotenv-plugin](https://github.com/colynb/serverless-dotenv-plugin) to load these as an environment variable when our Lambda function runs locally. This allows us to reference them in our `serverless.yml`. We will not be committing the `.env` file to Git as we are only going to use these locally. When we look at automating deployments, we'll be adding our secrets to the CI, so they'll be made available through there instead.
 
 Next, let's add a reference to these.
 
-<img class="code-marker" src="/assets/s.png" />And add the following in the `environment:` block in your `serverless.yml`.
+{%change%} And add the following in the `environment:` block in your `serverless.yml`.
 
 ``` yml
     stripeSecretKey: ${env:STRIPE_SECRET_KEY}
@@ -55,7 +55,7 @@ A quick explanation on the above:
 
 Now we need to ensure that we don't commit our `.env` file to git. The starter project that we are using has the following in the `.gitignore`.
 
-```
+``` txt
 # Env
 .env
 ```

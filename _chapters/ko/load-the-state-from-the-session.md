@@ -17,7 +17,7 @@ Amplify는 `Auth.currentSession()` 메소드를 사용하여 현재 사용자 �
 
 앱이 브라우저에 로드 될 때 사용자 세션을 불러오겠습니다. 먼저 `componentDidMount`에서 이를 처리합니다. `Auth.currentSession()`이 promise를 반환하므로 앱이 완전히 로드가 완료된 상태로 준비가 되어 있어야합니다.
 
-<img class="code-marker" src="/assets/s.png" />이를 위해 `isAuthenticating`라고 하는 `src/App.js`의 state에 플래그를 추가합니다. 생성자의 초기 상태는 다음과 같아야합니다.
+{%change%} 이를 위해 `isAuthenticating`라고 하는 `src/App.js`의 state에 플래그를 추가합니다. 생성자의 초기 상태는 다음과 같아야합니다.
 
 ``` javascript
 this.state = {
@@ -26,13 +26,13 @@ this.state = {
 };
 ```
 
-<img class="code-marker" src="/assets/s.png" />`Auth` 모듈을 `src/App.js` 헤더에 다음과 같이 추가해 보겠습니다.
+{%change%} `Auth` 모듈을 `src/App.js` 헤더에 다음과 같이 추가해 보겠습니다.
 
 ``` javascript
 import { Auth } from "aws-amplify";
 ```
 
-<img class="code-marker" src="/assets/s.png" />이제 사용자 세션을 불러오기 위해 우리는 `src/App.js`의 `constructor` 메소드 아래에 다음을 추가 할 것입니다.
+{%change%} 이제 사용자 세션을 불러오기 위해 우리는 `src/App.js`의 `constructor` 메소드 아래에 다음을 추가 할 것입니다.
 
 ``` javascript
 async componentDidMount() {
@@ -58,7 +58,7 @@ async componentDidMount() {
 
 여기서는`isAuthenticating` 플래그에 기반하여 앱을 조건부로 렌더링합니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/App.js`의 `render` 메소드는 아래와 같아야 합니다. 
+{%change%} `src/App.js`의 `render` 메소드는 아래와 같아야 합니다. 
 
 ``` coffee
 render() {

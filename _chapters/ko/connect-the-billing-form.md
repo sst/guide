@@ -13,13 +13,13 @@ ref: connect-the-billing-form
 
 Stripe.js를 HTML에 포함시켜 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`public/index.html` 파일의 `<head>` 아래에 다음을 추가합니다.  
+{%change%} `public/index.html` 파일의 `<head>` 아래에 다음을 추가합니다.  
 
 ``` html
 <script src="https://js.stripe.com/v3/"></script>
 ```
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Settings.js`에 `render` 메소드를 다음으로 대체합니다.
+{%change%} `src/containers/Settings.js`에 `render` 메소드를 다음으로 대체합니다.
 
 ``` coffee
 handleFormSubmit = async (storage, { token, error }) => {
@@ -60,7 +60,7 @@ render() {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 헤더에 다음 내용을 추가합니다.
+{%change%} 그리고 헤더에 다음 내용을 추가합니다.
 
 ``` js
 import { Elements, StripeProvider } from "react-stripe-elements";
@@ -75,7 +75,7 @@ import "./Settings.css";
 
 마지막으로 Setting 페이지의 스타일을 전체적으로 처리해 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/Settings.css`에 다음을 추가합니다.
+{%change%} `src/containers/Settings.css`에 다음을 추가합니다.
 
 ``` css
 @media all and (min-width: 480px) {
@@ -108,7 +108,7 @@ Stripe 테스트 카드에 대한 자세한 내용은 [Stripe API Docs](https://
 
 ### 변경 사항 적용
 
-<img class="code-marker" src="/assets/s.png" />Git에 빠르게 커밋합니다.
+{%change%} Git에 빠르게 커밋합니다.
 
 ``` bash
 $ git add .

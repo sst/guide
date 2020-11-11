@@ -27,31 +27,31 @@ Once your repository is created, copy the repository URL. We'll need this soon.
 
 In our case the URL is:
 
-```
+``` txt
 https://github.com/jayair/serverless-stack-api.git
 ```
 
 ### Initialize Your New Repo
 
-<img class="code-marker" src="/assets/s.png" />Now head back to your project and use the following command to initialize your new repo.
+{%change%} Now head back to your project and use the following command to initialize your new repo.
 
 ``` bash
 $ git init
 ```
 
-<img class="code-marker" src="/assets/s.png" />Add the existing files.
+{%change%} Add the existing files.
 
 ``` bash
 $ git add .
 ```
 
-<img class="code-marker" src="/assets/s.png" />Create your first commit.
+{%change%} Create your first commit.
 
 ``` bash
 $ git commit -m "First commit"
 ```
 
-<img class="code-marker" src="/assets/s.png" />Link it to the repo you created on GitHub.
+{%change%} Link it to the repo you created on GitHub.
 
 ``` bash
 $ git remote add origin REPO_URL
@@ -63,7 +63,7 @@ Here `REPO_URL` is the URL we copied from GitHub in the steps above. You can ver
 $ git remote -v
 ```
 
-<img class="code-marker" src="/assets/s.png" />Finally, let's push our first commit to GitHub using:
+{%change%} Finally, let's push our first commit to GitHub using:
 
 ``` bash
 $ git push -u origin master

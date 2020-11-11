@@ -11,7 +11,7 @@ ref: create-a-billing-form
 
 이제 설정 페이지에는 사용자의 신용 카드 정보를 가져 와서 Stripe 토큰을 받고 결제 API를 호출하는 양식을 추가합니다. Stripe React SDK를 프로젝트에 추가해 보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />프로젝트 루트에서 다음을 실행합니다.
+{%change%} 프로젝트 루트에서 다음을 실행합니다.
 
 ``` bash
 $ npm install --save react-stripe-elements
@@ -19,7 +19,7 @@ $ npm install --save react-stripe-elements
 
 다음으로 청구서 양식 컴포넌트를 생성합니다.
 
-<img class="code-marker" src="/assets/s.png" />아래 내용을 추가한 `src/components/BillingForm.js`파일을 생성합니다.
+{%change%} 아래 내용을 추가한 `src/components/BillingForm.js`파일을 생성합니다.
 
 {% raw %}
 ``` coffee
@@ -144,7 +144,7 @@ export default injectStripe(BillingForm);
 
 또한 신용카드 필드에 스타일을 추가하여 나머지 UI와 일치하도록하십시오.
 
-<img class="code-marker" src="/assets/s.png" />아래 내용으로 `src/components/BillingForm.css` 파일을 생성합니다.
+{%change%} 아래 내용으로 `src/components/BillingForm.css` 파일을 생성합니다.
 
 ``` css
 .BillingForm .card-field {
@@ -165,7 +165,7 @@ export default injectStripe(BillingForm);
 
 ### 변경 사항 커밋
 
-<img class="code-marker" src="/assets/s.png" />Git에 변경 사항을 빠르게 커밋합니다.
+{%change%} Git에 변경 사항을 빠르게 커밋합니다.
 
 ``` bash
 $ git add .

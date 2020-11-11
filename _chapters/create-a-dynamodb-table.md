@@ -22,7 +22,7 @@ First, log in to your [AWS Console](https://console.aws.amazon.com) and select *
 
 Select **Create table**.
 
-![Create DynamoDB Table screenshot](/assets/dynamodb/create-dynamodb-table.png)
+![Create DynamoDB Table screenshot](/assets/dynamodb/dynamodb-dashboard-create-table.png)
 
 Enter the **Table name** and **Primary key** info as shown below. Just make sure that `userId` and `noteId` are in camel case.
 
@@ -46,6 +46,8 @@ Scroll down further and select **On-demand** instead of **Provisioned**.
 ![Select On-Demand Capacity screenshot](/assets/dynamodb/select-on-demand-capacity.png)
 
 [On-Demand Capacity](https://aws.amazon.com/dynamodb/pricing/on-demand/) is DynamoDB's pay per request mode. For workloads that are not predictable or if you are just starting out, this ends up being a lot cheaper than the [Provisioned Capacity](https://aws.amazon.com/dynamodb/pricing/provisioned/) mode.
+
+If the On-Demand Capacity option is missing and there is an info box containing the message "You do not have the required role to enable Auto Scaling by default", you can create the table and afterwards modify the setting from the "Capacity" tab of the table settings page. The role mentioned by the info box is automatically created by the table creation process.
 
 Finally, scroll down and hit **Create**.
 

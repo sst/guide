@@ -1,4 +1,16 @@
 current:
+  title: "Fixing encoding issue in eBook"
+  desc: "Oct 23, 2020: Generating new eBook version to fix encoding issues."
+
+v5-0-1:
+  title: "Updating to new eBook format"
+  desc: "Oct 21, 2020: Generating new eBook using Pandoc."
+
+v5-0:
+  title: "Using CDK to configure infrastructure resources"
+  desc: "Oct 7, 2020: Moving from CloudFormation to AWS CDK to configure infrastructure resources. And using Serverless Stack Toolkit (SST) to deploy CDK alongside Serverless Framework."
+
+v4-1:
   title: "Adding new monitoring and debugging section"
   desc: "Apr 8, 2020: Adding a new section on monitoring and debugging full-stack Serverless apps. Updating React Router. Using React Context to manage app state."
 

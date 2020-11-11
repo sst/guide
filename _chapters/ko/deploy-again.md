@@ -66,7 +66,7 @@ $ aws cloudfront create-invalidation --distribution-id YOUR_WWW_CF_DISTRIBUTION_
 
 NPM을 사용하면 `package.json`에`deploy` 명령을 추가할 수 있습니다.
 
-<img class="code-marker" src="/assets/s.png" />`package.json`에서 `eject` 위에 `scripts` 블럭을 다음 내용으로 추가합니다.
+{%change%} `package.json`에서 `eject` 위에 `scripts` 블럭을 다음 내용으로 추가합니다.
 
 ``` coffee
 "predeploy": "npm run build",

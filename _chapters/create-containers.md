@@ -14,13 +14,13 @@ Currently, our app has a single component that renders our content. For creating
 
 Let's start by creating the outer chrome of our application by first adding a navigation bar to it. We are going to use the [Navbar](https://react-bootstrap.github.io/components/navbar/) React-Bootstrap component.
 
-<img class="code-marker" src="/assets/s.png" />To start, you can go remove the `src/logo.svg` that is placed there by Create React App.
+{%change%} To start, you can go remove the `src/logo.svg` that is placed there by Create React App.
 
 ``` bash
 $ rm src/logo.svg
 ```
 
-<img class="code-marker" src="/assets/s.png" />And go ahead and remove the code inside `src/App.js` and replace it with the following.
+{%change%} And go ahead and remove the code inside `src/App.js` and replace it with the following.
 
 ``` coffee
 import React from "react";
@@ -54,7 +54,7 @@ We are doing a few things here:
 
 Let's also add a couple lines of style to space things out a bit more.
 
-<img class="code-marker" src="/assets/s.png" />Remove all the code inside `src/App.css` and replace it with the following:
+{%change%} Remove all the code inside `src/App.css` and replace it with the following:
 
 ``` css
 .App {
@@ -70,7 +70,7 @@ Let's also add a couple lines of style to space things out a bit more.
 
 Now that we have the outer chrome of our application ready, let's add the container for the homepage of our app.  It'll respond to the `/` route.
 
-<img class="code-marker" src="/assets/s.png" />Create a `src/containers/` directory by running the following in your working directory.
+{%change%} Create a `src/containers/` directory by running the following in your working directory.
 
 ``` bash
 $ mkdir src/containers/
@@ -78,7 +78,7 @@ $ mkdir src/containers/
 
 We'll be storing all of our top level components here. These are components that will respond to our routes and make requests to our API. We will be calling them *containers* through the rest of this tutorial.
 
-<img class="code-marker" src="/assets/s.png" />Create a new container and add the following to `src/containers/Home.js`.
+{%change%} Create a new container and add the following to `src/containers/Home.js`.
 
 ``` coffee
 import React from "react";
@@ -100,7 +100,7 @@ This simply renders our homepage given that the user is not currently signed in.
 
 Now let's add a few lines to style this.
 
-<img class="code-marker" src="/assets/s.png" />Add the following into `src/containers/Home.css`.
+{%change%} Add the following into `src/containers/Home.css`.
 
 ``` css
 .Home .lander {
@@ -122,7 +122,7 @@ Now let's add a few lines to style this.
 
 Now we'll set up the routes so that we can have this container respond to the `/` route.
 
-<img class="code-marker" src="/assets/s.png" />Create `src/Routes.js` and add the following into it.
+{%change%} Create `src/Routes.js` and add the following into it.
 
 ``` coffee
 import React from "react";
@@ -146,13 +146,13 @@ This component uses this `Switch` component from React-Router that renders the f
 
 Now let's render the routes into our App component.
 
-<img class="code-marker" src="/assets/s.png" />Add the following to the header of your `src/App.js`.
+{%change%} Add the following to the header of your `src/App.js`.
 
 ``` coffee
 import Routes from "./Routes";
 ```
 
-<img class="code-marker" src="/assets/s.png" />And add the following line below our `Navbar` component inside the `render` of `src/App.js`.
+{%change%} And add the following line below our `Navbar` component inside `src/App.js`.
 
 ``` coffee
 <Routes />

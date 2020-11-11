@@ -15,7 +15,7 @@ comments_id: add-the-create-note-page/107
 
 ### 컨테이너 추가하기
 
-<img class="code-marker" src="/assets/s.png" />`src/containers/NewNote.js` 파일을 생성하고 아내 내용을 작성합니다.
+{%change%} `src/containers/NewNote.js` 파일을 생성하고 아내 내용을 작성합니다.
 
 ``` coffee
 import React, { Component } from "react";
@@ -97,13 +97,13 @@ export default class NewNote extends Component {
 
 현재, `handleSubmit`은 첨부 파일의 파일 크기를 제한하는 것 외에는 별다른 기능이 없습니다. 우리는 이것을 config에서 정의 할 예정입니다.
 
-<img class="code-marker" src="/assets/s.png" />자 그럼, `src/config.js` 파일의 `export default {` 라인 바로 아래에 다음 내용을 추가합니다. 
+{%change%} 자 그럼, `src/config.js` 파일의 `export default {` 라인 바로 아래에 다음 내용을 추가합니다. 
 
 ```
 MAX_ATTACHMENT_SIZE: 5000000,
 ```
 
-<img class="code-marker" src="/assets/s.png" />이제 `src/containers/NewNote.css` 파일을 추가해서 입력 양식에 스타일을 추가합니다.
+{%change%} 이제 `src/containers/NewNote.css` 파일을 추가해서 입력 양식에 스타일을 추가합니다.
 
 ``` css
 .NewNote form {
@@ -118,13 +118,13 @@ MAX_ATTACHMENT_SIZE: 5000000,
 
 ### 경로 추가하기
 
-<img class="code-marker" src="/assets/s.png" />마지막으로 작성한 컨테이너를 `src/Routes.js` 파일의 가입("/signup") 경로 아래에 추가하십시오. [상태에 세션 추가하기]({% link _chapters/add-the-session-to-the-state.md %}) 챕터에서 작성한 `AppliedRoute` 컴포넌트를 사용합니다.
+{%change%} 마지막으로 작성한 컨테이너를 `src/Routes.js` 파일의 가입("/signup") 경로 아래에 추가하십시오. [상태에 세션 추가하기]({% link _chapters/add-the-session-to-the-state.md %}) 챕터에서 작성한 `AppliedRoute` 컴포넌트를 사용합니다.
 
 ``` coffee
 <AppliedRoute path="/notes/new" exact component={NewNote} props={childProps} />
 ```
 
-<img class="code-marker" src="/assets/s.png" />그리고 컴포넌트 헤더에 아래 내용을 추가합니다.
+{%change%} 그리고 컴포넌트 헤더에 아래 내용을 추가합니다.
 
 ``` javascript
 import NewNote from "./containers/NewNote";

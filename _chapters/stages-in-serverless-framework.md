@@ -19,13 +19,13 @@ There are a couple of ways to set up stages for your project:
 
   You can create multiple stages within a single API Gateway project. Stages within the same project share the same endpoint host, but have a different path. For example, say you have a stage called `prod` with the endpoint:
 
-  ```
+  ``` txt
   https://abc12345.execute-api.us-east-1.amazonaws.com/prod
   ```
 
   If you were to add a stage called `dev` to the same API Gateway API, the new stage will have the endpoint:
 
-  ```
+  ``` txt
   https://abc12345.execute-api.us-east-1.amazonaws.com/dev
   ```  
 
@@ -35,13 +35,13 @@ There are a couple of ways to set up stages for your project:
 
   You create an API Gateway project for each stage. Let's take the same example, your `prod` stage has the endpoint:
 
-  ```
+  ``` txt
   https://abc12345.execute-api.us-east-1.amazonaws.com/prod
   ```
 
   To create the `dev` stage, you create a new API Gateway project and add the `dev` stage to the new project. The new endpoint will look something like:
 
-  ```
+  ``` txt
   https://xyz67890.execute-api.us-east-1.amazonaws.com/dev
   ```
 

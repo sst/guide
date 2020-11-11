@@ -23,9 +23,26 @@ You can get these updates emailed to you via our [newsletter]({{ site.newsletter
 
 ### Changes
 
-#### [v4.1: {{ site.data.changelog.current.title }}](https://branchv41--serverless-stack.netlify.com/) (Current)
+#### v5.0.2: {{ site.data.changelog.current.title }} (Current)
 
 {{ site.data.changelog.current.desc }}
+
+#### [v5.0.1: {{ site.data.changelog.v5-0-1.title }}](https://branchv501--serverless-stack.netlify.app/)
+
+{{ site.data.changelog.v5-0-1.desc }}
+
+- [Tutorial changes]({{ site.github_repo }}/compare/v5.0...v5.0.1)
+
+#### [v5.0: {{ site.data.changelog.v5-0.title }}](https://branchv50--serverless-stack.netlify.app/)
+
+{{ site.data.changelog.v5-0.desc }}
+
+- [Tutorial changes]({{ site.github_repo }}/compare/v4.1...v5.0)
+- [API]({{ site.backend_github_repo }}/compare/v4.1...v5.0)
+
+#### [v4.1: {{ site.data.changelog.v4-1.title }}](https://branchv41--serverless-stack.netlify.com/)
+
+{{ site.data.changelog.v4-1.desc }}
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v4.0...v4.1)
 - [API]({{ site.backend_github_repo }}/compare/v4.0...v4.1)
@@ -33,7 +50,7 @@ You can get these updates emailed to you via our [newsletter]({{ site.newsletter
 
 #### [v4.0: {{ site.data.changelog.v4-0.title }}](https://branchv40--serverless-stack.netlify.com/)
 
-{{ site.data.changelog.current.desc }}
+{{ site.data.changelog.v4-0.desc }}
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v3.4...v4.0)
 - [API]({{ site.backend_github_repo }}/compare/v3.4...v4.0)

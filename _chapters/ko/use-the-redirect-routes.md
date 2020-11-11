@@ -12,7 +12,7 @@ ref: use-the-redirect-routes
 
 지난 챕터에서`AuthenticatedRoute` 와 `UnauthenticatedRoute`을 만들었으니, 우리가 원하는 컨테이너에서 사용하도록합시다.
 
-<img class="code-marker" src="/assets/s.png" />먼저 `src/Routes.js`의 헤더에 앞서 만든 컴포넌트를 import합니다.
+{%change%} 먼저 `src/Routes.js`의 헤더에 앞서 만든 컴포넌트를 import합니다.
 
 ``` javascript
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
@@ -30,7 +30,7 @@ import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
 <AppliedRoute path="/notes/:id" exact component={Notes} props={childProps} />
 ```
 
-<img class="code-marker" src="/assets/s.png" />위 컴포넌트들 대신 다음과 같이 바뀌어야 합니다:
+{%change%} 위 컴포넌트들 대신 다음과 같이 바뀌어야 합니다:
 
 ``` coffee
 <UnauthenticatedRoute path="/login" exact component={Login} props={childProps} />

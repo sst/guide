@@ -14,6 +14,10 @@ First let's start by quickly looking at the common terms used when talking about
 
   A service is what you might call a Serverless project. It has a single `serverless.yml` file driving it.
 
+- **Stack**
+
+  A stack is what CloudFormation stack. In our case it is defined using [CDK]({% link _chapters/what-is-aws-cdk.md %}).
+
 - **Application**
 
   An application or app is a collection of multiple services.
@@ -31,11 +35,11 @@ And your app also has a job service:
 
 - **notify-job** service: Sends you a text message after a user successfully makes a purchase.
 
-The infrastructure is created by the following services:
+The infrastructure on the other hand is created by the following stacks in CDK:
 
-- **auth** service: Defines a Cognito User and Identity pool used to store user data.
-- **database** service: Defines a DynamoDB table called `notes` used to store notes data.
-- **uploads** service: Defines an S3 bucket used to store note images.
+- **CognitoStack**: Defines a Cognito User and Identity pool used to store user data.
+- **DynamoDBStack**: Defines a DynamoDB table called `notes` used to store notes data.
+- **S3Stack**: Defines an S3 bucket used to store note images.
 
 
 ### Microservices + Monorepo
@@ -46,14 +50,12 @@ The microservice pattern on the other hand is a concept of keeping each of your 
 
 The directory structure of your entire application under the microservice + monorepo pattern would look something like this.
 
-```
+``` txt
 |- services/
-|--- auth/
 |--- billing-api/
-|--- database/
 |--- notes-api/
 |--- notify-job/
-|--- uploads/
+|- infrastructure/
 |- libs/
 |- package.json
 ```
@@ -62,10 +64,11 @@ A couple of things to notice here:
 1. We are going over a Node.js project here but this pattern applies to other languages as well.
 2. The `services/` dir at the root is made up of a collection of services. Where a service contains a single `serverless.yml` file.
 3. Each service deals with a relatively small and self-contained function. So for example, the `notes-api` service deals with everything from creating to deleting notes. Of course, the degree to which you want to separate your application is entirely up to you.
-4. The `package.json` (and the `node_modules/` dir) are at the root of the repo. However, it is fairly common to have a separate `package.json` inside each service directory.
-5. The `libs/` dir is just to illustrate that any common code that might be used across all services can be placed in here.
-6. To deploy this application you are going to need to run `serverless deploy` separately in each of the services.
-7. [Environments (or stages)]({% link _chapters/stages-in-serverless-framework.md %}) need to be co-ordinated across all the different services. So if your team is using a `dev`, `staging`, and `prod` environment, then you are going to need to define the specifics of this in each of the services.
+4. The `infrastructure/` directory is a CDK app that is made up of multiple stacks.
+5. The `package.json` (and the `node_modules/` dir) are at the root of the repo. However, it is fairly common to have a separate `package.json` inside each service directory.
+6. The `libs/` dir is just to illustrate that any common code that might be used across all services can be placed in here.
+7. To deploy this application you are going to need to run `serverless deploy` separately in each of the services.
+8. [Environments (or stages)]({% link _chapters/stages-in-serverless-framework.md %}) need to be co-ordinated across all the different services. So if your team is using a `dev`, `staging`, and `prod` environment, then you are going to need to define the specifics of this in each of the services.
 
 #### Advantages of Monorepo
 
@@ -97,7 +100,7 @@ A couple of things to watch out for with the multi-repo pattern.
 
 2. Due to the friction involved in code sharing, we typically see each service (or repo) grow in the number of Lambda functions. This can cause you to hit the CloudFormation resource limit and get a deployment error that looks like:
 
-   ```
+   ``` txt
    Error --------------------------------------------------
 
    The CloudFormation template is invalid: Template format error: Number of resources, 201, is greater than maximum allowed, 200
@@ -111,7 +114,7 @@ Finally, it's worth looking at the less common monolith pattern.
 
 The monolith pattern involves taking advantage of API Gateway's `{proxy+}` and `ANY` method to route all the requests to a single Lambda function. In this Lambda function you can potentially run an application server like [Express](https://expressjs.com). So as an example, all the API requests below would be handled by the same Lambda function.
 
-```
+``` txt
 GET https://api.example.com/notes
 GET https://api.example.com/notes/{id}
 POST https://api.example.com/notes
@@ -144,17 +147,17 @@ It's not the goal of this section to evaluate which setup is better. Instead, I 
 
 In **serverless-stack-demo-ext-resources**, you have:
 
-```
+``` txt
 /
-  services/
-    auth/
-    database/
-    uploads/
+  lib/
+    CognitoStack.js
+    DynamoDBStack.js
+    S3Stack.js
 ```
 
 And in **serverless-stack-demo-ext-api**, you have:
 
-```
+``` txt
 /
   libs/
   services/
@@ -170,5 +173,7 @@ On the other hand, changes are going to happen less frequently in the **serverle
 ![Organize serverless projects in an app](/assets/best-practices/organizing-services/organize-serverless-services-in-an-app.png)
 
 So if you have a service that doesn't make sense to replicate in an ephemeral environment, we would suggest moving it to the repo with all the infrastructure services. This is what we have seen most teams do. And this setup scales well as your project and team grows.
+
+Note that, we build on this monorepo setup further by using [Lerna](https://lerna.js.org) and [Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) in our [Using Lerna and Yarn Workspaces with Serverless]({% link _chapters/using-lerna-and-yarn-workspaces-with-serverless.md %}) extra credit chapter.
 
 Now that we have figured out how to organize our application into repos, let's look at how we split our app into the various services. We'll start with creating a separate service for our DynamoDB tables.

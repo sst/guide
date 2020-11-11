@@ -21,7 +21,7 @@ Let's look at how to debug these.
 
 Head over to the frontend repo.
 
-<img class="code-marker" src="/assets/s.png" />Open `src/containers/Home.js`, and replace the `loadNotes()` function with:
+{%change%} Open `src/containers/Home.js`, and replace the `loadNotes()` function with:
 
 ``` javascript
 function loadNotes() {
@@ -29,7 +29,7 @@ function loadNotes() {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />Let's commit this and deploy it.
+{%change%} Let's commit this and deploy it.
 
 ``` bash
 $ git add .
@@ -70,7 +70,7 @@ This will tell you that for some reason our frontend is making a request to an i
 
 Now let's look at what happens when we use an invalid HTTP method for our API requests. Instead of a `GET` request we are going to make a `PUT` request.
 
-<img class="code-marker" src="/assets/s.png" />In `src/containers/Home.js` replace the `loadNotes()` function with:
+{%change%} In `src/containers/Home.js` replace the `loadNotes()` function with:
 
 ``` javascript
 function loadNotes() {
@@ -78,7 +78,7 @@ function loadNotes() {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />Let's deploy our code.
+{%change%} Let's deploy our code.
 
 ``` bash
 $ git add .
@@ -110,37 +110,11 @@ The access log combined with the Sentry error details should tell us what we nee
 
 And that covers all the major types of Serverless errors and how to debug them.
 
-### Summary
-
-Let's put the different type of errors we've covered into a table. This'll give us a good idea of what to do when we run into one of these in the future. 
-
-{:.serverless-errors}
-| Error                        | Sentry   | Access Log | Lambda Log | Debug Info | Action |
-|------------------------------|----------|------------|------------|------------|--------|
-| Errors in your code          | &#10003; | &#10003;   | &#10003;   | &#10003;   | Look at the debug info in the Lambda logs. |
-| Lambda timeout               | &#10003; | &#10003;   | &#10003;   | &#10003;   | Look at the last debug message in the Lambda logs. |
-| Lambda out of memory         | &#10003; | &#10003;   | &#10003;   | &#10007;   | Look for the error message `Runtime exited with error: signal: killed` in the Lambda logs. |
-| Lambda initialization errors | &#10003; | &#10003;   | &#10003;   | &#10007;   | Look for the error message `Unknown application error occurred` in the Lambda logs. |
-| Lambda handler errors        | &#10003; | &#10003;   | &#10003;   | &#10007;   | Look for the error message `Runtime.HandlerNotFound` in the Lambda logs. |
-| Invalid API path             | &#10003; | &#10003;   | &#10007;   | &#10007;   | Look for a single failed `OPTIONS` request in the access logs. |
-| Invalid API method           | &#10003; | &#10003;   | &#10007;   | &#10007;   | Look for a single successful `OPTIONS` request in the access logs. |
-
-<style type="text/css">
-  @media (min-width: 640px) {
-    table.serverless-errors thead th:nth-child(2),
-    table.serverless-errors thead th:nth-child(3),
-    table.serverless-errors thead th:nth-child(4),
-    table.serverless-errors thead th:nth-child(5) {
-      min-width: 60px;
-    }
-  }
-</style>
-
 ### Remove the Faulty Code
 
 Let's cleanup all the faulty code.
 
-<img class="code-marker" src="/assets/s.png" />In `src/containers/Home.js` replace the `loadNotes()` function with the original:
+{%change%} In `src/containers/Home.js` replace the `loadNotes()` function with the original:
 
 ``` javascript
 function loadNotes() {

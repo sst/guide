@@ -82,7 +82,7 @@ In our React app we are going to use the Facebook JS SDK and AWS Amplify to conf
 
 Let's take a quick look at the key changes that were made.
 
-<img class="code-marker" src="/assets/s.png" />To start we add our Facebook App ID to our `src/config.js`. So it should look something like this.
+{%change%} To start we add our Facebook App ID to our `src/config.js`. So it should look something like this.
 
 ``` js
 export default {
@@ -108,7 +108,7 @@ export default {
 
 Make sure to replace `YOUR_FACEBOOK_APP_ID` with the one from above.
 
-<img class="code-marker" src="/assets/s.png" />Next we load the Facebook JS SDK in the our `src/App.js` in the `componentDidMount` method.
+{%change%} Next we load the Facebook JS SDK in the our `src/App.js` in the `componentDidMount` method.
 
 ``` coffee
 async componentDidMount() {
@@ -148,13 +148,13 @@ loadFacebookSDK() {
 
 And we also load the current authenticated user using the `Auth.currentAuthenticatedUser` method. Where `Auth` is a part of the AWS Amplify package.
 
-<img class="code-marker" src="/assets/s.png" />Make sure to import the config at the top of `src/App.js`.
+{%change%} Make sure to import the config at the top of `src/App.js`.
 
 ``` coffee
 import config from "./config";
 ```
 
-<img class="code-marker" src="/assets/s.png" />Now we'll create a Facebook login button component in `src/components/FacebookButton.js`.
+{%change%} Now we'll create a Facebook login button component in `src/components/FacebookButton.js`.
 
 ``` coffee
 import React, { Component } from "react";
@@ -253,7 +253,7 @@ Let's look at what we are doing here very quickly.
 
 3. If the user has given our app the permissions, then we use the information we receive from Facebook (the user's email) and call the `Auth.federatedSignIn` AWS Amplify method. This effectively logs the user in.
 
-<img class="code-marker" src="/assets/s.png" />Finally, we can use the `FacebookButton.js` in our `src/containers/Login.js` and `src/containers/Signup.js`.
+{%change%} Finally, we can use the `FacebookButton.js` in our `src/containers/Login.js` and `src/containers/Signup.js`.
 
 ``` html
 <FacebookButton
@@ -264,7 +264,7 @@ Let's look at what we are doing here very quickly.
 
 Add the button above our login and signup form. And don't forget to import it using `import FacebookButton from "../components/FacebookButton";`.
 
-<img class="code-marker" src="/assets/s.png" />Also, add the handler method as well.
+{%change%} Also, add the handler method as well.
 
 ``` coffee
 handleFbLogin = () => {

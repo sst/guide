@@ -3,7 +3,7 @@ layout: post
 title: Tracing Serverless Apps with X-Ray
 description: In this chapter we look at how to trace Serverless apps using AWS X-Ray. Since your app is made up of multiple services, it's important to configure X-Ray to get visibility over a request as it flows through the system.
 date: 2019-10-02 00:00:00
-comments_id: 
+comments_id: tracing-serverless-apps-with-x-ray/1337
 canonical_url: https://seed.run/blog/how-to-trace-serverless-apps-with-aws-x-ray.html
 ---
 

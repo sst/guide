@@ -10,7 +10,7 @@ ref: test-the-billing-api
 
 이제 결제 API를 모두 설정했으므로 로컬 환경에서 신속하게 테스트 해보겠습니다.
 
-<img class="code-marker" src="/assets/s.png" />`mocks/billing-event.json` 파일을 만들고 다음 내용을 추가합니다.
+{%change%} `mocks/billing-event.json` 파일을 만들고 다음 내용을 추가합니다.
 
 ``` json
 {
@@ -46,7 +46,7 @@ $ serverless invoke local --function billing --path mocks/billing-event.json
 
 ### 변경사항 커밋 
 
-<img class="code-marker" src="/assets/s.png" />변경사항을 Git에 커밋합니다.
+{%change%} 변경사항을 Git에 커밋합니다.
 
 ``` bash
 $ git add .

@@ -30,11 +30,11 @@ Create React App은 앱에 대한 간단한 favicon을 생성하고`public/favic
 이렇게하면 favicon 패키지와 함께 제공되는 코드가 생성됩니다.
 
 
-<img class="code-marker" src="/assets/s.png" />**Favicon 패키지**를 클릭하여 생성 된 favicon을 다운로드하십시오. 그리고 모든 파일을 `public/` 디렉토리에 복사하십시오.
+{%change%} **Favicon 패키지**를 클릭하여 생성 된 favicon을 다운로드하십시오. 그리고 모든 파일을 `public/` 디렉토리에 복사하십시오.
 
 ![Realfavicongenerator.net 완성 화면](/assets/realfavicongenerator-completed.png)
 
-<img class="code-marker" src="/assets/s.png" />그런 다음 `public/manifest.json`의 내용을 다음으로 대체하십시오:
+{%change%} 그런 다음 `public/manifest.json`의 내용을 다음으로 대체하십시오:
 
 ``` json
 {
@@ -61,7 +61,7 @@ Create React App은 앱에 대한 간단한 favicon을 생성하고`public/favic
 
 `public/` 디렉토리에있는 파일을 HTML에 포함 시키려면 React Create App에 `%PUBLIC_URL%` 접두사가 있어야합니다.
 
-<img class="code-marker" src="/assets/s.png" />아래 내용을 `public/index.html`에 추가하십시오.
+{%change%} 아래 내용을 `public/index.html`에 추가하십시오.
 
 ``` html
 <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png">
@@ -71,7 +71,7 @@ Create React App은 앱에 대한 간단한 favicon을 생성하고`public/favic
 <meta name="theme-color" content="#ffffff">
 ```
 
-<img class="code-marker" src="/assets/s.png" />원래의 favicon 및 테마 색상을 참조하는 다음 줄을 **제거합니다**.
+{%change%} 원래의 favicon 및 테마 색상을 참조하는 다음 줄을 **제거합니다**.
 
 ``` html
 <meta name="theme-color" content="#000000">

@@ -12,7 +12,7 @@ Let's start by creating the signup form that'll get the user's email and passwor
 
 ### Add the Container
 
-<img class="code-marker" src="/assets/s.png" />Create a new container at `src/containers/Signup.js` with the following.
+{%change%} Create a new container at `src/containers/Signup.js` with the following.
 
 ``` coffee
 import React, { useState } from "react";
@@ -158,7 +158,7 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 6. And you'll notice we are using the `useFormFields` custom React Hook that we [previously created]({% link _chapters/create-a-custom-react-hook-to-handle-form-fields.md %}) to handle our form fields.
 
-<img class="code-marker" src="/assets/s.png" />Also, let's add a couple of styles in `src/containers/Signup.css`.
+{%change%} Also, let's add a couple of styles in `src/containers/Signup.css`.
 
 ``` css
 @media all and (min-width: 480px) {
@@ -181,7 +181,7 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 ### Add the Route
 
-<img class="code-marker" src="/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our login route.
+{%change%} Finally, add our container as a route in `src/Routes.js` below our login route.
 
 ``` coffee
 <Route exact path="/signup">
@@ -189,7 +189,7 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 </Route>
 ```
 
-<img class="code-marker" src="/assets/s.png" />And include our component in the header.
+{%change%} And include our component in the header.
 
 ``` javascript
 import Signup from "./containers/Signup";

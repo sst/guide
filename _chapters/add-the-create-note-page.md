@@ -14,7 +14,7 @@ First we are going to create the form for a note. It'll take some content and a 
 
 ### Add the Container
 
-<img class="code-marker" src="/assets/s.png" />Create a new file `src/containers/NewNote.js` and add the following.
+{%change%} Create a new file `src/containers/NewNote.js` and add the following.
 
 ``` coffee
 import React, { useRef, useState } from "react";
@@ -91,13 +91,13 @@ file.current = event.target.files[0];
 
 Currently, our `handleSubmit` does not do a whole lot other than limiting the file size of our attachment. We are going to define this in our config.
 
-<img class="code-marker" src="/assets/s.png" />So add the following to our `src/config.js` below the `export default {` line.
+{%change%} So add the following to our `src/config.js` below the `export default {` line.
 
-```
+``` txt
 MAX_ATTACHMENT_SIZE: 5000000,
 ```
 
-<img class="code-marker" src="/assets/s.png" />Let's also add the styles for our form in `src/containers/NewNote.css`.
+{%change%} Let's also add the styles for our form in `src/containers/NewNote.css`.
 
 ``` css
 .NewNote form {
@@ -112,7 +112,7 @@ MAX_ATTACHMENT_SIZE: 5000000,
 
 ### Add the Route
 
-<img class="code-marker" src="/assets/s.png" />Finally, add our container as a route in `src/Routes.js` below our signup route.
+{%change%} Finally, add our container as a route in `src/Routes.js` below our signup route.
 
 ``` coffee
 <Route exact path="/notes/new">
@@ -120,7 +120,7 @@ MAX_ATTACHMENT_SIZE: 5000000,
 </Route>
 ```
 
-<img class="code-marker" src="/assets/s.png" />And include our component in the header.
+{%change%} And include our component in the header.
 
 ``` javascript
 import NewNote from "./containers/NewNote";

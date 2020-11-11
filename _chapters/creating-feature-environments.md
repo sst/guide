@@ -87,17 +87,13 @@ provider:
     lambda: true
 
   apiGateway:
-    restApiId:
-      'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiId
-    restApiRootResourceId:
-      'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId
+    restApiId: !ImportValue ${self:custom.stage}-ExtApiGatewayRestApiId
+    restApiRootResourceId: !ImportValue ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId
     restApiResources:
-      /notes/{id}:
-        'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayResourceNotesIdVarId
+      /notes/{id}: !ImportValue ${self:custom.stage}-ExtApiGatewayResourceNotesIdVarId
 
   environment:
     stage: ${self:custom.stage}
-    resourcesStage: ${self:custom.resourcesStage}
 
   iamRoleStatements:
     - ${file(../../serverless.common.yml):lambdaPolicyXRay}
@@ -118,34 +114,38 @@ Again, the `like-api` will share the same API endpoint as the `notes-api` servic
 Add the handler file `like.js`.
 
 ``` javascript
-import handler from "../../libs/handler-lib";
+import { success } from "../../libs/response-lib";
 
-export const main = handler(async (event, context) => {
-  // business logic code for liking a post
+export async function main(event, context) {
+  // Business logic code for liking a post
 
-  return { status: true };
-});
+  return success({ status: true });
+}
 ```
 
 Now before we push our Git branch, let's enable the branch workflow in Seed.
 
 ### Enable branch workflow in Seed
 
-Go to your app on Seed. Click **Settings**.
+Go to your app on Seed and head over to the **Pipeline** tab and hit **Edit Pipeline**.
 
-![Select app settings in Seed](/assets/best-practices/creating-feature-environments/select-app-settings-in-seed.png)
+![Select edit pipeline in Seed](/assets/best-practices/creating-feature-environments/select-edit-pipeline-in-seed.png)
 
-Scroll down to **Git Integration**. Then select **Enable Auto-Deploy Branches**.
+Enable **Auto-deploy branches**.
 
 ![Select Enable Auto-Deploy Branches](/assets/best-practices/creating-feature-environments/select-enable-auto-deploy-branches.png)
 
-Select the **dev** stage, since we want the stage to be deployed into the **Development** AWS account. Click **Enable Auto-Deploy**.
+Select the **dev** stage, since we want the stage to be deployed into the **Development** AWS account. Click **Enable**.
 
 ![Select Enable Auto-Deploy](/assets/best-practices/creating-feature-environments/select-enable-auto-deploy.png)
 
+Click **Pipeline** to head back.
+
+![Head back to pipeline](/assets/best-practices/creating-feature-environments/head-back-to-pipeline.png)
+
 ### Add the new service to Seed
 
-Back in our app, click on **Add a Service**.
+Click on **Add a Service**.
 
 ![Select Add a service](/assets/best-practices/creating-feature-environments/select-add-a-service.png)
 
@@ -157,11 +157,11 @@ Since the code has not been committed to Git yet, Seed is not able to find the `
 
 ![Set new service name](/assets/best-practices/creating-feature-environments/set-new-service-name.png)
 
-Now, we have the service added.
+This should add the new service across all your stages.
 
 ![Added new service in Seed](/assets/best-practices/creating-feature-environments/added-new-service-in-seed.png)
 
-By default, the new service is added to the latest deploy phase. Let's head into the **Manage Deploy Phases** in the app **Settings**, and move it to Phase 2. This is because it's dependent on the API Gateway resources exported by `notes-api`.
+By default, the new service is added to the last deploy phase. Let's click on **Manage Deploy Phases**, and move it to Phase 2. This is because it's dependent on the API Gateway resources exported by `notes-api`.
 
 ![Show default Deploy Phase](/assets/best-practices/creating-feature-environments/show-default-deploy-phase.png)
 
@@ -179,17 +179,17 @@ Back in Seed, a new stage called **like** is created and is being deployed autom
 
 ![Show new feature stage created](/assets/best-practices/creating-feature-environments/show-new-feature-stage-created.png)
 
-After the new stage successfully deploys, you can get the API endpoint in the stage's resources page. Click on the **like** stage.
+After the new stage successfully deploys, you can get the API endpoint in the stage's resources page. Head over to the **Resources** tab.
+
+![Select Resources tab in Seed](/assets/best-practices/creating-feature-environments/select-resources-tab-in-seed.png)
+
+And select the **like** stage.
 
 ![Select feature stage](/assets/best-practices/creating-feature-environments/select-feature-stage.png)
 
-You will see the API Gateway endpoint for the **like** stage.
+You will see the API Gateway endpoint for the **like** stage and the API path for the **like** handler.
 
 ![Show API Gateway endpoint in feature stage](/assets/best-practices/creating-feature-environments/show-api-gateway-endpoint-in-feature-stage.png)
-
-Scroll down and you will see the API path for the **like** handler.
-
-![Show API path in feature stage](/assets/best-practices/creating-feature-environments/show-api-path-in-feature-stage.png)
 
 You can now use the endpoint in your frontend for further testing and development.
 
@@ -220,15 +220,15 @@ Fortunately, there is a way to deploy individual functions using the `serverless
 Say we change our new `like.js` code to:
 
 ``` javascript
-import handler from "../../libs/handler-lib";
+import { success } from "../../libs/response-lib";
 
-export const main = handler(async (event, context) => {
-  // business logic code for liking a post
+export async function main(event, context) {
+  // Business logic code for liking a post
 
   console.log("adding some debug code to test");
 
-  return { status: true };
-});
+  return success({ status: true });
+}
 ```
 
 To deploy the code for this function, run:

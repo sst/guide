@@ -101,7 +101,7 @@ In the **Logs** tab:
 
 Scroll to the bottom of the page and click **Save Changes**. Now our API Gateway requests should be logged via CloudWatch.
 
-Note that, the execution logs can generate a ton of log data and it's not recommended to leave them on. They are much better for debugging. API Gateway does have support for access logs, which we recomend leaving on. Here is [how to enable access logs for your API Gateway project](https://seed.run/blog/how-to-enable-access-logs-for-api-gateway).
+Note that, the execution logs can generate a ton of log data and it's not recommended to leave them on. They are much better for debugging. API Gateway does have support for access logs, which we recommend leaving on. Here is [how to enable access logs for your API Gateway project](https://seed.run/blog/how-to-enable-access-logs-for-api-gateway).
 
 
 ### Enable Lambda CloudWatch Logs

@@ -68,7 +68,7 @@ And that’s it! We now have a set of commands we can run to deploy our updates.
 
 NPM allows us to add a `deploy` command in our `package.json`.
 
-<img class="code-marker" src="/assets/s.png" />Add the following in the `scripts` block above `eject` in the `package.json`.
+{%change%} Add the following in the `scripts` block above `eject` in the `package.json`.
 
 ``` coffee
 "predeploy": "npm run build",
@@ -80,7 +80,7 @@ Make sure to replace `YOUR_S3_DEPLOY_BUCKET_NAME`, `YOUR_CF_DISTRIBUTION_ID`, an
 
 For Windows users, if `postdeploy` returns an error like.
 
-```
+``` txt
 An error occurred (InvalidArgument) when calling the CreateInvalidation operation: Your request contains one or more invalid invalidation paths.
 ```
 

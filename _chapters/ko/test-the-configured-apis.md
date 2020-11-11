@@ -16,7 +16,7 @@ ref: test-the-configured-apis
 
 이를 위해 AWS CLI를 사용할 것입니다.
 
-<img class="code-marker" src="/assets/s.png" />터미널에서 다음을 실행합니다.
+{%change%} 터미널에서 다음을 실행합니다.
 
 ``` bash
 $ aws cognito-idp sign-up \
@@ -41,7 +41,7 @@ $ aws cognito-idp admin-confirm-sign-up \
 
 **prod** 버전에서도 동일한 작업을 신속하게 수행합니다.
 
-<img class="code-marker" src="/assets/s.png" />터미널에서 다음을 실행합니다.
+{%change%} 터미널에서 다음을 실행합니다.
 
 ``` bash
 $ aws cognito-idp sign-up \
@@ -53,7 +53,7 @@ $ aws cognito-idp sign-up \
 
 prod 버전의 Cognito 상세 정보를 이용합니다.
 
-<img class="code-marker" src="/assets/s.png" />그리고 사용자를 확인합니다.
+{%change%} 그리고 사용자를 확인합니다.
 
 ``` bash
 $ aws cognito-idp admin-confirm-sign-up \

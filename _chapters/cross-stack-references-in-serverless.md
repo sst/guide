@@ -1,63 +1,84 @@
 ---
 layout: post
 title: Cross-Stack References in Serverless
-description: AWS CloudFormation allows us to link multiple Serverless services using cross-stack references. A cross-stack reference consists of an "Export" and "Fn::ImportValue". Cross-stack references are useful for tracking the dependencies between Serverless services.
+description: AWS CloudFormation allows us to link multiple Serverless services using cross-stack references. To create a cross-stack reference, export a value using the "Export:" option in CloudFormation or CfnOutput construct in CDK. To import it in your serverless.yml, use "Fn::ImportValue".
 date: 2018-04-02 13:00:00
+ref: cross-stack-references-in-serverless
 comments_id: cross-stack-references-in-serverless/405
 ---
 
-In the previous chapter we looked at the [most common patterns for organizing your Serverless applications]({% link _chapters/organizing-serverless-projects.md %}). Now let's look at how to work with multiple services in your Serverless application.
+In the previous chapter we looked at [some of the most common patterns for organizing your Serverless applications]({% link _chapters/organizing-serverless-projects.md %}). Now let's look at how to work with multiple services in your Serverless application.
 
-You might recall that a Serverless service is where a single `serverless.yml` is used to define the project. And the `serverless.yml` file is converted into a [CloudFormation template](https://aws.amazon.com/cloudformation/aws-cloudformation-templates/) using Serverless Framework. This means that in the case of multiple services you might need to reference a resource that is available in a different service. For example, you might have your DynamoDB tables created in one service and your APIs (which are in another service) need to refer to them. Of course you don't want to hard code this. And so over the next few chapters we will be breaking down the [note taking application]({{ site.backend_ext_resources_github_repo }}) into multiple resources to illustrate how to do this.
+You might recall that a Serverless service is where a single `serverless.yml` is used to define the project. And the `serverless.yml` file is converted into a [CloudFormation template](https://aws.amazon.com/cloudformation/aws-cloudformation-templates/) using Serverless Framework. This means that in the case of multiple services you might need to reference a resource that is available in a different service.
 
-However before we do, we need to cover the concept of cross-stack references. A cross-stack reference is a way for one CloudFormation template to refer to the resource in another CloudFormation template.
+You also might be defining your AWS infrastructure using [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}). And you want to make sure your Serverless API is connected to those resources.
 
-### CloudFormation Cross-Stack References
+For example, you might have your DynamoDB tables created in CDK and your APIs (as a Serverless service) need to refer to them. Of course you don't want to hard code this. To do this we are going to be using cross-stack references.
 
-To create a cross-stack reference, you need to:
+A cross-stack reference is a way for one CloudFormation template to refer to the resource in another CloudFormation template.
 
-1. Use the `Export:` flag in the `Outputs:` section in the `serverless.yml` of the service you would like to reference.
+- Cross-stack references have a name and value.
+- Cross-stack references only apply within the same region.
+- The name needs to be unique for a given region in an AWS account.
 
-2. Then in the service where you want to use the reference; use the `Fn::ImportValue` CloudFormation function.
+A reference is created when one stack creates a CloudFormation export and another imports it. So for example, our `DynamoDBStack.js` is exporting the name of our DynamoDB table, and our `notes-api` service is importing it. Once the reference has been created, you cannot remove the DynamoDB stack without first removing the stack that is referencing it (the `notes-api`).
 
-So as a quick example (we will go over this in detail shortly), say you wanted to refer to the DynamoDB table across services.
+The above relationship between two stacks means that they need to be deployed and removed in a specific order. We'll be looking at this later.
 
-1. First export the table name in your DynamoDB service using the `Export:` flag:
+### CloudFormation Export in CDK
 
-   ```yml
-    resources:
-      Resources:
-        NotesTable:
-          Type: AWS::DynamoDB::Table
-          Properties:
-            TableName: notes
+To create a cross-stack reference, we first create a CloudFormation export.
 
-    # ...
+``` javascript
+new CfnOutput(this, "TableName", {
+  value: table.tableName,
+  exportName: app.logicalPrefixedName("ExtTableName"),
+});
+```
 
-     Outputs:
-       Value:
-         Ref: NotesTable
-       Export:
-         Name: NotesTableName
-   ```
+The above is a CDK example from our `DynamoDBStack.js`.
 
-2. And in your API service, import it using the `Fn::ImportValue` function:
+Here the `exportName` is the name of the CloudFormation export. We use a convenience method from [SST](https://github.com/serverless-stack/serverless-stack) called `app.logicalPrefixedName` that prefixes our export name with the name of the stage we are deploying to, and the name of our SST app. This ensures that our export name is unique when we deploy our stack across multiple environments.
 
-   ```yml
-   'Fn::ImportValue': NotesTableName
-   ```
+### CloudFormation Export in Serverless Framework
 
-The `Fn::ImportValue` function takes the export name and returns the exported value. In this case the imported value is the DynamoDB table name.
+Similarly, we can create a CloudFormation export in Serverless Framework by adding the following 
 
-Now before we dig into the details of cross-stack references in Serverless, let's quickly look at some of its details.
+``` yml
+resources:
+  Outputs:
+    NotePurchasedTopicArn:
+      Value:
+        Ref: NotePurchasedTopic
+      Export:
+        Name: ${self:custom.stage}-ExtNotePurchasedTopicArn
+```
 
-- Cross-stack references only apply within a single region. Meaning that an exported value can be referenced by any service in that region.
+The above is an example from the `serverless.yml` of our `billing-api`. We can add a `resources:` section to our `serverless.yml` and the `Outputs:` allows us to add CloudFormation exports.
 
-- Consequently, the `Export:` function needs to be unique within that region.
+Just as above we need to name our CloudFormation export. We do it using the `Name:` property. Here we are prefixing our export name with the stage name (`${self:custom.stage}`) to make it unique across environments.
 
-- If a service's export is being referenced in another stack, the service cannot be removed. So for the above example, you won't be able to remove the DynamoDB service if it is still being referenced in the API service.
+The `${self:custom.stage}` is a custom variable that we define at the top of our `serverless.yml`.
 
-- The services need to be deployed in a specific order. The service that is exporting a value needs to be deployed before the one doing the importing. Using the above example again, the DynamoDB service needs to be deployed before the API service.
+``` yml
+# Our stage is based on what is passed in when running serverless
+# commands. Or falls back to what we have set in the provider section.
+stage: ${opt:stage, self:provider.stage}
+```
+
+### Importing a CloudFormation Export
+
+Now once we've created a CloudFormation export, we need to import it in our `serverless.yml`. To do so, we'll use the `Fn::ImportValue` CloudFormation function.
+
+For example, in our `notes-api/serverless.yml`.
+
+``` yml
+provider:
+  environment:
+    tableName: !ImportValue ${self:custom.sstApp}-ExtTableName
+```
+
+We import the name of the DynamoDB table that we created and exported in `DynamoDBStack.js`.
 
 ### Advantages of Cross-Stack References
 
@@ -65,4 +86,4 @@ As your application grows, it can become hard to track the dependencies between 
 
 The other advantage is that you can easily recreate the entire application (say for testing) with ease. This is because none of the services of your application are statically linked to each other.
 
-In the next chapter let's look at setting up DynamoDB as a separate service.
+In the next chapter let's look at how we share code between our services.

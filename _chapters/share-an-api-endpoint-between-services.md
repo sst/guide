@@ -9,7 +9,7 @@ comments_id: api-gateway-domains-across-services/408
 
 In this chapter we will look at how to work with API Gateway across multiple services. A challenge that you run into when splitting your APIs into multiple services is sharing the same domain for them. You might recall that APIs that are created as a part of the Serverless service get their own unique URL that looks something like:
 
-```
+``` txt
 https://z6pv80ao4l.execute-api.us-east-1.amazonaws.com/dev
 ```
 
@@ -78,10 +78,8 @@ Let's look at how we are importing the above. Open the `billing-api` service in 
 
 provider:
   apiGateway:
-    restApiId:
-      'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiId
-    restApiRootResourceId:
-      'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId
+    restApiId: !ImportValue ${self:custom.stage}-ExtApiGatewayRestApiId
+    restApiRootResourceId: !ImportValue ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId
 ...
 
 functions:
@@ -97,9 +95,9 @@ functions:
 
 To share the same API Gateway domain as our `notes-api` service, we are adding an `apiGateway:` section to the `provider:` block.
 
-  1. Here we state that we want to use the `restApiId` of our notes service. We do this by using the cross-stack reference `'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiId` that we had exported above.
+  1. Here we state that we want to use the `restApiId` of our notes service. We do this by using the cross-stack reference `!ImportValue ${self:custom.stage}-ExtApiGatewayRestApiId` that we had exported above.
 
-  2. We also state that we want all the APIs in our service to be linked under the root path of our notes service. We do this by setting the `restApiRootResourceId` to the cross-stack reference `'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId` from above.
+  2. We also state that we want all the APIs in our service to be linked under the root path of our notes service. We do this by setting the `restApiRootResourceId` to the cross-stack reference `!ImportValue ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId` from above.
 
 Now when you deploy the `billing-api` service, instead of creating a new API Gateway project, Serverless Framework is going to reuse the project you imported.
 
@@ -113,7 +111,7 @@ By sharing API Gateway project, we are making the `billing-api` depend on the `n
 
 Note that, a path part can only be created **ONCE**. Let's look at an example to understand how this works. Say you need to add another API service that uses the following endpoint.
 
-```
+``` txt
 https://api.example.com/billing/xyz
 ```
 

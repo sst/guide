@@ -25,8 +25,8 @@ Serverless Stack is written and maintained by [Frank Wang](https://github.com/fw
 
 ## Gold Sponsors
 
-<a target="_blank" href="https://www.datadoghq.com">
-  <img height="50" alt="Thundra" src="/assets/sponsors/datadog.png" />
+<a target="_blank" href="https://epsagon.com/serverless-stack/?utm_source=Advertisement&utm_medium=cpm&utm_campaign=ServerlessStack">
+  <img height="50" alt="Epsagon" src="/assets/sponsors/epsagon.png" />
 </a>
 
 Your **banner** will be placed on **ALL** the chapters of the guide. And your **company logo** and link will be placed here. [Contact us if you'd like to be a Gold Sponsor](mailto:{{ site.email }}).
@@ -70,6 +70,9 @@ Your **company logo** and link will be placed here. [Contact us if you'd like to
 - [Ryan Jackson](https://github.com/ryanauj)
 - [Dynobase](https://dynobase.dev/)
 - [Tim Shnaider](https://twitter.com/TimShnaider)
+- [MichaelGMalek](https://github.com/MichaelGMalek)
+- [Craig Barr](https://github.com/m0un10)
+- [Dale Jacques](https://www.patreon.com/user/creators?u=43900227)
 
 
 We'd like thank our sponsors and backers for supporting us!

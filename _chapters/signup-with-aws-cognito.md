@@ -10,7 +10,7 @@ comments_id: signup-with-aws-cognito/130
 
 Now let's go ahead and implement the `handleSubmit` and `handleConfirmationSubmit` functions and connect it up with our AWS Cognito setup.
 
-<img class="code-marker" src="/assets/s.png" />Replace our `handleSubmit` and `handleConfirmationSubmit` functions in `src/containers/Signup.js` with the following.
+{%change%} Replace our `handleSubmit` and `handleConfirmationSubmit` functions in `src/containers/Signup.js` with the following.
 
 ``` javascript
 async function handleSubmit(event) {
@@ -49,7 +49,7 @@ async function handleConfirmationSubmit(event) {
 }
 ```
 
-<img class="code-marker" src="/assets/s.png" />Also, include the Amplify Auth in our header.
+{%change%} Also, include the Amplify Auth in our header.
 
 ``` javascript
 import { Auth } from "aws-amplify";

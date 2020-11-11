@@ -76,14 +76,7 @@ provider:
       Action:
         - ssm:GetParameter
       Resource:
-        Fn::Join:
-          - ''
-          -
-            - 'arn:aws:ssm:'
-            - Ref: AWS::Region
-            - ':'
-            - Ref: AWS::AccountId
-            - ':parameter/stripeSecretKey/*'
+        !Sub 'arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/stripeSecretKey/*'
 ...
 ```
 
@@ -93,7 +86,6 @@ Next, we'll add the parameter names in our `config.js`.
 
 ``` js
 const stage = process.env.stage;
-const resourcesStage = process.env.resourcesStage;
 const adminPhoneNumber = "+14151234567";
 
 const stageConfigs = {
@@ -109,7 +101,6 @@ const config = stageConfigs[stage] || stageConfigs.dev;
 
 export default {
   stage,
-  resourcesStage,
   adminPhoneNumber,
   ...config
 };

@@ -85,7 +85,7 @@ The guide is split roughly into a couple of parts:
 
 #### Building Your First Serverless App
 
-The first part of this guide helps you create the the notes application and deploy it to production. We cover all the basics. Each service is created by hand. Here is what is covered in order.
+The first part of this guide helps you create the notes application and deploy it to production. We cover all the basics. Each service is created by hand. Here is what is covered in order.
 
 For the backend:
 

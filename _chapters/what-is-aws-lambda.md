@@ -17,10 +17,12 @@ Let's start by quickly looking at the technical specifications of AWS Lambda. La
 - Node.js 12.13.0, 10.16.3, and 8.10
 - Java 11 and 8
 - Python 3.8, 3.7, 3.6, and 2.7
-- .NET Core 2.1
+- .NET Core 2.1, 2.2, 3.0, and 3.1
 - Go 1.x
 - Ruby 2.5
 - Rust
+
+Note that, [.NET Core 2.2 and 3.0 are supported through custom runtimes](https://aws.amazon.com/blogs/developer/announcing-amazon-lambda-runtimesupport/).
 
 Each function runs inside a container with a 64-bit Amazon Linux AMI. And the execution environment has:
 

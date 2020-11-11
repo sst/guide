@@ -12,13 +12,13 @@ Now that we are done working on our new feature, we would like our team lead to 
 
 To enable auto-deploying pull requests, head over to your app on Seed. Click **Settings**.
 
-![Select app settings in Seed](/assets/best-practices/creating-pull-request-environments/select-app-settings-in-seed.png)
+![Select edit pipeline in Seed](/assets/best-practices/creating-pull-request-environments/select-edit-pipeline-in-seed.png)
 
-Scroll down to **Git Integration**. Then click **Enable Auto-Deploy PRs**.
+And **Enable auto-deploy pull requests**.
 
 ![Select Enable Auto-Deploy PRs](/assets/best-practices/creating-pull-request-environments/select-enable-auto-deploy-prs.png)
 
-Hit **Enable**.
+Select the **dev** stage, since we want the stage to be deployed into the **Development** AWS account. Click **Enable**.
 
 ![Select Enable Auto-Deploy](/assets/best-practices/creating-pull-request-environments/select-enable-auto-deploy.png)
 
