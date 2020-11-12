@@ -14,7 +14,7 @@ Now we are going to host our React app on [Netlify](https://www.netlify.com). Be
 
 {%change%} Create a file called `_redirects` in the `public/` directory of your React app with the following.
 
-```
+``` text
 /*    /index.html   200
 ```
 
