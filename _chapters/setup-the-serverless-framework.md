@@ -86,9 +86,27 @@ provider:
   runtime: nodejs12.x
   stage: prod
   region: us-east-1
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: hello
+          method: get
 ```
 
 The `service` name is pretty important. We are calling our service the `notes-api`. Serverless Framework creates your stack on AWS using this as the name. This means that if you change the name and deploy your project, it will create a **completely new project**!
+
+We are also defining one Lambda function called `hello`. It has a handler called `handler.hello`. It follows the format:
+
+```
+handler: {filename}-{export}
+```
+
+So in this case the handler for our `hello` Lambda function is the `hello` function that is exported in the `handler.js` file.
+
+Our Lambda function also responds to an HTTP GET event with the path `/hello`. This will make more sense once we deploy our API.
 
 You'll notice the plugins that we've included — `serverless-bundle`, `serverless-offline`, and `serverless-dotenv-plugin`. The [serverless-offline](https://github.com/dherault/serverless-offline) plugin is helpful for local development. While the [serverless-dotenv-plugin](https://github.com/colynb/serverless-dotenv-plugin) will be used later to load the `.env` files as Lambda environment variables.
 

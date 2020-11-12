@@ -35,4 +35,4 @@ $ aws cognito-idp admin-confirm-sign-up \
   --username admin@example.com
 ```
 
-Now our test user is ready. Next, let's set up the Serverless Framework to create our backend APIs.
+Now that our User Pool has been configured and ready to use, let's create our Identity Pool to manage access to our AWS resources.

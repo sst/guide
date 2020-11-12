@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Deploy the APIs
-date: 2017-01-04 00:00:00
+date: 2020-10-20 00:00:00
 lang: en
 ref: deploy-the-apis
 description: Use the “serverless deploy” command to deploy to AWS Lambda and API Gateway using the Serverless Framework. Running this command will display the list of deployed API endpoints and the AWS region it was deployed to. And we can run the "serverless deploy function" command when we want to update an individual Lambda function.
@@ -31,25 +31,27 @@ Service Information
 service: notes-api
 stage: prod
 region: us-east-1
+stack: notes-api-prod
+resources: 32
 api keys:
   None
 endpoints:
-  POST - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes
-  GET - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
-  GET - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes
-  PUT - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
-  DELETE - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
-  POST - https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/billing
+  POST - https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod/notes
+  GET - https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
+  GET - https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod/notes
+  PUT - https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
+  DELETE - https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
 functions:
   create: notes-api-prod-create
   get: notes-api-prod-get
   list: notes-api-prod-list
   update: notes-api-prod-update
   delete: notes-api-prod-delete
-  billing: notes-api-prod-billing
+layers:
+  None
 ```
 
-This has a list of the API endpoints that were created. Make a note of these endpoints as we are going to use them later while creating our frontend. Also make a note of the region and the id in these endpoints, we are going to use them in the coming chapters. In our case, `us-east-1` is our API Gateway Region and `ly55wbovq4` is our API Gateway ID.
+This has a list of the API endpoints that were created. Make a note of these endpoints as we are going to use them later while creating our frontend. Also make a note of the region and the id in these endpoints, we are going to use them in the coming chapters. In our case, `us-east-1` is our API Gateway Region and `0f7jby961h` is our API Gateway ID.
 
 If you are running into some issues while deploying your app, we have [a compilation of some of the most common Serverless errors](https://seed.run/docs/serverless-errors/) over on [Seed](https://seed.run).
 
@@ -63,4 +65,32 @@ For example, to deploy the list function again, we can run the following.
 $ serverless deploy function -f list
 ```
 
-Now before we test our APIs we have one final thing to set up. We need to ensure that our users can securely access the AWS resources we have created so far. Let's look at setting up a Cognito Identity Pool.
+### Test the APIs
+
+So far we've been testing our Lambda functions locally using the `serverless invoke local` command. Now that we've deployed our APIs, we can test it through their endpoints.
+
+So if you head over to our list notes API endpoint. In our case it is:
+
+```
+https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod/notes
+```
+
+You should see something like this.
+
+``` json
+[{"attachment":"hello.jpg","content":"hello world","createdAt":1487800950620,"noteId":"578eb840-f70f-11e6-9d1a-1359b3b22944","userId":"123"}]
+```
+
+This is a JSON encoded array of notes objects that we stored in DynamoDB.
+
+### Commit the Changes
+
+{%change%} Let's commit the changes so far and push it to GitHub.
+
+``` bash
+$ git add .
+$ git commit -m "Adding our Serverless API"
+$ git push
+```
+
+So our API is publicly available, this means that anybody can access it and create notes. And it's always connecting to the `123` user id. Let's fix these next by handling users and authentication.

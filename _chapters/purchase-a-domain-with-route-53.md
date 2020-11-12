@@ -8,11 +8,15 @@ comments_id: purchase-a-domain-with-route-53/1867
 ref: purchase-a-domain-with-route-53
 ---
 
-Now that we have our CloudFront distribution live, let's set up our domain with it. You can purchase a domain right from the [AWS Console](https://console.aws.amazon.com) by heading to the Route 53 section in the list of services.
+We want to host our React app on our own domain (and later our API as well). To do this, we'll start by purchasing a domain through AWS. We'll be using [Amazon Route 53](https://aws.amazon.com/route53/) for this.
+
+If you are following this guide but are not ready to purchase a new domain, you can skip this chapter.
+
+On the other hand, if you have an existing domain that is not on AWS, follow these docs to [move it over to Amazon Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html).
+
+Let's get started. In your [AWS Console](https://console.aws.amazon.com) head over to the Route 53 section in the list of services.
 
 ![Select Route 53 service screenshot](/assets/select-route-53-service.png)
-
-### Purchase a Domain with Route 53
 
 Type in your domain in the **Register domain** section and click **Check**.
 
@@ -34,4 +38,4 @@ Finally, review your details and confirm the purchase by hitting **Complete Purc
 
 ![Confirm domain purchase screenshot](/assets/confirm-domain-purchase.png)
 
-Next up, we'll set up SSL to make sure we can use HTTPS with our domain.
+Next, let's use our new domain for the our site on Netlify.

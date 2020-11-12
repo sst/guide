@@ -25,37 +25,35 @@ setup-aws:
       url: /chapters/create-an-aws-account.html
     - page: Create an IAM user
       url: /chapters/create-an-iam-user.html
-      subchapters:
-        - page: What is IAM
-          url: /chapters/what-is-iam.html
-        - page: What is an ARN
-          url: /chapters/what-is-an-arn.html
     - page: Configure the AWS CLI
       url: /chapters/configure-the-aws-cli.html
 
-setup-backend:
-  title: Setting up the Serverless backend
+setup-serverless:
+  title: Setting up a Serverless app
   chapters:
-    - page: Create a DynamoDB table
-      url: /chapters/create-a-dynamodb-table.html
-    - page: Create an S3 bucket for file uploads
-      url: /chapters/create-an-s3-bucket-for-file-uploads.html
-    - page: Create a Cognito user pool
-      url: /chapters/create-a-cognito-user-pool.html
-      subchapters:
-        - page: Create a Cognito test user
-          url: /chapters/create-a-cognito-test-user.html
     - page: Set up the Serverless Framework
       url: /chapters/setup-the-serverless-framework.html
       subchapters:
         - page: Add support for ES6 and TypeScript
           url: /chapters/add-support-for-es6-and-typescript.html
+    - page: Deploy your Hello World API
+      url: /chapters/deploy-your-hello-world-api.html
     - page: Initialize the backend repo
       url: /chapters/initialize-the-backend-repo.html
 
-build-api:
-  title: Building a Serverless REST API
+setup-backend:
+  title: Create your AWS resources
   chapters:
+    - page: Create a DynamoDB table
+      url: /chapters/create-a-dynamodb-table.html
+    - page: Create an S3 bucket for file uploads
+      url: /chapters/create-an-s3-bucket-for-file-uploads.html
+
+build-api:
+  title: Building a Serverless API
+  chapters:
+    - page: Review our app architecture
+      url: /chapters/review-our-app-architecture.html
     - page: Add a create note API
       url: /chapters/add-a-create-note-api.html
     - page: Add a get note API
@@ -66,6 +64,29 @@ build-api:
       url: /chapters/add-an-update-note-api.html
     - page: Add a delete note API
       url: /chapters/add-a-delete-note-api.html
+    - page: Deploy the APIs
+      url: /chapters/deploy-the-apis.html
+
+users-auth:
+  title: Users and authentication
+  chapters:
+    - page: Handling Auth in Serverless APIs
+      url: /chapters/handling-auth-in-serverless-apis.html
+    - page: Create a Cognito user pool
+      url: /chapters/create-a-cognito-user-pool.html
+      subchapters:
+        - page: Create a Cognito test user
+          url: /chapters/create-a-cognito-test-user.html
+    - page: Create a Cognito identity pool
+      url: /chapters/create-a-cognito-identity-pool.html
+    - page: Secure the APIs
+      url: /chapters/secure-the-apis.html
+    - page: Test the APIs
+      url: /chapters/test-the-apis.html
+
+third-party-apis:
+  title: Secrets and 3rd party APIs
+  chapters:
     - page: Working with 3rd party APIs
       url: /chapters/working-with-3rd-party-apis.html
       subchapters:
@@ -73,27 +94,26 @@ build-api:
           url: /chapters/setup-a-stripe-account.html
         - page: Add a billing API
           url: /chapters/add-a-billing-api.html
-        - page: Load secrets from .env
-          url: /chapters/load-secrets-from-env.html
-        - page: Test the billing API
-          url: /chapters/test-the-billing-api.html
+    - page: Load secrets from .env
+      url: /chapters/load-secrets-from-env.html
+    - page: Test the billing API
+      url: /chapters/test-the-billing-api.html
+
+unit-tests:
+  title: Serverless unit tests
+  chapters:
     - page: Unit tests in Serverless
       url: /chapters/unit-tests-in-serverless.html
+
+cors:
+  title: CORS in Serverless
+  chapters:
+    - page: Handle CORS in Serverless APIs
+      url: /chapters/handle-cors-in-serverless-apis.html
     - page: Handle API Gateway CORS errors
       url: /chapters/handle-api-gateway-cors-errors.html
-
-deploy-backend:
-  title: Deploying the backend
-  chapters:
-    - page: Deploy the APIs
-      url: /chapters/deploy-the-apis.html
-    - page: Create a Cognito identity pool
-      url: /chapters/create-a-cognito-identity-pool.html
-      subchapters:
-        - page: Cognito user pool vs identity pool
-          url: /chapters/cognito-user-pool-vs-identity-pool.html
-    - page: Test the APIs
-      url: /chapters/test-the-apis.html
+    - page: Handle CORS in S3 for File Uploads
+      url: /chapters/handle-cors-in-s3-for-file-uploads.html
 
 setup-react:
   title: Setting up a React app
@@ -109,6 +129,10 @@ setup-react:
           url: /chapters/setup-custom-fonts.html
         - page: Set up Bootstrap
           url: /chapters/setup-bootstrap.html
+
+react-routes:
+  title: Routes in React
+  chapters:
     - page: Handle routes with React Router
       url: /chapters/handle-routes-with-react-router.html
       subchapters:
@@ -118,12 +142,12 @@ setup-react:
           url: /chapters/adding-links-in-the-navbar.html
         - page: Handle 404s
           url: /chapters/handle-404s.html
+
+setup-amplify:
+  title: Adding auth to a React app
+  chapters:
     - page: Configure AWS Amplify
       url: /chapters/configure-aws-amplify.html
-
-build-react:
-  title: Building a React app
-  chapters:
     - page: Create a login page
       url: /chapters/create-a-login-page.html
       subchapters:
@@ -148,6 +172,10 @@ build-react:
           url: /chapters/create-the-signup-form.html
         - page: Signup with AWS Cognito
           url: /chapters/signup-with-aws-cognito.html
+
+build-react:
+  title: Building a React app
+  chapters:
     - page: Add the create note page
       url: /chapters/add-the-create-note-page.html
       subchapters:
@@ -178,18 +206,33 @@ build-react:
           url: /chapters/create-a-billing-form.html
         - page: Connect the billing form
           url: /chapters/connect-the-billing-form.html
+
+secure-pages:
+  title: Securing React pages
+  chapters:
     - page: Set up secure pages
       url: /chapters/setup-secure-pages.html
-      subchapters:
-        - page: Create a route that redirects
-          url: /chapters/create-a-route-that-redirects.html
-        - page: Use the redirect routes
-          url: /chapters/use-the-redirect-routes.html
-        - page: Redirect on login
-          url: /chapters/redirect-on-login.html
+    - page: Create a route that redirects
+      url: /chapters/create-a-route-that-redirects.html
+    - page: Use the redirect routes
+      url: /chapters/use-the-redirect-routes.html
+    - page: Redirect on login
+      url: /chapters/redirect-on-login.html
 
-deploy-backend-prod:
-  title: Deploying the backend to production
+domains-hosting:
+  title: Domains and hosting
+  chapters:
+    - page: Hosting your React app
+      url: /chapters/hosting-your-react-app.html
+    - page: Setting up your project on Netlify
+      url: /chapters/setting-up-your-project-on-netlify.html
+    - page: Purchase a domain with Route 53
+      url: /chapters/purchase-a-domain-with-route-53.html
+    - page: Custom domains in Netlify
+      url: /chapters/custom-domain-in-netlify.html
+
+infrastructure-as-code:
+  title: Infrastructure as Code
   chapters:
     - page: Getting production ready
       url: /chapters/getting-production-ready.html
@@ -215,39 +258,35 @@ deploy-backend-prod:
           url: /chapters/connect-serverless-framework-and-cdk-with-sst.html
     - page: Deploy your Serverless infrastructure
       url: /chapters/deploy-your-serverless-infrastructure.html
-    - page: Automating Serverless deployments
-      url: /chapters/automating-serverless-deployments.html
-      subchapters:
-        - page: Setting up your project on Seed
-          url: /chapters/setting-up-your-project-on-seed.html
-        - page: Configure secrets in Seed
-          url: /chapters/configure-secrets-in-seed.html
-        - page: Deploying through Seed
-          url: /chapters/deploying-through-seed.html
-        - page: Set custom domains through Seed
-          url: /chapters/set-custom-domains-through-seed.html
-    - page: Test the configured APIs
-      url: /chapters/test-the-configured-apis.html
 
-deploy-frontend-prod:
-  title: Deploying the frontend to production
+automating-deployments:
+  title: Automating deployments
   chapters:
-    - page: Automating React Deployments
-      url: /chapters/automating-react-deployments.html
+    - page: Creating a CI/CD pipeline for Serverless
+      url: /chapters/creating-a-ci-cd-pipeline-for-serverless.html
       subchapters:
-        - page: Manage environments in Create React App
-          url: /chapters/manage-environments-in-create-react-app.html
-        - page: Create a build script
-          url: /chapters/create-a-build-script.html
-        - page: Setting up your project on Netlify
-          url: /chapters/setting-up-your-project-on-netlify.html
-        - page: Custom Domains in Netlify
-          url: /chapters/custom-domain-in-netlify.html
-    - page: Frontend workflow
-      url: /chapters/frontend-workflow.html
+      - page: Setting up your project on Seed
+        url: /chapters/setting-up-your-project-on-seed.html
+      - page: Configure secrets in Seed
+        url: /chapters/configure-secrets-in-seed.html
+      - page: Deploying through Seed
+        url: /chapters/deploying-through-seed.html
+      - page: Set custom domains through Seed
+        url: /chapters/set-custom-domains-through-seed.html
+      - page: Test the configured APIs
+        url: /chapters/test-the-configured-apis.html
+    - page: Creating a CI/CD pipeline for React
+      url: /chapters/creating-a-ci-cd-pipeline-for-react.html
+      subchapters:
+      - page: Manage environments in Create React App
+        url: /chapters/manage-environments-in-create-react-app.html
+      - page: Create a Netlify build script
+        url: /chapters/create-a-netlify-build-script.html
+      - page: Frontend workflow
+        url: /chapters/frontend-workflow.html
 
 monitor-debug-errors:
-  title: Monitoring and debugging errors
+  title: Monitoring and debugging
   chapters:
     - page: Debugging full-stack Serverless apps
       url: /chapters/debugging-full-stack-serverless-apps.html
@@ -299,6 +338,13 @@ organize-serverless-apps:
       url: /chapters/organizing-serverless-projects.html
     - page: Cross-stack references in Serverless
       url: /chapters/cross-stack-references-in-serverless.html
+      subchapters:
+        - page: DynamoDB as a Serverless service
+          url: /chapters/dynamodb-as-a-serverless-service.html
+        - page: S3 as a Serverless service
+          url: /chapters/s3-as-a-serverless-service.html
+        - page: Cognito as a Serverless service
+          url: /chapters/cognito-as-a-serverless-service.html
     - page: Share code between services
       url: /chapters/share-code-between-services.html
     - page: Share an API endpoint between services
@@ -368,6 +414,12 @@ best-practices-conclusion:
 extra-backend:
   title: Serverless
   chapters:
+    - page: What is IAM
+      url: /chapters/what-is-iam.html
+    - page: What is an ARN
+      url: /chapters/what-is-an-arn.html
+    - page: Cognito user pool vs identity pool
+      url: /chapters/cognito-user-pool-vs-identity-pool.html
     - page: API Gateway and Lambda Logs
       url: /chapters/api-gateway-and-lambda-logs.html
     - page: Debugging Serverless API Issues
@@ -411,10 +463,8 @@ extra-frontend:
           url: /chapters/deploy-to-s3.html
         - page: Create a CloudFront distribution
           url: /chapters/create-a-cloudfront-distribution.html
-        - page: Purchase a Domain with Route 53
-          url: /chapters/purchase-a-domain-with-route-53.html
-        - page: Setup SSL
-          url: /chapters/setup-ssl.html
+        - page: Set up a Custom Domain With SSL
+          url: /chapters/setup-a-custom-domain-with-ssl.html
         - page: Set up your domain with CloudFront
           url: /chapters/setup-your-domain-with-cloudfront.html
         - page: Set up www domain redirect

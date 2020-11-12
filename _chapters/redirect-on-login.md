@@ -73,7 +73,7 @@ const history = useHistory();
 import { useHistory } from "react-router-dom";
 ```
 
-Now our login page should redirect after we login. And that's it! Our app is ready to go live.
+Now our login page should redirect after we login.
 
 ### Commit the Changes
 
@@ -85,4 +85,8 @@ $ git commit -m "Building our React app"
 $ git push
 ```
 
-Next we'll be looking at how to automate this stack so we can use it for our future projects. You can also take a look at how to add a Login with Facebook option in the [Facebook Login with Cognito using AWS Amplify]({% link _chapters/facebook-login-with-cognito-using-aws-amplify.md %}) chapter. It builds on what we have covered so far.
+And that's it! Our app is ready to go live.
+
+Next we'll be looking at how to host our React app! And we'll do it on our own domain!
+
+We should mention that if you want to use the setup we've described so far but want to use a Facebook login, we have a separate chapter on that — [Facebook Login with Cognito using AWS Amplify]({% link _chapters/facebook-login-with-cognito-using-aws-amplify.md %}). It builds on what we've covered so far.

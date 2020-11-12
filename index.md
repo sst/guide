@@ -19,12 +19,26 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
           {% include toc-chapters.html items=site.data.chapterlist.preface id="preface" %}
 
           {% include toc-chapters.html items=site.data.chapterlist.intro id="intro" %}
+
           {% include toc-chapters.html items=site.data.chapterlist.setup-aws id="setup-aws" %}
+          {% include toc-chapters.html items=site.data.chapterlist.setup-serverless id="setup-serverless" %}
           {% include toc-chapters.html items=site.data.chapterlist.setup-backend id="setup-backend" %}
           {% include toc-chapters.html items=site.data.chapterlist.build-api id="build-api" %}
-          {% include toc-chapters.html items=site.data.chapterlist.deploy-backend id="deploy-backend" %}
+          {% include toc-chapters.html items=site.data.chapterlist.users-auth id="users-auth" %}
+          {% include toc-chapters.html items=site.data.chapterlist.third-party-apis id="third-party-apis" %}
+          {% include toc-chapters.html items=site.data.chapterlist.unit-tests id="unit-tests" %}
+          {% include toc-chapters.html items=site.data.chapterlist.cors id="cors" %}
+
           {% include toc-chapters.html items=site.data.chapterlist.setup-react id="setup-react" %}
+          {% include toc-chapters.html items=site.data.chapterlist.react-routes id="react-routes" %}
+          {% include toc-chapters.html items=site.data.chapterlist.setup-amplify id="setup-amplify" %}
           {% include toc-chapters.html items=site.data.chapterlist.build-react id="build-react" %}
+          {% include toc-chapters.html items=site.data.chapterlist.secure-pages id="secure-pages" %}
+          {% include toc-chapters.html items=site.data.chapterlist.domains-hosting id="domains-hosting" %}
+
+          {% include toc-chapters.html items=site.data.chapterlist.infrastructure-as-code id="infrastructure-as-code" %}
+          {% include toc-chapters.html items=site.data.chapterlist.automating-deployments id="automating-deployments" %}
+
           {% include toc-chapters.html items=site.data.chapterlist.deploy-backend-prod id="deploy-backend-prod" %}
           {% include toc-chapters.html items=site.data.chapterlist.deploy-frontend-prod id="deploy-frontend-prod" %}
           {% include toc-chapters.html items=site.data.chapterlist.monitor-debug-errors id="monitor-debug-errors" %}

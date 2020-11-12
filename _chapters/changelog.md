@@ -23,9 +23,17 @@ You can get these updates emailed to you via our [newsletter]({{ site.newsletter
 
 ### Changes
 
-#### v5.0.2: {{ site.data.changelog.current.title }} (Current)
+#### [v6.0: {{ site.data.changelog.current.title }}](https://branchv60--serverless-stack.netlify.app/) (Current)
 
 {{ site.data.changelog.current.desc }}
+
+- [Tutorial changes]({{ site.github_repo }}/compare/v5.0.1...v6.0)
+- [API]({{ site.backend_github_repo }}/compare/v5.0...v6.0)
+- [Client]({{ site.frontend_github_repo }}/compare/v4.1...v6.0)
+
+#### v5.0.2: {{ site.data.changelog.v5-0-2.title }}
+
+{{ site.data.changelog.v5-0-2.desc }}
 
 #### [v5.0.1: {{ site.data.changelog.v5-0-1.title }}](https://branchv501--serverless-stack.netlify.app/)
 

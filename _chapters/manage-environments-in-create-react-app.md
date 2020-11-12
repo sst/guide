@@ -13,9 +13,9 @@ Recall from our backend section that we created two environments (dev and prod) 
 Let's start by looking at how our app is configured currently. Our `src/config.js` stores the info for all of our backend resources.
 
 ``` js
-export default {
-  MAX_ATTACHMENT_SIZE: 5000000,
+const config = {
   STRIPE_KEY: "pk_test_1234567890",
+  MAX_ATTACHMENT_SIZE: 5000000,
   s3: {
     REGION: "us-east-1",
     BUCKET: "notes-app-uploads"
@@ -31,6 +31,8 @@ export default {
     IDENTITY_POOL_ID: "us-east-1:ceef8ccc-0a19-4616-9067-854dc69c2d82"
   }
 };
+
+export default config;
 ```
 
 We need to change this so that when we *push* our app to **dev** it connects to the dev environment of our backend and for **prod** it connects to the prod environment. Of course you can add many more environments, but let's just stick to these for now.
@@ -98,16 +100,14 @@ const prod = {
   }
 };
 
-// Default to dev if not set
-const config = process.env.REACT_APP_STAGE === 'prod'
-  ? prod
-  : dev;
-
-export default {
+const config = {
   // Add common config values here
   MAX_ATTACHMENT_SIZE: 5000000,
-  ...config
+  // Default to dev if not set
+  ...(process.env.REACT_APP_STAGE === "prod" ? prod : dev),
 };
+
+export default config;
 ```
 
 Make sure to replace the different version of the resources with the ones from the [Deploying through Seed]({% link _chapters/deploying-through-seed.md %}) chapter.

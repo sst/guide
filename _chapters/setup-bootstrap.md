@@ -4,30 +4,35 @@ title: Set up Bootstrap
 date: 2017-01-09 00:00:00
 lang: en
 ref: set-up-bootstrap
-description: Bootstrap is a UI framework that makes it easy to build consistent responsive web apps. We are going to use Bootstrap with our React.js project using the React-Bootstrap library. React-Bootstrap allows you to use Bootstrap in the form of standard React components.
+description: Bootstrap is a UI framework that makes it easy to build consistent responsive web apps. We are going to use Bootstrap with our React.js project using the React Bootstrap and the Bootstrap icons from the React Icons package. React Bootstrap and React Icons allow you to use them as standard React components.
 comments_id: set-up-bootstrap/118
 ---
 
-A big part of writing web applications is having a UI Kit to help create the interface of the application. We are going to use [Bootstrap](http://getbootstrap.com) for our note taking app. While Bootstrap can be used directly with React; the preferred way is to use it with the [React-Bootstrap](https://react-bootstrap.github.io) package. This makes our markup a lot simpler to implement and understand.
+A big part of writing web applications is having a UI Kit to help create the interface of the application. We are going to use [Bootstrap](http://getbootstrap.com) for our note taking app. While Bootstrap can be used directly with React; the preferred way is to use it with the [React Bootstrap](https://react-bootstrap.github.io) package. This makes our markup a lot simpler to implement and understand.
+
+We also need a couple of icons in our application. We'll be using the [React Icons](https://react-icons.github.io/react-icons/) package for this. It allows us to include icons in our React app as standard React components.
 
 ### Installing React Bootstrap
 
 {%change%} Run the following command in your working directory.
 
 ``` bash
-$ npm install react-bootstrap@0.33.1 --save
+$ npm install react-bootstrap@1.4.0 react-icons@3.11.0 --save
 ```
 
-This installs the NPM package and adds the dependency to your `package.json`.
-
-Note that, we'll be upgrading the guide to React Bootstrap v1 once it is out of beta.
+This installs the npm packages and adds the dependencies to your `package.json`.
 
 ### Add Bootstrap Styles
 
 {%change%} React Bootstrap uses the standard Bootstrap v3 styles; so just add the following styles to your `public/index.html`.
 
 ``` html
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+  integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+  crossorigin="anonymous"
+/>
 ```
 
 We'll also tweak the styles of the form fields so that the mobile browser does not zoom in on them on focus. We just need them to have a minimum font size of `16px` to prevent the zoom.
@@ -38,7 +43,7 @@ We'll also tweak the styles of the form fields so that the mobile browser does n
 select.form-control,
 textarea.form-control,
 input.form-control {
-  font-size: 16px;
+  font-size: 1rem;
 }
 input[type=file] {
   width: 100%;

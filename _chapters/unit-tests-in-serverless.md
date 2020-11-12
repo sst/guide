@@ -75,12 +75,11 @@ This should be straightforward. We are adding 3 tests. They are testing the diff
 
 You might have noticed a `handler.test.js` file in the `tests/` directory. This was a part of our starter that we can now remove.
 
-### Remove Unused Files
+### Remove Template Files
 
 {%change%} Remove the starter files by running the following command in the root of our project.
 
 ``` bash
-$ rm handler.js
 $ rm tests/handler.test.js
 ```
 
@@ -109,4 +108,14 @@ Ran all test suites.
 
 And that's it! We have unit tests all configured.
 
-Now we are almost ready to deploy our backend.
+### Commit the Changes
+
+{%change%} Let's commit the changes to so far and push it to GitHub.
+
+``` bash
+$ git add .
+$ git commit -m "Adding unit tests to our Serverless API"
+$ git push
+```
+
+Now we are almost ready to move on to our frontend. But before we do, we need to ensure that our backend is configured so that our React app will be able to connect to it.

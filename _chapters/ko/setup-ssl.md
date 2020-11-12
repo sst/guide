@@ -6,7 +6,7 @@ lang: ko
 description: AWS의 React.js 앱에서 SSL 또는 HTTPS를 사용하도록 설정하려고합니다. 그렇게하기 위해 우리는 AWS의 Certificate Manager 서비스를 사용하여 인증서를 요청할 것입니다. 그런 다음 CloudFront 배포판에서 새 인증서를 사용하려고합니다. 
 context: true
 comments_id: comments-for-set-up-ssl/133
-ref: setup-ssl
+ref: setup-a-custom-domain-with-ssl
 ---
 
 이제 우리 응용 프로그램이 도메인을 통해 제공되고 있으므로 HTTPS로 전환하여 보안 기능을 추가해 보겠습니다. 인증서 관리자 덕분에 AWS를 사용하면 이 작업을 매우 쉽게 처리 할 수 있습니다.

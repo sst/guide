@@ -49,6 +49,50 @@ To run your tests, add this to your `package.json`.
 }
 ```
 
+### ES6 Lambda Functions
+
+Let's look at the Lambda function that comes with our starter project.
+
+Your `handler.js` should look like this.
+
+``` js
+export const hello = async (event, context) => {
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      message: `Go Serverless v2.0! ${(await message({ time: 1, copy: 'Your function executed successfully!'}))}`,
+    }),
+  };
+};
+
+const message = ({ time, ...rest }) => new Promise((resolve, reject) =>
+  setTimeout(() => {
+    resolve(`${rest.copy} (with a delay)`);
+  }, time * 1000)
+);
+```
+
+Let's run this. In your project root run:
+
+``` bash
+$ serverless invoke local --function hello
+```
+
+You should see something like this in your terminal.
+
+``` bash
+{
+    "statusCode": 200,
+    "body": "{\"message\":\"Go Serverless v2.0! Your function executed successfully! (with a delay)\"}"
+}
+```
+
+In the above command we are asking Serverless Framework to (locally) invoke a Lambda function called `hello`. This in turn will run the `hello` method that we are exporting in our `handler.js`.
+
+Here we are directly invoking the Lambda function. Though once deployed, we'll be invoking this function through the `/hello` API endpoint (as we [talked about in the last chapter]({% link _chapters/setup-the-serverless-framework.md %})).
+
+Now we are almost ready to deploy our Lambda function and API. But before we do that let's quickly look at one of the other things that's been set up for us in this starter project. 
+
 ### Optimized Packages
 
 By default Serverless Framework creates a single package for all your Lambda functions. This means that when a Lambda function is invoked, it'll load all the code in your app. Including all the other Lambda functions. This negatively affects performance as your app grows in size. The larger your Lambda function packages, the longer [the cold starts]({% link _chapters/what-is-serverless.md %}#cold-starts).
@@ -64,4 +108,4 @@ This should be on by default in our starter project.
 
 Note that, with the above option enabled, serverless-bundle can use Webpack to generate optimized packages using a [tree shaking algorithm](https://webpack.js.org/guides/tree-shaking/). It'll only include the code needed to run your Lambda function and nothing else!
 
-Now we are ready to write our backend code. But before that, let's create a GitHub repo to store our code.
+Now we are ready to deploy our backend API.

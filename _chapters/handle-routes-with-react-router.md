@@ -10,15 +10,16 @@ comments_id: handle-routes-with-react-router/116
 
 Create React App sets a lot of things up by default but it does not come with a built-in way to handle routes. And since we are building a single page app, we are going to use [React Router](https://reacttraining.com/react-router/) to handle them for us.
 
+React Router allows us to specify a route like: `/login`. And specify a React Component that should be loaded when a user goes to that page.
 
-Let's start by installing React Router. We are going to be using the React Router v4, the newest version of React Router. React Router v4 can be used on the web and in native. So let's install the one for the web.
+Let's start by installing React Router.
 
 ### Installing React Router
 
 {%change%} Run the following command in your working directory.
 
 ``` bash
-$ npm install react-router-dom@5.1.2 --save
+$ npm install react-router-dom@5.2.0 --save
 ```
 
 This installs the NPM package and adds the dependency to your `package.json`.
@@ -30,16 +31,23 @@ Even though we don't have any routes set up in our app, we can get the basic str
 {%change%} Replace the following code in `src/index.js`:
 
 ``` coffee
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
 ```
 
 {%change%} With this:
 
 ``` coffee
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <React.StrictMode>
+    <Router>
+      <App />
+    </Router>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 ```

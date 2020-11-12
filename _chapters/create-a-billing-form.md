@@ -23,7 +23,7 @@ Next let's create our billing form component.
 {% raw %}
 ``` coffee
 import React, { useState } from "react";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import LoaderButton from "./LoaderButton";
 import { useFormFields } from "../libs/hooksLib";
@@ -32,7 +32,7 @@ import "./BillingForm.css";
 function BillingForm({ isLoading, onSubmit, ...props }) {
   const [fields, handleFieldChange] = useFormFields({
     name: "",
-    storage: ""
+    storage: "",
   });
   const [isProcessing, setIsProcessing] = useState(false);
   const [isCardComplete, setIsCardComplete] = useState(false);
@@ -40,11 +40,7 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
   isLoading = isProcessing || isLoading;
 
   function validateForm() {
-    return (
-      fields.name !== "" &&
-      fields.storage !== "" &&
-      isCardComplete
-    );
+    return fields.name !== "" && fields.storage !== "" && isCardComplete;
   }
 
   async function handleSubmitClick(event) {
@@ -52,7 +48,9 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
 
     setIsProcessing(true);
 
-    const { token, error } = await props.stripe.createToken({ name: fields.name });
+    const { token, error } = await props.stripe.createToken({
+      name: fields.name,
+    });
 
     setIsProcessing(false);
 
@@ -60,45 +58,49 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
   }
 
   return (
-    <form className="BillingForm" onSubmit={handleSubmitClick}>
-      <FormGroup bsSize="large" controlId="storage">
-        <ControlLabel>Storage</ControlLabel>
-        <FormControl
+    <Form className="BillingForm" onSubmit={handleSubmitClick}>
+      <Form.Group size="lg" controlId="storage">
+        <Form.Label>Storage</Form.Label>
+        <Form.Control
           min="0"
           type="number"
           value={fields.storage}
           onChange={handleFieldChange}
           placeholder="Number of notes to store"
         />
-      </FormGroup>
+      </Form.Group>
       <hr />
-      <FormGroup bsSize="large" controlId="name">
-        <ControlLabel>Cardholder&apos;s name</ControlLabel>
-        <FormControl
+      <Form.Group size="lg" controlId="name">
+        <Form.Label>Cardholder&apos;s name</Form.Label>
+        <Form.Control
           type="text"
           value={fields.name}
           onChange={handleFieldChange}
           placeholder="Name on the card"
         />
-      </FormGroup>
-      <ControlLabel>Credit Card Info</ControlLabel>
+      </Form.Group>
+      <Form.Label>Credit Card Info</Form.Label>
       <CardElement
         className="card-field"
-        onChange={e => setIsCardComplete(e.complete)}
+        onChange={(e) => setIsCardComplete(e.complete)}
         style={{
-          base: { fontSize: "18px", fontFamily: '"Open Sans", sans-serif' }
+          base: {
+            fontSize: "16px",
+            color: "#495057",
+            fontFamily: "'Open Sans', sans-serif",
+          },
         }}
       />
       <LoaderButton
         block
+        size="lg"
         type="submit"
-        bsSize="large"
         isLoading={isLoading}
         disabled={!validateForm()}
       >
         Purchase
       </LoaderButton>
-    </form>
+    </Form>
   );
 }
 
@@ -108,7 +110,11 @@ export default injectStripe(BillingForm);
 
 Let's quickly go over what we are doing here:
 
-- To begin with we are going to wrap our component with a Stripe module using the `injectStripe` HOC. This gives our component access to the `props.stripe.createToken` method.
+- To begin with we are going to wrap our component with a Stripe module using the `injectStripe` HOC. A [Higher-Order Component (or HOC)]https://reactjs.org/docs/higher-order-components.html), is one that takes a component and returns a new component. It wraps around a given component and can add additional functionality to it. In our case, this gives our component access to the `props.stripe.createToken` method.
+
+  ``` javascript
+  export default injectStripe(BillingForm)
+  ```
 
 - As for the fields in our form, we have input field of type `number` that allows a user to enter the number of notes they want to store. We also take the name on the credit card. These are stored in the state through the `handleFieldChange` method that we get from our `useFormFields` custom React Hook.
 
@@ -128,19 +134,22 @@ Also, let's add some styles to the card field so it matches the rest of our UI.
 
 ``` css
 .BillingForm .card-field {
-  margin-bottom: 15px;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+  padding: 0.55rem 0.75rem;
   background-color: white;
-  padding: 11px 16px;
-  border-radius: 6px;
-  border: 1px solid #CCC;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-  line-height: 1.3333333;
+  border: 1px solid #ced4da;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .BillingForm .card-field.StripeElement--focus {
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
-  border-color: #66AFE9;
+  outline: 0;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 ```
+
+These styles might look complicated. But we are just copying them from the other form fields on the page to make sure that the card field looks like them.
 
 Next we'll plug our form into the settings page.

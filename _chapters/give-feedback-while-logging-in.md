@@ -53,7 +53,8 @@ Here we'll be storing all our React components that are not dealing directly wit
 
 ``` coffee
 import React from "react";
-import { Button, Glyphicon } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import { BsArrowRepeat } from "react-icons/bs";
 import "./LoaderButton.css";
 
 export default function LoaderButton({
@@ -64,36 +65,45 @@ export default function LoaderButton({
 }) {
   return (
     <Button
-      className={`LoaderButton ${className}`}
       disabled={disabled || isLoading}
+      className={`LoaderButton ${className}`}
       {...props}
     >
-      {isLoading && <Glyphicon glyph="refresh" className="spinning" />}
+      {isLoading && <BsArrowRepeat className="spinning" />}
       {props.children}
     </Button>
   );
 }
 ```
 
-This is a really simple component that takes an `isLoading` flag and the text that the button displays in the two states (the default state and the loading state). The `disabled` prop is a result of what we have currently in our `Login` button. And we ensure that the button is disabled when `isLoading` is `true`. This makes it so that the user can't click it while we are in the process of logging them in.
+This is a really simple component that takes an `isLoading` prop and `disabled` prop. The latter is a result of what we have currently in our `Login` button. And we ensure that the button is disabled when `isLoading` is `true`. This makes it so that the user can't click it while we are in the process of logging them in.
+
+The `className` prop that we have is to ensure that a CSS class that's set for this component, doesn't override the `LoaderButton` CSS class that we are using internally.
+
+When the `isLoading` flag is on, we show an icon. The icon we include is from the Bootstrap icon set of [React Icons](https://react-icons.github.io/icons?name=bs).
 
 And let's add a couple of styles to animate our loading icon.
 
 {%change%} Add the following to `src/components/LoaderButton.css`.
 
 ``` css
-.LoaderButton .spinning.glyphicon {
+.LoaderButton .spinning {
   margin-right: 7px;
   top: 2px;
   animation: spin 1s infinite linear;
 }
+
 @keyframes spin {
-  from { transform: scale(1) rotate(0deg); }
-  to { transform: scale(1) rotate(360deg); }
+  from {
+    transform: scale(1) rotate(0deg);
+  }
+  to {
+    transform: scale(1) rotate(360deg);
+  }
 }
 ```
 
-This spins the refresh Glyphicon infinitely with each spin taking a second. And by adding these styles as a part of the `LoaderButton` we keep them self contained within the component.
+This spins the icon infinitely with each spin taking a second. And by adding these styles as a part of the `LoaderButton` we keep them self contained within the component.
 
 ### Render Using the isLoading Flag
 
@@ -102,7 +112,7 @@ Now we can use our new component in our `Login` container.
 {%change%} In `src/containers/Login.js` find the `<Button>` component in the `return` statement.
 
 ``` html
-<Button block bsSize="large" disabled={!validateForm()} type="submit">
+<Button block size="lg" type="submit" disabled={!validateForm()}>
   Login
 </Button>
 ```
@@ -112,8 +122,8 @@ Now we can use our new component in our `Login` container.
 ``` html
 <LoaderButton
   block
+  size="lg"
   type="submit"
-  bsSize="large"
   isLoading={isLoading}
   disabled={!validateForm()}
 >
@@ -121,10 +131,15 @@ Now we can use our new component in our `Login` container.
 </LoaderButton>
 ```
 
-{%change%} Also, import the `LoaderButton` in the header. And remove the reference to the `Button` component.
+{%change%} Also, let's replace `Button` import in the header. Remove this.
 
 ``` javascript
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+```
+
+{%change%} And add the following.
+
+``` javascript
 import LoaderButton from "../components/LoaderButton";
 ```
 

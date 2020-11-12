@@ -1,11 +1,12 @@
 ---
 layout: post
-title: Create a Build Script
+title: Create a Netlify Build Script
 date: 2018-03-26 00:00:00
 lang: en
 description: To configure our Create React App with Netlify, we need to add a build script to our project root. To make sure that we return a HTTP status code of 200 for our React Router routes we will be adding a redirects rule.
 code: frontend
-ref: create-a-build-script
+ref: create-a-netlify-build-script
+redirect_from: /chapters/create-a-build-script.html
 comments_id: create-a-build-script/189
 ---
 
@@ -52,21 +53,6 @@ The build script is configured based on contexts. There is a default one right u
 
 The production context labelled, `context.production` is the only one where we set the `REACT_APP_STAGE` variable to `prod`. This is when we push to `master`. The `branch-deploy` is what we will be using when we push to any other non-production branch. The `deploy-preview` is for pull requests.
 
-### Handle HTTP Status Codes
-
-Just as in the first part of the tutorial, we'll need to handle requests to any non-root paths of our app. Our frontend is a single-page app and the routing is handled on the client side. We need to tell Netlify to always redirect any request to our `index.html` and return the 200 status code for it.
-
-{%change%} To do this, add a redirects rule at the bottom of `netlify.toml`:
-
-``` toml
-# Always redirect any request to our index.html
-# and return the status code 200.
-[[redirects]]
-    from    = "/*"
-    to      = "/index.html"
-    status  = 200
-```
-
 ### Commit the Changes
 
 {%change%} Let's quickly commit these to Git.
@@ -84,4 +70,4 @@ $ git commit -m "Adding a Netlify build script"
 $ git push
 ```
 
- Now we are ready to add our project to Netlify.
+Now we are ready to test our frontend workflow!

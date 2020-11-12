@@ -57,54 +57,72 @@ Now let's render the results.
 
 ``` coffee
 function renderNotesList(notes) {
-  return [{}].concat(notes).map((note, i) =>
-    i !== 0 ? (
-      <LinkContainer key={note.noteId} to={`/notes/${note.noteId}`}>
-        <ListGroupItem header={note.content.trim().split("\n")[0]}>
-          {"Created: " + new Date(note.createdAt).toLocaleString()}
-        </ListGroupItem>
+  return (
+    <>
+      <LinkContainer to="/notes/new">
+        <ListGroup.Item action className="py-3 text-nowrap text-truncate">
+          <BsPencilSquare size={17} />
+          <span className="ml-2 font-weight-bold">Create a new note</span>
+        </ListGroup.Item>
       </LinkContainer>
-    ) : (
-      <LinkContainer key="new" to="/notes/new">
-        <ListGroupItem>
-          <h4>
-            <b>{"\uFF0B"}</b> Create a new note
-          </h4>
-        </ListGroupItem>
-      </LinkContainer>
-    )
+      {notes.map(({ noteId, content, createdAt }) => (
+        <LinkContainer key={noteId} to={`/notes/${noteId}`}>
+          <ListGroup.Item action>
+            <span className="font-weight-bold">
+              {content.trim().split("\n")[0]}
+            </span>
+            <br />
+            <span className="text-muted">
+              Created: {new Date(createdAt).toLocaleString()}
+            </span>
+          </ListGroup.Item>
+        </LinkContainer>
+      ))}
+    </>
   );
 }
 ```
 
-{%change%} Include the `LinkContainer` from `react-router-bootstrap`.
-
-``` javascript
-import { LinkContainer } from "react-router-bootstrap";
-```
-
 The code above does a few things.
 
-1. It always renders a **Create a new note** button as the first item in the list (even if the list is empty). We do this by concatenating an array with an empty object with our `notes` array.
+1. It always renders a **Create a new note** button as the first item in the list (even if the list is empty). And it links to [the create note page that we previously created]({% link _chapters/add-the-create-note-page.md %}).
 
-2. We render the first line of each note as the `ListGroupItem` header by doing `note.content.trim().split('\n')[0]`.
+   ``` coffee
+    <LinkContainer to="/notes/new">
+      <ListGroup.Item action className="py-3 text-nowrap text-truncate">
+        <BsPencilSquare size={17} />
+        <span className="ml-2 font-weight-bold">Create a new note</span>
+      </ListGroup.Item>
+    </LinkContainer>
+   ```
 
-3. And the `LinkContainer` component directs our app to each of the items.
+2. In the button we use a `BsPencilSquare` icon from the [React Icons Bootstrap icon set](https://react-icons.github.io/icons?name=bs).
 
-{%change%} Let's also add a couple of styles to our `src/containers/Home.css`.
+3. We then render a list of all the notes.
 
-``` css
-.Home .notes h4 {
-  font-family: "Open Sans", sans-serif;
-  font-weight: 600;
-  overflow: hidden;
-  line-height: 1.5;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-.Home .notes p {
-  color: #666;
-}
+   ``` javascript
+   notes.map(({ noteId, content, createdAt }) => (...
+   ```
+
+4. The first line of each note's content is set as the `ListGroup.Item` header.
+
+   ``` javascript
+   note.content.trim().split('\n')[0]
+   ```
+
+5. And we convert the date the note was created to a more friendly format.
+
+   ``` javascript
+   {new Date(createdAt).toLocaleString()}
+   ```
+
+6. The `LinkContainer` component directs our app to each of the items.
+
+{%change%} Include the `LinkContainer` and `BsPencilSquare` icon at the top of `src/containers/Home.js`.
+
+``` javascript
+import { BsPencilSquare } from "react-icons/bs";
+import { LinkContainer } from "react-router-bootstrap";
 ```
 
 Now head over to your browser and you should see your list displayed.

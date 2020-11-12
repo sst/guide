@@ -8,7 +8,7 @@ description: We are going to add a login page to our React.js app. To create the
 comments_id: create-a-login-page/71
 ---
 
-Let's create a page where the users of our app can login with their credentials. When we created our User Pool we asked it to allow a user to sign in and sign up with their email as their username. We'll be touching on this further when we create the signup form.
+Let's create a page where the users of our app can login with their credentials. When we [created our User Pool]({% link _chapters/create-a-cognito-user-pool.md %}) we asked it to allow a user to sign in and sign up with their email as their username. We'll be touching on this further when we create the signup form.
 
 So let's start by creating the basic form that'll take the user's email (as their username) and password.
 
@@ -18,7 +18,8 @@ So let's start by creating the basic form that'll take the user's email (as thei
 
 ``` coffee
 import React, { useState } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 import "./Login.css";
 
 export default function Login() {
@@ -35,28 +36,28 @@ export default function Login() {
 
   return (
     <div className="Login">
-      <form onSubmit={handleSubmit}>
-        <FormGroup controlId="email" bsSize="large">
-          <ControlLabel>Email</ControlLabel>
-          <FormControl
+      <Form onSubmit={handleSubmit}>
+        <Form.Group size="lg" controlId="email">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
             autoFocus
             type="email"
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
-        </FormGroup>
-        <FormGroup controlId="password" bsSize="large">
-          <ControlLabel>Password</ControlLabel>
-          <FormControl
-            value={password}
-            onChange={e => setPassword(e.target.value)}
+        </Form.Group>
+        <Form.Group size="lg" controlId="password">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
             type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
-        </FormGroup>
-        <Button block bsSize="large" disabled={!validateForm()} type="submit">
+        </Form.Group>
+        <Button block size="lg" type="submit" disabled={!validateForm()}>
           Login
         </Button>
-      </form>
+      </Form>
     </div>
   );
 }

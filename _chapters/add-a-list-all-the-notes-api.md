@@ -24,13 +24,12 @@ export const main = handler(async (event, context) => {
     // 'KeyConditionExpression' defines the condition for the query
     // - 'userId = :userId': only return items with matching 'userId'
     //   partition key
-    // 'ExpressionAttributeValues' defines the value in the condition
-    // - ':userId': defines 'userId' to be Identity Pool identity id
-    //   of the authenticated user
     KeyConditionExpression: "userId = :userId",
+    // 'ExpressionAttributeValues' defines the value in the condition
+    // - ':userId': defines 'userId' to be the id of the author
     ExpressionAttributeValues: {
-      ":userId": event.requestContext.identity.cognitoIdentityId
-    }
+      ":userId": "123",
+    },
   };
 
   const result = await dynamoDb.query(params);
@@ -40,7 +39,7 @@ export const main = handler(async (event, context) => {
 });
 ```
 
-This is pretty much the same as our `get.js` except we only pass in the `userId` in the DynamoDB `query` call.
+This is pretty much the same as our `get.js` except we use a condition to only return the items that have the same `userId` as the one we are passing in. In our case, it's still hardcoded to `123`.
 
 ### Configure the API Endpoint
 
@@ -56,8 +55,6 @@ This is pretty much the same as our `get.js` except we only pass in the `userId`
       - http:
           path: notes
           method: get
-          cors: true
-          authorizer: aws_iam
 ```
 
 This defines the `/notes` endpoint that takes a GET request.
@@ -67,14 +64,10 @@ This defines the `/notes` endpoint that takes a GET request.
 {%change%} Create a `mocks/list-event.json` file and add the following.
 
 ``` json
-{
-  "requestContext": {
-    "identity": {
-      "cognitoIdentityId": "USER-SUB-1234"
-    }
-  }
-}
+{}
 ```
+
+We are still adding an empty mock event because we are going to replace this later on in the guide.
 
 And invoke our function from the root directory of the project.
 
@@ -86,12 +79,8 @@ The response should look similar to this.
 
 ``` bash
 {
-  statusCode: 200,
-  headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Credentials': true
-  },
-  body: '[{"attachment":"hello.jpg","content":"hello world","createdAt":1487800950620,"noteId":"578eb840-f70f-11e6-9d1a-1359b3b22944","userId":"USER-SUB-1234"}]'
+    "statusCode": 200,
+    "body": "[{\"attachment\":\"hello.jpg\",\"content\":\"hello world\",\"createdAt\":1602891322039,\"noteId\":\"42244c70-1008-11eb-8be9-4b88616c4b39\",\"userId\":\"123\"}]"
 }
 ```
 

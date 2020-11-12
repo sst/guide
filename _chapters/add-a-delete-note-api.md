@@ -22,12 +22,10 @@ export const main = handler(async (event, context) => {
   const params = {
     TableName: process.env.tableName,
     // 'Key' defines the partition key and sort key of the item to be removed
-    // - 'userId': Identity Pool identity id of the authenticated user
-    // - 'noteId': path parameter
     Key: {
-      userId: event.requestContext.identity.cognitoIdentityId,
-      noteId: event.pathParameters.id
-    }
+      userId: "123", // The id of the author
+      noteId: event.pathParameters.id, // The id of the note from the path
+    },
   };
 
   await dynamoDb.delete(params);
@@ -52,8 +50,6 @@ This makes a DynamoDB `delete` call with the `userId` & `noteId` key to delete t
       - http:
           path: notes/{id}
           method: delete
-          cors: true
-          authorizer: aws_iam
 ```
 
 This adds a DELETE request handler to the `/notes/{id}` endpoint.
@@ -68,11 +64,6 @@ Just like before we'll use the `noteId` of our note in place of the `id` in the 
 {
   "pathParameters": {
     "id": "578eb840-f70f-11e6-9d1a-1359b3b22944"
-  },
-  "requestContext": {
-    "identity": {
-      "cognitoIdentityId": "USER-SUB-1234"
-    }
   }
 }
 ```
@@ -87,12 +78,8 @@ And the response should look similar to this.
 
 ``` bash
 {
-  statusCode: 200,
-  headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Credentials': true
-  },
-  body: '{"status":true}'
+    "statusCode": 200,
+    "body": "{\"status\":true}"
 }
 ```
 
