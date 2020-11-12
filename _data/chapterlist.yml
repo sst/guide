@@ -338,13 +338,6 @@ organize-serverless-apps:
       url: /chapters/organizing-serverless-projects.html
     - page: Cross-stack references in Serverless
       url: /chapters/cross-stack-references-in-serverless.html
-      subchapters:
-        - page: DynamoDB as a Serverless service
-          url: /chapters/dynamodb-as-a-serverless-service.html
-        - page: S3 as a Serverless service
-          url: /chapters/s3-as-a-serverless-service.html
-        - page: Cognito as a Serverless service
-          url: /chapters/cognito-as-a-serverless-service.html
     - page: Share code between services
       url: /chapters/share-code-between-services.html
     - page: Share an API endpoint between services
