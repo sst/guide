@@ -38,7 +38,7 @@ There's a bit more to CORS than what we have covered here. So make sure to [chec
 
 If we don't set the above up, then we'll see something like this in our HTTP responses.
 
-```
+``` text
 No 'Access-Control-Allow-Origin' header is present on the requested resource
 ```
 

@@ -100,7 +100,7 @@ The `service` name is pretty important. We are calling our service the `notes-ap
 
 We are also defining one Lambda function called `hello`. It has a handler called `handler.hello`. It follows the format:
 
-```
+``` text
 handler: {filename}-{export}
 ```
 

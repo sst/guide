@@ -71,7 +71,7 @@ So far we've been testing our Lambda functions locally using the `serverless inv
 
 So if you head over to our list notes API endpoint. In our case it is:
 
-```
+``` text
 https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod/notes
 ```
 

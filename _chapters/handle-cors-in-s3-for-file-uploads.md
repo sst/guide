@@ -14,25 +14,36 @@ Go back to the AWS Console and head over to the S3 section. Then, select the buc
 
 ![Select Created S3 Bucket screenshot](/assets/s3/select-created-s3-bucket.png)
 
-Select the **Permissions** tab, then select **CORS configuration**.
+Select the **Permissions** tab
 
-![Select S3 Bucket CORS Configuration screenshot](/assets/s3/select-s3-bucket-cors-configuration.png)
+![Select S3 Bucket Permissions tab](/assets/s3/select-s3-bucket-permissions-tab.png)
 
-Add the following CORS configuration into the editor, then hit **Save**.
+Then scroll down to the **Cross-origin resource sharing (CORS)** section and hit **Edit**.
 
-``` xml
-<CORSConfiguration>
-	<CORSRule>
-		<AllowedOrigin>*</AllowedOrigin>
-		<AllowedMethod>GET</AllowedMethod>
-		<AllowedMethod>PUT</AllowedMethod>
-		<AllowedMethod>POST</AllowedMethod>
-		<AllowedMethod>HEAD</AllowedMethod>
-		<AllowedMethod>DELETE</AllowedMethod>
-		<MaxAgeSeconds>3000</MaxAgeSeconds>
-		<AllowedHeader>*</AllowedHeader>
-	</CORSRule>
-</CORSConfiguration>
+![Scroll to S3 Bucket CORS Configuration screenshot](/assets/s3/scroll-to-s3-bucket-cors-configuration.png)
+
+Paste the following CORS configuration into the editor, then hit **Save changes**.
+
+``` json
+[
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "GET",
+            "PUT",
+            "POST",
+            "HEAD",
+            "DELETE"
+        ],
+        "AllowedOrigins": [
+            "*"
+        ],
+        "ExposeHeaders": [],
+        "MaxAgeSeconds": 3000
+    }
+]
 ```
 
 ![Save S3 Bucket CORS Configuration screenshot](/assets/s3/save-s3-bucket-cors-configuration.png)

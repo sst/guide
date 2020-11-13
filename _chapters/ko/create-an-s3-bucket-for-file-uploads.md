@@ -56,19 +56,25 @@ comments_id: create-an-s3-bucket-for-file-uploads/150
 
 CORS 구성 편집기에 아래 내용을 추가하고 **저장** 버튼을 클릭합니다.
 
-``` xml
-<CORSConfiguration>
-	<CORSRule>
-		<AllowedOrigin>*</AllowedOrigin>
-		<AllowedMethod>GET</AllowedMethod>
-		<AllowedMethod>PUT</AllowedMethod>
-		<AllowedMethod>POST</AllowedMethod>
-		<AllowedMethod>HEAD</AllowedMethod>
-		<AllowedMethod>DELETE</AllowedMethod>
-		<MaxAgeSeconds>3000</MaxAgeSeconds>
-		<AllowedHeader>*</AllowedHeader>
-	</CORSRule>
-</CORSConfiguration>
+``` json
+[
+    {
+        "AllowedMethods": [
+            "GET",
+            "PUT",
+            "POST",
+            "HEAD",
+            "DELETE"
+        ],
+        "AllowedOrigins": [
+            "*"
+        ],
+        "AllowedHeaders": [
+            "*"
+        ],
+        "MaxAgeSeconds": 3000
+    }
+]
 ```
 운영 환경에서 사용할 때에는 여러분의 도메인이나 도메인 목록을 사용해서 구성할 수 있습니다.
 

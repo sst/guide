@@ -34,11 +34,9 @@ Make a note of the name and region as we'll be using it later in the guide.
 
 ![Enter S3 Bucket Info screenshot](/assets/s3/enter-s3-bucket-info.png)
 
-Step through the next steps and leave the defaults by clicking **Next**, and then click **Create bucket** on the last step.
+Then scroll all the way down and click **Create bucket**.
 
-![Set S3 Bucket Properties screenshot](/assets/s3/set-s3-bucket-properties.png)
-![Set S3 Bucket Permissions screenshot](/assets/s3/set-s3-bucket-permissions.png)
-![Review S3 Bucket screenshot](/assets/s3/review-s3-bucket.png)
+![Click create S3 Bucket screenshot](/assets/s3/click-create-s3-bucket.png)
 
 This should create your new S3 bucket.
 
