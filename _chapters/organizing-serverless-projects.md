@@ -105,6 +105,8 @@ A couple of things to watch out for with the multi-repo pattern.
 
    The CloudFormation template is invalid: Template format error: Number of resources, 201, is greater than maximum allowed, 200
    ```
+   
+   Note that, [AWS recently increased this limit to 500](https://aws.amazon.com/about-aws/whats-new/2020/10/aws-cloudformation-now-supports-increased-limits-on-five-service-quotas/).
 
 Even with the disadvantages the multi-repo pattern does have its place. We have come across cases where some infrastructure related pieces (setting up DynamoDB, Cognito, etc) is done in a service that is placed in a separate repo. And since this typically doesn't need a lot of code or even share anything with the rest of your application, it can live on its own. So in effect you can run a multi-repo setup where the standalone repos are for your _infrastructure_ and your _API endpoints_ live in a microservice + monorepo setup.
 
