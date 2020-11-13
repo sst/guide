@@ -55,19 +55,25 @@ Selecione a aba the **Permissões**, e clique em **Configuração de CORS**.
 
 Coloque essas configurações no editor que aparece e depois clique em **Salvar**.
 
-```xml
-<CORSConfiguration>
-	<CORSRule>
-		<AllowedOrigin>*</AllowedOrigin>
-		<AllowedMethod>GET</AllowedMethod>
-		<AllowedMethod>PUT</AllowedMethod>
-		<AllowedMethod>POST</AllowedMethod>
-		<AllowedMethod>HEAD</AllowedMethod>
-		<AllowedMethod>DELETE</AllowedMethod>
-		<MaxAgeSeconds>3000</MaxAgeSeconds>
-		<AllowedHeader>*</AllowedHeader>
-	</CORSRule>
-</CORSConfiguration>
+```json
+[
+    {
+        "AllowedMethods": [
+            "GET",
+            "PUT",
+            "POST",
+            "HEAD",
+            "DELETE"
+        ],
+        "AllowedOrigins": [
+            "*"
+        ],
+        "AllowedHeaders": [
+            "*"
+        ],
+        "MaxAgeSeconds": 3000
+    }
+]
 ```
 
 Você também pode editar essa configuração para utilizar seu próprio domínio ou uma lista que queira permitir o acesso, uma vez que desejar usar em produção.
