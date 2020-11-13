@@ -6,10 +6,10 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y wget tex
 RUN wget https://github.com/jgm/pandoc/releases/download/2.10.1/pandoc-2.10.1-linux-amd64.tar.gz
 RUN tar xvzf pandoc-2.10.1-linux-amd64.tar.gz --strip-components 1 -C /usr
 
-RUN mkdir -p ~/.fonts
-COPY fonts/Lato/*.ttf ~/.fonts/
-COPY fonts/PTSerif/*.ttf ~/.fonts/
-COPY fonts/SourceCodePro/*.ttf ~/.fonts/
+RUN mkdir -p /root/.fonts
+COPY fonts/PTSerif/*.ttf /root/.fonts/
+COPY fonts/SourceCodePro/*.ttf /root/.fonts/
+COPY fonts/SourceSansPro/*.ttf /root/.fonts/
 
 WORKDIR /data/etc/ebook
 ENTRYPOINT /bin/bash

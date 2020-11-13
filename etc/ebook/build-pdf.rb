@@ -149,7 +149,6 @@ def build_chapter chapter_data
     chapter = chapter
       .gsub('&rarr;', '\faLongArrowAltRight')
       .gsub('⇒', '\faLongArrowAltRight')
-      .gsub('✓', '\faCheck')
 
     # Replace chapter specific content
     if (chapter_name === 'wrapping-up-the-best-practices')

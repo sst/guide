@@ -1,26 +1,26 @@
 @font-face {
-  font-family: Lato;
+  font-family: "Source Sans Pro";
   font-style: normal;
   font-weight: normal;
-  src:url("../fonts/Lato-Regular.ttf");
+  src:url("../fonts/SourceSansPro-Regular.ttf");
 }
 @font-face {
-  font-family: Lato;
+  font-family: "Source Sans Pro";
   font-style: normal;
   font-weight: bold;
-  src:url("../fonts/Lato-Bold.ttf");
+  src:url("../fonts/SourceSansPro-Bold.ttf");
 }
 @font-face {
-  font-family: Lato;
+  font-family: "Source Sans Pro";
   font-style: italic;
   font-weight: normal;
-  src:url("../fonts/Lato-Italic.ttf");
+  src:url("../fonts/SourceSansPro-Italic.ttf");
 }
 @font-face {
-  font-family: Lato;
+  font-family: "Source Sans Pro";
   font-style: italic;
   font-weight: bold;
-  src:url("../fonts/Lato-BoldItalic.ttf");
+  src:url("../fonts/SourceSansPro-BoldItalic.ttf");
 }
 @font-face {
   font-family: "PT Serif";
@@ -72,7 +72,7 @@
 }
 
 body {
-  font-family: "Lato", serif;
+  font-family: "Source Sans Pro", serif;
   margin: 5% 5% 20% 5%;
   text-align: justify;
   font-size: 0.75em;
@@ -166,7 +166,7 @@ section.titlepage {
   margin-top: 30%;
 }
 section.titlepage h1.main {
-  font-family: "Lato", serif;
+  font-family: "Source Sans Pro", serif;
   font-size: 1.5em;
 }
 section.titlepage p.author {
