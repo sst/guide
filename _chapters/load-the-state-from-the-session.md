@@ -95,37 +95,37 @@ We'll conditionally render our app based on the `isAuthenticating` flag.
 {% raw %}
 ``` coffee
 return (
-  !isAuthenticating &&
-  <div className="App container">
-    <Navbar fluid collapseOnSelect>
-      <Navbar.Header>
-        <Navbar.Brand>
-          <Link to="/">Scratch</Link>
-        </Navbar.Brand>
+  !isAuthenticating && (
+    <div className="App container py-3">
+      <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
+        <LinkContainer to="/">
+          <Navbar.Brand className="font-weight-bold text-muted">
+            Scratch
+          </Navbar.Brand>
+        </LinkContainer>
         <Navbar.Toggle />
-      </Navbar.Header>
-      <Navbar.Collapse>
-        <Nav pullRight>
-          {isAuthenticated
-            ? <NavItem onClick={handleLogout}>Logout</NavItem>
-            : <>
+        <Navbar.Collapse className="justify-content-end">
+          <Nav activeKey={window.location.pathname}>
+            {isAuthenticated ? (
+              <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+            ) : (
+              <>
                 <LinkContainer to="/signup">
-                  <NavItem>Signup</NavItem>
+                  <Nav.Link>Signup</Nav.Link>
                 </LinkContainer>
                 <LinkContainer to="/login">
-                  <NavItem>Login</NavItem>
+                  <Nav.Link>Login</Nav.Link>
                 </LinkContainer>
               </>
-          }
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
-    <AppContext.Provider
-      value={{ isAuthenticated, userHasAuthenticated }}
-    >
-      <Routes />
-    </AppContext.Provider>
-  </div>
+            )}
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+        <Routes />
+      </AppContext.Provider>
+    </div>
+  )
 );
 ```
 {% endraw %}

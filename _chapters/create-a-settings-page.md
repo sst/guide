@@ -21,8 +21,8 @@ To get started let's add our settings page.
 
 ``` coffee
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import { API } from "aws-amplify";
+import { useHistory } from "react-router-dom";
 import { onError } from "../libs/errorLib";
 import config from "../config";
 
@@ -63,39 +63,37 @@ import Settings from "./containers/Settings";
 ``` coffee
 return (
   !isAuthenticating && (
-    <div className="App container">
-      <Navbar fluid collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Link to="/">Scratch</Link>
+    <div className="App container py-3">
+      <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
+        <LinkContainer to="/">
+          <Navbar.Brand className="font-weight-bold text-muted">
+            Scratch
           </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav pullRight>
+        </LinkContainer>
+        <Navbar.Toggle />
+        <Navbar.Collapse className="justify-content-end">
+          <Nav activeKey={window.location.pathname}>
             {isAuthenticated ? (
               <>
                 <LinkContainer to="/settings">
-                  <NavItem>Settings</NavItem>
+                  <Nav.Link>Settings</Nav.Link>
                 </LinkContainer>
-                <NavItem onClick={handleLogout}>Logout</NavItem>
+                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
               </>
             ) : (
               <>
                 <LinkContainer to="/signup">
-                  <NavItem>Signup</NavItem>
+                  <Nav.Link>Signup</Nav.Link>
                 </LinkContainer>
                 <LinkContainer to="/login">
-                  <NavItem>Login</NavItem>
+                  <Nav.Link>Login</Nav.Link>
                 </LinkContainer>
               </>
             )}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <AppContext.Provider
-        value={{ isAuthenticated, userHasAuthenticated }}
-      >
+      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
         <Routes />
       </AppContext.Provider>
     </div>
@@ -105,6 +103,12 @@ return (
 {% endraw %}
 
 You'll notice that we added another link in the navbar that only displays when a user is logged in.
+
+``` coffee
+<LinkContainer to="/settings">
+  <Nav.Link>Settings</Nav.Link>
+</LinkContainer>
+```
 
 Now if you head over to your app, you'll see a new **Settings** link at the top. Of course, the page is pretty empty right now.
 

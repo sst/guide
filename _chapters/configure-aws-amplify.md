@@ -9,9 +9,9 @@ code: frontend
 comments_id: configure-aws-amplify/151
 ---
 
-To allow our React app to talk to the AWS resources that we created (in the backend section of the tutorial), we'll be using a library called [AWS Amplify](https://github.com/aws/aws-amplify). 
+In this section we are going to allow our users to login and sign up for our app. To do this we are going to start connecting the AWS resources that we created in the backend section.
 
-AWS Amplify provides a few simple modules (Auth, API, and Storage) to help us easily connect to our backend.
+To do this we'll be using a library called [AWS Amplify](https://github.com/aws/aws-amplify). AWS Amplify provides a few simple modules (Auth, API, and Storage) to help us easily connect to our backend.
 
 ### Install AWS Amplify
 
@@ -30,22 +30,24 @@ Let's first create a configuration file for our app that'll reference all the re
 {%change%} Create a file at `src/config.js` and add the following.
 
 ``` coffee
-export default {
+const config = {
   s3: {
     REGION: "YOUR_S3_UPLOADS_BUCKET_REGION",
-    BUCKET: "YOUR_S3_UPLOADS_BUCKET_NAME"
+    BUCKET: "YOUR_S3_UPLOADS_BUCKET_NAME",
   },
   apiGateway: {
     REGION: "YOUR_API_GATEWAY_REGION",
-    URL: "YOUR_API_GATEWAY_URL"
+    URL: "YOUR_API_GATEWAY_URL",
   },
   cognito: {
     REGION: "YOUR_COGNITO_REGION",
     USER_POOL_ID: "YOUR_COGNITO_USER_POOL_ID",
     APP_CLIENT_ID: "YOUR_COGNITO_APP_CLIENT_ID",
-    IDENTITY_POOL_ID: "YOUR_IDENTITY_POOL_ID"
-  }
+    IDENTITY_POOL_ID: "YOUR_IDENTITY_POOL_ID",
+  },
 };
+
+export default config;
 ```
 
 Here you need to replace the following:

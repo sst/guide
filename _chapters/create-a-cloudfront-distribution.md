@@ -72,4 +72,4 @@ Pick **404** for the **HTTP Error Code** and select **Customize Error Response**
 
 And hit **Create**. This is basically telling CloudFront to respond to any 404 responses from our S3 bucket with the `index.html` and a 200 status code. Creating a custom error response should take a couple of minutes to complete.
 
-Next up, let's point our domain to our CloudFront Distribution.
+Next up, let's point a custom domain to our CloudFront Distribution. And setup SSL.

@@ -36,12 +36,59 @@ The response should look similar to this.
 ``` bash
 {
     "statusCode": 200,
-    "headers": {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Credentials": true
-    },
-    "body": "{"status":true}"
+    "body": "{\"status\":true}"
 }
 ```
 
-Now that we have our new billing API ready. Let's look at how to setup unit tests to ensure that our business logic has been configured correctly.
+### Deploy the Changes
+
+Let's quickly deploy the changes we've made.
+
+{%change%} From your project root, run the following.
+
+``` bash
+$ serverless deploy
+```
+
+Once deployed, you should see something like this in your console.
+
+``` bash
+Service Information
+service: notes-api
+stage: prod
+region: us-east-1
+stack: notes-api-prod
+resources: 38
+api keys:
+  None
+endpoints:
+  POST - https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod/notes
+  GET - https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
+  GET - https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod/notes
+  PUT - https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
+  DELETE - https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
+  POST - https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod/billing
+functions:
+  create: notes-api-prod-create
+  get: notes-api-prod-get
+  list: notes-api-prod-list
+  update: notes-api-prod-update
+  delete: notes-api-prod-delete
+  billing: notes-api-prod-billing
+layers:
+  None
+```
+
+Note the new `/billing` endpoint and `notes-api-prod-billing` function that's been added to the list.
+
+### Commit the Changes
+
+{%change%} Let's commit and push our changes to GitHub.
+
+``` bash
+$ git add .
+$ git commit -m "Adding a billing API"
+$ git push
+```
+
+Now that we have our new billing API ready. Let's look at how to setup unit tests in Serverless. We'll be using that to ensure that our business logic has been configured correctly.

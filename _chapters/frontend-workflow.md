@@ -9,7 +9,7 @@ ref: frontend-workflow
 comments_id: frontend-workflow/192
 ---
 
-Now that we have our frontend deployed and configured, let's go over what our development workflow will look like.
+Now that we have our frontend deployments configured, let's go over what our development workflow will look like.
 
 ### Working in a Dev Branch
 
@@ -34,9 +34,9 @@ function renderLander() {
   return (
     <div className="lander">
       <h1>Scratch</h1>
-      <p>A simple note taking app</p>
-      <div>
-        <Link to="/login" className="btn btn-info btn-lg">
+      <p className="text-muted">A simple note taking app</p>
+      <div className="pt-3">
+        <Link to="/login" className="btn btn-info btn-lg mr-3">
           Login
         </Link>
         <Link to="/signup" className="btn btn-success btn-lg">
@@ -52,17 +52,6 @@ function renderLander() {
 
 ``` javascript
 import { Link } from "react-router-dom";
-```
-
-{%change%} Also, add a couple of styles to `src/containers/Home.css`.
-
-``` css
-.Home .lander div {
-  padding-top: 20px;
-}
-.Home .lander div a:first-child {
-  margin-right: 20px;
-}
 ```
 
 And our lander should look something like this.

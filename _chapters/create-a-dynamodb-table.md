@@ -8,11 +8,20 @@ description: Amazon DynamoDB is a fully managed NoSQL database that we are going
 comments_id: create-a-dynamodb-table/139
 ---
 
-To build the backend for our notes app, it makes sense that we first start by thinking about how the data is going to be stored. We are going to use [DynamoDB](https://aws.amazon.com/dynamodb/) to do this.
+We are going to build a REST API for our notes app. It's a simple [CRUD (create, read, update, and delete)](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) API. Meaning that we'll be performing these operations on our database. We also want our users to be able to upload files as attachments to their notes.
+
+So in this section we'll be creating a couple of AWS resources:
+
+1. A database
+2. And a file storage service
+
+Let's first start by thinking about how the data is going to be stored. We are going to use [DynamoDB](https://aws.amazon.com/dynamodb/) to do this.
 
 ### About DynamoDB
 
-Amazon DynamoDB is a fully managed NoSQL database that provides fast and predictable performance with seamless scalability. Similar to other databases, DynamoDB stores data in tables. Each table contains multiple items, and each item is composed of one or more attributes. We are going to cover some basics in the following chapters. But to get a better feel for it, here is a [great guide on DynamoDB](https://www.dynamodbguide.com).
+Amazon DynamoDB is a fully managed NoSQL database that provides fast and predictable performance with seamless scalability. DynamoDB is also a Serverless database, which means (as you guessed) it'll scale automatically and you only pay for what you use. 
+
+Similar to other databases, DynamoDB stores data in tables. Each table contains multiple items, and each item is composed of one or more attributes. We are going to cover some basics in the following chapters. But to get a better feel for it, here is a [great guide on DynamoDB](https://www.dynamodbguide.com).
 
 ### Create Table
 
@@ -59,6 +68,6 @@ The `notes` table has now been created. If you find yourself stuck with the **Ta
 
 It is also a good idea to set up backups for your DynamoDB table, especially if you are planning to use it in production. We cover this in an extra-credit chapter, [Backups in DynamoDB]({% link _chapters/backups-in-dynamodb.md %}).
 
-Next, we'll set up an S3 bucket to handle file uploads.
+Next let's look at how we are going to store the files that our users upload.
 
 [dynamodb-components]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html

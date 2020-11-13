@@ -8,7 +8,9 @@ ref: custom-domains-in-netlify
 comments_id: custom-domains-in-netlify/191
 ---
 
-Now that we have our first deployment, let's configure a custom domain for our app through Netlify. Recall that back in the [Set custom domains through Seed]({% link _chapters/set-custom-domains-through-seed.md %}) chapter we purchased a domain on [Amazon Route 53](https://aws.amazon.com/route53/). 
+Now that we have our React app hosted on Netlify, let's configure a custom domain. We'll be using the domain that we [previously purchased]({% link _chapters/purchase-a-domain-with-route-53.md %}).
+
+If you didn't setup a domain back then, feel free to skip this chapter.
 
 ### Pick a Netlify Site Name
 
@@ -56,7 +58,7 @@ This will show you the instructions for setting up your domain through Route 53.
 
 To do this we need to head back to the [AWS Console](https://console.aws.amazon.com/). and search for Route 53 as the service.
 
-![Select Route 53 service screenshot](/assets/part2/select-route-53-service.png)
+![Select Route 53 service screenshot](/assets/select-route-53-service.png)
 
 Click on **Hosted zones**.
 
@@ -100,4 +102,6 @@ Now if you head over to your browser and go to your custom domain, your notes ap
 
 ![Notes app on custom domain screenshot](/assets/part2/notes-app-on-custom-domain.png)
 
-We have our app in production but we haven't had a chance to go through our workflow just yet. Let's take a look at that next.
+We've hit an important milestone here. Our fully functional React app is now live on our own custom domain. You've completed the main part of this guide!
+
+Over the next few sections, we'll work on taking our app into production. These are meant for folks that are using this guide to build an app for work or for business. We'll introduce you to concepts like _Infrastructure as Code_, environments, automating deployments, and how to monitor and debug your app in production.

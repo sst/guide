@@ -24,9 +24,9 @@ Over the next few chapters we will look at how to get your app ready for product
 
   Typically while working on projects you end up creating multiple environments. For example, you'd want to make sure not to make changes directly to your app while it is in use. Thanks to the Serverless Framework and Seed we'll be able to do this with ease for the backend. And we'll do something similar for our frontend using React and Netlify.
 
-- **Custom domains**
+- **Monitoring and debugging errors in production**
 
-  Once your app is in production, you want it hosted under your domain name. This applies both to the React app (my-domain.com) and backend APIs (api.my-domain.com).
+  Debugging errors in your app can be tricky, once it's in production. You cannot expect your users to tell you when they see a problem. And you cannot ask them to send you what they see in the browser console. We'll be setting up our app so that we can monitor and debug any issues that come up in production.
 
 The goal of the next few sections is to make sure that you have a setup that you can easily replicate and use for your future projects. This is almost exactly what we and a few of our readers have been using.
 

@@ -4,7 +4,7 @@ title: Add a Create Note API
 date: 2016-12-30 00:00:00
 lang: en
 ref: add-a-create-note-api
-description: To allow users to create notes in our note taking app, we are going to add a create note POST API. To do this we are going to add a new Lambda function to our Serverless Framework project. The Lambda function will save the note to our DynamoDB table and return the newly created note. We also need to ensure to set the Access-Control headers to enable CORS for our serverless backend API.
+description: To allow users to create notes in our note taking app, we are going to add a create note POST API. To do this we are going to add a new Lambda function to our Serverless Framework project. The Lambda function will save the note to our DynamoDB table and return the newly created note.
 comments_id: add-a-create-note-api/125
 ---
 
@@ -22,66 +22,47 @@ import AWS from "aws-sdk";
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-export function main(event, context, callback) {
+export async function main(event, context) {
   // Request body is passed in as a JSON encoded string in 'event.body'
   const data = JSON.parse(event.body);
 
   const params = {
     TableName: process.env.tableName,
-    // 'Item' contains the attributes of the item to be created
-    // - 'userId': user identities are federated through the
-    //             Cognito Identity Pool, we will use the identity id
-    //             as the user id of the authenticated user
-    // - 'noteId': a unique uuid
-    // - 'content': parsed from request body
-    // - 'attachment': parsed from request body
-    // - 'createdAt': current Unix timestamp
     Item: {
-      userId: event.requestContext.identity.cognitoIdentityId,
-      noteId: uuid.v1(),
-      content: data.content,
-      attachment: data.attachment,
-      createdAt: Date.now()
-    }
+      // The attributes of the item to be created
+      userId: "123", // The id of the author
+      noteId: uuid.v1(), // A unique uuid
+      content: data.content, // Parsed from request body
+      attachment: data.attachment, // Parsed from request body
+      createdAt: Date.now(), // Current Unix timestamp
+    },
   };
 
-  dynamoDb.put(params, (error, data) => {
-    // Set response headers to enable CORS (Cross-Origin Resource Sharing)
-    const headers = {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Credentials": true
-    };
+  try {
+    await dynamoDb.put(params).promise();
 
-    // Return status code 500 on error
-    if (error) {
-      const response = {
-        statusCode: 500,
-        headers: headers,
-        body: JSON.stringify({ status: false })
-      };
-      callback(null, response);
-      return;
-    }
-
-    // Return status code 200 and the newly created item
-    const response = {
+    return {
       statusCode: 200,
-      headers: headers,
-      body: JSON.stringify(params.Item)
+      body: JSON.stringify(params.Item),
     };
-    callback(null, response);
-  });
+  } catch (e) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: e.message }),
+    };
+  }
 }
 ```
 
 There are some helpful comments in the code but we are doing a few simple things here.
 
 - The AWS JS SDK assumes the region based on the current region of the Lambda function. So if your DynamoDB table is in a different region, make sure to set it by calling `AWS.config.update({ region: "my-region" });` before initializing the DynamoDB client.
-- Parse the input from the `event.body`. This represents the HTTP request parameters.
+- Parse the input from the `event.body`. This represents the HTTP request body.
+- It contains the the contents of the note, as a string — `content`.
+- It also contains an `attachment`, if one exists. It's the filename of file that has been uploaded to [our S3 bucket]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}).
 - We read the name of our DynamoDB table from the environment variable using `process.env.tableName`. We'll be setting this in our `serverless.yml` below. We do this so we won't have to hardcode it in every function.
-- The `userId` is a Federated Identity id that comes in as a part of the request. This is set after our user has been authenticated via the User Pool. We are going to expand more on this in the coming chapters when we set up our Cognito Identity Pool. However, if you want to use the user's User Pool user Id; take a look at the [Mapping Cognito Identity Id and User Pool Id]({% link _chapters/mapping-cognito-identity-id-and-user-pool-id.md %}) chapter.
+- The `userId` is the id for the author of the note. For now we are hardcoding it to `123`.  Later we'll be setting this based on the authenticated user.
 - Make a call to DynamoDB to put a new object with a generated `noteId` and the current date as the `createdAt`.
-- Upon success, return the newly created note object with the HTTP status code `200` and response headers to enable **CORS (Cross-Origin Resource Sharing)**.
 - And if the DynamoDB call fails then return an error with the HTTP status code `500`.
 
 ### Configure the API Endpoint
@@ -131,24 +112,19 @@ functions:
   # Defines an HTTP API endpoint that calls the main function in create.js
   # - path: url path is /notes
   # - method: POST request
-  # - cors: enabled CORS (Cross-Origin Resource Sharing) for browser cross
-  #     domain api call
-  # - authorizer: authenticate using the AWS IAM role
   create:
     handler: create.main
     events:
       - http:
           path: notes
           method: post
-          cors: true
-          authorizer: aws_iam
 ```
 
-Here we are adding our newly added create function to the configuration. We specify that it handles `post` requests at the `/notes` endpoint. This pattern of using a single Lambda function to respond to a single HTTP event is very much like the [Microservices architecture](https://en.wikipedia.org/wiki/Microservices). We discuss this and a few other patterns in the chapter on [organizing Serverless Framework projects]({% link _chapters/organizing-serverless-projects.md %}). We set CORS support to true. This is because our frontend is going to be served from a different domain. As the authorizer we are going to restrict access to our API based on the user's IAM credentials. We will touch on this and how our User Pool works with this, in the Cognito Identity Pool chapter.
+Here we are adding our newly added create function to the configuration. We specify that it handles `post` requests at the `/notes` endpoint. This pattern of using a single Lambda function to respond to a single HTTP event is very much like the [Microservices architecture](https://en.wikipedia.org/wiki/Microservices). We discuss this and a few other patterns in the chapter on [organizing Serverless Framework projects]({% link _chapters/organizing-serverless-projects.md %}).
 
 The `environment:` block allows us to define environment variables for our Lambda function. These are made available under the `process.env` Node.js variable. In our specific case, we are using `process.env.tableName` to access the name of our DynamoDB table.
 
-The `iamRoleStatements` section is telling AWS which resources our Lambda functions have access to. In this case we are saying that our Lambda functions can carry out the above listed actions on DynamoDB. We specify DynamoDB using `arn:aws:dynamodb:us-east-1:*:*`. This is roughly pointing to every DynamoDB table in the `us-east-1` region. We can be more specific here by specifying the table name but we'll leave this as an exercise for the reader. Just make sure to use the region that the DynamoDB table was created in, as this can be a common source of issues later on. For us the region is `us-east-1`.
+The `iamRoleStatements` section is telling AWS which resources our Lambda functions have access to. In this case we are saying that our Lambda functions can carry out the above listed actions on DynamoDB. We specify DynamoDB using `arn:aws:dynamodb:us-east-1:*:*`. This is roughly pointing to every DynamoDB table in the `us-east-1` region. We can be more specific here by specifying the table name. We'll be doing this later in the guide when we define our infrastructure as code. For now, just make sure to use the region that the DynamoDB table was created in, as this can be a common source of issues later on. For us the region is `us-east-1`.
 
 ### Test
 
@@ -164,16 +140,11 @@ $ mkdir mocks
 
 ``` json
 {
-  "body": "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}",
-  "requestContext": {
-    "identity": {
-      "cognitoIdentityId": "USER-SUB-1234"
-    }
-  }
+  "body": "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}"
 }
 ```
 
-You might have noticed that the `body` and `requestContext` fields are the ones we used in our create function. In this case the `cognitoIdentityId` field is just a string we are going to use as our `userId`. We can use any string here; just make sure to use the same one when we test our other functions.
+The `body` here corresponds to the `event.body` that we reference in our function. We are passing it in as a JSON encoded string. Note that, for the `attachment` we are just pretending that there is a file called `hello.jpg` that has already been uploaded.
 
 And to invoke our function we run the following in the root directory.
 
@@ -193,12 +164,8 @@ The response should look similar to this.
 
 ``` bash
 {
-  statusCode: 200,
-  headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Credentials': true
-  },
-  body: '{"userId":"USER-SUB-1234","noteId":"578eb840-f70f-11e6-9d1a-1359b3b22944","content":"hello world","attachment":"hello.jpg","createdAt":1487800950620}'
+    "statusCode": 200,
+    "body": "{\"userId\":\"123\",\"noteId\":\"bf586970-1007-11eb-a17f-a5105a0818d3\",\"content\":\"hello world\",\"attachment\":\"hello.jpg\",\"createdAt\":1602891102599}"
 }
 ```
 
@@ -219,21 +186,14 @@ export const main = handler(async (event, context) => {
   const data = JSON.parse(event.body);
   const params = {
     TableName: process.env.tableName,
-    // 'Item' contains the attributes of the item to be created
-    // - 'userId': user identities are federated through the
-    //             Cognito Identity Pool, we will use the identity id
-    //             as the user id of the authenticated user
-    // - 'noteId': a unique uuid
-    // - 'content': parsed from request body
-    // - 'attachment': parsed from request body
-    // - 'createdAt': current Unix timestamp
     Item: {
-      userId: event.requestContext.identity.cognitoIdentityId,
-      noteId: uuid.v1(),
-      content: data.content,
-      attachment: data.attachment,
-      createdAt: Date.now()
-    }
+      // The attributes of the item to be created
+      userId: "123", // The id of the author
+      noteId: uuid.v1(), // A unique uuid
+      content: data.content, // Parsed from request body
+      attachment: data.attachment, // Parsed from request body
+      createdAt: Date.now(), // Current Unix timestamp
+    },
   };
 
   await dynamoDb.put(params);
@@ -244,8 +204,8 @@ export const main = handler(async (event, context) => {
 
 This code doesn't work just yet but it shows you what we want to accomplish:
 
-- We want to make our Lambda function `async`, and simply return the results. Without having to call the `callback` method. 
-- We want to simplify how we make calls to DynamoDB. We don't want to have to create a `new AWS.DynamoDB.DocumentClient()`. We also want to use async/await when working with our database calls.
+- We want to make our Lambda function `async`, and simply return the results.
+- We want to simplify how we make calls to DynamoDB. We don't want to have to create a `new AWS.DynamoDB.DocumentClient()`.
 - We want to centrally handle any errors in our Lambda functions.
 - Finally, since all of our Lambda functions will be handling API endpoints, we want to handle our HTTP responses in one place.
 
@@ -266,15 +226,15 @@ import AWS from "aws-sdk";
 const client = new AWS.DynamoDB.DocumentClient();
 
 export default {
-  get   : (params) => client.get(params).promise(),
-  put   : (params) => client.put(params).promise(),
-  query : (params) => client.query(params).promise(),
+  get: (params) => client.get(params).promise(),
+  put: (params) => client.put(params).promise(),
+  query: (params) => client.query(params).promise(),
   update: (params) => client.update(params).promise(),
   delete: (params) => client.delete(params).promise(),
 };
 ```
 
-Here we are using the promise form of the DynamoDB methods. Promises are a method for managing asynchronous code that serve as an alternative to the standard callback function syntax. It will make our code a lot easier to read. And we are exposing the DynamoDB client methods that we are going to need in this guide.
+Here we are creating a convenience object that exposes the DynamoDB client methods that we are going to need in this guide.
 
 {%change%} Also create a `libs/handler-lib.js` file with the following.
 
@@ -296,10 +256,6 @@ export default function handler(lambda) {
     return {
       statusCode,
       body: JSON.stringify(body),
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Credentials": true,
-      },
     };
   };
 }
@@ -315,7 +271,15 @@ Let's go over this in detail.
 
 It's **important to note** that the `handler-lib.js` needs to be **imported before we import anything else**. This is because we'll be adding some error handling to it later that needs to be initialized when our Lambda function is first invoked.
 
-Next, we are going to write the API to get a note given its id.
+### Remove Template Files
+
+{%change%} Also, let's remove the starter files by running the following command in the root of our project.
+
+``` bash
+$ rm handler.js
+```
+
+Next, we are going to add the API to get a note given its id.
 
 ---
 

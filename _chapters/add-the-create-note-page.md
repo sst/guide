@@ -18,8 +18,8 @@ First we are going to create the form for a note. It'll take some content and a 
 
 ``` coffee
 import React, { useRef, useState } from "react";
+import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router-dom";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import { onError } from "../libs/errorLib";
 import config from "../config";
@@ -55,29 +55,29 @@ export default function NewNote() {
 
   return (
     <div className="NewNote">
-      <form onSubmit={handleSubmit}>
-        <FormGroup controlId="content">
-          <FormControl
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="content">
+          <Form.Control
             value={content}
-            componentClass="textarea"
-            onChange={e => setContent(e.target.value)}
+            as="textarea"
+            onChange={(e) => setContent(e.target.value)}
           />
-        </FormGroup>
-        <FormGroup controlId="file">
-          <ControlLabel>Attachment</ControlLabel>
-          <FormControl onChange={handleFileChange} type="file" />
-        </FormGroup>
+        </Form.Group>
+        <Form.Group controlId="file">
+          <Form.Label>Attachment</Form.Label>
+          <Form.Control onChange={handleFileChange} type="file" />
+        </Form.Group>
         <LoaderButton
           block
           type="submit"
-          bsSize="large"
-          bsStyle="primary"
+          size="lg"
+          variant="primary"
           isLoading={isLoading}
           disabled={!validateForm()}
         >
           Create
         </LoaderButton>
-      </form>
+      </Form>
     </div>
   );
 }
@@ -91,7 +91,7 @@ file.current = event.target.files[0];
 
 Currently, our `handleSubmit` does not do a whole lot other than limiting the file size of our attachment. We are going to define this in our config.
 
-{%change%} So add the following to our `src/config.js` below the `export default {` line.
+{%change%} So add the following to our `src/config.js` below the `const config = {` line.
 
 ``` txt
 MAX_ATTACHMENT_SIZE: 5000000,
@@ -100,13 +100,9 @@ MAX_ATTACHMENT_SIZE: 5000000,
 {%change%} Let's also add the styles for our form in `src/containers/NewNote.css`.
 
 ``` css
-.NewNote form {
-  padding-bottom: 15px;
-}
-
 .NewNote form textarea {
   height: 300px;
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 ```
 

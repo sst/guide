@@ -15,18 +15,16 @@ Now that we have our first route set up, let's add a couple of links to the navb
 ``` coffee
 function App() {
   return (
-    <div className="App container">
-      <Navbar fluid collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Link to="/">Scratch</Link>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav pullRight>
-            <NavItem href="/signup">Signup</NavItem>
-            <NavItem href="/login">Login</NavItem>
+    <div className="App container py-3">
+      <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
+        <Navbar.Brand href="/" className="font-weight-bold text-muted">
+          Scratch
+        </Navbar.Brand>
+        <Navbar.Toggle />
+        <Navbar.Collapse className="justify-content-end">
+          <Nav>
+            <Nav.Link href="/signup">Signup</Nav.Link>
+            <Nav.Link href="/login">Login</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -36,18 +34,19 @@ function App() {
 }
 ```
 
-This adds two links to our navbar using the `NavItem` Bootstrap component. The `Navbar.Collapse` component ensures that on mobile devices the two links will be collapsed.
+This adds two links to our navbar inside the `Nav` Bootstrap component. The `Navbar.Collapse` component ensures that on mobile devices the two links will be collapsed.
 
-And let's include the necessary components in the header.
+We also added a link to the _Scratch_ logo. It links back to the homepage of our app.
 
-{%change%} Replace the `react-router-dom` and `react-bootstrap` import in `src/App.js` with this.
+And let's include the `Nav` component in the header.
+
+{%change%} Add the following import to the top of your `src/App.js`.
 
 ``` coffee
-import { Link } from "react-router-dom";
-import { Nav, Navbar, NavItem } from "react-bootstrap";
+import Nav from "react-bootstrap/Nav";
 ```
 
-Now if you flip over to your browser, you should see the two links in our navbar.
+Now if you flip over to your browser, you should see the links in our navbar.
 
 ![Navbar links added screenshot](/assets/navbar-links-added.png)
 
@@ -61,7 +60,9 @@ To fix this we need a component that works with React Router and React Bootstrap
 $ npm install react-router-bootstrap --save
 ```
 
-{%change%} And include it at the top of your `src/App.js`.
+Let's also import it.
+
+{%change%} Add this to the top of your `src/App.js`.
 
 ``` coffee
 import { LinkContainer } from "react-router-bootstrap";
@@ -72,21 +73,21 @@ import { LinkContainer } from "react-router-bootstrap";
 ``` coffee
 function App() {
   return (
-    <div className="App container">
-      <Navbar fluid collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Link to="/">Scratch</Link>
+    <div className="App container py-3">
+      <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
+        <LinkContainer to="/">
+          <Navbar.Brand className="font-weight-bold text-muted">
+            Scratch
           </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav pullRight>
+        </LinkContainer>
+        <Navbar.Toggle />
+        <Navbar.Collapse className="justify-content-end">
+          <Nav activeKey={window.location.pathname}>
             <LinkContainer to="/signup">
-              <NavItem>Signup</NavItem>
+              <Nav.Link>Signup</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/login">
-              <NavItem>Login</NavItem>
+              <Nav.Link>Login</Nav.Link>
             </LinkContainer>
           </Nav>
         </Navbar.Collapse>
@@ -95,6 +96,12 @@ function App() {
     </div>
   );
 }
+```
+
+We are doing one other thing here. We are grabbing the current path the user is on from the `window.location` object. And we set it as the `activeKey` of our `Nav` component. This'll highlight the link when we are on that page.
+
+``` coffee
+<Nav activeKey={window.location.pathname}>
 ```
 
 And that's it! Now if you flip over to your browser and click on the login link, you should see the link highlighted in the navbar. Also, it doesn't refresh the page while redirecting.

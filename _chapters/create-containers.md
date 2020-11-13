@@ -8,7 +8,7 @@ description: To split up our React.js app into different routes we are going to 
 comments_id: create-containers/62
 ---
 
-Currently, our app has a single component that renders our content. For creating our note taking app, we need to create a few different pages to load/edit/create notes. Before we can do that we will put the outer chrome of our app inside a component and render all the top level components inside them. These top level components that represent the various pages will be called containers.
+Currently, our app has a single component that renders our content. For creating our note taking app, we need to create a few different pages to load/edit/create notes. Before we can do that we will put the outer "chrome" (or UI) of our app inside a component and render all the top level components inside them. We are calling the top level components that represent the various pages, containers.
 
 ### Add a Navbar
 
@@ -24,20 +24,17 @@ $ rm src/logo.svg
 
 ``` coffee
 import React from "react";
-import { Link } from "react-router-dom";
-import { Navbar } from "react-bootstrap";
+import Navbar from "react-bootstrap/Navbar";
 import "./App.css";
 
 function App() {
   return (
-    <div className="App container">
-      <Navbar fluid collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Link to="/">Scratch</Link>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
+    <div className="App container py-3">
+      <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
+        <Navbar.Brand className="font-weight-bold text-muted">
+          Scratch
+        </Navbar.Brand>
+        <Navbar.Toggle />
       </Navbar>
     </div>
   );
@@ -50,21 +47,18 @@ We are doing a few things here:
 
 1. Creating a fixed width container using Bootstrap in `div.container`.
 2. Adding a Navbar inside the container that fits to its container's width using the attribute `fluid`.
-3. Using `Link` component from the React-Router to handle the link to our app's homepage (without forcing the page to refresh).
+3. Using a couple of [Bootstrap spacing utility classes](https://getbootstrap.com/docs/4.5/utilities/spacing/) (like `mb-#` and `py-#`) to add margin bottom (`mb`) and padding vertical (`py`). These use a proportional set of spacer units to give a more harmonious feel to our UI.
 
-Let's also add a couple lines of style to space things out a bit more.
+Let's clear out the styles that came with our template. 
 
 {%change%} Remove all the code inside `src/App.css` and replace it with the following:
 
 ``` css
 .App {
-  margin-top: 15px;
-}
-
-.App .navbar-brand {
-  font-weight: bold;
 }
 ```
+
+For now we don't have any styles to add but we'll leave this file around, in case you want to add to it later.
 
 ### Add the Home container
 
@@ -89,7 +83,7 @@ export default function Home() {
     <div className="Home">
       <div className="lander">
         <h1>Scratch</h1>
-        <p>A simple note taking app</p>
+        <p className="text-muted">A simple note taking app</p>
       </div>
     </div>
   );
@@ -111,10 +105,6 @@ Now let's add a few lines to style this.
 .Home .lander h1 {
   font-family: "Open Sans", sans-serif;
   font-weight: 600;
-}
-
-.Home .lander p {
-  color: #999;
 }
 ```
 
@@ -163,14 +153,12 @@ So the `App` function component of our `src/App.js` should now look like this.
 ``` coffee
 function App() {
   return (
-    <div className="App container">
-      <Navbar fluid collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Link to="/">Scratch</Link>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
+    <div className="App container py-3">
+      <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
+        <Navbar.Brand className="font-weight-bold text-muted">
+          Scratch
+        </Navbar.Brand>
+        <Navbar.Toggle />
       </Navbar>
       <Routes />
     </div>

@@ -1,4 +1,8 @@
 current:
+  title: "Upgrading Bootstrap and reorganizing chapters"
+  desc: "Nov 11, 2020: Upgrading to Bootstrap 4 and React Bootstrap 1.4. Also, a major reorganizing of the chapters."
+
+v5-0-2:
   title: "Fixing encoding issue in eBook"
   desc: "Oct 23, 2020: Generating new eBook version to fix encoding issues."
 

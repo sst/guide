@@ -58,18 +58,18 @@ async function handleDelete(event) {
 return (
   <div className="Notes">
     {note && (
-      <form onSubmit={handleSubmit}>
-        <FormGroup controlId="content">
-          <FormControl
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="content">
+          <Form.Control
+            as="textarea"
             value={content}
-            componentClass="textarea"
-            onChange={e => setContent(e.target.value)}
+            onChange={(e) => setContent(e.target.value)}
           />
-        </FormGroup>
-        {note.attachment && (
-          <FormGroup>
-            <ControlLabel>Attachment</ControlLabel>
-            <FormControl.Static>
+        </Form.Group>
+        <Form.Group controlId="file">
+          <Form.Label>Attachment</Form.Label>
+          {note.attachment && (
+            <p>
               <a
                 target="_blank"
                 rel="noopener noreferrer"
@@ -77,18 +77,14 @@ return (
               >
                 {formatFilename(note.attachment)}
               </a>
-            </FormControl.Static>
-          </FormGroup>
-        )}
-        <FormGroup controlId="file">
-          {!note.attachment && <ControlLabel>Attachment</ControlLabel>}
-          <FormControl onChange={handleFileChange} type="file" />
-        </FormGroup>
+            </p>
+          )}
+          <Form.Control onChange={handleFileChange} type="file" />
+        </Form.Group>
         <LoaderButton
           block
+          size="lg"
           type="submit"
-          bsSize="large"
-          bsStyle="primary"
           isLoading={isLoading}
           disabled={!validateForm()}
         >
@@ -96,14 +92,14 @@ return (
         </LoaderButton>
         <LoaderButton
           block
-          bsSize="large"
-          bsStyle="danger"
+          size="lg"
+          variant="danger"
           onClick={handleDelete}
           isLoading={isDeleting}
         >
           Delete
         </LoaderButton>
-      </form>
+      </Form>
     )}
   </div>
 );
@@ -125,14 +121,9 @@ We are doing a few things here:
 
 To complete this code, let's add `isLoading` and `isDeleting` to the state.
 
-{%change%} So our new state and ref declarations at the top of our `Notes` component function look like this.
+{%change%} Add these below the state and ref declarations at the top of our `Notes` component function.
 
 ``` javascript
-const file = useRef(null);
-const { id } = useParams();
-const history = useHistory();
-const [note, setNote] = useState(null);
-const [content, setContent] = useState("");
 const [isLoading, setIsLoading] = useState(false);
 const [isDeleting, setIsDeleting] = useState(false);
 ```
@@ -140,20 +131,16 @@ const [isDeleting, setIsDeleting] = useState(false);
 {%change%} Let's also add some styles by adding the following to `src/containers/Notes.css`.
 
 ``` css
-.Notes form {
-  padding-bottom: 15px;
-}
-
 .Notes form textarea {
   height: 300px;
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 ```
 
 {%change%} Also, let's include the React-Bootstrap components that we are using here by adding the following to our header. And our styles, the `LoaderButton`, and the `config`.
 
 ``` javascript
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
 import LoaderButton from "../components/LoaderButton";
 import config from "../config";
 import "./Notes.css";

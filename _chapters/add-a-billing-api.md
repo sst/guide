@@ -18,7 +18,7 @@ Now let's get started with creating our billing API. It is going to take a Strip
 $ npm install --save stripe
 ```
 
-{%change%} Create a new file called 'billing.js' with the following.
+{%change%} Create a new file called `billing.js` with the following.
 
 ``` js
 import stripePackage from "stripe";
@@ -37,8 +37,9 @@ export const main = handler(async (event, context) => {
     source,
     amount,
     description,
-    currency: "usd"
+    currency: "usd",
   });
+
   return { status: true };
 });
 ```
@@ -91,7 +92,6 @@ Let's add a reference to our new API and Lambda function.
       - http:
           path: billing
           method: post
-          cors: true
           authorizer: aws_iam
 ```
 

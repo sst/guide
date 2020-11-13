@@ -6,7 +6,7 @@ lang: ko
 description: Git 저장소에 변경 사항을 적용할 때 Create React App을 자동으로 배포하려고 합니다. 이를 위해 Netlify에서 프로젝트를 설정해야합니다. 
 context: true
 comments_id: automating-react-deployments/188
-ref: automating-react-deployments
+ref: creating-a-ci-cd-pipeline-for-react
 ---
 
 이 가이드의 첫 번째 부분을 따라해 본다면 S3에 Create React App을 배포하고 CloudFront를 CDN으로 사용한다는 사실을 알 수 있습니다. 그런 다음 Route 53을 사용하여 도메인을 구성했습니다. 우리는 또한 도메인의 www 버전을 구성했으며 다른 S3 및 CloudFront 배포가 필요했습니다. 이 과정은 다소 번거로울 수 있습니다.

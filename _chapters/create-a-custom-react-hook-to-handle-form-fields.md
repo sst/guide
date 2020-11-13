@@ -18,7 +18,7 @@ const [password, setPassword] = useState("");
 And we also use something like this to set the state:
 
 ``` coffee
-onChange={e => setEmail(e.target.value)}
+onChange={(e) => setEmail(e.target.value)}
 ```
 
 Now we are going to do something similar for our sign up page and it'll have a few more fields than the login page. So it makes sense to simplify this process and have some common logic that all our form related components can share. Plus this is a good way to introduce the biggest benefit of React Hooks — reusing stateful logic between components.
@@ -51,18 +51,18 @@ Creating a custom hook is amazingly simple. In fact, we did this back when we cr
 
 2. Our Hook takes the initial state of our form fields as an object and saves it as a state variable called `fields`. The initial state in our case is an object where the _keys_ are the ids of the form fields and the _values_ are what the user enters.
 
-3. So our hook returns an array with `fields` and a callback function that sets the new state based on the event object. The callback function takes the event object and gets the form field id from `event.target.id` and the value from `event.target.value`. In the case of our form the elements, the `event.target.id` comes from the `controlId` thats set in the `FormGroup` element:
+3. So our hook returns an array with `fields` and a callback function that sets the new state based on the event object. The callback function takes the event object and gets the form field id from `event.target.id` and the value from `event.target.value`. In the case of our form the elements, the `event.target.id` comes from the `controlId` thats set in the `Form.Group` element:
 
    ``` coffee
-   <FormGroup controlId="email" bsSize="large">
-     <ControlLabel>Email</ControlLabel>
-     <FormControl
+   <Form.Group size="lg" controlId="email">
+     <Form.Label>Email</Form.Label>
+     <Form.Control
        autoFocus
        type="email"
        value={email}
-       onChange={e => setEmail(e.target.value)}
+       onChange={(e) => setEmail(e.target.value)}
      />
-   </FormGroup>
+   </Form.Group>
    ```
 
 4. The callback function is directly using `setValues`, the function that we get from `useState`. So `onChange` we take what the user has entered and call `setValues` to update the state of `fields`, `{ ...fields, [event.target.id]: event.target.value }`. This updated object is now set as our new form field state.
@@ -76,8 +76,8 @@ And that's it! We can now use this in our Login component.
 ``` coffee
 import React, { useState } from "react";
 import { Auth } from "aws-amplify";
+import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router-dom";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import { useAppContext } from "../libs/contextLib";
 import { useFormFields } from "../libs/hooksLib";
@@ -114,34 +114,34 @@ export default function Login() {
 
   return (
     <div className="Login">
-      <form onSubmit={handleSubmit}>
-        <FormGroup controlId="email" bsSize="large">
-          <ControlLabel>Email</ControlLabel>
-          <FormControl
+      <Form onSubmit={handleSubmit}>
+        <Form.Group size="lg" controlId="email">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
             autoFocus
             type="email"
             value={fields.email}
             onChange={handleFieldChange}
           />
-        </FormGroup>
-        <FormGroup controlId="password" bsSize="large">
-          <ControlLabel>Password</ControlLabel>
-          <FormControl
+        </Form.Group>
+        <Form.Group size="lg" controlId="password">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
             type="password"
             value={fields.password}
             onChange={handleFieldChange}
           />
-        </FormGroup>
+        </Form.Group>
         <LoaderButton
           block
+          size="lg"
           type="submit"
-          bsSize="large"
           isLoading={isLoading}
           disabled={!validateForm()}
         >
           Login
         </LoaderButton>
-      </form>
+      </Form>
     </div>
   );
 }

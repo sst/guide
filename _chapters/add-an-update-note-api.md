@@ -23,23 +23,21 @@ export const main = handler(async (event, context) => {
   const params = {
     TableName: process.env.tableName,
     // 'Key' defines the partition key and sort key of the item to be updated
-    // - 'userId': Identity Pool identity id of the authenticated user
-    // - 'noteId': path parameter
     Key: {
-      userId: event.requestContext.identity.cognitoIdentityId,
-      noteId: event.pathParameters.id
+      userId: "123", // The id of the author
+      noteId: event.pathParameters.id, // The id of the note from the path
     },
     // 'UpdateExpression' defines the attributes to be updated
     // 'ExpressionAttributeValues' defines the value in the update expression
     UpdateExpression: "SET content = :content, attachment = :attachment",
     ExpressionAttributeValues: {
       ":attachment": data.attachment || null,
-      ":content": data.content || null
+      ":content": data.content || null,
     },
     // 'ReturnValues' specifies if and how to return the item's attributes,
     // where ALL_NEW returns all attributes of the item after the update; you
     // can inspect 'result' below to see how it works with different settings
-    ReturnValues: "ALL_NEW"
+    ReturnValues: "ALL_NEW",
   };
 
   await dynamoDb.update(params);
@@ -64,8 +62,6 @@ This should look similar to the `create.js` function. Here we make an `update` D
       - http:
           path: notes/{id}
           method: put
-          cors: true
-          authorizer: aws_iam
 ```
 
 Here we are adding a handler for the PUT request to the `/notes/{id}` endpoint.
@@ -81,11 +77,6 @@ Also, don't forget to use the `noteId` of the note we have been using in place o
   "body": "{\"content\":\"new world\",\"attachment\":\"new.jpg\"}",
   "pathParameters": {
     "id": "578eb840-f70f-11e6-9d1a-1359b3b22944"
-  },
-  "requestContext": {
-    "identity": {
-      "cognitoIdentityId": "USER-SUB-1234"
-    }
   }
 }
 ```
@@ -100,12 +91,8 @@ The response should look similar to this.
 
 ``` bash
 {
-  statusCode: 200,
-  headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Credentials': true
-  },
-  body: '{"status":true}'
+    "statusCode": 200,
+    "body": "{\"status\":true}"
 }
 ```
 

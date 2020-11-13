@@ -16,11 +16,10 @@ Currently, our Home container is very simple. Let's add the conditional renderin
 
 ``` coffee
 import React, { useState, useEffect } from "react";
-import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
+import ListGroup from "react-bootstrap/ListGroup";
 import { useAppContext } from "../libs/contextLib";
 import { onError } from "../libs/errorLib";
 import "./Home.css";
-
 
 export default function Home() {
   const [notes, setNotes] = useState([]);
@@ -35,7 +34,7 @@ export default function Home() {
     return (
       <div className="lander">
         <h1>Scratch</h1>
-        <p>A simple note taking app</p>
+        <p className="text-muted">A simple note taking app</p>
       </div>
     );
   }
@@ -43,10 +42,8 @@ export default function Home() {
   function renderNotes() {
     return (
       <div className="notes">
-        <PageHeader>Your Notes</PageHeader>
-        <ListGroup>
-          {!isLoading && renderNotesList(notes)}
-        </ListGroup>
+        <h2 className="pb-3 mt-4 mb-3 border-bottom">Your Notes</h2>
+        <ListGroup>{!isLoading && renderNotesList(notes)}</ListGroup>
       </div>
     );
   }
@@ -63,9 +60,15 @@ We are doing a few things of note here:
 
 1. Rendering the lander or the list of notes based on `isAuthenticated` flag in our app context.
 
+   ``` javascript
+   {isAuthenticated ? renderNotes() : renderLander()}
+   ```
+
 2. Store our notes in the state. Currently, it's empty but we'll be calling our API for it.
 
 3. Once we fetch our list we'll use the `renderNotesList` method to render the items in the list.
+
+4. We're using the [Bootstrap utility classes](https://getbootstrap.com/docs/4.5/utilities/spacing/) `pb-3` (padding bottom), `mt-4` (margin top), `mb-3` (margin bottom), and `border-bottom` to style the _Your Notes_ header.
 
 And that's our basic setup! Head over to the browser and the homepage of our app should render out an empty list.
 

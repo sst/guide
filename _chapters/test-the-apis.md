@@ -31,7 +31,7 @@ We need to pass in quite a bit of our info to complete the above steps.
 - Use the username and password of the user created in the [Create a Cognito test user]({% link _chapters/create-a-cognito-test-user.md %}) chapter.
 - Replace **YOUR_COGNITO_USER_POOL_ID**, **YOUR_COGNITO_APP_CLIENT_ID**, and **YOUR_COGNITO_REGION** with the values from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter. In our case the region is `us-east-1`.
 - Replace **YOUR_IDENTITY_POOL_ID** with the one from the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter.
-- Use the **YOUR_API_GATEWAY_URL** and **YOUR_API_GATEWAY_REGION** with the ones from the [Deploy the APIs]({% link _chapters/deploy-the-apis.md %}) chapter. In our case the URL is `https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod` and the region is `us-east-1`.
+- Use the **YOUR_API_GATEWAY_URL** and **YOUR_API_GATEWAY_REGION** with the ones from the [Deploy the APIs]({% link _chapters/deploy-the-apis.md %}) chapter. In our case the URL is `https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod` and the region is `us-east-1`.
 
 And run the following.
 
@@ -64,17 +64,30 @@ If the command is successful, the response will look similar to this.
 Authenticating with User Pool
 Getting temporary credentials
 Making API request
-{ status: 200,
+{
+  status: 200,
   statusText: 'OK',
-  data: 
-   { userId: 'us-east-1:9bdc031d-ee9e-4ffa-9a2d-123456789',
-     noteId: '8f7da030-650b-11e7-a661-123456789',
-     content: 'hello world',
-     attachment: 'hello.jpg',
-     createdAt: 1499648598452 } }
+  data: {
+    userId: 'us-east-1:edc3b241-70c3-4665-a775-1f2df6ddfc26',
+    noteId: '6f9f41a0-18b4-11eb-a94f-db173bada851',
+    content: 'hello world',
+    attachment: 'hello.jpg',
+    createdAt: 1603844881083
+  }
+}
 ```
 
-And that's it for the backend! Next we are going to move on to creating the frontend of our app.
+### Commit the Changes
+
+{%change%} Let's commit and push our changes to GitHub.
+
+``` bash
+$ git add .
+$ git commit -m "Adding auth to our Serverless API"
+$ git push
+```
+
+We've now got a Serverless API that's secure and handles user authentication. In the next section we are going to look at how we can work with 3rd party APIs in Serverless. And how to work with secrets!
 
 ---
 
