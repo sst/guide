@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Co to jest AWS Lambda?
-date: 20120-10-29 18:00:00
+date: 2020-10-29 18:00:00
 lang: pl
 ref: what-is-aws-lambda
 description: AWS Lambda to usługa obliczeniowa serverless dostępna na Amazon Web Services. Uruchamia fragmenty kodu (zwane funkcjami Lambda) w kontenerach bezstanowych, które są wywoływane na żądanie, aby odpowiedzieć na zdarzenia (takie jak żądania HTTP). Po zakończeniu wykonywania funkcji kontenery są wyłączane. Użytkownicy ponoszą koszt jedynie za czas potrzebny do wykonania funkcji.
