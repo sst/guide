@@ -110,7 +110,7 @@ export default injectStripe(BillingForm);
 
 Let's quickly go over what we are doing here:
 
-- To begin with we are going to wrap our component with a Stripe module using the `injectStripe` HOC. A [Higher-Order Component (or HOC)]https://reactjs.org/docs/higher-order-components.html), is one that takes a component and returns a new component. It wraps around a given component and can add additional functionality to it. In our case, this gives our component access to the `props.stripe.createToken` method.
+- To begin with we are going to wrap our component with a Stripe module using the `injectStripe` HOC. A [Higher-Order Component (or HOC)](https://reactjs.org/docs/higher-order-components.html), is one that takes a component and returns a new component. It wraps around a given component and can add additional functionality to it. In our case, this gives our component access to the `props.stripe.createToken` method.
 
   ``` javascript
   export default injectStripe(BillingForm)
