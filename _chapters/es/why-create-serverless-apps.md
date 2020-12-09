@@ -40,4 +40,4 @@ Así que cuesta $6.10 por mes. Además, un dominio .com nos costaría $12 por a�
 
 Finalmente, la facilidad de escalamiento se debe en parte a DynamoDB, que nos brinda una escala casi infinita y Lambda que simplemente se amplía para satisfacer la demanda. Y, por supuesto, nuestra interfaz es una SPA (single page application) estática simple que, casi siempre, responde de manera instantánea gracias a CloudFront.
 
-!Muy bien! Ahora que estás convencido del por qué debes crear aplicaciones serverless, empecemos.
+¡Muy bien! Ahora que estás convencido del por qué debes crear aplicaciones serverless, empecemos.
