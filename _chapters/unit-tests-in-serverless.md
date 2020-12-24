@@ -110,7 +110,7 @@ And that's it! We have unit tests all configured.
 
 ### Commit the Changes
 
-{%change%} Let's commit the changes to so far and push it to GitHub.
+{%change%} Let's commit the changes so far and push it to GitHub.
 
 ``` bash
 $ git add .
