@@ -72,7 +72,7 @@ Our Lambda functions will now import this instead of the standard AWS SDK.
 import AWS from '../../libs/aws-sdk';
 ```
 
-The great thing about this is that we can easily change any AWS related config and it’ll apply across all of our services. In this case, we are using [AWS X-Ray](https://aws.amazon.com/xray/) to enabled tracing across our entire application. You don't need to do this but we are going to be talking about this in one of the later chapters. And this is a good example of how to share the same AWS config across all our services.
+The great thing about this is that we can easily change any AWS related config and it’ll apply across all of our services. In this case, we are using [AWS X-Ray](https://aws.amazon.com/xray/) to enable tracing across our entire application. You don't need to do this but we are going to be talking about this in one of the later chapters. And this is a good example of how to share the same AWS config across all our services.
 
 ### 3. Share common serverless.yml config
 
