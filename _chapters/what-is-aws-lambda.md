@@ -81,7 +81,7 @@ Now you can guess that this isn't a very reliable way to make our Lambda functio
 
 ### Pricing
 
-Finally, Lambda functions are billed only for the time it takes to execute your function. And it is calculated from the time it begins executing till when it returns or terminates. It is rounded up to the nearest 100ms.
+Finally, Lambda functions are billed only for the time it takes to execute your function. And it is calculated from the time it begins executing till when it returns or terminates. It is rounded up to the nearest 1ms.
 
 Note that while AWS might keep the container with your Lambda function around after it has completed; you are not going to be charged for this.
 
