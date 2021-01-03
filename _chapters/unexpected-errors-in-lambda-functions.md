@@ -73,7 +73,7 @@ Next let's look at what happens when our Lambda function runs out of memory.
 
 ### Debugging Out of Memory Errors
 
-By default, a Lambda function has 1024MB of memory. You can assing any amount of memory between 128MB and 3008MB in 64MB increments. So in our code, let's try and allocate more memory till it runs out of memory.
+By default, a Lambda function has 1024MB of memory. You can assign any amount of memory between 128MB and 3008MB in 64MB increments. So in our code, let's try and allocate more memory till it runs out of memory.
 
 {%change%} Replace your `get.js` with:
 
