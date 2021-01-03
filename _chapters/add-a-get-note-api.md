@@ -38,7 +38,7 @@ export const main = handler(async (event, context) => {
 });
 ```
 
-This follows exactly the same structure as our previous `create.js` function. The major difference here is that we are doing a `dynamoDb.get(params)` to get a note object given the `noteId` (still hardcoded) and `userId` that is passed in through the request.
+This follows exactly the same structure as our previous `create.js` function. The major difference here is that we are doing a `dynamoDb.get(params)` to get a note object given the `userId` (still hardcoded) and `noteId` that is passed in through the request.
 
 ### Configure the API Endpoint
 
