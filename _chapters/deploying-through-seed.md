@@ -12,7 +12,7 @@ Now, we are ready to make our first deployment. You can either Git push a new ch
 
 Let's do it through Git.
 
-{%change%} Go back to your project root and run the following.
+{%change%} Go back to the notes service in your backend API repo, `services/notes` and run the following.
 
 ``` bash
 $ npm version patch
