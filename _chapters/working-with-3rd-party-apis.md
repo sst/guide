@@ -12,7 +12,7 @@ So far we've created a basic CRUD (create, read, update, and delete) API. We are
 
 A common extension of Serverless Stack (that we have noticed) is to add a billing API that works with Stripe. In the case of our notes app we are going to allow our users to pay a fee for storing a certain number of notes. The flow is going to look something like this:
 
-1. The user is going to select the number of notes he wants to store and puts in his credit card information.
+1. The user is going to select the number of notes they want to store and puts in their credit card information.
 
 2. We are going to generate a one time token by calling the Stripe SDK on the frontend to verify that the credit card info is valid.
 
