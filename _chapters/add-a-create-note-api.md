@@ -58,7 +58,7 @@ There are some helpful comments in the code but we are doing a few simple things
 
 - The AWS JS SDK assumes the region based on the current region of the Lambda function. So if your DynamoDB table is in a different region, make sure to set it by calling `AWS.config.update({ region: "my-region" });` before initializing the DynamoDB client.
 - Parse the input from the `event.body`. This represents the HTTP request body.
-- It contains the the contents of the note, as a string — `content`.
+- It contains the contents of the note, as a string — `content`.
 - It also contains an `attachment`, if one exists. It's the filename of file that has been uploaded to [our S3 bucket]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}).
 - We read the name of our DynamoDB table from the environment variable using `process.env.tableName`. We'll be setting this in our `serverless.yml` below. We do this so we won't have to hardcode it in every function.
 - The `userId` is the id for the author of the note. For now we are hardcoding it to `123`.  Later we'll be setting this based on the authenticated user.
