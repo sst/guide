@@ -14,7 +14,17 @@
     color: $secondary-text-color;
 
     i {
-      margin-right: 4px;
+    }
+
+    img {
+      width: 12px;
+      height: 12px;
+      opacity: 0.55;
+      vertical-align: -2px;
+    }
+
+    span {
+      margin-left: 4px;
     }
 
     &:hover {
@@ -23,6 +33,13 @@
 
     &:last-child {
       margin-right: 0;
+    }
+  }
+  @include media-query($on-laptop) {
+    .button:not(:first-child) {
+      span {
+        display: none;
+      }
     }
   }
 }

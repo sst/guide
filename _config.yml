@@ -45,6 +45,7 @@ forum_thread_prefix: "/t/"
 patreon_url: "https://www.patreon.com/serverless_stack"
 github_sponsor_url: "https://github.com/sponsors/jayair"
 twitter_url: "https://twitter.com/anomaly_inv"
+slack_invite_url: "https://join.slack.com/t/serverless-stack/shared_invite/zt-kqna615x-AFoTXvrglivZqJZcnTzKZA"
 
 collections:
   chapters:
