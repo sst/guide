@@ -623,8 +623,7 @@
  */
 .home .testimonials {
   margin-top: 3.5 * $spacing-unit;
-  border-bottom: 1px solid darken($background-color, 30%);
-  background-color: darken($background-color, 6%);
+  background-color: $secondary-background-color;
   position: relative;
 
   @include media-query($on-palm) {
@@ -671,10 +670,13 @@
     box-sizing: border-box;
     background-color: white;
     border-radius: 5px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 
+      0 1px 1px 0 rgba(0, 0, 0, 0.03),
+      0 1px 2px 0 rgba(0, 0, 0, 0.05),
+      0 2px 4px 0 rgba(0, 0, 0, 0.05),
+      0 4px 8px 0 rgba(0, 0, 0, 0.07);
     flex: 0 0 370px;
     position: relative;
-    border: 1px solid darken(white, 25%);
 
     @include media-query($on-palm) {
       padding: 10px;
