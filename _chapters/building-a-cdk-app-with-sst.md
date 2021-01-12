@@ -17,7 +17,7 @@ Let's get started.
 {%change%} In the root of your Serverless app run the following.
 
 ``` bash
-$ npx create-serverless-stack resources infrastructure
+$ npx create-serverless-stack@latest infrastructure
 ```
 
 This will create your SST app in the `infrastructure/` directory inside your Serverless project.
@@ -48,7 +48,6 @@ Let's also quickly change the config a bit. It has your app name, the default st
 ``` json
 {
   "name": "notes-infra",
-  "type": "@serverless-stack/resources",
   "stage": "dev",
   "region": "us-east-1"
 }
