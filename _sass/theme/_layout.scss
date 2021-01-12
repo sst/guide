@@ -6,7 +6,7 @@
   white-space: nowrap;
   .button {
     margin-right: 6px;
-    background-color: darken($background-color, 10%);
+    background-color: $secondary-background-color;
     padding: 7px 12px;
     font-size: 13px;
     font-weight: 700;
@@ -18,7 +18,7 @@
     }
 
     &:hover {
-      background-color: darken($background-color, 14%);
+      background-color: darken($secondary-background-color, 5%);
     }
 
     &:last-child {
@@ -47,7 +47,7 @@
     height: 42px;
     width: 236px;
     color: $secondary-text-color;
-    background-color: darken($background-color, 7%);
+    background-color: $secondary-background-color;
     border: 1px solid transparent;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     font-size: 16px;
@@ -84,7 +84,7 @@
 }
 
 .site-header {
-  border-bottom: 1px solid darken($background-color, 40%);
+  border-bottom: 1px solid darken($secondary-background-color, 30%);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 
   & > .wrapper-header {
@@ -144,26 +144,85 @@
   }
 
   .site-title {
+    margin-right: 5px;
+    display: block;
+    position: relative;
+    width: 180px;
+    height: 48px;
     margin-bottom: 0;
     margin-right: $spacing-unit / 2;
     white-space: nowrap;
 
+    @keyframes logo1Fade {
+      0% {
+        opacity: 1;
+      }
+      33% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+    @keyframes logo2Fade {
+      0% {
+        opacity: 0;
+      }
+      33% {
+        opacity: 1;
+      }
+      66% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+    @keyframes logo3Fade {
+      0% {
+        opacity: 0;
+      }
+      66% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    @keyframes logo4Fade {
+      0% {
+        opacity: 0;
+      }
+      75% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
     img {
-      margin-right: 5px;
-      display: inline-block;
-      vertical-align: middle;
+      top: 4px;
+      left: 0;
+      position: absolute;
+      opacity: 0;
+
+      &:nth-of-type(1) { opacity: 1; }
     }
 
-    span {
-      font-size: 26px;
-      vertical-align: middle;
-      font-weight: 700;
-      color: $text-color;
-    }
+    &:hover {
+      img {
+        &:nth-of-type(1) { opacity: 0; }
+        &:nth-of-type(4) { opacity: 1; }
 
-    &,
-    &:visited {
-      color: $brand-color;
+        animation-timing-function: linear;
+        animation-iteration-count: 1;
+        animation-duration: 1.3s;
+
+        &:nth-of-type(2) { animation-name: logo1Fade; }
+        &:nth-of-type(3) { animation-name: logo2Fade; }
+        &:nth-of-type(4) { animation-name: logo3Fade; }
+      }
     }
   }
 
@@ -284,7 +343,7 @@
 
   a.email-link,
   a.page-link {
-    font-size: 13px;
+    font-size: 14px;
     @extend %a-tertiary;
   }
 
@@ -295,7 +354,7 @@
 
   .site-author {
     padding-top: 4px;
-    font-size: 13px;
+    font-size: 14px;
     a {
       @extend %a-tertiary;
     }
@@ -679,7 +738,7 @@
 }
 
 .post-links {
-  background-color: darken($background-color, 5%);
+  background-color: $secondary-background-color;
   border-radius: 5px;
   padding: $spacing-unit - 5px;
 

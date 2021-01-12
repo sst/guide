@@ -4,9 +4,9 @@
 @charset "utf-8";
 
 // Our variables
-$base-font-family:            Lato, sans-serif;
-$heading-font-family:         "PT Serif", serif;
-$code-font-family:            "Source Pro", monospace;
+$base-font-family:            "Source Sans Pro", sans-serif;
+$heading-font-family:         "Roboto Slab", serif;
+$code-font-family:            "Source Code Pro", monospace;
 $base-font-size:              16px;
 $base-font-weight:            400;
 $small-font-size:             $base-font-size * 0.875;
@@ -17,11 +17,12 @@ $spacing-unit:                30px;
 $text-color:                  #383736;
 $secondary-text-color:        #706F6C;
 $tertiary-text-color:  	      #9A9894;
-$background-color:            #f2efe8;
-$code-background-color:       #f0eaf7;
-$highlight-background-color:  #fff694;
-$brand-color:                 #9068BE;
-$important-color:             #F39C12;
+$background-color:            #FFFBF9;
+$secondary-background-color:  #F4ECE8;
+$code-background-color:       #EFEEED;
+$highlight-background-color:  #FFF694;
+$brand-color:                 #395C6B;
+$important-color:             #E27152;
 
 $grey-color:                  #828282;
 $grey-color-light:            lighten($grey-color, 30%);
