@@ -42,7 +42,7 @@ build-pdf:
 		-V mainfont="Source Sans Pro" \
 		-V monofont="Source Code Pro" \
 		-V monofontoptions="Scale=0.9" \
-		-V sansfont="PT Serif" \
+		-V sansfont="Roboto Slab" \
 		--template="./eisvogel" \
 		--highlight-style="tango" \
 		-V urlcolor="serverless-purple" \
@@ -52,7 +52,7 @@ build-pdf:
 build-epub:
 	pandoc metadata-epub.txt $(OUTPUT_DIR)/epub.md -o $(OUTPUT_DIR)/$(FILE_NAME).epub \
 		--epub-embed-font='fonts/SourceSansPro/*.ttf' \
-		--epub-embed-font='fonts/PTSerif/*.ttf' \
+		--epub-embed-font='fonts/RobotoSlab/*.ttf' \
 		--epub-embed-font='fonts/SourceCodePro/*.ttf' \
 		--epub-chapter-level=2 \
 		--epub-cover-image='cover.jpeg' \

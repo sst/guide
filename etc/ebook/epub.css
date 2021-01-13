@@ -23,28 +23,16 @@
   src:url("../fonts/SourceSansPro-BoldItalic.ttf");
 }
 @font-face {
-  font-family: "PT Serif";
+  font-family: "Roboto Slab";
   font-style: normal;
   font-weight: normal;
-  src:url("../fonts/PTSerif-Regular.ttf");
+  src:url("../fonts/RobotoSlab-Regular.ttf");
 }
 @font-face {
-  font-family: "PT Serif";
+  font-family: "Roboto Slab";
   font-style: normal;
   font-weight: bold;
-  src:url("../fonts/PTSerif-Bold.ttf");
-}
-@font-face {
-  font-family: "PT Serif";
-  font-style: italic;
-  font-weight: normal;
-  src:url("../fonts/PTSerif-Italic.ttf");
-}
-@font-face {
-  font-family: "PT Serif";
-  font-style: italic;
-  font-weight: bold;
-  src:url("../fonts/PTSerif-BoldItalic.ttf");
+  src:url("../fonts/RobotoSlab-Bold.ttf");
 }
 @font-face {
   font-family: "Source Code Pro";
@@ -79,7 +67,7 @@ body {
   line-height: 1.5;
 }
 h1, h2, h3, h4, h5, h6 {
-  font-family: "PT Serif", serif;
+  font-family: "Roboto Slab", serif;
   text-align: left;
 }
 
