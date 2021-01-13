@@ -31,7 +31,7 @@ jobs:
     - run: sudo tar xvzf pandoc-2.10.1-linux-amd64.tar.gz --strip-components 1 -C /usr
     - run: sudo mkdir -p ~/.fonts
     - run: sudo cp etc/ebook/fonts/SourceSansPro/*.ttf ~/.fonts
-    - run: sudo cp etc/ebook/fonts/PTSerif/*.ttf ~/.fonts
+    - run: sudo cp etc/ebook/fonts/RobotoSlab/*.ttf ~/.fonts
     - run: sudo cp etc/ebook/fonts/SourceCodePro/*.ttf ~/.fonts
     - run: cd etc/ebook && make prepare
 

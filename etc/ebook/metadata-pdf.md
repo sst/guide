@@ -3,10 +3,10 @@ title: "Serverless Stack"
 subtitle: "Open source guide to building full-stack apps using Serverless and React"
 author: [Anomaly Innovations]
 titlepage: true
-titlepage-color: "9068BE"
+titlepage-color: "E27152"
 titlepage-text-color: "FFFFFF"
 titlepage-rule-color: "FFFFFF"
-bodypage-color: "F2EFE8"
+bodypage-color: "FFFBF9"
 header-left: "\\leftmark"
 header-right: "Serverless Stack"
 footer-left: "serverless-stack.com"
