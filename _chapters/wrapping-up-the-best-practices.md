@@ -23,9 +23,9 @@ And you should've stepped through the development workflow that we recommended!
 
 The above setup and workflow is exactly what we, and a number of other companies are using in production. We hope that this gives you a good starting point for your projects! 
 
-We'd love to hear from you about your experience following this guide. Please [fill out our survey]({{ site.survey_url }}) or send us any comments or feedback you might have, via [email](mailto:{{ site.email }}).
+We'd love to hear from you about your experience following this guide. Please [**fill out our survey**]({{ site.survey_url }}) or send us any comments or feedback you might have, via [email](mailto:{{ site.email }}). And [please star our repo on GitHub]({{ site.sst_github_repo }}), it really helps spread the word.
 
-<a class="button contact" href="{{ site.survey_url }}" target="_blank">Fill out our survey</a>
+<a class="button contact" href="{{ site.sst_github_repo }}" target="_blank">Star our GitHub repo</a>
 
 Also, if there are any other topics you'd like us to cover, please leave a comment in the discussion thread below!
 

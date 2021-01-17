@@ -34,9 +34,9 @@ If you've found this guide helpful please consider helping us out by doing the f
 
   Currently we do a lot of manual work to publish updates and maintain the tutorial. You can help by contributing to improve the process. [Here are some more details on what we need help with]({{ site.github_repo }}/blob/master/CONTRIBUTING.md#improve-tooling).
 
-- [**Give us a Star on GitHub**]({{ site.github_repo }})
+- [**Give us a Star on GitHub**]({{ site.sst_github_repo }})
 
-  We rely on our GitHub repo for everything from hosting this site to code samples and comments. [Starring our repo]({{ site.github_repo }}) helps us get the word out.
+  We rely on our GitHub repo for everything from hosting this site to code samples and comments. [Starring our repo]({{ site.sst_github_repo }}) helps us get the word out.
 
 - **Sharing this guide**
 

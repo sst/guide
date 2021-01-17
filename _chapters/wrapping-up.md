@@ -22,9 +22,9 @@ We hope what you've learned here can be adapted to fit the use case you have in 
 
 If you are looking to use Serverless at your company and are wondering how best to structure a large Serverless project, make sure to check out our [best practices section]({% link _chapters/best-practices-for-building-serverless-apps.md %}). The entire workflow and the ideas covered are in production at a number of companies.
 
-We'd love to hear from you about your experience following this guide. Please [fill out our survey]({{ site.survey_url }}) or send us any comments or feedback you might have, via [email](mailto:{{ site.email }}).
+We'd love to hear from you about your experience following this guide. Please [**fill out our survey**]({{ site.survey_url }}) or send us any comments or feedback you might have, via [email](mailto:{{ site.email }}). And [please star our repo on GitHub]({{ site.sst_github_repo }}), it really helps spread the word.
 
-<a class="button contact" href="{{ site.survey_url }}" target="_blank">Fill out our survey</a>
+<a class="button contact" href="{{ site.sst_github_repo }}" target="_blank">Star our GitHub repo</a>
 
 Also, we'd love to feature what you've built with Serverless Stack, please [send us a URL and brief description](mailto:{{ site.email }}).
 
