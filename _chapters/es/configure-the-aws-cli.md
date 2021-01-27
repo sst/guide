@@ -32,7 +32,7 @@ $ brew install awscli
 
 Si tienes problemas para instalar la CLI de AWS o necesitas instrucciones de instalación en Windows, consulta las [instrucciones de instalación completas](http://docs.aws.amazon.com/cli/latest/userguide/installing.html).
 
-### Agregua tu clave de acceso a AWS CLI
+### Agrega tu clave de acceso a AWS CLI
 
 Ahora debemos decirle a AWS CLI que use las claves de acceso del capítulo anterior.
 
