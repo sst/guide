@@ -4,9 +4,6 @@ title: Agregar soporte para ES6 y TypeScript
 date: 2016-12-29 12:00:00
 lang: es
 ref: add-support-for-es6-and-typescript
-redirect_from:
-  - /chapters/add-support-for-es6-javascript.html
-  - /chapters/add-support-for-es6-es7-javascript.html
 description: AWS Lambda soporta Node.js v10.x y v12.x. Sin embargo, para usar características ES6 o de TypeScript en nuestro proyecto Serverless Framework necesitamos usar Babel, Webpack 5 y una gran variedad de otros paquetes. Podemos lograr esto usando el plugin serverless-bundle en nuestro proyecto.
 comments_id: add-support-for-es6-es7-javascript/128
 ---
