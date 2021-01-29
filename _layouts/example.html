@@ -1,0 +1,77 @@
+---
+layout: default
+---
+<div class="wrapper wrapper-post">
+  <div class="post-container">
+
+    <article class="post">
+
+      <header class="post-header">
+        <h1 class="post-title">{{ page.title | escape }}</h1>
+
+        <div class="post-info">
+
+          <a target="_blank" href="{{ site.github_repo }}{{ site.github_edit_prefix }}{{ page.path }}">Edit this page</a>
+          <span class="separator">&nbsp;&bull;&nbsp;</span>
+          <a target="_blank" href="{{ site.github_repo }}{{ site.github_history_prefix }}{{ page.path }}">View history</a>
+
+          {% if page.ref %}
+            {% assign pages = site.examples | where:"ref", page.ref | sort: 'lang' %}
+            {% if pages[1] %}
+              <span class="separator">&nbsp;&bull;&nbsp;</span>
+              <span class="copy">View this page in: </span>
+              {% for other in pages %}
+                {% if other.lang == "en" %}
+                  {% assign page_en_url = other.url %}
+                {% endif %}
+                {% if other.lang != page.lang %}
+                  <a class="lang {{ other.lang }}" href="{{ other.url }}" class="{{ other.lang }}">
+                    {{ site.data.languages[other.lang] }}
+                  </a>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+
+        </div>
+
+        {% if page.bio %}
+        <div class="post-author">
+          This chapter is contributed by: {{ page.bio }}
+        </div>
+        {% endif %}
+
+      </header>
+
+      <div class="post-content">
+        {{ content }}
+      </div>
+
+      {% include post-checkpoint.html %}
+
+      <div class="post-links">
+
+        <p>For help and discussion</p>
+        <a target="_blank" href="{{ site.forum_url }}{{ site.forum_thread_prefix }}{{ page.comments_id }}">
+          <i class="fa fa-comments" aria-hidden="true"></i>
+          Comments on this post
+        </a>
+
+      </div>
+
+      {% include post-sponsor.html %}
+
+      <div class="extras">
+        <div class="container">
+          <div class="newsletter">
+            {% include newsletter-form.html %}
+          </div>
+        </div>
+      </div>
+
+    </article>
+
+    {% include example-sidebar.html page_en_url=page_en_url %}
+
+  </div>
+</div>
