@@ -80,7 +80,7 @@ This is a really simple component that takes an `isLoading` prop and `disabled` 
 
 The `className` prop that we have is to ensure that a CSS class that's set for this component, doesn't override the `LoaderButton` CSS class that we are using internally.
 
-When the `isLoading` flag is on, we show an icon. The icon we include is from the Bootstrap icon set of [React Icons](https://react-icons.github.io/icons?name=bs).
+When the `isLoading` flag is on, we show an icon. The icon we include is from the Bootstrap icon set of [React Icons](https://react-icons.github.io/react-icons/icons?name=bs).
 
 And let's add a couple of styles to animate our loading icon.
 
