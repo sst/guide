@@ -16,7 +16,7 @@ layout: default
           <a target="_blank" href="{{ site.github_repo }}{{ site.github_history_prefix }}{{ page.path }}">View history</a>
 
           {% if page.ref %}
-            {% assign pages = site.chapters | where:"ref", page.ref | sort: 'lang' %}
+            {% assign pages = site.examples | where:"ref", page.ref | sort: 'lang' %}
             {% if pages[1] %}
               <span class="separator">&nbsp;&bull;&nbsp;</span>
               <span class="copy">View this page in: </span>
@@ -47,16 +47,17 @@ layout: default
         {{ content }}
       </div>
 
-      {% include post-checkpoint.html %}
-
-      {% include post-footer.html page_en_url=page_en_url %}
-
       <div class="post-links">
 
-        <p>For help and discussion</p>
+        <p>Example repo for reference</p>
+        <a target="_blank" href="{{ page.repo }}">
+          <i class="fa fa-github" aria-hidden="true"></i>
+          {{ page.repo | replace: "https://", "" }}
+        </a>
+        <p class="comments">For help and discussion</p>
         <a target="_blank" href="{{ site.forum_url }}{{ site.forum_thread_prefix }}{{ page.comments_id }}">
           <i class="fa fa-comments" aria-hidden="true"></i>
-          Comments on this chapter
+          Comments on this post
         </a>
 
       </div>
@@ -75,7 +76,7 @@ layout: default
 
     </article>
 
-    {% include post-sidebar.html page_en_url=page_en_url %}
+    {% include example-sidebar.html page_en_url=page_en_url %}
 
   </div>
 </div>

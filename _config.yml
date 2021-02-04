@@ -51,6 +51,8 @@ slack_invite_url: "https://join.slack.com/t/serverless-stack/shared_invite/zt-kq
 collections:
   chapters:
     output: true
+  examples:
+    output: true
 
 # Build settings
 markdown: kramdown

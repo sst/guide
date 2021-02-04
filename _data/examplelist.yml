@@ -1,0 +1,5 @@
+api:
+  title: Building APIs
+  chapters:
+    - page: How to create a REST API with serverless 
+      url: /examples/how-to-create-a-rest-api-with-serverless.html

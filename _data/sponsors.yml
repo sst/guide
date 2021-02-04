@@ -14,8 +14,8 @@ list:
 #      alt: "Thundra — Application Observability & Security Platform"
 #      image: "/assets/sponsors/thundra-banner.gif"
 #      width: 420
-  epsagon:
-    - link: "https://epsagon.com/serverless-stack/?utm_source=Advertisement&utm_medium=cpm&utm_campaign=ServerlessStack"
-      alt: "Automated & Correlated Tracing for Serverless"
-      image: "/assets/sponsors/epsagon-banner.jpg"
-      width: 420
+#  epsagon:
+#    - link: "https://epsagon.com/serverless-stack/?utm_source=Advertisement&utm_medium=cpm&utm_campaign=ServerlessStack"
+#      alt: "Automated & Correlated Tracing for Serverless"
+#      image: "/assets/sponsors/epsagon-banner.jpg"
+#      width: 420
