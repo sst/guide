@@ -49,11 +49,14 @@ layout: default
 
       <div class="post-links">
 
+        {% if page.repo %}
         <p>Example repo for reference</p>
         <a target="_blank" href="{{ page.repo }}">
           <i class="fa fa-github" aria-hidden="true"></i>
           {{ page.repo | replace: "https://", "" }}
         </a>
+        {% endif %}
+
         <p class="comments">For help and discussion</p>
         <a target="_blank" href="{{ site.forum_url }}{{ site.forum_thread_prefix }}{{ page.comments_id }}">
           <i class="fa fa-comments" aria-hidden="true"></i>

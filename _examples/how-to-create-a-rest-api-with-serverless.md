@@ -6,7 +6,7 @@ lang: en
 description: In this example we will look at how to create a serverless REST API on AWS using Serverless Stack Toolkit (SST). We'll be using the sst.Api construct to define the routes of our API.
 repo: https://github.com/serverless-stack/examples/tree/main/rest-api
 ref: how-to-create-a-rest-api-with-serverless
-comments_id: 
+comments_id: example-apps-created-with-sst/2304
 ---
 
 In this example we will look at how to create a serverless REST API on AWS using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}).

@@ -764,7 +764,7 @@
     margin-bottom: 5px;
     color: $secondary-text-color;
 
-    &.comments {
+    &.comments:not(:first-child) {
       margin-top: $spacing-unit - 10px;
     }
   }
