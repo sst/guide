@@ -1,20 +1,20 @@
 ---
 layout: example
-title: How to create a REST API with serverless 
-date: 2021-01-27 00:00:00
+title: How to create a REST API in TypeScript with serverless 
+date: 2021-02-04 00:00:00
 lang: en
-description: In this example we will look at how to create a serverless REST API on AWS using Serverless Stack Toolkit (SST). We'll be using the sst.Api construct to define the routes of our API.
-repo: https://github.com/serverless-stack/examples/tree/main/rest-api
-ref: how-to-create-a-rest-api-with-serverless
-comments_id: how-to-create-a-rest-api-with-serverless/2305
+description: In this example we will look at how to create a serverless REST API  on AWS with TypeScript using Serverless Stack Toolkit (SST). We'll be using the sst.Api construct to define the routes of our API.
+repo: https://github.com/serverless-stack/examples/tree/main/rest-api-ts
+ref: how-to-create-a-rest-api-in-typescript-with-serverless
+comments_id: how-to-create-a-rest-api-in-typescript-with-serverless/2306
 ---
 
-In this example we will look at how to create a serverless REST API on AWS using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}). If you are a TypeScript user, we've got [a version for that as well]({% link _examples/how-to-create-a-rest-api-in-typescript-with-serverless.md %}).
+In this example we'll look at how to create a serverless REST API with TypeScript on AWS using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}). We also have a [a JavaScript version of this example]({% link _examples/how-to-create-a-rest-api-in-typescript-with-serverless.md %}) as well.
 
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
 ## Create an SST app
@@ -22,7 +22,7 @@ In this example we will look at how to create a serverless REST API on AWS using
 {%change%} Let's start by creating an SST app.
 
 ``` bash
-$ npx create-serverless-stack@latest rest-api
+$ npx create-serverless-stack@latest --language typescript rest-api-ts
 $ cd rest-api
 ```
 
@@ -30,7 +30,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 
 ``` json
 {
-  "name": "rest-api",
+  "name": "rest-api-ts",
   "stage": "dev",
   "region": "us-east-1"
 }
@@ -52,14 +52,14 @@ An SST app is made up of two parts.
 
 Let's start by setting up the routes for our API.
 
-{%change%} Replace the `lib/MyStack.js` with the following.
+{%change%} Replace the `lib/MyStack.ts` with the following.
 
-``` js
+``` ts
 import * as cdk from "@aws-cdk/core";
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
+  constructor(scope: sst.App, id: string, props?: sst.StackProps) {
     super(scope, id, props);
 
     // Create the HTTP API
@@ -93,10 +93,17 @@ The first is getting a list of notes. The second is getting a specific note give
 
 For this example, we are not using a database. We'll look at that in detail in another example. So internally we are just going to get the list of notes from a file.
 
-{%change%} Let's add a file that contains our notes in `src/notes.js`.
+{%change%} Let's add a file that contains our notes in `src/notes.ts`.
 
-``` js
-export default {
+``` ts
+interface Note {
+  noteId: string;
+  userId: string;
+  createdAt: number;
+  content: string;
+}
+
+const notes: { [key: string]: Note } = {
   id1: {
     noteId: "id1",
     userId: "user1",
@@ -110,18 +117,21 @@ export default {
     content: "Hello Old World! Old note.",
   },
 };
+
+export default notes;
 ```
 
 Now add the code for our first endpoint.
 
 ### Getting a list of notes
 
-{%change%} Add a `src/list.js`.
+{%change%} Add a `src/list.ts`.
 
-``` js
+``` ts
+import { APIGatewayProxyResult } from "aws-lambda";
 import notes from "./notes";
 
-export async function main() {
+export async function main(): Promise<APIGatewayProxyResult> {
   return {
     statusCode: 200,
     body: JSON.stringify(notes),
@@ -135,13 +145,19 @@ Note that this function need to be `async` to be invoked by AWS Lambda. Even tho
 
 ### Getting a specific note
 
-{%change%} Add the following to `src/get.js`.
+{%change%} Add the following to `src/get.ts`.
 
-``` js
+``` ts
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import notes from "./notes";
 
-export async function main(event) {
-  const note = notes[event.pathParameters.id];
+export async function main(
+  event: APIGatewayProxyEvent
+): Promise<APIGatewayProxyResult> {
+  const note =
+    event.pathParameters && event.pathParameters.id
+      ? notes[event.pathParameters.id]
+      : null;
   return note
     ? {
         statusCode: 200,
@@ -158,13 +174,19 @@ Here we are checking if we have the requested note. If we do, we respond with it
 
 ### Updating a note
 
-{%change%} Add the following to `src/update.js`.
+{%change%} Add the following to `src/update.ts`.
 
-``` js
+``` ts
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import notes from "./notes";
 
-export async function main(event) {
-  const note = notes[event.pathParameters.id];
+export async function main(
+  event: APIGatewayProxyEvent
+): Promise<APIGatewayProxyResult> {
+  const note =
+    event.pathParameters && event.pathParameters.id
+      ? notes[event.pathParameters.id]
+      : null;
 
   if (!note) {
     return {
@@ -173,9 +195,10 @@ export async function main(event) {
     };
   }
 
-  const data = JSON.parse(event.body);
-
-  note.content = data.content;
+  if (event.body) {
+    const data = JSON.parse(event.body);
+    note.content = data.content || note.content;
+  }
 
   return {
     statusCode: 200,
@@ -196,14 +219,7 @@ Now let's test our new API.
 $ npx sst start
 ```
 
-The first time you run this command it'll take a couple of minutes to do the following:
-
-1. It'll bootstrap your AWS environment to use CDK.
-2. Deploy a debug stack to power the Live Lambda Development environment.
-3. Deploy your app, but replace the functions in the `src/` directory with ones that connect to your local client.
-4. Start up a local client.
-
-Once complete, you should see something like this.
+The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
 
 ```
 ===============
@@ -214,21 +230,21 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-rest-api-my-stack: deploying...
+dev-rest-api-ts-my-stack: deploying...
 
- ✅  dev-rest-api-my-stack
+ ✅  dev-rest-api-ts-my-stack
 
 
-Stack dev-rest-api-my-stack
-  Status: no changes
+Stack dev-rest-api-ts-my-stack
+  Status: deployed
   Outputs:
-    ApiEndpoint: https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com
+    ApiEndpoint: https://rxk5buowgi.execute-api.us-east-1.amazonaws.com
 ```
 
 The `ApiEndpoint` is the API we just created. Now let's get our list of notes. Head over to the following in your browser. Make sure to replace the URL with your API.
 
 ```
-https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com/notes
+https://rxk5buowgi.execute-api.us-east-1.amazonaws.com/notes
 ```
 
 You should see the list of notes as a JSON string.
@@ -236,7 +252,7 @@ You should see the list of notes as a JSON string.
 And use the following endpoint to to retrieve a specific note.
 
 ```
-https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com/notes/id1
+https://rxk5buowgi.execute-api.us-east-1.amazonaws.com/notes/id1
 ```
 
 Now to update our note, we need to make a `PUT` request. Our browser cannot make this type of request. So use the following command in your terminal.
@@ -245,7 +261,7 @@ Now to update our note, we need to make a `PUT` request. Our browser cannot make
 curl -X PUT \
 -H 'Content-Type: application/json' \
 -d '{"content":"Updating my note"}' \
-https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com/notes/id1
+https://rxk5buowgi.execute-api.us-east-1.amazonaws.com/notes/id1
 ```
 
 This should respond with the updated note.
@@ -254,12 +270,13 @@ This should respond with the updated note.
 
 Let's make a quick change to our API. It would be good if the JSON strings are pretty printed to make them more readable.
 
-{%change%} Replace `src/list.js` with the following.
+{%change%} Replace `src/list.ts` with the following.
 
-``` js
+``` ts
+import { APIGatewayProxyResult } from "aws-lambda";
 import notes from "./notes";
 
-export async function main() {
+export async function main(): Promise<APIGatewayProxyResult> {
   return {
     statusCode: 200,
     body: JSON.stringify(notes, null, "  "),
@@ -272,16 +289,14 @@ Here we are just [adding some spaces](https://developer.mozilla.org/en-US/docs/W
 If you head back to the `/notes` endpoint.
 
 ```
-https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com/notes
+https://rxk5buowgi.execute-api.us-east-1.amazonaws.com/notes
 ```
 
 You should see your list of notes in a more readable format.
 
 ## Deploying your API
 
-Now that our API is tested and ready to go. Let's go ahead and deploy it for our users. You'll recall that we were using a `dev` environment, the one specified in your `sst.json`.
-
-However, we are going to deploy your API again. But to a different environment, called `prod`. This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
+Now that our API is tested, let's deploy it to production. You'll recall that we were using a `dev` environment, the one specified in our `sst.json`. However, we are going to deploy it to a different environment. This ensures that the next time we are developing locally, it doesn't break the API for our users.
 
 {%change%} Run the following in your terminal.
 
@@ -289,22 +304,16 @@ However, we are going to deploy your API again. But to a different environment, 
 $ npx sst deploy --stage prod
 ```
 
-A note on these environments. SST is simply deploying the same app twice using two different `stage` names. It prefixes the resources with the stage names to ensure that they don't thrash.
-
 ## Cleaning up
 
-Finally, you can remove the resources created in this example using the following command.
+Finally, you can remove the resources created in this example using the following commands.
 
 ``` bash
 $ npx sst remove
-```
-
-And to remove the prod environment.
-
-``` bash
 $ npx sst remove --stage prod
 ```
 
 ## Conclusion
 
 And that's it! You've got a brand new serverless API. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+

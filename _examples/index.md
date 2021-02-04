@@ -1,6 +1,6 @@
 ---
 layout: example
-title: Examples
+title: Serverless Examples
 date: 2021-01-27 00:00:00
 lang: en
 description: A collection of example serverless apps built with Serverless Stack Toolkit (SST).

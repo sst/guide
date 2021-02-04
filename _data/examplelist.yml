@@ -1,5 +1,7 @@
 api:
   title: Building APIs
   chapters:
-    - page: How to create a REST API with serverless 
+    - page: How to create a REST API with serverless
       url: /examples/how-to-create-a-rest-api-with-serverless.html
+    - page: How to create a REST API in TypeScript with serverless
+      url: /examples/how-to-create-a-rest-api-in-typescript-with-serverless.html
