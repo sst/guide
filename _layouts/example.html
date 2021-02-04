@@ -47,11 +47,14 @@ layout: default
         {{ content }}
       </div>
 
-      {% include post-checkpoint.html %}
-
       <div class="post-links">
 
-        <p>For help and discussion</p>
+        <p>Example repo for reference</p>
+        <a target="_blank" href="{{ page.repo }}">
+          <i class="fa fa-github" aria-hidden="true"></i>
+          {{ page.repo | replace: "https://", "" }}
+        </a>
+        <p class="comments">For help and discussion</p>
         <a target="_blank" href="{{ site.forum_url }}{{ site.forum_thread_prefix }}{{ page.comments_id }}">
           <i class="fa fa-comments" aria-hidden="true"></i>
           Comments on this post
@@ -59,7 +62,9 @@ layout: default
 
       </div>
 
+      <!--
       {% include post-sponsor.html %}
+      -->
 
       <div class="extras">
         <div class="container">

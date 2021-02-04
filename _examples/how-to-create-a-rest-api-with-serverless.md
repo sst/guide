@@ -3,12 +3,13 @@ layout: example
 title: How to create a REST API with serverless 
 date: 2021-01-27 00:00:00
 lang: en
-description: In this post we will look at how to create a serverless REST API on AWS using Serverless Stack Toolkit (SST). We'll be using the sst.Api construct to define the routes of our API.
+description: In this example we will look at how to create a serverless REST API on AWS using Serverless Stack Toolkit (SST). We'll be using the sst.Api construct to define the routes of our API.
+repo: https://github.com/serverless-stack/examples/tree/main/rest-api
 ref: how-to-create-a-rest-api-with-serverless
 comments_id: 
 ---
 
-In this post we will look at how to create a serverless REST API on AWS using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}).
+In this example we will look at how to create a serverless REST API on AWS using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}).
 
 ## Requirements
 
@@ -21,15 +22,15 @@ In this post we will look at how to create a serverless REST API on AWS using [S
 Let's start by creating an SST app.
 
 ``` bash
-$ npx create-serverless-stack@latest my-sst-api
-$ cd my-sst-api
+$ npx create-serverless-stack@latest rest-api
+$ cd rest-api
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ``` json
 {
-  "name": "my-sst-api",
+  "name": "rest-api",
   "stage": "dev",
   "region": "us-east-1"
 }
@@ -90,7 +91,7 @@ The first is getting a list of notes. The second is getting a specific note give
 
 ## Adding function code
 
-For this example, we are not using a database. We'll look at that in detail in another tutorial. So internally we are just going to get the list of notes from a file.
+For this example, we are not using a database. We'll look at that in detail in another example. So internally we are just going to get the list of notes from a file.
 
 {%change%} Let's add a file that contains our notes in `src/notes.js`.
 
@@ -211,12 +212,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-my-sst-api-my-stack: deploying...
+dev-rest-api-my-stack: deploying...
 
- ✅  dev-my-sst-api-my-stack
+ ✅  dev-rest-api-my-stack
 
 
-Stack dev-my-sst-api-my-stack
+Stack dev-rest-api-my-stack
   Status: no changes
   Outputs:
     ApiEndpoint: https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com
@@ -239,7 +240,10 @@ https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com/notes/id1
 Now to update our note, we need to make a `PUT` request. Our browser cannot make this type of request. So use the following command in your terminal.
 
 ``` bash
-curl -X PUT -H "Content-Type: application/json" -d '{"content":"Updating my note"}' https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com/notes/id1
+curl -X PUT \
+-H 'Content-Type: application/json' \
+-d '{"content":"Updating my note"}' \
+https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com/notes/id1
 ```
 
 This should respond with the updated note.
@@ -287,7 +291,7 @@ A note on these environments. SST is simply deploying the same app twice using t
 
 ## Cleaning up
 
-Finally, you can remove the resources created in this tutorial using the following command.
+Finally, you can remove the resources created in this example using the following command.
 
 ``` bash
 $ npx sst remove

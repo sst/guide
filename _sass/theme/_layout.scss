@@ -755,22 +755,36 @@
 }
 
 .post-links {
+  margin-bottom: $spacing-unit;
   background-color: $secondary-background-color;
   border-radius: 5px;
   padding: $spacing-unit - 5px;
 
   p {
-    margin-bottom: 8px;
+    margin-bottom: 5px;
     color: $secondary-text-color;
 
-    &.code {
-      margin-top: 15px;
+    &.comments {
+      margin-top: $spacing-unit - 10px;
     }
   }
 
   a {
-    font-family: $code-font-family;
-    font-size: 18px;
+    font-size: 20px;
+
+    @include media-query($on-palm) {
+      font-size: 16px;
+    }
+
+    i.fa {
+      vertical-align: -2px;
+      margin-right: 4px;
+      font-size: 24px;
+
+      @include media-query($on-palm) {
+        font-size: 18px;
+      }
+    }
   }
 }
 

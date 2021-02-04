@@ -23,11 +23,8 @@ Serverless Stack is written and maintained by [Frank Wang](https://github.com/fw
 
 ---
 
+<!--
 ## Gold Sponsors
-
-<a target="_blank" href="https://epsagon.com/serverless-stack/?utm_source=Advertisement&utm_medium=cpm&utm_campaign=ServerlessStack">
-  <img height="50" alt="Epsagon" src="/assets/sponsors/epsagon.png" />
-</a>
 
 Your **banner** will be placed on **ALL** the chapters of the guide. And your **company logo** and link will be placed here. [Contact us if you'd like to be a Gold Sponsor](mailto:{{ site.email }}).
 
@@ -38,6 +35,7 @@ Your **banner** will be placed on **ALL** the chapters of the guide. And your **
 Your **company logo** and link will be placed here. [Contact us if you'd like to be a Silver Sponsor](mailto:{{ site.email }}).
 
 <br />
+-->
 
 ## Backers
 
