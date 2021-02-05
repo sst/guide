@@ -5,3 +5,9 @@ api:
       url: /examples/how-to-create-a-rest-api-with-serverless.html
     - page: How to create a REST API in TypeScript with serverless
       url: /examples/how-to-create-a-rest-api-in-typescript-with-serverless.html
+
+database:
+  title: Working with databases
+  chapters:
+    - page: How to use DynamoDB in your serverless app
+      url: /examples/how-to-use-dynamodb-in-your-serverless-app.html
