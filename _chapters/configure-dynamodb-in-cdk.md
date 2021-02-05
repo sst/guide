@@ -69,7 +69,7 @@ Note that, we don't need to create a separate stack for each resource. We could 
 $ npx sst add-cdk @aws-cdk/aws-dynamodb
 ```
 
-The reason we are using the [**add-cdk**](https://github.com/serverless-stack/serverless-stack/tree/master/packages/cli#add-cdk-packages) command instead of using an `npm install`, is because of [a known issue with AWS CDK](https://github.com/serverless-stack/serverless-stack#cdk-version-mismatch). Using mismatched versions of CDK packages can cause some unexpected problems down the road. The `sst add-cdk` command ensures that we install the right version of the package.
+The reason we are using the [**add-cdk**](https://docs.serverless-stack.com/packages/cli#add-cdk-packages) command instead of using an `npm install`, is because of [a known issue with AWS CDK](https://docs.serverless-stack.com/known-issues). Using mismatched versions of CDK packages can cause some unexpected problems down the road. The `sst add-cdk` command ensures that we install the right version of the package.
 
 
 ### Add the Stack
