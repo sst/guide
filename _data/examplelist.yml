@@ -11,3 +11,5 @@ database:
   chapters:
     - page: How to use DynamoDB in your serverless app
       url: /examples/how-to-use-dynamodb-in-your-serverless-app.html
+    - page: How to create a CRUD API with serverless using DynamoDB
+      url: /examples/how-to-create-a-crud-api-with-serverless-using-dynamodb.html

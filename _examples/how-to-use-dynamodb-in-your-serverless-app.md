@@ -48,9 +48,9 @@ An SST app is made up of two parts.
 
    The code that's run when your API is invoked is placed in the `src/` directory of your project.
 
-## Setting up the API
+## Adding DynamoDB
 
-Let's start by creating our API.
+[Amazon DynamoDB](https://aws.amazon.com/dynamodb/) is a reliable and highly-performant NoSQL database that can be configured as a true serverless database. Meaning that it'll scale up and down automatically. And you won't get charged if you are not using it.
 
 {%change%} Replace the `lib/MyStack.js` with the following.
 
@@ -62,38 +62,38 @@ export default class MyStack extends sst.Stack {
   constructor(scope, id, props) {
     super(scope, id, props);
 
-    // Create the HTTP API
-    const api = new sst.Api(this, "Api", {
-      routes: {
-        "POST /": "src/lambda.main",
+    // Create the table
+    const table = new sst.Table(this, "Counter", {
+      fields: {
+        counter: dynamodb.AttributeType.STRING,
       },
-    });
-
-    // Show API endpoint in output
-    new cdk.CfnOutput(this, "ApiEndpoint", {
-      value: api.httpApi.apiEndpoint,
+      primaryIndex: { partitionKey: "counter" },
     });
   }
 }
 ```
 
-Our [API](https://docs.serverless-stack.com/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `main` in `src/lambda.js` will get invoked.
+This creates a serverless DynamoDB table using [`sst.Table`](https://docs.serverless-stack.com/constructs/Table). It has a primary key called `counter`. Our table is going to look something like this:
 
-## Adding DynamoDB
+| counter | tally |
+|---------|-------|
+| hits    | 123   |
 
-[Amazon DynamoDB](https://aws.amazon.com/dynamodb/) is a reliable and highly-performant NoSQL database that can be configured as a true serverless database. Meaning that it'll scale up and down automatically. And you won't get charged if you are not using it.
+{%change%} Let's add the `aws-dynamodb` dependency.
 
-{%change%} Let's replace the `new sst.Api` call in `lib/MyStack.js` with.
+``` bash
+$ npx sst add-cdk @aws-cdk/aws-dynamodb
+```
+
+The reason we are using the [**add-cdk**](https://docs.serverless-stack.com/packages/cli#add-cdk-packages) command instead of using an `npm install`, is because of [a known issue with AWS CDK](https://docs.serverless-stack.com/known-issues).
+
+## Setting up the API
+
+Now let's add the API.
+
+{%change%} Add this below the `sst.Table` definition in `lib/MyStack.js`.
 
 ``` js
-// Create the table
-const table = new sst.Table(this, "Counter", {
-  fields: {
-    counter: dynamodb.AttributeType.STRING,
-  },
-  primaryIndex: { partitionKey: "counter" },
-});
-
 // Create the HTTP API
 const api = new sst.Api(this, "Api", {
   defaultFunctionProps: {
@@ -109,33 +109,16 @@ const api = new sst.Api(this, "Api", {
 
 // Allow the API to access the table
 api.attachPermissions([table]);
+
+// Show API endpoint in output
+new cdk.CfnOutput(this, "ApiEndpoint", {
+  value: api.httpApi.apiEndpoint,
+});
 ```
 
-The above does a couple of things:
+Our [API](https://docs.serverless-stack.com/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `main` in `src/lambda.js` will get invoked.
 
-1. It creates a serverless DynamoDB table using [`sst.Table`](https://docs.serverless-stack.com/constructs/Table). It has a primary key called `counter`. Our table is going to look something like this:
-
-   | counter | tally |
-   |---------|-------|
-   | hits    | 123   |
-
-2. We pass in the name of our DynamoDB table to our API as an environment variable called `tableName`.
-
-3. We allow our API to access (read and write) the table instance we just created.
-
-{%change%} Let's add the `DynamoDB` import at the top.
-
-``` js
-import * as dynamodb from "@aws-cdk/aws-dynamodb";
-```
-
-{%change%} And add the dependency.
-
-``` bash
-$ npx sst add-cdk @aws-cdk/aws-dynamodb
-```
-
-The reason we are using the [**add-cdk**](https://docs.serverless-stack.com/packages/cli#add-cdk-packages) command instead of using an `npm install`, is because of [a known issue with AWS CDK](https://docs.serverless-stack.com/known-issues).
+We also pass in the name of our DynamoDB table to our API as an environment variable called `tableName`. And we allow our API to access (read and write) the table instance we just created.
 
 ## Reading from our table
 
@@ -268,4 +251,4 @@ $ npx sst remove --stage prod
 
 ## Conclusion
 
-And that's it! We've got a completely serverless hit counter. In another example, we'll expand on this to create a CRUD API. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+And that's it! We've got a completely serverless hit counter. In another example, [we'll expand on this to create a CRUD API]({% link _examples/how-to-create-a-crud-api-with-serverless-using-dynamodb.md %}). Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
