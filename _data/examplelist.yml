@@ -13,3 +13,33 @@ database:
       url: /examples/how-to-use-dynamodb-in-your-serverless-app.html
     - page: How to create a CRUD API with serverless using DynamoDB
       url: /examples/how-to-create-a-crud-api-with-serverless-using-dynamodb.html
+
+auth:
+  title: Working with API authentication
+  chapters:
+    - page: How to create a REST API with AWS Cognito authentication
+      url: /examples/how-to-create-a-rest-api-with-cognito-authentication.html
+    - page: How to create a REST API with Facebook authentication
+      url: /examples/how-to-create-a-rest-api-with-facebook-authentication.html
+    - page: How to create a REST API with Google authentication
+      url: /examples/how-to-create-a-rest-api-with-google-authentication.html
+    - page: How to create a REST API with Twitter authentication
+      url: /examples/how-to-create-a-rest-api-with-twitter-authentication.html
+
+sns:
+  title: Working with SNS Topics
+  chapters:
+    - page: How to use SNS in your serverless app
+      url: /examples/how-to-use-sns-in-your-serverless-app.html
+
+sqs:
+  title: Working with SQS Queues
+  chapters:
+    - page: How to use SQS in your serverless app
+      url: /examples/how-to-use-sqs-in-your-serverless-app.html
+
+cron:
+  title: Working with Cron Jobs
+  chapters:
+    - page: How to create a cron job in your serverless app
+      url: /examples/how-to-create-a-cron-job-in-your-serverless-app.html
