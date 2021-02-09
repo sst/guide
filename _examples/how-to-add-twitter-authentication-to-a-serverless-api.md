@@ -23,15 +23,15 @@ In this example we will look at how to create a serverless REST API on AWS using
 {%change%} Let's start by creating an SST app.
 
 ``` bash
-$ npx create-serverless-stack@latest rest-api-auth-twitter
-$ cd rest-api-auth-twitter
+$ npx create-serverless-stack@latest api-auth-twitter
+$ cd api-auth-twitter
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ``` json
 {
-  "name": "rest-api-auth-twitter",
+  "name": "api-auth-twitter",
   "stage": "dev",
   "region": "us-east-1"
 }
@@ -180,12 +180,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-rest-api-auth-twitter-my-stack: deploying...
+dev-api-auth-twitter-my-stack: deploying...
 
- ✅  dev-rest-api-auth-twitter-my-stack
+ ✅  dev-api-auth-twitter-my-stack
 
 
-Stack dev-rest-api-auth-twitter-my-stack
+Stack dev-api-auth-twitter-my-stack
   Status: deployed
   Outputs:
     ApiEndpoint: https://b3njix6irk.execute-api.us-east-1.amazonaws.com

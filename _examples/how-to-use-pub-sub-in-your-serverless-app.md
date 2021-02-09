@@ -22,15 +22,15 @@ In this example we will look at how to use SNS in our serverless app using [Serv
 {%change%} Let's start by creating an SST app.
 
 ``` bash
-$ npx create-serverless-stack@latest rest-api-sns
-$ cd rest-api-sns
+$ npx create-serverless-stack@latest pub-sub
+$ cd pub-sub
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ``` json
 {
-  "name": "rest-api-sns",
+  "name": "pub-sub",
   "stage": "dev",
   "region": "us-east-1"
 }
@@ -163,12 +163,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-rest-api-sns-my-stack: deploying...
+dev-pub-sub-my-stack: deploying...
 
- ✅  dev-rest-api-sns-my-stack (no changes)
+ ✅  dev-pub-sub-my-stack (no changes)
 
 
-Stack dev-rest-api-sns-my-stack
+Stack dev-pub-sub-my-stack
   Status: deployed
   Outputs:
     ApiEndpoint: https://gevkgi575a.execute-api.us-east-1.amazonaws.com

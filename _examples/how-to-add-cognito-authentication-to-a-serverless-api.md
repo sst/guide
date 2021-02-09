@@ -3,13 +3,13 @@ layout: example
 title: How to add Cognito authentication to a serverless API
 date: 2021-02-08 00:00:00
 lang: en
-description: In this example we will look at how to create a serverless REST API on AWS using Serverless Stack Toolkit (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
+description: In this example we will look at how to add Cognito User Pool authentication to a serverless API using Serverless Stack Toolkit (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
 repo: https://github.com/serverless-stack/examples/tree/main/api-auth-cognito
 ref: how-to-add-cognito-authentication-to-a-serverless-api
 comments_id:
 ---
 
-In this example we will look at how to create a serverless REST API on AWS using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}). If you are a TypeScript user, we've got [a version for that as well]({% link _examples/how-to-create-a-rest-api-in-typescript-with-serverless.md %}).
+In this example we will look at how to add [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) authentication to a serverless API using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}).
 
 ## Requirements
 
@@ -22,15 +22,15 @@ In this example we will look at how to create a serverless REST API on AWS using
 {%change%} Let's start by creating an SST app.
 
 ``` bash
-$ npx create-serverless-stack@latest rest-api-auth-cognito
-$ cd rest-api-auth-cognito
+$ npx create-serverless-stack@latest api-auth-cognito
+$ cd api-auth-cognito
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ``` json
 {
-  "name": "rest-api-auth-cognito",
+  "name": "api-auth-cognito",
   "stage": "dev",
   "region": "us-east-1"
 }
@@ -90,7 +90,7 @@ GET /private
 GET /public
 ```
 
-By default, all routes have the authorization type AWS_IAM. This means the caller of the API needs to have the required IAM permission. The first is a private endpoint. The second is a public endpoint and its authorization type is override to NONE.
+By default, all routes have the authorization type `AWS_IAM`. This means the caller of the API needs to have the required IAM permissions. The first is a private endpoint. The second is a public endpoint and its authorization type is overriden to `NONE`.
 
 ## Setting up the authorization
 
@@ -106,7 +106,7 @@ const auth = new sst.Auth(this, "Auth", {
   },
 });
 
-// Allow authenticated users invoke API
+// Allow authenticated users to invoke the API
 auth.attachPermissionsForAuthUsers([
   new iam.PolicyStatement({
     actions: ["execute-api:Invoke"],
@@ -128,13 +128,13 @@ new cdk.CfnOutput(this, "IdentityPoolId", {
 });
 ```
 
-This creates a Conito User Pool, which is a user directory that manages user sign up and login. We configured the User Pool to allow users login with their email and password.
+This creates a [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html); a user directory that manages user sign up and login. We've configured the User Pool to allow users to login with their email and password.
 
 This also creates a Cognito Identity Pool which assigns IAM permissions to users. We are allowing only the logged in users to have the permission to call the API.
 
 ## Adding function code
 
-We will create two functions, one handling the public route, and one handling the private route.
+We will create two functions, one for the public route, and one for the private route.
 
 {%change%} Add a `src/public.js`.
 
@@ -153,7 +153,7 @@ export async function main() {
 export async function main() {
   return {
     statusCode: 200,
-    body: `Hello user!`,
+    body: "Hello user!",
   };
 }
 ```
@@ -186,12 +186,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-rest-api-auth-cognito-my-stack: deploying...
+dev-api-auth-cognito-my-stack: deploying...
 
- ✅  dev-rest-api-auth-cognito-my-stack
+ ✅  dev-api-auth-cognito-my-stack
 
 
-Stack dev-rest-api-auth-cognito-my-stack
+Stack dev-api-auth-cognito-my-stack
   Status: deployed
   Outputs:
     UserPoolClientId: 4fb69je3470cat29p0nfm3t27k
@@ -216,29 +216,31 @@ https://12mflx0e8e.execute-api.us-east-1.amazonaws.com/private
 
 ## Signing up
 
-Now to visit the private route, we need to create an acount in our User Pool. So use the following command in your terminal. Replace --client-id with `UserPoolClientId` from the stack output.
+Now to visit the private route, we need to create an account in our User Pool. Usually, we'll have our users sign up for an account through our app. But for this example, we'll use the AWS CLI to sign up a user and confirm their account.
+
+Use the following command in your terminal. Replace `--client-id` with `UserPoolClientId` from the `sst start` output above.
 
 ``` bash
-aws cognito-idp sign-up \
+$ aws cognito-idp sign-up \
   --region us-east-1 \
   --client-id 4fb69je3470cat29p0nfm3t27k \
   --username admin@example.com \
   --password Passw0rd!
 ```
 
-Verify the user. Replace --user-pool-id with `UserPoolId` from the stack output.
+Next we'll verify the user. Replace `--user-pool-id` with `UserPoolId` from the `sst start` output above.
 
 ``` bash
-aws cognito-idp admin-confirm-sign-up \
+$ aws cognito-idp admin-confirm-sign-up \
   --region us-east-1 \
   --user-pool-id us-east-1_e8u3sktE1 \
   --username admin@example.com
 ```
 
-Makes a call to the API using the new user's credentials.
+Now we'll make a request to our private API. Typically, we'll be using our app to do this. But just to test, we'll use the [AWS API Gateway Test CLI](https://github.com/AnomalyInnovations/aws-api-gateway-cli-test). This makes an authenticated call to our private API using the credentials of the user we just created.
 
 ``` bash
-npx aws-api-gateway-cli-test \
+$ npx aws-api-gateway-cli-test \
   --username='admin@example.com' \
   --password='Passw0rd!' \
   --user-pool-id='us-east-1_e8u3sktE1' \
@@ -251,9 +253,11 @@ npx aws-api-gateway-cli-test \
   --method='GET'
 ```
 
-You shoud now see
+Make sure to replace the options with the ones in your `sst start` output.
 
-```
+You should now see.
+
+``` bash
 {
   status: 200,
   statusText: 'OK',
@@ -263,7 +267,7 @@ You shoud now see
 
 ## Making changes
 
-Let's make a quick change to our private route and print out the caller's user id.
+Let's make a quick change to our private route to print out the caller's user id.
 
 {%change%} Replace `src/private.js` with the following.
 
@@ -276,12 +280,12 @@ export async function main(event) {
 }
 ```
 
-We are getting the user id from event object.
+We are getting the user id from the event object.
 
-If you head back to the `/private` endpoint.
+If you make the same authenticated request to the `/private` endpoint.
 
-```
-npx aws-api-gateway-cli-test \
+``` bash
+$ npx aws-api-gateway-cli-test \
   --username='admin@example.com' \
   --password='Passw0rd!' \
   --user-pool-id='us-east-1_e8u3sktE1' \
@@ -296,7 +300,7 @@ npx aws-api-gateway-cli-test \
 
 You should see the user id.
 
-```
+``` bash
 {
   status: 200,
   statusText: 'OK',

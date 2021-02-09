@@ -4,7 +4,7 @@ title: How to use queues in your serverless app
 date: 2021-02-08 00:00:00
 lang: en
 description: In this example we will look at how to use SQS in your serverless app on AWS using Serverless Stack Toolkit (SST). We'll be using the sst.Api and sst.Queue to create a simple queue system.
-repo: https://github.com/serverless-stack/examples/tree/main/queues
+repo: https://github.com/serverless-stack/examples/tree/main/queue
 ref: how-to-use-queues-in-your-serverless-app
 comments_id:
 ---
@@ -22,15 +22,15 @@ In this example we will look at how to use SQS in our serverless app using [Serv
 {%change%} Let's start by creating an SST app.
 
 ``` bash
-$ npx create-serverless-stack@latest rest-api-sqs
-$ cd rest-api-sqs
+$ npx create-serverless-stack@latest queue
+$ cd queue
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ``` json
 {
-  "name": "rest-api-sqs",
+  "name": "queue",
   "stage": "dev",
   "region": "us-east-1"
 }
@@ -151,12 +151,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-rest-api-sqs-my-stack: deploying...
+dev-queue-my-stack: deploying...
 
- ✅  dev-rest-api-sqs-my-stack (no changes)
+ ✅  dev-queue-my-stack (no changes)
 
 
-Stack dev-rest-api-sqs-my-stack
+Stack dev-queue-my-stack
   Status: deployed
   Outputs:
     ApiEndpoint: https://i8ia1epqnh.execute-api.us-east-1.amazonaws.com

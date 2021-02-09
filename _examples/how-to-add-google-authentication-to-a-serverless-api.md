@@ -23,15 +23,15 @@ In this example we will look at how to create a serverless REST API on AWS using
 {%change%} Let's start by creating an SST app.
 
 ``` bash
-$ npx create-serverless-stack@latest rest-api-auth-google
-$ cd rest-api-auth-google
+$ npx create-serverless-stack@latest api-auth-google
+$ cd api-auth-google
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ``` json
 {
-  "name": "rest-api-auth-google",
+  "name": "api-auth-google",
   "stage": "dev",
   "region": "us-east-1"
 }
@@ -179,12 +179,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-rest-api-auth-google-my-stack: deploying...
+dev-api-auth-google-my-stack: deploying...
 
- ✅  dev-rest-api-auth-google-my-stack
+ ✅  dev-api-auth-google-my-stack
 
 
-Stack dev-rest-api-auth-google-my-stack
+Stack dev-api-auth-google-my-stack
   Status: deployed
   Outputs:
     ApiEndpoint: https://aueschz6ba.execute-api.us-east-1.amazonaws.com
