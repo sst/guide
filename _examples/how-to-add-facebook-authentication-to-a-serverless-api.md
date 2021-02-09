@@ -3,13 +3,13 @@ layout: example
 title: How to add Facebook authentication to a serverless API
 date: 2021-02-08 00:00:00
 lang: en
-description: In this example we will look at how to create a serverless REST API on AWS using Serverless Stack Toolkit (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
+description: In this example we will look at how to add Facebook authentication to a serverless API using Serverless Stack Toolkit (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
 repo: https://github.com/serverless-stack/examples/tree/main/api-auth-facebook
 ref: how-to-add-facebook-authentication-to-a-serverless-api
 comments_id:
 ---
 
-In this example we will look at how to create a serverless REST API on AWS using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}). If you are a TypeScript user, we've got [a version for that as well]({% link _examples/how-to-create-a-rest-api-in-typescript-with-serverless.md %}).
+In this example we will look at how to add Facebook authentication to a serverless API using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}).
 
 ## Requirements
 
@@ -91,11 +91,13 @@ GET /private
 GET /public
 ```
 
-By default, all routes have the authorization type AWS_IAM. This means the caller of the API needs to have the required IAM permission. The first is a private endpoint. The second is a public endpoint and its authorization type is override to NONE.
+To secure our APIs we are adding the authorization type `AWS_IAM`. This means the caller of the API needs to have the right permissions. The first is a private endpoint. The second is a public endpoint and its authorization type is overriden to `NONE`.
 
 ## Setting up the authorization
 
-{%change%} Add this below the `sst.Api` definition in `lib/MyStack.js`. Make sure to replace the appId with that of your Facebook app.
+Now let's add authentication for our serverless app.
+
+{%change%} Add this below the `sst.Api` definition in `lib/MyStack.js`. Make sure to replace the `appId` with that of your Facebook app.
 
 ``` js
 const { account, region } = sst.Stack.of(this);
@@ -121,11 +123,11 @@ new cdk.CfnOutput(this, "IdentityPoolId", {
 });
 ```
 
-This creates a Cognito Identity Pool which relys on Facebook to authenticate users. And assigns IAM permissions to users. We are allowing only the logged in users to have the permission to call the API.
+This creates a [Cognito Identity Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html) which relies on Facebook to authenticate users. And we use the [`attachPermissionsForAuthUsers`](https://docs.serverless-stack.com/constructs/Auth#attachpermissionsforauthusers) method to allow our logged in users to access our API.
 
 ## Adding function code
 
-We will create two functions, one handling the public route, and one handling the private route.
+Let's create two functions, one handling the public route, and the other for the private route.
 
 {%change%} Add a `src/public.js`.
 
@@ -205,20 +207,16 @@ https://2zy74sn6we.execute-api.us-east-1.amazonaws.com/private
 
 ## Login with Facebook
 
-We are going use Facebook's Graph API Explorer to test logging in with Facebook. Head over to
+We are going to use [Facebook's Graph API Explorer](https://developers.facebook.com/tools/explorer) to test logging in with Facebook. Head over to — [developers.facebook.com/tools/explorer](https://developers.facebook.com/tools/explorer)
 
-```
-https://developers.facebook.com/tools/explorer
-```
-
-Select your Facebook App and select Generate Access Token. Copy the generated access token.
+Select your Facebook App and select **Generate Access Token**. Copy the generated access token.
 
 ![Generate access token for users logged in with Facebook](/assets/examples/api-auth-facebook/generate-access-token-for-users-logged-in-with-facebook.png)
 
-Get the user's Cognito Identity id. Replace --identity-pool-id with `IdentityPoolId` from the stack output; and replace access code from the previous step.
+Next, we need to get the user's Cognito Identity id. Replace `--identity-pool-id` with the `IdentityPoolId` from the `sst start` log output; and replace access code from the previous step.
 
 ``` bash
-aws cognito-identity get-id \
+$ aws cognito-identity get-id \
   --identity-pool-id us-east-1:84340cf1-4f64-496e-87c2-517072e7d5d9 \
   --logins graph.facebook.com="EAAF9u0npLFUBAGv7SlHXIMigP0nZBF2LxZA5ZCe3NqZB6Wc6xbWxwHqn64T5QLEsjOZAFhZCLJj1yIsDLPCc9L3TRWZC3SvKf2D1vEZC3FISPWENQ9S5BZA94zxtn6HWQFD8QLMvjt83qOGHeQKZAAtJRgHeuzmd2oGn3jbZBmfYl2rhg3dpEnFhkAmK3lC7BZAEyc0ZD"
 ```
@@ -231,7 +229,7 @@ You should get an identity id for the Facebook user.
 }
 ```
 
-Now we will get the IAM credentials for the identity user.
+Now we'll need to get the IAM credentials for the identity user.
 
 ``` bash
 aws cognito-identity get-credentials-for-identity \
@@ -239,7 +237,7 @@ aws cognito-identity get-credentials-for-identity \
   --logins graph.facebook.com="EAAF9u0npLFUBAGv7SlHXIMigP0nZBF2LxZA5ZCe3NqZB6Wc6xbWxwHqn64T5QLEsjOZAFhZCLJj1yIsDLPCc9L3TRWZC3SvKf2D1vEZC3FISPWENQ9S5BZA94zxtn6HWQFD8QLMvjt83qOGHeQKZAAtJRgHeuzmd2oGn3jbZBmfYl2rhg3dpEnFhkAmK3lC7BZAEyc0ZD"
 ```
 
-You should get a temporary IAM crecentials.
+You should get a set of temporary IAM credentials.
 
 ``` json
 {
@@ -253,11 +251,17 @@ You should get a temporary IAM crecentials.
 }
 ```
 
-Makes a call to the private route using the credentials. The API request needs to be signed with AWS SigV4. We are going to use Insomia to help us sign and make the request.
+Let's make a call to the private route using the credentials. The API request needs to be [signed with AWS SigV4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html). We are going to use [Insomnia](https://insomnia.rest) to help us sign and make this request.
+
+Make sure to replace the **Access Key Id**, **Secret Access Key**, **Region**, and **Session Token** above. In our case the region is `us-east-1`. You can see this in the API URL.
+
+```
+https://2zy74sn6we.execute-api.us-east-1.amazonaws.com
+```
 
 ![Invoke Facebook authenticated API Gateway route](/assets/examples/api-auth-facebook/invoke-facebook-authenticated-api-gateway-route.png)
 
-You shoud now see
+You should now see.
 
 ```
 Hello user!
@@ -278,13 +282,13 @@ export async function main(event) {
 }
 ```
 
-We are getting the user id from event object.
+We are getting the user id from the event object.
 
-If you head back to the `/private` endpoint.
+If you head back to Insomnia and hit the `/private` endpoint.
 
 ![Get caller identity id in Facebook authenticated route](/assets/examples/api-auth-facebook/get-caller-identity-id-in-facebook-authenticated-route.png)
 
-You should see the user id. Note this matches the identity id that was generated from the earlier step.
+You should see the user id. Note, this matches the identity id that was generated from the step where we generated a set of IAM credentials.
 
 ```
 Hello us-east-1:46625265-9c97-420f-a826-15dbc812a008!

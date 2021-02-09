@@ -9,7 +9,7 @@ ref: how-to-use-cron-jobs-in-your-serverless-app
 comments_id:
 ---
 
-In this example we will look at how to create a cron job in our serverless app using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}). We'll be creating a simple task that's run every minute.
+In this example we will look at how to create a cron job in our serverless app using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}). We'll be creating a simple task that runs every minute and prints the weather forecast.
 
 ## Requirements
 
@@ -70,7 +70,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-This creates a serverless cron job using [`sst.Cron`](https://docs.serverless-stack.com/constructs/Cron). We configured the cron job to run every minute.
+This creates a serverless cron job using [`sst.Cron`](https://docs.serverless-stack.com/constructs/Cron). We've configured the cron job to run every minute.
 
 ## Adding function code
 
@@ -115,11 +115,11 @@ Stack dev-cron-job-my-stack
   Status: deployed
 ```
 
-Wait for a couple of minutes, you should see `Hi!` gets printed out every minute in your terminal.
+Wait for a couple of minutes and you should see `Hi!` gets printed out every minute in your terminal.
 
 ## Checking weather forecast
 
-Now let's make a call to [MetaWeather](https://www.metaweather.com)'s API and prints out the weather in San Francisco.
+Now let's make a call to [MetaWeather](https://www.metaweather.com)'s API and print out the weather in San Francisco.
 
 {%change%} Replace `src/lambda.js` with the following.
 
@@ -149,9 +149,9 @@ function checkSFWeather() {
 }
 ```
 
-And now if you head over to your terminal and wait for the function gets invoked in the next minute, you'll notice the weather data is printed out in the terminal!
+Now if you head over to your terminal and wait for the function to get invoked in the next minute, you'll notice the weather data is printed out in the terminal!
 
-```
+``` js
 {
   id: 5251329426456576,
   weather_state_name: 'Heavy Cloud',
@@ -191,4 +191,4 @@ $ npx sst remove --stage prod
 
 ## Conclusion
 
-And that's it! We've got a completely serverless cron job that checks the weather every minute. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+And that's it! We've got a completely serverless cron job that checks the weather every minute. You can change this to run a job that you want. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!

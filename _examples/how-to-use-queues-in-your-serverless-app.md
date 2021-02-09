@@ -9,7 +9,7 @@ ref: how-to-use-queues-in-your-serverless-app
 comments_id:
 ---
 
-In this example we will look at how to use SQS in our serverless app using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}). We'll be creating a simple queue system.
+In this example we will look at how to use SQS to create a queue in our serverless app using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}). We'll be creating a simple queue system.
 
 ## Requirements
 
@@ -70,7 +70,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-This creates an SQS queue using [`sst.Queue`](https://docs.serverless-stack.com/constructs/Queue). And it has a consumer that polls for messages from the queue. The consumer function will run when it polled 1 or more mesages.
+This creates an SQS queue using [`sst.Queue`](https://docs.serverless-stack.com/constructs/Queue). And it has a consumer that polls for messages from the queue. The consumer function will run when it has polled 1 or more messages.
 
 ## Setting up the API
 
@@ -107,7 +107,7 @@ We also pass in the url of our SQS queue to our API as an environment variable c
 
 ## Adding function code
 
-We will create two functions, one handling the API request, and one for the consumer.
+We will create two functions, one for handling the API request, and one for the consumer.
 
 {%change%} Replace the `src/lambda.js` with the following.
 
@@ -168,7 +168,7 @@ The `ApiEndpoint` is the API we just created. Let's test our endpoint. Run the f
 $ curl -X POST https://i8ia1epqnh.execute-api.us-east-1.amazonaws.com
 ```
 
-You should see `{status: 'successful'}` printed out. And if you head back to the debugger, you should see `Item queued!` printed out.
+You should see `{status: 'successful'}` printed out. And if you head back to the debugger, you should see `Item queued!`.
 
 ## Sending message to our queue
 
@@ -200,15 +200,15 @@ export async function main() {
 }
 ```
 
+Here we are getting the queue url from the environment variable, and then sending a message to it.
+
 {%change%} Let's install the `aws-sdk`.
 
 ``` bash
 $ npm install aws-sdk
 ```
 
-Here we are getting the queue url from the environment variable, and then sending a message to it.
-
-And now if you head over to your terminal and make a request to our API. You'll notice inside debugger that our consumer is called. And you should see `Message processed!` printed out.
+And now if you head over to your terminal and make a request to our API. You'll notice in the debug logs that our consumer is called. And you should see `Message processed!` being printed out.
 
 ``` bash
 $ curl -X POST https://i8ia1epqnh.execute-api.us-east-1.amazonaws.com

@@ -9,7 +9,7 @@ ref: how-to-use-pub-sub-in-your-serverless-app
 comments_id:
 ---
 
-In this example we will look at how to use SNS in our serverless app using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}). We'll be creating a simple checkout system.
+In this example we will look at how to use SNS to create [a pub/sub system](https://en.wikipedia.org/wiki/Publish–subscribe_pattern) in our serverless app using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}). We'll be creating a simple checkout flow.
 
 ## Requirements
 
@@ -70,7 +70,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-This creates an SNS topic using [`sst.Topic`](https://docs.serverless-stack.com/constructs/Topic). And it has two subscribers. Meaning when the topic is published, both functions will get run.
+This creates an SNS topic using [`sst.Topic`](https://docs.serverless-stack.com/constructs/Topic). And it has two subscribers. Meaning when the topic is published, both the functions will get run.
 
 ## Setting up the API
 
@@ -101,9 +101,9 @@ new cdk.CfnOutput(this, "ApiEndpoint", {
 });
 ```
 
-Our [API](https://docs.serverless-stack.com/constructs/api) simply has one endpoint (/order). When we make a `POST` request to this endpoint the Lambda function called `main` in `src/order.js` will get invoked.
+Our [API](https://docs.serverless-stack.com/constructs/api) simply has one endpoint (`/order`). When we make a `POST` request to this endpoint the Lambda function called `main` in `src/order.js` will get invoked.
 
-We also pass in the arn of our SNS topic to our API as an environment variable called `topicArn`. And we allow our API to publish to the topic we just created.
+We'll also pass in [the arn]({ link _chapters/what-is-an-arn.md %}) of our SNS topic to our API as an environment variable called `topicArn`. And we allow our API to publish to the topic we just created.
 
 ## Adding function code
 
@@ -177,7 +177,7 @@ The `ApiEndpoint` is the API we just created. Let's test our endpoint. Run the f
 $ curl -X POST https://gevkgi575a.execute-api.us-east-1.amazonaws.com/order
 ```
 
-You should see `{status: 'successful'}` printed out. And if you head back to the debugger, you should see `Order confirmed!` printed out.
+You should see `{status: 'successful'}` being printed out. And if you head back to the debugger, you should see `Order confirmed!`.
 
 ## Publishing to our topic
 
@@ -210,19 +210,21 @@ export async function main() {
 }
 ```
 
+Here we are getting the topic arn from the environment variable, and then publishing a message to it.
+
 {%change%} Let's install the `aws-sdk`.
 
 ``` bash
 $ npm install aws-sdk
 ```
 
-Here we are getting the topic arn from the environment variable, and then publishing a message to it.
-
-And now if you head over to your terminal and make a request to our API. You'll notice inside debugger that our topic subscribers are called. And you should see `Receipt sent!` and `Item shipped!` printed out.
+And now if you head over to your terminal and make a request to our API.
 
 ``` bash
 $ curl -X POST https://gevkgi575a.execute-api.us-east-1.amazonaws.com/order
 ```
+
+You'll notice inside the debug log that our topic subscribers are called. And you should see `Receipt sent!` and `Item shipped!` printed out.
 
 ## Deploying to prod
 
@@ -244,4 +246,4 @@ $ npx sst remove --stage prod
 
 ## Conclusion
 
-And that's it! We've got a completely serverless checkout system. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+And that's it! We've got a completely serverless checkout system, powered by SNS. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
