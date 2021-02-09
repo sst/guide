@@ -1,11 +1,11 @@
 ---
 layout: example
-title: How to create a REST API with Facebook authentication
+title: How to add Facebook authentication to a serverless API
 date: 2021-02-08 00:00:00
 lang: en
 description: In this example we will look at how to create a serverless REST API on AWS using Serverless Stack Toolkit (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
-repo: https://github.com/serverless-stack/examples/tree/main/rest-api-auth-facebook
-ref: how-to-create-a-rest-api-with-facebook-authentication
+repo: https://github.com/serverless-stack/examples/tree/main/api-auth-facebook
+ref: how-to-add-facebook-authentication-to-a-serverless-api
 comments_id:
 ---
 

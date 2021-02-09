@@ -1,11 +1,11 @@
 ---
 layout: example
-title: How to create a REST API with Google authentication
+title: How to add Google authentication to a serverless API
 date: 2021-02-08 00:00:00
 lang: en
 description: In this example we will look at how to create a serverless REST API on AWS using Serverless Stack Toolkit (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
-repo: https://github.com/serverless-stack/examples/tree/main/rest-api-auth-google
-ref: how-to-create-a-rest-api-with-google-authentication
+repo: https://github.com/serverless-stack/examples/tree/main/api-auth-google
+ref: how-to-add-google-authentication-to-a-serverless-api
 comments_id:
 ---
 
