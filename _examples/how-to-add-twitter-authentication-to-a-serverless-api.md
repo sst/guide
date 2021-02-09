@@ -287,7 +287,7 @@ You should get a temporary IAM crecentials.
 
 Makes a call to the private route using the credentials. The API request needs to be signed with AWS SigV4. We are going to use Insomia to help us sign and make the request.
 
-![Call Twitter Authenticated Route](/assets/examples/rest-api-twitter-auth/call-twitter-authenticated-route.png)
+![Invoke Twitter authenticated API Gateway route](/assets/examples/api-auth-twitter/invoke-twitter-authenticated-api-gateway-route.png)
 
 You shoud now see
 
@@ -314,7 +314,7 @@ We are getting the user id from event object.
 
 If you head back to the `/private` endpoint.
 
-![Display Identity Id in Twitter Authenticated Route](/assets/examples/rest-api-twitter-auth/display-identity-id-in-twitter-authenticated-route.png)
+![Get caller identity id in Twitter authenticated route](/assets/examples/api-auth-twitter/get-caller-identity-id-in-twitter-authenticated-route.png)
 
 You should see the user id. Note this matches the identity id that was generated from the earlier step.
 

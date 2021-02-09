@@ -102,7 +102,7 @@ const { account, region } = sst.Stack.of(this);
 
 // Create auth provider
 const auth = new sst.Auth(this, "Auth", {
-  facebook: { appId: "419718329085013" },
+  facebook: { appId: "419718329085014" },
 });
 
 // Allow authenticated users invoke API
@@ -213,7 +213,7 @@ https://developers.facebook.com/tools/explorer
 
 Select your Facebook App and select Generate Access Token. Copy the generated access token.
 
-![Generate Facebook Access Token](/assets/examples/rest-api-facebook-auth/generate-facebook-access-token.png)
+![Generate access token for users logged in with Facebook](/assets/examples/api-auth-facebook/generate-access-token-for-users-logged-in-with-facebook.png)
 
 Get the user's Cognito Identity id. Replace --identity-pool-id with `IdentityPoolId` from the stack output; and replace access code from the previous step.
 
@@ -255,7 +255,7 @@ You should get a temporary IAM crecentials.
 
 Makes a call to the private route using the credentials. The API request needs to be signed with AWS SigV4. We are going to use Insomia to help us sign and make the request.
 
-![Call Facebook Authenticated Route](/assets/examples/rest-api-facebook-auth/call-facebook-authenticated-route.png)
+![Invoke Facebook authenticated API Gateway route](/assets/examples/api-auth-facebook/invoke-facebook-authenticated-api-gateway-route.png)
 
 You shoud now see
 
@@ -282,7 +282,7 @@ We are getting the user id from event object.
 
 If you head back to the `/private` endpoint.
 
-![Display Identity Id in Facebook Authenticated Route](/assets/examples/rest-api-facebook-auth/display-identity-id-in-facebook-authenticated-route.png)
+![Get caller identity id in Facebook authenticated route](/assets/examples/api-auth-facebook/get-caller-identity-id-in-facebook-authenticated-route.png)
 
 You should see the user id. Note this matches the identity id that was generated from the earlier step.
 

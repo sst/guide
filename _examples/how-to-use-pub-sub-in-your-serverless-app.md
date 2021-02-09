@@ -64,10 +64,7 @@ export default class MyStack extends sst.Stack {
 
     // Create Topic
     const topic = new sst.Topic(this, "Ordered", {
-      subscribers: [
-        "src/receipt.main",
-        "src/shipping.main",
-      ],
+      subscribers: ["src/receipt.main", "src/shipping.main"],
     });
   }
 }
@@ -96,7 +93,7 @@ const api = new sst.Api(this, "Api", {
 });
 
 // Allow the API to access the topic
-api.attachPermissions([ topic ]);
+api.attachPermissions([topic]);
 
 // Show API endpoint in output
 new cdk.CfnOutput(this, "ApiEndpoint", {
@@ -195,18 +192,20 @@ const sns = new AWS.SNS();
 
 export async function main() {
   // Publish a message to topic
-  await sns.publish({
-    // Get the topic from the environment variable
-    TopicArn          : process.env.topicArn,
-    Message           : JSON.stringify({ordered: true}),
-    MessageStructure  : 'string',
-  }).promise();
+  await sns
+    .publish({
+      // Get the topic from the environment variable
+      TopicArn: process.env.topicArn,
+      Message: JSON.stringify({ ordered: true }),
+      MessageStructure: "string",
+    })
+    .promise();
 
   console.log("Order confirmed!");
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ status: 'successful' }),
+    body: JSON.stringify({ status: "successful" }),
   };
 }
 ```

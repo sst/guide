@@ -103,7 +103,8 @@ const { account, region } = sst.Stack.of(this);
 // Create auth provider
 const auth = new sst.Auth(this, "Auth", {
   google: {
-    clientId: "38017095028-abcdjaaaidbgt3kfhuoh3n5ts08vodt2.apps.googleusercontent.com",
+    clientId:
+      "38017095028-abcdjaaaidbgt3kfhuoh3n5ts08vodt3.apps.googleusercontent.com",
   },
 });
 
@@ -215,19 +216,19 @@ https://developers.google.com/oauthplayground
 
 Open settings, check **Use your own OAuth credentials**, and enter **OAuth Client ID** and **OAuth Client secret** for your Google API project.
 
-![Set Google OAuth Playground Setting](/assets/examples/rest-api-google-auth/set-google-oauth-playground-setting.png)
+![Set Google OAuth Playground Setting](/assets/examples/api-auth-google/set-google-oauth-playground-setting.png)
 
 Select **Google OAuth2 API v2** from Step 1. Check **userinfo.email**. Then select **Authorize APIs**.
 
-![Select Google OAuth2 API v2](/assets/examples/rest-api-google-auth/select-google-oauth2-api-v2.png)
+![Select Google OAuth2 API v2](/assets/examples/api-auth-google/select-google-oauth2-api-v2.png)
 
 Select **Exchange authorization code for tokens**.
 
-![Exchange Google Authorization Code](/assets/examples/rest-api-google-auth/exchange-authorization-code-for-tokens.png)
+![Exchange Google authorization code for user access token](/assets/examples/api-auth-google/exchange-authorization-code-for-user-access-token.png)
 
 Copy the generated id token.
 
-![Copy Google ID Token](/assets/examples/rest-api-google-auth/copy-id-token.png)
+![Copy access token for users logged in with Google](/assets/examples/api-auth-google/copy-access-token-for-users-logged-in-with-google.png)
 
 Get the user's Cognito Identity id. Replace --identity-pool-id with `IdentityPoolId` from the stack output; and replace token from the previous step.
 
@@ -269,7 +270,7 @@ You should get a temporary IAM crecentials.
 
 Makes a call to the private route using the credentials. The API request needs to be signed with AWS SigV4. We are going to use Insomia to help us sign and make the request.
 
-![Call Google Authenticated Route](/assets/examples/rest-api-google-auth/call-google-authenticated-route.png)
+![Invoke Google authenticated API Gateway route](/assets/examples/api-auth-google/invoke-google-authenticated-api-gateway-route.png)
 
 You shoud now see
 
@@ -296,7 +297,7 @@ We are getting the user id from event object.
 
 If you head back to the `/private` endpoint.
 
-![Display Identity Id in Google Authenticated Route](/assets/examples/rest-api-google-auth/display-identity-id-in-google-authenticated-route.png)
+![Get caller identity id in Google authenticated route](/assets/examples/api-auth-google/get-caller-identity-id-in-google-authenticated-route.png)
 
 You should see the user id. Note this matches the identity id that was generated from the earlier step.
 

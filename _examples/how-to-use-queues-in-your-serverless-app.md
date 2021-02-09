@@ -93,7 +93,7 @@ const api = new sst.Api(this, "Api", {
 });
 
 // Allow the API to publish the queue
-api.attachPermissions([ queue ]);
+api.attachPermissions([queue]);
 
 // Show API endpoint in output
 new cdk.CfnOutput(this, "ApiEndpoint", {
@@ -183,17 +183,19 @@ const sqs = new AWS.SQS();
 
 export async function main() {
   // Send a message to queue
-  await sqs.publish({
-    // Get the queue url from the environment variable
-    QueueUrl: process.env.queueUrl,
-    MessageBody: JSON.stringify({ordered: true}),
-  }).promise();
+  await sqs
+    .sendMessage({
+      // Get the queue url from the environment variable
+      QueueUrl: process.env.queueUrl,
+      MessageBody: JSON.stringify({ ordered: true }),
+    })
+    .promise();
 
   console.log("Message queued!");
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ status: 'successful' }),
+    body: JSON.stringify({ status: "successful" }),
   };
 }
 ```
