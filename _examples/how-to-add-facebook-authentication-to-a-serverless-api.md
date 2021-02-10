@@ -146,7 +146,7 @@ export async function main() {
 export async function main() {
   return {
     statusCode: 200,
-    body: `Hello user!`,
+    body: "Hello user!",
   };
 }
 ```

@@ -116,7 +116,7 @@ export async function main() {
   console.log("Order confirmed!");
   return {
     statusCode: 200,
-    body: JSON.stringify({ status: 'successful' }),
+    body: JSON.stringify({ status: "successful" }),
   };
 }
 ```
