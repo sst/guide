@@ -121,10 +121,16 @@ Wait for a couple of minutes and you should see `Hi!` gets printed out every min
 
 Now let's make a call to [MetaWeather](https://www.metaweather.com)'s API and print out the weather in San Francisco.
 
+{%change%} Let's install the `node-fetch`.
+
+``` bash
+$ npm install -s node-fetch
+```
+
 {%change%} Replace `src/lambda.js` with the following.
 
 ``` js
-import https from "https";
+import fetch from "node-fetch";
 
 export async function main() {
   const weather = await checkSFWeather();
@@ -133,19 +139,9 @@ export async function main() {
 }
 
 function checkSFWeather() {
-  return new Promise((resolve, reject) =>
-    https
-      .get("https://www.metaweather.com/api/location/2487956/", (resp) => {
-        let data = "";
-
-        resp.on("data", (chunk) => {
-          data += chunk;
-        });
-
-        resp.on("end", () => resolve(JSON.parse(data)));
-      })
-      .on("error", (err) => reject(err))
-  );
+  return fetch(
+    "https://www.metaweather.com/api/location/2487956/"
+  ).then((res) => res.json());
 }
 ```
 
