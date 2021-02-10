@@ -14,3 +14,7 @@ A collection of example serverless apps built with [**Serverless Stack Toolkit (
 {% include toc-chapters.html items=site.data.examplelist.api id="api" %}
 
 {% include toc-chapters.html items=site.data.examplelist.database id="database" %}
+
+{% include toc-chapters.html items=site.data.examplelist.auth id="auth" %}
+
+{% include toc-chapters.html items=site.data.examplelist.async id="async" %}

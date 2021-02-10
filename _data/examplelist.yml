@@ -1,5 +1,5 @@
 api:
-  title: Building APIs
+  title: APIs
   chapters:
     - page: How to create a REST API with serverless
       url: /examples/how-to-create-a-rest-api-with-serverless.html
@@ -7,9 +7,32 @@ api:
       url: /examples/how-to-create-a-rest-api-in-typescript-with-serverless.html
 
 database:
-  title: Working with databases
+  title: Databases
   chapters:
     - page: How to use DynamoDB in your serverless app
       url: /examples/how-to-use-dynamodb-in-your-serverless-app.html
     - page: How to create a CRUD API with serverless using DynamoDB
       url: /examples/how-to-create-a-crud-api-with-serverless-using-dynamodb.html
+
+auth:
+  title: Authentication
+  chapters:
+    - page: How to add Cognito authentication to a serverless API
+      url: /examples/how-to-add-cognito-authentication-to-a-serverless-api.html
+    - page: How to add Facebook authentication to a serverless API
+      url: /examples/how-to-add-facebook-authentication-to-a-serverless-api.html
+    - page: How to add Google authentication to a serverless API
+      url: /examples/how-to-add-google-authentication-to-a-serverless-api.html
+    - page: How to add Twitter authentication to a serverless API
+      url: /examples/how-to-add-twitter-authentication-to-a-serverless-api.html
+
+
+async:
+  title: Async Tasks
+  chapters:
+    - page: How to use cron jobs in your serverless app
+      url: /examples/how-to-use-cron-jobs-in-your-serverless-app.html
+    - page: How to use queues in your serverless app
+      url: /examples/how-to-use-queues-in-your-serverless-app.html
+    - page: How to use pub sub in your serverless app
+      url: /examples/how-to-use-pub-sub-in-your-serverless-app.html
