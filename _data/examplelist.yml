@@ -34,5 +34,5 @@ async:
       url: /examples/how-to-use-cron-jobs-in-your-serverless-app.html
     - page: How to use queues in your serverless app
       url: /examples/how-to-use-queues-in-your-serverless-app.html
-    - page: How to use pub sub in your serverless app
+    - page: How to use Pub/Sub in your serverless app
       url: /examples/how-to-use-pub-sub-in-your-serverless-app.html
