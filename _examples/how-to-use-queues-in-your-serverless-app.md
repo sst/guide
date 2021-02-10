@@ -6,7 +6,7 @@ lang: en
 description: In this example we will look at how to use SQS in your serverless app on AWS using Serverless Stack Toolkit (SST). We'll be using the sst.Api and sst.Queue to create a simple queue system.
 repo: https://github.com/serverless-stack/examples/tree/main/queue
 ref: how-to-use-queues-in-your-serverless-app
-comments_id:
+comments_id: how-to-use-queues-in-your-serverless-app/2314
 ---
 
 In this example we will look at how to use SQS to create a queue in our serverless app using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}). We'll be creating a simple queue system.
