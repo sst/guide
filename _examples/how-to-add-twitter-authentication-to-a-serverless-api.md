@@ -3,13 +3,13 @@ layout: example
 title: How to add Twitter authentication to a serverless API
 date: 2021-02-08 00:00:00
 lang: en
-description: In this example we will look at how to create a serverless REST API on AWS using Serverless Stack Toolkit (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
+description: In this example we will look at how to add Twitter authentication to a serverless API using Serverless Stack Toolkit (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
 repo: https://github.com/serverless-stack/examples/tree/main/api-auth-twitter
 ref: how-to-add-twitter-authentication-to-a-serverless-api
 comments_id:
 ---
 
-In this example we will look at how to create a serverless REST API on AWS using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}). If you are a TypeScript user, we've got [a version for that as well]({% link _examples/how-to-create-a-rest-api-in-typescript-with-serverless.md %}).
+In this example we will look at how to add Twitter authentication to a serverless API using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}).
 
 ## Requirements
 
@@ -91,11 +91,13 @@ GET /private
 GET /public
 ```
 
-By default, all routes have the authorization type AWS_IAM. This means the caller of the API needs to have the required IAM permission. The first is a private endpoint. The second is a public endpoint and its authorization type is override to NONE.
+To secure our APIs we are adding the authorization type `AWS_IAM`. This means the caller of the API needs to have the right permissions. The first route is a private endpoint. The second is a public endpoint and its authorization type is overriden to `NONE`.
 
-## Setting up the authorization
+## Setting up authentication
 
-{%change%} Add this below the `sst.Api` definition in `lib/MyStack.js`. Make sure to replace the **consumerKey** and **consumerSecret** with that of your Twitter app.
+Now let's add authentication for our serverless app.
+
+{%change%} Add this below the `sst.Api` definition in `lib/MyStack.js`. Make sure to replace the `consumerKey` and `consumerSecret` with that of your Twitter app.
 
 ``` js
 const { account, region } = sst.Stack.of(this);
@@ -124,11 +126,11 @@ new cdk.CfnOutput(this, "IdentityPoolId", {
 });
 ```
 
-This creates a Cognito Identity Pool which relys on Twitter to authenticate users. And assigns IAM permissions to users. We are allowing only the logged in users to have the permission to call the API.
+This creates a [Cognito Identity Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html) which relies on Google to authenticate users. And we use the [`attachPermissionsForAuthUsers`](https://docs.serverless-stack.com/constructs/Auth#attachpermissionsforauthusers) method to allow our logged in users to access our API.
 
 ## Adding function code
 
-We will create two functions, one handling the public route, and one handling the private route.
+Let's create two functions, one handling the public route, and the other for the private route.
 
 {%change%} Add a `src/public.js`.
 
@@ -192,7 +194,9 @@ Stack dev-api-auth-twitter-my-stack
     IdentityPoolId: us-east-1:abc36c64-36d5-4298-891c-7aa9ea318f1d
 ```
 
-The `ApiEndpoint` is the API we just created. Now let's try out our public route. Head over to the following in your browser. Make sure to replace the URL with your API.
+The `ApiEndpoint` is the API we just created. Make a note of the `IdentityPoolId`, we'll need that later.
+
+Now let's try out our public route. Head over to the following in your browser. Make sure to replace the URL with your API.
 
 ```
 https://b3njix6irk.execute-api.us-east-1.amazonaws.com/public
@@ -208,28 +212,28 @@ https://b3njix6irk.execute-api.us-east-1.amazonaws.com/private
 
 ## Login with Twitter
 
-We are going use the [twurl](https://github.com/twitter/twurl) tool to test logging in with Twitter. Follow the project README to install twurl.
+We are going to use the [**twurl**](https://github.com/twitter/twurl) tool to test logging in with Twitter. Follow the project README to install twurl.
 
-Initiate sign in with Twitter. Replace the credentials with those from your Twitter app.
+Once installed, we'll need to set our app credentials. Run the following and replace it with those from your Twitter app.
 
 ``` bash
-twurl authorize --consumer-key gyMbPOiwefr6x63SjIW8NN0d1 \
+$ twurl authorize --consumer-key gyMbPOiwefr6x63SjIW8NN0d1 \
   --consumer-secret qxld8zic5c2eyahqK3gjGLGQaOTogGfAgHh17MYOIcOUR9l2Nz
 ```
 
-This will return an URL with the authentication url.
+This will return an authentication URL.
 
 ```
-Go to https://api.twitter.com/oauth/authorize?oauth_consumer_key=gyMbPOiwefr6x63SjIW8NN0d1&oauth_nonce=ELNkf9FaDqzNhLkxeuxFlnlDjwvQ17WBLlabN1Sg&oauth_signature=i%252By%252BuupyXcYAENs1XbL3zjb6CBY%253D&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1612769097&oauth_token=PAXt3wAAAAABMhofAAABd4CHeJY&oauth_version=1.0 and paste in the supplied PIN
+https://api.twitter.com/oauth/authorize?oauth_consumer_key=gyMbPOiwefr6x63SjIW8NN0d1&oauth_nonce=ELNkf9FaDqzNhLkxeuxFlnlDjwvQ17WBLlabN1Sg&oauth_signature=i%252By%252BuupyXcYAENs1XbL3zjb6CBY%253D&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1612769097&oauth_token=PAXt3wAAAAABMhofAAABd4CHeJY&oauth_version=1.0 and paste in the supplied PIN
 ```
 
-Open the url in your browser. Authenticate to Twitter, and then enter the PIN back into the terminal. If you have have authenticated successfully, you should get the message.
+Open the URL in your browser. Authenticate to Twitter, and then enter the PIN back into the terminal. If you've authenticated successfully, you should get the message.
 
 ```
 Authorization successful
 ```
 
-twurl stores your access token information in the `~/.twurlrc` file. Note the **token** and **secret** under your profile.
+Twurl stores your access token information in the `~/.twurlrc` file. Note the **token** and **secret** in your profile.
 
 ```
 ---
@@ -247,10 +251,10 @@ configuration:
   - gyMbPOiwefr6x63SjIW8NN0d1
 ```
 
-Get the user's Cognito Identity id. Replace --identity-pool-id with `IdentityPoolId` from the stack output; and replace **TOKEN** and **SECRET** from the previous step.
+Next, we need to get the user's Cognito Identity id. Replace `--identity-pool-id` with the `IdentityPoolId` from the `sst start` log output; and replace the `--logins` with the **TOKEN** and **SECRET** from the previous step.
 
 ``` bash
-aws cognito-identity get-id \
+$ aws cognito-identity get-id \
   --identity-pool-id us-east-1:abc36c64-36d5-4298-891c-7aa9ea318f1d \
   --logins api.twitter.com="TOKEN:SECRET"
 ```
@@ -259,19 +263,19 @@ You should get an identity id for the Twitter user.
 
 ``` json
 {
-"IdentityId": "us-east-1:0a6b1bb0-614c-4e00-9028-146854eaee4a"
+  "IdentityId": "us-east-1:0a6b1bb0-614c-4e00-9028-146854eaee4a"
 }
 ```
 
-Now we will get the IAM credentials for the identity user.
+Now we'll need to get the IAM credentials for the identity user.
 
 ``` bash
-aws cognito-identity get-credentials-for-identity \
+$ aws cognito-identity get-credentials-for-identity \
   --identity-id us-east-1:0a6b1bb0-614c-4e00-9028-146854eaee4a \
   --logins graph.facebook.com="EAAF9u0npLFUBAGv7SlHXIMigP0nZBF2LxZA5ZCe3NqZB6Wc6xbWxwHqn64T5QLEsjOZAFhZCLJj1yIsDLPCc9L3TRWZC3SvKf2D1vEZC3FISPWENQ9S5BZA94zxtn6HWQFD8QLMvjt83qOGHeQKZAAtJRgHeuzmd2oGn3jbZBmfYl2rhg3dpEnFhkAmK3lC7BZAEyc0ZD"
 ```
 
-You should get a temporary IAM crecentials.
+This should give you a set of temporary IAM credentials.
 
 ``` json
 {
@@ -285,15 +289,23 @@ You should get a temporary IAM crecentials.
 }
 ```
 
-Makes a call to the private route using the credentials. The API request needs to be signed with AWS SigV4. We are going to use Insomia to help us sign and make the request.
+Let's make a call to the private route using the credentials. The API request needs to be [signed with AWS SigV4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html). We are going to use [Insomnia](https://insomnia.rest) to help us sign and make this request.
+
+Make sure to replace the **Access Key Id**, **Secret Access Key**, **Region**, and **Session Token** below. In our case the region is `us-east-1`. You can see this in the API URL.
+
+```
+https://b3njix6irk.execute-api.us-east-1.amazonaws.com
+```
 
 ![Invoke Twitter authenticated API Gateway route](/assets/examples/api-auth-twitter/invoke-twitter-authenticated-api-gateway-route.png)
 
-You shoud now see
+You should now see.
 
 ```
 Hello user!
 ```
+
+The above process might seem fairly tedious. But once we integrate it into our frontend app, we'll be able to use something like [AWS Amplify]({% link _chapters/configure-aws-amplify.md %}) to handle these steps for us.
 
 ## Making changes
 
@@ -310,13 +322,13 @@ export async function main(event) {
 }
 ```
 
-We are getting the user id from event object.
+We are getting the user id from the event object.
 
-If you head back to the `/private` endpoint.
+If you head back to Insomnia and hit the `/private` endpoint again.
 
 ![Get caller identity id in Twitter authenticated route](/assets/examples/api-auth-twitter/get-caller-identity-id-in-twitter-authenticated-route.png)
 
-You should see the user id. Note this matches the identity id that was generated from the earlier step.
+You should see the user id. Note, this matches the identity id that was generated from the step where we generated a set of IAM credentials.
 
 ```
 Hello us-east-1:46625265-9c97-420f-a826-15dbc812a008!

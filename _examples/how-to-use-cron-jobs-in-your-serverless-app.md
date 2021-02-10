@@ -124,7 +124,7 @@ Now let's make a call to [MetaWeather](https://www.metaweather.com)'s API and pr
 {%change%} Let's install the `node-fetch`.
 
 ``` bash
-$ npm install -s node-fetch
+$ npm install node-fetch
 ```
 
 {%change%} Replace `src/lambda.js` with the following.

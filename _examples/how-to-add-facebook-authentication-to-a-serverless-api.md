@@ -91,9 +91,9 @@ GET /private
 GET /public
 ```
 
-To secure our APIs we are adding the authorization type `AWS_IAM`. This means the caller of the API needs to have the right permissions. The first is a private endpoint. The second is a public endpoint and its authorization type is overriden to `NONE`.
+To secure our APIs we are adding the authorization type `AWS_IAM`. This means the caller of the API needs to have the right permissions. The first route is a private endpoint. The second is a public endpoint and its authorization type is overriden to `NONE`.
 
-## Setting up the authorization
+## Setting up authentication
 
 Now let's add authentication for our serverless app.
 
@@ -191,7 +191,9 @@ Stack dev-api-auth-facebook-my-stack
     IdentityPoolId: us-east-1:84340cf1-4f64-496e-87c2-517072e7d5d9
 ```
 
-The `ApiEndpoint` is the API we just created. Now let's try out our public route. Head over to the following in your browser. Make sure to replace the URL with your API.
+The `ApiEndpoint` is the API we just created. Make a note of the `IdentityPoolId`, we'll need that later.
+
+Now let's try out our public route. Head over to the following in your browser. Make sure to replace the URL with your API.
 
 ```
 https://2zy74sn6we.execute-api.us-east-1.amazonaws.com/public
@@ -207,13 +209,13 @@ https://2zy74sn6we.execute-api.us-east-1.amazonaws.com/private
 
 ## Login with Facebook
 
-We are going to use [Facebook's Graph API Explorer](https://developers.facebook.com/tools/explorer) to test logging in with Facebook. Head over to — [developers.facebook.com/tools/explorer](https://developers.facebook.com/tools/explorer)
+We are going to use [Facebook's Graph API Explorer](https://developers.facebook.com/tools/explorer) to test logging in with Facebook. Head over to — [**developers.facebook.com/tools/explorer**](https://developers.facebook.com/tools/explorer)
 
 Select your Facebook App and select **Generate Access Token**. Copy the generated access token.
 
 ![Generate access token for users logged in with Facebook](/assets/examples/api-auth-facebook/generate-access-token-for-users-logged-in-with-facebook.png)
 
-Next, we need to get the user's Cognito Identity id. Replace `--identity-pool-id` with the `IdentityPoolId` from the `sst start` log output; and replace access code from the previous step.
+Next, we need to get the user's Cognito Identity id. Replace `--identity-pool-id` with the `IdentityPoolId` from the `sst start` log output; and replace the `--logins` with the **Access Token** from the previous step.
 
 ``` bash
 $ aws cognito-identity get-id \
@@ -232,7 +234,7 @@ You should get an identity id for the Facebook user.
 Now we'll need to get the IAM credentials for the identity user.
 
 ``` bash
-aws cognito-identity get-credentials-for-identity \
+$ aws cognito-identity get-credentials-for-identity \
   --identity-id us-east-1:46625265-9c97-420f-a826-15dbc812a008 \
   --logins graph.facebook.com="EAAF9u0npLFUBAGv7SlHXIMigP0nZBF2LxZA5ZCe3NqZB6Wc6xbWxwHqn64T5QLEsjOZAFhZCLJj1yIsDLPCc9L3TRWZC3SvKf2D1vEZC3FISPWENQ9S5BZA94zxtn6HWQFD8QLMvjt83qOGHeQKZAAtJRgHeuzmd2oGn3jbZBmfYl2rhg3dpEnFhkAmK3lC7BZAEyc0ZD"
 ```
@@ -253,7 +255,7 @@ You should get a set of temporary IAM credentials.
 
 Let's make a call to the private route using the credentials. The API request needs to be [signed with AWS SigV4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html). We are going to use [Insomnia](https://insomnia.rest) to help us sign and make this request.
 
-Make sure to replace the **Access Key Id**, **Secret Access Key**, **Region**, and **Session Token** above. In our case the region is `us-east-1`. You can see this in the API URL.
+Make sure to replace the **Access Key Id**, **Secret Access Key**, **Region**, and **Session Token** below. In our case the region is `us-east-1`. You can see this in the API URL.
 
 ```
 https://2zy74sn6we.execute-api.us-east-1.amazonaws.com
@@ -266,6 +268,8 @@ You should now see.
 ```
 Hello user!
 ```
+
+The above process might seem fairly tedious. But once we integrate it into our frontend app, we'll be able to use something like [AWS Amplify]({% link _chapters/configure-aws-amplify.md %}) to handle these steps for us.
 
 ## Making changes
 
@@ -284,7 +288,7 @@ export async function main(event) {
 
 We are getting the user id from the event object.
 
-If you head back to Insomnia and hit the `/private` endpoint.
+If you head back to Insomnia and hit the `/private` endpoint again.
 
 ![Get caller identity id in Facebook authenticated route](/assets/examples/api-auth-facebook/get-caller-identity-id-in-facebook-authenticated-route.png)
 

@@ -3,13 +3,13 @@ layout: example
 title: How to add Google authentication to a serverless API
 date: 2021-02-08 00:00:00
 lang: en
-description: In this example we will look at how to create a serverless REST API on AWS using Serverless Stack Toolkit (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
+description: In this example we will look at how to add Google authentication to a serverless API using Serverless Stack Toolkit (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
 repo: https://github.com/serverless-stack/examples/tree/main/api-auth-google
 ref: how-to-add-google-authentication-to-a-serverless-api
 comments_id:
 ---
 
-In this example we will look at how to create a serverless REST API on AWS using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}). If you are a TypeScript user, we've got [a version for that as well]({% link _examples/how-to-create-a-rest-api-in-typescript-with-serverless.md %}).
+In this example we will look at how to add Google authentication to a serverless API using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}).
 
 ## Requirements
 
@@ -91,11 +91,13 @@ GET /private
 GET /public
 ```
 
-By default, all routes have the authorization type AWS_IAM. This means the caller of the API needs to have the required IAM permission. The first is a private endpoint. The second is a public endpoint and its authorization type is override to NONE.
+To secure our APIs we are adding the authorization type `AWS_IAM`. This means the caller of the API needs to have the right permissions. The first route is a private endpoint. The second is a public endpoint and its authorization type is overriden to `NONE`.
 
-## Setting up the authorization
+## Setting up authentication
 
-{%change%} Add this below the `sst.Api` definition in `lib/MyStack.js`. Make sure to replace the clientId with that of your Google API project.
+Now let's add authentication for our serverless app.
+
+{%change%} Add this below the `sst.Api` definition in `lib/MyStack.js`. Make sure to replace the `clientId` with that of your Google API project.
 
 ``` js
 const { account, region } = sst.Stack.of(this);
@@ -124,11 +126,11 @@ new cdk.CfnOutput(this, "IdentityPoolId", {
 });
 ```
 
-This creates a Cognito Identity Pool which relys on Google to authenticate users. And assigns IAM permissions to users. We are allowing only the logged in users to have the permission to call the API.
+This creates a [Cognito Identity Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html) which relies on Google to authenticate users. And we use the [`attachPermissionsForAuthUsers`](https://docs.serverless-stack.com/constructs/Auth#attachpermissionsforauthusers) method to allow our logged in users to access our API.
 
 ## Adding function code
 
-We will create two functions, one handling the public route, and one handling the private route.
+Let's create two functions, one handling the public route, and the other for the private route.
 
 {%change%} Add a `src/public.js`.
 
@@ -192,7 +194,9 @@ Stack dev-api-auth-google-my-stack
     IdentityPoolId: us-east-1:b6211282-8eac-41d0-a721-945b7be7b586
 ```
 
-The `ApiEndpoint` is the API we just created. Now let's try out our public route. Head over to the following in your browser. Make sure to replace the URL with your API.
+The `ApiEndpoint` is the API we just created. Make a note of the `IdentityPoolId`, we'll need that later.
+
+Now let's try out our public route. Head over to the following in your browser. Make sure to replace the URL with your API.
 
 ```
 https://aueschz6ba.execute-api.us-east-1.amazonaws.com/public
@@ -208,13 +212,9 @@ https://aueschz6ba.execute-api.us-east-1.amazonaws.com/private
 
 ## Login with Google
 
-We are going use Google's OAuth 2.0 Playground to test logging in with Google. Head over to
+We are going to use [Google's OAuth 2.0 Playground](https://developers.google.com/oauthplayground) to test logging in with Google. Head over to — [**developers.google.com/oauthplayground**](https://developers.google.com/oauthplayground)
 
-```
-https://developers.google.com/oauthplayground
-```
-
-Open settings, check **Use your own OAuth credentials**, and enter **OAuth Client ID** and **OAuth Client secret** for your Google API project.
+Head over to the settings, check **Use your own OAuth credentials**, and enter the **OAuth Client ID** and **OAuth Client secret** for your Google API project.
 
 ![Set Google OAuth Playground Setting](/assets/examples/api-auth-google/set-google-oauth-playground-setting.png)
 
@@ -226,14 +226,14 @@ Select **Exchange authorization code for tokens**.
 
 ![Exchange Google authorization code for user access token](/assets/examples/api-auth-google/exchange-authorization-code-for-user-access-token.png)
 
-Copy the generated id token.
+Copy the generated **id_token**.
 
 ![Copy access token for users logged in with Google](/assets/examples/api-auth-google/copy-access-token-for-users-logged-in-with-google.png)
 
-Get the user's Cognito Identity id. Replace --identity-pool-id with `IdentityPoolId` from the stack output; and replace token from the previous step.
+Next, we need to get the user's Cognito Identity id. Replace `--identity-pool-id` with the `IdentityPoolId` from the `sst start` log output; and replace the `--logins` with the **id_token** from the previous step.
 
 ``` bash
-aws cognito-identity get-id \
+$ aws cognito-identity get-id \
   --identity-pool-id us-east-1:b6211282-8eac-41d0-a721-945b7be7b586 \
   --logins accounts.google.com="eyJhbGciOiJSUzI1NiIsImtpZCI6ImZkMjg1ZWQ0ZmViY2IxYWVhZmU3ODA0NjJiYzU2OWQyMzhjNTA2ZDkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI0MDc0MDg3MTgxOTIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI0MDc0MDg3MTgxOTIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDIwNzgwOTk5MzY4NDM3Njg5OTMiLCJlbWFpbCI6IndhbmdmYW5qaWVAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiI0cEFYV2diR0JoNy1NRzUyNEtBUG5BIiwiaWF0IjoxNjEyNzYzMDA1LCJleHAiOjE2MTI3NjY2MDV9.jIukmyMeJNTyOqya2eRWZzgMpUFJQkR2O49NV3-wGhW4sPKJPwKbhhfEMHEadQo5lYgsmQmsTiIrt4uPGMV0MwzvVppJ5iA57x-sc8JeQxezEnI6XVl59mQyuViAnBovCZeOB9nSquBr2KbxmIUvKApGq3E1Z8ksqobB-hzCEl1Jxqxp6aCKWAjJNsIkXpV615O-VYxRbL7Lxpi_1Saethf--PLV3_3kNd_NvsuwJa1CIdLw2fGqt-BUR46sgxICcCn95g9j2wacwBjHDVj_In75Xpecrp0FP-mxW13w9zwO8nWOQcmb4X8guHNd511az-F8r4bGVOy8il0SPoj3yw"
 ```
@@ -242,19 +242,19 @@ You should get an identity id for the Google user.
 
 ``` json
 {
-"IdentityId": "us-east-1:52b11867-4633-4614-ae69-a2872f6a4429"
+  "IdentityId": "us-east-1:52b11867-4633-4614-ae69-a2872f6a4429"
 }
 ```
 
-Now we will get the IAM credentials for the identity user.
+Now we'll need to get the IAM credentials for the identity user.
 
 ``` bash
-aws cognito-identity get-credentials-for-identity \
+$ aws cognito-identity get-credentials-for-identity \
   --identity-id us-east-1:52b11867-4633-4614-ae69-a2872f6a4429 \
   --logins accounts.google.com="eyJhbGciOiJSUzI1NiIsImtpZCI6ImZkMjg1ZWQ0ZmViY2IxYWVhZmU3ODA0NjJiYzU2OWQyMzhjNTA2ZDkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI0MDc0MDg3MTgxOTIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI0MDc0MDg3MTgxOTIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDIwNzgwOTk5MzY4NDM3Njg5OTMiLCJlbWFpbCI6IndhbmdmYW5qaWVAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiI0cEFYV2diR0JoNy1NRzUyNEtBUG5BIiwiaWF0IjoxNjEyNzYzMDA1LCJleHAiOjE2MTI3NjY2MDV9.jIukmyMeJNTyOqya2eRWZzgMpUFJQkR2O49NV3-wGhW4sPKJPwKbhhfEMHEadQo5lYgsmQmsTiIrt4uPGMV0MwzvVppJ5iA57x-sc8JeQxezEnI6XVl59mQyuViAnBovCZeOB9nSquBr2KbxmIUvKApGq3E1Z8ksqobB-hzCEl1Jxqxp6aCKWAjJNsIkXpV615O-VYxRbL7Lxpi_1Saethf--PLV3_3kNd_NvsuwJa1CIdLw2fGqt-BUR46sgxICcCn95g9j2wacwBjHDVj_In75Xpecrp0FP-mxW13w9zwO8nWOQcmb4X8guHNd511az-F8r4bGVOy8il0SPoj3yw"
 ```
 
-You should get a temporary IAM crecentials.
+This should give you a set of temporary IAM credentials.
 
 ``` json
 {
@@ -268,15 +268,23 @@ You should get a temporary IAM crecentials.
 }
 ```
 
-Makes a call to the private route using the credentials. The API request needs to be signed with AWS SigV4. We are going to use Insomia to help us sign and make the request.
+Let's make a call to the private route using the credentials. The API request needs to be [signed with AWS SigV4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html). We are going to use [Insomnia](https://insomnia.rest) to help us sign and make this request.
+
+Make sure to replace the **Access Key Id**, **Secret Access Key**, **Region**, and **Session Token** below. In our case the region is `us-east-1`. You can see this in the API URL.
+
+```
+https://aueschz6ba.execute-api.us-east-1.amazonaws.com
+```
 
 ![Invoke Google authenticated API Gateway route](/assets/examples/api-auth-google/invoke-google-authenticated-api-gateway-route.png)
 
-You shoud now see
+You should now see.
 
 ```
 Hello user!
 ```
+
+The above process might seem fairly tedious. But once we integrate it into our frontend app, we'll be able to use something like [AWS Amplify]({% link _chapters/configure-aws-amplify.md %}) to handle these steps for us.
 
 ## Making changes
 
@@ -293,13 +301,13 @@ export async function main(event) {
 }
 ```
 
-We are getting the user id from event object.
+We are getting the user id from the event object.
 
-If you head back to the `/private` endpoint.
+If you head back to Insomnia and hit the `/private` endpoint again.
 
 ![Get caller identity id in Google authenticated route](/assets/examples/api-auth-google/get-caller-identity-id-in-google-authenticated-route.png)
 
-You should see the user id. Note this matches the identity id that was generated from the earlier step.
+You should see the user id. Note, this matches the identity id that was generated from the step where we generated a set of IAM credentials.
 
 ```
 Hello us-east-1:52b11867-4633-4614-ae69-a2872f6a4429!

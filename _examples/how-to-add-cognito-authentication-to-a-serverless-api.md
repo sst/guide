@@ -92,7 +92,7 @@ GET /public
 
 By default, all routes have the authorization type `AWS_IAM`. This means the caller of the API needs to have the required IAM permissions. The first is a private endpoint. The second is a public endpoint and its authorization type is overriden to `NONE`.
 
-## Setting up the authorization
+## Setting up authentication
 
 {%change%} Add this below the `sst.Api` definition in `lib/MyStack.js`.
 
@@ -200,7 +200,9 @@ Stack dev-api-auth-cognito-my-stack
     IdentityPoolId: us-east-1:d01df859-f416-4dc2-90ac-0c6fc272d197
 ```
 
-The `ApiEndpoint` is the API we just created. Now let's try out our public route. Head over to the following in your browser. Make sure to replace the URL with your API.
+The `ApiEndpoint` is the API we just created. Make a note of the `UserPoolClientId`, `UserPoolId`, `IdentityPoolId`; we'll need them later.
+
+Now let's try out our public route. Head over to the following in your browser. Make sure to replace the URL with your API.
 
 ```
 https://12mflx0e8e.execute-api.us-east-1.amazonaws.com/public
@@ -253,7 +255,13 @@ $ npx aws-api-gateway-cli-test \
   --method='GET'
 ```
 
-Make sure to replace the options with the ones in your `sst start` output.
+Make sure to set the options with the ones in your `sst start` output.
+
+- `--user-pool-id` => `UserPoolId`
+- `--app-client-id` => `UserPoolClientId`
+- `--identity-pool-id` => `IdentityPoolId`
+- `--invoke-url` => `ApiEndpoint`
+- `--cognito-region` and `--api-gateway-region`, the region in your `sst.json`
 
 You should now see.
 
@@ -264,6 +272,8 @@ You should now see.
   data: 'Hello user!'
 }
 ```
+
+The above process might seem fairly tedious. But once we integrate it into our frontend app, we'll be able to use something like [AWS Amplify]({% link _chapters/configure-aws-amplify.md %}) to handle these steps for us.
 
 ## Making changes
 
