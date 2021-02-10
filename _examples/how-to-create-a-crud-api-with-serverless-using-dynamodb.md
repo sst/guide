@@ -56,7 +56,6 @@ An SST app is made up of two parts.
 
 ``` js
 import * as cdk from "@aws-cdk/core";
-import * as dynamodb from "@aws-cdk/aws-dynamodb";
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -66,8 +65,8 @@ export default class MyStack extends sst.Stack {
     // Create the table
     const table = new sst.Table(this, "Notes", {
       fields: {
-        userId: dynamodb.AttributeType.STRING,
-        noteId: dynamodb.AttributeType.STRING,
+        userId: sst.TableFieldType.STRING,
+        noteId: sst.TableFieldType.STRING,
       },
       primaryIndex: { partitionKey: "userId", sortKey: "noteId" },
     });
@@ -80,15 +79,6 @@ This creates a serverless DynamoDB table using [`sst.Table`](https://docs.server
 | userId | noteId | content | createdAt |
 |--------|--------|---------|-----------|
 | 123    | 1      | Hi!     | Feb 5     |
-
-{%change%} Let's add the `aws-dynamodb` dependency.
-
-``` bash
-$ npx sst add-cdk @aws-cdk/aws-dynamodb
-```
-
-The reason we are using the [**add-cdk**](https://docs.serverless-stack.com/packages/cli#add-cdk-packages) command instead of using an `npm install`, is because of [a known issue with AWS CDK](https://docs.serverless-stack.com/known-issues).
-
 
 ## Setting up our routes
 

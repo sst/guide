@@ -65,7 +65,7 @@ export default class MyStack extends sst.Stack {
     // Create the table
     const table = new sst.Table(this, "Counter", {
       fields: {
-        counter: dynamodb.AttributeType.STRING,
+        counter: sst.TableFieldType.STRING,
       },
       primaryIndex: { partitionKey: "counter" },
     });
@@ -78,14 +78,6 @@ This creates a serverless DynamoDB table using [`sst.Table`](https://docs.server
 | counter | tally |
 |---------|-------|
 | hits    | 123   |
-
-{%change%} Let's add the `aws-dynamodb` dependency.
-
-``` bash
-$ npx sst add-cdk @aws-cdk/aws-dynamodb
-```
-
-The reason we are using the [**add-cdk**](https://docs.serverless-stack.com/packages/cli#add-cdk-packages) command instead of using an `npm install`, is because of [a known issue with AWS CDK](https://docs.serverless-stack.com/known-issues).
 
 ## Setting up the API
 
