@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://discourse.serverless-stack.com"><img alt="Discourse posts" src="https://img.shields.io/discourse/https/discourse.serverless-stack.com/posts.svg?style=for-the-badge" /></a>
   <a href="https://twitter.com/Anomaly_Inv"><img alt="Twitter follow" src="https://img.shields.io/twitter/follow/anomaly_inv.svg?label=twitter&style=for-the-badge" /></a>
-  <a href="https://communityinviter.com/apps/serverless-stack/invite"><img alt="Chat on Slack" src="https://img.shields.io/badge/CHAT-ON%20SLACK-brightgreen?style=for-the-badge" /></a>
+  <a href="https://launchpass.com/serverless-stack"><img alt="Chat on Slack" src="https://img.shields.io/badge/CHAT-ON%20SLACK-brightgreen?style=for-the-badge" /></a>
 </p>
 
 ------------------------------------------------------------------------------------
@@ -120,7 +120,7 @@ Thanks to these folks for their contributions to the content of Serverless Stack
 - [Jae Chul Kim](https://github.com/bsg-bob): Translating chapters to Korean
 
 
-[Slack]: https://communityinviter.com/apps/serverless-stack/invite
+[Slack]: https://launchpass.com/serverless-stack
 [Discourse]: https://discourse.serverless-stack.com
 [Contributing]: CONTRIBUTING.md
 [PR]: ../../compare
