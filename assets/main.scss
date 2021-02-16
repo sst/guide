@@ -31,6 +31,8 @@ $grey-color-dark:             darken($grey-color, 25%);
 // Width of the content       area
 $content-width:               1280px;
 $post-content-width:          1280px;
+// Single column pages
+$page-content-width:          900px;
 
 $on-palm:                     600px;
 $on-laptop:                   800px;
@@ -48,6 +50,7 @@ $on-laptop:                   800px;
 @import "theme";
 @import "print";
 @import "lander";
+@import "example";
 
 
 
