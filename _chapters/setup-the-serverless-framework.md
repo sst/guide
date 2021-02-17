@@ -83,7 +83,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs14.x
   stage: prod
   region: us-east-1
 
