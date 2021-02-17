@@ -6,6 +6,12 @@ description: Serverless Stack is used to build all kinds of apps, from SaaS serv
 
 [Serverless Stack](/) is used to build all kinds of apps, from SaaS services to weekend projects. Here are just a few apps that our readers have built. If you'd like to share your project, just [**send us an email with a link and a short description**](mailto:{{ site.email }}?subject=Built%20with%20Serverless%20Stack). We'll be sure to share it on Twitter and with our 25K newsletter subscribers!
 
+#### [Music Home](https://getmusichome.com/)
+
+[GetMusicHome.com](https://getmusichome.com) is a way to play your own and personal music on your Alexa smart speaker. No need for extra devices like a server, bluetooth, or computer. Created by [Creative Designs Guru](https://creativedesignsguru.com).
+
+[![Music Home screenshot](/assets/showcase/music-home.png)](https://getmusichome.com/)
+
 #### [Olog](https://olog.me)
 
 [Olog](https://olog.me) is a way to share voice notes with people that are 30-seconds long; a micro-casting site. Created by [Mayowa Daniel](https://mayowa.me).
