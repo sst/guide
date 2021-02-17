@@ -68,9 +68,7 @@ To test our get note API we need to mock passing in the `noteId` parameter. We a
 
 ``` json
 {
-  "pathParameters": {
-    "id": "a63c5450-1274-11eb-81db-b9d1e2c85f15"
-  }
+  "body": "{\"pathParameters\":{\"id\":\"YOUR-NOTE-ID-HERE\"}}"
 }
 ```
 
