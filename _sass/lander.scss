@@ -33,7 +33,7 @@ $reader-logo-width: 123px;
 
   .header-wrapper {
     overflow: hidden;
-    padding-bottom: $spacing-unit + 5px;
+    padding-bottom: 1.5 * $spacing-unit;
   }
 
   & .columns {
@@ -216,7 +216,7 @@ $reader-logo-width: 123px;
 }
 
 .home > .features {
-  padding: 3.5 * $spacing-unit + 5px $spacing-unit 0;
+  padding: 3 * $spacing-unit + 10px $spacing-unit 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -316,6 +316,9 @@ $reader-logo-width: 123px;
 
         i.fa {
           color: $important-color;
+          &.fa-cubes {
+            margin-left: 1px;
+          }
         }
       }
 

@@ -69,6 +69,13 @@ layout: default
 
     </div>
 
+    {% if page.ref != 'examples-index' %}
+    <div class="other-examples">
+      <h2>More Examples</h2>
+      {% include examples-list.html %}
+    </div>
+    {% endif %}
+
     <!--
     {% include post-sponsor.html %}
     -->

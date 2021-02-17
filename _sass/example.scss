@@ -18,12 +18,21 @@ article.post.example section.examples-list {
     & > ul > li {
       font-size: 20px;
     }
+    & > ul > li i.fa {
+      top: 7px;
+      opacity: 0.8;
+      color: darken($brand-color, 15%);
+    }
+    & > ul > li span.active {
+      font-weight: 700;
+      color: $tertiary-text-color;
+    }
   }
 
   div.icon {
     $size: 48px;
 
-    margin: 1.5 * $spacing-unit 0 10px;
+    margin: 1.5 * $spacing-unit + 5px 0 10px;
     background-color: lighten($brand-color, 52%);
     width: $size;
     height: $size;
@@ -37,6 +46,21 @@ article.post.example section.examples-list {
       font-size: 22px;
       color: lighten($brand-color, 25%);
       color: white;
+    }
+  }
+}
+
+article.post.example > div.other-examples {
+  margin-top: 1.5 * $spacing-unit;
+
+  h2 {
+    padding: 1.5 * $spacing-unit 0;
+    font-size: 24px;
+    text-align: center;
+    border: {
+      width: 1px 0;
+      style: solid;
+      color: darken($background-color, 15%);
     }
   }
 }
