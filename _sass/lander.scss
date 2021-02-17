@@ -34,6 +34,10 @@ $reader-logo-width: 123px;
   .header-wrapper {
     overflow: hidden;
     padding-bottom: 1.5 * $spacing-unit;
+
+    @include media-query($on-laptop) {
+      overflow: initial;
+    }
   }
 
   & .columns {
@@ -92,6 +96,7 @@ $reader-logo-width: 123px;
 
     @include media-query($on-palm) {
       font-size: 32px;
+      letter-spacing: -1px;
     }
   }
 
@@ -223,10 +228,10 @@ $reader-logo-width: 123px;
 
   @include media-query($on-laptop) {
     display: block;
-    padding: 2.5 * $spacing-unit $spacing-unit / 2 0;
+    padding: $spacing-unit $spacing-unit / 2 0;
   }
   @include media-query($on-palm) {
-    padding: 1.5 * $spacing-unit $spacing-unit / 2 0;
+    padding: 0 $spacing-unit / 2 0;
   }
 
   .quick-start {
@@ -342,6 +347,9 @@ $reader-logo-width: 123px;
   @include media-query($on-laptop) {
     padding: 2 * $spacing-unit $spacing-unit / 2 0;
   }
+  @include media-query($on-palm) {
+    padding-top: 1.5 * $spacing-unit;
+  }
 
   .title {
     text-align: center;
@@ -356,6 +364,10 @@ $reader-logo-width: 123px;
       line-height: 1.1;
       font-size: 44px;
       font-weight: 700;
+
+      @include media-query($on-palm) {
+        font-size: 36px;
+      }
     }
     p {
       margin-bottom: 0;
@@ -468,6 +480,9 @@ $reader-logo-width: 123px;
   @include media-query($on-laptop) {
     padding: 2 * $spacing-unit $spacing-unit / 2 0;
   }
+  @include media-query($on-palm) {
+    padding-top: 1.5 * $spacing-unit;
+  }
 
   .title {
     text-align: center;
@@ -478,6 +493,10 @@ $reader-logo-width: 123px;
       line-height: 1.1;
       font-size: 44px;
       font-weight: 700;
+
+      @include media-query($on-palm) {
+        font-size: 36px;
+      }
     }
     p {
       margin-bottom: 0;
@@ -613,11 +632,6 @@ $reader-logo-width: 123px;
       display: flex;
       align-items: center;
       justify-content: center;
-
-      @include media-query($on-palm) {
-        margin: $spacing-unit / 2 0;
-        width: 140px;
-      }
 
       & img {
         width: 60px;
