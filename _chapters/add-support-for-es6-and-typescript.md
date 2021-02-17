@@ -11,7 +11,7 @@ description: AWS Lambda supports Node.js v10.x and v12.x. However, to use ES 6 f
 comments_id: add-support-for-es6-es7-javascript/128
 ---
 
-AWS Lambda supports Node.js v10.x and v12.x. However, the supported syntax is a little different when compared to the more advanced ECMAScript flavor of JavaScript that our frontend React app supports. It makes sense to use similar ES features across both parts of the project – specifically, we'll be relying on ES imports/exports in our handler functions.
+AWS Lambda supports Node.js v10.x, v12.x, and v14.x. However, the supported syntax is a little different when compared to the more advanced ECMAScript flavor of JavaScript that our frontend React app supports. It makes sense to use similar ES features across both parts of the project – specifically, we'll be relying on ES imports/exports in our handler functions.
 
 Additionally, our frontend React app automatically supports TypeScript, via [Create React App](https://create-react-app.dev). And while we are not using TypeScript in this guide, it makes sense to have a similar setup for your backend Lambda functions. So you can use it in your future projects.
 
