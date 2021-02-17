@@ -10,19 +10,17 @@
           </li>
           <li><a class="page-link" href="https://github.com/serverless-stack/identity">Brand Guide</a></li>
           <li><a class="page-link" href="{{ site.newsletter_signup_form }}">Newsletter</a></li>
-          <li><a class="page-link" href="{% link _chapters/changelog.md %}">Changelog</a></li>
-          <li><a class="page-link" href="{% link showcase.md %}">Showcase</a></li>
-          <li><a class="page-link" href="{% link sponsors.md %}">Sponsors</a></li>
           <li><a class="page-link" href="{% link about.md %}">About us</a></li>
-          <li><a class="page-link" href="{{ site.github_repo }}">GitHub</a></li>
           <li><a class="page-link" href="{{ site.forum_url }}">Forums</a></li>
+          <li><a class="page-link" href="{{ site.sst_github_repo }}">GitHub</a></li>
           <li><a class="page-link" href="{{ site.twitter_url }}">Twitter</a></li>
+          <li><a class="page-link" href="{{ site.slack_invite_url }}">Slack</a></li>
         </ul>
       </div>
 
       <div class="footer-col footer-col-2">
         <ul class="contact-list">
-          <li class="site-description">Open source guide to building full-stack apps using Serverless and React</li>
+          <li class="site-description">Helping you build full-stack serverless apps</li>
           <li class="site-author">Created by <a href="https://anoma.ly">Anomaly Innovations</a></li>
         </ul>
       </div>
@@ -34,8 +32,6 @@
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-<!-- Lander Certificate Tilt -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
 <!-- Newsletter Form JS -->
 <script src="https://emailoctopus.com/bundles/emailoctopuslist/js/formEmbed.js?1519058398"></script>
 <!-- Code Snippet Copy JS -->
@@ -80,9 +76,12 @@
   });
   /** End sidebar ToC code **/
 
-  /** Start tilt settings **/
-  $('.certificate.tilt').tilt({ reset: false, perspective: 3000 });
-  /** End tilt settings **/
+  /** Start mobile menu button **/
+  $("#mobile-menu-button").click(function(e) {
+    e.preventDefault();
+    $("header.site-header").toggleClass("expanded");
+  });
+  /** End mobile menu button **/
 
   /** Start ToC lander code **/
   $('.table-of-contents .chapters .expand').click(function() {

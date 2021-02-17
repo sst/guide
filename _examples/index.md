@@ -5,16 +5,14 @@ date: 2021-01-27 00:00:00
 lang: en
 description: A collection of example serverless apps built with Serverless Stack Toolkit (SST).
 ref: examples-index
-repo: https://github.com/serverless-stack/examples
+repo: true
 comments_id: example-apps-created-with-sst/2304
 ---
 
-A collection of example serverless apps built with [**Serverless Stack Toolkit (SST)**]({{ site.sst_github_repo }}).
+{:.page-desc}
+A collection of example serverless apps built with [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}). The [source for these examples are available on GitHub]({{ site.sst_examples_github_repo }}).
 
-{% include toc-chapters.html items=site.data.examplelist.api id="api" %}
+{:.page-desc}
+We'll be adding more examples to this list soon! If there are use cases you'd like us to cover, or would like to contribute, [open an issue]({{ site.sst_github_repo }}{{ site.github_issues_prefix }}) or [join us on Slack]({{ site.slack_invite_url }}).
 
-{% include toc-chapters.html items=site.data.examplelist.database id="database" %}
-
-{% include toc-chapters.html items=site.data.examplelist.auth id="auth" %}
-
-{% include toc-chapters.html items=site.data.examplelist.async id="async" %}
+{% include examples-list.html %}

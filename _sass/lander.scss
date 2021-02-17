@@ -2,6 +2,14 @@
  * Hero
  */
 
+$reader-logo-width: 123px;
+
+// Animation
+@keyframes scroll {
+	0% { transform: translateX(0); }
+	100% { transform: translateX(-1 * $reader-logo-width * 28); }
+}
+
 %toc-expanded {
   max-height: none;
   overflow: visible;
@@ -12,43 +20,74 @@
 }
 
 .home .lander-header {
-  padding: 2 * $spacing-unit 0;
+  $video-width: 560px;
+  $video-padding: 2 * $spacing-unit;
+  $padding-left: $spacing-unit;
 
-  @include media-query($on-palm) {
-    padding: $spacing-unit 0;
+  position: relative;
+  padding: 2.5 * $spacing-unit 0 0;
+
+  @include media-query($on-laptop) {
+    padding: $spacing-unit 0 0;
+  }
+
+  .header-wrapper {
+    overflow: hidden;
+    padding-bottom: 1.5 * $spacing-unit;
   }
 
   & .columns {
+    margin: 0 auto;
+    max-width: $content-width;
     display: flex;
     align-items: center;
 
-    @include media-query($on-palm) {
-      display: block;
-
-      .col1 { text-align: center; }
-      .col2 { display: none; }
-    }
-
     .col1 {
-      margin-top: -10px;
-      flex: 1 1 55%;
+      padding-left: $padding-left;
+      box-sizing: border-box;
+      max-width: $content-width - $video-width - $video-padding - $padding-left;
+      flex: 0 0 50%;
     }
 
     .col2 {
-      flex: 1 1 45%;
-      // Bug in Safari
-      // Need to keep the search dropdown from being overlapped
-      // https://stackoverflow.com/a/18167565/3369702
-      -webkit-transform: translateZ(-1px);
+      flex: 0 0 50%;
+      position: relative;
+      box-sizing: border-box;
+      padding-left: $video-padding
+    }
+
+    @include media-query($on-laptop) {
+      display: block;
+
+      .col1 {
+        text-align: center;
+        max-width: none;
+        padding-right: $spacing-unit;
+
+        .site-description {
+          max-width: none;
+        }
+      }
+      .col2 {
+        padding: 2 * $spacing-unit 0 0;
+        text-align: center;
+      }
+    }
+    @include media-query($on-palm) {
+      .col2 {
+        padding: $spacing-unit $spacing-unit / 2 0;
+      }
     }
   }
 
   .site-description {
     margin: 0;
     padding: 0;
+    font-weight: 700;
     line-height: 1.35;
     max-width: 560px;
-    font-size: 48px;
+    font-size: 46px;
+    letter-spacing: -2px;
     color: $text-color;
 
     @include media-query($on-palm) {
@@ -86,7 +125,7 @@
       text-transform: uppercase;
       font-family: $base-font-family;
       display: inline-block;
-      font-size: 14px;
+      font-size: 18px;
       font-weight: 700;
       letter-spacing: 1px;
 
@@ -101,6 +140,11 @@
         margin-right: $spacing-unit / 2;
         background-color: $brand-color;
 
+        i.fa {
+          margin-right: 2px;
+          vertical-align: -1px;
+        }
+
         @include media-query($on-palm) {
           margin-right: auto;
           margin-bottom: 10px;
@@ -111,6 +155,10 @@
       }
       &:last-child {
         background-color: $important-color;
+
+        i.fa {
+          margin-left: 1px;
+        }
       }
       &:last-child:hover {
         background-color: lighten($important-color, 7%);
@@ -119,119 +167,394 @@
 
   }
 
-  .certificate {
-    $title-color: #65647D;
-    $border-color: #C2873F;
-
-    margin: 0 auto;
-    width: 350px;
-    height: 450px;
-    padding: 10px;
-    box-sizing: border-box;
-    border-radius: 2px;
-    background-color: #FDFDFB;
+  .video-wrapper {
     position: relative;
-    transform-style: preserve-3d;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+    width: $video-width;
+    height: 315px;
 
-    .wreath {
-      $size: 200px;
+    @include media-query($on-laptop) {
+      margin: 0 auto;
+    }
 
+    @include media-query($on-palm) {
+      padding-bottom: 56.25%; /* 16:9 */
+      padding-top: 25px;
+      width: 100%;
+      height: 0;
+
+      .coaster {
+        display: none;
+      }
+    }
+
+    iframe {
       position: absolute;
-      top: 60%;
-      left: 50%;
-      opacity: 0.025;
-      margin-top: - $size / 2;
-      margin-left: - $size / 2;
-      width: $size;
-      height: $size;
-      background: transparent url(/assets/lander/laurel-wreath.svg) no-repeat center;
-      background-size: $size auto;
-    }
-
-    .border {
-      box-sizing: border-box;
+      top: 0;
+      left: 0;
+      width: 100%;
       height: 100%;
-      border: 4px solid $border-color;
+      overflow: hidden;
+      border-radius: 4px;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.11),
+              0 1px 2px rgba(0,0,0,0.09),
+              0 2px 4px rgba(0,0,0,0.07),
+              0 3px 6px rgba(0,0,0,0.05);
     }
 
-    .title {
-      text-transform: uppercase;
-      text-align: center;
-      letter-spacing: 1px;
-      font-size: 14px;
-      padding-top: $spacing-unit;
-      font-family: $heading-font-family;
-      color: lighten($title-color, 10%);
+    .coaster {
+      position: absolute;
+      left: -29px;
+      top: 3px;
+      z-index: -1;
+      width: 110%;
+      height: 109%;
+      border-radius: 20px;
+      transform: rotate(-3deg) scale(1, 1) skew(0deg, -1deg);
+      background-image: linear-gradient(to top left, rgba(57, 92, 107, 0.09), rgba(57, 92, 107, 0.03));
+    }
+  }
+}
+
+.home > .features {
+  padding: 3 * $spacing-unit + 10px $spacing-unit 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include media-query($on-laptop) {
+    display: block;
+    padding: 2.5 * $spacing-unit $spacing-unit / 2 0;
+  }
+  @include media-query($on-palm) {
+    padding: 1.5 * $spacing-unit $spacing-unit / 2 0;
+  }
+
+  .quick-start {
+    background-color: darken($brand-color, 20%);
+    border-radius: 8px;
+    box-shadow:
+      0 0px 2px   rgba(22, 35, 40, 0.11), 
+      0 0px 4px   rgba(22, 35, 40, 0.11), 
+      0 0px 8px   rgba(22, 35, 40, 0.17), 
+      0 4px 16px  rgba(22, 35, 40, 0.17),
+      0 12px 32px rgba(22, 35, 40, 0.17), 
+      0 28px 64px rgba(22, 35, 40, 0.17);
+
+    @include media-query($on-laptop) {
+      margin: 0 auto;
+      max-width: 480px;
     }
 
-    .separator {
-      margin: $spacing-unit - 5px 80px;
-      border-top: 2px solid $border-color;
+    .navbar {
+      padding: $spacing-unit / 2 + 5px $spacing-unit / 2 + 5px 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      .button {
+        margin-right: 8px;
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+
+        &:nth-child(1) { background-color: #FC605B; }
+        &:nth-child(2) { background-color: #FDBC40; }
+        &:nth-child(3) { background-color: #33C748; }
+      }
     }
 
-    ul {
-      list-style: none;
-      margin-left: 22px;
+    .code-block {
+      padding: $spacing-unit / 2 + 3px $spacing-unit - 10px $spacing-unit - 10px;
+      font-family: $code-font-family;
+      color: white;
+      font-size: 18px;
 
-      li {
-        margin-top: 62px;
+      .token-line {
+        color: rgb(191, 199, 213);
+
+        .dim { color: rgb(114,124,134); }
+        .plain { color: rgb(232,235,240); }
+        .option { color: rgb(130, 170, 255); }
+        .keyword { color: rgb(255, 203, 107); }
+      }
+    }
+  }
+
+  .list {
+    margin-left: 3.5 * $spacing-unit;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    @include media-query($on-laptop) {
+      margin: 1.5 * $spacing-unit auto 0;
+    }
+
+    .feature {
+      margin-bottom: 2 * $spacing-unit - 5px;
+
+      @include media-query($on-palm) {
+        margin-bottom: $spacing-unit;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .icon {
+        $size: 42px;
+
+        margin-bottom: 10px;
+        width: $size;
+        height: $size;
+        border-radius: 50%;
+        background-color: lighten($important-color, 30%);
+        line-height: $size;
+        text-align: center;
+
+        i.fa {
+          color: $important-color;
+          &.fa-cubes {
+            margin-left: 1px;
+          }
+        }
+      }
+
+      h4 {
+        margin-bottom: 3px;
+        font-weight: 700;
+        font-size: 20px;
+      }
+      p {
+        margin-bottom: 0;
         font-size: 18px;
         color: $secondary-text-color;
+      }
+    }
+  }
+}
 
-        span {
-          $size: 24px;
+.home > .examples {
+  padding: 4.5 * $spacing-unit $spacing-unit 0;
 
+  @include media-query($on-laptop) {
+    padding: 2 * $spacing-unit $spacing-unit / 2 0;
+  }
+
+  .title {
+    text-align: center;
+    margin-bottom: 2 * $spacing-unit;
+
+    @include media-query($on-laptop) {
+      margin-bottom: $spacing-unit;
+    }
+
+    h2 {
+      margin-bottom: 5px;
+      line-height: 1.1;
+      font-size: 44px;
+      font-weight: 700;
+    }
+    p {
+      margin-bottom: 0;
+      color: $tertiary-text-color;
+
+      a.more {
+        padding-top: 5px;
+        display: inline-block;
+
+        i.fa {
+          margin-left: 1px;
+          vertical-align: -1px;
+        }
+      }
+    }
+  }
+
+  ul {
+    margin: - $spacing-unit / 2;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+    @include media-query($on-palm) {
+      margin: 0;
+    }
+
+    li {
+      list-style: none;
+      margin: $spacing-unit / 2;
+
+      a {
+        padding: $spacing-unit / 2;
+        color: $text-color;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: white;
+        width: 170px;
+        height: 250px;
+        border-radius: 4px;
+        text-align: center;
+        transition: box-shadow ease-in-out .2s, transform ease-in-out .2s;
+        box-shadow:
+          0 8px 12px 0 rgba(0, 0, 0, 0.02),
+          0 6px 8px 0 rgba(0, 0, 0, 0.02),
+          0 4px 6px 0 rgba(0, 0, 0, 0.02),
+          0 0px 4px 0 rgba(0, 0, 0, 0.02),
+          0 1px 2px 0 rgba(0, 0, 0, 0.02);
+
+        &:hover {
+          transform: translateY(-3px);
+          box-shadow:
+            0 18px 24px -6px rgba(0, 0, 0, 0.06),
+            0 14px 20px -5px rgba(0, 0, 0, 0.06),
+            0 10px 16px -4px rgba(0, 0, 0, 0.05),
+            0 6px 12px -3px rgba(0, 0, 0, 0.04);
+        }
+
+        &:active {
+          transform: translateY(0);
+          box-shadow:
+            0 6px 8px 0 rgba(0, 0, 0, 0.05),
+            0 4px 6px 0 rgba(0, 0, 0, 0.04),
+            0 2px 4px 0 rgba(0, 0, 0, 0.03),
+            0 1px 2px 0 rgba(0, 0, 0, 0.02);
+        }
+
+        h4 {
+          margin-top: $spacing-unit / 2;
+          margin-bottom: 0;
+          font-size: 20px;
+          font-weight: 700;
+        }
+
+        p {
+          margin-bottom: 0;
+          font-size: 15px;
+          color: $secondary-text-color;
+        }
+
+        div.icon {
+          $size: 48px;
+
+          margin: 10px auto 0;
+          background-color: lighten($brand-color, 52%);
           width: $size;
           height: $size;
-          line-height: $size;
-          margin-right: 6px;
-          vertical-align: -1px;
-          display: inline-block;
-          border-radius: $size / 2;
-          background-color: lighten($title-color, 10%);
+          border-radius: 6px;
           text-align: center;
+          box-shadow: 0 1px 11px -2px rgba(226, 113, 82, 0.55);
+          background-image: linear-gradient(to left bottom, $important-color, #ca6083, #8f659b, #51658e, $brand-color);
 
           i.fa {
-            font-size: 12px;
-            vertical-align: 1px;
-
-            &.fa-pencil {
-              vertical-align: 3px;
-            }
+            line-height: $size;
+            font-size: 22px;
+            color: lighten($brand-color, 25%);
+            color: white;
           }
         }
       }
     }
+  }
+}
 
-    .wreath {
-      transform: translateZ(10px);
+.home > .guide {
+  padding: 4.5 * $spacing-unit 0 0;
+
+  @include media-query($on-laptop) {
+    padding: 2 * $spacing-unit $spacing-unit / 2 0;
+  }
+
+  .title {
+    text-align: center;
+    margin-bottom: 5px;
+
+    h2 {
+      margin-bottom: 5px;
+      line-height: 1.1;
+      font-size: 44px;
+      font-weight: 700;
     }
-
-    ul,
-    .title {
-      transform: translateZ(15px);
+    p {
+      margin-bottom: 0;
+      color: $tertiary-text-color;
     }
   }
 
+  .form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    form {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+
+      .email-octopus-form-row {
+        margin: 0;
+      }
+
+      input {
+        margin: 0;
+        padding: 10px;
+        width: 280px;
+        font-size: 20px;
+        height: auto;
+        @extend %newsletter-input;
+
+        @include media-query($on-palm) {
+          width: 164px;
+          font-size: 16px;
+        }
+      }
+
+      .email-octopus-form-row-subscribe {
+        margin-top: 0;
+        margin-left: 10px;
+      }
+
+      button {
+        margin: 0;
+        padding: 19px 22px;
+        font-size: 18px;
+        text-transform: uppercase;
+        font-family: $base-font-family;
+        display: inline-block;
+        letter-spacing: 1px;
+        background-color: $important-color;
+        color: white;
+        border-radius: 4px;
+        line-height: 1;
+        transition: 0.3s;
+        cursor: pointer;
+
+        @include media-query($on-palm) {
+          padding: 17px 16px 18px;
+          font-size: 14px;
+        }
+
+        &:hover {
+          background-color: lighten($important-color, 7%);
+        }
+      }
+    }
+  }
 }
 
 /**
  * Readers Logos
  */
 .home .readers {
-  padding-top: $spacing-unit;
-  background-color: $secondary-background-color;
-
-  @include media-query($on-palm) {
-    padding-top: $spacing-unit / 2;
-  }
-
   .readers-desc {
-    margin-bottom: $spacing-unit - 5px;
-    font-size: 22px;
+    margin-top: 4px;
     text-align: center;
-    color: $secondary-text-color;
+    color: $tertiary-text-color;
 
     @include media-query($on-palm) {
       margin-bottom: $spacing-unit / 2;
@@ -240,19 +563,51 @@
     }
   }
 
+  .readers-list {
+    margin: 2 * $spacing-unit auto 0;
+    position: relative;
+    max-width: calc(#{$post-content-width} - (#{$spacing-unit} * 2));
+
+    @include media-query($on-palm) {
+      margin-top: $spacing-unit / 2;
+    }
+
+    .scroll-content {
+      overflow: hidden;
+    }
+    .scroll-shadow {
+      width: 200px;
+      height: 100%;
+      position: absolute;
+      opacity: 1;
+      top: 0;
+      transition: opacity .15s linear;
+      pointer-events: none;
+    }
+    .scroll-shadow.left {
+      left: 0;
+      background-image: linear-gradient(to left, rgba(255, 251, 249, 0), rgba(255, 251, 249, 1));
+    }
+    .scroll-shadow.right {
+      right: 0;
+      background-image: linear-gradient(to right, rgba(255, 251, 249, 0), rgba(255, 251, 249, 1));
+    }
+  }
+
   ul.logos {
     margin-left: 0;
     margin-bottom: 0;
     display: flex;
     flex-wrap: nowrap;
-    overflow-x: scroll;
     justify-content: flex-start;
-    box-shadow: inset 0 3px 3px -3px rgba(0, 0, 0, 0.4);
+
+    width: $reader-logo-width * 28 * 2;
+    animation: scroll 120s linear infinite;
 
     li {
       list-style-type: none;
-      width: 185px;
-      height: 100px;
+      width: $reader-logo-width;
+      height: 67px;
       flex-shrink: 0;
       margin: 10px 0;
       display: flex;
@@ -265,16 +620,23 @@
       }
 
       & img {
-        width: 90px;
+        width: 60px;
         height: auto;
         filter: grayscale(100%);
         &:hover {
           filter: none;
         }
       }
-      &.tall img {
+      &.m-w img {
+        width: 90px;
+      }
+      &.t img {
         width: auto;
-        height: 35px;
+        height: 30px;
+      }
+      &.m-t img {
+        width: auto;
+        height: 43px;
       }
     }
   }
@@ -376,65 +738,20 @@
 }
 
 /**
- * Newsletter form
- */
-.home .extras {
-  @extend %extras-section;
-  margin: 0 auto;
-  padding-top: $spacing-unit;
-  max-width: 720px;
-  position: relative;
-
-  @include media-query($on-palm) {
-    padding: $spacing-unit $spacing-unit / 2 0;
-  }
-
-  & > .divider {
-    top: 0;
-    left: 50%;
-    width: 1px;
-    margin-left: -2px;
-    height: $spacing-unit;
-    position: absolute;
-    border-right: 1px solid darken($background-color, 35%);
-
-    @include media-query($on-palm) {
-      border: none;
-    }
-  }
-}
-
-/**
  * Table of Contents
  */
 .home .table-of-contents {
 
-  margin-top: 2 * $spacing-unit;
-  border-top: 3px solid darken($background-color, 8%);
+  margin-top: 1.5 * $spacing-unit;
 
   @include media-query($on-palm) {
-    margin-top: 1.5 * $spacing-unit;
-  }
-
-  & > .header {
-    border-bottom: 3px solid darken($background-color, 8%);
-    h6 {
-      margin: 0;
-      padding: $spacing-unit / 2 0;
-      font-size: 48px;
-      font-weight: 500;
-      text-align: center;
-
-      @include media-query($on-palm) {
-        font-size: 36px;
-      }
-    }
+    margin-top: $spacing-unit / 2;
   }
 
   & > .wrapper {
     display: flex;
 
-    @include media-query($on-palm) {
+    @include media-query($on-laptop) {
       display: block;
     }
 
@@ -446,7 +763,7 @@
       margin-left: $spacing-unit;
       flex: 1 1 50%;
 
-      @include media-query($on-palm) {
+      @include media-query($on-laptop) {
         margin-left: 0;
       }
     }
@@ -455,11 +772,7 @@
   div.part {
 
     .header {
-      margin: $spacing-unit + 10px $spacing-unit / 2 $spacing-unit / 2;
-
-      @include media-query($on-palm) {
-        margin: $spacing-unit / 2 0;
-      }
+      margin: 0 $spacing-unit / 2 $spacing-unit / 2;
 
       h3 {
         margin-bottom: 5px;
@@ -467,7 +780,7 @@
         font-weight: 500;
         text-align: center;
 
-        @include media-query($on-palm) {
+        @include media-query($on-laptop) {
           font-size: 26px;
         }
       }
@@ -475,6 +788,15 @@
         margin: 0;
         text-align: center;
         color: $secondary-text-color;
+      }
+
+      @include media-query($on-laptop) {
+        &.best-practices {
+          margin-top: $spacing-unit + 10px;
+        }
+      }
+      &.extra-credit {
+        margin-top: $spacing-unit + 10px;
       }
     }
 
@@ -490,7 +812,7 @@
       overflow: hidden;
       position: relative;
 
-      @include media-query($on-palm) {
+      @include media-query($on-laptop) {
         padding-bottom: 10px;
         max-height: 1.5 * $max-height;
       }
@@ -498,7 +820,7 @@
       div.toc-section {
         padding: $spacing-unit 0 0;
 
-        @include media-query($on-palm) {
+        @include media-query($on-laptop) {
           padding-top: $spacing-unit / 2;
         }
 
@@ -511,7 +833,7 @@
           color: $tertiary-text-color;
           font-size: 18px;
 
-          @include media-query($on-palm) {
+          @include media-query($on-laptop) {
             padding: 0 $spacing-unit / 2;
           }
         }
@@ -529,7 +851,7 @@
           margin: 0;
           padding: $spacing-unit / 2 $spacing-unit 0;
 
-          @include media-query($on-palm) {
+          @include media-query($on-laptop) {
             padding: $spacing-unit / 2 $spacing-unit / 2 0;
           }
 
@@ -542,7 +864,7 @@
       &.the-basics {
         max-height: 2083px;
 
-        @include media-query($on-palm) {
+        @include media-query($on-laptop) {
           max-height: 1.5 * $max-height;
         }
       }
@@ -559,7 +881,7 @@
       &.best-practices {
         @extend %toc-expanded;
 
-        @include media-query($on-palm) {
+        @include media-query($on-laptop) {
           max-height: 1.5 * $max-height;
           overflow: hidden;
 
@@ -622,50 +944,95 @@
  * Testimonials
  */
 .home .testimonials {
-  margin-top: 3.5 * $spacing-unit;
-  background-color: $secondary-background-color;
+  margin: 1.5 * $spacing-unit + 10px auto 0;
   position: relative;
+  max-width: $post-content-width;
 
-  @include media-query($on-palm) {
-    margin-top: 2.5 * $spacing-unit;
+  @include media-query($on-laptop) {
+    margin-top: $spacing-unit;
   }
 
   .desc {
-    top: -40px;
-    left: 0;
-    width: 100%;
-    position: absolute;
-    font-size: 48px;
+    margin-bottom: 0;
+    position: relative;
     text-align: center;
-    color: $secondary-text-color;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
-    @include media-query($on-palm) {
-      top: -32px;
-      font-size: 42px;
+    span {
+      padding: 0 $spacing-unit - 10px;
+      font-size: 48px;
+      color: $secondary-text-color;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      background-color: $background-color;
+    }
+    div {
+      $width: 600px;
+
+      margin: 0 auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      max-width: $width;
+      width: 100%;
+      z-index: -1;
+      margin-top: -1px;
+      margin-left: - $width / 2;
+      border-top: 1px solid darken($background-color, 15%);
+
+      @include media-query($on-laptop) {
+        left: auto;
+        margin-left: 0;
+        max-width: 100%;
+      }
+    }
+  }
+
+  .scroll-content {
+    position: relative;
+    overflow: hidden;
+
+    .scroll-shadow {
+      width: 1.5 * $spacing-unit;
+      height: 100%;
+      position: absolute;
+      opacity: 1;
+      top: 0;
+      transition: opacity .15s linear;
+      pointer-events: none;
+    }
+    .scroll-shadow.left {
+      left: 0;
+      background-image: linear-gradient(to left, rgba(255, 251, 249, 0), rgba(255, 251, 249, 1));
+    }
+    .scroll-shadow.right {
+      right: 0;
+      background-image: linear-gradient(to right, rgba(255, 251, 249, 0), rgba(255, 251, 249, 1));
     }
   }
 
   .tweets {
-    margin-left: 0;
-    margin-bottom: 0;
-    padding: 2 * $spacing-unit 0 $spacing-unit;
+    padding: 1.5 * $spacing-unit 0 1.5 * $spacing-unit + 3px;
     display: flex;
     flex-wrap: nowrap;
     overflow-x: scroll;
     justify-content: flex-start;
     align-items: flex-start;
-    box-shadow: inset 0 3px 3px -3px rgba(0, 0, 0, 0.3);
 
-    @include media-query($on-palm) {
-      padding: 1.5 * $spacing-unit 0 $spacing-unit / 2;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar { 
+      display: none;
+    }
+
+    @include media-query($on-laptop) {
+      padding: $spacing-unit 0;
     }
   }
 
   .tweet {
     $color: #1DA1F2;
 
-    margin-left: $spacing-unit / 2;
+    margin-left: $spacing-unit;
     padding: $spacing-unit / 2;
     box-sizing: border-box;
     background-color: white;
@@ -772,5 +1139,9 @@
       position: absolute;
       z-index: 0;
     }
+  }
+  .spacer {
+    height: 100px;
+    flex: 0 0 $spacing-unit;
   }
 }

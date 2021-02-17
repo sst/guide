@@ -16,8 +16,7 @@
 title: Serverless Stack
 email: contact@anoma.ly
 description: > # this means to ignore newlines until "baseurl:"
-  Building a Full-Stack App
-  with Serverless and React
+  Helping you build full-stack serverless apps
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://serverless-stack.com" # the base hostname & protocol for your site, e.g. http://example.com
 logo: /assets/og-image.jpg
@@ -27,7 +26,6 @@ github_edit_prefix: "/edit/master/"
 github_history_prefix: "/commits/master/"
 github_issues_prefix: "/issues/"
 
-sst_github_repo: "https://github.com/serverless-stack/serverless-stack"
 backend_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-demo-api"
 frontend_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-demo-client"
 frontend_fb_login_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-demo-fb-login-client"
@@ -35,12 +33,16 @@ frontend_user_mgmt_github_repo: "https://github.com/AnomalyInnovations/serverles
 backend_ext_api_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-demo-ext-api"
 backend_ext_resources_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-demo-ext-resources"
 
+sst_github_repo: "https://github.com/serverless-stack/serverless-stack"
+sst_examples_github_repo: "https://github.com/serverless-stack/examples"
+
 newsletter_signup_form: "https://emailoctopus.com/lists/1c11b9a8-1500-11e8-a3c9-06b79b628af2/forms/subscribe"
 
 survey_url: "https://serverless-stack.typeform.com/to/xiPdCW"
 
 google_analytics: "UA-3536629-11"
 
+docs_url: "https://docs.serverless-stack.com"
 forum_url: "https://discourse.serverless-stack.com"
 forum_thread_prefix: "/t/"
 patreon_url: "https://www.patreon.com/serverless_stack"

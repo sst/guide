@@ -1,20 +1,29 @@
 <div class="testimonials">
-  <p class="desc">❤️</p>
-
-  <div class="tweets">
-    {% for tweet in site.data.testimonials.tweets %}
-      <div class="tweet">
-        <i class="fa fa-twitter" aria-hidden="true"></i>
-        <div class="author">
-          <img src="/assets/lander/testimonials/{{ tweet.username }}.jpg" />
-          <div>
-            <p>{{ tweet.name }}</p>
-            <p>@{{ tweet.username }}</p>
-          </div>
-        </div>
-        <div class="content">{{ tweet.content }}</div>
-        <a class="tweet-link" target="_blank" href="{{ tweet.link }}"></a>
-      </div>
-    {% endfor %}
+  <div class="desc">
+    <div></div>
+    <span>❤️</span>
   </div>
+
+  <div class="scroll-content">
+    <div class="tweets">
+      {% for tweet in site.data.testimonials.tweets %}
+        <div class="tweet">
+          <i class="fa fa-twitter" aria-hidden="true"></i>
+          <div class="author">
+            <img src="/assets/lander/testimonials/{{ tweet.username }}.jpg" />
+            <div>
+              <p>{{ tweet.name }}</p>
+              <p>@{{ tweet.username }}</p>
+            </div>
+          </div>
+          <div class="content">{{ tweet.content }}</div>
+          <a class="tweet-link" target="_blank" href="{{ tweet.link }}"></a>
+        </div>
+      {% endfor %}
+      <div class="spacer"></div>
+    </div>
+    <div class="scroll-shadow left"></div>
+    <div class="scroll-shadow right"></div>
+  </div>
+
 </div>

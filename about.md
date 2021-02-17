@@ -4,16 +4,12 @@ title: About Us
 description: Serverless Stack is an open source guide brought to you by Frank (@fanjiewang) and Jay (@jayair) from Anomaly Innovations.
 ---
 
-[Serverless Stack](/) is an open source guide to building and deploying full-stack production ready serverless applications using Serverless and React. It's completely free and the content is hosted on [GitHub]({{ site.github_repo }}).
+[Serverless Stack (SST)](/) is a framework that makes it easy to build full-stack serverless applications. SST features a Live Lambda Development environment that allows you to work on your Lambda functions live. Without having to mock or redeploy your changes.
 
-Serverless Stack was launched in March 2017 with a simple goal of creating the most comprehensive resource for building full-stack serverless applications. It is the way we have built our applications and we wanted to share our learnings with the world. Over the past year we have seen our readers use the stack to build their projects and to power their businesses. Most folks don't just complete the tutorial, they use it to build something significant. [Here is just a small sample of what folks have built with Serverless Stack]({% link showcase.md %}). It has had an impact far greater than we could have imagined. This has also shown in terms of the traffic to the site.
+Serverless Stack was originally launched in March 2017 as an open source guide for building full-stack serverless apps. Over the years tens of thousands of folks have used the guide to build their projects and businesses. [Here is just a small sample of what folks have built with Serverless Stack]({% link showcase.md %}). It has had an impact far greater than we could've imagined.
 
-![Serverless Stack Traffic Graph screenshot](/assets/serverless-stack-traffic-graph.png)
+Over the years we realized that the local development experience for serverless really needed to be improved. There needed to be a better way to build and test your Lambda functions locally. So we created [SST]({{ site.sst_github_repo }}).
 
-Today Serverless Stack is read by thousands of people every single day and tens of thousands every month. We also have over twenty thousand people on our mailing list. And these numbers continue to rise.
+Our goal is to make it easy to build serverless apps. [And we'd like you to join our community on Slack]({{ site.slack_invite_url }}).
 
-By making this guide open source we hope to keep it up to date and accurate with the help of our readers. We also rely on our community to help people resolve their issues and help extend the tutorial to serve other use cases. You can join our community in our forums - [{{ site.forum_url }}]({{ site.forum_url }}).
-
-Serverless Stack is written and maintained mainly by Frank Wang ([@fanjiewang](https://twitter.com/fanjiewang)) & Jay V ([@jayair](https://twitter.com/jayair)) from [Anomaly Innovations](https://anoma.ly).
-
-<a class="button support" target="_blank" href="{{ site.github_sponsor_url }}">Sponsor us on GitHub</a>
+Serverless Stack is maintained mainly by Frank ([@fanjiewang](https://twitter.com/fanjiewang)) & Jay ([@jayair](https://twitter.com/jayair)) from [Anomaly Innovations](https://anoma.ly).

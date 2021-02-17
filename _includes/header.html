@@ -4,17 +4,38 @@
   <div class="content">
 
     <div class="col1">
-      <a class="site-title" href="{{ "/" | relative_url}}">
-        <img alt="{{ site.title | escape }}" src="/assets/lander/logo/sst-animation-svg0.svg" height="48" />
-        <img alt="{{ site.title | escape }}" src="/assets/lander/logo/sst-animation-svg1.svg" height="48" />
-        <img alt="{{ site.title | escape }}" src="/assets/lander/logo/sst-animation-svg2.svg" height="48" />
-        <img alt="{{ site.title | escape }}" src="/assets/lander/logo/sst-animation-svg3.svg" height="48" />
-      </a>
-
-      {% include social-buttons.html %}
+      <span class="menu-header">
+        <a class="site-title" href="{{ "/" | relative_url}}">
+          <img alt="{{ site.title | escape }}" src="/assets/lander/logo/sst-animation-svg0.svg" height="54" />
+          <img alt="{{ site.title | escape }}" src="/assets/lander/logo/sst-animation-svg1.svg" height="54" />
+          <img alt="{{ site.title | escape }}" src="/assets/lander/logo/sst-animation-svg2.svg" height="54" />
+          <img alt="{{ site.title | escape }}" src="/assets/lander/logo/sst-animation-svg3.svg" height="54" />
+        </a>
+        <a id="mobile-menu-button" class="menu-button" href="#">
+          <i class="fa fa-caret-down" aria-hidden="true"></i>
+          <i class="fa fa-caret-up" aria-hidden="true"></i>
+        </a>
+      </span>
+      <a class="links" href="{{ site.docs_url }}">Docs</a>
+      <a class="links" href="/#guide">Guide</a>
+      <a class="links" href="{% link _examples/index.md %}">Examples</a>
     </div>
 
     <div class="col2">
+      <div class="social">
+        <a title="GitHub" href="{{ site.sst_github_repo }}">
+          <i class="fa fa-github" aria-hidden="true"></i>
+        </a>
+        <a title="Slack" href="{{ site.slack_invite_url }}">
+          <img src="/assets/lander/slack-mark-black.svg" />
+        </a>
+        <a title="Twitter" href="{{ site.twitter_url }}">
+          <i class="fa fa-twitter" aria-hidden="true"></i>
+        </a>
+        <a title="Forums" href="{{ site.forum_url }}">
+          <i class="fa fa-comments" aria-hidden="true"></i>
+        </a>
+      </div>
       {% include search-field.html %}
     </div>
 

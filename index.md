@@ -1,11 +1,9 @@
 ---
 layout: lander
-description: Free step-by-step tutorials for creating full-stack apps with Serverless Framework and React.js. Build a Serverless REST API with our Serverless tutorial and connect it to a React single-page application with our React.js tutorial. Use our AWS tutorial with screenshots to deploy your full-stack app.
+description: "Serverless Stack (SST) is a framework that makes it easy to build serverless applications. Check out our examples to get started. Or follow our step-by-step tutorials for creating full-stack apps with serverless and React.js on AWS. Build a serverless REST API with our Serverless tutorial and connect it to a React single-page application with our React.js tutorial."
 ---
 
 <div id="table-of-contents" class="table-of-contents">
-
-  <div class="header"><h6>Table of Contents</h6></div>
 
   <div class="wrapper">
 
@@ -48,7 +46,7 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
 
     <div class="col2">
       <div class="part">
-        <div id="best-practices" class="header">
+        <div id="best-practices" class="header best-practices">
           <h3>Best Practices</h3>
           <p>The best practices for running Serverless apps in production.</p>
         </div>
@@ -64,7 +62,7 @@ description: Free step-by-step tutorials for creating full-stack apps with Serve
       </div>
 
       <div class="part">
-        <div id="extra-credit" class="header">
+        <div id="extra-credit" class="header extra-credit">
           <h3>Extra Credit</h3>
           <p>Standalone chapters on specific topics for reference.</p>
         </div>

@@ -1,85 +1,92 @@
 ---
 layout: default
 ---
-<div class="wrapper wrapper-post">
-  <div class="post-container">
+<div class="wrapper wrapper-single-col">
+  <article class="post example">
 
-    <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">{{ page.title | escape }}</h1>
 
-      <header class="post-header">
-        <h1 class="post-title">{{ page.title | escape }}</h1>
+      <div class="post-info">
 
-        <div class="post-info">
+        <a target="_blank" href="{{ site.github_repo }}{{ site.github_edit_prefix }}{{ page.path }}">Edit this page</a>
+        <span class="separator">&nbsp;&bull;&nbsp;</span>
+        <a target="_blank" href="{{ site.github_repo }}{{ site.github_history_prefix }}{{ page.path }}">View history</a>
 
-          <a target="_blank" href="{{ site.github_repo }}{{ site.github_edit_prefix }}{{ page.path }}">Edit this page</a>
-          <span class="separator">&nbsp;&bull;&nbsp;</span>
-          <a target="_blank" href="{{ site.github_repo }}{{ site.github_history_prefix }}{{ page.path }}">View history</a>
-
-          {% if page.ref %}
-            {% assign pages = site.examples | where:"ref", page.ref | sort: 'lang' %}
-            {% if pages[1] %}
-              <span class="separator">&nbsp;&bull;&nbsp;</span>
-              <span class="copy">View this page in: </span>
-              {% for other in pages %}
-                {% if other.lang == "en" %}
-                  {% assign page_en_url = other.url %}
-                {% endif %}
-                {% if other.lang != page.lang %}
-                  <a class="lang {{ other.lang }}" href="{{ other.url }}" class="{{ other.lang }}">
-                    {{ site.data.languages[other.lang] }}
-                  </a>
-                {% endif %}
-              {% endfor %}
-            {% endif %}
+        {% if page.ref %}
+          {% assign pages = site.examples | where:"ref", page.ref | sort: 'lang' %}
+          {% if pages[1] %}
+            <span class="separator">&nbsp;&bull;&nbsp;</span>
+            <span class="copy">View this page in: </span>
+            {% for other in pages %}
+              {% if other.lang == "en" %}
+                {% assign page_en_url = other.url %}
+              {% endif %}
+              {% if other.lang != page.lang %}
+                <a class="lang {{ other.lang }}" href="{{ other.url }}" class="{{ other.lang }}">
+                  {{ site.data.languages[other.lang] }}
+                </a>
+              {% endif %}
+            {% endfor %}
           {% endif %}
-
-        </div>
-
-        {% if page.bio %}
-        <div class="post-author">
-          This chapter is contributed by: {{ page.bio }}
-        </div>
         {% endif %}
 
-      </header>
-
-      <div class="post-content">
-        {{ content }}
       </div>
 
-      <div class="post-links">
-
-        {% if page.repo %}
-        <p>Example repo for reference</p>
-        <a target="_blank" href="{{ page.repo }}">
-          <i class="fa fa-github" aria-hidden="true"></i>
-          {{ page.repo | replace: "https://", "" }}
-        </a>
-        {% endif %}
-
-        <p class="comments">For help and discussion</p>
-        <a target="_blank" href="{{ site.forum_url }}{{ site.forum_thread_prefix }}{{ page.comments_id }}">
-          <i class="fa fa-comments" aria-hidden="true"></i>
-          Comments on this example
-        </a>
-
+      {% if page.bio %}
+      <div class="post-author">
+        This chapter is contributed by: {{ page.bio }}
       </div>
+      {% endif %}
 
-      <!--
-      {% include post-sponsor.html %}
-      -->
+    </header>
 
-      <div class="extras">
-        <div class="container">
-          <div class="newsletter">
-            {% include newsletter-form.html %}
-          </div>
+    <div class="post-content">
+      {{ content }}
+    </div>
+
+    <div class="post-links">
+
+      {% if page.repo == true %}
+      {% capture repo %}{{ site.sst_examples_github_repo }}{% endcapture %}
+      {% elsif page.repo != true %}
+      {% capture repo %}{{ site.sst_examples_github_repo }}/tree/main/{{ page.repo }}{% endcapture %}
+      {% endif %}
+
+      {% if page.repo %}
+      <p>Example repo for reference</p>
+      <a target="_blank" href="{{ repo }}">
+        <i class="fa fa-github" aria-hidden="true"></i>
+        {{ repo | replace: "https://", "" }}
+      </a>
+      {% endif %}
+
+      <p class="comments">For help and discussion</p>
+      <a target="_blank" href="{{ site.forum_url }}{{ site.forum_thread_prefix }}{{ page.comments_id }}">
+        <i class="fa fa-comments" aria-hidden="true"></i>
+        Comments on this example
+      </a>
+
+    </div>
+
+    {% if page.ref != 'examples-index' %}
+    <div class="other-examples">
+      <h2>More Examples</h2>
+      {% include examples-list.html %}
+    </div>
+    {% endif %}
+
+    <!--
+    {% include post-sponsor.html %}
+    -->
+
+    <div class="extras">
+      <div class="container">
+        <div class="newsletter">
+          {% include newsletter-form.html %}
         </div>
       </div>
+    </div>
 
-    </article>
-
-    {% include example-sidebar.html page_en_url=page_en_url %}
-
-  </div>
+  </article>
 </div>
