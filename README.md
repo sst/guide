@@ -5,10 +5,6 @@
 </p>
 
 <p align="center">
-  <b>Learn to Build Full-Stack Apps with Serverless and React</b>
-</p>
-
-<p align="center">
   <a href="https://discourse.serverless-stack.com"><img alt="Discourse posts" src="https://img.shields.io/discourse/https/discourse.serverless-stack.com/posts.svg?style=for-the-badge" /></a>
   <a href="https://twitter.com/Anomaly_Inv"><img alt="Twitter follow" src="https://img.shields.io/twitter/follow/anomaly_inv.svg?label=twitter&style=for-the-badge" /></a>
   <a href="https://launchpass.com/serverless-stack"><img alt="Chat on Slack" src="https://img.shields.io/badge/CHAT-ON%20SLACK-brightgreen?style=for-the-badge" /></a>
