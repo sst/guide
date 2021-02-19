@@ -1,12 +1,12 @@
 # Contributing
 
-Thank you for considering to contribute. Here is what Serverless Stack is trying to accomplish and how you can help. We use our [Gitter chat room][Gitter] for our contributors, feel free to join us there.
+Thank you for considering to contribute. Here is what Serverless Stack Guide is trying to accomplish and how you can help. We use [Slack][slack] for our contributors, feel free to join us there.
 
 ## Project Goals
 
 We are trying to create a really comprehensive and up to date guide to help people build production ready full-stack serverless applications. To start, we are focussing on building a CRUD API backend with Serverless Framework on AWS and a single-page app web frontend using React.
 
-We want Serverless Stack to cover a very broad collection of technologies, services, and concepts that gives people the confidence to use this guide to build their next project. Too often we come across tutorials or blog posts that sound very promising but leave us hanging once we get to the complicated bits.
+We want Serverless Stack Guide to cover a very broad collection of technologies, services, and concepts that gives people the confidence to use this guide to build their next project. Too often we come across tutorials or blog posts that sound very promising but leave us hanging once we get to the complicated bits.
 
 However while we want to be as comprehensive as possible, we also want to make sure that you can get started easily. To achieve this we are using the following structure and layout.
 
@@ -44,7 +44,7 @@ Additionally, you are welcome to provide general feedback and suggestions via ou
 
 ### Keep the core guide updated
 
-Serverless Stack is reliant on a large number of services and open source libraries and projects. Here is what needs updating:
+The Serverless Stack Guide is reliant on a large number of services and open source libraries and projects. Here is what needs updating:
 
 ### Updating Screenshots
 
@@ -76,7 +76,7 @@ Once all the PRs are merged, we'll tag the repo (tutorial & demo app) with the n
 
 The core chapters are missing some extra details (for the sake of simplicity) that are necessary once you start customizing the Serverless Stack setup. Additionally, there are cases that we just don't handle in the core chapters. [Here is a rough list of topics that have been requested](https://github.com/AnomalyInnovations/serverless-stack-com/projects/1#column-2785572). This is not an exhaustive list. If you have some ideas to extend some of the demo app functionality, feel free to get in touch with us. Here is how to go about adding a new extra credit chapter:
 
-- Let us know via [Gitter][Gitter] that you are planning to work on it
+- Let us know via [Slack][slack] that you are planning to work on it
 - Create a new issue in GitHub to track progress
 - Fork the tutorial repo
 - Copy the `_drafts/template.md` as a starting point for the chapter
@@ -146,4 +146,4 @@ As an example, compare the [What is Serverless](https://serverless-stack.com/cha
 Feel free to [contact us](mailto:contact@anoma.ly) if you have any questions.
    
 
-[Gitter]: https://gitter.im/serverless-stack/Lobby
+[slack]: https://launchpass.com/serverless-stack
