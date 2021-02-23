@@ -92,7 +92,7 @@ const api = new sst.Api(this, "Api", {
   },
 });
 
-// Allow the API to publish the queue
+// Allow the API to publish to the queue
 api.attachPermissions([queue]);
 
 // Show API endpoint in output
