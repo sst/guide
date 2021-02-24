@@ -19,6 +19,98 @@ $reader-logo-width: 123px;
   }
 }
 
+%code-editor {
+  background-color: darken($brand-color, 20%);
+  border-radius: 8px;
+  box-shadow:
+    0 0px 2px   rgba(22, 35, 40, 0.11),
+    0 0px 4px   rgba(22, 35, 40, 0.11),
+    0 0px 8px   rgba(22, 35, 40, 0.17),
+    0 4px 16px  rgba(22, 35, 40, 0.17),
+    0 12px 32px rgba(22, 35, 40, 0.17),
+    0 28px 64px rgba(22, 35, 40, 0.17);
+
+  .navbar {
+    $button-size: 13px;
+    $button-margin: 8px;
+    $controls-width: 3 * $button-size + 2 * $button-margin;
+
+    padding: $spacing-unit / 2 $spacing-unit / 2 + 5px + $controls-width 0 $spacing-unit / 2 + 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    .controls {
+
+      flex: 0 0 $controls-width;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      .button {
+        margin-right: $button-margin;
+        width: $button-size;
+        height: $button-size;
+        border-radius: 50%;
+
+        &:last-child { margin-right: 0; }
+
+        &:nth-child(1) { background-color: #FC605B; }
+        &:nth-child(2) { background-color: #FDBC40; }
+        &:nth-child(3) { background-color: #33C748; }
+      }
+    }
+    .title {
+      flex: 1 1 auto;
+      text-align: center;
+      font-family: $code-font-family;
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  .code-block {
+    padding: $spacing-unit / 2 + 3px $spacing-unit - 10px $spacing-unit - 10px;
+    color: white;
+    font-size: 18px;
+    overflow-x: auto;
+    font-family: $code-font-family;
+
+    .token-line {
+      position: relative;
+      white-space: nowrap;
+      padding-left: $spacing-unit - 5px;
+
+      color: rgb(191, 199, 213);
+
+      .italics { font-style: italic; }
+      .dim { color: rgb(114, 124, 134); }
+      .plain { color: rgb(232, 235, 240); }
+      .string { color: rgb(195, 232, 141); }
+      .option { color: rgb(130, 170, 255); }
+      .keyword { color: rgb(255, 203, 107); }
+      .operator { color: rgb(137, 221, 255); }
+
+      .lead {
+        top: 0;
+        left: 0;
+        opacity: 0.6;
+        text-align: right;
+        position: absolute;
+        display: inline-block;
+        color: rgb(114, 124, 134);
+      }
+    }
+
+    &.long .token-line {
+      padding-left: $spacing-unit + 10px;
+
+      .lead {
+        min-width: 24px;
+      }
+    }
+  }
+}
+
 .home .lander-header {
   $video-width: 560px;
   $video-padding: 2 * $spacing-unit;
@@ -235,53 +327,11 @@ $reader-logo-width: 123px;
   }
 
   .quick-start {
-    background-color: darken($brand-color, 20%);
-    border-radius: 8px;
-    box-shadow:
-      0 0px 2px   rgba(22, 35, 40, 0.11), 
-      0 0px 4px   rgba(22, 35, 40, 0.11), 
-      0 0px 8px   rgba(22, 35, 40, 0.17), 
-      0 4px 16px  rgba(22, 35, 40, 0.17),
-      0 12px 32px rgba(22, 35, 40, 0.17), 
-      0 28px 64px rgba(22, 35, 40, 0.17);
+    @extend %code-editor;
 
     @include media-query($on-laptop) {
       margin: 0 auto;
       max-width: 480px;
-    }
-
-    .navbar {
-      padding: $spacing-unit / 2 + 5px $spacing-unit / 2 + 5px 0;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-
-      .button {
-        margin-right: 8px;
-        width: 13px;
-        height: 13px;
-        border-radius: 50%;
-
-        &:nth-child(1) { background-color: #FC605B; }
-        &:nth-child(2) { background-color: #FDBC40; }
-        &:nth-child(3) { background-color: #33C748; }
-      }
-    }
-
-    .code-block {
-      padding: $spacing-unit / 2 + 3px $spacing-unit - 10px $spacing-unit - 10px;
-      font-family: $code-font-family;
-      color: white;
-      font-size: 18px;
-
-      .token-line {
-        color: rgb(191, 199, 213);
-
-        .dim { color: rgb(114,124,134); }
-        .plain { color: rgb(232,235,240); }
-        .option { color: rgb(130, 170, 255); }
-        .keyword { color: rgb(255, 203, 107); }
-      }
     }
   }
 
@@ -345,18 +395,19 @@ $reader-logo-width: 123px;
   padding: 4.5 * $spacing-unit $spacing-unit 0;
 
   @include media-query($on-laptop) {
-    padding: 2 * $spacing-unit $spacing-unit / 2 0;
+    padding: 2 * $spacing-unit 0 0;
   }
   @include media-query($on-palm) {
     padding-top: 1.5 * $spacing-unit;
   }
 
-  .title {
+  & > .title {
     text-align: center;
-    margin-bottom: 2 * $spacing-unit;
+    margin-bottom: 1.5 * $spacing-unit;
 
     @include media-query($on-laptop) {
       margin-bottom: $spacing-unit;
+      padding: 0 $spacing-unit / 2;
     }
 
     h2 {
@@ -381,6 +432,231 @@ $reader-logo-width: 123px;
           margin-left: 1px;
           vertical-align: -1px;
         }
+      }
+    }
+  }
+
+  & > .controls {
+    margin-bottom: $spacing-unit;
+    position: relative;
+
+    @include media-query($on-laptop) {
+      margin-bottom: 1.5 * $spacing-unit;
+    }
+    @include media-query($on-laptop) {
+      margin-bottom: $spacing-unit;
+    }
+
+    .list {
+      overflow-x: auto;
+      position: relative;
+      text-align: center;
+      white-space: nowrap;
+
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .scroll-content {
+      display: flex;
+      overflow: hidden;
+      justify-content: center;
+    }
+    .scroll-shadow {
+      width: 20px;
+      height: 100%;
+      position: absolute;
+      opacity: 1;
+      top: 0;
+      transition: opacity .15s linear;
+      pointer-events: none;
+    }
+    .scroll-shadow.left {
+      left: 0;
+      background-image: linear-gradient(to left, rgba(255, 251, 249, 0), rgba(255, 251, 249, 1));
+    }
+    .scroll-shadow.right {
+      right: 0;
+      background-image: linear-gradient(to right, rgba(255, 251, 249, 0), rgba(255, 251, 249, 1));
+    }
+
+    button {
+      $height: 34px;
+
+      margin: 0;
+      border: none;
+      height: $height;
+      cursor: pointer;
+      transition: .3s;
+      font-size: 16px;
+      font-weight: 700;
+      appearance: none;
+      background: none;
+      line-height: 1.1;
+      white-space: nowrap;
+      box-sizing: border-box;
+      padding: 0 $height / 2;
+      border-radius: $height / 2;
+      color: $secondary-text-color;
+      transition: all .2s ease-out;
+
+      &:focus { outline: 0; }
+      &:hover { color: $tertiary-text-color; }
+
+      &.active { color: white; }
+
+      &.highlight {
+        top: 0;
+        left: 0;
+        z-index: -1;
+        position: absolute;
+        color: transparent;
+        pointer-events: none;
+        background-color: lighten($brand-color, 5%);
+      }
+    }
+  }
+
+  .example-list {
+    display: flex;
+    justify-content: center;
+
+    @include media-query($on-laptop) {
+      padding: 0 $spacing-unit / 2;
+    }
+    @include media-query($on-palm) {
+      display: block;
+    }
+  }
+
+  .example-list > .example {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include media-query($on-laptop) {
+      display: block;
+    }
+
+    .info {
+      margin-right: $spacing-unit;
+      max-width: 288px;
+
+      @include media-query($on-laptop) {
+        margin: 0 auto $spacing-unit - 5px;
+        display: flex;
+        max-width: 512px;
+        align-items: center;
+      }
+      @include media-query($on-palm) {
+        display: block;
+      }
+
+      .icon {
+        $size: 48px;
+
+        margin-bottom: 10px;
+        background-color: lighten($brand-color, 52%);
+        width: $size;
+        height: $size;
+        border-radius: 6px;
+        text-align: center;
+        box-shadow: 0 1px 11px -2px rgba(226, 113, 82, 0.55);
+        background-image: linear-gradient(to left bottom, $important-color, #ca6083, #8f659b, #51658e, $brand-color);
+
+        i.fa {
+          line-height: $size;
+          font-size: 22px;
+          color: lighten($brand-color, 25%);
+          color: white;
+        }
+
+        @include media-query($on-laptop) {
+          display: none;
+        }
+      }
+
+      h4 {
+        margin-bottom: 3px;
+        font-size: 20px;
+        font-weight: 700;
+
+        @include media-query($on-laptop) {
+          display: none;
+        }
+      }
+
+      p {
+        margin-bottom: $spacing-unit / 2 + 5px;
+        color: $secondary-text-color;
+
+        @include media-query($on-laptop) {
+          margin-bottom: 0;
+          margin-right: $spacing-unit / 2;
+        }
+        @include media-query($on-palm) {
+          margin-right: 0;
+          margin-bottom: $spacing-unit / 2 - 5px;
+        }
+      }
+
+      & > a {
+        padding: 7px 10px 7px 13px;
+        text-transform: uppercase;
+        font-family: $base-font-family;
+        font-weight: 700;
+        letter-spacing: 1px;
+        background-color: $important-color;
+        border-radius: 4px;
+        display: inline-block;
+        color: white;
+        font-size: 13px;
+        white-space: nowrap;
+
+        &:hover {
+          background-color: lighten($important-color, 7%);
+        }
+
+        i.fa {
+          font-weight: 700;
+          margin-left: 2px;
+        }
+      }
+    }
+    .code-editor {
+      flex: 0 0 auto;
+      @extend %code-editor;
+
+      @include media-query($on-palm) {
+        .code-block {
+          font-size: 14px;
+        }
+      }
+    }
+    .coaster {
+      position: absolute;
+      left: -35px;
+      top: 8px;
+      z-index: -1;
+      width: 106%;
+      height: 105%;
+      border-radius: 20px;
+      transform: rotate(0.5deg);
+      background-image: linear-gradient(to top left, rgba(57, 92, 107, 0.09), rgba(57, 92, 107, 0.03));
+
+      @include media-query($on-laptop) {
+        left: -18px;
+        top: -16px;
+        width: 106%;
+        height: 109%;
+      }
+      @include media-query($on-palm) {
+        display: none;
       }
     }
   }
@@ -1034,7 +1310,7 @@ $reader-logo-width: 123px;
     scrollbar-width: none;
     -ms-overflow-style: none;
 
-    &::-webkit-scrollbar { 
+    &::-webkit-scrollbar {
       display: none;
     }
 

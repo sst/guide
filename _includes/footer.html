@@ -76,12 +76,47 @@
   });
   /** End sidebar ToC code **/
 
-  /** Start mobile menu button **/
+  /** Start mobile menu button code **/
   $("#mobile-menu-button").click(function(e) {
     e.preventDefault();
     $("header.site-header").toggleClass("expanded");
   });
-  /** End mobile menu button **/
+  /** End mobile menu button code **/
+
+  /** Start lander segmented control code **/
+  $("#examples .controls button").click(function(e) {
+    var el = $(this);
+    var parent = el.parent();
+
+    var name = el.data("name");
+    var position = el.position();
+    var scrollLeft = parent.scrollLeft();
+    var width = Math.round(el.outerWidth());
+
+    parent.children(".active").removeClass("active");
+    el.addClass("active");
+
+    parent.children(".highlight").css({
+      left: Math.round(position.left) + scrollLeft, width: width
+    });
+
+    // Fade in content
+    var targets = [
+      "#examples .example .info.active",
+      "#examples .example .code-block.active",
+      "#examples .example .code-editor .navbar .title.active",
+    ];
+
+    for (var i = 0, l = targets.length; i < l; i++) {
+      $(targets[i]).fadeOut(150, function() {
+        $(this).removeClass("active");
+        $(this).siblings("." + name)
+          .addClass("active")
+          .fadeIn(150);
+      });
+    }
+  });
+  /** End lander segmented control code **/
 
   /** Start ToC lander code **/
   $('.table-of-contents .chapters .expand').click(function() {

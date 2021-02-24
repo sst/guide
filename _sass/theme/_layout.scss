@@ -5,7 +5,7 @@
 %social-buttons {
   white-space: nowrap;
   a {
-    margin-right: 12px;
+    margin-right: $spacing-unit / 2;
     font-size: 25px;
     font-weight: 700;
     color: $tertiary-text-color;

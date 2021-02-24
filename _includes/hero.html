@@ -33,33 +33,35 @@
 
   <div class="quick-start">
     <div class="navbar">
-      <div class="button"></div>
-      <div class="button"></div>
-      <div class="button"></div>
+      <div class="controls">
+        <div class="button"></div>
+        <div class="button"></div>
+        <div class="button"></div>
+      </div>
     </div>
     <div class="code-block">
       <div class="token-line">
-        <span class="token dim"># Create a new Serverless Stack app</span>
+        <span class="token lead">#</span><span class="token dim">Create a new Serverless Stack app</span>
       </div>
       <div class="token-line">
-        <span class="token dim">$</span> npx <span class="token keyword">create-serverless-stack</span> my-sst-app</span>
+        <span class="token lead">$</span> npx <span class="token keyword">create-serverless-stack</span> my-sst-app</span>
       </div>
       <div class="token-line">
-        <span class="token dim">$</span> cd my-sst-app</span>
-      </div>
-      <br />
-      <div class="token-line">
-        <span class="token dim"># Start the Live Lambda Dev environment</span>
-      </div>
-      <div class="token-line">
-        <span class="token dim">$</span> npx <span class="token keyword">sst</span> <span class="token plain">start</span>
+        <span class="token lead">$</span> cd my-sst-app</span>
       </div>
       <br />
       <div class="token-line">
-        <span class="token dim"># Deploy to prod</span>
+        <span class="token lead">#</span><span class="token dim">Start the Live Lambda Dev environment</span>
       </div>
       <div class="token-line">
-        <span class="token dim">$</span> npx <span class="token keyword">sst</span> <span class="token plain">deploy</span> --stage prod
+        <span class="token lead">$</span> npx <span class="token keyword">sst</span> <span class="token plain">start</span>
+      </div>
+      <br />
+      <div class="token-line">
+        <span class="token lead">#</span><span class="token dim">Deploy to prod</span>
+      </div>
+      <div class="token-line">
+        <span class="token lead">$</span> npx <span class="token keyword">sst</span> <span class="token plain">deploy</span> --stage prod
       </div>
     </div>
   </div>
@@ -84,7 +86,8 @@
 
 </div>
 
-<div class="examples">
+<div id="examples" class="examples">
+
   <div class="title">
     <h2>Examples</h2>
     <p>
@@ -94,63 +97,265 @@
       </a>
     </p>
   </div>
-  <ul>
-    <li>
-      <a href="{% link _examples/how-to-create-a-rest-api-with-serverless.md %}">
-        <div>
-          <div class="icon">
-            <i class="fa fa-link" aria-hidden="true"></i>
-          </div>
-          <h4>Simple REST API</h4>
+
+  <div class="controls">
+    <div class="scroll-content">
+      <div class="list">
+        <button data-name="rest-api" class="active">Simple API</button>
+        <button data-name="crud-api">CRUD API</button>
+        <button data-name="api-auth">API with auth</button>
+        <button data-name="cron-job">Cron job</button>
+        <button data-name="queue">Queue</button>
+        <button class="highlight">Simple API</button>
+      </div>
+      <div class="scroll-shadow left"></div>
+      <div class="scroll-shadow right"></div>
+    </div>
+  </div>
+
+  <div class="example-list">
+    <div class="example">
+
+      <!-- Infos -->
+      <div class="info active rest-api">
+        <div class="icon">
+          <i class="fa fa-link" aria-hidden="true"></i>
         </div>
+        <h4>Simple REST API</h4>
         <p>Create a serverless REST API on AWS using the SST Api construct to define our routes and functions.</p>
-      </a>
-    </li>
-    <li>
-      <a href="{% link _examples/how-to-create-a-crud-api-with-serverless-using-dynamodb.md %}">
-        <div>
-          <div class="icon">
-            <i class="fa fa-database" aria-hidden="true"></i>
-          </div>
-          <h4>CRUD API</h4>
+        <a href="{% link _examples/how-to-create-a-rest-api-with-serverless.md %}">
+          View example <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div class="info crud-api" style="display: none">
+        <div class="icon">
+        <i class="fa fa-database" aria-hidden="true"></i>
         </div>
+        <h4>CRUD API</h4>
         <p>Create a CRUD API with serverless and DynamoDB. Using the SST Api and Table constructs.</p>
-      </a>
-    </li>
-    <li>
-      <a href="{% link _examples/how-to-add-facebook-authentication-to-a-serverless-api.md %}">
-        <div>
-          <div class="icon">
-            <i class="fa fa-key" aria-hidden="true"></i>
-          </div>
-          <h4>API with Auth</h4>
+        <a href="{% link _examples/how-to-create-a-crud-api-with-serverless-using-dynamodb.md %}">
+          View example <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div class="info api-auth" style="display: none">
+        <div class="icon">
+          <i class="fa fa-key" aria-hidden="true"></i>
         </div>
+        <h4>API with Auth</h4>
         <p>Add Facebook authentication to a serverless API using the SST Api and Auth constructs.</p>
-      </a>
-    </li>
-    <li>
-      <a href="{% link _examples/how-to-use-cron-jobs-in-your-serverless-app.md %}">
-        <div>
-          <div class="icon">
-            <i class="fa fa-clock-o" aria-hidden="true"></i>
-          </div>
-          <h4>Cron Job</h4>
+        <a href="{% link _examples/how-to-add-facebook-authentication-to-a-serverless-api.md %}">
+          View example <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div class="info cron-job" style="display: none">
+        <div class="icon">
+          <i class="fa fa-clock-o" aria-hidden="true"></i>
         </div>
+        <h4>Cron Job</h4>
         <p>Create a cron job in your serverless app using the SST Cron construct.</p>
-      </a>
-    </li>
-    <li>
-      <a href="{% link _examples/how-to-use-queues-in-your-serverless-app.md %}">
-        <div>
-          <div class="icon">
-            <i class="fa fa-list-ol" aria-hidden="true"></i>
-          </div>
-          <h4>Queue</h4>
+        <a href="{% link _examples/how-to-use-cron-jobs-in-your-serverless-app.md %}">
+          View example <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div class="info queue" style="display: none">
+        <div class="icon">
+          <i class="fa fa-list-ol" aria-hidden="true"></i>
         </div>
+        <h4>Queue</h4>
         <p>Create a queue system in your serverless app using the SST Api and Queue constructs.</p>
-      </a>
-    </li>
-  </ul>
+        <a href="{% link _examples/how-to-use-queues-in-your-serverless-app.md %}">
+          View example <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </a>
+      </div>
+      <!-- End Infos -->
+
+      <div class="code-editor">
+        <div class="navbar">
+          <div class="controls">
+            <div class="button"></div>
+            <div class="button"></div>
+            <div class="button"></div>
+          </div>
+          <!-- Code Titles -->
+          <div class="title rest-api active">api.js</div>
+          <div class="title crud-api" style="display: none">crud.js</div>
+          <div class="title api-auth" style="display: none">auth.js</div>
+          <div class="title cron-job" style="display: none">cron.js</div>
+          <div class="title queue" style="display: none">queue.js</div>
+          <!-- End Code Titles -->
+        </div>
+        <!-- Code Blocks -->
+        <div class="code-block rest-api active">
+          <div class="token-line">
+            <span class="token lead">1</span> <span class="token italics">new</span> <span class="token keyword">sst.Api</span>(<span class="token italics">this</span>, <span class="token string">"Api"</span>, {
+          </div>
+          <div class="token-line">
+            <span class="token lead">2</span>&nbsp;&nbsp;routes: {
+          </div>
+          <div class="token-line">
+            <span class="token lead">3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"GET /notes"</span>: <span class="token string">"src/list.main"</span>,
+          </div>
+          <div class="token-line">
+            <span class="token lead">4</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"GET /notes{id}"</span>: <span class="token string">"src/get.main"</span>,
+          </div>
+          <div class="token-line">
+            <span class="token lead">5</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"PUT /notes{id}"</span>: <span class="token string">"src/update.main"</span>
+          </div>
+          <div class="token-line">
+            <span class="token lead">6</span>&nbsp;&nbsp;}
+          </div>
+          <div class="token-line">
+            <span class="token lead">7</span>});
+          </div>
+        </div>
+        <div class="code-block crud-api long" style="display: none">
+          <div class="token-line">
+            <span class="token lead">1</span> <span class="token italics">const</span> table <span class="token operator">=</span> <span class="token italics">new</span> <span class="token keyword">sst.Table</span>(<span class="token italics">this</span>, <span class="token string">"Notes"</span>, {
+          </div>
+          <div class="token-line">
+            <span class="token lead">2</span>&nbsp;&nbsp;fields: {
+          </div>
+          <div class="token-line">
+            <span class="token lead">3</span>&nbsp;&nbsp;&nbsp;&nbsp;userId: TableFieldType.<span class="token keyword">STRING</span>,
+          </div>
+          <div class="token-line">
+            <span class="token lead">4</span>&nbsp;&nbsp;&nbsp;&nbsp;noteId: TableFieldType.<span class="token keyword">STRING</span>
+          </div>
+          <div class="token-line">
+            <span class="token lead">5</span>&nbsp;&nbsp;},
+          </div>
+          <div class="token-line">
+            <span class="token lead">6</span>&nbsp;&nbsp;primaryIndex: {
+          </div>
+          <div class="token-line">
+            <span class="token lead">7</span>&nbsp;&nbsp;&nbsp;&nbsp;partitionKey: <span class="token string">"userId"</span>,
+          </div>
+          <div class="token-line">
+            <span class="token lead">8</span>&nbsp;&nbsp;&nbsp;&nbsp;sortKey: <span class="token string">"noteId"</span>
+          </div>
+          <div class="token-line">
+            <span class="token lead">9</span>&nbsp;&nbsp;}
+          </div>
+          <div class="token-line">
+            <span class="token lead">10</span>});
+          </div>
+          <div class="token-line">
+            <span class="token lead">11</span>&nbsp;
+          </div>
+          <div class="token-line">
+            <span class="token lead">12</span><span class="token dim">// Allow the API to access the table</span>
+          </div>
+          <div class="token-line">
+            <span class="token lead">13</span>api.<span class="token keyword">attachPermissions</span>([table]);
+          </div>
+        </div>
+        <div class="code-block api-auth long" style="display: none">
+          <div class="token-line">
+            <span class="token lead">1</span> <span class="token italics">const</span> api <span class="token operator">=</span> <span class="token italics">new</span> <span class="token keyword">sst.Api</span>(<span class="token italics">this</span>, <span class="token string">"Api"</span>, {
+          </div>
+          <div class="token-line">
+            <span class="token lead">2</span>&nbsp;&nbsp;defaultAuthorizationType: <span class="token string">"AWS_IAM"</span>,
+          </div>
+          <div class="token-line">
+            <span class="token lead">3</span>&nbsp;&nbsp;routes: {
+          </div>
+          <div class="token-line">
+            <span class="token lead">4</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"GET /private"</span>: <span class="token string">"src/private.main"</span>
+          </div>
+          <div class="token-line">
+            <span class="token lead">5</span>&nbsp;&nbsp;}
+          </div>
+          <div class="token-line">
+            <span class="token lead">6</span>});
+          </div>
+          <div class="token-line">
+            <span class="token lead">7</span>&nbsp;
+          </div>
+          <div class="token-line">
+            <span class="token lead">8</span> <span class="token italics">const</span> auth <span class="token operator">=</span> <span class="token italics">new</span> <span class="token keyword">sst.Auth</span>(<span class="token italics">this</span>, <span class="token string">"Auth"</span>, {
+          </div>
+          <div class="token-line">
+            <span class="token lead">9</span>&nbsp;&nbsp;facebook: { appId: <span class="token string">"419718329085014"</span> }
+          </div>
+          <div class="token-line">
+            <span class="token lead">10</span>});
+          </div>
+          <div class="token-line">
+            <span class="token lead">11</span>&nbsp;
+          </div>
+          <div class="token-line">
+            <span class="token lead">12</span><span class="token dim">// Allow auth users to access the API</span>
+          </div>
+          <div class="token-line">
+            <span class="token lead">13</span>auth.<span class="token keyword">attachPermissionsForAuthUsers</span>([ <span class="token dim">// api </span> ]);
+          </div>
+        </div>
+        <div class="code-block cron-job" style="display: none">
+          <div class="token-line">
+            <span class="token lead">1</span> <span class="token italics">new</span> <span class="token keyword">sst.Cron</span>(<span class="token italics">this</span>, <span class="token string">"Cron"</span>, {
+          </div>
+          <div class="token-line">
+            <span class="token lead">2</span>&nbsp;&nbsp;job: <span class="token string">"src/lambda.main"</span>,
+          </div>
+          <div class="token-line">
+            <span class="token lead">3</span>&nbsp;&nbsp;schedule: <span class="token string">"rate(1 minute)"</span>
+          </div>
+          <div class="token-line">
+            <span class="token lead">4</span>});
+          </div>
+          <div class="token-line">
+            <span class="token lead">5</span>&nbsp;
+          </div>
+          <div class="token-line">
+            <span class="token lead">6</span><span class="token dim">// Allow access to other resources</span>
+          </div>
+          <div class="token-line">
+            <span class="token lead">7</span>api.<span class="token keyword">attachPermissions</span>([<span class="token string">"s3"</span>]);
+          </div>
+        </div>
+        <div class="code-block queue long" style="display: none">
+          <div class="token-line">
+            <span class="token lead">1</span> <span class="token italics">const</span> queue <span class="token operator">=</span> <span class="token italics">new</span> <span class="token keyword">sst.Queue</span>(<span class="token italics">this</span>, <span class="token string">"Queue"</span>, {
+          </div>
+          <div class="token-line">
+            <span class="token lead">2</span>&nbsp;&nbsp;consumer: <span class="token string">"src/queueConsumer.main"</span>
+          </div>
+          <div class="token-line">
+            <span class="token lead">3</span>});
+          </div>
+          <div class="token-line">
+            <span class="token lead">4</span>&nbsp;
+          </div>
+          <div class="token-line">
+            <span class="token lead">5</span> <span class="token italics">const</span> api <span class="token operator">=</span> <span class="token italics">new</span> <span class="token keyword">sst.Api</span>(<span class="token italics">this</span>, <span class="token string">"Api"</span>, {
+          </div>
+          <div class="token-line">
+            <span class="token lead">6</span>&nbsp;&nbsp;routes: {
+          </div>
+          <div class="token-line">
+            <span class="token lead">7</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"GET /"</span>: <span class="token string">"src/publisher.main"</span>
+          </div>
+          <div class="token-line">
+            <span class="token lead">8</span>&nbsp;&nbsp;}
+          </div>
+          <div class="token-line">
+            <span class="token lead">9</span>});
+          </div>
+          <div class="token-line">
+            <span class="token lead">10</span>&nbsp;
+          </div>
+          <div class="token-line">
+            <span class="token lead">11</span><span class="token dim">// Allow the API to publish to the queue</span>
+          </div>
+          <div class="token-line">
+            <span class="token lead">12</span>api.<span class="token keyword">attachPermissions</span>([queue]);
+          </div>
+        </div>
+        <!-- End Code Blocks -->
+      </div>
+      <div class="coaster"></div>
+    </div>
+  </div>
 </div>
 
 <div id="guide" class="guide">

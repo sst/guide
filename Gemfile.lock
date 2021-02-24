@@ -80,7 +80,7 @@ DEPENDENCIES
   minima (~> 2.0)
 
 RUBY VERSION
-   ruby 2.7.2p137
+   ruby 2.7.1p83
 
 BUNDLED WITH
    2.1.4
