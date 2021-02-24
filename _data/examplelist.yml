@@ -19,6 +19,8 @@ auth:
   chapters:
     - page: How to add Cognito authentication to a serverless API
       url: /examples/how-to-add-cognito-authentication-to-a-serverless-api.html
+    - page: How to add Auth0 authentication to a serverless API
+      url: /examples/how-to-add-auth0-authentication-to-a-serverless-api.html
     - page: How to add Facebook authentication to a serverless API
       url: /examples/how-to-add-facebook-authentication-to-a-serverless-api.html
     - page: How to add Google authentication to a serverless API
