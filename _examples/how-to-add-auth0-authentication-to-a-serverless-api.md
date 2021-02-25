@@ -4,12 +4,12 @@ title: How to add Auth0 authentication to a serverless API
 date: 2021-02-23 00:00:00
 lang: en
 description: In this example we will look at how to add Auth0 authentication to a serverless API using Serverless Stack Toolkit (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
-repo: https://github.com/serverless-stack/examples/tree/main/api-auth-auth0
+repo: api-auth-auth0
 ref: how-to-add-auth0-authentication-to-a-serverless-api
-comments_id: how-to-add-auth0-authentication-to-a-serverless-api/2317
+comments_id: how-to-add-auth0-authentication-to-a-serverless-api/2333
 ---
 
-In this example we will look at how to add Auth0 authentication to a serverless API using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}).
+In this example we will look at how to add [Auth0](https://auth0.com) authentication to a serverless API using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}).
 
 ## Requirements
 
@@ -33,7 +33,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 {
   "name": "api-auth-auth0",
   "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
 }
 ```
 
@@ -214,23 +214,23 @@ https://2zy74sn6we.execute-api.us-east-1.amazonaws.com/private
 
 We are going to use Auth0's universal login page to test logging in with Auth0.
 
-First, we will configure a callback url that will be used by the login page to redirect the authenticated users to with the authorization code. Head over to your Auth0 app, select **Settings**, and add `http://localhost:5678` to the **Allowed Callback URLS**. We don't need a working url, this is just a placeholder.
+First, we'll configure a callback URL that'll be used by the login page. It'll redirect authenticated users to a page with the authorization code. Head over to your Auth0 app, select **Settings**, and add `http://localhost:5678` to the **Allowed Callback URLS**. We don't need a working URL for now. We just need the code. You can later point this to your frontend application.
 
-Next, open up your browser and head over to the login page. Replace `client_id` with your app's `Client ID`.
+Next, open up your browser and head over to the login page. Replace the `client_id` with your app's `Client ID`. And the domain in the URL with the one for your Auth0 app.
 
 ``` text
 https://myorg.us.auth0.com/authorize?response_type=code&client_id=UsGRQJJz5sDfPQDs6bhQ9Oc3hNISuVif&redirect_uri=http://localhost:5678&scope=openid%20profile
 ```
 
-Your login page should look something like this. Continue with login. If you have not setup a user, you can create one in your Auth0 dashboard.
+Your login page should look something like this. Continue logging in. If you have not setup a user, you can create one in your Auth0 dashboard.
 
 ![Authenticate users using Auth0 Universal Login page](/assets/examples/api-auth-auth0/authenticate-users-using-auth0-universal-login-page.png)
 
-If login was successful, the browser will be redirected to the callback url. Copy the **authorization code** from the url.
+If the login was successful, the browser will be redirected to the callback URL. Copy the **authorization code** from the URL.
 
 ![Generate authorization code for users logged in with Auth0](/assets/examples/api-auth-auth0/generate-authorization-code-for-users-logged-in-with-auth0.png)
 
-Next, we need to exchange the user's code for tokens. Relace the `url` domain, `client_id` and `client_secret` with the values of your app. Also replace `code` with the **authorization code** from the previous step.
+Next, we need to exchange the user's code for tokens. Replace the `url` domain, `client_id` and `client_secret` with the ones for your Auth0 app. Also, replace the `code` with the **authorization code** from above.
 
 ``` bash
 $ curl --request POST \
@@ -239,6 +239,7 @@ $ curl --request POST \
 ```
 
 You should get a couple of tokens for the Auth0 user.
+
 ``` json
 {
   "access_token":"0Yl7bZdnkS2LDBbHkpLBXCU2K3SRilnp",
@@ -257,7 +258,7 @@ $ aws cognito-identity get-id \
   --logins myorg.us.auth0.com="eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Imk0REpDeWhabncydDN1dTd6TlI4USJ9.eyJuaWNrbmFtZSI6IndhbmdmYW5qaWUiLCJuYW1lIjoid2FuZ2ZhbmppZUBnbWFpbC5jb20iLCJwaWN0dXJlIjoiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvMmE5Y2VlMTkxYWI3NjBlZmI3ZTU1ZTBkN2MzNjZiYmI_cz00ODAmcj1wZyZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZ3YS5wbmciLCJ1cGRhdGVkX2F0IjoiMjAyMS0wMi0yNFQwNDoxMjoxOC40NzJaIiwiaXNzIjoiaHR0cHM6Ly9zc3QtdGVzdC51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjAzNTdhNmQ5OGUzZTUwMDZhOWQ3NGEzIiwiYXVkIjoiVXNHUlFKSno1c0RmUFFEczZiaFE5T2MzaE5JU3VWaWUiLCJpYXQiOjE2MTQxNDAyMTksImV4cCI6MTYxNDE3NjIxOX0.KIB9bNHykhcFuMkXGEbu1TlcAp0A6xyze4wSwUh_BscnOlXjcKN-IoN6cgnt7YXUYJa7StN3WSduJJEx_LRpcrrUQw-V3BSGge06RA4bGWXM7S4rdpu4TCG0Lw_V272AKkWIrEGdOBd_Xw-lC8iwX0HXzuZ6-n4gzHPJAzhZ7Io0akkObsvSlQaRKOOXsx-cShWPXa3ZVThSgK5iO00LrsbPMICvvrQVSlwG2XnQDaonUnrXg6kKn0rP_GegoFCAz3buYDGYK__Z7oDaj4chldAqR1FmnJ2X9MfRmpjuX4-94ebicLv7O9fdMHIQQWCgtLmcu4T0mKpR2e3gL_13gQ"
 ```
 
-You should get an identity id for the Auth0 user.
+This should give you an identity id for the Auth0 user.
 
 ``` json
 {
@@ -265,7 +266,7 @@ You should get an identity id for the Auth0 user.
 }
 ```
 
-Now we'll need to get the IAM credentials for the identity user.
+Now we'll use that to get the IAM credentials for the identity user. Use the same `--logins` option as the command above.
 
 ``` bash
 $ aws cognito-identity get-credentials-for-identity \
@@ -273,7 +274,7 @@ $ aws cognito-identity get-credentials-for-identity \
   --logins myorg.us.auth0.com="eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Imk0REpDeWhabncydDN1dTd6TlI4USJ9.eyJuaWNrbmFtZSI6IndhbmdmYW5qaWUiLCJuYW1lIjoid2FuZ2ZhbmppZUBnbWFpbC5jb20iLCJwaWN0dXJlIjoiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvMmE5Y2VlMTkxYWI3NjBlZmI3ZTU1ZTBkN2MzNjZiYmI_cz00ODAmcj1wZyZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZ3YS5wbmciLCJ1cGRhdGVkX2F0IjoiMjAyMS0wMi0yNFQwNDoxMjoxOC40NzJaIiwiaXNzIjoiaHR0cHM6Ly9zc3QtdGVzdC51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjAzNTdhNmQ5OGUzZTUwMDZhOWQ3NGEzIiwiYXVkIjoiVXNHUlFKSno1c0RmUFFEczZiaFE5T2MzaE5JU3VWaWUiLCJpYXQiOjE2MTQxNDAyMTksImV4cCI6MTYxNDE3NjIxOX0.KIB9bNHykhcFuMkXGEbu1TlcAp0A6xyze4wSwUh_BscnOlXjcKN-IoN6cgnt7YXUYJa7StN3WSduJJEx_LRpcrrUQw-V3BSGge06RA4bGWXM7S4rdpu4TCG0Lw_V272AKkWIrEGdOBd_Xw-lC8iwX0HXzuZ6-n4gzHPJAzhZ7Io0akkObsvSlQaRKOOXsx-cShWPXa3ZVThSgK5iO00LrsbPMICvvrQVSlwG2XnQDaonUnrXg6kKn0rP_GegoFCAz3buYDGYK__Z7oDaj4chldAqR1FmnJ2X9MfRmpjuX4-94ebicLv7O9fdMHIQQWCgtLmcu4T0mKpR2e3gL_13gQ"
 ```
 
-You should get a set of temporary IAM credentials.
+The temporary IAM credentials should look something like this.
 
 ``` json
 {
@@ -289,7 +290,7 @@ You should get a set of temporary IAM credentials.
 
 Let's make a call to the private route using the credentials. The API request needs to be [signed with AWS SigV4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html). We are going to use [Insomnia](https://insomnia.rest) to help us sign and make this request.
 
-Make sure to replace the **Access Key Id**, **Secret Access Key**, **Region**, and **Session Token** below. In our case the region is `us-east-1`. You can see this in the API URL.
+Make sure to replace the **Access Key Id**, **Secret Access Key**, and **Session Token** with the ones from the temporary credentials. And replace the **Region** for your API endpoint. In our case the region is `us-east-1`.
 
 ```
 https://2zy74sn6we.execute-api.us-east-1.amazonaws.com
@@ -326,7 +327,7 @@ If you head back to Insomnia and hit the `/private` endpoint again.
 
 ![Get caller identity id in Auth0 authenticated route](/assets/examples/api-auth-auth0/get-caller-identity-id-in-auth0-authenticated-route.png)
 
-You should see the user id. Note, this matches the identity id that was generated from the step where we generated a set of IAM credentials.
+You should see the user id. Note, this matches the identity id from the step where we generated the temporary IAM credentials.
 
 ```
 Hello us-east-1:46625265-9c97-420f-a826-15dbc812a008!
