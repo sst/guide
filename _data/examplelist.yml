@@ -25,6 +25,8 @@ auth:
       url: /examples/how-to-add-google-authentication-to-a-serverless-api.html
     - page: How to add Twitter authentication to a serverless API
       url: /examples/how-to-add-twitter-authentication-to-a-serverless-api.html
+    - page: How to add Auth0 authentication to a serverless API
+      url: /examples/how-to-add-auth0-authentication-to-a-serverless-api.html
 
 
 async:
