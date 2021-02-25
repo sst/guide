@@ -1,21 +1,22 @@
 ---
 layout: example
-title: How to create a REST API with serverless 
-date: 2021-01-27 00:00:00
+title: How to add a custom domain to a serverless API
+date: 2021-02-25 00:00:00
 lang: en
-description: In this example we will look at how to add custom domain to a serverless API using Serverless Stack Toolkit (SST). We'll be using the sst.Api construct to create an API with custom domain.
+description: In this example we will look at how to add a custom domain to a serverless API using Serverless Stack Toolkit (SST). We'll be using the sst.Api construct to create an API with a custom domain.
 repo: rest-api-custom-domain
-ref: how-to-add-custom-domain-to-a-serverless-api
-comments_id:
+ref: how-to-add-a-custom-domain-to-a-serverless-api
+comments_id: how-to-add-a-custom-domain-to-a-serverless-api/2334
 ---
 
-In this example we will look at how to add custom domain to a serverless API using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}).
+In this example we will look at how to add a custom domain to a serverless API using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}).
 
 ## Requirements
 
 - Node.js >= 10.15.1
 - We'll be using Node.js (or ES) in this example but you can also use TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
+- A domain configured using [Route 53](https://aws.amazon.com/route53/).
 
 ## Create an SST app
 
@@ -48,9 +49,9 @@ An SST app is made up of two parts.
 
    The code that's run when your API is invoked is placed in the `src/` directory of your project.
 
-## Setting up our routes
+## Setting up an API
 
-Let's start by setting up the routes for our API.
+Let's start by setting up an API
 
 {%change%} Replace the `lib/MyStack.js` with the following.
 
@@ -62,9 +63,11 @@ export default class MyStack extends sst.Stack {
   constructor(scope, id, props) {
     super(scope, id, props);
 
+    const stage = this.node.root.stage;
+
     // Create the HTTP API
     const api = new sst.Api(this, "Api", {
-      customDomain: "api.example.com",
+      customDomain: `${stage}.example.com`,
       routes: {
         "GET /": "src/lambda.main",
       },
@@ -78,17 +81,41 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-We are creating an API here using the [`sst.Api`](https://docs.serverless-stack.com/constructs/api) construct. And we are adding one routes to it.
+We are creating an API here using the [`sst.Api`](https://docs.serverless-stack.com/constructs/api) construct. And we are adding a route to it.
 
 ```
 GET /
 ```
 
-We also configured a custom domain for the API endpoint.
+We are also configuring a custom domain for the API endpoint.
+
+``` js
+customDomain: `${stage}.example.com`
+```
+
+Our custom domain is based on the stage we are deploying to. So for `dev` it'll be `dev.example.com`. To do this, we are [accessing the properties of the app from the stack](https://docs.serverless-stack.com/constructs/Stack#accessing-app-properties).
+
+## Custom domains in Route 53
+
+If you are looking to create a new domain, you can [follow this guide to purchase one from Route 53]({% link _chapters/purchase-a-domain-with-route-53.md %}).
+
+Or if you have a domain hosted on another provider, [read this to migrate it to Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html).
+
+If you already have a domain in Route 53, SST will look for a [hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) with the name set to the base domain. So for example, if your custom domain is set to `dev.example.com`, SST will look for a hosted zone called `example.com`. If you have it set under a different hosted zone, you'll need to set that explicitly.
+
+``` js
+const api = new sst.Api(this, "Api", {
+  customDomain: {
+    domainName: "dev.api.example.com",
+    hostedZone: "example.com",
+  },
+  ...
+});
+```
 
 ## Adding function code
 
-For this example, we are going to focus on the custom domain. So we are going to keep our Lambda function simple.
+For this example, we are going to focus on the custom domain. So we are going to keep our Lambda function simple. [Refer to the CRUD example]({% link _examples/how-to-create-a-crud-api-with-serverless-using-dynamodb.md %}), if you want to connect your API to a database.
 
 {%change%} Replace the `src/lambda.js` with the following.
 
@@ -127,6 +154,8 @@ The first time you run this command it'll take a couple of minutes to do the fol
 3. Deploy your app, but replace the functions in the `src/` directory with ones that connect to your local client.
 4. Start up a local client.
 
+Deploying your app in this case also means configuring the custom domain. So if you are doing it the first time, it'll take longer to set that up.
+
 Once complete, you should see something like this.
 
 ```
@@ -149,21 +178,21 @@ Stack dev-rest-api-custom-domain-my-stack
     ApiEndpoint: https://9bdtsrrlu1.execute-api.us-east-1.amazonaws.com
 ```
 
-The `ApiEndpoint` is the API we just created. Now let's get our list of notes. Head over to the following in your browser. Make sure to replace the URL with your API.
+The `ApiEndpoint` is the API we just created. Head over to the following in your browser. Make sure to replace the URL with your API.
 
 ```
 https://9bdtsrrlu1.execute-api.us-east-1.amazonaws.com
 ```
 
-You should see the JSON string printed in the browser.
+You should see a JSON string printed in the browser.
 
 Now try hitting our custom domain.
 
 ```
-https://api.example.com
+https://dev.example.com
 ```
 
-You should see the same response again. If the page does not load, don't worry. It can take up to 40 minutes for DNS to propagate. Try again after some time.
+You should see the same response again. If the page does not load, don't worry. It can take up to 40 minutes for your custom domain to propagate through DNS. Try again after some time.
 
 ## Making changes
 
@@ -189,10 +218,10 @@ export async function main() {
 
 Here we are just [adding some spaces](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) to pretty print the JSON.
 
-If you head back to the custom domain.
+If you head back to the custom domain endpoint.
 
 ```
-https://api.example.com
+https://dev.example.com
 ```
 
 You should see the object in a more readable format.
@@ -207,6 +236,12 @@ However, we are going to deploy your API again. But to a different environment, 
 
 ``` bash
 $ npx sst deploy --stage prod
+```
+
+Once deployed, you should be able to access that endpoint on the prod custom domain.
+
+```
+https://prod.example.com
 ```
 
 A note on these environments. SST is simply deploying the same app twice using two different `stage` names. It prefixes the resources with the stage names to ensure that they don't thrash.
@@ -225,6 +260,8 @@ And to remove the prod environment.
 $ npx sst remove --stage prod
 ```
 
+This will remove the custom domain mappings as well.
+
 ## Conclusion
 
-And that's it! You've got a brand new serverless API with custom domain. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+And that's it! You've got a brand new serverless API with a custom domain. A local development environment, to test and make changes. And it's deployed to production with a custom domain as well. So you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
