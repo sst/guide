@@ -29,6 +29,10 @@ auth:
       url: /examples/how-to-add-twitter-authentication-to-a-serverless-api.html
     - page: How to add Auth0 authentication to a serverless API
       url: /examples/how-to-add-auth0-authentication-to-a-serverless-api.html
+    - page: How to add JWT authorization to a serverless API using Cognito User Pool
+      url: /examples/how-to-add-jwt-authorization-to-a-serverless-api-using-cognito-user-pool.html
+    - page: How to add JWT authorization to a serverless API using Auth0
+      url: /examples/how-to-add-jwt-authorization-to-a-serverless-api-using-auth0.html
 
 
 async:
