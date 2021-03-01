@@ -57,7 +57,6 @@ Let's start by setting up an API.
 
 ``` js
 import * as cdk from "@aws-cdk/core";
-import * as iam from "@aws-cdk/aws-iam";
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -66,12 +65,12 @@ export default class MyStack extends sst.Stack {
 
     // Create Api
     const api = new sst.Api(this, "Api", {
-      defaultAuthorizationType: "AWS_IAM",
+      defaultAuthorizationType: sst.ApiAuthorizationType.AWS_IAM,
       routes: {
         "GET /private": "src/private.main",
         "GET /public": {
-          authorizationType: "NONE",
           function: "src/public.main",
+          authorizationType: sst.ApiAuthorizationType.NONE,
         },
       },
     });
@@ -100,23 +99,13 @@ Now let's add authentication for our serverless app.
 {%change%} Add this below the `sst.Api` definition in `lib/MyStack.js`. Make sure to replace the `appId` with that of your Facebook app.
 
 ``` js
-const { account, region } = sst.Stack.of(this);
-
 // Create auth provider
 const auth = new sst.Auth(this, "Auth", {
   facebook: { appId: "419718329085014" },
 });
 
 // Allow authenticated users invoke API
-auth.attachPermissionsForAuthUsers([
-  new iam.PolicyStatement({
-    actions: ["execute-api:Invoke"],
-    effect: iam.Effect.ALLOW,
-    resources: [
-      `arn:aws:execute-api:${region}:${account}:${api.httpApi.httpApiId}/*`,
-    ],
-  }),
-]);
+auth.attachPermissionsForAuthUsers([api]);
 
 new cdk.CfnOutput(this, "IdentityPoolId", {
   value: auth.cognitoCfnIdentityPool.ref,
