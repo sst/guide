@@ -56,7 +56,6 @@ Let's start by setting up an API.
 
 ``` js
 import * as cdk from "@aws-cdk/core";
-import * as iam from "@aws-cdk/aws-iam";
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -65,12 +64,12 @@ export default class MyStack extends sst.Stack {
 
     // Create Api
     const api = new sst.Api(this, "Api", {
-      defaultAuthorizationType: "AWS_IAM",
+      defaultAuthorizationType: sst.ApiAuthorizationType.AWS_IAM,
       routes: {
         "GET /private": "src/private.main",
         "GET /public": {
-          authorizationType: "NONE",
           function: "src/public.main",
+          authorizationType: sst.ApiAuthorizationType.NONE,
         },
       },
     });
@@ -97,8 +96,6 @@ By default, all routes have the authorization type `AWS_IAM`. This means the cal
 {%change%} Add this below the `sst.Api` definition in `lib/MyStack.js`.
 
 ``` js
-const { account, region } = sst.Stack.of(this);
-
 // Create auth provider
 const auth = new sst.Auth(this, "Auth", {
   cognito: {
@@ -107,15 +104,7 @@ const auth = new sst.Auth(this, "Auth", {
 });
 
 // Allow authenticated users to invoke the API
-auth.attachPermissionsForAuthUsers([
-  new iam.PolicyStatement({
-    actions: ["execute-api:Invoke"],
-    effect: iam.Effect.ALLOW,
-    resources: [
-      `arn:aws:execute-api:${region}:${account}:${api.httpApi.httpApiId}/*`,
-    ],
-  }),
-]);
+auth.attachPermissionsForAuthUsers([api]);
 
 new cdk.CfnOutput(this, "UserPoolId", {
   value: auth.cognitoUserPool.userPoolId,

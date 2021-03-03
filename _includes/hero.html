@@ -254,40 +254,43 @@
             <span class="token lead">1</span> <span class="token italics">const</span> api <span class="token operator">=</span> <span class="token italics">new</span> <span class="token keyword">sst.Api</span>(<span class="token italics">this</span>, <span class="token string">"Api"</span>, {
           </div>
           <div class="token-line">
-            <span class="token lead">2</span>&nbsp;&nbsp;defaultAuthorizationType: <span class="token string">"AWS_IAM"</span>,
+            <span class="token lead">2</span>&nbsp;&nbsp;defaultAuthorizationType:
           </div>
           <div class="token-line">
-            <span class="token lead">3</span>&nbsp;&nbsp;routes: {
+            <span class="token lead">3</span>&nbsp;&nbsp;&nbsp;&nbsp;sst.ApiAuthorizationType.<span class="token option">AWS_IAM</span>,
           </div>
           <div class="token-line">
-            <span class="token lead">4</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"GET /private"</span>: <span class="token string">"src/private.main"</span>
+            <span class="token lead">4</span>&nbsp;&nbsp;routes: {
           </div>
           <div class="token-line">
-            <span class="token lead">5</span>&nbsp;&nbsp;}
+            <span class="token lead">5</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"GET /private"</span>: <span class="token string">"src/private.main"</span>
           </div>
           <div class="token-line">
-            <span class="token lead">6</span>});
+            <span class="token lead">6</span>&nbsp;&nbsp;}
           </div>
           <div class="token-line">
-            <span class="token lead">7</span>&nbsp;
+            <span class="token lead">7</span>});
           </div>
           <div class="token-line">
-            <span class="token lead">8</span> <span class="token italics">const</span> auth <span class="token operator">=</span> <span class="token italics">new</span> <span class="token keyword">sst.Auth</span>(<span class="token italics">this</span>, <span class="token string">"Auth"</span>, {
+            <span class="token lead">8</span>&nbsp;
           </div>
           <div class="token-line">
-            <span class="token lead">9</span>&nbsp;&nbsp;facebook: { appId: <span class="token string">"419718329085014"</span> }
+            <span class="token lead">9</span> <span class="token italics">const</span> auth <span class="token operator">=</span> <span class="token italics">new</span> <span class="token keyword">sst.Auth</span>(<span class="token italics">this</span>, <span class="token string">"Auth"</span>, {
           </div>
           <div class="token-line">
-            <span class="token lead">10</span>});
+            <span class="token lead">10</span>&nbsp;&nbsp;facebook: { appId: <span class="token string">"419718329085014"</span> }
           </div>
           <div class="token-line">
-            <span class="token lead">11</span>&nbsp;
+            <span class="token lead">11</span>});
           </div>
           <div class="token-line">
-            <span class="token lead">12</span><span class="token dim">// Allow auth users to access the API</span>
+            <span class="token lead">12</span>&nbsp;
           </div>
           <div class="token-line">
-            <span class="token lead">13</span>auth.<span class="token keyword">attachPermissionsForAuthUsers</span>([<span class="token dim">/* api */</span>]);
+            <span class="token lead">13</span><span class="token dim">// Allow auth users to access the API</span>
+          </div>
+          <div class="token-line">
+            <span class="token lead">14</span>auth.<span class="token keyword">attachPermissionsForAuthUsers</span>([api]);
           </div>
         </div>
         <div class="code-block cron-job" style="display: none">
