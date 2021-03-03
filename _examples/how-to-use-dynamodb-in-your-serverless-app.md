@@ -3,13 +3,13 @@ layout: example
 title: How to use DynamoDB in your serverless app
 date: 2021-02-04 00:00:00
 lang: en
-description: In this example we will look at how to use DynamoDB in your serverless app on AWS using Serverless Stack Toolkit (SST). We'll be using the sst.Api and sst.Table to create a simple hit counter.
+description: In this example we will look at how to use DynamoDB in your serverless app on AWS using Serverless Stack (SST). We'll be using the sst.Api and sst.Table to create a simple hit counter.
 repo: rest-api-dynamodb
 ref: how-to-use-dynamodb-in-your-serverless-app
 comments_id: how-to-use-dynamodb-in-your-serverless-app/2307
 ---
 
-In this example we will look at how to use DynamoDB in our serverless app using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}). We'll be creating a simple hit counter.
+In this example we will look at how to use DynamoDB in our serverless app using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be creating a simple hit counter.
 
 ## Requirements
 

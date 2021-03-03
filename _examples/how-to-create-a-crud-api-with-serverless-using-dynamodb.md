@@ -3,13 +3,13 @@ layout: example
 title: How to create a CRUD API with serverless using DynamoDB
 date: 2021-02-04 00:00:00
 lang: en
-description: In this example we will look at how to create a CRUD API with serverless using DynamoDB. We'll be using the sst.Api and sst.Table constructs from the Serverless Stack Toolkit (SST).
+description: In this example we will look at how to create a CRUD API with serverless using DynamoDB. We'll be using the sst.Api and sst.Table constructs from the Serverless Stack (SST).
 repo: crud-api-dynamodb
 ref: how-to-create-a-crud-api-with-serverless-using-dynamodb
 comments_id: how-to-create-a-crud-api-with-serverless-using-dynamodb/2309
 ---
 
-In this example we will look at how to create a CRUD API with serverless using [DynamoDB](https://aws.amazon.com/dynamodb/). We'll be using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}). Our API will be creating, reading, updating, and deleting notes.
+In this example we will look at how to create a CRUD API with serverless using [DynamoDB](https://aws.amazon.com/dynamodb/). We'll be using [Serverless Stack (SST)]({{ site.sst_github_repo }}). Our API will be creating, reading, updating, and deleting notes.
 
 ## Requirements
 

@@ -1,15 +1,15 @@
 ---
 layout: example
-title: How to add JWT authorization to a serverless API using Auth0
-date: 2021-02-26 00:00:00
+title: How to add JWT authorization with Auth0 to a serverless API
+date: 2021-03-02 00:00:00
 lang: en
-description: In this example we will look at how to add JWT authorization to a serverless API with Auth0 using Serverless Stack Toolkit (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
+description: In this example we will look at how to add JWT authorization with Auth0 to a serverless API using Serverless Stack (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
 repo: api-auth-jwt-auth0
-ref: how-to-add-jwt-authorization-to-a-serverless-api-using-auth0
-comments_id:
+ref: how-to-add-jwt-authorization-with-auth0-to-a-serverless-api
+comments_id: how-to-add-jwt-authorization-with-auth0-to-a-serverless-api/2337
 ---
 
-In this example we will look at how to add JWT authorization to a serverless API with [Auth0](https://auth0.com) using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}).
+In this example we will look at how to add JWT authorization with [Auth0](https://auth0.com) to a serverless API using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
 
 ## Requirements
 
@@ -53,7 +53,9 @@ An SST app is made up of two parts.
 
 Let's start by setting up an API.
 
-{%change%} Replace the `lib/MyStack.js` with the following. Make sure to replace the `jwtIssuer` and `jwtAudience` with your Auth0 app's `Domain` and `Client ID`. Note: make sure the `jwtIsser` ends with a trailing slash.
+{%change%} Replace the `lib/MyStack.js` with the following. Make sure to replace the `jwtIssuer` and `jwtAudience` with your Auth0 app's `Domain` and `Client ID`.
+
+Note that, the `jwtIssuer` option **ends with a trailing slash** (`/`).
 
 ``` js
 import * as cdk from "@aws-cdk/core";
@@ -95,7 +97,7 @@ GET /private
 GET /public
 ```
 
-To secure our APIs we are adding the authorization type `JWT` and a JWT authorizer. This means the caller of the API needs to pass in a valid JWT token. In this case, it relies on Auth0 to authenticate users. The first route is a private endpoint. The second is a public endpoint and its authorization type is overriden to `NONE`.
+To secure our APIs we are adding the authorization type `JWT` and a JWT authorizer. This means the caller of the API needs to pass in a valid JWT token. In this case, it relies on Auth0 to authenticate users. The first route is a private endpoint. The second is a public endpoint and its authorization type is overridden to `NONE`.
 
 ## Adding function code
 
@@ -162,7 +164,7 @@ Stack dev-api-auth-jwt-auth0-my-stack
     ApiEndpoint: https://9ero2xj9cl.execute-api.us-east-1.amazonaws.com
 ```
 
-The `ApiEndpoint` is the API we just created. Make a note of the `IdentityPoolId`, we'll need that later.
+The `ApiEndpoint` is the API we just created.
 
 Now let's try out our public route. Head over to the following in your browser. Make sure to replace the URL with your API.
 
@@ -190,7 +192,7 @@ Next, open up your browser and head over to the login page. Replace the `client_
 https://myorg.us.auth0.com/authorize?response_type=code&client_id=UsGRQJJz5sDfPQDs6bhQ9Oc3hNISuVif&redirect_uri=http://localhost:5678&scope=openid%20profile
 ```
 
-Your login page should look something like this. Continue logging in. If you have not setup a user, you can create one in your Auth0 dashboard.
+Your login page should look something like this. Continue logging in. If you haven't setup a user, you can create one in your Auth0 dashboard.
 
 ![Authenticate users using Auth0 Universal Login page](/assets/examples/api-auth-jwt-auth0/authenticate-users-using-auth0-universal-login-page.png)
 
@@ -244,7 +246,7 @@ export async function main(event) {
 
 We are getting the user id from the event object.
 
-If you head back to Insomnia and hit the `/private` endpoint again.
+If you head back to the terminal and hit the `/private` endpoint again.
 
 ``` bash
 $ curl --url https://9ero2xj9cl.execute-api.us-east-1.amazonaws.com/private \
@@ -283,4 +285,4 @@ $ npx sst remove --stage prod
 
 ## Conclusion
 
-And that's it! You've got a brand new serverless API authenticated with Auth0. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+And that's it! You've got a brand new serverless API with a JWT authorizer using Auth0. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!

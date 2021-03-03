@@ -1,15 +1,15 @@
 ---
 layout: example
-title: How to add JWT authorization to a serverless API using Cognito User Pool
-date: 2021-02-26 00:00:00
+title: How to add JWT authorization with Cognito User Pool to a serverless API
+date: 2021-03-02 00:00:00
 lang: en
-description: In this example we will look at how to add JWT authorization to a serverless API with Cognito User Pool using Serverless Stack Toolkit (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
+description: In this example we will look at how to add JWT authorization with Cognito User Pool to a serverless API using Serverless Stack (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
 repo: api-auth-jwt-cognito-user-pool
-ref: how-to-add-jwt-authorization-to-a-serverless-api-using-cognito-user-pool
-comments_id:
+ref: how-to-add-jwt-authorization-with-cognito-user-pool-to-a-serverless-api
+comments_id: how-to-add-jwt-authorization-with-cognito-user-pool-to-a-serverless-api/2338
 ---
 
-In this example we will look at how to add JWT authorization to a serverless API with [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}).
+In this example we will look at how to add JWT authorization with [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to a serverless API using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
 
 ## Requirements
 
@@ -109,7 +109,7 @@ export default class MyStack extends sst.Stack {
 
 This creates a [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html); a user directory that manages user sign up and login. We've configured the User Pool to allow users to login with their email and password.
 
-Note we are enabling the `userPassword` authentication flow for the purpose of this article to be able to authenticate user and receive the JWT token via AWS CLI. You should not enable this authenticate flow in production.
+Note, we are enabling the `userPassword` authentication flow for the purpose of this example. We need this to be able to authenticate a user and receive the JWT token via the AWS CLI. You **should not** enable this authentication flow in production.
 
 We are also creating an API here using the [`sst.Api`](https://docs.serverless-stack.com/constructs/api) construct. And we are adding two routes to it.
 
@@ -118,11 +118,11 @@ GET /private
 GET /public
 ```
 
-By default, all routes have the authorization type `JWT`. This means the caller of the API needs to pass in a valid JWT token. The first is a private endpoint. The second is a public endpoint and its authorization type is overriden to `NONE`.
+By default, all routes have the authorization type `JWT`. This means the caller of the API needs to pass in a valid JWT token. The first is a private endpoint. The second is a public endpoint and its authorization type is overridden to `NONE`.
 
 ## Adding function code
 
-We will create two functions, one for the public route, and one for the private route.
+Let's create two functions, one for the public route, and one for the private route.
 
 {%change%} Add a `src/public.js`.
 
@@ -187,7 +187,7 @@ Stack dev-api-auth-jwt-cognito-user-pool-my-stack
     ApiEndpoint: https://4foju6nhne.execute-api.us-east-1.amazonaws.com
 ```
 
-The `ApiEndpoint` is the API we just created. Make a note of the `UserPoolClientId`, `UserPoolId`; we'll need them later.
+The `ApiEndpoint` is the API we just created. Make a note of the `UserPoolClientId` and `UserPoolId`; we'll need them later.
 
 Now let's try out our public route. Head over to the following in your browser. Make sure to replace the URL with your API.
 
@@ -203,7 +203,7 @@ And if you try to visit the private route, you will see `{"message":"Unauthorize
 https://4foju6nhne.execute-api.us-east-1.amazonaws.com/private
 ```
 
-## Signing up
+## Sign up with Cognito
 
 Now to visit the private route, we need to create an account in our User Pool. Usually, we'll have our users sign up for an account through our app. But for this example, we'll use the AWS CLI to sign up a user and confirm their account.
 
@@ -226,7 +226,7 @@ $ aws cognito-idp admin-confirm-sign-up \
   --username admin@example.com
 ```
 
-Now we'll authenticate the user. Typically, we'll be using our app to do this. But just to test, we'll use the AWS CLI, recall we had to enabled the `userPassword` authentication flow for this work. Replace `--client-id` with `UserPoolClientId` from the `sst start` output above.
+Now we'll authenticate the user. Typically, we'll be using our app to do this. But just to test, we'll use the AWS CLI. Recall we had to enable the `userPassword` authentication flow for this to work. Replace `--client-id` with `UserPoolClientId` from the `sst start` output above.
 
 ``` bash
 $ aws cognito-idp initiate-auth \
@@ -250,7 +250,7 @@ You should get a set of temporary tokens.
 }
 ```
 
-Let's make a call to the private route using the JWT token. Make sure to replace the **Access Key Id**, **Secret Access Key**, **Region**, and **Session Token** below. In our case the region is `us-east-1`. You can see this in the API URL.
+Let's make a call to the private route using the JWT token. Make sure to replace the token with **IdToken** from the previous step. And the URL with your API endpoint.
 
 ``` bash
 $ curl --url https://4foju6nhne.execute-api.us-east-1.amazonaws.com/private \
@@ -315,4 +315,4 @@ $ npx sst remove --stage prod
 
 ## Conclusion
 
-And that's it! You've got a brand new serverless API authenticated with Cognito. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+And that's it! You've got a brand new serverless API with a JWT authorizer using Cognito User Pool. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!

@@ -24,8 +24,14 @@ article.post.example section.examples-list {
       color: darken($brand-color, 15%);
     }
     & > ul > li span.active {
-      font-weight: 700;
       color: $tertiary-text-color;
+    }
+
+    & > .toc-section {
+      & > h3 {
+        font-size: 20px;
+        font-weight: 700;
+      }
     }
   }
 

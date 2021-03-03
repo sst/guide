@@ -3,13 +3,13 @@ layout: example
 title: How to add a custom domain to a serverless API
 date: 2021-02-25 00:00:00
 lang: en
-description: In this example we will look at how to add a custom domain to a serverless API using Serverless Stack Toolkit (SST). We'll be using the sst.Api construct to create an API with a custom domain.
+description: In this example we will look at how to add a custom domain to a serverless API using Serverless Stack (SST). We'll be using the sst.Api construct to create an API with a custom domain.
 repo: rest-api-custom-domain
 ref: how-to-add-a-custom-domain-to-a-serverless-api
 comments_id: how-to-add-a-custom-domain-to-a-serverless-api/2334
 ---
 
-In this example we will look at how to add a custom domain to a serverless API using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}).
+In this example we will look at how to add a custom domain to a serverless API using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
 
 ## Requirements
 
