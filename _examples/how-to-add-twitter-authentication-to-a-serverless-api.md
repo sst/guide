@@ -3,13 +3,13 @@ layout: example
 title: How to add Twitter authentication to a serverless API
 date: 2021-02-08 00:00:00
 lang: en
-description: In this example we will look at how to add Twitter authentication to a serverless API using Serverless Stack Toolkit (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
+description: In this example we will look at how to add Twitter authentication to a serverless API using Serverless Stack (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
 repo: api-auth-twitter
 ref: how-to-add-twitter-authentication-to-a-serverless-api
 comments_id: how-to-add-twitter-authentication-to-a-serverless-api/2319
 ---
 
-In this example we will look at how to add Twitter authentication to a serverless API using [Serverless Stack Toolkit (SST)]({{ site.sst_github_repo }}).
+In this example we will look at how to add Twitter authentication to a serverless API using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
 
 ## Requirements
 

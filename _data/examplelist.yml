@@ -16,8 +16,8 @@ database:
     - page: How to create a CRUD API with serverless using DynamoDB
       url: /examples/how-to-create-a-crud-api-with-serverless-using-dynamodb.html
 
-auth:
-  title: Authentication
+iam-auth:
+  title: Using AWS IAM
   chapters:
     - page: How to add Cognito authentication to a serverless API
       url: /examples/how-to-add-cognito-authentication-to-a-serverless-api.html
@@ -30,6 +30,13 @@ auth:
     - page: How to add Auth0 authentication to a serverless API
       url: /examples/how-to-add-auth0-authentication-to-a-serverless-api.html
 
+jwt-auth:
+  title: Using JWT
+  chapters:
+    - page: How to add JWT authorization with Cognito User Pool to a serverless API
+      url: /examples/how-to-add-jwt-authorization-with-cognito-user-pool-to-a-serverless-api.html
+    - page: How to add JWT authorization with Auth0 to a serverless API
+      url: /examples/how-to-add-jwt-authorization-with-auth0-to-a-serverless-api.html
 
 async:
   title: Async Tasks

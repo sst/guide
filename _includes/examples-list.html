@@ -13,7 +13,11 @@
   <div class="icon">
     <i class="fa fa-key" aria-hidden="true"></i>
   </div>
-  {% include toc-examples.html items=site.data.examplelist.auth id="auth" %}
+  <div id="auth" class="toc-section">
+    <h3>Authentication</h3>
+    {% include toc-examples.html items=site.data.examplelist.iam-auth id="iam-auth" %}
+    {% include toc-examples.html items=site.data.examplelist.jwt-auth id="jwt-auth" %}
+  </div>
 
   <div class="icon">
     <i class="fa fa-clock-o" aria-hidden="true"></i>
