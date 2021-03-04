@@ -72,7 +72,7 @@ export default class MyStack extends sst.Stack {
         jwtAudience: ["UsGRQJJz5sDfPQDs6bhQ9Oc3hNISuVif"],
         jwtIssuer: "https://myorg.us.auth0.com/",
       }),
-      defaultAuthorizationType: "JWT",
+      defaultAuthorizationType: sst.ApiAuthorizationType.JWT,
       routes: {
         "GET /private": "src/private.main",
         "GET /public": {
