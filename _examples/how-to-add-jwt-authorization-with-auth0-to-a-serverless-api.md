@@ -76,7 +76,7 @@ export default class MyStack extends sst.Stack {
       routes: {
         "GET /private": "src/private.main",
         "GET /public": {
-          authorizationType: "NONE",
+          authorizationType: sst.ApiAuthorizationType.NONE,
           function: "src/public.main",
         },
       },
