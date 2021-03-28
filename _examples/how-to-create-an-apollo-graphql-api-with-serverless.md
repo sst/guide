@@ -9,7 +9,7 @@ ref: how-to-create-an-apollo-graphql-api-with-serverless
 comments_id: how-to-create-an-apollo-graphql-api-with-serverless/2361
 ---
 
-In this example we'll look at how to create an Apollo GraphQL API on AWS using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
+In this example we'll look at how to create an [Apollo GraphQL API](https://www.apollographql.com) on AWS using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
 
 ## Requirements
 
