@@ -40,6 +40,7 @@ article.post.example section.examples-list {
 
     margin: 1.5 * $spacing-unit + 5px 0 10px;
     background-color: lighten($brand-color, 52%);
+    position: relative;
     width: $size;
     height: $size;
     border-radius: 6px;
@@ -52,6 +53,16 @@ article.post.example section.examples-list {
       font-size: 22px;
       color: lighten($brand-color, 25%);
       color: white;
+    }
+    img.graphql {
+      $icon-size: 28px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -1 * $icon-size / 2;
+      margin-left: -1 * $icon-size / 2;
+      width: $icon-size;
+      height: $icon-size;
     }
   }
 }

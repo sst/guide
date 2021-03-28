@@ -7,6 +7,13 @@ api:
       url: /examples/how-to-create-a-rest-api-in-typescript-with-serverless.html
     - page: How to add a custom domain to a serverless API
       url: /examples/how-to-add-a-custom-domain-to-a-serverless-api.html
+graphql:
+  title: GraphQL
+  chapters:
+    - page: How to create an Apollo GraphQL API with serverless
+      url: /examples/how-to-create-an-apollo-graphql-api-with-serverless.html
+    - page: How to create a serverless GraphQL API with AWS AppSync
+      url: /examples/how-to-create-a-serverless-graphql-api-with-aws-appsync.html
 
 database:
   title: Databases
