@@ -561,6 +561,7 @@ $reader-logo-width: 123px;
         $size: 48px;
 
         margin-bottom: 10px;
+        position: relative;
         background-color: lighten($brand-color, 52%);
         width: $size;
         height: $size;
@@ -574,6 +575,16 @@ $reader-logo-width: 123px;
           font-size: 22px;
           color: lighten($brand-color, 25%);
           color: white;
+        }
+        img.graphql {
+          $icon-size: 30px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          margin-top: -1 * $icon-size / 2;
+          margin-left: -1 * $icon-size / 2;
+          width: $icon-size;
+          height: $icon-size;
         }
 
         @include media-query($on-laptop) {
@@ -661,93 +672,6 @@ $reader-logo-width: 123px;
     }
   }
 
-  ul {
-    margin: - $spacing-unit / 2;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-
-    @include media-query($on-palm) {
-      margin: 0;
-    }
-
-    li {
-      list-style: none;
-      margin: $spacing-unit / 2;
-
-      a {
-        padding: $spacing-unit / 2;
-        color: $text-color;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        background-color: white;
-        width: 170px;
-        height: 250px;
-        border-radius: 4px;
-        text-align: center;
-        transition: box-shadow ease-in-out .2s, transform ease-in-out .2s;
-        box-shadow:
-          0 8px 12px 0 rgba(0, 0, 0, 0.02),
-          0 6px 8px 0 rgba(0, 0, 0, 0.02),
-          0 4px 6px 0 rgba(0, 0, 0, 0.02),
-          0 0px 4px 0 rgba(0, 0, 0, 0.02),
-          0 1px 2px 0 rgba(0, 0, 0, 0.02);
-
-        &:hover {
-          transform: translateY(-3px);
-          box-shadow:
-            0 18px 24px -6px rgba(0, 0, 0, 0.06),
-            0 14px 20px -5px rgba(0, 0, 0, 0.06),
-            0 10px 16px -4px rgba(0, 0, 0, 0.05),
-            0 6px 12px -3px rgba(0, 0, 0, 0.04);
-        }
-
-        &:active {
-          transform: translateY(0);
-          box-shadow:
-            0 6px 8px 0 rgba(0, 0, 0, 0.05),
-            0 4px 6px 0 rgba(0, 0, 0, 0.04),
-            0 2px 4px 0 rgba(0, 0, 0, 0.03),
-            0 1px 2px 0 rgba(0, 0, 0, 0.02);
-        }
-
-        h4 {
-          margin-top: $spacing-unit / 2;
-          margin-bottom: 0;
-          font-size: 20px;
-          font-weight: 700;
-        }
-
-        p {
-          margin-bottom: 0;
-          font-size: 15px;
-          color: $secondary-text-color;
-        }
-
-        div.icon {
-          $size: 48px;
-
-          margin: 10px auto 0;
-          background-color: lighten($brand-color, 52%);
-          width: $size;
-          height: $size;
-          border-radius: 6px;
-          text-align: center;
-          box-shadow: 0 1px 11px -2px rgba(226, 113, 82, 0.55);
-          background-image: linear-gradient(to left bottom, $important-color, #ca6083, #8f659b, #51658e, $brand-color);
-
-          i.fa {
-            line-height: $size;
-            font-size: 22px;
-            color: lighten($brand-color, 25%);
-            color: white;
-          }
-        }
-      }
-    }
-  }
 }
 
 .home > .guide {

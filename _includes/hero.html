@@ -101,12 +101,12 @@
   <div class="controls">
     <div class="scroll-content">
       <div class="list">
-        <button data-name="rest-api" class="active">Simple API</button>
-        <button data-name="crud-api">CRUD API</button>
+        <button data-name="rest-api" class="active">REST API</button>
+        <button data-name="graphql-api">GraphQL API</button>
         <button data-name="api-auth">API with auth</button>
         <button data-name="cron-job">Cron job</button>
         <button data-name="queue">Queue</button>
-        <button class="highlight">Simple API</button>
+        <button class="highlight">REST API</button>
       </div>
       <div class="scroll-shadow left"></div>
       <div class="scroll-shadow right"></div>
@@ -121,19 +121,19 @@
         <div class="icon">
           <i class="fa fa-link" aria-hidden="true"></i>
         </div>
-        <h4>Simple REST API</h4>
+        <h4>REST API</h4>
         <p>Create a serverless REST API on AWS using the SST Api construct to define our routes and functions.</p>
         <a href="{% link _examples/how-to-create-a-rest-api-with-serverless.md %}">
           View example <i class="fa fa-angle-right" aria-hidden="true"></i>
         </a>
       </div>
-      <div class="info crud-api" style="display: none">
+      <div class="info graphql-api" style="display: none">
         <div class="icon">
-        <i class="fa fa-database" aria-hidden="true"></i>
+          <img class="graphql" src="/assets/lander/graphql-logo.svg" />
         </div>
-        <h4>CRUD API</h4>
-        <p>Create a CRUD API with serverless and DynamoDB. Using the SST Api and Table constructs.</p>
-        <a href="{% link _examples/how-to-create-a-crud-api-with-serverless-using-dynamodb.md %}">
+        <h4>GraphQL API</h4>
+        <p>Create a serverless GraphQL API with AppSync. Using the SST AppSyncApi and Table constructs.</p>
+        <a href="{% link _examples/how-to-create-a-serverless-graphql-api-with-aws-appsync.md %}">
           View example <i class="fa fa-angle-right" aria-hidden="true"></i>
         </a>
       </div>
@@ -178,7 +178,7 @@
           </div>
           <!-- Code Titles -->
           <div class="title rest-api active">api.js</div>
-          <div class="title crud-api" style="display: none">crud.js</div>
+          <div class="title graphql-api" style="display: none">graphql.js</div>
           <div class="title api-auth" style="display: none">auth.js</div>
           <div class="title cron-job" style="display: none">cron.js</div>
           <div class="title queue" style="display: none">queue.js</div>
@@ -208,45 +208,48 @@
             <span class="token lead">7</span>});
           </div>
         </div>
-        <div class="code-block crud-api long" style="display: none">
+        <div class="code-block graphql-api long" style="display: none">
           <div class="token-line">
-            <span class="token lead">1</span> <span class="token italics">const</span> table <span class="token operator">=</span> <span class="token italics">new</span> <span class="token keyword">sst.Table</span>(<span class="token italics">this</span>, <span class="token string">"Notes"</span>, {
+            <span class="token lead">1</span> <span class="token italics">const</span> api <span class="token operator">=</span> <span class="token italics">new</span> <span class="token keyword">sst.AppSyncApi</span>(<span class="token italics">this</span>, <span class="token string">"Api"</span>, {
           </div>
           <div class="token-line">
-            <span class="token lead">2</span>&nbsp;&nbsp;fields: {
+            <span class="token lead">2</span>&nbsp;&nbsp;graphqlApi: { schema: <span class="token string">"schema.graphql"</span> },
           </div>
           <div class="token-line">
-            <span class="token lead">3</span>&nbsp;&nbsp;&nbsp;&nbsp;userId: TableFieldType.<span class="token keyword">STRING</span>,
+            <span class="token lead">3</span>&nbsp;&nbsp;resolvers: {
           </div>
           <div class="token-line">
-            <span class="token lead">4</span>&nbsp;&nbsp;&nbsp;&nbsp;noteId: TableFieldType.<span class="token keyword">STRING</span>
+            <span class="token lead">4</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"Query get"</span>: <span class="token string">"src/resolver.main"</span>
           </div>
           <div class="token-line">
-            <span class="token lead">5</span>&nbsp;&nbsp;},
+            <span class="token lead">5</span>&nbsp;&nbsp;}
           </div>
           <div class="token-line">
-            <span class="token lead">6</span>&nbsp;&nbsp;primaryIndex: {
+            <span class="token lead">6</span>});
           </div>
           <div class="token-line">
-            <span class="token lead">7</span>&nbsp;&nbsp;&nbsp;&nbsp;partitionKey: <span class="token string">"userId"</span>,
+            <span class="token lead">7</span>&nbsp;
           </div>
           <div class="token-line">
-            <span class="token lead">8</span>&nbsp;&nbsp;&nbsp;&nbsp;sortKey: <span class="token string">"noteId"</span>
+            <span class="token lead">8</span> <span class="token italics">const</span> table <span class="token operator">=</span> <span class="token italics">new</span> <span class="token keyword">sst.Table</span>(<span class="token italics">this</span>, <span class="token string">"Notes"</span>, {
           </div>
           <div class="token-line">
-            <span class="token lead">9</span>&nbsp;&nbsp;}
+            <span class="token lead">9</span>&nbsp;&nbsp;fields: { id: TableFieldType.<span class="token keyword">STRING</span> },
           </div>
           <div class="token-line">
-            <span class="token lead">10</span>});
+            <span class="token lead">10</span>&nbsp;&nbsp;primaryIndex: { partitionKey: <span class="token string">"id"</span> }
           </div>
           <div class="token-line">
-            <span class="token lead">11</span>&nbsp;
+            <span class="token lead">11</span>});
           </div>
           <div class="token-line">
-            <span class="token lead">12</span><span class="token dim">// Allow the API to access the table</span>
+            <span class="token lead">12</span>&nbsp;
           </div>
           <div class="token-line">
-            <span class="token lead">13</span>api.<span class="token keyword">attachPermissions</span>([table]);
+            <span class="token lead">13</span><span class="token dim">// Allow the API to access the table</span>
+          </div>
+          <div class="token-line">
+            <span class="token lead">14</span>api.<span class="token keyword">attachPermissions</span>([table]);
           </div>
         </div>
         <div class="code-block api-auth long" style="display: none">
