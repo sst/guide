@@ -132,7 +132,7 @@
           <img class="graphql" src="/assets/lander/graphql-logo.svg" />
         </div>
         <h4>GraphQL API</h4>
-        <p>Create a serverless GraphQL API with AppSync. Using the SST AppSyncApi and Table constructs.</p>
+        <p>Create a serverless GraphQL API with AppSync. Using the SST AppSyncApi to define the schema and resolvers.</p>
         <a href="{% link _examples/how-to-create-a-serverless-graphql-api-with-aws-appsync.md %}">
           View example <i class="fa fa-angle-right" aria-hidden="true"></i>
         </a>
@@ -210,7 +210,7 @@
         </div>
         <div class="code-block graphql-api long" style="display: none">
           <div class="token-line">
-            <span class="token lead">1</span> <span class="token italics">const</span> api <span class="token operator">=</span> <span class="token italics">new</span> <span class="token keyword">sst.AppSyncApi</span>(<span class="token italics">this</span>, <span class="token string">"Api"</span>, {
+            <span class="token lead">1</span> <span class="token italics">new</span> <span class="token keyword">sst.AppSyncApi</span>(<span class="token italics">this</span>, <span class="token string">"Api"</span>, {
           </div>
           <div class="token-line">
             <span class="token lead">2</span>&nbsp;&nbsp;graphqlApi: { schema: <span class="token string">"schema.graphql"</span> },
@@ -219,37 +219,19 @@
             <span class="token lead">3</span>&nbsp;&nbsp;resolvers: {
           </div>
           <div class="token-line">
-            <span class="token lead">4</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"Query get"</span>: <span class="token string">"src/resolver.main"</span>
+            <span class="token lead">4</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"Query get"</span>: <span class="token string">"src/get.main"</span>,
           </div>
           <div class="token-line">
-            <span class="token lead">5</span>&nbsp;&nbsp;}
+            <span class="token lead">5</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"Query list"</span>: <span class="token string">"src/list.main"</span>,
           </div>
           <div class="token-line">
-            <span class="token lead">6</span>});
+            <span class="token lead">6</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"Mutation update"</span>: <span class="token string">"src/update.main"</span>
           </div>
           <div class="token-line">
-            <span class="token lead">7</span>&nbsp;
+            <span class="token lead">7</span>&nbsp;&nbsp;}
           </div>
           <div class="token-line">
-            <span class="token lead">8</span> <span class="token italics">const</span> table <span class="token operator">=</span> <span class="token italics">new</span> <span class="token keyword">sst.Table</span>(<span class="token italics">this</span>, <span class="token string">"Notes"</span>, {
-          </div>
-          <div class="token-line">
-            <span class="token lead">9</span>&nbsp;&nbsp;fields: { id: TableFieldType.<span class="token keyword">STRING</span> },
-          </div>
-          <div class="token-line">
-            <span class="token lead">10</span>&nbsp;&nbsp;primaryIndex: { partitionKey: <span class="token string">"id"</span> }
-          </div>
-          <div class="token-line">
-            <span class="token lead">11</span>});
-          </div>
-          <div class="token-line">
-            <span class="token lead">12</span>&nbsp;
-          </div>
-          <div class="token-line">
-            <span class="token lead">13</span><span class="token dim">// Allow the API to access the table</span>
-          </div>
-          <div class="token-line">
-            <span class="token lead">14</span>api.<span class="token keyword">attachPermissions</span>([table]);
+            <span class="token lead">8</span>});
           </div>
         </div>
         <div class="code-block api-auth long" style="display: none">
