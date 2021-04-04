@@ -5,6 +5,8 @@ api:
       url: /examples/how-to-create-a-rest-api-with-serverless.html
     - page: How to create a REST API in TypeScript with serverless
       url: /examples/how-to-create-a-rest-api-in-typescript-with-serverless.html
+    - page: How to create a REST API in Golang with serverless
+      url: /examples/how-to-create-a-rest-api-in-golang-with-serverless.html
     - page: How to add a custom domain to a serverless API
       url: /examples/how-to-add-a-custom-domain-to-a-serverless-api.html
 graphql:
