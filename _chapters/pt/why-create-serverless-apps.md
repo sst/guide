@@ -8,15 +8,15 @@ description: Aplicações Serverless são fáceis de manter e escalar, tendo em 
 comments_id: why-create-serverless-apps/87
 ---
 
-É muito importante entender porque vale a pena criar aplicações Serverless. Aqui temos algumas boas razões do porque aplicações Serverless tem certa vantagem em cima de modelos tradicionais de hospedar aplicações.
+É muito importante entender porque vale a pena criar aplicações Serverless. Aqui temos algumas boas razões do porque aplicações Serverless têm certas vantagens em cima de modelos tradicionais de hospedar aplicações.
 
 1. Baixa manutenção
 2. Baixo custo
 3. Fácil de escalar
 
-De longe, o maior benefício, é que você só tera de se preocupar com o seu código e nada mais. E o resultado da baixa manutenção é que você não precisará gerenciar servidores. Você não irá precisar checar se seu servidor está executando da maneira correto ou que você está seguindo todas as questões de segurança para ele.
+De longe, o maior benefício, é que você só tera de se preocupar com o seu código e nada mais. E o resultado da baixa manutenção é que você não precisará gerenciar servidores. Você não irá precisar checar se seu servidor está executando da maneira correta ou que você está seguindo todas as questões de segurança para ele.
 
-O principal motivo é o preço de se executar aplicações Serverless, onde você efetivamente só vai pagar algo quando acontecer uma requisição. Tendo em vista esse cenário, enquanto sua aplicação não está sendo usada nada será cobrado. Vamos fazer uma rápida análise de quanto nos custará para executar uma simples aplicação de notas. No nosso cenário, vamos assumir uma média de 1000 usuários ativos por dia fazendo uma média de 20 requisições por dia para a nossa API e armazenando cerca de 10MB de arquivos no S3.
+O principal motivo é o preço de se executar aplicações Serverless, onde você efetivamente só vai pagar algo quando acontecer uma requisição. Tendo em vista esse cenário, enquanto sua aplicação não está sendo usada, nada será cobrado. Vamos fazer uma rápida análise de quanto nos custará para executar uma simples aplicação de notas. No nosso cenário, vamos assumir uma média de 1000 usuários ativos por dia fazendo uma média de 20 requisições por dia para a nossa API e armazenando cerca de 10MB de arquivos no S3.
 
 {: .cost-table }
 | Serviço             | Taxa          | Custo |
@@ -36,8 +36,8 @@ O principal motivo é o preço de se executar aplicações Serverless, onde voc�
 [3] DynamoDB oferece 25GB/mês de armazenamento gratuito.  
 [4] S3 oferece 1GB gratuito de transferência.    
 
-Chegamos em um valor de $6.10 (cerca de R$ 22,67 na cotação atual do dólar em relação ao real). Adicionalmente, um domínio .com custa $12 por ano (cerca de R$ 30 dependendo do site), esse último sendo o mais caro. Mas tenha em mente que essas estimativas não são exatas e podem ter inúmeras variações. O uso no mundo real podem seguir por outros caminhos. Entretanto, essas estimativas conseguem nos mostrar o quão barato pode ser ter uma aplicação Serverless.
+Chegamos em um valor de $6.10 (cerca de R$ 22,67 na cotação atual do dólar em relação ao real). Adicionalmente, um domínio .com custa $12 por ano (cerca de R$ 30 dependendo do site), esse último sendo o mais caro. Mas tenha em mente que essas estimativas não são exatas e podem ter inúmeras variações. O uso no mundo real pode seguir por outros caminhos. Entretanto, essas estimativas conseguem nos mostrar o quão barato pode ser ter uma aplicação Serverless.
 
-Por fim, todo o esquema de escalonamento se deve em parte pelo DynamoDB que nos entrega escalonamento infinito e a Lambda que escala conforme a demanda. Claro que o nosso frontend é apenas uma simples página estática e isso garantirá que nossa aplicação responda quase que instantaneamente graças ao CloudFront.
+Por fim, todo o esquema de escalonamento se deve em parte pelo DynamoDB que nos entrega escalonamento infinito e à Lambda, que escala conforme a demanda. Claro que o nosso frontend é apenas uma simples página estática e isso garantirá que nossa aplicação responda quase que instantaneamente graças ao CloudFront.
 
 Perfeito! Agora que você está convencido que é uma boa criar aplicações Serverless, mãos na massa!
