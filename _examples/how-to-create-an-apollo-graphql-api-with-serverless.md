@@ -117,6 +117,14 @@ Here we are creating an Apollo Server. We are also enabling the GraphQL Playgrou
 $ npm install apollo-server-lambda
 ```
 
+We also need to quickly update our `tsconfig.json` to work with the Apollo Server package.
+
+{%change%} Add the following to the `compilerOptions` block in the `tsconfig.json`.
+
+``` json
+"esModuleInterop": true
+```
+
 Now let's test our new Apollo GraphQL API.
 
 ## Starting your dev environment
