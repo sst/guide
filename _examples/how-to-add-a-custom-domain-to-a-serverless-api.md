@@ -56,7 +56,6 @@ Let's start by setting up an API
 {%change%} Replace the `lib/MyStack.js` with the following.
 
 ``` js
-import * as cdk from "@aws-cdk/core";
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -73,9 +72,9 @@ export default class MyStack extends sst.Stack {
       },
     });
 
-    // Show API endpoint in output
-    new cdk.CfnOutput(this, "ApiEndpoint", {
-      value: api.httpApi.apiEndpoint,
+    // Show the API endpoint in output
+    this.addOutputs({
+      ApiEndpoint: api.httpApi.apiEndpoint,
     });
   }
 }

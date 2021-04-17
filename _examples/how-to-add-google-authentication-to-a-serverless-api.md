@@ -56,7 +56,6 @@ Let's start by setting up an API.
 {%change%} Replace the `lib/MyStack.js` with the following.
 
 ``` js
-import * as cdk from "@aws-cdk/core";
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -75,9 +74,9 @@ export default class MyStack extends sst.Stack {
       },
     });
 
-    // Show API endpoint in output
-    new cdk.CfnOutput(this, "ApiEndpoint", {
-      value: api.httpApi.apiEndpoint,
+    // Show the API endpoint and other info in the output
+    this.addOutputs({
+      ApiEndpoint: api.httpApi.apiEndpoint,
     });
   }
 }
@@ -109,13 +108,20 @@ const auth = new sst.Auth(this, "Auth", {
 
 // Allow authenticated users invoke API
 auth.attachPermissionsForAuthUsers([api]);
-
-new cdk.CfnOutput(this, "IdentityPoolId", {
-  value: auth.cognitoCfnIdentityPool.ref,
-});
 ```
 
 This creates a [Cognito Identity Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html) which relies on Google to authenticate users. And we use the [`attachPermissionsForAuthUsers`](https://docs.serverless-stack.com/constructs/Auth#attachpermissionsforauthusers) method to allow our logged in users to access our API.
+
+{%change%} Replace the `this.addOutputs` call with the following.
+
+```js
+this.addOutputs({
+  ApiEndpoint: api.httpApi.apiEndpoint,
+  IdentityPoolId: auth.cognitoCfnIdentityPool.ref,
+});
+```
+
+We are going to print out the resources that we created for reference.
 
 ## Adding function code
 
