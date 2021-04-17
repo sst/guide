@@ -82,11 +82,12 @@ export default class MyStack extends sst.Stack {
         userPool,
         userPoolClient,
       }),
-      defaultAuthorizationType: sst.ApiAuthorizationType.NONE,
+      defaultAuthorizationType: sst.ApiAuthorizationType.JWT,
       routes: {
         "GET /private": "src/private.main",
         "GET /public": {
           function: "src/public.main",
+          authorizationType: sst.ApiAuthorizationType.NONE,
         },
       },
     });
