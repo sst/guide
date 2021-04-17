@@ -55,7 +55,6 @@ Let's start by setting up an API.
 {%change%} Replace the `lib/MyStack.js` with the following.
 
 ``` js
-import * as cdk from "@aws-cdk/core";
 import * as cognito from "@aws-cdk/aws-cognito";
 import * as apigAuthorizers from "@aws-cdk/aws-apigatewayv2-authorizers";
 import * as sst from "@serverless-stack/resources";
@@ -83,25 +82,20 @@ export default class MyStack extends sst.Stack {
         userPool,
         userPoolClient,
       }),
-      defaultAuthorizationType: sst.ApiAuthorizationType.JWT,
+      defaultAuthorizationType: sst.ApiAuthorizationType.NONE,
       routes: {
         "GET /private": "src/private.main",
         "GET /public": {
           function: "src/public.main",
-          authorizationType: sst.ApiAuthorizationType.NONE,
         },
       },
     });
 
-    // Show API endpoint in output
-    new cdk.CfnOutput(this, "ApiEndpoint", {
-      value: api.httpApi.apiEndpoint,
-    });
-    new cdk.CfnOutput(this, "UserPoolId", {
-      value: userPool.userPoolId,
-    });
-    new cdk.CfnOutput(this, "UserPoolClientId", {
-      value: userPoolClient.userPoolClientId,
+    // Show the API endpoint and other info in the output
+    this.addOutputs({
+      ApiEndpoint: api.httpApi.apiEndpoint,
+      UserPoolId: userPool.userPoolId,
+      UserPoolClientId: userPoolClient.userPoolClientId,
     });
   }
 }

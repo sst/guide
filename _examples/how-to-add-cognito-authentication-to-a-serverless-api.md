@@ -55,7 +55,6 @@ Let's start by setting up an API.
 {%change%} Replace the `lib/MyStack.js` with the following.
 
 ``` js
-import * as cdk from "@aws-cdk/core";
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -74,9 +73,9 @@ export default class MyStack extends sst.Stack {
       },
     });
 
-    // Show API endpoint in output
-    new cdk.CfnOutput(this, "ApiEndpoint", {
-      value: api.httpApi.apiEndpoint,
+    // Show the API endpoint and other info in the output
+    this.addOutputs({
+      ApiEndpoint: api.httpApi.apiEndpoint,
     });
   }
 }
@@ -105,21 +104,24 @@ const auth = new sst.Auth(this, "Auth", {
 
 // Allow authenticated users to invoke the API
 auth.attachPermissionsForAuthUsers([api]);
-
-new cdk.CfnOutput(this, "UserPoolId", {
-  value: auth.cognitoUserPool.userPoolId,
-});
-new cdk.CfnOutput(this, "UserPoolClientId", {
-  value: auth.cognitoUserPoolClient.userPoolClientId,
-});
-new cdk.CfnOutput(this, "IdentityPoolId", {
-  value: auth.cognitoCfnIdentityPool.ref,
-});
 ```
 
 This creates a [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html); a user directory that manages user sign up and login. We've configured the User Pool to allow users to login with their email and password.
 
 This also creates a Cognito Identity Pool which assigns IAM permissions to users. We are allowing only the logged in users to have the permission to call the API.
+
+{%change%} Replace the `this.addOutputs` call with the following.
+
+```js
+this.addOutputs({
+  ApiEndpoint: api.httpApi.apiEndpoint,
+  UserPoolId: auth.cognitoUserPool.userPoolId,
+  IdentityPoolId: auth.cognitoCfnIdentityPool.ref,
+  UserPoolClientId: auth.cognitoUserPoolClient.userPoolClientId,
+});
+```
+
+We are going to print out the resources that we created for reference.
 
 ## Adding function code
 
