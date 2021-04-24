@@ -108,7 +108,7 @@ api.attachPermissions([table]);
 
 // Show the API endpoint in the output
 this.addOutputs({
-  ApiEndpoint: api.httpApi.apiEndpoint,
+  ApiEndpoint: api.url,
 });
 ```
 

@@ -94,7 +94,7 @@ export default class MyStack extends sst.Stack {
 
     // Show the API endpoint and other info in the output
     this.addOutputs({
-      ApiEndpoint: api.httpApi.apiEndpoint,
+      ApiEndpoint: api.url,
       UserPoolId: userPool.userPoolId,
       UserPoolClientId: userPoolClient.userPoolClientId,
     });

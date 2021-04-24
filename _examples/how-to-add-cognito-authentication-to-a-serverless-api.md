@@ -75,7 +75,7 @@ export default class MyStack extends sst.Stack {
 
     // Show the API endpoint and other info in the output
     this.addOutputs({
-      ApiEndpoint: api.httpApi.apiEndpoint,
+      ApiEndpoint: api.url,
     });
   }
 }
@@ -97,8 +97,12 @@ By default, all routes have the authorization type `AWS_IAM`. This means the cal
 ``` js
 // Create auth provider
 const auth = new sst.Auth(this, "Auth", {
+  // Create a Cognito User Pool to manage user's authentication info.
   cognito: {
-    signInAliases: { email: true },
+    userPool: {
+      // Users will login using their email and password
+      signInAliases: { email: true },
+    },
   },
 });
 
@@ -114,7 +118,7 @@ This also creates a Cognito Identity Pool which assigns IAM permissions to users
 
 ```js
 this.addOutputs({
-  ApiEndpoint: api.httpApi.apiEndpoint,
+  ApiEndpoint: api.url,
   UserPoolId: auth.cognitoUserPool.userPoolId,
   IdentityPoolId: auth.cognitoCfnIdentityPool.ref,
   UserPoolClientId: auth.cognitoUserPoolClient.userPoolClientId,
