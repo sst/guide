@@ -56,3 +56,9 @@ async:
       url: /examples/how-to-use-queues-in-your-serverless-app.html
     - page: How to use Pub/Sub in your serverless app
       url: /examples/how-to-use-pub-sub-in-your-serverless-app.html
+
+misc:
+  title: Miscellaneous
+  chapters:
+    - page: How to debug Lambda functions with Visual Studio Code
+      url: /examples/how-to-debug-lambda-functions-with-visual-studio-code.html
