@@ -26,7 +26,7 @@ Let's look at how.
 {%change%} Let's start by creating an SST app.
 
 ``` bash
-$ npx create-serverless-stack@latest vscode
+$ npx create-serverless-stack@latest --language typescript vscode
 $ cd vscode
 ```
 
