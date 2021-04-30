@@ -6,7 +6,7 @@ lang: en
 description: In this example we will look at how to debug AWS Lambda functions with Visual Studio Code using Serverless Stack (SST).
 repo: vscode
 ref: how-to-debug-lambda-functions-with-visual-studio-code
-comments_id: 
+comments_id: how-to-debug-lambda-functions-with-visual-studio-code/2388
 ---
 
 In this example we will look at how to debug AWS Lambda functions with [Visual Studio Code (VS Code)](https://code.visualstudio.com) using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
