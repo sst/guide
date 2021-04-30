@@ -200,9 +200,11 @@ Stack dev-vscode-my-stack
 
 The `ApiEndpoint` is the API we just created. Now if you head over to that endpoint in your browser, you'll notice that you'll hit the breakpoint.
 
-![Lambda function breakpoint hit in VS Code](/assets/examples/vscode/lambda-function-breakpoint-hit-in-vs-code.png)
+Here is a video of it in action.
 
-Here you can inspect the real Lambda function arguments.
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/2w4A06IsBlU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 ## Making changes
 
