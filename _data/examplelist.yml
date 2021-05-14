@@ -3,6 +3,8 @@ api:
   chapters:
     - page: How to create a REST API with serverless
       url: /examples/how-to-create-a-rest-api-with-serverless.html
+    - page: How to create a WebSocket API with serverless
+      url: /examples/how-to-create-a-websocket-api-with-serverless.html
     - page: How to create a REST API in TypeScript with serverless
       url: /examples/how-to-create-a-rest-api-in-typescript-with-serverless.html
     - page: How to create a REST API in Golang with serverless
