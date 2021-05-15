@@ -23,6 +23,8 @@ We are going to use the `useHistory` hook that comes with React Router. This wil
 const history = useHistory();
 ```
 
+Make sure to add it below the `export default function Login() {` line.
+
 {%change%} Then update the `handleSubmit` method in `src/containers/Login.js` to look like this:
 
 ``` javascript
