@@ -151,7 +151,7 @@ And now when we switch over to the browser and try logging in, you should see th
 
 You might have noticed in our Login and App components that we simply `alert` when there is an error. We are going to keep our error handling simple. But it'll help us further down the line if we handle all of our errors in one place.
 
-{%change%} To do that, add the following to `src/libs/errorLib.js`.
+{%change%} To do that, create `src/libs/errorLib.js` and add the following.
 
 ``` javascript
 export function onError(error) {
