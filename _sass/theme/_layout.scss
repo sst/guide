@@ -923,6 +923,7 @@
 
     @include media-query($on-palm) {
       margin-top: $spacing-unit;
+      margin-bottom: $spacing-unit;
     }
 
     &:before {

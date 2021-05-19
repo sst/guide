@@ -213,8 +213,7 @@ div.support-footer {
   }
 
   div.newsletter {
-    $width-on-palm: 240px;
-    $width: 340px;
+    $width: 320px;
 
     display: flex;
     align-items: center;
@@ -266,6 +265,10 @@ div.support-footer {
           font-size: 16px;
         }
       }
+    }
+
+    & > .controls {
+      flex: 0 0 $width;
     }
 
     p.email-octopus-error-message {
@@ -336,6 +339,10 @@ div.newsletter div.divider {
   text-align: center;
   position: relative;
 
+  @include media-query($on-palm) {
+    margin: 10px $spacing-unit - 10px;
+  }
+
   div {
     position: absolute;
     width: 100%;
@@ -355,9 +362,6 @@ div.newsletter div.divider {
 
 div.newsletter div.support {
   a.button {
-    $width-on-palm: 240px;
-    $width: 340px;
-
     margin: 0 auto;
     box-sizing: border-box;
     border-radius: 4px;
@@ -366,7 +370,6 @@ div.newsletter div.support {
     color: white;
     text-align: center;
     padding: 14px 20px;
-    width: $width;
     font-size: 15px;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -374,7 +377,7 @@ div.newsletter div.support {
     display: block;
 
     @include media-query($on-palm) {
-      width: $width-on-palm;
+      font-size: 14px;
     }
 
     &:hover {
