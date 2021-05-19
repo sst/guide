@@ -100,7 +100,7 @@ The above are run automatically through [Github Actions](https://github.com/Anom
 
 ## Maintainers
 
-Serverless Stack is maintained by [Anomaly Innovations](https://anoma.ly/). [**Subscribe to our newsletter**](https://emailoctopus.com/lists/1c11b9a8-1500-11e8-a3c9-06b79b628af2/forms/subscribe) for updates on Serverless Stack.
+Serverless Stack is maintained by [Anomaly Innovations](https://anoma.ly/). [**Subscribe to our newsletter**](https://serverless-stack.com/newsletter.html) for updates on Serverless Stack.
 
 ## Contributors
 
