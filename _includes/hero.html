@@ -360,30 +360,7 @@
       <p>Join 30,000 readers from the biggest companies in the world.</p>
     </div>
     <div class="form">
-      <div class="email-octopus-form-wrapper">
-        <p class="email-octopus-success-message"></p>
-        <p class="email-octopus-error-message"></p>
-        <form method="post" action="https://emailoctopus.com/lists/1c11b9a8-1500-11e8-a3c9-06b79b628af2/members/external-add" class="email-octopus-form">
-          <div class="email-octopus-form-row">
-            <input type="email" name="emailAddress" placeholder="email@domain.com" class="email-octopus-email-address">
-          </div>
-          <div class="email-octopus-form-row" style="display: none;">
-            <label>First name</label>
-            <input type="text" name="firstName" class="email-octopus-first-name" value="">
-          </div>
-          <div class="email-octopus-form-row" style="display: none;">
-            <label>Last name</label>
-            <input type="text" name="lastName" class="email-octopus-last-name" value="">
-          </div>
-          <div class="email-octopus-form-row-hp" aria-hidden="true">
-            <input type="text" name="hp1c11b9a8-1500-11e8-a3c9-06b79b628af2" tabindex="-1" autocomplete="nope">
-          </div>
-          <div class="email-octopus-form-row-subscribe">
-            <input type="hidden" name="successRedirectUrl" class="email-octopus-success-redirect-url" value="/thanks.html">
-            <button type="submit">Download</button>
-          </div>
-        </form>
-      </div>
+      {% include email-octopus-form.html button_copy="Download" %}
     </div>
   </div>
 
