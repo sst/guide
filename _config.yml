@@ -36,8 +36,6 @@ backend_ext_resources_github_repo: "https://github.com/AnomalyInnovations/server
 sst_github_repo: "https://github.com/serverless-stack/serverless-stack"
 sst_examples_github_repo: "https://github.com/serverless-stack/examples"
 
-newsletter_signup_form: "https://emailoctopus.com/lists/1c11b9a8-1500-11e8-a3c9-06b79b628af2/forms/subscribe"
-
 survey_url: "https://serverless-stack.typeform.com/to/xiPdCW"
 
 google_analytics: "UA-3536629-11"

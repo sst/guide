@@ -1,6 +1,51 @@
 <aside id="toc-sidebar" class="sidebar">
 
-  <p class="section"><a href="/#table-of-contents">Table of Contents</a></p>
+  <div class="context-cta">
+    <div class="header">
+      <img src="/assets/lander/ebook-cover.svg" width="86px" />
+      <p class="eyebrow">Part of the</p>
+      <h6>Serverless Stack Guide</h6>
+      <p>Learn to build full-stack apps with serverless and React</p>
+    </div>
+    <div class="body">
+      <a class="guide" href="/#guide">
+        View the full guide&nbsp;
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+      </a>
+      <hr>
+      <div class="newsletter">
+        <p>Sign up for our newsletter and get this 1000 page ebook for free!</p>
+        <div class="form">
+          <div class="email-octopus-form-wrapper">
+            <p class="email-octopus-success-message"></p>
+            <p class="email-octopus-error-message"></p>
+            <form method="post" action="https://emailoctopus.com/lists/1c11b9a8-1500-11e8-a3c9-06b79b628af2/members/external-add" class="email-octopus-form">
+              <div class="email-octopus-form-row">
+                <input type="email" name="emailAddress" placeholder="email@domain.com" class="email-octopus-email-address">
+              </div>
+              <div class="email-octopus-form-row" style="display: none;">
+                <label>First name</label>
+                <input type="text" name="firstName" class="email-octopus-first-name" value="">
+              </div>
+              <div class="email-octopus-form-row" style="display: none;">
+                <label>Last name</label>
+                <input type="text" name="lastName" class="email-octopus-last-name" value="">
+              </div>
+              <div class="email-octopus-form-row-hp" aria-hidden="true">
+                <input type="text" name="hp1c11b9a8-1500-11e8-a3c9-06b79b628af2" tabindex="-1" autocomplete="nope">
+              </div>
+              <div class="email-octopus-form-row-subscribe">
+                <input type="hidden" name="successRedirectUrl" class="email-octopus-success-redirect-url" value="/thanks.html">
+                <button type="submit">Download</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="section toc"><a href="/#table-of-contents">Table of Contents</a></p>
 
   {% include toc-sidebar.html items=site.data.chapterlist.preface id="preface" page_en_url=include.page_en_url %}
 

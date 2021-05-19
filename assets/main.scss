@@ -178,18 +178,16 @@ div.support-footer {
 
 
 %extras-section {
-  text-align: center;
 
   div.container {
     display: block;
-    padding: $spacing-unit 20px $spacing-unit + 7px;
-    background-color: darken($background-color, 5%);
+    padding: $spacing-unit;
     background-color: $brand-color;
     color: white;
     border-radius: 5px;
 
     @include media-query($on-palm) {
-      padding: 20px;
+      padding: $spacing-unit / 2;
     }
 
     div.share {
@@ -216,15 +214,57 @@ div.support-footer {
 
   div.newsletter {
     $width-on-palm: 240px;
-    $width: 380px;
+    $width: 340px;
 
-    p.copy {
-      margin-bottom: 20px;
-      text-align: center;
-      font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include media-query($on-palm) {
+      display: block;
+    }
+
+    & > .copy {
+      margin-right: $spacing-unit * 2;
 
       @include media-query($on-palm) {
-        font-size: 20px;
+        margin-right: 0;
+        margin-bottom: $spacing-unit / 2;
+        text-align: center;
+      }
+
+      p.eyebrow {
+        margin-bottom: 0;
+        font-size: 12px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        opacity: 0.7;
+      }
+      h6 {
+        margin-bottom: 1px;
+        font-size: 24px;
+
+        @include media-query($on-palm) {
+          font-size: 20px;
+        }
+      }
+      p.description {
+        margin-bottom: $spacing-unit - 10px;
+        font-size: 14px;
+        line-height: 1.4;
+        opacity: 0.7;
+
+        @include media-query($on-palm) {
+          margin-bottom: 8px;
+        }
+      }
+      p.body {
+        margin-bottom: 0;
+        font-size: 18px;
+
+        @include media-query($on-palm) {
+          font-size: 16px;
+        }
       }
     }
 
@@ -232,54 +272,69 @@ div.support-footer {
       color: white;
     }
 
-    div.email-octopus-form-row {
-      margin-bottom: 0;
+    form {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
     }
 
-    div.email-octopus-form-row-subscribe {
-      margin-top: 0;
+    .email-octopus-form-row {
+      margin: 0;
+      flex: 1 1 auto;
     }
 
-    form input {
+    input.email-octopus-email-address {
+      margin: 0;
       padding: 10px;
-      width: $width;
-      font-size: 20px;
+      width: 100%;
+      font-size: 16px;
       height: auto;
       @extend %newsletter-input;
 
       @include media-query($on-palm) {
-        width: $width-on-palm;
+        font-size: 15px;
       }
     }
 
-    form button {
-      margin-top: 7px;
-      width: $width;
-      padding: 14px 22px;
-      font-size: 18px;
-      font-weight: 700;
-      @extend %newsletter-button;
+    .email-octopus-form-row-subscribe {
+      margin-top: 0;
+      margin-left: 10px;
+    }
+
+    button {
+      margin: 0;
+      padding: 17px 15px;
+      font-size: 15px;
+      white-space: nowrap;
+      text-transform: uppercase;
+      font-family: $base-font-family;
+      display: inline-block;
+      background-color: $important-color;
+      color: white;
+      border-radius: 4px;
+      line-height: 1;
+      transition: 0.3s;
+      letter-spacing: 1px;
+      cursor: pointer;
 
       @include media-query($on-palm) {
-        width: $width-on-palm;
-        font-size: 16px;
+        padding: 18px 12px;
+        font-size: 12px;
+      }
+
+      &:hover {
+        background-color: lighten($important-color, 7%);
       }
     }
   }
 }
 
 div.newsletter div.divider {
-  $width-on-palm: 240px;
-  $width: 380px;
   $color: lighten($brand-color, 20%);
 
-  margin: $spacing-unit / 2 auto;
+  margin: $spacing-unit / 2 $spacing-unit - 10px;
+  text-align: center;
   position: relative;
-  width: $width;
-
-  @include media-query($on-palm) {
-    width: $width-on-palm;
-  }
 
   div {
     position: absolute;
@@ -301,19 +356,21 @@ div.newsletter div.divider {
 div.newsletter div.support {
   a.button {
     $width-on-palm: 240px;
-    $width: 380px;
+    $width: 340px;
 
     margin: 0 auto;
     box-sizing: border-box;
     border-radius: 4px;
     line-height: 1.2;
-    background-color: $important-color;
-    border: 2px solid darken($important-color, 5%);
+    background-color: rgba(255, 255, 255, 0.2);
     color: white;
     text-align: center;
     padding: 14px 20px;
     width: $width;
-    font-size: 18px;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
     display: block;
 
     @include media-query($on-palm) {
@@ -321,8 +378,7 @@ div.newsletter div.support {
     }
 
     &:hover {
-      background-color: darken($important-color, 10%);
-      border-color: darken($important-color, 15%);
+      background-color: rgba(255, 255, 255, 0.35);
     }
   }
 }
@@ -337,6 +393,103 @@ iframe.seed-demo-video {
   @include media-query($on-palm) {
     width: 100%;
     height: auto;
+  }
+}
+
+div.standalone-newsletter-form-container {
+  margin: 60px 0 100px;
+
+  @include media-query($on-palm) {
+    margin: 0 0 $spacing-unit / 2;
+  }
+}
+
+div.standalone-newsletter-form {
+  margin-bottom: $spacing-unit / 2;
+  background-color: $brand-color;
+  border-radius: 5px;
+  padding: $spacing-unit;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @include media-query($on-palm) {
+    padding: $spacing-unit / 2;
+    display: block;
+    text-align: center;
+  }
+
+  & > .copy {
+    margin-right: $spacing-unit;
+
+    @include media-query($on-palm) {
+      margin-right: 0;
+      margin-bottom: $spacing-unit / 2;
+    }
+
+    p {
+      margin-bottom: 0;
+      font-size: 22px;
+      line-height: 1.5;
+
+      @include media-query($on-palm) {
+        font-size: 18px;
+      }
+    }
+  }
+
+  p.email-octopus-success-message {
+    margin: 0;
+  }
+  p.email-octopus-error-message {
+    margin: 0;
+    color: white;
+  }
+
+  div.email-octopus-form-row {
+    margin-bottom: 0;
+  }
+
+  form {
+    width: 260px;
+
+    @include media-query($on-palm) {
+      width: 100%;
+    }
+  }
+
+  input.email-octopus-email-address {
+    margin: 0;
+    padding: 10px;
+    font-size: 18px;
+    height: auto;
+    @extend %newsletter-input;
+  }
+
+  .email-octopus-form-row-subscribe {
+    margin-top: 10px;
+  }
+
+  button {
+    margin: 0;
+    padding: 18px 16px;
+    font-size: 16px;
+    white-space: nowrap;
+    text-transform: uppercase;
+    font-family: $base-font-family;
+    display: block;
+    width: 100%;
+    background-color: $important-color;
+    color: white;
+    border-radius: 4px;
+    line-height: 1;
+    transition: 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: lighten($important-color, 7%);
+    }
   }
 }
 
