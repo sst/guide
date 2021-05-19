@@ -686,10 +686,9 @@ $reader-logo-width: 123px;
 
   .title {
     text-align: center;
-    margin-bottom: 5px;
 
     h2 {
-      margin-bottom: 5px;
+      margin-bottom: 10px;
       line-height: 1.1;
       font-size: 44px;
       font-weight: 700;
@@ -698,17 +697,57 @@ $reader-logo-width: 123px;
         font-size: 36px;
       }
     }
-    p {
+    h4 {
       margin-bottom: 0;
-      color: $tertiary-text-color;
+      font-family: $base-font-family;
+      font-size: 20px;
+    }
+  }
+
+  .form-container {
+    margin: $spacing-unit - 10px auto 0;
+    padding: $spacing-unit;
+    background-color: $brand-color;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 775px;
+
+    @include media-query($on-palm) {
+      padding: 12px $spacing-unit / 2 $spacing-unit / 2;
+      display: block;
+    }
+
+    div.form-copy {
+      margin-right: 10px;
+      color: white;
+
+      @include media-query($on-palm) {
+        margin-right: 0;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+
+      p:first-child {
+        margin: 0;
+        font-size: 20px;
+      }
+      p:last-child {
+        margin: 0;
+        font-size: 14px;
+        opacity: 0.7;
+      }
     }
   }
 
   .form {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
+    flex: 0 auto;
+
+    p.email-octopus-error-message,
+    p.email-octopus-success-message {
+      margin: 0;
+    }
 
     form {
       display: flex;
@@ -717,19 +756,20 @@ $reader-logo-width: 123px;
 
       .email-octopus-form-row {
         margin: 0;
+        flex: 1 1 auto;
       }
 
       input {
         margin: 0;
         padding: 10px;
-        width: 280px;
+        width: 240px;
         font-size: 20px;
         height: auto;
         @extend %newsletter-input;
 
         @include media-query($on-palm) {
-          width: 164px;
-          font-size: 16px;
+          width: 100%;
+          font-size: 15px;
         }
       }
 
@@ -740,8 +780,9 @@ $reader-logo-width: 123px;
 
       button {
         margin: 0;
-        padding: 19px 22px;
+        padding: 19px 20px;
         font-size: 18px;
+        white-space: nowrap;
         text-transform: uppercase;
         font-family: $base-font-family;
         display: inline-block;
@@ -754,8 +795,8 @@ $reader-logo-width: 123px;
         cursor: pointer;
 
         @include media-query($on-palm) {
-          padding: 17px 16px 18px;
-          font-size: 14px;
+          padding: 18px 13px;
+          font-size: 12px;
         }
 
         &:hover {

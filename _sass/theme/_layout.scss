@@ -541,8 +541,134 @@
 .page-content .post-container > .sidebar {
   margin-left: $spacing-unit;
   padding-top: $spacing-unit / 2;
-  flex: 0 0 220px;
+  flex: 0 0 300px;
   font-size: 14px;
+
+  @include media-query($on-laptop) {
+    margin-left: 0;
+    border-top: 2px solid $grey-color-light;
+    padding-top: $spacing-unit / 2 + 3px;
+    order: 99;
+  }
+
+  .context-cta {
+    background-color: $brand-color;
+    border-radius: 5px;
+    padding: $spacing-unit / 2;
+    color: white;
+
+    @include media-query($on-laptop) {
+      display: none;
+    }
+
+    .header {
+      margin-bottom: $spacing-unit / 2;
+      padding-left: 98px;
+      padding-bottom: 6px;
+      position: relative;
+
+      img {
+        left: 0;
+        top: - (21px + $spacing-unit / 2);
+        position: absolute;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25),
+                    0 3px 3px rgba(0, 0, 0, 0.125),
+                    0 4px 4px rgba(0, 0, 0, 0.06);
+      }
+
+      p.eyebrow {
+        margin-bottom: 0;
+        font-size: 11px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        opacity: 0.7;
+      }
+      h6 {
+        margin-bottom: 3px;
+        font-size: 16px;
+      }
+      p:last-child {
+        margin-bottom: 0;
+        line-height: 1.4;
+      }
+    }
+
+    .body {
+      a.guide {
+        display: block;
+        line-height: 44px;
+        border-radius: 4px;
+        background-color: rgba(255, 255, 255, 0.2);
+        text-align: center;
+        font-size: 13px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: white;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.35);
+        }
+      }
+
+      hr {
+        margin: $spacing-unit - 10px $spacing-unit - 10px $spacing-unit - 18px;
+        opacity: 0.4;
+      }
+
+      .newsletter {
+        p:first-child {
+          text-align: center;
+          font-size: 16px;
+          line-height: 1.5;
+        }
+        form {
+          display: flex;
+          align-items: stretch;
+          justify-content: center;
+        }
+
+        .email-octopus-form-row {
+          margin: 0;
+          flex: 1 1 auto;
+        }
+
+        input.email-octopus-email-address {
+          margin: 0;
+          padding: 10px;
+          width: 100%;
+          font-size: 14px;
+          height: auto;
+          @extend %newsletter-input;
+        }
+
+        .email-octopus-form-row-subscribe {
+          margin-top: 0;
+          margin-left: 10px;
+        }
+
+        button {
+          margin: 0;
+          padding: 16px 13px;
+          font-size: 14px;
+          white-space: nowrap;
+          text-transform: uppercase;
+          font-family: $base-font-family;
+          display: inline-block;
+          background-color: $important-color;
+          color: white;
+          border-radius: 4px;
+          line-height: 1;
+          transition: 0.3s;
+          cursor: pointer;
+
+          &:hover {
+            background-color: lighten($important-color, 7%);
+          }
+        }
+      }
+    }
+  }
 
   p.section {
     margin-top: $spacing-unit;
@@ -553,10 +679,13 @@
       color: $text-color;
     }
 
-    &:first-child {
-      margin-top: 0;
+    &.toc {
       font-size: 18px;
       font-family: $base-font-family;
+
+      @include media-query($on-laptop) {
+        margin-top: 0;
+      }
     }
   }
 
@@ -593,13 +722,6 @@
     &.steps.open {
       display: block;
     }
-  }
-
-  @include media-query($on-laptop) {
-    margin-left: 0;
-    border-top: 2px solid $grey-color-light;
-    padding-top: $spacing-unit;
-    order: 99;
   }
 }
 .post-header {
