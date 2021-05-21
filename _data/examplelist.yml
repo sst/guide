@@ -58,6 +58,8 @@ async:
       url: /examples/how-to-use-queues-in-your-serverless-app.html
     - page: How to use Pub/Sub in your serverless app
       url: /examples/how-to-use-pub-sub-in-your-serverless-app.html
+    - page: How to automatically resize images with serverless
+      url: /examples/how-to-automatically-resize-images-with-serverless.html
 
 misc:
   title: Miscellaneous
