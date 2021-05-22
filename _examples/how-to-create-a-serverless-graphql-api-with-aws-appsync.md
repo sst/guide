@@ -425,8 +425,6 @@ You'll notice a couple of things. Firstly, the note we created is still there. T
 
 ## Making changes
 
-
-
 {%change%} Let's fix our `src/deleteNote.ts` by un-commenting the query.
 
 ``` ts
@@ -453,6 +451,12 @@ query listNotes {
 ```
 
 Notice we didn't need to redeploy our app to see the change.
+
+Here is a video of it in action.
+
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/PScbA_1sYns" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 ## Deploying your API
 

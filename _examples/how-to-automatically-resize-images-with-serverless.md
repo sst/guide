@@ -281,6 +281,12 @@ Now if you go back and upload that same image again, you should see the new resi
 
 ![Updated SST resized image in S3 bucket](/assets/examples/bucket-image-resize/updated-sst-resized-image-in-s3-bucket.png)
 
+Here is a video of it in action.
+
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/1m9Pl4oZBnw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 ## Deploying to prod
 
 {%change%} To wrap things up we'll deploy our app to prod.
