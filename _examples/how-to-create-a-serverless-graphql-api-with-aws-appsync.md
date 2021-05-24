@@ -11,6 +11,14 @@ comments_id: how-to-create-a-serverless-graphql-api-with-aws-appsync/2362
 
 In this example we'll look at how to create an [AppSync GraphQL API](https://aws.amazon.com/appsync/) on AWS using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be allowing our users to get, create, update, delete, and list notes.
 
+We'll be using SST's [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development). It allows you to make changes and test locally without having to redeploy.
+
+Here is a video of it in action.
+
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/PScbA_1sYns" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 ## Requirements
 
 - Node.js >= 10.15.1
@@ -451,12 +459,6 @@ query listNotes {
 ```
 
 Notice we didn't need to redeploy our app to see the change.
-
-Here is a video of it in action.
-
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/PScbA_1sYns" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
 
 ## Deploying your API
 

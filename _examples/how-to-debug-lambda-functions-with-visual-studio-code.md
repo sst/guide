@@ -13,6 +13,12 @@ In this example we will look at how to debug AWS Lambda functions with [Visual S
 
 SST allows you to build and test Lambda functions locally using [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development). This means that you can attach breakpoints and inspect your Lambda functions locally, even if they are invoked remotely.
 
+Here is a video of it in action.
+
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/2w4A06IsBlU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 Let's look at how.
 
 ## Requirements
@@ -200,11 +206,7 @@ Stack dev-vscode-my-stack
 
 The `ApiEndpoint` is the API we just created. Now if you head over to that endpoint in your browser, you'll notice that you'll hit the breakpoint.
 
-Here is a video of it in action.
-
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/2w4A06IsBlU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
+![Hitting a breakpoint in a Lambda function in VS Code](/assets/examples/vscode/set-lambda-hitting-a-breakpoint-in-a-lambda-function-in-vs-code.png)
 
 ## Making changes
 

@@ -11,7 +11,13 @@ comments_id: how-to-automatically-resize-images-with-serverless/2399
 
 In this example we will look at how to automatically resize images that are uploaded to your S3 bucket using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be using the [Sharp](https://github.com/lovell/sharp) package as a [Lambda Layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
 
-We'll also be using [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) to test our image resizer locally before having to deploy it to AWS.
+We'll be using SST's [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development). It allows you to make changes and test locally without having to redeploy.
+
+Here is a video of it in action.
+
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/1m9Pl4oZBnw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 ## Requirements
 
@@ -280,12 +286,6 @@ const width = 100;
 Now if you go back and upload that same image again, you should see the new resized image show up in your S3 bucket.
 
 ![Updated SST resized image in S3 bucket](/assets/examples/bucket-image-resize/updated-sst-resized-image-in-s3-bucket.png)
-
-Here is a video of it in action.
-
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/1m9Pl4oZBnw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
 
 ## Deploying to prod
 
