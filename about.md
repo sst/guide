@@ -16,6 +16,10 @@ The [Serverless Stack (SST) framework]({{ site.sst_github_repo }}) is an open so
 
 The [Serverless-Stack.com](/) site was originally launched in March 2017 as an open source guide for building full-stack serverless apps. Over the years tens of thousands of folks have used the guide to build their projects and businesses. It's now the most widely read resource for serverless.
 
+# [Seed](https://seed.run)
+
+[Seed](https://seed.run) is the easiest way for your team to deploy and manage your serverless applications. It can speed up your deployments 100x by incrementally deploying them. It also sends you real-time alerts when your Lambda functions fail. And, SST apps deploy for free on Seed!
+
 # [Newsletter]({% link newsletter.md %})
 
 We run a monthly newsletter where we share news and updates with our community. Make sure to subscribe below.
