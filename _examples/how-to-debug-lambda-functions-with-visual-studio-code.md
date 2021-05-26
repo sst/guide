@@ -145,7 +145,6 @@ To allow VS Code to set breakpoints and debug our Lambda functions we'll add it 
       "request": "launch",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["start"],
-      "port": 9229,
       "skipFiles": ["<node_internals>/**"]
     },
     {
