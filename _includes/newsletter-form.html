@@ -1,8 +1,15 @@
 <div class="copy">
-  <p class="eyebrow">Part of the</p>
-  <h6>Serverless Stack Guide</h6>
-  <p class="description">Learn to build full-stack apps with serverless and React</p>
-  <p class="body">Join 30,000 other readers and subscribe to our monthly newsletter. We’ll send you the entire 1000 page ebook for free!</p>
+  {% if include.type == "guide" %}
+    <p class="eyebrow">Part of the</p>
+    <h6>Serverless Stack Guide</h6>
+    <p class="body">Download the FREE 1000 page ebook!</p>
+    <p class="description">Get the most popular resource for building serverless apps. We'll also send you updates when new versions are published.</p>
+  {% else %}
+    <p class="eyebrow">Learn serverless</p>
+    <h6>Serverless Stack Guide</h6>
+    <p class="body">Download the FREE 1000 page ebook!</p>
+    <p class="description">Get the most popular resource for building serverless apps. We'll also send you updates when new versions are published.</p>
+  {% endif %}
 </div>
 <div class="controls">
   <div class="support">
@@ -16,5 +23,6 @@
     <span>&amp;</span>
   </div>
 
-  {% include email-octopus-form.html button_copy="Download" %}
+  {% include email-octopus-form.html button_copy="Download" source="post-footer" %}
+
 </div>
