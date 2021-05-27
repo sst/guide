@@ -66,3 +66,5 @@ misc:
   chapters:
     - page: How to debug Lambda functions with Visual Studio Code
       url: /examples/how-to-debug-lambda-functions-with-visual-studio-code.html
+    - page: How to use Lambda Layers in your serverless app
+      url: /examples/how-to-use-lambda-layers-in-your-serverless-app.html
