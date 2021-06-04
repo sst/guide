@@ -26,6 +26,8 @@ database:
       url: /examples/how-to-use-dynamodb-in-your-serverless-app.html
     - page: How to create a CRUD API with serverless using DynamoDB
       url: /examples/how-to-create-a-crud-api-with-serverless-using-dynamodb.html
+    - page: How to use MongoDB in your serverless app
+      url: /examples/how-to-use-mongodb-in-your-serverless-app.html
 
 iam-auth:
   title: Using AWS IAM
