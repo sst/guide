@@ -111,6 +111,10 @@ Thanks to these folks for their contributions to the content of Serverless Stack
 - [Christian Kaindl](https://github.com/christiankaindl): Translating chapters to German
 - [Jae Chul Kim](https://github.com/bsg-bob): Translating chapters to Korean
 
+---
+
+This repo is maintained by [Serverless Stack](https://serverless-stack.com).
+
 
 [Slack]: https://launchpass.com/serverless-stack
 [Discourse]: https://discourse.serverless-stack.com
