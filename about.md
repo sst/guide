@@ -33,7 +33,3 @@ We run a monthly newsletter where we share news and updates with our community. 
 # [Slack]({{ site.slack_invite_url %}})
 
 Make sure to [**join us on Slack**]({{ site.slack_invite_url }}) to connect with the community and to get involved.
-
----
-
-Serverless Stack is brought to you by Frank ([@fanjiewang](https://twitter.com/fanjiewang)) & Jay ([@jayair](https://twitter.com/jayair)) from [Anomaly Innovations](https://anoma.ly).
