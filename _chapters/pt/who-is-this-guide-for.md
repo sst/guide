@@ -14,4 +14,4 @@ Talvez você seja um desenvolvedor backend querendo aprender mais sobre a parte 
 
 Por hora, apenas vamos abordar o desenvolvimento com JavaScript. Futuramente talvez abordemos outras linguagens e ambientes. Porém, para começar, nós achamos muito benéfico para um desenvolvedor full-stack utilizar apenas uma linguagem (JavaScript) e ambiente (NodeJs) para a construção de uma aplicação completa.
 
-Pessoalmente, a ideia do Serverless foi uma enorme revelação para nós e isso nos fez criar um guia com qual poderíamos compartilhar o que aprendemos. Você pode ser mais sobre nós [**aqui**]({% link about.md %}). E [veja alguns exemplos de pessoas que construiram aplicações com a stack Serverless]({% link showcase.md %})
+Pessoalmente, a ideia do Serverless foi uma enorme revelação para nós e isso nos fez criar um guia com qual poderíamos compartilhar o que aprendemos. Você pode ser mais sobre nós [**aqui**]({% link about.html %}). E [veja alguns exemplos de pessoas que construiram aplicações com a stack Serverless]({% link showcase.md %})
