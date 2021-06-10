@@ -1,0 +1,337 @@
+/////////////////
+// ABOUTE PAGE //
+/////////////////
+main > .about-page {
+
+  @include media-query($on-palm) {
+    padding: 0 $spacing-unit / 2;
+  }
+
+  .header {
+
+    h1 {
+      margin: 0 auto $spacing-unit / 2;
+      max-width: 570px;
+      padding-top: $spacing-unit;
+      font-size: 40px;
+      line-height: 1.4;
+      text-align: center;
+    }
+    & > p {
+      margin: 0 auto;
+      max-width: 570px;
+      font-size: 20px;
+      text-align: center;
+      color: $secondary-text-color;
+      b {
+        font-weight: 600;
+      }
+    }
+
+
+    @include media-query($on-palm) {
+      h1 {
+        padding-top: $spacing-unit / 2;
+        font-size: 34px;
+      }
+    }
+  }
+
+  hr {
+    margin: $spacing-unit * 3 auto;
+    max-width: 400px;
+    border-color: darken($background-color, 10%);
+
+    @include media-query($on-palm) {
+      margin: $spacing-unit * 1.5 auto;
+    }
+  }
+
+  .products {
+    margin: 0 auto;
+    max-width: 960px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    @include media-query($on-palm) {
+      display: block;
+    }
+
+    .product {
+      flex: 0 0 33%;
+      box-sizing: border-box;
+      padding: 0 20px;
+
+      @include media-query($on-palm) {
+        margin-bottom: $spacing-unit / 2;
+        padding: 0;
+      }
+
+      h4 {
+        margin-bottom: 2px;
+        font-size: 24px;
+        font-weight: 600;
+      }
+      p {
+        margin-bottom: 0;
+        color: $secondary-text-color;
+      }
+    }
+  }
+
+  .investors {
+    margin: 0 auto;
+    text-align: center;
+    max-width: 720px;
+
+    h3 {
+      font-size: 30px;
+    }
+
+    p {
+      margin-bottom: $spacing-unit;
+      color: $secondary-text-color;
+      font-size: 17px;
+      a {
+        font-weight: 600;
+      }
+    }
+
+    .logos {
+      a {
+        display: inline-block;
+      }
+      a:nth-child(1) {
+        margin-right: $spacing-unit;
+        vertical-align: -11px;
+      }
+      a:nth-child(3) {
+        margin-left: $spacing-unit;
+        img {
+          margin-top: 32px;
+        }
+      }
+
+      @include media-query($on-palm) {
+        a {
+          display: block;
+        }
+        a:nth-child(1) {
+          margin-right: 0;
+          margin-bottom: $spacing-unit / 2 + 5px;
+        }
+        a:nth-child(2) {
+          margin-bottom: $spacing-unit / 2 + 5px;
+        }
+        a:nth-child(3) {
+          margin-left: 0;
+          img {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+
+    ul {
+      margin: $spacing-unit -10px 0 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+
+      @include media-query($on-palm) {
+        margin: $spacing-unit / 2 0 0 0;
+      }
+
+      li {
+        flex: 0 0 25%;
+        margin-top: $spacing-unit / 2 + 10px;
+        margin-right: 10px;
+        max-width: 156px;
+        text-align: left;
+
+        @include media-query($on-palm) {
+          margin-right: 0;
+          flex: 0 1 50%;
+        }
+
+        a {
+          font-weight: 600;
+          font-size: 17px;
+          @include media-query($on-palm) {
+            font-size: 15px;
+          }
+        }
+        p {
+          margin: 0;
+          font-size: 13px;
+          color: $tertiary-text-color;
+        }
+
+        &:last-child {
+          color: $tertiary-text-color;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  .founders {
+    margin: 0 auto;
+    max-width: 720px;
+    text-align: center;
+
+    h3 {
+      font-size: 30px;
+      margin-bottom: $spacing-unit;
+    }
+
+    p {
+      color: $secondary-text-color;
+      font-size: 17px;
+      a {
+        font-weight: 600;
+      }
+      b {
+        font-weight: 600;
+      }
+    }
+  }
+
+  .team {
+    margin: 0 auto;
+    max-width: 720px;
+    text-align: center;
+
+    h3 {
+      margin-bottom: $spacing-unit - 2px;
+      font-size: 30px;
+    }
+
+    .profiles {
+      margin-bottom: $spacing-unit;
+
+      a {
+        &:first-child {
+          margin-right: $spacing-unit;
+        }
+        img {
+          border-radius: 100%;
+        }
+      }
+    }
+
+    p {
+      color: $secondary-text-color;
+      font-size: 17px;
+      a {
+        font-weight: 600;
+      }
+      b {
+        font-weight: 600;
+      }
+    }
+  }
+
+  .community {
+    margin: 0 auto;
+    max-width: 720px;
+    text-align: center;
+
+    h3 {
+      font-size: 30px;
+    }
+
+    p {
+      margin-bottom: $spacing-unit;
+      color: $secondary-text-color;
+      font-size: 17px;
+      a {
+        font-weight: 600;
+      }
+      b {
+        font-weight: 600;
+      }
+    }
+
+    .social {
+      $size: 74px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      a {
+        margin-right: $spacing-unit;
+        color: $tertiary-text-color;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        &:hover {
+          color: $secondary-text-color;
+          img { opacity: 0.55; }
+        }
+
+        i {
+          font-size: $size;
+
+          @include media-query($on-palm) {
+            font-size: 32px;
+          }
+        }
+        img {
+          width: $size - 10px;
+          height: $size - 10px;
+          vertical-align: -1px;
+          opacity: 0.4;
+          transition: opacity 0.3s ease-in-out;
+
+          @include media-query($on-palm) {
+            width: 30px;
+            height: 30px;
+          }
+        }
+      }
+    }
+  }
+
+  .press {
+    margin: 0 auto;
+    text-align: center;
+    max-width: 500px;
+
+    h3 {
+      font-size: 24px;
+    }
+    img {
+      margin-bottom: $spacing-unit / 2;
+    }
+    p {
+      font-size: 17px;
+    }
+  }
+
+  .info {
+    margin-bottom: $spacing-unit * 3;
+    text-align: center;
+
+    & > p {
+      margin-bottom: 10px;
+      color: $tertiary-text-color;
+      font-size: 28px;
+      a {
+        color: $tertiary-text-color;
+      }
+    }
+    @include media-query($on-palm) {
+      margin-bottom: $spacing-unit * 2;
+    }
+  }
+
+}
