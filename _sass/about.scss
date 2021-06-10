@@ -321,14 +321,6 @@ main > .about-page {
     margin-bottom: $spacing-unit * 3;
     text-align: center;
 
-    .standalone-newsletter-form {
-      margin: 0 auto $spacing-unit;
-      max-width: 610px;
-      p {
-        font-size: 19px;
-      }
-    }
-
     & > p {
       margin-bottom: 10px;
       color: $tertiary-text-color;
