@@ -1,3 +1,24 @@
+article.post.example .post-header .post-repo {
+  margin-top: $spacing-unit / 2;
+  padding-top: $spacing-unit / 2;
+  border-top: 1px solid $grey-color-light;
+  font-size: 18px;
+  color: $secondary-text-color;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  i.fa {
+    margin-right: 3px;
+    vertical-align: -2px;
+    font-size: 22px;
+    color: $tertiary-text-color;
+  }
+  span {
+    margin-right: 5px;
+  }
+}
+
 article.post.example .post-content .page-desc {
   font-size: 18px;
   color: $secondary-text-color;

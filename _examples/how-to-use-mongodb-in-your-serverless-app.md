@@ -252,11 +252,11 @@ Linting source
 Deploying stacks
 dev-rest-api-mongodb-my-stack: deploying...
 
- ✅  dev-rest-api-mongodb-my-stack (no changes)
+ ✅  dev-rest-api-mongodb-my-stack
 
 
 Stack dev-rest-api-mongodb-my-stack
-  Status: no changes
+  Status: deployed
   Outputs:
     ApiEndpoint: https://uzuwvg7khc.execute-api.us-east-1.amazonaws.com
 ```

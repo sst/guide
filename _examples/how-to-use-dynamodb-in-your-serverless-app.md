@@ -175,11 +175,11 @@ Linting source
 Deploying stacks
 dev-rest-api-dynamodb-my-stack: deploying...
 
- ✅  dev-rest-api-dynamodb-my-stack (no changes)
+ ✅  dev-rest-api-dynamodb-my-stack
 
 
 Stack dev-rest-api-dynamodb-my-stack
-  Status: no changes
+  Status: deployed
   Outputs:
     ApiEndpoint: https://u3nnmgdigh.execute-api.us-east-1.amazonaws.com
 ```
