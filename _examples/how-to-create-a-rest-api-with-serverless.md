@@ -219,7 +219,7 @@ dev-rest-api-my-stack: deploying...
 
 
 Stack dev-rest-api-my-stack
-  Status: no changes
+  Status: deployed
   Outputs:
     ApiEndpoint: https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com
 ```

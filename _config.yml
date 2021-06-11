@@ -35,7 +35,7 @@ backend_ext_api_github_repo: "https://github.com/AnomalyInnovations/serverless-s
 backend_ext_resources_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-demo-ext-resources"
 
 sst_github_repo: "https://github.com/serverless-stack/serverless-stack"
-sst_examples_github_repo: "https://github.com/serverless-stack/examples"
+sst_github_examples_prefix: "/tree/master/examples/"
 
 survey_url: "https://serverless-stack.typeform.com/to/xiPdCW"
 

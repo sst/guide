@@ -35,6 +35,17 @@ layout: default
 
         </div>
 
+        {% if page.repo != true %}
+        {% capture repo %}{{ site.sst_github_repo }}{{ site.sst_github_examples_prefix }}{{ page.repo }}{% endcapture %}
+        <div class="post-repo">
+          <i class="fa fa-github" aria-hidden="true"></i>
+          <span>Example code</span>
+          <a target="_blank" href="{{ repo }}">
+            {{ repo | replace: "https://", "" }}
+          </a>
+        </div>
+        {% endif %}
+
         {% if page.bio %}
         <div class="post-author">
           This chapter is contributed by: {{ page.bio }}
@@ -50,9 +61,9 @@ layout: default
       <div class="post-links">
 
         {% if page.repo == true %}
-        {% capture repo %}{{ site.sst_examples_github_repo }}{% endcapture %}
+        {% capture repo %}{{ site.sst_github_repo }}{{ site.sst_github_examples_prefix }}{% endcapture %}
         {% elsif page.repo != true %}
-        {% capture repo %}{{ site.sst_examples_github_repo }}/tree/main/{{ page.repo }}{% endcapture %}
+        {% capture repo %}{{ site.sst_github_repo }}{{ site.sst_github_examples_prefix }}{{ page.repo }}{% endcapture %}
         {% endif %}
 
         {% if page.repo %}

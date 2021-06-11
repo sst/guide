@@ -161,7 +161,7 @@ Linting source
 Deploying stacks
 dev-pub-sub-my-stack: deploying...
 
- ✅  dev-pub-sub-my-stack (no changes)
+ ✅  dev-pub-sub-my-stack
 
 
 Stack dev-pub-sub-my-stack

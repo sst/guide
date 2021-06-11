@@ -198,7 +198,7 @@ dev-vscode-my-stack: deploying...
 
 
 Stack dev-vscode-my-stack
-  Status: no changes
+  Status: deployed
   Outputs:
     ApiEndpoint: https://siyp617yh1.execute-api.us-east-1.amazonaws.com
 ```

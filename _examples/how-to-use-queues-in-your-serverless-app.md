@@ -152,7 +152,7 @@ Linting source
 Deploying stacks
 dev-queue-my-stack: deploying...
 
- ✅  dev-queue-my-stack (no changes)
+ ✅  dev-queue-my-stack
 
 
 Stack dev-queue-my-stack

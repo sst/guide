@@ -203,11 +203,11 @@ Linting source
 Deploying stacks
 dev-websocket-my-stack: deploying...
 
- ✅  dev-websocket-my-stack (no changes)
+ ✅  dev-websocket-my-stack
 
 
 Stack dev-websocket-my-stack
-  Status: no changes
+  Status: deployed
   Outputs:
     ApiEndpoint: wss://61op9sj4wc.execute-api.us-east-1.amazonaws.com/dev
 ```
