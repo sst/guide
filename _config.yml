@@ -51,6 +51,8 @@ twitter_url: "https://twitter.com/ServerlessStack"
 slack_invite_url: "https://launchpass.com/serverless-stack"
 linkedin_url: "https://www.linkedin.com/company/serverless-stack"
 
+permalink: /blog/:title:output_ext
+
 collections:
   chapters:
     output: true

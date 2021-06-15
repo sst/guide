@@ -24,7 +24,7 @@ $highlight-background-color:  #FFF694;
 $brand-color:                 #395C6B;
 $important-color:             #E27152;
 
-$grey-color:                  #828282;
+$grey-color:                  #838180;
 $grey-color-light:            lighten($grey-color, 30%);
 $grey-color-dark:             darken($grey-color, 25%);
 
@@ -49,6 +49,8 @@ $on-laptop:                   800px;
 // Import partials from the `minima` theme.
 @import "theme";
 @import "print";
+
+@import "blog";
 @import "about";
 @import "lander";
 @import "example";
