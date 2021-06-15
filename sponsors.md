@@ -71,6 +71,7 @@ Your **company logo** and link will be placed here. [Contact us if you'd like to
 - [MichaelGMalek](https://github.com/MichaelGMalek)
 - [Craig Barr](https://github.com/m0un10)
 - [Dale Jacques](https://www.patreon.com/user/creators?u=43900227)
+- [AppsGB](https://appsgb.com/)
 
 
 We'd like thank our sponsors and backers for supporting us!
