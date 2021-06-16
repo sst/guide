@@ -86,28 +86,6 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-## Extending Lambda function timeouts
-
-Since we are going to set breakpoints in our Lambda functions, it makes sense to increase the timeouts.
-
-{%change%} To do this replace the `main` function in `lib/index.ts` with the following.
-
-``` ts
-export default function main(app: sst.App): void {
-  if (process.env.IS_LOCAL) {
-    app.setDefaultFunctionProps({
-      timeout: 30,
-    });
-  }
-
-  new MyStack(app, "my-stack");
-
-  // Add more stacks
-}
-```
-
-We are using an SST [built-in environment variable](https://docs.serverless-stack.com/environment-variables#built-in-environment-variables) called `IS_LOCAL`, to set a longer Lambda function timeout if our app is running locally.
-
 ## Adding function code
 
 Our functions are stored in the `src/` directory. In this case, we have a simple Lambda function that's printing out the time the request was made.
@@ -143,8 +121,9 @@ To allow VS Code to set breakpoints and debug our Lambda functions we'll add it 
       "name": "Debug SST Start",
       "type": "node",
       "request": "launch",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["start"],
+      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/sst",
+      "runtimeArgs": ["start", "--increase-timeout"],
+      "console": "integratedTerminal",
       "skipFiles": ["<node_internals>/**"]
     },
     {
@@ -165,6 +144,18 @@ To allow VS Code to set breakpoints and debug our Lambda functions we'll add it 
 ```
 
 This adds two debug configurations, the first is to debug Lambda functions, while the second allows debugging the Jest tests that are automatically supported by SST.
+
+## Extending Lambda function timeouts
+
+Since we are going to set breakpoints in our Lambda functions, it makes sense to increase the timeouts.
+
+SST has an [`--increase-timeout`](https://docs.serverless-stack.com/packages/cli#options) option that increases the function timeouts in your app to the maximum 15 minutes. We are using this option in our `launch.json`.
+
+``` js
+"runtimeArgs": ["start", "--increase-timeout"],
+```
+
+Note that, this doesn't increase the timeout of an API. Since those cannot be increased for more than 30 seconds. But you can continue debugging the Lambda function, even after the API request times out.
 
 ## Starting your dev environment
 
