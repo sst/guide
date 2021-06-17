@@ -5,12 +5,40 @@
 %social-buttons {
   white-space: nowrap;
   a {
-    margin-right: $spacing-unit / 2;
-    font-size: 25px;
-    font-weight: 700;
+    margin-right: 10px;
     color: $tertiary-text-color;
 
-    i {
+    & > i {
+      font-size: 25px;
+    }
+
+    .stars {
+      margin-left: 4px;
+      padding: 3px 5px 3px 8px;
+      line-height: 1;
+      font-size: 14px;
+      border-radius: 4px;
+      vertical-align: 4px;
+      background-color: $tertiary-text-color;
+      font-weight: 600;
+      color: $background-color;
+      position: relative;
+
+      &:before {
+        content: "\A";
+        border-left: 0 solid transparent;
+        border-bottom: 5px solid transparent;
+        border-right: 6px solid $tertiary-text-color;
+        border-top: 5px solid transparent;
+        position: absolute;
+        left: -5px;
+        top: calc(50% - 5px);
+      }
+
+      i.fa {
+        margin-right: 1px;
+        font-size: 13px;
+      }
     }
 
     img {
@@ -194,8 +222,9 @@
           .social {
             margin: 0;
             a {
+              padding-top: 5px;
+              padding-bottom: 14px;
               display: inline-block;
-              padding-bottom: 10px;
             }
           }
 
@@ -306,6 +335,7 @@
   }
 
   .social {
+    margin-top: 5px;
     margin-right: $spacing-unit / 2 + 5px;
     @extend %social-buttons;
   }

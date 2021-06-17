@@ -392,13 +392,13 @@ $reader-logo-width: 123px;
 }
 
 .home > .examples {
-  padding: 4.5 * $spacing-unit $spacing-unit 0;
+  padding: 1.5 * $spacing-unit $spacing-unit 0;
 
   @include media-query($on-laptop) {
-    padding: 2 * $spacing-unit 0 0;
+    padding: 5px 0 0;
   }
   @include media-query($on-palm) {
-    padding-top: 1.5 * $spacing-unit;
+    padding-top: 0;
   }
 
   & > .title {
@@ -576,6 +576,7 @@ $reader-logo-width: 123px;
           color: lighten($brand-color, 25%);
           color: white;
         }
+        img.react,
         img.graphql {
           $icon-size: 30px;
           position: absolute;
@@ -997,7 +998,7 @@ $reader-logo-width: 123px;
  */
 .home .table-of-contents {
 
-  margin-top: 1.5 * $spacing-unit;
+  margin: 1.5 * $spacing-unit 0;
 
   @include media-query($on-palm) {
     margin-top: $spacing-unit / 2;
@@ -1199,7 +1200,7 @@ $reader-logo-width: 123px;
  * Testimonials
  */
 .home .testimonials {
-  margin: 1.5 * $spacing-unit + 10px auto 0;
+  margin: 2 * $spacing-unit + 10px auto 0;
   position: relative;
   max-width: $post-content-width;
 
@@ -1265,7 +1266,7 @@ $reader-logo-width: 123px;
   }
 
   .tweets {
-    padding: 1.5 * $spacing-unit 0 1.5 * $spacing-unit + 3px;
+    padding: 2 * $spacing-unit 0 $spacing-unit;
     display: flex;
     flex-wrap: nowrap;
     overflow-x: scroll;
@@ -1366,6 +1367,8 @@ $reader-logo-width: 123px;
     }
 
     .content {
+      font-size: 18px;
+
       @include media-query($on-palm) {
         font-size: 13px;
       }
