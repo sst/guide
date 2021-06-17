@@ -1,41 +1,52 @@
 tweets:
-  - link: https://twitter.com/pmmuens/status/909005179848134656
-    name: Philipp Muens
-    username: pmmuens
-    content: "Superb <a href=\"https://twitter.com/goserverless\" target=\"_blank\">@goserverless</a> guide ⚡️ --> <a href=\"https://serverless-stack.com\">serverless-stack.com</a><p></p>Helps you build a <a target=\"_blank\" href=\"https://twitter.com/hashtag/serverless?src=hashtag_click\">#serverless</a> <a target=\"_blank\" href=\"https://twitter.com/hashtag/reactjs?src=hashtag_click\">#reactjs</a> app on <a target=\"_blank\" href=\"https://twitter.com/awscloud\">@awscloud</a><p></p>Thanks <a target=\"_blank\" href=\"https://twitter.com/Anomaly_Inv\">@Anomaly_Inv</a> 🙌"
-  - link: https://twitter.com/acemarke/status/881572841338130433
-    name: Mark Erikson
-    username: acemarke
-    content: "Fantastic, in-depth tutorial for building and deploying a full-stack React app w/ an AWS serverless backend: <a href=\"https://serverless-stack.com\">serverless-stack.com</a>"
-  - link: https://twitter.com/JoshuaGrime/status/1141720131351060482
-    name: Josh Grime
-    username: JoshuaGrime
-    content: "<a target=\"_blank\" href=\"https://twitter.com/fanjiewang\">@fanjiewang</a> <a target=\"_blank\" href=\"https://twitter.com/jayair\">@jayair</a> Just wanna say a huge thank you for your guide on <a href=\"https://serverless-stack.com\">serverless-stack.com</a>. Between this and the repository, I was able to deploy my first (working) stack today. I'd still be banging my head against walls without your work!"
-  - link: https://twitter.com/riethmayer/status/932585505388154880
-    name: Jan Riethmayer
-    username: riethmayer
-    content: "Serverless Stack - Building a Full-Stack App with Serverless and React <a href=\"https://serverless-stack.com\">serverless-stack.com</a> I really enjoyed this guide over the weekend. If you're interested in serverless with react, that's a great resource!"
-  - link: https://twitter.com/jakebenn/status/1036103819485007874
-    name: Jake Bennett
-    username: jakebenn
-    content: "I'm going thru the most AMAZING tutorial by <a href=\"https://twitter.com/Anomaly_Inv\" target=\"_blank\">@Anomaly_Inv</a> for creating a <a target=\"_blank\" href=\"https://twitter.com/hashtag/serverless?src=hashtag_click\">#serverless</a> app with AWS Lambda, NodeJS and <a target=\"_blank\" href=\"https://twitter.com/hashtag/React?src=hashtag_click\">#React</a>, using Cognito for authentication. It's a must-read for JavaScript novices (like me)."
-  - link: https://twitter.com/magnusriga/status/1074783852026126336
-    name: Magnus R. Gaarder
-    username: magnusriga
-    content: "<a href=\"https://serverless-stack.com\">Serverless-Stack.com</a> is the best resource I have encountered so far, to get <a target=\"_blank\" href=\"https://twitter.com/hashtag/serverless?src=hashtag_click\">#serverless</a> <a target=\"_blank\" href=\"https://twitter.com/reactjs\">@reactjs</a> apps up and running on <a target=\"_blank\" href=\"https://twitter.com/awscloud\">@awscloud</a><p></p>Thank you, <a target=\"_blank\" href=\"https://twitter.com/Anomaly_Inv\">@Anomaly_Inv</a>"
-  - link: https://twitter.com/vdelacou/status/1083572056061427713
-    name: Vincent Delacourt
-    username: vdelacou
-    content: "One of the best resource I found so far on Serverless and React with AWS<p></p> <a href=\"https://serverless-stack.com\">serverless-stack.com</a>  <a target=\"_blank\" href=\"https://twitter.com/hashtag/serverless?src=hashtag_click\">#serverless</a> <a target=\"_blank\" href=\"https://twitter.com/hashtag/aws?src=hashtag_click\">#aws</a> <a target=\"_blank\" href=\"https://twitter.com/Anomaly_Inv\">@anomaly_inv</a>"
-  - link: https://twitter.com/damonmiller/status/952933397109923840
-    name: Damon Miller
-    username: damonmiller
-    content: "This has been a phenomenal step-by-step tutorial on <a href=\"https://twitter.com/goserverless\" target=\"_blank\">@goserverless</a> <a href=\"https://twitter.com/reactjs\" target=\"_blank\">@reactjs</a> and <a href=\"https://twitter.com/hashtag/AWSCognito?src=hashtag_click\" target=\"_blank\">#AWSCognito</a>.  Loving this!  <a href=\"https://serverless-stack.com\">serverless-stack.com</a>"
-  - link: https://twitter.com/adenforshaw/status/1078495832188477442
-    name: Aden Forshaw
-    username: adenforshaw
-    content: "Serverless tutorial project over at <a href=\"https://serverless-stack.com\">serverless-stack.com</a> is phenomenal. There's some real nuggets of gold, well worth a few hours of anyones time even as a refresher."
-  - link: https://twitter.com/jscstechnology/status/1157058537174065152
-    name: JSCONSULTING
-    username: jscstechnology
-    content: "<a href=\"https://twitter.com/Anomaly_Inv\" target=\"_blank\">@Anomaly_Inv</a> stepping through your <a href=\"https://serverless-stack.com\">serverless-stack.com</a> and its fantastic. Thank you for sharing this amazing guide!"
+
+  - link: https://twitter.com/louisbarclay/status/1402024362333642754
+    name: Louis Barclay
+    username: louisbarclay
+    content: "Loving migrating over from serverless framework to <a href=\"https://twitter.com/ServerlessStack\">@ServerlessStack</a>'s new sst<br /><br />I can vouch for it as a fantastic way to easily chuck some serverless functions into the world"
+
+  - link: https://twitter.com/caludio/status/1389903761527738370
+    name: Claudio Cicali 
+    username: caludio
+    content: "The best solution I have found is <a href=\"https://twitter.com/ServerlessStack\">@ServerlessStack</a><br /><br />Uses CDK and a Websocket proxy to be able to use the real AWS resources. Deploy remotely,  test locally. It's pretty good."
+
+
+  - link: https://twitter.com/mike_mccall10/status/1400874702613012480
+    name: Mike McCall
+    username: mike_mccall10
+    content: "Love <a href=\"https://twitter.com/hashtag/cdk?src=hashtag_click\">#cdk</a> and <a href=\"https://twitter.com/ServerlessStack\">@ServerlessStack</a> for IaC. Live lambda for working out <a href=\"https://twitter.com/hashtag/shopify?src=hashtag_click\">#shopify</a> oauth handlers in the cloud 🤯. Crazy what you get for less than 20 lines of code."
+
+  - link: https://twitter.com/jdjkelly/status/1379452198648700931
+    name: Josh
+    username: jdjkelly
+    content: "<a href=\"https://twitter.com/ServerlessStack\">@ServerlessStack</a> is really well thought out, i migrated a complicated set of terraform modules into SST + CDK in just over a day"
+
+  - link: https://twitter.com/manuelgil/status/1378426344866992131
+    name: Manuel Alejandro
+    username: manuelgil
+    content: "Excellent framework to get started with serverless:<br /><br /><a href=\"https://serverless-stack.com\">serverless-stack.com</a><br /><br /><a href=\"https://twitter.com/ServerlessStack\">@ServerlessStack</a>"
+
+  - link: https://twitter.com/thdxr/status/1369101803296526339
+    name: Dax Ravi
+    username: thdxr
+    content: "If you're new to serverless don't get confused by SAM or Serverless Framework, the way forward is AWS CDK alongside <a href=\"https://twitter.com/ServerlessStack\">@ServerlessStack</a>"
+
+  - link: https://twitter.com/lucamezzalira/status/1355461214676123648
+    name: Luca Mezzalira
+    username: lucamezzalira
+    content: "This week I discovered <a href=\"https://twitter.com/ServerlessStack\">@ServerlessStack</a> and I really liked the live reload feature so I give it a go last night <a href=\"https://twitter.com/hashtag/dx?src=hashtag_click\">#dx</a> was really smooth, using <a href=\"https://twitter.com/hashtag/cdk?src=hashtag_click\">#cdk</a> open up many possibilities<br />I created a <a href=\"https://twitter.com/hashtag/ssr?src=hashtag_click\">#ssr</a> catalogue with <a href=\"https://twitter.com/hashtag/webpack?src=hashtag_click\">#webpack</a> <a href=\"https://twitter.com/hashtag/react?src=hashtag_click\">#react</a> and lambda debugging in sec any part of the application 🚀"
+
+  - link: https://twitter.com/albertgao/status/1396930766806814727
+    name: Albert Gao
+    username: albertgao
+    content: "Keep finding myself back to the old-school server approach when doing side projects because of the rapid feedback loop, until I found <a href=\"https://twitter.com/ServerlessStack\">@ServerlessStack</a>. Update local code, instant change on the remote endpoint.Magic! Connect to local db for dev and AWS auora for deployment. Great"
+
+  - link: https://twitter.com/sethgeoghegan/status/1387264119363956738
+    name: Seth Geoghegan
+    username: sethgeoghegan
+    content: "Check out <a href=\"https://twitter.com/ServerlessStack\">@ServerlessStack</a>. They address these specific pain points with their framework.  A nice bonus is their documentation is second to none."
+
+  - link: https://twitter.com/aeduhm/status/1374135054226616325
+    name: Adam Elmore
+    username: aeduhm
+    content: "If I were an investor, I’d be throwing money at this crew.<br />In this practitioners opinion, there are whole waves of disruption that will be unleashed as the gap between devs and serverless is bridged.<br />These folks are building that bridge 🌉"

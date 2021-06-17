@@ -1,0 +1,136 @@
+.blog.post .post-content {
+  font-size: 18px;
+}
+.blog.post .post-header {
+  padding-bottom: $spacing-unit + 6px;
+  margin-bottom: $spacing-unit + 20px;
+  position: relative;
+}
+.blog.post .post-header .breadcrumb {
+  margin-bottom: 7px;
+  text-align: center;
+  font-size: 18px;
+  font-family: $base-font-family;
+
+  & a:after {
+    padding-left: 7px;
+    color: $grey-color-light;
+    content: "/\00a0";
+  }
+}
+.blog.post .post-header .post-title {
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 32px;
+  line-height: 1.44;
+}
+.blog.post .post-header .post-title.post a {
+  @extend %a-secondary;
+}
+
+.blog.post .post-header .post-info {
+  text-align: center;
+  font-size: 15px;
+}
+.blog.post .post-header .post-info .date {
+  color: $tertiary-text-color;
+}
+.blog.post .post-header .post-info .separator {
+  color: $grey-color-light;
+}
+.blog.post .post-header .post-info .twitter {
+  $color: #1DA1F2;
+
+  font-size: 15px;
+  color: $color;
+
+  i.fa {
+    margin-right: 1px;
+  }
+
+  &:hover {
+    color: lighten($color, 13%);
+  }
+}
+.blog.post .post-header img.post-author {
+  $size: 48px;
+
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: - $size / 2;
+  margin-bottom: - $size / 2;
+  border-radius: 100%;
+  //filter: grayscale(100%);
+}
+
+$img-size: 36px;
+$img-margin: 15px;
+
+@mixin post-list {
+  padding-left: 0;
+  margin-left: $img-size + $img-margin;
+  list-style-type: none;
+
+  li {
+    margin-bottom: $spacing-unit * 1.5;
+    position: relative;
+  }
+  li h3 img.bullet {
+    position: absolute;
+    left: - ($img-size + $img-margin);
+    width: $img-size;
+    top: 1px;
+    border-radius: 100%;
+    //filter: grayscale(100%);
+  }
+  li .post-info {
+    margin-top: $spacing-unit / 2;
+    font-size: 15px;
+  }
+  li .post-info .category {
+    @extend %a-tertiary;
+    i.fa {
+      margin-right: 2px;
+      opacity: 0.8;
+      font-size: 13px;
+    }
+  }
+  li .post-info .date {
+    color: $tertiary-text-color;
+  }
+  li .post-info .separator {
+    color: $grey-color-light;
+  }
+}
+
+.blog .post-content .twitter-share {
+  margin-top: $spacing-unit / 2 + 5px;
+  line-height: 2;
+  span {
+    margin-right: 4px;
+  }
+  a {
+    padding: 6px 11px 5px;
+    line-height: 1.6;
+    border-radius: 3px;
+    display: inline-block;
+    font-size: 13px;
+    color: white;
+    background-color: #1DA1F2;
+
+    &:hover {
+      background-color: #0C7ABF;
+    }
+
+    i.fa {
+      margin-right: 4px;
+      font-size: 15px;
+      vertical-align: -1px;
+    }
+  }
+}
+
+.blog .post-list {
+  @include post-list;
+}

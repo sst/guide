@@ -1,0 +1,51 @@
+---
+layout: default
+---
+<div class="wrapper wrapper-single-col">
+  <article class="blog post">
+
+    <header class="post-header">
+      {% if page.id %}
+        <p class="breadcrumb">
+          <a href="{% link blog/index.md %}">Blog</a>
+        </p>
+      {% endif %}
+      <h1 class="post-title post">
+        <a href="{{ page.url }}">{{ page.title | escape }}</a>
+      </h1>
+
+      <div class="post-info">
+        {% if page.id %}
+          <a class="twitter" href="https://twitter.com/intent/tweet?via={{ site.twitter }}&text={{ page.title }}&url={{ page.url | absolute_url }}&related={{ site.twitter }}" target="_blank" title="Tweet">
+            <i class="fa fa-twitter" aria-hidden="true"></i>
+            Share on Twitter
+          </a>
+          <span class="separator">&nbsp;&bull;&nbsp;</span>
+          <span class="date">{{ page.date | date: '%B %d, %Y' }}</span>
+        {% else %}
+          <a class="twitter" href="{{ site.twitter_url }}">
+            <i class="fa fa-twitter" aria-hidden="true"></i>
+            Follow us on Twitter
+          </a>
+        {% endif %}
+      </div>
+
+      {% if page.id %}
+        <a href="https://twitter.com/{{ site.data.authors[page.author].twitter }}">
+          <img
+            width="48"
+            class="post-author"
+            title="{{ site.data.authors[page.author].name }}"
+            src="{{ site.data.authors[page.author].picture }}"
+          />
+        </a>
+      {% endif %}
+    
+    </header>
+
+    <div class="post-content">
+      {{ content }}
+    </div>
+
+  </article>
+</div>

@@ -24,17 +24,15 @@
 
     <div class="col2">
       <div class="social">
-        <a title="GitHub" href="{{ site.sst_github_repo }}">
+        <a title="GitHub" class="github" href="{{ site.sst_github_repo }}">
           <i class="fa fa-github" aria-hidden="true"></i>
+          <span class="stars">
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <span>1.9k</span>
+          </span>
         </a>
-        <a title="Slack" href="{{ site.slack_invite_url }}">
+        <a title="Slack" class="slack" href="{{ site.slack_invite_url }}">
           <img src="/assets/lander/slack-mark-black.svg" />
-        </a>
-        <a title="Twitter" href="{{ site.twitter_url }}">
-          <i class="fa fa-twitter" aria-hidden="true"></i>
-        </a>
-        <a title="Forums" href="{{ site.forum_url }}">
-          <i class="fa fa-comments" aria-hidden="true"></i>
         </a>
       </div>
       {% include search-field.html %}

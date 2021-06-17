@@ -86,6 +86,8 @@
 
 </div>
 
+{% include testimonials.html %}
+
 <div id="examples" class="examples">
 
   <div class="title">
@@ -103,6 +105,7 @@
       <div class="list">
         <button data-name="rest-api" class="active">REST API</button>
         <button data-name="graphql-api">GraphQL API</button>
+        <button data-name="react-app">React app</button>
         <button data-name="api-auth">API with auth</button>
         <button data-name="cron-job">Cron job</button>
         <button data-name="queue">Queue</button>
@@ -134,6 +137,16 @@
         <h4>GraphQL API</h4>
         <p>Create a serverless GraphQL API with AppSync. Using the SST AppSyncApi to define the schema and resolvers.</p>
         <a href="{% link _examples/how-to-create-a-serverless-graphql-api-with-aws-appsync.md %}">
+          View example <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div class="info react-app" style="display: none">
+        <div class="icon">
+          <img class="react" src="/assets/lander/react-logo.svg" />
+        </div>
+        <h4>React app</h4>
+        <p>Deploy a React app as a static website. Using the SST StaticSite construct and setting the custom domain.</p>
+        <a href="https://docs.serverless-stack.com/constructs/StaticSite#creating-a-react-site">
           View example <i class="fa fa-angle-right" aria-hidden="true"></i>
         </a>
       </div>
@@ -179,6 +192,7 @@
           <!-- Code Titles -->
           <div class="title rest-api active">api.js</div>
           <div class="title graphql-api" style="display: none">graphql.js</div>
+          <div class="title react-app" style="display: none">react.js</div>
           <div class="title api-auth" style="display: none">auth.js</div>
           <div class="title cron-job" style="display: none">cron.js</div>
           <div class="title queue" style="display: none">queue.js</div>
@@ -232,6 +246,26 @@
           </div>
           <div class="token-line">
             <span class="token lead">8</span>});
+          </div>
+        </div>
+        <div class="code-block react-app long" style="display: none">
+          <div class="token-line">
+            <span class="token lead">1</span> <span class="token italics">new</span> <span class="token keyword">sst.StaticSite</span>(<span class="token italics">this</span>, <span class="token string">"ReactSite"</span>, {
+          </div>
+          <div class="token-line">
+            <span class="token lead">2</span>&nbsp;&nbsp;path: <span class="token string">"src/frontend"</span>,
+          </div>
+          <div class="token-line">
+            <span class="token lead">3</span>&nbsp;&nbsp;buildOutput: <span class="token string">"build"</span>,
+          </div>
+          <div class="token-line">
+            <span class="token lead">4</span>&nbsp;&nbsp;buildCommand: <span class="token string">"npm run build"</span>,
+          </div>
+          <div class="token-line">
+            <span class="token lead">5</span>&nbsp;&nbsp;customDomain: <span class="token string">"www.my-react-app.com"</span>
+          </div>
+          <div class="token-line">
+            <span class="token lead">6</span>});
           </div>
         </div>
         <div class="code-block api-auth long" style="display: none">
