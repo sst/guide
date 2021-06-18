@@ -11,6 +11,13 @@ api:
       url: /examples/how-to-create-a-rest-api-in-golang-with-serverless.html
     - page: How to add a custom domain to a serverless API
       url: /examples/how-to-add-a-custom-domain-to-a-serverless-api.html
+
+webapp:
+  title: Web Apps 
+  chapters:
+    - page: How to create a React.js app with serverless
+      url: /examples/how-to-create-a-reactjs-app-with-serverless.html
+
 graphql:
   title: GraphQL
   chapters:
