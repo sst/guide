@@ -343,6 +343,7 @@ const site = new sst.StaticSite(this, "ReactSite", {
   path: "frontend",
   buildOutput: "build",
   buildCommand: "npm run build",
+  errorPage: sst.StaticSiteErrorOptions.REDIRECT_TO_INDEX_PAGE,
 });
 
 // Show the URLs in the output
@@ -363,6 +364,7 @@ const site = new sst.StaticSite(this, "ReactSite", {
   buildOutput: "build",
   buildCommand: "npm run build",
   customDomain: "www.my-react-app.com",
+  errorPage: sst.StaticSiteErrorOptions.REDIRECT_TO_INDEX_PAGE,
 });
 ```
 
