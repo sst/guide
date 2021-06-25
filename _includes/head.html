@@ -43,7 +43,7 @@
   {% endif %}
 
   <!-- Image -->
-  {% assign encoded_title=title | base64_encode | url_encode %}
+  {% assign encoded_title=title | url_encode | base64_encode | url_encode %}
   {% if page.collection == "chapters" %}
   <meta content="{{ site.social_cards_url }}/serverless-stack-guide/{{ encoded_title }}.png" property="og:image">
   <meta content="{{ site.social_cards_url }}/serverless-stack-guide/{{ encoded_title }}.png" property="twitter:image">
