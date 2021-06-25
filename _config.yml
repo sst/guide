@@ -20,7 +20,6 @@ description: > # this means to ignore newlines until "baseurl:"
   Helping you build full-stack serverless apps
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://serverless-stack.com" # the base hostname & protocol for your site, e.g. http://example.com
-logo: /assets/og-image.jpg
 
 github_repo: "https://github.com/AnomalyInnovations/serverless-stack-com"
 github_edit_prefix: "/edit/master/"
@@ -51,6 +50,8 @@ twitter_url: "https://twitter.com/ServerlessStack"
 slack_invite_url: "https://launchpass.com/serverless-stack"
 linkedin_url: "https://www.linkedin.com/company/serverless-stack"
 
+social_cards_url: "https://social-cards.serverless-stack.com"
+
 permalink: /blog/:title:output_ext
 
 collections:
@@ -63,7 +64,6 @@ collections:
 markdown: kramdown
 #theme: minima
 plugins:
-  - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-redirect-from
 
@@ -72,4 +72,4 @@ defaults:
   - scope:
       path: ""
     values:
-      image: /assets/og-image.jpg
+      image: serverless-stack-lander/index.png
