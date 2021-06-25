@@ -75,7 +75,6 @@ PLATFORMS
 DEPENDENCIES
   jekyll (= 4.1.1)
   jekyll-redirect-from
-  jekyll-seo-tag
   jekyll-sitemap
   minima (~> 2.0)
 
