@@ -68,8 +68,8 @@ plugins:
   - jekyll-redirect-from
 
 # Front Matter defaults
-defaults:
-  - scope:
-      path: ""
-    values:
-      image: serverless-stack-lander/index.png
+#defaults:
+#  - scope:
+#      path: ""
+#    values:
+#      image: serverless-stack-lander/index.png
