@@ -53,12 +53,10 @@
   {% elsif page.id %}
   <meta content="{{ site.social_cards_url }}/serverless-stack-blog/{{ encoded_title }}.png?author={{ site.data.authors[page.author].name | url_encode }}&avatar={{ page.author }}" property="og:image">
   <meta content="{{ site.social_cards_url }}/serverless-stack-blog/{{ encoded_title }}.png?author={{ site.data.authors[page.author].name | url_encode }}&avatar={{ page.author }}" property="twitter:image">
-  {% elsif page.image %}
-  <meta content="{{ site.social_cards_url }}/{{ page.image }}" property="og:image">
-  <meta content="{{ site.social_cards_url }}/{{ page.image }}" property="twitter:image">
   {% else %}
-  <meta content="{{ site.social_cards_url }}/serverless-stack-lander/index.png" property="og:image">
-  <meta content="{{ site.social_cards_url }}/serverless-stack-lander/index.png" property="twitter:image">
+  {% assign default_title=site.description | url_encode | base64_encode | url_encode %}
+  <meta content="{{ site.social_cards_url }}/serverless-stack-lander/{{ default_title }}.png" property="og:image">
+  <meta content="{{ site.social_cards_url }}/serverless-stack-lander/{{ default_title }}.png" property="twitter:image">
   {% endif %}
 
   <!-- Twitter Cards -->
