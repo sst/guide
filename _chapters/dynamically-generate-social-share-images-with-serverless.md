@@ -27,7 +27,7 @@ We also have multiple templates to generate these social cards. Here's one for o
 
 These images are served out of our social cards service. It's built using [Serverless Stack (SST)](/) and is hosted on AWS:
 
-```
+``` bash
 https://social-cards.serverless-stack.com
 ```
 
@@ -145,13 +145,13 @@ We'll add these to the `templates/` directory in our project.
 
 You can open these files locally with the URL:
 
-```
+``` bash
 file:///Users/jayair/Desktop/social-cards-service/templates/serverless-stack-blog.html?title=This%20is%20a%20sample%20blog%20post%20on%20Serverless%20Stack&author=Jay&avatar=jay
 ```
 
 It has the format:
 
-```
+``` bash
 file:///Users/jayair/Desktop/social-cards-service/templates/serverless-stack-blog.html?title={title}&author={name}&avatar={filename}
 ```
 
@@ -165,7 +165,7 @@ Now that our templates can load locally in a browser, we'll take a screenshot of
 
 We'll update our API to take the template and the rest of the options. We are going to use the format:
 
-```
+``` bash
 https://api-endpoint.com/{template}/{encoded_title}.png?author={author}&avatar={avatar}
 ```
 
@@ -325,13 +325,13 @@ Most of the code is pretty straightforward. But let's look at some of the key po
 
 Now to test this, we'll head over to a URL that looks something like this:
 
-```
+``` bash
 https://l36xnnxdw6.execute-api.us-east-1.amazonaws.com/serverless-stack-blog/VGhpcyUyMGlzJTIwYSUyMHNhbXBsZSUyMGJsb2clMjBwb3N0JTIwb24lMjBTZXJ2ZXJsZXNzJTIwU3RhY2s=.png?author=Jay&avatar=jay
 ```
 
 Where the big encoded string is the Base64 encoded version of:
 
-```
+``` bash
 This%20is%20a%20sample%20blog%20post%20on%20Serverless%20Stack
 ```
 
@@ -504,7 +504,7 @@ We are doing a couple of things here:
 
 So now you can replace the CloudFront domain in our previously used URL scheme and it should load our images really fast.
 
-```
+``` bash
 https://d12c5yrsx1d0su.cloudfront.net/serverless-stack-blog/VGhpcyUyMGlzJTIwYSUyMHNhbXBsZSUyMGJsb2clMjBwb3N0JTIwb24lMjBTZXJ2ZXJsZXNzJTIwU3RhY2s=.png?author=Jay&avatar=jay
 ```
 
@@ -580,7 +580,7 @@ Make sure to check out the full `lib/MyStack.js` source here — [{{ page.repo |
 
 Now you can load our custom domain URL!
 
-```
+``` bash
 https://social-cards.serverless-stack.com/serverless-stack-blog/VGhpcyUyMGlzJTIwYSUyMHNhbXBsZSUyMGJsb2clMjBwb3N0JTIwb24lMjBTZXJ2ZXJsZXNzJTIwU3RhY2s=.png?author=Jay&avatar=jay
 ```
 
@@ -625,7 +625,7 @@ Here we are adding the `og:image` tag if the current page is a blog post. We are
 
 In the above code snippet, we are assuming that our blog post has the `author` set in the front matter.
 
-```
+``` yml
 author: jay
 ```
 
