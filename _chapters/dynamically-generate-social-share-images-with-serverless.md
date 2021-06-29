@@ -33,8 +33,6 @@ https://social-cards.serverless-stack.com
 
 In this chapter we'll look at how we created this service and how you can do the same!
 
-### Resources
-
 The entire social cards service is open source and available on GitHub. So you can fork it and play around with everything that will be talked about in this chapter.
 
 <i class="fa fa-github" aria-hidden="true"></i>&nbsp;&nbsp;[SST Social Cards Service on GitHub]({{ page.repo }})
