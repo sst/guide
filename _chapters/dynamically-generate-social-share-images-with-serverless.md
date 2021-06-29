@@ -45,7 +45,7 @@ In this chapter we'll be looking at:
 1. [Create a serverless app with SST](#create-an-sst-app)
 2. [Design templates for our social cards in the browser](#design-social-card-templates)
 4. [Use Puppeteer to take screenshots of the templates](#take-screenshots-with-puppeteer)
-5. [Support non Latin fonts in Lambda](#support-non-latin-fonts-in-lambda)
+5. [Support non-Latin fonts in Lambda](#support-non-latin-fonts-in-lambda)
 6. [Cache the images in an S3 bucket](#cache-images-in-s3)
 7. [Use CloudFront as a CDN to serve the images](#use-cloudfront-as-a-cdn)
 8. [Add a custom domain for our social cards service](#adding-a-custom-domain)
