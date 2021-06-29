@@ -6,7 +6,7 @@ lang: en
 description: In this chapter we'll look at how to create a serverless service that dynamically generates social cards for our website or blog. It uses the Serverless Stack Framework (SST) and Puppeteer to generate these images.
 repo: https://github.com/serverless-stack/social-cards
 ref: dynamically-generate-social-share-images-with-serverless
-comments_id: 
+comments_id: dynamically-generate-social-share-images-with-serverless/2419
 ---
 
 In this chapter we'll look at how to dynamically generate social share images or open graph (OG) images with serverless.
