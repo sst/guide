@@ -47,10 +47,11 @@ In this chapter we'll be looking at:
 1. [Create a serverless app with SST](#create-an-sst-app)
 2. [Design templates for our social cards in the browser](#design-social-card-templates)
 4. [Use Puppeteer to take screenshots of the templates](#take-screenshots-with-puppeteer)
-5. [Cache the images in an S3 bucket](#cache-images-in-s3)
-6. [Use CloudFront as a CDN to serve the images](#use-cloudfront-as-a-cdn)
-7. [Add a custom domain for our social cards service](#adding-a-custom-domain)
-8. [Integrate with static site generators](#integrate-with-static-site-generators)
+5. [Support non Latin fonts in Lambda](#support-non-latin-fonts-in-lambda)
+6. [Cache the images in an S3 bucket](#cache-images-in-s3)
+7. [Use CloudFront as a CDN to serve the images](#use-cloudfront-as-a-cdn)
+8. [Add a custom domain for our social cards service](#adding-a-custom-domain)
+9. [Integrate with static site generators](#integrate-with-static-site-generators)
 
 Let's start by taking a step back and getting a sense of the architecture of our social card service. 
 
@@ -339,6 +340,70 @@ So visiting this page should give a screenshot of our template.
 
 ![Social card image generated from an API](/assets/dynamically-generate-social-share-images-with-serverless/social-card-image-generated-from-an-api.png)
 
+### Support Non-Latin Fonts in Lambda
+
+While running SST locally, Puppeteer will pick up the fonts that you have in your system. However, when deployed to Lambda, you might find that some fonts might be missing. And this will render as little boxes.
+
+![Social card image generated with tofu font](/assets/dynamically-generate-social-share-images-with-serverless/social-card-image-generated-with-tofu-font.png)
+
+To fix this we'll need to set the OS that Lambda runs in, with these fonts.
+
+Start by creating a `.fonts/` directory in your project root.
+
+``` bash
+$ mkdir .fonts
+```
+
+Here you can download and copy over the font you need from [Google's Noto project](https://www.google.com/get/noto/). For this example, we are going to copy over `NotoSansCJKsc-Regular.otf`.
+
+``` bash
+.fonts
+└── NotoSansCJKsc-Regular.otf
+```
+
+We'll also configure our Lambda function to copy this directory. And we set the `$HOME` environment variable to `/var/task` (where it'll be placed) to instruct the OS of the Lambda function to pick it up.
+
+``` js
+// Create a HTTP API
+const api = new sst.Api(this, "Api", {
+  routes: {
+    "GET /{template}/{file}": {
+      function: {
+        handler: "src/lambda.handler",
+
+        //...
+
+        environment: {
+          // Set $HOME for OS to pick up the non Latin fonts
+          // from the .fonts/ directory
+          HOME: "/var/task",
+        },
+
+        bundle: {
+          // Copy over templates and non Latin fonts 
+          copyFiles: [
+            {
+              from: "templates",
+              to: "templates",
+            },
+            {
+              from: ".fonts",
+              to: ".fonts",
+            },
+          ],
+        },
+
+        //...
+      },
+    },
+  },
+});
+```
+
+Now you should notice the characters being displayed correctly.
+
+![Social card image generated with non-latin font](/assets/dynamically-generate-social-share-images-with-serverless/social-card-image-generated-with-non-latin-font.png)
+
 ### Cache Images in S3
 
 If we visit our API multiple times, it takes a screenshot every time. This is both slow and wasteful. So let's cache the image in S3.
@@ -371,6 +436,7 @@ const api = new sst.Api(this, "Api", {
         // ...
 
         environment: {
+          HOME: "/var/task",
           BucketName: bucket.bucketName,
         },
 
