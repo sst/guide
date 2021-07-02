@@ -404,6 +404,12 @@ best-practices-conclusion:
     - page: Wrapping up the best practices
       url: /chapters/wrapping-up-the-best-practices.html
 
+extra-appsync:
+  title: AppSync
+  chapters:
+    - page: What is AWS AppSync
+      url: /chapters/what-is-aws-appsync.html
+
 extra-backend:
   title: Serverless
   chapters:
