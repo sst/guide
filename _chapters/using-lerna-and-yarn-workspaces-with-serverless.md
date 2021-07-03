@@ -268,7 +268,7 @@ $ yarn
 
 The directory structure roughly looks like:
 
-```
+``` txt
 package.json
 /lib
 /frontend
