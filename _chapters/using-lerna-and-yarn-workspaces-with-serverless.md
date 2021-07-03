@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Using Lerna and Yarn Workspaces with Serverless
-description: In this chapter we look at how to manage large monorepo Serverless projects with Lerna and Yarn Workspaces. We also share a starter to use as a template for future projects.
+description: In this chapter we look at how to manage large monorepo serverless projects with Lerna and Yarn Workspaces. We also share starter projects for Serverless Framework and SST to use as a template for future projects.
 date: 2020-07-09 00:00:00
 lang: en
 ref: using-lerna-and-yarn-workspace-with-serverless
@@ -26,18 +26,30 @@ However, managing these packages in the same repo can be really challenging. To 
 
 Lerna and Yarn Workspaces together helps create a monorepo setup that allows our Serverless project to scale as it grows.
 
-To help get you started with this, we created a starter project — [**Serverless Lerna + Yarn Workspaces Monorepo Starter**](https://github.com/AnomalyInnovations/serverless-lerna-yarn-starter)
+#### Starter Templates
+
+To help get you started with this, we created two starter projects for 
+
+- [**Serverless Framework Lerna + Yarn Workspaces Starter**](#serverless-framework-starter)
+- [**SST Lerna + Yarn Workspaces Monorepo Starter**](#sst-starter)
+
+These starter templates are:
 
 - Designed to scale for larger projects
 - Maintains internal dependencies as packages
 - Uses Lerna to figure out which services have been updated 
-- Supports publishing dependencies as private NPM packages
-- Uses [serverless-bundle](https://github.com/AnomalyInnovations/serverless-bundle) to generate optimized Lambda packages
+- Supports publishing dependencies as private npm packages
 - Uses Yarn Workspaces to hoist packages to the root `node_modules/` directory
 
 This will help get you started with this setup. But if you are not familiar with Lerna or Yarn Workspaces, make sure to check out their docs.
 
+Let's look at both of these starters.
+
 -----
+
+## Serverless Framework Starter
+
+Check out the repo here — [**github.com/AnomalyInnovations/serverless-lerna-yarn-starter**](https://github.com/AnomalyInnovations/serverless-lerna-yarn-starter)
 
 ### Installation
 
@@ -228,4 +240,132 @@ To test this:
 
 ------
 
-This starter should give you a great template to build your next monorepo Serverless project. So give it a try and let us know what you think.
+## SST Starter
+
+Check out the repo here — [**github.com/AnomalyInnovations/serverless-stack/lerna-yarn-starter**](https://github.com/serverless-stack/lerna-yarn-starter)
+
+### Installation
+
+Start by cloning this repo
+
+``` bash
+$ git clone https://github.com/serverless-stack/lerna-yarn-starter my-project
+```
+
+Enter the new directory
+
+``` bash
+$ cd my-project
+```
+
+Install npm packages for the entire project
+
+``` bash
+$ yarn
+```
+
+### How It Works
+
+The directory structure roughly looks like:
+
+```
+package.json
+/lib
+/frontend
+  package.json
+/src
+  /services
+    /service1
+      handler.js
+      package.json
+    /service2
+      handler.js
+      package.json
+  /packages
+    /sample-package
+      index.js
+      package.json
+  /util
+```
+
+This repo is split into a few parts. Each with a different purpose:
+
+- `lib/`
+
+  This is where the CDK code for your app lives. It defines the infrastructure of your serverless app.
+
+- `src/`
+
+  This is where the code for your Lambda function are. It is further organized into services. Where each service is a collection of Lambda functions.
+
+- `src/services/`
+
+  These are services that are deployed as Lambda functions. Has a `package.json` and an entry point. There are two sample services.
+
+  1. `service1`: Depends on the `sample-package`.
+  2. `service2`: Does not depend on any internal packages.
+
+- `src/packages/`
+
+  These are internal packages that are used in our services. Each contains a `package.json` and can be optionally published to npm.
+
+- `src/util/`
+
+  Any common code that you might not want to maintain as a package. Does NOT have a `package.json`.
+
+- `frontend/`
+
+  A sample frontend React app that is a part of our serverless app.
+
+The `src/packages/`, `src/services/`, and `frontend/` directories are Yarn Workspaces.
+
+#### Services
+
+Each service is a collection of Lambda functions with a similar purpose. They are meant to be managed on their own. They each have their own `package.json` and the versions of the dependencies should be kept separate from the other services. SST internally uses [esbuild](https://github.com/evanw/esbuild) to optimally package each Lambda function in a service.
+
+This is good for keeping your Lambda packages small. But Yarn Workspaces also ensures that it hoists all your npm packages to the project root.
+
+#### Packages
+
+Since each package has its own `package.json`, you can manage it just like you would any other npm package.
+
+To add a new package:
+
+``` bash
+$ mkdir src/packages/new-package
+$ yarn init
+```
+
+Packages can also be optionally published to npm.
+
+To use a package:
+
+```bash
+$ yarn add new-package@1.0.0
+```
+
+Note that packages should be added by specifying the version number declared in their `package.json`. Otherwise, Yarn tries to find the dependency in the registry.
+
+#### Util
+
+If you need to add any other common code in your repo that won't be maintained as a package, add it to the util directory. It does not contain a `package.json`. This means that you'll need to install any npm packages as dependencies in the root.
+
+To install an npm package at the root.
+
+``` bash
+$ yarn add -W some-npm-package
+```
+
+While it's convenient to add all the common code to the util, it has a downside. If a team updates the util, all the services that are dependent on it will need to test this change before deploying. In contrast, a package can be locked to a specific version and can be upgraded when the team chooses to.
+
+### Deployment
+
+SST will handle all the dependencies internally and deploy all the services (and the frontend) in order.
+
+### Deploying Through Seed
+
+[Seed](https://seed.run) supports deploying SST monorepo projects that use Lerna and Yarn Workspaces out of the box.
+
+------
+
+These starters should give you a great template to build your next monorepo Serverless project. So give it a try and let us know what you think!
