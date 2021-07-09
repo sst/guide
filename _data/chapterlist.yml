@@ -404,12 +404,6 @@ best-practices-conclusion:
     - page: Wrapping up the best practices
       url: /chapters/wrapping-up-the-best-practices.html
 
-extra-appsync:
-  title: AppSync
-  chapters:
-    - page: What is AWS AppSync
-      url: /chapters/what-is-aws-appsync.html
-
 extra-backend:
   title: Serverless
   chapters:
@@ -445,6 +439,12 @@ extra-backend:
       url: /chapters/dynamically-generate-social-share-images-with-serverless.html
     - page: Using Lerna and Yarn Workspaces with Serverless
       url: /chapters/using-lerna-and-yarn-workspaces-with-serverless.html
+
+extra-appsync:
+  title: AppSync
+  chapters:
+    - page: What is AWS AppSync
+      url: /chapters/what-is-aws-appsync.html
 
 extra-frontend:
   title: React

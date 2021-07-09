@@ -50,7 +50,7 @@ AWS AppSync is a managed GraphQL API service that, in true serverless form, allo
 
 AppSync APIs have [three components that you need to define](https://docs.aws.amazon.com/appsync/latest/devguide/designing-a-graphql-api.html): a schema, resolvers, and data sources. Combining these three items allows your API to interact with resources and translate responses into the desired format.
 
-![Imgur](https://i.imgur.com/4zs2Oyq.png)
+![AWS AppSync Architecture](/assets/diagrams/aws-appsync-architecture.png)
 
 When a request first comes in, AppSync verifies it using the schema. The authorization of the request is verified against some optional type decorators and the requested properties are checked to make sure they're valid.
 
