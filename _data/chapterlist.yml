@@ -446,6 +446,14 @@ extra-auth:
     - page: Intro to Serverless Authentication
       url: /chapters/intro-to-serverless-authentication.html
 
+extra-appsync:
+  title: AppSync
+  chapters:
+    - page: What is AWS AppSync
+      url: /chapters/what-is-aws-appsync.html
+    - page: How to use AWS AppSync
+      url: /chapters/how-to-use-appsync.html
+
 extra-frontend:
   title: React
   chapters:

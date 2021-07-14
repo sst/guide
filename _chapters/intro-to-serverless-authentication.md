@@ -22,7 +22,7 @@ When I waved my badge in front of the black box, the system was able to verify w
 
 ### Adding Authentication in Serverless
 
-You can use one of AWS's built-in authentication methods in your [API Gateway](https://aws.amazon.com/api-gateway/) or [AppSync](https://aws.amazon.com/appsync/) APIs. Or if you need some extra features, there are plenty of third-party services, some of which you can self-host.
+You can use one of AWS's built-in authentication methods in your [API Gateway](https://aws.amazon.com/api-gateway/) or [AppSync]({% link _chapters/what-is-aws-appsync.md %}) APIs. Or if you need some extra features, there are plenty of third-party services, some of which you can self-host.
 
 1. **IAM**
 
@@ -50,7 +50,7 @@ Let’s look at a couple of these options in detail.
 
 [AWS IAM]({% link _chapters/what-is-iam.md %}) is how AWS controls access to resources natively. When you log in to the AWS console or use the CLI, your request is authorized by IAM.
 
-You can use IAM to control access to an API Gateway or AppSync API by attaching a role to the resource that's making requests. At runtime, the resource will assume the role, which will allow it to make requests to your API depending on what permissions you've given to the role.
+You can use IAM to control access to an API Gateway or [AppSync API]({% link _chapters/what-is-aws-appsync.md %}) by attaching a role to the resource that's making requests. At runtime, the resource will assume the role, which will allow it to make requests to your API depending on what permissions you've given to the role.
 
 For example, if you create a Lambda function that needs access to your AppSync API, you would first define a role that provides that permission and allows the Lambda service to assume the role. When your function starts, it will tell IAM that it wants to assume the role that you defined. IAM will authenticate the request by verifying that it came from a Lambda function and that Lambdas are allowed to assume the role. Once the function has been authenticated, IAM will provide it with temporary credentials to use when making requests to AWS services.
 
@@ -108,7 +108,7 @@ Third-party providers like [Auth0](https://auth0.com/), [Okta](https://www.okta.
 
 While, Cognito has fantastic integration with other AWS services, but it does have an ugly side. The most frustrating issue that is that there are a lot of User Pool properties that cannot be changed once the pool is created. For example, if you allow usernames to be case-insensitive and your users sign up using Cognito. You won't be able to change this later. So if you want to switch to lowercase usernames, you would need to create a new User Pool and transition your existing users to it.
 
-Most third-party providers will have the same basic features as a Cognito User Pool, plus some extras. The user will sign in using OAuth 2, then get a token back. They also tend to have better management tools than Cognito. The Cognito dashboard in AWS is very basic and can be hard to use.
+Most third-party providers will have the same basic features as a Cognito User Pool, plus some extras. The user will sign in using OAuth 2, then get a token back. These services also tend to have better user management tools than Cognito. The Cognito dashboard in AWS is very basic and can be hard to use.
 
 Each provider has its list of pros and cons. In general, the drawbacks of using a third-party provider over Cognito are billing and integration with other AWS services.
 
