@@ -445,6 +445,8 @@ extra-appsync:
   chapters:
     - page: What is AWS AppSync
       url: /chapters/what-is-aws-appsync.html
+    - page: How to use AWS AppSync
+      url: /chapters/how-to-use-appsync.html
 
 extra-frontend:
   title: React

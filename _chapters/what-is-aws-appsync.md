@@ -8,7 +8,9 @@ ref: what-is-aws-appsync
 comments_id: 
 ---
 
-[AWS AppSync](https://aws.amazon.com/appsync/) is a managed API service that you can use in your serverless backends. If you’re already familiar with API Gateway, you may be wondering why you would need to learn yet another service. It all comes down to the protocol that you want to use: REST or GraphQL. 
+[AWS AppSync](https://aws.amazon.com/appsync/) is a managed API service that you can use in your serverless backends.
+
+If you’re already familiar with API Gateway, you may be wondering why you would need to learn yet another service. It all comes down to the protocol that you want to use: REST or GraphQL. 
 
 ### GraphQL Introduction
 
@@ -94,3 +96,5 @@ The following table details the current prices charged for running an AppSync AP
 #### Cache Pricing
 
 You can optionally enable caching for your AppSync API. You select an instance type from a handful of options. Each instance type has an hourly rate associated with it that currently ranges from $0.044 to $6.775. See the [AWS AppSync pricing page](https://aws.amazon.com/appsync/pricing/) for the most up to date prices.
+
+Next, [let's look at how to use AWS AppSync in your applications]({% link _chapters/how-to-use-aws-appsync.md %}).
