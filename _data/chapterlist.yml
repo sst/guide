@@ -440,6 +440,12 @@ extra-backend:
     - page: Using Lerna and Yarn Workspaces with Serverless
       url: /chapters/using-lerna-and-yarn-workspaces-with-serverless.html
 
+extra-auth:
+  title: Authentication
+  chapters:
+    - page: Intro to Serverless Authentication
+      url: /chapters/intro-to-serverless-authentication.html
+
 extra-frontend:
   title: React
   chapters:
