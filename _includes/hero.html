@@ -145,7 +145,7 @@
           <img class="react" src="/assets/lander/react-logo.svg" />
         </div>
         <h4>React app</h4>
-        <p>Deploy a React app as a static website. Using the SST StaticSite construct and setting the custom domain.</p>
+        <p>Deploy a React.js app. Using the ReactStaticSite construct to set custom domains and environment variables.</p>
         <a href="{% link _examples/how-to-create-a-reactjs-app-with-serverless.md %}">
           View example <i class="fa fa-angle-right" aria-hidden="true"></i>
         </a>
@@ -250,22 +250,25 @@
         </div>
         <div class="code-block react-app long" style="display: none">
           <div class="token-line">
-            <span class="token lead">1</span> <span class="token italics">new</span> <span class="token keyword">sst.StaticSite</span>(<span class="token italics">this</span>, <span class="token string">"ReactSite"</span>, {
+            <span class="token lead">1</span> <span class="token italics">new</span> <span class="token keyword">sst.ReactStaticSite</span>(<span class="token italics">this</span>, <span class="token string">"Site"</span>, {
           </div>
           <div class="token-line">
             <span class="token lead">2</span>&nbsp;&nbsp;path: <span class="token string">"src/frontend"</span>,
           </div>
           <div class="token-line">
-            <span class="token lead">3</span>&nbsp;&nbsp;buildOutput: <span class="token string">"build"</span>,
+            <span class="token lead">3</span>&nbsp;&nbsp;customDomain: <span class="token string">"www.my-react-app.com"</span>,
           </div>
           <div class="token-line">
-            <span class="token lead">4</span>&nbsp;&nbsp;buildCommand: <span class="token string">"npm run build"</span>,
+            <span class="token lead">4</span>&nbsp;&nbsp;environment: {
           </div>
           <div class="token-line">
-            <span class="token lead">5</span>&nbsp;&nbsp;customDomain: <span class="token string">"www.my-react-app.com"</span>
+            <span class="token lead">5</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token option">REACT_APP_API_URL</span>: api.url
           </div>
           <div class="token-line">
-            <span class="token lead">6</span>});
+            <span class="token lead">6</span>&nbsp;&nbsp;}
+          </div>
+          <div class="token-line">
+            <span class="token lead">7</span>});
           </div>
         </div>
         <div class="code-block api-auth long" style="display: none">

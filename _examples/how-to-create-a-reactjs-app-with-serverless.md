@@ -3,13 +3,13 @@ layout: example
 title: How to create a React.js app with serverless
 date: 2021-06-17 00:00:00
 lang: en
-description: In this example we will look at how to use React.js with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST) and the sst.StaticSite construct to deploy our app to AWS S3 and CloudFront.
+description: In this example we will look at how to use React.js with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST) and the SST ReactStaticSite construct to deploy our app to AWS S3 and CloudFront.
 repo: react-app
 ref: how-to-create-a-reactjs-app-with-serverless
 comments_id: how-to-create-a-react-js-app-with-serverless/2413
 ---
 
-In this example we will look at how to use [React.js](https://reactjs.org) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) and the sst.StaticSite construct to deploy our app to AWS.
+In this example we will look at how to use [React.js](https://reactjs.org) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) and the SST [`ReactStaticSite`](https://docs.serverless-stack.com/constructs/ReactStaticSite) construct to deploy our app to AWS.
 
 ## Requirements
 
@@ -52,11 +52,13 @@ An SST app is made up of two parts.
 
    The code for our frontend React.js app.
 
-## Create a serverless API
+## Create our infrastructure
 
-We'll be creating a simple API that'll be counting clicks. We need a database for this. We'll be using [Amazon DynamoDB](https://aws.amazon.com/dynamodb/); a reliable and highly-performant NoSQL database that can be configured as a true serverless database. Meaning that it'll scale up and down automatically. And you won't get charged if you are not using it.
+Our app is made up of a simple API and a React.js app. The API will be talking to a database to store the number of clicks. We'll start by creating the database.
 
 ### Adding the table
+
+We'll be using [Amazon DynamoDB](https://aws.amazon.com/dynamodb/); a reliable and highly-performant NoSQL database that can be configured as a true serverless database. Meaning that it'll scale up and down automatically. And you won't get charged if you are not using it.
 
 {%change%} Replace the `lib/MyStack.js` with the following.
 
@@ -78,13 +80,13 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-This creates a serverless DynamoDB table using [`sst.Table`](https://docs.serverless-stack.com/constructs/Table). It has a primary key called `counter`. Our table is going to look something like this:
+This creates a serverless DynamoDB table using the SST [`Table`](https://docs.serverless-stack.com/constructs/Table) construct. It has a primary key called `counter`. Our table is going to look something like this:
 
 | counter | tally |
 |---------|-------|
 | clicks  | 123   |
 
-### Setting up the API
+### Creating our API
 
 Now let's add the API.
 
@@ -113,13 +115,65 @@ this.addOutputs({
 });
 ```
 
-Our [API](https://docs.serverless-stack.com/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `main` in `src/lambda.js` will get invoked.
+We are using the SST [`Api`](https://docs.serverless-stack.com/constructs/Api) construct to create our API. It simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `main` in `src/lambda.js` will get invoked.
 
 We also pass in the name of our DynamoDB table to our API as an environment variable called `tableName`. And we allow our API to access (read and write) the table instance we just created.
 
+### Setting up our React app
+
+To deploy a React.js app to AWS, we'll be using the SST [`ReactStaticSite`](https://docs.serverless-stack.com/constructs/ReactStaticSite) construct.
+
+{%change%} Replace the following in `lib/MyStack.js`:
+
+``` js
+// Show the API endpoint in the output
+this.addOutputs({
+  ApiEndpoint: api.url,
+});
+```
+
+{%change%} With:
+
+``` js
+// Deploy our React app
+const site = new sst.ReactStaticSite(this, "ReactSite", {
+  path: "frontend",
+  environment: {
+    // Pass in the API endpoint to our app
+    REACT_APP_API_URL: api.url,
+  },
+});
+
+// Show the URLs in the output
+this.addOutputs({
+  SiteUrl: site.url,
+  ApiEndpoint: api.url,
+});
+```
+
+The construct is pointing to where our React.js app is located. We haven't created our app yet but for now we'll point to the `frontend` directory.
+
+We are also setting up a [build time React environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) `REACT_APP_API_URL` with the endpoint of our API. The [`ReactStaticSite`](https://docs.serverless-stack.com/constructs/ReactStaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
+
+You can also optionally configure a custom domain.
+
+```js
+// Deploy our React app
+const site = new sst.ReactStaticSite(this, "ReactSite", {
+  path: "frontend",
+  environment: {
+    // Pass in the API endpoint to our app
+    REACT_APP_API_URL: api.url,
+  },
+  customDomain: "www.my-react-app.com",
+});
+```
+
+But we'll skip this for now.
+
 ### Reading from our table
 
-Now in our function, we'll start by reading from our DynamoDB table.
+Our API is powered by a Lambda function. In the function we'll read from our DynamoDB table.
 
 {%change%} Replace `src/lambda.js` with the following.
 
@@ -150,7 +204,7 @@ export async function main() {
 }
 ```
 
-We make a `get` call to our DynamoDB table and get the value of a row where the `counter` column has the value `clicks`. Since, we haven't written to this column yet, we are going to just return `0`.
+We make a `get` call to our DynamoDB table and get the value of a row where the `counter` column has the value `clicks`. Since we haven't written to this column yet, we are going to just return `0`.
 
 {%change%} Let's install the `aws-sdk`.
 
@@ -188,9 +242,12 @@ Stack dev-react-app-my-stack
   Status: deployed
   Outputs:
     ApiEndpoint: https://51q98mf39e.execute-api.us-east-1.amazonaws.com
+    SiteUrl: https://d8lnp7p95pfac.cloudfront.net
 ```
 
-The `ApiEndpoint` is the API we just created. Let's test our endpoint. Run the following in your terminal.
+The `ApiEndpoint` is the API we just created. While the `SiteUrl` is where our React.js app will be hosted. For now it's just a placeholder website.
+
+Let's test our endpoint. Run the following in your terminal.
 
 ``` bash
 $ curl -X POST https://51q98mf39e.execute-api.us-east-1.amazonaws.com
@@ -200,15 +257,16 @@ You should see a `0` printed out.
 
 ## Setting up our React app
 
-Now let's use [Create React App](https://github.com/facebook/create-react-app) to setup our React.js app.
+We are now ready to use the API we just created. Let's use [Create React App](https://github.com/facebook/create-react-app) to setup our React.js app.
 
-{%change%} Run the following in our project root.
+{%change%} Run the following in the project root.
 
 ``` bash
 $ npx create-react-app frontend --use-npm
+$ cd frontend
 ```
 
-This sets up our React app in the `frontend/` directory. 
+This sets up our React app in the `frontend/` directory. Recall that, earlier in the guide we were pointing the `ReactStaticSite` construct to this path.
 
 Create React App will throw a warning if it is installed inside a repo that uses Jest. To disable this, we'll need to set an environment variable.
 
@@ -216,6 +274,28 @@ Create React App will throw a warning if it is installed inside a repo that uses
 
 ``` bash
 SKIP_PREFLIGHT_CHECK=true
+```
+
+We also need to load the environment variables from our SST app. To do this, we'll be using the [`@serverless-stack/static-site-env`](https://www.npmjs.com/package/@serverless-stack/static-site-env) package.
+
+{%change%} Install the `static-site-env` package by running the following in the `frontend/` directory.
+
+``` bash
+$ npm install @serverless-stack/static-site-env --save-dev
+```
+
+We need to update our start script to use this package.
+
+{%change%} Replace the `start` script in your `frontend/package.json`.
+
+``` bash
+"start": "react-scripts start",
+```
+
+{%change%} With the following:
+
+``` bash
+"start": "sst-env -- react-scripts start",
 ```
 
 Let's start our React development environment.
@@ -242,7 +322,7 @@ export default function App() {
   const [count, setCount] = useState(null);
 
   function onClick() {
-    fetch("https://51q98mf39e.execute-api.us-east-1.amazonaws.com", {
+    fetch(process.env.REACT_APP_API_URL, {
       method: "POST",
     })
       .then((response) => response.text())
@@ -258,9 +338,9 @@ export default function App() {
 }
 ```
 
-Here we are adding a simple button that when clicked, makes a request to our API. The response from our API is then stored in our app's state. We use that to display the count of the number of times the button has been clicked.
+Here we are adding a simple button that when clicked, makes a request to our API. We are getting the API endpoint from the environment variable, `process.env.REACT_APP_API_URL`.
 
-Make sure to replace the API endpoint with the one from your stack outputs above.
+The response from our API is then stored in our app's state. We use that to display the count of the number of times the button has been clicked.
 
 Let's add some styles.
 
@@ -319,54 +399,6 @@ Here we are updating the `clicks` row's `tally` column with the increased count.
 And if you head over to your browser and click the button again, you should see the count increase!
 
 ![Click counter updating in React app](/assets/examples/react-app/click-counter-updating-in-react-app.png)
-
-## Deploying our React app
-
-Now that our click counter app is working locally, let's set it up to deploy it to AWS.
-
-{%change%} Replace the following in `lib/MyStack.js`:
-
-``` js
-// Show the API endpoint in the output
-this.addOutputs({
-  ApiEndpoint: api.url,
-});
-```
-
-{%change%} With:
-
-``` js
-// Deploy our React app
-const site = new sst.StaticSite(this, "ReactSite", {
-  path: "frontend",
-  buildOutput: "build",
-  buildCommand: "npm run build",
-  errorPage: sst.StaticSiteErrorOptions.REDIRECT_TO_INDEX_PAGE,
-});
-
-// Show the URLs in the output
-this.addOutputs({
-  SiteUrl: site.url,
-  ApiEndpoint: api.url,
-});
-```
-
-This uses the [`sst.StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite) construct to deploy our React app to AWS. Finally, we are outputting the URL of our new React app along with our API endpoint.
-
-We can also optionally configure a custom domain.
-
-```js
-// Deploy our React app
-const site = new sst.StaticSite(this, "ReactSite", {
-  path: "frontend",
-  buildOutput: "build",
-  buildCommand: "npm run build",
-  customDomain: "www.my-react-app.com",
-  errorPage: sst.StaticSiteErrorOptions.REDIRECT_TO_INDEX_PAGE,
-});
-```
-
-But we can skip this for now.
 
 ## Deploying to prod
 
