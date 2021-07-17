@@ -70,7 +70,7 @@ IAM is a free service provided as a part of AWS.
 
 A user's info is stored in a Cognito User Pool when they sign up. Users will then authenticate with a username and password. Once the User Pool has authenticated the user, it will send back a token. Then, when a user makes a request to your API Gateway, it will attach the token to it. API Gateway will validate the token automatically, check that the authenticated user has authorization to perform the request, and finally return the response.
 
-![https://i.imgur.com/XxCpiSn.png](https://i.imgur.com/XxCpiSn.png)
+![Cognito User Pool authentication flow](/assets/diagrams/cognito-user-pool-authentication-flow.png)
 
 #### Identity Pools
 
