@@ -16,6 +16,12 @@ For example, your React app might be calling an API endpoint in your backend. Yo
 
 In this chapter, we'll look at how to do this specifically between a React.js app and a serverless backend.
 
+Here is a video of it in action.
+
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/58Ga_Z25Q6A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 Let's look at the two parts of our workflow; developing and deploying.
 
 ## While Developing
