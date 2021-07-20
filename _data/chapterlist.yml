@@ -449,6 +449,8 @@ extra-frontend:
       url: /chapters/code-splitting-in-create-react-app.html
     - page: Environments in Create React App
       url: /chapters/environments-in-create-react-app.html
+    - page: Setting serverless environments variables in a React app
+      url: /chapters/setting-serverless-environments-variables-in-a-react-app.html
     - page: Deploying a React app to AWS
       url: /chapters/deploying-a-react-app-to-aws.html
       subchapters:
