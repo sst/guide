@@ -493,8 +493,13 @@
 }
 
 .footer-col-1 {
+  display: flex;
   width: -webkit-calc(60% - (#{$spacing-unit} / 2));
   width:         calc(60% - (#{$spacing-unit} / 2));
+
+  & > ul:not(:last-child) {
+    margin-right: 3 * $spacing-unit;
+  }
 }
 
 .footer-col-2 {
@@ -509,6 +514,14 @@
 		text-align: left;
     width: -webkit-calc(100% - (#{$spacing-unit} / 2));
     width:         calc(100% - (#{$spacing-unit} / 2));
+
+    &.footer-col-1 {
+      display: block;
+
+      & > ul:not(:last-child) {
+        margin-right: 0;
+      }
+    }
   }
 }
 

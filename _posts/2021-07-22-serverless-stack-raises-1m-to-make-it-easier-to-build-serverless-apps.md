@@ -14,4 +14,4 @@ As more and more developers discover and adopt SST's [live local development env
 
 We are also incredibly proud of what we've built with the [Serverless Stack Guide](/#guide), it is the most widely read resource for serverless. And [Seed](https://seed.run); the best way for teams to deploy and manage their serverless applications.
 
-The new funding allows us to expand the team to better serve the community and ensure that you have everything you need to build serverless applications. So if you are excited about where we are heading and would like to help our cause, [**we would like you to join our team**]({{ site.jobs_email }})!
+The new funding allows us to expand the team to better serve the community and ensure that you have everything you need to build serverless applications. So if you are excited about where we are heading and would like to help our cause, [**we would like you to join our team**]({% link careers.html %})!

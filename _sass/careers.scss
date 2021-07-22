@@ -1,0 +1,95 @@
+//////////////////
+// CAREERS PAGE //
+//////////////////
+main > .careers-page {
+
+  @include media-query($on-palm) {
+    padding: 0 $spacing-unit / 2;
+  }
+
+  .header {
+
+    h1 {
+      margin: 0 auto $spacing-unit / 2;
+      max-width: 570px;
+      padding-top: $spacing-unit;
+      font-size: 40px;
+      line-height: 1.4;
+      text-align: center;
+    }
+    & > p {
+      margin: 0 auto;
+      max-width: 570px;
+      font-size: 20px;
+      text-align: center;
+      color: $secondary-text-color;
+      b {
+        font-weight: 600;
+      }
+    }
+
+
+    @include media-query($on-palm) {
+      h1 {
+        padding-top: $spacing-unit / 2;
+        font-size: 34px;
+      }
+    }
+  }
+
+  hr {
+    margin: $spacing-unit * 3 auto;
+    max-width: 400px;
+    border-color: darken($background-color, 10%);
+
+    @include media-query($on-palm) {
+      margin: $spacing-unit * 1.5 auto;
+    }
+  }
+
+  .careers {
+    margin: 0 auto $spacing-unit * 2;
+    max-width: 800px;
+    list-style-type: none;
+
+
+    li {
+      display: flex;
+      align-items: center;
+
+      @include media-query($on-palm) {
+        display: block;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 1.5 * $spacing-unit;
+      }
+
+      div:first-child {
+        margin-right: 2 * $spacing-unit;
+        flex-grow: 1;
+
+        @include media-query($on-palm) {
+          margin-bottom: 10px;
+          margin-right: 0;
+        }
+      }
+
+      h3 {
+        margin-bottom: 5px;
+        font-size: 30px;
+      }
+
+      p {
+        margin-bottom: 0;
+        font-size: 18px;
+        color: $secondary-text-color;
+      }
+
+      & > a {
+        white-space: nowrap;
+        font-weight: bold;
+      }
+    }
+  }
+}
