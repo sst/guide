@@ -176,6 +176,43 @@ $reader-logo-width: 123px;
     }
   }
 
+  .site-announcement {
+    margin-bottom: $spacing-unit / 2;
+    max-width: 560px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: 600;
+
+    @include media-query($on-palm) {
+      margin-bottom: 10px;
+    }
+
+    .new {
+      margin-right: 10px;
+      flex: 0 0 auto;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: $important-color;
+      background-color: lighten($important-color, 30%);
+      padding: 3px 5px;
+      line-height: 1;
+      border-radius: 3px;
+      font-size: 11px;
+    }
+    .copy {
+      margin-right: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.1;
+    }
+    i.fa {
+      margin-top: 1px;
+      font-size: 14px;
+    }
+  }
+
   .site-description {
     margin: 0;
     padding: 0;
@@ -392,7 +429,7 @@ $reader-logo-width: 123px;
 }
 
 .home > .examples {
-  padding: 1.5 * $spacing-unit $spacing-unit 0;
+  padding: $spacing-unit $spacing-unit 0;
 
   @include media-query($on-laptop) {
     padding: 5px 0 0;
@@ -1266,7 +1303,7 @@ $reader-logo-width: 123px;
   }
 
   .tweets {
-    padding: 2 * $spacing-unit 0 $spacing-unit;
+    padding: $spacing-unit 0 $spacing-unit;
     display: flex;
     flex-wrap: nowrap;
     overflow-x: scroll;

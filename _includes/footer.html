@@ -5,16 +5,24 @@
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
         <ul class="link-list">
-          <li class="site-title">
-            {{ site.title | escape }}
-          </li>
-          <li><a class="page-link" href="{% link newsletter.md %}">Newsletter</a></li>
-          <li><a class="page-link" href="{% link about.html %}">About us</a></li>
+          <li class="site-title">Products</li>
+          <li><a class="page-link" href="{{ site.sst_github_repo }}">SST</a></li>
+          <li><a class="page-link" href="{{ site.seed_run }}">Seed</a></li>
+          <li><a class="page-link" href="/#guide">Guide</a></li>
+        </ul>
+        <ul class="link-list">
+          <li class="site-title">Resources</li>
+          <li><a class="page-link" href="{{ site.docs_url }}">Docs</a></li>
           <li><a class="page-link" href="{{ site.forum_url }}">Forums</a></li>
-          <li><a class="page-link" href="{{ site.sst_github_repo }}">GitHub</a></li>
-          <li><a class="page-link" href="{{ site.twitter_url }}">Twitter</a></li>
-          <li><a class="page-link" href="{{ site.slack_invite_url }}">Slack</a></li>
-          <!--<li><a class="page-link" href="{% link blog/index.md %}">Blog</a></li>-->
+          <li><a class="page-link" href="{% link _examples/index.md %}">Examples</a></li>
+          <li><a class="page-link" href="{% link newsletter.md %}">Newsletter</a></li>
+        </ul>
+        <ul class="link-list">
+          <li class="site-title">Company</li>
+          <li><a class="page-link" href="{% link blog/index.md %}">Blog</a></li>
+          <li><a class="page-link" href="{% link about.html %}">About</a></li>
+          <li><a class="page-link" href="mailto:{{ site.email }}">Contact us</a></li>
+          <li><a class="page-link jobs" href="{% link careers.html %}">Join our team!</a></li>
         </ul>
       </div>
 
@@ -22,6 +30,20 @@
         <ul class="contact-list">
           <li class="site-description">Helping you build full-stack serverless apps</li>
           <li class="site-author">&copy; 2021 <a href="https://anoma.ly">Anomaly Innovations</a></li>
+          <li class="social-links">
+            <a class="social-link" href="{{ site.github_repo }}">
+              <i class="fa fa-github-square" aria-hidden="true"></i>
+            </a>
+            <a class="social-link" href="{{ site.slack_invite_url }}">
+              <img class="slack" width="30px" src="/assets/lander/slack-square.svg" />
+            </a>
+            <a class="social-link" href="{{ site.twitter_url }}">
+              <i class="fa fa-twitter-square" aria-hidden="true"></i>
+            </a>
+            <a class="social-link" href="{{ site.linkedin_url }}">
+              <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+            </a>
+          </li>
         </ul>
       </div>
 
