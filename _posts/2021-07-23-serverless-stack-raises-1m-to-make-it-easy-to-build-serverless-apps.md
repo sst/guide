@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: Serverless Stack raises $1M to make it easier to build serverless apps
+title: Serverless Stack raises $1M to make it easy to build serverless apps
 author: jay
 ---
 
