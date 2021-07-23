@@ -4,7 +4,7 @@ title: Serverless Stack raises $1M to make it easy to build serverless apps
 author: jay
 ---
 
-Today we are announcing our $1M seed round. The new funding helps us in our mission to make it easy for developers to build full-stack serverless applications.
+Today we are announcing our $1M seed round. The new funding helps us in our mission to make it easy for developers to build full-stack serverless applications. You can [read more about this announcement over on TechCrunch](https://techcrunch.com/2021/07/23/serverless-stack-raises-1m-for-open-source-application-framework/) as well.
 
 Our [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) allows developers to test and make changes to their applications by directly connecting their local machines to the cloud. The biggest issue that developers face while adopting serverless is the ability to debug their applications locally. With Serverless Stack, developers are able to [set breakpoints and inspect their code](https://youtu.be/2w4A06IsBlU), just as they would with any other type of application. Since its public launch 5 months ago, SST has grown to over 2K stars on GitHub and has been downloaded over 60K times.
 

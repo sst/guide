@@ -153,7 +153,7 @@ this.addOutputs({
 
 The construct is pointing to where our React.js app is located. We haven't created our app yet but for now we'll point to the `frontend` directory.
 
-We are also setting up a [build time React environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) `REACT_APP_API_URL` with the endpoint of our API. The [`ReactStaticSite`](https://docs.serverless-stack.com/constructs/ReactStaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
+We are also setting up a [build time React environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) `REACT_APP_API_URL` with the endpoint of our API. The [`ReactStaticSite`](https://docs.serverless-stack.com/constructs/ReactStaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend. You can read more about this over in our chapter on, [Setting serverless environments variables in a React app]({% link _chapters/setting-serverless-environments-variables-in-a-react-app.md %}).
 
 You can also optionally configure a custom domain.
 
