@@ -36,7 +36,7 @@ backend_ext_resources_github_repo: "https://github.com/AnomalyInnovations/server
 sst_github_repo: "https://github.com/serverless-stack/serverless-stack"
 sst_github_examples_prefix: "/tree/master/examples/"
 
-seed_rul: "https://seed.run"
+seed_url: "https://seed.run"
 survey_url: "https://serverless-stack.typeform.com/to/xiPdCW"
 
 google_analytics: "UA-3536629-11"
