@@ -435,6 +435,8 @@ extra-backend:
       url: /chapters/serverless-nodejs-starter.html
     - page: Package Lambdas with serverless-bundle
       url: /chapters/package-lambdas-with-serverless-bundle.html
+    - page: Dynamically generate social share images with serverless
+      url: /chapters/dynamically-generate-social-share-images-with-serverless.html
     - page: Using Lerna and Yarn Workspaces with Serverless
       url: /chapters/using-lerna-and-yarn-workspaces-with-serverless.html
 
@@ -447,6 +449,8 @@ extra-frontend:
       url: /chapters/code-splitting-in-create-react-app.html
     - page: Environments in Create React App
       url: /chapters/environments-in-create-react-app.html
+    - page: Setting serverless environments variables in a React app
+      url: /chapters/setting-serverless-environments-variables-in-a-react-app.html
     - page: Deploying a React app to AWS
       url: /chapters/deploying-a-react-app-to-aws.html
       subchapters:
