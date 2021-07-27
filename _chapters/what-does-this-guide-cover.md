@@ -8,7 +8,7 @@ ref: what-does-this-guide-cover
 comments_id: what-does-this-guide-cover/83
 ---
 
-**UPCOMING CHANGES**: There some big changes that are coming to the Serverless Stack Guide. We'll be migrating the guide to use [SST]({ site.sst_github_repo }). And we'll be creating a separate version for Serverless Framework. [Subscribe to our newsletter]({% link newsletter.md %}) and we'll keep you posted.
+**UPCOMING CHANGES**: There are some big changes that are coming to the Serverless Stack Guide. We'll be migrating the guide to use [SST]({ site.sst_github_repo }). And we'll be creating a separate version for Serverless Framework. [Subscribe to our newsletter]({% link newsletter.md %}) and we'll keep you posted.
 
 ---
 

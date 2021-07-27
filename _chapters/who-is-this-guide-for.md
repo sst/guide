@@ -7,7 +7,7 @@ ref: who-is-this-guide-for
 comments_id: who-is-this-guide-for/96
 ---
 
-**UPCOMING CHANGES**: There some big changes that are coming to the Serverless Stack Guide. We'll be migrating the guide to use [SST]({ site.sst_github_repo }). And we'll be creating a separate version for Serverless Framework. [Subscribe to our newsletter]({% link newsletter.md %}) and we'll keep you posted.
+**UPCOMING CHANGES**: There are some big changes that are coming to the Serverless Stack Guide. We'll be migrating the guide to use [SST]({ site.sst_github_repo }). And we'll be creating a separate version for Serverless Framework. [Subscribe to our newsletter]({% link newsletter.md %}) and we'll keep you posted.
 
 ---
 
