@@ -8,10 +8,6 @@ ref: what-does-this-guide-cover
 comments_id: what-does-this-guide-cover/83
 ---
 
-**UPCOMING CHANGES**: There are some big changes that are coming to the Serverless Stack Guide. We'll be migrating the guide to use [SST]({ site.sst_github_repo }). And we'll be creating a separate version for Serverless Framework. [Subscribe to our newsletter]({% link newsletter.md %}) and we'll keep you posted.
-
----
-
 To step through the major concepts involved in building web applications, we are going to be building a simple note taking app called [**Scratch**](https://demo2.serverless-stack.com). However, unlike most tutorials out there, our goal is to go into the details of what it takes to build a full-stack application for production.
 
 ![Completed app desktop screenshot](/assets/completed-app-desktop.png)

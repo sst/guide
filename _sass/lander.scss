@@ -735,6 +735,21 @@ $reader-logo-width: 123px;
         font-size: 36px;
       }
     }
+    p.update {
+      color: $secondary-text-color;
+      .new {
+        margin-right: 5px;
+        flex: 0 0 auto;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: $important-color;
+        background-color: lighten($important-color, 30%);
+        padding: 3px 5px;
+        line-height: 1;
+        border-radius: 3px;
+        font-size: 11px;
+      }
+    }
     h4 {
       margin-bottom: 0;
       font-family: $base-font-family;
