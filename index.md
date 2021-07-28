@@ -68,7 +68,6 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
         </div>
         <div class="chapters">
           {% include toc-chapters.html items=site.data.chapterlist.extra-backend id="extra-backend" %}
-          {% include toc-chapters.html items=site.data.chapterlist.extra-appsync id="extra-appsync" %}
           {% include toc-chapters.html items=site.data.chapterlist.extra-frontend id="extra-frontend" %}
           <a class="expand"><span>Show all chapters</span></a>
         </div>

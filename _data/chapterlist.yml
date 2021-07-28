@@ -411,6 +411,8 @@ extra-backend:
       url: /chapters/what-is-iam.html
     - page: What is an ARN
       url: /chapters/what-is-an-arn.html
+    - page: What is AWS AppSync
+      url: /chapters/what-is-aws-appsync.html
     - page: Cognito user pool vs identity pool
       url: /chapters/cognito-user-pool-vs-identity-pool.html
     - page: API Gateway and Lambda Logs
@@ -439,14 +441,6 @@ extra-backend:
       url: /chapters/dynamically-generate-social-share-images-with-serverless.html
     - page: Using Lerna and Yarn Workspaces with Serverless
       url: /chapters/using-lerna-and-yarn-workspaces-with-serverless.html
-
-extra-appsync:
-  title: AppSync
-  chapters:
-    - page: What is AWS AppSync
-      url: /chapters/what-is-aws-appsync.html
-    - page: How to use AWS AppSync
-      url: /chapters/how-to-use-appsync.html
 
 extra-frontend:
   title: React
