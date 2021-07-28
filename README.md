@@ -110,6 +110,8 @@ Thanks to these folks for their contributions to the content of Serverless Stack
 - [Vieko Franetovic](https://github.com/vieko): Translating chapters to Spanish
 - [Christian Kaindl](https://github.com/christiankaindl): Translating chapters to German
 - [Jae Chul Kim](https://github.com/bsg-bob): Translating chapters to Korean
+- [Ben Force](https://twitter.com/theBenForce): AppSync extra credit chapter
+- [Eze Sunday](https://twitter.com/ezesundayeze): AppSync extra credit chapter
 
 ---
 
