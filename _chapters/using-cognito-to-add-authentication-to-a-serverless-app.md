@@ -573,7 +573,7 @@ The first time you run this command it'll take a couple of minutes to create you
 
 Once complete, you should see something like this.
 
-```
+``` bash
 ===============
  Deploying app
 ===============
