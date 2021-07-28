@@ -411,6 +411,8 @@ extra-backend:
       url: /chapters/what-is-iam.html
     - page: What is an ARN
       url: /chapters/what-is-an-arn.html
+    - page: What is AWS AppSync
+      url: /chapters/what-is-aws-appsync.html
     - page: Cognito user pool vs identity pool
       url: /chapters/cognito-user-pool-vs-identity-pool.html
     - page: API Gateway and Lambda Logs
