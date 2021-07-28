@@ -584,7 +584,7 @@ Linting source
 Deploying stacks
 dev-react-app-auth-cognito-my-stack: deploying...
 
- ✅  dev-react-app-auth-cognito-my-stack
+ dev-react-app-auth-cognito-my-stack
 
 
 Stack dev-react-app-auth-cognito-my-stack
