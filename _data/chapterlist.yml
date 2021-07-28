@@ -442,6 +442,15 @@ extra-backend:
     - page: Using Lerna and Yarn Workspaces with Serverless
       url: /chapters/using-lerna-and-yarn-workspaces-with-serverless.html
 
+extra-auth:
+  title: Authentication
+  chapters:
+    - page: How to add authentication to a serverless app
+      url: /chapters/how-to-add-authentication-to-a-serverless-app.html
+      subchapters:
+        - page: Using Cognito to add authentication to a serverless app
+          url: /chapters/using-cognito-to-add-authentication-to-a-serverless-app.html
+
 extra-frontend:
   title: React
   chapters:

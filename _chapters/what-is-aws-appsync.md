@@ -143,7 +143,7 @@ The function generally contains four arguments:
 
 Here is what the function definition looks like:
 
-```
+``` js
 fieldName: (parent, args, context, info) => data;
 ```
 
@@ -257,7 +257,7 @@ In most cases, you will have to pull data intermittently with queries on demand 
 
 To create a subscription, you’ll first need to create a schema type of subscription and add the AWS AppSync annotation `@aws_subscribe()` to it.
 
-```
+``` ts
 type Subscription {
   newTodo: Todo
   @aws_subscribe(mutations: ["newTodo"])
