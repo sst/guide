@@ -5,7 +5,7 @@ date: 2021-07-01 00:00:00
 lang: en
 description: AWS AppSync is a fully managed GraphQL service that can be used to build serverless backends. It can connect to data sources like DynamoDB, Lambda, RDS, etc. It also provides full support for subscriptions.
 ref: what-is-aws-appsync
-comments_id: 
+comments_id: what-is-aws-appsync/2432
 ---
 
 [AWS AppSync](https://aws.amazon.com/appsync/) is a managed API service that you can use in your serverless backends. In this chapter we'll go over it in detail:
