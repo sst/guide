@@ -10,19 +10,19 @@ comments_id:
 
 {% capture repo_url %}{{ site.sst_github_repo }}{{ site.sst_github_examples_prefix }}react-app-auth-cognito{% endcapture %}
 
-In the [previous chapter]({% link _chapters/how-to-add-authentication-to-a-serverless-app.md %}) we looked the basics of adding authentication to a serverless app. In this chapter we look at how to use [Amazon Cognito](https://aws.amazon.com/cognito/) to add authentication to a serverless API. We'll also look at how to connect to this API using [AWS Amplify](https://aws.amazon.com/amplify/) in a [React.js](https://reactjs.org) app.
+In the [previous chapter]({% link _chapters/how-to-add-authentication-to-a-serverless-app.md %}) we looked at the basics of adding authentication to a serverless app. In this chapter we look at how to use [Amazon Cognito](https://aws.amazon.com/cognito/) to add authentication to a serverless API. We'll also look at how to connect to this API using [AWS Amplify](https://aws.amazon.com/amplify/) in a [React.js](https://reactjs.org) app.
 
-To understand this better we'll be using an example SST application that's been created for this:
+To understand this better we'll be referencing an example SST application on GitHub that's been created for this guide.
 
-[**{{ page.repo_url }}**]({{ page.repo_url }})
+[**{{ repo_url }}**]({{ repo_url }})
 
 This example SST app has a couple of key parts:
 
-- **The `lib/` directory.** This contains the code that describes the infrastructure of your serverless app. It works by leveraging [AWS CDK](https://serverless-stack.com/chapters/what-is-aws-cdk.html) to create the infrastructure. This includes our API, our Cognito services, and our frontend static site.
-- **The `src/` directory.** This is where the application code resides. The code that will run when your API is called will live here.
-- **The `frontend/` directory.** This is where our frontend React.js application is. It'll be connecting to our APIs.
+- **The `lib/` directory**: This contains the code that describes the infrastructure of your serverless app. It works by leveraging [AWS CDK](https://serverless-stack.com/chapters/what-is-aws-cdk.html) to create the infrastructure. This includes our API, our Cognito services, and our frontend static site.
+- **The `src/` directory**: This is where the application code resides. The code that will run when your API is called.
+- **The `frontend/` directory**: This is where our frontend React.js application is. It'll be connecting to our APIs.
 
-Moreso, it comes with a configuration file, `sst.json`, which contains the environment configuration information. Here is what it looks like:
+It also comes with a configuration file, `sst.json`, which contains the environment configuration information. Here is what it looks like:
 
 ```json
 {
@@ -35,13 +35,13 @@ Moreso, it comes with a configuration file, `sst.json`, which contains the envir
 
 The configuration above implies that the app will be deployed to the development environment called `dev` in the `us-east-1` region.
 
-Let’s start with looking at how to add a Cognito User Pool client.
+Let’s start with looking at how to add Cognito User Pool to our app.
 
 ### How to Add Cognito
 
 In the [previous chapter]({% link _chapters/how-to-add-authentication-to-a-serverless-app.md %}) we talked about the various parts of Cognito ([User Pools and Identity Pools]({% link _chapters/cognito-user-pool-vs-identity-pool.md %})).
 
-SST makes it easy to add these to your application. In [`lib/MyStack.js`]() you'll notice.
+SST makes it easy to add these to your application. In [`lib/MyStack.js`]({{ repo_url }}/lib/MyStack.js) you'll notice.
 
 ``` js
 // Create a Cognito User Pool to manage auth
@@ -61,7 +61,7 @@ This is using the SST [`Auth`](https://docs.serverless-stack.com/constructs/Auth
 
 In this case we are allowing users to login with their email and phone number as their username.
 
-You can also optionally allows users to create a username and login using that.
+You can also optionally allow users to create a username and login using that.
 
 ```js
 const auth = new sst.Auth(this, "Auth", {
@@ -95,7 +95,7 @@ new Auth(this, "Auth", {
 
 #### Cognito Triggers
 
-You also might want to trigger. Before and after the authentication, you might want to trigger some actions. The [Cognito Triggers](https://docs.serverless-stack.com/constructs/Auth#authuserpooltriggers) allow you to define Lambda functions that get executed for specific events.
+You also might want to trigger (before and after authentication) some actions. The [Cognito Triggers](https://docs.serverless-stack.com/constructs/Auth#authuserpooltriggers) allow you to define Lambda functions that get executed for specific events.
 
 ```js
 new Auth(this, "Auth", {
@@ -110,7 +110,7 @@ new Auth(this, "Auth", {
 
 ### Adding an API
 
-Now let's look at how we can use Cognito to secure our API. In `lib/MyStack.js` of our example, you'll notice our SST [`Api`](https://docs.serverless-stack.com/constructs/Api) definition.
+Now let's look at how we can use Cognito to secure our API. In [`lib/MyStack.js`]({{ repo_url }}/lib/MyStack.js) of our example, you'll notice our SST [`Api`](https://docs.serverless-stack.com/constructs/Api) definition.
 
 ``` js
 // Create an HTTP API
@@ -135,7 +135,7 @@ We are going to create a simple API that generates random numbers. It'll have a 
 
 Notice the `defaultAuthorizationType: sst.ApiAuthorizationType.AWS_IAM`. This is to ensure that by default you are setting the authorization to allow only users with a valid `AWS_IAM` permission to access your routes.
 
-You’ll also notice that you set the `authorizationType` to `NONE` in the public route, overriding the default behavior described earlier.
+You’ll also notice that we set the `authorizationType` to `NONE` in the public route, overriding the default behavior described earlier.
 
 Finally, `auth.attachPermissionsForAuthUsers([api])` tells AWS that the authenticated users to our Cognito User Pool can access the API that we just defined.
 
@@ -143,7 +143,7 @@ Finally, `auth.attachPermissionsForAuthUsers([api])` tells AWS that the authenti
 
 Next, let's quickly look at the Lambda functions that'll be powering our API. Inside the `src/` directory we have a couple of files that generate random numbers for us.
 
-For example, here's what `src/private.js` looks like.
+For example, here's what [`src/private.js`]({{ repo_url }}/src/private.js) looks like.
 
 ``` js
 export async function handler() {
@@ -159,7 +159,7 @@ export async function handler() {
 
 ### Adding a React Static Site
 
-We can now turn our attention to the frontend part of our application. In `lib/MyStack.js` you'll notice the SST [`ReactStaticSite`](https://docs.serverless-stack.com/constructs/ReactStaticSite) definition.
+We can now turn our attention to the frontend part of our application. In [`lib/MyStack.js`]({{ repo_url }}/lib/MyStack.js) take a look at the SST [`ReactStaticSite`](https://docs.serverless-stack.com/constructs/ReactStaticSite) definition.
 
 ``` js
 // Deploy our React app
@@ -185,13 +185,15 @@ The key here is that we are [setting the outputs from our backend as environment
 4. Id of our Cognito Identity Pool
 5. And the Id of the Cognito User Pool client
 
+You can check out the rest of [`lib/MyStack.js`]({{ repo_url }}/lib/MyStack.js) for reference.
+
 Now we are ready to create our React app.
 
 ### Creating a React app
 
-In this example we are using [Create React App](https://create-react-app.dev). The only difference is that we are using [`@serverless-stack/static-site-env`](@serverless-stack/static-site-env) CLI to load the environments variables from our SST app.
+In this example we are using [Create React App](https://create-react-app.dev). The only difference is that we are using [`@serverless-stack/static-site-env`](@serverless-stack/static-site-env) CLI to load the environment variables from our SST app.
 
-You'll notice this in the `frontend/package.json`.
+You'll notice this in the [`frontend/package.json`]({{ repo_url }}/frontend/package.json).
 
 ``` json
 "scripts": {
@@ -206,9 +208,9 @@ We are also using [Bootstrap](https://getbootstrap.com), [React Bootstrap](https
 
 However, we'll look at how we use [AWS Amplify](https://aws.amazon.com/amplify/) to connect to the API that we defined above.
 
-#### Configure AWS Amplify
+### Configure AWS Amplify
 
-To start with, we'll configure it in `frontend/src/index.js`.
+To start with, we'll configure it in [`frontend/src/index.js`]({{ repo_url }}/frontend/src/index.js).
 
 ``` js
 // Init Amplify
@@ -234,52 +236,116 @@ Amplify.configure({
 
 You'll notice that we are using the environment variables that we had set above.
 
-#### Handling Signups
+### Loading APIs  
 
-To allow users to sign up for our application, let's look at `frontend/src/components/Signup.js`.
+Our simple React app will be loading the two API routes that we had previously created. We have a component that renders the homepage of our app.
 
-First we have a simple form that we've created using React Bootstrap.
+In [`frontend/src/components/Home.js`]({{ repo_url }}/frontend/src/components/Home.js) you'll notice that we are loading our random number generating APIs.
 
 ``` jsx
-<Form onSubmit={handleSubmit}>
-  <Form.Group controlId="email" size="lg">
-    <Form.Label>Email</Form.Label>
-    <Form.Control
-      autoFocus
-      type="email"
-      value={fields.email}
-      onChange={handleFieldChange}
-    />
-  </Form.Group>
-  <Form.Group controlId="password" size="lg">
-    <Form.Label>Password</Form.Label>
-    <Form.Control
-      type="password"
-      value={fields.password}
-      onChange={handleFieldChange}
-    />
-  </Form.Group>
-  <Form.Group controlId="confirmPassword" size="lg">
-    <Form.Label>Confirm Password</Form.Label>
-    <Form.Control
-      type="password"
-      onChange={handleFieldChange}
-      value={fields.confirmPassword}
-    />
-  </Form.Group>
-  <Button
-    block
-    size="lg"
-    type="submit"
-    variant="success"
-    disabled={isLoading || !validateForm()}
-  >
-    Signup
-  </Button>
-</Form>
+import React, { useState, useEffect } from "react";
+import { API } from "aws-amplify";
+import "./Home.css";
+
+export default function Home({ isAuthenticated }) {
+  const [publicMessage, setPublic] = useState(null);
+  const [privateMessage, setPrivate] = useState(null);
+
+  useEffect(() => {
+    // Load our public and private API
+    async function onLoad() {
+      try {
+        const response = await loadPublic();
+        setPublic(response.message);
+      } catch (e) {
+        setPublic(false);
+      }
+      try {
+        const response = await loadPrivate();
+        setPrivate(response.message);
+      } catch (e) {
+        setPrivate(false);
+      }
+    }
+
+    onLoad();
+  }, [isAuthenticated]);
+
+  function loadPublic() {
+    return API.get("random-api", "/public");
+  }
+
+  function loadPrivate() {
+    return API.get("random-api", "/private");
+  }
+
+  return (
+    <div className="Home">
+      <h3>{publicMessage}</h3>
+      <h3>
+        {privateMessage === false
+          ? "Cannot load private message"
+          : privateMessage}
+      </h3>
+    </div>
+  );
+}
 ```
 
-When we submit this form, we use the 
+This will show us if we are able to load our public or private API endpoints. We are using the `API` package from Amplify to make these calls. They use the current session to make authenticated requests.
+
+For a user to be able to connect to a private endpoint they need to be authenticated, and before they can do that, they need to be able to sign up!
+
+### Handling Signups
+
+To allow users to sign up for our application, let's look at [`frontend/src/components/Signup.js`]({{ repo_url }}/frontend/src/components/Signup.js).
+
+First, we have a form that we've created using React Bootstrap.
+
+``` jsx
+function renderForm() {
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Form.Group controlId="email" size="lg">
+        <Form.Label>Email</Form.Label>
+        <Form.Control
+          autoFocus
+          type="email"
+          value={fields.email}
+          onChange={handleFieldChange}
+        />
+      </Form.Group>
+      <Form.Group controlId="password" size="lg">
+        <Form.Label>Password</Form.Label>
+        <Form.Control
+          type="password"
+          value={fields.password}
+          onChange={handleFieldChange}
+        />
+      </Form.Group>
+      <Form.Group controlId="confirmPassword" size="lg">
+        <Form.Label>Confirm Password</Form.Label>
+        <Form.Control
+          type="password"
+          onChange={handleFieldChange}
+          value={fields.confirmPassword}
+        />
+      </Form.Group>
+      <Button
+        block
+        size="lg"
+        type="submit"
+        variant="success"
+        disabled={isLoading || !validateForm()}
+      >
+        Signup
+      </Button>
+    </Form>
+  );
+}
+```
+
+Then when we submit this form, we use the Amplify Auth package to sign up the user.
 
 ``` js
 async function handleSubmit(event) {
@@ -302,894 +368,283 @@ async function handleSubmit(event) {
 }
 ```
 
-``` js
-import React, { useState } from "react";
-import { Auth } from "aws-amplify";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import { useHistory } from "react-router-dom";
-import { useFormFields } from "../lib/hooksLib";
-import "./Signup.css";
+Upon sign up, the user is sent a confirmation code. So we have a form that allows users to enter the code.
 
-export default function Signup({ userHasAuthenticated }) {
-  const [fields, handleFieldChange] = useFormFields({
-    email: "",
-    password: "",
-    confirmPassword: "",
-    confirmationCode: "",
-  });
-  const history = useHistory();
-  const [newUser, setNewUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-
-  function validateForm() {
-    return (
-      fields.email.length > 0 &&
-      fields.password.length > 0 &&
-      fields.password === fields.confirmPassword
-    );
-  }
-
-  function validateConfirmationForm() {
-    return fields.confirmationCode.length > 0;
-  }
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-
-    setIsLoading(true);
-
-    try {
-      // Sign up the user
-      const newUser = await Auth.signUp({
-        username: fields.email,
-        password: fields.password,
-      });
-      setIsLoading(false);
-      setNewUser(newUser);
-    } catch (e) {
-      alert(e);
-      setIsLoading(false);
-    }
-  }
-
-  async function handleConfirmationSubmit(event) {
-    event.preventDefault();
-
-    setIsLoading(true);
-
-    try {
-      // Check the user's confirmation code
-      await Auth.confirmSignUp(fields.email, fields.confirmationCode);
-      // Sign the user in
-      await Auth.signIn(fields.email, fields.password);
-
-      userHasAuthenticated(true);
-      // Redirect to the homepage
-      history.push("/");
-    } catch (e) {
-      alert(e);
-      setIsLoading(false);
-    }
-  }
-
-  function renderConfirmationForm() {
-    return (
-      <Form onSubmit={handleConfirmationSubmit}>
-        <Form.Group controlId="confirmationCode" size="lg">
-          <Form.Label>Confirmation Code</Form.Label>
-          <Form.Control
-            autoFocus
-            type="tel"
-            onChange={handleFieldChange}
-            value={fields.confirmationCode}
-          />
-          <Form.Text muted>Please check your email for the code.</Form.Text>
-        </Form.Group>
-        <Button
-          block
-          size="lg"
-          type="submit"
-          variant="success"
-          disabled={isLoading || !validateConfirmationForm()}
-        >
-          Verify
-        </Button>
-      </Form>
-    );
-  }
-
-  function renderForm() {
-    return (
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="email" size="lg">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            autoFocus
-            type="email"
-            value={fields.email}
-            onChange={handleFieldChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="password" size="lg">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            value={fields.password}
-            onChange={handleFieldChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="confirmPassword" size="lg">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type="password"
-            onChange={handleFieldChange}
-            value={fields.confirmPassword}
-          />
-        </Form.Group>
-        <Button
-          block
-          size="lg"
-          type="submit"
-          variant="success"
-          disabled={isLoading || !validateForm()}
-        >
-          Signup
-        </Button>
-      </Form>
-    );
-  }
-
+``` jsx
+function renderConfirmationForm() {
   return (
-    <div className="Signup">
-      {newUser === null ? renderForm() : renderConfirmationForm()}
-    </div>
+    <Form onSubmit={handleConfirmationSubmit}>
+      <Form.Group controlId="confirmationCode" size="lg">
+        <Form.Label>Confirmation Code</Form.Label>
+        <Form.Control
+          autoFocus
+          type="tel"
+          onChange={handleFieldChange}
+          value={fields.confirmationCode}
+        />
+        <Form.Text muted>Please check your email for the code.</Form.Text>
+      </Form.Group>
+      <Button
+        block
+        size="lg"
+        type="submit"
+        variant="success"
+        disabled={isLoading || !validateConfirmationForm()}
+      >
+        Verify
+      </Button>
+    </Form>
   );
 }
 ```
 
+And finally, we confirm the code and log the user in.
 
+``` js
+async function handleConfirmationSubmit(event) {
+  event.preventDefault();
 
+  setIsLoading(true);
 
-An [Amazon Cognito User Pool](https://serverless-stack.com/chapters/create-a-cognito-user-pool.html) Client is a resource that allows you to generate authentication tokens used to authorize a user for an application.
+  try {
+    // Check the user's confirmation code
+    await Auth.confirmSignUp(fields.email, fields.confirmationCode);
+    // Sign the user in
+    await Auth.signIn(fields.email, fields.password);
 
-To demonstrate how to add the User Pool Client to an application, let’s build a simple random number generator with SST that will have:
-
-- A secure route to generate random numbers
-- And a public route as well
-
-So, let’s create the routes. Open the `lib/MyStack.js` file and modify it to include the public and private route as shown below:
-
-```js
-import * as sst from "@serverless-stack/resources";
-
-export default class MyStack extends sst.Stack {
-    constructor(scope, id, props) {
-        super(scope, id, props);
-
-        // Create a HTTP API
-        const api = new sst.Api(this, "Api", {
-
-            //Set the default authorization
-            defaultAuthorizationType: sst.ApiAuthorizationType.AWS_IAM,
-            routes: {
-                "GET /private": "src/private.handler",
-                "GET /public": {
-                    function: "src/public.handler",
-                    authorizationType: sst.ApiAuthorizationType.NONE,
-                },
-            },
-        });
-
-        // Show the endpoint in the output
-        this.addOutputs({
-            "ApiEndpoint": api.url,
-        });
-    }
+    userHasAuthenticated(true);
+    // Redirect to the homepage
+    history.push("/");
+  } catch (e) {
+    alert(e);
+    setIsLoading(false);
+  }
 }
 ```
 
-Now, let’s explore the different ways you can add authentication with AWS Cognito to your application.
+You can check out the rest of the [`frontend/src/components/Signup.js`]({{ repo_url }}/frontend/src/components/Signup.js) for reference.
 
-## Using Aliases
+### Logging in Users
 
-There are two ways to log in users using aliases.
+So now our users can sign up with Cognito. Let's make sure a signed up user can login as well.
 
-### 1. With a Username or Alias
+In the [`frontend/src/components/Login.js`]({{ repo_url }}/frontend/src/components/Login.js) we have a simple login form.
 
-To enable this functionality with SST, set the `UserPool` prop to:
+``` jsx
+<div className="Login">
+  <Form onSubmit={handleSubmit}>
+    <Form.Group size="lg" controlId="email">
+      <Form.Label>Email</Form.Label>
+      <Form.Control
+        autoFocus
+        type="email"
+        value={fields.email}
+        onChange={handleFieldChange}
+      />
+    </Form.Group>
+    <Form.Group size="lg" controlId="password">
+      <Form.Label>Password</Form.Label>
+      <Form.Control
+        type="password"
+        value={fields.password}
+        onChange={handleFieldChange}
+      />
+    </Form.Group>
+    <Button
+      block
+      size="lg"
+      type="submit"
+      disabled={isLoading || !validateForm()}
+    >
+      Login
+    </Button>
+  </Form>
+</div>
+```
 
-```js
-{
-    signInAliases: {
-        username: true,
-        email: true,
-        phone: true
-        preferredUsername: true,
-    }
+When a user submits this form, we make a request to Amplify to log the user in. You'll notice it's the same call we made at the end of the sign up process.
+
+``` js
+async function handleSubmit(event) {
+  event.preventDefault();
+
+  setIsLoading(true);
+
+  try {
+    // Log the user in
+    await Auth.signIn(fields.email, fields.password);
+    userHasAuthenticated(true);
+    // Redirect to the homepage
+    history.push("/");
+  } catch (e) {
+    alert(e);
+    setIsLoading(false);
+  }
 }
 ```
 
-Make this modification in the `lib/MyStack.js` file like so:
+Once the user is logged in, we redirect them to the homepage.
 
-```js
-const auth = new sst.Auth(this, "Auth", {
-    // Create a Cognito User Pool to manage user's authentication info.
-    cognito: {
-        userPool: {
-            // Users will login using their email or phone number and password
-            signInAliases: {
-                username: true,
-                email: true,
-                phone: true
-                preferredUsername: true,
-            },
-        },
-    },
-});
+You can check out the rest of the [`frontend/src/components/Login.js`]({{ repo_url }}/frontend/src/components/Login.js) for reference.
 
+### Loading the Session
+
+To tie all of these together, we need to make sure that the session is loaded when our app is loaded. We don't want to have the user to login again and we want to make sure all the components in our app are aware that the user has been authenticated.
+
+So in [`frontend/src/App.js`]({{ repo_url }}/frontend/src/App.js) we get the current session from Amplify.
+
+``` js
+useEffect(() => {
+  async function onLoad() {
+    try {
+      // Check if the user is authenticated
+      await Auth.currentSession();
+      userHasAuthenticated(true);
+    } catch (e) {
+      if (e !== "No current user") {
+        alert(e);
+      }
+    }
+
+    setIsAuthenticating(false);
+  }
+
+  onLoad();
+}, []);
 ```
 
-### 2. With an Email or Phone Number 
+The `userHasAuthenticated` and `setIsAuthenticating` are a couple of state variables that we define.
 
-To enable this functionality with SST, set the `UserPool` prop in the `lib/MyStack.js` file to:
+``` js
+// Track if authentication is in progress
+const [isAuthenticating, setIsAuthenticating] = useState(true);
+// Track is the user has authenticated
+const [isAuthenticated, userHasAuthenticated] = useState(false);
+```
 
-```js
-{
-    signInAliases: {
-        email: true,
-        phone: true,
-    }
+Finally we pass these in to the components in our app.
+
+``` js
+// Props that'll be passed to all the routes
+const routeProps = { isAuthenticated, userHasAuthenticated };
+```
+
+``` jsx
+<Switch>
+  <Route exact path="/">
+    <Home {...routeProps} />
+  </Route>
+  <Route exact path="/login">
+    <Login {...routeProps} />
+  </Route>
+  <Route exact path="/signup">
+    <Signup {...routeProps} />
+  </Route>
+</Switch>
+```
+
+We also allow our users to log out.
+
+``` js
+async function handleLogout() {
+  // Log the user out
+  await Auth.signOut();
+
+  userHasAuthenticated(false);
 }
 ```
 
-It should look like this in the file:
+Make sure to check out the rest of the [`frontend/src/App.js`]({{ repo_url }}/frontend/src/App.js) for reference.
 
-```js
-const auth = new sst.Auth(this, "Auth", {
-    // Create a Cognito User Pool to manage user's authentication info.
-    cognito: {
-        userPool: {
-            // Users will login using their email or phone number and password
-            {
-                signInAliases: {
-                    email: true,
-                    phone: true,
-                }
-            }
-        },
-    },
-});
+### Testing our App
 
+SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
+
+To test our [example]({{ repo_url }}):
+
+``` bash
+$ npm install
+$ npx sst start
 ```
 
-Then, still in same file `lib/MyStack.js`, set the permission on the API with the following code:
+The first time you run this command it'll take a couple of minutes to create your environment.
 
-```js
-// Set the private API to allow only authenticated users to call the API
-auth.attachPermissionsForAuthUsers([api]);
+Once complete, you should see something like this.
+
 ```
+===============
+ Deploying app
+===============
 
-Let’s implement an option that uses either username or phone number and password. Add the following object to your SST stack class below the `api` constant in the `/lib/MyStack.js` file:
-
-```js
-const auth = new sst.Auth(this, "Auth", {
-// Create a Cognito User Pool to manage user's authentication info.
-cognito: {
-   userPool: {
-   // Users will login using their email or phone number and password
-   signInAliases: { email: true, phone: true },
-  },
-},
-});
-```
-
-And finally, modify the `addOutputs` construct to include the following AWS Cognito Identify parameters:
-
-```js
-this.addOutputs({
-    ApiEndpoint: api.url,
-    UserPoolId: auth.cognitoUserPool.userPoolId,
-    IdentityPoolId: auth.cognitoCfnIdentityPool.ref,
-    UserPoolClientId: auth.cognitoUserPoolClient.userPoolClientId,
-});
-```
-
-## Social Login
-
-Also, your users can log in with their social media accounts, such as Facebook, Google, or Twitter. Using SST, you can easily enable social media login by adding the social login configuration to the `Auth` construct as shown below:
-
-```js
-new Auth(this, "Auth", {
-   facebook: { appId: "419718329085014" },
-   apple: { servicesId: "com.myapp.client" },
-   amazon: { appId: "amzn1.application.24ebe4ee4aef41e5acff038aee2ee65f" },
-   google: {
-   clientId: "38017095028-abcdjaaaidbgt3kfhuoh3n5ts08vodt3.apps.googleusercontent.com",
-},
-});
-```
-
-SST makes it easy to log in with Auth0 using the following configuration:
-
-```js
-new Auth(this, "Auth", {
-auth0: {
-   domain: "https://myorg.us.auth0.com",
-   clientId: "UsGRQJJz5sDfPQDs6bhQ9Oc3hNISuVif",
-},
-});
-```
-
-Before and after the authentication, you might want to trigger some actions. The [Cognito Trigger](https://docs.serverless-stack.com/constructs/Auth#authuserpooltriggers) allows you to define triggers that get executed in this manner. You can configure it as shown below:
-
-```js
-new Auth(this, "Auth", {
-cognito: {
-    triggers: {
-    preAuthentication: "src/preAuthentication.main",
-    postAuthentication: "src/postAuthentication.main",
-    },
-},
-});
-```
-
-So, at this point, your API should look like so:
-
-```js
-import * as sst from "@serverless-stack/resources";
-
-export default class MyStack extends sst.Stack {
-    constructor(scope, id, props) {
-        super(scope, id, props);
-        // Create a HTTP API
-        const api = new sst.Api(this, "Api", {
-            defaultAuthorizationType: sst.ApiAuthorizationType.AWS_IAM,
-            routes: {
-                "GET /private": "src/private.handler",
-                "GET /public": {
-                    function: "src/public.handler",
-                    authorizationType: sst.ApiAuthorizationType.NONE,
-
-                },
-            },
-        });
-
-        const auth = new sst.Auth(this, "Auth", {
-
-            // Create a Cognito User Pool to manage the user's authentication info.
-
-            cognito: {
-                userPool: {
-                    // Users will login using their email or phone number and password
-                    signInAliases: {
-                        email: true,
-                        phone: true
-                    },
-                },
-
-            },
-
-        });
-
-        // Show the endpoint in the output
-        this.addOutputs({
-            ApiEndpoint: api.url,
-            UserPoolId: auth.cognitoUserPool.userPoolId,
-            IdentityPoolId: auth.cognitoCfnIdentityPool.ref,
-            UserPoolClientId: auth.cognitoUserPoolClient.userPoolClientId,
-        });
-
-        // Allow authenticated users to invoke the API
-        auth.attachPermissionsForAuthUsers([api]);
-    }
-}
-```
-
-Run `npx sst start` on your terminal to start and deploy the application in debug mode.
-
-If it all goes well, you should see a result that looks like this:
-
-```shell
 Preparing your SST app
 Transpiling source
 Linting source
-=======================
+Deploying stacks
+dev-react-app-auth-cognito-my-stack: deploying...
 
-Deploying debug stack
-=======================
-...
+ ✅  dev-react-app-auth-cognito-my-stack
 
-Stack dev-react-app-auth-cognito-debug-stack
-Outputs:
-UserPoolClientId: 2turafvi6bjbv9pomrp61lljo
-UserPoolId: us-east-1_c4SsgOvxg
-ApiEndpoint: https://24ji2e01n9.execute-api.us-east-1.amazonaws.com
 
-IdentityPoolId: us-east-1:9acb4572-dd8c-4457-a2b5-2a1e19541683
-
+Stack dev-react-app-auth-cognito-my-stack
+  Status: deployed
+  Outputs:
+    ApiEndpoint: https://gcnapdpral.execute-api.us-east-1.amazonaws.com
+    SiteUrl: https://d24wffw7qyqjnm.cloudfront.net
+  ReactSite:
+    REACT_APP_API_URL: https://gcnapdpral.execute-api.us-east-1.amazonaws.com
+    REACT_APP_IDENTITY_POOL_ID: us-east-1:ecfb817c-a5a8-43ef-9eba-b4a95fbe9ab0
+    REACT_APP_REGION: us-east-1
+    REACT_APP_USER_POOL_CLIENT_ID: 6fe8mgiaslpgrd8bphfsg634fe
+    REACT_APP_USER_POOL_ID: us-east-1_xN4Qv2SQR
 ```
 
-You can copy the `ApiEndpoint` and test both API routes on [Postman]([https://www.postman.com/](https://www.postman.com/)). You’ll need the other outputs later.
+We'll also start up our React application.
 
-**Public Route**
 
-![Get request on the public route](https://i.imgur.com/wKUUN2k.png)
-
-**Private Route**
-
-![Get request on the private route](https://i.imgur.com/XfPxUot.png)
-
-Notice the forbidden error on the private route? That indicates that you need to be authenticated. Let’s build the frontend with ReactJS and allow users to sign up, log in, and generate random numbers from the private API route.
-
-## Frontend App
-
-Let’s create a simple frontend with ReactJS that will allow you to sign up, sign in, and invoke your serverless APIs.
-
-### Set Up
-
-Set up a simple ReactJS boilerplate with [Create React App](https://create-react-app.dev/) by running `npx create-react-app my-app`. Install the dependencies you will need to build this application by running this command when the `create-react-app` command is completely executed:
-
-```bash
-$ npm install aws-sdk amazon-cognito-identity-js react-router-dom axios bootstrap react-bootstrap
+``` bash
+$ cd frontend
+$ npm run start
 ```
 
-### Sign Up
+Once it loads up, you'll notice that the public API loads but the private one fails.
 
-![Signup Page](https://i.imgur.com/tEQXYPR.png)
+![Load public and private APIs in React.js app](/assets/extra-auth/cognito/load-public-and-private-apis-in-react-js-app.png)
 
-Create a signup component `src/Components/Signup.js` and add the following code to it:
+Let's go ahead and sign up.
 
-```js
-import React, {
-    useState
-} from "react";
-import {
-    useHistory
-} from "react-router-dom";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import "./Auth.css"
-import 'cross-fetch/polyfill';
+![Sign up with Cognito in React.js app](/assets/extra-auth/cognito/sign-up-with-cognito-in-react-js-app.png)
 
-import {
-    CognitoUserPool,
-    CognitoUserAttribute,
-} from 'amazon-cognito-identity-js';
+We'll be asked for the confirmation code.
 
-export default function Signup() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    let history = useHistory();
+![Sign up confirm Cognito in React.js app](/assets/extra-auth/cognito/sign-up-confirm-cognito-in-react-js-app.png)
 
-    function validateForm() {
-        return email.length > 0 && password.length > 0;
-    }
+And we'll get redirected to the homepage, where the private random number API now loads!
 
-    function handleSubmit(event) {
-        event.preventDefault();
+![Private API loads in React.js app](/assets/extra-auth/cognito/private-api-loads-in-react-js-app.png)
 
-        var poolData = {
-            UserPoolId: 'us-east-1_gghjkjg', // Your user pool id here
-            ClientId: '6lrvb2pvj8pa3m9ndhghhjsd', // Your client id here
+You can test refreshing the page and the APIs should load just as before.
 
-        };
+We can also hit the logout button, it'll clear the session and we won't be able to load the private API anymore. You can also test the login page as well.
 
-        var userPool = new CognitoUserPool(poolData);
-        var attributeList = [];
+![Login with Cognito in React.js app](/assets/extra-auth/cognito/login-with-cognito-in-react-js-app.png)
 
-        var dataEmail = {
-            Name: 'email',
-            Value: email,
-        };
+### Wrapping up
 
-        var attributeEmail = new CognitoUserAttribute(dataEmail);
-        attributeList.push(attributeEmail);
-        userPool.signUp(dataEmail.Value, password, attributeList, null, function(
-            err,
-            result
-        ) {
-            if (err) {
-                alert(err.message || JSON.stringify(err));
-                return;
-            }
+Finally, you can deploy your app to prod by:
 
-            var cognitoUser = result.user;
-            localStorage.setItem("username", cognitoUser.getUsername());
-
-            history.push("/confirm")
-            console.log('user name is ' + cognitoUser.getUsername());
-        });
-    }
-
-    return (
-
-        <
-        div className = "Auth" >
-        <
-        Form onSubmit = {
-            handleSubmit
-        } >
-        <
-        Form.Group size = "lg"
-        controlId = "email" >
-        <
-        Form.Label > Email < /Form.Label> <
-        Form.Control autoFocus type = "email"
-        value = {
-            email
-        }
-        onChange = {
-            (e) => setEmail(e.target.value)
-        }
-        /> <
-        /Form.Group> <
-        Form.Group size = "lg"
-        controlId = "password" >
-        <
-        Form.Label > Password < /Form.Label> <
-        Form.Control type = "password"
-        value = {
-            password
-        }
-        onChange = {
-            (e) => setPassword(e.target.value)
-        }
-        />
-
-        <
-        /Form.Group> <
-        Button block size = "lg"
-        type = "submit"
-        disabled = {
-            !validateForm()
-        } >
-        Signup
-
-        <
-        /Button>
-
-        <
-        /Form>
-
-        <
-        /div>
-
-    );
-
-}
-
-
+``` bash
+$ npx sst deploy --stage prod
 ```
 
-The signup component will allow users to sign up with their email address and password. Your `UserPoolId` and the `ClientId` are how AWS knows this user should be created for your application.
+And once you are done, you can remove all the resources we've created by running.
 
-You’ll grab the `UserPoolId` and `ClientId` from the terminal and add it to your code as shown in the above React component. Then, call the `userPool.signUp` function to register the user. If it all goes well, the newly created user will be returned as the result of the callback function that was passed to the `Signup` function, and a verification code will be sent to the user’s email address.
-
-![Confirmation code](https://i.imgur.com/FeLQdwy.png)
-
-### The Confirmation Component
-
-![Confirmation Page](https://i.imgur.com/gqKwTO7.png)
-
-Once you receive the confirmation code, the next step is to actually confirm it. Create a `ConfirmUser` component to make this happen: `src/Components/ConfirmUser.js`.
- 
-```js
-import  React, { useState } from  'react'
-import  Form  from  "react-bootstrap/Form";
-import  Button  from  "react-bootstrap/Button";
-import  'cross-fetch/polyfill';
-import {
-CognitoUserPool,
-CognitoUser,
-} from  'amazon-cognito-identity-js';
-
-export  default  function  ConfirmUser() {
-const [token, setToken] = useState("");
-const [username, setUsername] = useState("");
-
-function  validateForm() {
-return  token.length > 0;
-}
-
-function  handleSubmit(event) {
-
-event.preventDefault();
-var  poolData = {
-UserPoolId:  'us-east-1_gYggfdgf', // Change this to your user pool id 
-ClientId:  '6lrvbg2pvj8pa3hm9nfgdgfdf', // change this to your client id
-
-};
-
-setUsername(localStorage.getItem("username"));
-console.log(username)
-var  userPool = new  CognitoUserPool(poolData);
-var  userData = {
-Username:  username,
-Pool:  userPool,
-};
-
-var  cognitoUser = new  CognitoUser(userData);
-cognitoUser.confirmRegistration(token, true, function (err, result) {
-
-if (err) {
-console.log(err.message || JSON.stringify(err));
-return;
-
-}
-console.log('call result: ' + result);
-});
-}
-
-return (
-<div  className="Auth">
-<Form  onSubmit={handleSubmit}>
-<Form.Group  size="lg"  controlId="email">
-<Form.Label>Verification Code</Form.Label>
-<Form.Control
-autoFocus
-type="text"
-value={token}
-onChange={(e) =>  setToken(e.target.value)}
-/>
-</Form.Group>
-<Button  block  size="lg"  type="submit"  disabled={!validateForm()}  >
-Confirm
-</Button>
-</Form>
-</div>
-);
-}
+``` bash
+$ npx sst remove
+$ npx sst remove --stage prod
 ```
 
-To verify the user, initialize the user in your user pool:
+Make sure to check out the example repo on GitHub.
 
-```js
-var userData = {
-    Username: username,
-    Pool: userPool,
-};
-var cognitoUser = new CognitoUser(userData);
+[**{{ repo_url }}**]({{ repo_url }})
 
-```
-
-And invoke the `confirmRegistration` method passing in the `token` you got from your email.
-
-If the code is correct, the API will return a `SUCCESS` response. Otherwise you'll get an error with the reason for the error.
-
-## Sign In
-
-Once the user is verified, you can now sign in. 
-
-Create a sign-in component. The user will enter their email and password in exchange for a token they can use to log in: `id_token` and  `access_tokens`.
-
-```js
-import React, {
-    useState
-} from 'react'
-import * as AWS from 'aws-sdk/global';
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import "./Auth.css"
-import 'cross-fetch/polyfill';
-
-import {
-    CognitoUserPool,
-    CognitoUser,
-    AuthenticationDetails
-} from 'amazon-cognito-identity-js';
-
-export default function Login(params) {
-
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
-    function validateForm() {
-        return email.length > 0 && password.length > 0;
-    }
-
-    function handleSubmit(event) {
-        event.preventDefault();
-
-        var authenticationData = {
-            Username: email,
-            Password: password,
-        };
-
-        var authenticationDetails = new AuthenticationDetails(
-            authenticationData
-        );
-        var poolData = {
-            UserPoolId: 'us-east-1_gYW7OI6O2', // Change this to your user pool id
-            ClientId: '6lrvb2pvj8pa3m9ndbs84hob9h', // Change this to your client id 
-        };
-
-        var userPool = new CognitoUserPool(poolData);
-        var userData = {
-            Username: email,
-            Pool: userPool,
-        };
-
-        var cognitoUser = new CognitoUser(userData);
-
-        cognitoUser.authenticateUser(authenticationDetails, {
-            onSuccess: function(result) {
-                var accessToken = result.getAccessToken().getJwtToken();
-                console.log(accessToken)
-                localStorage.setItem("token", accessToken)
-
-                //POTENTIAL: Region needs to be set if not already set previously elsewhere.
-
-                AWS.config.region = 'us-east-1';
-
-                AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-
-                    IdentityPoolId: 'us-east-1_gYW7OIref', // your identity pool id here
-
-                    Logins: {
-
-                        // Change the key below according to the specific region your user pool is in.
-
-                        'cognito-idp.us-east-1.amazonaws.com/us-east-1_gYW7OIref': result
-
-                            .getIdToken()
-                            .getJwtToken(),
-                    },
-                });
-
-                //refreshes credentials using AWS.CognitoIdentity.getCredentialsForIdentity()
-                AWS.config.credentials.refresh(error => {
-                    if (error) {
-                        console.error(error);
-                    } else {
-                        // Instantiate aws sdk service objects now that the credentials have been updated.
-                        // example: var s3 = new AWS.S3();
-                        console.log('Successfully logged!');
-                    }
-                });
-
-            },
-
-            onFailure: function(err) {
-                console.log(err.message || JSON.stringify(err));
-            },
-
-        });
-
-    }
-
-    return ( <
-        div className = "Auth" >
-        <
-        Form onSubmit = {
-            handleSubmit
-        } >
-
-        <
-        Form.Group size = "lg"
-        controlId = "email" >
-
-        <
-        Form.Label > Email < /Form.Label>
-
-        <
-        Form.Control autoFocus type = "email"
-        value = {
-            email
-        }
-        onChange = {
-            (e) => setEmail(e.target.value)
-        }
-        /> <
-        /Form.Group> <
-        Form.Group size = "lg"
-        controlId = "password" >
-        <
-        Form.Label > Password < /Form.Label> <
-        Form.Control type = "password"
-        value = {
-            password
-        }
-        onChange = {
-            (e) => setPassword(e.target.value)
-        }
-        /> <
-        /Form.Group> <
-        Button block size = "lg"
-        type = "submit"
-        disabled = {
-            !validateForm()
-        } >
-        Login <
-        /Button> <
-        /Form> <
-        /div>
-    )
-}
-```
-
-If the login is successful, you'll have your access token added to the `localStorage`, which will be used to invoke the API.
-
-![Tokens](https://i.imgur.com/XKgQ2Ng.png)
-  
-## API Call
-
-Now that the user is authenticated, you can call the private API from React using [Axios](https://www.npmjs.com/package/axios) as shown in the code below:
-
-`src/Components/PrivateRandom.js`
-```js
-import  axios  from  "axios";
-import  React, { useState, useEffect, Fragment } from  "react";
-
-function  PrivateRandom() {
-const [result, setResult] = useState("")
-const [status, setStatus] = useState(false);
-
-useEffect(() => {
-const token = localStorage.getItem("token");
-axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-	axios.get("https://24ji2e01n9.execute-api.us-east-1.amazonaws.com/private")
-.then((data) => {
-	setStatus(true)
-	setResult(data.data)
-}).catch((error)=>{
-	setStatus(false)
-});
-}, [])
-
-return(
-	<Fragment>
-		{status && result}
-		{!status && "Loading ..."}
-	</Fragment>
-)
-};
-
-export  default  PrivateRandom;
-```
-
-With the token passed in to the `Authorization` headers, you are able to make a call to the API securely as an authenticated user.
-
-![Private API call](https://i.imgur.com/T9MUG9E.png)
-
-But you won't need that to invoke the public API. Just make a direct call to the API without a token. It should look like so:
-
-```js
-
-import  axios  from  "axios";
-
-import  React, { useState, useEffect, Fragment } from  "react";
-
-function  PublicRandom() {
-const [result, setResult] = useState("")
-const [status, setStatus] = useState(false);
-
-useEffect(() => {
-axios.get("https://24ji2e01n9.execute-api.us-east-1.amazonaws.com/public")
-.then((data) => {
-	setStatus(true)
-	setResult(data.data)
-}).catch((error) => {
-console.error(error)
-setStatus(false)
-});
-}, [])
-return (
-
-<Fragment>
-{status && result}
-{!status && "Loading ..."}
-</Fragment>
-)
-};
-
-export  default  PublicRandom;
-
-```
-
-![Public API call](https://i.imgur.com/YsX0m4z.png)
-
-You can also use [AWS Amplified](https://serverless-stack.com/chapters/configure-aws-amplify.html) to generate the frontend ReactJS application (including the generating of the login and signup form automatically) for authentication with the backend. 
-
-Here is a [link](https://github.com/ezesundayeze/aws-cognito-sst) to the API and the [React sample application](https://github.com/ezesundayeze/aws-cognito-react).
+We'll be covering another auth provider in an upcoming chapter!

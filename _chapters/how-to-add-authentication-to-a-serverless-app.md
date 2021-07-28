@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to add authentication serverless app
+title: How to add authentication to a serverless app
 date: 2021-07-13 00:00:00
 lang: en
 description: In this chapter we'll look at how authentication works for serverless apps in AWS. We'll be looking at the differences between authentication and authorization, the various authentication options, and go into detail for IAM and Cognito.
@@ -117,3 +117,7 @@ Most third-party auth providers require you to pay someone besides AWS, so your 
 Another advantage of User Pools is they can be defined in a CloudFormation stack—without having to create custom resources. While you can't change a lot about a User Pool after creation, it is easier to build it in the first place if it's in a CloudFormation template.
 
 Finally, AWS automatically handles User Pool token validation. If you're using a third-party provider, you'll have to manually validate the token against it's signature.
+
+### Next Steps
+
+This chapter should give you a good high-level overview of how to handle authentication in serverless apps. In the next few chapters we'll be looking at specific examples of how to use various authentication providers. Starting with [how to use Cognito to add authentication to your serverless app]({% link _chapters/using-cognito-to-add-authentication-to-a-serverless-app.md %}).
