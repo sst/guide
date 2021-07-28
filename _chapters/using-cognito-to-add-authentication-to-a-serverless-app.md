@@ -12,6 +12,8 @@ comments_id: using-cognito-to-add-authentication-to-a-serverless-app/2434
 
 In the [previous chapter]({% link _chapters/how-to-add-authentication-to-a-serverless-app.md %}) we looked at the basics of adding authentication to a serverless app. In this chapter we look at how to use [Amazon Cognito](https://aws.amazon.com/cognito/) to add authentication to a serverless API. We'll also look at how to connect to this API using [AWS Amplify](https://aws.amazon.com/amplify/) in a [React.js](https://reactjs.org) app.
 
+![Login with Cognito in React.js app](/assets/extra-auth/cognito/login-with-cognito-in-react-js-app.png)
+
 To understand this better we'll be referencing an example SST application on GitHub that's been created for this guide.
 
 [**{{ repo_url }}**]({{ repo_url }})
