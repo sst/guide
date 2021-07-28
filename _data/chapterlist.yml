@@ -443,8 +443,11 @@ extra-backend:
 extra-auth:
   title: Authentication
   chapters:
-    - page: Intro to Serverless Authentication
-      url: /chapters/intro-to-serverless-authentication.html
+    - page: How to add authentication to a serverless app
+      url: /chapters/how-to-add-authentication-to-a-serverless-app.html
+      subchapters:
+        - page: Using Cognito to add authentication to a serverless app
+          url: /chapters/using-cognito-to-add-authentication-to-a-serverless-app.html
 
 extra-appsync:
   title: AppSync

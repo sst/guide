@@ -1,14 +1,14 @@
 ---
 layout: post
-title: Intro to Serverless Authentication
+title: How to add authentication serverless app
 date: 2021-07-13 00:00:00
 lang: en
 description: In this chapter we'll look at how authentication works for serverless apps in AWS. We'll be looking at the differences between authentication and authorization, the various authentication options, and go into detail for IAM and Cognito.
-ref: intro-to-serverless-authentication
+ref: how-to-add-authentication-to-a-serverless-app
 comments_id: 
 ---
 
-In this section we'll look at how authentication works for serverless apps in AWS. We'll be looking at the differences between authentication and authorization, the various authentication options, and go into detail for a couple for IAM and Cognito.
+In this section we'll look at how authentication works for serverless apps in AWS. Over the course of the next few chapters we'll be looking at the various authentication options.
 
 Let's start with some background. Say I was issued a [RFID security badge](https://en.wikipedia.org/wiki/Radio-frequency_identification) by my company. Every morning I'll need to walk through a metal turnstile in the fence, and wave my badge in front of a black, plastic box. It would click and the indicator would turn green. Allowing me to push my way through the turnstile.
 
