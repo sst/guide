@@ -47,22 +47,25 @@
   {% if page.collection == "chapters" %}
   <meta content="{{ site.social_cards_url }}/serverless-stack-guide/{{ encoded_title }}.png" property="og:image">
   <meta content="{{ site.social_cards_url }}/serverless-stack-guide/{{ encoded_title }}.png" property="twitter:image">
-  {% elsif page.collection == "examples" %}
+  {% elsif page.collection == "examples" and page.ref != "examples-index" %}
   <meta content="{{ site.social_cards_url }}/serverless-stack-examples/{{ encoded_title }}.png" property="og:image">
   <meta content="{{ site.social_cards_url }}/serverless-stack-examples/{{ encoded_title }}.png" property="twitter:image">
-  {% elsif page.id %}
+  {% elsif page.path contains "_posts" %}
   <meta content="{{ site.social_cards_url }}/serverless-stack-blog/{{ encoded_title }}.png?author={{ site.data.authors[page.author].name | url_encode }}&avatar={{ page.author }}" property="og:image">
   <meta content="{{ site.social_cards_url }}/serverless-stack-blog/{{ encoded_title }}.png?author={{ site.data.authors[page.author].name | url_encode }}&avatar={{ page.author }}" property="twitter:image">
-  {% else %}
+  {% elsif page.url == "/" %}
   {% assign default_title=site.description | url_encode | base64_encode | url_encode %}
   <meta content="{{ site.social_cards_url }}/serverless-stack-lander/{{ default_title }}.png" property="og:image">
   <meta content="{{ site.social_cards_url }}/serverless-stack-lander/{{ default_title }}.png" property="twitter:image">
+  {% else %}
+  <meta content="{{ site.social_cards_url }}/serverless-stack-pages/{{ encoded_title }}.png" property="og:image">
+  <meta content="{{ site.social_cards_url }}/serverless-stack-pages/{{ encoded_title }}.png" property="twitter:image">
   {% endif %}
 
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@{{ site.twitter }}">
-  {% if page.id && site.data.authors[page.author].twitter %}
+  {% if page.author and site.data.authors[page.author].twitter %}
   <meta name="twitter:creator" content="@{{ site.data.authors[page.author].twitter }}">
   {% endif %}
 

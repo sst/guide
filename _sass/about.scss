@@ -1,6 +1,6 @@
-/////////////////
-// ABOUTE PAGE //
-/////////////////
+////////////////
+// ABOUT PAGE //
+////////////////
 main > .about-page {
 
   @include media-query($on-palm) {
@@ -298,22 +298,6 @@ main > .about-page {
           }
         }
       }
-    }
-  }
-
-  .press {
-    margin: 0 auto;
-    text-align: center;
-    max-width: 500px;
-
-    h3 {
-      font-size: 24px;
-    }
-    img {
-      margin-bottom: $spacing-unit / 2;
-    }
-    p {
-      font-size: 17px;
     }
   }
 
