@@ -451,14 +451,6 @@ extra-auth:
         - page: Using Cognito to add authentication to a serverless app
           url: /chapters/using-cognito-to-add-authentication-to-a-serverless-app.html
 
-extra-appsync:
-  title: AppSync
-  chapters:
-    - page: What is AWS AppSync
-      url: /chapters/what-is-aws-appsync.html
-    - page: How to use AWS AppSync
-      url: /chapters/how-to-use-appsync.html
-
 extra-frontend:
   title: React
   chapters:
