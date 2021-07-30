@@ -13,7 +13,7 @@ Here's what we'll be covering in this document.
 - [Our vision](#our-vision)
 - [How we build products](#how-we-build-products)
 - [How we operate as a team](#how-we-operate-as-a-team)
-- [Cultural Values](#cultural-values)
+- [Cultural values](#cultural-values)
 
 Let's get started!
 
@@ -47,7 +47,7 @@ However, there are few different problems with adopting serverless. Let’s just
 
 ## Our vision
 
-We think every startup should be built using serverless and we want to create a platform that allows them to do so. They should be able to get started by using our platform. And continue to use it as their application and company grows. In a sense, they should be able to use our platform to go from _idea to IPO_.
+We think every startup should be built using serverless and we want to create a platform that makes this possible. They should be able to get started by using our platform. And continue to use it as their application and company grows. In a sense, they should be able to use our platform to go from _idea to IPO_.
 
 > Build a platform that a startup can use to go from idea to IPO.
 
@@ -75,7 +75,7 @@ The two above ideas together create a virtuous cycle that effectively describes 
 5. This leads to our users being excited to try it for additional use cases.
 6. And the cycle continues.
 
-This virtuous cycle allows us to traverse the problem space while prioritizing our user's needs. It also presents us with natural growth opportunities for the business.
+This virtuous cycle lets us traverse the problem space while prioritizing our user's needs. It also presents us with natural growth opportunities for the business.
 
 Let’s look at what this means practically. Starting with how we implement feature requests.
 
@@ -171,7 +171,7 @@ The process of talking to users and building products is the core engine that dr
 
 The role of the leadership team is to give an engineer as much autonomy as possible and to make sure the product process is running smoothly.
 
-## Cultural Values
+## Cultural values
 
 All of this leads us to our core tenets, our cultural values.
 
@@ -185,9 +185,9 @@ There's an unhealthy power dynamic in large communities between the "in" crowd a
 
 While we are trying to help our users build their products we are not merely providing “support” or “services”. We are trying to figure out how our products can do a better job for them. We need to pay attention to the details of their experience. This doesn’t always mean making big changes to our products. It could be something as simple as clarifying some small details in our docs. We need to think as a user and use their feedback to improve the product.
 
-As a team, we rely heavily on our users to guide our product roadmap. So it’s important that as engineers we spend time thinking about all the little details of their experience. This information helps us make better product decisions. And ultimately allows us to make something that people want.
+As a team, we rely heavily on our users to guide our product roadmap. So it’s important that as engineers we spend time thinking about all the little details of their experience. This information helps us make better product decisions. And ultimately lets us make something that people want.
 
-### Having good design taste
+### Having good taste
 
 A lot of the key products and features that we work on, require us to make design decisions on behalf of our users. In an industry where most solutions are overly complicated, we need to be able to design intuitive products that are easy to use. It also matters that we use similar design principles across our products, so as to minimize the number of concepts a user has to learn.
 
