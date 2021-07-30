@@ -1,5 +1,6 @@
 ---
 layout: page
+editable: true
 title: Built with Serverless Stack
 description: Serverless Stack is used to build all kinds of apps, from SaaS services to weekend projects. Here we are showcasing a few apps built by our readers.
 ---

@@ -6,6 +6,16 @@ layout: default
 
     <header class="post-header">
       <h1 class="post-title">{{ page.title | escape }}</h1>
+
+      {% if page.editable %}
+      <div class="post-info">
+
+        <a target="_blank" href="{{ site.github_repo }}{{ site.github_edit_prefix }}{{ page.path }}">Edit this page</a>
+        <span class="separator">&nbsp;&bull;&nbsp;</span>
+        <a target="_blank" href="{{ site.github_repo }}{{ site.github_history_prefix }}{{ page.path }}">View history</a>
+
+      </div>
+      {% endif %}
     </header>
 
     <div class="post-content">
