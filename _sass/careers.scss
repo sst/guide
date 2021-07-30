@@ -23,8 +23,12 @@ main > .careers-page {
       font-size: 20px;
       text-align: center;
       color: $secondary-text-color;
-      b {
+      a {
         font-weight: 600;
+      }
+
+      &:last-child {
+        margin-top: 10px;
       }
     }
 
