@@ -1,14 +1,14 @@
 ---
 layout: post
-title: Call the Create API
+title: API එකක් සෑදීම සඳහා
 date: 2017-01-23 00:00:00
-lang: en
+lang: si
 ref: call-the-create-api
-description: To let our users create a note in our React.js app, we need to connect our form to our serverless API backend. We are going to use AWS Amplify's API module for this.
+description: අපගේ පරිශීලකයින්ට අපගේ React.js යෙදුමේ සටහනක් සෑදීමට ඉඩ දීම සඳහා, අපි අපගේ පෝරමය serverless API backend සමඟ සම්බන්ධ කළ යුතුයි. මේ සඳහා අපි භාවිතා කිරීමට යන්නේ AWS Amplify's API මොඩියුලය.
 comments_id: call-the-create-api/124
 ---
 
-Now that we have our basic create note form working, let's connect it to our API. We'll do the upload to S3 a little bit later. Our APIs are secured using AWS IAM and Cognito User Pool is our authentication provider. Thankfully, Amplify takes care of this for us by using the logged in user's session.
+දැන් අපේ මූලික නිර්‍මාණ සටහන් පත්‍රය ක්‍රියාත්මක වන බැවින් එය අපේ API වෙත සම්බන්ධ කරමු. අපි ටික වේලාවකට පසු S3 වෙත උඩුගත කරමු. AWS IAM භාවිතා කර අපේ APIs ආරක්‍ෂා කර ඇති අතර අපගේ සත්‍යාපන සපයන්නා වන්නේ Cognito User Pool. ස්තූතිවන්ත වන්නට, ලොග් වී ඇති පරිශීලක සැසිය භාවිතා කිරීමෙන් Amplify අප වෙනුවෙන් මෙය රැකබලා ගනී.
 
 {%change%} Let's include the `API` module by adding the following to the header of `src/containers/NewNote.js`.
 
