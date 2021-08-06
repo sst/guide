@@ -48,11 +48,11 @@ function createNote(note) {
 }
 ```
 
-This does a couple of simple things.
+මෙය සරල කරුණු කිහිපයක් කරයි.
 
-1. We make our create call in `createNote` by making a POST request to `/notes` and passing in our note object. Notice that the first two arguments to the `API.post()` method are `notes` and `/notes`. This is because back in the [Configure AWS Amplify]({% link _chapters/configure-aws-amplify.md %}) chapter we called these set of APIs by the name `notes`.
+1. `/notes` වෙත POST request කිරීමෙන් සහ අපගේ note object පාස් වීමෙන් අපි 'createNote' හි අපගේ create call ලබා දෙන්නෙමු. `API.post()` method සඳහා වන පළමු arguments දෙක `notes` සහ`/notes` බව සලකන්න. එයට හේතුව නම් [Configure AWS Amplify]({% link _chapters/configure-aws-amplify.md %}) පරිච්ඡේදයේ අපි මෙම API කට්ටලය `notes` නමින් හැඳින්වූ බැවිනි.
 
-2. For now the note object is simply the content of the note. We are creating these notes without an attachment for now.
+2. මේ වන විට note object සරලව note අන්තර්ගතයයි. අපි දැනට මෙම note නිර්මාණය කරන්නේ ඇමුණුමකින් තොරවය.
 
 3. Finally, after the note is created we redirect to our homepage.
 
