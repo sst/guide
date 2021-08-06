@@ -10,13 +10,13 @@ comments_id: call-the-create-api/124
 
 දැන් අපේ මූලික නිර්‍මාණ සටහන් පත්‍රය ක්‍රියාත්මක වන බැවින් එය අපේ API වෙත සම්බන්ධ කරමු. අපි ටික වේලාවකට පසු S3 වෙත උඩුගත කරමු. AWS IAM භාවිතා කර අපේ APIs ආරක්‍ෂා කර ඇති අතර අපගේ සත්‍යාපන සපයන්නා වන්නේ Cognito User Pool. ස්තූතිවන්ත වන්නට, ලොග් වී ඇති පරිශීලක සැසිය භාවිතා කිරීමෙන් Amplify අප වෙනුවෙන් මෙය රැකබලා ගනී.
 
-{%change%} Let's include the `API` module by adding the following to the header of `src/containers/NewNote.js`.
+{%change%} පහත දැක්වෙන දේ `src/containers/NewNote.js` හි header ට එකතු කිරීමෙන් `API` මොඩියුලය ඇතුළත් කරමු.
 
 ``` javascript
 import { API } from "aws-amplify";
 ```
 
-{%change%} And replace our `handleSubmit` function with the following.
+{%change%} තවද අපගේ `handleSubmit` function ය පහත සඳහන් දෑ සමඟ ප්‍රතිස්ථාපනය කරන්න.
 
 ``` javascript
 async function handleSubmit(event) {
