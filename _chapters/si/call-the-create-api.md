@@ -54,10 +54,10 @@ function createNote(note) {
 
 2. මේ වන විට note object සරලව note අන්තර්ගතයයි. අපි දැනට මෙම note නිර්මාණය කරන්නේ ඇමුණුමකින් තොරවය.
 
-3. Finally, after the note is created we redirect to our homepage.
+3. අවසාන වශයෙන්, note සෑදීමෙන් පසු අපි අපේ homepage හරවා යවමු.
 
-And that's it; if you switch over to your browser and try submitting your form, it should successfully navigate over to our homepage.
+එපමණයි; ඔබ ඔබේ බ්‍රව්සරය වෙත මාරු වී ඔබේ පෝරමය ඉදිරිපත් කිරීමට උත්සාහ කරන්නේ නම්, එය අපේ homepage සාර්ථකව යා යුතුය.
 
 ![New note created screenshot](/assets/new-note-created.png)
 
-Next let's upload our file to S3 and add an attachment to our note.
+ඊළඟට අපි අපේ ගොනුව S3 වෙත උඩුගත කර අපේ note ට ඇමුණුමක් එකතු කරමු.
