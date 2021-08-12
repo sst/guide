@@ -119,7 +119,7 @@ Linting source
 Deploying stacks
 dev-notes-my-stack: deploying...
 
- ✅  dev-notes-my-stack
+ dev-notes-my-stack
 
 
 Stack dev-notes-my-stack
@@ -300,6 +300,16 @@ You should see that the storage stack has been updated.
 ``` bash
 Stack dev-notes-storage
   Status: deployed
+```
+
+### Commit the changes
+
+{%change%} Let's commit and push our changes to GitHub.
+
+``` bash
+$ git add .
+$ git commit -m "Adding a storage stack"
+$ git push
 ```
 
 Next, let's create the API for our notes app.
@@ -970,6 +980,16 @@ TODO: UPDATE THE CURL OUTPUT
 }
 ```
 
+### Commit the changes
+
+{%change%} Let's commit and push our changes to GitHub.
+
+``` bash
+$ git add .
+$ git commit -m "Adding the API"
+$ git push
+```
+
 Next we are going to add the API to delete a note given its id.
 
 # Users and authentication
@@ -978,7 +998,7 @@ Next we are going to add the API to delete a note given its id.
 
 https://serverless-stack.com/chapters/handling-auth-in-serverless-apis.html
 
-In the last section, we created a Serverless REST API and deployed it. But there are a couple of things missing.
+In the last section, we created a serverless REST API and deployed it. But there are a couple of things missing.
 
 1. It's not secure
 2. And, it's not linked to a specific user
@@ -993,7 +1013,7 @@ For reference, here is what we have so far.
 
 ![Serverless public API architecture](/assets/diagrams/serverless-public-api-architecture.png)
 
-Our users make a request to our Serverless API. It starts by hitting our API Gateway endpoint. And depending on the endpoint we request, it'll forward that request to the appropriate Lambda function.
+Our users make a request to our serverless API. It starts by hitting our API Gateway endpoint. And depending on the endpoint we request, it'll forward that request to the appropriate Lambda function.
 
 In terms of access control, our API Gateway endpoint is allowed to invoke the Lambda functions we listed in the routes of our `lib/ApiStack.js`. And if you'll recall, our Lambda function are allowed to connect to our DynamoDB tables.
 
@@ -1072,7 +1092,7 @@ You can also directly connect the User Pool to API Gateway. The downside with th
 
 Finally, you can manage your users and authentication yourself. This is a little bit more complicated and we are not covering it in this guide. Though we might expand on it later.
 
-Now that we've got a good idea how we are going to handle users and authentication in our Serverless app, let's get started by adding the auth infrastructure to our app.
+Now that we've got a good idea how we are going to handle users and authentication in our serverless app, let's get started by adding the auth infrastructure to our app.
 
 # Adding auth to our serverless app
 
@@ -1199,6 +1219,33 @@ export default function main(app) {
 
 Here you'll notice that we are passing in our API and S3 Bucket to the auth stack.
 
+### Add auth to the API  
+
+We also need to enable authentication in our API.
+
+{%change%} Replace the following line in `lib/ApiStack.js`.
+
+``` js
+      defaultFunctionProps: {
+        environment: {
+          TABLE_NAME: table.tableName,
+        },
+      },
+```
+
+{%change%} With the following.
+
+``` js
+      defaultAuthorizationType: "AWS_IAM",
+      defaultFunctionProps: {
+        environment: {
+          TABLE_NAME: table.tableName,
+        },
+      },
+```
+
+This tells our API that we want to use `AWS_IAM` across all our routes.
+
 ### Deploy the app
 
 If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
@@ -1219,7 +1266,81 @@ Stack dev-notes-auth
 
 # Secure the APIs
 
-Now that our APIs have been secured with Cognito User Pool and Identity Pool TODO: LINK TO PREVIOUS CHAPTER, we are ready to use the authenticated user's info in our Lambda functions. Recall that we've been hard coding our user ids so far.
+Now that our APIs have been secured with Cognito User Pool and Identity Pool TODO: LINK TO PREVIOUS CHAPTER, we are ready to use the authenticated user's info in our Lambda functions. Recall that we've been hard coding our user ids so far (with user id `123`).
+
+We'll need to grab the real user id from the Lambda function event.
+
+### Cognito Identity Id
+
+Recall the function signature of a Lambda function:
+
+``` javascript
+export async function main(event, context) {}
+```
+
+Or the refactored one that we are using:
+
+``` javascript
+export const main = handler(async (event) => {});
+```
+
+So far we've used the `event` object to get the path parameters (`event.pathParameters`) and request body (`event.body`).
+
+Now we'll get the id of the authenticated user.
+
+``` javascript
+event.requestContext.identity.cognitoIdentityId
+```
+
+This is an id that's assigned to our user by our Cognito Identity Pool.
+
+You'll also recall that so far all of our APIs are hardcoded to interact with a single user.
+
+``` javascript
+userId: "123", // The id of the author
+```
+
+Let's change that.
+
+{%change%} Replace the above line in `src/create.js` with.
+
+``` javascript
+userId: event.requestContext.identity.cognitoIdentityId, // The id of the author
+```
+
+{%change%} Do the same in the `src/get.js`.
+
+``` javascript
+userId: event.requestContext.identity.cognitoIdentityId, // The id of the author
+```
+
+{%change%} And in the `src/update.js`.
+
+``` javascript
+userId: event.requestContext.identity.cognitoIdentityId, // The id of the author
+```
+
+{%change%} In `src/delete.js` as well.
+
+``` javascript
+userId: event.requestContext.identity.cognitoIdentityId, // The id of the author
+```
+
+{%change%} In `src/list.js` find this line instead.
+
+``` javascript
+":userId": "123",
+```
+
+{%change%} And replace it with.
+
+``` javascript
+":userId": event.requestContext.identity.cognitoIdentityId,
+```
+
+Keep in mind that the `userId` above is the Federated Identity id (or Identity Pool user id). This is not the user id that is assigned in our User Pool. If you want to use the user's User Pool user Id instead, have a look at the [Mapping Cognito Identity Id and User Pool Id]({% link _chapters/mapping-cognito-identity-id-and-user-pool-id.md %}) chapter.
+
+To test these changes we cannot use the `curl` command anymore. We'll need to generate a set of authentication headers to make our requests. Let's do that next.
 
 # Test the APIs
 
@@ -1318,3 +1439,519 @@ Making API request
 ```
 
 It will have create a new note for our test user.
+
+### Commit the changes
+
+{%change%} Let's commit and push our changes to GitHub.
+
+``` bash
+$ git add .
+$ git commit -m "Securing the API"
+$ git push
+```
+
+We’ve now got a serverless API that’s secure and handles user authentication. In the next section we are going to look at how we can work with 3rd party APIs in serverless. And how to work with secrets!
+
+# Secrets and 3rd party APIs
+
+# Working with 3rd Party APIs
+
+https://serverless-stack.com/chapters/working-with-3rd-party-apis.html
+
+# Setup a Stripe Account
+
+https://serverless-stack.com/chapters/setup-a-stripe-account.html
+
+# Add a Billing API
+
+https://serverless-stack.com/chapters/add-a-billing-api.html
+
+Now let's get started with creating our billing API. It is going to take a Stripe token and the number of notes the user wants to store.
+
+### Add a Billing Lambda
+
+{%change%} Start by installing the Stripe NPM package. Run the following in the root of our project.
+
+``` bash
+$ npm install stripe
+```
+
+{%change%} Create a new file in `src/billing.js` with the following.
+
+``` js
+import Stripe from "stripe";
+import handler from "./util/handler";
+import { calculateCost } from "./util/cost";
+
+export const main = handler(async (event) => {
+  const { storage, source } = JSON.parse(event.body);
+  const amount = calculateCost(storage);
+  const description = "Scratch charge";
+
+  // Load our secret key from the  environment variables
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
+  await stripe.charges.create({
+    source,
+    amount,
+    description,
+    currency: "usd",
+  });
+
+  return { status: true };
+});
+```
+
+Most of this is fairly straightforward but let's go over it quickly:
+
+- We get the `storage` and `source` from the request body. The `storage` variable is the number of notes the user would like to store in his account. And `source` is the Stripe token for the card that we are going to charge.
+
+- We are using a `calculateCost(storage)` function (that we are going to add soon) to figure out how much to charge a user based on the number of notes that are going to be stored.
+
+- We create a new Stripe object using our Stripe Secret key. We are going to get this as an environment variable. We do not want to put our secret keys in our code and commit that to Git. This is a security issue.
+
+- Finally, we use the `stripe.charges.create` method to charge the user and respond to the request if everything went through successfully.
+
+Note, if you are testing this from India, you'll need to add some shipping information as well. Check out the [details from our forums](https://discourse.serverless-stack.com/t/test-the-billing-api/172/20).
+
+### Add the Business Logic
+
+Now let's implement our `calculateCost` method. This is primarily our *business logic*.
+
+{%change%} Create a `src/util/cost.js` and add the following.
+
+``` js
+export function calculateCost(storage) {
+  const rate = storage <= 10 ? 4 : storage <= 100 ? 2 : 1;
+  return rate * storage * 100;
+}
+```
+
+This is basically saying that if a user wants to store 10 or fewer notes, we'll charge them $4 per note. For 11 to 100 notes, we'll charge $2 and any more than 100 is $1 per note. Since Stripe expects us to provide the amount in pennies (the currency’s smallest unit) we multiply the result by 100. Clearly, our serverless infrastructure might be cheap but our service isn't!
+
+### Add the route
+
+Let's add a new route for our billing API.
+
+{%change%} Add the following below the `DELETE /notes/{id}` route in `lib/ApiStack.js`.
+
+``` js
+        "POST   /billing": "src/billing.main",
+```
+
+### Deploy our changes
+
+If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
+
+Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
+
+You should see that the API stack is being updated.
+
+``` bash
+Stack dev-notes-api
+  Status: deployed
+  Outputs:
+    ApiEndpoint: https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com
+```
+
+Now before we can test our API we need to load our Stripe secret key in our environment.
+
+# Load Secrets from .env
+
+As we had previously mentioned TODO: LINK TO PREVIOUS CHAPTER, we do not want to store our secret environment variables in our code. In our case it is the Stripe secret key. In this chapter, we'll look at how to do that.
+
+We are going to create a `.env` file to store this.
+
+{%change%} Create a new file in `lib/.env.local` with the following.
+
+``` bash
+STRIPE_SECRET_KEY=STRIPE_TEST_SECRET_KEY
+```
+
+Make sure to replace the `STRIPE_TEST_SECRET_KEY` with the **Secret key** from the [Setup a Stripe account]({% link _chapters/setup-a-stripe-account.md %}) chapter. TODO: CHECK LINK TO CHAPTER
+
+SST automatically loads this into your application.
+
+A note on committing these files. SST follows the convention used by [Create React App](https://create-react-app.dev/docs/adding-custom-environment-variables/#adding-development-environment-variables-in-env) and [others](https://nextjs.org/docs/basic-features/environment-variables#default-environment-variables) of committing `.env` files to Git but not the `.env.local` or `.env.$STAGE.local` files. You can [read more about it here](https://docs.serverless-stack.com/environment-variables#committing-env-files).
+
+To ensure that this file doesn't get committed, we'll need to add it to the `.gitignore` in our project root. You'll notice that the starter project we are using already has this in the `.gitignore`.
+
+``` txt
+# environments
+.env*.local
+```
+
+Also, since we won't be committing this file to Git, we'll need to add this to our CI when we want to automate our deployments. We'll do this later in the guide.
+
+Next, let's add these to our functions.
+
+{%change%} Replace the following in `lib/ApiStack.js`:
+
+``` js
+      defaultFunctionProps: {
+        environment: {
+          TABLE_NAME: table.tableName,
+        },
+      },
+```
+
+{%change%} With this instead.
+
+``` js
+      defaultFunctionProps: {
+        environment: {
+          TABLE_NAME: table.tableName,
+          STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+        },
+      },
+```
+
+We are taking the environment variables in our SST app and passing it into our API.
+
+### Deploy our changes
+
+If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
+
+Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
+
+You should see that the API stack is being updated.
+
+``` bash
+Stack dev-notes-api
+  Status: deployed
+  Outputs:
+    ApiEndpoint: https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com
+```
+
+Now we are ready to test our billing API.
+
+# Test the Billing API
+
+Now that we have our billing API all set up, let's do a quick test in our local environment.
+
+We'll be using the same CLI from a few chapters ago. TODO: LINK TO TEST API WITH AUTH CHAPTER
+
+{%change%} Run the following in your terminal.
+
+``` bash
+$ npx aws-api-gateway-cli-test \
+--username='admin@example.com' \
+--password='Passw0rd!' \
+--user-pool-id='USER_POOL_ID' \
+--app-client-id='USER_POOL_CLIENT_ID' \
+--cognito-region='COGNITO_REGION' \
+--identity-pool-id='IDENTITY_POOL_ID' \
+--invoke-url='API_ENDPOINT' \
+--api-gateway-region='API_REGION' \
+--path-template='/billing' \
+--method='POST' \
+--body='{"source":"tok_visa","storage":21}'
+```
+
+Make sure to replace the `USER_POOL_ID`, `USER_POOL_CLIENT_ID`, `COGNITO_REGION`, `IDENTITY_POOL_ID`, `API_ENDPOINT`, and `API_REGION` with the outputs from your app.
+
+Here we are testing with a Stripe test token called `tok_visa` and with `21` as the number of notes we want to store. You can read more about the Stripe test cards and tokens in the [Stripe API Docs here](https://stripe.com/docs/testing#cards).
+
+The response should look similar to this.
+
+``` bash
+{
+    "statusCode": 200,
+    "body": "{\"status\":true}"
+}
+```
+
+If the command is successful, the response will look similar to this.
+
+``` bash
+Authenticating with User Pool
+Getting temporary credentials
+Making API request
+{
+  statusCode: 200,
+  body: {
+    status: true
+  }
+}
+```
+
+### Commit the changes
+
+{%change%} Let's commit and push our changes to GitHub.
+
+``` bash
+$ git add .
+$ git commit -m "Adding a billing API"
+$ git push
+```
+
+Now that we have our new billing API ready. Let's look at how to setup unit tests in serverless. We'll be using that to ensure that our business logic has been configured correctly.
+
+# Unit Tests in Serverless
+
+Our serverless app is made up of two big parts; the code that defines our infrastructure and the code that powers our Lambda functions. We'd like to be able to test both of these. 
+
+On the infrastructure side, we want to make sure the right type of resources are being created. So we don't mistakingly deploy some updates that we shouldn't.
+
+On the Lambda function side, we have some simple business logic that figures out exactly how much to charge our user based on the number of notes they want to store. We want to make sure that we test all the possible cases for this before we start charging people.
+
+SST comes with built in support for tests. It uses [Jest](https://jestjs.io) internally for this.
+
+### Testing CDK infrastructure
+
+Let's start by writing a test for the CDK infrastructure in our app. We are going to keep this fairly simple for now.
+
+{%change%} Add the following to `test/StorageStack.test.js`.
+
+``` js
+import { expect, haveResource } from "@aws-cdk/assert";
+import * as sst from "@serverless-stack/resources";
+import StorageStack from "../lib/StorageStack";
+
+test("Test StorageStack", () => {
+  const app = new sst.App();
+  // WHEN
+  const stack = new StorageStack(app, "test-stack");
+  // THEN
+  expect(stack).to(
+    haveResource("AWS::DynamoDB::Table", {
+      BillingMode: "PAY_PER_REQUEST",
+    })
+  );
+});
+```
+
+This is a very simple CDK test that checks if our storage stack creates a DynamoDB table and that the table's billing mode is set to `PAY_PER_REQUEST`. This is the default setting in SST's [`Table`](https://docs.serverless-stack.com/constructs/Table) construct. This test is making sure that we don't change this setting by mistake.
+
+We also have a sample test created with the starter that we can remove.
+
+{%change%} Run the following in your project root.
+
+``` bash
+$ rm test/MyStack.test.js
+```
+
+### Testing Lambda functions
+
+We are also going to test the business logic in our Lambda functions.
+
+{%change%} Create a new file in `test/cost.test.js` and add the following.
+
+``` js
+import { calculateCost } from "../src/util/cost";
+
+test("Lowest tier", () => {
+  const storage = 10;
+
+  const cost = 4000;
+  const expectedCost = calculateCost(storage);
+
+  expect(cost).toEqual(expectedCost);
+});
+
+test("Middle tier", () => {
+  const storage = 100;
+
+  const cost = 20000;
+  const expectedCost = calculateCost(storage);
+
+  expect(cost).toEqual(expectedCost);
+});
+
+test("Highest tier", () => {
+  const storage = 101;
+
+  const cost = 10100;
+  const expectedCost = calculateCost(storage);
+
+  expect(cost).toEqual(expectedCost);
+});
+```
+
+This should be straightforward. We are adding 3 tests. They are testing the different tiers of our pricing structure. We test the case where a user is trying to store 10, 100, and 101 notes. And comparing the calculated cost to the one we are expecting.
+
+### Run tests
+
+And we can run our tests by using the following command in the root of our project.
+
+``` bash
+$ npx sst test
+```
+
+You should see something like this:
+
+``` bash
+ PASS  test/cost.test.js
+ PASS  test/StorageStack.test.js
+
+Test Suites: 2 passed, 2 total
+Tests:       4 passed, 4 total
+Snapshots:   0 total
+Time:        4.708 s, estimated 5 s
+Ran all test suites.
+```
+
+And that's it! We have unit tests all configured. These tests are fairly simple but should give you an idea of how to add more in the future. The key being that you are testing both your infrastructure and your functions.
+
+### Commit the changes
+
+{%change%} Let's commit the changes so far and push it to GitHub.
+
+``` bash
+$ git add .
+$ git commit -m "Adding unit tests"
+$ git push
+```
+
+Now we are almost ready to move on to our frontend. But before we do, we need to ensure that our backend is configured so that our React app will be able to connect to it.
+
+# CORS in Serverless
+
+# Handle CORS in Serverless APIs
+
+https://serverless-stack.com/chapters/handle-cors-in-serverless-apis.html
+
+Let's take stock of our setup so far. We have a serverless API backend that allows users to create notes and an S3 bucket where they can upload files. We are now almost ready to work on our frontend React app.
+
+However, before we can do that. There is one thing that needs to be taken care of — [CORS or Cross-Origin Resource Sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing).
+
+Since our React app is going to be run inside a browser (and most likely hosted on a domain separate from our serverless API and S3 bucket), we need to configure CORS to allow it to connect to our resources.
+
+Let's quickly review our backend app architecture.
+
+![Serverless Auth API architecture](/assets/diagrams/serverless-auth-api-architecture.png)
+
+Our client will be interacting with our API, S3 bucket, and User Pool. CORS in the User Pool part is taken care of by its internals. That leaves our API and S3 bucket. In the next couple of chapters we'll be setting that up.
+
+Let's get a quick background on CORS.
+
+### Understanding CORS
+
+There are two things we need to do to support CORS in our serverless API.
+
+1. Preflight OPTIONS requests
+
+   For certain types of cross-domain requests (PUT, DELETE, ones with Authentication headers, etc.), your browser will first make a _preflight_ request using the request method OPTIONS. These need to respond with the domains that are allowed to access this API and the HTTP methods that are allowed.
+
+2. Respond with CORS headers
+
+   For all the other types of requests we need to make sure to include the appropriate CORS headers. These headers, just like the one above, need to include the domains that are allowed.
+
+There's a bit more to CORS than what we have covered here. So make sure to [check out the Wikipedia article for further details](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing).
+
+If we don't set the above up, then we'll see something like this in our HTTP responses.
+
+``` text
+No 'Access-Control-Allow-Origin' header is present on the requested resource
+```
+
+And our browser won't show us the HTTP response. This can make debugging our API extremely hard.
+
+### Preflight requests in API Gateway
+
+The [`Api`](https://docs.serverless-stack.com/constructs/Api) construct that we are using enables CORS by default.
+
+``` js
+new Api(this, "Api", {
+  // Enabled by default
+  cors: true,
+  routes: {
+    "GET /notes": "src/list.main",
+  },
+});
+```
+
+But you can configure the specifics if necessary.
+
+``` js
+import { HttpMethod } from "@aws-cdk/aws-apigatewayv2";
+
+new Api(this, "Api", {
+  cors: {
+    allowMethods: [HttpMethod.GET],
+  },
+  routes: {
+    "GET /notes": "src/list.main",
+  },
+});
+```
+
+You can [read more about this here](https://docs.serverless-stack.com/constructs/Api#cors).
+
+We'll go with the default setting for now.
+
+### CORS headers in Lambda functions
+
+Next we need to add the CORS headers in our Lambda function response.
+
+{%change%} Replace the `return` statement in our `util/handler.js`.
+
+``` javascript
+return {
+  statusCode,
+  body: JSON.stringify(body),
+};
+```
+
+{%change%} With the following.
+
+``` javascript
+return {
+  statusCode,
+  body: JSON.stringify(body),
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Credentials": true,
+  },
+};
+```
+
+Again you can customize the CORS headers but we'll go with the default ones here.
+
+The two steps we've taken above ensure that if our Lambda functions are invoked through API Gateway, it'll respond with the proper CORS config.
+
+Next, let’s add these CORS settings to our S3 bucket as well. Since our frontend React app will be uploading files directly to it.
+
+# Handle CORS in S3 for File Uploads
+
+https://serverless-stack.com/chapters/handle-cors-in-s3-for-file-uploads.html
+
+In the notes app we'll be building, users will be uploading files to the bucket we just created. And since our app will be served through our custom domain, it'll be communicating across domains while it does the uploads. By default, S3 does not allow its resources to be accessed from a different domain. However, cross-origin resource sharing (CORS) defines a way for client web applications that are loaded in one domain to interact with resources in a different domain. Let's enable CORS for our S3 bucket.
+
+{%change%} Replace the following line in `lib/StorageStack.js`.
+
+``` js
+    this.bucket = new sst.Bucket(this, "Uploads");
+```
+
+{%change%} With this.
+
+``` js
+    this.bucket = new sst.Bucket(this, "Uploads", {
+      s3Bucket: {
+        // Allow client side access to the bucket from a different domain
+        cors: [
+          {
+            maxAge: 3000,
+            allowedOrigins: ["*"],
+            allowedHeaders: ["*"],
+            allowedMethods: ["GET", "PUT", "POST", "DELETE", "HEAD"],
+          },
+        ],
+      },
+    });
+```
+
+Note that, you can customize this configuration to use your own domain or a list of domains when you use this in production. We'll use these default settings for now.
+
+### Commit the Changes
+
+{%change%} Let's commit our backend code and push it to GitHub.
+
+``` bash
+$ git add .
+$ git commit -m "Enabling CORS"
+$ git push
+```
+
+Now we are ready to use our serverless backend to create our frontend React app!
