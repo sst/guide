@@ -13,10 +13,10 @@ Let's first create a route that will check if the user is logged in before routi
 
 {%change%} Add the following to `src/components/AuthenticatedRoute.js`.
 
-``` coffee
+``` jsx
 import React from "react";
 import { Route, Redirect, useLocation } from "react-router-dom";
-import { useAppContext } from "../libs/contextLib";
+import { useAppContext } from "../lib/contextLib";
 
 export default function AuthenticatedRoute({ children, ...rest }) {
   const { pathname, search } = useLocation();
@@ -51,10 +51,10 @@ We'll do something similar to ensure that the user is not authenticated.
 
 {%change%} Add the following to `src/components/UnauthenticatedRoute.js`.
 
-``` coffee
+``` jsx
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { useAppContext } from "../libs/contextLib";
+import { useAppContext } from "../lib/contextLib";
 
 export default function UnauthenticatedRoute({ children, ...rest }) {
   const { isAuthenticated } = useAppContext();

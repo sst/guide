@@ -314,7 +314,7 @@ We are now ready to add the UI for our app and connect it to our serverless API.
 
 {%change%} Replace `frontend/src/App.js` with.
 
-``` coffee
+``` jsx
 import { useState } from "react";
 import "./App.css";
 

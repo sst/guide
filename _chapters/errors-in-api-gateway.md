@@ -19,7 +19,7 @@ Let's look at how to debug these.
 
 ### Invalid API Path
 
-Head over to the frontend repo.
+Head over to the `frontend/` directory in your project.
 
 {%change%} Open `src/containers/Home.js`, and replace the `loadNotes()` function with:
 
@@ -29,15 +29,17 @@ function loadNotes() {
 }
 ```
 
-{%change%} Let's commit this and deploy it.
+{%change%} Let's commit this and push it.
 
 ``` bash
 $ git add .
-$ git commit -m "Adding fault paths"
+$ git commit -m "Adding faulty paths"
 $ git push
 ```
 
-Head over to your notes app, and load the home page. You'll notice the page fails with an error alert saying `Network Alert`.
+Head over to your Seed dashboard and deploy it.
+
+Then in your notes app, load the home page. You'll notice the page fails with an error alert saying `Network Alert`.
 
 ![Invalid path error in notes app](/assets/monitor-debug-errors/invalid-path-error-in-notes-app.png)
 
@@ -78,13 +80,15 @@ function loadNotes() {
 }
 ```
 
-{%change%} Let's deploy our code.
+{%change%} Let's push our code.
 
 ``` bash
 $ git add .
 $ git commit -m "Adding invalid method"
 $ git push
 ```
+
+Head over to your Seed dashboard and deploy it.
 
 Our notes app should fail to load the home page.
 
@@ -122,7 +126,7 @@ function loadNotes() {
 }
 ```
 
-Deploy the code.
+Commit and push the code.
 
 ``` bash
 $ git add .
@@ -130,6 +134,8 @@ $ git commit -m "Reverting faulty code"
 $ git push
 ```
 
-Now you are all set to go live with your brand new Serverless app!
+Head over to your Seed dashboard and deploy it.
+
+Now you are all set to go live with your brand new full-stack serverless app!
 
 Let's wrap things up next.

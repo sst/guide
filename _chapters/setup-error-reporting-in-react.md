@@ -42,7 +42,7 @@ And that's it. Scroll down and copy the `Sentry.init` line.
 
 ### Install Sentry
 
-{%change%} Now head over to the project root for your React app and install Sentry.
+{%change%} Now head over to the React `frontend/` directory and install Sentry.
 
 ``` bash
 $ npm install @sentry/browser --save
@@ -50,10 +50,11 @@ $ npm install @sentry/browser --save
 
 We are going to be using Sentry across our app. So it makes sense to keep all the Sentry related code in one place.
 
-{%change%} Add the following to the top of your `src/libs/errorLib.js`.
+{%change%} Add the following to the top of your `src/lib/errorLib.js`.
 
 ``` javascript
 import * as Sentry from "@sentry/browser";
+import config from "../config";
 
 const isLocal = process.env.NODE_ENV === "development";
 
@@ -62,7 +63,7 @@ export function initSentry() {
     return;
   }
 
-  Sentry.init({ dsn: "https://your-dsn-id-here@sentry.io/123456" });
+  Sentry.init({ dsn: config.SENTRY_DSN });
 }
 
 export function logError(error, errorInfo = null) {
@@ -77,7 +78,13 @@ export function logError(error, errorInfo = null) {
 }
 ```
 
-Make sure to replace `Sentry.init({ dsn: "https://your-dsn-id-here@sentry.io/123456" });` with the line we copied from the Sentry dashboard above.
+{%change%} Add the `SENTRY_DSN` below the `const config = {` line in `src/config.js`. 
+
+``` js
+SENTRY_DSN: "https://your-dsn-id-here@sentry.io/123456",
+```
+
+Make sure to replace `https://your-dsn-id-here@sentry.io/123456` with the line we copied from the Sentry dashboard above.
 
 We are using the `isLocal` flag to conditionally enable Sentry because we don't want to report errors when we are developing locally. Even though we all know that we _rarely_ ever make mistakes while developing…
 
@@ -91,7 +98,7 @@ Next, let's initialize our app with Sentry.
 {%change%} Add the following to the end of the imports in `src/index.js`.
 
 ``` javascript
-import { initSentry } from './libs/errorLib';
+import { initSentry } from './lib/errorLib';
 
 initSentry();
 ```

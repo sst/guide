@@ -19,9 +19,9 @@ It's incredibly straightforward to setup. So let's get started.
 
 {%change%} Add the following to `src/components/ErrorBoundary.js`.
 
-``` coffee
+``` jsx
 import React from "react";
-import { logError } from "../libs/errorLib";
+import { logError } from "../lib/errorLib";
 import "./ErrorBoundary.css";
 
 export default class ErrorBoundary extends React.Component {
@@ -68,7 +68,7 @@ To use the Error Boundary component that we created, we'll need to add it to our
 {%change%} Find the following in `src/App.js`.
 
 {% raw %}
-``` coffee
+``` jsx
 <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
   <Routes />
 </AppContext.Provider>
@@ -78,7 +78,7 @@ To use the Error Boundary component that we created, we'll need to add it to our
 {%change%} And replace it with:
 
 {% raw %}
-``` coffee
+``` jsx
 <ErrorBoundary>
   <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
     <Routes />
@@ -101,15 +101,7 @@ And that's it! Now an unhandled error in our containers will show a nice error m
 
 ``` bash
 $ git add .
-$ git commit -m "Adding error reporting"
-```
-
-### Push the Changes
-
-{%change%} Let's also push these changes to GitHub and deploy our app.
-
-``` bash
-$ git push
+$ git commit -m "Adding React error reporting"
 ```
 
 ### Test the Error Boundary
@@ -141,7 +133,7 @@ While developing, React doesn't show your Error Boundary fallback UI by default.
 
 Since we are developing locally, we don't report this error to Sentry. But let's do a quick test to make sure it's hooked up properly.
 
-Replace the following from the top of `src/libs/errorLib.js`.
+Replace the following from the top of `src/lib/errorLib.js`.
 
 ``` javascript
 const isLocal = process.env.NODE_ENV === "development";
@@ -165,9 +157,16 @@ Now our React app is ready to handle the errors that are thrown its way!
 
 Let's cleanup all the testing changes we made above.
 
-
 ``` bash
 $ git checkout .
+```
+
+### Push the Changes
+
+{%change%} Let's also push these changes to GitHub and deploy our app.
+
+``` bash
+$ git push
 ```
 
 Next, let's look at how to handle errors in our Serverless app.

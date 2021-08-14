@@ -31,8 +31,8 @@ import {
   ControlLabel,
 } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
-import { useFormFields } from "../libs/hooksLib";
-import { onError } from "../libs/errorLib";
+import { useFormFields } from "../lib/hooksLib";
+import { onError } from "../lib/errorLib";
 import "./ChangeEmail.css";
 
 export default function ChangeEmail() {

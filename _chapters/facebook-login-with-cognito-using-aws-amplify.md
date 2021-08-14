@@ -110,7 +110,7 @@ Make sure to replace `YOUR_FACEBOOK_APP_ID` with the one from above.
 
 {%change%} Next we load the Facebook JS SDK in the our `src/App.js` in the `componentDidMount` method.
 
-``` coffee
+``` jsx
 async componentDidMount() {
   this.loadFacebookSDK();
 
@@ -150,13 +150,13 @@ And we also load the current authenticated user using the `Auth.currentAuthentic
 
 {%change%} Make sure to import the config at the top of `src/App.js`.
 
-``` coffee
+``` jsx
 import config from "./config";
 ```
 
 {%change%} Now we'll create a Facebook login button component in `src/components/FacebookButton.js`.
 
-``` coffee
+``` jsx
 import React, { Component } from "react";
 import { Auth } from "aws-amplify";
 import LoaderButton from "./LoaderButton";
@@ -266,7 +266,7 @@ Add the button above our login and signup form. And don't forget to import it us
 
 {%change%} Also, add the handler method as well.
 
-``` coffee
+``` jsx
 handleFbLogin = () => {
   this.props.userHasAuthenticated(true);
 };

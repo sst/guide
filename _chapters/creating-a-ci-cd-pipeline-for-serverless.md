@@ -11,16 +11,21 @@ comments_id: creating-a-ci-cd-pipeline-for-serverless/174
 
 So to recap, this is what we have built so far:
 
-- A Serverless app that creates our backend APIs
-- A [CDK SST app](https://github.com/serverless-stack/serverless-stack) that configures all our infrastructure completely in code
+- A serverless app that includes the following:
+  - Storage stack, with DynamoDB and S3
+  - API stack
+  - Auth stack, with Cognito
+  - Frontend stack for our React.js app
 - A way to handle secrets locally
-- And a way to run unit tests to test our business logic
+- And a way to run unit tests
+- Deployed to a local dev environment
+- And deployed to a prod environment
 
 All of this is neatly committed in a Git repo.
 
-So far we've been deploying our app locally through our command line. But if we had multiple people on our team, or if we were working on different features at the same time, we won't be able to work on our app because the changes would overwrite each other. And it also means that if we deploy some changes while we are working on our app, our users will see those changes.
+So far we've been deploying our app locally through our command line. But if we had multiple people on our team, or if we were working on different features at the same time, we won't be able to work on our app because the changes would overwrite each other.
 
-To fix this we are going to implement a CI/CD pipeline with multiple environments for our Serverless app. 
+To fix this we are going to implement a CI/CD pipeline for our full-stack serverless app. 
 
 ### What is a CI/CD pipeline
 
@@ -47,9 +52,6 @@ There are many common CI/CD services, like [Travis CI](https://travis-ci.org) or
 
 To fix this we created a service called [**Seed**](https://seed.run). It requires no scripts and is built specifically for Serverless. It also allows you to monitor and debug your Serverless app. This is something we'll be doing later in the guide.
 
-We should mention that you don't have to use Seed. It just makes it easier for this guide. If you'd like to use Circle or Travis, we've created a couple of tutorials for them as well.
-
-- [Configure a CI/CD pipeline for Serverless apps on CircleCI](https://seed.run/blog/how-to-build-a-cicd-pipeline-for-serverless-apps-with-circleci)
-- [Configure a CI/CD pipeline for Serverless apps on Travis CI](https://seed.run/blog/how-to-build-a-cicd-pipeline-for-serverless-apps-with-travis-ci)
+We should mention that you don't have to use Seed. And this section is completely optional.
 
 Let's get started with setting up your project on Seed.

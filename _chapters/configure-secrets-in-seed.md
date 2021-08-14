@@ -8,7 +8,7 @@ ref: configure-secrets-in-seed
 comments_id: configure-secrets-in-seed/176
 ---
 
-Before we can do our first deployment, we need to make sure to configure our secret environment variables. If you'll recall, we have explicitly not stored these in our code (or in Git). This means that if somebody else on our team needs to deploy, we'll need to pass the `.env` file around. Instead we'll configure [Seed](https://seed.run) to deploy with our secrets for us.
+Before we can do our first deployment, we need to make sure to configure our secret environment variables. If you'll recall, we have explicitly not stored these in our code (or in Git). TODO:LINK TO SECRETS CHAPTER This means that if somebody else on our team needs to deploy, we'll need to pass the `.env.local` file around. Instead we'll configure [Seed](https://seed.run) to deploy with our secrets for us.
 
 To do that, hit **dev** in your app **Settings**.
 

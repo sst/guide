@@ -12,7 +12,7 @@ Now that our container loads a note using the `useEffect` method, let's go ahead
 
 {%change%} Replace our placeholder `return` statement in `src/containers/Notes.js` with the following.
 
-``` coffee
+``` jsx
 function validateForm() {
   return content.length > 0;
 }

@@ -14,14 +14,14 @@ Let's start by creating the signup form that'll get the user's email and passwor
 
 {%change%} Create a new container at `src/containers/Signup.js` with the following.
 
-``` coffee
+``` jsx
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
-import { useAppContext } from "../libs/contextLib";
-import { useFormFields } from "../libs/hooksLib";
-import { onError } from "../libs/errorLib";
+import { useAppContext } from "../lib/contextLib";
+import { useFormFields } from "../lib/hooksLib";
+import { onError } from "../lib/errorLib";
 import "./Signup.css";
 
 export default function Signup() {
@@ -145,7 +145,7 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 1. Since we need to show the user a form to enter the confirmation code, we are conditionally rendering two forms based on if we have a user object or not.
 
-   ``` coffee
+   ``` jsx
    {newUser === null ? renderForm() : renderConfirmationForm()}
    ```
 
@@ -194,7 +194,7 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 {%change%} Finally, add our container as a route in `src/Routes.js` below our login route.
 
-``` coffee
+``` jsx
 <Route exact path="/signup">
   <Signup />
 </Route>

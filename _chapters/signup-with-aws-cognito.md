@@ -89,8 +89,8 @@ Now while developing you might run into cases where you need to manually confirm
 
 ```bash
 aws cognito-idp admin-confirm-sign-up \
-   --region YOUR_COGNITO_REGION \
-   --user-pool-id YOUR_COGNITO_USER_POOL_ID \
+   --region COGNITO_REGION \
+   --user-pool-id USER_POOL_ID \
    --username YOUR_USER_EMAIL
 ```
 

@@ -14,11 +14,11 @@ We've covered debugging [errors in our code]({% link _chapters/logic-errors-in-l
 
 Lambda functions could fail not because of an error inside your handler code, but because of an error outside it. In this case, your Lambda function won't be invoked. Let's add some faulty code outside our handler function.
 
-{%change%} Replace our `services/notes/get.js` with the following.
+{%change%} Replace our `src/get.js` with the following.
 
 ``` javascript
-import handler from "./libs/handler-lib";
-import dynamoDb from "./libs/dynamodb-lib";
+import handler from "./util/handler";
+import dynamoDb from "./util/dynamodb";
 
 // Some faulty code
 dynamoDb.notExist();
@@ -71,11 +71,11 @@ Note that, you might see there are 3 events for this error. This is because the 
 
 Another error that can happen outside a Lambda function is when the handler has been misnamed. 
 
-{%change%} Replace our `get.js` with the following.
+{%change%} Replace our `src/get.js` with the following.
 
 ``` javascript
-import handler from "./libs/handler-lib";
-import * as dynamoDbLib from "./libs/dynamodb-lib";
+import handler from "./util/handler";
+import dynamoDb from "./util/dynamodb";
 
 // Wrong handler function name
 export const main2 = handler(async (event, context) => {

@@ -15,7 +15,7 @@ Let's start by adding a method to read the `redirect` URL from the querystring.
 
 {%change%} Add the following method to your `src/components/UnauthenticatedRoute.js` below the imports.
 
-``` coffee
+``` jsx
 function querystring(name, url = window.location.href) {
   name = name.replace(/[[]]/g, "\\$&");
 
@@ -39,7 +39,7 @@ Now let's update our component to use this parameter when it redirects.
 
 {%change%} Replace our current `UnauthenticatedRoute` function component with the following.
 
-``` coffee
+``` jsx
 export default function UnauthenticatedRoute({ children, ...rest }) {
   const { isAuthenticated } = useAppContext();
   const redirect = querystring("redirect");
@@ -57,19 +57,19 @@ export default function UnauthenticatedRoute({ children, ...rest }) {
 
 {%change%} And remove the following from the `handleSubmit` method in `src/containers/Login.js`.
 
-``` coffee
+``` jsx
 history.push("/");
 ```
 
 {%change%} Also, remove the hook declaration.
 
-``` coffee
+``` jsx
 const history = useHistory();
 ```
 
 {%change%} Finally, remove the import.
 
-``` coffee
+``` jsx
 import { useHistory } from "react-router-dom";
 ```
 

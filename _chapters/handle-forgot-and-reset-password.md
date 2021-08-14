@@ -20,7 +20,7 @@ Let's look at the main changes we need to make to allow users to reset their pas
 
 {%change%} We are going to create a `src/containers/ResetPassword.js`.
 
-``` coffee
+``` jsx
 import React, { useState } from "react";
 import { Auth } from "aws-amplify";
 import { Link } from "react-router-dom";
@@ -32,8 +32,8 @@ import {
   ControlLabel,
 } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
-import { useFormFields } from "../libs/hooksLib";
-import { onError } from "../libs/errorLib";
+import { useFormFields } from "../lib/hooksLib";
+import { onError } from "../lib/errorLib";
 import "./ResetPassword.css";
 
 export default function ResetPassword() {
@@ -242,7 +242,7 @@ Finally, let's link this up with the rest of our app.
 
 {%change%} And import it in the header.
 
-``` coffee
+``` jsx
 import ResetPassword from "./containers/ResetPassword";
 ```
 
@@ -252,13 +252,13 @@ Now we want to make sure that our users are directed to this page when they are 
 
 {%change%} So let's add a link in our `src/containers/Login.js`. Add it above our login button.
 
-``` coffee
+``` jsx
 <Link to="/login/reset">Forgot password?</Link>
 ```
 
 {%change%} And import the `Link` component in the header.
 
-``` coffee
+``` jsx
 import { Link } from "react-router-dom";
 ```
 

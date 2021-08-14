@@ -14,7 +14,7 @@ We are going to use AWS Amplify to login to our Amazon Cognito setup. Let's star
 
 {%change%} Add the Auth module to the header of our Login container in `src/containers/Login.js`.
 
-``` coffee
+``` jsx
 import { Auth } from "aws-amplify";
 ```
 

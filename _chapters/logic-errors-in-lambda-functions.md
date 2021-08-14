@@ -26,11 +26,11 @@ $ git checkout -b debug
 
 Let's trigger an error in `get.js` by commenting out the `noteId` field in the DynamoDB call's Key definition. This will cause the DynamoDB call to fail and in turn cause the Lambda function to fail.
 
-{%change%} Replace `services/notes/get.js` with the following.
+{%change%} Replace `src/get.js` with the following.
 
 ``` javascript
-import handler from "./libs/handler-lib";
-import dynamoDb from "./libs/dynamodb-lib";
+import handler from "./util/handler";
+import dynamoDb from "./util/dynamodb";
 
 export const main = handler(async (event, context) => {
   const params = {
@@ -71,8 +71,9 @@ Head over to your Seed dashboard and select the **prod** stage in the pipeline a
 
 ![Click deploy in Seed pipeline](/assets/monitor-debug-errors/click-deploy-in-seed-pipeline.png)
 
-Select the **debug** branch from the dropdown and hit **Deploy**.
+Type in the **debug** branch and hit **Deploy**.
 
+TOOD: UPDATE SS AND FILENAME
 ![Select branch and confirm deploy in Seed](/assets/monitor-debug-errors/select-branch-and-confirm-deploy-in-seed.png)
 
 This will deploy our faulty code to production.

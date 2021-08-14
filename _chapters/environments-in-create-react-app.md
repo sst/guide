@@ -39,7 +39,7 @@ We can use this idea of custom environment variables to configure our React app 
 
 The first thing we can do is to configure our build system with the `REACT_APP_STAGE` environment variable. Currently the `scripts` portion of our `package.json` looks something like this:
 
-``` coffee
+``` jsx
 "scripts": {
   "start": "react-scripts start",
   "build": "react-scripts build",
@@ -57,7 +57,7 @@ Here we only have one environment and we use it for our local development and on
 
 To set our two environments we can change this to:
 
-``` coffee
+``` jsx
 "scripts": {
   "start": "REACT_APP_STAGE=dev react-scripts start",
   "build": "react-scripts build",

@@ -29,7 +29,7 @@ A demo version of this service is hosted on AWS - [`https://z6pv80ao4l.execute-a
 
 And here is the ES7 source behind it.
 
-``` coffee
+``` jsx
 export const hello = async (event, context, callback) => {
   const response = {
     statusCode: 200,

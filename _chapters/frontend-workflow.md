@@ -29,7 +29,7 @@ We are going to add a Login and Signup button to our lander to give users a clea
 
 {%change%} To do this update our `renderLander` function in `src/containers/Home.js`.
 
-``` coffee
+``` jsx
 function renderLander() {
   return (
     <div className="lander">
