@@ -1,12 +1,15 @@
 ---
 layout: post
-title: Initialize the Backend Repo
-date: 2016-12-29 18:00:00
+title: Initialize a GitHub Repo
+date: 2021-08-17 18:00:00
 lang: en
-description: For this guide we are going to add our Serverless Framework app to a Git repo. We do this so that we can automate our deployments later by just pushing to Git.
+description: For this guide we are going to add our SST app to a Git repo. We do this so that we can automate our deployments later by just pushing to GitHub.
 code: backend
-ref: initialize-the-backend-repo
-comments_id: initialize-the-backend-repo/159
+ref: initialize-a-github-repo
+redirect_from:
+  - /chapters/initialize-the-backend-repo.html
+  - /chapters/initialize-the-frontend-repo.html
+comments_id: 
 ---
 
 Before we start working on our app, let's create a GitHub repository for this project. It's a good way to store our code and we'll use this repository later to automate deploying our app.

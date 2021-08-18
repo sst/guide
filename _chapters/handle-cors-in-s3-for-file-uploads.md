@@ -1,12 +1,56 @@
 ---
 layout: post
 title: Handle CORS in S3 for File Uploads
-date: 2020-10-26 00:00:00
+date: 2021-08-17 00:00:00
 lang: en 
 ref: handle-cors-in-s3-for-file-uploads
-description: In this chapter we'll be configuring CORS (or cross-origin resource sharing) for our AWS S3 bucket. This will allow the users of our React web app to upload files directly to our S3 bucket. Even though they'll be hosted on two different domains.
+description: 
 comments_id: handle-cors-in-s3-for-file-uploads/2174
 ---
+
+In the notes app we'll be building, users will be uploading files to the bucket we just created. And since our app will be served through our custom domain, it'll be communicating across domains while it does the uploads. By default, S3 does not allow its resources to be accessed from a different domain. However, cross-origin resource sharing (CORS) defines a way for client web applications that are loaded in one domain to interact with resources in a different domain. Let's enable CORS for our S3 bucket.
+
+{%change%} Replace the following line in `lib/StorageStack.js`.
+
+``` js
+    this.bucket = new sst.Bucket(this, "Uploads");
+```
+
+{%change%} With this.
+
+``` js
+    this.bucket = new sst.Bucket(this, "Uploads", {
+      s3Bucket: {
+        // Allow client side access to the bucket from a different domain
+        cors: [
+          {
+            maxAge: 3000,
+            allowedOrigins: ["*"],
+            allowedHeaders: ["*"],
+            allowedMethods: ["GET", "PUT", "POST", "DELETE", "HEAD"],
+          },
+        ],
+      },
+    });
+```
+
+Note that, you can customize this configuration to use your own domain or a list of domains when you use this in production. We'll use these default settings for now.
+
+### Commit the Changes
+
+{%change%} Let's commit our backend code and push it to GitHub.
+
+``` bash
+$ git add .
+$ git commit -m "Enabling CORS"
+$ git push
+```
+
+Now we are ready to use our serverless backend to create our frontend React app!
+
+----
+
+TODO: MOVE OLD SECTION
 
 In the notes app we'll be building, users will be uploading files to the bucket we just created. And since our app will be served through our custom domain, it'll be communicating across domains while it does the uploads. By default, S3 does not allow its resources to be accessed from a different domain. However, cross-origin resource sharing (CORS) defines a way for client web applications that are loaded in one domain to interact with resources in a different domain. Let's enable CORS for our S3 bucket.
 

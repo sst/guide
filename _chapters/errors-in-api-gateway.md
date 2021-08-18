@@ -114,27 +114,28 @@ The access log combined with the Sentry error details should tell us what we nee
 
 And that covers all the major types of Serverless errors and how to debug them.
 
-### Remove the Faulty Code
+### Rollback the Changes
 
-Let's cleanup all the faulty code.
-
-{%change%} In `src/containers/Home.js` replace the `loadNotes()` function with the original:
-
-``` javascript
-function loadNotes() {
-  return API.get("notes", "/notes");
-}
-```
-
-Commit and push the code.
+{%change%} Let's revert all the faulty code that we created.
 
 ``` bash
-$ git add .
-$ git commit -m "Reverting faulty code"
-$ git push
+$ git checkout master
+$ git branch -D debug
 ```
 
-Head over to your Seed dashboard and deploy it.
+And rollback the prod build in Seed. Click on **Activity** in the Seed dashboard.
+
+![Click activity in Seed](/assets/monitor-debug-errors/click-activity-in-seed.png)
+
+Then click on **prod** over on the right. This shows us all the deployments made to our prod stage.
+
+![Click on prod activity in Seed](/assets/monitor-debug-errors/click-on-prod-activity-in-seed.png)
+
+Scroll down to the last deployment from the `master` branch, past all the ones made from the `debug` branch. Hit **Rollback**.
+
+![Rollback on prod build in Seed](/assets/monitor-debug-errors/rollback-on-prod-build-in-seed.png)
+
+This will rollback our app to the state it was in before we deployed all of our faulty code.
 
 Now you are all set to go live with your brand new full-stack serverless app!
 
