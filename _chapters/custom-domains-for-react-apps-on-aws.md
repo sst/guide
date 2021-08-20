@@ -13,36 +13,38 @@ In the previous chapter we configured a custom domain for our serverless API. TO
 {%change%} In the `lib/FrontendStack.js` add the following below the `new sst.ReactStaticSite(` line.
 
 ``` js
-customDomain: {
-  domainName:
-    scope.stage === "prod"
-      ? "my-serverless-app.com"
-      : `${scope.stage}.my-serverless-app.com`,
-  domainAlias: scope.stage === "prod" ? "www.my-serverless-app.com" : undefined,
-},
+customDomain:
+  scope.stage === "prod"
+    ? {
+        domainName: "my-serverless-app.com",
+        domainAlias: "wwww.my-serverless-app.com",
+      }
+    : undefined,
 ```
 
-Just like the API case, we want to use the given custom domain **if** we are deploying to the `prod` stage. This means that when we are using our app locally, it won't be using the custom domain. Of course change this if you'd like to use a custom domain locally as well. You can use something like `dev.my-serverless-app.com`.
+Just like the API case, we want to use the given custom domain **if** we are deploying to the `prod` stage. This means that when we are using our app locally, it won't be using the custom domain.
 
-Just like the API, we want to use the custom domain `my-serverless-app.com` **if** we are deploying to the `prod` stage. For all other stages we want to base it on the stage name. So for `dev`, it'll be `dev.my-serverless-app.com`.
+Of course change this if you'd like to use a custom domain locally as well. You can use something like `${scope.stage}.my-serverless-app.com`. So for `dev` it'll be `dev.my-serverless-app.com`.
 
 The `domainAlias` prop is necessary because we want visitors of `www.my-serverless-app.com` to be redirected to the URL we want to use. It's a good idea to support both the `www.` and root versions of our domain. You can switch these around so that the root domain redirects to the `www.` version as well.
 
-We don't need to set the `domainAlias` for the non-prod versions because we don't need `www.` versions for those.
+You won't need to set the `domainAlias` for the non-prod versions because we don't need `www.` versions for those.
 
 We need to use the custom domain URL of our API in our React app.
 
 {%change%} Find the following line in `lib/FrontendStack.js`.
 
 ``` js
-        REACT_APP_API_URL: api.url,
+REACT_APP_API_URL: api.url,
 ```
 
 {%change%} And replace it with.
 
 ``` js
-        REACT_APP_API_URL: api.customDomainUrl || api.url,
+REACT_APP_API_URL: api.customDomainUrl || api.url,
 ```
+
+Note that, if you are going to use a custom domain locally, you might need to remove your app (`npx sst remove`) first and deploy it again. This is because CDK doesn't allow you to change these references dynamically.
 
 We also need to update the outputs of our frontend stack.
 

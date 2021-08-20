@@ -47,7 +47,7 @@ Let's add a new route for the get note API.
 {%change%} Add the following below the `POST /notes` route in `lib/ApiStack.js`.
 
 ``` js
-        "GET    /notes/{id}": "src/get.main",
+"GET    /notes/{id}": "src/get.main",
 ```
 
 ### Deploy our changes
@@ -62,7 +62,7 @@ You should see that the API stack is being updated.
 Stack dev-notes-api
   Status: deployed
   Outputs:
-    ApiEndpoint: https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com
+    ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
 ```
 
 ### Test the API
@@ -72,7 +72,7 @@ Let's test the get notes API. In the previous chapter we tested our create note 
 {%change%} Run the following in your terminal.
 
 ``` bash
-$ curl https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com/notes/bf586970-1007-11eb-a17f-a5105a0818d3
+$ curl https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes/bf586970-1007-11eb-a17f-a5105a0818d3
 ```
 
 Make sure to replace the id at the end of the URL with the `noteId` that created previously.
@@ -81,11 +81,8 @@ Since we are making a simple GET request, we could also go to this URL directly 
 
 The response should look something like this.
 
-``` bash
-{
-    "statusCode": 200,
-    "body": "{\"attachment\":\"hello.jpg\",\"content\":\"hello world\",\"createdAt\":1603157777941,\"noteId\":\"a63c5450-1274-11eb-81db-b9d1e2c85f15\",\"userId\":\"123\"}"
-}
+``` json
+{"attachment":"hello.jpg","content":"Hello World","createdAt":1629336889054,"noteId":"a46b7fe0-008d-11ec-a6d5-a1d39a077784","userId":"123"}
 ```
 
 Next, let’s create an API to list all the notes a user has.

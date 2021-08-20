@@ -20,7 +20,7 @@ Our Lambda functions often make API requests to interact with other services. In
 import handler from "./util/handler";
 import dynamoDb from "./util/dynamodb";
 
-export const main = handler(async (event, context) => {
+export const main = handler(async (event) => {
   const params = {
     TableName: process.env.tableName,
     // 'Key' defines the partition key and sort key of the item to be retrieved
@@ -86,7 +86,7 @@ function allocMem() {
   return bigList.concat(allocMem());
 }
 
-export const main = handler(async (event, context) => {
+export const main = handler(async (event) => {
   const params = {
     TableName: process.env.tableName,
     // 'Key' defines the partition key and sort key of the item to be retrieved

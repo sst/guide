@@ -17,7 +17,7 @@ We'll be adding to the `StorageStack` that we created in the last chapter.
 
 ### Add to the stack
 
-{%change%} Add the following below the `new sst.Table` definition in `lib/StorageStack.js`.
+{%change%} Add the following above the `sst.Table` definition in `lib/StorageStack.js`.
 
 ``` js
 // Create an S3 bucket
@@ -33,7 +33,7 @@ This creates a new S3 bucket using the SST [`Bucket`](https://docs.serverless-st
   table;
 ```
 
-{%change%} And add the following below it.
+{%change%} And add the following above it.
 
 ``` js
   // Public reference to the bucket

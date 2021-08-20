@@ -32,7 +32,7 @@ Let's trigger an error in `get.js` by commenting out the `noteId` field in the D
 import handler from "./util/handler";
 import dynamoDb from "./util/dynamodb";
 
-export const main = handler(async (event, context) => {
+export const main = handler(async (event) => {
   const params = {
     TableName: process.env.tableName,
     // 'Key' defines the partition key and sort key of the item to be retrieved
@@ -73,7 +73,6 @@ Head over to your Seed dashboard and select the **prod** stage in the pipeline a
 
 Type in the **debug** branch and hit **Deploy**.
 
-TOOD: UPDATE SS AND FILENAME
 ![Select branch and confirm deploy in Seed](/assets/monitor-debug-errors/select-branch-and-confirm-deploy-in-seed.png)
 
 This will deploy our faulty code to production.

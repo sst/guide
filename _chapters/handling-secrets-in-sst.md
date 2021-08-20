@@ -12,7 +12,7 @@ In the previous chapter TODO: LINK TO PREVIOUS CHAPTER, we created a Stripe acco
 
 We are going to create a `.env` file to store this.
 
-{%change%} Create a new file in `lib/.env.local` with the following.
+{%change%} Create a new file in `.env.local` with the following.
 
 ``` bash
 STRIPE_SECRET_KEY=STRIPE_TEST_SECRET_KEY
@@ -35,25 +35,12 @@ Also, since we won't be committing this file to Git, we'll need to add this to o
 
 Next, let's add these to our functions.
 
-{%change%} Replace the following in `lib/ApiStack.js`:
-
-``` js
-      defaultFunctionProps: {
-        environment: {
-          TABLE_NAME: table.tableName,
-        },
-      },
-```
+{%change%} Add the following below the `TABLE_NAME: table.tableName,` line in `lib/ApiStack.js`:
 
 {%change%} With this instead.
 
 ``` js
-      defaultFunctionProps: {
-        environment: {
-          TABLE_NAME: table.tableName,
-          STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
-        },
-      },
+STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
 ```
 
 We are taking the environment variables in our SST app and passing it into our API.
@@ -70,7 +57,7 @@ You should see that the API stack is being updated.
 Stack dev-notes-api
   Status: deployed
   Outputs:
-    ApiEndpoint: https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com
+    ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
 ```
 
 Now we are ready to add an API to handle billing.

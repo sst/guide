@@ -14,7 +14,7 @@ We are going to create a single page app using [React.js](https://facebook.githu
 
 ### Create a New React App
 
-{%change%} Run the following command in your project root
+{%change%} Run the following command in your project root.
 
 ``` bash
 $ npx create-react-app frontend --use-npm
@@ -148,7 +148,14 @@ You should see that the new frontend stack has been deployed.
 Stack dev-notes-frontend
   Status: deployed
   Outputs:
-    SiteUrl: https://d1aecurn5fuqyh.cloudfront.net
+    SiteUrl: https://d3j4c16hczgtjw.cloudfront.net
+  ReactSite:
+    REACT_APP_API_URL: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
+    REACT_APP_BUCKET: dev-notes-storage-uploadsbucketc4b27cc7-xmqzx69e5bpt
+    REACT_APP_IDENTITY_POOL_ID: us-east-1:2d7b425d-eb44-4c42-afbd-645018b37a27
+    REACT_APP_REGION: us-east-1
+    REACT_APP_USER_POOL_CLIENT_ID: jbf2qe4h17tl2u94fntkjii7n
+    REACT_APP_USER_POOL_ID: us-east-1_gll8EbWrr
 ```
 
 ### Start the React App

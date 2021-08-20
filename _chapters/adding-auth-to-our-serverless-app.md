@@ -122,7 +122,7 @@ export default function main(app) {
     table: storageStack.table,
   });
 
-  const authStack = new AuthStack(app, "auth", {
+  new AuthStack(app, "auth", {
     api: apiStack.api,
     bucket: storageStack.bucket,
   });
@@ -141,25 +141,10 @@ import AuthStack from "./AuthStack";
 
 We also need to enable authentication in our API.
 
-{%change%} Replace the following line in `lib/ApiStack.js`.
+{%change%} Add the following above the `defaultFunctionProps: {` line in `lib/ApiStack.js`.
 
 ``` js
-      defaultFunctionProps: {
-        environment: {
-          TABLE_NAME: table.tableName,
-        },
-      },
-```
-
-{%change%} With the following.
-
-``` js
-      defaultAuthorizationType: "AWS_IAM",
-      defaultFunctionProps: {
-        environment: {
-          TABLE_NAME: table.tableName,
-        },
-      },
+defaultAuthorizationType: "AWS_IAM",
 ```
 
 This tells our API that we want to use `AWS_IAM` across all our routes.

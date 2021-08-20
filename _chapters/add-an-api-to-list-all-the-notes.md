@@ -18,7 +18,7 @@ Now we are going to add an API that returns a list of all the notes a user has. 
 import handler from "./util/handler";
 import dynamoDb from "./util/dynamodb";
 
-export const main = handler(async (event) => {
+export const main = handler(async () => {
   const params = {
     TableName: process.env.TABLE_NAME,
     // 'KeyConditionExpression' defines the condition for the query
@@ -48,7 +48,7 @@ Let's add the route for this new endpoint.
 {%change%} Add the following above the `POST /notes` route in `lib/ApiStack.js`.
 
 ``` js
-        "GET    /notes": "src/list.main",
+"GET    /notes": "src/list.main",
 ```
 
 ### Deploy our changes
@@ -63,7 +63,7 @@ You should see that the API stack is being updated.
 Stack dev-notes-api
   Status: deployed
   Outputs:
-    ApiEndpoint: https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com
+    ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
 ```
 
 ### Test the API
@@ -73,18 +73,15 @@ Let's test list all notes API.
 {%change%} Run the following in your terminal.
 
 ``` bash
-$ curl https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com/notes
+$ curl https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes
 ```
 
 Since we are making a simple GET request, we could also go to this URL directly in your browser.
 
 The response should look something like this.
 
-``` bash
-{
-    "statusCode": 200,
-    "body": "[{\"attachment\":\"hello.jpg\",\"content\":\"hello world\",\"createdAt\":1602891322039,\"noteId\":\"42244c70-1008-11eb-8be9-4b88616c4b39\",\"userId\":\"123\"}]"
-}
+``` json
+[{"attachment":"hello.jpg","content":"Hello World","createdAt":1629336889054,"noteId":"a46b7fe0-008d-11ec-a6d5-a1d39a077784","userId":"123"}]
 ```
 
 Next we are going to add an API to update a note.

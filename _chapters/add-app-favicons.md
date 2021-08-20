@@ -16,7 +16,7 @@ For our example, we are going to start with a simple image and generate the vari
 
 <img alt="App Icon" width="130" height="130" src="/assets/scratch-icon.png" />
 
-To ensure that our icon works for most of our targeted platforms we'll use a service called the [Favicon Generator](http://realfavicongenerator.net).
+To ensure that our icon works for most of our targeted platforms we'll use a service called the [**Favicon Generator**](http://realfavicongenerator.net).
 
 Click **Select your Favicon picture** to upload our icon.
 
@@ -39,8 +39,7 @@ Let's remove the old icons files.
 {%change%} Run the following from our `frontend/` directory.
 
 ``` bash
-$ rm public/logo192.png
-$ rm public/logo512.png
+$ rm public/logo192.png public/logo512.png
 ```
 
 {%change%} Then replace the contents of `public/manifest.json` with the following:

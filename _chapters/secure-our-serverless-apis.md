@@ -47,25 +47,25 @@ Let's change that.
 {%change%} Replace the above line in `src/create.js` with.
 
 ``` javascript
-userId: event.requestContext.identity.cognitoIdentityId, // The id of the author
+userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
 ```
 
 {%change%} Do the same in the `src/get.js`.
 
 ``` javascript
-userId: event.requestContext.identity.cognitoIdentityId, // The id of the author
+userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
 ```
 
 {%change%} And in the `src/update.js`.
 
 ``` javascript
-userId: event.requestContext.identity.cognitoIdentityId, // The id of the author
+userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
 ```
 
 {%change%} In `src/delete.js` as well.
 
 ``` javascript
-userId: event.requestContext.identity.cognitoIdentityId, // The id of the author
+userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
 ```
 
 {%change%} In `src/list.js` find this line instead.
@@ -77,7 +77,13 @@ userId: event.requestContext.identity.cognitoIdentityId, // The id of the author
 {%change%} And replace it with.
 
 ``` javascript
-":userId": event.requestContext.identity.cognitoIdentityId,
+":userId": event.requestContext.authorizer.iam.cognitoIdentity.identityId,
+```
+
+{%change%} Also, include `event` in the function arguments.
+
+``` javascript
+export const main = handler(async (event) => {
 ```
 
 Keep in mind that the `userId` above is the Federated Identity id (or Identity Pool user id). This is not the user id that is assigned in our User Pool. If you want to use the user's User Pool user Id instead, have a look at the [Mapping Cognito Identity Id and User Pool Id]({% link _chapters/mapping-cognito-identity-id-and-user-pool-id.md %}) chapter.

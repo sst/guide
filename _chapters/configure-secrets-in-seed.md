@@ -10,28 +10,55 @@ comments_id: configure-secrets-in-seed/176
 
 Before we can do our first deployment, we need to make sure to configure our secret environment variables. If you'll recall, we have explicitly not stored these in our code (or in Git). TODO:LINK TO SECRETS CHAPTER This means that if somebody else on our team needs to deploy, we'll need to pass the `.env.local` file around. Instead we'll configure [Seed](https://seed.run) to deploy with our secrets for us.
 
-To do that, hit **dev** in your app **Settings**.
+We are also going configure Seed to deploy our app to production when we push any changes to the `main` branch.
 
-![Select dev stage in Settings screenshot](/assets/part2/select-dev-stage-in-settings.png)
+By default, Seed sets you up with two environments, `dev` and `prod`. Where pushing to the `main` branch would deploy to `dev`. And you'll need to promote your changes to `prod`. To keep things simple, we are only going to use the `prod` stage here and deploy directly to it.
 
+A common workflow for teams is to:
+
+1. Have developers use their own local _dev_ environment and Git branches.
+2. Merge their changes to the _master_ branch.
+3. The _master_ branch auto-deploys to a _staging_ environment.
+4. Once the changes are tested, they are manually promoted to the _production_ environment.
+
+But we are going to keep things simple here and deploy any changes to the `main` branch directly to `prod`.
+
+To confgiure the above, click **dev** in your app **Settings**.
+
+![Select dev stage in Settings](/assets/part2/select-dev-stage-in-settings.png)
+
+Here **turn off the Auto-deploy** setting.
+
+![Turn off auto-deploy for dev](/assets/part2/turn-off-auto-deploy-for-dev.png)
+
+<!--
 Here click **Show Env Variables**.
 
-![Show dev env variables settings screenshot](/assets/part2/show-dev-env-variables-settings.png)
+![Show dev env variables settings](/assets/part2/show-dev-env-variables-settings.png)
 
-And type in `STRIPE_SECRET_KEY` as the **Key** and the value should be the `STRIPE_TEST_SECRET_KEY` back from the [Load secrets from env.yml]({% link _chapters/load-secrets-from-env.md %}) chapter. Hit **Add** to save your secret key.
+And type in `STRIPE_SECRET_KEY` as the **Key**. We saved this in a `.env.local` file in our project root back from the [Load secrets from env.yml]({% link _chapters/load-secrets-from-env.md %}) chapter. Hit **Add** to save your secret key. TODO: FIX CHAPTER LINK
 
-![Add secret dev environment variable screenshot](/assets/part2/add-secret-dev-environment-variable.png)
+![Add secret dev environment variable](/assets/part2/add-secret-dev-environment-variable.png)
+-->
 
-Next we need to configure our secrets for the `prod` stage. Head over to the **prod** stage in your app **Settings**.
+Then head over to the **prod** stage in your app **Settings**.
 
-![Select prod stage in Settings screenshot](/assets/part2/select-prod-stage-in-settings.png)
+![Select prod stage in Settings](/assets/part2/select-prod-stage-in-settings.png)
 
-Click **Show Env Variables**.
+Here **turn on the Auto-deploy** setting. 
 
-![Show prod env variables settings screenshot](/assets/part2/show-prod-env-variables-settings.png)
+![Turn on auto-deploy for prod](/assets/part2/turn-on-auto-deploy-for-prod.png)
 
-And type in `STRIPE_SECRET_KEY` as the **Key** and the value should be the `STRIPE_TEST_SECRET_KEY` back from the [Load secrets from env.yml]({% link _chapters/load-secrets-from-env.md %}) chapter. Hit **Add** to save your secret key.
+You'll be prompted to select a branch. Select **main** and click **Enable**.
 
-![Add secret prod environment variable screenshot](/assets/part2/add-secret-prod-environment-variable.png)
+![Select branch to auto-deploy to prod](/assets/part2/select-branch-to-auto-deploy-to-prod.png)
+
+Next, scroll down and click **Show Env Variables**.
+
+![Show prod env variables settings](/assets/part2/show-prod-env-variables-settings.png)
+
+And type in `STRIPE_SECRET_KEY` as the **Key**. We saved this in a `.env.local` file in our project root back from the [Load secrets from env.yml]({% link _chapters/load-secrets-from-env.md %}) chapter. Hit **Add** to save your secret key. TODO: FIX CHAPTER LINK
+
+![Add secret prod environment variable](/assets/part2/add-secret-prod-environment-variable.png)
 
 Next, we'll trigger our first deployment on Seed.

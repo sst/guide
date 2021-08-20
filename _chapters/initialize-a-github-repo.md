@@ -4,7 +4,6 @@ title: Initialize a GitHub Repo
 date: 2021-08-17 18:00:00
 lang: en
 description: For this guide we are going to add our SST app to a Git repo. We do this so that we can automate our deployments later by just pushing to GitHub.
-code: backend
 ref: initialize-a-github-repo
 redirect_from:
   - /chapters/initialize-the-backend-repo.html
@@ -20,7 +19,7 @@ Let's head over to [GitHub](https://github.com). Make sure you are signed in and
 
 ![Create new GitHub repository screenshot](/assets/part2/create-new-github-repository.png)
 
-Give your repository a name, in our case we are calling it `serverless-stack-api`. Next hit **Create repository**.
+Give your repository a name, in our case we are calling it `demo-notes-app`. Next hit **Create repository**.
 
 ![Name new GitHub repository screenshot](/assets/part2/name-new-github-repository.png)
 
@@ -31,7 +30,7 @@ Once your repository is created, copy the repository URL. We'll need this soon.
 In our case the URL is:
 
 ``` txt
-https://github.com/jayair/serverless-stack-api.git
+https://github.com/serverless-stack/demo-notes-app.git
 ```
 
 ### Initialize Your New Repo
@@ -57,6 +56,7 @@ $ git commit -m "First commit"
 {%change%} Link it to the repo you created on GitHub.
 
 ``` bash
+$ git branch -M main
 $ git remote add origin REPO_URL
 ```
 
@@ -69,7 +69,7 @@ $ git remote -v
 {%change%} Finally, let's push our first commit to GitHub using:
 
 ``` bash
-$ git push -u origin master
+$ git push -u origin main
 ```
 
 Now we are ready to build our backend!

@@ -59,8 +59,7 @@ Also, let's remove some unused template files.
 {%change%} Run the following in your React `frontend/` directory.
 
 ``` bash
-$ rm src/logo.svg
-$ rm src/App.test.js
+$ rm src/logo.svg src/App.test.js
 ```
 
 ### Add the Home container

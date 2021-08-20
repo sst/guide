@@ -4,6 +4,7 @@ title: Auth in serverless apps
 date: 2021-08-17 00:00:00
 lang: en
 description: 
+redirect_from: /chapters/handling-auth-in-serverless-apis.html
 ref: auth-in-serverless-apps
 comments_id: 
 ---

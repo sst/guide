@@ -3,7 +3,7 @@ layout: post
 title: Errors in API Gateway
 date: 2020-04-03 00:00:00
 lang: en
-description: In this chapter we'll look at how to debug errors that happen only in API Gateway in your Serverless app. These errors are only logged to your API Gateway access logs, and not your Lambda logs in CloudWatch.
+description: In this chapter we'll look at how to debug errors that happen only in API Gateway in your serverless app. These errors are only logged to your API Gateway access logs, and not your Lambda logs in CloudWatch.
 comments_id: errors-in-api-gateway/1728
 ref: errors-in-api-gateway
 ---
@@ -52,7 +52,10 @@ What happens here is that:
 - API Gateway returns a `403` response.
 - The browser throws an error and does not continue to make the `GET` request.
 
-This means that our Lambda function was not invoked. So we'll need to check our API access logs instead.
+This means that our Lambda function was not invoked. And in the browser it fails as a CORS error.
+
+<!--
+So we'll need to check our API access logs instead.
 
 Click on **View Lambda logs or API logs** in your Seed dashboard.
 
@@ -67,6 +70,7 @@ You should see an `OPTIONS` request with path `/prod/invalid_path`. You'll notic
 ![Invalid API path request error in Seed](/assets/monitor-debug-errors/invalid-api-path-request-error-in-seed.png)
 
 This will tell you that for some reason our frontend is making a request to an invalid API path. We can use the error details in Sentry to figure out where that request is being made.
+-->
 
 ### Invalid API method
 
@@ -106,28 +110,30 @@ Here's what's going on behind the scenes:
   - `POST` request on `/notes` to create a new note
 - The browser reports the error because the request method `PUT` is not allowed.
 
+Similar as to the case above, our Lambda function was not invoked. And in the browser it fails as a CORS error.
+
+<!--
 So in this case over on Seed, you'll only see an `OPTIONS` request in your access log, and not the `PUT` request.
 
 ![Invalid API method request error in Seed](/assets/monitor-debug-errors/invalid-api-method-request-error-in-seed.png)
 
 The access log combined with the Sentry error details should tell us what we need to do to fix the error. 
+-->
 
-And that covers all the major types of Serverless errors and how to debug them.
+With that we've covered all the major types of serverless errors and how to debug them.
 
 ### Rollback the Changes
 
 {%change%} Let's revert all the faulty code that we created.
 
 ``` bash
-$ git checkout master
+$ git checkout main
 $ git branch -D debug
 ```
 
-And rollback the prod build in Seed. Click on **Activity** in the Seed dashboard.
+And rollback the prod build in Seed.
 
-![Click activity in Seed](/assets/monitor-debug-errors/click-activity-in-seed.png)
-
-Then click on **prod** over on the right. This shows us all the deployments made to our prod stage.
+Head to the **Activity** tab in the Seed dashboard. Then click on **prod** over on the right. This shows us all the deployments made to our prod stage.
 
 ![Click on prod activity in Seed](/assets/monitor-debug-errors/click-on-prod-activity-in-seed.png)
 

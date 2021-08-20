@@ -23,7 +23,7 @@ import dynamoDb from "./util/dynamodb";
 // Some faulty code
 dynamoDb.notExist();
 
-export const main = handler(async (event, context) => {
+export const main = handler(async (event) => {
   const params = {
     TableName: process.env.tableName,
     // 'Key' defines the partition key and sort key of the item to be retrieved
@@ -78,7 +78,7 @@ import handler from "./util/handler";
 import dynamoDb from "./util/dynamodb";
 
 // Wrong handler function name
-export const main2 = handler(async (event, context) => {
+export const main2 = handler(async (event) => {
   const params = {
     TableName: process.env.tableName,
     // 'Key' defines the partition key and sort key of the item to be retrieved
@@ -127,7 +127,7 @@ Let's cleanup all the faulty code.
 import handler from "./util/handler";
 import dynamoDb from "./util/dynamodb";
 
-export const main = handler(async (event, context) => {
+export const main = handler(async (event) => {
   const params = {
     TableName: process.env.tableName,
     // 'Key' defines the partition key and sort key of the item to be retrieved

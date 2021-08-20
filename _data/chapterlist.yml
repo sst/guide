@@ -82,8 +82,8 @@ add-auth-stack:
 handling-secrets:
   title: Working with secrets
   chapters:
-    - page: Create a Stripe account
-      url: /chapters/create-a-stripe-account.html
+    - page: Setup a Stripe account
+      url: /chapters/setup-a-stripe-account.html
     - page: Handling secrets in SST
       url: /chapters/handling-secrets-in-sst.html
     - page: Add an API to handle billing
@@ -109,8 +109,6 @@ setup-react:
     - page: Create a new React.js app
       url: /chapters/create-a-new-reactjs-app.html
       subchapters:
-        - page: Initialize the frontend repo
-          url: /chapters/initialize-the-frontend-repo.html
         - page: Add app favicons
           url: /chapters/add-app-favicons.html
         - page: Set up custom fonts
@@ -373,8 +371,6 @@ setup-serverless:
           url: /chapters/add-support-for-es6-and-typescript.html
     - page: Deploy your Hello World API
       url: /chapters/deploy-your-hello-world-api.html
-    - page: Initialize the backend repo
-      url: /chapters/initialize-the-backend-repo.html
 
 setup-backend:
   title: Create your AWS resources
@@ -387,8 +383,6 @@ setup-backend:
 build-api:
   title: Building a Serverless API
   chapters:
-    - page: Review our app architecture [SKIP]
-      url: /chapters/review-our-app-architecture.html
     - page: Add a create note API
       url: /chapters/add-a-create-note-api.html
     - page: Add a get note API
@@ -405,8 +399,6 @@ build-api:
 users-auth:
   title: Users and authentication
   chapters:
-    - page: Handling Auth in Serverless APIs [MERGE WITH NEXT CHAPTER]
-      url: /chapters/handling-auth-in-serverless-apis.html
     - page: Create a Cognito user pool
       url: /chapters/create-a-cognito-user-pool.html
       subchapters:
@@ -425,8 +417,6 @@ third-party-apis:
     - page: Working with 3rd party APIs
       url: /chapters/working-with-3rd-party-apis.html
       subchapters:
-        - page: Setup a Stripe account
-          url: /chapters/setup-a-stripe-account.html
         - page: Add a billing API
           url: /chapters/add-a-billing-api.html
     - page: Load secrets from .env

@@ -4,7 +4,6 @@ title: Setup an Error Boundary in React
 date: 2020-04-03 00:00:00
 lang: en
 description: In this chapter we look at how to handle unexpected errors in our React app using an Error Boundary component. It lets us catch any errors, log it to Sentry, and show a fallback UI.
-code: frontend_full
 comments_id: setup-an-error-boundary-in-react/1732
 ref: setup-an-error-boundary-in-react
 ---
@@ -127,6 +126,8 @@ Now in your browser you should see something like this.
 
 ![React error message](/assets/monitor-debug-errors/react-error-message.png)
 
+Note that, you'll need to have the SST local development environment (`npx sst start`) and React local environment (`npm run start`) running.
+
 While developing, React doesn't show your Error Boundary fallback UI by default. To view that, hit the **close** button on the top right.
 
 ![React Error Boundary fallback UI](/assets/monitor-debug-errors/react-error-boundary-fallback-ui.png)
@@ -169,4 +170,4 @@ $ git checkout .
 $ git push
 ```
 
-Next, let's look at how to handle errors in our Serverless app.
+Next, let's look at how to handle errors in our serverless app.

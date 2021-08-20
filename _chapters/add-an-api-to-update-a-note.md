@@ -55,7 +55,7 @@ Let's add a new route for the get note API.
 {%change%} Add the following below the `GET /notes/{id}` route in `lib/ApiStack.js`.
 
 ``` js
-        "PUT    /notes/{id}": "src/update.main",
+"PUT    /notes/{id}": "src/update.main",
 ```
 
 ### Deploy our changes
@@ -70,7 +70,7 @@ You should see that the API stack is being updated.
 Stack dev-notes-api
   Status: deployed
   Outputs:
-    ApiEndpoint: https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com
+    ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
 ```
 
 ### Test the API
@@ -85,7 +85,7 @@ Make sure to keep your local environment (`sst start`) running in another window
 $ curl -X PUT \
 -H 'Content-Type: application/json' \
 -d '{"content":"New World","attachment":"new.jpg"}' \
-https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com/notes/bf586970-1007-11eb-a17f-a5105a0818d3
+https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes/bf586970-1007-11eb-a17f-a5105a0818d3
 ```
 
 Make sure to replace the id at the end of the URL with the `noteId` from when we created our note. TODO: ADD LINK TO CREATE CHAPTER
@@ -94,13 +94,8 @@ Here we are making a PUT request to a note that we want to update. We are passin
 
 The response should look something like this.
 
-TODO: UPDATE THE CURL OUTPUT
-
-``` bash
-{
-    "statusCode": 200,
-    "body": "{\"status\":true}"
-}
+``` json
+{"status":true}
 ```
 
 Next we are going to add the API to delete a note given its id.

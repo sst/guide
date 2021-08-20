@@ -8,67 +8,46 @@ ref: deploying-through-seed
 comments_id: deploying-through-seed/177
 ---
 
-Now, we are ready to make our first deployment. You can either Git push a new change to master to trigger it. Or we can just go into the **dev** stage and hit the **Trigger Deploy** button.
+Now, we are almost ready to make our first deployment. Our app also contains a React app in the `frontend/` directory. We need to make sure to run an `npm install` in that directory.
 
-Let's do it through Git.
+Let's quickly add a build script to do that.
 
-{%change%} Go back to our project root and run the following.
+{%change%} Create a new file in your project root called `seed.yml` with.
 
-``` bash
-$ npm version patch
+``` yml
+before_build:
+  - cd frontend && npm install
 ```
 
-This is simply updating the NPM version for your project. It is a good way to keep track of the changes you are making to your project. And it also creates a quick Git commit for us.
+And let's commit and push this change.
 
 {%change%} Push the change using.
 
 ``` bash
+$ git add .
+$ git commit -m "Adding a seed build spec"
 $ git push
 ```
 
-Now if you head into the **dev** stage in Seed, you should see a build in progress. Now to see the build logs, you can click the **v1** link.
+Now if you head into the **prod** stage in Seed, you should see a build in progress. Now to see the build logs, you can click the **v1** link.
 
-![Seed dev build in progress](/assets/part2/seed-dev-build-in-progress.png)
+![Seed prod build in progress](/assets/part2/seed-prod-build-in-progress.png)
 
 Here you'll see the build taking place live. Click on the **notes** service that is being deployed.
 
-TODO: UPDATE SS AND FILENAME
-![Dev build page phase 1 in progress](/assets/part2/dev-build-page-phase-1-in-progress.png)
+![Prod build details](/assets/part2/prod-build-details.png)
 
 You'll see the build logs for the in progress build here.
 
-![Dev build logs in progress](/assets/part2/dev-build-logs-in-progress.png)
+![Prod build logs in progress](/assets/part2/prod-build-logs-in-progress.png)
 
 Notice the tests are being run as a part of the build.
 
-![Dev build run tests](/assets/part2/dev-build-run-tests.png)
+![Prod build run tests](/assets/part2/prod-build-run-tests.png)
 
-Once the build is complete, you'll notice the outputs with the API and frontend URLs.
+Once the build is complete, you'll notice all the stack outputs at the bottom.
 
-TODO: UPDATE SS AND FILENAME
-![Dev build infrastructure output](/assets/part2/dev-build-infrastructure-output.png)
-
-Now head over to the app home page. You'll notice that we are ready to promote to production.
-
-We have a manual promotion step so that you get a chance to review the changes and ensure that you are ready to push to production.
-
-Hit the **Promote** button.
-
-![Dev build ready to promote](/assets/part2/dev-build-ready-to-promote.png)
-
-This brings up a dialog that will generate a Change Set. It compares the resources that are being updated with respect to what you have in production. It's a great way to compare the infrastructure changes that are being promoted.
-
-![Review promote change set](/assets/part2/review-promote-change-set.png)
-
-Scroll down and hit **Promote to Production**.
-
-![Confirm promote dev build](/assets/part2/confirm-promote-dev-build.png)
-
-You'll notice that the build is being promoted to the **prod** stage.
-
-![prod build in progress](/assets/part2/prod-build-in-progress.png)
-
-Once complete, our app should be deployed to prod. We now have an automated workflow for building and deploying our full-stack serverless app.
+![Prod build stack outputs](/assets/part2/prod-build-stack-outputs.png)
 
 ### Test our app in production
 
@@ -78,7 +57,7 @@ Let's checkout our app in production.
 
 To give it a quick test, sign up for a new account and create a note.
 
-![Create a notes in production](/assets/part2/create-a-note-in-production.png)
+![Create notes in production](/assets/part2/create-notes-in-production.png)
 
 You can also test updating and removing a note. And also test out the billing page.
 

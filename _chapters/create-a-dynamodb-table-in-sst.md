@@ -102,8 +102,7 @@ There are a couple of files that came with our starter template, that we can now
 {%change%} Run the following in your project root.
 
 ``` bash
-$ rm lib/MyStack.js
-$ rm src/lambda.js
+$ rm lib/MyStack.js src/lambda.js
 ```
 
 Now that our database has been created, let's create an S3 bucket to handle file uploads.

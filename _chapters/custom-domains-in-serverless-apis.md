@@ -14,12 +14,12 @@ In the [previous chapter]({% link _chapters/purchase-a-domain-with-route-53.md %
 
 ``` js
 customDomain:
-  scope.stage === "prod"
-    ? "api.my-serverless-app.com"
-    : `api-${scope.stage}.my-serverless-app.com`,
+  scope.stage === "prod" ? "api.my-serverless-app.com" : undefined,
 ```
 
-This tells SST that we want to use the custom domain `api.my-serverless-app.com` **if** we are deploying to the `prod` stage. For all other stages we want to base it on the stage name. So for `dev` it'll be `api-dev.my-serverless-app.com`.
+This tells SST that we want to use the custom domain `api.my-serverless-app.com` **if** we are deploying to the `prod` stage. We are not setting one for our `dev` stage, or any other stage for that matter. We'll leave that as an exercise for you.
+
+We could for example, base it on the stage name, `api-${scope.stage}.my-serverless-app.com`. So for `dev` it might be `api-dev.my-serverless-app.com`.
 
 We also need to update the outputs of our API stack.
 

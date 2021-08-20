@@ -75,7 +75,7 @@ Let's add this new stack to the rest of our app.
 export default function main(app) {
   const storageStack = new StorageStack(app, "storage");
 
-  const apiStack = new ApiStack(app, "api", {
+  new ApiStack(app, "api", {
     table: storageStack.table,
   });
 }
@@ -101,7 +101,7 @@ import AWS from "aws-sdk";
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-export async function main(event, context) {
+export async function main(event) {
   // Request body is passed in as a JSON encoded string in 'event.body'
   const data = JSON.parse(event.body);
 
@@ -166,7 +166,7 @@ You should see that the new API stack has been deployed.
 Stack dev-notes-api
   Status: deployed
   Outputs:
-    ApiEndpoint: https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com
+    ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
 ```
 
 It includes the API endpoint that we created.
@@ -183,20 +183,15 @@ Make sure to keep your local environment (`sst start`) running in another window
 $ curl -X POST \
 -H 'Content-Type: application/json' \
 -d '{"content":"Hello World","attachment":"hello.jpg"}' \
-https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com/notes
+https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes
 ```
 
 Here we are making a POST request to our create note API. We are passing in the `content` and `attachment` as a JSON string. In this case the attachment is a made up file name. We haven't uploaded anything to S3 yet.
 
 The response should look something like this.
 
-TODO: UPDATE THE CURL OUTPUT
-
-``` bash
-{
-    "statusCode": 200,
-    "body": "{\"userId\":\"123\",\"noteId\":\"bf586970-1007-11eb-a17f-a5105a0818d3\",\"content\":\"hello world\",\"attachment\":\"hello.jpg\",\"createdAt\":1602891102599}"
-}
+``` json
+{"userId":"123","noteId":"a46b7fe0-008d-11ec-a6d5-a1d39a077784","content":"Hello World","attachment":"hello.jpg","createdAt":1629336889054}
 ```
 
 Make a note of the `noteId` in the response. We are going to use this newly created note in the next chapter.
@@ -247,7 +242,7 @@ Let's start by creating the `dynamodb` util.
 $ mkdir src/util
 ```
 
-{%change%} Create a `util/dynamodb.js` file with:
+{%change%} Create a `src/util/dynamodb.js` file with:
 
 ``` javascript
 import AWS from "aws-sdk";
@@ -265,7 +260,7 @@ export default {
 
 Here we are creating a convenience object that exposes the DynamoDB client methods that we are going to need in this guide.
 
-{%change%} Also create a `util/handler.js` file with the following.
+{%change%} Also create a `src/util/handler.js` file with the following.
 
 ``` javascript
 export default function handler(lambda) {
@@ -277,6 +272,7 @@ export default function handler(lambda) {
       body = await lambda(event, context);
       statusCode = 200;
     } catch (e) {
+      console.error(e);
       body = { error: e.message };
       statusCode = 500;
     }

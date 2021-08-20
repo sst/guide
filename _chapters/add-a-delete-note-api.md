@@ -49,6 +49,7 @@ This makes a DynamoDB `delete` call with the `userId` & `noteId` key to delete t
     events:
       - http:
           path: notes/{id}
+          cors: true
           method: delete
 ```
 

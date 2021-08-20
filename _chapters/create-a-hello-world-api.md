@@ -65,12 +65,12 @@ dev-notes-my-stack: deploying...
 Stack dev-notes-my-stack
   Status: deployed
   Outputs:
-    ApiEndpoint: https://uzuwvg7khc.execute-api.us-east-1.amazonaws.com
+    ApiEndpoint: https://guksgkkr4l.execute-api.us-east-1.amazonaws.com
 ```
 
 The `ApiEndpoint` is the API we just created. Let's test our endpoint. If you open the endpoint URL in your browser, you should see _Hello World!_ being printed out.
 
-![Serverless Hello World API invoked](/assets/sst/serverless-hello-world-api-invoked.png)
+![Serverless Hello World API invoked](/assets/part2/sst-hello-world-api-invoked.png)
 
 Note that when you hit this endpoint the Lambda function is being run locally.
 

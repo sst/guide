@@ -55,7 +55,6 @@ return (
 {%change%} And add the following to the header.
 
 ``` js
-import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import BillingForm from "../components/BillingForm";
 import "./Settings.css";

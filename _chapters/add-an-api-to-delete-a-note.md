@@ -18,9 +18,9 @@ Finally, we are going to create an API that allows a user to delete a given note
 import handler from "./util/handler";
 import dynamoDb from "./util/dynamodb";
 
-export const main = handler(async (event, context) => {
+export const main = handler(async (event) => {
   const params = {
-    TableName: process.env.tableName,
+    TableName: process.env.TABLE_NAME,
     // 'Key' defines the partition key and sort key of the item to be removed
     Key: {
       userId: "123", // The id of the author
@@ -43,7 +43,7 @@ Let's add a new route for the delete note API.
 {%change%} Add the following below the `PUT /notes{id}` route in `lib/ApiStack.js`.
 
 ``` js
-        "DELETE /notes/{id}": "src/delete.main",
+"DELETE /notes/{id}": "src/delete.main",
 ```
 
 ### Deploy our changes
@@ -58,7 +58,7 @@ You should see that the API stack is being updated.
 Stack dev-notes-api
   Status: deployed
   Outputs:
-    ApiEndpoint: https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com
+    ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
 ```
 
 ### Test the API
@@ -70,20 +70,15 @@ Let's test the delete note API.
 Make sure to keep your local environment (`sst start`) running in another window.
 
 ``` bash
-$ curl -X DELETE https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com/notes/bf586970-1007-11eb-a17f-a5105a0818d3
+$ curl -X DELETE https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes/bf586970-1007-11eb-a17f-a5105a0818d3
 ```
 
 Make sure to replace the id at the end of the URL with the `noteId` from when we created our note. TODO: ADD LINK TO CREATE CHAPTER
 
 Here we are making a DELETE request to the note that we want to delete. The response should look something like this.
 
-TODO: UPDATE THE CURL OUTPUT
-
-``` bash
-{
-    "statusCode": 200,
-    "body": "{\"status\":true}"
-}
+``` json
+{"status":true}
 ```
 
 ### Commit the changes

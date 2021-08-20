@@ -1,10 +1,10 @@
 ---
 layout: post
-title: 
+title: Add an API to handle billing
 date: 2021-08-17 00:00:00
 lang: en
 description: 
-ref: 
+ref: add-an-api-to-handle-billing
 comments_id: 
 ---
 
@@ -80,7 +80,7 @@ Let's add a new route for our billing API.
 {%change%} Add the following below the `DELETE /notes/{id}` route in `lib/ApiStack.js`.
 
 ``` js
-        "POST   /billing": "src/billing.main",
+"POST   /billing": "src/billing.main",
 ```
 
 ### Deploy our changes
@@ -95,7 +95,7 @@ You should see that the API stack is being updated.
 Stack dev-notes-api
   Status: deployed
   Outputs:
-    ApiEndpoint: https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com
+    ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
 ```
 
 Now before we can test our API we need to load our Stripe secret key in our environment.
@@ -142,12 +142,7 @@ If the command is successful, the response will look similar to this.
 Authenticating with User Pool
 Getting temporary credentials
 Making API request
-{
-  statusCode: 200,
-  body: {
-    status: true
-  }
-}
+{ status: 200, statusText: 'OK', data: { status: true } }
 ```
 
 ### Commit the changes
