@@ -11,7 +11,7 @@ comments_id: creating-a-ci-cd-pipeline-for-react/188
 
 Now that we have our backend deployments automated, we are ready to do the same for our frontend React app. Just like the [backend CI/CD pipeline]({% link _chapters/creating-a-ci-cd-pipeline-for-serverless.md %}), we can use something like [Travis CI](https://travis-ci.org) or [CircleCI](https://circleci.com). But these take a lot of scripts and configuration to set up.
 
-Thankfully [Netlify](https://www.netlify.com), the service that we are using to [host our React app]({% link _chapters/hosting-your-react-app.md %}), also supports CI/CD.
+Thankfully [Netlify](https://www.netlify.com), the service that we are using to [host our React app]({% link _chapters/deploying-a-react-app-to-netlify.md %}), also supports CI/CD.
 
 Here's what the CI/CD pipeline for our React app will look like.
 

@@ -214,16 +214,12 @@ custom-domains:
       url: /chapters/custom-domains-in-serverless-apis.html
     - page: Custom domains for React apps on AWS
       url: /chapters/custom-domains-for-react-apps-on-aws.html
-#    - page: Hosting your React app
-#      url: /chapters/hosting-your-react-app.html
-#    - page: Setting up your project on Netlify
-#      url: /chapters/setting-up-your-project-on-netlify.html
-#    - page: Custom domains in Netlify
-#      url: /chapters/custom-domain-in-netlify.html
 
 automating-serverless-deployments:
   title: Automating serverless deployments
   chapters:
+    - page: Getting production ready
+      url: /chapters/getting-production-ready.html
     - page: Creating a CI/CD pipeline for serverless
       url: /chapters/creating-a-ci-cd-pipeline-for-serverless.html
       subchapters:
@@ -395,6 +391,8 @@ build-api:
       url: /chapters/add-a-delete-note-api.html
     - page: Deploy the APIs
       url: /chapters/deploy-the-apis.html
+    - page: Handle API Gateway CORS errors
+      url: /chapters/handle-api-gateway-cors-errors.html
 
 users-auth:
   title: Users and authentication
@@ -423,82 +421,22 @@ third-party-apis:
       url: /chapters/load-secrets-from-env.html
     - page: Test the billing API
       url: /chapters/test-the-billing-api.html
-
-cors:
-  title: CORS in Serverless
-  chapters:
-    - page: Handle CORS in Serverless APIs
-      url: /chapters/handle-cors-in-serverless-apis.html
     - page: Handle API Gateway CORS errors
       url: /chapters/handle-api-gateway-cors-errors.html
-    - page: Handle CORS in S3 for File Uploads
-      url: /chapters/handle-cors-in-s3-for-file-uploads.html
-
-domains-hosting:
-  title: Domains and hosting
-  chapters:
-    - page: Hosting your React app
-      url: /chapters/hosting-your-react-app.html
-    - page: Setting up your project on Netlify
-      url: /chapters/setting-up-your-project-on-netlify.html
-    - page: Purchase a domain with Route 53
-      url: /chapters/purchase-a-domain-with-route-53.html
-    - page: Custom domains in Netlify
-      url: /chapters/custom-domain-in-netlify.html
 
 infrastructure-as-code:
   title: Infrastructure as Code
   chapters:
-    - page: Getting production ready
-      url: /chapters/getting-production-ready.html
-    - page: What is Infrastructure as Code?
-      url: /chapters/what-is-infrastructure-as-code.html
-      subchapters:
-        - page: What is AWS CDK?
-          url: /chapters/what-is-aws-cdk.html
-        - page: Using AWS CDK with Serverless Framework
-          url: /chapters/using-aws-cdk-with-serverless-framework.html
-    - page: Building a CDK app with SST
-      url: /chapters/building-a-cdk-app-with-sst.html
-      subchapters:
-        - page: Configure DynamoDB in CDK
-          url: /chapters/configure-dynamodb-in-cdk.html
-        - page: Configure S3 in CDK
-          url: /chapters/configure-s3-in-cdk.html
-        - page: Configure Cognito User Pool in CDK
-          url: /chapters/configure-cognito-user-pool-in-cdk.html
-        - page: Configure Cognito Identity Pool in CDK
-          url: /chapters/configure-cognito-identity-pool-in-cdk.html
-        - page: Connect Serverless Framework and CDK with SST
-          url: /chapters/connect-serverless-framework-and-cdk-with-sst.html
+    - page: Configure DynamoDB in serverless
+      url: /chapters/configure-dynamodb-in-serverless.html
+    - page: Configure S3 in serverless
+      url: /chapters/configure-s3-in-serverless.html
+    - page: Configure Cognito User Pool in serverless
+      url: /chapters/configure-cognito-user-pool-in-serverless.html
+    - page: Configure Cognito Identity Pool in serverless
+      url: /chapters/configure-cognito-identity-pool-in-serverless.html
     - page: Deploy your Serverless infrastructure
       url: /chapters/deploy-your-serverless-infrastructure.html
-
-automating-deployments:
-  title: Automating deployments
-  chapters:
-    - page: Creating a CI/CD pipeline for serverless
-      url: /chapters/creating-a-ci-cd-pipeline-for-serverless.html
-      subchapters:
-      - page: Setting up your project on Seed
-        url: /chapters/setting-up-your-project-on-seed.html
-      - page: Configure secrets in Seed
-        url: /chapters/configure-secrets-in-seed.html
-      - page: Deploying through Seed
-        url: /chapters/deploying-through-seed.html
-      - page: Set custom domains through Seed
-        url: /chapters/set-custom-domains-through-seed.html
-      - page: Test the configured APIs
-        url: /chapters/test-the-configured-apis.html
-    - page: Creating a CI/CD pipeline for React
-      url: /chapters/creating-a-ci-cd-pipeline-for-react.html
-      subchapters:
-      - page: Manage environments in Create React App
-        url: /chapters/manage-environments-in-create-react-app.html
-      - page: Create a Netlify build script
-        url: /chapters/create-a-netlify-build-script.html
-      - page: Frontend workflow
-        url: /chapters/frontend-workflow.html
 
 #
 # Extra Credits Section
@@ -535,6 +473,10 @@ extra-backend:
       url: /chapters/connect-to-api-gateway-with-iam-auth.html
     - page: Serverless Node.js Starter
       url: /chapters/serverless-nodejs-starter.html
+    - page: Set custom domains through Seed
+      url: /chapters/set-custom-domains-through-seed.html
+    - page: Using AWS CDK with Serverless Framework
+      url: /chapters/using-aws-cdk-with-serverless-framework.html
     - page: Package Lambdas with serverless-bundle
       url: /chapters/package-lambdas-with-serverless-bundle.html
     - page: Dynamically generate social share images with serverless
@@ -579,6 +521,23 @@ extra-frontend:
           url: /chapters/setup-www-domain-redirect.html
         - page: Deploy updates
           url: /chapters/deploy-updates.html
+    - page: Deploying a React app to Netlify
+      url: /chapters/deploying-a-react-app-to-netlify.html
+      subchapters:
+        - page: Setting up your project on Netlify
+          url: /chapters/setting-up-your-project-on-netlify.html
+        - page: Purchase a domain with Route 53
+          url: /chapters/purchase-a-domain-with-route-53.html
+        - page: Custom domains in Netlify
+          url: /chapters/custom-domain-in-netlify.html
+        - page: Creating a CI/CD pipeline for React
+          url: /chapters/creating-a-ci-cd-pipeline-for-react.html
+        - page: Manage environments in Create React App
+          url: /chapters/manage-environments-in-create-react-app.html
+        - page: Create a Netlify build script
+          url: /chapters/create-a-netlify-build-script.html
+        - page: Frontend workflow
+          url: /chapters/frontend-workflow.html
     - page: Manage User Accounts in AWS Amplify
       url: /chapters/manage-user-accounts-in-aws-amplify.html
       subchapters:

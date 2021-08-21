@@ -4,10 +4,7 @@ title: Create a DynamoDB Table in SST
 date: 2018-02-27 00:00:00
 lang: en
 description: In this chapter we'll be using AWS CDK to configure a DynamoDB table for our Serverless app using the dynamodb.Table construct. We'll also be using the Serverless Stack Toolkit (SST) to make sure that we can deploy it alongside our Serverless Framework services.
-redirect_from:
-  - /chapters/configure-dynamodb-in-cdk.html
-  - /chapters/configure-dynamodb-in-serverless.html
-  - /chapters/dynamodb-as-a-serverless-service.html
+redirect_from: /chapters/configure-dynamodb-in-cdk.html
 ref: create-a-dynamodb-table-in-sst
 comments_id: 
 ---

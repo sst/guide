@@ -4,6 +4,9 @@ title: Adding auth to our serverless app
 date: 2021-08-17 00:00:00
 lang: en
 description: 
+redirect_from:
+  - /chapters/configure-cognito-user-pool-in-cdk.html
+  - /chapters/configure-cognito-identity-pool-in-cdk.html
 ref: adding-auth-to-our-serverless-app
 comments_id: 
 ---

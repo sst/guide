@@ -1,10 +1,11 @@
 ---
 layout: post
-title: Hosting Your React App
+title: Deploying a React App to Netlify
 date: 2020-11-03 00:00:00
 lang: en
 description: In this chapter we'll be looking at hosting your React app on Netlify. Our React app is a static site and it's pretty simple to host them.
-ref: hosting-your-react-app
+redirect_from: /chapters/hosting-your-react-app.html
+ref: deploying-a-react-app-to-netlify
 comments_id: hosting-your-react-app/2177
 ---
 

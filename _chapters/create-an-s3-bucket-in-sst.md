@@ -4,9 +4,7 @@ title: Create an S3 bucket in SST
 date: 2021-07-17 00:00:00
 lang: en
 description: In this chapter we'll be using AWS CDK to configure a S3 bucket for our Serverless app using the s3.Bucket construct. We'll also be using the Serverless Stack Toolkit (SST) to make sure that we can deploy it alongside our Serverless Framework services.
-redirect_from:
-  - /chapters/configure-s3-in-serverless.html
-  - /chapters/s3-as-a-serverless-service.html
+redirect_from: /chapters/configure-s3-in-cdk.html
 ref: create-an-s3-bucket-in-sst
 comments_id: 
 ---

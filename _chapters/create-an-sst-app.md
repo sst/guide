@@ -4,6 +4,7 @@ title: Create an SST app
 date: 2021-08-17 00:00:00
 lang: en
 description: 
+redirect_from: /chapters/building-a-cdk-app-with-sst.html
 ref: create-an-sst-app
 comments_id: 
 ---

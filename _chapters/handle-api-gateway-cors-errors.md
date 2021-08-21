@@ -9,6 +9,8 @@ code: backend
 comments_id: handle-api-gateway-cors-errors/780
 ---
 
+TODO: EDIT INTRO AND CONCLUSION
+
 In the last chapter we configured CORS for our Lambda functions and API endpoints. However when we make an API request, API Gateway gets invoked before our Lambda functions. This means that if there is an error at the API Gateway level, the CORS headers won't be set.
 
 Consequently, debugging such errors can be really hard. Our client won't be able to see the error message and instead will be presented with something like this:
@@ -88,7 +90,6 @@ service: notes-api
 stage: prod
 region: us-east-1
 stack: notes-api-prod
-resources: 43
 api keys:
   None
 endpoints:
@@ -97,19 +98,15 @@ endpoints:
   GET - https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod/notes
   PUT - https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
   DELETE - https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
-  POST - https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod/billing
 functions:
   create: notes-api-prod-create
   get: notes-api-prod-get
   list: notes-api-prod-list
   update: notes-api-prod-update
   delete: notes-api-prod-delete
-  billing: notes-api-prod-billing
 layers:
   None
 ```
-
-The only change you'll notice compared to our past deploys is the `resources: 43` count. The number of resources tied to our stack has slowly increased as we have added more resources to it.
 
 ### Commit the Changes
 

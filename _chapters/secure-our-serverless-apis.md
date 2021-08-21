@@ -4,6 +4,7 @@ title: Secure our serverless APIs
 date: 2021-08-17 00:00:00
 lang: en
 description: 
+redirect_from: /chapters/test-the-configured-apis.html
 ref: secure-our-serverless-apis
 comments_id: 
 ---
