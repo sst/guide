@@ -8,7 +8,7 @@ comments_id: stages-in-serverless-framework/35
 
 Serverless Framework allows you to create stages for your project to deploy to. Stages are useful for creating environments for testing and development. Typically you create a staging environment that is an independent clone of your production environment. This allows you to test and ensure that the version of code that you are about to deploy is good to go.
 
-In this chapter we will take a look at how to configure stages in Serverless. Let's first start by looking at how stages can be implemented.
+In this chapter we will take a look at how to configure stages in serverless. Let's first start by looking at how stages can be implemented.
 
 
 ### How Is Staging Implemented?

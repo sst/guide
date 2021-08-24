@@ -1,19 +1,19 @@
 ---
 layout: post
-title: Create an S3 bucket in SST
+title: Create an S3 Bucket in SST
 date: 2021-07-17 00:00:00
 lang: en
-description: In this chapter we'll be using AWS CDK to configure a S3 bucket for our Serverless app using the s3.Bucket construct. We'll also be using the Serverless Stack Toolkit (SST) to make sure that we can deploy it alongside our Serverless Framework services.
+description: In this chapter we'll be using a higher-level CDK construct to create an S3 bucket in our SST app.
 redirect_from: /chapters/configure-s3-in-cdk.html
 ref: create-an-s3-bucket-in-sst
 comments_id: 
 ---
 
-Just like the previous chapter, we are going to be using [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}) creating an S3 bucket.
+Just like [the previous chapter]({% link _chapters/create-a-dynamodb-table-in-sst.md %}), we are going to be using [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}) in our SST app to create an S3 bucket.
 
-We'll be adding to the `StorageStack` that we created in the last chapter.
+We'll be adding to the `StorageStack` that we created.
 
-### Add to the stack
+### Add to the Stack
 
 {%change%} Add the following above the `sst.Table` definition in `lib/StorageStack.js`.
 
@@ -27,20 +27,20 @@ This creates a new S3 bucket using the SST [`Bucket`](https://docs.serverless-st
 {%change%} Also, find the following line in `lib/StorageStack.js`.
 
 ``` js
-  // Public reference to the table
-  table;
+// Public reference to the table
+table;
 ```
 
 {%change%} And add the following above it.
 
 ``` js
-  // Public reference to the bucket
-  bucket;
+// Public reference to the bucket
+bucket;
 ```
 
 As the comment says, we want to have a public reference to the S3 bucket.
 
-### Deploy the app
+### Deploy the App
 
 If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
 
@@ -53,7 +53,7 @@ Stack dev-notes-storage
   Status: deployed
 ```
 
-### Commit the changes
+### Commit the Changes
 
 {%change%} Let's commit and push our changes to GitHub.
 

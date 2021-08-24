@@ -16,7 +16,7 @@ An Error Boundary is a component that allows us to catch any errors that might h
 
 It's incredibly straightforward to setup. So let's get started.
 
-{%change%} Add the following to `src/components/ErrorBoundary.js`.
+{%change%} Add the following to `src/components/ErrorBoundary.js` in your `frontend/` directory.
 
 ``` jsx
 import React from "react";

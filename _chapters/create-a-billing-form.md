@@ -132,9 +132,9 @@ Let's quickly go over what we are doing here:
 
 - The submit button has a loading state that is set to true when we call Stripe to get a token and when we call our billing API. However, since our Settings container is calling the billing API we use the `props.isLoading` to set the state of the button from the Settings container.
 
-- We also validate this form by checking if the name, the number of notes, and the card details are complete. For the card details, we use the CardElement's `onChange` method.
+- We also validate this form by checking if the name, the number of notes, and the card details are complete. For the card details, we use the `CardElement`'s `onChange` method.
 
-- Finally, once the user completes and submits the form we make a call to Stripe by passing in the CardElement. It uses this to generate a token for the specific call. We simply pass this and the number of notes to be stored to the settings page via the `onSubmit` method. We will be setting this up shortly.
+- Finally, once the user completes and submits the form we make a call to Stripe by passing in the `CardElement`. It uses this to generate a token for the specific call. We simply pass this and the number of notes to be stored to the settings page via the `onSubmit` method. We will be setting this up shortly.
 
 You can read more about how to use the [React Stripe SDK here](https://github.com/stripe/react-stripe-js).
 

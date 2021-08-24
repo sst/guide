@@ -68,11 +68,11 @@ Let's look at this in detail.
 
 - The `${VARIABLE}` format allows us to also specify a fallback. So in the case of `${VARIABLE_1, VARIABLE_2}`, it'll first try `VARIABLE_1`. If it doesn't resolve then it'll try `VARIABLE_2`.
 
-- So Serverless will first try to resolve, `self:custom.sstAppMapping.${self:custom.stage}`. It'll check if the stage we are currently deploying to (`self:custom.stage`) has a mapping set in `self:custom.sstAppMapping`. If it does, then it uses it. In other words, if we are currently deploying to `dev` or `prod`, then use the corresponding stage in our SST app.
+- So Serverless Framework will first try to resolve, `self:custom.sstAppMapping.${self:custom.stage}`. It'll check if the stage we are currently deploying to (`self:custom.stage`) has a mapping set in `self:custom.sstAppMapping`. If it does, then it uses it. In other words, if we are currently deploying to `dev` or `prod`, then use the corresponding stage in our SST app.
 
 - If the stage we are currently deploying to does not have a corresponding stage in our SST app (not `dev` or `prod`), then we fallback to `self:custom.sstAppMapping.dev`. As in, we fallback to using the `dev` stage of our SST app.
 
-This allows us to map our environments correctly across our Serverless services and SST apps.
+This allows us to map our environments correctly across our Serverless Framework services and SST apps.
 
 For reference, here's what the top of our `serverless.common.yml` looks like: 
 

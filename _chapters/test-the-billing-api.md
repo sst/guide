@@ -3,7 +3,7 @@ layout: post
 title: Test the Billing API
 date: 2018-03-09 00:00:00
 lang: en
-description: To test our Serverless Stripe billing API, we are going to mock the Lambda HTTP event. Pass in the Stripe test token and call the "serverless invoke local" command.
+description: To test our serverless Stripe billing API, we are going to mock the Lambda HTTP event. Pass in the Stripe test token and call the "serverless invoke local" command.
 ref: test-the-billing-api
 comments_id: test-the-billing-api/172
 ---
@@ -91,4 +91,4 @@ $ git commit -m "Adding a billing API"
 $ git push
 ```
 
-Now that we have our new billing API ready. Let's look at how to setup unit tests in Serverless. We'll be using that to ensure that our business logic has been configured correctly.
+Now that we have our new billing API ready. Let's look at how to setup unit tests in serverless. We'll be using that to ensure that our business logic has been configured correctly.

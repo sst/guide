@@ -3,43 +3,24 @@ layout: post
 title: Configure Secrets in Seed
 lang: en
 date: 2018-03-13 00:00:00
-description: To automate our Serverless deployments with Seed (https://seed.run), we will need to set our secrets in the Seed console. Move the environment variables from your .env to the stage we are deploying to.
+description: To automate our serverless deployments with Seed, we will need to set our secrets in the Seed console. Move the environment variables from your .env.local to the stage we are deploying to.
 ref: configure-secrets-in-seed
 comments_id: configure-secrets-in-seed/176
 ---
 
-Before we can do our first deployment, we need to make sure to configure our secret environment variables. If you'll recall, we have explicitly not stored these in our code (or in Git). TODO:LINK TO SECRETS CHAPTER This means that if somebody else on our team needs to deploy, we'll need to pass the `.env.local` file around. Instead we'll configure [Seed](https://seed.run) to deploy with our secrets for us.
+Before we can make our first deployment, we need to make sure to configure our secret environment variables. If you'll recall, we have explicitly [not stored these in our code (or in Git)]({% link _chapters/handling-secrets-in-sst.md %}). This means that if somebody else on our team needs to deploy, we'll need to pass the `.env.local` file around. Instead we'll configure [Seed](https://seed.run) to deploy with our secrets for us.
 
-We are also going configure Seed to deploy our app to production when we push any changes to the `main` branch.
+We are also going to configure Seed to deploy our app to production when we push any changes to the `main` branch.
 
 By default, Seed sets you up with two environments, `dev` and `prod`. Where pushing to the `main` branch would deploy to `dev`. And you'll need to promote your changes to `prod`. To keep things simple, we are only going to use the `prod` stage here and deploy directly to it.
 
-A common workflow for teams is to:
-
-1. Have developers use their own local _dev_ environment and Git branches.
-2. Merge their changes to the _master_ branch.
-3. The _master_ branch auto-deploys to a _staging_ environment.
-4. Once the changes are tested, they are manually promoted to the _production_ environment.
-
-But we are going to keep things simple here and deploy any changes to the `main` branch directly to `prod`.
-
-To confgiure the above, click **dev** in your app **Settings**.
+To configure the above, click **dev** in your app **Settings**.
 
 ![Select dev stage in Settings](/assets/part2/select-dev-stage-in-settings.png)
 
 Here **turn off the Auto-deploy** setting.
 
 ![Turn off auto-deploy for dev](/assets/part2/turn-off-auto-deploy-for-dev.png)
-
-<!--
-Here click **Show Env Variables**.
-
-![Show dev env variables settings](/assets/part2/show-dev-env-variables-settings.png)
-
-And type in `STRIPE_SECRET_KEY` as the **Key**. We saved this in a `.env.local` file in our project root back from the [Load secrets from env.yml]({% link _chapters/load-secrets-from-env.md %}) chapter. Hit **Add** to save your secret key. TODO: FIX CHAPTER LINK
-
-![Add secret dev environment variable](/assets/part2/add-secret-dev-environment-variable.png)
--->
 
 Then head over to the **prod** stage in your app **Settings**.
 
@@ -57,7 +38,7 @@ Next, scroll down and click **Show Env Variables**.
 
 ![Show prod env variables settings](/assets/part2/show-prod-env-variables-settings.png)
 
-And type in `STRIPE_SECRET_KEY` as the **Key**. We saved this in a `.env.local` file in our project root back from the [Load secrets from env.yml]({% link _chapters/load-secrets-from-env.md %}) chapter. Hit **Add** to save your secret key. TODO: FIX CHAPTER LINK
+And type in `STRIPE_SECRET_KEY` as the **Key**. We saved this in a `.env.local` file in our project root back from the [Handling Secrets in SST]({% link _chapters/handling-secrets-in-sst.md %}) chapter. Hit **Add** to save your secret key.
 
 ![Add secret prod environment variable](/assets/part2/add-secret-prod-environment-variable.png)
 

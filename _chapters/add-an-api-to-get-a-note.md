@@ -1,18 +1,18 @@
 ---
 layout: post
-title: Add an API to get a note
+title: Add an API to Get a Note
 date: 2021-08-17 00:00:00
 lang: en
-description: 
+description: In this chapter we are adding an API to get a note. It'll trigger a Lambda function when we hit the API and get the requested note from our DynamoDB table.
 ref: add-an-api-to-get-a-note
 comments_id: 
 ---
 
-Now that we [created a note](/) (TODO:LINK TO PREVIOUS CHAPTER) and saved it to our database. Let's add an API to retrieve a note given its id.
+Now that we [created a note]({% link _chapters/add-an-api-to-create-a-note.md %}) and saved it to our database. Let's add an API to retrieve a note given its id.
 
-### Add the function
+### Add the Function
 
-{%change%} Create a new file in `src/get.js` in your project root and with the following:
+{%change%} Create a new file in `src/get.js` in your project root with the following:
 
 ``` javascript
 import handler from "./util/handler";
@@ -67,15 +67,15 @@ Stack dev-notes-api
 
 ### Test the API
 
-Let's test the get notes API. In the previous chapter we tested our create note API. It should've returned the new note's id as the `noteId`.
+Let's test the get notes API. In the [previous chapter]({% link _chapters/add-an-api-to-get-a-note.md %}) we tested our create note API. It should've returned the new note's id as the `noteId`.
 
 {%change%} Run the following in your terminal.
 
 ``` bash
-$ curl https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes/bf586970-1007-11eb-a17f-a5105a0818d3
+$ curl https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes/NOTE_ID
 ```
 
-Make sure to replace the id at the end of the URL with the `noteId` that created previously.
+Make sure to replace the id at the end of the URL with the `noteId` that was created previously.
 
 Since we are making a simple GET request, we could also go to this URL directly in your browser.
 

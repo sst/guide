@@ -64,4 +64,4 @@ And you should see your app in action!
 
 Just like that, our app is live! You can share it with your friends and the rest of the world!
 
-By default, a site hosted on Netlify uses their domains. But we want to host our notes app on our own domain. To do that, let's first purchase a domain name. We'll be using AWS to do so because we'll be using this same domain later for our Serverless API.
+By default, a site hosted on Netlify uses their domains. But we want to host our notes app on our own domain. To do that, let's first purchase a domain name. We'll be using AWS to do so because we'll be using this same domain later for our Serverless Framework API.

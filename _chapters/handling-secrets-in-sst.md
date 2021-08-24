@@ -1,14 +1,14 @@
 ---
 layout: post
-title: Handling secrets in SST
+title: Handling Secrets in SST
 date: 2021-08-17 00:00:00
 lang: en
-description: 
+description: In this chapter we'll look at how to work with secrets in an SST app. We store secrets to a .env.local file and make sure to not commit it to Git.
 ref: handling-secrets-in-sst
 comments_id: 
 ---
 
-In the previous chapter TODO: LINK TO PREVIOUS CHAPTER, we created a Stripe account and got a pair keys. Including the Stripe secret key. We need this in our app but we do not want to store this secret environment variables in our code. In this chapter, we'll look at how to add secrets in SST.
+In the [previous chapter]({% link _chapters/setup-a-stripe-account.md %}), we created a Stripe account and got a pair of keys. Including the Stripe secret key. We need this in our app but we do not want to store this secret environment variables in our code. In this chapter, we'll look at how to add secrets in SST.
 
 We are going to create a `.env` file to store this.
 
@@ -18,7 +18,7 @@ We are going to create a `.env` file to store this.
 STRIPE_SECRET_KEY=STRIPE_TEST_SECRET_KEY
 ```
 
-Make sure to replace the `STRIPE_TEST_SECRET_KEY` with the **Secret key** from the [previous]({% link _chapters/setup-a-stripe-account.md %}) chapter. TODO: CHECK LINK TO CHAPTER
+Make sure to replace the `STRIPE_TEST_SECRET_KEY` with the **Secret key** from the [previous]({% link _chapters/setup-a-stripe-account.md %}) chapter.
 
 SST automatically loads this into your application.
 
@@ -36,8 +36,6 @@ Also, since we won't be committing this file to Git, we'll need to add this to o
 Next, let's add these to our functions.
 
 {%change%} Add the following below the `TABLE_NAME: table.tableName,` line in `lib/ApiStack.js`:
-
-{%change%} With this instead.
 
 ``` js
 STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,

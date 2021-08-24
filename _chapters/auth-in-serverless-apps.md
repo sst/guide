@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Auth in serverless apps
+title: Auth in Serverless Apps
 date: 2021-08-17 00:00:00
 lang: en
-description: 
+description: In this chapter we'll be looking at how to handle authentication and users for our serverless API. We'll be using a Cognito User Pool and Cognito Identity Pool. The User Pool will handle user signups and logins. While the Identity Pool, will be handling access control for our AWS resources.
 redirect_from: /chapters/handling-auth-in-serverless-apis.html
 ref: auth-in-serverless-apps
 comments_id: 
@@ -33,7 +33,7 @@ In terms of access control, our API Gateway endpoint is allowed to invoke the La
 this.api.attachPermissions([table]);
 ```
 
-For uploading files, our users will directly upload them to the [S3 bucket]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}) TODO: LINK TO CREATE S3 IN CDK CHAPTER. While we'll look at how our frontend React app uploads files later in the guide, in this section we need to make sure that we secure access to it.
+For uploading files, our users will directly upload them to the [S3 bucket]({% link _chapters/create-an-s3-bucket-in-sst.md %}). While we'll look at how our frontend React app uploads files later in the guide, in this section we need to make sure that we secure access to it.
 
 ## Authenticated API Architecture
 

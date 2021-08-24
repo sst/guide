@@ -3,7 +3,7 @@ layout: post
 title: Setting up Your Project on Seed
 date: 2018-03-12 00:00:00
 lang: en
-description: To automate our Serverless deployments, we will use a service called Seed (https://seed.run). We will sign up for a free account, add our project repository, and set our AWS IAM credentials.
+description: To automate our serverless deployments, we will use a service called Seed. We will sign up for a free account, add our project repository, and set our AWS IAM credentials.
 ref: setting-up-your-project-on-seed
 comments_id: setting-up-your-project-on-seed/175
 ---
@@ -44,7 +44,7 @@ aws_access_key_id = YOUR_IAM_ACCESS_KEY
 aws_secret_access_key = YOUR_IAM_SECRET_KEY
 ```
 
-Seed will also create a couple of stages (or environments) for you. By default, it'll create a **dev** and a **prod** stage using the same AWS credentials. You can customize these but for us this is perfect.
+Seed will also create a couple of stages (or environments) for you. By default, it'll create a **dev** and a **prod** stage using the same AWS credentials. You can customize these but we'll use the defaults.
 
 Fill in the credentials and click **Add a New App**.
 
@@ -62,6 +62,6 @@ To do this, hit the **Settings** link and click **Enable Unit Tests**.
 
 ![Click Enable Unit Tests in Seed](/assets/part2/click-enable-unit-tsts-in-seed.png)
 
-Back in our pipeline, you'll notice that our **dev** stage is hooked up to master. This means that any commits to master will trigger a build in dev.
+Back in our pipeline, you'll notice that our **dev** stage is hooked up to `main`. This means that any commits to `main` will trigger a build in dev. To keep things simple, we'll want to deploy to prod when we push to `main`. We also need to add our secret environment variables.
 
-However, before we do that, we'll need to add our secret environment variables.
+Let's do that next.

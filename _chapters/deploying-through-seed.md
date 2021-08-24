@@ -3,7 +3,7 @@ layout: post
 title: Deploying Through Seed
 lang: en
 date: 2018-03-14 00:00:00
-description: We are going to trigger a deployment in Seed by pushing a commit to our Serverless project in Git. In the Seed console you can view the build logs and look at the CloudFormation output.
+description: We are going to trigger a deployment in Seed by pushing a commit to our full-stack serverless project in Git. In the Seed console you can view the build logs and look at the stack outputs.
 ref: deploying-through-seed
 comments_id: deploying-through-seed/177
 ---
@@ -19,9 +19,7 @@ before_build:
   - cd frontend && npm install
 ```
 
-And let's commit and push this change.
-
-{%change%} Push the change using.
+{%change%} And let's commit and push this change.
 
 ``` bash
 $ git add .
@@ -29,7 +27,7 @@ $ git commit -m "Adding a seed build spec"
 $ git push
 ```
 
-Now if you head into the **prod** stage in Seed, you should see a build in progress. Now to see the build logs, you can click the **v1** link.
+Now if you head into the **prod** stage in Seed, you should see a build in progress. To check out the build logs, you can click the **v1** link.
 
 ![Seed prod build in progress](/assets/part2/seed-prod-build-in-progress.png)
 
@@ -49,9 +47,9 @@ Once the build is complete, you'll notice all the stack outputs at the bottom.
 
 ![Prod build stack outputs](/assets/part2/prod-build-stack-outputs.png)
 
-### Test our app in production
+### Test Our App in Production
 
-Let's checkout our app in production.
+Let's check out our app in production.
 
 ![Notes app in production](/assets/part2/notes-app-in-production.png)
 

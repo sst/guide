@@ -21,7 +21,7 @@ To understand how we can use Serverless Framework and CDK together, let's look a
 
 #### Serverless Framework App Architecture
 
-So far in this guide we've only created a single Serverless service. But Serverless apps can be made up of multiple services and the app as a whole is deployed to the same environment.
+So far in this guide we've only created a single serverless service. But Serverless apps can be made up of multiple services and the app as a whole is deployed to the same environment.
 
 ![Serverless Framework App Architecture](/assets/diagrams/serverless-framework-app-architecture.png)
 
@@ -33,7 +33,7 @@ You might recall that Serverless Framework internally uses CloudFormation. So ea
 
 The `--stage` option here prefixes your stack names with the stage name. So if you are deploying multiple stages to the same AWS account, the resource names will not thrash.
 
-This allows you to easily deploy your Serverless app to multiple environments. Even if they are in the same AWS account.
+This allows you to easily deploy your serverless app to multiple environments. Even if they are in the same AWS account.
 
 ![Serverless Framework app deployed to multiple stages](/assets/diagrams/serverless-framework-app-deployed-to-multiple-stages.png)
 
@@ -43,7 +43,7 @@ We are able to do this by simply changing the options in the `serverless deploy`
 
 #### CDK App Architecture
 
-AWS CDK apps on the other hand are made up of multiple stacks. And each stack is deployed to the target AWS account as a CloudFormation stack. However, unlike Serverless apps, each stack can be deployed to a different AWS account or region.
+AWS CDK apps on the other hand are made up of multiple stacks. And each stack is deployed to the target AWS account as a CloudFormation stack. However, unlike serverless apps, each stack can be deployed to a different AWS account or region.
 
 ![AWS CDK App Architecture](/assets/diagrams/aws-cdk-app-architecture.png)
 
@@ -53,7 +53,7 @@ We haven't had a chance to look at some CDK code in detail yet, but you can defi
 new MyStack(app, "my-stack", { env: { account: "1234", region: "us-east-1" } });
 ```
 
-This means that each time you deploy your CDK app, it could potentially create a stack in multiple environments. This critical design difference prevents us from directly using CDK apps alongside our Serverless services.
+This means that each time you deploy your CDK app, it could potentially create a stack in multiple environments. This critical design difference prevents us from directly using CDK apps alongside our serverless services.
 
 You can fix this issue by following a certain convention in your CDK app. However, this is only effective if these conventions are enforced.
 
@@ -119,9 +119,9 @@ Here `notes-infra` is the name of our SST app as defined in `infrastructure/sst.
 
 Let's look at what we are defining in your `serverless.yml` in a little more detail.
 
-1. We first create a custom variable called `stage`. You might be wondering why we need a custom variable for this when we already have `stage: dev` in the `provider:` block. This is because we want to set the current stage of our project based on what is set through the `serverless deploy --stage $STAGE` command. And if a stage is not set when we deploy, we want to fallback to the one we have set in the provider block. So `${opt:stage, self:provider.stage}`, is telling Serverless to first look for the `opt:stage` (the one passed in through the command line), and then fallback to `self:provider.stage` (the one in the provider block).
+1. We first create a custom variable called `stage`. You might be wondering why we need a custom variable for this when we already have `stage: dev` in the `provider:` block. This is because we want to set the current stage of our project based on what is set through the `serverless deploy --stage $STAGE` command. And if a stage is not set when we deploy, we want to fallback to the one we have set in the provider block. So `${opt:stage, self:provider.stage}`, is telling Serverless Framework to first look for the `opt:stage` (the one passed in through the command line), and then fallback to `self:provider.stage` (the one in the provider block).
 
-2. Next, we set the name of our SST app as a custom variable. This includes the name of the stage as well — `${self:custom.stage}-notes-infra`. It's configured such that it references the SST app for the stage the current Serverless app is deployed to. So if you deploy your API app to `dev`, it'll reference the dev version of the SST notes app.
+2. Next, we set the name of our SST app as a custom variable. This includes the name of the stage as well — `${self:custom.stage}-notes-infra`. It's configured such that it references the SST app for the stage the current serverless app is deployed to. So if you deploy your API app to `dev`, it'll reference the dev version of the SST notes app.
 
 These two simple steps allow us to (loosely) link our Serverless Framework and CDK app using SST.
 
@@ -274,4 +274,4 @@ resources:
   - ${file(resources/cognito-policy.yml)}
 ```
 
-And now we are ready to deploy our (completely programmatically created) Serverless infrastructure!
+And now we are ready to deploy our (completely programmatically created) serverless infrastructure!

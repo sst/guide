@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Add an API to handle billing
+title: Add an API to Handle Billing
 date: 2021-08-17 00:00:00
 lang: en
-description: 
+description: In this chapter we'll add an API to our serverless app to handle billing. We'll use the Stripe npm package in our Lambda function to charge a credit card.
 ref: add-an-api-to-handle-billing
 comments_id: 
 ---
@@ -50,7 +50,7 @@ Most of this is fairly straightforward but let's go over it quickly:
 
 - We are using a `calculateCost(storage)` function (that we are going to add soon) to figure out how much to charge a user based on the number of notes that are going to be stored.
 
-- We create a new Stripe object using our Stripe Secret key. We are getting this from the environment variable that we configured in the previous chapter. TODO: LINK TO PREV CHAPTER
+- We create a new Stripe object using our Stripe Secret key. We are getting this from the environment variable that we configured in the [previous chapter]({% link _chapters/handling-secrets-in-sst.md %}).
 
 - Finally, we use the `stripe.charges.create` method to charge the user and respond to the request if everything went through successfully.
 
@@ -73,7 +73,7 @@ This is basically saying that if a user wants to store 10 or fewer notes, we'll 
 
 Clearly, our serverless infrastructure might be cheap but our service isn't!
 
-### Add the route
+### Add the Route
 
 Let's add a new route for our billing API.
 
@@ -83,7 +83,7 @@ Let's add a new route for our billing API.
 "POST   /billing": "src/billing.main",
 ```
 
-### Deploy our changes
+### Deploy Our Changes
 
 If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
 
@@ -98,13 +98,11 @@ Stack dev-notes-api
     ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
 ```
 
-Now before we can test our API we need to load our Stripe secret key in our environment.
-
 ### Test the Billing API
 
 Now that we have our billing API all set up, let's do a quick test in our local environment.
 
-We'll be using the same CLI from a few chapters ago. TODO: LINK TO TEST API WITH AUTH CHAPTER
+We'll be using the same CLI from [a few chapters ago]({% link _chapters/secure-our-serverless-apis.md %}).
 
 {%change%} Run the following in your terminal.
 
@@ -123,18 +121,9 @@ $ npx aws-api-gateway-cli-test \
 --body='{"source":"tok_visa","storage":21}'
 ```
 
-Make sure to replace the `USER_POOL_ID`, `USER_POOL_CLIENT_ID`, `COGNITO_REGION`, `IDENTITY_POOL_ID`, `API_ENDPOINT`, and `API_REGION` with the outputs from your app.
+Make sure to replace the `USER_POOL_ID`, `USER_POOL_CLIENT_ID`, `COGNITO_REGION`, `IDENTITY_POOL_ID`, `API_ENDPOINT`, and `API_REGION` with the [same values we used a couple of chapters ago]({% link _chapters/secure-our-serverless-apis.md %}).
 
 Here we are testing with a Stripe test token called `tok_visa` and with `21` as the number of notes we want to store. You can read more about the Stripe test cards and tokens in the [Stripe API Docs here](https://stripe.com/docs/testing#cards).
-
-The response should look similar to this.
-
-``` bash
-{
-    "statusCode": 200,
-    "body": "{\"status\":true}"
-}
-```
 
 If the command is successful, the response will look similar to this.
 
@@ -145,7 +134,7 @@ Making API request
 { status: 200, statusText: 'OK', data: { status: true } }
 ```
 
-### Commit the changes
+### Commit the Changes
 
 {%change%} Let's commit and push our changes to GitHub.
 
@@ -155,4 +144,4 @@ $ git commit -m "Adding a billing API"
 $ git push
 ```
 
-Now that we have our new billing API ready. Let's look at how to setup unit tests in serverless. We'll be using that to ensure that our business logic has been configured correctly.
+Now that we have our new billing API ready. Let's look at how to setup unit tests in serverless. We'll be using that to ensure that our infrastructure and business logic has been configured correctly.

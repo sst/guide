@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Deploy a Serverless App with Dependencies
-description: In this chapter we go over how to locally deploy a Serverless app with multiple interdependent services. So you'll need to ensure that you deploy the service that is exporting the reference before deploying the one that imports it. You'll only need to do this for the first time.
+description: In this chapter we go over how to locally deploy a serverless app with multiple interdependent services. So you'll need to ensure that you deploy the service that is exporting the reference before deploying the one that imports it. You'll only need to do this for the first time.
 redirect_from: /chapters/deploying-multiple-services-in-serverless.html
 date: 2019-09-29 00:00:00
 comments_id: deploying-multiple-services-in-serverless/410
@@ -74,4 +74,4 @@ To break it down in detail:
 - The `billing-api` service relies on the `notes-api` service for the API Gateway export.
 - The `notify-job` service relies on the `billing-api` service for the SNS Topic export.
 
-That covers our section on organizing your Serverless app. Next, let's configure our environments.
+That covers our section on organizing your serverless app. Next, let's configure our environments.

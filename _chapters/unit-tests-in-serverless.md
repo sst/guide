@@ -3,20 +3,20 @@ layout: post
 title: Unit Tests in Serverless
 date: 2021-07-17 00:00:00
 lang: en
-description: 
+description: In this chapter we look at how to test the infrastructure and the Lambda functions in our serverless app. We use SST's built in test command to help us write and run our tests.
 ref: unit-tests-in-serverless
 comments_id: unit-tests-in-serverless/173
 ---
 
 Our serverless app is made up of two big parts; the code that defines our infrastructure and the code that powers our Lambda functions. We'd like to be able to test both of these. 
 
-On the infrastructure side, we want to make sure the right type of resources are being created. So we don't mistakingly deploy some updates that we shouldn't.
+On the infrastructure side, we want to make sure the right type of resources are being created. So we don't mistakingly deploy some updates.
 
 On the Lambda function side, we have some simple business logic that figures out exactly how much to charge our user based on the number of notes they want to store. We want to make sure that we test all the possible cases for this before we start charging people.
 
-SST comes with built in support for tests. It uses [Jest](https://jestjs.io) internally for this.
+SST comes with built in support for writing and running tests. It uses [Jest](https://jestjs.io) internally for this.
 
-### Testing CDK infrastructure
+### Testing CDK Infrastructure
 
 Let's start by writing a test for the CDK infrastructure in our app. We are going to keep this fairly simple for now.
 
@@ -50,7 +50,7 @@ We also have a sample test created with the starter that we can remove.
 $ rm test/MyStack.test.js
 ```
 
-### Testing Lambda functions
+### Testing Lambda Functions
 
 We are also going to test the business logic in our Lambda functions.
 
@@ -89,7 +89,7 @@ test("Highest tier", () => {
 
 This should be straightforward. We are adding 3 tests. They are testing the different tiers of our pricing structure. We test the case where a user is trying to store 10, 100, and 101 notes. And comparing the calculated cost to the one we are expecting.
 
-### Run tests
+### Run Tests
 
 And we can run our tests by using the following command in the root of our project.
 
@@ -112,9 +112,9 @@ Ran all test suites.
 
 And that's it! We have unit tests all configured. These tests are fairly simple but should give you an idea of how to add more in the future. The key being that you are testing both your infrastructure and your functions.
 
-### Commit the changes
+### Commit the Changes
 
-{%change%} Let's commit the changes so far and push it to GitHub.
+{%change%} Let's commit our changes and push it to GitHub.
 
 ``` bash
 $ git add .

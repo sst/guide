@@ -3,22 +3,22 @@ layout: post
 title: Create an SST app
 date: 2021-08-17 00:00:00
 lang: en
-description: 
+description: Use the create-serverless-stack command to create a new SST app in your working directory.
 redirect_from: /chapters/building-a-cdk-app-with-sst.html
 ref: create-an-sst-app
 comments_id: 
 ---
 
-Now that we understand how we are going to be defining our infrastructure, let's get started with creating our first SST app.
+Now that we understand what _infrastructure as code_ is, we are ready to create our first SST app.
 
-{%change%} Let’s start by creating an SST app.
+{%change%} Run the following in your working directory.
 
 ``` bash
 $ npx create-serverless-stack@latest notes
 $ cd notes
 ```
 
-By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
+By default our app will be deployed to an environment (or stage) called `dev` in the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ``` json
 {
@@ -39,7 +39,7 @@ An SST app is made up of two parts.
 
 2. `src/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The Lambda function code that's run when your API is invoked is placed in the `src/` directory of your project.
 
 Later on we'll be adding a `frontend/` directory for our frontend React app.
 

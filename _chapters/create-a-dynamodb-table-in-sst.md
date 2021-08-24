@@ -1,17 +1,17 @@
 ---
 layout: post
 title: Create a DynamoDB Table in SST
-date: 2018-02-27 00:00:00
+date: 2021-08-23 00:00:00
 lang: en
-description: In this chapter we'll be using AWS CDK to configure a DynamoDB table for our Serverless app using the dynamodb.Table construct. We'll also be using the Serverless Stack Toolkit (SST) to make sure that we can deploy it alongside our Serverless Framework services.
+description: In this chapter we'll be using a higher-level CDK construct to configure a DynamoDB table in our SST app.
 redirect_from: /chapters/configure-dynamodb-in-cdk.html
 ref: create-a-dynamodb-table-in-sst
 comments_id: 
 ---
 
-We are now going to start creating our infrastructure using [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}). Starting with DynamoDB.
+We are now going to start creating our infrastructure in [SST]({{ site.sst_github_repo }}) using [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}). Starting with DynamoDB.
 
-### Create a stack
+### Create a Stack
 
 {%change%} Add the following to a new file in `lib/StorageStack.js`.
 
@@ -41,7 +41,7 @@ Let's quickly go over what we are doing here.
 
 We are creating a new stack in our SST app. We'll be using it to create all our storage related infrastructure (DynamoDB and S3). There's no specific reason why we are creating a separate stack for these resources. It's only meant as a way of organizing our resources and illustrating how to create separate stacks in our app.
 
-We are using the SST's [`Table`](https://docs.serverless-stack.com/constructs/Table) construct to create our DynamoDB table.
+We are using SST's [`Table`](https://docs.serverless-stack.com/constructs/Table) construct to create our DynamoDB table.
 
 It has two fields:
 1. `userId`: The id of the user that the note belongs to.
@@ -65,7 +65,7 @@ table;
 
 This'll allow us to reference this resource in our other stacks.
 
-### Add to the app
+### Add to the App
 
 Now let's add this stack to our app.
 
@@ -79,7 +79,7 @@ export default function main(app) {
 }
 ```
 
-### Deploy the app
+### Deploy the App
 
 If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
 
@@ -92,7 +92,7 @@ Stack dev-notes-storage
   Status: deployed
 ```
 
-### Remove template files
+### Remove Template Files
 
 There are a couple of files that came with our starter template, that we can now remove.
 

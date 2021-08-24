@@ -3,7 +3,7 @@ layout: post
 title: Create a Hello World API
 date: 2021-08-17 00:00:00
 lang: en
-description: 
+description: In this chapter we'll be creating a simple Hello World API using SST. We'll be deploying it using the Live Lambda development environment.
 ref: create-a-hello-world-api
 comments_id: 
 ---

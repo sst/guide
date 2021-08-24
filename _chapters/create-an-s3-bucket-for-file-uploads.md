@@ -9,7 +9,7 @@ redirect_from: /chapters/create-a-s3-bucket-for-file-uploads.html
 comments_id: create-an-s3-bucket-for-file-uploads/150
 ---
 
-Now that we have our database table ready; let's get things set up for handling file uploads. We need to handle file uploads because each note can have an uploaded file as an attachment.
+Now that we have [our database table]({% link _chapters/create-a-dynamodb-table.md %}) ready; let's get things set up for handling file uploads. We need to handle file uploads because each note can have an uploaded file as an attachment.
 
 [Amazon S3](https://aws.amazon.com/s3/) (Simple Storage Service) provides storage service through web services interfaces like REST. You can store any object in S3 including images, videos, files, etc. Objects are organized into buckets, and identified within each bucket by a unique, user-assigned key.
 
@@ -38,7 +38,7 @@ Then scroll all the way down and click **Create bucket**.
 
 ![Click create S3 Bucket screenshot](/assets/s3/click-create-s3-bucket.png)
 
-This should create your new S3 bucket. Before we move on, we need to make sure that our React client will be able to upload files to this bucket. Since it'll be hosted on a different domain, we need to enable CORS.
+This should create your new S3 bucket. Before we move on, we need to make sure that our React.js frontend will be able to upload files to this bucket. Since it'll be hosted on a different domain, we need to enable [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing).
 
 Select the newly created bucket from the list.
 

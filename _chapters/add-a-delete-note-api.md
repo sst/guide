@@ -84,4 +84,4 @@ And the response should look similar to this.
 }
 ```
 
-Now that our APIs are complete; we are almost ready to deploy them.
+Now that our APIs are complete, let's deploy them next!

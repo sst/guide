@@ -1,16 +1,18 @@
 ---
 layout: post
-title: Add an API to create a note
+title: Add an API to Create a Note
 date: 2021-08-17 00:00:00
 lang: en
-description: 
+description: In this chapter we are adding an API to create a note. It'll trigger a Lambda function when we hit the API and create a new note in our DynamoDB table.
 ref: add-an-api-to-create-a-note
 comments_id: 
 ---
 
-Let's get started by creating the API for our notes app. We'll first add an API to create a note. This API will take the note object as the input and store it in the database with a new id. The note object will contain the `content` field (the content of the note) and an `attachment` field (the URL to the uploaded file).
+Let's get started by creating the API for our notes app.
 
-### Creating a stack
+We'll first add an API to create a note. This API will take the note object as the input and store it in the database with a new id. The note object will contain the `content` field (the content of the note) and an `attachment` field (the URL to the uploaded file).
+
+### Creating a Stack
 
 {%change%} Create a new file in `lib/ApiStack.js` and add the following.
 
@@ -53,7 +55,7 @@ We are doing a couple of things of note here.
 
 - We are creating a new stack for our API. We could've used the stack we had previously created for DynamoDB and S3. But this is a good way to talk about how to share resources between stacks.
 
-- This new `ApiStack` expects a `table` resource to be passed in. We'll be doing passing in the DynamoDB table from the `StorageStack` that we created previously.
+- This new `ApiStack` expects a `table` resource to be passed in. We'll be passing in the DynamoDB table from the `StorageStack` that we created previously.
 
 - We are creating an API using SST's [`Api`](https://docs.serverless-stack.com/constructs/Api) construct.
 
@@ -65,7 +67,7 @@ We are doing a couple of things of note here.
 
 - Finally, we are printing out the URL of our API as an output by calling `this.addOutputs`. We are also exposing the API publicly so we can refer to it in other stacks.
 
-### Adding to the app
+### Adding to the App
 
 Let's add this new stack to the rest of our app.
 
@@ -81,15 +83,15 @@ export default function main(app) {
 }
 ```
 
+Here you'll notice that we using the public reference of the table from the `StorageStack` and passing it in to our `ApiStack`.
+
 {%change%} Also, import the new stack at the top.
 
 ``` js
 import ApiStack from "./ApiStack";
 ```
 
-Here you'll notice that we using the public reference of the table from the `StorageStack` and passing it in to our `ApiStack`.
-
-### Add the function
+### Add the Function
 
 Now let's add the function that'll be creating our note.
 
@@ -133,11 +135,11 @@ export async function main(event) {
 }
 ```
 
-There are some helpful comments in the code but we are doing a few simple things here.
+There are some helpful comments in the code but let's go over them quickly.
 
 - Parse the input from the `event.body`. This represents the HTTP request body.
 - It contains the contents of the note, as a string — `content`.
-- It also contains an `attachment`, if one exists. It's the filename of file that will been uploaded to [our S3 bucket]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}) TODO: LINK TO S3 CDK CHAPTER.
+- It also contains an `attachment`, if one exists. It's the filename of file that will been uploaded to [our S3 bucket]({% link _chapters/create-an-s3-bucket-in-sst.md %}).
 - We read the name of our DynamoDB table from the environment variable using `process.env.TABLE_NAME`. You'll recall that we set this above while configuring our API.
 - The `userId` is the id for the author of the note. For now we are hardcoding it to `123`.  Later we'll be setting this based on the authenticated user.
 - Make a call to DynamoDB to put a new object with a generated `noteId` and the current date as the `createdAt`.
@@ -154,7 +156,7 @@ $ npm install aws-sdk uuid@7.0.3
 - **aws-sdk** allows us to talk to the various AWS services.
 - **uuid** generates unique ids.
 
-### Deploy our changes
+### Deploy Our Changes
 
 If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
 

@@ -1,17 +1,17 @@
 ---
 layout: post
-title: Secure our serverless APIs
+title: Secure Our Serverless APIs
 date: 2021-08-17 00:00:00
 lang: en
-description: 
+description: In this chapter we'll secure our serverless APIs by only allowing authenticated users to connect. We'll get the user id in our Lambda functions from the Cognito Identity Pool identityId.
 redirect_from: /chapters/test-the-configured-apis.html
 ref: secure-our-serverless-apis
 comments_id: 
 ---
 
-Now that our APIs have been secured with Cognito User Pool and Identity Pool TODO: LINK TO PREVIOUS CHAPTER, we are ready to use the authenticated user's info in our Lambda functions. Recall that we've been hard coding our user ids so far (with user id `123`).
+Now that our APIs have been [secured with Cognito User Pool and Identity Pool]({% link _chapters/adding-auth-to-our-serverless-app.md %}), we are ready to use the authenticated user's info in our Lambda functions.
 
-We'll need to grab the real user id from the Lambda function event.
+Recall that we've been hard coding our user ids so far (with user id `123`). We'll need to grab the real user id from the Lambda function event.
 
 ### Cognito Identity Id
 
@@ -21,7 +21,7 @@ Recall the function signature of a Lambda function:
 export async function main(event, context) {}
 ```
 
-Or the refactored one that we are using:
+Or the refactored version that we are using:
 
 ``` javascript
 export const main = handler(async (event) => {});
@@ -32,12 +32,12 @@ So far we've used the `event` object to get the path parameters (`event.pathPara
 Now we'll get the id of the authenticated user.
 
 ``` javascript
-event.requestContext.identity.cognitoIdentityId
+event.requestContext.authorizer.iam.cognitoIdentity.identityId
 ```
 
 This is an id that's assigned to our user by our Cognito Identity Pool.
 
-You'll also recall that so far all of our APIs are hardcoded to interact with a single user.
+You'll also recall that so far all of our APIs are hard coded to interact with a single user.
 
 ``` javascript
 userId: "123", // The id of the author
@@ -93,11 +93,11 @@ To test these changes we cannot use the `curl` command anymore. We'll need to ge
 
 ## Test the APIs
 
-Now that our APIs are secured, let's quickly test them with authentication.
+Let's quickly test our APIs with authentication.
 
-To do this, we'll need create a test user for our Cognito User Pool.
+To do this, we'll need to create a test user for our Cognito User Pool.
 
-### Create a test user
+### Create a Test User
 
 We'll use AWS CLI to sign up a user with their email and password.
 
@@ -111,7 +111,7 @@ $ aws cognito-idp sign-up \
   --password Passw0rd!
 ```
 
-Make sure to replace `COGNITO_REGION` and `USER_POOL_CLIENT_ID` with the `Region` and `UserPoolClientId` from the previous chapter. TODO: ADD LINK TO PREVIOUS CHAPTER
+Make sure to replace `COGNITO_REGION` and `USER_POOL_CLIENT_ID` with the `Region` and `UserPoolClientId` from the [previous chapter]({% link _chapters/adding-auth-to-our-serverless-app.md %}).
 
 Now we need to verify this email. For now we'll do this via an administrator command.
 
@@ -124,9 +124,9 @@ $ aws cognito-idp admin-confirm-sign-up \
   --username admin@example.com
 ```
 
-Replace the `COGNITO_REGION` and `USER_POOL_ID` with the `Region` and `UserPoolId` from the previous chapter. TODO: ADD LINK TO PREVIOUS CHAPTER
+Replace the `COGNITO_REGION` and `USER_POOL_ID` with the `Region` and `UserPoolId` from the [previous chapter]({% link _chapters/adding-auth-to-our-serverless-app.md %}).
 
-### Test the API with auth
+### Test the API With Auth
 
 To be able to hit our API endpoints securely, we need to follow these steps.
 
@@ -156,11 +156,11 @@ $ npx aws-api-gateway-cli-test \
 We need to pass in quite a bit of our info to complete the above steps.
 
 - Use the username and password of the user created above.
-- Replace `USER_POOL_ID`, `USER_POOL_CLIENT_ID`, `COGNITO_REGION`, and `IDENTITY_POOL_ID` with the `UserPoolId`, `UserPoolClientId`, `Region`, and `IdentityPoolId` from our previous chapter. TODO: LINK TO PREVIOUS CHAPTER
-- Replace the `API_ENDPOINT` with the `ApiEndpoint` from our API stack outputs. TODO: LINK TO CREATE NOTE CHAPTER.
+- Replace `USER_POOL_ID`, `USER_POOL_CLIENT_ID`, `COGNITO_REGION`, and `IDENTITY_POOL_ID` with the `UserPoolId`, `UserPoolClientId`, `Region`, and `IdentityPoolId` from our [previous chapter]({% link _chapters/adding-auth-to-our-serverless-app.md %}).
+- Replace the `API_ENDPOINT` with the `ApiEndpoint` from our [API stack outputs]({% link _chapters/add-an-api-to-create-a-note.md %}).
 - And for the `API_REGION` you can use the same `Region` as we used above. Since our entire app is deployed to the same region.
 
-While this might look intimidating, just keep in mind that behind the scenes all we are doing is generating some security headers before making a basic HTTP request. You'll see more of this process when we connect our React.js app to our API backend.
+While this might look intimidating, just keep in mind that behind the scenes all we are doing is generating some security headers before making a basic HTTP request. We won't need to do this when we connect from our React.js app.
 
 If you are on Windows, use the command below. The space between each option is very important.
 
@@ -187,9 +187,9 @@ Making API request
 }
 ```
 
-It will have create a new note for our test user.
+It'll have created a new note for our test user.
 
-### Commit the changes
+### Commit the Changes
 
 {%change%} Let's commit and push our changes to GitHub.
 
@@ -199,4 +199,4 @@ $ git commit -m "Securing the API"
 $ git push
 ```
 
-We’ve now got a serverless API that’s secure and handles user authentication. In the next section we are going to look at how we can work with 3rd party APIs in serverless. And how to work with secrets!
+We’ve now got a serverless API that’s secure and handles user authentication. In the next section we are going to look at how we can work with 3rd party APIs in serverless. And how to handle secrets!

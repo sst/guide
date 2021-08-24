@@ -3,7 +3,7 @@ layout: post
 title: Deploy Your Serverless Infrastructure
 date: 2018-03-04 00:00:00
 lang: en
-description: In this chapter we'll be deploying our entire Serverless infrastructure. We are using CDK to define our resources and we are deploying it using the Serverless Stack Toolkit (SST). Our API on the other hand is deployed using Serverless Framework.
+description: In this chapter we'll be deploying our entire serverless infrastructure. We are using CDK to define our resources and we are deploying it using the Serverless Stack Toolkit (SST). Our API on the other hand is deployed using Serverless Framework.
 code: backend
 ref: deploy-your-serverless-infrastructure
 comments_id: deploy-your-serverless-infrastructure/167
@@ -113,6 +113,6 @@ Next, we will look at how we can automate our deployments. We want to set it up 
 
 ``` bash
 $ git add .
-$ git commit -m "Setting up our Serverless infrastructure"
+$ git commit -m "Setting up our serverless infrastructure"
 $ git push
 ```

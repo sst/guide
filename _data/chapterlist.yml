@@ -391,8 +391,6 @@ build-api:
       url: /chapters/add-a-delete-note-api.html
     - page: Deploy the APIs
       url: /chapters/deploy-the-apis.html
-    - page: Handle API Gateway CORS errors
-      url: /chapters/handle-api-gateway-cors-errors.html
 
 users-auth:
   title: Users and authentication
@@ -421,12 +419,12 @@ third-party-apis:
       url: /chapters/load-secrets-from-env.html
     - page: Test the billing API
       url: /chapters/test-the-billing-api.html
-    - page: Handle API Gateway CORS errors
-      url: /chapters/handle-api-gateway-cors-errors.html
 
 infrastructure-as-code:
   title: Infrastructure as Code
   chapters:
+    - page: Handle API Gateway CORS errors
+      url: /chapters/handle-api-gateway-cors-errors.html
     - page: Configure DynamoDB in serverless
       url: /chapters/configure-dynamodb-in-serverless.html
     - page: Configure S3 in serverless
@@ -526,8 +524,6 @@ extra-frontend:
       subchapters:
         - page: Setting up your project on Netlify
           url: /chapters/setting-up-your-project-on-netlify.html
-        - page: Purchase a domain with Route 53
-          url: /chapters/purchase-a-domain-with-route-53.html
         - page: Custom domains in Netlify
           url: /chapters/custom-domain-in-netlify.html
         - page: Creating a CI/CD pipeline for React

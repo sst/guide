@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Configure Multiple AWS Profiles
-description: To use multiple IAM credentials to deploy your Serverless application you need to create a new AWS CLI profile. On local set the default AWS profile using the AWS_PROFILE bash variable. To deploy using your new profile use the "--aws-profile" option for the "serverless deploy" command. Alternatively, you can use the "profile:" setting in your serverless.yml.
+description: To use multiple IAM credentials to deploy your serverless application you need to create a new AWS CLI profile. On local set the default AWS profile using the AWS_PROFILE bash variable. To deploy using your new profile use the "--aws-profile" option for the "serverless deploy" command. Alternatively, you can use the "profile:" setting in your serverless.yml.
 date: 2018-04-07 00:00:00
 comments_id: configure-multiple-aws-profiles/21
 ---
@@ -73,7 +73,7 @@ provider:
   profile: newAccount
 ```
 
-Note the `profile: newAccount` line here. This is telling Serverless to use the `newAccount` profile while running `serverless deploy`.
+Note the `profile: newAccount` line here. This is telling Serverless Framework to use the `newAccount` profile while running `serverless deploy`.
 
 
 ### Set Profiles per Stage

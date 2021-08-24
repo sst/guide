@@ -9,7 +9,7 @@ redirect_from: /chapters/monitoring-deployments-in-seed.html
 ref: setup-error-logging-in-serverless
 ---
 
-Now that we have our React app configured to report errors, let's move on to our Serverless backend. Our React app is reporting API errors (and other unexpected errors) with the API endpoint that caused the error. We want to use that info to be able to debug on the backend and figure out what's going on.
+Now that we have our React app configured to report errors, let's move on to our serverless backend. Our React app is reporting API errors (and other unexpected errors) with the API endpoint that caused the error. We want to use that info to be able to debug on the backend and figure out what's going on.
 
 To do this, we'll setup the error logging in our backend to catch:
 
@@ -23,7 +23,7 @@ We are going to look at how to setup a debugging framework to catch the above er
 
 Let's start by adding some code to help us with that.
 
-{%change%} Create a `src/util/debug.js` file and add the following to it.
+{%change%} Create a `src/util/debug.js` file from your project root with the following.
 
 ``` javascript
 import util from "util";

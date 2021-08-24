@@ -8,7 +8,7 @@ ref: what-does-this-guide-cover
 comments_id: what-does-this-guide-cover/83
 ---
 
-To step through the major concepts involved in building web applications, we are going to be building a simple note taking app called [**Scratch**](https://demo2.serverless-stack.com). However, unlike most tutorials out there, our goal is to go into the details of what it takes to build a full-stack application for production.
+To step through the major concepts involved in building web applications, we are going to be building a simple note taking app called [**Scratch**]({{ site.demo_url }}). However, unlike most tutorials out there, our goal is to go into the details of what it takes to build a full-stack application for production.
 
 ![Completed app desktop screenshot](/assets/completed-app-desktop.png)
 
@@ -46,7 +46,7 @@ We'll be using the following set of technologies and services to build our serve
 - [React Router][RR] for routing
 - [Bootstrap][Bootstrap] for the UI Kit
 - [Stripe][Stripe] for processing credit card payments
-- [Seed][Seed] for automating Serverless deployments
+- [Seed][Seed] for automating serverless deployments
 - [Netlify][Netlify] for automating React deployments
 - [GitHub][GitHub] for hosting our project repos
 - [Sentry][Sentry] for error reporting
@@ -69,7 +69,7 @@ The guide is split roughly into a couple of parts:
 
 1. **The Basics**
 
-   Here we go over how to create your first full-stack Serverless application. These chapters are roughly split up between the backend (Serverless) and the frontend (React). We also talk about how to deploy your serverless app and React app into production.
+   Here we go over how to create your first full-stack serverless application. These chapters are roughly split up between the backend (Serverless) and the frontend (React). We also talk about how to deploy your serverless app and React app into production.
 
    This section of the guide is carefully designed to be completed in its entirety. We go into all the steps in detail and have tons of screenshots to help you build your first app.
 
@@ -120,16 +120,16 @@ Automate backend deployments:
 - Configure Cognito Identity Pool through code
 - Environment variables in Serverless Framework
 - Working with secrets in Serverless Framework
-- Unit tests in Serverless
+- Unit tests in serverless
 - Automating deployments using Seed
 - Configuring custom domains through Seed
 
-Monitoring and debugging Serverless apps:
+Monitoring and debugging serverless apps:
 
 - Set up error reporting in React using Sentry
 - Configure an Error Boundary in React
-- Add error logging to our Serverless APIs
-- Cover the debugging workflow for common Serverless errors
+- Add error logging to our serverless APIs
+- Cover the debugging workflow for common serverless errors
 
 
 We think this will give you a good foundation on building full-stack production ready serverless applications. If there are any other concepts or technologies you'd like us to cover, feel free to let us know on our [forums]({{ site.forum_url }}).

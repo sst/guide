@@ -3,7 +3,7 @@ layout: post
 title: Unexpected Errors in Lambda Functions
 date: 2020-04-06 00:00:00
 lang: en
-description: In this chapter we look at how to debug unexpected errors in your Lambda functions for your Serverless app. These errors include timeout errors and when your Lambda function runs out of memory. 
+description: In this chapter we look at how to debug unexpected errors in your Lambda functions for your serverless app. These errors include timeout errors and when your Lambda function runs out of memory. 
 comments_id: unexpected-errors-in-lambda-functions/1735
 ref: unexpected-errors-in-lambda-functions
 ---

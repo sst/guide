@@ -4,7 +4,7 @@ title: Handle API Gateway CORS Errors
 date: 2017-01-03 12:00:00
 lang: en
 ref: handle-api-gateway-cors-errors
-description: We need to add the CORS headers to our Serverless API Gateway endpoint to handle 4xx and 5xx errors. This is to handle the case where our Lambda functions are not being invoked. 
+description: We need to add the CORS headers to our serverless API Gateway endpoint to handle 4xx and 5xx errors. This is to handle the case where our Lambda functions are not being invoked. 
 code: backend
 comments_id: handle-api-gateway-cors-errors/780
 ---
@@ -19,7 +19,7 @@ Consequently, debugging such errors can be really hard. Our client won't be able
 No 'Access-Control-Allow-Origin' header is present on the requested resource
 ```
 
-These CORS related errors are one of the most common Serverless API errors. In this chapter, we are going to configure API Gateway to set the CORS headers in the case there is an HTTP error. We won't be able to test this right away, but it will really help when we work on our frontend client.
+These CORS related errors are one of the most common serverless API errors. In this chapter, we are going to configure API Gateway to set the CORS headers in the case there is an HTTP error. We won't be able to test this right away, but it will really help when we work on our frontend client.
 
 ### Create a Resource
 
@@ -114,7 +114,7 @@ layers:
 
 ``` bash
 $ git add .
-$ git commit -m "Adding CORS to our Serverless API"
+$ git commit -m "Adding CORS to our serverless API"
 $ git push
 ```
 

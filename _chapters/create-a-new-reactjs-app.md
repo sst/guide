@@ -4,7 +4,7 @@ title: Create a New React.js App
 date: 2017-01-06 00:00:00
 lang: en
 ref: create-a-new-react-js-app
-description: Create React App helps you build React.js app with no configuration. Install the Create React App CLI using the NPM package and use the command to start a new React.js project.
+description: In this chapter we'll use Create React App to create a new React.js app. We'll be deploying our React app to AWS using the SST ReactStaticSite construct. It'll also load the environment variables from our serverless app.
 comments_id: create-a-new-react-js-app/68
 ---
 
@@ -23,7 +23,7 @@ $ cd frontend
 
 This should take a second to run, and it will create your new project in the `frontend/` directory.
 
-Note that we are adding this inside our SST app. Create React App will throw a warning if it is installed inside a directory that uses Jest. To disable this, we’ll need to set an environment variable.
+Note that we are adding this inside our SST app. Create React App will throw a warning if it is installed inside a directory that uses Jest. And we [were using Jest to run our tests]({% link _chapters/unit-tests-in-serverless.md %}). To disable this, we’ll need to set an environment variable.
 
 {%change%} Add the following to `frontend/.env`.
 
@@ -182,4 +182,4 @@ This should fire up the newly created app in your browser.
 
 Create React App comes pre-loaded with a pretty convenient yet minimal development environment. It includes live reloading, a testing framework, ES6 support, and much more.
 
-Now we are ready to build our frontend! We are going start by creating our app icon and updating the favicons.
+Now we are ready to build our frontend! We are going to start by creating our app icon and updating the favicons.

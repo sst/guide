@@ -1,18 +1,18 @@
 ---
 layout: post
-title: Add an API to update a note
+title: Add an API to Update a Note
 date: 2021-08-17 00:00:00
 lang: en
-description: 
+description: In this chapter we are adding an API to update a given note. It'll trigger a Lambda function when we hit the API and update the note in our DynamoDB table.
 ref: add-an-api-to-update-a-note
 comments_id: 
 ---
 
 Now let's create an API that allows a user to update a note with a new note object given the id.
 
-### Add the function
+### Add the Function
 
-{%change%} Create a new file in `src/update.js` and paste the following code
+{%change%} Create a new file in `src/update.js` and paste the following.
 
 ``` javascript
 import handler from "./util/handler";
@@ -48,7 +48,7 @@ export const main = handler(async (event) => {
 
 This should look similar to the `create.js` function. Here we make an `update` DynamoDB call with the new `content` and `attachment` values in the `params`.
 
-### Add the route
+### Add the Route
 
 Let's add a new route for the get note API.
 
@@ -58,7 +58,7 @@ Let's add a new route for the get note API.
 "PUT    /notes/{id}": "src/update.main",
 ```
 
-### Deploy our changes
+### Deploy Our Changes
 
 If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
 
@@ -85,10 +85,10 @@ Make sure to keep your local environment (`sst start`) running in another window
 $ curl -X PUT \
 -H 'Content-Type: application/json' \
 -d '{"content":"New World","attachment":"new.jpg"}' \
-https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes/bf586970-1007-11eb-a17f-a5105a0818d3
+https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes/NOTE_ID
 ```
 
-Make sure to replace the id at the end of the URL with the `noteId` from when we created our note. TODO: ADD LINK TO CREATE CHAPTER
+Make sure to replace the id at the end of the URL with the `noteId` from when we [created our note]({% link _chapter/add-an-api-to-create-a-note.md %}).
 
 Here we are making a PUT request to a note that we want to update. We are passing in the new `content` and `attachment` as a JSON string.
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Customize the Serverless IAM Policy
+title: Customize the serverless IAM Policy
 description: Serverless Framework deploys using the policy attached to the IAM credentials in your AWS CLI profile. To customize the IAM Policy used, access can be restricted to the services that Serverless Framework needs, and to the project that is being deployed.
 date: 2018-04-08 00:00:00
 comments_id: customize-the-serverless-iam-policy/18
@@ -18,10 +18,10 @@ The permissions required can be categorized into the following areas:
 
 Granting **AdministratorAccess** policy ensures that your project will always have the necessary permissions. But if you want to create an IAM policy that grants the minimal set of permissions, you need to customize your IAM policy.
 
-A basic Serverless project needs permissions to the following AWS services:
+A basic serverless project needs permissions to the following AWS services:
 
 - **CloudFormation** to create change set and update stack
-- **S3** to upload and store Serverless artifacts and Lambda source code
+- **S3** to upload and store serverless artifacts and Lambda source code
 - **CloudWatch Logs** to store Lambda execution logs
 - **IAM** to manage policies for the Lambda IAM Role
 - **API Gateway** to manage API endpoints
@@ -79,7 +79,7 @@ This policy grants your Serverless Framework project access to all the resources
 
 ### An advanced IAM Policy template
 
-Below is a more nuanced policy template that restricts access to the Serverless project that is being deployed. Make sure to replace `<region>`, `<account_no>` and `<service_name>` for your specific project.
+Below is a more nuanced policy template that restricts access to the serverless project that is being deployed. Make sure to replace `<region>`, `<account_no>` and `<service_name>` for your specific project.
 
 ``` json
 {
@@ -247,6 +247,6 @@ provider:
 
 In the above `serverless.yml`, the `<region>` is `us-east-1` and the `<service_name>` is `my-service`.
 
-The above IAM policy template restricts access to the AWS services based on the name of your Serverless project and the region it is deployed in.
+The above IAM policy template restricts access to the AWS services based on the name of your serverless project and the region it is deployed in.
 
-It provides sufficient permissions for a minimal Serverless project. However, if you provision any additional resources in your **serverless.yml**, or install Serverless plugins, or invoke any AWS APIs in your application code; you would need to update the IAM policy to accommodate for those changes. If you are looking for details on where this policy comes from; here is an in-depth discussion on the minimal [Serverless IAM Deployment Policy](https://github.com/serverless/serverless/issues/1439) required for a Serverless project.
+It provides sufficient permissions for a minimal Serverless Framework project. However, if you provision any additional resources in your **serverless.yml**, or install Serverless plugins, or invoke any AWS APIs in your application code; you would need to update the IAM policy to accommodate for those changes. If you are looking for details on where this policy comes from; here is an in-depth discussion on the minimal [Serverless IAM Deployment Policy](https://github.com/serverless/serverless/issues/1439) required for a Serverless project.
