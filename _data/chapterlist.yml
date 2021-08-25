@@ -11,11 +11,11 @@ preface:
 intro:
   title: Introduction
   chapters:
-    - page: What is Serverless?
+    - page: What is serverless?
       url: /chapters/what-is-serverless.html
     - page: What is AWS Lambda?
       url: /chapters/what-is-aws-lambda.html
-    - page: Why create Serverless apps?
+    - page: Why create serverless apps?
       url: /chapters/why-create-serverless-apps.html
 
 setup-aws:
@@ -54,7 +54,7 @@ setup-sst-backend:
       url: /chapters/create-an-s3-bucket-in-sst.html
 
 build-sst-api:
-  title: Building a Serverless API
+  title: Building a serverless API
   chapters:
     - page: Review our app architecture
       url: /chapters/review-our-app-architecture.html
@@ -92,7 +92,7 @@ handling-secrets:
 unit-tests:
   title: Serverless unit tests
   chapters:
-    - page: Unit tests in Serverless
+    - page: Unit tests in serverless
       url: /chapters/unit-tests-in-serverless.html
 
 cors-sst:
@@ -277,33 +277,33 @@ conclusion:
 best-practices-intro:
   title: Introduction
   chapters:
-    - page: Best practices for building Serverless apps
+    - page: Best practices for building serverless apps
       url: /chapters/best-practices-for-building-serverless-apps.html
 
 organize-serverless-apps:
-  title: Organize a Serverless app
+  title: Organize a serverless app
   chapters:
-    - page: Organizing Serverless projects
+    - page: Organizing serverless projects
       url: /chapters/organizing-serverless-projects.html
-    - page: Cross-stack references in Serverless
+    - page: Cross-stack references in serverless
       url: /chapters/cross-stack-references-in-serverless.html
     - page: Share code between services
       url: /chapters/share-code-between-services.html
     - page: Share an API endpoint between services
       url: /chapters/share-an-api-endpoint-between-services.html
-    - page: Deploy a Serverless app with dependencies
+    - page: Deploy a serverless app with dependencies
       url: /chapters/deploy-a-serverless-app-with-dependencies.html
 
 configure-environments:
   title: Manage environments
   chapters:
-    - page: Environments in Serverless apps
+    - page: Environments in serverless apps
       url: /chapters/environments-in-serverless-apps.html
     - page: Structure environments across AWS accounts
       url: /chapters/structure-environments-across-aws-accounts.html
     - page: Manage AWS accounts using AWS Organizations
       url: /chapters/manage-aws-accounts-using-aws-organizations.html
-    - page: Parameterize Serverless resources names
+    - page: Parameterize serverless resources names
       url: /chapters/parameterize-serverless-resources-names.html
     - page: Deploying to multiple AWS accounts
       url: /chapters/deploying-to-multiple-aws-accounts.html
@@ -314,7 +314,7 @@ configure-environments:
           url: /chapters/deploy-the-api-services-repo.html
     - page: Manage environment related config
       url: /chapters/manage-environment-related-config.html
-    - page: Storing secrets in Serverless apps
+    - page: Storing secrets in serverless apps
       url: /chapters/storing-secrets-in-serverless-apps.html
     - page: Share Route 53 domains across AWS accounts
       url: /chapters/share-route-53-domains-across-aws-accounts.html
@@ -324,7 +324,7 @@ configure-environments:
 development-lifecycle:
   title: Development lifecycle
   chapters:
-    - page: Working on Serverless apps
+    - page: Working on serverless apps
       url: /chapters/working-on-serverless-apps.html
     - page: Invoke Lambda functions locally
       url: /chapters/invoke-lambda-functions-locally.html
@@ -344,7 +344,7 @@ development-lifecycle:
 observability:
   title: Observability
   chapters:
-    - page: Tracing Serverless apps with X-Ray
+    - page: Tracing serverless apps with X-Ray
       url: /chapters/tracing-serverless-apps-with-x-ray.html
 
 best-practices-conclusion:
@@ -358,7 +358,7 @@ best-practices-conclusion:
 #
 
 setup-serverless:
-  title: Setting up a Serverless app
+  title: Setting up a serverless app
   chapters:
     - page: Set up the Serverless Framework
       url: /chapters/setup-the-serverless-framework.html
@@ -377,7 +377,7 @@ setup-backend:
       url: /chapters/create-an-s3-bucket-for-file-uploads.html
 
 build-api:
-  title: Building a Serverless API
+  title: Building a serverless API
   chapters:
     - page: Add a create note API
       url: /chapters/add-a-create-note-api.html
@@ -423,8 +423,6 @@ third-party-apis:
 infrastructure-as-code:
   title: Infrastructure as Code
   chapters:
-    - page: Handle API Gateway CORS errors
-      url: /chapters/handle-api-gateway-cors-errors.html
     - page: Configure DynamoDB in serverless
       url: /chapters/configure-dynamodb-in-serverless.html
     - page: Configure S3 in serverless
@@ -433,7 +431,9 @@ infrastructure-as-code:
       url: /chapters/configure-cognito-user-pool-in-serverless.html
     - page: Configure Cognito Identity Pool in serverless
       url: /chapters/configure-cognito-identity-pool-in-serverless.html
-    - page: Deploy your Serverless infrastructure
+    - page: Handle API Gateway CORS errors
+      url: /chapters/handle-api-gateway-cors-errors.html
+    - page: Deploy your serverless infrastructure
       url: /chapters/deploy-your-serverless-infrastructure.html
 
 #
@@ -453,7 +453,7 @@ extra-backend:
       url: /chapters/cognito-user-pool-vs-identity-pool.html
     - page: API Gateway and Lambda Logs
       url: /chapters/api-gateway-and-lambda-logs.html
-    - page: Debugging Serverless API Issues
+    - page: Debugging serverless API Issues
       url: /chapters/debugging-serverless-api-issues.html
     - page: Serverless environment variables
       url: /chapters/serverless-environment-variables.html
@@ -463,7 +463,7 @@ extra-backend:
       url: /chapters/backups-in-dynamodb.html
     - page: Configure multiple AWS profiles
       url: /chapters/configure-multiple-aws-profiles.html
-    - page: Customize the Serverless IAM Policy
+    - page: Customize the serverless IAM Policy
       url: /chapters/customize-the-serverless-iam-policy.html
     - page: Mapping Cognito Identity Id and User Pool Id
       url: /chapters/mapping-cognito-identity-id-and-user-pool-id.html
@@ -479,7 +479,7 @@ extra-backend:
       url: /chapters/package-lambdas-with-serverless-bundle.html
     - page: Dynamically generate social share images with serverless
       url: /chapters/dynamically-generate-social-share-images-with-serverless.html
-    - page: Using Lerna and Yarn Workspaces with Serverless
+    - page: Using Lerna and Yarn Workspaces with serverless
       url: /chapters/using-lerna-and-yarn-workspaces-with-serverless.html
 
 extra-auth:

@@ -9,11 +9,11 @@ redirect_from: /chapters/cognito-as-a-serverless-service.html
 comments_id: configure-cognito-identity-pool-in-serverless/165
 ---
 
-If you recall from the first part of this tutorial, we use the Cognito Identity Pool as a way to control which AWS resources our logged in users will have access to. We also tie in our Cognito User Pool as our authentication provider.
+If you recall from the easryl part of this section, we used the Cognito Identity Pool as a way to control which AWS resources our logged in users will have access to. We also tie in our Cognito User Pool as our authentication provider.
 
 ### Create the Resource
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `resources/cognito-identity-pool.yml`.
+{%change%} Add the following to `resources/cognito-identity-pool.yml`.
 
 ``` yml
 Resources:
@@ -132,13 +132,11 @@ Let's quickly go over the various sections of this configuration:
 
 ### Add the Resource
 
-<img class="code-marker" src="/assets/s.png" />Let's reference the resource in our `serverless.yml`. Replace your `resources:` block with the following.
+{%change%} Let's reference the resource in our `serverless.yml`. Replace your `resources:` block with the following.
 
 ``` yml
 # Create our resources with separate CloudFormation templates
 resources:
-  # API Gateway Errors
-  - ${file(resources/api-gateway-errors.yml)}
   # DynamoDB
   - ${file(resources/dynamodb-table.yml)}
   # S3
@@ -148,4 +146,4 @@ resources:
   - ${file(resources/cognito-identity-pool.yml)}
 ```
 
-Now we are ready to deploy our new serverless infrastructure.
+Now we are almost ready to deploy our new serverless infrastructure. We are going to add one more resource to the mix. It'll make it easier for us to debug CORS errors on the frontend.

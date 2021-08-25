@@ -25,5 +25,3 @@ We aren't going to do much else in the way of storing this info in our database.
 To get started, [**follow the steps outlined in this chapter to create a Stripe account**]({% link _chapters/setup-a-stripe-account.md %}).
 
 Now with Stripe keys, let's create a billing API.
-
-Let's get started with first setting up our Stripe account.

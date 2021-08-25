@@ -9,11 +9,19 @@ ref: configure-dynamodb-in-serverless
 comments_id: configure-dynamodb-in-serverless/162
 ---
 
-We are now going to start creating our resources through our `serverless.yml`. Starting with DynamoDB.
+For our Serverless Framework app, we had [previously created our DynamoDB table through the AWS console]({% link _chapters/create-a-dynamodb-table.md %}). This can be hard to do when you are creating multiple apps or environments. Ideally, we want to be able to do this programmatically. In this section we'll look at how to use [infrastructure as code]({% link _chapters/what-is-infrastructure-as-code.md %}) to do just that.
 
 ### Create the Resource
 
-<img class="code-marker" src="/assets/s.png" />Add the following to `resources/dynamodb-table.yml`.
+[Serverless Framework](https://serverless.com) supports [CloudFormation](https://aws.amazon.com/cloudformation/) to help us configure our infrastructure through code. CloudFormation is a way to define our AWS resources using YAML or JSON, instead of having to use the AWS Console. We'll go into this in more detail later in this section.
+
+{%change%} Let’s create a directory to add our resources.
+
+``` bash
+$ mkdir resources/
+```
+
+{%change%} Add the following to `resources/dynamodb-table.yml`.
 
 ``` yml
 Resources:
@@ -49,18 +57,16 @@ Let's quickly go over what we are doing here.
 
 Now let's add a reference to this resource in our project.
 
-<img class="code-marker" src="/assets/s.png" />Replace the `resources:` block at the bottom of our `serverless.yml` with the following:
+{%change%} Add the following `resources:` block to the bottom of our `serverless.yml` with the following:
 
 ``` yml
 # Create our resources with separate CloudFormation templates
 resources:
-  # API Gateway Errors
-  - ${file(resources/api-gateway-errors.yml)}
   # DynamoDB
   - ${file(resources/dynamodb-table.yml)}
 ```
 
-<img class="code-marker" src="/assets/s.png" />Add the following `custom:` block at the top of our `serverless.yml` above the `provider:` block.
+{%change%} Add the following `custom:` block at the top of our `serverless.yml` above the `provider:` block.
 
 ``` yml
 custom:
@@ -83,7 +89,7 @@ A lot of the above might sound tricky and overly complicated right now. But we a
 
 We are also going to make a quick tweak to reference the DynamoDB resource that we are creating.
 
-<img class="code-marker" src="/assets/s.png" />Update our environment variables with the new generated table name. Replace the `environment:` block with the following:
+{%change%} Update our environment variables with the new generated table name. Replace the `environment:` block with the following:
 
 ``` yml
   # These environment variables are made available to our functions
@@ -93,7 +99,7 @@ We are also going to make a quick tweak to reference the DynamoDB resource that 
     stripeSecretKey: ${env:STRIPE_SECRET_KEY}
 ```
 
-<img class="code-marker" src="/assets/s.png" />Replace the `iamRoleStatements:` block in your `serverless.yml` with the following.
+{%change%} Replace the `iamRoleStatements:` block in your `serverless.yml` with the following.
 
 ``` yml
   iamRoleStatements:

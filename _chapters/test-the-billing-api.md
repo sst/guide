@@ -81,14 +81,6 @@ layers:
 
 Note the new `/billing` endpoint and `notes-api-prod-billing` function that's been added to the list.
 
-### Commit the Changes
+And that's it! Our serverless backend is now complete!
 
-{%change%} Let's commit and push our changes to GitHub.
-
-``` bash
-$ git add .
-$ git commit -m "Adding a billing API"
-$ git push
-```
-
-Now that we have our new billing API ready. Let's look at how to setup unit tests in serverless. We'll be using that to ensure that our business logic has been configured correctly.
+In the next optional section we'll be looking at how to use [infrastructure as code]({% link _chapters/what-is-infrastructure-as-code.md %}) to configure our resources programmatically.

@@ -91,6 +91,7 @@ Let's add a reference to our new API and Lambda function.
     events:
       - http:
           path: billing
+          cors: true
           method: post
           authorizer: aws_iam
 ```
