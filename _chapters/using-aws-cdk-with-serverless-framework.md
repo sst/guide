@@ -3,17 +3,20 @@ layout: post
 title: Using AWS CDK with Serverless Framework
 date: 2020-09-14 00:00:00
 lang: en
-description: To use AWS CDK and Serverless Framework together, you'll need to ensure that your CDK stacks are not deployed to multiple AWS accounts or environments. To fix this issue, we are going to use the Serverless Stack Toolkit (SST).
+description: To use AWS CDK and Serverless Framework together, you'll need to ensure that your CDK stacks are not deployed to multiple AWS accounts or environments. To fix this issue, we are going to use the Serverless Stack Framework (SST).
 redirect_from: /chapters/connect-serverless-framework-and-cdk-with-sst.html
 ref: using-aws-cdk-with-serverless-framework
 comments_id: using-aws-cdk-with-serverless-framework/2101
 ---
 
-TODO: UPDATE TO SST
+In this guide we've looked at two different ways of creating serverless applications; [using SST]({% link _chapters/create-an-sst-app.md %}) and [using Serverless Framework]({% link _chapters/setup-the-serverless-framework.md %}). But you can use the two of them together as well.
 
-To quickly recap, we are using [Serverless Framework](https://github.com/serverless/serverless) to deploy our Serverless backend API. And we are going to use [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}) to deploy the rest of the infrastructure for our notes app. 
+As in, you can create your infrastructure with SST and manage your Lambda functions and APIs with Serverless Framework. There are a couple of reasons why you might find yourself wanting to do this.
 
-In this chapter we'll look at how we can use the two together.
+1. Your applications are currently built using Serverless Framework and you want to use [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}) instead of [CloudFormation for your resources]({% link _chapters/configure-dynamodb-in-serverless.md %}).
+2. Or, you are looking to [migrate from Serverless Framework to SST](https://docs.serverless-stack.com/migrating-from-serverless-framework).
+
+In this chapter we'll look at how we can use SST to define your infrastructure using CDK and connecting that to our Serverless Framework app.
 
 ### Background
 
@@ -21,7 +24,7 @@ To understand how we can use Serverless Framework and CDK together, let's look a
 
 #### Serverless Framework App Architecture
 
-So far in this guide we've only created a single serverless service. But Serverless apps can be made up of multiple services and the app as a whole is deployed to the same environment.
+Serverless Framework apps can be made up of multiple services and the app as a whole is deployed to the same environment.
 
 ![Serverless Framework App Architecture](/assets/diagrams/serverless-framework-app-architecture.png)
 
@@ -47,7 +50,7 @@ AWS CDK apps on the other hand are made up of multiple stacks. And each stack is
 
 ![AWS CDK App Architecture](/assets/diagrams/aws-cdk-app-architecture.png)
 
-We haven't had a chance to look at some CDK code in detail yet, but you can define the AWS account and region that you want your CDK stack to be deployed to.
+You can define the AWS account and region that you want your CDK stack to be deployed to.
 
 ``` javascript
 new MyStack(app, "my-stack", { env: { account: "1234", region: "us-east-1" } });
@@ -59,7 +62,7 @@ You can fix this issue by following a certain convention in your CDK app. Howeve
 
 Ideally, we'd like our CDK app to work the same way as our Serverless Framework app. So we can deploy them together. This will matter a lot more when we are going to `git push` to deploy our apps automatically.
 
-To fix this issue, we created the [**Serverless Stack Toolkit**](https://github.com/serverless-stack/serverless-stack) (SST).
+[**Serverless Stack Framework (SST)**]({{ site.sst_github_repo }}) fixes this issue.
 
 ### Enter, Serverless Stack Toolkit
 
@@ -81,15 +84,9 @@ Just like Serverless Framework, the stacks in your CDK app are prefixed with the
 
 Here, just like the Serverless Framework example above; our app is made up of three services. Except, one of those services is a CDK app deployed using SST! 
 
-We'll be deploying it using the `sst deploy` command, instead of the standard `cdk deploy` command. This'll make more sense in the coming chapters once we look at our infrastructure code.
+We'll be deploying it using the `sst deploy` command, instead of the standard `cdk deploy` command.
 
-Let's start by creating our SST project.
-
----
-
-TODO: MERGE WITH CONNECT SLS AND CDK CHAPTER connect-serverless-framework-and-cdk-with-sst.html
-
-Now that we have configured the infrastructure for our Serverless app using CDK. Let's look at how we can connect it to our Serverless Framework project. The conventions enforced by [SST](https://github.com/serverless-stack/serverless-stack) makes this easy to do.
+Now that you know how these frameworks work behind the scenes, let's look at how we can connect a notes app built with Serverless Framework to an SST app that defines our infrastructure.
 
 ### Reference Your SST App
 
@@ -111,7 +108,6 @@ Here `notes-infra` is the name of our SST app as defined in `infrastructure/sst.
 ``` json
 {
   "name": "notes-infra",
-  "type": "@serverless-stack/resources",
   "stage": "dev",
   "region": "us-east-1"
 }
@@ -157,7 +153,7 @@ provider:
 
 ### Reference DynamoDB
 
-Next let's programmatically reference [the DynamoDB table that we created using CDK]({% link _chapters/create-a-dynamodb-table-in-sst.md %}).
+Next let's programmatically reference a DynamoDB table created using SST.
 
 {%change%} Replace the `environment` and `iamRoleStatements` block with in your `serverless.yml` with.
 
@@ -217,7 +213,7 @@ provider:
 
 Let's look at what we are doing here.
 
-- We'll use the name of the SST app to import the CloudFormation exports that we setup in our `DynamoDBStack` class back in the [Configure DynamoDB in CDK]({% link _chapters/create-a-dynamodb-table-in-sst.md %}) chapter.
+- We'll use the name of the SST app to import the CloudFormation exports that was setup in CDK.
 
 - We'll then change the `tableName` from the hardcoded `notes` to `!ImportValue '${self:custom.sstApp}-TableName'`. This imports the table name that we exported in CDK.
 
@@ -227,13 +223,13 @@ You might have picked up that we are using the stage name extensively in our set
 
 ### Add to the Cognito Authenticated Role
 
-While we are on the topic of giving our Lambda functions IAM access. We'll need to do something similar for our API. In the [previous chapter]({% link _chapters/adding-auth-to-our-serverless-app.md %}), we created an IAM role our authenticated users will use. It allows them to uploads files to their folder in S3. But we also need to allow them to access our API endpoint.
+While we are on the topic of giving our Lambda functions IAM access. We'll need to do something similar for our API.
 
 Note that, we don't need to explicitly give them access to our Lambda functions or DynamoDB table. This is because we are securing access at the level of the API endpoint. We assume that if you can access our endpoint, you have access to our Lambda functions. And the DynamoDB permissions that we setup above are not for our users, but our Lambda functions. We don't do this for our S3 bucket because the user is directly uploading files to S3. So we need to secure access to it as well. Put another way, the two external touch points our user has is our API endpoint and S3 bucket. And that's what we need to secure access to.
 
-So let's add our API endpoint to the authenticated role we previously created in CDK.
+So let's add our API endpoint to an authenticated role created in our SST app.
 
-{%change%} Add the following to `services/notes/resources/cognito-policy.yml`.
+{%change%} Add a new resource in your `serverless.yml` with.
 
 ``` yml
 Resources:
@@ -259,19 +255,6 @@ While YAML can be a bit hard to read, here is what we are doing.
 
 - This policy has `execute-api:Invoke` access to the `arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGatewayRestApi}/*` resource. Once we attach this resource to our API, the `ApiGatewayRestApi` variable will be replaced with the API we are creating.
 
-- Finally, we attach this policy to the role we previously created (and exported), `!ImportValue '${self:custom.sstApp}-CognitoAuthRole'`. If you go back and look at the end of the [previous chapter]({% link _chapters/adding-auth-to-our-serverless-app.md %}), you'll notice the above export.
+- Finally, we attach this policy to the role we previously created (and exported), `!ImportValue '${self:custom.sstApp}-CognitoAuthRole'`. This role needs to be exported in our SST app.
 
-Now let's add this resource to our API.
-
-{%change%} Replace the `resources:` block at the bottom of our `services/notes/serverless.yml` with.
-
-``` yml
-# Create our resources with separate CloudFormation templates
-resources:
-  # API Gateway Errors
-  - ${file(resources/api-gateway-errors.yml)}
-  # Cognito Identity Pool Policy
-  - ${file(resources/cognito-policy.yml)}
-```
-
-And now we are ready to deploy our (completely programmatically created) serverless infrastructure!
+And now we are able to link the infrastructure created in our SST app with our Serverless Framework app.

@@ -163,7 +163,7 @@ function handleLogout() {
 }
 ```
 
-Now head over to your browser and try logging in with the admin credentials we created in the [Create a Cognito Test User]({% link _chapters/create-a-cognito-test-user.md %}) chapter. You should see the Logout button appear right away. TODO: CHECK THE LINK
+Now head over to your browser and try logging in with the admin credentials we created in the [Secure Our Serverless APIs]({% link _chapters/secure-our-serverless-apis.md %}) chapter. You should see the Logout button appear right away.
 
 ![Login state updated screenshot](/assets/login-state-updated.png)
 

@@ -8,9 +8,9 @@ ref: manage-environments-in-create-react-app
 comments_id: manage-environments-in-create-react-app/182
 ---
 
-Recall from our backend section that we created two environments (dev and prod) for our serverless backend API. In this chapter we'll configure our frontend Create React App to connect to it.
+We want to ensure that our React.js app connects to the right version of the backend resources when we deploy it to different environments. Let's look at how to do that.
 
-Let's start by looking at how our app is configured currently. Our `src/config.js` stores the info for all of our backend resources.
+Let's start by looking at a simple config. The `src/config.js` stores the info for all of our backend resources.
 
 ``` js
 const config = {
@@ -41,7 +41,7 @@ We need to change this so that when we *push* our app to **dev** it connects to 
 
 Our React app is a static single page app. This means that once a *build* is created for a certain environment it persists for that environment.
 
-[Create React App](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-custom-environment-variables) has support for custom environment variables baked into the build system. To set a custom environment variable, simply set it while starting the Create React App build process.
+[Create React App](https://create-react-app.dev/docs/adding-custom-environment-variables/) has support for custom environment variables baked into the build system. To set a custom environment variable, simply set it while starting the Create React App build process.
 
 ``` bash
 $ REACT_APP_TEST_VAR=123 npm start
@@ -110,13 +110,9 @@ const config = {
 export default config;
 ```
 
-Make sure to replace the different version of the resources with the ones from the [Deploying through Seed]({% link _chapters/deploying-through-seed.md %}) chapter.
-
-We did not complete our Stripe account setup back then, so we don't have the production version of this key. For now we'll just assume that we have two versions of the same key. So `YOUR_STRIPE_DEV_PUBLIC_KEY` and `YOUR_STRIPE_PROD_PUBLIC_KEY` are the same ones for now.
+Make sure to replace the different version of the resources with the ones from your app.
 
 Note that we are defaulting our environment to dev if the `REACT_APP_STAGE` is not set. This means that our current build process (`npm start` and `npm run build`) will default to the `dev` environment. Also note that we've moved config values that are common to both environments (like `MAX_ATTACHMENT_SIZE`) to a different section.
-
-If we switch over to our app, we should see it in development mode and it'll be connected to the dev version of our backend. We haven't changed the deployment process yet but in the coming chapters we'll change this when we automate our frontend deployments.
 
 We don't need to worry about the prod version just yet. But as an example, if we wanted to build the prod version of our app we'd have to run the following:
 
@@ -129,4 +125,4 @@ OR for Windows
 set "REACT_APP_STAGE=prod" && npm start
 ```
 
-Next, we'll set up automatic deployments for our React app using a service called [Netlify](https://www.netlify.com). This will be fairly similar to what we did for our serverless backend API.
+Next, we'll create a build script to deploy our React.js app to Netlify.

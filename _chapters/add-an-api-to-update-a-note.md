@@ -88,7 +88,7 @@ $ curl -X PUT \
 https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes/NOTE_ID
 ```
 
-Make sure to replace the id at the end of the URL with the `noteId` from when we [created our note]({% link _chapter/add-an-api-to-create-a-note.md %}).
+Make sure to replace the id at the end of the URL with the `noteId` from when we [created our note]({% link _chapters/add-an-api-to-create-a-note.md %}).
 
 Here we are making a PUT request to a note that we want to update. We are passing in the new `content` and `attachment` as a JSON string.
 

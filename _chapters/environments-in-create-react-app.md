@@ -14,7 +14,7 @@ In this chapter we will look at some simple ways to configure multiple environme
 
 ### Custom Environment Variables
 
-[Create React App](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-custom-environment-variables) has support for custom environment variables baked into the build system. To set a custom environment variable, simply set it while starting the Create React App build process.
+[Create React App](https://create-react-app.dev/docs/adding-custom-environment-variables/) has support for custom environment variables baked into the build system. To set a custom environment variable, simply set it while starting the Create React App build process.
 
 ``` bash
 $ REACT_APP_TEST_VAR=123 npm start

@@ -8,9 +8,11 @@ ref: set-custom-domains-through-seed
 comments_id: set-custom-domains-through-seed/178
 ---
 
-Our serverless API uses API Gateway and it gives us some auto-generated endpoints. We would like to configure them to use a scheme like `api.my-domain.com` or something similar. This can take a few different steps through the AWS Console, but it is pretty straightforward to configure through [Seed](https://seed.run).
+In the main part of our guide, we [used SST to configure custom domains for our serverless app]({% link _chapters/custom-domains-in-serverless-apis.md %}). But if you are using Serverless Framework or want to manage custom domains centrally, [Seed](https://seed.run) gives you another option.
 
-We are using the same custom domain that we purchased back in the [Purchase a Domain with Route 53]({% link _chapters/purchase-a-domain-with-route-53.md %}) chapter.
+Let's look at how.
+
+We are still using the same custom domain that we purchased back in the [Purchase a Domain with Route 53]({% link _chapters/purchase-a-domain-with-route-53.md %}) chapter.
 
 ### Add Custom Domain on Seed
 
@@ -42,4 +44,4 @@ While we wait, we can do the same for our `dev` endpoint. Select the domain, sub
 
 Hit **Add Custom Domain** and wait for the changes to take place.
 
-Now that we've automated our deployments, let’s do a quick test to see what will happen if we make a mistake and push some faulty code to production.
+And that's it! Now your app is configured with custom domains on Seed.

@@ -1,15 +1,17 @@
 ---
 layout: post
-title: Frontend Workflow
+title: Frontend Workflow in Netlify
 date: 2018-03-29 00:00:00
 lang: en
 description: There are three steps that are a part of workflow for a Create React App configured with Netlify. To work on new features create a new branch and enable branch deployments. And merge to master to deploy to production. Finally, publish an old deployment through the Netlify console to rollback in production.
-redirect_from: /chapters/update-the-app.html
-ref: frontend-workflow
+redirect_from:
+  - /chapters/update-the-app.html
+  - /chapters/frontend-workflow.html
+ref: frontend-workflow-in-netlify
 comments_id: frontend-workflow/192
 ---
 
-Now that we have our frontend deployments configured, let's go over what our development workflow will look like.
+Now that we have our [Netlify build script configured]({% link _chapters/create-a-netlify-build-script.md %}), let's go over what our development workflow with Netlify will look like.
 
 ### Working in a Dev Branch
 
@@ -129,6 +131,4 @@ And hit **Publish deploy**. This will publish our previous version again.
 
 ![Publish old production deployment screenshot](/assets/part2/publish-old-production-deployment.png)
 
-And that's it! Now you have an automated workflow for building and deploying your Create React App with serverless.
-
-We are almost ready to wrap things up. But before we do, we want to cover one final really important topic; how to monitor and debug errors when your app is live.
+And that's it! Now you have a CI/CD pipeline for building and deploying your Create React App with serverless.

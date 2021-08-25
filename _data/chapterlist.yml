@@ -532,8 +532,8 @@ extra-frontend:
           url: /chapters/manage-environments-in-create-react-app.html
         - page: Create a Netlify build script
           url: /chapters/create-a-netlify-build-script.html
-        - page: Frontend workflow
-          url: /chapters/frontend-workflow.html
+        - page: Frontend workflow in Netlify
+          url: /chapters/frontend-workflow-in-netlify.html
     - page: Manage User Accounts in AWS Amplify
       url: /chapters/manage-user-accounts-in-aws-amplify.html
       subchapters:
