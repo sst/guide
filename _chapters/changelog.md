@@ -28,6 +28,10 @@ You can get these updates emailed to you via our [newsletter]({% link newsletter
 {{ site.data.changelog.current.desc }}
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v6.1...v7.0)
+- [Demo notes app source]({{ site.sst_demo_repo }})
+- Serverless Framework version
+  - [API]({{ site.backend_github_repo }}/compare/v6.0...v7.0)
+  - [Client]({{ site.frontend_github_repo }}/compare/v6.0...v7.0)
 
 #### v6.1: {{ site.data.changelog.v6-1.title }}
 
