@@ -13,7 +13,7 @@ In this section we are going to use [Serverless Framework](https://github.com/se
 - We are only building the backend in Serverless Framework.
 - The backend is defined using [CloudFormation](https://aws.amazon.com/cloudformation) in Serverless Framework. While we use [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}) in SST.
 
-### Reference Repo
+### Demo Repo
 
 Before we get started, here's a link to the GitHub repo of the app that we will be building. Make sure to hang on to it for reference.
 

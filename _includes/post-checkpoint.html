@@ -13,7 +13,7 @@
 
   <div class="header">
     <i class="fa fa-map-marker" aria-hidden="true"></i>
-    <span>Checkpoint</span>
+    <span>Source</span>
   </div>
   <p>{{ repo_desc }}</p>
   {% if page.code == 'backend' %}
@@ -27,6 +27,10 @@
   {% elsif page.code == 'backend_full' %}
     {% capture repo_url %}{{ site.backend_github_repo }}{% endcapture %}
     {% capture repo_tag %}Backend Source{% endcapture %}
+
+  {% elsif page.code == 'sst_full' %}
+    {% capture repo_url %}{{ site.sst_demo_repo }}{% endcapture %}
+    {% capture repo_tag %}Notes App Source{% endcapture %}
 
   {% elsif page.code == 'facebook-login' %}
     {% capture repo_url %}{{ site.frontend_fb_login_github_repo }}{% endcapture %}

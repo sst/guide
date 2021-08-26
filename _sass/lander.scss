@@ -1103,13 +1103,14 @@ $reader-logo-width: 123px;
           margin-top: $spacing-unit + 10px;
         }
       }
-      &.extra-credit {
+      &.extra-credit,
+      &.serverless-framework {
         margin-top: $spacing-unit + 10px;
       }
     }
 
     div.chapters {
-      $max-height: 400px;
+      $max-height: 500px;
 
       padding-bottom: $spacing-unit;
       border-radius: 4px;
@@ -1170,7 +1171,7 @@ $reader-logo-width: 123px;
       }
 
       &.the-basics {
-        max-height: 2083px;
+        max-height: 1830px;
 
         @include media-query($on-laptop) {
           max-height: 1.5 * $max-height;
@@ -1183,28 +1184,6 @@ $reader-logo-width: 123px;
 
         .expand {
           display: none;
-        }
-      }
-
-      &.best-practices {
-        @extend %toc-expanded;
-
-        @include media-query($on-laptop) {
-          max-height: 1.5 * $max-height;
-          overflow: hidden;
-
-          .expand {
-            display: flex;
-          }
-
-          &.expanded {
-            max-height: none;
-            overflow: visible;
-
-            .expand {
-              display: none;
-            }
-          }
         }
       }
 

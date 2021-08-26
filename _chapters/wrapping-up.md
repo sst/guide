@@ -5,6 +5,7 @@ lang: en
 description: Wrapping up the tutorial and going over the next steps.
 date: 2018-03-30 00:00:00
 ref: wrapping-up
+code: sst_full
 comments_id: comments-for-wrapping-up/100
 ---
 

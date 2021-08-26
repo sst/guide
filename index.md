@@ -11,7 +11,7 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
       <div class="part">
         <div id="the-basics" class="header">
           <h3>The Basics</h3>
-          <p>Build your first Serverless app using AWS Lambda and React.</p>
+          <p>Build your first serverless app using AWS Lambda and React.</p>
         </div>
         <div class="chapters the-basics">
           {% include toc-chapters.html items=site.data.chapterlist.preface id="preface" %}
