@@ -42,7 +42,7 @@ Here is a rough rundown of the topics covered in this section of the guide.
 We are covering primarily the backend Serverless portion. The frontend flow works relatively the same way as what we covered in the first section. We also found that there is a distinct lack of best practices for building Serverless backends as opposed to React apps.
 
 - [Organizing large Serverless apps]({% link _chapters/organizing-serverless-projects.md %})
-  - [Sharing resources using cross-stack references]({ link _chapters/cross-stack-references-in-serverless.md %})
+  - [Sharing resources using cross-stack references]({% link _chapters/cross-stack-references-in-serverless.md %})
   - [Sharing code between services]({% link _chapters/share-code-between-services.md %})
   - [Sharing API endpoints across services]({% link _chapters/share-an-api-endpoint-between-services.md %})
 - [Configuring environments]({% link _chapters/environments-in-serverless-apps.md %})
