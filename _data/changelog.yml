@@ -2,6 +2,10 @@ current:
   title: "Creating separate SST and Serverless Framework sections"
   desc: "Aug 25, 2021: Creating a separate SST version and Serverless Framework version of the guide."
 
+v6-1:
+  title: "Adding Extra Credit AppSync and Auth chapters"
+  desc: "Aug 3, 2021: Adding Extra Credit chapters on AppSync and Auth."
+
 v6-0:
   title: "Upgrading Bootstrap and reorganizing chapters"
   desc: "Nov 11, 2020: Upgrading to Bootstrap 4 and React Bootstrap 1.4. Also, a major reorganizing of the chapters."
