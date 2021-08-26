@@ -191,9 +191,9 @@ def merge_chapters
             file << "\\addtocontents{toc}{~\\par}\n"
             file << "\\addtocontents{toc}{\\centerline{\\textbf{Best Practices}}\\par}\n"
           elsif (section_key === 'setup-serverless')
-            file << "\\addtocontents{toc}{~\\par}\n"
-            file << "\\addtocontents{toc}{~\\par}\n"
-            file << "\\addtocontents{toc}{\\centerline{\\textbf{Serverless Framework}}\\par}\n"
+            file << "\\addtocontents{toc}{~\\par}\n"
+            file << "\\addtocontents{toc}{~\\par}\n"
+            file << "\\addtocontents{toc}{\\centerline{\\textbf{Serverless Framework}}\\par}\n"
           elsif (section_key === 'extra-backend')
             file << "\\addtocontents{toc}{~\\par}\n"
             file << "\\addtocontents{toc}{~\\par}\n"
