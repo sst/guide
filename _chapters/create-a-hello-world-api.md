@@ -48,7 +48,7 @@ $ npx sst start
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
 
-```
+``` txt
 ===============
  Deploying app
 ===============
