@@ -4,7 +4,6 @@ title: Redirect on Login
 date: 2017-02-04 00:00:00
 lang: en
 description: To make sure that our React.js redirects a user to the right page after they login, we are going to use the React Router useHistory hook.
-code: frontend
 comments_id: redirect-on-login/24
 ref: redirect-on-login
 ---
@@ -15,7 +14,7 @@ Let's start by adding a method to read the `redirect` URL from the querystring.
 
 {%change%} Add the following method to your `src/components/UnauthenticatedRoute.js` below the imports.
 
-``` coffee
+``` jsx
 function querystring(name, url = window.location.href) {
   name = name.replace(/[[]]/g, "\\$&");
 
@@ -39,7 +38,7 @@ Now let's update our component to use this parameter when it redirects.
 
 {%change%} Replace our current `UnauthenticatedRoute` function component with the following.
 
-``` coffee
+``` jsx
 export default function UnauthenticatedRoute({ children, ...rest }) {
   const { isAuthenticated } = useAppContext();
   const redirect = querystring("redirect");
@@ -57,19 +56,19 @@ export default function UnauthenticatedRoute({ children, ...rest }) {
 
 {%change%} And remove the following from the `handleSubmit` method in `src/containers/Login.js`.
 
-``` coffee
+``` jsx
 history.push("/");
 ```
 
 {%change%} Also, remove the hook declaration.
 
-``` coffee
+``` jsx
 const history = useHistory();
 ```
 
 {%change%} Finally, remove the import.
 
-``` coffee
+``` jsx
 import { useHistory } from "react-router-dom";
 ```
 
@@ -87,6 +86,4 @@ $ git push
 
 And that's it! Our app is ready to go live.
 
-Next we'll be looking at how to host our React app! And we'll do it on our own domain!
-
-We should mention that if you want to use the setup we've described so far but want to use a Facebook login, we have a separate chapter on that — [Facebook Login with Cognito using AWS Amplify]({% link _chapters/facebook-login-with-cognito-using-aws-amplify.md %}). It builds on what we've covered so far.
+Next we'll be deploying our serverless app to production. And we'll do it using our own domain!

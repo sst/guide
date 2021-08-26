@@ -22,4 +22,6 @@ A common extension of Serverless Stack (that we have noticed) is to add a billin
 
 We aren't going to do much else in the way of storing this info in our database. We'll leave that as an exercise for the reader.
 
-Let's get started with first setting up our Stripe account.
+To get started, [**follow the steps outlined in this chapter to create a Stripe account**]({% link _chapters/setup-a-stripe-account.md %}).
+
+Now with Stripe keys, let's create a billing API.

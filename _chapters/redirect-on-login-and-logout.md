@@ -69,7 +69,7 @@ import { useHistory } from "react-router-dom";
 
 {%change%} Add the following to the bottom of the `handleLogout` function in our `src/App.js`.
 
-``` coffee
+``` jsx
 history.push("/login");
 ```
 

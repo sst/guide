@@ -14,15 +14,9 @@ Currently, our app has a single component that renders our content. For creating
 
 Let's start by creating the outer chrome of our application by first adding a navigation bar to it. We are going to use the [Navbar](https://react-bootstrap.github.io/components/navbar/) React-Bootstrap component.
 
-{%change%} To start, you can go remove the `src/logo.svg` that is placed there by Create React App.
+{%change%} Go ahead and remove the code inside `src/App.js` and replace it with the following.
 
-``` bash
-$ rm src/logo.svg
-```
-
-{%change%} And go ahead and remove the code inside `src/App.js` and replace it with the following.
-
-``` coffee
+``` jsx
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import "./App.css";
@@ -60,11 +54,19 @@ Let's clear out the styles that came with our template.
 
 For now we don't have any styles to add but we'll leave this file around, in case you want to add to it later.
 
+Also, let's remove some unused template files.
+
+{%change%} Run the following in your React `frontend/` directory.
+
+``` bash
+$ rm src/logo.svg src/App.test.js
+```
+
 ### Add the Home container
 
 Now that we have the outer chrome of our application ready, let's add the container for the homepage of our app.  It'll respond to the `/` route.
 
-{%change%} Create a `src/containers/` directory by running the following in your working directory.
+{%change%} Create a `src/containers/` directory by running the following in the `frontend/` directory.
 
 ``` bash
 $ mkdir src/containers/
@@ -74,7 +76,7 @@ We'll be storing all of our top level components here. These are components that
 
 {%change%} Create a new container and add the following to `src/containers/Home.js`.
 
-``` coffee
+``` jsx
 import React from "react";
 import "./Home.css";
 
@@ -114,7 +116,7 @@ Now we'll set up the routes so that we can have this container respond to the `/
 
 {%change%} Create `src/Routes.js` and add the following into it.
 
-``` coffee
+``` jsx
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "./containers/Home";
@@ -138,19 +140,19 @@ Now let's render the routes into our App component.
 
 {%change%} Add the following to the header of your `src/App.js`.
 
-``` coffee
+``` jsx
 import Routes from "./Routes";
 ```
 
 {%change%} And add the following line below our `Navbar` component inside `src/App.js`.
 
-``` coffee
+``` jsx
 <Routes />
 ```
 
 So the `App` function component of our `src/App.js` should now look like this.
 
-``` coffee
+``` jsx
 function App() {
   return (
     <div className="App container py-3">

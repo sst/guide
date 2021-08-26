@@ -4,13 +4,12 @@ title: Setup Error Logging in Serverless
 date: 2020-04-01 00:00:00
 lang: en
 description: In this chapter we'll look at how to handle errors in our Lambda functions. We'll also handle Lambda timeouts and enable logging for the AWS SDK.
-code: backend_full
 comments_id: setup-error-logging-in-serverless/1733
 redirect_from: /chapters/monitoring-deployments-in-seed.html
 ref: setup-error-logging-in-serverless
 ---
 
-Now that we have our React app configured to report errors, let's move on to our Serverless backend. Our React app is reporting API errors (and other unexpected errors) with the API endpoint that caused the error. We want to use that info to be able to debug on the backend and figure out what's going on.
+Now that we have our React app configured to report errors, let's move on to our serverless backend. Our React app is reporting API errors (and other unexpected errors) with the API endpoint that caused the error. We want to use that info to be able to debug on the backend and figure out what's going on.
 
 To do this, we'll setup the error logging in our backend to catch:
 
@@ -24,7 +23,7 @@ We are going to look at how to setup a debugging framework to catch the above er
 
 Let's start by adding some code to help us with that.
 
-{%change%} Create a `services/notes/libs/debug-lib.js` file and add the following to it.
+{%change%} Create a `src/util/debug.js` file from your project root with the following.
 
 ``` javascript
 import util from "util";
@@ -42,7 +41,7 @@ export default function debug() {
   });
 }
 
-export function init(event, context) {
+export function init(event) {
   logs = [];
 
   // Log API event
@@ -111,17 +110,17 @@ You'll recall that all our Lambda functions are wrapped using a `handler()` meth
 
 We'll use the debug lib that we added above to improve our error handling. 
 
-{%change%} Replace our `services/notes/libs/handler-lib.js` with the following.
+{%change%} Replace our `src/util/handler.js` with the following.
 
 ``` javascript
-import * as debug from "./debug-lib";
+import * as debug from "./debug";
 
 export default function handler(lambda) {
   return async function (event, context) {
     let body, statusCode;
 
     // Start debugger
-    debug.init(event, context);
+    debug.init(event);
 
     try {
       // Run the Lambda
@@ -161,7 +160,7 @@ This should be fairly straightforward:
 You might recall the way we are currently using the above error handler in our Lambda functions.
 
 ``` javascript
-import handler from "./libs/handler-lib";
+import handler from "./util/handler";
 
 export const main = handler((event, context) => {
   // Do some work
@@ -183,26 +182,10 @@ Let's push our changes
 
 ``` bash
 $ git add .
-$ git commit -m "Adding error logging"
+$ git commit -m "Adding serverless error logging"
 $ git push
 ```
 
-And promote the changes to production.
+This should deploy our changes to production.
 
-Head over to the Seed console and hit **Promote to prod** once your changes are deployed to dev.
-
-![Promote error logging to prod in Seed](/assets/monitor-debug-errors/promote-error-logging-to-prod-in-seed.png)
-
-### Enable Access Logs
-
-The combination of our new error handler and Lambda logs will help us catch most of the errors. However, we can run into errors that don't make it to our Lambda functions. To debug these errors we'll need to look at the API Gateway logs. So let's go head and enable access logs for our API.
-
-From the dashboard for your app on Seed, select the **Resources** tab.
-
-![Click Resources tab in Seed dashboard](/assets/monitor-debug-errors/click-resources-tab-in-seed-dashboard.png)
-
-Then hit **Enable Access Logs** for your API.
-
-![Enable access logs in Seed](/assets/monitor-debug-errors/enable-access-logs-in-seed.png)
-
-And that's pretty much it! With these simple steps, we are now ready to look at some examples of how to debug our Serverless app.
+And that's pretty much it! With these simple steps, we are now ready to look at some examples of how to debug our serverless app.

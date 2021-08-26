@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Share Route 53 Domains Across AWS Accounts
-description: In this chapter we look at how to delegate Route 53 domains across AWS accounts. This allows us to use the same custom domain for our Serverless app across multiple environments.
+description: In this chapter we look at how to delegate Route 53 domains across AWS accounts. This allows us to use the same custom domain for our serverless app across multiple environments.
 date: 2019-10-02 00:00:00
 comments_id: share-route-53-domains-across-aws-accounts/1334
 ---

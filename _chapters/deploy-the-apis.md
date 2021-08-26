@@ -8,7 +8,7 @@ description: Use the “serverless deploy” command to deploy to AWS Lambda and
 comments_id: deploy-the-apis/121
 ---
 
-Now that our APIs are complete, let's deploy them.
+So far we've been working on our Lambda functions locally. In this chapter we are going to deploy them.
 
 {%change%} Run the following in your working directory.
 
@@ -22,7 +22,7 @@ If you have multiple profiles for your AWS SDK credentials, you will need to exp
 $ serverless deploy --aws-profile myProfile
 ```
 
-Where `myProfile` is the name of the AWS profile you want to use. If you need more info on how to work with AWS profiles in Serverless, refer to our [Configure multiple AWS profiles]({% link _chapters/configure-multiple-aws-profiles.md %}) chapter.
+Where `myProfile` is the name of the AWS profile you want to use. If you need more info on how to work with AWS profiles in serverless, refer to our [Configure multiple AWS profiles]({% link _chapters/configure-multiple-aws-profiles.md %}) chapter.
 
 Near the bottom of the output for this command, you will find the **Service Information**.
 
@@ -53,7 +53,7 @@ layers:
 
 This has a list of the API endpoints that were created. Make a note of these endpoints as we are going to use them later while creating our frontend. Also make a note of the region and the id in these endpoints, we are going to use them in the coming chapters. In our case, `us-east-1` is our API Gateway Region and `0f7jby961h` is our API Gateway ID.
 
-If you are running into some issues while deploying your app, we have [a compilation of some of the most common Serverless errors](https://seed.run/docs/serverless-errors/) over on [Seed](https://seed.run).
+If you are running into some issues while deploying your app, we have [a compilation of some of the most common serverless errors](https://seed.run/docs/serverless-errors/) over on [Seed](https://seed.run).
 
 ### Deploy a Single Function
 
@@ -82,15 +82,5 @@ You should see something like this.
 ```
 
 This is a JSON encoded array of notes objects that we stored in DynamoDB.
-
-### Commit the Changes
-
-{%change%} Let's commit the changes so far and push it to GitHub.
-
-``` bash
-$ git add .
-$ git commit -m "Adding our Serverless API"
-$ git push
-```
 
 So our API is publicly available, this means that anybody can access it and create notes. And it's always connecting to the `123` user id. Let's fix these next by handling users and authentication.

@@ -1,12 +1,12 @@
 ---
 layout: post
 title: Working on Serverless Apps
-description: In this section of the guide we look at the development workflow of a real world Serverless app.
+description: In this section of the guide we look at the development workflow of a real world serverless app.
 date: 2019-10-07 00:00:00
 comments_id: working-on-serverless-apps/1339
 ---
 
-So to quickly recap, we've split our real world Serverless app into two repos, [one creates our infrastructure resources]({{ site.backend_ext_resources_github_repo }}) and the [second creates our API services]({{ site.backend_ext_api_github_repo }}).
+So to quickly recap, we've split our real world serverless app into two repos, [one creates our infrastructure resources]({{ site.backend_ext_resources_github_repo }}) and the [second creates our API services]({{ site.backend_ext_api_github_repo }}).
 
 We've also split our environments across two AWS accounts; `Development` and `Production`. In this section, we are going to look at the development workflow for a real world Serverless app.
 

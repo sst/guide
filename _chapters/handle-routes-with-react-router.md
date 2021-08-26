@@ -16,13 +16,13 @@ Let's start by installing React Router.
 
 ### Installing React Router
 
-{%change%} Run the following command in your working directory.
+{%change%} Run the following command in the `frontend/` directory and **not** in your project root.
 
 ``` bash
 $ npm install react-router-dom@5.2.0 --save
 ```
 
-This installs the NPM package and adds the dependency to your `package.json`.
+This installs the NPM package and adds the dependency to the `package.json` of your React app.
 
 ### Setting up React Router
 
@@ -30,7 +30,7 @@ Even though we don't have any routes set up in our app, we can get the basic str
 
 {%change%} Replace the following code in `src/index.js`:
 
-``` coffee
+``` jsx
 ReactDOM.render(
   <React.StrictMode>
     <App />
@@ -41,7 +41,7 @@ ReactDOM.render(
 
 {%change%} With this:
 
-``` coffee
+``` jsx
 ReactDOM.render(
   <React.StrictMode>
     <Router>
@@ -54,7 +54,7 @@ ReactDOM.render(
 
 {%change%} And import this in the header of `src/index.js`.
 
-``` coffee
+``` jsx
 import { BrowserRouter as Router } from 'react-router-dom';
 ```
 

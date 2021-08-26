@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Promoting to Production
-description: In this chapter we'll look at the process of promoting your Serverless app to production using Seed. We'll look at why a manual promote is recommended and how change sets can help us review our changes.
+description: In this chapter we'll look at the process of promoting your serverless app to production using Seed. We'll look at why a manual promote is recommended and how change sets can help us review our changes.
 date: 2019-10-02 00:00:00
 comments_id: promoting-to-production/1330
 ---
@@ -24,7 +24,7 @@ This will trigger the `prod` stage to start building.
 
 ### Why manual promote?
 
-In a traditional monolithic application (non-Serverless) development, your code mostly contains application logic. Application logic can be rolled back relatively easily and is usually side-effect free. 
+In a traditional monolithic application (non-serverless) development, your code mostly contains application logic. Application logic can be rolled back relatively easily and is usually side-effect free. 
 
 Serverless apps adopt the [infrastructure as code pattern]({% link _chapters/what-is-infrastructure-as-code.md %}), and your infrastructure definition (`serverless.yml`) sits in your codebase. When your Serverless app is deployed, the code is updated, and the infrastructure changes are applied. A typo in your `serverless.yml` could remove your resources. And in the case of a database resource, this could result in permanent data loss.
 

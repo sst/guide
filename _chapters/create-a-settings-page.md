@@ -19,11 +19,11 @@ To get started let's add our settings page.
 
 {%change%} Create a new file in `src/containers/Settings.js` and add the following.
 
-``` coffee
-import React, { useState, useEffect } from "react";
+``` jsx
+import React, { useState } from "react";
 import { API } from "aws-amplify";
 import { useHistory } from "react-router-dom";
-import { onError } from "../libs/errorLib";
+import { onError } from "../lib/errorLib";
 import config from "../config";
 
 export default function Settings() {
@@ -51,7 +51,7 @@ import Settings from "./containers/Settings";
 
 {%change%} Add the following below the `/signup` route in our `<Switch>` block in `src/Routes.js`.
 
-``` coffee
+``` jsx
 <Route exact path="/settings">
   <Settings />
 </Route>
@@ -60,7 +60,7 @@ import Settings from "./containers/Settings";
 {%change%} Next add a link to our settings page in the navbar by replacing the `return` statement in `src/App.js` with this.
 
 {% raw %}
-``` coffee
+``` jsx
 return (
   !isAuthenticating && (
     <div className="App container py-3">
@@ -104,7 +104,7 @@ return (
 
 You'll notice that we added another link in the navbar that only displays when a user is logged in.
 
-``` coffee
+``` jsx
 <LinkContainer to="/settings">
   <Nav.Link>Settings</Nav.Link>
 </LinkContainer>

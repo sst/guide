@@ -54,6 +54,7 @@ This is pretty much the same as our `get.js` except we use a condition to only r
     events:
       - http:
           path: notes
+          cors: true
           method: get
 ```
 

@@ -55,7 +55,7 @@ Now let's render the results.
 
 {%change%} Replace our `renderNotesList` placeholder method with the following.
 
-``` coffee
+``` jsx
 function renderNotesList(notes) {
   return (
     <>
@@ -87,7 +87,7 @@ The code above does a few things.
 
 1. It always renders a **Create a new note** button as the first item in the list (even if the list is empty). And it links to [the create note page that we previously created]({% link _chapters/add-the-create-note-page.md %}).
 
-   ``` coffee
+   ``` jsx
     <LinkContainer to="/notes/new">
       <ListGroup.Item action className="py-3 text-nowrap text-truncate">
         <BsPencilSquare size={17} />

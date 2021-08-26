@@ -8,13 +8,19 @@ ref: what-does-this-guide-cover
 comments_id: what-does-this-guide-cover/83
 ---
 
-To step through the major concepts involved in building web applications, we are going to be building a simple note taking app called [**Scratch**](https://demo2.serverless-stack.com). However, unlike most tutorials out there, our goal is to go into the details of what it takes to build a full-stack application for production.
+To step through the major concepts involved in building web applications, we are going to be building a simple note taking app called [**Scratch**]({{ site.demo_url }}).
 
-![Completed app desktop screenshot](/assets/completed-app-desktop.png)
+However, unlike most tutorials out there, our goal is to go into the details of what it takes to build a full-stack application for production.
 
-<img alt="Completed app mobile screenshot" src="/assets/completed-app-mobile.png" width="432" />
+### Demo App
 
-It is a single page application powered by a serverless API written completely in JavaScript. Here is the complete source for the [backend]({{ site.backend_github_repo }}) and the [frontend]({{ site.frontend_github_repo }}). It is a relatively simple application but we are going to address the following requirements.
+The demo app is a single page application powered by a serverless API written completely in JavaScript.
+
+[![Completed app desktop screenshot](/assets/completed-app-desktop.png)]({{ site.demo_url }})
+
+<a href="{{ site.demo_url }}"><img alt="Completed app mobile screenshot" src="/assets/completed-app-mobile.png" width="432" /></a>
+
+It is a relatively simple application but we are going to address the following requirements.
 
 - Should allow users to signup and login to their accounts
 - Users should be able to create notes with some content
@@ -27,6 +33,12 @@ It is a single page application powered by a serverless API written completely i
 - The app needs to be responsive
 - The app should be deployed when we `git push`
 - We should be able to monitor and debug any errors
+
+#### Demo Source
+
+Here is the complete source of the app we'll be building. We recommend bookmarking it and use it as a reference.
+
+- [**Demo source**]({{ site.sst_demo_repo }})
 
 We'll be using the AWS Platform to build it. We might expand further and cover a few other platforms but we figured the AWS Platform would be a good place to start.
 
@@ -46,7 +58,7 @@ We'll be using the following set of technologies and services to build our serve
 - [React Router][RR] for routing
 - [Bootstrap][Bootstrap] for the UI Kit
 - [Stripe][Stripe] for processing credit card payments
-- [Seed][Seed] for automating Serverless deployments
+- [Seed][Seed] for automating serverless deployments
 - [Netlify][Netlify] for automating React deployments
 - [GitHub][GitHub] for hosting our project repos
 - [Sentry][Sentry] for error reporting
@@ -59,7 +71,7 @@ While the list above might look daunting, we are trying to ensure that upon comp
 
 You just need a couple of things to work through this guide:
 
-- [Node v8.10+ and NPM v5.5+](https://nodejs.org/en/) installed on your machine.
+- [Node v12+ and NPM v6+](https://nodejs.org/en/) installed on your machine.
 - A free [GitHub account](https://github.com/join).
 - And basic knowledge of how to use the command line. 
 
@@ -69,7 +81,7 @@ The guide is split roughly into a couple of parts:
 
 1. **The Basics**
 
-   Here we go over how to create your first full-stack Serverless application. These chapters are roughly split up between the backend (Serverless) and the frontend (React). We also talk about how to deploy your serverless app and React app into production.
+   Here we go over how to create your first full-stack serverless application. These chapters are roughly split up between the backend (Serverless) and the frontend (React). We also talk about how to deploy your serverless app and React app into production.
 
    This section of the guide is carefully designed to be completed in its entirety. We go into all the steps in detail and have tons of screenshots to help you build your first app.
 
@@ -79,7 +91,11 @@ The guide is split roughly into a couple of parts:
 
    The chapters in this section are relatively standalone and tend to revolve around specific topics.
 
-3. **Reference**
+3. **Using Serverless Framework**
+
+   The main part of the guide uses [**SST**]({{ site.sst_github_repo }}). But we also cover building the same app using [Serverless Framework](https://github.com/serverless/serverless). This is an optional section and is meant for folks trying to learn Serverless Framework.
+
+4. **Reference**
 
    Finally, we have a collection of standalone chapters on various topics. We either refer to these in the guide or we use this to cover topics that don't necessarily belong to either of the two above sections.
 
@@ -92,44 +108,33 @@ For the backend:
 - Configure your AWS account
 - Create your database using DynamoDB
 - Set up S3 for file uploads
-- Set up Cognito User Pools to manage user accounts
-- Set up Cognito Identity Pool to secure our file uploads
-- Set up the Serverless Framework to work with Lambda & API Gateway
 - Write the various backend APIs
-- Working with external APIs (Stripe)
-- Deploy your app through the command line
+- Set up Cognito User Pools to manage user accounts
+- Set up Cognito Identity Pool to secure our resources
+- Working with secrets
+- Adding unit tests
 
 For the frontend:
 
 - Set up our project with Create React App
 - Add favicons, fonts, and a UI Kit using Bootstrap
-- Set up routes using React-Router
-- Use AWS Cognito SDK to login and signup users
+- Set up routes using React Router
+- Use AWS Cognito with Amplify to login and signup users
 - Plugin to the backend APIs to manage our notes
-- Use the AWS JS SDK to upload files 
-- Accepting credit card payments in React
-- Environments in Create React App
-- Deploy your frontend to production using Netlify
-- Configure custom domains through Netlify
+- Use the AWS Amplify to upload files 
+- Accepting credit cards with the Stripe React SDK
 
-Automate backend deployments:
+Deploying to prod:
 
-- Configure DynamoDB through code
-- Configure S3 through code
-- Configure Cognito User Pool through code
-- Configure Cognito Identity Pool through code
-- Environment variables in Serverless Framework
-- Working with secrets in Serverless Framework
-- Unit tests in Serverless
-- Automating deployments using Seed
-- Configuring custom domains through Seed
+- Use custom domains for the API and React
+- Create a CI/CD pipeline with Seed
 
-Monitoring and debugging Serverless apps:
+Monitoring and debugging serverless apps:
 
 - Set up error reporting in React using Sentry
 - Configure an Error Boundary in React
-- Add error logging to our Serverless APIs
-- Cover the debugging workflow for common Serverless errors
+- Add error logging to our serverless APIs
+- Cover the debugging workflow for common serverless errors
 
 
 We think this will give you a good foundation on building full-stack production ready serverless applications. If there are any other concepts or technologies you'd like us to cover, feel free to let us know on our [forums]({{ site.forum_url }}).

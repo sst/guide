@@ -706,7 +706,7 @@ For [Docusaurus](https://docusaurus.io), we'll need to wrap around the theme to 
 
 If you are using `theme-original`, then you can add the following to `src/theme/DocItem/index.js`.
 
-``` coffee
+``` jsx
 import React from "react";
 import { Base64 } from "js-base64";
 import Head from "@docusaurus/Head";

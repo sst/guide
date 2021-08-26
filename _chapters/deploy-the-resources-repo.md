@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Deploy the Resources Repo
-description: In this chapter we'll deploy our demo resources GitHub repo of our Serverless app to multiple AWS environments. We'll be using Seed to manage our deployments and environments.
+description: In this chapter we'll deploy our demo resources GitHub repo of our serverless app to multiple AWS environments. We'll be using Seed to manage our deployments and environments.
 date: 2019-10-08 00:00:00
 comments_id: deploy-the-resources-repo/1320
 ---
@@ -14,7 +14,7 @@ Go in to your [Seed account](https://console.seed.run), add a new app, authentic
 
 Seed will now automatically detect the SST service in the repo. After detection, select **Add Service**.
 
-![Select Serverless service to add](/assets/best-practices/deploy-resources-repo-to-seed/select-serverless-service-to-add.png)
+![Select serverless service to add](/assets/best-practices/deploy-resources-repo-to-seed/select-serverless-service-to-add.png)
 
 By default, Seed lets you configure two stages out of the box, a **Development** and a **Production** stage. Serverless Framework has a concept of stages. They are synonymous with environments. Recall that in the previous chapter we used this stage name to parameterize our resource names.
 

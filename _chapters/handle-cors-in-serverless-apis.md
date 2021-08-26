@@ -1,18 +1,18 @@
 ---
 layout: post
 title: Handle CORS in Serverless APIs
-date: 2020-10-16 00:00:00
+date: 2021-08-17 00:00:00
 lang: en 
 ref: handle-cors-in-serverless-apis
-description: In this chapter we'll be looking at how to configure CORS (or cross-origin resource sharing) for our Serverless API endpoint. We'll need to ensure that our API responds to the preflight OPTIONS requests and our Lambda functions return the right CORS headers.
+description: In this chapter we'll look at how to configure CORS in our serverless API. We'll be adding these settings in our SST Api construct and in our Lambda function responses.
 comments_id: handle-cors-in-serverless-apis/2175
 ---
 
-Let's take stock of our setup so far. We have a Serverless API backend that allows users to create notes and an S3 bucket where they can upload files. We are now almost ready to work on our frontend React app.
+Let's take stock of our setup so far. We have a serverless API backend that allows users to create notes and an S3 bucket where they can upload files. We are now almost ready to work on our frontend React app.
 
 However, before we can do that. There is one thing that needs to be taken care of — [CORS or Cross-Origin Resource Sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing).
 
-Since our React app is going to be run inside a browser (and most likely hosted on a domain separate from our Serverless API and S3 bucket), we need to configure CORS to allow it to connect to our resources.
+Since our React app is going to be run inside a browser (and most likely hosted on a domain separate from our serverless API and S3 bucket), we need to configure CORS to allow it to connect to our resources.
 
 Let's quickly review our backend app architecture.
 
@@ -24,7 +24,7 @@ Let's get a quick background on CORS.
 
 ### Understanding CORS
 
-There are two things we need to do to support CORS in our Serverless API.
+There are two things we need to do to support CORS in our serverless API.
 
 1. Preflight OPTIONS requests
 
@@ -44,117 +44,42 @@ No 'Access-Control-Allow-Origin' header is present on the requested resource
 
 And our browser won't show us the HTTP response. This can make debugging our API extremely hard.
 
-### Preflight Requests in API Gateway
+### Add an API to Handle Billing
 
-To ensure that API Gateway responds to the OPTIONS requests, we need to add the following to our Lambda function definitions in our `serverless.yml`.
+The SST [`Api`](https://docs.serverless-stack.com/constructs/Api) construct that we are using enables CORS by default.
 
-``` yml
-cors: true
+``` js
+new Api(this, "Api", {
+  // Enabled by default
+  cors: true,
+  routes: {
+    "GET /notes": "src/list.main",
+  },
+});
 ```
 
-Let's do that for all of our functions.
+You can further configure the specifics if necessary. You can [read more about this here](https://docs.serverless-stack.com/constructs/Api#cors).
 
-{%change%} Replace the functions block at the bottom of our `serverless.yml` with the following.
+``` js
+import { HttpMethod } from "@aws-cdk/aws-apigatewayv2";
 
-``` yml
-functions:
-  # Defines an HTTP API endpoint that calls the main function in create.js
-  # - path: url path is /notes
-  # - method: POST request
-  # - authorizer: authenticate using the AWS IAM role
-  create:
-    handler: create.main
-    events:
-      - http:
-          path: notes
-          method: post
-          cors: true
-          authorizer: aws_iam
-
-  get:
-    # Defines an HTTP API endpoint that calls the main function in get.js
-    # - path: url path is /notes/{id}
-    # - method: GET request
-    handler: get.main
-    events:
-      - http:
-          path: notes/{id}
-          method: get
-          cors: true
-          authorizer: aws_iam
-
-  list:
-    # Defines an HTTP API endpoint that calls the main function in list.js
-    # - path: url path is /notes
-    # - method: GET request
-    handler: list.main
-    events:
-      - http:
-          path: notes
-          method: get
-          cors: true
-          authorizer: aws_iam
-
-  update:
-    # Defines an HTTP API endpoint that calls the main function in update.js
-    # - path: url path is /notes/{id}
-    # - method: PUT request
-    handler: update.main
-    events:
-      - http:
-          path: notes/{id}
-          method: put
-          cors: true
-          authorizer: aws_iam
-
-  delete:
-    # Defines an HTTP API endpoint that calls the main function in delete.js
-    # - path: url path is /notes/{id}
-    # - method: DELETE request
-    handler: delete.main
-    events:
-      - http:
-          path: notes/{id}
-          method: delete
-          cors: true
-          authorizer: aws_iam
-
-  billing:
-    # Defines an HTTP API endpoint that calls the main function in billing.js
-    # - path: url path is /billing
-    # - method: POST request
-    handler: billing.main
-    events:
-      - http:
-          path: billing
-          method: post
-          cors: true
-          authorizer: aws_iam
-
+new Api(this, "Api", {
+  cors: {
+    allowMethods: [HttpMethod.GET],
+  },
+  routes: {
+    "GET /notes": "src/list.main",
+  },
+});
 ```
 
-This will add the basic set of CORS headers in any OPTIONS requests made to these endpoints. To customize the headers that are sent, you can do something like this:
-
-``` yml
-cors:
-  origin: '*'
-  headers:
-    - Content-Type
-    - X-Amz-Date
-    - Authorization
-    - X-Api-Key
-    - X-Amz-Security-Token
-    - X-Amz-User-Agent
-  allowCredentials: false
-```
-
-But for our purposes, we'll just use the default option.
+We'll go with the default setting for now.
 
 ### CORS Headers in Lambda Functions
 
-Next we need to add the CORS headers in our Lambda function response.
+Next, we need to add the CORS headers in our Lambda function response.
 
-{%change%} Replace the `return` statement in our `libs/handler-lib.js`.
+{%change%} Replace the `return` statement in our `src/util/handler.js`.
 
 ``` javascript
 return {
@@ -162,7 +87,6 @@ return {
   body: JSON.stringify(body),
 };
 ```
-
 
 {%change%} With the following.
 
@@ -179,29 +103,6 @@ return {
 
 Again you can customize the CORS headers but we'll go with the default ones here.
 
-Let's quickly test the above. Run the following in your project root.
-
-``` bash
-$ serverless invoke local --function list --path mocks/list-event.json
-```
-
-You should see something like this in your terminal. 
-
-``` bash
-{
-    "statusCode": 200,
-    "body": "[{\"attachment\":\"hello.jpg\",\"content\":\"hello world\",\"createdAt\":1602891322039,\"noteId\":\"42244c70-1008-11eb-8be9-4b88616c4b39\",\"userId\":\"123\"}]",
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': true
-    }
-}
-```
-
-Notice that we are now returning the CORS headers.
-
 The two steps we've taken above ensure that if our Lambda functions are invoked through API Gateway, it'll respond with the proper CORS config.
 
-However, there are cases where API Gateway might run into an error and our Lambda functions are not invoked. For example, if the authentication information is invalid. In these cases we want API Gateway to respond with the right CORS headers as well.
-
-Let's look at that next.
+Next, let’s add these CORS settings to our S3 bucket as well. Since our frontend React app will be uploading files directly to it.

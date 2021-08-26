@@ -10,10 +10,6 @@ comments_id: create-a-cognito-identity-pool/135
 
 Now that we have deployed our backend API; we almost have all the pieces we need for our backend. We have the User Pool that is going to store all of our users and help sign in and sign them up. We also have an S3 bucket that we will use to help our users upload files as attachments for their notes. The final piece that ties all these services together in a secure way is called Amazon Cognito Federated Identities.
 
-Recall from the [Handling Auth in Serverless APIs]({% link _chapters/handling-auth-in-serverless-apis.md %}) chapter, our authenticated API architecture.
-
-![Serverless Auth API architecture](/assets/diagrams/serverless-auth-api-architecture.png)
-
 Amazon Cognito Federated Identities enables developers to create unique identities for your users and authenticate them with federated identity providers. With a federated identity, you can obtain temporary, limited-privilege AWS credentials to securely access other AWS services such as Amazon DynamoDB, Amazon S3, and Amazon API Gateway.
 
 In this chapter, we are going to create a federated Cognito Identity Pool. We will be using our User Pool as the identity provider. We could also use Facebook, Google, or our own custom identity provider. Once a user is authenticated via our User Pool, the Identity Pool will attach an IAM Role to the user. We will define a policy for this IAM Role to grant access to the S3 bucket and our API. This is the Amazon way of securing your resources.
@@ -91,7 +87,7 @@ In our case `YOUR_S3_UPLOADS_BUCKET_NAME` is `notes-app-uploads`, `YOUR_API_GATE
 }
 ```
 
-This is the **Auth Role** that we were referring to in our architecture diagram at the beginning of this chapter. Once a user has been authenticated with our User Pool and verified with our Identity Pool, he/she is assigned this [IAM role]({% link _chapters/what-is-iam.md %}). This role limits what our user has access to in our AWS account.
+Once a user has been authenticated with our User Pool and verified with our Identity Pool, he/she is assigned this [IAM role]({% link _chapters/what-is-iam.md %}). This role limits what our user has access to in our AWS account.
 
 A quick note on the block that relates to the S3 Bucket. In the above policy we are granting our logged in users access to the path `private/${cognito-identity.amazonaws.com:sub}/`. Where `cognito-identity.amazonaws.com:sub` is the authenticated user's federated identity ID (their user id). So a user has access to only their folder within the bucket. This is how we are securing the uploads for each user.
 

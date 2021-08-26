@@ -12,7 +12,7 @@ First let's start by quickly looking at the common terms used when talking about
 
 - **Service**
 
-  A service is what you might call a Serverless project. It has a single `serverless.yml` file driving it.
+  A service is what you might call a Serverless Framework project. It has a single `serverless.yml` file driving it.
 
 - **Stack**
 

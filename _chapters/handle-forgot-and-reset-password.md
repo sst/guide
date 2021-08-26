@@ -1,13 +1,13 @@
 ---
 layout: post
 title: Handle Forgot and Reset Password
-description: Use the AWS Amplify Auth.forgotPassword method to support forgot password functionality in our Serverless React app. This triggers Cognito to help our users reset their password.
+description: Use the AWS Amplify Auth.forgotPassword method to support forgot password functionality in our serverless React app. This triggers Cognito to help our users reset their password.
 date: 2018-04-14 00:00:00
 code: user-management
 comments_id: handle-forgot-and-reset-password/506
 ---
 
-In our [Serverless notes app](https://demo.serverless-stack.com) we've used [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to sign up and login our users. In the frontend we've used [AWS Amplify](https://aws-amplify.github.io/) in our React app. However, if our users have forgotten their passwords, we need to have a way for them to reset their password. In this chapter we will look at how to do this.
+In our [serverless notes app](https://demo.serverless-stack.com) we've used [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to sign up and login our users. In the frontend we've used [AWS Amplify](https://aws-amplify.github.io/) in our React app. However, if our users have forgotten their passwords, we need to have a way for them to reset their password. In this chapter we will look at how to do this.
 
 The version of the notes app used in this chapter is hosted in a:
 
@@ -20,7 +20,7 @@ Let's look at the main changes we need to make to allow users to reset their pas
 
 {%change%} We are going to create a `src/containers/ResetPassword.js`.
 
-``` coffee
+``` jsx
 import React, { useState } from "react";
 import { Auth } from "aws-amplify";
 import { Link } from "react-router-dom";
@@ -32,8 +32,8 @@ import {
   ControlLabel,
 } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
-import { useFormFields } from "../libs/hooksLib";
-import { onError } from "../libs/errorLib";
+import { useFormFields } from "../lib/hooksLib";
+import { onError } from "../lib/errorLib";
 import "./ResetPassword.css";
 
 export default function ResetPassword() {
@@ -242,7 +242,7 @@ Finally, let's link this up with the rest of our app.
 
 {%change%} And import it in the header.
 
-``` coffee
+``` jsx
 import ResetPassword from "./containers/ResetPassword";
 ```
 
@@ -252,13 +252,13 @@ Now we want to make sure that our users are directed to this page when they are 
 
 {%change%} So let's add a link in our `src/containers/Login.js`. Add it above our login button.
 
-``` coffee
+``` jsx
 <Link to="/login/reset">Forgot password?</Link>
 ```
 
 {%change%} And import the `Link` component in the header.
 
-``` coffee
+``` jsx
 import { Link } from "react-router-dom";
 ```
 

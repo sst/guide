@@ -3,7 +3,7 @@ layout: post
 title: Errors in API Gateway
 date: 2020-04-03 00:00:00
 lang: en
-description: In this chapter we'll look at how to debug errors that happen only in API Gateway in your Serverless app. These errors are only logged to your API Gateway access logs, and not your Lambda logs in CloudWatch.
+description: In this chapter we'll look at how to debug errors that happen only in API Gateway in your serverless app. These errors are only logged to your API Gateway access logs, and not your Lambda logs in CloudWatch.
 comments_id: errors-in-api-gateway/1728
 ref: errors-in-api-gateway
 ---
@@ -19,7 +19,7 @@ Let's look at how to debug these.
 
 ### Invalid API Path
 
-Head over to the frontend repo.
+Head over to the `frontend/` directory in your project.
 
 {%change%} Open `src/containers/Home.js`, and replace the `loadNotes()` function with:
 
@@ -29,15 +29,17 @@ function loadNotes() {
 }
 ```
 
-{%change%} Let's commit this and deploy it.
+{%change%} Let's commit this and push it.
 
 ``` bash
 $ git add .
-$ git commit -m "Adding fault paths"
+$ git commit -m "Adding faulty paths"
 $ git push
 ```
 
-Head over to your notes app, and load the home page. You'll notice the page fails with an error alert saying `Network Alert`.
+Head over to your Seed dashboard and deploy it.
+
+Then in your notes app, load the home page. You'll notice the page fails with an error alert saying `Network Alert`.
 
 ![Invalid path error in notes app](/assets/monitor-debug-errors/invalid-path-error-in-notes-app.png)
 
@@ -50,7 +52,10 @@ What happens here is that:
 - API Gateway returns a `403` response.
 - The browser throws an error and does not continue to make the `GET` request.
 
-This means that our Lambda function was not invoked. So we'll need to check our API access logs instead.
+This means that our Lambda function was not invoked. And in the browser it fails as a CORS error.
+
+<!--
+So we'll need to check our API access logs instead.
 
 Click on **View Lambda logs or API logs** in your Seed dashboard.
 
@@ -65,6 +70,7 @@ You should see an `OPTIONS` request with path `/prod/invalid_path`. You'll notic
 ![Invalid API path request error in Seed](/assets/monitor-debug-errors/invalid-api-path-request-error-in-seed.png)
 
 This will tell you that for some reason our frontend is making a request to an invalid API path. We can use the error details in Sentry to figure out where that request is being made.
+-->
 
 ### Invalid API method
 
@@ -78,13 +84,15 @@ function loadNotes() {
 }
 ```
 
-{%change%} Let's deploy our code.
+{%change%} Let's push our code.
 
 ``` bash
 $ git add .
 $ git commit -m "Adding invalid method"
 $ git push
 ```
+
+Head over to your Seed dashboard and deploy it.
 
 Our notes app should fail to load the home page.
 
@@ -102,34 +110,39 @@ Here's what's going on behind the scenes:
   - `POST` request on `/notes` to create a new note
 - The browser reports the error because the request method `PUT` is not allowed.
 
+Similar as to the case above, our Lambda function was not invoked. And in the browser it fails as a CORS error.
+
+<!--
 So in this case over on Seed, you'll only see an `OPTIONS` request in your access log, and not the `PUT` request.
 
 ![Invalid API method request error in Seed](/assets/monitor-debug-errors/invalid-api-method-request-error-in-seed.png)
 
 The access log combined with the Sentry error details should tell us what we need to do to fix the error. 
+-->
 
-And that covers all the major types of Serverless errors and how to debug them.
+With that we've covered all the major types of serverless errors and how to debug them.
 
-### Remove the Faulty Code
+### Rollback the Changes
 
-Let's cleanup all the faulty code.
-
-{%change%} In `src/containers/Home.js` replace the `loadNotes()` function with the original:
-
-``` javascript
-function loadNotes() {
-  return API.get("notes", "/notes");
-}
-```
-
-Deploy the code.
+{%change%} Let's revert all the faulty code that we created.
 
 ``` bash
-$ git add .
-$ git commit -m "Reverting faulty code"
-$ git push
+$ git checkout main
+$ git branch -D debug
 ```
 
-Now you are all set to go live with your brand new Serverless app!
+And rollback the prod build in Seed.
+
+Head to the **Activity** tab in the Seed dashboard. Then click on **prod** over on the right. This shows us all the deployments made to our prod stage.
+
+![Click on prod activity in Seed](/assets/monitor-debug-errors/click-on-prod-activity-in-seed.png)
+
+Scroll down to the last deployment from the `master` branch, past all the ones made from the `debug` branch. Hit **Rollback**.
+
+![Rollback on prod build in Seed](/assets/monitor-debug-errors/rollback-on-prod-build-in-seed.png)
+
+This will rollback our app to the state it was in before we deployed all of our faulty code.
+
+Now you are all set to go live with your brand new full-stack serverless app!
 
 Let's wrap things up next.

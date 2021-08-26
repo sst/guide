@@ -14,7 +14,7 @@ In this chapter we will look at some simple ways to configure multiple environme
 
 ### Custom Environment Variables
 
-[Create React App](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-custom-environment-variables) has support for custom environment variables baked into the build system. To set a custom environment variable, simply set it while starting the Create React App build process.
+[Create React App](https://create-react-app.dev/docs/adding-custom-environment-variables/) has support for custom environment variables baked into the build system. To set a custom environment variable, simply set it while starting the Create React App build process.
 
 ``` bash
 $ REACT_APP_TEST_VAR=123 npm start
@@ -39,7 +39,7 @@ We can use this idea of custom environment variables to configure our React app 
 
 The first thing we can do is to configure our build system with the `REACT_APP_STAGE` environment variable. Currently the `scripts` portion of our `package.json` looks something like this:
 
-``` coffee
+``` jsx
 "scripts": {
   "start": "react-scripts start",
   "build": "react-scripts build",
@@ -57,7 +57,7 @@ Here we only have one environment and we use it for our local development and on
 
 To set our two environments we can change this to:
 
-``` coffee
+``` jsx
 "scripts": {
   "start": "REACT_APP_STAGE=dev react-scripts start",
   "build": "react-scripts build",

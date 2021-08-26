@@ -21,7 +21,7 @@ Also, just looking ahead a bit; we will be uploading files when a note is create
 
 ### Upload to S3
 
-{%change%} Create `src/libs/awsLib.js` and add the following:
+{%change%} Create `src/lib/awsLib.js` and add the following:
 
 ``` javascript
 import { Storage } from "aws-amplify";
@@ -84,7 +84,7 @@ async function handleSubmit(event) {
 {%change%} And make sure to include `s3Upload` by adding the following to the header of `src/containers/NewNote.js`.
 
 ``` javascript
-import { s3Upload } from "../libs/awsLib";
+import { s3Upload } from "../lib/awsLib";
 ```
 
 The change we've made in the `handleSubmit` is that:

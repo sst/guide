@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Storing Secrets in Serverless Apps
-description: In this chapter we look at how to store secrets in your Serverless app using AWS Systems Manager Parameter Store or SSM. Note that, SSM parameters should be decoded outside your Lambda functions.
+description: In this chapter we look at how to store secrets in your serverless app using AWS Systems Manager Parameter Store or SSM. Note that, SSM parameters should be decoded outside your Lambda functions.
 date: 2019-10-02 00:00:00
 comments_id: storing-secrets-in-serverless-apps/1335
 ---

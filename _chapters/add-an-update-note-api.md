@@ -61,6 +61,7 @@ This should look similar to the `create.js` function. Here we make an `update` D
     events:
       - http:
           path: notes/{id}
+          cors: true
           method: put
 ```
 

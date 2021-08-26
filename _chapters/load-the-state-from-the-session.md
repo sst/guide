@@ -93,7 +93,7 @@ We'll conditionally render our app based on the `isAuthenticating` flag.
 {%change%} Our `return` statement in `src/App.js` should be as follows.
 
 {% raw %}
-``` coffee
+``` jsx
 return (
   !isAuthenticating && (
     <div className="App container py-3">

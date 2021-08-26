@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Deploy the API Services Repo
-description: In this chapter we'll deploy our demo API services GitHub repo of our Serverless app to multiple AWS environments. We'll be using Seed to manage our deployments and environments.
+description: In this chapter we'll deploy our demo API services GitHub repo of our serverless app to multiple AWS environments. We'll be using Seed to manage our deployments and environments.
 date: 2019-10-08 00:00:00
 comments_id: deploy-the-api-services-repo/1319
 ---
@@ -14,7 +14,7 @@ Click **Add an App** again, and select your Git provider. This time, select the 
 
 Select the **notes-api** service from the list of services.
 
-![Select Serverless service to add](/assets/best-practices/deploy-api-services-repo-to-seed/select-serverless-service-to-add.png)
+![Select serverless service to add](/assets/best-practices/deploy-api-services-repo-to-seed/select-serverless-service-to-add.png)
 
 The environments for our API repo are identical to our resources repo. So instead of manually configuring them, we'll copy the settings.
 

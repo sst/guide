@@ -38,16 +38,24 @@ export async function main(event, context) {
     },
   };
 
+  // Set response headers to enable CORS (Cross-Origin Resource Sharing)
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Credentials": true
+  };
+
   try {
     await dynamoDb.put(params).promise();
 
     return {
       statusCode: 200,
+      headers: headers,
       body: JSON.stringify(params.Item),
     };
   } catch (e) {
     return {
       statusCode: 500,
+      headers: headers,
       body: JSON.stringify({ error: e.message }),
     };
   }
@@ -117,6 +125,7 @@ functions:
     events:
       - http:
           path: notes
+          cors: true
           method: post
 ```
 
@@ -256,6 +265,10 @@ export default function handler(lambda) {
     return {
       statusCode,
       body: JSON.stringify(body),
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true,
+      },
     };
   };
 }

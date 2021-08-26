@@ -3,7 +3,7 @@ layout: post
 title: Debugging Full-Stack Serverless Apps
 date: 2020-04-03 00:00:00
 lang: en
-description: In this chapter we look at the debugging setup and workflow for full-stack Serverless apps. We'll cover some of the most common errors, including errors inside and outside Lambda functions, timeouts and out-of-memory errors.
+description: In this chapter we look at the debugging setup and workflow for full-stack serverless apps. We'll cover some of the most common errors, including errors inside and outside Lambda functions, timeouts and out-of-memory errors.
 comments_id: debugging-full-stack-serverless-apps/1727
 ref: debugging-full-stack-serverless-apps
 ---
@@ -48,7 +48,7 @@ Here's what we'll be going over in the next few chapters:
   - [Reporting API errors in React]({% link _chapters/report-api-errors-in-react.md %})
   - [Reporting unexpected React errors with an Error Boundary]({% link _chapters/setup-an-error-boundary-in-react.md %})
 2. [Setting up detailed error reporting in Lambda]({% link _chapters/setup-error-logging-in-serverless.md %})
-3. The debugging workflow for the following Serverless errors:
+3. The debugging workflow for the following serverless errors:
    - [Logic errors in our Lambda functions]({% link _chapters/logic-errors-in-lambda-functions.md %})
    - [Unexpected errors in our Lambda functions]({% link _chapters/unexpected-errors-in-lambda-functions.md %})
    - [Errors outside our Lambda functions]({% link _chapters/errors-outside-lambda-functions.md %})

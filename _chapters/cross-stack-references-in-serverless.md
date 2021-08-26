@@ -1,19 +1,19 @@
 ---
 layout: post
-title: Cross-Stack References in Serverless
-description: AWS CloudFormation allows us to link multiple Serverless services using cross-stack references. To create a cross-stack reference, export a value using the "Export:" option in CloudFormation or CfnOutput construct in CDK. To import it in your serverless.yml, use "Fn::ImportValue".
+title: Cross-Stack References in serverless
+description: AWS CloudFormation allows us to link multiple serverless services using cross-stack references. To create a cross-stack reference, export a value using the "Export:" option in CloudFormation or CfnOutput construct in CDK. To import it in your serverless.yml, use "Fn::ImportValue".
 date: 2018-04-02 13:00:00
 ref: cross-stack-references-in-serverless
 comments_id: cross-stack-references-in-serverless/405
 ---
 
-In the previous chapter we looked at [some of the most common patterns for organizing your Serverless applications]({% link _chapters/organizing-serverless-projects.md %}). Now let's look at how to work with multiple services in your Serverless application.
+In the previous chapter we looked at [some of the most common patterns for organizing your serverless applications]({% link _chapters/organizing-serverless-projects.md %}). Now let's look at how to work with multiple services in your Serverless application.
 
-You might recall that a Serverless service is where a single `serverless.yml` is used to define the project. And the `serverless.yml` file is converted into a [CloudFormation template](https://aws.amazon.com/cloudformation/aws-cloudformation-templates/) using Serverless Framework. This means that in the case of multiple services you might need to reference a resource that is available in a different service.
+You might recall that a Serverless Framework service is where a single `serverless.yml` is used to define the project. And the `serverless.yml` file is converted into a [CloudFormation template](https://aws.amazon.com/cloudformation/aws-cloudformation-templates/) using Serverless Framework. This means that in the case of multiple services you might need to reference a resource that is available in a different service.
 
-You also might be defining your AWS infrastructure using [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}). And you want to make sure your Serverless API is connected to those resources.
+You also might be defining your AWS infrastructure using [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}). And you want to make sure your serverless API is connected to those resources.
 
-For example, you might have your DynamoDB tables created in CDK and your APIs (as a Serverless service) need to refer to them. Of course you don't want to hard code this. To do this we are going to be using cross-stack references.
+For example, you might have your DynamoDB tables created in CDK and your APIs (as a Serverless Framework service) need to refer to them. Of course you don't want to hard code this. To do this we are going to be using cross-stack references.
 
 A cross-stack reference is a way for one CloudFormation template to refer to the resource in another CloudFormation template.
 

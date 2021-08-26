@@ -16,12 +16,12 @@ First we are going to create the form for a note. It'll take some content and a 
 
 {%change%} Create a new file `src/containers/NewNote.js` and add the following.
 
-``` coffee
+``` jsx
 import React, { useRef, useState } from "react";
 import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
-import { onError } from "../libs/errorLib";
+import { onError } from "../lib/errorLib";
 import config from "../config";
 import "./NewNote.css";
 
@@ -110,7 +110,7 @@ MAX_ATTACHMENT_SIZE: 5000000,
 
 {%change%} Finally, add our container as a route in `src/Routes.js` below our signup route.
 
-``` coffee
+``` jsx
 <Route exact path="/notes/new">
   <NewNote />
 </Route>

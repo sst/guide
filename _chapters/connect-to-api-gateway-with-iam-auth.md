@@ -84,7 +84,7 @@ function getCurrentUser() {
 
 And with the JWT token you can generate their temporary IAM credentials using:
 
-``` coffee
+``` jsx
 function getAwsCredentials(userToken) {
   const authenticator = `cognito-idp.${config.cognito
     .REGION}.amazonaws.com/${config.cognito.USER_POOL_ID}`;
