@@ -5,7 +5,7 @@ date: 2021-08-17 00:00:00
 lang: en
 description: The Serverless Stack Framework (SST) makes it easy to build serverless applications. It's based on AWS CDK and allows developers to test their applications live.
 ref: what-is-sst
-comments_id: 
+comments_id: comments-for-what-is-sst/2468
 ---
 
 We are going to be using [AWS Lambda](https://aws.amazon.com/lambda/), [Amazon API Gateway](https://aws.amazon.com/api-gateway/), and a host of other AWS services to create our application. AWS Lambda is a compute service that lets you run code without provisioning or managing servers. You pay only for the compute time you consume - there is no charge when your code is not running. But working directly with AWS Lambda, API Gateway, and the other AWS services can be a bit cumbersome.

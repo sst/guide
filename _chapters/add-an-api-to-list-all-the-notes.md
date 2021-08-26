@@ -5,7 +5,7 @@ date: 2021-08-17 00:00:00
 lang: en
 description: In this chapter we are adding an API to get a list of all the notes a user has. It'll trigger a Lambda function when we hit the API and get the list of notes from our DynamoDB table.
 ref: add-an-api-to-list-all-the-notes
-comments_id: 
+comments_id: add-an-api-to-list-all-the-notes/2455
 ---
 
 Now we are going to add an API that returns a list of all the notes a user has. This'll be very similar to the [previous chapter]({% link _chapters/add-an-api-to-get-a-note.md %}) where we were returning a single note.

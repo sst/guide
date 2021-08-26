@@ -8,7 +8,7 @@ ref: initialize-a-github-repo
 redirect_from:
   - /chapters/initialize-the-backend-repo.html
   - /chapters/initialize-the-frontend-repo.html
-comments_id: 
+comments_id: initialize-a-github-repo/2466
 ---
 
 Before we start working on our app, let's create a GitHub repository for this project. It's a good way to store our code and we'll use this repository later to automate deploying our app.

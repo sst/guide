@@ -5,7 +5,7 @@ date: 2021-08-17 00:00:00
 lang: en
 description: In this chapter we are adding an API to update a given note. It'll trigger a Lambda function when we hit the API and update the note in our DynamoDB table.
 ref: add-an-api-to-update-a-note
-comments_id: 
+comments_id: add-an-api-to-update-a-note/2456
 ---
 
 Now let's create an API that allows a user to update a note with a new note object given the id.

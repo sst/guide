@@ -19,11 +19,13 @@ Before we get started, here's a link to the GitHub repo of the app that we will 
 
 - [**{{ site.backend_github_repo }}**]({{ site.backend_github_repo }})
 
+We also have the React.js frontend that connects to this — [**{{ site.frontend_github_repo }}**]({{ site.frontend_github_repo }})
+
 Now let's get started with building our app!
 
-In this chapter, we are going to set up the Serverless Framework on our local development environment.
-
 ### Install Serverless
+
+In this chapter, we are going to set up the Serverless Framework on our local development environment.
 
 {%change%} Install Serverless globally.
 

@@ -6,7 +6,7 @@ lang: en
 description: In this chapter we'll be using a higher-level CDK construct to configure a DynamoDB table in our SST app.
 redirect_from: /chapters/configure-dynamodb-in-cdk.html
 ref: create-a-dynamodb-table-in-sst
-comments_id: 
+comments_id: create-a-dynamodb-table-in-sst/2459
 ---
 
 We are now going to start creating our infrastructure in [SST]({{ site.sst_github_repo }}) using [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}). Starting with DynamoDB.

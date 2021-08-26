@@ -8,7 +8,7 @@ redirect_from:
   - /chapters/configure-cognito-user-pool-in-cdk.html
   - /chapters/configure-cognito-identity-pool-in-cdk.html
 ref: adding-auth-to-our-serverless-app
-comments_id: 
+comments_id: adding-auth-to-our-serverless-app/2457
 ---
 
 So far we've created the [DynamoDB table]({% link _chapters/create-a-dynamodb-table-in-sst.md %}), [S3 bucket]({% link _chapters/create-an-s3-bucket-in-sst.md %}), and [API]({% link _chapters/add-an-api-to-create-a-note.md %}) parts of our serverless backend. Now let's add auth into the mix. As we talked about in the [previous chapter]({% link _chapters/auth-in-serverless-apps.md %}), we are going to use [Cognito User Pool](https://aws.amazon.com/cognito/) to manage user sign ups and logins. While we are going to use [Cognito Identity Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html) to manage which resources our users have access to.

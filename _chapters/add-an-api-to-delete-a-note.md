@@ -5,7 +5,7 @@ date: 2021-08-17 00:00:00
 lang: en
 description: In this chapter we are adding an API to delete a given note. It'll trigger a Lambda function when we hit the API and delete the note from our DynamoDB table.
 ref: add-an-api-to-delete-a-note
-comments_id: 
+comments_id: add-an-api-to-delete-a-note/2452
 ---
 
 Finally, we are going to create an API that allows a user to delete a given note.

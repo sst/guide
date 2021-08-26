@@ -1,6 +1,6 @@
 ---
 layout: lander
-description: "Serverless Stack (SST) is a framework that makes it easy to build serverless applications. Check out our examples to get started. Or follow our step-by-step tutorials for creating full-stack apps with serverless and React.js on AWS. Build a serverless REST API with our Serverless tutorial and connect it to a React single-page application with our React.js tutorial."
+description: "Serverless Stack (SST) is a framework that makes it easy to build serverless applications by allowing you to test your Lambda functions live. Check out our examples to get started. Or follow our step-by-step tutorials for creating full-stack apps with serverless and React.js on AWS."
 ---
 
 <div id="table-of-contents" class="table-of-contents">
@@ -47,7 +47,7 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
       <div class="part">
         <div id="best-practices" class="header best-practices">
           <h3>Best Practices</h3>
-          <p>The best practices for running Serverless apps in production.</p>
+          <p>The best practices for running serverless apps in production.</p>
         </div>
         <div class="chapters best-practices">
           {% include toc-chapters.html items=site.data.chapterlist.best-practices-intro id="best-practices-intro" %}

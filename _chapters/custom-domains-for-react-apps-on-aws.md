@@ -5,7 +5,7 @@ date: 2021-08-17 00:00:00
 lang: en
 description: In this chapter we are setting a custom domain for our React.js app on AWS. We are using the SST ReactStaticSite construct to configure the custom domain.
 ref: custom-domains-for-react-apps-on-aws
-comments_id: 
+comments_id: custom-domains-for-react-apps-on-aws/2463
 ---
 
 In the [previous chapter we configured a custom domain for our serverless API]({% link _chapters/custom-domains-in-serverless-apis.md %}). Now let's do the same for our frontend React.js app.

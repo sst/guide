@@ -6,7 +6,7 @@ lang: en
 description: In this chapter we'll be looking at how to handle authentication and users for our serverless API. We'll be using a Cognito User Pool and Cognito Identity Pool. The User Pool will handle user signups and logins. While the Identity Pool, will be handling access control for our AWS resources.
 redirect_from: /chapters/handling-auth-in-serverless-apis.html
 ref: auth-in-serverless-apps
-comments_id: 
+comments_id: auth-in-serverless-apps/2458
 ---
 
 In the last section, we created a serverless REST API and deployed it. But there are a couple of things missing.

@@ -5,7 +5,7 @@ date: 2021-08-17 00:00:00
 lang: en
 description: In this chapter we are adding an API to get a note. It'll trigger a Lambda function when we hit the API and get the requested note from our DynamoDB table.
 ref: add-an-api-to-get-a-note
-comments_id: 
+comments_id: add-an-api-to-get-a-note/2453
 ---
 
 Now that we [created a note]({% link _chapters/add-an-api-to-create-a-note.md %}) and saved it to our database. Let's add an API to retrieve a note given its id.

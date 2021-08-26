@@ -6,7 +6,7 @@ lang: en
 description: Use the create-serverless-stack command to create a new SST app in your working directory.
 redirect_from: /chapters/building-a-cdk-app-with-sst.html
 ref: create-an-sst-app
-comments_id: 
+comments_id: create-an-sst-app/2462
 ---
 
 Now that we understand what _infrastructure as code_ is, we are ready to create our first SST app.

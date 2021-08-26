@@ -5,7 +5,7 @@ date: 2021-08-17 00:00:00
 lang: en
 description: In this chapter we'll add an API to our serverless app to handle billing. We'll use the Stripe npm package in our Lambda function to charge a credit card.
 ref: add-an-api-to-handle-billing
-comments_id: 
+comments_id: add-an-api-to-handle-billing/2454
 ---
 
 Now let's get started with creating an API to handle billing. It's going to take a Stripe token and the number of notes the user wants to store.

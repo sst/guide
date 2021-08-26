@@ -6,7 +6,7 @@ lang: en
 description: In this chapter we'll secure our serverless APIs by only allowing authenticated users to connect. We'll get the user id in our Lambda functions from the Cognito Identity Pool identityId.
 redirect_from: /chapters/test-the-configured-apis.html
 ref: secure-our-serverless-apis
-comments_id: 
+comments_id: secure-our-serverless-apis/2467
 ---
 
 Now that our APIs have been [secured with Cognito User Pool and Identity Pool]({% link _chapters/adding-auth-to-our-serverless-app.md %}), we are ready to use the authenticated user's info in our Lambda functions.

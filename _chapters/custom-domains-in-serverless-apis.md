@@ -5,7 +5,7 @@ date: 2021-08-17 00:00:00
 lang: en
 description: In this chapter we are setting a custom domain for our serverless API on AWS. We are using the SST Api construct to configure the custom domain.
 ref: custom-domains-in-serverless-apis
-comments_id: 
+comments_id: custom-domains-in-serverless-apis/2464
 ---
 
 In the [previous chapter]({% link _chapters/purchase-a-domain-with-route-53.md %}) we purchased a new domain on [Route 53](https://aws.amazon.com/route53/). Now let's use it for our serverless API.

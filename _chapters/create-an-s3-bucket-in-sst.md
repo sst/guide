@@ -6,7 +6,7 @@ lang: en
 description: In this chapter we'll be using a higher-level CDK construct to create an S3 bucket in our SST app.
 redirect_from: /chapters/configure-s3-in-cdk.html
 ref: create-an-s3-bucket-in-sst
-comments_id: 
+comments_id: create-an-s3-bucket-in-sst/2461
 ---
 
 Just like [the previous chapter]({% link _chapters/create-a-dynamodb-table-in-sst.md %}), we are going to be using [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}) in our SST app to create an S3 bucket.

@@ -5,7 +5,7 @@ date: 2021-08-17 00:00:00
 lang: en
 description: In this chapter we are adding an API to create a note. It'll trigger a Lambda function when we hit the API and create a new note in our DynamoDB table.
 ref: add-an-api-to-create-a-note
-comments_id: 
+comments_id: add-an-api-to-create-a-note/2451
 ---
 
 Let's get started by creating the API for our notes app.

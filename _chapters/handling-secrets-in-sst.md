@@ -5,7 +5,7 @@ date: 2021-08-17 00:00:00
 lang: en
 description: In this chapter we'll look at how to work with secrets in an SST app. We store secrets to a .env.local file and make sure to not commit it to Git.
 ref: handling-secrets-in-sst
-comments_id: 
+comments_id: handling-secrets-in-sst/2465
 ---
 
 In the [previous chapter]({% link _chapters/setup-a-stripe-account.md %}), we created a Stripe account and got a pair of keys. Including the Stripe secret key. We need this in our app but we do not want to store this secret environment variables in our code. In this chapter, we'll look at how to add secrets in SST.
