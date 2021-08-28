@@ -24,7 +24,7 @@ this.bucket = new sst.Bucket(this, "Uploads");
 
 This creates a new S3 bucket using the SST [`Bucket`](https://docs.serverless-stack.com/constructs/Bucket) construct.
 
-{%change%} Also, find the following line in `lib/StorageStack.js`.
+Also, find the following line in `lib/StorageStack.js`.
 
 ``` js
 // Public reference to the table
