@@ -92,7 +92,7 @@ Stack dev-notes-storage
   Status: deployed
 ```
 
-The `Stack` name above of `dev-notes-storage` is a string derived from your environment-appName-stackName. Your appName is defined in the 'name' field of your `package.json` file and your stackName is the label you choose for your stack in `lib/index.js'.
+The `Stack` name above of `dev-notes-storage` is a string derived from your `${stageName}-${appName}-${stackName}`. Your `appName` is defined in the `name` field of your `sst.json` file and your `stackName` is the label you choose for your stack in `lib/index.js'.
 
 ### Remove Template Files
 
