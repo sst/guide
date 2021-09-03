@@ -9,7 +9,7 @@ redirect_from: /chapters/cognito-as-a-serverless-service.html
 comments_id: configure-cognito-identity-pool-in-serverless/165
 ---
 
-If you recall from the easryl part of this section, we used the Cognito Identity Pool as a way to control which AWS resources our logged in users will have access to. We also tie in our Cognito User Pool as our authentication provider.
+If you recall from the earlier part of this section, we used the Cognito Identity Pool as a way to control which AWS resources our logged-in users will have access to. We also tie in our Cognito User Pool as our authentication provider.
 
 ### Create the Resource
 
