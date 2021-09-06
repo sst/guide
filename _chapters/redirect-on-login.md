@@ -16,20 +16,16 @@ Let's start by adding a method to read the `redirect` URL from the querystring.
 
 ``` jsx
 function querystring(name, url = window.location.href) {
-  name = name.replace(/[[]]/g, "\\$&");
+   const parsedName = name.replace(/[[]]/g, '\\$&');
+   const regex = new RegExp(`[?&]${parsedName}(=([^&#]*)|&|#|$)`, 'i');
+   const results = regex.exec(url);
 
-  const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)", "i");
-  const results = regex.exec(url);
+   if (!results || !results[2]) {
+     return false;
+   }
 
-  if (!results) {
-    return null;
-  }
-  if (!results[2]) {
-    return "";
-  }
-
-  return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
+   return window.decodeURIComponent(results[2].replace(/\+/g, ' '));
+ }
 ```
 
 This method takes the querystring param we want to read and returns it.
@@ -39,19 +35,29 @@ Now let's update our component to use this parameter when it redirects.
 {%change%} Replace our current `UnauthenticatedRoute` function component with the following.
 
 ``` jsx
-export default function UnauthenticatedRoute({ children, ...rest }) {
+export default function UnauthenticatedRoute(props) {
+  const { children, ...rest } = props;
   const { isAuthenticated } = useAppContext();
   const redirect = querystring("redirect");
+
   return (
     <Route {...rest}>
       {!isAuthenticated ? (
-        children
+        cloneElement(children, props)
       ) : (
-        <Redirect to={redirect === "" || redirect === null ? "/" : redirect} />
+        <Redirect to={redirect ? redirect : "/"} />
       )}
     </Route>
   );
 }
+```
+
+The `cloneElement` above makes sure that passed in `state` is handled correctly for child `UnauthenticatedRoute` routes.
+
+{%change%} Let's replace the `import React from "react";` at the top of `src/components/UnauthenticatedRoute.js` with the following:
+
+``` jsx
+import React, { cloneElement } from "react";
 ```
 
 {%change%} And remove the following from the `handleSubmit` method in `src/containers/Login.js`.
