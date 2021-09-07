@@ -48,6 +48,6 @@ Since your functions are run inside a container that is brought up on demand to 
 
 The duration of cold starts depends on the implementation of the specific cloud provider. On AWS Lambda it can range from anywhere between a few hundred milliseconds to a few seconds. It can depend on the runtime (or language) used, the size of the function (as a package), and of course the cloud provider in question. Cold starts have drastically improved over the years as cloud providers have gotten much better at optimizing for lower latency times.
 
-Aside from optimizing your functions, you can use simple tricks like a separate scheduled function to invoke your function every few minutes to keep it warm. [Serverless Framework](https://serverless.com) which we are going to be using in this tutorial has a few plugins to [help keep your functions warm](https://github.com/FidelLimited/serverless-plugin-warmup).
+Aside from optimizing your functions, you can use simple tricks like a separate scheduled function to invoke your function every few minutes to keep it warm. [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}), which we are going to be using in this tutorial, has a pre-built [Cron](https://docs.serverless-stack.com/constructs/Cron) construct to help with this.
 
 Now that we have a good idea of serverless computing, let's take a deeper look at what a Lambda function is and how your code will be executed.

@@ -54,7 +54,7 @@ Each DynamoDB table has a primary key. This cannot be changed once set. The prim
 * Partition key
 * Partition key and sort key (composite)
 
-We are going to use the composite primary key which gives us additional flexibility when querying the data. For example, if you provide only the value for `userId`, DynamoDB would retrieve all of the notes by that user. Or you could provide a value for `userId` and a value for `noteId`, to retrieve a particular note.
+We are going to use the composite primary key (referenced by `primaryIndex` in code block above) which gives us additional flexibility when querying the data. For example, if you provide only the value for `userId`, DynamoDB would retrieve all of the notes by that user. Or you could provide a value for `userId` and a value for `noteId`, to retrieve a particular note.
 
 We are also exposing the Table that's being created publicly.
 
@@ -91,6 +91,8 @@ You should see something like this at the end of the deploy process.
 Stack dev-notes-storage
   Status: deployed
 ```
+
+The `Stack` name above of `dev-notes-storage` is a string derived from your `${stageName}-${appName}-${stackName}`. Your `appName` is defined in the `name` field of your `sst.json` file and your `stackName` is the label you choose for your stack in `lib/index.js'.
 
 ### Remove Template Files
 
