@@ -33,6 +33,9 @@ export const main = handler(async () => {
   };
 
   const result = await dynamoDb.query(params);
+  if (!result.Items.length === 0) {
+    throw new Error("No items found.");
+  }
 
   // Return the matching list of items in response body
   return result.Items;
