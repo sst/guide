@@ -8,13 +8,13 @@ ref: add-an-api-to-create-a-note
 comments_id: add-an-api-to-create-a-note/2451
 ---
 
-Let's get started by creating the API for our notes app.
+Let's get started by updating our earlier API infrastructure for use with our notes app.
 
-We'll first add an API to create a note. This API will take the note object as the input and store it in the database with a new id. The note object will contain the `content` field (the content of the note) and an `attachment` field (the URL to the uploaded file).
+We'll first update the API to create a note. This API will take the note object as the input and store it in the database with a new id. The note object will contain the `content` field (the content of the note) and an `attachment` field (the URL to the uploaded file).
 
-### Creating a Stack
+### Update API Stack
 
-{%change%} Create a new file in `lib/ApiStack.js` and add the following.
+{%change%} Rename the template file `lib/MyStack.js` to `lib/ApiStack.js` and replace its content with the following.
 
 ``` js
 import * as sst from "@serverless-stack/resources";
@@ -53,9 +53,9 @@ export default class ApiStack extends sst.Stack {
 
 We are doing a couple of things of note here.
 
-- We are creating a new stack for our API. We could've used the stack we had previously created for DynamoDB and S3. But this is a good way to talk about how to share resources between stacks.
+- We are using a separate stack for our API. We could've used the stack we had previously created for DynamoDB and S3. But this is a good way to talk about how to share resources between stacks.
 
-- This new `ApiStack` expects a `table` resource to be passed in. We'll be passing in the DynamoDB table from the `StorageStack` that we created previously.
+- This `ApiStack` expects a `table` resource to be passed in. We'll be passing in the DynamoDB table from the `StorageStack` that we created previously.
 
 - We are creating an API using SST's [`Api`](https://docs.serverless-stack.com/constructs/Api) construct.
 
