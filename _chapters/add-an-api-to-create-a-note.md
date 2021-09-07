@@ -71,7 +71,14 @@ We are doing a couple of things of note here.
 
 Let's add this new stack to the rest of our app.
 
-{%change%} Replace the `main` function in `lib/index.js` with.
+
+{%change%} In `lib/index.js`, import the API stack at the top.
+
+``` js
+import ApiStack from "./ApiStack";
+```
+
+{%change%} And, replace the `main` function with -
 
 ``` js
 export default function main(app) {
@@ -84,12 +91,6 @@ export default function main(app) {
 ```
 
 Here you'll notice that we using the public reference of the table from the `StorageStack` and passing it in to our `ApiStack`.
-
-{%change%} Also, import the new stack at the top.
-
-``` js
-import ApiStack from "./ApiStack";
-```
 
 ### Add the Function
 
