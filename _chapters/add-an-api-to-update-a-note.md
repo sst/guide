@@ -40,8 +40,21 @@ export const main = handler(async (event) => {
     ReturnValues: "ALL_NEW",
   };
 
-  await dynamoDb.update(params);
+  // check if requested item exists, if not exit with error
+  const result = await dynamoDb.get(params);
+  if (!result.Item) {
+    throw new Error("Item not found.");
+  }
 
+  // check if `ReturnValues` successfully returned, if not log and exit with error
+  // (this test may vary it `ReturnValues` settings is changed)
+  const update = await dynamoDb.update(params);
+  if (!update.Attributes) {
+    console.error('Update error:', update);
+    throw new Error("Unable to update item.");
+  }
+
+  // if successful, return success message
   return { status: true };
 });
 ```
