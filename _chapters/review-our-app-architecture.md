@@ -8,7 +8,7 @@ description: In this chapter we'll do a quick overview of the serverless API tha
 comments_id: review-our-app-architecture/2178
 ---
 
-So far we've [deployed our simple Hello World API]({% link _chapters/deploy-your-hello-world-api.md %}), [created a database (DynamoDB)]({% link _chapters/create-a-dynamodb-table-in-sst.md %}), and [created an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-in-sst.md %}). We are ready to start working on our backend API but let's get a quick sense of how the aforementioned pieces fit together.
+So far we've [deployed our simple Hello World API]({% link _chapters/create-a-hello-world-api.md %}), [created a database (DynamoDB)]({% link _chapters/create-a-dynamodb-table-in-sst.md %}), and [created an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-in-sst.md %}). We are ready to start working on our backend API but let's get a quick sense of how the aforementioned pieces fit together.
 
 ### Hello World API Architecture
 
