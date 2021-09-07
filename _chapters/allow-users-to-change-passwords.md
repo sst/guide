@@ -34,11 +34,17 @@ return (
       </LoaderButton>
     </LinkContainer>
     <hr />
-    <StripeProvider stripe={stripe}>
-      <Elements>
-        <BillingForm isLoading={isLoading} onSubmit={handleFormSubmit} />
-      </Elements>
-    </StripeProvider>
+    <Elements
+      stripe={stripePromise}
+      fonts={[
+        {
+          cssSrc:
+            "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800",
+        },
+      ]}
+    >
+      <BillingForm isLoading={isLoading} onSubmit={handleFormSubmit} />
+    </Elements>
   </div>
 );
 ```
