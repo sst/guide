@@ -16,7 +16,7 @@ Let's start by quickly looking at the technical specifications of AWS Lambda. La
 
 - Node.js 14.x, 12.x and 10.x
 - Java 11 and 8
-- Python 3.8, 3.7, 3.6 and 2.7
+- Python 3.9, 3.8, 3.7, 3.6 and 2.7
 - .NET Core 2.1, 2.2, 3.0 and 3.1
 - Go 1.x
 - Ruby 2.7 and 2.5
@@ -28,11 +28,12 @@ Note that, [.NET Core 2.2 and 3.0 are supported through custom runtimes](https:/
 
 Each function runs inside a container with a 64-bit Amazon Linux AMI. And the execution environment has:
 
-- Memory: 128MB - 3008MB, in 64 MB increments
+- Memory: 128MB - 10240MB, in 1 MB increments
 - Ephemeral disk space: 512MB
 - Max execution duration: 900 seconds
 - Compressed package size: 50MB
 - Uncompressed package size: 250MB
+- Container image package size: 10GB
 
 You might notice that CPU is not mentioned as a part of the container specification. This is because you cannot control the CPU directly. As you increase the memory, the CPU is increased as well.
 
@@ -40,7 +41,7 @@ The ephemeral disk space is available in the form of the `/tmp` directory. You c
 
 The execution duration means that your Lambda function can run for a maximum of 900 seconds or 15 minutes. This means that Lambda isn't meant for long running processes.
 
-The package size refers to all your code necessary to run your function. This includes any dependencies (`node_modules/` directory in case of Node.js) that your function might import. There is a limit of 250MB on the uncompressed package and a 50MB limit once it has been compressed. We'll take a look at the packaging process below.
+The package size refers to all your code necessary to run your function. This includes any dependencies (`node_modules/` directory in case of Node.js) that your function might import. There is a limit of 250MB on the uncompressed package and a 50MB limit once it has been compressed. If you need more space, you can package your container as a Docker image which can be up to 10GB. We'll take a look at the packaging process below.
 
 ### Lambda Function
 
@@ -89,7 +90,7 @@ Note that while AWS might keep the container with your Lambda function around af
 
 Lambda comes with a very generous free tier and it is unlikely that you will go over this while working on this guide.
 
-The Lambda free tier includes 1M free requests per month and 400,000 GB-seconds of compute time per month. Past this, it costs $0.20 per 1 million requests and $0.00001667 for every GB-seconds. The GB-seconds is based on the memory consumption of the Lambda function. For further details check out the [Lambda pricing page](https://aws.amazon.com/lambda/pricing/).
+The Lambda free tier includes 1M free requests per month and 400,000 GB-seconds of compute time per month. Past this, it costs $0.20 per 1 million requests and $0.00001667 for every GB-seconds. The GB-seconds is based on the memory consumption of the Lambda function. You can save up to 17% by purchasing AWS Compute Savings Plans in exchange for a 1 or 3 year commitment. For further details check out the [Lambda pricing page](https://aws.amazon.com/lambda/pricing/).
 
 In our experience, Lambda is usually the least expensive part of our infrastructure costs.
 
