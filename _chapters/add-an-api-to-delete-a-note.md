@@ -28,8 +28,20 @@ export const main = handler(async (event) => {
     },
   };
 
-  await dynamoDb.delete(params);
+  // check if requested item exists, if not exit with error
+  const result = await dynamoDb.get(params);
+  if (!result.Item) {
+    throw new Error("Item not found.");
+  }
 
+  // check if delete return is an empty object {}, if not log and exit with error
+  const deleteItem = await dynamoDb.delete(params);
+  if (!Object.keys(deleteItem).length === 0) {
+    console.error('Delete error:', deleteItem);
+    throw new Error("Unable to delete item.");
+  }
+
+  // if successful, return success message
   return { status: true };
 });
 ```
