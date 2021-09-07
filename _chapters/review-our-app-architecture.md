@@ -12,11 +12,11 @@ So far we've [deployed our simple Hello World API]({% link _chapters/create-a-he
 
 ### Hello World API Architecture
 
-Here's what we've built so far in our Hello World API.
+Here's what was built initially when we created the SST boilerplate application with its Hello World API.
 
 ![Serverless Hello World API architecture](/assets/diagrams/serverless-hello-world-api-architecture.png)
 
-API Gateway handles the `https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod` endpoint for us. And any GET requests made to `/hello`, are sent to our `hello.js` Lambda function.
+API Gateway handles our main `/` endpoint, sending GET requests made to this to our default `src/lambda.js` Lambda function.
 
 ### Notes App API Architecture
 
