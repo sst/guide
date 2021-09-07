@@ -179,7 +179,7 @@ Now we are ready to test our new API.
 
 {%change%} Run the following in your terminal.
 
-Make sure to keep your local environment (`sst start`) running in another window.
+Make sure to keep your local environment (`sst start`) running in another window – and to replace the endpoint address in the curl command below with your `ApiEndpoint` value from above.
 
 ``` bash
 $ curl -X POST \
