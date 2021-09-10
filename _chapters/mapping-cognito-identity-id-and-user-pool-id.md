@@ -10,7 +10,7 @@ If you are using the Cognito User Pool to manage your users while using the Iden
 
 ### Identity Pool User Id vs User Pool User Id
 
-You might recall ([from the chapters where we work with our Lambda functions]({% link _chapters/add-a-create-note-api.md %})), that we used the `event.requestContext.identity.cognitoIdentityId` as the user Id. This is the Id that a user is assigned through the Identity Pool. However, you cannot use this Id to look up information for this user from the User Pool. This is because to access your Lambda function, your user needs to:
+You might recall ([from the chapters where we work with our Lambda functions]({% link _chapters/secure-our-serverless-apis.md %})), that we used the `event.requestContext.identity.cognitoIdentityId` as the user Id. This is the Id that a user is assigned through the Identity Pool. However, you cannot use this Id to look up information for this user from the User Pool. This is because to access your Lambda function, your user needs to:
 
 1. Authenticate through your User Pool
 2. And then federate their identity through the Identity Pool
