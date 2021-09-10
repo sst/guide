@@ -70,11 +70,13 @@ Stack dev-notes-api
 
 Let's test list all notes API.
 
-{%change%} Run the following in your terminal (again, replacing the example URL with your `ApiEndpoint` value).
+{%change%} Run the following in your terminal.
 
 ``` bash
 $ curl https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes
 ```
+
+Again, replacing the example URL with your `ApiEndpoint` value.
 
 Since we are making a simple GET request, we could also go to this URL directly in your browser.
 
