@@ -75,7 +75,7 @@ Let's test the get notes API. In the [previous chapter]({% link _chapters/add-an
 $ curl https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes/NOTE_ID
 ```
 
-Make sure to replace the id at the end of the URL with the `noteId` that was created previously.
+Make sure to replace the endpoint URL with your `ApiEndpoint` value and the NOTE_ID at the end of the URL with the `noteId` that was created previously.
 
 Since we are making a simple GET request, we could also go to this URL directly in your browser.
 
