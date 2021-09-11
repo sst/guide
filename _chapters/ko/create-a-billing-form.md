@@ -24,7 +24,7 @@ $ npm install --save react-stripe-elements
 {% raw %}
 ``` coffee
 import React, { Component } from "react";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import LoaderButton from "./LoaderButton";
 import "./BillingForm.css";
@@ -81,7 +81,7 @@ class BillingForm extends Component {
     return (
       <form className="BillingForm" onSubmit={this.handleSubmitClick}>
         <FormGroup bsSize="large" controlId="storage">
-          <ControlLabel>Storage</ControlLabel>
+          <FormLabel>Storage</FormLabel>
           <FormControl
             min="0"
             type="number"
@@ -92,7 +92,7 @@ class BillingForm extends Component {
         </FormGroup>
         <hr />
         <FormGroup bsSize="large" controlId="name">
-          <ControlLabel>Cardholder&apos;s name</ControlLabel>
+          <FormLabel>Cardholder&apos;s name</FormLabel>
           <FormControl
             type="text"
             value={this.state.name}
@@ -100,7 +100,7 @@ class BillingForm extends Component {
             placeholder="Name on the card"
           />
         </FormGroup>
-        <ControlLabel>Credit Card Info</ControlLabel>
+        <FormLabel>Credit Card Info</FormLabel>
         <CardElement
           className="card-field"
           onChange={this.handleCardFieldChange}

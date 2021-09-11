@@ -18,10 +18,10 @@ comments_id: create-the-signup-form/52
 ``` coffee
 import React, { Component } from "react";
 import {
-  HelpBlock,
+  FormText,
   FormGroup,
   FormControl,
-  ControlLabel
+  FormLabel
 } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import "./Signup.css";
@@ -78,14 +78,14 @@ export default class Signup extends Component {
     return (
       <form onSubmit={this.handleConfirmationSubmit}>
         <FormGroup controlId="confirmationCode" bsSize="large">
-          <ControlLabel>Confirmation Code</ControlLabel>
+          <FormLabel>Confirmation Code</FormLabel>
           <FormControl
             autoFocus
             type="tel"
             value={this.state.confirmationCode}
             onChange={this.handleChange}
           />
-          <HelpBlock>Please check your email for the code.</HelpBlock>
+          <FormText>Please check your email for the code.</FormText>
         </FormGroup>
         <LoaderButton
           block
@@ -104,7 +104,7 @@ export default class Signup extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <FormGroup controlId="email" bsSize="large">
-          <ControlLabel>Email</ControlLabel>
+          <FormLabel>Email</FormLabel>
           <FormControl
             autoFocus
             type="email"
@@ -113,7 +113,7 @@ export default class Signup extends Component {
           />
         </FormGroup>
         <FormGroup controlId="password" bsSize="large">
-          <ControlLabel>Password</ControlLabel>
+          <FormLabel>Password</FormLabel>
           <FormControl
             value={this.state.password}
             onChange={this.handleChange}
@@ -121,7 +121,7 @@ export default class Signup extends Component {
           />
         </FormGroup>
         <FormGroup controlId="confirmPassword" bsSize="large">
-          <ControlLabel>Confirm Password</ControlLabel>
+          <FormLabel>Confirm Password</FormLabel>
           <FormControl
             value={this.state.confirmPassword}
             onChange={this.handleChange}
