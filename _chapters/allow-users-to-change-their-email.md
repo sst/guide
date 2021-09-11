@@ -25,10 +25,10 @@ import React, { useState } from "react";
 import { Auth } from "aws-amplify";
 import { useHistory } from "react-router-dom";
 import {
-  HelpBlock,
+  FormText,
   FormGroup,
   FormControl,
-  ControlLabel,
+  FormLabel,
 } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import { useFormFields } from "../lib/hooksLib";
@@ -87,7 +87,7 @@ export default function ChangeEmail() {
     return (
       <form onSubmit={handleUpdateClick}>
         <FormGroup bsSize="large" controlId="email">
-          <ControlLabel>Email</ControlLabel>
+          <FormLabel>Email</FormLabel>
           <FormControl
             autoFocus
             type="email"
@@ -112,16 +112,16 @@ export default function ChangeEmail() {
     return (
       <form onSubmit={handleConfirmClick}>
         <FormGroup bsSize="large" controlId="code">
-          <ControlLabel>Confirmation Code</ControlLabel>
+          <FormLabel>Confirmation Code</FormLabel>
           <FormControl
             autoFocus
             type="tel"
             value={fields.code}
             onChange={handleFieldChange}
           />
-          <HelpBlock>
+          <FormText>
             Please check your email ({fields.email}) for the confirmation code.
-          </HelpBlock>
+          </FormText>
         </FormGroup>
         <LoaderButton
           block

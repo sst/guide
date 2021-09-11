@@ -34,11 +34,17 @@ return (
       </LoaderButton>
     </LinkContainer>
     <hr />
-    <StripeProvider stripe={stripe}>
-      <Elements>
-        <BillingForm isLoading={isLoading} onSubmit={handleFormSubmit} />
-      </Elements>
-    </StripeProvider>
+    <Elements
+      stripe={stripePromise}
+      fonts={[
+        {
+          cssSrc:
+            "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800",
+        },
+      ]}
+    >
+      <BillingForm isLoading={isLoading} onSubmit={handleFormSubmit} />
+    </Elements>
   </div>
 );
 ```
@@ -80,7 +86,7 @@ Now let's create the form that allows our users to change their password.
 import React, { useState } from "react";
 import { Auth } from "aws-amplify";
 import { useHistory } from "react-router-dom";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import { useFormFields } from "../lib/hooksLib";
 import { onError } from "../lib/errorLib";
@@ -127,7 +133,7 @@ export default function ChangePassword() {
     <div className="ChangePassword">
       <form onSubmit={handleChangeClick}>
         <FormGroup bsSize="large" controlId="oldPassword">
-          <ControlLabel>Old Password</ControlLabel>
+          <FormLabel>Old Password</FormLabel>
           <FormControl
             type="password"
             onChange={handleFieldChange}
@@ -136,7 +142,7 @@ export default function ChangePassword() {
         </FormGroup>
         <hr />
         <FormGroup bsSize="large" controlId="password">
-          <ControlLabel>New Password</ControlLabel>
+          <FormLabel>New Password</FormLabel>
           <FormControl
             type="password"
             onChange={handleFieldChange}
@@ -144,7 +150,7 @@ export default function ChangePassword() {
           />
         </FormGroup>
         <FormGroup bsSize="large" controlId="confirmPassword">
-          <ControlLabel>Confirm Password</ControlLabel>
+          <FormLabel>Confirm Password</FormLabel>
           <FormControl
             type="password"
             onChange={handleFieldChange}

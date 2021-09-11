@@ -125,7 +125,7 @@ export default ({
 {%change%} 또한 헤더에서 `LoaderButton`을 import 합니다. 그리고 `Button`에 대한 참조를 제거합니다.
 
 ``` javascript
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 ```
 
