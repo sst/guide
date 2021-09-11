@@ -52,16 +52,18 @@ We'll do something similar to ensure that the user is not authenticated.
 {%change%} Add the following to `src/components/UnauthenticatedRoute.js`.
 
 ``` jsx
-import React from "react";
+import React, { cloneElement } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useAppContext } from "../lib/contextLib";
 
-export default function UnauthenticatedRoute({ children, ...rest }) {
+export default function UnauthenticatedRoute(props) {
+  const { children, ...rest } = props;
   const { isAuthenticated } = useAppContext();
+
   return (
     <Route {...rest}>
       {!isAuthenticated ? (
-        children
+        cloneElement(children, props)
       ) : (
         <Redirect to="/" />
       )}
@@ -71,5 +73,7 @@ export default function UnauthenticatedRoute({ children, ...rest }) {
 ```
 
 Here we are checking to ensure that the user is **not** authenticated before we render the child components. Example child components here would be `Login` and `Signup`. And in the case where the user is authenticated, we use the `Redirect` component to simply send the user to the homepage.
+
+The `cloneElement` above makes sure that passed in `state` is handled correctly for child components of `UnauthenticatedRoute` routes.
 
 Next, let's use these components in our app.

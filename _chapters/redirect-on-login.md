@@ -16,16 +16,16 @@ Let's start by adding a method to read the `redirect` URL from the querystring.
 
 ``` jsx
 function querystring(name, url = window.location.href) {
-   const parsedName = name.replace(/[[]]/g, '\\$&');
-   const regex = new RegExp(`[?&]${parsedName}(=([^&#]*)|&|#|$)`, 'i');
-   const results = regex.exec(url);
+  const parsedName = name.replace(/[[]]/g, "\\$&");
+  const regex = new RegExp(`[?&]${parsedName}(=([^&#]*)|&|#|$)`, "i");
+  const results = regex.exec(url);
 
-   if (!results || !results[2]) {
-     return false;
-   }
+  if (!results || !results[2]) {
+    return false;
+  }
 
-   return window.decodeURIComponent(results[2].replace(/\+/g, ' '));
- }
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
 ```
 
 This method takes the querystring param we want to read and returns it.
@@ -50,14 +50,6 @@ export default function UnauthenticatedRoute(props) {
     </Route>
   );
 }
-```
-
-The `cloneElement` above makes sure that passed in `state` is handled correctly for child `UnauthenticatedRoute` routes.
-
-{%change%} Let's replace the `import React from "react";` at the top of `src/components/UnauthenticatedRoute.js` with the following:
-
-``` jsx
-import React, { cloneElement } from "react";
 ```
 
 {%change%} And remove the following from the `handleSubmit` method in `src/containers/Login.js`.

@@ -30,6 +30,7 @@ import {
   FormControl,
   FormLabel,
 } from "react-bootstrap";
+import { BsCheck } from "react-icons/bs";
 import LoaderButton from "../components/LoaderButton";
 import { useFormFields } from "../lib/hooksLib";
 import { onError } from "../lib/errorLib";
@@ -164,7 +165,7 @@ export default function ResetPassword() {
   function renderSuccessMessage() {
     return (
       <div className="success">
-        <p>✅ Your password has been reset.</p>
+        <p><BsCheck size={16} /> Your password has been reset.</p>
         <p>
           <Link to="/login">
             Click here to login with your new credentials.
