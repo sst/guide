@@ -1,0 +1,236 @@
+////////////////
+// ABOUT PAGE //
+////////////////
+main > .download-ebook-page {
+  margin: 0 auto;
+  padding: 0 $spacing-unit $spacing-unit / 2;
+  max-width: calc(#{$post-content-width} - (#{$spacing-unit} * 2));
+
+  & > .title {
+    text-align: center;
+
+    p.eyebrow {
+      margin-bottom: 5px;
+      font-size: 14px;
+      color: $secondary-text-color;
+    }
+    h2 {
+      margin-bottom: 10px;
+      line-height: 1.1;
+      font-size: 44px;
+      font-weight: 700;
+
+      @include media-query($on-palm) {
+        font-size: 36px;
+      }
+    }
+    h4 {
+      margin-bottom: 0;
+      font-family: $base-font-family;
+      font-size: 20px;
+    }
+  }
+
+  & > .readers {
+    .readers-list {
+      margin: $spacing-unit auto;
+      position: relative;
+
+      @include media-query($on-palm) {
+        margin-top: $spacing-unit / 2;
+      }
+
+      .scroll-content {
+        overflow: hidden;
+      }
+      .scroll-shadow {
+        width: 200px;
+        height: 100%;
+        position: absolute;
+        opacity: 1;
+        top: 0;
+        transition: opacity .15s linear;
+        pointer-events: none;
+      }
+      .scroll-shadow.left {
+        left: 0;
+        background-image: linear-gradient(to left, rgba(255, 251, 249, 0), rgba(255, 251, 249, 1));
+      }
+      .scroll-shadow.right {
+        right: 0;
+        background-image: linear-gradient(to right, rgba(255, 251, 249, 0), rgba(255, 251, 249, 1));
+      }
+    }
+
+    ul.logos {
+      margin-left: 0;
+      margin-bottom: 0;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+
+      width: $reader-logo-width * 28 * 2;
+      animation: scroll 120s linear infinite;
+
+      li {
+        list-style-type: none;
+        width: $reader-logo-width;
+        height: 67px;
+        flex-shrink: 0;
+        margin: 10px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        & img {
+          width: 60px;
+          height: auto;
+          filter: grayscale(100%);
+          &:hover {
+            filter: none;
+          }
+        }
+        &.m-w img {
+          width: 90px;
+        }
+        &.t img {
+          width: auto;
+          height: 30px;
+        }
+        &.m-t img {
+          width: auto;
+          height: 43px;
+        }
+      }
+    }
+  }
+
+  & > .panels {
+    $hilight-background-color:  #FFF694;
+
+    display: flex;
+
+    .features {
+      flex: 1 1 50%;
+      padding: $spacing-unit / 2 + 5px;
+      border-radius: 8px;
+      background-color: white;
+      border: 1px solid $important-color;
+
+      & > p {
+        margin-bottom: $spacing-unit / 2;
+        color: $secondary-text-color;
+      }
+
+      .feature-list {
+        margin-bottom: 0;
+        font-size: 18px;
+
+        li {
+          margin-bottom: 12px;
+          font-size: 20px;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+        strong {
+          background-color: $hilight-background-color;
+        }
+
+        @include media-query($on-palm) {
+          margin-bottom: $spacing-unit - 5px;
+          padding: 0 10px;
+        }
+      }
+    }
+
+    .action {
+      flex: 1 1 50%;
+      display: flex;
+      box-sizing: border-box;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-left: $spacing-unit;
+
+      .cover {
+        text-align: center;
+        img {
+          height: 340px;
+        }
+      }
+
+      .cta {
+        background-color: $brand-color;
+        color: white;
+        border-radius: 8px;
+        padding: $spacing-unit / 2 $spacing-unit / 2 + 5px $spacing-unit / 2 + 5px;
+
+        h3 {
+          margin-bottom: 0;
+          font-size: 20px;
+          font-family: $base-font-family;
+        }
+        p.copy {
+          margin-bottom: $spacing-unit / 2 + 5px;
+          color: #C3CED2;
+          font-size: 14px;
+          line-height: 1.375;
+        }
+
+        form {
+          display: flex;
+          align-items: stretch;
+          justify-content: space-between;
+        }
+
+        .email-octopus-form-row {
+          margin: 0;
+          flex: 1 1 auto;
+        }
+
+        input.email-octopus-email-address {
+          margin: 0;
+          padding: 10px;
+          width: 100%;
+          font-size: 20px;
+          height: auto;
+          @extend %newsletter-input;
+          text-align: left !important;
+        }
+
+        .email-octopus-form-row-subscribe {
+          margin-top: 0;
+          margin-left: $spacing-unit / 2 + 5px;
+        }
+
+        button {
+          margin: 0;
+          padding: 19px 15px;
+          font-size: 18px;
+          white-space: nowrap;
+          text-transform: uppercase;
+          font-family: $base-font-family;
+          display: inline-block;
+          background-color: $important-color;
+          color: white;
+          border-radius: 4px;
+          line-height: 1;
+          transition: 0.3s;
+          letter-spacing: 1px;
+          cursor: pointer;
+
+          @include media-query($on-palm) {
+            padding: 18px 12px;
+            font-size: 12px;
+          }
+
+          &:hover {
+            background-color: lighten($important-color, 7%);
+          }
+        }
+      }
+    }
+  }
+}
