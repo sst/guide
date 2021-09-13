@@ -25,12 +25,12 @@ import React, { useState } from "react";
 import { Auth } from "aws-amplify";
 import { Link } from "react-router-dom";
 import {
-  HelpBlock,
+  FormText,
   FormGroup,
-  Glyphicon,
   FormControl,
-  ControlLabel,
+  FormLabel,
 } from "react-bootstrap";
+import { BsCheck } from "react-icons/bs";
 import LoaderButton from "../components/LoaderButton";
 import { useFormFields } from "../lib/hooksLib";
 import { onError } from "../lib/errorLib";
@@ -96,7 +96,7 @@ export default function ResetPassword() {
     return (
       <form onSubmit={handleSendCodeClick}>
         <FormGroup bsSize="large" controlId="email">
-          <ControlLabel>Email</ControlLabel>
+          <FormLabel>Email</FormLabel>
           <FormControl
             autoFocus
             type="email"
@@ -121,20 +121,20 @@ export default function ResetPassword() {
     return (
       <form onSubmit={handleConfirmClick}>
         <FormGroup bsSize="large" controlId="code">
-          <ControlLabel>Confirmation Code</ControlLabel>
+          <FormLabel>Confirmation Code</FormLabel>
           <FormControl
             autoFocus
             type="tel"
             value={fields.code}
             onChange={handleFieldChange}
           />
-          <HelpBlock>
+          <FormText>
             Please check your email ({fields.email}) for the confirmation code.
-          </HelpBlock>
+          </FormText>
         </FormGroup>
         <hr />
         <FormGroup bsSize="large" controlId="password">
-          <ControlLabel>New Password</ControlLabel>
+          <FormLabel>New Password</FormLabel>
           <FormControl
             type="password"
             value={fields.password}
@@ -142,7 +142,7 @@ export default function ResetPassword() {
           />
         </FormGroup>
         <FormGroup bsSize="large" controlId="confirmPassword">
-          <ControlLabel>Confirm Password</ControlLabel>
+          <FormLabel>Confirm Password</FormLabel>
           <FormControl
             type="password"
             value={fields.confirmPassword}
@@ -165,8 +165,7 @@ export default function ResetPassword() {
   function renderSuccessMessage() {
     return (
       <div className="success">
-        <Glyphicon glyph="ok" />
-        <p>Your password has been reset.</p>
+        <p><BsCheck size={16} /> Your password has been reset.</p>
         <p>
           <Link to="/login">
             Click here to login with your new credentials.

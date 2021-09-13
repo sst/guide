@@ -76,6 +76,8 @@ Let's test list all notes API.
 $ curl https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes
 ```
 
+Again, replacing the example URL with your `ApiEndpoint` value.
+
 Since we are making a simple GET request, we could also go to this URL directly in your browser.
 
 The response should look something like this.
