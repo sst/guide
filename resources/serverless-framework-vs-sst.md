@@ -156,7 +156,7 @@ Let's quickly summarize the comparison between the two frameworks.
 | Flexibility | Use community plugins  | Use any CDK construct |
 |             | Create your own plugin | Write your own CDK construct |
 
----
+## Live Lambda Development
 
 Next, let's look at in detail how SST allows you to test your serverless apps locally. We'll be using VS Code in this example. SST allows you to set breakpoints through VS Code.
 
@@ -248,7 +248,7 @@ Stack dev-vscode-my-stack
 
 The `ApiEndpoint` is the API we just created. Now if you head over to that endpoint in your browser, you'll notice that you'll hit the breakpoint.
 
-![Hitting a breakpoint in a Lambda function in VS Code](/assets/examples/vscode/set-lambda-hitting-a-breakpoint-in-a-lambda-function-in-vs-code.png)
+![Hitting a breakpoint in a Lambda function in VS Code](/assets/resources/vscode/set-lambda-hitting-a-breakpoint-in-a-lambda-function-in-vs-code.png)
 
 Here on the left you'll be able to inspect all the Lambda function variables that are coming from AWS. And since you are testing against a deployed endpoint, this setup will work even if there was authentication involved.
 
