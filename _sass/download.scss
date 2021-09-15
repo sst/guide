@@ -201,7 +201,7 @@ main > .download-ebook-page {
           border: 1px solid lighten($important-color, 5%);
 
           &:nth-child(1) {
-            filter: blur(1px);
+            filter: blur(2px);
             transform: rotate(-30deg);
             box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.4);
           }
