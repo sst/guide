@@ -461,6 +461,8 @@ The dialog will change to show two textboxes. The first one is where you define 
 
 Once you click **Next**, the dialog will change back to how it was originally. Click **Done** to close the dialog.
 
+TODO: SHOW SCREENSHOTS WITH CONTINUE AND SAVE. DOESN'T WORK WITHOUT IT
+
 Click **Continue** on the Edit Services ID page. You’ll see a summary of the Services ID displayed. Click **Save**.
 
 ![Services ID Summary](https://i.imgur.com/0X9tuz6.png)
