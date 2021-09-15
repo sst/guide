@@ -36,7 +36,7 @@ You can [view the above in detail here](http://projects.wojtekmaj.pl/react-lifec
 
 Let's understand this quickly with an example. Say you have a component called `Hello`:
 
-``` coffee
+``` jsx
 class Hello extends React.Component {
   constructor(props) {
     super(props);
@@ -88,7 +88,7 @@ But for now, let's look at the flow for a Function component.
 
 Let's start with a basic React Function component and look at how React renders it.
 
-``` coffee
+``` jsx
 function Hello(props) {
   return (
     <div>
@@ -116,7 +116,7 @@ This is where Hooks come in!
 
 React Hooks allows Function components to "hook" into the React state and lifecycle. Let's look at an example.
 
-``` coffee
+``` jsx
 function Hello(props) {
   const [ stateVariable, setStateVariable ] = useState(0);
 
@@ -189,7 +189,7 @@ This section is based on a great post by [Dan Abramov](https://twitter.com/dan_a
 
 Using the example from Dan's post; let's compare similar versions of the same component first as a Class.
 
-``` coffee
+``` jsx
 class ProfilePage extends React.Component {
   showMessage = () => {
     alert('Followed ' + this.props.user);
@@ -207,7 +207,7 @@ class ProfilePage extends React.Component {
 
 And now as a Function component.
 
-``` coffee
+``` jsx
 function ProfilePage(props) {
   const showMessage = () => {
     alert('Followed ' + props.user);

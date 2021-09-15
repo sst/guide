@@ -26,7 +26,7 @@ While individual packaging is a good start, for Node.js apps, Serverless Framewo
 
 AWS Lambda supports Node.js 10.x and 12.x. However most modern JavaScript projects rely on ES6 features (like `import/export`) and TypeScript. To support ES6 and TypeScript, you can use [Babel](https://babeljs.io) and [TypeScript](https://www.typescriptlang.org) to transpile your Lambda functions.
 
-However, using Webpack and Babel require you to manage their respective configs, plugins, and NPM packages in your Serverless app. Additionally, you might want to lint your code before your functions get packaged. This means that your projects can end up with a long list of packages and config files before you even write your first line of code! And they need to be updated over time. This can be really hard to do across multiple projects.
+However, using Webpack and Babel require you to manage their respective configs, plugins, and NPM packages in your serverless app. Additionally, you might want to lint your code before your functions get packaged. This means that your projects can end up with a long list of packages and config files before you even write your first line of code! And they need to be updated over time. This can be really hard to do across multiple projects.
 
 We created a plugin to solve all of these issues.
 

@@ -19,7 +19,7 @@ Let's first start by thinking about how the data is going to be stored. We are g
 
 ### About DynamoDB
 
-Amazon DynamoDB is a fully managed NoSQL database that provides fast and predictable performance with seamless scalability. DynamoDB is also a Serverless database, which means (as you guessed) it'll scale automatically and you only pay for what you use. 
+Amazon DynamoDB is a fully managed NoSQL database that provides fast and predictable performance with seamless scalability. DynamoDB is also a serverless database, which means (as you guessed) it'll scale automatically and you only pay for what you use. 
 
 Similar to other databases, DynamoDB stores data in tables. Each table contains multiple items, and each item is composed of one or more attributes. We are going to cover some basics in the following chapters. But to get a better feel for it, here is a [great guide on DynamoDB](https://www.dynamodbguide.com).
 

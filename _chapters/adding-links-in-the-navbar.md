@@ -12,7 +12,7 @@ Now that we have our first route set up, let's add a couple of links to the navb
 
 {%change%} Replace the `App` function component in `src/App.js` with the following.
 
-``` coffee
+``` jsx
 function App() {
   return (
     <div className="App container py-3">
@@ -42,7 +42,7 @@ And let's include the `Nav` component in the header.
 
 {%change%} Add the following import to the top of your `src/App.js`.
 
-``` coffee
+``` jsx
 import Nav from "react-bootstrap/Nav";
 ```
 
@@ -54,23 +54,23 @@ Unfortunately, when you click on them they refresh your browser while redirectin
 
 To fix this we need a component that works with React Router and React Bootstrap called [React Router Bootstrap](https://github.com/react-bootstrap/react-router-bootstrap). It can wrap around your `Navbar` links and use the React Router to route your app to the required link without refreshing the browser.
 
-{%change%} Run the following command in your working directory.
+{%change%} Run the following command in the `frontend/` directory and **not** in your project root.
 
 ``` bash
-$ npm install react-router-bootstrap --save
+$ npm install react-router-bootstrap
 ```
 
 Let's also import it.
 
 {%change%} Add this to the top of your `src/App.js`.
 
-``` coffee
+``` jsx
 import { LinkContainer } from "react-router-bootstrap";
 ```
 
 {%change%} We will now wrap our links with the `LinkContainer`. Replace the `App` function component in your `src/App.js` with this.
 
-``` coffee
+``` jsx
 function App() {
   return (
     <div className="App container py-3">
@@ -100,7 +100,7 @@ function App() {
 
 We are doing one other thing here. We are grabbing the current path the user is on from the `window.location` object. And we set it as the `activeKey` of our `Nav` component. This'll highlight the link when we are on that page.
 
-``` coffee
+``` jsx
 <Nav activeKey={window.location.pathname}>
 ```
 

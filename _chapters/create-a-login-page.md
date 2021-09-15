@@ -16,7 +16,7 @@ So let's start by creating the basic form that'll take the user's email (as thei
 
 {%change%} Create a new file `src/containers/Login.js` and add the following.
 
-``` coffee
+``` jsx
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -98,7 +98,7 @@ These styles roughly target any non-mobile screen sizes.
 
 {%change%} Now we link this container up with the rest of our app by adding the following line to `src/Routes.js` below our home `<Route>`.
 
-``` coffee
+``` jsx
 <Route exact path="/login">
   <Login />
 </Route>

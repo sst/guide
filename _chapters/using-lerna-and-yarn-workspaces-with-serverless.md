@@ -24,7 +24,7 @@ However, managing these packages in the same repo can be really challenging. To 
 
   This helps us manage our packages, publish them, and keeps track of the dependencies between them.
 
-Lerna and Yarn Workspaces together helps create a monorepo setup that allows our Serverless project to scale as it grows.
+Lerna and Yarn Workspaces together helps create a monorepo setup that allows our serverless project to scale as it grows.
 
 #### Starter Templates
 
@@ -101,7 +101,7 @@ This repo is split into 3 directories. Each with a different purpose:
 
 - services
 
-  These are Serverless services that are deployed. Has a `package.json` and `serverless.yml`. There are two sample services.
+  These are Serverless Framework services that are deployed. Has a `package.json` and `serverless.yml`. There are two sample services.
 
   1. `service1`: Depends on the `sample-package`. This means that if it changes, we want to deploy `service1`.
   2. `service2`: Does not depend on any internal packages.
@@ -116,7 +116,7 @@ The `packages/` and `services/` directories are Yarn Workspaces.
 
 #### Services
 
-The Serverless services are meant to be managed on their own. Each service is based on our [Serverless Node.js Starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter). It uses the [serverless-bundle](https://github.com/AnomalyInnovations/serverless-bundle) plugin (based on [Webpack](https://webpack.js.org)) to create optimized Lambda packages.
+The Serverless Framework services are meant to be managed on their own. Each service is based on our [Serverless Node.js Starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter). It uses the [serverless-bundle](https://github.com/AnomalyInnovations/serverless-bundle) plugin (based on [Webpack](https://webpack.js.org)) to create optimized Lambda packages.
 
 This is good for keeping your Lambda packages small. But it also ensures that you can have Yarn hoist all your NPM packages to the project root. Without Webpack, you'll need to disable hoisting since Serverless Framework does not package the dependencies of a service correctly on its own.
 
@@ -209,7 +209,7 @@ To implement the above, use the following algorithm in your CI:
 
 ### Deploying Through Seed
 
-[Seed](https://seed.run) supports deploying Serverless monorepo projects that use Lerna and Yarn Workspaces. To enable it, add the following to the `seed.yml` in your repo root:
+[Seed](https://seed.run) supports deploying Serverless Framework monorepo projects that use Lerna and Yarn Workspaces. To enable it, add the following to the `seed.yml` in your repo root:
 
 ``` yaml
 check_code_change: lerna
@@ -368,4 +368,4 @@ SST will handle all the dependencies internally and deploy all the services (and
 
 ------
 
-These starters should give you a great template to build your next monorepo Serverless project. So give it a try and let us know what you think!
+These starters should give you a great template to build your next monorepo serverless project. So give it a try and let us know what you think!

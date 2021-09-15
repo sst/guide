@@ -41,7 +41,7 @@ async function handleSubmit(event) {
 
 Now to reflect the state change in our button we are going to render it differently based on the `isLoading` flag. But we are going to need this piece of code in a lot of different places. So it makes sense that we create a reusable component out of it.
 
-{%change%} Create a `src/components/` directory by running this command in your working directory.
+{%change%} Create a `src/components/` directory by running this command in the `frontend/` directory.
 
 ``` bash
 $ mkdir src/components/
@@ -51,7 +51,7 @@ Here we'll be storing all our React components that are not dealing directly wit
 
 {%change%} Create a new file and add the following in `src/components/LoaderButton.js`.
 
-``` coffee
+``` jsx
 import React from "react";
 import Button from "react-bootstrap/Button";
 import { BsArrowRepeat } from "react-icons/bs";
@@ -151,7 +151,7 @@ And now when we switch over to the browser and try logging in, you should see th
 
 You might have noticed in our Login and App components that we simply `alert` when there is an error. We are going to keep our error handling simple. But it'll help us further down the line if we handle all of our errors in one place.
 
-{%change%} To do that, create `src/libs/errorLib.js` and add the following.
+{%change%} To do that, create `src/lib/errorLib.js` and add the following.
 
 ``` javascript
 export function onError(error) {
@@ -173,7 +173,7 @@ Let's use this in our Login container.
 {%change%} Import the new error lib in the header of `src/containers/Login.js`.
 
 ``` javascript
-import { onError } from "../libs/errorLib";
+import { onError } from "../lib/errorLib";
 ```
 
 {%change%} And replace `alert(e.message);` in the `handleSubmit` function with:
@@ -187,7 +187,7 @@ We'll do something similar in the App component.
 {%change%} Import the error lib in the header of `src/App.js`.
 
 ``` javascript
-import { onError } from "./libs/errorLib";
+import { onError } from "./lib/errorLib";
 ```
 
 {%change%} And replace `alert(e);` in the `onLoad` function with:

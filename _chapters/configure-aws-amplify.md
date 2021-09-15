@@ -5,7 +5,6 @@ date: 2017-01-12 12:00:00
 lang: en
 ref: configure-aws-amplify
 description: We are going to use the information of our AWS resources to configure AWS Amplify in our React app. We'll call the Amplify.configure() method when our app first loads.
-code: frontend
 comments_id: configure-aws-amplify/151
 ---
 
@@ -15,13 +14,13 @@ To do this we'll be using a library called [AWS Amplify](https://github.com/aws/
 
 ### Install AWS Amplify
 
-{%change%} Run the following command in your working directory.
+{%change%} Run the following command in the `frontend/` directory and **not** in your project root.
 
 ``` bash
-$ npm install aws-amplify --save
+$ npm install aws-amplify
 ```
 
-This installs the NPM package and adds the dependency to your `package.json`.
+This installs the NPM package and adds the dependency to the `package.json` of your React app..
 
 ### Create a Config
 
@@ -29,36 +28,29 @@ Let's first create a configuration file for our app that'll reference all the re
 
 {%change%} Create a file at `src/config.js` and add the following.
 
-``` coffee
+``` js
 const config = {
+  // Backend config
   s3: {
-    REGION: "YOUR_S3_UPLOADS_BUCKET_REGION",
-    BUCKET: "YOUR_S3_UPLOADS_BUCKET_NAME",
+    REGION: process.env.REACT_APP_REGION,
+    BUCKET: process.env.REACT_APP_BUCKET,
   },
   apiGateway: {
-    REGION: "YOUR_API_GATEWAY_REGION",
-    URL: "YOUR_API_GATEWAY_URL",
+    REGION: process.env.REACT_APP_REGION,
+    URL: process.env.REACT_APP_API_URL,
   },
   cognito: {
-    REGION: "YOUR_COGNITO_REGION",
-    USER_POOL_ID: "YOUR_COGNITO_USER_POOL_ID",
-    APP_CLIENT_ID: "YOUR_COGNITO_APP_CLIENT_ID",
-    IDENTITY_POOL_ID: "YOUR_IDENTITY_POOL_ID",
+    REGION: process.env.REACT_APP_REGION,
+    USER_POOL_ID: process.env.REACT_APP_USER_POOL_ID,
+    APP_CLIENT_ID: process.env.REACT_APP_USER_POOL_CLIENT_ID,
+    IDENTITY_POOL_ID: process.env.REACT_APP_IDENTITY_POOL_ID,
   },
 };
 
 export default config;
 ```
 
-Here you need to replace the following:
-
-1. `YOUR_S3_UPLOADS_BUCKET_NAME` and `YOUR_S3_UPLOADS_BUCKET_REGION` with the your S3 Bucket name and region from the [Create an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}) chapter. In our case it is `notes-app-uploads` and `us-east-1`.
-
-2. `YOUR_API_GATEWAY_URL` and `YOUR_API_GATEWAY_REGION` with the ones from the [Deploy the APIs]({% link _chapters/deploy-the-apis.md %}) chapter. In our case the URL is `https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod` and the region is `us-east-1`.
-
-3. `YOUR_COGNITO_USER_POOL_ID`, `YOUR_COGNITO_APP_CLIENT_ID`, and `YOUR_COGNITO_REGION` with the Cognito **Pool Id**, **App Client id**, and region from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter.
-
-4. `YOUR_IDENTITY_POOL_ID` with your **Identity pool ID** from the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter.
+Here we are loading the environment that are set from our serverless backend. We did this back when we were first [setting up our React app]({% link _chapters/create-a-new-reactjs-app.md %}).
 
 ### Add AWS Amplify
 
@@ -66,7 +58,7 @@ Next we'll set up AWS Amplify.
 
 {%change%} Import it by adding the following to the header of your `src/index.js`.
 
-``` coffee
+``` js
 import { Amplify } from 'aws-amplify';
 ```
 
@@ -74,13 +66,13 @@ And import the config we created above.
 
 {%change%} Add the following, also to the header of your `src/index.js`.
 
-``` coffee
+``` js
 import config from './config';
 ```
 
 {%change%} And to initialize AWS Amplify; add the following above the `ReactDOM.render` line in `src/index.js`.
 
-``` coffee
+``` js
 Amplify.configure({
   Auth: {
     mandatorySignIn: true,

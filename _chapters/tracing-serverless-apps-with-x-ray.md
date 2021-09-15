@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Tracing Serverless Apps with X-Ray
-description: In this chapter we look at how to trace Serverless apps using AWS X-Ray. Since your app is made up of multiple services, it's important to configure X-Ray to get visibility over a request as it flows through the system.
+title: Tracing serverless Apps with X-Ray
+description: In this chapter we look at how to trace serverless apps using AWS X-Ray. Since your app is made up of multiple services, it's important to configure X-Ray to get visibility over a request as it flows through the system.
 date: 2019-10-02 00:00:00
 comments_id: tracing-serverless-apps-with-x-ray/1337
 canonical_url: https://seed.run/blog/how-to-trace-serverless-apps-with-aws-x-ray.html
@@ -11,7 +11,7 @@ _This chapter is based on a blog post over on the [Seed blog](https://seed.run/b
 
 ---
 
-Typically as a Serverless app grows, the number of AWS services involved also increases. This can make it tricky to debug them. [AWS X-Ray](https://aws.amazon.com/xray/) is a service that records and visualizes requests made by your application. It provides an end-to-end view of requests as they travel through your Serverless application, and shows a map of your application’s underlying components.
+Typically as a serverless app grows, the number of AWS services involved also increases. This can make it tricky to debug them. [AWS X-Ray](https://aws.amazon.com/xray/) is a service that records and visualizes requests made by your application. It provides an end-to-end view of requests as they travel through your Serverless application, and shows a map of your application’s underlying components.
 
 In this chapter we'll show you how to set up AWS X-Ray to trace API requests and Lambda invocations for your Serverless Framework application.
 
@@ -67,7 +67,7 @@ exports.main = async function(event) {
 
 Now run `serverless deploy` to deploy your service. Make sure to deploy your entire application (not just an individual function), since you made changes to your `serverless.yml`.
 
-Note that, if you are trying to enable AWS X-Ray Tracing on existing Serverless projects, make sure your Serverless CLI version is later than **1.44**.
+Note that, if you are trying to enable AWS X-Ray Tracing on existing serverless projects, make sure your Serverless CLI version is later than **1.44**.
 
 After you deploy, invoke your API Gateway endpoint:
 

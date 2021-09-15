@@ -71,7 +71,7 @@ render() {
           </FormGroup>
           {this.state.note.attachment &&
             <FormGroup>
-              <ControlLabel>Attachment</ControlLabel>
+              <FormLabel>Attachment</FormLabel>
               <FormControl.Static>
                 <a
                   target="_blank"
@@ -84,7 +84,7 @@ render() {
             </FormGroup>}
           <FormGroup controlId="file">
             {!this.state.note.attachment &&
-              <ControlLabel>Attachment</ControlLabel>}
+              <FormLabel>Attachment</FormLabel>}
             <FormControl onChange={this.handleFileChange} type="file" />
           </FormGroup>
           <LoaderButton
@@ -157,7 +157,7 @@ this.state = {
 
 
 ``` javascript
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import config from "../config";
 import "./Notes.css";

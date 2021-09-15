@@ -8,9 +8,9 @@ ref: custom-domains-in-netlify
 comments_id: custom-domains-in-netlify/191
 ---
 
-Now that we have our React app hosted on Netlify, let's configure a custom domain. We'll be using the domain that we [previously purchased]({% link _chapters/purchase-a-domain-with-route-53.md %}).
+Now that we [have our React app hosted on Netlify]({% link _chapters/setting-up-your-project-on-netlify.md %}), let's configure a custom domain.
 
-If you didn't setup a domain back then, feel free to skip this chapter.
+Before we get started, make sure to follow this chapter to [purchase a domain on Amazon Route 53]({% link _chapters/purchase-a-domain-with-route-53.md %}).
 
 ### Pick a Netlify Site Name
 
@@ -102,6 +102,4 @@ Now if you head over to your browser and go to your custom domain, your notes ap
 
 ![Notes app on custom domain screenshot](/assets/part2/notes-app-on-custom-domain.png)
 
-We've hit an important milestone here. Our fully functional React app is now live on our own custom domain. You've completed the main part of this guide!
-
-Over the next few sections, we'll work on taking our app into production. These are meant for folks that are using this guide to build an app for work or for business. We'll introduce you to concepts like _Infrastructure as Code_, environments, automating deployments, and how to monitor and debug your app in production.
+Now our React.js app is hosted on Netlify with a custom domain! Next, let's look at how to use Netlify as a CI/CD pipeline for our React app.

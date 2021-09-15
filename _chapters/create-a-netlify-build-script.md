@@ -4,13 +4,12 @@ title: Create a Netlify Build Script
 date: 2018-03-26 00:00:00
 lang: en
 description: To configure our Create React App with Netlify, we need to add a build script to our project root. To make sure that we return a HTTP status code of 200 for our React Router routes we will be adding a redirects rule.
-code: frontend
 ref: create-a-netlify-build-script
 redirect_from: /chapters/create-a-build-script.html
 comments_id: create-a-build-script/189
 ---
 
-Before we can add our project to [Netlify](https://www.netlify.com) we just need to set up a build script. If you recall, we had configured our app to use the `REACT_APP_STAGE` build environment variable. We are going to create a build script to tell Netlify to set this variable up for the different deployment cases.
+To automate our React.js deployments with [Netlify](https://www.netlify.com) we just need to set up a build script. If you recall from the [previous chapter]({% link _chapters/manage-environments-in-create-react-app.md %}), we had configured our app to use the `REACT_APP_STAGE` build environment variable. We are going to create a build script to tell Netlify to set this variable up for the different deployment cases.
 
 ### Add the Netlify Build Script
 
@@ -53,21 +52,4 @@ The build script is configured based on contexts. There is a default one right u
 
 The production context labelled, `context.production` is the only one where we set the `REACT_APP_STAGE` variable to `prod`. This is when we push to `master`. The `branch-deploy` is what we will be using when we push to any other non-production branch. The `deploy-preview` is for pull requests.
 
-### Commit the Changes
-
-{%change%} Let's quickly commit these to Git.
-
-``` bash
-$ git add .
-$ git commit -m "Adding a Netlify build script"
-```
-
-### Push the Changes
-
-{%change%} We are pretty much done making changes to our project. So let's go ahead and push them to GitHub.
-
-``` bash
-$ git push
-```
-
-Now we are ready to test our frontend workflow!
+If you commit and push your changes to Git, you'll see Netlify pick up your build script.

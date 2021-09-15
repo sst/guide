@@ -43,13 +43,15 @@ We are going to have to pass the session related info to all of our containers. 
 
 We'll create a context for our entire app that all of our containers will use.
 
-{%change%} Create a `src/libs/` directory. We'll use this to store all our common code.
+{%change%} Create a `src/lib/` directory in the `frontend/` React directory.
 
 ``` bash
-$ mkdir src/libs/
+$ mkdir src/lib/
 ```
 
-{%change%} Add the following to `src/libs/contextLib.js`.
+We'll use this to store all our common code.
+
+{%change%} Add the following to `src/lib/contextLib.js`.
 
 ``` javascript
 import { useContext, createContext } from "react";
@@ -70,21 +72,21 @@ If you are not sure how Contexts work, don't worry, it'll make more sense once w
 {%change%} Import our new app context in the header of `src/App.js`.
 
 ``` javascript
-import { AppContext } from "./libs/contextLib";
+import { AppContext } from "./lib/contextLib";
 ```
 
 Now to add our session to the context and to pass it to our containers:
 
 {%change%} Wrap our `Routes` component in the `return` statement of `src/App.js`.
 
-``` coffee
+``` jsx
 <Routes />
 ```
 
 {%change%} With this.
 
 {% raw %}
-``` coffee
+``` jsx
 <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
   <Routes />
 </AppContext.Provider>
@@ -104,7 +106,7 @@ The second part of the Context API is the consumer. We'll add that to the Login 
 {%change%} Start by importing it in the header of `src/containers/Login.js`.
 
 ``` javascript
-import { useAppContext } from "../libs/contextLib";
+import { useAppContext } from "../lib/contextLib";
 ```
 
 {%change%} Include the hook by adding it below the `export default function Login() {` line.
@@ -125,7 +127,7 @@ userHasAuthenticated(true);
 
 We can now use this to display a Logout button once the user logs in. Find the following in our `src/App.js`.
 
-``` coffee
+``` jsx
 <LinkContainer to="/signup">
   <Nav.Link>Signup</Nav.Link>
 </LinkContainer>
@@ -136,7 +138,7 @@ We can now use this to display a Logout button once the user logs in. Find the f
 
 {%change%} And replace it with this:
 
-``` coffee
+``` jsx
 {isAuthenticated ? (
   <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
 ) : (
@@ -161,7 +163,7 @@ function handleLogout() {
 }
 ```
 
-Now head over to your browser and try logging in with the admin credentials we created in the [Create a Cognito Test User]({% link _chapters/create-a-cognito-test-user.md %}) chapter. You should see the Logout button appear right away.
+Now head over to your browser and try logging in with the admin credentials we created in the [Secure Our Serverless APIs]({% link _chapters/secure-our-serverless-apis.md %}) chapter. You should see the Logout button appear right away.
 
 ![Login state updated screenshot](/assets/login-state-updated.png)
 

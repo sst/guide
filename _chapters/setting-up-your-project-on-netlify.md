@@ -8,7 +8,11 @@ ref: setting-up-your-project-on-netlify
 comments_id: setting-up-your-project-on-netlify/190
 ---
 
-Now we are going to host our React app on [Netlify](https://www.netlify.com). Before we can do that, we need to do one more thing. Recall that our React app is a single page app. Where the routes in the app are handled by our client side JavaScript code. We have a single `index.html` at the root of our app that handles all the routes. So we need to tell our hosting provider (in this case Netlify), to redirect any other requests back to this `index.html` file.
+Now we are going to host our React app on [Netlify](https://www.netlify.com). For reference, here's our React app in a GitHub repo.
+
+[**{{ site.frontend_github_repo }}**]({{ site.frontend_github_repo }})
+
+Recall that our React app is a single page app. Where the routes in the app are handled by our client side JavaScript code. We have a single `index.html` at the root of our app that handles all the routes. So we need to tell our hosting provider (in this case Netlify), to redirect any other requests back to this `index.html` file.
 
 ### Add a Redirects File
 
@@ -21,14 +25,6 @@ Now we are going to host our React app on [Netlify](https://www.netlify.com). Be
 This is basically saying that any requests should be sent to the `index.html` of our React app.
 
 Note that this file doesn't have an extension. It is just called `_redirects`.
-
-{%change%} Let's commit these changes and push to GitHub.
-
-``` bash
-$ git add .
-$ git commit -m "Adding a redirects file"
-$ git push
-```
 
 And we are now ready to host our app on Netlify!
 
@@ -64,4 +60,4 @@ And you should see your app in action!
 
 Just like that, our app is live! You can share it with your friends and the rest of the world!
 
-By default, a site hosted on Netlify uses their domains. But we want to host our notes app on our own domain. To do that, let's first purchase a domain name. We'll be using AWS to do so because we'll be using this same domain later for our Serverless API.
+By default, a site hosted on Netlify uses their domains. But we want to host our notes app on our own domain. Let's do that next!

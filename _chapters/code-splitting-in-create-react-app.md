@@ -3,7 +3,6 @@ layout: post
 title: Code Splitting in Create React App
 description: Code splitting in Create React App is an easy way to reduce the size of your React.js app bundle. To do this in an app using React Router v4, we can asynchronously load our routes using the dynamic import() method that Create React App supports.
 date: 2018-04-17 00:00:00
-code: frontend
 comments_id: code-splitting-in-create-react-app/98
 ---
 
@@ -23,7 +22,7 @@ While, the dynamic `import()` can be used for any component in our React app; it
 
 The usual structure used by React Router to set up routing for your app looks something like this.
 
-``` coffee
+``` jsx
 /* Import the components */
 import Home from "./containers/Home";
 import Posts from "./containers/Posts";
@@ -48,7 +47,7 @@ To do this we are going to dynamically import the required component.
 
 {%change%} Add the following to `src/components/AsyncComponent.js`.
 
-``` coffee
+``` jsx
 import React, { Component } from "react";
 
 export default function asyncComponent(importComponent) {
@@ -90,13 +89,13 @@ We are doing a few things here:
 
 Now let's use this component in our routes. Instead of statically importing our component.
 
-``` coffee
+``` jsx
 import Home from "./containers/Home";
 ```
 
 We are going to use the `asyncComponent` to dynamically import the component we want.
 
-``` coffee
+``` jsx
 const AsyncHome = asyncComponent(() => import("./containers/Home"));
 ```
 
@@ -106,7 +105,7 @@ Also, it might seem weird that we are passing a function here. Why not just pass
 
 We are then going to use the `AsyncHome` component in our routes. React Router will create the `AsyncHome` component when the route is matched and that will in turn dynamically import the `Home` component and continue just like before.
 
-``` coffee
+``` jsx
 <Route path="/" exact component={AsyncHome} />
 ```
 
@@ -114,7 +113,7 @@ Now let's go back to our Notes project and apply these changes.
 
 {%change%} Your `src/Routes.js` should look like this after the changes.
 
-``` coffee
+``` jsx
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import asyncComponent from "./components/AsyncComponent";
@@ -169,7 +168,7 @@ export default ({ childProps }) =>
 
 It is pretty cool that with just a couple of changes, our app is all set up for code splitting. And without adding a whole lot more complexity either! Here is what our `src/Routes.js` looked like before.
 
-``` coffee
+``` jsx
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import AppliedRoute from "./components/AppliedRoute";
@@ -249,7 +248,7 @@ $ npm install --save react-loadable
 
 Use it instead of the `asyncComponent` that we had above.
 
-``` coffee
+``` jsx
 const AsyncHome = Loadable({
   loader: () => import("./containers/Home"),
   loading: MyLoadingComponent
@@ -258,7 +257,7 @@ const AsyncHome = Loadable({
 
 And `AsyncHome` is used exactly as before. Here the `MyLoadingComponent` would look something like this.
 
-``` coffee
+``` jsx
 const MyLoadingComponent = ({isLoading, error}) => {
   // Handle the loading state
   if (isLoading) {

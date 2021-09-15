@@ -3,103 +3,60 @@ layout: post
 title: Deploying Through Seed
 lang: en
 date: 2018-03-14 00:00:00
-description: We are going to trigger a deployment in Seed by pushing a commit to our Serverless project in Git. In the Seed console you can view the build logs and look at the CloudFormation output.
+description: We are going to trigger a deployment in Seed by pushing a commit to our full-stack serverless project in Git. In the Seed console you can view the build logs and look at the stack outputs.
 ref: deploying-through-seed
 comments_id: deploying-through-seed/177
 ---
 
-Now, we are ready to make our first deployment. You can either Git push a new change to master to trigger it. Or we can just go into the **dev** stage and hit the **Trigger Deploy** button.
+Now, we are almost ready to make our first deployment. Our app also contains a React app in the `frontend/` directory. We need to make sure to run an `npm install` in that directory.
 
-Let's do it through Git.
+Let's quickly add a build script to do that.
 
-{%change%} Go back to the notes service in your backend API repo, `services/notes` and run the following.
+{%change%} Create a new file in your project root called `seed.yml` with.
 
-``` bash
-$ npm version patch
+``` yml
+before_build:
+  - cd frontend && npm install
 ```
 
-This is simply updating the NPM version for your project. It is a good way to keep track of the changes you are making to your project. And it also creates a quick Git commit for us.
-
-{%change%} Push the change using.
+{%change%} And let's commit and push this change.
 
 ``` bash
+$ git add .
+$ git commit -m "Adding a seed build spec"
 $ git push
 ```
 
-Now if you head into the **dev** stage in Seed, you should see a build in progress. Now to see the build logs, you can hit **Build v1**.
+Now if you head into the **prod** stage in Seed, you should see a build in progress. To check out the build logs, you can click the **v1** link.
 
-![Seed dev build in progress screenshot](/assets/part2/seed-dev-build-in-progress.png)
+![Seed prod build in progress](/assets/part2/seed-prod-build-in-progress.png)
 
-Here you'll see the build taking place live. Note that the deployments are carried out in the order specified by the deploy phases.
+Here you'll see the build taking place live. Click on the **notes** service that is being deployed.
 
-![Dev build page phase 1 in progress screenshot](/assets/part2/dev-build-page-phase-1-in-progress.png)
-
-The **notes-api** service will start deploying after the **notes-infra** service has succeeded. Click on the **notes-api** service that is being deployed.
-
-![Dev build page phase 2 in progress screenshot](/assets/part2/dev-build-page-phase-2-in-progress.png)
+![Prod build details](/assets/part2/prod-build-details.png)
 
 You'll see the build logs for the in progress build here.
 
-![Dev build logs in progress screenshot](/assets/part2/dev-build-logs-in-progress.png)
+![Prod build logs in progress](/assets/part2/prod-build-logs-in-progress.png)
 
 Notice the tests are being run as a part of the build.
 
-![Dev build run tests screenshot](/assets/part2/dev-build-run-tests.png)
+![Prod build run tests](/assets/part2/prod-build-run-tests.png)
 
-Once the build is complete, take a look at the build log from the **notes-infra** service and make a note of the following:
+Once the build is complete, you'll notice all the stack outputs at the bottom.
 
-- Cognito User Pool Id: `UserPoolId`
-- Cognito App Client Id: `UserPoolClientId`
-- Cognito Identity Pool Id: `IdentityPoolId`
-- S3 File Uploads Bucket: `AttachmentsBucketName`
+![Prod build stack outputs](/assets/part2/prod-build-stack-outputs.png)
 
-We'll be needing these later in our frontend and when we test our APIs.
+### Test Our App in Production
 
-![Dev build infrastructure output screenshot](/assets/part2/dev-build-infrastructure-output.png)
+Let's check out our app in production.
 
-Then, take a look at the build log from the **notes-api** service and make a note of the following:
+![Notes app in production](/assets/part2/notes-app-in-production.png)
 
-- Region: `region`
-- API Gateway URL: `ServiceEndpoint`
+To give it a quick test, sign up for a new account and create a note.
 
-![Dev build api stack output screenshot](/assets/part2/dev-build-api-output.png)
+![Create notes in production](/assets/part2/create-notes-in-production.png)
 
-If you don't see the above info, expand the deploy step in the build log.
+You can also test updating and removing a note. And also test out the billing page.
 
-Now head over to the app home page. You'll notice that we are ready to promote to production.
-
-We have a manual promotion step so that you get a chance to review the changes and ensure that you are ready to push to production.
-
-Hit the **Promote** button.
-
-![Dev build ready to promote screenshot](/assets/part2/dev-build-ready-to-promote.png)
-
-This brings up a dialog that will generate a Change Set. It compares the resources that are being updated with respect to what you have in production. It's a great way to compare the infrastructure changes that are being promoted.
-
-![Review promote change set screenshot](/assets/part2/review-promote-change-set.png)
-
-Scroll down and hit **Promote to Production**.
-
-![Confirm promote dev build screenshot](/assets/part2/confirm-promote-dev-build.png)
-
-You'll notice that the build is being promoted to the **prod** stage.
-
-![prod build in progress screenshot](/assets/part2/prod-build-in-progress.png)
-
-And if you head over to the **prod** stage, you should see your prod deployment in action. It should take a second to deploy to production. And just like before, make a note of the following from the **notes-infra** service.
-
-- Cognito User Pool Id: `UserPoolId`
-- Cognito App Client Id: `UserPoolClientId`
-- Cognito Identity Pool Id: `IdentityPoolId`
-- S3 File Uploads Bucket: `AttachmentsBucketName`
-
-![Prod build infrastructure output screenshot](/assets/part2/prod-build-infrastructure-output.png)
-
-And make a note of the following from the **notes-api** service.
-
-- Region: `region`
-- API Gateway URL: `ServiceEndpoint`
-
-![Prod build api output screenshot](/assets/part2/prod-build-api-output.png)
-
-Next let's configure our serverless API with a custom domain.
+So we are almost ready to wrap things up. But before we do, we want to cover one final really important topic; how to monitor and debug errors when your app is live.

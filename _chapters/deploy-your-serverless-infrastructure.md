@@ -3,62 +3,21 @@ layout: post
 title: Deploy Your Serverless Infrastructure
 date: 2018-03-04 00:00:00
 lang: en
-description: In this chapter we'll be deploying our entire Serverless infrastructure. We are using CDK to define our resources and we are deploying it using the Serverless Stack Toolkit (SST). Our API on the other hand is deployed using Serverless Framework.
-code: backend
+description: In this chapter we'll be deploying our entire serverless infrastructure. We are using CDK to define our resources and we are deploying it using the Serverless Stack Toolkit (SST). Our API on the other hand is deployed using Serverless Framework.
+code: backend_full
 ref: deploy-your-serverless-infrastructure
 comments_id: deploy-your-serverless-infrastructure/167
 ---
 
 Now that we have all our resources configured, let's go ahead and deploy our entire infrastructure.
 
-### Deploy Your SST CDK App
+Note that, this deployment will create a new set of resources (DynamoDB table, S3 bucket, etc.). You can remove the ones that we had previously created. We're leaving this as an exercise for you.
 
-Let's deploy our SST app once to make sure all of our changes have been deployed.
+### Deploy Your Serverless App
 
-{%change%} Run the following from your `infrastructure/` directory.
+Let's deploy our Serverless Framework app.
 
-``` bash
-$ npx sst deploy
-```
-
-You should see something like this in your output.
-
-``` bash
-Stack dev-notes-infra-dynamodb
-  Status: deployed
-  Outputs:
-    TableName: dev-notes-infra-dynamodb-TableCD117FA1-1B701ZU6DS6IR
-    TableArn: arn:aws:dynamodb:us-east-1:087220554750:table/dev-notes-infra-dynamodb-TableCD117FA1-1B701ZU6DS6IR
-  Exports:
-    dev-notes-infra-TableName: dev-notes-infra-dynamodb-TableCD117FA1-1B701ZU6DS6IR
-    dev-notes-infra-TableArn: arn:aws:dynamodb:us-east-1:087220554750:table/dev-notes-infra-dynamodb-TableCD117FA1-1B701ZU6DS6IR
-
-Stack dev-notes-infra-s3
-  Status: deployed
-  Outputs:
-    AttachmentsBucketName: dev-notes-infra-s3-uploads4f6eb0fd-1taash9pf6q1f
-    ExportsOutputFnGetAttUploads4F6EB0FDArn5513CBEA: arn:aws:s3:::dev-notes-infra-s3-uploads4f6eb0fd-1taash9pf6q1f
-  Exports:
-    dev-notes-infra-s3:ExportsOutputFnGetAttUploads4F6EB0FDArn5513CBEA: arn:aws:s3:::dev-notes-infra-s3-uploads4f6eb0fd-1taash9pf6q1f
-
-Stack dev-notes-infra-cognito
-  Status: deployed
-  Outputs:
-    AuthenticatedRoleName: dev-notes-infra-cognito-CognitoAuthRoleCognitoDefa-14TSUK0GNJIBU
-    UserPoolClientId: 1jh98ercq1aksvmlq0sla1qm9n
-    UserPoolId: us-east-1_Nzpw587R8
-    IdentityPoolId: us-east-1:9bf24959-2085-4802-add3-183c8842e6ae
-  Exports:
-    dev-notes-infra-CognitoAuthRole: dev-notes-infra-cognito-CognitoAuthRoleCognitoDefa-14TSUK0GNJIBU
-```
-
-We'll be using these outputs later when we update our React app.
-
-### Deploy Your Serverless API
-
-Now let's deploy your API.
-
-{%change%} From your `services/notes/` directory run:
+{%change%} From your project root, run the following.
 
 ``` bash
 $ serverless deploy -v
@@ -103,16 +62,16 @@ ServiceEndpoint: https://5opmr1alga.execute-api.us-east-1.amazonaws.com/dev
 ServerlessDeploymentBucketName: notes-api-dev-serverlessdeploymentbucket-1323e6pius3a
 ```
 
-We'll be using the `ServiceEndpoint` later when we update our React app.
+And there you have it! Your entire serverless app has been created completely programmatically.
 
-Next, we will look at how we can automate our deployments. We want to set it up so that when we `git push` our changes, our app should deploy automatically. We'll also be setting up our environments so that when we work on our app, it does not affect our users.
+### Next Steps
 
-### Commit the Changes
-
-{%change%} Let's commit our code so far and push it to GitHub.
+You can also deploy your app to production by running.
 
 ``` bash
-$ git add .
-$ git commit -m "Setting up our Serverless infrastructure"
-$ git push
+$ serverless deploy --stage prod
 ```
+
+Note that, production in this case is just an environment with a stage called `prod`. You can call it anything you like. Serverless Framework will simply create another version of your app with a completely new set of resources. You can learn more about this in our chapter on [Stages in Serverless Framework]({% link _chapters/stages-in-serverless-framework.md %}).
+
+Next, you can head back to our main guide and [follow the frontend section]({% link _chapters/create-a-new-reactjs-app.md %}). Just remember to use the resources that were created here in your React.js app config!

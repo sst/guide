@@ -14,11 +14,11 @@ Currently, our Home container is very simple. Let's add the conditional renderin
 
 {%change%} Replace our `src/containers/Home.js` with the following.
 
-``` coffee
+``` jsx
 import React, { useState, useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import { useAppContext } from "../libs/contextLib";
-import { onError } from "../libs/errorLib";
+import { useAppContext } from "../lib/contextLib";
+import { onError } from "../lib/errorLib";
 import "./Home.css";
 
 export default function Home() {

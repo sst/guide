@@ -77,17 +77,7 @@ Making API request
 }
 ```
 
-### Commit the Changes
-
-{%change%} Let's commit and push our changes to GitHub.
-
-``` bash
-$ git add .
-$ git commit -m "Adding auth to our Serverless API"
-$ git push
-```
-
-We've now got a Serverless API that's secure and handles user authentication. In the next section we are going to look at how we can work with 3rd party APIs in Serverless. And how to work with secrets!
+We've now got a serverless API that's secure and handles user authentication. In the next section we are going to look at how we can work with 3rd party APIs in serverless. And how to work with secrets!
 
 ---
 
@@ -103,7 +93,7 @@ We've now got a Serverless API that's secure and handles user authentication. In
   
   - If you're on Windows and are using Git Bash, try adding a trailing slash to `YOUR_API_GATEWAY_URL` while removing the leading slash from `--path-template`. In our case, it would result in `--invoke-url https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/ --path-template notes`. You can follow the discussion on this [here](https://github.com/AnomalyInnovations/serverless-stack-com/issues/112#issuecomment-345996566).
 
-  There is a good chance that this error is happening even before our Lambda functions are invoked. So we can start by making sure our IAM Roles are configured properly for our Identity Pool. Follow the steps as detailed in our [Debugging Serverless API Issues]({% link _chapters/debugging-serverless-api-issues.md %}#missing-iam-policy) chapter to ensure that your IAM Roles have the right set of permissions. 
+  There is a good chance that this error is happening even before our Lambda functions are invoked. So we can start by making sure our IAM Roles are configured properly for our Identity Pool. Follow the steps as detailed in our [Debugging serverless API Issues]({% link _chapters/debugging-serverless-api-issues.md %}#missing-iam-policy) chapter to ensure that your IAM Roles have the right set of permissions. 
 
   Next, you can [enable API Gateway logs]({% link _chapters/api-gateway-and-lambda-logs.md %}#enable-api-gateway-cloudwatch-logs) and follow [these instructions]({% link _chapters/api-gateway-and-lambda-logs.md %}#viewing-api-gateway-cloudwatch-logs) to read the requests that are being logged. This should give you a better idea of what is going on.
   

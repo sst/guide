@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Creating Pull Request Environments
-description: In this chapter we'll look at the workflow for creating new pull request based environments for your Serverless app using Seed.
+description: In this chapter we'll look at the workflow for creating new pull request based environments for your serverless app using Seed.
 date: 2019-10-02 00:00:00
 comments_id: creating-pull-request-environments/1318
 ---

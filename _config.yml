@@ -21,6 +21,8 @@ description: > # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://serverless-stack.com" # the base hostname & protocol for your site, e.g. http://example.com
 
+demo_url: "https://demo.serverless-stack.com"
+
 github_repo: "https://github.com/AnomalyInnovations/serverless-stack-com"
 github_edit_prefix: "/edit/master/"
 github_history_prefix: "/commits/master/"
@@ -35,6 +37,7 @@ backend_ext_resources_github_repo: "https://github.com/AnomalyInnovations/server
 
 sst_github_repo: "https://github.com/serverless-stack/serverless-stack"
 sst_github_examples_prefix: "/tree/master/examples/"
+sst_demo_repo: "https://github.com/serverless-stack/demo-notes-app"
 
 seed_url: "https://seed.run"
 survey_url: "https://serverless-stack.typeform.com/to/xiPdCW"

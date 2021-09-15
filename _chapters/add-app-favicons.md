@@ -8,7 +8,7 @@ description: To generate app icons and favicons for our React.js app we will use
 comments_id: add-app-favicons/155
 ---
 
-Create React App generates a simple favicon for our app and places it in `public/favicon.ico`. However, getting the favicon to work on all browsers and mobile platforms requires a little more work. There are quite a few different requirements and dimensions. And this gives us a good opportunity to learn how to include files in the `public/` directory of our app.
+Create React App generates a simple favicon for our app and places it in `public/favicon.ico` of our app. However, getting the favicon to work on all browsers and mobile platforms requires a little more work. There are quite a few different requirements and dimensions. And this gives us a good opportunity to learn how to include files in the `public/` directory of our app.
 
 For our example, we are going to start with a simple image and generate the various versions from it.
 
@@ -16,7 +16,7 @@ For our example, we are going to start with a simple image and generate the vari
 
 <img alt="App Icon" width="130" height="130" src="/assets/scratch-icon.png" />
 
-To ensure that our icon works for most of our targeted platforms we'll use a service called the [Favicon Generator](http://realfavicongenerator.net).
+To ensure that our icon works for most of our targeted platforms we'll use a service called the [**Favicon Generator**](http://realfavicongenerator.net).
 
 Click **Select your Favicon picture** to upload our icon.
 
@@ -32,11 +32,14 @@ This should generate your favicon package and the accompanying code.
 
 ![Realfavicongenerator.net completed screenshot](/assets/realfavicongenerator-completed.png)
 
-{%change%} Remove the `public/logo192.png` and `public/logo512.png` files.
+Let's remove the old icons files.
+
+**Note that, moving forward we'll be working exclusively in the `frontend/` directory.**
+
+{%change%} Run the following from our `frontend/` directory.
 
 ``` bash
-$ rm public/logo192.png
-$ rm public/logo512.png
+$ rm public/logo192.png public/logo512.png
 ```
 
 {%change%} Then replace the contents of `public/manifest.json` with the following:

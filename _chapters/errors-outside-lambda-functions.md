@@ -14,16 +14,16 @@ We've covered debugging [errors in our code]({% link _chapters/logic-errors-in-l
 
 Lambda functions could fail not because of an error inside your handler code, but because of an error outside it. In this case, your Lambda function won't be invoked. Let's add some faulty code outside our handler function.
 
-{%change%} Replace our `services/notes/get.js` with the following.
+{%change%} Replace our `src/get.js` with the following.
 
 ``` javascript
-import handler from "./libs/handler-lib";
-import dynamoDb from "./libs/dynamodb-lib";
+import handler from "./util/handler";
+import dynamoDb from "./util/dynamodb";
 
 // Some faulty code
 dynamoDb.notExist();
 
-export const main = handler(async (event, context) => {
+export const main = handler(async (event) => {
   const params = {
     TableName: process.env.tableName,
     // 'Key' defines the partition key and sort key of the item to be retrieved
@@ -71,14 +71,14 @@ Note that, you might see there are 3 events for this error. This is because the 
 
 Another error that can happen outside a Lambda function is when the handler has been misnamed. 
 
-{%change%} Replace our `get.js` with the following.
+{%change%} Replace our `src/get.js` with the following.
 
 ``` javascript
-import handler from "./libs/handler-lib";
-import * as dynamoDbLib from "./libs/dynamodb-lib";
+import handler from "./util/handler";
+import dynamoDb from "./util/dynamodb";
 
 // Wrong handler function name
-export const main2 = handler(async (event, context) => {
+export const main2 = handler(async (event) => {
   const params = {
     TableName: process.env.tableName,
     // 'Key' defines the partition key and sort key of the item to be retrieved
@@ -117,27 +117,46 @@ You should see the error `Runtime.HandlerNotFound`, along with message `get.main
 
 And that about covers the main Lambda function errors. So the next time you see one of the above error messages, you'll know what's going on.
 
-### Rollback the Changes
+### Remove the Faulty Code
 
-{%change%} Let's revert all the faulty code that we created.
+Let's cleanup all the faulty code.
 
-``` bash
-$ git checkout master
-$ git branch -D debug
+{%change%} Replace `src/get.js` with the original.
+
+``` js
+import handler from "./util/handler";
+import dynamoDb from "./util/dynamodb";
+
+export const main = handler(async (event) => {
+  const params = {
+    TableName: process.env.tableName,
+    // 'Key' defines the partition key and sort key of the item to be retrieved
+    // - 'userId': Identity Pool identity id of the authenticated user
+    // - 'noteId': path parameter
+    Key: {
+      userId: event.requestContext.identity.cognitoIdentityId,
+      noteId: event.pathParameters.id
+    }
+  };
+
+  const result = await dynamoDb.get(params);
+  if ( ! result.Item) {
+    throw new Error("Item not found.");
+  }
+
+  // Return the retrieved item
+  return result.Item;
+});
 ```
 
-And rollback the prod build in Seed. Click on **Activity** in the Seed dashboard.
+Commit and push the code.
 
-![Click activity in Seed](/assets/monitor-debug-errors/click-activity-in-seed.png)
+``` bash
+$ git add .
+$ git commit -m "Reverting faulty code"
+$ git push
+```
 
-Then click on **prod** over on the right. This shows us all the deployments made to our prod stage.
-
-![Click on prod activity in Seed](/assets/monitor-debug-errors/click-on-prod-activity-in-seed.png)
-
-Scroll down to the last deployment from the `master` branch, past all the ones made from the `debug` branch. Hit **Rollback**.
-
-![Rollback on prod build in Seed](/assets/monitor-debug-errors/rollback-on-prod-build-in-seed.png)
-
-This will rollback our app to the state it was in before we deployed all of our faulty code.
+Head over to your Seed dashboard and deploy it.
 
 Now let's move on to debugging API Gateway errors.

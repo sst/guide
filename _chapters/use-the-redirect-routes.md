@@ -22,7 +22,7 @@ Next, we simply switch to our new redirect routes.
 
 So the following routes in `src/Routes.js` would be affected.
 
-``` coffee
+``` jsx
 <Route exact path="/login">
   <Login />
 </Route>
@@ -42,7 +42,7 @@ So the following routes in `src/Routes.js` would be affected.
 
 {%change%} They should now look like so:
 
-``` coffee
+``` jsx
 <UnauthenticatedRoute exact path="/login">
   <Login />
 </UnauthenticatedRoute>

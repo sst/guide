@@ -18,7 +18,7 @@ Let's add a route for the note page that we are going to create.
 
 {%change%} Add the following line to `src/Routes.js` **below** our `/notes/new` route. 
 
-``` coffee
+``` jsx
 <Route exact path="/notes/:id">
   <Notes />
 </Route>
@@ -40,11 +40,11 @@ Of course this component doesn't exist yet and we are going to create it now.
 
 {%change%} Create a new file `src/containers/Notes.js` and add the following.
 
-``` coffee
+``` jsx
 import React, { useRef, useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { API, Storage } from "aws-amplify";
-import { onError } from "../libs/errorLib";
+import { onError } from "../lib/errorLib";
 
 export default function Notes() {
   const file = useRef(null);

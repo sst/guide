@@ -14,7 +14,7 @@
 
 The [Serverless Stack Guide](https://serverless-stack.com/#guide) is a comprehensive open source tutorial for building and deploying full-stack apps using Serverless and React on AWS.
 
-We are going to create a [note taking app](https://demo2.serverless-stack.com) from scratch using React.js, AWS Lambda, API Gateway, DynamoDB, and Cognito.
+We are going to create a [note taking app](https://demo.serverless-stack.com) from scratch using React.js, AWS Lambda, API Gateway, DynamoDB, and Cognito.
 
 ![Demo App](assets/completed-app-desktop.png)
 
@@ -38,8 +38,9 @@ The entire guide is hosted on GitHub and we use [Discourse][Discourse] for our c
 
 ## Source for the Demo App
 
-- [Backend Serverless API](https://github.com/AnomalyInnovations/serverless-stack-demo-api)
-- [Frontend React app](https://github.com/AnomalyInnovations/serverless-stack-demo-client)
+- [Demo Notes App](https://github.com/serverless-stack/demo-notes-app)
+
+We also have an alternative Serverless Framework version: [backend serverless API](https://github.com/AnomalyInnovations/serverless-stack-demo-api) & [frontend React app](https://github.com/AnomalyInnovations/serverless-stack-demo-client).
 
 ## Contributing
 

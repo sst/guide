@@ -53,6 +53,7 @@ This follows exactly the same structure as our previous `create.js` function. Th
     events:
       - http:
           path: notes/{id}
+          cors: true
           method: get
 ```
 

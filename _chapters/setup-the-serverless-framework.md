@@ -8,13 +8,24 @@ description: To create our serverless backend API using AWS Lambda and API Gatew
 comments_id: set-up-the-serverless-framework/145
 ---
 
-We are going to be using [AWS Lambda](https://aws.amazon.com/lambda/) and [Amazon API Gateway](https://aws.amazon.com/api-gateway/) to create our backend. AWS Lambda is a compute service that lets you run code without provisioning or managing servers. You pay only for the compute time you consume - there is no charge when your code is not running. And API Gateway makes it easy for developers to create, publish, maintain, monitor, and secure APIs. Working directly with AWS Lambda and configuring API Gateway can be a bit cumbersome; so we are going to use the [Serverless Framework](https://serverless.com) to help us with it.
+In this section we are going to use [Serverless Framework](https://github.com/serverless/serverless) to build our serverless app. It's very similar to [the notes app that we built using SST]({{ site.sst_demo_repo }}). With a couple of key differences:
 
-The Serverless Framework enables developers to deploy backend applications as independent functions that will be deployed to AWS Lambda. It also configures AWS Lambda to run your code in response to HTTP requests using Amazon API Gateway.
+- We are only building the backend in Serverless Framework.
+- The backend is defined using [CloudFormation](https://aws.amazon.com/cloudformation) in Serverless Framework. While we use [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}) in SST.
 
-In this chapter, we are going to set up the Serverless Framework on our local development environment.
+### Demo Repo
+
+Before we get started, here's a link to the GitHub repo of the app that we will be building. Make sure to hang on to it for reference.
+
+- [**{{ site.backend_github_repo }}**]({{ site.backend_github_repo }})
+
+We also have the React.js frontend that connects to this — [**{{ site.frontend_github_repo }}**]({{ site.frontend_github_repo }})
+
+Now let's get started with building our app!
 
 ### Install Serverless
+
+In this chapter, we are going to set up the Serverless Framework on our local development environment.
 
 {%change%} Install Serverless globally.
 
@@ -39,7 +50,7 @@ $ cd notes-api
 Now the directory should contain a few files including, the **handler.js** and **serverless.yml**.
 
 - **handler.js** file contains actual code for the services/functions that will be deployed to AWS Lambda.
-- **serverless.yml** file contains the configuration on what AWS services Serverless will provision and how to configure them.
+- **serverless.yml** file contains the configuration on what AWS services Serverless Framework will provision and how to configure them.
 
 We also have a `tests/` directory where we can add our unit tests.
 

@@ -147,6 +147,19 @@ type Mutation {
 }
 ```
 
+Let's also add a type for our note object.
+
+{%change%} Add the following to a new file in `src/Note.ts`.
+
+``` ts
+type Note = {
+  id: string;
+  content: string;
+};
+
+export default Note;
+```
+
 ## Adding the function handler
 
 To start with, let's create the Lambda function that'll be our AppSync data source.
@@ -229,7 +242,7 @@ $ npm install aws-sdk
 
 Next, let's write the function that'll fetch all our notes.
 
-{%change%} Add the following to `src/listNotes.js`.
+{%change%} Add the following to `src/listNotes.ts`.
 
 ``` ts
 import { DynamoDB } from "aws-sdk";
@@ -255,7 +268,7 @@ Here we are getting all the notes from our table.
 
 We'll do something similar for the function that gets a single note. 
 
-{%change%} Create a `src/getNoteById.js`.
+{%change%} Create a `src/getNoteById.ts`.
 
 ``` ts
 import { DynamoDB } from "aws-sdk";
@@ -283,7 +296,7 @@ We are getting the note with the id that's passed in.
 
 Now let's update our notes.
 
-{%change%} Add a `src/updateNote.js` with:
+{%change%} Add a `src/updateNote.ts` with:
 
 ``` ts
 import { DynamoDB } from "aws-sdk";
@@ -312,7 +325,7 @@ We are using the id and the content of the note that's passed in to update a not
 
 To complete all the operations, let's delete the note.
 
-{%change%} Add this to `src/deleteNote.js`.
+{%change%} Add this to `src/deleteNote.ts`.
 
 ``` ts
 import { DynamoDB } from "aws-sdk";

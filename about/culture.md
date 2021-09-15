@@ -21,8 +21,8 @@ Let's get started!
 
 This document is meant to be used as a user manual for the Serverless Stack team. We think sharing it publicly serves two purposes:
 
-1. It helps keep us accountable to the standards we set.
-2. And it helps the community get a better sense of how we operate.
+1. It helps the community get a better sense of how we operate.
+2. And, it helps keep us accountable to the standards we set.
 
 This document is a work in progress. If you have feedback on what's covered here, or have suggestions on what we should add, please let us know.
 
@@ -95,13 +95,10 @@ Let’s assume we get a message on Slack or somebody opens an issue on GitHub.
     - If the issue has been brought up before, add the new person to the list
 3. After we understand the problem, figure out if it’s straightforward to implement or if we need to design a solution.
     - A straightforward solution usually includes bug fixes or features that don’t change the overall design of the product.
-    - On the other hand, if the solution isn’t obvious or is a bigger change, we need to make some design decisions. For design decisions, get the team involved.
+    - On the other hand, if the solution isn’t obvious or is a bigger change, we need to make some design decisions (more on this below). For design decisions, get the team involved.
         - Before the group discussion, come up with a proposed solution.
         - If the issue is urgent, don't hesitate to get somebody’s time. The leadership team needs to be on-call for urgent issues.
         - If the issue is not urgent, you can book a time on somebody's calendar. Or bring it up in the 1 on 1.
-
-        More on this design process below.
-
 4. We then propose the solution to the user. Preferably with code snippets, and ask the user if it solves their issue.
 5. Update the GitHub issue with the proposed solution. For something that's really simple to implement, we can skip this step.
 6. We figure out the priority for this issue and when we are going to work on it. More on this below.
@@ -139,6 +136,14 @@ So the priorities look like: "Fix it now", "High", or "Low". The "Fix it now" on
 
 For the "Fix it now" and "High" priority issues, we tell the user the timeline for the fix (today or tomorrow vs this week or next week). On the other hand, for low priority issues we tell them we won’t get to it right away. But ask them to let us know if it becomes a blocker and we’ll bump it up in priority.
 
+While the above flow can seem a bit rigid, there are a couple of caveats. For example, we might prioritize a feature differently:
+
+- If it's being requested by a valued member of our community
+- If a person that's trying to contribute to the project needs it
+- If you think we can solve it in a novel way and it can have a big impact
+
+Feel free to pull the leadership team in, if you need any help. We hope that over time you are able to build a better sense of how to prioritize features.
+
 ### Our design process
 
 As mentioned above, there are some issues that are not straightforward to implement. They require a certain amount of design. These are typically issues that have multiple solutions and it's not immediately clear which approach makes sense. It's important that we have cohesively designed products that work well together. We also care about making our products intuitive to use. This means that for some issues we need to put a lot more thought while designing a solution. We employ a "design" meeting to work through this. It usually involves:
@@ -156,9 +161,19 @@ It's important that we work through this process on our own, before a design mee
 
 It should also be mentioned that it's the responsibility of the leadership team to not make these meetings a blocker. If a feature needs to be implemented urgently, they are on-call for these meetings. 
 
+### Naming things
+
+We also like to take care while naming features, config options, props, etc. For anything new:
+
+1. Suggest what you'd like to name it and why.
+2. Offer two other suggestions and what you like about them.
+3. Post this in the team channel. The rest of the team will quickly vote on them or add their own suggestions.
+
+Coming up with a good name can sometimes be hard. But it's worth thinking it through, especially for things that can be hard to rename later.
+
 ## How we operate as a team
 
-The above should give you some sense of how we operate internally as a team. But it’s worth looking at in a little more detail. We’ll look at it from the perspective of an engineer that’s building our products.
+The above should give you some sense of how we operate internally as a team. But let's look at it in a little more detail. We’ll look at it from the perspective of an engineer that’s building our products.
 
 The process of talking to users and building products is the core engine that drives our team. This implies a couple of things:
 

@@ -60,7 +60,7 @@ $ git push
 ### 오류 코드 테스트
 
 
-이제 코드를 테스트하기 위해 [마지막 챕터]({% link _chapters/test-the-configured-apis.md %})에서 동일한 명령을 실행하여 API를 테스트하십시오.
+이제 코드를 테스트하기 위해 [마지막 챕터]({% link _chapters/secure-our-serverless-apis.md %})에서 동일한 명령을 실행하여 API를 테스트하십시오.
 
 ``` bash
 $ npx aws-api-gateway-cli-test \

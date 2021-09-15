@@ -3,7 +3,7 @@ layout: post
 title: Unexpected Errors in Lambda Functions
 date: 2020-04-06 00:00:00
 lang: en
-description: In this chapter we look at how to debug unexpected errors in your Lambda functions for your Serverless app. These errors include timeout errors and when your Lambda function runs out of memory. 
+description: In this chapter we look at how to debug unexpected errors in your Lambda functions for your serverless app. These errors include timeout errors and when your Lambda function runs out of memory. 
 comments_id: unexpected-errors-in-lambda-functions/1735
 ref: unexpected-errors-in-lambda-functions
 ---
@@ -14,13 +14,13 @@ Previously, we looked at [how to debug errors in our Lambda function code]({% li
 
 Our Lambda functions often make API requests to interact with other services. In our notes app, we talk to DynamoDB to store and fetch data; and we also talk to Stripe to process payments. When we make an API request, there is the chance the HTTP connection times out or the remote service takes too long to respond. We are going to look at how to detect and debug the issue. The default timeout for Lambda functions are 6 seconds. So let's simulate a timeout using `setTimeout`.
 
-{%change%} Replace our `services/notes/get.js` with the following:
+{%change%} Replace our `src/get.js` with the following:
 
 ``` javascript
-import handler from "./libs/handler-lib";
-import dynamoDb from "./libs/dynamodb-lib";
+import handler from "./util/handler";
+import dynamoDb from "./util/dynamodb";
 
-export const main = handler(async (event, context) => {
+export const main = handler(async (event) => {
   const params = {
     TableName: process.env.tableName,
     // 'Key' defines the partition key and sort key of the item to be retrieved
@@ -75,18 +75,18 @@ Next let's look at what happens when our Lambda function runs out of memory.
 
 By default, a Lambda function has 1024MB of memory. You can assign any amount of memory between 128MB and 3008MB in 64MB increments. So in our code, let's try and allocate more memory till it runs out of memory.
 
-{%change%} Replace your `get.js` with:
+{%change%} Replace your `src/get.js` with:
 
 ``` javascript
-import handler from "./libs/handler-lib";
-import dynamoDb from "./libs/dynamodb-lib";
+import handler from "./util/handler";
+import dynamoDb from "./util/dynamodb";
 
 function allocMem() {
   let bigList = Array(4096000).fill(1);
   return bigList.concat(allocMem());
 }
 
-export const main = handler(async (event, context) => {
+export const main = handler(async (event) => {
   const params = {
     TableName: process.env.tableName,
     // 'Key' defines the partition key and sort key of the item to be retrieved
@@ -110,24 +110,12 @@ export const main = handler(async (event, context) => {
 });
 ```
 
-Now we'll set our Lambda function to use the lowest memory allowed and make sure it has time to allocate the memory.
+Now we'll set our Lambda function to use the lowest memory allowed.
 
-{%change%} Replace the `get` function block in your `services/notes/serverless.yml`.
+{%change%} Add the following below the `defaultFunctionProps: {` line in your `lib/ApiStack.js`.
 
-``` yml
-  get:
-    # Defines an HTTP API endpoint that calls the main function in get.js
-    # - path: url path is /notes/{id}
-    # - method: GET request
-    handler: get.main
-    memorySize: 128
-    timeout: 10
-    events:
-      - http:
-          path: notes/{id}
-          method: get
-          cors: true
-          authorizer: aws_iam
+``` js
+memorySize: 128,
 ```
 
 {%change%} Let's commit this.

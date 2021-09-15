@@ -55,7 +55,7 @@ async function handleSubmit(event) {
 {%change%} And include our `s3Upload` helper method in the header:
 
 ``` javascript
-import { s3Upload } from "../libs/awsLib";
+import { s3Upload } from "../lib/awsLib";
 ```
 
 The code above is doing a couple of things that should be very similar to what we did in the `NewNote` container.

@@ -30,7 +30,7 @@ Select **Add User**.
 
 Enter a **User name** and check **Programmatic access**, then select **Next: Permissions**.
 
-This account will be used by our [AWS CLI](https://aws.amazon.com/cli/) and [Serverless Framework](https://serverless.com). They'll be connecting to the AWS API directly and will not be using the Management Console.
+This account will be used by our [AWS CLI](https://aws.amazon.com/cli/) and [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}). They'll be connecting to the AWS API directly and will not be using the Management Console.
 
 ![Fill in IAM User Info Screenshot](/assets/iam-user/fill-in-iam-user-info.png)
 

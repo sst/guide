@@ -17,7 +17,7 @@ const [password, setPassword] = useState("");
 
 And we also use something like this to set the state:
 
-``` coffee
+``` jsx
 onChange={(e) => setEmail(e.target.value)}
 ```
 
@@ -25,7 +25,7 @@ Now we are going to do something similar for our sign up page and it'll have a f
 
 ### Creating a Custom React Hook
 
-{%change%} Add the following to `src/libs/hooksLib.js`.
+{%change%} Add the following to `src/lib/hooksLib.js`.
 
 ``` javascript
 import { useState } from "react";
@@ -53,7 +53,7 @@ Creating a custom hook is amazingly simple. In fact, we did this back when we cr
 
 3. So our hook returns an array with `fields` and a callback function that sets the new state based on the event object. The callback function takes the event object and gets the form field id from `event.target.id` and the value from `event.target.value`. In the case of our form the elements, the `event.target.id` comes from the `controlId` thats set in the `Form.Group` element:
 
-   ``` coffee
+   ``` jsx
    <Form.Group size="lg" controlId="email">
      <Form.Label>Email</Form.Label>
      <Form.Control
@@ -73,15 +73,15 @@ And that's it! We can now use this in our Login component.
 
 {%change%} Replace our `src/containers/Login.js` with the following:
 
-``` coffee
+``` jsx
 import React, { useState } from "react";
 import { Auth } from "aws-amplify";
 import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
-import { useAppContext } from "../libs/contextLib";
-import { useFormFields } from "../libs/hooksLib";
-import { onError } from "../libs/errorLib";
+import { useAppContext } from "../lib/contextLib";
+import { useFormFields } from "../lib/hooksLib";
+import { onError } from "../lib/errorLib";
 import "./Login.css";
 
 export default function Login() {
@@ -160,7 +160,7 @@ Simply imagine the code for the `useFormFields` function instead!
 
 Finally, we are setting our fields using the function our custom Hook is returning.
 
-``` coffee
+``` jsx
 onChange={handleFieldChange}
 ```
 

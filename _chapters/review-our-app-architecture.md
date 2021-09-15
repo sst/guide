@@ -4,23 +4,23 @@ title: Review Our App Architecture
 date: 2020-10-28 00:00:00
 lang: en
 ref: review-our-app-architecture
-description: In this chapter we'll do a quick overview of the Serverless API that we are about to build. We'll be using the DynamoDB table and S3 bucket that we previously created.
+description: In this chapter we'll do a quick overview of the serverless API that we are about to build. We'll be using the DynamoDB table and S3 bucket that we previously created.
 comments_id: review-our-app-architecture/2178
 ---
 
-So far we've [deployed our simple Hello World API]({% link _chapters/deploy-your-hello-world-api.md %}), [created a database (DynamoDB)]({% link _chapters/create-a-dynamodb-table.md %}), and [created an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}). We are ready to start working on our backend API but let's get a quick sense of how the aforementioned pieces fit together.
+So far we've [deployed our simple Hello World API]({% link _chapters/create-a-hello-world-api.md %}), [created a database (DynamoDB)]({% link _chapters/create-a-dynamodb-table-in-sst.md %}), and [created an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-in-sst.md %}). We are ready to start working on our backend API but let's get a quick sense of how the aforementioned pieces fit together.
 
 ### Hello World API Architecture
 
-Here's what we've built so far with our Hello World API.
+Here's what was built initially when we created the SST boilerplate application with its Hello World API.
 
 ![Serverless Hello World API architecture](/assets/diagrams/serverless-hello-world-api-architecture.png)
 
-API Gateway handles the `https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod` endpoint for us. And any GET requests made to `/hello`, are sent to our `hello.js` Lambda function.
+API Gateway handles our main `/` endpoint, sending GET requests made to this to our default `src/lambda.js` Lambda function.
 
 ### Notes App API Architecture
 
-Now we are going to add DynamoDB and S3 to the mix. We'll also be adding a few other Lambda functions.
+Then we added DynamoDB and S3 to the mix. We'll also be adding a few other Lambda functions.
 
 So our new notes app backend architecture will look something like this.
 

@@ -9,7 +9,7 @@ comments_id: wrapping-up-the-best-practices/1340
 
 Congratulations on completing this best practices section of the guide!
 
-You should now have a working real-world Serverless app with:
+You should now have a working real-world serverless app with:
 
 1. Resources exported and shared between services
 2. A single API endpoint shared between services
