@@ -494,6 +494,8 @@ extra-auth:
           url: /chapters/using-apple-to-add-authentication-to-a-serverless-app.html
         - page: Using Facebook to add authentication to a serverless app
           url: /chapters/using-facebook-to-add-authentication-to-a-serverless-app.html
+        - page: Using JWT to add authentication to a serverless app
+          url: /chapters/using-jwt-to-add-authentication-to-a-serverless-app.html
 
 extra-frontend:
   title: React
