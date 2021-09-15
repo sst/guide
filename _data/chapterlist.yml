@@ -490,6 +490,8 @@ extra-auth:
       subchapters:
         - page: Using Cognito to add authentication to a serverless app
           url: /chapters/using-cognito-to-add-authentication-to-a-serverless-app.html
+        - page: Using Facebook to add authentication to a serverless app
+          url: /chapters/using-facebook-to-add-authentication-to-a-serverless-app.html
 
 extra-frontend:
   title: React
