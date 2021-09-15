@@ -496,6 +496,8 @@ extra-auth:
           url: /chapters/using-facebook-to-add-authentication-to-a-serverless-app.html
         - page: Using Google to add authentication to a serverless app
           url: /chapters/using-google-to-add-authentication-to-a-serverless-app.html
+        - page: Using Auth0 to add authentication to a serverless app
+          url: /chapters/using-auth0-to-add-authentication-to-a-serverless-app.html
         - page: Using JWT to add authentication to a serverless app
           url: /chapters/using-jwt-to-add-authentication-to-a-serverless-app.html
 
