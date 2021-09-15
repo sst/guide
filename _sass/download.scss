@@ -33,11 +33,11 @@ main > .download-ebook-page {
 
   & > .readers {
     .readers-list {
-      margin: $spacing-unit auto;
+      margin: $spacing-unit auto $spacing-unit + 10px;
       position: relative;
 
       @include media-query($on-palm) {
-        margin-top: $spacing-unit / 2;
+        margin: $spacing-unit / 2 auto;
       }
 
       .scroll-content {
@@ -110,6 +110,10 @@ main > .download-ebook-page {
 
     display: flex;
 
+    @include media-query($on-palm) {
+      display: block;
+    }
+
     .features {
       flex: 1 1 50%;
       padding: $spacing-unit / 2 + 5px;
@@ -124,7 +128,12 @@ main > .download-ebook-page {
 
       .feature-list {
         margin-bottom: 0;
-        font-size: 18px;
+        padding: 0;
+        font-size: 20px;
+
+        @include media-query($on-palm) {
+          font-size: 16px;
+        }
 
         li {
           margin-bottom: 12px;
@@ -138,11 +147,6 @@ main > .download-ebook-page {
         strong {
           background-color: $hilight-background-color;
         }
-
-        @include media-query($on-palm) {
-          margin-bottom: $spacing-unit - 5px;
-          padding: 0 10px;
-        }
       }
     }
 
@@ -154,10 +158,62 @@ main > .download-ebook-page {
       justify-content: space-between;
       padding-left: $spacing-unit;
 
+      @include media-query($on-laptop) {
+        justify-content: flex-start;
+      }
+
+      @include media-query($on-palm) {
+        display: flex;
+        padding-left: 0;
+      }
+
       .cover {
+        margin-bottom: $spacing-unit;
+        position: relative;
         text-align: center;
+
+        @include media-query($on-palm) {
+          margin-top: 10px;
+          margin-bottom: 20px;
+        }
+
         img {
-          height: 340px;
+          $width: 260px;
+
+          &:nth-child(1),
+          &:nth-child(2) {
+            position: absolute;
+            left: 50%;
+            margin-left: -1 * $width / 2;
+          }
+
+          @include media-query($on-laptop) {
+            width: 200px;
+
+            &:nth-child(1),
+            &:nth-child(2) {
+              margin-left: -100px;
+            }
+          }
+
+          width: $width;
+          border-radius: 4px;
+          border: 1px solid lighten($important-color, 5%);
+
+          &:nth-child(1) {
+            filter: blur(1px);
+            transform: rotate(-30deg);
+            box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.4);
+          }
+          &:nth-child(2) {
+            filter: blur(1px);
+            transform: rotate(-20deg);
+            box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.4);
+          }
+          &:nth-child(3) {
+            transform: rotate(-11.34deg);
+            box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.4);
+          }
         }
       }
 
@@ -183,6 +239,10 @@ main > .download-ebook-page {
           display: flex;
           align-items: stretch;
           justify-content: space-between;
+
+          @include media-query($on-palm) {
+            display: block;
+          }
         }
 
         .email-octopus-form-row {
@@ -203,6 +263,11 @@ main > .download-ebook-page {
         .email-octopus-form-row-subscribe {
           margin-top: 0;
           margin-left: $spacing-unit / 2 + 5px;
+
+          @include media-query($on-palm) {
+            margin-top: $spacing-unit / 2;
+            margin-left: 0;
+          }
         }
 
         button {
@@ -222,8 +287,7 @@ main > .download-ebook-page {
           cursor: pointer;
 
           @include media-query($on-palm) {
-            padding: 18px 12px;
-            font-size: 12px;
+            width: 100%;
           }
 
           &:hover {
