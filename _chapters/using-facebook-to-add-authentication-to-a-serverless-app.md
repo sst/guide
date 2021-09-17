@@ -50,8 +50,7 @@ Your Facebook ID is required to integrate Facebook auth into your application. N
 
 Run the following command on your terminal to install SST:
 
-```
-shell
+``` bash
 npx create-serverless-stack@latest fb-auth
 
 cd fb-auth
@@ -114,6 +113,7 @@ Finally, return the outputs and attach the permission to the API, as shown below
 
    // Allow auth users to access the API
    auth.attachPermissionsForAuthUsers([api]);
+```
 
 You’ll need to add the Lambda function you want to execute when this route is called.
 
