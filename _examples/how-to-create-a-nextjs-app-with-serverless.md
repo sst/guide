@@ -34,7 +34,8 @@ Here's what we'll be covering in this example:
     - [AWS integration](#aws-integration)
     - [Infrastructure as Code](#infrastructure-as-code)
     - [Project support](#project-support)
-  - [Comparison Summary](#summary)
+
+- [Summary](#summary)
 
 ## Requirements
 
