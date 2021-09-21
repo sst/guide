@@ -111,6 +111,7 @@
         <button data-name="rest-api" class="active">REST API</button>
         <button data-name="graphql-api">GraphQL API</button>
         <button data-name="react-app">React app</button>
+        <button data-name="nextjs-app">Next.js app</button>
         <button data-name="api-auth">API with auth</button>
         <button data-name="cron-job">Cron job</button>
         <button data-name="queue">Queue</button>
@@ -152,6 +153,16 @@
         <h4>React app</h4>
         <p>Deploy a React.js app. Using the ReactStaticSite construct to set custom domains and environment variables.</p>
         <a href="{% link _examples/how-to-create-a-reactjs-app-with-serverless.md %}">
+          View example <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div class="info nextjs-app" style="display: none">
+        <div class="icon">
+          <img class="nextjs" src="/assets/lander/nextjs-logo.svg" />
+        </div>
+        <h4>Next.js app</h4>
+        <p>Deploy a Next.js app. Using the NextjsSite construct to configure environment variables and permissions.</p>
+        <a href="{% link _examples/how-to-create-a-nextjs-app-with-serverless.md %}">
           View example <i class="fa fa-angle-right" aria-hidden="true"></i>
         </a>
       </div>
@@ -198,6 +209,7 @@
           <div class="title rest-api active">api.js</div>
           <div class="title graphql-api" style="display: none">graphql.js</div>
           <div class="title react-app" style="display: none">react.js</div>
+          <div class="title nextjs-app" style="display: none">next.js</div>
           <div class="title api-auth" style="display: none">auth.js</div>
           <div class="title cron-job" style="display: none">cron.js</div>
           <div class="title queue" style="display: none">queue.js</div>
@@ -274,6 +286,38 @@
           </div>
           <div class="token-line">
             <span class="token lead">7</span>});
+          </div>
+        </div>
+        <div class="code-block nextjs-app long" style="display: none">
+          <div class="token-line">
+            <span class="token lead">1</span> <span class="token italics">const</span> site <span class="token operator">=</span> <span class="token italics">new</span> <span class="token keyword">sst.NextjsSite</span>(<span class="token italics">this</span>, <span class="token string">"Site"</span>, {
+          </div>
+          <div class="token-line">
+            <span class="token lead">2</span>&nbsp;&nbsp;path: <span class="token string">"src/frontend"</span>,
+          </div>
+          <div class="token-line">
+            <span class="token lead">3</span>&nbsp;&nbsp;customDomain: <span class="token string">"www.my-nextjs-app.com"</span>,
+          </div>
+          <div class="token-line">
+            <span class="token lead">4</span>&nbsp;&nbsp;environment: {
+          </div>
+          <div class="token-line">
+            <span class="token lead">5</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token option">NEXT_PUBLIC_TABLE_NAME</span>: table.tableName
+          </div>
+          <div class="token-line">
+            <span class="token lead">6</span>&nbsp;&nbsp;}
+          </div>
+          <div class="token-line">
+            <span class="token lead">7</span>});
+          </div>
+          <div class="token-line">
+            <span class="token lead">8</span>&nbsp;
+          </div>
+          <div class="token-line">
+            <span class="token lead">9</span><span class="token dim">// Allow access to the database</span>
+          </div>
+          <div class="token-line">
+            <span class="token lead">10</span>site.<span class="token keyword">attachPermissions</span>([table]);
           </div>
         </div>
         <div class="code-block api-auth long" style="display: none">
