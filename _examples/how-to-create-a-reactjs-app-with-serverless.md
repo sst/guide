@@ -38,7 +38,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 
 ## Project layout
 
-An SST app is made up of two parts.
+An SST app is made up of a couple of parts.
 
 1. `lib/` — App Infrastructure
 
