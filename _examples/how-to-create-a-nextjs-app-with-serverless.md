@@ -123,8 +123,8 @@ const site = new sst.NextjsSite(this, "Site", {
   path: "frontend",
   environment: {
     // Pass the table details to our app
-    NEXT_PUBLIC_REGION: scope.region,
-    NEXT_PUBLIC_TABLE_NAME: table.tableName,
+    REGION: scope.region,
+    TABLE_NAME: table.tableName,
   },
 });
 
@@ -139,7 +139,7 @@ this.addOutputs({
 
 The construct is pointing to where our Next.js app is located. You'll recall that we created it in the `frontend` directory.
 
-We are also setting up a couple of [build time Next.js environment variable](https://nextjs.org/docs/basic-features/environment-variables). The `NEXT_PUBLIC_REGION` and `NEXT_PUBLIC_TABLE_NAME` are passing in the table details to our Next.js app. The [`NextjsSite`](https://docs.serverless-stack.com/constructs/NextjsSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
+We are also setting up a couple of [build time Next.js environment variable](https://nextjs.org/docs/basic-features/environment-variables). The `REGION` and `TABLE_NAME` are passing in the table details to our Next.js app. The [`NextjsSite`](https://docs.serverless-stack.com/constructs/NextjsSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
 
 To load these environment variables in our local environment, we'll be using the [`@serverless-stack/static-site-env`](https://www.npmjs.com/package/@serverless-stack/static-site-env) package.
 
@@ -163,7 +163,7 @@ Then update the `dev` script to use this package.
 "dev": "sst-env -- next dev",
 ```
 
-This will ensure that when you are running your Next.js app locally, the `NEXT_PUBLIC_REGION` and `NEXT_PUBLIC_TABLE_NAME` will be available.
+This will ensure that when you are running your Next.js app locally, the `REGION` and `TABLE_NAME` will be available.
 
 ### Add the API
 
@@ -175,13 +175,13 @@ Let's create the API that'll be updating our click counter.
 import AWS from "aws-sdk";
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient({
-  region: process.env.NEXT_PUBLIC_REGION,
+  region: process.env.REGION,
 });
 
 export default async function handler(req, res) {
   const getParams = {
     // Get the table name from the environment variable
-    TableName: process.env.NEXT_PUBLIC_TABLE_NAME,
+    TableName: process.env.TABLE_NAME,
     // Get the row where the counter is called "hits"
     Key: {
       counter: "hits",
@@ -194,7 +194,7 @@ export default async function handler(req, res) {
   let count = results.Item ? results.Item.tally : 0;
 
   const putParams = {
-    TableName: process.env.NEXT_PUBLIC_TABLE_NAME,
+    TableName: process.env.TABLE_NAME,
     Key: {
       counter: "hits",
     },
