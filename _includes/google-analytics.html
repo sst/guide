@@ -1,3 +1,4 @@
+<!-- Google Analytics -->
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -8,3 +9,21 @@
   ga('send', 'pageview');
 
 </script>
+<!-- Global site tag (gtag.js) - Google Ads: 1060291111 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-1060291111"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-1060291111');
+</script>
+{% if page.url == "/thanks.html" %}
+<!-- Event snippet for Website lead conversion page -->
+<script>
+  if (window.location.search.indexOf("source=ebook-download") != -1) {
+    // Log the even if coming from the ebook dl page
+    gtag('event', 'conversion', {'send_to': 'AW-1060291111/NEJsCIHvy-UCEKeEy_kD'});
+  }
+</script>
+{% endif %}
