@@ -392,7 +392,7 @@ Let's look at how these compare across the following:
 
 Vercel hosts Next.js apps on their infrastructure.
 
-While, SST, Amplify, and sls-next host the Next.js app on your AWS account.
+While SST, Amplify, and sls-next host the Next.js app on your AWS account.
 
 A note on the Serverless Next.js (sls-next) Component. While it's hosted on your AWS account, your **credentials and application code** will pass through Serverless Inc's (the company behind Serverless Framework) servers.
 
@@ -406,7 +406,7 @@ Vercel is the most expensive option and one of the biggest reasons folks are loo
 
 Amplify on the other hand is fairly cheap but [charges you for deployments](https://aws.amazon.com/amplify/pricing/). They charge for build minutes but password protection is free and you can have unlimited number of concurrent deployments.
 
-SST is completely open source and does not charge you for deployments. While, sls-next is not completely open source (since your code runs through their servers) but Serverless Inc. doesn't currently charge you for deploying through them. The only expense is attached to hosting a Next.js app on your AWS account.
+SST is completely open source and does not charge you for deployments. While sls-next is not completely open source (since your code runs through their servers),  Serverless Inc. doesn't currently charge you for deploying through them. The only expense is attached to hosting a Next.js app on your AWS account.
 
 You can use any CI/CD with SST or sls-next, but they both have CI/CD services that are run by their respective teams.
 
@@ -426,7 +426,7 @@ SST is completely open source and deploys directly to your AWS account.
 
 Vercel and Amplify are CI/CD service and it can be tricky to integrate with your own CI/CD pipeline.
 
-While, SST and sls-next can be run as a part of your CI/CD pipeline.
+While SST and sls-next can be run as a part of your CI/CD pipeline.
 
 ### AWS integration
 
@@ -450,7 +450,7 @@ Vercel doesn't have any native IaC options.
 
 Vercel, Amplify, and SST are actively developed and managed by the companies that support it.
 
-While, sls-next is supported by Serverless Inc.; it's a community maintained project.
+While sls-next is supported by Serverless Inc., it's a community maintained project.
 
 ## Summary
 
