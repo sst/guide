@@ -111,6 +111,10 @@
     var el = $(this);
     var parent = el.parent();
 
+    if (el.hasClass("active")) {
+      return;
+    }
+
     var name = el.data("name");
     var position = el.position();
     var scrollLeft = parent.scrollLeft();
