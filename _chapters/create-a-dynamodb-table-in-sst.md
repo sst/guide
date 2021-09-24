@@ -94,14 +94,4 @@ Stack dev-notes-storage
 
 The `Stack` name above of `dev-notes-storage` is a string derived from your `${stageName}-${appName}-${stackName}`. Your `appName` is defined in the `name` field of your `sst.json` file and your `stackName` is the label you choose for your stack in `lib/index.js'.
 
-### Remove Template Files
-
-There are a couple of files that came with our starter template, that we can now remove.
-
-{%change%} Run the following in your project root.
-
-``` bash
-$ rm lib/MyStack.js src/lambda.js
-```
-
 Now that our database has been created, let's create an S3 bucket to handle file uploads.
