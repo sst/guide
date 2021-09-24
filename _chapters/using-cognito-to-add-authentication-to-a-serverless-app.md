@@ -20,7 +20,7 @@ To understand this better we'll be referencing an example SST application on Git
 
 This example SST app has a couple of key parts:
 
-- **The `lib/` directory**: This contains the code that describes the infrastructure of your serverless app. It works by leveraging [AWS CDK](https://serverless-stack.com/chapters/what-is-aws-cdk.html) to create the infrastructure. This includes our API, our Cognito services, and our frontend static site.
+- **The `stacks/` directory**: This contains the code that describes the infrastructure of your serverless app. It works by leveraging [AWS CDK](https://serverless-stack.com/chapters/what-is-aws-cdk.html) to create the infrastructure. This includes our API, our Cognito services, and our frontend static site.
 - **The `src/` directory**: This is where the application code resides. The code that will run when your API is called.
 - **The `frontend/` directory**: This is where our frontend React.js application is. It'll be connecting to our APIs.
 
@@ -43,7 +43,7 @@ Let’s start with looking at how to add Cognito User Pool to our app.
 
 In the [previous chapter]({% link _chapters/how-to-add-authentication-to-a-serverless-app.md %}) we talked about the various parts of Cognito ([User Pools and Identity Pools]({% link _chapters/cognito-user-pool-vs-identity-pool.md %})).
 
-SST makes it easy to add these to your application. In [`lib/MyStack.js`]({{ repo_url }}/lib/MyStack.js) you'll notice.
+SST makes it easy to add these to your application. In [`stacks/MyStack.js`]({{ repo_url }}/stacks/MyStack.js) you'll notice.
 
 ``` js
 // Create a Cognito User Pool to manage auth
@@ -112,7 +112,7 @@ new Auth(this, "Auth", {
 
 ### Adding an API
 
-Now let's look at how we can use Cognito to secure our API. In [`lib/MyStack.js`]({{ repo_url }}/lib/MyStack.js) of our example, you'll notice our SST [`Api`](https://docs.serverless-stack.com/constructs/Api) definition.
+Now let's look at how we can use Cognito to secure our API. In [`stacks/MyStack.js`]({{ repo_url }}/stacks/MyStack.js) of our example, you'll notice our SST [`Api`](https://docs.serverless-stack.com/constructs/Api) definition.
 
 ``` js
 // Create an HTTP API
@@ -161,7 +161,7 @@ export async function handler() {
 
 ### Adding a React Static Site
 
-We can now turn our attention to the frontend part of our application. In [`lib/MyStack.js`]({{ repo_url }}/lib/MyStack.js) take a look at the SST [`ReactStaticSite`](https://docs.serverless-stack.com/constructs/ReactStaticSite) definition.
+We can now turn our attention to the frontend part of our application. In [`stacks/MyStack.js`]({{ repo_url }}/stacks/MyStack.js) take a look at the SST [`ReactStaticSite`](https://docs.serverless-stack.com/constructs/ReactStaticSite) definition.
 
 ``` js
 // Deploy our React app
@@ -187,7 +187,7 @@ The key here is that we are [setting the outputs from our backend as environment
 4. Id of our Cognito Identity Pool
 5. And the Id of the Cognito User Pool client
 
-You can check out the rest of [`lib/MyStack.js`]({{ repo_url }}/lib/MyStack.js) for reference.
+You can check out the rest of [`stacks/MyStack.js`]({{ repo_url }}/stacks/MyStack.js) for reference.
 
 Now we are ready to create our React app.
 

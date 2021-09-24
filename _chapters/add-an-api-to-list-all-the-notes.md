@@ -45,7 +45,7 @@ This is pretty much the same as our `get.js` except we use a condition to only r
 
 Let's add the route for this new endpoint.
 
-{%change%} Add the following above the `POST /notes` route in `lib/ApiStack.js`.
+{%change%} Add the following above the `POST /notes` route in `stacks/ApiStack.js`.
 
 ``` js
 "GET    /notes": "src/list.main",

@@ -40,7 +40,7 @@ This makes a DynamoDB `delete` call with the `userId` & `noteId` key to delete t
 
 Let's add a new route for the delete note API.
 
-{%change%} Add the following below the `PUT /notes{id}` route in `lib/ApiStack.js`.
+{%change%} Add the following below the `PUT /notes{id}` route in `stacks/ApiStack.js`.
 
 ``` js
 "DELETE /notes/{id}": "src/delete.main",

@@ -51,7 +51,7 @@ resources:
 
 For CDK on the other hand we use [SST](https://github.com/serverless-stack/serverless-stack) to automatically parameterize our stack names. And use a helper method to parameterize specific resource names.
 
-So for example in the `lib/index.js` file in our [resources repo]({{ site.backend_ext_resources_github_repo }}).
+So for example in the `stacks/index.js` file in our [resources repo]({{ site.backend_ext_resources_github_repo }}).
 
 ``` javascript
 export default function main(app) {
@@ -73,7 +73,7 @@ dev-notes-ext-infra-cognito
 
 Where `dev` is the stage we are deploying to and `notes-ext-infra` is the name of our SST app, as specified in our `sst.json`.
 
-For specific resources, such as CloudFormation exports, we use the `app.logicalPrefixedName` helper method. Here's an example from `lib/DynamoDBStack.js`.
+For specific resources, such as CloudFormation exports, we use the `app.logicalPrefixedName` helper method. Here's an example from `stacks/DynamoDBStack.js`.
 
 ``` javascript
 new CfnOutput(this, "TableName", {

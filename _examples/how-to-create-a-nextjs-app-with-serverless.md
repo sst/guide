@@ -62,7 +62,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 }
 ```
 
-The code in the `lib/` directory describes the infrastructure of your serverless app. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}).
+The code in the `stacks/` directory describes the infrastructure of your serverless app. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}).
 
 ## Create our infrastructure
 
@@ -72,7 +72,7 @@ Our app is made up of a database, a Next.js app, and an API within the Next.js a
 
 We'll be using [Amazon DynamoDB](https://aws.amazon.com/dynamodb/); a reliable and highly-performant NoSQL database that can be configured as a true serverless database. Meaning that it'll scale up and down automatically. And you won't get charged if you are not using it.
 
-{%change%} Replace the `lib/MyStack.js` with the following.
+{%change%} Replace the `stacks/MyStack.js` with the following.
 
 ``` js
 import * as sst from "@serverless-stack/resources";
@@ -115,7 +115,7 @@ This sets up our Next.js app in the `frontend/` directory.
 
 Now let's configure SST to deploy our Next.js app to AWS. To do so, we'll be using the SST [`NextjsSite`](https://docs.serverless-stack.com/constructs/NextjsSite) construct.
 
-{%change%} Add the following in `lib/MyStack.js` below our `sst.Table` definition.
+{%change%} Add the following in `stacks/MyStack.js` below our `sst.Table` definition.
 
 ``` js
 // Create a Next.js site

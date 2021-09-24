@@ -40,9 +40,9 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 
 An SST app is made up of a couple of parts.
 
-1. `lib/` — App Infrastructure
+1. `stacks/` — App Infrastructure
 
-   The code that describes the infrastructure of your serverless app is placed in the `lib/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
+   The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
 2. `src/` — App Code
 
@@ -60,7 +60,7 @@ Our app is made up of a simple API and a React.js app. The API will be talking t
 
 We'll be using [Amazon DynamoDB](https://aws.amazon.com/dynamodb/); a reliable and highly-performant NoSQL database that can be configured as a true serverless database. Meaning that it'll scale up and down automatically. And you won't get charged if you are not using it.
 
-{%change%} Replace the `lib/MyStack.js` with the following.
+{%change%} Replace the `stacks/MyStack.js` with the following.
 
 ``` js
 import * as sst from "@serverless-stack/resources";
@@ -90,7 +90,7 @@ This creates a serverless DynamoDB table using the SST [`Table`](https://docs.se
 
 Now let's add the API.
 
-{%change%} Add this below the `sst.Table` definition in `lib/MyStack.js`.
+{%change%} Add this below the `sst.Table` definition in `stacks/MyStack.js`.
 
 ``` js
 // Create the HTTP API
@@ -123,7 +123,7 @@ We also pass in the name of our DynamoDB table to our API as an environment vari
 
 To deploy a React.js app to AWS, we'll be using the SST [`ReactStaticSite`](https://docs.serverless-stack.com/constructs/ReactStaticSite) construct.
 
-{%change%} Replace the following in `lib/MyStack.js`:
+{%change%} Replace the following in `stacks/MyStack.js`:
 
 ``` js
 // Show the API endpoint in the output

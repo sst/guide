@@ -10,7 +10,7 @@ comments_id: custom-domains-in-serverless-apis/2464
 
 In the [previous chapter]({% link _chapters/purchase-a-domain-with-route-53.md %}) we purchased a new domain on [Route 53](https://aws.amazon.com/route53/). Now let's use it for our serverless API.
 
-{%change%} In your `lib/ApiStack.js` add the following above the `defaultAuthorizationType: "AWS_IAM",` line.
+{%change%} In your `stacks/ApiStack.js` add the following above the `defaultAuthorizationType: "AWS_IAM",` line.
 
 ``` js
 customDomain:
@@ -23,7 +23,7 @@ We could for example, base it on the stage name, `api-${scope.stage}.my-serverle
 
 We also need to update the outputs of our API stack.
 
-{%change%} Replace the `this.addOutputs` call at the bottom of `lib/ApiStack.js`.
+{%change%} Replace the `this.addOutputs` call at the bottom of `stacks/ApiStack.js`.
 
 ``` js
 this.addOutputs({

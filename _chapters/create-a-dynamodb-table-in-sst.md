@@ -13,7 +13,7 @@ We are now going to start creating our infrastructure in [SST]({{ site.sst_githu
 
 ### Create a Stack
 
-{%change%} Add the following to a new file in `lib/StorageStack.js`.
+{%change%} Add the following to a new file in `stacks/StorageStack.js`.
 
 ``` js
 import * as sst from "@serverless-stack/resources";
@@ -69,7 +69,7 @@ This'll allow us to reference this resource in our other stacks.
 
 Now let's add this stack to our app.
 
-{%change%} Replace the `lib/index.js` with this.
+{%change%} Replace the `stacks/index.js` with this.
 
 ``` js
 import StorageStack from "./StorageStack";
@@ -92,7 +92,7 @@ Stack dev-notes-storage
   Status: deployed
 ```
 
-The `Stack` name above of `dev-notes-storage` is a string derived from your `${stageName}-${appName}-${stackName}`. Your `appName` is defined in the `name` field of your `sst.json` file and your `stackName` is the label you choose for your stack in `lib/index.js'.
+The `Stack` name above of `dev-notes-storage` is a string derived from your `${stageName}-${appName}-${stackName}`. Your `appName` is defined in the `name` field of your `sst.json` file and your `stackName` is the label you choose for your stack in `stacks/index.js'.
 
 ### Remove Template Files
 
@@ -101,7 +101,7 @@ There are a couple of files that came with our starter template, that we can now
 {%change%} Run the following in your project root.
 
 ``` bash
-$ rm lib/MyStack.js src/lambda.js
+$ rm stacks/MyStack.js src/lambda.js
 ```
 
 Now that our database has been created, let's create an S3 bucket to handle file uploads.

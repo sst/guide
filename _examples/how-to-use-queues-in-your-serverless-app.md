@@ -40,9 +40,9 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 
 An SST app is made up of two parts.
 
-1. `lib/` — App Infrastructure
+1. `stacks/` — App Infrastructure
 
-   The code that describes the infrastructure of your serverless app is placed in the `lib/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
+   The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
 2. `src/` — App Code
 
@@ -52,7 +52,7 @@ An SST app is made up of two parts.
 
 [Amazon SQS](https://aws.amazon.com/sqs/) is a reliable and high-throughput message queuing service. You are charged based on the number of API requests made to SQS. And you won't get charged if you are not using it.
 
-{%change%} Replace the `lib/MyStack.js` with the following.
+{%change%} Replace the `stacks/MyStack.js` with the following.
 
 ``` js
 import * as sst from "@serverless-stack/resources";
@@ -75,7 +75,7 @@ This creates an SQS queue using [`sst.Queue`](https://docs.serverless-stack.com/
 
 Now let's add the API.
 
-{%change%} Add this below the `sst.Queue` definition in `lib/MyStack.js`.
+{%change%} Add this below the `sst.Queue` definition in `stacks/MyStack.js`.
 
 ``` js
 // Create the HTTP API

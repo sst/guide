@@ -77,7 +77,7 @@ Clearly, our serverless infrastructure might be cheap but our service isn't!
 
 Let's add a new route for our billing API.
 
-{%change%} Add the following below the `DELETE /notes/{id}` route in `lib/ApiStack.js`.
+{%change%} Add the following below the `DELETE /notes/{id}` route in `stacks/ApiStack.js`.
 
 ``` js
 "POST   /billing": "src/billing.main",
