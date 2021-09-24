@@ -59,7 +59,7 @@ Now to use this package, we'll add it to our `package.json` scripts.
 
 We are going to be deploying our React app to AWS. To do that we'll be using the SST [`ReactStaticSite`](https://docs.serverless-stack.com/constructs/ReactStaticSite) construct.
 
-{%change%} Create a new file in `lib/FrontendStack.js` and add the following.
+{%change%} Create a new file in `stacks/FrontendStack.js` and add the following.
 
 ``` js
 import * as sst from "@serverless-stack/resources";
@@ -105,7 +105,7 @@ We are doing a couple of things of note here:
 
 Let's add this new stack to the rest of our app.
 
-{%change%} Replace the `main` function in `lib/index.js` with.
+{%change%} Replace the `main` function in `stacks/index.js` with.
 
 ``` js
 export default function main(app) {

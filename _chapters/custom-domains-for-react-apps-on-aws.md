@@ -10,7 +10,7 @@ comments_id: custom-domains-for-react-apps-on-aws/2463
 
 In the [previous chapter we configured a custom domain for our serverless API]({% link _chapters/custom-domains-in-serverless-apis.md %}). Now let's do the same for our frontend React.js app.
 
-{%change%} In the `lib/FrontendStack.js` add the following below the `new sst.ReactStaticSite(` line.
+{%change%} In the `stacks/FrontendStack.js` add the following below the `new sst.ReactStaticSite(` line.
 
 ``` js
 customDomain:
@@ -32,7 +32,7 @@ You won't need to set the `domainAlias` for the non-prod versions because we don
 
 We need to use the custom domain URL of our API in our React app.
 
-{%change%} Find the following line in `lib/FrontendStack.js`.
+{%change%} Find the following line in `stacks/FrontendStack.js`.
 
 ``` js
 REACT_APP_API_URL: api.url,
@@ -48,7 +48,7 @@ Note that, if you are going to use a custom domain locally, you might need to re
 
 We also need to update the outputs of our frontend stack.
 
-{%change%} Replace the `this.addOutputs` call at the bottom of `lib/FrontendStack.js` with this.
+{%change%} Replace the `this.addOutputs` call at the bottom of `stacks/FrontendStack.js` with this.
 
 ``` js
 this.addOutputs({

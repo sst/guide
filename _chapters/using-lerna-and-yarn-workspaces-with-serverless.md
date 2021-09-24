@@ -290,7 +290,7 @@ package.json
 
 This repo is split into a few parts. Each with a different purpose:
 
-- `lib/`
+- `stacks/`
 
   This is where the CDK code for your app lives. It defines the infrastructure of your serverless app.
 

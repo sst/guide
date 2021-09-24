@@ -17,7 +17,7 @@ Setting this all up can be pretty complicated in CDK. SST has a simple [`Auth`](
 
 ### Create a Stack
 
-{%change%} Add the following to a new file in `lib/AuthStack.js`.
+{%change%} Add the following to a new file in `stacks/AuthStack.js`.
 
 ``` js
 import * as iam from "@aws-cdk/aws-iam";
@@ -115,7 +115,7 @@ One other thing to note is that, the federated identity id is a UUID that is ass
 
 Let's add this stack to our app.
 
-{%change%} Replace the `main` function in `lib/index.js` with this.
+{%change%} Replace the `main` function in `stacks/index.js` with this.
 
 ``` js
 export default function main(app) {
@@ -144,7 +144,7 @@ import AuthStack from "./AuthStack";
 
 We also need to enable authentication in our API.
 
-{%change%} Add the following above the `defaultFunctionProps: {` line in `lib/ApiStack.js`.
+{%change%} Add the following above the `defaultFunctionProps: {` line in `stacks/ApiStack.js`.
 
 ``` js
 defaultAuthorizationType: "AWS_IAM",

@@ -12,7 +12,7 @@ In the notes app we are building, users will be uploading files to the bucket we
 
 Let's enable CORS for our S3 bucket.
 
-{%change%} Replace the following line in `lib/StorageStack.js`.
+{%change%} Replace the following line in `stacks/StorageStack.js`.
 
 ``` js
 this.bucket = new sst.Bucket(this, "Uploads");

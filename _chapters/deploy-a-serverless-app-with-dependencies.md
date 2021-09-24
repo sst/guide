@@ -18,7 +18,7 @@ The short version is that:
 
 In our [resources repo]({{ site.backend_ext_resources_github_repo }}) we are using SST to deploy our CDK app. CDK internally keeps track of the dependencies between stacks.
 
-Our `lib/index.js` looks like this.
+Our `stacks/index.js` looks like this.
 
 ``` javascript
 export default function main(app) {

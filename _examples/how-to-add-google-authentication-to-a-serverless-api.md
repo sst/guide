@@ -41,9 +41,9 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 
 An SST app is made up of two parts.
 
-1. `lib/` — App Infrastructure
+1. `stacks/` — App Infrastructure
 
-   The code that describes the infrastructure of your serverless app is placed in the `lib/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
+   The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
 2. `src/` — App Code
 
@@ -53,7 +53,7 @@ An SST app is made up of two parts.
 
 Let's start by setting up an API.
 
-{%change%} Replace the `lib/MyStack.js` with the following.
+{%change%} Replace the `stacks/MyStack.js` with the following.
 
 ``` js
 import * as sst from "@serverless-stack/resources";
@@ -95,7 +95,7 @@ To secure our APIs we are adding the authorization type `AWS_IAM`. This means th
 
 Now let's add authentication for our serverless app.
 
-{%change%} Add this below the `sst.Api` definition in `lib/MyStack.js`. Make sure to replace the `clientId` with that of your Google API project.
+{%change%} Add this below the `sst.Api` definition in `stacks/MyStack.js`. Make sure to replace the `clientId` with that of your Google API project.
 
 ``` js
 // Create auth provider

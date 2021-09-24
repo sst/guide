@@ -82,7 +82,7 @@ $ cd social-cards
 
 The infrastructure in our app is defined using [CDK]({% link _chapters/what-is-aws-cdk.md %}). Currently we just have a simple API that invokes a Lambda function.
 
-You can see this in `lib/MyStack.js`.
+You can see this in `stacks/MyStack.js`.
 
 ``` js
 // Create a HTTP API
@@ -174,7 +174,7 @@ The `encoded_title` is a [Base64 encoded](https://en.wikipedia.org/wiki/Base64) 
 
 We are going to use [Puppeteer](https://developers.google.com/web/tools/puppeteer) to take these screenshots. We'll be using [a publicly available Lambda Layer](https://github.com/shelfio/chrome-aws-lambda-layer) for it. It allows us to skip having to compile Puppeteer specifically for AWS Lambda.
 
-So the API definition in `lib/MyStack.js` now looks like this.
+So the API definition in `stacks/MyStack.js` now looks like this.
 
 ``` js
 const api = new sst.Api(this, "Api", {
@@ -408,7 +408,7 @@ If we visit our API multiple times, it takes a screenshot every time. This is bo
 
 First, we'll create our S3 bucket.
 
-In `lib/MyStack.js` above our API definition we have.
+In `stacks/MyStack.js` above our API definition we have.
 
 ``` js
 // Create S3 bucket to store generated images
@@ -541,7 +541,7 @@ Now if you load your API endpoint a couple of times, you'll notice it is much fa
 
 To make our requests even faster we'll add a CDN in front of our API. We'll use [CloudFront](https://aws.amazon.com/cloudfront/) for this.
 
-In `lib/MyStack.js` we'll define our CloudFront distribution.
+In `stacks/MyStack.js` we'll define our CloudFront distribution.
 
 ``` js
 // Create CloudFront Distribution
@@ -582,7 +582,7 @@ If you are looking to create a new domain, you can [follow this guide to purchas
 
 Or if you have a domain hosted on another provider, [read this to migrate it to Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html).
 
-We can do this in our `lib/MyStack.js` by adding this block above the CloudFront definition.
+We can do this in our `stacks/MyStack.js` by adding this block above the CloudFront definition.
 
 ``` js
 const rootDomain = "serverless-stack.com";
@@ -640,7 +640,7 @@ if (useCustomDomain) {
 }
 ```
 
-Make sure to check out the full `lib/MyStack.js` source here — [{{ page.repo | remove: "https://" }}/blob/main/lib/MyStack.js]({{ page.repo }}/blob/main/lib/MyStack.js)
+Make sure to check out the full `stacks/MyStack.js` source here — [{{ page.repo | remove: "https://" }}/blob/main/stacks/MyStack.js]({{ page.repo }}/blob/main/stacks/MyStack.js)
 
 Now you can load our custom domain URL!
 

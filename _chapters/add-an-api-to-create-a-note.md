@@ -14,7 +14,7 @@ We'll first add an API to create a note. This API will take the note object as t
 
 ### Creating a Stack
 
-{%change%} Create a new file in `lib/ApiStack.js` and add the following.
+{%change%} Create a new file in `stacks/ApiStack.js` and add the following.
 
 ``` js
 import * as sst from "@serverless-stack/resources";
@@ -72,7 +72,7 @@ We are doing a couple of things of note here.
 Let's add this new stack to the rest of our app.
 
 
-{%change%} In `lib/index.js`, import the API stack at the top.
+{%change%} In `stacks/index.js`, import the API stack at the top.
 
 ``` js
 import ApiStack from "./ApiStack";

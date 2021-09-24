@@ -26,7 +26,7 @@ For reference, here is what we have so far.
 
 Our users make a request to our serverless API. It starts by hitting our API Gateway endpoint. And depending on the endpoint we request, it'll forward that request to the appropriate Lambda function.
 
-In terms of access control, our API Gateway endpoint is allowed to invoke the Lambda functions we listed in the routes of our `lib/ApiStack.js`. And if you'll recall, our Lambda function are allowed to connect to our DynamoDB tables.
+In terms of access control, our API Gateway endpoint is allowed to invoke the Lambda functions we listed in the routes of our `stacks/ApiStack.js`. And if you'll recall, our Lambda function are allowed to connect to our DynamoDB tables.
 
 ``` js
 // Allow the API to access the table

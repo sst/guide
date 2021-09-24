@@ -35,7 +35,7 @@ Also, since we won't be committing this file to Git, we'll need to add this to o
 
 Next, let's add these to our functions.
 
-{%change%} Add the following below the `TABLE_NAME: table.tableName,` line in `lib/ApiStack.js`:
+{%change%} Add the following below the `TABLE_NAME: table.tableName,` line in `stacks/ApiStack.js`:
 
 ``` js
 STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
