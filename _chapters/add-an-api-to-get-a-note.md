@@ -44,7 +44,7 @@ This follows exactly the same structure as our previous `create.js` function. Th
 
 Let's add a new route for the get note API.
 
-{%change%} Add the following below the `POST /notes` route in `lib/ApiStack.js`.
+{%change%} Add the following below the `POST /notes` route in `stacks/ApiStack.js`.
 
 ``` js
 "GET    /notes/{id}": "src/get.main",

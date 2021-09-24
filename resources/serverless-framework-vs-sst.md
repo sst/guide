@@ -169,7 +169,7 @@ $ cd vscode
 
 This example comes with a VS Code [Launch Configuration](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations), [`.vscode/launch.json`]({{ site.sst_github_repo }}{{ site.sst_github_examples_prefix }}vscode/.vscode/launch.json).
 
-We are creating a simple API in our app. It's defined in `lib/MyStack.ts`.
+We are creating a simple API in our app. It's defined in `stacks/MyStack.ts`.
 
 ``` ts
 import * as sst from "@serverless-stack/resources";

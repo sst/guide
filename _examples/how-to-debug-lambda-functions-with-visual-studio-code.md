@@ -50,9 +50,9 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 
 An SST app is made up of two parts.
 
-1. `lib/` — App Infrastructure
+1. `stacks/` — App Infrastructure
 
-   The code that describes the infrastructure of your serverless app is placed in the `lib/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
+   The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
 2. `src/` — App Code
 
@@ -62,7 +62,7 @@ An SST app is made up of two parts.
 
 For this example we'll be testing using a simple API endpoint.
 
-Our API is defined in the `lib/MyStack.ts`.
+Our API is defined in the `stacks/MyStack.ts`.
 
 ``` ts
 import * as sst from "@serverless-stack/resources";

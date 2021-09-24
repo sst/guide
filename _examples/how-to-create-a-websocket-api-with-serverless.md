@@ -40,9 +40,9 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 
 An SST app is made up of two parts.
 
-1. `lib/` — App Infrastructure
+1. `stacks/` — App Infrastructure
 
-   The code that describes the infrastructure of your serverless app is placed in the `lib/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
+   The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
 2. `src/` — App Code
 
@@ -52,7 +52,7 @@ An SST app is made up of two parts.
 
 We are going to use [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) to store the connection ids from all the clients connected to our WebSocket API. DynamoDB is a reliable and highly-performant NoSQL database that can be configured as a true serverless database. Meaning that it'll scale up and down automatically. And you won't get charged if you are not using it.
 
-{%change%} Replace the `lib/MyStack.js` with the following.
+{%change%} Replace the `stacks/MyStack.js` with the following.
 
 ``` js
 import * as sst from "@serverless-stack/resources";
@@ -84,7 +84,7 @@ Where the `id` is the connection id as a string.
 
 Now let's add the WebSocket API.
 
-{%change%} Add this below the `sst.Table` definition in `lib/MyStack.js`.
+{%change%} Add this below the `sst.Table` definition in `stacks/MyStack.js`.
 
 ``` js
 // Create the WebSocket API

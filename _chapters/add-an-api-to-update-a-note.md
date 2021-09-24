@@ -52,7 +52,7 @@ This should look similar to the `create.js` function. Here we make an `update` D
 
 Let's add a new route for the get note API.
 
-{%change%} Add the following below the `GET /notes/{id}` route in `lib/ApiStack.js`.
+{%change%} Add the following below the `GET /notes/{id}` route in `stacks/ApiStack.js`.
 
 ``` js
 "PUT    /notes/{id}": "src/update.main",

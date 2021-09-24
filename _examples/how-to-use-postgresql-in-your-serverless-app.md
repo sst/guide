@@ -40,9 +40,9 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 
 An SST app is made up of two parts.
 
-1. `lib/` — App Infrastructure
+1. `stacks/` — App Infrastructure
 
-   The code that describes the infrastructure of your serverless app is placed in the `lib/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
+   The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
 2. `src/` — App Code
 
@@ -52,7 +52,7 @@ An SST app is made up of two parts.
 
 [Amazon Aurora Serverless](https://aws.amazon.com/rds/aurora/serverless/) is an auto-scaling managed relational database that supports PostgreSQL.
 
-{%change%} Replace the `lib/MyStack.js` with the following.
+{%change%} Replace the `stacks/MyStack.js` with the following.
 
 ``` js
 import * as cdk from "@aws-cdk/core";
@@ -93,7 +93,7 @@ This creates a [VPC](https://aws.amazon.com/vpc/) and uses that to create our Au
 
 Now let's add the API.
 
-{%change%} Add this below the `rds.ServerlessCluster` definition in `lib/MyStack.js`.
+{%change%} Add this below the `rds.ServerlessCluster` definition in `stacks/MyStack.js`.
 
 ``` js
 // Create a HTTP API
@@ -230,7 +230,7 @@ Here click on **Query Editor**. Now you'll be asked to connect to your database.
 - In the **Database instance or cluster** dropdown select the one matching the `ClusterIdentifier` in our app outputs.
 - For the **Database username** select, **Connect with a Secrets Manager ARN**.
 - Paste the `SecretArn` from your app outputs in the **Secret manager ARN** field.
-- And paste the `CounterDB` (or the `defaultDatabaseName` variable in `lib/MyStack.js`) as the name of the database.
+- And paste the `CounterDB` (or the `defaultDatabaseName` variable in `stacks/MyStack.js`) as the name of the database.
 
 Then click **Connect to database**.
 
