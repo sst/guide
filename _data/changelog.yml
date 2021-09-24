@@ -1,4 +1,8 @@
 current:
+  title: "Renaming lib to stacks"
+  desc: "Sep 24, 2021: Renaming lib to stacks in the SST app."
+
+v7-0:
   title: "Creating separate SST and Serverless Framework sections"
   desc: "Aug 25, 2021: Creating a separate SST version and Serverless Framework version of the guide."
 
