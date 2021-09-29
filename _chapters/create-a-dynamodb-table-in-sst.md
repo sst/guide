@@ -65,9 +65,27 @@ table;
 
 This'll allow us to reference this resource in our other stacks.
 
+### Remove Template Files
+
+The _Hello World_ API that we previously created, can now be removed. We can also remove the files that came with the starter template.
+
+{%change%} To remove the starter stack, run the following from your project root.
+
+``` bash
+$ npx sst remove my-stack
+```
+
+This will take a minute to run.
+
+{%change%} Also remove the template files.
+
+``` bash
+$ rm stacks/MyStack.js src/lambda.js
+```
+
 ### Add to the App
 
-Now let's add this stack to our app.
+Now let's add our new stack to the app.
 
 {%change%} Replace the `stacks/index.js` with this.
 
@@ -93,15 +111,5 @@ Stack dev-notes-storage
 ```
 
 The `Stack` name above of `dev-notes-storage` is a string derived from your `${stageName}-${appName}-${stackName}`. Your `appName` is defined in the `name` field of your `sst.json` file and your `stackName` is the label you choose for your stack in `stacks/index.js'.
-
-### Remove Template Files
-
-There are a couple of files that came with our starter template, that we can now remove.
-
-{%change%} Run the following in your project root.
-
-``` bash
-$ rm stacks/MyStack.js src/lambda.js
-```
 
 Now that our database has been created, let's create an S3 bucket to handle file uploads.
