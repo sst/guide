@@ -52,7 +52,7 @@ Now we just need to add this component to our routes to handle our 404s.
 </Route>
 ```
 
-This needs to always be the last line in the `<Route>` block. You can think of it as the route that handles requests in case all the other routes before it have failed.
+This needs to always be the last route in the `<Switch>` block. You can think of it as the route that handles requests in case all the other routes before it have failed.
 
 {%change%} And include the `NotFound` component in the header by adding the following:
 
