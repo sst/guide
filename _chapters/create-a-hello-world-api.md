@@ -17,7 +17,7 @@ export default class MyStack extends sst.Stack {
   constructor(scope, id, props) {
     super(scope, id, props);
 
-    // Create a HTTP API
+    // Create an HTTP API
     const api = new sst.Api(this, "Api", {
       routes: {
         "GET /": "src/lambda.handler",
