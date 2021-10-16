@@ -48,7 +48,7 @@ CDK internally uses CloudFormation. It converts your code into a CloudFormation 
 
 ![How CDK works](/assets/diagrams/how-cdk-works.png)
 
-A CDK app is made up of multiple stacks. Or more specifically, multiple instances of the `cdk.Stack` class. While these do get converted into CloudFormation stacks down the road. It's more appropriate to think of them as representations of your CloudFormation stacks, but in code.
+A CDK app is made up of multiple stacks. Or more specifically, multiple instances of the `cdk.Stack` class. While these do get converted into CloudFormation stacks down the road, it's more appropriate to think of them as representations of your CloudFormation stacks, but in code.
 
 When you run `cdk synth`, it converts these stacks into CloudFormation templates. And when you run `cdk deploy`, it'll submit these to CloudFormation. CloudFormation creates these stacks and all the resources that are defined in them.
 
