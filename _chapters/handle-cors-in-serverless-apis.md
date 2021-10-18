@@ -44,7 +44,7 @@ No 'Access-Control-Allow-Origin' header is present on the requested resource
 
 And our browser won't show us the HTTP response. This can make debugging our API extremely hard.
 
-### Add an API to Handle Billing
+### CORS in API Gateway
 
 The SST [`Api`](https://docs.serverless-stack.com/constructs/Api) construct that we are using enables CORS by default.
 
