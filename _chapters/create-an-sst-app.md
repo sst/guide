@@ -23,9 +23,8 @@ By default our app will be deployed to an environment (or stage) called `dev` in
 ``` json
 {
   "name": "notes",
-  "stage": "dev",
   "region": "us-east-1",
-  "lint": true
+  "main": "stacks/index.js"
 }
 ```
 
