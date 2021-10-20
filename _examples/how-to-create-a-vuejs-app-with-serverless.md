@@ -30,7 +30,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 
 ```json
 {
-  "name": "Vue-app",
+  "name": "vue-app",
   "stage": "dev",
   "region": "us-east-1"
 }
@@ -304,7 +304,7 @@ Let's start our Vue development environment.
 $ npm run serve
 ```
 
-Open up your browser and go to http://localhost:8080
+Open up your browser and go to `http://localhost:8080`.
 
 ### Add the click button
 
@@ -312,7 +312,7 @@ We are now ready to add the UI for our app and connect it to our serverless API.
 
 {%change%} Replace `frontend/src/App.vue` with.
 
-```jsx
+```coffee
 <template>
   <div className="App">
     <p>You clicked me {{ count }} times.</p>
@@ -342,7 +342,7 @@ export default {
 </script>
 ```
 
-Here we are adding a simple button that when clicked, makes a request to our API. We are getting the API endpoint from the environment variable, `process.env.Vue_APP_API_URL`.
+Here we are adding a simple button that when clicked, makes a request to our API. We are getting the API endpoint from the environment variable, `process.env.VUE_APP_API_URL`.
 
 The response from our API is then stored in our app's state. We use that to display the count of the number of times the button has been clicked.
 
@@ -350,7 +350,7 @@ Let's add some styles.
 
 {%change%} Add a style tag with the below styles in `App.vue` file.
 
-```css
+```vue
 <style>
 body,
 html {
