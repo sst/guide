@@ -149,7 +149,14 @@
   $('.table-of-contents .chapters .expand').click(function() {
     $(this).closest('.chapters').addClass('expanded');
   });
-  /** Edn ToC lander code **/
+  /** End ToC lander code **/
+
+  /** Start GitHub Stars code **/
+  $.ajax("https://api.github.com/repos/serverless-stack/serverless-stack")
+    .done(function(data) {
+      $("#github-star-count").text(data.stargazers_count);
+    });
+  /** End GitHub Stars code **/
 </script>
 <!-- Docsearch -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script> 
