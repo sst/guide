@@ -152,9 +152,14 @@
   /** End ToC lander code **/
 
   /** Start GitHub Stars code **/
+  function formatStars(num) {
+    return num > 999
+      ? parseFloat((num / 1000).toFixed(1)) + "k"
+      : num;
+  }
   $.ajax("https://api.github.com/repos/serverless-stack/serverless-stack")
     .done(function(data) {
-      $("#github-star-count").text(data.stargazers_count);
+      $("#github-star-count").text(formatStars(data.stargazers_count));
     });
   /** End GitHub Stars code **/
 </script>
