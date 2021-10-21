@@ -113,6 +113,7 @@ Thanks to these folks for their contributions to the content of Serverless Stack
 - [Jae Chul Kim](https://github.com/bsg-bob): Translating chapters to Korean
 - [Ben Force](https://twitter.com/theBenForce): Extra credit chapters
 - [Eze Sunday](https://twitter.com/ezesundayeze): Extra credit chapters
+- [Maniteja Pratha](https://twitter.com/PrataManitej): Vue.js example
 
 ---
 
