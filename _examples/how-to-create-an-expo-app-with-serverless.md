@@ -1,12 +1,12 @@
 ---
 layout: example
-title: How to create a expo app with serverless
+title: How to create an expo app with serverless
 date: 2021-10-23 00:00:00
 lang: en
 description: In this example we will look at how to use expo with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST).
 repo: expo-app
 ref: how-to-create-an-expo-app-with-serverless
-comments_id: how-to-create-a-expo-app-with-serverless/xxxx
+comments_id: how-to-create-an-expo-app-with-serverless/xxxx
 ---
 
 In this example we will look at how to use [expo](https://expo.dev) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}).
