@@ -206,13 +206,15 @@ You should see a `0` printed out.
 
 We are now ready to use the API we just created. Let's use [expo-cli](https://docs.expo.dev/workflow/expo-cli/) to setup our expo app.
 
-{%change%} Run the following in the project root.
+{%change%} Run the following in the project root and create a **blank** project
 
 ```bash
 $ npm install -g expo-cli
-$ expo create frontend
+$ expo init frontend
 $ cd frontend
 ```
+
+![Blank expo app](/assets/examples/expo-app/expo-setup.png)
 
 This sets up our expo app in the `frontend/` directory.
 
@@ -238,7 +240,7 @@ module.exports = function (api) {
 };
 ```
 
-Create a `.env` file in root and create two variables to hold dev and prod API endpoints
+Create a `.env` file in root and create two variables to hold dev and prod API endpoints and replace `DEV_API_URL` with the deployed URL.
 
 ```
 DEV_API_URL=https://sez1p3dsia.execute-api.us-east-1.amazonaws.com
@@ -249,8 +251,16 @@ Let's start our expo development environment.
 
 {%change%} In the `frontend/` directory run.
 
+For android emulator,
+
 ```bash
-$ expo start
+$ expo start --android
+```
+
+For iOS emulator,
+
+```bash
+$ expo start --ios
 ```
 
 This will open up an emulator and the app will be loaded
