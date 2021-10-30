@@ -44,7 +44,10 @@
 
   <!-- Image -->
   {% assign encoded_title=title | truncate: 700 | url_encode | base64_encode | url_encode %}
-  {% if page.collection == "chapters" %}
+  {% if page.image %}
+  <meta content="{{ page.image | absolute_url }}" property="og:image">
+  <meta content="{{ page.image | absolute_url }}" property="twitter:image">
+  {% elsif page.collection == "chapters" %}
   <meta content="{{ site.social_cards_url }}/serverless-stack-guide/{{ encoded_title }}.png" property="og:image">
   <meta content="{{ site.social_cards_url }}/serverless-stack-guide/{{ encoded_title }}.png" property="twitter:image">
   {% elsif page.collection == "examples" and page.ref != "examples-index" %}
@@ -89,11 +92,11 @@
   <link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 
   <!-- Favicon -->
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
-  <link rel="manifest" href="assets/site.webmanifest">
-  <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#5bbad5">
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
 
