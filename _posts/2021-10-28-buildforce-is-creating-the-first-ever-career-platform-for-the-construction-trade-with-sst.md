@@ -6,7 +6,7 @@ author: jay
 image: assets/social-cards/case-study-buildforce.png
 ---
 
-We are talking to Michael Orcutt, the founder of [Buildforce](https://buildforce.com) about their experience building with [SST](/) and [Seed](https://seed.run).
+We are talking to Michael Orcutt, a co-founder of [Buildforce](https://buildforce.com) about their experience building with [SST](/) and [Seed](https://seed.run).
 
 ### About Buildforce
 
