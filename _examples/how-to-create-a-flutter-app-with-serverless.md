@@ -66,7 +66,7 @@ We'll be using [Amazon DynamoDB](https://aws.amazon.com/dynamodb/); a reliable a
 ```js
 import * as sst from "@serverless-stack/resources";
 
-default class MyStack extends sst.Stack {
+export default class MyStack extends sst.Stack {
   constructor(scope, id, props) {
     super(scope, id, props);
 
@@ -131,7 +131,7 @@ import AWS from "aws-sdk";
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-async function main() {
+export async function main() {
   const getParams = {
     // Get the table name from the environment variable
     TableName: process.env.tableName,
