@@ -249,18 +249,10 @@ flutter:
 
 Also we need the `http` package to call the endpoint.
 
-Add `http` under `dependencies` in `pubspec.yaml` file
+{%change%} In the `frontend/` directory run.
 
-```yaml
-dependencies:
-  flutter:
-    sdk: flutter
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-  http:
-  flutter_dotenv: ^5.0.2
+```bash
+$ flutter pub add http
 ```
 
 Let's start our flutter development environment.
@@ -301,11 +293,9 @@ class _MyAppState extends State<MyApp> {
   update() async {
     Uri uri = kReleaseMode ? Uri.parse(dotenv.env['PROD_API_URL']!) : Uri.parse(dotenv.env['DEV_API_URL']!);
     var result = await http.post(uri);
-    print(result.body);
     setState(() {
       counter = int.parse(result.body);
     });
-    print(counter);
   }
 
   int counter = 0;
@@ -413,7 +403,7 @@ Add the above endpoint to the `.env` file in `frontend/.env` as a production API
 
 ```
 DEV_API_URL=https://sez1p3dsia.execute-api.us-east-1.amazonaws.com
-PROD_API_URL=https://hfv2gyuwdh.execute-api.us-east-1.amazonaws.com
+PROD_API_URL=https://k40qchmtvf.execute-api.us-east-1.amazonaws.com
 ```
 
 ## Cleaning up
