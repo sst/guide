@@ -226,10 +226,11 @@ We also need to load the environment variables from our SST app. To do this, we'
 $ flutter pub add flutter_dotenv
 ```
 
-Create a `.env` file inside `frontend/` and create a variable to hold the API endpoint
+Create a `.env` file inside `frontend/` and create two variables to hold the development & production API endpoints
 
 ```
-API_URL=https://sez1p3dsia.execute-api.us-east-1.amazonaws.com
+DEV_API_URL=https://sez1p3dsia.execute-api.us-east-1.amazonaws.com
+PROD_API_URL=<TO_BE_ADDED_LATER>
 ```
 
 Add the `.env` file to your assets bundle in `pubspec.yaml` by uncommenting the `assets` section under `flutter`. Ensure that the path corresponds to the location of the .env file!
@@ -282,6 +283,7 @@ We are now ready to add the UI for our app and connect it to our serverless API.
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/foundation.dart';
 
 Future main() async {
   await dotenv.load(fileName: ".env");
@@ -297,7 +299,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   update() async {
-    Uri uri = Uri.parse(dotenv.env['API_URL']!);
+    Uri uri = kReleaseMode ? Uri.parse(dotenv.env['PROD_API_URL']!) : Uri.parse(dotenv.env['DEV_API_URL']!);
     var result = await http.post(uri);
     print(result.body);
     setState(() {
@@ -347,7 +349,7 @@ class _MyAppState extends State<MyApp> {
 }
 ```
 
-Here we are adding a simple button that when clicked, makes a request to our API. We are getting the API endpoint from the environment variable, `dotenv.env['API_URL']`.
+Here we are adding a simple button that when clicked, makes a request to our API. We are getting the API endpoint from the environment variable depending on the build mode
 
 The response from our API is then stored in our app's state. We use that to display the count of the number of times the button has been clicked.
 
@@ -410,7 +412,8 @@ Stack prod-flutter-app-my-stack
 Add the above endpoint to the `.env` file in `frontend/.env` as a production API endpoint
 
 ```
-API_URL=https://hfv2gyuwdh.execute-api.us-east-1.amazonaws.com
+DEV_API_URL=https://sez1p3dsia.execute-api.us-east-1.amazonaws.com
+PROD_API_URL=https://hfv2gyuwdh.execute-api.us-east-1.amazonaws.com
 ```
 
 ## Cleaning up
