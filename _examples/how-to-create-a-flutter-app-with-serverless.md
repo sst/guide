@@ -207,6 +207,8 @@ You should see a `0` printed out.
 
 We are now ready to use the API we just created. Let's use [flutter-cli](https://flutter.dev/docs/get-started/install) to setup our flutter app.
 
+If you don't have the flutter cli installed on your machine, check [here](https://flutter.dev/docs/get-started/install)
+
 {%change%} Run the following in the project root.
 
 ```bash
@@ -224,17 +226,24 @@ We also need to load the environment variables from our SST app. To do this, we'
 $ flutter pub add flutter_dotenv
 ```
 
-Create a `.env` file in root and create a variable to hold the API endpoint
+Create a `.env` file inside `frontend/` and create a variable to hold the API endpoint
 
 ```
 API_URL=https://sez1p3dsia.execute-api.us-east-1.amazonaws.com
 ```
 
-Add the `.env` file to your assets bundle in `pubspec.yaml`. Ensure that the path corresponds to the location of the .env file!
+Add the `.env` file to your assets bundle in `pubspec.yaml` by uncommenting the `assets` section under `flutter`. Ensure that the path corresponds to the location of the .env file!
 
 ```yaml
-assets:
-  - .env
+flutter:
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - .env
 ```
 
 Let's start our flutter development environment.
