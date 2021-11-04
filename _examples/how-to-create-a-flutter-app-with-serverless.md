@@ -353,7 +353,7 @@ The response from our API is then stored in our app's state. We use that to disp
 
 Now if you head over to your emulator, your flutter app should look something like this.
 
-![Click counter UI in flutter app](/assets/examples/flutter-app/phone1.jpg)
+![Click counter UI in flutter app](/assets/examples/flutter-app/phone1.png)
 
 Of course if you click on the button multiple times, the count doesn't change. That's because we are not updating the count in our API. We'll do that next.
 
@@ -383,7 +383,7 @@ Here we are updating the `clicks` row's `tally` column with the increased count.
 
 And if you head over to your emulator and click the button again, you should see the count increase!
 
-![Click counter updating in flutter app](/assets/examples/flutter-app/phone2.jpg)
+![Click counter updating in flutter app](/assets/examples/flutter-app/phone2.png)
 
 ## Deploying to prod
 
