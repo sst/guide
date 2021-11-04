@@ -246,6 +246,22 @@ flutter:
     - .env
 ```
 
+Also we need the `http` package to call the endpoint.
+
+Add `http` under `dependencies` in `pubspec.yaml` file
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.2
+  http:
+  flutter_dotenv: ^5.0.2
+```
+
 Let's start our flutter development environment.
 
 {%change%} In the `frontend/` directory run.
