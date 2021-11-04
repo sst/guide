@@ -240,11 +240,11 @@ module.exports = function (api) {
 };
 ```
 
-Create a `.env` file in root and create two variables to hold dev and prod API endpoints and replace `DEV_API_URL` with the deployed URL.
+Create a `.env` file inside `frontend/` and create two variables to hold dev and prod API endpoints and replace `DEV_API_URL` with the deployed URL.
 
 ```
 DEV_API_URL=https://sez1p3dsia.execute-api.us-east-1.amazonaws.com
-PROD_API_URL= WILL BE UPDATED LATER
+PROD_API_URL=<TO_BE_ADDED_LATER>
 ```
 
 Let's start our expo development environment.
