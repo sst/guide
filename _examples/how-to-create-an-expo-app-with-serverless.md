@@ -1,15 +1,15 @@
 ---
 layout: example
-title: How to create an expo app with serverless
+title: How to create an Expo app with serverless
 date: 2021-10-23 00:00:00
 lang: en
-description: In this example we will look at how to use expo with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST).
+description: In this example we will look at how to use Expo with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST).
 repo: expo-app
 ref: how-to-create-an-expo-app-with-serverless
 comments_id: how-to-create-an-expo-app-with-serverless/xxxx
 ---
 
-In this example we will look at how to use [expo](https://expo.dev) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}).
+In this example we will look at how to use [Expo](https://expo.dev) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}).
 
 ## Requirements
 
@@ -26,13 +26,13 @@ $ npx create-serverless-stack@latest expo-app
 $ cd expo-app
 ```
 
-By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
+By default our app will be deployed to the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ```json
 {
   "name": "expo-app",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -48,13 +48,13 @@ An SST app is made up of a couple of parts.
 
    The code that's run when your API is invoked is placed in the `src/` directory of your project.
 
-3. `frontend/` — expo App
+3. `frontend/` — Expo app
 
-   The code for our frontend expo app.
+   The code for our frontend Expo app.
 
 ## Create our infrastructure
 
-Our app is made up of a simple API and a expo app. The API will be talking to a database to store the number of clicks. We'll start by creating the database.
+Our app is made up of a simple API and a Expo app. The API will be talking to a database to store the number of clicks. We'll start by creating the database.
 
 ### Adding the table
 
@@ -202,11 +202,11 @@ $ curl -X POST https://sez1p3dsia.execute-api.ap-south-1.amazonaws.com
 
 You should see a `0` printed out.
 
-## Setting up our expo app
+## Setting up our Expo app
 
-We are now ready to use the API we just created. Let's use [expo-cli](https://docs.expo.dev/workflow/expo-cli/) to setup our expo app.
+We are now ready to use the API we just created. Let's use [Expo CLI](https://docs.expo.dev/workflow/expo-cli/) to setup our Expo app.
 
-{%change%} Run the following in the project root and create a **blank** project
+{%change%} Run the following in the project root and create a **blank** project.
 
 ```bash
 $ npm install -g expo-cli
@@ -214,9 +214,9 @@ $ expo init frontend
 $ cd frontend
 ```
 
-![Blank expo app](/assets/examples/expo-app/expo-setup.png)
+![Blank Expo app](/assets/examples/expo-app/expo-setup.png)
 
-This sets up our expo app in the `frontend/` directory.
+This sets up our Expo app in the `frontend/` directory.
 
 We also need to load the environment variables from our SST app. To do this, we'll be using the [`babel-plugin-inline-dotenv`](https://github.com/brysgo/babel-plugin-inline-dotenv) package.
 
@@ -240,30 +240,28 @@ module.exports = function (api) {
 };
 ```
 
-Create a `.env` file inside `frontend/` and create two variables to hold dev and prod API endpoints and replace `DEV_API_URL` with the deployed URL.
+Create a `.env` file inside `frontend/` and create two variables to hold dev and prod API endpoints and replace `DEV_API_URL` with the deployed URL from the steps above.
 
 ```
 DEV_API_URL=https://sez1p3dsia.execute-api.us-east-1.amazonaws.com
 PROD_API_URL=<TO_BE_ADDED_LATER>
 ```
 
-Let's start our expo development environment.
+Let's start our Expo development environment.
 
-{%change%} In the `frontend/` directory run.
-
-For android emulator,
-
-```bash
-$ expo start --android
-```
-
-For iOS emulator,
+{%change%} In the `frontend/` directory run the following for the iOS emulator.
 
 ```bash
 $ expo start --ios
 ```
 
-This will open up an emulator and the app will be loaded
+{%change%} Or run this for the Android emulator.
+
+```bash
+$ expo start --android
+```
+
+This will open up an emulator and load your app.
 
 ### Add the click button
 
@@ -304,11 +302,11 @@ export default function App() {
 
 Here we are adding a simple button that when clicked, makes a request to our API. We are getting the API endpoint from the environment variable, `process.env.API_URL`.
 
-The response from our API is then stored in our app's state. We use that to display the count of the number of times the button has been clicked.
+The response from our API is then stored in our app's state. We use it to display the count of the number of times the button has been clicked.
 
 Let's add some styles.
 
-{%change%} Add stylesheet in `App.js` file
+{%change%} Add a `StyleSheet` in your `App.js`.
 
 ```jsx
 const styles = StyleSheet.create({
@@ -327,9 +325,9 @@ const styles = StyleSheet.create({
 });
 ```
 
-Now if you head over to your emulator, your expo app should look something like this.
+Now if you head over to your emulator, your Expo app should look something like this.
 
-![Click counter UI in expo app](/assets/examples/expo-app/phone1.png)
+![Click counter UI in Expo app](/assets/examples/expo-app/click-counter-ui-in-expo-app.png){: width="432" }
 
 Of course if you click on the button multiple times, the count doesn't change. That's because we are not updating the count in our API. We'll do that next.
 
@@ -359,7 +357,7 @@ Here we are updating the `clicks` row's `tally` column with the increased count.
 
 And if you head over to your emulator and click the button again, you should see the count increase!
 
-![Click counter updating in expo app](/assets/examples/expo-app/phone2.png)
+![Click counter updating in Expo app](/assets/examples/expo-app/click-counter-updating-in-expo-app.png){: width="432" }
 
 ## Deploying to prod
 
@@ -369,7 +367,7 @@ And if you head over to your emulator and click the button again, you should see
 $ npx sst deploy --stage prod
 ```
 
-This allows us to separate our environments, so when we are working in `dev`, it doesn't break the app for our users.
+This allows us to separate our environments, so when we are working locally it doesn't break the app for our users.
 
 Once deployed, you should see something like this.
 
@@ -383,12 +381,14 @@ Stack prod-expo-app-my-stack
     ApiEndpoint: https://k40qchmtvf.execute-api.ap-south-1.amazonaws.com
 ```
 
-Add the above endpoint to the `.env` file in `frontend/.env` as a production API endpoint
+{%change%} Add the above endpoint to the `.env` file in `frontend/.env` as the production API endpoint
 
 ```
 DEV_API_URL=https://hfv2gyuwdh.execute-api.us-east-1.amazonaws.com
 PROD_API_URL=https://k40qchmtvf.execute-api.us-east-1.amazonaws.com
 ```
+
+Now we are ready to ship our app!
 
 ## Cleaning up
 
@@ -401,4 +401,4 @@ $ npx sst remove --stage prod
 
 ## Conclusion
 
-And that's it! We've got a completely serverless click counter in expo. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+And that's it! We've got a completely serverless click counter Expo app. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!

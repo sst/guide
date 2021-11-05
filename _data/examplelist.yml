@@ -22,6 +22,12 @@ webapp:
     - page: How to create a Vue.js app with serverless
       url: /examples/how-to-create-a-vuejs-app-with-serverless.html
 
+mobileapp:
+  title: Mobile Apps 
+  chapters:
+    - page: How to create an Expo app with serverless
+      url: /examples/how-to-create-an-expo-app-with-serverless.html
+
 graphql:
   title: GraphQL
   chapters:

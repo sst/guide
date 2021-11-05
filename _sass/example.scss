@@ -74,9 +74,13 @@ article.post.example section.examples-list {
       font-size: 22px;
       color: lighten($brand-color, 25%);
       color: white;
+
+      &.fa-mobile {
+        font-size: 34px;
+      }
     }
     img.graphql {
-      $icon-size: 30px;
+      $icon-size: 28px;
       position: absolute;
       top: 50%;
       left: 50%;
