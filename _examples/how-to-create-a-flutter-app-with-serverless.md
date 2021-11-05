@@ -1,20 +1,21 @@
 ---
 layout: example
-title: How to create an Expo app with serverless
-date: 2021-10-23 00:00:00
+title: How to create an Flutter app with serverless
+date: 2021-10-25 00:00:00
 lang: en
-description: In this example we will look at how to use Expo with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST).
-repo: expo-app
-ref: how-to-create-an-expo-app-with-serverless
-comments_id: how-to-create-an-expo-app-with-serverless/2515
+description: In this example we will look at how to use Flutter with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST).
+repo: flutter-app
+ref: how-to-create-a-flutter-app-with-serverless
+comments_id: how-to-create-an-flutter-app-with-serverless/2516
 ---
 
-In this example we will look at how to use [Expo](https://expo.dev) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}).
+In this example we will look at how to use [Flutter](https://flutter.dev) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}).
 
 ## Requirements
 
 - Node.js >= 10.15.1
 - We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- Flutter installed
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
 ## Create an SST app
@@ -22,15 +23,15 @@ In this example we will look at how to use [Expo](https://expo.dev) with a [serv
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest expo-app
-$ cd expo-app
+$ npx create-serverless-stack@latest flutter-app
+$ cd flutter-app
 ```
 
 By default our app will be deployed to the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ```json
 {
-  "name": "expo-app",
+  "name": "flutter-app",
   "region": "us-east-1",
   "main": "stacks/index.js"
 }
@@ -48,13 +49,13 @@ An SST app is made up of a couple of parts.
 
    The code that's run when your API is invoked is placed in the `src/` directory of your project.
 
-3. `frontend/` — Expo App
+3. `frontend/` — Flutter App
 
-   The code for our frontend Expo app.
+   The code for our frontend Flutter app.
 
 ## Create our infrastructure
 
-Our app is made up of a simple API and a Expo app. The API will be talking to a database to store the number of clicks. We'll start by creating the database.
+Our app is made up of a simple API and a Flutter app. The API will be talking to a database to store the number of clicks. We'll start by creating the database.
 
 ### Adding the table
 
@@ -181,12 +182,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-expo-app-my-stack: deploying...
+dev-flutter-app-my-stack: deploying...
 
- ✅  dev-expo-app-my-stack
+ ✅  dev-flutter-app-my-stack
 
 
-Stack dev-expo-app-my-stack
+Stack dev-flutter-app-my-stack
   Status: deployed
   Outputs:
     ApiEndpoint: https://sez1p3dsia.execute-api.ap-south-1.amazonaws.com
@@ -202,134 +203,153 @@ $ curl -X POST https://sez1p3dsia.execute-api.ap-south-1.amazonaws.com
 
 You should see a `0` printed out.
 
-## Setting up our Expo app
+## Setting up our Flutter app
 
-We are now ready to use the API we just created. Let's use [Expo CLI](https://docs.expo.dev/workflow/expo-cli/) to setup our Expo app.
+We are now ready to use the API we just created. Let's use [Flutter CLI](https://flutter.dev/docs/get-started/install) to setup our Flutter app.
 
-{%change%} Run the following in the project root and create a **blank** project.
+If you don't have the Flutter CLI installed on your machine, [head over here to install it](https://flutter.dev/docs/get-started/install).
+
+{%change%} Run the following in the project root.
 
 ```bash
-$ npm install -g expo-cli
-$ expo init frontend
+$ flutter create frontend
 $ cd frontend
 ```
 
-![Blank Expo app](/assets/examples/expo-app/expo-setup.png)
+This sets up our Flutter app in the `frontend/` directory.
 
-This sets up our Expo app in the `frontend/` directory.
+We also need to load the environment variables from our SST app. To do this, we'll be using the [`flutter_dotenv`](https://pub.dev/packages/flutter_dotenv) package.
 
-We also need to load the environment variables from our SST app. To do this, we'll be using the [`babel-plugin-inline-dotenv`](https://github.com/brysgo/babel-plugin-inline-dotenv) package.
-
-{%change%} Install the `babel-plugin-inline-dotenv` package by running the following in the `frontend/` directory.
+{%change%} Install the `flutter_dotenv` package by running the following in the `frontend/` directory.
 
 ```bash
-$ npm install babel-plugin-inline-dotenv
+$ flutter pub add flutter_dotenv
 ```
 
-We need to update our script to use this package in `babel.config.js`.
-
-{%change%} Update your `babel.config.js` like below.
-
-```js
-module.exports = function (api) {
-  api.cache(true);
-  return {
-    presets: ["babel-preset-expo"],
-    plugins: ["inline-dotenv"],
-  };
-};
-```
-
-{%change%} Create a `.env` file inside `frontend/` and create two variables to hold dev and prod API endpoints and replace `DEV_API_URL` with the deployed URL from the steps above.
+{%change%} Create a `.env` file inside `frontend/` and create two variables to hold the development and production API endpoints. Replace the `DEV_API_URL` with the one from the steps above.
 
 ```
 DEV_API_URL=https://sez1p3dsia.execute-api.us-east-1.amazonaws.com
-PROD_API_URL=<TO_BE_ADDED_LATER>
+PROD_API_URL=OUTPUT_FROM_SST_DEPLOY
 ```
 
 We'll add the `PROD_API_URL` later in this example.
 
-Let's start our Expo development environment.
+{%change%} Add the `.env` file to your assets bundle in `pubspec.yaml` by uncommenting the `assets` section under `flutter`.
 
-{%change%} In the `frontend/` directory run the following for the iOS emulator.
+```yaml
+flutter:
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
 
-```bash
-$ expo start --ios
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - .env
 ```
 
-{%change%} Or run this for the Android emulator.
+Ensure that the path corresponds to the location of the `.env` file!
+
+We also need the `http` package to call the endpoint.
+
+{%change%} In the `frontend/` directory run.
 
 ```bash
-$ expo start --android
+$ flutter pub add http
 ```
 
-This will open up an emulator and load your app.
+Let's start our Flutter development environment.
+
+{%change%} In the `frontend/` directory run.
+
+```bash
+$ flutter run
+```
+
+This will open up an emulator and load the app.
 
 ### Add the click button
 
 We are now ready to add the UI for our app and connect it to our serverless API.
 
-{%change%} Replace `frontend/App.js` with.
+{%change%} Replace `frontend/lib/main.dart` with.
 
-```jsx
-/* eslint-disable no-undef */
-import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter/foundation.dart';
 
-export default function App() {
-  const [count, setCount] = useState(0);
+Future main() async {
+  await dotenv.load(fileName: ".env");
+  runApp(MyApp());
+}
 
-  const API_URL = __DEV__ ? process.env.DEV_API_URL : process.env.PROD_API_URL;
+class MyApp extends StatefulWidget {
+  MyApp({Key? key}) : super(key: key);
 
-  function onClick() {
-    fetch(API_URL, {
-      method: "POST",
-    })
-      .then((response) => response.text())
-      .then(setCount);
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  update() async {
+    Uri uri = kReleaseMode ? Uri.parse(dotenv.env['PROD_API_URL']!) : Uri.parse(dotenv.env['DEV_API_URL']!);
+    var result = await http.post(uri);
+    setState(() {
+      counter = int.parse(result.body);
+    });
   }
 
-  return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <Text>You clicked me {count} times.</Text>
-      <TouchableOpacity style={styles.btn} onPress={onClick}>
-        <Text>Click me!</Text>
-      </TouchableOpacity>
-    </View>
-  );
+  int counter = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Counter App",
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Counter App"),
+        ),
+        body: Container(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("This button is pressed $counter times"),
+                MaterialButton(
+                  onPressed: () {
+                    setState(() {
+                      update();
+                    });
+                  },
+                  child: Text(
+                    "Click Me",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  color: Colors.blue.shade500,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 ```
 
-Here we are adding a simple button that when clicked, makes a request to our API. We are getting the API endpoint from the environment variable, `process.env.API_URL`.
+Here we are adding a simple button that when clicked, makes a request to our API. We are getting the API endpoint from the environment variable depending on the build mode.
 
-The response from our API is then stored in our app's state. We use it to display the count of the number of times the button has been clicked.
+The response from our API is then stored in our app's state. We use that to display the count of the number of times the button has been clicked.
 
-Let's add some styles.
+Now if you head over to your emulator, your Flutter app should look something like this.
 
-{%change%} Add a `StyleSheet` in your `App.js`.
-
-```jsx
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  btn: {
-    backgroundColor: "lightblue",
-    padding: 10,
-    margin: 10,
-    borderRadius: 5,
-  },
-});
-```
-
-Now if you head over to your emulator, your Expo app should look something like this.
-
-![Click counter UI in Expo app](/assets/examples/expo-app/click-counter-ui-in-expo-app.png){: width="432" }
+![Click counter UI in Flutter app](/assets/examples/flutter-app/click-counter-ui-in-flutter-app.png){: width="432" }
 
 Of course if you click on the button multiple times, the count doesn't change. That's because we are not updating the count in our API. We'll do that next.
 
@@ -359,7 +379,7 @@ Here we are updating the `clicks` row's `tally` column with the increased count.
 
 And if you head over to your emulator and click the button again, you should see the count increase!
 
-![Click counter updating in Expo app](/assets/examples/expo-app/click-counter-updating-in-expo-app.png){: width="432" }
+![Click counter updating in Flutter app](/assets/examples/flutter-app/click-counter-updating-in-flutter-app.png){: width="432" }
 
 ## Deploying to prod
 
@@ -374,19 +394,19 @@ This allows us to separate our environments, so when we are working locally it d
 Once deployed, you should see something like this.
 
 ```bash
- ✅  prod-expo-app-my-stack
+ ✅  prod-flutter-app-my-stack
 
 
-Stack prod-expo-app-my-stack
+Stack prod-flutter-app-my-stack
   Status: deployed
   Outputs:
     ApiEndpoint: https://k40qchmtvf.execute-api.ap-south-1.amazonaws.com
 ```
 
-{%change%} Add the above endpoint to the `.env` file in `frontend/.env` as the production API endpoint
+{%change%} Add the above endpoint to the `.env` file in `frontend/.env` as a production API endpoint.
 
 ```
-DEV_API_URL=https://hfv2gyuwdh.execute-api.us-east-1.amazonaws.com
+DEV_API_URL=https://sez1p3dsia.execute-api.us-east-1.amazonaws.com
 PROD_API_URL=https://k40qchmtvf.execute-api.us-east-1.amazonaws.com
 ```
 
@@ -403,4 +423,4 @@ $ npx sst remove --stage prod
 
 ## Conclusion
 
-And that's it! We've got a completely serverless click counter Expo app. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+And that's it! We've got a completely serverless click counter app in Flutter. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
