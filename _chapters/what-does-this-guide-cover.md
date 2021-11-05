@@ -18,7 +18,7 @@ The demo app is a single page application powered by a serverless API written co
 
 [![Completed app desktop screenshot](/assets/completed-app-desktop.png)]({{ site.demo_url }})
 
-<a href="{{ site.demo_url }}"><img alt="Completed app mobile screenshot" src="/assets/completed-app-mobile.png" width="432" /></a>
+![Completed app mobile screenshot](/assets/completed-app-mobile.png){: width="432" }
 
 It is a relatively simple application but we are going to address the following requirements.
 
