@@ -1,6 +1,6 @@
 ---
 layout: example
-title: How to create an Flutter app with serverless
+title: How to create a Flutter app with serverless
 date: 2021-10-25 00:00:00
 lang: en
 description: In this example we will look at how to use Flutter with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST).
