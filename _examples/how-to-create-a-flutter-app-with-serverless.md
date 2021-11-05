@@ -1,15 +1,15 @@
 ---
 layout: example
-title: How to create an flutter app with serverless
+title: How to create an Flutter app with serverless
 date: 2021-10-25 00:00:00
 lang: en
-description: In this example we will look at how to use flutter with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST).
+description: In this example we will look at how to use Flutter with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST).
 repo: flutter-app
 ref: how-to-create-a-flutter-app-with-serverless
 comments_id: how-to-create-a-flutter-app-with-serverless/xxxx
 ---
 
-In this example we will look at how to use [flutter](https://flutter.dev) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}).
+In this example we will look at how to use [Flutter](https://flutter.dev) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}).
 
 ## Requirements
 
@@ -49,13 +49,13 @@ An SST app is made up of a couple of parts.
 
    The code that's run when your API is invoked is placed in the `src/` directory of your project.
 
-3. `frontend/` — flutter App
+3. `frontend/` — Flutter App
 
-   The code for our frontend flutter app.
+   The code for our frontend Flutter app.
 
 ## Create our infrastructure
 
-Our app is made up of a simple API and a flutter app. The API will be talking to a database to store the number of clicks. We'll start by creating the database.
+Our app is made up of a simple API and a Flutter app. The API will be talking to a database to store the number of clicks. We'll start by creating the database.
 
 ### Adding the table
 
@@ -203,11 +203,11 @@ $ curl -X POST https://sez1p3dsia.execute-api.ap-south-1.amazonaws.com
 
 You should see a `0` printed out.
 
-## Setting up our flutter app
+## Setting up our Flutter app
 
-We are now ready to use the API we just created. Let's use [flutter-cli](https://flutter.dev/docs/get-started/install) to setup our flutter app.
+We are now ready to use the API we just created. Let's use [Flutter CLI](https://flutter.dev/docs/get-started/install) to setup our Flutter app.
 
-If you don't have the flutter cli installed on your machine, check [here](https://flutter.dev/docs/get-started/install)
+If you don't have the Flutter CLI installed on your machine, check [here](https://flutter.dev/docs/get-started/install)
 
 {%change%} Run the following in the project root.
 
@@ -216,7 +216,7 @@ $ flutter create frontend
 $ cd frontend
 ```
 
-This sets up our flutter app in the `frontend/` directory.
+This sets up our Flutter app in the `frontend/` directory.
 
 We also need to load the environment variables from our SST app. To do this, we'll be using the [`flutter_dotenv`](https://pub.dev/packages/flutter_dotenv) package.
 
@@ -230,7 +230,7 @@ Create a `.env` file inside `frontend/` and create two variables to hold the dev
 
 ```
 DEV_API_URL=https://sez1p3dsia.execute-api.us-east-1.amazonaws.com
-PROD_API_URL=<TO_BE_ADDED_LATER>
+PROD_API_URL=OUTPUT_FROM_SST_DEPLOY
 ```
 
 Add the `.env` file to your assets bundle in `pubspec.yaml` by uncommenting the `assets` section under `flutter`. Ensure that the path corresponds to the location of the .env file!
@@ -255,7 +255,7 @@ Also we need the `http` package to call the endpoint.
 $ flutter pub add http
 ```
 
-Let's start our flutter development environment.
+Let's start our Flutter development environment.
 
 {%change%} In the `frontend/` directory run.
 
@@ -303,13 +303,13 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: "Counter App",
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Flutter serverless-stack demo"),
+          title: Text("Counter App"),
         ),
         body: Container(
           child: Center(
@@ -343,9 +343,9 @@ Here we are adding a simple button that when clicked, makes a request to our API
 
 The response from our API is then stored in our app's state. We use that to display the count of the number of times the button has been clicked.
 
-Now if you head over to your emulator, your flutter app should look something like this.
+Now if you head over to your emulator, your Flutter app should look something like this.
 
-![Click counter UI in flutter app](/assets/examples/flutter-app/phone1.png)
+![Click counter UI in Flutter app](/assets/examples/flutter-app/phone1.png)
 
 Of course if you click on the button multiple times, the count doesn't change. That's because we are not updating the count in our API. We'll do that next.
 
@@ -375,7 +375,7 @@ Here we are updating the `clicks` row's `tally` column with the increased count.
 
 And if you head over to your emulator and click the button again, you should see the count increase!
 
-![Click counter updating in flutter app](/assets/examples/flutter-app/phone2.png)
+![Click counter updating in Flutter app](/assets/examples/flutter-app/phone2.png)
 
 ## Deploying to prod
 
@@ -417,4 +417,4 @@ $ npx sst remove --stage prod
 
 ## Conclusion
 
-And that's it! We've got a completely serverless click counter in flutter. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+And that's it! We've got a completely serverless click counter in Flutter. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
