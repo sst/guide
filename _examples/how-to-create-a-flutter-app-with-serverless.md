@@ -27,13 +27,13 @@ $ npx create-serverless-stack@latest flutter-app
 $ cd flutter-app
 ```
 
-By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
+By default our app will be deployed to the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ```json
 {
   "name": "flutter-app",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -207,7 +207,7 @@ You should see a `0` printed out.
 
 We are now ready to use the API we just created. Let's use [Flutter CLI](https://flutter.dev/docs/get-started/install) to setup our Flutter app.
 
-If you don't have the Flutter CLI installed on your machine, check [here](https://flutter.dev/docs/get-started/install)
+If you don't have the Flutter CLI installed on your machine, [head over here to install it](https://flutter.dev/docs/get-started/install).
 
 {%change%} Run the following in the project root.
 
@@ -226,14 +226,16 @@ We also need to load the environment variables from our SST app. To do this, we'
 $ flutter pub add flutter_dotenv
 ```
 
-Create a `.env` file inside `frontend/` and create two variables to hold the development & production API endpoints
+{%change%} Create a `.env` file inside `frontend/` and create two variables to hold the development and production API endpoints. Replace the `DEV_API_URL` with the one from the steps above.
 
 ```
 DEV_API_URL=https://sez1p3dsia.execute-api.us-east-1.amazonaws.com
 PROD_API_URL=OUTPUT_FROM_SST_DEPLOY
 ```
 
-Add the `.env` file to your assets bundle in `pubspec.yaml` by uncommenting the `assets` section under `flutter`. Ensure that the path corresponds to the location of the .env file!
+We'll add the `PROD_API_URL` later in this example.
+
+{%change%} Add the `.env` file to your assets bundle in `pubspec.yaml` by uncommenting the `assets` section under `flutter`.
 
 ```yaml
 flutter:
@@ -247,7 +249,9 @@ flutter:
     - .env
 ```
 
-Also we need the `http` package to call the endpoint.
+Ensure that the path corresponds to the location of the `.env` file!
+
+We also need the `http` package to call the endpoint.
 
 {%change%} In the `frontend/` directory run.
 
@@ -263,7 +267,7 @@ Let's start our Flutter development environment.
 $ flutter run
 ```
 
-This will open up an emulator and the app will be loaded
+This will open up an emulator and load the app.
 
 ### Add the click button
 
@@ -339,13 +343,13 @@ class _MyAppState extends State<MyApp> {
 }
 ```
 
-Here we are adding a simple button that when clicked, makes a request to our API. We are getting the API endpoint from the environment variable depending on the build mode
+Here we are adding a simple button that when clicked, makes a request to our API. We are getting the API endpoint from the environment variable depending on the build mode.
 
 The response from our API is then stored in our app's state. We use that to display the count of the number of times the button has been clicked.
 
 Now if you head over to your emulator, your Flutter app should look something like this.
 
-![Click counter UI in Flutter app](/assets/examples/flutter-app/phone1.png)
+![Click counter UI in Flutter app](/assets/examples/flutter-app/click-counter-ui-in-flutter-app.png){: width="432" }
 
 Of course if you click on the button multiple times, the count doesn't change. That's because we are not updating the count in our API. We'll do that next.
 
@@ -375,7 +379,7 @@ Here we are updating the `clicks` row's `tally` column with the increased count.
 
 And if you head over to your emulator and click the button again, you should see the count increase!
 
-![Click counter updating in Flutter app](/assets/examples/flutter-app/phone2.png)
+![Click counter updating in Flutter app](/assets/examples/flutter-app/click-counter-updating-in-flutter-app.png){: width="432" }
 
 ## Deploying to prod
 
@@ -385,7 +389,7 @@ And if you head over to your emulator and click the button again, you should see
 $ npx sst deploy --stage prod
 ```
 
-This allows us to separate our environments, so when we are working in `dev`, it doesn't break the app for our users.
+This allows us to separate our environments, so when we are working locally it doesn't break the app for our users.
 
 Once deployed, you should see something like this.
 
@@ -399,12 +403,14 @@ Stack prod-flutter-app-my-stack
     ApiEndpoint: https://k40qchmtvf.execute-api.ap-south-1.amazonaws.com
 ```
 
-Add the above endpoint to the `.env` file in `frontend/.env` as a production API endpoint
+{%change%} Add the above endpoint to the `.env` file in `frontend/.env` as a production API endpoint.
 
 ```
 DEV_API_URL=https://sez1p3dsia.execute-api.us-east-1.amazonaws.com
 PROD_API_URL=https://k40qchmtvf.execute-api.us-east-1.amazonaws.com
 ```
+
+Now we are ready to ship our app!
 
 ## Cleaning up
 
@@ -417,4 +423,4 @@ $ npx sst remove --stage prod
 
 ## Conclusion
 
-And that's it! We've got a completely serverless click counter in Flutter. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+And that's it! We've got a completely serverless click counter app in Flutter. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!

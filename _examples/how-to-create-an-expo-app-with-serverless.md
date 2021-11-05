@@ -48,7 +48,7 @@ An SST app is made up of a couple of parts.
 
    The code that's run when your API is invoked is placed in the `src/` directory of your project.
 
-3. `frontend/` — Expo app
+3. `frontend/` — Expo App
 
    The code for our frontend Expo app.
 
@@ -240,12 +240,14 @@ module.exports = function (api) {
 };
 ```
 
-Create a `.env` file inside `frontend/` and create two variables to hold dev and prod API endpoints and replace `DEV_API_URL` with the deployed URL from the steps above.
+{%change%} Create a `.env` file inside `frontend/` and create two variables to hold dev and prod API endpoints and replace `DEV_API_URL` with the deployed URL from the steps above.
 
 ```
 DEV_API_URL=https://sez1p3dsia.execute-api.us-east-1.amazonaws.com
 PROD_API_URL=<TO_BE_ADDED_LATER>
 ```
+
+We'll add the `PROD_API_URL` later in this example.
 
 Let's start our Expo development environment.
 

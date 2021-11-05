@@ -27,6 +27,8 @@ mobileapp:
   chapters:
     - page: How to create an Expo app with serverless
       url: /examples/how-to-create-an-expo-app-with-serverless.html
+    - page: How to create a Flutter app with serverless
+      url: /examples/how-to-create-a-flutter-app-with-serverless.html
 
 graphql:
   title: GraphQL
