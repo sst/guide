@@ -6,7 +6,7 @@ lang: en
 description: In this example we will look at how to use Flutter with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST).
 repo: flutter-app
 ref: how-to-create-a-flutter-app-with-serverless
-comments_id: how-to-create-a-flutter-app-with-serverless/xxxx
+comments_id: how-to-create-an-flutter-app-with-serverless/2516
 ---
 
 In this example we will look at how to use [Flutter](https://flutter.dev) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}).
