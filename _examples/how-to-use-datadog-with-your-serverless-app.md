@@ -4,7 +4,7 @@ title: How to use Datadog with your serverless app
 date: 2021-11-01 00:00:00
 lang: en
 description: In this example we will look at how to use Datadog with a serverless API to create and monitor a simple click counter app. We'll be using the Serverless Stack Framework (SST).
-repo: datadog-app
+repo: datadog
 ref: how-to-use-datadog-with-your-serverless-app
 comments_id: how-to-use-datadog-with-your-serverless-app/xxxx
 ---
@@ -27,8 +27,8 @@ Once your app has been deployed to production, it's useful to be able to monitor
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest datadog-app
-$ cd datadog-app
+$ npx create-serverless-stack@latest datadog
+$ cd datadog
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
@@ -165,12 +165,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-Datadog-app-my-stack: deploying...
+dev-datadog-my-stack: deploying...
 
- ✅  dev-datadog-app-my-stack
+ ✅  dev-datadog-my-stack
 
 
-Stack dev-Datadog-app-my-stack
+Stack dev-datadog-my-stack
   Status: deployed
   Outputs:
     ApiEndpoint: https://753gre9wkh.execute-api.us-east-1.amazonaws.com
@@ -199,10 +199,10 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Once deployed, you should see something like this.
 
 ```bash
- ✅  prod-datadog-app-my-stack
+ ✅  prod-datadog-my-stack
 
 
-Stack prod-datadog-app-my-stack
+Stack prod-datadog-my-stack
   Status: deployed
   Outputs:
     ApiEndpoint: https://k40qchmtvf.execute-api.ap-south-1.amazonaws.com
