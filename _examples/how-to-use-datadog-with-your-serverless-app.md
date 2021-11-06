@@ -35,9 +35,9 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 
 ```json
 {
-  "name": "datadog-app",
-  "stage": "dev",
-  "region": "us-east-1"
+  "name": "datadog",
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -87,6 +87,63 @@ export default class MyStack extends sst.Stack {
 
 We are using the SST [`Api`](https://docs.serverless-stack.com/constructs/Api) construct to create our API. It simply has one endpoint (the root). When we make a `GET` request to this endpoint the Lambda function called `handler` in `src/lambda.js` will get invoked.
 
+## Setting up our app with Datadog
+
+Now let's setup [Datadog](https://www.datadoghq.com/) to monitor our API.
+
+{%change%} Run the following in the project root.
+
+```bash
+$ npm install --save-dev datadog-cdk-constructs
+```
+
+Go the [API keys](https://app.datadoghq.com/organization-settings/api-keys) page of your datadog dashboard and copy the API key
+
+![datadog_api_key](/assets/examples/datadog/api-key.png)
+
+Create a `.env.local` file with the API key. Note that this file should not be commited to git. If you are deploying the app through a CI service, configure the `DATADOG_API_KEY` as an environment variable in the CI provider. If you are deploying through Seed, you can configure this inside stage settings - https://seed.run/docs/storing-secrets.html.
+
+```
+DATADOG_API_KEY=<API_KEY>
+```
+
+Next, you'll need to import it into a stack and pass in the functions you want monitored.
+
+{%change%} Replace the code in `stacks/MyStack.js` with below
+
+```jsx
+import { Datadog } from "datadog-cdk-constructs";
+import * as sst from "@serverless-stack/resources";
+
+export default class MyStack extends sst.Stack {
+  constructor(scope, id, props) {
+    super(scope, id, props);
+
+    // Create a HTTP API
+    const api = new sst.Api(this, "Api", {
+      routes: {
+        "GET /": "src/lambda.handler",
+      },
+    });
+
+    // Configure Datadog
+    const datadog = new Datadog(this, "Datadog", {
+      nodeLayerVersion: 65,
+      extensionLayerVersion: 13,
+      apiKey: process.env.DATADOG_API_KEY,
+    });
+    datadog.addLambdaFunctions(this.getAllFunctions());
+
+    // Show the endpoint in the output
+    this.addOutputs({
+      ApiEndpoint: api.url,
+    });
+  }
+}
+```
+
+Note that `getAllFunctions()` gives you an array of all the Lambda function created in this stack. Always call it at the end of your stack definition.
+
 And let's test what we have so far.
 
 ## Starting your dev environment
@@ -123,70 +180,11 @@ The `ApiEndpoint` is the API we just created.
 
 Let's test our endpoint. Open the endpoint in your browser.
 
-You'll be shown a hello world message
+You'll be shown a hello world message.
 
-## Setting up our app with Datadog
+Now head over to your Datadog account to start exploring key performance metrics (invocations, errors, and duration) from your function. The [Serverless view](https://app.datadoghq.com/functions) aggregates data from all of the serverless functions running in your environment, enabling you to monitor their performance in one place. You can search and filter by name, AWS account, region, runtime, or any tag. Or click on a specific function to inspect its key performance metrics, distributed traces, and logs.
 
-We are now ready to use the API we just created. Let's use [Datadog](https://www.datadoghq.com/) to monitor our API.
-
-{%change%} Run the following in the project root.
-
-```bash
-$ npm install --save-dev datadog-cdk-constructs
-```
-
-Go the [API keys](https://app.datadoghq.com/organization-settings/api-keys) page of your datadog dashboard and copy the API key
-
-![datadog_api_key_page](/assets/examples/datadog/datadog1.jpeg)
-
-add the API key in the `.env` file
-
-```
-DATADOG_API_KEY=<API_KEY_GOES_HERE>
-```
-
-Next, you'll need to import it into a stack and pass in the functions you want monitored.
-
-{%change%} Replace the code in `stacks/MyStack.js` with below
-
-```jsx
-import * as sst from "@serverless-stack/resources";
-import { Datadog } from "datadog-cdk-constructs";
-
-const datadog = new Datadog(this, "Datadog", {
-  apiKey: process.env.DATADOG_API_KEY,
-});
-
-export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
-
-    // Create a HTTP API
-    const api = new sst.Api(this, "Api", {
-      routes: {
-        "GET /": "src/lambda.handler",
-      },
-    });
-
-    datadog.addLambdaFunctions([api.getFunction("GET /")]);
-
-    // Show the endpoint in the output
-    this.addOutputs({
-      ApiEndpoint: api.url,
-    });
-  }
-}
-```
-
-To monitor all the functions in a stack, you can use the Stack construct's getAllFunctions method and do the following at the bottom of your stack definition.
-
-```js
-datadog.addLambdaFunctions(this.getAllFunctions());
-```
-
-Now make a request to the API endpoint and head over to your Datadog account to start exploring key performance metrics (invocations, errors, and duration) from your function. The [Serverless view](https://app.datadoghq.com/functions) aggregates data from all of the serverless functions running in your environment, enabling you to monitor their performance in one place. You can search and filter by name, AWS account, region, runtime, or any tag—or click on a specific function to inspect its key performance metrics, distributed traces, and logs.
-
-![datadog_view](/assets/examples/datadog/datadog2.jpeg)
+![datadog_functions dashboard](/assets/examples/datadog/functions-dashboard.jpeg)
 
 ## Deploying to prod
 
@@ -221,4 +219,4 @@ $ npx sst remove --stage prod
 
 ## Conclusion
 
-And that's it! We've got a completely serverless click counter in Datadog. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+And that's it! We've got a serverless API monitored by Datadog. We also have a local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
