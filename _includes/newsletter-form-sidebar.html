@@ -4,28 +4,18 @@
     {% if include.type == "guide" %}
       <p class="eyebrow">Part of the</p>
       <h6>Serverless Stack Guide</h6>
-      <p>Learn to build full-stack apps with serverless and React</p>
+      <p>Learn to build full-stack apps with serverless and React.</p>
     {% else %}
       <p class="eyebrow">Get the</p>
       <h6>Serverless Stack Guide</h6>
-      <p>The most popular resource for building serverless apps</p>
+      <p>The most popular resource for building serverless apps.</p>
     {% endif %}
   </div>
   <div class="body">
-    {% if include.type == "guide" %}
-      <a class="guide" href="/#guide">
-        View the full guide&nbsp;
-        <i class="fa fa-angle-right" aria-hidden="true"></i>
-      </a>
-    {% endif %}
-    <hr>
-    <div class="newsletter">
-      <p>Download the FREE 1000 page ebook!</p>
-      <p>We'll also send you updates when new versions are published.</p>
-      <div class="form">
-        {% include email-octopus-form.html button_copy="Download" source="sidebar" %}
-      </div>
-    </div>
+    <a class="guide" href="/#guide">
+      View the guide&nbsp;
+      <i class="fa fa-angle-right" aria-hidden="true"></i>
+    </a>
   </div>
 </div>
 
