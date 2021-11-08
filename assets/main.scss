@@ -36,6 +36,7 @@ $page-content-width:          900px;
 
 $on-palm:                     600px;
 $on-laptop:                   800px;
+$on-laptop: 800px;
 
 // Minima also includes a mixin for defining media queries.
 // Use media queries like this:
@@ -228,10 +229,15 @@ div.support-footer {
       display: block;
     }
 
+    @include media-query($on-monitor) {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
     & > .copy {
       margin-right: $spacing-unit * 2;
 
-      @include media-query($on-palm) {
+      @include media-query($on-monitor) {
         margin-right: 0;
         margin-bottom: $spacing-unit / 2;
         text-align: center;
