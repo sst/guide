@@ -141,6 +141,23 @@
     }
   }
 
+  & > .site-announcement {
+    padding: 9px $spacing-unit / 2;
+    font-size: 15px;
+    text-align: center;
+    color: $secondary-text-color;
+    background-color: darken($background-color, 2%);
+    border-bottom: 1px solid darken($secondary-background-color, 15%);
+
+    a {
+      font-weight: 600;
+    }
+
+    i.fa {
+      margin-left: 3px;
+    }
+  }
+
   & > .wrapper-header {
     margin: 0 auto;
     padding: $spacing-unit / 2 + 5px $spacing-unit;
