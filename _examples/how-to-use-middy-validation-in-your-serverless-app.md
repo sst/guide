@@ -140,7 +140,7 @@ We are now ready to use the API we just created. Let's use [Middy validator](htt
 {%change%} Run the following in the project root.
 
 ```bash
-$ npm i --save @middy/core @middy/http-json-body-parser @middy/http-error-handler @middy/validator
+$ npm i --save @middy/core @middy/http-json-body-parser @middy/http-error-handler @middy/validator ajv
 ```
 
 Let's understand what the above packages are,
@@ -151,6 +151,7 @@ Let's understand what the above packages are,
 | `@middy/http-json-body-parser` | This middleware automatically parses HTTP requests with a JSON body and converts the body into an object                                                                                                                        |
 | `@middy/http-error-handler`    | Automatically handles uncaught errors that contain the properties `statusCode` (number) and `message` (string) and creates a proper HTTP response for them (using the message and the status code provided by the error object) |
 | `@middy/validator`             | This middleware automatically validates incoming events and outgoing responses against custom schemas defined with the JSON schema syntax.                                                                                      |
+| `ajv`                          | AJV stands for Another JSON Schema Validator and represents the fastest validator for JSON schemas around                                                                                                                       |
 
 ### Adding request validation
 
@@ -161,6 +162,8 @@ import middy from "@middy/core";
 import httpErrorHandler from "@middy/http-error-handler";
 import validator from "@middy/validator";
 import jsonBodyParser from "@middy/http-json-body-parser";
+const Ajv = require("ajv");
+const ajv = new Ajv();
 
 const baseHandler = (event) => {
   const { fname, lname } = event.body;
@@ -187,7 +190,7 @@ const inputSchema = {
 
 const handler = middy(baseHandler)
   .use(jsonBodyParser())
-  .use(validator({ inputSchema: inputSchema }))
+  .use(validator({ inputSchema: ajv.compile(inputSchema) }))
   .use(httpErrorHandler());
 
 export { handler };
@@ -210,6 +213,8 @@ import middy from "@middy/core";
 import httpErrorHandler from "@middy/http-error-handler";
 import validator from "@middy/validator";
 import jsonBodyParser from "@middy/http-json-body-parser";
+import Ajv from "ajv";
+const ajv = new Ajv();
 
 const baseHandler = (event) => {
   const { fname, lname } = event.body;
@@ -252,7 +257,12 @@ const outputSchema = {
 
 const handler = middy(baseHandler)
   .use(jsonBodyParser())
-  .use(validator({ inputSchema: inputSchema, outputSchema: outputSchema }))
+  .use(
+    validator({
+      inputSchema: ajv.compile(inputSchema),
+      outputSchema: ajv.compile(outputSchema),
+    })
+  )
   .use(httpErrorHandler());
 
 export { handler };
