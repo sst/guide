@@ -48,7 +48,7 @@ An SST app is made up of a couple of parts.
 
    The code that's run when your API is invoked is placed in the `src/` directory of your project.
 
-3. `frontend/` — svelte App
+3. `frontend/` — Svelte App
 
    The code for our frontend SvelteJS app.
 
@@ -119,7 +119,7 @@ We are using the SST [`Api`](https://docs.serverless-stack.com/constructs/Api) c
 
 We also pass in the name of our DynamoDB table to our API as an environment variable called `tableName`. And we allow our API to access (read and write) the table instance we just created.
 
-### Setting up our svelte app
+### Setting up our Svelte app
 
 To deploy a SvelteJS app to AWS, we'll be using the SST [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-a-sveltejs-site) construct.
 
@@ -141,7 +141,7 @@ const site = new sst.StaticSite(this, "svelteJSSite", {
   buildCommand: "npm run build",
   errorPage: sst.StaticSiteErrorOptions.REDIRECT_TO_INDEX_PAGE,
   environment: {
-    // Pass in the API endpoint to our app (Must need to start with VITE_)
+    // Pass in the API endpoint to our app (Must start with VITE_)
     VITE_APP_API_URL: api.url,
   },
 });
@@ -155,12 +155,12 @@ this.addOutputs({
 
 The construct is pointing to where our SvelteJS app is located. We haven't created our app yet but for now we'll point to the `frontend` directory.
 
-We are also setting up a [build time svelte environment variable](https://cli.sveltejs.org/guide/mode-and-env.html) `VITE_APP_API_URL` with the endpoint of our API. The [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-a-sveltejs-site) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
+We are also setting up a [build time Svelte environment variable](https://cli.sveltejs.org/guide/mode-and-env.html) `VITE_APP_API_URL` with the endpoint of our API. The [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-a-sveltejs-site) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
 
 You can also optionally configure a custom domain.
 
 ```js
-// Deploy our svelte app
+// Deploy our Svelte app
 const site = new sst.StaticSite(this, "svelteJSSite", {
   path: "frontend",
   buildOutput: "dist",
@@ -260,7 +260,7 @@ $ curl -X POST https://sez1p3dsia.execute-api.ap-south-1.amazonaws.com
 
 You should see a `0` printed out.
 
-## Setting up our svelte app
+## Setting up our Svelte app
 
 We are now ready to use the API we just created. Let's use [Vite](https://vitejs.dev/) to setup our SvelteJS app.
 
@@ -280,7 +280,7 @@ $ cd frontend
 $ npm install
 ```
 
-This sets up our svelte app in the `frontend/` directory. Recall that, earlier in the guide we were pointing the `StaticSite` construct to this path.
+This sets up our Svelte app in the `frontend/` directory. Recall that, earlier in the guide we were pointing the `StaticSite` construct to this path.
 
 We also need to load the environment variables from our SST app. To do this, we'll be using the [`@serverless-stack/static-site-env`](https://www.npmjs.com/package/@serverless-stack/static-site-env) package.
 
@@ -304,7 +304,7 @@ We need to update our start script to use this package.
 "dev": "sst-env -- vite"
 ```
 
-Let's start our svelte development environment.
+Let's start our Svelte development environment.
 
 {%change%} In the `frontend/` directory run.
 
@@ -364,9 +364,9 @@ Let's add some styles.
 </style>
 ```
 
-Now if you head over to your browser, your svelte app should look something like this.
+Now if you head over to your browser, your Svelte app should look something like this.
 
-![Click counter UI in svelte app](/assets/examples/react-app/click-counter-ui-in-react-app.png)
+![Click counter UI in Svelte app](/assets/examples/react-app/click-counter-ui-in-react-app.png)
 
 Of course if you click on the button multiple times, the count doesn't change. That's because we are not updating the count in our API. We'll do that next.
 
@@ -421,9 +421,9 @@ Stack prod-svelte-app-my-stack
     SiteUrl: https://d8zfb4waxo6ct.cloudfront.net
 ```
 
-If you head over to the `SiteUrl` in your browser, you should see your new svelte app in action!
+If you head over to the `SiteUrl` in your browser, you should see your new Svelte app in action!
 
-![svelte app deployed to AWS](/assets/examples/react-app/react-app-deployed-to-aws.png)
+![Svelte app deployed to AWS](/assets/examples/react-app/react-app-deployed-to-aws.png)
 
 ## Cleaning up
 
