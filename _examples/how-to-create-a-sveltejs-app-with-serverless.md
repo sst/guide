@@ -336,8 +336,10 @@ We are now ready to add the UI for our app and connect it to our serverless API.
 </script>
 
 <div class="App">
-  <p>You clicked me {count} times.</p>
+ <div>
+   <p>You clicked me {count} times.</p>
   <button on:click={onClick}>Click Me!</button>
+ </div>
 </div>
 ```
 
@@ -353,6 +355,9 @@ Let's add some styles.
 <style>
   .App {
     text-align: center;
+    height: 100vh;
+    display: grid;
+    place-items: center;
   }
   p {
     margin-top: 0;
