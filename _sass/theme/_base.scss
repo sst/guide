@@ -13,6 +13,11 @@ dl, dd, ol, ul, figure {
 /**
  * Basic styling
  */
+html {
+  // Reset after removing announcement bar
+  // background-color: $background-color;
+  background-color: darken($background-color, 2%);
+}
 body {
   font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
   color: $text-color;
