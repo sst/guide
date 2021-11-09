@@ -196,9 +196,7 @@ const handler = middy(baseHandler)
 export { handler };
 ```
 
-Here we are creating an `inputSchema` where we are explicitly telling that `fname` and `lname` are required.
-
-Now restart the local server and send the POST request again in insomnia,
+Here we are creating an `inputSchema` and precompiling it to ajv, where we are explicitly telling that `fname` and `lname` are required. Now open insomnia and send the request
 
 ![insomnia_post_request_with_middy_validation](/assets/examples/middy-validation-example/request3.png)
 
