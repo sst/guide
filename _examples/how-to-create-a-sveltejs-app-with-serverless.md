@@ -96,6 +96,8 @@ Now let's add the API.
 // Create the HTTP API
 const api = new sst.Api(this, "Api", {
   defaultFunctionProps: {
+    // Allow the API to access the table
+    permissions: [table],
     // Pass in the table name to our API
     environment: {
       tableName: table.dynamodbTable.tableName,
@@ -105,9 +107,6 @@ const api = new sst.Api(this, "Api", {
     "POST /": "src/lambda.main",
   },
 });
-
-// Allow the API to access the table
-api.attachPermissions([table]);
 
 // Show the API endpoint in the output
 this.addOutputs({
@@ -135,13 +134,14 @@ this.addOutputs({
 {%change%} With:
 
 ```js
-const site = new sst.StaticSite(this, "svelteJSSite", {
+// Deploy our Svelte app
+const site = new sst.StaticSite(this, "SvelteJSSite", {
   path: "frontend",
   buildOutput: "dist",
   buildCommand: "npm run build",
   errorPage: sst.StaticSiteErrorOptions.REDIRECT_TO_INDEX_PAGE,
   environment: {
-    // Pass in the API endpoint to our app (Must start with VITE_)
+    // Pass in the API endpoint to our app
     VITE_APP_API_URL: api.url,
   },
 });
@@ -155,7 +155,7 @@ this.addOutputs({
 
 The construct is pointing to where our SvelteJS app is located. We haven't created our app yet but for now we'll point to the `frontend` directory.
 
-We are also setting up a [build time Svelte environment variable](https://cli.sveltejs.org/guide/mode-and-env.html) `VITE_APP_API_URL` with the endpoint of our API. The [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-a-sveltejs-site) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
+We are also setting up a [build time Svelte environment variable](https://vitejs.dev/guide/env-and-mode.html) `VITE_APP_API_URL` with the endpoint of our API. The [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-a-sveltejs-site) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
 
 You can also optionally configure a custom domain.
 
@@ -354,9 +354,9 @@ Let's add some styles.
 ```js
 <style>
   .App {
-    text-align: center;
     height: 100vh;
     display: grid;
+    text-align: center;
     place-items: center;
   }
   p {
