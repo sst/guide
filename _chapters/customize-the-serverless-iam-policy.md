@@ -227,7 +227,7 @@ Below is a more nuanced policy template that restricts access to the serverless 
         "events:Delete*",
         "events:Describe*"
       ],
-      "Resource": "arn:aws:events::<account_no>:rule/<service_name>*"
+      "Resource": "arn:aws:events:<region>:<account_no>:rule/<service_name>*"
     }
   ]
 }
