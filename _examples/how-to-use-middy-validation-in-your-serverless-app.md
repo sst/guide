@@ -4,7 +4,7 @@ title: How to use middy validation with serverless
 date: 2021-06-17 00:00:00
 lang: en
 description: In this example we will look at how to use middy validation with a serverless API to validate request and response schemas
-repo: react-app
+repo: middy-validation
 ref: how-to-use-middy-validation-with-serverless
 comments_id: how-to-use-middy-validation-with-serverless/XXXX
 ---
@@ -22,8 +22,8 @@ In this example we will look at how to use [Middy validation](https://middy.js.o
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest react-app
-$ cd react-app
+$ npx create-serverless-stack@latest middy-validation
+$ cd middy-validation
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
@@ -60,7 +60,7 @@ Now let's add the API.
 
 ```js
 routes: {
-    "GET /": "src/lambda.handler",
+  "GET /": "src/lambda.handler",
 }
 ```
 
@@ -68,7 +68,7 @@ With the below,
 
 ```js
 routes: {
-    "POST /": "src/lambda.handler",
+  "POST /": "src/lambda.handler",
 }
 ```
 
@@ -78,11 +78,11 @@ We are using the SST [`Api`](https://docs.serverless-stack.com/constructs/Api) c
 
 ```js
 export async function handler(event) {
-  const { fname, lname } = event.body;
+  const { fname, lname } = JSON.parse(event.body);
   return {
     statusCode: 200,
     headers: { "Content-Type": "text/plain" },
-    body: `Hello, ${fname + "-" + lname}.`,
+    body: `Hello, ${fname}-${lname}.`,
   };
 }
 ```
@@ -110,12 +110,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-react-app-my-stack: deploying...
+dev-middy-validation-my-stack: deploying...
 
- ✅  dev-react-app-my-stack
+ ✅  dev-middy-validation-my-stack
 
 
-Stack dev-react-app-my-stack
+Stack dev-middy-validation-my-stack
   Status: deployed
   Outputs:
     ApiEndpoint: https://51q98mf39e.execute-api.us-east-1.amazonaws.com
@@ -145,13 +145,13 @@ $ npm i --save @middy/core @middy/http-json-body-parser @middy/http-error-handle
 
 Let's understand what the above packages are,
 
-| package                        | explanation                                                                                                                                                                                                                     |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `@middy/core`                  | Core component of the middy framework                                                                                                                                                                                           |
-| `@middy/http-json-body-parser` | This middleware automatically parses HTTP requests with a JSON body and converts the body into an object                                                                                                                        |
-| `@middy/http-error-handler`    | Automatically handles uncaught errors that contain the properties `statusCode` (number) and `message` (string) and creates a proper HTTP response for them (using the message and the status code provided by the error object) |
-| `@middy/validator`             | This middleware automatically validates incoming events and outgoing responses against custom schemas defined with the JSON schema syntax.                                                                                      |
-| `ajv`                          | AJV stands for Another JSON Schema Validator and represents the fastest validator for JSON schemas around                                                                                                                       |
+| package                        | explanation                                                                                                                                                                                                                       |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `@middy/core`                  | Core component of the middy framework                                                                                                                                                                                             |
+| `@middy/http-json-body-parser` | This middleware parses HTTP requests with a JSON body and converts the body into an object                                                                                                                                        |
+| `@middy/http-error-handler`    | This middleware handles uncaught errors that contain the properties `statusCode` (number) and `message` (string) and creates a proper HTTP response for them (using the message and the status code provided by the error object) |
+| `@middy/validator`             | This middleware validates incoming events and outgoing responses against custom schemas defined with the JSON schema syntax.                                                                                                      |
+| `ajv`                          | AJV stands for Another JSON Schema Validator and represents the fastest validator for JSON schemas around                                                                                                                         |
 
 ### Adding request validation
 
@@ -166,11 +166,12 @@ const Ajv = require("ajv");
 const ajv = new Ajv();
 
 const baseHandler = (event) => {
+  // you don't need to write JSON.parse anymore as we are using the jsonBodyParser middleware
   const { fname, lname } = event.body;
   return {
     statusCode: 200,
     headers: { "Content-Type": "text/plain" },
-    body: `Hello, ${fname + "-" + lname}.`,
+    body: `Hello, ${fname}-${lname}.`,
   };
 };
 
@@ -219,7 +220,7 @@ const baseHandler = (event) => {
   return {
     statusCode: 200,
     headers: { "Content-Type": "text/plain" },
-    body: `Hello, ${fname + "-" + lname}.`,
+    body: `Hello, ${fname}-${lname}.`,
   };
 };
 
@@ -285,10 +286,10 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Once deployed, you should see something like this.
 
 ```bash
- ✅  prod-react-app-my-stack
+ ✅  prod-middy-validation-my-stack
 
 
-Stack prod-react-app-my-stack
+Stack prod-middy-validation-my-stack
   Status: deployed
   Outputs:
     ApiEndpoint: https://ck198mfop1.execute-api.us-east-1.amazonaws.com
