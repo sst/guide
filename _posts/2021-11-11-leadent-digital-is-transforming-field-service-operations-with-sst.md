@@ -49,9 +49,9 @@ SST allowed them to set breakpoints in their code and debug in real-time, which 
 
 > "You can iterate faster and build so much faster."
 
-The entire SST local development process was a revelation for the team. _"I had never seen anything like SST and have never seen something like it since"_, says Ross.
+The entire SST local development process was a revelation for the team. _"I hadn't found anything like SST and haven't seen anything like it since"_, says Ross.
 
-> "I had never seen anything like SST and have never seen something like it since."
+> "I hadn't found anything like SST and haven't seen anything like it since."
 
 They also use [Seed](https://seed.run) to deploy their SST apps. All their major customers have separate deployments of their application. These are also deployed to separate AWS accounts. They use a PR based workflow in Seed and once their changes are merged to master, it gets deployed to all their customer accounts.
 
