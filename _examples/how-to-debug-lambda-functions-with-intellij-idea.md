@@ -156,7 +156,7 @@ Linting source
 Deploying stacks
 dev-intellij-idea-debugging-my-stack: deploying...
 
- ✅  dev-Intellij-my-stack
+ ✅  dev-intellij-idea-debugging-my-stack
 
 
 Stack dev-intellij-idea-debugging-my-stack
