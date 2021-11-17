@@ -54,4 +54,4 @@ Learn more about the [job opportunities at Doorvest](https://www.builtinsf.com/c
 
 ---
 
-[Read more about Serverless Stack](/) and [get started]({{ site.docs_url }}/installation) today.
+[Read more about Serverless Stack](/) and [get started]({{ site.docs_url }}{{ site.docs_get_started }}) today.

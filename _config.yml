@@ -45,6 +45,7 @@ survey_url: "https://serverless-stack.typeform.com/to/xiPdCW"
 google_analytics: "UA-3536629-11"
 
 docs_url: "https://docs.serverless-stack.com"
+docs_get_started: "/installation"
 forum_url: "https://discourse.serverless-stack.com"
 forum_thread_prefix: "/t/"
 patreon_url: "https://www.patreon.com/serverless_stack"

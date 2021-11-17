@@ -27,7 +27,6 @@ Around 2 months ago the team came together and decided they needed to make a cha
 As they tried out SST, _"We were blown away by the local development environment"_, says Michael. The entire team decided to move to SST.
 
 > "We were blown away by the local development environment."
-> 
 
 They decided to start a new SST app from scratch. They spent some time testing SST and within a month they had moved over completely. The new setup Michael says is _"Such a great experience. We are at least 1.5 to 2 times faster than before"_.
 
@@ -49,4 +48,4 @@ Thanks to SST their entire development setup works seamlessly, allowing them to 
 
 ---
 
-[Read more about Serverless Stack](/) and [get started]({{ site.docs_url }}/installation) today.
+[Read more about Serverless Stack](/) and [get started]({{ site.docs_url }}{{ site.docs_get_started }}) today.
