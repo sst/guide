@@ -6,7 +6,7 @@ lang: en
 description: In this example we will look at how to use Datadog with a serverless API to create and monitor a simple click counter app. We'll be using the Serverless Stack Framework (SST).
 repo: datadog
 ref: how-to-use-datadog-to-monitor-your-serverless-app
-comments_id: how-to-use-datadog-to-monitor-your-serverless-app/xxxx
+comments_id: how-to-use-datadog-to-monitor-your-serverless-app/2520
 ---
 
 In this example we will look at how to use [Datadog](https://www.datadoghq.com/) to monitor the Lambda functions in your [SST serverless application]({{ site.sst_github_repo }}).
