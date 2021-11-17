@@ -84,6 +84,12 @@ async:
     - page: How to automatically resize images with serverless
       url: /examples/how-to-automatically-resize-images-with-serverless.html
 
+monitoring:
+  title: Monitoring
+  chapters:
+    - page: How to use Datadog to monitor your serverless app
+      url: /examples/how-to-use-datadog-to-monitor-your-serverless-app.html
+
 misc:
   title: Miscellaneous
   chapters:
