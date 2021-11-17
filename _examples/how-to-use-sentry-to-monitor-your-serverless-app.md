@@ -6,7 +6,7 @@ lang: en
 description: In this example we will look at how to use Sentry with a serverless API to create and monitor a simple click counter app. We'll be using the Serverless Stack Framework (SST).
 repo: sentry
 ref: how-to-use-sentry-to-monitor-your-serverless-app
-comments_id: how-to-use-sentry-with-your-serverless-app/xxxx
+comments_id: how-to-use-sentry-to-monitor-your-serverless-app/2521
 ---
 
 In this example we will look at how to use [Sentry](https://www.sentry.io) to monitor the Lambda functions in your [SST serverless application]({{ site.sst_github_repo }}).
