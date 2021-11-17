@@ -18,7 +18,7 @@ In this example we will look at how to use [Sentry](https://www.sentry.io) to mo
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 - A [Sentry account](https://sentry.io/signup/)
 
-## What is Sentry?
+## What is Sentry
 
 When a serverless app is deployed to production, it's useful to be able to monitor your Lambda functions. There are a few different services that you can use for this. One of them is [Sentry](https://sentry.io/signup/). Sentry offers [Serverless Error Monitoring](https://sentry.io/for/serverless/) for your Lambda functions.
 
