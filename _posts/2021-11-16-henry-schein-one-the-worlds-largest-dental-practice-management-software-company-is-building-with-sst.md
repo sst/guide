@@ -56,7 +56,7 @@ They are looking to double the team over the next couple of months. So Jack thin
 
 ## Learn More
 
-Learn more about [Henry Schein One and their work here](https://henryscheinone.com).
+Learn about the [job opportunities at Henry Schein One](https://dentr.co.uk/jobs) and join the world's largest dental practice management software company.
 
 ---
 
