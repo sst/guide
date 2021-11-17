@@ -89,6 +89,8 @@ monitoring:
   chapters:
     - page: How to use Datadog to monitor your serverless app
       url: /examples/how-to-use-datadog-to-monitor-your-serverless-app.html
+    - page: How to use Sentry to monitor your serverless app
+      url: /examples/how-to-use-sentry-to-monitor-your-serverless-app.html
 
 misc:
   title: Miscellaneous

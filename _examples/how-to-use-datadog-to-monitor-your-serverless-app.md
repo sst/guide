@@ -16,7 +16,7 @@ In this example we will look at how to use [Datadog](https://www.datadoghq.com/)
 - Node.js >= 10.15.1
 - We'll be using Node.js (or ES) in this example but you can also use TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
-- [Datadog](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=roledelegation#setup) configured for your AWS account
+- A [Datadog account](https://app.datadoghq.com/signup) and that's [configured with your AWS account](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=roledelegation#setup)
 
 ## What is Datadog
 
@@ -145,7 +145,7 @@ datadog.addLambdaFunctions(this.getAllFunctions());
 import { Datadog } from "datadog-cdk-constructs";
 ```
 
-Note that [`getAllFunctions()`]({{ site.docs_url }}/constructs/Stack#getallfunctions) gives you an array of all the Lambda functions created in this stack. If you want to monitor all the functions in your stack, make sure to call it at the end of your stack definition.
+Note that [`getAllFunctions`]({{ site.docs_url }}/constructs/Stack#getallfunctions) gives you an array of all the Lambda functions created in this stack. If you want to monitor all the functions in your stack, make sure to call it at the end of your stack definition.
 
 Let's test what we have so far.
 
@@ -181,7 +181,7 @@ Stack dev-datadog-my-stack
 
 The `ApiEndpoint` is the API we just created. Let's test the endpoint.
 
-Open the URL in your browser. You'll should see the _Hello World_ message.
+Open the URL in your browser. You should see the _Hello World_ message.
 
 Now head over to your Datadog dashboard to start exploring key performance metrics; invocations, errors, and duration from your function. The [Serverless view](https://app.datadoghq.com/functions) aggregates data from all of the serverless functions running in your environment, enabling you to monitor their performance in one place. You can search and filter by name, AWS account, region, runtime, or any tag. Or click on a specific function to inspect its key performance metrics, distributed traces, and logs.
 
@@ -220,4 +220,4 @@ $ npx sst remove --stage prod
 
 ## Conclusion
 
-And that's it! We've got a serverless API monitored by Datadog. We also have a local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+And that's it! We've got a serverless API monitored with Datadog. We also have a local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
