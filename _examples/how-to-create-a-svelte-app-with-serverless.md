@@ -1,15 +1,15 @@
 ---
 layout: example
-title: How to create a SvelteJS app with serverless
+title: How to create a Svelte app with serverless
 date: 2021-10-15 00:00:00
 lang: en
-description: In this example we will look at how to use SvelteJS with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST) and the SST StaticSite construct to deploy our app to AWS S3 and CloudFront.
+description: In this example we will look at how to use Svelte with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST) and the SST StaticSite construct to deploy our app to AWS S3 and CloudFront.
 repo: svelte-app
-ref: how-to-create-a-sveltejs-app-with-serverless
-comments_id: how-to-create-a-sveltejs-app-with-serverless/XXXX
+ref: how-to-create-a-svelte-app-with-serverless
+comments_id: how-to-create-a-svelte-app-with-serverless/XXXX
 ---
 
-In this example we will look at how to use [SvelteJS](https://svelte.dev) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) and the SST [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-a-sveltejs-site) construct to deploy our app to AWS.
+In this example we will look at how to use [Svelte](https://svelte.dev) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) and the SST [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-a-svelte-site) construct to deploy our app to AWS.
 
 ## Requirements
 
@@ -50,11 +50,11 @@ An SST app is made up of a couple of parts.
 
 3. `frontend/` — Svelte App
 
-   The code for our frontend SvelteJS app.
+   The code for our frontend Svelte app.
 
 ## Create our infrastructure
 
-Our app is made up of a simple API and a SvelteJS app. The API will be talking to a database to store the number of clicks. We'll start by creating the database.
+Our app is made up of a simple API and a Svelte app. The API will be talking to a database to store the number of clicks. We'll start by creating the database.
 
 ### Adding the table
 
@@ -120,7 +120,7 @@ We also pass in the name of our DynamoDB table to our API as an environment vari
 
 ### Setting up our Svelte app
 
-To deploy a SvelteJS app to AWS, we'll be using the SST [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-a-sveltejs-site) construct.
+To deploy a Svelte app to AWS, we'll be using the SST [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-a-svelte-site) construct.
 
 {%change%} Replace the following in `stacks/MyStack.js`:
 
@@ -153,9 +153,9 @@ this.addOutputs({
 });
 ```
 
-The construct is pointing to where our SvelteJS app is located. We haven't created our app yet but for now we'll point to the `frontend` directory.
+The construct is pointing to where our Svelte app is located. We haven't created our app yet but for now we'll point to the `frontend` directory.
 
-We are also setting up a [build time Svelte environment variable](https://vitejs.dev/guide/env-and-mode.html) `VITE_APP_API_URL` with the endpoint of our API. The [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-a-sveltejs-site) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
+We are also setting up a [build time Svelte environment variable](https://vitejs.dev/guide/env-and-mode.html) `VITE_APP_API_URL` with the endpoint of our API. The [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-a-svelte-site) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
 
 You can also optionally configure a custom domain.
 
@@ -250,7 +250,7 @@ Stack dev-svelte-app-my-stack
     SiteUrl: https://d2uyljrh4twuwq.cloudfront.net
 ```
 
-The `ApiEndpoint` is the API we just created. While the `SiteUrl` is where our SvelteJS app will be hosted. For now it's just a placeholder website.
+The `ApiEndpoint` is the API we just created. While the `SiteUrl` is where our Svelte app will be hosted. For now it's just a placeholder website.
 
 Let's test our endpoint. Run the following in your terminal.
 
@@ -262,21 +262,16 @@ You should see a `0` printed out.
 
 ## Setting up our Svelte app
 
-We are now ready to use the API we just created. Let's use [Vite](https://vitejs.dev/) to setup our SvelteJS app.
+We are now ready to use the API we just created. Let's use [Vite](https://vitejs.dev/) to setup our Svelte app.
 
 {%change%} Run the following in the project root.
 
 ```bash
-# npm 6.x
-$ npm init vite@latest frontend --template svelte
-
 # npm 7+, extra double-dash is needed:
 $ npm init vite@latest frontend -- --template svelte
 
-# yarn
-$ yarn create vite frontend --template svelte
-
 $ cd frontend
+
 $ npm install
 ```
 
@@ -320,7 +315,7 @@ We are now ready to add the UI for our app and connect it to our serverless API.
 
 {%change%} Replace `frontend/src/App.svelte` with.
 
-```js
+```coffee
 <script>
   let count = 0;
 
@@ -351,7 +346,7 @@ Let's add some styles.
 
 {%change%} Add a style tag with the below styles in `App.svelte` file.
 
-```js
+```css
 <style>
   .App {
     height: 100vh;
@@ -441,4 +436,4 @@ $ npx sst remove --stage prod
 
 ## Conclusion
 
-And that's it! We've got a completely serverless click counter in SvelteJS. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+And that's it! We've got a completely serverless click counter in Svelte. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!

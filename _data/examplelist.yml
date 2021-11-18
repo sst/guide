@@ -21,6 +21,8 @@ webapp:
       url: /examples/how-to-create-a-nextjs-app-with-serverless.html
     - page: How to create a Vue.js app with serverless
       url: /examples/how-to-create-a-vuejs-app-with-serverless.html
+    - page: How to create a Svelte app with serverless
+      url: /examples/how-to-create-a-svelte-app-with-serverless.html
 
 mobileapp:
   title: Mobile Apps 
