@@ -123,13 +123,13 @@ Stack dev-middy-validation-my-stack
 
 The `ApiEndpoint` is the API we just created. Let's test our endpoint using [insomnia](https://insomnia.rest/)
 
-![insomnia_post_request_with_correct_schema](/assets/examples/middy-validation-example/request1.png)
+![insomnia request with correct schema](/assets/examples/middy-validation/insomnia-request-with-correct-schema.png)
 
 As you can see the endpoint is working absolutely fine. We sent `mani` and `teja` as our `fname` and `lname` respectively and got `Hello, mani-teja` as the response
 
 Now let's remove `lname` from the request object and see what will be the output
 
-![insomnia_post_request_without_correct_schema](/assets/examples/middy-validation-example/request2.png)
+![insomnia request with incorrect schema](/assets/examples/middy-validation/insomnia-request-with-incorrect-schema.png)
 
 Now, you can see the endpoint is working fine but it returned undefined for `lname` as we only sent the `fname` in the request so it returned undefined in the place of `lname`. But in a production app it makes difficult to debug the bugs, so we need to explicitly throw an error when there is a missing info in the request body
 
@@ -202,7 +202,7 @@ export { handler };
 
 Here we are creating an `inputSchema` and precompiling it to ajv, where we are explicitly telling that `fname` and `lname` are required. Now open insomnia and send the request
 
-![insomnia_post_request_with_middy_validation](/assets/examples/middy-validation-example/request3.png)
+![insomnia request with middy schema validation](/assets/examples/middy-validation/insomnia-request-with-middy-schema-validation.png)
 
 The server thrown a `400 Bad request` error.
 
@@ -272,7 +272,7 @@ export { handler };
 
 Let's test our API again with correct schema and middy middleware
 
-![insomnia_post_request_with_middy_validation_and_schema](/assets/examples/middy-validation-example/request1.png)
+![insomnia request with correct schema](/assets/examples/middy-validation/insomnia-request-with-correct-schema.png)
 
 As you can see, the API is working back as expected. If any schema violates the schema we mentioned in our middleware, the API would throw an error
 
