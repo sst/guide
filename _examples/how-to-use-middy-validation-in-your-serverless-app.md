@@ -26,7 +26,7 @@ $ npx create-serverless-stack@latest middy-validation
 $ cd middy-validation
 ```
 
-By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
+By default our app will be deployed to the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ```json
 {
@@ -118,7 +118,7 @@ dev-middy-validation-my-stack: deploying...
 Stack dev-middy-validation-my-stack
   Status: deployed
   Outputs:
-    ApiEndpoint: https://51q98mf39e.execute-api.us-east-1.amazonaws.com
+    ApiEndpoint: https://bqoc5prkna.execute-api.us-east-1.amazonaws.com
 ```
 
 The `ApiEndpoint` is the API we just created. Let's test our endpoint using [insomnia](https://insomnia.rest/)
@@ -159,10 +159,9 @@ Let's understand what the above packages are,
 
 ```js
 import middy from "@middy/core";
-import httpErrorHandler from "@middy/http-error-handler";
 import validator from "@middy/validator";
 import jsonBodyParser from "@middy/http-json-body-parser";
-const Ajv = require("ajv");
+import Ajv from "ajv";
 const ajv = new Ajv();
 
 const baseHandler = (event) => {
@@ -191,7 +190,11 @@ const inputSchema = {
 
 const handler = middy(baseHandler)
   .use(jsonBodyParser())
-  .use(validator({ inputSchema: ajv.compile(inputSchema) }))
+  .use(
+    validator({
+      inputSchema: ajv.compile(inputSchema),
+    })
+  )
   .use(httpErrorHandler());
 
 export { handler };
@@ -209,8 +212,8 @@ The server thrown a `400 Bad request` error.
 
 ```js
 import middy from "@middy/core";
-import httpErrorHandler from "@middy/http-error-handler";
 import validator from "@middy/validator";
+import httpErrorHandler from "@middy/http-error-handler";
 import jsonBodyParser from "@middy/http-json-body-parser";
 import Ajv from "ajv";
 const ajv = new Ajv();
@@ -292,7 +295,7 @@ Once deployed, you should see something like this.
 Stack prod-middy-validation-my-stack
   Status: deployed
   Outputs:
-    ApiEndpoint: https://ck198mfop1.execute-api.us-east-1.amazonaws.com
+    ApiEndpoint: https://bqoc5prkna.execute-api.us-east-1.amazonaws.com
 ```
 
 ## Cleaning up
