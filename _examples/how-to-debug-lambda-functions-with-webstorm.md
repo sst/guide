@@ -94,10 +94,11 @@ Our functions are stored in the `src/` directory. In this case, we have a simple
 
 ```js
 export async function handler(event) {
+  const message = `The time in Lambda is ${event.requestContext.time}.`;
   return {
     statusCode: 200,
     headers: { "Content-Type": "text/plain" },
-    body: `Hello, World! Your request was received at ${event.requestContext.time}.`,
+    body: `Hello, World! ${message}`,
   };
 }
 ```
@@ -106,17 +107,13 @@ export async function handler(event) {
 
 To allow WebStorm to set breakpoints and debug our Lambda functions we'll add it to our [Debug Configurations](https://www.jetbrains.com/help/webstorm/running-and-debugging-node-js.html#running).
 
-Go to `package.json` and click on the `▶️` icon beside `start` command as we want to debug locally
+Select `package.json` from the left panel, click on the `▶️` icon next to the `start` script, and then select `Modify Run Configuration`.
 
-![package_view](/assets/examples/webstorm-debugging/image1.png)
-
-After clicking the run icon, click on `Modify Run Configuration` option
-
-![package_edit_configuration_view](/assets/examples/webstorm-debugging/image2.png)
+![Select run icon beside start script in WebStorm](/assets/examples/webstorm/select-run-icon-beside-start-script-in-webstorm.png)
 
 It will open up a popup where you need to configure the settings as per the project, WebStorm does it automatically for us. Make sure your settings looks like below.
 
-![package_popup_view](/assets/examples/webstorm-debugging/image3.png)
+![Create run configuration in WebStorm](/assets/examples/webstorm/create-run-configuration-in-webstorm.png)
 
 ## Extending Lambda function timeouts
 
@@ -124,19 +121,25 @@ Since we are going to set breakpoints in our Lambda functions, it makes sense to
 
 SST has an [`--increase-timeout`](https://docs.serverless-stack.com/packages/cli#options) option that increases the function timeouts in your app to the maximum 15 minutes. Add `--increase-timeout` to arguments to increase the timeout.
 
-![timeout_increase_screen](/assets/examples/webstorm-debugging/timeout_ss.png)
+![Set increase timeout in run configuration in WebStorm](/assets/examples/webstorm/set-increase-timeout-in-run-configuration-in-webstorm.png)
 
 Note that, this doesn't increase the timeout of an API. Since those cannot be increased for more than 30 seconds. But you can continue debugging the Lambda function, even after the API request times out.
 
 ## Starting your dev environment
 
-Now if you open up your project in Webstorm, you can set a breakpoint in your `src/lambda.js`.
+Now if you open up your project in WebStorm, you can set a breakpoint in your `src/lambda.js`.
 
 Next, click on `Debug` icon to start the debugging
 
-![press debug button to start](/assets/examples/webstorm-debugging/debug_button.png)
+![Set Lambda function breakpoint in WebStorm](/assets/examples/webstorm/set-lambda-function-breakpoint-in-webstorm.png)
 
-The first time you start the Live Lambda Development environment, it'll take a couple of minutes to do the following:
+The first time you start the Live Lambda Development environment, you will be prompted to enter a stage name to use locally. If you are working within a team, it is recommended that you use a stage that's specific to you. This ensures that you and your teammate can share an AWS account and still have standalone environments.
+
+Note that the prompt will be shown under the `Process Console` tab.
+
+![Enter stage name in Process Console](/assets/examples/webstorm/enter-stage-name-in-process-console.png)
+
+It'll then take a couple of minutes to do the following:
 
 1. It'll bootstrap your AWS environment to use CDK.
 2. Deploy a debug stack to power the Live Lambda Development environment.
@@ -154,12 +157,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-webstorm-my-stack: deploying...
+frank-webstorm-my-stack: deploying...
 
- ✅  dev-webstorm-my-stack
+ ✅  frank-webstorm-my-stack
 
 
-Stack dev-webstorm-my-stack
+Stack frank-webstorm-my-stack
   Status: deployed
   Outputs:
     ApiEndpoint: https://siyp617yh1.execute-api.us-east-1.amazonaws.com
@@ -167,13 +170,37 @@ Stack dev-webstorm-my-stack
 
 The `ApiEndpoint` is the API we just created. Now if you head over to that endpoint in your browser, you'll notice that you'll hit the breakpoint.
 
-![Hitting a breakpoint in a Lambda function in WebStorm](/assets/examples/webstorm-debugging/set-lambda-hitting-a-breakpoint-in-a-lambda-function-in-webstorm.jpg)
+![Hitting a breakpoint in a Lambda function in WebStorm](/assets/examples/webstorm/hitting-a-breakpoint-in-a-lambda-function-in-webstorm.png)
+
+## Making changes
+
+An advantage of using the Live Lambda Development environment is that you can make changes without having to redeploy them.
+
+{%change%} Replace `src/lambda.ts` with the following.
+
+``` ts
+export async function handler(event) {
+  return {
+    statusCode: 200,
+    headers: { "Content-Type": "text/plain" },
+    body: `Hello, World! Your request was received at ${event.requestContext.time}.`,
+  };
+}
+```
+
+Now if you head back to the endpoint.
+
+```
+https://siyp617yh1.execute-api.us-east-1.amazonaws.com/
+```
+
+You should see the new message being printed out.
 
 ## Making improvements
 
 If you're facing any memory issues while debugging, then you can disable the unused plugins and exclude the folders which are not included in the source code by right clicking on the folder and mark as **Excluded**
 
-![Hitting a breakpoint in a Lambda function in WebStorm](/assets/examples/webstorm-debugging/excluded_ss.png)
+![Exclude folders in WebStorm](/assets/examples/webstorm/excluded-folders-in-webstorm.png)
 
 ## Deploying your API
 
@@ -205,4 +232,4 @@ $ npx sst remove --stage prod
 
 ## Conclusion
 
-And that's it! You've got a brand new serverless API. A local development environment, to test and make changes. And you can use Webstorm to debug and set breakpoints in your Lambda functions. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+And that's it! You've got a brand new serverless API. A local development environment, to test and make changes. And you can use WebStorm to debug and set breakpoints in your Lambda functions. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
