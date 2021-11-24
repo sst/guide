@@ -221,7 +221,7 @@ Here we are creating an `inputSchema` and precompiling it with Ajv. We are expli
 
 Now open Insomnia and send a request.
 
-![Insomnia request with Middy schema validation](/assets/examples/middy-validator/insomnia-request-with-middy-schema-validation.png)
+![Insomnia request with Middy schema request validation](/assets/examples/middy-validator/insomnia-request-with-middy-schema-request-validation.png)
 
 Great! The server throws a `400 Bad request` error to let us know that something is wrong.
 
@@ -299,6 +299,32 @@ Let's test our API again with correct schema and Middy validator.
 ![Insomnia request with correct schema](/assets/examples/middy-validator/insomnia-request-with-correct-schema.png)
 
 Now the API is back working as expected. If any schema violates the schema we mentioned in our middleware, the API would throw an error.
+
+Let's quickly try out the case of returning an invalid response. Instead of returning a number for status code, we return a string instead.
+
+{%change%} Replace this line:
+
+```js
+    statusCode: 200,
+```
+
+With this:
+
+```js
+    statusCode: "success",
+```
+
+Let's test our API again.
+
+![Insomnia request with Middy schema response validation](/assets/examples/middy-validator/insomnia-request-with-middy-schema-response-validation.png)
+
+Great! The server throws a `500 Internal Server Error` to let us know that something is wrong.
+
+{%change%} Let's change the status code back.
+
+```js
+    statusCode: 200,
+```
 
 ## Deploying to prod
 
