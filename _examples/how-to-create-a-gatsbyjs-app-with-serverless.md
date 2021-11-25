@@ -3,13 +3,13 @@ layout: example
 title: How to create a Gatsby app with serverless
 date: 2021-10-15 00:00:00
 lang: en
-description: In this example we will look at how to use gatsby with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST) and the SST StaticSite construct to deploy our app to AWS S3 and CloudFront.
-repo: Gatsby-app
+description: In this example we will look at how to use Batsby with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST) and the SST StaticSite construct to deploy our app to AWS S3 and CloudFront.
+repo: gatsby-app
 ref: how-to-create-a-gatsby-app-with-serverless
 comments_id: how-to-create-a-gatsby-app-with-serverless/xxxx
 ---
 
-In this example we will look at how to use [gatsby](https://www.gatsbyjs.com/) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) and the SST [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-a-gatsby-site) construct to deploy our app to AWS.
+In this example we will look at how to use [Gatsby](https://www.gatsbyjs.com/) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) and the SST [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-a-gatsby-site) construct to deploy our app to AWS.
 
 ## Requirements
 
@@ -26,7 +26,7 @@ $ npx create-serverless-stack@latest gatsby-app
 $ cd gatsby-app
 ```
 
-By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
+By default our app will be deployed to the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ```json
 {
@@ -50,11 +50,11 @@ An SST app is made up of a couple of parts.
 
 3. `frontend/` — Gatsby App
 
-   The code for our frontend gatsby app.
+   The code for our frontend Gatsby app.
 
 ## Create our infrastructure
 
-Our app is made up of a simple API and a gatsby app. The API will be talking to a database to store the number of clicks. We'll start by creating the database.
+Our app is made up of a simple API and a Gatsby app. The API will be talking to a database to store the number of clicks. We'll start by creating the database.
 
 ### Adding the table
 
@@ -121,7 +121,7 @@ We also pass in the name of our DynamoDB table to our API as an environment vari
 
 ### Setting up our Gatsby app
 
-To deploy a gatsby app to AWS, we'll be using the SST [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-a-gatsby-site) construct.
+To deploy a Gatsby app to AWS, we'll be using the SST [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-a-gatsby-site) construct.
 
 {%change%} Replace the following in `stacks/MyStack.js`:
 
@@ -153,7 +153,7 @@ this.addOutputs({
 });
 ```
 
-The construct is pointing to where our gatsby app is located. We haven't created our app yet but for now we'll point to the `frontend` directory.
+The construct is pointing to where our Gatsby app is located. We haven't created our app yet but for now we'll point to the `frontend` directory.
 
 We are also setting up a [build time Gatsby environment variable](https://www.gatsbyjs.com/docs/how-to/local-development/environment-variables/) `GATSBY_APP_API_URL` with the endpoint of our API. The [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-a-gatsby-site) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
 
@@ -214,7 +214,7 @@ We make a `get` call to our DynamoDB table and get the value of a row where the 
 {%change%} Let's install the `aws-sdk`.
 
 ```bash
-$ npm install aws-sdk --save
+$ npm install aws-sdk
 ```
 
 And let's test what we have so far.
@@ -250,7 +250,7 @@ Stack dev-gatsby-app-my-stack
     SiteUrl: https://d2uyljrh4twuwq.cloudfront.net
 ```
 
-The `ApiEndpoint` is the API we just created. While the `SiteUrl` is where our gatsby app will be hosted. For now it's just a placeholder website.
+The `ApiEndpoint` is the API we just created. While the `SiteUrl` is where our Gatsby app will be hosted. For now it's just a placeholder website.
 
 Let's test our endpoint. Run the following in your terminal.
 
@@ -262,7 +262,7 @@ You should see a `0` printed out.
 
 ## Setting up our Gatsby app
 
-We are now ready to use the API we just created. Let's use [Gatsby quickstart](https://www.gatsbyjs.com/docs/quick-start/) to setup our gatsby app.
+We are now ready to use the API we just created. Let's use [Gatsby Quick Start](https://www.gatsbyjs.com/docs/quick-start/) to setup our Gatsby app.
 
 {%change%} Run the following in the project root.
 
@@ -272,7 +272,7 @@ $ npm init gatsby
 
 Follow the prompts to choose your preferred CMS, styling tools and additional features. Name the app as `frontend`, For this tutorial we're going to use the default options as shown below.
 
-![prompt options](/assets/examples/gatsby-app/cli-options.png)
+![Create Gatsby app](/assets/examples/gatsby-app/create-gatsby-app.png)
 
 This sets up our Gatsby app in the `frontend/` directory. Recall that, earlier in the guide we were pointing the `StaticSite` construct to this path.
 
@@ -423,4 +423,4 @@ $ npx sst remove --stage prod
 
 ## Conclusion
 
-And that's it! We've got a completely serverless click counter in gatsby. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+And that's it! We've got a completely serverless click counter in Gatsby. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
