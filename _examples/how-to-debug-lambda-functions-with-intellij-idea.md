@@ -137,7 +137,7 @@ The first time you start the Live Lambda Development environment, you will be pr
 
 Note that the prompt will be shown under the `Process Console` tab.
 
-![Enter stage name in Process Console](/assets/examples/webstorm/enter-stage-name-in-process-console.png)
+![Enter stage name in Process Console](/assets/examples/intellij-idea/enter-stage-name-in-process-console.png)
 
 It'll then take a couple of minutes to do the following:
 
