@@ -292,8 +292,8 @@ const targetPath = `./src/environments/environment.ts`;
 
 const environmentFileContent = `
 export const environment = {
-   production: ${false},
-   API_URL:  "${process.env["DEV_API_URL"]}",
+  production: ${false},
+  API_URL:  "${process.env["DEV_API_URL"]}",
 };
 `;
 // write the content to the respective file
@@ -311,16 +311,22 @@ We need to update our scripts to use this script and `sst-env` package, Do this 
 
 ```json
 {
-   ...
-   "scripts": {
-      "ng": "ng",
-      "config": "ts-node ./scripts/setenv.ts",
-      "start": "sst-env -- npm run config && ng serve",
-      "build": "ng build",
-      ...
-   },
-   ...
+  ...
+  "scripts": {
+    "ng": "ng",
+    "config": "ts-node ./scripts/setenv.ts",
+    "start": "sst-env -- npm run config && ng serve",
+    "build": "ng build",
+    ...
+  },
+  ...
 }
+```
+
+{%change%} Install `ts-node`.
+
+```bash
+$ npm install ts-node --save-dev
 ```
 
 Let's start our angular development environment.
@@ -474,7 +480,7 @@ replaceValues: [
     search: "{{ PROD_API_URL }}",
     replace: api.url,
   },
-];
+],
 ```
 
 This replaces `{{ PROD_API_URL }}` with the deployed API endpoint in all the .js files in your compiled angular app.
