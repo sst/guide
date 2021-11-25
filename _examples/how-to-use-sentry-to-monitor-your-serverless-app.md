@@ -20,7 +20,7 @@ In this example we will look at how to use [Sentry](https://www.sentry.io) to mo
 
 ## What is Sentry
 
-When a serverless app is deployed to production, it's useful to be able to monitor your Lambda functions. There are a few different services that you can use for this. One of them is [Sentry](https://sentry.io/signup/). Sentry offers [erverless Error and Performance Monitoring](https://sentry.io/for/serverless/) for your Lambda functions.
+When a serverless app is deployed to production, it's useful to be able to monitor your Lambda functions. There are a few different services that you can use for this. One of them is [Sentry](https://sentry.io/signup/). Sentry offers [Serverless Error and Performance Monitoring](https://sentry.io/for/serverless/) for your Lambda functions.
 
 ## Create an SST app
 

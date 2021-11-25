@@ -88,12 +88,43 @@ Below is a more nuanced policy template that restricts access to the serverless 
     {
       "Effect": "Allow",
       "Action": [
-        "cloudformation:Describe*",
-        "cloudformation:List*",
-        "cloudformation:Get*",
+        "apigateway:GET",
+        "apigateway:PATCH",
+        "apigateway:POST",
+        "apigateway:PUT"
+      ],
+      "Resource": [
+        "arn:aws:apigateway:<region>::/apis"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "apigateway:GET",
+        "apigateway:PATCH",
+        "apigateway:POST",
+        "apigateway:PUT"
+      ],
+      "Resource": [
+        "arn:aws:apigateway:<region>::/apis/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "cloudformation:CancelUpdateStack",
+        "cloudformation:ContinueUpdateRollback",
+        "cloudformation:CreateChangeSet",
         "cloudformation:CreateStack",
+        "cloudformation:CreateUploadBucket",
+        "cloudformation:DeleteStack",
+        "cloudformation:Describe*",
+        "cloudformation:EstimateTemplateCost",
+        "cloudformation:ExecuteChangeSet",
+        "cloudformation:Get*",
+        "cloudformation:List*",
         "cloudformation:UpdateStack",
-        "cloudformation:DeleteStack"
+        "cloudformation:UpdateTerminationProtection"
       ],
       "Resource": "arn:aws:cloudformation:<region>:<account_no>:stack/<service_name>*/*"
     },
@@ -107,22 +138,44 @@ Below is a more nuanced policy template that restricts access to the serverless 
     {
       "Effect": "Allow",
       "Action": [
-        "s3:CreateBucket",
-        "s3:DeleteBucket",
-        "s3:Get*",
-        "s3:List*"
+        "ec2:Describe*"
       ],
       "Resource": [
-        "arn:aws:s3:::<service_name>*"
+        "*"
       ]
     },
     {
       "Effect": "Allow",
       "Action": [
-        "s3:*"
+        "events:Put*",
+        "events:Describe*",
+        "events:List*"
+      ],
+      "Resource": "arn:aws:events:<region>:<account_no>:rule/<service_name>*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iam:AttachRolePolicy",
+        "iam:CreateRole",
+        "iam:DeleteRole",
+        "iam:DeleteRolePolicy",
+        "iam:DetachRolePolicy",
+        "iam:GetRole",
+        "iam:PassRole",
+        "iam:PutRolePolicy"
       ],
       "Resource": [
-        "arn:aws:s3:::<service_name>*/*"
+        "arn:aws:iam::*:role/<service_name>*-lambdaRole"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "lambda:*"
+      ],
+      "Resource": [
+        "arn:aws:lambda:*:*:function:<service_name>*"
       ]
     },
     {
@@ -136,8 +189,6 @@ Below is a more nuanced policy template that restricts access to the serverless 
       "Action": [
         "logs:CreateLogGroup",
         "logs:CreateLogStream",
-        "logs:DeleteLogGroup",
-        "logs:DeleteLogStream",
         "logs:DescribeLogStreams",
         "logs:FilterLogEvents"
       ],
@@ -147,87 +198,32 @@ Below is a more nuanced policy template that restricts access to the serverless 
     {
       "Effect": "Allow",
       "Action": [
-        "iam:GetRole",
-        "iam:PassRole",
-        "iam:CreateRole",
-        "iam:DeleteRole",
-        "iam:DetachRolePolicy",
-        "iam:PutRolePolicy",
-        "iam:AttachRolePolicy",
-        "iam:DeleteRolePolicy"
+        "s3:CreateBucket",
+        "s3:DeleteBucket",
+        "s3:DeleteBucketPolicy",
+        "s3:DeleteObject",
+        "s3:DeleteObjectVersion",
+        "s3:Get*",
+        "s3:List*",
+        "s3:PutBucketNotification",
+        "s3:PutBucketPolicy",
+        "s3:PutBucketTagging",
+        "s3:PutBucketWebsite",
+        "s3:PutEncryptionConfiguration",
+        "s3:PutObject"
       ],
       "Resource": [
-        "arn:aws:iam::<account_no>:role/<service_name>*-lambdaRole"
+        "arn:aws:s3:::<service_name>*"
       ]
     },
     {
       "Effect": "Allow",
       "Action": [
-        "apigateway:GET",
-        "apigateway:PATCH",
-        "apigateway:POST",
-        "apigateway:PUT",
-        "apigateway:DELETE"
+        "s3:*"
       ],
       "Resource": [
-        "arn:aws:apigateway:<region>::/restapis"
+        "arn:aws:s3:::<service_name>*/*"
       ]
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "apigateway:GET",
-        "apigateway:PATCH",
-        "apigateway:POST",
-        "apigateway:PUT",
-        "apigateway:DELETE"
-      ],
-      "Resource": [
-        "arn:aws:apigateway:<region>::/restapis/*"
-      ]
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "lambda:GetFunction",
-        "lambda:CreateFunction",
-        "lambda:DeleteFunction",
-        "lambda:UpdateFunctionConfiguration",
-        "lambda:UpdateFunctionCode",
-        "lambda:ListVersionsByFunction",
-        "lambda:PublishVersion",
-        "lambda:CreateAlias",
-        "lambda:DeleteAlias",
-        "lambda:UpdateAlias",
-        "lambda:GetFunctionConfiguration",
-        "lambda:AddPermission",
-        "lambda:RemovePermission",
-        "lambda:InvokeFunction"
-      ],
-      "Resource": [
-        "arn:aws:lambda:*:<account_no>:function:<service_name>*"
-      ]
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "ec2:DescribeSecurityGroups",
-        "ec2:DescribeSubnets",
-        "ec2:DescribeVpcs"
-      ],
-      "Resource": [
-        "*"
-      ]
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "events:Put*",
-        "events:Remove*",
-        "events:Delete*",
-        "events:Describe*"
-      ],
-      "Resource": "arn:aws:events:<region>:<account_no>:rule/<service_name>*"
     }
   ]
 }
