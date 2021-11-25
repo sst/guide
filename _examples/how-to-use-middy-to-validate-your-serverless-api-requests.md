@@ -6,7 +6,7 @@ lang: en
 description: In this example we will look at how to use the Middy validator middleware in a serverless API to validate request and response schemas.
 repo: middy-validator
 ref: how-to-use-middy-to-validate-your-serverless-api-requests
-comments_id: how-to-use-the-middy-validator-with-serverless/XXXX
+comments_id: how-to-use-middy-to-validate-your-serverless-api-requests/2525
 ---
 
 In this example we will look at how to use the [Middy validator](https://middy.js.org/packages/validator/) middleware with a [serverless]({% link _chapters/what-is-serverless.md %}) API to validate request and response schemas.
