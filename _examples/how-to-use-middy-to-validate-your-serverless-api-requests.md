@@ -298,32 +298,34 @@ Let's test our API again with correct schema and Middy validator.
 
 ![Insomnia request with correct schema](/assets/examples/middy-validator/insomnia-request-with-correct-schema.png)
 
-Now the API is back working as expected. If any schema violates the schema we mentioned in our middleware, the API would throw an error.
+Now the API is back working as expected.
 
-Let's quickly try out the case of returning an invalid response. Instead of returning a number for status code, we return a string instead.
+If the schema violates the schema we set in our middleware, the API will throw an error. Let's quickly try out the case of returning an invalid response.
+
+Instead of returning a number for status code, we'll return a string instead.
 
 {%change%} Replace this line:
 
 ```js
-    statusCode: 200,
+statusCode: 200,
 ```
 
 With this:
 
 ```js
-    statusCode: "success",
+statusCode: "success",
 ```
 
-Let's test our API again.
+Let's test the API again.
 
 ![Insomnia request with Middy schema response validation](/assets/examples/middy-validator/insomnia-request-with-middy-schema-response-validation.png)
 
-Great! The server throws a `500 Internal Server Error` to let us know that something is wrong.
+Great! The server now throws a `500 Internal Server Error` to let us know that something is wrong.
 
 {%change%} Let's change the status code back.
 
 ```js
-    statusCode: 200,
+statusCode: 200,
 ```
 
 ## Deploying to prod
