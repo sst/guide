@@ -1,9 +1,13 @@
 ---
 layout: example
 title: How to create a Svelte app with serverless
+short_title: Svelte
 date: 2021-10-15 00:00:00
 lang: en
+index: 4
+type: webapp
 description: In this example we will look at how to use Svelte with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST) and the SST StaticSite construct to deploy our app to AWS S3 and CloudFront.
+short_desc: Full-stack Svelte app with a serverless API.
 repo: svelte-app
 ref: how-to-create-a-svelte-app-with-serverless
 comments_id: how-to-create-a-svelte-app-with-serverless/2522

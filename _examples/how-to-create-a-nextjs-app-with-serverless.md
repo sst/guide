@@ -1,9 +1,13 @@
 ---
 layout: example
 title: How to create a Next.js app with serverless
+short_title: Next.js
 date: 2021-09-17 00:00:00
 lang: en
+index: 2
+type: webapp
 description: In this example we will look at how to deploy a full-stack Next.js app to your AWS account with SST. We'll also compare the various deployment options for Next.js.
+short_desc: Full-stack Next.js app with DynamoDB.
 repo: nextjs-app
 ref: how-to-create-a-nextjs-app-with-serverless
 comments_id: how-to-create-a-next-js-app-with-serverless/2486

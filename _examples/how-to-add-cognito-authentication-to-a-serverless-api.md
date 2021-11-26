@@ -1,9 +1,13 @@
 ---
 layout: example
 title: How to add Cognito authentication to a serverless API
+short_title: Cognito IAM
 date: 2021-02-08 00:00:00
 lang: en
+index: 1
+type: iam-auth
 description: In this example we will look at how to add Cognito User Pool authentication to a serverless API using Serverless Stack (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
+short_desc: Authenticating with Cognito User Pool and Identity Pool.
 repo: api-auth-cognito
 ref: how-to-add-cognito-authentication-to-a-serverless-api
 comments_id: how-to-add-cognito-authentication-to-a-serverless-api/2316

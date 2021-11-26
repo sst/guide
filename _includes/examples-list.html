@@ -1,52 +1,73 @@
+{% assign groups = site.examples | group_by: "type" %}
 <section class="examples-list">
 
   <div class="icon">
     <i class="fa fa-link" aria-hidden="true"></i>
   </div>
-  {% include toc-examples.html items=site.data.examplelist.api id="api" %}
+  {% assign apis_group = groups | find: "name", "api" %}
+  {% assign apis = apis_group.items | sort: "index" %}
+  {% include toc-examples.html items=apis title="APIs" id="apis" %}
 
   <div class="icon">
     <i class="fa fa-html5" aria-hidden="true"></i>
   </div>
-  {% include toc-examples.html items=site.data.examplelist.webapp id="webapp" %}
+  {% assign webapps_group = groups | find: "name", "webapp" %}
+  {% assign webapps = webapps_group.items | sort: "index" %}
+  {% include toc-examples.html items=webapps title="Web Apps" id="webapps" %}
 
   <div class="icon">
     <i class="fa fa-mobile" aria-hidden="true"></i>
   </div>
-  {% include toc-examples.html items=site.data.examplelist.mobileapp id="mobileapp" %}
+  {% assign mobileapps_group = groups | find: "name", "mobileapp" %}
+  {% assign mobileapps = mobileapps_group.items | sort: "index" %}
+  {% include toc-examples.html items=mobileapps title="Mobile Apps" id="mobileapps" %}
 
   <div class="icon">
     <img class="graphql" src="/assets/lander/graphql-logo.svg" />
   </div>
-  {% include toc-examples.html items=site.data.examplelist.graphql id="graphql" %}
+  {% assign graphql_group = groups | find: "name", "graphql" %}
+  {% assign graphql = graphql_group.items | sort: "index" %}
+  {% include toc-examples.html items=graphql title="GraphQL" id="graphql" %}
 
   <div class="icon">
     <i class="fa fa-database" aria-hidden="true"></i>
   </div>
-  {% include toc-examples.html items=site.data.examplelist.database id="database" %}
+  {% assign databases_group = groups | find: "name", "database" %}
+  {% assign databases = databases_group.items | sort: "index" %}
+  {% include toc-examples.html items=databases title="Databases" id="databases" %}
 
   <div class="icon">
     <i class="fa fa-key" aria-hidden="true"></i>
   </div>
   <div id="auth" class="toc-section">
     <h3>Authentication</h3>
-    {% include toc-examples.html items=site.data.examplelist.iam-auth id="iam-auth" %}
-    {% include toc-examples.html items=site.data.examplelist.jwt-auth id="jwt-auth" %}
+    {% assign iam_auth_group = groups | find: "name", "iam-auth" %}
+    {% assign iam_auth = iam_auth_group.items | sort: "index" %}
+    {% include toc-examples.html items=iam_auth title="Using AWS IAM" id="iam-auth" %}
+    {% assign jwt_auth_group = groups | find: "name", "jwt-auth" %}
+    {% assign jwt_auth = jwt_auth_group.items | sort: "index" %}
+    {% include toc-examples.html items=jwt_auth title="Using JWT" id="jwt-auth" %}
   </div>
 
   <div class="icon">
     <i class="fa fa-clock-o" aria-hidden="true"></i>
   </div>
-  {% include toc-examples.html items=site.data.examplelist.async id="async" %}
+  {% assign async_group = groups | find: "name", "async" %}
+  {% assign async = async_group.items | sort: "index" %}
+  {% include toc-examples.html items=async title="Async Tasks" id="async" %}
 
   <div class="icon">
     <i class="fa fa-search" aria-hidden="true"></i>
   </div>
-  {% include toc-examples.html items=site.data.examplelist.monitoring id="monitoring" %}
+  {% assign monitoring_group = groups | find: "name", "monitoring" %}
+  {% assign monitoring = monitoring_group.items | sort: "index" %}
+  {% include toc-examples.html items=monitoring title="Monitoring" id="monitoring" %}
 
   <div class="icon">
     <i class="fa fa-cubes" aria-hidden="true"></i>
   </div>
-  {% include toc-examples.html items=site.data.examplelist.misc id="misc" %}
+  {% assign misc_group = groups | find: "name", "misc" %}
+  {% assign misc = misc_group.items | sort: "index" %}
+  {% include toc-examples.html items=misc title="Miscellaneous" id="misc" %}
 
 </section>

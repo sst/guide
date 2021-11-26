@@ -25,30 +25,104 @@ article.post.example .post-content .page-desc {
 }
 
 article.post.example section.examples-list {
-  margin-bottom: 1.5 * $spacing-unit;
+  margin-bottom: $spacing-unit;
 
   @include media-query($on-palm) {
     margin-bottom: $spacing-unit;
   }
 
   .toc-section {
+    $margin: round($spacing-unit / 4);
+
     & > h3 {
       font-size: 32px;
       font-weight: 700;
     }
+
+    & > ul {
+      margin: - $margin;
+      display: flex;
+      flex-wrap: wrap;
+      list-style-type: none;
+
+      @include media-query($on-palm) {
+        display: block;
+      }
+    }
+
     & > ul > li {
-      font-size: 20px;
-    }
-    & > ul > li i.fa {
-      top: 7px;
-      opacity: 0.8;
-      color: darken($brand-color, 15%);
-    }
-    & > ul > li span.active {
-      color: $tertiary-text-color;
+      margin: $margin;
+      flex: 0 0 286px;
+      box-sizing: border-box;
+      border-radius: 5px;
+      background: darken($background-color, 1%);
+      border: 1px solid darken($secondary-background-color, 7%);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      & > .content {
+        padding: $spacing-unit / 2;
+      }
+
+      h4 {
+        margin-bottom: 12px;
+        font-size: 18px;
+        line-height: 1.2;
+
+        a {
+          display: block;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+      p {
+        margin-bottom: 0;
+        color: $secondary-text-color;
+        font-size: 15px;
+      }
+
+      .controls {
+        padding: $spacing-unit / 2;
+        background: darken($secondary-background-color, 2%);
+
+        a {
+          padding: 8px 10px;
+          line-height: 1;
+          display: inline-block;
+          border-radius: 5px;
+          font-size: 11px;
+          border: 1px solid lighten($brand-color, 15%);
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          box-sizing: border-box;
+
+          &:hover {
+            color: white;
+            background-color: lighten($brand-color, 20%);
+          }
+
+          &:first-child {
+            margin-right: 8px;
+            color: white;
+            border-color: lighten($brand-color, 15%);
+            background-color: lighten($brand-color, 15%);
+
+            &:hover {
+              border-color: lighten($brand-color, 3%);
+              background-color: lighten($brand-color, 3%);
+            }
+          }
+        }
+      }
     }
 
     & > .toc-section {
+      &:last-child {
+        margin-top: $spacing-unit / 2;
+      }
       & > h3 {
         font-size: 20px;
         font-weight: 700;

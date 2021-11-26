@@ -1,9 +1,13 @@
 ---
 layout: example
 title: How to use MongoDB in your serverless app
+short_title: MongoDB
 date: 2021-06-04 00:00:00
 lang: en
+index: 2
+type: database
 description: In this example we will look at how to use MongoDB in your serverless app on AWS using Serverless Stack (SST). We'll be using the sst.Api construct to create a simple API that gets a list of movies.
+short_desc: Using MongoDB in a serverless API.
 repo: rest-api-mongodb
 ref: how-to-use-mongodb-in-your-serverless-app
 comments_id: how-to-use-mongodb-in-your-serverless-app/2406
