@@ -100,8 +100,7 @@ article.post.example section.examples-list {
           box-sizing: border-box;
 
           &:hover {
-            color: white;
-            background-color: lighten($brand-color, 20%);
+            background-color: lighten($brand-color, 50%);
           }
 
           &:first-child {
