@@ -1,7 +1,7 @@
 ---
 layout: example
 title: How to use queues in your serverless app
-short_desc: Queues
+short_title: Queues
 date: 2021-02-08 00:00:00
 lang: en
 index: 2
