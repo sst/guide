@@ -1,9 +1,13 @@
 ---
 layout: example
 title: How to use Sentry to monitor your serverless app
+short_title: Sentry
 date: 2021-11-01 00:00:00
 lang: en
+index: 2
+type: monitoring
 description: In this example we will look at how to use Sentry with a serverless API to create and monitor a simple click counter app. We'll be using the Serverless Stack Framework (SST).
+short_desc: Using Sentry to monitor a serverless app.
 repo: sentry
 ref: how-to-use-sentry-to-monitor-your-serverless-app
 comments_id: how-to-use-sentry-to-monitor-your-serverless-app/2521

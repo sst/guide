@@ -1,9 +1,13 @@
 ---
 layout: example
 title: How to create a REST API with serverless 
+short_title: REST API
 date: 2021-01-27 00:00:00
 lang: en
+index: 1
+type: api
 description: In this example we will look at how to create a serverless REST API on AWS using Serverless Stack (SST). We'll be using the sst.Api construct to define the routes of our API.
+short_desc: Building a simple REST API.
 repo: rest-api
 ref: how-to-create-a-rest-api-with-serverless
 comments_id: how-to-create-a-rest-api-with-serverless/2305

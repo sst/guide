@@ -1,9 +1,13 @@
 ---
 layout: example
 title: How to use Lambda Layers in your serverless app
+short_title: Lambda Layers
 date: 2021-05-26 00:00:00
 lang: en
+index: 2
+type: misc
 description: In this example we'll look at how to use a Lambda Layer in a serverless app using Serverless Stack (SST). We'll be using the chrome-aws-lambda Layer to take a screenshot of a webpage and return the image in our API.
+short_desc: Using the chrome-aws-lambda layer to take screenshots.
 repo: layer-chrome-aws-lambda
 ref: how-to-use-lambda-layers-in-your-serverless-app
 comments_id: how-to-use-lambda-layers-in-your-serverless-app/2405

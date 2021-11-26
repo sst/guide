@@ -1,9 +1,13 @@
 ---
 layout: example
 title: How to add JWT authorization with Auth0 to a serverless API
+short_title: Auth0 JWT
 date: 2021-03-02 00:00:00
 lang: en
+index: 2
+type: jwt-auth
 description: In this example we will look at how to add JWT authorization with Auth0 to a serverless API using Serverless Stack (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
+short_desc: Adding JWT authentication with Auth0.
 repo: api-auth-jwt-auth0
 ref: how-to-add-jwt-authorization-with-auth0-to-a-serverless-api
 comments_id: how-to-add-jwt-authorization-with-auth0-to-a-serverless-api/2337

@@ -1,9 +1,13 @@
 ---
 layout: example
 title: How to create a serverless GraphQL API with AWS AppSync
+short_title: AppSync
 date: 2021-03-27 00:00:00
 lang: en
+index: 2
+type: graphql
 description: In this example we'll look at how to use SST to test AppSync locally. We'll create a GraphQL API on AWS using the sst.AppSyncApi construct.
+short_desc: Building a serverless GraphQL API with AppSync.
 repo: graphql-appsync
 ref: how-to-create-a-serverless-graphql-api-with-aws-appsync
 comments_id: how-to-create-a-serverless-graphql-api-with-aws-appsync/2362
