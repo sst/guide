@@ -10,7 +10,7 @@ description: In this example we will look at how to debug AWS Lambda functions w
 short_desc: Using WebStorm to debug serverless apps.
 repo: webstorm
 ref: how-to-debug-lambda-functions-with-webstorm
-comments_id: how-to-debug-lambda-functions-with-webstorm/XXXX
+comments_id: how-to-debug-lambda-functions-with-webstorm/2529
 ---
 
 In this example we will look at how to debug AWS Lambda functions with [WebStorm](https://www.jetbrains.com/webstorm/) using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
