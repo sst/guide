@@ -57,6 +57,13 @@
   {% include toc-examples.html items=async title="Async Tasks" id="async" %}
 
   <div class="icon">
+    <i class="fa fa-code" aria-hidden="true"></i>
+  </div>
+  {% assign editors_group = groups | find: "name", "editor" %}
+  {% assign editors = editors_group.items | sort: "index" %}
+  {% include toc-examples.html items=editors title="Editors" id="editors" %}
+
+  <div class="icon">
     <i class="fa fa-search" aria-hidden="true"></i>
   </div>
   {% assign monitoring_group = groups | find: "name", "monitoring" %}
