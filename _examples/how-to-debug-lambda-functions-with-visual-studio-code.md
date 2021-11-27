@@ -153,7 +153,7 @@ This adds two debug configurations, the first is to debug Lambda functions, whil
 
 Since we are going to set breakpoints in our Lambda functions, it makes sense to increase the timeouts.
 
-SST has an [`--increase-timeout`](https://docs.serverless-stack.com/packages/cli#options) option that increases the function timeouts in your app to the maximum 15 minutes. We are using this option in our `launch.json`.
+SST has an [`--increase-timeout`]({{ site.docs_url }}/packages/cli#options) option that increases the function timeouts in your app to the maximum 15 minutes. We are using this option in our `launch.json`.
 
 ``` js
 "runtimeArgs": ["start", "--increase-timeout"],
