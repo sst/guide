@@ -109,7 +109,7 @@ export async function handler(event) {
 }
 ```
 
-## Adding WebStorm Debug Configurations
+## Adding WebStorm Debug Configuration
 
 To allow WebStorm to set breakpoints and debug our Lambda functions we'll add it to our [Debug Configurations](https://www.jetbrains.com/help/webstorm/running-and-debugging-node-js.html#running).
 

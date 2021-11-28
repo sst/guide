@@ -1,23 +1,29 @@
 ---
 layout: example
 title: How to debug Lambda functions with IntelliJ IDEA
+short_title: Debug With IntelliJ
 date: 2021-11-13 00:00:00
 lang: en
+index: 3
+type: editor
 description: In this example we will look at how to debug AWS Lambda functions with IntelliJ IDEA using Serverless Stack (SST).
+short_desc: Using IntelliJ IDEA to debug serverless apps.
 repo: intellij-idea
 ref: how-to-debug-lambda-functions-with-intellij-idea
-comments_id: how-to-debug-lambda-functions-with-intellij-idea/XXXX
+comments_id: how-to-debug-lambda-functions-with-intellij-idea/2530
 ---
 
 In this example we will look at how to debug AWS Lambda functions with [IntelliJ IDEA Ultimate](https://www.jetbrains.com/idea/) using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
 
-SST allows you to build and test Lambda functions locally using [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development). This means that you can attach breakpoints and inspect your Lambda functions locally, even if they are invoked remotely.
+SST allows you to build and test Lambda functions locally using [Live Lambda Development]({{ site.docs_url }}/live-lambda-development). This means that you can attach breakpoints and inspect your Lambda functions locally, even if they are invoked remotely.
 
+<!--
 Here is a video of it in action.
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://youtu.be/7FfY6bzeEPE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
+-->
 
 Let's look at how.
 
@@ -103,15 +109,15 @@ export async function handler(event) {
 }
 ```
 
-## Adding IntelliJ IDEA Debug Configurations
+## Adding IntelliJ IDEA Debug Configuration
 
 To allow IntelliJ IDEA to set breakpoints and debug our Lambda functions we'll add it to our [Debug Configurations](https://www.jetbrains.com/help/idea/run-debug-configuration.html).
 
-Select `package.json` from the left panel, click on the `▶️` icon next to the `start` script, and then select `Modify Run Configuration`.
+Select the `package.json` from the left panel, click on the `▶️` icon next to the `start` script, and then select **Modify Run Configuration**.
 
 ![Select run icon beside start script in IntelliJ](/assets/examples/intellij-idea/select-run-icon-beside-start-script-in-intellij.png)
 
-It will open up a popup where you need to configure the settings as per the project, IntelliJ IDEA does it automatically for us. Make sure your settings looks like below.
+It will open up a dialog where you need to configure the settings as per the project, IntelliJ IDEA does it automatically for us. Make sure your settings looks like below.
 
 ![Create run configuration in IntelliJ](/assets/examples/intellij-idea/create-run-configuration-in-intellij.png)
 
@@ -119,23 +125,25 @@ It will open up a popup where you need to configure the settings as per the proj
 
 Since we are going to set breakpoints in our Lambda functions, it makes sense to increase the timeouts.
 
-SST has an [`--increase-timeout`](https://docs.serverless-stack.com/packages/cli#options) option that increases the function timeouts in your app to the maximum 15 minutes. Add `--increase-timeout` to arguments to increase the timeout.
+SST has an [`--increase-timeout`]({{ site.docs_url }}/packages/cli#options) option that increases the function timeouts in your app to the maximum 15 minutes.
+
+{%change%} Add `--increase-timeout` to the arguments to increase the timeout.
 
 ![Set increase timeout in run configuration in IntelliJ](/assets/examples/intellij-idea/set-increase-timeout-in-run-configuration-in-intellij.png)
 
-Note that, this doesn't increase the timeout of an API. Since those cannot be increased for more than 30 seconds. But you can continue debugging the Lambda function, even after the API request times out.
+Note that, this doesn't increase the timeout of an API. Since the API Gateway timeout cannot be increased for more than 30 seconds. But you can continue debugging the Lambda function, even after the API request times out.
 
 ## Starting your dev environment
 
-Now if you open up your project in IntelliJ IDEA, you can set a breakpoint in your `src/lambda.js`.
+Now if you navigate to `src/lambda.js`, you can set a breakpoint.
 
-Next, click on `Debug` icon to start the debugging
+Click on **Debug** button to start the debugging
 
 ![Set Lambda function breakpoint in IntelliJ](/assets/examples/intellij-idea/set-lambda-function-breakpoint-in-intellij.png)
 
-The first time you start the Live Lambda Development environment, you will be prompted to enter a stage name to use locally. If you are working within a team, it is recommended that you use a stage that's specific to you. This ensures that you and your teammate can share an AWS account and still have standalone environments.
+The first time you start the [Live Lambda Development environment]({{ site.docs_url }}/live-lambda-development), you will be prompted to enter a stage name to use locally. If you are working within a team, it is recommended that you use a stage that's specific to you. This ensures that you and your teammate can share an AWS account and still have standalone environments. [Read more about this over on our docs]({{ site.docs_url }}/working-with-your-team).
 
-Note that the prompt will be shown under the `Process Console` tab.
+Note that the prompt will be shown under the **Process Console** tab.
 
 ![Enter stage name in Process Console](/assets/examples/intellij-idea/enter-stage-name-in-process-console.png)
 
@@ -198,15 +206,15 @@ You should see the new message being printed out.
 
 ## Making improvements
 
-If you're facing any memory issues while debugging, then you can disable the unused plugins and exclude the folders which are not included in the source code by right clicking on the folder and mark as **Excluded**
+If you're running into any memory issues while debugging, you can disable the unused plugins and exclude the folders that are not included in the source code. Right click on the folder and mark it as **Excluded**. In this case we are marking the `node_modules/` directory as _Excluded_.
 
 ![Exclude folders in IntelliJ](/assets/examples/intellij-idea/excluded-folders-in-intellij.png)
 
 ## Deploying your API
 
-Now that our API is tested and ready to go. Let's go ahead and deploy it for our users. You'll recall that we were using a `dev` environment, the one specified in your `sst.json`.
+Now that our API is tested and ready to go. Let's go ahead and deploy it for our users. You'll recall that we were using a dev environment.
 
-However, we are going to deploy your API again. But to a different environment, called `prod`. This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
+However, we are going to deploy your API again. But to a different environment, called `prod`. This allows us to separate our environments, so when we are working in our local environment, it doesn't break the API for our users.
 
 {%change%} Run the following in your terminal.
 
