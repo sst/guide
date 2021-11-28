@@ -5,7 +5,7 @@ short_title: Debug With VS Code
 date: 2021-04-26 00:00:00
 lang: en
 index: 1
-type: misc
+type: editor
 description: In this example we will look at how to debug AWS Lambda functions with Visual Studio Code using Serverless Stack (SST).
 short_desc: Using VS Code to debug serverless apps.
 repo: vscode
@@ -15,7 +15,7 @@ comments_id: how-to-debug-lambda-functions-with-visual-studio-code/2388
 
 In this example we will look at how to debug AWS Lambda functions with [Visual Studio Code (VS Code)](https://code.visualstudio.com) using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
 
-SST allows you to build and test Lambda functions locally using [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development). This means that you can attach breakpoints and inspect your Lambda functions locally, even if they are invoked remotely.
+SST allows you to build and test Lambda functions locally using [Live Lambda Development]({{ site.docs_url }}/live-lambda-development). This means that you can attach breakpoints and inspect your Lambda functions locally, even if they are invoked remotely.
 
 Here is a video of it in action.
 
@@ -153,7 +153,7 @@ This adds two debug configurations, the first is to debug Lambda functions, whil
 
 Since we are going to set breakpoints in our Lambda functions, it makes sense to increase the timeouts.
 
-SST has an [`--increase-timeout`](https://docs.serverless-stack.com/packages/cli#options) option that increases the function timeouts in your app to the maximum 15 minutes. We are using this option in our `launch.json`.
+SST has an [`--increase-timeout`]({{ site.docs_url }}/packages/cli#options) option that increases the function timeouts in your app to the maximum 15 minutes. We are using this option in our `launch.json`.
 
 ``` js
 "runtimeArgs": ["start", "--increase-timeout"],
