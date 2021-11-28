@@ -1,19 +1,19 @@
 ---
 layout: example
-title: How to debug Lambda functions with WebStorm
-short_title: Debug With WebStorm
+title: How to debug Lambda functions with IntelliJ IDEA
+short_title: Debug With IntelliJ
 date: 2021-11-13 00:00:00
 lang: en
-index: 2
+index: 3
 type: editor
-description: In this example we will look at how to debug AWS Lambda functions with WebStorm using Serverless Stack (SST).
-short_desc: Using WebStorm to debug serverless apps.
-repo: webstorm
-ref: how-to-debug-lambda-functions-with-webstorm
-comments_id: how-to-debug-lambda-functions-with-webstorm/2529
+description: In this example we will look at how to debug AWS Lambda functions with IntelliJ IDEA using Serverless Stack (SST).
+short_desc: Using IntelliJ IDEA to debug serverless apps.
+repo: intellij-idea
+ref: how-to-debug-lambda-functions-with-intellij-idea
+comments_id: how-to-debug-lambda-functions-with-intellij-idea/2530
 ---
 
-In this example we will look at how to debug AWS Lambda functions with [WebStorm](https://www.jetbrains.com/webstorm/) using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
+In this example we will look at how to debug AWS Lambda functions with [IntelliJ IDEA Ultimate](https://www.jetbrains.com/idea/) using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
 
 SST allows you to build and test Lambda functions locally using [Live Lambda Development]({{ site.docs_url }}/live-lambda-development). This means that you can attach breakpoints and inspect your Lambda functions locally, even if they are invoked remotely.
 
@@ -38,15 +38,15 @@ Let's look at how.
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest webstorm
-$ cd webstorm
+$ npx create-serverless-stack@latest intellij-idea
+$ cd intellij-idea
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ```json
 {
-  "name": "webstorm",
+  "name": "intellij-idea",
   "region": "us-east-1",
   "main": "stacks/index.js"
 }
@@ -109,17 +109,17 @@ export async function handler(event) {
 }
 ```
 
-## Adding WebStorm Debug Configuration
+## Adding IntelliJ IDEA Debug Configuration
 
-To allow WebStorm to set breakpoints and debug our Lambda functions we'll add it to our [Debug Configurations](https://www.jetbrains.com/help/webstorm/running-and-debugging-node-js.html#running).
+To allow IntelliJ IDEA to set breakpoints and debug our Lambda functions we'll add it to our [Debug Configurations](https://www.jetbrains.com/help/idea/run-debug-configuration.html).
 
 Select the `package.json` from the left panel, click on the `▶️` icon next to the `start` script, and then select **Modify Run Configuration**.
 
-![Select run icon beside start script in WebStorm](/assets/examples/webstorm/select-run-icon-beside-start-script-in-webstorm.png)
+![Select run icon beside start script in IntelliJ](/assets/examples/intellij-idea/select-run-icon-beside-start-script-in-intellij.png)
 
-It will open up a dialog where you need to configure the settings as per the project, WebStorm does it automatically for us. Make sure your settings look like below.
+It will open up a dialog where you need to configure the settings as per the project, IntelliJ IDEA does it automatically for us. Make sure your settings looks like below.
 
-![Create run configuration in WebStorm](/assets/examples/webstorm/create-run-configuration-in-webstorm.png)
+![Create run configuration in IntelliJ](/assets/examples/intellij-idea/create-run-configuration-in-intellij.png)
 
 ## Extending Lambda function timeouts
 
@@ -129,7 +129,7 @@ SST has an [`--increase-timeout`]({{ site.docs_url }}/packages/cli#options) opti
 
 {%change%} Add `--increase-timeout` to the arguments to increase the timeout.
 
-![Set increase timeout in run configuration in WebStorm](/assets/examples/webstorm/set-increase-timeout-in-run-configuration-in-webstorm.png)
+![Set increase timeout in run configuration in IntelliJ](/assets/examples/intellij-idea/set-increase-timeout-in-run-configuration-in-intellij.png)
 
 Note that, this doesn't increase the timeout of an API. Since the API Gateway timeout cannot be increased for more than 30 seconds. But you can continue debugging the Lambda function, even after the API request times out.
 
@@ -137,15 +137,15 @@ Note that, this doesn't increase the timeout of an API. Since the API Gateway ti
 
 Now if you navigate to `src/lambda.js`, you can set a breakpoint.
 
-Click on **Debug** icon to start the debugging
+Click on **Debug** button to start the debugging
 
-![Set Lambda function breakpoint in WebStorm](/assets/examples/webstorm/set-lambda-function-breakpoint-in-webstorm.png)
+![Set Lambda function breakpoint in IntelliJ](/assets/examples/intellij-idea/set-lambda-function-breakpoint-in-intellij.png)
 
 The first time you start the [Live Lambda Development environment]({{ site.docs_url }}/live-lambda-development), you will be prompted to enter a stage name to use locally. If you are working within a team, it is recommended that you use a stage that's specific to you. This ensures that you and your teammate can share an AWS account and still have standalone environments. [Read more about this over on our docs]({{ site.docs_url }}/working-with-your-team).
 
 Note that the prompt will be shown under the **Process Console** tab.
 
-![Enter stage name in Process Console](/assets/examples/webstorm/enter-stage-name-in-process-console.png)
+![Enter stage name in Process Console](/assets/examples/intellij-idea/enter-stage-name-in-process-console.png)
 
 It'll then take a couple of minutes to do the following:
 
@@ -165,12 +165,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-frank-webstorm-my-stack: deploying...
+dev-intellij-idea-my-stack: deploying...
 
- ✅  frank-webstorm-my-stack
+ ✅  dev-intellij-idea-my-stack
 
 
-Stack frank-webstorm-my-stack
+Stack dev-intellij-idea-my-stack
   Status: deployed
   Outputs:
     ApiEndpoint: https://siyp617yh1.execute-api.us-east-1.amazonaws.com
@@ -178,7 +178,7 @@ Stack frank-webstorm-my-stack
 
 The `ApiEndpoint` is the API we just created. Now if you head over to that endpoint in your browser, you'll notice that you'll hit the breakpoint.
 
-![Hitting a breakpoint in a Lambda function in WebStorm](/assets/examples/webstorm/hitting-a-breakpoint-in-a-lambda-function-in-webstorm.png)
+![Hitting a breakpoint in a Lambda function in IntelliJ](/assets/examples/intellij-idea/hitting-a-breakpoint-in-a-lambda-function-in-intellij.png)
 
 ## Making changes
 
@@ -186,7 +186,7 @@ An advantage of using the Live Lambda Development environment is that you can ma
 
 {%change%} Replace `src/lambda.js` with the following.
 
-``` ts
+```ts
 export async function handler(event) {
   return {
     statusCode: 200,
@@ -199,16 +199,16 @@ export async function handler(event) {
 Now if you head back to the endpoint.
 
 ```
-https://siyp617yh1.execute-api.us-east-1.amazonaws.com/
+https://siyp617yh1.execute-api.us-east-1.amazonaws.com
 ```
 
 You should see the new message being printed out.
 
-### Making improvements
+## Making improvements
 
 If you're running into any memory issues while debugging, you can disable the unused plugins and exclude the folders that are not included in the source code. Right click on the folder and mark it as **Excluded**. In this case we are marking the `node_modules/` directory as _Excluded_.
 
-![Exclude folders in WebStorm](/assets/examples/webstorm/excluded-folders-in-webstorm.png)
+![Exclude folders in IntelliJ](/assets/examples/intellij-idea/excluded-folders-in-intellij.png)
 
 ## Deploying your API
 
@@ -240,4 +240,4 @@ $ npx sst remove --stage prod
 
 ## Conclusion
 
-And that's it! You've got a brand new serverless API. A local development environment, to test and make changes. And you can use WebStorm to debug and set breakpoints in your Lambda functions. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+And that's it! You've got a brand new serverless API. A local development environment, to test and make changes. And you can use IntelliJ IDEA to debug and set breakpoints in your Lambda functions. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
