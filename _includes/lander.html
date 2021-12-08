@@ -2,32 +2,26 @@
 
   <div class="header-wrapper">
 
-    <div class="columns">
-      <div class="col1">
-        <a class="site-announcement" href="{% link _posts/2021-07-23-serverless-stack-raises-1m-to-make-it-easy-to-build-serverless-apps.md %}">
-          <span class="new">New</span>
-          <span class="copy">We raised $1M to make it easy to build serverless apps</span>
-          <i class="fa fa-angle-right" aria-hidden="true"></i>
-        </a>
-        <h1 class="site-description">Helping you build full-stack serverless apps</h1>
+    <a class="site-announcement" href="{% link _posts/2021-07-23-serverless-stack-raises-1m-to-make-it-easy-to-build-serverless-apps.md %}">
+      <span class="new">New</span>
+      <span class="copy">We raised $1M to make it easy to build serverless apps</span>
+      <i class="fa fa-angle-right" aria-hidden="true"></i>
+    </a>
+    <div class="site-description">
+      <h1 class="site-description">Making it easy to build full-stack serverless apps</h1>
+      <img src="/assets/lander/graphics/hero-scribble.svg" />
+      <img src="/assets/lander/graphics/hero-sparkle.svg" />
+    </div>
 
-        <h4 class="site-description-full">
-          Serverless Stack (SST) is a framework that makes it easy to build serverless applications. Check out our examples or follow our step-by-step guide to get started.
-        </h4>
+    <h4 class="site-description-full">
+      Serverless Stack (SST) is an open-source serverless application platform that deploys to your AWS account, helping you go from idea to IPO.
+    </h4>
 
-        <div class="controls">
-          <a class="button" href="#guide">Read the Guide</a>
-          <a class="button" href="{{ site.docs_url }}{{ site.docs_get_started }}">Get Started <i class="fa fa-angle-right" aria-hidden="true"></i></a>
-        </div>
-      </div>
-
-      <div class="col2">
-
-        <div class="video-wrapper">
-          <iframe src="https://www.youtube-nocookie.com/embed/hnTSTm5n11g?autoplay=1&amp;loop=1&amp;controls=0&amp;modestbranding=1&amp;rel=0&amp;disablekb=1&amp;mute=1&amp;muted=1" width="560" height="315" frameBorder="0" allow="autoplay; modestbranding; encrypted-media"></iframe>
-          <div class="coaster"></div>
-        </div>
-      </div>
+    <div class="controls">
+      <a class="sst-button primary" href="{{ site.docs_url }}{{ site.docs_get_started }}">
+        Get Started
+      </a>
+      <a class="sst-button secondary" href="#guide">Read the Guide</a>
     </div>
 
   </div>
@@ -72,31 +66,34 @@
   </div>
 
   <div class="list">
-    <div class="feature">
-      <div class="icon"><i class="fa fa-bolt" aria-hidden="true"></i></div>
+    <div class="feature live">
+      <img src="/assets/lander/graphics/bolt-icon.svg" />
+      <hr />
       <h4>Live Lambda Development</h4>
       <p>Work on your local Lambda functions live, without mocking or redeploying your app.</p>
     </div>
-    <div class="feature">
-      <div class="icon"><i class="fa fa-hand-o-right" aria-hidden="true"></i></div>
-      <h4>Breakpoint debugging</h4>
-      <p>Use Visual Studio code and set breakpoints to debug your Lambda functions.</p>
-    </div>
-    <div class="feature">
-      <div class="icon"><i class="fa fa-cubes" aria-hidden="true"></i></div>
-      <h4>Composable serverless constructs</h4>
-      <p>Higher-level CDK constructs made specifically for building serverless apps.</p>
+    <div class="columns">
+      <div class="feature breakpoints">
+        <img src="/assets/lander/graphics/bug-icon.svg" />
+        <hr />
+        <h4>Breakpoint debugging</h4>
+        <p>Use Visual Studio code and set breakpoints to debug your Lambda functions.</p>
+      </div>
+      <div class="feature cdk">
+        <img src="/assets/lander/graphics/parts-icon.svg" />
+        <hr />
+        <h4>Composable serverless constructs</h4>
+        <p>Higher-level CDK constructs made specifically for building serverless apps.</p>
+      </div>
     </div>
   </div>
 
 </div>
 
-{% include testimonials.html %}
-
 <div id="examples" class="examples">
 
   <div class="title">
-    <h2>Examples</h2>
+    <h2>Build <span>full-stack</span> apps</h2>
     <p>
       Quick start examples to help you build the type of Serverless Stack app you want.
       <a class="more" href="{% link _examples/index.md %}">
@@ -431,6 +428,8 @@
     </div>
   </div>
 </div>
+
+{% include testimonials.html %}
 
 <div id="guide" class="guide">
   <div class="title">

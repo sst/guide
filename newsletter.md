@@ -13,3 +13,13 @@ description: Join 30,000 other readers and subscribe to our monthly newsletter. 
 <div class="standalone-newsletter-form-container">
   {% include standalone-newsletter-form.html %}
 </div>
+
+<a href="/" class="sst-button primary">
+  Get Started
+</a>
+<a href="/" class="sst-button secondary">
+  Get Started
+</a>
+<a href="/" class="sst-button tertiary">
+  Get Started
+</a>

@@ -124,64 +124,17 @@ $reader-logo-width: 123px;
   }
 
   .header-wrapper {
-    overflow: hidden;
-    padding-bottom: 1.5 * $spacing-unit;
-
-    @include media-query($on-laptop) {
-      overflow: initial;
-    }
-  }
-
-  & .columns {
     margin: 0 auto;
-    max-width: $content-width;
-    display: flex;
-    align-items: center;
-
-    .col1 {
-      padding-left: $padding-left;
-      box-sizing: border-box;
-      max-width: $content-width - $video-width - $video-padding - $padding-left;
-      flex: 0 0 50%;
-    }
-
-    .col2 {
-      flex: 0 0 50%;
-      position: relative;
-      box-sizing: border-box;
-      padding-left: $video-padding
-    }
-
-    @include media-query($on-laptop) {
-      display: block;
-
-      .col1 {
-        text-align: center;
-        max-width: none;
-        padding-right: $spacing-unit;
-
-        .site-description {
-          max-width: none;
-        }
-      }
-      .col2 {
-        padding: 2 * $spacing-unit 0 0;
-        text-align: center;
-      }
-    }
-    @include media-query($on-palm) {
-      .col2 {
-        padding: $spacing-unit $spacing-unit / 2 0;
-      }
-    }
+    text-align: center;
+    padding-bottom: 2.5 * $spacing-unit;
   }
 
   .site-announcement {
-    margin-bottom: $spacing-unit / 2;
+    margin: 0 auto $spacing-unit / 2 + 5px;
     max-width: 560px;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     font-weight: 600;
 
     @include media-query($on-palm) {
@@ -214,26 +167,46 @@ $reader-logo-width: 123px;
   }
 
   .site-description {
-    margin: 0;
-    padding: 0;
-    font-weight: 700;
-    line-height: 1.35;
-    max-width: 560px;
-    font-size: 46px;
-    letter-spacing: -2px;
-    color: $text-color;
+    display: inline-block;
+    position: relative;
 
-    @include media-query($on-palm) {
-      font-size: 32px;
-      letter-spacing: -1px;
+    h1 {
+      margin: 0;
+      padding: 0;
+      display: inline-block;
+      font-weight: 900;
+      line-height: 105%;
+      max-width: 1000px;
+      font-size: 90px;
+      letter-spacing: -2px;
+      color: $text-color;
+      font-family: $base-font-family;
+
+      @include media-query($on-palm) {
+        font-size: 32px;
+        letter-spacing: -1px;
+      }
+    }
+
+    img:nth-child(2) {
+      position: absolute;
+      left: -59px;
+      bottom: -32px;
+    }
+
+    img:nth-child(3) {
+      position: absolute;
+      right: -39px;
+      bottom: 46px;
     }
   }
 
   .site-description-full {
-    margin: $spacing-unit / 2 0 0;
-    line-height: 1.6;
+    margin: $spacing-unit / 2 auto 0;
+    max-width: 600px;
+    line-height: 1.5;
     font-size: 20px;
-    color: $secondary-text-color;
+    color: $text-color;
     font-family: $base-font-family;
 
     a {
@@ -249,53 +222,20 @@ $reader-logo-width: 123px;
 
   .controls {
     margin-top: $spacing-unit;
+    text-align: center;
 
     @include media-query($on-palm) {
       margin-top: 20px;
     }
 
-    a.button {
-      padding: 19px 28px;
-      text-transform: uppercase;
-      font-family: $base-font-family;
-      display: inline-block;
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 1px;
-
-      @include media-query($on-palm) {
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
-        max-width: 250px;
+    a.sst-button {
+      padding: {
+        left: 80px;
+        right: 80px;
       }
 
-      &:first-child {
-        margin-right: $spacing-unit / 2;
-        background-color: $brand-color;
-
-        i.fa {
-          margin-right: 2px;
-          vertical-align: -1px;
-        }
-
-        @include media-query($on-palm) {
-          margin-right: auto;
-          margin-bottom: 10px;
-        }
-      }
-      &:first-child:hover {
-        background-color: lighten($brand-color, 7%);
-      }
       &:last-child {
-        background-color: $important-color;
-
-        i.fa {
-          margin-left: 1px;
-        }
-      }
-      &:last-child:hover {
-        background-color: lighten($important-color, 7%);
+        margin-left: $spacing-unit;
       }
     }
 
@@ -350,9 +290,10 @@ $reader-logo-width: 123px;
 }
 
 .home > .features {
-  padding: 3 * $spacing-unit + 10px $spacing-unit 0;
+  padding: 0 $spacing-unit 1.5 * $spacing-unit + 5px;
+  border-bottom: 1px dashed $brand-color;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
 
   @include media-query($on-laptop) {
@@ -373,19 +314,31 @@ $reader-logo-width: 123px;
   }
 
   .list {
-    margin-left: 3.5 * $spacing-unit;
-    max-width: 400px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
+    margin-left: $spacing-unit;
+
+    .columns {
+      margin-top: $spacing-unit;
+      display: flex;
+      align-items: stretch;
+    }
 
     @include media-query($on-laptop) {
       margin: 1.5 * $spacing-unit auto 0;
     }
 
     .feature {
-      margin-bottom: 2 * $spacing-unit - 5px;
+      padding: $spacing-unit $spacing-unit + 5px;
+      border-radius: 16px;
+      border: 1px dashed $important-color;
+
+      &.breakpoints {
+        flex: 1 1.5 auto;
+        margin-right: $spacing-unit / 2;
+      }
+      &.cdk {
+        flex: 1 1 auto;
+        margin-left: $spacing-unit / 2;
+      }
 
       @include media-query($on-palm) {
         margin-bottom: $spacing-unit;
@@ -394,6 +347,15 @@ $reader-logo-width: 123px;
       &:last-child {
         margin-bottom: 0;
       }
+
+      hr {
+        margin: 17px 0 13px;
+        border-top: 1px dashed $important-color;
+      }
+
+      &.live { hr { max-width: 250px; } }
+      &.breakpoints { hr { max-width: 235px; } }
+      &.cdk { hr { max-width: 300px; } }
 
       .icon {
         $size: 42px;
@@ -415,13 +377,14 @@ $reader-logo-width: 123px;
       }
 
       h4 {
-        margin-bottom: 3px;
+        margin-bottom: 6px;
         font-weight: 700;
-        font-size: 20px;
+        line-height: 1.5;
+        font-family: $base-font-family;
       }
       p {
         margin-bottom: 0;
-        font-size: 18px;
+        line-height: 1.5;
         color: $secondary-text-color;
       }
     }
@@ -429,7 +392,7 @@ $reader-logo-width: 123px;
 }
 
 .home > .examples {
-  padding: $spacing-unit $spacing-unit 0;
+  padding: 1.5 * $spacing-unit + 5px $spacing-unit 0;
 
   @include media-query($on-laptop) {
     padding: 5px 0 0;
@@ -449,9 +412,15 @@ $reader-logo-width: 123px;
 
     h2 {
       margin-bottom: 5px;
-      line-height: 1.1;
-      font-size: 44px;
-      font-weight: 700;
+      line-height: 1.2;
+      font-size: 54px;
+      font-weight: 900;
+      font-family: $base-font-family;
+      color: $important-color;
+
+      span {
+        color: $text-color;
+      }
 
       @include media-query($on-palm) {
         font-size: 36px;
@@ -459,7 +428,8 @@ $reader-logo-width: 123px;
     }
     p {
       margin-bottom: 0;
-      color: $tertiary-text-color;
+      color: $secondary-text-color;
+      line-height: 1.5;
 
       a.more {
         padding-top: 5px;
@@ -514,11 +484,11 @@ $reader-logo-width: 123px;
     }
     .scroll-shadow.left {
       left: 0;
-      background-image: linear-gradient(to left, rgba(255, 251, 249, 0), rgba(255, 251, 249, 1));
+      background-image: linear-gradient(to left, transparentize($secondary-background-color, 1), transparentize($secondary-background-color, 0));
     }
     .scroll-shadow.right {
       right: 0;
-      background-image: linear-gradient(to right, rgba(255, 251, 249, 0), rgba(255, 251, 249, 1));
+      background-image: linear-gradient(to right, transparentize($secondary-background-color, 1), transparentize($secondary-background-color, 0));
     }
 
     button {
