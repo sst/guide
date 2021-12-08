@@ -392,11 +392,9 @@ $reader-logo-width: 123px;
 }
 
 .home > .examples {
-  padding: 1.5 * $spacing-unit + 5px $spacing-unit 0;
+  padding: 1.5 * $spacing-unit + 5px $spacing-unit;
+  border-bottom: 1px dashed $brand-color;
 
-  @include media-query($on-laptop) {
-    padding: 5px 0 0;
-  }
   @include media-query($on-palm) {
     padding-top: 0;
   }
@@ -444,7 +442,7 @@ $reader-logo-width: 123px;
   }
 
   & > .controls {
-    margin-bottom: $spacing-unit;
+    margin-bottom: 1.5 * $spacing-unit;
     position: relative;
 
     @include media-query($on-laptop) {
@@ -501,7 +499,7 @@ $reader-logo-width: 123px;
       cursor: pointer;
       transition: .3s;
       font-size: 16px;
-      font-weight: 700;
+      font-weight: 600;
       appearance: none;
       background: none;
       line-height: 1.1;
@@ -510,7 +508,7 @@ $reader-logo-width: 123px;
       box-sizing: border-box;
       padding: 0 $height / 2;
       border-radius: $height / 2;
-      color: $secondary-text-color;
+      color: $text-color;
       transition: all .2s ease-out;
 
       &:focus { outline: 0; }
@@ -543,10 +541,15 @@ $reader-logo-width: 123px;
   }
 
   .example-list > .example {
+    padding: 5px $spacing-unit 5px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: $background-color;
+    border-radius: 28px;
+    box-shadow: 6px 9px 25px rgba(57, 92, 107, 0.05),
+                0px 4px 12px rgba(57, 92, 107, 0.1);
 
     @include media-query($on-laptop) {
       display: block;
@@ -651,6 +654,9 @@ $reader-logo-width: 123px;
       }
     }
     .code-editor {
+      position: relative;
+      top: -20px;
+      right: -10px;
       flex: 0 0 auto;
       @extend %code-editor;
 
