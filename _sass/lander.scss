@@ -495,6 +495,7 @@ $reader-logo-width: 123px;
       $height: 34px;
 
       margin: 0;
+      z-index: 1;
       border: none;
       height: $height;
       cursor: pointer;
@@ -504,6 +505,7 @@ $reader-logo-width: 123px;
       appearance: none;
       background: none;
       line-height: 1.1;
+      position: relative;
       white-space: nowrap;
       box-sizing: border-box;
       padding: 0 $height / 2;
@@ -519,7 +521,7 @@ $reader-logo-width: 123px;
       &.highlight {
         top: 0;
         left: 0;
-        z-index: -1;
+        z-index: 0;
         position: absolute;
         color: transparent;
         pointer-events: none;
