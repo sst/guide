@@ -8,7 +8,27 @@ description: To implement a signup form in our React.js app using Amazon Cognito
 comments_id: signup-with-aws-cognito/130
 ---
 
-Now let's go ahead and implement the `handleSubmit` and `handleConfirmationSubmit` functions and connect it up with our AWS Cognito setup.
+Now let's go ahead and implement the `handleSubmit` and `handleConfirmationSubmit` functions and connect it up with our AWS Cognito setup. We will also add some code to control for the user navigating away from the page to get their AWS confirmation code, which otherwise may cause your page to refresh and lose state (this issue usually appears on mobile devices).
+
+{%change%} First, add `useEffect` to the `import`s in the top line of `src/containers/Signup.js`, so it looks like this:
+
+``` javascript
+import React, { useState, useEffect } from "react";
+```
+
+{%change%} Then we will add a variable that will serve as our key to store and retrieve user data from `localStorage`, and a check for that data when someone navigates to, or refreshes, the page. This should be added right below the `useState()` variables:
+
+``` javascript
+  const tempAddressForUserInfo = 'tempNewUserData';
+ 
+  useEffect(() => {
+    const tempNewUser = window.localStorage.getItem(tempAddressForUserInfo);
+ 
+    if (tempNewUser) {
+      setNewUser(JSON.parse(tempNewUser));
+    }
+  }, []);
+```
 
 {%change%} Replace our `handleSubmit` and `handleConfirmationSubmit` functions in `src/containers/Signup.js` with the following.
 
@@ -23,6 +43,8 @@ async function handleSubmit(event) {
       username: fields.email,
       password: fields.password,
     });
+
+    window.localStorage.setItem(tempAddressForUserInfo, JSON.stringify(newUser));
     setIsLoading(false);
     setNewUser(newUser);
   } catch (e) {
@@ -42,6 +64,7 @@ async function handleConfirmationSubmit(event) {
 
     userHasAuthenticated(true);
     history.push("/");
+    window.localStorage.removeItem(tempAddressForUserInfo);
   } catch (e) {
     onError(e);
     setIsLoading(false);
