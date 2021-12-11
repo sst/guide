@@ -584,6 +584,7 @@ $reader-logo-width: 123px;
 
     .info {
       margin-right: $spacing-unit;
+      position: relative;
       max-width: 288px;
 
       @include media-query($on-laptop) {
@@ -682,6 +683,7 @@ $reader-logo-width: 123px;
     }
     .code-editor {
       flex: 0 0 auto;
+      position: relative;
       @extend %code-editor;
 
       @include media-query($on-palm) {
