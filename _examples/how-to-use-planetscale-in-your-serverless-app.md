@@ -1,26 +1,26 @@
 ---
 layout: example
-title: How to use Planetscale in your serverless app
-short_title: Planetscale
+title: How to use PlanetScale in your serverless app
+short_title: PlanetScale
 date: 2021-12-12 00:00:00
 lang: en
 index: 5
 type: database
-description: In this example we will look at how to use Planetscale in your serverless app on AWS using Serverless Stack (SST). We'll be using the sst.Api and sst.Table to create a simple hit counter.
-short_desc: Using Planetscale in a serverless API.
+description: In this example we will look at how to use PlanetScale in your serverless app on AWS using Serverless Stack (SST). We'll be using the sst.Api and sst.Table to create a simple hit counter.
+short_desc: Using PlanetScale in a serverless API.
 repo: planetscale
 ref: how-to-use-planetscale-in-your-serverless-app
 comments_id: how-to-use-planetscale-in-your-serverless-app/xxxx
 ---
 
-In this example we will look at how to use Planetscale in our serverless app using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be creating a simple hit counter.
+In this example we will look at how to use PlanetScale in our serverless app using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be creating a simple hit counter.
 
 ## Requirements
 
 - Node.js >= 10.15.1
 - We'll be using Node.js (or ES) in this example but you can also use TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
-- A [Planetscale account](https://auth.planetscale.com/sign-up) with the [pscale CLI configured locally](https://docs.planetscale.com/reference/planetscale-environment-setup)
+- A [PlanetScale account](https://auth.planetScale.com/sign-up) with the [pscale CLI configured locally](https://docs.planetScale.com/reference/planetScale-environment-setup)
 
 ## Create an SST app
 
@@ -53,15 +53,15 @@ An SST app is made up of two parts.
 
    The code that's run when your API is invoked is placed in the `src/` directory of your project.
 
-## What is planetscale?
+## What is planetScale?
 
 PlanetScale is a MySQL-compatible, serverless database platform powered by Vitess, which is a database clustering system for horizontal scaling of MySQL (as well as Percona and MariaDB). Vitess also powers Slack, Square, GitHub, and YouTube, among others. The Slack deployment of Vitess has about 6,000 servers; the current largest Vitess deployment has about 70,000 servers.
 
-## Adding planetscale
+## Adding planetScale
 
-[Planetscale](https://planetscale.com/) is a reliable and highly-performant MySQL database that can be configured as a true serverless database. Meaning that it'll scale up and down automatically. And you won't get charged if you are not using it.
+[PlanetScale](https://planetScale.com/) is a reliable and highly-performant MySQL database that can be configured as a true serverless database. Meaning that it'll scale up and down automatically. And you won't get charged if you are not using it.
 
-> Make sure you have [pscale CLI](https://docs.planetscale.com/reference/planetscale-environment-setup) installed locally
+> Make sure you have [pscale CLI](https://docs.planetScale.com/reference/planetScale-environment-setup) installed locally
 
 Sign in to your account
 
@@ -95,7 +95,7 @@ pscale shell demo main
 
 You are now connected to your main branch and can run MySQL queries against it.
 
-Create a table by running the following command:
+### Create a table by running the following command:
 
 ```sql
 CREATE TABLE IF NOT EXISTS counter (counter VARCHAR(255) PRIMARY KEY, tally INT);
@@ -107,7 +107,8 @@ You can confirm that the table has been added by running the following command:
 DESCRIBE counter;
 ```
 
-Insert data into your database
+### Insert data into your database
+
 Now that you have created a counter table, you can insert data into that table.
 
 Run the following command to add a hits counter to your table.
@@ -116,7 +117,7 @@ Run the following command to add a hits counter to your table.
 INSERT INTO counter (counter, tally) VALUES ('hits', 0) ON DUPLICATE KEY UPDATE tally = 0;
 ```
 
-![terminal output](/assets/examples/planetscale/terminal-output.png)
+![terminal output](/assets/examples/planetScale/terminal-output.png)
 
 We will be using the PlanetScale API to provision a TLS certificate, and then connects to the database. It uses Service Tokens for authentication, so you'll need to create one for the app:
 
@@ -158,18 +159,16 @@ export default class MyStack extends sst.Stack {
 
     // Create a HTTP API
     const api = new sst.Api(this, "Api", {
-      routes: {
-        "POST /": {
-          function: {
-            handler: "src/lambda.handler",
-            environment: {
-              PLANETSCALE_TOKEN: process.env.PLANETSCALE_TOKEN,
-              PLANETSCALE_TOKEN_NAME: process.env.PLANETSCALE_TOKEN_NAME,
-              PLANETSCALE_ORG: process.env.PLANETSCALE_ORG,
-              PLANETSCALE_DB: process.env.PLANETSCALE_DB,
-            },
-          },
+      defaultFunctionProps: {
+        environment: {
+          PLANETSCALE_TOKEN: process.env.PLANETSCALE_TOKEN,
+          PLANETSCALE_TOKEN_NAME: process.env.PLANETSCALE_TOKEN_NAME,
+          PLANETSCALE_ORG: process.env.PLANETSCALE_ORG,
+          PLANETSCALE_DB: process.env.PLANETSCALE_DB,
         },
+      },
+      routes: {
+        "POST /": "src/lambda.handler",
       },
     });
 
@@ -187,18 +186,18 @@ We also pass in the credentials we created to our API through environment variab
 
 ## Reading from our table
 
-Now in our function, we'll start by reading from our planetscale table.
+Now in our function, we'll start by reading from our planetScale table.
 
-To access planetscale database we'll be using a package `planetscale-node`, install it the by running below command.
+To access planetScale database we'll be using a package `planetScale-node`, install it the by running below command.
 
 ```bash
-npm install planetscale-node
+npm install planetScale-node
 ```
 
 {%change%} Now replace `src/lambda.js` with the following.
 
 ```js
-import { PSDB } from "planetscale-node";
+import { PSDB } from "planetScale-node";
 // connect to main branch
 const db = new PSDB("main");
 
@@ -216,7 +215,7 @@ export async function handler() {
 }
 ```
 
-We make a `POST` call to our planetscale table and get the value of a row where the `counter` column has the value `hits`. Since, we haven't written to this column yet, we are going to just return `0`.
+We make a `POST` call to our planetScale table and get the value of a row where the `counter` column has the value `hits`. Since, we haven't written to this column yet, we are going to just return `0`.
 
 And let's test what we have so far.
 
@@ -239,12 +238,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-planetscale-my-stack: deploying...
+dev-planetScale-my-stack: deploying...
 
- ✅  dev-planetscale-my-stack
+ ✅  dev-planetScale-my-stack
 
 
-Stack dev-planetscale-my-stack
+Stack dev-planetScale-my-stack
   Status: deployed
   Outputs:
     ApiEndpoint: https://u3nnmgdigh.execute-api.us-east-1.amazonaws.com
