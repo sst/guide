@@ -145,17 +145,26 @@ div.support-footer {
 // Newsletter Form Chrome
 %newsletter-input {
   box-sizing: border-box;
-  color: #555;
+  color: $background-color;
   font-family: $base-font-family;
-  background-color: white;
+  background-color: transparentize($background-color, 0.9);
   border-radius: 3px;
-  border: 2px solid $grey-color-light;
-  text-align: center;
+  border: 1px solid $background-color;
+  text-align: left;
   -webkit-appearance: none;
+  transition: 0.3s;
+
+  &::placeholder {
+    color: transparentize($secondary-background-color, 0.3);
+  }
 
   &:focus {
     border-color: darken($grey-color-light, 10%);
+    background-color: transparentize($background-color, 0.7);
     outline: none;
+
+    &::placeholder {
+    }
   }
 }
 

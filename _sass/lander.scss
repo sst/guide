@@ -1276,10 +1276,12 @@ $reader-logo-width: 123px;
   }
 
   .form-container {
-    margin: $spacing-unit - 10px auto 0;
+    margin: $spacing-unit auto 0;
+    position: relative;
     padding: $spacing-unit;
     background-color: $brand-color;
-    border-radius: 4px;
+    border-radius: 16px;
+    border: 1px dashed $background-color;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1291,8 +1293,8 @@ $reader-logo-width: 123px;
     }
 
     div.form-copy {
-      margin-right: 10px;
-      color: white;
+      margin-right: $spacing-unit + 5px;
+      color: $background-color;
 
       @include media-query($on-palm) {
         margin-right: 0;
@@ -1301,14 +1303,27 @@ $reader-logo-width: 123px;
       }
 
       p:first-child {
-        margin: 0;
-        font-size: 20px;
+        margin-bottom: 6px;
+        font-size: 16px;
+        font-weight: 700;
       }
       p:last-child {
         margin: 0;
-        font-size: 14px;
+        font-size: 16px;
+        line-height: 1.5;
         opacity: 0.7;
       }
+    }
+
+    img.sparkle-left {
+      position: absolute;
+      left: -43px;
+      top: -83px;
+    }
+    img.sparkle-right {
+      position: absolute;
+      right: -43px;
+      top: -79px;
     }
   }
 
@@ -1332,9 +1347,10 @@ $reader-logo-width: 123px;
 
       input {
         margin: 0;
-        padding: 10px;
+        padding: 11px 18px;
         width: 240px;
-        font-size: 20px;
+        font-size: 18px;
+        line-height: 32px;
         height: auto;
         @extend %newsletter-input;
 
@@ -1346,33 +1362,15 @@ $reader-logo-width: 123px;
 
       .email-octopus-form-row-subscribe {
         margin-top: 0;
-        margin-left: 10px;
+        margin-left: $spacing-unit;
       }
 
       button {
         margin: 0;
-        padding: 19px 20px;
-        font-size: 18px;
-        white-space: nowrap;
-        text-transform: uppercase;
-        font-family: $base-font-family;
-        display: inline-block;
-        letter-spacing: 1px;
-        background-color: $important-color;
-        color: white;
-        border-radius: 4px;
-        line-height: 1;
-        transition: 0.3s;
-        cursor: pointer;
-
-        @include media-query($on-palm) {
-          padding: 18px 13px;
-          font-size: 12px;
-        }
-
-        &:hover {
-          background-color: lighten($important-color, 7%);
-        }
+        padding: 17px 40px 16px;
+        box-shadow: none;
+        font-size: 16px;
+        line-height: 18px;
       }
     }
   }
@@ -1568,7 +1566,7 @@ $reader-logo-width: 123px;
  */
 .home .table-of-contents {
 
-  margin: 1.5 * $spacing-unit 0;
+  margin: 2.5 * $spacing-unit 0;
 
   @include media-query($on-palm) {
     margin-top: $spacing-unit / 2;
@@ -1598,13 +1596,15 @@ $reader-logo-width: 123px;
   div.part {
 
     .header {
-      margin: 0 $spacing-unit / 2 $spacing-unit / 2;
+      margin: 0 $spacing-unit / 2 $spacing-unit - 10px;
 
       h3 {
-        margin-bottom: 5px;
-        font-size: 30px;
-        font-weight: 500;
+        margin-bottom: 10px;
+        font-size: 54px;
+        font-weight: 900;
         text-align: center;
+        line-height: 1.1;
+        font-family: $base-font-family;
 
         @include media-query($on-laptop) {
           font-size: 26px;
@@ -1613,13 +1613,17 @@ $reader-logo-width: 123px;
       p {
         margin: 0;
         text-align: center;
-        color: $secondary-text-color;
+        color: $text-color;
+        line-height: 1.5;
       }
 
       @include media-query($on-laptop) {
         &.best-practices {
           margin-top: $spacing-unit + 10px;
         }
+      }
+      &.the-basics {
+        h3 { color: $important-color; }
       }
       &.extra-credit,
       &.serverless-framework {
@@ -1632,9 +1636,8 @@ $reader-logo-width: 123px;
 
       padding-bottom: $spacing-unit;
       border-radius: 4px;
-      background-color: white;
-      border: 1px solid darken($background-color, 15%);
-      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+      border: 1px dashed $important-color;
+      background-color: $secondary-background-color;
       max-height: $max-height;
       overflow: hidden;
       position: relative;
@@ -1656,12 +1659,22 @@ $reader-logo-width: 123px;
           padding: 0 $spacing-unit;
           font-family: $base-font-family;
           text-transform: uppercase;
-          letter-spacing: 1px;
-          color: $tertiary-text-color;
-          font-size: 18px;
+          letter-spacing: 0.04rem;
+          color: $secondary-text-color;
+          font-size: 16px;
+          font-weight: bold;
+          line-height: 1.5;
 
           @include media-query($on-laptop) {
             padding: 0 $spacing-unit / 2;
+          }
+
+          &:after {
+            margin-top: $spacing-unit / 2;
+            content: "";
+            display: block;
+            max-width: 206px;
+            border-top: 1px dashed $important-color;
           }
         }
 
@@ -1669,14 +1682,15 @@ $reader-logo-width: 123px;
           li {
             padding: 4px 0;
             a {
-              font-size: 20px;
+              font-size: 16px;
+              line-height: 1.5;
             }
           }
         }
 
         & > ul {
           margin: 0;
-          padding: $spacing-unit / 2 $spacing-unit 0;
+          padding: $spacing-unit / 2 - 3px $spacing-unit 0;
 
           @include media-query($on-laptop) {
             padding: $spacing-unit / 2 $spacing-unit / 2 0;
@@ -1689,7 +1703,7 @@ $reader-logo-width: 123px;
       }
 
       &.the-basics {
-        max-height: 1830px;
+        max-height: 1870px;
 
         @include media-query($on-laptop) {
           max-height: 1.5 * $max-height;
@@ -1710,35 +1724,23 @@ $reader-logo-width: 123px;
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 80px;
+        height: 200px;
         cursor: pointer;
         background: linear-gradient(
-          180deg, rgba(255,251,249,0) 0%,
-          rgba(255,251,249,0.7867914244186046) 25%,
-          rgba(255,251,249,1) 98%
+          180deg, transparentize($secondary-background-color, 1) 0%,
+          transparentize($secondary-background-color, 0.214) 25%,
+          transparentize($secondary-background-color, 0) 98%
         );
         display: flex;
         justify-content: center;
         align-items: flex-end;
 
         span {
-          margin-bottom: $spacing-unit / 2;
-          background-color: white;
-          border-radius: 19px;
-          padding: 7px 19px;
-          color: $text-color;
-          text-transform: uppercase;
-          font-family: $base-font-family;
+          padding: 13px 67px;
+          margin-bottom: $spacing-unit;
           display: inline-block;
-          font-size: 12px;
-          font-weight: 700;
-          letter-spacing: 1px;
-          line-height: 1;
-          box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-        }
-
-        &:hover span {
-          background-color: darken(white, 2%);
+          font-size: 16px;
+          font-weight: 500;
         }
       }
     }

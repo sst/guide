@@ -9,7 +9,7 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
 
     <div class="col1">
       <div class="part">
-        <div id="the-basics" class="header">
+        <div id="the-basics" class="header the-basics">
           <h3>The Basics</h3>
           <p>Build your first serverless app using AWS Lambda and React.</p>
         </div>
@@ -38,7 +38,7 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
           {% include toc-chapters.html items=site.data.chapterlist.monitor-debug-errors id="monitor-debug-errors" %}
 
           {% include toc-chapters.html items=site.data.chapterlist.conclusion id="conclusion" %}
-          <a class="expand"><span>Show all chapters</span></a>
+          <a class="expand"><span class="sst-button tertiary">Show all</span></a>
         </div>
       </div>
     </div>
@@ -56,7 +56,7 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
           {% include toc-chapters.html items=site.data.chapterlist.development-lifecycle id="development-lifecycle" %}
           {% include toc-chapters.html items=site.data.chapterlist.observability id="observability" %}
           {% include toc-chapters.html items=site.data.chapterlist.best-practices-conclusion id="best-practices-conclusion" %}
-          <a class="expand"><span>Show all chapters</span></a>
+          <a class="expand"><span class="sst-button tertiary">Show all</span></a>
         </div>
       </div>
 
@@ -73,7 +73,7 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
           {% include toc-chapters.html items=site.data.chapterlist.third-party-apis id="third-party-apis" %}
           {% include toc-chapters.html items=site.data.chapterlist.domains-hosting id="domains-hosting" %}
           {% include toc-chapters.html items=site.data.chapterlist.infrastructure-as-code id="infrastructure-as-code" %}
-          <a class="expand"><span>Show all chapters</span></a>
+          <a class="expand"><span class="sst-button tertiary">Show all</span></a>
         </div>
       </div>
 
@@ -86,7 +86,7 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
           {% include toc-chapters.html items=site.data.chapterlist.extra-backend id="extra-backend" %}
           {% include toc-chapters.html items=site.data.chapterlist.extra-auth id="extra-auth" %}
           {% include toc-chapters.html items=site.data.chapterlist.extra-frontend id="extra-frontend" %}
-          <a class="expand"><span>Show all chapters</span></a>
+          <a class="expand"><span class="sst-button tertiary">Show all</span></a>
         </div>
       </div>
     </div>
