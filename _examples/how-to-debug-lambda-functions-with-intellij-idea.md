@@ -20,7 +20,7 @@ SST allows you to build and test Lambda functions locally using [Live Lambda Dev
 Here is a video of it in action.
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://youtu.be/iABx-4bjWJ0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://youtu.be/embed/iABx-4bjWJ0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 Let's look at how.
