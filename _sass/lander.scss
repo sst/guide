@@ -19,6 +19,17 @@ $reader-logo-width: 123px;
   }
 }
 
+%gradient-text {
+  color: $background-color;
+  background-color: $background-color;
+  background-image: linear-gradient(-149.11deg, transparentize($important-color, 0.25), transparentize($important-color, 1));
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-text-fill-color: transparent;
+}
+
 %code-editor {
   background-color: darken($brand-color, 20%);
   border-radius: 8px;
@@ -147,7 +158,7 @@ $reader-logo-width: 123px;
       text-transform: uppercase;
       letter-spacing: 1px;
       color: $important-color;
-      background-color: lighten($important-color, 30%);
+      background-color: lighten($important-color, 25%);
       padding: 3px 5px;
       line-height: 1;
       border-radius: 3px;
@@ -290,11 +301,18 @@ $reader-logo-width: 123px;
 }
 
 .home > .features {
-  padding: 0 $spacing-unit 1.5 * $spacing-unit + 5px;
-  border-bottom: 1px dashed $brand-color;
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
+  margin: 0 auto;
+  padding: 0 $spacing-unit;
+
+  & > .content {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+  }
+
+  &:after {
+    @extend %bottom-border;
+  }
 
   @include media-query($on-laptop) {
     display: block;
@@ -393,8 +411,12 @@ $reader-logo-width: 123px;
 
 .home > .sections {
   text-align: center;
-  padding: 2.5 * $spacing-unit + 5px $spacing-unit;
-  border-bottom: 1px dashed $brand-color;
+  padding: 2.5 * $spacing-unit + 5px $spacing-unit 0;
+
+  &:after {
+    @extend %bottom-border;
+    margin-top: 2.5 * $spacing-unit;
+  }
 
   @include media-query($on-palm) {
     padding-top: 0;
@@ -812,11 +834,20 @@ $reader-logo-width: 123px;
 }
 
 .home > .case-studies {
-  margin: 2.5 * $spacing-unit $spacing-unit 2.5 * $spacing-unit;
-  background-color: $brand-color;
-  padding: 2 * $spacing-unit - 5px 2 * $spacing-unit 2 * $spacing-unit;
-  border-radius: 16px;
-  color: $background-color;
+  margin: 2.5 * $spacing-unit auto 2.5 * $spacing-unit;
+  padding: 0 $spacing-unit;
+
+  &:after {
+    @extend %bottom-border;
+    margin-top: 2 * $spacing-unit + 10px;
+  }
+
+  & > .content {
+    padding: 2 * $spacing-unit - 5px 2 * $spacing-unit 2 * $spacing-unit;
+    background-color: $brand-color;
+    border-radius: 16px;
+    color: $background-color;
+  }
 
   h3 {
     margin-bottom: $spacing-unit + 10px;
@@ -827,14 +858,74 @@ $reader-logo-width: 123px;
     color: $background-color;
   }
 
-  .case-study {
-    padding: 1.5 * $spacing-unit + 5px;
-    border: 1px dashed $background-color; 
+  .slideshow-container {
     position: relative;
-    border-radius: 16px;
+
+    .slideshow {
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px dashed $background-color; 
+
+      ul {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display: flex;
+      }
+    }
+
+    & > button {
+      $size: 36px;
+
+      background-color: $brand-color;
+      padding: 0;
+      position: absolute;
+      top: 50%;
+      margin-top: - $size / 2;
+      width: $size;
+      height: $size;
+      border-radius: 50%;
+      border: 1px dashed $background-color;
+      box-shadow: 0px 6px 12px -2px #2E4752;
+      cursor: pointer;
+
+      &:hover { background-color: #274D5E; }
+      &:active { background-color: #1D3E4D; }
+
+      img {
+        margin-top: -2px;
+      }
+
+      &.prev {
+        left: - $size / 2;
+
+        img {
+          margin-left: -3px;
+        }
+      }
+      &.next {
+        right: - $size / 2;
+
+        img {
+          margin-right: -3px;
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  .case-study {
+    flex: 1 0 auto;
+    width: 100%;
+    padding: 1.5 * $spacing-unit + 5px;
+    position: relative;
     display: flex;
     align-items: center;
     flex-direction: column;
+    box-sizing: border-box;
   }
 
   .author {
@@ -873,20 +964,13 @@ $reader-logo-width: 123px;
   }
 
   h5 {
+    @extend %gradient-text;
     margin: 1.5 * $spacing-unit - 5px 0 0;
     text-align: center;
-    max-width: 530px;
     font-weight: 600;
     font-size: 54px;
     line-height: 1.1;
-    color: white;
-    background-color: white;
-    background-image: linear-gradient(-149.11deg, transparentize($important-color, 0.25), transparentize($important-color, 1));
-    background-size: 100%;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    -webkit-text-fill-color: transparent; 
-    -moz-text-fill-color: transparent;
+    flex: 1 1 auto;
   }
 
   .logo {
@@ -900,54 +984,13 @@ $reader-logo-width: 123px;
       right: 2.5 * $spacing-unit;
     }
   }
-
-  button {
-    $size: 36px;
-
-    background-color: $brand-color;
-    padding: 0;
-    position: absolute;
-    top: 50%;
-    margin-top: - $size / 2;
-    width: $size;
-    height: $size;
-    border-radius: 50%;
-    border: 1px dashed $background-color;
-    box-shadow: 0px 6px 12px -2px #2E4752;
-    cursor: pointer;
-
-    &:hover { background-color: #274D5E; }
-    &:active { background-color: #1D3E4D; }
-
-    img {
-      margin-top: -2px;
-    }
-
-    &.prev {
-      left: - $size / 2;
-
-      img {
-        margin-left: -3px;
-      }
-    }
-    &.next {
-      right: - $size / 2;
-
-      img {
-        margin-right: -3px;
-        transform: rotate(180deg);
-      }
-    }
-  }
 }
 
 /**
  * Testimonials
  */
 .home .testimonials {
-  padding-top: 2 * $spacing-unit + 10px;
   margin: 0 auto;
-  border-top: 1px dashed $brand-color;
   position: relative;
   max-width: $post-content-width;
 
@@ -1160,12 +1203,21 @@ $reader-logo-width: 123px;
 }
 
 .home > .community {
-  margin: 3.5 * $spacing-unit $spacing-unit 0;
-  padding: 2 * $spacing-unit;
-  background-color: $text-color;
-  border-radius: 16px;
-  box-shadow: 6px 9px 25px rgba(57, 92, 107, 0.3),
-              0px 4px 12px rgba(57, 92, 107, 0.4);
+  margin: 3.5 * $spacing-unit auto 0;
+  padding: 0 $spacing-unit;
+
+  &:after {
+    @extend %bottom-border;
+    margin-top: 2.5 * $spacing-unit;
+  }
+
+  & > .content {
+    padding: 2 * $spacing-unit;
+    background-color: $text-color;
+    border-radius: 16px;
+    box-shadow: 6px 9px 25px rgba(57, 92, 107, 0.3),
+                0px 4px 12px rgba(57, 92, 107, 0.4);
+  }
 
   h4 {
     margin-bottom: 1.5 * $spacing-unit;
@@ -1209,14 +1261,7 @@ $reader-logo-width: 123px;
 
       &:nth-child(2) {
         h6 {
-          color: white;
-          background-color: white;
-          background-image: linear-gradient(-149.11deg, transparentize($important-color, 0.25), transparentize($important-color, 1));
-          background-size: 100%;
-          -webkit-background-clip: text;
-          -moz-background-clip: text;
-          -webkit-text-fill-color: transparent; 
-          -moz-text-fill-color: transparent;
+          @extend %gradient-text;
         }
       }
       p {
@@ -1229,7 +1274,7 @@ $reader-logo-width: 123px;
 }
 
 .home > .guide {
-  padding: 3.5 * $spacing-unit 0 0;
+  padding: 2 * $spacing-unit 0 0;
 
   @include media-query($on-laptop) {
     padding: 2 * $spacing-unit $spacing-unit / 2 0;

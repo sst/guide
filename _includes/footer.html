@@ -166,6 +166,44 @@
   });
   /** End lander segmented control code **/
 
+  /** Start lander case studies carousel **/
+  $(function ($) {
+    // cache the slider object for later use
+    var slider = $("#case-studies .slideshow-container ul"),
+      // get the width of the container for later use
+      itemWidth = slider.parent().outerWidth();
+
+    // Handle clicks on the next button
+    slider.parent().parent().on("click", "button.prev", function (e) {
+      e.preventDefault();
+
+      slider.children("li:last").prependTo(slider);
+      slider.css("left", -itemWidth);
+
+      slider.animate(
+        { left: 0 },
+        300,
+        "swing"
+      );
+    });
+
+    // Handle clicks on the previous button
+    slider.parent().parent().on("click", "button.next", function (e) {
+      e.preventDefault();
+
+      slider.animate(
+        { left: -itemWidth },
+        300,
+        "swing",
+        function () {
+          slider.children("li:first").appendTo(slider);
+          slider.css("left", 0);
+        }
+      );
+    });
+  });
+  /** End lander case studies carousel **/
+
   /** Start ToC lander code **/
   $('.table-of-contents .chapters .expand').click(function() {
     $(this).closest('.chapters').addClass('expanded');

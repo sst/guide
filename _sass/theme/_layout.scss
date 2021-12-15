@@ -2,6 +2,14 @@
  * Site header
  */
 
+%bottom-border {
+  margin-top: 1.5 * $spacing-unit + 5px;
+  content: "";
+  display: block;
+  padding: 0 $spacing-unit;
+  border-top: 1px dashed $brand-color;
+}
+
 %social-buttons {
   white-space: nowrap;
   a {
@@ -127,7 +135,6 @@
 }
 
 .site-header {
-  border-bottom: 1px dashed $brand-color;
 
   &.expanded {
     & > .wrapper-header > .content {
@@ -152,12 +159,15 @@
   }
 
   & > .site-announcement {
-    padding: 9px $spacing-unit / 2;
+    padding: 9px $spacing-unit / 2 0;
     font-size: 15px;
     text-align: center;
     color: $secondary-text-color;
-    background-color: darken($background-color, 2%);
-    border-bottom: 1px solid darken($secondary-background-color, 15%);
+
+    &:after {
+      @extend %bottom-border;
+      margin-top: 9px;
+    }
 
     a {
       font-weight: 600;
@@ -170,7 +180,12 @@
 
   & > .wrapper-header {
     margin: 0 auto;
-    padding: $spacing-unit / 2 + 5px $spacing-unit;
+    padding: $spacing-unit / 2 + 5px $spacing-unit 0;
+
+    &:after {
+      @extend %bottom-border;
+      margin-top: $spacing-unit / 2 + 5px;
+    }
 
     @include media-query($on-laptop) {
       padding: $spacing-unit / 2;
@@ -188,7 +203,6 @@
 
         .menu-header {
           .site-title {
-            margin-left: -5px;
           }
           .menu-button {
             display: none;
@@ -403,8 +417,17 @@
  * Site footer
  */
 .site-footer {
-  border-top: 1px dashed $brand-color;
-  padding: 1.5 * $spacing-unit 0;
+  padding: 0 0 1.5 * $spacing-unit;
+
+  & > .wrapper {
+    &:before {
+      margin-bottom: 1.5 * $spacing-unit;
+      content: "";
+      display: block;
+      padding: 0 $spacing-unit;
+      border-top: 1px dashed $brand-color;
+    }
+  }
 
   .site-author {
     margin: 0;
@@ -432,7 +455,6 @@
 .footer-col-wrapper {
   display: flex;
   color: $tertiary-text-color;
-  margin-left: -$spacing-unit / 2;
 }
 
 .footer-col {
@@ -449,7 +471,7 @@
     display: flex;
 
     & > ul:not(:last-child) {
-      margin-right: 3 * $spacing-unit;
+      margin-right: 2 * $spacing-unit;
     }
   }
 
