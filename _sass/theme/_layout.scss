@@ -164,6 +164,10 @@
     text-align: center;
     color: $secondary-text-color;
 
+    @include media-query($on-palm) {
+      font-size: 14px;
+    }
+
     &:after {
       @extend %bottom-border;
       margin-top: 9px;

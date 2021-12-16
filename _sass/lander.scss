@@ -86,6 +86,10 @@ $reader-logo-width: 123px;
     overflow-x: auto;
     font-family: $code-font-family;
 
+    @include media-query($on-palm) {
+      font-size: 12px;
+    }
+
     .token-line {
       position: relative;
       white-space: nowrap;
@@ -134,10 +138,18 @@ $reader-logo-width: 123px;
     padding: $spacing-unit 0 0;
   }
 
+  @include media-query($on-palm) {
+    padding-top: 5px;
+  }
+
   .header-wrapper {
     margin: 0 auto;
+    padding: 0 $spacing-unit 2.5 * $spacing-unit;
     text-align: center;
-    padding-bottom: 2.5 * $spacing-unit;
+
+    @include media-query($on-palm) {
+      padding: 0 $spacing-unit / 2 1.5 * $spacing-unit;
+    }
   }
 
   .site-announcement {
@@ -149,7 +161,7 @@ $reader-logo-width: 123px;
     font-weight: 600;
 
     @include media-query($on-palm) {
-      margin-bottom: 10px;
+      margin-bottom: $spacing-unit + 10px;
     }
 
     .new {
@@ -187,15 +199,13 @@ $reader-logo-width: 123px;
       display: inline-block;
       font-weight: 900;
       line-height: 105%;
-      max-width: 1000px;
+      max-width: 1036px;
       font-size: 90px;
-      letter-spacing: -2px;
       color: $text-color;
       font-family: $base-font-family;
 
       @include media-query($on-palm) {
-        font-size: 32px;
-        letter-spacing: -1px;
+        font-size: 42px;
       }
     }
 
@@ -203,12 +213,25 @@ $reader-logo-width: 123px;
       position: absolute;
       left: -59px;
       bottom: -32px;
+
+      @include media-query($on-palm) {
+        width: 35px;
+        bottom: -12px;
+        left: 1px;
+      }
     }
 
     img:nth-child(3) {
       position: absolute;
       right: -39px;
       bottom: 46px;
+
+      @include media-query($on-palm) {
+        width: 35px;
+        top: -12px;
+        right: -8px;
+        bottom: unset;
+      }
     }
   }
 
@@ -217,7 +240,7 @@ $reader-logo-width: 123px;
     max-width: 600px;
     line-height: 1.5;
     font-size: 20px;
-    color: $text-color;
+    color: $secondary-text-color;
     font-family: $base-font-family;
 
     a {
@@ -226,8 +249,8 @@ $reader-logo-width: 123px;
     }
 
     @include media-query($on-palm) {
-      margin-top: 5px;
-      font-size: 18px;
+      margin-top: $spacing-unit + 10px;
+      font-size: 16px;
     }
   }
 
@@ -236,7 +259,7 @@ $reader-logo-width: 123px;
     text-align: center;
 
     @include media-query($on-palm) {
-      margin-top: 20px;
+      margin-top: $spacing-unit;
     }
 
     a.sst-button {
@@ -245,8 +268,24 @@ $reader-logo-width: 123px;
         right: 80px;
       }
 
+      @include media-query($on-palm) {
+        padding: {
+          left: 36px;
+          right: 36px;
+        }
+      }
+
       &:last-child {
         margin-left: $spacing-unit;
+
+        @include media-query($on-palm) {
+          margin-left: $spacing-unit - 10px;
+
+          padding: {
+            left: 22px;
+            right: 22px;
+          }
+        }
       }
     }
 
@@ -308,10 +347,19 @@ $reader-logo-width: 123px;
     display: flex;
     align-items: stretch;
     justify-content: center;
+
+    @include media-query($on-palm) {
+      display: block;
+    }
   }
 
   &:after {
     @extend %bottom-border;
+
+    @include media-query($on-palm) {
+      margin-top: 2 * $spacing-unit - 5px;
+      border: none;
+    }
   }
 
   @include media-query($on-laptop) {
@@ -338,10 +386,15 @@ $reader-logo-width: 123px;
       margin-top: $spacing-unit;
       display: flex;
       align-items: stretch;
+
+      @include media-query($on-laptop) {
+        margin-top: 0;
+        display: block;
+      }
     }
 
     @include media-query($on-laptop) {
-      margin: 1.5 * $spacing-unit auto 0;
+      margin: $spacing-unit / 2 auto 0;
     }
 
     .feature {
@@ -349,17 +402,29 @@ $reader-logo-width: 123px;
       border-radius: 16px;
       border: 1px dashed $important-color;
 
+      @include media-query($on-laptop) {
+        padding: $spacing-unit / 2 $spacing-unit - 10px;
+      }
+
       &.breakpoints {
         flex: 1 1.5 auto;
         margin-right: $spacing-unit / 2;
+
+        @include media-query($on-laptop) {
+          margin-right: 0;
+        }
       }
       &.cdk {
         flex: 1 1 auto;
         margin-left: $spacing-unit / 2;
+
+        @include media-query($on-laptop) {
+          margin-left: 0;
+        }
       }
 
       @include media-query($on-palm) {
-        margin-bottom: $spacing-unit;
+        margin-bottom: $spacing-unit / 2;
       }
 
       &:last-child {
@@ -369,29 +434,26 @@ $reader-logo-width: 123px;
       hr {
         margin: 17px 0 13px;
         border-top: 1px dashed $important-color;
+
+        @include media-query($on-palm) {
+          margin: 14px 0 11px;
+        }
       }
 
       &.live { hr { max-width: 250px; } }
       &.breakpoints { hr { max-width: 235px; } }
       &.cdk { hr { max-width: 300px; } }
 
-      .icon {
-        $size: 42px;
+      @include media-query($on-palm) {
+        &.live { hr { max-width: unset; } }
+        &.breakpoints { hr { max-width: unset; } }
+        &.cdk { hr { max-width: unset; } }
+      }
 
-        margin-bottom: 10px;
-        width: $size;
-        height: $size;
-        border-radius: 50%;
-        background-color: lighten($important-color, 30%);
-        line-height: $size;
-        text-align: center;
-
-        i.fa {
-          color: $important-color;
-          &.fa-cubes {
-            margin-left: 1px;
-          }
-        }
+      @include media-query($on-palm) {
+        &.live img { width: 14px; }
+        &.breakpoints img { width: 18px; }
+        &.cdk img { width: 16px; }
       }
 
       h4 {
@@ -399,6 +461,10 @@ $reader-logo-width: 123px;
         font-weight: 700;
         line-height: 1.5;
         font-family: $base-font-family;
+
+        @include media-query($on-palm) {
+          margin-bottom: 5px;
+        }
       }
       p {
         margin-bottom: 0;
@@ -412,14 +478,32 @@ $reader-logo-width: 123px;
 .home > .sections {
   text-align: center;
   padding: 2.5 * $spacing-unit + 5px $spacing-unit 0;
+  overflow: hidden;
 
   &:after {
     @extend %bottom-border;
     margin-top: 2.5 * $spacing-unit;
+
+    @include media-query($on-palm) {
+      margin-top: 2 * $spacing-unit - 5px;
+      border: none;
+    }
+  }
+
+  &.breakpoints:after {
+    @include media-query($on-palm) {
+      margin-top: $spacing-unit + 5px;
+    }
+  }
+
+  &.cdk:after {
+    @include media-query($on-palm) {
+      margin-top: $spacing-unit + 10px;
+    }
   }
 
   @include media-query($on-palm) {
-    padding-top: 0;
+    padding: 0 $spacing-unit / 2;
   }
 
   & > .title {
@@ -429,7 +513,6 @@ $reader-logo-width: 123px;
 
     @include media-query($on-laptop) {
       margin-bottom: $spacing-unit;
-      padding: 0 $spacing-unit / 2;
     }
 
     h2 {
@@ -446,7 +529,9 @@ $reader-logo-width: 123px;
       }
 
       @include media-query($on-palm) {
-        font-size: 36px;
+        margin-bottom: $spacing-unit - 5px;
+        font-size: 38px;
+        line-height: 40px;
       }
     }
     p {
@@ -455,8 +540,11 @@ $reader-logo-width: 123px;
       line-height: 1.5;
       display: inline-block;
 
+      @include media-query($on-palm) {
+        font-weight: 600;
+      }
+
       a.more {
-        padding-top: 5px;
         display: inline-block;
 
         i.fa {
@@ -472,17 +560,37 @@ $reader-logo-width: 123px;
       position: absolute;
       bottom: -28px;
       right: -58px;
+
+      @include media-query($on-palm) {
+        display: none;
+      }
     }
   }
   &.breakpoints > .title {
     margin-bottom: 110px;
+
+      @include media-query($on-palm) {
+        margin-bottom: 1.5 * $spacing-unit;
+      }
+
       & > img {
       position: absolute;
       top: -20px;
       left: -49px;
+
+      @include media-query($on-palm) {
+        display: none;
+      }
     }
   }
   &.console > .title {
+
+    @include media-query($on-palm) {
+      margin-bottom: $spacing-unit + 10px;
+
+      img { display: none; }
+    }
+
     & > img:nth-child(4) {
       position: absolute;
       top: 34px;
@@ -546,6 +654,10 @@ $reader-logo-width: 123px;
       top: 0;
       transition: opacity .15s linear;
       pointer-events: none;
+
+      @include media-query($on-palm) {
+        display: none;
+      }
     }
     .scroll-shadow.left {
       left: 0;
@@ -590,7 +702,7 @@ $reader-logo-width: 123px;
         position: absolute;
         color: transparent;
         pointer-events: none;
-        background-color: lighten($brand-color, 5%);
+        background-color: $important-color;
       }
     }
   }
@@ -599,9 +711,6 @@ $reader-logo-width: 123px;
     display: flex;
     justify-content: center;
 
-    @include media-query($on-laptop) {
-      padding: 0 $spacing-unit / 2;
-    }
     @include media-query($on-palm) {
       display: block;
     }
@@ -619,7 +728,12 @@ $reader-logo-width: 123px;
                 0px 4px 12px rgba(57, 92, 107, 0.1);
 
     @include media-query($on-laptop) {
+      padding: $spacing-unit / 2 - 3px $spacing-unit / 2 $spacing-unit / 2;
       display: block;
+      box-shadow: none;
+      background: none;
+      border-radius: 16px;
+      border: 1px dashed $important-color;
     }
 
     .info {
@@ -700,16 +814,17 @@ $reader-logo-width: 123px;
 
       & > a {
         padding: 7px 10px 7px 13px;
-        text-transform: uppercase;
         font-family: $base-font-family;
-        font-weight: 700;
-        letter-spacing: 1px;
+        font-weight: 500;
         background-color: $important-color;
         border-radius: 4px;
         display: inline-block;
         color: white;
-        font-size: 13px;
         white-space: nowrap;
+
+        @include media-query($on-palm) {
+          font-size: 15px;
+        }
 
         &:hover {
           background-color: lighten($important-color, 7%);
@@ -729,6 +844,9 @@ $reader-logo-width: 123px;
       @extend %code-editor;
 
       @include media-query($on-palm) {
+        top: unset;
+        right: unset;
+
         .code-block {
           font-size: 14px;
         }
@@ -746,30 +864,63 @@ $reader-logo-width: 123px;
   }
 
   .scribble {
-    left: 159px;
+    left: 132px;
     top: -67px;
     position: absolute;
+
+    @include media-query($on-palm) {
+      left: 51px;
+      top: -27px;
+      width: 154px;
+    }
   }
   .arrow {
-    left: 539px;
+    left: 506px;
     top: 207px;
     position: absolute;
+
+    @include media-query($on-palm) {
+      left: 202px;
+      top: 80px;
+      width: 82px;
+    }
   }
   .copy {
-    right: -189px;
-    top: 89px;
+    right: -214px;
+    top: 86px;
     position: absolute;
+
+    @include media-query($on-palm) {
+      right: 17px;
+      top: 44px;
+      width: 59px;
+    }
   }
   .magnified {
-    left: 160px;
+    left: 133px;
     top: -81px;
     position: absolute;
-    filter: drop-shadow(0px 4px 10px rgba(254, 251, 249, 0.1)) drop-shadow(0px 4px 39px rgba(254, 251, 249, 0.2));
+    filter: drop-shadow(0px 4px 10px rgba(254, 251, 249, 0.1))
+            drop-shadow(0px 4px 39px rgba(254, 251, 249, 0.2));
+
+    @include media-query($on-palm) {
+      left: 51px;
+      top: -32px;
+      width: 154px;
+      filter: drop-shadow(0px 1px 3px rgba(254, 251, 249, 0.1))
+              drop-shadow(0px 1px 13px rgba(254, 251, 249, 0.2));
+    }
   }
   .screenshot {
     border-radius: 10px;
     box-shadow: 6px 9px 25px rgba(57, 92, 107, 0.4),
                 0px 4px 12px rgba(57, 92, 107, 0.3);
+
+    @include media-query($on-palm) {
+      border-radius: 3px;
+      box-shadow: 2px 3px 8px rgba(57, 92, 107, 0.4),
+                  0px 1px 4px rgba(57, 92, 107, 0.3);
+    }
   }
 }
 
@@ -782,29 +933,76 @@ $reader-logo-width: 123px;
   }
 
   .arrow-left {
-    left: -43px;
+    left: -78px;
     top: 220px;
     position: absolute;
+
+    @include media-query($on-palm) {
+      display: none;
+    }
+  }
+  .arrow-left-mobile {
+    display: none;
+    left: -11px;
+    top: -16px;
+    position: absolute;
+
+    @include media-query($on-palm) {
+      display: block;
+    }
   }
   .copy-left {
-    left: -105px;
+    left: -140px;
     top: 135px;
     position: absolute;
+
+    @include media-query($on-palm) {
+      left: 28px;
+      top: -25px;
+      width: 32px;
+      transform: rotate(26deg);
+    }
   }
   .arrow-right {
     right: -52px;
     bottom: 148px;
     position: absolute;
+
+    @include media-query($on-palm) {
+      display: none;
+    }
+  }
+  .arrow-right-mobile {
+    display: none;
+    right: -13px;
+    top: -17px;
+    position: absolute;
+
+    @include media-query($on-palm) {
+      display: block;
+    }
   }
   .copy-right {
-    right: -111px;
+    right: -145px;
     top: 123px;
     position: absolute;
+
+    @include media-query($on-palm) {
+      right: 6px;
+      top: -45px;
+      width: 26px
+    }
   }
   .screenshot {
     border-radius: 10px;
     box-shadow: 6px 9px 25px rgba(57, 92, 107, 0.4),
                 0px 4px 12px rgba(57, 92, 107, 0.3);
+
+    @include media-query($on-palm) {
+      border-radius: 3px;
+      box-shadow: 2px 3px 8px rgba(57, 92, 107, 0.4),
+                  0px 1px 4px rgba(57, 92, 107, 0.3);
+    }
   }
 }
 
@@ -820,22 +1018,53 @@ $reader-logo-width: 123px;
     left: -157px;
     top: 176px;
     position: absolute;
+
+    @include media-query($on-palm) {
+      display: none;
+    }
+  }
+  .arrow-mobile {
+    display: none;
+    left: -15px;
+    bottom: -22px;
+    position: absolute;
+
+    @include media-query($on-palm) {
+      display: block;
+    }
   }
   .copy {
     left: -116px;
     top: 122px;
     position: absolute;
+
+    @include media-query($on-palm) {
+      left: 17px;
+      bottom: -38px;
+      top: unset;
+      width: 47px;
+    }
   }
   .screenshot {
     border-radius: 10px;
     box-shadow: 6px 9px 25px rgba(57, 92, 107, 0.4),
                 0px 4px 12px rgba(57, 92, 107, 0.3);
+
+    @include media-query($on-palm) {
+      border-radius: 3px;
+      box-shadow: 2px 3px 8px rgba(57, 92, 107, 0.4),
+                  0px 1px 4px rgba(57, 92, 107, 0.3);
+    }
   }
 }
 
 .home > .case-studies {
   margin: 2.5 * $spacing-unit auto 2.5 * $spacing-unit;
   padding: 0 $spacing-unit;
+
+  @include media-query($on-palm) {
+    margin-top: $spacing-unit + 5px;
+  }
 
   &:after {
     @extend %bottom-border;
