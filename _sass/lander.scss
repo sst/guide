@@ -146,8 +146,9 @@ $reader-logo-width: 123px;
     margin: 0 auto;
     padding: 0 $spacing-unit 2.5 * $spacing-unit;
     text-align: center;
+    overflow: hidden;
 
-    @include media-query($on-palm) {
+    @include media-query($on-laptop) {
       padding: 0 $spacing-unit / 2 1.5 * $spacing-unit;
     }
   }
@@ -209,10 +210,17 @@ $reader-logo-width: 123px;
       }
     }
 
+    img {
+      @include media-query($on-monitor) { display: none; }
+      @include media-query($on-palm) { display: block; }
+    }
+
     img:nth-child(2) {
       position: absolute;
       left: -59px;
       bottom: -32px;
+
+      @include media-query(1175px) { left: -39px; }
 
       @include media-query($on-palm) {
         width: 35px;
@@ -225,6 +233,8 @@ $reader-logo-width: 123px;
       position: absolute;
       right: -39px;
       bottom: 46px;
+
+      @include media-query(1175px) { right: -31px; }
 
       @include media-query($on-palm) {
         width: 35px;
@@ -251,6 +261,7 @@ $reader-logo-width: 123px;
     @include media-query($on-palm) {
       margin-top: $spacing-unit + 10px;
       font-size: 16px;
+      font-weight: 600;
     }
   }
 
@@ -260,6 +271,9 @@ $reader-logo-width: 123px;
 
     @include media-query($on-palm) {
       margin-top: $spacing-unit;
+      padding-left: 5px;
+      display: flex;
+      justify-content: space-between;
     }
 
     a.sst-button {
@@ -269,9 +283,10 @@ $reader-logo-width: 123px;
       }
 
       @include media-query($on-palm) {
+        flex: 1 1 auto;
         padding: {
-          left: 36px;
-          right: 36px;
+          left: 16px;
+          right: 16px;
         }
       }
 
@@ -279,7 +294,7 @@ $reader-logo-width: 123px;
         margin-left: $spacing-unit;
 
         @include media-query($on-palm) {
-          margin-left: $spacing-unit - 10px;
+          margin-left: $spacing-unit / 2;
 
           padding: {
             left: 22px;
@@ -348,7 +363,7 @@ $reader-logo-width: 123px;
     align-items: stretch;
     justify-content: center;
 
-    @include media-query($on-palm) {
+    @include media-query($on-monitor) {
       display: block;
     }
   }
@@ -363,24 +378,23 @@ $reader-logo-width: 123px;
   }
 
   @include media-query($on-laptop) {
-    display: block;
-    padding: $spacing-unit $spacing-unit / 2 0;
-  }
-  @include media-query($on-palm) {
     padding: 0 $spacing-unit / 2 0;
   }
 
   .quick-start {
     @extend %code-editor;
-
-    @include media-query($on-laptop) {
-      margin: 0 auto;
-      max-width: 480px;
-    }
   }
 
   .list {
     margin-left: $spacing-unit;
+
+    @include media-query($on-monitor) {
+      margin: $spacing-unit 0 0;
+    }
+
+    @include media-query($on-palm) {
+      margin: $spacing-unit / 2 auto 0;
+    }
 
     .columns {
       margin-top: $spacing-unit;
@@ -393,22 +407,26 @@ $reader-logo-width: 123px;
       }
     }
 
-    @include media-query($on-laptop) {
-      margin: $spacing-unit / 2 auto 0;
-    }
-
     .feature {
       padding: $spacing-unit $spacing-unit + 5px;
       border-radius: 16px;
       border: 1px dashed $important-color;
 
       @include media-query($on-laptop) {
-        padding: $spacing-unit / 2 $spacing-unit - 10px;
+        margin-bottom: $spacing-unit;
+      }
+
+      @include media-query($on-palm) {
+        margin-bottom: $spacing-unit / 2;
       }
 
       &.breakpoints {
         flex: 1 1.5 auto;
         margin-right: $spacing-unit / 2;
+
+        @include media-query($on-monitor) {
+          flex: 1 1 auto;
+        }
 
         @include media-query($on-laptop) {
           margin-right: 0;
@@ -421,10 +439,6 @@ $reader-logo-width: 123px;
         @include media-query($on-laptop) {
           margin-left: 0;
         }
-      }
-
-      @include media-query($on-palm) {
-        margin-bottom: $spacing-unit / 2;
       }
 
       &:last-child {
@@ -490,15 +504,23 @@ $reader-logo-width: 123px;
     }
   }
 
+  &.examples:after {
+    margin-top: 2 * $spacing-unit - 10px;
+  }
+
   &.breakpoints:after {
+    margin-top: $spacing-unit / 2;
+
     @include media-query($on-palm) {
-      margin-top: $spacing-unit + 5px;
+      margin-top: $spacing-unit / 2;
     }
   }
 
   &.cdk:after {
+    margin-top: $spacing-unit / 2 - 4px;
+
     @include media-query($on-palm) {
-      margin-top: $spacing-unit + 10px;
+      margin-top: 0;
     }
   }
 
@@ -561,19 +583,19 @@ $reader-logo-width: 123px;
       bottom: -28px;
       right: -58px;
 
+      @include media-query($on-monitor) {
+        right: -38px;
+      }
+
       @include media-query($on-palm) {
         display: none;
       }
     }
   }
   &.breakpoints > .title {
-    margin-bottom: 110px;
+    margin-bottom: 0;
 
-      @include media-query($on-palm) {
-        margin-bottom: 1.5 * $spacing-unit;
-      }
-
-      & > img {
+    & > img {
       position: absolute;
       top: -20px;
       left: -49px;
@@ -603,6 +625,12 @@ $reader-logo-width: 123px;
     }
   }
   &.cdk > .title {
+    margin-bottom: 13px;
+
+    @include media-query($on-palm) {
+      margin-bottom: 10px;
+    }
+
     & > img {
       position: absolute;
       top: -32px;
@@ -647,6 +675,8 @@ $reader-logo-width: 123px;
       justify-content: center;
     }
     .scroll-shadow {
+      // Hide for the new background
+      display: none;
       width: 20px;
       height: 100%;
       position: absolute;
@@ -654,14 +684,11 @@ $reader-logo-width: 123px;
       top: 0;
       transition: opacity .15s linear;
       pointer-events: none;
-
-      @include media-query($on-palm) {
-        display: none;
-      }
     }
     .scroll-shadow.left {
       left: 0;
       background-image: linear-gradient(to left, transparentize($secondary-background-color, 1), transparentize($secondary-background-color, 0));
+
     }
     .scroll-shadow.right {
       right: 0;
@@ -843,10 +870,12 @@ $reader-logo-width: 123px;
       flex: 0 0 auto;
       @extend %code-editor;
 
-      @include media-query($on-palm) {
+      @include media-query($on-laptop) {
         top: unset;
         right: unset;
+      }
 
+      @include media-query($on-palm) {
         .code-block {
           font-size: 14px;
         }
@@ -858,69 +887,13 @@ $reader-logo-width: 123px;
 .home > .breakpoints > .content {
   text-align: center;
 
-  .wrap {
-    display: inline-block;
-    position: relative;
+  svg:last-child {
+    display: none;
   }
 
-  .scribble {
-    left: 132px;
-    top: -67px;
-    position: absolute;
-
-    @include media-query($on-palm) {
-      left: 51px;
-      top: -27px;
-      width: 154px;
-    }
-  }
-  .arrow {
-    left: 506px;
-    top: 207px;
-    position: absolute;
-
-    @include media-query($on-palm) {
-      left: 202px;
-      top: 80px;
-      width: 82px;
-    }
-  }
-  .copy {
-    right: -214px;
-    top: 86px;
-    position: absolute;
-
-    @include media-query($on-palm) {
-      right: 17px;
-      top: 44px;
-      width: 59px;
-    }
-  }
-  .magnified {
-    left: 133px;
-    top: -81px;
-    position: absolute;
-    filter: drop-shadow(0px 4px 10px rgba(254, 251, 249, 0.1))
-            drop-shadow(0px 4px 39px rgba(254, 251, 249, 0.2));
-
-    @include media-query($on-palm) {
-      left: 51px;
-      top: -32px;
-      width: 154px;
-      filter: drop-shadow(0px 1px 3px rgba(254, 251, 249, 0.1))
-              drop-shadow(0px 1px 13px rgba(254, 251, 249, 0.2));
-    }
-  }
-  .screenshot {
-    border-radius: 10px;
-    box-shadow: 6px 9px 25px rgba(57, 92, 107, 0.4),
-                0px 4px 12px rgba(57, 92, 107, 0.3);
-
-    @include media-query($on-palm) {
-      border-radius: 3px;
-      box-shadow: 2px 3px 8px rgba(57, 92, 107, 0.4),
-                  0px 1px 4px rgba(57, 92, 107, 0.3);
-    }
+  @include media-query($on-palm) {
+    svg:first-child { display: none; }
+    svg:last-child { display: inline; }
   }
 }
 
@@ -1009,52 +982,13 @@ $reader-logo-width: 123px;
 .home > .cdk > .content {
   text-align: center;
 
-  .wrap {
-    display: inline-block;
-    position: relative;
-  }
-
-  .arrow {
-    left: -157px;
-    top: 176px;
-    position: absolute;
-
-    @include media-query($on-palm) {
-      display: none;
-    }
-  }
-  .arrow-mobile {
+  svg:last-child {
     display: none;
-    left: -15px;
-    bottom: -22px;
-    position: absolute;
-
-    @include media-query($on-palm) {
-      display: block;
-    }
   }
-  .copy {
-    left: -116px;
-    top: 122px;
-    position: absolute;
 
-    @include media-query($on-palm) {
-      left: 17px;
-      bottom: -38px;
-      top: unset;
-      width: 47px;
-    }
-  }
-  .screenshot {
-    border-radius: 10px;
-    box-shadow: 6px 9px 25px rgba(57, 92, 107, 0.4),
-                0px 4px 12px rgba(57, 92, 107, 0.3);
-
-    @include media-query($on-palm) {
-      border-radius: 3px;
-      box-shadow: 2px 3px 8px rgba(57, 92, 107, 0.4),
-                  0px 1px 4px rgba(57, 92, 107, 0.3);
-    }
+  @include media-query($on-palm) {
+    svg:first-child { display: none; }
+    svg:last-child { display: inline; }
   }
 }
 
@@ -1063,12 +997,18 @@ $reader-logo-width: 123px;
   padding: 0 $spacing-unit;
 
   @include media-query($on-palm) {
-    margin-top: $spacing-unit + 5px;
+    margin: $spacing-unit + 5px auto 0;
+    padding: 0 $spacing-unit / 2;
   }
 
   &:after {
     @extend %bottom-border;
-    margin-top: 2 * $spacing-unit + 10px;
+    margin-top: 2 * $spacing-unit - 10px;
+
+    @include media-query($on-palm) {
+      margin-top: 2 * $spacing-unit - 5px;
+      border: none;
+    }
   }
 
   & > .content {
@@ -1076,6 +1016,10 @@ $reader-logo-width: 123px;
     background-color: $brand-color;
     border-radius: 16px;
     color: $background-color;
+
+    @include media-query($on-palm) {
+      padding: $spacing-unit - 5px $spacing-unit - 10px $spacing-unit - 10px;
+    }
   }
 
   h3 {
@@ -1085,6 +1029,11 @@ $reader-logo-width: 123px;
     font-size: 56px;
     font-weight: 900;
     color: $background-color;
+
+    @include media-query($on-palm) {
+      margin-bottom: $spacing-unit - 8px;
+      font-size: 38px;
+    }
   }
 
   .slideshow-container {
@@ -1108,6 +1057,7 @@ $reader-logo-width: 123px;
 
     & > button {
       $size: 36px;
+      $mSize: 24px;
 
       background-color: $brand-color;
       padding: 0;
@@ -1121,26 +1071,66 @@ $reader-logo-width: 123px;
       box-shadow: 0px 6px 12px -2px #2E4752;
       cursor: pointer;
 
+      @include media-query($on-palm) {
+        margin-top: - $mSize / 2;
+        width: $mSize;
+        height: $mSize;
+      }
+
       &:hover { background-color: #274D5E; }
       &:active { background-color: #1D3E4D; }
 
+      @include media-query($on-palm) {
+        &:after {
+          $cSize: 50px;
+
+          content: "";
+          position: absolute;
+          left: - ($cSize - $mSize ) / 2;
+          top: - ($cSize - $mSize ) / 2;
+          width: $cSize;
+          height: $cSize;
+        }
+      }
+
       img {
         margin-top: -2px;
+
+        @include media-query($on-palm) {
+          margin-top: -5px;
+          width: 6px;
+        }
       }
 
       &.prev {
         left: - $size / 2;
 
+        @include media-query($on-palm) {
+          left: - $mSize / 2;
+        }
+
         img {
           margin-left: -3px;
+
+          @include media-query($on-palm) {
+            margin-left: -2px;
+          }
         }
       }
       &.next {
         right: - $size / 2;
 
+        @include media-query($on-palm) {
+          right: - $mSize / 2;
+        }
+
         img {
           margin-right: -3px;
           transform: rotate(180deg);
+
+          @include media-query($on-palm) {
+            margin-right: -2px;
+          }
         }
       }
     }
@@ -1155,6 +1145,10 @@ $reader-logo-width: 123px;
     align-items: center;
     flex-direction: column;
     box-sizing: border-box;
+
+    @include media-query($on-palm) {
+      padding: $spacing-unit + 6px $spacing-unit - 10px $spacing-unit - 8px;
+    }
   }
 
   .author {
@@ -1175,11 +1169,20 @@ $reader-logo-width: 123px;
       margin-left: 9px;
       text-align: left;
 
+      @include media-query($on-palm) {
+        margin-left: $spacing-unit / 2;
+      }
+
       p {
         margin: 0;
         font-size: 18px;
         color: $background-color;
         line-height: 1.5;
+
+        @include media-query($on-palm) {
+          font-size: 16px;
+          line-height: 26px;
+        }
 
         a {
           color: $background-color;
@@ -1200,10 +1203,24 @@ $reader-logo-width: 123px;
     font-size: 54px;
     line-height: 1.1;
     flex: 1 1 auto;
+
+    @include media-query($on-laptop) {
+      font-size: 40px;
+    }
+
+    @include media-query($on-palm) {
+      margin-top: $spacing-unit - 5px;
+      font-size: 26px;
+      line-height: 30px;
+    }
   }
 
   .logo {
     margin-top: 1.5 * $spacing-unit;
+
+    @include media-query($on-palm) {
+      margin-top: $spacing-unit - 10px;
+    }
   }
   .sst-button {
     margin-top: $spacing-unit / 2 + 5px;
@@ -1211,6 +1228,14 @@ $reader-logo-width: 123px;
     padding: {
       left: 2.5 * $spacing-unit;
       right: 2.5 * $spacing-unit;
+    }
+
+    @include media-query($on-palm) {
+      align-self: stretch;
+      padding: {
+        left: 36px;
+        right: 36px;
+      }
     }
   }
 }
@@ -1223,15 +1248,12 @@ $reader-logo-width: 123px;
   position: relative;
   max-width: $post-content-width;
 
-  @include media-query($on-laptop) {
-    margin-top: $spacing-unit;
-  }
-
   .title {
     display: flex;
     justify-content: center;
 
     h2 {
+      padding: 0 $spacing-unit;
       position: relative;
       text-align: center;
       font-size: 72px;
@@ -1241,6 +1263,12 @@ $reader-logo-width: 123px;
       color: $text-color;
       max-width: 850px;
 
+      @include media-query($on-laptop) {
+        margin-bottom: 0;
+        padding: 0 $spacing-unit / 2;
+        font-size: 38px;
+      }
+
       span {
         color: $important-color;
       }
@@ -1249,6 +1277,10 @@ $reader-logo-width: 123px;
         position: absolute;
         top: -28px;
         left: 15px;
+
+        @include media-query($on-laptop) {
+          display: none;
+        }
       }
     }
   }
@@ -1258,6 +1290,8 @@ $reader-logo-width: 123px;
     overflow: hidden;
 
     .scroll-shadow {
+      // Hide for the new background
+      display: none;
       width: 1.5 * $spacing-unit;
       height: 100%;
       position: absolute;
@@ -1269,6 +1303,7 @@ $reader-logo-width: 123px;
     .scroll-shadow.left {
       left: 0;
       background-image: linear-gradient(to left, transparentize($secondary-background-color, 1), transparentize($secondary-background-color, 0));
+
     }
     .scroll-shadow.right {
       right: 0;
@@ -1292,7 +1327,7 @@ $reader-logo-width: 123px;
     }
 
     @include media-query($on-laptop) {
-      padding: $spacing-unit 0;
+      padding: $spacing-unit 0 $spacing-unit / 2 - 5px;
     }
   }
 
@@ -1314,7 +1349,7 @@ $reader-logo-width: 123px;
 
     @include media-query($on-palm) {
       padding: 10px;
-      margin-left: 10px;
+      margin-left: $spacing-unit / 2;
       flex: 0 0 270px;
     }
 
@@ -1417,6 +1452,10 @@ $reader-logo-width: 123px;
   .controls {
     text-align: center;
 
+    @include media-query($on-palm) {
+      display: none;
+    }
+
     a.sst-button {
       padding: {
         left: 80px;
@@ -1435,9 +1474,19 @@ $reader-logo-width: 123px;
   margin: 3.5 * $spacing-unit auto 0;
   padding: 0 $spacing-unit;
 
+  @include media-query($on-palm) {
+    margin-top: $spacing-unit;
+    padding: 0 $spacing-unit / 2;
+  }
+
   &:after {
     @extend %bottom-border;
     margin-top: 2.5 * $spacing-unit;
+
+    @include media-query($on-palm) {
+      margin-top: 2 * $spacing-unit - 5px;
+      border: none;
+    }
   }
 
   & > .content {
@@ -1446,6 +1495,10 @@ $reader-logo-width: 123px;
     border-radius: 16px;
     box-shadow: 6px 9px 25px rgba(57, 92, 107, 0.3),
                 0px 4px 12px rgba(57, 92, 107, 0.4);
+
+    @include media-query($on-palm) {
+      padding: $spacing-unit - 2px $spacing-unit - 10px;
+    }
   }
 
   h4 {
@@ -1456,6 +1509,15 @@ $reader-logo-width: 123px;
     color: $background-color;
     font-family: $base-font-family;
     text-align: center;
+
+    @include media-query($on-monitor) {
+      font-size: 38px;
+      line-height: 39px;
+    }
+
+    @include media-query($on-laptop) {
+      margin-bottom: $spacing-unit / 2;
+    }
 
     span {
       color: $important-color;
@@ -1469,23 +1531,46 @@ $reader-logo-width: 123px;
     align-items: center;
     justify-content: center;
 
+    @include media-query($on-laptop) {
+      display: block;
+    }
+
     li {
       padding: 0 $spacing-unit / 2 + 5px;
       border-right: 1px dashed $background-color;
       text-align: center;
       width: 300px;
 
+      @include media-query($on-laptop) {
+        padding: $spacing-unit - 10px 0 $spacing-unit;
+        border-right: none;
+        border-bottom: 1px dashed $background-color;
+        width: 100%;
+      }
+
       &:last-child {
         border-right: none;
+
+        @include media-query($on-laptop) {
+          padding-bottom: $spacing-unit / 2;
+          border-bottom: none;
+        }
       }
 
       h6 {
         margin-bottom: 0;
-        font-size: 90px;
+        font-size: 100px;
         line-height: 1.5;
         font-family: $base-font-family;
         font-weight: 900;
         color: $background-color;
+
+        @include media-query($on-monitor) {
+          font-size: 70px;
+        }
+        @include media-query($on-laptop) {
+          font-size: 90px;
+        }
       }
 
       &:nth-child(2) {
@@ -1503,13 +1588,13 @@ $reader-logo-width: 123px;
 }
 
 .home > .guide {
-  padding: 2 * $spacing-unit 0 0;
+  padding: 2 * $spacing-unit $spacing-unit 0;
 
   @include media-query($on-laptop) {
     padding: 2 * $spacing-unit $spacing-unit / 2 0;
   }
   @include media-query($on-palm) {
-    padding-top: 1.5 * $spacing-unit;
+    padding-top: 0;
   }
 
   .title {
@@ -1522,7 +1607,9 @@ $reader-logo-width: 123px;
       font-weight: 900;
 
       @include media-query($on-palm) {
-        font-size: 36px;
+        margin-bottom: $spacing-unit - 4px;
+        font-size: 38px;
+        line-height: 39px;
       }
     }
     p.update {
@@ -1546,6 +1633,10 @@ $reader-logo-width: 123px;
       font-size: 16px;
       color: $secondary-text-color;
       line-height: 1.5;
+
+      @include media-query($on-palm) {
+        font-weight: 600;
+      }
     }
   }
 
@@ -1562,7 +1653,7 @@ $reader-logo-width: 123px;
     max-width: 775px;
 
     @include media-query($on-palm) {
-      padding: 12px $spacing-unit / 2 $spacing-unit / 2;
+      padding: $spacing-unit $spacing-unit - 10px $spacing-unit;
       display: block;
     }
 
@@ -1572,7 +1663,7 @@ $reader-logo-width: 123px;
 
       @include media-query($on-palm) {
         margin-right: 0;
-        margin-bottom: 10px;
+        margin-bottom: $spacing-unit - 10px;
         text-align: center;
       }
 
@@ -1593,16 +1684,40 @@ $reader-logo-width: 123px;
       position: absolute;
       left: -43px;
       top: -83px;
+
+      @include media-query($on-monitor) { display: none; }
+
+      @include media-query($on-palm) {
+        display: block;
+        transform: rotate(43deg);
+        left: -7px;
+        top: -26px;
+        height: 32px;
+      }
     }
     img.sparkle-right {
       position: absolute;
       right: -43px;
       top: -79px;
+
+      @include media-query($on-monitor) { display: none; }
+
+      @include media-query($on-palm) {
+        display: block;
+        transform: rotate(-34deg);
+        right: -7px;
+        top: -26px;
+        height: 32px;
+      }
     }
   }
 
   .form {
     flex: 0 auto;
+
+    @include media-query($on-laptop) {
+      flex: 1 1 auto;
+    }
 
     p.email-octopus-error-message,
     p.email-octopus-success-message {
@@ -1613,6 +1728,10 @@ $reader-logo-width: 123px;
       display: flex;
       align-items: stretch;
       justify-content: center;
+
+      @include media-query($on-laptop) {
+        display: block;
+      }
 
       .email-octopus-form-row {
         margin: 0;
@@ -1630,6 +1749,7 @@ $reader-logo-width: 123px;
 
         @include media-query($on-palm) {
           width: 100%;
+          max-width: none;
           font-size: 15px;
         }
       }
@@ -1637,6 +1757,11 @@ $reader-logo-width: 123px;
       .email-octopus-form-row-subscribe {
         margin-top: 0;
         margin-left: $spacing-unit;
+
+        @include media-query($on-laptop) {
+          margin-top: $spacing-unit - 10px;
+          margin-left: 0;
+        }
       }
 
       button {
@@ -1645,6 +1770,10 @@ $reader-logo-width: 123px;
         box-shadow: none;
         font-size: 16px;
         line-height: 18px;
+
+        @include media-query($on-monitor) {
+          width: 100%;
+        }
       }
     }
   }
@@ -1679,6 +1808,8 @@ $reader-logo-width: 123px;
       overflow: hidden;
     }
     .scroll-shadow {
+      // Hide for the new background
+      display: none;
       width: 200px;
       height: 100%;
       position: absolute;
@@ -1843,7 +1974,7 @@ $reader-logo-width: 123px;
   margin: 2.5 * $spacing-unit 0;
 
   @include media-query($on-palm) {
-    margin-top: $spacing-unit / 2;
+    margin: $spacing-unit / 2 0 2 * $spacing-unit - 5px;
   }
 
   & > .wrapper {
@@ -1872,6 +2003,10 @@ $reader-logo-width: 123px;
     .header {
       margin: 0 $spacing-unit / 2 $spacing-unit - 10px;
 
+      @include media-query($on-palm) {
+        margin-bottom: $spacing-unit - 5px;
+      }
+
       h3 {
         margin-bottom: 10px;
         font-size: 54px;
@@ -1880,8 +2015,10 @@ $reader-logo-width: 123px;
         line-height: 1.1;
         font-family: $base-font-family;
 
-        @include media-query($on-laptop) {
-          font-size: 26px;
+        @include media-query($on-palm) {
+          margin-bottom: $spacing-unit - 5px;
+          font-size: 38px;
+          line-height: 39px;
         }
       }
       p {
@@ -1889,6 +2026,11 @@ $reader-logo-width: 123px;
         text-align: center;
         color: $text-color;
         line-height: 1.5;
+
+        @include media-query($on-palm) {
+          font-weight: 600;
+          color: $secondary-text-color;
+        }
       }
 
       @include media-query($on-laptop) {
@@ -1911,10 +2053,13 @@ $reader-logo-width: 123px;
       padding-bottom: $spacing-unit;
       border-radius: 4px;
       border: 1px dashed $important-color;
-      background-color: $secondary-background-color;
       max-height: $max-height;
       overflow: hidden;
       position: relative;
+
+      @include media-query($on-palm) {
+        text-align: center;
+      }
 
       @include media-query($on-laptop) {
         padding-bottom: 10px;
@@ -1926,6 +2071,10 @@ $reader-logo-width: 123px;
 
         @include media-query($on-laptop) {
           padding-top: $spacing-unit / 2;
+        }
+
+        @include media-query($on-palm) {
+          padding-top: $spacing-unit;
         }
 
         h3 {
@@ -1940,14 +2089,13 @@ $reader-logo-width: 123px;
           line-height: 1.5;
 
           @include media-query($on-laptop) {
-            padding: 0 $spacing-unit / 2;
+            padding: 0 $spacing-unit - 10px;
           }
 
           &:after {
             margin-top: $spacing-unit / 2;
             content: "";
             display: block;
-            max-width: 206px;
             border-top: 1px dashed $important-color;
           }
         }

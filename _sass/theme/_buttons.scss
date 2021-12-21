@@ -6,6 +6,8 @@
   font-weight: 600;
   box-sizing: border-box;
   padding: 24px 40px 23px;
+  text-align: center;
+  white-space: nowrap;
 
   @include media-query($on-palm) {
     padding: 9px 36px;
