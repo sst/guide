@@ -125,10 +125,12 @@
     e.preventDefault();
     var el = $("header.site-header");
 
-    $(document.body).css(
-      "overflow",
-      el.hasClass("expanded") ? "auto" : "hidden"
-    );
+    if (el.hasClass("expanded")) {
+      $(document.body).css({overflow : "unset", position : "unset"});
+    }
+    else {
+      $(document.body).css({overflow : "hidden", position : "fixed"});
+    }
 
     el.toggleClass("expanded");
   });
