@@ -5,10 +5,6 @@
 
   <body class="lander">
 
-    <!--
-    <canvas id="canvas" style="position: fixed; width: 100%; height: 100%"></canvas>
-    -->
-
     {% include header.html %}
 
     <main class="page-content lander" aria-label="Content">
@@ -20,74 +16,6 @@
     </main>
 
     {% include footer.html %}
-
-<!--
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/d3-color@3"></script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    function opaqued(color, opacity) {
-      const c = d3.color(color)
-      c.opacity = opacity.toFixed(3)
-      return c.toString()
-    }
-
-    function clamp(a, b) {
-      return (x) => Math.max(a, Math.min(b, x))
-    }
-
-    function smoothstep(min, max) {
-      return (x) => {
-        const v = clamp(0, 1)((x - min) / (max - min))
-        const s = v * v * (3 - 2 * v)
-        return s
-      }
-    }
-
-    const smooth = smoothstep(0, 1)
-
-    var canvas = document.getElementById("canvas");
-    var ctx = canvas.getContext("2d");
-
-    function clearCanvas() {
-      ctx.fillStyle = "#F4ECE8"
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
-      console.log(canvas.width, canvas.height);
-    }
-
-    function drawCanvas(x, y, color) {
-      var r = 200
-      var gradient = ctx.createRadialGradient(x, y, 0, x, y, r)
-      for (let i = 0; i <= 1; i += 0.1) {
-        gradient.addColorStop(i, opaqued(color, 1.0 - smooth(i)))
-      }
-      ctx.fillStyle = gradient
-      ctx.fillRect(x-r, y-r, 2*r, 2*r)
-    }
-
-    function frame() {
-      clearCanvas()
-      var t = performance.now() / 1000
-      var p = Math.sin(t) * 100
-      drawCanvas(300 + p, 300 + p, "#E27152")
-      drawCanvas(200, 200, "#395C6B")
-
-      requestAnimationFrame(frame)
-    }
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-
-      requestAnimationFrame(frame);
-    }
-
-    window.addEventListener('resize', resizeCanvas, false);
-    resizeCanvas();
-  });
-
-
-</script>
--->
 
   </body>
 
