@@ -1766,10 +1766,17 @@ $reader-logo-width: 123px;
 
       button {
         margin: 0;
-        padding: 17px 40px 16px;
-        box-shadow: none;
+
+        @extend %sst-button;
+        @extend %sst-button-outline;
+        @extend %sst-button-primary-pseudo;
+
+        color: white;
         font-size: 16px;
+        box-shadow: none;
         line-height: 18px;
+        padding: 17px 40px 16px;
+        background: $important-color;
 
         @include media-query($on-monitor) {
           width: 100%;

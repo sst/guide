@@ -310,15 +310,15 @@
     <h4>Join our <span>growing community</span></h4>
     <ul>
       <li>
-        <h6>3500+</h6>
+        <h6>{{ site.stats.github }}+</h6>
         <p>GitHub stars</p>
       </li>
       <li>
-        <h6>1100+</h6>
+        <h6>{{ site.stats.slack }}+</h6>
         <p>Slack members</p>
       </li>
       <li>
-        <h6>35k+</h6>
+        <h6>{{ site.stats.newsletter_short }}+</h6>
         <p>Email subscribers</p>
       </li>
     </ul>
@@ -336,7 +336,7 @@
   <div class="form-container">
     <div class="form-copy">
       <p>Download the FREE 1000 page ebook</p>
-      <p>Join 30,000 readers from the biggest companies in the world. We'll also send you updates when new versions are published.</p>
+      <p>Join {{ site.stats.newsletter }} readers from the biggest companies in the world. We'll also send you updates when new versions are published.</p>
     </div>
     <div class="form">
       {% include email-octopus-form.html button_copy="Download" source="home" %}

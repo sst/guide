@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Subscribe to our newsletter
-description: Join 30,000 other readers and subscribe to our monthly newsletter. You'll also receive the entire Serverless Stack guide as a 1000 page ebook for free!
+description: Subscribe to our monthly newsletter and receive the entire Serverless Stack guide as a 1000 page ebook for free!
 ---
 
 - No spam
@@ -13,13 +13,3 @@ description: Join 30,000 other readers and subscribe to our monthly newsletter. 
 <div class="standalone-newsletter-form-container">
   {% include standalone-newsletter-form.html %}
 </div>
-
-<a href="/" class="sst-button primary">
-  Get Started
-</a>
-<a href="/" class="sst-button secondary">
-  Get Started
-</a>
-<a href="/" class="sst-button tertiary">
-  Get Started
-</a>

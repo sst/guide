@@ -43,14 +43,7 @@
   }
 }
 
-.sst-button.primary {
-  @extend %sst-button;
-  @extend %sst-button-outline;
-
-  color: white;
-  background: $important-color;
-  box-shadow: 0px 6px 12px -2px transparentize(#FFC2B4, 0.11);
-
+%sst-button-primary-pseudo {
   &:visited { color: white; }
 
   &:before { border-color: $important-color; }
@@ -60,6 +53,17 @@
 
   &:active { background-color: #D35431; }
   &:active:before { border-color: #D35431; }
+}
+
+.sst-button.primary {
+  @extend %sst-button;
+  @extend %sst-button-outline;
+  @extend %sst-button-primary-pseudo;
+
+  color: white;
+  background: $important-color;
+  box-shadow: 0px 6px 12px -2px transparentize(#FFC2B4, 0.11);
+
 }
 
 .sst-button.secondary {
