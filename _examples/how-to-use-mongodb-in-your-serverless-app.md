@@ -98,7 +98,7 @@ We are doing a couple of things here.
 
 ## What is MongoDB
 
-[MongoDB](https://www.mongodb.com/atlas/database) is the most advanced cloud database service on the market, with unmatched data distribution and mobility across AWS, Azure, and Google Cloud, built-in automation for resource and workload optimization, and so much more.
+[MongoDB](https://www.mongodb.com/atlas/database) is the most advanced cloud database service on the market, with unmatched data distribution and mobility across AWS, Azure, and Google Cloud. It also has built-in automation for resource and workload optimization.
 
 ## Setting up MongoDB
 
@@ -110,9 +110,11 @@ MongoDB Atlas can deploy two types of cloud databases: **serverless instances** 
 
 - **Clusters** give you more flexibility in choosing your database configuration. You can set the cluster tier, use advanced capabilities such as sharding and Continuous Cloud Backups, distribute your data to multiple regions and cloud providers, and scale your cluster on-demand. You can also enable autoscaling, but it requires preconfiguration. MongoDB bills clusters based on the deployment configuration and cluster tier.
 
-> If you want to know more on the deployment types click [here](https://docs.atlas.mongodb.com/choose-database-deployment-type/)
+To learn more about the deployment types [head over to the MongoDB docs](https://docs.atlas.mongodb.com/choose-database-deployment-type/).
 
-Then **create a new Cluster**. We are using the new **Serverless Instance** option for this example. Make sure to **select AWS** as the cloud provider and **pick a region** where you are deploying your SST app. In this example, we are using `us-east-1`.
+Note that, Serverless instances are in a preview release and do not support some Atlas features. You can [read more about the Serverless instance limitations](https://docs.atlas.mongodb.com/reference/serverless-instance-limitations/).
+
+To **create a new Cluster**, we are using the new **Serverless Instance** option. Make sure to **select AWS** as the cloud provider and **pick a region** where you are deploying your SST app. In this example, we are using `us-east-1`.
 
 Once our cluster is created, click **Add New Database User**.
 
@@ -130,7 +132,7 @@ For now we'll use the **Allow Access From Anywhere** option.
 
 ![Allow access to the database from anywhere](/assets/examples/rest-api-mongodb/allow-access-to-the-database-from-anywhere.png)
 
-Once those changes have been deployed, click the **Browse collections** button and add some test data. I created a database named **demo** and inside the db, created a collection called **users** and added 2 sample documents.
+Once those changes have been deployed, click the **Browse collections** button and add some test data. We are creating a database named **demo** and inside the database, adding a collection called **users** and with two sample documents.
 
 ![sample dataset in database](/assets/examples/rest-api-mongodb/sample-data-in-database.png)
 
@@ -140,7 +142,7 @@ Click **Connect** and use the **Connect your application** option.
 
 ![Choose a connection method to the database](/assets/examples/rest-api-mongodb/choose-a-connection-method-to-the-database.png)
 
-Now copy the connection string.
+Now **copy** the connection string.
 
 ![Copy connection string to the database](/assets/examples/rest-api-mongodb/copy-connection-string-to-the-database.png)
 
@@ -150,14 +152,14 @@ Now copy the connection string.
 mongodb+srv://mongodb:<password>@serverlessinstance0.j9n6s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 ```
 
-Make sure to replace `<password>` with the password that we had copied while adding a database user above.
+Make sure to replace `<password>` with the password that we had copied while creating a database user above.
 
 We also want to make sure that this file is not committed to Git.
 
 {%change%} So add it to the `.gitignore` in your project root.
 
 ```
-.env.lcal
+.env.local
 ```
 
 ## Query our MongoDB database
@@ -297,7 +299,7 @@ const users = await db.collection("users").find({}).toArray();
 const users = await db.collection("users").find({}).limit(1).toArray();
 ```
 
-This will limit the no of users to 1 in the response object.
+This will limit the number of users to 1.
 
 ![JSON list of limit 1 users](/assets/examples/rest-api-mongodb/json-list-of-limit-1.png)
 
