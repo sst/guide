@@ -6,14 +6,14 @@ date: 2021-06-04 00:00:00
 lang: en
 index: 2
 type: database
-description: In this example we will look at how to use MongoDB in your serverless app on AWS using Serverless Stack (SST). We'll be using the sst.Api construct to create a simple API that gets a list of movies.
+description: In this example we will look at how to use MongoDB in your serverless app on AWS using Serverless Stack (SST). We'll be using the sst.Api construct to create a simple API that gets a list of users.
 short_desc: Using MongoDB in a serverless API.
 repo: rest-api-mongodb
 ref: how-to-use-mongodb-in-your-serverless-app
 comments_id: how-to-use-mongodb-in-your-serverless-app/2406
 ---
 
-In this example we will look at how to use MongoDB in our serverless app using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be creating a simple API that returns a list of movies.
+In this example we will look at how to use MongoDB in our serverless app using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be creating a simple API that returns a list of users.
 
 ## Requirements
 
@@ -25,18 +25,18 @@ In this example we will look at how to use MongoDB in our serverless app using [
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest rest-api-mongodb
 $ cd rest-api-mongodb
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "rest-api-mongodb",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -58,7 +58,7 @@ First let's create the API endpoint and connect it to a Lambda function. We'll b
 
 {%change%} Replace the `stacks/MyStack.js` with the following.
 
-``` js
+```js
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -96,11 +96,25 @@ We are doing a couple of things here.
 - The function is not being bundled. This means that we are not using [esbuild](https://esbuild.github.io) to package it. This is because there are some MongoDB npm packages (that we'll be using later) that are not compatible with esbuild. So we'll be zipping up the entire `srcPath` directory and deploying it.
 - Finally, we are printing out the API endpoint in our outputs.
 
-## Setting up MongoDB 
+## What is MongoDB
+
+[MongoDB](https://www.mongodb.com/atlas/database) is the most advanced cloud database service on the market, with unmatched data distribution and mobility across AWS, Azure, and Google Cloud. It also has built-in automation for resource and workload optimization.
+
+## Setting up MongoDB
 
 Let's create our MongoDB database. Start by heading over to [MongoDB.com](https://www.mongodb.com) to create a free account.
 
-Then **create a new Cluster**. We are using the **free Shared Cluster** option for this example. Make sure to **select AWS** as the cloud provider and **pick a region** where you are deploying your SST app. In this example, we are using `us-east-1`.
+MongoDB Atlas can deploy two types of cloud databases: **serverless instances** and **clusters**.
+
+- **Serverless Instances** require minimal configuration. Atlas automatically scales the storage capacity, storage throughput, and computing power for a serverless instance seamlessly to meet your workload requirements. They always run the latest MongoDB version, and you only pay for the operations that you run.
+
+- **Clusters** give you more flexibility in choosing your database configuration. You can set the cluster tier, use advanced capabilities such as sharding and Continuous Cloud Backups, distribute your data to multiple regions and cloud providers, and scale your cluster on-demand. You can also enable autoscaling, but it requires preconfiguration. MongoDB bills clusters based on the deployment configuration and cluster tier.
+
+To learn more about the deployment types [head over to the MongoDB docs](https://docs.atlas.mongodb.com/choose-database-deployment-type/).
+
+Note that, Serverless instances are in a preview release and do not support some Atlas features. You can [read more about the Serverless instance limitations](https://docs.atlas.mongodb.com/reference/serverless-instance-limitations/).
+
+To **create a new Cluster**, we are using the new **Serverless Instance** option. Make sure to **select AWS** as the cloud provider and **pick a region** where you are deploying your SST app. In this example, we are using `us-east-1`.
 
 Once our cluster is created, click **Add New Database User**.
 
@@ -118,9 +132,9 @@ For now we'll use the **Allow Access From Anywhere** option.
 
 ![Allow access to the database from anywhere](/assets/examples/rest-api-mongodb/allow-access-to-the-database-from-anywhere.png)
 
-Once those changes have been deployed, click the **Load Sample Dataset** to load a database of movies that we can test with.
+Once those changes have been deployed, click the **Browse collections** button and add some test data. We are creating a database named **demo** and inside the database, adding a collection called **users** and with two sample documents.
 
-![Load sample dataset in database](/assets/examples/rest-api-mongodb/load-sample-dataset-in-database.png)
+![sample dataset in database](/assets/examples/rest-api-mongodb/sample-data-in-database.png)
 
 Finally, let's get the connection string to connect to our new MongoDB database.
 
@@ -128,24 +142,24 @@ Click **Connect** and use the **Connect your application** option.
 
 ![Choose a connection method to the database](/assets/examples/rest-api-mongodb/choose-a-connection-method-to-the-database.png)
 
-Now copy the connection string.
+Now **copy** the connection string.
 
 ![Copy connection string to the database](/assets/examples/rest-api-mongodb/copy-connection-string-to-the-database.png)
 
 {%change%} Create a new `.env.local` file in your project root and add your connection string.
 
-``` bash
-MONGODB_URI=mongodb+srv://mongodb:<password>@cluster0.jicjv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+```bash
+mongodb+srv://mongodb:<password>@serverlessinstance0.j9n6s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 ```
 
-Make sure to replace `<password>` with the password that we had copied while adding a database user above.
+Make sure to replace `<password>` with the password that we had copied while creating a database user above.
 
 We also want to make sure that this file is not committed to Git.
 
 {%change%} So add it to the `.gitignore` in your project root.
 
 ```
-.env.lcal
+.env.local
 ```
 
 ## Query our MongoDB database
@@ -154,7 +168,7 @@ We are now ready to add the function code to query our newly created MongoDB dat
 
 {%change%} Replace `src/lambda.js` with the following.
 
-``` js
+```js
 import * as mongodb from "mongodb";
 
 const MongoClient = mongodb.MongoClient;
@@ -172,7 +186,7 @@ async function connectToDatabase() {
   const client = await MongoClient.connect(process.env.MONGODB_URI);
 
   // Specify which database we want to use
-  cachedDb = await client.db("sample_mflix");
+  cachedDb = await client.db("demo");
 
   return cachedDb;
 }
@@ -189,22 +203,22 @@ export async function handler(event, context) {
   const db = await connectToDatabase();
 
   // Make a MongoDB MQL Query
-  const movies = await db.collection("movies").find({}).limit(20).toArray();
+  const users = await db.collection("users").find({}).toArray();
 
   return {
     statusCode: 200,
-    body: JSON.stringify(movies, null, 2),
+    body: JSON.stringify(users, null, 2),
   };
 }
 ```
 
 The first thing to note here is the `connectToDatabase` method. We use the connection string from the environment and connect to our sample database. But we save a reference to it. This allows us to reuse the connection as long as this Lambda function container is being used.
 
-The `handler` function should be pretty straightforward here. We connect to our database and query the `movies` collection in our database. And return 20 items. We then JSON stringify it and pretty print it.
+The `handler` function should be pretty straightforward here. We connect to our database and query the `users` collection in our database. And return 2 items. We then JSON stringify it and pretty print it.
 
 The line of note is:
 
-``` js
+```js
 context.callbackWaitsForEmptyEventLoop = false;
 ```
 
@@ -214,13 +228,13 @@ Let's install our MongoDB client. As mentioned at the beginning of this example,
 
 {%change%} Add the following to `src/package.json`.
 
-``` json
+```json
 {
   "name": "rest-api-mongodb-src",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "mongodb": "^3.6.9"
+    "mongodb": "^4.2.1"
   }
 }
 ```
@@ -229,7 +243,7 @@ Note, this isn't the same `package.json` in your project root.
 
 {%change%} And run the following inside the `src/` directory.
 
-``` bash
+```bash
 $ npm install
 ```
 
@@ -239,7 +253,7 @@ We are now ready to test our API!
 
 {%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
 
-``` bash
+```bash
 $ npx sst start
 ```
 
@@ -262,12 +276,12 @@ dev-rest-api-mongodb-my-stack: deploying...
 Stack dev-rest-api-mongodb-my-stack
   Status: deployed
   Outputs:
-    ApiEndpoint: https://uzuwvg7khc.execute-api.us-east-1.amazonaws.com
+    ApiEndpoint: https://4gqqjg6ima.execute-api.us-east-1.amazonaws.com/
 ```
 
-The `ApiEndpoint` is the API we just created. Let's test our endpoint. If you open the endpoint URL in your browser, you should see a list of movies being printed out.
+The `ApiEndpoint` is the API we just created. Let's test our endpoint. If you open the endpoint URL in your browser, you should see a list of users being printed out.
 
-![JSON list of movies](/assets/examples/rest-api-mongodb/json-list-of-movies.png)
+![JSON list of users](/assets/examples/rest-api-mongodb/json-list-of-users.png)
 
 ## Making changes
 
@@ -275,44 +289,39 @@ Now let's make a quick change to our database query.
 
 {%change%} Replace the following line in `src/lambda.js`.
 
-``` js
-  const movies = await db.collection("movies").find({}).limit(20).toArray();
+```js
+const users = await db.collection("users").find({}).toArray();
 ```
 
 {%change%} With:
 
-``` js
-  const movies = await db
-    .collection("movies")
-    .find({}, { projection: { title: 1, plot: 1, metacritic: 1, cast: 1 } })
-    .sort({ metacritic: -1 })
-    .limit(20)
-    .toArray();
+```js
+const users = await db.collection("users").find({}).limit(1).toArray();
 ```
 
-This will sort our movies list by the ones that have the highest Metacritic score. So if you refresh your browser, you should see a different set of movies at the top.
+This will limit the number of users to 1.
 
-
-![JSON list of top movies](/assets/examples/rest-api-mongodb/json-list-of-top-movies.png)
+![JSON list of limit 1 users](/assets/examples/rest-api-mongodb/json-list-of-limit-1.png)
 
 ## Deploying to prod
 
 {%change%} To wrap things up we'll deploy our app to prod.
 
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
+
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
 
 ## Cleaning up
 
 Finally, you can remove the resources created in this example using the following commands.
 
-``` bash
+```bash
 $ npx sst remove
 $ npx sst remove --stage prod
 ```
 
 ## Conclusion
 
-And that's it! We've got a serverless API connected to a MongoDB database. We also have a local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+And that's it! We've got a serverless API connected to a MongoDB serverless database. We also have a local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
