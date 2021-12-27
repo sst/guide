@@ -102,6 +102,10 @@
     pointer-events: none;
     opacity: 0.4;
     color: $secondary-text-color;
+
+    @include media-query($on-palm) {
+      left: 13px;
+    }
   }
 
   input {
@@ -186,7 +190,7 @@
           }
 
           input {
-            padding: 6px 10px 6px 33px;
+            padding: 6px 10px 6px 36px;
             height: 44px;
             font-size: 18px;
             background-color: $background-color;
@@ -424,6 +428,10 @@
   section.search {
     margin-left: $spacing-unit / 2 + 5px;
     @extend %search;
+
+    @include media-query($on-monitor) {
+      margin-left: 0;
+    }
   }
 
 }
