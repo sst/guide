@@ -41,9 +41,22 @@ $on-laptop:             800px !default;
   }
 }
 
+%body-background {
+  background: {
+    image: url("/assets/lander/background.svg");
+    position: 0 0;
+    size: cover;
+    color: $secondary-background-color;
+  }
+  @include media-query($on-laptop) {
+    background-image: url("/assets/lander/background-mobile.svg");
+  }
+}
+
 // Import partials.
 @import
   "theme/base",
   "theme/layout",
+  "theme/buttons",
   "theme/syntax-highlighting"
 ;

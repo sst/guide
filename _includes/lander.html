@@ -2,433 +2,318 @@
 
   <div class="header-wrapper">
 
-    <div class="columns">
-      <div class="col1">
-        <a class="site-announcement" href="{% link _posts/2021-07-23-serverless-stack-raises-1m-to-make-it-easy-to-build-serverless-apps.md %}">
-          <span class="new">New</span>
-          <span class="copy">We raised $1M to make it easy to build serverless apps</span>
-          <i class="fa fa-angle-right" aria-hidden="true"></i>
-        </a>
-        <h1 class="site-description">Helping you build full-stack serverless apps</h1>
+    <a class="site-announcement" href="{% link _posts/2021-07-23-serverless-stack-raises-1m-to-make-it-easy-to-build-serverless-apps.md %}">
+      <span class="new">New</span>
+      <span class="copy">We raised $1M to make it easy to build serverless apps</span>
+      <i class="fa fa-angle-right" aria-hidden="true"></i>
+    </a>
+    <div class="site-description">
+      <h1 class="site-description">Making it easy to build full-stack serverless apps</h1>
+      <img src="/assets/lander/graphics/hero-scribble.svg" />
+      <img src="/assets/lander/graphics/hero-sparkle.svg" />
+    </div>
 
-        <h4 class="site-description-full">
-          Serverless Stack (SST) is a framework that makes it easy to build serverless applications. Check out our examples or follow our step-by-step guide to get started.
-        </h4>
+    <h4 class="site-description-full">
+      Serverless Stack (SST) is an open-source serverless application platform that deploys to your AWS account, helping you go from idea to IPO.
+    </h4>
 
-        <div class="controls">
-          <a class="button" href="#guide">Read the Guide</a>
-          <a class="button" href="{{ site.docs_url }}{{ site.docs_get_started }}">Get Started <i class="fa fa-angle-right" aria-hidden="true"></i></a>
-        </div>
-      </div>
-
-      <div class="col2">
-
-        <div class="video-wrapper">
-          <div class="coaster"></div>
-          <iframe src="https://www.youtube-nocookie.com/embed/hnTSTm5n11g?autoplay=1&amp;loop=1&amp;controls=0&amp;modestbranding=1&amp;rel=0&amp;disablekb=1&amp;mute=1&amp;muted=1" width="560" height="315" frameBorder="0" allow="autoplay; modestbranding; encrypted-media"></iframe>
-        </div>
-      </div>
+    <div class="controls">
+      <a class="sst-button primary" href="{{ site.docs_url }}{{ site.docs_get_started }}">
+        Get Started
+      </a>
+      <a class="sst-button secondary" href="#guide">Read the Guide</a>
     </div>
 
   </div>
 
 </header>
 
-<div class="features">
+<div class="features wrapper ">
 
-  <div class="quick-start">
-    <div class="navbar">
-      <div class="controls">
-        <div class="button"></div>
-        <div class="button"></div>
-        <div class="button"></div>
-      </div>
-    </div>
-    <div class="code-block">
-      <div class="token-line">
-        <span class="token lead">#</span><span class="token dim">Create a new Serverless Stack app</span>
-      </div>
-      <div class="token-line">
-        <span class="token lead">$</span> npx <span class="token keyword">create-serverless-stack</span> my-sst-app</span>
-      </div>
-      <div class="token-line">
-        <span class="token lead">$</span> cd my-sst-app</span>
-      </div>
-      <br />
-      <div class="token-line">
-        <span class="token lead">#</span><span class="token dim">Start the Live Lambda Dev environment</span>
-      </div>
-      <div class="token-line">
-        <span class="token lead">$</span> npx <span class="token keyword">sst</span> <span class="token plain">start</span>
-      </div>
-      <br />
-      <div class="token-line">
-        <span class="token lead">#</span><span class="token dim">Deploy to prod</span>
-      </div>
-      <div class="token-line">
-        <span class="token lead">$</span> npx <span class="token keyword">sst</span> <span class="token plain">deploy</span> --stage prod
-      </div>
-    </div>
-  </div>
+  <div class="content">
 
-  <div class="list">
-    <div class="feature">
-      <div class="icon"><i class="fa fa-bolt" aria-hidden="true"></i></div>
-      <h4>Live Lambda Development</h4>
-      <p>Work on your local Lambda functions live, without mocking or redeploying your app.</p>
+    <div class="quick-start">
+      <div class="navbar">
+        <div class="controls">
+          <div class="button"></div>
+          <div class="button"></div>
+          <div class="button"></div>
+        </div>
+      </div>
+      <div class="code-block">
+        <div class="token-line">
+          <span class="token lead">#</span><span class="token dim">Create a new Serverless Stack app</span>
+        </div>
+        <div class="token-line">
+          <span class="token lead">$</span> npx <span class="token keyword">create-serverless-stack</span> my-sst-app</span>
+        </div>
+        <div class="token-line">
+          <span class="token lead">$</span> cd my-sst-app</span>
+        </div>
+        <br />
+        <div class="token-line">
+          <span class="token lead">#</span><span class="token dim">Start the Live Lambda Dev environment</span>
+        </div>
+        <div class="token-line">
+          <span class="token lead">$</span> npx <span class="token keyword">sst</span> <span class="token plain">start</span>
+        </div>
+        <br />
+        <div class="token-line">
+          <span class="token lead">#</span><span class="token dim">Deploy to prod</span>
+        </div>
+        <div class="token-line">
+          <span class="token lead">$</span> npx <span class="token keyword">sst</span> <span class="token plain">deploy</span> --stage prod
+        </div>
+      </div>
     </div>
-    <div class="feature">
-      <div class="icon"><i class="fa fa-hand-o-right" aria-hidden="true"></i></div>
-      <h4>Breakpoint debugging</h4>
-      <p>Use Visual Studio code and set breakpoints to debug your Lambda functions.</p>
+
+    <div class="list">
+      <div class="feature live">
+        <img src="/assets/lander/graphics/bolt-icon.svg" />
+        <hr />
+        <h4>Live Lambda Development</h4>
+        <p>Work on your local Lambda functions live, without mocking or redeploying your app.</p>
+      </div>
+      <div class="columns">
+        <div class="feature breakpoints">
+          <img src="/assets/lander/graphics/bug-icon.svg" />
+          <hr />
+          <h4>Breakpoint debugging</h4>
+          <p>Use Visual Studio code and set breakpoints to debug your Lambda functions.</p>
+        </div>
+        <div class="feature cdk">
+          <img src="/assets/lander/graphics/parts-icon.svg" />
+          <hr />
+          <h4>Composable serverless constructs</h4>
+          <p>Higher-level CDK constructs made specifically for building serverless apps.</p>
+        </div>
+      </div>
     </div>
-    <div class="feature">
-      <div class="icon"><i class="fa fa-cubes" aria-hidden="true"></i></div>
-      <h4>Composable serverless constructs</h4>
-      <p>Higher-level CDK constructs made specifically for building serverless apps.</p>
-    </div>
+
   </div>
 
 </div>
 
-{% include testimonials.html %}
-
-<div id="examples" class="examples">
+<div id="examples" class="sections examples wrapper ">
 
   <div class="title">
-    <h2>Examples</h2>
+    <h2>Build <span>full-stack</span> apps</h2>
+    <br />
     <p>
       Quick start examples to help you build the type of Serverless Stack app you want.
       <a class="more" href="{% link _examples/index.md %}">
         View all the examples <i class="fa fa-angle-right" aria-hidden="true"></i>
       </a>
     </p>
+    <img src="/assets/lander/graphics/examples-scribble.svg" />
+  </div>
+
+  <div class="content">
+    {% include lander-examples.html %}
+  </div>
+</div>
+
+<div class="sections breakpoints wrapper ">
+
+  <div class="title">
+    <h2><span>Test</span> your apps <span>live</span></h2>
+    <br />
+    <p>
+      Set breakpoints in your Lambda functions and test your apps live.
+      <a class="more" href="{% link _examples/how-to-debug-lambda-functions-with-visual-studio-code.md %}">
+        Learn more <i class="fa fa-angle-right" aria-hidden="true"></i>
+      </a>
+    </p>
+    <img src="/assets/lander/graphics/breakpoints-swirl.svg" />
+  </div>
+
+  <div class="content">
+    <svg viewBox="0 0 2684 1366" xmlns="http://www.w3.org/2000/svg">
+      <image x="432" y="0" width="2252" height="1366" href="/assets/lander/graphics/breakpoints-image.png" />
+    </svg>
+    <svg viewBox="0 0 750 527" xmlns="http://www.w3.org/2000/svg">
+      <image x="19" y="0" width="731" height="527" href="/assets/lander/graphics/breakpoints-image-mobile.png" />
+    </svg>
+  </div>
+
+</div>
+
+{% comment %}
+<!--
+<div class="sections console wrapper ">
+
+  <div class="title">
+    <h2>Easy to use <span>console</span></h2>
+    <br />
+    <p>
+      Browse your constructs, invoke your functions, and view your logs live.
+      <a class="more" href="{% link _examples/how-to-debug-lambda-functions-with-visual-studio-code.md %}">
+        Learn more <i class="fa fa-angle-right" aria-hidden="true"></i>
+      </a>
+    </p>
+    <img src="/assets/lander/graphics/console-sparkle-left.svg" />
+    <img src="/assets/lander/graphics/console-sparkle-right.svg" />
+  </div>
+
+  <div class="content">
+    <div class="wrap">
+      <img class="copy-left" src="/assets/lander/graphics/console-copy-left.svg" />
+      <img class="arrow-left" src="/assets/lander/graphics/console-arrow-left.svg" />
+      <img class="arrow-left-mobile" src="/assets/lander/graphics/console-arrow-left-mobile.svg" />
+      <img class="copy-right" src="/assets/lander/graphics/console-copy-right.svg" />
+      <img class="arrow-right" src="/assets/lander/graphics/console-arrow-right.svg" />
+      <img class="arrow-right-mobile" src="/assets/lander/graphics/console-arrow-right-mobile.svg" />
+      <img class="screenshot" src="/assets/lander/graphics/breakpoints-screenshot.png" />
+    </div>
+  </div>
+
+</div>
+-->
+{% endcomment %}
+
+<div class="sections cdk wrapper ">
+
+  <div class="title">
+    <h2><span>Use</span> all AWS <span>services</span></h2>
+    <br />
+    <p>
+      SST is built on AWS CDK and supports all AWS services.
+      <a class="more" href="{{ site.docs_url }}/faq#can-i-use-all-the-cdk-constructs-in-sst">
+        Learn more <i class="fa fa-angle-right" aria-hidden="true"></i>
+      </a>
+    </p>
+    <img src="/assets/lander/graphics/cdk-sparkle.svg" />
+  </div>
+
+  <div class="content">
+    <svg viewBox="0 0 2638 926" xmlns="http://www.w3.org/2000/svg">
+      <image x="139" y="0" width="2098" height="926" href="/assets/lander/graphics/cdk-image.png" />
+    </svg>
+    <svg viewBox="0 0 750 471" xmlns="http://www.w3.org/2000/svg">
+      <image x="0" y="0" width="743" height="471" href="/assets/lander/graphics/cdk-image-mobile.png" />
+    </svg>
+  </div>
+
+</div>
+
+<div id="case-studies" class="case-studies wrapper ">
+  <div class="content">
+    <h3>Case Studies</h3>
+    <div class="slideshow-container">
+      <div class="slideshow">
+        <ul>
+          <li class="case-study">
+            <div class="author">
+              <img src="/assets/lander/case-studies/profile-doorvest.png" />
+              <div class="content">
+                <p>Lead Engineer,</p>
+                <p><a href="https://doorvest.com">Doorvest</a></p>
+              </div>
+            </div>
+            <h5 class="quote">&ldquo;SST has improved our productivity by at least 3 times.&rdquo;</h5>
+            <a class="logo" href="https://doorvest.com"><img width="138px" src="/assets/lander/case-studies/logo-doorvest.svg" /></a>
+            <a class="sst-button primary" href="{% link _posts/2021-10-27-doorvest-is-using-sst-to-simplify-real-estate-investing.md %}">Read Case Study</a>
+          </li>
+          <li class="case-study">
+            <div class="author">
+              <img src="/assets/lander/case-studies/profile-hs1.jpeg" />
+              <div class="content">
+                <p>Engineering Manager,</p>
+                <p><a href="https://henryscheinone.com">Henry Schein One</a></p>
+              </div>
+            </div>
+            <h5 class="quote">&ldquo;We have gone all-in on SST.&rdquo;</h5>
+            <a class="logo" href="https://henryscheinone.com"><img width="150px" src="/assets/lander/case-studies/logo-hs1.svg" /></a>
+            <a class="sst-button primary" href="{% link _posts/2021-11-16-henry-schein-one-the-worlds-largest-dental-practice-management-software-company-is-building-with-sst.md %}">Read Case Study</a>
+          </li>
+          <li class="case-study">
+            <div class="author">
+              <img src="/assets/lander/case-studies/profile-leadent.jpeg" />
+              <div class="content">
+                <p>CTO,</p>
+                <p><a href="https://leadent.digital">Leadent Digital</a></p>
+              </div>
+            </div>
+            <h5 class="quote">&ldquo;I hadn't found anything like SST.&rdquo;</h5>
+            <a class="logo" href="https://leadent.digital"><img width="90px" src="/assets/lander/case-studies/logo-leadent.png" /></a>
+            <a class="sst-button primary" href="{% link _posts/2021-11-11-leadent-digital-is-transforming-field-service-operations-with-sst.md %}">Read Case Study</a>
+          </li>
+          <li class="case-study">
+            <div class="author">
+              <img src="/assets/lander/case-studies/profile-buildforce.png" />
+              <div class="content">
+                <p>Founder,</p>
+                <p><a href="https://buildforce.com">Buildforce</a></p>
+              </div>
+            </div>
+            <h5 class="quote">&ldquo;We were blown away by the local development environment.&rdquo;</h5>
+            <a class="logo" href="https://buildforce.com"><img width="135px" src="/assets/lander/case-studies/logo-buildforce.png" /></a>
+            <a class="sst-button primary" href="{% link _posts/2021-10-28-buildforce-is-creating-the-first-ever-career-platform-for-the-construction-trade-with-sst.md %}">Read Case Study</a>
+          </li>
+        </ul>
+      </div>
+      <button class="prev"><img src="/assets/lander/graphics/chevron-icon.svg" /></button>
+      <button class="next"><img src="/assets/lander/graphics/chevron-icon.svg" /></button>
+    </div>
+  </div>
+</div>
+
+<div class="testimonials">
+  <div class="title">
+    <h2>
+      Making it easy <span>to build full-stack</span> serverless apps
+      <img src="/assets/lander/graphics/testimonials-sparkle.svg" />
+    </h2>
+  </div>
+
+  <div class="scroll-content">
+    <div class="tweets">
+      {% for tweet in site.data.testimonials.tweets %}
+        <div class="tweet">
+          <i class="fa fa-twitter" aria-hidden="true"></i>
+          <div class="author">
+            <img src="/assets/lander/testimonials/{{ tweet.username }}.jpg" />
+            <div>
+              <p>{{ tweet.name }}</p>
+              <p>@{{ tweet.username }}</p>
+            </div>
+          </div>
+          <div class="content">{{ tweet.content }}</div>
+          <a class="tweet-link" target="_blank" href="{{ tweet.link }}"></a>
+        </div>
+      {% endfor %}
+      <div class="spacer"></div>
+    </div>
+    <div class="scroll-shadow left"></div>
+    <div class="scroll-shadow right"></div>
   </div>
 
   <div class="controls">
-    <div class="scroll-content">
-      <div class="list">
-        <button data-name="rest-api" class="active">REST API</button>
-        <button data-name="graphql-api">GraphQL API</button>
-        <button data-name="react-app">React app</button>
-        <button data-name="nextjs-app">Next.js app</button>
-        <button data-name="api-auth">API with auth</button>
-        <button data-name="cron-job">Cron job</button>
-        <button data-name="queue">Queue</button>
-        <button class="highlight">REST API</button>
-      </div>
-      <div class="scroll-shadow left"></div>
-      <div class="scroll-shadow right"></div>
-    </div>
+    <a class="sst-button primary" href="{{ site.docs_url }}{{ site.docs_get_started }}">
+      Get Started
+    </a>
+    <a class="sst-button secondary" href="#guide">Read the Guide</a>
   </div>
 
-  <div class="example-list">
-    <div class="example">
-      <div class="coaster"></div>
+</div>
 
-      <!-- Infos -->
-      <div class="info active rest-api">
-        <div class="icon">
-          <i class="fa fa-link" aria-hidden="true"></i>
-        </div>
-        <h4>REST API</h4>
-        <p>Create a serverless REST API on AWS using the SST Api construct to define our routes and functions.</p>
-        <a href="{% link _examples/how-to-create-a-rest-api-with-serverless.md %}">
-          View example <i class="fa fa-angle-right" aria-hidden="true"></i>
-        </a>
-      </div>
-      <div class="info graphql-api" style="display: none">
-        <div class="icon">
-          <img class="graphql" src="/assets/lander/graphql-logo.svg" />
-        </div>
-        <h4>GraphQL API</h4>
-        <p>Create a serverless GraphQL API with AppSync. Using the SST AppSyncApi to define the schema and resolvers.</p>
-        <a href="{% link _examples/how-to-create-a-serverless-graphql-api-with-aws-appsync.md %}">
-          View example <i class="fa fa-angle-right" aria-hidden="true"></i>
-        </a>
-      </div>
-      <div class="info react-app" style="display: none">
-        <div class="icon">
-          <img class="react" src="/assets/lander/react-logo.svg" />
-        </div>
-        <h4>React app</h4>
-        <p>Deploy a React.js app. Using the ReactStaticSite construct to set custom domains and environment variables.</p>
-        <a href="{% link _examples/how-to-create-a-reactjs-app-with-serverless.md %}">
-          View example <i class="fa fa-angle-right" aria-hidden="true"></i>
-        </a>
-      </div>
-      <div class="info nextjs-app" style="display: none">
-        <div class="icon">
-          <img class="nextjs" src="/assets/lander/nextjs-logo.svg" />
-        </div>
-        <h4>Next.js app</h4>
-        <p>Deploy a Next.js app. Using the NextjsSite construct to configure environment variables and permissions.</p>
-        <a href="{% link _examples/how-to-create-a-nextjs-app-with-serverless.md %}">
-          View example <i class="fa fa-angle-right" aria-hidden="true"></i>
-        </a>
-      </div>
-      <div class="info api-auth" style="display: none">
-        <div class="icon">
-          <i class="fa fa-key" aria-hidden="true"></i>
-        </div>
-        <h4>API with Auth</h4>
-        <p>Add Facebook authentication to a serverless API using the SST Api and Auth constructs.</p>
-        <a href="{% link _examples/how-to-add-facebook-authentication-to-a-serverless-api.md %}">
-          View example <i class="fa fa-angle-right" aria-hidden="true"></i>
-        </a>
-      </div>
-      <div class="info cron-job" style="display: none">
-        <div class="icon">
-          <i class="fa fa-clock-o" aria-hidden="true"></i>
-        </div>
-        <h4>Cron Job</h4>
-        <p>Create a cron job in your serverless app using the SST Cron construct.</p>
-        <a href="{% link _examples/how-to-use-cron-jobs-in-your-serverless-app.md %}">
-          View example <i class="fa fa-angle-right" aria-hidden="true"></i>
-        </a>
-      </div>
-      <div class="info queue" style="display: none">
-        <div class="icon">
-          <i class="fa fa-list-ol" aria-hidden="true"></i>
-        </div>
-        <h4>Queue</h4>
-        <p>Create a queue system in your serverless app using the SST Api and Queue constructs.</p>
-        <a href="{% link _examples/how-to-use-queues-in-your-serverless-app.md %}">
-          View example <i class="fa fa-angle-right" aria-hidden="true"></i>
-        </a>
-      </div>
-      <!-- End Infos -->
-
-      <div class="code-editor">
-        <div class="navbar">
-          <div class="controls">
-            <div class="button"></div>
-            <div class="button"></div>
-            <div class="button"></div>
-          </div>
-          <!-- Code Titles -->
-          <div class="title rest-api active">api.js</div>
-          <div class="title graphql-api" style="display: none">graphql.js</div>
-          <div class="title react-app" style="display: none">react.js</div>
-          <div class="title nextjs-app" style="display: none">next.js</div>
-          <div class="title api-auth" style="display: none">auth.js</div>
-          <div class="title cron-job" style="display: none">cron.js</div>
-          <div class="title queue" style="display: none">queue.js</div>
-          <!-- End Code Titles -->
-        </div>
-        <!-- Code Blocks -->
-        <div class="code-block rest-api active">
-          <div class="token-line">
-            <span class="token lead">1</span> <span class="token italics">new</span> <span class="token keyword">sst.Api</span>(<span class="token italics">this</span>, <span class="token string">"Api"</span>, {
-          </div>
-          <div class="token-line">
-            <span class="token lead">2</span>&nbsp;&nbsp;routes: {
-          </div>
-          <div class="token-line">
-            <span class="token lead">3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"GET /notes"</span>: <span class="token string">"src/list.main"</span>,
-          </div>
-          <div class="token-line">
-            <span class="token lead">4</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"GET /notes/{id}"</span>: <span class="token string">"src/get.main"</span>,
-          </div>
-          <div class="token-line">
-            <span class="token lead">5</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"PUT /notes/{id}"</span>: <span class="token string">"src/update.main"</span>
-          </div>
-          <div class="token-line">
-            <span class="token lead">6</span>&nbsp;&nbsp;}
-          </div>
-          <div class="token-line">
-            <span class="token lead">7</span>});
-          </div>
-        </div>
-        <div class="code-block graphql-api long" style="display: none">
-          <div class="token-line">
-            <span class="token lead">1</span> <span class="token italics">new</span> <span class="token keyword">sst.AppSyncApi</span>(<span class="token italics">this</span>, <span class="token string">"Api"</span>, {
-          </div>
-          <div class="token-line">
-            <span class="token lead">2</span>&nbsp;&nbsp;graphqlApi: { schema: <span class="token string">"schema.graphql"</span> },
-          </div>
-          <div class="token-line">
-            <span class="token lead">3</span>&nbsp;&nbsp;resolvers: {
-          </div>
-          <div class="token-line">
-            <span class="token lead">4</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"Query get"</span>: <span class="token string">"src/get.main"</span>,
-          </div>
-          <div class="token-line">
-            <span class="token lead">5</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"Query list"</span>: <span class="token string">"src/list.main"</span>,
-          </div>
-          <div class="token-line">
-            <span class="token lead">6</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"Mutation update"</span>: <span class="token string">"src/update.main"</span>
-          </div>
-          <div class="token-line">
-            <span class="token lead">7</span>&nbsp;&nbsp;}
-          </div>
-          <div class="token-line">
-            <span class="token lead">8</span>});
-          </div>
-        </div>
-        <div class="code-block react-app long" style="display: none">
-          <div class="token-line">
-            <span class="token lead">1</span> <span class="token italics">new</span> <span class="token keyword">sst.ReactStaticSite</span>(<span class="token italics">this</span>, <span class="token string">"Site"</span>, {
-          </div>
-          <div class="token-line">
-            <span class="token lead">2</span>&nbsp;&nbsp;path: <span class="token string">"src/frontend"</span>,
-          </div>
-          <div class="token-line">
-            <span class="token lead">3</span>&nbsp;&nbsp;customDomain: <span class="token string">"www.my-react-app.com"</span>,
-          </div>
-          <div class="token-line">
-            <span class="token lead">4</span>&nbsp;&nbsp;environment: {
-          </div>
-          <div class="token-line">
-            <span class="token lead">5</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token option">REACT_APP_API_URL</span>: api.url
-          </div>
-          <div class="token-line">
-            <span class="token lead">6</span>&nbsp;&nbsp;}
-          </div>
-          <div class="token-line">
-            <span class="token lead">7</span>});
-          </div>
-        </div>
-        <div class="code-block nextjs-app long" style="display: none">
-          <div class="token-line">
-            <span class="token lead">1</span> <span class="token italics">const</span> site <span class="token operator">=</span> <span class="token italics">new</span> <span class="token keyword">sst.NextjsSite</span>(<span class="token italics">this</span>, <span class="token string">"Site"</span>, {
-          </div>
-          <div class="token-line">
-            <span class="token lead">2</span>&nbsp;&nbsp;path: <span class="token string">"src/frontend"</span>,
-          </div>
-          <div class="token-line">
-            <span class="token lead">3</span>&nbsp;&nbsp;customDomain: <span class="token string">"www.my-nextjs-app.com"</span>,
-          </div>
-          <div class="token-line">
-            <span class="token lead">4</span>&nbsp;&nbsp;environment: {
-          </div>
-          <div class="token-line">
-            <span class="token lead">5</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token option">TABLE_NAME</span>: table.tableName
-          </div>
-          <div class="token-line">
-            <span class="token lead">6</span>&nbsp;&nbsp;}
-          </div>
-          <div class="token-line">
-            <span class="token lead">7</span>});
-          </div>
-          <div class="token-line">
-            <span class="token lead">8</span>&nbsp;
-          </div>
-          <div class="token-line">
-            <span class="token lead">9</span><span class="token dim">// Allow access to the database</span>
-          </div>
-          <div class="token-line">
-            <span class="token lead">10</span>site.<span class="token keyword">attachPermissions</span>([table]);
-          </div>
-        </div>
-        <div class="code-block api-auth long" style="display: none">
-          <div class="token-line">
-            <span class="token lead">1</span> <span class="token italics">const</span> api <span class="token operator">=</span> <span class="token italics">new</span> <span class="token keyword">sst.Api</span>(<span class="token italics">this</span>, <span class="token string">"Api"</span>, {
-          </div>
-          <div class="token-line">
-            <span class="token lead">2</span>&nbsp;&nbsp;defaultAuthorizationType:
-          </div>
-          <div class="token-line">
-            <span class="token lead">3</span>&nbsp;&nbsp;&nbsp;&nbsp;sst.ApiAuthorizationType.<span class="token option">AWS_IAM</span>,
-          </div>
-          <div class="token-line">
-            <span class="token lead">4</span>&nbsp;&nbsp;routes: {
-          </div>
-          <div class="token-line">
-            <span class="token lead">5</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"GET /private"</span>: <span class="token string">"src/private.main"</span>
-          </div>
-          <div class="token-line">
-            <span class="token lead">6</span>&nbsp;&nbsp;}
-          </div>
-          <div class="token-line">
-            <span class="token lead">7</span>});
-          </div>
-          <div class="token-line">
-            <span class="token lead">8</span>&nbsp;
-          </div>
-          <div class="token-line">
-            <span class="token lead">9</span> <span class="token italics">const</span> auth <span class="token operator">=</span> <span class="token italics">new</span> <span class="token keyword">sst.Auth</span>(<span class="token italics">this</span>, <span class="token string">"Auth"</span>, {
-          </div>
-          <div class="token-line">
-            <span class="token lead">10</span>&nbsp;&nbsp;facebook: { appId: <span class="token string">"419718329085014"</span> }
-          </div>
-          <div class="token-line">
-            <span class="token lead">11</span>});
-          </div>
-          <div class="token-line">
-            <span class="token lead">12</span>&nbsp;
-          </div>
-          <div class="token-line">
-            <span class="token lead">13</span><span class="token dim">// Allow auth users to access the API</span>
-          </div>
-          <div class="token-line">
-            <span class="token lead">14</span>auth.<span class="token keyword">attachPermissionsForAuthUsers</span>([api]);
-          </div>
-        </div>
-        <div class="code-block cron-job" style="display: none">
-          <div class="token-line">
-            <span class="token lead">1</span> <span class="token italics">new</span> <span class="token keyword">sst.Cron</span>(<span class="token italics">this</span>, <span class="token string">"Cron"</span>, {
-          </div>
-          <div class="token-line">
-            <span class="token lead">2</span>&nbsp;&nbsp;job: <span class="token string">"src/lambda.main"</span>,
-          </div>
-          <div class="token-line">
-            <span class="token lead">3</span>&nbsp;&nbsp;schedule: <span class="token string">"rate(1 minute)"</span>
-          </div>
-          <div class="token-line">
-            <span class="token lead">4</span>});
-          </div>
-          <div class="token-line">
-            <span class="token lead">5</span>&nbsp;
-          </div>
-          <div class="token-line">
-            <span class="token lead">6</span><span class="token dim">// Allow access to other resources</span>
-          </div>
-          <div class="token-line">
-            <span class="token lead">7</span>api.<span class="token keyword">attachPermissions</span>([<span class="token string">"s3"</span>]);
-          </div>
-        </div>
-        <div class="code-block queue long" style="display: none">
-          <div class="token-line">
-            <span class="token lead">1</span> <span class="token italics">const</span> queue <span class="token operator">=</span> <span class="token italics">new</span> <span class="token keyword">sst.Queue</span>(<span class="token italics">this</span>, <span class="token string">"Queue"</span>, {
-          </div>
-          <div class="token-line">
-            <span class="token lead">2</span>&nbsp;&nbsp;consumer: <span class="token string">"src/queueConsumer.main"</span>
-          </div>
-          <div class="token-line">
-            <span class="token lead">3</span>});
-          </div>
-          <div class="token-line">
-            <span class="token lead">4</span>&nbsp;
-          </div>
-          <div class="token-line">
-            <span class="token lead">5</span> <span class="token italics">const</span> api <span class="token operator">=</span> <span class="token italics">new</span> <span class="token keyword">sst.Api</span>(<span class="token italics">this</span>, <span class="token string">"Api"</span>, {
-          </div>
-          <div class="token-line">
-            <span class="token lead">6</span>&nbsp;&nbsp;routes: {
-          </div>
-          <div class="token-line">
-            <span class="token lead">7</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"GET /"</span>: <span class="token string">"src/publisher.main"</span>
-          </div>
-          <div class="token-line">
-            <span class="token lead">8</span>&nbsp;&nbsp;}
-          </div>
-          <div class="token-line">
-            <span class="token lead">9</span>});
-          </div>
-          <div class="token-line">
-            <span class="token lead">10</span>&nbsp;
-          </div>
-          <div class="token-line">
-            <span class="token lead">11</span><span class="token dim">// Allow the API to publish to the queue</span>
-          </div>
-          <div class="token-line">
-            <span class="token lead">12</span>api.<span class="token keyword">attachPermissions</span>([queue]);
-          </div>
-        </div>
-        <!-- End Code Blocks -->
-      </div>
-    </div>
+<div class="community wrapper ">
+  <div class="content">
+    <h4>Join our <span>growing community</span></h4>
+    <ul>
+      <li>
+        <h6>{{ site.stats.github }}+</h6>
+        <p>GitHub stars</p>
+      </li>
+      <li>
+        <h6>{{ site.stats.slack }}+</h6>
+        <p>Slack members</p>
+      </li>
+      <li>
+        <h6>{{ site.stats.newsletter_short }}+</h6>
+        <p>Subscribers</p>
+      </li>
+    </ul>
   </div>
 </div>
 
@@ -443,11 +328,13 @@
   <div class="form-container">
     <div class="form-copy">
       <p>Download the FREE 1000 page ebook</p>
-      <p>Join 30,000 readers from the biggest companies in the world. We'll also send you updates when new versions are published.</p>
+      <p>Join {{ site.stats.newsletter }} readers from the biggest companies in the world. We'll also send you updates when new versions are published.</p>
     </div>
     <div class="form">
       {% include email-octopus-form.html button_copy="Download" source="home" %}
     </div>
+    <img class="sparkle-left" src="/assets/lander/graphics/guide-sparkle-left.svg" />
+    <img class="sparkle-right" src="/assets/lander/graphics/guide-sparkle-right.svg" />
   </div>
 
   <div class="readers">
