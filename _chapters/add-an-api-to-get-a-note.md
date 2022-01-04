@@ -8,7 +8,7 @@ ref: add-an-api-to-get-a-note
 comments_id: add-an-api-to-get-a-note/2453
 ---
 
-Now that we [created a note]({% link _chapters/add-an-api-to-create-a-note.md %}) and saved it to our database. Let's add an API to retrieve a note given its id.
+Now that we [created a note]({% link _chapters/add-an-api-to-create-a-note.md %}) and saved it to our database, let's add an API to retrieve a note given its id.
 
 ### Add the Function
 
