@@ -1,19 +1,20 @@
 ---
 layout: example
-title: How to use MongoDB in your serverless app
-short_title: MongoDB
+title: How to use MongoDB Atlas in your serverless app
+short_title: MongoDB Atlas
 date: 2021-06-04 00:00:00
 lang: en
 index: 2
 type: database
-description: In this example we will look at how to use MongoDB in your serverless app on AWS using Serverless Stack (SST). We'll be using the sst.Api construct to create a simple API that gets a list of users.
-short_desc: Using MongoDB in a serverless API.
+description: In this example we will look at how to use MongoDB Atlas in your serverless app on AWS using Serverless Stack (SST). We'll be using the sst.Api construct to create a simple API that gets a list of users.
+short_desc: Using MongoDB Atlas in a serverless API.
 repo: rest-api-mongodb
 ref: how-to-use-mongodb-in-your-serverless-app
+redirect_from: /examples/how-to-use-mongodb-in-your-serverless-app.html
 comments_id: how-to-use-mongodb-in-your-serverless-app/2406
 ---
 
-In this example we will look at how to use MongoDB in our serverless app using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be creating a simple API that returns a list of users.
+In this example we will look at how to use MongoDB Atlas in our serverless app using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be creating a simple API that returns a list of users.
 
 ## Requirements
 
@@ -96,13 +97,15 @@ We are doing a couple of things here.
 - The function is not being bundled. This means that we are not using [esbuild](https://esbuild.github.io) to package it. This is because there are some MongoDB npm packages (that we'll be using later) that are not compatible with esbuild. So we'll be zipping up the entire `srcPath` directory and deploying it.
 - Finally, we are printing out the API endpoint in our outputs.
 
-## What is MongoDB
+## What is MongoDB Atlas
 
-[MongoDB](https://www.mongodb.com/atlas/database) is the most advanced cloud database service on the market, with unmatched data distribution and mobility across AWS, Azure, and Google Cloud. It also has built-in automation for resource and workload optimization.
+[MongoDB Atlas](https://www.mongodb.com/atlas/database?utm_campaign=serverless_stack&utm_source=serverlessstack&utm_medium=website&utm_term=partner) is the most advanced cloud database service on the market, with unmatched data distribution and mobility across AWS, Azure, and Google Cloud. It also has built-in automation for resource and workload optimization.
+
+MongoDB’s JSON-like document data model maps to the objects in your application code, providing the flexibility to model for a wide variety of use cases while also enabling you to easily evolve your data structures.
 
 ## Setting up MongoDB
 
-Let's create our MongoDB database. Start by heading over to [MongoDB.com](https://www.mongodb.com) to create a free account.
+Let's create our MongoDB database. Start by heading over to [MongoDB.com](https://www.mongodb.com/cloud/atlas/register?utm_campaign=serverless_stack&utm_source=serverlessstack&utm_medium=website&utm_term=partner) to create an Atlas account.
 
 MongoDB Atlas can deploy two types of cloud databases: **serverless instances** and **clusters**.
 
@@ -112,7 +115,7 @@ MongoDB Atlas can deploy two types of cloud databases: **serverless instances** 
 
 To learn more about the deployment types [head over to the MongoDB docs](https://docs.atlas.mongodb.com/choose-database-deployment-type/).
 
-Note that, Serverless instances are in a preview release and do not support some Atlas features. You can [read more about the Serverless instance limitations](https://docs.atlas.mongodb.com/reference/serverless-instance-limitations/).
+Note that serverless instances are in a preview release and currently do not support some Atlas features. You can [read more about the supported capabilities for serverless instance](https://docs.atlas.mongodb.com/reference/serverless-instance-limitations/).
 
 To **create a new Cluster**, we are using the new **Serverless Instance** option. Make sure to **select AWS** as the cloud provider and **pick a region** where you are deploying your SST app. In this example, we are using `us-east-1`.
 
@@ -324,4 +327,4 @@ $ npx sst remove --stage prod
 
 ## Conclusion
 
-And that's it! We've got a serverless API connected to a MongoDB serverless database. We also have a local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+And that's it! We've got a serverless API connected to a [MongoDB serverless database](https://www.mongodb.com/cloud/atlas/serverless?utm_campaign=serverless_stack&utm_source=serverlessstack&utm_medium=website&utm_term=partner). We also have a local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
