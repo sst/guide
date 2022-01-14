@@ -17,7 +17,7 @@ customDomain:
   scope.stage === "prod"
     ? {
         domainName: "my-serverless-app.com",
-        domainAlias: "wwww.my-serverless-app.com",
+        domainAlias: "www.my-serverless-app.com",
       }
     : undefined,
 ```
