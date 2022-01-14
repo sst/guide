@@ -60,10 +60,10 @@ social_cards_url: "https://social-cards.serverless-stack.com"
 permalink: /blog/:title:output_ext
 
 stats:
-  newsletter: "40,000"
-  newsletter_short: "40k"
-  slack: "1100"
-  github: "4000"
+  newsletter: "43,000"
+  newsletter_short: "43k"
+  slack: "1200"
+  github: "4300"
   github_short: "4k"
 
 collections:
