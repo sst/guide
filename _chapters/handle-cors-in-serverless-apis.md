@@ -2,7 +2,7 @@
 layout: post
 title: Handle CORS in Serverless APIs
 date: 2021-08-17 00:00:00
-lang: en 
+lang: en
 ref: handle-cors-in-serverless-apis
 description: In this chapter we'll look at how to configure CORS in our serverless API. We'll be adding these settings in our SST Api construct and in our Lambda function responses.
 comments_id: handle-cors-in-serverless-apis/2175
@@ -38,7 +38,7 @@ There's a bit more to CORS than what we have covered here. So make sure to [chec
 
 If we don't set the above up, then we'll see something like this in our HTTP responses.
 
-``` text
+```text
 No 'Access-Control-Allow-Origin' header is present on the requested resource
 ```
 
@@ -48,7 +48,7 @@ And our browser won't show us the HTTP response. This can make debugging our API
 
 The SST [`Api`](https://docs.serverless-stack.com/constructs/Api) construct that we are using enables CORS by default.
 
-``` js
+```js
 new Api(this, "Api", {
   // Enabled by default
   cors: true,
@@ -60,8 +60,8 @@ new Api(this, "Api", {
 
 You can further configure the specifics if necessary. You can [read more about this here](https://docs.serverless-stack.com/constructs/Api#cors).
 
-``` js
-import { HttpMethod } from "@aws-cdk/aws-apigatewayv2";
+```js
+import { HttpMethod } from "@aws-cdk/aws-apigatewayv2-alpha";
 
 new Api(this, "Api", {
   cors: {
@@ -81,7 +81,7 @@ Next, we need to add the CORS headers in our Lambda function response.
 
 {%change%} Replace the `return` statement in our `src/util/handler.js`.
 
-``` javascript
+```javascript
 return {
   statusCode,
   body: JSON.stringify(body),
@@ -90,7 +90,7 @@ return {
 
 {%change%} With the following.
 
-``` javascript
+```javascript
 return {
   statusCode,
   body: JSON.stringify(body),
