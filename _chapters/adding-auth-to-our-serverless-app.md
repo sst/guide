@@ -20,7 +20,7 @@ Setting this all up can be pretty complicated in CDK. SST has a simple [`Auth`](
 {%change%} Add the following to a new file in `stacks/AuthStack.js`.
 
 ``` js
-import * as iam from "@aws-cdk/aws-iam";
+import * as iam from "aws-cdk-lib/aws-iam";
 import * as sst from "@serverless-stack/resources";
 
 export default class AuthStack extends sst.Stack {
@@ -79,16 +79,6 @@ Let's quickly go over what we are doing here.
 - And we want them to access our S3 bucket. We'll look at this in detail below.
 
 - Finally, we output the ids of the auth resources that've been created.
-
-We also need to install a CDK package for the IAM policy that we are creating.
-
-{%change%} Run the following in your project root.
-
-``` bash
-$ npx sst add-cdk @aws-cdk/aws-iam
-```
-
-We are using this command instead of `npm install` because there's [a known issue with CDK](https://docs.serverless-stack.com/known-issues) where mismatched versions can cause a problem.
 
 ### Securing Access to Uploaded Files
 
