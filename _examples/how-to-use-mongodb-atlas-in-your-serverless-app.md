@@ -117,9 +117,9 @@ To learn more about the deployment types [head over to the MongoDB docs](https:/
 
 Note that serverless instances are in a preview release and currently do not support some Atlas features. You can [read more about the supported capabilities for serverless instance](https://docs.atlas.mongodb.com/reference/serverless-instance-limitations/).
 
-To **create a new Cluster**, we are using the new **Serverless Instance** option. Make sure to **select AWS** as the cloud provider and **pick a region** where you are deploying your SST app. In this example, we are using `us-east-1`.
+To **create a new database**, we are using the new **Serverless Instance** option. Make sure to **select AWS** as the cloud provider and **pick a region** where you are deploying your SST app. In this example, we are using `us-east-1`.
 
-Once our cluster is created, click **Add New Database User**.
+Once our database is created, click **Add New Database User**.
 
 ![New MongoDB cluster created](/assets/examples/rest-api-mongodb/new-mongodb-cluster-created.png)
 
