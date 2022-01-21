@@ -25,14 +25,14 @@ In this example we will look at how to add JWT authorization with [Cognito User 
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest api-auth-jwt-cognito-user-pool
 $ cd api-auth-jwt-cognito-user-pool
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "api-auth-jwt-cognito-user-pool",
   "stage": "dev",
@@ -58,9 +58,9 @@ Let's start by setting up an API.
 
 {%change%} Replace the `stacks/MyStack.js` with the following.
 
-``` js
-import * as cognito from "@aws-cdk/aws-cognito";
-import * as apigAuthorizers from "@aws-cdk/aws-apigatewayv2-authorizers";
+```js
+import * as cognito from "aws-cdk-lib/aws-cognito";
+import * as apigAuthorizers from "@aws-cdk/aws-apigatewayv2-authorizers-alpha";
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -82,9 +82,8 @@ export default class MyStack extends sst.Stack {
 
     // Create Api
     const api = new sst.Api(this, "Api", {
-      defaultAuthorizer: new apigAuthorizers.HttpUserPoolAuthorizer({
-        userPool,
-        userPoolClient,
+      defaultAuthorizer: new apigAuthorizers.HttpUserPoolAuthorizer("Authorizer", userPool, {
+        userPoolClients: [userPoolClient],
       }),
       defaultAuthorizationType: sst.ApiAuthorizationType.JWT,
       routes: {
@@ -119,13 +118,23 @@ GET /public
 
 By default, all routes have the authorization type `JWT`. This means the caller of the API needs to pass in a valid JWT token. The first is a private endpoint. The second is a public endpoint and its authorization type is overridden to `NONE`.
 
+Let's install the npm packages we are using here.
+
+{%change%} From the project root run the following.
+
+``` bash
+$ npx sst add-cdk @aws-cdk/aws-apigatewayv2-authorizers-alpha
+```
+
+The reason we are using the [**add-cdk**](https://docs.serverless-stack.com/packages/cli#add-cdk-packages) command instead of using an `npm install`, is because of [a known issue with AWS CDK](https://docs.serverless-stack.com/known-issues). Using mismatched versions of CDK packages can cause some unexpected problems down the road. The `sst add-cdk` command ensures that we install the right version of the package.
+
 ## Adding function code
 
 Let's create two functions, one for the public route, and one for the private route.
 
 {%change%} Add a `src/public.js`.
 
-``` js
+```js
 export async function main() {
   return {
     statusCode: 200,
@@ -136,7 +145,7 @@ export async function main() {
 
 {%change%} Add a `src/private.js`.
 
-``` js
+```js
 export async function main() {
   return {
     statusCode: 200,
@@ -151,7 +160,7 @@ Now let's test our new API.
 
 {%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
 
-``` bash
+```bash
 $ npx sst start
 ```
 
@@ -208,7 +217,7 @@ Now to visit the private route, we need to create an account in our User Pool. U
 
 Use the following command in your terminal. Replace `--client-id` with `UserPoolClientId` from the `sst start` output above.
 
-``` bash
+```bash
 $ aws cognito-idp sign-up \
   --region us-east-1 \
   --client-id t4gepqqbmbg90dh61pam8rg9r \
@@ -218,7 +227,7 @@ $ aws cognito-idp sign-up \
 
 Next we'll verify the user. Replace `--user-pool-id` with `UserPoolId` from the `sst start` output above.
 
-``` bash
+```bash
 $ aws cognito-idp admin-confirm-sign-up \
   --region us-east-1 \
   --user-pool-id us-east-1_QLBISRQwA \
@@ -227,7 +236,7 @@ $ aws cognito-idp admin-confirm-sign-up \
 
 Now we'll authenticate the user. Typically, we'll be using our app to do this. But just to test, we'll use the AWS CLI. Recall we had to enable the `userPassword` authentication flow for this to work. Replace `--client-id` with `UserPoolClientId` from the `sst start` output above.
 
-``` bash
+```bash
 $ aws cognito-idp initiate-auth \
   --client-id t4gepqqbmbg90dh61pam8rg9r \
   --auth-flow USER_PASSWORD_AUTH \
@@ -236,22 +245,22 @@ $ aws cognito-idp initiate-auth \
 
 You should get a set of temporary tokens.
 
-``` json
+```json
 {
-    "ChallengeParameters": {},
-    "AuthenticationResult": {
-        "AccessToken": "eyJraWQiOiI4TUxNTUQzVEJoRHJGdk1pYjBUVXlHMXZmaEZJVnMxRzJTMjNWSlJlaG9rPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI5ZGNlMjY3Ni1lNDAxLTQ2MTMtOTc2Zi03NjIwMThkNGE5MzMiLCJldmVudF9pZCI6ImYwMTdmMWQzLWM5MDAtNGEzOS1hODBiLTNjZTJkMzBiZGUyZSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2MTQzNzIzNzQsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX1FMQklTUlF3QSIsImV4cCI6MTYxNDM3NTk3NCwiaWF0IjoxNjE0MzcyMzc0LCJqdGkiOiIyNjY0NDdhOS03OTQzLTQxMDUtYjg2YS05YjQ1NmY5NDk0ZjMiLCJjbGllbnRfaWQiOiJ0NGdlcHFxYm1iZzkwZGg2MXBhbThyZzlyIiwidXNlcm5hbWUiOiI5ZGNlMjY3Ni1lNDAxLTQ2MTMtOTc2Zi03NjIwMThkNGE5MzMifQ.RvAQ1u3n0ZcF7D0tKTWJP9Tvr65PwymOkLT3Ob8iZYViop9-RM8YqK-AnHs4SyK7aP8_OgdTIIx4pdbS9ixsgSSu67pQEwXS-2LxCvlDhEQ8UhDc_YxPxeQanKGb6465BYi3UcXzRIIQd7XQO4NHdMxu7i77VkxKoWbDUNGT8qdhx_cUoESZRHkFiW3pT7vDboot_vtHTzCAsNLAlW5fgQgtONxwn3er8AXFYUTTODL8M3MM8kdw-RhxdwT8kFesJvJATmUY-PypfnYXp4zQfhFvBE-eXNXtBMtEpHqmAfFOjFSIhzGh1Jbst6O_xVa7dbT5w_dXGFGmzBLwLCRpxQ",
-        "ExpiresIn": 3600,
-        "TokenType": "Bearer",
-        "RefreshToken": "eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAifQ.DLXqfzpikKGjG79Av2aR_Vb-F0Nk6RtZz0lUQ5atuFAo5fB65WneZHpfHcNnps5t4pCYHau7aA26ye9aFnjhkYY1XIrfvdCtctYIpH4Zfhd_pfGPZ7Zmj2GnQyzB9EJmCKKros46ZW78nQuqxgJVctKtFG33TQc7e3DA1nJRlrLBq_mjewFuKqryuaLR0wB5OP5iLCrQjXcVJdCxK499jRR6xEpl-xCEfHnW5eP11T78j7SkgXwQObH1SYY1ZvxyFNP8faLW3Vc9oSqwVpbs4JTLoNmKnVrV0XhSCnOzxIsuGZ22rbMq9hvhez58-IgdCeSx4jGe4oo-DnZmL-vQAw.LoTIKvlPNTrIROzu.YhRdBvDoKGRehOHpWW86wkzYvgEC-fdDrjtOaRO5rw5wvwd23rYu2qJ-M2TaQKHy7cEH4oSW1UxxPbdBo74tF5KRpEIiYTafPIW0_KBL7kMJeGG5uN-x-AWvVmgI4wzzsZnYn_yoG2HAQ-gHPNT8flJftRvqXPi0OGcivoY03rm5OGiqVMDXkwKWhwkllTXmYjOLNx3iIAV1arAZ62JppGmZkKErJy7NFqVoxDt5rEF1bEhZ_cn2Z7S3nnMBdUas-aM7CEYVXDynrckshroO9azZGRTeEJSN-zAy8bTZPbRi26QIGArXZr7bz6qEeDeG5mYgFsi_rpcy169fCmfwaKeVQBn7nWY8eiJ-5aWJ_9tPeKhafbjoKHonuN4Hyr9KRB38bhWgtiDe1kbsQBGkNAjwIe_FD-tIZgZ6FSkqZ-lqionAxZB2Z-hQtaoCofuUki7X12Rxz7t4vfw5Ia4wIylSWMuR4PcuWfCltCYjR1T1IMuXdJsCkTv1hjL5-yqGIBGAwchGGayZTbLwLHJrefAZOPEo9arSPPphQeQNAgK60u5LlBS5bmFMlYGmipqfWhiadtsIPLPfU0DzKEsqtxypeL9d-zpWfylDfEgYrcleOV3o_OoJo1h5Oj09obyjIv038H7McsO376bMoAIKEdPwad84WOZlXbrjf7TEqiwUTNaOMpnrbs_JBp25FfeHpfWvGVALFd1kktu-mQHwzCxqaLxh6nsW3wkFkJiANTJs7KgKF4AJ3i-Mw_XEMKfZnKwocS6q0woxbkTMMfSoVnh56Yjyj4VuuaMoOm4WxMamnXHXOjwYafZ6hkcqA0Sodnns1FY_pkHu_xg6T0gqthJS2yBtJ3vvg4HW6_m-rIa-K26FIoVRtcIr6euPeagzuul2ginD4oGtAETcDVUn3UFTHLjk_OcK1T5hAxyD8sysm7KEOtFQRvdALYBS38qP3FiAjdGbMg5NyKufJO_KGi8LKNALRmW1zSN9DugSnZHhwH1XJ2F7xbWH4kb-bvdt-3DCWU9O2BlYj5OJpggSFSf6GLtpKQ81yTyWzU8-eNq5-bG2tBrlIAq8j9rpG0MNYj0l3MQZb9fwCmDVtjwK1mMywAX2rRhQmAQ2zIdMQVD6SvY7_nbsgA1Zqs_16VslLEPDUOu1XuFGqKINoRwvnocdQY8it_7mKwf1WrTd8EAnOcESzq6T5ViFi3oGhMUtm2GMBuUY9GqRF2gj_O6vdXgJ00gDu2T_ZMIBoNBQawH41G9oyoM_T14thaToHLLQvCwTwlqcD0_MIWGErnFhOpXazGzTF-xiEBuEdzFeGsHpICmzFcYfKQrNzg.W-_nygvWnW5CYurFbxYEAQ",
-        "IdToken": "eyJraWQiOiJ4cVFWN0VCWkwrNXpvbUtycHFRYTNSM1F3QzErQ2t4ajRkejhwbEJUbmpJPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI5ZGNlMjY3Ni1lNDAxLTQ2MTMtOTc2Zi03NjIwMThkNGE5MzMiLCJhdWQiOiJ0NGdlcHFxYm1iZzkwZGg2MXBhbThyZzlyIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJldmVudF9pZCI6ImYwMTdmMWQzLWM5MDAtNGEzOS1hODBiLTNjZTJkMzBiZGUyZSIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNjE0MzcyMzc0LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9RTEJJU1JRd0EiLCJjb2duaXRvOnVzZXJuYW1lIjoiOWRjZTI2NzYtZTQwMS00NjEzLTk3NmYtNzYyMDE4ZDRhOTMzIiwiZXhwIjoxNjE0Mzc1OTc0LCJpYXQiOjE2MTQzNzIzNzQsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20ifQ.m8mf_D5rcxoiUAbKUJIjADqP8M2Oti65I85nYmewGBIefhtSubQkYDI2DhyrYL22LLHvIyxKqcc16XLLR25QFxyZnHwrlF8I1YbDg6zVcudwf_ec00zywclfkoqWao8QYf6KN9XsdUzbYsrVcf91K4gBd4gNLn_okyGGCBB5YH8MBvmnALMNZ3gYvDN1iiP15S7HfToFsWm6bUVE2s7S4kaAZnnBkwl7eZauqn2bWzygfaLCJSCMmS_q663gYLZAq-viLiHZIjB9GOZAH1_Ir3FdcB9l1kSjU1EA2mr6NAQ7UzB0g8E9zfTWrOQ3lZOJnazz3pstGgkVjuCQHw8WAw"
-    }
+  "ChallengeParameters": {},
+  "AuthenticationResult": {
+    "AccessToken": "eyJraWQiOiI4TUxNTUQzVEJoRHJGdk1pYjBUVXlHMXZmaEZJVnMxRzJTMjNWSlJlaG9rPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI5ZGNlMjY3Ni1lNDAxLTQ2MTMtOTc2Zi03NjIwMThkNGE5MzMiLCJldmVudF9pZCI6ImYwMTdmMWQzLWM5MDAtNGEzOS1hODBiLTNjZTJkMzBiZGUyZSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2MTQzNzIzNzQsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX1FMQklTUlF3QSIsImV4cCI6MTYxNDM3NTk3NCwiaWF0IjoxNjE0MzcyMzc0LCJqdGkiOiIyNjY0NDdhOS03OTQzLTQxMDUtYjg2YS05YjQ1NmY5NDk0ZjMiLCJjbGllbnRfaWQiOiJ0NGdlcHFxYm1iZzkwZGg2MXBhbThyZzlyIiwidXNlcm5hbWUiOiI5ZGNlMjY3Ni1lNDAxLTQ2MTMtOTc2Zi03NjIwMThkNGE5MzMifQ.RvAQ1u3n0ZcF7D0tKTWJP9Tvr65PwymOkLT3Ob8iZYViop9-RM8YqK-AnHs4SyK7aP8_OgdTIIx4pdbS9ixsgSSu67pQEwXS-2LxCvlDhEQ8UhDc_YxPxeQanKGb6465BYi3UcXzRIIQd7XQO4NHdMxu7i77VkxKoWbDUNGT8qdhx_cUoESZRHkFiW3pT7vDboot_vtHTzCAsNLAlW5fgQgtONxwn3er8AXFYUTTODL8M3MM8kdw-RhxdwT8kFesJvJATmUY-PypfnYXp4zQfhFvBE-eXNXtBMtEpHqmAfFOjFSIhzGh1Jbst6O_xVa7dbT5w_dXGFGmzBLwLCRpxQ",
+    "ExpiresIn": 3600,
+    "TokenType": "Bearer",
+    "RefreshToken": "eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAifQ.DLXqfzpikKGjG79Av2aR_Vb-F0Nk6RtZz0lUQ5atuFAo5fB65WneZHpfHcNnps5t4pCYHau7aA26ye9aFnjhkYY1XIrfvdCtctYIpH4Zfhd_pfGPZ7Zmj2GnQyzB9EJmCKKros46ZW78nQuqxgJVctKtFG33TQc7e3DA1nJRlrLBq_mjewFuKqryuaLR0wB5OP5iLCrQjXcVJdCxK499jRR6xEpl-xCEfHnW5eP11T78j7SkgXwQObH1SYY1ZvxyFNP8faLW3Vc9oSqwVpbs4JTLoNmKnVrV0XhSCnOzxIsuGZ22rbMq9hvhez58-IgdCeSx4jGe4oo-DnZmL-vQAw.LoTIKvlPNTrIROzu.YhRdBvDoKGRehOHpWW86wkzYvgEC-fdDrjtOaRO5rw5wvwd23rYu2qJ-M2TaQKHy7cEH4oSW1UxxPbdBo74tF5KRpEIiYTafPIW0_KBL7kMJeGG5uN-x-AWvVmgI4wzzsZnYn_yoG2HAQ-gHPNT8flJftRvqXPi0OGcivoY03rm5OGiqVMDXkwKWhwkllTXmYjOLNx3iIAV1arAZ62JppGmZkKErJy7NFqVoxDt5rEF1bEhZ_cn2Z7S3nnMBdUas-aM7CEYVXDynrckshroO9azZGRTeEJSN-zAy8bTZPbRi26QIGArXZr7bz6qEeDeG5mYgFsi_rpcy169fCmfwaKeVQBn7nWY8eiJ-5aWJ_9tPeKhafbjoKHonuN4Hyr9KRB38bhWgtiDe1kbsQBGkNAjwIe_FD-tIZgZ6FSkqZ-lqionAxZB2Z-hQtaoCofuUki7X12Rxz7t4vfw5Ia4wIylSWMuR4PcuWfCltCYjR1T1IMuXdJsCkTv1hjL5-yqGIBGAwchGGayZTbLwLHJrefAZOPEo9arSPPphQeQNAgK60u5LlBS5bmFMlYGmipqfWhiadtsIPLPfU0DzKEsqtxypeL9d-zpWfylDfEgYrcleOV3o_OoJo1h5Oj09obyjIv038H7McsO376bMoAIKEdPwad84WOZlXbrjf7TEqiwUTNaOMpnrbs_JBp25FfeHpfWvGVALFd1kktu-mQHwzCxqaLxh6nsW3wkFkJiANTJs7KgKF4AJ3i-Mw_XEMKfZnKwocS6q0woxbkTMMfSoVnh56Yjyj4VuuaMoOm4WxMamnXHXOjwYafZ6hkcqA0Sodnns1FY_pkHu_xg6T0gqthJS2yBtJ3vvg4HW6_m-rIa-K26FIoVRtcIr6euPeagzuul2ginD4oGtAETcDVUn3UFTHLjk_OcK1T5hAxyD8sysm7KEOtFQRvdALYBS38qP3FiAjdGbMg5NyKufJO_KGi8LKNALRmW1zSN9DugSnZHhwH1XJ2F7xbWH4kb-bvdt-3DCWU9O2BlYj5OJpggSFSf6GLtpKQ81yTyWzU8-eNq5-bG2tBrlIAq8j9rpG0MNYj0l3MQZb9fwCmDVtjwK1mMywAX2rRhQmAQ2zIdMQVD6SvY7_nbsgA1Zqs_16VslLEPDUOu1XuFGqKINoRwvnocdQY8it_7mKwf1WrTd8EAnOcESzq6T5ViFi3oGhMUtm2GMBuUY9GqRF2gj_O6vdXgJ00gDu2T_ZMIBoNBQawH41G9oyoM_T14thaToHLLQvCwTwlqcD0_MIWGErnFhOpXazGzTF-xiEBuEdzFeGsHpICmzFcYfKQrNzg.W-_nygvWnW5CYurFbxYEAQ",
+    "IdToken": "eyJraWQiOiJ4cVFWN0VCWkwrNXpvbUtycHFRYTNSM1F3QzErQ2t4ajRkejhwbEJUbmpJPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI5ZGNlMjY3Ni1lNDAxLTQ2MTMtOTc2Zi03NjIwMThkNGE5MzMiLCJhdWQiOiJ0NGdlcHFxYm1iZzkwZGg2MXBhbThyZzlyIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJldmVudF9pZCI6ImYwMTdmMWQzLWM5MDAtNGEzOS1hODBiLTNjZTJkMzBiZGUyZSIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNjE0MzcyMzc0LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9RTEJJU1JRd0EiLCJjb2duaXRvOnVzZXJuYW1lIjoiOWRjZTI2NzYtZTQwMS00NjEzLTk3NmYtNzYyMDE4ZDRhOTMzIiwiZXhwIjoxNjE0Mzc1OTc0LCJpYXQiOjE2MTQzNzIzNzQsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20ifQ.m8mf_D5rcxoiUAbKUJIjADqP8M2Oti65I85nYmewGBIefhtSubQkYDI2DhyrYL22LLHvIyxKqcc16XLLR25QFxyZnHwrlF8I1YbDg6zVcudwf_ec00zywclfkoqWao8QYf6KN9XsdUzbYsrVcf91K4gBd4gNLn_okyGGCBB5YH8MBvmnALMNZ3gYvDN1iiP15S7HfToFsWm6bUVE2s7S4kaAZnnBkwl7eZauqn2bWzygfaLCJSCMmS_q663gYLZAq-viLiHZIjB9GOZAH1_Ir3FdcB9l1kSjU1EA2mr6NAQ7UzB0g8E9zfTWrOQ3lZOJnazz3pstGgkVjuCQHw8WAw"
+  }
 }
 ```
 
 Let's make a call to the private route using the JWT token. Make sure to replace the token with **IdToken** from the previous step. And the URL with your API endpoint.
 
-``` bash
+```bash
 $ curl --url https://4foju6nhne.execute-api.us-east-1.amazonaws.com/private \
   -H "Authorization: Bearer eyJraWQiOiI4TUxNTUQzVEJoRHJGdk1pYjBUVXlHMXZmaEZJVnMxRzJTMjNWSlJlaG9rPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI5ZGNlMjY3Ni1lNDAxLTQ2MTMtOTc2Zi03NjIwMThkNGE5MzMiLCJldmVudF9pZCI6ImYwMTdmMWQzLWM5MDAtNGEzOS1hODBiLTNjZTJkMzBiZGUyZSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2MTQzNzIzNzQsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX1FMQklTUlF3QSIsImV4cCI6MTYxNDM3NTk3NCwiaWF0IjoxNjE0MzcyMzc0LCJqdGkiOiIyNjY0NDdhOS03OTQzLTQxMDUtYjg2YS05YjQ1NmY5NDk0ZjMiLCJjbGllbnRfaWQiOiJ0NGdlcHFxYm1iZzkwZGg2MXBhbThyZzlyIiwidXNlcm5hbWUiOiI5ZGNlMjY3Ni1lNDAxLTQ2MTMtOTc2Zi03NjIwMThkNGE5MzMifQ.RvAQ1u3n0ZcF7D0tKTWJP9Tvr65PwymOkLT3Ob8iZYViop9-RM8YqK-AnHs4SyK7aP8_OgdTIIx4pdbS9ixsgSSu67pQEwXS-2LxCvlDhEQ8UhDc_YxPxeQanKGb6465BYi3UcXzRIIQd7XQO4NHdMxu7i77VkxKoWbDUNGT8qdhx_cUoESZRHkFiW3pT7vDboot_vtHTzCAsNLAlW5fgQgtONxwn3er8AXFYUTTODL8M3MM8kdw-RhxdwT8kFesJvJATmUY-PypfnYXp4zQfhFvBE-eXNXtBMtEpHqmAfFOjFSIhzGh1Jbst6O_xVa7dbT5w_dXGFGmzBLwLCRpxQ"
 ```
@@ -264,7 +273,7 @@ Let's make a quick change to our private route to print out the caller's user id
 
 {%change%} Replace `src/private.js` with the following.
 
-``` js
+```js
 export async function main(event) {
   return {
     statusCode: 200,
@@ -277,7 +286,7 @@ We are getting the user id from the event object.
 
 If you make the same authenticated request to the `/private` endpoint.
 
-``` bash
+```bash
 $ curl --url https://4foju6nhne.execute-api.us-east-1.amazonaws.com/private \
   -H "Authorization: Bearer eyJraWQiOiI4TUxNTUQzVEJoRHJGdk1pYjBUVXlHMXZmaEZJVnMxRzJTMjNWSlJlaG9rPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI5ZGNlMjY3Ni1lNDAxLTQ2MTMtOTc2Zi03NjIwMThkNGE5MzMiLCJldmVudF9pZCI6ImYwMTdmMWQzLWM5MDAtNGEzOS1hODBiLTNjZTJkMzBiZGUyZSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2MTQzNzIzNzQsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX1FMQklTUlF3QSIsImV4cCI6MTYxNDM3NTk3NCwiaWF0IjoxNjE0MzcyMzc0LCJqdGkiOiIyNjY0NDdhOS03OTQzLTQxMDUtYjg2YS05YjQ1NmY5NDk0ZjMiLCJjbGllbnRfaWQiOiJ0NGdlcHFxYm1iZzkwZGg2MXBhbThyZzlyIiwidXNlcm5hbWUiOiI5ZGNlMjY3Ni1lNDAxLTQ2MTMtOTc2Zi03NjIwMThkNGE5MzMifQ.RvAQ1u3n0ZcF7D0tKTWJP9Tvr65PwymOkLT3Ob8iZYViop9-RM8YqK-AnHs4SyK7aP8_OgdTIIx4pdbS9ixsgSSu67pQEwXS-2LxCvlDhEQ8UhDc_YxPxeQanKGb6465BYi3UcXzRIIQd7XQO4NHdMxu7i77VkxKoWbDUNGT8qdhx_cUoESZRHkFiW3pT7vDboot_vtHTzCAsNLAlW5fgQgtONxwn3er8AXFYUTTODL8M3MM8kdw-RhxdwT8kFesJvJATmUY-PypfnYXp4zQfhFvBE-eXNXtBMtEpHqmAfFOjFSIhzGh1Jbst6O_xVa7dbT5w_dXGFGmzBLwLCRpxQ"
 ```
@@ -292,7 +301,7 @@ However, we are going to deploy your API again. But to a different environment, 
 
 {%change%} Run the following in your terminal.
 
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
 
@@ -302,13 +311,13 @@ A note on these environments. SST is simply deploying the same app twice using t
 
 Finally, you can remove the resources created in this example using the following command.
 
-``` bash
+```bash
 $ npx sst remove
 ```
 
 And to remove the prod environment.
 
-``` bash
+```bash
 $ npx sst remove --stage prod
 ```
 

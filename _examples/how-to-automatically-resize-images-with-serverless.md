@@ -33,14 +33,14 @@ Here is a video of it in action.
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest bucket-image-resize
 $ cd bucket-image-resize
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "bucket-image-resize",
   "stage": "dev",
@@ -66,9 +66,9 @@ Let's start by creating a bucket.
 
 {%change%} Replace the `stacks/MyStack.js` with the following.
 
-``` js
-import { EventType } from "@aws-cdk/aws-s3";
-import * as lambda from "@aws-cdk/aws-lambda";
+```js
+import { EventType } from "aws-cdk-lib/aws-s3";
+import * as lambda from "aws-cdk-lib/aws-lambda";
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -114,23 +114,13 @@ We are subscribing to the `OBJECT_CREATED` notification with a [`sst.Function`](
 
 Finally, we are allowing our functions to access the bucket by calling `attachPermissions`. We are also outputting the name of the bucket that we are creating.
 
-Let's install the npm packages we are using here.
-
-{%change%} From the project root run the following.
-
-``` bash
-$ npx sst add-cdk @aws-cdk/aws-s3 @aws-cdk/aws-lambda
-```
-
-The reason we are using the [**add-cdk**](https://docs.serverless-stack.com/packages/cli#add-cdk-packages) command instead of using an `npm install`, is because of [a known issue with AWS CDK](https://docs.serverless-stack.com/known-issues). Using mismatched versions of CDK packages can cause some unexpected problems down the road. The `sst add-cdk` command ensures that we install the right version of the package.
-
 ## Using Sharp as a Layer
 
 Next let's set up Sharp as a Layer.
 
 {%change%} First create a new directory in your project root.
 
-``` bash
+```bash
 $ mkdir -p layers/sharp
 ```
 
@@ -144,7 +134,7 @@ Now in our function, we'll be handling resizing an image once it's uploaded.
 
 {%change%} Add a new file at `src/resize.js` with the following.
 
-``` js
+```js
 import AWS from "aws-sdk";
 import sharp from "sharp";
 import stream from "stream";
@@ -225,7 +215,7 @@ Now let's install the npm packages we are using here.
 
 {%change%} Run this from the root.
 
-``` bash
+```bash
 $ npm install sharp aws-sdk
 ```
 
@@ -233,7 +223,7 @@ $ npm install sharp aws-sdk
 
 {%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
 
-``` bash
+```bash
 $ npx sst start
 ```
 
@@ -283,7 +273,7 @@ Let's try making a quick change.
 
 {%change%} Change the `width` in your `src/resize.js`.
 
-``` bash
+```bash
 const width = 100;
 ```
 
@@ -295,24 +285,25 @@ Now if you go back and upload that same image again, you should see the new resi
 
 {%change%} To wrap things up we'll deploy our app to prod.
 
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
+
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
 
 ## Cleaning up
 
 Finally, you can remove the resources created in this example using the following commands.
 
-``` bash
+```bash
 $ npx sst remove
 $ npx sst remove --stage prod
 ```
 
 Note that, by default resources like the S3 bucket are not removed automatically. To do so, you'll need to explicitly set it.
 
-``` js
-import { RemovalPolicy } from "@aws-cdk/core";
+```js
+import { RemovalPolicy } from "aws-cdk-lib";
 
 const bucket = new sst.Bucket(this, "Bucket", {
   s3Bucket: {
@@ -329,4 +320,3 @@ const bucket = new sst.Bucket(this, "Bucket", {
 ## Conclusion
 
 And that's it! We've got a completely serverless image resizer that automatically resizes any images uploaded to our S3 bucket. And we can test our changes locally before deploying to AWS! Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
-

@@ -93,7 +93,7 @@ We are using the SST [`Api`](https://docs.serverless-stack.com/constructs/Api) c
 
 {%change%} Your `src/lambda.js` should look something like this.
 
-``` js
+```js
 export async function handler(event) {
   return {
     statusCode: 200,
@@ -113,7 +113,7 @@ Go to the **Settings** > **Projects**. Select the project. Then scroll down to *
 
 {%change%} Create a `.env.local` file with the `SENTRY_DSN` in your project root.
 
-``` bash
+```bash
 SENTRY_DSN=https://xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx@xxxxxxxx.ingest.sentry.io/xxxxxxx
 ```
 
@@ -124,12 +124,6 @@ Next, you'll need to add the Sentry Lambda layer in your app.
 [Head over to the Sentry docs](https://docs.sentry.io/platforms/node/guides/aws-lambda/layer/) and get the layer they provide. **Select your region** and **copy the layer ARN**.
 
 ![Copy Sentry Lambda Layer ARN](/assets/examples/sentry/copy-sentry-lambda-layer-arn.png)
-
-{%change%} Let's add the CDK Lambda constructs that we'll use to configure the layer.
-
-```bash
-$ npx sst add-cdk @aws-cdk/aws-lambda
-```
 
 You can then set the layer for all the functions in your stack using the [`addDefaultFunctionLayers`]({{ site.docs_url }}/constructs/Stack#adddefaultfunctionlayers) and [`addDefaultFunctionEnv`]({{ site.docs_url }}/constructs/Stack#adddefaultfunctionenv). Note we only want to enable this when the function is deployed, and not when using [Live Lambda Dev]({{ site.docs_url }}/live-lambda-development).
 
