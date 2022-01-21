@@ -82,9 +82,8 @@ export default class MyStack extends sst.Stack {
 
     // Create Api
     const api = new sst.Api(this, "Api", {
-      defaultAuthorizer: new apigAuthorizers.HttpUserPoolAuthorizer({
-        userPool,
-        userPoolClient,
+      defaultAuthorizer: new apigAuthorizers.HttpUserPoolAuthorizer("Authorizer", userPool, {
+        userPoolClients: [userPoolClient],
       }),
       defaultAuthorizationType: sst.ApiAuthorizationType.JWT,
       routes: {
@@ -118,6 +117,16 @@ GET /public
 ```
 
 By default, all routes have the authorization type `JWT`. This means the caller of the API needs to pass in a valid JWT token. The first is a private endpoint. The second is a public endpoint and its authorization type is overridden to `NONE`.
+
+Let's install the npm packages we are using here.
+
+{%change%} From the project root run the following.
+
+``` bash
+$ npx sst add-cdk @aws-cdk/aws-apigatewayv2-authorizers-alpha
+```
+
+The reason we are using the [**add-cdk**](https://docs.serverless-stack.com/packages/cli#add-cdk-packages) command instead of using an `npm install`, is because of [a known issue with AWS CDK](https://docs.serverless-stack.com/known-issues). Using mismatched versions of CDK packages can cause some unexpected problems down the road. The `sst add-cdk` command ensures that we install the right version of the package.
 
 ## Adding function code
 
