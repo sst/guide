@@ -23,7 +23,7 @@ Let's start by writing a test for the CDK infrastructure in our app. We are goin
 {%change%} Add the following to `test/StorageStack.test.js`.
 
 ``` js
-import { expect, haveResource } from "@aws-cdk/assert";
+import { Template } from "aws-cdk-lib/assertions";
 import * as sst from "@serverless-stack/resources";
 import StorageStack from "../stacks/StorageStack";
 
@@ -31,12 +31,11 @@ test("Test StorageStack", () => {
   const app = new sst.App();
   // WHEN
   const stack = new StorageStack(app, "test-stack");
+  const template = Template.fromStack(stack);
   // THEN
-  expect(stack).to(
-    haveResource("AWS::DynamoDB::Table", {
-      BillingMode: "PAY_PER_REQUEST",
-    })
-  );
+  template.hasResource("AWS::DynamoDB::Table", {
+    BillingMode: "PAY_PER_REQUEST",
+  });
 });
 ```
 
