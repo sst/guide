@@ -33,7 +33,7 @@ test("Test StorageStack", () => {
   const stack = new StorageStack(app, "test-stack");
   // THEN
   const template = Template.fromStack(stack);
-  template.haveResource("AWS::DynamoDB::Table", {
+  template.hasResourceProperties("AWS::DynamoDB::Table", {
     BillingMode: "PAY_PER_REQUEST",
   });
 });
