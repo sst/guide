@@ -14,7 +14,7 @@ redirect_from: /examples/how-to-use-mongodb-in-your-serverless-app.html
 comments_id: how-to-use-mongodb-in-your-serverless-app/2406
 ---
 
-In this example we will look at how to use MongoDB Atlas in our serverless app using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be creating a simple API that returns a list of users.
+In this example we will look at how to use [MongoDB Atlas](https://www.mongodb.com/atlas/database?utm_campaign=serverless_stack&utm_source=serverlessstack&utm_medium=website&utm_term=partner) in our serverless app using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be creating a simple API that returns a list of users.
 
 ## Requirements
 
