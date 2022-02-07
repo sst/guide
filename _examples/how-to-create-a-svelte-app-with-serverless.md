@@ -140,6 +140,7 @@ this.addOutputs({
 ```js
 // Deploy our Svelte app
 const site = new sst.ViteStaticSite(this, "SvelteJSSite", {
+  path: "frontend",
   environment: {
     // Pass in the API endpoint to our app
     VITE_APP_API_URL: api.url,
@@ -162,6 +163,7 @@ You can also optionally configure a custom domain.
 ```js
 // Deploy our Svelte app
 const site = new sst.ViteStaticSite(this, "svelteJSSite", {
+  path: "frontend",
   environment: {
     // Pass in the API endpoint to our app
     VITE_APP_API_URL: api.url,
@@ -260,18 +262,22 @@ You should see a `0` printed out.
 
 We are now ready to use the API we just created. Let's use [Vite](https://vitejs.dev/) to setup our Svelte app.
 
-{%change%} Run the following in the project root.
+{%change%} Run the following in the project root and select the `react` framework.
 
 ```bash
 # npm 7+, extra double-dash is needed:
 $ npm init vite@latest frontend -- --template svelte
+```
 
+This sets up our Svelte app in the `frontend/` directory. Recall that, earlier in the guide we were pointing the `ViteStaticSite` construct to this path.
+
+Install the the Svelte app's dependencies.
+
+```bash
 $ cd frontend
 
 $ npm install
 ```
-
-This sets up our Svelte app in the `frontend/` directory. Recall that, earlier in the guide we were pointing the `ViteStaticSite` construct to this path.
 
 We also need to load the environment variables from our SST app. To do this, we'll be using the [`@serverless-stack/static-site-env`](https://www.npmjs.com/package/@serverless-stack/static-site-env) package.
 
@@ -316,14 +322,14 @@ We are now ready to add the UI for our app and connect it to our serverless API.
   let count = 0;
 
   function onClick() {
-      fetch(import.meta.env.VITE_APP_API_URL, {
-        method: "POST",
-      })
-        .then((response) => response.text())
-        .then((data) => {
-          count = data;
-      });
-    }
+    fetch(import.meta.env.VITE_APP_API_URL, {
+      method: "POST",
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        count = data;
+    });
+  }
 </script>
 
 <div class="App">
