@@ -82,7 +82,7 @@ export default class MyStack extends sst.Stack {
 
     // Show the endpoint in the output
     this.addOutputs({
-      "ApiEndpoint": api.url,
+      ApiEndpoint: api.url,
     });
   }
 }
@@ -160,18 +160,17 @@ To fix this let's use the [Middy validator](https://middy.js.org/packages/valida
 {%change%} Run the following in the project root.
 
 ```bash
-$ npm install --save @middy/core @middy/http-json-body-parser @middy/http-error-handler @middy/validator ajv
+$ npm install --save @middy/core @middy/http-json-body-parser @middy/http-error-handler @middy/validator
 ```
 
 Let's understand what the above packages are.
 
-| package                        | explanation                                                                                                                                                                                                                       |
-| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`@middy/core`](https://www.npmjs.com/package/@middy/core)                  | The core package of the Middy framework.                                                                                                                                                                                             |
+| package                                                                                      | explanation                                                                                                                                                                                                                          |
+| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [`@middy/core`](https://www.npmjs.com/package/@middy/core)                                   | The core package of the Middy framework.                                                                                                                                                                                             |
 | [`@middy/http-json-body-parser`](https://www.npmjs.com/package/@middy/http-json-body-parser) | A middleware that parses HTTP requests with a JSON body and converts the body into an object.                                                                                                                                        |
-| [`@middy/http-error-handler`](https://www.npmjs.com/package/@middy/http-error-handler)    | A middleware that handles uncaught errors that contain the properties `statusCode` (number) and `message` (string) and creates a proper HTTP response for them (using the message and the status code provided by the error object). |
-| [`@middy/validator`](https://www.npmjs.com/package/@middy/validator)             | A middleware that validates incoming events and outgoing responses against custom schemas defined with the [JSON schema syntax](https://json-schema.org).                                                                                                      |
-| [`ajv`](https://www.npmjs.com/package/ajv)                          | AJV stands for "Another JSON Schema Validator" and is the fastest validator for JSON schemas.                                                                                                                         |
+| [`@middy/http-error-handler`](https://www.npmjs.com/package/@middy/http-error-handler)       | A middleware that handles uncaught errors that contain the properties `statusCode` (number) and `message` (string) and creates a proper HTTP response for them (using the message and the status code provided by the error object). |
+| [`@middy/validator`](https://www.npmjs.com/package/@middy/validator)                         | A middleware that validates incoming events and outgoing responses against custom schemas defined with the [JSON schema syntax](https://json-schema.org).                                                                            |
 
 ### Adding request validation
 
@@ -181,9 +180,6 @@ Let's understand what the above packages are.
 import middy from "@middy/core";
 import validator from "@middy/validator";
 import jsonBodyParser from "@middy/http-json-body-parser";
-import Ajv from "ajv";
-
-const ajv = new Ajv();
 
 const baseHandler = (event) => {
   // You don't need JSON.parse since we are using the jsonBodyParser middleware
@@ -213,7 +209,7 @@ const handler = middy(baseHandler)
   .use(jsonBodyParser())
   .use(
     validator({
-      inputSchema: ajv.compile(inputSchema),
+      inputSchema,
     })
   )
   .use(httpErrorHandler());
@@ -221,7 +217,9 @@ const handler = middy(baseHandler)
 export { handler };
 ```
 
-Here we are creating an `inputSchema` and precompiling it with Ajv. We are explicitly setting that `fname` and `lname` are required.
+Here we are creating an `inputSchema`. We are explicitly setting that `fname` and `lname` are required.
+
+> **Important** Compiling schemas on the fly will cause a 50-100ms performance hit during cold start for simple JSON Schemas. Precompiling is highly recommended.
 
 Now open Insomnia and send a request.
 
@@ -240,9 +238,6 @@ import middy from "@middy/core";
 import validator from "@middy/validator";
 import httpErrorHandler from "@middy/http-error-handler";
 import jsonBodyParser from "@middy/http-json-body-parser";
-import Ajv from "ajv";
-
-const ajv = new Ajv();
 
 const baseHandler = (event) => {
   const { fname, lname } = event.body;
@@ -287,8 +282,8 @@ const handler = middy(baseHandler)
   .use(jsonBodyParser())
   .use(
     validator({
-      inputSchema: ajv.compile(inputSchema),
-      outputSchema: ajv.compile(outputSchema),
+      inputSchema,
+      outputSchema,
     })
   )
   .use(httpErrorHandler());
@@ -296,7 +291,7 @@ const handler = middy(baseHandler)
 export { handler };
 ```
 
-We added a new `outputSchema`, compiled it with Ajv and added it to the Middy validator.
+We added a new `outputSchema` and added it to the Middy validator.
 
 Let's test our API again with correct schema and Middy validator.
 
