@@ -338,6 +338,10 @@ We are now ready to add the UI for our app and connect it to our serverless API.
 
 Here we are adding a simple button that when clicked, makes a request to our API. We are getting the API endpoint from the environment variable, `import.meta.env.VITE_APP_API_URL`.
 
+SST also [generates a type definition file](https://docs.serverless-stack.com/constructs/ViteStaticSite#type-definitions), meaning that your editor can autocomplete the environment variables for you.
+
+![Vite environment variables autocomplete](/assets/examples/react-app/vite-environment-variables-autocomplete.png)
+
 The response from our API is then stored in our app's state. We use that to display the count of the number of times the button has been clicked.
 
 Let's add some styles.

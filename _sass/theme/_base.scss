@@ -35,7 +35,13 @@ body {
 input, textarea, keygen, select, button {
   font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
 }
-
+/** Text selection color **/
+::selection {
+  background: #F4C9BC;
+}
+::-moz-selection {
+  background: #F4C9BC;
+}
 
 
 /**
