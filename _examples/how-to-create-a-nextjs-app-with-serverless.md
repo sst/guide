@@ -110,7 +110,6 @@ We are now ready to create our Next.js app.
 
 ``` bash
 $ npx create-next-app frontend
-$ cd frontend
 ```
 
 This sets up our Next.js app in the `frontend/` directory.
@@ -168,6 +167,14 @@ Then update the `dev` script to use this package.
 ```
 
 This will ensure that when you are running your Next.js app locally, the `REGION` and `TABLE_NAME` will be available.
+
+The `NextjsSite` uses the [`@sls-next/lambda-at-edge`](https://github.com/serverless-nextjs/serverless-next.js/tree/master/packages/libs/lambda-at-edge) package from the [`serverless-next.js`](https://github.com/serverless-nextjs/serverless-next.js) project to build and package your Next.js app to a structure that can be deployed to AWS.
+
+{%change%} Install the `@sls-next/lambda-at-edge` package by running the following in the project root.
+
+``` bash
+$ npm install @sls-next/lambda-at-edge
+```
 
 ### Add the API
 
