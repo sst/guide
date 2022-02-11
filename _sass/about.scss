@@ -61,6 +61,8 @@
       img {
         @include media-query($on-monitor) { display: none; }
         @include media-query($on-palm) { display: block; }
+
+        @include media-query(370px) { display: none; }
       }
     }
     & > p {
