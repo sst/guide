@@ -6,7 +6,7 @@ date: 2021-03-27 00:00:00
 lang: en
 index: 1
 type: graphql
-description: In this example we will look at how to create an Apollo GraphQL API on AWS using Serverless Stack (SST). We'll be using the sst.ApolloApi construct to define the Apollo Lambda server.
+description: In this example we will look at how to create an Apollo GraphQL API on AWS using Serverless Stack (SST). We'll be using the sst.GraphQLApi construct to define the Apollo Lambda server.
 short_desc: Building a serverless GraphQL API with Apollo.
 repo: graphql-apollo
 ref: how-to-create-an-apollo-graphql-api-with-serverless
@@ -54,7 +54,7 @@ An SST app is made up of two parts.
 
 ## Setting up our infrastructure
 
-Let's start by setting up our Apollo API.
+Let's start by setting up our GraphQL API.
 
 {%change%} Replace the `stacks/MyStack.ts` with the following.
 
@@ -65,8 +65,8 @@ export default class MyStack extends sst.Stack {
   constructor(scope: sst.App, id: string, props?: sst.StackProps) {
     super(scope, id, props);
 
-    // Create the Apollo GraphQL API
-    const api = new sst.ApolloApi(this, "ApolloApi", {
+    // Create the GraphQL API
+    const api = new sst.GraphQLApi(this, "ApolloApi", {
       server: "src/lambda.handler",
     });
 
@@ -78,7 +78,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-We are creating an Apollo GraphQL API here using the [`sst.ApolloApi`](https://docs.serverless-stack.com/constructs/ApolloApi) construct. Our Apollo Server is powered by the Lambda function in `src/lambda.ts`.
+We are creating an Apollo GraphQL API here using the [`sst.GraphQLApi`](https://docs.serverless-stack.com/constructs/GraphQLApi) construct. Our Apollo Server is powered by the Lambda function in `src/lambda.ts`.
 
 ## Adding function code
 
