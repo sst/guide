@@ -25,14 +25,14 @@ In this example we will look at how to use MongoDB in our serverless app using [
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest rest-api-mongodb
 $ cd rest-api-mongodb
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "rest-api-mongodb",
   "stage": "dev",
@@ -58,7 +58,7 @@ First let's create the API endpoint and connect it to a Lambda function. We'll b
 
 {%change%} Replace the `stacks/MyStack.js` with the following.
 
-``` js
+```js
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -96,7 +96,7 @@ We are doing a couple of things here.
 - The function is not being bundled. This means that we are not using [esbuild](https://esbuild.github.io) to package it. This is because there are some MongoDB npm packages (that we'll be using later) that are not compatible with esbuild. So we'll be zipping up the entire `srcPath` directory and deploying it.
 - Finally, we are printing out the API endpoint in our outputs.
 
-## Setting up MongoDB 
+## Setting up MongoDB
 
 Let's create our MongoDB database. Start by heading over to [MongoDB.com](https://www.mongodb.com) to create a free account.
 
@@ -134,8 +134,8 @@ Now copy the connection string.
 
 {%change%} Create a new `.env.local` file in your project root and add your connection string.
 
-``` bash
-MONGODB_URI=mongodb+srv://mongodb:<password>@cluster0.jicjv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+```bash
+MONGODB_URI=mongodb+srv://mongodb:<password>@cluster0.jicjv.mongodb.net/demo?retryWrites=true&w=majority
 ```
 
 Make sure to replace `<password>` with the password that we had copied while adding a database user above.
@@ -154,7 +154,7 @@ We are now ready to add the function code to query our newly created MongoDB dat
 
 {%change%} Replace `src/lambda.js` with the following.
 
-``` js
+```js
 import * as mongodb from "mongodb";
 
 const MongoClient = mongodb.MongoClient;
@@ -204,7 +204,7 @@ The `handler` function should be pretty straightforward here. We connect to our 
 
 The line of note is:
 
-``` js
+```js
 context.callbackWaitsForEmptyEventLoop = false;
 ```
 
@@ -214,7 +214,7 @@ Let's install our MongoDB client. As mentioned at the beginning of this example,
 
 {%change%} Add the following to `src/package.json`.
 
-``` json
+```json
 {
   "name": "rest-api-mongodb-src",
   "version": "0.1.0",
@@ -229,7 +229,7 @@ Note, this isn't the same `package.json` in your project root.
 
 {%change%} And run the following inside the `src/` directory.
 
-``` bash
+```bash
 $ npm install
 ```
 
@@ -239,7 +239,7 @@ We are now ready to test our API!
 
 {%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
 
-``` bash
+```bash
 $ npx sst start
 ```
 
@@ -275,23 +275,22 @@ Now let's make a quick change to our database query.
 
 {%change%} Replace the following line in `src/lambda.js`.
 
-``` js
-  const movies = await db.collection("movies").find({}).limit(20).toArray();
+```js
+const movies = await db.collection("movies").find({}).limit(20).toArray();
 ```
 
 {%change%} With:
 
-``` js
-  const movies = await db
-    .collection("movies")
-    .find({}, { projection: { title: 1, plot: 1, metacritic: 1, cast: 1 } })
-    .sort({ metacritic: -1 })
-    .limit(20)
-    .toArray();
+```js
+const movies = await db
+  .collection("movies")
+  .find({}, { projection: { title: 1, plot: 1, metacritic: 1, cast: 1 } })
+  .sort({ metacritic: -1 })
+  .limit(20)
+  .toArray();
 ```
 
 This will sort our movies list by the ones that have the highest Metacritic score. So if you refresh your browser, you should see a different set of movies at the top.
-
 
 ![JSON list of top movies](/assets/examples/rest-api-mongodb/json-list-of-top-movies.png)
 
@@ -299,16 +298,17 @@ This will sort our movies list by the ones that have the highest Metacritic scor
 
 {%change%} To wrap things up we'll deploy our app to prod.
 
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
+
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
 
 ## Cleaning up
 
 Finally, you can remove the resources created in this example using the following commands.
 
-``` bash
+```bash
 $ npx sst remove
 $ npx sst remove --stage prod
 ```
