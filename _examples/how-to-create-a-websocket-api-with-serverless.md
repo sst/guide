@@ -99,8 +99,8 @@ const api = new sst.WebSocketApi(this, "Api", {
     },
   },
   routes: {
-    $connect: "src/connect.main",
-    $disconnect: "src/disconnect.main",
+    connect: "src/connect.main",
+    disconnect: "src/disconnect.main",
     sendmessage: "src/sendMessage.main",
   },
 });
