@@ -16,7 +16,7 @@ Now that our CloudFront Distribution has been created. Let's configure it with a
 Let's start by setting up your custom domain.
 
 1. If you have an existing domain that is not on AWS, follow these docs to [move it over to Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html).
-2. If you'd like to pruchase a new Route 53 domain, you can follow the step in this chapter — [Purchase a Domain with Route 53]({% link _chapters/purchase-a-domain-with-route-53.md %})
+2. If you'd like to purchase a new Route 53 domain, you can follow the step in this chapter — [Purchase a Domain with Route 53]({% link _chapters/purchase-a-domain-with-route-53.md %})
 
 ### Setup SSL
 
