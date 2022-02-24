@@ -152,7 +152,7 @@ Now **copy** the connection string.
 {%change%} Create a new `.env.local` file in your project root and add your connection string.
 
 ```bash
-mongodb+srv://mongodb:<password>@serverlessinstance0.j9n6s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://mongodb:<password>@serverlessinstance0.j9n6s.mongodb.net/demo?retryWrites=true&w=majority
 ```
 
 Make sure to replace `<password>` with the password that we had copied while creating a database user above.
