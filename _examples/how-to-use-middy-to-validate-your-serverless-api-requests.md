@@ -219,7 +219,7 @@ export { handler };
 
 Here we are creating an `inputSchema`. We are explicitly setting that `fname` and `lname` are required.
 
-> **Important** Compiling schemas on the fly will cause a 50-100ms performance hit during cold start for simple JSON Schemas. Precompiling is highly recommended.
+**Important:** Compiling schemas on the fly will cause a 50-100ms performance hit during cold start for simple JSON Schemas. Precompiling is highly recommended. [Read more about this](https://github.com/willfarrell/middy-ajv).
 
 Now open Insomnia and send a request.
 
