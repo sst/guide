@@ -68,17 +68,13 @@ export default class MyStack extends sst.Stack {
 
     // Create a HTTP API
     const api = new sst.Api(this, "Api", {
-      routes: {
-        "GET /": {
-          function: {
-            bundle: false,
-            srcPath: "src/",
-            handler: "lambda.handler",
-            environment: {
-              MONGODB_URI: process.env.MONGODB_URI,
-            },
-          },
+      defaultFunctionProps: {
+        environment: {
+          MONGODB_URI: process.env.MONGODB_URI,
         },
+      },
+      routes: {
+        "GET /": "src/lambda.handler",
       },
     });
 
@@ -94,7 +90,6 @@ We are doing a couple of things here.
 
 - We are creating an endpoint at `GET /` and connecting it to a Lambda function.
 - We are passing in the MongoDB connection string as an environment variable (`MONGODB_URI`). We'll be loading this from a `.env` file that we'll be soon.
-- The function is not being bundled. This means that we are not using [esbuild](https://esbuild.github.io) to package it. This is because there are some MongoDB npm packages (that we'll be using later) that are not compatible with esbuild. So we'll be zipping up the entire `srcPath` directory and deploying it.
 - Finally, we are printing out the API endpoint in our outputs.
 
 ## What is MongoDB Atlas
@@ -227,27 +222,10 @@ context.callbackWaitsForEmptyEventLoop = false;
 
 As the comment explains, we are telling AWS to not wait for the Node.js event loop to empty before freezing the Lambda function container. We need this because the connection to our MongoDB database is still around after our function returns.
 
-Let's install our MongoDB client. As mentioned at the beginning of this example, it is not compatible with esbuild, so we are going to install it separately.
-
-{%change%} Add the following to `src/package.json`.
-
-```json
-{
-  "name": "rest-api-mongodb-src",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "mongodb": "^4.2.1"
-  }
-}
-```
-
-Note, this isn't the same `package.json` in your project root.
-
-{%change%} And run the following inside the `src/` directory.
+Let's install our MongoDB client, run the below command in the project root.
 
 ```bash
-$ npm install
+$ npm install mongodb
 ```
 
 We are now ready to test our API!
