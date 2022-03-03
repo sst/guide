@@ -136,23 +136,21 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
     <svg viewBox="0 0 2684 1366" xmlns="http://www.w3.org/2000/svg">
       <image x="432" y="0" width="2252" height="1366" href="/assets/lander/graphics/breakpoints-image.png" />
     </svg>
-    <svg viewBox="0 0 750 527" xmlns="http://www.w3.org/2000/svg">
-      <image x="19" y="0" width="731" height="527" href="/assets/lander/graphics/breakpoints-image-mobile.png" />
+    <svg viewBox="0 0 760 522" xmlns="http://www.w3.org/2000/svg">
+      <image x="28" y="0" width="714" height="522" href="/assets/lander/graphics/breakpoints-image-mobile.png" />
     </svg>
   </div>
 
 </div>
 
-{% comment %}
-<!--
-<div class="sections console wrapper ">
+<div class="sections console wrapper">
 
   <div class="title">
     <h2>Easy to use <span>console</span></h2>
     <br />
     <p>
-      Browse your constructs, invoke your functions, and view your logs live.
-      <a class="more" href="{% link _examples/how-to-debug-lambda-functions-with-visual-studio-code.md %}">
+      Manage your resources, invoke functions, and view your logs live.
+      <a class="more" href="{{ site.docs_url }}/console">
         Learn more <i class="fa fa-angle-right" aria-hidden="true"></i>
       </a>
     </p>
@@ -161,20 +159,15 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
   </div>
 
   <div class="content">
-    <div class="wrap">
-      <img class="copy-left" src="/assets/lander/graphics/console-copy-left.svg" />
-      <img class="arrow-left" src="/assets/lander/graphics/console-arrow-left.svg" />
-      <img class="arrow-left-mobile" src="/assets/lander/graphics/console-arrow-left-mobile.svg" />
-      <img class="copy-right" src="/assets/lander/graphics/console-copy-right.svg" />
-      <img class="arrow-right" src="/assets/lander/graphics/console-arrow-right.svg" />
-      <img class="arrow-right-mobile" src="/assets/lander/graphics/console-arrow-right-mobile.svg" />
-      <img class="screenshot" src="/assets/lander/graphics/breakpoints-screenshot.png" />
-    </div>
+    <svg viewBox="0 0 2640 1123" xmlns="http://www.w3.org/2000/svg">
+      <image x="54" y="0" width="2546" height="1123" href="/assets/lander/graphics/console-image.png" />
+    </svg>
+    <svg viewBox="0 0 747 577" xmlns="http://www.w3.org/2000/svg">
+      <image x="0" y="0" width="739" height="577" href="/assets/lander/graphics/console-image-mobile.png" />
+    </svg>
   </div>
 
 </div>
--->
-{% endcomment %}
 
 <div class="sections cdk wrapper ">
 
@@ -194,8 +187,8 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
     <svg viewBox="0 0 2638 926" xmlns="http://www.w3.org/2000/svg">
       <image x="139" y="0" width="2098" height="926" href="/assets/lander/graphics/cdk-image.png" />
     </svg>
-    <svg viewBox="0 0 750 471" xmlns="http://www.w3.org/2000/svg">
-      <image x="0" y="0" width="743" height="471" href="/assets/lander/graphics/cdk-image-mobile.png" />
+    <svg viewBox="0 0 764 471" xmlns="http://www.w3.org/2000/svg">
+      <image x="7" y="0" width="743" height="471" href="/assets/lander/graphics/cdk-image-mobile.png" />
     </svg>
   </div>
 

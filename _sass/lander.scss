@@ -499,6 +499,10 @@ $reader-logo-width: 123px;
   padding: 2.5 * $spacing-unit + 5px $spacing-unit 0;
   overflow: hidden;
 
+  @include media-query($on-palm) {
+    padding: 0;
+  }
+
   &:after {
     @extend %bottom-border;
     margin-top: 2.5 * $spacing-unit;
@@ -511,9 +515,21 @@ $reader-logo-width: 123px;
 
   &.examples:after {
     margin-top: 2 * $spacing-unit - 10px;
+
+    @include media-query($on-palm) {
+    margin-top: 1.5 * $spacing-unit;
+    }
   }
 
   &.breakpoints:after {
+    margin-top: $spacing-unit / 2;
+
+    @include media-query($on-palm) {
+      margin-top: $spacing-unit / 2;
+    }
+  }
+
+  &.console:after {
     margin-top: $spacing-unit / 2;
 
     @include media-query($on-palm) {
@@ -528,15 +544,14 @@ $reader-logo-width: 123px;
       margin-top: 0;
     }
   }
-
-  @include media-query($on-palm) {
-    padding: 0 $spacing-unit / 2;
-  }
-
   & > .title {
     display: inline-block;
     position: relative;
     margin-bottom: 1.5 * $spacing-unit;
+
+    @include media-query($on-palm) {
+      padding: 0 $spacing-unit / 2;
+    }
 
     @include media-query($on-laptop) {
       margin-bottom: $spacing-unit;
@@ -611,9 +626,10 @@ $reader-logo-width: 123px;
     }
   }
   &.console > .title {
+    margin-bottom: $spacing-unit / 2 + 5px;
 
     @include media-query($on-palm) {
-      margin-bottom: $spacing-unit + 10px;
+      margin-bottom: 0;
 
       img { display: none; }
     }
@@ -649,6 +665,11 @@ $reader-logo-width: 123px;
 }
 
 .home > .examples > .content {
+
+  @include media-query($on-palm) {
+    padding: 0 $spacing-unit / 2;
+  }
+
   & > .controls {
     margin-bottom: 1.5 * $spacing-unit;
     position: relative;
@@ -889,7 +910,9 @@ $reader-logo-width: 123px;
   }
 }
 
-.home > .breakpoints > .content {
+.home > .breakpoints > .content,
+.home > .console > .content,
+.home > .cdk > .content {
   text-align: center;
 
   svg:last-child {
@@ -903,97 +926,8 @@ $reader-logo-width: 123px;
 }
 
 .home > .console > .content {
-  text-align: center;
-
-  .wrap {
-    display: inline-block;
-    position: relative;
-  }
-
-  .arrow-left {
-    left: -78px;
-    top: 220px;
-    position: absolute;
-
-    @include media-query($on-palm) {
-      display: none;
-    }
-  }
-  .arrow-left-mobile {
-    display: none;
-    left: -11px;
-    top: -16px;
-    position: absolute;
-
-    @include media-query($on-palm) {
-      display: block;
-    }
-  }
-  .copy-left {
-    left: -140px;
-    top: 135px;
-    position: absolute;
-
-    @include media-query($on-palm) {
-      left: 28px;
-      top: -25px;
-      width: 32px;
-      transform: rotate(26deg);
-    }
-  }
-  .arrow-right {
-    right: -52px;
-    bottom: 148px;
-    position: absolute;
-
-    @include media-query($on-palm) {
-      display: none;
-    }
-  }
-  .arrow-right-mobile {
-    display: none;
-    right: -13px;
-    top: -17px;
-    position: absolute;
-
-    @include media-query($on-palm) {
-      display: block;
-    }
-  }
-  .copy-right {
-    right: -145px;
-    top: 123px;
-    position: absolute;
-
-    @include media-query($on-palm) {
-      right: 6px;
-      top: -45px;
-      width: 26px
-    }
-  }
-  .screenshot {
-    border-radius: 10px;
-    box-shadow: 6px 9px 25px rgba(57, 92, 107, 0.4),
-                0px 4px 12px rgba(57, 92, 107, 0.3);
-
-    @include media-query($on-palm) {
-      border-radius: 3px;
-      box-shadow: 2px 3px 8px rgba(57, 92, 107, 0.4),
-                  0px 1px 4px rgba(57, 92, 107, 0.3);
-    }
-  }
-}
-
-.home > .cdk > .content {
-  text-align: center;
-
-  svg:last-child {
-    display: none;
-  }
-
   @include media-query($on-palm) {
-    svg:first-child { display: none; }
-    svg:last-child { display: inline; }
+    margin-top: -25px;
   }
 }
 
