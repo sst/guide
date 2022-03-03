@@ -47,20 +47,27 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
       </div>
       <div class="code-block">
         <div class="token-line">
-          <span class="token lead">#</span><span class="token dim">Create a new Serverless Stack app</span>
+          <span class="token lead">#</span><span class="token dim">Create a new SST app</span>
         </div>
         <div class="token-line">
-          <span class="token lead">$</span> npx <span class="token keyword">create-serverless-stack</span> my-sst-app</span>
+          <span class="token lead">$</span> npx <span class="token keyword">create-serverless-stack</span> my-sst-app
         </div>
         <div class="token-line">
-          <span class="token lead">$</span> cd my-sst-app</span>
+          <span class="token lead">$</span> cd my-sst-app
         </div>
         <br />
         <div class="token-line">
-          <span class="token lead">#</span><span class="token dim">Start the Live Lambda Dev environment</span>
+          <span class="token lead">#</span><span class="token dim">Start Live Lambda Dev</span>
         </div>
         <div class="token-line">
           <span class="token lead">$</span> npx <span class="token keyword">sst</span> <span class="token plain">start</span>
+        </div>
+        <br />
+        <div class="token-line">
+          <span class="token lead">#</span><span class="token dim">Load the SST Console</span>
+        </div>
+        <div class="token-line">
+          <span class="token lead">#</span> console.serverless-stack.com/acme/local
         </div>
         <br />
         <div class="token-line">
@@ -137,7 +144,7 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
       <image x="432" y="0" width="2252" height="1366" href="/assets/lander/graphics/breakpoints-image.png" />
     </svg>
     <svg viewBox="0 0 760 522" xmlns="http://www.w3.org/2000/svg">
-      <image x="28" y="0" width="714" height="522" href="/assets/lander/graphics/breakpoints-image-mobile.png" />
+      <image x="0" y="0" width="714" height="522" href="/assets/lander/graphics/breakpoints-image-mobile.png" />
     </svg>
   </div>
 
