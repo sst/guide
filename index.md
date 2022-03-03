@@ -67,7 +67,7 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
           <span class="token lead">#</span><span class="token dim">Open the SST Console</span>
         </div>
         <div class="token-line">
-          <span class="token lead">$</span> <span class="token keyword">open</span> console.serverless-stack.com/my-app
+          <span class="token lead">$</span> <span class="token">open</span> <span class="token plain">console.serverless-stack.com/my-app</span>
         </div>
         <br />
         <div class="token-line">
