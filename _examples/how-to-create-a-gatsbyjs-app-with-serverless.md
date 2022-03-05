@@ -10,7 +10,7 @@ description: In this example we will look at how to use Gatsby with a serverless
 short_desc: Full-stack Gatsby app with a serverless API.
 repo: gatsby-app
 ref: how-to-create-a-gatsby-app-with-serverless
-comments_id: how-to-create-a-gatsby-app-with-serverless/xxxx
+comments_id: how-to-create-a-gatsby-app-with-serverless/2595
 ---
 
 In this example we will look at how to use [Gatsby](https://www.gatsbyjs.com/) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) and the SST [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-a-gatsby-site) construct to deploy our app to AWS.
@@ -324,6 +324,7 @@ We are now ready to add the UI for our app and connect it to our serverless API.
 
 {%change%} Replace `frontend/src/pages/index.js` with.
 
+{% raw %}
 ```jsx
 import React, { useState } from "react";
 
@@ -350,6 +351,7 @@ export default function App() {
   );
 }
 ```
+{% endraw %}
 
 Here we are adding a simple button that when clicked, makes a request to our API. We are getting the API endpoint from the environment variable, `process.env.GATSBY_APP_API_URL`.
 

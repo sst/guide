@@ -10,7 +10,7 @@ description: In this example we will look at how to use PlanetScale in your serv
 short_desc: Using PlanetScale in a serverless API.
 repo: planetscale
 ref: how-to-use-planetscale-in-your-serverless-app
-comments_id: how-to-use-planetscale-in-your-serverless-app/xxxx
+comments_id: how-to-use-planetscale-in-your-serverless-app/2594
 ---
 
 In this example we will look at how to use PlanetScale in our serverless app using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be creating a simple hit counter.
