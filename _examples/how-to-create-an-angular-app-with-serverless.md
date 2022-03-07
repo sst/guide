@@ -174,7 +174,7 @@ const site = new sst.StaticSite(this, "AngularSite", {
   environment: {
     DEV_API_URL: api.url,
   },
-  customDomain: "www.my-Angular-app.com",
+  customDomain: "www.my-angular-app.com",
 });
 ```
 
@@ -503,10 +503,10 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Once deployed, you should see something like this.
 
 ```bash
- ✅  prod-Angular-app-my-stack
+ ✅  prod-angular-app-my-stack
 
 
-Stack prod-Angular-app-my-stack
+Stack prod-angular-app-my-stack
   Status: deployed
   Outputs:
     ApiEndpoint: https://k40qchmtvf.execute-api.ap-south-1.amazonaws.com
@@ -515,7 +515,9 @@ Stack prod-Angular-app-my-stack
 
 If you head over to the `SiteUrl` in your browser, you should see your new Angular app in action!
 
-![Angular app deployed to AWS](/assets/examples/react-app/react-app-deployed-to-aws.png)
+Also let's check the updation in the table using the [DynamoDB Explorer](https://docs.serverless-stack.com/console#dynamodb) in SST Console.
+
+![DynamoDB table view of counter table](/assets/examples/angular-app/dynamo_table_view_of_counter_table.png)
 
 ## Cleaning up
 
