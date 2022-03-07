@@ -1,15 +1,20 @@
 ---
 layout: example
-title: How to create an angular app with serverless
+title: How to create an Angular app with serverless
+short_title: Angular
 date: 2021-11-17 00:00:00
 lang: en
-description: In this example we will look at how to use angular with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST) and the SST StaticSite construct to deploy our app to AWS S3 and CloudFront.
+lang: en
+index: 6
+type: webapp
+description: In this example we will look at how to use Angular with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST) and the SST StaticSite construct to deploy our app to AWS S3 and CloudFront.
+short_desc: Full-stack Angular app with a serverless API.
 repo: angular-app
 ref: how-to-create-an-angular-app-with-serverless
 comments_id: how-to-create-an-angular-app-with-serverless/xxxx
 ---
 
-In this example we will look at how to use [angular](https://angular.io) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) and the SST [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-an-angular-site) construct to deploy our app to AWS.
+In this example we will look at how to use [Angular](https://angular.io) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) and the SST [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-an-Angular-site) construct to deploy our app to AWS.
 
 ## Requirements
 
@@ -49,11 +54,11 @@ An SST app is made up of a couple of parts.
 
 3. `frontend/` — Angular app
 
-   The code for our frontend angular app.
+   The code for our frontend Angular app.
 
 ## Create our infrastructure
 
-Our app is made up of a simple API and an angular app. The API will be talking to a database to store the number of clicks. We'll start by creating the database.
+Our app is made up of a simple API and an Angular app. The API will be talking to a database to store the number of clicks. We'll start by creating the database.
 
 ### Adding the table
 
@@ -118,9 +123,9 @@ We are using the SST [`Api`](https://docs.serverless-stack.com/constructs/Api) c
 
 We also pass in the name of our DynamoDB table to our API as an environment variable called `tableName`. And we allow our API to access (read and write) the table instance we just created.
 
-### Setting up our angular app
+### Setting up our Angular app
 
-To deploy an angular app to AWS, we'll be using the SST [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-an-angular-site) construct.
+To deploy an Angular app to AWS, we'll be using the SST [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-an-angular-site) construct.
 
 {%change%} Replace the following in `stacks/MyStack.js`:
 
@@ -139,7 +144,7 @@ const site = new sst.StaticSite(this, "AngularSite", {
   buildOutput: "dist",
   buildCommand: "ng build --output-path dist",
   errorPage: sst.StaticSiteErrorOptions.REDIRECT_TO_INDEX_PAGE,
-  // To load the API URL from the environment in development mode
+  // To load the API URL from the environment in development mode (environment.ts)
   environment: {
     DEV_API_URL: api.url,
   },
@@ -152,15 +157,15 @@ this.addOutputs({
 });
 ```
 
-The construct is pointing to where our angular app is located. We haven't created our app yet but for now we'll point to the `frontend` directory.
+The construct is pointing to where our Angular app is located. We haven't created our app yet but for now we'll point to the `frontend` directory.
 
-We are also setting up a [angular environment variable](https://angular.io/guide/build) `DEV_API_URL` with the endpoint of our API. The [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-an-angular-site) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
+We are also setting up an [Angular environment variable](https://Angular.io/guide/build) `DEV_API_URL` with the endpoint of our API. The [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-an-Angular-site) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
 
 You can also optionally configure a custom domain.
 
 ```js
-// Deploy our angular app
-const site = new sst.StaticSite(this, "angularSite", {
+// Deploy our Angular app
+const site = new sst.StaticSite(this, "AngularSite", {
   path: "frontend",
   buildOutput: "dist",
   buildCommand: "ng build --output-path dist",
@@ -169,7 +174,7 @@ const site = new sst.StaticSite(this, "angularSite", {
   environment: {
     DEV_API_URL: api.url,
   },
-  customDomain: "www.my-angular-app.com",
+  customDomain: "www.my-Angular-app.com",
 });
 ```
 
@@ -249,19 +254,21 @@ Stack manitej-angular-app-my-stack
     SiteUrl: https://d2uyljrh4twuwq.cloudfront.net
 ```
 
-The `ApiEndpoint` is the API we just created. While the `SiteUrl` is where our angular app will be hosted. For now it's just a placeholder website.
+The `ApiEndpoint` is the API we just created. While the `SiteUrl` is where our Angular app will be hosted. For now it's just a placeholder website.
 
-Let's test our endpoint. Run the following in your terminal.
+Let's test our endpoint using the integrated [SST Console](https://console.serverless-stack.com)
 
-```bash
-$ curl -X POST https://sez1p3dsia.execute-api.ap-south-1.amazonaws.com
-```
+**NOTE:** The SST Console is a web based dashboard to manage your SST apps [Learn more](https://docs.serverless-stack.com/console)
 
-You should see a `0` printed out.
+Go to the _Functions_ tab and click **Invoke** button to send a `POST` request
 
-## Setting up our angular app
+![invocation response](/assets/examples/angular-app/invocation_response.png)
 
-We are now ready to use the API we just created. Let's use [angular cli](https://angular.io/cli) to setup our angular app.
+You should see a `0` in the response body
+
+## Setting up our Angular app
+
+We are now ready to use the API we just created. Let's use [Angular cli](https://angular.io/cli) to setup our Angular app.
 
 {%change%} Run the following in the project root.
 
@@ -271,7 +278,7 @@ $ ng new frontend
 $ cd frontend
 ```
 
-This sets up our angular app in the `frontend/` directory. Recall that, earlier in the guide we were pointing the `StaticSite` construct to this path.
+This sets up our Angular app in the `frontend/` directory. Recall that, earlier in the guide we were pointing the `StaticSite` construct to this path.
 
 We also need to load the environment variables from our SST app. To do this, we'll be using the [`@serverless-stack/static-site-env`](https://www.npmjs.com/package/@serverless-stack/static-site-env) package.
 
@@ -281,19 +288,20 @@ We also need to load the environment variables from our SST app. To do this, we'
 $ npm install @serverless-stack/static-site-env --save-dev
 ```
 
-In angular, we have our `environment.ts` and `environment.prod.ts` files defined in the `src/environments` folder. The `environment.ts` file is where we usually keep our environment variables by convention, as the angular compiler looks for these files before the build process. Now, the problem is, these environment files are required by angular for the build process, meaning they have to be pushed to the repository so that others can also install the project locally. If you have your API keys explicitly written in these files, consider those keys compromised, because anyone who has access to your repository can see them. To solve this issue we'll use a script that generates env variables at build time.
+In Angular, we have our `environment.ts` and `environment.prod.ts` files defined in the `src/environments` folder. The `environment.ts` file is where we usually keep our environment variables by convention, as the Angular compiler looks for these files before the build process. Now, the problem is, these environment files are required by Angular for the build process, meaning they have to be pushed to the repository so that others can also install the project locally. If you have your API keys explicitly written in these files, consider those keys compromised, because anyone who has access to your repository can see them. To solve this issue we'll use a script that generates env variables at build time.
 
-Create a `setenv.ts` file inside `scripts` folder in the `frontend/` path with below code
+Create a `setenv.ts` file inside `frontend/scripts` folder and add the below code
 
 ```ts
-const { writeFile } = require("fs");
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { writeFile } = require('fs');
 
 const targetPath = `./src/environments/environment.ts`;
 
 const environmentFileContent = `
 export const environment = {
   production: ${false},
-  API_URL:  "${process.env["DEV_API_URL"]}",
+  API_URL:  "${process.env['DEV_API_URL']}",
 };
 `;
 // write the content to the respective file
@@ -307,16 +315,15 @@ writeFile(targetPath, environmentFileContent, function (err: unknown) {
 
 The above script creates the required environment file (`environment.ts` for development) and populates it with the variables from your .env file (available in `process.env`) with our `API_URL`.
 
-We need to update our scripts to use this script and `sst-env` package, Do this in the `package.json` file.
+We need to update our scripts to use this script and `sst-env` package, update the `package.json` file like below
 
 ```json
 {
   ...
   "scripts": {
-    "ng": "ng",
+    ...
     "config": "ts-node ./scripts/setenv.ts",
     "start": "sst-env -- npm run config && ng serve",
-    "build": "ng build",
     ...
   },
   ...
@@ -329,7 +336,7 @@ We need to update our scripts to use this script and `sst-env` package, Do this 
 $ npm install ts-node --save-dev
 ```
 
-Let's start our angular development environment.
+Let's start our Angular development environment.
 
 {%change%} In the `frontend/` directory run.
 
@@ -358,8 +365,8 @@ We are now ready to add the UI for our app and connect it to our serverless API.
 
 ```ts
 import { environment } from "./../environments/environment";
-import { Component } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Component } from "@Angular/core";
+import { HttpClient } from "@Angular/common/http";
 
 @Component({
   selector: "app-root",
@@ -387,9 +394,9 @@ We need `HttpClientModule` to make API calls with our API, To make `HttpClientMo
 {%change%} Replace `frontend/src/app/app.module.ts` with.
 
 ```ts
-import { HttpClientModule } from "@angular/common/http";
-import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
+import { HttpClientModule } from "@Angular/common/http";
+import { NgModule } from "@Angular/core";
+import { BrowserModule } from "@Angular/platform-browser";
 
 import { AppComponent } from "./app.component";
 
@@ -421,9 +428,9 @@ button {
 }
 ```
 
-Now if you head over to your browser, your angular app should look something like this.
+Now if you head over to your browser, your Angular app should look something like this.
 
-![Click counter UI in angular app](/assets/examples/react-app/click-counter-ui-in-react-app.png)
+![Click counter UI in Angular app](/assets/examples/react-app/click-counter-ui-in-react-app.png)
 
 Of course if you click on the button multiple times, the count doesn't change. That's because we are not updating the count in our API. We'll do that next.
 
@@ -453,7 +460,7 @@ Here we are updating the `clicks` row's `tally` column with the increased count.
 
 And if you head over to your browser and click the button again, you should see the count increase!
 
-![Click counter updating in angular app](/assets/examples/react-app/click-counter-updating-in-react-app.png)
+![Click counter updating in Angular app](/assets/examples/react-app/click-counter-updating-in-react-app.png)
 
 ## Deploying to prod
 
@@ -473,7 +480,7 @@ export const environment = {
 In `stacks/MyStack.js` add the below code , right below `environment` key.
 
 ```js
-// To load the API URL from the environment in production mode
+// To load the API URL from the environment in production mode (environment.prod.ts)
 replaceValues: [
   {
     files: "**/*.js",
@@ -483,7 +490,7 @@ replaceValues: [
 ],
 ```
 
-This replaces `{{ PROD_API_URL }}` with the deployed API endpoint in all the .js files in your compiled angular app.
+This replaces `{{ PROD_API_URL }}` with the deployed API endpoint in all the .js files in your compiled Angular app.
 
 That's it, now run below command to deploy.
 
@@ -496,19 +503,19 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Once deployed, you should see something like this.
 
 ```bash
- ✅  prod-angular-app-my-stack
+ ✅  prod-Angular-app-my-stack
 
 
-Stack prod-angular-app-my-stack
+Stack prod-Angular-app-my-stack
   Status: deployed
   Outputs:
     ApiEndpoint: https://k40qchmtvf.execute-api.ap-south-1.amazonaws.com
     SiteUrl: https://d1wuzrecqjflrh.cloudfront.net
 ```
 
-If you head over to the `SiteUrl` in your browser, you should see your new angular app in action!
+If you head over to the `SiteUrl` in your browser, you should see your new Angular app in action!
 
-![angular app deployed to AWS](/assets/examples/react-app/react-app-deployed-to-aws.png)
+![Angular app deployed to AWS](/assets/examples/react-app/react-app-deployed-to-aws.png)
 
 ## Cleaning up
 
@@ -521,4 +528,4 @@ $ npx sst remove --stage prod
 
 ## Conclusion
 
-And that's it! We've got a completely serverless click counter in angular. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+And that's it! We've got a completely serverless click counter in Angular. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
