@@ -8,7 +8,7 @@ ref: unit-tests-in-serverless
 comments_id: unit-tests-in-serverless/173
 ---
 
-Our serverless app is made up of two big parts; the code that defines our infrastructure and the code that powers our Lambda functions. We'd like to be able to test both of these. 
+Our serverless app is made up of two big parts; the code that defines our infrastructure and the code that powers our Lambda functions. We'd like to be able to test both of these.
 
 On the infrastructure side, we want to make sure the right type of resources are being created. So we don't mistakingly deploy some updates.
 
@@ -22,8 +22,8 @@ Let's start by writing a test for the CDK infrastructure in our app. We are goin
 
 {%change%} Add the following to `test/StorageStack.test.js`.
 
-``` js
-import { expect, haveResource } from "@aws-cdk/assert";
+```js
+import { Template } from "aws-cdk-lib/assertions";
 import * as sst from "@serverless-stack/resources";
 import StorageStack from "../stacks/StorageStack";
 
@@ -32,11 +32,10 @@ test("Test StorageStack", () => {
   // WHEN
   const stack = new StorageStack(app, "test-stack");
   // THEN
-  expect(stack).to(
-    haveResource("AWS::DynamoDB::Table", {
-      BillingMode: "PAY_PER_REQUEST",
-    })
-  );
+  const template = Template.fromStack(stack);
+  template.hasResourceProperties("AWS::DynamoDB::Table", {
+    BillingMode: "PAY_PER_REQUEST",
+  });
 });
 ```
 
@@ -46,7 +45,7 @@ We also have a sample test created with the starter that we can remove.
 
 {%change%} Run the following in your project root.
 
-``` bash
+```bash
 $ rm test/MyStack.test.js
 ```
 
@@ -56,7 +55,7 @@ We are also going to test the business logic in our Lambda functions.
 
 {%change%} Create a new file in `test/cost.test.js` and add the following.
 
-``` js
+```js
 import { calculateCost } from "../src/util/cost";
 
 test("Lowest tier", () => {
@@ -93,13 +92,13 @@ This should be straightforward. We are adding 3 tests. They are testing the diff
 
 And we can run our tests by using the following command in the root of our project.
 
-``` bash
+```bash
 $ npx sst test
 ```
 
 You should see something like this:
 
-``` bash
+```bash
  PASS  test/cost.test.js
  PASS  test/StorageStack.test.js
 
@@ -116,7 +115,7 @@ And that's it! We have unit tests all configured. These tests are fairly simple 
 
 {%change%} Let's commit our changes and push it to GitHub.
 
-``` bash
+```bash
 $ git add .
 $ git commit -m "Adding unit tests"
 $ git push

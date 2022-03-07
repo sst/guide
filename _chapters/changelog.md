@@ -23,9 +23,16 @@ You can get these updates emailed to you via our [newsletter]({% link newsletter
 
 ### Changes
 
-#### [v7.0.3: {{ site.data.changelog.current.title }}](https://branchv703--serverless-stack.netlify.app/) (Current)
+#### [v7.1: {{ site.data.changelog.current.title }}](https://branchv71--serverless-stack.netlify.app/) (Current)
 
 {{ site.data.changelog.current.desc }}
+
+- [Tutorial changes]({{ site.github_repo }}/compare/v7.0.3...v7.1)
+- [Demo notes app source]({{ site.sst_demo_repo }}/compare/v1.0.1...v1.1)
+
+#### [v7.0.3: {{ site.data.changelog.v7-0-3.title }}](https://branchv703--serverless-stack.netlify.app/)
+
+{{ site.data.changelog.v7-0-3.desc }}
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v7.0.2...v7.0.3)
 - [Demo notes app source]({{ site.sst_demo_repo }}/compare/v1.0...v1.0.1)

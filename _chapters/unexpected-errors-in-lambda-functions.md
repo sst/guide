@@ -27,7 +27,7 @@ export const main = handler(async (event) => {
     // - 'userId': Identity Pool identity id of the authenticated user
     // - 'noteId': path parameter
     Key: {
-      userId: event.requestContext.identity.cognitoIdentityId,
+      userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
       noteId: event.pathParameters.id
     }
   };
@@ -93,7 +93,7 @@ export const main = handler(async (event) => {
     // - 'userId': Identity Pool identity id of the authenticated user
     // - 'noteId': path parameter
     Key: {
-      userId: event.requestContext.identity.cognitoIdentityId,
+      userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
       noteId: event.pathParameters.id
     }
   };

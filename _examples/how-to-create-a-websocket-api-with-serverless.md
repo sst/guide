@@ -1,9 +1,13 @@
 ---
 layout: example
 title: How to create a WebSocket API with serverless
+short_title: WebSocket API
 date: 2021-02-04 00:00:00
 lang: en
+index: 2
+type: api
 description: In this example we will look at how to create a serverless WebSocket API on AWS using Serverless Stack (SST). We'll be using the sst.WebSocketApi construct to define the routes of our API.
+short_desc: Building a simple WebSocket API.
 repo: websocket
 ref: how-to-create-a-websocket-api-with-serverless
 comments_id: how-to-create-a-websocket-api-with-serverless/2397

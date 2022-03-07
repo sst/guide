@@ -1,9 +1,13 @@
 ---
 layout: example
 title: How to create a React.js app with serverless
+short_title: React.js
 date: 2021-06-17 00:00:00
 lang: en
+index: 1
+type: webapp
 description: In this example we will look at how to use React.js with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST) and the SST ReactStaticSite construct to deploy our app to AWS S3 and CloudFront.
+short_desc: Full-stack React app with a serverless API.
 repo: react-app
 ref: how-to-create-a-reactjs-app-with-serverless
 comments_id: how-to-create-a-react-js-app-with-serverless/2413
