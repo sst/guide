@@ -133,7 +133,7 @@ $ pscale service-token add-access nyprhd2z6bd3 connect_branch --database demo
   demo       connect_branch
 ```
 
-Add the above values in the `.env` file in the root
+Add the above values in the `.env.local` file in the root
 
 ```
 PLANETSCALE_TOKEN='<TOKEN_FROM_TERMINAL>'
@@ -279,6 +279,8 @@ $ curl -X POST https://u3nnmgdigh.execute-api.us-east-1.amazonaws.com
 ## Deploying to prod
 
 {%change%} To wrap things up we'll deploy our app to prod.
+
+**NOTE:** `env.local` is not committed to the git and remember to set the environment variables in your CI pipeline.
 
 ```bash
 $ npx sst deploy --stage prod
