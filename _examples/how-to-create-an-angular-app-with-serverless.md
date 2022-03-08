@@ -11,7 +11,7 @@ description: In this example we will look at how to use Angular with a serverles
 short_desc: Full-stack Angular app with a serverless API.
 repo: angular-app
 ref: how-to-create-an-angular-app-with-serverless
-comments_id: how-to-create-an-angular-app-with-serverless/xxxx
+comments_id: how-to-create-an-angular-app-with-serverless/2599
 ---
 
 In this example we will look at how to use [Angular](https://angular.io) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) and the SST [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-an-Angular-site) construct to deploy our app to AWS.
