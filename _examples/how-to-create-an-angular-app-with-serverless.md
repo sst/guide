@@ -462,7 +462,7 @@ And if you head over to your browser and click the button again, you should see 
 
 ![Click counter updating in Angular app](/assets/examples/react-app/click-counter-updating-in-react-app.png)
 
-Also let's go to the DynamoDB tab in the SST Console and check the value is updated in the table.
+Also let's go to the **DynamoDB** tab in the SST Console and check the value is updated in the table.
 
 ![DynamoDB table view of counter table](/assets/examples/angular-app/dynamo_table_view_of_counter_table.png)
 
