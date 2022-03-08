@@ -462,6 +462,10 @@ And if you head over to your browser and click the button again, you should see 
 
 ![Click counter updating in Angular app](/assets/examples/react-app/click-counter-updating-in-react-app.png)
 
+Also let's check the updation in the table using the [DynamoDB Explorer](https://docs.serverless-stack.com/console#dynamodb) in SST Console.
+
+![DynamoDB table view of counter table](/assets/examples/angular-app/dynamo_table_view_of_counter_table.png)
+
 ## Deploying to prod
 
 {%change%} To wrap things up we'll deploy our app to prod, but the current way of loading environment variables from script only works on the development mode as we can't use `sst-env` in prod, to load env variables from `process.env` in production we need to make further changes.
@@ -514,10 +518,6 @@ Stack prod-angular-app-my-stack
 ```
 
 If you head over to the `SiteUrl` in your browser, you should see your new Angular app in action!
-
-Also let's check the updation in the table using the [DynamoDB Explorer](https://docs.serverless-stack.com/console#dynamodb) in SST Console.
-
-![DynamoDB table view of counter table](/assets/examples/angular-app/dynamo_table_view_of_counter_table.png)
 
 ## Cleaning up
 
