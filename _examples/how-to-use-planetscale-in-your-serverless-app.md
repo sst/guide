@@ -61,7 +61,7 @@ PlanetScale is a MySQL-compatible, serverless database platform powered by Vites
 
 [PlanetScale](https://planetscale.com/) is a reliable and highly-performant MySQL database that can be configured as a true serverless database. Meaning that it'll scale up and down automatically. And you won't get charged if you are not using it.
 
-**NOTE:** Make sure you have [pscale CLI](https://docs.planetscale.com/reference/planetscale-environment-setup) installed locally
+Note, Make sure you have [pscale CLI](https://docs.planetscale.com/reference/planetscale-environment-setup) installed locally
 
 Sign in to your account
 
@@ -142,7 +142,7 @@ PLANETSCALE_ORG='<ORG_NAME>'
 PLANETSCALE_DB='demo'
 ```
 
-**NOTE:** The names of the env variables should not be changed
+Note, The names of the env variables should not be changed
 
 ## Setting up the API
 
