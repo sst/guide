@@ -425,21 +425,21 @@ $reader-logo-width: 123px;
         margin-bottom: $spacing-unit / 2;
       }
 
-      &.breakpoints {
-        flex: 1 1.5 auto;
+      &.cdk {
+        flex: 1 1 auto;
         margin-right: $spacing-unit / 2;
-
-        @include media-query($on-monitor) {
-          flex: 1 1 auto;
-        }
 
         @include media-query($on-laptop) {
           margin-right: 0;
         }
       }
-      &.cdk {
-        flex: 1 1 auto;
+      &.console {
+        flex: 1 1.5 auto;
         margin-left: $spacing-unit / 2;
+
+        @include media-query($on-monitor) {
+          flex: 1 1 auto;
+        }
 
         @include media-query($on-laptop) {
           margin-left: 0;
@@ -460,19 +460,19 @@ $reader-logo-width: 123px;
       }
 
       &.live { hr { max-width: 250px; } }
-      &.breakpoints { hr { max-width: 235px; } }
       &.cdk { hr { max-width: 300px; } }
+      &.console { hr { max-width: 202px; } }
 
       @include media-query($on-palm) {
         &.live { hr { max-width: unset; } }
-        &.breakpoints { hr { max-width: unset; } }
         &.cdk { hr { max-width: unset; } }
+        &.console { hr { max-width: unset; } }
       }
 
       @include media-query($on-palm) {
         &.live img { width: 14px; }
-        &.breakpoints img { width: 18px; }
         &.cdk img { width: 16px; }
+        &.console img { width: 18px; }
       }
 
       h4 {
@@ -650,12 +650,14 @@ $reader-logo-width: 123px;
 
     @include media-query($on-palm) {
       margin-bottom: 10px;
+
+      img { display: none; }
     }
 
     & > img {
       position: absolute;
-      top: -32px;
-      right: -40px;
+      top: -22px;
+      right: 58px;
     }
   }
 
@@ -927,7 +929,7 @@ $reader-logo-width: 123px;
 
 .home > .console > .content {
   @include media-query($on-palm) {
-    margin-top: -25px;
+    margin-top: -10px;
   }
 }
 

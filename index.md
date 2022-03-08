@@ -87,17 +87,17 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
         <p>Work on your local Lambda functions live, without mocking or redeploying your app.</p>
       </div>
       <div class="columns">
-        <div class="feature breakpoints">
-          <img src="/assets/lander/graphics/bug-icon.svg" />
-          <hr />
-          <h4>Breakpoint debugging</h4>
-          <p>Use Visual Studio code and set breakpoints to debug your Lambda functions.</p>
-        </div>
         <div class="feature cdk">
           <img src="/assets/lander/graphics/parts-icon.svg" />
           <hr />
           <h4>Composable serverless constructs</h4>
           <p>Higher-level CDK constructs made specifically for building serverless apps.</p>
+        </div>
+        <div class="feature console">
+          <img src="/assets/lander/graphics/console-icon.svg" />
+          <hr />
+          <h4>Easy to use console</h4>
+          <p>Manage the resources in your application with the SST Console.</p>
         </div>
       </div>
     </div>
@@ -144,7 +144,7 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
       <image x="432" y="0" width="2252" height="1366" href="/assets/lander/graphics/breakpoints-image.png" />
     </svg>
     <svg viewBox="0 0 760 522" xmlns="http://www.w3.org/2000/svg">
-      <image x="0" y="0" width="714" height="522" href="/assets/lander/graphics/breakpoints-image-mobile.png" />
+      <image x="30" y="0" width="714" height="522" href="/assets/lander/graphics/breakpoints-image-mobile.png" />
     </svg>
   </div>
 
@@ -179,10 +179,10 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
 <div class="sections cdk wrapper ">
 
   <div class="title">
-    <h2><span>Use</span> all AWS <span>services</span></h2>
+    <h2><span>The power of </span>AWS<span></span></h2>
     <br />
     <p>
-      SST is built on AWS CDK and supports all AWS services.
+      Built on CDK and the battle-tested CloudFormation. Natively use all AWS services.
       <a class="more" href="{{ site.docs_url }}/faq#can-i-use-all-the-cdk-constructs-in-sst">
         Learn more <i class="fa fa-angle-right" aria-hidden="true"></i>
       </a>
