@@ -25,14 +25,14 @@ In this example we will look at how to use PostgreSQL in our serverless app usin
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest rest-api-postgresql
 $ cd rest-api-postgresql
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "rest-api-postgresql",
   "stage": "dev",
@@ -58,10 +58,10 @@ An SST app is made up of two parts.
 
 {%change%} Replace the `stacks/MyStack.js` with the following.
 
-``` js
-import * as cdk from "@aws-cdk/core";
-import * as ec2 from "@aws-cdk/aws-ec2";
-import * as rds from "@aws-cdk/aws-rds";
+```js
+import * as cdk from "aws-cdk-lib";
+import * as ec2 from "aws-cdk-lib/aws-ec2";
+import * as rds from "aws-cdk-lib/aws-rds";
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -99,7 +99,7 @@ Now let's add the API.
 
 {%change%} Add this below the `rds.ServerlessCluster` definition in `stacks/MyStack.js`.
 
-``` js
+```js
 // Create a HTTP API
 const api = new sst.Api(this, "Api", {
   routes: {
@@ -133,23 +133,13 @@ We also pass in the name of our database, the ARN of the database cluster, and t
 
 We then allow our Lambda function to access our database cluster. Finally, we output the endpoint of our API, ARN of the secret and the name of the database cluster. We'll be using these later in the example.
 
-We need to install a couple of CDK packages that we are using.
-
-{%change%} From the project root run the following.
-
-``` bash
-$ npx sst add-cdk @aws-cdk/aws-ec2 @aws-cdk/aws-rds
-```
-
-The reason we are using the [**add-cdk**](https://docs.serverless-stack.com/packages/cli#add-cdk-packages) command instead of using an `npm install`, is because of [a known issue with AWS CDK](https://docs.serverless-stack.com/known-issues). Using mismatched versions of CDK packages can cause some unexpected problems down the road. The `sst add-cdk` command ensures that we install the right version of the package.
-
 ## Reading from our database
 
 Now in our function, we'll start by reading from our PostgreSQL database.
 
 {%change%} Replace `src/lambda.js` with the following.
 
-``` js
+```js
 import client from "data-api-client";
 
 const db = client({
@@ -178,7 +168,7 @@ For now we'll get the number of hits from a table called `tblCounter` and return
 
 {%change%} Let's install the `data-api-client`.
 
-``` bash
+```bash
 $ npm install data-api-client
 ```
 
@@ -188,7 +178,7 @@ And test what we have so far.
 
 {%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
 
-``` bash
+```bash
 $ npx sst start
 ```
 
@@ -220,7 +210,6 @@ The `ApiEndpoint` is the API we just created. While the `SecretArn` is what we n
 
 Before we can test our endpoint let's create the `tblCounter` table in our database.
 
-
 ## Creating our table
 
 To create our table we'll use the query editor in the AWS console. First let's grab the secret ARN to login to our database.
@@ -242,7 +231,7 @@ Then click **Connect to database**.
 
 Paste the following queries. This will create our table and insert a row to keep track of our hits.
 
-``` sql
+```sql
 CREATE TABLE tblCounter (
  counter text UNIQUE,
  tally integer
@@ -259,7 +248,7 @@ Hit **Run**.
 
 Now that our table is created, let's test our endpoint. Run the following in your terminal.
 
-``` bash
+```bash
 $ curl -X POST https://u3nnmgdigh.execute-api.us-east-1.amazonaws.com
 ```
 
@@ -267,13 +256,13 @@ This makes a POST request to our API.
 
 You should see a `0` printed out. Of course, if you call it again, nothing changes.
 
-## Writing to our table 
+## Writing to our table
 
 So let's update our table with the hits.
 
 {%change%} Add this above the `return` statement in `src/lambda.js`.
 
-``` js
+```js
 await db.query(`UPDATE tblCounter set tally=${++count} where counter='hits'`);
 ```
 
@@ -281,7 +270,7 @@ Here we are updating the `hits` row's `tally` column with the increased count.
 
 And now if you head over to your terminal and make a request to our API. You'll notice the count increase!
 
-``` bash
+```bash
 $ curl -X POST https://u3nnmgdigh.execute-api.us-east-1.amazonaws.com
 ```
 
@@ -289,16 +278,17 @@ $ curl -X POST https://u3nnmgdigh.execute-api.us-east-1.amazonaws.com
 
 {%change%} To wrap things up we'll deploy our app to prod.
 
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
+
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
 
 ## Cleaning up
 
 Finally, you can remove the resources created in this example using the following commands.
 
-``` bash
+```bash
 $ npx sst remove
 $ npx sst remove --stage prod
 ```
@@ -306,4 +296,3 @@ $ npx sst remove --stage prod
 ## Conclusion
 
 And that's it! We've got a completely serverless hit counter. And we can test our changes locally before deploying to AWS! Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
-

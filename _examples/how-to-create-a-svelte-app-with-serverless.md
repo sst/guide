@@ -6,14 +6,14 @@ date: 2021-10-15 00:00:00
 lang: en
 index: 4
 type: webapp
-description: In this example we will look at how to use Svelte with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST) and the SST StaticSite construct to deploy our app to AWS S3 and CloudFront.
+description: In this example we will look at how to use Svelte with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST) and the SST ViteStaticSite construct to deploy our app to AWS S3 and CloudFront.
 short_desc: Full-stack Svelte app with a serverless API.
 repo: svelte-app
 ref: how-to-create-a-svelte-app-with-serverless
 comments_id: how-to-create-a-svelte-app-with-serverless/2522
 ---
 
-In this example we will look at how to use [Svelte](https://svelte.dev) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) and the SST [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-a-svelte-site) construct to deploy our app to AWS.
+In this example we will look at how to use [Svelte](https://svelte.dev) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) and the SST [`ViteStaticSite`](https://docs.serverless-stack.com/constructs/ViteStaticSite) construct to deploy our app to AWS.
 
 ## Requirements
 
@@ -124,7 +124,7 @@ We also pass in the name of our DynamoDB table to our API as an environment vari
 
 ### Setting up our Svelte app
 
-To deploy a Svelte app to AWS, we'll be using the SST [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-a-svelte-site) construct.
+To deploy a Svelte app to AWS, we'll be using the SST [`ViteStaticSite`](https://docs.serverless-stack.com/constructs/ViteStaticSite) construct.
 
 {%change%} Replace the following in `stacks/MyStack.js`:
 
@@ -139,11 +139,8 @@ this.addOutputs({
 
 ```js
 // Deploy our Svelte app
-const site = new sst.StaticSite(this, "SvelteJSSite", {
+const site = new sst.ViteStaticSite(this, "SvelteJSSite", {
   path: "frontend",
-  buildOutput: "dist",
-  buildCommand: "npm run build",
-  errorPage: sst.StaticSiteErrorOptions.REDIRECT_TO_INDEX_PAGE,
   environment: {
     // Pass in the API endpoint to our app
     VITE_APP_API_URL: api.url,
@@ -159,17 +156,14 @@ this.addOutputs({
 
 The construct is pointing to where our Svelte app is located. We haven't created our app yet but for now we'll point to the `frontend` directory.
 
-We are also setting up a [build time Svelte environment variable](https://vitejs.dev/guide/env-and-mode.html) `VITE_APP_API_URL` with the endpoint of our API. The [`StaticSite`](https://docs.serverless-stack.com/constructs/StaticSite#creating-a-svelte-site) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
+We are also setting up a [build time Svelte environment variable](https://vitejs.dev/guide/env-and-mode.html) `VITE_APP_API_URL` with the endpoint of our API. The [`ViteStaticSite`](https://docs.serverless-stack.com/constructs/ViteStaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
 
 You can also optionally configure a custom domain.
 
 ```js
 // Deploy our Svelte app
-const site = new sst.StaticSite(this, "svelteJSSite", {
+const site = new sst.ViteStaticSite(this, "svelteJSSite", {
   path: "frontend",
-  buildOutput: "dist",
-  buildCommand: "npm run build",
-  errorPage: sst.StaticSiteErrorOptions.REDIRECT_TO_INDEX_PAGE,
   environment: {
     // Pass in the API endpoint to our app
     VITE_APP_API_URL: api.url,
@@ -279,7 +273,7 @@ $ cd frontend
 $ npm install
 ```
 
-This sets up our Svelte app in the `frontend/` directory. Recall that, earlier in the guide we were pointing the `StaticSite` construct to this path.
+This sets up our Svelte app in the `frontend/` directory. Recall that, earlier in the guide we were pointing the `ViteStaticSite` construct to this path.
 
 We also need to load the environment variables from our SST app. To do this, we'll be using the [`@serverless-stack/static-site-env`](https://www.npmjs.com/package/@serverless-stack/static-site-env) package.
 
@@ -324,14 +318,14 @@ We are now ready to add the UI for our app and connect it to our serverless API.
   let count = 0;
 
   function onClick() {
-      fetch(import.meta.env.VITE_APP_API_URL, {
-        method: "POST",
-      })
-        .then((response) => response.text())
-        .then((data) => {
-          count = data;
-      });
-    }
+    fetch(import.meta.env.VITE_APP_API_URL, {
+      method: "POST",
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        count = data;
+    });
+  }
 </script>
 
 <div class="App">
@@ -343,6 +337,10 @@ We are now ready to add the UI for our app and connect it to our serverless API.
 ```
 
 Here we are adding a simple button that when clicked, makes a request to our API. We are getting the API endpoint from the environment variable, `import.meta.env.VITE_APP_API_URL`.
+
+SST also [generates a type definition file](https://docs.serverless-stack.com/constructs/ViteStaticSite#type-definitions), meaning that your editor can autocomplete the environment variables for you.
+
+![Vite environment variables autocomplete](/assets/examples/react-app/vite-environment-variables-autocomplete.png)
 
 The response from our API is then stored in our app's state. We use that to display the count of the number of times the button has been clicked.
 
