@@ -256,15 +256,15 @@ Stack manitej-angular-app-my-stack
 
 The `ApiEndpoint` is the API we just created. While the `SiteUrl` is where our Angular app will be hosted. For now it's just a placeholder website.
 
-Let's test our endpoint using the integrated [SST Console](https://console.serverless-stack.com)
+Let's test our endpoint using the integrated [SST Console](https://console.serverless-stack.com).
 
-**NOTE:** The SST Console is a web based dashboard to manage your SST apps [Learn more](https://docs.serverless-stack.com/console)
+Note, The SST Console is a web based dashboard to manage your SST apps [Learn more](https://docs.serverless-stack.com/console).
 
-Go to the _Functions_ tab and click **Invoke** button to send a `POST` request
+Go to the **Functions** tab and click **Invoke** button to send a `POST` request.
 
 ![invocation response](/assets/examples/angular-app/invocation_response.png)
 
-You should see a `0` in the response body
+You should see a `0` in the response body.
 
 ## Setting up our Angular app
 
@@ -462,7 +462,7 @@ And if you head over to your browser and click the button again, you should see 
 
 ![Click counter updating in Angular app](/assets/examples/react-app/click-counter-updating-in-react-app.png)
 
-Also let's check the updation in the table using the [DynamoDB Explorer](https://docs.serverless-stack.com/console#dynamodb) in SST Console.
+Also let's go to the DynamoDB tab in the SST Console and check the value is updated in the table.
 
 ![DynamoDB table view of counter table](/assets/examples/angular-app/dynamo_table_view_of_counter_table.png)
 
