@@ -36,6 +36,7 @@ $page-content-width:          900px;
 
 $on-palm:                     600px;
 $on-laptop:                   800px;
+$on-monitor:                  1100px;
 
 // Minima also includes a mixin for defining media queries.
 // Use media queries like this:
@@ -145,17 +146,26 @@ div.support-footer {
 // Newsletter Form Chrome
 %newsletter-input {
   box-sizing: border-box;
-  color: #555;
+  color: $background-color;
   font-family: $base-font-family;
-  background-color: white;
+  background-color: transparentize($background-color, 0.9);
   border-radius: 3px;
-  border: 2px solid $grey-color-light;
-  text-align: center;
+  border: 1px solid $background-color;
+  text-align: left;
   -webkit-appearance: none;
+  transition: 0.3s;
+
+  &::placeholder {
+    color: transparentize($secondary-background-color, 0.3);
+  }
 
   &:focus {
     border-color: darken($grey-color-light, 10%);
+    background-color: transparentize($background-color, 0.7);
     outline: none;
+
+    &::placeholder {
+    }
   }
 }
 
@@ -224,6 +234,11 @@ div.support-footer {
     align-items: center;
     justify-content: space-between;
 
+    @include media-query($on-monitor) {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
     @include media-query($on-palm) {
       display: block;
     }
@@ -231,7 +246,7 @@ div.support-footer {
     & > .copy {
       margin-right: $spacing-unit * 2;
 
-      @include media-query($on-palm) {
+      @include media-query($on-monitor) {
         margin-right: 0;
         margin-bottom: $spacing-unit / 2;
         text-align: center;
@@ -293,7 +308,8 @@ div.support-footer {
 
     input.email-octopus-email-address {
       margin: 0;
-      padding: 10px;
+      padding: 14px;
+      line-height: 1.1;
       width: 100%;
       font-size: 16px;
       height: auto;
@@ -320,7 +336,7 @@ div.support-footer {
       background-color: $important-color;
       color: white;
       border-radius: 4px;
-      line-height: 1;
+      line-height: 1.1;
       transition: 0.3s;
       letter-spacing: 1px;
       cursor: pointer;
@@ -481,8 +497,8 @@ div.standalone-newsletter-form {
 
   button {
     margin: 0;
-    padding: 18px 16px;
-    font-size: 16px;
+    padding: 17px 16px;
+    font-size: 15px;
     white-space: nowrap;
     text-transform: uppercase;
     font-family: $base-font-family;
@@ -491,7 +507,7 @@ div.standalone-newsletter-form {
     background-color: $important-color;
     color: white;
     border-radius: 4px;
-    line-height: 1;
+    line-height: 1.1;
     transition: 0.3s;
     cursor: pointer;
 

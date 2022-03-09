@@ -27,14 +27,14 @@ We'll be using SST's [Live Lambda Development](https://docs.serverless-stack.com
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest layer-chrome-aws-lambda
 $ cd layer-chrome-aws-lambda
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "layer-chrome-aws-lambda",
   "stage": "dev",
@@ -60,8 +60,8 @@ Let's start by creating our API.
 
 {%change%} Replace the `stacks/MyStack.js` with the following.
 
-``` js
-import { LayerVersion } from "@aws-cdk/aws-lambda";
+```js
+import { LayerVersion } from "aws-cdk-lib/aws-lambda";
 import * as sst from "@serverless-stack/resources";
 
 const layerArn =
@@ -104,23 +104,13 @@ We then use the [`sst.Api`](https://docs.serverless-stack.com/constructs/Api) co
 
 Finally, we output the endpoint of our newly created API.
 
-Let's install the npm package we are using here.
-
-{%change%} From the project root run the following.
-
-``` bash
-$ npx sst add-cdk @aws-cdk/aws-lambda
-```
-
-The reason we are using the [**add-cdk**](https://docs.serverless-stack.com/packages/cli#add-cdk-packages) command instead of using an `npm install`, is because of [a known issue with AWS CDK](https://docs.serverless-stack.com/known-issues). Using mismatched versions of CDK packages can cause some unexpected problems down the road. The `sst add-cdk` command ensures that we install the right version of the package.
-
 ## Adding function code
 
 Now in our function, we'll be handling taking a screenshot of a given webpage.
 
 {%change%} Replace `src/lambda.js` with the following.
 
-``` js
+```js
 import chrome from "chrome-aws-lambda";
 
 // chrome-aws-lambda handles loading locally vs from the Layer
@@ -151,7 +141,7 @@ export async function handler(event) {
   return {
     statusCode: 200,
     headers: { "Content-Type": "text/plain" },
-    body: "Screenshot taken"
+    body: "Screenshot taken",
   };
 }
 ```
@@ -162,7 +152,7 @@ Now let's install the npm packages we need.
 
 {%change%} Run this from the root.
 
-``` bash
+```bash
 $ npm install puppeteer puppeteer-core chrome-aws-lambda
 ```
 
@@ -172,7 +162,7 @@ The `puppeteer` packages are used internally by the `chrome-aws-lambda` package.
 
 {%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
 
-``` bash
+```bash
 $ npx sst start
 ```
 
@@ -212,27 +202,27 @@ Now let's make a change to our function so that we return the screenshot directl
 
 {%change%} Replace the following lines in `src/lambda.js`.
 
-``` js
-  // Take the screenshot
-  await page.screenshot();
+```js
+// Take the screenshot
+await page.screenshot();
 
-  return {
-    statusCode: 200,
-    headers: { "Content-Type": "text/plain" },
-    body: "Screenshot taken"
-  };
+return {
+  statusCode: 200,
+  headers: { "Content-Type": "text/plain" },
+  body: "Screenshot taken",
+};
 ```
 
 with:
 
-``` js
-  return {
-    statusCode: 200,
-    // Return as binary data
-    isBase64Encoded: true,
-    headers: { "Content-Type": "image/png" },
-    body: await page.screenshot({ encoding: "base64" }),
-  };
+```js
+return {
+  statusCode: 200,
+  // Return as binary data
+  isBase64Encoded: true,
+  headers: { "Content-Type": "image/png" },
+  body: await page.screenshot({ encoding: "base64" }),
+};
 ```
 
 Here we are returning the screenshot image as binary data in the body. We are also setting the `isBase64Encoded` option to `true`.
@@ -245,16 +235,17 @@ Now if you go back and load the same link in your browser, you should see the sc
 
 {%change%} To wrap things up we'll deploy our app to prod.
 
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
+
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
 
 ## Cleaning up
 
 Finally, you can remove the resources created in this example using the following commands.
 
-``` bash
+```bash
 $ npx sst remove
 $ npx sst remove --stage prod
 ```
