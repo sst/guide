@@ -177,11 +177,19 @@ Stack dev-kinesisstream-my-stack
 
 The `ApiEndpoint` is the API we just created. Let's test our endpoint. Run the following in your terminal.
 
-```bash
-$ curl -X POST https://i8ia1epqnh.execute-api.us-east-1.amazonaws.com
-```
+Let's test our endpoint using the integrated [SST Console](https://console.serverless-stack.com).
 
-You should see `{status: 'successful'}` printed out. And if you head back to the debugger, you should see `Message queued!`.
+Note, The SST Console is a web based dashboard to manage your SST apps [Learn more](https://docs.serverless-stack.com/console).
+
+Go to the **Functions** tab and click **Invoke** button to send a `POST` request.
+
+![Functions tab invoke button](/assets/examples/kinesisstream/functions_tab_invoke_button.png)
+
+After you see a success status in the logs, go to the **Local** tab in the console to see all function invocations.
+
+![Local tab response without kinesis](/assets/examples/kinesisstream/Local_tab_response_without_kinesis.png)
+
+You should see `Message queued!` logged in the console.
 
 ## Sending message to our KinesisStream
 
@@ -221,11 +229,9 @@ Here we are getting the KinesisStream name from the environment variable, and th
 $ npm install aws-sdk
 ```
 
-And now if you head over to your terminal and make a request to our API. You'll notice in the debug logs that our consumer is called. And you should see `Message 1 processed!` and `Message 2 processed!` being printed out.
+And now if you head over to your console and invoke the function again, You'll notice in the **Local** tab that our consumersAdd are called. And you should see `Message 1 processed!` and `Message 2 processed!` being printed out.
 
-```bash
-$ curl -X POST https://i8ia1epqnh.execute-api.us-east-1.amazonaws.com
-```
+![Local tab response with kinesis](/assets/examples/kinesisstream/Local_tab_response_with_kinesis.png)
 
 ## Deploying to prod
 
