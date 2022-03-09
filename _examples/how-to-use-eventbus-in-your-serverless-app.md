@@ -4,7 +4,7 @@ title: How to use EventBus in your serverless app
 short_title: EventBus
 date: 2021-12-18 00:00:00
 lang: en
-index: 4
+index: 6
 type: async
 description: In this example we will look at how to use EventBus in your serverless app on AWS using Serverless Stack (SST). We'll be using the sst.Api and sst.EventBus to create a simple checkout system.
 short_desc: A simple EventBridge system with EventBus.
@@ -52,9 +52,9 @@ An SST app is made up of two parts.
 
    The code that's run when your API is invoked is placed in the `src/` directory of your project.
 
-## Adding EventBridge EventBus
+## Adding EventBridge EventBus 
 
-[Amazon EventBridge](https://aws.amazon.com/eventbridge/) is a serverless event bus that makes it easier to build event-driven applications at scale using events generated from your applications, integrated Software-as-a-Service (SaaS) applications, and AWS services
+[Amazon EventBridge](https://aws.amazon.com/eventbridge/) is a serverless event bus that makes it easier to build event-driven applications at scale using events generated from your applications, integrated Software-as-a-Service (SaaS) applications, and AWS services.
 
 {%change%} Replace the `stacks/MyStack.js` with the following.
 
@@ -81,7 +81,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-This creates an EventBridge EventBus using [`sst.EventBus`](https://docs.serverless-stack.com/constructs/EventBus). And it has two targets. Meaning when the event is published, both the functions will get run.
+This creates an EventBridge EventBus using [`sst.EventBus`](https://docs.serverless-stack.com/constructs/EventBus) and it has two targets. Meaning when the event is published, both the functions will get run.
 
 ## Setting up the API
 
@@ -181,13 +181,21 @@ Stack dev-eventbus-my-stack
     ApiEndpoint: https://gevkgi575a.execute-api.us-east-1.amazonaws.com
 ```
 
-The `ApiEndpoint` is the API we just created. Let's test our endpoint. Run the following in your terminal.
+The `ApiEndpoint` is the API we just created.
 
-```bash
-$ curl -X POST https://gevkgi575a.execute-api.us-east-1.amazonaws.com/order
-```
+Let's test our endpoint using the integrated [SST Console](https://console.serverless-stack.com).
 
-You should see `{status: 'successful'}` being printed out. And if you head back to the debugger, you should see `Order confirmed!`.
+Note, the SST Console is a web based dashboard to manage your SST apps [Learn more](https://docs.serverless-stack.com/console).
+
+Go to the **Functions** tab and click the **Invoke** button of the `POST /order` function to send a `POST` request.
+
+![Functions tab invoke button](/assets/examples/eventbus/functions_tab_invoke_button.png)
+
+You can also view the logs for all functions in the **Local** tab. Go to the Local tab, and you should see the logs from our Invoke here as well.
+
+![Local tab response without event](/assets/examples/eventbus/Local_tab_response_without_events.png)
+
+You should see `Order confirmed!` logged in the console.
 
 ## Publishing to our EventBus
 
@@ -244,13 +252,10 @@ Here we are getting the EventBus name from the environment variable, and then pu
 $ npm install aws-sdk
 ```
 
-And now if you head over to your terminal and make a request to our API.
+And now if you head over to your console and invoke the function again, You'll notice in the **Local** tab that our EventBus targets are called. And you should see `Receipt sent!` and `Item shipped!` printed out.
 
-```bash
-$ curl -X POST https://gevkgi575a.execute-api.us-east-1.amazonaws.com/order
-```
+![Local tab response with event](/assets/examples/eventbus/Local_tab_response_with_events.png)
 
-You'll notice inside the debug log that our EventBus targets are called. And you should see `Receipt sent!` and `Item shipped!` printed out.
 
 ## Deploying to prod
 
