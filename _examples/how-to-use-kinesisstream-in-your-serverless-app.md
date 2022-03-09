@@ -76,7 +76,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-This creates an Kinesis Data Stream using [`sst.KinesisStream`](https://docs.serverless-stack.com/constructs/KinesisStream). And it has a consumer that polls for messages from the KinesisStream. The consumer function will run when it has polled 1 or more messages.
+This creates an Kinesis Data Stream using [`sst.KinesisStream`](https://docs.serverless-stack.com/constructs/KinesisStream) and it has a consumer that polls for messages from the KinesisStream. The consumer function will run when it has polled 1 or more messages.
 
 ## Setting up the API
 
@@ -107,11 +107,11 @@ this.addOutputs({
 
 Our [API](https://docs.serverless-stack.com/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `src/lambda.js` will get invoked.
 
-We also pass in the url of our KinesisStream name to our API as an environment variable called `streamName`. And we allow our API to send messages to the KinesisStream we just created.
+We also pass in the stream name to our API as an environment variable called `streamName`. And we allow our API to send messages to the KinesisStream we just created.
 
 ## Adding function code
 
-We will create two functions, one for handling the API request, and one for the consumer.
+We will create three functions, one for handling the API request, and the other two for the consumers.
 
 {%change%} Replace the `src/lambda.js` with the following.
 
@@ -179,9 +179,9 @@ The `ApiEndpoint` is the API we just created.
 
 Let's test our endpoint using the integrated [SST Console](https://console.serverless-stack.com).
 
-Note, The SST Console is a web based dashboard to manage your SST apps [Learn more](https://docs.serverless-stack.com/console).
+Note, the SST Console is a web based dashboard to manage your SST apps [Learn more](https://docs.serverless-stack.com/console).
 
-Go to the **Functions** tab and click **Invoke** button to send a `POST` request.
+Go to the **Functions** tab and click the **Invoke** button of the `POST /` function to send a `POST` request.
 
 ![Functions tab invoke button](/assets/examples/kinesisstream/functions_tab_invoke_button.png)
 
