@@ -175,7 +175,7 @@ Stack dev-kinesisstream-my-stack
     ApiEndpoint: https://i8ia1epqnh.execute-api.us-east-1.amazonaws.com
 ```
 
-The `ApiEndpoint` is the API we just created. Let's test our endpoint. Run the following in your terminal.
+The `ApiEndpoint` is the API we just created.
 
 Let's test our endpoint using the integrated [SST Console](https://console.serverless-stack.com).
 
@@ -229,7 +229,7 @@ Here we are getting the KinesisStream name from the environment variable, and th
 $ npm install aws-sdk
 ```
 
-And now if you head over to your console and invoke the function again, You'll notice in the **Local** tab that our consumersAdd are called. And you should see `Message 1 processed!` and `Message 2 processed!` being printed out.
+And now if you head over to your console and invoke the function again, You'll notice in the **Local** tab that our consumers are called. And you should see `Message 1 processed!` and `Message 2 processed!` being printed out.
 
 ![Local tab response with kinesis](/assets/examples/kinesisstream/Local_tab_response_with_kinesis.png)
 
