@@ -19,8 +19,8 @@ Setting this all up can be pretty complicated in CDK. SST has a simple [`Auth`](
 
 {%change%} Add the following to a new file in `stacks/AuthStack.js`.
 
-``` js
-import * as iam from "@aws-cdk/aws-iam";
+```js
+import * as iam from "aws-cdk-lib/aws-iam";
 import * as sst from "@serverless-stack/resources";
 
 export default class AuthStack extends sst.Stack {
@@ -70,7 +70,7 @@ Let's quickly go over what we are doing here.
 
 - We are creating a new stack for our auth infrastructure. We don't need to create a separate stack but we are using it as an example to show how to work with multiple stacks.
 
-- The `Auth` construct creates a Cognito User Pool for us. We are using the `signInAliases` prop to state that we want our users to be login with their email.
+- The `Auth` construct creates a Cognito User Pool for us. We are using the `signInAliases` prop to state that we want our users to login with their email.
 
 - The `Auth` construct also creates an Identity Pool. The `attachPermissionsForAuthUsers` function allows us to specify the resources our authenticated users have access to.
 
@@ -80,21 +80,11 @@ Let's quickly go over what we are doing here.
 
 - Finally, we output the ids of the auth resources that've been created.
 
-We also need to install a CDK package for the IAM policy that we are creating.
-
-{%change%} Run the following in your project root.
-
-``` bash
-$ npx sst add-cdk @aws-cdk/aws-iam
-```
-
-We are using this command instead of `npm install` because there's [a known issue with CDK](https://docs.serverless-stack.com/known-issues) where mismatched versions can cause a problem.
-
 ### Securing Access to Uploaded Files
 
 We are creating a specific IAM policy to secure the files our users will upload to our S3 bucket.
 
-``` js
+```js
 // Policy granting access to a specific folder in the bucket
 new iam.PolicyStatement({
   actions: ["s3:*"],
@@ -117,7 +107,7 @@ Let's add this stack to our app.
 
 {%change%} Replace the `main` function in `stacks/index.js` with this.
 
-``` js
+```js
 export default function main(app) {
   const storageStack = new StorageStack(app, "storage");
 
@@ -136,7 +126,7 @@ Here you'll notice that we are passing in our API and S3 Bucket to the auth stac
 
 {%change%} Also, import the new stack at the top.
 
-``` js
+```js
 import AuthStack from "./AuthStack";
 ```
 
@@ -146,7 +136,7 @@ We also need to enable authentication in our API.
 
 {%change%} Add the following above the `defaultFunctionProps: {` line in `stacks/ApiStack.js`.
 
-``` js
+```js
 defaultAuthorizationType: "AWS_IAM",
 ```
 
@@ -160,7 +150,7 @@ Note that, you'll need to have `sst start` running for this to happen. If you ha
 
 You should see something like this at the end of the deploy process.
 
-``` bash
+```bash
 Stack dev-notes-auth
   Status: deployed
   Outputs:

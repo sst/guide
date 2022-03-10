@@ -1,4 +1,8 @@
 current:
+  title: "Upgrading to CDK v2"
+  desc: "Feb 2, 2022: Updating SST version for CDK v2 upgrade."
+
+v7-0-3:
   title: "Renaming lib to stacks"
   desc: "Sep 24, 2021: Renaming lib to stacks in the SST app."
 

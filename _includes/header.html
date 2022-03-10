@@ -1,6 +1,6 @@
 <header class="site-header" role="banner">
 
-<div class="site-announcement">
+<div class="site-announcement wrapper">
   If you like Serverless Stack, <a target="_blank" href="{{ site.sst_github_repo }}">give it a star on GitHub</a>! <i class="fa fa-star" aria-hidden="true"></i>
 </div>
 
@@ -16,27 +16,41 @@
           <img alt="{{ site.title | escape }}" src="/assets/lander/logo/sst-animation-svg3.svg" height="54" />
         </a>
         <a id="mobile-menu-button" class="menu-button" href="#">
-          <i class="fa fa-caret-down" aria-hidden="true"></i>
-          <i class="fa fa-caret-up" aria-hidden="true"></i>
+          <img src="/assets/lander/menu.svg" />
+          <img src="/assets/lander/menu-close.svg" />
         </a>
       </span>
-      <a class="links" href="{% link about/index.html %}">About</a>
       <a class="links" href="{{ site.docs_url }}">Docs</a>
       <a class="links" href="/#guide">Guide</a>
+      <a class="links" href="{% link about/index.html %}">About</a>
       <a class="links" href="{% link _examples/index.md %}">Examples</a>
     </div>
 
     <div class="col2">
       <div class="social">
-        <a title="GitHub" class="github" href="{{ site.sst_github_repo }}">
-          <i class="fa fa-github" aria-hidden="true"></i>
-          <span class="stars">
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <span id="github-star-count">3k</span>
+        <a title="Slack" class="slack" href="{{ site.slack_invite_url }}">
+          <span class="icon">
+            <img src="/assets/lander/slack-mark-white.svg" />
           </span>
         </a>
-        <a title="Slack" class="slack" href="{{ site.slack_invite_url }}">
-          <img src="/assets/lander/slack-mark-black.svg" />
+        <a title="GitHub" class="github" href="{{ site.sst_github_repo }}">
+          <span class="icon">
+            <i class="fa fa-github fa-lg"></i>
+          </span>
+          <span class="stars">
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <span id="github-star-count">{{ site.stats.github_short }}</span>
+          </span>
+        </a>
+        <a title="Twitter" class="twitter" href="{{ site.twitter_url }}">
+          <span class="icon">
+            <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
+          </span>
+        </a>
+        <a title="LinkedIn" class="linkedin" href="{{ site.linkedin_url }}">
+          <span class="icon">
+            <i class="fa fa-linkedin fa-lg" aria-hidden="true"></i>
+          </span>
         </a>
       </div>
       {% include search-field.html %}
@@ -48,8 +62,6 @@
       <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> We recently updated our guide. Read about it here.
     </a>
     -->
-  <script>
-  </script>
 </div>
 
 </header>

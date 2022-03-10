@@ -4,51 +4,72 @@
 
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
+        <a href="{{ "/" | relative_url}}">
+          <img alt="{{ site.title | escape }}" src="/assets/lander/logo/sst.svg" height="54" />
+        </a>
+      </div>
+      <div class="footer-col footer-col-2">
         <ul class="link-list">
-          <li class="site-title">Products</li>
+          <li class="col-title">Products</li>
           <li><a class="page-link" href="{{ site.sst_github_repo }}">SST</a></li>
           <li><a class="page-link" href="{{ site.seed_url }}">Seed</a></li>
           <li><a class="page-link" href="/#guide">Guide</a></li>
         </ul>
         <ul class="link-list">
-          <li class="site-title">Resources</li>
+          <li class="col-title">Resources</li>
           <li><a class="page-link" href="{{ site.docs_url }}">Docs</a></li>
           <li><a class="page-link" href="{{ site.forum_url }}">Forums</a></li>
           <li><a class="page-link" href="{% link _examples/index.md %}">Examples</a></li>
           <li><a class="page-link" href="{% link newsletter.md %}">Newsletter</a></li>
         </ul>
         <ul class="link-list">
-          <li class="site-title">Company</li>
+          <li class="col-title">Company</li>
           <li><a class="page-link" href="{% link blog/index.md %}">Blog</a></li>
           <li><a class="page-link" href="{% link about/index.html %}">About us</a></li>
           <li><a class="page-link" href="mailto:{{ site.email }}">Contact us</a></li>
           <li><a class="page-link" href="{% link about/culture.md %}">How we work</a></li>
-          <li><a class="page-link jobs" href="{% link careers.html %}">Join our team!</a></li>
         </ul>
       </div>
 
-      <div class="footer-col footer-col-2">
+      <div class="footer-col footer-col-3">
         <ul class="contact-list">
-          <li class="site-description">Helping you build full-stack serverless apps</li>
-          <li class="site-author">&copy; 2021 <a href="https://anoma.ly">Anomaly Innovations</a></li>
+          <li class="site-description">{{ site.description }}</li>
+          <li class="site-buttons">
+            <a class="sst-button primary" href="{% link careers.html %}">
+              Join our team!
+            </a>
+            <a class="sst-button secondary" href="mailto:{{ site.email }}">
+              Contact us
+            </a>
+          </li>
           <li class="social-links">
-            <a class="social-link" href="{{ site.github_repo }}">
-              <i class="fa fa-github-square" aria-hidden="true"></i>
+            <a href="{{ site.github_repo }}">
+              <span class="icon">
+                <i class="fa fa-github fa-lg" aria-hidden="true"></i>
+              </span>
             </a>
-            <a class="social-link" href="{{ site.slack_invite_url }}">
-              <img class="slack" width="30px" src="/assets/lander/slack-square.svg" />
+            <a class="slack" href="{{ site.slack_invite_url }}">
+              <span class="icon">
+                <img src="/assets/lander/slack-mark-white.svg" />
+              </span>
             </a>
-            <a class="social-link" href="{{ site.twitter_url }}">
-              <i class="fa fa-twitter-square" aria-hidden="true"></i>
+            <a href="{{ site.twitter_url }}">
+              <span class="icon">
+                <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
+              </span>
             </a>
-            <a class="social-link" href="{{ site.linkedin_url }}">
-              <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+            <a href="{{ site.linkedin_url }}">
+              <span class="icon">
+                <i class="fa fa-linkedin fa-lg" aria-hidden="true"></i>
+              </span>
             </a>
           </li>
         </ul>
       </div>
 
     </div>
+
+    <p class="site-author">&copy; 2022 <a href="https://anoma.ly">Anomaly Innovations</a></p>
 
   </div>
 
@@ -102,7 +123,16 @@
   /** Start mobile menu button code **/
   $("#mobile-menu-button").click(function(e) {
     e.preventDefault();
-    $("header.site-header").toggleClass("expanded");
+    var el = $("header.site-header");
+
+    if (el.hasClass("expanded")) {
+      $(document.body).css({overflow : "unset", position : "unset"});
+    }
+    else {
+      $(document.body).css({overflow : "hidden", position : "fixed"});
+    }
+
+    el.toggleClass("expanded");
   });
   /** End mobile menu button code **/
 
@@ -144,6 +174,44 @@
     }
   });
   /** End lander segmented control code **/
+
+  /** Start lander case studies carousel **/
+  $(function ($) {
+    // cache the slider object for later use
+    var slider = $("#case-studies .slideshow-container ul"),
+      // get the width of the container for later use
+      itemWidth = slider.parent().outerWidth();
+
+    // Handle clicks on the next button
+    slider.parent().parent().on("click", "button.prev", function (e) {
+      e.preventDefault();
+
+      slider.children("li:last").prependTo(slider);
+      slider.css("left", -itemWidth);
+
+      slider.animate(
+        { left: 0 },
+        300,
+        "swing"
+      );
+    });
+
+    // Handle clicks on the previous button
+    slider.parent().parent().on("click", "button.next", function (e) {
+      e.preventDefault();
+
+      slider.animate(
+        { left: -itemWidth },
+        300,
+        "swing",
+        function () {
+          slider.children("li:first").appendTo(slider);
+          slider.css("left", 0);
+        }
+      );
+    });
+  });
+  /** End lander case studies carousel **/
 
   /** Start ToC lander code **/
   $('.table-of-contents .chapters .expand').click(function() {

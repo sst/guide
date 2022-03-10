@@ -61,7 +61,7 @@ We are doing a couple of things of note here.
 
 - We are passing in the name of our DynamoDB table as an environment variable called `TABLE_NAME`. We'll need this to query our table.
 
-- The first route we are adding to our API is the `POSTS /notes` route. It'll be used to create a note.
+- The first route we are adding to our API is the `POST /notes` route. It'll be used to create a note.
 
 - We are giving our API permission to access our DynamoDB table by calling `this.api.attachPermissions([table])`.
 
@@ -140,7 +140,7 @@ There are some helpful comments in the code but let's go over them quickly.
 
 - Parse the input from the `event.body`. This represents the HTTP request body.
 - It contains the contents of the note, as a string — `content`.
-- It also contains an `attachment`, if one exists. It's the filename of file that will been uploaded to [our S3 bucket]({% link _chapters/create-an-s3-bucket-in-sst.md %}).
+- It also contains an `attachment`, if one exists. It's the filename of a file that will be uploaded to [our S3 bucket]({% link _chapters/create-an-s3-bucket-in-sst.md %}).
 - We read the name of our DynamoDB table from the environment variable using `process.env.TABLE_NAME`. You'll recall that we set this above while configuring our API.
 - The `userId` is the id for the author of the note. For now we are hardcoding it to `123`.  Later we'll be setting this based on the authenticated user.
 - Make a call to DynamoDB to put a new object with a generated `noteId` and the current date as the `createdAt`.

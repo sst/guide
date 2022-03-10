@@ -1,9 +1,13 @@
 ---
 layout: example
 title: How to create a CRUD API with serverless using DynamoDB
+short_title: CRUD DynamoDB
 date: 2021-02-04 00:00:00
 lang: en
+index: 4
+type: database
 description: In this example we will look at how to create a CRUD API with serverless using DynamoDB. We'll be using the sst.Api and sst.Table constructs from the Serverless Stack (SST).
+short_desc: Building a CRUD API with DynamoDB.
 repo: crud-api-dynamodb
 ref: how-to-create-a-crud-api-with-serverless-using-dynamodb
 comments_id: how-to-create-a-crud-api-with-serverless-using-dynamodb/2309

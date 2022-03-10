@@ -16,7 +16,7 @@ In the last section, we created a serverless REST API and deployed it. But there
 
 These two problems are connected. We need a way to allow users to sign up for our notes app and then only allow authenticated users to access it.
 
-In this section we are going to learn to do just that. Starting with getting a understanding of how authentication (and access control) works in the AWS world.
+In this section we are going to learn to do just that. Starting with getting an understanding of how authentication (and access control) works in the AWS world.
 
 ## Public API Architecture
 
@@ -26,7 +26,7 @@ For reference, here is what we have so far.
 
 Our users make a request to our serverless API. It starts by hitting our API Gateway endpoint. And depending on the endpoint we request, it'll forward that request to the appropriate Lambda function.
 
-In terms of access control, our API Gateway endpoint is allowed to invoke the Lambda functions we listed in the routes of our `stacks/ApiStack.js`. And if you'll recall, our Lambda function are allowed to connect to our DynamoDB tables.
+In terms of access control, our API Gateway endpoint is allowed to invoke the Lambda functions we listed in the routes of our `stacks/ApiStack.js`. And if you'll recall, our Lambda functions are allowed to connect to our DynamoDB tables.
 
 ``` js
 // Allow the API to access the table
@@ -57,7 +57,7 @@ To manage sign up and login functionality for our users, we'll be using an AWS s
 
 To manage access control to our AWS infrastructure we use another service called [Amazon Cognito Identity Pools](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html). This service decides if our previously authenticated user has access to the resources he/she is trying to connect to. Identity Pools can have different authentication providers (like Cognito User Pools, Facebook, Google etc.). In our case, our Identity Pool will be connected to our User Pool.
 
-If you are a little confused about the differences between a User Pool and and Identity Pool, don't worry. We've got a chapter to help you with just that — [Cognito User Pool vs Identity Pool]({% link _chapters/cognito-user-pool-vs-identity-pool.md %})
+If you are a little confused about the differences between a User Pool and an Identity Pool, don't worry. We've got a chapter to help you with just that — [Cognito User Pool vs Identity Pool]({% link _chapters/cognito-user-pool-vs-identity-pool.md %})
 
 #### Auth Role
 

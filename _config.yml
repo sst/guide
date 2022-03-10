@@ -17,7 +17,7 @@ title: Serverless Stack
 email: hello@serverless-stack.com
 jobs_email: jobs@serverless-stack.com
 description: > # this means to ignore newlines until "baseurl:"
-  Helping you build full-stack serverless apps
+  Making it easy to build full-stack serverless apps
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://serverless-stack.com" # the base hostname & protocol for your site, e.g. http://example.com
 
@@ -52,12 +52,19 @@ patreon_url: "https://www.patreon.com/serverless_stack"
 github_sponsor_url: "https://github.com/sponsors/jayair"
 twitter: "ServerlessStack"
 twitter_url: "https://twitter.com/ServerlessStack"
-slack_invite_url: "https://launchpass.com/serverless-stack"
+slack_invite_url: "https://serverless-stack.com/slack"
 linkedin_url: "https://www.linkedin.com/company/serverless-stack"
 
 social_cards_url: "https://social-cards.serverless-stack.com"
 
 permalink: /blog/:title:output_ext
+
+stats:
+  newsletter: "52,000"
+  newsletter_short: "52k"
+  slack: "1400"
+  github: "5200"
+  github_short: "5k"
 
 collections:
   chapters:
