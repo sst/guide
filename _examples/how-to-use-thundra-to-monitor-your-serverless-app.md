@@ -113,7 +113,7 @@ To get started, [sign up for an account](https://console.thundra.io/landing/) in
 
 Next, go to the [**Projects**](https://apm.thundra.io/projects) page of your Thundra dashboard and copy the API key.
 
-![Copy Thundra API key from dashboard](/assets/examples/thundra/thundra-api-key-page.jpeg)
+![Copy Thundra API key from dashboard](/assets/examples/thundra/thundra-api-key-page.png)
 
 {%change%} Create a `.env.local` file with the API key in your project root.
 
