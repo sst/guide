@@ -258,7 +258,7 @@ The `ApiEndpoint` is the API we just created. While the `SiteUrl` is where our A
 
 Let's test our endpoint using the integrated [SST Console](https://console.serverless-stack.com).
 
-Note, The SST Console is a web based dashboard to manage your SST apps [Learn more](https://docs.serverless-stack.com/console).
+Note, the SST Console is a web based dashboard to manage your SST apps [Learn more](https://docs.serverless-stack.com/console).
 
 Go to the **Functions** tab and click **Invoke** button to send a `POST` request.
 
