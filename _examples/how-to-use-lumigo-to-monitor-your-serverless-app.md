@@ -1,9 +1,13 @@
 ---
 layout: example
 title: How to use Lumigo to monitor your serverless app
+short_title: Lumigo
 date: 2021-11-26 00:00:00
 lang: en
+index: 4
+type: monitoring
 description: In this example we will look at how to use Lumigo with a serverless API to create and monitor a simple click counter app. We'll be using the Serverless Stack Framework (SST).
+short_desc: Using Lumigo to monitor a serverless app.
 repo: lumigo
 ref: how-to-use-lumigo-to-monitor-your-serverless-app
 comments_id: how-to-use-lumigo-to-monitor-your-serverless-app/xxxx
@@ -111,7 +115,7 @@ To enable Lambda monitoring for a function, add a `lumigo:auto-trace` tag and se
 
 ```js
 import * as sst from "@serverless-stack/resources";
-import * as cdk from "@aws-cdk/core";
+import * as cdk from "aws-cdk-lib";
 
 export default class MyStack extends sst.Stack {
   constructor(scope, id, props) {
@@ -124,7 +128,9 @@ export default class MyStack extends sst.Stack {
       },
     });
 
-    cdk.Tags.of(api.getFunction("GET /")).add("lumigo:auto-trace", "true");
+    // Enable auto trace only in prod
+    if (!scope.local)
+      cdk.Tags.of(api.getFunction("GET /")).add("lumigo:auto-trace", "true");
 
     // Show the endpoint in the output
     this.addOutputs({
@@ -141,48 +147,6 @@ this.getAllFunctions().forEach((fn) =>
   cdk.Tags.of(fn).add("lumigo:auto-trace", "true")
 );
 ```
-
-Let's test what we have so far.
-
-## Starting your dev environment
-
-{%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
-
-```bash
-$ npx sst start
-```
-
-The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
-
-```
-===============
- Deploying app
-===============
-
-Preparing your SST app
-Transpiling source
-Linting source
-Deploying stacks
-manitej-lumigo-my-stack: deploying...
-
- ✅  manitej-lumigo-my-stack
-
-
-Stack manitej-lumigo-my-stack
-  Status: deployed
-  Outputs:
-    ApiEndpoint: https://753gre9wkh.execute-api.us-east-1.amazonaws.com
-```
-
-The `ApiEndpoint` is the API we just created. Let's test the endpoint.
-
-Open the URL in your browser. You should see the _Hello World_ message.
-
-Now head over to your Lumigo dashboard to start exploring key performance metrics; invocations, errors, and duration from your function. The Dashboard aggregates data from all of the serverless functions running in your environment, enabling you to monitor their performance in one place. You can search and filter by name, AWS account, region, runtime, or any tag. Or click on a specific function to inspect its key performance metrics, distributed traces, and logs.
-
-![Lumigo-functions-page](/assets/examples/lumigo/lumigo-functions-page.jpeg)
-
-![Lumigo-functions-stats](/assets/examples/lumigo/lumigo-function-stats.jpeg)
 
 ## Deploying to prod
 
@@ -205,6 +169,30 @@ Stack prod-lumigo-my-stack
   Outputs:
     ApiEndpoint: https://k40qchmtvf.execute-api.ap-south-1.amazonaws.com
 ```
+
+The `ApiEndpoint` is the API we just created.
+
+Let's test our endpoint using the integrated [SST Console](https://console.serverless-stack.com).
+
+Note, the SST Console is a web based dashboard to manage your SST apps [Learn more](https://docs.serverless-stack.com/console).
+
+Run the below command to start SST console in **prod** stage.
+
+```bash
+npx sst console --stage prod
+```
+
+Go to the **Api** tab and click the **Send** button.
+
+![Api tab invoke button](/assets/examples/lumigo/api_tab_invoke_button.png)
+
+You will see the response of your function.
+
+Now head over to your Lumigo dashboard to start exploring key performance metrics; invocations, errors, and duration from your function. The Dashboard aggregates data from all of the serverless functions running in your environment, enabling you to monitor their performance in one place.
+
+![Lumigo-functions-page](/assets/examples/lumigo/lumigo-functions-page.png)
+
+![Lumigo-functions-stats](/assets/examples/lumigo/lumigo-function-stats.png)
 
 ## Cleaning up
 
