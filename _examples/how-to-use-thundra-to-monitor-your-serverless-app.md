@@ -118,10 +118,10 @@ Next, go to the [**Projects**](https://apm.thundra.io/projects) page of your Thu
 {%change%} Create a `.env.local` file with the API key in your project root.
 
 ```bash
-THUNDRA_API_KEY=<API_KEY>
+THUNDRA_APIKEY=<API_KEY>
 ```
 
-Note that, this file should not be committed to Git. If you are deploying the app through a CI service, configure the `THUNDRA_API_KEY` as an environment variable in the CI provider. If you are deploying through Seed, you can [configure this in your stage settings](https://seed.run/docs/storing-secrets.html).
+Note that, this file should not be committed to Git. If you are deploying the app through a CI service, configure the `THUNDRA_APIKEY` as an environment variable in the CI provider. If you are deploying through Seed, you can [configure this in your stage settings](https://seed.run/docs/storing-secrets.html).
 
 You can connect to Thundra in two ways,
 
@@ -147,7 +147,7 @@ if (!scope.local) {
   this.addDefaultFunctionLayers([thundraLayer]);
 
   this.addDefaultFunctionEnv({
-    THUNDRA_APIKEY: process.env.THUNDRA_API_KEY,
+    THUNDRA_APIKEY: process.env.THUNDRA_APIKEY,
     NODE_OPTIONS: "-r @thundra/core/dist/bootstrap/lambda",
   });
 }
@@ -156,38 +156,6 @@ if (!scope.local) {
 Note, to figure out the layer ARN for the latest version, [check the badge here](https://apm.docs.thundra.io/node.js/nodejs-integration-options).
 
 Note that `addDefaultFunctionLayers` and `addDefaultFunctionEnv` only affects the functions added after it's been called. So make sure to call it at the beginning of your stack definition if you want to monitor all the Lambda functions in your stack.
-
-Let's test what we have so far.
-
-## Starting your dev environment
-
-{%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
-
-```bash
-$ npx sst start
-```
-
-The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
-
-```
-===============
- Deploying app
-===============
-
-Preparing your SST app
-Transpiling source
-Linting source
-Deploying stacks
-manitej-thundra-my-stack: deploying...
-
- ✅  manitej-thundra-my-stack
-
-
-Stack manitej-thundra-my-stack
-  Status: deployed
-  Outputs:
-    ApiEndpoint: https://753gre9wkh.execute-api.us-east-1.amazonaws.com
-```
 
 ## Deploying to prod
 
