@@ -123,21 +123,6 @@ THUNDRA_API_KEY=<API_KEY>
 
 Note that, this file should not be committed to Git. If you are deploying the app through a CI service, configure the `THUNDRA_API_KEY` as an environment variable in the CI provider. If you are deploying through Seed, you can [configure this in your stage settings](https://seed.run/docs/storing-secrets.html).
 
-Now let's pass the API key to all the functions, modify the `Api` construct in `stacks/MyStack.js` like below.
-
-```js
-const api = new sst.Api(this, "Api", {
-  defaultFunctionProps: {
-    environment: {
-      THUNDRA_APIKEY: process.env.THUNDRA_API_KEY,
-    },
-  },
-  routes: {
-    "GET /": "src/lambda.handler",
-  },
-});
-```
-
 You can connect to Thundra in two ways,
 
 1. You can connect your AWS account and add our CloudFormation stack into your AWS.
@@ -145,39 +130,12 @@ You can connect to Thundra in two ways,
 
 For this tutorial let's follow the second way.
 
-Install Thundra to our project by running below command.
-
-```bash
-npm install @thundra/core --save
-```
-
-Configure your lambda to send data to thundra by wrapping your function with `thundra`.
-
-Replace `src/lambda.js` with below code.
-
-```js
-import Thundra from "@thundra/core";
-
-const thundra = Thundra({
-  apiKey: process.env.THUNDRA_API_KEY,
-});
-
-// wrap your lambda function with Thundra
-export const handler = thundra(async (event) => {
-  return {
-    statusCode: 200,
-    headers: { "Content-Type": "text/plain" },
-    body: `Hello, World! Your request was received`,
-  };
-});
-```
-
 You can then set the layer for all the functions in your stack using the [`addDefaultFunctionLayers`]({{ site.docs_url }}/constructs/Stack#adddefaultfunctionlayers) and [`addDefaultFunctionEnv`]({{ site.docs_url }}/constructs/Stack#adddefaultfunctionenv). Note we only want to enable this when the function is deployed, and not when using [Live Lambda Dev]({{ site.docs_url }}/live-lambda-development).
 
 {%change%} Add the following below the `super(scope, id, props)` line in `stacks/MyStack.js`.
 
 ```js
-// Configure thundra
+// Configure thundra to only prod
 if (!scope.local) {
   const thundraAWSAccountNo = 269863060030;
   const thundraNodeLayerVersion = 107; // Latest version at time of writing
@@ -231,17 +189,45 @@ Stack manitej-thundra-my-stack
     ApiEndpoint: https://753gre9wkh.execute-api.us-east-1.amazonaws.com
 ```
 
+## Deploying to prod
+
+{%change%} To wrap things up we'll deploy our app to prod.
+
+```bash
+$ npx sst deploy --stage prod
+```
+
+This allows us to separate our environments, so when we are working in `dev`, it doesn't break the app for our users.
+
+Once deployed, you should see something like this.
+
+```bash
+ ✅  prod-thundra-my-stack
+
+
+Stack prod-thundra-my-stack
+  Status: deployed
+  Outputs:
+    ApiEndpoint: https://k40qchmtvf.execute-api.ap-south-1.amazonaws.com
+```
+
 The `ApiEndpoint` is the API we just created.
 
 Let's test our endpoint using the integrated [SST Console](https://console.serverless-stack.com).
 
 Note, the SST Console is a web based dashboard to manage your SST apps [Learn more](https://docs.serverless-stack.com/console).
 
-Go to the **Functions** tab and click the **Invoke** button.
+Run the below command to start SST console in **prod** stage.
 
-![Functions tab invoke button](/assets/examples/thundra/functions_tab_invoke_button.png)
+```bash
+npx sst console --stage prod
+```
 
-You will see the response of your lambda.
+Go to the **Api** tab and click the **Send** button.
+
+![Api tab invoke button](/assets/examples/thundra/api_tab_invoke_button.png)
+
+You will see the response of your function.
 
 Now let's go to Thundra dashboard to check if we are able to monitor the invocation.
 
@@ -297,28 +283,6 @@ bundle: {
 Now in the Trace chart of the invocation you can see the code that is executed.
 
 ![time travel debugging demo](/assets/examples/thundra/time_travel_debugging_demo.png)
-
-## Deploying to prod
-
-{%change%} To wrap things up we'll deploy our app to prod.
-
-```bash
-$ npx sst deploy --stage prod
-```
-
-This allows us to separate our environments, so when we are working in `dev`, it doesn't break the app for our users.
-
-Once deployed, you should see something like this.
-
-```bash
- ✅  prod-thundra-my-stack
-
-
-Stack prod-thundra-my-stack
-  Status: deployed
-  Outputs:
-    ApiEndpoint: https://k40qchmtvf.execute-api.ap-south-1.amazonaws.com
-```
 
 ## Cleaning up
 
