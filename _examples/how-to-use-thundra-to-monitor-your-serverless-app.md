@@ -250,7 +250,7 @@ If you use SST and your code is bundled, you can use `thundra-esbuild-plugin` to
 Install the package by running below command.
 
 ```bash
-npm install @thundra/esbuild-plugin --save
+npm install --save-dev @thundra/esbuild-plugin
 ```
 
 Create a new file called `esbuild.js` inside `config` folder in root and add the below code.
