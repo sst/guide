@@ -1,78 +1,168 @@
 ////////////////
 // ABOUT PAGE //
 ////////////////
-main > .about-page {
+.home > .about-page {
 
   @include media-query($on-palm) {
     padding: 0 $spacing-unit / 2;
   }
 
   .header {
+    text-align: center;
 
-    h1 {
-      margin: 0 auto $spacing-unit / 2;
-      max-width: 570px;
-      padding-top: $spacing-unit;
-      font-size: 40px;
-      line-height: 1.4;
-      text-align: center;
+    .title {
+      margin-top: 2.5 * $spacing-unit - 5px;
+      display: inline-block;
+      position: relative;
+
+      @include media-query($on-palm) {
+        margin-top: 1.5 * $spacing-unit;
+      }
+
+      h1 {
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        font-size: 80px;
+        font-weight: 900;
+        line-height: 84px;
+        text-align: center;
+        color: $text-color;
+
+        @include media-query($on-palm) {
+          font-size: 38px;
+          line-height: 40px;
+        }
+      }
+      img:nth-child(2) {
+        position: absolute;
+        top: -32px;
+        left: -46px;
+
+        @include media-query($on-palm) {
+          width: 35px;
+          top: -24px;
+          left: 0px;
+        }
+      }
+
+      img:nth-child(3) {
+        position: absolute;
+        right: -63px;
+        bottom: -27px;
+
+        @include media-query($on-palm) {
+          width: 35px;
+          right: 92px;
+          bottom: -21px;
+        }
+      }
+
+      img {
+        @include media-query($on-monitor) { display: none; }
+        @include media-query($on-palm) { display: block; }
+
+        @include media-query(370px) { display: none; }
+      }
     }
     & > p {
       margin: 0 auto;
-      max-width: 570px;
+      padding-top: $spacing-unit / 2;
+      max-width: 780px;
       font-size: 20px;
+      line-height: 30px;
+      font-weight: 600;
       text-align: center;
       color: $secondary-text-color;
-      b {
-        font-weight: 600;
-      }
-    }
 
-
-    @include media-query($on-palm) {
-      h1 {
-        padding-top: $spacing-unit / 2;
-        font-size: 34px;
+      @include media-query($on-palm) {
+        padding-top: $spacing-unit + 10px;
+        font-size: 16px;
+        line-height: 24px;
       }
     }
   }
 
-  hr {
-    margin: $spacing-unit * 3 auto;
-    max-width: 400px;
-    border-color: darken($background-color, 10%);
+  & > hr {
+    margin: 2 * $spacing-unit auto 2 * $spacing-unit - 10px;
+    border: {
+      style: dashed;
+      color: $brand-color;
+    }
+    opacity: 0.4;
 
-    @include media-query($on-palm) {
-      margin: $spacing-unit * 1.5 auto;
+    &.header,
+    &.team {
+      @include media-query($on-palm) {
+        display: none;
+      }
     }
   }
 
   .products {
-    margin: 0 auto;
-    max-width: 960px;
+    margin: 0 -1 * $spacing-unit / 2;
 
     display: flex;
-    align-items: flex-start;
+    align-items: stretch;
     justify-content: space-between;
 
     @include media-query($on-palm) {
+      margin-top: $spacing-unit - 5px;
       display: block;
+      padding: 0 $spacing-unit / 2;
     }
 
     .product {
-      flex: 0 0 33%;
+      flex: 1 1 auto;
+      margin: 0 $spacing-unit / 2;
+      border-radius: 16px;
+      padding: $spacing-unit 2 * $spacing-unit - 10px 2 * $spacing-unit - 5px;
+      border: 1px dashed $important-color;
       box-sizing: border-box;
-      padding: 0 20px;
+
+      @include media-query($on-monitor) {
+        padding: $spacing-unit / 2;
+      }
 
       @include media-query($on-palm) {
         margin-bottom: $spacing-unit / 2;
-        padding: 0;
+        padding: $spacing-unit / 2;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      img {
+        @include media-query($on-palm) {
+          width: 20px;
+        }
+      }
+
+      hr {
+        border: {
+          style: dashed;
+          color: $important-color;
+        }
+        margin: $spacing-unit / 2 + 4px 0 $spacing-unit / 2;
+
+        @include media-query($on-palm) {
+          margin: $spacing-unit / 2 0 $spacing-unit / 2 - 3px;
+        }
       }
 
       h4 {
-        margin-bottom: 2px;
-        font-size: 24px;
-        font-weight: 600;
+        margin-bottom: 5px;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.5;
+        font-family: $base-font-family;
+        a {
+          color: $text-color;
+          &:hover {
+            color: $brand-color;
+          }
+        }
       }
       p {
         margin-bottom: 0;
@@ -81,95 +171,302 @@ main > .about-page {
     }
   }
 
-  .investors {
+  hr.team {
+    margin: 2 * $spacing-unit - 10px 0;
+  }
+
+  & > div.team {
     margin: 0 auto;
+    padding: 3 * $spacing-unit;
     text-align: center;
-    max-width: 720px;
+    background-color: $brand-color;
+    border: 1px dashed $background-color;
+    border-radius: 16px;
+    color: $background-color;
+
+    @include media-query($on-palm) {
+      margin-top: 2.5 * $spacing-unit;
+      padding: 2 * $spacing-unit + 10px $spacing-unit / 2 3 * $spacing-unit;
+      border: none;
+      box-shadow: 6px 9px 25px rgba(57, 92, 107, 0.3),
+                  0px 4px 12px rgba(57, 92, 107, 0.4);
+    }
 
     h3 {
-      font-size: 30px;
+      margin-bottom: $spacing-unit - 5px;
+      font-weight: 900;
+      font-size: 60px;
+      line-height: 1.2;
+
+      @include media-query($on-palm) {
+        margin-bottom: $spacing-unit;
+        font-size: 38px;
+        line-height: 1.2;
+      }
+    }
+
+    & > p {
+      margin: 0 auto;
+      max-width: 860px;
+
+      a {
+        font-weight: 600;
+        color: $important-color;
+        &:hover {
+          color: #E06543;
+        }
+      }
+    }
+
+    .profiles {
+      margin-top: 2 * $spacing-unit;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      position: relative;
+
+      @include media-query($on-palm) {
+        margin-top: 1.5 * $spacing-unit;
+        display: block;
+      }
+
+      & > div.left {
+        padding-right: 3 * $spacing-unit;
+
+        @include media-query($on-palm) {
+          padding: 0;
+        }
+      }
+      & > div.right {
+        padding-left: 3 * $spacing-unit;
+
+        @include media-query($on-palm) {
+          margin-top: $spacing-unit;
+          padding: 0;
+        }
+      }
+
+      & > hr {
+        margin: 0;
+        width: 1px;
+        height: 150px;
+        border-top: none;
+        border-right: 1px dashed $background-color;
+
+        @include media-query($on-palm) {
+          display: none;
+        }
+      }
+
+      a:first-child {
+        img {
+          border: 3px solid $background-color;
+          border-radius: 100%;
+        }
+      }
+
+      h5 {
+        margin-top: $spacing-unit / 2;
+        margin-bottom: 2px;
+        font-family: $base-font-family;
+        font-size: 20px;
+        font-weight: 600;
+
+        a {
+          color: $background-color;
+          &:hover {
+            color: $secondary-background-color;
+          }
+        }
+      }
+      p.bio {
+        margin: 0;
+        font-size: 20px;
+
+        @include media-query($on-palm) {
+          font-size: 16px;
+        }
+      }
+      .links {
+        margin-top: $spacing-unit / 2 - 5px;
+
+        @include media-query($on-palm) {
+          margin-top: $spacing-unit - 10px;
+        }
+
+        @extend %social-buttons;
+
+        a {
+          margin-right: $spacing-unit - 10px;
+
+          @include media-query($on-palm) {
+            margin-right: $spacing-unit / 2;
+          }
+        }
+      }
+
+      & > img.desktop {
+        position: absolute;
+        right: 5px;
+        bottom: -58px;
+
+        @include media-query($on-palm) { display: none; }
+        @include media-query($on-monitor) { display: none; }
+      }
+      & > img.mobile {
+        display: none;
+
+        @include media-query($on-monitor) {
+          display: block;
+          position: absolute;
+          right: -33px;
+          bottom: -35px;
+        }
+        @include media-query($on-palm) {
+          right: -4px;
+        }
+      }
+    }
+  }
+
+  .investors {
+    margin: 3 * $spacing-unit - 10px auto 0;
+    text-align: center;
+
+    @include media-query($on-palm) {
+      margin-top: 2 * $spacing-unit - 5px;
+    }
+
+    .section-title {
+      display: inline-block;
+      position: relative;
+      text-align: center;
+
+      h3 {
+        font-family: $base-font-family;
+        font-size: 60px;
+        line-height: 72px;
+        font-weight: 900;
+
+        @include media-query($on-palm) {
+          font-size: 38px;
+          line-height: 40px;
+        }
+
+        span {
+          color: $important-color;
+        }
+      }
+      img {
+        position: absolute;
+        top: -2px;
+        left: -97px;
+
+        @include media-query($on-palm) {
+          display: none;
+        }
+      }
     }
 
     p {
-      margin-bottom: $spacing-unit;
-      color: $secondary-text-color;
-      font-size: 17px;
-      a {
-        font-weight: 600;
-      }
+      margin-bottom: 1.5 * $spacing-unit;
+      color: $text-color;
     }
 
     .logos {
+
+      @include media-query($on-monitor) { margin: - $spacing-unit 0; }
+
       a {
         display: inline-block;
+        padding-top: $spacing-unit;
+        padding-bottom: $spacing-unit;
       }
       a:nth-child(1) {
-        margin-right: $spacing-unit;
-        vertical-align: -11px;
+        padding-right: 2 * $spacing-unit;
+
+        @include media-query($on-monitor) { padding: $spacing-unit; }
+        @include media-query($on-palm) { padding: 5px; }
+      }
+      a:nth-child(2) {
+        padding-left: 3 * $spacing-unit;
+        padding-right: 3 * $spacing-unit;
+        border: {
+          width: 0 1px;
+          style: dashed;
+          color: $text-color;
+        }
+        @include media-query($on-monitor) {
+          border: none;
+          padding: $spacing-unit;
+        }
+        @include media-query($on-monitor) {
+          padding: $spacing-unit / 2;
+        }
       }
       a:nth-child(3) {
-        margin-left: $spacing-unit;
-        img {
-          margin-top: 32px;
-        }
+        padding-left: 2 * $spacing-unit;
+
+        @include media-query($on-monitor) { padding: $spacing-unit; }
+        @include media-query($on-monitor) { padding: $spacing-unit / 2; }
       }
+    }
+
+    .names {
+      margin: 1.5 * $spacing-unit 0 0;
+      padding: $spacing-unit - 5px $spacing-unit 2 * $spacing-unit - 10px;
+      background-color: $text-color;
+      border-radius: 16px;
+      box-shadow: 6px 9px 25px rgba(57, 92, 107, 0.3),
+                  0px 4px 12px rgba(57, 92, 107, 0.4);
 
       @include media-query($on-palm) {
-        a {
-          display: block;
-        }
-        a:nth-child(1) {
-          margin-right: 0;
-          margin-bottom: $spacing-unit / 2 + 5px;
-        }
-        a:nth-child(2) {
-          margin-bottom: $spacing-unit / 2 + 5px;
-        }
-        a:nth-child(3) {
-          margin-left: 0;
-          img {
-            margin-top: 0;
-          }
-        }
+        padding: 0 $spacing-unit / 2 $spacing-unit;
       }
     }
 
     ul {
-      margin: $spacing-unit -10px 0 0;
-      padding: 0;
+      margin: 0 auto;
       list-style: none;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-
-      @include media-query($on-palm) {
-        margin: $spacing-unit / 2 0 0 0;
-      }
+      max-width: 952px;
 
       li {
-        flex: 0 0 25%;
-        margin-top: $spacing-unit / 2 + 10px;
-        margin-right: 10px;
-        max-width: 156px;
+        flex: 0 0 300px - 1.5 * $spacing-unit;
+        margin: 0 $spacing-unit - 8px;
+        padding-top: $spacing-unit;
+        padding-bottom: $spacing-unit / 2;
         text-align: left;
+        border-bottom: 1px dashed $important-color;
 
         @include media-query($on-palm) {
-          margin-right: 0;
-          flex: 0 1 50%;
+          margin: 0 $spacing-unit 0 0;
+          flex: 1 1;
+        }
+
+        &:last-child {
+          border: none;
         }
 
         a {
-          font-weight: 600;
-          font-size: 17px;
-          @include media-query($on-palm) {
-            font-size: 15px;
+          font-weight: bold;
+          font-size: 16px;
+          color: $background-color;
+          white-space: nowrap;
+
+          &:hover {
+            color: $secondary-background-color;
           }
         }
         p {
-          margin: 0;
-          font-size: 13px;
-          color: $tertiary-text-color;
+          margin: 6px 0 0;
+          font-size: 16px;
+          color: $background-color;
+          opacity: 0.5;
+          white-space: nowrap;
         }
 
         &:last-child {
@@ -180,81 +477,38 @@ main > .about-page {
     }
   }
 
-  .founders {
-    margin: 0 auto;
-    max-width: 720px;
-    text-align: center;
-
-    h3 {
-      font-size: 30px;
-      margin-bottom: $spacing-unit;
-    }
-
-    p {
-      color: $secondary-text-color;
-      font-size: 17px;
-      a {
-        font-weight: 600;
-      }
-      b {
-        font-weight: 600;
-      }
-    }
-  }
-
-  .team {
-    margin: 0 auto;
-    max-width: 720px;
-    text-align: center;
-
-    h3 {
-      margin-bottom: $spacing-unit - 2px;
-      font-size: 30px;
-    }
-
-    .profiles {
-      margin-bottom: $spacing-unit;
-
-      a {
-        &:first-child {
-          margin-right: $spacing-unit;
-        }
-        img {
-          border-radius: 100%;
-        }
-      }
-    }
-
-    p {
-      color: $secondary-text-color;
-      font-size: 17px;
-      a {
-        font-weight: 600;
-      }
-      b {
-        font-weight: 600;
-      }
-    }
-  }
-
   .community {
-    margin: 0 auto;
-    max-width: 720px;
+    margin: 3 * $spacing-unit - 10px auto 0;
     text-align: center;
 
-    h3 {
-      font-size: 30px;
+    @include media-query($on-palm) {
+      margin-top: 2 * $spacing-unit - 5px;
     }
 
-    p {
-      margin-bottom: $spacing-unit;
-      color: $secondary-text-color;
-      font-size: 17px;
-      a {
-        font-weight: 600;
+    h3 {
+      margin-bottom: $spacing-unit - 10px;
+      font-family: $base-font-family;
+      font-size: 60px;
+      line-height: 72px;
+      font-weight: 900;
+
+      @include media-query($on-palm) {
+        margin-bottom: $spacing-unit;
+        font-size: 38px;
+        line-height: 40px;
       }
-      b {
-        font-weight: 600;
+
+      span {
+        color: $important-color;
+      }
+    }
+
+    & > p {
+      margin-bottom: 2 * $spacing-unit - 5px;
+      color: $text-color;
+
+      @include media-query($on-palm) {
+        display: none;
       }
     }
 
@@ -265,56 +519,128 @@ main > .about-page {
       align-items: center;
       justify-content: center;
 
-      a {
-        margin-right: $spacing-unit;
-        color: $tertiary-text-color;
+      @include media-query($on-palm) {
+        margin: 0 auto;
+        flex-wrap: wrap;
+        max-width: 320px;
+      }
+
+      & > div {
+        padding: $spacing-unit - 5px 3 * $spacing-unit - 5px;
+        border: {
+          width: 0 1px 0 0;
+          style: dashed;
+          color: $text-color;
+        }
+
+        @include media-query($on-monitor) {
+          padding: $spacing-unit - 5px $spacing-unit;
+        }
+
+        @include media-query($on-palm) {
+          padding: $spacing-unit;
+          flex: 1 1;
+        }
+
+        &:nth-child(1) {
+          @include media-query($on-palm) {
+            border-width: 0 1px 1px 0
+          }
+        }
+        &:nth-child(2) {
+          @include media-query($on-palm) {
+            border-width: 0 0 1px 0
+          }
+        }
 
         &:last-child {
-          margin-right: 0;
+          border: none;
+        }
+      }
+
+      p {
+        margin-bottom: $spacing-unit;
+        font-weight: bold;
+      }
+
+      a {
+        padding: 0;
+        width: 52px;
+        height: 52px;
+        line-height: 52px;
+        font-size: 32px;
+
+        &.github {
+          font-size: 37px;
         }
 
-        &:hover {
-          color: $secondary-text-color;
-          img { opacity: 0.55; }
-        }
-
-        i {
-          font-size: $size;
-
-          @include media-query($on-palm) {
-            font-size: 32px;
-          }
-        }
         img {
-          width: $size - 10px;
-          height: $size - 10px;
-          vertical-align: -1px;
-          opacity: 0.4;
-          transition: opacity 0.3s ease-in-out;
+          width: 32px;
+          vertical-align: -5px;
+        }
 
-          @include media-query($on-palm) {
-            width: 30px;
-            height: 30px;
-          }
+        i.fa {
+          vertical-align: -1px;
         }
       }
     }
   }
 
   .info {
-    margin-bottom: $spacing-unit * 3;
-    text-align: center;
+    margin: 2.5 * $spacing-unit 0 $spacing-unit * 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    & > p {
-      margin-bottom: 10px;
-      color: $tertiary-text-color;
-      font-size: 28px;
-      a {
-        color: $tertiary-text-color;
+    @include media-query($on-palm) {
+      margin-bottom: 2 * $spacing-unit - 5px;
+    }
+
+    & > div {
+      text-align: center;
+      position: relative;
+
+      img.desktop {
+        position: absolute;
+        left: -386px;
+        top: -39px;
+
+        @include media-query($on-monitor) {
+          display: none;
+        }
+      }
+      img.mobile {
+        display: none;
+        position: absolute;
+        left: -36px;
+        top: 44px;
+
+        @include media-query($on-monitor) {
+          display: block;
+        }
+        @include media-query($on-palm) {
+          left: -42px;
+          top: 31px;
+        }
       }
     }
-    @include media-query($on-palm) {
-      margin-bottom: $spacing-unit * 2;
+
+    p {
+      margin-bottom: 20px;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+
+      @include media-query($on-palm) {
+        font-size: 20px;
+      }
+
+      a {
+        color: $text-color;
+        &:hover {
+          color: $secondary-text-color;
+        }
+      }
     }
   }
 

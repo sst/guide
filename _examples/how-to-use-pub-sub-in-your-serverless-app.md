@@ -1,9 +1,13 @@
 ---
 layout: example
 title: How to use Pub/Sub in your serverless app
+short_title: Pub/Sub
 date: 2021-02-08 00:00:00
 lang: en
+index: 3
+type: async
 description: In this example we will look at how to use SNS in your serverless app on AWS using Serverless Stack (SST). We'll be using the sst.Api and sst.Topic to create a simple checkout system.
+short_desc: A simple pub/sub system with SNS.
 repo: pub-sub
 ref: how-to-use-pub-sub-in-your-serverless-app
 comments_id: how-to-use-pub-sub-in-your-serverless-app/2315

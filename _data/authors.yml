@@ -3,9 +3,11 @@ frank:
   picture: /assets/lander/profiles/frank.png
   linkedin: fanjiewang
   twitter: fanjiewang
+  github: fwang
 
 jay:
   name: Jay
   picture: /assets/lander/profiles/jay.png
   linkedin: jayair
   twitter: jayair
+  github: jayair

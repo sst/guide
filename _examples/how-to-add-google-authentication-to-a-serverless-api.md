@@ -1,9 +1,13 @@
 ---
 layout: example
 title: How to add Google authentication to a serverless API
+short_title: Google Auth
 date: 2021-02-08 00:00:00
 lang: en
+index: 3
+type: iam-auth
 description: In this example we will look at how to add Google authentication to a serverless API using Serverless Stack (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
+short_desc: Authenticating a serverless API with Google.
 repo: api-auth-google
 ref: how-to-add-google-authentication-to-a-serverless-api
 comments_id: how-to-add-google-authentication-to-a-serverless-api/2318

@@ -1,0 +1,105 @@
+%sst-button {
+  border-radius: 4px;
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  font-weight: 600;
+  box-sizing: border-box;
+  padding: 24px 40px 23px;
+  text-align: center;
+  white-space: nowrap;
+
+  @include media-query($on-palm) {
+    padding: 9px 36px;
+  }
+
+  &.disabled { opacity: 0.5; }
+}
+
+%sst-button-outline {
+  font-size: 18px;
+  line-height: 20px;
+
+  @include media-query($on-palm) {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  &:before {
+    border-radius: 4px;
+    box-sizing: border-box;
+    border: {
+      width: 1px;
+      style: solid;
+    }
+    content: "";
+    display: block;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    top: 5px;
+    left: -5px;
+    //z-index: -1;
+  }
+}
+
+%sst-button-primary-pseudo {
+  &:visited { color: white; }
+
+  &:before { border-color: $important-color; }
+
+  &:hover { background-color: #E06543; }
+  &:hover:before { border-color: #E06543; }
+
+  &:active { background-color: #D35431; }
+  &:active:before { border-color: #D35431; }
+}
+
+.sst-button.primary {
+  @extend %sst-button;
+  @extend %sst-button-outline;
+  @extend %sst-button-primary-pseudo;
+
+  color: white;
+  background: $important-color;
+  box-shadow: 0px 6px 12px -2px transparentize(#FFC2B4, 0.11);
+
+}
+
+.sst-button.secondary {
+  @extend %sst-button;
+  @extend %sst-button-outline;
+
+  color: $text-color;
+  background: white;
+  box-shadow: 0px 6px 12px -2px transparentize(#FAECE8, 0.11);
+
+  &:visited { color: $text-color; }
+
+  &:before { border-color: white; }
+
+  &:hover { background-color: $background-color; }
+  &:hover:before { border-color: $background-color; }
+
+  &:active { background-color: #FFF8F4; }
+  &:active:before { border-color: #FFF8F4; }
+}
+
+.sst-button.tertiary {
+  @extend %sst-button;
+
+  font-size: 16px;
+  line-height: 18px;
+  color: $important-color;
+  border: 1px dashed $important-color;
+
+  &:hover {
+    color: #E06543;
+    border-color: #E06543;
+  }
+
+  &:active {
+    color: #D35431;
+    border-color: #D35431;
+  }
+}

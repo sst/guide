@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://discourse.serverless-stack.com"><img alt="Discourse posts" src="https://img.shields.io/discourse/https/discourse.serverless-stack.com/posts.svg?style=for-the-badge" /></a>
   <a href="https://twitter.com/ServerlessStack"><img alt="Twitter follow" src="https://img.shields.io/twitter/follow/serverlessstack.svg?label=twitter&style=for-the-badge" /></a>
-  <a href="https://launchpass.com/serverless-stack"><img alt="Chat on Slack" src="https://img.shields.io/badge/CHAT-ON%20SLACK-brightgreen?style=for-the-badge" /></a>
+  <a href="https://serverless-stack.com/slack"><img alt="Chat on Slack" src="https://img.shields.io/badge/CHAT-ON%20SLACK-brightgreen?style=for-the-badge" /></a>
 </p>
 
 ------------------------------------------------------------------------------------
@@ -120,7 +120,7 @@ Thanks to these folks for their contributions to the content of Serverless Stack
 This repo is maintained by [Serverless Stack](https://serverless-stack.com).
 
 
-[Slack]: https://launchpass.com/serverless-stack
+[Slack]: https://serverless-stack.com/slack
 [Discourse]: https://discourse.serverless-stack.com
 [Contributing]: CONTRIBUTING.md
 [PR]: ../../compare

@@ -57,7 +57,7 @@ To fix this we need a component that works with React Router and React Bootstrap
 {%change%} Run the following command in the `frontend/` directory and **not** in your project root.
 
 ``` bash
-$ npm install react-router-bootstrap
+$ npm install react-router-bootstrap@0.25.0
 ```
 
 Let's also import it.

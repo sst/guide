@@ -1,9 +1,13 @@
 ---
 layout: example
 title: How to add Auth0 authentication to a serverless API
+short_title: Auth0 IAM
 date: 2021-02-23 00:00:00
 lang: en
+index: 5
+type: iam-auth
 description: In this example we will look at how to add Auth0 authentication to a serverless API using Serverless Stack (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
+short_desc: Authenticating a serverless API with Auth0.
 repo: api-auth-auth0
 ref: how-to-add-auth0-authentication-to-a-serverless-api
 comments_id: how-to-add-auth0-authentication-to-a-serverless-api/2333
