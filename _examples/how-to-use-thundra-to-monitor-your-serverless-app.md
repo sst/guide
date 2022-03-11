@@ -231,7 +231,7 @@ You will see the response of your function.
 
 Now let's go to Thundra dashboard to check if we are able to monitor the invocation.
 
-The [Serverless view](https://apm.thundra.io/functions) aggregates data from all of the serverless functions running in your environment, enabling you to monitor their performance in one place. You can search and filter by name, AWS account, region, runtime, or any tag. Or click on a specific function to inspect its key performance metrics, distributed traces, and logs.
+The [Functions view](https://apm.thundra.io/functions) aggregates data from all of the serverless functions running in your environment, enabling you to monitor their performance in one place.
 
 ![Thundra functions dashboard](/assets/examples/thundra/thundra-initial-page-after-start.png)
 
