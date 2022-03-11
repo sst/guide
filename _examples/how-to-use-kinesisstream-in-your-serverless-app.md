@@ -185,7 +185,7 @@ Go to the **Functions** tab and click the **Invoke** button of the `POST /` func
 
 ![Functions tab invoke button](/assets/examples/kinesisstream/functions_tab_invoke_button.png)
 
-After you see a success status in the logs, go to the **Local** tab in the console to see all function invocations.
+After you see a success status in the logs, go to the **Local** tab in the console to see all function invocations. Local tab displays **real-time logs** from your Live Lambda Dev environment.
 
 ![Local tab response without kinesis](/assets/examples/kinesisstream/Local_tab_response_without_kinesis.png)
 
@@ -223,7 +223,7 @@ export async function handler() {
 
 Here we are getting the KinesisStream name from the environment variable, and then sending a message to it.
 
-{%change%} Let's install the `aws-sdk`.
+{%change%} Let's install the `aws-sdk` in the root.
 
 ```bash
 $ npm install aws-sdk

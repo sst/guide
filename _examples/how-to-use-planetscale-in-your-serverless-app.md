@@ -188,7 +188,7 @@ We also pass in the credentials we created to our API through environment variab
 
 Now in our function, we'll start by reading from our PlanetScale table.
 
-To access PlanetScale database we'll be using a package `planetscale-node`, install it the by running below command.
+To access PlanetScale database we'll be using a package `planetscale-node`, install it the by running below command in the root.
 
 ```bash
 npm install planetscale-node
