@@ -10,7 +10,7 @@ description: In this example we will look at how to use EventBus in your serverl
 short_desc: A simple EventBridge system with EventBus.
 repo: eventbus
 ref: how-to-use-eventbus-in-your-serverless-app
-comments_id: how-to-use-eventbus-in-your-serverless-app/2315
+comments_id: how-to-use-eventbus-in-your-serverless-app/2607
 ---
 
 In this example we will look at how to use EventBus to create [an EventBridge system](https://aws.amazon.com/eventbridge/) in our serverless app using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be creating a simple checkout flow.

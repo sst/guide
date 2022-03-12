@@ -10,7 +10,7 @@ description: In this example we will look at how to use Lumigo with a serverless
 short_desc: Using Lumigo to monitor a serverless app.
 repo: lumigo
 ref: how-to-use-lumigo-to-monitor-your-serverless-app
-comments_id: how-to-use-lumigo-to-monitor-your-serverless-app/xxxx
+comments_id: how-to-use-lumigo-to-monitor-your-serverless-app/2615
 ---
 
 In this example we will look at how to use [Lumigo](https://lumigo.io/) to monitor the Lambda functions in your [SST serverless application]({{ site.sst_github_repo }}).
