@@ -257,9 +257,11 @@ The `ApiEndpoint` is the API we just created. While the `SiteUrl` is where our A
 
 Let's test our endpoint with the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
-Go to the **Functions** tab and click **Invoke** button to send a `POST` request.
+Go to the **API** tab and click **Send** button to send a `POST` request.
 
-![invocation response](/assets/examples/angular-app/invocation_response.png)
+Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` and `ApiGatewayV1Api` constructs. Set the headers, query params, request body, and view the function logs with the response.
+
+![API explorer invocation response](/assets/examples/angular-app/api-explorer-invocation-response.png)
 
 You should see a `0` in the response body.
 
@@ -291,14 +293,14 @@ In Angular, we have our `environment.ts` and `environment.prod.ts` files defined
 
 ```ts
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { writeFile } = require('fs');
+const { writeFile } = require("fs");
 
 const targetPath = `./src/environments/environment.ts`;
 
 const environmentFileContent = `
 export const environment = {
   production: ${false},
-  API_URL:  "${process.env['DEV_API_URL']}",
+  API_URL:  "${process.env["DEV_API_URL"]}",
 };
 `;
 // write the content to the respective file
@@ -463,7 +465,7 @@ And if you head over to your browser and click the button again, you should see 
 
 Also let's go to the **DynamoDB** tab in the SST Console and check that the value has been updated in the table.
 
-![DynamoDB table view of counter table](/assets/examples/angular-app/dynamo_table_view_of_counter_table.png)
+![DynamoDB table view of counter table](/assets/examples/angular-app/dynamo-table-view-of-counter-table.png)
 
 ## Deploying to prod
 
@@ -519,6 +521,16 @@ Stack prod-angular-app-my-stack
     ApiEndpoint: https://k40qchmtvf.execute-api.ap-south-1.amazonaws.com
     SiteUrl: https://d1wuzrecqjflrh.cloudfront.net
 ```
+
+Run the below command to open the SST Console in **prod** stage to test the production endpoint.
+
+```bash
+npx sst console --stage prod
+```
+
+Go to the **API** tab and click **Send** button to send a `POST` request.
+
+![API explorer prod invocation response](/assets/examples/angular-app/api-explorer-prod-invocation-response.png)
 
 If you head over to the `SiteUrl` in your browser, you should see your new Angular app in action!
 
