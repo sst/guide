@@ -257,9 +257,9 @@ The `ApiEndpoint` is the API we just created. While the `SiteUrl` is where our A
 
 Let's test our endpoint with the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
-Go to the **Api** tab and click **Send** button to send a `POST` request.
+Go to the **API** tab and click **Send** button to send a `POST` request.
 
-Note, The API explorer lets you make HTTP requests to any of the routes in your `Api` and `ApiGatewayV1Api` constructs. Set the headers, query params, request body, and view the function logs with the response.
+Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` and `ApiGatewayV1Api` constructs. Set the headers, query params, request body, and view the function logs with the response.
 
 ![invocation response](/assets/examples/angular-app/invocation-response.png)
 
@@ -528,7 +528,7 @@ Run the below command to open the SST Console in **prod** stage to test the prod
 npx sst console --stage prod
 ```
 
-Go to the **Api** tab and click **Send** button to send a `POST` request.
+Go to the **API** tab and click **Send** button to send a `POST` request.
 
 ![invocation response](/assets/examples/angular-app/prod-invocation-response.png)
 
