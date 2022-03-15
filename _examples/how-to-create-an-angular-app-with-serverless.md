@@ -261,7 +261,7 @@ Go to the **API** tab and click **Send** button to send a `POST` request.
 
 Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` and `ApiGatewayV1Api` constructs. Set the headers, query params, request body, and view the function logs with the response.
 
-![invocation response](/assets/examples/angular-app/invocation-response.png)
+![API explorer invocation response](/assets/examples/angular-app/api-explorer-invocation-response.png)
 
 You should see a `0` in the response body.
 
@@ -530,7 +530,7 @@ npx sst console --stage prod
 
 Go to the **API** tab and click **Send** button to send a `POST` request.
 
-![invocation response](/assets/examples/angular-app/prod-invocation-response.png)
+![API explorer prod invocation response](/assets/examples/angular-app/api-explorer-prod-invocation-response.png)
 
 If you head over to the `SiteUrl` in your browser, you should see your new Angular app in action!
 
