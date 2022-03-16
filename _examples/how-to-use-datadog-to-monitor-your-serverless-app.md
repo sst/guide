@@ -95,7 +95,7 @@ We are using the SST [`Api`](https://docs.serverless-stack.com/constructs/Api) c
 
 {%change%} Your `src/lambda.js` should look something like this.
 
-``` js
+```js
 export async function handler(event) {
   return {
     statusCode: 200,
@@ -112,7 +112,7 @@ Now let's setup [Datadog](https://www.datadoghq.com/) to monitor our API. Make s
 {%change%} Run the following in the project root.
 
 ```bash
-$ npm install --save-dev datadog-cdk-constructs
+$ npm install --save-dev datadog-cdk-constructs-v2
 ```
 
 Next, go to the [**API keys**](https://app.datadoghq.com/organization-settings/api-keys) page of your Datadog dashboard and copy the API key.
@@ -121,7 +121,7 @@ Next, go to the [**API keys**](https://app.datadoghq.com/organization-settings/a
 
 {%change%} Create a `.env.local` file with the API key in your project root.
 
-``` bash
+```bash
 DATADOG_API_KEY=<API_KEY>
 ```
 
@@ -146,7 +146,7 @@ datadog.addLambdaFunctions(this.getAllFunctions());
 {%change%} Also make sure to include the Datadog construct.
 
 ```js
-import { Datadog } from "datadog-cdk-constructs";
+import { Datadog } from "datadog-cdk-constructs-v2";
 ```
 
 Note that [`getAllFunctions`]({{ site.docs_url }}/constructs/Stack#getallfunctions) gives you an array of all the Lambda functions created in this stack. If you want to monitor all the functions in your stack, make sure to call it at the end of your stack definition.
