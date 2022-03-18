@@ -35,8 +35,8 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 ```json
 {
   "name": "rest-api-postgresql",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -174,17 +174,17 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-rest-api-postgresql-my-stack: deploying...
+manitej-rest-api-postgresql-my-stack: deploying...
 
- ✅  dev-rest-api-postgresql-my-stack
+ ✅  manitej-rest-api-postgresql-my-stack
 
 
-Stack dev-rest-api-postgresql-my-stack
+Stack manitej-rest-api-postgresql-my-stack
   Status: deployed
   Outputs:
     SecretArn: arn:aws:secretsmanager:us-east-1:087220554750:secret:CounterDBClusterSecret247C4-MhR0f3WMmWBB-dnCizN
     ApiEndpoint: https://u3nnmgdigh.execute-api.us-east-1.amazonaws.com
-    ClusterIdentifier: dev-rest-api-postgresql-counterdbcluster09367634-1wjmlf5ijd4be
+    ClusterIdentifier: manitej-rest-api-postgresql-counterdbcluster09367634-1wjmlf5ijd4be
 ```
 
 The `ApiEndpoint` is the API we just created. While the `SecretArn` is what we need to login to our database securely. The `ClusterIdentifier` is the id of our database cluster.
