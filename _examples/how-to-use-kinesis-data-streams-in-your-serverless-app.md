@@ -1,7 +1,7 @@
 ---
 layout: example
-title: How to use Kinesis Streams in your serverless app
-short_title: Kinesis Streams
+title: How to use Kinesis data streams in your serverless app
+short_title: Kinesis data streams
 date: 2021-02-08 00:00:00
 lang: en
 index: 5
@@ -9,8 +9,8 @@ type: async
 description: In this example we will look at how to use Kinesis Data Streams in your serverless app on AWS using Serverless Stack (SST). We'll be using the API and KinesisStream constructs to create it.
 short_desc: A simple Kinesis Data Stream system.
 repo: kinesisstream
-ref: how-to-use-kinesisstream-in-your-serverless-app
-comments_id: how-to-use-kinesisstream-in-your-serverless-app/2600
+ref: how-to-use-kinesis-data-streams-in-your-serverless-app
+comments_id: how-to-use-kinesis-data-streams-in-your-serverless-app/2600
 ---
 
 In this example we will look at how to create a Kinesis Data Stream in our serverless app using [Serverless Stack (SST)]({{ site.sst_github_repo }}).

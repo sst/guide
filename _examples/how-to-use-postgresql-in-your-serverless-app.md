@@ -35,8 +35,8 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 ```json
 {
   "name": "rest-api-postgresql",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -59,70 +59,51 @@ An SST app is made up of two parts.
 {%change%} Replace the `stacks/MyStack.js` with the following.
 
 ```js
-import * as cdk from "aws-cdk-lib";
-import * as ec2 from "aws-cdk-lib/aws-ec2";
-import * as rds from "aws-cdk-lib/aws-rds";
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
   constructor(scope, id, props) {
     super(scope, id, props);
 
-    const defaultDatabaseName = "CounterDB";
+    const DATABASE = "CounterDB";
 
-    // Create the VPC needed for the Aurora Serverless DB cluster
-    const vpc = new ec2.Vpc(this, "CounterVPC");
-
-    // Create the Serverless Aurora DB cluster
-    const cluster = new rds.ServerlessCluster(this, "CounterDBCluster", {
-      vpc,
-      defaultDatabaseName,
-      // Set the engine to Postgres
-      engine: rds.DatabaseClusterEngine.AURORA_POSTGRESQL,
-      parameterGroup: rds.ParameterGroup.fromParameterGroupName(
-        this,
-        "ParameterGroup",
-        "default.aurora-postgresql10"
-      ),
-      // Optional, disable the instance from pausing after 5 minutes
-      scaling: { autoPause: cdk.Duration.seconds(0) },
+    // Create the Aurora DB cluster
+    const cluster = new sst.RDS(this, "Cluster", {
+      engine: "postgresql10.14",
+      defaultDatabaseName: DATABASE,
     });
   }
 }
 ```
 
-This creates a [VPC](https://aws.amazon.com/vpc/) and uses that to create our Aurora cluster. We also set the database engine to PostgreSQL. The databsse in the cluster that we'll be using is called `CounterDB` (as set in the `defaultDatabaseName` variable).
+This creates an [RDS Serverless cluster](https://docs.serverless-stack.com/constructs/RDS). We also set the database engine to PostgreSQL. The database in the cluster that we'll be using is called `CounterDB` (as set in the `defaultDatabaseName` variable).
 
 ## Setting up the API
 
 Now let's add the API.
 
-{%change%} Add this below the `rds.ServerlessCluster` definition in `stacks/MyStack.js`.
+{%change%} Add this below the `cluster` definition in `stacks/MyStack.js`.
 
 ```js
 // Create a HTTP API
 const api = new sst.Api(this, "Api", {
-  routes: {
-    "POST /": {
-      function: {
-        handler: "src/lambda.handler",
-        environment: {
-          dbName: defaultDatabaseName,
-          clusterArn: cluster.clusterArn,
-          secretArn: cluster.secret.secretArn,
-        },
-      },
+  defaultFunctionProps: {
+    environment: {
+      DATABASE,
+      CLUSTER_ARN: cluster.clusterArn,
+      SECRET_ARN: cluster.secretArn,
     },
+    permissions: [cluster],
+  },
+  routes: {
+    "POST /": "src/lambda.handler",
   },
 });
-
-// Grant access to the cluster from the Lambda function
-cluster.grantDataApiAccess(api.getFunction("POST /"));
 
 // Show the resource info in the output
 this.addOutputs({
   ApiEndpoint: api.url,
-  SecretArn: cluster.secret.secretArn,
+  SecretArn: cluster.secretArn,
   ClusterIdentifier: cluster.clusterIdentifier,
 });
 ```
@@ -143,14 +124,14 @@ Now in our function, we'll start by reading from our PostgreSQL database.
 import client from "data-api-client";
 
 const db = client({
-  database: process.env.dbName,
-  secretArn: process.env.secretArn,
-  resourceArn: process.env.clusterArn,
+  database: process.env.DATABASE,
+  secretArn: process.env.SECRET_ARN,
+  resourceArn: process.env.CLUSTER_ARN,
 });
 
 export async function handler() {
   const { records } = await db.query(
-    "SELECT tally FROM tblCounter where counter='hits'"
+    "SELECT tally FROM tblcounter where counter='hits'"
   );
 
   let count = records[0].tally;
@@ -164,7 +145,7 @@ export async function handler() {
 
 We are using the [Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html). It allows us to connect to our database over HTTP using the [data-api-client](https://github.com/jeremydaly/data-api-client).
 
-For now we'll get the number of hits from a table called `tblCounter` and return it.
+For now we'll get the number of hits from a table called `tblcounter` and return it.
 
 {%change%} Let's install the `data-api-client`.
 
@@ -193,68 +174,53 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-rest-api-postgresql-my-stack: deploying...
+manitej-rest-api-postgresql-my-stack: deploying...
 
- ✅  dev-rest-api-postgresql-my-stack
+ ✅  manitej-rest-api-postgresql-my-stack
 
 
-Stack dev-rest-api-postgresql-my-stack
+Stack manitej-rest-api-postgresql-my-stack
   Status: deployed
   Outputs:
     SecretArn: arn:aws:secretsmanager:us-east-1:087220554750:secret:CounterDBClusterSecret247C4-MhR0f3WMmWBB-dnCizN
     ApiEndpoint: https://u3nnmgdigh.execute-api.us-east-1.amazonaws.com
-    ClusterIdentifier: dev-rest-api-postgresql-counterdbcluster09367634-1wjmlf5ijd4be
+    ClusterIdentifier: manitej-rest-api-postgresql-counterdbcluster09367634-1wjmlf5ijd4be
 ```
 
 The `ApiEndpoint` is the API we just created. While the `SecretArn` is what we need to login to our database securely. The `ClusterIdentifier` is the id of our database cluster.
 
-Before we can test our endpoint let's create the `tblCounter` table in our database.
+Before we can test our endpoint let's create the `tblcounter` table in our database.
 
 ## Creating our table
 
-To create our table we'll use the query editor in the AWS console. First let's grab the secret ARN to login to our database.
+To create our table we’ll use the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
-Head over to the [Amazon RDS](https://console.aws.amazon.com/rds) part of the console.
-
-![Amazon RDS console](/assets/examples/rest-api-postgresql/amazon-rds-console.png)
-
-Here click on **Query Editor**. Now you'll be asked to connect to your database.
-
-- In the **Database instance or cluster** dropdown select the one matching the `ClusterIdentifier` in our app outputs.
-- For the **Database username** select, **Connect with a Secrets Manager ARN**.
-- Paste the `SecretArn` from your app outputs in the **Secret manager ARN** field.
-- And paste the `CounterDB` (or the `defaultDatabaseName` variable in `stacks/MyStack.js`) as the name of the database.
-
-Then click **Connect to database**.
-
-![Amazon RDS Query Editor connect to a database](/assets/examples/rest-api-postgresql/amazon-rds-query-editor-connect-to-a-database.png)
-
-Paste the following queries. This will create our table and insert a row to keep track of our hits.
+Go to the **RDS** tab and paste the below SQL code in the editor.
 
 ```sql
-CREATE TABLE tblCounter (
+CREATE TABLE tblcounter (
  counter text UNIQUE,
  tally integer
 );
 
-INSERT INTO tblCounter VALUES ('hits', 0);
+INSERT INTO tblcounter VALUES ('hits', 0);
 ```
 
-Hit **Run**.
+Hit the **Execute** button to run the SQL query. The above code will create our table and insert a row to keep track of our hits.
 
-![Amazon RDS Query Editor run query](/assets/examples/rest-api-postgresql/amazon-rds-query-editor-run-query.png)
+![running-sql-query-inside-the-editor](/assets/examples/rest-api-postgresql/running-sql-query-inside-the-editor.png)
 
 ## Test our API
 
-Now that our table is created, let's test our endpoint. Run the following in your terminal.
+Now that our table is created, let's test our endpoint with the [SST Console](https://console.serverless-stack.com).
 
-```bash
-$ curl -X POST https://u3nnmgdigh.execute-api.us-east-1.amazonaws.com
-```
+Go to the **API** tab and click **Send** button to send a `POST` request.
 
-This makes a POST request to our API.
+Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` and `ApiGatewayV1Api` constructs. Set the headers, query params, request body, and view the function logs with the response.
 
-You should see a `0` printed out. Of course, if you call it again, nothing changes.
+![API explorer invocation response](/assets/examples/rest-api-postgresql/api-explorer-invocation-response.png)
+
+You should see a `0` in the response body.
 
 ## Writing to our table
 
@@ -263,16 +229,68 @@ So let's update our table with the hits.
 {%change%} Add this above the `return` statement in `src/lambda.js`.
 
 ```js
-await db.query(`UPDATE tblCounter set tally=${++count} where counter='hits'`);
+await db.query(`UPDATE tblcounter set tally=${++count} where counter='hits'`);
 ```
 
 Here we are updating the `hits` row's `tally` column with the increased count.
 
-And now if you head over to your terminal and make a request to our API. You'll notice the count increase!
+And now if you head over to your console and make a request to our API. You'll notice the count increase!
 
-```bash
-$ curl -X POST https://u3nnmgdigh.execute-api.us-east-1.amazonaws.com
+![api-explorer-invocation-response-after-update](/assets/examples/rest-api-postgresql/api-explorer-invocation-response-after-update.png)
+
+## Running migrations
+
+You can run migrations from the SST console, The `RDS` construct uses [Kysely](https://koskimas.github.io/kysely/) to run and manage schema migrations. The `migrations` prop should point to the folder where your migration files are. you can [read more about migrations here](https://docs.serverless-stack.com/constructs/RDS#configuring-migrations).
+
+Let's create a migration file that creates a table called `todos`.
+
+Create a `migrations` folder inside the `src/` folder.
+
+Let's write our first migration file, create a new file called `first.js` inside the newly created `src/migrations` folder and paste the below code.
+
+```js
+module.exports.up = async (db) => {
+  await db.schema
+    .createTable("todos")
+    .addColumn("id", "text", (col) => col.primaryKey())
+    .addColumn("title", "text")
+    .execute();
+};
+
+module.exports.down = async (db) => {
+  await db.schema.dropTable("todos").execute();
+};
 ```
+
+{%change%} update the cluster definition like below in `stacks/MyStack.js`.
+
+```js
+const cluster = new sst.RDS(this, "Cluster", {
+  engine: "postgresql10.14",
+  defaultDatabaseName: DATABASE,
+  migrations: "src/migrations", // add this line
+});
+```
+
+This creates an infrastructure change, open the terminal and hit enter when it asks.
+
+Now to run the migrations we can use the SST console. Go to the **RDS** tab and click the **Migrations** button on the top right corner.
+
+It will list out all the migration files in the specified folder.
+
+Now to apply the migration that we created, click on the **Apply** button beside to the migration name.
+
+![list-of-migrations-in-the-stack](/assets/examples/rest-api-postgresql/list-of-migrations-in-the-stack.png)
+
+To confirm if the migration is successful, let's display the `todos` table by running the below query.
+
+```sql
+select * from todos
+```
+
+![successful-migration-output](/assets/examples/rest-api-postgresql/successful-migration-output.png)
+
+You should see the empty table with column names.
 
 ## Deploying to prod
 
@@ -283,6 +301,16 @@ $ npx sst deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
+
+Run the below command to open the SST Console in **prod** stage to test the production endpoint.
+
+```bash
+npx sst console --stage prod
+```
+
+Go to the **API** tab and click **Send** button to send a `POST` request.
+
+![api-explorer-invocation-response-prod](/assets/examples/rest-api-postgresql/api-explorer-invocation-response-prod.png)
 
 ## Cleaning up
 
