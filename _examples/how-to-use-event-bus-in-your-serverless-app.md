@@ -1,16 +1,16 @@
 ---
 layout: example
-title: How to use EventBus in your serverless app
+title: How to use event bus in your serverless app
 short_title: EventBus
 date: 2021-12-18 00:00:00
 lang: en
 index: 6
 type: async
-description: In this example we will look at how to use EventBus in your serverless app on AWS using Serverless Stack (SST). We'll be using the sst.Api and sst.EventBus to create a simple checkout system.
+description: In this example we will look at how to use event bus in your serverless app on AWS using Serverless Stack (SST). We'll be using the sst.Api and sst.EventBus to create a simple checkout system.
 short_desc: A simple EventBridge system with EventBus.
 repo: eventbus
-ref: how-to-use-eventbus-in-your-serverless-app
-comments_id: how-to-use-eventbus-in-your-serverless-app/2607
+ref: how-to-use-event-bus-in-your-serverless-app
+comments_id: how-to-use-event-bus-in-your-serverless-app/2607
 ---
 
 In this example we will look at how to use EventBus to create [an EventBridge system](https://aws.amazon.com/eventbridge/) in our serverless app using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be creating a simple checkout flow.
@@ -52,7 +52,7 @@ An SST app is made up of two parts.
 
    The code that's run when your API is invoked is placed in the `src/` directory of your project.
 
-## Adding EventBridge EventBus 
+## Adding EventBridge EventBus
 
 [Amazon EventBridge](https://aws.amazon.com/eventbridge/) is a serverless event bus that makes it easier to build event-driven applications at scale using events generated from your applications, integrated Software-as-a-Service (SaaS) applications, and AWS services.
 
@@ -255,7 +255,6 @@ $ npm install aws-sdk
 And now if you head over to your console and invoke the function again, You'll notice in the **Local** tab that our EventBus targets are called. And you should see `Receipt sent!` and `Item shipped!` printed out.
 
 ![Local tab response with event](/assets/examples/eventbus/Local_tab_response_with_events.png)
-
 
 ## Deploying to prod
 
