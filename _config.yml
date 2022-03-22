@@ -62,7 +62,7 @@ permalink: /blog/:title:output_ext
 stats:
   newsletter: "55,000"
   newsletter_short: "55k"
-  slack: "1400"
+  slack: "1500"
   github: "5500"
   github_short: "5.5k"
 
