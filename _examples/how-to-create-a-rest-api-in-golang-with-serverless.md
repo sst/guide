@@ -283,13 +283,13 @@ Go to the **API** explorer and click the **Send** button of the `GET /notes` rou
 
 Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` and `ApiGatewayV1Api` constructs. Set the headers, query params, request body, and view the function logs with the response.
 
-![Api tab get notes response](/assets/examples/rest-api/api-tab-get-notes-response.png)
+![API tab get notes response](/assets/examples/rest-api/api-tab-get-notes-response.png)
 
 You should see the list of notes as a JSON string.
 
 To retrieve a specific note, Go to `GET /notes/{id}` route and in the **URL** tab enter the **id** of the note you want to get in the **id** field and click the **Send** button to get that note.
 
-![Api tab get specific note response](/assets/examples/rest-api/api-tab-get-specific-note-response.png)
+![API tab get specific note response](/assets/examples/rest-api/api-tab-get-specific-note-response.png)
 
 Now to update our note, we need to make a `PUT` request, go to `PUT /notes/{id}` route.
 
@@ -299,7 +299,7 @@ In the **URL** tab, enter the **id** of the note you want to update and in the *
 { "content": "Updating my note" }
 ```
 
-![Api tab update note response](/assets/examples/rest-api/api-tab-update-note-response.png)
+![API tab update note response](/assets/examples/rest-api/api-tab-update-note-response.png)
 
 This should respond with the updated note.
 
@@ -324,7 +324,7 @@ Here we are just adding some spaces to pretty print the JSON.
 
 If you head back to the `GET /notes` route and hit **Send** again.
 
-![Api tab get notes response with spaces](/assets/examples/rest-api/api-tab-get-notes-response-with-spaces.png)
+![API tab get notes response with spaces](/assets/examples/rest-api/api-tab-get-notes-response-with-spaces.png)
 You should see your list of notes in a more readable format.
 
 ## Deploying your API
@@ -355,9 +355,9 @@ Run the below command to open the SST Console in **prod** stage to test the prod
 npx sst console --stage prod
 ```
 
-Go to the **API** explorer and click **Send** button of the `GET /notes` route a `GET` request.
+Go to the **API** explorer and click **Send** button of the `GET /notes` route, to send a `GET` request.
 
-![Prod api tab get notes response with spaces](/assets/examples/rest-api/prod-api-tab-get-notes-response-with-spaces.png)
+![Prod API explorer get notes response with spaces](/assets/examples/rest-api/prod-api-tab-get-notes-response-with-spaces.png)
 
 ## Cleaning up
 
