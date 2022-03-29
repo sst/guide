@@ -132,15 +132,18 @@ Next, you'll need to import it into the stack and pass in the functions you want
 {%change%} Add the following above the `this.addOutputs` line in `stacks/MyStack.js`.
 
 ```js
-// Configure Datadog
-const datadog = new Datadog(this, "Datadog", {
-  nodeLayerVersion: 65,
-  extensionLayerVersion: 13,
-  apiKey: process.env.DATADOG_API_KEY,
-});
+// Configure Datadog only in prod
+if (!scope.local) {
+  // Configure Datadog
+  const datadog = new Datadog(this, "Datadog", {
+    nodeLayerVersion: 65,
+    extensionLayerVersion: 13,
+    apiKey: process.env.DATADOG_API_KEY,
+  });
 
-// Monitor all functions in the stack
-datadog.addLambdaFunctions(this.getAllFunctions());
+  // Monitor all functions in the stack
+  datadog.addLambdaFunctions(this.getAllFunctions());
+}
 ```
 
 {%change%} Also make sure to include the Datadog construct.
@@ -150,46 +153,6 @@ import { Datadog } from "datadog-cdk-constructs-v2";
 ```
 
 Note that [`getAllFunctions`]({{ site.docs_url }}/constructs/Stack#getallfunctions) gives you an array of all the Lambda functions created in this stack. If you want to monitor all the functions in your stack, make sure to call it at the end of your stack definition.
-
-Let's test what we have so far.
-
-## Starting your dev environment
-
-{%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
-
-```bash
-$ npx sst start
-```
-
-The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
-
-```
-===============
- Deploying app
-===============
-
-Preparing your SST app
-Transpiling source
-Linting source
-Deploying stacks
-dev-datadog-my-stack: deploying...
-
- ✅  dev-datadog-my-stack
-
-
-Stack dev-datadog-my-stack
-  Status: deployed
-  Outputs:
-    ApiEndpoint: https://753gre9wkh.execute-api.us-east-1.amazonaws.com
-```
-
-The `ApiEndpoint` is the API we just created. Let's test the endpoint.
-
-Open the URL in your browser. You should see the _Hello World_ message.
-
-Now head over to your Datadog dashboard to start exploring key performance metrics; invocations, errors, and duration from your function. The [Serverless view](https://app.datadoghq.com/functions) aggregates data from all of the serverless functions running in your environment, enabling you to monitor their performance in one place. You can search and filter by name, AWS account, region, runtime, or any tag. Or click on a specific function to inspect its key performance metrics, distributed traces, and logs.
-
-![Datadog functions dashboard](/assets/examples/datadog/datadog-functions-dashboard.png)
 
 ## Deploying to prod
 
@@ -212,6 +175,22 @@ Stack prod-datadog-my-stack
   Outputs:
     ApiEndpoint: https://k40qchmtvf.execute-api.ap-south-1.amazonaws.com
 ```
+
+The `ApiEndpoint` is the API we just created.
+
+Let's test our endpoint with the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
+
+Go to the **API** tab and click **Send** button to send a `GET` request.
+
+Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` and `ApiGatewayV1Api` constructs. Set the headers, query params, request body, and view the function logs with the response.
+
+![API explorer invocation response](/assets/examples/datadog/api-explorer-invocation-response.png)
+
+You should see the _Hello World_ message.
+
+Now head over to your Datadog dashboard to start exploring key performance metrics; invocations, errors, and duration from your function. The [Serverless view](https://app.datadoghq.com/functions) aggregates data from all of the serverless functions running in your environment, enabling you to monitor their performance in one place. You can search and filter by name, AWS account, region, runtime, or any tag. Or click on a specific function to inspect its key performance metrics, distributed traces, and logs.
+
+![Datadog functions dashboard](/assets/examples/datadog/datadog-functions-dashboard.png)
 
 ## Cleaning up
 

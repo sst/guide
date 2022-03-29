@@ -203,9 +203,17 @@ Stack dev-sentry-my-stack
     ApiEndpoint: https://753gre9wkh.execute-api.us-east-1.amazonaws.com
 ```
 
-The `ApiEndpoint` is the API we just created. Let's test the endpoint.
+The `ApiEndpoint` is the API we just created.
 
-Open the URL in your browser. You should see the _Hello World_ message.
+Let's test our endpoint with the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
+
+Go to the **API** tab and click **Send** button to send a `GET` request.
+
+Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` and `ApiGatewayV1Api` constructs. Set the headers, query params, request body, and view the function logs with the response.
+
+![API explorer invocation response](/assets/examples/datadog/api-explorer-invocation-response.png)
+
+You should see the _Hello World_ message.
 
 Now head over to your Sentry dashboard to start exploring key metrics like the execution duration, failure rates, and transactions per minute. You can also click through to inspect specific errors.
 

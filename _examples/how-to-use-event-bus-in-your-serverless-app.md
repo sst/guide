@@ -191,7 +191,7 @@ Go to the **Functions** tab and click the **Invoke** button of the `POST /order`
 
 ![Functions tab invoke button](/assets/examples/eventbus/functions_tab_invoke_button.png)
 
-You can also view the logs for all functions in the **Local** tab. Go to the Local tab, and you should see the logs from our Invoke here as well.
+After you see a success status in the logs, go to the Local tab in the console to see all function invocations. Local tab displays real-time logs from your Live Lambda Dev environment.
 
 ![Local tab response without event](/assets/examples/eventbus/Local_tab_response_without_events.png)
 
