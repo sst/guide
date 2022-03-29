@@ -197,7 +197,7 @@ Stack dev-flutter-app-my-stack
     ApiEndpoint: https://sez1p3dsia.execute-api.ap-south-1.amazonaws.com
 ```
 
-The `ApiEndpoint` is the API we just created. While the `SiteUrl` is where our React app will be hosted. For now it's just a placeholder website.
+The `ApiEndpoint` is the API we just created.
 
 Let's test our endpoint with the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
