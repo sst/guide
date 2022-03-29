@@ -30,7 +30,7 @@ Serverless Framework apps can be made up of multiple services and the app as a w
 
 You might recall that Serverless Framework internally uses CloudFormation. So each service is deployed as a CloudFormation stack to the target AWS account. You can specify a stage, region, and AWS profile to customize this.
 
-``` bash
+```bash
  $ AWS_PROFILE=development serverless deploy --stage dev --region us-east-1
 ```
 
@@ -52,7 +52,7 @@ AWS CDK apps on the other hand are made up of multiple stacks. And each stack is
 
 You can define the AWS account and region that you want your CDK stack to be deployed to.
 
-``` javascript
+```javascript
 new MyStack(app, "my-stack", { env: { account: "1234", region: "us-east-1" } });
 ```
 
@@ -68,13 +68,13 @@ Ideally, we'd like our CDK app to work the same way as our Serverless Framework 
 
 SST allows you to follow the same conventions as Serverless Framework. This means that you can deploy your Lambda functions using.
 
-``` bash
+```bash
 $ AWS_PROFILE=production serverless deploy --stage prod --region us-east-1
 ```
 
 And use CDK for the rest of your AWS infrastructure.
 
-``` bash
+```bash
 $ AWS_PROFILE=production npx sst deploy --stage prod --region us-east-1
 ```
 
@@ -82,7 +82,7 @@ Just like Serverless Framework, the stacks in your CDK app are prefixed with the
 
 ![Serverless Framework with CDK using SST](/assets/diagrams/serverless-framework-with-cdk-using-sst.png)
 
-Here, just like the Serverless Framework example above; our app is made up of three services. Except, one of those services is a CDK app deployed using SST! 
+Here, just like the Serverless Framework example above; our app is made up of three services. Except, one of those services is a CDK app deployed using SST!
 
 We'll be deploying it using the `sst deploy` command, instead of the standard `cdk deploy` command.
 
@@ -94,7 +94,7 @@ Start by adding a reference to your SST app in your `serverless.yml`.
 
 {%change%} Add the following `custom:` block at the top of our `services/notes/serverless.yml` above the `provider:` block.
 
-``` yml
+```yml
 custom:
   # Our stage is based on what is passed in when running serverless
   # commands. Or falls back to what we have set in the provider section.
@@ -105,11 +105,11 @@ custom:
 
 Here `notes-infra` is the name of our SST app as defined in `infrastructure/sst.json`.
 
-``` json
+```json
 {
   "name": "notes-infra",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -123,7 +123,7 @@ These two simple steps allow us to (loosely) link our Serverless Framework and C
 
 Just for reference, the top of our `serverless.yml` should look something like this.
 
-``` yml
+```yml
 service: notes-api
 
 # Create an optimized package for our functions
@@ -147,8 +147,6 @@ provider:
   runtime: nodejs12.x
   stage: dev
   region: us-east-1
-
-...
 ```
 
 ### Reference DynamoDB
@@ -157,32 +155,32 @@ Next let's programmatically reference a DynamoDB table created using SST.
 
 {%change%} Replace the `environment` and `iamRoleStatements` block with in your `serverless.yml` with.
 
-``` yml
-  # These environment variables are made available to our functions
-  # under process.env.
-  environment:
-    stripeSecretKey: ${env:STRIPE_SECRET_KEY}
-    tableName: !ImportValue '${self:custom.sstApp}-TableName'
+```yml
+# These environment variables are made available to our functions
+# under process.env.
+environment:
+  stripeSecretKey: ${env:STRIPE_SECRET_KEY}
+  tableName: !ImportValue "${self:custom.sstApp}-TableName"
 
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:Scan
-        - dynamodb:Query
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-        - dynamodb:DescribeTable
-      # Restrict our IAM role permissions to
-      # the specific table for the stage
-      Resource:
-        - !ImportValue '${self:custom.sstApp}-TableArn'
+iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - dynamodb:Scan
+      - dynamodb:Query
+      - dynamodb:GetItem
+      - dynamodb:PutItem
+      - dynamodb:UpdateItem
+      - dynamodb:DeleteItem
+      - dynamodb:DescribeTable
+    # Restrict our IAM role permissions to
+    # the specific table for the stage
+    Resource:
+      - !ImportValue "${self:custom.sstApp}-TableArn"
 ```
 
 Make sure to **copy the indentation** correctly. Your `provider` block should look something like this.
 
-``` yml
+```yml
 provider:
   name: aws
   runtime: nodejs12.x
@@ -193,7 +191,7 @@ provider:
   # under process.env.
   environment:
     stripeSecretKey: ${env:STRIPE_SECRET_KEY}
-    tableName: !ImportValue '${self:custom.sstApp}-TableName'
+    tableName: !ImportValue "${self:custom.sstApp}-TableName"
 
   iamRoleStatements:
     - Effect: Allow
@@ -208,7 +206,7 @@ provider:
       # Restrict our IAM role permissions to
       # the specific table for the stage
       Resource:
-        - !ImportValue '${self:custom.sstApp}-TableArn'
+        - !ImportValue "${self:custom.sstApp}-TableArn"
 ```
 
 Let's look at what we are doing here.
@@ -231,7 +229,7 @@ So let's add our API endpoint to an authenticated role created in our SST app.
 
 {%change%} Add a new resource in your `serverless.yml` with.
 
-``` yml
+```yml
 Resources:
   CognitoAuthorizedApiPolicy:
     Type: AWS::IAM::Policy
@@ -243,10 +241,9 @@ Resources:
           - Effect: "Allow"
             Action:
               - "execute-api:Invoke"
-            Resource:
-              !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGatewayRestApi}/*'
+            Resource: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGatewayRestApi}/*"
       Roles:
-        - !ImportValue '${self:custom.sstApp}-CognitoAuthRole'
+        - !ImportValue "${self:custom.sstApp}-CognitoAuthRole"
 ```
 
 While YAML can be a bit hard to read, here is what we are doing.

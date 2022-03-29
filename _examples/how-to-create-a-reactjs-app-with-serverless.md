@@ -35,8 +35,8 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 ```json
 {
   "name": "react-app",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 

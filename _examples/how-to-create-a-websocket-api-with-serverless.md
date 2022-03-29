@@ -25,18 +25,18 @@ In this example we will look at how to create a serverless WebSocket API on AWS 
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest websocket
 $ cd websocket
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "websocket",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -58,7 +58,7 @@ We are going to use [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) to store
 
 {%change%} Replace the `stacks/MyStack.js` with the following.
 
-``` js
+```js
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -79,7 +79,7 @@ export default class MyStack extends sst.Stack {
 This creates a serverless DynamoDB table using [`sst.Table`](https://docs.serverless-stack.com/constructs/Table). It has a primary key called `id`. Our table is going to look something like this:
 
 | id       |
-|----------|
+| -------- |
 | abcd1234 |
 
 Where the `id` is the connection id as a string.
@@ -90,7 +90,7 @@ Now let's add the WebSocket API.
 
 {%change%} Add this below the `sst.Table` definition in `stacks/MyStack.js`.
 
-``` js
+```js
 // Create the WebSocket API
 const api = new sst.WebSocketApi(this, "Api", {
   defaultFunctionProps: {
@@ -124,7 +124,7 @@ Now in our functions, let's first handle the case when a client connects to our 
 
 {%change%} Add the following to `src/connect.js`.
 
-``` js
+```js
 import AWS from "aws-sdk";
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
@@ -147,7 +147,7 @@ Here when a new client connects, we grab the connection id from `event.requestCo
 
 {%change%} We are using the `aws-sdk`, so let's install it.
 
-``` bash
+```bash
 $ npm install aws-sdk
 ```
 
@@ -157,7 +157,7 @@ Similarly, we'll remove the connection id from the table when a client disconnec
 
 {%change%} Add the following to `src/disconnect.js`.
 
-``` js
+```js
 import AWS from "aws-sdk";
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
@@ -180,7 +180,7 @@ Now before handling the `sendmessage` route, let's do a quick test. We'll leave 
 
 {%change%} Add this to `src/sendMessage.js`.
 
-``` js
+```js
 export async function main(event) {
   return { statusCode: 200, body: "Message sent" };
 }
@@ -190,7 +190,7 @@ export async function main(event) {
 
 {%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
 
-``` bash
+```bash
 $ npx sst start
 ```
 
@@ -232,7 +232,7 @@ Now let's update our function to send messages.
 
 {%change%} Replace your `src/sendMessage.js` with:
 
-``` js
+```js
 import AWS from "aws-sdk";
 
 const TableName = process.env.tableName;
@@ -299,21 +299,21 @@ Also, if you flip back to our original WebSocket client window, you'll notice th
 
 ![Receive message from serverless WebSocket API](/assets/examples/websocket/receive-message-from-serverless-websocket-api.png)
 
-
 ## Deploying to prod
 
 {%change%} To wrap things up we'll deploy our app to prod.
 
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
+
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
 
 ## Cleaning up
 
 Finally, you can remove the resources created in this example using the following commands.
 
-``` bash
+```bash
 $ npx sst remove
 $ npx sst remove --stage prod
 ```
@@ -321,4 +321,3 @@ $ npx sst remove --stage prod
 ## Conclusion
 
 And that's it! You've got a brand new serverless WebSocket API. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
-

@@ -33,18 +33,18 @@ Here is a video of it in action.
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest --language typescript graphql-appsync
 $ cd graphql-appsync
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "graphql-appsync",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -66,7 +66,7 @@ Let's start by defining our AppSync API.
 
 {%change%} Replace the `stacks/MyStack.ts` with the following.
 
-``` ts
+```ts
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -123,7 +123,7 @@ Finally, we allow our API to access our table.
 
 {%change%} Add the following to `graphql/schema.graphql`.
 
-``` graphql
+```graphql
 type Note {
   id: ID!
   content: String!
@@ -155,7 +155,7 @@ Let's also add a type for our note object.
 
 {%change%} Add the following to a new file in `src/Note.ts`.
 
-``` ts
+```ts
 type Note = {
   id: string;
   content: string;
@@ -170,7 +170,7 @@ To start with, let's create the Lambda function that'll be our AppSync data sour
 
 {%change%} Create a `src/main.ts` with the following.
 
-``` ts
+```ts
 import Note from "./Note";
 import listNotes from "./listNotes";
 import createNote from "./createNote";
@@ -216,7 +216,7 @@ Starting with the one that'll create a note.
 
 {%change%} Add a file to `src/createNote.ts`.
 
-``` ts
+```ts
 import { DynamoDB } from "aws-sdk";
 import Note from "./Note";
 
@@ -238,7 +238,7 @@ Here, we are storing the given note in our DynamoDB table.
 
 {%change%} Let's install the `aws-sdk` package that we are using.
 
-``` bash
+```bash
 $ npm install aws-sdk
 ```
 
@@ -248,7 +248,7 @@ Next, let's write the function that'll fetch all our notes.
 
 {%change%} Add the following to `src/listNotes.ts`.
 
-``` ts
+```ts
 import { DynamoDB } from "aws-sdk";
 
 const dynamoDb = new DynamoDB.DocumentClient();
@@ -270,11 +270,11 @@ Here we are getting all the notes from our table.
 
 ## Read a specific note
 
-We'll do something similar for the function that gets a single note. 
+We'll do something similar for the function that gets a single note.
 
 {%change%} Create a `src/getNoteById.ts`.
 
-``` ts
+```ts
 import { DynamoDB } from "aws-sdk";
 import Note from "./Note";
 
@@ -302,7 +302,7 @@ Now let's update our notes.
 
 {%change%} Add a `src/updateNote.ts` with:
 
-``` ts
+```ts
 import { DynamoDB } from "aws-sdk";
 import Note from "./Note";
 
@@ -331,7 +331,7 @@ To complete all the operations, let's delete the note.
 
 {%change%} Add this to `src/deleteNote.ts`.
 
-``` ts
+```ts
 import { DynamoDB } from "aws-sdk";
 
 const dynamoDb = new DynamoDB.DocumentClient();
@@ -356,7 +356,7 @@ Let's test what we've created so far!
 
 {%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
 
-``` bash
+```bash
 $ npx sst start
 ```
 
@@ -396,7 +396,7 @@ Here we can test our AppSync API live.
 
 Let's start by creating a note. Run the following mutation.
 
-``` graphql
+```graphql
 mutation createNote {
   createNote(note: { id: "001", content: "My note" }) {
     id
@@ -407,7 +407,7 @@ mutation createNote {
 
 And let's get the note we just created by running this query instead.
 
-``` graphql
+```graphql
 query getNoteById {
   getNoteById(noteId: "001") {
     id
@@ -418,7 +418,7 @@ query getNoteById {
 
 Let's test our update mutation by running:
 
-``` graphql
+```graphql
 mutation updateNote {
   updateNote(note: { id: "001", content: "My updated note" }) {
     id
@@ -429,7 +429,7 @@ mutation updateNote {
 
 Now let's try deleting our note.
 
-``` graphql
+```graphql
 mutation deleteNote {
   deleteNote(noteId: "001")
 }
@@ -437,7 +437,7 @@ mutation deleteNote {
 
 Let's test if the delete worked by getting all the notes.
 
-``` graphql
+```graphql
 query listNotes {
   listNotes {
     id
@@ -452,13 +452,13 @@ You'll notice a couple of things. Firstly, the note we created is still there. T
 
 {%change%} Let's fix our `src/deleteNote.ts` by un-commenting the query.
 
-``` ts
+```ts
 await dynamoDb.delete(params).promise();
 ```
 
 If you head back to the query editor and run the delete mutation again.
 
-``` graphql
+```graphql
 mutation deleteNote {
   deleteNote(noteId: "001")
 }
@@ -466,7 +466,7 @@ mutation deleteNote {
 
 And running the list query should now show that the note has been removed!
 
-``` graphql
+```graphql
 query listNotes {
   listNotes {
     id
@@ -483,7 +483,7 @@ Now that our API is tested, let's deploy it to production. You'll recall that we
 
 {%change%} Run the following in your terminal.
 
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
 
@@ -491,7 +491,7 @@ $ npx sst deploy --stage prod
 
 Finally, you can remove the resources created in this example using the following commands.
 
-``` bash
+```bash
 $ npx sst remove
 $ npx sst remove --stage prod
 ```
@@ -499,5 +499,3 @@ $ npx sst remove --stage prod
 ## Conclusion
 
 And that's it! You've got a brand new serverless GraphQL API built with AppSync. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
-
-

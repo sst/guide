@@ -43,8 +43,8 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 ```json
 {
   "name": "bucket-image-resize",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 

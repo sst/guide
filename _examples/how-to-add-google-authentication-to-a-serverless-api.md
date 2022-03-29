@@ -26,18 +26,18 @@ In this example we will look at how to add Google authentication to a serverless
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest api-auth-google
 $ cd api-auth-google
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "api-auth-google",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -59,7 +59,7 @@ Let's start by setting up an API.
 
 {%change%} Replace the `stacks/MyStack.js` with the following.
 
-``` js
+```js
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -101,7 +101,7 @@ Now let's add authentication for our serverless app.
 
 {%change%} Add this below the `sst.Api` definition in `stacks/MyStack.js`. Make sure to replace the `clientId` with that of your Google API project.
 
-``` js
+```js
 // Create auth provider
 const auth = new sst.Auth(this, "Auth", {
   google: {
@@ -133,7 +133,7 @@ Let's create two functions, one handling the public route, and the other for the
 
 {%change%} Add a `src/public.js`.
 
-``` js
+```js
 export async function main() {
   return {
     statusCode: 200,
@@ -144,7 +144,7 @@ export async function main() {
 
 {%change%} Add a `src/private.js`.
 
-``` js
+```js
 export async function main() {
   return {
     statusCode: 200,
@@ -159,7 +159,7 @@ Now let's test our new API.
 
 {%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
 
-``` bash
+```bash
 $ npx sst start
 ```
 
@@ -231,7 +231,7 @@ Copy the generated **id_token**.
 
 Next, we need to get the user's Cognito Identity id. Replace `--identity-pool-id` with the `IdentityPoolId` from the `sst start` log output; and replace the `--logins` with the **id_token** from the previous step.
 
-``` bash
+```bash
 $ aws cognito-identity get-id \
   --identity-pool-id us-east-1:b6211282-8eac-41d0-a721-945b7be7b586 \
   --logins accounts.google.com="eyJhbGciOiJSUzI1NiIsImtpZCI6ImZkMjg1ZWQ0ZmViY2IxYWVhZmU3ODA0NjJiYzU2OWQyMzhjNTA2ZDkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI0MDc0MDg3MTgxOTIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI0MDc0MDg3MTgxOTIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDIwNzgwOTk5MzY4NDM3Njg5OTMiLCJlbWFpbCI6IndhbmdmYW5qaWVAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiI0cEFYV2diR0JoNy1NRzUyNEtBUG5BIiwiaWF0IjoxNjEyNzYzMDA1LCJleHAiOjE2MTI3NjY2MDV9.jIukmyMeJNTyOqya2eRWZzgMpUFJQkR2O49NV3-wGhW4sPKJPwKbhhfEMHEadQo5lYgsmQmsTiIrt4uPGMV0MwzvVppJ5iA57x-sc8JeQxezEnI6XVl59mQyuViAnBovCZeOB9nSquBr2KbxmIUvKApGq3E1Z8ksqobB-hzCEl1Jxqxp6aCKWAjJNsIkXpV615O-VYxRbL7Lxpi_1Saethf--PLV3_3kNd_NvsuwJa1CIdLw2fGqt-BUR46sgxICcCn95g9j2wacwBjHDVj_In75Xpecrp0FP-mxW13w9zwO8nWOQcmb4X8guHNd511az-F8r4bGVOy8il0SPoj3yw"
@@ -239,7 +239,7 @@ $ aws cognito-identity get-id \
 
 You should get an identity id for the Google user.
 
-``` json
+```json
 {
   "IdentityId": "us-east-1:52b11867-4633-4614-ae69-a2872f6a4429"
 }
@@ -247,7 +247,7 @@ You should get an identity id for the Google user.
 
 Now we'll need to get the IAM credentials for the identity user.
 
-``` bash
+```bash
 $ aws cognito-identity get-credentials-for-identity \
   --identity-id us-east-1:52b11867-4633-4614-ae69-a2872f6a4429 \
   --logins accounts.google.com="eyJhbGciOiJSUzI1NiIsImtpZCI6ImZkMjg1ZWQ0ZmViY2IxYWVhZmU3ODA0NjJiYzU2OWQyMzhjNTA2ZDkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI0MDc0MDg3MTgxOTIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI0MDc0MDg3MTgxOTIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDIwNzgwOTk5MzY4NDM3Njg5OTMiLCJlbWFpbCI6IndhbmdmYW5qaWVAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiI0cEFYV2diR0JoNy1NRzUyNEtBUG5BIiwiaWF0IjoxNjEyNzYzMDA1LCJleHAiOjE2MTI3NjY2MDV9.jIukmyMeJNTyOqya2eRWZzgMpUFJQkR2O49NV3-wGhW4sPKJPwKbhhfEMHEadQo5lYgsmQmsTiIrt4uPGMV0MwzvVppJ5iA57x-sc8JeQxezEnI6XVl59mQyuViAnBovCZeOB9nSquBr2KbxmIUvKApGq3E1Z8ksqobB-hzCEl1Jxqxp6aCKWAjJNsIkXpV615O-VYxRbL7Lxpi_1Saethf--PLV3_3kNd_NvsuwJa1CIdLw2fGqt-BUR46sgxICcCn95g9j2wacwBjHDVj_In75Xpecrp0FP-mxW13w9zwO8nWOQcmb4X8guHNd511az-F8r4bGVOy8il0SPoj3yw"
@@ -255,15 +255,15 @@ $ aws cognito-identity get-credentials-for-identity \
 
 This should give you a set of temporary IAM credentials.
 
-``` json
+```json
 {
-    "IdentityId": "us-east-1:52b11867-4633-4614-ae69-a2872f6a4429",
-    "Credentials": {
-        "AccessKeyId": "ASIARUIS6Q2MERYVMP4Y",
-        "SecretKey": "/kxZf5+j+ShJE+1iptcdasBt1HVm3q+sA9VjtBjr",
-        "SessionToken": "IQoJb3JpZ2luX2VjEHcaCXVzLWVhc3QtMSJHMEUCIQCe/hEcayua8aNqS0T9AiJcbcRV3TdRcHbVDJcIdRQG/QIgB+tzHI2K2dSlMmJz6QmTA9W4/lSeoRcX07GJoUg4jqYqpwQIbxACGgwxMTIyNDU3Njk4ODAiDCX9xBhdQx4BF0mu3CqEBFgdvm6VueEpZMKVuCOg5i3PLnLsc58PFVD1iu2omj6cAmn/36ws1kM5BVOJ63hsXWHAzg1HbPrZ+EbgiF30LJWNX58e87Vx3KlpSjzDKLVZM9pH7Rg7JalQK0tmI6TfosffL2RJe7+JjFc0wKujagdKTedM6O15v1/Rkxou0JJ3N0bWSr8GNn2V4A1Xuz9fftkAE2pU2RYCtr8XM0U2s3szyTy61tnwUyddRwRSj3QCxBMRQgifR1bBKRGXzEDC5wwzlWxwH4t13fftlh6YOvp/ri8rZ5O46YLtIUSFzl18olH7ZuXrOjovL+W2Ksygp8ruhq6dFd6/rpSkpcN4CharuIgOQKT/w98ocqbmFOcLcPT97FvK5hZdtDvfOeehfAw40Vso3D3h4609TVpAFbNlsYh4hI4lWT3UazAf5Wwah/7pCwV05xXmGp5TjAdMrZP36Tc0vrt7bIWC7u2GuCKsw2fikj0zUfeIb8gEEL0cyhg0TzPSdZYoWeBf9bnqZqPy77h16bpNlSovHeP+oD+/4VIjw8ZDZg/arSky3dZtnAF9KEHtnS07cBSng8JsaUkhc/DugaB7nH41AuOQzaVfkOc9lnc3i6iDbsT+cJJCdYLtlrCAknCRGs+duX1XKX8Ek3CYvGfD2HqRjKIe9afeWGZJ2NyJJ9x6FmVnJXrLCn+n1jDhqoOBBjqFAhjV4D81AhSut/Z0y0lW+Z3xoD1N0bW5/7G2KQqwxFqa1L5uhvV5uyatgH4a4vHe/r+U1zXA9cIyJvNgreLzIUCHgN8UbgWs9r8rgxeHALGw9elNFdT7fUD5itM4o3rdnWTLBrQlCXlQfs68bsS9ABY6vc/3WLK5XY+7P+SCgFxWTztFLwVXAYqGvxu0cAjO4IC3+vf6MqzgdjRP0xqz9NWzbmax6ups1X2eF1Hjhfit6jMPotahLHZcRiPrPneUT5nOEv+vHGjcY7KOWUisqs8VCTBNvRJjZkD2HHaAoIv7UkVfuNEInt3sOwCu0qlTk6lOX6r8mKiW23vHqiSw/BcODkm3Yw==",
-        "Expiration": "2021-02-08T02:08:33-05:00"
-    }
+  "IdentityId": "us-east-1:52b11867-4633-4614-ae69-a2872f6a4429",
+  "Credentials": {
+    "AccessKeyId": "ASIARUIS6Q2MERYVMP4Y",
+    "SecretKey": "/kxZf5+j+ShJE+1iptcdasBt1HVm3q+sA9VjtBjr",
+    "SessionToken": "IQoJb3JpZ2luX2VjEHcaCXVzLWVhc3QtMSJHMEUCIQCe/hEcayua8aNqS0T9AiJcbcRV3TdRcHbVDJcIdRQG/QIgB+tzHI2K2dSlMmJz6QmTA9W4/lSeoRcX07GJoUg4jqYqpwQIbxACGgwxMTIyNDU3Njk4ODAiDCX9xBhdQx4BF0mu3CqEBFgdvm6VueEpZMKVuCOg5i3PLnLsc58PFVD1iu2omj6cAmn/36ws1kM5BVOJ63hsXWHAzg1HbPrZ+EbgiF30LJWNX58e87Vx3KlpSjzDKLVZM9pH7Rg7JalQK0tmI6TfosffL2RJe7+JjFc0wKujagdKTedM6O15v1/Rkxou0JJ3N0bWSr8GNn2V4A1Xuz9fftkAE2pU2RYCtr8XM0U2s3szyTy61tnwUyddRwRSj3QCxBMRQgifR1bBKRGXzEDC5wwzlWxwH4t13fftlh6YOvp/ri8rZ5O46YLtIUSFzl18olH7ZuXrOjovL+W2Ksygp8ruhq6dFd6/rpSkpcN4CharuIgOQKT/w98ocqbmFOcLcPT97FvK5hZdtDvfOeehfAw40Vso3D3h4609TVpAFbNlsYh4hI4lWT3UazAf5Wwah/7pCwV05xXmGp5TjAdMrZP36Tc0vrt7bIWC7u2GuCKsw2fikj0zUfeIb8gEEL0cyhg0TzPSdZYoWeBf9bnqZqPy77h16bpNlSovHeP+oD+/4VIjw8ZDZg/arSky3dZtnAF9KEHtnS07cBSng8JsaUkhc/DugaB7nH41AuOQzaVfkOc9lnc3i6iDbsT+cJJCdYLtlrCAknCRGs+duX1XKX8Ek3CYvGfD2HqRjKIe9afeWGZJ2NyJJ9x6FmVnJXrLCn+n1jDhqoOBBjqFAhjV4D81AhSut/Z0y0lW+Z3xoD1N0bW5/7G2KQqwxFqa1L5uhvV5uyatgH4a4vHe/r+U1zXA9cIyJvNgreLzIUCHgN8UbgWs9r8rgxeHALGw9elNFdT7fUD5itM4o3rdnWTLBrQlCXlQfs68bsS9ABY6vc/3WLK5XY+7P+SCgFxWTztFLwVXAYqGvxu0cAjO4IC3+vf6MqzgdjRP0xqz9NWzbmax6ups1X2eF1Hjhfit6jMPotahLHZcRiPrPneUT5nOEv+vHGjcY7KOWUisqs8VCTBNvRJjZkD2HHaAoIv7UkVfuNEInt3sOwCu0qlTk6lOX6r8mKiW23vHqiSw/BcODkm3Yw==",
+    "Expiration": "2021-02-08T02:08:33-05:00"
+  }
 }
 ```
 
@@ -291,7 +291,7 @@ Let's make a quick change to our private route and print out the caller's user i
 
 {%change%} Replace `src/private.js` with the following.
 
-``` js
+```js
 export async function main(event) {
   return {
     statusCode: 200,
@@ -320,7 +320,7 @@ However, we are going to deploy your API again. But to a different environment, 
 
 {%change%} Run the following in your terminal.
 
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
 
@@ -330,13 +330,13 @@ A note on these environments. SST is simply deploying the same app twice using t
 
 Finally, you can remove the resources created in this example using the following command.
 
-``` bash
+```bash
 $ npx sst remove
 ```
 
 And to remove the prod environment.
 
-``` bash
+```bash
 $ npx sst remove --stage prod
 ```
 

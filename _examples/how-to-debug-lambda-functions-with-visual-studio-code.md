@@ -35,18 +35,18 @@ Let's look at how.
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest --language typescript vscode
 $ cd vscode
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "vscode",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -68,7 +68,7 @@ For this example we'll be testing using a simple API endpoint.
 
 Our API is defined in the `stacks/MyStack.ts`.
 
-``` ts
+```ts
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -96,7 +96,7 @@ Our functions are stored in the `src/` directory. In this case, we have a simple
 
 {%change%} Replace your `src/lambda.ts` with.
 
-``` ts
+```ts
 import { APIGatewayProxyEventV2, APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 export const handler: APIGatewayProxyHandlerV2 = async (
@@ -117,7 +117,7 @@ To allow VS Code to set breakpoints and debug our Lambda functions we'll add it 
 
 {%change%} Add the following to `.vscode/launch.json`.
 
-``` json
+```json
 {
   "version": "0.2.0",
   "configurations": [
@@ -155,7 +155,7 @@ Since we are going to set breakpoints in our Lambda functions, it makes sense to
 
 SST has an [`--increase-timeout`]({{ site.docs_url }}/packages/cli#options) option that increases the function timeouts in your app to the maximum 15 minutes. We are using this option in our `launch.json`.
 
-``` js
+```js
 "runtimeArgs": ["start", "--increase-timeout"],
 ```
 
@@ -208,7 +208,7 @@ An advantage of using the Live Lambda Development environment is that you can ma
 
 {%change%} Replace `src/lambda.ts` with the following.
 
-``` ts
+```ts
 import { APIGatewayProxyEventV2, APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 export const handler: APIGatewayProxyHandlerV2 = async (
@@ -238,7 +238,7 @@ However, we are going to deploy your API again. But to a different environment, 
 
 {%change%} Run the following in your terminal.
 
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
 
@@ -248,13 +248,13 @@ A note on these environments. SST is simply deploying the same app twice using t
 
 Finally, you can remove the resources created in this example using the following command.
 
-``` bash
+```bash
 $ npx sst remove
 ```
 
 And to remove the prod environment.
 
-``` bash
+```bash
 $ npx sst remove --stage prod
 ```
 
