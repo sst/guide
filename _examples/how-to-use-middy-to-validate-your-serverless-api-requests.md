@@ -139,7 +139,7 @@ Stack dev-middy-validator-my-stack
 
 The `ApiEndpoint` is the API we just created.
 
-Let's test our endpoint using the integrated [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.docs_url }}/console.
+Let's test our endpoint using the integrated [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.docs_url }}/console).
 
 Go to the **API** explorer and click on the `POST /` route. In the **Query** tab, enter **fname** and **lname** values as **mani** and **teja** respectively and click **Send** to send a POST request.
 
