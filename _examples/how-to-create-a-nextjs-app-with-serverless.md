@@ -64,7 +64,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 {
   "name": "nextjs-app",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "lib/index.js"
 }
 ```
 
