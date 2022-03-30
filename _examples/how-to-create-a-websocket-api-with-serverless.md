@@ -205,26 +205,38 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-websocket-my-stack: deploying...
+manitej-websocket-my-stack: deploying...
 
- ✅  dev-websocket-my-stack
+ ✅  manitej-websocket-my-stack
 
 
-Stack dev-websocket-my-stack
+Stack manitej-websocket-my-stack
   Status: deployed
   Outputs:
-    ApiEndpoint: wss://61op9sj4wc.execute-api.us-east-1.amazonaws.com/dev
+    ApiEndpoint: wss://oivzpnqnb6.execute-api.us-east-1.amazonaws.com/manitej
 ```
 
 The `ApiEndpoint` is the WebSocket API we just created. Let's test our endpoint.
 
-Head over to [**WebSocket Echo Test**](https://www.websocket.org/echo.html) to create a WebSocket client that'll connect to our API.
+Head over to [**WebSocket Echo Test**](https://www.piesocket.com/websocket-tester) to create a WebSocket client that'll connect to our API.
 
-Enter the `ApiEndpoint` from above as the **Location** and hit **Connect**.
+Enter the `ApiEndpoint` from above as the **url** field and hit **Connect**.
 
 ![Connect to serverless WebSocket API](/assets/examples/websocket/connect-to-serverless-websocket-api.png)
 
 You should see `CONNECTED` being printed out in the **Log**.
+
+![Serverless WebSocket API response](/assets/examples/websocket/serverless-websocket-api-response.png)
+
+Whenever a new client is connected to the API, we will store the connection ID in the DynamoDB **Connections** table.
+
+Let's go to the **DynamoDB** tab in the SST Console and check that the value has been created in the table.
+
+Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`sst.Table`](https://docs.serverless-stack.com/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
+
+![DynamoDB table view of connections table](/assets/examples/websocket/dynamo-table-view-of-connections-table.png)
+
+You should see a random connection ID created in the table.
 
 ## Sending messages
 
@@ -281,7 +293,7 @@ We are doing a couple of things here:
 
 Now let's do a complete test!
 
-Create another client by opening the [**WebSocket Echo Test**](https://www.websocket.org/echo.html) page in **a different browser window**. Just like before, paste the `ApiEndpoint` as the **Location** and hit **Connect**.
+Create another client by opening the [**WebSocket Echo Test**](https://www.piesocket.com/websocket-tester) page in **a different browser window**. Just like before, paste the `ApiEndpoint` as the **url** and hit **Connect**.
 
 ![Connect to serverless WebSocket API again](/assets/examples/websocket/connect-to-serverless-websocket-api-again.png)
 

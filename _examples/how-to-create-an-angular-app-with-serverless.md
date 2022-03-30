@@ -465,6 +465,8 @@ And if you head over to your browser and click the button again, you should see 
 
 Also let's go to the **DynamoDB** tab in the SST Console and check that the value has been updated in the table.
 
+Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`sst.Table`](https://docs.serverless-stack.com/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
+
 ![DynamoDB table view of counter table](/assets/examples/angular-app/dynamo-table-view-of-counter-table.png)
 
 ## Deploying to prod

@@ -365,7 +365,7 @@ To retrieve the created note, go to `GET /notes/{id}` route and in the **URL** t
 
 Also let's go to the **DynamoDB** tab in the SST Console and check that the value has been created in the table.
 
-Note, The DynamoDB explorer allows you to query the DynamoDB tables in the Table constructs in your app. You can scan the table, query specific keys, create and edit items.
+Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`sst.Table`](https://docs.serverless-stack.com/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
 
 ![DynamoDB table view of table](/assets/examples/crud-rest-api-dynamodb/dynamo-table-view-of-table.png)
 

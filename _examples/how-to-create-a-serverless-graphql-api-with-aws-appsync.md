@@ -423,6 +423,8 @@ mutation createNote {
 
 Also let's go to the **DynamoDB** tab in the SST Console and check that the value has been created in the table.
 
+Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`sst.Table`](https://docs.serverless-stack.com/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
+
 ![DynamoDB explorer create note](/assets/examples/graphql-appsync/dynamodb-explorer-create-note.png)
 
 And let's get the note we just created by running this query instead.
