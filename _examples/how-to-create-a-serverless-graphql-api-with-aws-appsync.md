@@ -107,9 +107,11 @@ export default class MyStack extends sst.Stack {
     // Enable the AppSync API to access the DynamoDB table
     api.attachPermissions([notesTable]);
 
-    // Show the AppSync API Id in the output
+    // Show the AppSync API Id and API Key in the output
     this.addOutputs({
       ApiId: api.graphqlApi.apiId,
+      ApiKey: api.graphqlApi.apiKey,
+      APiUrl: api.graphqlApi.graphqlUrl,
     });
   }
 }
@@ -380,21 +382,33 @@ Stack dev-graphql-appsync-my-stack
   Status: deployed
   Outputs:
     ApiId: lk2fgfxsizdstfb24c4y4dnad4
+    ApiKey: da2-3oknz5th4nbj5oobjz4jwid62q
+    ApiUrl: https://2ngraxbyo5cwdpsk47wgn3oafu.appsync-api.us-east-1.amazonaws.com/graphql
 ```
 
-The `ApiId` is the Id of the AppSync API we just created. [**Head over to the AppSync console**](https://console.aws.amazon.com/appsync), and click on the project with your `ApiId`.
+The `ApiId` is the Id of the AppSync API we just created, the `ApiKey` is the API key of our AppSync API and `ApiUrl` is the AppSync API URL.
 
-![AWS AppSync console](/assets/examples/graphql-appsync/aws-appsync-console.png)
+Let's test our endpoint with the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
-Then expand **Run a query** and head to the query editor.
+Go to the **GraphQL** tab and you should see the GraphQL Playground in action.
 
-![Click Run a query in the AWS AppSync console](/assets/examples/graphql-appsync/click-run-a-query-in-then-aws-appsync-console.png)
+Note, The GraphQL explorer lets you query GraphQL endpoints created with the GraphQLApi and AppSyncApi constructs in your app.
 
-Here we can test our AppSync API live.
+Copy the `ApiUrl` from the terminal and replace the playground URL.
 
-![AWS AppSync query editor console](/assets/examples/graphql-appsync/aws-appsync-query-editor-console.png)
+![GraphQL console replace playground url.png](/assets/examples/graphql-appsync/graphql-console-replace-playground-url.png)
 
-Let's start by creating a note. Run the following mutation.
+Next, click on the **HTTP HEADERS** tab at bottom and paste the below code.
+
+```js
+{
+  "x-api-key": "da2-3oknz5th4nbj5oobjz4jwid62q" // replace with your API key value from terminal
+}
+```
+
+![GraphQL console add headers.png](/assets/examples/graphql-appsync/graphql-console-add-headers.png)
+
+Let's start by creating a note. Paste the below mutation in the left part of the playground.
 
 ```graphql
 mutation createNote {
@@ -404,6 +418,12 @@ mutation createNote {
   }
 }
 ```
+
+![GraphQL console create note](/assets/examples/graphql-appsync/graphql-console-create-note.png)
+
+Also let's go to the **DynamoDB** tab in the SST Console and check that the value has been created in the table.
+
+![DynamoDB explorer create note](/assets/examples/graphql-appsync/dynamodb-explorer-create-note.png)
 
 And let's get the note we just created by running this query instead.
 
@@ -416,6 +436,8 @@ query getNoteById {
 }
 ```
 
+![GraphQL console get note](/assets/examples/graphql-appsync/graphql-console-get-note.png)
+
 Let's test our update mutation by running:
 
 ```graphql
@@ -427,6 +449,8 @@ mutation updateNote {
 }
 ```
 
+![GraphQL console update note](/assets/examples/graphql-appsync/graphql-console-update-note.png)
+
 Now let's try deleting our note.
 
 ```graphql
@@ -434,6 +458,8 @@ mutation deleteNote {
   deleteNote(noteId: "001")
 }
 ```
+
+![GraphQL console delete note](/assets/examples/graphql-appsync/graphql-console-delete-note.png)
 
 Let's test if the delete worked by getting all the notes.
 
@@ -445,6 +471,8 @@ query listNotes {
   }
 }
 ```
+
+![GraphQL console list notes](/assets/examples/graphql-appsync/graphql-console-list-notes.png)
 
 You'll notice a couple of things. Firstly, the note we created is still there. This is because our `deleteNote` method isn't actually running our query. Secondly, our note should have the updated content from our previous query.
 
@@ -464,6 +492,8 @@ mutation deleteNote {
 }
 ```
 
+![GraphQL console delete note after change](/assets/examples/graphql-appsync/graphql-console-delete-note.png)
+
 And running the list query should now show that the note has been removed!
 
 ```graphql
@@ -474,6 +504,8 @@ query listNotes {
   }
 }
 ```
+
+![GraphQL console list notes after change](/assets/examples/graphql-appsync/graphql-console-list-notes-after-change.png)
 
 Notice we didn't need to redeploy our app to see the change.
 
