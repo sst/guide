@@ -172,9 +172,7 @@ Stack prod-lumigo-my-stack
 
 The `ApiEndpoint` is the API we just created.
 
-Let's test our endpoint using the integrated [SST Console](https://console.serverless-stack.com).
-
-Note, the SST Console is a web based dashboard to manage your SST apps [Learn more](https://docs.serverless-stack.com/console).
+Let's test our endpoint using the integrated [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.docs_url }}/console.
 
 Run the below command to start SST console in **prod** stage.
 
@@ -182,11 +180,11 @@ Run the below command to start SST console in **prod** stage.
 npx sst console --stage prod
 ```
 
-Go to the **Api** tab and click the **Send** button.
+Go to the **API** tab and click the **Send** button.
 
 Note, The API explorer lets you make HTTP requests to any of the routes in your `Api` and `ApiGatewayV1Api` constructs. Set the headers, query params, request body, and view the function logs with the response.
 
-![Api tab invoke button](/assets/examples/lumigo/api_tab_invoke_button.png)
+![API tab invoke button](/assets/examples/lumigo/api_tab_invoke_button.png)
 
 You will see the response of your function.
 

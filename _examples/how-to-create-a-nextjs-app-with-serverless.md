@@ -18,6 +18,7 @@ In this example we will look at how to deploy a full-stack [Next.js](https://nex
 Here's what we'll be covering in this example:
 
 - Create a full-stack Next.js app
+
   - [Create an SST app](#create-an-sst-app)
   - [Create our infrastructure](#create-our-infrastructure)
     - [Add the table](#add-the-table)
@@ -29,6 +30,7 @@ Here's what we'll be covering in this example:
   - [Deploy to AWS](#deploy-to-aws)
 
 - Comparison
+
   - [Comparing Next.js deployment options](#comparisons)
     - [Hosting](#hosting)
     - [Speed of deployment](#speed-of-deployment)
@@ -51,18 +53,18 @@ Here's what we'll be covering in this example:
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest nextjs-app
 $ cd nextjs-app
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "nextjs-app",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "lib/index.js"
 }
 ```
 
@@ -78,7 +80,7 @@ We'll be using [Amazon DynamoDB](https://aws.amazon.com/dynamodb/); a reliable a
 
 {%change%} Replace the `stacks/MyStack.js` with the following.
 
-``` js
+```js
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -99,7 +101,7 @@ export default class MyStack extends sst.Stack {
 This creates a serverless DynamoDB table using the SST [`Table`](https://docs.serverless-stack.com/constructs/Table) construct. It has a primary key called `counter`. Our table is going to look something like this:
 
 | counter | tally |
-|---------|-------|
+| ------- | ----- |
 | clicks  | 123   |
 
 ## Setup our Next.js app
@@ -108,7 +110,7 @@ We are now ready to create our Next.js app.
 
 {%change%} Run the following in the project root.
 
-``` bash
+```bash
 $ npx create-next-app frontend
 ```
 
@@ -120,7 +122,7 @@ Now let's configure SST to deploy our Next.js app to AWS. To do so, we'll be usi
 
 {%change%} Add the following in `stacks/MyStack.js` below our `sst.Table` definition.
 
-``` js
+```js
 // Create a Next.js site
 const site = new sst.NextjsSite(this, "Site", {
   path: "frontend",
@@ -148,7 +150,7 @@ To load these environment variables in our local environment, we'll be using the
 
 {%change%} Install the `static-site-env` package by running the following in the `frontend/` directory.
 
-``` bash
+```bash
 $ npm install @serverless-stack/static-site-env --save-dev
 ```
 
@@ -156,13 +158,13 @@ Then update the `dev` script to use this package.
 
 {%change%} Replace the `dev` script in your `frontend/package.json`.
 
-``` bash
+```bash
 "dev": "next dev",
 ```
 
 {%change%} With the following:
 
-``` bash
+```bash
 "dev": "sst-env -- next dev",
 ```
 
@@ -172,7 +174,7 @@ The `NextjsSite` uses the [`@sls-next/lambda-at-edge`](https://github.com/server
 
 {%change%} Install the `@sls-next/lambda-at-edge` package by running the following in the project root.
 
-``` bash
+```bash
 $ npm install @sls-next/lambda-at-edge
 ```
 
@@ -182,7 +184,7 @@ Let's create the API that'll be updating our click counter.
 
 {%change%} Add the following to a new file in `frontend/pages/api/count.js`.
 
-``` js
+```js
 import AWS from "aws-sdk";
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient({
@@ -231,7 +233,7 @@ We are using the AWS SDK to connect to DynamoDB.
 
 {%change%} So let's install it by running the following in the `frontend/` directory.
 
-``` bash
+```bash
 $ npm install aws-sdk
 ```
 
@@ -241,7 +243,7 @@ We are now ready to add the UI for our app and connect it to our serverless API.
 
 {%change%} Replace `frontend/pages/index.js` with.
 
-``` jsx
+```jsx
 import { useState } from "react";
 
 export default function App() {
@@ -270,8 +272,9 @@ Let's add some styles.
 
 {%change%} Replace `frontend/styles/globals.css` with.
 
-``` css
-body, html {
+```css
+body,
+html {
   height: 100%;
   display: grid;
   font-family: sans-serif;
@@ -299,8 +302,7 @@ SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-
 
 {%change%} Run the following in your project root.
 
-
-``` bash
+```bash
 $ npx sst start
 ```
 
@@ -332,7 +334,7 @@ Let's start our Next.js development environment.
 
 {%change%} In the `frontend/` directory run.
 
-``` bash
+```bash
 $ npm run dev
 ```
 
@@ -342,11 +344,19 @@ Now if you head over to your browser and open `http://localhost:3000`, your Next
 
 If you click the button the count should update. And if you refresh the page and do it again, it'll continue keeping count.
 
+Also let's check the updated value in dynamodb with the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
+
+Go to the **DynamoDB** tab in the SST Console and check that the value has been updated in the table.
+
+Note, the DynamoDB explorer allows you to query the DynamoDB tables in the Table constructs in your app. You can scan the table, query specific keys, create and edit items.
+
+![DynamoDB table view of counter table](/assets/examples/nextjs-app/dynamo-table-view-of-counter-table.png)
+
 ## Deploy to AWS
 
 {%change%} To wrap things up we'll deploy our app to prod.
 
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
 
@@ -354,7 +364,7 @@ This allows us to separate our environments, so when we are working in our local
 
 Once deployed, you should see something like this.
 
-``` bash
+```bash
  ✅  prod-nextjs-app-my-stack
 
 
@@ -372,7 +382,7 @@ If you head over to the `URL` in your browser, you should see your new Next.js a
 
 Finally, you can remove the resources created in this example using the following commands.
 
-``` bash
+```bash
 $ npx sst remove
 $ npx sst remove --stage prod
 ```
@@ -417,7 +427,7 @@ Vercel is the most expensive option and one of the biggest reasons folks are loo
 
 Amplify on the other hand is fairly cheap but [charges you for deployments](https://aws.amazon.com/amplify/pricing/). They charge for build minutes but password protection is free and you can have unlimited number of concurrent deployments.
 
-SST is completely open source and does not charge you for deployments. While sls-next is not completely open source (since your code runs through their servers),  Serverless Inc. doesn't currently charge you for deploying through them. The only expense is attached to hosting a Next.js app on your AWS account.
+SST is completely open source and does not charge you for deployments. While sls-next is not completely open source (since your code runs through their servers), Serverless Inc. doesn't currently charge you for deploying through them. The only expense is attached to hosting a Next.js app on your AWS account.
 
 You can use any CI/CD with SST or sls-next, but they both have CI/CD services that are run by their respective teams.
 

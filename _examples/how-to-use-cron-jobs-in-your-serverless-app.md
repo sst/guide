@@ -25,18 +25,18 @@ In this example we will look at how to create a cron job in our serverless app u
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest cron-job
 $ cd cron-job
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "cron-job",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -58,7 +58,7 @@ Let's start by creating a cron job.
 
 {%change%} Replace the `stacks/MyStack.js` with the following.
 
-``` js
+```js
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -82,7 +82,7 @@ Now in our function, we'll print out a message every time the function is run.
 
 {%change%} Replace `src/lambda.js` with the following.
 
-``` js
+```js
 export async function main() {
   console.log("Hi!");
   return {};
@@ -95,7 +95,7 @@ And let's test what we have so far.
 
 {%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
 
-``` bash
+```bash
 $ npx sst start
 ```
 
@@ -119,7 +119,17 @@ Stack dev-cron-job-my-stack
   Status: deployed
 ```
 
-Wait for a couple of minutes and you should see `Hi!` gets printed out every minute in your terminal.
+Let's test our cron job using the integrated [SST Console](https://console.serverless-stack.com).
+
+Note, the SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.docs_url }}/console.
+
+Go to the **Local** tab in the console.
+
+Note, The **Local** tab display real-time logs from your Live Lambda Dev environment
+
+Wait for a couple of minutes and you should see `Hi!` gets printed out every minute in your invocations.
+
+![local tab invocations](/assets/examples/cron-job/local-tab-invocations.png)
 
 ## Checking weather forecast
 
@@ -127,13 +137,13 @@ Now let's make a call to [MetaWeather](https://www.metaweather.com)'s API and pr
 
 {%change%} Let's install the `node-fetch`.
 
-``` bash
+```bash
 $ npm install node-fetch
 ```
 
 {%change%} Replace `src/lambda.js` with the following.
 
-``` js
+```js
 import fetch from "node-fetch";
 
 export async function main() {
@@ -143,48 +153,31 @@ export async function main() {
 }
 
 function checkSFWeather() {
-  return fetch(
-    "https://www.metaweather.com/api/location/2487956/"
-  ).then((res) => res.json());
+  return fetch("https://www.metaweather.com/api/location/2487956/").then(
+    (res) => res.json()
+  );
 }
 ```
 
-Now if you head over to your terminal and wait for the function to get invoked in the next minute, you'll notice the weather data is printed out in the terminal!
+Now if you head over to your console and wait for the function to get invoked in the next minute, you'll notice the weather data is printed out in the invocations!
 
-``` js
-{
-  id: 5251329426456576,
-  weather_state_name: 'Heavy Cloud',
-  weather_state_abbr: 'hc',
-  wind_direction_compass: 'WNW',
-  created: '2021-02-08T09:20:16.839517Z',
-  applicable_date: '2021-02-08',
-  min_temp: 8.15,
-  max_temp: 12.76,
-  the_temp: 12.629999999999999,
-  wind_speed: 4.307475905607254,
-  wind_direction: 293.69935054043833,
-  air_pressure: 1016,
-  humidity: 71,
-  visibility: 13.503017378509504,
-  predictability: 71
-}
-```
+![local tab weather data invocation](/assets/examples/cron-job/local-tab-weather-data-invocation.png)
 
 ## Deploying to prod
 
 {%change%} To wrap things up we'll deploy our app to prod.
 
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
+
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
 
 ## Cleaning up
 
 Finally, you can remove the resources created in this example using the following commands.
 
-``` bash
+```bash
 $ npx sst remove
 $ npx sst remove --stage prod
 ```

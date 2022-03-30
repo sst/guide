@@ -25,18 +25,18 @@ In this example we will look at how to create a CRUD API with serverless using [
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest crud-api-dynamodb
 $ cd crud-api-dynamodb
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "crud-api-dynamodb",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -58,7 +58,7 @@ An SST app is made up of two parts.
 
 {%change%} Replace the `stacks/MyStack.js` with the following.
 
-``` js
+```js
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -80,7 +80,7 @@ export default class MyStack extends sst.Stack {
 This creates a serverless DynamoDB table using [`sst.Table`](https://docs.serverless-stack.com/constructs/Table). Our table is going to look something like this:
 
 | userId | noteId | content | createdAt |
-|--------|--------|---------|-----------|
+| ------ | ------ | ------- | --------- |
 | 123    | 1      | Hi!     | Feb 5     |
 
 ## Setting up our routes
@@ -89,7 +89,7 @@ Now let's add the API.
 
 {%change%} Add this after the `sst.Table` definition in `stacks/MyStack.js`.
 
-``` js
+```js
 // Create the HTTP API
 const api = new sst.Api(this, "Api", {
   defaultFunctionProps: {
@@ -132,11 +132,11 @@ We also pass in the name of our DynamoDB table to our API as an environment vari
 
 ## Create a note
 
-Let's turn towards the functions that'll be powering our API. Starting with the one that creates our note. 
+Let's turn towards the functions that'll be powering our API. Starting with the one that creates our note.
 
 {%change%} Add the following to `src/create.js`.
 
-``` js
+```js
 import AWS from "aws-sdk";
 import * as uuid from "uuid";
 
@@ -168,7 +168,7 @@ Here we are creating a new row in our DynamoDB table. First we JSON parse the re
 
 {%change%} Let's install both the packages we are using here.
 
-``` bash
+```bash
 $ npm install aws-sdk uuid
 ```
 
@@ -206,7 +206,7 @@ Here we are getting all the notes for our hard coded `userId`, `123`.
 
 ## Read a specific note
 
-We'll do something similar for the function that gets a single note. 
+We'll do something similar for the function that gets a single note.
 
 {%change%} Create a `src/get.js`.
 
@@ -313,7 +313,7 @@ Now let's test what we've created so far.
 
 {%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
 
-``` bash
+```bash
 $ npx sst start
 ```
 
@@ -339,47 +339,57 @@ Stack dev-rest-api-dynamodb-my-stack
     ApiEndpoint: https://t34witddz7.execute-api.us-east-1.amazonaws.com
 ```
 
-The `ApiEndpoint` is the API we just created. Let's create our first note.
+The `ApiEndpoint` is the API we just created.
 
-``` bash
-$ curl -X POST \
--H 'Content-Type: application/json' \
--d '{"content":"Hello World"}' \
-https://t34witddz7.execute-api.us-east-1.amazonaws.com/notes
+Let's test our endpoint using the integrated [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.docs_url }}/console.
+
+Let's create our first note, go to the **API** explorer and click on the `POST /notes` route.
+
+Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` and `ApiGatewayV1Api` constructs. Set the headers, query params, request body, and view the function logs with the response.
+
+In the **Headers** tab enter `Content-type` in **Header 1** input and `application/json` in **Value 1** input. Go to the **Body** tab and paste the below json.
+
+```json
+{ "content": "Hello World" }
 ```
 
-This should print out the newly created note.
+Now, hit the **Send** button to send the request.
 
-``` bash
-{"userId":"123","noteId":"f32223d0-682d-11eb-96f0-bfbf66b96915","content":"Hello World","createdAt":1612583212685}
+![API explorer create a note response](/assets/examples/crud-rest-api-dynamodb/api-explorer-create-a-note-response.png)
+
+This should create a new note.
+
+To retrieve the created note, go to `GET /notes/{id}` route and in the **URL** tab enter the **id** of the note we created in the **id** field and click the **Send** button to get that note.
+
+![API explorer get a note response](/assets/examples/crud-rest-api-dynamodb/api-explorer-get-a-note-response.png)
+
+Also let's go to the **DynamoDB** tab in the SST Console and check that the value has been created in the table.
+
+Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`sst.Table`](https://docs.serverless-stack.com/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
+
+![DynamoDB table view of table](/assets/examples/crud-rest-api-dynamodb/dynamo-table-view-of-table.png)
+
+Now to update our note, we need to make a `PUT` request, go to `PUT /notes/{id}` route.
+
+In the **URL** tab, enter the **id** of the note we created and in the **body** tab and enter the below json value and hit **Send**.
+
+```json
+{ "content": "Updating the note" }
 ```
 
-To fetch our new note, use the `noteId` that was just printed out.
+![API explorer update a note response](/assets/examples/crud-rest-api-dynamodb/api-explorer-update-a-note-response.png)
 
-``` bash
-$ curl https://t34witddz7.execute-api.us-east-1.amazonaws.com/notes/f32223d0-682d-11eb-96f0-bfbf66b96915
-```
+This should respond with the updated note.
 
-And to update it.
+Click the **Send** button of the `GET /notes` route to get a list of notes.
 
-``` bash
-$ curl -X PUT \
--H 'Content-Type: application/json' \
--d '{"content":"Updating the note"}' \
-https://t34witddz7.execute-api.us-east-1.amazonaws.com/notes/bf602fd0-6826-11eb-a6e5-5de2269b43c8
-```
+![API explorer get notes response](/assets/examples/crud-rest-api-dynamodb/api-explorer-get-notes-response.png)
 
-To list all our notes, just hit `/notes`.
+You should see the list of notes.
 
-``` bash
-$ curl https://t34witddz7.execute-api.us-east-1.amazonaws.com/notes
-```
+To delete a note, go to the `DELETE /notes/{id}` and enter the **id** of the note to delete in the **URL** tab and hot **Send**.
 
-Finally, to delete it.
-
-``` bash
-$ curl -X DELETE https://t34witddz7.execute-api.us-east-1.amazonaws.com/notes/bf602fd0-6826-11eb-a6e5-5de2269b43c8
-```
+![API explorer delete note response](/assets/examples/crud-rest-api-dynamodb/api-explorer-delete-note-response.png)
 
 ## Making changes
 
@@ -387,7 +397,7 @@ Let's make a quick change to test our Live Lambda Development environment. We wa
 
 {%change%} Replace the `return` statement in `src/gets.js` with:
 
-``` js
+```js
 return results.Item
   ? {
       statusCode: 200,
@@ -399,32 +409,49 @@ return results.Item
     };
 ```
 
-Now if you request an invalid note.
+Now let's send an invalid request by entering a random note id which is not present in the table.
 
-``` bash
-$ curl https://t34witddz7.execute-api.us-east-1.amazonaws.com/notes/ABCD
-```
+![API explorer invalid note response](/assets/examples/crud-rest-api-dynamodb/api-explorer-invalid-note-response.png)
 
 You should see an error being printed out.
-
-``` bash
-{"error":true}
-```
 
 ## Deploying to prod
 
 {%change%} To wrap things up we'll deploy our app to prod.
 
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
-This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
+
+This allows us to separate our environments, so when we are working in `dev`, it doesn't break the app for our users.
+
+Once deployed, you should see something like this.
+
+```bash
+ ✅  prod-rest-api-dynamodb-my-stack
+
+
+Stack prod-rest-api-dynamodb-my-stack
+  Status: deployed
+  Outputs:
+    ApiEndpoint: https://ck198mfop1.execute-api.us-east-1.amazonaws.com
+```
+
+Run the below command to open the SST Console in **prod** stage to test the production endpoint.
+
+```bash
+npx sst console --stage prod
+```
+
+Go to the **API** explorer and click **Send** button of the `GET /notes` route, to send a `GET` request.
+
+![Prod API explorer get notes response](/assets/examples/crud-rest-api-dynamodb/prod-api-explorer-get-notes-response.png)
 
 ## Cleaning up
 
 Finally, you can remove the resources created in this example using the following commands.
 
-``` bash
+```bash
 $ npx sst remove
 $ npx sst remove --stage prod
 ```

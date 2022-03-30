@@ -292,6 +292,8 @@ select * from todos
 
 You should see the empty table with column names.
 
+Note, to revert back to a specific migration, re-run its previous migration.
+
 ## Deploying to prod
 
 {%change%} To wrap things up we'll deploy our app to prod.

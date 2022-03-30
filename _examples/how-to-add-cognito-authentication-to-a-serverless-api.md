@@ -25,18 +25,18 @@ In this example we will look at how to add [Cognito User Pool](https://docs.aws.
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest api-auth-cognito
 $ cd api-auth-cognito
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "api-auth-cognito",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -58,7 +58,7 @@ Let's start by setting up an API.
 
 {%change%} Replace the `stacks/MyStack.js` with the following.
 
-``` js
+```js
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -98,7 +98,7 @@ By default, all routes have the authorization type `AWS_IAM`. This means the cal
 
 {%change%} Add this below the `sst.Api` definition in `stacks/MyStack.js`.
 
-``` js
+```js
 // Create auth provider
 const auth = new sst.Auth(this, "Auth", {
   // Create a Cognito User Pool to manage user's authentication info.
@@ -137,7 +137,7 @@ We will create two functions, one for the public route, and one for the private 
 
 {%change%} Add a `src/public.js`.
 
-``` js
+```js
 export async function main() {
   return {
     statusCode: 200,
@@ -148,7 +148,7 @@ export async function main() {
 
 {%change%} Add a `src/private.js`.
 
-``` js
+```js
 export async function main() {
   return {
     statusCode: 200,
@@ -163,7 +163,7 @@ Now let's test our new API.
 
 {%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
 
-``` bash
+```bash
 $ npx sst start
 ```
 
@@ -221,7 +221,7 @@ Now to visit the private route, we need to create an account in our User Pool. U
 
 Use the following command in your terminal. Replace `--client-id` with `UserPoolClientId` from the `sst start` output above.
 
-``` bash
+```bash
 $ aws cognito-idp sign-up \
   --region us-east-1 \
   --client-id 4fb69je3470cat29p0nfm3t27k \
@@ -231,7 +231,7 @@ $ aws cognito-idp sign-up \
 
 Next we'll verify the user. Replace `--user-pool-id` with `UserPoolId` from the `sst start` output above.
 
-``` bash
+```bash
 $ aws cognito-idp admin-confirm-sign-up \
   --region us-east-1 \
   --user-pool-id us-east-1_e8u3sktE1 \
@@ -240,7 +240,7 @@ $ aws cognito-idp admin-confirm-sign-up \
 
 Now we'll make a request to our private API. Typically, we'll be using our app to do this. But just to test, we'll use the [AWS API Gateway Test CLI](https://github.com/AnomalyInnovations/aws-api-gateway-cli-test). This makes an authenticated call to our private API using the credentials of the user we just created.
 
-``` bash
+```bash
 $ npx aws-api-gateway-cli-test \
   --username='admin@example.com' \
   --password='Passw0rd!' \
@@ -264,7 +264,7 @@ Make sure to set the options with the ones in your `sst start` output.
 
 You should now see.
 
-``` bash
+```bash
 {
   status: 200,
   statusText: 'OK',
@@ -280,7 +280,7 @@ Let's make a quick change to our private route to print out the caller's user id
 
 {%change%} Replace `src/private.js` with the following.
 
-``` js
+```js
 export async function main(event) {
   return {
     statusCode: 200,
@@ -293,7 +293,7 @@ We are getting the user id from the event object.
 
 If you make the same authenticated request to the `/private` endpoint.
 
-``` bash
+```bash
 $ npx aws-api-gateway-cli-test \
   --username='admin@example.com' \
   --password='Passw0rd!' \
@@ -309,7 +309,7 @@ $ npx aws-api-gateway-cli-test \
 
 You should see the user id.
 
-``` bash
+```bash
 {
   status: 200,
   statusText: 'OK',
@@ -325,7 +325,7 @@ However, we are going to deploy your API again. But to a different environment, 
 
 {%change%} Run the following in your terminal.
 
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
 
@@ -335,13 +335,13 @@ A note on these environments. SST is simply deploying the same app twice using t
 
 Finally, you can remove the resources created in this example using the following command.
 
-``` bash
+```bash
 $ npx sst remove
 ```
 
 And to remove the prod environment.
 
-``` bash
+```bash
 $ npx sst remove --stage prod
 ```
 

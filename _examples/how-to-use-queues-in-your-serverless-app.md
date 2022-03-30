@@ -25,18 +25,18 @@ In this example we will look at how to use SQS to create a queue in our serverle
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest queue
 $ cd queue
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "queue",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -58,7 +58,7 @@ An SST app is made up of two parts.
 
 {%change%} Replace the `stacks/MyStack.js` with the following.
 
-``` js
+```js
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -81,7 +81,7 @@ Now let's add the API.
 
 {%change%} Add this below the `sst.Queue` definition in `stacks/MyStack.js`.
 
-``` js
+```js
 // Create the HTTP API
 const api = new sst.Api(this, "Api", {
   defaultFunctionProps: {
@@ -114,7 +114,7 @@ We will create two functions, one for handling the API request, and one for the 
 
 {%change%} Replace the `src/lambda.js` with the following.
 
-``` js
+```js
 export async function main() {
   console.log("Message queued!");
   return {
@@ -126,7 +126,7 @@ export async function main() {
 
 {%change%} Add a `src/consumer.js`.
 
-``` js
+```js
 export async function main() {
   console.log("Message processed!");
   return {};
@@ -139,7 +139,7 @@ Now let's test our new API.
 
 {%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
 
-``` bash
+```bash
 $ npx sst start
 ```
 
@@ -165,13 +165,19 @@ Stack dev-queue-my-stack
     ApiEndpoint: https://i8ia1epqnh.execute-api.us-east-1.amazonaws.com
 ```
 
-The `ApiEndpoint` is the API we just created. Let's test our endpoint. Run the following in your terminal.
+The `ApiEndpoint` is the API we just created.
 
-``` bash
-$ curl -X POST https://i8ia1epqnh.execute-api.us-east-1.amazonaws.com
-```
+Let's test our endpoint with the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
-You should see `{status: 'successful'}` printed out. And if you head back to the debugger, you should see `Item queued!`.
+Go to the **API** tab and click the **Send** button of the `POST /` function to send a `POST` request.
+
+![API explorer response](/assets/examples/queues/api-explorer-response.png)
+
+After you see a success status in the logs, go to the **Local** tab in the console to see all function invocations. Local tab displays **real-time logs** from your Live Lambda Dev environment.
+
+![Local tab response without queue](/assets/examples/queues/local-tab-response-without-queue.png)
+
+You should see `Message queued!` logged in the console.
 
 ## Sending message to our queue
 
@@ -179,7 +185,7 @@ Now let's send a message to our queue.
 
 {%change%} Replace the `src/lambda.js` with the following.
 
-``` js
+```js
 import AWS from "aws-sdk";
 
 const sqs = new AWS.SQS();
@@ -207,30 +213,29 @@ Here we are getting the queue url from the environment variable, and then sendin
 
 {%change%} Let's install the `aws-sdk`.
 
-``` bash
+```bash
 $ npm install aws-sdk
 ```
 
-And now if you head over to your terminal and make a request to our API. You'll notice in the debug logs that our consumer is called. And you should see `Message processed!` being printed out.
+And now if you head over to your console and hit the **Send** button again in API explorer, you'll notice in the **Local** tab that our consumer is called. You should see `Message processed!` being printed out.
 
-``` bash
-$ curl -X POST https://i8ia1epqnh.execute-api.us-east-1.amazonaws.com
-```
+![Local tab response with queue](/assets/examples/queues/local-tab-response-with-queue.png)
 
 ## Deploying to prod
 
 {%change%} To wrap things up we'll deploy our app to prod.
 
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
+
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
 
 ## Cleaning up
 
 Finally, you can remove the resources created in this example using the following commands.
 
-``` bash
+```bash
 $ npx sst remove
 $ npx sst remove --stage prod
 ```

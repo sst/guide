@@ -25,18 +25,18 @@ In this example we'll look at how to create an [Apollo GraphQL API](https://www.
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest --language typescript graphql-apollo
 $ cd graphql-apollo
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "graphql-apollo",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -58,7 +58,7 @@ Let's start by setting up our GraphQL API.
 
 {%change%} Replace the `stacks/MyStack.ts` with the following.
 
-``` ts
+```ts
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -86,7 +86,7 @@ For this example, we are not using a database. We'll look at that in detail in a
 
 {%change%} Let's add a file that contains our notes in `src/lambda.ts`.
 
-``` ts
+```ts
 import { gql, ApolloServer } from "apollo-server-lambda";
 
 const IS_LOCAL = !!process.env.IS_LOCAL;
@@ -106,18 +106,18 @@ const resolvers = {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  playground: IS_LOCAL,
+  playground: false,
   introspection: IS_LOCAL,
 });
 
 export const handler = server.createHandler();
 ```
 
-Here we are creating an Apollo Server. We are also enabling the GraphQL Playground and enabling introspection if we are running our Lambda function locally. SST sets the `process.env.IS_LOCAL` when run locally. 
+Here we are creating an Apollo Server. We are also enabling introspection if we are running our Lambda function locally. SST sets the `process.env.IS_LOCAL` when run locally.
 
 {%change%} Let's install `apollo-server-lambda`.
 
-``` bash
+```bash
 $ npm install apollo-server-lambda
 ```
 
@@ -125,7 +125,7 @@ We also need to quickly update our `tsconfig.json` to work with the Apollo Serve
 
 {%change%} Add the following to the `compilerOptions` block in the `tsconfig.json`.
 
-``` json
+```json
 "esModuleInterop": true
 ```
 
@@ -135,7 +135,7 @@ Now let's test our new Apollo GraphQL API.
 
 {%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
 
-``` bash
+```bash
 $ npx sst start
 ```
 
@@ -161,27 +161,24 @@ Stack dev-graphql-apollo-my-stack
     ApiEndpoint: https://keocx594ue.execute-api.us-east-1.amazonaws.com
 ```
 
-The `ApiEndpoint` is the Apollo GraphQL API we just created. Head over to the following in your browser. Make sure to replace the URL with your API.
+The `ApiEndpoint` is the API we just created.
 
-```
-https://keocx594ue.execute-api.us-east-1.amazonaws.com
-```
+Let's test our endpoint with the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
-You should see the GraphQL Playground in action.
+Go to the **GraphQL** tab and you should see the GraphQL Playground in action.
 
-![Apollo GraphQL Playground](/assets/examples/graphql-apollo/apollo-graphql-playground.png)
+Note, The GraphQL explorer lets you query GraphQL endpoints created with the GraphQLApi and AppSyncApi constructs in your app.
 
-Now let's run our query. Paste the following on the left.
+Now let's run our query. Paste the following on the left and hit the run button.
 
-``` graphql
+```graphql
 query {
   hello
 }
 ```
 
-And if you run it, you should see `Hello, World!`.
-
 ![Apollo GraphQL Playground Hello World](/assets/examples/graphql-apollo/apollo-graphql-playground-hello-world.png)
+You should see `Hello, World!`.
 
 ## Making changes
 
@@ -189,7 +186,7 @@ Let's make a quick change to our API.
 
 {%change%} In `src/lambda.ts` replace `Hello, World!` with `Hello, New World!`.
 
-``` ts
+```ts
 const resolvers = {
   Query: {
     hello: () => "Hello, New World!",
@@ -197,7 +194,9 @@ const resolvers = {
 };
 ```
 
-If you head back to the playground and run the query again, you should see the change!
+If you head back to the GraphQL playground in SST console and run the query again, you should see the change!
+
+![Apollo GraphQL Playground Hello New World](/assets/examples/graphql-apollo/apollo-graphql-playground-hello-new-world.png)
 
 ## Deploying your API
 
@@ -205,7 +204,7 @@ Now that our API is tested, let's deploy it to production. You'll recall that we
 
 {%change%} Run the following in your terminal.
 
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
 
@@ -213,7 +212,7 @@ $ npx sst deploy --stage prod
 
 Finally, you can remove the resources created in this example using the following commands.
 
-``` bash
+```bash
 $ npx sst remove
 $ npx sst remove --stage prod
 ```
@@ -221,5 +220,3 @@ $ npx sst remove --stage prod
 ## Conclusion
 
 And that's it! You've got a brand new serverless Apollo GraphQL API. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
-
-

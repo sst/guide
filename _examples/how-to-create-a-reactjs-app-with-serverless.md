@@ -25,18 +25,18 @@ In this example we will look at how to use [React.js](https://reactjs.org) with 
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest react-app
 $ cd react-app
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "react-app",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -66,7 +66,7 @@ We'll be using [Amazon DynamoDB](https://aws.amazon.com/dynamodb/); a reliable a
 
 {%change%} Replace the `stacks/MyStack.js` with the following.
 
-``` js
+```js
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -87,7 +87,7 @@ export default class MyStack extends sst.Stack {
 This creates a serverless DynamoDB table using the SST [`Table`](https://docs.serverless-stack.com/constructs/Table) construct. It has a primary key called `counter`. Our table is going to look something like this:
 
 | counter | tally |
-|---------|-------|
+| ------- | ----- |
 | clicks  | 123   |
 
 ### Creating our API
@@ -96,7 +96,7 @@ Now let's add the API.
 
 {%change%} Add this below the `sst.Table` definition in `stacks/MyStack.js`.
 
-``` js
+```js
 // Create the HTTP API
 const api = new sst.Api(this, "Api", {
   defaultFunctionProps: {
@@ -129,7 +129,7 @@ To deploy a React.js app to AWS, we'll be using the SST [`ReactStaticSite`](http
 
 {%change%} Replace the following in `stacks/MyStack.js`:
 
-``` js
+```js
 // Show the API endpoint in the output
 this.addOutputs({
   ApiEndpoint: api.url,
@@ -138,7 +138,7 @@ this.addOutputs({
 
 {%change%} With:
 
-``` js
+```js
 // Deploy our React app
 const site = new sst.ReactStaticSite(this, "ReactSite", {
   path: "frontend",
@@ -181,7 +181,7 @@ Our API is powered by a Lambda function. In the function we'll read from our Dyn
 
 {%change%} Replace `src/lambda.js` with the following.
 
-``` js
+```js
 import AWS from "aws-sdk";
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
@@ -212,7 +212,7 @@ We make a `get` call to our DynamoDB table and get the value of a row where the 
 
 {%change%} Let's install the `aws-sdk`.
 
-``` bash
+```bash
 $ npm install aws-sdk
 ```
 
@@ -222,7 +222,7 @@ And let's test what we have so far.
 
 {%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
 
-``` bash
+```bash
 $ npx sst start
 ```
 
@@ -249,15 +249,17 @@ Stack dev-react-app-my-stack
     SiteUrl: https://d8lnp7p95pfac.cloudfront.net
 ```
 
-The `ApiEndpoint` is the API we just created. While the `SiteUrl` is where our React.js app will be hosted. For now it's just a placeholder website.
+The `ApiEndpoint` is the API we just created. While the `SiteUrl` is where our React app will be hosted. For now it's just a placeholder website.
 
-Let's test our endpoint. Run the following in your terminal.
+Let's test our endpoint with the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
-``` bash
-$ curl -X POST https://51q98mf39e.execute-api.us-east-1.amazonaws.com
-```
+Go to the **API** tab and click **Send** button to send a `POST` request.
 
-You should see a `0` printed out.
+Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` and `ApiGatewayV1Api` constructs. Set the headers, query params, request body, and view the function logs with the response.
+
+![API explorer invocation response](/assets/examples/angular-app/api-explorer-invocation-response.png)
+
+You should see a `0` in the response body.
 
 ## Setting up our React app
 
@@ -265,7 +267,7 @@ We are now ready to use the API we just created. Let's use [Create React App](ht
 
 {%change%} Run the following in the project root.
 
-``` bash
+```bash
 $ npx create-react-app frontend --use-npm
 $ cd frontend
 ```
@@ -276,7 +278,7 @@ Create React App will throw a warning if it is installed inside a repo that uses
 
 {%change%} Add the following to `frontend/.env`.
 
-``` bash
+```bash
 SKIP_PREFLIGHT_CHECK=true
 ```
 
@@ -284,7 +286,7 @@ We also need to load the environment variables from our SST app. To do this, we'
 
 {%change%} Install the `static-site-env` package by running the following in the `frontend/` directory.
 
-``` bash
+```bash
 $ npm install @serverless-stack/static-site-env --save-dev
 ```
 
@@ -292,13 +294,13 @@ We need to update our start script to use this package.
 
 {%change%} Replace the `start` script in your `frontend/package.json`.
 
-``` bash
+```bash
 "start": "react-scripts start",
 ```
 
 {%change%} With the following:
 
-``` bash
+```bash
 "start": "sst-env -- react-scripts start",
 ```
 
@@ -306,7 +308,7 @@ Let's start our React development environment.
 
 {%change%} In the `frontend/` directory run.
 
-``` bash
+```bash
 $ npm run start
 ```
 
@@ -318,7 +320,7 @@ We are now ready to add the UI for our app and connect it to our serverless API.
 
 {%change%} Replace `frontend/src/App.js` with.
 
-``` jsx
+```jsx
 import { useState } from "react";
 import "./App.css";
 
@@ -350,8 +352,9 @@ Let's add some styles.
 
 {%change%} Replace `frontend/src/App.css` with.
 
-``` css
-body, html {
+```css
+body,
+html {
   height: 100%;
   display: grid;
 }
@@ -382,7 +385,7 @@ Let's update our table with the clicks.
 
 {%change%} Add this above the `return` statement in `src/lambda.js`.
 
-``` js
+```js
 const putParams = {
   TableName: process.env.tableName,
   Key: {
@@ -404,11 +407,17 @@ And if you head over to your browser and click the button again, you should see 
 
 ![Click counter updating in React app](/assets/examples/react-app/click-counter-updating-in-react-app.png)
 
+Also let's go to the **DynamoDB** tab in the SST Console and check that the value has been updated in the table.
+
+Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`sst.Table`](https://docs.serverless-stack.com/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
+
+![DynamoDB table view of counter table](/assets/examples/angular-app/dynamo-table-view-of-counter-table.png)
+
 ## Deploying to prod
 
 {%change%} To wrap things up we'll deploy our app to prod.
 
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
 
@@ -416,7 +425,7 @@ This allows us to separate our environments, so when we are working in `dev`, it
 
 Once deployed, you should see something like this.
 
-``` bash
+```bash
  ✅  prod-react-app-my-stack
 
 
@@ -427,6 +436,16 @@ Stack prod-react-app-my-stack
     SiteUrl: https://d1wuzrecqjflrh.cloudfront.net
 ```
 
+Run the below command to open the SST Console in **prod** stage to test the production endpoint.
+
+```bash
+npx sst console --stage prod
+```
+
+Go to the **API** tab and click **Send** button to send a `POST` request.
+
+![API explorer prod invocation response](/assets/examples/angular-app/api-explorer-prod-invocation-response.png)
+
 If you head over to the `SiteUrl` in your browser, you should see your new React app in action!
 
 ![React app deployed to AWS](/assets/examples/react-app/react-app-deployed-to-aws.png)
@@ -435,7 +454,7 @@ If you head over to the `SiteUrl` in your browser, you should see your new React
 
 Finally, you can remove the resources created in this example using the following commands.
 
-``` bash
+```bash
 $ npx sst remove
 $ npx sst remove --stage prod
 ```

@@ -26,18 +26,18 @@ In this example we will look at how to add Facebook authentication to a serverle
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest api-auth-facebook
 $ cd api-auth-facebook
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "api-auth-facebook",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -59,7 +59,7 @@ Let's start by setting up an API.
 
 {%change%} Replace the `stacks/MyStack.js` with the following.
 
-``` js
+```js
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -101,7 +101,7 @@ Now let's add authentication for our serverless app.
 
 {%change%} Add this below the `sst.Api` definition in `stacks/MyStack.js`. Make sure to replace the `appId` with that of your Facebook app.
 
-``` js
+```js
 // Create auth provider
 const auth = new sst.Auth(this, "Auth", {
   facebook: { appId: "419718329085014" },
@@ -130,7 +130,7 @@ Let's create two functions, one handling the public route, and the other for the
 
 {%change%} Add a `src/public.js`.
 
-``` js
+```js
 export async function main() {
   return {
     statusCode: 200,
@@ -141,7 +141,7 @@ export async function main() {
 
 {%change%} Add a `src/private.js`.
 
-``` js
+```js
 export async function main() {
   return {
     statusCode: 200,
@@ -156,7 +156,7 @@ Now let's test our new API.
 
 {%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
 
-``` bash
+```bash
 $ npx sst start
 ```
 
@@ -208,7 +208,7 @@ https://2zy74sn6we.execute-api.us-east-1.amazonaws.com/private
 
 ## Login with Facebook
 
-We are going to use [Facebook's Graph API Explorer](https://developers.facebook.com/tools/explorer) to test logging in with Facebook. Head over to — [**developers.facebook.com/tools/explorer**](https://developers.facebook.com/tools/explorer)
+We are going to use [Facebook's Graph API explorer](https://developers.facebook.com/tools/explorer) to test logging in with Facebook. Head over to — [**developers.facebook.com/tools/explorer**](https://developers.facebook.com/tools/explorer)
 
 Select your Facebook App and select **Generate Access Token**. Copy the generated access token.
 
@@ -216,7 +216,7 @@ Select your Facebook App and select **Generate Access Token**. Copy the generate
 
 Next, we need to get the user's Cognito Identity id. Replace `--identity-pool-id` with the `IdentityPoolId` from the `sst start` log output; and replace the `--logins` with the **Access Token** from the previous step.
 
-``` bash
+```bash
 $ aws cognito-identity get-id \
   --identity-pool-id us-east-1:84340cf1-4f64-496e-87c2-517072e7d5d9 \
   --logins graph.facebook.com="EAAF9u0npLFUBAGv7SlHXIMigP0nZBF2LxZA5ZCe3NqZB6Wc6xbWxwHqn64T5QLEsjOZAFhZCLJj1yIsDLPCc9L3TRWZC3SvKf2D1vEZC3FISPWENQ9S5BZA94zxtn6HWQFD8QLMvjt83qOGHeQKZAAtJRgHeuzmd2oGn3jbZBmfYl2rhg3dpEnFhkAmK3lC7BZAEyc0ZD"
@@ -224,7 +224,7 @@ $ aws cognito-identity get-id \
 
 You should get an identity id for the Facebook user.
 
-``` json
+```json
 {
   "IdentityId": "us-east-1:46625265-9c97-420f-a826-15dbc812a008"
 }
@@ -232,7 +232,7 @@ You should get an identity id for the Facebook user.
 
 Now we'll need to get the IAM credentials for the identity user.
 
-``` bash
+```bash
 $ aws cognito-identity get-credentials-for-identity \
   --identity-id us-east-1:46625265-9c97-420f-a826-15dbc812a008 \
   --logins graph.facebook.com="EAAF9u0npLFUBAGv7SlHXIMigP0nZBF2LxZA5ZCe3NqZB6Wc6xbWxwHqn64T5QLEsjOZAFhZCLJj1yIsDLPCc9L3TRWZC3SvKf2D1vEZC3FISPWENQ9S5BZA94zxtn6HWQFD8QLMvjt83qOGHeQKZAAtJRgHeuzmd2oGn3jbZBmfYl2rhg3dpEnFhkAmK3lC7BZAEyc0ZD"
@@ -240,15 +240,15 @@ $ aws cognito-identity get-credentials-for-identity \
 
 You should get a set of temporary IAM credentials.
 
-``` json
+```json
 {
-    "IdentityId": "us-east-1:46625265-9c97-420f-a826-15dbc812a008",
-    "Credentials": {
-        "AccessKeyId": "ASIARUIS6Q2MOT2D7LGE",
-        "SecretKey": "r9xMZBe7KXqKYUTBPuGR8jziNrkD8XpL5g2r9Pgw",
-        "SessionToken": "IQoJb3JpZ2luX2VjEHYaCXVzLWVhc3QtMSJHMEUCIA/0ccZZvhjSPnoXkzJ/TUiSPXB2ON/1Qnn2/omfQOQLAiEA+qjuBHYwZvHG8Q9cfjd/0yloUkh5pkEUzEiCjjaa5FYq6QMIbhACGgwxMTIyNDU3Njk4ODAiDGDpiBCuNOBhkktiHyrGA7A8scWUjxzwUKaEAzYdWOwxDdYxA21wPc3Bz2NSJlscwHQP0AjmZ3aPmEREgwhi92/5SGETFINbJSRDs9dsJ+hrArHpSyoOp6UmXX/48q8b9BbWKB2qeF/kIPMG+1urwgTLn7I9cmYNH0LUHLJ0/EaRVxFo/hUTnTiPsDZCD9X96WxvO+cfjhmpAdCTR8MjxUl4k18grIWzPBkNAJwS1D+zIuoQTQPiIN6e25pWi3Mi+wXxgz+ToBFiPeybl3Q9qHOH0gQipss5eYrMFYaRWS3k6eOLCZoTOA4T/sMoJMweGwT2V33C1/o95W0LXCwYuAWg9bdUC71DHtc9bPY1NCAWqQcnxQabziZkOFTW5aLeDsY53TDPFoYiQ8lUrmDLhZSU3MsBcXVtPsvI5MPmoIqyf62ccd8VJo7idS5yyobZz9Ku7/jG/ZmU5S0jdpjWIVqBGNd5aG4R6Vf41FqMN0bEcz2qQBRFTeRg+UDQTv6Hc0kM943iXXBNdzVptivlkEV/fN5NN8sC5zXOafWUMJ8raQhPOAvWTVPIo8aXfAlKzcAqA/8bzJOzeEADcW71XGABOSzhy5TQayqWVrIX8ksBWMmFcSMwqJSDgQY6hAINr+bYzf+Vp1knGBWE52ArJAWzcss9UQU+b0kXripIvFpbdSCn3Yz4+kHKmmgvLKCEGo2k+zJW8TP+j+f3PsQinCB1VHpLpL2G+rx4aK/wMZ48ALY/rIK8KcYArnmjga5IT/PC/4cRW0z1vCucGQibKZ5skF0tUnpLb3BNwGP42NrtoaFkHPmihRpvvpS93iHX8HavIkpEzNcgkKzCcL3tdWXlnN9Hx/CI1kpb4ubzYaAQYiuURYKrFySzkaAJAvSkCO0ZjG342YHe9V+WEC/VBDRJllSiPBAnWaWrDsymafAKUA3HylrvKAetXaK8sSwGQ3DfkJ6GedJTel3FDN8jzZOo9A==",
-        "Expiration": "2021-02-08T01:20:40-05:00"
-    }
+  "IdentityId": "us-east-1:46625265-9c97-420f-a826-15dbc812a008",
+  "Credentials": {
+    "AccessKeyId": "ASIARUIS6Q2MOT2D7LGE",
+    "SecretKey": "r9xMZBe7KXqKYUTBPuGR8jziNrkD8XpL5g2r9Pgw",
+    "SessionToken": "IQoJb3JpZ2luX2VjEHYaCXVzLWVhc3QtMSJHMEUCIA/0ccZZvhjSPnoXkzJ/TUiSPXB2ON/1Qnn2/omfQOQLAiEA+qjuBHYwZvHG8Q9cfjd/0yloUkh5pkEUzEiCjjaa5FYq6QMIbhACGgwxMTIyNDU3Njk4ODAiDGDpiBCuNOBhkktiHyrGA7A8scWUjxzwUKaEAzYdWOwxDdYxA21wPc3Bz2NSJlscwHQP0AjmZ3aPmEREgwhi92/5SGETFINbJSRDs9dsJ+hrArHpSyoOp6UmXX/48q8b9BbWKB2qeF/kIPMG+1urwgTLn7I9cmYNH0LUHLJ0/EaRVxFo/hUTnTiPsDZCD9X96WxvO+cfjhmpAdCTR8MjxUl4k18grIWzPBkNAJwS1D+zIuoQTQPiIN6e25pWi3Mi+wXxgz+ToBFiPeybl3Q9qHOH0gQipss5eYrMFYaRWS3k6eOLCZoTOA4T/sMoJMweGwT2V33C1/o95W0LXCwYuAWg9bdUC71DHtc9bPY1NCAWqQcnxQabziZkOFTW5aLeDsY53TDPFoYiQ8lUrmDLhZSU3MsBcXVtPsvI5MPmoIqyf62ccd8VJo7idS5yyobZz9Ku7/jG/ZmU5S0jdpjWIVqBGNd5aG4R6Vf41FqMN0bEcz2qQBRFTeRg+UDQTv6Hc0kM943iXXBNdzVptivlkEV/fN5NN8sC5zXOafWUMJ8raQhPOAvWTVPIo8aXfAlKzcAqA/8bzJOzeEADcW71XGABOSzhy5TQayqWVrIX8ksBWMmFcSMwqJSDgQY6hAINr+bYzf+Vp1knGBWE52ArJAWzcss9UQU+b0kXripIvFpbdSCn3Yz4+kHKmmgvLKCEGo2k+zJW8TP+j+f3PsQinCB1VHpLpL2G+rx4aK/wMZ48ALY/rIK8KcYArnmjga5IT/PC/4cRW0z1vCucGQibKZ5skF0tUnpLb3BNwGP42NrtoaFkHPmihRpvvpS93iHX8HavIkpEzNcgkKzCcL3tdWXlnN9Hx/CI1kpb4ubzYaAQYiuURYKrFySzkaAJAvSkCO0ZjG342YHe9V+WEC/VBDRJllSiPBAnWaWrDsymafAKUA3HylrvKAetXaK8sSwGQ3DfkJ6GedJTel3FDN8jzZOo9A==",
+    "Expiration": "2021-02-08T01:20:40-05:00"
+  }
 }
 ```
 
@@ -276,7 +276,7 @@ Let's make a quick change to our private route and print out the caller's user i
 
 {%change%} Replace `src/private.js` with the following.
 
-``` js
+```js
 export async function main(event) {
   return {
     statusCode: 200,
@@ -305,7 +305,7 @@ However, we are going to deploy your API again. But to a different environment, 
 
 {%change%} Run the following in your terminal.
 
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
 
@@ -315,13 +315,13 @@ A note on these environments. SST is simply deploying the same app twice using t
 
 Finally, you can remove the resources created in this example using the following command.
 
-``` bash
+```bash
 $ npx sst remove
 ```
 
 And to remove the prod environment.
 
-``` bash
+```bash
 $ npx sst remove --stage prod
 ```
 

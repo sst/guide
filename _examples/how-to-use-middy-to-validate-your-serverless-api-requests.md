@@ -139,15 +139,17 @@ Stack dev-middy-validator-my-stack
 
 The `ApiEndpoint` is the API we just created.
 
-Let's test our endpoint using [**Insomnia**](https://insomnia.rest/).
+Let's test our endpoint using the integrated [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.docs_url }}/console.
 
-![Insomnia request with correct schema](/assets/examples/middy-validator/insomnia-request-with-correct-schema.png)
+Go to the **API** explorer and click on the `POST /` route. In the **Query** tab, enter **fname** and **lname** values as **mani** and **teja** respectively and click **Send** to send a POST request.
+
+![Request with correct schema](/assets/examples/middy-validator/request-with-correct-schema.png)
 
 As you can see the endpoint is working as expected. We sent `mani` and `teja` as our `fname` and `lname` respectively and got `Hello, mani-teja` as the response.
 
-Now let's remove `lname` from the request object and see what happens.
+Now let's remove `lname` from the query parameters and see what happens.
 
-![Insomnia request with incorrect schema](/assets/examples/middy-validator/insomnia-request-with-incorrect-schema.png)
+![Request with incorrect schema](/assets/examples/middy-validator/request-with-incorrect-schema.png)
 
 You'll notice that the endpoint is working fine but it returned `undefined` for `lname`. Since we'd only sent the `fname` in the request, so it returned `undefined` in the place of `lname`.
 
@@ -179,6 +181,7 @@ Let's understand what the above packages are.
 ```js
 import middy from "@middy/core";
 import validator from "@middy/validator";
+import httpErrorHandler from "@middy/http-error-handler";
 import jsonBodyParser from "@middy/http-json-body-parser";
 
 const baseHandler = (event) => {
@@ -221,11 +224,11 @@ Here we are creating an `inputSchema`. We are explicitly setting that `fname` an
 
 **Important:** Compiling schemas on the fly will cause a 50-100ms performance hit during cold start for simple JSON Schemas. Precompiling is highly recommended. [Read more about this](https://github.com/willfarrell/middy-ajv).
 
-Now open Insomnia and send a request.
+Now go back to console and click the **Send** button again to send a new request.
 
-![Insomnia request with Middy schema request validation](/assets/examples/middy-validator/insomnia-request-with-middy-schema-request-validation.png)
+![Request with Middy schema request validation](/assets/examples/middy-validator/request-with-middy-schema-validation.png)
 
-Great! The server throws a `400 Bad request` error to let us know that something is wrong.
+Great! The server throws a `Bad request` error to let us know that something is wrong.
 
 ### Adding response validation
 
@@ -295,7 +298,9 @@ We added a new `outputSchema` and added it to the Middy validator.
 
 Let's test our API again with correct schema and Middy validator.
 
-![Insomnia request with correct schema](/assets/examples/middy-validator/insomnia-request-with-correct-schema.png)
+Add **lname** parameter again in the **Query** tab and click **Send**.
+
+![Request with correct schema](/assets/examples/middy-validator/request-with-correct-schema.png)
 
 Now the API is back working as expected.
 
@@ -317,7 +322,7 @@ statusCode: "success",
 
 Let's test the API again.
 
-![Insomnia request with Middy schema response validation](/assets/examples/middy-validator/insomnia-request-with-middy-schema-response-validation.png)
+![Request with Middy schema response validation](/assets/examples/middy-validator/request-with-middy-schema-response-validation.png)
 
 Great! The server now throws a `500 Internal Server Error` to let us know that something is wrong.
 

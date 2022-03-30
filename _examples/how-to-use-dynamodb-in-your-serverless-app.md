@@ -25,18 +25,18 @@ In this example we will look at how to use DynamoDB in our serverless app using 
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest rest-api-dynamodb
 $ cd rest-api-dynamodb
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "rest-api-dynamodb",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -58,7 +58,7 @@ An SST app is made up of two parts.
 
 {%change%} Replace the `stacks/MyStack.js` with the following.
 
-``` js
+```js
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -79,7 +79,7 @@ export default class MyStack extends sst.Stack {
 This creates a serverless DynamoDB table using [`sst.Table`](https://docs.serverless-stack.com/constructs/Table). It has a primary key called `counter`. Our table is going to look something like this:
 
 | counter | tally |
-|---------|-------|
+| ------- | ----- |
 | hits    | 123   |
 
 ## Setting up the API
@@ -88,7 +88,7 @@ Now let's add the API.
 
 {%change%} Add this below the `sst.Table` definition in `stacks/MyStack.js`.
 
-``` js
+```js
 // Create the HTTP API
 const api = new sst.Api(this, "Api", {
   defaultFunctionProps: {
@@ -121,7 +121,7 @@ Now in our function, we'll start by reading from our DynamoDB table.
 
 {%change%} Replace `src/lambda.js` with the following.
 
-``` js
+```js
 import AWS from "aws-sdk";
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
@@ -152,7 +152,7 @@ We make a `get` call to our DynamoDB table and get the value of a row where the 
 
 {%change%} Let's install the `aws-sdk`.
 
-``` bash
+```bash
 $ npm install aws-sdk
 ```
 
@@ -162,7 +162,7 @@ And let's test what we have so far.
 
 {%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
 
-``` bash
+```bash
 $ npx sst start
 ```
 
@@ -188,21 +188,25 @@ Stack dev-rest-api-dynamodb-my-stack
     ApiEndpoint: https://u3nnmgdigh.execute-api.us-east-1.amazonaws.com
 ```
 
-The `ApiEndpoint` is the API we just created. Let's test our endpoint. Run the following in your terminal.
+The `ApiEndpoint` is the API we just created.
 
-``` bash
-$ curl -X POST https://u3nnmgdigh.execute-api.us-east-1.amazonaws.com
-```
+Let's test our endpoint with the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
-You should see a `0` printed out.
+Go to the **API** tab and click **Send** button to send a `POST` request.
 
-## Writing to our table 
+Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` and `ApiGatewayV1Api` constructs. Set the headers, query params, request body, and view the function logs with the response.
+
+![API explorer invocation response](/assets/examples/angular-app/api-explorer-invocation-response.png)
+
+You should see a `0` in the response body.
+
+## Writing to our table
 
 Now let's update our table with the hits.
 
 {%change%} Add this above the `return` statement in `src/lambda.js`.
 
-``` js
+```js
 const putParams = {
   TableName: process.env.tableName,
   Key: {
@@ -218,28 +222,31 @@ const putParams = {
 await dynamoDb.update(putParams).promise();
 ```
 
-Here we are updating the `hits` row's `tally` column with the increased count.
+Here we are updating the `clicks` row's `tally` column with the increased count.
 
-And now if you head over to your terminal and make a request to our API. You'll notice the count increase!
+And if you head over to your API explorer and hit the **Send** button again, you should see the count increase!
 
-``` bash
-$ curl -X POST https://u3nnmgdigh.execute-api.us-east-1.amazonaws.com
-```
+Also let's go to the **DynamoDB** tab in the SST Console and check that the value has been updated in the table.
+
+Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`sst.Table`](https://docs.serverless-stack.com/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
+
+![DynamoDB table view of counter table](/assets/examples/angular-app/dynamo-table-view-of-counter-table.png)
 
 ## Deploying to prod
 
 {%change%} To wrap things up we'll deploy our app to prod.
 
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
+
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
 
 ## Cleaning up
 
 Finally, you can remove the resources created in this example using the following commands.
 
-``` bash
+```bash
 $ npx sst remove
 $ npx sst remove --stage prod
 ```

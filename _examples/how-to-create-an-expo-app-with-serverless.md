@@ -196,15 +196,17 @@ Stack dev-expo-app-my-stack
     ApiEndpoint: https://sez1p3dsia.execute-api.ap-south-1.amazonaws.com
 ```
 
-The `ApiEndpoint` is the API we just created.
+The `ApiEndpoint` is the API we just created. While the `SiteUrl` is where our React app will be hosted. For now it's just a placeholder website.
 
-Let's test our endpoint. Run the following in your terminal.
+Let's test our endpoint with the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
-```bash
-$ curl -X POST https://sez1p3dsia.execute-api.ap-south-1.amazonaws.com
-```
+Go to the **API** tab and click **Send** button to send a `POST` request.
 
-You should see a `0` printed out.
+Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` and `ApiGatewayV1Api` constructs. Set the headers, query params, request body, and view the function logs with the response.
+
+![API explorer invocation response](/assets/examples/angular-app/api-explorer-invocation-response.png)
+
+You should see a `0` in the response body.
 
 ## Setting up our Expo app
 
@@ -365,6 +367,12 @@ And if you head over to your emulator and click the button again, you should see
 
 ![Click counter updating in Expo app](/assets/examples/expo-app/click-counter-updating-in-expo-app.png){: width="432" }
 
+Also let's go to the **DynamoDB** tab in the SST Console and check that the value has been updated in the table.
+
+Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`sst.Table`](https://docs.serverless-stack.com/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
+
+![DynamoDB table view of counter table](/assets/examples/angular-app/dynamo-table-view-of-counter-table.png)
+
 ## Deploying to prod
 
 {%change%} To wrap things up we'll deploy our app to prod.
@@ -393,6 +401,16 @@ Stack prod-expo-app-my-stack
 DEV_API_URL=https://hfv2gyuwdh.execute-api.us-east-1.amazonaws.com
 PROD_API_URL=https://k40qchmtvf.execute-api.us-east-1.amazonaws.com
 ```
+
+Run the below command to open the SST Console in **prod** stage to test the production endpoint.
+
+```bash
+npx sst console --stage prod
+```
+
+Go to the **API** tab and click **Send** button to send a `POST` request.
+
+![API explorer prod invocation response](/assets/examples/angular-app/api-explorer-prod-invocation-response.png)
 
 Now we are ready to ship our app!
 

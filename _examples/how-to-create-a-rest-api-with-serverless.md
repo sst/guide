@@ -1,6 +1,6 @@
 ---
 layout: example
-title: How to create a REST API with serverless 
+title: How to create a REST API with serverless
 short_title: REST API
 date: 2021-01-27 00:00:00
 lang: en
@@ -25,18 +25,18 @@ In this example we will look at how to create a serverless REST API on AWS using
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest rest-api
 $ cd rest-api
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "rest-api",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -58,7 +58,7 @@ Let's start by setting up the routes for our API.
 
 {%change%} Replace the `stacks/MyStack.js` with the following.
 
-``` js
+```js
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -98,7 +98,7 @@ For this example, we are not using a database. We'll look at that in detail in a
 
 {%change%} Let's add a file that contains our notes in `src/notes.js`.
 
-``` js
+```js
 export default {
   id1: {
     noteId: "id1",
@@ -121,7 +121,7 @@ Now add the code for our first endpoint.
 
 {%change%} Add a `src/list.js`.
 
-``` js
+```js
 import notes from "./notes";
 
 export async function main() {
@@ -140,7 +140,7 @@ Note that this function need to be `async` to be invoked by AWS Lambda. Even tho
 
 {%change%} Add the following to `src/get.js`.
 
-``` js
+```js
 import notes from "./notes";
 
 export async function main(event) {
@@ -157,13 +157,13 @@ export async function main(event) {
 }
 ```
 
-Here we are checking if we have the requested note. If we do, we respond with it. If we don't, then we respond with a 404 error. 
+Here we are checking if we have the requested note. If we do, we respond with it. If we don't, then we respond with a 404 error.
 
 ### Updating a note
 
 {%change%} Add the following to `src/update.js`.
 
-``` js
+```js
 import notes from "./notes";
 
 export async function main(event) {
@@ -195,7 +195,7 @@ Now let's test our new API.
 
 {%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
 
-``` bash
+```bash
 $ npx sst start
 ```
 
@@ -217,39 +217,42 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-rest-api-my-stack: deploying...
+manitej-rest-api-my-stack: deploying...
 
- ✅  dev-rest-api-my-stack
+ ✅  manitej-rest-api-my-stack
 
 
-Stack dev-rest-api-my-stack
+Stack manitej-rest-api-my-stack
   Status: deployed
   Outputs:
     ApiEndpoint: https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com
 ```
 
-The `ApiEndpoint` is the API we just created. Now let's get our list of notes. Head over to the following in your browser. Make sure to replace the URL with your API.
+The `ApiEndpoint` is the API we just created.
 
-```
-https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com/notes
-```
+Let's test our endpoint using the integrated [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.docs_url }}/console.
+
+Go to the **API** explorer and click the **Send** button of the `GET /notes` route to get a list of notes.
+
+Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` and `ApiGatewayV1Api` constructs. Set the headers, query params, request body, and view the function logs with the response.
+
+![API tab get notes response](/assets/examples/rest-api/api-tab-get-notes-response.png)
 
 You should see the list of notes as a JSON string.
 
-And use the following endpoint to to retrieve a specific note.
+To retrieve a specific note, Go to `GET /notes/{id}` route and in the **URL** tab enter the **id** of the note you want to get in the **id** field and click the **Send** button to get that note.
 
-```
-https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com/notes/id1
+![API tab get specific note response](/assets/examples/rest-api/api-tab-get-specific-note-response.png)
+
+Now to update our note, we need to make a `PUT` request, go to `PUT /notes/{id}` route.
+
+In the **URL** tab, enter the **id** of the note you want to update and in the **body** tab and enter the below json value and hit **Send**.
+
+```json
+{ "content": "Updating my note" }
 ```
 
-Now to update our note, we need to make a `PUT` request. Our browser cannot make this type of request. So use the following command in your terminal.
-
-``` bash
-curl -X PUT \
--H 'Content-Type: application/json' \
--d '{"content":"Updating my note"}' \
-https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com/notes/id1
-```
+![API tab update note response](/assets/examples/rest-api/api-tab-update-note-response.png)
 
 This should respond with the updated note.
 
@@ -259,7 +262,7 @@ Let's make a quick change to our API. It would be good if the JSON strings are p
 
 {%change%} Replace `src/list.js` with the following.
 
-``` js
+```js
 import notes from "./notes";
 
 export async function main() {
@@ -272,39 +275,55 @@ export async function main() {
 
 Here we are just [adding some spaces](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) to pretty print the JSON.
 
-If you head back to the `/notes` endpoint.
+If you head back to the `GET /notes` route and hit **Send** again.
 
-```
-https://2q0mwp6r8d.execute-api.us-east-1.amazonaws.com/notes
-```
+![API tab get notes response with spaces](/assets/examples/rest-api/api-tab-get-notes-response-with-spaces.png)
 
 You should see your list of notes in a more readable format.
 
 ## Deploying your API
 
-Now that our API is tested and ready to go. Let's go ahead and deploy it for our users. You'll recall that we were using a `dev` environment, the one specified in your `sst.json`.
+{%change%} To wrap things up we'll deploy our app to prod.
 
-However, we are going to deploy your API again. But to a different environment, called `prod`. This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
-
-{%change%} Run the following in your terminal.
-
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
 
-A note on these environments. SST is simply deploying the same app twice using two different `stage` names. It prefixes the resources with the stage names to ensure that they don't thrash.
+This allows us to separate our environments, so when we are working in `dev`, it doesn't break the app for our users.
+
+Once deployed, you should see something like this.
+
+```bash
+ ✅  prod-rest-api-my-stack
+
+
+Stack prod-rest-api-my-stack
+  Status: deployed
+  Outputs:
+    ApiEndpoint: https://ck198mfop1.execute-api.us-east-1.amazonaws.com
+```
+
+Run the below command to open the SST Console in **prod** stage to test the production endpoint.
+
+```bash
+npx sst console --stage prod
+```
+
+Go to the **API** explorer and click **Send** button of the `GET /notes` route, to send a `GET` request.
+
+![Prod API explorer get notes response with spaces](/assets/examples/rest-api/prod-api-tab-get-notes-response-with-spaces.png)
 
 ## Cleaning up
 
 Finally, you can remove the resources created in this example using the following command.
 
-``` bash
+```bash
 $ npx sst remove
 ```
 
 And to remove the prod environment.
 
-``` bash
+```bash
 $ npx sst remove --stage prod
 ```
 

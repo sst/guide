@@ -35,8 +35,8 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 ```json
 {
   "name": "api-auth-jwt-cognito-user-pool",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -82,9 +82,13 @@ export default class MyStack extends sst.Stack {
 
     // Create Api
     const api = new sst.Api(this, "Api", {
-      defaultAuthorizer: new apigAuthorizers.HttpUserPoolAuthorizer("Authorizer", userPool, {
-        userPoolClients: [userPoolClient],
-      }),
+      defaultAuthorizer: new apigAuthorizers.HttpUserPoolAuthorizer(
+        "Authorizer",
+        userPool,
+        {
+          userPoolClients: [userPoolClient],
+        }
+      ),
       defaultAuthorizationType: sst.ApiAuthorizationType.JWT,
       routes: {
         "GET /private": "src/private.main",
@@ -122,7 +126,7 @@ Let's install the npm packages we are using here.
 
 {%change%} From the project root run the following.
 
-``` bash
+```bash
 $ npx sst add-cdk @aws-cdk/aws-apigatewayv2-authorizers-alpha
 ```
 

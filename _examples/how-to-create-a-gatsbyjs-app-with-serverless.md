@@ -256,13 +256,15 @@ Stack dev-gatsby-app-my-stack
 
 The `ApiEndpoint` is the API we just created. While the `SiteUrl` is where our Gatsby app will be hosted. For now it's just a placeholder website.
 
-Let's test our endpoint. Run the following in your terminal.
+Let's test our endpoint with the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
-```bash
-$ curl -X POST https://sez1p3dsia.execute-api.ap-south-1.amazonaws.com
-```
+Go to the **API** tab and click **Send** button to send a `POST` request.
 
-You should see a `0` printed out.
+Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` and `ApiGatewayV1Api` constructs. Set the headers, query params, request body, and view the function logs with the response.
+
+![API explorer invocation response](/assets/examples/angular-app/api-explorer-invocation-response.png)
+
+You should see a `0` in the response body.
 
 ## Setting up our Gatsby app
 
@@ -325,6 +327,7 @@ We are now ready to add the UI for our app and connect it to our serverless API.
 {%change%} Replace `frontend/src/pages/index.js` with.
 
 {% raw %}
+
 ```jsx
 import React, { useState } from "react";
 
@@ -351,6 +354,7 @@ export default function App() {
   );
 }
 ```
+
 {% endraw %}
 
 Here we are adding a simple button that when clicked, makes a request to our API. We are getting the API endpoint from the environment variable, `process.env.GATSBY_APP_API_URL`.
@@ -391,6 +395,12 @@ And if you head over to your browser and click the button again, you should see 
 
 ![Click counter updating in Gatsby app](/assets/examples/react-app/click-counter-updating-in-react-app.png)
 
+Also let's go to the **DynamoDB** tab in the SST Console and check that the value has been updated in the table.
+
+Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`sst.Table`](https://docs.serverless-stack.com/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
+
+![DynamoDB table view of counter table](/assets/examples/angular-app/dynamo-table-view-of-counter-table.png)
+
 ## Deploying to prod
 
 {%change%} To wrap things up we'll deploy our app to prod.
@@ -413,6 +423,16 @@ Stack prod-gatsby-app-my-stack
     ApiEndpoint: https://k40qchmtvf.execute-api.ap-south-1.amazonaws.com
     SiteUrl: https://d1wuzrecqjflrh.cloudfront.net
 ```
+
+Run the below command to open the SST Console in **prod** stage to test the production endpoint.
+
+```bash
+npx sst console --stage prod
+```
+
+Go to the **API** tab and click **Send** button to send a `POST` request.
+
+![API explorer prod invocation response](/assets/examples/angular-app/api-explorer-prod-invocation-response.png)
 
 If you head over to the `SiteUrl` in your browser, you should see your new Gatsby app in action!
 

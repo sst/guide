@@ -26,18 +26,18 @@ In this example we will look at how to add a custom domain to a serverless API u
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest rest-api-custom-domain
 $ cd rest-api-custom-domain
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "rest-api-custom-domain",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -59,7 +59,7 @@ Let's start by setting up an API
 
 {%change%} Replace the `stacks/MyStack.js` with the following.
 
-``` js
+```js
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -92,8 +92,8 @@ GET /
 
 We are also configuring a custom domain for the API endpoint.
 
-``` js
-customDomain: `${stage}.example.com`
+```js
+customDomain: `${stage}.example.com`;
 ```
 
 Our custom domain is based on the stage we are deploying to. So for `dev` it'll be `dev.example.com`. To do this, we are [accessing the properties of the app from the stack](https://docs.serverless-stack.com/constructs/Stack#accessing-app-properties).
@@ -106,7 +106,7 @@ Or if you have a domain hosted on another provider, [read this to migrate it to 
 
 If you already have a domain in Route 53, SST will look for a [hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) with the name set to the base domain. So for example, if your custom domain is set to `dev.example.com`, SST will look for a hosted zone called `example.com`. If you have it set under a different hosted zone, you'll need to set that explicitly.
 
-``` js
+```js
 const api = new sst.Api(this, "Api", {
   customDomain: {
     domainName: "dev.api.example.com",
@@ -122,13 +122,13 @@ For this example, we are going to focus on the custom domain. So we are going to
 
 {%change%} Replace the `src/lambda.js` with the following.
 
-``` js
+```js
 export async function main() {
   const response = {
     userId: 1,
     id: 1,
     title: "delectus aut autem",
-    completed: false
+    completed: false,
   };
 
   return {
@@ -146,7 +146,7 @@ Now let's test our new API.
 
 {%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
 
-``` bash
+```bash
 $ npx sst start
 ```
 
@@ -203,13 +203,13 @@ Let's make a quick change to our API. It would be good if the JSON strings are p
 
 {%change%} Replace `src/lambda.js` with the following.
 
-``` js
+```js
 export async function main() {
   const response = {
     userId: 1,
     id: 1,
     title: "delectus aut autem",
-    completed: false
+    completed: false,
   };
 
   return {
@@ -237,7 +237,7 @@ However, we are going to deploy your API again. But to a different environment, 
 
 {%change%} Run the following in your terminal.
 
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
 
@@ -253,13 +253,13 @@ A note on these environments. SST is simply deploying the same app twice using t
 
 Finally, you can remove the resources created in this example using the following command.
 
-``` bash
+```bash
 $ npx sst remove
 ```
 
 And to remove the prod environment.
 
-``` bash
+```bash
 $ npx sst remove --stage prod
 ```
 

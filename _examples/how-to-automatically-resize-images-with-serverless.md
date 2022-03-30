@@ -43,8 +43,8 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 ```json
 {
   "name": "bucket-image-resize",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -251,19 +251,17 @@ Stack dev-bucket-image-resize-my-stack
 
 ## Uploading files
 
-Now head over to the S3 page in your AWS console — [https://s3.console.aws.amazon.com/](https://s3.console.aws.amazon.com). Search for the bucket name from the above output.
+Now head over to the **Buckets** tab in [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
+
+Note, The Buckets explorer allows you to manage the S3 Buckets created with the **Bucket** constructs in your app. It allows you upload, delete, and download files. You can also create and delete folders.
 
 ![S3 bucket created with SST](/assets/examples/bucket-image-resize/s3-bucket-created-with-sst.png)
 
-Here you can drag and drop an image to upload it.
+Here you can click **Upload** and select an image to upload it. After uploading you'll notice the resized image shows up.
 
-![Drag and drop file to upload to S3](/assets/examples/bucket-image-resize/drag-and-drop-file-to-upload-to-s3.png)
+![Drag and drop file to upload to S3](/assets/examples/bucket-image-resize/file-upload-to-s3.png)
 
-Give it a minute after it's done uploading. Hit **Close** to go back to the list of files.
-
-![Complete file upload to S3](/assets/examples/bucket-image-resize/complete-file-to-upload-to-s3.png)
-
-You'll notice the resized image shows up.
+Now refresh your console to see the resized image.
 
 ![SST resized image in S3 bucket](/assets/examples/bucket-image-resize/sst-resized-image-in-s3-bucket.png)
 
@@ -277,7 +275,7 @@ Let's try making a quick change.
 const width = 100;
 ```
 
-Now if you go back and upload that same image again, you should see the new resized image show up in your S3 bucket.
+Now if you go back to SST console and upload that same image again, you should see the new resized image show up in your Buckets explorer.
 
 ![Updated SST resized image in S3 bucket](/assets/examples/bucket-image-resize/updated-sst-resized-image-in-s3-bucket.png)
 

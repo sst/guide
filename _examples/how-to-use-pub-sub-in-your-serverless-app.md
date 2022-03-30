@@ -25,18 +25,18 @@ In this example we will look at how to use SNS to create [a pub/sub system](http
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest pub-sub
 $ cd pub-sub
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "pub-sub",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -58,7 +58,7 @@ An SST app is made up of two parts.
 
 {%change%} Replace the `stacks/MyStack.js` with the following.
 
-``` js
+```js
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -81,7 +81,7 @@ Now let's add the API.
 
 {%change%} Add this below the `sst.Topic` definition in `stacks/MyStack.js`.
 
-``` js
+```js
 // Create the HTTP API
 const api = new sst.Api(this, "Api", {
   defaultFunctionProps: {
@@ -106,7 +106,7 @@ this.addOutputs({
 
 Our [API](https://docs.serverless-stack.com/constructs/api) simply has one endpoint (`/order`). When we make a `POST` request to this endpoint the Lambda function called `main` in `src/order.js` will get invoked.
 
-We'll also pass in [the arn]({ link _chapters/what-is-an-arn.md %}) of our SNS topic to our API as an environment variable called `topicArn`. And we allow our API to publish to the topic we just created.
+We'll also pass in [the arn]({ link \_chapters/what-is-an-arn.md %}) of our SNS topic to our API as an environment variable called `topicArn`. And we allow our API to publish to the topic we just created.
 
 ## Adding function code
 
@@ -114,7 +114,7 @@ We will create three functions, one handling the `/order` API request, and two f
 
 {%change%} Add a `src/order.js`.
 
-``` js
+```js
 export async function main() {
   console.log("Order confirmed!");
   return {
@@ -126,7 +126,7 @@ export async function main() {
 
 {%change%} Add a `src/receipt.js`.
 
-``` js
+```js
 export async function main() {
   console.log("Receipt sent!");
   return {};
@@ -135,7 +135,7 @@ export async function main() {
 
 {%change%} Add a `src/shipping.js`.
 
-``` js
+```js
 export async function main() {
   console.log("Item shipped!");
   return {};
@@ -148,7 +148,7 @@ Now let's test our new API.
 
 {%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
 
-``` bash
+```bash
 $ npx sst start
 ```
 
@@ -174,13 +174,19 @@ Stack dev-pub-sub-my-stack
     ApiEndpoint: https://gevkgi575a.execute-api.us-east-1.amazonaws.com
 ```
 
-The `ApiEndpoint` is the API we just created. Let's test our endpoint. Run the following in your terminal.
+The `ApiEndpoint` is the API we just created.
 
-``` bash
-$ curl -X POST https://gevkgi575a.execute-api.us-east-1.amazonaws.com/order
-```
+Let's test our endpoint using the integrated [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.docs_url }}/console.
 
-You should see `{status: 'successful'}` being printed out. And if you head back to the debugger, you should see `Order confirmed!`.
+Go to the **Functions** tab and click the **Invoke** button of the `POST /order` function to send a `POST` request.
+
+![Functions tab invoke button](/assets/examples/eventbus/functions_tab_invoke_button.png)
+
+After you see a success status in the logs, go to the Local tab in the console to see all function invocations. Local tab displays real-time logs from your Live Lambda Dev environment.
+
+![Local tab response without event](/assets/examples/eventbus/Local_tab_response_without_events.png)
+
+You should see `Order confirmed!` logged in the console.
 
 ## Publishing to our topic
 
@@ -188,7 +194,7 @@ Now let's publish a message to our topic.
 
 {%change%} Replace the `src/order.js` with the following.
 
-``` js
+```js
 import AWS from "aws-sdk";
 
 const sns = new AWS.SNS();
@@ -217,32 +223,29 @@ Here we are getting the topic arn from the environment variable, and then publis
 
 {%change%} Let's install the `aws-sdk`.
 
-``` bash
+```bash
 $ npm install aws-sdk
 ```
 
-And now if you head over to your terminal and make a request to our API.
+And now if you head over to your console and invoke the function again, You'll notice in the **Local** tab that our EventBus targets are called. And you should see `Receipt sent!` and `Item shipped!` printed out.
 
-``` bash
-$ curl -X POST https://gevkgi575a.execute-api.us-east-1.amazonaws.com/order
-```
-
-You'll notice inside the debug log that our topic subscribers are called. And you should see `Receipt sent!` and `Item shipped!` printed out.
+![Local tab response with event](/assets/examples/eventbus/Local_tab_response_with_events.png)
 
 ## Deploying to prod
 
 {%change%} To wrap things up we'll deploy our app to prod.
 
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
+
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
 
 ## Cleaning up
 
 Finally, you can remove the resources created in this example using the following commands.
 
-``` bash
+```bash
 $ npx sst remove
 $ npx sst remove --stage prod
 ```

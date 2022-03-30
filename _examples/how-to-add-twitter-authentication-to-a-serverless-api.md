@@ -26,18 +26,18 @@ In this example we will look at how to add Twitter authentication to a serverles
 
 {%change%} Let's start by creating an SST app.
 
-``` bash
+```bash
 $ npx create-serverless-stack@latest api-auth-twitter
 $ cd api-auth-twitter
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "api-auth-twitter",
-  "stage": "dev",
-  "region": "us-east-1"
+  "region": "us-east-1",
+  "main": "stacks/index.js"
 }
 ```
 
@@ -59,7 +59,7 @@ Let's start by setting up an API.
 
 {%change%} Replace the `stacks/MyStack.js` with the following.
 
-``` js
+```js
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -101,7 +101,7 @@ Now let's add authentication for our serverless app.
 
 {%change%} Add this below the `sst.Api` definition in `stacks/MyStack.js`. Make sure to replace the `consumerKey` and `consumerSecret` with that of your Twitter app.
 
-``` js
+```js
 // Create auth provider
 const auth = new sst.Auth(this, "Auth", {
   twitter: {
@@ -133,7 +133,7 @@ Let's create two functions, one handling the public route, and the other for the
 
 {%change%} Add a `src/public.js`.
 
-``` js
+```js
 export async function main() {
   return {
     statusCode: 200,
@@ -144,7 +144,7 @@ export async function main() {
 
 {%change%} Add a `src/private.js`.
 
-``` js
+```js
 export async function main() {
   return {
     statusCode: 200,
@@ -159,7 +159,7 @@ Now let's test our new API.
 
 {%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
 
-``` bash
+```bash
 $ npx sst start
 ```
 
@@ -215,7 +215,7 @@ We are going to use the [**twurl**](https://github.com/twitter/twurl) tool to te
 
 Once installed, we'll need to set our app credentials. Run the following and replace it with those from your Twitter app.
 
-``` bash
+```bash
 $ twurl authorize --consumer-key gyMbPOiwefr6x63SjIW8NN0d1 \
   --consumer-secret qxld8zic5c2eyahqK3gjGLGQaOTogGfAgHh17MYOIcOUR9l2Nz
 ```
@@ -252,7 +252,7 @@ configuration:
 
 Next, we need to get the user's Cognito Identity id. Replace `--identity-pool-id` with the `IdentityPoolId` from the `sst start` log output; and replace the `--logins` with the **TOKEN** and **SECRET** from the previous step.
 
-``` bash
+```bash
 $ aws cognito-identity get-id \
   --identity-pool-id us-east-1:abc36c64-36d5-4298-891c-7aa9ea318f1d \
   --logins api.twitter.com="TOKEN:SECRET"
@@ -260,7 +260,7 @@ $ aws cognito-identity get-id \
 
 You should get an identity id for the Twitter user.
 
-``` json
+```json
 {
   "IdentityId": "us-east-1:0a6b1bb0-614c-4e00-9028-146854eaee4a"
 }
@@ -268,7 +268,7 @@ You should get an identity id for the Twitter user.
 
 Now we'll need to get the IAM credentials for the identity user.
 
-``` bash
+```bash
 $ aws cognito-identity get-credentials-for-identity \
   --identity-id us-east-1:0a6b1bb0-614c-4e00-9028-146854eaee4a \
   --logins graph.facebook.com="EAAF9u0npLFUBAGv7SlHXIMigP0nZBF2LxZA5ZCe3NqZB6Wc6xbWxwHqn64T5QLEsjOZAFhZCLJj1yIsDLPCc9L3TRWZC3SvKf2D1vEZC3FISPWENQ9S5BZA94zxtn6HWQFD8QLMvjt83qOGHeQKZAAtJRgHeuzmd2oGn3jbZBmfYl2rhg3dpEnFhkAmK3lC7BZAEyc0ZD"
@@ -276,15 +276,15 @@ $ aws cognito-identity get-credentials-for-identity \
 
 This should give you a set of temporary IAM credentials.
 
-``` json
+```json
 {
-    "IdentityId": "us-east-1:0a6b1bb0-614c-4e00-9028-146854eaee4a",
-    "Credentials": {
-        "AccessKeyId": "ASIARUIS6Q2MF3FI5XCV",
-        "SecretKey": "3znZKINfXmEv9y3UC1MASUkJkhw/AVV+9Ny88qua",
-        "SessionToken": "IQoJb3JpZ2luX2VjEHgaCXVzLWVhc3QtMSJHMEUCIQDNFismZshPFba10yJTB7hiX1S0qzPRGM0yb09hL+lOHgIgHuX2SBa75YbF/iyRoPEUyP+3gpkKAek6Mv/d35nuFBEqmAQIcRACGgwxMTIyNDU3Njk4ODAiDOHVJcoQ5KUmpbzzgSr1A7xg1HzbehJ/rejQkuaoWyiyVSecrPgBkLN01/jxief7/zoViKUdaocZrUNOcFXm9PtKKgEbEg16gUfTtaid6nhVE6MthX82f8oBArIancEgi5uj5KW9H2HOUjlmAmpcaooDeyDmTjtTwlKPpsWjz2B5NCDfQCrBVBQlv5st/sPSA88jkG1PYuQSmsueqiWeqVViDjaPaxNcVuuHgQofbPhSI0fUduXM9ePDP5O5rGNMo/g0oOLeyhgzJX/Xzf1qYx1BURILfKH10cx4PaCO5Zr49NggdfXAdooqZPqlAYAvDOA8FafiE7k2aG0pEC84yhiWl4BzHkAUGiMYjJD2eua7QMvfWHu1o/DIFH4jFzPjqKWV00CVCjyI8aFbmkarvdVkK+jqCfWYXYdD5HJSTwsjvmPhdF/3B7WWYTqb5eQPWVcPCbzj1WPGpKX0zbytKg4Z+Klb+Wp0yHG2QZ8blMHir6WgNoDJ/PisO6HbbpxqkWe+1GMkxi29IhjRZ18tAtpCwZRarIeEYfgPiHtt+QVAKg5T84Qprcslr6T6wkyNB8dqlVf4ozLekF/RbfAGq/BVbQy8iM62hU30SCoJrqyC6dq3xhcpiSv+kyKi0Q0NaT6rZ9w/oeQ+0olkrJRec1eVDeCmvw2O0eKXPsTEQoiFEGpIeTCc2YOBBjqEAqxGdKjVZWrMzG2yBIK55A9yqluEAyp3nnXPbnpU6VaKnCeVt16TR4sbD8/Y4HFZCW/zGo0K3ymQI+lfzpquaR9NdGnjjuiTcGqJRcaj94N/Aop/jGDXoBUnjqTelj7lkZtPO0sQ7Xf+NlVhzbPulMbnkIBe9f9FXnC2xpxGyfcWQOwoenqXRuXLzMQYGzVH9+ApEkzSVH0bqPZFqXm4cOFTw648Y41MrIE6EuXAorrJd/CfyvmWVd6WzMSplIG8UfNIDO1mS81D2Xg/O1urH8Bu0h6LsPjg1d3KLo9Cdd48+kNNcqqXkg2d+lSJA68Cxq3ne8N3jNnsxWDfBSj27hm9D2r0",
-        "Expiration": "2021-02-08T03:47:40-05:00"
-    }
+  "IdentityId": "us-east-1:0a6b1bb0-614c-4e00-9028-146854eaee4a",
+  "Credentials": {
+    "AccessKeyId": "ASIARUIS6Q2MF3FI5XCV",
+    "SecretKey": "3znZKINfXmEv9y3UC1MASUkJkhw/AVV+9Ny88qua",
+    "SessionToken": "IQoJb3JpZ2luX2VjEHgaCXVzLWVhc3QtMSJHMEUCIQDNFismZshPFba10yJTB7hiX1S0qzPRGM0yb09hL+lOHgIgHuX2SBa75YbF/iyRoPEUyP+3gpkKAek6Mv/d35nuFBEqmAQIcRACGgwxMTIyNDU3Njk4ODAiDOHVJcoQ5KUmpbzzgSr1A7xg1HzbehJ/rejQkuaoWyiyVSecrPgBkLN01/jxief7/zoViKUdaocZrUNOcFXm9PtKKgEbEg16gUfTtaid6nhVE6MthX82f8oBArIancEgi5uj5KW9H2HOUjlmAmpcaooDeyDmTjtTwlKPpsWjz2B5NCDfQCrBVBQlv5st/sPSA88jkG1PYuQSmsueqiWeqVViDjaPaxNcVuuHgQofbPhSI0fUduXM9ePDP5O5rGNMo/g0oOLeyhgzJX/Xzf1qYx1BURILfKH10cx4PaCO5Zr49NggdfXAdooqZPqlAYAvDOA8FafiE7k2aG0pEC84yhiWl4BzHkAUGiMYjJD2eua7QMvfWHu1o/DIFH4jFzPjqKWV00CVCjyI8aFbmkarvdVkK+jqCfWYXYdD5HJSTwsjvmPhdF/3B7WWYTqb5eQPWVcPCbzj1WPGpKX0zbytKg4Z+Klb+Wp0yHG2QZ8blMHir6WgNoDJ/PisO6HbbpxqkWe+1GMkxi29IhjRZ18tAtpCwZRarIeEYfgPiHtt+QVAKg5T84Qprcslr6T6wkyNB8dqlVf4ozLekF/RbfAGq/BVbQy8iM62hU30SCoJrqyC6dq3xhcpiSv+kyKi0Q0NaT6rZ9w/oeQ+0olkrJRec1eVDeCmvw2O0eKXPsTEQoiFEGpIeTCc2YOBBjqEAqxGdKjVZWrMzG2yBIK55A9yqluEAyp3nnXPbnpU6VaKnCeVt16TR4sbD8/Y4HFZCW/zGo0K3ymQI+lfzpquaR9NdGnjjuiTcGqJRcaj94N/Aop/jGDXoBUnjqTelj7lkZtPO0sQ7Xf+NlVhzbPulMbnkIBe9f9FXnC2xpxGyfcWQOwoenqXRuXLzMQYGzVH9+ApEkzSVH0bqPZFqXm4cOFTw648Y41MrIE6EuXAorrJd/CfyvmWVd6WzMSplIG8UfNIDO1mS81D2Xg/O1urH8Bu0h6LsPjg1d3KLo9Cdd48+kNNcqqXkg2d+lSJA68Cxq3ne8N3jNnsxWDfBSj27hm9D2r0",
+    "Expiration": "2021-02-08T03:47:40-05:00"
+  }
 }
 ```
 
@@ -312,7 +312,7 @@ Let's make a quick change to our private route and print out the caller's user i
 
 {%change%} Replace `src/private.js` with the following.
 
-``` js
+```js
 export async function main(event) {
   return {
     statusCode: 200,
@@ -341,7 +341,7 @@ However, we are going to deploy your API again. But to a different environment, 
 
 {%change%} Run the following in your terminal.
 
-``` bash
+```bash
 $ npx sst deploy --stage prod
 ```
 
@@ -351,13 +351,13 @@ A note on these environments. SST is simply deploying the same app twice using t
 
 Finally, you can remove the resources created in this example using the following command.
 
-``` bash
+```bash
 $ npx sst remove
 ```
 
 And to remove the prod environment.
 
-``` bash
+```bash
 $ npx sst remove --stage prod
 ```
 

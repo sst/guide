@@ -260,9 +260,17 @@ Stack dev-rest-api-mongodb-my-stack
     ApiEndpoint: https://4gqqjg6ima.execute-api.us-east-1.amazonaws.com/
 ```
 
-The `ApiEndpoint` is the API we just created. Let's test our endpoint. If you open the endpoint URL in your browser, you should see a list of users being printed out.
+The `ApiEndpoint` is the API we just created.
 
-![JSON list of users](/assets/examples/rest-api-mongodb/json-list-of-users.png)
+Let's test our endpoint using the integrated [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.docs_url }}/console.
+
+Go to the **API** explorer and click the **Send** button of the `GET /` route to get a list of users.
+
+Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` and `ApiGatewayV1Api` constructs. Set the headers, query params, request body, and view the function logs with the response.
+
+![API explorer list of users response](/assets/examples/rest-api-mongodb/api-explorer-list-of-users-response.png)
+
+You should see the list of users as a JSON string.
 
 ## Making changes
 
@@ -282,7 +290,7 @@ const users = await db.collection("users").find({}).limit(1).toArray();
 
 This will limit the number of users to 1.
 
-![JSON list of limit 1 users](/assets/examples/rest-api-mongodb/json-list-of-limit-1.png)
+![API explorer list of users limit 1 response](/assets/examples/rest-api-mongodb/api-explorer-list-of-users-limit-1-response.png)
 
 ## Deploying to prod
 
@@ -292,7 +300,29 @@ This will limit the number of users to 1.
 $ npx sst deploy --stage prod
 ```
 
-This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
+This allows us to separate our environments, so when we are working in `dev`, it doesn't break the app for our users.
+
+Once deployed, you should see something like this.
+
+```bash
+ ✅  prod-rest-api-mongodb-my-stack
+
+
+Stack prod-rest-api-mongodb-my-stack
+  Status: deployed
+  Outputs:
+    ApiEndpoint: https://ck198mfop1.execute-api.us-east-1.amazonaws.com
+```
+
+Run the below command to open the SST Console in **prod** stage to test the production endpoint.
+
+```bash
+npx sst console --stage prod
+```
+
+Go to the **API** explorer and click **Send** button of the `GET /notes` route, to send a `GET` request.
+
+![Prod API explorer list users response](/assets/examples/rest-api-mongodb/prod-api-explorer-list-of-users-response.png)
 
 ## Cleaning up
 

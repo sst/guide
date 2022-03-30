@@ -249,13 +249,17 @@ Stack dev-planetscale-my-stack
     ApiEndpoint: https://u3nnmgdigh.execute-api.us-east-1.amazonaws.com
 ```
 
-The `ApiEndpoint` is the API we just created. Let's test our endpoint. Run the following in your terminal.
+The `ApiEndpoint` is the API we just created.
 
-```bash
-$ curl -X POST https://u3nnmgdigh.execute-api.us-east-1.amazonaws.com
-```
+Let's test our endpoint with the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
-You should see a `0` printed out.
+Go to the **API** tab and click **Send** button to send a `POST` request.
+
+Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` and `ApiGatewayV1Api` constructs. Set the headers, query params, request body, and view the function logs with the response.
+
+![API explorer invocation response](/assets/examples/angular-app/api-explorer-invocation-response.png)
+
+You should see a `0` in the response body.
 
 ## Writing to our table
 
@@ -270,23 +274,43 @@ await db.query("UPDATE counter SET tally = tally + 1 WHERE counter = 'hits'");
 
 Here we are updating the `hits` row's `tally` column with the increased count.
 
-And now if you head over to your terminal and make a request to our API. You'll notice the count increase!
+And now if you head over to your console and click the **Send** button again you'll notice the count increase!
 
-```bash
-$ curl -X POST https://u3nnmgdigh.execute-api.us-east-1.amazonaws.com
-```
+![api-explorer-invocation-response-after-update](/assets/examples/rest-api-postgresql/api-explorer-invocation-response-after-update.png)
 
 ## Deploying to prod
 
 {%change%} To wrap things up we'll deploy our app to prod.
 
-**NOTE:** `env.local` is not committed to the git and remember to set the environment variables in your CI pipeline.
+Note, `env.local` is not committed to the git and remember to set the environment variables in your CI pipeline.
 
 ```bash
 $ npx sst deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
+
+Once deployed, you should see something like this.
+
+```bash
+ ✅  prod-planetscale-my-stack
+
+
+Stack prod-planetscale-my-stack
+  Status: deployed
+  Outputs:
+    ApiEndpoint: https://ck198mfop1.execute-api.us-east-1.amazonaws.com
+```
+
+Run the below command to open the SST Console in **prod** stage to test the production endpoint.
+
+```bash
+npx sst console --stage prod
+```
+
+Go to the **API** explorer and click **Send** button of the `POST /` route, to send a `POST` request.
+
+![API explorer prod invocation response](/assets/examples/angular-app/api-explorer-prod-invocation-response.png)
 
 ## Cleaning up
 
