@@ -191,7 +191,7 @@ npx sst console --stage prod
 
 Go to the **API** tab and click the **Send** button.
 
-Note, The API explorer lets you make HTTP requests to any of the routes in your `Api` and `ApiGatewayV1Api` constructs. Set the headers, query params, request body, and view the function logs with the response.
+Note, The API explorer lets you make HTTP requests to any of the routes in your `Api` construct. Set the headers, query params, request body, and view the function logs with the response.
 
 ![API tab invoke button](/assets/examples/thundra/api_tab_invoke_button.png)
 

@@ -209,7 +209,7 @@ Let's test our endpoint with the [SST Console](https://console.serverless-stack.
 
 Go to the **API** tab and click **Send** button to send a `GET` request.
 
-Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` and `ApiGatewayV1Api` constructs. Set the headers, query params, request body, and view the function logs with the response.
+Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` construct. Set the headers, query params, request body, and view the function logs with the response.
 
 ![API explorer invocation response](/assets/examples/datadog/api-explorer-invocation-response.png)
 

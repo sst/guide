@@ -266,7 +266,7 @@ Let's test our endpoint using the integrated [SST Console](https://console.serve
 
 Go to the **API** explorer and click the **Send** button of the `GET /` route to get a list of users.
 
-Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` and `ApiGatewayV1Api` constructs. Set the headers, query params, request body, and view the function logs with the response.
+Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` construct. Set the headers, query params, request body, and view the function logs with the response.
 
 ![API explorer list of users response](/assets/examples/rest-api-mongodb/api-explorer-list-of-users-response.png)
 
