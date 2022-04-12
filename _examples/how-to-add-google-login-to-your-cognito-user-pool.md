@@ -386,6 +386,7 @@ ReactDOM.render(
 
 {%change%} Replace `src/App.jsx` with below code.
 
+{% raw %}
 ```jsx
 import { Auth, API } from "aws-amplify";
 import React, { useState, useEffect } from "react";
@@ -471,6 +472,7 @@ const App = () => {
 
 export default App;
 ```
+{% endraw %}
 
 {%change%} Replace `src/index.css` with the below styles.
 
