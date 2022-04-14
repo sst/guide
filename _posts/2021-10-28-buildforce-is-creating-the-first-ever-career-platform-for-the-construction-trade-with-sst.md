@@ -22,7 +22,7 @@ The Buildforce team knew they wanted to build their applications using serverles
 
 ### Enter SST
 
-Around 2 months ago the team came together and decided they needed to make a change. They had heard about [SST](/) and the [Serverless Stack Guide](/#guide). They decided they needed to take a deeper look.
+Around 2 months ago the team came together and decided they needed to make a change. They had heard about [SST](/) and the [Serverless Stack Guide]({% link guide.md %}). They decided they needed to take a deeper look.
 
 As they tried out SST, _"We were blown away by the local development environment"_, says Michael. The entire team decided to move to SST.
 

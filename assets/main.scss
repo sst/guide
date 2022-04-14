@@ -38,6 +38,8 @@ $on-palm:                     600px;
 $on-laptop:                   800px;
 $on-monitor:                  1100px;
 
+$reader-logo-width:           123px;
+
 // Minima also includes a mixin for defining media queries.
 // Use media queries like this:
 // @include media-query($on-palm) {
@@ -53,6 +55,7 @@ $on-monitor:                  1100px;
 
 @import "blog";
 @import "about";
+@import "guide";
 @import "lander";
 @import "careers";
 @import "example";

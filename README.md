@@ -12,7 +12,7 @@
 
 ------------------------------------------------------------------------------------
 
-The [Serverless Stack Guide](https://serverless-stack.com/#guide) is a comprehensive open source tutorial for building and deploying full-stack apps using Serverless and React on AWS.
+The [Serverless Stack Guide](https://serverless-stack.com/guide.html) is a comprehensive open source tutorial for building and deploying full-stack apps using Serverless and React on AWS.
 
 We are going to create a [note taking app](https://demo.serverless-stack.com) from scratch using React.js, AWS Lambda, API Gateway, DynamoDB, and Cognito.
 

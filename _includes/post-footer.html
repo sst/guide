@@ -65,7 +65,7 @@
     </a>
   {% endif %}
 
-  <a class="toc" href="/#table-of-contents">Table of Contents</a>
+  <a class="toc" href="{% link guide.md %}#table-of-contents">Table of Contents</a>
 
   {% assign next = index | plus: 1 %}
   {% if next != size %}
