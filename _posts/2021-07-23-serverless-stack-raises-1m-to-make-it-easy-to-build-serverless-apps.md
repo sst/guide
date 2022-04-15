@@ -12,6 +12,6 @@ We would like to take this opportunity to thank the Serverless Stack community f
 
 As more and more developers discover and adopt SST's [live local development environment](https://docs.serverless-stack.com/live-lambda-development); our team is committed to adding features to support their workflow. This commitment shows clearly in [our rapid release history](https://github.com/serverless-stack/serverless-stack/releases).
 
-We are also incredibly proud of what we've built with the [Serverless Stack Guide](/#guide), it is the most widely read resource for serverless. And [Seed](https://seed.run); the best way for teams to deploy and manage their serverless applications.
+We are also incredibly proud of what we've built with the [Serverless Stack Guide]({% link guide.md %}), it is the most widely read resource for serverless. And [Seed](https://seed.run); the best way for teams to deploy and manage their serverless applications.
 
 The new funding allows us to expand the team to better serve the community and ensure that you have everything you need to build serverless applications. So if you are excited about where we are heading and would like to help our cause, [**we would like you to join our team**]({% link careers.html %})!

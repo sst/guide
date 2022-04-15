@@ -1,5 +1,10 @@
 <div id="{{ include.id }}" class="toc-section">
-  <h3>{{ include.items.title }}</h3>
+  <h3>
+    {% if include.index %}
+      {{ include.index }}.&nbsp;
+    {% endif %}
+    {{ include.items.title }}
+  </h3>
   <ul>
   {% for chapter in include.items.chapters %}
     <li>

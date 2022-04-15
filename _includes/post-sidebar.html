@@ -2,11 +2,9 @@
 
   {% include newsletter-form-sidebar.html type="guide" %}
 
-  <p class="section toc"><a href="/#table-of-contents">Table of Contents</a></p>
+  <p class="section toc"><a href="{% link guide.md %}#table-of-contents">Table of Contents</a></p>
 
   {% include toc-sidebar.html items=site.data.chapterlist.preface id="preface" page_en_url=include.page_en_url %}
-
-  <p class="section"><a href="/#the-basics">The Basics</a></p>
 
   {% include toc-sidebar.html items=site.data.chapterlist.intro id="intro" page_en_url=include.page_en_url %}
 
@@ -30,34 +28,5 @@
   {% include toc-sidebar.html items=site.data.chapterlist.monitor-debug-errors id="monitor-debug-errors" page_en_url=include.page_en_url %}
 
   {% include toc-sidebar.html items=site.data.chapterlist.conclusion id="conclusion" page_en_url=include.page_en_url %}
-
-  <p class="section"><a href="/#best-practices">Best Practices</a></p>
-
-  {% include toc-sidebar.html items=site.data.chapterlist.best-practices-intro id="best-practices-intro" page_en_url=include.page_en_url %}
-  {% include toc-sidebar.html items=site.data.chapterlist.organize-serverless-apps id="organize-serverless-apps" page_en_url=include.page_en_url %}
-  {% include toc-sidebar.html items=site.data.chapterlist.configure-environments id="configure-environments" page_en_url=include.page_en_url %}
-  {% include toc-sidebar.html items=site.data.chapterlist.development-lifecycle id="development-lifecycle" page_en_url=include.page_en_url %}
-  {% include toc-sidebar.html items=site.data.chapterlist.observability id="observability" page_en_url=include.page_en_url %}
-  {% include toc-sidebar.html items=site.data.chapterlist.best-practices-conclusion id="best-practices-conclusion" page_en_url=include.page_en_url %}
-
-  <p class="section"><a href="/#serverless-framework">Serverless Framework</a></p>
-
-  {% include toc-sidebar.html items=site.data.chapterlist.setup-serverless id="setup-serverless" page_en_url=include.page_en_url %}
-  {% include toc-sidebar.html items=site.data.chapterlist.setup-backend id="setup-backend" page_en_url=include.page_en_url %}
-  {% include toc-sidebar.html items=site.data.chapterlist.build-api id="build-api" page_en_url=include.page_en_url %}
-  {% include toc-sidebar.html items=site.data.chapterlist.users-auth id="users-auth" page_en_url=include.page_en_url %}
-  {% include toc-sidebar.html items=site.data.chapterlist.third-party-apis id="third-party-apis" page_en_url=include.page_en_url %}
-  {% include toc-sidebar.html items=site.data.chapterlist.domains-hosting id="domains-hosting" page_en_url=include.page_en_url %}
-  {% include toc-sidebar.html items=site.data.chapterlist.infrastructure-as-code id="infrastructure-as-code" page_en_url=include.page_en_url %}
-
-  <p class="section"><a href="/#extra-credit">Extra Credit</a></p>
-
-  {% include toc-sidebar.html items=site.data.chapterlist.extra-backend id="extra-backend" page_en_url=include.page_en_url %}
-  {% include toc-sidebar.html items=site.data.chapterlist.extra-auth id="extra-auth" page_en_url=include.page_en_url %}
-  {% include toc-sidebar.html items=site.data.chapterlist.extra-frontend id="extra-frontend" page_en_url=include.page_en_url %}
-
-  <!--
-  <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CE7DP5QU&placement=serverless-stackcom" id="_carbonads_js"></script>
-  -->
 
 </aside>
