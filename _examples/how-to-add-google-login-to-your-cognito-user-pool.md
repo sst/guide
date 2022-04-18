@@ -68,8 +68,12 @@ const auth = new sst.Auth(this, "Auth", {
         cognito.UserPoolClientIdentityProvider.GOOGLE,
       ],
       oAuth: {
-        callbackUrls: ["http://localhost:3000"],
-        logoutUrls: ["http://localhost:3000"],
+        callbackUrls: [
+          scope.stage === "prod" ? "production-url" : "http://localhost:3000",
+        ],
+        logoutUrls: [
+          scope.stage === "prod" ? "production-url" : "http://localhost:3000",
+        ],
       },
     },
   },
@@ -82,9 +86,11 @@ Note, we haven't yet set up Google OAuth with our user pool, we'll do it next.
 
 ## Setting up Google OAuth
 
-Now let's add Google OAuth for our serverless app, to do so we need to create a [Google User Pool identity provider](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_cognito.UserPoolIdentityProviderGoogle.html) and link it with the user pool we created above.
+Now let's add Google OAuth for our serverless app, to do so we need to create a [Google User Pool identity provider](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-social-idp.html) and link it with the user pool we created above.
 
 {%change%} Create a `.env` file in the root and add your google `clientId` and `clientSecret` from your [Google API project](https://console.developers.google.com/apis).
+
+![GCP Console API Credentials](/assets/examples/api-oauth-google/gcp-console-api-credentials.png)
 
 ```js
 GOOGLE_CLIENT_ID=<YOUR_GOOGLE_CLIENT_ID>
@@ -112,7 +118,7 @@ const provider = new cognito.UserPoolIdentityProviderGoogle(this, "Google", {
 auth.cognitoUserPoolClient.node.addDependency(provider);
 ```
 
-This creates a Google identity provider with the given scopes and links the created provider to our user pool.
+This creates a Google identity provider with the given scopes and links the created provider to our user pool and Google user’s attributes will be mapped to the User Pool user.
 
 Make sure to import the `cognito` package.
 
@@ -120,9 +126,9 @@ Make sure to import the `cognito` package.
 import * as cognito from "aws-cdk-lib/aws-cognito";
 ```
 
-Now let's associate a Cognito domain to the user pool, which we can be used for sign-up and sign-in webpages.
+Now let's associate a Cognito domain to the user pool, which can be used for sign-up and sign-in webpages.
 
-{%change%} Add this below code in `stacks/MyStack.js`.
+{%change%} Add below code in `stacks/MyStack.js`.
 
 ```js
 // Create a cognito userpool domain
@@ -168,7 +174,7 @@ GET /private
 GET /public
 ```
 
-By default, all routes have the authorization type `JWT`. This means the caller of the API needs to pass in a valid JWT token. The first is a private endpoint. The second is a public endpoint and its authorization type is overridden to `NONE`.
+By default, all routes have the authorization type `JWT`. This means the caller of the API needs to pass in a valid JWT token. The `GET /private` route is a private endpoint. The `GET /public` is a public endpoint and its authorization type is overridden to `NONE`.
 
 Let's install the npm packages we are using here.
 
@@ -228,8 +234,8 @@ const site = new sst.ViteStaticSite(this, "Site", {
 
 // Show the endpoint in the output
 this.addOutputs({
-  ApiEndpoint: api.url,
-  authClientId: auth.cognitoUserPoolClient.userPoolClientId,
+  api_url: api.url,
+  auth_client_id: auth.cognitoUserPoolClient.userPoolClientId,
   domain: domain.domainName,
   site_url: site.url,
 });
@@ -240,49 +246,6 @@ The construct is pointing to where our React.js app is located. We haven't creat
 We are also setting up [build time React environment variables](https://vitejs.dev/guide/env-and-mode.html) with the endpoint of our API. The [`ViteStaticSite`](https://docs.serverless-stack.com/constructs/ViteStaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
 
 We are going to print out the resources that we created for reference.
-
-## Starting your dev environment
-
-{%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
-
-```bash
-$ npx sst start
-```
-
-The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
-
-```
-===============
- Deploying app
-===============
-
-Preparing your SST app
-Transpiling source
-Linting source
-Deploying stacks
-manitej-api-oauth-google-my-stack: deploying...
-
- ✅  manitej-api-oauth-google-my-stack
-
-
-Stack manitej-api-oauth-google-my-stack
-  Status: deployed
-  Outputs:
-    ApiEndpoint: https://sez1p3dsia.execute-api.ap-south-1.amazonaws.com
-    SiteUrl: https://d2uyljrh4twuwq.cloudfront.net
-```
-
-The `ApiEndpoint` is the API we just created. While the `SiteUrl` is where our React app will be hosted. For now, it's just a placeholder website.
-
-Let's test our endpoint with the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
-
-Go to the **API** tab and click **Send** button of the `GET /public` to send a `GET` request.
-
-Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` construct. Set the headers, query params, request body, and view the function logs with the response.
-
-![API explorer invocation response](/assets/examples/api-oauth-google/api-explorer-invocation-response.png)
-
-You should see a `Hello, stranger!` in the response body.
 
 ## Creating the frontend
 
@@ -321,11 +284,64 @@ We need to update our start script to use this package.
 "dev": "sst-env -- vite"
 ```
 
+## Starting your dev environment
+
+{%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
+
+```bash
+$ npx sst start
+```
+
+The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
+
+```
+===============
+ Deploying app
+===============
+
+Preparing your SST app
+Transpiling source
+Linting source
+Deploying stacks
+manitej-api-oauth-google-my-stack: deploying...
+
+ ✅  manitej-api-oauth-google-my-stack
+
+
+Stack manitej-api-oauth-google-my-stack
+  Status: deployed
+  Outputs:
+    api_url: https://v0l1zlpy5f.execute-api.us-east-1.amazonaws.com
+    auth_client_id: 253t1t5o6jjur88nu4t891eac2
+    domain: manitej-demo-auth-domain
+    site_url: https://d1567f41smqk8b.cloudfront.net
+```
+
+Copy the cognito domain from the terminal output and add it to the **Authorised JavaScript origins** in the GCP Console.
+
+Note, if you are not using custom domain, your domain URL will be `https://<domain>.auth.<region>.amazoncognito.com`.
+
+And under **Authorised redirect URIs**, append `/oauth2/idpresponse` to your domain URL and add it to the values and click **Save**.
+
+![GCP Console](/assets/examples/api-oauth-google/gcp-console.png)
+
+The `api_endpoint` is the API we just created. While the `site_url` is where our React app will be hosted. For now, it's just a placeholder website.
+
+Let's test our endpoint with the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
+
+Go to the **API** tab and click **Send** button of the `GET /public` to send a `GET` request.
+
+Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` construct. Set the headers, query params, request body, and view the function logs with the response.
+
+![API explorer invocation response](/assets/examples/api-oauth-google/api-explorer-invocation-response.png)
+
+You should see a `Hello, stranger!` in the response body.
+
 ## Adding AWS Amplify
 
 To use our AWS resources on the frontend we are going to use [AWS Amplify](https://aws.amazon.com/amplify/).
 
-Note, to know more about configuring Amplify with SST check [this chapter]({% link _chapters/configure-aws-amplify.md %})
+Note, to know more about configuring Amplify with SST check [this chapter]({% link _chapters/configure-aws-amplify.md %}).
 
 Run the below command to install AWS Amplify in the `frontend/` directory.
 
@@ -358,8 +374,14 @@ Amplify.configure({
         ".amazoncognito.com"
       }`,
       scope: ["email", "profile", "openid", "aws.cognito.signin.user.admin"],
-      redirectSignIn: "http://localhost:3000", // Make sure to use the exact URL
-      redirectSignOut: "http://localhost:3000", // Make sure to use the exact URL
+      redirectSignIn:
+        import.meta.env.VITE_APP_API_STAGE === "prod"
+          ? "production-url"
+          : "http://localhost:3000", // Make sure to use the exact URL
+      redirectSignOut:
+        import.meta.env.VITE_APP_API_STAGE === "prod"
+          ? "production-url"
+          : "http://localhost:3000", // Make sure to use the exact URL
       responseType: "token", // or 'token', note that REFRESH token will only be generated when the responseType is code
     },
   },
@@ -387,6 +409,7 @@ ReactDOM.render(
 {%change%} Replace `src/App.jsx` with below code.
 
 {% raw %}
+
 ```jsx
 import { Auth, API } from "aws-amplify";
 import React, { useState, useEffect } from "react";
@@ -472,6 +495,7 @@ const App = () => {
 
 export default App;
 ```
+
 {% endraw %}
 
 {%change%} Replace `src/index.css` with the below styles.
@@ -554,7 +578,11 @@ When you're not logged in and try to click the buttons, you'll see responses lik
 
 ![private button click without login](/assets/examples/api-oauth-google/private-button-click-without-login.png)
 
-Once you click on login, you're asked to login through your Google account. Once it's done you can check your info.
+Once you click on login, you're asked to login through your Google account.
+
+![login button click google login screen](/assets/examples/api-oauth-google/login-button-click-google-login-screen.png)
+
+Once it's done you can check your info.
 
 ![current logged in user info](/assets/examples/api-oauth-google/current-logged-in-user-info.png)
 
@@ -585,7 +613,7 @@ Once deployed, you should see something like this.
 Stack prod-api-oauth-google-my-stack
   Status: deployed
   Outputs:
-    ApiEndpoint: https://ck198mfop1.execute-api.us-east-1.amazonaws.com
+    api_endpoint: https://ck198mfop1.execute-api.us-east-1.amazonaws.com
 ```
 
 ## Cleaning up
