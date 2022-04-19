@@ -74,7 +74,7 @@ Now let's add GitHub OAuth for our serverless app, to do so we need to create a 
 
 {%change%} Create a `.env` file in the root and add your GitHub `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` from your [GitHub OAuth App](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app).
 
-Note, if you haven't created an app follow [this tutorial](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app).
+Note, if you haven't created an app, follow [this tutorial](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app).
 
 ![GitHub API Credentials](/assets/examples/api-oauth-github/github-api-credentials.png)
 
