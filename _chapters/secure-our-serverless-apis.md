@@ -95,39 +95,6 @@ To test these changes we cannot use the `curl` command anymore. We'll need to ge
 
 Let's quickly test our APIs with authentication.
 
-To do this, we'll need to create a test user for our Cognito User Pool.
-
-### Create a Test User
-
-We'll use AWS CLI to sign up a user with their email and password.
-
-{%change%} In your terminal, run.
-
-``` bash
-$ aws cognito-idp sign-up \
-  --region COGNITO_REGION \
-  --client-id USER_POOL_CLIENT_ID \
-  --username admin@example.com \
-  --password Passw0rd!
-```
-
-Make sure to replace `COGNITO_REGION` and `USER_POOL_CLIENT_ID` with the `Region` and `UserPoolClientId` from the [previous chapter]({% link _chapters/adding-auth-to-our-serverless-app.md %}).
-
-Now we need to verify this email. For now we'll do this via an administrator command.
-
-{%change%} In your terminal, run.
-
-``` bash
-$ aws cognito-idp admin-confirm-sign-up \
-  --region COGNITO_REGION \
-  --user-pool-id USER_POOL_ID \
-  --username admin@example.com
-```
-
-Replace the `COGNITO_REGION` and `USER_POOL_ID` with the `Region` and `UserPoolId` from the [previous chapter]({% link _chapters/adding-auth-to-our-serverless-app.md %}).
-
-### Test the API With Auth
-
 To be able to hit our API endpoints securely, we need to follow these steps.
 
 1. Authenticate against our User Pool and acquire a user token.
@@ -178,16 +145,18 @@ Making API request
   status: 200,
   statusText: 'OK',
   data: {
-    userId: 'us-east-1:edc3b241-70c3-4665-a775-1f2df6ddfc26',
-    noteId: '6f9f41a0-18b4-11eb-a94f-db173bada851',
+    userId: 'us-east-1:06d418dd-b55b-4f7d-9af4-5d067a69106e',
+    noteId: 'b5199840-c0e5-11ec-a5e8-61c040911d73',
     content: 'hello world',
     attachment: 'hello.jpg',
-    createdAt: 1603844881083
+    createdAt: 1650485336004
   }
 }
 ```
 
-It'll have created a new note for our test user.
+It'll have created a new note for our test user in the **DynamoDB** tab of the [SST Console]({{ site.console_url }}).
+
+![SST Console test user new note](/assets/part2/sst-console-test-user-new-note.png)
 
 ### Commit the Changes
 

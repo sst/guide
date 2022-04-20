@@ -66,11 +66,24 @@ Stack dev-notes-my-stack
   Status: deployed
   Outputs:
     ApiEndpoint: https://guksgkkr4l.execute-api.us-east-1.amazonaws.com
+
+==========================
+Starting Live Lambda Dev
+==========================
+
+SST Console: https://console.serverless-stack.com/notes/Jay/local
+Debug session started. Listening for requests...
 ```
 
 The `ApiEndpoint` is the API we just created. Let's test our endpoint. If you open the endpoint URL in your browser, you should see _Hello World!_ being printed out.
 
 ![Serverless Hello World API invoked](/assets/part2/sst-hello-world-api-invoked.png)
+
+You can also head over to the **SST Console** link in your browser. The [SST Console]({{ site.docs_url }}/console) is a web based dashboard to manage your SST apps.
+
+![SST Console Local tab](/assets/part2/sst-console-local-tab.png)
+
+The **Local** tab shows you real-time logs from your apps.
 
 Note that when you hit this endpoint the Lambda function is being run locally.
 

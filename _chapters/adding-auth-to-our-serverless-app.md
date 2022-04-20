@@ -160,4 +160,20 @@ Stack dev-notes-auth
     UserPoolId: us-east-1_TYEz7XP7P
 ```
 
-Now that the auth services in our infrastructure have been created, let's use them to secure our APIs.
+You'll also see our new User Pool if you head over to the **Cognito** tab in the [SST Console]({{ site.console_url }}).
+
+![SST Console Cognito tab](/assets/part2/sst-console-cognito-tab.png)
+
+### Create a Test User
+
+Let's create a test user so that we can test our API. Click the **Create User** button.
+
+{%change%} Fill in `admin@example.com` as the **Email** and `Passw0rd!` as the **Password**, then hit **Create**.
+
+![SST Console Cognito create new user](/assets/part2/sst-console-cognito-create-new-user.png)
+
+This should create a new user.
+
+![SST Console Cognito new user](/assets/part2/sst-console-cognito-new-user.png)
+
+Now that the auth infrastructure and a test user has been created, let's use them to secure our APIs and test them.

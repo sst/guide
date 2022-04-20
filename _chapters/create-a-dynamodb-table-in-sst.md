@@ -112,4 +112,8 @@ Stack dev-notes-storage
 
 The `Stack` name above of `dev-notes-storage` is a string derived from your `${stageName}-${appName}-${stackName}`. Your `appName` is defined in the `name` field of your `sst.json` file and your `stackName` is the label you choose for your stack in `stacks/index.js'.
 
+You can also head over to the **DynamoDB** tab in the [SST Console]({{ site.console_url }}) and check out the new table.
+
+![SST Console DynamoDB tab](/assets/part2/sst-console-dynamodb-tab.png)
+
 Now that our database has been created, let's create an S3 bucket to handle file uploads.
