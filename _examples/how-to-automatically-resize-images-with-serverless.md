@@ -15,7 +15,7 @@ comments_id: how-to-automatically-resize-images-with-serverless/2399
 
 In this example we will look at how to automatically resize images that are uploaded to your S3 bucket using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be using the [Sharp](https://github.com/lovell/sharp) package as a [Lambda Layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
 
-We'll be using SST's [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development). It allows you to make changes and test locally without having to redeploy.
+We'll be using SST's [Live Lambda Development]({{ site.docs_url }}/live-lambda-development). It allows you to make changes and test locally without having to redeploy.
 
 Here is a video of it in action.
 
@@ -108,9 +108,9 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-This creates a S3 bucket using the [`sst.Bucket`](https://docs.serverless-stack.com/constructs/Bucket) construct.
+This creates a S3 bucket using the [`sst.Bucket`]({{ site.docs_url }}/constructs/Bucket) construct.
 
-We are subscribing to the `OBJECT_CREATED` notification with a [`sst.Function`](https://docs.serverless-stack.com/constructs/Function). The image resizing library that we are using, [Sharp](https://github.com/lovell/sharp), needs to be compiled specifically for the target runtime. So we are going to use a [Lambda Layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) to upload it. Locally, the `sharp` package is not compatible with how our functions are bundled. So we are marking it in the `externalModules`.
+We are subscribing to the `OBJECT_CREATED` notification with a [`sst.Function`]({{ site.docs_url }}/constructs/Function). The image resizing library that we are using, [Sharp](https://github.com/lovell/sharp), needs to be compiled specifically for the target runtime. So we are going to use a [Lambda Layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) to upload it. Locally, the `sharp` package is not compatible with how our functions are bundled. So we are marking it in the `externalModules`.
 
 Finally, we are allowing our functions to access the bucket by calling `attachPermissions`. We are also outputting the name of the bucket that we are creating.
 
@@ -221,7 +221,7 @@ $ npm install sharp aws-sdk
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npx sst start

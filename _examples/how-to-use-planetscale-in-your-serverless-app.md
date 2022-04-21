@@ -180,7 +180,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-Our [API](https://docs.serverless-stack.com/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `main` in `src/lambda.js` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `main` in `src/lambda.js` will get invoked.
 
 We also pass in the credentials we created to our API through environment variables.
 
@@ -221,7 +221,7 @@ And let's test what we have so far.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npx sst start

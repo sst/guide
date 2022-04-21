@@ -55,7 +55,7 @@ An SST app is made up of two parts.
 
 ## Setting up the Auth
 
-First, let's create a [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to store the user info using the [`Auth`](https://docs.serverless-stack.com/constructs/Auth) construct
+First, let's create a [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to store the user info using the [`Auth`]({{ site.docs_url }}/constructs/Auth) construct
 
 {%change%} Add this code below the `super()` method in `stacks/MyStack.js`.
 
@@ -167,7 +167,7 @@ const api = new sst.Api(this, "Api", {
 auth.attachPermissionsForAuthUsers([api]);
 ```
 
-We are creating an API here using the [`sst.Api`](https://docs.serverless-stack.com/constructs/api) construct. And we are adding two routes to it.
+We are creating an API here using the [`sst.Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding two routes to it.
 
 ```
 GET /private
@@ -184,7 +184,7 @@ Let's install the npm packages we are using here.
 $ npx sst add-cdk @aws-cdk/aws-apigatewayv2-authorizers-alpha
 ```
 
-The reason we are using the [**add-cdk**](https://docs.serverless-stack.com/packages/cli#add-cdk-packages) command instead of using an `npm install`, is because of [a known issue with AWS CDK](https://docs.serverless-stack.com/known-issues). Using mismatched versions of CDK packages can cause some unexpected problems down the road. The `sst add-cdk` command ensures that we install the right version of the package.
+The reason we are using the [**add-cdk**]({{ site.docs_url }}/packages/cli#add-cdk-packages) command instead of using an `npm install`, is because of [a known issue with AWS CDK]({{ site.docs_url }}/known-issues). Using mismatched versions of CDK packages can cause some unexpected problems down the road. The `sst add-cdk` command ensures that we install the right version of the package.
 
 ## Adding function code
 
@@ -214,7 +214,7 @@ export async function handler() {
 
 ## Setting up our React app
 
-To deploy a React app to AWS, we'll be using the SST [`ViteStaticSite`](https://docs.serverless-stack.com/constructs/ViteStaticSite) construct.
+To deploy a React app to AWS, we'll be using the SST [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) construct.
 
 {%change%} Replace the `this.addOutputs` call with the following.
 
@@ -243,7 +243,7 @@ this.addOutputs({
 
 The construct is pointing to where our React.js app is located. We haven't created our app yet but for now, we'll point to the `frontend` directory.
 
-We are also setting up [build time React environment variables](https://vitejs.dev/guide/env-and-mode.html) with the endpoint of our API. The [`ViteStaticSite`](https://docs.serverless-stack.com/constructs/ViteStaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
+We are also setting up [build time React environment variables](https://vitejs.dev/guide/env-and-mode.html) with the endpoint of our API. The [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
 
 We are going to print out the resources that we created for reference.
 
@@ -286,7 +286,7 @@ We need to update our start script to use this package.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npx sst start

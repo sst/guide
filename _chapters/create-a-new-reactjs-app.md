@@ -57,7 +57,7 @@ Now to use this package, we'll add it to our `package.json` scripts.
 
 ### Add the React App to SST
 
-We are going to be deploying our React app to AWS. To do that we'll be using the SST [`ReactStaticSite`](https://docs.serverless-stack.com/constructs/ReactStaticSite) construct.
+We are going to be deploying our React app to AWS. To do that we'll be using the SST [`ReactStaticSite`]({{ site.docs_url }}/constructs/ReactStaticSite) construct.
 
 {%change%} Create a new file in `stacks/FrontendStack.js` and add the following.
 

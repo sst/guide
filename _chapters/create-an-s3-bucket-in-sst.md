@@ -22,7 +22,7 @@ We'll be adding to the `StorageStack` that we created.
 this.bucket = new sst.Bucket(this, "Uploads");
 ```
 
-This creates a new S3 bucket using the SST [`Bucket`](https://docs.serverless-stack.com/constructs/Bucket) construct.
+This creates a new S3 bucket using the SST [`Bucket`]({{ site.docs_url }}/constructs/Bucket) construct.
 
 Also, find the following line in `stacks/StorageStack.js`.
 
@@ -52,6 +52,10 @@ You should see that the storage stack has been updated.
 Stack dev-notes-storage
   Status: deployed
 ```
+
+You can also head over to the **Buckets** tab in the [SST Console]({{ site.console_url }}) and check out the new bucket.
+
+![SST Console Buckets tab](/assets/part2/sst-console-buckets-tab.png)
 
 ### Commit the Changes
 

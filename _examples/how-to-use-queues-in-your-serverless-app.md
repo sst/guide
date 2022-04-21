@@ -73,7 +73,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-This creates an SQS queue using [`sst.Queue`](https://docs.serverless-stack.com/constructs/Queue). And it has a consumer that polls for messages from the queue. The consumer function will run when it has polled 1 or more messages.
+This creates an SQS queue using [`sst.Queue`]({{ site.docs_url }}/constructs/Queue). And it has a consumer that polls for messages from the queue. The consumer function will run when it has polled 1 or more messages.
 
 ## Setting up the API
 
@@ -104,7 +104,7 @@ this.addOutputs({
 });
 ```
 
-Our [API](https://docs.serverless-stack.com/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `main` in `src/main.js` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `main` in `src/main.js` will get invoked.
 
 We also pass in the url of our SQS queue to our API as an environment variable called `queueUrl`. And we allow our API to send messages to the queue we just created.
 
@@ -137,7 +137,7 @@ Now let's test our new API.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npx sst start

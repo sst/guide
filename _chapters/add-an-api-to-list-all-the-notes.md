@@ -68,23 +68,13 @@ Stack dev-notes-api
 
 ### Test the API
 
-Let's test list all notes API.
+Let's test the list all notes API. Head to the **API** tab of the [SST Console]({{ site.console_url }}).
 
-{%change%} Run the following in your terminal.
+{%change%} Select the `/notes` API and click **Send**.
 
-``` bash
-$ curl https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes
-```
+You should see the notes being returned in the response.
 
-Again, replacing the example URL with your `ApiEndpoint` value.
-
-Since we are making a simple GET request, we could also go to this URL directly in your browser.
-
-The response should look something like this.
-
-``` json
-[{"attachment":"hello.jpg","content":"Hello World","createdAt":1629336889054,"noteId":"a46b7fe0-008d-11ec-a6d5-a1d39a077784","userId":"123"}]
-```
+![SST Console list notes API request](/assets/part2/sst-console-list-notes-api-request.png)
 
 Note that, we are getting an array of notes. Instead of a single note.
 

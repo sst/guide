@@ -57,7 +57,7 @@ We are doing a couple of things of note here.
 
 - This new `ApiStack` expects a `table` resource to be passed in. We'll be passing in the DynamoDB table from the `StorageStack` that we created previously.
 
-- We are creating an API using SST's [`Api`](https://docs.serverless-stack.com/constructs/Api) construct.
+- We are creating an API using SST's [`Api`]({{ site.docs_url }}/constructs/Api) construct.
 
 - We are passing in the name of our DynamoDB table as an environment variable called `TABLE_NAME`. We'll need this to query our table.
 
@@ -178,26 +178,29 @@ It includes the API endpoint that we created.
 
 Now we are ready to test our new API.
 
-{%change%} Run the following in your terminal.
+Head over to the **API** tab in the [SST Console]({{ site.console_url }}) and check out the new API.
 
-Make sure to keep your local environment (`sst start`) running in another window – and to replace the endpoint address in the curl command below with your `ApiEndpoint` value from above.
+![SST Console API tab](/assets/part2/sst-console-api-tab.png)
 
-``` bash
-$ curl -X POST \
--H 'Content-Type: application/json' \
--d '{"content":"Hello World","attachment":"hello.jpg"}' \
-https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes
+Here we can test our APIs.
+
+{%change%} Add the following request body to the **Body** field and hit **Send**.
+
+```txt
+{"content":"Hello World","attachment":"hello.jpg"}
 ```
+
+You should see the create note API request being made. 
+
+![SST Console create note API request](/assets/part2/sst-console-create-note-api-request.png)
 
 Here we are making a POST request to our create note API. We are passing in the `content` and `attachment` as a JSON string. In this case the attachment is a made up file name. We haven't uploaded anything to S3 yet.
 
-The response should look something like this.
+If you head over to the **DynamoDB** tab, you'll see the new note.
 
-``` json
-{"userId":"123","noteId":"a46b7fe0-008d-11ec-a6d5-a1d39a077784","content":"Hello World","attachment":"hello.jpg","createdAt":1629336889054}
-```
+![SST Console new note](/assets/part2/sst-console-new-note.png)
 
-Make a note of the `noteId` in the response. We are going to use this newly created note in the next chapter.
+Make a note of the `noteId`. We are going to use this newly created note in the next chapter.
 
 ### Refactor Our Code
 

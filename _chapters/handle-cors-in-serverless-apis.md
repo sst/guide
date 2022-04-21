@@ -46,7 +46,7 @@ And our browser won't show us the HTTP response. This can make debugging our API
 
 ### CORS in API Gateway
 
-The SST [`Api`](https://docs.serverless-stack.com/constructs/Api) construct that we are using enables CORS by default.
+The SST [`Api`]({{ site.docs_url }}/constructs/Api) construct that we are using enables CORS by default.
 
 ```js
 new Api(this, "Api", {
@@ -58,7 +58,7 @@ new Api(this, "Api", {
 });
 ```
 
-You can further configure the specifics if necessary. You can [read more about this here](https://docs.serverless-stack.com/constructs/Api#cors).
+You can further configure the specifics if necessary. You can [read more about this here]({{ site.docs_url }}/constructs/Api#cors).
 
 ```js
 import { HttpMethod } from "@aws-cdk/aws-apigatewayv2-alpha";

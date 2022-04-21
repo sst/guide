@@ -15,7 +15,7 @@ comments_id: how-to-use-lambda-layers-in-your-serverless-app/2405
 
 In this example we will look at how to use [Layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) in your serverless app with [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be using the [chrome-aws-lambda](https://github.com/shelfio/chrome-aws-lambda-layer) Layer to take a screenshot of a webpage and return the image in our API.
 
-We'll be using SST's [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development). It allows you to make changes and test locally without having to redeploy.
+We'll be using SST's [Live Lambda Development]({{ site.docs_url }}/live-lambda-development). It allows you to make changes and test locally without having to redeploy.
 
 ## Requirements
 
@@ -100,7 +100,7 @@ export default class MyStack extends sst.Stack {
 
 Here, we are first getting a reference to the [ARN]({% link _chapters/what-is-an-arn.md %}) of the Layer we want to use. Head over to the [chrome-aws-lambda](https://github.com/shelfio/chrome-aws-lambda-layer) Layer repo and grab the one for your region.
 
-We then use the [`sst.Api`](https://docs.serverless-stack.com/constructs/Api) construct and add a single route (`GET /`). For the function that'll be handling the route, we increase the timeout, since generating a screenshot can take a little bit of time. We then reference the Layer we want and exclude the Lambda function from bundling the [chrome-aws-lambda](https://github.com/alixaxel/chrome-aws-lambda) npm package.
+We then use the [`sst.Api`]({{ site.docs_url }}/constructs/Api) construct and add a single route (`GET /`). For the function that'll be handling the route, we increase the timeout, since generating a screenshot can take a little bit of time. We then reference the Layer we want and exclude the Lambda function from bundling the [chrome-aws-lambda](https://github.com/alixaxel/chrome-aws-lambda) npm package.
 
 Finally, we output the endpoint of our newly created API.
 
@@ -160,7 +160,7 @@ The `puppeteer` packages are used internally by the `chrome-aws-lambda` package.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npx sst start

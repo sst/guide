@@ -75,27 +75,18 @@ Stack dev-notes-api
 
 ### Test the API
 
-Now we are ready to test the new API.
+Now we are ready to test the new API. In [an earlier chapter]({% link _chapters/add-an-api-to-get-a-note.md %}) we tested our create note API. It should've returned the new note's id as the `noteId`.
 
-{%change%} Run the following in your terminal.
+Head to the **API** tab in the [SST Console]({{ site.console_url }}) and select the `PUT /notes/{id}` API.
 
-Make sure to keep your local environment (`sst start`) running in another window.
+{%change%} Set the `noteId` as the **id** and in the **Body** tab set the following as the request body. Then hit **Send**.
 
-``` bash
-$ curl -X PUT \
--H 'Content-Type: application/json' \
--d '{"content":"New World","attachment":"new.jpg"}' \
-https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes/NOTE_ID
+``` txt
+{"content":"New World","attachment":"new.jpg"}
 ```
 
-Make sure to replace the id at the end of the URL with the `noteId` from when we [created our note]({% link _chapters/add-an-api-to-create-a-note.md %}).
+You should see the note being updated in the response.
 
-Here we are making a PUT request to a note that we want to update. We are passing in the new `content` and `attachment` as a JSON string.
-
-The response should look something like this.
-
-``` json
-{"status":true}
-```
+![SST Console update note API request](/assets/part2/sst-console-update-note-api-request.png)
 
 Next we are going to add the API to delete a note given its id.

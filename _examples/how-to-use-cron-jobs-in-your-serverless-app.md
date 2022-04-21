@@ -74,7 +74,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-This creates a serverless cron job using [`sst.Cron`](https://docs.serverless-stack.com/constructs/Cron). We've configured the cron job to run every minute.
+This creates a serverless cron job using [`sst.Cron`]({{ site.docs_url }}/constructs/Cron). We've configured the cron job to run every minute.
 
 ## Adding function code
 
@@ -93,7 +93,7 @@ And let's test what we have so far.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npx sst start

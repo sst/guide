@@ -81,7 +81,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-This creates an EventBridge EventBus using [`sst.EventBus`](https://docs.serverless-stack.com/constructs/EventBus) and it has two targets. Meaning when the event is published, both the functions will get run.
+This creates an EventBridge EventBus using [`sst.EventBus`]({{ site.docs_url }}/constructs/EventBus) and it has two targets. Meaning when the event is published, both the functions will get run.
 
 ## Setting up the API
 
@@ -111,7 +111,7 @@ this.addOutputs({
 });
 ```
 
-Our [API](https://docs.serverless-stack.com/constructs/api) simply has one endpoint (`/order`). When we make a `POST` request to this endpoint the Lambda function called `main` in `src/order.js` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (`/order`). When we make a `POST` request to this endpoint the Lambda function called `main` in `src/order.js` will get invoked.
 
 We'll also pass in the name of our EventBridge EventBus to our API as an environment variable called `busName`. And we allow our API to publish to the EventBus we just created.
 
@@ -153,7 +153,7 @@ Now let's test our new API.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npx sst start

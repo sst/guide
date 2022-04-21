@@ -113,7 +113,7 @@ This creates a [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/de
 
 Note, we are enabling the `userPassword` authentication flow for the purpose of this example. We need this to be able to authenticate a user and receive the JWT token via the AWS CLI. You **should not** enable this authentication flow in production.
 
-We are also creating an API here using the [`sst.Api`](https://docs.serverless-stack.com/constructs/api) construct. And we are adding two routes to it.
+We are also creating an API here using the [`sst.Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding two routes to it.
 
 ```
 GET /private
@@ -130,7 +130,7 @@ Let's install the npm packages we are using here.
 $ npx sst add-cdk @aws-cdk/aws-apigatewayv2-authorizers-alpha
 ```
 
-The reason we are using the [**add-cdk**](https://docs.serverless-stack.com/packages/cli#add-cdk-packages) command instead of using an `npm install`, is because of [a known issue with AWS CDK](https://docs.serverless-stack.com/known-issues). Using mismatched versions of CDK packages can cause some unexpected problems down the road. The `sst add-cdk` command ensures that we install the right version of the package.
+The reason we are using the [**add-cdk**]({{ site.docs_url }}/packages/cli#add-cdk-packages) command instead of using an `npm install`, is because of [a known issue with AWS CDK]({{ site.docs_url }}/known-issues). Using mismatched versions of CDK packages can cause some unexpected problems down the road. The `sst add-cdk` command ensures that we install the right version of the package.
 
 ## Adding function code
 
@@ -162,7 +162,7 @@ Now let's test our new API.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npx sst start

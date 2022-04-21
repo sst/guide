@@ -129,7 +129,7 @@ The CDK code here gets compiled down to CloudFormation templates, similar to the
 
 ### Developing Locally in SST
 
-SST was initially developed to solved the local development problem with serverless. It features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment. It allows you test your serverless apps live.
+SST was initially developed to solved the local development problem with serverless. It features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment. It allows you test your serverless apps live.
 
 It does this by deploying your application to AWS and proxying any Lambda function requests to your local machine. It'll then execute these locally and send the response back to AWS. This means that you don't need to mock anything and you can test against your deployed infrastructure.
 
@@ -151,7 +151,7 @@ Let's quickly summarize the comparison between the two frameworks.
 | Architecture | Partly open source with hosted deployment engine | Completely open source and self-hosted |
 | Infrastructure Definition | [CloudFormation](https://aws.amazon.com/cloudformation/resources/templates/) | [CDK]({% link _chapters/what-is-aws-cdk.md %}) |
 | | Hard to manage large applications | Easy to reuse infrastructure code |
-| Local Development | Mocking or [serverless-offline](https://github.com/dherault/serverless-offline) | [Live Lambda Dev](https://docs.serverless-stack.com/live-lambda-development) |
+| Local Development | Mocking or [serverless-offline](https://github.com/dherault/serverless-offline) | [Live Lambda Dev]({{ site.docs_url }}/live-lambda-development) |
 |                   | Repeatedly deploying changes  | Setting breakpoints |
 | Flexibility | Use community plugins  | Use any CDK construct |
 |             | Create your own plugin | Write your own CDK construct |
@@ -276,4 +276,4 @@ Finally, you can remove the resources created in this example using the followin
 $ npx sst remove
 ```
 
-You can also [check out the source for this example]({{ site.sst_github_repo }}{{ site.sst_github_examples_prefix }}vscode) and read about [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development).
+You can also [check out the source for this example]({{ site.sst_github_repo }}{{ site.sst_github_examples_prefix }}vscode) and read about [Live Lambda Development]({{ site.docs_url }}/live-lambda-development).

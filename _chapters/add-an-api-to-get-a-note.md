@@ -69,20 +69,12 @@ Stack dev-notes-api
 
 Let's test the get notes API. In the [previous chapter]({% link _chapters/add-an-api-to-get-a-note.md %}) we tested our create note API. It should've returned the new note's id as the `noteId`.
 
-{%change%} Run the following in your terminal.
+Head back to the **API** tab in the [SST Console]({{ site.console_url }}) and select the `/notes/{id}` API.
 
-``` bash
-$ curl https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes/NOTE_ID
-```
+{%change%} Set the `noteId` as the **id** and click **Send**.
 
-Make sure to replace the endpoint URL with your `ApiEndpoint` value and the NOTE_ID at the end of the URL with the `noteId` that was created previously.
+You should see the note being returned in the response.
 
-Since we are making a simple GET request, we could also go to this URL directly in your browser.
-
-The response should look something like this.
-
-``` json
-{"attachment":"hello.jpg","content":"Hello World","createdAt":1629336889054,"noteId":"a46b7fe0-008d-11ec-a6d5-a1d39a077784","userId":"123"}
-```
+![SST Console get note API request](/assets/part2/sst-console-get-note-api-request.png)
 
 Next, let’s create an API to list all the notes a user has.

@@ -65,21 +65,19 @@ Stack dev-notes-api
 
 Let's test the delete note API.
 
-{%change%} Run the following in your terminal.
+In a [previous chapter]({% link _chapters/add-an-api-to-get-a-note.md %}) we tested our create note API. It should've returned the new note's id as the `noteId`.
 
-Make sure to keep your local environment (`sst start`) running in another window.
+In the **API** tab of the [SST Console]({{ site.console_url }}), select the `DELETE /notes/{id}` API.
 
-``` bash
-$ curl -X DELETE https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes/NOTE_ID
-```
+{%change%} Set the `noteId` as the **id** and click **Send**.
 
-Make sure to replace the id at the end of the URL with the `noteId` from when we [created our note]({% link _chapters/add-an-api-to-create-a-note.md %}).
+You should see the note being deleted in the response.
 
-Here we are making a DELETE request to the note that we want to delete. The response should look something like this.
+![SST Console delete note API request](/assets/part2/sst-console-delete-note-api-request.png)
 
-``` json
-{"status":true}
-```
+And the note should be removed from the DynamoDB Table as well.
+
+![SST Console note removed in DynamoDB](/assets/part2/sst-console-note-removed-in-dynamodb.png)
 
 ### Commit the Changes
 

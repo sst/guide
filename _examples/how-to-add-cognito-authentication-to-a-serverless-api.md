@@ -85,7 +85,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-We are creating an API here using the [`sst.Api`](https://docs.serverless-stack.com/constructs/api) construct. And we are adding two routes to it.
+We are creating an API here using the [`sst.Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding two routes to it.
 
 ```
 GET /private
@@ -161,7 +161,7 @@ Now let's test our new API.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npx sst start

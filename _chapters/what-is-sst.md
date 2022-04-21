@@ -17,11 +17,12 @@ To solve these issues we created the [Serverless Stack Framework (SST)]({{ site.
 SST makes it easy to build serverless applications by allowing developers to:
 
 1. Define their infrastructure using [AWS CDK]({% link _chapters/what-is-aws-cdk.md %})
-2. Test their applications live using [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development)
-3. [Set breakpoints and debug in Visual Studio Code](https://docs.serverless-stack.com/debugging-with-vscode)
-4. [Deploy to multiple environments and regions](https://docs.serverless-stack.com/deploying-your-app#deploying-to-a-stage)
-5. Use [higher-level constructs](https://docs.serverless-stack.com/packages/resources) designed specifically for serverless apps
-6. Configure Lambda functions with JS and TS (using [esbuild](https://esbuild.github.io/)), Go, Python, C#, and F#
+2. Test their applications live using [Live Lambda Development]({{ site.docs_url }}/live-lambda-development)
+3. [Set breakpoints and debug in Visual Studio Code]({{ site.docs_url }}/debugging-with-vscode)
+4. [Web based dashboard]({{ site.docs_url }}/console) to manage your apps
+5. [Deploy to multiple environments and regions]({{ site.docs_url }}/deploying-your-app#deploying-to-a-stage)
+6. Use [higher-level constructs]({{ site.docs_url }}/packages/resources) designed specifically for serverless apps
+7. Configure Lambda functions with JS and TS (using [esbuild](https://esbuild.github.io/)), Go, Python, C#, and F#
 
 We also have an [alternative guide using Serverless Framework]({% link _chapters/setup-the-serverless-framework.md %}).
 

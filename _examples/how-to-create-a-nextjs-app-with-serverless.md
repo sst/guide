@@ -13,7 +13,7 @@ ref: how-to-create-a-nextjs-app-with-serverless
 comments_id: how-to-create-a-next-js-app-with-serverless/2486
 ---
 
-In this example we will look at how to deploy a full-stack [Next.js](https://nextjs.org) app to your AWS account with [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) and the SST [`NextjsSite`](https://docs.serverless-stack.com/constructs/NextjsSite) construct.
+In this example we will look at how to deploy a full-stack [Next.js](https://nextjs.org) app to your AWS account with [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) and the SST [`NextjsSite`]({{ site.docs_url }}/constructs/NextjsSite) construct.
 
 Here's what we'll be covering in this example:
 
@@ -98,7 +98,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-This creates a serverless DynamoDB table using the SST [`Table`](https://docs.serverless-stack.com/constructs/Table) construct. It has a primary key called `counter`. Our table is going to look something like this:
+This creates a serverless DynamoDB table using the SST [`Table`]({{ site.docs_url }}/constructs/Table) construct. It has a primary key called `counter`. Our table is going to look something like this:
 
 | counter | tally |
 | ------- | ----- |
@@ -118,7 +118,7 @@ This sets up our Next.js app in the `frontend/` directory.
 
 ### Configure Next.js with SST
 
-Now let's configure SST to deploy our Next.js app to AWS. To do so, we'll be using the SST [`NextjsSite`](https://docs.serverless-stack.com/constructs/NextjsSite) construct.
+Now let's configure SST to deploy our Next.js app to AWS. To do so, we'll be using the SST [`NextjsSite`]({{ site.docs_url }}/constructs/NextjsSite) construct.
 
 {%change%} Add the following in `stacks/MyStack.js` below our `sst.Table` definition.
 
@@ -144,7 +144,7 @@ this.addOutputs({
 
 The construct is pointing to where our Next.js app is located. You'll recall that we created it in the `frontend` directory.
 
-We are also setting up a couple of [build time Next.js environment variable](https://nextjs.org/docs/basic-features/environment-variables). The `REGION` and `TABLE_NAME` are passing in the table details to our Next.js app. The [`NextjsSite`](https://docs.serverless-stack.com/constructs/NextjsSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
+We are also setting up a couple of [build time Next.js environment variable](https://nextjs.org/docs/basic-features/environment-variables). The `REGION` and `TABLE_NAME` are passing in the table details to our Next.js app. The [`NextjsSite`]({{ site.docs_url }}/constructs/NextjsSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
 
 To load these environment variables in our local environment, we'll be using the [`@serverless-stack/static-site-env`](https://www.npmjs.com/package/@serverless-stack/static-site-env) package.
 
@@ -298,7 +298,7 @@ Now let's test our app.
 
 ## Start the dev environment
 
-SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
+SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 {%change%} Run the following in your project root.
 
