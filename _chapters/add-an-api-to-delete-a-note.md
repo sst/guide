@@ -65,7 +65,7 @@ Stack dev-notes-api
 
 Let's test the delete note API.
 
-In the [previous chapter]({% link _chapters/add-an-api-to-get-a-note.md %}) we tested our create note API. It should've returned the new note's id as the `noteId`.
+In a [previous chapter]({% link _chapters/add-an-api-to-get-a-note.md %}) we tested our create note API. It should've returned the new note's id as the `noteId`.
 
 In the **API** tab of the [SST Console]({{ site.console_url }}), select the `DELETE /notes/{id}` API.
 

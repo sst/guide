@@ -41,7 +41,7 @@ Let's quickly go over what we are doing here.
 
 We are creating a new stack in our SST app. We'll be using it to create all our storage related infrastructure (DynamoDB and S3). There's no specific reason why we are creating a separate stack for these resources. It's only meant as a way of organizing our resources and illustrating how to create separate stacks in our app.
 
-We are using SST's [`Table`](https://docs.serverless-stack.com/constructs/Table) construct to create our DynamoDB table.
+We are using SST's [`Table`]({{ site.docs_url }}/constructs/Table) construct to create our DynamoDB table.
 
 It has two fields:
 1. `userId`: The id of the user that the note belongs to.

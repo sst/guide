@@ -39,7 +39,7 @@ test("Test StorageStack", () => {
 });
 ```
 
-This is a very simple CDK test that checks if our storage stack creates a DynamoDB table and that the table's billing mode is set to `PAY_PER_REQUEST`. This is the default setting in SST's [`Table`](https://docs.serverless-stack.com/constructs/Table) construct. This test is making sure that we don't change this setting by mistake.
+This is a very simple CDK test that checks if our storage stack creates a DynamoDB table and that the table's billing mode is set to `PAY_PER_REQUEST`. This is the default setting in SST's [`Table`]({{ site.docs_url }}/constructs/Table) construct. This test is making sure that we don't change this setting by mistake.
 
 We also have a sample test created with the starter that we can remove.
 

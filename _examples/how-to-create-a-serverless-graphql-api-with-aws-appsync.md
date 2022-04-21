@@ -15,7 +15,7 @@ comments_id: how-to-create-a-serverless-graphql-api-with-aws-appsync/2362
 
 In this example we'll look at how to create an [AppSync GraphQL API]({% link _chapters/what-is-aws-appsync.md %}) on AWS using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be allowing our users to get, create, update, delete, and list notes.
 
-We'll be using SST's [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development). It allows you to make changes and test AppSync locally without having to redeploy.
+We'll be using SST's [Live Lambda Development]({{ site.docs_url }}/live-lambda-development). It allows you to make changes and test AppSync locally without having to redeploy.
 
 Here is a video of it in action.
 
@@ -117,7 +117,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-We are creating an AppSync GraphQL API here using the [`sst.AppSyncApi`](https://docs.serverless-stack.com/constructs/AppSyncApi) construct. We are also creating a DynamoDB table using the [`sst.Table`](https://docs.serverless-stack.com/constructs/Table) construct. It'll store the notes we'll be creating with our GraphQL API.
+We are creating an AppSync GraphQL API here using the [`sst.AppSyncApi`]({{ site.docs_url }}/constructs/AppSyncApi) construct. We are also creating a DynamoDB table using the [`sst.Table`]({{ site.docs_url }}/constructs/Table) construct. It'll store the notes we'll be creating with our GraphQL API.
 
 Finally, we allow our API to access our table.
 
@@ -356,7 +356,7 @@ Let's test what we've created so far!
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npx sst start
@@ -423,7 +423,7 @@ mutation createNote {
 
 Also let's go to the **DynamoDB** tab in the SST Console and check that the value has been created in the table.
 
-Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`sst.Table`](https://docs.serverless-stack.com/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
+Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`sst.Table`]({{ site.docs_url }}/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
 
 ![DynamoDB explorer create note](/assets/examples/graphql-appsync/dynamodb-explorer-create-note.png)
 

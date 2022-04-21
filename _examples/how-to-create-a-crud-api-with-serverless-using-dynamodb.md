@@ -77,7 +77,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-This creates a serverless DynamoDB table using [`sst.Table`](https://docs.serverless-stack.com/constructs/Table). Our table is going to look something like this:
+This creates a serverless DynamoDB table using [`sst.Table`]({{ site.docs_url }}/constructs/Table). Our table is going to look something like this:
 
 | userId | noteId | content | createdAt |
 | ------ | ------ | ------- | --------- |
@@ -116,7 +116,7 @@ this.addOutputs({
 });
 ```
 
-We are creating an API here using the [`sst.Api`](https://docs.serverless-stack.com/constructs/api) construct. And we are adding five routes to it.
+We are creating an API here using the [`sst.Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding five routes to it.
 
 ```
 GET     /notes
@@ -311,7 +311,7 @@ Now let's test what we've created so far.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npx sst start
@@ -365,7 +365,7 @@ To retrieve the created note, go to `GET /notes/{id}` route and in the **URL** t
 
 Also let's go to the **DynamoDB** tab in the SST Console and check that the value has been created in the table.
 
-Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`sst.Table`](https://docs.serverless-stack.com/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
+Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`sst.Table`]({{ site.docs_url }}/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
 
 ![DynamoDB table view of table](/assets/examples/crud-rest-api-dynamodb/dynamo-table-view-of-table.png)
 

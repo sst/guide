@@ -36,9 +36,9 @@ The other aspect that they found really appealing was the Live Lambda Developmen
 
 > "We loved the Live Lambda debugging in SST"
 
-Now they have 15 stacks in their SST app. With over 200 endpoints in their API. It also includes 4 Angular apps that use SST's [StaticSite construct](https://docs.serverless-stack.com/constructs/StaticSite).
+Now they have 15 stacks in their SST app. With over 200 endpoints in their API. It also includes 4 Angular apps that use SST's [StaticSite construct]({{ site.docs_url }}/constructs/StaticSite).
 
-They also decided to move to GraphQL to manage their APIs. _"We are already using SST's [ApolloApi construct](https://docs.serverless-stack.com/constructs/ApolloApi)"_, says Phil Astle, a Senior Software Engineer on the team.
+They also decided to move to GraphQL to manage their APIs. _"We are already using SST's [ApolloApi construct]({{ site.docs_url }}/constructs/ApolloApi)"_, says Phil Astle, a Senior Software Engineer on the team.
 
 It's also all deployed through [Seed](https://seed.run). _"We want to have a consistent release process"_, says Jack. Each developer on the team has 2 stages, a local one and a deployed one. There's also a sandbox environment and a production environment.
 

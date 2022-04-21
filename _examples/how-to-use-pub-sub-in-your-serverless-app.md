@@ -73,7 +73,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-This creates an SNS topic using [`sst.Topic`](https://docs.serverless-stack.com/constructs/Topic). And it has two subscribers. Meaning when the topic is published, both the functions will get run.
+This creates an SNS topic using [`sst.Topic`]({{ site.docs_url }}/constructs/Topic). And it has two subscribers. Meaning when the topic is published, both the functions will get run.
 
 ## Setting up the API
 
@@ -104,7 +104,7 @@ this.addOutputs({
 });
 ```
 
-Our [API](https://docs.serverless-stack.com/constructs/api) simply has one endpoint (`/order`). When we make a `POST` request to this endpoint the Lambda function called `main` in `src/order.js` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (`/order`). When we make a `POST` request to this endpoint the Lambda function called `main` in `src/order.js` will get invoked.
 
 We'll also pass in [the arn]({ link \_chapters/what-is-an-arn.md %}) of our SNS topic to our API as an environment variable called `topicArn`. And we allow our API to publish to the topic we just created.
 
@@ -146,7 +146,7 @@ Now let's test our new API.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npx sst start

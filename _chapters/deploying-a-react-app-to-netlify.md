@@ -9,7 +9,7 @@ ref: deploying-a-react-app-to-netlify
 comments_id: hosting-your-react-app/2177
 ---
 
-In this section we'll be looking at how to deploy your React.js app as a static website to [Netlify](https://www.netlify.com). You'll recall that in the [main part of the guide]({% link _chapters/create-a-new-reactjs-app.md %}) we used the SST [`ReactStaticSite`](https://docs.serverless-stack.com/constructs/ReactStaticSite) construct to deploy our React app to AWS.
+In this section we'll be looking at how to deploy your React.js app as a static website to [Netlify](https://www.netlify.com). You'll recall that in the [main part of the guide]({% link _chapters/create-a-new-reactjs-app.md %}) we used the SST [`ReactStaticSite`]({{ site.docs_url }}/constructs/ReactStaticSite) construct to deploy our React app to AWS.
 
 Netlify allows you to [host your React app for free](https://www.netlify.com/pricing/) and it allows your to `git push` to deploy your apps.
 

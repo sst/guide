@@ -78,7 +78,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-We are creating an Apollo GraphQL API here using the [`sst.GraphQLApi`](https://docs.serverless-stack.com/constructs/GraphQLApi) construct. Our Apollo Server is powered by the Lambda function in `src/lambda.ts`.
+We are creating an Apollo GraphQL API here using the [`sst.GraphQLApi`]({{ site.docs_url }}/constructs/GraphQLApi) construct. Our Apollo Server is powered by the Lambda function in `src/lambda.ts`.
 
 ## Adding function code
 
@@ -133,7 +133,7 @@ Now let's test our new Apollo GraphQL API.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npx sst start

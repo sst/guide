@@ -57,7 +57,7 @@ We are doing a couple of things of note here.
 
 - This new `ApiStack` expects a `table` resource to be passed in. We'll be passing in the DynamoDB table from the `StorageStack` that we created previously.
 
-- We are creating an API using SST's [`Api`](https://docs.serverless-stack.com/constructs/Api) construct.
+- We are creating an API using SST's [`Api`]({{ site.docs_url }}/constructs/Api) construct.
 
 - We are passing in the name of our DynamoDB table as an environment variable called `TABLE_NAME`. We'll need this to query our table.
 

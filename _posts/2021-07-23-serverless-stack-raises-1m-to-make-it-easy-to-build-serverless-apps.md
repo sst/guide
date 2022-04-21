@@ -10,7 +10,7 @@ Our [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) allows develo
 
 We would like to take this opportunity to thank the Serverless Stack community for being involved right from day one. We couldn't have built Serverless Stack without you. Your continued feedback has pushed us to improve every part of the framework. It has also allowed us to truly understand the problems developers face while trying to adopt serverless. Also thanks to you, [our Slack community]({{ site.slack_invite_url }}) has grown to nearly 500 members and is a welcoming space for anybody that's looking to use serverless.
 
-As more and more developers discover and adopt SST's [live local development environment](https://docs.serverless-stack.com/live-lambda-development); our team is committed to adding features to support their workflow. This commitment shows clearly in [our rapid release history](https://github.com/serverless-stack/serverless-stack/releases).
+As more and more developers discover and adopt SST's [live local development environment]({{ site.docs_url }}/live-lambda-development); our team is committed to adding features to support their workflow. This commitment shows clearly in [our rapid release history](https://github.com/serverless-stack/serverless-stack/releases).
 
 We are also incredibly proud of what we've built with the [Serverless Stack Guide]({% link guide.md %}), it is the most widely read resource for serverless. And [Seed](https://seed.run); the best way for teams to deploy and manage their serverless applications.
 

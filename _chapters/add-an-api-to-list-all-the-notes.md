@@ -68,7 +68,7 @@ Stack dev-notes-api
 
 ### Test the API
 
-Let's test list all notes API. Head to the **API** tab of the [SST Console]({{ site.console_url }}).
+Let's test the list all notes API. Head to the **API** tab of the [SST Console]({{ site.console_url }}).
 
 {%change%} Select the `/notes` API and click **Send**.
 

@@ -771,8 +771,8 @@ The repo is setup with [Seed](https://seed.run), so a `git push` to the `main` b
 
 We used a couple of SST constructs while building this service. You can read more about them here:
 
-- [Api](https://docs.serverless-stack.com/constructs/Api)
-- [Bucket](https://docs.serverless-stack.com/constructs/Bucket)
-- [Function](https://docs.serverless-stack.com/constructs/Function)
+- [Api]({{ site.docs_url }}/constructs/Api)
+- [Bucket]({{ site.docs_url }}/constructs/Bucket)
+- [Function]({{ site.docs_url }}/constructs/Function)
 
 Hope you enjoyed this chapter. Leave a comment below if you have any questions or feedback!

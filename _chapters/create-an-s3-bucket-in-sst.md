@@ -22,7 +22,7 @@ We'll be adding to the `StorageStack` that we created.
 this.bucket = new sst.Bucket(this, "Uploads");
 ```
 
-This creates a new S3 bucket using the SST [`Bucket`](https://docs.serverless-stack.com/constructs/Bucket) construct.
+This creates a new S3 bucket using the SST [`Bucket`]({{ site.docs_url }}/constructs/Bucket) construct.
 
 Also, find the following line in `stacks/StorageStack.js`.
 

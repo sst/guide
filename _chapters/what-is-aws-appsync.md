@@ -108,11 +108,11 @@ Data sources in AWS AppSync are services, databases, or APIs that hold the data 
 
 There are just a handful of data sources that AWS AppSync supports, such as [Amazon DynamoDB](https://aws.amazon.com/dynamodb/), [AWS Lambda](https://aws.amazon.com/lambda/) (Lambda can allow you to use other options, such as RDS or ElastiCache), and [Amazon Elasticsearch Service](https://aws.amazon.com/elasticsearch-service/). 
 
-SST’s [`AppSyncApi` construct](https://docs.serverless-stack.com/constructs/AppSyncApi#examples) makes creating data sources a lot easier. We'll be looking at some examples of how to do this below.
+SST’s [`AppSyncApi` construct]({{ site.docs_url }}/constructs/AppSyncApi#examples) makes creating data sources a lot easier. We'll be looking at some examples of how to do this below.
 
 You’ll need data sources whenever you need to fetch and manipulate data. However, in some cases where you might only want to perform data transformation with resolvers and subscriptions to be invoked by a mutation, you might not need a data source.
 
-Using the [SST `AppSyncApi`](https://docs.serverless-stack.com/constructs/AppSyncApi), you could add a data source to your GraphQL API easily without having to log in to your AWS console.
+Using the [SST `AppSyncApi`]({{ site.docs_url }}/constructs/AppSyncApi), you could add a data source to your GraphQL API easily without having to log in to your AWS console.
 
 ```js
 import { AppSyncApi } from "@serverless-stack/resources";

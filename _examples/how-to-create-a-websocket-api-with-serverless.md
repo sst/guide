@@ -76,7 +76,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-This creates a serverless DynamoDB table using [`sst.Table`](https://docs.serverless-stack.com/constructs/Table). It has a primary key called `id`. Our table is going to look something like this:
+This creates a serverless DynamoDB table using [`sst.Table`]({{ site.docs_url }}/constructs/Table). It has a primary key called `id`. Our table is going to look something like this:
 
 | id       |
 | -------- |
@@ -114,7 +114,7 @@ this.addOutputs({
 });
 ```
 
-We are creating a WebSocket API using the [`sst.WebSocketApi`](https://docs.serverless-stack.com/constructs/WebSocketApi) construct. It has a couple of routes; the `$connect` and `$disconnect` handles the requests when a client connects or disconnects from our WebSocket API. The `sendmessage` route handles the request when a client wants to send a message to all the connected clients.
+We are creating a WebSocket API using the [`sst.WebSocketApi`]({{ site.docs_url }}/constructs/WebSocketApi) construct. It has a couple of routes; the `$connect` and `$disconnect` handles the requests when a client connects or disconnects from our WebSocket API. The `sendmessage` route handles the request when a client wants to send a message to all the connected clients.
 
 We also pass in the name of our DynamoDB table to our API as an environment variable called `tableName`. And we allow our API to access (read and write) the table instance we just created.
 
@@ -188,7 +188,7 @@ export async function main(event) {
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npx sst start
@@ -232,7 +232,7 @@ Whenever a new client is connected to the API, we will store the connection ID i
 
 Let's go to the **DynamoDB** tab in the SST Console and check that the value has been created in the table.
 
-Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`sst.Table`](https://docs.serverless-stack.com/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
+Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`sst.Table`]({{ site.docs_url }}/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
 
 ![DynamoDB table view of connections table](/assets/examples/websocket/dynamo-table-view-of-connections-table.png)
 

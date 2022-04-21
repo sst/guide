@@ -76,7 +76,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-This creates an [RDS Serverless cluster](https://docs.serverless-stack.com/constructs/RDS). We also set the database engine to PostgreSQL. The database in the cluster that we'll be using is called `CounterDB` (as set in the `defaultDatabaseName` variable).
+This creates an [RDS Serverless cluster]({{ site.docs_url }}/constructs/RDS). We also set the database engine to PostgreSQL. The database in the cluster that we'll be using is called `CounterDB` (as set in the `defaultDatabaseName` variable).
 
 ## Setting up the API
 
@@ -108,7 +108,7 @@ this.addOutputs({
 });
 ```
 
-Our [API](https://docs.serverless-stack.com/constructs/Api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `src/lambda.js` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/Api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `src/lambda.js` will get invoked.
 
 We also pass in the name of our database, the ARN of the database cluster, and the ARN of the secret that'll help us login to our database. An ARN is an identifier that AWS uses. You can [read more about it here]({% link _chapters/what-is-an-arn.md %}).
 
@@ -157,7 +157,7 @@ And test what we have so far.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development](https://docs.serverless-stack.com/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npx sst start
@@ -240,7 +240,7 @@ And now if you head over to your console and make a request to our API. You'll n
 
 ## Running migrations
 
-You can run migrations from the SST console, The `RDS` construct uses [Kysely](https://koskimas.github.io/kysely/) to run and manage schema migrations. The `migrations` prop should point to the folder where your migration files are. you can [read more about migrations here](https://docs.serverless-stack.com/constructs/RDS#configuring-migrations).
+You can run migrations from the SST console, The `RDS` construct uses [Kysely](https://koskimas.github.io/kysely/) to run and manage schema migrations. The `migrations` prop should point to the folder where your migration files are. you can [read more about migrations here]({{ site.docs_url }}/constructs/RDS#configuring-migrations).
 
 Let's create a migration file that creates a table called `todos`.
 

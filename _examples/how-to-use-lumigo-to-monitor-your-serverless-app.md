@@ -91,7 +91,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-We are using the SST [`Api`](https://docs.serverless-stack.com/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `src/lambda.js` will get invoked.
+We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `src/lambda.js` will get invoked.
 
 {%change%} Your `src/lambda.js` should look something like this.
 
@@ -140,7 +140,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-To monitor all the functions in a stack, you can use the [Stack](https://docs.serverless-stack.com/constructs/Stack) construct's `getAllFunctions` method and do the following at the bottom of your stack definition like below
+To monitor all the functions in a stack, you can use the [Stack]({{ site.docs_url }}/constructs/Stack) construct's `getAllFunctions` method and do the following at the bottom of your stack definition like below
 
 ```js
 this.getAllFunctions().forEach((fn) =>
