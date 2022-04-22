@@ -139,6 +139,8 @@ const domain = auth.cognitoUserPool.addDomain("AuthDomain", {
 });
 ```
 
+Note, the `domainPrefix` need to be globally unique across all AWS accounts in a region.
+
 ## Setting up the API
 
 {%change%} Replace the `sst.Api` definition with the following in `stacks/MyStacks.js`.
@@ -236,7 +238,7 @@ const site = new sst.ViteStaticSite(this, "Site", {
 this.addOutputs({
   api_url: api.url,
   auth_client_id: auth.cognitoUserPoolClient.userPoolClientId,
-  domain: domain.domainName,
+  auth_domain: domain.domainName,
   site_url: site.url,
 });
 ```
@@ -313,7 +315,7 @@ Stack manitej-api-oauth-google-my-stack
   Outputs:
     api_url: https://v0l1zlpy5f.execute-api.us-east-1.amazonaws.com
     auth_client_id: 253t1t5o6jjur88nu4t891eac2
-    domain: manitej-demo-auth-domain
+    auth_domain: manitej-demo-auth-domain
     site_url: https://d1567f41smqk8b.cloudfront.net
 ```
 
@@ -613,7 +615,10 @@ Once deployed, you should see something like this.
 Stack prod-api-oauth-google-my-stack
   Status: deployed
   Outputs:
-    api_endpoint: https://ck198mfop1.execute-api.us-east-1.amazonaws.com
+    api_url: https://ck198mfop1.execute-api.us-east-1.amazonaws.com
+    auth_client_id: 875t1t5o6jjur88jd4t891eat5
+    auth_domain: prod-demo-auth-domain
+    site_url: https://c1767f41smqkh7.cloudfront.net
 ```
 
 ## Cleaning up

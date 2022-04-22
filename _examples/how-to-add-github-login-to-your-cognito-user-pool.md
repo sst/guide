@@ -74,7 +74,7 @@ Now let's add GitHub OAuth for our serverless app, to do so we need to create a 
 
 {%change%} Create a `.env` file in the root and add your GitHub `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` from your [GitHub OAuth App](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app).
 
-Note, if you haven't created an app, follow [this tutorial](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app).
+Note, if you haven't created a GitHub OAuth app, follow [this tutorial](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app).
 
 ![GitHub API Credentials](/assets/examples/api-oauth-github/github-api-credentials.png)
 
@@ -168,6 +168,18 @@ if (idp) {
 
 This creates a GitHub OIDC provider with the given scopes and links the created provider to our user pool and GitHub user’s attributes will be mapped to the User Pool user.
 
+Make sure to import the `cognito` package in `stacks/MyStack.js`.
+
+```js
+import * as cognito from "aws-cdk-lib/aws-cognito";
+```
+
+We are using [Lazy values](https://docs.aws.amazon.com/cdk/v2/guide/tokens.html#tokens_lazy) to load the api url, import it by adding below code.
+
+```js
+import { Lazy } from "aws-cdk-lib";
+```
+
 ## Setting up the API
 
 {%change%} Replace the `sst.Api` definition with the following in `stacks/MyStacks.js`.
@@ -217,6 +229,12 @@ $ npx sst add-cdk @aws-cdk/aws-apigatewayv2-authorizers-alpha
 ```
 
 The reason we are using the [**add-cdk**]({{ site.docs_url }}/packages/cli#add-cdk-packages) command instead of using an `npm install`, is because of [a known issue with AWS CDK]({{ site.docs_url }}/known-issues). Using mismatched versions of CDK packages can cause some unexpected problems down the road. The `sst add-cdk` command ensures that we install the right version of the package.
+
+Make sure to import the package we just installed,
+
+```js
+import * as apigAuthorizers from "@aws-cdk/aws-apigatewayv2-authorizers-alpha";
+```
 
 ## Adding function code
 
@@ -297,12 +315,6 @@ export async function handler(event) {
 }
 ```
 
-Make sure to import the `cognito` package in `stacks/MyStack.js`.
-
-```js
-import * as cognito from "aws-cdk-lib/aws-cognito";
-```
-
 Now let's associate a Cognito domain to the user pool, which can be used for sign-up and sign-in webpages.
 
 {%change%} Add below code in `stacks/MyStack.js`.
@@ -315,6 +327,8 @@ const domain = auth.cognitoUserPool.addDomain("AuthDomain", {
   },
 });
 ```
+
+Note, the `domainPrefix` need to be globally unique across all AWS accounts in a region.
 
 ## Setting up our React app
 
@@ -341,7 +355,7 @@ const site = new sst.ViteStaticSite(this, "Site", {
 this.addOutputs({
   api_endpoint: api.url,
   auth_client_id: auth.cognitoUserPoolClient.userPoolClientId,
-  domain: domain.domainName,
+  auth_domain: domain.domainName,
   site_url: site.url,
 });
 ```
@@ -418,7 +432,7 @@ Stack dev-api-oauth-github-my-stack
   Outputs:
     api_url: https://v0l1zlpy5f.execute-api.us-east-1.amazonaws.com
     auth_client_id: 253t1t5o6jjur88nu4t891eac2
-    domain: dev-demo-auth-domain
+    auth_domain: dev-demo-auth-domain
     site_url: https://d1567f41smqk8b.cloudfront.net
 ```
 
@@ -714,7 +728,7 @@ Stack prod-api-oauth-github-my-stack
   Outputs:
     api_url: https://v0l0zspdd7.execute-api.us-east-1.amazonaws.com
     auth_client_id: e58t1t5o6jjur88nu4t891eac2
-    domain: prod-demo-auth-domain
+    auth_domain: prod-demo-auth-domain
     site_url: https://d1567f41smqksw.cloudfront.net
 ```
 
