@@ -46,6 +46,7 @@ google_analytics: "UA-3536629-11"
 
 docs_url: "https://docs.serverless-stack.com"
 docs_get_started: "/installation"
+v1_conf_url: "https://v1conf.sst.dev"
 console_url: "https://console.serverless-stack.com"
 forum_url: "https://discourse.serverless-stack.com"
 forum_thread_prefix: "/t/"
