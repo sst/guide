@@ -1,8 +1,9 @@
 ---
 layout: blog
 title: Announcing SST 1.0 Conf
-description: The first ever SST conference!
+description: The first-ever SST conference!
 author: jay
+image: assets/social-cards/sst-1-0-conf.png
 ---
 
 You might’ve [heard about our v1 release](https://github.com/serverless-stack/serverless-stack/releases/tag/v1.0.0-beta.26). As SST enters into a new phase, we wanted to do something special for our community. We are putting together a virtual community event to commemorate the launch!
