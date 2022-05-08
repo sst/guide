@@ -6,7 +6,7 @@ date: 2021-02-08 00:00:00
 lang: en
 index: 2
 type: async
-description: In this example we will look at how to use SQS in your serverless app on AWS using Serverless Stack (SST). We'll be using the sst.Api and sst.Queue to create a simple queue system.
+description: In this example we will look at how to use SQS in your serverless app on AWS using Serverless Stack (SST). We'll be using the Api construct and Queue to create a simple queue system.
 short_desc: A simple queue system with SQS.
 repo: queue
 ref: how-to-use-queues-in-your-serverless-app
@@ -18,7 +18,7 @@ In this example we will look at how to use SQS to create a queue in our serverle
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
 ## Create an SST app
@@ -26,7 +26,7 @@ In this example we will look at how to use SQS to create a queue in our serverle
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest queue
+$ npm init sst -- typescript-starter queue
 $ cd queue
 ```
 
@@ -36,7 +36,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 {
   "name": "queue",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -48,63 +48,61 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## Adding SQS Queue
 
 [Amazon SQS](https://aws.amazon.com/sqs/) is a reliable and high-throughput message queuing service. You are charged based on the number of API requests made to SQS. And you won't get charged if you are not using it.
 
-{%change%} Replace the `stacks/MyStack.js` with the following.
+{%change%} Replace the `stacks/MyStack.ts` with the following.
 
-```js
-import * as sst from "@serverless-stack/resources";
+```ts
+import { StackContext, Queue, Api } from "@serverless-stack/resources";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
-
-    // Create Queue
-    const queue = new sst.Queue(this, "Queue", {
-      consumer: "src/consumer.main",
-    });
-  }
+export function MyStack({ stack }: StackContext) {
+  // Create Queue
+  const queue = new Queue(stack, "Queue", {
+    consumer: "consumer.main",
+  });
 }
 ```
 
-This creates an SQS queue using [`sst.Queue`]({{ site.docs_url }}/constructs/Queue). And it has a consumer that polls for messages from the queue. The consumer function will run when it has polled 1 or more messages.
+This creates an SQS queue using [`Queue`]({{ site.docs_url }}/constructs/Queue). And it has a consumer that polls for messages from the queue. The consumer function will run when it has polled 1 or more messages.
 
 ## Setting up the API
 
 Now let's add the API.
 
-{%change%} Add this below the `sst.Queue` definition in `stacks/MyStack.js`.
+{%change%} Add this below the `Queue` definition in `stacks/MyStack.ts`.
 
-```js
+```ts
 // Create the HTTP API
-const api = new sst.Api(this, "Api", {
-  defaultFunctionProps: {
-    // Pass in the queue to our API
-    environment: {
-      queueUrl: queue.sqsQueue.queueUrl,
+const api = new Api(stack, "Api", {
+  defaults: {
+    function: {
+      // Pass in the queue to our API
+      environment: {
+        queueUrl: queue.queueName,
+      },
     },
   },
   routes: {
-    "POST /": "src/lambda.main",
+    "POST /": "lambda.main",
   },
 });
 
-// Allow the API to publish to the queue
+// Allow the API to publish the queue
 api.attachPermissions([queue]);
 
 // Show the API endpoint in the output
-this.addOutputs({
+stack.addOutputs({
   ApiEndpoint: api.url,
 });
 ```
 
-Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `main` in `src/main.js` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `main` in `backend/main.ts` will get invoked.
 
 We also pass in the url of our SQS queue to our API as an environment variable called `queueUrl`. And we allow our API to send messages to the queue we just created.
 
@@ -112,9 +110,9 @@ We also pass in the url of our SQS queue to our API as an environment variable c
 
 We will create two functions, one for handling the API request, and one for the consumer.
 
-{%change%} Replace the `src/lambda.js` with the following.
+{%change%} Replace the `backend/lambda.ts` with the following.
 
-```js
+```ts
 export async function main() {
   console.log("Message queued!");
   return {
@@ -124,9 +122,9 @@ export async function main() {
 }
 ```
 
-{%change%} Add a `src/consumer.js`.
+{%change%} Add a `backend/consumer.ts`.
 
-```js
+```ts
 export async function main() {
   console.log("Message processed!");
   return {};
@@ -140,7 +138,7 @@ Now let's test our new API.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -183,9 +181,9 @@ You should see `Message queued!` logged in the console.
 
 Now let's send a message to our queue.
 
-{%change%} Replace the `src/lambda.js` with the following.
+{%change%} Replace the `backend/lambda.ts` with the following.
 
-```js
+```ts
 import AWS from "aws-sdk";
 
 const sqs = new AWS.SQS();
@@ -226,7 +224,7 @@ And now if you head over to your console and hit the **Send** button again in AP
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
@@ -236,8 +234,8 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npx sst remove
-$ npx sst remove --stage prod
+$ npm run remove
+$ npm run remove --stage prod
 ```
 
 ## Conclusion

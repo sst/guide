@@ -18,7 +18,7 @@ In this example we will look at how to use [Sentry](https://www.sentry.io) to mo
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 - A [Sentry account](https://sentry.io/signup/)
 
@@ -31,7 +31,7 @@ When a serverless app is deployed to production, it's useful to be able to monit
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest sentry
+$ npm init sst -- typescript-starter sentry
 $ cd sentry
 ```
 
@@ -41,7 +41,7 @@ By default our app will be deployed to the `us-east-1` AWS region. This can be c
 {
   "name": "sentry",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -53,9 +53,9 @@ An SST app is made up of a couple of parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## Create our infrastructure
 
@@ -65,35 +65,32 @@ Our app is going to be a simple API that returns a _Hello World_ response.
 
 Let's add the API.
 
-{%change%} Add this in `stacks/MyStack.js`.
+{%change%} Add this in `stacks/MyStack.ts`.
 
-```js
-import * as sst from "@serverless-stack/resources";
+```ts
+import { LayerVersion } from "aws-cdk-lib/aws-lambda";
+import { Api, StackContext } from "@serverless-stack/resources";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
+export function MyStack({ stack, app }: StackContext) {
+  // Create a HTTP API
+  const api = new Api(stack, "Api", {
+    routes: {
+      "GET /": "lambda.handler",
+    },
+  });
 
-    // Create a HTTP API
-    const api = new sst.Api(this, "Api", {
-      routes: {
-        "GET /": "src/lambda.handler",
-      },
-    });
-
-    // Show the endpoint in the output
-    this.addOutputs({
-      ApiEndpoint: api.url,
-    });
-  }
+  // Show the endpoint in the output
+  stack.addOutputs({
+    ApiEndpoint: api.url,
+  });
 }
 ```
 
-We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `src/lambda.js` will get invoked.
+We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `backend/lambda.ts` will get invoked.
 
-{%change%} Your `src/lambda.js` should look something like this.
+{%change%} Your `backend/lambda.ts` should look something like this.
 
-```js
+```ts
 export async function handler(event) {
   return {
     statusCode: 200,
@@ -127,19 +124,19 @@ Next, you'll need to add the Sentry Lambda layer in your app.
 
 You can then set the layer for all the functions in your stack using the [`addDefaultFunctionLayers`]({{ site.docs_url }}/constructs/Stack#adddefaultfunctionlayers) and [`addDefaultFunctionEnv`]({{ site.docs_url }}/constructs/Stack#adddefaultfunctionenv). Note we only want to enable this when the function is deployed, and not when using [Live Lambda Dev]({{ site.docs_url }}/live-lambda-development).
 
-{%change%} Add the following below the `super(scope, id, props)` line in `stacks/MyStack.js`.
+{%change%} Add the following below the `super(scope, id, props)` line in `stacks/MyStack.ts`.
 
-```js
+```ts
 // Configure Sentry
 if (!scope.local) {
   const sentry = LayerVersion.fromLayerVersionArn(
-    this,
+    stack,
     "SentryLayer",
     `arn:aws:lambda:${scope.region}:943013980633:layer:SentryNodeServerlessSDK:35`
   );
 
-  this.addDefaultFunctionLayers([sentry]);
-  this.addDefaultFunctionEnv({
+  stack.addDefaultFunctionLayers([sentry]);
+  stack.addDefaultFunctionEnv({
     SENTRY_DSN: process.env.SENTRY_DSN,
     SENTRY_TRACES_SAMPLE_RATE: "1.0",
     NODE_OPTIONS: "-r @sentry/serverless/dist/awslambda-auto",
@@ -155,9 +152,9 @@ Also, replace the layer ARN with the one that we copied above.
 
 Next, we'll instrument our Lambda functions by wrapping them with the Sentry handler.
 
-{%change%} Replace the code in `src/lambda.js` with this.
+{%change%} Replace the code in `backend/lambda.ts` with this.
 
-```js
+```ts
 import Sentry from "@sentry/serverless";
 
 export const handler = Sentry.AWSLambda.wrapHandler(async (event) => {
@@ -178,7 +175,7 @@ We need to deploy the API in order to track any errors.
 {%change%} Run the following.
 
 ```bash
-$ npx sst deploy
+$ npm deploy
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app from scratch.
@@ -224,7 +221,7 @@ Now head over to your Sentry dashboard to start exploring key metrics like the e
 Finally, you can remove the resources created in this example using the following.
 
 ```bash
-$ npx sst remove
+$ npm run remove
 ```
 
 ## Conclusion

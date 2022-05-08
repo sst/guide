@@ -6,7 +6,7 @@ date: 2021-02-08 00:00:00
 lang: en
 index: 2
 type: iam-auth
-description: In this example we will look at how to add Facebook authentication to a serverless API using Serverless Stack (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
+description: In this example we will look at how to add Facebook authentication to a serverless API using Serverless Stack (SST). We'll be using the Api and Auth construct to create an authenticated API.
 short_desc: Authenticating a serverless API with Facebook.
 repo: api-auth-facebook
 ref: how-to-add-facebook-authentication-to-a-serverless-api
@@ -18,7 +18,7 @@ In this example we will look at how to add Facebook authentication to a serverle
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 - A [Facebook app](https://developers.facebook.com/apps)
 
@@ -27,7 +27,7 @@ In this example we will look at how to add Facebook authentication to a serverle
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest api-auth-facebook
+$ npm init sst -- typescript-starter api-auth-facebook
 $ cd api-auth-facebook
 ```
 
@@ -37,7 +37,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 {
   "name": "api-auth-facebook",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -49,44 +49,42 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## Setting up the API
 
 Let's start by setting up an API.
 
-{%change%} Replace the `stacks/MyStack.js` with the following.
+{%change%} Replace the `stacks/MyStack.ts` with the following.
 
-```js
-import * as sst from "@serverless-stack/resources";
+```ts
+import { Api, Auth, StackContext } from "@serverless-stack/resources";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
-
-    // Create Api
-    const api = new sst.Api(this, "Api", {
-      defaultAuthorizationType: sst.ApiAuthorizationType.AWS_IAM,
-      routes: {
-        "GET /private": "src/private.main",
-        "GET /public": {
-          function: "src/public.main",
-          authorizationType: sst.ApiAuthorizationType.NONE,
-        },
+export function MyStack({ stack }: StackContext) {
+  // Create Api
+  const api = new Api(stack, "Api", {
+    defaults: {
+      authorizer: "iam",
+    },
+    routes: {
+      "GET /private": "private.main",
+      "GET /public": {
+        function: "public.main",
+        authorizer: "none",
       },
-    });
+    },
+  });
 
-    // Show the API endpoint and other info in the output
-    this.addOutputs({
-      ApiEndpoint: api.url,
-    });
-  }
+  // Show the API endpoint and other info in the output
+  stack.addOutputs({
+    ApiEndpoint: api.url,
+  });
 }
 ```
 
-We are creating an API here using the [`sst.Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding two routes to it.
+We are creating an API here using the [`Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding two routes to it.
 
 ```
 GET /private
@@ -99,12 +97,14 @@ To secure our APIs we are adding the authorization type `AWS_IAM`. This means th
 
 Now let's add authentication for our serverless app.
 
-{%change%} Add this below the `sst.Api` definition in `stacks/MyStack.js`. Make sure to replace the `appId` with that of your Facebook app.
+{%change%} Add this below the `Api` definition in `stacks/MyStack.ts`. Make sure to replace the `appId` with that of your Facebook app.
 
-```js
+```ts
 // Create auth provider
-const auth = new sst.Auth(this, "Auth", {
-  facebook: { appId: "419718329085014" },
+const auth = new Auth(stack, "Auth", {
+  identityPoolFederation: {
+    facebook: { appId: "419718329085014" },
+  },
 });
 
 // Allow authenticated users invoke API
@@ -113,10 +113,10 @@ auth.attachPermissionsForAuthUsers([api]);
 
 This creates a [Cognito Identity Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html) which relies on Facebook to authenticate users. And we use the [`attachPermissionsForAuthUsers`]({{ site.docs_url }}/constructs/Auth#attachpermissionsforauthusers) method to allow our logged in users to access our API.
 
-{%change%} Replace the `this.addOutputs` call with the following.
+{%change%} Replace the `stack.addOutputs` call with the following.
 
-```js
-this.addOutputs({
+```ts
+stack.addOutputs({
   ApiEndpoint: api.url,
   IdentityPoolId: auth.cognitoCfnIdentityPool.ref,
 });
@@ -128,9 +128,9 @@ We are going to print out the resources that we created for reference.
 
 Let's create two functions, one handling the public route, and the other for the private route.
 
-{%change%} Add a `src/public.js`.
+{%change%} Add a `backend/public.ts`.
 
-```js
+```ts
 export async function main() {
   return {
     statusCode: 200,
@@ -139,9 +139,9 @@ export async function main() {
 }
 ```
 
-{%change%} Add a `src/private.js`.
+{%change%} Add a `backend/private.ts`.
 
-```js
+```ts
 export async function main() {
   return {
     statusCode: 200,
@@ -157,14 +157,14 @@ Now let's test our new API.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to do the following:
 
 1. It'll bootstrap your AWS environment to use CDK.
 2. Deploy a debug stack to power the Live Lambda Development environment.
-3. Deploy your app, but replace the functions in the `src/` directory with ones that connect to your local client.
+3. Deploy your app, but replace the functions in the `backend/` directory with ones that connect to your local client.
 4. Start up a local client.
 
 Once complete, you should see something like this.
@@ -274,9 +274,9 @@ The above process might seem fairly tedious. But once we integrate it into our f
 
 Let's make a quick change to our private route and print out the caller's user id.
 
-{%change%} Replace `src/private.js` with the following.
+{%change%} Replace `backend/private.ts` with the following.
 
-```js
+```ts
 export async function main(event) {
   return {
     statusCode: 200,
@@ -306,7 +306,7 @@ However, we are going to deploy your API again. But to a different environment, 
 {%change%} Run the following in your terminal.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
 A note on these environments. SST is simply deploying the same app twice using two different `stage` names. It prefixes the resources with the stage names to ensure that they don't thrash.
@@ -316,13 +316,13 @@ A note on these environments. SST is simply deploying the same app twice using t
 Finally, you can remove the resources created in this example using the following command.
 
 ```bash
-$ npx sst remove
+$ npm run remove
 ```
 
 And to remove the prod environment.
 
 ```bash
-$ npx sst remove --stage prod
+$ npm run remove --stage prod
 ```
 
 ## Conclusion

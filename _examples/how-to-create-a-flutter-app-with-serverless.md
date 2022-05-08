@@ -18,7 +18,7 @@ In this example we will look at how to use [Flutter](https://flutter.dev) with a
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - Flutter installed
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -27,7 +27,7 @@ In this example we will look at how to use [Flutter](https://flutter.dev) with a
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest flutter-app
+$ npm init sst -- typescript-starter flutter-app
 $ cd flutter-app
 ```
 
@@ -37,7 +37,7 @@ By default our app will be deployed to the `us-east-1` AWS region. This can be c
 {
   "name": "flutter-app",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -49,9 +49,9 @@ An SST app is made up of a couple of parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 3. `frontend/` — Flutter App
 
@@ -65,23 +65,24 @@ Our app is made up of a simple API and a Flutter app. The API will be talking to
 
 We'll be using [Amazon DynamoDB](https://aws.amazon.com/dynamodb/); a reliable and highly-performant NoSQL database that can be configured as a true serverless database. Meaning that it'll scale up and down automatically. And you won't get charged if you are not using it.
 
-{%change%} Replace the `stacks/MyStack.js` with the following.
+{%change%} Replace the `stacks/MyStack.ts` with the following.
 
-```js
-import * as sst from "@serverless-stack/resources";
+```ts
+import {
+  Api,
+  ReactStaticSite,
+  StackContext,
+  Table,
+} from "@serverless-stack/resources";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
-
-    // Create the table
-    const table = new sst.Table(this, "Counter", {
-      fields: {
-        counter: sst.TableFieldType.STRING,
-      },
-      primaryIndex: { partitionKey: "counter" },
-    });
-  }
+export function MyStack({ stack }: StackContext) {
+  // Create the table
+  const table = new Table(stack, "Counter", {
+    fields: {
+      counter: "string",
+    },
+    primaryIndex: { partitionKey: "counter" },
+  });
 }
 ```
 
@@ -95,32 +96,33 @@ This creates a serverless DynamoDB table using the SST [`Table`]({{ site.docs_ur
 
 Now let's add the API.
 
-{%change%} Add this below the `sst.Table` definition in `stacks/MyStack.js`.
+{%change%} Add this below the `Table` definition in `stacks/MyStack.ts`.
 
-```js
+```ts
 // Create the HTTP API
-const api = new sst.Api(this, "Api", {
-  defaultFunctionProps: {
-    // Pass in the table name to our API
-    environment: {
-      tableName: table.dynamodbTable.tableName,
+const api = new Api(stack, "Api", {
+  defaults: {
+    function: {
+      // Allow the API to access the table
+      permissions: [table],
+      // Pass in the table name to our API
+      environment: {
+        tableName: table.tableName,
+      },
     },
   },
   routes: {
-    "POST /": "src/lambda.main",
+    "POST /": "lambda.main",
   },
 });
 
-// Allow the API to access the table
-api.attachPermissions([table]);
-
-// Show the API endpoint in the output
-this.addOutputs({
+// Show the URLs in the output
+stack.addOutputs({
   ApiEndpoint: api.url,
 });
 ```
 
-We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `main` in `src/lambda.js` will get invoked.
+We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `main` in `backend/lambda.ts` will get invoked.
 
 We also pass in the name of our DynamoDB table to our API as an environment variable called `tableName`. And we allow our API to access (read and write) the table instance we just created.
 
@@ -128,12 +130,12 @@ We also pass in the name of our DynamoDB table to our API as an environment vari
 
 Our API is powered by a Lambda function. In the function we'll read from our DynamoDB table.
 
-{%change%} Replace `src/lambda.js` with the following.
+{%change%} Replace `backend/lambda.ts` with the following.
 
-```js
-import AWS from "aws-sdk";
+```ts
+import { DynamoDB } from "aws-sdk";
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const dynamoDb = new DynamoDB.DocumentClient();
 
 export async function main() {
   const getParams = {
@@ -172,7 +174,7 @@ And let's test what we have so far.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -363,9 +365,9 @@ Of course if you click on the button multiple times, the count doesn't change. T
 
 Let's update our table with the clicks.
 
-{%change%} Add this above the `return` statement in `src/lambda.js`.
+{%change%} Add this above the `return` statement in `backend/lambda.ts`.
 
-```js
+```ts
 const putParams = {
   TableName: process.env.tableName,
   Key: {
@@ -389,7 +391,7 @@ And if you head over to your emulator and click the button again, you should see
 
 Also let's go to the **DynamoDB** tab in the SST Console and check that the value has been updated in the table.
 
-Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`sst.Table`]({{ site.docs_url }}/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
+Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`Table`]({{ site.docs_url }}/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
 
 ![DynamoDB table view of counter table](/assets/examples/angular-app/dynamo-table-view-of-counter-table.png)
 
@@ -398,7 +400,7 @@ Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you t
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working locally it doesn't break the app for our users.
@@ -425,7 +427,7 @@ PROD_API_URL=https://k40qchmtvf.execute-api.us-east-1.amazonaws.com
 Run the below command to open the SST Console in **prod** stage to test the production endpoint.
 
 ```bash
-npx sst console --stage prod
+npm run console --stage prod
 ```
 
 Go to the **API** tab and click **Send** button to send a `POST` request.
@@ -439,8 +441,8 @@ Now we are ready to ship our app!
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npx sst remove
-$ npx sst remove --stage prod
+$ npm run remove
+$ npm run remove --stage prod
 ```
 
 ## Conclusion
