@@ -1,19 +1,19 @@
 ---
 layout: example
-title: How to create a Vue.ts app with serverless
-short_title: Vue.ts
+title: How to create a Vue.js app with serverless
+short_title: Vue.js
 date: 2021-10-15 00:00:00
 lang: en
 index: 3
 type: webapp
-description: In this example we will look at how to use Vue.ts with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST) and the SST StaticSite construct to deploy our app to AWS S3 and CloudFront.
-short_desc: Full-stack Next.ts app with a serverless API.
+description: In this example we will look at how to use Vue.js with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST) and the SST ViteStaticSite construct to deploy our app to AWS S3 and CloudFront.
+short_desc: Full-stack Next.js app with a serverless API.
 repo: vue-app
 ref: how-to-create-a-vuejs-app-with-serverless
 comments_id: how-to-create-a-vue-js-app-with-serverless/2508
 ---
 
-In this example we will look at how to use [Vue.ts](https://vuejs.org) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) and the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite#creating-a-vuejs-site) construct to deploy our app to AWS.
+In this example we will look at how to use [Vue.js](https://vuejs.org) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) and the SST [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) construct to deploy our app to AWS.
 
 ## Requirements
 
@@ -54,11 +54,11 @@ An SST app is made up of a couple of parts.
 
 3. `frontend/` — Vue App
 
-   The code for our frontend Vue.ts app.
+   The code for our frontend Vue.js app.
 
 ## Create our infrastructure
 
-Our app is made up of a simple API and a Vue.ts app. The API will be talking to a database to store the number of clicks. We'll start by creating the database.
+Our app is made up of a simple API and a Vue.js app. The API will be talking to a database to store the number of clicks. We'll start by creating the database.
 
 ### Adding the table
 
@@ -69,10 +69,9 @@ We'll be using [Amazon DynamoDB](https://aws.amazon.com/dynamodb/); a reliable a
 ```ts
 import {
   Api,
-  StaticSite,
+  ViteStaticSite,
   StackContext,
   Table,
-  StaticSiteErrorOptions,
 } from "@serverless-stack/resources";
 
 export function MyStack({ stack }: StackContext) {
@@ -128,7 +127,7 @@ We also pass in the name of our DynamoDB table to our API as an environment vari
 
 ### Setting up our Vue app
 
-To deploy a Vue.ts app to AWS, we'll be using the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite#creating-a-vuejs-site) construct.
+To deploy a Vue.js app to AWS, we'll be using the SST [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) construct.
 
 {%change%} Replace the following in `stacks/MyStack.ts`:
 
@@ -142,14 +141,11 @@ stack.addOutputs({
 {%change%} With:
 
 ```ts
-const site = new StaticSite(stack, "VueJSSite", {
+const site = new ViteStaticSite(stack, "VueJSSite", {
   path: "frontend",
-  buildOutput: "dist",
-  buildCommand: "npm run build",
-  errorPage: StaticSiteErrorOptions.REDIRECT_TO_INDEX_PAGE,
   environment: {
     // Pass in the API endpoint to our app
-    VUE_APP_API_URL: api.url,
+    VITE_APP_API_URL: api.url,
   },
 });
 
@@ -160,22 +156,19 @@ stack.addOutputs({
 });
 ```
 
-The construct is pointing to where our Vue.ts app is located. We haven't created our app yet but for now we'll point to the `frontend` directory.
+The construct is pointing to where our Vue.js app is located. We haven't created our app yet but for now we'll point to the `frontend` directory.
 
-We are also setting up a [build time Vue environment variable](https://cli.vuejs.org/guide/mode-and-env.html) `VUE_APP_API_URL` with the endpoint of our API. The [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite#creating-a-vuejs-site) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
+We are also setting up a [build time Vue environment variable](https://cli.vuejs.org/guide/mode-and-env.html) `VITE_APP_API_URL` with the endpoint of our API. The [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
 
 You can also optionally configure a custom domain.
 
 ```ts
 // Deploy our Vue app
-const site = new StaticSite(stack, "VueJSSite", {
+const site = new ViteStaticSite(stack, "VueJSSite", {
   path: "frontend",
-  buildOutput: "dist",
-  buildCommand: "npm run build",
-  errorPage: StaticSiteErrorOptions.REDIRECT_TO_INDEX_PAGE,
   environment: {
     // Pass in the API endpoint to our app
-    VUE_APP_API_URL: api.url,
+    VITE_APP_API_URL: api.url,
   },
   customDomain: "www.my-vue-app.com",
 });
@@ -197,7 +190,7 @@ const dynamoDb = new DynamoDB.DocumentClient();
 export async function main() {
   const getParams = {
     // Get the table name from the environment variable
-    TableName: process.env.tableName,
+    TableName: import.meta.env.tableName,
     // Get the row where the counter is called "clicks"
     Key: {
       counter: "clicks",
@@ -271,17 +264,39 @@ You should see a `0` in the response body.
 
 ## Setting up our Vue app
 
-We are now ready to use the API we just created. Let's use [Vue cli](https://cli.vuejs.org/) to setup our Vue.ts app.
+We are now ready to use the API we just created. Let's use [Vue quickstart](https://vuejs.org/guide/quick-start.html) to setup our Vue.js app.
 
 {%change%} Run the following in the project root.
 
 ```bash
-$ npm install -g @vue/cli
-$ vue create frontend
-$ cd frontend
+$ npm init vue@latest
 ```
 
-This sets up our Vue app in the `frontend/` directory. Recall that, earlier in the guide we were pointing the `StaticSite` construct to this path.
+This command will install and execute [create-vue](https://github.com/vuejs/create-vue), the official Vue project scaffolding tool. You will be presented with prompts for a number of optional features such as TypeScript and testing support:
+
+```bash
+✔ Project name: frontend
+✔ Add TypeScript? … No / Yes
+✔ Add JSX Support? … No / Yes
+✔ Add Vue Router for Single Page Application development? … No / Yes
+✔ Add Pinia for state management? … No / Yes
+✔ Add Vitest for Unit testing? … No / Yes
+✔ Add Cypress for both Unit and End-to-End testing? … No / Yes
+✔ Add ESLint for code quality? … No / Yes
+✔ Add Prettier for code formatting? … No / Yes
+
+Scaffolding project in ./frontend
+Done.
+```
+
+For this tutorial, simply choose **No** by hitting enter for now. Once the project is created, follow the instructions to install dependencies.
+
+```bash
+$ cd frontend
+$ npm install
+```
+
+This sets up our Vue app in the `frontend/` directory. Recall that, earlier in the guide we were pointing the `ViteStaticSite` construct to this path.
 
 We also need to load the environment variables from our SST app. To do this, we'll be using the [`@serverless-stack/static-site-env`](https://www.npmjs.com/package/@serverless-stack/static-site-env) package.
 
@@ -293,16 +308,16 @@ $ npm install @serverless-stack/static-site-env --save-dev
 
 We need to update our start script to use this package.
 
-{%change%} Replace the `serve` script in your `frontend/package.json`.
+{%change%} Replace the `dev` script in your `frontend/package.json`.
 
 ```bash
-"serve": "vue-cli-service serve",
+"dev": "vite"
 ```
 
 {%change%} With the following:
 
 ```bash
-"serve": "sst-env -- vue-cli-service serve",
+"dev": "sst-env -- vite"
 ```
 
 Let's start our Vue development environment.
@@ -310,10 +325,10 @@ Let's start our Vue development environment.
 {%change%} In the `frontend/` directory run.
 
 ```bash
-$ npm run serve
+$ npm run dev
 ```
 
-Open up your browser and go to `http://localhost:8080`.
+Open up your browser and go to `http://localhost:3000`.
 
 ### Add the click button
 
@@ -338,7 +353,7 @@ export default {
   },
   methods: {
     onClick() {
-      fetch(process.env.VUE_APP_API_URL, {
+      fetch(import.meta.env.VITE_APP_API_URL, {
         method: "POST",
       })
         .then((response) => response.text())
@@ -351,7 +366,7 @@ export default {
 </script>
 ```
 
-Here we are adding a simple button that when clicked, makes a request to our API. We are getting the API endpoint from the environment variable, `process.env.VUE_APP_API_URL`.
+Here we are adding a simple button that when clicked, makes a request to our API. We are getting the API endpoint from the environment variable, `import.meta.env.VITE_APP_API_URL`.
 
 The response from our API is then stored in our app's state. We use that to display the count of the number of times the button has been clicked.
 
@@ -397,7 +412,7 @@ Let's update our table with the clicks.
 
 ```ts
 const putParams = {
-  TableName: process.env.tableName,
+  TableName: import.meta.env.tableName,
   Key: {
     counter: "clicks",
   },
@@ -471,4 +486,4 @@ $ npm run remove --stage prod
 
 ## Conclusion
 
-And that's it! We've got a completely serverless click counter in Vue.ts. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+And that's it! We've got a completely serverless click counter in Vue.js. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!

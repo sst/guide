@@ -1,19 +1,19 @@
 ---
 layout: example
-title: How to create a React.ts app with serverless
-short_title: React.ts
+title: How to create a React.js app with serverless
+short_title: React.js
 date: 2021-06-17 00:00:00
 lang: en
 index: 1
 type: webapp
-description: In this example we will look at how to use React.ts with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST) and the SST ReactStaticSite construct to deploy our app to AWS S3 and CloudFront.
+description: In this example we will look at how to use React.js with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST) and the SST ReactStaticSite construct to deploy our app to AWS S3 and CloudFront.
 short_desc: Full-stack React app with a serverless API.
 repo: react-app
 ref: how-to-create-a-reactjs-app-with-serverless
 comments_id: how-to-create-a-react-js-app-with-serverless/2413
 ---
 
-In this example we will look at how to use [React.ts](https://reactjs.org) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) and the SST [`ReactStaticSite`]({{ site.docs_url }}/constructs/ReactStaticSite) construct to deploy our app to AWS.
+In this example we will look at how to use [React.js](https://reactjs.org) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) and the SST [`ReactStaticSite`]({{ site.docs_url }}/constructs/ReactStaticSite) construct to deploy our app to AWS.
 
 ## Requirements
 
@@ -54,11 +54,11 @@ An SST app is made up of a couple of parts.
 
 3. `frontend/` — React App
 
-   The code for our frontend React.ts app.
+   The code for our frontend React.js app.
 
 ## Create our infrastructure
 
-Our app is made up of a simple API and a React.ts app. The API will be talking to a database to store the number of clicks. We'll start by creating the database.
+Our app is made up of a simple API and a React.js app. The API will be talking to a database to store the number of clicks. We'll start by creating the database.
 
 ### Adding the table
 
@@ -127,7 +127,7 @@ We also pass in the name of our DynamoDB table to our API as an environment vari
 
 ### Setting up our React app
 
-To deploy a React.ts app to AWS, we'll be using the SST [`ReactStaticSite`]({{ site.docs_url }}/constructs/ReactStaticSite) construct.
+To deploy a React.js app to AWS, we'll be using the SST [`ReactStaticSite`]({{ site.docs_url }}/constructs/ReactStaticSite) construct.
 
 {%change%} Replace the following in `stacks/MyStack.ts`:
 
@@ -156,7 +156,7 @@ stack.addOutputs({
 });
 ```
 
-The construct is pointing to where our React.ts app is located. We haven't created our app yet but for now we'll point to the `frontend` directory.
+The construct is pointing to where our React.js app is located. We haven't created our app yet but for now we'll point to the `frontend` directory.
 
 We are also setting up a [build time React environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) `REACT_APP_API_URL` with the endpoint of our API. The [`ReactStaticSite`]({{ site.docs_url }}/constructs/ReactStaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend. You can read more about this over in our chapter on, [Setting serverless environments variables in a React app]({% link _chapters/setting-serverless-environments-variables-in-a-react-app.md %}).
 
@@ -263,7 +263,7 @@ You should see a `0` in the response body.
 
 ## Setting up our React app
 
-We are now ready to use the API we just created. Let's use [Create React App](https://github.com/facebook/create-react-app) to setup our React.ts app.
+We are now ready to use the API we just created. Let's use [Create React App](https://github.com/facebook/create-react-app) to setup our React.js app.
 
 {%change%} Run the following in the project root.
 
@@ -312,7 +312,7 @@ Let's start our React development environment.
 $ npm run start
 ```
 
-This should open up our React.ts app in your browser.
+This should open up our React.js app in your browser.
 
 ### Add the click button
 
@@ -461,4 +461,4 @@ $ npm run remove --stage prod
 
 ## Conclusion
 
-And that's it! We've got a completely serverless click counter in React.ts. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+And that's it! We've got a completely serverless click counter in React.js. A local development environment, to test and make changes. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!

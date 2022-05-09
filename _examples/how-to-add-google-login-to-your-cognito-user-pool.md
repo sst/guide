@@ -265,7 +265,7 @@ stack.addOutputs({
 });
 ```
 
-The construct is pointing to where our React.ts app is located. We haven't created our app yet but for now, we'll point to the `frontend` directory.
+The construct is pointing to where our React.js app is located. We haven't created our app yet but for now, we'll point to the `frontend` directory.
 
 We are also setting up [build time React environment variables](https://vitejs.dev/guide/env-and-mode.html) with the endpoint of our API. The [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
 

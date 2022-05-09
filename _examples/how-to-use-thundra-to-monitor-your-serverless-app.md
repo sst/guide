@@ -217,10 +217,10 @@ Install the package by running below command.
 npm install --save-dev @thundra/esbuild-plugin
 ```
 
-Create a new file called `esbuild.ts` inside `config` folder in root and add the below code.
+Create a new file called `esbuild.js` inside `config` folder in root and add the below code.
 
 ```ts
-// config/esbuild.ts
+// config/esbuild.js
 
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { ThundraEsbuildPlugin } = require("@thundra/esbuild-plugin");

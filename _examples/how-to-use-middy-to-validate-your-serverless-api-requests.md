@@ -13,7 +13,7 @@ ref: how-to-use-middy-to-validate-your-serverless-api-requests
 comments_id: how-to-use-middy-to-validate-your-serverless-api-requests/2525
 ---
 
-In this example we will look at how to use the [Middy validator](https://middy.ts.org/packages/validator/) middleware with a [serverless]({% link _chapters/what-is-serverless.md %}) API to validate request and response schemas.
+In this example we will look at how to use the [Middy validator](https://middy.js.org/packages/validator/) middleware with a [serverless]({% link _chapters/what-is-serverless.md %}) API to validate request and response schemas.
 
 ## Requirements
 
@@ -23,7 +23,7 @@ In this example we will look at how to use the [Middy validator](https://middy.t
 
 ## What is Middy
 
-[Middy](https://middy.ts.org) is a very simple middleware engine that allows you to simplify your AWS Lambda code when using Node.js. It allows you to focus on the strict business logic of your Lambda function and then attach additional common elements like authentication, authorization, validation, serialization, etc. in a modular and reusable way by decorating the main business logic.
+[Middy](https://middy.js.org) is a very simple middleware engine that allows you to simplify your AWS Lambda code when using Node.js. It allows you to focus on the strict business logic of your Lambda function and then attach additional common elements like authentication, authorization, validation, serialization, etc. in a modular and reusable way by decorating the main business logic.
 
 ## Create an SST app
 
@@ -153,7 +153,7 @@ In a production app it can be difficult to catch these issues. We'd like to expl
 
 ## Setting up our Middy middleware
 
-To fix this let's use the [Middy validator](https://middy.ts.org/packages/validator/) middleware to validate our API.
+To fix this let's use the [Middy validator](https://middy.js.org/packages/validator/) middleware to validate our API.
 
 {%change%} Run the following in the `backend/` directory.
 
