@@ -5,7 +5,7 @@ short_title: TypeScript REST API
 date: 2021-02-04 00:00:00
 lang: en
 index: 3
-type: api
+# type: api
 description: In this example we will look at how to create a serverless REST API on AWS with TypeScript using Serverless Stack (SST). We'll be using the Api construct to define the routes of our API.
 short_desc: Building a REST API with TypeScript.
 repo: rest-api-ts
