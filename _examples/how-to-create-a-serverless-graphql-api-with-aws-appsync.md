@@ -6,7 +6,7 @@ date: 2021-03-27 00:00:00
 lang: en
 index: 2
 type: graphql
-description: In this example we'll look at how to use SST to test AppSync locally. We'll create a GraphQL API on AWS using the sst.AppSyncApi construct.
+description: In this example we'll look at how to use SST to test AppSync locally. We'll create a GraphQL API on AWS using the AppSyncApi construct.
 short_desc: Building a serverless GraphQL API with AppSync.
 repo: graphql-appsync
 ref: how-to-create-a-serverless-graphql-api-with-aws-appsync
@@ -82,7 +82,7 @@ export default class MyStack extends sst.Stack {
     });
 
     // Create the AppSync GraphQL API
-    const api = new sst.AppSyncApi(stack, "AppSyncApi", {
+    const api = new AppSyncApi(stack, "AppSyncApi", {
       graphqlApi: {
         schema: "graphql/schema.graphql",
       },
@@ -117,7 +117,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-We are creating an AppSync GraphQL API here using the [`sst.AppSyncApi`]({{ site.docs_url }}/constructs/AppSyncApi) construct. We are also creating a DynamoDB table using the [`Table`]({{ site.docs_url }}/constructs/Table) construct. It'll store the notes we'll be creating with our GraphQL API.
+We are creating an AppSync GraphQL API here using the [`AppSyncApi`]({{ site.docs_url }}/constructs/AppSyncApi) construct. We are also creating a DynamoDB table using the [`Table`]({{ site.docs_url }}/constructs/Table) construct. It'll store the notes we'll be creating with our GraphQL API.
 
 Finally, we allow our API to access our table.
 

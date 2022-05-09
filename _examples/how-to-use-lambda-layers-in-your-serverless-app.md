@@ -32,7 +32,7 @@ $ npm init sst -- typescript-starter layer-chrome-aws-lambda
 $ cd layer-chrome-aws-lambda
 ```
 
-By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.tson` in your project root.
+By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ```json
 {

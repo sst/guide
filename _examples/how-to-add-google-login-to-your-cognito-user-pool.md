@@ -375,7 +375,7 @@ npm install aws-amplify
 
 {%change%} Replace `frontend/src/main.jsx` with below code.
 
-```js
+```jsx
 /* eslint-disable no-undef */
 import React from "react";
 import ReactDOM from "react-dom";
