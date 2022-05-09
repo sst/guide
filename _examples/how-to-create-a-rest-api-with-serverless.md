@@ -6,19 +6,19 @@ date: 2021-01-27 00:00:00
 lang: en
 index: 1
 type: api
-description: In this example we will look at how to create a serverless REST API on AWS using Serverless Stack (SST). We'll be using the sst.Api construct to define the routes of our API.
+description: In this example we will look at how to create a serverless REST API on AWS using Serverless Stack (SST). We'll be using the Api construct to define the routes of our API.
 short_desc: Building a simple REST API.
 repo: rest-api
 ref: how-to-create-a-rest-api-with-serverless
 comments_id: how-to-create-a-rest-api-with-serverless/2305
 ---
 
-In this example we will look at how to create a serverless REST API on AWS using [Serverless Stack (SST)]({{ site.sst_github_repo }}). If you are a TypeScript user, we've got [a version for that as well]({% link _examples/how-to-create-a-rest-api-in-typescript-with-serverless.md %}).
+In this example we will look at how to create a serverless REST API on AWS using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
 
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
 ## Create an SST app
@@ -26,7 +26,7 @@ In this example we will look at how to create a serverless REST API on AWS using
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest rest-api
+$ npm init sst -- typescript-starter rest-api
 $ cd rest-api
 ```
 
@@ -36,7 +36,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 {
   "name": "rest-api",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -48,41 +48,37 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## Setting up our routes
 
 Let's start by setting up the routes for our API.
 
-{%change%} Replace the `stacks/MyStack.js` with the following.
+{%change%} Replace the `stacks/MyStack.ts` with the following.
 
-```js
-import * as sst from "@serverless-stack/resources";
+```ts
+import { Api, StackContext } from "@serverless-stack/resources";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
+export function MyStack({ stack }: StackContext) {
+  // Create the HTTP API
+  const api = new Api(stack, "Api", {
+    routes: {
+      "GET /notes": "list.main",
+      "GET /notes/{id}": "get.main",
+      "PUT /notes/{id}": "update.main",
+    },
+  });
 
-    // Create the HTTP API
-    const api = new sst.Api(this, "Api", {
-      routes: {
-        "GET /notes": "src/list.main",
-        "GET /notes/{id}": "src/get.main",
-        "PUT /notes/{id}": "src/update.main",
-      },
-    });
-
-    // Show the API endpoint in the output
-    this.addOutputs({
-      ApiEndpoint: api.url,
-    });
-  }
+  // Show the API endpoint in the output
+  stack.addOutputs({
+    ApiEndpoint: api.url,
+  });
 }
 ```
 
-We are creating an API here using the [`sst.Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding three routes to it.
+We are creating an API here using the [`Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding three routes to it.
 
 ```
 GET /notes
@@ -96,9 +92,9 @@ The first is getting a list of notes. The second is getting a specific note give
 
 For this example, we are not using a database. We'll look at that in detail in another example. So internally we are just going to get the list of notes from a file.
 
-{%change%} Let's add a file that contains our notes in `src/notes.js`.
+{%change%} Let's add a file that contains our notes in `backend/notes.ts`.
 
-```js
+```ts
 export default {
   id1: {
     noteId: "id1",
@@ -119,9 +115,9 @@ Now add the code for our first endpoint.
 
 ### Getting a list of notes
 
-{%change%} Add a `src/list.js`.
+{%change%} Add a `backend/list.ts`.
 
-```js
+```ts
 import notes from "./notes";
 
 export async function main() {
@@ -138,9 +134,9 @@ Note that this function need to be `async` to be invoked by AWS Lambda. Even tho
 
 ### Getting a specific note
 
-{%change%} Add the following to `src/get.js`.
+{%change%} Add the following to `backend/get.ts`.
 
-```js
+```ts
 import notes from "./notes";
 
 export async function main(event) {
@@ -161,9 +157,9 @@ Here we are checking if we have the requested note. If we do, we respond with it
 
 ### Updating a note
 
-{%change%} Add the following to `src/update.js`.
+{%change%} Add the following to `backend/update.ts`.
 
-```js
+```ts
 import notes from "./notes";
 
 export async function main(event) {
@@ -196,14 +192,14 @@ Now let's test our new API.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to do the following:
 
 1. It'll bootstrap your AWS environment to use CDK.
 2. Deploy a debug stack to power the Live Lambda Development environment.
-3. Deploy your app, but replace the functions in the `src/` directory with ones that connect to your local client.
+3. Deploy your app, but replace the functions in the `backend/` directory with ones that connect to your local client.
 4. Start up a local client.
 
 Once complete, you should see something like this.
@@ -260,9 +256,9 @@ This should respond with the updated note.
 
 Let's make a quick change to our API. It would be good if the JSON strings are pretty printed to make them more readable.
 
-{%change%} Replace `src/list.js` with the following.
+{%change%} Replace `backend/list.ts` with the following.
 
-```js
+```ts
 import notes from "./notes";
 
 export async function main() {
@@ -286,7 +282,7 @@ You should see your list of notes in a more readable format.
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the app for our users.
@@ -306,7 +302,7 @@ Stack prod-rest-api-my-stack
 Run the below command to open the SST Console in **prod** stage to test the production endpoint.
 
 ```bash
-npx sst console --stage prod
+npm run console --stage prod
 ```
 
 Go to the **API** explorer and click **Send** button of the `GET /notes` route, to send a `GET` request.
@@ -318,13 +314,13 @@ Go to the **API** explorer and click **Send** button of the `GET /notes` route, 
 Finally, you can remove the resources created in this example using the following command.
 
 ```bash
-$ npx sst remove
+$ npm run remove
 ```
 
 And to remove the prod environment.
 
 ```bash
-$ npx sst remove --stage prod
+$ npm run remove --stage prod
 ```
 
 ## Conclusion

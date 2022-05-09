@@ -6,7 +6,7 @@ date: 2021-02-08 00:00:00
 lang: en
 index: 1
 type: async
-description: In this example we will look at how to create a cron job in your serverless app on AWS using Serverless Stack (SST). We'll be using the sst.Cron to create a simple weather tracking app that checks the weather forecast every minute.
+description: In this example we will look at how to create a cron job in your serverless app on AWS using Serverless Stack (SST). We'll be using the Cron to create a simple weather tracking app that checks the weather forecast every minute.
 short_desc: A simple serverless Cron job.
 repo: cron-job
 ref: how-to-use-cron-jobs-in-your-serverless-app
@@ -18,7 +18,7 @@ In this example we will look at how to create a cron job in our serverless app u
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
 ## Create an SST app
@@ -26,7 +26,7 @@ In this example we will look at how to create a cron job in our serverless app u
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest cron-job
+$ npm init sst -- typescript-starter cron-job
 $ cd cron-job
 ```
 
@@ -36,7 +36,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 {
   "name": "cron-job",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -48,41 +48,36 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## Creating Cron Job
 
 Let's start by creating a cron job.
 
-{%change%} Replace the `stacks/MyStack.js` with the following.
+{%change%} Replace the `stacks/MyStack.ts` with the following.
 
-```js
-import * as sst from "@serverless-stack/resources";
+```ts
+import { Cron, StackContext } from "@serverless-stack/resources";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
-
-    // Create Cron Job
-    new sst.Cron(this, "Cron", {
-      schedule: "rate(1 minute)",
-      job: "src/lambda.main",
-    });
-  }
+export function MyStack({ stack }: StackContext) {
+  new Cron(stack, "Cron", {
+    schedule: "rate(1 minute)",
+    job: "lambda.main",
+  });
 }
 ```
 
-This creates a serverless cron job using [`sst.Cron`]({{ site.docs_url }}/constructs/Cron). We've configured the cron job to run every minute.
+This creates a serverless cron job using [`Cron`]({{ site.docs_url }}/constructs/Cron). We've configured the cron job to run every minute.
 
 ## Adding function code
 
 Now in our function, we'll print out a message every time the function is run.
 
-{%change%} Replace `src/lambda.js` with the following.
+{%change%} Replace `backend/lambda.ts` with the following.
 
-```js
+```ts
 export async function main() {
   console.log("Hi!");
   return {};
@@ -96,7 +91,7 @@ And let's test what we have so far.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -141,9 +136,9 @@ Now let's make a call to [MetaWeather](https://www.metaweather.com)'s API and pr
 $ npm install node-fetch
 ```
 
-{%change%} Replace `src/lambda.js` with the following.
+{%change%} Replace `backend/lambda.ts` with the following.
 
-```js
+```ts
 import fetch from "node-fetch";
 
 export async function main() {
@@ -168,7 +163,7 @@ Now if you head over to your console and wait for the function to get invoked in
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
@@ -178,8 +173,8 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npx sst remove
-$ npx sst remove --stage prod
+$ npm run remove
+$ npm run remove --stage prod
 ```
 
 ## Conclusion

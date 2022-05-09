@@ -6,7 +6,7 @@ date: 2021-12-18 00:00:00
 lang: en
 index: 6
 type: async
-description: In this example we will look at how to use event bus in your serverless app on AWS using Serverless Stack (SST). We'll be using the sst.Api and sst.EventBus to create a simple checkout system.
+description: In this example we will look at how to use event bus in your serverless app on AWS using Serverless Stack (SST). We'll be using the Api and EventBus to create a simple checkout system.
 short_desc: A simple EventBridge system with EventBus.
 repo: eventbus
 ref: how-to-use-event-bus-in-your-serverless-app
@@ -18,7 +18,7 @@ In this example we will look at how to use EventBus to create [an EventBridge sy
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
 ## Create an SST app
@@ -26,7 +26,7 @@ In this example we will look at how to use EventBus to create [an EventBridge sy
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest eventbus
+$ npm init sst -- typescript-starter eventbus
 $ cd eventbus
 ```
 
@@ -36,7 +36,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 {
   "name": "eventbus",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -48,70 +48,69 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## Adding EventBridge EventBus
 
 [Amazon EventBridge](https://aws.amazon.com/eventbridge/) is a serverless event bus that makes it easier to build event-driven applications at scale using events generated from your applications, integrated Software-as-a-Service (SaaS) applications, and AWS services.
 
-{%change%} Replace the `stacks/MyStack.js` with the following.
+{%change%} Replace the `stacks/MyStack.ts` with the following.
 
-```js
-import * as sst from "@serverless-stack/resources";
+```ts
+import { Api, EventBus, StackContext } from "@serverless-stack/resources";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
-
-    // create bus
-    const bus = new sst.EventBus(this, "Ordered", {
-      rules: {
-        rule1: {
-          eventPattern: {
-            source: ["myevent"],
-            detailType: ["Order"],
-          },
-          targets: ["src/receipt.handler", "src/shipping.handler"],
+export function MyStack({ stack }: StackContext) {
+  const bus = new EventBus(stack, "Ordered", {
+    rules: {
+      rule1: {
+        pattern: {
+          source: ["myevent"],
+          detailType: ["Order"],
+        },
+        targets: {
+          receipt: "receipt.handler",
+          shipping: "shipping.handler",
         },
       },
-    });
-  }
+    },
+  });
 }
 ```
 
-This creates an EventBridge EventBus using [`sst.EventBus`]({{ site.docs_url }}/constructs/EventBus) and it has two targets. Meaning when the event is published, both the functions will get run.
+This creates an EventBridge EventBus using [`EventBus`]({{ site.docs_url }}/constructs/EventBus) and it has two targets. Meaning when the event is published, both the functions will get run.
 
 ## Setting up the API
 
 Now let's add the API.
 
-{%change%} Add this below the `sst.EventBus` definition in `stacks/MyStack.js`.
+{%change%} Add this below the `EventBus` definition in `stacks/MyStack.ts`.
 
-```js
+```ts
 // Create a HTTP API
-const api = new sst.Api(this, "Api", {
-  defaultFunctionProps: {
-    environment: {
-      busName: bus.eventBusName,
+const api = new Api(stack, "Api", {
+  defaults: {
+    function: {
+      environment: {
+        busName: bus.eventBusName,
+      },
     },
   },
   routes: {
-    "POST /order": "src/order.handler",
+    "POST /order": "order.handler",
   },
 });
 
-// Allow the API to access the EventBus
 api.attachPermissions([bus]);
 
-// Show the API endpoint in the output
-this.addOutputs({
+// Show the endpoint in the output
+stack.addOutputs({
   ApiEndpoint: api.url,
 });
 ```
 
-Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (`/order`). When we make a `POST` request to this endpoint the Lambda function called `main` in `src/order.js` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (`/order`). When we make a `POST` request to this endpoint the Lambda function called `main` in `backend/order.ts` will get invoked.
 
 We'll also pass in the name of our EventBridge EventBus to our API as an environment variable called `busName`. And we allow our API to publish to the EventBus we just created.
 
@@ -119,9 +118,9 @@ We'll also pass in the name of our EventBridge EventBus to our API as an environ
 
 We will create three functions, one handling the `/order` API request, and two for the EventBus targets.
 
-{%change%} Add a `src/order.js`.
+{%change%} Add a `backend/order.ts`.
 
-```js
+```ts
 export async function handler() {
   console.log("Order confirmed!");
   return {
@@ -131,18 +130,18 @@ export async function handler() {
 }
 ```
 
-{%change%} Add a `src/receipt.js`.
+{%change%} Add a `backend/receipt.ts`.
 
-```js
+```ts
 export async function handler() {
   console.log("Receipt sent!");
   return {};
 }
 ```
 
-{%change%} Add a `src/shipping.js`.
+{%change%} Add a `backend/shipping.ts`.
 
-```js
+```ts
 export async function handler() {
   console.log("Item shipped!");
   return {};
@@ -156,7 +155,7 @@ Now let's test our new API.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -199,9 +198,9 @@ You should see `Order confirmed!` logged in the console.
 
 Now let's publish a event to our EventBus.
 
-{%change%} Replace the `src/order.js` with the following.
+{%change%} Replace the `backend/order.ts` with the following.
 
-```js
+```ts
 import AWS from "aws-sdk";
 
 const client = new AWS.EventBridge();
@@ -259,7 +258,7 @@ And now if you head over to your console and invoke the function again, You'll n
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
@@ -269,8 +268,8 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npx sst remove
-$ npx sst remove --stage prod
+$ npm run remove
+$ npm run remove --stage prod
 ```
 
 ## Conclusion

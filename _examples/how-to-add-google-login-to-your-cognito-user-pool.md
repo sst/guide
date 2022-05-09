@@ -6,7 +6,7 @@ date: 2021-02-08 00:00:00
 lang: en
 index: 3
 type: jwt-auth
-description: In this example we will look at how to add Google Login to a Cognito User Pool using Serverless Stack (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
+description: In this example we will look at how to add Google Login to a Cognito User Pool using Serverless Stack (SST). We'll be using the Api and Auth construct to create an authenticated API.
 short_desc: Authenticating a full-stack serverless app with Google.
 repo: api-oauth-google
 ref: how-to-add-google-login-to-your-cognito-user-pool
@@ -18,7 +18,7 @@ In this example, we will look at how to add Google Login to Your Cognito User Po
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 - A [Google API project](https://console.developers.google.com/apis)
 
@@ -27,7 +27,7 @@ In this example, we will look at how to add Google Login to Your Cognito User Po
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest api-oauth-google
+$ npm init sst -- typescript-starter api-oauth-google
 $ cd api-oauth-google
 ```
 
@@ -37,7 +37,7 @@ By default, our app will be deployed to an environment (or stage) called `dev` a
 {
   "name": "api-oauth-google",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -49,35 +49,50 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## Setting up the Auth
 
 First, let's create a [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to store the user info using the [`Auth`]({{ site.docs_url }}/constructs/Auth) construct
 
-{%change%} Add this code below the `super()` method in `stacks/MyStack.js`.
+{%change%} Replace the `stacks/MyStack.ts` with the following.
 
-```js
-// Create auth
-const auth = new sst.Auth(this, "Auth", {
-  cognito: {
-    userPoolClient: {
-      supportedIdentityProviders: [
-        cognito.UserPoolClientIdentityProvider.GOOGLE,
-      ],
-      oAuth: {
-        callbackUrls: [
-          scope.stage === "prod" ? "production-url" : "http://localhost:3000",
+```ts
+import * as cognito from "aws-cdk-lib/aws-cognito";
+import * as apigAuthorizers from "@aws-cdk/aws-apigatewayv2-authorizers-alpha";
+import {
+  Api,
+  Auth,
+  StackContext,
+  ViteStaticSite,
+} from "@serverless-stack/resources";
+
+export function MyStack({ stack, app }: StackContext) {
+  // Create auth
+  const auth = new Auth(stack, "Auth", {
+    cdk: {
+      userPoolClient: {
+        supportedIdentityProviders: [
+          cognito.UserPoolClientIdentityProvider.GOOGLE,
         ],
-        logoutUrls: [
-          scope.stage === "prod" ? "production-url" : "http://localhost:3000",
-        ],
+        oAuth: {
+          callbackUrls: [
+            app.stage === "prod"
+              ? "prodDomainNameUrl"
+              : "http://localhost:3000",
+          ],
+          logoutUrls: [
+            app.stage === "prod"
+              ? "prodDomainNameUrl"
+              : "http://localhost:3000",
+          ],
+        },
       },
     },
-  },
-});
+  });
+}
 ```
 
 This creates a [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html); a user directory that manages users. We've configured the User Pool to allow users to login with their Google account and added the callback and logout URLs.
@@ -92,19 +107,23 @@ Now let's add Google OAuth for our serverless app, to do so we need to create a 
 
 ![GCP Console API Credentials](/assets/examples/api-oauth-google/gcp-console-api-credentials.png)
 
-```js
+```ts
 GOOGLE_CLIENT_ID=<YOUR_GOOGLE_CLIENT_ID>
 GOOGLE_CLIENT_SECRET=<YOUR_GOOGLE_CLIENT_SECRET>
 ```
 
-{%change%} Add this below the `sst.Auth` definition in `stacks/MyStack.js`.
+{%change%} Add this below the `Auth` definition in `stacks/MyStack.ts`.
 
-```js
+```ts
+// Throw error if client ID & secret are not provided
+if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET)
+  throw new Error("Please set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET");
+
 // Create a Google OAuth provider
-const provider = new cognito.UserPoolIdentityProviderGoogle(this, "Google", {
+const provider = new cognito.UserPoolIdentityProviderGoogle(stack, "Google", {
   clientId: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  userPool: auth.cognitoUserPool,
+  userPool: auth.cdk.userPool,
   scopes: ["profile", "email", "openid"],
   attributeMapping: {
     email: cognito.ProviderAttribute.GOOGLE_EMAIL,
@@ -115,26 +134,20 @@ const provider = new cognito.UserPoolIdentityProviderGoogle(this, "Google", {
 });
 
 // attach the created provider to our userpool
-auth.cognitoUserPoolClient.node.addDependency(provider);
+auth.cdk.userPoolClient.node.addDependency(provider);
 ```
 
 This creates a Google identity provider with the given scopes and links the created provider to our user pool and Google user’s attributes will be mapped to the User Pool user.
 
-Make sure to import the `cognito` package.
-
-```js
-import * as cognito from "aws-cdk-lib/aws-cognito";
-```
-
 Now let's associate a Cognito domain to the user pool, which can be used for sign-up and sign-in webpages.
 
-{%change%} Add below code in `stacks/MyStack.js`.
+{%change%} Add below code in `stacks/MyStack.ts`.
 
-```js
+```ts
 // Create a cognito userpool domain
-const domain = auth.cognitoUserPool.addDomain("AuthDomain", {
+const domain = auth.cdk.userPool.addDomain("AuthDomain", {
   cognitoDomain: {
-    domainPrefix: `${scope.stage}-demo-auth-domain`,
+    domainPrefix: `${app.stage}-demo-auth-domain`,
   },
 });
 ```
@@ -143,24 +156,33 @@ Note, the `domainPrefix` need to be globally unique across all AWS accounts in a
 
 ## Setting up the API
 
-{%change%} Replace the `sst.Api` definition with the following in `stacks/MyStacks.js`.
+{%change%} Replace the `Api` definition with the following in `stacks/MyStacks.ts`.
 
-```js
+```ts
 // Create a HTTP API
-const api = new sst.Api(this, "Api", {
-  defaultAuthorizer: new apigAuthorizers.HttpUserPoolAuthorizer(
-    "Authorizer",
-    auth.cognitoUserPool,
-    {
-      userPoolClients: [auth.cognitoUserPoolClient],
-    }
-  ),
-  defaultAuthorizationType: sst.ApiAuthorizationType.JWT,
+const api = new Api(stack, "Api", {
+  authorizers: {
+    userPool: {
+      type: "user_pool",
+      cdk: {
+        authorizer: new apigAuthorizers.HttpUserPoolAuthorizer(
+          "Authorizer",
+          auth.cdk.userPool,
+          {
+            userPoolClients: [auth.cdk.userPoolClient],
+          }
+        ),
+      },
+    },
+  },
+  defaults: {
+    authorizer: "userPool",
+  },
   routes: {
-    "GET /private": "src/private.handler",
+    "GET /private": "private.handler",
     "GET /public": {
-      function: "src/public.handler",
-      authorizationType: sst.ApiAuthorizationType.NONE,
+      function: "public.handler",
+      authorizer: "none",
     },
   },
 });
@@ -169,7 +191,7 @@ const api = new sst.Api(this, "Api", {
 auth.attachPermissionsForAuthUsers([api]);
 ```
 
-We are creating an API here using the [`sst.Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding two routes to it.
+We are creating an API here using the [`Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding two routes to it.
 
 ```
 GET /private
@@ -192,9 +214,9 @@ The reason we are using the [**add-cdk**]({{ site.docs_url }}/packages/cli#add-c
 
 Let's create two functions, one handling the public route, and the other for the private route.
 
-{%change%} Add a `src/public.js`.
+{%change%} Add a `backend/public.ts`.
 
-```js
+```ts
 export async function handler() {
   return {
     statusCode: 200,
@@ -203,9 +225,9 @@ export async function handler() {
 }
 ```
 
-{%change%} Add a `src/private.js`.
+{%change%} Add a `backend/private.ts`.
 
-```js
+```ts
 export async function handler() {
   return {
     statusCode: 200,
@@ -218,11 +240,11 @@ export async function handler() {
 
 To deploy a React app to AWS, we'll be using the SST [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) construct.
 
-{%change%} Replace the `this.addOutputs` call with the following.
+{%change%} Replace the `stack.addOutputs` call with the following.
 
-```js
+```ts
 // Create a React Static Site
-const site = new sst.ViteStaticSite(this, "Site", {
+const site = new ViteStaticSite(stack, "Site", {
   path: "frontend",
   environment: {
     VITE_APP_COGNITO_DOMAIN: domain.domainName,
@@ -235,7 +257,7 @@ const site = new sst.ViteStaticSite(this, "Site", {
 });
 
 // Show the endpoint in the output
-this.addOutputs({
+stack.addOutputs({
   api_url: api.url,
   auth_client_id: auth.cognitoUserPoolClient.userPoolClientId,
   auth_domain: domain.domainName,
@@ -291,7 +313,7 @@ We need to update our start script to use this package.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -351,9 +373,9 @@ Run the below command to install AWS Amplify in the `frontend/` directory.
 npm install aws-amplify
 ```
 
-{%change%} Replace `src/main.jsx` with below code.
+{%change%} Replace `frontend/src/main.jsx` with below code.
 
-```js
+```jsx
 /* eslint-disable no-undef */
 import React from "react";
 import ReactDOM from "react-dom";
@@ -408,7 +430,7 @@ ReactDOM.render(
 
 ## Adding login UI
 
-{%change%} Replace `src/App.jsx` with below code.
+{%change%} Replace `frontend/src/App.jsx` with below code.
 
 {% raw %}
 
@@ -500,7 +522,7 @@ export default App;
 
 {% endraw %}
 
-{%change%} Replace `src/index.css` with the below styles.
+{%change%} Replace `frontend/src/index.css` with the below styles.
 
 ```css
 body {
@@ -601,7 +623,7 @@ As you can see the private route is only working while we are logged in.
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the app for our users.
@@ -626,13 +648,13 @@ Stack prod-api-oauth-google-my-stack
 Finally, you can remove the resources created in this example using the following command.
 
 ```bash
-$ npx sst remove
+$ npm run remove
 ```
 
 And to remove the prod environment.
 
 ```bash
-$ npx sst remove --stage prod
+$ npm run remove --stage prod
 ```
 
 ## Conclusion

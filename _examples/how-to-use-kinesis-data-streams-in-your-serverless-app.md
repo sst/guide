@@ -18,7 +18,7 @@ In this example we will look at how to create a Kinesis Data Stream in our serve
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
 ## Create an SST app
@@ -26,7 +26,7 @@ In this example we will look at how to create a Kinesis Data Stream in our serve
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest kinesisstream
+$ npm init sst -- typescript-starter kinesisstream
 $ cd kinesisstream
 ```
 
@@ -36,7 +36,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 {
   "name": "kinesisstream",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -48,64 +48,62 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## Adding a Kinesis Data Stream
 
 [Amazon Kinesis Data Streams](https://aws.amazon.com/kinesis/data-streams/) is a serverless streaming data service that makes it easy to capture, process, and store data streams at any scale. And you won't get charged if you are not using it.
 
-{%change%} Replace the `stacks/MyStack.js` with the following.
+{%change%} Replace the `stacks/MyStack.ts` with the following.
 
-```js
-import * as sst from "@serverless-stack/resources";
+```ts
+import { Api, KinesisStream, StackContext } from "@serverless-stack/resources";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
-
-    // create a kinesis stream
-    const stream = new sst.KinesisStream(this, "Stream", {
-      consumers: {
-        consumer1: "src/consumer1.handler",
-        consumer2: "src/consumer2.handler",
-      },
-    });
-  }
+export function MyStack({ stack }: StackContext) {
+  // create a kinesis stream
+  const stream = new KinesisStream(stack, "Stream", {
+    consumers: {
+      consumer1: "consumer1.handler",
+      consumer2: "consumer2.handler",
+    },
+  });
 }
 ```
 
-This creates an Kinesis Data Stream using [`sst.KinesisStream`]({{ site.docs_url }}/constructs/KinesisStream) and it has a consumer that polls for messages from the Kinesis Data Stream. The consumer function will run when it has polled 1 or more messages.
+This creates an Kinesis Data Stream using [`KinesisStream`]({{ site.docs_url }}/constructs/KinesisStream) and it has a consumer that polls for messages from the Kinesis Data Stream. The consumer function will run when it has polled 1 or more messages.
 
 ## Setting up the API
 
 Now let's add the API.
 
-{%change%} Add this below the `sst.KinesisStream` definition in `stacks/MyStack.js`.
+{%change%} Add this below the `KinesisStream` definition in `stacks/MyStack.ts`.
 
-```js
+```ts
 // Create a HTTP API
-const api = new sst.Api(this, "Api", {
-  defaultFunctionProps: {
-    environment: {
-      streamName: stream.streamName,
+const api = new Api(stack, "Api", {
+  defaults: {
+    function: {
+      environment: {
+        streamName: stream.streamName,
+      },
     },
   },
   routes: {
-    "POST /": "src/lambda.handler",
+    "POST /": "lambda.handler",
   },
 });
 
 api.attachPermissions([stream]);
 
 // Show the endpoint in the output
-this.addOutputs({
+stack.addOutputs({
   ApiEndpoint: api.url,
 });
 ```
 
-Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `src/lambda.js` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `backend/lambda.ts` will get invoked.
 
 We also pass in the stream name to our API as an environment variable called `streamName`. And we allow our API to send messages to the Kinesis Data Stream we just created.
 
@@ -113,9 +111,9 @@ We also pass in the stream name to our API as an environment variable called `st
 
 We will create three functions, one for handling the API request, and the other two for the consumers.
 
-{%change%} Replace the `src/lambda.js` with the following.
+{%change%} Replace the `backend/lambda.ts` with the following.
 
-```js
+```ts
 export async function handler() {
   console.log("Message queued!");
   return {
@@ -125,18 +123,18 @@ export async function handler() {
 }
 ```
 
-{%change%} Add a `src/consumer1.js`.
+{%change%} Add a `backend/consumer1.ts`.
 
-```js
+```ts
 export async function handler() {
   console.log("Message 1 processed!");
   return {};
 }
 ```
 
-{%change%} Add a `src/consumer2.js`.
+{%change%} Add a `backend/consumer2.ts`.
 
-```js
+```ts
 export async function handler() {
   console.log("Message 2 processed!");
   return {};
@@ -150,7 +148,7 @@ Now let's test our new API.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -193,9 +191,9 @@ You should see `Message queued!` logged in the console.
 
 Now let's send a message to our Kinesis Data Stream.
 
-{%change%} Replace the `src/lambda.js` with the following.
+{%change%} Replace the `backend/lambda.ts` with the following.
 
-```js
+```ts
 import AWS from "aws-sdk";
 
 const stream = new AWS.Kinesis();
@@ -236,7 +234,7 @@ And now if you head over to your console and invoke the function again. You'll n
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in dev, it doesn't break the API for our users.
@@ -246,8 +244,8 @@ This allows us to separate our environments, so when we are working in dev, it d
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npx sst remove
-$ npx sst remove --stage prod
+$ npm run remove
+$ npm run remove --stage prod
 ```
 
 ## Conclusion

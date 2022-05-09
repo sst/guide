@@ -6,7 +6,7 @@ date: 2021-02-04 00:00:00
 lang: en
 index: 3
 type: database
-description: In this example we will look at how to use PostgreSQL in your serverless app on AWS using Serverless Stack (SST). We'll be using the sst.Api and Amazon Aurora Serverless to create a simple hit counter.
+description: In this example we will look at how to use PostgreSQL in your serverless app on AWS using Serverless Stack (SST). We'll be using the Api construct and Amazon Aurora Serverless to create a simple hit counter.
 short_desc: Using PostgreSQL and Aurora in a serverless API.
 repo: rest-api-postgresql
 ref: how-to-use-postgresql-in-your-serverless-app
@@ -18,7 +18,7 @@ In this example we will look at how to use PostgreSQL in our serverless app usin
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
 ## Create an SST app
@@ -26,7 +26,7 @@ In this example we will look at how to use PostgreSQL in our serverless app usin
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest rest-api-postgresql
+$ npm init sst -- typescript-starter rest-api-postgresql
 $ cd rest-api-postgresql
 ```
 
@@ -36,7 +36,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 {
   "name": "rest-api-postgresql",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -48,31 +48,28 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## Adding PostgreSQL
 
 [Amazon Aurora Serverless](https://aws.amazon.com/rds/aurora/serverless/) is an auto-scaling managed relational database that supports PostgreSQL.
 
-{%change%} Replace the `stacks/MyStack.js` with the following.
+{%change%} Replace the `stacks/MyStack.ts` with the following.
 
-```js
-import * as sst from "@serverless-stack/resources";
+```ts
+import { Api, RDS, StackContext } from "@serverless-stack/resources";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
+export function MyStack({ stack }: StackContext) {
+  const DATABASE = "CounterDB";
 
-    const DATABASE = "CounterDB";
-
-    // Create the Aurora DB cluster
-    const cluster = new sst.RDS(this, "Cluster", {
-      engine: "postgresql10.14",
-      defaultDatabaseName: DATABASE,
-    });
-  }
+  // Create the Aurora DB cluster
+  const cluster = new RDS(stack, "Cluster", {
+    engine: "postgresql10.14",
+    defaultDatabaseName: DATABASE,
+    migrations: "migrations",
+  });
 }
 ```
 
@@ -82,33 +79,35 @@ This creates an [RDS Serverless cluster]({{ site.docs_url }}/constructs/RDS). We
 
 Now let's add the API.
 
-{%change%} Add this below the `cluster` definition in `stacks/MyStack.js`.
+{%change%} Add this below the `cluster` definition in `stacks/MyStack.ts`.
 
-```js
+```ts
 // Create a HTTP API
-const api = new sst.Api(this, "Api", {
-  defaultFunctionProps: {
-    environment: {
-      DATABASE,
-      CLUSTER_ARN: cluster.clusterArn,
-      SECRET_ARN: cluster.secretArn,
+const api = new Api(stack, "Api", {
+  defaults: {
+    function: {
+      environment: {
+        DATABASE,
+        CLUSTER_ARN: cluster.clusterArn,
+        SECRET_ARN: cluster.secretArn,
+      },
+      permissions: [cluster],
     },
-    permissions: [cluster],
   },
   routes: {
-    "POST /": "src/lambda.handler",
+    "POST /": "lambda.handler",
   },
 });
 
 // Show the resource info in the output
-this.addOutputs({
+stack.addOutputs({
   ApiEndpoint: api.url,
   SecretArn: cluster.secretArn,
   ClusterIdentifier: cluster.clusterIdentifier,
 });
 ```
 
-Our [API]({{ site.docs_url }}/constructs/Api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `src/lambda.js` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/Api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `backend/lambda.ts` will get invoked.
 
 We also pass in the name of our database, the ARN of the database cluster, and the ARN of the secret that'll help us login to our database. An ARN is an identifier that AWS uses. You can [read more about it here]({% link _chapters/what-is-an-arn.md %}).
 
@@ -118,9 +117,9 @@ We then allow our Lambda function to access our database cluster. Finally, we ou
 
 Now in our function, we'll start by reading from our PostgreSQL database.
 
-{%change%} Replace `src/lambda.js` with the following.
+{%change%} Replace `backend/lambda.ts` with the following.
 
-```js
+```ts
 import client from "data-api-client";
 
 const db = client({
@@ -160,7 +159,7 @@ And test what we have so far.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -226,9 +225,9 @@ You should see a `0` in the response body.
 
 So let's update our table with the hits.
 
-{%change%} Add this above the `return` statement in `src/lambda.js`.
+{%change%} Add this above the `return` statement in `backend/lambda.ts`.
 
-```js
+```ts
 await db.query(`UPDATE tblcounter set tally=${++count} where counter='hits'`);
 ```
 
@@ -244,11 +243,11 @@ You can run migrations from the SST console, The `RDS` construct uses [Kysely](h
 
 Let's create a migration file that creates a table called `todos`.
 
-Create a `migrations` folder inside the `src/` folder.
+Create a `migrations` folder inside the `backend/` folder.
 
-Let's write our first migration file, create a new file called `first.js` inside the newly created `src/migrations` folder and paste the below code.
+Let's write our first migration file, create a new file called `first.ts` inside the newly created `backend/migrations` folder and paste the below code.
 
-```js
+```ts
 module.exports.up = async (db) => {
   await db.schema
     .createTable("todos")
@@ -262,13 +261,13 @@ module.exports.down = async (db) => {
 };
 ```
 
-{%change%} update the cluster definition like below in `stacks/MyStack.js`.
+{%change%} update the cluster definition like below in `stacks/MyStack.ts`.
 
-```js
-const cluster = new sst.RDS(this, "Cluster", {
+```ts
+const cluster = new RDS(stack, "Cluster", {
   engine: "postgresql10.14",
   defaultDatabaseName: DATABASE,
-  migrations: "src/migrations", // add this line
+  migrations: "backend/migrations", // add this line
 });
 ```
 
@@ -299,7 +298,7 @@ Note, to revert back to a specific migration, re-run its previous migration.
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
@@ -307,7 +306,7 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Run the below command to open the SST Console in **prod** stage to test the production endpoint.
 
 ```bash
-npx sst console --stage prod
+npm run console --stage prod
 ```
 
 Go to the **API** tab and click **Send** button to send a `POST` request.
@@ -319,8 +318,8 @@ Go to the **API** tab and click **Send** button to send a `POST` request.
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npx sst remove
-$ npx sst remove --stage prod
+$ npm run remove
+$ npm run remove --stage prod
 ```
 
 ## Conclusion

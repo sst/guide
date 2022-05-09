@@ -20,7 +20,7 @@ We'll be using SST's [Live Lambda Development]({{ site.docs_url }}/live-lambda-d
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
 ## Create an SST app
@@ -28,7 +28,7 @@ We'll be using SST's [Live Lambda Development]({{ site.docs_url }}/live-lambda-d
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest layer-chrome-aws-lambda
+$ npm init sst -- typescript-starter layer-chrome-aws-lambda
 $ cd layer-chrome-aws-lambda
 ```
 
@@ -38,7 +38,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 {
   "name": "layer-chrome-aws-lambda",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -50,57 +50,53 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## Creating the API
 
 Let's start by creating our API.
 
-{%change%} Replace the `stacks/MyStack.js` with the following.
+{%change%} Replace the `stacks/MyStack.ts` with the following.
 
-```js
+```ts
 import { LayerVersion } from "aws-cdk-lib/aws-lambda";
-import * as sst from "@serverless-stack/resources";
+import { Api, StackContext } from "@serverless-stack/resources";
 
 const layerArn =
   "arn:aws:lambda:us-east-1:764866452798:layer:chrome-aws-lambda:22";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
+export function MyStack({ stack }: StackContext) {
+  const layer = LayerVersion.fromLayerVersionArn(stack, "Layer", layerArn);
 
-    const layer = LayerVersion.fromLayerVersionArn(this, "Layer", layerArn);
-
-    // Create a HTTP API
-    const api = new sst.Api(this, "Api", {
-      routes: {
-        "GET /": {
-          function: {
-            handler: "src/lambda.handler",
-            // Increase the timeout for generating screenshots
-            timeout: 15,
-            // Load Chrome in a Layer
-            layers: [layer],
-            // Exclude bundling it in the Lambda function
-            bundle: { externalModules: ["chrome-aws-lambda"] },
-          },
+  // Create a HTTP API
+  const api = new Api(stack, "Api", {
+    routes: {
+      "GET /": {
+        function: {
+          handler: "lambda.handler",
+          // Increase the timeout for generating screenshots
+          timeout: 15,
+          // Load Chrome in a Layer
+          layers: [layer],
+          // Exclude bundling it in the Lambda function
+          bundle: { externalModules: ["chrome-aws-lambda"] },
         },
       },
-    });
+    },
+  });
 
-    // Show the endpoint in the output
-    this.addOutputs({
-      ApiEndpoint: api.url,
-    });
-  }
+  // Show the endpoint in the output
+  stack.addOutputs({
+    ApiEndpoint: api.url,
+  });
 }
 ```
 
 Here, we are first getting a reference to the [ARN]({% link _chapters/what-is-an-arn.md %}) of the Layer we want to use. Head over to the [chrome-aws-lambda](https://github.com/shelfio/chrome-aws-lambda-layer) Layer repo and grab the one for your region.
 
-We then use the [`sst.Api`]({{ site.docs_url }}/constructs/Api) construct and add a single route (`GET /`). For the function that'll be handling the route, we increase the timeout, since generating a screenshot can take a little bit of time. We then reference the Layer we want and exclude the Lambda function from bundling the [chrome-aws-lambda](https://github.com/alixaxel/chrome-aws-lambda) npm package.
+We then use the [`Api`]({{ site.docs_url }}/constructs/Api) construct and add a single route (`GET /`). For the function that'll be handling the route, we increase the timeout, since generating a screenshot can take a little bit of time. We then reference the Layer we want and exclude the Lambda function from bundling the [chrome-aws-lambda](https://github.com/alixaxel/chrome-aws-lambda) npm package.
 
 Finally, we output the endpoint of our newly created API.
 
@@ -108,9 +104,9 @@ Finally, we output the endpoint of our newly created API.
 
 Now in our function, we'll be handling taking a screenshot of a given webpage.
 
-{%change%} Replace `src/lambda.js` with the following.
+{%change%} Replace `backend/lambda.ts` with the following.
 
-```js
+```ts
 import chrome from "chrome-aws-lambda";
 
 // chrome-aws-lambda handles loading locally vs from the Layer
@@ -163,7 +159,7 @@ The `puppeteer` packages are used internally by the `chrome-aws-lambda` package.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -200,9 +196,9 @@ You should see `Screenshot taken` being printed out.
 
 Now let's make a change to our function so that we return the screenshot directly as an image.
 
-{%change%} Replace the following lines in `src/lambda.js`.
+{%change%} Replace the following lines in `backend/lambda.ts`.
 
-```js
+```ts
 // Take the screenshot
 await page.screenshot();
 
@@ -215,7 +211,7 @@ return {
 
 with:
 
-```js
+```ts
 return {
   statusCode: 200,
   // Return as binary data
@@ -236,7 +232,7 @@ Now if you go back and load the same link in your browser, you should see the sc
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
@@ -246,8 +242,8 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npx sst remove
-$ npx sst remove --stage prod
+$ npm run remove
+$ npm run remove --stage prod
 ```
 
 ## Conclusion

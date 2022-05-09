@@ -6,7 +6,7 @@ date: 2021-03-27 00:00:00
 lang: en
 index: 2
 type: graphql
-description: In this example we'll look at how to use SST to test AppSync locally. We'll create a GraphQL API on AWS using the sst.AppSyncApi construct.
+description: In this example we'll look at how to use SST to test AppSync locally. We'll create a GraphQL API on AWS using the AppSyncApi construct.
 short_desc: Building a serverless GraphQL API with AppSync.
 repo: graphql-appsync
 ref: how-to-create-a-serverless-graphql-api-with-aws-appsync
@@ -34,7 +34,7 @@ Here is a video of it in action.
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest --language typescript graphql-appsync
+$ npm init sst -- typescript-starter graphql-appsync
 $ cd graphql-appsync
 ```
 
@@ -56,9 +56,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## Setting up our infrastructure
 
@@ -74,22 +74,22 @@ export default class MyStack extends sst.Stack {
     super(scope, id, props);
 
     // Create a notes table
-    const notesTable = new sst.Table(this, "Notes", {
+    const notesTable = new Table(stack, "Notes", {
       fields: {
-        id: sst.TableFieldType.STRING,
+        id: TableFieldType.STRING,
       },
       primaryIndex: { partitionKey: "id" },
     });
 
     // Create the AppSync GraphQL API
-    const api = new sst.AppSyncApi(this, "AppSyncApi", {
+    const api = new AppSyncApi(stack, "AppSyncApi", {
       graphqlApi: {
         schema: "graphql/schema.graphql",
       },
       defaultFunctionProps: {
         // Pass the table name to the function
         environment: {
-          NOTES_TABLE: notesTable.dynamodbTable.tableName,
+          NOTES_TABLE: notestable.tableName,
         },
       },
       dataSources: {
@@ -108,7 +108,7 @@ export default class MyStack extends sst.Stack {
     api.attachPermissions([notesTable]);
 
     // Show the AppSync API Id and API Key in the output
-    this.addOutputs({
+    stack.addOutputs({
       ApiId: api.graphqlApi.apiId,
       ApiKey: api.graphqlApi.apiKey,
       APiUrl: api.graphqlApi.graphqlUrl,
@@ -117,7 +117,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-We are creating an AppSync GraphQL API here using the [`sst.AppSyncApi`]({{ site.docs_url }}/constructs/AppSyncApi) construct. We are also creating a DynamoDB table using the [`sst.Table`]({{ site.docs_url }}/constructs/Table) construct. It'll store the notes we'll be creating with our GraphQL API.
+We are creating an AppSync GraphQL API here using the [`AppSyncApi`]({{ site.docs_url }}/constructs/AppSyncApi) construct. We are also creating a DynamoDB table using the [`Table`]({{ site.docs_url }}/constructs/Table) construct. It'll store the notes we'll be creating with our GraphQL API.
 
 Finally, we allow our API to access our table.
 
@@ -359,7 +359,7 @@ Let's test what we've created so far!
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -400,7 +400,7 @@ Copy the `ApiUrl` from the terminal and replace the playground URL.
 
 Next, click on the **HTTP HEADERS** tab at bottom and paste the below code.
 
-```js
+```ts
 {
   "x-api-key": "da2-3oknz5th4nbj5oobjz4jwid62q" // replace with your API key value from terminal
 }
@@ -423,7 +423,7 @@ mutation createNote {
 
 Also let's go to the **DynamoDB** tab in the SST Console and check that the value has been created in the table.
 
-Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`sst.Table`]({{ site.docs_url }}/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
+Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`Table`]({{ site.docs_url }}/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
 
 ![DynamoDB explorer create note](/assets/examples/graphql-appsync/dynamodb-explorer-create-note.png)
 
@@ -518,7 +518,7 @@ Now that our API is tested, let's deploy it to production. You'll recall that we
 {%change%} Run the following in your terminal.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
 ## Cleaning up
@@ -526,8 +526,8 @@ $ npx sst deploy --stage prod
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npx sst remove
-$ npx sst remove --stage prod
+$ npm run remove
+$ npm run remove --stage prod
 ```
 
 ## Conclusion

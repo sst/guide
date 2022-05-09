@@ -6,7 +6,7 @@ date: 2021-12-12 00:00:00
 lang: en
 index: 5
 type: database
-description: In this example we will look at how to use PlanetScale in your serverless app on AWS using Serverless Stack (SST). We'll be using the sst.Api to create a simple hit counter.
+description: In this example we will look at how to use PlanetScale in your serverless app on AWS using Serverless Stack (SST). We'll be using the Api construct to create a simple hit counter.
 short_desc: Using PlanetScale in a serverless API.
 repo: planetscale
 ref: how-to-use-planetscale-in-your-serverless-app
@@ -18,7 +18,7 @@ In this example we will look at how to use PlanetScale in our serverless app usi
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 - A [PlanetScale account](https://auth.planetscale.com/sign-up) with the [pscale CLI configured locally](https://docs.planetscale.com/reference/planetscale-environment-setup)
 
@@ -27,7 +27,7 @@ In this example we will look at how to use PlanetScale in our serverless app usi
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest planetscale
+$ npm init sst -- typescript-starter planetscale
 $ cd planetscale
 ```
 
@@ -37,7 +37,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 {
   "name": "planetscale",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -49,9 +49,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## What is PlanetScale?
 
@@ -148,18 +148,16 @@ Note, The names of the env variables should not be changed
 
 Now let's add the API.
 
-{%change%} Replace the code in `stacks/MyStack.js` with below.
+{%change%} Replace the code in `stacks/MyStack.ts` with below.
 
-```js
-import * as sst from "@serverless-stack/resources";
+```ts
+import { StackContext, Api } from "@serverless-stack/resources";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
-
-    // Create a HTTP API
-    const api = new sst.Api(this, "Api", {
-      defaultFunctionProps: {
+export function MyStack({ stack }: StackContext) {
+  // Create a HTTP API
+  const api = new Api(stack, "Api", {
+    defaults: {
+      function: {
         environment: {
           PLANETSCALE_TOKEN: process.env.PLANETSCALE_TOKEN,
           PLANETSCALE_TOKEN_NAME: process.env.PLANETSCALE_TOKEN_NAME,
@@ -167,20 +165,20 @@ export default class MyStack extends sst.Stack {
           PLANETSCALE_DB: process.env.PLANETSCALE_DB,
         },
       },
-      routes: {
-        "POST /": "src/lambda.handler",
-      },
-    });
+    },
+    routes: {
+      "POST /": "lambda.handler",
+    },
+  });
 
-    // Show the endpoint in the output
-    this.addOutputs({
-      ApiEndpoint: api.url,
-    });
-  }
+  // Show the endpoint in the output
+  stack.addOutputs({
+    ApiEndpoint: api.url,
+  });
 }
 ```
 
-Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `main` in `src/lambda.js` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `main` in `backend/lambda.ts` will get invoked.
 
 We also pass in the credentials we created to our API through environment variables.
 
@@ -194,9 +192,9 @@ To access PlanetScale database we'll be using a package `planetscale-node`, inst
 npm install planetscale-node
 ```
 
-{%change%} Now replace `src/lambda.js` with the following.
+{%change%} Now replace `backend/lambda.ts` with the following.
 
-```js
+```ts
 import { PSDB } from "planetscale-node";
 // connect to main branch
 const db = new PSDB("main");
@@ -224,7 +222,7 @@ And let's test what we have so far.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -265,9 +263,9 @@ You should see a `0` in the response body.
 
 Now let's update our table with the hits.
 
-{%change%} Add this above the query statement in `src/lambda.js`.
+{%change%} Add this above the query statement in `backend/lambda.ts`.
 
-```js
+```ts
 // increment tally by 1
 await db.query("UPDATE counter SET tally = tally + 1 WHERE counter = 'hits'");
 ```
@@ -285,7 +283,7 @@ And now if you head over to your console and click the **Send** button again you
 Note, `env.local` is not committed to the git and remember to set the environment variables in your CI pipeline.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
@@ -305,7 +303,7 @@ Stack prod-planetscale-my-stack
 Run the below command to open the SST Console in **prod** stage to test the production endpoint.
 
 ```bash
-npx sst console --stage prod
+npm run console --stage prod
 ```
 
 Go to the **API** explorer and click **Send** button of the `POST /` route, to send a `POST` request.
@@ -317,8 +315,8 @@ Go to the **API** explorer and click **Send** button of the `POST /` route, to s
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npx sst remove
-$ npx sst remove --stage prod
+$ npm run remove
+$ npm run remove --stage prod
 ```
 
 ## Conclusion
