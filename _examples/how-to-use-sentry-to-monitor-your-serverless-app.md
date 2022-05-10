@@ -128,11 +128,11 @@ You can then set the layer for all the functions in your stack using the [`addDe
 
 ```ts
 // Configure Sentry
-if (!scope.local) {
+if (!app.local) {
   const sentry = LayerVersion.fromLayerVersionArn(
     stack,
     "SentryLayer",
-    `arn:aws:lambda:${scope.region}:943013980633:layer:SentryNodeServerlessSDK:35`
+    `arn:aws:lambda:${app.region}:943013980633:layer:SentryNodeServerlessSDK:35`
   );
 
   stack.addDefaultFunctionLayers([sentry]);

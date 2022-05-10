@@ -129,7 +129,7 @@ Next, you'll need to import it into the stack and pass in the functions you want
 
 ```ts
 // Configure Datadog only in prod
-if (!scope.local) {
+if (!app.local) {
   // Configure Datadog
   const datadog = new Datadog(stack, "Datadog", {
     nodeLayerVersion: 65,

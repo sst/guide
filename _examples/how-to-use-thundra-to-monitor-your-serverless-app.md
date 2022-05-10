@@ -132,13 +132,13 @@ You can then set the layer for all the functions in your stack using the [`addDe
 
 ```ts
 // Configure thundra to only prod
-if (!scope.local) {
+if (!app.local) {
   const thundraAWSAccountNo = 269863060030;
   const thundraNodeLayerVersion = 107; // Latest version at time of writing
   const thundraLayer = LayerVersion.fromLayerVersionArn(
     this,
     "ThundraLayer",
-    `arn:aws:lambda:${scope.region}:${thundraAWSAccountNo}:layer:thundra-lambda-node-layer:${thundraNodeLayerVersion}`
+    `arn:aws:lambda:${app.region}:${thundraAWSAccountNo}:layer:thundra-lambda-node-layer:${thundraNodeLayerVersion}`
   );
   stack.addDefaultFunctionLayers([thundraLayer]);
 

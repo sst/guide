@@ -249,7 +249,7 @@ const site = new ViteStaticSite(stack, "Site", {
   environment: {
     VITE_APP_COGNITO_DOMAIN: domain.domainName,
     VITE_APP_API_URL: api.url,
-    VITE_APP_REGION: scope.region,
+    VITE_APP_REGION: app.region,
     VITE_APP_USER_POOL_ID: auth.cognitoUserPool.userPoolId,
     VITE_APP_IDENTITY_POOL_ID: auth.cognitoCfnIdentityPool.ref,
     VITE_APP_USER_POOL_CLIENT_ID: auth.cognitoUserPoolClient.userPoolClientId,
