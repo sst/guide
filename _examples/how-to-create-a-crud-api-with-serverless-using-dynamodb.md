@@ -6,19 +6,19 @@ date: 2021-02-04 00:00:00
 lang: en
 index: 4
 type: database
-description: In this example we will look at how to create a CRUD API with serverless using DynamoDB. We'll be using the sst.Api and sst.Table constructs from the Serverless Stack (SST).
+description: In this example we will look at how to create a CRUD API with serverless using DynamoDB. We'll be using the Api and Table constructs from the Serverless Stack (SST).
 short_desc: Building a CRUD API with DynamoDB.
 repo: crud-api-dynamodb
 ref: how-to-create-a-crud-api-with-serverless-using-dynamodb
 comments_id: how-to-create-a-crud-api-with-serverless-using-dynamodb/2309
 ---
 
-In this example we will look at how to create a CRUD API with serverless using [DynamoDB](https://aws.amazon.com/dynamodb/). We'll be using [Serverless Stack (SST)]({{ site.sst_github_repo }}). Our API will be creating, reading, updating, and deleting notes.
+In this example we will look at how to create a CRUD API with serverless using [DynamoDB](https://amazon.com/dynamodb/). We'll be using [Serverless Stack (SST)]({{ site.sst_github_repo }}). Our API will be creating, reading, updating, and deleting notes.
 
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
 ## Create an SST app
@@ -26,7 +26,7 @@ In this example we will look at how to create a CRUD API with serverless using [
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest crud-api-dynamodb
+$ npm init sst -- typescript-starter crud-api-dynamodb
 $ cd crud-api-dynamodb
 ```
 
@@ -36,7 +36,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 {
   "name": "crud-api-dynamodb",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -48,36 +48,32 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## Adding DynamoDB
 
-[Amazon DynamoDB](https://aws.amazon.com/dynamodb/) is a reliable and highly-performant NoSQL database that can be configured as a true serverless database. Meaning that it'll scale up and down automatically. And you won't get charged if you are not using it.
+[Amazon DynamoDB](https://amazon.com/dynamodb/) is a reliable and highly-performant NoSQL database that can be configured as a true serverless database. Meaning that it'll scale up and down automatically. And you won't get charged if you are not using it.
 
-{%change%} Replace the `stacks/MyStack.js` with the following.
+{%change%} Replace the `stacks/MyStack.ts` with the following.
 
-```js
-import * as sst from "@serverless-stack/resources";
+```ts
+import { Api, StackContext, Table } from "@serverless-stack/resources";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
-
-    // Create the table
-    const table = new sst.Table(this, "Notes", {
-      fields: {
-        userId: sst.TableFieldType.STRING,
-        noteId: sst.TableFieldType.STRING,
-      },
-      primaryIndex: { partitionKey: "userId", sortKey: "noteId" },
-    });
-  }
+export function MyStack({ stack }: StackContext) {
+  // Create the table
+  const table = new Table(stack, "Notes", {
+    fields: {
+      userId: "string",
+      noteId: "string",
+    },
+    primaryIndex: { partitionKey: "userId", sortKey: "noteId" },
+  });
 }
 ```
 
-This creates a serverless DynamoDB table using [`sst.Table`]({{ site.docs_url }}/constructs/Table). Our table is going to look something like this:
+This creates a serverless DynamoDB table using [`Table`]({{ site.docs_url }}/constructs/Table). Our table is going to look something like this:
 
 | userId | noteId | content | createdAt |
 | ------ | ------ | ------- | --------- |
@@ -87,23 +83,25 @@ This creates a serverless DynamoDB table using [`sst.Table`]({{ site.docs_url }}
 
 Now let's add the API.
 
-{%change%} Add this after the `sst.Table` definition in `stacks/MyStack.js`.
+{%change%} Add this after the `Table` definition in `stacks/MyStack.ts`.
 
-```js
+```ts
 // Create the HTTP API
-const api = new sst.Api(this, "Api", {
-  defaultFunctionProps: {
-    // Pass in the table name to our API
-    environment: {
-      tableName: table.dynamodbTable.tableName,
+const api = new Api(stack, "Api", {
+  defaults: {
+    function: {
+      // Pass in the table name to our API
+      environment: {
+        tableName: table.tableName,
+      },
     },
   },
   routes: {
-    "GET    /notes": "src/list.main",
-    "POST   /notes": "src/create.main",
-    "GET    /notes/{id}": "src/get.main",
-    "PUT    /notes/{id}": "src/update.main",
-    "DELETE /notes/{id}": "src/delete.main",
+    "GET    /notes": "list.main",
+    "POST   /notes": "create.main",
+    "GET    /notes/{id}": "get.main",
+    "PUT    /notes/{id}": "update.main",
+    "DELETE /notes/{id}": "delete.main",
   },
 });
 
@@ -111,12 +109,12 @@ const api = new sst.Api(this, "Api", {
 api.attachPermissions([table]);
 
 // Show the API endpoint in the output
-this.addOutputs({
+stack.addOutputs({
   ApiEndpoint: api.url,
 });
 ```
 
-We are creating an API here using the [`sst.Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding five routes to it.
+We are creating an API here using the [`Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding five routes to it.
 
 ```
 GET     /notes
@@ -134,13 +132,13 @@ We also pass in the name of our DynamoDB table to our API as an environment vari
 
 Let's turn towards the functions that'll be powering our API. Starting with the one that creates our note.
 
-{%change%} Add the following to `src/create.js`.
+{%change%} Add the following to `backend/create.ts`.
 
-```js
-import AWS from "aws-sdk";
+```ts
+import { DynamoDB } from "aws-sdk";
 import * as uuid from "uuid";
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const dynamoDb = new DynamoDB.DocumentClient();
 
 export async function main(event) {
   const data = JSON.parse(event.body);
@@ -176,12 +174,12 @@ $ npm install aws-sdk uuid
 
 Next, let's write the function that'll fetch all our notes.
 
-{%change%} Add the following to `src/list.js`.
+{%change%} Add the following to `backend/list.ts`.
 
-```js
-import AWS from "aws-sdk";
+```ts
+import { DynamoDB } from "aws-sdk";
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const dynamoDb = new DynamoDB.DocumentClient();
 
 export async function main() {
   const params = {
@@ -208,12 +206,12 @@ Here we are getting all the notes for our hard coded `userId`, `123`.
 
 We'll do something similar for the function that gets a single note.
 
-{%change%} Create a `src/get.js`.
+{%change%} Create a `backend/get.ts`.
 
-```js
-import AWS from "aws-sdk";
+```ts
+import { DynamoDB } from "aws-sdk";
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const dynamoDb = new DynamoDB.DocumentClient();
 
 export async function main(event) {
   const params = {
@@ -240,12 +238,12 @@ We are getting the note with the id that's passed in through the API endpoint pa
 
 Now let's update our notes.
 
-{%change%} Add a `src/update.js` with:
+{%change%} Add a `backend/update.ts` with:
 
-```js
-import AWS from "aws-sdk";
+```ts
+import { DynamoDB } from "aws-sdk";
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const dynamoDb = new DynamoDB.DocumentClient();
 
 export async function main(event) {
   const data = JSON.parse(event.body);
@@ -281,12 +279,12 @@ We are first JSON parsing the request body. We use the content we get from it, t
 
 To complete the CRUD operations, let's delete the note.
 
-{%change%} Add this to `src/delete.js`.
+{%change%} Add this to `backend/delete.ts`.
 
-```js
-import AWS from "aws-sdk";
+```ts
+import { DynamoDB } from "aws-sdk";
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const dynamoDb = new DynamoDB.DocumentClient();
 
 export async function main(event) {
   const params = {
@@ -314,7 +312,7 @@ Now let's test what we've created so far.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -336,7 +334,7 @@ dev-rest-api-dynamodb-my-stack: deploying...
 Stack dev-rest-api-dynamodb-my-stack
   Status: deployed
   Outputs:
-    ApiEndpoint: https://t34witddz7.execute-api.us-east-1.amazonaws.com
+    ApiEndpoint: https://t34witddz7.execute-api.us-east-1.amazoncom
 ```
 
 The `ApiEndpoint` is the API we just created.
@@ -365,7 +363,7 @@ To retrieve the created note, go to `GET /notes/{id}` route and in the **URL** t
 
 Also let's go to the **DynamoDB** tab in the SST Console and check that the value has been created in the table.
 
-Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`sst.Table`]({{ site.docs_url }}/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
+Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`Table`]({{ site.docs_url }}/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
 
 ![DynamoDB table view of table](/assets/examples/crud-rest-api-dynamodb/dynamo-table-view-of-table.png)
 
@@ -395,9 +393,9 @@ To delete a note, go to the `DELETE /notes/{id}` and enter the **id** of the not
 
 Let's make a quick change to test our Live Lambda Development environment. We want our `get` function to return an error if it cannot find the note.
 
-{%change%} Replace the `return` statement in `src/gets.js` with:
+{%change%} Replace the `return` statement in `backend/gets.ts` with:
 
-```js
+```ts
 return results.Item
   ? {
       statusCode: 200,
@@ -420,7 +418,7 @@ You should see an error being printed out.
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the app for our users.
@@ -434,13 +432,13 @@ Once deployed, you should see something like this.
 Stack prod-rest-api-dynamodb-my-stack
   Status: deployed
   Outputs:
-    ApiEndpoint: https://ck198mfop1.execute-api.us-east-1.amazonaws.com
+    ApiEndpoint: https://ck198mfop1.execute-api.us-east-1.amazoncom
 ```
 
 Run the below command to open the SST Console in **prod** stage to test the production endpoint.
 
 ```bash
-npx sst console --stage prod
+npm run console --stage prod
 ```
 
 Go to the **API** explorer and click **Send** button of the `GET /notes` route, to send a `GET` request.
@@ -452,8 +450,8 @@ Go to the **API** explorer and click **Send** button of the `GET /notes` route, 
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npx sst remove
-$ npx sst remove --stage prod
+$ npm run remove
+$ npm run remove --stage prod
 ```
 
 ## Conclusion

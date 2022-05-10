@@ -6,7 +6,7 @@ date: 2021-02-08 00:00:00
 lang: en
 index: 3
 type: async
-description: In this example we will look at how to use SNS in your serverless app on AWS using Serverless Stack (SST). We'll be using the sst.Api and sst.Topic to create a simple checkout system.
+description: In this example we will look at how to use SNS in your serverless app on AWS using Serverless Stack (SST). We'll be using the Api construct and Topic to create a simple checkout system.
 short_desc: A simple pub/sub system with SNS.
 repo: pub-sub
 ref: how-to-use-pub-sub-in-your-serverless-app
@@ -18,7 +18,7 @@ In this example we will look at how to use SNS to create [a pub/sub system](http
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
 ## Create an SST app
@@ -26,7 +26,7 @@ In this example we will look at how to use SNS to create [a pub/sub system](http
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest pub-sub
+$ npm init sst -- typescript-starter pub-sub
 $ cd pub-sub
 ```
 
@@ -36,7 +36,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 {
   "name": "pub-sub",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -48,63 +48,63 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## Adding SNS Topic
 
 [Amazon SNS](https://aws.amazon.com/sns/) is a reliable and high-throughput messaging service. You are charged based on the number of API requests made to SNS. And you won't get charged if you are not using it.
 
-{%change%} Replace the `stacks/MyStack.js` with the following.
+{%change%} Replace the `stacks/MyStack.ts` with the following.
 
-```js
-import * as sst from "@serverless-stack/resources";
+```ts
+import { Api, StackContext, Topic } from "@serverless-stack/resources";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
-
-    // Create Topic
-    const topic = new sst.Topic(this, "Ordered", {
-      subscribers: ["src/receipt.main", "src/shipping.main"],
-    });
-  }
-}
+export function MyStack({ stack }: StackContext) {
+  // Create Topic
+  const topic = new Topic(stack, "Ordered", {
+    subscribers: {
+      receipt: "receipt.main",
+      shipping: "shipping.main",
+    },
+  });
 ```
 
-This creates an SNS topic using [`sst.Topic`]({{ site.docs_url }}/constructs/Topic). And it has two subscribers. Meaning when the topic is published, both the functions will get run.
+This creates an SNS topic using [`Topic`]({{ site.docs_url }}/constructs/Topic). And it has two subscribers. Meaning when the topic is published, both the functions will get run.
 
 ## Setting up the API
 
 Now let's add the API.
 
-{%change%} Add this below the `sst.Topic` definition in `stacks/MyStack.js`.
+{%change%} Add this below the `Topic` definition in `stacks/MyStack.ts`.
 
-```js
+```ts
 // Create the HTTP API
-const api = new sst.Api(this, "Api", {
-  defaultFunctionProps: {
-    // Pass in the topic arn to our API
-    environment: {
-      topicArn: topic.snsTopic.topicArn,
+const api = new Api(stack, "Api", {
+  defaults: {
+    function: {
+      // Pass in the topic to our API
+      environment: {
+        topicArn: topic.topicArn,
+      },
     },
   },
   routes: {
-    "POST /order": "src/order.main",
+    "POST /order": "order.main",
   },
 });
 
-// Allow the API to access the topic
+// Allow the API to publish the topic
 api.attachPermissions([topic]);
 
 // Show the API endpoint in the output
-this.addOutputs({
+stack.addOutputs({
   ApiEndpoint: api.url,
 });
 ```
 
-Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (`/order`). When we make a `POST` request to this endpoint the Lambda function called `main` in `src/order.js` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (`/order`). When we make a `POST` request to this endpoint the Lambda function called `main` in `backend/order.ts` will get invoked.
 
 We'll also pass in [the arn]({ link \_chapters/what-is-an-arn.md %}) of our SNS topic to our API as an environment variable called `topicArn`. And we allow our API to publish to the topic we just created.
 
@@ -112,9 +112,9 @@ We'll also pass in [the arn]({ link \_chapters/what-is-an-arn.md %}) of our SNS 
 
 We will create three functions, one handling the `/order` API request, and two for the topic subscribers.
 
-{%change%} Add a `src/order.js`.
+{%change%} Add a `backend/order.ts`.
 
-```js
+```ts
 export async function main() {
   console.log("Order confirmed!");
   return {
@@ -124,18 +124,18 @@ export async function main() {
 }
 ```
 
-{%change%} Add a `src/receipt.js`.
+{%change%} Add a `backend/receipt.ts`.
 
-```js
+```ts
 export async function main() {
   console.log("Receipt sent!");
   return {};
 }
 ```
 
-{%change%} Add a `src/shipping.js`.
+{%change%} Add a `backend/shipping.ts`.
 
-```js
+```ts
 export async function main() {
   console.log("Item shipped!");
   return {};
@@ -149,7 +149,7 @@ Now let's test our new API.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -192,9 +192,9 @@ You should see `Order confirmed!` logged in the console.
 
 Now let's publish a message to our topic.
 
-{%change%} Replace the `src/order.js` with the following.
+{%change%} Replace the `backend/order.ts` with the following.
 
-```js
+```ts
 import AWS from "aws-sdk";
 
 const sns = new AWS.SNS();
@@ -236,7 +236,7 @@ And now if you head over to your console and invoke the function again, You'll n
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
@@ -246,8 +246,8 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npx sst remove
-$ npx sst remove --stage prod
+$ npm run remove
+$ npm run remove --stage prod
 ```
 
 ## Conclusion

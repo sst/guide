@@ -6,7 +6,7 @@ date: 2021-02-08 00:00:00
 lang: en
 index: 4
 type: async
-description: In this example we will look at how to automatically resize images that are uploaded to your S3 bucket using Serverless Stack (SST). We'll be using the sst.Bucket construct and a Lambda layer to set this up.
+description: In this example we will look at how to automatically resize images that are uploaded to your S3 bucket using Serverless Stack (SST). We'll be using the Bucket construct and a Lambda layer to set this up.
 short_desc: Automatically resize images uploaded to S3.
 repo: bucket-image-resize
 ref: how-to-automatically-resize-images-with-serverless
@@ -26,7 +26,7 @@ Here is a video of it in action.
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
 ## Create an SST app
@@ -34,7 +34,7 @@ Here is a video of it in action.
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest bucket-image-resize
+$ npm init sst -- typescript-starter bucket-image-resize
 $ cd bucket-image-resize
 ```
 
@@ -44,7 +44,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 {
   "name": "bucket-image-resize",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -56,61 +56,54 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## Creating the bucket
 
 Let's start by creating a bucket.
 
-{%change%} Replace the `stacks/MyStack.js` with the following.
+{%change%} Replace the `stacks/MyStack.ts` with the following.
 
-```js
-import { EventType } from "aws-cdk-lib/aws-s3";
+```ts
+import { Bucket, StackContext } from "@serverless-stack/resources";
 import * as lambda from "aws-cdk-lib/aws-lambda";
-import * as sst from "@serverless-stack/resources";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
-
-    // Create a new bucket
-    const bucket = new sst.Bucket(this, "Bucket", {
-      notifications: [
-        {
-          function: {
-            handler: "src/resize.main",
-            bundle: {
-              externalModules: ["sharp"],
-            },
-            layers: [
-              new lambda.LayerVersion(this, "SharpLayer", {
-                code: lambda.Code.fromAsset("layers/sharp"),
-              }),
-            ],
+export function MyStack({ stack }: StackContext) {
+  // Create a new bucket
+  const bucket = new Bucket(stack, "Bucket", {
+    notifications: {
+      resize: {
+        function: {
+          handler: "resize.main",
+          bundle: {
+            externalModules: ["sharp"],
           },
-          notificationProps: {
-            events: [EventType.OBJECT_CREATED],
-          },
+          layers: [
+            new lambda.LayerVersion(stack, "SharpLayer", {
+              code: lambda.Code.fromAsset("layers/sharp"),
+            }),
+          ],
         },
-      ],
-    });
+        events: ["object_created"],
+      },
+    },
+  });
 
-    // Allow the notification functions to access the bucket
-    bucket.attachPermissions([bucket]);
+  // Allow the notification functions to access the bucket
+  bucket.attachPermissions([bucket]);
 
-    // Show the endpoint in the output
-    this.addOutputs({
-      BucketName: bucket.s3Bucket.bucketName,
-    });
-  }
+  // Show the endpoint in the output
+  stack.addOutputs({
+    BucketName: bucket.s3Bucket.bucketName,
+  });
 }
 ```
 
-This creates a S3 bucket using the [`sst.Bucket`]({{ site.docs_url }}/constructs/Bucket) construct.
+This creates a S3 bucket using the [`Bucket`]({{ site.docs_url }}/constructs/Bucket) construct.
 
-We are subscribing to the `OBJECT_CREATED` notification with a [`sst.Function`]({{ site.docs_url }}/constructs/Function). The image resizing library that we are using, [Sharp](https://github.com/lovell/sharp), needs to be compiled specifically for the target runtime. So we are going to use a [Lambda Layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) to upload it. Locally, the `sharp` package is not compatible with how our functions are bundled. So we are marking it in the `externalModules`.
+We are subscribing to the `OBJECT_CREATED` notification with a [`Function`]({{ site.docs_url }}/constructs/Function). The image resizing library that we are using, [Sharp](https://github.com/lovell/sharp), needs to be compiled specifically for the target runtime. So we are going to use a [Lambda Layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) to upload it. Locally, the `sharp` package is not compatible with how our functions are bundled. So we are marking it in the `externalModules`.
 
 Finally, we are allowing our functions to access the bucket by calling `attachPermissions`. We are also outputting the name of the bucket that we are creating.
 
@@ -132,9 +125,9 @@ Unzip that into the `layers/sharp` directory that we just created. Make sure tha
 
 Now in our function, we'll be handling resizing an image once it's uploaded.
 
-{%change%} Add a new file at `src/resize.js` with the following.
+{%change%} Add a new file at `backend/resize.ts` with the following.
 
-```js
+```ts
 import AWS from "aws-sdk";
 import sharp from "sharp";
 import stream from "stream";
@@ -224,7 +217,7 @@ $ npm install sharp aws-sdk
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -269,7 +262,7 @@ Now refresh your console to see the resized image.
 
 Let's try making a quick change.
 
-{%change%} Change the `width` in your `src/resize.js`.
+{%change%} Change the `width` in your `backend/resize.ts`.
 
 ```bash
 const width = 100;
@@ -284,7 +277,7 @@ Now if you go back to SST console and upload that same image again, you should s
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
@@ -294,21 +287,21 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npx sst remove
-$ npx sst remove --stage prod
+$ npm run remove
+$ npm run remove --stage prod
 ```
 
 Note that, by default resources like the S3 bucket are not removed automatically. To do so, you'll need to explicitly set it.
 
-```js
-import { RemovalPolicy } from "aws-cdk-lib";
+```ts
+import * as cdk from "aws-cdk-lib";
 
-const bucket = new sst.Bucket(this, "Bucket", {
-  s3Bucket: {
-    // Delete all the files
-    autoDeleteObjects: true,
-    // Remove the bucket when the stack is removed
-    removalPolicy: RemovalPolicy.DESTROY,
+const bucket = new Bucket(stack, "Bucket", {
+  cdk: {
+    bucket: {
+      autoDeleteObjects: true,
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
+    },
   },
   ...
 }

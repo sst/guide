@@ -18,7 +18,7 @@ In this example we will look at how to use the [Middy validator](https://middy.j
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
 ## What is Middy
@@ -30,7 +30,7 @@ In this example we will look at how to use the [Middy validator](https://middy.j
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest middy-validator
+$ npm init sst -- typescript-starter middy-validator
 $ cd middy-validator
 ```
 
@@ -40,7 +40,7 @@ By default our app will be deployed to the `us-east-1` AWS region. This can be c
 {
   "name": "middy-validator",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -52,9 +52,9 @@ An SST app is made up of a couple of parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## Create our infrastructure
 
@@ -64,35 +64,31 @@ Our app is made up of a simple API. The API will read two variables from the req
 
 Let's start by adding the API.
 
-{%change%} Add this in `stacks/MyStack.js`.
+{%change%} Add this in `stacks/MyStack.ts`.
 
-```js
-import * as sst from "@serverless-stack/resources";
+```ts
+import { Api, StackContext } from "@serverless-stack/resources";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
+export function MyStack({ stack }: StackContext) {
+  // Create a HTTP API
+  const api = new Api(stack, "Api", {
+    routes: {
+      "POST /": "lambda.handler",
+    },
+  });
 
-    // Create a HTTP API
-    const api = new sst.Api(this, "Api", {
-      routes: {
-        "POST /": "src/lambda.handler",
-      },
-    });
-
-    // Show the endpoint in the output
-    this.addOutputs({
-      ApiEndpoint: api.url,
-    });
-  }
+  // Show the endpoint in the output
+  stack.addOutputs({
+    ApiEndpoint: api.url,
+  });
 }
 ```
 
-We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `src/lambda.js` will get invoked.
+We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `backend/lambda.ts` will get invoked.
 
-{%change%} Replace the code in `src/lambda.js` with:
+{%change%} Replace the code in `backend/lambda.ts` with:
 
-```js
+```ts
 export async function handler(event) {
   const { fname, lname } = JSON.parse(event.body);
   return {
@@ -112,7 +108,7 @@ Let's test what we have so far.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -159,7 +155,7 @@ In a production app it can be difficult to catch these issues. We'd like to expl
 
 To fix this let's use the [Middy validator](https://middy.js.org/packages/validator/) middleware to validate our API.
 
-{%change%} Run the following in the project root.
+{%change%} Run the following in the `backend/` directory.
 
 ```bash
 $ npm install --save @middy/core @middy/http-json-body-parser @middy/http-error-handler @middy/validator
@@ -176,9 +172,9 @@ Let's understand what the above packages are.
 
 ### Adding request validation
 
-{%change%} Replace `src/lambda.js` with the following.
+{%change%} Replace `backend/lambda.ts` with the following.
 
-```js
+```ts
 import middy from "@middy/core";
 import validator from "@middy/validator";
 import httpErrorHandler from "@middy/http-error-handler";
@@ -234,9 +230,9 @@ Great! The server throws a `Bad request` error to let us know that something is 
 
 While we are here, let's add response validation as well.
 
-{%change%} Replace `src/lambda.js` with this:
+{%change%} Replace `backend/lambda.ts` with this:
 
-```js
+```ts
 import middy from "@middy/core";
 import validator from "@middy/validator";
 import httpErrorHandler from "@middy/http-error-handler";
@@ -310,13 +306,13 @@ Instead of returning a number for status code, we'll return a string instead.
 
 {%change%} Replace this line:
 
-```js
+```ts
 statusCode: 200,
 ```
 
 With this:
 
-```js
+```ts
 statusCode: "success",
 ```
 
@@ -328,7 +324,7 @@ Great! The server now throws a `500 Internal Server Error` to let us know that s
 
 {%change%} Let's change the status code back.
 
-```js
+```ts
 statusCode: 200,
 ```
 
@@ -337,7 +333,7 @@ statusCode: 200,
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the app for our users.
@@ -359,8 +355,8 @@ Stack prod-middy-validator-my-stack
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npx sst remove
-$ npx sst remove --stage prod
+$ npm run remove
+$ npm run remove --stage prod
 ```
 
 ## Conclusion

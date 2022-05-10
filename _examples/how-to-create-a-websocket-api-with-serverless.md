@@ -6,7 +6,7 @@ date: 2021-02-04 00:00:00
 lang: en
 index: 2
 type: api
-description: In this example we will look at how to create a serverless WebSocket API on AWS using Serverless Stack (SST). We'll be using the sst.WebSocketApi construct to define the routes of our API.
+description: In this example we will look at how to create a serverless WebSocket API on AWS using Serverless Stack (SST). We'll be using the WebSocketApi construct to define the routes of our API.
 short_desc: Building a simple WebSocket API.
 repo: websocket
 ref: how-to-create-a-websocket-api-with-serverless
@@ -18,7 +18,7 @@ In this example we will look at how to create a serverless WebSocket API on AWS 
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
 ## Create an SST app
@@ -26,7 +26,7 @@ In this example we will look at how to create a serverless WebSocket API on AWS 
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest websocket
+$ npm init sst -- typescript-starter websocket
 $ cd websocket
 ```
 
@@ -36,7 +36,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 {
   "name": "websocket",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -48,35 +48,31 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## Storing connections
 
 We are going to use [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) to store the connection ids from all the clients connected to our WebSocket API. DynamoDB is a reliable and highly-performant NoSQL database that can be configured as a true serverless database. Meaning that it'll scale up and down automatically. And you won't get charged if you are not using it.
 
-{%change%} Replace the `stacks/MyStack.js` with the following.
+{%change%} Replace the `stacks/MyStack.ts` with the following.
 
-```js
-import * as sst from "@serverless-stack/resources";
+```ts
+import { StackContext, Table, WebSocketApi } from "@serverless-stack/resources";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
-
-    // Create the table
-    const table = new sst.Table(this, "Connections", {
-      fields: {
-        id: sst.TableFieldType.STRING,
-      },
-      primaryIndex: { partitionKey: "id" },
-    });
-  }
+export function MyStack({ stack }: StackContext) {
+  // Create the table
+  const table = new Table(stack, "Connections", {
+    fields: {
+      id: "string",
+    },
+    primaryIndex: { partitionKey: "id" },
+  });
 }
 ```
 
-This creates a serverless DynamoDB table using [`sst.Table`]({{ site.docs_url }}/constructs/Table). It has a primary key called `id`. Our table is going to look something like this:
+This creates a serverless DynamoDB table using [`Table`]({{ site.docs_url }}/constructs/Table). It has a primary key called `id`. Our table is going to look something like this:
 
 | id       |
 | -------- |
@@ -88,20 +84,22 @@ Where the `id` is the connection id as a string.
 
 Now let's add the WebSocket API.
 
-{%change%} Add this below the `sst.Table` definition in `stacks/MyStack.js`.
+{%change%} Add this below the `Table` definition in `stacks/MyStack.ts`.
 
-```js
+```ts
 // Create the WebSocket API
-const api = new sst.WebSocketApi(this, "Api", {
-  defaultFunctionProps: {
-    environment: {
-      tableName: table.dynamodbTable.tableName,
+const api = new WebSocketApi(stack, "Api", {
+  defaults: {
+    function: {
+      environment: {
+        tableName: table.tableName,
+      },
     },
   },
   routes: {
-    $connect: "src/connect.main",
-    $disconnect: "src/disconnect.main",
-    sendmessage: "src/sendMessage.main",
+    $connect: "connect.main",
+    $disconnect: "disconnect.main",
+    sendmessage: "sendMessage.main",
   },
 });
 
@@ -109,12 +107,12 @@ const api = new sst.WebSocketApi(this, "Api", {
 api.attachPermissions([table]);
 
 // Show the API endpoint in the output
-this.addOutputs({
+stack.addOutputs({
   ApiEndpoint: api.url,
 });
 ```
 
-We are creating a WebSocket API using the [`sst.WebSocketApi`]({{ site.docs_url }}/constructs/WebSocketApi) construct. It has a couple of routes; the `$connect` and `$disconnect` handles the requests when a client connects or disconnects from our WebSocket API. The `sendmessage` route handles the request when a client wants to send a message to all the connected clients.
+We are creating a WebSocket API using the [`WebSocketApi`]({{ site.docs_url }}/constructs/WebSocketApi) construct. It has a couple of routes; the `$connect` and `$disconnect` handles the requests when a client connects or disconnects from our WebSocket API. The `sendmessage` route handles the request when a client wants to send a message to all the connected clients.
 
 We also pass in the name of our DynamoDB table to our API as an environment variable called `tableName`. And we allow our API to access (read and write) the table instance we just created.
 
@@ -122,12 +120,12 @@ We also pass in the name of our DynamoDB table to our API as an environment vari
 
 Now in our functions, let's first handle the case when a client connects to our WebSocket API.
 
-{%change%} Add the following to `src/connect.js`.
+{%change%} Add the following to `backend/connect.ts`.
 
-```js
-import AWS from "aws-sdk";
+```ts
+import { DynamoDB } from "aws-sdk";
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const dynamoDb = new DynamoDB.DocumentClient();
 
 export async function main(event) {
   const params = {
@@ -155,12 +153,12 @@ $ npm install aws-sdk
 
 Similarly, we'll remove the connection id from the table when a client disconnects.
 
-{%change%} Add the following to `src/disconnect.js`.
+{%change%} Add the following to `backend/disconnect.ts`.
 
-```js
-import AWS from "aws-sdk";
+```ts
+import { DynamoDB } from "aws-sdk";
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const dynamoDb = new DynamoDB.DocumentClient();
 
 export async function main(event) {
   const params = {
@@ -178,9 +176,9 @@ export async function main(event) {
 
 Now before handling the `sendmessage` route, let's do a quick test. We'll leave a placeholder function there for now.
 
-{%change%} Add this to `src/sendMessage.js`.
+{%change%} Add this to `backend/sendMessage.ts`.
 
-```js
+```ts
 export async function main(event) {
   return { statusCode: 200, body: "Message sent" };
 }
@@ -191,7 +189,7 @@ export async function main(event) {
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -232,7 +230,7 @@ Whenever a new client is connected to the API, we will store the connection ID i
 
 Let's go to the **DynamoDB** tab in the SST Console and check that the value has been created in the table.
 
-Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`sst.Table`]({{ site.docs_url }}/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
+Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`Table`]({{ site.docs_url }}/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
 
 ![DynamoDB table view of connections table](/assets/examples/websocket/dynamo-table-view-of-connections-table.png)
 
@@ -242,13 +240,13 @@ You should see a random connection ID created in the table.
 
 Now let's update our function to send messages.
 
-{%change%} Replace your `src/sendMessage.js` with:
+{%change%} Replace your `backend/sendMessage.ts` with:
 
-```js
-import AWS from "aws-sdk";
+```ts
+import { DynamoDB, ApiGatewayManagementApi } from "aws-sdk";
 
 const TableName = process.env.tableName;
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const dynamoDb = new DynamoDB.DocumentClient();
 
 export async function main(event) {
   const messageData = JSON.parse(event.body).data;
@@ -259,7 +257,7 @@ export async function main(event) {
     .scan({ TableName, ProjectionExpression: "id" })
     .promise();
 
-  const apiG = new AWS.ApiGatewayManagementApi({
+  const apiG = new ApiGatewayManagementApi({
     endpoint: `${domainName}/${stage}`,
   });
 
@@ -316,7 +314,7 @@ Also, if you flip back to our original WebSocket client window, you'll notice th
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
@@ -326,8 +324,8 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npx sst remove
-$ npx sst remove --stage prod
+$ npm run remove
+$ npm run remove --stage prod
 ```
 
 ## Conclusion

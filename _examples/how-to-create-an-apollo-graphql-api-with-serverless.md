@@ -6,7 +6,7 @@ date: 2021-03-27 00:00:00
 lang: en
 index: 1
 type: graphql
-description: In this example we will look at how to create an Apollo GraphQL API on AWS using Serverless Stack (SST). We'll be using the sst.GraphQLApi construct to define the Apollo Lambda server.
+description: In this example we will look at how to create an Apollo GraphQL API on AWS using Serverless Stack (SST). We'll be using the GraphQLApi construct to define the Apollo Lambda server.
 short_desc: Building a serverless GraphQL API with Apollo.
 repo: graphql-apollo
 ref: how-to-create-an-apollo-graphql-api-with-serverless
@@ -26,7 +26,7 @@ In this example we'll look at how to create an [Apollo GraphQL API](https://www.
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest --language typescript graphql-apollo
+$ npm init sst -- typescript-starter graphql-apollo
 $ cd graphql-apollo
 ```
 
@@ -48,9 +48,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## Setting up our infrastructure
 
@@ -59,32 +59,28 @@ Let's start by setting up our GraphQL API.
 {%change%} Replace the `stacks/MyStack.ts` with the following.
 
 ```ts
-import * as sst from "@serverless-stack/resources";
+import { GraphQLApi, StackContext } from "@serverless-stack/resources";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope: sst.App, id: string, props?: sst.StackProps) {
-    super(scope, id, props);
+export function MyStack({ stack }: StackContext) {
+  // Create the GraphQL API
+  const api = new GraphQLApi(stack, "ApolloApi", {
+    server: "lambda.handler",
+  });
 
-    // Create the GraphQL API
-    const api = new sst.GraphQLApi(this, "ApolloApi", {
-      server: "src/lambda.handler",
-    });
-
-    // Show the API endpoint in output
-    this.addOutputs({
-      ApiEndpoint: api.url,
-    });
-  }
+  // Show the API endpoint in output
+  stack.addOutputs({
+    ApiEndpoint: api.url,
+  });
 }
 ```
 
-We are creating an Apollo GraphQL API here using the [`sst.GraphQLApi`]({{ site.docs_url }}/constructs/GraphQLApi) construct. Our Apollo Server is powered by the Lambda function in `src/lambda.ts`.
+We are creating an Apollo GraphQL API here using the [`GraphQLApi`]({{ site.docs_url }}/constructs/GraphQLApi) construct. Our Apollo Server is powered by the Lambda function in `backend/lambda.ts`.
 
 ## Adding function code
 
 For this example, we are not using a database. We'll look at that in detail in another example. So we'll just be printing out a simple string.
 
-{%change%} Let's add a file that contains our notes in `src/lambda.ts`.
+{%change%} Let's add a file that contains our notes in `backend/lambda.ts`.
 
 ```ts
 import { gql, ApolloServer } from "apollo-server-lambda";
@@ -106,7 +102,7 @@ const resolvers = {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  playground: false,
+  playground: IS_LOCAL,
   introspection: IS_LOCAL,
 });
 
@@ -136,7 +132,7 @@ Now let's test our new Apollo GraphQL API.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -184,7 +180,7 @@ You should see `Hello, World!`.
 
 Let's make a quick change to our API.
 
-{%change%} In `src/lambda.ts` replace `Hello, World!` with `Hello, New World!`.
+{%change%} In `backend/lambda.ts` replace `Hello, World!` with `Hello, New World!`.
 
 ```ts
 const resolvers = {
@@ -205,7 +201,7 @@ Now that our API is tested, let's deploy it to production. You'll recall that we
 {%change%} Run the following in your terminal.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
 ## Cleaning up
@@ -213,8 +209,8 @@ $ npx sst deploy --stage prod
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npx sst remove
-$ npx sst remove --stage prod
+$ npm run remove
+$ npm run remove --stage prod
 ```
 
 ## Conclusion

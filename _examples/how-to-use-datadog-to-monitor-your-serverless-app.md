@@ -18,7 +18,7 @@ In this example we will look at how to use [Datadog](https://www.datadoghq.com/)
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 - A [Datadog account](https://app.datadoghq.com/signup) and that's [configured with your AWS account](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=roledelegation#setup)
 
@@ -33,7 +33,7 @@ Let's look at how to set this up.
 {%change%} Start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest datadog
+$ npm init sst -- typescript-starter datadog
 $ cd datadog
 ```
 
@@ -43,7 +43,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 {
   "name": "datadog",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -55,9 +55,9 @@ An SST app is made up of a couple of parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## Create our infrastructure
 
@@ -67,35 +67,31 @@ Our app is going to be a simple API that returns a _Hello World_ response.
 
 Let's add the API.
 
-{%change%} Add this in `stacks/MyStack.js`.
+{%change%} Add this in `stacks/MyStack.ts`.
 
-```js
-import * as sst from "@serverless-stack/resources";
+```ts
+import { StackContext, Api } from "@serverless-stack/resources";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
+export function MyStack({ stack, app }: StackContext) {
+  // Create a HTTP API
+  const api = new Api(stack, "Api", {
+    routes: {
+      "GET /": "backend/lambda.handler",
+    },
+  });
 
-    // Create a HTTP API
-    const api = new sst.Api(this, "Api", {
-      routes: {
-        "GET /": "src/lambda.handler",
-      },
-    });
-
-    // Show the endpoint in the output
-    this.addOutputs({
-      ApiEndpoint: api.url,
-    });
-  }
+  // Show the endpoint in the output
+  stack.addOutputs({
+    ApiEndpoint: api.url,
+  });
 }
 ```
 
-We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `src/lambda.js` will get invoked.
+We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `backend/lambda.ts` will get invoked.
 
-{%change%} Your `src/lambda.js` should look something like this.
+{%change%} Your `backend/lambda.ts` should look something like this.
 
-```js
+```ts
 export async function handler(event) {
   return {
     statusCode: 200,
@@ -109,7 +105,7 @@ export async function handler(event) {
 
 Now let's setup [Datadog](https://www.datadoghq.com/) to monitor our API. Make sure [Datadog](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=roledelegation#setup) has been configured with your AWS account.
 
-{%change%} Run the following in the project root.
+{%change%} Run the following in the `backend/` directory.
 
 ```bash
 $ npm install --save-dev datadog-cdk-constructs-v2
@@ -129,26 +125,26 @@ Note that, this file should not be committed to Git. If you are deploying the ap
 
 Next, you'll need to import it into the stack and pass in the functions you want monitored.
 
-{%change%} Add the following above the `this.addOutputs` line in `stacks/MyStack.js`.
+{%change%} Add the following above the `stack.addOutputs` line in `stacks/MyStack.ts`.
 
-```js
+```ts
 // Configure Datadog only in prod
-if (!scope.local) {
+if (!app.local) {
   // Configure Datadog
-  const datadog = new Datadog(this, "Datadog", {
+  const datadog = new Datadog(stack, "Datadog", {
     nodeLayerVersion: 65,
     extensionLayerVersion: 13,
     apiKey: process.env.DATADOG_API_KEY,
   });
 
   // Monitor all functions in the stack
-  datadog.addLambdaFunctions(this.getAllFunctions());
+  datadog.addLambdaFunctions(stack.getAllFunctions());
 }
 ```
 
 {%change%} Also make sure to include the Datadog construct.
 
-```js
+```ts
 import { Datadog } from "datadog-cdk-constructs-v2";
 ```
 
@@ -159,7 +155,7 @@ Note that [`getAllFunctions`]({{ site.docs_url }}/constructs/Stack#getallfunctio
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the app for our users.
@@ -197,8 +193,8 @@ Now head over to your Datadog dashboard to start exploring key performance metri
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npx sst remove
-$ npx sst remove --stage prod
+$ npm run remove
+$ npm run remove --stage prod
 ```
 
 ## Conclusion

@@ -5,8 +5,8 @@ short_title: TypeScript REST API
 date: 2021-02-04 00:00:00
 lang: en
 index: 3
-type: api
-description: In this example we will look at how to create a serverless REST API on AWS with TypeScript using Serverless Stack (SST). We'll be using the sst.Api construct to define the routes of our API.
+# type: api
+description: In this example we will look at how to create a serverless REST API on AWS with TypeScript using Serverless Stack (SST). We'll be using the Api construct to define the routes of our API.
 short_desc: Building a REST API with TypeScript.
 repo: rest-api-ts
 ref: how-to-create-a-rest-api-in-typescript-with-serverless
@@ -26,7 +26,7 @@ In this example we'll look at how to create a serverless REST API with TypeScrip
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest --language typescript rest-api-ts
+$ npm init sst -- typescript-starter rest-api-ts
 $ cd rest-api-ts
 ```
 
@@ -48,9 +48,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## Setting up our routes
 
@@ -66,7 +66,7 @@ export default class MyStack extends sst.Stack {
     super(scope, id, props);
 
     // Create the HTTP API
-    const api = new sst.Api(this, "Api", {
+    const api = new Api(stack, "Api", {
       routes: {
         "GET /notes": "src/list.main",
         "GET /notes/{id}": "src/get.main",
@@ -75,14 +75,14 @@ export default class MyStack extends sst.Stack {
     });
 
     // Show the API endpoint in the output
-    this.addOutputs({
+    stack.addOutputs({
       ApiEndpoint: api.url,
     });
   }
 }
 ```
 
-We are creating an API here using the [`sst.Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding three routes to it.
+We are creating an API here using the [`Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding three routes to it.
 
 ```
 GET /notes
@@ -219,7 +219,7 @@ Now let's test our new API.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -303,7 +303,7 @@ You should see your list of notes in a more readable format.
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the app for our users.
@@ -323,7 +323,7 @@ Stack prod-rest-api-ts-my-stack
 Run the below command to open the SST Console in **prod** stage to test the production endpoint.
 
 ```bash
-npx sst console --stage prod
+npm run console --stage prod
 ```
 
 Go to the **API** explorer and click **Send** button of the `GET /notes` route, to send a `GET` request.
@@ -335,8 +335,8 @@ Go to the **API** explorer and click **Send** button of the `GET /notes` route, 
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npx sst remove
-$ npx sst remove --stage prod
+$ npm run remove
+$ npm run remove --stage prod
 ```
 
 ## Conclusion

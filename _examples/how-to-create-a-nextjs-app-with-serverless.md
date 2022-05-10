@@ -46,7 +46,7 @@ Here's what we'll be covering in this example:
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
 ## Create an SST app
@@ -54,7 +54,7 @@ Here's what we'll be covering in this example:
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest nextjs-app
+$ npm init sst -- typescript-starter nextjs-app
 $ cd nextjs-app
 ```
 
@@ -64,7 +64,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 {
   "name": "nextjs-app",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -78,23 +78,24 @@ Our app is made up of a database, a Next.js app, and an API within the Next.js a
 
 We'll be using [Amazon DynamoDB](https://aws.amazon.com/dynamodb/); a reliable and highly-performant NoSQL database that can be configured as a true serverless database. Meaning that it'll scale up and down automatically. And you won't get charged if you are not using it.
 
-{%change%} Replace the `stacks/MyStack.js` with the following.
+{%change%} Replace the `stacks/MyStack.ts` with the following.
 
-```js
-import * as sst from "@serverless-stack/resources";
+```ts
+import {
+  Api,
+  ReactStaticSite,
+  StackContext,
+  Table,
+} from "@serverless-stack/resources";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
-
-    // Create the table
-    const table = new sst.Table(this, "Counter", {
-      fields: {
-        counter: sst.TableFieldType.STRING,
-      },
-      primaryIndex: { partitionKey: "counter" },
-    });
-  }
+export function MyStack({ stack, app }: StackContext) {
+  // Create the table
+  const table = new Table(stack, "Counter", {
+    fields: {
+      counter: "string",
+    },
+    primaryIndex: { partitionKey: "counter" },
+  });
 }
 ```
 
@@ -120,15 +121,15 @@ This sets up our Next.js app in the `frontend/` directory.
 
 Now let's configure SST to deploy our Next.js app to AWS. To do so, we'll be using the SST [`NextjsSite`]({{ site.docs_url }}/constructs/NextjsSite) construct.
 
-{%change%} Add the following in `stacks/MyStack.js` below our `sst.Table` definition.
+{%change%} Add the following in `stacks/MyStack.ts` below our `Table` definition.
 
-```js
+```ts
 // Create a Next.js site
-const site = new sst.NextjsSite(this, "Site", {
+const site = new NextjsSite(stack, "Site", {
   path: "frontend",
   environment: {
     // Pass the table details to our app
-    REGION: scope.region,
+    REGION: app.region,
     TABLE_NAME: table.tableName,
   },
 });
@@ -137,7 +138,7 @@ const site = new sst.NextjsSite(this, "Site", {
 site.attachPermissions([table]);
 
 // Show the site URL in the output
-this.addOutputs({
+stack.addOutputs({
   URL: site.url,
 });
 ```
@@ -303,7 +304,7 @@ SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-develop
 {%change%} Run the following in your project root.
 
 ```bash
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -357,10 +358,10 @@ Note, the DynamoDB explorer allows you to query the DynamoDB tables in the Table
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
-This allows us to separate our environments, so when we are working in our local environment, it doesn't break the app for our users. You can stop the `npx sst start` command that we had previously run.
+This allows us to separate our environments, so when we are working in our local environment, it doesn't break the app for our users. You can stop the `npm start` command that we had previously run.
 
 Once deployed, you should see something like this.
 
@@ -383,8 +384,8 @@ If you head over to the `URL` in your browser, you should see your new Next.js a
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npx sst remove
-$ npx sst remove --stage prod
+$ npm run remove
+$ npm run remove --stage prod
 ```
 
 ---

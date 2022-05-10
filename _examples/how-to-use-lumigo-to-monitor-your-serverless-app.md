@@ -18,7 +18,7 @@ In this example we will look at how to use [Lumigo](https://lumigo.io/) to monit
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 - A [Lumigo account](https://platform.lumigo.io/signup) and that's [configured with your AWS account](https://platform.lumigo.io/wizard)
 
@@ -33,7 +33,7 @@ Let's look at how to set this up.
 {%change%} Start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest lumigo
+$ npm init sst -- typescript-starter lumigo
 $ cd lumigo
 ```
 
@@ -43,7 +43,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 {
   "name": "lumigo",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -55,9 +55,9 @@ An SST app is made up of a couple of parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## Create our infrastructure
 
@@ -67,35 +67,32 @@ Our app is going to be a simple API that returns a _Hello World_ response.
 
 Let's add the API.
 
-{%change%} Add this in `stacks/MyStack.js`.
+{%change%} Add this in `stacks/MyStack.ts`.
 
-```js
-import * as sst from "@serverless-stack/resources";
+```ts
+import { Api, StackContext } from "@serverless-stack/resources";
+import * as cdk from "aws-cdk-lib";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
+export function MyStack({ stack, app }: StackContext) {
+  // Create a HTTP API
+  const api = new Api(stack, "Api", {
+    routes: {
+      "GET /": "lambda.handler",
+    },
+  });
 
-    // Create a HTTP API
-    const api = new sst.Api(this, "Api", {
-      routes: {
-        "GET /": "src/lambda.handler",
-      },
-    });
-
-    // Show the endpoint in the output
-    this.addOutputs({
-      ApiEndpoint: api.url,
-    });
-  }
+  // Show the endpoint in the output
+  stack.addOutputs({
+    ApiEndpoint: api.url,
+  });
 }
 ```
 
-We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `src/lambda.js` will get invoked.
+We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `backend/lambda.ts` will get invoked.
 
-{%change%} Your `src/lambda.js` should look something like this.
+{%change%} Your `backend/lambda.ts` should look something like this.
 
-```js
+```ts
 export async function handler(event) {
   return {
     statusCode: 200,
@@ -109,43 +106,22 @@ export async function handler(event) {
 
 Now let's setup [Lumigo](https://lumigo.io/) to monitor our API. Make sure [Lumigo has been configured with your AWS account](https://platform.lumigo.io/wizard) .
 
-To enable Lambda monitoring for a function, add a `lumigo:auto-trace` tag and set it to `true`
+To enable Lambda monitoring for a function, add a `lumigo:auto-trace` tag and set it to `true`.
 
-{%change%} Add the following in `stacks/MyStack.js`.
+{%change%} Add the following above `stack.addOutputs` in `stacks/MyStack.ts`.
 
-```js
-import * as sst from "@serverless-stack/resources";
-import * as cdk from "aws-cdk-lib";
-
-export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
-
-    // Create a HTTP API
-    const api = new sst.Api(this, "Api", {
-      routes: {
-        "GET /": "src/lambda.handler",
-      },
-    });
-
-    // Enable auto trace only in prod
-    if (!scope.local)
-      cdk.Tags.of(api.getFunction("GET /")).add("lumigo:auto-trace", "true");
-
-    // Show the endpoint in the output
-    this.addOutputs({
-      ApiEndpoint: api.url,
-    });
-  }
-}
+```ts
+// Enable auto trace only in prod
+if (!app.local)
+  cdk.Tags.of(api.getFunction("GET /")).add("lumigo:auto-trace", "true");
 ```
 
 To monitor all the functions in a stack, you can use the [Stack]({{ site.docs_url }}/constructs/Stack) construct's `getAllFunctions` method and do the following at the bottom of your stack definition like below
 
-```js
-this.getAllFunctions().forEach((fn) =>
-  cdk.Tags.of(fn).add("lumigo:auto-trace", "true")
-);
+```ts
+stack
+  .getAllFunctions()
+  .forEach((fn) => cdk.Tags.of(fn).add("lumigo:auto-trace", "true"));
 ```
 
 ## Deploying to prod
@@ -153,7 +129,7 @@ this.getAllFunctions().forEach((fn) =>
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the app for our users.
@@ -177,7 +153,7 @@ Let's test our endpoint using the integrated [SST Console](https://console.serve
 Run the below command to start SST console in **prod** stage.
 
 ```bash
-npx sst console --stage prod
+npm run console --stage prod
 ```
 
 Go to the **API** tab and click the **Send** button.
@@ -199,8 +175,8 @@ Now head over to your Lumigo dashboard to start exploring key performance metric
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npx sst remove
-$ npx sst remove --stage prod
+$ npm run remove
+$ npm run remove --stage prod
 ```
 
 ## Conclusion

@@ -6,7 +6,7 @@ date: 2021-06-04 00:00:00
 lang: en
 index: 2
 type: database
-description: In this example we will look at how to use MongoDB Atlas in your serverless app on AWS using Serverless Stack (SST). We'll be using the sst.Api construct to create a simple API that gets a list of users.
+description: In this example we will look at how to use MongoDB Atlas in your serverless app on AWS using Serverless Stack (SST). We'll be using the Api construct to create a simple API that gets a list of users.
 short_desc: Using MongoDB Atlas in a serverless API.
 repo: rest-api-mongodb
 ref: how-to-use-mongodb-in-your-serverless-app
@@ -19,7 +19,7 @@ In this example we will look at how to use [MongoDB Atlas](https://www.mongodb.c
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
 ## Create an SST app
@@ -27,7 +27,7 @@ In this example we will look at how to use [MongoDB Atlas](https://www.mongodb.c
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest rest-api-mongodb
+$ npm init sst -- typescript-starter rest-api-mongodb
 $ cd rest-api-mongodb
 ```
 
@@ -37,7 +37,7 @@ By default our app will be deployed to an environment (or stage) called `dev` an
 {
   "name": "rest-api-mongodb",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -49,40 +49,38 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## Adding the API
 
 First let's create the API endpoint and connect it to a Lambda function. We'll be using this to query our MongoDB database.
 
-{%change%} Replace the `stacks/MyStack.js` with the following.
+{%change%} Replace the `stacks/MyStack.ts` with the following.
 
-```js
-import * as sst from "@serverless-stack/resources";
+```ts
+import { Api, StackContext } from "@serverless-stack/resources";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
-
-    // Create a HTTP API
-    const api = new sst.Api(this, "Api", {
-      defaultFunctionProps: {
+export function MyStack({ stack }: StackContext) {
+  // Create a HTTP API
+  const api = new Api(stack, "Api", {
+    defaults: {
+      function: {
         environment: {
           MONGODB_URI: process.env.MONGODB_URI,
         },
       },
-      routes: {
-        "GET /": "src/lambda.handler",
-      },
-    });
+    },
+    routes: {
+      "GET /": "lambda.handler",
+    },
+  });
 
-    // Show the endpoint in the output
-    this.addOutputs({
-      ApiEndpoint: api.url,
-    });
-  }
+  // Show the endpoint in the output
+  stack.addOutputs({
+    ApiEndpoint: api.url,
+  });
 }
 ```
 
@@ -164,9 +162,9 @@ We also want to make sure that this file is not committed to Git.
 
 We are now ready to add the function code to query our newly created MongoDB database.
 
-{%change%} Replace `src/lambda.js` with the following.
+{%change%} Replace `backend/lambda.ts` with the following.
 
-```js
+```ts
 import * as mongodb from "mongodb";
 
 const MongoClient = mongodb.MongoClient;
@@ -216,7 +214,7 @@ The `handler` function should be pretty straightforward here. We connect to our 
 
 The line of note is:
 
-```js
+```ts
 context.callbackWaitsForEmptyEventLoop = false;
 ```
 
@@ -235,7 +233,7 @@ We are now ready to test our API!
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -276,15 +274,15 @@ You should see the list of users as a JSON string.
 
 Now let's make a quick change to our database query.
 
-{%change%} Replace the following line in `src/lambda.js`.
+{%change%} Replace the following line in `backend/lambda.ts`.
 
-```js
+```ts
 const users = await db.collection("users").find({}).toArray();
 ```
 
 {%change%} With:
 
-```js
+```ts
 const users = await db.collection("users").find({}).limit(1).toArray();
 ```
 
@@ -297,7 +295,7 @@ This will limit the number of users to 1.
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the app for our users.
@@ -317,7 +315,7 @@ Stack prod-rest-api-mongodb-my-stack
 Run the below command to open the SST Console in **prod** stage to test the production endpoint.
 
 ```bash
-npx sst console --stage prod
+npm run console --stage prod
 ```
 
 Go to the **API** explorer and click **Send** button of the `GET /notes` route, to send a `GET` request.
@@ -329,8 +327,8 @@ Go to the **API** explorer and click **Send** button of the `GET /notes` route, 
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npx sst remove
-$ npx sst remove --stage prod
+$ npm run remove
+$ npm run remove --stage prod
 ```
 
 ## Conclusion
