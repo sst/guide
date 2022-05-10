@@ -7,9 +7,9 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
 
   <div class="header-wrapper">
 
-    <a class="site-announcement" href="{% link _posts/2021-07-23-serverless-stack-raises-1m-to-make-it-easy-to-build-serverless-apps.md %}">
+    <a class="site-announcement" href="{% link _posts/2022-05-05-announcing-sst-1-0-conf.md %}">
       <span class="new">New</span>
-      <span class="copy">We raised $1M to make it easy to build serverless apps</span>
+      <span class="copy">Announcing our first-ever conference &mdash; SST 1.0 Conf</span>
       <i class="fa fa-angle-right" aria-hidden="true"></i>
     </a>
     <div class="site-description">
