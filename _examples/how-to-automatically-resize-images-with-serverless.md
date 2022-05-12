@@ -76,7 +76,7 @@ export function MyStack({ stack }: StackContext) {
     notifications: {
       resize: {
         function: {
-          handler: "resize.main",
+          handler: "functions/resize.handler",
           bundle: {
             externalModules: ["sharp"],
           },
@@ -125,7 +125,7 @@ Unzip that into the `layers/sharp` directory that we just created. Make sure tha
 
 Now in our function, we'll be handling resizing an image once it's uploaded.
 
-{%change%} Add a new file at `backend/resize.ts` with the following.
+{%change%} Add a new file at `backend/functions/resize.ts` with the following.
 
 ```ts
 import AWS from "aws-sdk";
@@ -161,7 +161,7 @@ function streamToSharp(width) {
   return sharp().resize(width);
 }
 
-export async function main(event) {
+export async function handler(event) {
   const s3Record = event.Records[0].s3;
 
   // Grab the filename and bucket name
@@ -198,7 +198,7 @@ export async function main(event) {
 
 We are doing a few things here. Let's go over them in detail.
 
-1. In the `main` function, we start by grabbing the `Key` or filename of the file that's been uploaded. We also get the `Bucket` or name of the bucket that it was uploaded to.
+1. In the `handler` function, we start by grabbing the `Key` or filename of the file that's been uploaded. We also get the `Bucket` or name of the bucket that it was uploaded to.
 2. Check if the file has already been resized, by looking at the filename and if it starts with the dimensions. If it has, then we quit the function.
 3. Generate the new filename with the dimensions.
 4. Create a stream to read the file from S3, another to resize the image, and finally upload it back to S3. We use streams because really large files might hit the limit for what can be downloaded on to the Lambda function.
@@ -206,7 +206,7 @@ We are doing a few things here. Let's go over them in detail.
 
 Now let's install the npm packages we are using here.
 
-{%change%} Run this from the root.
+{%change%} Run this command in the `backend/` folder.
 
 ```bash
 $ npm install sharp aws-sdk
@@ -262,7 +262,7 @@ Now refresh your console to see the resized image.
 
 Let's try making a quick change.
 
-{%change%} Change the `width` in your `backend/resize.ts`.
+{%change%} Change the `width` in your `backend/functions/resize.ts`.
 
 ```bash
 const width = 100;

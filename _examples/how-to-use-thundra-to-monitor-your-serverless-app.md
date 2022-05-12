@@ -76,7 +76,7 @@ export function MyStack({ stack, app }: StackContext) {
   // Create a HTTP API
   const api = new Api(stack, "Api", {
     routes: {
-      "GET /": "lambda.handler",
+      "GET /": "functions/lambda.handler",
     },
   });
 
@@ -87,9 +87,9 @@ export function MyStack({ stack, app }: StackContext) {
 }
 ```
 
-We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `backend/lambda.ts` will get invoked.
+We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `backend/functions/lambda.ts` will get invoked.
 
-{%change%} Your `backend/lambda.ts` should look something like this.
+{%change%} Your `backend/functions/lambda.ts` should look something like this.
 
 ```ts
 export async function handler(event) {
@@ -132,13 +132,13 @@ You can then set the layer for all the functions in your stack using the [`addDe
 
 ```ts
 // Configure thundra to only prod
-if (!scope.local) {
+if (!app.local) {
   const thundraAWSAccountNo = 269863060030;
   const thundraNodeLayerVersion = 107; // Latest version at time of writing
   const thundraLayer = LayerVersion.fromLayerVersionArn(
     this,
     "ThundraLayer",
-    `arn:aws:lambda:${scope.region}:${thundraAWSAccountNo}:layer:thundra-lambda-node-layer:${thundraNodeLayerVersion}`
+    `arn:aws:lambda:${app.region}:${thundraAWSAccountNo}:layer:thundra-lambda-node-layer:${thundraNodeLayerVersion}`
   );
   stack.addDefaultFunctionLayers([thundraLayer]);
 
@@ -211,7 +211,7 @@ To enable TTD in your SST app, follow the below steps.
 
 If you use SST and your code is bundled, you can use `thundra-esbuild-plugin` to activate TTD (Time-Travel Debugging).
 
-Install the package by running below command.
+Install the package by running below command in the `backend/` folder.
 
 ```bash
 npm install --save-dev @thundra/esbuild-plugin
@@ -241,7 +241,7 @@ And then in `stacks/MyStack.ts` add the below code under the `defaults` in `Api`
 ```ts
 const api = new Api(stack, "Api", {
   routes: {
-    "GET /": "lambda.handler",
+    "GET /": "functions/lambda.handler",
   },
 });
 ```
@@ -260,7 +260,7 @@ const api = new Api(stack, "Api", {
     },
   },
   routes: {
-    "GET /": "lambda.handler",
+    "GET /": "functions/lambda.handler",
   },
 });
 ```

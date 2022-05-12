@@ -67,53 +67,48 @@ Let's start by defining our AppSync API.
 {%change%} Replace the `stacks/MyStack.ts` with the following.
 
 ```ts
-import * as sst from "@serverless-stack/resources";
+import { StackContext, Table, AppSyncApi } from "@serverless-stack/resources";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope: sst.App, id: string, props?: sst.StackProps) {
-    super(scope, id, props);
+export function MyStack({ stack }: StackContext) {
+  // Create a notes table
+  const notesTable = new Table(stack, "Notes", {
+    fields: {
+      id: "string",
+    },
+    primaryIndex: { partitionKey: "id" },
+  });
 
-    // Create a notes table
-    const notesTable = new Table(stack, "Notes", {
-      fields: {
-        id: TableFieldType.STRING,
-      },
-      primaryIndex: { partitionKey: "id" },
-    });
-
-    // Create the AppSync GraphQL API
-    const api = new AppSyncApi(stack, "AppSyncApi", {
-      graphqlApi: {
-        schema: "graphql/schema.graphql",
-      },
-      defaultFunctionProps: {
-        // Pass the table name to the function
+  // Create the AppSync GraphQL API
+  const api = new AppSyncApi(stack, "AppSyncApi", {
+    schema: "backend/graphql/schema.graphql",
+    defaults: {
+      function: {
         environment: {
-          NOTES_TABLE: notestable.tableName,
+          NOTES_TABLE: notesTable.tableName,
         },
       },
-      dataSources: {
-        notes: "src/main.handler",
-      },
-      resolvers: {
-        "Query    listNotes": "notes",
-        "Query    getNoteById": "notes",
-        "Mutation createNote": "notes",
-        "Mutation updateNote": "notes",
-        "Mutation deleteNote": "notes",
-      },
-    });
+    },
+    dataSources: {
+      notes: "functions/lambda.handler",
+    },
+    resolvers: {
+      "Query    listNotes": "notes",
+      "Query    getNoteById": "notes",
+      "Mutation createNote": "notes",
+      "Mutation updateNote": "notes",
+      "Mutation deleteNote": "notes",
+    },
+  });
 
-    // Enable the AppSync API to access the DynamoDB table
-    api.attachPermissions([notesTable]);
+  // Enable the AppSync API to access the DynamoDB table
+  api.attachPermissions([notesTable]);
 
-    // Show the AppSync API Id and API Key in the output
-    stack.addOutputs({
-      ApiId: api.graphqlApi.apiId,
-      ApiKey: api.graphqlApi.apiKey,
-      APiUrl: api.graphqlApi.graphqlUrl,
-    });
-  }
+  // Show the AppSync API Id and API Key in the output
+  stack.addOutputs({
+    ApiId: api.apiId,
+    ApiKey: api.cdk.graphqlApi.apiKey,
+    APiUrl: api.url,
+  });
 }
 ```
 
@@ -123,7 +118,7 @@ Finally, we allow our API to access our table.
 
 ## Define the GraphQL schema
 
-{%change%} Add the following to `graphql/schema.graphql`.
+{%change%} Add the following to `backend/graphql/schema.graphql`.
 
 ```graphql
 type Note {
@@ -155,7 +150,7 @@ type Mutation {
 
 Let's also add a type for our note object.
 
-{%change%} Add the following to a new file in `src/Note.ts`.
+{%change%} Add the following to a new file in `backend/Note.ts`.
 
 ```ts
 type Note = {
@@ -170,7 +165,7 @@ export default Note;
 
 To start with, let's create the Lambda function that'll be our AppSync data source.
 
-{%change%} Create a `src/main.ts` with the following.
+{%change%} Replace `backend/functions/lambda.ts` with the following.
 
 ```ts
 import Note from "./Note";
@@ -216,7 +211,7 @@ Now let's implement our resolvers.
 
 Starting with the one that'll create a note.
 
-{%change%} Add a file to `src/createNote.ts`.
+{%change%} Add a file to `backend/createNote.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -238,7 +233,7 @@ export default async function createNote(note: Note): Promise<Note> {
 
 Here, we are storing the given note in our DynamoDB table.
 
-{%change%} Let's install the `aws-sdk` package that we are using.
+{%change%} Let's install the `aws-sdk` package in the `backend/` folder package that we are using.
 
 ```bash
 $ npm install aws-sdk
@@ -248,7 +243,7 @@ $ npm install aws-sdk
 
 Next, let's write the function that'll fetch all our notes.
 
-{%change%} Add the following to `src/listNotes.ts`.
+{%change%} Add the following to `backend/listNotes.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -274,7 +269,7 @@ Here we are getting all the notes from our table.
 
 We'll do something similar for the function that gets a single note.
 
-{%change%} Create a `src/getNoteById.ts`.
+{%change%} Create a `backend/getNoteById.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -302,7 +297,7 @@ We are getting the note with the id that's passed in.
 
 Now let's update our notes.
 
-{%change%} Add a `src/updateNote.ts` with:
+{%change%} Add a `backend/updateNote.ts` with:
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -331,7 +326,7 @@ We are using the id and the content of the note that's passed in to update a not
 
 To complete all the operations, let's delete the note.
 
-{%change%} Add this to `src/deleteNote.ts`.
+{%change%} Add this to `backend/deleteNote.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -351,6 +346,12 @@ export default async function deleteNote(noteId: string): Promise<string> {
 ```
 
 Note that, we are purposely disabling the delete query for now. We'll come back to this later.
+
+{%change%} Let's install the `aws-sdk` package in the `backend/` folder.
+
+```bash
+$ npm install aws-sdk
+```
 
 Let's test what we've created so far!
 
@@ -393,20 +394,6 @@ Let's test our endpoint with the [SST Console](https://console.serverless-stack.
 Go to the **GraphQL** tab and you should see the GraphQL Playground in action.
 
 Note, The GraphQL explorer lets you query GraphQL endpoints created with the GraphQLApi and AppSyncApi constructs in your app.
-
-Copy the `ApiUrl` from the terminal and replace the playground URL.
-
-![GraphQL console replace playground url.png](/assets/examples/graphql-appsync/graphql-console-replace-playground-url.png)
-
-Next, click on the **HTTP HEADERS** tab at bottom and paste the below code.
-
-```ts
-{
-  "x-api-key": "da2-3oknz5th4nbj5oobjz4jwid62q" // replace with your API key value from terminal
-}
-```
-
-![GraphQL console add headers.png](/assets/examples/graphql-appsync/graphql-console-add-headers.png)
 
 Let's start by creating a note. Paste the below mutation in the left part of the playground.
 
@@ -480,7 +467,7 @@ You'll notice a couple of things. Firstly, the note we created is still there. T
 
 ## Making changes
 
-{%change%} Let's fix our `src/deleteNote.ts` by un-commenting the query.
+{%change%} Let's fix our `backend/deleteNote.ts` by un-commenting the query.
 
 ```ts
 await dynamoDb.delete(params).promise();

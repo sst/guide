@@ -75,7 +75,7 @@ export function MyStack({ stack }: StackContext) {
     routes: {
       "GET /": {
         function: {
-          handler: "lambda.handler",
+          handler: "functions/lambda.handler",
           // Increase the timeout for generating screenshots
           timeout: 15,
           // Load Chrome in a Layer
@@ -104,7 +104,7 @@ Finally, we output the endpoint of our newly created API.
 
 Now in our function, we'll be handling taking a screenshot of a given webpage.
 
-{%change%} Replace `backend/lambda.ts` with the following.
+{%change%} Replace `backend/functions/lambda.ts` with the following.
 
 ```ts
 import chrome from "chrome-aws-lambda";
@@ -146,7 +146,7 @@ First, we grab the webpage URL and dimensions for the screenshot from the query 
 
 Now let's install the npm packages we need.
 
-{%change%} Run this from the root.
+{%change%} Run the below command in the `backend/` folder.
 
 ```bash
 $ npm install puppeteer puppeteer-core chrome-aws-lambda
@@ -196,7 +196,7 @@ You should see `Screenshot taken` being printed out.
 
 Now let's make a change to our function so that we return the screenshot directly as an image.
 
-{%change%} Replace the following lines in `backend/lambda.ts`.
+{%change%} Replace the following lines in `backend/functions/lambda.ts`.
 
 ```ts
 // Take the screenshot

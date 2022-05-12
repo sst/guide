@@ -167,7 +167,7 @@ export function MyStack({ stack }: StackContext) {
       },
     },
     routes: {
-      "POST /": "lambda.handler",
+      "POST /": "functions/lambda.handler",
     },
   });
 
@@ -178,7 +178,7 @@ export function MyStack({ stack }: StackContext) {
 }
 ```
 
-Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `main` in `backend/lambda.ts` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `backend/functions/lambda.ts` will get invoked.
 
 We also pass in the credentials we created to our API through environment variables.
 
@@ -186,13 +186,13 @@ We also pass in the credentials we created to our API through environment variab
 
 Now in our function, we'll start by reading from our PlanetScale table.
 
-To access PlanetScale database we'll be using a package `planetscale-node`, install it the by running below command in the root.
+To access PlanetScale database we'll be using a package `planetscale-node`, install it the by running below command in the `backend/` folder.
 
 ```bash
 npm install planetscale-node
 ```
 
-{%change%} Now replace `backend/lambda.ts` with the following.
+{%change%} Now replace `backend/functions/lambda.ts` with the following.
 
 ```ts
 import { PSDB } from "planetscale-node";
@@ -263,7 +263,7 @@ You should see a `0` in the response body.
 
 Now let's update our table with the hits.
 
-{%change%} Add this above the query statement in `backend/lambda.ts`.
+{%change%} Add this above the query statement in `backend/functions/lambda.ts`.
 
 ```ts
 // increment tally by 1

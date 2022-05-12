@@ -73,7 +73,7 @@ export function MyStack({ stack }: StackContext) {
   // Create a HTTP API
   const api = new Api(stack, "Api", {
     routes: {
-      "POST /": "lambda.handler",
+      "POST /": "functions/lambda.handler",
     },
   });
 
@@ -84,9 +84,9 @@ export function MyStack({ stack }: StackContext) {
 }
 ```
 
-We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `backend/lambda.ts` will get invoked.
+We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `backend/functions/lambda.ts` will get invoked.
 
-{%change%} Replace the code in `backend/lambda.ts` with:
+{%change%} Replace the code in `backend/functions/lambda.ts` with:
 
 ```ts
 export async function handler(event) {
@@ -172,7 +172,7 @@ Let's understand what the above packages are.
 
 ### Adding request validation
 
-{%change%} Replace `backend/lambda.ts` with the following.
+{%change%} Replace `backend/functions/lambda.ts` with the following.
 
 ```ts
 import middy from "@middy/core";
@@ -230,7 +230,7 @@ Great! The server throws a `Bad request` error to let us know that something is 
 
 While we are here, let's add response validation as well.
 
-{%change%} Replace `backend/lambda.ts` with this:
+{%change%} Replace `backend/functions/lambda.ts` with this:
 
 ```ts
 import middy from "@middy/core";

@@ -75,7 +75,7 @@ export function MyStack({ stack, app }: StackContext) {
   // Create a HTTP API
   const api = new Api(stack, "Api", {
     routes: {
-      "GET /": "lambda.handler",
+      "GET /": "functions/lambda.handler",
     },
   });
 
@@ -86,9 +86,9 @@ export function MyStack({ stack, app }: StackContext) {
 }
 ```
 
-We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `backend/lambda.ts` will get invoked.
+We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `backend/functions/lambda.ts` will get invoked.
 
-{%change%} Your `backend/lambda.ts` should look something like this.
+{%change%} Your `backend/functions/lambda.ts` should look something like this.
 
 ```ts
 export async function handler(event) {
@@ -128,11 +128,11 @@ You can then set the layer for all the functions in your stack using the [`addDe
 
 ```ts
 // Configure Sentry
-if (!scope.local) {
+if (!app.local) {
   const sentry = LayerVersion.fromLayerVersionArn(
     stack,
     "SentryLayer",
-    `arn:aws:lambda:${scope.region}:943013980633:layer:SentryNodeServerlessSDK:35`
+    `arn:aws:lambda:${app.region}:943013980633:layer:SentryNodeServerlessSDK:35`
   );
 
   stack.addDefaultFunctionLayers([sentry]);
@@ -152,7 +152,7 @@ Also, replace the layer ARN with the one that we copied above.
 
 Next, we'll instrument our Lambda functions by wrapping them with the Sentry handler.
 
-{%change%} Replace the code in `backend/lambda.ts` with this.
+{%change%} Replace the code in `backend/functions/lambda.ts` with this.
 
 ```ts
 import Sentry from "@sentry/serverless";

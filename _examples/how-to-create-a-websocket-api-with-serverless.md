@@ -97,9 +97,9 @@ const api = new WebSocketApi(stack, "Api", {
     },
   },
   routes: {
-    $connect: "connect.main",
-    $disconnect: "disconnect.main",
-    sendmessage: "sendMessage.main",
+    $connect: "functions/connect.handler",
+    $disconnect: "functions/disconnect.handler",
+    sendmessage: "functions/sendMessage.handler",
   },
 });
 
@@ -120,14 +120,14 @@ We also pass in the name of our DynamoDB table to our API as an environment vari
 
 Now in our functions, let's first handle the case when a client connects to our WebSocket API.
 
-{%change%} Add the following to `backend/connect.ts`.
+{%change%} Add the following to `backend/functions/connect.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export async function main(event) {
+export async function handler(event) {
   const params = {
     TableName: process.env.tableName,
     Item: {
@@ -143,7 +143,7 @@ export async function main(event) {
 
 Here when a new client connects, we grab the connection id from `event.requestContext.connectionId` and store it in our table.
 
-{%change%} We are using the `aws-sdk`, so let's install it.
+{%change%} We are using the `aws-sdk`, so let's install it in the `backend/` folder.
 
 ```bash
 $ npm install aws-sdk
@@ -153,14 +153,14 @@ $ npm install aws-sdk
 
 Similarly, we'll remove the connection id from the table when a client disconnects.
 
-{%change%} Add the following to `backend/disconnect.ts`.
+{%change%} Add the following to `backend/functions/disconnect.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export async function main(event) {
+export async function handler(event) {
   const params = {
     TableName: process.env.tableName,
     Key: {
@@ -176,10 +176,10 @@ export async function main(event) {
 
 Now before handling the `sendmessage` route, let's do a quick test. We'll leave a placeholder function there for now.
 
-{%change%} Add this to `backend/sendMessage.ts`.
+{%change%} Add this to `backend/functions/sendMessage.ts`.
 
 ```ts
-export async function main(event) {
+export async function handler(event) {
   return { statusCode: 200, body: "Message sent" };
 }
 ```
@@ -240,7 +240,7 @@ You should see a random connection ID created in the table.
 
 Now let's update our function to send messages.
 
-{%change%} Replace your `backend/sendMessage.ts` with:
+{%change%} Replace your `backend/functions/sendMessage.ts` with:
 
 ```ts
 import { DynamoDB, ApiGatewayManagementApi } from "aws-sdk";
@@ -248,7 +248,7 @@ import { DynamoDB, ApiGatewayManagementApi } from "aws-sdk";
 const TableName = process.env.tableName;
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export async function main(event) {
+export async function handler(event) {
   const messageData = JSON.parse(event.body).data;
   const { stage, domainName } = event.requestContext;
 

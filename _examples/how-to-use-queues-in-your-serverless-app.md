@@ -6,7 +6,7 @@ date: 2021-02-08 00:00:00
 lang: en
 index: 2
 type: async
-description: In this example we will look at how to use SQS in your serverless app on AWS using Serverless Stack (SST). We'll be using the Api construct and Queue to create a simple queue system.
+description: In this example we will look at how to use SQS in your serverless app on AWS using Serverless Stack (SST). We'll be using the Api and Queue constructs to create a simple queue system.
 short_desc: A simple queue system with SQS.
 repo: queue
 ref: how-to-use-queues-in-your-serverless-app
@@ -64,7 +64,7 @@ import { StackContext, Queue, Api } from "@serverless-stack/resources";
 export function MyStack({ stack }: StackContext) {
   // Create Queue
   const queue = new Queue(stack, "Queue", {
-    consumer: "consumer.main",
+    consumer: "functions/consumer.handler",
   });
 }
 ```
@@ -89,7 +89,7 @@ const api = new Api(stack, "Api", {
     },
   },
   routes: {
-    "POST /": "lambda.main",
+    "POST /": "functions/lambda.handler",
   },
 });
 
@@ -102,7 +102,7 @@ stack.addOutputs({
 });
 ```
 
-Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `main` in `backend/main.ts` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `backend/functions/lambda.ts` will get invoked.
 
 We also pass in the url of our SQS queue to our API as an environment variable called `queueUrl`. And we allow our API to send messages to the queue we just created.
 
@@ -110,10 +110,10 @@ We also pass in the url of our SQS queue to our API as an environment variable c
 
 We will create two functions, one for handling the API request, and one for the consumer.
 
-{%change%} Replace the `backend/lambda.ts` with the following.
+{%change%} Replace the `backend/functions/lambda.ts` with the following.
 
 ```ts
-export async function main() {
+export async function handler() {
   console.log("Message queued!");
   return {
     statusCode: 200,
@@ -122,10 +122,10 @@ export async function main() {
 }
 ```
 
-{%change%} Add a `backend/consumer.ts`.
+{%change%} Add a `backend/functions/consumer.ts`.
 
 ```ts
-export async function main() {
+export async function handler() {
   console.log("Message processed!");
   return {};
 }
@@ -181,14 +181,14 @@ You should see `Message queued!` logged in the console.
 
 Now let's send a message to our queue.
 
-{%change%} Replace the `backend/lambda.ts` with the following.
+{%change%} Replace the `backend/functions/lambda.ts` with the following.
 
 ```ts
 import AWS from "aws-sdk";
 
 const sqs = new AWS.SQS();
 
-export async function main() {
+export async function handler() {
   // Send a message to queue
   await sqs
     .sendMessage({
@@ -209,7 +209,7 @@ export async function main() {
 
 Here we are getting the queue url from the environment variable, and then sending a message to it.
 
-{%change%} Let's install the `aws-sdk`.
+{%change%} Let's install the `aws-sdk` package in the `backend/` folder.
 
 ```bash
 $ npm install aws-sdk

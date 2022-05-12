@@ -95,7 +95,7 @@ const api = new Api(stack, "Api", {
     },
   },
   routes: {
-    "POST /": "lambda.handler",
+    "POST /": "functions/lambda.handler",
   },
 });
 
@@ -107,7 +107,7 @@ stack.addOutputs({
 });
 ```
 
-Our [API]({{ site.docs_url }}/constructs/Api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `backend/lambda.ts` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/Api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `backend/functions/lambda.ts` will get invoked.
 
 We also pass in the name of our database, the ARN of the database cluster, and the ARN of the secret that'll help us login to our database. An ARN is an identifier that AWS uses. You can [read more about it here]({% link _chapters/what-is-an-arn.md %}).
 
@@ -117,7 +117,7 @@ We then allow our Lambda function to access our database cluster. Finally, we ou
 
 Now in our function, we'll start by reading from our PostgreSQL database.
 
-{%change%} Replace `backend/lambda.ts` with the following.
+{%change%} Replace `backend/functions/lambda.ts` with the following.
 
 ```ts
 import client from "data-api-client";
@@ -146,7 +146,7 @@ We are using the [Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraU
 
 For now we'll get the number of hits from a table called `tblcounter` and return it.
 
-{%change%} Let's install the `data-api-client`.
+{%change%} Let's install the `data-api-client` in the `backend/` folder.
 
 ```bash
 $ npm install data-api-client
@@ -225,7 +225,7 @@ You should see a `0` in the response body.
 
 So let's update our table with the hits.
 
-{%change%} Add this above the `return` statement in `backend/lambda.ts`.
+{%change%} Add this above the `return` statement in `backend/functions/lambda.ts`.
 
 ```ts
 await db.query(`UPDATE tblcounter set tally=${++count} where counter='hits'`);

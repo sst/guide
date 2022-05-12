@@ -64,7 +64,7 @@ import { Cron, StackContext } from "@serverless-stack/resources";
 export function MyStack({ stack }: StackContext) {
   new Cron(stack, "Cron", {
     schedule: "rate(1 minute)",
-    job: "lambda.main",
+    job: "functions/lambda.handler",
   });
 }
 ```
@@ -75,10 +75,10 @@ This creates a serverless cron job using [`Cron`]({{ site.docs_url }}/constructs
 
 Now in our function, we'll print out a message every time the function is run.
 
-{%change%} Replace `backend/lambda.ts` with the following.
+{%change%} Replace `backend/functions/lambda.ts` with the following.
 
 ```ts
-export async function main() {
+export async function handler() {
   console.log("Hi!");
   return {};
 }
@@ -130,18 +130,18 @@ Wait for a couple of minutes and you should see `Hi!` gets printed out every min
 
 Now let's make a call to [MetaWeather](https://www.metaweather.com)'s API and print out the weather in San Francisco.
 
-{%change%} Let's install the `node-fetch`.
+{%change%} Let's install the `node-fetch` in the `backend/` folder.
 
 ```bash
 $ npm install node-fetch
 ```
 
-{%change%} Replace `backend/lambda.ts` with the following.
+{%change%} Replace `backend/functions/lambda.ts` with the following.
 
 ```ts
 import fetch from "node-fetch";
 
-export async function main() {
+export async function handler() {
   const weather = await checkSFWeather();
   console.log(weather.consolidated_weather[0]);
   return {};

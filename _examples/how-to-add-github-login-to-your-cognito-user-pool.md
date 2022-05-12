@@ -6,7 +6,7 @@ date: 2021-02-08 00:00:00
 lang: en
 index: 4
 type: jwt-auth
-description: In this example we will look at how to add GitHub Login to a Cognito User Pool using Serverless Stack (SST). We'll be using the sst.Api and sst.Auth to create an authenticated API.
+description: In this example we will look at how to add GitHub Login to a Cognito User Pool using Serverless Stack (SST). We'll be using the Api and Auth constructs to create an authenticated API.
 short_desc: Authenticating a full-stack serverless app with GitHub.
 repo: api-oauth-github
 ref: how-to-add-github-login-to-your-cognito-user-pool
@@ -18,7 +18,7 @@ In this example, we will look at how to add GitHub Login to Your Cognito User Po
 ## Requirements
 
 - Node.js >= 10.15.1
-- We'll be using Node.js (or ES) in this example but you can also use TypeScript
+- We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 - A [GitHub OAuth App](https://github.com/settings/applications/new)
 
@@ -27,7 +27,7 @@ In this example, we will look at how to add GitHub Login to Your Cognito User Po
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-serverless-stack@latest api-oauth-github
+$ npm init sst -- typescript-starter api-oauth-github
 $ cd api-oauth-github
 ```
 
@@ -37,7 +37,7 @@ By default, our app will be deployed to an environment (or stage) called `dev` a
 {
   "name": "api-oauth-github",
   "region": "us-east-1",
-  "main": "stacks/index.js"
+  "main": "stacks/index.ts"
 }
 ```
 
@@ -49,158 +49,106 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 ## Setting up the Auth
 
-First, let's create a [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to store the user info using the [`Auth`]({{ site.docs_url }}/constructs/Auth) construct
+First, let's create a [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to store the user info using the [`Auth`]({{ site.docs_url }}/constructs/Auth) construct.
 
-{%change%} Add this code below the `super()` method in `stacks/MyStack.js`.
+{%change%} Replace the `stacks/MyStack.ts` with the following.
 
-```js
-// Create auth userpool
-const auth = new sst.Auth(this, "Auth", {
-  cognito: true,
-});
-```
+```ts
+import {
+  StackContext,
+  Api,
+  Auth,
+  ViteStaticSite,
+} from "@serverless-stack/resources";
+import * as cognito from "aws-cdk-lib/aws-cognito";
+import * as apigAuthorizers from "@aws-cdk/aws-apigatewayv2-authorizers-alpha";
 
-This creates a [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html); a user directory that manages users.
-
-## Setting up GitHub OAuth
-
-Now let's add GitHub OAuth for our serverless app, to do so we need to create a [GitHub User Pool OIDC IDP](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html) and link it with the user pool we created above.
-
-{%change%} Create a `.env` file in the root and add your GitHub `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` from your [GitHub OAuth App](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app).
-
-Note, if you haven't created a GitHub OAuth app, follow [this tutorial](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app).
-
-![GitHub API Credentials](/assets/examples/api-oauth-github/github-api-credentials.png)
-
-```js
-GITHUB_CLIENT_ID=<YOUR_GITHUB_CLIENT_ID>
-GITHUB_CLIENT_SECRET=<YOUR_GITHUB_CLIENT_SECRET>
-```
-
-{%change%} Add this below the `sst.Auth` definition in `stacks/MyStack.js`.
-
-```js
-// variable to store API
-let api;
-
-// Create a GitHub OIDC IDP
-const idp = new cognito.CfnUserPoolIdentityProvider(
-  this,
-  "GitHubIdentityProvider",
-  {
-    providerName: "GitHub",
-    providerType: "OIDC",
-    userPoolId: auth.cognitoUserPool.userPoolId,
-    providerDetails: {
-      client_id: process.env.GITHUB_CLIENT_ID,
-      client_secret: process.env.GITHUB_CLIENT_SECRET,
-      attributes_request_method: "GET",
-      oidc_issuer: "https://github.com",
-      authorize_scopes: "openid user",
-      authorize_url: "https://github.com/login/oauth/authorize",
-      // Instead of evaluating `api.url` in place which is undefined at the moment,
-      // Lazy value evaluates it after `api` is defined.
-      // More details here - https://docs.aws.amazon.com/cdk/v2/guide/tokens.html#tokens_lazy
-      token_url: Lazy.string({
-        produce() {
-          return api.url + "/token";
+export function MyStack({ stack, app }: StackContext) {
+  const auth = new Auth(stack, "Auth", {
+    cdk: {
+      userPoolClient: {
+        supportedIdentityProviders: [
+          {
+            name: "GitHub",
+          },
+        ],
+        oAuth: {
+          callbackUrls: [
+            app.stage === "prod"
+              ? "https://my-app.com"
+              : "http://localhost:3000",
+          ],
+          logoutUrls: [
+            app.stage === "prod"
+              ? "https://my-app.com"
+              : "https://localhost:3000",
+          ],
         },
-      }),
-      attributes_url: Lazy.string({
-        produce() {
-          return api.url + "/user";
-        },
-      }),
-      jwks_uri: Lazy.string({
-        produce() {
-          return api.url + "/token";
-        },
-      }),
+      },
     },
-    attributeMapping: {
-      email: "email",
-      name: "name",
-      picture: "avatar_url",
-    },
-  }
-);
+  });
 
-// Create a Cognito User Pool Client with GitHub OIDC IDP
-const cfnUserPoolClient = new cognito.CfnUserPoolClient(
-  this,
-  "CognitoAppClient",
-  {
-    supportedIdentityProviders: ["GitHub"],
-    clientName: "GitHubClient",
-    allowedOAuthFlowsUserPoolClient: true,
-    allowedOAuthFlows: ["code", "implicit"],
-    allowedOAuthScopes: [
-      "openid",
-      "profile",
-      "email",
-      "aws.cognito.signin.user.admin",
-    ],
-    explicitAuthFlows: ["ALLOW_REFRESH_TOKEN_AUTH"],
-    preventUserExistenceErrors: "ENABLED",
-    generateSecret: false,
-    refreshTokenValidity: 1,
-    callbackUrLs: [
-      scope.stage === "prod" ? "production-url" : "http://localhost:3000",
-    ],
-    logoutUrLs: [
-      scope.stage === "prod" ? "production-url" : "http://localhost:3000",
-    ],
-    userPoolId: auth.cognitoUserPool.userPoolId,
-  }
-);
-
-// attach the IDP to the client
-if (idp) {
-  cfnUserPoolClient.node.addDependency(idp);
+  // Show the endpoint in the output
+  stack.addOutputs({
+    api_endpoint: api.url,
+  });
 }
 ```
 
-This creates a GitHub OIDC provider with the given scopes and links the created provider to our user pool and GitHub user’s attributes will be mapped to the User Pool user.
+This creates a [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html); a user directory that manages users. We've configured the User Pool to allow users to login with their GitHub account and added the callback and logout URLs.
 
-Make sure to import the `cognito` package in `stacks/MyStack.js`.
+Let's install the npm packages we are using.
 
-```js
-import * as cognito from "aws-cdk-lib/aws-cognito";
+{%change%} Update the `package.json` in the root.
+
+```json
+...
+"aws-cdk-lib": "2.20.0",
+"@aws-cdk/aws-apigatewayv2-alpha": "2.20.0-alpha.0"
+...
 ```
 
-We are using [Lazy values](https://docs.aws.amazon.com/cdk/v2/guide/tokens.html#tokens_lazy) to load the api url, import it by adding below code.
+You can find the latest CDK versions supported by SST in our [releases](https://github.com/serverless-stack/serverless-stack/releases).
 
-```js
-import { Lazy } from "aws-cdk-lib";
-```
+Note, we haven't yet set up GitHub OAuth with our user pool, we'll do it later.
 
 ## Setting up the API
 
-{%change%} Replace the `sst.Api` definition with the following in `stacks/MyStacks.js`.
+{%change%} Replace the `Api` definition with the following in `stacks/MyStacks.ts`.
 
-```js
+```ts
 // Create a HTTP API
-api = new sst.Api(this, "Api", {
+const api = new Api(stack, "api", {
+  authorizers: {
+    userPool: {
+      type: "user_pool",
+      cdk: {
+        authorizer: new apigAuthorizers.HttpUserPoolAuthorizer(
+          "Authorizer",
+          auth.cdk.userPool,
+          {
+            userPoolClients: [auth.cdk.userPoolClient],
+          }
+        ),
+      },
+    },
+  },
+  defaults: {
+    authorizer: "none",
+  },
   routes: {
-    "GET /public": "src/public.handler",
-    "GET /user": "src/user.handler",
-    "POST /token": "src/token.handler",
+    "GET /public": "functions/public.handler",
+    "GET /user": "functions/user.handler",
+    "POST /token": "functions/token.handler",
     "GET /private": {
-      handler: "src/private.handler",
-      authorizer: new apigAuthorizers.HttpUserPoolAuthorizer(
-        "Authorizer",
-        auth.cognitoUserPool,
-        {
-          userPoolClients: [cfnUserPoolClient],
-        }
-      ),
-      authorizationType: sst.ApiAuthorizationType.JWT,
+      function: "functions/private.handler",
+      authorizer: "userPool",
     },
   },
 });
@@ -209,7 +157,7 @@ api = new sst.Api(this, "Api", {
 auth.attachPermissionsForAuthUsers([api]);
 ```
 
-We are creating an API here using the [`sst.Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding four routes to it.
+We are creating an API here using the [`Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding four routes to it.
 
 ```
 GET /public
@@ -220,29 +168,13 @@ GET /private
 
 The `GET /public` is a public endpoint, The `GET /private` route have the authorization type `JWT`. This means the caller of the API needs to pass in a valid JWT token and the other two routes are proxy functions to handle GitHub OAuth responses.
 
-Let's install the npm packages we are using here.
-
-{%change%} From the project root run the following.
-
-```bash
-$ npx sst add-cdk @aws-cdk/aws-apigatewayv2-authorizers-alpha
-```
-
-The reason we are using the [**add-cdk**]({{ site.docs_url }}/packages/cli#add-cdk-packages) command instead of using an `npm install`, is because of [a known issue with AWS CDK]({{ site.docs_url }}/known-issues). Using mismatched versions of CDK packages can cause some unexpected problems down the road. The `sst add-cdk` command ensures that we install the right version of the package.
-
-Make sure to import the package we just installed,
-
-```js
-import * as apigAuthorizers from "@aws-cdk/aws-apigatewayv2-authorizers-alpha";
-```
-
 ## Adding function code
 
-Let's create four functions, one handling the public route, and the other for the handling GitHub OAuth responses.
+Let's create four functions, one handling the public route, one handling the private route and the other for the handling GitHub OAuth responses.
 
-{%change%} Add a `src/public.js`.
+{%change%} Add a `backend/functions/public.ts`.
 
-```js
+```ts
 export async function handler() {
   return {
     statusCode: 200,
@@ -251,13 +183,24 @@ export async function handler() {
 }
 ```
 
-{%change%} Add a `src/token.js`.
+{%change%} Add a `backend/functions/private.ts`.
+
+```ts
+export async function handler() {
+  return {
+    statusCode: 200,
+    body: "Hello, user!",
+  };
+}
+```
+
+{%change%} Add a `backend/token.ts`.
 
 Requesting data from the token endpoint, it will return the following form: `access_token=xxxxxxxxxxxxxxxxxxxxxxx&token_type=bearer`, which is not a JSON. It should be returning a JSON object for OpenID to understand. The below lambda does exactly that.
 
 The idea for this endpoint is to take the form data sent from AWS Cognito, forward it back to GitHub with the header `accept: application/json` for GitHub API to return back in JSON form instead of **query** form.
 
-```js
+```ts
 import fetch from "node-fetch";
 import parser from "lambda-multipart-parser";
 
@@ -279,21 +222,21 @@ export async function handler(event) {
 }
 ```
 
-Make sure to install the `node-fetch` and `lambda-multipart-parser` package.
+Make sure to install the `node-fetch` and `lambda-multipart-parser` packages.
 
-{%change%} Run the below command in root.
+{%change%} Run the below command in the `backend/` folder.
 
 ```bash
 npm install node-fetch lambda-multipart-parser
 ```
 
-{%change%} Add a `src/user.js`.
+{%change%} Add a `backend/user.ts`.
 
 User info endpoint uses a different authorization scheme: `Authorization: token OAUTH-TOKEN`. But, OpenID will send a `Bearer` scheme so that's we need a proxy to modify it to correct scheme.
 
 The below lambda gets the Bearer token given by Cognito and modify the header to send token authorization scheme to GitHub and adds a **sub** field into the response for Cognito to map the username.
 
-```js
+```ts
 import fetch from "node-fetch";
 
 export async function handler(event) {
@@ -315,15 +258,72 @@ export async function handler(event) {
 }
 ```
 
+## Setting up GitHub OAuth
+
+Now let's add GitHub OAuth for our serverless app, to do so we need to create a [GitHub User Pool OIDC IDP](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html) and link it with the user pool we created above.
+
+{%change%} Create a `.env` file in the root and add your GitHub `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` from your [GitHub OAuth App](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app).
+
+Note, if you haven't created a GitHub OAuth app, follow [this tutorial](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app).
+
+![GitHub API Credentials](/assets/examples/api-oauth-github/github-api-credentials.png)
+
+```ts
+GITHUB_CLIENT_ID=<YOUR_GITHUB_CLIENT_ID>
+GITHUB_CLIENT_SECRET=<YOUR_GITHUB_CLIENT_SECRET>
+```
+
+{%change%} Add this below the `Auth` definition in `stacks/MyStack.ts`.
+
+```ts
+// Throw error if client ID & secret are not provided
+if (!process.env.GITHUB_CLIENT_ID || !process.env.GITHUB_CLIENT_SECRET)
+  throw new Error("Please set GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET");
+
+// Create a GitHub OIDC IDP
+const idp = new cognito.CfnUserPoolIdentityProvider(
+  stack,
+  "GitHubIdentityProvider",
+  {
+    providerName: "GitHub",
+    providerType: "OIDC",
+    userPoolId: auth.userPoolId,
+    providerDetails: {
+      client_id: process.env.GITHUB_CLIENT_ID,
+      client_secret: process.env.GITHUB_CLIENT_SECRET,
+      attributes_request_method: "GET",
+      oidc_issuer: "https://github.com",
+      authorize_scopes: "openid user",
+      authorize_url: "https://github.com/login/oauth/authorize",
+      token_url: api.url + "/token",
+      attributes_url: api.url + "/user",
+      jwks_uri: api.url + "/token",
+    },
+    attributeMapping: {
+      email: "email",
+      name: "name",
+      picture: "avatar_url",
+    },
+  }
+);
+
+// attach the IDP to the client
+if (idp) {
+  auth.cdk.userPoolClient.node.addDependency(idp);
+}
+```
+
+This creates a GitHub OIDC provider with the given scopes and links the created provider to our user pool and GitHub user’s attributes will be mapped to the User Pool user.
+
 Now let's associate a Cognito domain to the user pool, which can be used for sign-up and sign-in webpages.
 
-{%change%} Add below code in `stacks/MyStack.js`.
+{%change%} Add below code in `stacks/MyStack.ts`.
 
-```js
+```ts
 // Create a cognito userpool domain
-const domain = auth.cognitoUserPool.addDomain("AuthDomain", {
+const domain = auth.cdk.userPool.addDomain("AuthDomain", {
   cognitoDomain: {
-    domainPrefix: `${scope.stage}-github-demo-oauth-domain`,
+    domainPrefix: `${app.stage}-github-demo-oauth`,
   },
 });
 ```
@@ -334,28 +334,28 @@ Note, the `domainPrefix` need to be globally unique across all AWS accounts in a
 
 To deploy a React app to AWS, we'll be using the SST [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) construct.
 
-{%change%} Replace the `this.addOutputs` call with the following.
+{%change%} Replace the `stack.addOutputs` call with the following.
 
-```js
+```ts
 // Create a React Static Site
-const site = new sst.ViteStaticSite(this, "Site", {
+const site = new ViteStaticSite(stack, "Site", {
   path: "frontend",
   environment: {
     VITE_APP_COGNITO_DOMAIN: domain.domainName,
-    VITE_APP_STAGE: scope.stage,
+    VITE_APP_STAGE: app.stage,
     VITE_APP_API_URL: api.url,
-    VITE_APP_REGION: scope.region,
-    VITE_APP_USER_POOL_ID: auth.cognitoUserPool.userPoolId,
-    VITE_APP_IDENTITY_POOL_ID: auth.cognitoCfnIdentityPool.ref,
-    VITE_APP_USER_POOL_CLIENT_ID: cfnUserPoolClient.ref,
+    VITE_APP_REGION: app.region,
+    VITE_APP_USER_POOL_ID: auth.userPoolId,
+    VITE_APP_IDENTITY_POOL_ID: auth.cognitoIdentityPoolId,
+    VITE_APP_USER_POOL_CLIENT_ID: auth.userPoolClientId,
   },
 });
 
 // Show the endpoint in the output
-this.addOutputs({
+stack.addOutputs({
   api_endpoint: api.url,
-  auth_client_id: auth.cognitoUserPoolClient.userPoolClientId,
-  auth_domain: domain.domainName,
+  auth_client_id: auth.userPoolClientId,
+  domain: domain.domainName,
   site_url: site.url,
 });
 ```
@@ -408,7 +408,7 @@ We need to update our start script to use this package.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -468,9 +468,9 @@ Run the below command to install AWS Amplify in the `frontend/` directory.
 npm install aws-amplify
 ```
 
-{%change%} Replace `src/main.jsx` with below code.
+{%change%} Replace `frontend/src/main.jsx` with below code.
 
-```js
+```ts
 /* eslint-disable no-undef */
 import React from "react";
 import ReactDOM from "react-dom";
@@ -524,11 +524,11 @@ ReactDOM.render(
 
 ## Adding login UI
 
-{%change%} Replace `src/App.jsx` with below code.
+{%change%} Replace `frontend/src/App.jsx` with below code.
 
 {% raw %}
 
-```jsx
+```tsx
 import React, { useState, useEffect } from "react";
 import { Auth, API } from "aws-amplify";
 
@@ -611,7 +611,7 @@ export default App;
 
 {% endraw %}
 
-{%change%} Replace `src/index.css` with the below styles.
+{%change%} Replace `frontend/src/index.css` with the below styles.
 
 ```css
 body {
@@ -712,7 +712,7 @@ As you can see the private route is only working while we are logged in.
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npx sst deploy --stage prod
+$ npm run deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the app for our users.
@@ -737,13 +737,13 @@ Stack prod-api-oauth-github-my-stack
 Finally, you can remove the resources created in this example using the following command.
 
 ```bash
-$ npx sst remove
+$ npm run remove
 ```
 
 And to remove the prod environment.
 
 ```bash
-$ npx sst remove --stage prod
+$ npm run remove --stage prod
 ```
 
 ## Conclusion

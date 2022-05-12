@@ -6,7 +6,7 @@ date: 2021-02-08 00:00:00
 lang: en
 index: 3
 # type: iam-auth
-description: In this example we will look at how to add Google authentication to a serverless API using Serverless Stack (SST). We'll be using the Api and Auth construct to create an authenticated API.
+description: In this example we will look at how to add Google authentication to a serverless API using Serverless Stack (SST). We'll be using the Api and Auth constructs to create an authenticated API.
 short_desc: Authenticating a serverless API with Google.
 repo: api-auth-google
 ref: how-to-add-google-authentication-to-a-serverless-api
@@ -69,9 +69,9 @@ export function MyStack({ stack }: StackContext) {
       authorizer: "iam",
     },
     routes: {
-      "GET /private": "private.main",
+      "GET /private": "functions/private.handler",
       "GET /public": {
-        function: "public.main",
+        function: "functions/public.handler",
         authorizer: "none",
       },
     },
@@ -131,10 +131,10 @@ We are going to print out the resources that we created for reference.
 
 Let's create two functions, one handling the public route, and the other for the private route.
 
-{%change%} Add a `backend/public.ts`.
+{%change%} Add a `backend/functions/public.ts`.
 
 ```ts
-export async function main() {
+export async function handler() {
   return {
     statusCode: 200,
     body: "Hello stranger!",
@@ -142,10 +142,10 @@ export async function main() {
 }
 ```
 
-{%change%} Add a `backend/private.ts`.
+{%change%} Add a `backend/functions/private.ts`.
 
 ```ts
-export async function main() {
+export async function handler() {
   return {
     statusCode: 200,
     body: "Hello user!",
@@ -289,10 +289,10 @@ The above process might seem fairly tedious. But once we integrate it into our f
 
 Let's make a quick change to our private route and print out the caller's user id.
 
-{%change%} Replace `backend/private.ts` with the following.
+{%change%} Replace `backend/functions/private.ts` with the following.
 
 ```ts
-export async function main(event) {
+export async function handler(event) {
   return {
     statusCode: 200,
     body: `Hello ${event.requestContext.authorizer.iam.cognitoIdentity.identityId}!`,
