@@ -6,7 +6,7 @@ date: 2021-10-15 00:00:00
 lang: en
 index: 3
 type: webapp
-description: In this example we will look at how to use Vue.js with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST) and the SST ViteStaticSite construct to deploy our app to AWS S3 and CloudFront.
+description: In this example we will look at how to use Vue.js with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST) and the ViteStaticSite construct to deploy our app to AWS S3 and CloudFront.
 short_desc: Full-stack Next.js app with a serverless API.
 repo: vue-app
 ref: how-to-create-a-vuejs-app-with-serverless
@@ -111,7 +111,7 @@ const api = new Api(stack, "Api", {
     },
   },
   routes: {
-    "POST /": "lambda.main",
+    "POST /": "functions/lambda.handler",
   },
 });
 
@@ -121,7 +121,7 @@ stack.addOutputs({
 });
 ```
 
-We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `main` in `backend/lambda.ts` will get invoked.
+We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `backend/functions/lambda.ts` will get invoked.
 
 We also pass in the name of our DynamoDB table to our API as an environment variable called `tableName`. And we allow our API to access (read and write) the table instance we just created.
 
@@ -180,14 +180,14 @@ But we'll skip this for now.
 
 Our API is powered by a Lambda function. In the function we'll read from our DynamoDB table.
 
-{%change%} Replace `backend/lambda.ts` with the following.
+{%change%} Replace `backend/functions/lambda.ts` with the following.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export async function main() {
+export async function handler() {
   const getParams = {
     // Get the table name from the environment variable
     TableName: import.meta.env.tableName,
@@ -211,7 +211,7 @@ export async function main() {
 
 We make a `get` call to our DynamoDB table and get the value of a row where the `counter` column has the value `clicks`. Since we haven't written to this column yet, we are going to just return `0`.
 
-{%change%} Let's install the `aws-sdk`.
+{%change%} Let's install the `aws-sdk` package in the `backend/` folder.
 
 ```bash
 $ npm install aws-sdk
@@ -408,7 +408,7 @@ Of course if you click on the button multiple times, the count doesn't change. T
 
 Let's update our table with the clicks.
 
-{%change%} Add this above the `return` statement in `backend/lambda.ts`.
+{%change%} Add this above the `return` statement in `backend/functions/lambda.ts`.
 
 ```ts
 const putParams = {

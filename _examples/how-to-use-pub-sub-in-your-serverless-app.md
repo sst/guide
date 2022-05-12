@@ -6,7 +6,7 @@ date: 2021-02-08 00:00:00
 lang: en
 index: 3
 type: async
-description: In this example we will look at how to use SNS in your serverless app on AWS using Serverless Stack (SST). We'll be using the Api construct and Topic to create a simple checkout system.
+description: In this example we will look at how to use SNS in your serverless app on AWS using Serverless Stack (SST). We'll be using the Api and Topic constructs to create a simple checkout system.
 short_desc: A simple pub/sub system with SNS.
 repo: pub-sub
 ref: how-to-use-pub-sub-in-your-serverless-app
@@ -65,8 +65,8 @@ export function MyStack({ stack }: StackContext) {
   // Create Topic
   const topic = new Topic(stack, "Ordered", {
     subscribers: {
-      receipt: "receipt.main",
-      shipping: "shipping.main",
+      receipt: "functions/receipt.handler",
+      shipping: "functions/shipping.handler",
     },
   });
 ```
@@ -91,7 +91,7 @@ const api = new Api(stack, "Api", {
     },
   },
   routes: {
-    "POST /order": "order.main",
+    "POST /order": "functions/order.handler",
   },
 });
 
@@ -104,7 +104,7 @@ stack.addOutputs({
 });
 ```
 
-Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (`/order`). When we make a `POST` request to this endpoint the Lambda function called `main` in `backend/order.ts` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (`/order`). When we make a `POST` request to this endpoint the Lambda function called `handler` in `backend/functions/order.ts` will get invoked.
 
 We'll also pass in [the arn]({ link \_chapters/what-is-an-arn.md %}) of our SNS topic to our API as an environment variable called `topicArn`. And we allow our API to publish to the topic we just created.
 
@@ -112,10 +112,10 @@ We'll also pass in [the arn]({ link \_chapters/what-is-an-arn.md %}) of our SNS 
 
 We will create three functions, one handling the `/order` API request, and two for the topic subscribers.
 
-{%change%} Add a `backend/order.ts`.
+{%change%} Add a `backend/functions/order.ts`.
 
 ```ts
-export async function main() {
+export async function handler() {
   console.log("Order confirmed!");
   return {
     statusCode: 200,
@@ -124,19 +124,19 @@ export async function main() {
 }
 ```
 
-{%change%} Add a `backend/receipt.ts`.
+{%change%} Add a `backend/functions/receipt.ts`.
 
 ```ts
-export async function main() {
+export async function handler() {
   console.log("Receipt sent!");
   return {};
 }
 ```
 
-{%change%} Add a `backend/shipping.ts`.
+{%change%} Add a `backend/functions/shipping.ts`.
 
 ```ts
-export async function main() {
+export async function handler() {
   console.log("Item shipped!");
   return {};
 }
@@ -192,14 +192,14 @@ You should see `Order confirmed!` logged in the console.
 
 Now let's publish a message to our topic.
 
-{%change%} Replace the `backend/order.ts` with the following.
+{%change%} Replace the `backend/functions/order.ts` with the following.
 
 ```ts
 import AWS from "aws-sdk";
 
 const sns = new AWS.SNS();
 
-export async function main() {
+export async function handler() {
   // Publish a message to topic
   await sns
     .publish({
@@ -221,7 +221,7 @@ export async function main() {
 
 Here we are getting the topic arn from the environment variable, and then publishing a message to it.
 
-{%change%} Let's install the `aws-sdk`.
+{%change%} Let's install the `aws-sdk` package in the `backend/` folder.
 
 ```bash
 $ npm install aws-sdk

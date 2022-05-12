@@ -6,7 +6,7 @@ date: 2021-02-08 00:00:00
 lang: en
 index: 3
 type: jwt-auth
-description: In this example we will look at how to add Google Login to a Cognito User Pool using Serverless Stack (SST). We'll be using the Api and Auth construct to create an authenticated API.
+description: In this example we will look at how to add Google Login to a Cognito User Pool using Serverless Stack (SST). We'll be using the Api and Auth constructs to create an authenticated API.
 short_desc: Authenticating a full-stack serverless app with Google.
 repo: api-oauth-google
 ref: how-to-add-google-login-to-your-cognito-user-pool
@@ -179,9 +179,9 @@ const api = new Api(stack, "Api", {
     authorizer: "userPool",
   },
   routes: {
-    "GET /private": "private.handler",
+    "GET /private": "functions/private.handler",
     "GET /public": {
-      function: "public.handler",
+      function: "functions/public.handler",
       authorizer: "none",
     },
   },
@@ -202,19 +202,22 @@ By default, all routes have the authorization type `JWT`. This means the caller 
 
 Let's install the npm packages we are using here.
 
-{%change%} From the project root run the following.
+{%change%} Update the `package.json` in the root.
 
-```bash
-$ npx sst add-cdk @aws-cdk/aws-apigatewayv2-authorizers-alpha
+```json
+...
+"aws-cdk-lib": "2.20.0",
+"@aws-cdk/aws-apigatewayv2-alpha": "2.20.0-alpha.0"
+...
 ```
 
-The reason we are using the [**add-cdk**]({{ site.docs_url }}/packages/cli#add-cdk-packages) command instead of using an `npm install`, is because of [a known issue with AWS CDK]({{ site.docs_url }}/known-issues). Using mismatched versions of CDK packages can cause some unexpected problems down the road. The `sst add-cdk` command ensures that we install the right version of the package.
+You can find the latest CDK versions supported by SST in our [releases](https://github.com/serverless-stack/serverless-stack/releases).
 
 ## Adding function code
 
 Let's create two functions, one handling the public route, and the other for the private route.
 
-{%change%} Add a `backend/public.ts`.
+{%change%} Add a `backend/functions/public.ts`.
 
 ```ts
 export async function handler() {
@@ -225,7 +228,7 @@ export async function handler() {
 }
 ```
 
-{%change%} Add a `backend/private.ts`.
+{%change%} Add a `backend/functions/private.ts`.
 
 ```ts
 export async function handler() {

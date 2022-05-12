@@ -75,7 +75,7 @@ export function MyStack({ stack }: StackContext) {
   // Create a HTTP API
   const api = new Api(stack, "Api", {
     routes: {
-      "GET /": "lambda.handler",
+      "GET /": "functions/lambda.handler",
     },
   });
 
@@ -90,7 +90,7 @@ export function MyStack({ stack }: StackContext) {
 
 Our functions are stored in the `backend/` directory. In this case, we have a simple Lambda function that's printing out the time the request was made.
 
-{%change%} Replace your `backend/lambda.ts` with.
+{%change%} Replace your `backend/functions/lambda.ts` with.
 
 ```ts
 export async function handler(event) {
@@ -129,7 +129,7 @@ Note that, this doesn't increase the timeout of an API. Since the API Gateway ti
 
 ## Starting your dev environment
 
-Now if you navigate to `backend/lambda.ts`, you can set a breakpoint.
+Now if you navigate to `backend/functions/lambda.ts`, you can set a breakpoint.
 
 Click on **Debug** button to start the debugging
 
@@ -178,7 +178,7 @@ The `ApiEndpoint` is the API we just created. Now if you head over to that endpo
 
 An advantage of using the Live Lambda Development environment is that you can make changes without having to redeploy them.
 
-{%change%} Replace `backend/lambda.ts` with the following.
+{%change%} Replace `backend/functions/lambda.ts` with the following.
 
 ```ts
 export async function handler(event) {

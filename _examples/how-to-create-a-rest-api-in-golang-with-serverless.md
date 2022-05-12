@@ -65,9 +65,9 @@ export function MyStack({ stack }: StackContext) {
   // Create the HTTP API
   const api = new Api(stack, "Api", {
     routes: {
-      "GET /notes": "list.go",
-      "GET /notes/{id}": "get.go",
-      "PUT /notes/{id}": "update.go",
+      "GET /notes": "functions/list.go",
+      "GET /notes/{id}": "functions/get.go",
+      "PUT /notes/{id}": "functions/update.go",
     },
   });
 
@@ -92,7 +92,7 @@ The first is getting a list of notes. The second is getting a specific note give
 
 For this example, we are not using a database. We'll look at that in detail in another example. So internally we are just going to get the list of notes from a file.
 
-{%change%} Let's add a file that contains our notes in `db/notes.go`.
+{%change%} Let's add a file that contains our notes in `backend/db/notes.go`.
 
 ```go
 package db
@@ -124,7 +124,7 @@ Now add the code for our first endpoint.
 
 ### Getting a list of notes
 
-{%change%} Add a `backend/list.go`.
+{%change%} Add a `backend/functions/list.go`.
 
 ```go
 package main
@@ -154,7 +154,7 @@ Here we are simply converting a list of notes to string, and responding with tha
 
 ### Getting a specific note
 
-{%change%} Add the following to `backend/get.go`.
+{%change%} Add the following to `backend/functions/get.go`.
 
 ```go
 package main
@@ -194,7 +194,7 @@ Here we are checking if we have the requested note. If we do, we respond with it
 
 ### Updating a note
 
-{%change%} Add the following to `backend/update.go`.
+{%change%} Add the following to `backend/functions/update.go`.
 
 ```go
 package main
@@ -301,7 +301,7 @@ This should respond with the updated note.
 
 Let's make a quick change to our API. It would be good if the JSON strings are pretty printed to make them more readable.
 
-{%change%} Replace `Handler` function in `backend/list.go` with the following.
+{%change%} Replace `Handler` function in `backend/functions/list.go` with the following.
 
 ```go
 func Handler(request events.APIGatewayV2HTTPRequest) (events.APIGatewayProxyResponse, error) {

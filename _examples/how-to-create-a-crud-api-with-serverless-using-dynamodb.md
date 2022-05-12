@@ -97,11 +97,11 @@ const api = new Api(stack, "Api", {
     },
   },
   routes: {
-    "GET    /notes": "list.main",
-    "POST   /notes": "create.main",
-    "GET    /notes/{id}": "get.main",
-    "PUT    /notes/{id}": "update.main",
-    "DELETE /notes/{id}": "delete.main",
+    "GET    /notes": "functions/list.handler",
+    "POST   /notes": "functions/create.handler",
+    "GET    /notes/{id}": "functions/get.handler",
+    "PUT    /notes/{id}": "functions/update.handler",
+    "DELETE /notes/{id}": "functions/delete.handler",
   },
 });
 
@@ -132,7 +132,7 @@ We also pass in the name of our DynamoDB table to our API as an environment vari
 
 Let's turn towards the functions that'll be powering our API. Starting with the one that creates our note.
 
-{%change%} Add the following to `backend/create.ts`.
+{%change%} Add the following to `backend/functions/create.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -140,7 +140,7 @@ import * as uuid from "uuid";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export async function main(event) {
+export async function handler(event) {
   const data = JSON.parse(event.body);
 
   const params = {
@@ -166,6 +166,8 @@ Here we are creating a new row in our DynamoDB table. First we JSON parse the re
 
 {%change%} Let's install both the packages we are using here.
 
+Run the below command in the `backend/` folder.
+
 ```bash
 $ npm install aws-sdk uuid
 ```
@@ -174,14 +176,14 @@ $ npm install aws-sdk uuid
 
 Next, let's write the function that'll fetch all our notes.
 
-{%change%} Add the following to `backend/list.ts`.
+{%change%} Add the following to `backend/functions/list.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export async function main() {
+export async function handler() {
   const params = {
     // Get the table name from the environment variable
     TableName: process.env.tableName,
@@ -206,14 +208,14 @@ Here we are getting all the notes for our hard coded `userId`, `123`.
 
 We'll do something similar for the function that gets a single note.
 
-{%change%} Create a `backend/get.ts`.
+{%change%} Create a `backend/functions/get.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export async function main(event) {
+export async function handler(event) {
   const params = {
     // Get the table name from the environment variable
     TableName: process.env.tableName,
@@ -238,14 +240,14 @@ We are getting the note with the id that's passed in through the API endpoint pa
 
 Now let's update our notes.
 
-{%change%} Add a `backend/update.ts` with:
+{%change%} Add a `backend/functions/update.ts` with:
 
 ```ts
 import { DynamoDB } from "aws-sdk";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export async function main(event) {
+export async function handler(event) {
   const data = JSON.parse(event.body);
 
   const params = {
@@ -286,7 +288,7 @@ import { DynamoDB } from "aws-sdk";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export async function main(event) {
+export async function handler(event) {
   const params = {
     // Get the table name from the environment variable
     TableName: process.env.tableName,

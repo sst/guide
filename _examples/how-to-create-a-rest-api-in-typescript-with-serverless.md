@@ -68,9 +68,9 @@ export default class MyStack extends sst.Stack {
     // Create the HTTP API
     const api = new Api(stack, "Api", {
       routes: {
-        "GET /notes": "src/list.main",
-        "GET /notes/{id}": "src/get.main",
-        "PUT /notes/{id}": "src/update.main",
+        "GET /notes": "src/list.handler",
+        "GET /notes/{id}": "src/get.handler",
+        "PUT /notes/{id}": "src/update.handler",
       },
     });
 
@@ -134,7 +134,7 @@ Now add the code for our first endpoint.
 import { APIGatewayProxyResult } from "aws-lambda";
 import notes from "./notes";
 
-export async function main(): Promise<APIGatewayProxyResult> {
+export async function handler(): Promise<APIGatewayProxyResult> {
   return {
     statusCode: 200,
     body: JSON.stringify(notes),
@@ -282,7 +282,7 @@ Let's make a quick change to our API. It would be good if the JSON strings are p
 import { APIGatewayProxyResult } from "aws-lambda";
 import notes from "./notes";
 
-export async function main(): Promise<APIGatewayProxyResult> {
+export async function handler(): Promise<APIGatewayProxyResult> {
   return {
     statusCode: 200,
     body: JSON.stringify(notes, null, "  "),
