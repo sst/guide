@@ -64,7 +64,7 @@ import { GraphQLApi, StackContext } from "@serverless-stack/resources";
 export function MyStack({ stack }: StackContext) {
   // Create the GraphQL API
   const api = new GraphQLApi(stack, "ApolloApi", {
-    server: "lambda.handler",
+    server: "functions/lambda.handler",
   });
 
   // Show the API endpoint in output
@@ -74,13 +74,13 @@ export function MyStack({ stack }: StackContext) {
 }
 ```
 
-We are creating an Apollo GraphQL API here using the [`GraphQLApi`]({{ site.docs_url }}/constructs/GraphQLApi) construct. Our Apollo Server is powered by the Lambda function in `backend/lambda.ts`.
+We are creating an Apollo GraphQL API here using the [`GraphQLApi`]({{ site.docs_url }}/constructs/GraphQLApi) construct. Our Apollo Server is powered by the Lambda function in `backend/functions/lambda.ts`.
 
 ## Adding function code
 
 For this example, we are not using a database. We'll look at that in detail in another example. So we'll just be printing out a simple string.
 
-{%change%} Let's add a file that contains our notes in `backend/lambda.ts`.
+{%change%} Let's add a file that contains our notes in `backend/functions/lambda.ts`.
 
 ```ts
 import { gql, ApolloServer } from "apollo-server-lambda";
@@ -111,7 +111,7 @@ export const handler = server.createHandler();
 
 Here we are creating an Apollo Server. We are also enabling introspection if we are running our Lambda function locally. SST sets the `process.env.IS_LOCAL` when run locally.
 
-{%change%} Let's install `apollo-server-lambda`.
+{%change%} Let's install `apollo-server-lambda` in the `backend/` folder.
 
 ```bash
 $ npm install apollo-server-lambda
@@ -180,7 +180,7 @@ You should see `Hello, World!`.
 
 Let's make a quick change to our API.
 
-{%change%} In `backend/lambda.ts` replace `Hello, World!` with `Hello, New World!`.
+{%change%} In `backend/functions/lambda.ts` replace `Hello, World!` with `Hello, New World!`.
 
 ```ts
 const resolvers = {

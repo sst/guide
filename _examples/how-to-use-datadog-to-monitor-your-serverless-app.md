@@ -76,7 +76,7 @@ export function MyStack({ stack, app }: StackContext) {
   // Create a HTTP API
   const api = new Api(stack, "Api", {
     routes: {
-      "GET /": "backend/lambda.handler",
+      "GET /": "functions/lambda.handler",
     },
   });
 
@@ -87,9 +87,9 @@ export function MyStack({ stack, app }: StackContext) {
 }
 ```
 
-We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `backend/lambda.ts` will get invoked.
+We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `backend/functions/lambda.ts` will get invoked.
 
-{%change%} Your `backend/lambda.ts` should look something like this.
+{%change%} Your `backend/functions/lambda.ts` should look something like this.
 
 ```ts
 export async function handler(event) {

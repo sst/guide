@@ -6,7 +6,7 @@ date: 2021-02-04 00:00:00
 lang: en
 index: 1
 type: database
-description: In this example we will look at how to use DynamoDB in your serverless app on AWS using Serverless Stack (SST). We'll be using the Api construct and Table to create a simple hit counter.
+description: In this example we will look at how to use DynamoDB in your serverless app on AWS using Serverless Stack (SST). We'll be using the Api and Table constructs to create a simple hit counter.
 short_desc: Using DynamoDB in a serverless API.
 repo: rest-api-dynamodb
 ref: how-to-use-dynamodb-in-your-serverless-app
@@ -103,7 +103,7 @@ const api = new Api(stack, "Api", {
     },
   },
   routes: {
-    "POST /": "lambda.main",
+    "POST /": "functions/lambda.handler",
   },
 });
 
@@ -113,7 +113,7 @@ stack.addOutputs({
 });
 ```
 
-Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `main` in `backend/lambda.ts` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `backend/functions/lambda.ts` will get invoked.
 
 We also pass in the name of our DynamoDB table to our API as an environment variable called `tableName`. And we allow our API to access (read and write) the table instance we just created.
 
@@ -121,14 +121,14 @@ We also pass in the name of our DynamoDB table to our API as an environment vari
 
 Now in our function, we'll start by reading from our DynamoDB table.
 
-{%change%} Replace `backend/lambda.ts` with the following.
+{%change%} Replace `backend/functions/lambda.ts` with the following.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export async function main() {
+export async function handler() {
   const getParams = {
     // Get the table name from the environment variable
     TableName: process.env.tableName,
@@ -152,7 +152,7 @@ export async function main() {
 
 We make a `get` call to our DynamoDB table and get the value of a row where the `counter` column has the value `hits`. Since, we haven't written to this column yet, we are going to just return `0`.
 
-{%change%} Let's install the `aws-sdk`.
+{%change%} Let's install the `aws-sdk` package in the `backend/` folder.
 
 ```bash
 $ npm install aws-sdk
@@ -206,7 +206,7 @@ You should see a `0` in the response body.
 
 Now let's update our table with the hits.
 
-{%change%} Add this above the `return` statement in `backend/lambda.ts`.
+{%change%} Add this above the `return` statement in `backend/functions/lambda.ts`.
 
 ```ts
 const putParams = {

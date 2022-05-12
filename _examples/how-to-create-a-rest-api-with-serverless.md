@@ -65,9 +65,9 @@ export function MyStack({ stack }: StackContext) {
   // Create the HTTP API
   const api = new Api(stack, "Api", {
     routes: {
-      "GET /notes": "list.main",
-      "GET /notes/{id}": "get.main",
-      "PUT /notes/{id}": "update.main",
+      "GET /notes": "functions/list.handler",
+      "GET /notes/{id}": "functions/get.handler",
+      "PUT /notes/{id}": "functions/update.handler",
     },
   });
 
@@ -115,12 +115,12 @@ Now add the code for our first endpoint.
 
 ### Getting a list of notes
 
-{%change%} Add a `backend/list.ts`.
+{%change%} Add a `backend/functions/list.ts`.
 
 ```ts
 import notes from "./notes";
 
-export async function main() {
+export async function handler() {
   return {
     statusCode: 200,
     body: JSON.stringify(notes),
@@ -134,12 +134,12 @@ Note that this function need to be `async` to be invoked by AWS Lambda. Even tho
 
 ### Getting a specific note
 
-{%change%} Add the following to `backend/get.ts`.
+{%change%} Add the following to `backend/functions/get.ts`.
 
 ```ts
 import notes from "./notes";
 
-export async function main(event) {
+export async function handler(event) {
   const note = notes[event.pathParameters.id];
   return note
     ? {
@@ -157,12 +157,12 @@ Here we are checking if we have the requested note. If we do, we respond with it
 
 ### Updating a note
 
-{%change%} Add the following to `backend/update.ts`.
+{%change%} Add the following to `backend/functions/update.ts`.
 
 ```ts
 import notes from "./notes";
 
-export async function main(event) {
+export async function handler(event) {
   const note = notes[event.pathParameters.id];
 
   if (!note) {
@@ -256,12 +256,12 @@ This should respond with the updated note.
 
 Let's make a quick change to our API. It would be good if the JSON strings are pretty printed to make them more readable.
 
-{%change%} Replace `backend/list.ts` with the following.
+{%change%} Replace `backend/functions/list.ts` with the following.
 
 ```ts
 import notes from "./notes";
 
-export async function main() {
+export async function handler() {
   return {
     statusCode: 200,
     body: JSON.stringify(notes, null, "  "),

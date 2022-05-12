@@ -6,7 +6,7 @@ date: 2021-03-02 00:00:00
 lang: en
 index: 2
 type: jwt-auth
-description: In this example we will look at how to add JWT authorization with Auth0 to a serverless API using Serverless Stack (SST). We'll be using the Api and Auth construct to create an authenticated API.
+description: In this example we will look at how to add JWT authorization with Auth0 to a serverless API using Serverless Stack (SST). We'll be using the Api and Auth constructs to create an authenticated API.
 short_desc: Adding JWT authentication with Auth0.
 repo: api-auth-jwt-auth0
 ref: how-to-add-jwt-authorization-with-auth0-to-a-serverless-api
@@ -86,9 +86,9 @@ export function MyStack({ stack }: StackContext) {
       authorizer: "jwt",
     },
     routes: {
-      "GET /private": "private.main",
+      "GET /private": "functions/private.handler",
       "GET /public": {
-        function: "public.main",
+        function: "functions/public.handler",
         authorizer: "none",
       },
     },
@@ -112,22 +112,25 @@ To secure our APIs we are adding the authorization type `JWT` and a JWT authoriz
 
 Let's install the npm packages we are using here.
 
-{%change%} From the project root run the following.
+{%change%} Update the `package.json` in the root.
 
-```bash
-$ npx sst add-cdk @aws-cdk/aws-apigatewayv2-authorizers-alpha
+```json
+...
+"aws-cdk-lib": "2.20.0",
+"@aws-cdk/aws-apigatewayv2-alpha": "2.20.0-alpha.0"
+...
 ```
 
-The reason we are using the [**add-cdk**]({{ site.docs_url }}/packages/cli#add-cdk-packages) command instead of using an `npm install`, is because of [a known issue with AWS CDK]({{ site.docs_url }}/known-issues). Using mismatched versions of CDK packages can cause some unexpected problems down the road. The `sst add-cdk` command ensures that we install the right version of the package.
+You can find the latest CDK versions supported by SST in our [releases](https://github.com/serverless-stack/serverless-stack/releases).
 
 ## Adding function code
 
 Let's create two functions, one handling the public route, and the other for the private route.
 
-{%change%} Add a `backend/public.ts`.
+{%change%} Add a `backend/functions/public.ts`.
 
 ```ts
-export async function main() {
+export async function handler() {
   return {
     statusCode: 200,
     body: "Hello stranger!",
@@ -135,10 +138,10 @@ export async function main() {
 }
 ```
 
-{%change%} Add a `backend/private.ts`.
+{%change%} Add a `backend/functions/private.ts`.
 
 ```ts
-export async function main() {
+export async function handler() {
   return {
     statusCode: 200,
     body: "Hello user!",
@@ -254,10 +257,10 @@ You should see the greeting `Hello user!`.
 
 Let's make a quick change to our private route and print out the caller's user id.
 
-{%change%} Replace `backend/private.ts` with the following.
+{%change%} Replace `backend/functions/private.ts` with the following.
 
 ```ts
-export async function main(event) {
+export async function handler(event) {
   return {
     statusCode: 200,
     body: `Hello ${event.requestContext.authorizer.jwt.claims.sub}!`,

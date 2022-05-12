@@ -69,7 +69,7 @@ export function MyStack({ stack, app }: StackContext) {
   const api = new Api(stack, "Api", {
     customDomain: `${stage}.example.com`,
     routes: {
-      "GET /": "lambda.main",
+      "GET /": "functions/lambda.handler",
     },
   });
 
@@ -116,10 +116,10 @@ const api = new Api(stack, "Api", {
 
 For this example, we are going to focus on the custom domain. So we are going to keep our Lambda function simple. [Refer to the CRUD example]({% link _examples/how-to-create-a-crud-api-with-serverless-using-dynamodb.md %}), if you want to connect your API to a database.
 
-{%change%} Replace the `backend/lambda.ts` with the following.
+{%change%} Replace the `backend/functions/lambda.ts` with the following.
 
 ```ts
-export async function main() {
+export async function handler() {
   const response = {
     userId: 1,
     id: 1,
@@ -197,10 +197,10 @@ You should see the same response again. If the page does not load, don't worry. 
 
 Let's make a quick change to our API. It would be good if the JSON strings are pretty printed to make them more readable.
 
-{%change%} Replace `backend/lambda.ts` with the following.
+{%change%} Replace `backend/functions/lambda.ts` with the following.
 
 ```ts
-export async function main() {
+export async function handler() {
   const response = {
     userId: 1,
     id: 1,
