@@ -91,13 +91,15 @@ We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to cr
 {%change%} Your `backend/functions/lambda.ts` should look something like this.
 
 ```ts
-export async function handler(event) {
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   return {
     statusCode: 200,
     headers: { "Content-Type": "text/plain" },
     body: `Hello, World! Your request was received at ${event.requestContext.time}.`,
   };
-}
+};
 ```
 
 ## Setting up our app with Sentry

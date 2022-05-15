@@ -138,8 +138,9 @@ Note that this function need to be `async` to be invoked by AWS Lambda. Even tho
 
 ```ts
 import notes from "./notes";
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
-export async function handler(event) {
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const note = notes[event.pathParameters.id];
   return note
     ? {
@@ -150,7 +151,7 @@ export async function handler(event) {
         statusCode: 404,
         body: JSON.stringify({ error: true }),
       };
-}
+};
 ```
 
 Here we are checking if we have the requested note. If we do, we respond with it. If we don't, then we respond with a 404 error.
@@ -161,8 +162,9 @@ Here we are checking if we have the requested note. If we do, we respond with it
 
 ```ts
 import notes from "./notes";
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
-export async function handler(event) {
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const note = notes[event.pathParameters.id];
 
   if (!note) {
@@ -180,7 +182,7 @@ export async function handler(event) {
     statusCode: 200,
     body: JSON.stringify(note),
   };
-}
+};
 ```
 
 We first check if the note with the requested id exists. And then we update the content of the note and return it. Of course, we aren't really saving our changes because we don't have a database!

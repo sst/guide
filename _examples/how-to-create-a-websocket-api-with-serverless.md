@@ -124,10 +124,11 @@ Now in our functions, let's first handle the case when a client connects to our 
 
 ```ts
 import { DynamoDB } from "aws-sdk";
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export async function handler(event) {
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const params = {
     TableName: process.env.tableName,
     Item: {
@@ -138,7 +139,7 @@ export async function handler(event) {
   await dynamoDb.put(params).promise();
 
   return { statusCode: 200, body: "Connected" };
-}
+};
 ```
 
 Here when a new client connects, we grab the connection id from `event.requestContext.connectionId` and store it in our table.
@@ -157,10 +158,11 @@ Similarly, we'll remove the connection id from the table when a client disconnec
 
 ```ts
 import { DynamoDB } from "aws-sdk";
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export async function handler(event) {
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const params = {
     TableName: process.env.tableName,
     Key: {
@@ -171,7 +173,7 @@ export async function handler(event) {
   await dynamoDb.delete(params).promise();
 
   return { statusCode: 200, body: "Disconnected" };
-}
+};
 ```
 
 Now before handling the `sendmessage` route, let's do a quick test. We'll leave a placeholder function there for now.
@@ -179,9 +181,11 @@ Now before handling the `sendmessage` route, let's do a quick test. We'll leave 
 {%change%} Add this to `backend/functions/sendMessage.ts`.
 
 ```ts
-export async function handler(event) {
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   return { statusCode: 200, body: "Message sent" };
-}
+};
 ```
 
 ## Starting your dev environment
@@ -244,11 +248,12 @@ Now let's update our function to send messages.
 
 ```ts
 import { DynamoDB, ApiGatewayManagementApi } from "aws-sdk";
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 const TableName = process.env.tableName;
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export async function handler(event) {
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const messageData = JSON.parse(event.body).data;
   const { stage, domainName } = event.requestContext;
 
@@ -279,7 +284,7 @@ export async function handler(event) {
   await Promise.all(connections.Items.map(postToConnection));
 
   return { statusCode: 200, body: "Message sent" };
-}
+};
 ```
 
 We are doing a couple of things here:

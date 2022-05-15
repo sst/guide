@@ -131,6 +131,7 @@ Now in our function, we'll be handling resizing an image once it's uploaded.
 import AWS from "aws-sdk";
 import sharp from "sharp";
 import stream from "stream";
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 const width = 400;
 const prefix = `${width}w`;
@@ -161,7 +162,7 @@ function streamToSharp(width) {
   return sharp().resize(width);
 }
 
-export async function handler(event) {
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const s3Record = event.Records[0].s3;
 
   // Grab the filename and bucket name
@@ -193,7 +194,7 @@ export async function handler(event) {
   await upload;
 
   return true;
-}
+};
 ```
 
 We are doing a few things here. Let's go over them in detail.

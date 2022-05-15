@@ -112,7 +112,9 @@ import chrome from "chrome-aws-lambda";
 // chrome-aws-lambda handles loading locally vs from the Layer
 const puppeteer = chrome.puppeteer;
 
-export async function handler(event) {
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   // Get the url and dimensions from the query string
   const { url, width, height } = event.queryStringParameters;
 
@@ -139,7 +141,7 @@ export async function handler(event) {
     headers: { "Content-Type": "text/plain" },
     body: "Screenshot taken",
   };
-}
+};
 ```
 
 First, we grab the webpage URL and dimensions for the screenshot from the query string. We then launch the browser and navigate to that URL, with those dimensions and take the screenshot.

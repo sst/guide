@@ -89,14 +89,16 @@ We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to cr
 {%change%} Replace the code in `backend/functions/lambda.ts` with:
 
 ```ts
-export async function handler(event) {
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const { fname, lname } = JSON.parse(event.body);
   return {
     statusCode: 200,
     headers: { "Content-Type": "text/plain" },
     body: `Hello, ${fname}-${lname}.`,
   };
-}
+};
 ```
 
 We are reading two variables `fname` and `lname` from the event body and returning a simple greeting message.

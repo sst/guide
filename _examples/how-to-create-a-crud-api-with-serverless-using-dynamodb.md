@@ -137,10 +137,11 @@ Let's turn towards the functions that'll be powering our API. Starting with the 
 ```ts
 import { DynamoDB } from "aws-sdk";
 import * as uuid from "uuid";
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export async function handler(event) {
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const data = JSON.parse(event.body);
 
   const params = {
@@ -159,7 +160,7 @@ export async function handler(event) {
     statusCode: 200,
     body: JSON.stringify(params.Item),
   };
-}
+};
 ```
 
 Here we are creating a new row in our DynamoDB table. First we JSON parse the request body. That gives us the content of the note. Then we are hard coding the `userId` to `123` for now. Our API will not be tied to a user. We'll tackle that in a later example. We are also using a `uuid` package to generate a unique `noteId`.
@@ -212,10 +213,11 @@ We'll do something similar for the function that gets a single note.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export async function handler(event) {
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const params = {
     // Get the table name from the environment variable
     TableName: process.env.tableName,
@@ -231,7 +233,7 @@ export async function handler(event) {
     statusCode: 200,
     body: JSON.stringify(results.Item),
   };
-}
+};
 ```
 
 We are getting the note with the id that's passed in through the API endpoint path. The `event.pathParameters.id` corresponds to the id in `/notes/{id}`.
@@ -244,10 +246,11 @@ Now let's update our notes.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export async function handler(event) {
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const data = JSON.parse(event.body);
 
   const params = {
@@ -272,7 +275,7 @@ export async function handler(event) {
     statusCode: 200,
     body: JSON.stringify(results.Attributes),
   };
-}
+};
 ```
 
 We are first JSON parsing the request body. We use the content we get from it, to update the note. The `ALL_NEW` property means that this update call will return the updated row.
@@ -285,10 +288,11 @@ To complete the CRUD operations, let's delete the note.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export async function handler(event) {
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const params = {
     // Get the table name from the environment variable
     TableName: process.env.tableName,
@@ -304,7 +308,7 @@ export async function handler(event) {
     statusCode: 200,
     body: JSON.stringify({ status: true }),
   };
-}
+};
 ```
 
 Now let's test what we've created so far.

@@ -204,7 +204,9 @@ The idea for this endpoint is to take the form data sent from AWS Cognito, forwa
 import fetch from "node-fetch";
 import parser from "lambda-multipart-parser";
 
-export async function handler(event) {
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const result = await parser.parse(event);
   const token = await (
     await fetch(
@@ -219,7 +221,7 @@ export async function handler(event) {
   ).json();
 
   return token;
-}
+};
 ```
 
 Make sure to install the `node-fetch` and `lambda-multipart-parser` packages.
@@ -238,8 +240,9 @@ The below lambda gets the Bearer token given by Cognito and modify the header to
 
 ```ts
 import fetch from "node-fetch";
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
-export async function handler(event) {
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const token = await (
     await fetch("https://api.github.com/user", {
       method: "GET",
@@ -255,7 +258,7 @@ export async function handler(event) {
     sub: token.id,
     ...token,
   };
-}
+};
 ```
 
 ## Setting up GitHub OAuth

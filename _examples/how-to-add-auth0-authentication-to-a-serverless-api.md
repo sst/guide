@@ -312,12 +312,14 @@ Let's make a quick change to our private route and print out the caller's user i
 {%change%} Replace `backend/functions/private.ts` with the following.
 
 ```ts
-export async function handler(event) {
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   return {
     statusCode: 200,
     body: `Hello ${event.requestContext.authorizer.iam.cognitoIdentity.identityId}!`,
   };
-}
+};
 ```
 
 We are getting the user id from the event object.

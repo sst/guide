@@ -93,14 +93,16 @@ Our functions are stored in the `backend/` directory. In this case, we have a si
 {%change%} Replace your `backend/functions/lambda.ts` with.
 
 ```ts
-export async function handler(event) {
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const message = `The time in Lambda is ${event.requestContext.time}.`;
   return {
     statusCode: 200,
     headers: { "Content-Type": "text/plain" },
     body: `Hello, World! ${message}`,
   };
-}
+};
 ```
 
 ## Adding WebStorm Debug Configuration
@@ -181,13 +183,15 @@ An advantage of using the Live Lambda Development environment is that you can ma
 {%change%} Replace `backend/functions/lambda.ts` with the following.
 
 ```ts
-export async function handler(event) {
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   return {
     statusCode: 200,
     headers: { "Content-Type": "text/plain" },
     body: `Hello, World! Your request was received at ${event.requestContext.time}.`,
   };
-}
+};
 ```
 
 Now if you head back to the endpoint.
