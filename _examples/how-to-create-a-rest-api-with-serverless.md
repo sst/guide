@@ -118,7 +118,7 @@ Now add the code for our first endpoint.
 {%change%} Add a `backend/functions/list.ts`.
 
 ```ts
-import notes from "./notes";
+import notes from "../notes";
 
 export async function handler() {
   return {
