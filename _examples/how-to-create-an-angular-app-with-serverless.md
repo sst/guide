@@ -509,7 +509,7 @@ This replaces `{{ PROD_API_URL }}` with the deployed API endpoint in all the `.j
 {%change%} That's it, now run the deploy command.
 
 ```bash
-$ npm run deploy --stage prod
+$ npm run deploy -- --stage prod
 ```
 
 The `--stage` option allows us to separate our environments, so when we are working in locally, it doesn't break the app for our users.
@@ -530,7 +530,7 @@ Stack prod-angular-app-my-stack
 Run the below command to open the SST Console in **prod** stage to test the production endpoint.
 
 ```bash
-npm run console --stage prod
+npm run console -- --stage prod
 ```
 
 Go to the **API** tab and click **Send** button to send a `POST` request.
@@ -545,7 +545,7 @@ Finally, you can remove the resources created in this example using the followin
 
 ```bash
 $ npm run remove
-$ npm run remove --stage prod
+$ npm run remove -- --stage prod
 ```
 
 ## Conclusion

@@ -418,7 +418,7 @@ Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you t
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npm run deploy --stage prod
+$ npm run deploy -- --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the app for our users.
@@ -439,7 +439,7 @@ Stack prod-react-app-my-stack
 Run the below command to open the SST Console in **prod** stage to test the production endpoint.
 
 ```bash
-npm run console --stage prod
+npm run console -- --stage prod
 ```
 
 Go to the **API** tab and click **Send** button to send a `POST` request.
@@ -456,7 +456,7 @@ Finally, you can remove the resources created in this example using the followin
 
 ```bash
 $ npm run remove
-$ npm run remove --stage prod
+$ npm run remove -- --stage prod
 ```
 
 ## Conclusion

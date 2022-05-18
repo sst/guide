@@ -319,7 +319,7 @@ Also, if you flip back to our original WebSocket client window, you'll notice th
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npm run deploy --stage prod
+$ npm run deploy -- --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
@@ -330,7 +330,7 @@ Finally, you can remove the resources created in this example using the followin
 
 ```bash
 $ npm run remove
-$ npm run remove --stage prod
+$ npm run remove -- --stage prod
 ```
 
 ## Conclusion

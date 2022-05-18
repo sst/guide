@@ -283,7 +283,7 @@ And now if you head over to your console and click the **Send** button again you
 Note, `env.local` is not committed to the git and remember to set the environment variables in your CI pipeline.
 
 ```bash
-$ npm run deploy --stage prod
+$ npm run deploy -- --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
@@ -303,7 +303,7 @@ Stack prod-planetscale-my-stack
 Run the below command to open the SST Console in **prod** stage to test the production endpoint.
 
 ```bash
-npm run console --stage prod
+npm run console -- --stage prod
 ```
 
 Go to the **API** explorer and click **Send** button of the `POST /` route, to send a `POST` request.
@@ -316,7 +316,7 @@ Finally, you can remove the resources created in this example using the followin
 
 ```bash
 $ npm run remove
-$ npm run remove --stage prod
+$ npm run remove -- --stage prod
 ```
 
 ## Conclusion

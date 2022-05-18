@@ -626,7 +626,7 @@ As you can see the private route is only working while we are logged in.
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npm run deploy --stage prod
+$ npm run deploy -- --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the app for our users.
@@ -657,7 +657,7 @@ $ npm run remove
 And to remove the prod environment.
 
 ```bash
-$ npm run remove --stage prod
+$ npm run remove -- --stage prod
 ```
 
 ## Conclusion

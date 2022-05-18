@@ -278,7 +278,7 @@ Now if you go back to SST console and upload that same image again, you should s
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npm run deploy --stage prod
+$ npm run deploy -- --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
@@ -289,7 +289,7 @@ Finally, you can remove the resources created in this example using the followin
 
 ```bash
 $ npm run remove
-$ npm run remove --stage prod
+$ npm run remove -- --stage prod
 ```
 
 Note that, by default resources like the S3 bucket are not removed automatically. To do so, you'll need to explicitly set it.

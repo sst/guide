@@ -505,7 +505,7 @@ Now that our API is tested, let's deploy it to production. You'll recall that we
 {%change%} Run the following in your terminal.
 
 ```bash
-$ npm run deploy --stage prod
+$ npm run deploy -- --stage prod
 ```
 
 ## Cleaning up
@@ -514,7 +514,7 @@ Finally, you can remove the resources created in this example using the followin
 
 ```bash
 $ npm run remove
-$ npm run remove --stage prod
+$ npm run remove -- --stage prod
 ```
 
 ## Conclusion

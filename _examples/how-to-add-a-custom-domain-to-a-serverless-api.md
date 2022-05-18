@@ -234,7 +234,7 @@ However, we are going to deploy your API again. But to a different environment, 
 {%change%} Run the following in your terminal.
 
 ```bash
-$ npm run deploy --stage prod
+$ npm run deploy -- --stage prod
 ```
 
 Once deployed, you should be able to access that endpoint on the prod custom domain.
@@ -256,7 +256,7 @@ $ npm run remove
 And to remove the prod environment.
 
 ```bash
-$ npm run remove --stage prod
+$ npm run remove -- --stage prod
 ```
 
 This will remove the custom domain mappings as well.
