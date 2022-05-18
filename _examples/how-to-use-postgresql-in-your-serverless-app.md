@@ -298,7 +298,7 @@ Note, to revert back to a specific migration, re-run its previous migration.
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npm deploy --stage prod
+$ npm run deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.

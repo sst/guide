@@ -509,7 +509,7 @@ This replaces `{{ PROD_API_URL }}` with the deployed API endpoint in all the `.j
 {%change%} That's it, now run the deploy command.
 
 ```bash
-$ npm deploy --stage prod
+$ npm run deploy --stage prod
 ```
 
 The `--stage` option allows us to separate our environments, so when we are working in locally, it doesn't break the app for our users.

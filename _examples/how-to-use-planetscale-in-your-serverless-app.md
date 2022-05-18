@@ -283,7 +283,7 @@ And now if you head over to your console and click the **Send** button again you
 Note, `env.local` is not committed to the git and remember to set the environment variables in your CI pipeline.
 
 ```bash
-$ npm deploy --stage prod
+$ npm run deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.

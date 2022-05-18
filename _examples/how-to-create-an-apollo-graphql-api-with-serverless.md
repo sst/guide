@@ -201,7 +201,7 @@ Now that our API is tested, let's deploy it to production. You'll recall that we
 {%change%} Run the following in your terminal.
 
 ```bash
-$ npm deploy --stage prod
+$ npm run deploy --stage prod
 ```
 
 ## Cleaning up

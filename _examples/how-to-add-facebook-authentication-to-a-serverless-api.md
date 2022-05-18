@@ -308,7 +308,7 @@ However, we are going to deploy your API again. But to a different environment, 
 {%change%} Run the following in your terminal.
 
 ```bash
-$ npm deploy --stage prod
+$ npm run deploy --stage prod
 ```
 
 A note on these environments. SST is simply deploying the same app twice using two different `stage` names. It prefixes the resources with the stage names to ensure that they don't thrash.

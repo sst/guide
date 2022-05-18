@@ -177,7 +177,7 @@ We need to deploy the API in order to track any errors.
 {%change%} Run the following.
 
 ```bash
-$ npm deploy
+$ npm run deploy
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app from scratch.
