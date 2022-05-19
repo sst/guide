@@ -139,13 +139,24 @@ The `ApiEndpoint` is the API we just created.
 
 Let's test our endpoint using the integrated [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.docs_url }}/console).
 
-Go to the **API** explorer and click on the `POST /` route. In the **Query** tab, enter **fname** and **lname** values as **mani** and **teja** respectively and click **Send** to send a POST request.
+Go to the **API** explorer and click on the `POST /` route. In the **Headers** tab set the content-type as **JSON** `Content-type: application/json`.
+
+![Console with headers](/assets/examples/middy-validator/console-with-header.png)
+
+In the **Body** tab, enter the below JSON and click **Send** to send a POST request.
+
+```json
+{
+  "fname": "mani",
+  "lname": "teja"
+}
+```
 
 ![Request with correct schema](/assets/examples/middy-validator/request-with-correct-schema.png)
 
 As you can see the endpoint is working as expected. We sent `mani` and `teja` as our `fname` and `lname` respectively and got `Hello, mani-teja` as the response.
 
-Now let's remove `lname` from the query parameters and see what happens.
+Now let's remove `lname` from the body and see what happens.
 
 ![Request with incorrect schema](/assets/examples/middy-validator/request-with-incorrect-schema.png)
 
@@ -296,7 +307,7 @@ We added a new `outputSchema` and added it to the Middy validator.
 
 Let's test our API again with correct schema and Middy validator.
 
-Add **lname** parameter again in the **Query** tab and click **Send**.
+Add **lname** parameter again in the **Body** tab and click **Send**.
 
 ![Request with correct schema](/assets/examples/middy-validator/request-with-correct-schema.png)
 
