@@ -137,7 +137,7 @@ Note that this function need to be `async` to be invoked by AWS Lambda. Even tho
 {%change%} Add the following to `backend/functions/get.ts`.
 
 ```ts
-import notes from "./notes";
+import notes from "../notes";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
@@ -161,7 +161,7 @@ Here we are checking if we have the requested note. If we do, we respond with it
 {%change%} Add the following to `backend/functions/update.ts`.
 
 ```ts
-import notes from "./notes";
+import notes from "../notes";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
@@ -261,7 +261,7 @@ Let's make a quick change to our API. It would be good if the JSON strings are p
 {%change%} Replace `backend/functions/list.ts` with the following.
 
 ```ts
-import notes from "./notes";
+import notes from "../notes";
 
 export async function handler() {
   return {
