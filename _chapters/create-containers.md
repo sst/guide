@@ -4,7 +4,7 @@ title: Create Containers
 date: 2017-01-11 00:00:00
 lang: en
 ref: create-containers
-description: To split up our React.js app into different routes we are going to structure it using containers in React Router v4. We are also going to add the Navbar React-Bootstrap component to our App container.
+description: To split up our React.js app into different routes we are going to structure it using containers in React Router v6. We are also going to add the Navbar React-Bootstrap component to our App container.
 comments_id: create-containers/62
 ---
 
@@ -16,7 +16,7 @@ Let's start by creating the outer chrome of our application by first adding a na
 
 {%change%} Go ahead and remove the code inside `src/App.js` and replace it with the following.
 
-``` jsx
+```jsx
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import "./App.css";
@@ -43,11 +43,11 @@ We are doing a few things here:
 2. Adding a Navbar inside the container that fits to its container's width using the attribute `fluid`.
 3. Using a couple of [Bootstrap spacing utility classes](https://getbootstrap.com/docs/4.5/utilities/spacing/) (like `mb-#` and `py-#`) to add margin bottom (`mb`) and padding vertical (`py`). These use a proportional set of spacer units to give a more harmonious feel to our UI.
 
-Let's clear out the styles that came with our template. 
+Let's clear out the styles that came with our template.
 
 {%change%} Remove all the code inside `src/App.css` and replace it with the following:
 
-``` css
+```css
 .App {
 }
 ```
@@ -58,25 +58,25 @@ Also, let's remove some unused template files.
 
 {%change%} Run the following in your React `frontend/` directory.
 
-``` bash
+```bash
 $ rm src/logo.svg src/App.test.js
 ```
 
 ### Add the Home container
 
-Now that we have the outer chrome of our application ready, let's add the container for the homepage of our app.  It'll respond to the `/` route.
+Now that we have the outer chrome of our application ready, let's add the container for the homepage of our app. It'll respond to the `/` route.
 
 {%change%} Create a `src/containers/` directory by running the following in the `frontend/` directory.
 
-``` bash
+```bash
 $ mkdir src/containers/
 ```
 
-We'll be storing all of our top level components here. These are components that will respond to our routes and make requests to our API. We will be calling them *containers* through the rest of this tutorial.
+We'll be storing all of our top level components here. These are components that will respond to our routes and make requests to our API. We will be calling them _containers_ through the rest of this tutorial.
 
 {%change%} Create a new container and add the following to `src/containers/Home.js`.
 
-``` jsx
+```jsx
 import React from "react";
 import "./Home.css";
 
@@ -98,7 +98,7 @@ Now let's add a few lines to style this.
 
 {%change%} Add the following into `src/containers/Home.css`.
 
-``` css
+```css
 .Home .lander {
   padding: 80px 0;
   text-align: center;
@@ -116,23 +116,21 @@ Now we'll set up the routes so that we can have this container respond to the `/
 
 {%change%} Create `src/Routes.js` and add the following into it.
 
-``` jsx
+```jsx
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./containers/Home";
 
-export default function Routes() {
+export default function Links() {
   return (
-    <Switch>
-      <Route exact path="/">
-        <Home />
-      </Route>
-    </Switch>
+    <Routes>
+      <Route path="/" element={<Home />} />
+    </Routes>
   );
 }
 ```
 
-This component uses this `Switch` component from React-Router that renders the first matching route that is defined within it. For now we only have a single route, it looks for `/` and renders the `Home` component when matched. We are also using the `exact` prop to ensure that it matches the `/` route exactly. This is because the path `/` will also match any route that starts with a `/`.
+This component uses this `Routes` component from React-Router that renders the first matching route that is defined within it. For now we only have a single route, it looks for `/` and renders the `Home` component when matched. We are also using the `exact` prop to ensure that it matches the `/` route exactly. This is because the path `/` will also match any route that starts with a `/`.
 
 ### Render the Routes
 
@@ -140,19 +138,19 @@ Now let's render the routes into our App component.
 
 {%change%} Add the following to the header of your `src/App.js`.
 
-``` jsx
+```jsx
 import Routes from "./Routes";
 ```
 
 {%change%} And add the following line below our `Navbar` component inside `src/App.js`.
 
-``` jsx
+```jsx
 <Routes />
 ```
 
 So the `App` function component of our `src/App.js` should now look like this.
 
-``` jsx
+```jsx
 function App() {
   return (
     <div className="App container py-3">

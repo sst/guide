@@ -11,19 +11,18 @@ comments_id: comments-for-upload-a-file-to-s3/123
 Let's now add an attachment to our note. The flow we are using here is very simple.
 
 1. The user selects a file to upload.
-2. The file is uploaded to S3 under the user's folder and we get a key back. 
+2. The file is uploaded to S3 under the user's folder and we get a key back.
 3. Create a note with the file key as the attachment.
 
-We are going to use the Storage module that AWS Amplify has. If you recall, that back in the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter we allow a logged in user access to a folder inside our S3 Bucket. AWS Amplify stores directly to this folder if we want to *privately* store a file.
+We are going to use the Storage module that AWS Amplify has. If you recall, that back in the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter we allow a logged in user access to a folder inside our S3 Bucket. AWS Amplify stores directly to this folder if we want to _privately_ store a file.
 
 Also, just looking ahead a bit; we will be uploading files when a note is created and when a note is edited. So let's create a simple convenience method to help with that.
-
 
 ### Upload to S3
 
 {%change%} Create `src/lib/awsLib.js` and add the following:
 
-``` javascript
+```js
 import { Storage } from "aws-amplify";
 
 export async function s3Upload(file) {
@@ -53,7 +52,7 @@ Now that we have our upload methods ready, let's call them from the create note 
 
 {%change%} Replace the `handleSubmit` method in `src/containers/NewNote.js` with the following.
 
-``` javascript
+```js
 async function handleSubmit(event) {
   event.preventDefault();
 
@@ -72,18 +71,17 @@ async function handleSubmit(event) {
     const attachment = file.current ? await s3Upload(file.current) : null;
 
     await createNote({ content, attachment });
-    history.push("/");
+    nav("/");
   } catch (e) {
     onError(e);
     setIsLoading(false);
   }
 }
-
 ```
 
 {%change%} And make sure to include `s3Upload` by adding the following to the header of `src/containers/NewNote.js`.
 
-``` javascript
+```js
 import { s3Upload } from "../lib/awsLib";
 ```
 

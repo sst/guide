@@ -28,9 +28,9 @@ Our users make a request to our serverless API. It starts by hitting our API Gat
 
 In terms of access control, our API Gateway endpoint is allowed to invoke the Lambda functions we listed in the routes of our `stacks/ApiStack.js`. And if you'll recall, our Lambda functions are allowed to connect to our DynamoDB tables.
 
-``` js
+```js
 // Allow the API to access the table
-this.api.attachPermissions([table]);
+permissions: [table];
 ```
 
 For uploading files, our users will directly upload them to the [S3 bucket]({% link _chapters/create-an-s3-bucket-in-sst.md %}). While we'll look at how our frontend React app uploads files later in the guide, in this section we need to make sure that we secure access to it.

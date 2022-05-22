@@ -14,7 +14,7 @@ We are going to create a `.env` file to store this.
 
 {%change%} Create a new file in `.env.local` with the following.
 
-``` bash
+```bash
 STRIPE_SECRET_KEY=STRIPE_TEST_SECRET_KEY
 ```
 
@@ -26,7 +26,7 @@ A note on committing these files. SST follows the convention used by [Create Rea
 
 To ensure that this file doesn't get committed, we'll need to add it to the `.gitignore` in our project root. You'll notice that the starter project we are using already has this in the `.gitignore`.
 
-``` txt
+```txt
 # environments
 .env*.local
 ```
@@ -37,7 +37,7 @@ Next, let's add these to our functions.
 
 {%change%} Add the following below the `TABLE_NAME: table.tableName,` line in `stacks/ApiStack.js`:
 
-``` js
+```js
 STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
 ```
 
@@ -47,11 +47,11 @@ We are taking the environment variables in our SST app and passing it into our A
 
 If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
 
-Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
+Note that, you'll need to have `npm start` running for this to happen. If you had previously stopped it, then running `npm start` will deploy your changes again.
 
 You should see that the API stack is being updated.
 
-``` bash
+```bash
 Stack dev-notes-api
   Status: deployed
   Outputs:

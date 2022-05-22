@@ -2,7 +2,7 @@
 layout: post
 title: Handle CORS in S3 for File Uploads
 date: 2021-08-17 00:00:00
-lang: en 
+lang: en
 ref: handle-cors-in-s3-for-file-uploads
 description: In this chapter we'll look at how to configure CORS for an S3 bucket in our serverless app. We'll be adding these settings in our SST Bucket construct.
 comments_id: handle-cors-in-s3-for-file-uploads/2174
@@ -14,25 +14,22 @@ Let's enable CORS for our S3 bucket.
 
 {%change%} Replace the following line in `stacks/StorageStack.js`.
 
-``` js
-this.bucket = new sst.Bucket(this, "Uploads");
+```js
+const bucket = new Bucket(stack, "Uploads");
 ```
 
 {%change%} With this.
 
-``` js
-this.bucket = new sst.Bucket(this, "Uploads", {
-  s3Bucket: {
-    // Allow client side access to the bucket from a different domain
-    cors: [
-      {
-        maxAge: 3000,
-        allowedOrigins: ["*"],
-        allowedHeaders: ["*"],
-        allowedMethods: ["GET", "PUT", "POST", "DELETE", "HEAD"],
-      },
-    ],
-  },
+```js
+const bucket = new Bucket(stack, "Uploads", {
+  cors: [
+    {
+      maxAge: "1 day",
+      allowedOrigins: ["*"],
+      allowedHeaders: ["*"],
+      allowedMethods: ["GET", "PUT", "POST", "DELETE", "HEAD"],
+    },
+  ],
 });
 ```
 
@@ -42,7 +39,7 @@ Note that, you can customize this configuration to use your own domain or a list
 
 {%change%} Let's commit our changes and push it to GitHub.
 
-``` bash
+```bash
 $ git add .
 $ git commit -m "Enabling CORS"
 $ git push

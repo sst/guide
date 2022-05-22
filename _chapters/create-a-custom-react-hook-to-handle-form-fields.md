@@ -10,14 +10,14 @@ comments_id: create-a-custom-react-hook-to-handle-form-fields/1316
 
 Now before we move on to creating our sign up page, we are going to take a short detour to simplify how we handle form fields in React. We built a form as a part of our login page and we are going to do the same for our sign up page. You'll recall that in our login component we were creating two state variables to store the username and password.
 
-``` javascript
+```js
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 ```
 
 And we also use something like this to set the state:
 
-``` jsx
+```jsx
 onChange={(e) => setEmail(e.target.value)}
 ```
 
@@ -27,7 +27,7 @@ Now we are going to do something similar for our sign up page and it'll have a f
 
 {%change%} Add the following to `src/lib/hooksLib.js`.
 
-``` javascript
+```js
 import { useState } from "react";
 
 export function useFormFields(initialState) {
@@ -35,12 +35,12 @@ export function useFormFields(initialState) {
 
   return [
     fields,
-    function(event) {
+    function (event) {
       setValues({
         ...fields,
-        [event.target.id]: event.target.value
+        [event.target.id]: event.target.value,
       });
-    }
+    },
   ];
 }
 ```
@@ -53,7 +53,7 @@ Creating a custom hook is amazingly simple. In fact, we did this back when we cr
 
 3. So our hook returns an array with `fields` and a callback function that sets the new state based on the event object. The callback function takes the event object and gets the form field id from `event.target.id` and the value from `event.target.value`. In the case of our form the elements, the `event.target.id` comes from the `controlId` thats set in the `Form.Group` element:
 
-   ``` jsx
+   ```jsx
    <Form.Group size="lg" controlId="email">
      <Form.Label>Email</Form.Label>
      <Form.Control
@@ -73,11 +73,11 @@ And that's it! We can now use this in our Login component.
 
 {%change%} Replace our `src/containers/Login.js` with the following:
 
-``` jsx
+```jsx
 import React, { useState } from "react";
 import { Auth } from "aws-amplify";
 import Form from "react-bootstrap/Form";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
 import { useAppContext } from "../lib/contextLib";
 import { useFormFields } from "../lib/hooksLib";
@@ -85,12 +85,12 @@ import { onError } from "../lib/errorLib";
 import "./Login.css";
 
 export default function Login() {
-  const history = useHistory();
+  const nav = useNavigate();
   const { userHasAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
     email: "",
-    password: ""
+    password: "",
   });
 
   function validateForm() {
@@ -105,7 +105,7 @@ export default function Login() {
     try {
       await Auth.signIn(fields.email, fields.password);
       userHasAuthenticated(true);
-      history.push("/");
+      nav("/");
     } catch (e) {
       onError(e);
       setIsLoading(false);
@@ -133,7 +133,7 @@ export default function Login() {
           />
         </Form.Group>
         <LoaderButton
-          block
+          block="true"
           size="lg"
           type="submit"
           isLoading={isLoading}
@@ -149,10 +149,10 @@ export default function Login() {
 
 You'll notice that we are using our `useFormFields` Hook. A good way to think about custom React Hooks is to simply replace the line where we use it, with the Hook code itself. So instead of this line:
 
-``` javascript
+```js
 const [fields, handleFieldChange] = useFormFields({
   email: "",
-  password: ""
+  password: "",
 });
 ```
 
@@ -160,8 +160,8 @@ Simply imagine the code for the `useFormFields` function instead!
 
 Finally, we are setting our fields using the function our custom Hook is returning.
 
-``` jsx
-onChange={handleFieldChange}
+```jsx
+onChange = { handleFieldChange };
 ```
 
 Now we are ready to tackle our sign up page.

@@ -12,11 +12,11 @@ Now we are going to add an API that returns a list of all the notes a user has. 
 
 ### Add the Function
 
-{%change%} Create a new file in `src/list.js` with the following.
+{%change%} Create a new file in `backend/functions/list.js` with the following.
 
-``` js
-import handler from "./util/handler";
-import dynamoDb from "./util/dynamodb";
+```js
+import handler from "../util/handler";
+import dynamoDb from "../util/dynamodb";
 
 export const main = handler(async () => {
   const params = {
@@ -47,19 +47,19 @@ Let's add the route for this new endpoint.
 
 {%change%} Add the following above the `POST /notes` route in `stacks/ApiStack.js`.
 
-``` js
-"GET    /notes": "src/list.main",
+```js
+"GET /notes": "functions/list.main",
 ```
 
 ### Deploy Our Changes
 
 If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
 
-Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
+Note that, you'll need to have `npm start` running for this to happen. If you had previously stopped it, then running `npm start` will deploy your changes again.
 
 You should see that the API stack is being updated.
 
-``` bash
+```bash
 Stack dev-notes-api
   Status: deployed
   Outputs:

@@ -2,7 +2,7 @@
 layout: post
 title: Render the Note Form
 date: 2017-01-29 00:00:00
-lang: ko 
+lang: ko
 description: 우리는 React.js 앱의 형태로 사용자 노트를 렌더링하려고합니다. 양식 필드를 렌더링하기 위해 React-Bootstrap의 FormGroup 및 FormControl 구성 요소를 사용합니다.
 context: true
 comments_id: render-the-note-form/140
@@ -13,7 +13,7 @@ ref: render-the-note-form
 
 {%change%} `src/containers/Notes.js` 파일에 아래 내용과 같이 메소드를 추가하고 `render` 메소드를 변경합니다.
 
-``` coffee
+```coffee
 validateForm() {
   return this.state.content.length > 0;
 }
@@ -128,21 +128,21 @@ render() {
 
 이 코드를 완성하기 위해 `lisLoading`과 `isDeleting`을 state에 추가합니다.
 
-{%change%} 그럼 `constructor`의 state는 다음 처럼 설정되어 있어야 합니다. 
+{%change%} 그럼 `constructor`의 state는 다음 처럼 설정되어 있어야 합니다.
 
-``` javascript
+```js
 this.state = {
   isLoading: null,
   isDeleting: null,
   note: null,
   content: "",
-  attachmentURL: null
+  attachmentURL: null,
 };
 ```
 
 {%change%} `src/containers/Notes.css`에 다음을 추가해서 약간의 스타일을 반영하겠습니다.
 
-``` css
+```css
 .Notes form {
   padding-bottom: 15px;
 }
@@ -153,10 +153,9 @@ this.state = {
 }
 ```
 
-{%change%} 또한 헤더에 다음을 추가하여 여기에서 사용중인 React-Bootstrap 구성 요소와 스타일인 `LoaderButton` 그리고 `config`를 포함 시키십시오. 
+{%change%} 또한 헤더에 다음을 추가하여 여기에서 사용중인 React-Bootstrap 구성 요소와 스타일인 `LoaderButton` 그리고 `config`를 포함 시키십시오.
 
-
-``` javascript
+```js
 import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import config from "../config";

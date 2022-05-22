@@ -18,7 +18,7 @@ It's incredibly straightforward to setup. So let's get started.
 
 {%change%} Add the following to `src/components/ErrorBoundary.js` in your `frontend/` directory.
 
-``` jsx
+```jsx
 import React from "react";
 import { logError } from "../lib/errorLib";
 import "./ErrorBoundary.css";
@@ -52,13 +52,13 @@ Let's include some simple styles for this.
 
 {%change%} Create a `src/components/ErrorBoundary.css` file and add:
 
-``` css
+```css
 .ErrorBoundary {
   padding-top: 100px;
 }
 ```
 
-The styles we are using are very similar to our `NotFound` component. We use that when a user navigates to a page that we don't have a route for. 
+The styles we are using are very similar to our `NotFound` component. We use that when a user navigates to a page that we don't have a route for.
 
 ### Use the Error Boundary
 
@@ -67,28 +67,32 @@ To use the Error Boundary component that we created, we'll need to add it to our
 {%change%} Find the following in `src/App.js`.
 
 {% raw %}
-``` jsx
+
+```jsx
 <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
   <Routes />
 </AppContext.Provider>
 ```
+
 {% endraw %}
 
 {%change%} And replace it with:
 
 {% raw %}
-``` jsx
+
+```jsx
 <ErrorBoundary>
   <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
     <Routes />
   </AppContext.Provider>
 </ErrorBoundary>
 ```
+
 {% endraw %}
 
 {%change%} Also, make sure to import it in the header of `src/App.js`.
 
-``` javascript
+```js
 import ErrorBoundary from "./components/ErrorBoundary";
 ```
 
@@ -98,7 +102,7 @@ And that's it! Now an unhandled error in our containers will show a nice error m
 
 {%change%} Let's quickly commit these to Git.
 
-``` bash
+```bash
 $ git add .
 $ git commit -m "Adding React error reporting"
 ```
@@ -109,24 +113,32 @@ Before we move on, let's do a quick test.
 
 Replace the following in `src/containers/Home.js`.
 
-``` javascript
-{isAuthenticated ? renderNotes() : renderLander()}
+```js
+{
+  isAuthenticated ? renderNotes() : renderLander();
+}
 ```
 
 With these faulty lines:
 
 {% raw %}
-``` javascript
-{isAuthenticated ? renderNotes() : renderLander()}
-{ isAuthenticated.none.no }
+
+```js
+{
+  isAuthenticated ? renderNotes() : renderLander();
+}
+{
+  isAuthenticated.none.no;
+}
 ```
+
 {% endraw %}
 
 Now in your browser you should see something like this.
 
 ![React error message](/assets/monitor-debug-errors/react-error-message.png)
 
-Note that, you'll need to have the SST local development environment (`npx sst start`) and React local environment (`npm run start`) running.
+Note that, you'll need to have the SST local development environment (`npm start`) and React local environment (`npm run start`) running.
 
 While developing, React doesn't show your Error Boundary fallback UI by default. To view that, hit the **close** button on the top right.
 
@@ -136,13 +148,13 @@ Since we are developing locally, we don't report this error to Sentry. But let's
 
 Replace the following from the top of `src/lib/errorLib.js`.
 
-``` javascript
+```js
 const isLocal = process.env.NODE_ENV === "development";
 ```
 
 With:
 
-``` javascript
+```js
 const isLocal = false;
 ```
 
@@ -158,7 +170,7 @@ Now our React app is ready to handle the errors that are thrown its way!
 
 Let's cleanup all the testing changes we made above.
 
-``` bash
+```bash
 $ git checkout .
 ```
 
@@ -166,7 +178,7 @@ $ git checkout .
 
 {%change%} Let's also push these changes to GitHub and deploy our app.
 
-``` bash
+```bash
 $ git push
 ```
 

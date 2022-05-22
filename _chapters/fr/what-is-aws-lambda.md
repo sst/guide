@@ -38,7 +38,7 @@ Le temps maximum d'exécution signifie que les fonctions Lambda ne peuvent pas t
 
 La taille du package correspond à tout le code nécessaire pour exécuter la fonction. Cela inclut toutes les dépendances (le dossier `node_modules/` dans le cas de Node.js) dont votre fonction a besoin, Il y a une limite à 250MB non-compressé et 50MB après compression. On va s'intéresser au processus de packaging un peu plus tard.
 
-### Fonction Lambda 
+### Fonction Lambda
 
 Voici enfin ce à quoi ressemble une fonction Lambda (en Node.js).
 
@@ -64,10 +64,10 @@ Cependant, en raison de l'optimisation précédemment décrite, la fonction Lamb
 
 Par exemple, la méthode `createNewDbConnection` ci-dessous est appelée une fois par instanciation de conteneur et non à chaque fois que la fonction Lambda est appelée. En revanche, la fonction `myHandler` est appelée à chaque appel.
 
-``` javascript
+```js
 var dbConnection = createNewDbConnection();
 
-exports.myHandler = function(event, context, callback) {
+exports.myHandler = function (event, context, callback) {
   var result = dbConnection.makeQuery();
   callback(null, result);
 };

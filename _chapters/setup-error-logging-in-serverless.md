@@ -23,9 +23,9 @@ We are going to look at how to setup a debugging framework to catch the above er
 
 Let's start by adding some code to help us with that.
 
-{%change%} Create a `src/util/debug.js` file from your project root with the following.
+{%change%} Create a `backend/util/debug.js` file from your project root with the following.
 
-``` javascript
+```js
 import util from "util";
 import AWS from "aws-sdk";
 
@@ -61,8 +61,8 @@ export function flush(e) {
 We are doing a few things of note in this simple helper.
 
 - **Enable AWS SDK logging**
-  
-  We start by enabling logging for the AWS SDK. We do so by running `AWS.config.logger = { log: debug }`. This is telling the AWS SDK to log using our logger, the `debug()` method (we'll look at this below).  So when you make a call to an AWS service, ie. a query call to the DynamoDB table `dev-notes`, this will log:
+
+  We start by enabling logging for the AWS SDK. We do so by running `AWS.config.logger = { log: debug }`. This is telling the AWS SDK to log using our logger, the `debug()` method (we'll look at this below). So when you make a call to an AWS service, ie. a query call to the DynamoDB table `dev-notes`, this will log:
 
   ````
   [AWS dynamodb 200 0.296s 0 retries] query({ TableName: 'dev-notes',
@@ -71,6 +71,8 @@ We are doing a few things of note in this simple helper.
   ```
   Note, we only want to log this info when there is an error. We'll look at how we accomplish this below.
 
+  ````
+
 - **Log API request info**
 
   We initialize our debugger by calling `init()`. We log the API request info, including the path parameters, query string parameters, and request body. We do so using our internal `debug()` method.
@@ -78,28 +80,30 @@ We are doing a few things of note in this simple helper.
 - **Log only on error**
 
   We log messages using our special `debug()` method. Debug messages logged using this method only get printed out when we call the `flush()` method. This allows us to log very detailed contextual information about what was being done leading up to the error. We can log:
+
   - Arguments and return values for function calls.
   - And, request/response data for HTTP requests made.
-  
+
   We only want to print out debug messages to the console when we run into an error. This helps us reduce clutter in the case of successful requests. And, keeps our CloudWatch costs low!
 
   To do this, we store the log info (when calling `debug()`) in memory inside the `logs` array. And when we call `flush()` (in the case of an error), we `console.debug()` all those stored log messages.
 
-
 So in our Lambda function code, if we want to log some debug information that only gets printed out if we have an error, we'll do the following:
 
-``` javascript
+```js
 import debug from "../libs/debug-lib";
 
-debug('This stores the message and prints to CloudWatch if Lambda function later throws an exception');
+debug(
+  "This stores the message and prints to CloudWatch if Lambda function later throws an exception"
+);
 ```
 
 In contrast, if we always want to log to CloudWatch, we'll:
 
-``` javascript
-console.log('This prints a message in CloudWatch prefixed with INFO');
-console.warn('This prints a message in CloudWatch prefixed with WARN');
-console.error('This prints a message in CloudWatch prefixed with ERROR');
+```js
+console.log("This prints a message in CloudWatch prefixed with INFO");
+console.warn("This prints a message in CloudWatch prefixed with WARN");
+console.error("This prints a message in CloudWatch prefixed with ERROR");
 ```
 
 Now let's use the debug library in our Lambda functions.
@@ -108,11 +112,11 @@ Now let's use the debug library in our Lambda functions.
 
 You'll recall that all our Lambda functions are wrapped using a `handler()` method. We use this to format what our Lambda functions return as their HTTP response. It also, handles any errors that our Lambda functions throws.
 
-We'll use the debug lib that we added above to improve our error handling. 
+We'll use the debug lib that we added above to improve our error handling.
 
-{%change%} Replace our `src/util/handler.js` with the following.
+{%change%} Replace our `backend/util/handler.js` with the following.
 
-``` javascript
+```js
 import * as debug from "./debug";
 
 export default function handler(lambda) {
@@ -159,8 +163,8 @@ This should be fairly straightforward:
 
 You might recall the way we are currently using the above error handler in our Lambda functions.
 
-``` javascript
-import handler from "./util/handler";
+```js
+import handler from "../util/handler";
 
 export const main = handler((event, context) => {
   // Do some work
@@ -176,11 +180,11 @@ Note that, the `handler-lib.js` needs to be **imported before we import anything
 
 ### Commit the Code
 
-Let's push our changes  
+Let's push our changes
 
 {%change%} Let's commit the code we have so far.
 
-``` bash
+```bash
 $ git add .
 $ git commit -m "Adding serverless error logging"
 $ git push

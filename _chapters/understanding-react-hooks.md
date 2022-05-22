@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Understanding React Hooks
-description: Transitioning from Class components in React to using Function components with React Hooks can be tricky. In this post we go over the React lifecycle and help you develop a simple mental model for understanding React Hooks. 
+description: Transitioning from Class components in React to using Function components with React Hooks can be tricky. In this post we go over the React lifecycle and help you develop a simple mental model for understanding React Hooks.
 date: 2018-04-16 12:00:00
 comments_id: understanding-react-hooks/1338
 ---
@@ -36,20 +36,17 @@ You can [view the above in detail here](http://projects.wojtekmaj.pl/react-lifec
 
 Let's understand this quickly with an example. Say you have a component called `Hello`:
 
-``` jsx
+```jsx
 class Hello extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
-  componentDidUpdate() {
-  }
+  componentDidUpdate() {}
 
-  componentWillUnmount() {
-  }
+  componentWillUnmount() {}
 
   render() {
     return (
@@ -64,7 +61,8 @@ class Hello extends React.Component {
 This is roughly what React does when creating the `Hello` component. Note that, this is a simplified model and it isn't exactly what happens behind the scenes.
 
 1. React will create a new instance of your component.
-   ``` javascript
+
+   ```js
    const HelloInstance = new Hello(someProps);
    ```
 
@@ -88,7 +86,7 @@ But for now, let's look at the flow for a Function component.
 
 Let's start with a basic React Function component and look at how React renders it.
 
-``` jsx
+```jsx
 function Hello(props) {
   return (
     <div>
@@ -100,7 +98,7 @@ function Hello(props) {
 
 React will render this by simply running the function!
 
-``` javascript
+```js
 Hello(someProps);
 ```
 
@@ -116,15 +114,15 @@ This is where Hooks come in!
 
 React Hooks allows Function components to "hook" into the React state and lifecycle. Let's look at an example.
 
-``` jsx
+```jsx
 function Hello(props) {
-  const [ stateVariable, setStateVariable ] = useState(0);
+  const [stateVariable, setStateVariable] = useState(0);
 
   useEffect(() => {
-    console.log('mount and update');
+    console.log("mount and update");
 
     return () => {
-      console.log('cleanup');
+      console.log("cleanup");
     };
   });
 
@@ -142,7 +140,7 @@ We are using two Hooks here; `useState` and `useEffect`. One tells React to stor
 
 - Next we the `useEffect` Hook. We pass in a function that we want React to run every time our component gets rendered or updated. This function can also return a function that'll get called when our component needs to cleanup the old render. So if React renders our component, and we call `setStateVariable` at some point, React will need to re-render it. Here is roughly what happens:
 
-  ``` javascript
+  ```js
   // React renders the component
   Hello(someProps);
   // Console shows: mount and update
@@ -162,12 +160,12 @@ You'll notice that the lifecycle flow here is not exactly the same as before. An
 
 As an aside, you can optionally make `useEffect` call only on the initial mount and final unmount by passing in an empty array (`[]`) as another argument.
 
-``` javascript
+```js
 useEffect(() => {
-  console.log('mount');
+  console.log("mount");
   return () => {
-    console.log('will unmount');
-  }
+    console.log("will unmount");
+  };
 }, []);
 ```
 
@@ -189,10 +187,10 @@ This section is based on a great post by [Dan Abramov](https://twitter.com/dan_a
 
 Using the example from Dan's post; let's compare similar versions of the same component first as a Class.
 
-``` jsx
+```jsx
 class ProfilePage extends React.Component {
   showMessage = () => {
-    alert('Followed ' + this.props.user);
+    alert("Followed " + this.props.user);
   };
 
   handleClick = () => {
@@ -200,26 +198,24 @@ class ProfilePage extends React.Component {
   };
 
   render() {
-    return <button onClick={this.handleClick}>Follow</button>;
+    return <Button onClick={this.handleClick}>Follow</Button>;
   }
 }
 ```
 
 And now as a Function component.
 
-``` jsx
+```jsx
 function ProfilePage(props) {
   const showMessage = () => {
-    alert('Followed ' + props.user);
+    alert("Followed " + props.user);
   };
 
   const handleClick = () => {
     setTimeout(showMessage, 3000);
   };
 
-  return (
-    <button onClick={handleClick}>Follow</button>
-  );
+  return <Button onClick={handleClick}>Follow</Button>;
 }
 ```
 
@@ -229,7 +225,7 @@ However, the Class version is buggy in a very subtle way. Dan has [a demo versio
 
 Here is the bug in the Class version. If you click the button and `this.props.user` changes before 3 seconds, then the alerted message is the new user! This isn't surprising if you've followed along this chapter so far. React is using the SAME instance of your Class component between re-renders. Meaning that within our code the `this` object refers to that same instance. So conceptually React changes the `ProfilePage` instance prop by doing something like this:
 
-``` javascript
+```js
 // Create an instance
 const ProfilePageInstance = new ProfilePage({ user: "First User" });
 // First render
@@ -246,14 +242,14 @@ ProfilePageInstance.render();
 
 // Timer completes
 // where this <=> ProfilePageInstance
-alert('Followed ' + this.props.user);
+alert("Followed " + this.props.user);
 ```
 
 So when the `alert` is run, `this.props.user` is `New User` instead!
 
 Let's look at how the Functional version handles this.
 
-``` javascript
+```js
 // First render
 ProfilePage({ user: "First User" });
 
@@ -266,7 +262,7 @@ ProfilePage({ user: "New User" });
 
 // Timer completes
 // from the first ProfilePage() call scope
-alert('Followed ' + props.user);
+alert("Followed " + props.user);
 ```
 
 Here is the critical difference, the `alert` call here is from the scope of the first `ProfilePage()` call scope. This is happens thanks to [JavaScript Closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures). Since there is no "instance" here, your code is just a regular JavaScript function and is scoped to where it was run.

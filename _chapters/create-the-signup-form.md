@@ -14,10 +14,10 @@ Let's start by creating the signup form that'll get the user's email and passwor
 
 {%change%} Create a new container at `src/containers/Signup.js` with the following.
 
-``` jsx
+```jsx
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
 import { useAppContext } from "../lib/contextLib";
 import { useFormFields } from "../lib/hooksLib";
@@ -31,7 +31,7 @@ export default function Signup() {
     confirmPassword: "",
     confirmationCode: "",
   });
-  const history = useHistory();
+  const nav = useNavigate();
   const [newUser, setNewUser] = useState(null);
   const { userHasAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
@@ -50,17 +50,13 @@ export default function Signup() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-
     setIsLoading(true);
-
     setNewUser("test");
-
     setIsLoading(false);
   }
 
   async function handleConfirmationSubmit(event) {
     event.preventDefault();
-
     setIsLoading(true);
   }
 
@@ -78,7 +74,7 @@ export default function Signup() {
           <Form.Text muted>Please check your email for the code.</Form.Text>
         </Form.Group>
         <LoaderButton
-          block
+          block="true"
           size="lg"
           type="submit"
           variant="success"
@@ -120,7 +116,7 @@ export default function Signup() {
           />
         </Form.Group>
         <LoaderButton
-          block
+          block="true"
           size="lg"
           type="submit"
           variant="success"
@@ -145,8 +141,10 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 1. Since we need to show the user a form to enter the confirmation code, we are conditionally rendering two forms based on if we have a user object or not.
 
-   ``` jsx
-   {newUser === null ? renderForm() : renderConfirmationForm()}
+   ```jsx
+   {
+     newUser === null ? renderForm() : renderConfirmationForm();
+   }
    ```
 
 2. We are using the `LoaderButton` component that we created earlier for our submit buttons.
@@ -155,7 +153,7 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 4. We are setting the `autoFocus` flags on the email and the confirmation code fields.
 
-   ``` coffee
+   ```coffee
    <Form.Control
      autoFocus
      type="email"
@@ -166,7 +164,7 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 6. And you'll notice we are using the `useFormFields` custom React Hook that we [previously created]({% link _chapters/create-a-custom-react-hook-to-handle-form-fields.md %}) to handle our form fields.
 
-   ``` javascript
+   ```js
    const [fields, handleFieldChange] = useFormFields({
      email: "",
      password: "",
@@ -177,7 +175,7 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 {%change%} Also, let's add a couple of styles in `src/containers/Signup.css`.
 
-``` css
+```css
 @media all and (min-width: 480px) {
   .Signup {
     padding: 60px 0;
@@ -194,15 +192,13 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 {%change%} Finally, add our container as a route in `src/Routes.js` below our login route.
 
-``` jsx
-<Route exact path="/signup">
-  <Signup />
-</Route>
+```jsx
+<Route path="/signup" element={<Signup />} />
 ```
 
 {%change%} And include our component in the header.
 
-``` javascript
+```js
 import Signup from "./containers/Signup";
 ```
 

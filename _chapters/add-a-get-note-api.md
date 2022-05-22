@@ -14,7 +14,7 @@ Now that we created a note and saved it to our database. Let's add an API to ret
 
 {%change%} Create a new file `get.js` in your project root and paste the following code:
 
-``` javascript
+```js
 import handler from "./libs/handler-lib";
 import dynamoDb from "./libs/dynamodb-lib";
 
@@ -44,17 +44,17 @@ This follows exactly the same structure as our previous `create.js` function. Th
 
 {%change%} Open the `serverless.yml` file and append the following to it.
 
-``` yaml
-  get:
-    # Defines an HTTP API endpoint that calls the main function in get.js
-    # - path: url path is /notes/{id}
-    # - method: GET request
-    handler: get.main
-    events:
-      - http:
-          path: notes/{id}
-          cors: true
-          method: get
+```yaml
+get:
+  # Defines an HTTP API endpoint that calls the main function in get.js
+  # - path: url path is /notes/{id}
+  # - method: GET request
+  handler: get.main
+  events:
+    - http:
+        path: notes/{id}
+        cors: true
+        method: get
 ```
 
 Make sure that this block is indented exactly the same way as the preceding `create` block.
@@ -67,7 +67,7 @@ To test our get note API we need to mock passing in the `noteId` parameter. We a
 
 {%change%} Create a `mocks/get-event.json` file and add the following.
 
-``` json
+```json
 {
   "pathParameters": {
     "id": "a63c5450-1274-11eb-81db-b9d1e2c85f15"
@@ -77,13 +77,13 @@ To test our get note API we need to mock passing in the `noteId` parameter. We a
 
 And invoke our newly created function from the root directory of the project.
 
-``` bash
+```bash
 $ serverless invoke local --function get --path mocks/get-event.json
 ```
 
 The response should look similar to this.
 
-``` bash
+```bash
 {
     "statusCode": 200,
     "body": "{\"attachment\":\"hello.jpg\",\"content\":\"hello world\",\"createdAt\":1603157777941,\"noteId\":\"a63c5450-1274-11eb-81db-b9d1e2c85f15\",\"userId\":\"123\"}"

@@ -12,11 +12,11 @@ Now that we [created a note]({% link _chapters/add-an-api-to-create-a-note.md %}
 
 ### Add the Function
 
-{%change%} Create a new file in `src/get.js` in your project root with the following:
+{%change%} Create a new file in `backend/functions/get.js` in your project root with the following:
 
-``` javascript
-import handler from "./util/handler";
-import dynamoDb from "./util/dynamodb";
+```js
+import handler from "../util/handler";
+import dynamoDb from "../util/dynamodb";
 
 export const main = handler(async (event) => {
   const params = {
@@ -46,19 +46,19 @@ Let's add a new route for the get note API.
 
 {%change%} Add the following below the `POST /notes` route in `stacks/ApiStack.js`.
 
-``` js
-"GET    /notes/{id}": "src/get.main",
+```js
+"GET /notes/{id}": "functions/get.main",
 ```
 
 ### Deploy our changes
 
 If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
 
-Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
+Note that, you'll need to have `npm start` running for this to happen. If you had previously stopped it, then running `npm start` will deploy your changes again.
 
 You should see that the API stack is being updated.
 
-``` bash
+```bash
 Stack dev-notes-api
   Status: deployed
   Outputs:

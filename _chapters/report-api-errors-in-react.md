@@ -12,7 +12,7 @@ Now that we have our [React app configured with Sentry]({% link _chapters/setup-
 
 So far we've been using the `onError` method in `src/lib/errorLib.js` to handle errors. Recall that it doesn't do a whole lot outside of alerting the error.
 
-``` javascript
+```js
 export function onError(error) {
   let message = error.toString();
 
@@ -31,7 +31,7 @@ For API errors we want to report both the error and the API endpoint that caused
 
 {%change%} Replace the `onError` method in `src/lib/errorLib.js` with the following:
 
-``` javascript
+```js
 export function onError(error) {
   let errorInfo = {};
   let message = error.toString();

@@ -14,7 +14,7 @@ AWS Amplify has a `Auth.signOut()` method that helps clear it out.
 
 {%change%} Let's replace the `handleLogout` function in our `src/App.js` with this:
 
-``` javascript
+```js
 async function handleLogout() {
   await Auth.signOut();
 

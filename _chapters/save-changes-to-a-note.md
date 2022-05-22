@@ -12,10 +12,10 @@ Now that our note loads into our form, let's work on saving the changes we make 
 
 {%change%} Replace the `handleSubmit` function in `src/containers/Notes.js` with the following.
 
-``` javascript
+```js
 function saveNote(note) {
   return API.put("notes", `/notes/${id}`, {
-    body: note
+    body: note,
   });
 }
 
@@ -42,9 +42,9 @@ async function handleSubmit(event) {
 
     await saveNote({
       content,
-      attachment: attachment || note.attachment
+      attachment: attachment || note.attachment,
     });
-    history.push("/");
+    nav("/");
   } catch (e) {
     onError(e);
     setIsLoading(false);
@@ -54,7 +54,7 @@ async function handleSubmit(event) {
 
 {%change%} And include our `s3Upload` helper method in the header:
 
-``` javascript
+```js
 import { s3Upload } from "../lib/awsLib";
 ```
 

@@ -20,7 +20,7 @@ Let's start by editing our settings page so that our users can use to change the
 
 {%change%} Replace the `return` statement in `src/containers/Settings.js` with.
 
-``` jsx
+```jsx
 return (
   <div className="Settings">
     <LinkContainer to="/settings/email">
@@ -51,7 +51,7 @@ return (
 
 {%change%} And import the following as well.
 
-``` jsx
+```jsx
 import { LinkContainer } from "react-router-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 ```
@@ -60,7 +60,7 @@ All this does is add two links to a page that allows our users to change their p
 
 {%change%} Replace our `src/containers/Settings.css` with the following.
 
-``` css
+```css
 @media all and (min-width: 480px) {
   .Settings {
     padding: 60px 0;
@@ -78,14 +78,14 @@ All this does is add two links to a page that allows our users to change their p
 
 ### Change Password Form
 
-Now let's create the form that allows our users to change their password. 
+Now let's create the form that allows our users to change their password.
 
 {%change%} Add the following to `src/containers/ChangePassword.js`.
 
-``` jsx
+```jsx
 import React, { useState } from "react";
 import { Auth } from "aws-amplify";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import { useFormFields } from "../lib/hooksLib";
@@ -93,7 +93,7 @@ import { onError } from "../lib/errorLib";
 import "./ChangePassword.css";
 
 export default function ChangePassword() {
-  const history = useHistory();
+  const nav = useNavigate();
   const [fields, handleFieldChange] = useFormFields({
     password: "",
     oldPassword: "",
@@ -122,7 +122,7 @@ export default function ChangePassword() {
         fields.password
       );
 
-      history.push("/settings");
+      nav("/settings");
     } catch (error) {
       onError(error);
       setIsChanging(false);
@@ -174,20 +174,16 @@ export default function ChangePassword() {
 
 Most of this should be very straightforward. The key part of the flow here is that we ask the user for their current password along with their new password. Once they enter it, we can call the following:
 
-``` jsx
+```jsx
 const currentUser = await Auth.currentAuthenticatedUser();
-await Auth.changePassword(
-  currentUser,
-  fields.oldPassword,
-  fields.password
-);
+await Auth.changePassword(currentUser, fields.oldPassword, fields.password);
 ```
 
 The above snippet uses the `Auth` module from Amplify to get the current user. And then uses that to change their password by passing in the old and new password. Once the `Auth.changePassword` method completes, we redirect the user to the settings page.
 
 {%change%} Let's also add a couple of styles.
 
-``` css
+```css
 @media all and (min-width: 480px) {
   .ChangePassword {
     padding: 60px 0;
@@ -202,7 +198,7 @@ The above snippet uses the `Auth` module from Amplify to get the current user. A
 
 {%change%} Let's add our new page to `src/Routes.js`.
 
-``` html
+```html
 <AuthenticatedRoute exact path="/settings/password">
   <ChangePassword />
 </AuthenticatedRoute>
@@ -210,7 +206,7 @@ The above snippet uses the `Auth` module from Amplify to get the current user. A
 
 {%change%} And import it.
 
-``` jsx
+```jsx
 import ChangePassword from "./containers/ChangePassword";
 ```
 

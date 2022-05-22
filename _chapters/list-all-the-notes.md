@@ -14,7 +14,7 @@ Currently, our Home container is very simple. Let's add the conditional renderin
 
 {%change%} Replace our `src/containers/Home.js` with the following.
 
-``` jsx
+```jsx
 import React, { useState, useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import { useAppContext } from "../lib/contextLib";
@@ -60,8 +60,10 @@ We are doing a few things of note here:
 
 1. Rendering the lander or the list of notes based on `isAuthenticated` flag in our app context.
 
-   ``` javascript
-   {isAuthenticated ? renderNotes() : renderLander()}
+   ```js
+   {
+     isAuthenticated ? renderNotes() : renderLander();
+   }
    ```
 
 2. Store our notes in the state. Currently, it's empty but we'll be calling our API for it.

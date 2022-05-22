@@ -20,19 +20,20 @@ SST comes with built in support for writing and running tests. It uses [Jest](ht
 
 Let's start by writing a test for the CDK infrastructure in our app. We are going to keep this fairly simple for now.
 
-{%change%} Add the following to `test/StorageStack.test.js`.
+{%change%} Add the following to `backend/test/StorageStack.test.js`.
 
 ```js
 import { Template } from "aws-cdk-lib/assertions";
-import * as sst from "@serverless-stack/resources";
-import StorageStack from "../stacks/StorageStack";
+import { App, getStack } from "@serverless-stack/resources";
+import { StorageStack } from "../../stacks/StorageStack";
+import { test } from "vitest";
 
 test("Test StorageStack", () => {
-  const app = new sst.App();
+  const app = new App();
   // WHEN
-  const stack = new StorageStack(app, "test-stack");
+  app.stack(StorageStack);
   // THEN
-  const template = Template.fromStack(stack);
+  const template = Template.fromStack(getStack(StorageStack));
   template.hasResourceProperties("AWS::DynamoDB::Table", {
     BillingMode: "PAY_PER_REQUEST",
   });
@@ -53,10 +54,11 @@ $ rm test/MyStack.test.js
 
 We are also going to test the business logic in our Lambda functions.
 
-{%change%} Create a new file in `test/cost.test.js` and add the following.
+{%change%} Create a new file in `backend/test/cost.test.js` and add the following.
 
 ```js
-import { calculateCost } from "../src/util/cost";
+import { expect, test } from "vitest";
+import { calculateCost } from "../util/cost";
 
 test("Lowest tier", () => {
   const storage = 10;
@@ -93,14 +95,14 @@ This should be straightforward. We are adding 3 tests. They are testing the diff
 And we can run our tests by using the following command in the root of our project.
 
 ```bash
-$ npx sst test
+$ npm test
 ```
 
 You should see something like this:
 
 ```bash
- PASS  test/cost.test.js
- PASS  test/StorageStack.test.js
+ PASS  backend/test/cost.test.js
+ PASS  backend/test/StorageStack.test.js
 
 Test Suites: 2 passed, 2 total
 Tests:       4 passed, 4 total

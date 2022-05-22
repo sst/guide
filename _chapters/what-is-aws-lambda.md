@@ -69,10 +69,10 @@ However, as noted in the optimization above, AWS will hang on to an existing con
 
 For example, the `createNewDbConnection` method below is called once per container instance and not every time the Lambda function is invoked. The `myHandler` function on the other hand is called on every invocation.
 
-``` javascript
+```js
 var dbConnection = createNewDbConnection();
 
-exports.myHandler = function(event, context, callback) {
+exports.myHandler = function (event, context, callback) {
   var result = dbConnection.makeQuery();
   callback(null, result);
 };
@@ -95,4 +95,3 @@ The Lambda free tier includes 1M free requests per month and 400,000 GB-seconds 
 In our experience, Lambda is usually the least expensive part of our infrastructure costs.
 
 Next, let's take a deeper look into the advantages of serverless, including the total cost of running our demo app.
-

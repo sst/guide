@@ -17,13 +17,13 @@ Recall that we've been hard coding our user ids so far (with user id `123`). We'
 
 Recall the function signature of a Lambda function:
 
-``` javascript
+```js
 export async function main(event, context) {}
 ```
 
 Or the refactored version that we are using:
 
-``` javascript
+```js
 export const main = handler(async (event) => {});
 ```
 
@@ -31,59 +31,59 @@ So far we've used the `event` object to get the path parameters (`event.pathPara
 
 Now we'll get the id of the authenticated user.
 
-``` javascript
-event.requestContext.authorizer.iam.cognitoIdentity.identityId
+```js
+event.requestContext.authorizer.iam.cognitoIdentity.identityId;
 ```
 
 This is an id that's assigned to our user by our Cognito Identity Pool.
 
 You'll also recall that so far all of our APIs are hard coded to interact with a single user.
 
-``` javascript
+```js
 userId: "123", // The id of the author
 ```
 
 Let's change that.
 
-{%change%} Replace the above line in `src/create.js` with.
+{%change%} Replace the above line in `backend/functions/create.js` with.
 
-``` javascript
+```js
 userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
 ```
 
-{%change%} Do the same in the `src/get.js`.
+{%change%} Do the same in the `backend/functions/get.js`.
 
-``` javascript
+```js
 userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
 ```
 
-{%change%} And in the `src/update.js`.
+{%change%} And in the `backend/functions/update.js`.
 
-``` javascript
+```js
 userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
 ```
 
-{%change%} In `src/delete.js` as well.
+{%change%} In `backend/functions/delete.js` as well.
 
-``` javascript
+```js
 userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
 ```
 
-{%change%} In `src/list.js` find this line instead.
+{%change%} In `backend/functions/list.js` find this line instead.
 
-``` javascript
+```js
 ":userId": "123",
 ```
 
 {%change%} And replace it with.
 
-``` javascript
+```js
 ":userId": event.requestContext.authorizer.iam.cognitoIdentity.identityId,
 ```
 
 {%change%} Also, include `event` in the function arguments.
 
-``` javascript
+```js
 export const main = handler(async (event) => {
 ```
 
@@ -105,7 +105,7 @@ These steps can be a bit tricky to do by hand. So we created a simple tool calle
 
 You can run it using.
 
-``` bash
+```bash
 $ npx aws-api-gateway-cli-test \
 --username='admin@example.com' \
 --password='Passw0rd!' \
@@ -131,13 +131,13 @@ While this might look intimidating, just keep in mind that behind the scenes all
 
 If you are on Windows, use the command below. The space between each option is very important.
 
-``` bash
+```bash
 $ npx aws-api-gateway-cli-test --username admin@example.com --password Passw0rd! --user-pool-id USER_POOL_ID --app-client-id USER_POOL_CLIENT_ID --cognito-region COGNITO_REGION --identity-pool-id IDENTITY_POOL_ID --invoke-url API_ENDPOINT --api-gateway-region API_REGION --path-template /notes --method POST --body "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}"
 ```
 
 If the command is successful, the response will look similar to this.
 
-``` bash
+```bash
 Authenticating with User Pool
 Getting temporary credentials
 Making API request
@@ -162,7 +162,7 @@ It'll have created a new note for our test user in the **DynamoDB** tab of the [
 
 {%change%} Let's commit and push our changes to GitHub.
 
-``` bash
+```bash
 $ git add .
 $ git commit -m "Securing the API"
 $ git push

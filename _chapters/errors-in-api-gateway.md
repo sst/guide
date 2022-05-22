@@ -23,7 +23,7 @@ Head over to the `frontend/` directory in your project.
 
 {%change%} Open `src/containers/Home.js`, and replace the `loadNotes()` function with:
 
-``` javascript
+```js
 function loadNotes() {
   return API.get("notes", "/invalid_path");
 }
@@ -31,7 +31,7 @@ function loadNotes() {
 
 {%change%} Let's commit this and push it.
 
-``` bash
+```bash
 $ git add .
 $ git commit -m "Adding faulty paths"
 $ git push
@@ -48,6 +48,7 @@ On Sentry, the error will show that a `GET` request failed with status code `0`.
 ![Invalid path error in Sentry](/assets/monitor-debug-errors/invalid-path-error-in-sentry.png)
 
 What happens here is that:
+
 - The browser first makes an `OPTIONS` request to `/invalid_path`.
 - API Gateway returns a `403` response.
 - The browser throws an error and does not continue to make the `GET` request.
@@ -78,7 +79,7 @@ Now let's look at what happens when we use an invalid HTTP method for our API re
 
 {%change%} In `src/containers/Home.js` replace the `loadNotes()` function with:
 
-``` javascript
+```js
 function loadNotes() {
   return API.put("notes", "/notes");
 }
@@ -86,7 +87,7 @@ function loadNotes() {
 
 {%change%} Let's push our code.
 
-``` bash
+```bash
 $ git add .
 $ git commit -m "Adding invalid method"
 $ git push
@@ -103,6 +104,7 @@ You should see a similar Network Error as the one above in Sentry. Select the er
 ![Invalid method error in Sentry](/assets/monitor-debug-errors/invalid-method-error-in-sentry.png)
 
 Here's what's going on behind the scenes:
+
 - The browser first makes an `OPTIONS` request to `/notes`.
 - API Gateway returns a successful `200` response with the HTTP methods allowed for the path.
 - The allowed HTTP methods are `GET` and `POST`. This is because we defined:
@@ -117,7 +119,7 @@ So in this case over on Seed, you'll only see an `OPTIONS` request in your acces
 
 ![Invalid API method request error in Seed](/assets/monitor-debug-errors/invalid-api-method-request-error-in-seed.png)
 
-The access log combined with the Sentry error details should tell us what we need to do to fix the error. 
+The access log combined with the Sentry error details should tell us what we need to do to fix the error.
 -->
 
 With that we've covered all the major types of serverless errors and how to debug them.
@@ -126,7 +128,7 @@ With that we've covered all the major types of serverless errors and how to debu
 
 {%change%} Let's revert all the faulty code that we created.
 
-``` bash
+```bash
 $ git checkout main
 $ git branch -D debug
 ```

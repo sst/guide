@@ -15,7 +15,7 @@ comments_id: call-the-list-api/127
 
 {%change%} `src/containers/Home.js` 파일의 `constructor` 블럭 아래에 다음 내용을 추가합니다.
 
-``` javascript
+```js
 async componentDidMount() {
   if (!this.props.isAuthenticated) {
     return;
@@ -36,9 +36,9 @@ notes() {
 }
 ```
 
-{%change%} 그리고 헤더에 Amplify API을 추가합니다. 
+{%change%} 그리고 헤더에 Amplify API을 추가합니다.
 
-``` javascript
+```js
 import { API } from "aws-amplify";
 ```
 
@@ -50,7 +50,7 @@ import { API } from "aws-amplify";
 
 {%change%} `renderNotesList` 메소드를 다음 내용으로 바꿉니다.
 
-``` coffee
+```coffee
 renderNotesList(notes) {
   return [{}].concat(notes).map(
     (note, i) =>
@@ -79,13 +79,13 @@ renderNotesList(notes) {
 
 {%change%} `react-bootstrap` 파일의 헤더에`ListGroupItem`을 포함 시키십시오.
 
-``` javascript
+```js
 import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
 ```
 
 {%change%} 또한 `react-router-bootstrap`에서 `LinkContainer`를 포함시킵니다.
 
-``` javascript
+```js
 import { LinkContainer } from "react-router-bootstrap";
 ```
 
@@ -99,7 +99,7 @@ import { LinkContainer } from "react-router-bootstrap";
 
 {%change%} `src/containers/Home.css`에 몇 가지 스타일을 추가합니다.
 
-``` css
+```css
 .Home .notes h4 {
   font-family: "Open Sans", sans-serif;
   font-weight: 600;

@@ -16,36 +16,31 @@ We also need a couple of icons in our application. We'll be using the [React Ico
 
 {%change%} Run the following command in your `frontend/` directory and **not** in your project root
 
-``` bash
-$ npm install react-bootstrap@1.6.1 react-icons@4.2.0 --save
+```bash
+$ npm install bootstrap react-bootstrap react-icons
 ```
 
 This installs the npm packages and adds the dependencies to your `package.json` of your React app.
 
 ### Add Bootstrap Styles
 
-{%change%} React Bootstrap uses the standard Bootstrap v3 styles; so just add the following styles to your `public/index.html`.
+{%change%} React Bootstrap uses the standard Bootstrap v5 styles; so just add the following styles to your `src/index.js`.
 
-``` html
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-  integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
-  crossorigin="anonymous"
-/>
+```js
+import "bootstrap/dist/css/bootstrap.min.css";
 ```
 
 We'll also tweak the styles of the form fields so that the mobile browser does not zoom in on them on focus. We just need them to have a minimum font size of `16px` to prevent the zoom.
 
 {%change%} To do that, let's add the following to our `src/index.css`.
 
-``` css
+```css
 select.form-control,
 textarea.form-control,
 input.form-control {
   font-size: 1rem;
 }
-input[type=file] {
+input[type="file"] {
   width: 100%;
 }
 ```

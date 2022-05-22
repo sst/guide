@@ -13,15 +13,15 @@ ref: connect-the-billing-form
 
 Stripe.js를 HTML에 포함시켜 보겠습니다.
 
-{%change%} `public/index.html` 파일의 `<head>` 아래에 다음을 추가합니다.  
+{%change%} `public/index.html` 파일의 `<head>` 아래에 다음을 추가합니다.
 
-``` html
+```html
 <script src="https://js.stripe.com/v3/"></script>
 ```
 
 {%change%} `src/containers/Settings.js`에 `render` 메소드를 다음으로 대체합니다.
 
-``` coffee
+```coffee
 handleFormSubmit = async (storage, { token, error }) => {
   if (error) {
     alert(error);
@@ -37,7 +37,7 @@ handleFormSubmit = async (storage, { token, error }) => {
     });
 
     alert("Your card has been charged successfully!");
-    this.props.history.push("/");
+    this.props.nav("/");
   } catch (e) {
     alert(e);
     this.setState({ isLoading: false });
@@ -62,7 +62,7 @@ render() {
 
 {%change%} 그리고 헤더에 다음 내용을 추가합니다.
 
-``` js
+```js
 import { Elements, StripeProvider } from "react-stripe-elements";
 import BillingForm from "../components/BillingForm";
 import config from "../config";
@@ -77,7 +77,7 @@ import "./Settings.css";
 
 {%change%} `src/containers/Settings.css`에 다음을 추가합니다.
 
-``` css
+```css
 @media all and (min-width: 480px) {
   .Settings {
     padding: 60px 0;
@@ -110,7 +110,7 @@ Stripe 테스트 카드에 대한 자세한 내용은 [Stripe API Docs](https://
 
 {%change%} Git에 빠르게 커밋합니다.
 
-``` bash
+```bash
 $ git add .
 $ git commit -m "Connecting the billing form"
 ```

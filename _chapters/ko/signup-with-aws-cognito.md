@@ -11,10 +11,10 @@ comments_id: signup-with-aws-cognito/130
 
 이제 `handleSubmit` 과 `handleConfirmationSubmit` 메소드를 구현해서 AWS Cognito 설정과 연결해 보겠습니다.
 
-{%change%} `src/containers/Signup.js` 파일에서 `handleSubmit` 과 `handleConfirmationSubmit` 메소드를 아래 내용으로 변경합니다. 
+{%change%} `src/containers/Signup.js` 파일에서 `handleSubmit` 과 `handleConfirmationSubmit` 메소드를 아래 내용으로 변경합니다.
 
-``` javascript
-handleSubmit = async event => {
+```js
+handleSubmit = async (event) => {
   event.preventDefault();
 
   this.setState({ isLoading: true });
@@ -22,19 +22,19 @@ handleSubmit = async event => {
   try {
     const newUser = await Auth.signUp({
       username: this.state.email,
-      password: this.state.password
+      password: this.state.password,
     });
     this.setState({
-      newUser
+      newUser,
     });
   } catch (e) {
     alert(e.message);
   }
 
   this.setState({ isLoading: false });
-}
+};
 
-handleConfirmationSubmit = async event => {
+handleConfirmationSubmit = async (event) => {
   event.preventDefault();
 
   this.setState({ isLoading: true });
@@ -44,17 +44,17 @@ handleConfirmationSubmit = async event => {
     await Auth.signIn(this.state.email, this.state.password);
 
     this.props.userHasAuthenticated(true);
-    this.props.history.push("/");
+    this.props.nav("/");
   } catch (e) {
     alert(e.message);
     this.setState({ isLoading: false });
   }
-}
+};
 ```
 
 {%change%} 그리고 Amplify의 Auth를 헤더에 추가합니다.
 
-``` javascript
+```js
 import { Auth } from "aws-amplify";
 ```
 
@@ -73,7 +73,6 @@ import { Auth } from "aws-amplify";
 6. `userHasAuthenticated` 메소드를 사용하여 App state를 업데이트합니다.
 
 7. 마지막으로 홈페이지로 리디렉션합니다.
-
 
 이제 브라우저로 전환하여 위 순서대로 새로운 계정을 신청할 경우, 성공적으로 완료된 후에 홈페이지로 리디렉션되어야합니다.
 

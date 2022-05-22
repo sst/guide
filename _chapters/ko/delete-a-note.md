@@ -2,8 +2,8 @@
 layout: post
 title: Delete a Note
 date: 2017-01-31 00:00:00
-lang: ko 
-description: 사용자가 React.js 앱에서 노트를 삭제할 수 있습니다. 이를 위해 AWS Amplify를 사용하여 serverless 백앤드 API에 DELETE 요청을 할 것입니다. 
+lang: ko
+description: 사용자가 React.js 앱에서 노트를 삭제할 수 있습니다. 이를 위해 AWS Amplify를 사용하여 serverless 백앤드 API에 DELETE 요청을 할 것입니다.
 context: true
 comments_id: comments-for-delete-a-note/137
 ref: delete-a-note
@@ -11,9 +11,9 @@ ref: delete-a-note
 
 노트 페이지에서 마지막으로 해야할 일은 사용자가 노트를 삭제할 수 있게하는 것입니다. 버튼은 이미 설정되어 있습니다. API에 연결해서 마무리할 일만 남았습니다.
 
-{%change%}  `src/containers/Notes.js`에서 `handleDelete` 메소드를 대체합니다.
+{%change%} `src/containers/Notes.js`에서 `handleDelete` 메소드를 대체합니다.
 
-``` coffee
+```coffee
 deleteNote() {
   return API.del("notes", `/notes/${this.props.match.params.id}`);
 }
@@ -33,7 +33,7 @@ handleDelete = async event => {
 
   try {
     await this.deleteNote();
-    this.props.history.push("/");
+    this.props.nav("/");
   } catch (e) {
     alert(e);
     this.setState({ isDeleting: false });
@@ -53,4 +53,4 @@ handleDelete = async event => {
 
 ![로그 아웃 상태에서 노트 페이지 에러 화면](/assets/note-page-logged-out-error.png)
 
-대신에, 로그인 페이지로 리디렉션 한 다음 로그인 한 후에 다시 요청한 페이지로 리디렉션하고 싶습니다. 다음에 그 방법을 살펴 보겠습니다. 
+대신에, 로그인 페이지로 리디렉션 한 다음 로그인 한 후에 다시 요청한 페이지로 리디렉션하고 싶습니다. 다음에 그 방법을 살펴 보겠습니다.

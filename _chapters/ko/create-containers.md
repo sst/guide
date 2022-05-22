@@ -4,7 +4,7 @@ title: Create Containers
 date: 2017-01-11 00:00:00
 lang: ko
 ref: create-containers
-description: React.js 앱을 여러 경로로 나누기 위해 React Router v4의 컨테이너를 사용하여 구조화 할 것이다. 또한 Navbar React-Bootstrap 구성 요소를 App 컨테이너에 추가 할 예정입니다.
+description: React.js 앱을 여러 경로로 나누기 위해 React Router v6의 컨테이너를 사용하여 구조화 할 것이다. 또한 Navbar React-Bootstrap 구성 요소를 App 컨테이너에 추가 할 예정입니다.
 context: true
 comments_id: create-containers/62
 ---
@@ -17,13 +17,13 @@ comments_id: create-containers/62
 
 <img class = "code-marker" src="/assets/s.png"/> 시작하려면, Create React App에 원래 있던 `src/logo.svg`를 제거합니다.
 
-``` bash
+```bash
 $ rm src/logo.svg
 ```
 
 {%change%} 그리고 `src/App.js`에서도 코드를 제거합니다. 그리고 아래 내용으로 대체합니다.
 
-``` coffee
+```coffee
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Navbar } from "react-bootstrap";
@@ -59,7 +59,7 @@ export default App;
 
 {%change%} `src/App.css` 안에 모든 코드를 제거하고 아래 내용으로 바꿉니다:
 
-``` css
+```css
 .App {
   margin-top: 15px;
 }
@@ -69,13 +69,13 @@ export default App;
 }
 ```
 
-### Home 컨테이너 추가하기 
+### Home 컨테이너 추가하기
 
 이제 외부 컨텐트를 넣기 위한 준비가 되었으므로 홈페이지에 컨테이너를 추가해 봅시다. 홈페이지 컨테이너를 추가하면 `/` 경로에 응답합니다.
 
 {%change%} 작업 디렉토리에 아래 명령을 실행해서 `src/containers/` 디렉터리를 만듭니다.
 
-``` bash
+```bash
 $ mkdir src/containers/
 ```
 
@@ -83,7 +83,7 @@ $ mkdir src/containers/
 
 {%change%} 새로운 컨테이너를 생성하기 위해 아래 코드를 새로 만든 파일인 `src/containers/Home.js`에 추가합니다.
 
-``` coffee
+```coffee
 import React, { Component } from "react";
 import "./Home.css";
 
@@ -107,7 +107,7 @@ export default class Home extends Component {
 
 {%change%} `src/containers/Home.css`에 아래 내용을 추가합니다.
 
-``` css
+```css
 .Home .lander {
   padding: 80px 0;
   text-align: center;
@@ -129,7 +129,7 @@ export default class Home extends Component {
 
 {%change%} `src/Routes.js`를 만들고 아래 내용을 작성합니다.
 
-``` coffee
+```coffee
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "./containers/Home";
@@ -142,25 +142,25 @@ export default () =>
 
 이 구성 요소는 React-Router의 `Switch` 컴포넌트를 사용하여 그 안에 정의 된 첫 번째로 일치하는 경로를 렌더링합니다. 지금은 단 하나의 경로만을 가지고 있습니다. `/`를 찾아서 일치 할 때 `Home` 컴포넌트를 렌더링합니다. 그리고 `exact` 속성을 사용하여 `/` 경로와 정확히 일치하는지 확인합니다. `/` 경로는 `/`로 시작하는 다른 경로와도 일치하기 때문입니다.
 
-### 경로 렌더링하기 
+### 경로 렌더링하기
 
 이제 경로를 App 구성 요소로 렌더링 해 봅시다.
 
 {%change%} `src/App.js`의 헤더 부분에 아래 내용을 추가합니다.
 
-``` coffee
+```coffee
 import Routes from "./Routes";
 ```
 
 {%change%} 그리고 `src/App.js`의 `render` 내부에 있는 `Navbar` 컴포넌트 아래에 다음 내용을 추가합니다.
 
-``` coffee
+```coffee
 <Routes />
 ```
 
 그래서 `src/App.js`의 `render` 메소드는 다음과 같이 보일 것입니다.
 
-``` coffee
+```coffee
 render() {
   return (
     <div className="App container">

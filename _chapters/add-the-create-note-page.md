@@ -16,10 +16,10 @@ First we are going to create the form for a note. It'll take some content and a 
 
 {%change%} Create a new file `src/containers/NewNote.js` and add the following.
 
-``` jsx
+```jsx
 import React, { useRef, useState } from "react";
 import Form from "react-bootstrap/Form";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
 import { onError } from "../lib/errorLib";
 import config from "../config";
@@ -27,7 +27,7 @@ import "./NewNote.css";
 
 export default function NewNote() {
   const file = useRef(null);
-  const history = useHistory();
+  const nav = useNavigate();
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -44,8 +44,9 @@ export default function NewNote() {
 
     if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
       alert(
-        `Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE /
-          1000000} MB.`
+        `Please pick a file smaller than ${
+          config.MAX_ATTACHMENT_SIZE / 1000000
+        } MB.`
       );
       return;
     }
@@ -85,7 +86,7 @@ export default function NewNote() {
 
 Everything is fairly standard here, except for the file input. Our form elements so far have been [controlled components](https://facebook.github.io/react/docs/forms.html), as in their value is directly controlled by the state of the component. However, in the case of the file input we want the browser to handle this state. So instead of `useState` we'll use the `useRef` hook. The main difference between the two is that `useRef` does not cause the component to re-render. It simply tells React to store a value for us so that we can use it later. We can set/get the current value of a ref by using its `current` property. Just as we do when the user selects a file.
 
-``` javascript
+```js
 file.current = event.target.files[0];
 ```
 
@@ -93,13 +94,13 @@ Currently, our `handleSubmit` does not do a whole lot other than limiting the fi
 
 {%change%} So add the following to our `src/config.js` below the `const config = {` line.
 
-``` txt
+```txt
 MAX_ATTACHMENT_SIZE: 5000000,
 ```
 
 {%change%} Let's also add the styles for our form in `src/containers/NewNote.css`.
 
-``` css
+```css
 .NewNote form textarea {
   height: 300px;
   font-size: 1.5rem;
@@ -110,15 +111,13 @@ MAX_ATTACHMENT_SIZE: 5000000,
 
 {%change%} Finally, add our container as a route in `src/Routes.js` below our signup route.
 
-``` jsx
-<Route exact path="/notes/new">
-  <NewNote />
-</Route>
+```jsx
+<Route path="/notes/new" element={<NewNote />} />
 ```
 
 {%change%} And include our component in the header.
 
-``` javascript
+```js
 import NewNote from "./containers/NewNote";
 ```
 

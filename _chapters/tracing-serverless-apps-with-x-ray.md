@@ -21,16 +21,17 @@ First let’s start by enabling X-Ray for your application.
 
 Open your `serverless.yml` and add a `tracing` config inside the `provider` section:
 
-``` yaml
+```yaml
 provider:
   ...
   tracing:
     apiGateway: true
     lambda: true
 ```
+
 Then add the IAM permissions required for Lambda to write to X-Ray under `iamRoleStatements` inside the `provider` section:
 
-``` yaml
+```yaml
 provider:
   ...
   iamRoleStatements:
@@ -44,25 +45,28 @@ provider:
 
 Let’s use the following Lambda function as an example.
 
-``` javascript
-const AWS = require('aws-sdk');
+```js
+const AWS = require("aws-sdk");
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 const sns = new AWS.SNS();
 
-exports.main = async function(event) {
-  await dynamodb.get({
-    TableName: 'notes',
-    Key: { noteId: 'note1' },
-  }).promise();
+exports.main = async function (event) {
+  await dynamodb
+    .get({
+      TableName: "notes",
+      Key: { noteId: "note1" },
+    })
+    .promise();
 
-  await sns.publish({
-    Message           : 'test',
-    TopicArn          : 'arn:aws:sns:us-east-1:113345762000:test-topic',
-  }).promise();
+  await sns
+    .publish({
+      Message: "test",
+      TopicArn: "arn:aws:sns:us-east-1:113345762000:test-topic",
+    })
+    .promise();
 
-
-  return { statusCode: 200, body: 'successful' };
-}
+  return { statusCode: 200, body: "successful" };
+};
 ```
 
 Now run `serverless deploy` to deploy your service. Make sure to deploy your entire application (not just an individual function), since you made changes to your `serverless.yml`.
@@ -71,7 +75,7 @@ Note that, if you are trying to enable AWS X-Ray Tracing on existing serverless 
 
 After you deploy, invoke your API Gateway endpoint:
 
-``` bash
+```bash
 $ curl https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/xxx
 ```
 
@@ -104,21 +108,21 @@ To do this we need to enable X-Ray tracing for the services that were invoked by
 
 Install the AWS X-Ray SDK. In your project directory, run:
 
-``` bash
+```bash
 $ npm install -s aws-xray-sdk
 ```
 
 Update your Lambda code and wrap AWS SDK with the X-Ray SDK. Change:
 
-``` javascript
-const AWS = require('aws-sdk');
+```js
+const AWS = require("aws-sdk");
 ```
 
 To:
 
-``` javascript
-const AWSXRay = require('aws-xray-sdk-core');
-const AWS = AWSXRay.captureAWS(require('aws-sdk'));
+```js
+const AWSXRay = require("aws-xray-sdk-core");
+const AWS = AWSXRay.captureAWS(require("aws-sdk"));
 ```
 
 That’s it!
@@ -127,7 +131,7 @@ Now run `serverless deploy` again to deploy the change. This time you can depl
 
 After you deploy, invoke your API Gateway endpoint again:
 
-``` bash
+```bash
 $ curl https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/xxx
 ```
 

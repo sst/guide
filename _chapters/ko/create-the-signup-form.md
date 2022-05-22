@@ -4,7 +4,7 @@ title: Create the Signup Form
 date: 2017-01-20 00:00:00
 lang: ko
 ref: create-the-signup-form
-description: 우리는 React.js 앱을 위한 가입 페이지를 만들 예정입니다. Amazon Cognito를 사용하여 사용자를 등록하려면 사용자가 이메일로 전송된 인증 코드를 입력할 수있는 양식을 만들어야합니다. 
+description: 우리는 React.js 앱을 위한 가입 페이지를 만들 예정입니다. Amazon Cognito를 사용하여 사용자를 등록하려면 사용자가 이메일로 전송된 인증 코드를 입력할 수있는 양식을 만들어야합니다.
 context: true
 comments_id: create-the-signup-form/52
 ---
@@ -15,7 +15,7 @@ comments_id: create-the-signup-form/52
 
 {%change%} 다음과 같이 `src/containers/Signup.js`에 새 컨테이너를 만듭니다.
 
-``` coffee
+```coffee
 import React, { Component } from "react";
 import {
   FormText,
@@ -151,7 +151,7 @@ export default class Signup extends Component {
     );
   }
 }
- 
+
 ```
 
 우리가 여기에서 하는 대부분의 작업은 매우 간단하므로 빨리 넘어 가겠습니다.
@@ -168,8 +168,7 @@ export default class Signup extends Component {
 
 {%change%} 그리고 `src/containers/Signup.css`에 몇 가지 스타일을 추가해 보겠습니다.
 
-
-``` css
+```css
 @media all and (min-width: 480px) {
   .Signup {
     padding: 60px 0;
@@ -192,13 +191,13 @@ export default class Signup extends Component {
 
 {%change%} 마지막으로 컨테이너를 로그인 경로 아래의 `src/Routes.js`에있는 경로로 추가하십시오. 참고로 ["세션을 state에 추가하기"]({% link _chapters/add-the-session-to-the-state.md %}) 챕터에서 작성한 `AppliedRoute` 컴포넌트를 사용하고 있습니다.
 
-``` coffee
+```coffee
 <AppliedRoute path="/signup" exact component={Signup} props={childProps} />
 ```
 
 그리고 헤더에 컴포넌트를 import합니다.
 
-``` javascript
+```js
 import Signup from "./containers/Signup";
 ```
 

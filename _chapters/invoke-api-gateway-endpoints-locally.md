@@ -12,25 +12,23 @@ Our notes app backend has an API Gateway endpoint. We want to be able to develop
 
 We installed the above plugin at the repo root, because all API services require the plugin. Open `serverless.yml` in our `notes-api`. You'll notice `serverless-offline` is listed under plugins.
 
-``` yaml
+```yaml
 service: notes-api
 
 plugins:
   - serverless-offline
-
-...
 ```
 
 Let's start our local web server.
 
-``` bash
+```bash
 $ cd notes-api
 $ serverless offline
 ```
 
-By default,  the server starts on `http://localhost` and on port `3000`. Let's try making a request to the endpoint:
+By default, the server starts on `http://localhost` and on port `3000`. Let's try making a request to the endpoint:
 
-``` bash
+```bash
 $ curl http://localhost:3000/notes
 ```
 
@@ -38,9 +36,9 @@ $ curl http://localhost:3000/notes
 
 Our API endpoint is secured using Cognito Identity Pool. The serverless-offline plugin allows you to pass in Cognito authentication information through the request headers. This allows you to invoke the Lambdas as if they were authenticated by Cognito Identity pool.
 
-To mock a User Pool user id: 
+To mock a User Pool user id:
 
-``` bash
+```bash
 $ curl --header "cognito-identity-id: 13179724-6380-41c4-8936-64bca3f3a25b" \
   http://localhost:3000/notes
 ```
@@ -49,7 +47,7 @@ You can access the id via `event.requestContext.identity.cognitoIdentityId` in y
 
 To mock the Identity Pool user id:
 
-``` bash
+```bash
 $ curl --header "cognito-authentication-provider: cognito-idp.us-east-1.amazonaws.com/us-east-1_Jw6lUuyG2,cognito-idp.us-east-1.amazonaws.com/us-east-1_Jw6lUuyG2:CognitoSignIn:5f24dbc9-d3ab-4bce-8d5f-eafaeced67ff" \
   http://localhost:3000/notes
 ```
@@ -64,40 +62,46 @@ The serverless-offline plugin cannot emulate an overall API endpoint. It cannot 
 
 That said, here is a quick script that lets you run a server on port `8080` while routing `/notes` and `/billing` to their separate services.
 
-``` javascript
+```js
 #!/usr/bin/env node
 
-const { spawn } = require('child_process');
-const http = require('http');
-const httpProxy = require('http-proxy');
+const { spawn } = require("child_process");
+const http = require("http");
+const httpProxy = require("http-proxy");
 const services = [
-  {route:'/billing/*', path:'services/billing-api', port:3001},
-  {route:'/notes/*', path:'services/notes-api', port:3002},
+  { route: "/billing/*", path: "services/billing-api", port: 3001 },
+  { route: "/notes/*", path: "services/notes-api", port: 3002 },
 ];
 
 // Start `serverless offline` for each service
-services.forEach(service => {
-  const child = spawn('serverless', ['offline', 'start', '--stage', 'dev', '--port', service.port], {cwd: service.path});
-  child.stdout.setEncoding('utf8');
-  child.stdout.on('data', chunk => console.log(chunk));
-  child.stderr.on('data', chunk => console.log(chunk));
-  child.on('close', code => console.log(`child exited with code ${code}`));
+services.forEach((service) => {
+  const child = spawn(
+    "serverless",
+    ["offline", "start", "--stage", "dev", "--port", service.port],
+    { cwd: service.path }
+  );
+  child.stdout.setEncoding("utf8");
+  child.stdout.on("data", (chunk) => console.log(chunk));
+  child.stderr.on("data", (chunk) => console.log(chunk));
+  child.on("close", (code) => console.log(`child exited with code ${code}`));
 });
 
 // Start a proxy server on port 8080 forwarding based on url path
 const proxy = httpProxy.createProxyServer({});
-const server = http.createServer(function(req, res) {
-  const service = services.find(per => urlMatchRoute(req.url, per.route));
+const server = http.createServer(function (req, res) {
+  const service = services.find((per) => urlMatchRoute(req.url, per.route));
   // Case 1: matching service FOUND => forward request to the service
   if (service) {
-    proxy.web(req, res, {target:`http://localhost:${service.port}`});
+    proxy.web(req, res, { target: `http://localhost:${service.port}` });
   }
   // Case 2: matching service NOT found => display available routes
   else {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.write(`Url path "${req.url}" does not match routes defined in services\n\n`);
+    res.writeHead(200, { "Content-Type": "text/plain" });
+    res.write(
+      `Url path "${req.url}" does not match routes defined in services\n\n`
+    );
     res.write(`Available routes are:\n`);
-    services.map(service => res.write(`- ${service.route}\n`));
+    services.map((service) => res.write(`- ${service.route}\n`));
     res.end();
   }
 });
@@ -107,23 +111,31 @@ server.listen(8080);
 // - ie. url is '/notes/123'
 // - ie. route is '/notes/*'
 function urlMatchRoute(url, route) {
-  const urlParts = url.split('/');
-  const routeParts = route.split('/');
+  const urlParts = url.split("/");
+  const routeParts = route.split("/");
   for (let i = 0, l = routeParts.length; i < l; i++) {
     const urlPart = urlParts[i];
     const routePart = routeParts[i];
 
     // Case 1: If either part is undefined => not match
-    if (urlPart === undefined || routePart === undefined) { return false; }
+    if (urlPart === undefined || routePart === undefined) {
+      return false;
+    }
 
     // Case 2: If route part is match all => match
-    if (routePart === '*') { return true; }
- 
+    if (routePart === "*") {
+      return true;
+    }
+
     // Case 3: Exact match => keep checking
-    if (urlPart === routePart) { continue; }
+    if (urlPart === routePart) {
+      continue;
+    }
 
     // Case 4: route part is variable => keep checking
-    if (routePart.startsWith('{')) { continue; }
+    if (routePart.startsWith("{")) {
+      continue;
+    }
   }
 
   return true;
@@ -139,7 +151,7 @@ This script is in included as `startServer` in the [sample repo]({{ site.backend
 
 You can run this server locally from the project root using:
 
-``` bash
+```bash
 $ ./startServer
 ```
 

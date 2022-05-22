@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Code Splitting in Create React App
-description: Code splitting in Create React App is an easy way to reduce the size of your React.js app bundle. To do this in an app using React Router v4, we can asynchronously load our routes using the dynamic import() method that Create React App supports.
+description: Code splitting in Create React App is an easy way to reduce the size of your React.js app bundle. To do this in an app using React Router v6, we can asynchronously load our routes using the dynamic import() method that Create React App supports.
 date: 2018-04-17 00:00:00
 comments_id: code-splitting-in-create-react-app/98
 ---
@@ -18,23 +18,24 @@ Create React App (from 1.0 onwards) allows us to dynamically import parts of our
 
 While, the dynamic `import()` can be used for any component in our React app; it works really well with React Router. Since, React Router is figuring out which component to load based on the path; it would make sense that we dynamically import those components only when we navigate to them.
 
-### Code Splitting and React Router v4
+### Code Splitting and React Router v6
 
 The usual structure used by React Router to set up routing for your app looks something like this.
 
-``` jsx
+```jsx
 /* Import the components */
 import Home from "./containers/Home";
 import Posts from "./containers/Posts";
 import NotFound from "./containers/NotFound";
 
 /* Use components to define routes */
-export default () =>
+export default () => (
   <Switch>
     <Route path="/" exact component={Home} />
     <Route path="/posts/:id" exact component={Posts} />
     <Route component={NotFound} />
-  </Switch>;
+  </Switch>
+);
 ```
 
 We start by importing the components that will respond to our routes. And then use them to define our routes. The `Switch` component renders the route that matches the path.
@@ -47,7 +48,7 @@ To do this we are going to dynamically import the required component.
 
 {%change%} Add the following to `src/components/AsyncComponent.js`.
 
-``` jsx
+```jsx
 import React, { Component } from "react";
 
 export default function asyncComponent(importComponent) {
@@ -56,7 +57,7 @@ export default function asyncComponent(importComponent) {
       super(props);
 
       this.state = {
-        component: null
+        component: null,
       };
     }
 
@@ -64,7 +65,7 @@ export default function asyncComponent(importComponent) {
       const { default: component } = await importComponent();
 
       this.setState({
-        component: component
+        component: component,
       });
     }
 
@@ -89,13 +90,13 @@ We are doing a few things here:
 
 Now let's use this component in our routes. Instead of statically importing our component.
 
-``` jsx
+```jsx
 import Home from "./containers/Home";
 ```
 
 We are going to use the `asyncComponent` to dynamically import the component we want.
 
-``` jsx
+```jsx
 const AsyncHome = asyncComponent(() => import("./containers/Home"));
 ```
 
@@ -105,7 +106,7 @@ Also, it might seem weird that we are passing a function here. Why not just pass
 
 We are then going to use the `AsyncHome` component in our routes. React Router will create the `AsyncHome` component when the route is matched and that will in turn dynamically import the `Home` component and continue just like before.
 
-``` jsx
+```jsx
 <Route path="/" exact component={AsyncHome} />
 ```
 
@@ -113,7 +114,7 @@ Now let's go back to our Notes project and apply these changes.
 
 {%change%} Your `src/Routes.js` should look like this after the changes.
 
-``` jsx
+```jsx
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import asyncComponent from "./components/AsyncComponent";
@@ -128,14 +129,9 @@ const AsyncSignup = asyncComponent(() => import("./containers/Signup"));
 const AsyncNewNote = asyncComponent(() => import("./containers/NewNote"));
 const AsyncNotFound = asyncComponent(() => import("./containers/NotFound"));
 
-export default ({ childProps }) =>
+export default ({ childProps }) => (
   <Switch>
-    <AppliedRoute
-      path="/"
-      exact
-      component={AsyncHome}
-      props={childProps}
-    />
+    <AppliedRoute path="/" exact component={AsyncHome} props={childProps} />
     <UnauthenticatedRoute
       path="/login"
       exact
@@ -163,12 +159,12 @@ export default ({ childProps }) =>
     {/* Finally, catch all unmatched routes */}
     <Route component={AsyncNotFound} />
   </Switch>
-;
+);
 ```
 
 It is pretty cool that with just a couple of changes, our app is all set up for code splitting. And without adding a whole lot more complexity either! Here is what our `src/Routes.js` looked like before.
 
-``` jsx
+```jsx
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import AppliedRoute from "./components/AppliedRoute";
@@ -182,14 +178,9 @@ import Signup from "./containers/Signup";
 import NewNote from "./containers/NewNote";
 import NotFound from "./containers/NotFound";
 
-export default ({ childProps }) =>
+export default ({ childProps }) => (
   <Switch>
-    <AppliedRoute
-      path="/"
-      exact
-      component={Home}
-      props={childProps}
-    />
+    <AppliedRoute path="/" exact component={Home} props={childProps} />
     <UnauthenticatedRoute
       path="/login"
       exact
@@ -217,7 +208,7 @@ export default ({ childProps }) =>
     {/* Finally, catch all unmatched routes */}
     <Route component={NotFound} />
   </Switch>
-;
+);
 ```
 
 Notice that instead of doing the static imports for all the containers at the top, we are creating these functions that are going to do the dynamic imports for us when necessary.
@@ -226,9 +217,9 @@ Now if you build your app using `npm run build`; you'll see the code splitting i
 
 ![Create React App Code Splitting build screenshot](/assets/create-react-app-code-splitting-build.png)
 
-Each of those `.chunk.js` files are the different dynamic `import()` calls that we have.  Of course, our app is quite small and the various parts that are split up are not significant at all. However, if the page that we use to edit our note included a rich text editor; you can imagine how that would grow in size. And it would unfortunately affect the initial load time of our app.
+Each of those `.chunk.js` files are the different dynamic `import()` calls that we have. Of course, our app is quite small and the various parts that are split up are not significant at all. However, if the page that we use to edit our note included a rich text editor; you can imagine how that would grow in size. And it would unfortunately affect the initial load time of our app.
 
-Now if we deploy our app using `npm run deploy`; you can see the browser load the different chunks on-demand as we browse around in the [demo](https://demo.serverless-stack.com). 
+Now if we deploy our app using `npm run deploy`; you can see the browser load the different chunks on-demand as we browse around in the [demo](https://demo.serverless-stack.com).
 
 ![Create React App loading Code Splitting screenshot](/assets/create-react-app-loading-code-splitting.png)
 
@@ -242,23 +233,23 @@ It was mentioned above that you can add a loading spinner while the import is in
 
 All you need to do to use it is install it.
 
-``` bash
+```bash
 $ npm install --save react-loadable
 ```
 
 Use it instead of the `asyncComponent` that we had above.
 
-``` jsx
+```jsx
 const AsyncHome = Loadable({
   loader: () => import("./containers/Home"),
-  loading: MyLoadingComponent
+  loading: MyLoadingComponent,
 });
 ```
 
 And `AsyncHome` is used exactly as before. Here the `MyLoadingComponent` would look something like this.
 
-``` jsx
-const MyLoadingComponent = ({isLoading, error}) => {
+```jsx
+const MyLoadingComponent = ({ isLoading, error }) => {
   // Handle the loading state
   if (isLoading) {
     return <div>Loading...</div>;
@@ -266,8 +257,7 @@ const MyLoadingComponent = ({isLoading, error}) => {
   // Handle the error state
   else if (error) {
     return <div>Sorry, there was a problem loading the page.</div>;
-  }
-  else {
+  } else {
     return null;
   }
 };

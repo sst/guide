@@ -16,7 +16,7 @@ We are going to create a single page app using [React.js](https://facebook.githu
 
 {%change%} Run the following command in your project root.
 
-``` bash
+```bash
 $ npx create-react-app frontend --use-npm
 $ cd frontend
 ```
@@ -27,7 +27,7 @@ Note that we are adding this inside our SST app. Create React App will throw a w
 
 {%change%} Add the following to `frontend/.env`.
 
-``` bash
+```bash
 SKIP_PREFLIGHT_CHECK=true
 ```
 
@@ -37,7 +37,7 @@ We also want to load the environment variables from our backend. To do this, weâ
 
 {%change%} Run the following **in the `frontend/` directory**.
 
-``` bash
+```bash
 $ npm install @serverless-stack/static-site-env --save-dev
 ```
 
@@ -61,35 +61,35 @@ We are going to be deploying our React app to AWS. To do that we'll be using the
 
 {%change%} Create a new file in `stacks/FrontendStack.js` and add the following.
 
-``` js
-import * as sst from "@serverless-stack/resources";
+```js
+import { ReactStaticSite, use } from "@serverless-stack/resources";
+import { ApiStack } from "./ApiStack";
+import { AuthStack } from "./AuthStack";
+import { StorageStack } from "./StorageStack";
 
-export default class FrontendStack extends sst.Stack {
-  constructor(scope, id, props) {
-    super(scope, id, props);
+export function FrontendStack({ stack, app }) {
+  const { api } = use(ApiStack);
+  const { auth } = use(AuthStack);
+  const { bucket } = use(StorageStack);
 
-    const { api, auth, bucket } = props;
+  // Define our React app
+  const site = new ReactStaticSite(stack, "ReactSite", {
+    path: "frontend",
+    // Pass in our environment variables
+    environment: {
+      REACT_APP_API_URL: api.customDomainUrl || api.url,
+      REACT_APP_REGION: app.region,
+      REACT_APP_BUCKET: bucket.bucketName,
+      REACT_APP_USER_POOL_ID: auth.userPoolId,
+      REACT_APP_IDENTITY_POOL_ID: auth.cognitoIdentityPoolId,
+      REACT_APP_USER_POOL_CLIENT_ID: auth.userPoolClientId,
+    },
+  });
 
-    // Define our React app
-    const site = new sst.ReactStaticSite(this, "ReactSite", {
-      path: "frontend",
-      // Pass in our environment variables
-      environment: {
-        REACT_APP_API_URL: api.url,
-        REACT_APP_REGION: scope.region,
-        REACT_APP_BUCKET: bucket.bucketName,
-        REACT_APP_USER_POOL_ID: auth.cognitoUserPool.userPoolId,
-        REACT_APP_IDENTITY_POOL_ID: auth.cognitoCfnIdentityPool.ref,
-        REACT_APP_USER_POOL_CLIENT_ID:
-          auth.cognitoUserPoolClient.userPoolClientId,
-      },
-    });
-
-    // Show the url in the output
-    this.addOutputs({
-      SiteUrl: site.url,
-    });
-  }
+  // Show the url in the output
+  stack.addOutputs({
+    SiteUrl: site.url,
+  });
 }
 ```
 
@@ -107,44 +107,34 @@ Let's add this new stack to the rest of our app.
 
 {%change%} Replace the `main` function in `stacks/index.js` with.
 
-``` js
+```js
 export default function main(app) {
-  const storageStack = new StorageStack(app, "storage");
-
-  const apiStack = new ApiStack(app, "api", {
-    table: storageStack.table,
+  app.setDefaultFunctionProps({
+    runtime: "nodejs16.x",
+    srcPath: "backend",
+    bundle: {
+      format: "esm",
+    },
   });
-
-  const authStack = new AuthStack(app, "auth", {
-    api: apiStack.api,
-    bucket: storageStack.bucket,
-  });
-
-  new FrontendStack(app, "frontend", {
-    api: apiStack.api,
-    auth: authStack.auth,
-    bucket: storageStack.bucket,
-  });
+  app.stack(StorageStack).stack(ApiStack).stack(AuthStack).stack(FrontendStack);
 }
 ```
 
-Here you'll notice that we are passing in the references from our other stacks into the `FrontendStack`.
-
 {%change%} Also, import the new stack at the top.
 
-``` js
-import FrontendStack from "./FrontendStack";
+```js
+import { FrontendStack } from "./FrontendStack";
 ```
 
 ### Deploy the Changes
 
 If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
 
-Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
+Note that, you'll need to have `npm start` running for this to happen. If you had previously stopped it, then running `npm start` will deploy your changes again.
 
 You should see that the new frontend stack has been deployed.
 
-``` bash
+```bash
 Stack dev-notes-frontend
   Status: deployed
   Outputs:
@@ -164,7 +154,7 @@ Letâ€™s start our React development environment.
 
 {%change%} In the `frontend/` directory run.
 
-``` bash
+```bash
 $ npm start
 ```
 
@@ -176,7 +166,7 @@ This should fire up the newly created app in your browser.
 
 {%change%} Let's quickly change the title of our note taking app. Open up `public/index.html` and edit the `title` tag to the following:
 
-``` html
+```html
 <title>Scratch - A simple note taking app</title>
 ```
 

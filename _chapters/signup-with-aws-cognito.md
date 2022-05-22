@@ -12,12 +12,10 @@ Now let's go ahead and implement the `handleSubmit` and `handleConfirmationSubmi
 
 {%change%} Replace our `handleSubmit` and `handleConfirmationSubmit` functions in `src/containers/Signup.js` with the following.
 
-``` javascript
+```js
 async function handleSubmit(event) {
   event.preventDefault();
-
   setIsLoading(true);
-
   try {
     const newUser = await Auth.signUp({
       username: fields.email,
@@ -33,15 +31,12 @@ async function handleSubmit(event) {
 
 async function handleConfirmationSubmit(event) {
   event.preventDefault();
-
   setIsLoading(true);
-
   try {
     await Auth.confirmSignUp(fields.email, fields.confirmationCode);
     await Auth.signIn(fields.email, fields.password);
-
     userHasAuthenticated(true);
-    history.push("/");
+    nav("/");
   } catch (e) {
     onError(e);
     setIsLoading(false);
@@ -51,7 +46,7 @@ async function handleConfirmationSubmit(event) {
 
 {%change%} Also, include the Amplify Auth in our header.
 
-``` javascript
+```js
 import { Auth } from "aws-amplify";
 ```
 

@@ -13,14 +13,14 @@ Now that we understand what _infrastructure as code_ is, we are ready to create 
 
 {%change%} Run the following in your working directory.
 
-``` bash
-$ npx create-serverless-stack@latest notes
+```bash
+$ npm init sst -- javascript-starter notes
 $ cd notes
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` in the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-``` json
+```json
 {
   "name": "notes",
   "region": "us-east-1",
@@ -36,11 +36,10 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `src/` — App Code
+2. `backend/` — App Code
 
-   The Lambda function code that's run when your API is invoked is placed in the `src/` directory of your project.
+   The Lambda function code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
 Later on we'll be adding a `frontend/` directory for our frontend React app.
 
 The starter project that's created is defining a simple _Hello World_ API. In the next chapter, we'll be deploying it and running it locally.
-

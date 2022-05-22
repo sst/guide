@@ -35,7 +35,7 @@ Here's what we want to happening when developing locally:
 
 As an example, let's look at a really simple full-stack [SST app](/). It has a simple _Hello World_ API endpoint. And a React.js app.
 
-``` js
+```js
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -43,14 +43,14 @@ export default class MyStack extends sst.Stack {
     super(scope, id, props);
 
     // Create a HTTP API
-    const api = new sst.Api(this, "Api", {
+    const api = new Api(stack, "Api", {
       routes: {
-        "GET /": "src/lambda.handler",
+        "GET /": "functions/lambda.handler",
       },
     });
 
     // Create a React.js app
-    const site = new sst.ReactStaticSite(this, "Site", {
+    const site = new ReactStaticSite(this, "Site", {
       path: "frontend",
       environment: {
         // Pass in the API endpoint to our app
@@ -59,7 +59,7 @@ export default class MyStack extends sst.Stack {
     });
 
     // Show the URLs in the output
-    this.addOutputs({
+    stack.addOutputs({
       SiteUrl: site.url,
       ApiEndpoint: api.url,
     });
@@ -69,7 +69,7 @@ export default class MyStack extends sst.Stack {
 
 Here we are using the [`ReactStaticSite`]({{ site.docs_url }}/constructs/ReactStaticSite) construct. It allows us to set React environment variables from our API.
 
-``` js
+```js
 environment: {
   // Pass in the API endpoint to our app
   REACT_APP_API_URL: api.url,
@@ -78,8 +78,8 @@ environment: {
 
 Now when we start our local development environment.
 
-``` bash
-$ npx sst start
+```bash
+$ npm start
 ```
 
 SST generates a file in the `.build/` directory with the environment that we configured. It looks something like this.
@@ -98,13 +98,13 @@ SST generates a file in the `.build/` directory with the environment that we con
 
 On the React side, we'll now want to pick the environment variable up. To do this, we'll use a really simple CLI ([`@serverless-stack/static-site-env`](https://www.npmjs.com/package/@serverless-stack/static-site-env)) that reads from this file and sets it as a [build-time environment variable in React](https://create-react-app.dev/docs/adding-custom-environment-variables/).
 
-``` bash
+```bash
 $ npm install @serverless-stack/static-site-env --save-dev
 ```
 
 We can use the environment variable in our components using `process.env.REACT_APP_API_URL`.
 
-``` jsx
+```jsx
 export default function App() {
   const url = process.env.REACT_APP_API_URL;
 
@@ -118,7 +118,7 @@ export default function App() {
 
 We can now wrap our start script with it.
 
-``` json
+```json
 "scripts": {
   "start": "sst-env -- react-scripts start",
   "build": "react-scripts build",
@@ -129,7 +129,7 @@ We can now wrap our start script with it.
 
 So if we start our React local environment:
 
-``` bash
+```bash
 $ npm run start
 ```
 

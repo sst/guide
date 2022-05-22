@@ -12,18 +12,18 @@ Now let's get started with creating an API to handle billing. It's going to take
 
 ### Add a Billing Lambda
 
-{%change%} Start by installing the Stripe NPM package. Run the following in the root of our project.
+{%change%} Start by installing the Stripe NPM package. Run the following in the `backend/` folder of our project.
 
-``` bash
+```bash
 $ npm install stripe
 ```
 
-{%change%} Create a new file in `src/billing.js` with the following.
+{%change%} Create a new file in `backend/functions/billing.js` with the following.
 
-``` js
+```js
 import Stripe from "stripe";
-import handler from "./util/handler";
-import { calculateCost } from "./util/cost";
+import handler from "../util/handler";
+import { calculateCost } from "../util/cost";
 
 export const main = handler(async (event) => {
   const { storage, source } = JSON.parse(event.body);
@@ -58,11 +58,11 @@ Note, if you are testing this from India, you'll need to add some shipping infor
 
 ### Add the Business Logic
 
-Now let's implement our `calculateCost` method. This is primarily our *business logic*.
+Now let's implement our `calculateCost` method. This is primarily our _business logic_.
 
-{%change%} Create a `src/util/cost.js` and add the following.
+{%change%} Create a `backend/util/cost.js` and add the following.
 
-``` js
+```js
 export function calculateCost(storage) {
   const rate = storage <= 10 ? 4 : storage <= 100 ? 2 : 1;
   return rate * storage * 100;
@@ -79,19 +79,19 @@ Let's add a new route for our billing API.
 
 {%change%} Add the following below the `DELETE /notes/{id}` route in `stacks/ApiStack.js`.
 
-``` js
-"POST   /billing": "src/billing.main",
+```js
+"POST /billing": "functions/billing.main",
 ```
 
 ### Deploy Our Changes
 
 If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
 
-Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
+Note that, you'll need to have `npm start` running for this to happen. If you had previously stopped it, then running `npm start` will deploy your changes again.
 
 You should see that the API stack is being updated.
 
-``` bash
+```bash
 Stack dev-notes-api
   Status: deployed
   Outputs:
@@ -106,7 +106,7 @@ We'll be using the same CLI from [a few chapters ago]({% link _chapters/secure-o
 
 {%change%} Run the following in your terminal.
 
-``` bash
+```bash
 $ npx aws-api-gateway-cli-test \
 --username='admin@example.com' \
 --password='Passw0rd!' \
@@ -127,7 +127,7 @@ Here we are testing with a Stripe test token called `tok_visa` and with `21` as 
 
 If the command is successful, the response will look similar to this.
 
-``` bash
+```bash
 Authenticating with User Pool
 Getting temporary credentials
 Making API request
@@ -138,7 +138,7 @@ Making API request
 
 {%change%} Let's commit and push our changes to GitHub.
 
-``` bash
+```bash
 $ git add .
 $ git commit -m "Adding a billing API"
 $ git push

@@ -4,7 +4,7 @@ title: Adding Links in the Navbar
 date: 2017-01-11 12:00:00
 lang: ko
 ref: adding-links-in-the-navbar
-description: React.js 앱의 Navbar에 링크를 추가하려면 NavItem React-Bootstrap 구성 요소를 사용합니다. 사용자가 링크를 사용하여 탐색 할 수있게하려면 React-Router의 Route 구성 요소를 사용하고 history.push 메서드를 호출해야합니다. 
+description: React.js 앱의 Navbar에 링크를 추가하려면 NavItem React-Bootstrap 구성 요소를 사용합니다. 사용자가 링크를 사용하여 탐색 할 수있게하려면 React-Router의 Route 구성 요소를 사용하고 nav.push 메서드를 호출해야합니다.
 context: true
 comments_id: adding-links-in-the-navbar/141
 ---
@@ -13,7 +13,7 @@ comments_id: adding-links-in-the-navbar/141
 
 {%change%} `src/App.js`에 있는`render` 메쏘드를 다음으로 대체하십시오.
 
-``` coffee
+```coffee
 render() {
   return (
     <div className="App container">
@@ -43,7 +43,7 @@ render() {
 
 {%change%} import 항목인 `react-router-dom`와 `react-bootstrap`를 `src/App.js`에서 제거하고 아래 내용으로 대체합니다.
 
-``` coffee
+```coffee
 import { Link } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 ```
@@ -57,19 +57,19 @@ import { Nav, Navbar, NavItem } from "react-bootstrap";
 
 {%change%} 작업 디렉토리에서 다음 명령을 실행하십시오.
 
-``` bash
+```bash
 $ npm install react-router-bootstrap --save
 ```
 
 {%change%} 그리고 `src/App.js`의 최상단에 아래 내용을 추가합니다.
 
-``` coffee
+```coffee
 import { LinkContainer } from "react-router-bootstrap";
 ```
 
 {%change%} 이제 링크를`LinkContainer`로 감쌉니다. `src/App.js`에 있는 `render` 메쏘드를 아래 내용으로 바꾸십시오.
 
-``` coffee
+```coffee
 render() {
   return (
     <div className="App container">

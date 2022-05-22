@@ -8,13 +8,13 @@ description: To allow users to login using Amazon Cognito in our React.js app, w
 comments_id: login-with-aws-cognito/129
 ---
 
-We are going to use AWS Amplify to login to our Amazon Cognito setup. Let's start by importing it. 
+We are going to use AWS Amplify to login to our Amazon Cognito setup. Let's start by importing it.
 
 ### Import Auth from AWS Amplify
 
 {%change%} Add the Auth module to the header of our Login container in `src/containers/Login.js`.
 
-``` jsx
+```jsx
 import { Auth } from "aws-amplify";
 ```
 
@@ -24,7 +24,7 @@ The login code itself is relatively simple.
 
 {%change%} Simply replace our placeholder `handleSubmit` method in `src/containers/Login.js` with the following.
 
-``` javascript
+```js
 async function handleSubmit(event) {
   event.preventDefault();
 

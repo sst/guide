@@ -27,13 +27,13 @@ One final thing! You can also manage your app in production with the [SST Consol
 
 Run the following in your project root.
 
-``` bash
-$ npx sst console --stage prod
+```bash
+$ npm run console -- --stage prod
 ```
 
 This'll allow you to connect your SST Console to your prod stage.
 
-``` txt
+```txt
 SST Console: https://console.serverless-stack.com/notes/prod/stacks
 ```
 

@@ -15,25 +15,22 @@ We are now going to start creating our infrastructure in [SST]({{ site.sst_githu
 
 {%change%} Add the following to a new file in `stacks/StorageStack.js`.
 
-``` js
-import * as sst from "@serverless-stack/resources";
+```js
+import { Table } from "@serverless-stack/resources";
 
-export default class StorageStack extends sst.Stack {
-  // Public reference to the table
-  table;
+export function StorageStack({ stack, app }) {
+  // Create the DynamoDB table
+  const table = new Table(stack, "Notes", {
+    fields: {
+      userId: "string",
+      noteId: "string",
+    },
+    primaryIndex: { partitionKey: "userId", sortKey: "noteId" },
+  });
 
-  constructor(scope, id, props) {
-    super(scope, id, props);
-
-    // Create the DynamoDB table
-    this.table = new sst.Table(this, "Notes", {
-      fields: {
-        userId: sst.TableFieldType.STRING,
-        noteId: sst.TableFieldType.STRING,
-      },
-      primaryIndex: { partitionKey: "userId", sortKey: "noteId" },
-    });
-  }
+  return {
+    table,
+  };
 }
 ```
 
@@ -44,6 +41,7 @@ We are creating a new stack in our SST app. We'll be using it to create all our 
 We are using SST's [`Table`]({{ site.docs_url }}/constructs/Table) construct to create our DynamoDB table.
 
 It has two fields:
+
 1. `userId`: The id of the user that the note belongs to.
 2. `noteId`: The id of the note.
 
@@ -51,19 +49,22 @@ We are then creating an index for our table.
 
 Each DynamoDB table has a primary key. This cannot be changed once set. The primary key uniquely identifies each item in the table, so that no two items can have the same key. DynamoDB supports two different kinds of primary keys:
 
-* Partition key
-* Partition key and sort key (composite)
+- Partition key
+- Partition key and sort key (composite)
 
 We are going to use the composite primary key (referenced by `primaryIndex` in code block above) which gives us additional flexibility when querying the data. For example, if you provide only the value for `userId`, DynamoDB would retrieve all of the notes by that user. Or you could provide a value for `userId` and a value for `noteId`, to retrieve a particular note.
 
-We are also exposing the Table that's being created publicly.
+We are also returning the Table that's being created publicly.
 
-``` js
-// Public reference to the table
-table;
+```js
+return {
+  table,
+};
 ```
 
 This'll allow us to reference this resource in our other stacks.
+
+Note, learn more about sharing resources between stacks [here](https://docs.serverless-stack.com/constructs/Stack#sharing-resources-between-stacks).
 
 ### Remove Template Files
 
@@ -71,16 +72,16 @@ The _Hello World_ API that we previously created, can now be removed. We can als
 
 {%change%} To remove the starter stack, run the following from your project root.
 
-``` bash
-$ npx sst remove my-stack
+```bash
+$ npm run remove my-stack
 ```
 
 This will take a minute to run.
 
 {%change%} Also remove the template files.
 
-``` bash
-$ rm stacks/MyStack.js src/lambda.js
+```bash
+$ rm stacks/MyStack.js functions/lambda.js
 ```
 
 ### Add to the App
@@ -89,11 +90,18 @@ Now let's add our new stack to the app.
 
 {%change%} Replace the `stacks/index.js` with this.
 
-``` js
-import StorageStack from "./StorageStack";
+```js
+import { StorageStack } from "./StorageStack";
 
 export default function main(app) {
-  new StorageStack(app, "storage");
+  app.setDefaultFunctionProps({
+    runtime: "nodejs16.x",
+    srcPath: "backend",
+    bundle: {
+      format: "esm",
+    },
+  });
+  app.stack(StorageStack);
 }
 ```
 
@@ -101,11 +109,11 @@ export default function main(app) {
 
 If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
 
-Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
+Note that, you'll need to have `npm start` running for this to happen. If you had previously stopped it, then running `npm start` will deploy your changes again.
 
 You should see something like this at the end of the deploy process.
 
-``` bash
+```bash
 Stack dev-notes-storage
   Status: deployed
 ```

@@ -64,10 +64,10 @@ Sin embargo, debido a la optimización mencionada anteriormente, la función Lam
 
 Por ejemplo, el método `createNewDbConnection` a continuación se llama una vez por instanciación de contenedor y no cada vez que se invoca la función Lambda. La función `myHandler` por otra parte se llama en cada invocación.
 
-``` javascript
+```js
 var dbConnection = createNewDbConnection();
 
-exports.myHandler = function(event, context, callback) {
+exports.myHandler = function (event, context, callback) {
   var result = dbConnection.makeQuery();
   callback(null, result);
 };

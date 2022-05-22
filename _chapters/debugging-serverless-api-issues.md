@@ -19,12 +19,11 @@ When a request is made to your serverless API, it starts by hitting API Gateway 
 
 This chapter assumes you have turned on CloudWatch logging for API Gateway and that you know how to read both the API Gateway and Lambda logs. If you have not done so, start by taking a look at the chapter on [API Gateway and Lambda Logs]({% link _chapters/api-gateway-and-lambda-logs.md %}).
 
-
 ### Invalid API Endpoint
 
 The first and most basic issue we see is when the API Gateway endpoint that is requested is invalid. An API Gateway endpoint usually looks something like this:
 
-``` txt
+```txt
 https://API_ID.execute-api.REGION.amazonaws.com/STAGE/PATH
 ```
 
@@ -41,10 +40,9 @@ An API request will fail if:
 
 In all of these cases, the error does not get logged to CloudWatch since the request does not hit your API Gateway project.
 
-
 ### Missing IAM Policy
 
-This happens when your API endpoint uses **aws_iam** as the authorizer, and the IAM role 
+This happens when your API endpoint uses **aws_iam** as the authorizer, and the IAM role
 assigned to the Cognito Identity Pool has not been granted the **execute-api:Invoke** permission for your API Gateway resource.
 
 This is a tricky issue to debug because the request still has not reached API Gateway, and hence the error is not logged in the API Gateway CloudWatch logs. But we can perform a check to ensure that our Cognito Identity Pool users have the required permissions, using the [IAM policy Simulator](https://policysim.aws.amazon.com).
@@ -121,7 +119,7 @@ Click **Edit policy**.
 
 Here you can edit the policy to ensure that it has the right permission to invoke API Gateway. Ensure that there is a block in your policy like the one below.
 
-``` coffee
+```coffee
 ...
     {
       "Effect": "Allow",
@@ -141,11 +139,9 @@ Finally, hit **Save** to update the policy.
 
 Now if you test your policy, it should show that you are allowed to invoke your API Gateway endpoint.
 
-
 ### Lambda Function Error
 
 Now if you are able to invoke your Lambda function but it fails to execute properly due to uncaught exceptions, it'll error out. These are pretty straightforward to debug. When this happens, AWS Lambda will attempt to convert the error object to a string, and then send it to CloudWatch along with the stacktrace. This can be observed in both Lambda and API Gateway CloudWatch log groups.
-
 
 ### Lambda Function Timeout
 
@@ -153,16 +149,15 @@ Sometimes we might run into a case where the Lambda function just times out. Nor
 
 To get around this issue, you can set this **callbackWaitsForEmptyEventLoop** property to false to request AWS Lambda to freeze the process as soon as the callback is called, even if there are events in the event loop.
 
-``` javascript
+```js
 export async function handler(event, context, callback) {
 
   context.callbackWaitsForEmptyEventLoop = false;
-  
+
   ...
 };
 ```
 
 This effectively allows a Lambda function to return its result to the caller without requiring that the database connection be closed. This allows the Lambda function to reuse the same connection across calls, and it reduces the execution time as well.
-
 
 These are just a few of the common issues we see folks running into while working with serverless APIs. Feel free to let us know via the comments if there are any other issues you'd like us to cover.

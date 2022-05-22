@@ -16,7 +16,7 @@ Here's what was built initially when we created the SST boilerplate application 
 
 ![Serverless Hello World API architecture](/assets/diagrams/serverless-hello-world-api-architecture.png)
 
-API Gateway handles our main `/` endpoint, sending GET requests made to this to our default `src/lambda.js` Lambda function.
+API Gateway handles our main `/` endpoint, sending GET requests made to this to our default `backend/functions/lambda.js` Lambda function.
 
 ### Notes App API Architecture
 

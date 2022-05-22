@@ -18,13 +18,13 @@ The best practice to ensure uniqueness is by parameterizing resource names with 
 
 Luckily, Serverless Framework already parameterizes a few of the default resources:
 
-| Resource | Scheme | Example |
-|-----------|-----------|----------|
-| Lambda functions | `$serviceName-$stage-$functionName` | notes-app-ext-notes-api-dev-get |
-| API Gateway project | `$stage-$serviceName` | dev-notes-app-ext-notes-api |
-| CloudWatch log groups | `/aws/lambda/$serviceName-$stage-$functionName` | /aws/lambda/notes-app-ext-notes-api-dev-get |
-| IAM roles | `$serviceName-$stage-$region-lambdaRole` | notes-app-ext-notes-api-dev-us-east-1-lambdaRole |
-| S3 bucket | `$stackName-$resourceName-$hash` | notes-app-ext-notes-api-serverlessdeploymentbuck-19fhidl3prw0m |
+| Resource              | Scheme                                          | Example                                                        |
+| --------------------- | ----------------------------------------------- | -------------------------------------------------------------- |
+| Lambda functions      | `$serviceName-$stage-$functionName`             | notes-app-ext-notes-api-dev-get                                |
+| API Gateway project   | `$stage-$serviceName`                           | dev-notes-app-ext-notes-api                                    |
+| CloudWatch log groups | `/aws/lambda/$serviceName-$stage-$functionName` | /aws/lambda/notes-app-ext-notes-api-dev-get                    |
+| IAM roles             | `$serviceName-$stage-$region-lambdaRole`        | notes-app-ext-notes-api-dev-us-east-1-lambdaRole               |
+| S3 bucket             | `$stackName-$resourceName-$hash`                | notes-app-ext-notes-api-serverlessdeploymentbuck-19fhidl3prw0m |
 
 A couple of things to note here:
 
@@ -38,7 +38,7 @@ Here are a couple of examples where we need to be aware of resource names being 
 
 ### SNS topic names in `billing-api` service
 
-``` yml
+```yml
 resources:
   Resources:
     NotePurchasedTopic:
@@ -53,7 +53,7 @@ For CDK on the other hand we use [SST](https://github.com/serverless-stack/serve
 
 So for example in the `stacks/index.js` file in our [resources repo]({{ site.backend_ext_resources_github_repo }}).
 
-``` javascript
+```js
 export default function main(app) {
   new DynamoDBStack(app, "dynamodb");
 
@@ -65,7 +65,7 @@ export default function main(app) {
 
 Our stack names are called `dynamodb`, `s3`, and `cognito`. But when these are deployed, they are deployed as:
 
-``` bash
+```bash
 dev-notes-ext-infra-dynamodb
 dev-notes-ext-infra-s3
 dev-notes-ext-infra-cognito
@@ -75,7 +75,7 @@ Where `dev` is the stage we are deploying to and `notes-ext-infra` is the name o
 
 For specific resources, such as CloudFormation exports, we use the `app.logicalPrefixedName` helper method. Here's an example from `stacks/DynamoDBStack.js`.
 
-``` javascript
+```js
 new CfnOutput(this, "TableName", {
   value: table.tableName,
   exportName: app.logicalPrefixedName("ExtTableName"),

@@ -19,48 +19,44 @@ To get started let's add our settings page.
 
 {%change%} Create a new file in `src/containers/Settings.js` and add the following.
 
-``` jsx
+```jsx
 import React, { useState } from "react";
 import { API } from "aws-amplify";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { onError } from "../lib/errorLib";
 import config from "../config";
 
 export default function Settings() {
-  const history = useHistory();
+  const nav = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
   function billUser(details) {
     return API.post("notes", "/billing", {
-      body: details
+      body: details,
     });
   }
 
-  return (
-    <div className="Settings">
-    </div>
-  );
+  return <div className="Settings"></div>;
 }
 ```
 
 {%change%} Next import this component in the header of `src/Routes.js`.
 
-``` js
+```js
 import Settings from "./containers/Settings";
 ```
 
 {%change%} Add the following below the `/signup` route in our `<Switch>` block in `src/Routes.js`.
 
-``` jsx
-<Route exact path="/settings">
-  <Settings />
-</Route>
+```jsx
+<Route path="/settings" element={<Settings />} />
 ```
 
 {%change%} Next add a link to our settings page in the navbar by replacing the `return` statement in `src/App.js` with this.
 
 {% raw %}
-``` jsx
+
+```jsx
 return (
   !isAuthenticating && (
     <div className="App container py-3">
@@ -100,11 +96,12 @@ return (
   )
 );
 ```
+
 {% endraw %}
 
 You'll notice that we added another link in the navbar that only displays when a user is logged in.
 
-``` jsx
+```jsx
 <LinkContainer to="/settings">
   <Nav.Link>Settings</Nav.Link>
 </LinkContainer>

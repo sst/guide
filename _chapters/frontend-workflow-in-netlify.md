@@ -19,7 +19,7 @@ A good practise is to create a branch when we are working on something new.
 
 {%change%} Run the following in the root of your project.
 
-``` bash
+```bash
 $ git checkout -b "new-feature"
 ```
 
@@ -31,7 +31,7 @@ We are going to add a Login and Signup button to our lander to give users a clea
 
 {%change%} To do this update our `renderLander` function in `src/containers/Home.js`.
 
-``` jsx
+```jsx
 function renderLander() {
   return (
     <div className="lander">
@@ -52,7 +52,7 @@ function renderLander() {
 
 {%change%} And import the `Link` component from React-Router in the header.
 
-``` javascript
+```js
 import { Link } from "react-router-dom";
 ```
 
@@ -62,7 +62,7 @@ And our lander should look something like this.
 
 {%change%} Let's commit these changes to Git.
 
-``` bash
+```bash
 $ git add .
 $ git commit -m "Updating the lander"
 ```
@@ -83,7 +83,7 @@ Set **Branch deploys** to **All** and hit **Save**.
 
 {%change%} Now comes the fun part, we can deploy this to dev so we can test it right away. All we need to do is push it to Git.
 
-``` bash
+```bash
 $ git push -u origin new-feature
 ```
 
@@ -105,7 +105,7 @@ You can test around this version of our frontend app. It is connected to the dev
 
 {%change%} Now if we feel happy with the changes we can push this to production just by merging to master.
 
-``` bash
+```bash
 $ git checkout master
 $ git merge new-feature
 $ git push

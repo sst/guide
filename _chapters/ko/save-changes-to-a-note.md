@@ -2,8 +2,8 @@
 layout: post
 title: Save Changes to a Note
 date: 2017-01-30 00:00:00
-lang: ko 
-description: 사용자가 React.js 앱에서 노트를 편집하려면 AWS Amplify를 사용하여 Serverless 백엔드 API에 PUT 요청을해야합니다. 또한 파일을 S3에 직접 업로드하고 노트에 첨부 파일로 추가 할 수 있어야합니다. 
+lang: ko
+description: 사용자가 React.js 앱에서 노트를 편집하려면 AWS Amplify를 사용하여 Serverless 백엔드 API에 PUT 요청을해야합니다. 또한 파일을 S3에 직접 업로드하고 노트에 첨부 파일로 추가 할 수 있어야합니다.
 context: true
 comments_id: save-changes-to-a-note/131
 ref: save-changes-to-a-note
@@ -13,7 +13,7 @@ ref: save-changes-to-a-note
 
 {%change%} `src/containers/Notes.js`에 있는 `handleSubmit` 메소드를 다음으로 대체하십시오.
 
-``` coffee
+```coffee
 saveNote(note) {
   return API.put("notes", `/notes/${this.props.match.params.id}`, {
     body: note
@@ -41,7 +41,7 @@ handleSubmit = async event => {
       content: this.state.content,
       attachment: attachment || this.state.note.attachment
     });
-    this.props.history.push("/");
+    this.props.nav("/");
   } catch (e) {
     alert(e);
     this.setState({ isLoading: false });
@@ -52,7 +52,7 @@ handleSubmit = async event => {
 
 {%change%} 그리고 헤더에 `s3Upload` helper 메소드를 추가합니다.:
 
-``` javascript
+```js
 import { s3Upload } from "../libs/awsLib";
 ```
 

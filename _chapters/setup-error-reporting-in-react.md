@@ -10,7 +10,7 @@ ref: setup-error-reporting-in-react
 
 Let's start by setting up error reporting in React. To do so, we'll be using [Sentry](https://sentry.io). Sentry is a great service for reporting and debugging errors. And it comes with a very generous free tier.
 
-In this chapter we'll sign up for a free Sentry account and configure it in our React app. And in the coming chapters we'll be reporting the various frontend errors to it. 
+In this chapter we'll sign up for a free Sentry account and configure it in our React app. And in the coming chapters we'll be reporting the various frontend errors to it.
 
 Let's get started.
 
@@ -44,7 +44,7 @@ And that's it. Scroll down and copy the `Sentry.init` line.
 
 {%change%} Now head over to the React `frontend/` directory and install Sentry.
 
-``` bash
+```bash
 $ npm install @sentry/browser --save
 ```
 
@@ -52,7 +52,7 @@ We are going to be using Sentry across our app. So it makes sense to keep all th
 
 {%change%} Add the following to the top of your `src/lib/errorLib.js`.
 
-``` javascript
+```js
 import * as Sentry from "@sentry/browser";
 import config from "../config";
 
@@ -78,9 +78,9 @@ export function logError(error, errorInfo = null) {
 }
 ```
 
-{%change%} Add the `SENTRY_DSN` below the `const config = {` line in `src/config.js`. 
+{%change%} Add the `SENTRY_DSN` below the `const config = {` line in `src/config.js`.
 
-``` js
+```js
 SENTRY_DSN: "https://your-dsn-id-here@sentry.io/123456",
 ```
 
@@ -97,8 +97,8 @@ Next, let's initialize our app with Sentry.
 
 {%change%} Add the following to the end of the imports in `src/index.js`.
 
-``` javascript
-import { initSentry } from './lib/errorLib';
+```js
+import { initSentry } from "./lib/errorLib";
 
 initSentry();
 ```
