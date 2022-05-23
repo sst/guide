@@ -64,14 +64,12 @@ We are doing a few things of note in this simple helper.
 
   We start by enabling logging for the AWS SDK. We do so by running `AWS.config.logger = { log: debug }`. This is telling the AWS SDK to log using our logger, the `debug()` method (we'll look at this below). So when you make a call to an AWS service, ie. a query call to the DynamoDB table `dev-notes`, this will log:
 
-  ````
+  ```` bash
   [AWS dynamodb 200 0.296s 0 retries] query({ TableName: 'dev-notes',
     KeyConditionExpression: 'userId = :userId',
     ExpressionAttributeValues: { ':userId': { S: 'USER-SUB-1234' } } })
   ```
   Note, we only want to log this info when there is an error. We'll look at how we accomplish this below.
-
-  ````
 
 - **Log API request info**
 
