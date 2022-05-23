@@ -115,9 +115,9 @@ This also creates a Cognito Identity Pool which assigns IAM permissions to users
 ```ts
 stack.addOutputs({
   ApiEndpoint: api.url,
-  UserPoolId: auth.cognitoUserPool.userPoolId,
-  IdentityPoolId: auth.cognitoCfnIdentityPool.ref,
-  UserPoolClientId: auth.cognitoUserPoolClient.userPoolClientId,
+  UserPoolId: auth.userPoolId,
+  IdentityPoolId: auth.cognitoIdentityPoolId,
+  UserPoolClientId: auth.userPoolClientId,
 });
 ```
 

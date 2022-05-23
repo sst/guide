@@ -118,7 +118,7 @@ This creates a [Cognito Identity Pool](https://docs.aws.amazon.com/cognito/lates
 ```ts
 stack.addOutputs({
   ApiEndpoint: api.url,
-  IdentityPoolId: auth.cognitoCfnIdentityPool.ref,
+  IdentityPoolId: auth.cognitoIdentityPoolId,
 });
 ```
 

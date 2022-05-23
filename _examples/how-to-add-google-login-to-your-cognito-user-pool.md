@@ -253,16 +253,16 @@ const site = new ViteStaticSite(stack, "Site", {
     VITE_APP_COGNITO_DOMAIN: domain.domainName,
     VITE_APP_API_URL: api.url,
     VITE_APP_REGION: app.region,
-    VITE_APP_USER_POOL_ID: auth.cognitoUserPool.userPoolId,
-    VITE_APP_IDENTITY_POOL_ID: auth.cognitoCfnIdentityPool.ref,
-    VITE_APP_USER_POOL_CLIENT_ID: auth.cognitoUserPoolClient.userPoolClientId,
+    VITE_APP_USER_POOL_ID: auth.userPoolId,
+    VITE_APP_IDENTITY_POOL_ID: auth.cognitoIdentityPoolId,
+    VITE_APP_USER_POOL_CLIENT_ID: auth.userPoolClientId,
   },
 });
 
 // Show the endpoint in the output
 stack.addOutputs({
   api_url: api.url,
-  auth_client_id: auth.cognitoUserPoolClient.userPoolClientId,
+  auth_client_id: auth.userPoolClientId,
   auth_domain: domain.domainName,
   site_url: site.url,
 });
