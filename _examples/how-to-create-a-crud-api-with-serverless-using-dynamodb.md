@@ -98,7 +98,7 @@ const api = new Api(stack, "Api", {
   },
   routes: {
     "GET /notes": "functions/list.handler",
-    "POST   /notes": "functions/create.handler",
+    "POST /notes": "functions/create.handler",
     "GET /notes/{id}": "functions/get.handler",
     "PUT /notes/{id}": "functions/update.handler",
     "DELETE /notes/{id}": "functions/delete.handler",
@@ -117,11 +117,11 @@ stack.addOutputs({
 We are creating an API here using the [`Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding five routes to it.
 
 ```
-GET     /notes
+GET /notes
 POST /notes
-GET     /notes/{id}
-PUT     /notes/{id}
-DELETE  /notes/{id}
+GET /notes/{id}
+PUT /notes/{id}
+DELETE /notes/{id}
 ```
 
 These will be getting a list of notes, creating a note, getting, updating, and deleting a specific note respectively.
