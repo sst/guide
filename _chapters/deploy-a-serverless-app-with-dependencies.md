@@ -20,7 +20,7 @@ In our [resources repo]({{ site.backend_ext_resources_github_repo }}) we are usi
 
 Our `stacks/index.js` looks like this.
 
-``` javascript
+```js
 export default function main(app) {
   new DynamoDBStack(app, "dynamodb");
 
@@ -44,7 +44,7 @@ Assuming that you are deploying to the `dev` stage.
 
 If you were to deploy `billing-api` and `notify-job` concurrently, the `notify-job` will fail with the following CloudFormation error:
 
-``` txt
+```txt
 notify-job - No export named dev-ExtNotePurchasedTopicArn found.
 ```
 
@@ -67,10 +67,13 @@ If you are using a CI, you'll need to deploy the above in phases. With [Seed](ht
 ### Managing deployment in phases for api
 
 For our api repo, the dependencies look like:
-``` txt
+
+```txt
 notes-api > billing-api > notify-job
 ```
+
 To break it down in detail:
+
 - The `billing-api` service relies on the `notes-api` service for the API Gateway export.
 - The `notify-job` service relies on the `billing-api` service for the SNS Topic export.
 

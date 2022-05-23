@@ -13,25 +13,20 @@ Let's first create a route that will check if the user is logged in before routi
 
 {%change%} Add the following to `src/components/AuthenticatedRoute.js`.
 
-``` jsx
+```jsx
 import React from "react";
-import { Route, Redirect, useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useAppContext } from "../lib/contextLib";
 
-export default function AuthenticatedRoute({ children, ...rest }) {
+export default function AuthenticatedRoute({ children }) {
   const { pathname, search } = useLocation();
   const { isAuthenticated } = useAppContext();
-  return (
-    <Route {...rest}>
-      {isAuthenticated ? (
-        children
-      ) : (
-        <Redirect to={
-          `/login?redirect=${pathname}${search}`
-        } />
-      )}
-    </Route>
-  );
+
+  if (!isAuthenticated) {
+    return <Navigate to={`/login?redirect=${pathname}${search}`} />;
+  }
+
+  return children;
 }
 ```
 
@@ -43,7 +38,7 @@ This simple component creates a `Route` where its children are rendered only if 
 
 - We use the `useAppContext` hook to check if the user is authenticated.
 
-- If the user is authenticated, then we simply render the `children` component. And if the user is not authenticated, then we use the `Redirect` React Router component to redirect the user to the login page. 
+- If the user is authenticated, then we simply render the `children` component. And if the user is not authenticated, then we use the `Redirect` React Router component to redirect the user to the login page.
 
 - We also pass in the current path to the login page (`redirect` in the query string). We will use this later to redirect us back after the user logs in. We use the `useLocation` React Router hook to get this info.
 
@@ -51,24 +46,20 @@ We'll do something similar to ensure that the user is not authenticated.
 
 {%change%} Add the following to `src/components/UnauthenticatedRoute.js`.
 
-``` jsx
+```jsx
 import React, { cloneElement } from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useAppContext } from "../lib/contextLib";
 
 export default function UnauthenticatedRoute(props) {
-  const { children, ...rest } = props;
   const { isAuthenticated } = useAppContext();
+  const { children } = props;
 
-  return (
-    <Route {...rest}>
-      {!isAuthenticated ? (
-        cloneElement(children, props)
-      ) : (
-        <Redirect to="/" />
-      )}
-    </Route>
-  );
+  if (isAuthenticated) {
+    return <Navigate to={"/"} />;
+  }
+
+  return cloneElement(children, props);
 }
 ```
 

@@ -12,13 +12,13 @@ comments_id: add-a-create-note-api/125
 
 먼저 노트를 만드는 API를 추가하여 백엔드를 시작해 보겠습니다. 이 API는 노트 오브젝트를 입력으로 사용하고 새 ID로 데이터베이스에 저장합니다. 노트 오브젝트는 `content` 필드(노트의 내용)와 `attachment` 필드(업로드 된 파일의 URL)를 포함합니다.
 
-### 함수 추가하기 
+### 함수 추가하기
 
 첫 번째 함수를 추가해 보겠습니다.
 
 {%change%} 프로젝트 루트에 다음과 같이`create.js`라는 새로운 파일을 만듭니다.
 
-``` javascript
+```js
 import * as uuid from "uuid";
 import AWS from "aws-sdk";
 
@@ -29,27 +29,22 @@ export function main(event, context, callback) {
   const data = JSON.parse(event.body);
 
   const params = {
-    TableName: "notes",
-     // 'Item'은 생성 될 항목의 속성을 포함합니다.
-     // - 'userId': 사용자 신원은 Cognito ID 풀 ID는 인증 된 사용자의 사용자 ID를 사용합니다.
-     // - 'noteId': 고유한 uuid
-     // - 'content': 요청 본문으로부터 파싱 됨
-     // - 'attachment': 요청 본문에서 파싱 됨
-     // - 'createdAt': 현재 유닉스 타임 스탬프
+    TableName: "notes", // - 'userId': 사용자 신원은 Cognito ID 풀 ID는 인증 된 사용자의 사용자 ID를 사용합니다. // - 'noteId': 고유한 uuid // - 'content': 요청 본문으로부터 파싱 됨 // - 'attachment': 요청 본문에서 파싱 됨 // - 'createdAt': 현재 유닉스 타임 스탬프
+    // 'Item'은 생성 될 항목의 속성을 포함합니다.
     Item: {
       userId: event.requestContext.identity.cognitoIdentityId,
       noteId: uuid.v1(),
       content: data.content,
       attachment: data.attachment,
-      createdAt: Date.now()
-    }
+      createdAt: Date.now(),
+    },
   };
 
   dynamoDb.put(params, (error, data) => {
     // CORS (Cross-Origin Resource Sharing)를 사용하도록 응답 헤더를 설정합니다.
     const headers = {
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Credentials": true
+      "Access-Control-Allow-Credentials": true,
     };
 
     // 에러발생시 상태코드 500을 반환합니다.
@@ -57,17 +52,17 @@ export function main(event, context, callback) {
       const response = {
         statusCode: 500,
         headers: headers,
-        body: JSON.stringify({ status: false })
+        body: JSON.stringify({ status: false }),
       };
       callback(null, response);
       return;
     }
 
-	// 새로운 항목이 생성되면 상태 코드 200을 반환합니다.
+    // 새로운 항목이 생성되면 상태 코드 200을 반환합니다.
     const response = {
       statusCode: 200,
       headers: headers,
-      body: JSON.stringify(params.Item)
+      body: JSON.stringify(params.Item),
     };
     callback(null, response);
   });
@@ -89,7 +84,7 @@ export function main(event, context, callback) {
 
 {%change%} `serverless.yml` 파일을 열어서 아래 코드로 대치하십시오.
 
-``` yaml
+```yaml
 service: notes-api
 
 # ES6 변환을 위해 serverless-webpack 플러그인 사용
@@ -97,7 +92,7 @@ plugins:
   - serverless-webpack
   - serverless-offline
 
-# serverless-webpack 구성 
+# serverless-webpack 구성
 # 외부 모듈 패키징 자동화 활성
 custom:
   webpack:
@@ -128,8 +123,8 @@ functions:
   # create.js의 메인 함수를 호출하는 HTTP API 엔드포인트를 정의
   # - path: url 경로는 /notes
   # - method: POST 요청
-  # - cors: 브라우저의 크로스 도메인 API 호출을 위해 CORS (Cross-Origin Resource Sharing) 활성화 
-  # - authorizer: AWS IAM 역할을 통한 인증 
+  # - cors: 브라우저의 크로스 도메인 API 호출을 위해 CORS (Cross-Origin Resource Sharing) 활성화
+  # - authorizer: AWS IAM 역할을 통한 인증
   create:
     handler: create.main
     events:
@@ -144,20 +139,19 @@ functions:
 
 `iamRoleStatements` 섹션은 람다 함수가 어떤 리소스에 액세스 할 수 있는지 AWS에 알려줍니다. 이 경우 람다 함수가 위에 나열된 작업을 DynamoDB에서 수행할 수 있습니다. DynamoDB는`arn:aws:dynamodb:us-east-1:*:*`를 사용하여 지정합니다. 이것은 대략`us-east-1` 리전의 모든 DynamoDB 테이블을 가리 킵니다. 여기에 테이블 이름을 지정하여보다 구체적으로 설명 할 수 있지만 여러분에게 연습 문제로 남겨 두겠습니다. 반드시 DynamoDB 테이블이 생성 된 리전을 사용하십시오. 나중에 발생하는 문제의 대부분의 원인이 될 수 있습니다. 우리에게는 이 리전이 'us-east-1'입니다.
 
-
-### 테스트 
+### 테스트
 
 자, 이제 새로운 API를 테스트할 준비가 되었습니다. 로컬에서 테스트하기 위해 입력 파라미터를 임의로 만들겠습니다.
 
 {%change%} 프로젝트 루트에서 `mocks/` 디렉토리를 생성합니다.
 
-``` bash
+```bash
 $ mkdir mocks
 ```
 
 {%change%} `mocks/create-event.json` 파일을 만들고 아래 코드를 추가합니다.
 
-``` json
+```json
 {
   "body": "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}",
   "requestContext": {
@@ -172,13 +166,13 @@ $ mkdir mocks
 
 그리고 함수를 호출하기 위해 루트 디렉토리에서 다음을 실행합니다.
 
-``` bash
+```bash
 $ serverless invoke local --function create --path mocks/create-event.json
 ```
 
 만일 여러분의 AWS SDK 자격 증명을 위한 프로필이 여러개인 경우 명시적으로 선택해야합니다. 그럴경우 다음 명령을 사용하십시오.
 
-``` bash
+```bash
 $ AWS_PROFILE=myProfile serverless invoke local --function create --path mocks/create-event.json
 ```
 
@@ -186,7 +180,7 @@ $ AWS_PROFILE=myProfile serverless invoke local --function create --path mocks/c
 
 응답은 다음과 같이 나와야합니다.
 
-``` bash
+```bash
 {
   statusCode: 200,
   headers: {
@@ -199,47 +193,49 @@ $ AWS_PROFILE=myProfile serverless invoke local --function create --path mocks/c
 
 여기서 응답으로 나온 `noteId` 값을 적어 놓으세요. 다음 장에서 여기서 작성한 새 노트를 사용하겠습니다.
 
-### 코드 리펙토링 
+### 코드 리펙토링
 
 다음 장으로 넘어가기 전에 앞으로 모든 API에 대해 많은 것을 처리해야 하므로 코드를 빠르게 리팩토링하겠습니다.
 
 {%change%} 프로젝트 루트에서 `libs/` 디렉토리를 생성합니다.
 
-``` bash
+```bash
 $ mkdir libs
 $ cd libs
 ```
 
 {%change%} 그리고 아래 내용으로 `libs/handler-lib.js` 파일을 만듭니다.
 
-``` javascript
+```js
 export default function handler(lambda) {
   return function (event, context) {
-    return Promise.resolve()
-      // Run the Lambda
-      .then(() => lambda(event, context))
-      // On success
-      .then((responseBody) => [200, responseBody])
-      // On failure
-      .catch((e) => [500, { error: e.message }])
-      // Return HTTP response
-      .then(([statusCode, body]) => ({
-        statusCode,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Credentials": true,
-        },
-        body: JSON.stringify(body),
-      }));
+    return (
+      Promise.resolve()
+        // Run the Lambda
+        .then(() => lambda(event, context))
+        // On success
+        .then((responseBody) => [200, responseBody])
+        // On failure
+        .catch((e) => [500, { error: e.message }])
+        // Return HTTP response
+        .then(([statusCode, body]) => ({
+          statusCode,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": true,
+          },
+          body: JSON.stringify(body),
+        }))
+    );
   };
 }
 ```
 
 이렇게하면 적절한 HTTP 상태 코드와 헤더를 사용하여 성공 및 실패 사례에 대한 응답 오브젝트를 작성할 수 있습니다.
 
-{%change%} 다시 `libs/` 디렉토리에서 아래 내용으로  `dynamodb-lib.js` 파일을 생성합니다.
+{%change%} 다시 `libs/` 디렉토리에서 아래 내용으로 `dynamodb-lib.js` 파일을 생성합니다.
 
-``` javascript
+```js
 import AWS from "aws-sdk";
 
 export function call(action, params) {
@@ -253,7 +249,7 @@ export function call(action, params) {
 
 {%change%} 이제 우리는`create.js`로 돌아가서 우리가 만든 Helper 함수를 사용할 것입니다. `create.js`를 다음으로 대체하십시오.
 
-``` javascript
+```js
 import * as uuid from "uuid";
 import handler from "./libs/handler-lib";
 import dynamoDb from "./libs/dynamodb-lib";
@@ -267,8 +263,8 @@ export const main = handler(async (event, context) => {
       noteId: uuid.v1(),
       content: data.content,
       attachment: data.attachment,
-      createdAt: Date.now()
-    }
+      createdAt: Date.now(),
+    },
   };
 
   await dynamoDb.put(params);
@@ -282,15 +278,15 @@ export const main = handler(async (event, context) => {
 
 ---
 
-#### 공통 이슈 
+#### 공통 이슈
 
 - 응답 `statusCode: 500`
 
 함수를 호출 할 때`statusCode : 500` 응답을 보게되면 디버그하는 방법이 있습니다. 에러는 우리 코드에 의해`catch` 블록에서 생성됩니다. 이렇게`console.log`를 추가하면 문제가 무엇인지에 대한 단서를 얻을 수 있습니다.
 
-  ``` javascript
-  catch(e) {
-    console.log(e);
-    return failure({status: false});
-  }
-  ```
+```js
+catch(e) {
+  console.log(e);
+  return failure({status: false});
+}
+```

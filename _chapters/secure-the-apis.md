@@ -2,7 +2,7 @@
 layout: post
 title: Secure the APIs
 date: 2020-10-16 00:00:00
-lang: en 
+lang: en
 ref: secure-the-apis
 description: In this chapter we'll be using the `aws_iam` authorizer to secure our serverless APIs. This uses a Cognito Identity Pool and Cognito User Pool for authentication. To identify our users, we'll be using the `cognitoIdentityId` that's passed in through the `event` object in our Lambda function.
 comments_id: secure-the-apis/2179
@@ -14,7 +14,7 @@ Now that we have [created a User Pool]({% link _chapters/create-a-cognito-user-p
 
 {%change%} Let's start by replacing the `functions:` block in our `serverless.yml`.
 
-``` yml
+```yml
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js
   # - path: url path is /notes
@@ -75,7 +75,7 @@ functions:
 
 The key change here is the addition of the following line to each of our functions.
 
-``` yml
+```yml
 authorizer: aws_iam
 ```
 
@@ -83,23 +83,23 @@ This is telling Serverless Framework that our APIs are secured using an Identity
 
 1. A request with some signed authentication headers will be sent to our API.
 2. AWS will use the headers to figure out which Identity Pool is tied to it.
-3. The Identity Pool will ensure that the request is signed by somebody that has authenticated with our User Pool. 
+3. The Identity Pool will ensure that the request is signed by somebody that has authenticated with our User Pool.
 4. If so, then it'll assign the Auth IAM Role to this request.
 5. Finally, IAM will check to ensure that this role has access to our API.
 
-If all goes well, your Lambda function will be invoked. And the `event` parameter in your function handler will contain information about the user that called your API. 
+If all goes well, your Lambda function will be invoked. And the `event` parameter in your function handler will contain information about the user that called your API.
 
 ### Cognito Identity Id
 
 Recall the function signature of our Lambda functions:
 
-``` javascript
+```js
 export async function main(event, context) {}
 ```
 
 Or the refactored one that we are now using:
 
-``` javascript
+```js
 export const main = handler(async (event, context) => {});
 ```
 
@@ -107,15 +107,15 @@ So far we've used the `event` object to get the path parameters (`event.pathPara
 
 Now we'll get the id of the authenticated user.
 
-``` javascript
-event.requestContext.identity.cognitoIdentityId
+```js
+event.requestContext.identity.cognitoIdentityId;
 ```
 
 This is an id that's assigned to our user by our Cognito Identity Pool.
 
 You'll also recall that so far all of our APIs are hardcoded to interact with a single user (with user id `123`).
 
-``` javascript
+```js
 userId: "123", // The id of the author
 ```
 
@@ -123,37 +123,37 @@ Let's change that.
 
 {%change%} Replace the above line in `create.js` with.
 
-``` javascript
+```js
 userId: event.requestContext.identity.cognitoIdentityId, // The id of the author
 ```
 
 {%change%} Do the same in the `get.js`.
 
-``` javascript
+```js
 userId: event.requestContext.identity.cognitoIdentityId, // The id of the author
 ```
 
 {%change%} And in the `update.js`.
 
-``` javascript
+```js
 userId: event.requestContext.identity.cognitoIdentityId, // The id of the author
 ```
 
 {%change%} In `delete.js` as well.
 
-``` javascript
+```js
 userId: event.requestContext.identity.cognitoIdentityId, // The id of the author
 ```
 
 {%change%} In `list.js` find this line instead.
 
-``` javascript
+```js
 ":userId": "123",
 ```
 
 {%change%} And replace it with.
 
-``` javascript
+```js
 ":userId": event.requestContext.identity.cognitoIdentityId,
 ```
 
@@ -165,7 +165,7 @@ If you recall the chapters where we first [created our API endpoints]({% link _c
 
 For example, the `create-event.json` looks like this.
 
-``` json
+```json
 {
   "body": "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}"
 }
@@ -175,7 +175,7 @@ Now we need to modify these to pass in the `event.requestContext.identity.cognit
 
 {%change%} Replace the `create-event.json` with this.
 
-``` json
+```json
 {
   "body": "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}",
   "requestContext": {
@@ -190,13 +190,13 @@ Here we are passing in a dummy value for the `cognitoIdentityId` just for testin
 
 So if you run the following in your project root.
 
-``` bash
+```bash
 $ serverless invoke local --function create --path mocks/create-event.json
 ```
 
 You should see that a new note object has been created for our test user.
 
-``` bash
+```bash
 {
     "statusCode": 200,
     "body": "{\"userId\":\"USER-SUB-1234\",\"noteId\":\"0101be80-18b9-11eb-893d-b7fc3f6c5167\",\"content\":\"hello world\",\"attachment\":\"hello.jpg\",\"createdAt\":1603846842984}"
@@ -207,7 +207,7 @@ Let's update our other mock events.
 
 {%change%} Replace the `get-event.json` with this.
 
-``` json
+```json
 {
   "pathParameters": {
     "id": "cf6a83b0-1314-11eb-9506-9133509a950f"
@@ -222,7 +222,7 @@ Let's update our other mock events.
 
 {%change%} The `update-event.json` with.
 
-``` json
+```json
 {
   "body": "{\"content\":\"new world\",\"attachment\":\"new.jpg\"}",
   "pathParameters": {
@@ -238,7 +238,7 @@ Let's update our other mock events.
 
 {%change%} And the `delete-event.json` with.
 
-``` json
+```json
 {
   "pathParameters": {
     "id": "a63c5450-1274-11eb-81db-b9d1e2c85f15"
@@ -253,7 +253,7 @@ Let's update our other mock events.
 
 {%change%} Finally, the `list-event.json` with.
 
-``` json
+```json
 {
   "requestContext": {
     "identity": {
@@ -271,13 +271,13 @@ Let's quickly deploy the changes we've made.
 
 {%change%} From your project root, run the following.
 
-``` bash
+```bash
 $ serverless deploy
 ```
 
 Once deployed, you should see the deployed endpoints and functions.
 
-``` bash
+```bash
 Service Information
 service: notes-api
 stage: prod

@@ -20,10 +20,10 @@ In the previous chapter we created a settings page that links to `/settings/emai
 
 {%change%} Add the following to `src/containers/ChangeEmail.js`.
 
-``` coffee
+```coffee
 import React, { useState } from "react";
 import { Auth } from "aws-amplify";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   FormText,
   FormGroup,
@@ -36,7 +36,7 @@ import { onError } from "../lib/errorLib";
 import "./ChangeEmail.css";
 
 export default function ChangeEmail() {
-  const history = useHistory();
+  const nav = useNavigate();
   const [codeSent, setCodeSent] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
     code: "",
@@ -76,7 +76,7 @@ export default function ChangeEmail() {
     try {
       await Auth.verifyCurrentUserAttributeSubmit("email", fields.code);
 
-      history.push("/settings");
+      nav("/settings");
     } catch (error) {
       onError(error);
       setIsConfirming(false);
@@ -152,14 +152,14 @@ The flow for changing a user's email is pretty similar to how we sign a user up.
 
 We start by rendering a form that asks our user to enter their new email in `renderUpdateForm()`. Once the user submits this form, we call:
 
-``` js
+```js
 const user = await Auth.currentAuthenticatedUser();
 Auth.updateUserAttributes(user, { email: fields.email });
 ```
 
 This gets the current user and updates their email using the `Auth` module from Amplify. Next we render the form where they can enter the code in `renderConfirmationForm()`. Upon submitting this form we call:
 
-``` js
+```js
 Auth.verifyCurrentUserAttributeSubmit("email", fields.code);
 ```
 
@@ -167,7 +167,7 @@ This confirms the change on Cognito's side. Finally, we redirect the user to the
 
 {%change%} Let's add a couple of styles to `src/containers/ChangeEmail.css`.
 
-``` css
+```css
 @media all and (min-width: 480px) {
   .ChangeEmail {
     padding: 60px 0;
@@ -182,7 +182,7 @@ This confirms the change on Cognito's side. Finally, we redirect the user to the
 
 {%change%} Finally, let's add our new page to `src/Routes.js`.
 
-``` html
+```html
 <AuthenticatedRoute exact path="/settings/email">
   <ChangeEmail />
 </AuthenticatedRoute>
@@ -190,7 +190,7 @@ This confirms the change on Cognito's side. Finally, we redirect the user to the
 
 {%change%} And import it in the header.
 
-``` coffee
+```coffee
 import ChangeEmail from "./containers/ChangeEmail";
 ```
 

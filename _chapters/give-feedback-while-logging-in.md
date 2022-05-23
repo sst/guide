@@ -14,13 +14,13 @@ It's important that we give the user some feedback while we are logging them in.
 
 {%change%} To do this we are going to add an `isLoading` flag to the state of our `src/containers/Login.js`. Add the following to the top of our `Login` function component.
 
-``` javascript
+```js
 const [isLoading, setIsLoading] = useState(false);
 ```
 
 {%change%} And we'll update it while we are logging in. So our `handleSubmit` function now looks like so:
 
-``` javascript
+```js
 async function handleSubmit(event) {
   event.preventDefault();
 
@@ -29,7 +29,7 @@ async function handleSubmit(event) {
   try {
     await Auth.signIn(email, password);
     userHasAuthenticated(true);
-    history.push("/");
+    nav("/");
   } catch (e) {
     alert(e.message);
     setIsLoading(false);
@@ -43,7 +43,7 @@ Now to reflect the state change in our button we are going to render it differen
 
 {%change%} Create a `src/components/` directory by running this command in the `frontend/` directory.
 
-``` bash
+```bash
 $ mkdir src/components/
 ```
 
@@ -51,7 +51,7 @@ Here we'll be storing all our React components that are not dealing directly wit
 
 {%change%} Create a new file and add the following in `src/components/LoaderButton.js`.
 
-``` jsx
+```jsx
 import React from "react";
 import Button from "react-bootstrap/Button";
 import { BsArrowRepeat } from "react-icons/bs";
@@ -86,7 +86,11 @@ And let's add a couple of styles to animate our loading icon.
 
 {%change%} Add the following to `src/components/LoaderButton.css`.
 
-``` css
+```css
+.LoaderButton {
+  margin-top: 10px;
+}
+
 .LoaderButton .spinning {
   margin-right: 7px;
   top: 2px;
@@ -111,21 +115,21 @@ Now we can use our new component in our `Login` container.
 
 {%change%} In `src/containers/Login.js` find the `<Button>` component in the `return` statement.
 
-``` html
-<Button block size="lg" type="submit" disabled={!validateForm()}>
+```html
+<Button block="true" size="lg" type="submit" disabled="{!validateForm()}">
   Login
 </Button>
 ```
 
 {%change%} And replace it with this.
 
-``` html
+```html
 <LoaderButton
-  block
+  block="true"
   size="lg"
   type="submit"
-  isLoading={isLoading}
-  disabled={!validateForm()}
+  isLoading="{isLoading}"
+  disabled="{!validateForm()}"
 >
   Login
 </LoaderButton>
@@ -133,13 +137,13 @@ Now we can use our new component in our `Login` container.
 
 {%change%} Also, let's replace `Button` import in the header. Remove this.
 
-``` javascript
+```js
 import Button from "react-bootstrap/Button";
 ```
 
 {%change%} And add the following.
 
-``` javascript
+```js
 import LoaderButton from "../components/LoaderButton";
 ```
 
@@ -153,7 +157,7 @@ You might have noticed in our Login and App components that we simply `alert` wh
 
 {%change%} To do that, create `src/lib/errorLib.js` and add the following.
 
-``` javascript
+```js
 export function onError(error) {
   let message = error.toString();
 
@@ -172,13 +176,13 @@ Let's use this in our Login container.
 
 {%change%} Import the new error lib in the header of `src/containers/Login.js`.
 
-``` javascript
+```js
 import { onError } from "../lib/errorLib";
 ```
 
 {%change%} And replace `alert(e.message);` in the `handleSubmit` function with:
 
-``` javascript
+```js
 onError(e);
 ```
 
@@ -186,13 +190,13 @@ We'll do something similar in the App component.
 
 {%change%} Import the error lib in the header of `src/App.js`.
 
-``` javascript
+```js
 import { onError } from "./lib/errorLib";
 ```
 
 {%change%} And replace `alert(e);` in the `onLoad` function with:
 
-``` javascript
+```js
 onError(e);
 ```
 

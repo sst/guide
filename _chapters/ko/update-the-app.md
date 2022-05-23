@@ -2,7 +2,7 @@
 layout: post
 title: Update the App
 date: 2017-02-13 00:00:00
-lang: ko 
+lang: ko
 description: React.js 단일 페이지 응용 프로그램을 변경하는 방법에 대한 자습서.
 comments_id: comments-for-update-the-app/43
 ref: update-the-app
@@ -14,7 +14,7 @@ ref: update-the-app
 
 {%change%} `src/containers/Home.js`의 `renderLander` 메소드를 다음과 같이 변경합니다.
 
-``` coffee
+```coffee
 renderLander() {
   return (
     <div className="lander">
@@ -35,13 +35,13 @@ renderLander() {
 
 {%change%} 그리고 React-Router 헤더에서 `Link` 컴포넌트를 import합니다.
 
-``` javascript
+```js
 import { Link } from "react-router-dom";
 ```
 
 {%change%} 또한 `src/containers/Home.css`에 몇 가지 스타일을 추가합니다.
 
-``` css
+```css
 .Home .lander div {
   padding-top: 20px;
 }

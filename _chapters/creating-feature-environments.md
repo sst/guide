@@ -10,19 +10,19 @@ Over the last couple of chapters we looked at how to work on Lambda and API Gate
 
 Serverless is really good at creating ephemeral environments. Let's look at what the workflow looks like when you are trying to add a new feature to your app.
 
-As an example we'll add a  feature that lets you _like_ a note. We will add a new API endpoint `/notes/{id}/like`. We are going to work on this in a new feature branch and then deploy this using Seed.
+As an example we'll add a feature that lets you _like_ a note. We will add a new API endpoint `/notes/{id}/like`. We are going to work on this in a new feature branch and then deploy this using Seed.
 
 ### Create a feature branch
 
 We will create a new feature branch called `like`.
 
-``` bash
+```bash
 $ git checkout -b like
 ```
 
-Since we are going to be using `/notes/{id}/like` as our endpoint we need to first export the `/notes/{id}` API path.  Open the `serverless.yml` in the `services/notes-api` service, and append to the resource outputs.
+Since we are going to be using `/notes/{id}/like` as our endpoint we need to first export the `/notes/{id}` API path. Open the `serverless.yml` in the `services/notes-api` service, and append to the resource outputs.
 
-``` yaml
+```yaml
 ApiGatewayResourceNotesIdVarId:
   Value:
     Ref: ApiGatewayResourceNotesIdVar
@@ -32,33 +32,34 @@ ApiGatewayResourceNotesIdVarId:
 
 Our resource outputs should now look like:
 
-``` yaml
-...
-  - Outputs:
-      ApiGatewayRestApiId:
-        Value:
-          Ref: ApiGatewayRestApi
-        Export:
-          Name: ${self:custom.stage}-ExtApiGatewayRestApiId
+```yaml
 
-      ApiGatewayRestApiRootResourceId:
-        Value:
-           Fn::GetAtt:
-            - ApiGatewayRestApi
-            - RootResourceId
-        Export:
-          Name: ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId
+---
+- Outputs:
+    ApiGatewayRestApiId:
+      Value:
+        Ref: ApiGatewayRestApi
+      Export:
+        Name: ${self:custom.stage}-ExtApiGatewayRestApiId
 
-      ApiGatewayResourceNotesIdVarId:
-        Value:
-          Ref: ApiGatewayResourceNotesIdVar
-        Export:
-          Name: ${self:custom.stage}-ExtApiGatewayResourceNotesIdVarId
+    ApiGatewayRestApiRootResourceId:
+      Value:
+        Fn::GetAtt:
+          - ApiGatewayRestApi
+          - RootResourceId
+      Export:
+        Name: ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId
+
+    ApiGatewayResourceNotesIdVarId:
+      Value:
+        Ref: ApiGatewayResourceNotesIdVar
+      Export:
+        Name: ${self:custom.stage}-ExtApiGatewayResourceNotesIdVarId
 ```
 
 Let's create the `like-api` service.
 
-``` bash
+```bash
 $ cd services
 $ mkdir like-api
 $ cd like-api
@@ -66,7 +67,7 @@ $ cd like-api
 
 Add a `serverless.yml`.
 
-``` yaml
+```yaml
 service: notes-app-ext-like-api
 
 plugins:
@@ -113,7 +114,7 @@ Again, the `like-api` will share the same API endpoint as the `notes-api` servic
 
 Add the handler file `like.js`.
 
-``` javascript
+```js
 import { success } from "../../libs/response-lib";
 
 export async function main(event, context) {
@@ -169,7 +170,7 @@ By default, the new service is added to the last deploy phase. Let's click on **
 
 Now we are ready to create our new feature environment. Go back to our command line, and then push the code to the `like` branch.
 
-``` bash
+```bash
 $ git add .
 $ git commit -m "Add like API"
 $ git push --set-upstream origin like
@@ -195,7 +196,7 @@ You can now use the endpoint in your frontend for further testing and developmen
 
 Now that our new feature environment has been created, let's quickly look at the flow for working on your new feature.
 
-### Working on new feature environments locally 
+### Working on new feature environments locally
 
 Once the environment has been created, we want to continue working on the feature. A common problem people run into is that `serverless deploy` takes very long to execute. And running `serverless deploy` for every change just does not work.
 
@@ -219,7 +220,7 @@ Fortunately, there is a way to deploy individual functions using the `serverless
 
 Say we change our new `like.js` code to:
 
-``` javascript
+```js
 import { success } from "../../libs/response-lib";
 
 export async function main(event, context) {
@@ -233,7 +234,7 @@ export async function main(event, context) {
 
 To deploy the code for this function, run:
 
-``` bash
+```bash
 $ cd services/like-api
 $ serverless deploy -f like -s like
 ```

@@ -6,17 +6,18 @@ ref: create-a-login-page
 description: React.js 앱에 로그인 페이지를 추가합니다. 로그인 양식을 만들기 위해서 FormGroup과 FormControl React-Bootstrap 컴포넌트들을 사용합니다.
 context: true
 comments_id: create-a-login-page/71
+
 ---
 
 사용자가 자격 증명으로 로그인할 수 있는 페이지를 만들어 보겠습니다. 사용자가 로그인하거나 회원 가입시에 사용자 이름으로 이메일을 등록 할 수 있도록 이미 앞선 챕터에서 사용자 풀을 만들어 처리해 두었습니다. 나중에 가입 양식을 만들 때에도 다시 언급하겠습니다.
 
 먼저 사용자의 이메일(사용자 이름)과 비밀번호를 입력받기 위한 기본 양식을 만들어 보겠습니다.
 
-### 컨테이너 추가하기 
+### 컨테이너 추가하기
 
 {%change%} `src/containers/Login.js` 파일을 만들고 다음 내용을 추가합니다.
 
-``` coffee
+```coffee
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import "./Login.css";
@@ -97,7 +98,7 @@ export default class Login extends Component {
 
 {%change%} `src/containers/Login.css` 파일 안에 몇 가지 스타일을 추가해 보겠습니다.
 
-``` css
+```css
 @media all and (min-width: 480px) {
   .Login {
     padding: 60px 0;
@@ -116,13 +117,13 @@ export default class Login extends Component {
 
 {%change%} 이제 `src/Routes.js`의 `<Route>` 바로 아래에 다음 줄(`반드시 <Route component={NotFound} />` 보다는 위에 줄)을 추가하여 이 컨테이너를 나머지 응용 프로그램과 연결합니다.
 
-``` coffee
+```coffee
 <Route path="/login" exact component={Login} />
 ```
 
 {%change%} 그리고 헤더 부분에 컴포넌트를 추가합니다.
 
-``` javascript
+```js
 import Login from "./containers/Login";
 ```
 

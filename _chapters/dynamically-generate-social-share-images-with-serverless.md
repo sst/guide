@@ -15,7 +15,7 @@ Social cards or social share images or open graph images are preview images that
 
 However, creating a unique image for each blog post or page of your website can be time consuming and impractical. So we ideally want to be able to generate these images dynamically based on the title of the blog post or page and some other accompanying information.
 
-We wanted to do something like this for [Serverless Stack](/). And this was a perfect use case for [serverless]({% link _chapters/what-is-serverless.md %}). These images will be generated when your website is shared and it doesn't make sense to run a server to serve these out. So we built our own social cards service with [SST](/)! It's also deployed and managed with [Seed](https://seed.run). 
+We wanted to do something like this for [Serverless Stack](/). And this was a perfect use case for [serverless]({% link _chapters/what-is-serverless.md %}). These images will be generated when your website is shared and it doesn't make sense to run a server to serve these out. So we built our own social cards service with [SST](/)! It's also deployed and managed with [Seed](https://seed.run).
 
 For instance, here is what the social card for one of our chapters looks like.
 
@@ -27,7 +27,7 @@ We also have multiple templates to generate these social cards. Here's one for o
 
 These images are served out of our social cards service. It's built using [Serverless Stack (SST)](/) and is hosted on AWS:
 
-``` bash
+```bash
 https://social-cards.serverless-stack.com
 ```
 
@@ -43,15 +43,15 @@ In this chapter we'll be looking at:
 
 1. [The architecture of our social cards service](#the-architecture)
 1. [Create a serverless app with SST](#create-an-sst-app)
-2. [Design templates for our social cards in the browser](#design-social-card-templates)
-4. [Use Puppeteer to take screenshots of the templates](#take-screenshots-with-puppeteer)
-5. [Support non-Latin fonts in Lambda](#support-non-latin-fonts-in-lambda)
-6. [Cache the images in an S3 bucket](#cache-images-in-s3)
-7. [Use CloudFront as a CDN to serve the images](#use-cloudfront-as-a-cdn)
-8. [Add a custom domain for our social cards service](#adding-a-custom-domain)
-9. [Integrate with static site generators](#integrate-with-static-site-generators)
+1. [Design templates for our social cards in the browser](#design-social-card-templates)
+1. [Use Puppeteer to take screenshots of the templates](#take-screenshots-with-puppeteer)
+1. [Support non-Latin fonts in Lambda](#support-non-latin-fonts-in-lambda)
+1. [Cache the images in an S3 bucket](#cache-images-in-s3)
+1. [Use CloudFront as a CDN to serve the images](#use-cloudfront-as-a-cdn)
+1. [Add a custom domain for our social cards service](#adding-a-custom-domain)
+1. [Integrate with static site generators](#integrate-with-static-site-generators)
 
-Let's start by taking a step back and getting a sense of the architecture of our social card service. 
+Let's start by taking a step back and getting a sense of the architecture of our social card service.
 
 ### The Architecture
 
@@ -64,7 +64,7 @@ There are a couple of key parts to this. So let's look at it in detail.
 1. We have [CloudFront](https://aws.amazon.com/cloudfront/) as our CDN to serve out images.
 2. CloudFront connects to our serverless API.
 3. The API is powered by a Lambda function.
-1. The Lambda function generating these images will:
+4. The Lambda function generating these images will:
    - Include the templates that we'll be using. These are HTML files that are included in our Lambda function.
    - Run a headless Chrome instance with [Puppeteer](https://developers.google.com/web/tools/puppeteer) and pass in the parameters for the templates.
    - Load these templates and take a screenshot.
@@ -75,8 +75,8 @@ There are a couple of key parts to this. So let's look at it in detail.
 
 We'll start by creating a new SST app.
 
-``` bash
-$ npx create-serverless-stack@latest social-cards
+```bash
+$ npm init sst -- javascript-starter social-cards
 $ cd social-cards
 ```
 
@@ -84,16 +84,16 @@ The infrastructure in our app is defined using [CDK]({% link _chapters/what-is-a
 
 You can see this in `stacks/MyStack.js`.
 
-``` js
+```js
 // Create a HTTP API
-const api = new sst.Api(this, "Api", {
+const api = new Api(stack, "Api", {
   routes: {
-    "GET /": "src/lambda.handler",
+    "GET /": "functions/lambda.handler",
   },
 });
 ```
 
-For now our Lambda function in `src/lambda.js` just prints out _"Hello World"_.
+For now our Lambda function in `functions/lambda.js` just prints out _"Hello World"_.
 
 ### Design Social Card Templates
 
@@ -105,13 +105,13 @@ Let's look at the blog template that we use in Serverless Stack as an example.
 
 The HTML that generates this page looks like:
 
-``` html
+```html
 <html>
   <head>
-    <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="assets/css/fonts.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/blog.css">
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="assets/css/fonts.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/blog.css" />
   </head>
   <body>
     <img class="logo" height="55" src="assets/images/logo.svg" />
@@ -130,7 +130,9 @@ The HTML that generates this page looks like:
 
       document.getElementById("title").innerHTML = params.title;
       document.getElementById("author").innerHTML = params.author;
-      document.getElementById("avatar").src = `assets/images/profiles/${params.avatar}.png`;
+      document.getElementById(
+        "avatar"
+      ).src = `assets/images/profiles/${params.avatar}.png`;
     </script>
   </body>
 </html>
@@ -144,13 +146,13 @@ We'll add these to the `templates/` directory in our project.
 
 You can open these files locally with the URL:
 
-``` bash
+```bash
 file:///Users/jayair/Desktop/social-cards-service/templates/serverless-stack-blog.html?title=This%20is%20a%20sample%20blog%20post%20on%20Serverless%20Stack&author=Jay&avatar=jay
 ```
 
 It has the format:
 
-``` bash
+```bash
 file:///Users/jayair/Desktop/social-cards-service/templates/serverless-stack-blog.html?title={title}&author={name}&avatar={filename}
 ```
 
@@ -164,7 +166,7 @@ Now that our templates can load locally in a browser, we'll take a screenshot of
 
 We'll update our API to take the template and the rest of the options. We are going to use the format:
 
-``` bash
+```bash
 https://api-endpoint.com/{template}/{encoded_title}.png?author={author}&avatar={avatar}
 ```
 
@@ -176,12 +178,12 @@ We are going to use [Puppeteer](https://developers.google.com/web/tools/puppetee
 
 So the API definition in `stacks/MyStack.js` now looks like this.
 
-``` js
-const api = new sst.Api(this, "Api", {
+```js
+const api = new Api(stack, "Api", {
   routes: {
     "GET /{template}/{file}": {
       function: {
-        handler: "src/lambda.handler",
+        handler: "functions/lambda.handler",
         // Increase the timeout for generating screenshots
         timeout: 15,
         // Load Chrome in a Layer
@@ -205,8 +207,9 @@ const api = new sst.Api(this, "Api", {
 
 Where `layer` is:
 
-``` js
-const layerArn = "arn:aws:lambda:us-east-1:764866452798:layer:chrome-aws-lambda:22";
+```js
+const layerArn =
+  "arn:aws:lambda:us-east-1:764866452798:layer:chrome-aws-lambda:22";
 const layer = LayerVersion.fromLayerVersionArn(this, "Layer", layerArn);
 ```
 
@@ -214,13 +217,13 @@ You'll also notice that we are copying over the template files to our Lambda fun
 
 Now for our Lambda function, we'll need to install a couple of NPM packages.
 
-``` bash
+```bash
 $ npm install puppeteer puppeteer-core chrome-aws-lambda
 ```
 
 Here are the relevant parts of our Lambda function.
 
-``` js
+```js
 import path from "path";
 import chrome from "chrome-aws-lambda";
 
@@ -324,13 +327,13 @@ Most of the code is pretty straightforward. But let's look at some of the key po
 
 Now to test this, we'll head over to a URL that looks something like this:
 
-``` bash
+```bash
 https://l36xnnxdw6.execute-api.us-east-1.amazonaws.com/serverless-stack-blog/VGhpcyUyMGlzJTIwYSUyMHNhbXBsZSUyMGJsb2clMjBwb3N0JTIwb24lMjBTZXJ2ZXJsZXNzJTIwU3RhY2s=.png?author=Jay&avatar=jay
 ```
 
 Where the big encoded string is the Base64 encoded version of:
 
-``` bash
+```bash
 This%20is%20a%20sample%20blog%20post%20on%20Serverless%20Stack
 ```
 
@@ -348,26 +351,26 @@ To fix this we'll need to set the OS that Lambda runs in, with these fonts.
 
 Start by creating a `.fonts/` directory in your project root.
 
-``` bash
+```bash
 $ mkdir .fonts
 ```
 
 Here you can download and copy over the font you need from [Google's Noto project](https://www.google.com/get/noto/). For this example, we are going to copy over `NotoSansCJKsc-Regular.otf`.
 
-``` bash
+```bash
 .fonts
 └── NotoSansCJKsc-Regular.otf
 ```
 
 We'll also configure our Lambda function to copy this directory. And we set the `$HOME` environment variable to `/var/task` (where it'll be placed) to instruct the OS of the Lambda function to pick it up.
 
-``` js
+```js
 // Create a HTTP API
-const api = new sst.Api(this, "Api", {
+const api = new Api(stack, "Api", {
   routes: {
     "GET /{template}/{file}": {
       function: {
-        handler: "src/lambda.handler",
+        handler: "functions/lambda.handler",
 
         //...
 
@@ -378,7 +381,7 @@ const api = new sst.Api(this, "Api", {
         },
 
         bundle: {
-          // Copy over templates and non Latin fonts 
+          // Copy over templates and non Latin fonts
           copyFiles: [
             {
               from: "templates",
@@ -410,7 +413,7 @@ First, we'll create our S3 bucket.
 
 In `stacks/MyStack.js` above our API definition we have.
 
-``` js
+```js
 // Create S3 bucket to store generated images
 const bucket = new sst.Bucket(this, "WebsiteBucket", {
   s3Bucket: {
@@ -423,13 +426,13 @@ const bucket = new sst.Bucket(this, "WebsiteBucket", {
 
 We'll also update our API definition to pass in the name of this bucket as an environment variable.
 
-``` js
+```js
 // Create a HTTP API
-const api = new sst.Api(this, "Api", {
+const api = new Api(stack, "Api", {
   routes: {
     "GET /{template}/{file}": {
       function: {
-        handler: "src/lambda.handler",
+        handler: "functions/lambda.handler",
 
         // ...
 
@@ -447,23 +450,23 @@ const api = new sst.Api(this, "Api", {
 
 We'll allow the API to access our S3 bucket.
 
-``` js
+```js
 // Allow API to access bucket
 api.attachPermissions([bucket]);
 ```
 
 On the Lambda function side, let's reference the environment variable.
 
-``` js
+```js
 import { S3 } from "aws-sdk";
 
 const Bucket = process.env.BucketName;
 const s3 = new S3({ apiVersion: "2006-03-01" });
 ```
 
-And after the `const options...` line in `src/lambda.js` we'll do the following.
+And after the `const options...` line in `functions/lambda.js` we'll do the following.
 
-``` js
+```js
 const key = generateS3Key(template, title, options);
 
 // Check the S3 bucket
@@ -477,7 +480,7 @@ if (fromBucket) {
 
 Where `generateS3Key` looks like.
 
-``` js
+```js
 /**
  * Generate a S3 safe key using the path parameters and query string options
  */
@@ -496,7 +499,7 @@ This gives us a S3 safe key that looks like a directory path using our input par
 
 The `get(key)` function checks if this key already exists in S3.
 
-``` js
+```js
 async function get(Key) {
   const params = { Key, Bucket };
 
@@ -513,14 +516,14 @@ If it does, we return it directly by calling `createResponse(fromBucket)`.
 
 And after we take the screenshot with `page.screenshot()`, we'll save it to S3.
 
-``` js
+```js
 // Upload to the bucket
 await upload(key, buffer);
 ```
 
 Where `upload` looks like.
 
-``` js
+```js
 async function upload(Key, Body) {
   const params = {
     Key,
@@ -533,7 +536,7 @@ async function upload(Key, Body) {
 }
 ```
 
-Make sure to check out the full `src/lambda.js` source here — [{{ page.repo | remove: "https://" }}/blob/main/src/lambda.js]({{ page.repo }}/blob/main/src/lambda.js)
+Make sure to check out the full `functions/lambda.js` source here — [{{ page.repo | remove: "https://" }}/blob/main/functions/lambda.js]({{ page.repo }}/blob/main/functions/lambda.js)
 
 Now if you load your API endpoint a couple of times, you'll notice it is much faster the second time around.
 
@@ -543,7 +546,7 @@ To make our requests even faster we'll add a CDN in front of our API. We'll use 
 
 In `stacks/MyStack.js` we'll define our CloudFront distribution.
 
-``` js
+```js
 // Create CloudFront Distribution
 const distribution = new cf.Distribution(this, "WebsiteCdn", {
   defaultBehavior: {
@@ -568,7 +571,7 @@ We are doing a couple of things here:
 
 So now you can replace the CloudFront domain in our previously used URL scheme and it should load our images really fast.
 
-``` bash
+```bash
 https://d12c5yrsx1d0su.cloudfront.net/serverless-stack-blog/VGhpcyUyMGlzJTIwYSUyMHNhbXBsZSUyMGJsb2clMjBwb3N0JTIwb24lMjBTZXJ2ZXJsZXNzJTIwU3RhY2s=.png?author=Jay&avatar=jay
 ```
 
@@ -584,11 +587,11 @@ Or if you have a domain hosted on another provider, [read this to migrate it to 
 
 We can do this in our `stacks/MyStack.js` by adding this block above the CloudFront definition.
 
-``` js
+```js
 const rootDomain = "serverless-stack.com";
 const domainName = `social-cards.${rootDomain}`;
 
-const useCustomDomain = scope.stage === "prod";
+const useCustomDomain = app.stage === "prod";
 
 if (useCustomDomain) {
   // Lookup domain hosted zone
@@ -615,7 +618,7 @@ This creates a certificate for our domain. Note that, this needs to be in the `u
 
 We then pass in these `domainProps` to our CloudFront Distribution.
 
-``` js
+```js
 // Create CloudFront Distribution
 const distribution = new cf.Distribution(this, "WebsiteCdn", {
   ...domainProps,
@@ -633,9 +636,7 @@ if (useCustomDomain) {
   new route53.ARecord(this, "AliasRecord", {
     zone: hostedZone,
     recordName: domainName,
-    target: route53.RecordTarget.fromAlias(
-      new CloudFrontTarget(distribution)
-    ),
+    target: route53.RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
   });
 }
 ```
@@ -644,7 +645,7 @@ Make sure to check out the full `stacks/MyStack.js` source here — [{{ page.rep
 
 Now you can load our custom domain URL!
 
-``` bash
+```bash
 https://social-cards.serverless-stack.com/serverless-stack-blog/VGhpcyUyMGlzJTIwYSUyMHNhbXBsZSUyMGJsb2clMjBwb3N0JTIwb24lMjBTZXJ2ZXJsZXNzJTIwU3RhY2s=.png?author=Jay&avatar=jay
 ```
 
@@ -658,7 +659,7 @@ So our social cards service is ready and optimized for production. Let's look at
 
 We need to Base64 encode our titles. We'll create a simple plugin to make this easy. Add the following to `_plugins/base64_filter.rb` in your Jekyll site.
 
-``` ruby
+```ruby
 require "base64"
 
 module Base64Filter
@@ -673,12 +674,17 @@ Liquid::Template.register_filter(Base64Filter) # register filter globally
 In your layouts where you have the `<head>` tag, add the following.
 
 {% raw %}
-``` html
-{% if page.id %}
-  {% assign encoded_title=title | truncate: 700 | url_encode | base64_encode | url_encode %}
-  <meta content="https://social-cards.serverless-stack.com/serverless-stack-blog/{{ encoded_title }}.png?author={{ site.data.authors[page.author].name | url_encode }}&avatar={{ page.author }}" property="og:image">
+
+```html
+{% if page.id %} {% assign encoded_title=title | truncate: 700 | url_encode |
+base64_encode | url_encode %}
+<meta
+  content="https://social-cards.serverless-stack.com/serverless-stack-blog/{{ encoded_title }}.png?author={{ site.data.authors[page.author].name | url_encode }}&avatar={{ page.author }}"
+  property="og:image"
+/>
 {% endif %}
 ```
+
 {% endraw %}
 
 Here we are adding the `og:image` tag if the current page is a blog post. We are also doing a couple of things to the title.
@@ -689,13 +695,13 @@ Here we are adding the `og:image` tag if the current page is a blog post. We are
 
 In the above code snippet, we are assuming that our blog post has the `author` set in the front matter.
 
-``` yml
+```yml
 author: jay
 ```
 
 We also have a data file in `_data/authors.yml` that stores all the authors in our site.
 
-``` yml
+```yml
 jay:
   name: Jay
 ```
@@ -706,7 +712,7 @@ For [Docusaurus](https://docusaurus.io), we'll need to wrap around the theme to 
 
 If you are using `theme-original`, then you can add the following to `src/theme/DocItem/index.js`.
 
-``` jsx
+```jsx
 import React from "react";
 import { Base64 } from "js-base64";
 import Head from "@docusaurus/Head";
@@ -720,11 +726,7 @@ export default function DocItem(props) {
   const { authors, socialCardsUrl } = siteConfig.customFields;
 
   const encodedTitle = encodeURIComponent(
-    Base64.encode(
-      encodeURIComponent(
-        title.substring(0, 700)
-      )
-    )
+    Base64.encode(encodeURIComponent(title.substring(0, 700)))
   );
   const encodedName = encodeURIComponent(authors[author].name);
 
@@ -745,7 +747,7 @@ Here we are [wrapping around the original theme component](https://docusaurus.io
 
 Just like with the Jekyll case, we limit the size of the title and in our `docusaurus.config.js` we have a custom field that contains the URL of our social cards service and the author info.
 
-``` js
+```js
 customFields: {
   // Used in "src/theme/DocItem/index.js" to add og:image tags dynamically
   socialCardsUrl: "https://social-cards.serverless-stack.com",

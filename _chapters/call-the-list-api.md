@@ -14,7 +14,7 @@ Now that we have our basic homepage set up, let's make the API call to render ou
 
 {%change%} Add the following right below the state variable declarations in `src/containers/Home.js`.
 
-``` javascript
+```js
 useEffect(() => {
   async function onLoad() {
     if (!isAuthenticated) {
@@ -45,7 +45,7 @@ Let's quickly go over how we are using it here. We want to make a request to our
 
 {%change%} And include our Amplify API module in the header.
 
-``` javascript
+```js
 import { API } from "aws-amplify";
 ```
 
@@ -55,7 +55,7 @@ Now let's render the results.
 
 {%change%} Replace our `renderNotesList` placeholder method with the following.
 
-``` jsx
+```jsx
 function renderNotesList(notes) {
   return (
     <>
@@ -87,40 +87,42 @@ The code above does a few things.
 
 1. It always renders a **Create a new note** button as the first item in the list (even if the list is empty). And it links to [the create note page that we previously created]({% link _chapters/add-the-create-note-page.md %}).
 
-   ``` jsx
-    <LinkContainer to="/notes/new">
-      <ListGroup.Item action className="py-3 text-nowrap text-truncate">
-        <BsPencilSquare size={17} />
-        <span className="ml-2 font-weight-bold">Create a new note</span>
-      </ListGroup.Item>
-    </LinkContainer>
+   ```jsx
+   <LinkContainer to="/notes/new">
+     <ListGroup.Item action className="py-3 text-nowrap text-truncate">
+       <BsPencilSquare size={17} />
+       <span className="ml-2 font-weight-bold">Create a new note</span>
+     </ListGroup.Item>
+   </LinkContainer>
    ```
 
 2. In the button we use a `BsPencilSquare` icon from the [React Icons Bootstrap icon set](https://react-icons.github.io/icons?name=bs).
 
 3. We then render a list of all the notes.
 
-   ``` javascript
+   ```js
    notes.map(({ noteId, content, createdAt }) => (...
    ```
 
 4. The first line of each note's content is set as the `ListGroup.Item` header.
 
-   ``` javascript
-   note.content.trim().split('\n')[0]
+   ```js
+   note.content.trim().split("\n")[0];
    ```
 
 5. And we convert the date the note was created to a more friendly format.
 
-   ``` javascript
-   {new Date(createdAt).toLocaleString()}
+   ```js
+   {
+     new Date(createdAt).toLocaleString();
+   }
    ```
 
 6. The `LinkContainer` component directs our app to each of the items.
 
 {%change%} Include the `LinkContainer` and `BsPencilSquare` icon at the top of `src/containers/Home.js`.
 
-``` javascript
+```js
 import { BsPencilSquare } from "react-icons/bs";
 import { LinkContainer } from "react-router-bootstrap";
 ```
@@ -129,6 +131,6 @@ Now head over to your browser and you should see your list displayed.
 
 ![Homepage list loaded screenshot](/assets/homepage-list-loaded.png)
 
-If you click on each entry, the links should generate URLs with appropriate _noteIds_. For now, these URLs will take you to our 404 page.  We'll fix that in the next section.
+If you click on each entry, the links should generate URLs with appropriate _noteIds_. For now, these URLs will take you to our 404 page. We'll fix that in the next section.
 
 Next up we are going to allow users to view and edit their notes.

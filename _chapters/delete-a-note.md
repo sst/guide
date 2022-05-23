@@ -12,7 +12,7 @@ The last thing we need to do on the note page is allowing users to delete their 
 
 {%change%} Replace our `handleDelete` function in `src/containers/Notes.js`.
 
-``` javascript
+```js
 function deleteNote() {
   return API.del("notes", `/notes/${id}`);
 }
@@ -32,7 +32,7 @@ async function handleDelete(event) {
 
   try {
     await deleteNote();
-    history.push("/");
+    nav("/");
   } catch (e) {
     onError(e);
     setIsDeleting(false);

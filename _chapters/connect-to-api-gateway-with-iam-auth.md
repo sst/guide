@@ -7,7 +7,6 @@ comments_id: 113
 comments_id: comments-signup-with-aws-cognito/113
 ---
 
-
 Connecting to an API Gateway endpoint secured using AWS IAM can be challenging. You need to sign your requests using [Signature Version 4](http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html). You can use:
 
 - [Generated API Gateway SDK](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-generate-sdk.html)
@@ -27,11 +26,11 @@ In this chapter we'll go over how to use the `sigV4Client.js`. The basic flow lo
 
 The following method can authenticate a user to Cognito User Pool.
 
-``` js
+```js
 function login(username, password) {
   const userPool = new CognitoUserPool({
     UserPoolId: USER_POOL_ID,
-    ClientId: APP_CLIENT_ID
+    ClientId: APP_CLIENT_ID,
   });
   const user = new CognitoUser({ Username: username, Pool: userPool });
   const authenticationData = { Username: username, Password: password };
@@ -39,8 +38,8 @@ function login(username, password) {
 
   return new Promise((resolve, reject) =>
     user.authenticateUser(authenticationDetails, {
-      onSuccess: result => resolve(),
-      onFailure: err => reject(err)
+      onSuccess: (result) => resolve(),
+      onFailure: (err) => reject(err),
     })
   );
 }
@@ -48,18 +47,18 @@ function login(username, password) {
 
 Ensure to use your `USER_POOL_ID` and `APP_CLIENT_ID`. And given their Cognito `username` and `password` you can log a user in by calling:
 
-``` js
-await login('my_username', 'my_password');
+```js
+await login("my_username", "my_password");
 ```
 
 ### Generate Temporary IAM Credentials
 
 Once your user is authenticated you can generate a set of temporary credentials. To do so you need to first get their JWT user token using the following:
 
-``` js
+```js
 function getUserToken(currentUser) {
   return new Promise((resolve, reject) => {
-    currentUser.getSession(function(err, session) {
+    currentUser.getSession(function (err, session) {
       if (err) {
         reject(err);
         return;
@@ -72,11 +71,11 @@ function getUserToken(currentUser) {
 
 Where you can get the current logged in user using:
 
-``` js
+```js
 function getCurrentUser() {
   const userPool = new CognitoUserPool({
     UserPoolId: config.cognito.USER_POOL_ID,
-    ClientId: config.cognito.APP_CLIENT_ID
+    ClientId: config.cognito.APP_CLIENT_ID,
   });
   return userPool.getCurrentUser();
 }
@@ -84,18 +83,17 @@ function getCurrentUser() {
 
 And with the JWT token you can generate their temporary IAM credentials using:
 
-``` jsx
+```jsx
 function getAwsCredentials(userToken) {
-  const authenticator = `cognito-idp.${config.cognito
-    .REGION}.amazonaws.com/${config.cognito.USER_POOL_ID}`;
+  const authenticator = `cognito-idp.${config.cognito.REGION}.amazonaws.com/${config.cognito.USER_POOL_ID}`;
 
   AWS.config.update({ region: config.cognito.REGION });
 
   AWS.config.credentials = new AWS.CognitoIdentityCredentials({
     IdentityPoolId: config.cognito.IDENTITY_POOL_ID,
     Logins: {
-      [authenticator]: userToken
-    }
+      [authenticator]: userToken,
+    },
   });
 
   return AWS.config.credentials.getPromise();
@@ -108,7 +106,7 @@ The `sigV4Client.js` needs [**crypto-js**](https://github.com/brix/crypto-js) in
 
 Install it by running the following in your project root.
 
-``` bash
+```bash
 $ npm install crypto-js --save
 ```
 
@@ -118,7 +116,7 @@ And to use the `sigV4Client.js` simply copy it over to your project.
 
 This file can look a bit intimidating at first but it is just using the temporary credentials and the request parameters to create the necessary signed headers. To create a new `sigV4Client` we need to pass in the following:
 
-``` javascript
+```js
 // Pseudocode
 
 sigV4Client.newClient({
@@ -131,13 +129,13 @@ sigV4Client.newClient({
   // API Gateway region
   region,
   // API Gateway URL
-  endpoint
+  endpoint,
 });
 ```
 
 And to sign a request you need to use the `signRequest` method and pass in:
 
-``` javascript
+```js
 // Pseudocode
 
 const signedRequest = client.signRequest({
@@ -150,7 +148,7 @@ const signedRequest = client.signRequest({
   // The request query parameters
   queryParams,
   // The request body
-  body
+  body,
 });
 ```
 
@@ -160,7 +158,7 @@ And `signedRequest.headers` should give you the signed headers that you need to 
 
 Let's put it all together. The following gives you a simple helper function to call an API Gateway endpoint.
 
-``` js
+```js
 function invokeApig({
   path,
   method = "GET",

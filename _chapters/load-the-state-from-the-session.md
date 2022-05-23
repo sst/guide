@@ -18,7 +18,7 @@ Let's load this when our app loads. To do this we are going to use another React
 
 {%change%} To do this, let's add another state variable to our `src/App.js` state called `isAuthenticating`. Add it to the top of our `App` function.
 
-``` javascript
+```js
 const [isAuthenticating, setIsAuthenticating] = useState(true);
 ```
 
@@ -26,13 +26,13 @@ We start with the value set to `true` because as we first load our app, it'll st
 
 {%change%} Let's include the `Auth` module by adding the following to the header of `src/App.js`.
 
-``` javascript
+```js
 import { Auth } from "aws-amplify";
 ```
 
 {%change%} Now to load the user session we'll add the following to our `src/App.js` right below our variable declarations.
 
-``` javascript
+```js
 useEffect(() => {
   onLoad();
 }, []);
@@ -41,9 +41,8 @@ async function onLoad() {
   try {
     await Auth.currentSession();
     userHasAuthenticated(true);
-  }
-  catch(e) {
-    if (e !== 'No current user') {
+  } catch (e) {
+    if (e !== "No current user") {
       alert(e);
     }
   }
@@ -66,7 +65,7 @@ When our app first loads, it'll run the `onLoad` function. All this does is load
 
 So the top of our `App` function should now look like this:
 
-``` javascript
+```js
 function App() {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -80,7 +79,7 @@ function App() {
 
 {%change%} Let's make sure to include the `useEffect` hook by replacing the React import in the header of `src/App.js` with:
 
-``` javascript
+```js
 import React, { useState, useEffect } from "react";
 ```
 
@@ -93,7 +92,8 @@ We'll conditionally render our app based on the `isAuthenticating` flag.
 {%change%} Our `return` statement in `src/App.js` should be as follows.
 
 {% raw %}
-``` jsx
+
+```jsx
 return (
   !isAuthenticating && (
     <div className="App container py-3">
@@ -128,6 +128,7 @@ return (
   )
 );
 ```
+
 {% endraw %}
 
 Now if you head over to your browser and refresh the page, you should see that a user is logged in.

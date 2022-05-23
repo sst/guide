@@ -28,10 +28,10 @@ It also comes with a configuration file, `sst.json`, which contains the environm
 
 ```json
 {
-   "name":"react-app-auth-cognito",
-   "stage":"dev",
-   "region":"us-east-1",
-   "lint":true
+  "name": "react-app-auth-cognito",
+  "stage": "dev",
+  "region": "us-east-1",
+  "lint": true
 }
 ```
 
@@ -45,7 +45,7 @@ In the [previous chapter]({% link _chapters/how-to-add-authentication-to-a-serve
 
 SST makes it easy to add these to your application. In [`stacks/MyStack.js`]({{ repo_url }}/stacks/MyStack.js) you'll notice.
 
-``` js
+```js
 // Create a Cognito User Pool to manage auth
 const auth = new sst.Auth(this, "Auth", {
   cognito: {
@@ -90,7 +90,8 @@ new Auth(this, "Auth", {
   apple: { servicesId: "com.myapp.client" },
   amazon: { appId: "amzn1.application.24ebe4ee4aef41e5acff038aee2ee65f" },
   google: {
-    clientId: "38017095028-abcdjaaaidbgt3kfhuoh3n5ts08vodt3.apps.googleusercontent.com",
+    clientId:
+      "38017095028-abcdjaaaidbgt3kfhuoh3n5ts08vodt3.apps.googleusercontent.com",
   },
 });
 ```
@@ -114,9 +115,9 @@ new Auth(this, "Auth", {
 
 Now let's look at how we can use Cognito to secure our API. In [`stacks/MyStack.js`]({{ repo_url }}/stacks/MyStack.js) of our example, you'll notice our SST [`Api`]({{ site.docs_url }}/constructs/Api) definition.
 
-``` js
+```js
 // Create an HTTP API
-const api = new sst.Api(this, "Api", {
+const api = new Api(stack, "Api", {
   // Secure it with IAM Auth
   defaultAuthorizationType: sst.ApiAuthorizationType.AWS_IAM,
   routes: {
@@ -147,7 +148,7 @@ Next, let's quickly look at the Lambda functions that'll be powering our API. In
 
 For example, here's what [`src/private.js`]({{ repo_url }}/src/private.js) looks like.
 
-``` js
+```js
 export async function handler() {
   const rand = Math.floor(Math.random() * 10);
 
@@ -163,9 +164,9 @@ export async function handler() {
 
 We can now turn our attention to the frontend part of our application. In [`stacks/MyStack.js`]({{ repo_url }}/stacks/MyStack.js) take a look at the SST [`ReactStaticSite`]({{ site.docs_url }}/constructs/ReactStaticSite) definition.
 
-``` js
+```js
 // Deploy our React app
-const site = new sst.ReactStaticSite(this, "ReactSite", {
+const site = new ReactStaticSite(this, "ReactSite", {
   path: "frontend",
   // Pass in our environment variables
   environment: {
@@ -173,8 +174,7 @@ const site = new sst.ReactStaticSite(this, "ReactSite", {
     REACT_APP_REGION: scope.region,
     REACT_APP_USER_POOL_ID: auth.cognitoUserPool.userPoolId,
     REACT_APP_IDENTITY_POOL_ID: auth.cognitoCfnIdentityPool.ref,
-    REACT_APP_USER_POOL_CLIENT_ID:
-      auth.cognitoUserPoolClient.userPoolClientId,
+    REACT_APP_USER_POOL_CLIENT_ID: auth.cognitoUserPoolClient.userPoolClientId,
   },
 });
 ```
@@ -197,7 +197,7 @@ In this example we are using [Create React App](https://create-react-app.dev). T
 
 You'll notice this in the [`frontend/package.json`]({{ repo_url }}/frontend/package.json).
 
-``` json
+```json
 "scripts": {
   "start": "sst-env -- react-scripts start",
   "build": "react-scripts build",
@@ -214,7 +214,7 @@ However, we'll look at how we use [AWS Amplify](https://aws.amazon.com/amplify/)
 
 To start with, we'll configure it in [`frontend/src/index.js`]({{ repo_url }}/frontend/src/index.js).
 
-``` js
+```js
 // Init Amplify
 Amplify.configure({
   Auth: {
@@ -238,13 +238,13 @@ Amplify.configure({
 
 You'll notice that we are using the environment variables that we had set above.
 
-### Loading APIs  
+### Loading APIs
 
 Our simple React app will be loading the two API routes that we had previously created. We have a component that renders the homepage of our app.
 
 In [`frontend/src/components/Home.js`]({{ repo_url }}/frontend/src/components/Home.js) you'll notice that we are loading our random number generating APIs.
 
-``` jsx
+```jsx
 import React, { useState, useEffect } from "react";
 import { API } from "aws-amplify";
 import "./Home.css";
@@ -304,7 +304,7 @@ To allow users to sign up for our application, let's look at [`frontend/src/comp
 
 First, we have a form that we've created using React Bootstrap.
 
-``` jsx
+```jsx
 function renderForm() {
   return (
     <Form onSubmit={handleSubmit}>
@@ -349,7 +349,7 @@ function renderForm() {
 
 Then when we submit this form, we use the Amplify Auth package to sign up the user.
 
-``` js
+```js
 async function handleSubmit(event) {
   event.preventDefault();
 
@@ -372,7 +372,7 @@ async function handleSubmit(event) {
 
 Upon sign up, the user is sent a confirmation code. So we have a form that allows users to enter the code.
 
-``` jsx
+```jsx
 function renderConfirmationForm() {
   return (
     <Form onSubmit={handleConfirmationSubmit}>
@@ -402,7 +402,7 @@ function renderConfirmationForm() {
 
 And finally, we confirm the code and log the user in.
 
-``` js
+```js
 async function handleConfirmationSubmit(event) {
   event.preventDefault();
 
@@ -416,7 +416,7 @@ async function handleConfirmationSubmit(event) {
 
     userHasAuthenticated(true);
     // Redirect to the homepage
-    history.push("/");
+    nav("/");
   } catch (e) {
     alert(e);
     setIsLoading(false);
@@ -432,7 +432,7 @@ So now our users can sign up with Cognito. Let's make sure a signed up user can 
 
 In the [`frontend/src/components/Login.js`]({{ repo_url }}/frontend/src/components/Login.js) we have a simple login form.
 
-``` jsx
+```jsx
 <div className="Login">
   <Form onSubmit={handleSubmit}>
     <Form.Group size="lg" controlId="email">
@@ -466,7 +466,7 @@ In the [`frontend/src/components/Login.js`]({{ repo_url }}/frontend/src/componen
 
 When a user submits this form, we make a request to Amplify to log the user in. You'll notice it's the same call we made at the end of the sign up process.
 
-``` js
+```js
 async function handleSubmit(event) {
   event.preventDefault();
 
@@ -477,7 +477,7 @@ async function handleSubmit(event) {
     await Auth.signIn(fields.email, fields.password);
     userHasAuthenticated(true);
     // Redirect to the homepage
-    history.push("/");
+    nav("/");
   } catch (e) {
     alert(e);
     setIsLoading(false);
@@ -495,7 +495,7 @@ To tie all of these together, we need to make sure that the session is loaded wh
 
 So in [`frontend/src/App.js`]({{ repo_url }}/frontend/src/App.js) we get the current session from Amplify.
 
-``` js
+```js
 useEffect(() => {
   async function onLoad() {
     try {
@@ -517,7 +517,7 @@ useEffect(() => {
 
 The `userHasAuthenticated` and `setIsAuthenticating` are a couple of state variables that we define.
 
-``` js
+```js
 // Track if authentication is in progress
 const [isAuthenticating, setIsAuthenticating] = useState(true);
 // Track is the user has authenticated
@@ -526,28 +526,22 @@ const [isAuthenticated, userHasAuthenticated] = useState(false);
 
 Finally we pass these in to the components in our app.
 
-``` js
+```js
 // Props that'll be passed to all the routes
 const routeProps = { isAuthenticated, userHasAuthenticated };
 ```
 
-``` jsx
-<Switch>
-  <Route exact path="/">
-    <Home {...routeProps} />
-  </Route>
-  <Route exact path="/login">
-    <Login {...routeProps} />
-  </Route>
-  <Route exact path="/signup">
-    <Signup {...routeProps} />
-  </Route>
-</Switch>
+```jsx
+<Routes>
+  <Route path="/" element={<Home {...routeProps} />}>
+  <Route path="/login" element={<Login {...routeProps} />}>
+  <Route path="/signup" element={<Signup {...routeProps} />}>
+</Routes>
 ```
 
 We also allow our users to log out.
 
-``` js
+```js
 async function handleLogout() {
   // Log the user out
   await Auth.signOut();
@@ -564,16 +558,16 @@ SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-develop
 
 To test our [example]({{ repo_url }}):
 
-``` bash
+```bash
 $ npm install
-$ npx sst start
+$ npm start
 ```
 
 The first time you run this command it'll take a couple of minutes to create your environment.
 
 Once complete, you should see something like this.
 
-``` bash
+```bash
 ===============
  Deploying app
 ===============
@@ -602,8 +596,7 @@ Stack dev-react-app-auth-cognito-my-stack
 
 We'll also start up our React application.
 
-
-``` bash
+```bash
 $ cd frontend
 $ npm run start
 ```
@@ -634,15 +627,15 @@ We can also hit the logout button, it'll clear the session and we won't be able 
 
 Finally, you can deploy your app to prod by:
 
-``` bash
-$ npx sst deploy --stage prod
+```bash
+$ npm run deploy -- --stage prod
 ```
 
 And once you are done, you can remove all the resources we've created by running.
 
-``` bash
-$ npx sst remove
-$ npx sst remove --stage prod
+```bash
+$ npm run remove
+$ npm run remove --stage prod
 ```
 
 Make sure to check out the example repo on GitHub.

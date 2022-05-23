@@ -4,7 +4,7 @@ title: Handle 404s
 date: 2017-01-12 00:00:00
 lang: ko
 ref: handle-404s
-description: React.js 앱에서 React Router v4를 사용하여 404를 처리하려면 Switch 블록 하단에 모든 경로에 대한 감지 설정을 해야합니다. 모든 경로 감지에는 경로 속성 없이 모든 경로에 응답합니다.
+description: React.js 앱에서 React Router v6를 사용하여 404를 처리하려면 Switch 블록 하단에 모든 경로에 대한 감지 설정을 해야합니다. 모든 경로 감지에는 경로 속성 없이 모든 경로에 응답합니다.
 context: true
 comments_id: handle-404s/75
 ---
@@ -17,7 +17,7 @@ comments_id: handle-404s/75
 
 {%change%} `src/containers/NotFound.js` 이름으로 새로운 컴포넌트를 만듭니다. 그리고 다음 내용을 추가합니다.
 
-``` coffee
+```coffee
 import React from "react";
 import "./NotFound.css";
 
@@ -31,20 +31,20 @@ export default () =>
 
 {%change%} `src/containers/NotFound.css`에 몇 가지 스타일을 추가합니다.
 
-``` css
+```css
 .NotFound {
   padding-top: 100px;
   text-align: center;
 }
 ```
 
-### 모든 경로에 대한 감지 추가하기 
+### 모든 경로에 대한 감지 추가하기
 
 이제 모든 경로에서 404 처리를 위해 위 컴포넌트를 추가합니다.
 
-{%change%} `src/Routes.js`에서 `<Switch>` 블록을 찾아 해당 블록 마지막 줄에 다음 내용을 추가합니다. 
+{%change%} `src/Routes.js`에서 `<Switch>` 블록을 찾아 해당 블록 마지막 줄에 다음 내용을 추가합니다.
 
-``` coffee
+```coffee
 { /* 최종적으로 일치하지 않는 모든 경로를 감지합니다. */ }
 <Route component={NotFound} />
 ```
@@ -53,7 +53,7 @@ export default () =>
 
 {%change%} 그리고 `NotFound` 컴포넌트를 import하기 위해 헤더 부분에 다음 내용을 추가합니다:
 
-``` javascript
+```js
 import NotFound from "./containers/NotFound";
 ```
 

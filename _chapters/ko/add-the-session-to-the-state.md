@@ -5,20 +5,20 @@ date: 2017-01-15 00:00:00
 lang: ko
 ref: add-the-session-to-the-state
 redirect_from: /chapters/add-the-user-token-to-the-state.html
-description: React.js 앱에서 App 세션 상태에 사용자 세션을 추가해야합니다. 상태를 추가하게 되면 해당 사용자 세션을 모든 하위 컨테이너에 전달할 수 있습니다. 
+description: React.js 앱에서 App 세션 상태에 사용자 세션을 추가해야합니다. 상태를 추가하게 되면 해당 사용자 세션을 모든 하위 컨테이너에 전달할 수 있습니다.
 context: true
 comments_id: add-the-session-to-the-state/136
 ---
 
 로그인 프로세스를 완료하려면 사용자가 로그인했음을 알리기 위해 세션과 함께 App state를 업데이트해야합니다.
 
-### App State 업데이트 
+### App State 업데이트
 
 먼저 사용자 로그인을 한 상태에서 App state를 업데이트하는 것으로 시작합니다. 이 항목을 `Login` 컨테이너에 저장하고 싶지만 다른 곳에서도 이 항목을 사용하므로 가장 적합한 곳은 `App` 컨테이너입니다.
 
 {%change%} `src/App.js`를 열어서 `class App extends Component {` 줄 바로 아래에 다음 내용을 추가합니다.
 
-``` javascript
+```js
 constructor(props) {
   super(props);
 
@@ -40,22 +40,22 @@ userHasAuthenticated = authenticated => {
 
 {%change%} `src/App.js`의 `render() {` 줄 바로 아래에 다음 내용을 추가합니다 .
 
-``` javascript
+```js
 const childProps = {
   isAuthenticated: this.state.isAuthenticated,
-  userHasAuthenticated: this.userHasAuthenticated
+  userHasAuthenticated: this.userHasAuthenticated,
 };
 ```
 
 {%change%} `src/App.js`의 `render` 메쏘드에서 다음 라인을 대체하여 `Routes` 컴포넌트로 전달하십시오.
 
-``` coffee
+```coffee
 <Routes />
 ```
 
 {%change%} 위 내용을 다음 내용으로 변경
 
-``` coffee
+```coffee
 <Routes childProps={childProps} />
 ```
 
@@ -65,7 +65,7 @@ const childProps = {
 
 {%change%} 작업 디렉토리에서 다음 명령을 실행하여 `src/components/` 디렉토리를 만듭니다.
 
-``` bash
+```bash
 $ mkdir src/components/
 ```
 
@@ -73,7 +73,7 @@ $ mkdir src/components/
 
 {%change%} `src/components/AppliedRoute.js`라는 새로운 컴포넌트를 만들고 다음을 추가하십시오.
 
-``` coffee
+```coffee
 import React from "react";
 import { Route } from "react-router-dom";
 
@@ -93,9 +93,9 @@ export default ({ component: C, props: cProps, ...rest }) =>
 
 이제 이 컴포넌트를 사용하기 위해 우리는 `childProps`를 전달해야 할 경로에 이 컴포넌트를 포함시킵니다.
 
-{%change%} `src/Routes.js` 파일의 `export default () => (` 메소드를 다음으로 대체합니다. 
+{%change%} `src/Routes.js` 파일의 `export default () => (` 메소드를 다음으로 대체합니다.
 
-``` coffee
+```coffee
 export default ({ childProps }) =>
   <Switch>
     <AppliedRoute path="/" exact component={Home} props={childProps} />
@@ -107,7 +107,7 @@ export default ({ childProps }) =>
 
 {%change%} `src/Routes.js` 파일의 헤더에 새로운 컴포넌트를 추가합니다.
 
-``` coffee
+```coffee
 import AppliedRoute from "./components/AppliedRoute";
 ```
 
@@ -115,7 +115,7 @@ import AppliedRoute from "./components/AppliedRoute";
 
 {%change%} `src/containers/Login.js`에 `alert ( 'Logged in');` 행을 다음 행으로 대체하십시오.
 
-``` javascript
+```js
 this.props.userHasAuthenticated(true);
 ```
 
@@ -123,7 +123,7 @@ this.props.userHasAuthenticated(true);
 
 이제 사용자가 로그인하면 `로그아웃`으로 버튼을 표시해야합니다. `src/App.js`에서 다음을 찾아보세요.
 
-``` coffee
+```coffee
 <LinkContainer to="/signup">
   <NavItem>Signup</NavItem>
 </LinkContainer>
@@ -134,7 +134,7 @@ this.props.userHasAuthenticated(true);
 
 {%change%} 그리고 다음 내용으로 대체합니다:
 
-``` coffee
+```coffee
 {this.state.isAuthenticated
   ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
   : <Fragment>
@@ -148,11 +148,11 @@ this.props.userHasAuthenticated(true);
 }
 ```
 
-그리고 헤더에 `Fragment`를 import 합니다. 
+그리고 헤더에 `Fragment`를 import 합니다.
 
-{%change%} `src/App.js` 파일의 헤더에 `import React` 행을 다음으로 대체합니다. 
+{%change%} `src/App.js` 파일의 헤더에 `import React` 행을 다음으로 대체합니다.
 
-``` coffee
+```coffee
 import React, { Component, Fragment } from "react";
 ```
 
@@ -160,7 +160,7 @@ import React, { Component, Fragment } from "react";
 
 {%change%} `src/App.js` 파일의 `handleLogout` 메소드를 추가하고 `render() {` 위에 다음 내용을 추가합니다.
 
-``` coffee
+```coffee
 handleLogout = event => {
   this.userHasAuthenticated(false);
 }

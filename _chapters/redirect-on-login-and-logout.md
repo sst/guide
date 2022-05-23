@@ -4,7 +4,7 @@ title: Redirect on Login and Logout
 date: 2017-01-17 00:00:00
 lang: en
 ref: redirect-on-login-and-logout
-description: To ensure that the user is redirected after logging in and logging out of our React.js app, we are going to use the useHistory React hook from React Router. And we’ll use the history.push method to navigate the app.
+description: To ensure that the user is redirected after logging in and logging out of our React.js app, we are going to use the useNavigate React hook from React Router. And we’ll use the nav.push method to navigate the app.
 comments_id: redirect-on-login-and-logout/154
 ---
 
@@ -13,75 +13,75 @@ To complete the login flow we are going to need to do two more things.
 1. Redirect the user to the homepage after they login.
 2. And redirect them back to the login page after they logout.
 
-We are going to use the `useHistory` hook that comes with React Router. This will allow us to use the browser's [History API](https://developer.mozilla.org/en-US/docs/Web/API/History).
+We are going to use the `useNavigate` hook that comes with React Router. This will allow us to use the browser's [History API](https://developer.mozilla.org/en-US/docs/Web/API/History).
 
 ### Redirect to Home on Login
 
-{%change%} First, initialize `useHistory` hook in the beginning of `src/containers/Login.js`.
+{%change%} First, initialize `useNavigate` hook in the beginning of `src/containers/Login.js`.
 
-``` javascript
-const history = useHistory();
+```js
+const nav = useNavigate();
 ```
 
 Make sure to add it below the `export default function Login() {` line.
 
 {%change%} Then update the `handleSubmit` method in `src/containers/Login.js` to look like this:
 
-``` javascript
+```js
 async function handleSubmit(event) {
   event.preventDefault();
 
   try {
     await Auth.signIn(email, password);
     userHasAuthenticated(true);
-    history.push("/");
+    nav("/");
   } catch (e) {
     alert(e.message);
   }
 }
 ```
 
-{%change%}  Also, import `useHistory` from React Router in the header of `src/containers/Login.js`.
+{%change%} Also, import `useNavigate` from React Router in the header of `src/containers/Login.js`.
 
-``` javascript
-import { useHistory } from "react-router-dom";
+```js
+import { useNavigate } from "react-router-dom";
 ```
 
 Now if you head over to your browser and try logging in, you should be redirected to the homepage after you've been logged in.
 
-![React Router v4 redirect home after login screenshot](/assets/redirect-home-after-login.png)
+![React Router v6 redirect home after login screenshot](/assets/redirect-home-after-login.png)
 
 ### Redirect to Login After Logout
 
-Now we'll do something very similar for the logout process. 
+Now we'll do something very similar for the logout process.
 
-{%change%} Add the `useHistory` hook in the beginning of `App` component.
+{%change%} Add the `useNavigate` hook in the beginning of `App` component.
 
-``` javascript
-const history = useHistory();
+```js
+const nav = useNavigate();
 ```
 
-{%change%}  Import `useHistory` from React Router in the header of `src/App.js`.
+{%change%} Import `useNavigate` from React Router in the header of `src/App.js`.
 
-``` javascript
-import { useHistory } from "react-router-dom";
+```js
+import { useNavigate } from "react-router-dom";
 ```
 
 {%change%} Add the following to the bottom of the `handleLogout` function in our `src/App.js`.
 
-``` jsx
-history.push("/login");
+```jsx
+nav("/login");
 ```
 
 So our `handleLogout` function should now look like this.
 
-``` javascript
+```js
 async function handleLogout() {
   await Auth.signOut();
 
   userHasAuthenticated(false);
 
-  history.push("/login");
+  nav("/login");
 }
 ```
 

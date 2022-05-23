@@ -12,11 +12,11 @@ Now let's create an API that allows a user to update a note with a new note obje
 
 ### Add the Function
 
-{%change%} Create a new file in `src/update.js` and paste the following.
+{%change%} Create a new file in `backend/functions/update.js` and paste the following.
 
-``` javascript
-import handler from "./util/handler";
-import dynamoDb from "./util/dynamodb";
+```js
+import handler from "../util/handler";
+import dynamoDb from "../util/dynamodb";
 
 export const main = handler(async (event) => {
   const data = JSON.parse(event.body);
@@ -54,19 +54,19 @@ Let's add a new route for the get note API.
 
 {%change%} Add the following below the `GET /notes/{id}` route in `stacks/ApiStack.js`.
 
-``` js
-"PUT    /notes/{id}": "src/update.main",
+```js
+"PUT /notes/{id}": "functions/update.main",
 ```
 
 ### Deploy Our Changes
 
 If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
 
-Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
+Note that, you'll need to have `npm start` running for this to happen. If you had previously stopped it, then running `npm start` will deploy your changes again.
 
 You should see that the API stack is being updated.
 
-``` bash
+```bash
 Stack dev-notes-api
   Status: deployed
   Outputs:
@@ -81,7 +81,7 @@ Head to the **API** tab in the [SST Console]({{ site.console_url }}) and select 
 
 {%change%} Set the `noteId` as the **id** and in the **Body** tab set the following as the request body. Then hit **Send**.
 
-``` txt
+```txt
 {"content":"New World","attachment":"new.jpg"}
 ```
 

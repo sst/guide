@@ -8,7 +8,6 @@ comments_id: api-gateway-and-lambda-logs/31
 
 Logging is an essential part of building backends and it is no different for a serverless API. It gives us visibility into how we are processing and responding to incoming requests.
 
-
 ### Types of Logs
 
 There are 2 types of logs we usually take for granted in a monolithic environment.
@@ -103,18 +102,16 @@ Scroll to the bottom of the page and click **Save Changes**. Now our API Gateway
 
 Note that, the execution logs can generate a ton of log data and it's not recommended to leave them on. They are much better for debugging. API Gateway does have support for access logs, which we recommend leaving on. Here is [how to enable access logs for your API Gateway project](https://seed.run/blog/how-to-enable-access-logs-for-api-gateway).
 
-
 ### Enable Lambda CloudWatch Logs
 
 Lambda CloudWatch logs are enabled by default. It tracks the duration and max memory usage for each execution. You can write additional information to CloudWatch via `console.log`. For example:
 
-``` javascript
+```js
 export function main(event, context, callback) {
-  console.log('Hello world');
-  callback(null, { body: '' });
+  console.log("Hello world");
+  callback(null, { body: "" });
 }
 ```
-
 
 ### Viewing API Gateway CloudWatch Logs
 
@@ -128,7 +125,7 @@ Select **Logs** from the left panel.
 
 ![Select CloudWatch Logs Screenshot](/assets/logging/select-cloudwatch-logs.png)
 
-Select the log group prefixed with **API-Gateway-Execution-Logs_** followed by the API Gateway id.
+Select the log group prefixed with **API-Gateway-Execution-Logs\_** followed by the API Gateway id.
 
 ![Select CloudWatch API Gateway Log Group Screenshot](/assets/logging/select-cloudwatch-api-gateway-log-group.png)
 
@@ -141,7 +138,6 @@ This shows you the log entries grouped by request.
 ![CloudWatch API Gateway Log Entries Screenshot](/assets/logging/cloudwatch-api-gateway-log-entries.png)
 
 Note that two consecutive groups of logs are not necessarily two consecutive requests in real time. This is because there might be other requests that are processed in between these two that were picked up by one of the other log streams.
-
 
 ### Viewing Lambda CloudWatch Logs
 
@@ -163,17 +159,16 @@ You can also use the Serverless CLI to view CloudWatch logs for a Lambda functio
 
 From your project root run the following.
 
-``` bash
+```bash
 $ serverless logs -f <func-name>
 ```
 
 Where the `<func-name>` is the name of the Lambda function you are looking for. Additionally, you can use the `--tail` flag to stream the logs automatically to your console.
 
-``` bash
+```bash
 $ serverless logs -f <func-name> --tail
 ```
 
 This can be very helpful during development when trying to debug your functions using the `console.log` call.
-
 
 Hopefully, this has helped you set up CloudWatch logging for your API Gateway and Lambda projects. And given you a quick idea of how to read your serverless logs using the AWS Console.

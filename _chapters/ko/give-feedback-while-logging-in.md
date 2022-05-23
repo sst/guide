@@ -4,7 +4,7 @@ title: Give Feedback While Logging In
 date: 2017-01-18 00:00:00
 lang: ko
 ref: give-feedback-while-logging-in
-description: React.js 앱에 로그인하는 동안 사용자에게 몇 가지 피드백을 제공해야합니다. 이렇게하려면 React-Bootstrap Button 구성 요소 내에서 Glyphicon 새로 고침 아이콘을 움직이는 컴포넌트를 만듭니다. 로그인 호출이 진행되는 동안 애니메이션을 수행합니다. 
+description: React.js 앱에 로그인하는 동안 사용자에게 몇 가지 피드백을 제공해야합니다. 이렇게하려면 React-Bootstrap Button 구성 요소 내에서 Glyphicon 새로 고침 아이콘을 움직이는 컴포넌트를 만듭니다. 로그인 호출이 진행되는 동안 애니메이션을 수행합니다.
 context: true
 comments_id: give-feedback-while-logging-in/46
 ---
@@ -15,18 +15,18 @@ comments_id: give-feedback-while-logging-in/46
 
 {%change%} `src/containers/Login.js`의 state에 `isLoading` 플래그를 추가합니다. 그러면 `constructor`의 초기 state는 다음과 같습니다.
 
-``` javascript
+```js
 this.state = {
   isLoading: false,
   email: "",
-  password: ""
+  password: "",
 };
 ```
 
 {%change%} 그리고 로그인하는 동안 업데이트합니다. 그러면 `handleSubmit` 메쏘드는 다음과 같습니다:
 
-``` javascript
-handleSubmit = async event => {
+```js
+handleSubmit = async (event) => {
   event.preventDefault();
 
   this.setState({ isLoading: true });
@@ -34,12 +34,12 @@ handleSubmit = async event => {
   try {
     await Auth.signIn(this.state.email, this.state.password);
     this.props.userHasAuthenticated(true);
-    this.props.history.push("/");
+    this.props.nav("/");
   } catch (e) {
     alert(e.message);
     this.setState({ isLoading: false });
   }
-}
+};
 ```
 
 ### Loader Button 만들기
@@ -48,7 +48,7 @@ handleSubmit = async event => {
 
 {%change%} `src/components/LoaderButton.js` 파일을 만들고 아래 내용을 추가합니다.
 
-``` coffee
+```coffee
 import React from "react";
 import { Button, Glyphicon } from "react-bootstrap";
 import "./LoaderButton.css";
@@ -77,15 +77,19 @@ export default ({
 
 {%change%} `src/components/LoaderButton.css` 파일에 아래 내용을 추가합니다.
 
-``` css
+```css
 .LoaderButton .spinning.glyphicon {
   margin-right: 7px;
   top: 2px;
   animation: spin 1s infinite linear;
 }
 @keyframes spin {
-  from { transform: scale(1) rotate(0deg); }
-  to { transform: scale(1) rotate(360deg); }
+  from {
+    transform: scale(1) rotate(0deg);
+  }
+  to {
+    transform: scale(1) rotate(360deg);
+  }
 }
 ```
 
@@ -97,26 +101,21 @@ export default ({
 
 {%change%} `src/containers/Login.js` 파일의 `render` 함수에서 `<Button>` 컴포넌트를 찾습니다.
 
-``` html
-<Button
-  block
-  bsSize="large"
-  disabled={!this.validateForm()}
-  type="submit"
->
+```html
+<button block bsSize="large" disabled="{!this.validateForm()}" type="submit">
   Login
-</Button>
+</button>
 ```
 
 {%change%} 그리고 위 내용을 아래와 같이 바꿉니다.
 
-``` html
+```html
 <LoaderButton
-  block
+  block="true"
   bsSize="large"
-  disabled={!this.validateForm()}
+  disabled="{!this.validateForm()}"
   type="submit"
-  isLoading={this.state.isLoading}
+  isLoading="{this.state.isLoading}"
   text="Login"
   loadingText="Logging in…"
 />
@@ -124,7 +123,7 @@ export default ({
 
 {%change%} 또한 헤더에서 `LoaderButton`을 import 합니다. 그리고 `Button`에 대한 참조를 제거합니다.
 
-``` javascript
+```js
 import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 ```

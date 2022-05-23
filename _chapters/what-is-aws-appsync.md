@@ -27,7 +27,7 @@ Let's get started!
 
 ## Background
 
-If you’re already familiar with API Gateway, you may be wondering why you would need to learn yet another service. It all comes down to the protocol that you want to use: REST or GraphQL. 
+If you’re already familiar with API Gateway, you may be wondering why you would need to learn yet another service. It all comes down to the protocol that you want to use: REST or GraphQL.
 
 ### GraphQL
 
@@ -47,7 +47,7 @@ There are two main GraphQL server libraries that can run in an AWS Lambda. Apoll
 
 Apollo Server is [the more popular of the two options](https://www.npmtrends.com/express-graphql-vs-apollo-server) and should be your go-to option most of the time. If you already have a REST API running on a Lambda, however, and want to convert it to GraphQL then the simplicity of adding a middleware plugin to your server is a huge win. Just add `express-graphql` to your project and you can slowly replace your REST paths with GraphQL queries and mutators.
 
-Speaking of middleware plugins, that's another reason to stick with Express: it has a *lot* of plugins. If Apollo Server doesn't already support the authentication that you want to use, chances are that someone has written an express middleware for it.
+Speaking of middleware plugins, that's another reason to stick with Express: it has a _lot_ of plugins. If Apollo Server doesn't already support the authentication that you want to use, chances are that someone has written an express middleware for it.
 
 ## What is AWS AppSync
 
@@ -65,14 +65,14 @@ Once AppSync has determined what object type is being requested, and that the us
 
 After the GraphQL query has been translated by a resolver, it's sent to a data source. The data source defines a database connection, lambda ARN, or some other destination that the request is sent to. Once the resource runs whatever action was requested, it returns the result to a response template which translates it back into a format compliant with your schema.
 
-There are [currently six types of data sources](https://docs.amazonaws.cn/en_us/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-datasource.html#cfn-appsync-datasource-type) supported by AppSync: 
+There are [currently six types of data sources](https://docs.amazonaws.cn/en_us/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-datasource.html#cfn-appsync-datasource-type) supported by AppSync:
 
-* DynamoDB 
-* ElasticSearch
-* Lambda
-* None 
-* Http 
-* RDS 
+- DynamoDB
+- ElasticSearch
+- Lambda
+- None
+- Http
+- RDS
 
 If you need to use data from an AWS service that isn't in the list, you can use a Http data source.
 
@@ -80,19 +80,20 @@ The biggest drawback to AppSync is the development experience. Resolver template
 
 ### AppSync Pricing
 
-There are a few different things that you get charged for when using AppSync: 
-* queries/mutations
-* subscription updates
-* minutes that a client is listening to a subscription
-* data transferred out
-* optionally caching
+There are a few different things that you get charged for when using AppSync:
+
+- queries/mutations
+- subscription updates
+- minutes that a client is listening to a subscription
+- data transferred out
+- optionally caching
 
 The following table details the current prices charged for running an AppSync API. For the most up to date pricing, see the [AWS AppSync pricing page](https://aws.amazon.com/appsync/pricing/).
 
-| Description                                           | Price |
+| Description                                 | Price |
 | ------------------------------------------- | ----: |
 | 1 Million Queries/Mutations                 | $4.00 |
-| 1 Million 5 kb Updates                       | $2.00 |
+| 1 Million 5 kb Updates                      | $2.00 |
 | 1 Million Minutes Connected to Subscription | $0.08 |
 | 1 Gb Transferred to the Internet            | $0.09 |
 
@@ -106,7 +107,7 @@ Now let's dive into the major concepts behind AppSync. Starting with data source
 
 Data sources in AWS AppSync are services, databases, or APIs that hold the data your GraphQL API queries and uses to populate your schema.
 
-There are just a handful of data sources that AWS AppSync supports, such as [Amazon DynamoDB](https://aws.amazon.com/dynamodb/), [AWS Lambda](https://aws.amazon.com/lambda/) (Lambda can allow you to use other options, such as RDS or ElastiCache), and [Amazon Elasticsearch Service](https://aws.amazon.com/elasticsearch-service/). 
+There are just a handful of data sources that AWS AppSync supports, such as [Amazon DynamoDB](https://aws.amazon.com/dynamodb/), [AWS Lambda](https://aws.amazon.com/lambda/) (Lambda can allow you to use other options, such as RDS or ElastiCache), and [Amazon Elasticsearch Service](https://aws.amazon.com/elasticsearch-service/).
 
 SST’s [`AppSyncApi` construct]({{ site.docs_url }}/constructs/AppSyncApi#examples) makes creating data sources a lot easier. We'll be looking at some examples of how to do this below.
 
@@ -122,7 +123,7 @@ new AppSyncApi(this, "GraphqlApi", {
     //...
   },
   dataSources: {
-    notesDS: "src/notes.main",
+    notesDS: "functions/notes.main",
   },
   resolvers: {
     //...
@@ -130,33 +131,33 @@ new AppSyncApi(this, "GraphqlApi", {
 }
 ```
 
-### Resolvers 
+### Resolvers
 
 Resolvers in GraphQL are functions that return responses when you query a GraphQL API. It’s a function mapped to a field in your GraphQL schema and is responsible for returning results for that field.
 
 The function generally contains four arguments:
 
-* `parent`
-* `arguments`
-* `context`
-* `info`
+- `parent`
+- `arguments`
+- `context`
+- `info`
 
 Here is what the function definition looks like:
 
-``` js
+```js
 fieldName: (parent, args, context, info) => data;
 ```
 
 Now let’s take a look at what they mean:
 
-* **parent:** The parent, sometimes referred to as the `root`, is the object that holds the return value of the reference field. It’s always executed before the resolvers of the field’s children. It’s an optional parameter.
-* **args:** All the GraphQL arguments provided for a certain field are accessible in the args. For example, when executing `Query{ todo(id: "2") }`, the args here is the object passed to the todo resolver `{ "id": "2" }`.
-* **context:** All resolvers that execute for a particular operation share the same context and can be accessed across all the resolvers with the same argument in the resolver.
-* **info:** This argument contains information about the execution of the query such as the field’s name and the field’s path. 
+- **parent:** The parent, sometimes referred to as the `root`, is the object that holds the return value of the reference field. It’s always executed before the resolvers of the field’s children. It’s an optional parameter.
+- **args:** All the GraphQL arguments provided for a certain field are accessible in the args. For example, when executing `Query{ todo(id: "2") }`, the args here is the object passed to the todo resolver `{ "id": "2" }`.
+- **context:** All resolvers that execute for a particular operation share the same context and can be accessed across all the resolvers with the same argument in the resolver.
+- **info:** This argument contains information about the execution of the query such as the field’s name and the field’s path.
 
 Assuming you have a schema:
 
-``` graphql
+```graphql
 type Todo {
   id: ID!
   description: String!
@@ -164,7 +165,7 @@ type Todo {
 }
 
 type Query {
-  todos: [ Todo ]
+  todos: [Todo]
   todo(id: ID!): Todo
 }
 ```
@@ -257,7 +258,7 @@ In most cases, you will have to pull data intermittently with queries on demand 
 
 To create a subscription, you’ll first need to create a schema type of subscription and add the AWS AppSync annotation `@aws_subscribe()` to it.
 
-``` ts
+```ts
 type Subscription {
   newTodo: Todo
   @aws_subscribe(mutations: ["newTodo"])
@@ -294,8 +295,8 @@ api.attachPermissions(["s3"]);
 
 Alternatively, you can add permission for a specific Lambda function. Such as the function for a particular data source to access AWS S3.
 
-``` js
-api.attachPermissionsToDataSource("todoDS", ["s3"])
+```js
+api.attachPermissionsToDataSource("todoDS", ["s3"]);
 ```
 
 Here you are referring to the data source by the key, `todoDS`. This is to make sure that only those functions have the permission to your services.

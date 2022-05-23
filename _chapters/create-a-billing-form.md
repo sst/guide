@@ -12,7 +12,7 @@ Now our settings page is going to have a form that will take a user's credit car
 
 {%change%} Run the following in the `frontend/` directory and **not** in your project root.
 
-``` bash
+```bash
 $ npm install @stripe/react-stripe-js
 ```
 
@@ -21,7 +21,8 @@ Next let's create our billing form component.
 {%change%} Add the following to a new file in `src/components/BillingForm.js`.
 
 {% raw %}
-``` jsx
+
+```jsx
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
@@ -108,7 +109,7 @@ export default function BillingForm({ isLoading, onSubmit }) {
         }}
       />
       <LoaderButton
-        block
+        block="true"
         size="lg"
         type="submit"
         isLoading={isLoading}
@@ -120,6 +121,7 @@ export default function BillingForm({ isLoading, onSubmit }) {
   );
 }
 ```
+
 {% endraw %}
 
 Let's quickly go over what we are doing here:
@@ -142,7 +144,7 @@ Also, let's add some styles to the card field so it matches the rest of our UI.
 
 {%change%} Create a file at `src/components/BillingForm.css`.
 
-``` css
+```css
 .BillingForm .card-field {
   line-height: 1.5;
   margin-bottom: 1rem;

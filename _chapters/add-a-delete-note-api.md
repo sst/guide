@@ -14,7 +14,7 @@ Finally, we are going to create an API that allows a user to delete a given note
 
 {%change%} Create a new file `delete.js` and paste the following code
 
-``` javascript
+```js
 import handler from "./libs/handler-lib";
 import dynamoDb from "./libs/dynamodb-lib";
 
@@ -40,17 +40,17 @@ This makes a DynamoDB `delete` call with the `userId` & `noteId` key to delete t
 
 {%change%} Open the `serverless.yml` file and append the following to it.
 
-``` yaml
-  delete:
-    # Defines an HTTP API endpoint that calls the main function in delete.js
-    # - path: url path is /notes/{id}
-    # - method: DELETE request
-    handler: delete.main
-    events:
-      - http:
-          path: notes/{id}
-          cors: true
-          method: delete
+```yaml
+delete:
+  # Defines an HTTP API endpoint that calls the main function in delete.js
+  # - path: url path is /notes/{id}
+  # - method: DELETE request
+  handler: delete.main
+  events:
+    - http:
+        path: notes/{id}
+        cors: true
+        method: delete
 ```
 
 This adds a DELETE request handler to the `/notes/{id}` endpoint.
@@ -61,7 +61,7 @@ This adds a DELETE request handler to the `/notes/{id}` endpoint.
 
 Just like before we'll use the `noteId` of our note in place of the `id` in the `pathParameters` block.
 
-``` json
+```json
 {
   "pathParameters": {
     "id": "578eb840-f70f-11e6-9d1a-1359b3b22944"
@@ -71,13 +71,13 @@ Just like before we'll use the `noteId` of our note in place of the `id` in the 
 
 Invoke our newly created function from the root directory.
 
-``` bash
+```bash
 $ serverless invoke local --function delete --path mocks/delete-event.json
 ```
 
 And the response should look similar to this.
 
-``` bash
+```bash
 {
     "statusCode": 200,
     "body": "{\"status\":true}"

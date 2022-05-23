@@ -15,13 +15,13 @@ AWS Amplify가 가지고있는`API` 모듈을 사용할 필요가 있습니다.
 
 {%change%} `src/containers/NewNote.js` 헤더에 다음을 추가하여 API 모듈을 포함 시키십시오.
 
-``` javascript
+```js
 import { API } from "aws-amplify";
 ```
 
 {%change%} 그리고 `handleSubmit` 함수를 아래와 같이 바꾸십시오.
 
-``` javascript
+```js
 handleSubmit = async event => {
   event.preventDefault();
 
@@ -36,7 +36,7 @@ handleSubmit = async event => {
     await this.createNote({
       content: this.state.content
     });
-    this.props.history.push("/");
+    this.props.nav("/");
   } catch (e) {
     alert(e);
     this.setState({ isLoading: false });
@@ -52,7 +52,7 @@ createNote(note) {
 
 위 내용은 몇 가지 간단한 일을 처리합니다.
 
-1. `/notes`에 POST 요청을 하면서 노트 객체를 전달함으로써 `createNote`를 호출을 합니다. `API.post()` 메쏘드의 처음 두 인자는`notes` 와 `/notes`입니다. 이것은 [AWS Amplify 설정하기]({% link _chapters/configure-aws-amplify.md %})  챕터에서 우리가 `notes`라는 이름으로 API 세트를 호출했기 때문입니다.
+1. `/notes`에 POST 요청을 하면서 노트 객체를 전달함으로써 `createNote`를 호출을 합니다. `API.post()` 메쏘드의 처음 두 인자는`notes` 와 `/notes`입니다. 이것은 [AWS Amplify 설정하기]({% link _chapters/configure-aws-amplify.md %}) 챕터에서 우리가 `notes`라는 이름으로 API 세트를 호출했기 때문입니다.
 
 2. 현재 노트 오브젝트는 단순한 노트의 내용뿐입니다. 일단 첨부 파일없이 노트를 작성하겠습니다.
 
@@ -63,4 +63,3 @@ createNote(note) {
 ![새 노트 작성 스크린 샷](/assets/new-note-created.png)
 
 다음으로 파일을 S3에 업로드하고 첨부 파일을 노트에 추가해 봅시다.
-

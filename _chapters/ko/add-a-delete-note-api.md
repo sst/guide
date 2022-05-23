@@ -16,7 +16,7 @@ comments_id: add-a-delete-note-api/153
 
 {%change%} `delete.js` 파일을 생성하고 아래 코드를 붙여 넣기 합니다.
 
-``` javascript
+```js
 import handler from "./libs/handler-lib";
 import dynamoDb from "./libs/dynamodb-lib";
 
@@ -24,12 +24,12 @@ export const main = handler(async (event, context) => {
   const params = {
     TableName: "notes",
     // 'Key' 삭제할 아이템의 파티션 키와 정렬 키를 정의합니다.
-    // - 'userId': 인증 사용자의 Cognito Identity Pool 인증 ID 
+    // - 'userId': 인증 사용자의 Cognito Identity Pool 인증 ID
     // - 'noteId': 경로 파라미터
     Key: {
       userId: event.requestContext.identity.cognitoIdentityId,
-      noteId: event.pathParameters.id
-    }
+      noteId: event.pathParameters.id,
+    },
   };
 
   await dynamoDb.delete(params);
@@ -37,24 +37,24 @@ export const main = handler(async (event, context) => {
 });
 ```
 
-이 파일은 삭제할 노트의 `userId` 와 `noteId` 값을 이용해 DynamoDB에 `delete`를 호출합니다. 
+이 파일은 삭제할 노트의 `userId` 와 `noteId` 값을 이용해 DynamoDB에 `delete`를 호출합니다.
 
-### API 엔드포인트 구성하기 
+### API 엔드포인트 구성하기
 
-{%change%} `serverless.yml` 파일을 열어서 아래 내용을 추가합니다. 
+{%change%} `serverless.yml` 파일을 열어서 아래 내용을 추가합니다.
 
-``` yaml
-  delete:
-    # delete.js의 메인 함수를 호출하는 HTTP API 엔드포인트
-    # - path: url 경로는 /notes/{id} 입니다.
-    # - method: DELETE 요청 
-    handler: delete.main
-    events:
-      - http:
-          path: notes/{id}
-          method: delete
-          cors: true
-          authorizer: aws_iam
+```yaml
+delete:
+  # delete.js의 메인 함수를 호출하는 HTTP API 엔드포인트
+  # - path: url 경로는 /notes/{id} 입니다.
+  # - method: DELETE 요청
+  handler: delete.main
+  events:
+    - http:
+        path: notes/{id}
+        method: delete
+        cors: true
+        authorizer: aws_iam
 ```
 
 이것은 DELETE 요청 핸들러 함수를 `/notes/{id}` 엔드포인트에 추가합니다.
@@ -65,7 +65,7 @@ export const main = handler(async (event, context) => {
 
 역시 이전과 같이 `pathParameters` 블록에 `id` 값은 `noteId` 값으로 대체합니다.
 
-``` json
+```json
 {
   "pathParameters": {
     "id": "578eb840-f70f-11e6-9d1a-1359b3b22944"
@@ -77,15 +77,16 @@ export const main = handler(async (event, context) => {
   }
 }
 ```
+
 루트 디렉토리에서 새로 추가한 함수를 실행합니다.
 
-``` bash
+```bash
 $ serverless invoke local --function delete --path mocks/delete-event.json
 ```
 
 반환된 응답은 아래와 유사해야합니다.
 
-``` bash
+```bash
 {
   statusCode: 200,
   headers: {

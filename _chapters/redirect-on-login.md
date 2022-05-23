@@ -3,7 +3,7 @@ layout: post
 title: Redirect on Login
 date: 2017-02-04 00:00:00
 lang: en
-description: To make sure that our React.js redirects a user to the right page after they login, we are going to use the React Router useHistory hook.
+description: To make sure that our React.js redirects a user to the right page after they login, we are going to use the React Router useNavigate hook.
 comments_id: redirect-on-login/24
 ref: redirect-on-login
 ---
@@ -14,7 +14,7 @@ Let's start by adding a method to read the `redirect` URL from the querystring.
 
 {%change%} Add the following method to your `src/components/UnauthenticatedRoute.js` below the imports.
 
-``` jsx
+```jsx
 function querystring(name, url = window.location.href) {
   const parsedName = name.replace(/[[]]/g, "\\$&");
   const regex = new RegExp(`[?&]${parsedName}(=([^&#]*)|&|#|$)`, "i");
@@ -34,40 +34,36 @@ Now let's update our component to use this parameter when it redirects.
 
 {%change%} Replace our current `UnauthenticatedRoute` function component with the following.
 
-``` jsx
+```jsx
 export default function UnauthenticatedRoute(props) {
-  const { children, ...rest } = props;
   const { isAuthenticated } = useAppContext();
+  const { children } = props;
   const redirect = querystring("redirect");
 
-  return (
-    <Route {...rest}>
-      {!isAuthenticated ? (
-        cloneElement(children, props)
-      ) : (
-        <Redirect to={redirect ? redirect : "/"} />
-      )}
-    </Route>
-  );
+  if (isAuthenticated) {
+    return <Navigate to={redirect || "/"} />;
+  }
+
+  return cloneElement(children, props);
 }
 ```
 
 {%change%} And remove the following from the `handleSubmit` method in `src/containers/Login.js`.
 
-``` jsx
-history.push("/");
+```jsx
+nav("/");
 ```
 
 {%change%} Also, remove the hook declaration.
 
-``` jsx
-const history = useHistory();
+```jsx
+const nav = useNavigate();
 ```
 
 {%change%} Finally, remove the import.
 
-``` jsx
-import { useHistory } from "react-router-dom";
+```jsx
+import { useNavigate } from "react-router-dom";
 ```
 
 Now our login page should redirect after we login.
@@ -76,7 +72,7 @@ Now our login page should redirect after we login.
 
 {%change%} Let's commit our code so far and push it to GitHub.
 
-``` bash
+```bash
 $ git add .
 $ git commit -m "Building our React app"
 $ git push

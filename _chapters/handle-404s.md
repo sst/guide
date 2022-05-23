@@ -4,7 +4,7 @@ title: Handle 404s
 date: 2017-01-12 00:00:00
 lang: en
 ref: handle-404s
-description: To handle 404s in a React.js app with React Router v4 we need to set up a catch all Route at the bottom of our Switch block. A catch all Route does not have a path prop and responds to all routes.
+description: To handle 404s in a React.js app with React Router v6 we need to set up a catch all Route at the bottom of our Switch block. A catch all Route does not have a path prop and responds to all routes.
 comments_id: handle-404s/75
 ---
 
@@ -16,7 +16,7 @@ Let's start by creating a component that will handle this for us.
 
 {%change%} Create a new component at `src/containers/NotFound.js` and add the following.
 
-``` jsx
+```jsx
 import React from "react";
 import "./NotFound.css";
 
@@ -33,7 +33,7 @@ All this component does is print out a simple message for us.
 
 {%change%} Let's add a couple of styles for it in `src/containers/NotFound.css`.
 
-``` css
+```css
 .NotFound {
   padding-top: 100px;
 }
@@ -43,20 +43,20 @@ All this component does is print out a simple message for us.
 
 Now we just need to add this component to our routes to handle our 404s.
 
-{%change%} Find the `<Switch>` block in `src/Routes.js` and add it as the last line in that section.
+{%change%} Find the `<Routes>` block in `src/Routes.js` and add it as the last line in that section.
 
-``` jsx
-{/* Finally, catch all unmatched routes */}
-<Route>
-  <NotFound />
-</Route>
+```jsx
+{
+  /* Finally, catch all unmatched routes */
+}
+<Route path="*" element={<NotFound />} />;
 ```
 
-This needs to always be the last route in the `<Switch>` block. You can think of it as the route that handles requests in case all the other routes before it have failed.
+This needs to always be the last route in the `<Routes>` block. You can think of it as the route that handles requests in case all the other routes before it have failed.
 
 {%change%} And include the `NotFound` component in the header by adding the following:
 
-``` javascript
+```js
 import NotFound from "./containers/NotFound";
 ```
 

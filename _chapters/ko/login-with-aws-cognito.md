@@ -15,7 +15,7 @@ AWS Amplify를 사용하여 Amazon Cognito 설정에 로그인합니다. 가져 
 
 {%change%} `src/containers/Login.js`에 있는 Login 컨테이너의 헤더에 다음을 추가하십시오.
 
-``` coffee
+```coffee
 import { Auth } from "aws-amplify";
 ```
 
@@ -25,8 +25,8 @@ import { Auth } from "aws-amplify";
 
 {%change%} `src/containers/Login.js` 파일의 `handleSubmit` 메소드를 다음과 같이 바꾸기만 하면 됩니다.
 
-``` javascript
-handleSubmit = async event => {
+```js
+handleSubmit = async (event) => {
   event.preventDefault();
 
   try {
@@ -35,7 +35,7 @@ handleSubmit = async event => {
   } catch (e) {
     alert(e.message);
   }
-}
+};
 ```
 
 여기서는 두 가지를 처리하고 있습니다.

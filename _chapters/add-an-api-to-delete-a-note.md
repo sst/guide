@@ -12,11 +12,11 @@ Finally, we are going to create an API that allows a user to delete a given note
 
 ### Add the Function
 
-{%change%} Create a new file in `src/delete.js` and paste the following.
+{%change%} Create a new file in `backend/functions/delete.js` and paste the following.
 
-``` javascript
-import handler from "./util/handler";
-import dynamoDb from "./util/dynamodb";
+```js
+import handler from "../util/handler";
+import dynamoDb from "../util/dynamodb";
 
 export const main = handler(async (event) => {
   const params = {
@@ -42,19 +42,19 @@ Let's add a new route for the delete note API.
 
 {%change%} Add the following below the `PUT /notes{id}` route in `stacks/ApiStack.js`.
 
-``` js
-"DELETE /notes/{id}": "src/delete.main",
+```js
+"DELETE /notes/{id}": "functions/delete.main",
 ```
 
 ### Deploy Our Changes
 
 If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
 
-Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
+Note that, you'll need to have `npm start` running for this to happen. If you had previously stopped it, then running `npm start` will deploy your changes again.
 
 You should see that the API stack is being updated.
 
-``` bash
+```bash
 Stack dev-notes-api
   Status: deployed
   Outputs:
@@ -83,7 +83,7 @@ And the note should be removed from the DynamoDB Table as well.
 
 {%change%} Let's commit and push our changes to GitHub.
 
-``` bash
+```bash
 $ git add .
 $ git commit -m "Adding the API"
 $ git push

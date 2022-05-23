@@ -26,17 +26,17 @@ Zwróć uwagę, że [wsparcie dla .NET Core 2.2 i 3.0 jest dostępne poprzez nie
 
 Każda funkcja działa w kontenerze z 64-bitowym AMI Amazon Linux. Środowisko wykonawcze posiada:
 
-- Pamięć RAM: 128MB - 3008MB, dostępna w przyrostach 64 MB 
+- Pamięć RAM: 128MB - 3008MB, dostępna w przyrostach 64 MB
 - Efemeryczny dysk: 512MB
 - Maksymalny czas wykonania: 900 sekund
 - Rozmiar skompresowanego pakietu: 50 MB
 - Rozmiar nieskompresowanego pakietu: 250 MB
 
-Możliwe, że zauważyłeś, że procesor nie jest wymieniony jako część specyfikacji kontenera, z uwagi na to, że nie jest możliwa bezpośrednia kontrola nad nim. Wraz ze zwiększeniem pamięci RAM zwiększa się również ilość procesorów. 
+Możliwe, że zauważyłeś, że procesor nie jest wymieniony jako część specyfikacji kontenera, z uwagi na to, że nie jest możliwa bezpośrednia kontrola nad nim. Wraz ze zwiększeniem pamięci RAM zwiększa się również ilość procesorów.
 
 Przestrzeń na dysku efemerycznym jest dostępna w postaci katalogu `/tmp`. Możesz go używać jedynie do tymczasowego przechowywania, ponieważ kolejne wywołania nie będą miały do niego dostępu. W dalszej części powiemy nieco więcej na temat bezstanowej natury funkcji Lambda.
 
-Określony czas wykonania wskazuje na to, że funkcja Lambda może działać maksymalnie przez 900 sekund, tzn. 15 minut. Co za tym idzie - Lambda nie jest przeznaczona do długotrwałych procesów.  
+Określony czas wykonania wskazuje na to, że funkcja Lambda może działać maksymalnie przez 900 sekund, tzn. 15 minut. Co za tym idzie - Lambda nie jest przeznaczona do długotrwałych procesów.
 
 Rozmiar pakietu odnosi się do całego kodu niezbędnego do uruchomienia funkcji. Obejmuje to również wszelkie zależności (w przypadku Node.js jest to katalog `node_modules/'), które Twoja funkcja potrzebuje zaimportować. Maksymalny rozmiar pakietu nieskompresowanego to 250 MB i 50 MB po skompresowaniu. Poniżej przyjrzymy się procesowi pakowania.
 
@@ -58,7 +58,7 @@ Kontener (i wykorzystywane przez niego zasoby), w którym działa nasza funkcja,
 
 Ma to pewne interesujące konsekwencje. Po pierwsze, nasze funkcje są bezstanowe. Po drugie, każde żądanie (lub zdarzenie) jest obsługiwane przez jedną instancję funkcji Lambda. Oznacza to, że nie możesz obsługiwać jednoczesnych żądań w swoim kodzie. AWS tworzy kontener w momencie gdy pojawia się nowe żądanie, niemniej jednak dokonuje tu pewnej optymalizacji. Kontener pozostaje aktywny przez kilka minut (5 - 15 minut w zależności od obciążenia), dzięki czemu może odpowiadać na kolejne żądania bez cold startu.
 
-### Funkcje bezstanowe 
+### Funkcje bezstanowe
 
 Opisany powyżej model wykonawczy sprawia, że funkcje Lambda są faktycznie bezstanowe. Oznacza to, że za każdym razem, gdy funkcja Lambda jest wyzwalana przez zdarzenie, jest ona wywoływana w zupełnie nowym środowisku. Nie mamy dostępu do kontekstu wykonawczego poprzedniego zdarzenia.
 
@@ -66,10 +66,10 @@ Jednak ze względu na wspomnianą powyżej optymalizację, kompletny kod Lambdy 
 
 Posługując się przykładem, poniższa metoda `createNewDbConnection` jest wywoływana jedynie podczas tworzenia nowego kontenera, a nie za każdym razem, gdy wywoływana jest funkcja Lambda. Z kolei funkcja `myHandler` jest wywoływana przy każdym wywołaniu.
 
-``` javascript
+```js
 var dbConnection = createNewDbConnection();
 
-exports.myHandler = function(event, context, callback) {
+exports.myHandler = function (event, context, callback) {
   var result = dbConnection.makeQuery();
   callback(null, result);
 };
@@ -87,8 +87,8 @@ Zwróć uwagę, że mimo tego, że AWS może zachować kontener z funkcją Lambd
 
 Lambda ma spory pakiet darmowy, dlatego też jest mało prawdopodobne, że przekroczysz jego limit podczas pracy z tym przewodnikiem.
 
-Bezpłatny pakiet Lambdy obejmuje 1 mln żądań miesięcznie i 400 000 GB-sekund czasu obliczeniowego miesięcznie. Po przekroczeniu limitu kosztuje 0,20 USD za 1 milion żądań i 0,00001667 USD za każdą GB-sekundę. Liczba GB-sekund zależy od zużycia pamięci przez funkcję Lambda. Więcej informacji możesz znaleźć na [stronie z cennikiem Lambdy] (https://aws.amazon.com/lambda/pricing/). 
+Bezpłatny pakiet Lambdy obejmuje 1 mln żądań miesięcznie i 400 000 GB-sekund czasu obliczeniowego miesięcznie. Po przekroczeniu limitu kosztuje 0,20 USD za 1 milion żądań i 0,00001667 USD za każdą GB-sekundę. Liczba GB-sekund zależy od zużycia pamięci przez funkcję Lambda. Więcej informacji możesz znaleźć na [stronie z cennikiem Lambdy] (https://aws.amazon.com/lambda/pricing/).
 
-Z doświadczenia wiemy, że koszty związane z wykorzystaniem Lambdy stanowią zwykle najmniejszą cześć kosztów naszej infrastruktury. 
+Z doświadczenia wiemy, że koszty związane z wykorzystaniem Lambdy stanowią zwykle najmniejszą cześć kosztów naszej infrastruktury.
 
 Następnie przyjrzyjmy się dokładniej zaletom modelu serverless, w tym całkowitemu kosztowi uruchomienia naszej aplikacji demo.

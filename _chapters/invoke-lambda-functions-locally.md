@@ -12,7 +12,7 @@ After you finish creating a Lambda function, you want to first run it locally.
 
 Let's take the **get** function defined in the `serverless.yml` file in the `notes-api` service .
 
-``` yaml
+```yaml
 functions:
   get:
     handler: get.main
@@ -26,7 +26,7 @@ functions:
 
 And `get.js` looks like:
 
-``` javascript
+```js
 import handler from "../../libs/handler-lib";
 import dynamoDb from "../../libs/dynamodb-lib";
 
@@ -38,12 +38,12 @@ export const main = handler(async (event, context) => {
     // - 'noteId': path parameter
     Key: {
       userId: event.requestContext.identity.cognitoIdentityId,
-      noteId: event.pathParameters.id
-    }
+      noteId: event.pathParameters.id,
+    },
   };
 
   const result = await dynamoDb.get(params);
-  if ( ! result.Item) {
+  if (!result.Item) {
     throw new Error("Item not found.");
   }
 
@@ -52,9 +52,9 @@ export const main = handler(async (event, context) => {
 });
 ```
 
-The Lambda function is invoked by an API Gateway GET HTTP request, we need to mock the request parameters. In the `events` directory inside `services/notes-api/`, there  is a mock event file called `get-event.json`:
+The Lambda function is invoked by an API Gateway GET HTTP request, we need to mock the request parameters. In the `events` directory inside `services/notes-api/`, there is a mock event file called `get-event.json`:
 
-``` json
+```json
 {
   "pathParameters": {
     "id": "578eb840-f70f-11e6-9d1a-1359b3b22944"
@@ -69,7 +69,7 @@ The Lambda function is invoked by an API Gateway GET HTTP request, we need to mo
 
 To invoke this function, run the following inside `services/notes-api`:
 
-``` bash
+```bash
 $ serverless invoke local -f get --path events/get-event.json
 ```
 
@@ -79,7 +79,7 @@ Let's look at a couple of example HTTP event objects.
 
 To pass in a query string parameter:
 
-``` json
+```json
 {
   "queryStringParameters": {
     "key": "value"
@@ -91,7 +91,7 @@ To pass in a query string parameter:
 
 To pass in a HTTP body for a POST request:
 
-``` json
+```json
 {
   "body": "{\"key\":\"value\"}"
 }
@@ -105,7 +105,7 @@ You might want to distinguish if the Lambda function was triggered by `serverles
 
 So in your code, you can check this environment variable. We use this in our `libs/aws-sdk.js` to disable X-Ray tracing when invoking a function locally:
 
-``` javascript
+```js
 import aws from "aws-sdk";
 import xray from "aws-xray-sdk";
 

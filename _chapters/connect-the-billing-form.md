@@ -12,7 +12,7 @@ Now all we have left to do is to connect our billing form to our billing API.
 
 {%change%} Replace our `return` statement in `src/containers/Settings.js` with this.
 
-``` jsx
+```jsx
 async function handleFormSubmit(storage, { token, error }) {
   if (error) {
     onError(error);
@@ -28,7 +28,7 @@ async function handleFormSubmit(storage, { token, error }) {
     });
 
     alert("Your card has been charged successfully!");
-    history.push("/");
+    nav("/");
   } catch (e) {
     onError(e);
     setIsLoading(false);
@@ -54,7 +54,7 @@ return (
 
 {%change%} And add the following to the header.
 
-``` js
+```js
 import { Elements } from "@stripe/react-stripe-js";
 import BillingForm from "../components/BillingForm";
 import "./Settings.css";
@@ -66,7 +66,7 @@ To initialize the Stripe Elements we pass in the Stripe.js object that we loaded
 
 The Stripe elements are loaded inside an [IFrame](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe). So if we are using any custom fonts, we'll need to include them explicitly. Like we are doing above.
 
-``` jsx
+```jsx
 <Elements
   fonts={[
     {
@@ -81,7 +81,7 @@ Finally, let's handle some styles for our settings page as a whole.
 
 {%change%} Create a file named `src/containers/Settings.css` and add the following.
 
-``` css
+```css
 @media all and (min-width: 480px) {
   .Settings {
     padding: 60px 0;

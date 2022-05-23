@@ -12,20 +12,21 @@ Now that we have our basic create note form working, let's connect it to our API
 
 {%change%} Let's include the `API` module by adding the following to the header of `src/containers/NewNote.js`.
 
-``` javascript
+```js
 import { API } from "aws-amplify";
 ```
 
 {%change%} And replace our `handleSubmit` function with the following.
 
-``` javascript
+```js
 async function handleSubmit(event) {
   event.preventDefault();
 
   if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
     alert(
-      `Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE /
-        1000000} MB.`
+      `Please pick a file smaller than ${
+        config.MAX_ATTACHMENT_SIZE / 1000000
+      } MB.`
     );
     return;
   }
@@ -34,7 +35,7 @@ async function handleSubmit(event) {
 
   try {
     await createNote({ content });
-    history.push("/");
+    nav("/");
   } catch (e) {
     onError(e);
     setIsLoading(false);
@@ -43,7 +44,7 @@ async function handleSubmit(event) {
 
 function createNote(note) {
   return API.post("notes", "/notes", {
-    body: note
+    body: note,
   });
 }
 ```

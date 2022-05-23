@@ -12,9 +12,9 @@ Now we are going to add an API that returns a list of all the notes a user has.
 
 ### Add the Function
 
-{%change%} Create a new file called `list.js` with the following.
+{%change%} Create a new file called `backend/functions/list.js` with the following.
 
-``` javascript
+```js
 import handler from "./libs/handler-lib";
 import dynamoDb from "./libs/dynamodb-lib";
 
@@ -45,17 +45,17 @@ This is pretty much the same as our `get.js` except we use a condition to only r
 
 {%change%} Open the `serverless.yml` file and append the following.
 
-``` yaml
-  list:
-    # Defines an HTTP API endpoint that calls the main function in list.js
-    # - path: url path is /notes
-    # - method: GET request
-    handler: list.main
-    events:
-      - http:
-          path: notes
-          cors: true
-          method: get
+```yaml
+list:
+  # Defines an HTTP API endpoint that calls the main function in list.js
+  # - path: url path is /notes
+  # - method: GET request
+  handler: list.main
+  events:
+    - http:
+        path: notes
+        cors: true
+        method: get
 ```
 
 This defines the `/notes` endpoint that takes a GET request.
@@ -64,7 +64,7 @@ This defines the `/notes` endpoint that takes a GET request.
 
 {%change%} Create a `mocks/list-event.json` file and add the following.
 
-``` json
+```json
 {}
 ```
 
@@ -72,13 +72,13 @@ We are still adding an empty mock event because we are going to replace this lat
 
 And invoke our function from the root directory of the project.
 
-``` bash
+```bash
 $ serverless invoke local --function list --path mocks/list-event.json
 ```
 
 The response should look similar to this.
 
-``` bash
+```bash
 {
     "statusCode": 200,
     "body": "[{\"attachment\":\"hello.jpg\",\"content\":\"hello world\",\"createdAt\":1602891322039,\"noteId\":\"42244c70-1008-11eb-8be9-4b88616c4b39\",\"userId\":\"123\"}]"

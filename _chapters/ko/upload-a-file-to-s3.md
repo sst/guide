@@ -15,21 +15,21 @@ comments_id: comments-for-upload-a-file-to-s3/123
 2. 파일이 s3의 사용자 폴더에 업로드되고 키가 반환됩니다.
 3. 파일 키가 첨부된 노트를 작성하십시오.
 
-AWS Amplify의 스토리지 모듈을 사용할 예정입니다. [Cognito 자격증명 풀 만들기]({% link _chapters/create-a-cognito-identity-pool.md %}) 챕터를 보면 로그인 한 사용자는 S3 버킷에 있는 폴더에 액세스할 수 있습니다 . AWS Amplify는 파일을 *본인만 볼 수 있도록* 저장하려면 이 폴더에 직접 저장합니다.
+AWS Amplify의 스토리지 모듈을 사용할 예정입니다. [Cognito 자격증명 풀 만들기]({% link _chapters/create-a-cognito-identity-pool.md %}) 챕터를 보면 로그인 한 사용자는 S3 버킷에 있는 폴더에 액세스할 수 있습니다 . AWS Amplify는 파일을 _본인만 볼 수 있도록_ 저장하려면 이 폴더에 직접 저장합니다.
 
 그리고 노트를 새로 작성해서 저장하거나 기존 노트를 편집해서 저장할 경우에만 파일이 업로드됩니다. 따라서 이를 위해 쉽고 편리한 방법을 만들어 보겠습니다.
 
 ### S3에 업로드하기
 
-{%change%} 이를 위해 `src/libs/` 디렉토리를 만듭니다. 
+{%change%} 이를 위해 `src/libs/` 디렉토리를 만듭니다.
 
-``` bash
+```bash
 $ mkdir src/libs/
 ```
 
 {%change%} `src/libs/awsLib.js` 파일을 만들고 아래 내용을 작성합니다.
 
-``` coffee
+```coffee
 import { Storage } from "aws-amplify";
 
 export async function s3Upload(file) {
@@ -59,37 +59,39 @@ export async function s3Upload(file) {
 
 {%change%} `src/containers/NewNote.js` 파일에서 `handleSubmit` 메소드를 다음 내용으로 바꿉니다.
 
-``` javascript
-handleSubmit = async event => {
+```js
+handleSubmit = async (event) => {
   event.preventDefault();
 
   if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
-    alert(`Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE/1000000} MB.`);
+    alert(
+      `Please pick a file smaller than ${
+        config.MAX_ATTACHMENT_SIZE / 1000000
+      } MB.`
+    );
     return;
   }
 
   this.setState({ isLoading: true });
 
   try {
-    const attachment = this.file
-      ? await s3Upload(this.file)
-      : null;
+    const attachment = this.file ? await s3Upload(this.file) : null;
 
     await this.createNote({
       attachment,
-      content: this.state.content
+      content: this.state.content,
     });
-    this.props.history.push("/");
+    this.props.nav("/");
   } catch (e) {
     alert(e);
     this.setState({ isLoading: false });
   }
-}
+};
 ```
 
 {%change%} 그리고 `src/containers/NewNote.js` 헤더에 다음과 같이 `s3Upload`를 추가합니다.
 
-``` javascript
+```js
 import { s3Upload } from "../libs/awsLib";
 ```
 

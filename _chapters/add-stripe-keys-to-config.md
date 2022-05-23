@@ -12,7 +12,7 @@ Back in the [Setup a Stripe account]({% link _chapters/setup-a-stripe-account.md
 
 {%change%} Add the following line below the `const config = {` line in your `src/config.js`.
 
-``` txt
+```txt
 STRIPE_KEY: "YOUR_STRIPE_PUBLIC_KEY",
 ```
 
@@ -22,7 +22,7 @@ Let's also add the Stripe.js packages
 
 {%change%} Run the following in the `frontend/` directory and **not** in your project root.
 
-``` bash
+```bash
 $ npm install @stripe/stripe-js
 ```
 
@@ -30,7 +30,7 @@ And load the Stripe config in our settings page.
 
 {%change%} Add the following at top of the `Settings` component in `src/containers/Settings.js` above the `billUser()` function.
 
-``` javascript
+```js
 const stripePromise = loadStripe(config.STRIPE_KEY);
 ```
 
@@ -38,7 +38,7 @@ This loads the Stripe object from Stripe.js with the Stripe key when our setting
 
 {%change%} We'll also import this function at the top.
 
-``` js
+```js
 import { loadStripe } from "@stripe/stripe-js";
 ```
 

@@ -8,7 +8,6 @@ description: AWS Lambda é o serviço de Serverless oferecido pela Amazon Web Se
 comments_id: what-is-aws-lambda/308
 ---
 
-
 [AWS Lambda](https://aws.amazon.com/lambda/) (ou Lambda para resumir as coisas) é o serviço de Serverless oferecido pela AWS. Nesse capítulo vamos usar Lambda para montar nossa aplicação Serverless. E, enquanto não precisarmos conhecer a fundo sobre como a Lambda funciona, é importante conhecer como as funções serão executadas.
 
 ### Especificações das funções Lambda
@@ -63,10 +62,10 @@ Entretanto, devido a otimização citada anteriormente, a função Lambda atual 
 
 Por exemplo, o metódo `createNewDbConnection` abaixo é chamado apenas uma vez por instância de container e não toda vez que a função Lambda é chamada. Por outro lado, a função `myHandler` é executado em cada request.
 
-``` javascript
+```js
 var dbConnection = createNewDbConnection();
 
-exports.myHandler = function(event, context, callback) {
+exports.myHandler = function (event, context, callback) {
   var result = dbConnection.makeQuery();
   callback(null, result);
 };

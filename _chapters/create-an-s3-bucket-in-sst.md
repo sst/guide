@@ -15,40 +15,43 @@ We'll be adding to the `StorageStack` that we created.
 
 ### Add to the Stack
 
-{%change%} Add the following above the `sst.Table` definition in `stacks/StorageStack.js`.
+{%change%} Add the following above the `Table` definition in `stacks/StorageStack.js`.
 
-``` js
+```js
 // Create an S3 bucket
-this.bucket = new sst.Bucket(this, "Uploads");
+const bucket = new Bucket(stack, "Uploads");
+```
+
+Make sure to import the `Bucket` construct by adding below line.
+
+```js
+import { Bucket } from "@serverless-stack/resources";
 ```
 
 This creates a new S3 bucket using the SST [`Bucket`]({{ site.docs_url }}/constructs/Bucket) construct.
 
-Also, find the following line in `stacks/StorageStack.js`.
+Also, add the bucket that we created to the return object.
 
-``` js
-// Public reference to the table
-table;
+```js
+return {
+  table,
+  bucket, //add this here
+};
 ```
 
-{%change%} And add the following above it.
+This'll allow us to reference this resource in our other stacks.
 
-``` js
-// Public reference to the bucket
-bucket;
-```
-
-As the comment says, we want to have a public reference to the S3 bucket.
+Note, learn more about sharing resources between stacks [here](https://docs.serverless-stack.com/constructs/Stack#sharing-resources-between-stacks).
 
 ### Deploy the App
 
 If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
 
-Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
+Note that, you'll need to have `npm start` running for this to happen. If you had previously stopped it, then running `npm start` will deploy your changes again.
 
 You should see that the storage stack has been updated.
 
-``` bash
+```bash
 Stack dev-notes-storage
   Status: deployed
 ```
@@ -61,7 +64,7 @@ You can also head over to the **Buckets** tab in the [SST Console]({{ site.conso
 
 {%change%} Let's commit and push our changes to GitHub.
 
-``` bash
+```bash
 $ git add .
 $ git commit -m "Adding a storage stack"
 $ git push

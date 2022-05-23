@@ -19,19 +19,19 @@ To save the user's login state, let's include the `useState` hook in `src/App.js
 
 {%change%} Replace the `React` import:
 
-``` javascript
+```js
 import React from "react";
 ```
 
 {%change%} With the following:
 
-``` javascript
+```js
 import React, { useState } from "react";
 ```
 
 {%change%} Add the following to the top of our `App` component function.
 
-``` javascript
+```js
 const [isAuthenticated, userHasAuthenticated] = useState(false);
 ```
 
@@ -45,7 +45,7 @@ We'll create a context for our entire app that all of our containers will use.
 
 {%change%} Create a `src/lib/` directory in the `frontend/` React directory.
 
-``` bash
+```bash
 $ mkdir src/lib/
 ```
 
@@ -53,7 +53,7 @@ We'll use this to store all our common code.
 
 {%change%} Add the following to `src/lib/contextLib.js`.
 
-``` javascript
+```js
 import { useContext, createContext } from "react";
 
 export const AppContext = createContext(null);
@@ -64,6 +64,7 @@ export function useAppContext() {
 ```
 
 This really simple bit of code is creating and exporting two things:
+
 1. Using the `createContext` API to create a new context for our app.
 2. Using the `useContext` React Hook to access the context.
 
@@ -71,7 +72,7 @@ If you are not sure how Contexts work, don't worry, it'll make more sense once w
 
 {%change%} Import our new app context in the header of `src/App.js`.
 
-``` javascript
+```js
 import { AppContext } from "./lib/contextLib";
 ```
 
@@ -79,24 +80,28 @@ Now to add our session to the context and to pass it to our containers:
 
 {%change%} Wrap our `Routes` component in the `return` statement of `src/App.js`.
 
-``` jsx
+```jsx
 <Routes />
 ```
 
 {%change%} With this.
 
 {% raw %}
-``` jsx
+
+```jsx
 <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
   <Routes />
 </AppContext.Provider>
 ```
+
 {% endraw %}
 
 React Context's are made up of two parts. The first is the Provider. This is telling React that all the child components inside the Context Provider should be able to access what we put in it. In this case we are putting in the following object:
 
-``` javascript
-{ isAuthenticated, userHasAuthenticated }
+```js
+{
+  isAuthenticated, userHasAuthenticated;
+}
 ```
 
 ### Use the Context to Update the State
@@ -105,13 +110,13 @@ The second part of the Context API is the consumer. We'll add that to the Login 
 
 {%change%} Start by importing it in the header of `src/containers/Login.js`.
 
-``` javascript
+```js
 import { useAppContext } from "../lib/contextLib";
 ```
 
 {%change%} Include the hook by adding it below the `export default function Login() {` line.
 
-``` javascript
+```js
 const { userHasAuthenticated } = useAppContext();
 ```
 
@@ -119,7 +124,7 @@ This is telling React that we want to use our app context here and that we want 
 
 {%change%} Finally, replace the `alert('Logged in');` line with the following in `src/containers/Login.js`.
 
-``` javascript
+```js
 userHasAuthenticated(true);
 ```
 
@@ -127,7 +132,7 @@ userHasAuthenticated(true);
 
 We can now use this to display a Logout button once the user logs in. Find the following in our `src/App.js`.
 
-``` jsx
+```jsx
 <LinkContainer to="/signup">
   <Nav.Link>Signup</Nav.Link>
 </LinkContainer>
@@ -138,26 +143,28 @@ We can now use this to display a Logout button once the user logs in. Find the f
 
 {%change%} And replace it with this:
 
-``` jsx
-{isAuthenticated ? (
-  <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-) : (
-  <>
-    <LinkContainer to="/signup">
-      <Nav.Link>Signup</Nav.Link>
-    </LinkContainer>
-    <LinkContainer to="/login">
-      <Nav.Link>Login</Nav.Link>
-    </LinkContainer>
-  </>
-)}
+```jsx
+{
+  isAuthenticated ? (
+    <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+  ) : (
+    <>
+      <LinkContainer to="/signup">
+        <Nav.Link>Signup</Nav.Link>
+      </LinkContainer>
+      <LinkContainer to="/login">
+        <Nav.Link>Login</Nav.Link>
+      </LinkContainer>
+    </>
+  );
+}
 ```
 
 The `<>` or [Fragment component](https://reactjs.org/docs/fragments.html) can be thought of as a placeholder component. We need this because in the case the user is not logged in, we want to render two links. To do this we would need to wrap it inside a single component, like a `div`. But by using the Fragment component it tells React that the two links are inside this component but we don't want to render any extra HTML.
 
 {%change%} And add this `handleLogout` method to `src/App.js` above the `return` statement as well.
 
-``` javascript
+```js
 function handleLogout() {
   userHasAuthenticated(false);
 }

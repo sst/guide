@@ -10,12 +10,11 @@ In Node.js we use the `process.env` to get access to environment variables of th
 
 Let's take a quick look at how to do that.
 
-
 ### Defining Environment Variables
 
 We can define our environment variables in our `serverless.yml` in two separate places. The first is in the `functions` section:
 
-``` yml
+```yml
 service: service-name
 
 provider:
@@ -31,7 +30,7 @@ functions:
 
 Here `SYSTEM_URL` is the name of the environment variable we are defining and `http://example.com/api/v1` is its value. We can access this in our `hello` Lambda function using `process.env.SYSTEM_URL`, like so:
 
-``` javascript
+```js
 export function hello(event, context, callback) {
   callback(null, { body: process.env.SYSTEM_URL });
 }
@@ -39,7 +38,7 @@ export function hello(event, context, callback) {
 
 We can also define our environment variables globally in the `provider` section:
 
-``` yml
+```yml
 service: service-name
 
 provider:
@@ -59,14 +58,13 @@ Just as before we can access the environment variable `SYSTEM_ID` in our `hello`
 
 In the case where both the `provider` and `functions` section has an environment variable with the same name, the function specific environment variable takes precedence. As in, we can override the environment variables described in the `provider` section with the ones defined in the `functions` section.
 
-
 ### Custom Variables in Serverless Framework
 
 Serverless Framework builds on these ideas to make it easier to define and work with environment variables in our `serverless.yml` by generalizing the idea of [variables](https://serverless.com/framework/docs/providers/aws/guide/variables/).
 
 Let's take a quick look at how these work using an example. Say you had the following `serverless.yml`.
 
-``` yml
+```yml
 service: service-name
 
 provider:
@@ -91,7 +89,7 @@ A variable allows you to replace values in your `serverless.yml` dynamically. It
 
 Let's see how this works in practice. We can rewrite our example and simplify it by doing the following:
 
-``` yml
+```yml
 service: service-name
 
 custom:
@@ -115,8 +113,7 @@ functions:
 
 This should be pretty straightforward. We started by adding this section first:
 
-
-``` yml
+```yml
 custom:
   systemUrl: http://example.com/api/v1/
 ```

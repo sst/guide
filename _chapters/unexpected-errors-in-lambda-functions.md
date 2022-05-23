@@ -3,7 +3,7 @@ layout: post
 title: Unexpected Errors in Lambda Functions
 date: 2020-04-06 00:00:00
 lang: en
-description: In this chapter we look at how to debug unexpected errors in your Lambda functions for your serverless app. These errors include timeout errors and when your Lambda function runs out of memory. 
+description: In this chapter we look at how to debug unexpected errors in your Lambda functions for your serverless app. These errors include timeout errors and when your Lambda function runs out of memory.
 comments_id: unexpected-errors-in-lambda-functions/1735
 ref: unexpected-errors-in-lambda-functions
 ---
@@ -14,11 +14,11 @@ Previously, we looked at [how to debug errors in our Lambda function code]({% li
 
 Our Lambda functions often make API requests to interact with other services. In our notes app, we talk to DynamoDB to store and fetch data; and we also talk to Stripe to process payments. When we make an API request, there is the chance the HTTP connection times out or the remote service takes too long to respond. We are going to look at how to detect and debug the issue. The default timeout for Lambda functions are 6 seconds. So let's simulate a timeout using `setTimeout`.
 
-{%change%} Replace our `src/get.js` with the following:
+{%change%} Replace our `backend/functions/get.js` with the following:
 
-``` javascript
-import handler from "./util/handler";
-import dynamoDb from "./util/dynamodb";
+```js
+import handler from "../util/handler";
+import dynamoDb from "../util/dynamodb";
 
 export const main = handler(async (event) => {
   const params = {
@@ -28,17 +28,17 @@ export const main = handler(async (event) => {
     // - 'noteId': path parameter
     Key: {
       userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
-      noteId: event.pathParameters.id
-    }
+      noteId: event.pathParameters.id,
+    },
   };
 
   const result = await dynamoDb.get(params);
-  if ( ! result.Item) {
+  if (!result.Item) {
     throw new Error("Item not found.");
   }
 
   // Set a timeout
-  await new Promise(resolve => setTimeout(resolve, 10000));
+  await new Promise((resolve) => setTimeout(resolve, 10000));
 
   // Return the retrieved item
   return result.Item;
@@ -47,7 +47,7 @@ export const main = handler(async (event) => {
 
 {%change%} Let's commit this code.
 
-``` bash
+```bash
 $ git add .
 $ git commit -m "Adding a timeout"
 $ git push
@@ -75,11 +75,11 @@ Next let's look at what happens when our Lambda function runs out of memory.
 
 By default, a Lambda function has 1024MB of memory. You can assign any amount of memory between 128MB and 3008MB in 64MB increments. So in our code, let's try and allocate more memory till it runs out of memory.
 
-{%change%} Replace your `src/get.js` with:
+{%change%} Replace your `backend/functions/get.js` with:
 
-``` javascript
-import handler from "./util/handler";
-import dynamoDb from "./util/dynamodb";
+```js
+import handler from "../util/handler";
+import dynamoDb from "../util/dynamodb";
 
 function allocMem() {
   let bigList = Array(4096000).fill(1);
@@ -94,12 +94,12 @@ export const main = handler(async (event) => {
     // - 'noteId': path parameter
     Key: {
       userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
-      noteId: event.pathParameters.id
-    }
+      noteId: event.pathParameters.id,
+    },
   };
 
   const result = await dynamoDb.get(params);
-  if ( ! result.Item) {
+  if (!result.Item) {
     throw new Error("Item not found.");
   }
 
@@ -112,15 +112,15 @@ export const main = handler(async (event) => {
 
 Now we'll set our Lambda function to use the lowest memory allowed.
 
-{%change%} Add the following below the `defaultFunctionProps: {` line in your `stacks/ApiStack.js`.
+{%change%} Add the following below the `defaults: {` line in your `stacks/ApiStack.js`.
 
-``` js
+```js
 memorySize: 128,
 ```
 
 {%change%} Let's commit this.
 
-``` bash
+```bash
 $ git add .
 $ git commit -m "Adding a memory error"
 $ git push

@@ -29,7 +29,7 @@ The above relationship between two stacks means that they need to be deployed an
 
 To create a cross-stack reference, we first create a CloudFormation export.
 
-``` javascript
+```js
 new CfnOutput(this, "TableName", {
   value: table.tableName,
   exportName: app.logicalPrefixedName("ExtTableName"),
@@ -42,9 +42,9 @@ Here the `exportName` is the name of the CloudFormation export. We use a conveni
 
 ### CloudFormation Export in Serverless Framework
 
-Similarly, we can create a CloudFormation export in Serverless Framework by adding the following 
+Similarly, we can create a CloudFormation export in Serverless Framework by adding the following
 
-``` yml
+```yml
 resources:
   Outputs:
     NotePurchasedTopicArn:
@@ -60,7 +60,7 @@ Just as above we need to name our CloudFormation export. We do it using the `Nam
 
 The `${self:custom.stage}` is a custom variable that we define at the top of our `serverless.yml`.
 
-``` yml
+```yml
 # Our stage is based on what is passed in when running serverless
 # commands. Or falls back to what we have set in the provider section.
 stage: ${opt:stage, self:provider.stage}
@@ -72,7 +72,7 @@ Now once we've created a CloudFormation export, we need to import it in our `ser
 
 For example, in our `notes-api/serverless.yml`.
 
-``` yml
+```yml
 provider:
   environment:
     tableName: !ImportValue ${self:custom.sstApp}-ExtTableName

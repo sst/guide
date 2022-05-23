@@ -14,7 +14,7 @@ Now let's create an API that allows a user to update a note with a new note obje
 
 {%change%} Create a new file `update.js` and paste the following code
 
-``` javascript
+```js
 import handler from "./libs/handler-lib";
 import dynamoDb from "./libs/dynamodb-lib";
 
@@ -52,17 +52,17 @@ This should look similar to the `create.js` function. Here we make an `update` D
 
 {%change%} Open the `serverless.yml` file and append the following to it.
 
-``` yaml
-  update:
-    # Defines an HTTP API endpoint that calls the main function in update.js
-    # - path: url path is /notes/{id}
-    # - method: PUT request
-    handler: update.main
-    events:
-      - http:
-          path: notes/{id}
-          cors: true
-          method: put
+```yaml
+update:
+  # Defines an HTTP API endpoint that calls the main function in update.js
+  # - path: url path is /notes/{id}
+  # - method: PUT request
+  handler: update.main
+  events:
+    - http:
+        path: notes/{id}
+        cors: true
+        method: put
 ```
 
 Here we are adding a handler for the PUT request to the `/notes/{id}` endpoint.
@@ -73,7 +73,7 @@ Here we are adding a handler for the PUT request to the `/notes/{id}` endpoint.
 
 Also, don't forget to use the `noteId` of the note we have been using in place of the `id` in the `pathParameters` block.
 
-``` json
+```json
 {
   "body": "{\"content\":\"new world\",\"attachment\":\"new.jpg\"}",
   "pathParameters": {
@@ -84,13 +84,13 @@ Also, don't forget to use the `noteId` of the note we have been using in place o
 
 And we invoke our newly created function from the root directory.
 
-``` bash
+```bash
 $ serverless invoke local --function update --path mocks/update-event.json
 ```
 
 The response should look similar to this.
 
-``` bash
+```bash
 {
     "statusCode": 200,
     "body": "{\"status\":true}"

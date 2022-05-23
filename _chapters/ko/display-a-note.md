@@ -4,7 +4,7 @@ title: Display a Note
 date: 2017-01-28 00:00:00
 lang: ko 
 ref: display-a-note
-description: React.js 앱에 URL의 ID를 기반으로 사용자 노트를 표시하는 페이지를 만들고 싶습니다. React Router v4 Route 구성 요소의 URL 매개 변수를 사용하여 ID를 가져옵니다. 이 ID를 사용하여 serverless 백엔드 API에서 노트를 요청할 것입니다. AWS Amplify의 Storage.vault.get() 메소드를 사용하여 첨부 파일을 다운로드하는 보안 링크를 얻을 수 있습니다. 
+description: React.js 앱에 URL의 ID를 기반으로 사용자 노트를 표시하는 페이지를 만들고 싶습니다. React Router v6 Route 구성 요소의 URL 매개 변수를 사용하여 ID를 가져옵니다. 이 ID를 사용하여 serverless 백엔드 API에서 노트를 요청할 것입니다. AWS Amplify의 Storage.vault.get() 메소드를 사용하여 첨부 파일을 다운로드하는 보안 링크를 얻을 수 있습니다. 
 context: true
 comments_id: display-a-note/112
 ref: display-a-note
@@ -14,13 +14,13 @@ ref: display-a-note
 
 우리가 해야할 첫 번째 일은 컨테이너가 로드 될 때 노트를 불러오는 것입니다. 우리가 'Home' 컨테이너에서 했던 것과 마찬가지 방법으로 시작해 보겠습니다.
 
-### 경로 추가하기 
+### 경로 추가하기
 
 노트 불러오기 화면의 경로를 추가 합니다.
 
 {%change%} `src/Routes.js` 파일의 `/notes/new` 경로 아래에 다음 행을 추가하십시오. 우리는 [세션을 상태에 추가하기]({% link _chapters/add-the-session-to-the-state.md %}) 챕터에서 작성한 `AppliedRoute` 컴포넌트를 사용하고 있습니다.
 
-``` coffee
+```coffee
 <AppliedRoute path="/notes/:id" exact component={Notes} props={childProps} />
 ```
 
@@ -30,7 +30,7 @@ URL에서 노트 ID를 추출하기 위해 패턴 매칭을 이용하는 부분�
 
 {%change%} 그리고 헤더에 컴포넌트를 추가합니다.
 
-``` javascript
+```js
 import Notes from "./containers/Notes";
 ```
 
@@ -40,7 +40,7 @@ import Notes from "./containers/Notes";
 
 {%change%} `src/containers/Notes.js` 파일을 만들고 아래 내용을 추가합니다.
 
-``` coffee
+```coffee
 import React, { Component } from "react";
 import { API, Storage } from "aws-amplify";
 

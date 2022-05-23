@@ -53,7 +53,7 @@ new Api(this, "Api", {
   // Enabled by default
   cors: true,
   routes: {
-    "GET /notes": "src/list.main",
+    "GET /notes": "functions/list.main",
   },
 });
 ```
@@ -61,14 +61,12 @@ new Api(this, "Api", {
 You can further configure the specifics if necessary. You can [read more about this here]({{ site.docs_url }}/constructs/Api#cors).
 
 ```js
-import { HttpMethod } from "@aws-cdk/aws-apigatewayv2-alpha";
-
 new Api(this, "Api", {
   cors: {
-    allowMethods: [HttpMethod.GET],
+    allowMethods: ["get"],
   },
   routes: {
-    "GET /notes": "src/list.main",
+    "GET /notes": "functions/list.main",
   },
 });
 ```
@@ -79,9 +77,9 @@ We'll go with the default setting for now.
 
 Next, we need to add the CORS headers in our Lambda function response.
 
-{%change%} Replace the `return` statement in our `src/util/handler.js`.
+{%change%} Replace the `return` statement in our `backend/util/handler.js`.
 
-```javascript
+```js
 return {
   statusCode,
   body: JSON.stringify(body),
@@ -90,7 +88,7 @@ return {
 
 {%change%} With the following.
 
-```javascript
+```js
 return {
   statusCode,
   body: JSON.stringify(body),

@@ -4,7 +4,7 @@ title: Adding Links in the Navbar
 date: 2017-01-11 12:00:00
 lang: en
 ref: adding-links-in-the-navbar
-description: To add links to the Navbar of our React.js app we’ll be using the NavItem React-Bootstrap component. And to allow users to navigate using these links we are going to use React-Router's Route component and call the history.push method.
+description: To add links to the Navbar of our React.js app we’ll be using the NavItem React-Bootstrap component. And to allow users to navigate using these links we are going to use React-Router's Route component and call the nav.push method.
 comments_id: adding-links-in-the-navbar/141
 ---
 
@@ -12,7 +12,7 @@ Now that we have our first route set up, let's add a couple of links to the navb
 
 {%change%} Replace the `App` function component in `src/App.js` with the following.
 
-``` jsx
+```jsx
 function App() {
   return (
     <div className="App container py-3">
@@ -42,7 +42,7 @@ And let's include the `Nav` component in the header.
 
 {%change%} Add the following import to the top of your `src/App.js`.
 
-``` jsx
+```jsx
 import Nav from "react-bootstrap/Nav";
 ```
 
@@ -56,21 +56,21 @@ To fix this we need a component that works with React Router and React Bootstrap
 
 {%change%} Run the following command in the `frontend/` directory and **not** in your project root.
 
-``` bash
-$ npm install react-router-bootstrap@0.25.0
+```bash
+$ npm install react-router-bootstrap
 ```
 
 Let's also import it.
 
 {%change%} Add this to the top of your `src/App.js`.
 
-``` jsx
+```jsx
 import { LinkContainer } from "react-router-bootstrap";
 ```
 
 {%change%} We will now wrap our links with the `LinkContainer`. Replace the `App` function component in your `src/App.js` with this.
 
-``` jsx
+```jsx
 function App() {
   return (
     <div className="App container py-3">
@@ -100,7 +100,7 @@ function App() {
 
 We are doing one other thing here. We are grabbing the current path the user is on from the `window.location` object. And we set it as the `activeKey` of our `Nav` component. This'll highlight the link when we are on that page.
 
-``` jsx
+```jsx
 <Nav activeKey={window.location.pathname}>
 ```
 

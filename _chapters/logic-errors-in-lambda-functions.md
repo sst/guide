@@ -18,7 +18,7 @@ Let's start by creating a new branch that we'll use while working through the fo
 
 {%change%} In the project root for your backend repo, run the following:
 
-``` bash
+```bash
 $ git checkout -b debug
 ```
 
@@ -26,11 +26,11 @@ $ git checkout -b debug
 
 Let's trigger an error in `get.js` by commenting out the `noteId` field in the DynamoDB call's Key definition. This will cause the DynamoDB call to fail and in turn cause the Lambda function to fail.
 
-{%change%} Replace `src/get.js` with the following.
+{%change%} Replace `backend/functions/get.js` with the following.
 
-``` javascript
-import handler from "./util/handler";
-import dynamoDb from "./util/dynamodb";
+```js
+import handler from "../util/handler";
+import dynamoDb from "../util/dynamodb";
 
 export const main = handler(async (event) => {
   const params = {
@@ -41,11 +41,11 @@ export const main = handler(async (event) => {
     Key: {
       userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
       // noteId: event.pathParameters.id
-    }
+    },
   };
 
   const result = await dynamoDb.get(params);
-  if ( ! result.Item) {
+  if (!result.Item) {
     throw new Error("Item not found.");
   }
 
@@ -56,10 +56,9 @@ export const main = handler(async (event) => {
 
 Note the line that we've commented out.
 
-{%change%}  Let's commit our changes.
+{%change%} Let's commit our changes.
 
-
-``` bash
+```bash
 $ git add .
 $ git commit -m "Adding some faulty code"
 $ git push --set-upstream origin debug

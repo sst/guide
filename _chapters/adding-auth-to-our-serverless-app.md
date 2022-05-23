@@ -21,48 +21,44 @@ Setting this all up can be pretty complicated in CDK. SST has a simple [`Auth`](
 
 ```js
 import * as iam from "aws-cdk-lib/aws-iam";
-import * as sst from "@serverless-stack/resources";
+import { Auth, use } from "@serverless-stack/resources";
+import { StorageStack } from "./StorageStack";
+import { ApiStack } from "./ApiStack";
 
-export default class AuthStack extends sst.Stack {
-  // Public reference to the auth instance
-  auth;
+export function AuthStack({ stack, app }) {
+  const { bucket } = use(StorageStack);
+  const { api } = use(ApiStack);
 
-  constructor(scope, id, props) {
-    super(scope, id, props);
+  // Create a Cognito User Pool and Identity Pool
+  const auth = new Auth(stack, "Auth", {
+    login: ["email"],
+  });
 
-    const { api, bucket } = props;
+  auth.attachPermissionsForAuthUsers([
+    // Allow access to the API
+    api,
+    // Policy granting access to a specific folder in the bucket
+    new iam.PolicyStatement({
+      actions: ["s3:*"],
+      effect: iam.Effect.ALLOW,
+      resources: [
+        bucket.bucketArn + "/private/${cognito-identity.amazonaws.com:sub}/*",
+      ],
+    }),
+  ]);
 
-    // Create a Cognito User Pool and Identity Pool
-    this.auth = new sst.Auth(this, "Auth", {
-      cognito: {
-        userPool: {
-          // Users can login with their email and password
-          signInAliases: { email: true },
-        },
-      },
-    });
+  // Show the auth resources in the output
+  stack.addOutputs({
+    Region: app.region,
+    UserPoolId: auth.userPoolId,
+    IdentityPoolId: auth.cognitoIdentityPoolId,
+    UserPoolClientId: auth.userPoolClientId,
+  });
 
-    this.auth.attachPermissionsForAuthUsers([
-      // Allow access to the API
-      api,
-      // Policy granting access to a specific folder in the bucket
-      new iam.PolicyStatement({
-        actions: ["s3:*"],
-        effect: iam.Effect.ALLOW,
-        resources: [
-          bucket.bucketArn + "/private/${cognito-identity.amazonaws.com:sub}/*",
-        ],
-      }),
-    ]);
-
-    // Show the auth resources in the output
-    this.addOutputs({
-      Region: scope.region,
-      UserPoolId: this.auth.cognitoUserPool.userPoolId,
-      IdentityPoolId: this.auth.cognitoCfnIdentityPool.ref,
-      UserPoolClientId: this.auth.cognitoUserPoolClient.userPoolClientId,
-    });
-  }
+  // Return the auth resource
+  return {
+    auth,
+  };
 }
 ```
 
@@ -78,7 +74,9 @@ Let's quickly go over what we are doing here.
 
 - And we want them to access our S3 bucket. We'll look at this in detail below.
 
-- Finally, we output the ids of the auth resources that've been created.
+- Finally, we output the ids of the auth resources that've been created and returning the auth resource so that other stacks can access this resource.
+
+Note, learn more about sharing resources between stacks [here](https://docs.serverless-stack.com/constructs/Stack#sharing-resources-between-stacks).
 
 ### Securing Access to Uploaded Files
 
@@ -109,35 +107,31 @@ Let's add this stack to our app.
 
 ```js
 export default function main(app) {
-  const storageStack = new StorageStack(app, "storage");
-
-  const apiStack = new ApiStack(app, "api", {
-    table: storageStack.table,
+  app.setDefaultFunctionProps({
+    runtime: "nodejs16.x",
+    srcPath: "backend",
+    bundle: {
+      format: "esm",
+    },
   });
-
-  new AuthStack(app, "auth", {
-    api: apiStack.api,
-    bucket: storageStack.bucket,
-  });
+  app.stack(StorageStack).stack(ApiStack).stack(AuthStack);
 }
 ```
-
-Here you'll notice that we are passing in our API and S3 Bucket to the auth stack.
 
 {%change%} Also, import the new stack at the top.
 
 ```js
-import AuthStack from "./AuthStack";
+import { AuthStack } from "./AuthStack";
 ```
 
 ### Add Auth to the API
 
 We also need to enable authentication in our API.
 
-{%change%} Add the following above the `defaultFunctionProps: {` line in `stacks/ApiStack.js`.
+{%change%} Add the following above the `function: {` line in `stacks/ApiStack.js`.
 
 ```js
-defaultAuthorizationType: "AWS_IAM",
+authorizer: "iam",
 ```
 
 This tells our API that we want to use `AWS_IAM` across all our routes.
@@ -146,7 +140,7 @@ This tells our API that we want to use `AWS_IAM` across all our routes.
 
 If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
 
-Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
+Note that, you'll need to have `npm start` running for this to happen. If you had previously stopped it, then running `npm start` will deploy your changes again.
 
 You should see something like this at the end of the deploy process.
 
