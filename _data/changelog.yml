@@ -1,4 +1,8 @@
 current:
+  title: "Upgrading to SST v1"
+  desc: "May 24, 2022: Updating the guide and code snippets to SST v1."
+
+v7-1:
   title: "Upgrading to CDK v2"
   desc: "Feb 2, 2022: Updating SST version for CDK v2 upgrade."
 
