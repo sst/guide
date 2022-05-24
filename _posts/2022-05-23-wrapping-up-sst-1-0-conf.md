@@ -8,7 +8,7 @@ image: assets/social-cards/sst-1-0-conf-replay.png
 
 Hopefully everybody enjoyed [SST 1.0 Conf]({{ site.v1_conf_url }}) as much as we enjoyed putting it together. It allowed the community to come together and celebrate SST's v1 release. 
 
-It's been a little over a year since SST launched and it's incredible to see how far its come in this short time. SST now has over [6500 stars on GitHub]({{ site.sst_github_repo }}), [1900 developers in Slack]({{ site.slack_invite_url }}), and nearly [80000 folks have subscribed to our newsletter]({% link newsletter.md %}). Thousands of teams from companies like Comcast, Shell, Analog Devices, and The LEGO Group are using SST.
+It's been a little over a year since SST launched and it's incredible to see how far it has come in this short time. SST now has over [6500 stars on GitHub]({{ site.sst_github_repo }}), [1900 developers in Slack]({{ site.slack_invite_url }}), and nearly [80000 folks have subscribed to our newsletter]({% link newsletter.md %}). Thousands of teams from companies like Comcast, Shell, Analog Devices, and The LEGO Group are using SST.
 
 ### Watch the recording
 
