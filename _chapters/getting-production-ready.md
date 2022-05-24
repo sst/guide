@@ -14,7 +14,7 @@ Over the next few chapters we will look at how to get your app ready for product
 
 - **Automating deployments**
 
-  So far you've had to deploy through your command line using the `npm run deploy` command. When you have a team working on your project, you want to make sure the deployments to production are centralized. This ensures that you have control over what gets deployed to production. We'll go over how to automate your deployments using [Seed](https://seed.run).
+  So far you've had to deploy through your command line using the `npx sst deploy` command. When you have a team working on your project, you want to make sure the deployments to production are centralized. This ensures that you have control over what gets deployed to production. We'll go over how to automate your deployments using [Seed](https://seed.run).
 
 - **Monitoring and debugging errors in production**
 

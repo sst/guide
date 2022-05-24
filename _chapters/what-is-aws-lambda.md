@@ -14,12 +14,12 @@ comments_id: what-is-aws-lambda/308
 
 Let's start by quickly looking at the technical specifications of AWS Lambda. Lambda supports the following runtimes.
 
-- Node.js 14.x, 12.x and 10.x
+- Node.js 16.x, 14.x and 12.x
 - Java 11 and 8
-- Python 3.9, 3.8, 3.7, 3.6 and 2.7
-- .NET Core 2.1, 2.2, 3.0 and 3.1
+- Python 3.9, 3.8, 3.7 and 3.6
+- .NET 6, 3.1, 3.0 and 2.2
 - Go 1.x
-- Ruby 2.7 and 2.5
+- Ruby 2.7
 - Rust
 
 Note that, [.NET Core 2.2 and 3.0 are supported through custom runtimes](https://aws.amazon.com/blogs/developer/announcing-amazon-lambda-runtimesupport/).
@@ -29,7 +29,7 @@ Note that, [.NET Core 2.2 and 3.0 are supported through custom runtimes](https:/
 Each function runs inside a container with a 64-bit Amazon Linux AMI. And the execution environment has:
 
 - Memory: 128MB - 10240MB, in 1 MB increments
-- Ephemeral disk space: 512MB
+- Ephemeral disk space: 512MB - 10240MB, in 1 MB increments
 - Max execution duration: 900 seconds
 - Compressed package size: 50MB
 - Uncompressed package size: 250MB

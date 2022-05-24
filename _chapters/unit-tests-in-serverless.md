@@ -20,12 +20,12 @@ SST comes with built in support for writing and running tests. It uses [Jest](ht
 
 Let's start by writing a test for the CDK infrastructure in our app. We are going to keep this fairly simple for now.
 
-{%change%} Add the following to `backend/test/StorageStack.test.js`.
+{%change%} Add the following to `stacks/test/StorageStack.test.js`.
 
 ```js
 import { Template } from "aws-cdk-lib/assertions";
 import { App, getStack } from "@serverless-stack/resources";
-import { StorageStack } from "../../stacks/StorageStack";
+import { StorageStack } from "../StorageStack";
 import { test } from "vitest";
 
 test("Test StorageStack", () => {
@@ -41,14 +41,6 @@ test("Test StorageStack", () => {
 ```
 
 This is a very simple CDK test that checks if our storage stack creates a DynamoDB table and that the table's billing mode is set to `PAY_PER_REQUEST`. This is the default setting in SST's [`Table`]({{ site.docs_url }}/constructs/Table) construct. This test is making sure that we don't change this setting by mistake.
-
-We also have a sample test created with the starter that we can remove.
-
-{%change%} Run the following in your project root.
-
-```bash
-$ rm test/MyStack.test.js
-```
 
 ### Testing Lambda Functions
 
@@ -90,6 +82,14 @@ test("Highest tier", () => {
 
 This should be straightforward. We are adding 3 tests. They are testing the different tiers of our pricing structure. We test the case where a user is trying to store 10, 100, and 101 notes. And comparing the calculated cost to the one we are expecting.
 
+We also have a sample test created with the starter that we can remove.
+
+{%change%} Run the following in your project root.
+
+```bash
+$ rm backend/test/sample.test.js
+```
+
 ### Run Tests
 
 And we can run our tests by using the following command in the root of our project.
@@ -101,14 +101,12 @@ $ npm test
 You should see something like this:
 
 ```bash
- PASS  backend/test/cost.test.js
- PASS  backend/test/StorageStack.test.js
+ √ backend/test/cost.test.js (3)
+ √ stacks/test/StorageStack.test.js (1)
 
-Test Suites: 2 passed, 2 total
-Tests:       4 passed, 4 total
-Snapshots:   0 total
-Time:        4.708 s, estimated 5 s
-Ran all test suites.
+Test Files  2 passed (2)
+     Tests  4 passed (4)
+      Time  3.75s (in thread 91ms, 4116.79%)
 ```
 
 And that's it! We have unit tests all configured. These tests are fairly simple but should give you an idea of how to add more in the future. The key being that you are testing both your infrastructure and your functions.

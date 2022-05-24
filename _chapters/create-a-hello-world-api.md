@@ -41,7 +41,7 @@ We'll do this by starting up our local development environment.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npm start
+$ npx sst start
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -55,12 +55,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-notes-my-stack: deploying...
+dev-notes-MyStack: deploying...
 
- dev-notes-my-stack
+ dev-notes-MyStack
 
 
-Stack dev-notes-my-stack
+Stack dev-notes-MyStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://guksgkkr4l.execute-api.us-east-1.amazonaws.com
@@ -69,7 +69,7 @@ Stack dev-notes-my-stack
 Starting Live Lambda Dev
 ==========================
 
-SST Console: https://console.serverless-stack.com/notes/Jay/local
+SST Console: https://console.serverless-stack.com/notes/dev/local
 Debug session started. Listening for requests...
 ```
 
@@ -90,7 +90,7 @@ Note that when you hit this endpoint the Lambda function is being run locally.
 To deploy our API to prod, we'll need to stop our local development environment and run the following.
 
 ```bash
-$ npm run deploy -- --stage prod
+$ npx sst deploy --stage prod
 ```
 
 We don't have to do this right now. We'll be doing it later once we are done working on our app.

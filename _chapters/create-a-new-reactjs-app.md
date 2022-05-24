@@ -23,14 +23,6 @@ $ cd frontend
 
 This should take a second to run, and it will create your new project in the `frontend/` directory.
 
-Note that we are adding this inside our SST app. Create React App will throw a warning if it is installed inside a directory that uses Jest. And we [were using Jest to run our tests]({% link _chapters/unit-tests-in-serverless.md %}). To disable this, we’ll need to set an environment variable.
-
-{%change%} Add the following to `frontend/.env`.
-
-```bash
-SKIP_PREFLIGHT_CHECK=true
-```
-
 ### Loading SST Environment Variables
 
 We also want to load the environment variables from our backend. To do this, we’ll be using the [@serverless-stack/static-site-env package](https://www.npmjs.com/package/@serverless-stack/static-site-env). It'll find the environment variables from our SST app and load it while starting the React development environment.
@@ -130,18 +122,18 @@ import { FrontendStack } from "./FrontendStack";
 
 If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
 
-Note that, you'll need to have `npm start` running for this to happen. If you had previously stopped it, then running `npm start` will deploy your changes again.
+Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
 
 You should see that the new frontend stack has been deployed.
 
 ```bash
-Stack dev-notes-frontend
+Stack dev-notes-FrontendStack
   Status: deployed
   Outputs:
     SiteUrl: https://d3j4c16hczgtjw.cloudfront.net
   ReactSite:
     REACT_APP_API_URL: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
-    REACT_APP_BUCKET: dev-notes-storage-uploadsbucketc4b27cc7-xmqzx69e5bpt
+    REACT_APP_BUCKET: dev-notes-StorageStack-uploadsbucketc4b27cc7-xmqzx69e5bpt
     REACT_APP_IDENTITY_POOL_ID: us-east-1:2d7b425d-eb44-4c42-afbd-645018b37a27
     REACT_APP_REGION: us-east-1
     REACT_APP_USER_POOL_CLIENT_ID: jbf2qe4h17tl2u94fntkjii7n

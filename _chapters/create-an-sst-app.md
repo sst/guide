@@ -14,8 +14,9 @@ Now that we understand what _infrastructure as code_ is, we are ready to create 
 {%change%} Run the following in your working directory.
 
 ```bash
-$ npm init sst -- javascript-starter notes
+$ npm init sst javascript-starter notes
 $ cd notes
+$ npm install
 ```
 
 By default our app will be deployed to an environment (or stage) called `dev` in the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.

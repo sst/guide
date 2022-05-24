@@ -32,8 +32,8 @@ So for example, a CloudFormation template that creates our DynamoDB table would 
 
 
 + const table = new dynamodb.Table(this, "notes", {
-+   partitionKey: { name: 'userId', type: dynamodb.AttributeType.STRING },
-+   sortKey: { name: 'noteId', type: dynamodb.AttributeType.STRING },
++   partitionKey: { name: "userId", type: dynamodb.AttributeType.STRING },
++   sortKey: { name: "noteId", type: dynamodb.AttributeType.STRING },
 +   billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
 + });
 ```

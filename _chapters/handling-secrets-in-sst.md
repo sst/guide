@@ -47,12 +47,12 @@ We are taking the environment variables in our SST app and passing it into our A
 
 If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
 
-Note that, you'll need to have `npm start` running for this to happen. If you had previously stopped it, then running `npm start` will deploy your changes again.
+Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
 
 You should see that the API stack is being updated.
 
 ```bash
-Stack dev-notes-api
+Stack dev-notes-ApiStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com

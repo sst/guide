@@ -44,7 +44,7 @@ REACT_APP_API_URL: api.url,
 REACT_APP_API_URL: api.customDomainUrl || api.url,
 ```
 
-Note that, if you are going to use a custom domain locally, you might need to remove your app (`npm run remove`) and deploy it again. This is because CDK doesn't allow you to change these references dynamically.
+Note that, if you are going to use a custom domain locally, you might need to remove your app (`npx sst remove`) and deploy it again. This is because CDK doesn't allow you to change these references dynamically.
 
 We also need to update the outputs of our frontend stack.
 
@@ -65,13 +65,13 @@ Just like the previous chapter, we need to update these changes in prod.
 {%change%} Run the following from your project root.
 
 ```bash
-$ npm run deploy -- --stage prod
+$ npx sst deploy --stage prod
 ```
 
 This command will take a few minutes. At the end of the deploy process you should see something like this.
 
 ```bash
-Stack prod-notes-frontend
+Stack prod-notes-FrontendStack
   Status: no changes
   Outputs:
     SiteUrl: https://my-serverless-app.com

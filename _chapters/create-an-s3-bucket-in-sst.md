@@ -22,24 +22,28 @@ We'll be adding to the `StorageStack` that we created.
 const bucket = new Bucket(stack, "Uploads");
 ```
 
-Make sure to import the `Bucket` construct by adding below line.
+{%change%} Make sure to import the `Bucket` construct. Replace the import line up top with this.
 
 ```js
-import { Bucket } from "@serverless-stack/resources";
+import { Bucket, Table } from "@serverless-stack/resources";
 ```
 
 This creates a new S3 bucket using the SST [`Bucket`]({{ site.docs_url }}/constructs/Bucket) construct.
 
-Also, add the bucket that we created to the return object.
+Also, find the following line in `stacks/StorageStack.js`.
 
 ```js
 return {
   table,
-  bucket, //add this here
 };
 ```
 
-This'll allow us to reference this resource in our other stacks.
+{%change%} And add the `bucket` below `table`.
+```js
+  bucket,
+```
+
+This'll allow us to reference the S3 bucket in other stacks.
 
 Note, learn more about sharing resources between stacks [here](https://docs.serverless-stack.com/constructs/Stack#sharing-resources-between-stacks).
 
@@ -47,12 +51,12 @@ Note, learn more about sharing resources between stacks [here](https://docs.serv
 
 If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
 
-Note that, you'll need to have `npm start` running for this to happen. If you had previously stopped it, then running `npm start` will deploy your changes again.
+Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
 
 You should see that the storage stack has been updated.
 
 ```bash
-Stack dev-notes-storage
+Stack dev-notes-StorageStack
   Status: deployed
 ```
 

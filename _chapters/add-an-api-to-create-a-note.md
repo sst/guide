@@ -54,7 +54,7 @@ We are doing a couple of things of note here.
 
 - We are creating a new stack for our API. We could've used the stack we had previously created for DynamoDB and S3. But this is a good way to talk about how to share resources between stacks.
 
-- This new `ApiStack` expects a `table` resource to be passed in. We'll be passing in the DynamoDB table from the `StorageStack` that we created previously.
+- This new `ApiStack` references the `table` resource from the `StorageStack` that we created previously.
 
 - We are creating an API using SST's [`Api`]({{ site.docs_url }}/constructs/Api) construct.
 
@@ -160,12 +160,12 @@ $ npm install aws-sdk uuid
 
 If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
 
-Note that, you'll need to have `npm start` running for this to happen. If you had previously stopped it, then running `npm start` will deploy your changes again.
+Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
 
 You should see that the new API stack has been deployed.
 
 ```bash
-Stack dev-notes-api
+Stack dev-notes-ApiStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com

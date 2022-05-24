@@ -70,7 +70,7 @@ Let's quickly go over what we are doing here.
 
 - The `Auth` construct also creates an Identity Pool. The `attachPermissionsForAuthUsers` function allows us to specify the resources our authenticated users have access to.
 
-- In this case, we want them to access our API. We'll be passing that in as a prop.
+- This new `AuthStack` references the `bucket` resource from the `StorageStack` and the `api` resource from the `ApiStack` that we created previously.
 
 - And we want them to access our S3 bucket. We'll look at this in detail below.
 
@@ -140,12 +140,12 @@ This tells our API that we want to use `AWS_IAM` across all our routes.
 
 If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
 
-Note that, you'll need to have `npm start` running for this to happen. If you had previously stopped it, then running `npm start` will deploy your changes again.
+Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
 
 You should see something like this at the end of the deploy process.
 
 ```bash
-Stack dev-notes-auth
+Stack dev-notes-AuthStack
   Status: deployed
   Outputs:
     Region: us-east-1

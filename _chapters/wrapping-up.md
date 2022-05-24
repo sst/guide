@@ -28,7 +28,7 @@ One final thing! You can also manage your app in production with the [SST Consol
 Run the following in your project root.
 
 ```bash
-$ npm run console -- --stage prod
+$ npx sst console --stage prod
 ```
 
 This'll allow you to connect your SST Console to your prod stage.

@@ -75,7 +75,7 @@ $ AWS_PROFILE=production serverless deploy --stage prod --region us-east-1
 And use CDK for the rest of your AWS infrastructure.
 
 ```bash
-$ AWS_PROFILE=production npm run deploy -- --stage prod --region us-east-1
+$ AWS_PROFILE=production npx sst deploy --stage prod --region us-east-1
 ```
 
 Just like Serverless Framework, the stacks in your CDK app are prefixed with the stage name. Now you can use Serverless Framework and CDK together! Allowing you to do something like this.
@@ -84,7 +84,7 @@ Just like Serverless Framework, the stacks in your CDK app are prefixed with the
 
 Here, just like the Serverless Framework example above; our app is made up of three services. Except, one of those services is a CDK app deployed using SST!
 
-We'll be deploying it using the `npm run deploy` command, instead of the standard `cdk deploy` command.
+We'll be deploying it using the `npx sst deploy` command, instead of the standard `cdk deploy` command.
 
 Now that you know how these frameworks work behind the scenes, let's look at how we can connect a notes app built with Serverless Framework to an SST app that defines our infrastructure.
 

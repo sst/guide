@@ -40,7 +40,7 @@ We are now going to deploy our app to prod. You can go ahead and stop the local 
 {%change%} Run the following from your project root.
 
 ```bash
-$ npm run deploy -- --stage prod
+$ npx sst deploy --stage prod
 ```
 
 This command will take a few minutes as it'll deploy your app to a completely new environment. Recall that we are deploying to a separate prod environment because we don't want to affect our users while we are actively developing our app. This ensures that we have a separate local dev environment and a separate prod environment.
@@ -48,7 +48,7 @@ This command will take a few minutes as it'll deploy your app to a completely ne
 At the end of the deploy process you should see something like this.
 
 ```bash
-Stack prod-notes-api
+Stack prod-notes-ApiStack
   Status: no changes
   Outputs:
     ApiEndpoint: https://api.my-serverless-app.com
