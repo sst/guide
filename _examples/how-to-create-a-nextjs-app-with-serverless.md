@@ -54,11 +54,12 @@ Here's what we'll be covering in this example:
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst -- typescript-starter nextjs-app
+$ npm init sst typescript-starter nextjs-app
 $ cd nextjs-app
+$ npm install
 ```
 
-By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
+By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ```json
 {
@@ -358,7 +359,7 @@ Note, the DynamoDB explorer allows you to query the DynamoDB tables in the Table
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npm run deploy -- --stage prod
+$ npx sst deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in our local environment, it doesn't break the app for our users. You can stop the `npm start` command that we had previously run.
@@ -384,8 +385,8 @@ If you head over to the `URL` in your browser, you should see your new Next.js a
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npm run remove
-$ npm run remove -- --stage prod
+$ npx sst remove
+$ npx sst remove --stage prod
 ```
 
 ---

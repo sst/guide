@@ -26,11 +26,12 @@ In this example we will look at how to create a CRUD API with serverless using [
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst -- typescript-starter crud-api-dynamodb
+$ npm init sst typescript-starter crud-api-dynamodb
 $ cd crud-api-dynamodb
+$ npm install
 ```
 
-By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
+By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ```json
 {
@@ -424,7 +425,7 @@ You should see an error being printed out.
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npm run deploy -- --stage prod
+$ npx sst deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the app for our users.
@@ -444,7 +445,7 @@ Stack prod-rest-api-dynamodb-my-stack
 Run the below command to open the SST Console in **prod** stage to test the production endpoint.
 
 ```bash
-npm run console -- --stage prod
+npx sst console --stage prod
 ```
 
 Go to the **API** explorer and click **Send** button of the `GET /notes` route, to send a `GET` request.
@@ -456,8 +457,8 @@ Go to the **API** explorer and click **Send** button of the `GET /notes` route, 
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npm run remove
-$ npm run remove -- --stage prod
+$ npx sst remove
+$ npx sst remove --stage prod
 ```
 
 ## Conclusion

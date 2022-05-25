@@ -25,11 +25,12 @@ In this example we will look at how to use [Angular](https://angular.io) with a 
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst -- typescript-starter angular-app
+$ npm init sst typescript-starter angular-app
 $ cd angular-app
+$ npm install
 ```
 
-By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
+By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ```json
 {
@@ -509,7 +510,7 @@ This replaces `{{ PROD_API_URL }}` with the deployed API endpoint in all the `.j
 {%change%} That's it, now run the deploy command.
 
 ```bash
-$ npm run deploy -- --stage prod
+$ npx sst deploy --stage prod
 ```
 
 The `--stage` option allows us to separate our environments, so when we are working in locally, it doesn't break the app for our users.
@@ -530,7 +531,7 @@ Stack prod-angular-app-my-stack
 Run the below command to open the SST Console in **prod** stage to test the production endpoint.
 
 ```bash
-npm run console -- --stage prod
+npx sst console --stage prod
 ```
 
 Go to the **API** tab and click **Send** button to send a `POST` request.
@@ -544,8 +545,8 @@ If you head over to the `SiteUrl` in your browser, you should see your new Angul
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npm run remove
-$ npm run remove -- --stage prod
+$ npx sst remove
+$ npx sst remove --stage prod
 ```
 
 ## Conclusion

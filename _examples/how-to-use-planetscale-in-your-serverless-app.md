@@ -27,11 +27,12 @@ In this example we will look at how to use PlanetScale in our serverless app usi
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst -- typescript-starter planetscale
+$ npm init sst typescript-starter planetscale
 $ cd planetscale
+$ npm install
 ```
 
-By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
+By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ```json
 {
@@ -283,7 +284,7 @@ And now if you head over to your console and click the **Send** button again you
 Note, `env.local` is not committed to the git and remember to set the environment variables in your CI pipeline.
 
 ```bash
-$ npm run deploy -- --stage prod
+$ npx sst deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
@@ -303,7 +304,7 @@ Stack prod-planetscale-my-stack
 Run the below command to open the SST Console in **prod** stage to test the production endpoint.
 
 ```bash
-npm run console -- --stage prod
+npx sst console --stage prod
 ```
 
 Go to the **API** explorer and click **Send** button of the `POST /` route, to send a `POST` request.
@@ -315,8 +316,8 @@ Go to the **API** explorer and click **Send** button of the `POST /` route, to s
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npm run remove
-$ npm run remove -- --stage prod
+$ npx sst remove
+$ npx sst remove --stage prod
 ```
 
 ## Conclusion

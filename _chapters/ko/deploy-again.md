@@ -2,20 +2,20 @@
 layout: post
 title: Deploy Again
 date: 2017-02-14 00:00:00
-lang: ko 
-description: S3 및 CloudFront에서 호스팅되는 React.js 앱에 업데이트를 배포하려면 S3에 앱을 업로드하고 CloudFront 캐시를 무효화해야합니다. AWS CLI에서 “aws cloudfront create-invalidation” 명령을 사용하여 이 작업을 수행 할 수 있습니다. “npm run deploy”를 실행하여 이러한 단계를 자동화하려면 이 명령을 추가하여 package.json에 사전 배포, 배포 및 사후 배포를 수행합니다.
+lang: ko
+description: S3 및 CloudFront에서 호스팅되는 React.js 앱에 업데이트를 배포하려면 S3에 앱을 업로드하고 CloudFront 캐시를 무효화해야합니다. AWS CLI에서 “aws cloudfront create-invalidation” 명령을 사용하여 이 작업을 수행 할 수 있습니다. “npx sst deploy”를 실행하여 이러한 단계를 자동화하려면 이 명령을 추가하여 package.json에 사전 배포, 배포 및 사후 배포를 수행합니다.
 context: true
 comments_id: deploy-again/138
 ref: deploy-again
 ---
 
-이제 앱을 약간 변경 했으므로 업데이트를 배포해 보겠습니다. 참고로 업데이트를 배포 할 때마다 반복해야하는  프로세스입니다.
+이제 앱을 약간 변경 했으므로 업데이트를 배포해 보겠습니다. 참고로 업데이트를 배포 할 때마다 반복해야하는 프로세스입니다.
 
-### 앱 빌드 
+### 앱 빌드
 
 먼저 앱을 제작하여 앱을 준비해 봅시다. 작업 디렉토리에서 다음을 실행하십시오.
 
-``` bash
+```bash
 $ npm run build
 ```
 
@@ -25,7 +25,7 @@ $ npm run build
 
 작업 디렉토리에서 다음을 실행하여 S3 버킷에 앱을 업로드하십시오. `YOUR_S3_DEPLOY_BUCKET_NAME`을 [S3 버킷 생성하기]({% link _chapters/create-an-s3-bucket.md %}) 챕터에서 생성한 S3 버킷으로 바꿔야합니다.
 
-``` bash
+```bash
 $ aws s3 sync build/ s3://YOUR_S3_DEPLOY_BUCKET_NAME --delete
 ```
 
@@ -47,7 +47,7 @@ CloudFront를 사용하면 객체 경로를 전달하여 배포본의 객체를 
 
 이제 AWS CLI를 사용하여 두 배포본의 캐시를 무효화 할 수 있습니다. `YOUR_CF_DISTRIBUTION_ID`와 `YOUR_WWW_CF_DISTRIBUTION_ID`을 위에있는 것과 바꾸십시오.
 
-``` bash
+```bash
 $ aws cloudfront create-invalidation --distribution-id YOUR_CF_DISTRIBUTION_ID --paths "/*"
 $ aws cloudfront create-invalidation --distribution-id YOUR_WWW_CF_DISTRIBUTION_ID --paths "/*"
 ```
@@ -68,7 +68,7 @@ NPM을 사용하면 `package.json`에`deploy` 명령을 추가할 수 있습니�
 
 {%change%} `package.json`에서 `eject` 위에 `scripts` 블럭을 다음 내용으로 추가합니다.
 
-``` coffee
+```coffee
 "predeploy": "npm run build",
 "deploy": "aws s3 sync build/ s3://YOUR_S3_DEPLOY_BUCKET_NAME --delete",
 "postdeploy": "aws cloudfront create-invalidation --distribution-id YOUR_CF_DISTRIBUTION_ID --paths '/*' && aws cloudfront create-invalidation --distribution-id YOUR_WWW_CF_DISTRIBUTION_ID --paths '/*'",
@@ -84,14 +84,14 @@ An error occurred (InvalidArgument) when calling the CreateInvalidation operatio
 
 `/*`에 따옴표가 없는지 확인하십시오.
 
-``` coffee
+```coffee
 "postdeploy": "aws cloudfront create-invalidation --distribution-id YOUR_CF_DISTRIBUTION_ID --paths /* && aws cloudfront create-invalidation --distribution-id YOUR_WWW_CF_DISTRIBUTION_ID --paths /*",
 ```
 
 이제 업데이트를 배포할 때 프로젝트 루트에서 다음 명령을 실행하기만하면됩니다. 앱을 빌드하고 S3에 업로드하고 CloudFront 캐시를 무효화합니다.
 
-``` bash
-$ npm run deploy
+```bash
+$ npx sst deploy
 ```
 
 이제 앱이 완성되었습니다. 그리고 여기까지가 Part I의 끝입니다. 다음 챕터에서는 이 스택을 자동화하여 향후 프로젝트에 사용할 수있는 방법을 살펴 보겠습니다. [AWS Amplify를 사용하는 Cognito의 Facebook 로그인]({% link _chapters/facebook-login-with-cognito-using-aws-amplify.md %}) 챕터에서 Facebook 로그인을 추가하는 방법을 살펴볼 수도 있는데, 모두 지금까지 Part I에서 다루었던 것을 토대로 진행됩니다.

@@ -3,7 +3,7 @@ layout: post
 title: Deploy Updates
 date: 2017-02-12 00:00:00
 lang: en
-description: To be able to deploy updates to our React.js app hosted on S3 and CloudFront, we need to uploads our app to S3 and invalidate the CloudFront cache. We can do this using the “aws cloudfront create-invalidation” command in our AWS CLI. To automate these steps by running “npm run deploy”, we will add these commands to predeploy, deploy, and postdeploy scripts in our package.json.
+description: To be able to deploy updates to our React.js app hosted on S3 and CloudFront, we need to uploads our app to S3 and invalidate the CloudFront cache. We can do this using the “aws cloudfront create-invalidation” command in our AWS CLI. To automate these steps by running “npx sst deploy”, we will add these commands to predeploy, deploy, and postdeploy scripts in our package.json.
 redirect_from: /chapters/deploy-again.html
 comments_id: deploy-updates/16
 ref: deploy-updates
@@ -23,7 +23,7 @@ Let's assume you've made some changes to your app; you'll need to build these ch
 
 First let's prepare our app for production by building it. Run the following in your working directory.
 
-``` bash
+```bash
 $ npm run build
 ```
 
@@ -33,7 +33,7 @@ Now that our app is built and ready in the `build/` directory, let's deploy to S
 
 Run the following from our working directory to upload our app to our main S3 Bucket. Make sure to replace `YOUR_S3_DEPLOY_BUCKET_NAME` with the S3 Bucket we created in the [Create an S3 bucket]({% link _chapters/create-an-s3-bucket.md %}) chapter.
 
-``` bash
+```bash
 $ aws s3 sync build/ s3://YOUR_S3_DEPLOY_BUCKET_NAME --delete
 ```
 
@@ -51,7 +51,7 @@ To do this we'll need the **Distribution ID** of **both** of our CloudFront Dist
 
 Now we can use the AWS CLI to invalidate the cache of the two distributions. Make sure to replace `YOUR_CF_DISTRIBUTION_ID` and `YOUR_WWW_CF_DISTRIBUTION_ID` with the ones from above.
 
-``` bash
+```bash
 $ aws cloudfront create-invalidation --distribution-id YOUR_CF_DISTRIBUTION_ID --paths "/*"
 $ aws cloudfront create-invalidation --distribution-id YOUR_WWW_CF_DISTRIBUTION_ID --paths "/*"
 ```
@@ -70,7 +70,7 @@ NPM allows us to add a `deploy` command in our `package.json`.
 
 {%change%} Add the following in the `scripts` block above `eject` in the `package.json`.
 
-``` coffee
+```coffee
 "predeploy": "npm run build",
 "deploy": "aws s3 sync build/ s3://YOUR_S3_DEPLOY_BUCKET_NAME --delete",
 "postdeploy": "aws cloudfront create-invalidation --distribution-id YOUR_CF_DISTRIBUTION_ID --paths '/*' && aws cloudfront create-invalidation --distribution-id YOUR_WWW_CF_DISTRIBUTION_ID --paths '/*'",
@@ -80,21 +80,20 @@ Make sure to replace `YOUR_S3_DEPLOY_BUCKET_NAME`, `YOUR_CF_DISTRIBUTION_ID`, an
 
 For Windows users, if `postdeploy` returns an error like.
 
-``` txt
+```txt
 An error occurred (InvalidArgument) when calling the CreateInvalidation operation: Your request contains one or more invalid invalidation paths.
 ```
 
 Make sure that there is no quote in the `/*`.
 
-``` coffee
+```coffee
 "postdeploy": "aws cloudfront create-invalidation --distribution-id YOUR_CF_DISTRIBUTION_ID --paths /* && aws cloudfront create-invalidation --distribution-id YOUR_WWW_CF_DISTRIBUTION_ID --paths /*",
 ```
 
 Now simply run the following command from your project root when you want to deploy your updates. It'll build your app, upload it to S3, and invalidate the CloudFront cache.
 
-``` bash
-$ npm run deploy
+```bash
+$ npx sst deploy
 ```
 
 And that's it! Now you have a workflow for deploying and updating your React app on AWS using S3 and CloudFront.
-

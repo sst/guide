@@ -34,11 +34,12 @@ Here is a video of it in action.
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst -- typescript-starter graphql-appsync
+$ npm init sst typescript-starter graphql-appsync
 $ cd graphql-appsync
+$ npm install
 ```
 
-By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
+By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ```json
 {
@@ -505,7 +506,7 @@ Now that our API is tested, let's deploy it to production. You'll recall that we
 {%change%} Run the following in your terminal.
 
 ```bash
-$ npm run deploy -- --stage prod
+$ npx sst deploy --stage prod
 ```
 
 ## Cleaning up
@@ -513,8 +514,8 @@ $ npm run deploy -- --stage prod
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npm run remove
-$ npm run remove -- --stage prod
+$ npx sst remove
+$ npx sst remove --stage prod
 ```
 
 ## Conclusion

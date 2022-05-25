@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Code Splitting in Create React App
-description: Code splitting in Create React App is an easy way to reduce the size of your React.js app bundle. To do this in an app using React Router v6, we can asynchronously load our routes using the dynamic import() method that Create React App supports.
+description: Code splitting in Create React App is an easy way to reduce the size of your React.js app bundle. To do this in an app using React Router v5, we can asynchronously load our routes using the dynamic import() method that Create React App supports.
 date: 2018-04-17 00:00:00
 comments_id: code-splitting-in-create-react-app/98
 ---
@@ -18,7 +18,7 @@ Create React App (from 1.0 onwards) allows us to dynamically import parts of our
 
 While, the dynamic `import()` can be used for any component in our React app; it works really well with React Router. Since, React Router is figuring out which component to load based on the path; it would make sense that we dynamically import those components only when we navigate to them.
 
-### Code Splitting and React Router v6
+### Code Splitting and React Router v5
 
 The usual structure used by React Router to set up routing for your app looks something like this.
 
@@ -219,7 +219,7 @@ Now if you build your app using `npm run build`; you'll see the code splitting i
 
 Each of those `.chunk.js` files are the different dynamic `import()` calls that we have. Of course, our app is quite small and the various parts that are split up are not significant at all. However, if the page that we use to edit our note included a rich text editor; you can imagine how that would grow in size. And it would unfortunately affect the initial load time of our app.
 
-Now if we deploy our app using `npm run deploy`; you can see the browser load the different chunks on-demand as we browse around in the [demo](https://demo.serverless-stack.com).
+Now if we deploy our app using `npx sst deploy`; you can see the browser load the different chunks on-demand as we browse around in the [demo](https://demo.serverless-stack.com).
 
 ![Create React App loading Code Splitting screenshot](/assets/create-react-app-loading-code-splitting.png)
 
