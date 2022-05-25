@@ -27,11 +27,12 @@ In this example we will look at how to add [Auth0](https://auth0.com) authentica
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst -- typescript-starter api-auth-auth0
+$ npm init sst typescript-starter api-auth-auth0
 $ cd api-auth-auth0
+$ npm install
 ```
 
-By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
+By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ```json
 {
@@ -343,7 +344,7 @@ However, we are going to deploy your API again. But to a different environment, 
 {%change%} Run the following in your terminal.
 
 ```bash
-$ npm run deploy -- --stage prod
+$ npx sst deploy --stage prod
 ```
 
 A note on these environments. SST is simply deploying the same app twice using two different `stage` names. It prefixes the resources with the stage names to ensure that they don't thrash.
@@ -353,13 +354,13 @@ A note on these environments. SST is simply deploying the same app twice using t
 Finally, you can remove the resources created in this example using the following command.
 
 ```bash
-$ npm run remove
+$ npx sst remove
 ```
 
 And to remove the prod environment.
 
 ```bash
-$ npm run remove -- --stage prod
+$ npx sst remove --stage prod
 ```
 
 ## Conclusion

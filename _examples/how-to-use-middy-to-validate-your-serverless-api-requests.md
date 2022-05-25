@@ -30,11 +30,12 @@ In this example we will look at how to use the [Middy validator](https://middy.j
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst -- typescript-starter middy-validator
+$ npm init sst typescript-starter middy-validator
 $ cd middy-validator
+$ npm install
 ```
 
-By default our app will be deployed to the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
+By default, our app will be deployed to the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ```json
 {
@@ -346,7 +347,7 @@ statusCode: 200,
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npm run deploy -- --stage prod
+$ npx sst deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the app for our users.
@@ -368,8 +369,8 @@ Stack prod-middy-validator-my-stack
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npm run remove
-$ npm run remove -- --stage prod
+$ npx sst remove
+$ npx sst remove --stage prod
 ```
 
 ## Conclusion

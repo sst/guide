@@ -46,7 +46,7 @@ export default function Settings() {
 import Settings from "./containers/Settings";
 ```
 
-{%change%} Add the following below the `/signup` route in our `<Switch>` block in `src/Routes.js`.
+{%change%} Add the following below the `/signup` route in our `<Routes>` block in `src/Routes.js`.
 
 ```jsx
 <Route path="/settings" element={<Settings />} />

@@ -16,13 +16,13 @@ In this chapter we will look at some simple ways to configure multiple environme
 
 [Create React App](https://create-react-app.dev/docs/adding-custom-environment-variables/) has support for custom environment variables baked into the build system. To set a custom environment variable, simply set it while starting the Create React App build process.
 
-``` bash
+```bash
 $ REACT_APP_TEST_VAR=123 npm start
 ```
 
 Here `REACT_APP_TEST_VAR` is the custom environment variable and we are setting it to the value `123`. In our app we can access this variable as `process.env.REACT_APP_TEST_VAR`. So the following line in our app:
 
-``` js
+```js
 console.log(process.env.REACT_APP_TEST_VAR);
 ```
 
@@ -35,11 +35,11 @@ Note that, these variables are embedded during build time. Also, only the variab
 We can use this idea of custom environment variables to configure our React app for specific environments. Say we used a custom environment variable called `REACT_APP_STAGE` to denote the environment our app is in. And we wanted to configure two environments for our app:
 
 - One that we will use for our local development and also to test before pushing it to live. Let's call this one `dev`.
-- And our live environment that we will only push to, once we are comfortable with our changes. Let's call it `production`. 
+- And our live environment that we will only push to, once we are comfortable with our changes. Let's call it `production`.
 
 The first thing we can do is to configure our build system with the `REACT_APP_STAGE` environment variable. Currently the `scripts` portion of our `package.json` looks something like this:
 
-``` jsx
+```jsx
 "scripts": {
   "start": "react-scripts start",
   "build": "react-scripts build",
@@ -53,11 +53,11 @@ The first thing we can do is to configure our build system with the `REACT_APP_S
 
 Recall that the `YOUR_S3_DEPLOY_BUCKET_NAME` is the S3 bucket we created to host our React app back in the [Create an S3 bucket]({% link _chapters/create-an-s3-bucket.md %}) chapter. And `YOUR_CF_DISTRIBUTION_ID` and `YOUR_WWW_CF_DISTRIBUTION_ID` are the CloudFront Distributions for the [apex]({% link _chapters/create-a-cloudfront-distribution.md %}) and [www]({% link _chapters/setup-www-domain-redirect.md %}) domains.
 
-Here we only have one environment and we use it for our local development and on live. The `npm start` command runs our local server and `npm run deploy` command deploys our app to live.
+Here we only have one environment and we use it for our local development and on live. The `npm start` command runs our local server and `npx sst deploy` command deploys our app to live.
 
 To set our two environments we can change this to:
 
-``` jsx
+```jsx
 "scripts": {
   "start": "REACT_APP_STAGE=dev react-scripts start",
   "build": "react-scripts build",
@@ -79,9 +79,9 @@ We are doing a few things of note here:
 
 1. We use the `REACT_APP_STAGE=dev` for our `npm start` command.
 2. We also have dev versions of our S3 and CloudFront Distributions called `YOUR_DEV_S3_DEPLOY_BUCKET_NAME`, `YOUR_DEV_CF_DISTRIBUTION_ID`, and `YOUR_DEV_WWW_CF_DISTRIBUTION_ID`.
-3. We default `npm run deploy` to the dev environment and dev versions of our S3 and CloudFront Distributions. We also build using the `REACT_APP_STAGE=dev` environment variable.
+3. We default `npx sst deploy` to the dev environment and dev versions of our S3 and CloudFront Distributions. We also build using the `REACT_APP_STAGE=dev` environment variable.
 4. We have production versions of our S3 and CloudFront Distributions called `YOUR_PROD_S3_DEPLOY_BUCKET_NAME`, `YOUR_PROD_CF_DISTRIBUTION_ID`, and `YOUR_PROD_WWW_CF_DISTRIBUTION_ID`.
-5. Finally, we create a specific version of the deploy script for the production environment with `npm run deploy:prod`. And just like the dev version of this command, it builds using the `REACT_APP_STAGE=production` environment variable and the production versions of the S3 and CloudFront Distributions.
+5. Finally, we create a specific version of the deploy script for the production environment with `npx sst deploy:prod`. And just like the dev version of this command, it builds using the `REACT_APP_STAGE=production` environment variable and the production versions of the S3 and CloudFront Distributions.
 
 Note that you don't have to replicate the S3 and CloudFront Distributions for the dev version. But it does help if you want to mimic the live version as much as possible.
 
@@ -91,69 +91,66 @@ Now that we have our build commands set up with the custom environment variables
 
 Currently, our `src/config.js` looks something like this:
 
-``` js
+```js
 export default {
   MAX_ATTACHMENT_SIZE: 5000000,
   s3: {
-    BUCKET: "YOUR_S3_UPLOADS_BUCKET_NAME"
+    BUCKET: "YOUR_S3_UPLOADS_BUCKET_NAME",
   },
   apiGateway: {
     REGION: "YOUR_API_GATEWAY_REGION",
-    URL: "YOUR_API_GATEWAY_URL"
+    URL: "YOUR_API_GATEWAY_URL",
   },
   cognito: {
     REGION: "YOUR_COGNITO_REGION",
     USER_POOL_ID: "YOUR_COGNITO_USER_POOL_ID",
     APP_CLIENT_ID: "YOUR_COGNITO_APP_CLIENT_ID",
-    IDENTITY_POOL_ID: "YOUR_IDENTITY_POOL_ID"
-  }
+    IDENTITY_POOL_ID: "YOUR_IDENTITY_POOL_ID",
+  },
 };
 ```
 
 To use the `REACT_APP_STAGE` variable, we are just going to set the config conditionally.
 
-
-``` js
+```js
 const dev = {
   s3: {
-    BUCKET: "YOUR_DEV_S3_UPLOADS_BUCKET_NAME"
+    BUCKET: "YOUR_DEV_S3_UPLOADS_BUCKET_NAME",
   },
   apiGateway: {
     REGION: "YOUR_DEV_API_GATEWAY_REGION",
-    URL: "YOUR_DEV_API_GATEWAY_URL"
+    URL: "YOUR_DEV_API_GATEWAY_URL",
   },
   cognito: {
     REGION: "YOUR_DEV_COGNITO_REGION",
     USER_POOL_ID: "YOUR_DEV_COGNITO_USER_POOL_ID",
     APP_CLIENT_ID: "YOUR_DEV_COGNITO_APP_CLIENT_ID",
-    IDENTITY_POOL_ID: "YOUR_DEV_IDENTITY_POOL_ID"
-  }
+    IDENTITY_POOL_ID: "YOUR_DEV_IDENTITY_POOL_ID",
+  },
 };
 
 const prod = {
   s3: {
-    BUCKET: "YOUR_PROD_S3_UPLOADS_BUCKET_NAME"
+    BUCKET: "YOUR_PROD_S3_UPLOADS_BUCKET_NAME",
   },
   apiGateway: {
     REGION: "YOUR_PROD_API_GATEWAY_REGION",
-    URL: "YOUR_PROD_API_GATEWAY_URL"
+    URL: "YOUR_PROD_API_GATEWAY_URL",
   },
   cognito: {
     REGION: "YOUR_PROD_COGNITO_REGION",
     USER_POOL_ID: "YOUR_PROD_COGNITO_USER_POOL_ID",
     APP_CLIENT_ID: "YOUR_PROD_COGNITO_APP_CLIENT_ID",
-    IDENTITY_POOL_ID: "YOUR_PROD_IDENTITY_POOL_ID"
-  }
+    IDENTITY_POOL_ID: "YOUR_PROD_IDENTITY_POOL_ID",
+  },
 };
 
-const config = process.env.REACT_APP_STAGE === 'production'
-  ? prod
-  : dev;
+const config = process.env.REACT_APP_STAGE === "production" ? prod : dev;
 
 export default {
   // Add common config values here
   MAX_ATTACHMENT_SIZE: 5000000,
-  ...config
+  ...config,
 };
 ```
 
@@ -165,7 +162,7 @@ So to recap:
 
 - The `REACT_APP_STAGE` custom environment variable is set to either `dev` or `production`.
 - While working locally we use the `npm start` command which uses our dev environment.
-- The `npm run deploy` command then deploys by default to dev.
-- Once we are comfortable with the dev version, we can deploy to production using the `npm run deploy:prod` command.
+- The `npx sst deploy` command then deploys by default to dev.
+- Once we are comfortable with the dev version, we can deploy to production using the `npx sst deploy:prod` command.
 
 This entire setup is fairly straightforward and can be extended to multiple environments. You can read more on custom environment variables in Create React App [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-custom-environment-variables).

@@ -131,13 +131,13 @@ export default class Home extends Component {
 
 ```coffee
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./containers/Home";
 
 export default () =>
-  <Switch>
-    <Route path="/" exact component={Home} />
-  </Switch>;
+  <Routes>
+    <Route path="/" element={Home} />
+  </Routes>;
 ```
 
 이 구성 요소는 React-Router의 `Switch` 컴포넌트를 사용하여 그 안에 정의 된 첫 번째로 일치하는 경로를 렌더링합니다. 지금은 단 하나의 경로만을 가지고 있습니다. `/`를 찾아서 일치 할 때 `Home` 컴포넌트를 렌더링합니다. 그리고 `exact` 속성을 사용하여 `/` 경로와 정확히 일치하는지 확인합니다. `/` 경로는 `/`로 시작하는 다른 경로와도 일치하기 때문입니다.

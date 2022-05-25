@@ -26,11 +26,12 @@ In this example we will look at how to use PostgreSQL in our serverless app usin
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst -- typescript-starter rest-api-postgresql
+$ npm init sst typescript-starter rest-api-postgresql
 $ cd rest-api-postgresql
+$ npm install
 ```
 
-By default our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
+By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ```json
 {
@@ -298,7 +299,7 @@ Note, to revert back to a specific migration, re-run its previous migration.
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npm run deploy -- --stage prod
+$ npx sst deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
@@ -306,7 +307,7 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Run the below command to open the SST Console in **prod** stage to test the production endpoint.
 
 ```bash
-npm run console -- --stage prod
+npx sst console --stage prod
 ```
 
 Go to the **API** tab and click **Send** button to send a `POST` request.
@@ -318,8 +319,8 @@ Go to the **API** tab and click **Send** button to send a `POST` request.
 Finally, you can remove the resources created in this example using the following commands.
 
 ```bash
-$ npm run remove
-$ npm run remove -- --stage prod
+$ npx sst remove
+$ npx sst remove --stage prod
 ```
 
 ## Conclusion

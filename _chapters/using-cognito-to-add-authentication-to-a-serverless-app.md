@@ -628,14 +628,14 @@ We can also hit the logout button, it'll clear the session and we won't be able 
 Finally, you can deploy your app to prod by:
 
 ```bash
-$ npm run deploy -- --stage prod
+$ npx sst deploy --stage prod
 ```
 
 And once you are done, you can remove all the resources we've created by running.
 
 ```bash
-$ npm run remove
-$ npm run remove --stage prod
+$ npx sst remove
+$ npx sst remove --stage prod
 ```
 
 Make sure to check out the example repo on GitHub.

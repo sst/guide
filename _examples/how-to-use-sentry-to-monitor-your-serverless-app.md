@@ -31,11 +31,12 @@ When a serverless app is deployed to production, it's useful to be able to monit
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst -- typescript-starter sentry
+$ npm init sst typescript-starter sentry
 $ cd sentry
+$ npm install
 ```
 
-By default our app will be deployed to the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
+By default, our app will be deployed to the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
 ```json
 {
@@ -177,7 +178,7 @@ We need to deploy the API in order to track any errors.
 {%change%} Run the following.
 
 ```bash
-$ npm run deploy
+$ npx sst deploy
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app from scratch.
@@ -223,7 +224,7 @@ Now head over to your Sentry dashboard to start exploring key metrics like the e
 Finally, you can remove the resources created in this example using the following.
 
 ```bash
-$ npm run remove
+$ npx sst remove
 ```
 
 ## Conclusion

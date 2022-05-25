@@ -27,8 +27,9 @@ In this example, we will look at how to add GitHub Login to Your Cognito User Po
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst -- typescript-starter api-oauth-github
+$ npm init sst typescript-starter api-oauth-github
 $ cd api-oauth-github
+$ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
@@ -715,7 +716,7 @@ As you can see the private route is only working while we are logged in.
 {%change%} To wrap things up we'll deploy our app to prod.
 
 ```bash
-$ npm run deploy -- --stage prod
+$ npx sst deploy --stage prod
 ```
 
 This allows us to separate our environments, so when we are working in `dev`, it doesn't break the app for our users.
@@ -740,13 +741,13 @@ Stack prod-api-oauth-github-my-stack
 Finally, you can remove the resources created in this example using the following command.
 
 ```bash
-$ npm run remove
+$ npx sst remove
 ```
 
 And to remove the prod environment.
 
 ```bash
-$ npm run remove -- --stage prod
+$ npx sst remove --stage prod
 ```
 
 ## Conclusion
