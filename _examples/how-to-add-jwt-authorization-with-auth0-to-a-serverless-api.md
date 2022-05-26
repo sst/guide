@@ -54,42 +54,61 @@ An SST app is made up of two parts.
 
    The code that's run when your API is invoked is placed in the `backend/` directory of your project.
 
+## Setting up Auth0
+
+Go to the applications page in your Auth0 dashboard and click on **Create Application** button.
+
+![Auth0 create application](/assets/examples/api-auth-jwt-auth0/auth0-create-application.png)
+
+For this example we are going to use React for the frontend so on the next screen select single page application.
+
+![Auth0 choose single page application](/assets/examples/api-auth-jwt-auth0/auth0-spa.png)
+
+Go to the settings tab in your application dashboard and copy the **Domain** and **Client ID** values and add them into a `.env.local` file in the root.
+
+![Auth0 applications page](/assets/examples/api-auth-jwt-auth0/auth0-applications-page.png)
+
+```
+AUTH0_DOMAIN=<YOUR_AUTH0_DOMAIN>
+AUTH0_CLIENT_ID=<YOUR_AUTH0_CLIENT_ID>
+```
+
+Scroll down to **Application URIs** section and add `http://localhost:3000` in Callback, Logout and Web Origins to give access to our React client.
+
+Note, after deployment you need to replace these values with the deployed URL.
+
+![Auth0 URLs setup](/assets/examples/api-auth-jwt-auth0/auth0-urls-setup.png)
+
 ## Setting up the API
 
 Let's start by setting up an API.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following. Make sure to replace the `jwtIssuer` and `jwtAudience` with your Auth0 app's `Domain` and `Client ID`.
+{%change%} Replace the `stacks/MyStack.ts` with the following.
 
-Note that, the `jwtIssuer` option **ends with a trailing slash** (`/`).
+Note that, the `issuer` option **ends with a trailing slash** (`/`).
 
 ```ts
-import * as apigAuthorizers from "@aws-cdk/aws-apigatewayv2-authorizers-alpha";
 import { StackContext, Api } from "@serverless-stack/resources";
 
-export function MyStack({ stack }: StackContext) {
+export function MyStack({ stack, app }: StackContext) {
   // Create Api
   const api = new Api(stack, "Api", {
     authorizers: {
-      jwt: {
+      auth0: {
         type: "jwt",
-        cdk: {
-          authorizer: new apigAuthorizers.HttpJwtAuthorizer(
-            "Authorizer",
-            "https://sst-test.us.auth0.com/",
-            {
-              jwtAudience: ["r7MQkwTZjIzcKhGmlcy9QhMNXnT9qhwX"],
-            }
-          ),
+        jwt: {
+          issuer: process.env.AUTH0_DOMAIN + "/",
+          audience: [process.env.AUTH0_DOMAIN + "/api/v2/"],
         },
       },
     },
     defaults: {
-      authorizer: "jwt",
+      authorizer: "auth0",
     },
     routes: {
-      "GET /private": "functions/private.handler",
+      "GET /private": "functions/private.main",
       "GET /public": {
-        function: "functions/public.handler",
+        function: "functions/public.main",
         authorizer: "none",
       },
     },
@@ -111,19 +130,6 @@ GET /public
 
 To secure our APIs we are adding the authorization type `JWT` and a JWT authorizer. This means the caller of the API needs to pass in a valid JWT token. In this case, it relies on Auth0 to authenticate users. The first route is a private endpoint. The second is a public endpoint and its authorization type is overridden to `NONE`.
 
-Let's install the npm packages we are using here.
-
-{%change%} Update the `package.json` in the root.
-
-```json
-...
-"aws-cdk-lib": "2.20.0",
-"@aws-cdk/aws-apigatewayv2-alpha": "2.20.0-alpha.0"
-...
-```
-
-You can find the latest CDK versions supported by SST in our [releases](https://github.com/serverless-stack/serverless-stack/releases).
-
 ## Adding function code
 
 Let's create two functions, one handling the public route, and the other for the private route.
@@ -142,15 +148,97 @@ export async function handler() {
 {%change%} Add a `backend/functions/private.ts`.
 
 ```ts
-export async function handler() {
+import { APIGatewayProxyHandlerV2WithJWTAuthorizer } from "aws-lambda";
+
+export const main: APIGatewayProxyHandlerV2WithJWTAuthorizer = async (
+  event
+) => {
   return {
     statusCode: 200,
-    body: "Hello user!",
+    body: `Hello ${event.requestContext.authorizer.jwt.claims.sub}!`,
   };
-}
+};
 ```
 
-Now let's test our new API.
+## Setting up our React app
+
+To deploy a React.js app to AWS, we'll be using the SST [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) construct.
+
+{%change%} Replace the following in `stacks/MyStack.ts`:
+
+```ts
+// Show the API endpoint in the output
+stack.addOutputs({
+  ApiEndpoint: api.url,
+});
+```
+
+{%change%} With:
+
+```ts
+const site = new ViteStaticSite(stack, "Site", {
+  path: "frontend",
+  environment: {
+    VITE_APP_AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
+    VITE_APP_AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
+    VITE_APP_API_URL: api.url,
+    VITE_APP_REGION: app.region,
+  },
+});
+
+// Show the API endpoint and other info in the output
+stack.addOutputs({
+  ApiEndpoint: api.url,
+  SiteUrl: site.url,
+});
+```
+
+The construct is pointing to where our React.js app is located. We haven't created our app yet but for now we'll point to the `frontend` directory.
+
+We are also setting up [build time React environment variables](https://vitejs.dev/guide/env-and-mode.html) with the endpoint of our API. The [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
+
+We are going to print out the resources that we created for reference.
+
+Make sure to import the `ViteStaticSite` construct by adding below line
+
+```ts
+import { ViteStaticSite } from "@serverless-stack/resources";
+```
+
+## Creating the frontend
+
+Run the below commands in the root to create a basic react project.
+
+```bash
+# npm 7+, extra double-dash is needed:
+$ npm init vite@latest frontend -- --template react
+$ cd frontend
+$ npm install
+```
+
+This sets up our React app in the `frontend/` directory. Recall that, earlier in the guide we were pointing the `ViteStaticSite` construct to this path.
+
+We also need to load the environment variables from our SST app. To do this, we'll be using the [`@serverless-stack/static-site-env`](https://www.npmjs.com/package/@serverless-stack/static-site-env) package.
+
+{%change%} Install the `static-site-env` package by running the following in the `frontend/` directory.
+
+```bash
+$ npm install @serverless-stack/static-site-env --save-dev
+```
+
+We need to update our start script to use this package.
+
+{%change%} Replace the `dev` script in your `frontend/package.json`.
+
+```bash
+"dev": "vite"
+```
+
+{%change%} With the following:
+
+```bash
+"dev": "sst-env -- vite"
+```
 
 ## Starting your dev environment
 
@@ -189,98 +277,244 @@ Stack dev-api-auth-jwt-auth0-my-stack
     ApiEndpoint: https://9ero2xj9cl.execute-api.us-east-1.amazonaws.com
 ```
 
-The `ApiEndpoint` is the API we just created.
+Let's test our endpoint with the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
-Now let's try out our public route. Head over to the following in your browser. Make sure to replace the URL with your API.
+Go to the **API** tab and click **Send** button of the `GET /public` to send a `GET` request.
 
-```
-https://9ero2xj9cl.execute-api.us-east-1.amazonaws.com/public
-```
+Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` construct. Set the headers, query params, request body, and view the function logs with the response.
 
-You should see the greeting `Hello stranger!`.
+![API explorer invocation response](/assets/examples/api-oauth-google/api-explorer-invocation-response.png)
 
-And if you try to visit the private route, you will see `{"message":"Unauthorized"}`.
+You should see a `Hello, stranger!` in the response body.
 
-```
-https://9ero2xj9cl.execute-api.us-east-1.amazonaws.com/private
-```
+## Adding AWS Amplify
 
-## Login with Auth0
+To use our AWS resources on the frontend we are going to use [AWS Amplify](https://aws.amazon.com/amplify/).
 
-We are going to use Auth0's universal login page to test logging in with Auth0.
+Note, to know more about configuring Amplify with SST check [this chapter]({% link _chapters/configure-aws-amplify.md %}).
 
-First, we'll configure a callback URL that'll be used by the login page. It'll redirect authenticated users to a page with the authorization code. Head over to your Auth0 app, select **Settings**, and add `http://localhost:5678` to the **Allowed Callback URLS**. We don't need a working URL for now. We just need the code. You can later point this to your frontend application.
-
-Next, open up your browser and head over to the login page. Replace the `client_id` with your app's `Client ID`. And the domain in the URL with the one for your Auth0 app.
-
-```text
-https://myorg.us.auth0.com/authorize?response_type=code&client_id=UsGRQJJz5sDfPQDs6bhQ9Oc3hNISuVif&redirect_uri=http://localhost:5678&scope=openid%20profile
-```
-
-Your login page should look something like this. Continue logging in. If you haven't setup a user, you can create one in your Auth0 dashboard.
-
-![Authenticate users using Auth0 Universal Login page](/assets/examples/api-auth-jwt-auth0/authenticate-users-using-auth0-universal-login-page.png)
-
-If the login was successful, the browser will be redirected to the callback URL. Copy the **authorization code** from the URL.
-
-![Generate authorization code for users logged in with Auth0](/assets/examples/api-auth-jwt-auth0/generate-authorization-code-for-users-logged-in-with-auth0.png)
-
-Next, we need to exchange the user's code for tokens. Replace the `url` domain, `client_id` and `client_secret` with the ones for your Auth0 app. Also, replace the `code` with the **authorization code** from above.
+Run the below command to install AWS Amplify and the Auth0 React SDK in the `frontend/` directory.
 
 ```bash
-$ curl --request POST \
-  --url https://myorg.us.auth0.com/oauth/token \
-  --data "grant_type=authorization_code&client_id=UsGRQJJz5sDfPQDs6bhQ9Oc3hNISuVif&client_secret=80ExzyYpIsGZ5WwOUkefgk8mg5tZiAdzisdnMEXybD7CQIBGgtZIEp_xVBGGSK6P&code=EvaUxc_3vp-LZXDk&redirect_uri=http://localhost:5678"
+npm install aws-amplify @auth0/auth0-react
 ```
 
-You should get a couple of tokens for the Auth0 user.
+{%change%} Replace `frontend/src/main.jsx` with below code.
 
-```json
-{
-  "access_token": "0Yl7bZdnkS2LDBbHkpLBXCU2K3SRilnp",
-  "id_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Imk0REpDeWhabncydDN1dTd6TlI4USJ9.eyJuaWNrbmFtZSI6IndhbmdmYW5qaWUiLCJuYW1lIjoid2FuZ2ZhbmppZUBnbWFpbC5jb20iLCJwaWN0dXJlIjoiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvMmE5Y2VlMTkxYWI3NjBlZmI3ZTU1ZTBkN2MzNjZiYmI_cz00ODAmcj1wZyZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZ3YS5wbmciLCJ1cGRhdGVkX2F0IjoiMjAyMS0wMi0yNFQwNDoxMjoxOC40NzJaIiwiaXNzIjoiaHR0cHM6Ly9zc3QtdGVzdC51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjAzNTdhNmQ5OGUzZTUwMDZhOWQ3NGEzIiwiYXVkIjoiVXNHUlFKSno1c0RmUFFEczZiaFE5T2MzaE5JU3VWaWUiLCJpYXQiOjE2MTQxNDAyMTksImV4cCI6MTYxNDE3NjIxOX0.KIB9bNHykhcFuMkXGEbu1TlcAp0A6xyze4wSwUh_BscnOlXjcKN-IoN6cgnt7YXUYJa7StN3WSduJJEx_LRpcrrUQw-V3BSGge06RA4bGWXM7S4rdpu4TCG0Lw_V272AKkWIrEGdOBd_Xw-lC8iwX0HXzuZ6-n4gzHPJAzhZ7Io0akkObsvSlQaRKOOXsx-cShWPXa3ZVThSgK5iO00LrsbPMICvvrQVSlwG2XnQDaonUnrXg6kKn0rP_GegoFCAz3buYDGYK__Z7oDaj4chldAqR1FmnJ2X9MfRmpjuX4-94ebicLv7O9fdMHIQQWCgtLmcu4T0mKpR2e3gL_13gQ",
-  "scope": "openid profile",
-  "expires_in": 86400,
-  "token_type": "Bearer"
+```jsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "./index.css";
+import { Auth0Provider } from "@auth0/auth0-react";
+import Amplify from "aws-amplify";
+
+Amplify.configure({
+  API: {
+    endpoints: [
+      {
+        name: "api",
+        endpoint: import.meta.env.VITE_APP_API_URL,
+        region: import.meta.env.VITE_APP_REGION,
+      },
+    ],
+  },
+});
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <Auth0Provider
+      domain={import.meta.env.VITE_APP_AUTH0_DOMAIN}
+      clientId={import.meta.env.VITE_APP_AUTH0_CLIENT_ID}
+      redirectUri={window.location.origin}
+      audience={`https://${import.meta.env.VITE_APP_AUTH0_DOMAIN}/api/v2/`}
+      scope="read:current_user update:current_user_metadata"
+    >
+      <App />
+    </Auth0Provider>
+  </React.StrictMode>
+);
+```
+
+## Adding login UI
+
+{%change%} Replace `frontend/src/App.jsx` with below code.
+
+{% raw %}
+
+```jsx
+import { API } from "aws-amplify";
+import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+
+const App = () => {
+  const {
+    loginWithRedirect,
+    logout,
+    user,
+    isAuthenticated,
+    isLoading,
+    getAccessTokenSilently,
+  } = useAuth0();
+
+  const publicRequest = async () => {
+    const response = await API.get("api", "/public");
+    alert(JSON.stringify(response));
+  };
+
+  const privateRequest = async () => {
+    try {
+      const accessToken = await getAccessTokenSilently({
+        audience: `https://${import.meta.env.VITE_APP_AUTH0_DOMAIN}/api/v2/`,
+        scope: "read:current_user",
+      });
+      const response = await API.get("api", "/private", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      alert(JSON.stringify(response));
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  if (isLoading) return <div className="container">Loading...</div>;
+
+  return (
+    <div className="container">
+      <h2>SST + Auth0 + React</h2>
+      {isAuthenticated ? (
+        <div className="profile">
+          <p>Welcome!</p>
+          <p>{user.email}</p>
+          <button onClick={logout}>logout</button>
+        </div>
+      ) : (
+        <div>
+          <p>Not signed in</p>
+          <button onClick={loginWithRedirect}>login</button>
+        </div>
+      )}
+      <div className="api-section">
+        <button onClick={publicRequest}>call /public</button>
+        <button onClick={privateRequest}>call /private</button>
+      </div>
+    </div>
+  );
+};
+
+export default App;
+```
+
+{% endraw %}
+
+{%change%} Replace `frontend/src/index.css` with the below styles.
+
+```css
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+button {
+  width: 120px;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #000;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.profile {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 4px;
+}
+.api-section {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.api-section > button {
+  background-color: darkorange;
 }
 ```
 
-Let's make a call to the private route using the JWT token. Make sure to replace the token with **IdToken** from the previous step.
+Let's start our frontend in development environment.
+
+{%change%} In the `frontend/` directory run.
 
 ```bash
-$ curl --url https://9ero2xj9cl.execute-api.us-east-1.amazonaws.com/private \
-  -H "Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Imk0REpDeWhabncydDN1dTd6TlI4USJ9.eyJuaWNrbmFtZSI6IndhbmdmYW5qaWUiLCJuYW1lIjoid2FuZ2ZhbmppZUBnbWFpbC5jb20iLCJwaWN0dXJlIjoiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvMmE5Y2VlMTkxYWI3NjBlZmI3ZTU1ZTBkN2MzNjZiYmI_cz00ODAmcj1wZyZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZ3YS5wbmciLCJ1cGRhdGVkX2F0IjoiMjAyMS0wMi0yNFQwNDoxMjoxOC40NzJaIiwiaXNzIjoiaHR0cHM6Ly9zc3QtdGVzdC51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjAzNTdhNmQ5OGUzZTUwMDZhOWQ3NGEzIiwiYXVkIjoiVXNHUlFKSno1c0RmUFFEczZiaFE5T2MzaE5JU3VWaWUiLCJpYXQiOjE2MTQxNDAyMTksImV4cCI6MTYxNDE3NjIxOX0.KIB9bNHykhcFuMkXGEbu1TlcAp0A6xyze4wSwUh_BscnOlXjcKN-IoN6cgnt7YXUYJa7StN3WSduJJEx_LRpcrrUQw-V3BSGge06RA4bGWXM7S4rdpu4TCG0Lw_V272AKkWIrEGdOBd_Xw-lC8iwX0HXzuZ6-n4gzHPJAzhZ7Io0akkObsvSlQaRKOOXsx-cShWPXa3ZVThSgK5iO00LrsbPMICvvrQVSlwG2XnQDaonUnrXg6kKn0rP_GegoFCAz3buYDGYK__Z7oDaj4chldAqR1FmnJ2X9MfRmpjuX4-94ebicLv7O9fdMHIQQWCgtLmcu4T0mKpR2e3gL_13gQ"
+npm run dev
 ```
 
-You should see the greeting `Hello user!`.
+Open up your browser and go to `http://localhost:3000`.
 
-## Making changes
+![Browser view of localhost](/assets/examples/api-auth-jwt-auth0/browser-view-of-localhost.png)
 
-Let's make a quick change to our private route and print out the caller's user id.
+Note, if you get a blank page add this `<script>` in `frontend/index.html`.
 
-{%change%} Replace `backend/functions/private.ts` with the following.
-
-```ts
-import { APIGatewayProxyHandlerV2 } from "aws-lambda";
-
-export const handler: APIGatewayProxyHandlerV2 = async (event) => {
-  return {
-    statusCode: 200,
-    body: `Hello ${event.requestContext.authorizer.jwt.claims.sub}!`,
-  };
-};
+```html
+<script>
+  if (global === undefined) {
+    var global = window;
+    var global = alert;
+  }
+</script>
 ```
 
-We are getting the user id from the event object.
+There are 2 buttons that invokes the endpoints we created above.
 
-If you head back to the terminal and hit the `/private` endpoint again.
+The **call /public** button invokes **GET /public** route using the `publicRequest` method we created in our frontend.
 
-```bash
-$ curl --url https://9ero2xj9cl.execute-api.us-east-1.amazonaws.com/private \
-  -H "Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Imk0REpDeWhabncydDN1dTd6TlI4USJ9.eyJuaWNrbmFtZSI6IndhbmdmYW5qaWUiLCJuYW1lIjoid2FuZ2ZhbmppZUBnbWFpbC5jb20iLCJwaWN0dXJlIjoiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvMmE5Y2VlMTkxYWI3NjBlZmI3ZTU1ZTBkN2MzNjZiYmI_cz00ODAmcj1wZyZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZ3YS5wbmciLCJ1cGRhdGVkX2F0IjoiMjAyMS0wMi0yNFQwNDoxMjoxOC40NzJaIiwiaXNzIjoiaHR0cHM6Ly9zc3QtdGVzdC51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjAzNTdhNmQ5OGUzZTUwMDZhOWQ3NGEzIiwiYXVkIjoiVXNHUlFKSno1c0RmUFFEczZiaFE5T2MzaE5JU3VWaWUiLCJpYXQiOjE2MTQxNDAyMTksImV4cCI6MTYxNDE3NjIxOX0.KIB9bNHykhcFuMkXGEbu1TlcAp0A6xyze4wSwUh_BscnOlXjcKN-IoN6cgnt7YXUYJa7StN3WSduJJEx_LRpcrrUQw-V3BSGge06RA4bGWXM7S4rdpu4TCG0Lw_V272AKkWIrEGdOBd_Xw-lC8iwX0HXzuZ6-n4gzHPJAzhZ7Io0akkObsvSlQaRKOOXsx-cShWPXa3ZVThSgK5iO00LrsbPMICvvrQVSlwG2XnQDaonUnrXg6kKn0rP_GegoFCAz3buYDGYK__Z7oDaj4chldAqR1FmnJ2X9MfRmpjuX4-94ebicLv7O9fdMHIQQWCgtLmcu4T0mKpR2e3gL_13gQ"
-```
+Similarly, the **call /private** button invokes **GET /private** route using the `privateRequest` method.
 
-You should see `Hello auth0|60357a6d98e3e5006a9d74a3!`.
+When you're not logged in and try to click the buttons, you'll see responses like below.
+
+![public button click without login](/assets/examples/api-oauth-google/public-button-click-without-login.png)
+
+![private button click without login](/assets/examples/api-oauth-google/private-button-click-without-login.png)
+
+Once you click on login, you're asked to login through your Auth0 account.
+
+![login button click auth0 login screen](/assets/examples/api-auth-jwt-auth0/auth0-login-screen.png)
+
+Once it's done you can check your info.
+
+![current logged in user info](/assets/examples/api-auth-jwt-auth0/current-logged-in-user-info.png)
+
+Now that you've authenticated repeat the same steps as you did before, you'll see responses like below.
+
+![public button click with login](/assets/examples/api-auth-jwt-auth0/public-button-click-with-login.png)
+
+![private button click with login](/assets/examples/api-auth-jwt-auth0/private-button-click-with-login.png)
+
+As you can see the private route is only working while we are logged in.
 
 ## Deploying your API
 
@@ -295,6 +529,24 @@ $ npx sst deploy --stage prod
 ```
 
 A note on these environments. SST is simply deploying the same app twice using two different `stage` names. It prefixes the resources with the stage names to ensure that they don't thrash.
+
+Note, if you get any error like `'request' is not exported by __vite-browser-external, imported by node_modules/@aws-sdk/credential-provider-imds/dist/es/remoteProvider/httpRequest.js` replace `vite.config.js` with below code.
+
+```ts
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  ...
+  resolve: {
+    alias: {
+      "./runtimeConfig": "./runtimeConfig.browser",
+    },
+  },
+  ...
+});
+```
 
 ## Cleaning up
 
