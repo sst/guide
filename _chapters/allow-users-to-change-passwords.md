@@ -199,9 +199,14 @@ The above snippet uses the `Auth` module from Amplify to get the current user. A
 {%change%} Let's add our new page to `src/Routes.js`.
 
 ```html
-<AuthenticatedRoute exact path="/settings/password">
-  <ChangePassword />
-</AuthenticatedRoute>
+<Route
+  path="/settings/password"
+  element={
+    <AuthenticatedRoute>
+        <ChangePassword />
+    </AuthenticatedRoute>
+  }
+/>
 ```
 
 {%change%} And import it.
