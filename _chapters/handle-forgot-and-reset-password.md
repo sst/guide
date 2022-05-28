@@ -234,9 +234,14 @@ Finally, let's link this up with the rest of our app.
 {%change%} Add the route to `src/Routes.js`.
 
 ``` html
-<UnauthenticatedRoute exact path="/login/reset">
-  <ResetPassword />
-</UnauthenticatedRoute>
+<Route
+  path="/login/reset"
+  element={
+    <UnauthenticatedRoute>
+      <ResetPassword />
+    </UnauthenticatedRoute>
+  }
+/>
 ```
 
 {%change%} And import it in the header.
