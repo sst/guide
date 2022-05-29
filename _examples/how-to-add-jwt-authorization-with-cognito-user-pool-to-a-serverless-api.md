@@ -60,21 +60,17 @@ Let's start by setting up an API.
 {%change%} Replace the `stacks/MyStack.ts` with the following.
 
 ```ts
-import * as cognito from "aws-cdk-lib/aws-cognito";
-import { Api, StackContext } from "@serverless-stack/resources";
+import {
+  Api,
+  Auth,
+  StackContext,
+  ViteStaticSite,
+} from "@serverless-stack/resources";
 
-export function MyStack({ stack }: StackContext) {
+export function MyStack({ stack, app }: StackContext) {
   // Create User Pool
-  const userPool = new cognito.UserPool(stack, "UserPool", {
-    selfSignUpEnabled: true,
-    signInAliases: { email: true },
-    signInCaseSensitive: false,
-  });
-
-  // Create User Pool Client
-  const userPoolClient = new cognito.UserPoolClient(stack, "UserPoolClient", {
-    userPool,
-    authFlows: { userPassword: true },
+  const auth = new Auth(stack, "Auth", {
+    login: ["email"],
   });
 
   // Create Api
@@ -83,8 +79,8 @@ export function MyStack({ stack }: StackContext) {
       jwt: {
         type: "user_pool",
         userPool: {
-          id: userPool.userPoolId,
-          clientIds: [userPoolClient.userPoolClientId],
+          id: auth.userPoolId,
+          clientIds: [auth.userPoolClientId],
         },
       },
     },
@@ -92,26 +88,27 @@ export function MyStack({ stack }: StackContext) {
       authorizer: "jwt",
     },
     routes: {
-      "GET /private": "functions/private.handler",
+      "GET /private": "functions/private.main",
       "GET /public": {
-        function: "functions/public.handler",
+        function: "functions/public.main",
         authorizer: "none",
       },
     },
   });
 
+  // allowing authenticated users to access API
+  auth.attachPermissionsForAuthUsers([api]);
+
   // Show the API endpoint and other info in the output
   stack.addOutputs({
     ApiEndpoint: api.url,
-    UserPoolId: userPool.userPoolId,
-    UserPoolClientId: userPoolClient.userPoolClientId,
+    UserPoolId: auth.userPoolId,
+    UserPoolClientId: auth.userPoolClientId,
   });
 }
 ```
 
 This creates a [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html); a user directory that manages user sign up and login. We've configured the User Pool to allow users to login with their email and password.
-
-Note, we are enabling the `userPassword` authentication flow for the purpose of this example. We need this to be able to authenticate a user and receive the JWT token via the AWS CLI. You **should not** enable this authentication flow in production.
 
 We are also creating an API here using the [`Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding two routes to it.
 
@@ -129,7 +126,7 @@ Let's create two functions, one for the public route, and one for the private ro
 {%change%} Add a `backend/functions/public.ts`.
 
 ```ts
-export async function handler() {
+export async function main() {
   return {
     statusCode: 200,
     body: "Hello stranger!",
@@ -140,15 +137,101 @@ export async function handler() {
 {%change%} Add a `backend/functions/private.ts`.
 
 ```ts
-export async function handler() {
+import { APIGatewayProxyHandlerV2WithJWTAuthorizer } from "aws-lambda";
+
+export const main: APIGatewayProxyHandlerV2WithJWTAuthorizer = async (
+  event
+) => {
   return {
     statusCode: 200,
-    body: "Hello user!",
+    body: `Hello ${event.requestContext.authorizer.jwt.claims.sub}!`,
   };
-}
+};
 ```
 
-Now let's test our new API.
+## Setting up our React app
+
+To deploy a React.js app to AWS, we'll be using the SST [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) construct.
+
+{%change%} Replace the following in `stacks/MyStack.ts`:
+
+```ts
+// Show the API endpoint in the output
+stack.addOutputs({
+  ApiEndpoint: api.url,
+  UserPoolId: auth.userPoolId,
+  UserPoolClientId: auth.userPoolClientId,
+});
+```
+
+{%change%} With:
+
+```ts
+const site = new ViteStaticSite(stack, "Site", {
+  path: "frontend",
+  environment: {
+    VITE_APP_API_URL: api.url,
+    VITE_APP_REGION: app.region,
+    VITE_APP_USER_POOL_ID: auth.userPoolId,
+    VITE_APP_USER_POOL_CLIENT_ID: auth.userPoolClientId,
+  },
+});
+
+// Show the API endpoint and other info in the output
+stack.addOutputs({
+  ApiEndpoint: api.url,
+  UserPoolId: auth.userPoolId,
+  UserPoolClientId: auth.userPoolClientId,
+  SiteUrl: site.url,
+});
+```
+
+The construct is pointing to where our React.js app is located. We haven't created our app yet but for now we'll point to the `frontend` directory.
+
+We are also setting up [build time React environment variables](https://vitejs.dev/guide/env-and-mode.html) with the endpoint of our API. The [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
+
+We are going to print out the resources that we created for reference.
+
+Make sure to import the `ViteStaticSite` construct by adding below line
+
+```ts
+import { ViteStaticSite } from "@serverless-stack/resources";
+```
+
+## Creating the frontend
+
+Run the below commands in the root to create a basic react project.
+
+```bash
+# npm 7+, extra double-dash is needed:
+$ npm init vite@latest frontend -- --template react
+$ cd frontend
+$ npm install
+```
+
+This sets up our React app in the `frontend/` directory. Recall that, earlier in the guide we were pointing the `ViteStaticSite` construct to this path.
+
+We also need to load the environment variables from our SST app. To do this, we'll be using the [`@serverless-stack/static-site-env`](https://www.npmjs.com/package/@serverless-stack/static-site-env) package.
+
+{%change%} Install the `static-site-env` package by running the following in the `frontend/` directory.
+
+```bash
+$ npm install @serverless-stack/static-site-env --save-dev
+```
+
+We need to update our start script to use this package.
+
+{%change%} Replace the `dev` script in your `frontend/package.json`.
+
+```bash
+"dev": "vite"
+```
+
+{%change%} With the following:
+
+```bash
+"dev": "sst-env -- vite"
+```
 
 ## Starting your dev environment
 
@@ -187,107 +270,387 @@ Stack dev-api-auth-jwt-cognito-user-pool-my-stack
     UserPoolClientId: t4gepqqbmbg90dh61pam8rg9r
     UserPoolId: us-east-1_QLBISRQwA
     ApiEndpoint: https://4foju6nhne.execute-api.us-east-1.amazonaws.com
+    SiteUrl: https://d3uxpgrgqdfnl5.cloudfront.net
 ```
 
-The `ApiEndpoint` is the API we just created. Make a note of the `UserPoolClientId` and `UserPoolId`; we'll need them later.
+Let's test our endpoint with the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
-Now let's try out our public route. Head over to the following in your browser. Make sure to replace the URL with your API.
+Go to the **API** tab and click **Send** button of the `GET /public` to send a `GET` request.
 
-```
-https://4foju6nhne.execute-api.us-east-1.amazonaws.com/public
-```
+Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` construct. Set the headers, query params, request body, and view the function logs with the response.
 
-You should see the greeting `Hello stranger!`.
+![API explorer invocation response](/assets/examples/api-oauth-google/api-explorer-invocation-response.png)
 
-And if you try to visit the private route, you will see `{"message":"Unauthorized"}`.
+You should see a `Hello, stranger!` in the response body.
 
-```
-https://4foju6nhne.execute-api.us-east-1.amazonaws.com/private
-```
+And if you try for `GET /private`, you will see `{"message":"Unauthorized"}`.
 
-## Sign up with Cognito
+## Adding AWS Amplify
 
-Now to visit the private route, we need to create an account in our User Pool. Usually, we'll have our users sign up for an account through our app. But for this example, we'll use the AWS CLI to sign up a user and confirm their account.
+To use our AWS resources on the frontend we are going to use [AWS Amplify](https://aws.amazon.com/amplify/).
 
-Use the following command in your terminal. Replace `--client-id` with `UserPoolClientId` from the `sst start` output above.
+Note, to know more about configuring Amplify with SST check [this chapter]({% link _chapters/configure-aws-amplify.md %}).
+
+Run the below command to install AWS Amplify in the `frontend/` directory.
 
 ```bash
-$ aws cognito-idp sign-up \
-  --region us-east-1 \
-  --client-id t4gepqqbmbg90dh61pam8rg9r \
-  --username admin@example.com \
-  --password Passw0rd!
+npm install aws-amplify
 ```
 
-Next we'll verify the user. Replace `--user-pool-id` with `UserPoolId` from the `sst start` output above.
+{%change%} Replace `frontend/src/main.jsx` with below code.
 
-```bash
-$ aws cognito-idp admin-confirm-sign-up \
-  --region us-east-1 \
-  --user-pool-id us-east-1_QLBISRQwA \
-  --username admin@example.com
+```jsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "./index.css";
+import Amplify from "aws-amplify";
+
+Amplify.configure({
+  Auth: {
+    region: import.meta.env.VITE_APP_REGION,
+    userPoolId: import.meta.env.VITE_APP_USER_POOL_ID,
+    userPoolWebClientId: import.meta.env.VITE_APP_USER_POOL_CLIENT_ID,
+  },
+  API: {
+    endpoints: [
+      {
+        name: "api",
+        endpoint: import.meta.env.VITE_APP_API_URL,
+        region: import.meta.env.VITE_APP_REGION,
+      },
+    ],
+  },
+});
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 ```
 
-Now we'll authenticate the user. Typically, we'll be using our app to do this. But just to test, we'll use the AWS CLI. Recall we had to enable the `userPassword` authentication flow for this to work. Replace `--client-id` with `UserPoolClientId` from the `sst start` output above.
+## Adding Signup component
 
-```bash
-$ aws cognito-idp initiate-auth \
-  --client-id t4gepqqbmbg90dh61pam8rg9r \
-  --auth-flow USER_PASSWORD_AUTH \
-  --auth-parameters USERNAME=admin@example.com,PASSWORD=Passw0rd!
-```
+{%change%} Add a `frontend/src/components/Signup.jsx` with below code.
 
-You should get a set of temporary tokens.
+```jsx
+import { useState } from "react";
+import { Auth } from "aws-amplify";
 
-```json
-{
-  "ChallengeParameters": {},
-  "AuthenticationResult": {
-    "AccessToken": "eyJraWQiOiI4TUxNTUQzVEJoRHJGdk1pYjBUVXlHMXZmaEZJVnMxRzJTMjNWSlJlaG9rPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI5ZGNlMjY3Ni1lNDAxLTQ2MTMtOTc2Zi03NjIwMThkNGE5MzMiLCJldmVudF9pZCI6ImYwMTdmMWQzLWM5MDAtNGEzOS1hODBiLTNjZTJkMzBiZGUyZSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2MTQzNzIzNzQsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX1FMQklTUlF3QSIsImV4cCI6MTYxNDM3NTk3NCwiaWF0IjoxNjE0MzcyMzc0LCJqdGkiOiIyNjY0NDdhOS03OTQzLTQxMDUtYjg2YS05YjQ1NmY5NDk0ZjMiLCJjbGllbnRfaWQiOiJ0NGdlcHFxYm1iZzkwZGg2MXBhbThyZzlyIiwidXNlcm5hbWUiOiI5ZGNlMjY3Ni1lNDAxLTQ2MTMtOTc2Zi03NjIwMThkNGE5MzMifQ.RvAQ1u3n0ZcF7D0tKTWJP9Tvr65PwymOkLT3Ob8iZYViop9-RM8YqK-AnHs4SyK7aP8_OgdTIIx4pdbS9ixsgSSu67pQEwXS-2LxCvlDhEQ8UhDc_YxPxeQanKGb6465BYi3UcXzRIIQd7XQO4NHdMxu7i77VkxKoWbDUNGT8qdhx_cUoESZRHkFiW3pT7vDboot_vtHTzCAsNLAlW5fgQgtONxwn3er8AXFYUTTODL8M3MM8kdw-RhxdwT8kFesJvJATmUY-PypfnYXp4zQfhFvBE-eXNXtBMtEpHqmAfFOjFSIhzGh1Jbst6O_xVa7dbT5w_dXGFGmzBLwLCRpxQ",
-    "ExpiresIn": 3600,
-    "TokenType": "Bearer",
-    "RefreshToken": "eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAifQ.DLXqfzpikKGjG79Av2aR_Vb-F0Nk6RtZz0lUQ5atuFAo5fB65WneZHpfHcNnps5t4pCYHau7aA26ye9aFnjhkYY1XIrfvdCtctYIpH4Zfhd_pfGPZ7Zmj2GnQyzB9EJmCKKros46ZW78nQuqxgJVctKtFG33TQc7e3DA1nJRlrLBq_mjewFuKqryuaLR0wB5OP5iLCrQjXcVJdCxK499jRR6xEpl-xCEfHnW5eP11T78j7SkgXwQObH1SYY1ZvxyFNP8faLW3Vc9oSqwVpbs4JTLoNmKnVrV0XhSCnOzxIsuGZ22rbMq9hvhez58-IgdCeSx4jGe4oo-DnZmL-vQAw.LoTIKvlPNTrIROzu.YhRdBvDoKGRehOHpWW86wkzYvgEC-fdDrjtOaRO5rw5wvwd23rYu2qJ-M2TaQKHy7cEH4oSW1UxxPbdBo74tF5KRpEIiYTafPIW0_KBL7kMJeGG5uN-x-AWvVmgI4wzzsZnYn_yoG2HAQ-gHPNT8flJftRvqXPi0OGcivoY03rm5OGiqVMDXkwKWhwkllTXmYjOLNx3iIAV1arAZ62JppGmZkKErJy7NFqVoxDt5rEF1bEhZ_cn2Z7S3nnMBdUas-aM7CEYVXDynrckshroO9azZGRTeEJSN-zAy8bTZPbRi26QIGArXZr7bz6qEeDeG5mYgFsi_rpcy169fCmfwaKeVQBn7nWY8eiJ-5aWJ_9tPeKhafbjoKHonuN4Hyr9KRB38bhWgtiDe1kbsQBGkNAjwIe_FD-tIZgZ6FSkqZ-lqionAxZB2Z-hQtaoCofuUki7X12Rxz7t4vfw5Ia4wIylSWMuR4PcuWfCltCYjR1T1IMuXdJsCkTv1hjL5-yqGIBGAwchGGayZTbLwLHJrefAZOPEo9arSPPphQeQNAgK60u5LlBS5bmFMlYGmipqfWhiadtsIPLPfU0DzKEsqtxypeL9d-zpWfylDfEgYrcleOV3o_OoJo1h5Oj09obyjIv038H7McsO376bMoAIKEdPwad84WOZlXbrjf7TEqiwUTNaOMpnrbs_JBp25FfeHpfWvGVALFd1kktu-mQHwzCxqaLxh6nsW3wkFkJiANTJs7KgKF4AJ3i-Mw_XEMKfZnKwocS6q0woxbkTMMfSoVnh56Yjyj4VuuaMoOm4WxMamnXHXOjwYafZ6hkcqA0Sodnns1FY_pkHu_xg6T0gqthJS2yBtJ3vvg4HW6_m-rIa-K26FIoVRtcIr6euPeagzuul2ginD4oGtAETcDVUn3UFTHLjk_OcK1T5hAxyD8sysm7KEOtFQRvdALYBS38qP3FiAjdGbMg5NyKufJO_KGi8LKNALRmW1zSN9DugSnZHhwH1XJ2F7xbWH4kb-bvdt-3DCWU9O2BlYj5OJpggSFSf6GLtpKQ81yTyWzU8-eNq5-bG2tBrlIAq8j9rpG0MNYj0l3MQZb9fwCmDVtjwK1mMywAX2rRhQmAQ2zIdMQVD6SvY7_nbsgA1Zqs_16VslLEPDUOu1XuFGqKINoRwvnocdQY8it_7mKwf1WrTd8EAnOcESzq6T5ViFi3oGhMUtm2GMBuUY9GqRF2gj_O6vdXgJ00gDu2T_ZMIBoNBQawH41G9oyoM_T14thaToHLLQvCwTwlqcD0_MIWGErnFhOpXazGzTF-xiEBuEdzFeGsHpICmzFcYfKQrNzg.W-_nygvWnW5CYurFbxYEAQ",
-    "IdToken": "eyJraWQiOiJ4cVFWN0VCWkwrNXpvbUtycHFRYTNSM1F3QzErQ2t4ajRkejhwbEJUbmpJPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI5ZGNlMjY3Ni1lNDAxLTQ2MTMtOTc2Zi03NjIwMThkNGE5MzMiLCJhdWQiOiJ0NGdlcHFxYm1iZzkwZGg2MXBhbThyZzlyIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJldmVudF9pZCI6ImYwMTdmMWQzLWM5MDAtNGEzOS1hODBiLTNjZTJkMzBiZGUyZSIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNjE0MzcyMzc0LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9RTEJJU1JRd0EiLCJjb2duaXRvOnVzZXJuYW1lIjoiOWRjZTI2NzYtZTQwMS00NjEzLTk3NmYtNzYyMDE4ZDRhOTMzIiwiZXhwIjoxNjE0Mzc1OTc0LCJpYXQiOjE2MTQzNzIzNzQsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20ifQ.m8mf_D5rcxoiUAbKUJIjADqP8M2Oti65I85nYmewGBIefhtSubQkYDI2DhyrYL22LLHvIyxKqcc16XLLR25QFxyZnHwrlF8I1YbDg6zVcudwf_ec00zywclfkoqWao8QYf6KN9XsdUzbYsrVcf91K4gBd4gNLn_okyGGCBB5YH8MBvmnALMNZ3gYvDN1iiP15S7HfToFsWm6bUVE2s7S4kaAZnnBkwl7eZauqn2bWzygfaLCJSCMmS_q663gYLZAq-viLiHZIjB9GOZAH1_Ir3FdcB9l1kSjU1EA2mr6NAQ7UzB0g8E9zfTWrOQ3lZOJnazz3pstGgkVjuCQHw8WAw"
-  }
+export default function Signup({ setScreen }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [code, setCode] = useState("");
+  const [verifying, setVerifying] = useState(false);
+
+  return (
+    <div className="signup">
+      <input
+        type="email"
+        placeholder="email"
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="password"
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      {verifying && (
+        <input
+          type="text"
+          placeholder="code"
+          onChange={(e) => setCode(e.target.value)}
+        />
+      )}
+      <button
+        onClick={() => {
+          if (verifying) {
+            Auth.confirmSignUp(email, code).then(() => {
+              setScreen("login");
+            });
+          } else {
+            Auth.signUp({
+              username: email,
+              password,
+            })
+              .then(() => {
+                setVerifying(true);
+              })
+              .catch((e) => alert(e));
+          }
+        }}
+      >
+        {verifying ? "Verify" : "Sign up"}
+      </button>
+      <span onClick={() => setScreen("login")}>
+        Already have an account? Login
+      </span>
+    </div>
+  );
 }
 ```
 
-Let's make a call to the private route using the JWT token. Make sure to replace the token with **IdToken** from the previous step. And the URL with your API endpoint.
+## Adding Signin component
 
-```bash
-$ curl --url https://4foju6nhne.execute-api.us-east-1.amazonaws.com/private \
-  -H "Authorization: Bearer eyJraWQiOiI4TUxNTUQzVEJoRHJGdk1pYjBUVXlHMXZmaEZJVnMxRzJTMjNWSlJlaG9rPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI5ZGNlMjY3Ni1lNDAxLTQ2MTMtOTc2Zi03NjIwMThkNGE5MzMiLCJldmVudF9pZCI6ImYwMTdmMWQzLWM5MDAtNGEzOS1hODBiLTNjZTJkMzBiZGUyZSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2MTQzNzIzNzQsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX1FMQklTUlF3QSIsImV4cCI6MTYxNDM3NTk3NCwiaWF0IjoxNjE0MzcyMzc0LCJqdGkiOiIyNjY0NDdhOS03OTQzLTQxMDUtYjg2YS05YjQ1NmY5NDk0ZjMiLCJjbGllbnRfaWQiOiJ0NGdlcHFxYm1iZzkwZGg2MXBhbThyZzlyIiwidXNlcm5hbWUiOiI5ZGNlMjY3Ni1lNDAxLTQ2MTMtOTc2Zi03NjIwMThkNGE5MzMifQ.RvAQ1u3n0ZcF7D0tKTWJP9Tvr65PwymOkLT3Ob8iZYViop9-RM8YqK-AnHs4SyK7aP8_OgdTIIx4pdbS9ixsgSSu67pQEwXS-2LxCvlDhEQ8UhDc_YxPxeQanKGb6465BYi3UcXzRIIQd7XQO4NHdMxu7i77VkxKoWbDUNGT8qdhx_cUoESZRHkFiW3pT7vDboot_vtHTzCAsNLAlW5fgQgtONxwn3er8AXFYUTTODL8M3MM8kdw-RhxdwT8kFesJvJATmUY-PypfnYXp4zQfhFvBE-eXNXtBMtEpHqmAfFOjFSIhzGh1Jbst6O_xVa7dbT5w_dXGFGmzBLwLCRpxQ"
+{%change%} Add a `frontend/src/components/Signin.jsx` with below code.
+
+```jsx
+import { useState } from "react";
+import { Auth } from "aws-amplify";
+
+export default function Login({ setScreen, setUser }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  return (
+    <div className="login">
+      <input
+        type="email"
+        placeholder="email"
+        autoComplete="off"
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="password"
+        onChange={(e) => setPassword(e.target.value)}
+      />
+
+      <button
+        onClick={() => {
+          Auth.signIn(email, password)
+            .then((user) => setUser(user))
+            .catch((e) => alert(e));
+        }}
+      >
+        Login
+      </button>
+      <span onClick={() => setScreen("signup")}>
+        Don't have an account? Sign up
+      </span>
+    </div>
+  );
+}
 ```
 
-You should see the greeting `Hello user!`.
+## Adding Home Page
 
-## Making changes
+{%change%} Replace `frontend/src/App.jsx` with below code.
 
-Let's make a quick change to our private route to print out the caller's user id.
+{% raw %}
 
-{%change%} Replace `backend/functions/private.ts` with the following.
+```jsx
+import { Auth, API } from "aws-amplify";
+import React, { useState, useEffect } from "react";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 
-```ts
-import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+const App = () => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [screen, setScreen] = useState("signup");
 
-export const handler: APIGatewayProxyHandlerV2 = async (event) => {
-  return {
-    statusCode: 200,
-    body: `Hello ${event.requestContext.authorizer.jwt.claims.sub}!`,
+  // Get the current logged in user info
+  const getUser = async () => {
+    const user = await Auth.currentUserInfo();
+    if (user) setUser(user);
+    setLoading(false);
   };
+
+  // Logout the authenticated user
+  const signOut = async () => {
+    await Auth.signOut();
+    setUser(null);
+  };
+
+  // Send an API call to the /public endpoint
+  const publicRequest = async () => {
+    const response = await API.get("api", "/public");
+    alert(JSON.stringify(response));
+  };
+
+  // Send an API call to the /private endpoint with authentication details.
+  const privateRequest = async () => {
+    try {
+      const response = await API.get("api", "/private", {
+        headers: {
+          Authorization: `Bearer ${(await Auth.currentSession())
+            .getAccessToken()
+            .getJwtToken()}`,
+        },
+      });
+      alert(JSON.stringify(response));
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  // Check if there's any user on mount
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  if (loading) return <div className="container">Loading...</div>;
+
+  return (
+    <div className="container">
+      <h2>SST + Cognito + React</h2>
+      {user ? (
+        <div className="profile">
+          <p>Welcome {user.attributes.given_name}!</p>
+          <p>{user.attributes.email}</p>
+          <button onClick={signOut}>logout</button>
+        </div>
+      ) : (
+        <div>
+          {screen === "signup" ? (
+            <Signup setScreen={setScreen} />
+          ) : (
+            <Login setScreen={setScreen} setUser={setUser} />
+          )}
+        </div>
+      )}
+      <div className="api-section">
+        <button onClick={publicRequest}>call /public</button>
+        <button onClick={privateRequest}>call /private</button>
+      </div>
+    </div>
+  );
 };
+
+export default App;
 ```
 
-We are getting the user id from the event object.
+{% endraw %}
 
-If you make the same authenticated request to the `/private` endpoint.
+{%change%} Replace `frontend/src/index.css` with the below styles.
+
+```css
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+button {
+  width: 120px;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #000;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.profile {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 4px;
+}
+.api-section {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.api-section > button {
+  background-color: darkorange;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.signup,
+.login {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+```
+
+Let's start our frontend in development environment.
+
+{%change%} In the `frontend/` directory run.
 
 ```bash
-$ curl --url https://4foju6nhne.execute-api.us-east-1.amazonaws.com/private \
-  -H "Authorization: Bearer eyJraWQiOiI4TUxNTUQzVEJoRHJGdk1pYjBUVXlHMXZmaEZJVnMxRzJTMjNWSlJlaG9rPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI5ZGNlMjY3Ni1lNDAxLTQ2MTMtOTc2Zi03NjIwMThkNGE5MzMiLCJldmVudF9pZCI6ImYwMTdmMWQzLWM5MDAtNGEzOS1hODBiLTNjZTJkMzBiZGUyZSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2MTQzNzIzNzQsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX1FMQklTUlF3QSIsImV4cCI6MTYxNDM3NTk3NCwiaWF0IjoxNjE0MzcyMzc0LCJqdGkiOiIyNjY0NDdhOS03OTQzLTQxMDUtYjg2YS05YjQ1NmY5NDk0ZjMiLCJjbGllbnRfaWQiOiJ0NGdlcHFxYm1iZzkwZGg2MXBhbThyZzlyIiwidXNlcm5hbWUiOiI5ZGNlMjY3Ni1lNDAxLTQ2MTMtOTc2Zi03NjIwMThkNGE5MzMifQ.RvAQ1u3n0ZcF7D0tKTWJP9Tvr65PwymOkLT3Ob8iZYViop9-RM8YqK-AnHs4SyK7aP8_OgdTIIx4pdbS9ixsgSSu67pQEwXS-2LxCvlDhEQ8UhDc_YxPxeQanKGb6465BYi3UcXzRIIQd7XQO4NHdMxu7i77VkxKoWbDUNGT8qdhx_cUoESZRHkFiW3pT7vDboot_vtHTzCAsNLAlW5fgQgtONxwn3er8AXFYUTTODL8M3MM8kdw-RhxdwT8kFesJvJATmUY-PypfnYXp4zQfhFvBE-eXNXtBMtEpHqmAfFOjFSIhzGh1Jbst6O_xVa7dbT5w_dXGFGmzBLwLCRpxQ"
+npm run dev
 ```
 
-You should see `Hello 9dce2676-e401-4613-976f-762018d4a933!`.
+Open up your browser and go to `http://localhost:3000`.
+
+![Browser view of localhost](/assets/examples/api-auth-jwt-cogntio/browser-view-of-localhost.png)
+
+Note, if you get a blank page add this `<script>` in `frontend/index.html`.
+
+```html
+<script>
+  if (global === undefined) {
+    var global = window;
+    var global = alert;
+  }
+</script>
+```
+
+There are 2 buttons that invokes the endpoints we created above.
+
+The **call /public** button invokes **GET /public** route using the `publicRequest` method we created in our frontend.
+
+Similarly, the **call /private** button invokes **GET /private** route using the `privateRequest` method.
+
+When you're not logged in and try to click the buttons, you'll see responses like below.
+
+![public button click without login](/assets/examples/api-oauth-google/public-button-click-without-login.png)
+
+![private button click without login](/assets/examples/api-oauth-google/private-button-click-without-login.png)
+
+Once you enter your details and click on **Signup**, you're asked to verify your account by entering a code that's sent to your mail.
+
+![Cognito signup verification](/assets/examples/api-auth-jwt-cogntio/cognito-signup-verification.png)
+
+After you enter the code, click on **Verify** to signin.
+
+![Cognito code verification](/assets/examples/api-auth-jwt-cogntio/cognito-code-verification.png)
+
+Once it's done you can check your info.
+
+![current logged in user info](/assets/examples/api-auth-jwt-cogntio/current-logged-in-user-info.png)
+
+Now that you've authenticated repeat the same steps as you did before, you'll see responses like below.
+
+![public button click with login](/assets/examples/api-auth-jwt-auth0/public-button-click-with-login.png)
+
+![private button click with login](/assets/examples/api-auth-jwt-auth0/private-button-click-with-login.png)
+
+As you can see the private route is only working while we are logged in.
 
 ## Deploying your API
 
@@ -302,6 +665,24 @@ $ npx sst deploy --stage prod
 ```
 
 A note on these environments. SST is simply deploying the same app twice using two different `stage` names. It prefixes the resources with the stage names to ensure that they don't thrash.
+
+Note, if you get any error like `'request' is not exported by __vite-browser-external, imported by node_modules/@aws-sdk/credential-provider-imds/dist/es/remoteProvider/httpRequest.js` replace `vite.config.js` with below code.
+
+```ts
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  ...
+  resolve: {
+    alias: {
+      "./runtimeConfig": "./runtimeConfig.browser",
+    },
+  },
+  ...
+});
+```
 
 ## Cleaning up
 
