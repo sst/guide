@@ -275,6 +275,7 @@ Stack dev-api-auth-jwt-auth0-my-stack
   Status: deployed
   Outputs:
     ApiEndpoint: https://9ero2xj9cl.execute-api.us-east-1.amazonaws.com
+    SiteUrl: https://d3uxpgrgqdfnl5.cloudfront.net
 ```
 
 Let's test our endpoint with the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
@@ -286,6 +287,8 @@ Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP req
 ![API explorer invocation response](/assets/examples/api-oauth-google/api-explorer-invocation-response.png)
 
 You should see a `Hello, stranger!` in the response body.
+
+And if you try for `GET /private`, you will see `{"message":"Unauthorized"}`.
 
 ## Adding AWS Amplify
 
