@@ -97,7 +97,7 @@ export function MyStack({ stack }: StackContext) {
 
   // Show the endpoint in the output
   stack.addOutputs({
-    BucketName: bucket.s3Bucket.bucketName,
+    BucketName: bucket.bucketName,
   });
 }
 ```
