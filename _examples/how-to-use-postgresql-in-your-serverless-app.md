@@ -76,9 +76,9 @@ export function MyStack({ stack }: StackContext) {
 
 This creates an [RDS Serverless cluster]({{ site.docs_url }}/constructs/RDS). We also set the database engine to PostgreSQL. The database in the cluster that we'll be using is called `CounterDB` (as set in the `defaultDatabaseName` variable).
 
-## Setting up the Database
+The `migrations` prop should point to the folder where your migration files are. The `RDS` construct uses [Kysely](https://koskimas.github.io/kysely/) to run and manage schema migrations. You can [read more about migrations here]({{ site.docs_url }}/constructs/RDS#configuring-migrations).
 
-The `RDS` construct uses [Kysely](https://koskimas.github.io/kysely/) to run and manage schema migrations. The `migrations` prop should point to the folder where your migration files are. you can [read more about migrations here]({{ site.docs_url }}/constructs/RDS#configuring-migrations).
+## Setting up the Database
 
 Let's create a migration file that creates a table called `tblcounter`.
 
@@ -191,9 +191,11 @@ export async function handler() {
     .where("counter", "=", "hits")
     .executeTakeFirstOrThrow();
 
+  let count = record.tally;
+
   return {
     statusCode: 200,
-    body: record.tally,
+    body: count,
   };
 }
 ```
@@ -267,10 +269,6 @@ SELECT * FROM tblcounter
 ![successful-migration-output](/assets/examples/rest-api-postgresql/successful-migration-output.png)
 
 You should see the empty table with column names.
-
-Note, to revert back to a specific migration, re-run its previous migration.
-
-![running-sql-query-inside-the-editor](/assets/examples/rest-api-postgresql/running-sql-query-inside-the-editor.png)
 
 ## Test our API
 
