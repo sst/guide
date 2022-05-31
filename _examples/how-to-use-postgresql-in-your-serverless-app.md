@@ -69,12 +69,52 @@ export function MyStack({ stack }: StackContext) {
   const cluster = new RDS(stack, "Cluster", {
     engine: "postgresql10.14",
     defaultDatabaseName: DATABASE,
-    migrations: "migrations",
+    migrations: "backend/migrations",
   });
 }
 ```
 
 This creates an [RDS Serverless cluster]({{ site.docs_url }}/constructs/RDS). We also set the database engine to PostgreSQL. The database in the cluster that we'll be using is called `CounterDB` (as set in the `defaultDatabaseName` variable).
+
+The `migrations` prop should point to the folder where your migration files are. The `RDS` construct uses [Kysely](https://koskimas.github.io/kysely/) to run and manage schema migrations. You can [read more about migrations here]({{ site.docs_url }}/constructs/RDS#configuring-migrations).
+
+## Setting up the Database
+
+Let's create a migration file that creates a table called `tblcounter`.
+
+Create a `migrations` folder inside the `backend/` folder.
+
+Let's write our first migration file, create a new file called `first.mjs` inside the newly created `backend/migrations` folder and paste the below code.
+
+```js
+import { Kysely } from "kysely";
+
+/**
+ * @param db {Kysely<any>}
+ */
+export async function up(db) {
+  await db.schema
+    .createTable("tblcounter")
+    .addColumn("counter", "text", col => col.primaryKey())
+    .addColumn("tally", "integer")
+    .execute();
+
+  await db
+    .insertInto("tblcounter")
+    .values({
+      counter: "hits",
+      tally: 0,
+    })
+    .execute();
+}
+
+/**
+ * @param db {Kysely<any>}
+ */
+export async function down(db) {
+  await db.schema.dropTable("tblcounter").execute();
+}
+```
 
 ## Setting up the API
 
@@ -121,20 +161,37 @@ Now in our function, we'll start by reading from our PostgreSQL database.
 {%change%} Replace `backend/functions/lambda.ts` with the following.
 
 ```ts
-import client from "data-api-client";
+import { RDSDataService } from "aws-sdk";
+import { Kysely } from "kysely";
+import { DataApiDialect } from "kysely-data-api";
 
-const db = client({
-  database: process.env.DATABASE,
-  secretArn: process.env.SECRET_ARN,
-  resourceArn: process.env.CLUSTER_ARN,
+interface Database {
+  tblcounter: {
+    counter: string;
+    tally: string;
+  };
+}
+
+const db = new Kysely<Database>({
+  dialect: new DataApiDialect({
+    mode: "postgres",
+    driver: {
+      database: process.env.DATABASE!,
+      secretArn: process.env.SECRET_ARN!,
+      resourceArn: process.env.CLUSTER_ARN!,
+      client: new RDSDataService(),
+    },
+  }),
 });
 
 export async function handler() {
-  const { records } = await db.query(
-    "SELECT tally FROM tblcounter where counter='hits'"
-  );
+  const record = await db
+    .selectFrom("tblcounter")
+    .select("tally")
+    .where("counter", "=", "hits")
+    .executeTakeFirstOrThrow();
 
-  let count = records[0].tally;
+  let count = record.tally;
 
   return {
     statusCode: 200,
@@ -143,14 +200,14 @@ export async function handler() {
 }
 ```
 
-We are using the [Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html). It allows us to connect to our database over HTTP using the [data-api-client](https://github.com/jeremydaly/data-api-client).
+We are using the [Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html). It allows us to connect to our database over HTTP using the [kysely-data-api](https://github.com/serverless-stack/kysely-data-api).
 
 For now we'll get the number of hits from a table called `tblcounter` and return it.
 
-{%change%} Let's install the `data-api-client` in the `backend/` folder.
+{%change%} Let's install the `kysely` and `kysely-data-api` in the `backend/` folder.
 
 ```bash
-$ npm install data-api-client
+$ npm install kysely kysely-data-api
 ```
 
 And test what we have so far.
@@ -191,24 +248,27 @@ The `ApiEndpoint` is the API we just created. While the `SecretArn` is what we n
 
 Before we can test our endpoint let's create the `tblcounter` table in our database.
 
-## Creating our table
+## Running migrations
 
-To create our table we’ll use the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
+You can run migrations from the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
-Go to the **RDS** tab and paste the below SQL code in the editor.
+Go to the **RDS** tab and click the **Migrations** button on the top right corner.
+
+It will list out all the migration files in the specified folder.
+
+Now to apply the migration that we created, click on the **Apply** button beside to the migration name.
+
+![list-of-migrations-in-the-stack](/assets/examples/rest-api-postgresql/list-of-migrations-in-the-stack.png)
+
+To confirm if the migration is successful, let's display the `tblcounter` table by running the below query.
 
 ```sql
-CREATE TABLE tblcounter (
- counter text UNIQUE,
- tally integer
-);
-
-INSERT INTO tblcounter VALUES ('hits', 0);
+SELECT * FROM tblcounter
 ```
 
-Hit the **Execute** button to run the SQL query. The above code will create our table and insert a row to keep track of our hits.
+![successful-migration-output](/assets/examples/rest-api-postgresql/successful-migration-output.png)
 
-![running-sql-query-inside-the-editor](/assets/examples/rest-api-postgresql/running-sql-query-inside-the-editor.png)
+You should see the table with 1 row .
 
 ## Test our API
 
@@ -229,7 +289,12 @@ So let's update our table with the hits.
 {%change%} Add this above the `return` statement in `backend/functions/lambda.ts`.
 
 ```ts
-await db.query(`UPDATE tblcounter set tally=${++count} where counter='hits'`);
+await db
+  .updateTable("tblcounter")
+  .set({
+    tally: ++count,
+  })
+  .execute();
 ```
 
 Here we are updating the `hits` row's `tally` column with the increased count.
@@ -237,62 +302,6 @@ Here we are updating the `hits` row's `tally` column with the increased count.
 And now if you head over to your console and make a request to our API. You'll notice the count increase!
 
 ![api-explorer-invocation-response-after-update](/assets/examples/rest-api-postgresql/api-explorer-invocation-response-after-update.png)
-
-## Running migrations
-
-You can run migrations from the SST console, The `RDS` construct uses [Kysely](https://koskimas.github.io/kysely/) to run and manage schema migrations. The `migrations` prop should point to the folder where your migration files are. you can [read more about migrations here]({{ site.docs_url }}/constructs/RDS#configuring-migrations).
-
-Let's create a migration file that creates a table called `todos`.
-
-Create a `migrations` folder inside the `backend/` folder.
-
-Let's write our first migration file, create a new file called `first.ts` inside the newly created `backend/migrations` folder and paste the below code.
-
-```ts
-module.exports.up = async (db) => {
-  await db.schema
-    .createTable("todos")
-    .addColumn("id", "text", (col) => col.primaryKey())
-    .addColumn("title", "text")
-    .execute();
-};
-
-module.exports.down = async (db) => {
-  await db.schema.dropTable("todos").execute();
-};
-```
-
-{%change%} update the cluster definition like below in `stacks/MyStack.ts`.
-
-```ts
-const cluster = new RDS(stack, "Cluster", {
-  engine: "postgresql10.14",
-  defaultDatabaseName: DATABASE,
-  migrations: "backend/migrations", // add this line
-});
-```
-
-This creates an infrastructure change, open the terminal and hit enter when it asks.
-
-Now to run the migrations we can use the SST console. Go to the **RDS** tab and click the **Migrations** button on the top right corner.
-
-It will list out all the migration files in the specified folder.
-
-Now to apply the migration that we created, click on the **Apply** button beside to the migration name.
-
-![list-of-migrations-in-the-stack](/assets/examples/rest-api-postgresql/list-of-migrations-in-the-stack.png)
-
-To confirm if the migration is successful, let's display the `todos` table by running the below query.
-
-```sql
-select * from todos
-```
-
-![successful-migration-output](/assets/examples/rest-api-postgresql/successful-migration-output.png)
-
-You should see the empty table with column names.
-
-Note, to revert back to a specific migration, re-run its previous migration.
 
 ## Deploying to prod
 
