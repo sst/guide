@@ -260,7 +260,7 @@ Now to apply the migration that we created, click on the **Apply** button beside
 
 ![list-of-migrations-in-the-stack](/assets/examples/rest-api-postgresql/list-of-migrations-in-the-stack.png)
 
-To confirm if the migration is successful, let's display the `todos` table by running the below query.
+To confirm if the migration is successful, let's display the `tblcounter` table by running the below query.
 
 ```sql
 SELECT * FROM tblcounter
@@ -268,7 +268,7 @@ SELECT * FROM tblcounter
 
 ![successful-migration-output](/assets/examples/rest-api-postgresql/successful-migration-output.png)
 
-You should see the empty table with column names.
+You should see the table with 1 row .
 
 ## Test our API
 
@@ -293,7 +293,8 @@ await db
   .updateTable("tblcounter")
   .set({
     tally: ++count,
-  });
+  })
+  .execute();
 ```
 
 Here we are updating the `hits` row's `tally` column with the increased count.
