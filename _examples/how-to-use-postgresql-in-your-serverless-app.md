@@ -168,7 +168,7 @@ import { DataApiDialect } from "kysely-data-api";
 interface Database {
   tblcounter: {
     counter: string;
-    tally: string;
+    tally: number;
   };
 }
 
