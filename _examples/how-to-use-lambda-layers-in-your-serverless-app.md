@@ -77,6 +77,8 @@ export function MyStack({ stack }: StackContext) {
       "GET /": {
         function: {
           handler: "functions/lambda.handler",
+          // The chrome-aws-lambda layer currently does not work in Node.js 16
+          runtime: "nodejs14.x",
           // Increase the timeout for generating screenshots
           timeout: 15,
           // Load Chrome in a Layer
@@ -117,7 +119,7 @@ import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   // Get the url and dimensions from the query string
-  const { url, width, height } = event.queryStringParameters;
+  const { url, width, height } = event.queryStringParameters!;
 
   const browser = await puppeteer.launch({
     args: chrome.args,
@@ -132,7 +134,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   });
 
   // Navigate to the url
-  await page.goto(url);
+  await page.goto(url!);
 
   // Take the screenshot
   await page.screenshot();
@@ -215,12 +217,15 @@ return {
 with:
 
 ```ts
+// Take the screenshot
+const screenshot = await page.screenshot({ encoding: "base64" }) as string;
+
 return {
   statusCode: 200,
   // Return as binary data
   isBase64Encoded: true,
   headers: { "Content-Type": "image/png" },
-  body: await page.screenshot({ encoding: "base64" }),
+  body: screenshot,
 };
 ```
 
