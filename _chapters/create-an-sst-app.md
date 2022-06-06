@@ -3,7 +3,7 @@ layout: post
 title: Create an SST app
 date: 2021-08-17 00:00:00
 lang: en
-description: Use the create-serverless-stack command to create a new SST app in your working directory.
+description: Use the create-sst command to create a new SST app in your working directory.
 redirect_from: /chapters/building-a-cdk-app-with-sst.html
 ref: create-an-sst-app
 comments_id: create-an-sst-app/2462

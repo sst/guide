@@ -50,7 +50,7 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
           <span class="token lead">#</span><span class="token dim">Create a new SST app</span>
         </div>
         <div class="token-line">
-          <span class="token lead">$</span> npx <span class="token keyword">create-serverless-stack</span> my-app
+          <span class="token lead">$</span> npx <span class="token keyword">create-sst</span> my-app
         </div>
         <div class="token-line">
           <span class="token lead">$</span> cd my-app
