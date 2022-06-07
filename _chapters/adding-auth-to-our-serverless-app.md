@@ -66,7 +66,7 @@ Let's quickly go over what we are doing here.
 
 - We are creating a new stack for our auth infrastructure. We don't need to create a separate stack but we are using it as an example to show how to work with multiple stacks.
 
-- The `Auth` construct creates a Cognito User Pool for us. We are using the `signInAliases` prop to state that we want our users to login with their email.
+- The `Auth` construct creates a Cognito User Pool for us. We are using the `login` prop to state that we want our users to login with their email.
 
 - The `Auth` construct also creates an Identity Pool. The `attachPermissionsForAuthUsers` function allows us to specify the resources our authenticated users have access to.
 
