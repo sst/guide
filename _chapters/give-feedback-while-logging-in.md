@@ -116,7 +116,7 @@ Now we can use our new component in our `Login` container.
 {%change%} In `src/containers/Login.js` find the `<Button>` component in the `return` statement.
 
 ```html
-<Button block="true" size="lg" type="submit" disabled="{!validateForm()}">
+<Button block="true" size="lg" type="submit" disabled={!validateForm()}>
   Login
 </Button>
 ```
