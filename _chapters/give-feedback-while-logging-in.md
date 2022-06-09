@@ -128,8 +128,8 @@ Now we can use our new component in our `Login` container.
   block="true"
   size="lg"
   type="submit"
-  isLoading="{isLoading}"
-  disabled="{!validateForm()}"
+  isLoading={isLoading}
+  disabled={!validateForm()}
 >
   Login
 </LoaderButton>
