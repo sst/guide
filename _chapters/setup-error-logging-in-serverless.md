@@ -89,7 +89,7 @@ We are doing a few things of note in this simple helper.
 So in our Lambda function code, if we want to log some debug information that only gets printed out if we have an error, we'll do the following:
 
 ```js
-import debug from "../libs/debug-lib";
+import debug from "../util/debug";
 
 debug(
   "This stores the message and prints to CloudWatch if Lambda function later throws an exception"
@@ -174,7 +174,7 @@ export const main = handler((event, context) => {
 
 We wrap all of our Lambda functions using the error handler.
 
-Note that, the `handler-lib.js` needs to be **imported before we import anything else**. This is because the `debug-lib.js` that it imports needs to initialize AWS SDK logging before it's used anywhere else.
+Note that, the `handler.js` needs to be **imported before we import anything else**. This is because the `debug.js` that it imports needs to initialize AWS SDK logging before it's used anywhere else.
 
 ### Commit the Code
 
