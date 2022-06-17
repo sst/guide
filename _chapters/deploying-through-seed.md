@@ -8,14 +8,15 @@ ref: deploying-through-seed
 comments_id: deploying-through-seed/177
 ---
 
-Now, we are almost ready to make our first deployment. Our app also contains a React app in the `frontend/` directory. We need to make sure to run an `npm install` in that directory.
+Now, we are almost ready to make our first deployment. Our app also contains a React app in the `frontend/` directory. We need to make sure to run an `npm install` in that directory. Create React App also fails the build on any warnings in a CI, so we'll disable that flag.
 
-Let's quickly add a build script to do that.
+Let's quickly add a build script to do this.
 
 {%change%} Create a new file in your project root called `seed.yml` with.
 
 ``` yml
 before_build:
+  - echo 'export CI=false' >> $BASH_ENV
   - cd frontend && npm install
 ```
 
