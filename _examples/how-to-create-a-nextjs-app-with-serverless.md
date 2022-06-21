@@ -84,7 +84,7 @@ We'll be using [Amazon DynamoDB](https://aws.amazon.com/dynamodb/); a reliable a
 ```ts
 import {
   Api,
-  ReactStaticSite,
+  NextjsSite,
   StackContext,
   Table,
 } from "@serverless-stack/resources";
