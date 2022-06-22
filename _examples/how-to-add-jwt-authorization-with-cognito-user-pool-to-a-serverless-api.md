@@ -49,9 +49,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `backend/` — App Code
+2. `services/` — App Code
 
-   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
+   The code that's run when your API is invoked is placed in the `services/` directory of your project.
 
 ## Setting up the API
 
@@ -123,7 +123,7 @@ By default, all routes have the authorization type `JWT`. This means the caller 
 
 Let's create two functions, one for the public route, and one for the private route.
 
-{%change%} Add a `backend/functions/public.ts`.
+{%change%} Add a `services/functions/public.ts`.
 
 ```ts
 export async function main() {
@@ -134,7 +134,7 @@ export async function main() {
 }
 ```
 
-{%change%} Add a `backend/functions/private.ts`.
+{%change%} Add a `services/functions/private.ts`.
 
 ```ts
 import { APIGatewayProxyHandlerV2WithJWTAuthorizer } from "aws-lambda";
@@ -245,7 +245,7 @@ The first time you run this command it'll take a couple of minutes to do the fol
 
 1. It'll bootstrap your AWS environment to use CDK.
 2. Deploy a debug stack to power the Live Lambda Development environment.
-3. Deploy your app, but replace the functions in the `backend/` directory with ones that connect to your local client.
+3. Deploy your app, but replace the functions in the `services/` directory with ones that connect to your local client.
 4. Start up a local client.
 
 Once complete, you should see something like this.

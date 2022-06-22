@@ -49,9 +49,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `backend/` — App Code
+2. `services/` — App Code
 
-   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
+   The code that's run when your API is invoked is placed in the `services/` directory of your project.
 
 ## Adding PostgreSQL
 
@@ -69,7 +69,7 @@ export function MyStack({ stack }: StackContext) {
   const cluster = new RDS(stack, "Cluster", {
     engine: "postgresql10.14",
     defaultDatabaseName: DATABASE,
-    migrations: "backend/migrations",
+    migrations: "services/migrations",
   });
 }
 ```
@@ -82,9 +82,9 @@ The `migrations` prop should point to the folder where your migration files are.
 
 Let's create a migration file that creates a table called `tblcounter`.
 
-Create a `migrations` folder inside the `backend/` folder.
+Create a `migrations` folder inside the `services/` folder.
 
-Let's write our first migration file, create a new file called `first.mjs` inside the newly created `backend/migrations` folder and paste the below code.
+Let's write our first migration file, create a new file called `first.mjs` inside the newly created `services/migrations` folder and paste the below code.
 
 ```js
 import { Kysely } from "kysely";
@@ -148,7 +148,7 @@ stack.addOutputs({
 });
 ```
 
-Our [API]({{ site.docs_url }}/constructs/Api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `backend/functions/lambda.ts` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/Api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `services/functions/lambda.ts` will get invoked.
 
 We also pass in the name of our database, the ARN of the database cluster, and the ARN of the secret that'll help us login to our database. An ARN is an identifier that AWS uses. You can [read more about it here]({% link _chapters/what-is-an-arn.md %}).
 
@@ -158,7 +158,7 @@ We then allow our Lambda function to access our database cluster. Finally, we ou
 
 Now in our function, we'll start by reading from our PostgreSQL database.
 
-{%change%} Replace `backend/functions/lambda.ts` with the following.
+{%change%} Replace `services/functions/lambda.ts` with the following.
 
 ```ts
 import { RDSDataService } from "aws-sdk";
@@ -204,7 +204,7 @@ We are using the [Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraU
 
 For now we'll get the number of hits from a table called `tblcounter` and return it.
 
-{%change%} Let's install the `kysely` and `kysely-data-api` in the `backend/` folder.
+{%change%} Let's install the `kysely` and `kysely-data-api` in the `services/` folder.
 
 ```bash
 $ npm install kysely kysely-data-api
@@ -286,7 +286,7 @@ You should see a `0` in the response body.
 
 So let's update our table with the hits.
 
-{%change%} Add this above the `return` statement in `backend/functions/lambda.ts`.
+{%change%} Add this above the `return` statement in `services/functions/lambda.ts`.
 
 ```ts
 await db

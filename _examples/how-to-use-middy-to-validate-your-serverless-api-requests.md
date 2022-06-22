@@ -53,9 +53,9 @@ An SST app is made up of a couple of parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `backend/` — App Code
+2. `services/` — App Code
 
-   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
+   The code that's run when your API is invoked is placed in the `services/` directory of your project.
 
 ## Create our infrastructure
 
@@ -85,9 +85,9 @@ export function MyStack({ stack }: StackContext) {
 }
 ```
 
-We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `backend/functions/lambda.ts` will get invoked.
+We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `services/functions/lambda.ts` will get invoked.
 
-{%change%} Replace the code in `backend/functions/lambda.ts` with:
+{%change%} Replace the code in `services/functions/lambda.ts` with:
 
 ```ts
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
@@ -169,7 +169,7 @@ In a production app it can be difficult to catch these issues. We'd like to expl
 
 To fix this let's use the [Middy validator](https://middy.js.org/packages/validator/) middleware to validate our API.
 
-{%change%} Run the following in the `backend/` directory.
+{%change%} Run the following in the `services/` directory.
 
 ```bash
 $ npm install --save @middy/core @middy/http-json-body-parser @middy/http-error-handler @middy/validator
@@ -186,7 +186,7 @@ Let's understand what the above packages are.
 
 ### Adding request validation
 
-{%change%} Replace `backend/functions/lambda.ts` with the following.
+{%change%} Replace `services/functions/lambda.ts` with the following.
 
 ```ts
 import middy from "@middy/core";
@@ -244,7 +244,7 @@ Great! The server throws a `Bad request` error to let us know that something is 
 
 While we are here, let's add response validation as well.
 
-{%change%} Replace `backend/functions/lambda.ts` with this:
+{%change%} Replace `services/functions/lambda.ts` with this:
 
 ```ts
 import middy from "@middy/core";

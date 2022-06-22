@@ -26,7 +26,7 @@ $ git checkout -b debug
 
 Let's trigger an error in `get.js` by commenting out the `noteId` field in the DynamoDB call's Key definition. This will cause the DynamoDB call to fail and in turn cause the Lambda function to fail.
 
-{%change%} Replace `backend/functions/get.js` with the following.
+{%change%} Replace `services/functions/get.js` with the following.
 
 ```js
 import handler from "../util/handler";

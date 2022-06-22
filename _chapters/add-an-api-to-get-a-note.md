@@ -12,7 +12,7 @@ Now that we [created a note]({% link _chapters/add-an-api-to-create-a-note.md %}
 
 ### Add the Function
 
-{%change%} Create a new file in `backend/functions/get.js` in your project root with the following:
+{%change%} Create a new file in `services/functions/get.js` in your project root with the following:
 
 ```js
 import handler from "../util/handler";

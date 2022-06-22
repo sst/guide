@@ -12,13 +12,13 @@ Now let's get started with creating an API to handle billing. It's going to take
 
 ### Add a Billing Lambda
 
-{%change%} Start by installing the Stripe NPM package. Run the following in the `backend/` folder of our project.
+{%change%} Start by installing the Stripe NPM package. Run the following in the `services/` folder of our project.
 
 ```bash
 $ npm install stripe
 ```
 
-{%change%} Create a new file in `backend/functions/billing.js` with the following.
+{%change%} Create a new file in `services/functions/billing.js` with the following.
 
 ```js
 import Stripe from "stripe";
@@ -60,7 +60,7 @@ Note, if you are testing this from India, you'll need to add some shipping infor
 
 Now let's implement our `calculateCost` method. This is primarily our _business logic_.
 
-{%change%} Create a `backend/util/cost.js` and add the following.
+{%change%} Create a `services/util/cost.js` and add the following.
 
 ```js
 export function calculateCost(storage) {

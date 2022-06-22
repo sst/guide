@@ -49,9 +49,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `backend/` — App Code
+2. `services/` — App Code
 
-   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
+   The code that's run when your API is invoked is placed in the `services/` directory of your project.
 
 ## Adding a Kinesis Data Stream
 
@@ -104,7 +104,7 @@ stack.addOutputs({
 });
 ```
 
-Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `backend/functions/lambda.ts` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `services/functions/lambda.ts` will get invoked.
 
 We also pass in the stream name to our API as an environment variable called `streamName`. And we allow our API to send messages to the Kinesis Data Stream we just created.
 
@@ -112,7 +112,7 @@ We also pass in the stream name to our API as an environment variable called `st
 
 We will create three functions, one for handling the API request, and the other two for the consumers.
 
-{%change%} Replace the `backend/functions/lambda.ts` with the following.
+{%change%} Replace the `services/functions/lambda.ts` with the following.
 
 ```ts
 export async function handler() {
@@ -124,7 +124,7 @@ export async function handler() {
 }
 ```
 
-{%change%} Add a `backend/functions/consumer1.ts`.
+{%change%} Add a `services/functions/consumer1.ts`.
 
 ```ts
 export async function handler() {
@@ -133,7 +133,7 @@ export async function handler() {
 }
 ```
 
-{%change%} Add a `backend/functions/consumer2.ts`.
+{%change%} Add a `services/functions/consumer2.ts`.
 
 ```ts
 export async function handler() {
@@ -192,7 +192,7 @@ You should see `Message queued!` logged in the console.
 
 Now let's send a message to our Kinesis Data Stream.
 
-{%change%} Replace the `backend/functions/lambda.ts` with the following.
+{%change%} Replace the `services/functions/lambda.ts` with the following.
 
 ```ts
 import AWS from "aws-sdk";
@@ -220,7 +220,7 @@ export async function handler() {
 
 Here we are getting the Kinesis Data Stream name from the environment variable, and then sending a message to it.
 
-{%change%} Let's install the `aws-sdk` package in the `backend/` folder.
+{%change%} Let's install the `aws-sdk` package in the `services/` folder.
 
 ```bash
 $ npm install aws-sdk

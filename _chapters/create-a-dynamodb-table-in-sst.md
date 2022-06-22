@@ -81,7 +81,7 @@ This will take a minute to run.
 {%change%} Also remove the template files.
 
 ```bash
-$ rm stacks/MyStack.js backend/functions/lambda.js
+$ rm stacks/MyStack.js services/functions/lambda.js
 ```
 
 ### Add to the App
@@ -96,7 +96,7 @@ import { StorageStack } from "./StorageStack";
 export default function main(app) {
   app.setDefaultFunctionProps({
     runtime: "nodejs16.x",
-    srcPath: "backend",
+    srcPath: "services",
     bundle: {
       format: "esm",
     },

@@ -103,7 +103,7 @@ Let's add this new stack to the rest of our app.
 export default function main(app) {
   app.setDefaultFunctionProps({
     runtime: "nodejs16.x",
-    srcPath: "backend",
+    srcPath: "services",
     bundle: {
       format: "esm",
     },

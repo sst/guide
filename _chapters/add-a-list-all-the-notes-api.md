@@ -12,7 +12,7 @@ Now we are going to add an API that returns a list of all the notes a user has.
 
 ### Add the Function
 
-{%change%} Create a new file called `backend/functions/list.js` with the following.
+{%change%} Create a new file called `services/functions/list.js` with the following.
 
 ```js
 import handler from "./libs/handler-lib";

@@ -49,9 +49,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `backend/` — App Code
+2. `services/` — App Code
 
-   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
+   The code that's run when your API is invoked is placed in the `services/` directory of your project.
 
 ## Setting up our infrastructure
 
@@ -80,13 +80,13 @@ export function MyStack({ stack }: StackContext) {
 }
 ```
 
-We are creating an Apollo GraphQL API here using the [`GraphQLApi`]({{ site.docs_url }}/constructs/GraphQLApi) construct. Our Apollo Server is powered by the Lambda function in `backend/functions/lambda.ts`.
+We are creating an Apollo GraphQL API here using the [`GraphQLApi`]({{ site.docs_url }}/constructs/GraphQLApi) construct. Our Apollo Server is powered by the Lambda function in `services/functions/lambda.ts`.
 
 ## Adding function code
 
 For this example, we are not using a database. We'll look at that in detail in another example. So we'll just be printing out a simple string.
 
-{%change%} Let's add a file that contains our notes in `backend/functions/lambda.ts`.
+{%change%} Let's add a file that contains our notes in `services/functions/lambda.ts`.
 
 ```ts
 import { gql, ApolloServer } from "apollo-server-lambda";
@@ -114,7 +114,7 @@ export const handler = server.createHandler();
 
 Here we are creating an Apollo Server. We are also enabling introspection if we are running our Lambda function locally. SST sets the `process.env.IS_LOCAL` when run locally.
 
-{%change%} Let's install `apollo-server-lambda` in the `backend/` folder.
+{%change%} Let's install `apollo-server-lambda` in the `services/` folder.
 
 ```bash
 $ npm install apollo-server-lambda
@@ -183,7 +183,7 @@ You should see `Hello, World!`.
 
 Let's make a quick change to our API.
 
-{%change%} In `backend/functions/lambda.ts` replace `Hello, World!` with `Hello, New World!`.
+{%change%} In `services/functions/lambda.ts` replace `Hello, World!` with `Hello, New World!`.
 
 ```ts
 const resolvers = {
