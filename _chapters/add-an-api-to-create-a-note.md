@@ -82,7 +82,7 @@ import { ApiStack } from "./ApiStack";
 export default function main(app) {
   app.setDefaultFunctionProps({
     runtime: "nodejs16.x",
-    srcPath: "backend",
+    srcPath: "services",
     bundle: {
       format: "esm",
     },
@@ -95,7 +95,7 @@ export default function main(app) {
 
 Now let's add the function that'll be creating our note.
 
-{%change%} Create a new file in `backend/functions/create.js` with the following.
+{%change%} Create a new file in `services/functions/create.js` with the following.
 
 ```js
 import * as uuid from "uuid";
@@ -147,7 +147,7 @@ There are some helpful comments in the code but let's go over them quickly.
 
 Let's go ahead and install the npm packages that we are using here.
 
-{%change%} Run the following in the `backend/` folder.
+{%change%} Run the following in the `services/` folder.
 
 ```bash
 $ npm install aws-sdk uuid
@@ -241,13 +241,13 @@ This code doesn't work just yet but it shows you what we want to accomplish:
 
 Let's start by creating the `dynamodb` util.
 
-{%change%} From the project root run the following to create a `backend/util` directory.
+{%change%} From the project root run the following to create a `services/util` directory.
 
 ```bash
-$ mkdir backend/util
+$ mkdir services/util
 ```
 
-{%change%} Create a `backend/util/dynamodb.js` file with:
+{%change%} Create a `services/util/dynamodb.js` file with:
 
 ```js
 import AWS from "aws-sdk";
@@ -265,7 +265,7 @@ export default {
 
 Here we are creating a convenience object that exposes the DynamoDB client methods that we are going to need in this guide.
 
-{%change%} Also create a `backend/util/handler.js` file with the following.
+{%change%} Also create a `services/util/handler.js` file with the following.
 
 ```js
 export default function handler(lambda) {

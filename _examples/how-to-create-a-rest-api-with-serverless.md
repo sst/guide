@@ -49,9 +49,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `backend/` — App Code
+2. `services/` — App Code
 
-   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
+   The code that's run when your API is invoked is placed in the `services/` directory of your project.
 
 ## Setting up our routes
 
@@ -93,7 +93,7 @@ The first is getting a list of notes. The second is getting a specific note give
 
 For this example, we are not using a database. We'll look at that in detail in another example. So internally we are just going to get the list of notes from a file.
 
-{%change%} Let's add a file that contains our notes in `backend/notes.ts`.
+{%change%} Let's add a file that contains our notes in `services/notes.ts`.
 
 ```ts
 export default {
@@ -116,7 +116,7 @@ Now add the code for our first endpoint.
 
 ### Getting a list of notes
 
-{%change%} Add a `backend/functions/list.ts`.
+{%change%} Add a `services/functions/list.ts`.
 
 ```ts
 import notes from "../notes";
@@ -135,7 +135,7 @@ Note that this function need to be `async` to be invoked by AWS Lambda. Even tho
 
 ### Getting a specific note
 
-{%change%} Add the following to `backend/functions/get.ts`.
+{%change%} Add the following to `services/functions/get.ts`.
 
 ```ts
 import notes from "../notes";
@@ -159,7 +159,7 @@ Here we are checking if we have the requested note. If we do, we respond with it
 
 ### Updating a note
 
-{%change%} Add the following to `backend/functions/update.ts`.
+{%change%} Add the following to `services/functions/update.ts`.
 
 ```ts
 import notes from "../notes";
@@ -202,7 +202,7 @@ The first time you run this command it'll take a couple of minutes to do the fol
 
 1. It'll bootstrap your AWS environment to use CDK.
 2. Deploy a debug stack to power the Live Lambda Development environment.
-3. Deploy your app, but replace the functions in the `backend/` directory with ones that connect to your local client.
+3. Deploy your app, but replace the functions in the `services/` directory with ones that connect to your local client.
 4. Start up a local client.
 
 Once complete, you should see something like this.
@@ -259,7 +259,7 @@ This should respond with the updated note.
 
 Let's make a quick change to our API. It would be good if the JSON strings are pretty printed to make them more readable.
 
-{%change%} Replace `backend/functions/list.ts` with the following.
+{%change%} Replace `services/functions/list.ts` with the following.
 
 ```ts
 import notes from "../notes";

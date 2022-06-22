@@ -57,9 +57,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `backend/` — App Code
+2. `services/` — App Code
 
-   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
+   The code that's run when your API is invoked is placed in the `services/` directory of your project.
 
 ## Creating the bucket
 
@@ -126,7 +126,7 @@ Unzip that into the `layers/sharp` directory that we just created. Make sure tha
 
 Now in our function, we'll be handling resizing an image once it's uploaded.
 
-{%change%} Add a new file at `backend/functions/resize.ts` with the following.
+{%change%} Add a new file at `services/functions/resize.ts` with the following.
 
 ```ts
 import AWS from "aws-sdk";
@@ -208,7 +208,7 @@ We are doing a few things here. Let's go over them in detail.
 
 Now let's install the npm packages we are using here.
 
-{%change%} Run this command in the `backend/` folder.
+{%change%} Run this command in the `services/` folder.
 
 ```bash
 $ npm install sharp aws-sdk
@@ -264,7 +264,7 @@ Now refresh your console to see the resized image.
 
 Let's try making a quick change.
 
-{%change%} Change the `width` in your `backend/functions/resize.ts`.
+{%change%} Change the `width` in your `services/functions/resize.ts`.
 
 ```bash
 const width = 100;

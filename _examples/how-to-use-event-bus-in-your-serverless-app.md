@@ -49,9 +49,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `backend/` — App Code
+2. `services/` — App Code
 
-   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
+   The code that's run when your API is invoked is placed in the `services/` directory of your project.
 
 ## Adding EventBridge EventBus
 
@@ -111,7 +111,7 @@ stack.addOutputs({
 });
 ```
 
-Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (`/order`). When we make a `POST` request to this endpoint the Lambda function called `handler` in `backend/functions/order.ts` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (`/order`). When we make a `POST` request to this endpoint the Lambda function called `handler` in `services/functions/order.ts` will get invoked.
 
 We'll also pass in the name of our EventBridge EventBus to our API as an environment variable called `busName`. And we allow our API to publish to the EventBus we just created.
 
@@ -119,7 +119,7 @@ We'll also pass in the name of our EventBridge EventBus to our API as an environ
 
 We will create three functions, one handling the `/order` API request, and two for the EventBus targets.
 
-{%change%} Add a `backend/functions/order.ts`.
+{%change%} Add a `services/functions/order.ts`.
 
 ```ts
 export async function handler() {
@@ -131,7 +131,7 @@ export async function handler() {
 }
 ```
 
-{%change%} Add a `backend/functions/receipt.ts`.
+{%change%} Add a `services/functions/receipt.ts`.
 
 ```ts
 export async function handler() {
@@ -140,7 +140,7 @@ export async function handler() {
 }
 ```
 
-{%change%} Add a `backend/functions/shipping.ts`.
+{%change%} Add a `services/functions/shipping.ts`.
 
 ```ts
 export async function handler() {
@@ -199,7 +199,7 @@ You should see `Order confirmed!` logged in the console.
 
 Now let's publish a event to our EventBus.
 
-{%change%} Replace the `backend/functions/order.ts` with the following.
+{%change%} Replace the `services/functions/order.ts` with the following.
 
 ```ts
 import AWS from "aws-sdk";
@@ -244,7 +244,7 @@ export async function handler() {
 
 Here we are getting the EventBus name from the environment variable, and then publishing an event to it.
 
-{%change%} Let's install the `aws-sdk` package in the `backend/` folder.
+{%change%} Let's install the `aws-sdk` package in the `services/` folder.
 
 ```bash
 $ npm install aws-sdk

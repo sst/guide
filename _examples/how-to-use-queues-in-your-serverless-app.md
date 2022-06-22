@@ -49,9 +49,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `backend/` — App Code
+2. `services/` — App Code
 
-   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
+   The code that's run when your API is invoked is placed in the `services/` directory of your project.
 
 ## Adding SQS Queue
 
@@ -103,7 +103,7 @@ stack.addOutputs({
 });
 ```
 
-Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `backend/functions/lambda.ts` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `services/functions/lambda.ts` will get invoked.
 
 We also pass in the url of our SQS queue to our API as an environment variable called `queueUrl`. And we allow our API to send messages to the queue we just created.
 
@@ -111,7 +111,7 @@ We also pass in the url of our SQS queue to our API as an environment variable c
 
 We will create two functions, one for handling the API request, and one for the consumer.
 
-{%change%} Replace the `backend/functions/lambda.ts` with the following.
+{%change%} Replace the `services/functions/lambda.ts` with the following.
 
 ```ts
 export async function handler() {
@@ -123,7 +123,7 @@ export async function handler() {
 }
 ```
 
-{%change%} Add a `backend/functions/consumer.ts`.
+{%change%} Add a `services/functions/consumer.ts`.
 
 ```ts
 export async function handler() {
@@ -182,7 +182,7 @@ You should see `Message queued!` logged in the console.
 
 Now let's send a message to our queue.
 
-{%change%} Replace the `backend/functions/lambda.ts` with the following.
+{%change%} Replace the `services/functions/lambda.ts` with the following.
 
 ```ts
 import AWS from "aws-sdk";
@@ -210,7 +210,7 @@ export async function handler() {
 
 Here we are getting the queue url from the environment variable, and then sending a message to it.
 
-{%change%} Let's install the `aws-sdk` package in the `backend/` folder.
+{%change%} Let's install the `aws-sdk` package in the `services/` folder.
 
 ```bash
 $ npm install aws-sdk

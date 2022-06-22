@@ -77,7 +77,7 @@ We'll go with the default setting for now.
 
 Next, we need to add the CORS headers in our Lambda function response.
 
-{%change%} Replace the `return` statement in our `backend/util/handler.js`.
+{%change%} Replace the `return` statement in our `services/util/handler.js`.
 
 ```js
 return {

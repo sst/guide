@@ -12,7 +12,7 @@ Finally, we are going to create an API that allows a user to delete a given note
 
 ### Add the Function
 
-{%change%} Create a new file in `backend/functions/delete.js` and paste the following.
+{%change%} Create a new file in `services/functions/delete.js` and paste the following.
 
 ```js
 import handler from "../util/handler";

@@ -51,9 +51,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `backend/` — App Code
+2. `services/` — App Code
 
-   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
+   The code that's run when your API is invoked is placed in the `services/` directory of your project.
 
 ## Creating the API
 
@@ -107,7 +107,7 @@ Finally, we output the endpoint of our newly created API.
 
 Now in our function, we'll be handling taking a screenshot of a given webpage.
 
-{%change%} Replace `backend/functions/lambda.ts` with the following.
+{%change%} Replace `services/functions/lambda.ts` with the following.
 
 ```ts
 import chrome from "chrome-aws-lambda";
@@ -151,7 +151,7 @@ First, we grab the webpage URL and dimensions for the screenshot from the query 
 
 Now let's install the npm packages we need.
 
-{%change%} Run the below command in the `backend/` folder.
+{%change%} Run the below command in the `services/` folder.
 
 ```bash
 $ npm install puppeteer puppeteer-core chrome-aws-lambda
@@ -201,7 +201,7 @@ You should see `Screenshot taken` being printed out.
 
 Now let's make a change to our function so that we return the screenshot directly as an image.
 
-{%change%} Replace the following lines in `backend/functions/lambda.ts`.
+{%change%} Replace the following lines in `services/functions/lambda.ts`.
 
 ```ts
 // Take the screenshot

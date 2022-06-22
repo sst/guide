@@ -46,7 +46,7 @@ This is a very simple CDK test that checks if our storage stack creates a Dynamo
 
 We are also going to test the business logic in our Lambda functions.
 
-{%change%} Create a new file in `backend/test/cost.test.js` and add the following.
+{%change%} Create a new file in `services/test/cost.test.js` and add the following.
 
 ```js
 import { expect, test } from "vitest";
@@ -87,7 +87,7 @@ We also have a sample test created with the starter that we can remove.
 {%change%} Run the following in your project root.
 
 ```bash
-$ rm backend/test/sample.test.js
+$ rm services/test/sample.test.js
 ```
 
 ### Run Tests
@@ -101,7 +101,7 @@ $ npm test
 You should see something like this:
 
 ```bash
- √ backend/test/cost.test.js (3)
+ √ services/test/cost.test.js (3)
  √ stacks/test/StorageStack.test.js (1)
 
 Test Files  2 passed (2)

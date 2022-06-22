@@ -23,7 +23,7 @@ We are going to look at how to setup a debugging framework to catch the above er
 
 Let's start by adding some code to help us with that.
 
-{%change%} Create a `backend/util/debug.js` file from your project root with the following.
+{%change%} Create a `services/util/debug.js` file from your project root with the following.
 
 ```js
 import util from "util";
@@ -112,7 +112,7 @@ You'll recall that all our Lambda functions are wrapped using a `handler()` meth
 
 We'll use the debug lib that we added above to improve our error handling.
 
-{%change%} Replace our `backend/util/handler.js` with the following.
+{%change%} Replace our `services/util/handler.js` with the following.
 
 ```js
 import * as debug from "./debug";

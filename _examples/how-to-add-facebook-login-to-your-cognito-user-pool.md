@@ -50,9 +50,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `backend/` — App Code
+2. `services/` — App Code
 
-   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
+   The code that's run when your API is invoked is placed in the `services/` directory of your project.
 
 ## Setting up the Auth
 
@@ -226,7 +226,7 @@ You can find the latest CDK versions supported by SST in our [releases](https://
 
 Let's create two functions, one handling the public route, and the other for the private route.
 
-{%change%} Add a `backend/functions/public.ts`.
+{%change%} Add a `services/functions/public.ts`.
 
 ```ts
 export async function handler() {
@@ -237,7 +237,7 @@ export async function handler() {
 }
 ```
 
-{%change%} Add a `backend/functions/private.ts`.
+{%change%} Add a `services/functions/private.ts`.
 
 ```ts
 import { APIGatewayProxyHandlerV2WithJWTAuthorizer } from "aws-lambda";

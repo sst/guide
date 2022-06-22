@@ -49,9 +49,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `backend/` — App Code
+2. `services/` — App Code
 
-   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
+   The code that's run when your API is invoked is placed in the `services/` directory of your project.
 
 ## Storing connections
 
@@ -121,7 +121,7 @@ We also pass in the name of our DynamoDB table to our API as an environment vari
 
 Now in our functions, let's first handle the case when a client connects to our WebSocket API.
 
-{%change%} Add the following to `backend/functions/connect.ts`.
+{%change%} Add the following to `services/functions/connect.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -145,7 +145,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
 
 Here when a new client connects, we grab the connection id from `event.requestContext.connectionId` and store it in our table.
 
-{%change%} We are using the `aws-sdk`, so let's install it in the `backend/` folder.
+{%change%} We are using the `aws-sdk`, so let's install it in the `services/` folder.
 
 ```bash
 $ npm install aws-sdk
@@ -155,7 +155,7 @@ $ npm install aws-sdk
 
 Similarly, we'll remove the connection id from the table when a client disconnects.
 
-{%change%} Add the following to `backend/functions/disconnect.ts`.
+{%change%} Add the following to `services/functions/disconnect.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -179,7 +179,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
 
 Now before handling the `sendmessage` route, let's do a quick test. We'll leave a placeholder function there for now.
 
-{%change%} Add this to `backend/functions/sendMessage.ts`.
+{%change%} Add this to `services/functions/sendMessage.ts`.
 
 ```ts
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
@@ -245,7 +245,7 @@ You should see a random connection ID created in the table.
 
 Now let's update our function to send messages.
 
-{%change%} Replace your `backend/functions/sendMessage.ts` with:
+{%change%} Replace your `services/functions/sendMessage.ts` with:
 
 ```ts
 import { DynamoDB, ApiGatewayManagementApi } from "aws-sdk";

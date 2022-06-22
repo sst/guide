@@ -59,9 +59,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `backend/` — App Code
+2. `services/` — App Code
 
-   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
+   The code that's run when your API is invoked is placed in the `services/` directory of your project.
 
 ## Setting up our API
 
@@ -89,9 +89,9 @@ export function MyStack({ stack }: StackContext) {
 
 ## Adding function code
 
-Our functions are stored in the `backend/` directory. In this case, we have a simple Lambda function that's printing out the time the request was made.
+Our functions are stored in the `services/` directory. In this case, we have a simple Lambda function that's printing out the time the request was made.
 
-{%change%} Replace your `backend/functions/lambda.ts` with.
+{%change%} Replace your `services/functions/lambda.ts` with.
 
 ```ts
 import { APIGatewayProxyEventV2, APIGatewayProxyHandlerV2 } from "aws-lambda";
@@ -160,7 +160,7 @@ Note that, this doesn't increase the timeout of an API. Since those cannot be in
 
 ## Starting your dev environment
 
-Now if you open up your project in VS Code, you can set a breakpoint in your `backend/functions/lambda.ts`.
+Now if you open up your project in VS Code, you can set a breakpoint in your `services/functions/lambda.ts`.
 
 Next, head over to the **Run And Debug** tab > select the above configured **Debug SST Start**, and hit **Play**.
 
@@ -170,7 +170,7 @@ The first time you start the Live Lambda Development environment, it'll take a c
 
 1. It'll bootstrap your AWS environment to use CDK.
 2. Deploy a debug stack to power the Live Lambda Development environment.
-3. Deploy your app, but replace the functions in the `backend/` directory with ones that connect to your local client.
+3. Deploy your app, but replace the functions in the `services/` directory with ones that connect to your local client.
 4. Start up a local client.
 
 Once complete, you should see something like this.
@@ -203,7 +203,7 @@ The `ApiEndpoint` is the API we just created. Now if you head over to that endpo
 
 An advantage of using the Live Lambda Development environment is that you can make changes without having to redeploy them.
 
-{%change%} Replace `backend/functions/lambda.ts` with the following.
+{%change%} Replace `services/functions/lambda.ts` with the following.
 
 ```ts
 import { APIGatewayProxyEventV2, APIGatewayProxyHandlerV2 } from "aws-lambda";

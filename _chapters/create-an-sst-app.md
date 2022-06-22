@@ -37,9 +37,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `backend/` — App Code
+2. `services/` — App Code
 
-   The Lambda function code that's run when your API is invoked is placed in the `backend/` directory of your project.
+   The Lambda function code that's run when your API is invoked is placed in the `services/` directory of your project.
 
 Later on we'll be adding a `frontend/` directory for our frontend React app.
 

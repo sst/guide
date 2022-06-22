@@ -12,7 +12,7 @@ Now let's create an API that allows a user to update a note with a new note obje
 
 ### Add the Function
 
-{%change%} Create a new file in `backend/functions/update.js` and paste the following.
+{%change%} Create a new file in `services/functions/update.js` and paste the following.
 
 ```js
 import handler from "../util/handler";

@@ -56,9 +56,9 @@ An SST app is made up of a couple of parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `backend/` — App Code
+2. `services/` — App Code
 
-   The code that's run when your API is invoked is placed in the `backend/` directory of your project.
+   The code that's run when your API is invoked is placed in the `services/` directory of your project.
 
 ## Create our infrastructure
 
@@ -88,9 +88,9 @@ export function MyStack({ stack, app }: StackContext) {
 }
 ```
 
-We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `backend/functions/lambda.ts` will get invoked.
+We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `services/functions/lambda.ts` will get invoked.
 
-{%change%} Your `backend/functions/lambda.ts` should look something like this.
+{%change%} Your `services/functions/lambda.ts` should look something like this.
 
 ```ts
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
@@ -108,7 +108,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
 
 Now let's setup [Datadog](https://www.datadoghq.com/) to monitor our API. Make sure [Datadog](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=roledelegation#setup) has been configured with your AWS account.
 
-{%change%} Run the following in the `backend/` directory.
+{%change%} Run the following in the `services/` directory.
 
 ```bash
 $ npm install --save-dev datadog-cdk-constructs-v2
