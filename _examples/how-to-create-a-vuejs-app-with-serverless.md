@@ -7,7 +7,7 @@ lang: en
 index: 3
 type: webapp
 description: In this example we will look at how to use Vue.js with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST) and the ViteStaticSite construct to deploy our app to AWS S3 and CloudFront.
-short_desc: Full-stack Next.js app with a serverless API.
+short_desc: Full-stack Vue.js app with a serverless API.
 repo: vue-app
 ref: how-to-create-a-vuejs-app-with-serverless
 comments_id: how-to-create-a-vue-js-app-with-serverless/2508
