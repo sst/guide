@@ -125,11 +125,11 @@ Now in our functions, let's first handle the case when a client connects to our 
 
 ```ts
 import { DynamoDB } from "aws-sdk";
-import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+import { APIGatewayProxyHandler } from "aws-lambda";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export const handler: APIGatewayProxyHandlerV2 = async (event) => {
+export const handler: APIGatewayProxyHandler = async (event) => {
   const params = {
     TableName: process.env.tableName,
     Item: {
@@ -159,11 +159,11 @@ Similarly, we'll remove the connection id from the table when a client disconnec
 
 ```ts
 import { DynamoDB } from "aws-sdk";
-import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+import { APIGatewayProxyHandler } from "aws-lambda";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export const handler: APIGatewayProxyHandlerV2 = async (event) => {
+export const handler: APIGatewayProxyHandler = async (event) => {
   const params = {
     TableName: process.env.tableName,
     Key: {
@@ -182,9 +182,9 @@ Now before handling the `sendmessage` route, let's do a quick test. We'll leave 
 {%change%} Add this to `services/functions/sendMessage.ts`.
 
 ```ts
-import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+import { APIGatewayProxyHandler } from "aws-lambda";
 
-export const handler: APIGatewayProxyHandlerV2 = async (event) => {
+export const handler: APIGatewayProxyHandler = async (event) => {
   return { statusCode: 200, body: "Message sent" };
 };
 ```
@@ -249,12 +249,12 @@ Now let's update our function to send messages.
 
 ```ts
 import { DynamoDB, ApiGatewayManagementApi } from "aws-sdk";
-import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+import { APIGatewayProxyHandler } from "aws-lambda";
 
 const TableName = process.env.tableName;
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export const handler: APIGatewayProxyHandlerV2 = async (event) => {
+export const handler: APIGatewayProxyHandler = async (event) => {
   const messageData = JSON.parse(event.body).data;
   const { stage, domainName } = event.requestContext;
 
