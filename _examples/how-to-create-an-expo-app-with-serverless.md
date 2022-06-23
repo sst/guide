@@ -26,7 +26,7 @@ In this example we will look at how to use [Expo](https://expo.dev) with a [serv
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst typescript-starter expo-app
+$ npx create-sst@latest --template=starters/typescript-starter expo-app
 $ cd expo-app
 $ npm install
 ```

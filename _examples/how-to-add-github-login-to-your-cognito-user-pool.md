@@ -27,7 +27,7 @@ In this example, we will look at how to add GitHub Login to Your Cognito User Po
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst typescript-starter api-oauth-github
+$ npx create-sst@latest --template=starters/typescript-starter api-oauth-github
 $ cd api-oauth-github
 $ npm install
 ```
@@ -375,11 +375,8 @@ We are going to print out the resources that we created for reference.
 Run the below commands in the root to create a basic react project.
 
 ```bash
-# npm 7+, extra double-dash is needed:
-$ npm init vite@latest frontend -- --template react
-
+$ npx create-vite@latest frontend --template react
 $ cd frontend
-
 $ npm install
 ```
 

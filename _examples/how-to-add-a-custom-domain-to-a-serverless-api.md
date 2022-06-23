@@ -27,7 +27,7 @@ In this example we will look at how to add a custom domain to a serverless API u
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst typescript-starter rest-api-custom-domain
+$ npx create-sst@latest --template=starters/typescript-starter rest-api-custom-domain
 $ cd rest-api-custom-domain
 $ npm install
 ```

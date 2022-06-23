@@ -27,7 +27,7 @@ In this example we will look at how to add Google authentication to a serverless
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst typescript-starter api-auth-google
+$ npx create-sst@latest --template=starters/typescript-starter api-auth-google
 $ cd api-auth-google
 $ npm install
 ```

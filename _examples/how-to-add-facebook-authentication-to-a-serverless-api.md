@@ -27,7 +27,7 @@ In this example we will look at how to add Facebook authentication to a serverle
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst typescript-starter api-auth-facebook
+$ npx create-sst@latest --template=starters/typescript-starter api-auth-facebook
 $ cd api-auth-facebook
 $ npm install
 ```

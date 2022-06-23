@@ -26,7 +26,7 @@ In this example we will look at how to use SQS to create a queue in our serverle
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst typescript-starter queue
+$ npx create-sst@latest --template=starters/typescript-starter queue
 $ cd queue
 $ npm install
 ```

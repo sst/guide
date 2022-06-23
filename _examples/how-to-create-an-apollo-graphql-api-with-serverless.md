@@ -26,7 +26,7 @@ In this example we'll look at how to create an [Apollo GraphQL API](https://www.
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst typescript-starter graphql-apollo
+$ npx create-sst@latest --template=starters/typescript-starter graphql-apollo
 $ cd graphql-apollo
 $ npm install
 ```

@@ -34,7 +34,7 @@ Here is a video of it in action.
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst typescript-starter graphql-appsync
+$ npx create-sst@latest --template=starters/typescript-starter graphql-appsync
 $ cd graphql-appsync
 $ npm install
 ```

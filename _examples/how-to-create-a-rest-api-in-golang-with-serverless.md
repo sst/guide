@@ -26,7 +26,7 @@ In this example we'll look at how to create a serverless REST API with Golang on
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst go-starter rest-api-go
+$ npx create-sst@latest --template=starters/go-starter rest-api-go
 $ cd rest-api-go
 $ npm install
 ```

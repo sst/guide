@@ -27,7 +27,7 @@ In this example we will look at how to add Twitter authentication to a serverles
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst typescript-starter api-auth-twitter
+$ npx create-sst@latest --template=starters/typescript-starter api-auth-twitter
 $ cd api-auth-twitter
 $ npm install
 ```

@@ -27,7 +27,7 @@ In this example we will look at how to add [Auth0](https://auth0.com) authentica
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst typescript-starter api-auth-auth0
+$ npx create-sst@latest --template=starters/typescript-starter api-auth-auth0
 $ cd api-auth-auth0
 $ npm install
 ```

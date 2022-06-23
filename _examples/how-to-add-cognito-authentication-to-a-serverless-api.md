@@ -26,7 +26,7 @@ In this example we will look at how to add [Cognito User Pool](https://docs.aws.
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst typescript-starter api-auth-cognito
+$ npx create-sst@latest --template=starters/typescript-starter api-auth-cognito
 $ cd api-auth-cognito
 $ npm install
 ```

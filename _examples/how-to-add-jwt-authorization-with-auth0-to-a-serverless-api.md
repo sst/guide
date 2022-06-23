@@ -27,7 +27,7 @@ In this example we will look at how to add JWT authorization with [Auth0](https:
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst typescript-starter api-auth-jwt-auth0
+$ npx create-sst@latest --template=starters/typescript-starter api-auth-jwt-auth0
 $ cd api-auth-jwt-auth0
 $ npm install
 ```
@@ -210,8 +210,7 @@ import { ViteStaticSite } from "@serverless-stack/resources";
 Run the below commands in the root to create a basic react project.
 
 ```bash
-# npm 7+, extra double-dash is needed:
-$ npm init vite@latest frontend -- --template react
+$ npx create-vite@latest frontend --template react
 $ cd frontend
 $ npm install
 ```

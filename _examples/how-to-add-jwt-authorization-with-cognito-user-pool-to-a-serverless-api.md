@@ -26,7 +26,7 @@ In this example we will look at how to add JWT authorization with [Cognito User 
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst typescript-starter api-auth-jwt-cognito-user-pool
+$ npx create-sst@latest --template=starters/typescript-starter api-auth-jwt-cognito-user-pool
 $ cd api-auth-jwt-cognito-user-pool
 $ npm install
 ```
@@ -203,8 +203,7 @@ import { ViteStaticSite } from "@serverless-stack/resources";
 Run the below commands in the root to create a basic react project.
 
 ```bash
-# npm 7+, extra double-dash is needed:
-$ npm init vite@latest frontend -- --template react
+$ npx create-vite@latest frontend --template react
 $ cd frontend
 $ npm install
 ```

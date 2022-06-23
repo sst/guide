@@ -27,7 +27,7 @@ In this example we will look at how to use [MongoDB Atlas](https://www.mongodb.c
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst typescript-starter rest-api-mongodb
+$ npx create-sst@latest --template=starters/typescript-starter rest-api-mongodb
 $ cd rest-api-mongodb
 $ npm install
 ```

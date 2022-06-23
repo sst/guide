@@ -26,7 +26,7 @@ In this example we will look at how to use SNS to create [a pub/sub system](http
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst typescript-starter pub-sub
+$ npx create-sst@latest --template=starters/typescript-starter pub-sub
 $ cd pub-sub
 $ npm install
 ```

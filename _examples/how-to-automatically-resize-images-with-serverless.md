@@ -34,7 +34,7 @@ Here is a video of it in action.
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst typescript-starter bucket-image-resize
+$ npx create-sst@latest --template=starters/typescript-starter bucket-image-resize
 $ cd bucket-image-resize
 $ npm install
 ```

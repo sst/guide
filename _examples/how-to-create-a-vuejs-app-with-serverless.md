@@ -26,7 +26,7 @@ In this example we will look at how to use [Vue.js](https://vuejs.org) with a [s
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst typescript-starter vue-app
+$ npx create-sst@latest --template=starters/typescript-starter vue-app
 $ cd vue-app
 $ npm install
 ```
@@ -270,7 +270,7 @@ We are now ready to use the API we just created. Let's use [Vue quickstart](http
 {%change%} Run the following in the project root.
 
 ```bash
-$ npm init vue@latest
+$ npx create-vue@latest
 ```
 
 This command will install and execute [create-vue](https://github.com/vuejs/create-vue), the official Vue project scaffolding tool. You will be presented with prompts for a number of optional features such as TypeScript and testing support:

@@ -26,7 +26,7 @@ In this example we will look at how to use [Gatsby](https://www.gatsbyjs.com/) w
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst typescript-starter gatsby-app
+$ npx create-sst@latest --template=starters/typescript-starter gatsby-app
 $ cd gatsby-app
 $ npm install
 ```
@@ -277,7 +277,7 @@ We are now ready to use the API we just created. Let's use [Gatsby Quick Start](
 {%change%} Run the following in the project root.
 
 ```bash
-$ npm init gatsby
+$ npx create-gatsby@latest
 ```
 
 Follow the prompts to choose your preferred CMS, styling tools and additional features. Name the app as `frontend`, For this tutorial we're going to use the default options as shown below.

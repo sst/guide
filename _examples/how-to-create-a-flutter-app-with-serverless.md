@@ -27,7 +27,7 @@ In this example we will look at how to use [Flutter](https://flutter.dev) with a
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst typescript-starter flutter-app
+$ npx create-sst@latest --template=starters/typescript-starter flutter-app
 $ cd flutter-app
 $ npm install
 ```

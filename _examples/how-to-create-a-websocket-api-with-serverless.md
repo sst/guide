@@ -26,7 +26,7 @@ In this example we will look at how to create a serverless WebSocket API on AWS 
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst typescript-starter websocket
+$ npx create-sst@latest --template=starters/typescript-starter websocket
 $ cd websocket
 $ npm install
 ```

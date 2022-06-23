@@ -26,7 +26,7 @@ In this example we will look at how to use [Svelte](https://svelte.dev) with a [
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npm init sst typescript-starter svelte-app
+$ npx create-sst@latest --template=starters/typescript-starter svelte-app
 $ cd svelte-app
 $ npm install
 ```
@@ -271,11 +271,8 @@ We are now ready to use the API we just created. Let's use [Vite](https://vitejs
 {%change%} Run the following in the project root.
 
 ```bash
-# npm 7+, extra double-dash is needed:
-$ npm init vite@latest frontend -- --template svelte
-
+$ npx create-vite@latest frontend --template react
 $ cd frontend
-
 $ npm install
 ```
 
