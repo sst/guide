@@ -19,4 +19,4 @@ This entire guide is hosted on [GitHub]({{ site.github_repo }}). So if you find 
 - Open a [new issue]({{ site.github_repo }}/issues/new)
 - Or if you've found a typo, edit the page and submit a pull request!
 
-You can also [join us on Slack]({{ site.slack_invite_url }}).
+You can also [join us on Discord]({{ site.discord_invite_url }}).

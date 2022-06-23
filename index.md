@@ -315,7 +315,7 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
       </li>
       <li>
         <h6>{{ site.stats.slack }}+</h6>
-        <p>Slack members</p>
+        <p>Discord members</p>
       </li>
       <li>
         <h6>{{ site.stats.newsletter_short }}+</h6>

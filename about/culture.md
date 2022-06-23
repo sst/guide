@@ -83,7 +83,7 @@ Let’s look at what this means practically. Starting with how we implement feat
 
 Here’s a rough step-by-step process that we try to follow.
 
-Let’s assume we get a message on Slack or somebody opens an issue on GitHub.
+Let’s assume we get a message on Discord or somebody opens an issue on GitHub.
 
 1. Start by understanding what the user is trying to do.
     - If it’s a bug, understand what's causing it. We don't need to have a solution, but we need to get all the information required to debug the issue. It's harder to get the user to send you debug information after they’ve moved on.
@@ -108,7 +108,7 @@ Let’s assume we get a message on Slack or somebody opens an issue on GitHub.
 10. Write a doc for it and add it to the PR. It doesn’t have to be perfect but it needs to be functional. The copy will be reviewed later but the content needs to be figured out upfront.
 11. Cut a release. In the release notes mention how to use the feature.
 12. Tell everybody that requested it about the release. Mention the version number, so they can upgrade to it.
-13. Announce the release in Slack, with a snippet on how to use the feature.
+13. Announce the release in Discord, with a snippet on how to use the feature.
 14. Make a list of all the copy and docs changes that need to be reviewed, create an issue and send it to the team.
 
 The key here is that it’s easier to gather the requirements and understand the problem when it’s first reported. Even if we don’t end up implementing the fix right away, users are far more engaged when the issue is first reported. We want to figure out a solution and get it validated by our users as early as possible. And document everything in a GitHub issue.
