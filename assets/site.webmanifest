@@ -1,6 +1,6 @@
 {
-    "name": "Serverless Stack",
-    "short_name": "Serverless Stack",
+    "name": "SST",
+    "short_name": "SST",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
