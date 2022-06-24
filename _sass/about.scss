@@ -41,19 +41,19 @@
 
         @include media-query($on-palm) {
           width: 35px;
-          top: -24px;
-          left: 0px;
+          top: -17px;
+          left: -22px;
         }
       }
 
       img:nth-child(3) {
         position: absolute;
-        right: -63px;
-        bottom: -27px;
+        right: -56px;
+        bottom: -24px;
 
         @include media-query($on-palm) {
           width: 35px;
-          right: 92px;
+          right: -22px;
           bottom: -21px;
         }
       }
@@ -67,7 +67,7 @@
     }
     & > p {
       margin: 0 auto;
-      padding-top: $spacing-unit / 2;
+      padding-top: $spacing-unit;
       max-width: 780px;
       font-size: 20px;
       line-height: 30px;
@@ -602,8 +602,8 @@
 
       img.desktop {
         position: absolute;
-        left: -386px;
-        top: -39px;
+        left: -212px;
+        top: 64px;
 
         @include media-query($on-monitor) {
           display: none;
@@ -612,15 +612,13 @@
       img.mobile {
         display: none;
         position: absolute;
-        left: -36px;
-        top: 44px;
 
         @include media-query($on-monitor) {
           display: block;
         }
         @include media-query($on-palm) {
-          left: -42px;
-          top: 31px;
+          left: -25px;
+          top: 89px;
         }
       }
     }
