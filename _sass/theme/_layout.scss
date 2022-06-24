@@ -350,10 +350,11 @@
     margin-bottom: 0;
     display: block;
     position: relative;
-    width: 203px;
-    height: 48px;
     white-space: nowrap;
 
+/**
+    width: 203px;
+    height: 48px;
     @keyframes logo1Fade {
       0% { opacity: 1; }
       33% { opacity: 1; }
@@ -399,6 +400,7 @@
         &:nth-of-type(4) { animation-name: logo3Fade; }
       }
     }
+**/
   }
 
   .links {
