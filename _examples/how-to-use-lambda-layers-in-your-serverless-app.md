@@ -6,14 +6,14 @@ date: 2021-05-26 00:00:00
 lang: en
 index: 2
 type: misc
-description: In this example we'll look at how to use a Lambda Layer in a serverless app using Serverless Stack (SST). We'll be using the chrome-aws-lambda Layer to take a screenshot of a webpage and return the image in our API.
+description: In this example we'll look at how to use a Lambda Layer in a serverless app using SST. We'll be using the chrome-aws-lambda Layer to take a screenshot of a webpage and return the image in our API.
 short_desc: Using the chrome-aws-lambda layer to take screenshots.
 repo: layer-chrome-aws-lambda
 ref: how-to-use-lambda-layers-in-your-serverless-app
 comments_id: how-to-use-lambda-layers-in-your-serverless-app/2405
 ---
 
-In this example we will look at how to use [Layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) in your serverless app with [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be using the [chrome-aws-lambda](https://github.com/shelfio/chrome-aws-lambda-layer) Layer to take a screenshot of a webpage and return the image in our API.
+In this example we will look at how to use [Layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) in your serverless app with [SST]({{ site.sst_github_repo }}). We'll be using the [chrome-aws-lambda](https://github.com/shelfio/chrome-aws-lambda-layer) Layer to take a screenshot of a webpage and return the image in our API.
 
 We'll be using SST's [Live Lambda Development]({{ site.docs_url }}/live-lambda-development). It allows you to make changes and test locally without having to redeploy.
 

@@ -6,14 +6,14 @@ date: 2021-02-08 00:00:00
 lang: en
 index: 1
 type: async
-description: In this example we will look at how to create a cron job in your serverless app on AWS using Serverless Stack (SST). We'll be using the Cron to create a simple weather tracking app that checks the weather forecast every minute.
+description: In this example we will look at how to create a cron job in your serverless app on AWS using SST. We'll be using the Cron to create a simple weather tracking app that checks the weather forecast every minute.
 short_desc: A simple serverless Cron job.
 repo: cron-job
 ref: how-to-use-cron-jobs-in-your-serverless-app
 comments_id: how-to-use-cron-jobs-in-your-serverless-app/2313
 ---
 
-In this example we will look at how to create a cron job in our serverless app using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be creating a simple task that runs every minute and prints the weather forecast.
+In this example we will look at how to create a cron job in our serverless app using [SST]({{ site.sst_github_repo }}). We'll be creating a simple task that runs every minute and prints the weather forecast.
 
 ## Requirements
 

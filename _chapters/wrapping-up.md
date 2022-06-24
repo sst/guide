@@ -61,6 +61,6 @@ We'd love to hear from you about your experience following this guide. Please [*
 
 <a class="button contact" href="{{ site.sst_github_repo }}" target="_blank">Star our GitHub repo</a>
 
-Also, we'd love to feature what you've built with Serverless Stack, please [send us a URL and brief description](mailto:{{ site.email }}).
+Also, we'd love to feature what you've built with SST, please [send us a URL and brief description](mailto:{{ site.email }}).
 
 Thank you and we hope you found this guide helpful!

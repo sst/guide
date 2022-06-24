@@ -6,14 +6,14 @@ date: 2021-11-13 00:00:00
 lang: en
 index: 3
 type: editor
-description: In this example we will look at how to debug AWS Lambda functions with IntelliJ IDEA using Serverless Stack (SST).
+description: In this example we will look at how to debug AWS Lambda functions with IntelliJ IDEA using SST.
 short_desc: Using IntelliJ IDEA to debug serverless apps.
 repo: intellij-idea
 ref: how-to-debug-lambda-functions-with-intellij-idea
 comments_id: how-to-debug-lambda-functions-with-intellij-idea/2530
 ---
 
-In this example we will look at how to debug AWS Lambda functions with [IntelliJ IDEA Ultimate](https://www.jetbrains.com/idea/) using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
+In this example we will look at how to debug AWS Lambda functions with [IntelliJ IDEA Ultimate](https://www.jetbrains.com/idea/) using [SST]({{ site.sst_github_repo }}).
 
 SST allows you to build and test Lambda functions locally using [Live Lambda Development]({{ site.docs_url }}/live-lambda-development). This means that you can attach breakpoints and inspect your Lambda functions locally, even if they are invoked remotely.
 

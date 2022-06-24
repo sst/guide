@@ -6,14 +6,14 @@ date: 2021-10-23 00:00:00
 lang: en
 index: 1
 type: mobileapp
-description: In this example we will look at how to use Expo with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST).
+description: In this example we will look at how to use Expo with a serverless API to create a simple click counter app. We'll be using SST.
 short_desc: Native app with Expo and a serverless API.
 repo: expo-app
 ref: how-to-create-an-expo-app-with-serverless
 comments_id: how-to-create-an-expo-app-with-serverless/2515
 ---
 
-In this example we will look at how to use [Expo](https://expo.dev) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}).
+In this example we will look at how to use [Expo](https://expo.dev) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [SST]({{ site.sst_github_repo }}).
 
 ## Requirements
 

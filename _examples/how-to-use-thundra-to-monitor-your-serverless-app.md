@@ -6,7 +6,7 @@ date: 2021-11-01 00:00:00
 lang: en
 index: 3
 type: monitoring
-description: In this example we will look at how to use Thundra APM with a serverless API to create and monitor a simple Hello world app. We'll be using the Serverless Stack Framework (SST).
+description: In this example we will look at how to use Thundra APM with a serverless API to create and monitor a simple Hello world app. We'll be using SST.
 short_desc: Using Thundra APM to monitor a serverless app.
 repo: thundra
 ref: how-to-use-thundra-apm-to-monitor-your-serverless-app

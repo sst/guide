@@ -6,14 +6,14 @@ date: 2021-11-13 00:00:00
 lang: en
 index: 2
 type: editor
-description: In this example we will look at how to debug AWS Lambda functions with WebStorm using Serverless Stack (SST).
+description: In this example we will look at how to debug AWS Lambda functions with WebStorm using SST.
 short_desc: Using WebStorm to debug serverless apps.
 repo: webstorm
 ref: how-to-debug-lambda-functions-with-webstorm
 comments_id: how-to-debug-lambda-functions-with-webstorm/2529
 ---
 
-In this example we will look at how to debug AWS Lambda functions with [WebStorm](https://www.jetbrains.com/webstorm/) using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
+In this example we will look at how to debug AWS Lambda functions with [WebStorm](https://www.jetbrains.com/webstorm/) using [SST]({{ site.sst_github_repo }}).
 
 SST allows you to build and test Lambda functions locally using [Live Lambda Development]({{ site.docs_url }}/live-lambda-development). This means that you can attach breakpoints and inspect your Lambda functions locally, even if they are invoked remotely.
 

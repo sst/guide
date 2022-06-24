@@ -12,7 +12,7 @@ Si vous rencontrez des problèmes avec une étape en particulier, nous voulons n
 - Nous utilisons [les sujets d'un forum de discussion Discourse]({{ site.forum_url }}) pour recevoir des commentaires et nous avons réussi à résoudre un certain nombre de problèmes dans le passé. Vérifiez donc les commentaires sous chaque chapitre pour voir si quelqu'un a déjà rencontré le même problème que vous (en anglais). 
 - Postez votre problème dans les commentaires pour le chapitre spécifique et l'un d'entre nous vous répondra (en anglais).
 
-![Serverless Stack Discourse Forums screenshot](/assets/serverless-stack-discourse-forums.png)
+![SST Discourse Forums screenshot](/assets/serverless-stack-discourse-forums.png)
 
 Le guide complet est hébergé sur[GitHub]({{ site.github_repo }}). Si vous trouvez une erreur, vous pouvez toujours:
 

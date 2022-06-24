@@ -14,6 +14,6 @@ Por lo tanto, podrías ser un desarrollador de backend que le gustaría aprender
 
 También estamos, por ahora, enfocando esto únicamente a los desarrolladores de JavaScript. Podríamos apuntar a otros idiomas y entornos en el futuro. Pero creemos que este es un buen punto de partida porque puede ser realmente beneficioso para un desarrollador fullstack usar un solo lenguaje (JavaScript) y un entorno (Node.js) para crear toda la aplicación.
 
-Como nota personal, el enfoque sin servidor ha sido una revelación gigante para nosotros y queríamos crear un recurso donde pudiéramos compartir lo que hemos aprendido. Puedes leer más sobre nosotros [**aquí**]({% link about/index.html %}). Y [echar un vistazo a una muestra de lo que la gente ha creado con Serverless Stack]({% link showcase.md %}).
+Como nota personal, el enfoque sin servidor ha sido una revelación gigante para nosotros y queríamos crear un recurso donde pudiéramos compartir lo que hemos aprendido. Puedes leer más sobre nosotros [**aquí**]({% link about/index.html %}). Y [echar un vistazo a una muestra de lo que la gente ha creado con SST]({% link showcase.md %}).
 
 Comencemos mirando lo que estaremos cubriendo.

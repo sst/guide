@@ -6,14 +6,14 @@ date: 2021-02-04 00:00:00
 lang: en
 index: 3
 type: database
-description: In this example we will look at how to use PostgreSQL in your serverless app on AWS using Serverless Stack (SST). We'll be using the Api construct and Amazon Aurora Serverless to create a simple hit counter.
+description: In this example we will look at how to use PostgreSQL in your serverless app on AWS using SST. We'll be using the Api construct and Amazon Aurora Serverless to create a simple hit counter.
 short_desc: Using PostgreSQL and Aurora in a serverless API.
 repo: rest-api-postgresql
 ref: how-to-use-postgresql-in-your-serverless-app
 comments_id: how-to-use-postgresql-in-your-serverless-app/2409
 ---
 
-In this example we will look at how to use PostgreSQL in our serverless app using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be creating a simple hit counter using [Amazon Aurora Serverless](https://aws.amazon.com/rds/aurora/serverless/).
+In this example we will look at how to use PostgreSQL in our serverless app using [SST]({{ site.sst_github_repo }}). We'll be creating a simple hit counter using [Amazon Aurora Serverless](https://aws.amazon.com/rds/aurora/serverless/).
 
 ## Requirements
 

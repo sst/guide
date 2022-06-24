@@ -69,4 +69,4 @@ Learn more about [Leadent Digital and their work here](https://leadent.digital).
 
 ---
 
-[Read more about Serverless Stack](/) and [get started]({{ site.docs_url }}{{ site.docs_get_started }}) today.
+[Read more about SST](/) and [get started]({{ site.docs_url }}{{ site.docs_get_started }}) today.

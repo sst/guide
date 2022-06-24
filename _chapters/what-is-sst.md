@@ -3,7 +3,7 @@ layout: post
 title: What is SST?
 date: 2021-08-17 00:00:00
 lang: en
-description: The Serverless Stack Framework (SST) makes it easy to build serverless applications. It's based on AWS CDK and allows developers to test their applications live.
+description: The SST makes it easy to build serverless applications. It's based on AWS CDK and allows developers to test their applications live.
 ref: what-is-sst
 comments_id: comments-for-what-is-sst/2468
 ---
@@ -12,7 +12,7 @@ We are going to be using [AWS Lambda](https://aws.amazon.com/lambda/), [Amazon A
 
 Since these services run on AWS, it can be tricky to test and debug them locally. And a big part of building serverless applications, is being able to define our infrastructure as code. This means that we want our infrastructure to be created programmatically. We don't want to have to click through the AWS Console to create our infrastructure.
 
-To solve these issues we created the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}).
+To solve these issues we created the [SST]({{ site.sst_github_repo }}).
 
 SST makes it easy to build serverless applications by allowing developers to:
 

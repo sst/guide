@@ -6,14 +6,14 @@ date: 2021-02-08 00:00:00
 lang: en
 index: 3
 type: jwt-auth
-description: In this example we will look at how to add Google Login to a Cognito User Pool using Serverless Stack (SST). We'll be using the Api and Auth constructs to create an authenticated API.
+description: In this example we will look at how to add Google Login to a Cognito User Pool using SST. We'll be using the Api and Auth constructs to create an authenticated API.
 short_desc: Authenticating a full-stack serverless app with Google.
 repo: api-oauth-google
 ref: how-to-add-google-login-to-your-cognito-user-pool
 comments_id: how-to-add-google-login-to-your-cognito-user-pool/2643
 ---
 
-In this example, we will look at how to add Google Login to Your Cognito User Pool using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
+In this example, we will look at how to add Google Login to Your Cognito User Pool using [SST]({{ site.sst_github_repo }}).
 
 ## Requirements
 

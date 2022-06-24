@@ -6,14 +6,14 @@ date: 2021-02-08 00:00:00
 lang: en
 index: 2
 type: iam-auth
-description: In this example we will look at how to add Facebook authentication to a serverless API using Serverless Stack (SST). We'll be using the Api and Auth constructs to create an authenticated API.
+description: In this example we will look at how to add Facebook authentication to a serverless API using SST. We'll be using the Api and Auth constructs to create an authenticated API.
 short_desc: Authenticating a serverless API with Facebook.
 repo: api-auth-facebook
 ref: how-to-add-facebook-authentication-to-a-serverless-api
 comments_id: how-to-add-facebook-authentication-to-a-serverless-api/2317
 ---
 
-In this example we will look at how to add Facebook authentication to a serverless API using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
+In this example we will look at how to add Facebook authentication to a serverless API using [SST]({{ site.sst_github_repo }}).
 
 ## Requirements
 

@@ -6,14 +6,14 @@ date: 2021-10-15 00:00:00
 lang: en
 index: 5
 type: webapp
-description: In this example we will look at how to use Gatsby with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST) and the SST StaticSite construct to deploy our app to AWS S3 and CloudFront.
+description: In this example we will look at how to use Gatsby with a serverless API to create a simple click counter app. We'll be using SST and the SST StaticSite construct to deploy our app to AWS S3 and CloudFront.
 short_desc: Full-stack Gatsby app with a serverless API.
 repo: gatsby-app
 ref: how-to-create-a-gatsby-app-with-serverless
 comments_id: how-to-create-a-gatsby-app-with-serverless/2595
 ---
 
-In this example we will look at how to use [Gatsby](https://www.gatsbyjs.com/) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) and the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite#creating-a-gatsby-site) construct to deploy our app to AWS.
+In this example we will look at how to use [Gatsby](https://www.gatsbyjs.com/) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [SST]({{ site.sst_github_repo }}) and the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite#creating-a-gatsby-site) construct to deploy our app to AWS.
 
 ## Requirements
 

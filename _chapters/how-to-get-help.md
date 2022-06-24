@@ -12,7 +12,7 @@ In case you find yourself having problems with a certain step, we want to make s
 - We use [Discourse forum topics]({{ site.forum_url }}) as our comments and we've helped resolve quite a few issues in the past. So make sure to check the comments under each chapter to see if somebody else has run into the same issue as you have.
 - Post in the comments for the specific chapter detailing your issue and one of us will respond.
 
-![Serverless Stack Discourse Forums screenshot](/assets/serverless-stack-discourse-forums.png)
+![SST Discourse Forums screenshot](/assets/serverless-stack-discourse-forums.png)
 
 This entire guide is hosted on [GitHub]({{ site.github_repo }}). So if you find an error you can always:
 

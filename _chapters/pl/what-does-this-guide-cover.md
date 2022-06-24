@@ -71,7 +71,7 @@ Ta część przewodnika została starannie opracowana, aby zrealizować ją od p
 
 2. **Najlepsze praktyki**
 
-  Na początku 2017 roku udostępniliśmy pierwszą wersję tego przewodnika, która obejmowała jedynie podstawy. Z biegiem czasu społeczność Serverless Stack rozrosła się i wielu naszych czytelników postanowiło wykorzystać konfigurację opisaną w tym przewodniku do stworzenia aplikacji, które napędzają ich biznes. W tej sekcji omówimy najlepsze praktyki związane z działaniem aplikacji w trybie produkcyjnym. Nabierają one wielkiego znaczenia, gdy baza kodu aplikacji się rozrasta lub gdy dodajesz więcej osób do swojego zespołu. Rozdziały w tej sekcji są stosunkowo niezależne i zwykle obracają się wokół określonych tematów. 
+  Na początku 2017 roku udostępniliśmy pierwszą wersję tego przewodnika, która obejmowała jedynie podstawy. Z biegiem czasu społeczność SST rozrosła się i wielu naszych czytelników postanowiło wykorzystać konfigurację opisaną w tym przewodniku do stworzenia aplikacji, które napędzają ich biznes. W tej sekcji omówimy najlepsze praktyki związane z działaniem aplikacji w trybie produkcyjnym. Nabierają one wielkiego znaczenia, gdy baza kodu aplikacji się rozrasta lub gdy dodajesz więcej osób do swojego zespołu. Rozdziały w tej sekcji są stosunkowo niezależne i zwykle obracają się wokół określonych tematów. 
 
 3. **Odsyłacze**
 

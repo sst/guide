@@ -4,14 +4,14 @@ title: 변경로그
 redirect_from: /chapters/older-versions.html
 lang: ko
 date: 2018-04-01 00:00:00
-description: A list of all the updates made to Serverless Stack
+description: A list of all the updates made to SST
 comments_id: comments-for-changelog/17
 ref: changelog
 ---
 
-Serverless Stack을 계속해서 업데이트하면서 모든 변경 사항을 명확하게 파악하고 싶습니다. 이는 업데이트 내용을 보완하기 위해 전체 자습서를 다시 살펴 보지 않아도 되도록 하기 위한 것입니다. 또한 참조가 필요할 경우에 대비하여 이전 버전을 그대로 두길 원합니다. 이는 업데이트 된 동안 자습서를 진행하는 독자에게도 유용합니다.
+SST을 계속해서 업데이트하면서 모든 변경 사항을 명확하게 파악하고 싶습니다. 이는 업데이트 내용을 보완하기 위해 전체 자습서를 다시 살펴 보지 않아도 되도록 하기 위한 것입니다. 또한 참조가 필요할 경우에 대비하여 이전 버전을 그대로 두길 원합니다. 이는 업데이트 된 동안 자습서를 진행하는 독자에게도 유용합니다.
 
-다음은 Serverless Stack에 대한 업데이트입니다.
+다음은 SST에 대한 업데이트입니다.
 
 - 각 업데이트에는 **보관 된 버전의 자습서**에 대한 링크가 있습니다.
 - 자습서에 **대한 최신 버전** 업데이트

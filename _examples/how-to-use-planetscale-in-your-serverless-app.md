@@ -6,14 +6,14 @@ date: 2021-12-12 00:00:00
 lang: en
 index: 5
 type: database
-description: In this example we will look at how to use PlanetScale in your serverless app on AWS using Serverless Stack (SST). We'll be using the Api construct to create a simple hit counter.
+description: In this example we will look at how to use PlanetScale in your serverless app on AWS using SST. We'll be using the Api construct to create a simple hit counter.
 short_desc: Using PlanetScale in a serverless API.
 repo: planetscale
 ref: how-to-use-planetscale-in-your-serverless-app
 comments_id: how-to-use-planetscale-in-your-serverless-app/2594
 ---
 
-In this example we will look at how to use PlanetScale in our serverless app using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be creating a simple hit counter.
+In this example we will look at how to use PlanetScale in our serverless app using [SST]({{ site.sst_github_repo }}). We'll be creating a simple hit counter.
 
 ## Requirements
 

@@ -6,14 +6,14 @@ date: 2021-04-04 00:00:00
 lang: en
 index: 4
 type: api
-description: In this example we will look at how to create a serverless REST API on AWS with Golang using Serverless Stack (SST). We'll be using the Api construct to define the routes of our API.
+description: In this example we will look at how to create a serverless REST API on AWS with Golang using SST. We'll be using the Api construct to define the routes of our API.
 short_desc: Building a REST API with Golang.
 repo: rest-api-go
 ref: how-to-create-a-rest-api-in-golang-with-serverless
 comments_id: how-to-create-a-rest-api-in-golang-with-serverless/2367
 ---
 
-In this example we'll look at how to create a serverless REST API with Golang on AWS using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
+In this example we'll look at how to create a serverless REST API with Golang on AWS using [SST]({{ site.sst_github_repo }}).
 
 ## Requirements
 

@@ -2,10 +2,10 @@
 layout: page
 title: How We Work
 editable: true
-description: This document is meant to be used as a user manual for the Serverless Stack team. In it we go over our cultural values and how we operate as a team.
+description: This document is meant to be used as a user manual for SST team. In it we go over our cultural values and how we operate as a team.
 ---
 
-In this document we'll go over the cultural values that drive our team at Serverless Stack. But before we get to these values, we want to go over a few things. We want to look at what we are building, why we are building it, and how we operate as a team. This'll give us a good sense of where our cultural values come from and why they matter to us.
+In this document we'll go over the cultural values that drive our team at SST. But before we get to these values, we want to go over a few things. We want to look at what we are building, why we are building it, and how we operate as a team. This'll give us a good sense of where our cultural values come from and why they matter to us.
 
 Here's what we'll be covering in this document.
 
@@ -19,7 +19,7 @@ Let's get started!
 
 ## About this document
 
-This document is meant to be used as a user manual for the Serverless Stack team. We think sharing it publicly serves two purposes:
+This document is meant to be used as a user manual for SST team. We think sharing it publicly serves two purposes:
 
 1. It helps the community get a better sense of how we operate.
 2. And, it helps keep us accountable to the standards we set.

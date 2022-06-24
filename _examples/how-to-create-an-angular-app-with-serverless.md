@@ -6,14 +6,14 @@ date: 2021-11-17 00:00:00
 lang: en
 index: 6
 type: webapp
-description: In this example we will look at how to use Angular with a serverless API to create a simple click counter app. We'll be using the Serverless Stack (SST), the StaticSite construct, and the SST Console to deploy our app to AWS S3 and CloudFront.
+description: In this example we will look at how to use Angular with a serverless API to create a simple click counter app. We'll be using SST, the StaticSite construct, and the SST Console to deploy our app to AWS S3 and CloudFront.
 short_desc: Full-stack Angular app with a serverless API.
 repo: angular-app
 ref: how-to-create-an-angular-app-with-serverless
 comments_id: how-to-create-an-angular-app-with-serverless/2599
 ---
 
-In this example we will look at how to use [Angular](https://angular.io) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) and the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite#creating-an-Angular-site) construct to deploy our app to AWS.
+In this example we will look at how to use [Angular](https://angular.io) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [SST]({{ site.sst_github_repo }}) and the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite#creating-an-Angular-site) construct to deploy our app to AWS.
 
 ## Requirements
 

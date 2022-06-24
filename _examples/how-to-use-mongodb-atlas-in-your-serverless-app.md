@@ -6,7 +6,7 @@ date: 2021-06-04 00:00:00
 lang: en
 index: 2
 type: database
-description: In this example we will look at how to use MongoDB Atlas in your serverless app on AWS using Serverless Stack (SST). We'll be using the Api construct to create a simple API that gets a list of users.
+description: In this example we will look at how to use MongoDB Atlas in your serverless app on AWS using SST. We'll be using the Api construct to create a simple API that gets a list of users.
 short_desc: Using MongoDB Atlas in a serverless API.
 repo: rest-api-mongodb
 ref: how-to-use-mongodb-in-your-serverless-app
@@ -14,7 +14,7 @@ redirect_from: /examples/how-to-use-mongodb-in-your-serverless-app.html
 comments_id: how-to-use-mongodb-in-your-serverless-app/2406
 ---
 
-In this example we will look at how to use [MongoDB Atlas](https://www.mongodb.com/atlas/database?utm_campaign=serverless_stack&utm_source=serverlessstack&utm_medium=website&utm_term=partner) in our serverless app using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be creating a simple API that returns a list of users.
+In this example we will look at how to use [MongoDB Atlas](https://www.mongodb.com/atlas/database?utm_campaign=serverless_stack&utm_source=serverlessstack&utm_medium=website&utm_term=partner) in our serverless app using [SST]({{ site.sst_github_repo }}). We'll be creating a simple API that returns a list of users.
 
 ## Requirements
 

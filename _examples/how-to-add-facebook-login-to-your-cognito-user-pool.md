@@ -6,14 +6,14 @@ date: 2022-05-29 00:00:00
 lang: en
 index: 5
 type: jwt-auth
-description: In this example we will look at how to add Facebook Login to a Cognito User Pool using Serverless Stack (SST). We'll be using the Api and Auth constructs to create an authenticated API.
+description: In this example we will look at how to add Facebook Login to a Cognito User Pool using SST. We'll be using the Api and Auth constructs to create an authenticated API.
 short_desc: Authenticating a full-stack serverless app with Facebook.
 repo: api-oauth-facebook
 ref: how-to-add-facebook-login-to-your-cognito-user-pool
 comments_id: how-to-add-facebook-login-to-your-cognito-user-pool/2679
 ---
 
-In this example, we will look at how to add Facebook Login to Your Cognito User Pool using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
+In this example, we will look at how to add Facebook Login to Your Cognito User Pool using [SST]({{ site.sst_github_repo }}).
 
 ## Requirements
 

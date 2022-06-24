@@ -6,14 +6,14 @@ date: 2021-02-08 00:00:00
 lang: en
 index: 4
 type: iam-auth
-description: In this example we will look at how to add Twitter authentication to a serverless API using Serverless Stack (SST). We'll be using the Api and Auth constructs to create an authenticated API.
+description: In this example we will look at how to add Twitter authentication to a serverless API using SST. We'll be using the Api and Auth constructs to create an authenticated API.
 short_desc: Authenticating a serverless API with Twitter.
 repo: api-auth-twitter
 ref: how-to-add-twitter-authentication-to-a-serverless-api
 comments_id: how-to-add-twitter-authentication-to-a-serverless-api/2319
 ---
 
-In this example we will look at how to add Twitter authentication to a serverless API using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
+In this example we will look at how to add Twitter authentication to a serverless API using [SST]({{ site.sst_github_repo }}).
 
 ## Requirements
 

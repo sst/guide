@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://serverless-stack.com/">
-    <img alt="Serverless Stack" src="https://github.com/AnomalyInnovations/serverless-stack-com/raw/master/assets/logo-large.png" width="377" />
+    <img alt="SST" src="https://github.com/AnomalyInnovations/serverless-stack-com/raw/master/assets/logo-large.png" width="377" />
   </a>
 </p>
 
@@ -12,7 +12,7 @@
 
 ------------------------------------------------------------------------------------
 
-The [Serverless Stack Guide](https://serverless-stack.com/guide.html) is a comprehensive open source tutorial for building and deploying full-stack apps using Serverless and React on AWS.
+The [SST Guide](https://serverless-stack.com/guide.html) is a comprehensive open source tutorial for building and deploying full-stack apps using Serverless and React on AWS.
 
 We are going to create a [note taking app](https://demo.serverless-stack.com) from scratch using React.js, AWS Lambda, API Gateway, DynamoDB, and Cognito.
 
@@ -44,11 +44,11 @@ We also have an alternative Serverless Framework version: [backend serverless AP
 
 ## Contributing
 
-Thank you for your considering to contribute. [Read more about how you can contribute to Serverless Stack][Contributing].
+Thank you for your considering to contribute. [Read more about how you can contribute to SST][Contributing].
 
 ## Running Locally
 
-Serverless Stack is built using [Jekyll](https://jekyllrb.com). [Follow these steps to install Jekyll](https://jekyllrb.com/docs/installation/).
+SST is built using [Jekyll](https://jekyllrb.com). [Follow these steps to install Jekyll](https://jekyllrb.com/docs/installation/).
 
 #### Viewing Locally
 
@@ -96,12 +96,12 @@ The above are run automatically through [Github Actions](https://github.com/Anom
 <!--
 ## Sponsors
 
-[**Sponsor Serverless Stack on GitHub**](https://github.com/sponsors/jayair) if you've found this guide useful or would like to be an official supporter. [A big thanks to our supporters](https://serverless-stack.com/sponsors.html)!
+[**Sponsor SST on GitHub**](https://github.com/sponsors/jayair) if you've found this guide useful or would like to be an official supporter. [A big thanks to our supporters](https://serverless-stack.com/sponsors.html)!
 -->
 
 ## Contributors
 
-Thanks to these folks for their contributions to the content of Serverless Stack.
+Thanks to these folks for their contributions to the content of SST.
 
 - [Peter Eman Paver Abastillas](https://github.com/jatazoulja): Social login chapters
 - [Bernardo Bugmann](https://github.com/bernardobugmann): Translating chapters to Portuguese
@@ -117,7 +117,7 @@ Thanks to these folks for their contributions to the content of Serverless Stack
 
 ---
 
-This repo is maintained by [Serverless Stack](https://serverless-stack.com).
+This repo is maintained by [SST](https://serverless-stack.com).
 
 
 [Slack]: https://serverless-stack.com/slack

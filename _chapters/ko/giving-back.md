@@ -20,15 +20,15 @@ ref: giving-back
 
 - **핵심 가이드 업데이트 유지**
 
-  Serverless Stack은 많은 수의 서비스와 오픈 소스 라이브러리 및 프로젝트에 의존합니다. 서비스 및 종속성에 대한 스크린 샷은 매번 업데이트됩니다. [여기에 대한 자세한 내용은 이 곳에 있습니다]({{ site.github_repo }}/blob/master/CONTRIBUTING.md#keep-the-core-guide-updated#keep-the-core-guide-updated).
+  SST은 많은 수의 서비스와 오픈 소스 라이브러리 및 프로젝트에 의존합니다. 서비스 및 종속성에 대한 스크린 샷은 매번 업데이트됩니다. [여기에 대한 자세한 내용은 이 곳에 있습니다]({{ site.github_repo }}/blob/master/CONTRIBUTING.md#keep-the-core-guide-updated#keep-the-core-guide-updated).
 
 - **가이드 번역에 도움주기**
 
-  독자들의 헌신 덕분에 Serverless Stack을 여러 언어로 번역하는데 도움을 받고 있습니다. 여기서 [저희의 진행 상황]({% link _chapters/translations.md %})을 확인할 수 있습니다. 번역 작업을 돕고 싶다면 [여기에 의견을 남겨주세요.](https://discourse.serverless-stack.com/t/help-us-translate-serverless-stack/596/15)
+  독자들의 헌신 덕분에 SST을 여러 언어로 번역하는데 도움을 받고 있습니다. 여기서 [저희의 진행 상황]({% link _chapters/translations.md %})을 확인할 수 있습니다. 번역 작업을 돕고 싶다면 [여기에 의견을 남겨주세요.](https://discourse.serverless-stack.com/t/help-us-translate-serverless-stack/596/15)
 
 - **보너스 챕터 추가**
 
-  핵심 챕터에서는 Severless Stack 설정을 사용자 지정하기 위한 필요한 몇 가지 추가 정보가 빠져 있습니다(단순성을 위해). 또한 가이드의 핵심 부분에서 다루지 않는 경우도 있습니다. 우리는 *보너스 챕터*를 통해 이러한 문제를 해결합니다. Serverless Stack을 확장 할 기회가 있다면 그에 대한 챕터를 작성하는 것을 고려하십시오. [여기에 보너스 챕터를 추가하는 방법에 대한 자세한 내용이 있습니다]({{ site.github_repo }}/blob/master/CONTRIBUTING.md#add-an-extra-credit-chapter).
+  핵심 챕터에서는 Severless Stack 설정을 사용자 지정하기 위한 필요한 몇 가지 추가 정보가 빠져 있습니다(단순성을 위해). 또한 가이드의 핵심 부분에서 다루지 않는 경우도 있습니다. 우리는 *보너스 챕터*를 통해 이러한 문제를 해결합니다. SST을 확장 할 기회가 있다면 그에 대한 챕터를 작성하는 것을 고려하십시오. [여기에 보너스 챕터를 추가하는 방법에 대한 자세한 내용이 있습니다]({{ site.github_repo }}/blob/master/CONTRIBUTING.md#add-an-extra-credit-chapter).
 
 - **Tooling 개선**
 

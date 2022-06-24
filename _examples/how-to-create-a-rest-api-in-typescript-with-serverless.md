@@ -6,14 +6,14 @@ date: 2021-02-04 00:00:00
 lang: en
 index: 3
 # type: api
-description: In this example we will look at how to create a serverless REST API on AWS with TypeScript using Serverless Stack (SST). We'll be using the Api construct to define the routes of our API.
+description: In this example we will look at how to create a serverless REST API on AWS with TypeScript using SST. We'll be using the Api construct to define the routes of our API.
 short_desc: Building a REST API with TypeScript.
 repo: rest-api-ts
 ref: how-to-create-a-rest-api-in-typescript-with-serverless
 comments_id: how-to-create-a-rest-api-in-typescript-with-serverless/2306
 ---
 
-In this example we'll look at how to create a serverless REST API with TypeScript on AWS using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We also have a [a JavaScript version of this example]({% link _examples/how-to-create-a-rest-api-in-typescript-with-serverless.md %}) as well.
+In this example we'll look at how to create a serverless REST API with TypeScript on AWS using [SST]({{ site.sst_github_repo }}). We also have a [a JavaScript version of this example]({% link _examples/how-to-create-a-rest-api-in-typescript-with-serverless.md %}) as well.
 
 ## Requirements
 

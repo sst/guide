@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Subscribe to our newsletter
-description: Subscribe to our monthly newsletter and receive the entire Serverless Stack guide as a 1000 page ebook for free!
+description: Subscribe to our monthly newsletter and receive the entire SST guide as a 1000 page ebook for free!
 ---
 
 - No spam

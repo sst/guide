@@ -1,10 +1,10 @@
 ---
 layout: page
 title: Serverless Framework vs SST
-description: In this post we compare Serverless Framework with Serverless Stack Framework (SST). We look at how to test your serverless apps locally in both the frameworks and how Live Lambda Development works in SST.
+description: In this post we compare Serverless Framework with SST. We look at how to test your serverless apps locally in both the frameworks and how Live Lambda Development works in SST.
 ---
 
-In this post we compare [Serverless Framework](https://github.com/serverless/serverless) with [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}). We'll also take a deeper look at what makes SST different.
+In this post we compare [Serverless Framework](https://github.com/serverless/serverless) with [SST]({{ site.sst_github_repo }}). We'll also take a deeper look at what makes SST different.
 
 Let's start with some quick background.
 
@@ -106,7 +106,7 @@ While this process works, it requires you to wait to see your results. Making fo
 
 > Testing locally by repeatedly deploying your Lambda function creates a slow feedback loop.
 
-## Serverless Stack Framework (SST)
+## SST
 
 In contrast, [SST]({{ site.sst_github_repo }}) was launched in early 2021 and has since grown rapidly to become the new way to build full-stack serverless applications. It uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}) to define your infrastructure. You define your stacks using real programming languages like JavaScript or TypeScript.
 

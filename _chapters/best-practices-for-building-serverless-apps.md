@@ -10,7 +10,7 @@ In this section of the guide we'll be covering the best practices for developing
 
 ### Background
 
-Serverless Stack was launched back in March 2017. Since then thousands of folks have used the guide to build their first full-stack Serverless app. Many of you have used this as a starting point to build really large applications. Applications that are made up of scores of services worked on by a team of developers.
+SST was launched back in March 2017. Since then thousands of folks have used the guide to build their first full-stack Serverless app. Many of you have used this as a starting point to build really large applications. Applications that are made up of scores of services worked on by a team of developers.
 
 However, the challenges that teams face while developing large scale Serverless applications are very different from the one an individual faces while building his or her first app. You've to deal with architectural design decisions and questions that can be hard to answer if you haven't built and managed a large scale Serverless app before. Questions like:
 
@@ -27,7 +27,7 @@ While there are tons of blog posts out there that answer some of these questions
 
 ### A new perspective
 
-Now nearly 3 years into working on Serverless Stack and building large scale Serverless applications, there are some common design patterns that we can confidently share with our readers. Additionally, Serverless as a technology and community has also matured to the point where there are reasonable answers for the above questions.
+Now nearly 3 years into working on SST and building large scale Serverless applications, there are some common design patterns that we can confidently share with our readers. Additionally, Serverless as a technology and community has also matured to the point where there are reasonable answers for the above questions.
 
 This new addition to the guide is designed to lay out some of the best practices and give you a solid foundation to use Serverless at your company. You can be confident that as your application and team grows, you'll be on the right track for building something that scales. 
 

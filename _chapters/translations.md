@@ -33,7 +33,7 @@ Below is a list of all the chapters that are available in multiple languages. If
 
 ---
 
-A big thanks to our contributors for helping make Serverless Stack more accessible!
+A big thanks to our contributors for helping make SST more accessible!
 
 - [Bernardo Bugmann](https://github.com/bernardobugmann)
 - [Sebastian Gutierrez](https://github.com/pepas24)

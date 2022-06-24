@@ -6,7 +6,7 @@ date: 2021-11-26 00:00:00
 lang: en
 index: 4
 type: monitoring
-description: In this example we will look at how to use Lumigo with a serverless API to create and monitor a simple click counter app. We'll be using the Serverless Stack Framework (SST).
+description: In this example we will look at how to use Lumigo with a serverless API to create and monitor a simple click counter app. We'll be using SST.
 short_desc: Using Lumigo to monitor a serverless app.
 repo: lumigo
 ref: how-to-use-lumigo-to-monitor-your-serverless-app

@@ -12,7 +12,7 @@ comments_id: how-to-get-help/95
 - 我们使用 [ Discourse 论坛主题]({{ site.forum_url }})作为我们的评论，我们过去已经帮助解决了很多问题。因此，请确保查看每一章节下的评论，看是否有其他人遇到了和你一样的问题。
 - 在特定章节的评论中发布详细描述你问题的信息，我们中有人将会回应。
 
-![Serverless Stack Discourse Forums screenshot](/assets/serverless-stack-discourse-forums.png)
+![SST Discourse Forums screenshot](/assets/serverless-stack-discourse-forums.png)
 
 完整的指南托管在 [GitHub]({{ site.github_repo }})上。因此，如果你发现了错误，你可以随时：
 - 打开一个 [新的话题]({{ site.github_repo }}/issues/new)

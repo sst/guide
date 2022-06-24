@@ -8,7 +8,7 @@ comments_id: further-reading/209
 ref: further-reading
 ---
 
-이 가이드를 마치면 다음 프로젝트에 Serverless Stack을 사용할 것입니다. 그 과정에서 도움을 드리기 위해 참조용으로 사용할 수있는 문서 목록을 작성하려고합니다. 다음은이 가이드에서 사용된 일부 기술 및 서비스에 대해 자세하게 설명하는데 사용할 수 있습니다.
+이 가이드를 마치면 다음 프로젝트에 SST을 사용할 것입니다. 그 과정에서 도움을 드리기 위해 참조용으로 사용할 수있는 문서 목록을 작성하려고합니다. 다음은이 가이드에서 사용된 일부 기술 및 서비스에 대해 자세하게 설명하는데 사용할 수 있습니다.
 
 - [Serverless Framework 문서](https://serverless.com/framework/docs/): Serverless 프레임워크를 위한 문서
 

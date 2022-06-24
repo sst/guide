@@ -57,7 +57,7 @@ Você vai precisar do [Node.js v8.10+ e NPM v5.5+](https://nodejs.org/en/). Voc�
 
 ### Como esse guia é estruturado
 
-O guia é separado em duas partes. Ambas são relativamente "únicas". A primeira parte cobre o básico enquanto a segunda parte cobre os tópicos mais avançados e um pouco de automação do setup. Nós lançamos esse guia no começo de 2017 apenas com a primeira parte. A comunidade Serverless Stack cresceu bastante nesse meio tempo e a maioria dos nossos leitores usaram o que foi feito nesse guia para aumentar o tamanho de seus negócios.
+O guia é separado em duas partes. Ambas são relativamente "únicas". A primeira parte cobre o básico enquanto a segunda parte cobre os tópicos mais avançados e um pouco de automação do setup. Nós lançamos esse guia no começo de 2017 apenas com a primeira parte. A comunidade SST cresceu bastante nesse meio tempo e a maioria dos nossos leitores usaram o que foi feito nesse guia para aumentar o tamanho de seus negócios.
 
 Então nós decidimos extender esse guia e adicionar uma segunda parte a ele. Essa sendo destinada para pessoas que prentendem usar essa tecnologia para seus próprios projetos. Essa segunda parte ensina a automatizar todas as partes manuais da parte 1 e ajuda você a criar um fluxo de trabalho completo para produção.
 
@@ -90,7 +90,7 @@ Para o frontend:
 
 #### Parte II
 
-Focando nos leitores que estão procurando uma maneira de utilizar o Serverless Stack para os projetos do dia-a-dia. Nós automatizamos todos os passos da primeira etapa. A seguir é o que nós vamos cobrir, por ordem.
+Focando nos leitores que estão procurando uma maneira de utilizar o SST para os projetos do dia-a-dia. Nós automatizamos todos os passos da primeira etapa. A seguir é o que nós vamos cobrir, por ordem.
 
 Para o backend:
 

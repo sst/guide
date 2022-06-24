@@ -12,7 +12,7 @@ comments_id: how-to-get-help/95
 - 우리는 [담론 포럼 주제]({{site.forum_url}})를 우리의 의견으로 사용하고 과거에 많은 문제를 해결하는 데 도움을주었습니다. 따라서 각 장의 주석을 확인하여 다른 사람이 가졌던 문제와 동일한 문제가 발생했는지 확인하십시오.
 - 여러분의 쟁점을 상세히 설명하는 특정 챕터에 대한 의견을 게시하십시오. 저희들 중 한 명이 답변 드릴 것입니다.
 
-! [Serverless Stack Discourse Forums 스크린 샷](/assets/serverless-stack-discourse-forums.png)
+! [SST Discourse Forums 스크린 샷](/assets/serverless-stack-discourse-forums.png)
 
 이 전체 가이드는 [GitHub]({{site.github_repo}})에서 호스팅됩니다. 따라서 오류를 발견하면 항상 다음 작업을 수행할 수 있습니다.
 

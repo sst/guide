@@ -6,14 +6,14 @@ date: 2021-06-17 00:00:00
 lang: en
 index: 1
 type: webapp
-description: In this example we will look at how to use React.js with a serverless API to create a simple click counter app. We'll be using the Serverless Stack Framework (SST) and the ReactStaticSite construct to deploy our app to AWS S3 and CloudFront.
+description: In this example we will look at how to use React.js with a serverless API to create a simple click counter app. We'll be using SST and the ReactStaticSite construct to deploy our app to AWS S3 and CloudFront.
 short_desc: Full-stack React app with a serverless API.
 repo: react-app
 ref: how-to-create-a-reactjs-app-with-serverless
 comments_id: how-to-create-a-react-js-app-with-serverless/2413
 ---
 
-In this example we will look at how to use [React.js](https://reactjs.org) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) and the SST [`ReactStaticSite`]({{ site.docs_url }}/constructs/ReactStaticSite) construct to deploy our app to AWS.
+In this example we will look at how to use [React.js](https://reactjs.org) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [SST]({{ site.sst_github_repo }}) and the SST [`ReactStaticSite`]({{ site.docs_url }}/constructs/ReactStaticSite) construct to deploy our app to AWS.
 
 ## Requirements
 

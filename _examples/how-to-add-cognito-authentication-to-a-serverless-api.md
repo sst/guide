@@ -6,14 +6,14 @@ date: 2021-02-08 00:00:00
 lang: en
 index: 1
 type: iam-auth
-description: In this example we will look at how to add Cognito User Pool authentication to a serverless API using Serverless Stack (SST). We'll be using the Api and Auth constructs to create an authenticated API.
+description: In this example we will look at how to add Cognito User Pool authentication to a serverless API using SST. We'll be using the Api and Auth constructs to create an authenticated API.
 short_desc: Authenticating with Cognito User Pool and Identity Pool.
 repo: api-auth-cognito
 ref: how-to-add-cognito-authentication-to-a-serverless-api
 comments_id: how-to-add-cognito-authentication-to-a-serverless-api/2316
 ---
 
-In this example we will look at how to add [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) authentication to a serverless API using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
+In this example we will look at how to add [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) authentication to a serverless API using [SST]({{ site.sst_github_repo }}).
 
 ## Requirements
 

@@ -8,7 +8,7 @@ ref: further-reading
 comments_id: further-reading/209
 ---
 
-Once you've completed the guide, you are probably going to use the Serverless Stack for your next project. To help you along the way we try to compile a list of docs that you can use as a reference. The following can be used to drill down in detail for some of the technologies and services used in this guide.
+Once you've completed the guide, you are probably going to use SST for your next project. To help you along the way we try to compile a list of docs that you can use as a reference. The following can be used to drill down in detail for some of the technologies and services used in this guide.
 
 - [SST Documentation]({{ site.docs_url }}): Documentation for SST.
 

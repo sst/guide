@@ -2,7 +2,7 @@
 layout: post
 title: Giving Back
 lang: en
-description: Contributing to Serverless Stack by supporting us on GitHub and helping keep the content up to date.
+description: Contributing to SST by supporting us on GitHub and helping keep the content up to date.
 date: 2018-03-31 00:00:00
 ref: giving-back
 comments_id: comments-for-giving-back/193
@@ -20,15 +20,15 @@ If you've found this guide helpful please consider helping us out by doing the f
 
 - **Keep the core guide updated**
 
-  Serverless Stack is reliant on a large number of services and open source libraries and projects. The screenshots for the services and the dependencies need to be updated every once in a while. [Here is a little more details on this]({{ site.github_repo }}/blob/master/CONTRIBUTING.md#keep-the-core-guide-updated).
+  SST is reliant on a large number of services and open source libraries and projects. The screenshots for the services and the dependencies need to be updated every once in a while. [Here is a little more details on this]({{ site.github_repo }}/blob/master/CONTRIBUTING.md#keep-the-core-guide-updated).
 
 - **Help translate the guide**
 
-  Our incredible readers are helping translate Serverless Stack into multiple languages. You can check out [our progress here]({% link _chapters/translations.md %}). If you would like to help with our translation efforts, [leave us a comment here](https://discourse.serverless-stack.com/t/help-us-translate-serverless-stack/596/15).
+  Our incredible readers are helping translate SST into multiple languages. You can check out [our progress here]({% link _chapters/translations.md %}). If you would like to help with our translation efforts, [leave us a comment here](https://discourse.serverless-stack.com/t/help-us-translate-serverless-stack/596/15).
 
 - **Add an extra credit chapter**
 
-  The core chapters are missing some extra details (for the sake of simplicity) that are necessary once you start customizing the Serverless Stack setup. Additionally, there are cases that we just don't handle in the core part of the guide. We are addressing these via *Extra Credit chapters*. If you have had a chance to extend Serverless Stack consider writing a chapter on it. [Here are further details on how to add an extra credit chapter]({{ site.github_repo }}/blob/master/CONTRIBUTING.md#add-an-extra-credit-chapter).
+  The core chapters are missing some extra details (for the sake of simplicity) that are necessary once you start customizing SST setup. Additionally, there are cases that we just don't handle in the core part of the guide. We are addressing these via *Extra Credit chapters*. If you have had a chance to extend SST consider writing a chapter on it. [Here are further details on how to add an extra credit chapter]({{ site.github_repo }}/blob/master/CONTRIBUTING.md#add-an-extra-credit-chapter).
 
 - **Improve tooling**
 

@@ -58,7 +58,7 @@ Vous avez besoin de [Node v8.10+ and NPM v5.5+](https://nodejs.org/en/). Vous au
 
 ### Comment ce guide est structuré
 
-Le guide est séparé en deux parties distinctes. Elles sont toutes deux relativement autoportantes. La première partie couvre les fondamentaux, la deuxième couvre des sujets plus avancés ainsi qu'un moyen d'automatiser l'infrastructure. Nous avons lancé ce guide début 2017 avec uniquement la première partie. La communauté Serverless Stack a grandi et beaucoup de nos lecteurs ont utilisé ce setup pour leur business.
+Le guide est séparé en deux parties distinctes. Elles sont toutes deux relativement autoportantes. La première partie couvre les fondamentaux, la deuxième couvre des sujets plus avancés ainsi qu'un moyen d'automatiser l'infrastructure. Nous avons lancé ce guide début 2017 avec uniquement la première partie. La communauté SST a grandi et beaucoup de nos lecteurs ont utilisé ce setup pour leur business.
 
 Nous avons donc décider d'étendre ce guide et d'y ajouter une sconde partie. Cela cible les personnes qui pensent utiliser ce setup pour leurs projets. Elle automatise les étapes manuelle de la partie 1 et aide à la création d'un workfow prêt pour la production que vous pouvez utiliser pour tous vos projets serverless. Voici ce que nous aobrdons dans les deux parties.
 

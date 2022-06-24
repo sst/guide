@@ -12,7 +12,7 @@ Caso você tenha algum problema em algum passo específico, nós queremos ter ce
 - Nós usamos um [fórum]({{ site.forum_url }}) como sessão de comentários e com isso já ajudamos várias pessoas a resolver seus problemas no passado. Então, tenha certeza que sua dúvida ainda não foi sanada antes de fazer um novo comentário.
 - Poste no fórum específico do capítulo que você está tendo problemas para mantermos a organização.
 
-![Serverless Stack Discourse Forums screenshot](/assets/serverless-stack-discourse-forums.png)
+![SST Discourse Forums screenshot](/assets/serverless-stack-discourse-forums.png)
 
 O guia inteiro está hospedado no [GitHub]({{ site.github_repo }}). Se você achar algum erro, você pode:
 

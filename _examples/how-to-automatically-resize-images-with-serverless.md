@@ -6,14 +6,14 @@ date: 2021-02-08 00:00:00
 lang: en
 index: 4
 type: async
-description: In this example we will look at how to automatically resize images that are uploaded to your S3 bucket using Serverless Stack (SST). We'll be using the Bucket construct and a Lambda layer to set this up.
+description: In this example we will look at how to automatically resize images that are uploaded to your S3 bucket using SST. We'll be using the Bucket construct and a Lambda layer to set this up.
 short_desc: Automatically resize images uploaded to S3.
 repo: bucket-image-resize
 ref: how-to-automatically-resize-images-with-serverless
 comments_id: how-to-automatically-resize-images-with-serverless/2399
 ---
 
-In this example we will look at how to automatically resize images that are uploaded to your S3 bucket using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be using the [Sharp](https://github.com/lovell/sharp) package as a [Lambda Layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
+In this example we will look at how to automatically resize images that are uploaded to your S3 bucket using [SST]({{ site.sst_github_repo }}). We'll be using the [Sharp](https://github.com/lovell/sharp) package as a [Lambda Layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
 
 We'll be using SST's [Live Lambda Development]({{ site.docs_url }}/live-lambda-development). It allows you to make changes and test locally without having to redeploy.
 

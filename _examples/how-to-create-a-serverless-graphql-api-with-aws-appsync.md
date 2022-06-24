@@ -13,7 +13,7 @@ ref: how-to-create-a-serverless-graphql-api-with-aws-appsync
 comments_id: how-to-create-a-serverless-graphql-api-with-aws-appsync/2362
 ---
 
-In this example we'll look at how to create an [AppSync GraphQL API]({% link _chapters/what-is-aws-appsync.md %}) on AWS using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be allowing our users to get, create, update, delete, and list notes.
+In this example we'll look at how to create an [AppSync GraphQL API]({% link _chapters/what-is-aws-appsync.md %}) on AWS using [SST]({{ site.sst_github_repo }}). We'll be allowing our users to get, create, update, delete, and list notes.
 
 We'll be using SST's [Live Lambda Development]({{ site.docs_url }}/live-lambda-development). It allows you to make changes and test AppSync locally without having to redeploy.
 

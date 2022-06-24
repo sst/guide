@@ -4,14 +4,14 @@ title: Changelog
 lang: en
 redirect_from: /chapters/older-versions.html
 date: 2018-04-01 00:00:00
-description: A list of all the updates made to Serverless Stack
+description: A list of all the updates made to SST
 ref: changelog
 comments_id: comments-for-changelog/17
 ---
 
-As we continue to update Serverless Stack, we want to make sure that we give you a clear idea of all the changes that are being made. This is to ensure that you won't have to go through the entire tutorial again to get caught up on the updates. We also want to leave the older versions up in case you need a reference. This is also useful for readers who are working through the tutorial while it gets updated.
+As we continue to update SST, we want to make sure that we give you a clear idea of all the changes that are being made. This is to ensure that you won't have to go through the entire tutorial again to get caught up on the updates. We also want to leave the older versions up in case you need a reference. This is also useful for readers who are working through the tutorial while it gets updated.
 
-Below are the updates we’ve made to Serverless Stack, each with:
+Below are the updates we’ve made to SST, each with:
 
 - Each update has a link to an **archived version of the tutorial**
 - Updates to the tutorial **compared to the last version**

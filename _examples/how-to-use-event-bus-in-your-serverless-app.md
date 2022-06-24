@@ -6,14 +6,14 @@ date: 2021-12-18 00:00:00
 lang: en
 index: 6
 type: async
-description: In this example we will look at how to use event bus in your serverless app on AWS using Serverless Stack (SST). We'll be using the Api and EventBus constructs to create a simple checkout system.
+description: In this example we will look at how to use event bus in your serverless app on AWS using SST. We'll be using the Api and EventBus constructs to create a simple checkout system.
 short_desc: A simple EventBridge system with EventBus.
 repo: eventbus
 ref: how-to-use-event-bus-in-your-serverless-app
 comments_id: how-to-use-event-bus-in-your-serverless-app/2607
 ---
 
-In this example we will look at how to use EventBus to create [an EventBridge system](https://aws.amazon.com/eventbridge/) in our serverless app using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be creating a simple checkout flow.
+In this example we will look at how to use EventBus to create [an EventBridge system](https://aws.amazon.com/eventbridge/) in our serverless app using [SST]({{ site.sst_github_repo }}). We'll be creating a simple checkout flow.
 
 ## Requirements
 

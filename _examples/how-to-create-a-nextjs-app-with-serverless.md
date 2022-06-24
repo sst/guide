@@ -13,7 +13,7 @@ ref: how-to-create-a-nextjs-app-with-serverless
 comments_id: how-to-create-a-next-js-app-with-serverless/2486
 ---
 
-In this example we will look at how to deploy a full-stack [Next.js](https://nextjs.org) app to your AWS account with [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) and the SST [`NextjsSite`]({{ site.docs_url }}/constructs/NextjsSite) construct.
+In this example we will look at how to deploy a full-stack [Next.js](https://nextjs.org) app to your AWS account with [SST]({{ site.sst_github_repo }}) and the SST [`NextjsSite`]({{ site.docs_url }}/constructs/NextjsSite) construct.
 
 Here's what we'll be covering in this example:
 

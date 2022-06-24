@@ -60,4 +60,4 @@ Learn about the [job opportunities at Henry Schein One](https://dentr.co.uk/jobs
 
 ---
 
-[Read more about Serverless Stack](/) and [get started]({{ site.docs_url }}{{ site.docs_get_started }}) today.
+[Read more about SST](/) and [get started]({{ site.docs_url }}{{ site.docs_get_started }}) today.

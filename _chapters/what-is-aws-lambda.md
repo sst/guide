@@ -53,7 +53,7 @@ Here `myHandler` is the name of our Lambda function. The `event` object contains
 
 ### Packaging Functions
 
-Lambda functions need to be packaged and sent to AWS. This is usually a process of compressing the function and all its dependencies and uploading it to an S3 bucket. And letting AWS know that you want to use this package when a specific event takes place. To help us with this process we use the [Serverless Stack Framework (SST)]({{ site.sst_github_repo }}). We'll go over this in detail later on in this guide.
+Lambda functions need to be packaged and sent to AWS. This is usually a process of compressing the function and all its dependencies and uploading it to an S3 bucket. And letting AWS know that you want to use this package when a specific event takes place. To help us with this process we use the [SST]({{ site.sst_github_repo }}). We'll go over this in detail later on in this guide.
 
 ### Execution Model
 

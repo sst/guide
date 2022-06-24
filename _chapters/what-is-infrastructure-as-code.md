@@ -8,7 +8,7 @@ ref: what-is-infrastructure-as-code
 comments_id: what-is-infrastructure-as-code/161
 ---
 
-[Serverless Stack Framework (SST)]({{ site.sst_github_repo }}) converts your infrastructure code into a [CloudFormation](https://aws.amazon.com/cloudformation) template. This is a description of the infrastructure that you are trying to configure as a part of your serverless project. In our case we'll be describing Lambda functions, API Gateway endpoints, DynamoDB tables, S3 buckets, etc.
+[SST]({{ site.sst_github_repo }}) converts your infrastructure code into a [CloudFormation](https://aws.amazon.com/cloudformation) template. This is a description of the infrastructure that you are trying to configure as a part of your serverless project. In our case we'll be describing Lambda functions, API Gateway endpoints, DynamoDB tables, S3 buckets, etc.
 
 While you can configure this using the [AWS console](https://aws.amazon.com/console/), you'll need to do a whole lot of clicking around. It's much better to configure our infrastructure programmatically.
 

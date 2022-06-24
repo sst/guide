@@ -6,14 +6,14 @@ date: 2021-02-23 00:00:00
 lang: en
 index: 5
 type: iam-auth
-description: In this example we will look at how to add Auth0 authentication to a serverless API using Serverless Stack (SST). We'll be using the Api and Auth constructs to create an authenticated API.
+description: In this example we will look at how to add Auth0 authentication to a serverless API using SST. We'll be using the Api and Auth constructs to create an authenticated API.
 short_desc: Authenticating a serverless API with Auth0.
 repo: api-auth-auth0
 ref: how-to-add-auth0-authentication-to-a-serverless-api
 comments_id: how-to-add-auth0-authentication-to-a-serverless-api/2333
 ---
 
-In this example we will look at how to add [Auth0](https://auth0.com) authentication to a serverless API using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
+In this example we will look at how to add [Auth0](https://auth0.com) authentication to a serverless API using [SST]({{ site.sst_github_repo }}).
 
 ## Requirements
 

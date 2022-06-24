@@ -3,7 +3,7 @@ layout: post
 title: Dynamically generate social share images with serverless
 date: 2021-06-25 00:00:00
 lang: en
-description: In this chapter we'll look at how to create a serverless service that dynamically generates social cards for our website or blog. It uses the Serverless Stack Framework (SST) and Puppeteer to generate these images.
+description: In this chapter we'll look at how to create a serverless service that dynamically generates social cards for our website or blog. It uses SST and Puppeteer to generate these images.
 repo: https://github.com/serverless-stack/social-cards
 ref: dynamically-generate-social-share-images-with-serverless
 comments_id: dynamically-generate-social-share-images-with-serverless/2419
@@ -15,17 +15,17 @@ Social cards or social share images or open graph images are preview images that
 
 However, creating a unique image for each blog post or page of your website can be time consuming and impractical. So we ideally want to be able to generate these images dynamically based on the title of the blog post or page and some other accompanying information.
 
-We wanted to do something like this for [Serverless Stack](/). And this was a perfect use case for [serverless]({% link _chapters/what-is-serverless.md %}). These images will be generated when your website is shared and it doesn't make sense to run a server to serve these out. So we built our own social cards service with [SST](/)! It's also deployed and managed with [Seed](https://seed.run).
+We wanted to do something like this for [SST](/). And this was a perfect use case for [serverless]({% link _chapters/what-is-serverless.md %}). These images will be generated when your website is shared and it doesn't make sense to run a server to serve these out. So we built our own social cards service with [SST](/)! It's also deployed and managed with [Seed](https://seed.run).
 
 For instance, here is what the social card for one of our chapters looks like.
 
-![Social card for Serverless Stack chapter](/assets/dynamically-generate-social-share-images-with-serverless/social-card-for-serverless-stack-chapter.png)
+![Social card for SST chapter](/assets/dynamically-generate-social-share-images-with-serverless/social-card-for-serverless-stack-chapter.png)
 
 We also have multiple templates to generate these social cards. Here's one for our blog.
 
 ![Social card for sample blog post](/assets/dynamically-generate-social-share-images-with-serverless/social-card-for-sample-blog-post.png)
 
-These images are served out of our social cards service. It's built using [Serverless Stack (SST)](/) and is hosted on AWS:
+These images are served out of our social cards service. It's built using [SST](/) and is hosted on AWS:
 
 ```bash
 https://social-cards.serverless-stack.com
@@ -99,7 +99,7 @@ For now our Lambda function in `functions/lambda.js` just prints out _"Hello Wor
 
 The first step is to create a template for our social share images. These HTML files will be loaded locally and we'll pass in the parameters for our template via the query string.
 
-Let's look at the blog template that we use in Serverless Stack as an example.
+Let's look at the blog template that we use in SST as an example.
 
 ![Template for social card running locally](/assets/dynamically-generate-social-share-images-with-serverless/template-for-social-card-running-locally.png)
 

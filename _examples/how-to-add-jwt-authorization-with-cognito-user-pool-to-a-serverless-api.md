@@ -6,14 +6,14 @@ date: 2021-03-02 00:00:00
 lang: en
 index: 1
 type: jwt-auth
-description: In this example we will look at how to add JWT authorization with Cognito User Pool to a serverless API using Serverless Stack (SST). We'll be using the Api and Auth constructs to create an authenticated API.
+description: In this example we will look at how to add JWT authorization with Cognito User Pool to a serverless API using SST. We'll be using the Api and Auth constructs to create an authenticated API.
 short_desc: Adding JWT authentication with Cognito.
 repo: api-auth-jwt-cognito-user-pool
 ref: how-to-add-jwt-authorization-with-cognito-user-pool-to-a-serverless-api
 comments_id: how-to-add-jwt-authorization-with-cognito-user-pool-to-a-serverless-api/2338
 ---
 
-In this example we will look at how to add JWT authorization with [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to a serverless API using [Serverless Stack (SST)]({{ site.sst_github_repo }}).
+In this example we will look at how to add JWT authorization with [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to a serverless API using [SST]({{ site.sst_github_repo }}).
 
 ## Requirements
 

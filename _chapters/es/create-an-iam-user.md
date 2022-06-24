@@ -43,7 +43,7 @@ Podemos proporcionar una política más detallada aquí y lo cubriremos más ade
 
 ![Captura: política de administración añadida](/assets/es/iam-user/added-admin-policy.png)
 
-Este paso es opcional, aquí puedes agregar las etiquetas que creas necesarias al nuevo usuario de IAM, para organizar, seguir o controlar el acceso de los usuarios, por ejemplo, la etiqueta _Application_ tiene el valor _Serverless Stack Guide_ para saber que este usuario fue creado para esta aplicación específica. Luego selecciona **Siguiente: Revisar**.
+Este paso es opcional, aquí puedes agregar las etiquetas que creas necesarias al nuevo usuario de IAM, para organizar, seguir o controlar el acceso de los usuarios, por ejemplo, la etiqueta _Application_ tiene el valor _SST Guide_ para saber que este usuario fue creado para esta aplicación específica. Luego selecciona **Siguiente: Revisar**.
 
 ![Captura: agregar etiquetas a usuario de IAM](/assets/es/iam-user/add-iam-user-tags.png)
 

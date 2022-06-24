@@ -1,6 +1,6 @@
 ---
 layout: lander
-description: "Serverless Stack (SST) is a framework that makes it easy to build serverless applications by allowing you to test your Lambda functions live. Check out our examples to get started. Or follow our step-by-step tutorials for creating full-stack apps with serverless and React.js on AWS."
+description: "SST is a framework that makes it easy to build serverless applications by allowing you to test your Lambda functions live. Check out our examples to get started. Or follow our step-by-step tutorials for creating full-stack apps with serverless and React.js on AWS."
 ---
 
 <header class="lander-header" role="banner">
@@ -22,7 +22,7 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
     </div>
 
     <h4 class="site-description-full">
-      Serverless Stack (SST) is an open-source serverless application platform that deploys to your AWS account, helping you go from idea to IPO.
+      SST is an open-source serverless application platform that deploys to your AWS account, helping you go from idea to IPO.
     </h4>
 
     <div class="controls">
@@ -115,7 +115,7 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
     <h2>Build <span>full-stack</span> apps</h2>
     <br />
     <p>
-      Quick start examples to help you build the type of Serverless Stack app you want.
+      Quick start examples to help you build the type of SST app you want.
       <a class="more" href="{% link _examples/index.md %}">
         View all the examples <i class="fa fa-angle-right" aria-hidden="true"></i>
       </a>
@@ -327,7 +327,7 @@ description: "Serverless Stack (SST) is a framework that makes it easy to build 
 
 <div id="guide" class="guide">
   <div class="title">
-    <h2>Serverless Stack Guide</h2>
+    <h2>SST Guide</h2>
     <h4>
       The most widely read resource for building full-stack apps using serverless and React on AWS.
     </h4>

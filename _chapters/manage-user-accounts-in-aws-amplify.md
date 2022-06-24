@@ -7,7 +7,7 @@ code: user-management
 comments_id: manage-user-accounts-in-aws-amplify/505
 ---
 
-If you've followed along with [the first part of Serverless Stack](/#the-basics) guide, you might be looking to add ways your users can better manage their accounts. This includes the ability to:
+If you've followed along with [the first part of SST](/#the-basics) guide, you might be looking to add ways your users can better manage their accounts. This includes the ability to:
 
 - Reset their password in case they forget it
 - Change their password once they are logged in

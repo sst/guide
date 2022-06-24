@@ -33,7 +33,7 @@ ref: translations
 
 ---
 
-Serverless Stack을 보다 쉽게 사용할 수 있도록 공헌해주신  여러분께 진심으로 큰 감사를 드립니다!
+SST을 보다 쉽게 사용할 수 있도록 공헌해주신  여러분께 진심으로 큰 감사를 드립니다!
 
 - [Bernardo Bugmann](https://github.com/bernardobugmann)
 - [Sebastian Gutierrez](https://github.com/pepas24)

@@ -6,14 +6,14 @@ date: 2021-02-08 00:00:00
 lang: en
 index: 2
 type: async
-description: In this example we will look at how to use SQS in your serverless app on AWS using Serverless Stack (SST). We'll be using the Api and Queue constructs to create a simple queue system.
+description: In this example we will look at how to use SQS in your serverless app on AWS using SST. We'll be using the Api and Queue constructs to create a simple queue system.
 short_desc: A simple queue system with SQS.
 repo: queue
 ref: how-to-use-queues-in-your-serverless-app
 comments_id: how-to-use-queues-in-your-serverless-app/2314
 ---
 
-In this example we will look at how to use SQS to create a queue in our serverless app using [Serverless Stack (SST)]({{ site.sst_github_repo }}). We'll be creating a simple queue system.
+In this example we will look at how to use SQS to create a queue in our serverless app using [SST]({{ site.sst_github_repo }}). We'll be creating a simple queue system.
 
 ## Requirements
 

@@ -12,7 +12,7 @@ Jeśli napotkasz na problem na którymś etapie, będziemy w pobliżu, aby pomó
 - Używamy [tematów na forum Discourse]({{ site.forum_url }}) jako naszych komentarzy i udało nam się już rozwiązać tam sporo problemów. Dlatego sprawdzaj komentarze pod każdym rozdziałem, aby zobaczyć, czy inni nie napotkali na ten sam problem.
 - Opisz szczegółowo swój problem w komentarzu pod określonym rozdziałem, aby uzyskać odpowiedź od jednego z nas.
 
-![Serverless Stack Discourse Forums screenshot](/assets/serverless-stack-discourse-forums.png)
+![SST Discourse Forums screenshot](/assets/serverless-stack-discourse-forums.png)
 
 Cały przewodnik jest hostowany na GitHubie. W przypadku, gdy znajdziesz błąd, możesz: 
 - Stworzyć nowy [raport]({{ site.github_repo }}/issues/new)
