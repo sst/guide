@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://sst.dev/">
-    <img alt="SST" src="https://github.com/AnomalyInnovations/serverless-stack-com/raw/master/assets/logo-large.png" width="377" />
+    <img alt="SST" src="https://raw.githubusercontent.com/serverless-stack/identity/main/variants/sst-full.svg" width="377" />
   </a>
 </p>
 
