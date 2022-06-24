@@ -14,14 +14,14 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Serverless Stack
-email: hello@serverless-stack.com
-jobs_email: jobs@serverless-stack.com
+email: hello@sst.dev
+jobs_email: jobs@sst.dev
 description: > # this means to ignore newlines until "baseurl:"
   Making it easy to build full-stack serverless apps
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://serverless-stack.com" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://sst.dev" # the base hostname & protocol for your site, e.g. http://example.com
 
-demo_url: "https://demo.serverless-stack.com"
+demo_url: "https://demo.sst.dev"
 
 github_repo: "https://github.com/AnomalyInnovations/serverless-stack-com"
 github_edit_prefix: "/edit/master/"
@@ -44,22 +44,22 @@ survey_url: "https://serverless-stack.typeform.com/to/xiPdCW"
 
 google_analytics: "UA-3536629-11"
 
-docs_url: "https://docs.serverless-stack.com"
+docs_url: "https://docs.sst.dev"
 docs_get_started: "/installation"
 v1_conf_url: "https://v1conf.sst.dev"
-console_url: "https://console.serverless-stack.com"
-forum_url: "https://discourse.serverless-stack.com"
+console_url: "https://console.sst.dev"
+forum_url: "https://discourse.sst.dev"
 forum_thread_prefix: "/t/"
 patreon_url: "https://www.patreon.com/serverless_stack"
 github_sponsor_url: "https://github.com/sponsors/jayair"
 twitter: "ServerlessStack"
 twitter_url: "https://twitter.com/ServerlessStack"
-slack_invite_url: "https://serverless-stack.com/slack"
+slack_invite_url: "https://sst.dev/slack"
 discord_invite_url: "https://discord.gg/sst"
 linkedin_url: "https://www.linkedin.com/company/serverless-stack"
 youtube_url: "https://www.youtube.com/c/ServerlessStack"
 
-social_cards_url: "https://social-cards.serverless-stack.com"
+social_cards_url: "https://social-cards.sst.dev"
 
 permalink: /blog/:title:output_ext
 

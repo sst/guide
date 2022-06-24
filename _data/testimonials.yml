@@ -24,7 +24,7 @@ tweets:
   - link: https://twitter.com/manuelgil/status/1378426344866992131
     name: Manuel Alejandro
     username: manuelgil
-    content: "Excellent framework to get started with serverless:<br /><br /><a href=\"https://serverless-stack.com\">serverless-stack.com</a><br /><br /><a href=\"https://twitter.com/ServerlessStack\">@ServerlessStack</a>"
+    content: "Excellent framework to get started with serverless:<br /><br /><a href=\"https://sst.dev\">sst.dev</a><br /><br /><a href=\"https://twitter.com/ServerlessStack\">@ServerlessStack</a>"
 
   - link: https://twitter.com/thdxr/status/1369101803296526339
     name: Dax Ravi
