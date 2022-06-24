@@ -244,7 +244,7 @@ Stack dev-bucket-image-resize-my-stack
 
 ## Uploading files
 
-Now head over to the **Buckets** tab in [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
+Now head over to the **Buckets** tab in [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
 Note, The Buckets explorer allows you to manage the S3 Buckets created with the **Bucket** constructs in your app. It allows you upload, delete, and download files. You can also create and delete folders.
 

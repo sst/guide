@@ -9,7 +9,7 @@ context: true
 comments_id: what-does-this-guide-cover/83
 ---
 
-Pour parcourir les concepts principaux impliqués dans la construction d'une application web, nous allons construire une application basique de prise de notes appelée [**Scratch**](https://demo2.serverless-stack.com).
+Pour parcourir les concepts principaux impliqués dans la construction d'une application web, nous allons construire une application basique de prise de notes appelée [**Scratch**](https://demo2.sst.dev).
 
 ![Completed app desktop screenshot](/assets/completed-app-desktop.png)
 

@@ -346,7 +346,7 @@ Now if you head over to your browser and open `http://localhost:3000`, your Next
 
 If you click the button the count should update. And if you refresh the page and do it again, it'll continue keeping count.
 
-Also let's check the updated value in dynamodb with the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
+Also let's check the updated value in dynamodb with the [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
 Go to the **DynamoDB** tab in the SST Console and check that the value has been updated in the table.
 

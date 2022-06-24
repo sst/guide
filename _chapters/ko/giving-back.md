@@ -24,7 +24,7 @@ ref: giving-back
 
 - **가이드 번역에 도움주기**
 
-  독자들의 헌신 덕분에 SST을 여러 언어로 번역하는데 도움을 받고 있습니다. 여기서 [저희의 진행 상황]({% link _chapters/translations.md %})을 확인할 수 있습니다. 번역 작업을 돕고 싶다면 [여기에 의견을 남겨주세요.](https://discourse.serverless-stack.com/t/help-us-translate-serverless-stack/596/15)
+  독자들의 헌신 덕분에 SST을 여러 언어로 번역하는데 도움을 받고 있습니다. 여기서 [저희의 진행 상황]({% link _chapters/translations.md %})을 확인할 수 있습니다. 번역 작업을 돕고 싶다면 [여기에 의견을 남겨주세요.](https://discourse.sst.dev/t/help-us-translate-serverless-stack/596/15)
 
 - **보너스 챕터 추가**
 

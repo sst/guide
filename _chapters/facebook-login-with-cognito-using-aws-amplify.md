@@ -7,12 +7,12 @@ code: facebook-login
 comments_id: facebook-login-with-cognito-using-aws-amplify/466
 ---
 
-In our guide so far we have used the [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to sign up users to our [demo notes app](https://demo.serverless-stack.com). This means that our users have to sign up for an account with their email and password. But you might want your users to use their Facebook or Google account to sign up for your app. It also means that your users won't have to remember another email and password combination for the sites they use. In this chapter we will look at how to add a _"Login with Facebook"_ option to our demo app.
+In our guide so far we have used the [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to sign up users to our [demo notes app](https://demo.sst.dev). This means that our users have to sign up for an account with their email and password. But you might want your users to use their Facebook or Google account to sign up for your app. It also means that your users won't have to remember another email and password combination for the sites they use. In this chapter we will look at how to add a _"Login with Facebook"_ option to our demo app.
 
 The version of the notes app used in this chapter is hosted in :
 
 - A separate GitHub repository: [**{{ site.frontend_fb_login_github_repo }}**]({{ site.frontend_fb_login_github_repo }})
-- And can be accessed through: [**https://demo-fb-login.serverless-stack.com**](https://demo-fb-login.serverless-stack.com)
+- And can be accessed through: [**https://demo-fb-login.sst.dev**](https://demo-fb-login.sst.dev)
 
 The main ideas and code for this chapter have been contributed by our long time reader and contributor [Peter Eman Paver Abastillas](https://github.com/jatazoulja).
 

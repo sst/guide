@@ -69,7 +69,7 @@ Stack dev-notes-MyStack
 Starting Live Lambda Dev
 ==========================
 
-SST Console: https://console.serverless-stack.com/notes/dev/local
+SST Console: https://console.sst.dev/notes/dev/local
 Debug session started. Listening for requests...
 ```
 

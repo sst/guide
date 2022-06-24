@@ -378,7 +378,7 @@ Type your redirect URL into **Valid OAuth Redirect URIs**. It will consist of yo
 
 The `api_url` is the API we just created. While the `site_url` is where our React app will be hosted. For now, it's just a placeholder website.
 
-Let's test our endpoint with the [SST Console](https://console.serverless-stack.com). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
+Let's test our endpoint with the [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
 Go to the **API** tab and click **Send** button of the `GET /public` to send a `GET` request.
 

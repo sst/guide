@@ -7,12 +7,12 @@ code: user-management
 comments_id: allow-users-to-change-their-email/508
 ---
 
-We want the users of our [Serverless notes app](https://demo.serverless-stack.com) to be able to change their email. Recall that we are using Cognito to manage our users and AWS Amplify in our React app. In this chapter we will look at how to do that.
+We want the users of our [Serverless notes app](https://demo.sst.dev) to be able to change their email. Recall that we are using Cognito to manage our users and AWS Amplify in our React app. In this chapter we will look at how to do that.
 
 For reference, we are using a forked version of the notes app with:
 
 - A separate GitHub repository: [**{{ site.frontend_user_mgmt_github_repo }}**]({{ site.frontend_user_mgmt_github_repo }})
-- And it can be accessed through: [**https://demo-user-mgmt.serverless-stack.com**](https://demo-user-mgmt.serverless-stack.com)
+- And it can be accessed through: [**https://demo-user-mgmt.sst.dev**](https://demo-user-mgmt.sst.dev)
 
 In the previous chapter we created a settings page that links to `/settings/email`. Let's implement that.
 

@@ -219,7 +219,7 @@ Now if you build your app using `npm run build`; you'll see the code splitting i
 
 Each of those `.chunk.js` files are the different dynamic `import()` calls that we have. Of course, our app is quite small and the various parts that are split up are not significant at all. However, if the page that we use to edit our note included a rich text editor; you can imagine how that would grow in size. And it would unfortunately affect the initial load time of our app.
 
-Now if we deploy our app using `npx sst deploy`; you can see the browser load the different chunks on-demand as we browse around in the [demo](https://demo.serverless-stack.com).
+Now if we deploy our app using `npx sst deploy`; you can see the browser load the different chunks on-demand as we browse around in the [demo](https://demo.sst.dev).
 
 ![Create React App loading Code Splitting screenshot](/assets/create-react-app-loading-code-splitting.png)
 

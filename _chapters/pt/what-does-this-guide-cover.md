@@ -8,7 +8,7 @@ context: true
 comments_id: what-does-this-guide-cover/83
 ---
 
-Para entendermos os principais conceitos envolvidos na construção de aplicações web, nós iremos criar um aplicativo de notas chamado [**Scratch**](https://demo2.serverless-stack.com).
+Para entendermos os principais conceitos envolvidos na construção de aplicações web, nós iremos criar um aplicativo de notas chamado [**Scratch**](https://demo2.sst.dev).
 
 ![Completed app desktop screenshot](/assets/completed-app-desktop.png)
 

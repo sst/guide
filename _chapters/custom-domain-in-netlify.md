@@ -38,7 +38,7 @@ And hit **Add custom domain**.
 
 ![Click Add custom domain screenshot](/assets/part2/click-add-custom-domain.png)
 
-Type in the name of our domain, for example it might be `demo-serverless-stack.com`. And hit **Save**.
+Type in the name of our domain, for example it might be `demo-sst.dev`. And hit **Save**.
 
 ![Enter custom domain screenshot](/assets/part2/enter-custom-domain.png)
 

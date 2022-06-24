@@ -9,7 +9,7 @@ context: true
 comments_id: what-does-this-guide-cover/83
 ---
 
-Para repasar los principales conceptos involucrados en la creación de aplicaciones web, vamos a crear una aplicación sencilla para tomar notas llamada [**Scratch**](https://demo2.serverless-stack.com).
+Para repasar los principales conceptos involucrados en la creación de aplicaciones web, vamos a crear una aplicación sencilla para tomar notas llamada [**Scratch**](https://demo2.sst.dev).
 
 ![Captura de aplicación completada en escritorio](/assets/completed-app-desktop.png)
 

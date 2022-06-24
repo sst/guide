@@ -76,7 +76,7 @@ Let's quickly go over what we are doing here.
 
 - Finally, we output the ids of the auth resources that've been created and returning the auth resource so that other stacks can access this resource.
 
-Note, learn more about sharing resources between stacks [here](https://docs.serverless-stack.com/constructs/Stack#sharing-resources-between-stacks).
+Note, learn more about sharing resources between stacks [here](https://docs.sst.dev/constructs/Stack#sharing-resources-between-stacks).
 
 ### Securing Access to Uploaded Files
 

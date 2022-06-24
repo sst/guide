@@ -8,7 +8,7 @@ code: backend
 comments_id: add-a-create-note-api/125
 ---
 
-For the [notes app](https://demo.serverless-stack.com) that we have created, we allow our users to see a list of all the notes they have. But we left out a detail that needs to be handled when a user has a lot of notes. DynamoDB by default returns the amount of results that can fit in 1MB. So in this case where the number of notes exceeds the 1MB query result size, we need to be able to page through the rest of the notes.
+For the [notes app](https://demo.sst.dev) that we have created, we allow our users to see a list of all the notes they have. But we left out a detail that needs to be handled when a user has a lot of notes. DynamoDB by default returns the amount of results that can fit in 1MB. So in this case where the number of notes exceeds the 1MB query result size, we need to be able to page through the rest of the notes.
 
 In this chapter we are going to look at how to add paging to DynamoDB tables and how to use that in your React app.
 

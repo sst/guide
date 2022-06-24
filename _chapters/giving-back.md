@@ -24,7 +24,7 @@ If you've found this guide helpful please consider helping us out by doing the f
 
 - **Help translate the guide**
 
-  Our incredible readers are helping translate SST into multiple languages. You can check out [our progress here]({% link _chapters/translations.md %}). If you would like to help with our translation efforts, [leave us a comment here](https://discourse.serverless-stack.com/t/help-us-translate-serverless-stack/596/15).
+  Our incredible readers are helping translate SST into multiple languages. You can check out [our progress here]({% link _chapters/translations.md %}). If you would like to help with our translation efforts, [leave us a comment here](https://discourse.sst.dev/t/help-us-translate-serverless-stack/596/15).
 
 - **Add an extra credit chapter**
 

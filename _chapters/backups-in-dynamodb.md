@@ -8,7 +8,7 @@ comments_id: backups-in-dynamodb/705
 
 An important (yet overlooked) aspect of having a database powering your web application are, backups! In this chapter we are going to take a look at how to configure backups for your DynamoDB tables.
 
-For [our demo notes app](https://demo.serverless-stack.com), we are using a DynamoDB table to store all our user's notes. DynamoDB achieves a high degree of data availability and durability by replicating your data across three different facilities within a given region. However, DynamoDB does not provide an SLA for the data durability. This means that you should backup your database tables.
+For [our demo notes app](https://demo.sst.dev), we are using a DynamoDB table to store all our user's notes. DynamoDB achieves a high degree of data availability and durability by replicating your data across three different facilities within a given region. However, DynamoDB does not provide an SLA for the data durability. This means that you should backup your database tables.
 
 Let's start by getting a quick background on how backups work in DynamoDB.
 

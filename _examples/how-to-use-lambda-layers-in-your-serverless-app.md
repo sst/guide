@@ -192,7 +192,7 @@ Stack dev-layer-chrome-aws-lambda-my-stack
 Now if you head over to your API endpoint and add the URL and dimensions to the query string:
 
 ```
-?url=https://serverless-stack.com/examples&width=390&height=640
+?url=https://sst.dev/examples&width=390&height=640
 ```
 
 You should see `Screenshot taken` being printed out.

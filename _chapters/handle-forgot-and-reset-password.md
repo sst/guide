@@ -7,12 +7,12 @@ code: user-management
 comments_id: handle-forgot-and-reset-password/506
 ---
 
-In our [serverless notes app](https://demo.serverless-stack.com) we've used [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to sign up and login our users. In the frontend we've used [AWS Amplify](https://aws-amplify.github.io/) in our React app. However, if our users have forgotten their passwords, we need to have a way for them to reset their password. In this chapter we will look at how to do this.
+In our [serverless notes app](https://demo.sst.dev) we've used [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to sign up and login our users. In the frontend we've used [AWS Amplify](https://aws-amplify.github.io/) in our React app. However, if our users have forgotten their passwords, we need to have a way for them to reset their password. In this chapter we will look at how to do this.
 
 The version of the notes app used in this chapter is hosted in a:
 
 - Separate GitHub repository: [**{{ site.frontend_user_mgmt_github_repo }}**]({{ site.frontend_user_mgmt_github_repo }})
-- And can be accessed through: [**https://demo-user-mgmt.serverless-stack.com**](https://demo-user-mgmt.serverless-stack.com)
+- And can be accessed through: [**https://demo-user-mgmt.sst.dev**](https://demo-user-mgmt.sst.dev)
 
 Let's look at the main changes we need to make to allow users to reset their password.
 

@@ -15,6 +15,6 @@ If you've followed along with [the first part of SST](/#the-basics) guide, you m
 
 As a quick refresher, we are using [AWS Cognito](https://aws.amazon.com/cognito/) as our authentication and user management provider. And on the frontend we are using [AWS Amplify](https://aws-amplify.github.io/) with our [Create React App](https://github.com/facebook/create-react-app).
 
-In the next few chapters we are going to look at how to add the above functionality to our [serverless notes app]({{ site.demo_url }}). For these chapters we are going to use a forked version of the notes app. You can [view the hosted version here](https://demo-user-mgmt.serverless-stack.com) and the [source is available in a repo here]({{ site.frontend_user_mgmt_github_repo }}).
+In the next few chapters we are going to look at how to add the above functionality to our [serverless notes app]({{ site.demo_url }}). For these chapters we are going to use a forked version of the notes app. You can [view the hosted version here](https://demo-user-mgmt.sst.dev) and the [source is available in a repo here]({{ site.frontend_user_mgmt_github_repo }}).
 
 Let's get started by allowing users to reset their password in case they have forgotten it.

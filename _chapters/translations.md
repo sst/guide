@@ -11,7 +11,7 @@ Our guide is available in several languages thanks to contributions by our incre
 
 ![Chapter translation links Screenshot](/assets/chapter-translation-links.png)
 
-Below is a list of all the chapters that are available in multiple languages. If you are interested in helping with our translation efforts, leave us a [comment here](https://discourse.serverless-stack.com/t/help-us-translate-serverless-stack/596/15).  
+Below is a list of all the chapters that are available in multiple languages. If you are interested in helping with our translation efforts, leave us a [comment here](https://discourse.sst.dev/t/help-us-translate-serverless-stack/596/15).  
 
 ---
 

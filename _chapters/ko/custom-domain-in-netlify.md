@@ -19,7 +19,7 @@ ref: custom-domains-in-netlify
 
 1. 새 사용자 정의 도메인 구성
 
-   Part I의 도메인이 `https://notes-app.my-domain.com`과 같다고 가정 해 보겠습니다. 다음 섹션에서는 `https://notes-app-2.my-domain.com`과 같은 것을 설정할 수 있습니다. 이것은 이전에 구성된 내용을 변경하지 않기 때문에 선호되는 옵션입니다. 여기까지 튜토리얼에서 데모 응용 프로그램을 위해 우리가 작업한 내용들입니다. [Part I 버전](https://demo.serverless-stack.com)과 [Part II 버전](https://demo2.serverless-stack.com)을 볼 수 있습니다. 단점은 frontend React 앱의 두 가지 버전이 있다는 것입니다.
+   Part I의 도메인이 `https://notes-app.my-domain.com`과 같다고 가정 해 보겠습니다. 다음 섹션에서는 `https://notes-app-2.my-domain.com`과 같은 것을 설정할 수 있습니다. 이것은 이전에 구성된 내용을 변경하지 않기 때문에 선호되는 옵션입니다. 여기까지 튜토리얼에서 데모 응용 프로그램을 위해 우리가 작업한 내용들입니다. [Part I 버전](https://demo.sst.dev)과 [Part II 버전](https://demo2.sst.dev)을 볼 수 있습니다. 단점은 frontend React 앱의 두 가지 버전이 있다는 것입니다.
 
 2. 이전 도메인 바꾸기
 
@@ -57,7 +57,7 @@ Netlify의 프로젝트 페이지에서 **Site setting**을 누릅니다.
 
 ![ Add custom domain 클릭화면](/assets/part2/click-add-custom-domain.png)
 
-우리 도메인의 이름을 입력하십시오. 예를 들어, `demo-serverless-stack.com` 일 수 있습니다. **Save**를 누르십시오.
+우리 도메인의 이름을 입력하십시오. 예를 들어, `demo-sst.dev` 일 수 있습니다. **Save**를 누르십시오.
 
 ![사용자 정의 도메인 입력 화면](/assets/part2/enter-custom-domain.png)
 

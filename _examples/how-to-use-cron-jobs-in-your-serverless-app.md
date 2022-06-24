@@ -115,7 +115,7 @@ Stack dev-cron-job-my-stack
   Status: deployed
 ```
 
-Let's test our cron job using the integrated [SST Console](https://console.serverless-stack.com).
+Let's test our cron job using the integrated [SST Console](https://console.sst.dev).
 
 Note, the SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.docs_url }}/console).
 

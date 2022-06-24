@@ -121,7 +121,7 @@ To translate a chapter follow these steps:
    lang: en
    ```
    
-   Here `uri-of-the-chapter` is the part of the url that represents the name of the chapter. For example, the [What is Serverless](https://serverless-stack.com/chapters/what-is-serverless.html) has a URI `what-is-serverless`.
+   Here `uri-of-the-chapter` is the part of the url that represents the name of the chapter. For example, the [What is Serverless](https://sst.dev/chapters/what-is-serverless.html) has a URI `what-is-serverless`.
 
 2. Copy the file to `_chapters/[language-code]/[filename].md`
 
@@ -138,7 +138,7 @@ To translate a chapter follow these steps:
 
 Note that the only thing linking the translation with the original is the `ref:` attribute in the frontmatter. Make sure that it is the same for both the files.
 
-As an example, compare the [What is Serverless](https://serverless-stack.com/chapters/what-is-serverless.html) chapter:
+As an example, compare the [What is Serverless](https://sst.dev/chapters/what-is-serverless.html) chapter:
 
 - English version: https://github.com/AnomalyInnovations/serverless-stack-com/blob/master/_chapters/what-is-serverless.md
 - Spanish version: https://github.com/AnomalyInnovations/serverless-stack-com/blob/master/_chapters/es/what-is-serverless.md

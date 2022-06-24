@@ -11,7 +11,7 @@ ref: translations
 
 ![챕터 번역 링크 화면](/assets/chapter-translation-links.png)
 
-다음은 여러 언어로 제공되는 모든 챕터들의 목록입니다. 번역 작업에 관심이 있으시면 [여기](https://discourse.serverless-stack.com/t/help-us-translate-serverless-stack/596/15)에 의견을 남겨 주십시오.
+다음은 여러 언어로 제공되는 모든 챕터들의 목록입니다. 번역 작업에 관심이 있으시면 [여기](https://discourse.sst.dev/t/help-us-translate-serverless-stack/596/15)에 의견을 남겨 주십시오.
 
 ---
 

@@ -10,14 +10,14 @@ Our notes app has an API Gateway endpoint. In this chapter, we are going to look
 
 We are going to setup the following custom domain scheme:
 
-- `prod` ⇒ ext-api.serverless-stack.com
-- `dev` ⇒ dev.ext-api.serverless-stack.com
+- `prod` ⇒ ext-api.sst.dev
+- `dev` ⇒ dev.ext-api.sst.dev
 
 Assuming that our domain is hosted in our `Production` AWS account. We want to set it up so that our `Development` AWS account can use the above subdomain. This takes an extra setup.
 
 ### Delegate domains across AWS accounts
 
-We are going to have to delegate the subdomain `dev.ext-api.serverless-stack.com` to be hosted in the `Development` AWS account. Just a quick note, as you follow these steps, pay attention to the account name shown at the top right corner of the screenshot. It'll tell you which account we are working with.
+We are going to have to delegate the subdomain `dev.ext-api.sst.dev` to be hosted in the `Development` AWS account. Just a quick note, as you follow these steps, pay attention to the account name shown at the top right corner of the screenshot. It'll tell you which account we are working with.
 
 First, go into your Route 53 console in your `Development` account.
 
@@ -29,7 +29,7 @@ Click **Hosted zones** in the left menu. Then select **Create Hosted Zone**.
 
 Select **Create Hosted Zone** at the top. Enter:
 
-- **Domain Name**: dev.ext-api.serverless-stack.com
+- **Domain Name**: dev.ext-api.sst.dev
 
 Then click **Create**.
 
@@ -64,11 +64,11 @@ Click **Create**.
 
 ![Created Record Set in Route 53](/assets/best-practices/sharing-route-53-domain-across-aws-accounts/created-record-set-in-route-53.png)
 
-You should see a new `dev.ext-api.serverless-stack.com` row in the table.
+You should see a new `dev.ext-api.sst.dev` row in the table.
 
 ![Show subdomain delegated to Development account](/assets/best-practices/sharing-route-53-domain-across-aws-accounts/show-subdomain-delegated-to-development-account.png)
 
-Now we've delegated the `dev.ext-api` subdomain of `serverless-stack.com` to our `Development` AWS account. You can now head over to your app or to Seed and [add this as a custom domain](https://seed.run/docs/configuring-custom-domains) for the `dev` stage.
+Now we've delegated the `dev.ext-api` subdomain of `sst.dev` to our `Development` AWS account. You can now head over to your app or to Seed and [add this as a custom domain](https://seed.run/docs/configuring-custom-domains) for the `dev` stage.
 
 Go to the API app, and head into app settings.
 
@@ -82,7 +82,7 @@ Both **dev** and **prod** endpoints are listed. Select **Add** on the **prod** e
 
 ![Select Add domain for prod stage](/assets/best-practices/sharing-route-53-domain-across-aws-accounts/select-add-domain-for-prod-stage.png)
 
-Select the domain **serverless-stack.com** and enter the subdomain **ext-api**. Then select **Add Custom Domain**.
+Select the domain **sst.dev** and enter the subdomain **ext-api**. Then select **Add Custom Domain**.
 
 ![Select base domain and subdomain](/assets/best-practices/sharing-route-53-domain-across-aws-accounts/select-base-domain-and-subdomain.png)
 
@@ -97,7 +97,7 @@ Let's setup the domain for our **dev** api. Select **Add**.
 
 ![Select Add domain for dev stage](/assets/best-practices/sharing-route-53-domain-across-aws-accounts/select-add-domain-for-dev-stage.png)
 
-Select the domain **dev.ext-api.serverless-stack.com** and leave the subdomain empty. Then select **Add Custom Domain**.
+Select the domain **dev.ext-api.sst.dev** and leave the subdomain empty. Then select **Add Custom Domain**.
 
 ![Select base domain for dev stage](/assets/best-practices/sharing-route-53-domain-across-aws-accounts/select-base-domain-for-dev-stage.png)
 

@@ -7,7 +7,7 @@ ref: what-does-this-guide-cover
 comments_id: what-does-this-guide-cover/83
 ---
 
-Aby poruszyć główne kwestie związane z tworzeniem aplikacji internetowych, zamierzamy zbudować prostą aplikację do robienia notatek o nazwie [**Scratch**](https://demo2.serverless-stack.com). Jednak w przeciwieństwie do większości samouczków naszym celem jest zgłębienie się w szczegóły każdego z etapów tworzenia i wdrożenia full-stackowej aplikacji.
+Aby poruszyć główne kwestie związane z tworzeniem aplikacji internetowych, zamierzamy zbudować prostą aplikację do robienia notatek o nazwie [**Scratch**](https://demo2.sst.dev). Jednak w przeciwieństwie do większości samouczków naszym celem jest zgłębienie się w szczegóły każdego z etapów tworzenia i wdrożenia full-stackowej aplikacji.
 
 ![Completed app desktop screenshot](/assets/completed-app-desktop.png)
 

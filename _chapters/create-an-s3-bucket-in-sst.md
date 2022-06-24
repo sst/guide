@@ -45,7 +45,7 @@ return {
 
 This'll allow us to reference the S3 bucket in other stacks.
 
-Note, learn more about sharing resources between stacks [here](https://docs.serverless-stack.com/constructs/Stack#sharing-resources-between-stacks).
+Note, learn more about sharing resources between stacks [here](https://docs.sst.dev/constructs/Stack#sharing-resources-between-stacks).
 
 ### Deploy the App
 

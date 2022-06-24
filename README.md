@@ -1,20 +1,20 @@
 <p align="center">
-  <a href="https://serverless-stack.com/">
+  <a href="https://sst.dev/">
     <img alt="SST" src="https://github.com/AnomalyInnovations/serverless-stack-com/raw/master/assets/logo-large.png" width="377" />
   </a>
 </p>
 
 <p align="center">
-  <a href="https://discourse.serverless-stack.com"><img alt="Discourse posts" src="https://img.shields.io/discourse/https/discourse.serverless-stack.com/posts.svg?style=for-the-badge" /></a>
+  <a href="https://discourse.sst.dev"><img alt="Discourse posts" src="https://img.shields.io/discourse/https/discourse.sst.dev/posts.svg?style=for-the-badge" /></a>
   <a href="https://twitter.com/ServerlessStack"><img alt="Twitter follow" src="https://img.shields.io/twitter/follow/serverlessstack.svg?label=twitter&style=for-the-badge" /></a>
-  <a href="https://serverless-stack.com/slack"><img alt="Chat on Slack" src="https://img.shields.io/badge/CHAT-ON%20SLACK-brightgreen?style=for-the-badge" /></a>
+  <a href="https://sst.dev/slack"><img alt="Chat on Slack" src="https://img.shields.io/badge/CHAT-ON%20SLACK-brightgreen?style=for-the-badge" /></a>
 </p>
 
 ------------------------------------------------------------------------------------
 
-The [SST Guide](https://serverless-stack.com/guide.html) is a comprehensive open source tutorial for building and deploying full-stack apps using Serverless and React on AWS.
+The [SST Guide](https://sst.dev/guide.html) is a comprehensive open source tutorial for building and deploying full-stack apps using Serverless and React on AWS.
 
-We are going to create a [note taking app](https://demo.serverless-stack.com) from scratch using React.js, AWS Lambda, API Gateway, DynamoDB, and Cognito.
+We are going to create a [note taking app](https://demo.sst.dev) from scratch using React.js, AWS Lambda, API Gateway, DynamoDB, and Cognito.
 
 ![Demo App](assets/completed-app-desktop.png)
 
@@ -96,7 +96,7 @@ The above are run automatically through [Github Actions](https://github.com/Anom
 <!--
 ## Sponsors
 
-[**Sponsor SST on GitHub**](https://github.com/sponsors/jayair) if you've found this guide useful or would like to be an official supporter. [A big thanks to our supporters](https://serverless-stack.com/sponsors.html)!
+[**Sponsor SST on GitHub**](https://github.com/sponsors/jayair) if you've found this guide useful or would like to be an official supporter. [A big thanks to our supporters](https://sst.dev/sponsors.html)!
 -->
 
 ## Contributors
@@ -117,10 +117,10 @@ Thanks to these folks for their contributions to the content of SST.
 
 ---
 
-This repo is maintained by [SST](https://serverless-stack.com).
+This repo is maintained by [SST](https://sst.dev).
 
 
-[Slack]: https://serverless-stack.com/slack
-[Discourse]: https://discourse.serverless-stack.com
+[Slack]: https://sst.dev/slack
+[Discourse]: https://discourse.sst.dev
 [Contributing]: CONTRIBUTING.md
 [PR]: ../../compare

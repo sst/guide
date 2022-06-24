@@ -9,7 +9,7 @@ context: true
 comments_id: what-does-this-guide-cover/83
 ---
 
-웹 애플리케이션 구축과 관련된 주요 개념을 단계별로 수행하기 위해 [**스크래치**](https://demo2.serverless-stack.com)라는 간단한 노트 작성 응용 프로그램을 제작하려고합니다.
+웹 애플리케이션 구축과 관련된 주요 개념을 단계별로 수행하기 위해 [**스크래치**](https://demo2.sst.dev)라는 간단한 노트 작성 응용 프로그램을 제작하려고합니다.
 
 ![완성된 데스크탑 앱 화면](/assets/completed-app-desktop.png)
 

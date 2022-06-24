@@ -20,7 +20,7 @@ To understand this better we'll be referencing an example SST application on Git
 
 This example SST app has a couple of key parts:
 
-- **The `stacks/` directory**: This contains the code that describes the infrastructure of your serverless app. It works by leveraging [AWS CDK](https://serverless-stack.com/chapters/what-is-aws-cdk.html) to create the infrastructure. This includes our API, our Cognito services, and our frontend static site.
+- **The `stacks/` directory**: This contains the code that describes the infrastructure of your serverless app. It works by leveraging [AWS CDK](https://sst.dev/chapters/what-is-aws-cdk.html) to create the infrastructure. This includes our API, our Cognito services, and our frontend static site.
 - **The `src/` directory**: This is where the application code resides. The code that will run when your API is called.
 - **The `frontend/` directory**: This is where our frontend React.js application is. It'll be connecting to our APIs.
 

@@ -70,7 +70,7 @@ description: "SST is a framework that makes it easy to build serverless applicat
           <span class="token lead">#</span><span class="token dim">Open the SST Console</span>
         </div>
         <div class="token-line">
-          <span class="token lead">$</span> <span class="token">open</span> <span class="token plain">console.serverless-stack.com</span>
+          <span class="token lead">$</span> <span class="token">open</span> <span class="token plain">console.sst.dev</span>
         </div>
         <br />
         <div class="token-line">

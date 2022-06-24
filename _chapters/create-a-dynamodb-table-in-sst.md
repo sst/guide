@@ -64,7 +64,7 @@ return {
 
 This'll allow us to reference this resource in our other stacks.
 
-Note, learn more about sharing resources between stacks [here](https://docs.serverless-stack.com/constructs/Stack#sharing-resources-between-stacks).
+Note, learn more about sharing resources between stacks [here](https://docs.sst.dev/constructs/Stack#sharing-resources-between-stacks).
 
 ### Remove Template Files
 

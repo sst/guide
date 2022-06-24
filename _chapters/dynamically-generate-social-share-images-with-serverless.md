@@ -28,7 +28,7 @@ We also have multiple templates to generate these social cards. Here's one for o
 These images are served out of our social cards service. It's built using [SST](/) and is hosted on AWS:
 
 ```bash
-https://social-cards.serverless-stack.com
+https://social-cards.sst.dev
 ```
 
 In this chapter we'll look at how we created this service and how you can do the same!
@@ -588,7 +588,7 @@ Or if you have a domain hosted on another provider, [read this to migrate it to 
 We can do this in our `stacks/MyStack.js` by adding this block above the CloudFront definition.
 
 ```js
-const rootDomain = "serverless-stack.com";
+const rootDomain = "sst.dev";
 const domainName = `social-cards.${rootDomain}`;
 
 const useCustomDomain = app.stage === "prod";
@@ -646,7 +646,7 @@ Make sure to check out the full `stacks/MyStack.js` source here — [{{ page.rep
 Now you can load our custom domain URL!
 
 ```bash
-https://social-cards.serverless-stack.com/serverless-stack-blog/VGhpcyUyMGlzJTIwYSUyMHNhbXBsZSUyMGJsb2clMjBwb3N0JTIwb24lMjBTZXJ2ZXJsZXNzJTIwU3RhY2s=.png?author=Jay&avatar=jay
+https://social-cards.sst.dev/serverless-stack-blog/VGhpcyUyMGlzJTIwYSUyMHNhbXBsZSUyMGJsb2clMjBwb3N0JTIwb24lMjBTZXJ2ZXJsZXNzJTIwU3RhY2s=.png?author=Jay&avatar=jay
 ```
 
 ![Social card image generated from custom domain](/assets/dynamically-generate-social-share-images-with-serverless/social-card-image-generated-from-custom-domain.png)
@@ -679,7 +679,7 @@ In your layouts where you have the `<head>` tag, add the following.
 {% if page.id %} {% assign encoded_title=title | truncate: 700 | url_encode |
 base64_encode | url_encode %}
 <meta
-  content="https://social-cards.serverless-stack.com/serverless-stack-blog/{{ encoded_title }}.png?author={{ site.data.authors[page.author].name | url_encode }}&avatar={{ page.author }}"
+  content="https://social-cards.sst.dev/serverless-stack-blog/{{ encoded_title }}.png?author={{ site.data.authors[page.author].name | url_encode }}&avatar={{ page.author }}"
   property="og:image"
 />
 {% endif %}
@@ -750,7 +750,7 @@ Just like with the Jekyll case, we limit the size of the title and in our `docus
 ```js
 customFields: {
   // Used in "src/theme/DocItem/index.js" to add og:image tags dynamically
-  socialCardsUrl: "https://social-cards.serverless-stack.com",
+  socialCardsUrl: "https://social-cards.sst.dev",
   authors: {
     jay: {
       name: "Jay"

@@ -34,7 +34,7 @@ $ npx sst console --stage prod
 This'll allow you to connect your SST Console to your prod stage.
 
 ```txt
-SST Console: https://console.serverless-stack.com/notes/prod/stacks
+SST Console: https://console.sst.dev/notes/prod/stacks
 ```
 
 It'll show you all the resources in production.

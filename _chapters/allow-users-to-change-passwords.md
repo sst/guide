@@ -7,12 +7,12 @@ code: user-management
 comments_id: allow-users-to-change-passwords/507
 ---
 
-For our [Serverless notes app](https://demo.serverless-stack.com), we want to allow our users to change their password. Recall that we are using Cognito to manage our users and AWS Amplify in our React app. In this chapter we will look at how to do that.
+For our [Serverless notes app](https://demo.sst.dev), we want to allow our users to change their password. Recall that we are using Cognito to manage our users and AWS Amplify in our React app. In this chapter we will look at how to do that.
 
 For reference, we are using a forked version of the notes app with:
 
 - A separate GitHub repository: [**{{ site.frontend_user_mgmt_github_repo }}**]({{ site.frontend_user_mgmt_github_repo }})
-- And it can be accessed through: [**https://demo-user-mgmt.serverless-stack.com**](https://demo-user-mgmt.serverless-stack.com)
+- And it can be accessed through: [**https://demo-user-mgmt.sst.dev**](https://demo-user-mgmt.sst.dev)
 
 Let's start by editing our settings page so that our users can use to change their password.
 
