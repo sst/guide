@@ -32,7 +32,7 @@ export default function main(app) {
 
 Here CDK knows that the `CognitoStack` depends on the `S3Stack`. And it needs to wait for the `S3Stack` to complete first.
 
-[SST](https://github.com/serverless-stack/serverless-stack) will deploy the stacks in our CDK app concurrently while ensuring that the dependencies are respected.
+[SST](https://github.com/serverless-stack/sst) will deploy the stacks in our CDK app concurrently while ensuring that the dependencies are respected.
 
 Next for the [API repo]({{ site.backend_ext_api_github_repo }}) for the first time, you have to:
 

@@ -38,7 +38,7 @@ new CfnOutput(this, "TableName", {
 
 The above is a CDK example from our `DynamoDBStack.js`.
 
-Here the `exportName` is the name of the CloudFormation export. We use a convenience method from [SST](https://github.com/serverless-stack/serverless-stack) called `app.logicalPrefixedName` that prefixes our export name with the name of the stage we are deploying to, and the name of our SST app. This ensures that our export name is unique when we deploy our stack across multiple environments.
+Here the `exportName` is the name of the CloudFormation export. We use a convenience method from [SST](https://github.com/serverless-stack/sst) called `app.logicalPrefixedName` that prefixes our export name with the name of the stage we are deploying to, and the name of our SST app. This ensures that our export name is unique when we deploy our stack across multiple environments.
 
 ### CloudFormation Export in Serverless Framework
 

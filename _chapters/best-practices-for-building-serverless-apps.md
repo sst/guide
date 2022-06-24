@@ -69,7 +69,7 @@ The following repos will serve as the centerpiece of this section:
 
 1. [**Serverless Infrastructure**]({{ site.backend_ext_resources_github_repo }})
 
-   A repo containing all the main infrastructure resources of our extended notes application. We are creating a DynamoDB table to store all the notes related info, an S3 bucket for uploading attachments, and a Cognito User Pool and Identity Pool to authenticate users. We'll be using [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}) with [SST](https://github.com/serverless-stack/serverless-stack).
+   A repo containing all the main infrastructure resources of our extended notes application. We are creating a DynamoDB table to store all the notes related info, an S3 bucket for uploading attachments, and a Cognito User Pool and Identity Pool to authenticate users. We'll be using [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}) with [SST](https://github.com/serverless-stack/sst).
 
 2. [**Serverless Services**]({{ site.backend_ext_api_github_repo }})
 

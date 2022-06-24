@@ -220,7 +220,7 @@ Let's install the npm packages we are using here.
 ...
 ```
 
-You can find the latest CDK versions supported by SST in our [releases](https://github.com/serverless-stack/serverless-stack/releases).
+You can find the latest CDK versions supported by SST in our [releases](https://github.com/serverless-stack/sst/releases).
 
 ## Adding function code
 

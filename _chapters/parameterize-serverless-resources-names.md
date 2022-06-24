@@ -49,7 +49,7 @@ resources:
 
 ### Parameterize Resources in CDK With SST
 
-For CDK on the other hand we use [SST](https://github.com/serverless-stack/serverless-stack) to automatically parameterize our stack names. And use a helper method to parameterize specific resource names.
+For CDK on the other hand we use [SST](https://github.com/serverless-stack/sst) to automatically parameterize our stack names. And use a helper method to parameterize specific resource names.
 
 So for example in the `stacks/index.js` file in our [resources repo]({{ site.backend_ext_resources_github_repo }}).
 

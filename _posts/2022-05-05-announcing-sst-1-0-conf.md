@@ -6,7 +6,7 @@ author: jay
 image: assets/social-cards/sst-1-0-conf.png
 ---
 
-You might’ve [heard about our v1 release](https://github.com/serverless-stack/serverless-stack/releases/tag/v1.0.0-beta.26). As SST enters into a new phase, we wanted to do something special for our community. We are putting together a virtual community event to commemorate the launch!
+You might’ve [heard about our v1 release](https://github.com/serverless-stack/sst/releases/tag/v1.0.0-beta.26). As SST enters into a new phase, we wanted to do something special for our community. We are putting together a virtual community event to commemorate the launch!
 
 [**SST 1.0 Conf**]({{ site.v1_conf_url }}) is a free virtual event happening on May 17th, 2022 at 9am PDT. [Register for the conference now]({{ site.v1_conf_url }}).
 

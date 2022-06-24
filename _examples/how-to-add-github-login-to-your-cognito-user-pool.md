@@ -115,7 +115,7 @@ Let's install the npm packages we are using.
 ...
 ```
 
-You can find the latest CDK versions supported by SST in our [releases](https://github.com/serverless-stack/serverless-stack/releases).
+You can find the latest CDK versions supported by SST in our [releases](https://github.com/serverless-stack/sst/releases).
 
 Note, we haven't yet set up GitHub OAuth with our user pool, we'll do it later.
 

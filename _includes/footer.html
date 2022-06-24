@@ -230,7 +230,7 @@
       ? parseFloat((num / 1000).toFixed(1)) + "k"
       : num;
   }
-  $.ajax("https://api.github.com/repos/serverless-stack/serverless-stack")
+  $.ajax("https://api.github.com/repos/serverless-stack/sst")
     .done(function(data) {
       $("#github-star-count").text(formatStars(data.stargazers_count));
     });
