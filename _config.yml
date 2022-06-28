@@ -45,7 +45,7 @@ survey_url: "https://serverless-stack.typeform.com/to/xiPdCW"
 google_analytics: "UA-3536629-11"
 
 docs_url: "https://docs.sst.dev"
-docs_get_started: "/installation"
+docs_get_started: "/quick-start"
 v1_conf_url: "https://v1conf.sst.dev"
 console_url: "https://console.sst.dev"
 forum_url: "https://discourse.sst.dev"
