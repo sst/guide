@@ -76,7 +76,7 @@ There are a couple of key parts to this. So let's look at it in detail.
 We'll start by creating a new SST app.
 
 ```bash
-$ npm init sst javascript-starter social-cards
+$ npx create-sst@latest --template=starters/javascript-starter social-cards
 $ cd social-cards
 ```
 

@@ -14,7 +14,7 @@ Now that we understand what _infrastructure as code_ is, we are ready to create 
 {%change%} Run the following in your working directory.
 
 ```bash
-$ npm init sst javascript-starter notes
+$ npx create-sst@latest --template=starters/javascript-starter notes
 $ cd notes
 $ npm install
 ```

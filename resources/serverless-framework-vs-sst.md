@@ -164,7 +164,7 @@ Next, let's look at in detail how SST allows you to test your serverless apps lo
 {%change%} Let's start by using the VS Code example.
 
 ```bash
-$ npm init serverless-stack --example vscode
+$ npx create-sst@latest --template=examples/vscode vscode
 $ cd vscode
 ```
 
