@@ -126,25 +126,10 @@ To allow VS Code to set breakpoints and debug our Lambda functions we'll add it 
       "runtimeArgs": ["start", "--increase-timeout"],
       "console": "integratedTerminal",
       "skipFiles": ["<node_internals>/**"]
-    },
-    {
-      "name": "Debug SST Tests",
-      "type": "node",
-      "request": "launch",
-      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/sst",
-      "args": ["test", "--runInBand", "--no-cache", "--watchAll=false"],
-      "cwd": "${workspaceRoot}",
-      "protocol": "inspector",
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "env": { "CI": "true" },
-      "disableOptimisticBPs": true
     }
   ]
 }
 ```
-
-This adds two debug configurations, the first is to debug Lambda functions, while the second allows debugging the Jest tests that are automatically supported by SST.
 
 ## Extending Lambda function timeouts
 
