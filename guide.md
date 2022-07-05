@@ -7,7 +7,7 @@ description: Learn how to build full-stack apps using serverless and React on AW
 <div class="guide-page">
 
   <div class="title">
-    <p class="eyebrow">Join {{ site.stats.newsletter }} other readers from the biggest companies in the world</p>
+    <p class="eyebrow">Join readers from the biggest companies in the world</p>
     <h2>SST Guide</h2>
     <h4>
       The most widely read resource for building full-stack apps using serverless and React on AWS.
