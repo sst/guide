@@ -33,10 +33,17 @@ We livestreamed the `create sst` launch event. You can [check it out on YouTube]
   <iframe src="https://www.youtube-nocookie.com/embed/wBTDkLIyMhw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-It includes a little demo of `create sst`. We also interview the open source maintainers of a couple of projects we use in the starter:
+Here's roughly what we covered during the launch:
 
+- Backstory
+- Demo of `create sst`
 - [Tyler W. Walch](https://twitter.com/tinkertamper) from [ElectroDB](https://github.com/tywalch/electrodb)
 - [Michael Hayes](https://twitter.com/yavascript) from [Pothos](https://pothos-graphql.dev)
+- Looking ahead
+- Q&A
+
+The video is timestamped, so you can jump ahead.
+
 
 ## Looking ahead
 
