@@ -1,6 +1,6 @@
 ---
 layout: lander
-description: "SST is a framework that makes it easy to build serverless applications by allowing you to test your Lambda functions live. Check out our examples to get started. Or follow our step-by-step tutorials for creating full-stack apps with serverless and React.js on AWS."
+description: "SST is a framework that makes it easy to build full-stack serverless applications. Check out our examples to get started."
 ---
 
 <header class="lander-header" role="banner">
