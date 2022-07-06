@@ -73,7 +73,6 @@ import {
   StaticSite,
   StackContext,
   Table,
-  StaticSiteErrorOptions,
 } from "@serverless-stack/resources";
 
 export function MyStack({ stack }: StackContext) {
@@ -147,7 +146,7 @@ const site = new StaticSite(stack, "GatsbySite", {
   path: "frontend",
   buildOutput: "public",
   buildCommand: "npm run build",
-  errorPage: StaticSiteErrorOptions.REDIRECT_TO_INDEX_PAGE,
+  errorPage: "redirect_to_index_page",
   environment: {
     // Pass in the API endpoint to our app
     GATSBY_APP_API_URL: api.url,
@@ -173,7 +172,7 @@ const site = new StaticSite(stack, "GatsbySite", {
   path: "frontend",
   buildOutput: "public",
   buildCommand: "npm run build",
-  errorPage: StaticSiteErrorOptions.REDIRECT_TO_INDEX_PAGE,
+  errorPage: "redirect_to_index_page",
   environment: {
     // Pass in the API endpoint to our app
     GATSBY_APP_API_URL: api.url,
