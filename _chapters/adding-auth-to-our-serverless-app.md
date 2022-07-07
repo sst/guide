@@ -34,7 +34,7 @@ export function AuthStack({ stack, app }) {
     login: ["email"],
   });
 
-  auth.attachPermissionsForAuthUsers([
+  auth.attachPermissionsForAuthUsers(stack, [
     // Allow access to the API
     api,
     // Policy granting access to a specific folder in the bucket
