@@ -104,7 +104,7 @@ const auth = new Auth(stack, "Auth", {
 });
 
 // Allow authenticated users invoke API
-auth.attachPermissionsForAuthUsers([api]);
+auth.attachPermissionsForAuthUsers(stack, [api]);
 ```
 
 This creates a [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html); a user directory that manages user sign up and login. We've configured the User Pool to allow users to login with their email and password.

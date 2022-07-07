@@ -112,7 +112,7 @@ const auth = new Auth(stack, "Auth", {
 });
 
 // Allow authenticated users invoke API
-auth.attachPermissionsForAuthUsers([api]);
+auth.attachPermissionsForAuthUsers(stack, [api]);
 ```
 
 This creates a [Cognito Identity Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html) which relies on Google to authenticate users. And we use the [`attachPermissionsForAuthUsers`]({{ site.docs_url }}/constructs/Auth#attachpermissionsforauthusers) method to allow our logged in users to access our API.

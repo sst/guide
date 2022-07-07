@@ -198,7 +198,7 @@ const api = new Api(stack, "Api", {
 });
 
 // Allow authenticated users invoke API
-auth.attachPermissionsForAuthUsers([api]);
+auth.attachPermissionsForAuthUsers(stack, [api]);
 ```
 
 We are creating an API here using the [`Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding two routes to it.

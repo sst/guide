@@ -131,7 +131,7 @@ const api = new Api(stack, "Api", {
 });
 
 // Allow authenticated users to invoke the API
-auth.attachPermissionsForAuthUsers([api]);
+auth.attachPermissionsForAuthUsers(stack, [api]);
 ```
 
 We are going to create a simple API that generates random numbers. It'll have a public and a private route. While anyone can generate a random number on the public route, only logged-in users can generate random numbers from the private route.
@@ -140,7 +140,7 @@ Notice the `defaultAuthorizationType: sst.ApiAuthorizationType.AWS_IAM`. This is
 
 You’ll also notice that we set the `authorizationType` to `NONE` in the public route, overriding the default behavior described earlier.
 
-Finally, `auth.attachPermissionsForAuthUsers([api])` tells AWS that the authenticated users to our Cognito User Pool can access the API that we just defined.
+Finally, `auth.attachPermissionsForAuthUsers(stack, [api])` tells AWS that the authenticated users to our Cognito User Pool can access the API that we just defined.
 
 #### Adding Lambda functions
 

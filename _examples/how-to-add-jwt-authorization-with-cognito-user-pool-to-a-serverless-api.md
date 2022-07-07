@@ -97,7 +97,7 @@ export function MyStack({ stack, app }: StackContext) {
   });
 
   // allowing authenticated users to access API
-  auth.attachPermissionsForAuthUsers([api]);
+  auth.attachPermissionsForAuthUsers(stack, [api]);
 
   // Show the API endpoint and other info in the output
   stack.addOutputs({
