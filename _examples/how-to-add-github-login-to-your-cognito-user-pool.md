@@ -68,7 +68,6 @@ import {
   ViteStaticSite,
 } from "@serverless-stack/resources";
 import * as cognito from "aws-cdk-lib/aws-cognito";
-import * as apigAuthorizers from "@aws-cdk/aws-apigatewayv2-authorizers-alpha";
 
 export function MyStack({ stack, app }: StackContext) {
   const auth = new Auth(stack, "Auth", {
@@ -104,19 +103,6 @@ export function MyStack({ stack, app }: StackContext) {
 
 This creates a [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html); a user directory that manages users. We've configured the User Pool to allow users to login with their GitHub account and added the callback and logout URLs.
 
-Let's install the npm packages we are using.
-
-{%change%} Update the `package.json` in the root.
-
-```json
-...
-"aws-cdk-lib": "2.20.0",
-"@aws-cdk/aws-apigatewayv2-alpha": "2.20.0-alpha.0"
-...
-```
-
-You can find the latest CDK versions supported by SST in our [releases](https://github.com/serverless-stack/sst/releases).
-
 Note, we haven't yet set up GitHub OAuth with our user pool, we'll do it later.
 
 ## Setting up the API
@@ -129,14 +115,9 @@ const api = new Api(stack, "api", {
   authorizers: {
     userPool: {
       type: "user_pool",
-      cdk: {
-        authorizer: new apigAuthorizers.HttpUserPoolAuthorizer(
-          "Authorizer",
-          auth.cdk.userPool,
-          {
-            userPoolClients: [auth.cdk.userPoolClient],
-          }
-        ),
+      userPool: {
+        id: auth.userPoolId,
+        clientIds: [auth.userPoolClientId],
       },
     },
   },

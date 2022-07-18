@@ -62,7 +62,6 @@ First, let's create a [Cognito User Pool](https://docs.aws.amazon.com/cognito/la
 
 ```ts
 import * as cognito from "aws-cdk-lib/aws-cognito";
-import * as apigAuthorizers from "@aws-cdk/aws-apigatewayv2-authorizers-alpha";
 import {
   Api,
   Auth,
@@ -165,14 +164,9 @@ const api = new Api(stack, "Api", {
   authorizers: {
     userPool: {
       type: "user_pool",
-      cdk: {
-        authorizer: new apigAuthorizers.HttpUserPoolAuthorizer(
-          "Authorizer",
-          auth.cdk.userPool,
-          {
-            userPoolClients: [auth.cdk.userPoolClient],
-          }
-        ),
+      userPool: {
+        id: auth.userPoolId,
+        clientIds: [auth.userPoolClientId],
       },
     },
   },
@@ -200,19 +194,6 @@ GET /public
 ```
 
 By default, all routes have the authorization type `JWT`. This means the caller of the API needs to pass in a valid JWT token. The `GET /private` route is a private endpoint. The `GET /public` is a public endpoint and its authorization type is overridden to `NONE`.
-
-Let's install the npm packages we are using here.
-
-{%change%} Update the `package.json` in the root.
-
-```json
-...
-"aws-cdk-lib": "2.20.0",
-"@aws-cdk/aws-apigatewayv2-alpha": "2.20.0-alpha.0"
-...
-```
-
-You can find the latest CDK versions supported by SST in our [releases](https://github.com/serverless-stack/sst/releases).
 
 ## Adding function code
 
