@@ -7,7 +7,7 @@ image: assets/social-cards/remixsite-construct.png
 
 The new [`RemixSite`]({{ site.docs_url }}/constructs/RemixSite) construct makes it easy to deploy [Remix](https://remix.run) apps to AWS.
 
-Remix is a frontend focussed framework that delivers modern web experiences but by relying on web standards. The SST community has been looking for a way to deploy a Remix app with SST.
+Remix is a frontend focused framework that delivers modern web experiences but by relying on web standards. The SST community has been looking for a way to deploy a Remix app with SST.
 
 Recently, [Sean Matheson](https://twitter.com/controlplusb) put together [a very comprehensive PR]({{ site.sst_github_repo }}/pull/1800) implementing an SST construct that would deploy a Remix app.
 
