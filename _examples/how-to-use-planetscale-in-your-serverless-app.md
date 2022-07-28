@@ -27,7 +27,7 @@ In this example we will look at how to use PlanetScale in our serverless app usi
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter planetscale
+$ npx create-sst@latest --template=minimal/typescript-starter planetscale
 $ cd planetscale
 $ npm install
 ```

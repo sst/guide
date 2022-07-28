@@ -27,7 +27,7 @@ In this example, we will look at how to add GitHub Login to Your Cognito User Po
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter api-oauth-github
+$ npx create-sst@latest --template=minimal/typescript-starter api-oauth-github
 $ cd api-oauth-github
 $ npm install
 ```

@@ -26,7 +26,7 @@ In this example we will look at how to create a CRUD API with serverless using [
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter crud-api-dynamodb
+$ npx create-sst@latest --template=minimal/typescript-starter crud-api-dynamodb
 $ cd crud-api-dynamodb
 $ npm install
 ```

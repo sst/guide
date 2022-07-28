@@ -26,7 +26,7 @@ In this example we will look at how to use [Vue.js](https://vuejs.org) with a [s
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter vue-app
+$ npx create-sst@latest --template=minimal/typescript-starter vue-app
 $ cd vue-app
 $ npm install
 ```

@@ -30,7 +30,7 @@ In this example we will look at how to use the [Middy validator](https://middy.j
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter middy-validator
+$ npx create-sst@latest --template=minimal/typescript-starter middy-validator
 $ cd middy-validator
 $ npm install
 ```

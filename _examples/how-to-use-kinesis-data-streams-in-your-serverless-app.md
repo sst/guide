@@ -26,7 +26,7 @@ In this example we will look at how to create a Kinesis Data Stream in our serve
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter kinesisstream
+$ npx create-sst@latest --template=minimal/typescript-starter kinesisstream
 $ cd kinesisstream
 $ npm install
 ```

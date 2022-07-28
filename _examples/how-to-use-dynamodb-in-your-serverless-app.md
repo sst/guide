@@ -26,7 +26,7 @@ In this example we will look at how to use DynamoDB in our serverless app using 
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter rest-api-dynamodb
+$ npx create-sst@latest --template=minimal/typescript-starter rest-api-dynamodb
 $ cd rest-api-dynamodb
 $ npm install
 ```

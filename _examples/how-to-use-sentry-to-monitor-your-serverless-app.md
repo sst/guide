@@ -31,7 +31,7 @@ When a serverless app is deployed to production, it's useful to be able to monit
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter sentry
+$ npx create-sst@latest --template=minimal/typescript-starter sentry
 $ cd sentry
 $ npm install
 ```

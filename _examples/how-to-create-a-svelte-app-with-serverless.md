@@ -26,7 +26,7 @@ In this example we will look at how to use [Svelte](https://svelte.dev) with a [
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter svelte-app
+$ npx create-sst@latest --template=minimal/typescript-starter svelte-app
 $ cd svelte-app
 $ npm install
 ```
