@@ -26,7 +26,7 @@ In this example we will look at how to use [Gatsby](https://www.gatsbyjs.com/) w
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter gatsby-app
+$ npx create-sst@latest --template=minimal/typescript-starter gatsby-app
 $ cd gatsby-app
 $ npm install
 ```

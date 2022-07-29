@@ -26,7 +26,7 @@ In this example we will look at how to create a cron job in our serverless app u
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter cron-job
+$ npx create-sst@latest --template=minimal/typescript-starter cron-job
 $ cd cron-job
 $ npm install
 ```

@@ -26,7 +26,7 @@ In this example we will look at how to use EventBus to create [an EventBridge sy
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter eventbus
+$ npx create-sst@latest --template=minimal/typescript-starter eventbus
 $ cd eventbus
 $ npm install
 ```

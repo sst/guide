@@ -27,7 +27,7 @@ In this example, we will look at how to add Facebook Login to Your Cognito User 
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter api-oauth-facebook
+$ npx create-sst@latest --template=minimal/typescript-starter api-oauth-facebook
 $ cd api-oauth-facebook
 $ npm install
 ```

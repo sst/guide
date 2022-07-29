@@ -36,7 +36,7 @@ Let's look at how.
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter intellij-idea
+$ npx create-sst@latest --template=minimal/typescript-starter intellij-idea
 $ cd intellij-idea
 $ npm install
 ```

@@ -28,7 +28,7 @@ We'll be using SST's [Live Lambda Development]({{ site.docs_url }}/live-lambda-d
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter layer-chrome-aws-lambda
+$ npx create-sst@latest --template=minimal/typescript-starter layer-chrome-aws-lambda
 $ cd layer-chrome-aws-lambda
 $ npm install
 ```

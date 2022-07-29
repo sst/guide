@@ -26,7 +26,7 @@ In this example we will look at how to add JWT authorization with [Cognito User 
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter api-auth-jwt-cognito-user-pool
+$ npx create-sst@latest --template=minimal/typescript-starter api-auth-jwt-cognito-user-pool
 $ cd api-auth-jwt-cognito-user-pool
 $ npm install
 ```

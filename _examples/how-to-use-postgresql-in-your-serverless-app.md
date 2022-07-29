@@ -26,7 +26,7 @@ In this example we will look at how to use PostgreSQL in our serverless app usin
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter rest-api-postgresql
+$ npx create-sst@latest --template=minimal/typescript-starter rest-api-postgresql
 $ cd rest-api-postgresql
 $ npm install
 ```

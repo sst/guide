@@ -26,7 +26,7 @@ In this example we'll look at how to create a serverless REST API with TypeScrip
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter rest-api-ts
+$ npx create-sst@latest --template=minimal/typescript-starter rest-api-ts
 $ cd rest-api-ts
 $ npm install
 ```

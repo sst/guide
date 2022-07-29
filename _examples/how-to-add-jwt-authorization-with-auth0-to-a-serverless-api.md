@@ -27,7 +27,7 @@ In this example we will look at how to add JWT authorization with [Auth0](https:
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter api-auth-jwt-auth0
+$ npx create-sst@latest --template=minimal/typescript-starter api-auth-jwt-auth0
 $ cd api-auth-jwt-auth0
 $ npm install
 ```

@@ -33,7 +33,7 @@ Let's look at how to set this up.
 {%change%} Start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter datadog
+$ npx create-sst@latest --template=minimal/typescript-starter datadog
 $ cd datadog
 $ npm install
 ```

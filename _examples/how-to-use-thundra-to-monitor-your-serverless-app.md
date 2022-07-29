@@ -33,7 +33,7 @@ Let's look at how to set this up.
 {%change%} Start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter thundra
+$ npx create-sst@latest --template=minimal/typescript-starter thundra
 $ cd thundra
 $ npm install
 ```

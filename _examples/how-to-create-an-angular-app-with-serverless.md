@@ -25,7 +25,7 @@ In this example we will look at how to use [Angular](https://angular.io) with a 
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter angular-app
+$ npx create-sst@latest --template=minimal/typescript-starter angular-app
 $ cd angular-app
 $ npm install
 ```

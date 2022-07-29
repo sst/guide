@@ -36,7 +36,7 @@ Let's look at how.
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter webstorm
+$ npx create-sst@latest --template=minimal/typescript-starter webstorm
 $ cd webstorm
 $ npm install
 ```

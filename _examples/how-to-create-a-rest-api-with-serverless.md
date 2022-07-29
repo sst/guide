@@ -26,7 +26,7 @@ In this example we will look at how to create a serverless REST API on AWS using
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter rest-api
+$ npx create-sst@latest --template=minimal/typescript-starter rest-api
 $ cd rest-api
 $ npm install
 ```

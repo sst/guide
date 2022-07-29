@@ -54,7 +54,7 @@ Here's what we'll be covering in this example:
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=starters/typescript-starter nextjs-app
+$ npx create-sst@latest --template=minimal/typescript-starter nextjs-app
 $ cd nextjs-app
 $ npm install
 ```
