@@ -68,12 +68,7 @@ We'll be using [Amazon DynamoDB](https://aws.amazon.com/dynamodb/); a reliable a
 {%change%} Replace the `stacks/MyStack.ts` with the following.
 
 ```ts
-import {
-  Api,
-  ReactStaticSite,
-  StackContext,
-  Table,
-} from "@serverless-stack/resources";
+import { StackContext, Table, Api } from "@serverless-stack/resources";
 
 export function MyStack({ stack }: StackContext) {
   // Create the table
@@ -103,8 +98,6 @@ Now let's add the API.
 const api = new Api(stack, "Api", {
   defaults: {
     function: {
-      // Allow the API to access the table
-      permissions: [table],
       // Pass in the table name to our API
       environment: {
         tableName: table.tableName,
@@ -115,6 +108,9 @@ const api = new Api(stack, "Api", {
     "POST /": "functions/lambda.handler",
   },
 });
+
+// Allow the API to access the table
+api.attachPermissions([table]);
 
 // Show the URLs in the output
 stack.addOutputs({
@@ -199,7 +195,7 @@ Stack dev-expo-app-my-stack
     ApiEndpoint: https://sez1p3dsia.execute-api.ap-south-1.amazonaws.com
 ```
 
-The `ApiEndpoint` is the API we just created. While the `SiteUrl` is where our React app will be hosted. For now it's just a placeholder website.
+The `ApiEndpoint` is the API we just created. 
 
 Let's test our endpoint with the [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
@@ -311,7 +307,7 @@ export default function App() {
 }
 ```
 
-Here we are adding a simple button that when clicked, makes a request to our API. We are getting the API endpoint from the environment variable, `process.env.API_URL`.
+Here we are adding a simple button that when clicked, makes a request to our API. We are getting the API endpoint from the environment variable.
 
 The response from our API is then stored in our app's state. We use it to display the count of the number of times the button has been clicked.
 

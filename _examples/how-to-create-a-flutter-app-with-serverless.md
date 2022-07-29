@@ -69,12 +69,7 @@ We'll be using [Amazon DynamoDB](https://aws.amazon.com/dynamodb/); a reliable a
 {%change%} Replace the `stacks/MyStack.ts` with the following.
 
 ```ts
-import {
-  Api,
-  ReactStaticSite,
-  StackContext,
-  Table,
-} from "@serverless-stack/resources";
+import { StackContext, Table, Api } from "@serverless-stack/resources";
 
 export function MyStack({ stack }: StackContext) {
   // Create the table
@@ -104,8 +99,6 @@ Now let's add the API.
 const api = new Api(stack, "Api", {
   defaults: {
     function: {
-      // Allow the API to access the table
-      permissions: [table],
       // Pass in the table name to our API
       environment: {
         tableName: table.tableName,
@@ -116,6 +109,9 @@ const api = new Api(stack, "Api", {
     "POST /": "functions/lambda.handler",
   },
 });
+
+// Allow the API to access the table
+api.attachPermissions([table]);
 
 // Show the URLs in the output
 stack.addOutputs({
