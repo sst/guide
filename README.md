@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://discourse.sst.dev"><img alt="Discourse posts" src="https://img.shields.io/discourse/https/discourse.sst.dev/posts.svg?style=for-the-badge" /></a>
-  <a href="https://twitter.com/ServerlessStack"><img alt="Twitter follow" src="https://img.shields.io/twitter/follow/serverlessstack.svg?label=twitter&style=for-the-badge" /></a>
+  <a href="https://twitter.com/sst_dev"><img alt="Twitter follow" src="https://img.shields.io/twitter/follow/serverlessstack.svg?label=twitter&style=for-the-badge" /></a>
   <a href="https://sst.dev/discord"><img alt="Chat on Slack" src="https://img.shields.io/discord/983865673656705025?style=for-the-badge" /></a> 
 </p>
 
