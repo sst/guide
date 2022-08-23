@@ -10,7 +10,7 @@ comments_id: custom-domains-in-serverless-apis/2464
 
 In the [previous chapter]({% link _chapters/purchase-a-domain-with-route-53.md %}) we purchased a new domain on [Route 53](https://aws.amazon.com/route53/). Now let's use it for our serverless API.
 
-{%change%} In your `stacks/ApiStack.js` add the following above the `authorizer: "iam"` line.
+{%change%} In your `stacks/ApiStack.js` add the following above the `defaults: {` line.
 
 ```js
 customDomain:
