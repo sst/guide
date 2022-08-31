@@ -285,7 +285,7 @@ We are first JSON parsing the request body. We use the content we get from it, t
 
 To complete the CRUD operations, let's delete the note.
 
-{%change%} Add this to `services/delete.ts`.
+{%change%} Add this to `services/functions/delete.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -400,7 +400,7 @@ To delete a note, go to the `DELETE /notes/{id}` and enter the **id** of the not
 
 Let's make a quick change to test our Live Lambda Development environment. We want our `get` function to return an error if it cannot find the note.
 
-{%change%} Replace the `return` statement in `services/gets.ts` with:
+{%change%} Replace the `return` statement in `services/functions/gets.ts` with:
 
 ```ts
 return results.Item
