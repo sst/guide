@@ -66,6 +66,12 @@ $ cd my-sst-app
 $ npm install
 ```
 
+Let's deploy the app once. This'll create all the infrastructure for your app and the `Config`. Recall that we use AWS SSM to store our secrets and parameters.
+
+```bash
+$ npm run deploy
+```
+
 And you can run your tests by running:
 
 ```bash
