@@ -144,8 +144,7 @@ We can now use this to display a Logout button once the user logs in. Find the f
 {%change%} And replace it with this:
 
 ```jsx
-{
-  isAuthenticated ? (
+{isAuthenticated ? (
     <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
   ) : (
     <>
@@ -156,8 +155,7 @@ We can now use this to display a Logout button once the user logs in. Find the f
         <Nav.Link>Login</Nav.Link>
       </LinkContainer>
     </>
-  );
-}
+  )}
 ```
 
 The `<>` or [Fragment component](https://reactjs.org/docs/fragments.html) can be thought of as a placeholder component. We need this because in the case the user is not logged in, we want to render two links. To do this we would need to wrap it inside a single component, like a `div`. But by using the Fragment component it tells React that the two links are inside this component but we don't want to render any extra HTML.
