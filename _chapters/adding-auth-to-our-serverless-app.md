@@ -21,7 +21,7 @@ Setting this all up can be pretty complicated in CDK. SST has a simple [`Auth`](
 
 ```js
 import * as iam from "aws-cdk-lib/aws-iam";
-import { Auth, use } from "@serverless-stack/resources";
+import { Cognito, use } from "@serverless-stack/resources";
 import { StorageStack } from "./StorageStack";
 import { ApiStack } from "./ApiStack";
 
