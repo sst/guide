@@ -271,7 +271,7 @@ We are now ready to use the API we just created. Let's use [Vite](https://vitejs
 {%change%} Run the following in the project root.
 
 ```bash
-$ npx create-vite@latest frontend --template react
+$ npx create-vite@latest frontend --template svelte
 $ cd frontend
 $ npm install
 ```
