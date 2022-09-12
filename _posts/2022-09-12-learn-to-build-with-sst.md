@@ -19,7 +19,7 @@ So if you are just getting started with SST, or serverless, or you want to learn
 
 ### Video Tutorial
 
-We hosted a [livestream on YouTube](https://www.youtube.com/watch?v=YtaxDURRjHA) where we worked through the tutorial and talked about it in detail.
+We hosted a [livestream on YouTube](https://www.youtube.com/watch?v=i7xEKHWTKNk) where we worked through the tutorial and talked about it in detail.
 
 This will help if you want to follow along with the tutorial as a video.
 
