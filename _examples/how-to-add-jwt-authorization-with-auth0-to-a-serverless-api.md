@@ -98,7 +98,7 @@ export function MyStack({ stack, app }: StackContext) {
         type: "jwt",
         jwt: {
           issuer: process.env.AUTH0_DOMAIN + "/",
-          audience: [process.env.AUTH0_DOMAIN + "/api/v2/"],
+          audience: [process.env.AUTH0_CLIENT_ID + "/api/v2/"],
         },
       },
     },
