@@ -6,7 +6,7 @@ date: 2021-02-08 00:00:00
 lang: en
 index: 3
 type: jwt-auth
-description: In this example we will look at how to add Google Login to a Cognito User Pool using SST. We'll be using the Api and Auth constructs to create an authenticated API.
+description: In this example we will look at how to add Google Login to a Cognito User Pool using SST. We'll be using the Api and Cognito constructs to create an authenticated API.
 short_desc: Authenticating a full-stack serverless app with Google.
 repo: api-oauth-google
 ref: how-to-add-google-login-to-your-cognito-user-pool
@@ -54,9 +54,9 @@ An SST app is made up of two parts.
 
    The code that's run when your API is invoked is placed in the `services/` directory of your project.
 
-## Setting up the Auth
+## Setting up the Cognito
 
-First, let's create a [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to store the user info using the [`Auth`]({{ site.docs_url }}/constructs/Auth) construct
+First, let's create a [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to store the user info using the [`Cognito`]({{ site.docs_url }}/constructs/Cognito) construct
 
 {%change%} Replace the `stacks/MyStack.ts` with the following.
 
@@ -64,14 +64,14 @@ First, let's create a [Cognito User Pool](https://docs.aws.amazon.com/cognito/la
 import * as cognito from "aws-cdk-lib/aws-cognito";
 import {
   Api,
-  Auth,
+  Cognito,
   StackContext,
   ViteStaticSite,
 } from "@serverless-stack/resources";
 
 export function MyStack({ stack, app }: StackContext) {
   // Create auth
-  const auth = new Auth(stack, "Auth", {
+  const auth = new Cognito(stack, "Auth", {
     cdk: {
       userPoolClient: {
         supportedIdentityProviders: [
@@ -112,7 +112,7 @@ GOOGLE_CLIENT_ID=<YOUR_GOOGLE_CLIENT_ID>
 GOOGLE_CLIENT_SECRET=<YOUR_GOOGLE_CLIENT_SECRET>
 ```
 
-{%change%} Add this below the `Auth` definition in `stacks/MyStack.ts`.
+{%change%} Add this below the `Cognito` definition in `stacks/MyStack.ts`.
 
 ```ts
 // Throw error if client ID & secret are not provided

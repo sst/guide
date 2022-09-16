@@ -6,7 +6,7 @@ date: 2021-02-08 00:00:00
 lang: en
 index: 2
 type: iam-auth
-description: In this example we will look at how to add Facebook authentication to a serverless API using SST. We'll be using the Api and Auth constructs to create an authenticated API.
+description: In this example we will look at how to add Facebook authentication to a serverless API using SST. We'll be using the Api and Cognito constructs to create an authenticated API.
 short_desc: Authenticating a serverless API with Facebook.
 repo: api-auth-facebook
 ref: how-to-add-facebook-authentication-to-a-serverless-api
@@ -61,7 +61,7 @@ Let's start by setting up an API.
 {%change%} Replace the `stacks/MyStack.ts` with the following.
 
 ```ts
-import { Api, Auth, StackContext } from "@serverless-stack/resources";
+import { Api, Cognito, StackContext } from "@serverless-stack/resources";
 
 export function MyStack({ stack }: StackContext) {
   // Create Api
@@ -102,7 +102,7 @@ Now let's add authentication for our serverless app.
 
 ```ts
 // Create auth provider
-const auth = new Auth(stack, "Auth", {
+const auth = new Cognito(stack, "Auth", {
   identityPoolFederation: {
     facebook: { appId: "419718329085014" },
   },

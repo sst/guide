@@ -6,7 +6,7 @@ date: 2021-03-02 00:00:00
 lang: en
 index: 1
 type: jwt-auth
-description: In this example we will look at how to add JWT authorization with Cognito User Pool to a serverless API using SST. We'll be using the Api and Auth constructs to create an authenticated API.
+description: In this example we will look at how to add JWT authorization with Cognito User Pool to a serverless API using SST. We'll be using the Api and Cognito constructs to create an authenticated API.
 short_desc: Adding JWT authentication with Cognito.
 repo: api-auth-jwt-cognito-user-pool
 ref: how-to-add-jwt-authorization-with-cognito-user-pool-to-a-serverless-api
@@ -62,14 +62,14 @@ Let's start by setting up an API.
 ```ts
 import {
   Api,
-  Auth,
+  Cognito,
   StackContext,
   ViteStaticSite,
 } from "@serverless-stack/resources";
 
 export function MyStack({ stack, app }: StackContext) {
   // Create User Pool
-  const auth = new Auth(stack, "Auth", {
+  const auth = new Cognito(stack, "Auth", {
     login: ["email"],
   });
 

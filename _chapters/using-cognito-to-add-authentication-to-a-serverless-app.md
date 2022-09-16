@@ -47,7 +47,7 @@ SST makes it easy to add these to your application. In [`stacks/MyStack.js`]({{ 
 
 ```js
 // Create a Cognito User Pool to manage auth
-const auth = new sst.Auth(this, "Auth", {
+const auth = new sst.Cognito(this, "Auth", {
   cognito: {
     userPool: {
       // Users will login using their email and password
@@ -57,7 +57,7 @@ const auth = new sst.Auth(this, "Auth", {
 });
 ```
 
-This is using the SST [`Auth`]({{ site.docs_url }}/constructs/Auth) construct to create a Cognito User Pool and an Identity Pool.
+This is using the SST [`Cognito`]({{ site.docs_url }}/constructs/Cognito) construct to create a Cognito User Pool and an Identity Pool.
 
 #### Aliases
 
@@ -66,7 +66,7 @@ In this case we are allowing users to login with their email and phone number as
 You can also optionally allow users to create a username and login using that.
 
 ```js
-const auth = new sst.Auth(this, "Auth", {
+const auth = new sst.Cognito(this, "Auth", {
   cognito: {
     userPool: {
       signInAliases: {
@@ -85,7 +85,7 @@ const auth = new sst.Auth(this, "Auth", {
 In this example we are not setting up any social logins. We'll do that in an upcoming chapter. But for a quick look, here's roughly what adding other social login providers will look like:
 
 ```js
-new Auth(this, "Auth", {
+new Cognito(this, "Auth", {
   facebook: { appId: "419718329085014" },
   apple: { servicesId: "com.myapp.client" },
   amazon: { appId: "amzn1.application.24ebe4ee4aef41e5acff038aee2ee65f" },
@@ -98,10 +98,10 @@ new Auth(this, "Auth", {
 
 #### Cognito Triggers
 
-You also might want to trigger (before and after authentication) some actions. The [Cognito Triggers]({{ site.docs_url }}/constructs/Auth#authuserpooltriggers) allow you to define Lambda functions that get executed for specific events.
+You also might want to trigger (before and after authentication) some actions. The [Cognito Triggers]({{ site.docs_url }}/constructs/Cognito#authuserpooltriggers) allow you to define Lambda functions that get executed for specific events.
 
 ```js
-new Auth(this, "Auth", {
+new Cognito(this, "Auth", {
   cognito: {
     triggers: {
       preAuthentication: "src/preAuthentication.main",

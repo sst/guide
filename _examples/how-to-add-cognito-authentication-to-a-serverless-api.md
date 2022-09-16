@@ -6,7 +6,7 @@ date: 2021-02-08 00:00:00
 lang: en
 index: 1
 type: iam-auth
-description: In this example we will look at how to add Cognito User Pool authentication to a serverless API using SST. We'll be using the Api and Auth constructs to create an authenticated API.
+description: In this example we will look at how to add Cognito User Pool authentication to a serverless API using SST. We'll be using the Api and Cognito constructs to create an authenticated API.
 short_desc: Authenticating with Cognito User Pool and Identity Pool.
 repo: api-auth-cognito
 ref: how-to-add-cognito-authentication-to-a-serverless-api
@@ -60,7 +60,7 @@ Let's start by setting up an API.
 {%change%} Replace the `stacks/MyStack.ts` with the following.
 
 ```ts
-import { Api, Auth, StackContext } from "@serverless-stack/resources";
+import { Api, Cognito, StackContext } from "@serverless-stack/resources";
 
 export function MyStack({ stack }: StackContext) {
   // Create Api
@@ -99,7 +99,7 @@ By default, all routes have the authorization type `AWS_IAM`. This means the cal
 
 ```ts
 // Create auth provider
-const auth = new Auth(stack, "Auth", {
+const auth = new Cognito(stack, "Auth", {
   login: ["email"],
 });
 
