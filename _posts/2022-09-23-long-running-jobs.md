@@ -41,4 +41,49 @@ The video is timestamped and here's roughly what we covered.
 
 ## Get started
 
-Follow the [**Quick Start**]({{ site.docs_url }}/long-running-jobs#quick-start) in the docs to give the `Job` construct a try.
+Here's how you use the new `Job` construct. Start by creating a new job.
+
+```ts
+import { Job } from "@serverless-stack/resources";
+
+const job = new Job(stack, "MyJob", {
+  srcPath: "services",
+  handler: "functions/myJob.handler",
+});
+```
+
+Add the job handler.
+
+```ts
+import { JobHandler } from "@serverless-stack/node/job";
+
+declare module "@serverless-stack/node/job" {
+  export interface JobTypes {
+    MyJob: {
+      foo: string;
+    };
+  }
+}
+
+export const handler = JobHandler("MyJob", async (payload) => {
+  // Do the job
+});
+```
+
+Finally invoke the job.
+
+```ts
+import { Job } from "@serverless-stack/node/job";
+
+function someFunction() {
+  await Job.run("MyJob", {
+    payload: {
+      foo: "Hello World",
+    },
+  });
+}
+```
+
+Note that the `payload` and job name `MyJob` here are typesafe.
+
+For a full tutorial check out the [**Quick Start**]({{ site.docs_url }}/long-running-jobs#quick-start) in the docs.
