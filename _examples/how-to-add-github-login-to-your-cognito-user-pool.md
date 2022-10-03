@@ -176,7 +176,7 @@ export async function handler() {
 }
 ```
 
-{%change%} Add a `services/token.ts`.
+{%change%} Add a `services/functions/token.ts`.
 
 Requesting data from the token endpoint, it will return the following form: `access_token=xxxxxxxxxxxxxxxxxxxxxxx&token_type=bearer`, which is not a JSON. It should be returning a JSON object for OpenID to understand. The below lambda does exactly that.
 
@@ -214,7 +214,7 @@ Make sure to install the `node-fetch` and `lambda-multipart-parser` packages.
 npm install node-fetch lambda-multipart-parser
 ```
 
-{%change%} Add a `services/user.ts`.
+{%change%} Add a `services/functions/user.ts`.
 
 User info endpoint uses a different authorization scheme: `Authorization: token OAUTH-TOKEN`. But, OpenID will send a `Bearer` scheme so that's we need a proxy to modify it to correct scheme.
 
