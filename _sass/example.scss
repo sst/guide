@@ -119,7 +119,7 @@ article.post.example section.examples-list {
     }
 
     & > .toc-section {
-      &:last-child {
+      &:not(:first-child) {
         margin-top: $spacing-unit / 2;
       }
       & > h3 {

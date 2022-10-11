@@ -2,18 +2,18 @@
 layout: example
 title: How to Add Google Login to Your Serverless App with SST Auth
 short_title: Google Auth
-date: 2021-02-08 00:00:00
+date: 2022-10-10 00:00:00
 lang: en
-index: 3
+index: 1
 type: sst-auth
 description: In this example we will look at how to add Google Login to your serverless app using SST Auth. We'll be using the Api, Auth, Table, and ViteStaticSite constructs to create a full-stack app with Google authentication.
-short_desc: Authenticating a full-stack serverless app with Google.
+short_desc: Adding Google auth to a full-stack serverless app.
 repo: api-sst-auth-google
 ref: how-to-add-google-login-to-your-sst-app-with-sst-auth
 comments_id: how-to-add-google-login-to-your-sst-app-with-sst-auth/2643
 ---
 
-In this example, we will look at how to add Google Login to Your serverless app using [SST]({{ site.sst_github_repo }}).
+In this example, we will look at how to add Google Login to your serverless app using [SST Auth]({{ site.docs_url }}/auth).
 
 ## Requirements
 
@@ -45,15 +45,15 @@ By default, our app will be deployed to the `us-east-1` AWS region. This can be 
 
 An SST app is made up of three parts.
 
-1. `stacks/` — App Infrastructure
+1. `stacks/` — Infrastructure code
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `services/` — Backend Code
+2. `services/` — Application code
 
    The code that's run when your API is invoked is placed in the `services/` directory of your project.
 
-3. `web/` — Frontend App
+3. `web/` — Frontend app
 
    The frontend of your application like React, Next.js, Remix, or any static website is placed in the `web/` directory of your project. The starter template we used above does not come with a frontend. We will be creating one later in this tutorial.
 
@@ -63,16 +63,25 @@ Before we start let's first take a look at the auth flow at a high level.
 
 ![Google Auth Flow](/assets/examples/api-sst-auth-google/auth-flow.png)
 
-1. The user clicks on "Sign in with Google" in the frontend, and gets redirected to the **Authorize URL** to initiate the auth flow.
-2. The user gets redirected to Google and logs into their Google account.
-3. Google redirects the user to a **Callback URL** with the user's details.
-4. The **Callback URL** stores the user data in the database, creates a session token for the user, and redirects to the frontend with the session token. The session token is then stored in the cookie or local storage. At this point, the frontend user is authenticated.
+1. The user clicks on "Sign in with Google" in the frontend, and gets redirected to an **Authorize URL** to initiate the auth flow.
+
+2. This will redirect the user to Google and they login to their Google account.
+
+3. Google redirects the user back to a **Callback URL** with the user's details.
+
+4. In the **Callback URL** we:
+
+   Store the user data in our database, create a session token for the user, and redirect to the frontend with the session token.
+
+   The session token is then stored in the cookie or local storage. At this point, the user is authenticated.
+
 5. From now on, when the user makes API requests, the session token gets passed in through the request header.
+
 6. The backend API verifies the session token, decodes the user id from it, and looks up the user in the database.
 
 In this tutorial, we will be implementing each of the above steps.
 
-## Create Google Project
+## Create a Google Project
 
 Before we start, make sure you have a Google Project with OAuth client credentials. You can follow the steps below to create a new project and a new OAuth client.
 
@@ -80,11 +89,11 @@ Head over to the [Google Cloud console](https://console.cloud.google.com), selec
 
 ![GCP Console Select Credentials](/assets/examples/api-sst-auth-google/gcp-console-select-credentials.png)
 
-If you don't have an existing Google project, select **CREATE PROJECT**.
+If you don't have an existing Google project, click **CREATE PROJECT**.
 
 ![GCP Console Select Create Project](/assets/examples/api-sst-auth-google/gcp-console-select-create-project.png)
 
-Enter a project name, then select **CREATE**.
+Enter a project name, then click **CREATE**.
 
 ![GCP Console Create Project](/assets/examples/api-sst-auth-google/gcp-console-create-project.png)
 
@@ -102,13 +111,13 @@ Select **External**, and hit **CREATE**.
 
 Enter the following details:
 
-- **App name**: `SST Auth`
+- **App name**: the name of your app, here we picked `SST Auth`
 - **User support email**: select your email address in the drop-down
 - **Developer contact information**: enter your email address again
 
 ![GCP Console Configure Consent Screen Form](/assets/examples/api-sst-auth-google/gcp-console-configure-consent-screen-form.png)
 
-Select **SAVE AND CONTINUE** for the rest of the steps. And on the last step select **BACK TO DASHBOARD**.
+Click **SAVE AND CONTINUE** for the rest of the steps. And on the last step hit **BACK TO DASHBOARD**.
 
 ![GCP Console Select Back To Dashboard](/assets/examples/api-sst-auth-google/gcp-console-back-to-dashboard.png)
 
@@ -124,7 +133,7 @@ Make a note of the **Client ID**. We will need it in the following steps.
 
 ![GCP Console Copy Client Credentials](/assets/examples/api-sst-auth-google/gcp-console-copy-client-credentials.png)
 
-## Setting up Authorize URL
+## Add the Authorize URL
 
 Next, we need to create an **Authorize URL** to initiate the auth flow. We are going to use the [`Auth`]({{ site.docs_url }}/constructs/Auth) construct. It will help us create both the **Authorize URL** and the **Callback URL**.
 
@@ -142,12 +151,13 @@ auth.attach(stack, {
 });
 ```
 
-Behind the scene, the `Auth` construct creates a `/auth/*` catch-all route. Both the Authorize and Callback URLs will fall under this route.
+Behind the scenes, the `Auth` construct creates a `/auth/*` catch-all route. Both the Authorize and Callback URLs will fall under this route.
 
 {%change%} Also remember to import the `Auth` construct up top.
 
-```ts
-import { Auth } from "@serverless-stack/resources";
+```diff
+- import { StackContext, Api } from "@serverless-stack/resources";
++ import { StackContext, Api, Auth } from "@serverless-stack/resources";
 ```
 
 Now let's implement the `authenticator` function.
@@ -178,7 +188,7 @@ export const handler = AuthHandler({
 
 Make sure to replace `GOOGLE_CLIENT_ID` with the OAuth Client ID created in the previous section.
 
-The `@serverless-stack/node` package provides helper libraries used inside the Lambda function code. In the snippet above, we are using the package to create an `AuthHandler` with a `GoogleAdapter` named `google`. This creates two routes behind the scene:
+The `@serverless-stack/node` package provides helper libraries used in Lambda functions. In the snippet above, we are using the package to create an `AuthHandler` with a `GoogleAdapter` named `google`. This creates two routes behind the scenes:
 
 - **Authorize URL** at `/auth/google/authorize`
 - **Callback URL** at `/auth/google/callback`
@@ -191,7 +201,7 @@ When the Authorize URL is invoked, it will initialize the auth flow and redirect
 npm install --save @serverless-stack/node
 ```
 
-## Setting up our React app
+## Set up our React app
 
 Next, we are going to add a **Sign in with Google** button to our frontend. And on click, we will redirect the user to the **Authorize URL**.
 
@@ -211,25 +221,26 @@ const site = new ViteStaticSite(stack, "Site", {
 {%change%} And add the site URL to `stack.addOutputs`.
 
 ```diff
-stack.addOutputs({
-  ApiEndpoint: api.url,
+ stack.addOutputs({
+   ApiEndpoint: api.url,
 +  SiteURL: site.url,
-});
+ });
 ```
 
-The construct is pointing to where our React.js app is located. We haven't created our app yet but for now, we'll point to the `web` directory.
+The construct is pointing to the directory where we are going to add our React.js app.
 
 We are also setting up [build time React environment variables](https://vitejs.dev/guide/env-and-mode.html) with the endpoint of our API. The [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
 
 {%change%} Also remember to import the `ViteStaticSite` construct up top.
 
-```ts
-import { ViteStaticSite } from "@serverless-stack/resources";
+```diff
+- import { StackContext, Api, Auth } from "@serverless-stack/resources";
++ import { StackContext, Api, Auth, ViteStaticSite } from "@serverless-stack/resources";
 ```
 
-## Creating the frontend
+## Create the frontend
 
-{%change%} Run the below commands in the root to create a basic react project.
+{%change%} Run the below commands in our project root to create a basic react project.
 
 ```bash
 $ npx create-vite@latest web --template react
@@ -237,7 +248,7 @@ $ cd web
 $ npm install
 ```
 
-This sets up our React app in the `web/` directory. That is the path we pointed the `ViteStaticSite` construct to in the above section.
+This sets up our React app in the `web/` directory.
 
 We also need to load the environment variables from our SST app. To do this, we'll be using the [`@serverless-stack/static-site-env`](https://www.npmjs.com/package/@serverless-stack/static-site-env) package.
 
@@ -256,7 +267,7 @@ We need to update our start script to use this package.
 +"dev": "sst-env -- vite"
 ```
 
-## Starting your dev environment
+## Start our dev environment
 
 SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
@@ -268,8 +279,10 @@ $ npx sst start
 
 The first time you run this command it'll prompt you to enter a stage name.
 
-```bash
-Look like you’re running sst for the first time in this directory. Please enter a stage name you’d like to use locally. Or hit enter to use the one based on your AWS credentials (frank):
+```txt
+Look like you’re running sst for the first time in this directory.
+Please enter a stage name you’d like to use locally. Or hit enter
+to use the one based on your AWS credentials (frank):
 ```
 
 You can press enter to use the default stage, or manually enter a stage name. SST uses the stage to namespace all the resources in your application.
@@ -296,18 +309,18 @@ SST Console: https://console.sst.dev/api-sst-auth-google/frank/local
 Debug session started. Listening for requests...
 ```
 
-The `ApiEndpoint` is the API we just created. That means our
+The `ApiEndpoint` is the API we just created. That means our:
 
-- **Authorize URL** is `https://2wk0bl6b7i.execute-api.us-east-1.amazonaws.com/auth/google/authorize`; and
-- **Callback URL** is `https://2wk0bl6b7i.execute-api.us-east-1.amazonaws.com/auth/google/callback`.
+- **Authorize URL** is `https://2wk0bl6b7i.execute-api.us-east-1.amazonaws.com/auth/google/authorize`
+- **Callback URL** is `https://2wk0bl6b7i.execute-api.us-east-1.amazonaws.com/auth/google/callback`
 
-And the `SiteURL` is where our React app will be hosted. For now, it's just a placeholder website.
+And the `SiteURL` is where our React app will be hosted. While in development, it's just a placeholder website.
 
 Add our **Callback URL** to the **Authorized redirect URIs** in our Google project's GCP Console.
 
 ![GCP Console Authorize Redirect URI](/assets/examples/api-sst-auth-google/gcp-console-add-authorized-redirect-uri.png)
 
-## Adding login UI
+## Add the Login UI
 
 {%change%} Replace `web/src/App.jsx` with below code.
 
@@ -336,10 +349,10 @@ Let's start our frontend in the development environment.
 {%change%} In the `web/` directory run.
 
 ```bash
-npm run dev
+$ npm run dev
 ```
 
-Open up your browser and go to `http://127.0.0.1:5173`.
+Open up your browser and go to the URL it shows. In our case it is: `http://127.0.0.1:5173`
 
 ![Web app not signed in unstyled](/assets/examples/api-sst-auth-google/react-site-not-signed-in-unstyled.png)
 
@@ -347,13 +360,13 @@ Click on `Sign in with Google`, and you will be redirected to Google to sign in.
 
 ![Google Sign in screen](/assets/examples/api-sst-auth-google/google-sign-in-screen.png)
 
-Once you are signed in, you will be redirected to the **Callback URL** we created earlier with the user's details. Recall in our `authenticator` handler function, we were simply returning the user's claims `onSuccess` callback.
+Once you are signed in, you will be redirected to the **Callback URL** we created earlier with the user's details. Recall in our `authenticator` handler function, that we are simply printing the user's claims in the `onSuccess` callback.
 
 ![Google Sign in callback screen](/assets/examples/api-sst-auth-google/google-sign-in-callback.png)
 
 🎉 Sweet! We have just completed steps 1, 2, and 3 of our [Auth Flow](#auth-flow).
 
-## Create Session Token
+## Create a Session Token
 
 Now, let's implement step 4. In the `onSuccess` callback, we will create a session token and pass that back to the frontend.
 
@@ -378,12 +391,12 @@ Also note that as your app grows, you can define multiple session types like an 
 {%change%} Make the following changes to the `onSuccess` callback.
 
 ```diff
-export const handler = AuthHandler({
-  providers: {
-    google: GoogleAdapter({
-      mode: "oidc",
-      clientID: GOOGLE_CLIENT_ID,
-      onSuccess: async (tokenset) => {
+ export const handler = AuthHandler({
+   providers: {
+     google: GoogleAdapter({
+       mode: "oidc",
+       clientID: GOOGLE_CLIENT_ID,
+       onSuccess: async (tokenset) => {
 -        return {
 -          statusCode: 200,
 -          body: JSON.stringify(tokenset.claims(), null, 4),
@@ -396,21 +409,23 @@ export const handler = AuthHandler({
 +            userID: claims.sub,
 +          },
 +        });
-      },
-    }),
-  },
-});
+       },
+     }),
+   },
+ });
 ```
+
+Remember to replace the `redirect` URL with the URL of your local React app.
 
 The `Session.parameter` call encrypts the given session object to generate a token. It'll then redirect to the given `redirect` URL with `?token=xxxx` as the query string parameter.
 
-{%change%} Also remember to import the `Session` up top.
+{%change%} Also import the `Session` up top.
 
 ```ts
 import { Session } from "@serverless-stack/node/auth";
 ```
 
-## Store Session Token
+## Store the Session Token
 
 Then in the frontend, we will check if the URL contains the `token` query string when the page loads. If it is passed in, we will store it in the local storage, and then redirect the user to the root domain.
 
@@ -428,9 +443,9 @@ useEffect(() => {
 }, []);
 ```
 
-On page load, we will also check if the session token exists in the local storage. If it does, we want to display the user who is signed in, and have an option for the user to sign out.
+On page load, we will also check if the session token exists in the local storage. If it does, we want to display the user that is signed in, and have a button for the user to sign out.
 
-{%change%} Add the following above the `useEffect` we just added.
+{%change%} Add this above the `useEffect` we just added.
 
 ```ts
 const [session, setSession] = useState(null);
@@ -450,26 +465,26 @@ useEffect(() => {
 {%change%} Replace the `return` to conditionally render the page based on `session`.
 
 ```diff
-return (
-  <div className="container">
-    <h2>SST Auth Example</h2>
-+    {session ? (
-+     <div>
-+       <p>Yeah! You are signed in.</p>
-+       <button onClick={signOut}>Sign out</button>
-+     </div>
-+    ) : (
-      <div>
-        <a
-          href={`${import.meta.env.VITE_APP_API_URL}/auth/google/authorize`}
-          rel="noreferrer"
-        >
-          <button>Sign in with Google</button>
-        </a>
-      </div>
-+    )}
-  </div>
-);
+ return (
+   <div className="container">
+     <h2>SST Auth Example</h2>
++      {session ? (
++       <div>
++         <p>Yeah! You are signed in.</p>
++         <button onClick={signOut}>Sign out</button>
++       </div>
++      ) : (
+       <div>
+         <a
+           href={`${import.meta.env.VITE_APP_API_URL}/auth/google/authorize`}
+           rel="noreferrer"
+         >
+           <button>Sign in with Google</button>
+         </a>
+       </div>
++      )}
+   </div>
+ );
 ```
 
 And finally, when the user clicks on `Sign out`, we need to clear the session token from the local storage.
@@ -483,13 +498,13 @@ const signOut = async () => {
 };
 ```
 
-{%change%} Also, remember to add the following import up top.
+{%change%} Also, remember to add the imports up top.
 
 ```ts
 import { useEffect, useState } from "react";
 ```
 
-Let's go back to our browser. Click on **Sign in with Google** again. After you authenticate with Google, you will be redirected back to the same page with the "Yeah! You are signed in." message.
+Let's go back to our browser. Click on **Sign in with Google** again. After you authenticate with Google, you will be redirected back to the same page with the _"Yeah! You are signed in."_ message.
 
 ![Web app signed in unstyled](/assets/examples/api-sst-auth-google/react-site-signed-in-unstyled.png)
 
@@ -499,11 +514,11 @@ Let's sign out before continuing with the next section. Click on **Sign out**.
 
 🎉 Awesome! We have now completed step 4 of our [Auth Flow](#auth-flow).
 
-Now, let's move on to steps 5 and 6. We will create a session API that will return the user data given the session token.
+Let's move on to steps 5 and 6. We will create a session API that will return the user data given the session token.
 
-## Storing user data
+## Store the User Data
 
-So far, when Google returned the authenticated user data in the **Callback URL**, we were not storing it. Let's create a database table to store the user data. We'll be using the SST [`Table`]({{ site.docs_url }}/constructs/Table) construct.
+So far we haven't been storing the data Google's been returning through the **Callback URL**. Let's create a database table to store this. We'll be using the SST [`Table`]({{ site.docs_url }}/constructs/Table) construct.
 
 {%change%} Add the following above the `Api` construct in `stacks/MyStack.ts`.
 
@@ -516,44 +531,52 @@ const table = new Table(stack, "Users", {
 });
 ```
 
-And let's pass the `table`'s name to the `api`, and also grant the `api` with permission to access the `table`.
+Let's create a new Config parameter to pass the `table` name to the `api`. And grant the `api` permissions to access the `table`.
 
 {%change%} Make the following changes to the `Api` construct.
 
 ```diff
-const api = new Api(stack, "api", {
-+ defaults: {
-+   function: {
-+     config: [
-+       new Config.Parameter(stack, "TABLE_NAME", { value: table.tableName }),
-+     ],
-+     permissions: [table],
-+   },
-+ },
-  routes: {
-    "GET /": "functions/lambda.handler",
-  },
-});
+ const api = new Api(stack, "api", {
++  defaults: {
++    function: {
++      config: [
++        new Config.Parameter(stack, "TABLE_NAME", { value: table.tableName }),
++      ],
++      permissions: [table],
++    },
++  },
+   routes: {
+     "GET /": "functions/lambda.handler",
+   },
+ });
 ```
 
-{%change%} Also remember to import the `Table` and `Config` construct up top.
+{%change%} Import the `Table` and `Config` construct up top.
 
-```ts
-import { Table, Config } from "@serverless-stack/resources";
+```diff
+- import { StackContext, Api, Auth, ViteStaticSite } from "@serverless-stack/resources";
++ import {
++   StackContext,
++   Api,
++   Auth,
++   ViteStaticSite,
++   Table,
++   Config
++ } from "@serverless-stack/resources";
 ```
 
 Now let's update our `authenticator` function to store the user data in the `onSuccess` callback.
 
-{%change%} Make the following changes to the `onSuccess` callback.
+{%change%} Update the `onSuccess` callback.
 
 ```diff
-export const handler = AuthHandler({
-  providers: {
-    google: GoogleAdapter({
-      mode: "oidc",
-      clientID: GOOGLE_CLIENT_ID,
-      onSuccess: async (tokenset) => {
-        const claims = tokenset.claims();
+ export const handler = AuthHandler({
+   providers: {
+     google: GoogleAdapter({
+       mode: "oidc",
+       clientID: GOOGLE_CLIENT_ID,
+       onSuccess: async (tokenset) => {
+         const claims = tokenset.claims();
 
 +        const ddb = new DynamoDBClient({});
 +        await ddb.send(new PutItemCommand({
@@ -566,20 +589,22 @@ export const handler = AuthHandler({
 +          }),
 +        }));
 
-        return Session.parameter({
-          redirect: "http://127.0.0.1:5173",
-          type: "user",
-          properties: {
-            userID: claims.sub,
-          },
-        });
-      },
-    }),
-  },
-});
+         return Session.parameter({
+           redirect: "http://127.0.0.1:5173",
+           type: "user",
+           properties: {
+             userID: claims.sub,
+           },
+         });
+       },
+     }),
+   },
+ });
 ```
 
-{%change%} Also remember to add these imports up top.
+This is saving the `claims` we get from Google in our DynamoDB table.
+
+{%change%} Also add these imports up top.
 
 ```ts
 import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb";
@@ -587,23 +612,23 @@ import { marshall } from "@aws-sdk/util-dynamodb";
 import { Config } from "@serverless-stack/node/config";
 ```
 
-{%change%} And finally install these packages inside `/services`.
+{%change%} And finally install these packages inside the `/services` directory.
 
 ```bash
 npm install --save @aws-sdk/client-dynamodb @aws-sdk/util-dynamodb
 ```
 
-## Fetching user data
+## Fetch the User Data
 
-Now the user data is stored in the database, let's create an API endpoint that returns the user details given the session token.
+Now that the user data is stored in the database; let's create an API endpoint that returns the user details given a session token.
 
 {%change%} Add a `/session` route in the `Api` construct's routes definition in `stacks/MyStacks.ts`.
 
 ```diff
-routes: {
-  "GET /": "functions/lambda.handler",
-+ "GET /session": "functions/session.handler",
-},
+ routes: {
+   "GET /": "functions/lambda.handler",
++  "GET /session": "functions/session.handler",
+ },
 ```
 
 {%change%} Add a file at `services/functions/session.ts`.
@@ -640,7 +665,9 @@ export const handler = Handler("api", async () => {
 });
 ```
 
-The handler calls `useSession()` to decode the session token and retrieve the user's `userID` from the session data. We then fetch the user's data from our database table with `userID` being the key.
+The handler calls a [`useSession()`]({{ site.docs_url }}/packages/node#usesession) hook to decode the session token and retrieve the user's `userID` from the session data. Note that, `useSession` can be called anywhere in your Lambda handler. This works because we are using the [`Handler`]({{ site.docs_url }}/packages/node#handler) to wrap our Lambda function.
+
+We then fetch the user's data from our database table with `userID` being the key.
 
 Save the changes. And then open up the `sst start` terminal window. You will be prompted with:
 
@@ -673,51 +700,57 @@ const getUserInfo = async (session) => {
 };
 ```
 
-{%change%} And update the `getSession` function to fetch from the session API.
+{%change%} Update the `getSession` function to fetch from the new session API.
 
 ```diff
-const getSession = async () => {
-  const token = localStorage.getItem("session");
-  if (token) {
+ const getSession = async () => {
+   const token = localStorage.getItem("session");
+   if (token) {
 -    setSession(token);
 +    const user = await getUserInfo(token);
 +    if (user) setSession(user);
-  }
-+  setLoading(false);
-};
+   }
++   setLoading(false);
+ };
 ```
 
 And finally, add a loading state to indicate the API is being called.
 
-{%change%} Add the following below the session state.
+{%change%} Add the following below the session `useState` hook.
 
 ```diff
   const [session, setSession] = useState(null);
 + const [loading, setLoading] = useState(true);
 ```
 
-## Rendering user data
+## Render the User Data
 
-{%change%} Replace the `return` to render the user data.
+Let's render the user info.
+
+{%change%} Update our `return` statement with.
+
+{% raw %}
 
 ```diff
--      <div>
--        <p>Yeah! You are signed in.</p>
--        <button onClick={signOut}>Sign out</button>
--      </div>
-+      <div className="profile">
-+        <p>Welcome {session.name}!</p>
-+        <img
-+          src={session.picture}
-+          style={{ borderRadius: "50%" }}
-+          width={100}
-+          height={100}
-+          alt=""
-+        />
-+        <p>{session.email}</p>
-+        <button onClick={signOut}>Sign out</button>
-+      </div>
+- <div>
+-   <p>Yeah! You are signed in.</p>
+-   <button onClick={signOut}>Sign out</button>
+- </div>
++ <div className="profile">
++   <p>Welcome {session.name}!</p>
++   <img
++     src={session.picture}
++     style={{ borderRadius: "50%" }}
++     width={100}
++     height={100}
++     alt=""
++   />
++   <p>{session.email}</p>
++   <button onClick={signOut}>Sign out</button>
++ </div>
 ```
+
+{% endraw %}
 
 Also, let's display a loading sign while waiting for the `/session` API to return.
 
@@ -780,21 +813,21 @@ Click on **Sign in with Google** again. After you authenticate with Google, you 
 
 🎉 Congratulations! We have completed the entire [Auth Flow](#auth-flow).
 
-## Deploying your API
+## Deploy your API
 
 When deploying to prod, we need to change our `authenticator` to redirect to the deployed frontend URL instead of `127.0.0.1`.
 
-{%change%} In `stacks/MyStack.ts`, make the following changes to the Auth construct.
+{%change%} In `stacks/MyStack.ts`, make this change to the `Auth` construct.
 
 ```diff
-const auth = new Auth(stack, "auth", {
-  authenticator: {
-    handler: "functions/auth.handler",
-+   config: [
-+     new Config.Parameter(stack, "SITE_URL", { value: site.url })
-+   ],
-  },
-});
+ const auth = new Auth(stack, "auth", {
+   authenticator: {
+     handler: "functions/auth.handler",
++    config: [
++      new Config.Parameter(stack, "SITE_URL", { value: site.url })
++    ],
+   },
+ });
 ```
 
 {%change%} In `services/functions/auth.ts`, change `redirect` to:
@@ -826,13 +859,17 @@ Stack prod-api-sst-auth-google-MyStack
     VITE_APP_API_URL: https://jd8jpfjue6.execute-api.us-east-1.amazonaws.com
 ```
 
-Similarly, add `prod`'s **Callback URL** `https://jd8jpfjue6.execute-api.us-east-1.amazonaws.com/auth/google/callback` to the **Authorized redirect URIs** in the GCP Console.
+Like we did when we ran `sst start`; add the `prod` **Callback URL** to the **Authorized redirect URIs** in the GCP Console. In our case this is — `https://jd8jpfjue6.execute-api.us-east-1.amazonaws.com/auth/google/callback`
 
 ![GCP Console Authorize Redirect URI For Prod](/assets/examples/api-sst-auth-google/gcp-console-add-authorized-redirect-uri-for-prod.png)
 
-## Cleaning up
+## Conclusion
 
-You can remove the resources created in this example using the following command.
+And that's it! You've got a brand new serverless full-stack app that supports _Sign in with Google_. With a local development environment, to test. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+
+## Clean up
+
+Optionally, you can remove the resources created in this example using the following command.
 
 ```bash
 $ npx sst remove
@@ -843,7 +880,3 @@ And to remove the prod environment.
 ```bash
 $ npx sst remove --stage prod
 ```
-
-## Conclusion
-
-And that's it! You've got a brand new serverless API authenticated with Google. A local development environment, to test. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
