@@ -53,9 +53,9 @@ An SST app is made up of three parts.
 
    The code that's run when your API is invoked is placed in the `services/` directory of your project.
 
-3. `frontend/` — Frontend App
+3. `web/` — Frontend App
 
-   The frontend of your application like React, Next.js, Remix, or any static website is placed in the `frontend/` directory of your project. The starter template we used above does not come with a "frontend". We will be creating one later in this tutorial.
+   The frontend of your application like React, Next.js, Remix, or any static website is placed in the `web/` directory of your project. The starter template we used above does not come with a frontend. We will be creating one later in this tutorial.
 
 ## Auth flow
 
@@ -201,7 +201,7 @@ To deploy a React app to AWS, we'll be using the SST [`ViteStaticSite`]({{ site.
 
 ```ts
 const site = new ViteStaticSite(stack, "Site", {
-  path: "frontend",
+  path: "web",
   environment: {
     VITE_APP_API_URL: api.url,
   },
@@ -217,7 +217,7 @@ stack.addOutputs({
 });
 ```
 
-The construct is pointing to where our React.js app is located. We haven't created our app yet but for now, we'll point to the `frontend` directory.
+The construct is pointing to where our React.js app is located. We haven't created our app yet but for now, we'll point to the `web` directory.
 
 We are also setting up [build time React environment variables](https://vitejs.dev/guide/env-and-mode.html) with the endpoint of our API. The [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
 
@@ -232,16 +232,16 @@ import { ViteStaticSite } from "@serverless-stack/resources";
 {%change%} Run the below commands in the root to create a basic react project.
 
 ```bash
-$ npx create-vite@latest frontend --template react
-$ cd frontend
+$ npx create-vite@latest web --template react
+$ cd web
 $ npm install
 ```
 
-This sets up our React app in the `frontend/` directory. That is the path we pointed the `ViteStaticSite` construct to in the above section.
+This sets up our React app in the `web/` directory. That is the path we pointed the `ViteStaticSite` construct to in the above section.
 
 We also need to load the environment variables from our SST app. To do this, we'll be using the [`@serverless-stack/static-site-env`](https://www.npmjs.com/package/@serverless-stack/static-site-env) package.
 
-{%change%} Install the `static-site-env` package by running the following in the `frontend/` directory.
+{%change%} Install the `static-site-env` package by running the following in the `web/` directory.
 
 ```bash
 $ npm install @serverless-stack/static-site-env --save-dev
@@ -249,7 +249,7 @@ $ npm install @serverless-stack/static-site-env --save-dev
 
 We need to update our start script to use this package.
 
-{%change%} Replace the `dev` script in your `frontend/package.json`.
+{%change%} Replace the `dev` script in your `web/package.json`.
 
 ```diff
 -"dev": "vite"
@@ -309,7 +309,7 @@ Add our **Callback URL** to the **Authorized redirect URIs** in our Google proje
 
 ## Adding login UI
 
-{%change%} Replace `frontend/src/App.jsx` with below code.
+{%change%} Replace `web/src/App.jsx` with below code.
 
 ```jsx
 const App = () => {
@@ -333,7 +333,7 @@ export default App;
 
 Let's start our frontend in the development environment.
 
-{%change%} In the `frontend/` directory run.
+{%change%} In the `web/` directory run.
 
 ```bash
 npm run dev
@@ -414,7 +414,7 @@ import { Session } from "@serverless-stack/node/auth";
 
 Then in the frontend, we will check if the URL contains the `token` query string when the page loads. If it is passed in, we will store it in the local storage, and then redirect the user to the root domain.
 
-{%change%} Add the following above the `return` in `frontend/src/App.jsx`.
+{%change%} Add the following above the `return` in `web/src/App.jsx`.
 
 ```ts
 useEffect(() => {
@@ -654,7 +654,7 @@ Press **ENTER** to deploy the infrastructure changes.
 
 As we wait, let's update our frontend to make a request to the `/session` API to fetch the user data.
 
-{%change%} Add the following above the `signOut` function in `frontend/src/App.jsx`.
+{%change%} Add the following above the `signOut` function in `web/src/App.jsx`.
 
 ```ts
 const getUserInfo = async (session) => {
@@ -735,7 +735,7 @@ Also, let's display a loading sign while waiting for the `/session` API to retur
 
 Finally, let's add some basic styles to the page.
 
-{%change%} Replace `frontend/src/index.css` with the following.
+{%change%} Replace `web/src/index.css` with the following.
 
 ```css
 body {
