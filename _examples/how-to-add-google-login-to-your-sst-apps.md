@@ -606,8 +606,6 @@ routes: {
 },
 ```
 
-TODO `userID` not typesafe
-
 {%change%} Add a file at `services/functions/session.ts`.
 
 ```ts
@@ -798,8 +796,6 @@ const auth = new Auth(stack, "auth", {
   },
 });
 ```
-
-TODO: Can we get 127.0.0.1 URL automatically from environment variable? Or from directory?
 
 {%change%} In `services/functions/auth.ts`, change `redirect` to:
 
