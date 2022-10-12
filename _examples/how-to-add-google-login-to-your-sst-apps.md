@@ -81,7 +81,7 @@ Before we start let's first take a look at the auth flow at a high level.
 
 In this tutorial, we will be implementing each of the above steps.
 
-## Create a Google Project
+## Create a Google project
 
 Before we start, make sure you have a Google Project with OAuth client credentials. You can follow the steps below to create a new project and a new OAuth client.
 
@@ -133,9 +133,13 @@ Make a note of the **Client ID**. We will need it in the following steps.
 
 ![GCP Console Copy Client Credentials](/assets/examples/api-sst-auth-google/gcp-console-copy-client-credentials.png)
 
-## Add the Authorize URL
+## Add the authorize URL
 
-Next, we need to create an **Authorize URL** to initiate the auth flow. We are going to use the [`Auth`]({{ site.docs_url }}/constructs/Auth) construct. It will help us create both the **Authorize URL** and the **Callback URL**.
+Next, we need to create an **Authorize URL** to initiate the auth flow.
+
+#### Configure the construct
+
+We are going to use the [`Auth`]({{ site.docs_url }}/constructs/Auth) construct. It will help us create both the **Authorize URL** and the **Callback URL**.
 
 {%change%} Add the following below the `Api` construct in `stacks/MyStack.ts`.
 
@@ -159,6 +163,8 @@ Behind the scenes, the `Auth` construct creates a `/auth/*` catch-all route. Bot
 - import { StackContext, Api } from "@serverless-stack/resources";
 + import { StackContext, Api, Auth } from "@serverless-stack/resources";
 ```
+
+#### Add the auth handler
 
 Now let's implement the `authenticator` function.
 
@@ -309,6 +315,8 @@ SST Console: https://console.sst.dev/api-sst-auth-google/frank/local
 Debug session started. Listening for requests...
 ```
 
+## Update the Google redirect URI
+
 The `ApiEndpoint` is the API we just created. That means our:
 
 - **Authorize URL** is `https://2wk0bl6b7i.execute-api.us-east-1.amazonaws.com/auth/google/authorize`
@@ -320,7 +328,7 @@ Add our **Callback URL** to the **Authorized redirect URIs** in our Google proje
 
 ![GCP Console Authorize Redirect URI](/assets/examples/api-sst-auth-google/gcp-console-add-authorized-redirect-uri.png)
 
-## Add the Login UI
+## Add the login UI
 
 {%change%} Replace `web/src/App.jsx` with below code.
 
@@ -366,9 +374,11 @@ Once you are signed in, you will be redirected to the **Callback URL** we create
 
 🎉 Sweet! We have just completed steps 1, 2, and 3 of our [Auth Flow](#auth-flow).
 
-## Create a Session Token
+## Create a session token
 
 Now, let's implement step 4. In the `onSuccess` callback, we will create a session token and pass that back to the frontend.
+
+#### Define a session type
 
 First, to make creating and retrieving session typesafe, we'll start by defining our session types.
 
@@ -387,6 +397,10 @@ declare module "@serverless-stack/node/auth" {
 We are going to keep it simple and create a `user` session type. And it contains a `userId` property. Note that if you have a multi-tenant app, you might want to add something like the `tenantID` as well.
 
 Also note that as your app grows, you can define multiple session types like an `api_key` session type that represents any server-to-server requests.
+
+#### Create a session
+
+Now let's create the session object.
 
 {%change%} Make the following changes to the `onSuccess` callback.
 
@@ -425,7 +439,11 @@ The `Session.parameter` call encrypts the given session object to generate a tok
 import { Session } from "@serverless-stack/node/auth";
 ```
 
-## Store the Session Token
+## Use the session
+
+Now let's use the session token in the frontend.
+
+#### Store the session token
 
 Then in the frontend, we will check if the URL contains the `token` query string when the page loads. If it is passed in, we will store it in the local storage, and then redirect the user to the root domain.
 
@@ -442,6 +460,8 @@ useEffect(() => {
   }
 }, []);
 ```
+
+#### Load the session
 
 On page load, we will also check if the session token exists in the local storage. If it does, we want to display the user that is signed in, and have a button for the user to sign out.
 
@@ -487,6 +507,8 @@ useEffect(() => {
  );
 ```
 
+#### Clear the session on logout
+
 And finally, when the user clicks on `Sign out`, we need to clear the session token from the local storage.
 
 {%change%} Add the following above the `return`.
@@ -516,9 +538,13 @@ Let's sign out before continuing with the next section. Click on **Sign out**.
 
 Let's move on to steps 5 and 6. We will create a session API that will return the user data given the session token.
 
-## Store the User Data
+## Store the user data
 
-So far we haven't been storing the data Google's been returning through the **Callback URL**. Let's create a database table to store this. We'll be using the SST [`Table`]({{ site.docs_url }}/constructs/Table) construct.
+So far we haven't been storing the data Google's been returning through the **Callback URL**. Let's create a database table to store this.
+
+#### Create a DynamoDB table
+
+We'll be using the SST [`Table`]({{ site.docs_url }}/constructs/Table) construct.
 
 {%change%} Add the following above the `Api` construct in `stacks/MyStack.ts`.
 
@@ -564,6 +590,8 @@ Let's create a new Config parameter to pass the `table` name to the `api`. And g
 +   Config
 + } from "@serverless-stack/resources";
 ```
+
+#### Store the claims
 
 Now let's update our `authenticator` function to store the user data in the `onSuccess` callback.
 
@@ -618,9 +646,11 @@ import { Config } from "@serverless-stack/node/config";
 npm install --save @aws-sdk/client-dynamodb @aws-sdk/util-dynamodb
 ```
 
-## Fetch the User Data
+## Fetch the user data
 
 Now that the user data is stored in the database; let's create an API endpoint that returns the user details given a session token.
+
+#### Create a session API
 
 {%change%} Add a `/session` route in the `Api` construct's routes definition in `stacks/MyStacks.ts`.
 
@@ -679,6 +709,8 @@ Press **ENTER** to deploy the infrastructure changes.
 
 As we wait, let's update our frontend to make a request to the `/session` API to fetch the user data.
 
+#### Call the session API
+
 {%change%} Add the following above the `signOut` function in `web/src/App.jsx`.
 
 ```ts
@@ -723,7 +755,7 @@ And finally, add a loading state to indicate the API is being called.
 + const [loading, setLoading] = useState(true);
 ```
 
-## Render the User Data
+## Render the user data
 
 Let's render the user info.
 
@@ -858,6 +890,8 @@ Stack prod-api-sst-auth-google-MyStack
   Site:
     VITE_APP_API_URL: https://jd8jpfjue6.execute-api.us-east-1.amazonaws.com
 ```
+
+#### Add the prod redirect URI
 
 Like we did when we ran `sst start`; add the `prod` **Callback URL** to the **Authorized redirect URIs** in the GCP Console. In our case this is — `https://jd8jpfjue6.execute-api.us-east-1.amazonaws.com/auth/google/callback`
 
