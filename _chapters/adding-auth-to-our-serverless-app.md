@@ -3,7 +3,7 @@ layout: post
 title: Adding Auth to Our Serverless App
 date: 2021-08-17 00:00:00
 lang: en
-description: In this chapter we'll be adding a Cognito User Pool and Identity Pool to our serverless app. We'll be using SST's higher-level Auth construct to make this easy.
+description: In this chapter we'll be adding a Cognito User Pool and Identity Pool to our serverless app. We'll be using SST's higher-level Cognito construct to make this easy.
 redirect_from:
   - /chapters/configure-cognito-user-pool-in-cdk.html
   - /chapters/configure-cognito-identity-pool-in-cdk.html
@@ -13,7 +13,7 @@ comments_id: adding-auth-to-our-serverless-app/2457
 
 So far we've created the [DynamoDB table]({% link _chapters/create-a-dynamodb-table-in-sst.md %}), [S3 bucket]({% link _chapters/create-an-s3-bucket-in-sst.md %}), and [API]({% link _chapters/add-an-api-to-create-a-note.md %}) parts of our serverless backend. Now let's add auth into the mix. As we talked about in the [previous chapter]({% link _chapters/auth-in-serverless-apps.md %}), we are going to use [Cognito User Pool](https://aws.amazon.com/cognito/) to manage user sign ups and logins. While we are going to use [Cognito Identity Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html) to manage which resources our users have access to.
 
-Setting this all up can be pretty complicated in CDK. SST has a simple [`Auth`]({{ site.docs_url }}/constructs/Auth) construct to help with this.
+Setting this all up can be pretty complicated in CDK. SST has a simple [`Cognito`]({{ site.docs_url }}/constructs/Cognito) construct to help with this.
 
 ### Create a Stack
 
@@ -66,9 +66,9 @@ Let's quickly go over what we are doing here.
 
 - We are creating a new stack for our auth infrastructure. We don't need to create a separate stack but we are using it as an example to show how to work with multiple stacks.
 
-- The `Auth` construct creates a Cognito User Pool for us. We are using the `login` prop to state that we want our users to login with their email.
+- The `Cognito` construct creates a Cognito User Pool for us. We are using the `login` prop to state that we want our users to login with their email.
 
-- The `Auth` construct also creates an Identity Pool. The `attachPermissionsForAuthUsers` function allows us to specify the resources our authenticated users have access to.
+- The `Cognito` construct also creates an Identity Pool. The `attachPermissionsForAuthUsers` function allows us to specify the resources our authenticated users have access to.
 
 - This new `AuthStack` references the `bucket` resource from the `StorageStack` and the `api` resource from the `ApiStack` that we created previously.
 
