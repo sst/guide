@@ -427,8 +427,9 @@ The `Session.parameter` call encrypts the given session object to generate a tok
 
 {%change%} Also import the `Session` up top.
 
-```ts
-import { Session } from "@serverless-stack/node/auth";
+```diff
+- import { AuthHandler, GoogleAdapter } from "@serverless-stack/node/auth";
++ import { AuthHandler, GoogleAdapter, Session } from "@serverless-stack/node/auth";
 ```
 
 ## Use the session
@@ -675,7 +676,7 @@ export const handler = ApiHandler(async () => {
 });
 ```
 
-The handler calls a [`useSession()`]({{ site.docs_url }}/packages/node#usesession) hook to decode the session token and retrieve the user's `userID` from the session data. Note that, `useSession` can be called anywhere in your Lambda handler. This works because we are using the [`ApiHandler`]({{ site.docs_url }}/clients/api#apihandler) to wrap our Lambda function.
+The handler calls a [`useSession()`]({{ site.docs_url }}/clients/auth#usesession) hook to decode the session token and retrieve the user's `userID` from the session data. Note that, `useSession` can be called anywhere in your Lambda handler. This works because we are using the [`ApiHandler`]({{ site.docs_url }}/clients/api#apihandler) to wrap our Lambda function.
 
 We then fetch the user's data from our database table with `userID` being the key.
 
