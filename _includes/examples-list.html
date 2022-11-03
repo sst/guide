@@ -41,12 +41,15 @@
   </div>
   <div id="auth" class="toc-section">
     <h3>Authentication</h3>
+    {% assign sst_auth_group = groups | find: "name", "sst-auth" %}
+    {% assign sst_auth = sst_auth_group.items | sort: "index" %}
+    {% include toc-examples.html items=sst_auth title="Using SST Auth" id="sst-auth" %}
     {% assign iam_auth_group = groups | find: "name", "iam-auth" %}
     {% assign iam_auth = iam_auth_group.items | sort: "index" %}
-    {% include toc-examples.html items=iam_auth title="Using AWS IAM" id="iam-auth" %}
+    {% include toc-examples.html items=iam_auth title="Using Cognito Identity Pools" id="iam-auth" %}
     {% assign jwt_auth_group = groups | find: "name", "jwt-auth" %}
     {% assign jwt_auth = jwt_auth_group.items | sort: "index" %}
-    {% include toc-examples.html items=jwt_auth title="Using JWT" id="jwt-auth" %}
+    {% include toc-examples.html items=jwt_auth title="Using Cognito User Pools" id="jwt-auth" %}
   </div>
 
   <div class="icon">
