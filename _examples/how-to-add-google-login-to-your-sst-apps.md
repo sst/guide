@@ -201,12 +201,6 @@ The `@serverless-stack/node` package provides helper libraries used in Lambda fu
 
 When the Authorize URL is invoked, it will initialize the auth flow and redirects the user to Google.
 
-{%change%} Remember to install the `@serverless-stack/node` packages inside `/services`.
-
-```bash
-npm install --save @serverless-stack/node
-```
-
 ## Set up our React app
 
 Next, we are going to add a **Sign in with Google** button to our frontend. And on click, we will redirect the user to the **Authorize URL**.
@@ -303,8 +297,6 @@ Stack frank-api-sst-auth-google-MyStack
   Outputs:
     ApiEndpoint: https://2wk0bl6b7i.execute-api.us-east-1.amazonaws.com
     SiteURL: https://d54gkw8ds19md.cloudfront.net
-  Site:
-    VITE_APP_API_URL: https://2wk0bl6b7i.execute-api.us-east-1.amazonaws.com
 
 
 ==========================
@@ -339,7 +331,7 @@ const App = () => {
       <h2>SST Auth Example</h2>
       <div>
         <a
-          href={`${import.meta.env.vite_app_api_url}/auth/google/authorize`}
+          href={`${import.meta.env.VITE_APP_API_URL}/auth/google/authorize`}
           rel="noreferrer"
         >
           <button>Sign in with Google</button>
@@ -549,7 +541,7 @@ We'll be using the SST [`Table`]({{ site.docs_url }}/constructs/Table) construct
 {%change%} Add the following above the `Api` construct in `stacks/MyStack.ts`.
 
 ```ts
-const table = new Table(stack, "Users", {
+const table = new Table(stack, "users", {
   fields: {
     userId: "string",
   },
@@ -557,18 +549,13 @@ const table = new Table(stack, "Users", {
 });
 ```
 
-Let's create a new Config parameter to pass the `table` name to the `api`. And grant the `api` permissions to access the `table`.
-
-{%change%} Make the following changes to the `Api` construct.
+{%change%} Then let's bind the `table` to the `api`. Make the following changes to the `Api` construct.
 
 ```diff
  const api = new Api(stack, "api", {
 +  defaults: {
 +    function: {
-+      config: [
-+        new Config.Parameter(stack, "TABLE_NAME", { value: table.tableName }),
-+      ],
-+      permissions: [table],
++      bind: [table],
 +    },
 +  },
    routes: {
@@ -577,18 +564,11 @@ Let's create a new Config parameter to pass the `table` name to the `api`. And g
  });
 ```
 
-{%change%} Import the `Table` and `Config` construct up top.
+{%change%} Import the `Table` construct up top.
 
 ```diff
 - import { StackContext, Api, Auth, ViteStaticSite } from "@serverless-stack/resources";
-+ import {
-+   StackContext,
-+   Api,
-+   Auth,
-+   ViteStaticSite,
-+   Table,
-+   Config
-+ } from "@serverless-stack/resources";
++ import { StackContext, Api, Auth, ViteStaticSite, Table } from "@serverless-stack/resources";
 ```
 
 #### Store the claims
@@ -608,7 +588,7 @@ Now let's update our `authenticator` function to store the user data in the `onS
 
 +        const ddb = new DynamoDBClient({});
 +        await ddb.send(new PutItemCommand({
-+          TableName: Config.TABLE_NAME,
++          TableName: Table.users.tableName,
 +          Item: marshall({
 +            userId: claims.sub,
 +            email: claims.email,
@@ -637,7 +617,7 @@ This is saving the `claims` we get from Google in our DynamoDB table.
 ```ts
 import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb";
 import { marshall } from "@aws-sdk/util-dynamodb";
-import { Config } from "@serverless-stack/node/config";
+import { Table } from "@serverless-stack/node/table";
 ```
 
 {%change%} And finally install these packages inside the `/services` directory.
@@ -664,13 +644,13 @@ Now that the user data is stored in the database; let's create an API endpoint t
 {%change%} Add a file at `services/functions/session.ts`.
 
 ```ts
-import { Handler } from "@serverless-stack/node/context";
-import { Config } from "@serverless-stack/node/config";
+import { Table } from "@serverless-stack/node/table";
+import { ApiHandler } from "@serverless-stack/node/api";
 import { useSession } from "@serverless-stack/node/auth";
 import { DynamoDBClient, GetItemCommand } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
-export const handler = Handler("api", async () => {
+export const handler = ApiHandler(async () => {
   const session = useSession();
 
   // Check user is authenticated
@@ -681,7 +661,7 @@ export const handler = Handler("api", async () => {
   const ddb = new DynamoDBClient({});
   const data = await ddb.send(
     new GetItemCommand({
-      TableName: Config.TABLE_NAME,
+      TableName: Table.users.tableName,
       Key: marshall({
         userId: session.properties.userID,
       }),
@@ -695,7 +675,7 @@ export const handler = Handler("api", async () => {
 });
 ```
 
-The handler calls a [`useSession()`]({{ site.docs_url }}/packages/node#usesession) hook to decode the session token and retrieve the user's `userID` from the session data. Note that, `useSession` can be called anywhere in your Lambda handler. This works because we are using the [`Handler`]({{ site.docs_url }}/packages/node#handler) to wrap our Lambda function.
+The handler calls a [`useSession()`]({{ site.docs_url }}/packages/node#usesession) hook to decode the session token and retrieve the user's `userID` from the session data. Note that, `useSession` can be called anywhere in your Lambda handler. This works because we are using the [`ApiHandler`]({{ site.docs_url }}/clients/api#apihandler) to wrap our Lambda function.
 
 We then fetch the user's data from our database table with `userID` being the key.
 
@@ -855,9 +835,7 @@ When deploying to prod, we need to change our `authenticator` to redirect to the
  const auth = new Auth(stack, "auth", {
    authenticator: {
      handler: "functions/auth.handler",
-+    config: [
-+      new Config.Parameter(stack, "SITE_URL", { value: site.url })
-+    ],
++    bind: [site],
    },
  });
 ```
@@ -866,10 +844,16 @@ When deploying to prod, we need to change our `authenticator` to redirect to the
 
 ```diff
 -redirect: "http://127.0.0.1:5173",
-+redirect: process.env.IS_LOCAL ? "http://127.0.0.1:5173" : Config.SITE_URL,
++redirect: process.env.IS_LOCAL ? "http://127.0.0.1:5173" : ViteStaticSite.site.url,
 ```
 
 Note that when we are developing locally via `sst start`, the `IS_LOCAL` environment variable is set. We will conditionally redirect to `127.0.0.1` or the site's URL depending on `IS_LOCAL`.
+
+{%change%} Also remember to import the `ViteStaticSite` construct up top.
+
+```ts
+import { ViteStaticSite } from "@serverless-stack/node/site";
+```
 
 {%change%} To wrap things up we'll deploy our app to prod.
 
@@ -887,8 +871,6 @@ Stack prod-api-sst-auth-google-MyStack
   Outputs:
     ApiEndpoint: https://jd8jpfjue6.execute-api.us-east-1.amazonaws.com
     SiteURL: https://d36g0g26jff9tr.cloudfront.net
-  Site:
-    VITE_APP_API_URL: https://jd8jpfjue6.execute-api.us-east-1.amazonaws.com
 ```
 
 #### Add the prod redirect URI
