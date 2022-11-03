@@ -83,19 +83,14 @@ Now let's add the API.
 const api = new Api(stack, "Api", {
   defaults: {
     function: {
-      // Pass in the queue to our API
-      environment: {
-        queueUrl: queue.queueUrl,
-      },
+      // Bind the table name to our API
+      bind: [queue],
     },
   },
   routes: {
     "POST /": "functions/lambda.handler",
   },
 });
-
-// Allow the API to publish the queue
-api.attachPermissions([queue]);
 
 // Show the API endpoint in the output
 stack.addOutputs({
@@ -105,7 +100,7 @@ stack.addOutputs({
 
 Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `services/functions/lambda.ts` will get invoked.
 
-We also pass in the url of our SQS queue to our API as an environment variable called `queueUrl`. And we allow our API to send messages to the queue we just created.
+We'll also bind our queue to our API.
 
 ## Adding function code
 
@@ -186,6 +181,7 @@ Now let's send a message to our queue.
 
 ```ts
 import AWS from "aws-sdk";
+import { Queue } from "@serverless-stack/node/queue";
 
 const sqs = new AWS.SQS();
 
@@ -194,7 +190,7 @@ export async function handler() {
   await sqs
     .sendMessage({
       // Get the queue url from the environment variable
-      QueueUrl: process.env.queueUrl,
+      QueueUrl: Queue.Queue.queueUrl,
       MessageBody: JSON.stringify({ ordered: true }),
     })
     .promise();

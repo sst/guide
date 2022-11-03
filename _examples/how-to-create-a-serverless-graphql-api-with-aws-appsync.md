@@ -84,9 +84,7 @@ export function MyStack({ stack }: StackContext) {
     schema: "services/graphql/schema.graphql",
     defaults: {
       function: {
-        environment: {
-          NOTES_TABLE: notesTable.tableName,
-        },
+        bind: [notesTable],
       },
     },
     dataSources: {
@@ -101,9 +99,6 @@ export function MyStack({ stack }: StackContext) {
     },
   });
 
-  // Enable the AppSync API to access the DynamoDB table
-  api.attachPermissions([notesTable]);
-
   // Show the AppSync API Id and API Key in the output
   stack.addOutputs({
     ApiId: api.apiId,
@@ -115,7 +110,7 @@ export function MyStack({ stack }: StackContext) {
 
 We are creating an AppSync GraphQL API here using the [`AppSyncApi`]({{ site.docs_url }}/constructs/AppSyncApi) construct. We are also creating a DynamoDB table using the [`Table`]({{ site.docs_url }}/constructs/Table) construct. It'll store the notes we'll be creating with our GraphQL API.
 
-Finally, we allow our API to access our table.
+Finally, we bind our table to our API.
 
 ## Define the GraphQL schema
 
@@ -216,6 +211,7 @@ Starting with the one that'll create a note.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
+import { Table } from "@serverless-stack/node/table";
 import Note from "./Note";
 
 const dynamoDb = new DynamoDB.DocumentClient();
@@ -223,7 +219,7 @@ const dynamoDb = new DynamoDB.DocumentClient();
 export default async function createNote(note: Note): Promise<Note> {
   const params = {
     Item: note as Record<string, unknown>,
-    TableName: process.env.NOTES_TABLE as string,
+    TableName: Table.Notes.tableName,
   };
 
   await dynamoDb.put(params).promise();
@@ -248,6 +244,7 @@ Next, let's write the function that'll fetch all our notes.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
+import { Table } from "@serverless-stack/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
@@ -255,7 +252,7 @@ export default async function listNotes(): Promise<
   Record<string, unknown>[] | undefined
 > {
   const params = {
-    TableName: process.env.NOTES_TABLE as string,
+    TableName: Table.Notes.tableName,
   };
 
   const data = await dynamoDb.scan(params).promise();
@@ -274,6 +271,7 @@ We'll do something similar for the function that gets a single note.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
+import { Table } from "@serverless-stack/node/table";
 import Note from "./Note";
 
 const dynamoDb = new DynamoDB.DocumentClient();
@@ -283,7 +281,7 @@ export default async function getNoteById(
 ): Promise<Note | undefined> {
   const params = {
     Key: { id: noteId },
-    TableName: process.env.NOTES_TABLE as string,
+    TableName: Table.Notes.tableName,
   };
 
   const { Item } = await dynamoDb.get(params).promise();
@@ -302,6 +300,7 @@ Now let's update our notes.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
+import { Table } from "@serverless-stack/node/table";
 import Note from "./Note";
 
 const dynamoDb = new DynamoDB.DocumentClient();
@@ -311,7 +310,7 @@ export default async function updateNote(note: Note): Promise<Note> {
     Key: { id: note.id },
     ReturnValues: "UPDATED_NEW",
     UpdateExpression: "SET content = :content",
-    TableName: process.env.NOTES_TABLE as string,
+    TableName: Table.Notes.tableName,
     ExpressionAttributeValues: { ":content": note.content },
   };
 
@@ -331,13 +330,14 @@ To complete all the operations, let's delete the note.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
+import { Table } from "@serverless-stack/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
 export default async function deleteNote(noteId: string): Promise<string> {
   const params = {
     Key: { id: noteId },
-    TableName: process.env.NOTES_TABLE as string,
+    TableName: Table.Notes.tableName,
   };
 
   // await dynamoDb.delete(params).promise();

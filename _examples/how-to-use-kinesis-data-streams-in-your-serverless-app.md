@@ -86,17 +86,13 @@ Now let's add the API.
 const api = new Api(stack, "Api", {
   defaults: {
     function: {
-      environment: {
-        streamName: stream.streamName,
-      },
+      bind: [stream],
     },
   },
   routes: {
     "POST /": "functions/lambda.handler",
   },
 });
-
-api.attachPermissions([stream]);
 
 // Show the endpoint in the output
 stack.addOutputs({
@@ -106,7 +102,7 @@ stack.addOutputs({
 
 Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `services/functions/lambda.ts` will get invoked.
 
-We also pass in the stream name to our API as an environment variable called `streamName`. And we allow our API to send messages to the Kinesis Data Stream we just created.
+We'll also bind our stream to our API.
 
 ## Adding function code
 
@@ -196,6 +192,7 @@ Now let's send a message to our Kinesis Data Stream.
 
 ```ts
 import AWS from "aws-sdk";
+import { KinesisStream } from "@serverless-stack/node/kinesis-stream";
 
 const stream = new AWS.Kinesis();
 
@@ -206,7 +203,7 @@ export async function handler() {
         message: "Hello from Lambda!",
       }),
       PartitionKey: "key",
-      StreamName: process.env.streamName,
+      StreamName: KinesisStream.Stream.streamName,
     })
     .promise();
 

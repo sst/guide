@@ -91,10 +91,8 @@ Now let's add the API.
 const api = new Api(stack, "Api", {
   defaults: {
     function: {
-      // Pass in the table name to our API
-      environment: {
-        tableName: table.tableName,
-      },
+      // Bind the table name to our API
+      bind: [table],
     },
   },
   routes: {
@@ -105,9 +103,6 @@ const api = new Api(stack, "Api", {
     "DELETE /notes/{id}": "functions/delete.handler",
   },
 });
-
-// Allow the API to access the table
-api.attachPermissions([table]);
 
 // Show the API endpoint in the output
 stack.addOutputs({
@@ -127,7 +122,7 @@ DELETE /notes/{id}
 
 These will be getting a list of notes, creating a note, getting, updating, and deleting a specific note respectively.
 
-We also pass in the name of our DynamoDB table to our API as an environment variable called `tableName`. And we allow our API to access (read and write) the table instance we just created.
+We'll also bind our table to our API. It allows our API to access (read and write) the table we just created.
 
 ## Create a note
 
@@ -136,9 +131,10 @@ Let's turn towards the functions that'll be powering our API. Starting with the 
 {%change%} Add the following to `services/functions/create.ts`.
 
 ```ts
-import { DynamoDB } from "aws-sdk";
 import * as uuid from "uuid";
+import { DynamoDB } from "aws-sdk";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+import { Table } from "@serverless-stack/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
@@ -147,7 +143,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
 
   const params = {
     // Get the table name from the environment variable
-    TableName: process.env.tableName,
+    TableName: Table.Notes.tableName,
     Item: {
       userId: "123",
       noteId: uuid.v1(), // A unique uuid
@@ -182,13 +178,14 @@ Next, let's write the function that'll fetch all our notes.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
+import { Table } from "@serverless-stack/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
 export async function handler() {
   const params = {
     // Get the table name from the environment variable
-    TableName: process.env.tableName,
+    TableName: Table.Notes.tableName,
     // Get all the rows where the userId is our hardcoded user id
     KeyConditionExpression: "userId = :userId",
     ExpressionAttributeValues: {
@@ -215,13 +212,14 @@ We'll do something similar for the function that gets a single note.
 ```ts
 import { DynamoDB } from "aws-sdk";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+import { Table } from "@serverless-stack/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const params = {
     // Get the table name from the environment variable
-    TableName: process.env.tableName,
+    TableName: Table.Notes.tableName,
     // Get the row where the noteId is the one in the path
     Key: {
       userId: "123",
@@ -248,6 +246,7 @@ Now let's update our notes.
 ```ts
 import { DynamoDB } from "aws-sdk";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+import { Table } from "@serverless-stack/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
@@ -256,7 +255,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
 
   const params = {
     // Get the table name from the environment variable
-    TableName: process.env.tableName,
+    TableName: Table.Notes.tableName,
     // Get the row where the noteId is the one in the path
     Key: {
       userId: "123",
@@ -290,13 +289,14 @@ To complete the CRUD operations, let's delete the note.
 ```ts
 import { DynamoDB } from "aws-sdk";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+import { Table } from "@serverless-stack/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const params = {
     // Get the table name from the environment variable
-    TableName: process.env.tableName,
+    TableName: Table.Notes.tableName,
     // Get the row where the noteId is the one in the path
     Key: {
       userId: "123",

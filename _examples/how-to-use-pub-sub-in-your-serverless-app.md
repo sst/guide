@@ -85,19 +85,14 @@ Now let's add the API.
 const api = new Api(stack, "Api", {
   defaults: {
     function: {
-      // Pass in the topic to our API
-      environment: {
-        topicArn: topic.topicArn,
-      },
+      // Bind the table name to our API
+      bind: [topic],
     },
   },
   routes: {
     "POST /order": "functions/order.handler",
   },
 });
-
-// Allow the API to publish the topic
-api.attachPermissions([topic]);
 
 // Show the API endpoint in the output
 stack.addOutputs({
@@ -107,7 +102,7 @@ stack.addOutputs({
 
 Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (`/order`). When we make a `POST` request to this endpoint the Lambda function called `handler` in `services/functions/order.ts` will get invoked.
 
-We'll also pass in [the arn]({ link \_chapters/what-is-an-arn.md %}) of our SNS topic to our API as an environment variable called `topicArn`. And we allow our API to publish to the topic we just created.
+We'll also bind our topic to our API.
 
 ## Adding function code
 
@@ -197,6 +192,7 @@ Now let's publish a message to our topic.
 
 ```ts
 import AWS from "aws-sdk";
+import { Topic } from "@serverless-stack/node/topic";
 
 const sns = new AWS.SNS();
 
@@ -205,7 +201,7 @@ export async function handler() {
   await sns
     .publish({
       // Get the topic from the environment variable
-      TopicArn: process.env.topicArn,
+      TopicArn: Topic.Ordered.topicArn,
       Message: JSON.stringify({ ordered: true }),
       MessageStructure: "string",
     })

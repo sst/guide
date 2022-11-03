@@ -98,19 +98,14 @@ Now let's add the API.
 const api = new Api(stack, "Api", {
   defaults: {
     function: {
-      // Pass in the table name to our API
-      environment: {
-        tableName: table.tableName,
-      },
+      // Bind the table name to our API
+      bind: [table],
     },
   },
   routes: {
     "POST /": "functions/lambda.handler",
   },
 });
-
-// Allow the API to access the table
-api.attachPermissions([table]);
 
 // Show the URLs in the output
 stack.addOutputs({
@@ -120,7 +115,7 @@ stack.addOutputs({
 
 We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `services/functions/lambda.ts` will get invoked.
 
-We also pass in the name of our DynamoDB table to our API as an environment variable called `tableName`. And we allow our API to access (read and write) the table instance we just created.
+We'll also bind our table to our API. It allows our API to access (read and write) the table we just created.
 
 ### Reading from our table
 
@@ -130,13 +125,14 @@ Our API is powered by a Lambda function. In the function we'll read from our Dyn
 
 ```ts
 import { DynamoDB } from "aws-sdk";
+import { Table } from "@serverless-stack/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
 export async function handler() {
   const getParams = {
     // Get the table name from the environment variable
-    TableName: process.env.tableName,
+    TableName: Table.Counter.tableName,
     // Get the row where the counter is called "clicks"
     Key: {
       counter: "clicks",
@@ -195,7 +191,7 @@ Stack dev-expo-app-my-stack
     ApiEndpoint: https://sez1p3dsia.execute-api.ap-south-1.amazonaws.com
 ```
 
-The `ApiEndpoint` is the API we just created. 
+The `ApiEndpoint` is the API we just created.
 
 Let's test our endpoint with the [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
@@ -346,7 +342,7 @@ Let's update our table with the clicks.
 
 ```ts
 const putParams = {
-  TableName: process.env.tableName,
+  TableName: Table.Counter.tableName,
   Key: {
     counter: "clicks",
   },

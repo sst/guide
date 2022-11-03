@@ -92,9 +92,7 @@ Now let's add the WebSocket API.
 const api = new WebSocketApi(stack, "Api", {
   defaults: {
     function: {
-      environment: {
-        tableName: table.tableName,
-      },
+      bind: [table],
     },
   },
   routes: {
@@ -104,9 +102,6 @@ const api = new WebSocketApi(stack, "Api", {
   },
 });
 
-// Allow the API to access the table
-api.attachPermissions([table]);
-
 // Show the API endpoint in the output
 stack.addOutputs({
   ApiEndpoint: api.url,
@@ -115,7 +110,7 @@ stack.addOutputs({
 
 We are creating a WebSocket API using the [`WebSocketApi`]({{ site.docs_url }}/constructs/WebSocketApi) construct. It has a couple of routes; the `$connect` and `$disconnect` handles the requests when a client connects or disconnects from our WebSocket API. The `sendmessage` route handles the request when a client wants to send a message to all the connected clients.
 
-We also pass in the name of our DynamoDB table to our API as an environment variable called `tableName`. And we allow our API to access (read and write) the table instance we just created.
+We'll also bind our table to our API. It allows our API to access (read and write) the table we just created.
 
 ## Connecting clients
 
@@ -126,12 +121,13 @@ Now in our functions, let's first handle the case when a client connects to our 
 ```ts
 import { DynamoDB } from "aws-sdk";
 import { APIGatewayProxyHandler } from "aws-lambda";
+import { Table } from "@serverless-stack/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
 export const handler: APIGatewayProxyHandler = async (event) => {
   const params = {
-    TableName: process.env.tableName,
+    TableName: Table.Connections.tableName,
     Item: {
       id: event.requestContext.connectionId,
     },
@@ -160,12 +156,13 @@ Similarly, we'll remove the connection id from the table when a client disconnec
 ```ts
 import { DynamoDB } from "aws-sdk";
 import { APIGatewayProxyHandler } from "aws-lambda";
+import { Table } from "@serverless-stack/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
 export const handler: APIGatewayProxyHandler = async (event) => {
   const params = {
-    TableName: process.env.tableName,
+    TableName: Table.Connections.tableName,
     Key: {
       id: event.requestContext.connectionId,
     },
@@ -249,9 +246,10 @@ Now let's update our function to send messages.
 
 ```ts
 import { DynamoDB, ApiGatewayManagementApi } from "aws-sdk";
+import { Table } from "@serverless-stack/node/table";
 import { APIGatewayProxyHandler } from "aws-lambda";
 
-const TableName = process.env.tableName;
+const TableName = Table.Connections.tableName;
 const dynamoDb = new DynamoDB.DocumentClient();
 
 export const handler: APIGatewayProxyHandler = async (event) => {

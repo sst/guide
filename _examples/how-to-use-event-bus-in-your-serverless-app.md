@@ -93,17 +93,13 @@ Now let's add the API.
 const api = new Api(stack, "Api", {
   defaults: {
     function: {
-      environment: {
-        busName: bus.eventBusName,
-      },
+      bind: [bus],
     },
   },
   routes: {
     "POST /order": "functions/order.handler",
   },
 });
-
-api.attachPermissions([bus]);
 
 // Show the endpoint in the output
 stack.addOutputs({
@@ -113,7 +109,7 @@ stack.addOutputs({
 
 Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (`/order`). When we make a `POST` request to this endpoint the Lambda function called `handler` in `services/functions/order.ts` will get invoked.
 
-We'll also pass in the name of our EventBridge EventBus to our API as an environment variable called `busName`. And we allow our API to publish to the EventBus we just created.
+We'll also bind our event bus to our API.
 
 ## Adding function code
 
@@ -203,6 +199,7 @@ Now let's publish a event to our EventBus.
 
 ```ts
 import AWS from "aws-sdk";
+import { EventBus } from "@serverless-stack/node/event-bus";
 
 const client = new AWS.EventBridge();
 
@@ -211,7 +208,7 @@ export async function handler() {
     .putEvents({
       Entries: [
         {
-          EventBusName: process.env.busName,
+          EventBusName: EventBus.Ordered.eventBusName,
           Source: "myevent",
           DetailType: "Order",
           Detail: JSON.stringify({

@@ -95,7 +95,7 @@ import { Kysely } from "kysely";
 export async function up(db) {
   await db.schema
     .createTable("tblcounter")
-    .addColumn("counter", "text", col => col.primaryKey())
+    .addColumn("counter", "text", (col) => col.primaryKey())
     .addColumn("tally", "integer")
     .execute();
 
@@ -127,12 +127,7 @@ Now let's add the API.
 const api = new Api(stack, "Api", {
   defaults: {
     function: {
-      environment: {
-        DATABASE,
-        CLUSTER_ARN: cluster.clusterArn,
-        SECRET_ARN: cluster.secretArn,
-      },
-      permissions: [cluster],
+      bind: [cluster],
     },
   },
   routes: {
@@ -150,9 +145,7 @@ stack.addOutputs({
 
 Our [API]({{ site.docs_url }}/constructs/Api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `services/functions/lambda.ts` will get invoked.
 
-We also pass in the name of our database, the ARN of the database cluster, and the ARN of the secret that'll help us login to our database. An ARN is an identifier that AWS uses. You can [read more about it here]({% link _chapters/what-is-an-arn.md %}).
-
-We then allow our Lambda function to access our database cluster. Finally, we output the endpoint of our API, ARN of the secret and the name of the database cluster. We'll be using these later in the example.
+We'll also bind our database cluster to our API.
 
 ## Reading from our database
 
@@ -164,6 +157,7 @@ Now in our function, we'll start by reading from our PostgreSQL database.
 import { RDSDataService } from "aws-sdk";
 import { Kysely } from "kysely";
 import { DataApiDialect } from "kysely-data-api";
+import { RDS } from "@serverless-stack/node/rds";
 
 interface Database {
   tblcounter: {
@@ -176,9 +170,9 @@ const db = new Kysely<Database>({
   dialect: new DataApiDialect({
     mode: "postgres",
     driver: {
-      database: process.env.DATABASE!,
-      secretArn: process.env.SECRET_ARN!,
-      resourceArn: process.env.CLUSTER_ARN!,
+      database: RDS.Cluster.defaultDatabaseName,
+      secretArn: RDS.Cluster.secretArn,
+      resourceArn: RDS.Cluster.clusterArn,
       client: new RDSDataService(),
     },
   }),

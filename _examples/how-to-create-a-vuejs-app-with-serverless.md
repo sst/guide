@@ -103,12 +103,8 @@ Now let's add the API.
 const api = new Api(stack, "Api", {
   defaults: {
     function: {
-      // Allow the API to access the table
-      permissions: [table],
-      // Pass in the table name to our API
-      environment: {
-        tableName: table.tableName,
-      },
+      // Bind the table name to our API
+      bind: [table],
     },
   },
   routes: {
@@ -124,7 +120,7 @@ stack.addOutputs({
 
 We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `services/functions/lambda.ts` will get invoked.
 
-We also pass in the name of our DynamoDB table to our API as an environment variable called `tableName`. And we allow our API to access (read and write) the table instance we just created.
+We'll also bind our table to our API. It allows our API to access (read and write) the table we just created.
 
 ### Setting up our Vue app
 
