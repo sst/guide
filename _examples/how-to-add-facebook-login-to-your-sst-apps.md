@@ -1,19 +1,19 @@
 ---
 layout: example
-title: How to Add Google Login to Your Serverless App with SST Auth
-short_title: Google Auth
+title: How to Add Facebook Login to Your Serverless App with SST Auth
+short_title: Facebook Auth
 date: 2022-10-10 00:00:00
 lang: en
 index: 1
 type: sst-auth
-description: In this example we will look at how to add Google Login to your serverless app using SST Auth. We'll be using the Api, Auth, Table, and ViteStaticSite constructs to create a full-stack app with Google authentication.
-short_desc: Adding Google auth to a full-stack serverless app.
-repo: api-sst-auth-google
-ref: how-to-add-google-login-to-your-sst-app-with-sst-auth
-comments_id: how-to-add-google-login-to-your-sst-app-with-sst-auth/2643
+description: In this example we will look at how to add Facebook Login to your serverless app using SST Auth. We'll be using the Api, Auth, Table, and ViteStaticSite constructs to create a full-stack app with Facebook authentication.
+short_desc: Adding Facebook auth to a full-stack serverless app.
+repo: api-sst-auth-facebook
+ref: how-to-add-facebook-login-to-your-sst-app-with-sst-auth
+comments_id: how-to-add-facebook-login-to-your-sst-app-with-sst-auth/2643
 ---
 
-In this example, we will look at how to add Google Login to your serverless app using [SST Auth]({{ site.docs_url }}/auth).
+In this example, we will look at how to add Facebook Login to your serverless app using [SST Auth]({{ site.docs_url }}/auth).
 
 ## Requirements
 
@@ -26,8 +26,8 @@ In this example, we will look at how to add Google Login to your serverless app 
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=minimal/typescript-starter api-sst-auth-google
-$ cd api-sst-auth-google
+$ npx create-sst@latest --template=minimal/typescript-starter api-sst-auth-facebook
+$ cd api-sst-auth-facebook
 $ npm install
 ```
 
@@ -35,7 +35,7 @@ By default, our app will be deployed to the `us-east-1` AWS region. This can be 
 
 ```json
 {
-  "name": "api-sst-auth-google",
+  "name": "api-sst-auth-facebook",
   "region": "us-east-1",
   "main": "stacks/index.ts"
 }
@@ -61,13 +61,13 @@ An SST app is made up of three parts.
 
 Before we start let's first take a look at the auth flow at a high level.
 
-![Google Auth Flow](/assets/examples/api-sst-auth-google/auth-flow.png)
+![Facebook Auth Flow](/assets/examples/api-sst-auth-facebook/auth-flow.png)
 
-1. The user clicks on "Sign in with Google" in the frontend, and gets redirected to an **Authorize URL** to initiate the auth flow.
+1. The user clicks on "Sign in with Facebook" in the frontend, and gets redirected to an **Authorize URL** to initiate the auth flow.
 
-2. This will redirect the user to Google and they login to their Google account.
+2. This will redirect the user to Facebook and they login to their Facebook account.
 
-3. Google redirects the user back to a **Callback URL** with the user's details.
+3. Facebook redirects the user back to a **Callback URL** with the user's details.
 
 4. In the **Callback URL** we:
 
@@ -81,57 +81,48 @@ Before we start let's first take a look at the auth flow at a high level.
 
 In this tutorial, we will be implementing each of the above steps.
 
-## Create a Google project
+## Create a Facebook project
 
-Before we start, make sure you have a Google Project with OAuth client credentials. You can follow the steps below to create a new project and a new OAuth client.
+Before we start, make sure you have a Facebook App with OAuth client credentials. You can follow the steps below to create a new app.
 
-Head over to the [Google Cloud console](https://console.cloud.google.com), select the navigation menu on the top left, then **APIs & Services**, and then **Credentials**.
+Head over to the [Facebook Developers console](https://developers.facebook.com), select the **My Apps** on the top right. If you don't have an existing Facebook app, click **Create App**.
 
-![GCP Console Select Credentials](/assets/examples/api-sst-auth-google/gcp-console-select-credentials.png)
+![Facebook Developers Select Create App](/assets/examples/api-sst-auth-facebook/facebook-developer-console-select-create-app.png)
 
-If you don't have an existing Google project, click **CREATE PROJECT**.
+Select **Consumer**, then click **Next**.
 
-![GCP Console Select Create Project](/assets/examples/api-sst-auth-google/gcp-console-select-create-project.png)
+![Facebook Developers Select App Type](/assets/examples/api-sst-auth-facebook/facebook-developer-console-select-app-type.png)
 
-Enter a project name, then click **CREATE**.
+Enter an app name, then click **Create app**.
 
-![GCP Console Create Project](/assets/examples/api-sst-auth-google/gcp-console-create-project.png)
+![Facebook Developers Create App](/assets/examples/api-sst-auth-facebook/facebook-developer-console-create-app.png)
 
-After the project is created, select **CREATE CREDENTIALS**, then **OAuth client ID**.
+After the project is created, select **Set up** under **Facebook Login**.
 
-![GCP Console Create Credentials](/assets/examples/api-sst-auth-google/gcp-console-select-create-credentials.png)
+![Facebook Developers Set Up Facebook Login](/assets/examples/api-sst-auth-facebook/facebook-developer-console-set-up-facebook-login.png)
 
-Select **CONFIGURE CONSENT SCREEN**.
+Select **Settings** on the left. Then select **Basic**.
 
-![GCP Console Configure Consent Screen](/assets/examples/api-sst-auth-google/gcp-console-select-configure-consent-screen.png)
+![Facebook Developers Select Settings](/assets/examples/api-sst-auth-facebook/facebook-developer-console-select-settings.png)
 
-Select **External**, and hit **CREATE**.
+Select **Show** to reveal the **App secret**.
 
-![GCP Console Configure Consent Screen User Type](/assets/examples/api-sst-auth-google/gcp-console-configure-consent-screen-user-type.png)
+![Facebook Developers Select Copy Credentials](/assets/examples/api-sst-auth-facebook/facebook-developer-console-copy-credentials.png)
 
-Enter the following details:
+Make a note of the **App ID** and **App secret**. We will need them in the following steps.
 
-- **App name**: the name of your app, here we picked `SST Auth`
-- **User support email**: select your email address in the drop-down
-- **Developer contact information**: enter your email address again
+## Store the secrets
 
-![GCP Console Configure Consent Screen Form](/assets/examples/api-sst-auth-google/gcp-console-configure-consent-screen-form.png)
+Since sensitive values should not be defined in the code, we are going to use [Config]({{ site.docs_url }}/config) to help us managing the Facebook app's credentials.
 
-Click **SAVE AND CONTINUE** for the rest of the steps. And on the last step hit **BACK TO DASHBOARD**.
+{%change%} Run in the root.
 
-![GCP Console Select Back To Dashboard](/assets/examples/api-sst-auth-google/gcp-console-back-to-dashboard.png)
+```bash
+$ npx sst secrets set FACEBOOK_APP_ID 368385265465382
+$ npx sst secrets set FACEBOOK_APP_SECRET 296866b2119ff5afbd84c4ee98dff791
+```
 
-Select **Credentials** on the left. Then select **CREATE CREDENTIALS**, then **OAuth client ID**.
-
-![GCP Console Create Credentials](/assets/examples/api-sst-auth-google/gcp-console-select-create-credentials-again.png)
-
-Select **Web application** type, then hit **CREATE**.
-
-![GCP Console Create Client](/assets/examples/api-sst-auth-google/gcp-console-create-client.png)
-
-Make a note of the **Client ID**. We will need it in the following steps.
-
-![GCP Console Copy Client Credentials](/assets/examples/api-sst-auth-google/gcp-console-copy-client-credentials.png)
+Make sure to replace the values with the App ID and secret created in the previous section.
 
 ## Add the authorize URL
 
@@ -147,6 +138,10 @@ We are going to use the [`Auth`]({{ site.docs_url }}/constructs/Auth) construct.
 const auth = new Auth(stack, "auth", {
   authenticator: {
     handler: "functions/auth.handler",
+    bind: [
+      new Config.Secret(stack, "FACEBOOK_APP_ID"),
+      new Config.Secret(stack, "FACEBOOK_APP_SECRET"),
+    ],
   },
 });
 auth.attach(stack, {
@@ -157,11 +152,13 @@ auth.attach(stack, {
 
 Behind the scenes, the `Auth` construct creates a `/auth/*` catch-all route. Both the Authorize and Callback URLs will fall under this route.
 
-{%change%} Also remember to import the `Auth` construct up top.
+We'll also bind the secrets to the **authenticator** function. It allows the function to access the secret values.
+
+{%change%} Also remember to import the `Auth` and `Config` construct up top.
 
 ```diff
 - import { StackContext, Api } from "@serverless-stack/resources";
-+ import { StackContext, Api, Auth } from "@serverless-stack/resources";
++ import { StackContext, Api, Auth, Config } from "@serverless-stack/resources";
 ```
 
 #### Add the auth handler
@@ -171,16 +168,15 @@ Now let's implement the `authenticator` function.
 {%change%} Add a file in `services/functions/auth.ts` with the following.
 
 ```ts
-import { AuthHandler, GoogleAdapter } from "@serverless-stack/node/auth";
-
-const GOOGLE_CLIENT_ID =
-  "1051197502784-vjtbj1rnckpagefmcoqnaon0cbglsdac.apps.googleusercontent.com";
+import { Config } from "@serverless-stack/node/config";
+import { AuthHandler, FacebookAdapter } from "@serverless-stack/node/auth";
 
 export const handler = AuthHandler({
   providers: {
-    google: GoogleAdapter({
-      mode: "oidc",
-      clientID: GOOGLE_CLIENT_ID,
+    facebook: FacebookAdapter({
+      clientID: Config.FACEBOOK_APP_ID,
+      clientSecret: Config.FACEBOOK_APP_SECRET,
+      scope: "openid email",
       onSuccess: async (tokenset) => {
         return {
           statusCode: 200,
@@ -192,25 +188,25 @@ export const handler = AuthHandler({
 });
 ```
 
-Make sure to replace `GOOGLE_CLIENT_ID` with the OAuth Client ID created in the previous section.
+The `@serverless-stack/node` package provides helper libraries used in Lambda functions. In the snippet above, we are using the package to create an `AuthHandler` with a `FacebookAdapter` named `facebook`. This creates two routes behind the scenes:
 
-The `@serverless-stack/node` package provides helper libraries used in Lambda functions. In the snippet above, we are using the package to create an `AuthHandler` with a `GoogleAdapter` named `google`. This creates two routes behind the scenes:
+- **Authorize URL** at `/auth/facebook/authorize`
+- **Callback URL** at `/auth/facebook/callback`
 
-- **Authorize URL** at `/auth/google/authorize`
-- **Callback URL** at `/auth/google/callback`
+When the Authorize URL is invoked, it will initialize the auth flow and redirects the user to Facebook.
 
-When the Authorize URL is invoked, it will initialize the auth flow and redirects the user to Google.
+We are also using the `Config` module to load the Facebook app's credentials stored in the previous step.
 
 ## Set up our React app
 
-Next, we are going to add a **Sign in with Google** button to our frontend. And on click, we will redirect the user to the **Authorize URL**.
+Next, we are going to add a **Sign in with Facebook** button to our frontend. And on click, we will redirect the user to the **Authorize URL**.
 
 To deploy a React app to AWS, we'll be using the SST [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) construct.
 
 {%change%} Add the following above the `Auth` construct in `stacks/MyStack.ts`.
 
 ```ts
-const site = new ViteStaticSite(stack, "Site", {
+const site = new ViteStaticSite(stack, "site", {
   path: "web",
   environment: {
     VITE_APP_API_URL: api.url,
@@ -235,7 +231,7 @@ We are also setting up [build time React environment variables](https://vitejs.d
 
 ```diff
 - import { StackContext, Api, Auth } from "@serverless-stack/resources";
-+ import { StackContext, Api, Auth, ViteStaticSite } from "@serverless-stack/resources";
++ import { StackContext, Api, Auth, Config, ViteStaticSite } from "@serverless-stack/resources";
 ```
 
 ## Create the frontend
@@ -292,7 +288,7 @@ The first time `sst start` runs, it can take a couple of minutes to deploy your 
 After `sst start` starts up, you will see the following output in your terminal.
 
 ```
-Stack frank-api-sst-auth-google-MyStack
+Stack frank-api-sst-auth-facebook-MyStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://2wk0bl6b7i.execute-api.us-east-1.amazonaws.com
@@ -303,22 +299,22 @@ Stack frank-api-sst-auth-google-MyStack
  Starting Live Lambda Dev
 ==========================
 
-SST Console: https://console.sst.dev/api-sst-auth-google/frank/local
+SST Console: https://console.sst.dev/api-sst-auth-facebook/frank/local
 Debug session started. Listening for requests...
 ```
 
-## Update the Google redirect URI
+## Update the Facebook redirect URI
 
 The `ApiEndpoint` is the API we just created. That means our:
 
-- **Authorize URL** is `https://2wk0bl6b7i.execute-api.us-east-1.amazonaws.com/auth/google/authorize`
-- **Callback URL** is `https://2wk0bl6b7i.execute-api.us-east-1.amazonaws.com/auth/google/callback`
+- **Authorize URL** is `https://2wk0bl6b7i.execute-api.us-east-1.amazonaws.com/auth/facebook/authorize`
+- **Callback URL** is `https://2wk0bl6b7i.execute-api.us-east-1.amazonaws.com/auth/facebook/callback`
 
 And the `SiteURL` is where our React app will be hosted. While in development, it's just a placeholder website.
 
-Add our **Callback URL** to the **Authorized redirect URIs** in our Google project's GCP Console.
+Add our **Callback URL** to the **Valid OAuth Redirect URIs** in our Facebook app's Console.
 
-![GCP Console Authorize Redirect URI](/assets/examples/api-sst-auth-google/gcp-console-add-authorized-redirect-uri.png)
+![Facebook Developers Set OAuth Redirect URIs](/assets/examples/api-sst-auth-facebook/facebook-developer-console-set-oauth-redirect-uris.png)
 
 ## Add the login UI
 
@@ -331,10 +327,10 @@ const App = () => {
       <h2>SST Auth Example</h2>
       <div>
         <a
-          href={`${import.meta.env.VITE_APP_API_URL}/auth/google/authorize`}
+          href={`${import.meta.env.VITE_APP_API_URL}/auth/facebook/authorize`}
           rel="noreferrer"
         >
-          <button>Sign in with Google</button>
+          <button>Sign in with Facebook</button>
         </a>
       </div>
     </div>
@@ -354,15 +350,15 @@ $ npm run dev
 
 Open up your browser and go to the URL it shows. In our case it is: `http://127.0.0.1:5173`
 
-![Web app not signed in unstyled](/assets/examples/api-sst-auth-google/react-site-not-signed-in-unstyled.png)
+![Web app not signed in unstyled](/assets/examples/api-sst-auth-facebook/react-site-not-signed-in-unstyled.png)
 
-Click on `Sign in with Google`, and you will be redirected to Google to sign in.
+Click on `Sign in with Facebook`, and you will be redirected to Facebook to sign in.
 
-![Google Sign in screen](/assets/examples/api-sst-auth-google/google-sign-in-screen.png)
+![Facebook Sign in screen](/assets/examples/api-sst-auth-facebook/facebook-sign-in-screen.png)
 
 Once you are signed in, you will be redirected to the **Callback URL** we created earlier with the user's details. Recall in our `authenticator` handler function, that we are simply printing the user's claims in the `onSuccess` callback.
 
-![Google Sign in callback screen](/assets/examples/api-sst-auth-google/google-sign-in-callback.png)
+![Facebook Sign in callback screen](/assets/examples/api-sst-auth-facebook/facebook-sign-in-callback.png)
 
 🎉 Sweet! We have just completed steps 1, 2, and 3 of our [Auth Flow](#auth-flow).
 
@@ -399,9 +395,10 @@ Now let's create the session object.
 ```diff
  export const handler = AuthHandler({
    providers: {
-     google: GoogleAdapter({
-       mode: "oidc",
-       clientID: GOOGLE_CLIENT_ID,
+     facebook: FacebookAdapter({
+       clientID: Config.FACEBOOK_APP_ID,
+       clientSecret: Config.FACEBOOK_APP_SECRET,
+       scope: "openid email",
        onSuccess: async (tokenset) => {
 -        return {
 -          statusCode: 200,
@@ -428,8 +425,8 @@ The `Session.parameter` call encrypts the given session object to generate a tok
 {%change%} Also import the `Session` up top.
 
 ```diff
-- import { AuthHandler, GoogleAdapter } from "@serverless-stack/node/auth";
-+ import { AuthHandler, GoogleAdapter, Session } from "@serverless-stack/node/auth";
+- import { AuthHandler, FacebookAdapter } from "@serverless-stack/node/auth";
++ import { AuthHandler, FacebookAdapter, Session } from "@serverless-stack/node/auth";
 ```
 
 ## Use the session
@@ -489,10 +486,10 @@ useEffect(() => {
 +      ) : (
        <div>
          <a
-           href={`${import.meta.env.VITE_APP_API_URL}/auth/google/authorize`}
+           href={`${import.meta.env.VITE_APP_API_URL}/auth/facebook/authorize`}
            rel="noreferrer"
          >
-           <button>Sign in with Google</button>
+           <button>Sign in with Facebook</button>
          </a>
        </div>
 +      )}
@@ -519,9 +516,9 @@ const signOut = async () => {
 import { useEffect, useState } from "react";
 ```
 
-Let's go back to our browser. Click on **Sign in with Google** again. After you authenticate with Google, you will be redirected back to the same page with the _"Yeah! You are signed in."_ message.
+Let's go back to our browser. Click on **Sign in with Facebook** again. After you authenticate with Facebook, you will be redirected back to the same page with the _"Yeah! You are signed in."_ message.
 
-![Web app signed in unstyled](/assets/examples/api-sst-auth-google/react-site-signed-in-unstyled.png)
+![Web app signed in unstyled](/assets/examples/api-sst-auth-facebook/react-site-signed-in-unstyled.png)
 
 Try refreshing the page, you will remain signed in. This is because the session token is stored in the browser's local storage.
 
@@ -533,7 +530,7 @@ Let's move on to steps 5 and 6. We will create a session API that will return th
 
 ## Store the user data
 
-So far we haven't been storing the data Google's been returning through the **Callback URL**. Let's create a database table to store this.
+So far we haven't been storing the data Facebook's been returning through the **Callback URL**. Let's create a database table to store this.
 
 #### Create a DynamoDB table
 
@@ -568,22 +565,23 @@ const table = new Table(stack, "users", {
 {%change%} Import the `Table` construct up top.
 
 ```diff
-- import { StackContext, Api, Auth, ViteStaticSite } from "@serverless-stack/resources";
-+ import { StackContext, Api, Auth, ViteStaticSite, Table } from "@serverless-stack/resources";
+- import { StackContext, Api, Auth, Config, ViteStaticSite } from "@serverless-stack/resources";
++ import { StackContext, Api, Auth, Config, ViteStaticSite, Table } from "@serverless-stack/resources";
 ```
 
 #### Store the claims
 
 Now let's update our `authenticator` function to store the user data in the `onSuccess` callback.
 
-{%change%} Update the `onSuccess` callback.
+{%change%} Update the `onSuccess` callback in `services/functions/auth.ts`.
 
 ```diff
  export const handler = AuthHandler({
    providers: {
-     google: GoogleAdapter({
-       mode: "oidc",
-       clientID: GOOGLE_CLIENT_ID,
+     facebook: FacebookAdapter({
+       clientID: Config.FACEBOOK_APP_ID,
+       clientSecret: Config.FACEBOOK_APP_SECRET,
+       scope: "openid email",
        onSuccess: async (tokenset) => {
          const claims = tokenset.claims();
 
@@ -611,7 +609,7 @@ Now let's update our `authenticator` function to store the user data in the `onS
  });
 ```
 
-This is saving the `claims` we get from Google in our DynamoDB table.
+This is saving the `claims` we get from Facebook in our DynamoDB table.
 
 {%change%} Also add these imports up top.
 
@@ -820,15 +818,26 @@ button {
 
 Let's go back to our browser. Make sure you are signed out.
 
-Click on **Sign in with Google** again. After you authenticate with Google, you will be redirected back to the same page with your details.
+Click on **Sign in with Facebook** again. After you authenticate with Facebook, you will be redirected back to the same page with your details.
 
-![Web app signed in styled](/assets/examples/api-sst-auth-google/react-site-signed-in-styled.png)
+![Web app signed in styled](/assets/examples/api-sst-auth-facebook/react-site-signed-in-styled.png)
 
 🎉 Congratulations! We have completed the entire [Auth Flow](#auth-flow).
 
 ## Deploy your API
 
-When deploying to prod, we need to change our `authenticator` to redirect to the deployed frontend URL instead of `127.0.0.1`.
+When deploying to prod, we need to set the Facebook app's credentials in the prod stage as well.
+
+{%change%} Run in the root.
+
+```bash
+$ npx sst secrets set FACEBOOK_APP_ID 368385265465382 --stage prod
+$ npx sst secrets set FACEBOOK_APP_SECRET 296866b2119ff5afbd84c4ee98dff791 --stage prod
+```
+
+A good practice here is to create two Facebook apps, one for your live users and one for your local development. That way you won’t need to change the URL and you will have an environment where you can test your changes.
+
+We also need to change our `authenticator` to redirect to the deployed frontend URL instead of `127.0.0.1`.
 
 {%change%} In `stacks/MyStack.ts`, make this change to the `Auth` construct.
 
@@ -836,7 +845,11 @@ When deploying to prod, we need to change our `authenticator` to redirect to the
  const auth = new Auth(stack, "auth", {
    authenticator: {
      handler: "functions/auth.handler",
-+    bind: [site],
+     bind: [
+       new Config.Secret(stack, "FACEBOOK_APP_ID"),
+       new Config.Secret(stack, "FACEBOOK_APP_SECRET"),
++      site,
+     ],
    },
  });
 ```
@@ -867,7 +880,7 @@ This allows us to separate our environments, so that when we are developing loca
 Once deployed, you should see something like this.
 
 ```bash
-Stack prod-api-sst-auth-google-MyStack
+Stack prod-api-sst-auth-facebook-MyStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://jd8jpfjue6.execute-api.us-east-1.amazonaws.com
@@ -876,13 +889,13 @@ Stack prod-api-sst-auth-google-MyStack
 
 #### Add the prod redirect URI
 
-Like we did when we ran `sst start`; add the `prod` **Callback URL** to the **Authorized redirect URIs** in the GCP Console. In our case this is — `https://jd8jpfjue6.execute-api.us-east-1.amazonaws.com/auth/google/callback`
+Like we did when we ran `sst start`; add the `prod` **Callback URL** to the **Authorized redirect URIs** in the Facebook Developers Console. In our case this is — `https://jd8jpfjue6.execute-api.us-east-1.amazonaws.com/auth/facebook/callback`
 
-![GCP Console Authorize Redirect URI For Prod](/assets/examples/api-sst-auth-google/gcp-console-add-authorized-redirect-uri-for-prod.png)
+![Facebook Developers Set OAuth Redirect URIs For Prod](/assets/examples/api-sst-auth-facebook/facebook-developer-console-set-oauth-redirect-uris-for-prod.png)
 
 ## Conclusion
 
-And that's it! You've got a brand new serverless full-stack app that supports _Sign in with Google_. With a local development environment, to test. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
+And that's it! You've got a brand new serverless full-stack app that supports _Sign in with Facebook_. With a local development environment, to test. And it's deployed to production as well, so you can share it with your users. Check out the repo below for the code we used in this example. And leave a comment if you have any questions!
 
 ## Clean up
 
