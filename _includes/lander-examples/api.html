@@ -1,0 +1,33 @@
+<div class="code-editor small">
+  <div class="navbar">
+    <div class="controls">
+      <div class="button"></div>
+      <div class="button"></div>
+      <div class="button"></div>
+    </div>
+    <div class="title">stacks/api.js</div>
+  </div>
+  <div class="code-block">
+    <div class="token-line">
+      <span class="token lead">1</span> <span class="token italics">new</span> <span class="token keyword">AppSyncApi</span>(<span class="token italics">this</span>, <span class="token string">"graphql"</span>, {
+    </div>
+    <div class="token-line">
+      <span class="token lead">2</span>&nbsp;&nbsp;graphqlApi: { schema: <span class="token string">"schema.graphql"</span> },
+    </div>
+    <div class="token-line">
+      <span class="token lead">3</span>&nbsp;&nbsp;resolvers: {
+    </div>
+    <div class="token-line">
+      <span class="token lead">4</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"Query get"</span>: <span class="token string">"src/get.main"</span>,
+    </div>
+    <div class="token-line">
+      <span class="token lead">5</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"Mutation update"</span>: <span class="token string">"src/update.main"</span>
+    </div>
+    <div class="token-line">
+      <span class="token lead">6</span>&nbsp;&nbsp;}
+    </div>
+    <div class="token-line">
+      <span class="token lead">7</span>})
+    </div>
+  </div>
+</div>
