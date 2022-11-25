@@ -141,8 +141,29 @@
   });
   /** End mobile menu button code **/
 
+  /** Start lander copy command code **/
+  var cmdClipboard = new ClipboardJS(".lander-header a.command", {
+    text: function(trigger) {
+      return $(trigger).data("text");
+    }
+  });
+
+  cmdClipboard.on("success", function(e) {
+    var $el = $(e.trigger);
+
+    if ($el.hasClass("copied")) {
+      return;
+    }
+
+    $el.addClass("copied");
+    let t = setTimeout(function() {
+      $el.removeClass("copied");
+    }, 3000);
+  });
+  /** End lander copy command code **/
+
   /** Start lander segmented control code **/
-  $("#examples .controls button").click(function(e) {
+  $("#frontend .controls img").click(function(e) {
     var el = $(this);
     var parent = el.parent();
 
@@ -159,14 +180,12 @@
     el.addClass("active");
 
     parent.children(".highlight").css({
-      left: Math.round(position.left) + scrollLeft, width: width
+      left: Math.round(position.left) + scrollLeft
     });
 
     // Fade in content
     var targets = [
-      "#examples .example .info.active",
-      "#examples .example .code-block.active",
-      "#examples .example .code-editor .navbar .title.active",
+      "#frontend .example .code-block.active",
     ];
 
     for (var i = 0, l = targets.length; i < l; i++) {

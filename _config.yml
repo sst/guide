@@ -17,7 +17,7 @@ title: SST
 email: hello@sst.dev
 jobs_email: jobs@sst.dev
 description: > # this means to ignore newlines until "baseurl:"
-  Making it easy to build full-stack serverless apps
+  An open source framework for building modern full-stack applications on AWS.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://sst.dev" # the base hostname & protocol for your site, e.g. http://example.com
 
@@ -64,11 +64,11 @@ social_cards_url: "https://social-cards.sst.dev"
 permalink: /blog/:title:output_ext
 
 stats:
-  newsletter: "85,000"
-  newsletter_short: "85k"
-  slack: "1000"
-  github: "8500"
-  github_short: "8k"
+  newsletter: "90,000"
+  newsletter_short: "90k"
+  slack: "1600"
+  github: "9800"
+  github_short: "9k"
 
 collections:
   chapters:
@@ -82,7 +82,6 @@ markdown: kramdown
 plugins:
   - jekyll-sitemap
   - jekyll-redirect-from
-
 # Front Matter defaults
 #defaults:
 #  - scope:

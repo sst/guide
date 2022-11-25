@@ -17,6 +17,8 @@ $background-color:      #fdfdfd !default;
 $brand-color:           #2a7ae2 !default;
 $announcement-color:    #16A085 !default;
 
+$lander-background-color: darken($secondary-background-color, 4%);
+
 $grey-color:            #828282 !default;
 $grey-color-light:      lighten($grey-color, 40%) !default;
 $grey-color-dark:       darken($grey-color, 25%) !default;
@@ -42,15 +44,7 @@ $on-laptop:             800px !default;
 }
 
 %body-background {
-  background: {
-    image: url("/assets/lander/background.svg");
-    position: 0 0;
-    size: cover;
-    color: $secondary-background-color;
-  }
-  @include media-query($on-laptop) {
-    background-image: url("/assets/lander/background-mobile.svg");
-  }
+  background-color: $lander-background-color;
 }
 
 // Import partials.
