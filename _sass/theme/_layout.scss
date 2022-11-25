@@ -249,7 +249,7 @@
     }
 
     @include media-query($on-laptop) {
-      padding: $spacing-unit / 2;
+      padding: $spacing-unit / 2 $spacing-unit / 2 0;
     }
 
     & > .content {
@@ -559,7 +559,7 @@
 
 .footer-col {
   margin-bottom: 2 * $spacing-unit - 5px;
-  margin-right: $spacing-unit;
+  margin-right: 1.5 * $spacing-unit;
 
   @include media-query($on-laptop) {
     margin-right: 0;
@@ -567,7 +567,7 @@
 
   &.footer-col-1 {
     text-align: left;
-    flex: 0 0 225px;
+    flex: 1 0 auto;
 
     @include media-query($on-laptop) {
       text-align: center;
@@ -575,7 +575,7 @@
   }
 
   &.footer-col-2 {
-    flex: 1 1 auto;
+    flex: 1 0 auto;
     display: flex;
     flex-wrap: wrap;
 
@@ -606,9 +606,6 @@
     margin-bottom: $spacing-unit;
     margin-right: 0;
     flex: 0 1 auto;
-  }
-
-  li {
   }
 
   a.author-link {
@@ -646,12 +643,12 @@
     margin-bottom: $spacing-unit - 10px;
     font-size: 20px;
     line-height: 1;
-    font-weight: 700;
-    color: $brand-color;
+    font-weight: 600;
+    color: $secondary-text-color;
 
     @include media-query($on-laptop) {
       text-align: center;
-      line-height: 32px;
+      line-height: 1.5;
     }
   }
 

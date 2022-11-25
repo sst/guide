@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="512"
+   height="211"
+   viewBox="0 0 512 211"
+   version="1.1"
+   id="svg200"
+   sodipodi:docname="Hbo logo 1.svg"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#">
+  <defs
+     id="defs204" />
+  <sodipodi:namedview
+     id="namedview202"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="2.3543242"
+     inkscape:cx="129.33648"
+     inkscape:cy="119.7796"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="hbo-logo-blk" />
+  <g
+     id="hbo-logo-blk"
+     stroke="none"
+     stroke-width="1"
+     fill="none"
+     fill-rule="evenodd"
+     transform="translate(0,3.0006123e-5)">
+    <polyline
+       id="Fill-15"
+       fill="currentColor"
+       points="148 206 92.7748343 206 92.7748343 127.236832 56.9262346 127.236832 56.9262346 206 0 206 0 3 56.9262346 3 56.9262346 78.5141926 92.7748343 78.5141926 92.7748343 3 148 3 148 206"
+       transform="scale(1.0150417,1.0183117)" />
+    <path
+       d="m 407.03751,146.25835 c 22.74616,0 41.18655,-18.48231 41.18655,-41.28778 0,-22.799359 -18.44039,-41.284724 -41.18655,-41.284724 -22.74918,0 -41.18755,18.485365 -41.18755,41.284724 0,22.80547 18.43837,41.28778 41.18755,41.28778 z m -52.39287,-41.28778 c 0,-29.003142 23.45567,-52.51778 52.39287,-52.51778 28.93621,0 52.39593,23.514638 52.39593,52.51778 0,29.00823 -23.45972,52.52185 -52.39593,52.52185 -28.9372,0 -52.39287,-23.51362 -52.39287,-52.52185 z m -72.95472,0 c 6.48297,-0.82297 17.28995,-8.253081 21.09702,-12.995836 -1.33794,5.880691 -1.44032,22.900966 0.12367,28.781656 -4.34529,-6.7057 -14.63332,-14.9598 -21.22069,-15.78582 z M 244.0236,49.370203 c 8.23346,0 14.71745,8.147419 14.71745,17.432774 0,9.285356 -6.48399,17.437855 -14.71745,17.437855 H 215.72395 V 49.370203 Z m -0.10338,77.471097 c 8.23244,0 14.71744,8.15148 14.71744,17.43379 0,9.28637 -6.485,17.43481 -14.71744,17.43481 h -28.29966 v -34.8686 z m 163.08283,83.94921 C 464.66766,210.76815 511.5942,162.74115 511.58103,104.92994 511.56987,45.899497 464.66766,0.04371976 407.00305,5.4946177e-7 349.40535,-0.04162544 319.97554,42.458256 312.70398,59.612644 312.7719,33.860743 287.45121,3.4646403 257.83287,3.4321278 h -95.4262 V 209.76331 l 88.96958,0.0173 c 35.87021,0 61.39463,-31.15609 61.43822,-57.87219 8.18784,16.81403 36.59088,58.90243 94.18858,58.88211 z"
+       id="Fill-16"
+       fill="currentColor"
+       style="stroke-width:1.01668" />
+  </g>
+  <metadata
+     id="metadata439">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="" />
+    </rdf:RDF>
+  </metadata>
+</svg>
