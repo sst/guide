@@ -368,10 +368,6 @@
     color: $secondary-text-color;
     font-family: $base-font-family;
 
-    span {
-      color: transparentize($color: $secondary-text-color, $amount: 0.5)
-    }
-
     a {
       font-weight: 700;
       color: $secondary-text-color;

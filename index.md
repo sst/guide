@@ -22,9 +22,9 @@ description: "Deploy Next.js, Remix, Astro, Solid, Vite to AWS and add any backe
     </div>
 
     <h4 class="site-description-full">
-      <span>1.</span> Deploy Next.js, Remix, or Astro to AWS.<br />
-      <span>2.</span> Add any backend feature.<br />
-      <span>3.</span> Go from idea to IPO!
+      1. Deploy Next.js, Remix, or Astro to AWS.<br />
+      2. Add any backend feature.<br />
+      3. Go from idea to IPO!
     </h4>
 
     <div class="controls">
