@@ -398,8 +398,9 @@
       }
 
       @include media-query($on-palm) {
-        padding-top: 12px;
-        padding-bottom: 12px;
+        font-size: 16px;
+        line-height: 18px;
+        padding: 17px 40px 16px;
       }
 
       &:first-child {
@@ -413,7 +414,7 @@
         font-family: $code-font-family;
 
         @include media-query($on-palm) {
-          font-size: 16px;
+          font-size: 15px;
         }
 
         span {
@@ -1194,9 +1195,10 @@
     padding: 32px 70px;
 
     @include media-query($on-palm) {
-      font-size: 16px;
       width: 100%;
-      padding: 12px 24px;
+      font-size: 16px;
+      line-height: 18px;
+      padding: 17px 40px 16px;
     }
   }
 
