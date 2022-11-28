@@ -606,6 +606,7 @@
     margin-bottom: $spacing-unit;
     margin-right: 0;
     flex: 0 1 auto;
+    max-width: 450px;
   }
 
   a.author-link {
@@ -642,7 +643,7 @@
   .site-description {
     margin-bottom: $spacing-unit - 10px;
     font-size: 20px;
-    line-height: 1;
+    line-height: 1.45;
     font-weight: 600;
     color: $secondary-text-color;
 

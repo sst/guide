@@ -58,7 +58,7 @@ description: "Deploy Next.js, Remix, Astro, Solid, Vite to AWS and add any backe
   <div class="title">
     <h2>Start<span> with your favorite</span> frontend</h2>
     <br />
-    <p>Use our open source framework to deploy your Next.js, Remix, Astro, or Solid sites.</p>
+    <p>Use our open source framework to deploy your Next.js, Remix, Astro, or Solid site.</p>
     <img src="/assets/lander/graphics/frontend-scribble.svg" />
   </div>
 

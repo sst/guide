@@ -565,39 +565,64 @@
   ul {
     $width: 120px;
     $height: 44px;
-    $marginX: $spacing-unit + 5px;
-    $marginY: 8px;
 
-    @include media-query($on-palm) {
-      $width: 100px;
-      $height: 34px;
-      $marginX: $spacing-unit / 2 + 5px;
-    }
-
-    @include media-query($on-palm) {
-      $width: 100px;
-      $height: 34px;
-      $marginX: $spacing-unit / 2 + 5px;
-    }
+    $m_width: 50px;
+    $m_height: 24px;
 
     margin: 0;
     list-style-type: none;
     text-align: center;
 
     li {
-      margin: $marginY $marginX;
+      margin: 8px $spacing-unit + 5px;
       display: inline-block;
+
+      @include media-query($on-palm) {
+        margin: 8px 10px;
+      }
 
       svg {
         color: $tertiary-text-color;
         width: $width;
         height: auto;
+
+        @include media-query($on-palm) {
+          width: $m_width;
+        }
       }
 
-      &.ad svg { width: $width + 10px; }
-      &.shell svg { width: auto; height: $height; }
-      &.comcast svg { width: $width + 5px; }
-      &.hbo svg { width: auto; height: $height - 11px; }
+      &.ad svg {
+        width: $width + 10px;
+
+        @include media-query($on-palm) {
+          width: $m_width + 10px;
+        }
+      }
+      &.shell svg {
+        width: auto;
+        height: $height;
+
+        @include media-query($on-palm) {
+          width: auto;
+          height: $m_height - 4px;
+        }
+      }
+      &.comcast svg {
+        width: $width + 5px;
+
+        @include media-query($on-palm) {
+          width: $m_width + 5px;
+        }
+      }
+      &.hbo svg {
+        width: auto;
+        height: $height - 11px;
+
+        @include media-query($on-palm) {
+          width: auto;
+          height: $m_height - 11px;
+        }
+      }
     }
   }
 }
@@ -816,7 +841,7 @@
     }
     &:last-child {
       margin-top: $spacing-unit / 2;
-      height: 40px;
+      height: $spacing-unit * 2.5;
       visibility: visible;
     }
   }
@@ -1180,7 +1205,7 @@
     @extend %bottom-border;
 
     @include media-query($on-palm) {
-      margin-top: 2 * $spacing-unit - 5px;
+      margin: 0;
       border: none;
     }
   }
@@ -1308,7 +1333,7 @@
   padding: 0 $spacing-unit;
 
   @include media-query($on-palm) {
-    margin: $spacing-unit + 5px auto 0;
+    margin: $spacing-unit + 2px auto 0;
     padding: 0 $spacing-unit / 2;
   }
 
