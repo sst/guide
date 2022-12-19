@@ -161,7 +161,7 @@ description: "Deploy Next.js, Remix, Astro, Solid, Vite to AWS and add any backe
   <div class="title">
     <h2>Collaborate <span>with your team</span></h2>
     <br />
-    <p>Create preview or feature environments. Or one for everybody on your team.</p>
+    <p>Create preview or feature environments. Or one for everyone on your team.</p>
     <img src="/assets/lander/graphics/collaborate-sparkle.svg" />
   </div>
 
