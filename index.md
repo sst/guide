@@ -82,32 +82,32 @@ description: "Deploy Next.js, Remix, Astro, Solid, Vite to AWS and add any backe
 
   <div class="timeline"><div></div></div>
 
-  <div class="content apis">
-    {% include lander-examples/api.html %}
+  <div class="content databases">
+    {% include lander-examples/database.html %}
     <div class="spine">
       <div class="timeline"><div></div></div>
       <div class="point"></div>
       <div class="timeline"><div></div></div>
     </div>
-    <div class="copy">
-      <figure>{% include svg/graphql.svg %}</figure>
-      <h3>GraphQL API</h3>
-      <p>Add a dedicated serverless GraphQL or REST API to your app.</p>
-    </div>
-  </div>
-
-  <div class="content databases">
     <div class="copy">
       <figure><i class="fa fa-database" aria-hidden="true"></i></figure>
       <h3>Database</h3>
       <p>Add a serverless SQL or NoSQL database to power your app.</p>
     </div>
+  </div>
+
+  <div class="content apis">
+    <div class="copy">
+      <figure>{% include svg/graphql.svg %}</figure>
+      <h3>GraphQL API</h3>
+      <p>Add a dedicated serverless GraphQL or REST API to your app.</p>
+    </div>
     <div class="spine">
       <div class="timeline"><div></div></div>
       <div class="point"></div>
       <div class="timeline"><div></div></div>
     </div>
-    {% include lander-examples/database.html %}
+    {% include lander-examples/api.html %}
   </div>
 
   <div class="content auth">
