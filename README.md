@@ -7,10 +7,10 @@
 <p align="center">
   <a href="https://discourse.sst.dev"><img alt="Discourse posts" src="https://img.shields.io/discourse/https/discourse.sst.dev/posts.svg?style=for-the-badge" /></a>
   <a href="https://twitter.com/SST_dev"><img alt="Twitter follow" src="https://img.shields.io/twitter/follow/SST_dev.svg?label=twitter&style=for-the-badge" /></a>
-  <a href="https://sst.dev/discord"><img alt="Chat on Slack" src="https://img.shields.io/discord/983865673656705025?style=for-the-badge" /></a> 
+  <a href="https://sst.dev/discord"><img alt="Chat on Discord" src="https://img.shields.io/discord/983865673656705025?style=for-the-badge" /></a> 
 </p>
 
-------------------------------------------------------------------------------------
+---
 
 The [SST Guide](https://sst.dev/guide.html) is a comprehensive open source tutorial for building and deploying full-stack apps using Serverless and React on AWS.
 
@@ -20,7 +20,7 @@ We are going to create a [note taking app](https://demo.sst.dev) from scratch us
 
 It is a single-page React app powered by a serverless CRUD API. We also cover how add user authentication and handle file uploads.
 
-The entire guide is hosted on GitHub and we use [Discourse][Discourse] for our comments. With the help of the community we add more detail to the guide and keep it up to date.
+The entire guide is hosted on GitHub and we use [Discourse][discourse] for our comments. With the help of the community we add more detail to the guide and keep it up to date.
 
 ## Project Goals
 
@@ -31,10 +31,10 @@ The entire guide is hosted on GitHub and we use [Discourse][Discourse] for our c
 
 ## Getting Help
 
-- If you are running into issues with a specific chapter, post in the comments for that [chapter][Discourse].
+- If you are running into issues with a specific chapter, post in the comments for that [chapter][discourse].
 - Open a [new issue](../../issues/new) if you've found a bug
-- Or if you have a suggestion create a [new topic][Discourse] in our forums
-- If you've found a typo, edit the chapter and submit a [pull request][PR].
+- Or if you have a suggestion create a [new topic][discourse] in our forums
+- If you've found a typo, edit the chapter and submit a [pull request][pr].
 
 ## Source for the Demo App
 
@@ -44,7 +44,7 @@ We also have an alternative Serverless Framework version: [backend serverless AP
 
 ## Contributing
 
-Thank you for your considering to contribute. [Read more about how you can contribute to SST][Contributing].
+Thank you for your considering to contribute. [Read more about how you can contribute to SST][contributing].
 
 ## Running Locally
 
@@ -54,13 +54,13 @@ SST is built using [Jekyll](https://jekyllrb.com). [Follow these steps to instal
 
 To install, run the following in the root of the project.
 
-``` bash
+```bash
 $ bundle install
 ```
 
 And to view locally.
 
-``` bash
+```bash
 $ bundle exec jekyll serve
 ```
 
@@ -68,7 +68,7 @@ You can now view the guide locally by visiting `http://localhost:4000/`.
 
 You can also turn on live reloading and incremental builds while editing.
 
-``` bash
+```bash
 $ bundle exec jekyll serve --incremental --livereload
 ```
 
@@ -76,14 +76,14 @@ $ bundle exec jekyll serve --incremental --livereload
 
 We use [Pandoc](https://pandoc.org) to create the eBook. You can generate it locally by following these steps.
 
-``` bash
+```bash
 $ cd ~/Sites/ServerlessStackCom/etc/ebook
 $ make start
 ```
 
 This'll start a Docker instance. Inside the Docker run:
 
-``` bash
+```bash
 $ make pdf
 $ make epub
 ```
@@ -119,8 +119,6 @@ Thanks to these folks for their contributions to the content of SST.
 
 This repo is maintained by [SST](https://sst.dev).
 
-
-[Slack]: https://sst.dev/slack
-[Discourse]: https://discourse.sst.dev
-[Contributing]: CONTRIBUTING.md
-[PR]: ../../compare
+[discourse]: https://discourse.sst.dev
+[contributing]: CONTRIBUTING.md
+[pr]: ../../compare

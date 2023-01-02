@@ -15,18 +15,20 @@ However while we want to be as comprehensive as possible, we also want to make s
 The guide is split up in the following way:
 
 The Basics:
+
 - The basic aspects of creating a full-stack serverless app. And deploying your app to production.
 
 Best Practices:
+
 - Everything you need to run your app in production.
 
 The Extensions
+
 - Extra Credits: Standalone chapters/articles intended to supplement the first two parts and to extend some functionality of the demo app.
 
 Additionally, the demo app that people build as a part of the tutorial is split into the backend (a Serverless Framework project) and the frontend (a React app). Both these are in their separate Git repos.
 
 Key chapters in the Core part of the guide are accompanied with branches in their respective demo app repos. This is used to track progress and as a reference as you work through the tutorial.
-
 
 ## How to Help
 
@@ -40,7 +42,6 @@ There are quite a few ways to help.
 - [Translating to other languages](#translating-to-other-languages)
 
 Additionally, you are welcome to provide general feedback and suggestions via our forums.
-
 
 ### Keep the core guide updated
 
@@ -71,7 +72,6 @@ For the steps in the tutorial:
 
 Once all the PRs are merged, we'll tag the repo (tutorial & demo app) with the new version number and update the Changelog chapter.
 
-
 ### Add an Extra Credit Chapter
 
 The core chapters are missing some extra details (for the sake of simplicity) that are necessary once you start customizing SST setup. Additionally, there are cases that we just don't handle in the core chapters. [Here is a rough list of topics that have been requested](https://github.com/AnomalyInnovations/serverless-stack-com/projects/1#column-2785572). This is not an exhaustive list. If you have some ideas to extend some of the demo app functionality, feel free to get in touch with us. Here is how to go about adding a new extra credit chapter:
@@ -95,7 +95,6 @@ For any changes to the demo app:
 
 Finally, submit a PR to the tutorial repo with the new changes. We'll review it, maybe suggest some edits or give you some feedback. Once everything looks okay we'll merge with master and publish it. We'll also create comments threads for your chapter in the forums and link to it.
 
-
 ### Improve Tooling
 
 Currently we do a lot of manual work to publish updates and maintain the tutorial. You can help by contributing to improve the process. Feel free to get in touch if you're interested in helping out. Here is roughly what we need help with:
@@ -116,11 +115,11 @@ To translate a chapter follow these steps:
 
 1. Add the following to the frontmatter of the chapter you intend to translate.
 
-   ``` yml
+   ```yml
    ref: uri-of-the-chapter
    lang: en
    ```
-   
+
    Here `uri-of-the-chapter` is the part of the url that represents the name of the chapter. For example, the [What is Serverless](https://sst.dev/chapters/what-is-serverless.html) has a URI `what-is-serverless`.
 
 2. Copy the file to `_chapters/[language-code]/[filename].md`
@@ -129,12 +128,11 @@ To translate a chapter follow these steps:
 
 3. Change the frontmatter to.
 
-   ``` yml
+   ```yml
    lang: language-code
    ```
-   
+
    Again the `language-code` is either `pt` or `es`.
-   
 
 Note that the only thing linking the translation with the original is the `ref:` attribute in the frontmatter. Make sure that it is the same for both the files.
 
@@ -144,6 +142,5 @@ As an example, compare the [What is Serverless](https://sst.dev/chapters/what-is
 - Spanish version: https://github.com/AnomalyInnovations/serverless-stack-com/blob/master/_chapters/es/what-is-serverless.md
 
 Feel free to [contact us](mailto:contact@anoma.ly) if you have any questions.
-   
 
-[slack]: https://launchpass.com/serverless-stack
+[discord]: https://sst.dev/discord

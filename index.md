@@ -272,7 +272,7 @@ description: "Deploy Next.js, Remix, Astro, Solid, Vite to AWS and add any backe
         <p>GitHub stars</p>
       </li>
       <li>
-        <h6>{{ site.stats.slack }}+</h6>
+        <h6>{{ site.stats.discord }}+</h6>
         <p>Discord members</p>
       </li>
       <li>

@@ -68,7 +68,7 @@ permalink: /blog/:title:output_ext
 stats:
   newsletter: "90,000"
   newsletter_short: "90k"
-  slack: "1900"
+  discord: "2000"
   github: "10000"
   github_short: "10k"
 
