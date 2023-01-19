@@ -39,7 +39,7 @@ Let's remove the old icons files.
 {%change%} Run the following from our `frontend/` directory.
 
 ``` bash
-$ rm public/logo192.png public/logo512.png
+$ rm public/logo192.png, public/logo512.png, public/favicon.ico
 ```
 
 {%change%} Then replace the contents of `public/manifest.json` with the following:
@@ -102,7 +102,7 @@ To include a file from the `public/` directory in your HTML, Create React App ne
 
 ``` html
 <meta name="theme-color" content="#000000">
-<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+<link rel="icon" href="%PUBLIC_URL%/favicon.ico">
 <link rel="apple-touch-icon" href="logo192.png" />
 <meta
   name="description"
