@@ -34,12 +34,18 @@ $ npm install
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `json` in your project root.
 
-```json
-{
-  "name": "api-auth-twitter",
-  "region": "us-east-1",
-  "main": "stacks/index.ts"
-}
+```js {5-10}
+import { SSTConfig } from "sst";
+import { Api } from "sst/constructs";
+
+export default {
+  config(_input) {
+    return {
+      name: "api-auth-twitter",
+      region: "us-east-1",
+    };
+  },
+} satisfies SSTConfig;
 ```
 
 ## Project layout
