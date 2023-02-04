@@ -34,7 +34,7 @@ Here is a video of it in action.
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=minimal/typescript-starter bucket-image-resize
+$ npx create-sst@latest --template=base/monorepo bucket-image-resize
 $ cd bucket-image-resize
 $ npm install
 ```
@@ -57,9 +57,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `services/` — App Code
+2. `packages/` — App Code
 
-   The code that's run when your API is invoked is placed in the `services/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
 
 ## Creating the bucket
 
@@ -126,7 +126,7 @@ Unzip that into the `layers/sharp` directory that we just created. Make sure tha
 
 Now in our function, we'll be handling resizing an image once it's uploaded.
 
-{%change%} Add a new file at `services/functions/resize.ts` with the following.
+{%change%} Add a new file at `packages/functions/src/resize.ts` with the following.
 
 ```ts
 import AWS from "aws-sdk";
@@ -206,7 +206,7 @@ We are doing a few things here. Let's go over them in detail.
 
 Now let's install the npm packages we are using here.
 
-{%change%} Run this command in the `services/` folder.
+{%change%} Run this command in the `packages/` folder.
 
 ```bash
 $ npm install sharp aws-sdk
@@ -262,7 +262,7 @@ Now refresh your console to see the resized image.
 
 Let's try making a quick change.
 
-{%change%} Change the `width` in your `services/functions/resize.ts`.
+{%change%} Change the `width` in your `packages/functions/src/resize.ts`.
 
 ```bash
 const width = 100;

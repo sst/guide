@@ -26,7 +26,7 @@ In this example, we will look at how to add Facebook Login to your serverless ap
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=minimal/typescript-starter api-sst-auth-facebook
+$ npx create-sst@latest --template=base/monorepo api-sst-auth-facebook
 $ cd api-sst-auth-facebook
 $ npm install
 ```
@@ -49,9 +49,9 @@ An SST app is made up of three parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `services/` — Application code
+2. `packages/` — Application code
 
-   The code that's run when your API is invoked is placed in the `services/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
 
 3. `web/` — Frontend app
 
@@ -165,7 +165,7 @@ We'll also bind the secrets to the **authenticator** function. It allows the fun
 
 Now let's implement the `authenticator` function.
 
-{%change%} Add a file in `services/functions/auth.ts` with the following.
+{%change%} Add a file in `packages/functions/src/auth.ts` with the following.
 
 ```ts
 import { Config } from "@serverless-stack/node/config";
@@ -370,7 +370,7 @@ Now, let's implement step 4. In the `onSuccess` callback, we will create a sessi
 
 First, to make creating and retrieving session typesafe, we'll start by defining our session types.
 
-{%change%} Add the following above the `AuthHandler` in `services/functions/auth.ts`.
+{%change%} Add the following above the `AuthHandler` in `packages/functions/src/auth.ts`.
 
 ```ts
 declare module "@serverless-stack/node/auth" {
@@ -573,7 +573,7 @@ const table = new Table(stack, "users", {
 
 Now let's update our `authenticator` function to store the user data in the `onSuccess` callback.
 
-{%change%} Update the `onSuccess` callback in `services/functions/auth.ts`.
+{%change%} Update the `onSuccess` callback in `packages/functions/src/auth.ts`.
 
 ```diff
  export const handler = AuthHandler({
@@ -640,7 +640,7 @@ Now that the user data is stored in the database; let's create an API endpoint t
  },
 ```
 
-{%change%} Add a file at `services/functions/session.ts`.
+{%change%} Add a file at `packages/functions/src/session.ts`.
 
 ```ts
 import { Table } from "@serverless-stack/node/table";
@@ -854,7 +854,7 @@ We also need to change our `authenticator` to redirect to the deployed frontend 
  });
 ```
 
-{%change%} In `services/functions/auth.ts`, change `redirect` to:
+{%change%} In `packages/functions/src/auth.ts`, change `redirect` to:
 
 ```diff
 -redirect: "http://127.0.0.1:5173",

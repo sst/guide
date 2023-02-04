@@ -27,19 +27,25 @@ In this example we will look at how to add a custom domain to a serverless API u
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=minimal/typescript-starter rest-api-custom-domain
+$ npx create-sst@latest --template=base/monorepo rest-api-custom-domain
 $ cd rest-api-custom-domain
 $ npm install
 ```
 
-By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
+By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```json
-{
-  "name": "rest-api-custom-domain",
-  "region": "us-east-1",
-  "main": "stacks/index.ts"
-}
+```js {5-10}
+import { SSTConfig } from "sst";
+import { Api } from "sst/constructs";
+
+export default {
+  config(_input) {
+    return {
+      name: "rest-api-custom-domain",
+      region: "us-east-1",
+    };
+  },
+} satisfies SSTConfig;
 ```
 
 ## Project layout
@@ -50,9 +56,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `services/` — App Code
+2. `packages/` — App Code
 
-   The code that's run when your API is invoked is placed in the `services/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
 
 ## Setting up an API
 
@@ -61,7 +67,7 @@ Let's start by setting up an API
 {%change%} Replace the `stacks/MyStack.ts` with the following.
 
 ```ts
-import { Api, StackContext } from "@serverless-stack/resources";
+import { Api, StackContext } from "sst/constructs";
 
 export function MyStack({ stack, app }: StackContext) {
   const stage = app.stage;
@@ -117,7 +123,7 @@ const api = new Api(stack, "Api", {
 
 For this example, we are going to focus on the custom domain. So we are going to keep our Lambda function simple. [Refer to the CRUD example]({% link _examples/how-to-create-a-crud-api-with-serverless-using-dynamodb.md %}), if you want to connect your API to a database.
 
-{%change%} Replace the `services/functions/lambda.ts` with the following.
+{%change%} Replace the `packages/functions/src/lambda.ts` with the following.
 
 ```ts
 export async function handler() {
@@ -151,7 +157,7 @@ The first time you run this command it'll take a couple of minutes to do the fol
 
 1. It'll bootstrap your AWS environment to use CDK.
 2. Deploy a debug stack to power the Live Lambda Development environment.
-3. Deploy your app, but replace the functions in the `services/` directory with ones that connect to your local client.
+3. Deploy your app, but replace the functions in the `packages/functions/` directory with ones that connect to your local client.
 4. Start up a local client.
 
 Deploying your app in this case also means configuring the custom domain. So if you are doing it the first time, it'll take longer to set that up.
@@ -198,7 +204,7 @@ You should see the same response again. If the page does not load, don't worry. 
 
 Let's make a quick change to our API. It would be good if the JSON strings are pretty printed to make them more readable.
 
-{%change%} Replace `services/functions/lambda.ts` with the following.
+{%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
 ```ts
 export async function handler() {

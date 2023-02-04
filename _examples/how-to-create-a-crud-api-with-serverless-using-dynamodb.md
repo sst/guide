@@ -26,7 +26,7 @@ In this example we will look at how to create a CRUD API with serverless using [
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=minimal/typescript-starter crud-api-dynamodb
+$ npx create-sst@latest --template=base/monorepo crud-api-dynamodb
 $ cd crud-api-dynamodb
 $ npm install
 ```
@@ -49,9 +49,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `services/` — App Code
+2. `packages/` — App Code
 
-   The code that's run when your API is invoked is placed in the `services/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
 
 ## Adding DynamoDB
 
@@ -128,7 +128,7 @@ We'll also bind our table to our API. It allows our API to access (read and writ
 
 Let's turn towards the functions that'll be powering our API. Starting with the one that creates our note.
 
-{%change%} Add the following to `services/functions/create.ts`.
+{%change%} Add the following to `packages/functions/src/create.ts`.
 
 ```ts
 import * as uuid from "uuid";
@@ -164,7 +164,7 @@ Here we are creating a new row in our DynamoDB table. First we JSON parse the re
 
 {%change%} Let's install both the packages we are using here.
 
-Run the below command in the `services/` folder.
+Run the below command in the `packages/` folder.
 
 ```bash
 $ npm install aws-sdk uuid
@@ -174,7 +174,7 @@ $ npm install aws-sdk uuid
 
 Next, let's write the function that'll fetch all our notes.
 
-{%change%} Add the following to `services/functions/list.ts`.
+{%change%} Add the following to `packages/functions/src/list.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -207,7 +207,7 @@ Here we are getting all the notes for our hard coded `userId`, `123`.
 
 We'll do something similar for the function that gets a single note.
 
-{%change%} Create a `services/functions/get.ts`.
+{%change%} Create a `packages/functions/src/get.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -241,7 +241,7 @@ We are getting the note with the id that's passed in through the API endpoint pa
 
 Now let's update our notes.
 
-{%change%} Add a `services/functions/update.ts` with:
+{%change%} Add a `packages/functions/src/update.ts` with:
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -284,7 +284,7 @@ We are first JSON parsing the request body. We use the content we get from it, t
 
 To complete the CRUD operations, let's delete the note.
 
-{%change%} Add this to `services/functions/delete.ts`.
+{%change%} Add this to `packages/functions/src/delete.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -400,7 +400,7 @@ To delete a note, go to the `DELETE /notes/{id}` and enter the **id** of the not
 
 Let's make a quick change to test our Live Lambda Development environment. We want our `get` function to return an error if it cannot find the note.
 
-{%change%} Replace the `return` statement in `services/functions/gets.ts` with:
+{%change%} Replace the `return` statement in `packages/functions/src/gets.ts` with:
 
 ```ts
 return results.Item

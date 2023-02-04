@@ -26,7 +26,7 @@ In this example we will look at how to use DynamoDB in our serverless app using 
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=minimal/typescript-starter rest-api-dynamodb
+$ npx create-sst@latest --template=base/monorepo rest-api-dynamodb
 $ cd rest-api-dynamodb
 $ npm install
 ```
@@ -49,9 +49,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `services/` — App Code
+2. `packages/` — App Code
 
-   The code that's run when your API is invoked is placed in the `services/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
 
 ## Adding DynamoDB
 
@@ -110,7 +110,7 @@ stack.addOutputs({
 });
 ```
 
-Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `services/functions/lambda.ts` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `packages/functions/src/lambda.ts` will get invoked.
 
 We'll also bind our table to our API. It allows our API to access (read and write) the table we just created.
 
@@ -118,7 +118,7 @@ We'll also bind our table to our API. It allows our API to access (read and writ
 
 Now in our function, we'll start by reading from our DynamoDB table.
 
-{%change%} Replace `services/functions/lambda.ts` with the following.
+{%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -150,7 +150,7 @@ export async function handler() {
 
 We make a `get` call to our DynamoDB table and get the value of a row where the `counter` column has the value `hits`. Since, we haven't written to this column yet, we are going to just return `0`.
 
-{%change%} Let's install the `aws-sdk` package in the `services/` folder.
+{%change%} Let's install the `aws-sdk` package in the `packages/` folder.
 
 ```bash
 $ npm install aws-sdk
@@ -204,7 +204,7 @@ You should see a `0` in the response body.
 
 Now let's update our table with the hits.
 
-{%change%} Add this above the `return` statement in `services/functions/lambda.ts`.
+{%change%} Add this above the `return` statement in `packages/functions/src/lambda.ts`.
 
 ```ts
 const putParams = {

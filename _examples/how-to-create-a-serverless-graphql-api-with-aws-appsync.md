@@ -34,7 +34,7 @@ Here is a video of it in action.
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=minimal/typescript-starter graphql-appsync
+$ npx create-sst@latest --template=base/monorepo graphql-appsync
 $ cd graphql-appsync
 $ npm install
 ```
@@ -57,9 +57,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `services/` — App Code
+2. `packages/` — App Code
 
-   The code that's run when your API is invoked is placed in the `services/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
 
 ## Setting up our infrastructure
 
@@ -81,7 +81,7 @@ export function MyStack({ stack }: StackContext) {
 
   // Create the AppSync GraphQL API
   const api = new AppSyncApi(stack, "AppSyncApi", {
-    schema: "services/graphql/schema.graphql",
+    schema: "packages/graphql/schema.graphql",
     defaults: {
       function: {
         bind: [notesTable],
@@ -114,7 +114,7 @@ Finally, we bind our table to our API.
 
 ## Define the GraphQL schema
 
-{%change%} Add the following to `services/graphql/schema.graphql`.
+{%change%} Add the following to `packages/graphql/schema.graphql`.
 
 ```graphql
 type Note {
@@ -146,7 +146,7 @@ type Mutation {
 
 Let's also add a type for our note object.
 
-{%change%} Add the following to a new file in `services/Note.ts`.
+{%change%} Add the following to a new file in `packages/Note.ts`.
 
 ```ts
 type Note = {
@@ -161,7 +161,7 @@ export default Note;
 
 To start with, let's create the Lambda function that'll be our AppSync data source.
 
-{%change%} Replace `services/functions/lambda.ts` with the following.
+{%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
 ```ts
 import Note from "./Note";
@@ -207,7 +207,7 @@ Now let's implement our resolvers.
 
 Starting with the one that'll create a note.
 
-{%change%} Add a file to `services/createNote.ts`.
+{%change%} Add a file to `packages/createNote.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -230,7 +230,7 @@ export default async function createNote(note: Note): Promise<Note> {
 
 Here, we are storing the given note in our DynamoDB table.
 
-{%change%} Let's install the `aws-sdk` package in the `services/` folder package that we are using.
+{%change%} Let's install the `aws-sdk` package in the `packages/` folder package that we are using.
 
 ```bash
 $ npm install aws-sdk
@@ -240,7 +240,7 @@ $ npm install aws-sdk
 
 Next, let's write the function that'll fetch all our notes.
 
-{%change%} Add the following to `services/listNotes.ts`.
+{%change%} Add the following to `packages/listNotes.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -267,7 +267,7 @@ Here we are getting all the notes from our table.
 
 We'll do something similar for the function that gets a single note.
 
-{%change%} Create a `services/getNoteById.ts`.
+{%change%} Create a `packages/getNoteById.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -296,7 +296,7 @@ We are getting the note with the id that's passed in.
 
 Now let's update our notes.
 
-{%change%} Add a `services/updateNote.ts` with:
+{%change%} Add a `packages/updateNote.ts` with:
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -326,7 +326,7 @@ We are using the id and the content of the note that's passed in to update a not
 
 To complete all the operations, let's delete the note.
 
-{%change%} Add this to `services/deleteNote.ts`.
+{%change%} Add this to `packages/deleteNote.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -348,7 +348,7 @@ export default async function deleteNote(noteId: string): Promise<string> {
 
 Note that, we are purposely disabling the delete query for now. We'll come back to this later.
 
-{%change%} Let's install the `aws-sdk` package in the `services/` folder.
+{%change%} Let's install the `aws-sdk` package in the `packages/` folder.
 
 ```bash
 $ npm install aws-sdk
@@ -468,7 +468,7 @@ You'll notice a couple of things. Firstly, the note we created is still there. T
 
 ## Making changes
 
-{%change%} Let's fix our `services/deleteNote.ts` by un-commenting the query.
+{%change%} Let's fix our `packages/deleteNote.ts` by un-commenting the query.
 
 ```ts
 await dynamoDb.delete(params).promise();

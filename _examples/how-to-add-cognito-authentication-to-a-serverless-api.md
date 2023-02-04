@@ -26,19 +26,25 @@ In this example we will look at how to add [Cognito User Pool](https://docs.aws.
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=minimal/typescript-starter api-auth-cognito
+$ npx create-sst@latest --template=base/monorepo api-auth-cognito
 $ cd api-auth-cognito
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
 
-```json
-{
-  "name": "api-auth-cognito",
-  "region": "us-east-1",
-  "main": "stacks/index.ts"
-}
+```js {5-10}
+import { SSTConfig } from "sst";
+import { Api } from "sst/constructs";
+
+export default {
+  config(_input) {
+    return {
+      name: "api-auth-cognito",
+      region: "us-east-1",
+    };
+  },
+} satisfies SSTConfig;
 ```
 
 ## Project layout
@@ -49,9 +55,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `services/` — App Code
+2. `packages/` — App Code
 
-   The code that's run when your API is invoked is placed in the `services/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
 
 ## Setting up the API
 
@@ -128,7 +134,7 @@ We are going to print out the resources that we created for reference.
 
 We will create two functions, one for the public route, and one for the private route.
 
-{%change%} Add a `services/functions/public.ts`.
+{%change%} Add a `packages/functions/src/public.ts`.
 
 ```ts
 export async function handler() {
@@ -139,7 +145,7 @@ export async function handler() {
 }
 ```
 
-{%change%} Add a `services/functions/private.ts`.
+{%change%} Add a `packages/functions/src/private.ts`.
 
 ```ts
 export async function handler() {
@@ -164,7 +170,7 @@ The first time you run this command it'll take a couple of minutes to do the fol
 
 1. It'll bootstrap your AWS environment to use CDK.
 2. Deploy a debug stack to power the Live Lambda Development environment.
-3. Deploy your app, but replace the functions in the `services/` directory with ones that connect to your local client.
+3. Deploy your app, but replace the functions in the `packages/` directory with ones that connect to your local client.
 4. Start up a local client.
 
 Once complete, you should see something like this.
@@ -271,7 +277,7 @@ The above process might seem fairly tedious. But once we integrate it into our f
 
 Let's make a quick change to our private route to print out the caller's user id.
 
-{%change%} Replace `services/functions/private.ts` with the following.
+{%change%} Replace `packages/functions/src/private.ts` with the following.
 
 ```ts
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";

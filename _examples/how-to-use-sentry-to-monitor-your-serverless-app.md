@@ -31,7 +31,7 @@ When a serverless app is deployed to production, it's useful to be able to monit
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=minimal/typescript-starter sentry
+$ npx create-sst@latest --template=base/monorepo sentry
 $ cd sentry
 $ npm install
 ```
@@ -54,9 +54,9 @@ An SST app is made up of a couple of parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `services/` — App Code
+2. `packages/` — App Code
 
-   The code that's run when your API is invoked is placed in the `services/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
 
 ## Create our infrastructure
 
@@ -87,9 +87,9 @@ export function MyStack({ stack, app }: StackContext) {
 }
 ```
 
-We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `services/functions/lambda.ts` will get invoked.
+We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `packages/functions/src/lambda.ts` will get invoked.
 
-{%change%} Your `services/functions/lambda.ts` should look something like this.
+{%change%} Your `packages/functions/src/lambda.ts` should look something like this.
 
 ```ts
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
@@ -155,7 +155,7 @@ Also, replace the layer ARN with the one that we copied above.
 
 Next, we'll instrument our Lambda functions by wrapping them with the Sentry handler.
 
-{%change%} Replace the code in `services/functions/lambda.ts` with this.
+{%change%} Replace the code in `packages/functions/src/lambda.ts` with this.
 
 ```ts
 import Sentry from "@sentry/serverless";

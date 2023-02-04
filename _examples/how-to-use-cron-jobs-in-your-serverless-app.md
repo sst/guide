@@ -26,7 +26,7 @@ In this example we will look at how to create a cron job in our serverless app u
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=minimal/typescript-starter cron-job
+$ npx create-sst@latest --template=base/monorepo cron-job
 $ cd cron-job
 $ npm install
 ```
@@ -49,9 +49,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `services/` — App Code
+2. `packages/` — App Code
 
-   The code that's run when your API is invoked is placed in the `services/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
 
 ## Creating Cron Job
 
@@ -76,7 +76,7 @@ This creates a serverless cron job using [`Cron`]({{ site.docs_url }}/constructs
 
 Now in our function, we'll print out a message every time the function is run.
 
-{%change%} Replace `services/functions/lambda.ts` with the following.
+{%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
 ```ts
 export async function handler() {
@@ -131,13 +131,13 @@ Wait for a couple of minutes and you should see `Hi!` gets printed out every min
 
 Now let's make a call to [MetaWeather](https://www.metaweather.com)'s API and print out the weather in San Francisco.
 
-{%change%} Let's install the `node-fetch` in the `services/` folder.
+{%change%} Let's install the `node-fetch` in the `packages/` folder.
 
 ```bash
 $ npm install node-fetch
 ```
 
-{%change%} Replace `services/functions/lambda.ts` with the following.
+{%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
 ```ts
 import fetch from "node-fetch";

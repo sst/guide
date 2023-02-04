@@ -27,7 +27,7 @@ In this example we will look at how to use [MongoDB Atlas](https://www.mongodb.c
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=minimal/typescript-starter rest-api-mongodb
+$ npx create-sst@latest --template=base/monorepo rest-api-mongodb
 $ cd rest-api-mongodb
 $ npm install
 ```
@@ -50,9 +50,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `services/` — App Code
+2. `packages/` — App Code
 
-   The code that's run when your API is invoked is placed in the `services/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
 
 ## Adding the API
 
@@ -163,7 +163,7 @@ We also want to make sure that this file is not committed to Git.
 
 We are now ready to add the function code to query our newly created MongoDB database.
 
-{%change%} Replace `services/functions/lambda.ts` with the following.
+{%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
 ```ts
 import * as mongodb from "mongodb";
@@ -221,7 +221,7 @@ context.callbackWaitsForEmptyEventLoop = false;
 
 As the comment explains, we are telling AWS to not wait for the Node.js event loop to empty before freezing the Lambda function container. We need this because the connection to our MongoDB database is still around after our function returns.
 
-Let's install our MongoDB client, run the below command in the `services/` folder.
+Let's install our MongoDB client, run the below command in the `packages/` folder.
 
 ```bash
 $ npm install mongodb
@@ -275,7 +275,7 @@ You should see the list of users as a JSON string.
 
 Now let's make a quick change to our database query.
 
-{%change%} Replace the following line in `services/functions/lambda.ts`.
+{%change%} Replace the following line in `packages/functions/src/lambda.ts`.
 
 ```ts
 const users = await db.collection("users").find({}).toArray();

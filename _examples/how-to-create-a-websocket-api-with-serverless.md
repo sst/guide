@@ -26,7 +26,7 @@ In this example we will look at how to create a serverless WebSocket API on AWS 
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=minimal/typescript-starter websocket
+$ npx create-sst@latest --template=base/monorepo websocket
 $ cd websocket
 $ npm install
 ```
@@ -49,9 +49,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `services/` — App Code
+2. `packages/` — App Code
 
-   The code that's run when your API is invoked is placed in the `services/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
 
 ## Storing connections
 
@@ -116,7 +116,7 @@ We'll also bind our table to our API. It allows our API to access (read and writ
 
 Now in our functions, let's first handle the case when a client connects to our WebSocket API.
 
-{%change%} Add the following to `services/functions/connect.ts`.
+{%change%} Add the following to `packages/functions/src/connect.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -141,7 +141,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
 
 Here when a new client connects, we grab the connection id from `event.requestContext.connectionId` and store it in our table.
 
-{%change%} We are using the `aws-sdk`, so let's install it in the `services/` folder.
+{%change%} We are using the `aws-sdk`, so let's install it in the `packages/` folder.
 
 ```bash
 $ npm install aws-sdk
@@ -151,7 +151,7 @@ $ npm install aws-sdk
 
 Similarly, we'll remove the connection id from the table when a client disconnects.
 
-{%change%} Add the following to `services/functions/disconnect.ts`.
+{%change%} Add the following to `packages/functions/src/disconnect.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -176,7 +176,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
 
 Now before handling the `sendmessage` route, let's do a quick test. We'll leave a placeholder function there for now.
 
-{%change%} Add this to `services/functions/sendMessage.ts`.
+{%change%} Add this to `packages/functions/src/sendMessage.ts`.
 
 ```ts
 import { APIGatewayProxyHandler } from "aws-lambda";
@@ -242,7 +242,7 @@ You should see a random connection ID created in the table.
 
 Now let's update our function to send messages.
 
-{%change%} Replace your `services/functions/sendMessage.ts` with:
+{%change%} Replace your `packages/functions/src/sendMessage.ts` with:
 
 ```ts
 import { DynamoDB, ApiGatewayManagementApi } from "aws-sdk";

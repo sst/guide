@@ -26,7 +26,7 @@ In this example we will look at how to use [React.js](https://reactjs.org) with 
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=minimal/typescript-starter react-app
+$ npx create-sst@latest --template=base/monorepo react-app
 $ cd react-app
 $ npm install
 ```
@@ -49,9 +49,9 @@ An SST app is made up of a couple of parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `services/` — App Code
+2. `packages/` — App Code
 
-   The code that's run when your API is invoked is placed in the `services/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
 
 3. `frontend/` — React App
 
@@ -118,7 +118,7 @@ stack.addOutputs({
 });
 ```
 
-We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `services/functions/lambda.ts` will get invoked.
+We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `packages/functions/src/lambda.ts` will get invoked.
 
 We'll also bind our table to our API. It allows our API to access (read and write) the table we just created.
 
@@ -176,7 +176,7 @@ But we'll skip this for now.
 
 Our API is powered by a Lambda function. In the function we'll read from our DynamoDB table.
 
-{%change%} Replace `services/functions/lambda.ts` with the following.
+{%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -208,7 +208,7 @@ export async function handler() {
 
 We make a `get` call to our DynamoDB table and get the value of a row where the `counter` column has the value `clicks`. Since we haven't written to this column yet, we are going to just return `0`.
 
-{%change%} Let's install the `aws-sdk` package in the `services/` folder.
+{%change%} Let's install the `aws-sdk` package in the `packages/` folder.
 
 ```bash
 $ npm install aws-sdk
@@ -381,7 +381,7 @@ Of course if you click on the button multiple times, the count doesn't change. T
 
 Let's update our table with the clicks.
 
-{%change%} Add this above the `return` statement in `services/functions/lambda.ts`.
+{%change%} Add this above the `return` statement in `packages/functions/src/lambda.ts`.
 
 ```ts
 const putParams = {

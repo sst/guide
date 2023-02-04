@@ -20,7 +20,7 @@ In this example we will look at how to use [Datadog](https://www.datadoghq.com/)
 - Node.js >= 10.15.1
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
-- A [Datadog account](https://app.datadoghq.com/signup) and that's [configured with your AWS account](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=roledelegation#setup)
+- A [Datadog account](https://app.datadoghq.com/signup) and that's [configured with your AWS account](https://docs.datadoghq.com/integrations/amazon_web_packages/?tab=roledelegation#setup)
 
 ## What is Datadog
 
@@ -33,7 +33,7 @@ Let's look at how to set this up.
 {%change%} Start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=minimal/typescript-starter datadog
+$ npx create-sst@latest --template=base/monorepo datadog
 $ cd datadog
 $ npm install
 ```
@@ -56,9 +56,9 @@ An SST app is made up of a couple of parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `services/` — App Code
+2. `packages/` — App Code
 
-   The code that's run when your API is invoked is placed in the `services/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
 
 ## Create our infrastructure
 
@@ -88,9 +88,9 @@ export function MyStack({ stack, app }: StackContext) {
 }
 ```
 
-We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `services/functions/lambda.ts` will get invoked.
+We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `packages/functions/src/lambda.ts` will get invoked.
 
-{%change%} Your `services/functions/lambda.ts` should look something like this.
+{%change%} Your `packages/functions/src/lambda.ts` should look something like this.
 
 ```ts
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
@@ -106,9 +106,9 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
 
 ## Setting up our app with Datadog
 
-Now let's setup [Datadog](https://www.datadoghq.com/) to monitor our API. Make sure [Datadog](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=roledelegation#setup) has been configured with your AWS account.
+Now let's setup [Datadog](https://www.datadoghq.com/) to monitor our API. Make sure [Datadog](https://docs.datadoghq.com/integrations/amazon_web_packages/?tab=roledelegation#setup) has been configured with your AWS account.
 
-{%change%} Run the following in the `services/` directory.
+{%change%} Run the following in the `packages/` directory.
 
 ```bash
 $ npm install --save-dev datadog-cdk-constructs-v2

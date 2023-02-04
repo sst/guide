@@ -27,7 +27,7 @@ In this example, we will look at how to add Facebook Login to Your Cognito User 
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=minimal/typescript-starter api-oauth-facebook
+$ npx create-sst@latest --template=base/monorepo api-oauth-facebook
 $ cd api-oauth-facebook
 $ npm install
 ```
@@ -50,9 +50,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `services/` — App Code
+2. `packages/` — App Code
 
-   The code that's run when your API is invoked is placed in the `services/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
 
 ## Setting up the Cognito
 
@@ -214,7 +214,7 @@ By default, all routes have the authorization type `JWT`. This means the caller 
 
 Let's create two functions, one handling the public route, and the other for the private route.
 
-{%change%} Add a `services/functions/public.ts`.
+{%change%} Add a `packages/functions/src/public.ts`.
 
 ```ts
 export async function handler() {
@@ -225,7 +225,7 @@ export async function handler() {
 }
 ```
 
-{%change%} Add a `services/functions/private.ts`.
+{%change%} Add a `packages/functions/src/private.ts`.
 
 ```ts
 import { APIGatewayProxyHandlerV2WithJWTAuthorizer } from "aws-lambda";

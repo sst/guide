@@ -26,7 +26,7 @@ In this example we will look at how to use PostgreSQL in our serverless app usin
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=minimal/typescript-starter rest-api-postgresql
+$ npx create-sst@latest --template=base/monorepo rest-api-postgresql
 $ cd rest-api-postgresql
 $ npm install
 ```
@@ -49,9 +49,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `services/` — App Code
+2. `packages/` — App Code
 
-   The code that's run when your API is invoked is placed in the `services/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
 
 ## Adding PostgreSQL
 
@@ -69,7 +69,7 @@ export function MyStack({ stack }: StackContext) {
   const cluster = new RDS(stack, "Cluster", {
     engine: "postgresql10.14",
     defaultDatabaseName: DATABASE,
-    migrations: "services/migrations",
+    migrations: "packages/migrations",
   });
 }
 ```
@@ -82,9 +82,9 @@ The `migrations` prop should point to the folder where your migration files are.
 
 Let's create a migration file that creates a table called `tblcounter`.
 
-Create a `migrations` folder inside the `services/` folder.
+Create a `migrations` folder inside the `packages/` folder.
 
-Let's write our first migration file, create a new file called `first.mjs` inside the newly created `services/migrations` folder and paste the below code.
+Let's write our first migration file, create a new file called `first.mjs` inside the newly created `packages/migrations` folder and paste the below code.
 
 ```js
 import { Kysely } from "kysely";
@@ -143,7 +143,7 @@ stack.addOutputs({
 });
 ```
 
-Our [API]({{ site.docs_url }}/constructs/Api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `services/functions/lambda.ts` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/Api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `packages/functions/src/lambda.ts` will get invoked.
 
 We'll also bind our database cluster to our API.
 
@@ -151,7 +151,7 @@ We'll also bind our database cluster to our API.
 
 Now in our function, we'll start by reading from our PostgreSQL database.
 
-{%change%} Replace `services/functions/lambda.ts` with the following.
+{%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
 ```ts
 import { RDSDataService } from "aws-sdk";
@@ -198,7 +198,7 @@ We are using the [Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraU
 
 For now we'll get the number of hits from a table called `tblcounter` and return it.
 
-{%change%} Let's install the `kysely` and `kysely-data-api` in the `services/` folder.
+{%change%} Let's install the `kysely` and `kysely-data-api` in the `packages/` folder.
 
 ```bash
 $ npm install kysely kysely-data-api
@@ -280,7 +280,7 @@ You should see a `0` in the response body.
 
 So let's update our table with the hits.
 
-{%change%} Add this above the `return` statement in `services/functions/lambda.ts`.
+{%change%} Add this above the `return` statement in `packages/functions/src/lambda.ts`.
 
 ```ts
 await db

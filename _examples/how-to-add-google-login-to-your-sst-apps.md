@@ -26,7 +26,7 @@ In this example, we will look at how to add Google Login to your serverless app 
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=minimal/typescript-starter api-sst-auth-google
+$ npx create-sst@latest --template=base/monorepo api-sst-auth-google
 $ cd api-sst-auth-google
 $ npm install
 ```
@@ -49,9 +49,9 @@ An SST app is made up of three parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `services/` — Application code
+2. `packages/` — Application code
 
-   The code that's run when your API is invoked is placed in the `services/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
 
 3. `web/` — Frontend app
 
@@ -168,7 +168,7 @@ Behind the scenes, the `Auth` construct creates a `/auth/*` catch-all route. Bot
 
 Now let's implement the `authenticator` function.
 
-{%change%} Add a file in `services/functions/auth.ts` with the following.
+{%change%} Add a file in `packages/functions/src/auth.ts` with the following.
 
 ```ts
 import { AuthHandler, GoogleAdapter } from "@serverless-stack/node/auth";
@@ -374,7 +374,7 @@ Now, let's implement step 4. In the `onSuccess` callback, we will create a sessi
 
 First, to make creating and retrieving session typesafe, we'll start by defining our session types.
 
-{%change%} Add the following above the `AuthHandler` in `services/functions/auth.ts`.
+{%change%} Add the following above the `AuthHandler` in `packages/functions/src/auth.ts`.
 
 ```ts
 declare module "@serverless-stack/node/auth" {
@@ -642,7 +642,7 @@ Now that the user data is stored in the database; let's create an API endpoint t
  },
 ```
 
-{%change%} Add a file at `services/functions/session.ts`.
+{%change%} Add a file at `packages/functions/src/session.ts`.
 
 ```ts
 import { Table } from "@serverless-stack/node/table";
@@ -841,7 +841,7 @@ When deploying to prod, we need to change our `authenticator` to redirect to the
  });
 ```
 
-{%change%} In `services/functions/auth.ts`, change `redirect` to:
+{%change%} In `packages/functions/src/auth.ts`, change `redirect` to:
 
 ```diff
 -redirect: "http://127.0.0.1:5173",

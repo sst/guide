@@ -27,7 +27,7 @@ In this example, we will look at how to add GitHub Login to Your Cognito User Po
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=minimal/typescript-starter api-oauth-github
+$ npx create-sst@latest --template=base/monorepo api-oauth-github
 $ cd api-oauth-github
 $ npm install
 ```
@@ -50,9 +50,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `services/` — App Code
+2. `packages/` — App Code
 
-   The code that's run when your API is invoked is placed in the `services/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
 
 ## Setting up the Cognito
 
@@ -154,7 +154,7 @@ The `GET /public` is a public endpoint, The `GET /private` route have the author
 
 Let's create four functions, one handling the public route, one handling the private route and the other for the handling GitHub OAuth responses.
 
-{%change%} Add a `services/functions/public.ts`.
+{%change%} Add a `packages/functions/src/public.ts`.
 
 ```ts
 export async function handler() {
@@ -165,7 +165,7 @@ export async function handler() {
 }
 ```
 
-{%change%} Add a `services/functions/private.ts`.
+{%change%} Add a `packages/functions/src/private.ts`.
 
 ```ts
 export async function handler() {
@@ -176,7 +176,7 @@ export async function handler() {
 }
 ```
 
-{%change%} Add a `services/token.ts`.
+{%change%} Add a `packages/token.ts`.
 
 Requesting data from the token endpoint, it will return the following form: `access_token=xxxxxxxxxxxxxxxxxxxxxxx&token_type=bearer`, which is not a JSON. It should be returning a JSON object for OpenID to understand. The below lambda does exactly that.
 
@@ -208,13 +208,13 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
 
 Make sure to install the `node-fetch` and `lambda-multipart-parser` packages.
 
-{%change%} Run the below command in the `services/` folder.
+{%change%} Run the below command in the `packages/` folder.
 
 ```bash
 npm install node-fetch lambda-multipart-parser
 ```
 
-{%change%} Add a `services/user.ts`.
+{%change%} Add a `packages/user.ts`.
 
 User info endpoint uses a different authorization scheme: `Authorization: token OAUTH-TOKEN`. But, OpenID will send a `Bearer` scheme so that's we need a proxy to modify it to correct scheme.
 
