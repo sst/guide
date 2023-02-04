@@ -32,7 +32,7 @@ $ cd api-auth-google
 $ npm install
 ```
 
-By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
+By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
 ```json
 {
@@ -317,7 +317,7 @@ Hello us-east-1:52b11867-4633-4614-ae69-a2872f6a4429!
 
 ## Deploying your API
 
-Now that our API is tested and ready to go. Let's go ahead and deploy it for our users. You'll recall that we were using a `dev` environment, the one specified in your `sst.json`.
+Now that our API is tested and ready to go. Let's go ahead and deploy it for our users. You'll recall that we were using a `dev` environment, the one specified in your `sst.config.ts`.
 
 However, we are going to deploy your API again. But to a different environment, called `prod`. This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
 

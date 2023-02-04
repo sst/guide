@@ -39,7 +39,7 @@ $ cd graphql-appsync
 $ npm install
 ```
 
-By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
+By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
 ```json
 {
@@ -501,7 +501,7 @@ Notice we didn't need to redeploy our app to see the change.
 
 ## Deploying your API
 
-Now that our API is tested, let's deploy it to production. You'll recall that we were using a `dev` environment, the one specified in our `sst.json`. However, we are going to deploy it to a different environment. This ensures that the next time we are developing locally, it doesn't break the API for our users.
+Now that our API is tested, let's deploy it to production. You'll recall that we were using a `dev` environment, the one specified in our `sst.config.ts`. However, we are going to deploy it to a different environment. This ensures that the next time we are developing locally, it doesn't break the API for our users.
 
 {%change%} Run the following in your terminal.
 

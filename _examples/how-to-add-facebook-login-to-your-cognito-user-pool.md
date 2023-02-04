@@ -32,14 +32,20 @@ $ cd api-oauth-facebook
 $ npm install
 ```
 
-By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
+By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```json
-{
-  "name": "api-oauth-facebook",
-  "region": "us-east-1",
-  "main": "stacks/index.ts"
-}
+```js {5-10}
+import { SSTConfig } from "sst";
+import { Api } from "sst/constructs";
+
+export default {
+  config(_input) {
+    return {
+      name: "api-oauth-facebook",
+      region: "us-east-1",
+    };
+  },
+} satisfies SSTConfig;
 ```
 
 ## Project layout

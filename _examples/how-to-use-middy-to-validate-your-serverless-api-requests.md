@@ -35,7 +35,7 @@ $ cd middy-validator
 $ npm install
 ```
 
-By default, our app will be deployed to the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
+By default, our app will be deployed to the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
 ```json
 {

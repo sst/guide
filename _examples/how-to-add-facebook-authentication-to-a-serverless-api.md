@@ -32,14 +32,20 @@ $ cd api-auth-facebook
 $ npm install
 ```
 
-By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
+By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```json
-{
-  "name": "api-auth-facebook",
-  "region": "us-east-1",
-  "main": "stacks/index.ts"
-}
+```js {5-10}
+import { SSTConfig } from "sst";
+import { Api } from "sst/constructs";
+
+export default {
+  config(_input) {
+    return {
+      name: "api-auth-facebook",
+      region: "us-east-1",
+    };
+  },
+} satisfies SSTConfig;
 ```
 
 ## Project layout
@@ -302,7 +308,7 @@ Hello us-east-1:46625265-9c97-420f-a826-15dbc812a008!
 
 ## Deploying your API
 
-Now that our API is tested and ready to go. Let's go ahead and deploy it for our users. You'll recall that we were using a `dev` environment, the one specified in your `sst.json`.
+Now that our API is tested and ready to go. Let's go ahead and deploy it for our users. You'll recall that we were using a `dev` environment, the one specified in your `sst.config.ts`.
 
 However, we are going to deploy your API again. But to a different environment, called `prod`. This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
 

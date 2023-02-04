@@ -31,7 +31,7 @@ $ cd api-auth-cognito
 $ npm install
 ```
 
-By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
+By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
 ```js {5-10}
 import { SSTConfig } from "sst";
@@ -259,7 +259,7 @@ Make sure to set the options with the ones in your `sst start` output.
 - `--app-client-id` => `UserPoolClientId`
 - `--identity-pool-id` => `IdentityPoolId`
 - `--invoke-url` => `ApiEndpoint`
-- `--cognito-region` and `--api-gateway-region`, the region in your `sst.json`
+- `--cognito-region` and `--api-gateway-region`, the region in your `sst.config.ts`
 
 You should now see.
 
@@ -320,7 +320,7 @@ You should see the user id.
 
 ## Deploying your API
 
-Now that our API is tested and ready to go. Let's go ahead and deploy it for our users. You'll recall that we were using a `dev` environment, the one specified in your `sst.json`.
+Now that our API is tested and ready to go. Let's go ahead and deploy it for our users. You'll recall that we were using a `dev` environment, the one specified in your `sst.config.ts`.
 
 However, we are going to deploy your API again. But to a different environment, called `prod`. This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
 
