@@ -97,7 +97,9 @@ GET /private
 GET /public
 ```
 
-By default, all routes have the authorization type `AWS_IAM`. This means the caller of the API needs to have the required IAM permissions. The first is a private endpoint. The second is a public endpoint and its authorization type is overriden to `NONE`.
+By default, all routes have the authorization type `AWS_IAM`. This means the caller of the API needs to have the required IAM permissions. If you want to use JWT access tokens (seperate from this example doc), see the examples in the Constructs docs [here](https://docs.sst.dev/constructs/Api#adding-jwt-authorization).
+
+The first `route` is a private endpoint. The second is a public endpoint and its authorization type is overriden to `NONE`.
 
 ## Setting up authentication
 
