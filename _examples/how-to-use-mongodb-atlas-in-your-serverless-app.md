@@ -18,7 +18,7 @@ In this example we will look at how to use [MongoDB Atlas](https://www.mongodb.c
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -27,14 +27,14 @@ In this example we will look at how to use [MongoDB Atlas](https://www.mongodb.c
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo rest-api-mongodb
+$ npx create-sst@latest --template=base/example rest-api-mongodb
 $ cd rest-api-mongodb
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -64,12 +64,12 @@ An SST app is made up of two parts.
 
 First let's create the API endpoint and connect it to a Lambda function. We'll be using this to query our MongoDB database.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { Api, StackContext } from "@serverless-stack/resources";
+import { Api, StackContext } from "sst/constructs";
 
-export function MyStack({ stack }: StackContext) {
+export function ExampleStack({ stack }: StackContext) {
   // Create a HTTP API
   const api = new Api(stack, "Api", {
     defaults: {
@@ -254,12 +254,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-rest-api-mongodb-my-stack: deploying...
+dev-rest-api-mongodb-ExampleStack: deploying...
 
- ✅  dev-rest-api-mongodb-my-stack
+ ✅  dev-rest-api-mongodb-ExampleStack
 
 
-Stack dev-rest-api-mongodb-my-stack
+Stack dev-rest-api-mongodb-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://4gqqjg6ima.execute-api.us-east-1.amazonaws.com/
@@ -310,10 +310,10 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Once deployed, you should see something like this.
 
 ```bash
- ✅  prod-rest-api-mongodb-my-stack
+ ✅  prod-rest-api-mongodb-ExampleStack
 
 
-Stack prod-rest-api-mongodb-my-stack
+Stack prod-rest-api-mongodb-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://ck198mfop1.execute-api.us-east-1.amazonaws.com

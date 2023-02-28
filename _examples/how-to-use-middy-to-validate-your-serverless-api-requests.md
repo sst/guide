@@ -17,7 +17,7 @@ In this example we will look at how to use the [Middy validator](https://middy.j
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -30,14 +30,14 @@ In this example we will look at how to use the [Middy validator](https://middy.j
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo middy-validator
+$ npx create-sst@latest --template=base/example middy-validator
 $ cd middy-validator
 $ npm install
 ```
 
 By default, our app will be deployed to the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -71,12 +71,12 @@ Our app is made up of a simple API. The API will read two variables from the req
 
 Let's start by adding the API.
 
-{%change%} Add this in `stacks/MyStack.ts`.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { Api, StackContext } from "@serverless-stack/resources";
+import { Api, StackContext } from "sst/constructs";
 
-export function MyStack({ stack }: StackContext) {
+export function ExampleStack({ stack }: StackContext) {
   // Create a HTTP API
   const api = new Api(stack, "Api", {
     routes: {
@@ -131,12 +131,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-middy-validator-my-stack: deploying...
+dev-middy-validator-ExampleStack: deploying...
 
- ✅  dev-middy-validator-my-stack
+ ✅  dev-middy-validator-ExampleStack
 
 
-Stack dev-middy-validator-my-stack
+Stack dev-middy-validator-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://bqoc5prkna.execute-api.us-east-1.amazonaws.com
@@ -361,10 +361,10 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Once deployed, you should see something like this.
 
 ```bash
- ✅  prod-middy-validator-my-stack
+ ✅  prod-middy-validator-ExampleStack
 
 
-Stack prod-middy-validator-my-stack
+Stack prod-middy-validator-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://bqoc5prkna.execute-api.us-east-1.amazonaws.com

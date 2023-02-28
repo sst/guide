@@ -25,7 +25,7 @@ Here is a video of it in action.
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -34,14 +34,14 @@ Here is a video of it in action.
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo bucket-image-resize
+$ npx create-sst@latest --template=base/example bucket-image-resize
 $ cd bucket-image-resize
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -71,13 +71,13 @@ An SST app is made up of two parts.
 
 Let's start by creating a bucket.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { Bucket, StackContext } from "@serverless-stack/resources";
+import { Bucket, StackContext } from "sst/constructs";
 import * as lambda from "aws-cdk-lib/aws-lambda";
 
-export function MyStack({ stack }: StackContext) {
+export function ExampleStack({ stack }: StackContext) {
   // Create a new bucket
   const bucket = new Bucket(stack, "Bucket", {
     notifications: {
@@ -237,15 +237,15 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-bucket-image-resize-my-stack: deploying...
+dev-bucket-image-resize-ExampleStack: deploying...
 
- ✅  dev-bucket-image-resize-my-stack
+ ✅  dev-bucket-image-resize-ExampleStack
 
 
-Stack dev-bucket-image-resize-my-stack
+Stack dev-bucket-image-resize-ExampleStack
   Status: deployed
   Outputs:
-    BucketName: dev-bucket-image-resize-my-stack-bucketd7feb781-k3myfpcm6qp1
+    BucketName: dev-bucket-image-resize-ExampleStack-bucketd7feb781-k3myfpcm6qp1
 ```
 
 ## Uploading files

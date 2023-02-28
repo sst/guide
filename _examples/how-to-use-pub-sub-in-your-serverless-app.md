@@ -17,7 +17,7 @@ In this example we will look at how to use SNS to create [a pub/sub system](http
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -26,14 +26,14 @@ In this example we will look at how to use SNS to create [a pub/sub system](http
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo pub-sub
+$ npx create-sst@latest --template=base/example pub-sub
 $ cd pub-sub
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -63,12 +63,12 @@ An SST app is made up of two parts.
 
 [Amazon SNS](https://aws.amazon.com/sns/) is a reliable and high-throughput messaging service. You are charged based on the number of API requests made to SNS. And you won't get charged if you are not using it.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { Api, StackContext, Topic } from "@serverless-stack/resources";
+import { Api, StackContext, Topic } from "sst/constructs";
 
-export function MyStack({ stack }: StackContext) {
+export function ExampleStack({ stack }: StackContext) {
   // Create Topic
   const topic = new Topic(stack, "Ordered", {
     subscribers: {
@@ -84,7 +84,7 @@ This creates an SNS topic using [`Topic`]({{ site.docs_url }}/constructs/Topic).
 
 Now let's add the API.
 
-{%change%} Add this below the `Topic` definition in `stacks/MyStack.ts`.
+{%change%} Add this below the `Topic` definition in `stacks/ExampleStack.ts`.
 
 ```ts
 // Create the HTTP API
@@ -165,12 +165,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-pub-sub-my-stack: deploying...
+dev-pub-sub-ExampleStack: deploying...
 
- ✅  dev-pub-sub-my-stack
+ ✅  dev-pub-sub-ExampleStack
 
 
-Stack dev-pub-sub-my-stack
+Stack dev-pub-sub-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://gevkgi575a.execute-api.us-east-1.amazonaws.com
@@ -198,7 +198,7 @@ Now let's publish a message to our topic.
 
 ```ts
 import AWS from "aws-sdk";
-import { Topic } from "@serverless-stack/node/topic";
+import { Topic } from "sst/node/topic";
 
 const sns = new AWS.SNS();
 

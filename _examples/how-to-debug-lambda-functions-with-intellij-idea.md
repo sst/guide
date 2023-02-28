@@ -27,7 +27,7 @@ Let's look at how.
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -36,14 +36,14 @@ Let's look at how.
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo intellij-idea
+$ npx create-sst@latest --template=base/example intellij-idea
 $ cd intellij-idea
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -73,12 +73,12 @@ An SST app is made up of two parts.
 
 For this example we'll be testing using a simple API endpoint.
 
-Our API is defined in the `stacks/MyStack.ts`.
+Our API is defined in the `stacks/ExampleStack.ts`.
 
 ```ts
-import { Api, StackContext } from "@serverless-stack/resources";
+import { Api, StackContext } from "sst/constructs";
 
-export function MyStack({ stack }: StackContext) {
+export function ExampleStack({ stack }: StackContext) {
   // Create a HTTP API
   const api = new Api(stack, "Api", {
     routes: {
@@ -168,12 +168,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-intellij-idea-my-stack: deploying...
+dev-intellij-idea-ExampleStack: deploying...
 
- ✅  dev-intellij-idea-my-stack
+ ✅  dev-intellij-idea-ExampleStack
 
 
-Stack dev-intellij-idea-my-stack
+Stack dev-intellij-idea-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://siyp617yh1.execute-api.us-east-1.amazonaws.com

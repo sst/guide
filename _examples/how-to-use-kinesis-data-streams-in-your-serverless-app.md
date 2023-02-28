@@ -17,7 +17,7 @@ In this example we will look at how to create a Kinesis Data Stream in our serve
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -26,14 +26,14 @@ In this example we will look at how to create a Kinesis Data Stream in our serve
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo kinesisstream
+$ npx create-sst@latest --template=base/example kinesisstream
 $ cd kinesisstream
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -63,12 +63,12 @@ An SST app is made up of two parts.
 
 [Amazon Kinesis Data Streams](https://aws.amazon.com/kinesis/data-streams/) is a serverless streaming data service that makes it easy to capture, process, and store data streams at any scale. And you won't get charged if you are not using it.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { Api, KinesisStream, StackContext } from "@serverless-stack/resources";
+import { Api, KinesisStream, StackContext } from "sst/constructs";
 
-export function MyStack({ stack }: StackContext) {
+export function ExampleStack({ stack }: StackContext) {
   // create a kinesis stream
   const stream = new KinesisStream(stack, "Stream", {
     consumers: {
@@ -85,7 +85,7 @@ This creates an Kinesis Data Stream using [`KinesisStream`]({{ site.docs_url }}/
 
 Now let's add the API.
 
-{%change%} Add this below the `KinesisStream` definition in `stacks/MyStack.ts`.
+{%change%} Add this below the `KinesisStream` definition in `stacks/ExampleStack.ts`.
 
 ```ts
 // Create a HTTP API
@@ -165,12 +165,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-kinesisstream-my-stack: deploying...
+dev-kinesisstream-ExampleStack: deploying...
 
- ✅  dev-kinesisstream-my-stack
+ ✅  dev-kinesisstream-ExampleStack
 
 
-Stack dev-kinesisstream-my-stack
+Stack dev-kinesisstream-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://i8ia1epqnh.execute-api.us-east-1.amazonaws.com
@@ -198,7 +198,7 @@ Now let's send a message to our Kinesis Data Stream.
 
 ```ts
 import AWS from "aws-sdk";
-import { KinesisStream } from "@serverless-stack/node/kinesis-stream";
+import { KinesisStream } from "sst/node/kinesis-stream";
 
 const stream = new AWS.Kinesis();
 

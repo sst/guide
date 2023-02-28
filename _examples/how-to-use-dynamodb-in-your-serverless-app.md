@@ -17,7 +17,7 @@ In this example we will look at how to use DynamoDB in our serverless app using 
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -26,14 +26,14 @@ In this example we will look at how to use DynamoDB in our serverless app using 
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo rest-api-dynamodb
+$ npx create-sst@latest --template=base/example rest-api-dynamodb
 $ cd rest-api-dynamodb
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -63,17 +63,12 @@ An SST app is made up of two parts.
 
 [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) is a reliable and highly-performant NoSQL database that can be configured as a true serverless database. Meaning that it'll scale up and down automatically. And you won't get charged if you are not using it.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import {
-  Api,
-  ReactStaticSite,
-  StackContext,
-  Table,
-} from "@serverless-stack/resources";
+import { Api, ReactStaticSite, StackContext, Table } from "sst/constructs";
 
-export function MyStack({ stack }: StackContext) {
+export function ExampleStack({ stack }: StackContext) {
   // Create the table
   const table = new Table(stack, "Counter", {
     fields: {
@@ -94,7 +89,7 @@ This creates a serverless DynamoDB table using [`Table`]({{ site.docs_url }}/con
 
 Now let's add the API.
 
-{%change%} Add this below the `Table` definition in `stacks/MyStack.ts`.
+{%change%} Add this below the `Table` definition in `stacks/ExampleStack.ts`.
 
 ```ts
 // Create the HTTP API
@@ -128,7 +123,7 @@ Now in our function, we'll start by reading from our DynamoDB table.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
-import { Table } from "@serverless-stack/node/table";
+import { Table } from "sst/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
@@ -183,12 +178,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-rest-api-dynamodb-my-stack: deploying...
+dev-rest-api-dynamodb-ExampleStack: deploying...
 
- ✅  dev-rest-api-dynamodb-my-stack
+ ✅  dev-rest-api-dynamodb-ExampleStack
 
 
-Stack dev-rest-api-dynamodb-my-stack
+Stack dev-rest-api-dynamodb-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://u3nnmgdigh.execute-api.us-east-1.amazonaws.com

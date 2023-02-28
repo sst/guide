@@ -17,7 +17,7 @@ In this example we will look at how to add Google authentication to a serverless
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 - A [Google API project](https://console.developers.google.com/apis)
@@ -27,14 +27,14 @@ In this example we will look at how to add Google authentication to a serverless
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo api-auth-google
+$ npx create-sst@latest --template=base/example api-auth-google
 $ cd api-auth-google
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -64,12 +64,12 @@ An SST app is made up of two parts.
 
 Let's start by setting up an API.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { Api, Cognito, StackContext } from "@serverless-stack/resources";
+import { Api, Cognito, StackContext } from "sst/constructs";
 
-export function MyStack({ stack }: StackContext) {
+export function ExampleStack({ stack }: StackContext) {
   // Create Api
   const api = new Api(stack, "Api", {
     defaults: {
@@ -104,7 +104,7 @@ To secure our APIs we are adding the authorization type `AWS_IAM`. This means th
 
 Now let's add authentication for our serverless app.
 
-{%change%} Add this below the `Api` definition in `stacks/MyStack.ts`. Make sure to replace the `clientId` with that of your Google API project.
+{%change%} Add this below the `Api` definition in `stacks/ExampleStack.ts`. Make sure to replace the `clientId` with that of your Google API project.
 
 ```ts
 // Create auth provider
@@ -188,12 +188,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-api-auth-google-my-stack: deploying...
+dev-api-auth-google-ExampleStack: deploying...
 
- ✅  dev-api-auth-google-my-stack
+ ✅  dev-api-auth-google-ExampleStack
 
 
-Stack dev-api-auth-google-my-stack
+Stack dev-api-auth-google-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://aueschz6ba.execute-api.us-east-1.amazonaws.com

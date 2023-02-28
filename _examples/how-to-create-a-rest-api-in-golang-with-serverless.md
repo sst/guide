@@ -17,7 +17,7 @@ In this example we'll look at how to create a serverless REST API with Golang on
 
 ## Requirements
 
-- Node.js >= 10.15.1 for our CDK code
+- Node.js 16 or later for our CDK code
 - Golang 1.16 or similar for our Lambda code
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -33,7 +33,7 @@ $ npm install
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -63,12 +63,12 @@ An SST app is made up of two parts.
 
 Let's start by setting up the routes for our API.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { Api, StackContext } from "@serverless-stack/resources";
+import { Api, StackContext } from "sst/constructs";
 
-export function MyStack({ stack }: StackContext) {
+export function ExampleStack({ stack }: StackContext) {
   // Create the HTTP API
   const api = new Api(stack, "Api", {
     routes: {
@@ -265,12 +265,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-manitej-rest-api-go-my-stack: deploying...
+dev-rest-api-go-ExampleStack: deploying...
 
- ✅  manitej-rest-api-go-my-stack
+ ✅  dev-rest-api-go-ExampleStack
 
 
-Stack manitej-rest-api-go-my-stack
+Stack dev-rest-api-go-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://rxk5buowgi.execute-api.us-east-1.amazonaws.com
@@ -341,10 +341,10 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Once deployed, you should see something like this.
 
 ```bash
- ✅  prod-rest-api-go-my-stack
+ ✅  prod-rest-api-go-ExampleStack
 
 
-Stack prod-rest-api-go-my-stack
+Stack prod-rest-api-go-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://ck198mfop1.execute-api.us-east-1.amazonaws.com

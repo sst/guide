@@ -17,7 +17,7 @@ In this example, we will look at how to add Facebook Login to your serverless ap
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -26,14 +26,14 @@ In this example, we will look at how to add Facebook Login to your serverless ap
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo api-sst-auth-facebook
+$ npx create-sst@latest --template=base/example api-sst-auth-facebook
 $ cd api-sst-auth-facebook
 $ npm install
 ```
 
 By default, our app will be deployed to the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -138,7 +138,7 @@ Next, we need to create an **Authorize URL** to initiate the auth flow.
 
 We are going to use the [`Auth`]({{ site.docs_url }}/constructs/Auth) construct. It will help us create both the **Authorize URL** and the **Callback URL**.
 
-{%change%} Add the following below the `Api` construct in `stacks/MyStack.ts`.
+{%change%} Add the following below the `Api` construct in `stacks/ExampleStack.ts`.
 
 ```ts
 const auth = new Auth(stack, "auth", {
@@ -163,8 +163,8 @@ We'll also bind the secrets to the **authenticator** function. It allows the fun
 {%change%} Also remember to import the `Auth` and `Config` construct up top.
 
 ```diff
-- import { StackContext, Api } from "@serverless-stack/resources";
-+ import { StackContext, Api, Auth, Config } from "@serverless-stack/resources";
+- import { StackContext, Api } from "sst/constructs";
++ import { StackContext, Api, Auth, Config } from "sst/constructs";
 ```
 
 #### Add the auth handler
@@ -174,8 +174,8 @@ Now let's implement the `authenticator` function.
 {%change%} Add a file in `packages/functions/src/auth.ts` with the following.
 
 ```ts
-import { Config } from "@serverless-stack/node/config";
-import { AuthHandler, FacebookAdapter } from "@serverless-stack/node/auth";
+import { Config } from "sst/node/config";
+import { AuthHandler, FacebookAdapter } from "sst/node/auth";
 
 export const handler = AuthHandler({
   providers: {
@@ -194,7 +194,7 @@ export const handler = AuthHandler({
 });
 ```
 
-The `@serverless-stack/node` package provides helper libraries used in Lambda functions. In the snippet above, we are using the package to create an `AuthHandler` with a `FacebookAdapter` named `facebook`. This creates two routes behind the scenes:
+The `sst/node` package provides helper libraries used in Lambda functions. In the snippet above, we are using the package to create an `AuthHandler` with a `FacebookAdapter` named `facebook`. This creates two routes behind the scenes:
 
 - **Authorize URL** at `/auth/facebook/authorize`
 - **Callback URL** at `/auth/facebook/callback`
@@ -209,7 +209,7 @@ Next, we are going to add a **Sign in with Facebook** button to our frontend. An
 
 To deploy a React app to AWS, we'll be using the SST [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) construct.
 
-{%change%} Add the following above the `Auth` construct in `stacks/MyStack.ts`.
+{%change%} Add the following above the `Auth` construct in `stacks/ExampleStack.ts`.
 
 ```ts
 const site = new ViteStaticSite(stack, "site", {
@@ -236,8 +236,8 @@ We are also setting up [build time React environment variables](https://vitejs.d
 {%change%} Also remember to import the `ViteStaticSite` construct up top.
 
 ```diff
-- import { StackContext, Api, Auth } from "@serverless-stack/resources";
-+ import { StackContext, Api, Auth, Config, ViteStaticSite } from "@serverless-stack/resources";
+- import { StackContext, Api, Auth } from "sst/constructs";
++ import { StackContext, Api, Auth, Config, ViteStaticSite } from "sst/constructs";
 ```
 
 ## Create the frontend
@@ -294,7 +294,7 @@ The first time `sst start` runs, it can take a couple of minutes to deploy your 
 After `sst start` starts up, you will see the following output in your terminal.
 
 ```
-Stack frank-api-sst-auth-facebook-MyStack
+Stack frank-api-sst-auth-facebook-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://2wk0bl6b7i.execute-api.us-east-1.amazonaws.com
@@ -379,7 +379,7 @@ First, to make creating and retrieving session typesafe, we'll start by defining
 {%change%} Add the following above the `AuthHandler` in `packages/functions/src/auth.ts`.
 
 ```ts
-declare module "@serverless-stack/node/auth" {
+declare module "sst/node/auth" {
   export interface SessionTypes {
     user: {
       userID: string;
@@ -431,8 +431,8 @@ The `Session.parameter` call encrypts the given session object to generate a tok
 {%change%} Also import the `Session` up top.
 
 ```diff
-- import { AuthHandler, FacebookAdapter } from "@serverless-stack/node/auth";
-+ import { AuthHandler, FacebookAdapter, Session } from "@serverless-stack/node/auth";
+- import { AuthHandler, FacebookAdapter } from "sst/node/auth";
++ import { AuthHandler, FacebookAdapter, Session } from "sst/node/auth";
 ```
 
 ## Use the session
@@ -542,7 +542,7 @@ So far we haven't been storing the data Facebook's been returning through the **
 
 We'll be using the SST [`Table`]({{ site.docs_url }}/constructs/Table) construct.
 
-{%change%} Add the following above the `Api` construct in `stacks/MyStack.ts`.
+{%change%} Add the following above the `Api` construct in `stacks/ExampleStack.ts`.
 
 ```ts
 const table = new Table(stack, "users", {
@@ -571,8 +571,8 @@ const table = new Table(stack, "users", {
 {%change%} Import the `Table` construct up top.
 
 ```diff
-- import { StackContext, Api, Auth, Config, ViteStaticSite } from "@serverless-stack/resources";
-+ import { StackContext, Api, Auth, Config, ViteStaticSite, Table } from "@serverless-stack/resources";
+- import { StackContext, Api, Auth, Config, ViteStaticSite } from "sst/constructs";
++ import { StackContext, Api, Auth, Config, ViteStaticSite, Table } from "sst/constructs";
 ```
 
 #### Store the claims
@@ -622,7 +622,7 @@ This is saving the `claims` we get from Facebook in our DynamoDB table.
 ```ts
 import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb";
 import { marshall } from "@aws-sdk/util-dynamodb";
-import { Table } from "@serverless-stack/node/table";
+import { Table } from "sst/node/table";
 ```
 
 {%change%} And finally install these packages inside the `/services` directory.
@@ -637,7 +637,7 @@ Now that the user data is stored in the database; let's create an API endpoint t
 
 #### Create a session API
 
-{%change%} Add a `/session` route in the `Api` construct's routes definition in `stacks/MyStacks.ts`.
+{%change%} Add a `/session` route in the `Api` construct's routes definition in `stacks/ExampleStacks.ts`.
 
 ```diff
  routes: {
@@ -649,9 +649,9 @@ Now that the user data is stored in the database; let's create an API endpoint t
 {%change%} Add a file at `packages/functions/src/session.ts`.
 
 ```ts
-import { Table } from "@serverless-stack/node/table";
-import { ApiHandler } from "@serverless-stack/node/api";
-import { useSession } from "@serverless-stack/node/auth";
+import { Table } from "sst/node/table";
+import { ApiHandler } from "sst/node/api";
+import { useSession } from "sst/node/auth";
 import { DynamoDBClient, GetItemCommand } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
@@ -845,7 +845,7 @@ A good practice here is to create two Facebook apps, one for your live users and
 
 We also need to change our `authenticator` to redirect to the deployed frontend URL instead of `127.0.0.1`.
 
-{%change%} In `stacks/MyStack.ts`, make this change to the `Auth` construct.
+{%change%} In `stacks/ExampleStack.ts`, make this change to the `Auth` construct.
 
 ```diff
  const auth = new Auth(stack, "auth", {
@@ -872,7 +872,7 @@ Note that when we are developing locally via `sst start`, the `IS_LOCAL` environ
 {%change%} Also remember to import the `ViteStaticSite` construct up top.
 
 ```ts
-import { ViteStaticSite } from "@serverless-stack/node/site";
+import { ViteStaticSite } from "sst/node/site";
 ```
 
 {%change%} To wrap things up we'll deploy our app to prod.
@@ -886,7 +886,7 @@ This allows us to separate our environments, so that when we are developing loca
 Once deployed, you should see something like this.
 
 ```bash
-Stack prod-api-sst-auth-facebook-MyStack
+Stack prod-api-sst-auth-facebook-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://jd8jpfjue6.execute-api.us-east-1.amazonaws.com

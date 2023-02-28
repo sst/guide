@@ -17,7 +17,7 @@ In this example we will look at how to use [Lumigo](https://lumigo.io/) to monit
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 - A [Lumigo account](https://platform.lumigo.io/signup) and that's [configured with your AWS account](https://platform.lumigo.io/wizard)
@@ -33,14 +33,14 @@ Let's look at how to set this up.
 {%change%} Start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo lumigo
+$ npx create-sst@latest --template=base/example lumigo
 $ cd lumigo
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -74,13 +74,13 @@ Our app is going to be a simple API that returns a _Hello World_ response.
 
 Let's add the API.
 
-{%change%} Add this in `stacks/MyStack.ts`.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { Api, StackContext } from "@serverless-stack/resources";
+import { Api, StackContext } from "sst/constructs";
 import * as cdk from "aws-cdk-lib";
 
-export function MyStack({ stack, app }: StackContext) {
+export function ExampleStack({ stack, app }: StackContext) {
   // Create a HTTP API
   const api = new Api(stack, "Api", {
     routes: {
@@ -117,7 +117,7 @@ Now let's setup [Lumigo](https://lumigo.io/) to monitor our API. Make sure [Lumi
 
 To enable Lambda monitoring for a function, add a `lumigo:auto-trace` tag and set it to `true`.
 
-{%change%} Add the following above `stack.addOutputs` in `stacks/MyStack.ts`.
+{%change%} Add the following above `stack.addOutputs` in `stacks/ExampleStack.ts`.
 
 ```ts
 // Enable auto trace only in prod
@@ -146,10 +146,10 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Once deployed, you should see something like this.
 
 ```bash
- ✅  prod-lumigo-my-stack
+ ✅  prod-lumigo-ExampleStack
 
 
-Stack prod-lumigo-my-stack
+Stack prod-lumigo-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://k40qchmtvf.execute-api.ap-south-1.amazonaws.com

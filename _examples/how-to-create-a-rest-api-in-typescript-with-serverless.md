@@ -17,7 +17,7 @@ In this example we'll look at how to create a serverless REST API with TypeScrip
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -26,14 +26,14 @@ In this example we'll look at how to create a serverless REST API with TypeScrip
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo rest-api-ts
+$ npx create-sst@latest --template=base/example rest-api-ts
 $ cd rest-api-ts
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -63,33 +63,29 @@ An SST app is made up of two parts.
 
 Let's start by setting up the routes for our API.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import * as sst from "@serverless-stack/resources";
+import { api, stackcontext } from "sst/constructs";
 
-export default class MyStack extends sst.Stack {
-  constructor(scope: sst.App, id: string, props?: sst.StackProps) {
-    super(scope, id, props);
+export function examplestack({ stack }: stackcontext) {
+  // create the http api
+  const api = new api(stack, "api", {
+    routes: {
+      "get /notes": "packages/functions/src/list.main",
+      "get /notes/{id}": "packages/functions/src/get.main",
+      "put /notes/{id}": "packages/functions/src/update.main",
+    },
+  });
 
-    // Create the HTTP API
-    const api = new Api(stack, "Api", {
-      routes: {
-        "GET /notes": "src/list.handler",
-        "GET /notes/{id}": "src/get.handler",
-        "PUT /notes/{id}": "src/update.handler",
-      },
-    });
-
-    // Show the API endpoint in the output
-    stack.addOutputs({
-      ApiEndpoint: api.url,
-    });
-  }
+  // show the api endpoint in the output
+  stack.addoutputs({
+    apiendpoint: api.url,
+  });
 }
 ```
 
-We are creating an API here using the [`Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding three routes to it.
+we are creating an api here using the [`api`]({{ site.docs_url }}/constructs/api) construct. and we are adding three routes to it.
 
 ```
 GET /notes
@@ -240,12 +236,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-manitej-rest-api-ts-my-stack: deploying...
+dev-rest-api-ts-ExampleStack: deploying...
 
- ✅  manitej-rest-api-ts-my-stack
+ ✅  dev-rest-api-ts-ExampleStack
 
 
-Stack manitej-rest-api-ts-my-stack
+Stack dev-rest-api-ts-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://rxk5buowgi.execute-api.us-east-1.amazonaws.com
@@ -318,10 +314,10 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Once deployed, you should see something like this.
 
 ```bash
- ✅  prod-rest-api-ts-my-stack
+ ✅  prod-rest-api-ts-ExampleStack
 
 
-Stack prod-rest-api-ts-my-stack
+Stack prod-rest-api-ts-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://ck198mfop1.execute-api.us-east-1.amazonaws.com

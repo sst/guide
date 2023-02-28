@@ -17,7 +17,7 @@ In this example we will look at how to use [Datadog](https://www.datadoghq.com/)
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 - A [Datadog account](https://app.datadoghq.com/signup) and that's [configured with your AWS account](https://docs.datadoghq.com/integrations/amazon_web_packages/?tab=roledelegation#setup)
@@ -33,14 +33,14 @@ Let's look at how to set this up.
 {%change%} Start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo datadog
+$ npx create-sst@latest --template=base/example datadog
 $ cd datadog
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -74,12 +74,12 @@ Our app is going to be a simple API that returns a _Hello World_ response.
 
 Let's add the API.
 
-{%change%} Add this in `stacks/MyStack.ts`.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { StackContext, Api } from "@serverless-stack/resources";
+import { StackContext, Api } from "sst/constructs";
 
-export function MyStack({ stack, app }: StackContext) {
+export function ExampleStack({ stack, app }: StackContext) {
   // Create a HTTP API
   const api = new Api(stack, "Api", {
     routes: {
@@ -134,7 +134,7 @@ Note that, this file should not be committed to Git. If you are deploying the ap
 
 Next, you'll need to import it into the stack and pass in the functions you want monitored.
 
-{%change%} Add the following above the `stack.addOutputs` line in `stacks/MyStack.ts`.
+{%change%} Add the following above the `stack.addOutputs` line in `stacks/ExampleStack.ts`.
 
 ```ts
 // Configure Datadog only in prod
@@ -172,10 +172,10 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Once deployed, you should see something like this.
 
 ```bash
- ✅  prod-datadog-my-stack
+ ✅  prod-datadog-ExampleStack
 
 
-Stack prod-datadog-my-stack
+Stack prod-datadog-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://k40qchmtvf.execute-api.ap-south-1.amazonaws.com

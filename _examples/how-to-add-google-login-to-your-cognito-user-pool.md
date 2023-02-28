@@ -17,7 +17,7 @@ In this example, we will look at how to add Google Login to Your Cognito User Po
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 - A [Google API project](https://console.developers.google.com/apis)
@@ -27,14 +27,14 @@ In this example, we will look at how to add Google Login to Your Cognito User Po
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo api-oauth-google
+$ npx create-sst@latest --template=base/example api-oauth-google
 $ cd api-oauth-google
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -64,18 +64,13 @@ An SST app is made up of two parts.
 
 First, let's create a [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to store the user info using the [`Cognito`]({{ site.docs_url }}/constructs/Cognito) construct
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
 import * as cognito from "aws-cdk-lib/aws-cognito";
-import {
-  Api,
-  Cognito,
-  StackContext,
-  ViteStaticSite,
-} from "@serverless-stack/resources";
+import { Api, Cognito, StackContext, ViteStaticSite } from "sst/constructs";
 
-export function MyStack({ stack, app }: StackContext) {
+export function ExampleStack({ stack, app }: StackContext) {
   // Create auth
   const auth = new Cognito(stack, "Auth", {
     cdk: {
@@ -118,7 +113,7 @@ GOOGLE_CLIENT_ID=<YOUR_GOOGLE_CLIENT_ID>
 GOOGLE_CLIENT_SECRET=<YOUR_GOOGLE_CLIENT_SECRET>
 ```
 
-{%change%} Add this below the `Cognito` definition in `stacks/MyStack.ts`.
+{%change%} Add this below the `Cognito` definition in `stacks/ExampleStack.ts`.
 
 ```ts
 // Throw error if client ID & secret are not provided
@@ -147,7 +142,7 @@ This creates a Google identity provider with the given scopes and links the crea
 
 Now let's associate a Cognito domain to the user pool, which can be used for sign-up and sign-in webpages.
 
-{%change%} Add below code in `stacks/MyStack.ts`.
+{%change%} Add below code in `stacks/ExampleStack.ts`.
 
 ```ts
 // Create a cognito userpool domain
@@ -162,7 +157,7 @@ Note, the `domainPrefix` need to be globally unique across all AWS accounts in a
 
 ## Setting up the API
 
-{%change%} Replace the `Api` definition with the following in `stacks/MyStacks.ts`.
+{%change%} Replace the `Api` definition with the following in `stacks/ExampleStacks.ts`.
 
 ```ts
 // Create a HTTP API
@@ -315,17 +310,17 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-manitej-api-oauth-google-my-stack: deploying...
+dev-api-oauth-google-ExampleStack: deploying...
 
- ✅  manitej-api-oauth-google-my-stack
+ ✅  dev-api-oauth-google-ExampleStack
 
 
-Stack manitej-api-oauth-google-my-stack
+Stack dev-api-oauth-google-ExampleStack
   Status: deployed
   Outputs:
     api_url: https://v0l1zlpy5f.execute-api.us-east-1.amazonaws.com
     auth_client_id: 253t1t5o6jjur88nu4t891eac2
-    auth_domain: manitej-demo-auth-domain
+    auth_domain: dev-demo-auth-domain
     site_url: https://d1567f41smqk8b.cloudfront.net
 ```
 
@@ -619,10 +614,10 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Once deployed, you should see something like this.
 
 ```bash
- ✅  prod-api-oauth-google-my-stack
+ ✅  prod-api-oauth-google-ExampleStack
 
 
-Stack prod-api-oauth-google-my-stack
+Stack prod-api-oauth-google-ExampleStack
   Status: deployed
   Outputs:
     api_url: https://ck198mfop1.execute-api.us-east-1.amazonaws.com

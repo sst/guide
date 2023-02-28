@@ -17,7 +17,7 @@ In this example we will look at how to use EventBus to create [an EventBridge sy
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -26,14 +26,14 @@ In this example we will look at how to use EventBus to create [an EventBridge sy
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo eventbus
+$ npx create-sst@latest --template=base/example eventbus
 $ cd eventbus
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -63,12 +63,12 @@ An SST app is made up of two parts.
 
 [Amazon EventBridge](https://aws.amazon.com/eventbridge/) is a serverless event bus that makes it easier to build event-driven applications at scale using events generated from your applications, integrated Software-as-a-Service (SaaS) applications, and AWS services.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { Api, EventBus, StackContext } from "@serverless-stack/resources";
+import { Api, EventBus, StackContext } from "sst/constructs";
 
-export function MyStack({ stack }: StackContext) {
+export function ExampleStack({ stack }: StackContext) {
   const bus = new EventBus(stack, "Ordered", {
     rules: {
       rule1: {
@@ -92,7 +92,7 @@ This creates an EventBridge EventBus using [`EventBus`]({{ site.docs_url }}/cons
 
 Now let's add the API.
 
-{%change%} Add this below the `EventBus` definition in `stacks/MyStack.ts`.
+{%change%} Add this below the `EventBus` definition in `stacks/ExampleStack.ts`.
 
 ```ts
 // Create a HTTP API
@@ -172,12 +172,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-eventbus-my-stack: deploying...
+dev-eventbus-ExampleStack: deploying...
 
- ✅  dev-eventbus-my-stack
+ ✅  dev-eventbus-ExampleStack
 
 
-Stack dev-eventbus-my-stack
+Stack dev-eventbus-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://gevkgi575a.execute-api.us-east-1.amazonaws.com
@@ -205,7 +205,7 @@ Now let's publish a event to our EventBus.
 
 ```ts
 import AWS from "aws-sdk";
-import { EventBus } from "@serverless-stack/node/event-bus";
+import { EventBus } from "sst/node/event-bus";
 
 const client = new AWS.EventBridge();
 

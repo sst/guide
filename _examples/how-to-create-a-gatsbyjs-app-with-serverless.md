@@ -17,7 +17,7 @@ In this example we will look at how to use [Gatsby](https://www.gatsbyjs.com/) w
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -26,14 +26,14 @@ In this example we will look at how to use [Gatsby](https://www.gatsbyjs.com/) w
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo gatsby-app
+$ npx create-sst@latest --template=base/example gatsby-app
 $ cd gatsby-app
 $ npm install
 ```
 
 By default, our app will be deployed to the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -71,17 +71,12 @@ Our app is made up of a simple API and a Gatsby app. The API will be talking to 
 
 We'll be using [Amazon DynamoDB](https://aws.amazon.com/dynamodb/); a reliable and highly-performant NoSQL database that can be configured as a true serverless database. Meaning that it'll scale up and down automatically. And you won't get charged if you are not using it.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import {
-  Api,
-  StaticSite,
-  StackContext,
-  Table,
-} from "@serverless-stack/resources";
+import { Api, StaticSite, StackContext, Table } from "sst/constructs";
 
-export function MyStack({ stack }: StackContext) {
+export function ExampleStack({ stack }: StackContext) {
   // Create the table
   const table = new Table(stack, "Counter", {
     fields: {
@@ -102,7 +97,7 @@ This creates a serverless DynamoDB table using the SST [`Table`]({{ site.docs_ur
 
 Now let's add the API.
 
-{%change%} Add this below the `Table` definition in `stacks/MyStack.ts`.
+{%change%} Add this below the `Table` definition in `stacks/ExampleStack.ts`.
 
 ```ts
 // Create the HTTP API
@@ -132,7 +127,7 @@ We'll also bind our table to our API. It allows our API to access (read and writ
 
 To deploy a Gatsby app to AWS, we'll be using the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite#creating-a-gatsby-site) construct.
 
-{%change%} Replace the following in `stacks/MyStack.ts`:
+{%change%} Replace the following in `stacks/ExampleStack.ts`:
 
 ```ts
 // Show the API endpoint in the output
@@ -193,7 +188,7 @@ Our API is powered by a Lambda function. In the function we'll read from our Dyn
 
 ```ts
 import { DynamoDB } from "aws-sdk";
-import { Table } from "@serverless-stack/node/table";
+import { Table } from "sst/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
@@ -248,12 +243,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-gatsby-app-my-stack: deploying...
+dev-gatsby-app-ExampleStack: deploying...
 
- ✅  dev-gatsby-app-my-stack
+ ✅  dev-gatsby-app-ExampleStack
 
 
-Stack dev-gatsby-app-my-stack
+Stack dev-gatsby-app-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://sez1p3dsia.execute-api.ap-south-1.amazonaws.com
@@ -420,10 +415,10 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Once deployed, you should see something like this.
 
 ```bash
- ✅  prod-gatsby-app-my-stack
+ ✅  prod-gatsby-app-ExampleStack
 
 
-Stack prod-gatsby-app-my-stack
+Stack prod-gatsby-app-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://k40qchmtvf.execute-api.ap-south-1.amazonaws.com

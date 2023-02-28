@@ -17,7 +17,7 @@ In this example we will look at how to add JWT authorization with [Auth0](https:
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 - An [Auth0 account](https://auth0.com)
@@ -27,14 +27,14 @@ In this example we will look at how to add JWT authorization with [Auth0](https:
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo api-auth-jwt-auth0
+$ npx create-sst@latest --template=base/example api-auth-jwt-auth0
 $ cd api-auth-jwt-auth0
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -89,14 +89,14 @@ Note, after deployment you need to replace these values with the deployed URL.
 
 Let's start by setting up an API.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 Note that, the `issuer` option **ends with a trailing slash** (`/`).
 
 ```ts
-import { StackContext, Api } from "@serverless-stack/resources";
+import { StackContext, Api } from "sst/constructs";
 
-export function MyStack({ stack, app }: StackContext) {
+export function ExampleStack({ stack, app }: StackContext) {
   // Create Api
   const api = new Api(stack, "Api", {
     authorizers: {
@@ -170,7 +170,7 @@ export const main: APIGatewayProxyHandlerV2WithJWTAuthorizer = async (
 
 To deploy a React.js app to AWS, we'll be using the SST [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) construct.
 
-{%change%} Replace the following in `stacks/MyStack.ts`:
+{%change%} Replace the following in `stacks/ExampleStack.ts`:
 
 ```ts
 // Show the API endpoint in the output
@@ -208,7 +208,7 @@ We are going to print out the resources that we created for reference.
 Make sure to import the `ViteStaticSite` construct by adding below line
 
 ```ts
-import { ViteStaticSite } from "@serverless-stack/resources";
+import { ViteStaticSite } from "sst/constructs";
 ```
 
 ## Creating the frontend
@@ -271,12 +271,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-api-auth-jwt-auth0-my-stack: deploying...
+dev-api-auth-jwt-auth0-ExampleStack: deploying...
 
- ✅  dev-api-auth-jwt-auth0-my-stack
+ ✅  dev-api-auth-jwt-auth0-ExampleStack
 
 
-Stack dev-api-auth-jwt-auth0-my-stack
+Stack dev-api-auth-jwt-auth0-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://9ero2xj9cl.execute-api.us-east-1.amazonaws.com

@@ -17,7 +17,7 @@ In this example we will look at how to use [React.js](https://reactjs.org) with 
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -26,14 +26,14 @@ In this example we will look at how to use [React.js](https://reactjs.org) with 
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo react-app
+$ npx create-sst@latest --template=base/example react-app
 $ cd react-app
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -71,17 +71,12 @@ Our app is made up of a simple API and a React.js app. The API will be talking t
 
 We'll be using [Amazon DynamoDB](https://aws.amazon.com/dynamodb/); a reliable and highly-performant NoSQL database that can be configured as a true serverless database. Meaning that it'll scale up and down automatically. And you won't get charged if you are not using it.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import {
-  Api,
-  ReactStaticSite,
-  StackContext,
-  Table,
-} from "@serverless-stack/resources";
+import { Api, ReactStaticSite, StackContext, Table } from "sst/constructs";
 
-export function MyStack({ stack }: StackContext) {
+export function ExampleStack({ stack }: StackContext) {
   // Create the table
   const table = new Table(stack, "Counter", {
     fields: {
@@ -102,7 +97,7 @@ This creates a serverless DynamoDB table using the SST [`Table`]({{ site.docs_ur
 
 Now let's add the API.
 
-{%change%} Add this below the `Table` definition in `stacks/MyStack.ts`.
+{%change%} Add this below the `Table` definition in `stacks/ExampleStack.ts`.
 
 ```ts
 // Create the HTTP API
@@ -132,7 +127,7 @@ We'll also bind our table to our API. It allows our API to access (read and writ
 
 To deploy a React.js app to AWS, we'll be using the SST [`ReactStaticSite`]({{ site.docs_url }}/constructs/ReactStaticSite) construct.
 
-{%change%} Replace the following in `stacks/MyStack.ts`:
+{%change%} Replace the following in `stacks/ExampleStack.ts`:
 
 ```ts
 // Show the API endpoint in the output
@@ -186,7 +181,7 @@ Our API is powered by a Lambda function. In the function we'll read from our Dyn
 
 ```ts
 import { DynamoDB } from "aws-sdk";
-import { Table } from "@serverless-stack/node/table";
+import { Table } from "sst/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
@@ -241,12 +236,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-react-app-my-stack: deploying...
+dev-react-app-ExampleStack: deploying...
 
- ✅  dev-react-app-my-stack
+ ✅  dev-react-app-ExampleStack
 
 
-Stack dev-react-app-my-stack
+Stack dev-react-app-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://51q98mf39e.execute-api.us-east-1.amazonaws.com
@@ -430,10 +425,10 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Once deployed, you should see something like this.
 
 ```bash
- ✅  prod-react-app-my-stack
+ ✅  prod-react-app-ExampleStack
 
 
-Stack prod-react-app-my-stack
+Stack prod-react-app-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://ck198mfop1.execute-api.us-east-1.amazonaws.com

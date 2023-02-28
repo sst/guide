@@ -17,7 +17,7 @@ In this example we will look at how to use [Thundra APM](https://www.thundra.io/
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 - A [Thundra account](https://www.thundra.io) and that's it.
@@ -33,14 +33,14 @@ Let's look at how to set this up.
 {%change%} Start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo thundra
+$ npx create-sst@latest --template=base/example thundra
 $ cd thundra
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -74,12 +74,12 @@ Our app is going to be a simple API that returns a _Hello World_ response.
 
 Let's add the API.
 
-{%change%} Add this in `stacks/MyStack.ts`.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { StackContext, Api } from "@serverless-stack/resources";
+import { StackContext, Api } from "sst/constructs";
 
-export function MyStack({ stack, app }: StackContext) {
+export function ExampleStack({ stack, app }: StackContext) {
   // Create a HTTP API
   const api = new Api(stack, "Api", {
     routes: {
@@ -137,7 +137,7 @@ For this tutorial let's follow the second way.
 
 You can then set the layer for all the functions in your stack using the [`addDefaultFunctionLayers`]({{ site.docs_url }}/constructs/Stack#adddefaultfunctionlayers) and [`addDefaultFunctionEnv`]({{ site.docs_url }}/constructs/Stack#adddefaultfunctionenv). Note we only want to enable this when the function is deployed, and not when using [Live Lambda Dev]({{ site.docs_url }}/live-lambda-development).
 
-{%change%} Add the following above the `api` definiton line in `stacks/MyStack.ts`.
+{%change%} Add the following above the `api` definiton line in `stacks/ExampleStack.ts`.
 
 ```ts
 // Configure thundra to only prod
@@ -175,10 +175,10 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Once deployed, you should see something like this.
 
 ```bash
- ✅  prod-thundra-my-stack
+ ✅  prod-thundra-ExampleStack
 
 
-Stack prod-thundra-my-stack
+Stack prod-thundra-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://k40qchmtvf.execute-api.ap-south-1.amazonaws.com
@@ -243,9 +243,9 @@ module.exports = [
 ];
 ```
 
-And then in `stacks/MyStack.ts` add the below code under the `defaults` in `Api` construct.
+And then in `stacks/ExampleStack.ts` add the below code under the `defaults` in `Api` construct.
 
-{%change%} Replace the following in `stacks/MyStack.ts`:
+{%change%} Replace the following in `stacks/ExampleStack.ts`:
 
 ```ts
 const api = new Api(stack, "Api", {

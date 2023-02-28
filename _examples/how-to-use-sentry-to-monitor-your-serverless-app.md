@@ -17,7 +17,7 @@ In this example we will look at how to use [Sentry](https://www.sentry.io) to mo
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 - A [Sentry account](https://sentry.io/signup/)
@@ -31,14 +31,14 @@ When a serverless app is deployed to production, it's useful to be able to monit
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo sentry
+$ npx create-sst@latest --template=base/example sentry
 $ cd sentry
 $ npm install
 ```
 
 By default, our app will be deployed to the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -72,13 +72,13 @@ Our app is going to be a simple API that returns a _Hello World_ response.
 
 Let's add the API.
 
-{%change%} Add this in `stacks/MyStack.ts`.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
 import { LayerVersion } from "aws-cdk-lib/aws-lambda";
-import { Api, StackContext } from "@serverless-stack/resources";
+import { Api, StackContext } from "sst/constructs";
 
-export function MyStack({ stack, app }: StackContext) {
+export function ExampleStack({ stack, app }: StackContext) {
   // Create a HTTP API
   const api = new Api(stack, "Api", {
     routes: {
@@ -133,7 +133,7 @@ Next, you'll need to add the Sentry Lambda layer in your app.
 
 You can then set the layer for all the functions in your stack using the [`addDefaultFunctionLayers`]({{ site.docs_url }}/constructs/Stack#adddefaultfunctionlayers) and [`addDefaultFunctionEnv`]({{ site.docs_url }}/constructs/Stack#adddefaultfunctionenv). Note we only want to enable this when the function is deployed, and not when using [Live Lambda Dev]({{ site.docs_url }}/live-lambda-development).
 
-{%change%} Add the following below the `super(scope, id, props)` line in `stacks/MyStack.ts`.
+{%change%} Add the following to the top of the `ExampleStack` function in `stacks/ExampleStack.ts`.
 
 ```ts
 // Configure Sentry
@@ -198,12 +198,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-sentry-my-stack: deploying...
+dev-sentry-ExampleStack: deploying...
 
- ✅  dev-sentry-my-stack
+ ✅  dev-sentry-ExampleStack
 
 
-Stack dev-sentry-my-stack
+Stack dev-sentry-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://753gre9wkh.execute-api.us-east-1.amazonaws.com

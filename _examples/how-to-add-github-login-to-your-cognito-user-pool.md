@@ -17,7 +17,7 @@ In this example, we will look at how to add GitHub Login to Your Cognito User Po
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 - A [GitHub OAuth App](https://github.com/settings/applications/new)
@@ -27,14 +27,14 @@ In this example, we will look at how to add GitHub Login to Your Cognito User Po
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo api-oauth-github
+$ npx create-sst@latest --template=base/example api-oauth-github
 $ cd api-oauth-github
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -64,18 +64,13 @@ An SST app is made up of two parts.
 
 First, let's create a [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to store the user info using the [`Cognito`]({{ site.docs_url }}/constructs/Cognito) construct.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import {
-  StackContext,
-  Api,
-  Cognito,
-  ViteStaticSite,
-} from "@serverless-stack/resources";
+import { StackContext, Api, Cognito, ViteStaticSite } from "sst/constructs";
 import * as cognito from "aws-cdk-lib/aws-cognito";
 
-export function MyStack({ stack, app }: StackContext) {
+export function ExampleStack({ stack, app }: StackContext) {
   const auth = new Cognito(stack, "Auth", {
     cdk: {
       userPoolClient: {
@@ -113,7 +108,7 @@ Note, we haven't yet set up GitHub OAuth with our user pool, we'll do it later.
 
 ## Setting up the API
 
-{%change%} Replace the `Api` definition with the following in `stacks/MyStacks.ts`.
+{%change%} Replace the `Api` definition with the following in `stacks/ExampleStacks.ts`.
 
 ```ts
 // Create a HTTP API
@@ -264,7 +259,7 @@ GITHUB_CLIENT_ID=<YOUR_GITHUB_CLIENT_ID>
 GITHUB_CLIENT_SECRET=<YOUR_GITHUB_CLIENT_SECRET>
 ```
 
-{%change%} Add this below the `Auth` definition in `stacks/MyStack.ts`.
+{%change%} Add this below the `Auth` definition in `stacks/ExampleStack.ts`.
 
 ```ts
 // Throw error if client ID & secret are not provided
@@ -308,7 +303,7 @@ This creates a GitHub OIDC provider with the given scopes and links the created 
 
 Now let's associate a Cognito domain to the user pool, which can be used for sign-up and sign-in webpages.
 
-{%change%} Add below code in `stacks/MyStack.ts`.
+{%change%} Add below code in `stacks/ExampleStack.ts`.
 
 ```ts
 // Create a cognito userpool domain
@@ -410,12 +405,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-api-oauth-github-my-stack: deploying...
+dev-api-oauth-github-ExampleStack: deploying...
 
- ✅  dev-api-oauth-github-my-stack
+ ✅  dev-api-oauth-github-ExampleStack
 
 
-Stack dev-api-oauth-github-my-stack
+Stack dev-api-oauth-github-ExampleStack
   Status: deployed
   Outputs:
     api_url: https://v0l1zlpy5f.execute-api.us-east-1.amazonaws.com
@@ -708,10 +703,10 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Once deployed, you should see something like this.
 
 ```bash
- ✅  prod-api-oauth-github-my-stack
+ ✅  prod-api-oauth-github-ExampleStack
 
 
-Stack prod-api-oauth-github-my-stack
+Stack prod-api-oauth-github-ExampleStack
   Status: deployed
   Outputs:
     api_url: https://v0l0zspdd7.execute-api.us-east-1.amazonaws.com

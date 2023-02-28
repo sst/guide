@@ -17,7 +17,7 @@ In this example we will look at how to add JWT authorization with [Cognito User 
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -26,14 +26,14 @@ In this example we will look at how to add JWT authorization with [Cognito User 
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo api-auth-jwt-cognito-user-pool
+$ npx create-sst@latest --template=base/example api-auth-jwt-cognito-user-pool
 $ cd api-auth-jwt-cognito-user-pool
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -63,17 +63,12 @@ An SST app is made up of two parts.
 
 Let's start by setting up an API.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import {
-  Api,
-  Cognito,
-  StackContext,
-  ViteStaticSite,
-} from "@serverless-stack/resources";
+import { Api, Cognito, StackContext, ViteStaticSite } from "sst/constructs";
 
-export function MyStack({ stack, app }: StackContext) {
+export function ExampleStack({ stack, app }: StackContext) {
   // Create User Pool
   const auth = new Cognito(stack, "Auth", {
     login: ["email"],
@@ -159,7 +154,7 @@ export const main: APIGatewayProxyHandlerV2WithJWTAuthorizer = async (
 
 To deploy a React.js app to AWS, we'll be using the SST [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) construct.
 
-{%change%} Replace the following in `stacks/MyStack.ts`:
+{%change%} Replace the following in `stacks/ExampleStack.ts`:
 
 ```ts
 // Show the API endpoint in the output
@@ -201,7 +196,7 @@ We are going to print out the resources that we created for reference.
 Make sure to import the `ViteStaticSite` construct by adding below line
 
 ```ts
-import { ViteStaticSite } from "@serverless-stack/resources";
+import { ViteStaticSite } from "sst/constructs";
 ```
 
 ## Creating the frontend
@@ -264,12 +259,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-api-auth-jwt-cognito-user-pool-my-stack: deploying...
+dev-api-auth-jwt-cognito-user-pool-ExampleStack: deploying...
 
- ✅  dev-api-auth-jwt-cognito-user-pool-my-stack
+ ✅  dev-api-auth-jwt-cognito-user-pool-ExampleStack
 
 
-Stack dev-api-auth-jwt-cognito-user-pool-my-stack
+Stack dev-api-auth-jwt-cognito-user-pool-ExampleStack
   Status: deployed
   Outputs:
     UserPoolClientId: t4gepqqbmbg90dh61pam8rg9r

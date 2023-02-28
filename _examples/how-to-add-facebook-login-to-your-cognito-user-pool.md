@@ -17,7 +17,7 @@ In this example, we will look at how to add Facebook Login to Your Cognito User 
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 - A [Facebook developer account](https://developers.facebook.com/)
@@ -27,14 +27,14 @@ In this example, we will look at how to add Facebook Login to Your Cognito User 
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo api-oauth-facebook
+$ npx create-sst@latest --template=base/example api-oauth-facebook
 $ cd api-oauth-facebook
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -64,18 +64,13 @@ An SST app is made up of two parts.
 
 First, let's create a [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to store the user info using the [`Cognito`]({{ site.docs_url }}/constructs/Cognito) construct
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
 import * as cognito from "aws-cdk-lib/aws-cognito";
-import {
-  Api,
-  Cognito,
-  StackContext,
-  ViteStaticSite,
-} from "@serverless-stack/resources";
+import { Api, Cognito, StackContext, ViteStaticSite } from "sst/constructs";
 
-export function MyStack({ stack, app }: StackContext) {
+export function ExampleStack({ stack, app }: StackContext) {
   // Create auth
   const auth = new Cognito(stack, "Auth", {
     cdk: {
@@ -132,7 +127,7 @@ FACEBOOK_APP_SECRET=<YOUR_FACEBOOK_APP_SECRET>
 
 ![Basic settings view](/assets/examples/api-oauth-facebook/basic-settings-view.png)
 
-{%change%} Add this below the `Cognito` definition in `stacks/MyStack.ts`.
+{%change%} Add this below the `Cognito` definition in `stacks/ExampleStack.ts`.
 
 ```ts
 // Throw error if App ID & secret are not provided
@@ -162,7 +157,7 @@ This creates a Facebook identity provider with the given scopes and links the cr
 
 Now let's associate a Cognito domain to the user pool, which can be used for sign-up and sign-in webpages.
 
-{%change%} Add below code in `stacks/MyStack.ts`.
+{%change%} Add below code in `stacks/ExampleStack.ts`.
 
 ```ts
 // Create a cognito userpool domain
@@ -177,7 +172,7 @@ Note, the `domainPrefix` need to be globally unique across all AWS accounts in a
 
 ## Setting up the API
 
-{%change%} Replace the `Api` definition with the following in `stacks/MyStacks.ts`.
+{%change%} Replace the `Api` definition with the following in `stacks/ExampleStacks.ts`.
 
 ```ts
 // Create a HTTP API
@@ -334,17 +329,17 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-manitej-api-oauth-facebook-my-stack: deploying...
+dev-api-oauth-facebook-ExampleStack: deploying...
 
- ✅  manitej-api-oauth-facebook-my-stack
+ ✅  dev-api-oauth-facebook-ExampleStack
 
 
-Stack manitej-api-oauth-facebook-my-stack
+Stack dev-api-oauth-facebook-ExampleStack
   Status: deployed
   Outputs:
     api_url: https://v0l1zlpy5f.execute-api.us-east-1.amazonaws.com
     auth_client_id: 253t1t5o6jjur88nu4t891eac2
-    auth_domain: https://manitej-fb-demo-auth-domain.auth.us-east-1.amazoncognito.com
+    auth_domain: https://dev-fb-demo-auth-domain.auth.us-east-1.amazoncognito.com
     site_url: https://d1567f41smqk8b.cloudfront.net
 ```
 
@@ -644,10 +639,10 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Once deployed, you should see something like this.
 
 ```bash
- ✅  prod-api-oauth-facebook-my-stack
+ ✅  prod-api-oauth-facebook-ExampleStack
 
 
-Stack prod-api-oauth-facebook-my-stack
+Stack prod-api-oauth-facebook-ExampleStack
   Status: deployed
   Outputs:
     api_url: https://ck198mfop1.execute-api.us-east-1.amazonaws.com

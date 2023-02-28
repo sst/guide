@@ -17,7 +17,7 @@ In this example we will look at how to create a cron job in our serverless app u
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -26,14 +26,14 @@ In this example we will look at how to create a cron job in our serverless app u
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo cron-job
+$ npx create-sst@latest --template=base/example cron-job
 $ cd cron-job
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -63,12 +63,12 @@ An SST app is made up of two parts.
 
 Let's start by creating a cron job.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { Cron, StackContext } from "@serverless-stack/resources";
+import { Cron, StackContext } from "sst/constructs";
 
-export function MyStack({ stack }: StackContext) {
+export function ExampleStack({ stack }: StackContext) {
   new Cron(stack, "Cron", {
     schedule: "rate(1 minute)",
     job: "functions/lambda.handler",
@@ -112,12 +112,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-cron-job-my-stack: deploying...
+dev-cron-job-ExampleStack: deploying...
 
- ✅  dev-cron-job-my-stack
+ ✅  dev-cron-job-ExampleStack
 
 
-Stack dev-cron-job-my-stack
+Stack dev-cron-job-ExampleStack
   Status: deployed
 ```
 

@@ -17,7 +17,7 @@ In this example we will look at how to add Twitter authentication to a serverles
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 - A [Twitter app](https://developer.twitter.com/en/portal/dashboard)
@@ -27,14 +27,14 @@ In this example we will look at how to add Twitter authentication to a serverles
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo api-auth-twitter
+$ npx create-sst@latest --template=base/example api-auth-twitter
 $ cd api-auth-twitter
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `json` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -64,12 +64,12 @@ An SST app is made up of two parts.
 
 Let's start by setting up an API.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { Api, Cognito, StackContext } from "@serverless-stack/resources";
+import { Api, Cognito, StackContext } from "sst/constructs";
 
-export function MyStack({ stack }: StackContext) {
+export function ExampleStack({ stack }: StackContext) {
   // Create Api
   const api = new Api(stack, "Api", {
     defaults: {
@@ -104,7 +104,7 @@ To secure our APIs we are adding the authorization type `AWS_IAM`. This means th
 
 Now let's add authentication for our serverless app.
 
-{%change%} Add this below the `Api` definition in `stacks/MyStack.ts`. Make sure to replace the `consumerKey` and `consumerSecret` with that of your Twitter app.
+{%change%} Add this below the `Api` definition in `stacks/ExampleStack.ts`. Make sure to replace the `consumerKey` and `consumerSecret` with that of your Twitter app.
 
 ```ts
 // Create auth provider
@@ -188,12 +188,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-api-auth-twitter-my-stack: deploying...
+dev-api-auth-twitter-ExampleStack: deploying...
 
- ✅  dev-api-auth-twitter-my-stack
+ ✅  dev-api-auth-twitter-ExampleStack
 
 
-Stack dev-api-auth-twitter-my-stack
+Stack dev-api-auth-twitter-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://b3njix6irk.execute-api.us-east-1.amazonaws.com

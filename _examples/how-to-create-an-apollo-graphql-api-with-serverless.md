@@ -17,7 +17,7 @@ In this example we'll look at how to create an [Apollo GraphQL API](https://www.
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -26,14 +26,14 @@ In this example we'll look at how to create an [Apollo GraphQL API](https://www.
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo graphql-apollo
+$ npx create-sst@latest --template=base/example graphql-apollo
 $ cd graphql-apollo
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -63,12 +63,12 @@ An SST app is made up of two parts.
 
 Let's start by setting up our GraphQL API.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { GraphQLApi, StackContext } from "@serverless-stack/resources";
+import { GraphQLApi, StackContext } from "sst/constructs";
 
-export function MyStack({ stack }: StackContext) {
+export function ExampleStack({ stack }: StackContext) {
   // Create the GraphQL API
   const api = new GraphQLApi(stack, "ApolloApi", {
     server: {
@@ -155,12 +155,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-graphql-apollo-my-stack: deploying...
+dev-graphql-apollo-ExampleStack: deploying...
 
- ✅  dev-graphql-apollo-my-stack
+ ✅  dev-graphql-apollo-ExampleStack
 
 
-Stack dev-graphql-apollo-my-stack
+Stack dev-graphql-apollo-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://keocx594ue.execute-api.us-east-1.amazonaws.com

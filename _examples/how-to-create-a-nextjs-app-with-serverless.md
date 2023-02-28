@@ -45,7 +45,7 @@ Here's what we'll be covering in this example:
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -54,14 +54,14 @@ Here's what we'll be covering in this example:
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo nextjs-app
+$ npx create-sst@latest --template=base/example nextjs-app
 $ cd nextjs-app
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -85,17 +85,12 @@ Our app is made up of a database, a Next.js app, and an API within the Next.js a
 
 We'll be using [Amazon DynamoDB](https://aws.amazon.com/dynamodb/); a reliable and highly-performant NoSQL database that can be configured as a true serverless database. Meaning that it'll scale up and down automatically. And you won't get charged if you are not using it.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import {
-  Api,
-  NextjsSite,
-  StackContext,
-  Table,
-} from "@serverless-stack/resources";
+import { Api, NextjsSite, StackContext, Table } from "sst/constructs";
 
-export function MyStack({ stack, app }: StackContext) {
+export function ExampleStack({ stack, app }: StackContext) {
   // Create the table
   const table = new Table(stack, "Counter", {
     fields: {
@@ -128,7 +123,7 @@ This sets up our Next.js app in the `frontend/` directory.
 
 Now let's configure SST to deploy our Next.js app to AWS. To do so, we'll be using the SST [`NextjsSite`]({{ site.docs_url }}/constructs/NextjsSite) construct.
 
-{%change%} Add the following in `stacks/MyStack.ts` below our `Table` definition.
+{%change%} Add the following in `stacks/ExampleStack.ts` below our `Table` definition.
 
 ```ts
 // Create a Next.js site
@@ -325,12 +320,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-nextjs-app-my-stack: deploying...
+dev-nextjs-app-ExampleStack: deploying...
 
- ✅  dev-nextjs-app-my-stack
+ ✅  dev-nextjs-app-ExampleStack
 
 
-Stack dev-nextjs-app-my-stack
+Stack dev-nextjs-app-ExampleStack
   Status: deployed
   Outputs:
     URL: https://d25iso31kmpdvx.cloudfront.net
@@ -373,10 +368,10 @@ This allows us to separate our environments, so when we are working in our local
 Once deployed, you should see something like this.
 
 ```bash
- ✅  prod-nextjs-app-my-stack
+ ✅  prod-nextjs-app-ExampleStack
 
 
-Stack prod-nextjs-app-my-stack
+Stack prod-nextjs-app-ExampleStack
   Status: deployed
   Outputs:
     URL: https://dq1n2yr6krqwr.cloudfront.net

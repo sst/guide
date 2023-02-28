@@ -25,7 +25,7 @@ Here is a video of it in action.
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -34,14 +34,14 @@ Here is a video of it in action.
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo graphql-appsync
+$ npx create-sst@latest --template=base/example graphql-appsync
 $ cd graphql-appsync
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -71,12 +71,12 @@ An SST app is made up of two parts.
 
 Let's start by defining our AppSync API.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { StackContext, Table, AppSyncApi } from "@serverless-stack/resources";
+import { StackContext, Table, AppSyncApi } from "sst/constructs";
 
-export function MyStack({ stack }: StackContext) {
+export function ExampleStack({ stack }: StackContext) {
   // Create a notes table
   const notesTable = new Table(stack, "Notes", {
     fields: {
@@ -217,7 +217,7 @@ Starting with the one that'll create a note.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
-import { Table } from "@serverless-stack/node/table";
+import { Table } from "sst/node/table";
 import Note from "./Note";
 
 const dynamoDb = new DynamoDB.DocumentClient();
@@ -250,7 +250,7 @@ Next, let's write the function that'll fetch all our notes.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
-import { Table } from "@serverless-stack/node/table";
+import { Table } from "sst/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
@@ -277,7 +277,7 @@ We'll do something similar for the function that gets a single note.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
-import { Table } from "@serverless-stack/node/table";
+import { Table } from "sst/node/table";
 import Note from "./Note";
 
 const dynamoDb = new DynamoDB.DocumentClient();
@@ -306,7 +306,7 @@ Now let's update our notes.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
-import { Table } from "@serverless-stack/node/table";
+import { Table } from "sst/node/table";
 import Note from "./Note";
 
 const dynamoDb = new DynamoDB.DocumentClient();
@@ -336,7 +336,7 @@ To complete all the operations, let's delete the note.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
-import { Table } from "@serverless-stack/node/table";
+import { Table } from "sst/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
@@ -381,12 +381,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-graphql-appsync-my-stack: deploying...
+dev-graphql-appsync-ExampleStack: deploying...
 
- ✅  dev-graphql-appsync-my-stack
+ ✅  dev-graphql-appsync-ExampleStack
 
 
-Stack dev-graphql-appsync-my-stack
+Stack dev-graphql-appsync-ExampleStack
   Status: deployed
   Outputs:
     ApiId: lk2fgfxsizdstfb24c4y4dnad4

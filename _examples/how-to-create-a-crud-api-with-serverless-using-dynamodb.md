@@ -17,7 +17,7 @@ In this example we will look at how to create a CRUD API with serverless using [
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -26,7 +26,7 @@ In this example we will look at how to create a CRUD API with serverless using [
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo crud-api-dynamodb
+$ npx create-sst@latest --template=base/example crud-api-dynamodb
 $ cd crud-api-dynamodb
 $ npm install
 ```
@@ -57,12 +57,12 @@ An SST app is made up of two parts.
 
 [Amazon DynamoDB](https://amazon.com/dynamodb/) is a reliable and highly-performant NoSQL database that can be configured as a true serverless database. Meaning that it'll scale up and down automatically. And you won't get charged if you are not using it.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { Api, StackContext, Table } from "@serverless-stack/resources";
+import { Api, StackContext, Table } from "sst/constructs";
 
-export function MyStack({ stack }: StackContext) {
+export function ExampleStack({ stack }: StackContext) {
   // Create the table
   const table = new Table(stack, "Notes", {
     fields: {
@@ -84,7 +84,7 @@ This creates a serverless DynamoDB table using [`Table`]({{ site.docs_url }}/con
 
 Now let's add the API.
 
-{%change%} Add this after the `Table` definition in `stacks/MyStack.ts`.
+{%change%} Add this after the `Table` definition in `stacks/ExampleStack.ts`.
 
 ```ts
 // Create the HTTP API
@@ -134,7 +134,7 @@ Let's turn towards the functions that'll be powering our API. Starting with the 
 import * as uuid from "uuid";
 import { DynamoDB } from "aws-sdk";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
-import { Table } from "@serverless-stack/node/table";
+import { Table } from "sst/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
@@ -178,7 +178,7 @@ Next, let's write the function that'll fetch all our notes.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
-import { Table } from "@serverless-stack/node/table";
+import { Table } from "sst/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
@@ -212,7 +212,7 @@ We'll do something similar for the function that gets a single note.
 ```ts
 import { DynamoDB } from "aws-sdk";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
-import { Table } from "@serverless-stack/node/table";
+import { Table } from "sst/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
@@ -246,7 +246,7 @@ Now let's update our notes.
 ```ts
 import { DynamoDB } from "aws-sdk";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
-import { Table } from "@serverless-stack/node/table";
+import { Table } from "sst/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
@@ -289,7 +289,7 @@ To complete the CRUD operations, let's delete the note.
 ```ts
 import { DynamoDB } from "aws-sdk";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
-import { Table } from "@serverless-stack/node/table";
+import { Table } from "sst/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
@@ -333,12 +333,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-rest-api-dynamodb-my-stack: deploying...
+dev-rest-api-dynamodb-ExampleStack: deploying...
 
- ✅  dev-rest-api-dynamodb-my-stack
+ ✅  dev-rest-api-dynamodb-ExampleStack
 
 
-Stack dev-rest-api-dynamodb-my-stack
+Stack dev-rest-api-dynamodb-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://t34witddz7.execute-api.us-east-1.amazoncom
@@ -433,10 +433,10 @@ This allows us to separate our environments, so when we are working in `dev`, it
 Once deployed, you should see something like this.
 
 ```bash
- ✅  prod-rest-api-dynamodb-my-stack
+ ✅  prod-rest-api-dynamodb-ExampleStack
 
 
-Stack prod-rest-api-dynamodb-my-stack
+Stack prod-rest-api-dynamodb-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://ck198mfop1.execute-api.us-east-1.amazoncom

@@ -19,7 +19,7 @@ We'll be using SST's [Live Lambda Development]({{ site.docs_url }}/live-lambda-d
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -28,14 +28,14 @@ We'll be using SST's [Live Lambda Development]({{ site.docs_url }}/live-lambda-d
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo layer-chrome-aws-lambda
+$ npx create-sst@latest --template=base/example layer-chrome-aws-lambda
 $ cd layer-chrome-aws-lambda
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -65,16 +65,16 @@ An SST app is made up of two parts.
 
 Let's start by creating our API.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
 import { LayerVersion } from "aws-cdk-lib/aws-lambda";
-import { Api, StackContext } from "@serverless-stack/resources";
+import { Api, StackContext } from "sst/constructs";
 
 const layerArn =
   "arn:aws:lambda:us-east-1:764866452798:layer:chrome-aws-lambda:22";
 
-export function MyStack({ stack }: StackContext) {
+export function ExampleStack({ stack }: StackContext) {
   const layer = LayerVersion.fromLayerVersionArn(stack, "Layer", layerArn);
 
   // Create a HTTP API
@@ -184,12 +184,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-layer-chrome-aws-lambda-my-stack: deploying...
+dev-layer-chrome-aws-lambda-ExampleStack: deploying...
 
- ✅  dev-layer-chrome-aws-lambda-my-stack
+ ✅  dev-layer-chrome-aws-lambda-ExampleStack
 
 
-Stack dev-layer-chrome-aws-lambda-my-stack
+Stack dev-layer-chrome-aws-lambda-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://d9rxpfhft0.execute-api.us-east-1.amazonaws.com
@@ -224,7 +224,7 @@ with:
 
 ```ts
 // Take the screenshot
-const screenshot = await page.screenshot({ encoding: "base64" }) as string;
+const screenshot = (await page.screenshot({ encoding: "base64" })) as string;
 
 return {
   statusCode: 200,

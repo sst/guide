@@ -17,7 +17,7 @@ In this example we will look at how to use SQS to create a queue in our serverle
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -26,14 +26,14 @@ In this example we will look at how to use SQS to create a queue in our serverle
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo queue
+$ npx create-sst@latest --template=base/example queue
 $ cd queue
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -63,12 +63,12 @@ An SST app is made up of two parts.
 
 [Amazon SQS](https://aws.amazon.com/sqs/) is a reliable and high-throughput message queuing service. You are charged based on the number of API requests made to SQS. And you won't get charged if you are not using it.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { StackContext, Queue, Api } from "@serverless-stack/resources";
+import { StackContext, Queue, Api } from "sst/constructs";
 
-export function MyStack({ stack }: StackContext) {
+export function ExampleStack({ stack }: StackContext) {
   // Create Queue
   const queue = new Queue(stack, "Queue", {
     consumer: "functions/consumer.handler",
@@ -82,7 +82,7 @@ This creates an SQS queue using [`Queue`]({{ site.docs_url }}/constructs/Queue).
 
 Now let's add the API.
 
-{%change%} Add this below the `Queue` definition in `stacks/MyStack.ts`.
+{%change%} Add this below the `Queue` definition in `stacks/ExampleStack.ts`.
 
 ```ts
 // Create the HTTP API
@@ -154,12 +154,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-queue-my-stack: deploying...
+dev-queue-ExampleStack: deploying...
 
- ✅  dev-queue-my-stack
+ ✅  dev-queue-ExampleStack
 
 
-Stack dev-queue-my-stack
+Stack dev-queue-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://i8ia1epqnh.execute-api.us-east-1.amazonaws.com
@@ -187,7 +187,7 @@ Now let's send a message to our queue.
 
 ```ts
 import AWS from "aws-sdk";
-import { Queue } from "@serverless-stack/node/queue";
+import { Queue } from "sst/node/queue";
 
 const sqs = new AWS.SQS();
 

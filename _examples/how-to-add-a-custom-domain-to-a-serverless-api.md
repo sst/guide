@@ -17,7 +17,7 @@ In this example we will look at how to add a custom domain to a serverless API u
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 - A domain configured using [Route 53](https://aws.amazon.com/route53/).
@@ -27,14 +27,14 @@ In this example we will look at how to add a custom domain to a serverless API u
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo rest-api-custom-domain
+$ npx create-sst@latest --template=base/example rest-api-custom-domain
 $ cd rest-api-custom-domain
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -64,12 +64,12 @@ An SST app is made up of two parts.
 
 Let's start by setting up an API
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
 import { Api, StackContext } from "sst/constructs";
 
-export function MyStack({ stack, app }: StackContext) {
+export function ExampleStack({ stack, app }: StackContext) {
   const stage = app.stage;
 
   // Create the HTTP API
@@ -173,12 +173,12 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-dev-rest-api-custom-domain-my-stack: deploying...
+dev-rest-api-custom-domain-ExampleStack: deploying...
 
- ✅  dev-rest-api-custom-domain-my-stack
+ ✅  dev-rest-api-custom-domain-ExampleStack
 
 
-Stack dev-rest-api-custom-domain-my-stack
+Stack dev-rest-api-custom-domain-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://9bdtsrrlu1.execute-api.us-east-1.amazonaws.com

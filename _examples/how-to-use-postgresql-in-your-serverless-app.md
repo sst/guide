@@ -17,7 +17,7 @@ In this example we will look at how to use PostgreSQL in our serverless app usin
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -26,21 +26,21 @@ In this example we will look at how to use PostgreSQL in our serverless app usin
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo rest-api-postgresql
+$ npx create-sst@latest --template=base/example rest-api-postgresql
 $ cd rest-api-postgresql
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
 export default {
   config(_input) {
     return {
-      name: "api-auth-facebook",
+      name: "rest-api-postgresql",
       region: "us-east-1",
     };
   },
@@ -63,12 +63,12 @@ An SST app is made up of two parts.
 
 [Amazon Aurora Serverless](https://aws.amazon.com/rds/aurora/serverless/) is an auto-scaling managed relational database that supports PostgreSQL.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { Api, RDS, StackContext } from "@serverless-stack/resources";
+import { Api, RDS, StackContext } from "sst/constructs";
 
-export function MyStack({ stack }: StackContext) {
+export function ExampleStack({ stack }: StackContext) {
   const DATABASE = "CounterDB";
 
   // Create the Aurora DB cluster
@@ -126,7 +126,7 @@ export async function down(db) {
 
 Now let's add the API.
 
-{%change%} Add this below the `cluster` definition in `stacks/MyStack.ts`.
+{%change%} Add this below the `cluster` definition in `stacks/ExampleStack.ts`.
 
 ```ts
 // Create a HTTP API
@@ -163,7 +163,7 @@ Now in our function, we'll start by reading from our PostgreSQL database.
 import { RDSDataService } from "aws-sdk";
 import { Kysely } from "kysely";
 import { DataApiDialect } from "kysely-data-api";
-import { RDS } from "@serverless-stack/node/rds";
+import { RDS } from "sst/node/rds";
 
 interface Database {
   tblcounter: {
@@ -231,17 +231,17 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-manitej-rest-api-postgresql-my-stack: deploying...
+dev-rest-api-postgresql-ExampleStack: deploying...
 
- ✅  manitej-rest-api-postgresql-my-stack
+ ✅  dev-rest-api-postgresql-ExampleStack
 
 
-Stack manitej-rest-api-postgresql-my-stack
+Stack dev-rest-api-postgresql-ExampleStack
   Status: deployed
   Outputs:
     SecretArn: arn:aws:secretsmanager:us-east-1:087220554750:secret:CounterDBClusterSecret247C4-MhR0f3WMmWBB-dnCizN
     ApiEndpoint: https://u3nnmgdigh.execute-api.us-east-1.amazonaws.com
-    ClusterIdentifier: manitej-rest-api-postgresql-counterdbcluster09367634-1wjmlf5ijd4be
+    ClusterIdentifier: dev-rest-api-postgresql-counterdbcluster09367634-1wjmlf5ijd4be
 ```
 
 The `ApiEndpoint` is the API we just created. While the `SecretArn` is what we need to login to our database securely. The `ClusterIdentifier` is the id of our database cluster.

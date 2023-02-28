@@ -17,7 +17,7 @@ In this example we will look at how to create a serverless WebSocket API on AWS 
 
 ## Requirements
 
-- Node.js >= 10.15.1
+- Node.js 16 or later
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
@@ -26,14 +26,14 @@ In this example we will look at how to create a serverless WebSocket API on AWS 
 {%change%} Let's start by creating an SST app.
 
 ```bash
-$ npx create-sst@latest --template=base/monorepo websocket
+$ npx create-sst@latest --template=base/example websocket
 $ cd websocket
 $ npm install
 ```
 
 By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```js 
+```js
 import { SSTConfig } from "sst";
 import { Api } from "sst/constructs";
 
@@ -63,12 +63,12 @@ An SST app is made up of two parts.
 
 We are going to use [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) to store the connection ids from all the clients connected to our WebSocket API. DynamoDB is a reliable and highly-performant NoSQL database that can be configured as a true serverless database. Meaning that it'll scale up and down automatically. And you won't get charged if you are not using it.
 
-{%change%} Replace the `stacks/MyStack.ts` with the following.
+{%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { StackContext, Table, WebSocketApi } from "@serverless-stack/resources";
+import { StackContext, Table, WebSocketApi } from "sst/constructs";
 
-export function MyStack({ stack }: StackContext) {
+export function ExampleStack({ stack }: StackContext) {
   // Create the table
   const table = new Table(stack, "Connections", {
     fields: {
@@ -91,7 +91,7 @@ Where the `id` is the connection id as a string.
 
 Now let's add the WebSocket API.
 
-{%change%} Add this below the `Table` definition in `stacks/MyStack.ts`.
+{%change%} Add this below the `Table` definition in `stacks/ExampleStack.ts`.
 
 ```ts
 // Create the WebSocket API
@@ -127,7 +127,7 @@ Now in our functions, let's first handle the case when a client connects to our 
 ```ts
 import { DynamoDB } from "aws-sdk";
 import { APIGatewayProxyHandler } from "aws-lambda";
-import { Table } from "@serverless-stack/node/table";
+import { Table } from "sst/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
@@ -162,7 +162,7 @@ Similarly, we'll remove the connection id from the table when a client disconnec
 ```ts
 import { DynamoDB } from "aws-sdk";
 import { APIGatewayProxyHandler } from "aws-lambda";
-import { Table } from "@serverless-stack/node/table";
+import { Table } from "sst/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
@@ -211,15 +211,15 @@ Preparing your SST app
 Transpiling source
 Linting source
 Deploying stacks
-manitej-websocket-my-stack: deploying...
+dev-websocket-ExampleStack: deploying...
 
- ✅  manitej-websocket-my-stack
+ ✅  dev-websocket-ExampleStack
 
 
-Stack manitej-websocket-my-stack
+Stack dev-websocket-ExampleStack
   Status: deployed
   Outputs:
-    ApiEndpoint: wss://oivzpnqnb6.execute-api.us-east-1.amazonaws.com/manitej
+    ApiEndpoint: wss://oivzpnqnb6.execute-api.us-east-1.amazonaws.com/dev
 ```
 
 The `ApiEndpoint` is the WebSocket API we just created. Let's test our endpoint.
@@ -252,7 +252,7 @@ Now let's update our function to send messages.
 
 ```ts
 import { DynamoDB, ApiGatewayManagementApi } from "aws-sdk";
-import { Table } from "@serverless-stack/node/table";
+import { Table } from "sst/node/table";
 import { APIGatewayProxyHandler } from "aws-lambda";
 
 const TableName = Table.Connections.tableName;
