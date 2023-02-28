@@ -256,21 +256,13 @@ $ npm install
 
 This sets up our React app in the `web/` directory.
 
-We also need to load the environment variables from our SST app. To do this, we'll be using the [`@serverless-stack/static-site-env`](https://www.npmjs.com/package/@serverless-stack/static-site-env) package.
-
-{%change%} Install the `static-site-env` package by running the following in the `web/` directory.
-
-```bash
-$ npm install @serverless-stack/static-site-env --save-dev
-```
-
-We need to update our start script to use this package.
+We also need to load the environment variables from our SST app. To do this, we'll be using the [`sst env`](https://docs.sst.dev/packages/sst#sst-env) command.
 
 {%change%} Replace the `dev` script in your `web/package.json`.
 
 ```diff
 -"dev": "vite"
-+"dev": "sst-env -- vite"
++"dev": "sst env vite"
 ```
 
 ## Start our dev environment

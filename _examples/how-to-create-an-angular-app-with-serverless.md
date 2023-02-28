@@ -286,13 +286,7 @@ $ cd frontend
 
 This sets up our Angular app in the `frontend/` directory. Recall that, earlier in the guide we were pointing the `StaticSite` construct to this path.
 
-We also need to load the environment variables from our SST app. To do this, we'll be using the [`@serverless-stack/static-site-env`](https://www.npmjs.com/package/@serverless-stack/static-site-env) (or `sst-env`) package.
-
-{%change%} Install the `sst-env` package by running the following in the `frontend/` directory.
-
-```bash
-$ npm install @serverless-stack/static-site-env --save-dev
-```
+We also need to load the environment variables from our SST app. To do this, we'll be using the [`sst env`](https://docs.sst.dev/packages/sst#sst-env) command.
 
 In Angular, we have our `environment.ts` and `environment.prod.ts` files defined in the `src/environments` folder. The `environment.ts` file is where we usually keep our environment variables by convention, as the Angular compiler looks for these files before the build process. But we don't want to hard code these. We want them automatically set from our backend. To do this we'll use a script that generates env variables at build time.
 
@@ -321,7 +315,7 @@ writeFile(targetPath, environmentFileContent, function (err: unknown) {
 
 The above script creates the environment file, `environment.ts` for dev and populates it with the variables from your `.env` file (available in `process.env`) with our `API_URL`.
 
-We need to update our scripts to use this and the [`@serverless-stack/static-site-env`](https://www.npmjs.com/package/@serverless-stack/static-site-env) (or `sst-env`) package.
+We need to update our scripts to use this and the [`sst env`](https://docs.sst.dev/packages/sst#sst-env) command.
 
 {%change%} Update the `package.json` in the `frontend/` directory.
 
@@ -331,7 +325,7 @@ We need to update our scripts to use this and the [`@serverless-stack/static-sit
   "scripts": {
     // ...
     "config": "ts-node ./scripts/setenv.ts",
-    "start": "sst-env -- npm run config && ng serve",
+    "start": "sst env npm run config && ng serve",
     // ...
   },
   // ...
@@ -480,7 +474,7 @@ Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you t
 
 To wrap things up we'll deploy our app to prod.
 
-However the current way of loading environment variables only works in dev, as we can't use [`sst-env`](https://www.npmjs.com/package/@serverless-stack/static-site-env) in prod. To load the environment variables from `process.env` in production we need to make a couple of changes.
+However the current way of loading environment variables only works in dev, as we can't use `sst env` in prod. To load the environment variables from `process.env` in production we need to make a couple of changes.
 
 We'll replace placeholder env values in `environment.prod.ts` in our app with the [deployed values]({{ site.docs_url }}/constructs/StaticSite#replace-deployed-values).
 

@@ -281,15 +281,7 @@ Create React App will throw a warning if it is installed inside a repo that uses
 SKIP_PREFLIGHT_CHECK=true
 ```
 
-We also need to load the environment variables from our SST app. To do this, we'll be using the [`@serverless-stack/static-site-env`](https://www.npmjs.com/package/@serverless-stack/static-site-env) package.
-
-{%change%} Install the `static-site-env` package by running the following in the `frontend/` directory.
-
-```bash
-$ npm install @serverless-stack/static-site-env --save-dev
-```
-
-We need to update our start script to use this package.
+We also need to load the environment variables from our SST app. To do this, we'll be using the [`sst env`](https://docs.sst.dev/packages/sst#sst-env) command.
 
 {%change%} Replace the `start` script in your `frontend/package.json`.
 
@@ -300,7 +292,7 @@ We need to update our start script to use this package.
 {%change%} With the following:
 
 ```bash
-"start": "sst-env -- react-scripts start",
+"start": "sst env react-scripts start",
 ```
 
 Let's start our React development environment.
