@@ -7,13 +7,11 @@ description: "Deploy Next.js, Remix, Astro, Solid, Vite to AWS and add any backe
 
   <div class="header-wrapper">
 
-    <!--
-    <a class="site-announcement" href="https://www.youtube.com/watch?v=wBTDkLIyMhw">
+    <a class="site-announcement" href="{% link _posts/2023-02-27-sst-v2.md %}">
       <span class="new">New</span>
-      <span class="copy">Tune in live to the `create sst` launch</span>
+      <span class="copy">SST v2 is now available. Learn more</span>
       <i class="fa fa-angle-right" aria-hidden="true"></i>
     </a>
-    -->
 
     <div class="site-description">
       <h1 class="site-description">Build modern full-stack applications on AWS</h1>

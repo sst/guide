@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: "SST V2 Preview"
+title: "SST v2 Preview"
 author: jay
 ---
 
