@@ -99,7 +99,7 @@ The first is getting a list of notes. The second is getting a specific note give
 
 For this example, we are not using a database. We'll look at that in detail in another example. So internally we are just going to get the list of notes from a file.
 
-{%change%} Let's add a file that contains our notes in `packages/notes.ts`.
+{%change%} Let's add a file that contains our notes in `services/notes.ts`.
 
 ```ts
 export default {
@@ -125,7 +125,7 @@ Now add the code for our first endpoint.
 {%change%} Add a `packages/functions/src/list.ts`.
 
 ```ts
-import notes from "../notes";
+import notes from "../../../services/notes";
 
 export async function handler() {
   return {
@@ -144,7 +144,7 @@ Note that this function need to be `async` to be invoked by AWS Lambda. Even tho
 {%change%} Add the following to `packages/functions/src/get.ts`.
 
 ```ts
-import notes from "../notes";
+import notes from "../../../services/notes";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
@@ -168,7 +168,7 @@ Here we are checking if we have the requested note. If we do, we respond with it
 {%change%} Add the following to `packages/functions/src/update.ts`.
 
 ```ts
-import notes from "../notes";
+import notes from "../../../services/notes";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
@@ -268,7 +268,7 @@ Let's make a quick change to our API. It would be good if the JSON strings are p
 {%change%} Replace `packages/functions/src/list.ts` with the following.
 
 ```ts
-import notes from "../notes";
+import notes from "../../../services/notes";
 
 export async function handler() {
   return {

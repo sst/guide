@@ -59,10 +59,6 @@ An SST app is made up of three parts.
 
    The code that's run when your API is invoked is placed in the `packages/` directory of your project.
 
-3. `web/` — Frontend app
-
-   The frontend of your application like React, Next.js, Remix, or any static website is placed in the `web/` directory of your project. The starter template we used above does not come with a frontend. We will be creating one later in this tutorial.
-
 ## Auth flow
 
 Before we start let's first take a look at the auth flow at a high level.
@@ -217,7 +213,7 @@ To deploy a React app to AWS, we'll be using the SST [`ViteStaticSite`]({{ site.
 
 ```ts
 const site = new ViteStaticSite(stack, "Site", {
-  path: "web",
+  path: "packages/frontend",
   environment: {
     VITE_APP_API_URL: api.url,
   },
@@ -249,16 +245,17 @@ We are also setting up [build time React environment variables](https://vitejs.d
 {%change%} Run the below commands in our project root to create a basic react project.
 
 ```bash
-$ npx create-vite@latest web --template react
-$ cd web
+$ cd packages
+$ npx create-vite@latest frontend --template react
+$ cd frontend
 $ npm install
 ```
 
-This sets up our React app in the `web/` directory.
+This sets up our React app in the `packages/frontend/` directory.
 
 We also need to load the environment variables from our SST app. To do this, we'll be using the [`sst env`](https://docs.sst.dev/packages/sst#sst-env) command.
 
-{%change%} Replace the `dev` script in your `web/package.json`.
+{%change%} Replace the `dev` script in your `packages/frontend/package.json`.
 
 ```diff
 -"dev": "vite"
@@ -320,7 +317,7 @@ Add our **Callback URL** to the **Authorized redirect URIs** in our Google proje
 
 ## Add the login UI
 
-{%change%} Replace `web/src/App.jsx` with below code.
+{%change%} Replace `packages/frontend/src/App.jsx` with below code.
 
 ```jsx
 const App = () => {
@@ -344,7 +341,7 @@ export default App;
 
 Let's start our frontend in the development environment.
 
-{%change%} In the `web/` directory run.
+{%change%} In the `packages/frontend/` directory run.
 
 ```bash
 $ npm run dev
@@ -438,7 +435,7 @@ Now let's use the session token in the frontend.
 
 Then in the frontend, we will check if the URL contains the `token` query string when the page loads. If it is passed in, we will store it in the local storage, and then redirect the user to the root domain.
 
-{%change%} Add the following above the `return` in `web/src/App.jsx`.
+{%change%} Add the following above the `return` in `packages/frontend/src/App.jsx`.
 
 ```ts
 useEffect(() => {
@@ -690,7 +687,7 @@ As we wait, let's update our frontend to make a request to the `/session` API to
 
 #### Call the session API
 
-{%change%} Add the following above the `signOut` function in `web/src/App.jsx`.
+{%change%} Add the following above the `signOut` function in `packages/frontend/src/App.jsx`.
 
 ```ts
 const getUserInfo = async (session) => {
@@ -777,7 +774,7 @@ Also, let's display a loading sign while waiting for the `/session` API to retur
 
 Finally, let's add some basic styles to the page.
 
-{%change%} Replace `web/src/index.css` with the following.
+{%change%} Replace `packages/frontend/src/index.css` with the following.
 
 ```css
 body {

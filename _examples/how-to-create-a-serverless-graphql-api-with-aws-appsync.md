@@ -167,15 +167,15 @@ export default Note;
 
 To start with, let's create the Lambda function that'll be our AppSync data source.
 
-{%change%} Replace `packages/functions/src/lambda.ts` with the following.
+{%change%} Replace `packages/functions/src/main.ts` with the following.
 
 ```ts
-import Note from "./Note";
-import listNotes from "./listNotes";
-import createNote from "./createNote";
-import updateNote from "./updateNote";
-import deleteNote from "./deleteNote";
-import getNoteById from "./getNoteById";
+import Note from "../../../services/Note";
+import listNotes from "../../../services/listNotes";
+import createNote from "../../../services/createNote";
+import updateNote from "../../../services/updateNote";
+import deleteNote from "../../../services/deleteNote";
+import getNoteById from "../../../services/getNoteById";
 
 type AppSyncEvent = {
   info: {
