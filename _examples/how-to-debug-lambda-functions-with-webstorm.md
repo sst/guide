@@ -116,7 +116,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
 
 To allow WebStorm to set breakpoints and debug our Lambda functions we'll add it to our [Debug Configurations](https://www.jetbrains.com/help/webstorm/running-and-debugging-node-js.html#running).
 
-Select the `package.json` from the left panel, click on the `▶️` icon next to the `start` script, and then select **Modify Run Configuration**.
+Select the `package.json` from the left panel, click on the `▶️` icon next to the `dev` script, and then select **Modify Run Configuration**.
 
 ![Select run icon beside start script in WebStorm](/assets/examples/webstorm/select-run-icon-beside-start-script-in-webstorm.png)
 

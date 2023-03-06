@@ -125,7 +125,7 @@ To allow VS Code to set breakpoints and debug our Lambda functions we'll add it 
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug SST Start",
+      "name": "Debug SST Dev",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/sst",
@@ -153,7 +153,7 @@ Note that, this doesn't increase the timeout of an API. Since those cannot be in
 
 Now if you open up your project in VS Code, you can set a breakpoint in your `packages/functions/src/lambda.ts`.
 
-Next, head over to the **Run And Debug** tab > select the above configured **Debug SST Start**, and hit **Play**.
+Next, head over to the **Run And Debug** tab > select the above configured **Debug SST Dev**, and hit **Play**.
 
 ![Set Lambda function breakpoint in VS Code](/assets/examples/vscode/set-lambda-function-breakpoint-in-vs-code.png)
 

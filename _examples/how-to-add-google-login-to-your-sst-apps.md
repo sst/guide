@@ -269,7 +269,7 @@ SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-develop
 {%change%} Run in the root.
 
 ```bash
-$ npx sst start
+$ npx sst dev
 ```
 
 The first time you run this command it'll prompt you to enter a stage name.
@@ -282,9 +282,9 @@ to use the one based on your AWS credentials (frank):
 
 You can press enter to use the default stage, or manually enter a stage name. SST uses the stage to namespace all the resources in your application.
 
-The first time `sst start` runs, it can take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
+The first time `sst dev` runs, it can take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
 
-After `sst start` starts up, you will see the following output in your terminal.
+After `sst dev` starts up, you will see the following output in your terminal.
 
 ```
 Stack frank-api-sst-auth-google-ExampleStack
@@ -675,7 +675,7 @@ The handler calls a [`useSession()`]({{ site.docs_url }}/clients/auth#usesession
 
 We then fetch the user's data from our database table with `userID` being the key.
 
-Save the changes. And then open up the `sst start` terminal window. You will be prompted with:
+Save the changes. And then open up the `sst dev` terminal window. You will be prompted with:
 
 ```bash
 Stacks: There are new infrastructure changes. Press ENTER to redeploy.
@@ -843,7 +843,7 @@ When deploying to prod, we need to change our `authenticator` to redirect to the
 +redirect: process.env.IS_LOCAL ? "http://127.0.0.1:5173" : ViteStaticSite.site.url,
 ```
 
-Note that when we are developing locally via `sst start`, the `IS_LOCAL` environment variable is set. We will conditionally redirect to `127.0.0.1` or the site's URL depending on `IS_LOCAL`.
+Note that when we are developing locally via `sst dev`, the `IS_LOCAL` environment variable is set. We will conditionally redirect to `127.0.0.1` or the site's URL depending on `IS_LOCAL`.
 
 {%change%} Also remember to import the `ViteStaticSite` construct up top.
 
@@ -871,7 +871,7 @@ Stack prod-api-sst-auth-google-ExampleStack
 
 #### Add the prod redirect URI
 
-Like we did when we ran `sst start`; add the `prod` **Callback URL** to the **Authorized redirect URIs** in the GCP Console. In our case this is — `https://jd8jpfjue6.execute-api.us-east-1.amazonaws.com/auth/google/callback`
+Like we did when we ran `sst dev`; add the `prod` **Callback URL** to the **Authorized redirect URIs** in the GCP Console. In our case this is — `https://jd8jpfjue6.execute-api.us-east-1.amazonaws.com/auth/google/callback`
 
 ![GCP Console Authorize Redirect URI For Prod](/assets/examples/api-sst-auth-google/gcp-console-add-authorized-redirect-uri-for-prod.png)
 

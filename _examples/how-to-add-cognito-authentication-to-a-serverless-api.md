@@ -218,7 +218,7 @@ https://12mflx0e8e.execute-api.us-east-1.amazonaws.com/private
 
 Now to visit the private route, we need to create an account in our User Pool. Usually, we'll have our users sign up for an account through our app. But for this example, we'll use the AWS CLI to sign up a user and confirm their account.
 
-Use the following command in your terminal. Replace `--client-id` with `UserPoolClientId` from the `sst start` output above.
+Use the following command in your terminal. Replace `--client-id` with `UserPoolClientId` from the `sst dev` output above.
 
 ```bash
 $ aws cognito-idp sign-up \
@@ -228,7 +228,7 @@ $ aws cognito-idp sign-up \
   --password Passw0rd!
 ```
 
-Next we'll verify the user. Replace `--user-pool-id` with `UserPoolId` from the `sst start` output above.
+Next we'll verify the user. Replace `--user-pool-id` with `UserPoolId` from the `sst dev` output above.
 
 ```bash
 $ aws cognito-idp admin-confirm-sign-up \
@@ -253,7 +253,7 @@ $ npx aws-api-gateway-cli-test \
   --method='GET'
 ```
 
-Make sure to set the options with the ones in your `sst start` output.
+Make sure to set the options with the ones in your `sst dev` output.
 
 - `--user-pool-id` => `UserPoolId`
 - `--app-client-id` => `UserPoolClientId`

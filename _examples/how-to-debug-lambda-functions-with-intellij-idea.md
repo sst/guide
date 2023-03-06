@@ -116,7 +116,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
 
 To allow IntelliJ IDEA to set breakpoints and debug our Lambda functions we'll add it to our [Debug Configurations](https://www.jetbrains.com/help/idea/run-debug-configuration.html).
 
-Select the `package.json` from the left panel, click on the `▶️` icon next to the `start` script, and then select **Modify Run Configuration**.
+Select the `package.json` from the left panel, click on the `▶️` icon next to the `dev` script, and then select **Modify Run Configuration**.
 
 ![Select run icon beside start script in IntelliJ](/assets/examples/intellij-idea/select-run-icon-beside-start-script-in-intellij.png)
 

@@ -257,7 +257,7 @@ configuration:
   - gyMbPOiwefr6x63SjIW8NN0d1
 ```
 
-Next, we need to get the user's Cognito Identity id. Replace `--identity-pool-id` with the `IdentityPoolId` from the `sst start` log output; and replace the `--logins` with the **TOKEN** and **SECRET** from the previous step.
+Next, we need to get the user's Cognito Identity id. Replace `--identity-pool-id` with the `IdentityPoolId` from the `sst dev` log output; and replace the `--logins` with the **TOKEN** and **SECRET** from the previous step.
 
 ```bash
 $ aws cognito-identity get-id \

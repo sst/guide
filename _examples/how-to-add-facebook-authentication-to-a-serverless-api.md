@@ -221,7 +221,7 @@ Select your Facebook App and select **Generate Access Token**. Copy the generate
 
 ![Generate access token for users logged in with Facebook](/assets/examples/api-auth-facebook/generate-access-token-for-users-logged-in-with-facebook.png)
 
-Next, we need to get the user's Cognito Identity id. Replace `--identity-pool-id` with the `IdentityPoolId` from the `sst start` log output; and replace the `--logins` with the **Access Token** from the previous step.
+Next, we need to get the user's Cognito Identity id. Replace `--identity-pool-id` with the `IdentityPoolId` from the `sst dev` log output; and replace the `--logins` with the **Access Token** from the previous step.
 
 ```bash
 $ aws cognito-identity get-id \
