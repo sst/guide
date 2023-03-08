@@ -17,7 +17,7 @@ We'll first add an API to create a note. This API will take the note object as t
 {%change%} Create a new file in `stacks/ApiStack.js` and add the following.
 
 ```js
-import { Api, use } from "@serverless-stack/resources";
+import { Api, use } from "sst/constructs";
 import { StorageStack } from "./StorageStack";
 
 export function ApiStack({ stack, app }) {
@@ -27,14 +27,11 @@ export function ApiStack({ stack, app }) {
   const api = new Api(stack, "Api", {
     defaults: {
       function: {
-        permissions: [table],
-        environment: {
-          TABLE_NAME: table.tableName,
-        },
+        bind: [table],
       },
     },
     routes: {
-      "POST /notes": "functions/create.main",
+      "POST /notes": "packages/functions/src/create.main",
     },
   });
 
@@ -58,11 +55,9 @@ We are doing a couple of things of note here.
 
 - We are creating an API using SST's [`Api`]({{ site.docs_url }}/constructs/Api) construct.
 
-- We are passing in the name of our DynamoDB table as an environment variable called `TABLE_NAME`. We'll need this to query our table.
+- We are [binding]({{ site.docs_url }}/resource-binding) our DynamoDB table to our API using the `bind` prop. This will allow our API to access our table.
 
 - The first route we are adding to our API is the `POST /notes` route. It'll be used to create a note.
-
-- We are giving our API permission to access our DynamoDB table by setting `permissions: [table]`.
 
 - Finally, we are printing out the URL of our API as an output by calling `stack.addOutputs`. We are also exposing the API publicly so we can refer to it in other stacks.
 
@@ -70,36 +65,30 @@ We are doing a couple of things of note here.
 
 Let's add this new stack to the rest of our app.
 
-{%change%} In `stacks/index.js`, import the API stack at the top.
+{%change%} In `sst.config.ts`, import the API stack at the top.
 
 ```js
-import { ApiStack } from "./ApiStack";
+import { ApiStack } from "./stacks/ApiStack";
 ```
 
-{%change%} And, replace the `main` function with -
+{%change%} And, replace the `stacks` function with -
 
 ```js
-export default function main(app) {
-  app.setDefaultFunctionProps({
-    runtime: "nodejs16.x",
-    srcPath: "services",
-    bundle: {
-      format: "esm",
-    },
-  });
+stacks(app) {
   app.stack(StorageStack).stack(ApiStack);
-}
+},
 ```
 
 ### Add the Function
 
 Now let's add the function that'll be creating our note.
 
-{%change%} Create a new file in `services/functions/create.js` with the following.
+{%change%} Create a new file in `packages/functions/src/create.js` with the following.
 
 ```js
 import * as uuid from "uuid";
 import AWS from "aws-sdk";
+import { Table } from "sst/node/table";
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
@@ -108,7 +97,7 @@ export async function main(event) {
   const data = JSON.parse(event.body);
 
   const params = {
-    TableName: process.env.TABLE_NAME,
+    TableName: Table.Notes.tableName,
     Item: {
       // The attributes of the item to be created
       userId: "123", // The id of the author
@@ -140,14 +129,14 @@ There are some helpful comments in the code but let's go over them quickly.
 - Parse the input from the `event.body`. This represents the HTTP request body.
 - It contains the contents of the note, as a string — `content`.
 - It also contains an `attachment`, if one exists. It's the filename of a file that will be uploaded to [our S3 bucket]({% link _chapters/create-an-s3-bucket-in-sst.md %}).
-- We read the name of our DynamoDB table from the environment variable using `process.env.TABLE_NAME`. You'll recall that we set this above while configuring our API.
+- We can access the our DynamoDB table through `Table.Notes.tableName` from the `sst/node/table`, the [SST Node.js client]({{ site.docs_url }}/clients). Here `Notes` in `Table.Notes` is the name of our Table construct from the [Create a DynamoDB Table in SST]({% link _chapters/create-a-dynamodb-table-in-sst.md %}) chapter. By doing `bind: [table]` earlier in this chapter, we are allowing our API to access our table.
 - The `userId` is the id for the author of the note. For now we are hardcoding it to `123`. Later we'll be setting this based on the authenticated user.
 - Make a call to DynamoDB to put a new object with a generated `noteId` and the current date as the `createdAt`.
 - And if the DynamoDB call fails then return an error with the HTTP status code `500`.
 
 Let's go ahead and install the npm packages that we are using here.
 
-{%change%} Run the following in the `services/` folder.
+{%change%} Run the following in the `packages/functions/` folder.
 
 ```bash
 $ npm install aws-sdk uuid
@@ -158,17 +147,17 @@ $ npm install aws-sdk uuid
 
 ### Deploy Our Changes
 
-If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
+If you switch over to your terminal, you'll notice that your changes are being deployed.
 
-Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
+Note that, you'll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
 
 You should see that the new API stack has been deployed.
 
 ```bash
-Stack dev-notes-ApiStack
-  Status: deployed
-  Outputs:
-    ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
+✔  Deployed:
+   StorageStack
+   ApiStack
+   ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
 ```
 
 It includes the API endpoint that we created.
@@ -208,14 +197,15 @@ Before we move on to the next chapter, let's quickly refactor the code since we 
 {%change%} Start by replacing our `create.js` with the following.
 
 ```js
+import { Table } from "sst/node/table";
 import * as uuid from "uuid";
-import handler from "../util/handler";
-import dynamoDb from "../util/dynamodb";
+import handler from "@notes/core/handler";
+import dynamoDb from "@notes/core/dynamodb";
 
 export const main = handler(async (event) => {
   const data = JSON.parse(event.body);
   const params = {
-    TableName: process.env.TABLE_NAME,
+    TableName: Table.Notes.tableName,
     Item: {
       // The attributes of the item to be created
       userId: "123", // The id of the author
@@ -239,15 +229,9 @@ This code doesn't work just yet but it shows you what we want to accomplish:
 - We want to centrally handle any errors in our Lambda functions.
 - Finally, since all of our Lambda functions will be handling API endpoints, we want to handle our HTTP responses in one place.
 
-Let's start by creating the `dynamodb` util.
+Let's start by creating a `dynamodb` util that we can share across all our functions. We'll place this in the `packages/core` directory. This is where we'll be putting all our business logic.
 
-{%change%} From the project root run the following to create a `services/util` directory.
-
-```bash
-$ mkdir services/util
-```
-
-{%change%} Create a `services/util/dynamodb.js` file with:
+{%change%} Create a `packages/core/src/dynamodb.js` file with:
 
 ```js
 import AWS from "aws-sdk";
@@ -265,7 +249,7 @@ export default {
 
 Here we are creating a convenience object that exposes the DynamoDB client methods that we are going to need in this guide.
 
-{%change%} Also create a `services/util/handler.js` file with the following.
+{%change%} Also create a `packages/core/src/handler.js` file with the following.
 
 ```js
 export default function handler(lambda) {
@@ -309,7 +293,7 @@ Next, we are going to add the API to get a note given its id.
 
 - Response `statusCode: 500`
 
-  If you see a `statusCode: 500` response when you invoke your function, the error has been reported by our code in the `catch` block. You'll see a `console.error` is included in our `util/handler.js` code above. Incorporating logs like these can help give you insight on issues and how to resolve them.
+  If you see a `statusCode: 500` response when you invoke your function, the error has been reported by our code in the `catch` block. You'll see a `console.error` is included in our `handler.js` code above. Incorporating logs like these can help give you insight on issues and how to resolve them.
 
   ```js
   } catch (e) {

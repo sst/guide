@@ -12,15 +12,16 @@ Now that we [created a note]({% link _chapters/add-an-api-to-create-a-note.md %}
 
 ### Add the Function
 
-{%change%} Create a new file in `services/functions/get.js` in your project root with the following:
+{%change%} Create a new file in `packages/functions/src/get.js` in your project root with the following:
 
 ```js
-import handler from "../util/handler";
-import dynamoDb from "../util/dynamodb";
+import { Table } from "sst/node/table";
+import handler from "@notes/core/handler";
+import dynamoDb from "@notes/core/dynamodb";
 
 export const main = handler(async (event) => {
   const params = {
-    TableName: process.env.TABLE_NAME,
+    TableName: Table.Notes.tableName,
     // 'Key' defines the partition key and sort key of the item to be retrieved
     Key: {
       userId: "123", // The id of the author
@@ -47,29 +48,29 @@ Let's add a new route for the get note API.
 {%change%} Add the following below the `POST /notes` route in `stacks/ApiStack.js`.
 
 ```js
-"GET /notes/{id}": "functions/get.main",
+"GET /notes/{id}": "packages/functions/src/get.main",
 ```
 
 ### Deploy our changes
 
-If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
+If you switch over to your terminal, you'll notice that your changes are being deployed.
 
-Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
+Note that, you'll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
 
 You should see that the API stack is being updated.
 
 ```bash
-Stack dev-notes-ApiStack
-  Status: deployed
-  Outputs:
-    ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
+✔  Deployed:
+   StorageStack
+   ApiStack
+   ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
 ```
 
 ### Test the API
 
 Let's test the get notes API. In the [previous chapter]({% link _chapters/add-an-api-to-get-a-note.md %}) we tested our create note API. It should've returned the new note's id as the `noteId`.
 
-Head back to the **API** tab in the [SST Console]({{ site.console_url }}) and select the `/notes/{id}` API.
+Head back to the **API** tab in the [SST Console]({{ site.console_url }}) and select the `/notes/{id}` API. You might have to refresh your console.
 
 {%change%} Set the `noteId` as the **id** and click **Send**.
 

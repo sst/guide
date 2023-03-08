@@ -14,19 +14,28 @@ Now that we understand what _infrastructure as code_ is, we are ready to create 
 {%change%} Run the following in your working directory.
 
 ```bash
-$ npx create-sst@one --template=minimal/javascript-starter notes
+$ npx create-sst@latest notes
 $ cd notes
 $ npm install
 ```
 
-By default, our app will be deployed to an environment (or stage) called `dev` in the `us-east-1` AWS region. This can be changed in the `sst.json` in your project root.
+By default, our app will be deployed to the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```json
-{
-  "name": "notes",
-  "region": "us-east-1",
-  "main": "stacks/index.js"
-}
+```ts
+import { SSTConfig } from "sst";
+import { API } from "./stacks/MyStack";
+
+export default {
+  config(_input) {
+    return {
+      name: "notes",
+      region: "us-east-1",
+    };
+  },
+  stacks(app) {
+    app.stack(API);
+  },
+} satisfies SSTConfig;
 ```
 
 ## Project layout
@@ -37,9 +46,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `services/` — App Code
+2. `packages/` — App Code
 
-   The Lambda function code that's run when your API is invoked is placed in the `services/` directory of your project.
+   The Lambda function code that's run when your API is invoked is placed in the `packages/functions` directory of your project. While `packages/core` contains our business logic.
 
 Later on we'll be adding a `frontend/` directory for our frontend React app.
 

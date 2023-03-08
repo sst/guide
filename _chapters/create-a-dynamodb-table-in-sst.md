@@ -16,7 +16,7 @@ We are now going to start creating our infrastructure in [SST]({{ site.sst_githu
 {%change%} Add the following to a new file in `stacks/StorageStack.js`.
 
 ```js
-import { Table } from "@serverless-stack/resources";
+import { Table } from "sst/constructs";
 
 export function StorageStack({ stack, app }) {
   // Create the DynamoDB table
@@ -73,7 +73,7 @@ The _Hello World_ API that we previously created, can now be removed. We can als
 {%change%} To remove the starter stack, run the following from your project root.
 
 ```bash
-$ npx sst remove MyStack
+$ npx sst remove API
 ```
 
 This will take a minute to run.
@@ -81,44 +81,44 @@ This will take a minute to run.
 {%change%} Also remove the template files.
 
 ```bash
-$ rm stacks/MyStack.js services/functions/lambda.js
+$ rm stacks/MyStack.ts packages/core/src/time.ts packages/functions/src/lambda.ts
 ```
 
 ### Add to the App
 
 Now let's add our new stack to the app.
 
-{%change%} Replace the `stacks/index.js` with this.
+{%change%} Replace the `sst.config.ts` with this.
 
 ```js
-import { StorageStack } from "./StorageStack";
+import { SSTConfig } from "sst";
+import { StorageStack } from "./stacks/StorageStack";
 
-export default function main(app) {
-  app.setDefaultFunctionProps({
-    runtime: "nodejs16.x",
-    srcPath: "services",
-    bundle: {
-      format: "esm",
-    },
-  });
-  app.stack(StorageStack);
-}
+export default {
+  config(_input) {
+    return {
+      name: "notes",
+      region: "us-east-1",
+    };
+  },
+  stacks(app) {
+    app.stack(StorageStack);
+  },
+} satisfies SSTConfig;
 ```
 
 ### Deploy the App
 
 If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
 
-Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
+Note that, you'll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
 
 You should see something like this at the end of the deploy process.
 
 ```bash
-Stack dev-notes-StorageStack
-  Status: deployed
+✔  Deployed:
+   StorageStack
 ```
-
-The `Stack` name above of `dev-notes-StorageStack` is a string derived from your `${stageName}-${appName}-${stackName}`. Your `appName` is defined in the `name` field of your `sst.json` file and your `stackName` is the function name you choose for your stack in `stacks/StorageStack.js'.
 
 You can also head over to the **DynamoDB** tab in the [SST Console]({{ site.console_url }}) and check out the new table.
 

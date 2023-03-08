@@ -21,7 +21,7 @@ Setting this all up can be pretty complicated in CDK. SST has a simple [`Auth`](
 
 ```js
 import * as iam from "aws-cdk-lib/aws-iam";
-import { Cognito, use } from "@serverless-stack/resources";
+import { Cognito, use } from "sst/constructs";
 import { StorageStack } from "./StorageStack";
 import { ApiStack } from "./ApiStack";
 
@@ -103,25 +103,18 @@ One other thing to note is that, the federated identity id is a UUID that is ass
 
 Let's add this stack to our app.
 
-{%change%} Replace the `main` function in `stacks/index.js` with this.
+{%change%} Replace the `stacks` function in `sst.config.ts` with this.
 
 ```js
-export default function main(app) {
-  app.setDefaultFunctionProps({
-    runtime: "nodejs16.x",
-    srcPath: "services",
-    bundle: {
-      format: "esm",
-    },
-  });
+stacks(app) {
   app.stack(StorageStack).stack(ApiStack).stack(AuthStack);
-}
+},
 ```
 
 {%change%} Also, import the new stack at the top.
 
 ```js
-import { AuthStack } from "./AuthStack";
+import { AuthStack } from "./stacks/AuthStack";
 ```
 
 ### Add Auth to the API
@@ -138,20 +131,22 @@ This tells our API that we want to use `AWS_IAM` across all our routes.
 
 ### Deploy the App
 
-If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
+If you switch over to your terminal, you'll notice that your changes are being deployed.
 
-Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
+Note that, you'll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
 
 You should see something like this at the end of the deploy process.
 
 ```bash
-Stack dev-notes-AuthStack
-  Status: deployed
-  Outputs:
-    Region: us-east-1
-    IdentityPoolId: us-east-1:9bd0357e-2ac1-418d-a609-bc5e7bc064e3
-    UserPoolClientId: 3fetogamdv9aqa0393adsd7viv
-    UserPoolId: us-east-1_TYEz7XP7P
+✔  Deployed:
+   StorageStack
+   ApiStack
+   ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
+   AuthStack
+   IdentityPoolId: us-east-1:9bd0357e-2ac1-418d-a609-bc5e7bc064e3
+   Region: us-east-1
+   UserPoolClientId: 3fetogamdv9aqa0393adsd7viv
+   UserPoolId: us-east-1_TYEz7XP7P
 ```
 
 You'll also see our new User Pool if you head over to the **Cognito** tab in the [SST Console]({{ site.console_url }}).

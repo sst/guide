@@ -12,16 +12,17 @@ Now let's create an API that allows a user to update a note with a new note obje
 
 ### Add the Function
 
-{%change%} Create a new file in `services/functions/update.js` and paste the following.
+{%change%} Create a new file in `packages/functions/src/update.js` and paste the following.
 
 ```js
-import handler from "../util/handler";
-import dynamoDb from "../util/dynamodb";
+import { Table } from "sst/node/table";
+import handler from "@notes/core/handler";
+import dynamoDb from "@notes/core/dynamodb";
 
 export const main = handler(async (event) => {
   const data = JSON.parse(event.body);
   const params = {
-    TableName: process.env.TABLE_NAME,
+    TableName: Table.Notes.tableName,
     // 'Key' defines the partition key and sort key of the item to be updated
     Key: {
       userId: "123", // The id of the author
@@ -55,22 +56,22 @@ Let's add a new route for the get note API.
 {%change%} Add the following below the `GET /notes/{id}` route in `stacks/ApiStack.js`.
 
 ```js
-"PUT /notes/{id}": "functions/update.main",
+"PUT /notes/{id}": "packages/functions/src/update.main",
 ```
 
 ### Deploy Our Changes
 
-If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
+If you switch over to your terminal, you'll notice that your changes are being deployed.
 
-Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
+Note that, you'll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
 
 You should see that the API stack is being updated.
 
 ```bash
-Stack dev-notes-ApiStack
-  Status: deployed
-  Outputs:
-    ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
+✔  Deployed:
+   StorageStack
+   ApiStack
+   ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
 ```
 
 ### Test the API

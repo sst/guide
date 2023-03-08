@@ -88,7 +88,7 @@ And let's add a couple of styles to animate our loading icon.
 
 ```css
 .LoaderButton {
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .LoaderButton .spinning {
@@ -116,9 +116,9 @@ Now we can use our new component in our `Login` container.
 {%change%} In `src/containers/Login.js` find the `<Button>` component in the `return` statement.
 
 ```html
-<Button block="true" size="lg" type="submit" disabled={!validateForm()}>
+<button block="true" size="lg" type="submit" disabled="{!validateForm()}">
   Login
-</Button>
+</button>
 ```
 
 {%change%} And replace it with this.
@@ -128,8 +128,8 @@ Now we can use our new component in our `Login` container.
   block="true"
   size="lg"
   type="submit"
-  isLoading={isLoading}
-  disabled={!validateForm()}
+  isLoading="{isLoading}"
+  disabled="{!validateForm()}"
 >
   Login
 </LoaderButton>

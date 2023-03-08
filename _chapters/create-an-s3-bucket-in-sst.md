@@ -25,7 +25,7 @@ const bucket = new Bucket(stack, "Uploads");
 {%change%} Make sure to import the `Bucket` construct. Replace the import line up top with this.
 
 ```js
-import { Bucket, Table } from "@serverless-stack/resources";
+import { Bucket, Table } from "sst/constructs";
 ```
 
 This creates a new S3 bucket using the SST [`Bucket`]({{ site.docs_url }}/constructs/Bucket) construct.
@@ -39,6 +39,7 @@ return {
 ```
 
 {%change%} And add the `bucket` below `table`.
+
 ```js
   bucket,
 ```
@@ -49,15 +50,15 @@ Note, learn more about sharing resources between stacks [here](https://docs.sst.
 
 ### Deploy the App
 
-If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
+If you switch over to your terminal, you'll notice that your changes are being deployed.
 
-Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
+Note that, you'll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
 
 You should see that the storage stack has been updated.
 
 ```bash
-Stack dev-notes-StorageStack
-  Status: deployed
+✔  Deployed:
+   StorageStack
 ```
 
 You can also head over to the **Buckets** tab in the [SST Console]({{ site.console_url }}) and check out the new bucket.

@@ -35,27 +35,25 @@ Also, since we won't be committing this file to Git, we'll need to add this to o
 
 Next, let's add these to our functions.
 
-{%change%} Add the following below the `TABLE_NAME: table.tableName,` line in `stacks/ApiStack.js`:
+{%change%} Add the following below the `bind: [table],` line in `stacks/ApiStack.js`:
 
 ```js
-STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+environment: {
+  STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+},
 ```
 
 We are taking the environment variables in our SST app and passing it into our API.
 
 ### Deploy our changes
 
-If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
-
-Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
-
-You should see that the API stack is being updated.
+Switch over to your terminal and restart `sst dev` so that it picks up the new `.env.local` file.
 
 ```bash
-Stack dev-notes-ApiStack
-  Status: deployed
-  Outputs:
-    ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
+✔  Deployed:
+   StorageStack
+   ApiStack
+   ...
 ```
 
 Now we are ready to add an API to handle billing.

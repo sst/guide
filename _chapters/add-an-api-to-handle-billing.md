@@ -12,18 +12,18 @@ Now let's get started with creating an API to handle billing. It's going to take
 
 ### Add a Billing Lambda
 
-{%change%} Start by installing the Stripe NPM package. Run the following in the `services/` folder of our project.
+{%change%} Start by installing the Stripe NPM package. Run the following in the `packages/functions/` folder of our project.
 
 ```bash
 $ npm install stripe
 ```
 
-{%change%} Create a new file in `services/functions/billing.js` with the following.
+{%change%} Create a new file in `packages/functions/src/billing.js` with the following.
 
 ```js
 import Stripe from "stripe";
-import handler from "../util/handler";
-import { calculateCost } from "../util/cost";
+import handler from "@notes/core/handler";
+import { calculateCost } from "@notes/core/cost";
 
 export const main = handler(async (event) => {
   const { storage, source } = JSON.parse(event.body);
@@ -60,7 +60,7 @@ Note, if you are testing this from India, you'll need to add some shipping infor
 
 Now let's implement our `calculateCost` method. This is primarily our _business logic_.
 
-{%change%} Create a `services/util/cost.js` and add the following.
+{%change%} Create a `packages/core/src/cost.js` and add the following.
 
 ```js
 export function calculateCost(storage) {
@@ -80,22 +80,22 @@ Let's add a new route for our billing API.
 {%change%} Add the following below the `DELETE /notes/{id}` route in `stacks/ApiStack.js`.
 
 ```js
-"POST /billing": "functions/billing.main",
+"POST /billing": "packages/functions/src/billing.main",
 ```
 
 ### Deploy Our Changes
 
-If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
+If you switch over to your terminal, you'll notice that your changes are being deployed.
 
-Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
+Note that, you'll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
 
 You should see that the API stack is being updated.
 
 ```bash
-Stack dev-notes-ApiStack
-  Status: deployed
-  Outputs:
-    ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
+✔  Deployed:
+   StorageStack
+   ApiStack
+   ...
 ```
 
 ### Test the Billing API
