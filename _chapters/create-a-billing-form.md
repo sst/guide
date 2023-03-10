@@ -102,6 +102,7 @@ export default function BillingForm({ isLoading, onSubmit }) {
           style: {
             base: {
               fontSize: "16px",
+              fontWeight: "400",
               color: "#495057",
               fontFamily: "'Open Sans', sans-serif",
             },
