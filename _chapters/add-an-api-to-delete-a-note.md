@@ -12,15 +12,16 @@ Finally, we are going to create an API that allows a user to delete a given note
 
 ### Add the Function
 
-{%change%} Create a new file in `services/functions/delete.js` and paste the following.
+{%change%} Create a new file in `packages/functions/src/delete.js` and paste the following.
 
 ```js
-import handler from "../util/handler";
-import dynamoDb from "../util/dynamodb";
+import { Table } from "sst/node/table";
+import handler from "@notes/core/handler";
+import dynamoDb from "@notes/core/dynamodb";
 
 export const main = handler(async (event) => {
   const params = {
-    TableName: process.env.TABLE_NAME,
+    TableName: Table.Notes.tableName,
     // 'Key' defines the partition key and sort key of the item to be removed
     Key: {
       userId: "123", // The id of the author
@@ -43,22 +44,22 @@ Let's add a new route for the delete note API.
 {%change%} Add the following below the `PUT /notes{id}` route in `stacks/ApiStack.js`.
 
 ```js
-"DELETE /notes/{id}": "functions/delete.main",
+"DELETE /notes/{id}": "packages/functions/src/delete.main",
 ```
 
 ### Deploy Our Changes
 
-If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
+If you switch over to your terminal, you'll notice that your changes are being deployed.
 
-Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
+Note that, you'll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
 
 You should see that the API stack is being updated.
 
 ```bash
-Stack dev-notes-ApiStack
-  Status: deployed
-  Outputs:
-    ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
+✔  Deployed:
+   StorageStack
+   ApiStack
+   ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
 ```
 
 ### Test the API

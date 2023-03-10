@@ -10,7 +10,7 @@ comments_id: custom-domains-for-react-apps-on-aws/2463
 
 In the [previous chapter we configured a custom domain for our serverless API]({% link _chapters/custom-domains-in-serverless-apis.md %}). Now let's do the same for our frontend React.js app.
 
-{%change%} In the `stacks/FrontendStack.js` add the following below the `new ReactStaticSite(` line.
+{%change%} In the `stacks/FrontendStack.js` add the following below the `new StaticSite(` line.
 
 ```js
 customDomain:
@@ -52,7 +52,7 @@ We also need to update the outputs of our frontend stack.
 
 ```js
 stack.addOutputs({
-  SiteUrl: site.customDomainUrl || site.url,
+  SiteUrl: site.customDomainUrl || site.url || "http://localhost:3000",
 });
 ```
 
@@ -71,12 +71,10 @@ $ npx sst deploy --stage prod
 This command will take a few minutes. At the end of the deploy process you should see something like this.
 
 ```bash
-Stack prod-notes-FrontendStack
-  Status: no changes
-  Outputs:
-    SiteUrl: https://my-serverless-app.com
-  ReactSite:
-    REACT_APP_API_URL: https://api.my-serverless-app.com
+✔  Deployed:
+   ...
+   FrontendStack
+   SiteUrl: https://my-serverless-app.com
 ```
 
 And that's it! Our React.js app is now deployed to prod under our own domain!

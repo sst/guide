@@ -14,18 +14,15 @@ We've covered debugging [errors in our code]({% link _chapters/logic-errors-in-l
 
 Lambda functions could fail not because of an error inside your handler code, but because of an error outside it. In this case, your Lambda function won't be invoked. Let's add some faulty code outside our handler function.
 
-{%change%} Replace our `services/functions/get.js` with the following.
+{%change%} Replace the `main` function in `packages/functions/src/get.js` with the following.
 
 ```js
-import handler from "../util/handler";
-import dynamoDb from "../util/dynamodb";
-
 // Some faulty code
 dynamoDb.notExist();
 
 export const main = handler(async (event) => {
   const params = {
-    TableName: process.env.tableName,
+    TableName: Table.Notes.tableName,
     // 'Key' defines the partition key and sort key of the item to be retrieved
     // - 'userId': Identity Pool identity id of the authenticated user
     // - 'noteId': path parameter
@@ -71,16 +68,13 @@ Note that, you might see there are 3 events for this error. This is because the 
 
 Another error that can happen outside a Lambda function is when the handler has been misnamed.
 
-{%change%} Replace our `services/functions/get.js` with the following.
+{%change%} Replace the `main` function in `packages/functions/src/get.js` with the following.
 
 ```js
-import handler from "../util/handler";
-import dynamoDb from "../util/dynamodb";
-
 // Wrong handler function name
 export const main2 = handler(async (event) => {
   const params = {
-    TableName: process.env.tableName,
+    TableName: Table.Notes.tableName,
     // 'Key' defines the partition key and sort key of the item to be retrieved
     // - 'userId': Identity Pool identity id of the authenticated user
     // - 'noteId': path parameter
@@ -122,21 +116,20 @@ And that about covers the main Lambda function errors. So the next time you see 
 
 Let's cleanup all the faulty code.
 
-{%change%} Replace `services/functions/get.js` with the original.
+{%change%} Replace `packages/functions/src/get.js` with the following.
 
 ```js
-import handler from "../util/handler";
-import dynamoDb from "../util/dynamodb";
+import { Table } from "sst/node/table";
+import handler from "@notes/core/handler";
+import dynamoDb from "@notes/core/dynamodb";
 
 export const main = handler(async (event) => {
   const params = {
-    TableName: process.env.tableName,
+    TableName: Table.Notes.tableName,
     // 'Key' defines the partition key and sort key of the item to be retrieved
-    // - 'userId': Identity Pool identity id of the authenticated user
-    // - 'noteId': path parameter
     Key: {
       userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
-      noteId: event.pathParameters.id,
+      noteId: event.pathParameters.id, // The id of the note from the path
     },
   };
 

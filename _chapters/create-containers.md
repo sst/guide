@@ -24,10 +24,8 @@ import "./App.css";
 function App() {
   return (
     <div className="App container py-3">
-      <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
-        <Navbar.Brand className="font-weight-bold text-muted">
-          Scratch
-        </Navbar.Brand>
+      <Navbar collapseOnSelect bg="light" expand="md" className="mb-3 px-3">
+        <Navbar.Brand className="fw-bold text-muted">Scratch</Navbar.Brand>
         <Navbar.Toggle />
       </Navbar>
     </div>
@@ -154,10 +152,8 @@ So the `App` function component of our `src/App.js` should now look like this.
 function App() {
   return (
     <div className="App container py-3">
-      <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
-        <Navbar.Brand className="font-weight-bold text-muted">
-          Scratch
-        </Navbar.Brand>
+      <Navbar collapseOnSelect bg="light" expand="md" className="mb-3 px-3">
+        <Navbar.Brand className="fw-bold text-muted">Scratch</Navbar.Brand>
         <Navbar.Toggle />
       </Navbar>
       <Routes />

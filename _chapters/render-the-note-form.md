@@ -67,7 +67,7 @@ return (
             onChange={(e) => setContent(e.target.value)}
           />
         </Form.Group>
-        <Form.Group controlId="file">
+        <Form.Group className="mt-2" controlId="file">
           <Form.Label>Attachment</Form.Label>
           {note.attachment && (
             <p>

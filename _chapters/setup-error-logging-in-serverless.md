@@ -23,7 +23,7 @@ We are going to look at how to setup a debugging framework to catch the above er
 
 Let's start by adding some code to help us with that.
 
-{%change%} Create a `services/util/debug.js` file from your project root with the following.
+{%change%} Create a `packages/core/src/debug.js` file from your project root with the following.
 
 ```js
 import util from "util";
@@ -64,12 +64,14 @@ We are doing a few things of note in this simple helper.
 
   We start by enabling logging for the AWS SDK. We do so by running `AWS.config.logger = { log: debug }`. This is telling the AWS SDK to log using our logger, the `debug()` method (we'll look at this below). So when you make a call to an AWS service, ie. a query call to the DynamoDB table `dev-notes`, this will log:
 
-  ```` bash
+  ````bash
   [AWS dynamodb 200 0.296s 0 retries] query({ TableName: 'dev-notes',
     KeyConditionExpression: 'userId = :userId',
     ExpressionAttributeValues: { ':userId': { S: 'USER-SUB-1234' } } })
   ```
   Note, we only want to log this info when there is an error. We'll look at how we accomplish this below.
+
+  ````
 
 - **Log API request info**
 
@@ -89,8 +91,6 @@ We are doing a few things of note in this simple helper.
 So in our Lambda function code, if we want to log some debug information that only gets printed out if we have an error, we'll do the following:
 
 ```js
-import debug from "../util/debug";
-
 debug(
   "This stores the message and prints to CloudWatch if Lambda function later throws an exception"
 );
@@ -112,7 +112,7 @@ You'll recall that all our Lambda functions are wrapped using a `handler()` meth
 
 We'll use the debug lib that we added above to improve our error handling.
 
-{%change%} Replace our `services/util/handler.js` with the following.
+{%change%} Replace our `packages/core/src/handler.js` with the following.
 
 ```js
 import * as debug from "./debug";
@@ -162,8 +162,6 @@ This should be fairly straightforward:
 You might recall the way we are currently using the above error handler in our Lambda functions.
 
 ```js
-import handler from "../util/handler";
-
 export const main = handler((event, context) => {
   // Do some work
   const a = 1 + 1;

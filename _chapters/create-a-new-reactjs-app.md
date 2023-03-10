@@ -4,7 +4,7 @@ title: Create a New React.js App
 date: 2017-01-06 00:00:00
 lang: en
 ref: create-a-new-react-js-app
-description: In this chapter we'll use Create React App to create a new React.js app. We'll be deploying our React app to AWS using the SST ReactStaticSite construct. It'll also load the environment variables from our serverless app.
+description: In this chapter we'll use Create React App to create a new React.js app. We'll be deploying our React app to AWS using the SST StaticSite construct. It'll also load the environment variables from our serverless app.
 comments_id: create-a-new-react-js-app/68
 ---
 
@@ -30,7 +30,7 @@ We also want to load the environment variables from our backend. To do this, weâ
 {%change%} Run the following **in the `frontend/` directory**.
 
 ```bash
-$ npm install @serverless-stack/static-site-env --save-dev
+$ npm install sst --save-dev
 ```
 
 Now to use this package, we'll add it to our `package.json` scripts.
@@ -44,17 +44,17 @@ Now to use this package, we'll add it to our `package.json` scripts.
 {%change%} With.
 
 ```js
-"start": "sst-env -- react-scripts start",
+"start": "sst env react-scripts start",
 ```
 
 ### Add the React App to SST
 
-We are going to be deploying our React app to AWS. To do that we'll be using the SST [`ReactStaticSite`]({{ site.docs_url }}/constructs/ReactStaticSite) construct.
+We are going to be deploying our React app to AWS. To do that we'll be using the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite) construct.
 
 {%change%} Create a new file in `stacks/FrontendStack.js` and add the following.
 
 ```js
-import { ReactStaticSite, use } from "@serverless-stack/resources";
+import { StaticSite, use } from "sst/constructs";
 import { ApiStack } from "./ApiStack";
 import { AuthStack } from "./AuthStack";
 import { StorageStack } from "./StorageStack";
@@ -65,8 +65,10 @@ export function FrontendStack({ stack, app }) {
   const { bucket } = use(StorageStack);
 
   // Define our React app
-  const site = new ReactStaticSite(stack, "ReactSite", {
+  const site = new StaticSite(stack, "ReactSite", {
     path: "frontend",
+    buildOutput: "build",
+    buildCommand: "npm run build",
     // Pass in our environment variables
     environment: {
       REACT_APP_API_URL: api.customDomainUrl || api.url,
@@ -80,7 +82,7 @@ export function FrontendStack({ stack, app }) {
 
   // Show the url in the output
   stack.addOutputs({
-    SiteUrl: site.url,
+    SiteUrl: site.url || "http://localhost:3000",
   });
 }
 ```
@@ -89,7 +91,7 @@ We are creating a new stack in SST. We could've used one of the existing stacks 
 
 We are doing a couple of things of note here:
 
-1. We are pointing our `ReactStaticSite` construct to the `frontend/` directory where our React app is.
+1. We are pointing our `StaticSite` construct to the `frontend/` directory where our React app is.
 2. We are passing in the outputs from our other stacks as [environment variables in React](https://create-react-app.dev/docs/adding-custom-environment-variables/). This means that we won't have to hard code them in our React app. You can read more about this over in our chapter on, [Setting serverless environments variables in a React app]({% link _chapters/setting-serverless-environments-variables-in-a-react-app.md %}).
 3. And finally, we are outputting out the URL of our React app.
 
@@ -97,25 +99,22 @@ We are doing a couple of things of note here:
 
 Let's add this new stack to the rest of our app.
 
-{%change%} Replace the `main` function in `stacks/index.js` with.
+{%change%} Replace the `stacks` function in `sst.config.ts` with.
 
 ```js
-export default function main(app) {
-  app.setDefaultFunctionProps({
-    runtime: "nodejs16.x",
-    srcPath: "services",
-    bundle: {
-      format: "esm",
-    },
-  });
-  app.stack(StorageStack).stack(ApiStack).stack(AuthStack).stack(FrontendStack);
-}
+stacks(app) {
+  app
+    .stack(StorageStack)
+    .stack(ApiStack)
+    .stack(AuthStack)
+    .stack(FrontendStack);
+},
 ```
 
 {%change%} Also, import the new stack at the top.
 
 ```js
-import { FrontendStack } from "./FrontendStack";
+import { FrontendStack } from "./stacks/FrontendStack";
 ```
 
 ### Deploy the Changes
@@ -127,17 +126,10 @@ Note that, you'll need to have `sst start` running for this to happen. If you ha
 You should see that the new frontend stack has been deployed.
 
 ```bash
-Stack dev-notes-FrontendStack
-  Status: deployed
-  Outputs:
-    SiteUrl: https://d3j4c16hczgtjw.cloudfront.net
-  ReactSite:
-    REACT_APP_API_URL: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
-    REACT_APP_BUCKET: dev-notes-StorageStack-uploadsbucketc4b27cc7-xmqzx69e5bpt
-    REACT_APP_IDENTITY_POOL_ID: us-east-1:2d7b425d-eb44-4c42-afbd-645018b37a27
-    REACT_APP_REGION: us-east-1
-    REACT_APP_USER_POOL_CLIENT_ID: jbf2qe4h17tl2u94fntkjii7n
-    REACT_APP_USER_POOL_ID: us-east-1_gll8EbWrr
+âœ”  Deployed:
+   ...
+   FrontendStack
+   SiteUrl: http://localhost:3000
 ```
 
 ### Start the React App

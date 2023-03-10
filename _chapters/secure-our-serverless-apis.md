@@ -45,31 +45,31 @@ userId: "123", // The id of the author
 
 Let's change that.
 
-{%change%} Replace the above line in `services/functions/create.js` with.
+{%change%} Replace the above line in `packages/functions/src/create.js` with.
 
 ```js
 userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
 ```
 
-{%change%} Do the same in the `services/functions/get.js`.
+{%change%} Do the same in the `packages/functions/src/get.js`.
 
 ```js
 userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
 ```
 
-{%change%} And in the `services/functions/update.js`.
+{%change%} And in the `packages/functions/src/update.js`.
 
 ```js
 userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
 ```
 
-{%change%} In `services/functions/delete.js` as well.
+{%change%} In `packages/functions/src/delete.js` as well.
 
 ```js
 userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
 ```
 
-{%change%} In `services/functions/list.js` find this line instead.
+{%change%} In `packages/functions/src/list.js` find this line instead.
 
 ```js
 ":userId": "123",

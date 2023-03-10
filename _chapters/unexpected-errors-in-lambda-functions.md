@@ -14,15 +14,12 @@ Previously, we looked at [how to debug errors in our Lambda function code]({% li
 
 Our Lambda functions often make API requests to interact with other services. In our notes app, we talk to DynamoDB to store and fetch data; and we also talk to Stripe to process payments. When we make an API request, there is the chance the HTTP connection times out or the remote service takes too long to respond. We are going to look at how to detect and debug the issue. The default timeout for Lambda functions are 6 seconds. So let's simulate a timeout using `setTimeout`.
 
-{%change%} Replace our `services/functions/get.js` with the following:
+{%change%} Replace the `main` function in `packages/functions/src/get.js` with the following.
 
 ```js
-import handler from "../util/handler";
-import dynamoDb from "../util/dynamodb";
-
 export const main = handler(async (event) => {
   const params = {
-    TableName: process.env.tableName,
+    TableName: Table.Notes.tableName,
     // 'Key' defines the partition key and sort key of the item to be retrieved
     // - 'userId': Identity Pool identity id of the authenticated user
     // - 'noteId': path parameter
@@ -75,12 +72,9 @@ Next let's look at what happens when our Lambda function runs out of memory.
 
 By default, a Lambda function has 1024MB of memory. You can assign any amount of memory between 128MB and 3008MB in 64MB increments. So in our code, let's try and allocate more memory till it runs out of memory.
 
-{%change%} Replace your `services/functions/get.js` with:
+{%change%} Replace the `main` function in `packages/functions/src/get.js` with the following.
 
 ```js
-import handler from "../util/handler";
-import dynamoDb from "../util/dynamodb";
-
 function allocMem() {
   let bigList = Array(4096000).fill(1);
   return bigList.concat(allocMem());
@@ -88,7 +82,7 @@ function allocMem() {
 
 export const main = handler(async (event) => {
   const params = {
-    TableName: process.env.tableName,
+    TableName: Table.Notes.tableName,
     // 'Key' defines the partition key and sort key of the item to be retrieved
     // - 'userId': Identity Pool identity id of the authenticated user
     // - 'noteId': path parameter

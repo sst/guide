@@ -64,7 +64,7 @@ export default function NewNote() {
             onChange={(e) => setContent(e.target.value)}
           />
         </Form.Group>
-        <Form.Group controlId="file">
+        <Form.Group className="mt-2" controlId="file">
           <Form.Label>Attachment</Form.Label>
           <Form.Control onChange={handleFileChange} type="file" />
         </Form.Group>

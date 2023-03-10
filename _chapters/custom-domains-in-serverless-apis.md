@@ -48,10 +48,11 @@ This command will take a few minutes as it'll deploy your app to a completely ne
 At the end of the deploy process you should see something like this.
 
 ```bash
-Stack prod-notes-ApiStack
-  Status: no changes
-  Outputs:
-    ApiEndpoint: https://api.my-serverless-app.com
+✔  Deployed:
+   StorageStack
+   ApiStack
+   ApiEndpoint: https://api.my-serverless-app.com
+   ...
 ```
 
 This is great! We now have our app deployed to prod and our API has a custom domain.

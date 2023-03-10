@@ -24,12 +24,14 @@ Let's start by writing a test for the CDK infrastructure in our app. We are goin
 
 ```js
 import { Template } from "aws-cdk-lib/assertions";
-import { App, getStack } from "@serverless-stack/resources";
+import { initProject } from "sst/project";
+import { App, getStack } from "sst/constructs";
 import { StorageStack } from "../StorageStack";
-import { test } from "vitest";
+import { it } from "vitest";
 
-test("Test StorageStack", () => {
-  const app = new App();
+it("Test StorageStack", async () => {
+  await initProject({});
+  const app = new App({ mode: "deploy" });
   // WHEN
   app.stack(StorageStack);
   // THEN
@@ -46,11 +48,11 @@ This is a very simple CDK test that checks if our storage stack creates a Dynamo
 
 We are also going to test the business logic in our Lambda functions.
 
-{%change%} Create a new file in `services/test/cost.test.js` and add the following.
+{%change%} Create a new file in `packages/core/test/cost.test.js` and add the following.
 
 ```js
 import { expect, test } from "vitest";
-import { calculateCost } from "../util/cost";
+import { calculateCost } from "../src/cost";
 
 test("Lowest tier", () => {
   const storage = 10;
@@ -82,15 +84,15 @@ test("Highest tier", () => {
 
 This should be straightforward. We are adding 3 tests. They are testing the different tiers of our pricing structure. We test the case where a user is trying to store 10, 100, and 101 notes. And comparing the calculated cost to the one we are expecting.
 
-We also have a sample test created with the starter that we can remove.
-
-{%change%} Run the following in your project root.
-
-```bash
-$ rm services/test/sample.test.js
-```
-
 ### Run Tests
+
+Now let's add a test script.
+
+{%change%} Add the following to the `scripts` in your `packages.json`.
+
+```js
+"test": "sst bind vitest run",
+```
 
 And we can run our tests by using the following command in the root of our project.
 
@@ -101,8 +103,8 @@ $ npm test
 You should see something like this:
 
 ```bash
- √ services/test/cost.test.js (3)
- √ stacks/test/StorageStack.test.js (1)
+ ✓ packages/core/test/cost.test.js (3)
+ ✓ stacks/test/StorageStack.test.js (1)
 
 Test Files  2 passed (2)
      Tests  4 passed (4)

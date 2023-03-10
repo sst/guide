@@ -38,13 +38,13 @@ Let's remove the old icons files.
 
 {%change%} Run the following from our `frontend/` directory.
 
-``` bash
-$ rm public/logo192.png, public/logo512.png, public/favicon.ico
+```bash
+$ rm public/logo192.png public/logo512.png public/favicon.ico
 ```
 
 {%change%} Then replace the contents of `public/manifest.json` with the following:
 
-``` json
+```json
 {
   "short_name": "Scratch",
   "name": "Scratch Note Taking App",
@@ -71,7 +71,7 @@ To include a file from the `public/` directory in your HTML, Create React App ne
 
 {%change%} Add this to your `public/index.html`.
 
-``` html
+```html
 <link
   rel="apple-touch-icon"
   sizes="180x180"
@@ -100,14 +100,11 @@ To include a file from the `public/` directory in your HTML, Create React App ne
 
 {%change%} And **remove** the following lines that reference the original favicon and theme color.
 
-``` html
-<meta name="theme-color" content="#000000">
-<link rel="icon" href="%PUBLIC_URL%/favicon.ico">
+```html
+<meta name="theme-color" content="#000000" />
+<link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
 <link rel="apple-touch-icon" href="logo192.png" />
-<meta
-  name="description"
-  content="Web site created using create-react-app"
-/>
+<meta name="description" content="Web site created using create-react-app" />
 ```
 
 Finally head over to your browser and try the `/favicon-32x32.png` path to ensure that the files were added correctly.

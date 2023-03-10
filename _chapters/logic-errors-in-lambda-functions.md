@@ -26,21 +26,16 @@ $ git checkout -b debug
 
 Let's trigger an error in `get.js` by commenting out the `noteId` field in the DynamoDB call's Key definition. This will cause the DynamoDB call to fail and in turn cause the Lambda function to fail.
 
-{%change%} Replace `services/functions/get.js` with the following.
+{%change%} Replace the `main` function in `packages/functions/src/get.js` with the following.
 
 ```js
-import handler from "../util/handler";
-import dynamoDb from "../util/dynamodb";
-
 export const main = handler(async (event) => {
   const params = {
-    TableName: process.env.tableName,
+    TableName: Table.Notes.tableName,
     // 'Key' defines the partition key and sort key of the item to be retrieved
-    // - 'userId': Identity Pool identity id of the authenticated user
-    // - 'noteId': path parameter
     Key: {
       userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
-      // noteId: event.pathParameters.id
+      // noteId: event.pathParameters.id, // The id of the note from the path
     },
   };
 

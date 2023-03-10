@@ -1,4 +1,8 @@
 current:
+  title: "Upgrading to SST v2"
+  desc: "Mar 10, 2023: Updating the guide and code snippets to SST v2."
+
+v7-2:
   title: "Upgrading to SST v1"
   desc: "May 24, 2022: Updating the guide and code snippets to SST v1."
 
