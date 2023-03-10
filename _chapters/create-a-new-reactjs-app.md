@@ -126,7 +126,7 @@ Note that, you'll need to have `sst start` running for this to happen. If you ha
 You should see that the new frontend stack has been deployed.
 
 ```bash
-✔  Deployed:
+✓  Deployed:
    ...
    FrontendStack
    SiteUrl: http://localhost:3000

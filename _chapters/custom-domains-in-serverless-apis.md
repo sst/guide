@@ -48,7 +48,7 @@ This command will take a few minutes as it'll deploy your app to a completely ne
 At the end of the deploy process you should see something like this.
 
 ```bash
-✔  Deployed:
+✓  Deployed:
    StorageStack
    ApiStack
    ApiEndpoint: https://api.my-serverless-app.com

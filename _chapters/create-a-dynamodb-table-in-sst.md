@@ -116,7 +116,7 @@ Note that, you'll need to have `sst dev` running for this to happen. If you had 
 You should see something like this at the end of the deploy process.
 
 ```bash
-✔  Deployed:
+✓  Deployed:
    StorageStack
 ```
 

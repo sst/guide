@@ -61,7 +61,7 @@ Note that, you'll need to have `sst dev` running for this to happen. If you had 
 You should see that the API stack is being updated.
 
 ```bash
-✔  Deployed:
+✓  Deployed:
    StorageStack
    ApiStack
    ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com

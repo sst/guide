@@ -50,7 +50,7 @@ We are taking the environment variables in our SST app and passing it into our A
 Switch over to your terminal and restart `sst dev` so that it picks up the new `.env.local` file.
 
 ```bash
-✔  Deployed:
+✓  Deployed:
    StorageStack
    ApiStack
    ...

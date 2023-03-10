@@ -56,11 +56,11 @@ Running `sst dev` will take a couple of minutes to deploy your app and bootstrap
 ```txt
 SST v2.1.14  ready!
 
-➜  App:     notes
+→  App:     notes
    Stage:   Jay
    Console: https://console.sst.dev/notes/Jay
 
-✔  Deployed:
+✓  Deployed:
    API
    ApiEndpoint: https://guksgkkr4l.execute-api.us-east-1.amazonaws.com
 ```

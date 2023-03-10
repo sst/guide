@@ -57,7 +57,7 @@ Note that, you'll need to have `sst dev` running for this to happen. If you had 
 You should see that the storage stack has been updated.
 
 ```bash
-✔  Deployed:
+✓  Deployed:
    StorageStack
 ```
 

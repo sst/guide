@@ -71,7 +71,7 @@ $ npx sst deploy --stage prod
 This command will take a few minutes. At the end of the deploy process you should see something like this.
 
 ```bash
-✔  Deployed:
+✓  Deployed:
    ...
    FrontendStack
    SiteUrl: https://my-serverless-app.com
