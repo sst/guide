@@ -6,14 +6,14 @@ date: 2021-10-15 00:00:00
 lang: en
 index: 3
 type: webapp
-description: In this example we will look at how to use Vue.js with a serverless API to create a simple click counter app. We'll be using SST and the ViteStaticSite construct to deploy our app to AWS S3 and CloudFront.
+description: In this example we will look at how to use Vue.js with a serverless API to create a simple click counter app. We'll be using SST and the StaticSite construct to deploy our app to AWS S3 and CloudFront.
 short_desc: Full-stack Vue.js app with a serverless API.
 repo: vue-app
 ref: how-to-create-a-vuejs-app-with-serverless
 comments_id: how-to-create-a-vue-js-app-with-serverless/2508
 ---
 
-In this example we will look at how to use [Vue.js](https://vuejs.org) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [SST]({{ site.sst_github_repo }}) and the SST [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) construct to deploy our app to AWS.
+In this example we will look at how to use [Vue.js](https://vuejs.org) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [SST]({{ site.sst_github_repo }}) and the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite) construct to deploy our app to AWS.
 
 ## Requirements
 
@@ -55,11 +55,11 @@ An SST app is made up of a couple of parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `packages/` — App Code
+2. `packages/functions/` — App Code
 
-   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/functions/` directory of your project.
 
-3. `frontend/` — Vue App
+3. `packages/frontend/` — Vue App
 
    The code for our frontend Vue.js app.
 
@@ -74,7 +74,7 @@ We'll be using [Amazon DynamoDB](https://aws.amazon.com/dynamodb/); a reliable a
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { Api, ViteStaticSite, StackContext, Table } from "sst/constructs";
+import { Api, StaticSite, StackContext, Table } from "sst/constructs";
 
 export function ExampleStack({ stack }: StackContext) {
   // Create the table
@@ -109,7 +109,7 @@ const api = new Api(stack, "Api", {
     },
   },
   routes: {
-    "POST /": "functions/lambda.handler",
+    "POST /": "packages/functions/src/lambda.main",
   },
 });
 
@@ -125,7 +125,7 @@ We'll also bind our table to our API. It allows our API to access (read and writ
 
 ### Setting up our Vue app
 
-To deploy a Vue.js app to AWS, we'll be using the SST [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) construct.
+To deploy a Vue.js app to AWS, we'll be using the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite) construct.
 
 {%change%} Replace the following in `stacks/ExampleStack.ts`:
 
@@ -139,35 +139,34 @@ stack.addOutputs({
 {%change%} With:
 
 ```ts
-const site = new ViteStaticSite(stack, "VueJSSite", {
-  path: "frontend",
+const site = new StaticSite(stack, "VueJSSite", {
+  path: "packages/frontend",
+  buildOutput: "dist",
+  buildCommand: "npm run build",
+  errorPage: "redirect_to_index_page",
   environment: {
     // Pass in the API endpoint to our app
-    VITE_APP_API_URL: api.url,
+    VUE_APP_API_URL: api.url,
   },
 });
 
 // Show the URLs in the output
 stack.addOutputs({
-  SiteUrl: site.url,
+  SiteUrl: site.url || "http://localhost:3000",
   ApiEndpoint: api.url,
 });
 ```
 
 The construct is pointing to where our Vue.js app is located. We haven't created our app yet but for now we'll point to the `frontend` directory.
 
-We are also setting up a [build time Vue environment variable](https://cli.vuejs.org/guide/mode-and-env.html) `VITE_APP_API_URL` with the endpoint of our API. The [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
+We are also setting up a [build time Vue environment variable](https://cli.vuejs.org/guide/mode-and-env.html) `VITE_APP_API_URL` with the endpoint of our API. The [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
 
 You can also optionally configure a custom domain.
 
 ```ts
 // Deploy our Vue app
-const site = new ViteStaticSite(stack, "VueJSSite", {
-  path: "frontend",
-  environment: {
-    // Pass in the API endpoint to our app
-    VITE_APP_API_URL: api.url,
-  },
+const site = new StaticSite(stack, "VueJSSite", {
+  // ...
   customDomain: "www.my-vue-app.com",
 });
 ```
@@ -181,14 +180,15 @@ Our API is powered by a Lambda function. In the function we'll read from our Dyn
 {%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
 ```ts
-import { DynamoDB } from "aws-sdk";
+import AWS from "aws-sdk";
+import { Table } from "sst/node/table";
 
-const dynamoDb = new DynamoDB.DocumentClient();
+const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-export async function handler() {
+export async function main() {
   const getParams = {
     // Get the table name from the environment variable
-    TableName: import.meta.env.tableName,
+    TableName: Table.Counter.tableName,
     // Get the row where the counter is called "clicks"
     Key: {
       counter: "clicks",
@@ -209,7 +209,7 @@ export async function handler() {
 
 We make a `get` call to our DynamoDB table and get the value of a row where the `counter` column has the value `clicks`. Since we haven't written to this column yet, we are going to just return `0`.
 
-{%change%} Let's install the `aws-sdk` package in the `packages/` folder.
+{%change%} Let's install the `aws-sdk` package in the `packages/functions/` folder.
 
 ```bash
 $ npm install aws-sdk
@@ -222,7 +222,7 @@ And let's test what we have so far.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npm start
+$ npm run dev
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -245,10 +245,10 @@ Stack dev-vue-app-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://sez1p3dsia.execute-api.ap-south-1.amazonaws.com
-    SiteUrl: https://d2uyljrh4twuwq.cloudfront.net
+    SiteUrl: http://localhost:3000
 ```
 
-The `ApiEndpoint` is the API we just created. While the `SiteUrl` is where our Vue app will be hosted. For now it's just a placeholder website.
+The `ApiEndpoint` is the API we just created. While the `SiteUrl` our Svelte app will run locally once we start it.
 
 Let's test our endpoint with the [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
@@ -264,7 +264,7 @@ You should see a `0` in the response body.
 
 We are now ready to use the API we just created. Let's use [Vue quickstart](https://vuejs.org/guide/quick-start.html) to setup our Vue.js app.
 
-{%change%} Run the following in the project root.
+{%change%} Run the following in the `packages/` directory.
 
 ```bash
 $ npx create-vue@latest
@@ -294,7 +294,7 @@ $ cd frontend
 $ npm install
 ```
 
-This sets up our Vue app in the `frontend/` directory. Recall that, earlier in the guide we were pointing the `ViteStaticSite` construct to this path.
+This sets up our Vue app in the `packages/frontend/` directory. Recall that, earlier in the guide we were pointing the `StaticSite` construct to this path.
 
 We also need to load the environment variables from our SST app. To do this, we'll be using the [`sst env`](https://docs.sst.dev/packages/sst#sst-env) command.
 
@@ -324,7 +324,7 @@ Open up your browser and go to `http://localhost:3000`.
 
 We are now ready to add the UI for our app and connect it to our serverless API.
 
-{%change%} Replace `frontend/src/App.vue` with.
+{%change%} Replace `packages/frontend/src/App.vue` with.
 
 ```coffee
 <template>
