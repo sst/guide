@@ -6,14 +6,14 @@ date: 2021-06-17 00:00:00
 lang: en
 index: 1
 type: webapp
-description: In this example we will look at how to use React.js with a serverless API to create a simple click counter app. We'll be using SST and the ReactStaticSite construct to deploy our app to AWS S3 and CloudFront.
+description: In this example we will look at how to use React.js with a serverless API to create a simple click counter app. We'll be using SST and the StaticSite construct to deploy our app to AWS S3 and CloudFront.
 short_desc: Full-stack React app with a serverless API.
 repo: react-app
 ref: how-to-create-a-reactjs-app-with-serverless
 comments_id: how-to-create-a-react-js-app-with-serverless/2413
 ---
 
-In this example we will look at how to use [React.js](https://reactjs.org) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [SST]({{ site.sst_github_repo }}) and the SST [`ReactStaticSite`]({{ site.docs_url }}/constructs/ReactStaticSite) construct to deploy our app to AWS.
+In this example we will look at how to use [React.js](https://reactjs.org) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [SST]({{ site.sst_github_repo }}) and the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite) construct to deploy our app to AWS.
 
 ## Requirements
 
@@ -55,11 +55,11 @@ An SST app is made up of a couple of parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `packages/` — App Code
+2. `packages/functions/` — App Code
 
-   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/functions/` directory of your project.
 
-3. `frontend/` — React App
+3. `packages/frontend/` — React App
 
    The code for our frontend React.js app.
 
@@ -74,7 +74,7 @@ We'll be using [Amazon DynamoDB](https://aws.amazon.com/dynamodb/); a reliable a
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { Api, ReactStaticSite, StackContext, Table } from "sst/constructs";
+import { Api, StaticSite, StackContext, Table } from "sst/constructs";
 
 export function ExampleStack({ stack }: StackContext) {
   // Create the table
@@ -109,7 +109,7 @@ const api = new Api(stack, "Api", {
     },
   },
   routes: {
-    "POST /": "functions/lambda.handler",
+    "POST /": "packages/functions/src/lambda.handler",
   },
 });
 
@@ -125,7 +125,7 @@ We'll also bind our table to our API. It allows our API to access (read and writ
 
 ### Setting up our React app
 
-To deploy a React.js app to AWS, we'll be using the SST [`ReactStaticSite`]({{ site.docs_url }}/constructs/ReactStaticSite) construct.
+To deploy a React.js app to AWS, we'll be using the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite) construct.
 
 {%change%} Replace the following in `stacks/ExampleStack.ts`:
 
@@ -140,8 +140,10 @@ stack.addOutputs({
 
 ```ts
 // Deploy our React app
-const site = new ReactStaticSite(stack, "ReactSite", {
-  path: "frontend",
+const site = new StaticSite(stack, "ReactSite", {
+  path: "packages/frontend",
+  buildCommand: "npm run build",
+  buildOutput: "build",
   environment: {
     REACT_APP_API_URL: api.url,
   },
@@ -149,24 +151,21 @@ const site = new ReactStaticSite(stack, "ReactSite", {
 
 // Show the URLs in the output
 stack.addOutputs({
-  SiteUrl: site.url,
+  SiteUrl: site.url || "http://localhost:5173",
   ApiEndpoint: api.url,
 });
 ```
 
-The construct is pointing to where our React.js app is located. We haven't created our app yet but for now we'll point to the `frontend` directory.
+The construct is pointing to where our React.js app is located. We haven't created our app yet but for now we'll point to the `packages/frontend` directory.
 
-We are also setting up a [build time React environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) `REACT_APP_API_URL` with the endpoint of our API. The [`ReactStaticSite`]({{ site.docs_url }}/constructs/ReactStaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend. You can read more about this over in our chapter on, [Setting serverless environments variables in a React app]({% link _chapters/setting-serverless-environments-variables-in-a-react-app.md %}).
+We are also setting up a [build time React environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) `REACT_APP_API_URL` with the endpoint of our API. The [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend. You can read more about this over in our chapter on, [Setting serverless environments variables in a React app]({% link _chapters/setting-serverless-environments-variables-in-a-react-app.md %}).
 
 You can also optionally configure a custom domain.
 
 ```ts
 // Deploy our React app
-const site = new ReactStaticSite(stack, "ReactSite", {
-  path: "frontend",
-  environment: {
-    REACT_APP_API_URL: api.url,
-  },
+const site = new StaticSite(stack, "ReactSite", {
+  // ...
   customDomain: "www.my-react-app.com",
 });
 ```
@@ -209,7 +208,7 @@ export async function handler() {
 
 We make a `get` call to our DynamoDB table and get the value of a row where the `counter` column has the value `clicks`. Since we haven't written to this column yet, we are going to just return `0`.
 
-{%change%} Let's install the `aws-sdk` package in the `packages/` folder.
+{%change%} Let's install the `aws-sdk` package in the `packages/functions/` folder.
 
 ```bash
 $ npm install aws-sdk
@@ -222,7 +221,7 @@ And let's test what we have so far.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npm start
+$ npm run dev
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -245,10 +244,10 @@ Stack dev-react-app-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://51q98mf39e.execute-api.us-east-1.amazonaws.com
-    SiteUrl: https://d8lnp7p95pfac.cloudfront.net
+    SiteUrl: http://localhost:5173
 ```
 
-The `ApiEndpoint` is the API we just created. While the `SiteUrl` is where our React app will be hosted. For now it's just a placeholder website.
+The `ApiEndpoint` is the API we just created. While the `SiteUrl` our React app will run locally once we start it.
 
 Let's test our endpoint with the [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
@@ -267,11 +266,11 @@ We are now ready to use the API we just created. Let's use [Create React App](ht
 {%change%} Run the following in the project root.
 
 ```bash
-$ npx create-react-app frontend --use-npm
+$ npx create-react-app packages/frontend --use-npm
 $ cd frontend
 ```
 
-This sets up our React app in the `frontend/` directory. Recall that, earlier in the guide we were pointing the `ReactStaticSite` construct to this path.
+This sets up our React app in the `packages/frontend/` directory. Recall that, earlier in the guide we were pointing the `StaticSite` construct to this path.
 
 Create React App will throw a warning if it is installed inside a repo that uses Jest. To disable this, we'll need to set an environment variable.
 
@@ -297,7 +296,7 @@ We also need to load the environment variables from our SST app. To do this, we'
 
 Let's start our React development environment.
 
-{%change%} In the `frontend/` directory run.
+{%change%} In the `packages/frontend/` directory run.
 
 ```bash
 $ npm run start
@@ -309,7 +308,7 @@ This should open up our React.js app in your browser.
 
 We are now ready to add the UI for our app and connect it to our serverless API.
 
-{%change%} Replace `frontend/src/App.js` with.
+{%change%} Replace `packages/frontend/src/App.js` with.
 
 ```jsx
 import { useState } from "react";
@@ -341,7 +340,7 @@ The response from our API is then stored in our app's state. We use that to disp
 
 Let's add some styles.
 
-{%change%} Replace `frontend/src/App.css` with.
+{%change%} Replace `packages/frontend/src/App.css` with.
 
 ```css
 body,

@@ -6,7 +6,7 @@ date: 2021-10-15 00:00:00
 lang: en
 index: 4
 type: webapp
-description: In this example we will look at how to use Svelte with a serverless API to create a simple click counter app. We'll be using SST and the ViteStaticSite construct to deploy our app to AWS S3 and CloudFront.
+description: In this example we will look at how to use Svelte with a serverless API to create a simple click counter app. We'll be using SST and the StaticSite construct to deploy our app to AWS S3 and CloudFront.
 short_desc: Full-stack Svelte app with a serverless API.
 repo: svelte-app
 ref: how-to-create-a-svelte-app-with-serverless
@@ -109,7 +109,7 @@ const api = new Api(stack, "Api", {
     },
   },
   routes: {
-    "POST /": "functions/lambda.handler",
+    "POST /": "packages/functions/src/lambda.handler",
   },
 });
 
@@ -125,7 +125,7 @@ We'll also bind our table to our API. It allows our API to access (read and writ
 
 ### Setting up our Svelte app
 
-To deploy a Svelte app to AWS, we'll be using the SST [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) construct.
+To deploy a Svelte app to AWS, we'll be using the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite) construct.
 
 {%change%} Replace the following in `stacks/ExampleStack.ts`:
 
@@ -290,7 +290,7 @@ We also need to load the environment variables from our SST app. To do this, we'
 
 Let's start our Svelte development environment.
 
-{%change%} In the `frontend/` directory run.
+{%change%} In the `packages/frontend/` directory run.
 
 ```bash
 $ npm run dev
