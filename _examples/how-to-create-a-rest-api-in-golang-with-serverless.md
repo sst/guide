@@ -47,42 +47,30 @@ export default {
 } satisfies SSTConfig;
 ```
 
-## Project layout
-
-An SST app is made up of two parts.
-
-1. `stacks/` — App Infrastructure
-
-   The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure. CDK doesn't currently support Golang, so we'll be using JavaScript here.
-
-2. `packages/` — App Code
-
-   The code that's run when your API is invoked is placed in the `packages/` directory of your project. We'll be using Golang for this.
-
 ## Setting up our routes
 
 Let's start by setting up the routes for our API.
 
-{%change%} Replace the `stacks/ExampleStack.ts` with the following.
+{%change%} Add the following below the `config` function in the `sst.config.ts`.
 
 ```ts
-import { Api, StackContext } from "sst/constructs";
-
-export function ExampleStack({ stack }: StackContext) {
-  // Create the HTTP API
-  const api = new Api(stack, "Api", {
-    routes: {
-      "GET /notes": "functions/list.go",
-      "GET /notes/{id}": "functions/get.go",
-      "PUT /notes/{id}": "functions/update.go",
-    },
-  });
-
-  // Show API endpoint in output
-  stack.addOutputs({
-    ApiEndpoint: api.url,
-  });
-}
+stacks(app) {
+	app.setDefaultFunctionProps({
+		runtime: "go1.x",
+	});
+	app.stack(function Stack({ stack }) {
+		const api = new Api(stack, "api", {
+			routes: {
+				"GET /notes": "functions/lambda/list.go",
+				"GET /notes/{id}": "functions/lambda/get.go",
+				"PUT /notes/{id}": "functions/lambda/update.go",
+			},
+		});
+		stack.addOutputs({
+			ApiEndpoint: api.url,
+		});
+	});
+},
 ```
 
 We are creating an API here using the [`Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding three routes to it.
@@ -99,7 +87,7 @@ The first is getting a list of notes. The second is getting a specific note give
 
 For this example, we are not using a database. We'll look at that in detail in another example. So internally we are just going to get the list of notes from a file.
 
-{%change%} Let's add a file that contains our notes in `packages/db/notes.go`.
+{%change%} Let's add a file that contains our notes in `db/notes.go`.
 
 ```go
 package db
@@ -131,7 +119,7 @@ Now add the code for our first endpoint.
 
 ### Getting a list of notes
 
-{%change%} Add a `packages/functions/src/list.go`.
+{%change%} Add a `functions/lambda/list.go`.
 
 ```go
 package main
@@ -161,7 +149,7 @@ Here we are simply converting a list of notes to string, and responding with tha
 
 ### Getting a specific note
 
-{%change%} Add the following to `packages/functions/src/get.go`.
+{%change%} Add the following to `functions/lambda/get.go`.
 
 ```go
 package main
@@ -201,7 +189,7 @@ Here we are checking if we have the requested note. If we do, we respond with it
 
 ### Updating a note
 
-{%change%} Add the following to `packages/functions/src/update.go`.
+{%change%} Add the following to `functions/lambda/update.go`.
 
 ```go
 package main
@@ -251,7 +239,7 @@ Now let's test our new API.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npm start
+$ npm run dev
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -308,7 +296,7 @@ This should respond with the updated note.
 
 Let's make a quick change to our API. It would be good if the JSON strings are pretty printed to make them more readable.
 
-{%change%} Replace `Handler` function in `packages/functions/src/list.go` with the following.
+{%change%} Replace `Handler` function in `functions/lambda/list.go` with the following.
 
 ```go
 func Handler(request events.APIGatewayV2HTTPRequest) (events.APIGatewayProxyResponse, error) {
