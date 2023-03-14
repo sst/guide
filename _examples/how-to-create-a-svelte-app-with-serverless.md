@@ -13,7 +13,7 @@ ref: how-to-create-a-svelte-app-with-serverless
 comments_id: how-to-create-a-svelte-app-with-serverless/2522
 ---
 
-In this example we will look at how to use [Svelte](https://svelte.dev) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [SST]({{ site.sst_github_repo }}) and the SST [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) construct to deploy our app to AWS.
+In this example we will look at how to use [Svelte](https://svelte.dev) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [SST]({{ site.sst_github_repo }}) and the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite) construct to deploy our app to AWS.
 
 ## Requirements
 
@@ -55,11 +55,11 @@ An SST app is made up of a couple of parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `packages/` — App Code
+2. `packages/functions/` — App Code
 
-   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/functions/` directory of your project.
 
-3. `frontend/` — Svelte App
+3. `packages/frontend/` — Svelte App
 
    The code for our frontend Svelte app.
 
@@ -74,7 +74,7 @@ We'll be using [Amazon DynamoDB](https://aws.amazon.com/dynamodb/); a reliable a
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { Api, ViteStaticSite, StackContext, Table } from "sst/constructs";
+import { Api, StaticSite, StackContext, Table } from "sst/constructs";
 
 export function ExampleStack({ stack }: StackContext) {
   // Create the table
@@ -140,8 +140,10 @@ stack.addOutputs({
 
 ```ts
 // Deploy our Svelte app
-const site = new ViteStaticSite(stack, "SvelteJSSite", {
-  path: "frontend",
+const site = new StaticSite(stack, "SvelteJSSite", {
+  path: "packages/frontend",
+  buildCommand: "npm run build",
+  buildOutput: "dist",
   environment: {
     // Pass in the API endpoint to our app
     VITE_APP_API_URL: api.url,
@@ -150,25 +152,21 @@ const site = new ViteStaticSite(stack, "SvelteJSSite", {
 
 // Show the URLs in the output
 stack.addOutputs({
-  SiteUrl: site.url,
+  SiteUrl: site.url || "http://localhost:5173",
   ApiEndpoint: api.url,
 });
 ```
 
-The construct is pointing to where our Svelte app is located. We haven't created our app yet but for now we'll point to the `frontend` directory.
+The construct is pointing to where our Svelte app is located. We haven't created our app yet but for now we'll point to the `packages/frontend/` directory.
 
-We are also setting up a [build time Svelte environment variable](https://vitejs.dev/guide/env-and-mode.html) `VITE_APP_API_URL` with the endpoint of our API. The [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
+We are also setting up a [build time Svelte environment variable](https://vitejs.dev/guide/env-and-mode.html) `VITE_APP_API_URL` with the endpoint of our API. The [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
 
 You can also optionally configure a custom domain.
 
 ```ts
 // Deploy our Svelte app
-const site = new ViteStaticSite(stack, "svelteJSSite", {
-  path: "frontend",
-  environment: {
-    // Pass in the API endpoint to our app
-    VITE_APP_API_URL: api.url,
-  },
+const site = new StaticSite(stack, "SvelteJSSite", {
+  // ...
   customDomain: "www.my-svelte-app.com",
 });
 ```
@@ -211,7 +209,7 @@ export async function handler() {
 
 We make a `get` call to our DynamoDB table and get the value of a row where the `counter` column has the value `clicks`. Since we haven't written to this column yet, we are going to just return `0`.
 
-{%change%} Let's install the `aws-sdk` package in the `packages/` folder.
+{%change%} Let's install the `aws-sdk` package in the `packages/functions/` folder.
 
 ```bash
 $ npm install aws-sdk
@@ -224,7 +222,7 @@ And let's test what we have so far.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npm start
+$ npm run dev
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -247,10 +245,10 @@ Stack dev-svelte-app-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://sez1p3dsia.execute-api.ap-south-1.amazonaws.com
-    SiteUrl: https://d2uyljrh4twuwq.cloudfront.net
+    SiteUrl: http://localhost:5173
 ```
 
-The `ApiEndpoint` is the API we just created. While the `SiteUrl` is where our Svelte app will be hosted. For now it's just a placeholder website.
+The `ApiEndpoint` is the API we just created. While the `SiteUrl` our Svelte app will run locally once we start it.
 
 Let's test our endpoint with the [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
@@ -269,12 +267,12 @@ We are now ready to use the API we just created. Let's use [Vite](https://vitejs
 {%change%} Run the following in the project root.
 
 ```bash
-$ npx create-vite@latest frontend --template svelte
-$ cd frontend
+$ npx create-vite@latest packages/frontend --template svelte
+$ cd packages/frontend
 $ npm install
 ```
 
-This sets up our Svelte app in the `frontend/` directory. Recall that, earlier in the guide we were pointing the `ViteStaticSite` construct to this path.
+This sets up our Svelte app in the `packages/frontend/` directory. Recall that, earlier in the guide we were pointing the `StaticSite` construct to this path.
 
 We also need to load the environment variables from our SST app. To do this, we'll be using the [`sst env`](https://docs.sst.dev/packages/sst#sst-env) command.
 
@@ -298,13 +296,13 @@ Let's start our Svelte development environment.
 $ npm run dev
 ```
 
-Open up your browser and go to `http://localhost:3000`.
+Open up your browser and go to `http://localhost:5173`.
 
 ### Add the click button
 
 We are now ready to add the UI for our app and connect it to our serverless API.
 
-{%change%} Replace `frontend/src/App.svelte` with.
+{%change%} Replace `packages/frontend/src/App.svelte` with.
 
 ```coffee
 <script>
@@ -331,7 +329,7 @@ We are now ready to add the UI for our app and connect it to our serverless API.
 
 Here we are adding a simple button that when clicked, makes a request to our API. We are getting the API endpoint from the environment variable, `import.meta.env.VITE_APP_API_URL`.
 
-SST also [generates a type definition file]({{ site.docs_url }}/constructs/ViteStaticSite#type-definitions), meaning that your editor can autocomplete the environment variables for you.
+SST also [generates a type definition file]({{ site.docs_url }}/constructs/StaticSite#type-definitions), meaning that your editor can autocomplete the environment variables for you.
 
 ![Vite environment variables autocomplete](/assets/examples/react-app/vite-environment-variables-autocomplete.png)
 
@@ -407,7 +405,7 @@ Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you t
 $ npx sst deploy --stage prod
 ```
 
-This allows us to separate our environments, so when we are working in `dev`, it doesn't break the app for our users.
+This allows us to separate our environments, so when we are working in our local environment, it doesn't break the app for our users.
 
 Once deployed, you should see something like this.
 
