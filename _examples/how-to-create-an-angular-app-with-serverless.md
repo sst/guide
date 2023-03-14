@@ -54,11 +54,11 @@ An SST app is made up of a couple of parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `packages/` — App Code
+2. `packages/functions/` — App Code
 
-   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/functions/` directory of your project.
 
-3. `frontend/` — Angular app
+3. `packages/frontend/` — Angular app
 
    The code for our frontend Angular app.
 
@@ -114,7 +114,7 @@ const api = new Api(stack, "Api", {
     },
   },
   routes: {
-    "POST /": "functions/lambda.handler",
+    "POST /": "packages/functions/src/lambda.main",
   },
 });
 
@@ -157,7 +157,7 @@ const site = new StaticSite(stack, "AngularSite", {
 
 // Show the URLs in the output
 stack.addOutputs({
-  SiteUrl: site.url,
+  SiteUrl: site.url || "http://localhost:4200",
   ApiEndpoint: api.url,
 });
 ```
@@ -171,14 +171,7 @@ You can also optionally configure a custom domain.
 ```ts
 // Deploy our Angular app
 const site = new StaticSite(stack, "AngularSite", {
-  path: "frontend",
-  buildOutput: "dist",
-  buildCommand: "ng build --output-path dist",
-  errorPage: StaticSiteErrorOptions.REDIRECT_TO_INDEX_PAGE,
-  // To load the API URL from the environment in development mode
-  environment: {
-    DEV_API_URL: api.url,
-  },
+  // ...
   customDomain: "www.my-angular-app.com",
 });
 ```
@@ -197,7 +190,7 @@ import { Table } from "sst/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export async function handler() {
+export async function main() {
   const getParams = {
     // Get the table name from the environment variable
     TableName: Table.Counter.tableName,
@@ -221,7 +214,7 @@ export async function handler() {
 
 We make a `get` call to our DynamoDB table and get the value of a row where the `counter` column has the value `clicks`. Since we haven't written to this column yet, we are going to just return `0`.
 
-{%change%} Let's install the `aws-sdk` package in the `packages/` folder.
+{%change%} Let's install the `aws-sdk` package in the `packages/functions/` folder.
 
 ```bash
 $ npm install aws-sdk
@@ -234,7 +227,7 @@ And let's test what we have so far.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npm start
+$ npm run dev
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -280,11 +273,11 @@ We are now ready to use the API we just created. Let's use the [Angular CLI](htt
 
 ```bash
 $ npm install -g @angular/cli
-$ ng new frontend
-$ cd frontend
+$ ng new packages/frontend
+$ cd packages/frontend
 ```
 
-This sets up our Angular app in the `frontend/` directory. Recall that, earlier in the guide we were pointing the `StaticSite` construct to this path.
+This sets up our Angular app in the `packages/frontend/` directory. Recall that, earlier in the guide we were pointing the `StaticSite` construct to this path.
 
 We also need to load the environment variables from our SST app. To do this, we'll be using the [`sst env`](https://docs.sst.dev/packages/sst#sst-env) command.
 
@@ -317,7 +310,7 @@ The above script creates the environment file, `environment.ts` for dev and popu
 
 We need to update our scripts to use this and the [`sst env`](https://docs.sst.dev/packages/sst#sst-env) command.
 
-{%change%} Update the `package.json` in the `frontend/` directory.
+{%change%} Update the `package.json` in the `packages/frontend/` directory.
 
 ```ts
 {
@@ -340,7 +333,7 @@ $ npm install ts-node --save-dev
 
 Let's start our Angular development environment.
 
-{%change%} In the `frontend/` directory run.
+{%change%} In the `packages/frontend/` directory run.
 
 ```bash
 $ npm run start
@@ -352,7 +345,7 @@ Open up your browser and go to `http://localhost:4200`.
 
 We are now ready to add the UI for our app and connect it to our serverless API.
 
-{%change%} Replace `frontend/src/app/app.component.html` with.
+{%change%} Replace `packages/frontend/src/app/app.component.html` with.
 
 ```html
 <div class="App">
@@ -363,7 +356,7 @@ We are now ready to add the UI for our app and connect it to our serverless API.
 </div>
 ```
 
-{%change%} Replace `frontend/src/app/app.component.ts` with.
+{%change%} Replace `packages/frontend/src/app/app.component.ts` with.
 
 ```ts
 import { environment } from "./../environments/environment";
@@ -393,7 +386,7 @@ The response from our API is then stored in our app's state. We use that to disp
 
 We need `HttpClientModule` to make API calls with our API, To make `HttpClientModule` available everywhere in the app, replace code in `app.module.ts` with below.
 
-{%change%} Replace `frontend/src/app/app.module.ts` with.
+{%change%} Replace `packages/frontend/src/app/app.module.ts` with.
 
 ```ts
 import { HttpClientModule } from "@Angular/common/http";
@@ -413,7 +406,7 @@ export class AppModule {}
 
 Let's add some styles.
 
-{%change%} Replace `frontend/src/app/app.component.css` with.
+{%change%} Replace `packages/frontend/src/app/app.component.css` with.
 
 ```css
 .App {
@@ -478,7 +471,7 @@ However the current way of loading environment variables only works in dev, as w
 
 We'll replace placeholder env values in `environment.prod.ts` in our app with the [deployed values]({{ site.docs_url }}/constructs/StaticSite#replace-deployed-values).
 
-{%change%} Replace `frontend/src/environments/environment.prod.ts` with.
+{%change%} Replace `packages/frontend/src/environments/environment.prod.ts` with.
 
 ```ts
 export const environment = {
