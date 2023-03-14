@@ -56,11 +56,11 @@ An SST app is made up of a couple of parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `packages/` — App Code
+2. `packages/functions/` — App Code
 
-   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/functions/` directory of your project.
 
-3. `frontend/` — Flutter App
+3. `packages/frontend/` — Flutter App
 
    The code for our frontend Flutter app.
 
@@ -110,7 +110,7 @@ const api = new Api(stack, "Api", {
     },
   },
   routes: {
-    "POST /": "functions/lambda.handler",
+    "POST /": "packages/functions/src/lambda.main",
   },
 });
 
@@ -160,7 +160,7 @@ export async function handler() {
 
 We make a `get` call to our DynamoDB table and get the value of a row where the `counter` column has the value `clicks`. Since we haven't written to this column yet, we are going to just return `0`.
 
-{%change%} Let's install the `aws-sdk` package in the `packages/` folder.
+{%change%} Let's install the `aws-sdk` package in the `packages/functions/` folder.
 
 ```bash
 $ npm install aws-sdk
@@ -173,7 +173,7 @@ And let's test what we have so far.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npm start
+$ npm run dev
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -216,24 +216,24 @@ We are now ready to use the API we just created. Let's use [Flutter CLI](https:/
 
 If you don't have the Flutter CLI installed on your machine, [head over here to install it](https://flutter.dev/docs/get-started/install).
 
-{%change%} Run the following in the project root.
+{%change%} Run the following in the `packages/` directory.
 
 ```bash
 $ flutter create frontend
 $ cd frontend
 ```
 
-This sets up our Flutter app in the `frontend/` directory.
+This sets up our Flutter app in the `packages/frontend/` directory.
 
 We also need to load the environment variables from our SST app. To do this, we'll be using the [`flutter_dotenv`](https://pub.dev/packages/flutter_dotenv) package.
 
-{%change%} Install the `flutter_dotenv` package by running the following in the `frontend/` directory.
+{%change%} Install the `flutter_dotenv` package by running the following in the `packages/frontend/` directory.
 
 ```bash
 $ flutter pub add flutter_dotenv
 ```
 
-{%change%} Create a `.env` file inside `frontend/` and create two variables to hold the development and production API endpoints. Replace the `DEV_API_URL` with the one from the steps above.
+{%change%} Create a `.env` file inside `packages/frontend/` and create two variables to hold the development and production API endpoints. Replace the `DEV_API_URL` with the one from the steps above.
 
 ```
 DEV_API_URL=https://sez1p3dsia.execute-api.us-east-1.amazonaws.com
@@ -260,7 +260,7 @@ Ensure that the path corresponds to the location of the `.env` file!
 
 We also need the `http` package to call the endpoint.
 
-{%change%} In the `frontend/` directory run.
+{%change%} In the `packages/frontend/` directory run.
 
 ```bash
 $ flutter pub add http
@@ -268,7 +268,7 @@ $ flutter pub add http
 
 Let's start our Flutter development environment.
 
-{%change%} In the `frontend/` directory run.
+{%change%} In the `packages/frontend/` directory run.
 
 ```bash
 $ flutter run
@@ -280,7 +280,7 @@ This will open up an emulator and load the app.
 
 We are now ready to add the UI for our app and connect it to our serverless API.
 
-{%change%} Replace `frontend/lib/main.dart` with.
+{%change%} Replace `packages/frontend/lib/main.dart` with.
 
 ```dart
 import 'package:flutter/material.dart';
@@ -416,7 +416,7 @@ Stack prod-flutter-app-ExampleStack
     ApiEndpoint: https://k40qchmtvf.execute-api.ap-south-1.amazonaws.com
 ```
 
-{%change%} Add the above endpoint to the `.env` file in `frontend/.env` as a production API endpoint.
+{%change%} Add the above endpoint to the `.env` file in `packages/frontend/.env` as a production API endpoint.
 
 ```
 DEV_API_URL=https://sez1p3dsia.execute-api.us-east-1.amazonaws.com
