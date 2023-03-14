@@ -49,9 +49,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `packages/` — App Code
+2. `packages/functions/` — App Code
 
-   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/functions/` directory of your project.
 
 ## Adding DynamoDB
 
@@ -96,11 +96,11 @@ const api = new Api(stack, "Api", {
     },
   },
   routes: {
-    "GET /notes": "functions/list.handler",
-    "POST /notes": "functions/create.handler",
-    "GET /notes/{id}": "functions/get.handler",
-    "PUT /notes/{id}": "functions/update.handler",
-    "DELETE /notes/{id}": "functions/delete.handler",
+    "GET    /notes": "packages/functions/src/list.main",
+    "POST   /notes": "packages/functions/src/create.main",
+    "GET    /notes/{id}": "packages/functions/src/get.main",
+    "PUT    /notes/{id}": "packages/functions/src/update.main",
+    "DELETE /notes/{id}": "packages/functions/src/delete.main",
   },
 });
 
@@ -164,7 +164,7 @@ Here we are creating a new row in our DynamoDB table. First we JSON parse the re
 
 {%change%} Let's install both the packages we are using here.
 
-Run the below command in the `packages/` folder.
+Run the below command in the `packages/functions/` folder.
 
 ```bash
 $ npm install aws-sdk uuid
@@ -319,7 +319,7 @@ Now let's test what we've created so far.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npm start
+$ npm run dev
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
