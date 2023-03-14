@@ -63,9 +63,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `packages/` — App Code
+2. `packages/functions/` — App Code
 
-   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/functions/` directory of your project.
 
 ## Creating the bucket
 
@@ -83,9 +83,11 @@ export function ExampleStack({ stack }: StackContext) {
     notifications: {
       resize: {
         function: {
-          handler: "functions/resize.handler",
-          bundle: {
-            externalModules: ["sharp"],
+          handler: "packages/functions/src/resize.main",
+          nodejs: {
+            esbuild: {
+              externalModules: ["sharp"],
+            },
           },
           layers: [
             new lambda.LayerVersion(stack, "SharpLayer", {
@@ -223,7 +225,7 @@ $ npm install sharp aws-sdk
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npm start
+$ npm run dev
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
