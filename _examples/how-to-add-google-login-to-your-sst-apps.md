@@ -6,7 +6,7 @@ date: 2022-10-10 00:00:00
 lang: en
 index: 1
 type: sst-auth
-description: In this example we will look at how to add Google Login to your serverless app using SST Auth. We'll be using the Api, Auth, Table, and ViteStaticSite constructs to create a full-stack app with Google authentication.
+description: In this example we will look at how to add Google Login to your serverless app using SST Auth. We'll be using the Api, Auth, Table, and StaticSite constructs to create a full-stack app with Google authentication.
 short_desc: Adding Google auth to a full-stack serverless app.
 repo: api-sst-auth-google
 ref: how-to-add-google-login-to-your-sst-app-with-sst-auth
@@ -148,7 +148,7 @@ We are going to use the [`Auth`]({{ site.docs_url }}/constructs/Auth) construct.
 ```ts
 const auth = new Auth(stack, "auth", {
   authenticator: {
-    handler: "functions/auth.handler",
+    handler: "packages/functions/src/auth.handler",
   },
 });
 auth.attach(stack, {
@@ -207,13 +207,15 @@ When the Authorize URL is invoked, it will initialize the auth flow and redirect
 
 Next, we are going to add a **Sign in with Google** button to our frontend. And on click, we will redirect the user to the **Authorize URL**.
 
-To deploy a React app to AWS, we'll be using the SST [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) construct.
+To deploy a React app to AWS, we'll be using the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite) construct.
 
 {%change%} Add the following above the `Auth` construct in `stacks/ExampleStack.ts`.
 
 ```ts
-const site = new ViteStaticSite(stack, "Site", {
-  path: "packages/frontend",
+const site = new StaticSite(stack, "Site", {
+  path: "web",
+  buildCommand: "npm run build",
+  buildOutput: "dist",
   environment: {
     VITE_APP_API_URL: api.url,
   },
@@ -231,13 +233,13 @@ const site = new ViteStaticSite(stack, "Site", {
 
 The construct is pointing to the directory where we are going to add our React.js app.
 
-We are also setting up [build time React environment variables](https://vitejs.dev/guide/env-and-mode.html) with the endpoint of our API. The [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
+We are also setting up [build time React environment variables](https://vitejs.dev/guide/env-and-mode.html) with the endpoint of our API. The [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
 
-{%change%} Also remember to import the `ViteStaticSite` construct up top.
+{%change%} Also remember to import the `StaticSite` construct up top.
 
 ```diff
 - import { StackContext, Api, Auth } from "sst/constructs";
-+ import { StackContext, Api, Auth, ViteStaticSite } from "sst/constructs";
++ import { StackContext, Api, Auth, StaticSite } from "sst/constructs";
 ```
 
 ## Create the frontend
@@ -245,17 +247,16 @@ We are also setting up [build time React environment variables](https://vitejs.d
 {%change%} Run the below commands in our project root to create a basic react project.
 
 ```bash
-$ cd packages
-$ npx create-vite@latest frontend --template react
-$ cd frontend
+$ npx create-vite@latest web --template react
+$ cd web
 $ npm install
 ```
 
-This sets up our React app in the `packages/frontend/` directory.
+This sets up our React app in the `web/` directory.
 
 We also need to load the environment variables from our SST app. To do this, we'll be using the [`sst env`](https://docs.sst.dev/packages/sst#sst-env) command.
 
-{%change%} Replace the `dev` script in your `packages/frontend/package.json`.
+{%change%} Replace the `dev` script in your `web/package.json`.
 
 ```diff
 -"dev": "vite"
@@ -269,7 +270,7 @@ SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-develop
 {%change%} Run in the root.
 
 ```bash
-$ npx sst dev
+$ npm run dev
 ```
 
 The first time you run this command it'll prompt you to enter a stage name.
@@ -317,7 +318,7 @@ Add our **Callback URL** to the **Authorized redirect URIs** in our Google proje
 
 ## Add the login UI
 
-{%change%} Replace `packages/frontend/src/App.jsx` with below code.
+{%change%} Replace `web/src/App.jsx` with below code.
 
 ```jsx
 const App = () => {
@@ -341,7 +342,7 @@ export default App;
 
 Let's start our frontend in the development environment.
 
-{%change%} In the `packages/frontend/` directory run.
+{%change%} In the `web/` directory run.
 
 ```bash
 $ npm run dev
@@ -435,7 +436,7 @@ Now let's use the session token in the frontend.
 
 Then in the frontend, we will check if the URL contains the `token` query string when the page loads. If it is passed in, we will store it in the local storage, and then redirect the user to the root domain.
 
-{%change%} Add the following above the `return` in `packages/frontend/src/App.jsx`.
+{%change%} Add the following above the `return` in `web/src/App.jsx`.
 
 ```ts
 useEffect(() => {
@@ -555,7 +556,7 @@ const table = new Table(stack, "users", {
 +    },
 +  },
    routes: {
-     "GET /": "functions/lambda.handler",
+     "GET /": "packages/functions/src/lambda.handler",
    },
  });
 ```
@@ -563,8 +564,8 @@ const table = new Table(stack, "users", {
 {%change%} Import the `Table` construct up top.
 
 ```diff
-- import { StackContext, Api, Auth, ViteStaticSite } from "sst/constructs";
-+ import { StackContext, Api, Auth, ViteStaticSite, Table } from "sst/constructs";
+- import { StackContext, Api, Auth, StaticSite } from "sst/constructs";
++ import { StackContext, Api, Auth, StaticSite, Table } from "sst/constructs";
 ```
 
 #### Store the claims
@@ -616,7 +617,7 @@ import { marshall } from "@aws-sdk/util-dynamodb";
 import { Table } from "sst/node/table";
 ```
 
-{%change%} And finally install these packages inside the `/services` directory.
+{%change%} And finally install these packages inside the `packages/functions` directory.
 
 ```bash
 npm install --save @aws-sdk/client-dynamodb @aws-sdk/util-dynamodb
@@ -632,8 +633,8 @@ Now that the user data is stored in the database; let's create an API endpoint t
 
 ```diff
  routes: {
-   "GET /": "functions/lambda.handler",
-+  "GET /session": "functions/session.handler",
+   "GET /": "packages/functions/src/lambda.handler",
++  "GET /session": "packages/functions/src/session.handler",
  },
 ```
 
@@ -687,7 +688,7 @@ As we wait, let's update our frontend to make a request to the `/session` API to
 
 #### Call the session API
 
-{%change%} Add the following above the `signOut` function in `packages/frontend/src/App.jsx`.
+{%change%} Add the following above the `signOut` function in `web/src/App.jsx`.
 
 ```ts
 const getUserInfo = async (session) => {
@@ -774,7 +775,7 @@ Also, let's display a loading sign while waiting for the `/session` API to retur
 
 Finally, let's add some basic styles to the page.
 
-{%change%} Replace `packages/frontend/src/index.css` with the following.
+{%change%} Replace `web/src/index.css` with the following.
 
 ```css
 body {
@@ -840,15 +841,15 @@ When deploying to prod, we need to change our `authenticator` to redirect to the
 
 ```diff
 -redirect: "http://127.0.0.1:5173",
-+redirect: process.env.IS_LOCAL ? "http://127.0.0.1:5173" : ViteStaticSite.site.url,
++redirect: process.env.IS_LOCAL ? "http://127.0.0.1:5173" : StaticSite.site.url,
 ```
 
 Note that when we are developing locally via `sst dev`, the `IS_LOCAL` environment variable is set. We will conditionally redirect to `127.0.0.1` or the site's URL depending on `IS_LOCAL`.
 
-{%change%} Also remember to import the `ViteStaticSite` construct up top.
+{%change%} Also remember to import the `StaticSite` construct up top.
 
 ```ts
-import { ViteStaticSite } from "sst/node/site";
+import { StaticSite } from "sst/node/site";
 ```
 
 {%change%} To wrap things up we'll deploy our app to prod.

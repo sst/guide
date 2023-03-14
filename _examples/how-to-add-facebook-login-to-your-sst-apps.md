@@ -243,9 +243,8 @@ We are also setting up [build time React environment variables](https://vitejs.d
 {%change%} Run the below commands in our project root to create a basic React project.
 
 ```bash
-$ cd packages
 $ npx create-vite@latest web --template react
-$ cd frontend
+$ cd web
 $ npm install
 ```
 
@@ -841,7 +840,7 @@ We also need to change our `authenticator` to redirect to the deployed frontend 
 ```diff
  const auth = new Auth(stack, "auth", {
    authenticator: {
-     handler: "functions/auth.handler",
+     handler: "packages/functions/src/auth.handler",
      bind: [
        new Config.Secret(stack, "FACEBOOK_APP_ID"),
        new Config.Secret(stack, "FACEBOOK_APP_SECRET"),
