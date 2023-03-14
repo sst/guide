@@ -55,9 +55,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `packages/` — App Code
+2. `packages/functions/` — App Code
 
-   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/functions/` directory of your project.
 
 ## Setting up our routes
 
@@ -72,9 +72,9 @@ export function ExampleStack({ stack }: StackContext) {
   // Create the HTTP API
   const api = new Api(stack, "Api", {
     routes: {
-      "GET /notes": "functions/list.handler",
-      "GET /notes/{id}": "functions/get.handler",
-      "PUT /notes/{id}": "functions/update.handler",
+      "GET /notes": "packages/functions/list.handler",
+      "GET /notes/{id}": "packages/functions/get.handler",
+      "PUT /notes/{id}": "packages/functions/update.handler",
     },
   });
 
@@ -99,7 +99,7 @@ The first is getting a list of notes. The second is getting a specific note give
 
 For this example, we are not using a database. We'll look at that in detail in another example. So internally we are just going to get the list of notes from a file.
 
-{%change%} Let's add a file that contains our notes in `services/notes.ts`.
+{%change%} Let's add a file that contains our notes in `packages/core/src/notes.ts`.
 
 ```ts
 export default {
@@ -125,7 +125,7 @@ Now add the code for our first endpoint.
 {%change%} Add a `packages/functions/src/list.ts`.
 
 ```ts
-import notes from "../../../services/notes";
+import notes from "@rest-api/core/notes";
 
 export async function handler() {
   return {
@@ -144,7 +144,7 @@ Note that this function need to be `async` to be invoked by AWS Lambda. Even tho
 {%change%} Add the following to `packages/functions/src/get.ts`.
 
 ```ts
-import notes from "../../../services/notes";
+import notes from "@rest-api/core/notes";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
@@ -168,7 +168,7 @@ Here we are checking if we have the requested note. If we do, we respond with it
 {%change%} Add the following to `packages/functions/src/update.ts`.
 
 ```ts
-import notes from "../../../services/notes";
+import notes from "@rest-api/core/notes";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
@@ -201,7 +201,7 @@ Now let's test our new API.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npm start
+$ npm run dev
 ```
 
 The first time you run this command it'll take a couple of minutes to do the following:
@@ -268,7 +268,7 @@ Let's make a quick change to our API. It would be good if the JSON strings are p
 {%change%} Replace `packages/functions/src/list.ts` with the following.
 
 ```ts
-import notes from "../../../services/notes";
+import notes from "@rest-api/core/notes";
 
 export async function handler() {
   return {
