@@ -114,10 +114,10 @@ We are now ready to create our Next.js app.
 {%change%} Run the following in the project root.
 
 ```bash
-$ npx create-next-app frontend
+$ npx create-next-app packages/frontend
 ```
 
-This sets up our Next.js app in the `frontend/` directory.
+This sets up our Next.js app in the `packages/frontend/` directory.
 
 ### Configure Next.js with SST
 
@@ -128,7 +128,7 @@ Now let's configure SST to deploy our Next.js app to AWS. To do so, we'll be usi
 ```ts
 // Create a Next.js site
 const site = new NextjsSite(stack, "Site", {
-  path: "frontend",
+  path: "packages/frontend",
   environment: {
     // Pass the table details to our app
     REGION: app.region,
@@ -141,7 +141,7 @@ site.attachPermissions([table]);
 
 // Show the site URL in the output
 stack.addOutputs({
-  URL: site.url,
+  URL: site.url || "http://localhost:3000",
 });
 ```
 
@@ -165,19 +165,11 @@ To load these environment variables in our local environment, we'll be using the
 
 This will ensure that when you are running your Next.js app locally, the `REGION` and `TABLE_NAME` will be available.
 
-The `NextjsSite` uses the [`@sls-next/lambda-at-edge`](https://github.com/serverless-nextjs/serverless-next.js/tree/master/packages/libs/lambda-at-edge) package from the [`serverless-next.js`](https://github.com/serverless-nextjs/serverless-next.js) project to build and package your Next.js app to a structure that can be deployed to AWS.
-
-{%change%} Install the `@sls-next/lambda-at-edge` package by running the following in the project root.
-
-```bash
-$ npm install @sls-next/lambda-at-edge
-```
-
 ### Add the API
 
 Let's create the API that'll be updating our click counter.
 
-{%change%} Add the following to a new file in `frontend/pages/api/count.js`.
+{%change%} Add the following to a new file in `packages/frontend/pages/api/count.js`.
 
 ```js
 import AWS from "aws-sdk";
@@ -226,7 +218,7 @@ Then we increment the count, save it and return the new count.
 
 We are using the AWS SDK to connect to DynamoDB.
 
-{%change%} So let's install it by running the following in the `frontend/` directory.
+{%change%} So let's install it by running the following in the `packages/frontend/` directory.
 
 ```bash
 $ npm install aws-sdk
@@ -236,7 +228,7 @@ $ npm install aws-sdk
 
 We are now ready to add the UI for our app and connect it to our serverless API.
 
-{%change%} Replace `frontend/pages/index.js` with.
+{%change%} Replace `packages/frontend/pages/index.js` with.
 
 ```jsx
 import { useState } from "react";
@@ -265,7 +257,7 @@ The response from our API is then stored in our app's state. We use that to disp
 
 Let's add some styles.
 
-{%change%} Replace `frontend/styles/globals.css` with.
+{%change%} Replace `packages/frontend/styles/globals.css` with.
 
 ```css
 body,
@@ -298,7 +290,7 @@ SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-develop
 {%change%} Run the following in your project root.
 
 ```bash
-$ npm start
+$ npm run dev
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -320,14 +312,14 @@ dev-nextjs-app-ExampleStack: deploying...
 Stack dev-nextjs-app-ExampleStack
   Status: deployed
   Outputs:
-    URL: https://d25iso31kmpdvx.cloudfront.net
+    URL: http://localhost:3000
 ```
 
 The `URL` is where our Next.js app will be hosted. For now it's just a placeholder website.
 
 Let's start our Next.js development environment.
 
-{%change%} In the `frontend/` directory run.
+{%change%} In the `packages/frontend/` directory run.
 
 ```bash
 $ npm run dev
