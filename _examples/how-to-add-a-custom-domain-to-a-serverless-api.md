@@ -36,7 +36,6 @@ By default, our app will be deployed to an environment (or stage) called `dev` a
 
 ```js
 import { SSTConfig } from "sst";
-import { Api } from "sst/constructs";
 
 export default {
   config(_input) {
@@ -56,9 +55,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `packages/` — App Code
+2. `packages/functions/` — App Code
 
-   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/functions/` directory of your project.
 
 ## Setting up an API
 
@@ -76,7 +75,7 @@ export function ExampleStack({ stack, app }: StackContext) {
   const api = new Api(stack, "Api", {
     customDomain: `${stage}.example.com`,
     routes: {
-      "GET /": "functions/lambda.handler",
+      "GET /": "packages/functions/src/lambda.main",
     },
   });
 
@@ -150,7 +149,7 @@ Now let's test our new API.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npm start
+$ npm run dev
 ```
 
 The first time you run this command it'll take a couple of minutes to do the following:
