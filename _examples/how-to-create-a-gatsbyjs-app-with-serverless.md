@@ -55,11 +55,11 @@ An SST app is made up of a couple of parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `packages/` — App Code
+2. `packages/functions/` — App Code
 
-   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/functions/` directory of your project.
 
-3. `frontend/` — Gatsby App
+3. `packages/frontend/` — Gatsby App
 
    The code for our frontend Gatsby app.
 
@@ -109,7 +109,7 @@ const api = new Api(stack, "Api", {
     },
   },
   routes: {
-    "POST /": "functions/lambda.handler",
+    "POST /": "packages/functions/src/lambda.main",
   },
 });
 
@@ -152,7 +152,7 @@ const site = new StaticSite(stack, "GatsbySite", {
 
 // Show the URLs in the output
 stack.addOutputs({
-  SiteUrl: site.url,
+  SiteUrl: site.url || "http://localhost:8000",
   ApiEndpoint: api.url,
 });
 ```
@@ -166,14 +166,7 @@ You can also optionally configure a custom domain.
 ```ts
 // Deploy our Gatsby app
 const site = new StaticSite(stack, "GatsbySite", {
-  path: "frontend",
-  buildOutput: "public",
-  buildCommand: "npm run build",
-  errorPage: "redirect_to_index_page",
-  environment: {
-    // Pass in the API endpoint to our app
-    GATSBY_APP_API_URL: api.url,
-  },
+  // ...
   customDomain: "www.my-gatsby-app.com",
 });
 ```
@@ -192,7 +185,7 @@ import { Table } from "sst/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export async function handler() {
+export async function main() {
   const getParams = {
     // Get the table name from the environment variable
     TableName: Table.Counter.tableName,
@@ -216,7 +209,7 @@ export async function handler() {
 
 We make a `get` call to our DynamoDB table and get the value of a row where the `counter` column has the value `clicks`. Since we haven't written to this column yet, we are going to just return `0`.
 
-{%change%} Let's install the `aws-sdk` package in the `packages/` folder.
+{%change%} Let's install the `aws-sdk` package in the `packages/functions/` folder.
 
 ```bash
 $ npm install aws-sdk
@@ -229,7 +222,7 @@ And let's test what we have so far.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npm start
+$ npm run dev
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -252,10 +245,10 @@ Stack dev-gatsby-app-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://sez1p3dsia.execute-api.ap-south-1.amazonaws.com
-    SiteUrl: https://d2uyljrh4twuwq.cloudfront.net
+    SiteUrl: http://localhost:8000
 ```
 
-The `ApiEndpoint` is the API we just created. While the `SiteUrl` is where our Gatsby app will be hosted. For now it's just a placeholder website.
+The `ApiEndpoint` is the API we just created. While the `SiteUrl` our Svelte app will run locally once we start it.
 
 Let's test our endpoint with the [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 
@@ -271,7 +264,7 @@ You should see a `0` in the response body.
 
 We are now ready to use the API we just created. Let's use [Gatsby Quick Start](https://www.gatsbyjs.com/docs/quick-start/) to setup our Gatsby app.
 
-{%change%} Run the following in the project root.
+{%change%} Run the following in the `packages/` directory.
 
 ```bash
 $ npx create-gatsby@latest
@@ -317,7 +310,7 @@ Open up your browser and go to `http://localhost:8000`.
 
 We are now ready to add the UI for our app and connect it to our serverless API.
 
-{%change%} Replace `frontend/src/pages/index.js` with.
+{%change%} Replace `packages/frontend/src/pages/index.js` with.
 
 {% raw %}
 

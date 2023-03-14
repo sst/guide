@@ -109,7 +109,7 @@ const api = new Api(stack, "Api", {
     },
   },
   routes: {
-    "POST /": "packages/functions/src/lambda.handler",
+    "POST /": "packages/functions/src/lambda.main",
   },
 });
 
@@ -185,7 +185,7 @@ import { Table } from "sst/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export async function handler() {
+export async function main() {
   const getParams = {
     // Get the table name from the environment variable
     TableName: Table.Counter.tableName,
