@@ -55,9 +55,9 @@ An SST app is made up of two parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `packages/` — App Code
+2. `packages/functions/` — App Code
 
-   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/functions/` directory of your project.
 
 ## Storing connections
 
@@ -102,9 +102,9 @@ const api = new WebSocketApi(stack, "Api", {
     },
   },
   routes: {
-    $connect: "functions/connect.handler",
-    $disconnect: "functions/disconnect.handler",
-    sendmessage: "functions/sendMessage.handler",
+    $connect: "packages/functions/src/connect.main",
+    $disconnect: "packages/functions/src/disconnect.main",
+    sendmessage: "packages/functions/src/sendMessage.main",
   },
 });
 
@@ -147,7 +147,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
 
 Here when a new client connects, we grab the connection id from `event.requestContext.connectionId` and store it in our table.
 
-{%change%} We are using the `aws-sdk`, so let's install it in the `packages/` folder.
+{%change%} We are using the `aws-sdk`, so let's install it in the `packages/functions/` folder.
 
 ```bash
 $ npm install aws-sdk
@@ -197,7 +197,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npm start
+$ npm run dev
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
