@@ -86,7 +86,7 @@ export function ExampleStack({ stack }: StackContext) {
           handler: "packages/functions/src/resize.main",
           nodejs: {
             esbuild: {
-              externalModules: ["sharp"],
+              external: ["sharp"],
             },
           },
           layers: [
@@ -112,7 +112,7 @@ export function ExampleStack({ stack }: StackContext) {
 
 This creates a S3 bucket using the [`Bucket`]({{ site.docs_url }}/constructs/Bucket) construct.
 
-We are subscribing to the `OBJECT_CREATED` notification with a [`Function`]({{ site.docs_url }}/constructs/Function). The image resizing library that we are using, [Sharp](https://github.com/lovell/sharp), needs to be compiled specifically for the target runtime. So we are going to use a [Lambda Layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) to upload it. Locally, the `sharp` package is not compatible with how our functions are bundled. So we are marking it in the `externalModules`.
+We are subscribing to the `OBJECT_CREATED` notification with a [`Function`]({{ site.docs_url }}/constructs/Function). The image resizing library that we are using, [Sharp](https://github.com/lovell/sharp), needs to be compiled specifically for the target runtime. So we are going to use a [Lambda Layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) to upload it. Locally, the `sharp` package is not compatible with how our functions are bundled. So we are marking it in the `external`.
 
 Finally, we are allowing our functions to access the bucket by calling `attachPermissions`. We are also outputting the name of the bucket that we are creating.
 
