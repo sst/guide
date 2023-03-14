@@ -55,11 +55,11 @@ An SST app is made up of a couple of parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `packages/` — App Code
+2. `packages/functions/` — App Code
 
-   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/functions/` directory of your project.
 
-3. `frontend/` — Expo App
+3. `packages/frontend/` — Expo App
 
    The code for our frontend Expo app.
 
@@ -109,7 +109,7 @@ const api = new Api(stack, "Api", {
     },
   },
   routes: {
-    "POST /": "functions/lambda.handler",
+    "POST /": "packages/functions/src/lambda.main",
   },
 });
 
@@ -159,7 +159,7 @@ export async function handler() {
 
 We make a `get` call to our DynamoDB table and get the value of a row where the `counter` column has the value `clicks`. Since we haven't written to this column yet, we are going to just return `0`.
 
-{%change%} Let's install the `aws-sdk` package in the `packages/` folder.
+{%change%} Let's install the `aws-sdk` package in the `packages/functions/` folder.
 
 ```bash
 $ npm install aws-sdk
@@ -172,7 +172,7 @@ And let's test what we have so far.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npm start
+$ npm run dev
 ```
 
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
@@ -217,17 +217,17 @@ We are now ready to use the API we just created. Let's use [Expo CLI](https://do
 
 ```bash
 $ npm install -g expo-cli
-$ expo init frontend
-$ cd frontend
+$ expo init packages/frontend
+$ cd packages/frontend
 ```
 
 ![Blank Expo app](/assets/examples/expo-app/expo-setup.png)
 
-This sets up our Expo app in the `frontend/` directory.
+This sets up our Expo app in the `packages/frontend/` directory.
 
 We also need to load the environment variables from our SST app. To do this, we'll be using the [`babel-plugin-inline-dotenv`](https://github.com/brysgo/babel-plugin-inline-dotenv) package.
 
-{%change%} Install the `babel-plugin-inline-dotenv` package by running the following in the `frontend/` directory.
+{%change%} Install the `babel-plugin-inline-dotenv` package by running the following in the `packages/frontend/` directory.
 
 ```bash
 $ npm install babel-plugin-inline-dotenv
@@ -247,7 +247,7 @@ module.exports = function (api) {
 };
 ```
 
-{%change%} Create a `.env` file inside `frontend/` and create two variables to hold dev and prod API endpoints and replace `DEV_API_URL` with the deployed URL from the steps above.
+{%change%} Create a `.env` file inside `packages/frontend/` and create two variables to hold dev and prod API endpoints and replace `DEV_API_URL` with the deployed URL from the steps above.
 
 ```
 DEV_API_URL=https://sez1p3dsia.execute-api.us-east-1.amazonaws.com
@@ -258,7 +258,7 @@ We'll add the `PROD_API_URL` later in this example.
 
 Let's start our Expo development environment.
 
-{%change%} In the `frontend/` directory run the following for the iOS emulator.
+{%change%} In the `packages/frontend/` directory run the following for the iOS emulator.
 
 ```bash
 $ expo start --ios
@@ -276,7 +276,7 @@ This will open up an emulator and load your app.
 
 We are now ready to add the UI for our app and connect it to our serverless API.
 
-{%change%} Replace `frontend/App.js` with.
+{%change%} Replace `packages/frontend/App.js` with.
 
 ```jsx
 /* eslint-disable no-undef */
