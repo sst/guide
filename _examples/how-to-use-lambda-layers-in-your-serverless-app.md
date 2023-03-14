@@ -90,7 +90,7 @@ export function ExampleStack({ stack }: StackContext) {
           // Load Chrome in a Layer
           layers: [layer],
           // Exclude bundling it in the Lambda function
-          bundle: { externalModules: ["chrome-aws-lambda"] },
+          nodejs: { install: ["chrome-aws-lambda"] },
         },
       },
     },
