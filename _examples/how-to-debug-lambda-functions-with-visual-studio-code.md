@@ -72,7 +72,7 @@ An SST app is made up of two parts.
 
 For this example we'll be testing using a simple API endpoint.
 
-Our API is defined in the `stacks/ExampleStack.ts`.
+{%change%} Replace your `stacks/ExampleStack.ts` with the following.
 
 ```ts
 import { Api, StackContext } from "sst/constructs";
@@ -81,7 +81,7 @@ export function ExampleStack({ stack }: StackContext) {
   // Create the HTTP API
   const api = new Api(stack, "Api", {
     routes: {
-      "GET /": "functions/lambda.handler",
+      "GET /": "packages/functions/src/lambda.handler",
     },
   });
 
@@ -94,9 +94,9 @@ export function ExampleStack({ stack }: StackContext) {
 
 ## Adding function code
 
-Our functions are stored in the `packages/functions/` directory. In this case, we have a simple Lambda function that's printing out the time the request was made.
+Our functions are stored in the `packages/functions/` directory. In this case, we'll have a simple Lambda function that's printing out the time the request was made.
 
-{%change%} Replace your `packages/functions/src/lambda.ts` with.
+{%change%} Create a `packages/functions/src/lambda.ts` with.
 
 ```ts
 import { APIGatewayProxyEventV2, APIGatewayProxyHandlerV2 } from "aws-lambda";
@@ -115,9 +115,9 @@ export const handler: APIGatewayProxyHandlerV2 = async (
 
 ## Adding VS Code Launch Configurations
 
-To allow VS Code to set breakpoints and debug our Lambda functions we'll add it to our [Launch Configurations](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations).
+To allow VS Code to set breakpoints and debug our Lambda functions we'll add it to our [Launch Configurations](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations). The starter template should already come with this but you can also add it manually by doing the following.
 
-{%change%} Add the following to `.vscode/launch.json`.
+{%change%} Create a `.vscode/launch.json` file with.
 
 ```json
 {
@@ -140,7 +140,7 @@ To allow VS Code to set breakpoints and debug our Lambda functions we'll add it 
 
 Since we are going to set breakpoints in our Lambda functions, it makes sense to increase the timeouts.
 
-SST has an [`--increase-timeout`]({{ site.docs_url }}/packages/cli#options) option that increases the function timeouts in your app to the maximum 15 minutes. We are using this option in our `launch.json`.
+SST has an [`--increase-timeout`]({{ site.docs_url }}/packages/sst#options) option that increases the function timeouts in your app to the maximum 15 minutes. We are using this option in our `launch.json`.
 
 ```ts
 "runtimeArgs": ["start", "--increase-timeout"],
@@ -219,9 +219,9 @@ You should see the new message being printed out.
 
 ## Deploying your API
 
-Now that our API is tested and ready to go. Let's go ahead and deploy it for our users. You'll recall that we were using a `dev` environment, the one specified in your `sst.config.ts`.
+Now that our API is tested and ready to go. Let's go ahead and deploy it for our users.
 
-However, we are going to deploy your API again. But to a different environment, called `prod`. This allows us to separate our environments, so when we are working in `dev`, it doesn't break the API for our users.
+However, we are going to deploy your API again. But to a different environment, called `prod`. This allows us to separate our environments, so when we are working in our local stage, it doesn't break the API for our users.
 
 {%change%} Run the following in your terminal.
 
