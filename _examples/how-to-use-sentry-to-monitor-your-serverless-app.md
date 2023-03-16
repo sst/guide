@@ -40,7 +40,6 @@ By default, our app will be deployed to the `us-east-1` AWS region. This can be 
 
 ```js
 import { SSTConfig } from "sst";
-import { Api } from "sst/constructs";
 
 export default {
   config(_input) {
