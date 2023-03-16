@@ -35,7 +35,6 @@ By default, our app will be deployed to the `us-east-1` AWS region. This can be 
 
 ```js
 import { SSTConfig } from "sst";
-import { Api } from "sst/constructs";
 
 export default {
   config(_input) {
@@ -831,7 +830,7 @@ When deploying to prod, we need to change our `authenticator` to redirect to the
 ```diff
  const auth = new Auth(stack, "auth", {
    authenticator: {
-     handler: "functions/auth.handler",
+     handler: "packages/functions/src/auth.handler",
 +    bind: [site],
    },
  });

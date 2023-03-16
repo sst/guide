@@ -31,14 +31,19 @@ $ cd crud-api-dynamodb
 $ npm install
 ```
 
-By default, our app will be deployed to an environment (or stage) called `dev` and the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
+By default, our app will be deployed to the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```json
-{
-  "name": "crud-api-dynamodb",
-  "region": "us-east-1",
-  "main": "stacks/index.ts"
-}
+```js
+import { SSTConfig } from "sst";
+
+export default {
+  config(_input) {
+    return {
+      name: "crud-api-dynamodb",
+      region: "us-east-1",
+    };
+  },
+} satisfies SSTConfig;
 ```
 
 ## Project layout
@@ -138,7 +143,7 @@ import { Table } from "sst/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export const handler: APIGatewayProxyHandlerV2 = async (event) => {
+export const main: APIGatewayProxyHandlerV2 = async (event) => {
   const data = JSON.parse(event.body);
 
   const params = {
@@ -182,7 +187,7 @@ import { Table } from "sst/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export async function handler() {
+export async function main() {
   const params = {
     // Get the table name from the environment variable
     TableName: Table.Notes.tableName,
@@ -216,7 +221,7 @@ import { Table } from "sst/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export const handler: APIGatewayProxyHandlerV2 = async (event) => {
+export const main: APIGatewayProxyHandlerV2 = async (event) => {
   const params = {
     // Get the table name from the environment variable
     TableName: Table.Notes.tableName,
@@ -250,7 +255,7 @@ import { Table } from "sst/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export const handler: APIGatewayProxyHandlerV2 = async (event) => {
+export const main: APIGatewayProxyHandlerV2 = async (event) => {
   const data = JSON.parse(event.body);
 
   const params = {
@@ -293,7 +298,7 @@ import { Table } from "sst/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export const handler: APIGatewayProxyHandlerV2 = async (event) => {
+export const main: APIGatewayProxyHandlerV2 = async (event) => {
   const params = {
     // Get the table name from the environment variable
     TableName: Table.Notes.tableName,
