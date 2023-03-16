@@ -346,7 +346,7 @@ Note, the DynamoDB explorer allows you to query the DynamoDB tables in the Table
 $ npx sst deploy --stage prod
 ```
 
-This allows us to separate our environments, so when we are working in our local environment, it doesn't break the app for our users. You can stop the `npm start` command that we had previously run.
+This allows us to separate our environments, so when we are working in our local environment, it doesn't break the app for our users. You can stop the `npm run dev` command that we had previously run.
 
 Once deployed, you should see something like this.
 
