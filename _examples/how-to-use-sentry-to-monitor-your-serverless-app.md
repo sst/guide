@@ -59,9 +59,9 @@ An SST app is made up of a couple of parts.
 
    The code that describes the infrastructure of your serverless app is placed in the `stacks/` directory of your project. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}), to create the infrastructure.
 
-2. `packages/` — App Code
+2. `packages/functions/` — App Code
 
-   The code that's run when your API is invoked is placed in the `packages/` directory of your project.
+   The code that's run when your API is invoked is placed in the `packages/functions/` directory of your project.
 
 ## Create our infrastructure
 
