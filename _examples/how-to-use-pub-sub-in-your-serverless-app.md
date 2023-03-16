@@ -223,7 +223,7 @@ export async function main() {
 
 Here we are getting the topic arn from the environment variable, and then publishing a message to it.
 
-{%change%} Let's install the `aws-sdk` package in the `packages/` folder.
+{%change%} Let's install the `aws-sdk` package in the `packages/functions/` folder.
 
 ```bash
 $ npm install aws-sdk

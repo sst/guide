@@ -219,7 +219,7 @@ To enable TTD in your SST app, follow the below steps.
 
 If you use SST and your code is bundled, you can use `thundra-esbuild-plugin` to activate TTD (Time-Travel Debugging).
 
-Install the package by running below command in the `packages/` folder.
+Install the package by running below command in the `packages/functions/` folder.
 
 ```bash
 npm install --save-dev @thundra/esbuild-plugin

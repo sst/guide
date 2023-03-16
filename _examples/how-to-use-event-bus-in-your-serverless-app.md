@@ -246,7 +246,7 @@ export async function handler() {
 
 Here we are getting the EventBus name from the environment variable, and then publishing an event to it.
 
-{%change%} Let's install the `aws-sdk` package in the `packages/` folder.
+{%change%} Let's install the `aws-sdk` package in the `packages/functions/` folder.
 
 ```bash
 $ npm install aws-sdk

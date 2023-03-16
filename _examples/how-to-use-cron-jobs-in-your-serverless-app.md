@@ -136,7 +136,7 @@ Wait for a couple of minutes and you should see `Hi!` gets printed out every min
 
 Now let's make a call to [MetaWeather](https://www.metaweather.com)'s API and print out the weather in San Francisco.
 
-{%change%} Let's install the `node-fetch` in the `packages/` folder.
+{%change%} Let's install the `node-fetch` in the `packages/functions/` folder.
 
 ```bash
 $ npm install node-fetch

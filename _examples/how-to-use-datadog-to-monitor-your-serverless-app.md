@@ -113,10 +113,10 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
 
 Now let's setup [Datadog](https://www.datadoghq.com/) to monitor our API. Make sure [Datadog](https://docs.datadoghq.com/integrations/amazon_web_packages/?tab=roledelegation#setup) has been configured with your AWS account.
 
-{%change%} Run the following in the `packages/` directory.
+{%change%} Run the following in our project root.
 
 ```bash
-$ npm install --save-dev datadog-cdk-constructs-v2
+$ npm install --W datadog-cdk-constructs-v2
 ```
 
 Next, go to the [**API keys**](https://app.datadoghq.com/organization-settings/api-keys) page of your Datadog dashboard and copy the API key.

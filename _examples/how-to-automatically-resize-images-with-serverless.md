@@ -213,7 +213,7 @@ We are doing a few things here. Let's go over them in detail.
 
 Now let's install the npm packages we are using here.
 
-{%change%} Run this command in the `packages/` folder.
+{%change%} Run this command in the `packages/functions/` folder.
 
 ```bash
 $ npm install sharp aws-sdk

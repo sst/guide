@@ -174,7 +174,7 @@ In a production app it can be difficult to catch these issues. We'd like to expl
 
 To fix this let's use the [Middy validator](https://middy.js.org/packages/validator/) middleware to validate our API.
 
-{%change%} Run the following in the `packages/` directory.
+{%change%} Run the following in the `packages/functions/` directory.
 
 ```bash
 $ npm install --save @middy/core @middy/http-json-body-parser @middy/http-error-handler @middy/validator

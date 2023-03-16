@@ -71,8 +71,8 @@ export function ExampleStack({ stack }: StackContext) {
   // create a kinesis stream
   const stream = new KinesisStream(stack, "Stream", {
     consumers: {
-      consumer1: "functions/consumer1.handler",
-      consumer2: "functions/consumer2.handler",
+      consumer1: "packages/functions/src/consumer1.handler",
+      consumer2: "packages/functions/src/consumer2.handler",
     },
   });
 }
@@ -222,7 +222,7 @@ export async function handler() {
 
 Here we are getting the Kinesis Data Stream name from the environment variable, and then sending a message to it.
 
-{%change%} Let's install the `aws-sdk` package in the `packages/` folder.
+{%change%} Let's install the `aws-sdk` package in the `packages/functions/` folder.
 
 ```bash
 $ npm install aws-sdk

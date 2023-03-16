@@ -208,7 +208,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
 
 Make sure to install the `node-fetch` and `lambda-multipart-parser` packages.
 
-{%change%} Run the below command in the `packages/` folder.
+{%change%} Run the below command in the `packages/functions/` folder.
 
 ```bash
 npm install node-fetch lambda-multipart-parser

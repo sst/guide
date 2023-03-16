@@ -161,7 +161,7 @@ First, we grab the webpage URL and dimensions for the screenshot from the query 
 
 Now let's install the npm packages we need.
 
-{%change%} Run the below command in the `packages/` folder.
+{%change%} Run the below command in the `packages/functions/` folder.
 
 ```bash
 $ npm install puppeteer puppeteer-core chrome-aws-lambda

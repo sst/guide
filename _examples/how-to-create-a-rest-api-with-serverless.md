@@ -207,7 +207,7 @@ The first time you run this command it'll take a couple of minutes to do the fol
 
 1. It'll bootstrap your AWS environment to use CDK.
 2. Deploy a debug stack to power the Live Lambda Development environment.
-3. Deploy your app, but replace the functions in the `packages/` directory with ones that connect to your local client.
+3. Deploy your app, but replace the functions in the `packages/functions/` directory with ones that connect to your local client.
 4. Start up a local client.
 
 Once complete, you should see something like this.

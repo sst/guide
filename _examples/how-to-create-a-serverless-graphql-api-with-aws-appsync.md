@@ -86,9 +86,10 @@ export function ExampleStack({ stack }: StackContext) {
 
   // Create the AppSync GraphQL API
   const api = new AppSyncApi(stack, "AppSyncApi", {
-    schema: "services/graphql/schema.graphql",
+    schema: "packages/functions/src/graphql/schema.graphql",
     defaults: {
       function: {
+        // Bind the table name to the function
         bind: [notesTable],
       },
     },
@@ -107,8 +108,8 @@ export function ExampleStack({ stack }: StackContext) {
   // Show the AppSync API Id and API Key in the output
   stack.addOutputs({
     ApiId: api.apiId,
-    ApiKey: api.cdk.graphqlApi.apiKey,
     APiUrl: api.url,
+    ApiKey: api.cdk.graphqlApi.apiKey || "",
   });
 }
 ```
@@ -119,7 +120,7 @@ Finally, we bind our table to our API.
 
 ## Define the GraphQL schema
 
-{%change%} Add the following to `services/graphql/schema.graphql`.
+{%change%} Add the following to `packages/functions/src/graphql/schema.graphql`.
 
 ```graphql
 type Note {
@@ -151,7 +152,7 @@ type Mutation {
 
 Let's also add a type for our note object.
 
-{%change%} Add the following to a new file in `services/Note.ts`.
+{%change%} Add the following to a new file in `packages/functions/src/graphql/Note.ts`.
 
 ```ts
 type Note = {
@@ -169,12 +170,12 @@ To start with, let's create the Lambda function that'll be our AppSync data sour
 {%change%} Replace `packages/functions/src/main.ts` with the following.
 
 ```ts
-import Note from "../../../services/Note";
-import listNotes from "../../../services/listNotes";
-import createNote from "../../../services/createNote";
-import updateNote from "../../../services/updateNote";
-import deleteNote from "../../../services/deleteNote";
-import getNoteById from "../../../services/getNoteById";
+import Note from "./graphql/Note";
+import listNotes from "./graphql/listNotes";
+import createNote from "./graphql/createNote";
+import updateNote from "./graphql/updateNote";
+import deleteNote from "./graphql/deleteNote";
+import getNoteById from "./graphql/getNoteById";
 
 type AppSyncEvent = {
   info: {
@@ -212,7 +213,7 @@ Now let's implement our resolvers.
 
 Starting with the one that'll create a note.
 
-{%change%} Add a file to `services/createNote.ts`.
+{%change%} Add a file to `packages/functions/src/graphql/createNote.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -245,7 +246,7 @@ $ npm install aws-sdk
 
 Next, let's write the function that'll fetch all our notes.
 
-{%change%} Add the following to `services/listNotes.ts`.
+{%change%} Add the following to `packages/functions/src/graphql/listNotes.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -272,7 +273,7 @@ Here we are getting all the notes from our table.
 
 We'll do something similar for the function that gets a single note.
 
-{%change%} Create a `services/getNoteById.ts`.
+{%change%} Create a `packages/functions/src/graphql/getNoteById.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -301,7 +302,7 @@ We are getting the note with the id that's passed in.
 
 Now let's update our notes.
 
-{%change%} Add a `services/updateNote.ts` with:
+{%change%} Add a `packages/functions/src/graphql/updateNote.ts` with:
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -331,7 +332,7 @@ We are using the id and the content of the note that's passed in to update a not
 
 To complete all the operations, let's delete the note.
 
-{%change%} Add this to `services/deleteNote.ts`.
+{%change%} Add this to `packages/functions/src/graphql/deleteNote.ts`.
 
 ```ts
 import { DynamoDB } from "aws-sdk";
@@ -467,7 +468,7 @@ You'll notice a couple of things. Firstly, the note we created is still there. T
 
 ## Making changes
 
-{%change%} Let's fix our `services/deleteNote.ts` by un-commenting the query.
+{%change%} Let's fix our `packages/functions/src/graphql/deleteNote.ts` by un-commenting the query.
 
 ```ts
 await dynamoDb.delete(params).promise();
