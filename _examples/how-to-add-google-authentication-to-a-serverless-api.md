@@ -76,9 +76,9 @@ export function ExampleStack({ stack }: StackContext) {
       authorizer: "iam",
     },
     routes: {
-      "GET /private": "functions/private.handler",
+      "GET /private": "packages/functions/src/private.handler",
       "GET /public": {
-        function: "functions/public.handler",
+        function: "packages/functions/src/public.handler",
         authorizer: "none",
       },
     },

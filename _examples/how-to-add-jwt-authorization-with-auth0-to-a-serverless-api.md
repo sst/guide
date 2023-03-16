@@ -142,7 +142,7 @@ Let's create two functions, one handling the public route, and the other for the
 {%change%} Add a `packages/functions/src/public.ts`.
 
 ```ts
-export async function handler() {
+export async function main() {
   return {
     statusCode: 200,
     body: "Hello stranger!",

@@ -76,10 +76,10 @@ export function ExampleStack({ stack }: StackContext) {
       authorizer: "iam",
     },
     routes: {
-      "GET /private": "functions/private.handler",
+      "GET /private": "packages/functions/src/private.main",
       "GET /public": {
-        function: "functions/public.handler",
-        authorizer: "none",
+        function: "packages/functions/src/public.main",
+        authorizer: "iam",
       },
     },
   });
@@ -141,7 +141,7 @@ Let's create two functions, one handling the public route, and the other for the
 {%change%} Add a `packages/functions/src/public.ts`.
 
 ```ts
-export async function handler() {
+export async function main() {
   return {
     statusCode: 200,
     body: "Hello stranger!",
@@ -152,7 +152,7 @@ export async function handler() {
 {%change%} Add a `packages/functions/src/private.ts`.
 
 ```ts
-export async function handler() {
+export async function main() {
   return {
     statusCode: 200,
     body: "Hello user!",
@@ -322,7 +322,7 @@ Let's make a quick change to our private route and print out the caller's user i
 ```ts
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
-export const handler: APIGatewayProxyHandlerV2 = async (event) => {
+export const main: APIGatewayProxyHandlerV2 = async (event) => {
   return {
     statusCode: 200,
     body: `Hello ${event.requestContext.authorizer.iam.cognitoIdentity.identityId}!`,

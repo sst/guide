@@ -71,8 +71,8 @@ export function ExampleStack({ stack }: StackContext) {
   // Create Topic
   const topic = new Topic(stack, "Ordered", {
     subscribers: {
-      receipt: "functions/receipt.handler",
-      shipping: "functions/shipping.handler",
+      receipt: "packages/functions/src/receipt.main",
+      shipping: "packages/functions/src/shipping.main",
     },
   });
 ```
@@ -95,7 +95,7 @@ const api = new Api(stack, "Api", {
     },
   },
   routes: {
-    "POST /order": "functions/order.handler",
+    "POST /order": "packages/functions/src/order.main",
   },
 });
 
@@ -105,7 +105,7 @@ stack.addOutputs({
 });
 ```
 
-Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (`/order`). When we make a `POST` request to this endpoint the Lambda function called `handler` in `packages/functions/src/order.ts` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (`/order`). When we make a `POST` request to this endpoint the Lambda function called `main` in `packages/functions/src/order.ts` will get invoked.
 
 We'll also bind our topic to our API.
 
@@ -116,7 +116,7 @@ We will create three functions, one handling the `/order` API request, and two f
 {%change%} Add a `packages/functions/src/order.ts`.
 
 ```ts
-export async function handler() {
+export async function main() {
   console.log("Order confirmed!");
   return {
     statusCode: 200,
@@ -128,7 +128,7 @@ export async function handler() {
 {%change%} Add a `packages/functions/src/receipt.ts`.
 
 ```ts
-export async function handler() {
+export async function main() {
   console.log("Receipt sent!");
   return {};
 }
@@ -137,7 +137,7 @@ export async function handler() {
 {%change%} Add a `packages/functions/src/shipping.ts`.
 
 ```ts
-export async function handler() {
+export async function main() {
   console.log("Item shipped!");
   return {};
 }
@@ -201,7 +201,7 @@ import { Topic } from "sst/node/topic";
 
 const sns = new AWS.SNS();
 
-export async function handler() {
+export async function main() {
   // Publish a message to topic
   await sns
     .publish({

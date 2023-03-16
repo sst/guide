@@ -125,7 +125,7 @@ For this example, we are going to focus on the custom domain. So we are going to
 {%change%} Replace the `packages/functions/src/lambda.ts` with the following.
 
 ```ts
-export async function handler() {
+export async function main() {
   const response = {
     userId: 1,
     id: 1,
@@ -206,7 +206,7 @@ Let's make a quick change to our API. It would be good if the JSON strings are p
 {%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
 ```ts
-export async function handler() {
+export async function main() {
   const response = {
     userId: 1,
     id: 1,

@@ -70,7 +70,7 @@ import { StackContext, Queue, Api } from "sst/constructs";
 export function ExampleStack({ stack }: StackContext) {
   // Create Queue
   const queue = new Queue(stack, "Queue", {
-    consumer: "functions/consumer.handler",
+    consumer: "packages/functions/src/consumer.main",
   });
 }
 ```
@@ -93,7 +93,7 @@ const api = new Api(stack, "Api", {
     },
   },
   routes: {
-    "POST /": "functions/lambda.handler",
+    "POST /": "packages/functions/src/lambda.main",
   },
 });
 
@@ -103,7 +103,7 @@ stack.addOutputs({
 });
 ```
 
-Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `packages/functions/src/lambda.ts` will get invoked.
+Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `main` in `packages/functions/src/lambda.ts` will get invoked.
 
 We'll also bind our queue to our API.
 
@@ -114,7 +114,7 @@ We will create two functions, one for handling the API request, and one for the 
 {%change%} Replace the `packages/functions/src/lambda.ts` with the following.
 
 ```ts
-export async function handler() {
+export async function main() {
   console.log("Message queued!");
   return {
     statusCode: 200,
@@ -126,7 +126,7 @@ export async function handler() {
 {%change%} Add a `packages/functions/src/consumer.ts`.
 
 ```ts
-export async function handler() {
+export async function main() {
   console.log("Message processed!");
   return {};
 }
@@ -190,7 +190,7 @@ import { Queue } from "sst/node/queue";
 
 const sqs = new AWS.SQS();
 
-export async function handler() {
+export async function main() {
   // Send a message to queue
   await sqs
     .sendMessage({

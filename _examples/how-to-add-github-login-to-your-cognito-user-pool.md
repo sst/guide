@@ -125,11 +125,11 @@ const api = new Api(stack, "api", {
     authorizer: "none",
   },
   routes: {
-    "GET /public": "functions/public.handler",
-    "GET /user": "functions/user.handler",
-    "POST /token": "functions/token.handler",
+    "GET /public": "packages/functions/src/public.handler",
+    "GET /user": "packages/functions/src/user.handler",
+    "POST /token": "packages/functions/src/token.handler",
     "GET /private": {
-      function: "functions/private.handler",
+      function: "packages/functions/src/private.handler",
       authorizer: "userPool",
     },
   },

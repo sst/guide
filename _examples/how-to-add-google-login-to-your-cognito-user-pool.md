@@ -174,9 +174,9 @@ const api = new Api(stack, "Api", {
     authorizer: "userPool",
   },
   routes: {
-    "GET /private": "functions/private.handler",
+    "GET /private": "packages/functions/src/private.handler",
     "GET /public": {
-      function: "functions/public.handler",
+      function: "packages/functions/src/public.handler",
       authorizer: "none",
     },
   },

@@ -130,7 +130,7 @@ import { Table } from "sst/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export const handler: APIGatewayProxyHandler = async (event) => {
+export const main: APIGatewayProxyHandler = async (event) => {
   const params = {
     TableName: Table.Connections.tableName,
     Item: {
@@ -165,7 +165,7 @@ import { Table } from "sst/node/table";
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export const handler: APIGatewayProxyHandler = async (event) => {
+export const main: APIGatewayProxyHandler = async (event) => {
   const params = {
     TableName: Table.Connections.tableName,
     Key: {
@@ -186,7 +186,7 @@ Now before handling the `sendmessage` route, let's do a quick test. We'll leave 
 ```ts
 import { APIGatewayProxyHandler } from "aws-lambda";
 
-export const handler: APIGatewayProxyHandler = async (event) => {
+export const main: APIGatewayProxyHandler = async (event) => {
   return { statusCode: 200, body: "Message sent" };
 };
 ```
@@ -257,7 +257,7 @@ import { APIGatewayProxyHandler } from "aws-lambda";
 const TableName = Table.Connections.tableName;
 const dynamoDb = new DynamoDB.DocumentClient();
 
-export const handler: APIGatewayProxyHandler = async (event) => {
+export const main: APIGatewayProxyHandler = async (event) => {
   const messageData = JSON.parse(event.body).data;
   const { stage, domainName } = event.requestContext;
 

@@ -136,7 +136,7 @@ Now add the code for our first endpoint.
 import { APIGatewayProxyResult } from "aws-lambda";
 import notes from "./notes";
 
-export async function handler(): Promise<APIGatewayProxyResult> {
+export async function main(): Promise<APIGatewayProxyResult> {
   return {
     statusCode: 200,
     body: JSON.stringify(notes),
@@ -284,7 +284,7 @@ Let's make a quick change to our API. It would be good if the JSON strings are p
 import { APIGatewayProxyResult } from "aws-lambda";
 import notes from "./notes";
 
-export async function handler(): Promise<APIGatewayProxyResult> {
+export async function main(): Promise<APIGatewayProxyResult> {
   return {
     statusCode: 200,
     body: JSON.stringify(notes, null, "  "),

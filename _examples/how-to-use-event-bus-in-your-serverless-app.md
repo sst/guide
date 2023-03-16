@@ -76,8 +76,8 @@ export function ExampleStack({ stack }: StackContext) {
           detailType: ["Order"],
         },
         targets: {
-          receipt: "functions/receipt.handler",
-          shipping: "functions/shipping.handler",
+          receipt: "packages/functions/src/receipt.handler",
+          shipping: "packages/functions/src/shipping.handler",
         },
       },
     },
@@ -102,7 +102,7 @@ const api = new Api(stack, "Api", {
     },
   },
   routes: {
-    "POST /order": "functions/order.handler",
+    "POST /order": "packages/functions/src/order.handler",
   },
 });
 

@@ -70,7 +70,7 @@ import { Cron, StackContext } from "sst/constructs";
 export function ExampleStack({ stack }: StackContext) {
   new Cron(stack, "Cron", {
     schedule: "rate(1 minute)",
-    job: "functions/lambda.handler",
+    job: "packages/functions/src/lambda.main",
   });
 }
 ```
@@ -84,7 +84,7 @@ Now in our function, we'll print out a message every time the function is run.
 {%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
 ```ts
-export async function handler() {
+export async function main() {
   console.log("Hi!");
   return {};
 }
@@ -147,7 +147,7 @@ $ npm install node-fetch
 ```ts
 import fetch from "node-fetch";
 
-export async function handler() {
+export async function main() {
   const weather = await checkSFWeather();
   console.log(weather.consolidated_weather[0]);
   return {};

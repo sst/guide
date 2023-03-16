@@ -170,7 +170,7 @@ function streamToSharp(width) {
   return sharp().resize(width);
 }
 
-export const handler: S3Handler = async (event) => {
+export const main: S3Handler = async (event) => {
   const s3Record = event.Records[0].s3;
 
   // Grab the filename and bucket name
@@ -205,7 +205,7 @@ export const handler: S3Handler = async (event) => {
 
 We are doing a few things here. Let's go over them in detail.
 
-1. In the `handler` function, we start by grabbing the `Key` or filename of the file that's been uploaded. We also get the `Bucket` or name of the bucket that it was uploaded to.
+1. In the `main` function, we start by grabbing the `Key` or filename of the file that's been uploaded. We also get the `Bucket` or name of the bucket that it was uploaded to.
 2. Check if the file has already been resized, by looking at the filename and if it starts with the dimensions. If it has, then we quit the function.
 3. Generate the new filename with the dimensions.
 4. Create a stream to read the file from S3, another to resize the image, and finally upload it back to S3. We use streams because really large files might hit the limit for what can be downloaded on to the Lambda function.

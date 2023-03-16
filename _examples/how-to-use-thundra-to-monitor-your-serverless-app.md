@@ -82,7 +82,7 @@ export function ExampleStack({ stack, app }: StackContext) {
   // Create a HTTP API
   const api = new Api(stack, "Api", {
     routes: {
-      "GET /": "functions/lambda.handler",
+      "GET /": "packages/functions/src/lambda.handler",
     },
   });
 
@@ -249,7 +249,7 @@ And then in `stacks/ExampleStack.ts` add the below code under the `defaults` in 
 ```ts
 const api = new Api(stack, "Api", {
   routes: {
-    "GET /": "functions/lambda.handler",
+    "GET /": "packages/functions/src/lambda.handler",
   },
 });
 ```
@@ -268,7 +268,7 @@ const api = new Api(stack, "Api", {
     },
   },
   routes: {
-    "GET /": "functions/lambda.handler",
+    "GET /": "packages/functions/src/lambda.handler",
   },
 });
 ```
