@@ -500,7 +500,7 @@ And finally, when the user clicks on `Sign out`, we need to clear the session to
 
 ```ts
 const signOut = async () => {
-  localStorage.clear("session");
+  localStorage.removeItem("session");
   setSession(null);
 };
 ```
