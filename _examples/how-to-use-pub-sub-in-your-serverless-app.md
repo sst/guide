@@ -75,6 +75,7 @@ export function ExampleStack({ stack }: StackContext) {
       shipping: "packages/functions/src/shipping.main",
     },
   });
+}
 ```
 
 This creates an SNS topic using [`Topic`]({{ site.docs_url }}/constructs/Topic). And it has two subscribers. Meaning when the topic is published, both the functions will get run.
