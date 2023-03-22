@@ -65,7 +65,7 @@ Let's start by setting up an API.
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { Api, Cognito, StackContext, ViteStaticSite } from "sst/constructs";
+import { Api, Cognito, StackContext, StaticSite } from "sst/constructs";
 
 export function ExampleStack({ stack, app }: StackContext) {
   // Create User Pool
@@ -151,7 +151,7 @@ export const main: APIGatewayProxyHandlerV2WithJWTAuthorizer = async (
 
 ## Setting up our React app
 
-To deploy a React.js app to AWS, we'll be using the SST [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) construct.
+To deploy a React.js app to AWS, we'll be using the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite) construct.
 
 {%change%} Replace the following in `stacks/ExampleStack.ts`:
 
@@ -167,7 +167,7 @@ stack.addOutputs({
 {%change%} With:
 
 ```ts
-const site = new ViteStaticSite(stack, "Site", {
+const site = new StaticSite(stack, "Site", {
   path: "frontend",
   environment: {
     VITE_APP_API_URL: api.url,
@@ -188,14 +188,14 @@ stack.addOutputs({
 
 The construct is pointing to where our React.js app is located. We haven't created our app yet but for now we'll point to the `frontend` directory.
 
-We are also setting up [build time React environment variables](https://vitejs.dev/guide/env-and-mode.html) with the endpoint of our API. The [`ViteStaticSite`]({{ site.docs_url }}/constructs/ViteStaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
+We are also setting up [build time React environment variables](https://vitejs.dev/guide/env-and-mode.html) with the endpoint of our API. The [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
 
 We are going to print out the resources that we created for reference.
 
-Make sure to import the `ViteStaticSite` construct by adding below line
+Make sure to import the `StaticSite` construct by adding below line
 
 ```ts
-import { ViteStaticSite } from "sst/constructs";
+import { StaticSite } from "sst/constructs";
 ```
 
 ## Creating the frontend
@@ -208,7 +208,7 @@ $ cd frontend
 $ npm install
 ```
 
-This sets up our React app in the `frontend/` directory. Recall that, earlier in the guide we were pointing the `ViteStaticSite` construct to this path.
+This sets up our React app in the `frontend/` directory. Recall that, earlier in the guide we were pointing the `StaticSite` construct to this path.
 
 We also need to load the environment variables from our SST app. To do this, we'll be using the [`sst env`](https://docs.sst.dev/packages/sst#sst-env) command.
 
@@ -295,7 +295,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
-import Amplify from "aws-amplify";
+import { Amplify } from "aws-amplify";
 
 Amplify.configure({
   Auth: {
