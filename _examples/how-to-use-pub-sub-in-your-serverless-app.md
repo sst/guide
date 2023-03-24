@@ -91,7 +91,7 @@ Now let's add the API.
 const api = new Api(stack, "Api", {
   defaults: {
     function: {
-      // Bind the table name to our API
+      // Bind the SNS topic name to our API
       bind: [topic],
     },
   },
