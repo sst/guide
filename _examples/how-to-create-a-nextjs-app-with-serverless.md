@@ -148,7 +148,7 @@ The construct is pointing to where our Next.js app is located. You'll recall tha
 
 We are also setting up a couple of [build time Next.js environment variable](https://nextjs.org/docs/basic-features/environment-variables). The `REGION` and `TABLE_NAME` are passing in the table details to our Next.js app. The [`NextjsSite`]({{ site.docs_url }}/constructs/NextjsSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
 
-To load these environment variables in our local environment, we'll be using the [`sst env`](https://docs.sst.dev/packages/sst#sst-env) command.
+To load these environment variables in our local environment, we'll be using the [`sst bind`](https://docs.sst.dev/packages/sst#sst-bind) command.
 
 {%change%} Replace the `dev` script in your `frontend/package.json`.
 
@@ -159,7 +159,7 @@ To load these environment variables in our local environment, we'll be using the
 {%change%} With the following:
 
 ```bash
-"dev": "sst env next dev",
+"dev": "sst bind next dev",
 ```
 
 This will ensure that when you are running your Next.js app locally, the `REGION` and `TABLE_NAME` will be available.

@@ -279,7 +279,7 @@ Create React App will throw a warning if it is installed inside a repo that uses
 SKIP_PREFLIGHT_CHECK=true
 ```
 
-We also need to load the environment variables from our SST app. To do this, we'll be using the [`sst env`](https://docs.sst.dev/packages/sst#sst-env) command.
+We also need to load the environment variables from our SST app. To do this, we'll be using the [`sst bind`](https://docs.sst.dev/packages/sst#sst-bind) command.
 
 {%change%} Replace the `start` script in your `frontend/package.json`.
 
@@ -290,7 +290,7 @@ We also need to load the environment variables from our SST app. To do this, we'
 {%change%} With the following:
 
 ```bash
-"start": "sst env react-scripts start",
+"start": "sst bind react-scripts start",
 ```
 
 Let's start our React development environment.

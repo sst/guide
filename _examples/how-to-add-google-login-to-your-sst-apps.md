@@ -253,13 +253,13 @@ $ npm install
 
 This sets up our React app in the `web/` directory.
 
-We also need to load the environment variables from our SST app. To do this, we'll be using the [`sst env`](https://docs.sst.dev/packages/sst#sst-env) command.
+We also need to load the environment variables from our SST app. To do this, we'll be using the [`sst bind`](https://docs.sst.dev/packages/sst#sst-bind) command.
 
 {%change%} Replace the `dev` script in your `web/package.json`.
 
 ```diff
 -"dev": "vite"
-+"dev": "sst env vite"
++"dev": "sst bind vite"
 ```
 
 ## Start our dev environment

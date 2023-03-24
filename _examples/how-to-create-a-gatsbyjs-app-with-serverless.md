@@ -281,7 +281,7 @@ Navigate into the folder we created.
 $ cd frontend
 ```
 
-We also need to load the environment variables from our SST app. To do this, we'll be using the [`sst env`](https://docs.sst.dev/packages/sst#sst-env) command.
+We also need to load the environment variables from our SST app. To do this, we'll be using the [`sst bind`](https://docs.sst.dev/packages/sst#sst-bind) command.
 
 {%change%} Replace the `develop` script in your `frontend/package.json`.
 
@@ -292,7 +292,7 @@ We also need to load the environment variables from our SST app. To do this, we'
 {%change%} With the following:
 
 ```bash
-"develop": "sst env gatsby develop",
+"develop": "sst bind gatsby develop",
 ```
 
 Let's start our Gatsby development environment.
