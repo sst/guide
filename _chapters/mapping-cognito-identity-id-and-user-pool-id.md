@@ -24,8 +24,8 @@ However, you might find yourself looking for a user's User Pool user id in your 
 Below is a sample Lambda function where we find the user's User Pool user id.
 
 ``` js
-export async function main(event, context, callback) {
-  const authProvider = event.requestContext.identity.cognitoAuthenticationProvider;
+export async function main(event, context) {
+  const authProvider = event.requestContext.authorizer.iam.cognitoIdentity.amr.findLast(ref => ref.includes(':'))
   // Cognito authentication provider looks like:
   // cognito-idp.us-east-1.amazonaws.com/us-east-1_xxxxxxxxx,cognito-idp.us-east-1.amazonaws.com/us-east-1_aaaaaaaaa:CognitoSignIn:qqqqqqqq-1111-2222-3333-rrrrrrrrrrrr
   // Where us-east-1_aaaaaaaaa is the User Pool id
