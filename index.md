@@ -31,7 +31,7 @@ description: "Deploy Next.js, Remix, Astro, Solid, Vite to AWS and add any backe
         <i class="fa fa-copy" aria-hidden="true"></i>
         <i class="fa fa-check" aria-hidden="true"></i>
       </a>
-      <a class="sst-button primary" href="{{ site.docs_url }}{{ site.docs_get_started }}">
+      <a class="sst-button primary" href="{{ site.docs_url }}">
         Get Started
       </a>
     </div>
@@ -194,8 +194,8 @@ description: "Deploy Next.js, Remix, Astro, Solid, Vite to AWS and add any backe
 </div>
 
 <div class="learn-more wrapper">
-  <a class="sst-button primary" href="{{ site.docs_url }}/what-is-sst">
-    Learn More
+  <a class="sst-button primary" href="{{ site.docs_url }}">
+    Get Started
   </a>
 </div>
 
