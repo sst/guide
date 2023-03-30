@@ -129,7 +129,7 @@ There are some helpful comments in the code but let's go over them quickly.
 - Parse the input from the `event.body`. This represents the HTTP request body.
 - It contains the contents of the note, as a string — `content`.
 - It also contains an `attachment`, if one exists. It's the filename of a file that will be uploaded to [our S3 bucket]({% link _chapters/create-an-s3-bucket-in-sst.md %}).
-- We can access the our DynamoDB table through `Table.Notes.tableName` from the `sst/node/table`, the [SST Node.js client]({{ site.docs_url }}/clients). Here `Notes` in `Table.Notes` is the name of our Table construct from the [Create a DynamoDB Table in SST]({% link _chapters/create-a-dynamodb-table-in-sst.md %}) chapter. By doing `bind: [table]` earlier in this chapter, we are allowing our API to access our table.
+- We can access our DynamoDB table through `Table.Notes.tableName` from the `sst/node/table`, the [SST Node.js client]({{ site.docs_url }}/clients). Here `Notes` in `Table.Notes` is the name of our Table construct from the [Create a DynamoDB Table in SST]({% link _chapters/create-a-dynamodb-table-in-sst.md %}) chapter. By doing `bind: [table]` earlier in this chapter, we are allowing our API to access our table.
 - The `userId` is the id for the author of the note. For now we are hardcoding it to `123`. Later we'll be setting this based on the authenticated user.
 - Make a call to DynamoDB to put a new object with a generated `noteId` and the current date as the `createdAt`.
 - And if the DynamoDB call fails then return an error with the HTTP status code `500`.
@@ -174,7 +174,7 @@ Here we can test our APIs.
 
 {%change%} Add the following request body to the **Body** field and hit **Send**.
 
-```txt
+```json
 {"content":"Hello World","attachment":"hello.jpg"}
 ```
 
