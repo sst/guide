@@ -82,7 +82,7 @@ Head to the **API** tab in the [SST Console]({{ site.console_url }}) and select 
 
 {%change%} Set the `noteId` as the **id** and in the **Body** tab set the following as the request body. Then hit **Send**.
 
-```txt
+```json
 {"content":"New World","attachment":"new.jpg"}
 ```
 
