@@ -57,8 +57,8 @@ import { calculateCost } from "../src/cost";
 test("Lowest tier", () => {
   const storage = 10;
 
-  const cost = 4000;
-  const expectedCost = calculateCost(storage);
+  const expectedCost = 4000;
+  const cost = calculateCost(storage);
 
   expect(cost).toEqual(expectedCost);
 });
@@ -66,8 +66,8 @@ test("Lowest tier", () => {
 test("Middle tier", () => {
   const storage = 100;
 
-  const cost = 20000;
-  const expectedCost = calculateCost(storage);
+  const expectedCost = 20000;
+  const cost = calculateCost(storage);
 
   expect(cost).toEqual(expectedCost);
 });
@@ -75,8 +75,8 @@ test("Middle tier", () => {
 test("Highest tier", () => {
   const storage = 101;
 
-  const cost = 10100;
-  const expectedCost = calculateCost(storage);
+  const expectedCost = 10100;
+  const cost = calculateCost(storage);
 
   expect(cost).toEqual(expectedCost);
 });
