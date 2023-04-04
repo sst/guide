@@ -123,6 +123,8 @@ It will open up a dialog where you need to configure the settings as per the pro
 
 ![Create run configuration in WebStorm](/assets/examples/webstorm/create-run-configuration-in-webstorm.png)
 
+In some versions of WebStorm you might need to disable stepping through library scripts. You can do this by heading to **Preferences** > **Build, Execution, Deployment** > **Debugger** > **Stepping** > unchecking **Do not step into library scripts**.
+
 ## Extending Lambda function timeouts
 
 Since we are going to set breakpoints in our Lambda functions, it makes sense to increase the timeouts.
