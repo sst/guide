@@ -182,7 +182,7 @@ stack.addOutputs({
 
 ```ts
 const site = new StaticSite(stack, "Site", {
-  path: "frontend",
+  path: "packages/frontend",
   buildOutput: "dist",
   buildCommand: "npm run build",
   environment: {
@@ -200,7 +200,7 @@ stack.addOutputs({
 });
 ```
 
-The construct is pointing to where our React.js app is located. We haven't created our app yet but for now we'll point to the `frontend` directory.
+The construct is pointing to where our React.js app is located. We haven't created our app yet but for now we'll point to the `packages/frontend` directory.
 
 We are also setting up [build time React environment variables](https://vitejs.dev/guide/env-and-mode.html) with the endpoint of our API. The [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
 
@@ -214,7 +214,7 @@ import { StaticSite } from "sst/constructs";
 
 ## Creating the frontend
 
-Run the below commands in the root to create a basic react project.
+Run the below commands in the `packages/` directory to create a basic react project.
 
 ```bash
 $ npx create-vite@latest frontend --template react
@@ -222,7 +222,7 @@ $ cd frontend
 $ npm install
 ```
 
-This sets up our React app in the `frontend/` directory. Recall that, earlier in the guide we were pointing the `StaticSite` construct to this path.
+This sets up our React app in the `packages/frontend/` directory. Recall that, earlier in the guide we were pointing the `StaticSite` construct to this path.
 
 We also need to load the environment variables from our SST app. To do this, we'll be using the [`sst bind`](https://docs.sst.dev/packages/sst#sst-bind) command.
 
@@ -294,7 +294,7 @@ To use our AWS resources on the frontend we are going to use [AWS Amplify](https
 
 Note, to know more about configuring Amplify with SST check [this chapter]({% link _chapters/configure-aws-amplify.md %}).
 
-Run the below command to install AWS Amplify and the Auth0 React SDK in the `frontend/` directory.
+Run the below command to install AWS Amplify and the Auth0 React SDK in the `packages/frontend/` directory.
 
 ```bash
 npm install aws-amplify @auth0/auth0-react
@@ -468,7 +468,7 @@ button {
 
 Let's start our frontend in development environment.
 
-{%change%} In the `frontend/` directory run.
+{%change%} In the `packages/frontend/` directory run.
 
 ```bash
 npm run dev
