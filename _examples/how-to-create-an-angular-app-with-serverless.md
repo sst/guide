@@ -156,7 +156,7 @@ const site = new StaticSite(stack, "AngularSite", {
 
 // Show the URLs in the output
 stack.addOutputs({
-  SiteUrl: site.url || "http://localhost:4200",
+  SiteUrl: site.url,
   ApiEndpoint: api.url,
 });
 ```

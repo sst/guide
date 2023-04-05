@@ -151,7 +151,7 @@ const site = new StaticSite(stack, "GatsbySite", {
 
 // Show the URLs in the output
 stack.addOutputs({
-  SiteUrl: site.url || "http://localhost:8000",
+  SiteUrl: site.url,
   ApiEndpoint: api.url,
 });
 ```
@@ -244,10 +244,9 @@ Stack dev-gatsby-app-ExampleStack
   Status: deployed
   Outputs:
     ApiEndpoint: https://sez1p3dsia.execute-api.ap-south-1.amazonaws.com
-    SiteUrl: http://localhost:8000
 ```
 
-The `ApiEndpoint` is the API we just created. While the `SiteUrl` our Svelte app will run locally once we start it.
+The `ApiEndpoint` is the API we just created.
 
 Let's test our endpoint with the [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
 

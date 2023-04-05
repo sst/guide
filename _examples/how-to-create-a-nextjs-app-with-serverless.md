@@ -140,7 +140,7 @@ site.attachPermissions([table]);
 
 // Show the site URL in the output
 stack.addOutputs({
-  URL: site.url || "http://localhost:3000",
+  URL: site.url,
 });
 ```
 
@@ -310,8 +310,6 @@ dev-nextjs-app-ExampleStack: deploying...
 
 Stack dev-nextjs-app-ExampleStack
   Status: deployed
-  Outputs:
-    URL: http://localhost:3000
 ```
 
 The `URL` is where our Next.js app will be hosted. For now it's just a placeholder website.
