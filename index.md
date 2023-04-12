@@ -1,6 +1,6 @@
 ---
 layout: lander
-description: "Deploy Next.js, Remix, Astro, Solid, Vite to AWS and add any backend feature."
+description: "Build modern full-stack serverless applications on AWS with Next.js, Remix, Astro, Solid, and more."
 ---
 
 <header class="lander-header" role="banner">
