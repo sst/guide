@@ -7,9 +7,9 @@ description: "Build modern full-stack serverless applications on AWS with Next.j
 
   <div class="header-wrapper">
 
-    <a class="site-announcement" href="{% link _posts/2023-02-27-sst-v2.md %}">
+    <a class="site-announcement" href="{% link _posts/2023-04-17-open-next-v1.md %}">
       <span class="new">New</span>
-      <span class="copy">SST v2 is now available. Learn more</span>
+      <span class="copy">OpenNext 1.0 is out. Learn more</span>
       <i class="fa fa-angle-right" aria-hidden="true"></i>
     </a>
 
