@@ -44,7 +44,7 @@ Now to use this package, we'll add it to our `package.json` scripts.
 {%change%} With.
 
 ```js
-"start": "sst env react-scripts start",
+"start": "sst bind react-scripts start",
 ```
 
 ### Add the React App to SST
