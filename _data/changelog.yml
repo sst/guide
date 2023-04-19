@@ -1,4 +1,8 @@
 current:
+  title: "Upgrading to SST v2.5"
+  desc: "Apr 9, 2023: Updating the guide and code to use the latest `sst bind`."
+
+v7-3:
   title: "Upgrading to SST v2"
   desc: "Mar 10, 2023: Updating the guide and code snippets to SST v2."
 
