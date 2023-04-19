@@ -8,40 +8,12 @@ index: 2
 type: webapp
 description: In this example we will look at how to deploy a full-stack Next.js app to your AWS account with SST. We'll also compare the various deployment options for Next.js.
 short_desc: Full-stack Next.js app with DynamoDB.
-repo: nextjs-app
+repo: quickstart-nextjs
 ref: how-to-create-a-nextjs-app-with-serverless
 comments_id: how-to-create-a-next-js-app-with-serverless/2486
 ---
 
-In this example we will look at how to deploy a full-stack [Next.js](https://nextjs.org) app to your AWS account with [SST]({{ site.sst_github_repo }}) and the SST [`NextjsSite`]({{ site.docs_url }}/constructs/NextjsSite) construct.
-
-Here's what we'll be covering in this example:
-
-- Create a full-stack Next.js app
-
-  - [Create an SST app](#create-an-sst-app)
-  - [Create our infrastructure](#create-our-infrastructure)
-    - [Add the table](#add-the-table)
-  - [Setup our Next.js app](#setup-our-nextjs-app)
-    - [Configure Next.js with SST](#configure-nextjs-with-sst)
-    - [Add the API](#add-the-api)
-    - [Add a click button](#add-a-click-button)
-  - [Start the dev environment](#start-the-dev-environment)
-  - [Deploy to AWS](#deploy-to-aws)
-
-- Comparison
-
-  - [Comparing Next.js deployment options](#comparisons)
-    - [Hosting](#hosting)
-    - [Speed of deployment](#speed-of-deployment)
-    - [Cost](#cost)
-    - [Open source](#open-source)
-    - [CI/CD compatibility](#cicd-compatibility)
-    - [AWS integration](#aws-integration)
-    - [Infrastructure as Code](#infrastructure-as-code)
-    - [Project support](#project-support)
-
-- [Summary](#summary)
+In this example we will look at how to deploy a full-stack [Next.js](https://nextjs.org) app to your AWS account with [OpenNext](https://open-next.js.org) and the [`NextjsSite`]({{ site.docs_url }}/constructs/NextjsSite) construct.
 
 ## Requirements
 
@@ -49,17 +21,24 @@ Here's what we'll be covering in this example:
 - We'll be using TypeScript
 - An [AWS account]({% link _chapters/create-an-aws-account.md %}) with the [AWS CLI configured locally]({% link _chapters/configure-the-aws-cli.md %})
 
-## Create an SST app
+## Create a Next.js app
 
-{%change%} Let's start by creating an SST app.
+{%change%} Let's start by creating a Next.js app. We'll just go with the defaults.
 
 ```bash
-$ npx create-sst@latest --template=base/example nextjs-app
-$ cd nextjs-app
+$ npx create-next-app@latest
+```
+
+## Initialize SST in your app
+
+{%change%} Initialize SST in your Next.js app by running this in the root.
+
+```bash
+$ npx create-sst@latest
 $ npm install
 ```
 
-By default, our app will be deployed to the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
+This will detect that you are trying to configure a Next.js app. It'll add a `sst.config.ts` and a couple of packages to your `package.json`.
 
 ```js
 import { SSTConfig } from "sst";
@@ -67,274 +46,163 @@ import { SSTConfig } from "sst";
 export default {
   config(_input) {
     return {
-      name: "nextjs-app",
+      name: "quickstart-nextjs",
       region: "us-east-1",
     };
+  },
+  stacks(app) {
+    app.stack(function Site({ stack }) {
+      const site = new NextjsSite(stack, "site");
+
+      stack.addOutputs({
+        SiteUrl: site.url,
+      });
+    });
   },
 } satisfies SSTConfig;
 ```
 
-The code in the `stacks/` directory describes the infrastructure of your serverless app. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}).
+The `stacks` code describes the infrastructure of your serverless app. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}).
+
+You are **ready to deploy** your Next.js app at this point! But for the purpose of this example, we'll go a bit further and add a file uploads feature to our app.
+
+## Start the dev environment
+
+{%change%} Let's start our SST dev environment.
+
+```bash
+$ npx sst dev
+```
+
+SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live. This will ask you to start your Next.js dev environment as well.
+
+{%change%} Start Next.js locally in a separate terminal.
+
+```bash
+$ npm run dev
+```
+
+This will run `sst bind next dev`. More on bind later.
 
 ## Create our infrastructure
 
-Our app is made up of a database, a Next.js app, and an API within the Next.js app. The API will be talking to the database to store the number of clicks. We'll start by creating the database.
+To support file uploads in our app, we need an S3 bucket. Let's add that.
 
 ### Add the table
 
-We'll be using [Amazon DynamoDB](https://aws.amazon.com/dynamodb/); a reliable and highly-performant NoSQL database that can be configured as a true serverless database. Meaning that it'll scale up and down automatically. And you won't get charged if you are not using it.
-
-{%change%} Replace the `stacks/ExampleStack.ts` with the following.
+{%change%} Add the following above our `NextjsSite` definition in the `sst.config.ts`.
 
 ```ts
-import { Api, NextjsSite, StackContext, Table } from "sst/constructs";
+const bucket = new Bucket(stack, "public", {
+  cors: true,
+});
+```
 
-export function ExampleStack({ stack, app }: StackContext) {
-  // Create the table
-  const table = new Table(stack, "Counter", {
-    fields: {
-      counter: "string",
-    },
-    primaryIndex: { partitionKey: "counter" },
+Here we are using the [`Bucket`]({{ site.docs_url }}/constructs/Bucket) construct to create an S3 bucket.
+
+{%change%} Add it to the imports.
+
+```diff
+- import { NextjsSite } from "sst/constructs";
++ import { Bucket, NextjsSite } from "sst/constructs";
+```
+
+### Bind it to our app
+
+We want our Next.js app to be able to access our bucket.
+
+{%change%} Add this to our Next.js definition in the `sst.config.ts`.
+
+```diff
+- const site = new NextjsSite(stack, "site");
++ const site = new NextjsSite(stack, "site", {
++   bind: [bucket],
++ });
+```
+
+We'll see what bind does below.
+
+## Support file uploads
+
+Now to let our users upload files in our Next.js app we need to start by generating a presigned URL. This is a temporary URL that our frontend can make a request to upload files.
+
+### Generate a presigned URL
+
+{%change%} Add this to `pages/index.ts` above the `Home` component.
+
+```ts
+export async function getServerSideProps() {
+  const command = new PutObjectCommand({
+    ACL: "public-read",
+    Key: crypto.randomUUID(),
+    Bucket: Bucket.public.bucketName,
   });
+  const url = await getSignedUrl(new S3Client({}), command);
+
+  return { props: { url } };
 }
 ```
 
-This creates a serverless DynamoDB table using the SST [`Table`]({{ site.docs_url }}/constructs/Table) construct. It has a primary key called `counter`. Our table is going to look something like this:
+This generates a presigned URL when our app loads. Note how we can access our S3 bucket in a typesafe way — `Bucket.public.bucketName`. [You can learn more about Resource Binding over on our docs]({{ site.docs_url }}/resource-binding).
 
-| counter | tally |
-| ------- | ----- |
-| clicks  | 123   |
-
-## Setup our Next.js app
-
-We are now ready to create our Next.js app.
-
-{%change%} Run the following in the project root.
+{%change%} We need to install a couple of packages.
 
 ```bash
-$ npx create-next-app packages/frontend
+$ npm install @aws-sdk/client-s3 @aws-sdk/s3-request-presigner
 ```
 
-This sets up our Next.js app in the `packages/frontend/` directory.
-
-### Configure Next.js with SST
-
-Now let's configure SST to deploy our Next.js app to AWS. To do so, we'll be using the SST [`NextjsSite`]({{ site.docs_url }}/constructs/NextjsSite) construct.
-
-{%change%} Add the following in `stacks/ExampleStack.ts` below our `Table` definition.
+{%change%} And add these to the imports.
 
 ```ts
-// Create a Next.js site
-const site = new NextjsSite(stack, "Site", {
-  path: "packages/frontend",
-  environment: {
-    // Pass the table details to our app
-    REGION: app.region,
-    TABLE_NAME: table.tableName,
-  },
-});
-
-// Allow the Next.js API to access the table
-site.attachPermissions([table]);
-
-// Show the site URL in the output
-stack.addOutputs({
-  URL: site.url,
-});
+import crypto from "crypto";
+import { Bucket } from "sst/node/bucket";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 ```
 
-The construct is pointing to where our Next.js app is located. You'll recall that we created it in the `frontend` directory.
+### Add an upload form
 
-We are also setting up a couple of [build time Next.js environment variable](https://nextjs.org/docs/basic-features/environment-variables). The `REGION` and `TABLE_NAME` are passing in the table details to our Next.js app. The [`NextjsSite`]({{ site.docs_url }}/constructs/NextjsSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
+Now let's add the form.
 
-To load these environment variables in our local environment, we'll be using the [`sst bind`](https://docs.sst.dev/packages/sst#sst-bind) command.
+{%change%} Replace the `Home` component in `pages/index.tsx` with.
 
-{%change%} Replace the `dev` script in your `frontend/package.json`.
-
-```bash
-"dev": "next dev",
-```
-
-{%change%} With the following:
-
-```bash
-"dev": "sst bind next dev",
-```
-
-This will ensure that when you are running your Next.js app locally, the `REGION` and `TABLE_NAME` will be available.
-
-### Add the API
-
-Let's create the API that'll be updating our click counter.
-
-{%change%} Add the following to a new file in `packages/frontend/pages/api/count.js`.
-
-```js
-import AWS from "aws-sdk";
-
-const dynamoDb = new AWS.DynamoDB.DocumentClient({
-  region: process.env.REGION,
-});
-
-export default async function handler(req, res) {
-  const getParams = {
-    // Get the table name from the environment variable
-    TableName: process.env.TABLE_NAME,
-    // Get the row where the counter is called "hits"
-    Key: {
-      counter: "hits",
-    },
-  };
-  const results = await dynamoDb.get(getParams).promise();
-
-  // If there is a row, then get the value of the
-  // column called "tally"
-  let count = results.Item ? results.Item.tally : 0;
-
-  const putParams = {
-    TableName: process.env.TABLE_NAME,
-    Key: {
-      counter: "hits",
-    },
-    // Update the "tally" column
-    UpdateExpression: "SET tally = :count",
-    ExpressionAttributeValues: {
-      // Increase the count
-      ":count": ++count,
-    },
-  };
-
-  await dynamoDb.update(putParams).promise();
-
-  res.status(200).send(count);
-}
-```
-
-We make a `get` call to our DynamoDB table and get the value of a row where the `counter` column has the value `clicks`.
-
-Then we increment the count, save it and return the new count.
-
-We are using the AWS SDK to connect to DynamoDB.
-
-{%change%} So let's install it by running the following in the `packages/frontend/` directory.
-
-```bash
-$ npm install aws-sdk
-```
-
-### Add a click button
-
-We are now ready to add the UI for our app and connect it to our serverless API.
-
-{%change%} Replace `packages/frontend/pages/index.js` with.
-
-```jsx
-import { useState } from "react";
-
-export default function App() {
-  const [count, setCount] = useState(null);
-
-  function onClick() {
-    fetch("/api/count", { method: "POST" })
-      .then((response) => response.text())
-      .then(setCount);
-  }
-
+```tsx
+export default function Home({ url }: { url: string }) {
   return (
-    <div className="App">
-      {count && <p>You clicked me {count} times.</p>}
-      <button onClick={onClick}>Click Me!</button>
-    </div>
+    <main>
+      <form
+        onSubmit={async (e) => {
+          e.preventDefault();
+
+          const file = (e.target as HTMLFormElement).file.files?.[0]!;
+
+          const image = await fetch(url, {
+            body: file,
+            method: "PUT",
+            headers: {
+              "Content-Type": file.type,
+              "Content-Disposition": `attachment; filename="${file.name}"`,
+            },
+          });
+
+          window.location.href = image.url.split("?")[0];
+        }}
+      >
+        <input name="file" type="file" accept="image/png, image/jpeg" />
+        <button type="submit" className={inter.className}>
+          Upload
+        </button>
+      </form>
+    </main>
   );
 }
 ```
 
-Here we are adding a simple button that when clicked, makes a request to the API we created above.
+## Test your app
 
-The response from our API is then stored in our app's state. We use that to display the count of the number of times the button has been clicked.
+Now if you flip over to your browser, you should be able to upload an image and it'll redirect to it!
 
-Let's add some styles.
-
-{%change%} Replace `packages/frontend/styles/globals.css` with.
-
-```css
-body,
-html {
-  height: 100%;
-  display: grid;
-  font-family: sans-serif;
-}
-#__next {
-  margin: auto;
-}
-.App {
-  text-align: center;
-}
-p {
-  margin-top: 0;
-  font-size: 20px;
-}
-button {
-  font-size: 48px;
-}
-```
-
-Now let's test our app.
-
-## Start the dev environment
-
-SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
-
-{%change%} Run the following in your project root.
-
-```bash
-$ npm run dev
-```
-
-The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
-
-```
-===============
- Deploying app
-===============
-
-Preparing your SST app
-Transpiling source
-Linting source
-Deploying stacks
-dev-nextjs-app-ExampleStack: deploying...
-
- ✅  dev-nextjs-app-ExampleStack
-
-
-Stack dev-nextjs-app-ExampleStack
-  Status: deployed
-```
-
-The `URL` is where our Next.js app will be hosted. For now it's just a placeholder website.
-
-Let's start our Next.js development environment.
-
-{%change%} In the `packages/frontend/` directory run.
-
-```bash
-$ npm run dev
-```
-
-Now if you head over to your browser and open `http://localhost:3000`, your Next.js app should look something like this.
-
-![Click counter UI in Next.js app](/assets/examples/nextjs-app/click-counter-ui-in-nextjs-app.png)
-
-If you click the button the count should update. And if you refresh the page and do it again, it'll continue keeping count.
-
-Also let's check the updated value in dynamodb with the [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
-
-Go to the **DynamoDB** tab in the SST Console and check that the value has been updated in the table.
-
-Note, the DynamoDB explorer allows you to query the DynamoDB tables in the Table constructs in your app. You can scan the table, query specific keys, create and edit items.
-
-![DynamoDB table view of counter table](/assets/examples/nextjs-app/dynamo-table-view-of-counter-table.png)
+![Upload a file to S3 in Next.js app](/assets/examples/nextjs-app/upload-a-file-to-s3-in-next-js-app.png)
 
 ## Deploy to AWS
 
@@ -346,21 +214,17 @@ $ npx sst deploy --stage prod
 
 This allows us to separate our environments, so when we are working in our local environment, it doesn't break the app for our users. You can stop the `npm run dev` command that we had previously run.
 
-Once deployed, you should see something like this.
+Once deployed, you should see your app's URL.
 
 ```bash
- ✅  prod-nextjs-app-ExampleStack
-
-
-Stack prod-nextjs-app-ExampleStack
-  Status: deployed
-  Outputs:
-    URL: https://dq1n2yr6krqwr.cloudfront.net
+SiteUrl: https://dq1n2yr6krqwr.cloudfront.net
 ```
 
 If you head over to the `URL` in your browser, you should see your new Next.js app in action!
 
-![Next.js app deployed to AWS with SST](/assets/examples/nextjs-app/nextjs-app-deployed-to-aws-with-sst.png)
+![Deployed Next.js app with SST](/assets/examples/nextjs-app/deployed-next-js-app-with-sst.png)
+
+We can [add a custom domain]({{ site.docs_url }}/constructs/NextjsSite#custom-domains) to our app but we'll leave that as an exercise for later.
 
 ### Cleaning up
 
@@ -375,100 +239,14 @@ $ npx sst remove --stage prod
 
 ## Comparisons
 
-In this example we looked at how to use SST to deploy a Next.js app to AWS. But there are a few different ways to deploy Next.js apps. Let's look at them in detail and see how they compare.
+In this example we looked at how to use SST to deploy a Next.js app to AWS. But there are a few different ways to deploy Next.js apps. Let's look at how they all compare.
 
-Below are some of the most common ways of deploying Next.js apps.
+- [Vercel](https://vercel.com) is the most popular way to deploy Next.js apps. It's the most expensive and isn't open source.
 
-- [Vercel](https://vercel.com)
+- [Amplify](https://docs.amplify.aws/guides/hosting/nextjs/q/platform/js/) in many ways is AWS's version of Vercel. It's cheaper and deploys to your AWS account. But their implementation is incomplete and not on par with Vercel. And because they are not open source, you'll need to file a support ticket to get your issues fixed.
 
-  The company behind Next.js manages a service that lets you deploy and host Next.js apps.
+- [Serverless Next.js (sls-next) Component](https://github.com/serverless-nextjs/serverless-next.js) is open source and deploys to your AWS account. But this project is not being maintained anymore.
 
-- [Amplify](https://docs.amplify.aws/guides/hosting/nextjs/q/platform/js/)
-
-  AWS manages a service called Amplify that is a CI/CD service that deploys Next.js apps to your AWS account.
-
-- [Serverless Next.js (sls-next) Component](https://github.com/serverless-nextjs/serverless-next.js)
-
-  A [Serverless Framework](https://github.com/serverless/serverless) Component that allows you to deploy Next.js apps to your AWS account via Serverless Inc's deployment infrastructure.
-
-Let's look at how these compare across the following:
-
-### Hosting
-
-Vercel hosts Next.js apps on their infrastructure.
-
-While SST, Amplify, and sls-next host the Next.js app on your AWS account.
-
-A note on the Serverless Next.js (sls-next) Component. While it's hosted on your AWS account, your **credentials and application code** will pass through Serverless Inc's (the company behind Serverless Framework) servers.
-
-### Speed of deployment
-
-Vercel is the fastest option out of the bunch. The rest are slower because they rely on invalidating [CloudFront](https://aws.amazon.com/cloudfront/) distributions.
-
-### Cost
-
-Vercel is the most expensive option and one of the biggest reasons folks are looking for alternatives. For example, they charge $20/mo per user that commits to your project, $50/mo per concurrent deployment, and extras like $150/mo for adding password protection.
-
-Amplify on the other hand is fairly cheap but [charges you for deployments](https://aws.amazon.com/amplify/pricing/). They charge for build minutes but password protection is free and you can have unlimited number of concurrent deployments.
-
-SST is completely open source and does not charge you for deployments. While sls-next is not completely open source (since your code runs through their servers), Serverless Inc. doesn't currently charge you for deploying through them. The only expense is attached to hosting a Next.js app on your AWS account.
-
-You can use any CI/CD with SST or sls-next, but they both have CI/CD services that are run by their respective teams.
-
-[Seed]({{ site.seed_url }}), a CI/CD service run by the SST team, [provides free deployments for SST apps](https://seed.run/blog/free-cdk-deployments-in-seed). And allows for unlimited concurrent deployments.
-
-While [Serverless Inc's CI/CD service](https://www.serverless.com/ci-cd) charges $25/mo for each concurrent build.
-
-### Open source
-
-Vercel and Amplify are not open source services.
-
-The sls-next option is open source but the deployments run through Serverless Inc's servers and that part of the service is not open source.
-
-SST is completely open source and deploys directly to your AWS account.
-
-### CI/CD compatibility
-
-Vercel and Amplify are CI/CD service and it can be tricky to integrate with your own CI/CD pipeline.
-
-While SST and sls-next can be run as a part of your CI/CD pipeline.
-
-### AWS integration
-
-Since, Vercel hosts your apps on their infrastructure, it can be tricky to integrate with the rest of your AWS infrastructure.
-
-SST, Amplify, and sls-next all allow you to connect to your AWS infrastructure.
-
-However, as noted in the example above, SST allows you to easily reference environment variables and manage permissions to AWS resources.
-
-### Infrastructure as Code
-
-Amplify allows you to use IaC to manage your deployment pipeline but all the resources are managed internally as a black box.
-
-Similarly, sls-next allows you define your configuration in code but the deployment engine is managed internally by Serverless Inc.
-
-SST uses [CloudFormation](https://aws.amazon.com/cloudformation/) via [CDK]({% link _chapters/what-is-aws-cdk.md %}) to completely define your application.
-
-Vercel doesn't have any native IaC options.
-
-### Project support
-
-Vercel, Amplify, and SST are actively developed and managed by the companies that support it.
-
-While sls-next is supported by Serverless Inc., it's a community maintained project.
-
-## Summary
-
-SST lets you deploy Next.js apps to your AWS account while allowing you to easily reference the resources in your AWS infrastructure.
-
-And to put this in perspective with the other options out there:
-
-- [Vercel](https://vercel.com) is the most popular way to deploy Next.js apps. It's the most expensive and least configurable option out there. It is also not transparent or open source.
-
-- [Amplify](https://docs.amplify.aws/guides/hosting/nextjs/q/platform/js/) in many ways is AWS's version of Vercel. It's cheaper and deploys to your AWS account. But the deployment pipeline is a black box and like Vercel it's not open source either.
-
-- [Serverless Next.js (sls-next) Component](https://github.com/serverless-nextjs/serverless-next.js) is open source and deploys to your AWS account. But it deploys using Serverless Inc's deployment engine that passes your credentials and code through their servers.
-
-- [SST]({{ site.sst_github_repo }}) is completely open source and deploys directly to your AWS account. It can also be completely configured with Infrastructure as Code.
+- [SST]({{ site.sst_github_repo }}) is completely open source and deploys directly to your AWS account. It uses [OpenNext](https://open-next.js.org) — an open-source serverless adapter for Next.js. The OpenNext project is a community effort to reverse engineer Vercel's implementation and make it available to everybody.
 
 We hope this example has helped you deploy your Next.js apps to AWS. And given you an overview of all the deployment options out there.
