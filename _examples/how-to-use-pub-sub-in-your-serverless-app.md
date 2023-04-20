@@ -129,8 +129,12 @@ export async function main() {
 {%change%} Add a `packages/functions/src/receipt.ts`.
 
 ```ts
-export async function main() {
-  console.log("Receipt sent!");
+import { SNSEvent } from "aws-lambda";
+
+export async function main(event: SNSEvent) {
+  const records: any[] = event.Records;
+  console.log(`Receipt sent: "${records[0].Sns.Message}"`);
+
   return {};
 }
 ```
@@ -138,8 +142,12 @@ export async function main() {
 {%change%} Add a `packages/functions/src/shipping.ts`.
 
 ```ts
-export async function main() {
-  console.log("Item shipped!");
+import { SNSEvent } from "aws-lambda";
+
+export async function main(event: SNSEvent) {
+  const records: any[] = event.Records;
+  console.log(`Item shipped: "${records[0].Sns.Message}"`);
+
   return {};
 }
 ```
@@ -157,38 +165,20 @@ $ npm run dev
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
 
 ```
-===============
- Deploying app
-===============
-
-Preparing your SST app
-Transpiling source
-Linting source
-Deploying stacks
-dev-pub-sub-ExampleStack: deploying...
-
- ✅  dev-pub-sub-ExampleStack
-
-
-Stack dev-pub-sub-ExampleStack
-  Status: deployed
-  Outputs:
-    ApiEndpoint: https://gevkgi575a.execute-api.us-east-1.amazonaws.com
+Deployed:
+ExampleStack
+ApiEndpoint: https://gevkgi575a.execute-api.us-east-1.amazonaws.com
 ```
 
 The `ApiEndpoint` is the API we just created.
 
-Let's test our endpoint using the integrated [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.docs_url }}/console).
+Let's test our endpoint. Run the following in a new terminal.
 
-Go to the **Functions** tab and click the **Invoke** button of the `POST /order` function to send a `POST` request.
+```bash
+$ curl -X POST https://gevkgi575a.execute-api.us-east-1.amazonaws.com/order
+```
 
-![Functions tab invoke button](/assets/examples/eventbus/functions_tab_invoke_button.png)
-
-After you see a success status in the logs, go to the Local tab in the console to see all function invocations. Local tab displays real-time logs from your Live Lambda Dev environment.
-
-![Local tab response without event](/assets/examples/eventbus/Local_tab_response_without_events.png)
-
-You should see `Order confirmed!` logged in the console.
+This makes a POST request to our API. You should see `Order confirmed!` in the `sst dev` terminal.
 
 ## Publishing to our topic
 
@@ -230,9 +220,18 @@ Here we are getting the topic arn from the environment variable, and then publis
 $ npm install aws-sdk
 ```
 
-And now if you head over to your console and invoke the function again, You'll notice in the **Local** tab that our EventBus targets are called. And you should see `Receipt sent!` and `Item shipped!` printed out.
+Now if you hit our API again.
 
-![Local tab response with event](/assets/examples/eventbus/Local_tab_response_with_events.png)
+```bash
+$ curl -X POST https://gevkgi575a.execute-api.us-east-1.amazonaws.com/order
+```
+
+You should see the following in your `sst dev` terminal.
+
+```txt
+Item shipped: "{"ordered":true}"
+Receipt sent: "{"ordered":true}"
+```
 
 ## Deploying to prod
 
