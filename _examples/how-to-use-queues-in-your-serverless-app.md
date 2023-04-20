@@ -126,8 +126,12 @@ export async function main() {
 {%change%} Add a `packages/functions/src/consumer.ts`.
 
 ```ts
-export async function main() {
-  console.log("Message processed!");
+import { SQSEvent } from "aws-lambda";
+
+export async function main(event: SQSEvent) {
+  const records: any[] = event.Records;
+  console.log(`Message processed: "${records[0].body}"`);
+
   return {};
 }
 ```
@@ -145,38 +149,20 @@ $ npm run dev
 The first time you run this command it'll take a couple of minutes to deploy your app and a debug stack to power the Live Lambda Development environment.
 
 ```
-===============
- Deploying app
-===============
-
-Preparing your SST app
-Transpiling source
-Linting source
-Deploying stacks
-dev-queue-ExampleStack: deploying...
-
- ✅  dev-queue-ExampleStack
-
-
-Stack dev-queue-ExampleStack
-  Status: deployed
-  Outputs:
-    ApiEndpoint: https://i8ia1epqnh.execute-api.us-east-1.amazonaws.com
+Deployed:
+ExampleStack
+ApiEndpoint: https://3vi820odbc.execute-api.us-east-1.amazonaws.com
 ```
 
 The `ApiEndpoint` is the API we just created.
 
-Let's test our endpoint with the [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
+Let's test our endpoint. Run the following in a new terminal.
 
-Go to the **API** tab and click the **Send** button of the `POST /` function to send a `POST` request.
+```bash
+$ curl -X POST https://3vi820odbc.execute-api.us-east-1.amazonaws.com
+```
 
-![API explorer response](/assets/examples/queues/api-explorer-response.png)
-
-After you see a success status in the logs, go to the **Local** tab in the console to see all function invocations. Local tab displays **real-time logs** from your Live Lambda Dev environment.
-
-![Local tab response without queue](/assets/examples/queues/local-tab-response-without-queue.png)
-
-You should see `Message queued!` logged in the console.
+This makes a POST request to our API. You should see `Message queued!` in the `sst dev` terminal.
 
 ## Sending message to our queue
 
@@ -217,9 +203,13 @@ Here we are getting the queue url from the environment variable, and then sendin
 $ npm install aws-sdk
 ```
 
-And now if you head over to your console and hit the **Send** button again in API explorer, you'll notice in the **Local** tab that our consumer is called. You should see `Message processed!` being printed out.
+Now if you hit our API again.
 
-![Local tab response with queue](/assets/examples/queues/local-tab-response-with-queue.png)
+```bash
+$ curl -X POST https://3vi820odbc.execute-api.us-east-1.amazonaws.com
+```
+
+You should see `Message processed: "{"ordered":true}"` printed out in the `sst dev` terminal.
 
 ## Deploying to prod
 
