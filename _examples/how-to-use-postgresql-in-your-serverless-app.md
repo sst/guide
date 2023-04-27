@@ -159,9 +159,9 @@ Now in our function, we'll start by reading from our PostgreSQL database.
 {%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
 ```ts
-import { RDSDataService } from "aws-sdk";
 import { Kysely } from "kysely";
 import { DataApiDialect } from "kysely-data-api";
+import { RDSData } from "@aws-sdk/client-rds-data";
 import { RDS } from "sst/node/rds";
 
 interface Database {
@@ -178,7 +178,7 @@ const db = new Kysely<Database>({
       database: RDS.Cluster.defaultDatabaseName,
       secretArn: RDS.Cluster.secretArn,
       resourceArn: RDS.Cluster.clusterArn,
-      client: new RDSDataService(),
+      client: new RDSData({}),
     },
   }),
 });
@@ -203,13 +203,13 @@ We are using the [Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraU
 
 For now we'll get the number of hits from a table called `tblcounter` and return it.
 
-{%change%} Let's install the `kysely` and `kysely-data-api` in the `packages/functions/` folder.
+{%change%} Let's install the new packages in the `packages/functions/` folder.
 
-```bash
-$ npm install kysely kysely-data-api
-```
+ ```bash
+ $ npm install kysely kysely-data-api @aws-sdk/client-rds-data
+ ```
 
-And test what we have so far.
+ And test what we have so far.
 
 ## Starting your dev environment
 
