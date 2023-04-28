@@ -14,7 +14,7 @@ On the infrastructure side, we want to make sure the right type of resources are
 
 On the Lambda function side, we have some simple business logic that figures out exactly how much to charge our user based on the number of notes they want to store. We want to make sure that we test all the possible cases for this before we start charging people.
 
-SST comes with built in support for writing and running tests. It uses [Jest](https://jestjs.io) internally for this.
+SST comes with built in support for writing and running tests. It uses [Vitest](https://vitest.dev) internally for this.
 
 ### Testing CDK Infrastructure
 
