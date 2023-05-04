@@ -400,7 +400,7 @@ Let's update our table with the clicks.
 
 ```ts
 const putParams = {
-  TableName: import.meta.env.tableName,
+  TableName: Table.Counter.tableName,
   Key: {
     counter: "clicks",
   },
