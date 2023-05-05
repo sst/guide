@@ -42,6 +42,7 @@ This will detect that you are trying to configure a Next.js app. It'll add a `ss
 
 ```js
 import { SSTConfig } from "sst";
+import { NextjsSite } from "sst/constructs";
 
 export default {
   config(_input) {
