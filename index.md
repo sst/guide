@@ -1,6 +1,6 @@
 ---
 layout: lander
-description: "Build modern full-stack serverless applications on AWS with Next.js, Remix, Astro, Solid, and more."
+description: "Build modern full-stack serverless applications on AWS with Next.js, SvelteKit, Remix, Astro, Solid, and more."
 ---
 
 <header class="lander-header" role="banner">
@@ -20,7 +20,7 @@ description: "Build modern full-stack serverless applications on AWS with Next.j
     </div>
 
     <h4 class="site-description-full">
-      1. Deploy Next.js, Remix, or Astro to AWS.<br />
+      1. Deploy Next.js, Svelte, or Astro to AWS.<br />
       2. Add any backend feature.<br />
       3. Go from idea to IPO!
     </h4>
@@ -56,7 +56,7 @@ description: "Build modern full-stack serverless applications on AWS with Next.j
   <div class="title">
     <h2>Start<span> with your favorite</span> frontend</h2>
     <br />
-    <p>Use our open source framework to deploy your Next.js, Remix, Astro, or Solid site.</p>
+    <p>Use our open source framework to deploy your Next.js, Svelte, Remix, Astro, or Solid site.</p>
     <img src="/assets/lander/graphics/frontend-scribble.svg" />
   </div>
 
