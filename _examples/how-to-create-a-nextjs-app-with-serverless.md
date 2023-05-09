@@ -6,7 +6,7 @@ date: 2021-09-17 00:00:00
 lang: en
 index: 2
 type: webapp
-description: In this example we will look at how to deploy a full-stack Next.js app to your AWS account with SST. We'll also compare the various deployment options for Next.js.
+description: In this example we will look at how to deploy a full-stack Next.js app to your AWS account with SST and OpenNext. We'll also compare the various deployment options for Next.js.
 short_desc: Full-stack Next.js app with DynamoDB.
 repo: quickstart-nextjs
 ref: how-to-create-a-nextjs-app-with-serverless
@@ -94,9 +94,7 @@ To support file uploads in our app, we need an S3 bucket. Let's add that.
 {%change%} Add the following above our `NextjsSite` definition in the `sst.config.ts`.
 
 ```ts
-const bucket = new Bucket(stack, "public", {
-  cors: true,
-});
+const bucket = new Bucket(stack, "public");
 ```
 
 Here we are using the [`Bucket`]({{ site.docs_url }}/constructs/Bucket) construct to create an S3 bucket.
@@ -225,7 +223,7 @@ If you head over to the `URL` in your browser, you should see your new Next.js a
 
 ![Deployed Next.js app with SST](/assets/examples/nextjs-app/deployed-next-js-app-with-sst.png)
 
-We can [add a custom domain]({{ site.docs_url }}/constructs/NextjsSite#custom-domains) to our app but we'll leave that as an exercise for later.
+We can [add a custom domain]({{ site.docs_url }}/custom-domains) to our app but we'll leave that as an exercise for later.
 
 ### Cleaning up
 
