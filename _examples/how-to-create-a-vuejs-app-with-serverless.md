@@ -145,7 +145,7 @@ const site = new StaticSite(stack, "VueJSSite", {
   errorPage: "redirect_to_index_page",
   environment: {
     // Pass in the API endpoint to our app
-    VUE_APP_API_URL: api.url,
+    VITE_APP_API_URL: api.url,
   },
 });
 
@@ -400,7 +400,7 @@ Let's update our table with the clicks.
 
 ```ts
 const putParams = {
-  TableName: import.meta.env.tableName,
+  TableName: Table.Counter.tableName,
   Key: {
     counter: "clicks",
   },
