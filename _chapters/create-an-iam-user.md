@@ -16,48 +16,68 @@ In this chapter, we are going to create a new IAM user for a couple of the AWS r
 
 ### Create User
 
-First, log in to your [AWS Console](https://console.aws.amazon.com) and select IAM from the list of services.
+First, log in to your [AWS Console](https://console.aws.amazon.com) and search for IAM in the search bar. Hover or focus on the **IAM card** and then select the **Users** link.
 
-![Select IAM Service Screenshot](/assets/iam-user/select-iam-service.png)
+![Select IAM Service Screenshot](/assets/iam-user/search-to-iam-service.png)
 
-Select **Users**.
+Select **Add Users**.
 
-![Select IAM Users Screenshot](/assets/iam-user/select-iam-users.png)
+![Add IAM User Screenshot](/assets/iam-user/add-iam-user-button.png)
 
-Select **Add User**.
+Enter a **User name**, then select **Next**.
 
-![Add IAM User Screenshot](/assets/iam-user/add-iam-user.png)
+This account will be used by our [AWS CLI](https://aws.amazon.com/cli/) and [SST]({{ site.sst_github_repo }}). They'll be connecting to the AWS API directly and will not be using the Management Console.  
 
-Enter a **User name** and check **Programmatic access**, then select **Next: Permissions**.
+> 📘 Note
+> 
+> It is best practice to avoid creating keys when possible.  When using programmatic access keys, regularly rotate them.  In most cases, there are alternative solutions, see the [AWS IAM User Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_RotateAccessKey) for more information. 
 
-This account will be used by our [AWS CLI](https://aws.amazon.com/cli/) and [SST]({{ site.sst_github_repo }}). They'll be connecting to the AWS API directly and will not be using the Management Console.
-
-![Fill in IAM User Info Screenshot](/assets/iam-user/fill-in-iam-user-info.png)
+![Fill in IAM User Info Screenshot](/assets/iam-user/fill-in-iam-user-details.png)
 
 Select **Attach existing policies directly**.
 
-![Add IAM User Policy Screenshot](/assets/iam-user/add-iam-user-policy.png)
+![Add IAM User Policy Screenshot](/assets/iam-user/add-iam-attach-policies-directly.png)
 
-Search for **AdministratorAccess** and select the policy, then select **Next: Tags**.
+Search for **AdministratorAccess** and select the policy by checking the checkbox, then select **Next**.  
 
-We can provide a more fine-grained policy here and we cover this later in the [Customize the Serverless IAM Policy]({% link _chapters/customize-the-serverless-iam-policy.md %}) chapter. But for now, let's continue with this.
+We can provide a more fine-grained policy here. We cover this later in the [Customize the Serverless IAM Policy]({% link _chapters/customize-the-serverless-iam-policy.md %}) chapter. But for now, let's continue with this.
 
-![Added Admin Policy Screenshot](/assets/iam-user/added-admin-policy.png)
-
-We can optionally add some info to our IAM user. But we'll skip this for now. Click **Next: Review**.
-
-![Skip IAM tags Screenshot](/assets/iam-user/skip-iam-tags.png)
+![Added Admin Policy Screenshot](/assets/iam-user/iam-user-add-admin-policy.png)
 
 Select **Create user**.
 
-![Reivew IAM User Screenshot](/assets/iam-user/review-iam-user.png)
+![Reivew IAM User Screenshot](/assets/iam-user/iam-create-user.png)
+
+Select **View user**.
+
+![View IAM User Screenshot](/assets/iam-user/iam-success-view-user.png)
+
+Select **Security credentials**
+
+![IAM User Security Credentials Screenshot](/assets/iam-user/iam-user-security-credentials.png)
+
+Select **Create access key**
+
+![IAM User Create Access Key Screenshot](/assets/iam-user/iam-user-create-access-key.png)
+
+In keeping with the current guide instructions, we will choose other to generate an access key and secret.  Select **Other** and select **Next**
+
+![IAM User Access Key Purpose](/assets/iam-user/iam-user-access-key-purpose.png)
+
+You could add a descriptive tag here, but we will skip that in this tutorial, select **Create access key**
+
+![IAM User Access Key Purpose](/assets/iam-user/iam-access-key-skip-tag-create.png)
 
 Select **Show** to reveal **Secret access key**.
 
-![Added IAM User Screenshot](/assets/iam-user/added-iam-user.png)
+![IAM User Access Key Show](/assets/iam-user/iam-access-key-secret-show.png)
 
-Take a note of the **Access key ID** and **Secret access key**. We will be needing this in the next chapter.
+> 📘 Note
+> 
+> This is the only screen on which you will be able to access this key.  Save it to a secure location using best practices to ensure the security of your application.
 
-![IAM User Credentials Screenshot](/assets/iam-user/iam-user-credentials.png)
+Take a note of the **Access key** and **Secret access key**. We will be needing this in the next chapter.
 
-Now let's configure our AWS CLI so we can deploy our applications from our command line.
+![IAM Access Credentials Screenshot](/assets/iam-user/iam-access-credentials.png)
+
+Now let's configure our AWS CLI.  By configuring the AWS CLI, we can deploy our applications from our command line.
