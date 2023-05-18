@@ -13,12 +13,12 @@ We are now going to start creating our infrastructure in [SST]({{ site.sst_githu
 
 ### Create a Stack
 
-{%change%} Add the following to a new file in `stacks/StorageStack.js`.
+{%change%} Add the following to a new file in `stacks/StorageStack.ts`.
 
 ```js
-import { Table } from "sst/constructs";
+import { StackContext, Table } from "sst/constructs";
 
-export function StorageStack({ stack, app }) {
+export function StorageStack({ stack }: StackContext) {
   // Create the DynamoDB table
   const table = new Table(stack, "Notes", {
     fields: {
@@ -36,11 +36,11 @@ export function StorageStack({ stack, app }) {
 
 Let's quickly go over what we are doing here.
 
-We are creating a new stack in our SST app. We'll be using it to create all our storage related infrastructure (DynamoDB and S3). There's no specific reason why we are creating a separate stack for these resources. It's only meant as a way of organizing our resources and illustrating how to create separate stacks in our app.
+We are creating a new stack in our SST app by exporting the `StorageStack` function. We'll be using it to create all our storage related infrastructure (in this example DynamoDB and S3). There's no specific reason why we are creating a separate stack for these resources. It's only meant as a way of organizing our resources and illustrating how to create separate stacks in our app.
 
-We are using SST's [`Table`]({{ site.docs_url }}/constructs/Table) construct to create our DynamoDB table.
+Within the function, we are using SST's [`Table`]({{ site.docs_url }}/constructs/Table) construct to create our DynamoDB table.
 
-It has two fields:
+The table we are creating has two fields:
 
 1. `userId`: The id of the user that the note belongs to.
 2. `noteId`: The id of the note.
@@ -62,16 +62,24 @@ return {
 };
 ```
 
-This'll allow us to reference this resource in our other stacks.
+This will allow us to reference this resource in our other stacks.
 
-Note, learn more about sharing resources between stacks [here](https://docs.sst.dev/constructs/Stack#sharing-resources-between-stacks).
-
+> 📘 Note:
+> 
+> Learn more about sharing resources between stacks [here](https://docs.sst.dev/constructs/Stack#sharing-resources-between-stacks).
+  
 ### Remove Template Files
 
 The _Hello World_ API that we previously created, can now be removed. We can also remove the files that came with the starter template.
 
 {%change%} To remove the starter stack, run the following from your project root.
 
+PNPM Example:
+```bash
+$ pnpm exec sst remove API
+```
+
+NPM Example:
 ```bash
 $ npx sst remove API
 ```
@@ -90,7 +98,7 @@ Now let's add our new stack to the app.
 
 {%change%} Replace the `sst.config.ts` with this.
 
-```js
+```typescript
 import { SSTConfig } from "sst";
 import { StorageStack } from "./stacks/StorageStack";
 
@@ -109,9 +117,9 @@ export default {
 
 ### Deploy the App
 
-If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
+If you switch over to your terminal where you are running `sst dev`, you'll notice that your changes are being deployed.
 
-Note that, you'll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
+You will need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm exec sst dev` (or with NPM `npx sst dev`) will deploy your changes again.
 
 You should see something like this at the end of the deploy process.
 

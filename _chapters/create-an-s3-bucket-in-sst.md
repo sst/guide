@@ -11,53 +11,59 @@ comments_id: create-an-s3-bucket-in-sst/2461
 
 Just like [the previous chapter]({% link _chapters/create-a-dynamodb-table-in-sst.md %}), we are going to be using [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}) in our SST app to create an S3 bucket.
 
-We'll be adding to the `StorageStack` that we created.
+We'll be adding to the `StorageStack` function that we created.
 
 ### Add to the Stack
 
-{%change%} Add the following above the `Table` definition in `stacks/StorageStack.js`.
+{%change%} Make sure to import the `Bucket` construct. Replace the import line up top with this.
 
-```js
+```typescript
+import { Bucket, Table } from "sst/constructs";
+```
+
+
+{%change%} Add the following above the `Table` definition within the `StorageStack` function in stacks/StorageStack.ts`.
+
+```typescript
 // Create an S3 bucket
 const bucket = new Bucket(stack, "Uploads");
 ```
 
-{%change%} Make sure to import the `Bucket` construct. Replace the import line up top with this.
-
-```js
-import { Bucket, Table } from "sst/constructs";
-```
-
 This creates a new S3 bucket using the SST [`Bucket`]({{ site.docs_url }}/constructs/Bucket) construct.
 
-Also, find the following line in `stacks/StorageStack.js`.
+Also, find the following line in `stacks/StorageStack.ts`.
 
-```js
+```typescript
 return {
   table,
 };
 ```
 
-{%change%} And add the `bucket` below `table`.
+{%change%} And add the `bucket` in addition to the `table` as shown below.
 
-```js
-  bucket,
+```typescript
+return {
+    bucket,
+    table,
+};
 ```
 
-This'll allow us to reference the S3 bucket in other stacks.
+This will allow us to reference the S3 bucket in other stacks.
 
-Note, learn more about sharing resources between stacks [here](https://docs.sst.dev/constructs/Stack#sharing-resources-between-stacks).
+> 📘 Note: 
+>
+> You may learn more about sharing resources between stacks [here](https://docs.sst.dev/constructs/Stack#sharing-resources-between-stacks). 
 
 ### Deploy the App
 
-If you switch over to your terminal, you'll notice that your changes are being deployed.
+If you switch over to your terminal where you are running `sst dev`, you'll notice that your changes are being deployed.
 
-Note that, you'll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
+If you had previously stopped `sst dev`, then you can restart it using `pnpm dlx sst dev` which will start your server and deploy your changes.
 
 You should see that the storage stack has been updated.
 
 ```bash
-✓  Deployed:
+✔  Deployed:
    StorageStack
 ```
 
