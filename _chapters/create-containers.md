@@ -38,8 +38,7 @@ export default App;
 We are doing a few things here:
 
 1. Creating a fixed width container using Bootstrap in `div.container`.
-2. Adding a Navbar inside the container that fits to its container's width using the attribute `fluid`.
-3. Using a couple of [Bootstrap spacing utility classes](https://getbootstrap.com/docs/4.5/utilities/spacing/) (like `mb-#` and `py-#`) to add margin bottom (`mb`) and padding vertical (`py`). These use a proportional set of spacer units to give a more harmonious feel to our UI.
+1. Using a couple of [Bootstrap spacing utility classes](https://getbootstrap.com/docs/4.5/utilities/spacing/) (like `mb-#` and `py-#`) to add margin bottom (`mb`) and padding vertical (`py`). These use a proportional set of spacer units to give a more harmonious feel to our UI.
 
 Let's clear out the styles that came with our template.
 

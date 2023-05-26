@@ -16,7 +16,7 @@ To do this we'll be using a library called [AWS Amplify](https://github.com/aws/
 
 {%change%} Run the following command in the `frontend/` directory and **not** in your project root.
 
-``` bash
+```bash
 $ npm install aws-amplify
 ```
 
@@ -28,7 +28,7 @@ Let's first create a configuration file for our app that'll reference all the re
 
 {%change%} Create a file at `src/config.js` and add the following.
 
-``` js
+```js
 const config = {
   // Backend config
   s3: {
@@ -58,43 +58,43 @@ Next we'll set up AWS Amplify.
 
 {%change%} Import it by adding the following to the header of your `src/index.js`.
 
-``` js
-import { Amplify } from 'aws-amplify';
+```js
+import { Amplify } from "aws-amplify";
 ```
 
-And import the config we created above. 
+And import the config we created above.
 
 {%change%} Add the following, also to the header of your `src/index.js`.
 
-``` js
-import config from './config';
+```js
+import config from "./config";
 ```
 
-{%change%} And to initialize AWS Amplify; add the following above the `ReactDOM.render` line in `src/index.js`.
+{%change%} And to initialize AWS Amplify; add the following above the `ReactDOM.createRoot` line in `src/index.js`.
 
-``` js
+```js
 Amplify.configure({
   Auth: {
     mandatorySignIn: true,
     region: config.cognito.REGION,
     userPoolId: config.cognito.USER_POOL_ID,
     identityPoolId: config.cognito.IDENTITY_POOL_ID,
-    userPoolWebClientId: config.cognito.APP_CLIENT_ID
+    userPoolWebClientId: config.cognito.APP_CLIENT_ID,
   },
   Storage: {
     region: config.s3.REGION,
     bucket: config.s3.BUCKET,
-    identityPoolId: config.cognito.IDENTITY_POOL_ID
+    identityPoolId: config.cognito.IDENTITY_POOL_ID,
   },
   API: {
     endpoints: [
       {
         name: "notes",
         endpoint: config.apiGateway.URL,
-        region: config.apiGateway.REGION
+        region: config.apiGateway.REGION,
       },
-    ]
-  }
+    ],
+  },
 });
 ```
 
@@ -106,13 +106,13 @@ A couple of notes here.
 
 - The `name: "notes"` is basically telling Amplify that we want to name our API. Amplify allows you to add multiple APIs that your app is going to work with. In our case our entire backend is just one single API.
 
-- The `Amplify.configure()` is just setting the various AWS resources that we want to interact with. It isn't doing anything else special here beside configuration. So while this might look intimidating, just remember this is only setting things up. 
+- The `Amplify.configure()` is just setting the various AWS resources that we want to interact with. It isn't doing anything else special here beside configuration. So while this might look intimidating, just remember this is only setting things up.
 
 ### Commit the Changes
 
 {%change%} Let's commit our code so far and push it to GitHub.
 
-``` bash
+```bash
 $ git add .
 $ git commit -m "Setting up our React app"
 $ git push
