@@ -38,7 +38,7 @@ This simple component creates a `Route` where its children are rendered only if 
 
 - We use the `useAppContext` hook to check if the user is authenticated.
 
-- If the user is authenticated, then we simply render the `children` component. And if the user is not authenticated, then we use the `Redirect` React Router component to redirect the user to the login page.
+- If the user is authenticated, then we simply render the `children` component. And if the user is not authenticated, then we use the `Navigate` React Router component to redirect the user to the login page.
 
 - We also pass in the current path to the login page (`redirect` in the query string). We will use this later to redirect us back after the user logs in. We use the `useLocation` React Router hook to get this info.
 
@@ -63,7 +63,7 @@ export default function UnauthenticatedRoute(props) {
 }
 ```
 
-Here we are checking to ensure that the user is **not** authenticated before we render the child components. Example child components here would be `Login` and `Signup`. And in the case where the user is authenticated, we use the `Redirect` component to simply send the user to the homepage.
+Here we are checking to ensure that the user is **not** authenticated before we render the child components. Example child components here would be `Login` and `Signup`. And in the case where the user is authenticated, we use the `Navigate` component to simply send the user to the homepage.
 
 The `cloneElement` above makes sure that passed in `state` is handled correctly for child components of `UnauthenticatedRoute` routes.
 
