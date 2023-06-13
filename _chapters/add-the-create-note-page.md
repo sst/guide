@@ -14,19 +14,18 @@ First we are going to create the form for a note. It'll take some content and a 
 
 ### Add the Container
 
-{%change%} Create a new file `src/containers/NewNote.js` and add the following.
+{%change%} Create a new file `src/containers/NewNote.tsx` and add the following.
 
-```jsx
-import React, { useRef, useState } from "react";
+```tsx
+import React, {useRef, useState} from "react";
 import Form from "react-bootstrap/Form";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
-import { onError } from "../lib/errorLib";
 import config from "../config";
 import "./NewNote.css";
 
 export default function NewNote() {
-  const file = useRef(null);
+  const file = useRef<null | File>(null);
   const nav = useNavigate();
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -35,11 +34,12 @@ export default function NewNote() {
     return content.length > 0;
   }
 
-  function handleFileChange(event) {
-    file.current = event.target.files[0];
+  function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
+    if ( event.currentTarget.files === null ) return
+    file.current = event.currentTarget.files[0];
   }
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
@@ -82,19 +82,21 @@ export default function NewNote() {
     </div>
   );
 }
+
 ```
 
 Everything is fairly standard here, except for the file input. Our form elements so far have been [controlled components](https://facebook.github.io/react/docs/forms.html), as in their value is directly controlled by the state of the component. However, in the case of the file input we want the browser to handle this state. So instead of `useState` we'll use the `useRef` hook. The main difference between the two is that `useRef` does not cause the component to re-render. It simply tells React to store a value for us so that we can use it later. We can set/get the current value of a ref by using its `current` property. Just as we do when the user selects a file.
 
-```js
+```typescript
 file.current = event.target.files[0];
 ```
 
 Currently, our `handleSubmit` does not do a whole lot other than limiting the file size of our attachment. We are going to define this in our config.
 
-{%change%} So add the following to our `src/config.js` below the `const config = {` line.
+{%change%} So add the following to our `src/config.ts` below the `const config = {` line.
 
-```txt
+```typescript
+// Frontend config
 MAX_ATTACHMENT_SIZE: 5000000,
 ```
 
@@ -109,15 +111,15 @@ MAX_ATTACHMENT_SIZE: 5000000,
 
 ### Add the Route
 
-{%change%} Finally, add our container as a route in `src/Routes.js` below our signup route.
+{%change%} Finally, add our container as a route in `src/Routes.tsx` below our signup route.
 
-```jsx
+```tsx
 <Route path="/notes/new" element={<NewNote />} />
 ```
 
 {%change%} And include our component in the header.
 
-```js
+```tsx
 import NewNote from "./containers/NewNote";
 ```
 

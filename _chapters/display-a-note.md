@@ -16,9 +16,9 @@ The first thing we are going to need to do is load the note when our container l
 
 Let's add a route for the note page that we are going to create.
 
-{%change%} Add the following line to `src/Routes.js` **below** our `/notes/new` route.
+{%change%} Add the following line to `src/Routes.tsx` **below** our `/notes/new` route.
 
-```jsx
+```tsx
 <Route path="/notes/:id" element={<Notes />} />
 ```
 
@@ -28,7 +28,7 @@ By using the route path `/notes/:id` we are telling the router to send all match
 
 {%change%} And include our component in the header.
 
-```js
+```tsx
 import Notes from "./containers/Notes";
 ```
 
@@ -36,9 +36,9 @@ Of course this component doesn't exist yet and we are going to create it now.
 
 ### Add the Container
 
-{%change%} Create a new file `src/containers/Notes.js` and add the following.
+{%change%} Create a new file `src/containers/Notes.tsx` and add the following.
 
-```jsx
+```tsx
 import React, { useRef, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { API, Storage } from "aws-amplify";
@@ -53,7 +53,7 @@ export default function Notes() {
 
   useEffect(() => {
     function loadNote() {
-      return API.get("notes", `/notes/${id}`);
+      return API.get("notes", `/notes/${id}`, {});
     }
 
     async function onLoad() {

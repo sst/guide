@@ -10,14 +10,14 @@ comments_id: custom-domains-for-react-apps-on-aws/2463
 
 In the [previous chapter we configured a custom domain for our serverless API]({% link _chapters/custom-domains-in-serverless-apis.md %}). Now let's do the same for our frontend React.js app.
 
-{%change%} In the `stacks/FrontendStack.js` add the following below the `new StaticSite(` line.
+{%change%} In the `stacks/FrontendStack.ts` add the following below the `new StaticSite(` line. Replace the placeholders with your domain. In our examples  reference **demo.my-serverless-app.com**.
 
-```js
+```typescript
 customDomain:
   app.stage === "prod"
     ? {
-        domainName: "my-serverless-app.com",
-        domainAlias: "www.my-serverless-app.com",
+        domainName: "<YOUR DOMAIN>",
+        domainAlias: "www.<YOUR DOMAIN>",
       }
     : undefined,
 ```
@@ -26,31 +26,31 @@ Just like the API case, we want to use our custom domain **if** we are deploying
 
 Of course, you can change this if you'd like to use a custom domain for the other stages. You can use something like `${app.stage}.my-serverless-app.com`. So for `dev` it'll be `dev.my-serverless-app.com`. But we'll leave this as an exercise for you.
 
-The `domainAlias` prop is necessary because we want visitors of `www.my-serverless-app.com` to be redirected to the URL we want to use. It's a good idea to support both the `www.` and root versions of our domain. You can switch these around so that the root domain redirects to the `www.` version as well.
+The `domainAlias` prop is necessary because we want visitors of `www.my-serverless-app.com` to be redirected to the URL we want to use. It's a good idea to support both the `www.` and root versions of our domain. You can switch these around so that the root domain redirects to the `www.` version as well. 
 
 You won't need to set the `domainAlias` for the non-prod versions because we don't need `www.` versions for those.
 
 We need to use the custom domain URL of our API in our React app.
 
-{%change%} Find the following line in `stacks/FrontendStack.js`.
+{%change%} Find the following line in `stacks/FrontendStack.ts`.
 
-```js
+```typescript
 REACT_APP_API_URL: api.url,
 ```
 
 {%change%} And replace it with.
 
-```js
+```typescript
 REACT_APP_API_URL: api.customDomainUrl || api.url,
 ```
 
-Note that, if you are going to use a custom domain locally, you might need to remove your app (`npx sst remove`) and deploy it again. This is because CDK doesn't allow you to change these references dynamically.
+Note that, if you are going to use a custom domain locally, you might need to remove your app (`pnpm exec sst remove`) and deploy it again. This is because CDK doesn't allow you to change these references dynamically.
 
 We also need to update the outputs of our frontend stack.
 
-{%change%} Replace the `stack.addOutputs` call at the bottom of `stacks/FrontendStack.js` with this.
+{%change%} Replace the `stack.addOutputs` call at the bottom of `stacks/FrontendStack.ts` with this.
 
-```js
+```typescript
 stack.addOutputs({
   SiteUrl: site.customDomainUrl || site.url || "http://localhost:3000",
 });
@@ -65,7 +65,7 @@ Just like the previous chapter, we need to update these changes in prod.
 {%change%} Run the following from your project root.
 
 ```bash
-$ npx sst deploy --stage prod
+$ pnpm exec sst deploy --stage prod
 ```
 
 This command will take a few minutes. At the end of the deploy process you should see something like this.

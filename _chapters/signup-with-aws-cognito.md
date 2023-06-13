@@ -10,10 +10,10 @@ comments_id: signup-with-aws-cognito/130
 
 Now let's go ahead and implement the `handleSubmit` and `handleConfirmationSubmit` functions and connect it up with our AWS Cognito setup.
 
-{%change%} Replace our `handleSubmit` and `handleConfirmationSubmit` functions in `src/containers/Signup.js` with the following.
+{%change%} Replace our `handleSubmit` and `handleConfirmationSubmit` functions in `src/containers/Signup.tsx` with the following.
 
-```js
-async function handleSubmit(event) {
+```tsx
+async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
   event.preventDefault();
   setIsLoading(true);
   try {
@@ -29,7 +29,7 @@ async function handleSubmit(event) {
   }
 }
 
-async function handleConfirmationSubmit(event) {
+async function handleConfirmationSubmit(event: React.FormEvent<HTMLFormElement>) {
   event.preventDefault();
   setIsLoading(true);
   try {
@@ -44,10 +44,18 @@ async function handleConfirmationSubmit(event) {
 }
 ```
 
-{%change%} Also, include the Amplify Auth in our header.
+{%change%} Also, include the Amplify Auth, onError,  and ISignUpResult Type in our header.
 
-```js
+```tsx
 import { Auth } from "aws-amplify";
+import {onError} from "../lib/errorLib";
+import {ISignUpResult} from "amazon-cognito-identity-js";
+```
+
+{%change%} Finally, replace the constant for newUser and setNewUser with the following:
+
+```tsx
+const [newUser, setNewUser] = useState<null | ISignUpResult>(null);
 ```
 
 The flow here is pretty simple:
@@ -74,7 +82,7 @@ A quick note on the signup flow here. If the user refreshes their page at the co
 
 1. Check for the `UsernameExistsException` in the `handleSubmit` function's `catch` block.
 
-2. Use the `Auth.resendSignUp()` method to resend the code if the user has not been previously confirmed. Here is a link to the [Amplify API docs](https://aws.github.io/aws-amplify/api/classes/authclass.html#resendsignup).
+2. Use the `Auth.resendSignUp()` method to resend the code if the user has not been previously confirmed. Here is a link to the [Amplify API docs](https://aws.github.io/aws-amplify/api/classes/authclass.html#resendsignup){:target="_blank"}.
 
 3. Confirm the code just as we did before.
 
@@ -84,13 +92,15 @@ Now while developing you might run into cases where you need to manually confirm
 
 ```bash
 aws cognito-idp admin-confirm-sign-up \
-   --region COGNITO_REGION \
-   --user-pool-id USER_POOL_ID \
-   --username YOUR_USER_EMAIL
+   --region <COGNITO_REGION> \
+   --user-pool-id <USER_POOL_ID> \
+   --username <YOUR_USER_EMAIL>
 ```
 
-Just be sure to use your Cognito User Pool Id and the email you used to create the account.
+Just be sure to use your Cognito `USER_POOL_ID` and the _email address_ you used to create the account.
 
-If you would like to allow your users to change their email or password, you can refer to our [Extra Credit series of chapters on user management]({% link _chapters/manage-user-accounts-in-aws-amplify.md %}).
+{%aside%}
+If you would like to allow your users to change their email or password, you can refer to our [Extra Credit series of chapters on user management]({% link _chapters/manage-user-accounts-in-aws-amplify.md %}){:target="_blank"}.
+{%endaside%}
 
 Next up, we are going to create our first note.

@@ -8,19 +8,19 @@ description: In this chapter we'll look at how to configure CORS for an S3 bucke
 comments_id: handle-cors-in-s3-for-file-uploads/2174
 ---
 
-In the notes app we are building, users will be uploading files to the bucket we just created. And since our app will be served through our custom domain, it'll be communicating across domains while it does the uploads. By default, S3 does not allow its resources to be accessed from a different domain. However, [cross-origin resource sharing (CORS)](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) defines a way for client web applications that are loaded in one domain to interact with resources in a different domain.
+In the notes app we are building, users will be uploading files to the bucket we just created. And since our app will be served through our custom domain, it'll be communicating across domains while it does the uploads. By default, S3 does not allow its resources to be accessed from a different domain. However, [cross-origin resource sharing (CORS)](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing){:target="_blank"} defines a way for client web applications that are loaded in one domain to interact with resources in a different domain.
 
 Let's enable CORS for our S3 bucket.
 
-{%change%} Replace the following line in `stacks/StorageStack.js`.
+{%change%} Replace the following line in `stacks/StorageStack.ts`.
 
-```js
+```typescript
 const bucket = new Bucket(stack, "Uploads");
 ```
 
 {%change%} With this.
 
-```js
+```typescript
 const bucket = new Bucket(stack, "Uploads", {
   cors: [
     {

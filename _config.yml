@@ -23,6 +23,8 @@ description_full: >
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://sst.dev" # the base hostname & protocol for your site, e.g. http://example.com
 
+exclude:
+  - .idea
 demo_url: "https://demo.sst.dev"
 
 github_repo: "https://github.com/AnomalyInnovations/serverless-stack-com"

@@ -8,11 +8,11 @@ ref: create-a-hello-world-api
 comments_id: create-a-hello-world-api/2460
 ---
 
-With our newly created [SST]({{ site.sst_github_repo }}) app, we are ready to deploy a simple _Hello World_ API.
+With our newly created [SST]({{ site.sst_github_repo }}){:target="_blank"} app, we are ready to deploy a simple _Hello World_ API.
 
 In `stacks/MyStack.ts` you'll notice a API definition similar to this.
 
-```ts
+```typescript
 import { StackContext, Api } from "sst/constructs";
 
 export function API({ stack }: StackContext) {
@@ -37,10 +37,10 @@ Let's go ahead and deploy this.
 
 We'll do this by starting up our local development environment.
 
-{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development){:target="_blank"} environment that allows you to work on your serverless apps live.
 
 ```bash
-$ npx sst dev
+$ pnpm exec sst dev
 ```
 
 The first time you run this command it'll ask you for the name of a stage. A stage or an environment is just a string that SST uses to namespace your deployments.
@@ -69,7 +69,7 @@ The `ApiEndpoint` is the API we just created. Let's test our endpoint. If you op
 
 ![Serverless Hello World API invoked](/assets/part2/sst-hello-world-api-invoked.png)
 
-You can also head over to the **SST Console** link in your browser. The [SST Console]({{ site.docs_url }}/console) is a web based dashboard to manage your SST apps.
+You can also head over to the [**SST Console** link](https://console.sst.dev){:target="_blank"} in your browser. The [SST Console]({{ site.docs_url }}/console){:target="_blank"} is a web based dashboard to manage your SST apps.
 
 ![SST Console Local tab](/assets/part2/sst-console-local-tab.png)
 
@@ -82,7 +82,7 @@ Note that when you hit this endpoint the Lambda function is being run locally.
 To deploy our API to prod, we'll need to stop our local development environment and run the following.
 
 ```bash
-$ npx sst deploy --stage prod
+$ pnpm exec sst deploy --stage prod
 ```
 
 We don't have to do this right now. We'll be doing it later once we are done working on our app.

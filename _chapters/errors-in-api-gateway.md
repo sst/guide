@@ -21,11 +21,11 @@ Let's look at how to debug these.
 
 Head over to the `frontend/` directory in your project.
 
-{%change%} Open `src/containers/Home.js`, and replace the `loadNotes()` function with:
+{%change%} Open `src/containers/Home.tsx`, and replace the `loadNotes()` function with:
 
-```js
-function loadNotes() {
-  return API.get("notes", "/invalid_path");
+```tsx
+  function loadNotes() {
+  return API.get("notes", "/invalid_path", {});
 }
 ```
 
@@ -77,11 +77,11 @@ This will tell you that for some reason our frontend is making a request to an i
 
 Now let's look at what happens when we use an invalid HTTP method for our API requests. Instead of a `GET` request we are going to make a `PUT` request.
 
-{%change%} In `src/containers/Home.js` replace the `loadNotes()` function with:
+{%change%} In `src/containers/Home.tsx` replace the `loadNotes()` function with:
 
-```js
+```tsx
 function loadNotes() {
-  return API.put("notes", "/notes");
+  return API.put("notes", "/notes", {});
 }
 ```
 
@@ -139,7 +139,7 @@ Head to the **Activity** tab in the Seed dashboard. Then click on **prod** over 
 
 ![Click on prod activity in Seed](/assets/monitor-debug-errors/click-on-prod-activity-in-seed.png)
 
-Scroll down to the last deployment from the `master` branch, past all the ones made from the `debug` branch. Hit **Rollback**.
+Scroll down to the last deployment from the `main` branch, past all the ones made from the `debug` branch. Hit **Rollback**.
 
 ![Rollback on prod build in Seed](/assets/monitor-debug-errors/rollback-on-prod-build-in-seed.png)
 

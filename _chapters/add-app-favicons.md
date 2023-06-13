@@ -12,11 +12,11 @@ Create React App generates a simple favicon for our app and places it in `public
 
 For our example, we are going to start with a simple image and generate the various versions from it.
 
-**Right-click to download** the following image. Or head over to this link to download it — [{{ '/assets/scratch-icon.png' | absolute_url }}]({{ '/assets/scratch-icon.png' | absolute_url }})
+**Right-click to download** the following image. Or head over to this link to download it — [{{ '/assets/scratch-icon.png' | absolute_url }}]({{ '/assets/scratch-icon.png' | absolute_url }}){:target="_blank"}
 
 <img alt="App Icon" width="130" height="130" src="/assets/scratch-icon.png" />
 
-To ensure that our icon works for most of our targeted platforms we'll use a service called the [**Favicon Generator**](http://realfavicongenerator.net).
+To ensure that our icon works for most of our targeted platforms we'll use a service called the [**Favicon Generator**](http://realfavicongenerator.net){:target="_blank"}.
 
 Click **Select your Favicon picture** to upload our icon.
 
@@ -34,7 +34,9 @@ This should generate your favicon package and the accompanying code.
 
 Let's remove the old icons files.
 
-**Note that, moving forward we'll be working exclusively in the `frontend/` directory.**
+{%note%} 
+We'll be working exclusively in the `frontend/` directory through the chapter on securing React pages.**
+{%endnote%}
 
 {%change%} Run the following from our `frontend/` directory.
 
@@ -69,7 +71,7 @@ $ rm public/logo192.png public/logo512.png public/favicon.ico
 
 To include a file from the `public/` directory in your HTML, Create React App needs the `%PUBLIC_URL%` prefix.
 
-{%change%} Add this to your `public/index.html`.
+{%change%} Add this to the `<head>` in your `public/index.html`.
 
 ```html
 <link
@@ -101,12 +103,17 @@ To include a file from the `public/` directory in your HTML, Create React App ne
 {%change%} And **remove** the following lines that reference the original favicon and theme color.
 
 ```html
-<meta name="theme-color" content="#000000" />
-<link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-<link rel="apple-touch-icon" href="logo192.png" />
-<meta name="description" content="Web site created using create-react-app" />
+    <link href="%PUBLIC_URL%/favicon.ico" rel="icon" />
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+<meta content="#000000" name="theme-color" />
+<meta
+        content="Web site created using create-react-app"
+        name="description"
+/>
+<link href="%PUBLIC_URL%/logo192.png" rel="apple-touch-icon" />
+
 ```
 
-Finally head over to your browser and try the `/favicon-32x32.png` path to ensure that the files were added correctly.
+Finally head over to your browser and add `/favicon-32x32.png` to the base URL path to ensure that the files were added correctly.
 
 Next we are going to look into setting up custom fonts in our app.

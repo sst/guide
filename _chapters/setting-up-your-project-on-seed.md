@@ -24,7 +24,7 @@ Now to add your project, select **GitHub** as your git provider. You'll be asked
 
 Select the repo we've been using so far.
 
-Next, Seed will automatically detect the `sst.json` config in your repo. Click **Add Service**.
+Next, Seed will automatically detect the `sst.config.ts` file in your repo. Click **Add Service**.
 
 ![SST app detected](/assets/part2/sst-app-detected.png)
 
@@ -50,9 +50,9 @@ Fill in the credentials and click **Add a New App**.
 
 ![Add AWS IAM credentials](/assets/part2/add-aws-iam-credentials.png)
 
-Your new app is created. You'll notice a few things here. First, we have a service called **notes**. It's picking up the name from our `sst.json`. You can choose to change this by clicking on the service and editing its name.  You'll also notice the two stages that have been created.
+Your new app is created. You'll notice a few things here. First, we have a service called **notes**. It's picking up the name from our `sst.config.ts` file. You can choose to change this by clicking on the service and editing its name.  You'll also notice the two stages that have been created.
 
-Our app can have multiple services within it. A service (roughly speaking) is a reference to a `sst.json` or `serverless.yml` file (for Serverless Framework). In our case we just have the one service.
+Our app can have multiple services within it. A service (roughly speaking) is a reference to a `sst.config.ts` or `serverless.yml` file (for Serverless Framework). In our case we just have the one service.
 
 ![Seed app homepage](/assets/part2/seed-app-homepage.png)
 

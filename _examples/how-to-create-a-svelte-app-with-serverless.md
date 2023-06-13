@@ -40,7 +40,7 @@ $ npm install
 
 This will detect that you are trying to configure a Svelte app. It'll add a `sst.config.ts` and a couple of packages to your `package.json`.
 
-```ts
+```typescript
 import type { SSTConfig } from "sst";
 import { Cron, Bucket, SvelteKitSite } from "sst/constructs";
 
@@ -93,7 +93,7 @@ To support file uploads in our app, we need an S3 bucket. Let's add that.
 
 {%change%} Add the following above our `SvelteKitSite` definition in the `sst.config.ts`.
 
-```ts
+```typescript
 const bucket = new Bucket(stack, "public");
 ```
 
@@ -129,7 +129,7 @@ Now to let our users upload files in our Svelte app we need to start by generati
 
 {%change%} Create a `src/routes/+page.server.ts` with this.
 
-```ts
+```typescript
 export const load = (async () => {
   const command = new PutObjectCommand({
     ACL: "public-read",
@@ -152,7 +152,7 @@ $ npm install @aws-sdk/client-s3 @aws-sdk/s3-request-presigner
 
 {%change%} And add these to the imports.
 
-```ts
+```typescript
 import crypto from "crypto";
 import { Bucket } from "sst/node/bucket";
 import type { PageServerLoad } from "./$types";
@@ -177,7 +177,7 @@ Now let's add the form.
 
 {%change%} And add the upload handler as `<script lang="ts">`.
 
-```ts
+```typescript
 import type { PageData } from "./$types";
 
 export let data: PageData;
@@ -203,7 +203,7 @@ We also need to disable prerendering since we want to generate the presigned URL
 
 {%change%} Replace `src/routes/+page.ts` with.
 
-```ts
+```typescript
 // since there is data here, we can't prerender
 export const prerender = false;
 ```

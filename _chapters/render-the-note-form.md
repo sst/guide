@@ -10,22 +10,23 @@ ref: render-the-note-form
 
 Now that our container loads a note using the `useEffect` method, let's go ahead and render the form that we'll use to edit it.
 
-{%change%} Replace our placeholder `return` statement in `src/containers/Notes.js` with the following.
+{%change%} Replace our placeholder `return` statement in `src/containers/Notes.tsx` with the following.
 
-```jsx
+```tsx
 function validateForm() {
   return content.length > 0;
 }
 
-function formatFilename(str) {
+function formatFilename(str: string) {
   return str.replace(/^\w+-/, "");
 }
 
-function handleFileChange(event) {
-  file.current = event.target.files[0];
+function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
+  if ( event.currentTarget.files === null ) return
+  file.current = event.currentTarget.files[0];
 }
 
-async function handleSubmit(event) {
+async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
   let attachment;
 
   event.preventDefault();
@@ -42,7 +43,7 @@ async function handleSubmit(event) {
   setIsLoading(true);
 }
 
-async function handleDelete(event) {
+async function handleDelete(event: React.FormEvent<HTMLFormElement>) {
   event.preventDefault();
 
   const confirmed = window.confirm(
@@ -105,6 +106,42 @@ return (
   </div>
 );
 ```
+{%change%} To complete this code, Let's add `isLoading` and `isDeleting` below the state and ref declarations at the top of our `Notes` component function.
+
+```tsx
+const [isLoading, setIsLoading] = useState(false);
+const [isDeleting, setIsDeleting] = useState(false);
+```
+{%change%} Then replace the `const file` definition with the following
+
+```tsx
+const file = useRef<null | File>(null);
+```
+
+{%change%} as well as the `const note/setNote` definition as follows:
+
+```tsx
+const [note, setNote] = useState<null | NotesType>(null);
+```
+
+{%change%} Let's also add some styles by adding the following to `src/containers/Notes.css`.
+
+```css
+.Notes form textarea {
+  height: 300px;
+  font-size: 1.5rem;
+}
+```
+
+{%change%} and finally, let's include the React-Bootstrap components that we are using here by adding the following to our header. And our styles, the `LoaderButton`, and the `config`.
+
+```js
+import Form from "react-bootstrap/Form";
+import LoaderButton from "../components/LoaderButton";
+import config from "../config";
+import {NotesType} from "../lib/notesLib";
+import "./Notes.css";
+```
 
 We are doing a few things here:
 
@@ -120,32 +157,6 @@ We are doing a few things here:
 
 6. Our delete button also confirms with the user if they want to delete the note using the browser's `confirm` dialog.
 
-To complete this code, let's add `isLoading` and `isDeleting` to the state.
-
-{%change%} Add these below the state and ref declarations at the top of our `Notes` component function.
-
-```js
-const [isLoading, setIsLoading] = useState(false);
-const [isDeleting, setIsDeleting] = useState(false);
-```
-
-{%change%} Let's also add some styles by adding the following to `src/containers/Notes.css`.
-
-```css
-.Notes form textarea {
-  height: 300px;
-  font-size: 1.5rem;
-}
-```
-
-{%change%} Also, let's include the React-Bootstrap components that we are using here by adding the following to our header. And our styles, the `LoaderButton`, and the `config`.
-
-```js
-import Form from "react-bootstrap/Form";
-import LoaderButton from "../components/LoaderButton";
-import config from "../config";
-import "./Notes.css";
-```
 
 And that's it. If you switch over to your browser, you should see the note loaded.
 

@@ -64,7 +64,7 @@ An SST app is made up of two parts.
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { Api, ReactStaticSite, StackContext, Table } from "sst/constructs";
 
 export function ExampleStack({ stack }: StackContext) {
@@ -90,7 +90,7 @@ Now let's add the API.
 
 {%change%} Add this below the `Table` definition in `stacks/ExampleStack.ts`.
 
-```ts
+```typescript
 // Create the HTTP API
 const api = new Api(stack, "Api", {
   defaults: {
@@ -120,7 +120,7 @@ Now in our function, we'll start by reading from our DynamoDB table.
 
 {%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
-```ts
+```typescript
 import { DynamoDB } from "aws-sdk";
 import { Table } from "sst/node/table";
 
@@ -206,7 +206,7 @@ Now let's update our table with the hits.
 
 {%change%} Add this above the `return` statement in `packages/functions/src/lambda.ts`.
 
-```ts
+```typescript
 const putParams = {
   TableName: Table.Counter.tableName,
   Key: {

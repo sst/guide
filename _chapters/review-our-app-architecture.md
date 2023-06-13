@@ -20,7 +20,7 @@ API Gateway handles our main `/` endpoint, sending GET requests made to this to 
 
 ### Notes App API Architecture
 
-Then we added DynamoDB and S3 to the mix. We'll also be adding a few other Lambda functions.
+Then we added DynamoDB and S3 to the mix. We will also be adding a few other Lambda functions.
 
 So our new notes app backend architecture will look something like this.
 
@@ -31,8 +31,8 @@ There are a couple of things of note here:
 1. Our database is not exposed publicly and is only invoked by our Lambda functions.
 2. But our users will be uploading files directly to the S3 bucket that we created.
 
-The second point is something that is different from a lot of traditional server based architectures. We are typically used to uploading the files to our server and then moving them to a file server. But here we'll be directly uploading it to our S3 bucket. We'll look at this in more detail when we look at file uploads.
+The second point is something that is different from a lot of traditional server based architectures. We are typically used to uploading the files to our server and then moving them to a file server. But here we will be directly uploading it to our S3 bucket. We will look at this in more detail when we look at file uploads.
 
-In the coming sections will also be looking at how we can secure access to these resources. We'll be setting it up such that only our authenticated users will be allowed to access these resources.
+In the coming sections will also be looking at how we can secure access to these resources. We will be setting it up such that only our authenticated users will be allowed to access these resources.
 
 Now that we have a good idea of how our app will be architected, let's get to work!

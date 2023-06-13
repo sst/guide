@@ -72,7 +72,7 @@ Let's start by defining our AppSync API.
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { StackContext, Table, AppSyncApi } from "sst/constructs";
 
 export function ExampleStack({ stack }: StackContext) {
@@ -154,7 +154,7 @@ Let's also add a type for our note object.
 
 {%change%} Add the following to a new file in `packages/functions/src/graphql/Note.ts`.
 
-```ts
+```typescript
 type Note = {
   id: string;
   content: string;
@@ -169,7 +169,7 @@ To start with, let's create the Lambda function that'll be our AppSync data sour
 
 {%change%} Replace `packages/functions/src/main.ts` with the following.
 
-```ts
+```typescript
 import Note from "./graphql/Note";
 import listNotes from "./graphql/listNotes";
 import createNote from "./graphql/createNote";
@@ -215,7 +215,7 @@ Starting with the one that'll create a note.
 
 {%change%} Add a file to `packages/functions/src/graphql/createNote.ts`.
 
-```ts
+```typescript
 import { DynamoDB } from "aws-sdk";
 import { Table } from "sst/node/table";
 import Note from "./Note";
@@ -248,7 +248,7 @@ Next, let's write the function that'll fetch all our notes.
 
 {%change%} Add the following to `packages/functions/src/graphql/listNotes.ts`.
 
-```ts
+```typescript
 import { DynamoDB } from "aws-sdk";
 import { Table } from "sst/node/table";
 
@@ -275,7 +275,7 @@ We'll do something similar for the function that gets a single note.
 
 {%change%} Create a `packages/functions/src/graphql/getNoteById.ts`.
 
-```ts
+```typescript
 import { DynamoDB } from "aws-sdk";
 import { Table } from "sst/node/table";
 import Note from "./Note";
@@ -304,7 +304,7 @@ Now let's update our notes.
 
 {%change%} Add a `packages/functions/src/graphql/updateNote.ts` with:
 
-```ts
+```typescript
 import { DynamoDB } from "aws-sdk";
 import { Table } from "sst/node/table";
 import Note from "./Note";
@@ -334,7 +334,7 @@ To complete all the operations, let's delete the note.
 
 {%change%} Add this to `packages/functions/src/graphql/deleteNote.ts`.
 
-```ts
+```typescript
 import { DynamoDB } from "aws-sdk";
 import { Table } from "sst/node/table";
 
@@ -470,7 +470,7 @@ You'll notice a couple of things. Firstly, the note we created is still there. T
 
 {%change%} Let's fix our `packages/functions/src/graphql/deleteNote.ts` by un-commenting the query.
 
-```ts
+```typescript
 await dynamoDb.delete(params).promise();
 ```
 

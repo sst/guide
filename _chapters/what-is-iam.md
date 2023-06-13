@@ -8,7 +8,7 @@ description: AWS Identity and Access Management (or IAM) is a service that helps
 comments_id: what-is-iam/23
 ---
 
-In the last chapter, we created an IAM user so that our AWS CLI can operate on our account without using the AWS Console. But the IAM concept is used very frequently when dealing with security for AWS services, so it is worth understanding it in a bit more detail. Unfortunately, IAM is made up of a lot of different parts and it can be very confusing for folks that first come across it. In this chapter we are going to take a look at IAM and its concepts in a bit more detail.
+This Guide uses Amazon Identity and Access Management (IAM) to manage users.  When we setup our AWS Account, we created our first IAM user so that our AWS CLI can operate on our account without using the AWS Console. The IAM concept serves a broader purpose.  It is used very frequently when dealing with security for AWS services, so it is worth understanding it in a bit more detail. Unfortunately, IAM is made up of a lot of different parts and it can be very confusing for folks that first come across it. In this chapter we are going to take a look at IAM and its concepts in a bit more detail.
 
 Let's start with the official definition of IAM.
 
@@ -69,7 +69,7 @@ And here is a policy that grants more granular access, only allowing retrieval o
 }
 ```
 
-We are using S3 resources in the above examples. But a policy looks similar for any of the AWS services. It just depends on the resource ARN for `Resource` property. An ARN is an identifier for a resource in AWS and we'll look at it in more detail in the next chapter. We also add the corresponding service actions and condition context keys in `Action` and `Condition` property. You can find all the available AWS Service actions and condition context keys for use in IAM Policies [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actionsconditions.html). Aside from attaching a policy to a user, you can attach them to a role or a group.
+We are using S3 resources in the above examples. But a policy looks similar for any of the AWS services. It just depends on the resource ARN for `Resource` property. An ARN is an identifier for a resource in AWS and we'll look at it in more detail in the next chapter. We also add the corresponding service actions and condition context keys in `Action` and `Condition` property. You can find all the available AWS Service actions and condition context keys for use in IAM Policies [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actionsconditions.html){:target="_blank"}. Aside from attaching a policy to a user, you can attach them to a role or a group.
 
 ### What is an IAM Role
 
@@ -83,7 +83,7 @@ Roles can be applied to users as well. In this case, the user is taking on the p
 
 ![IAM User with IAM Role diagram](/assets/iam/iam-user-as-iam-role.png)
 
-You can also have a role tied to the ARN of a user from a different organization. This allows the external user to assume that role as a part of your organization. This is typically used when you have a third party service that is acting on your AWS Organization. You'll be asked to create a Cross-Account IAM Role and add the external user as a *Trust Relationship*. The *Trust Relationship* is telling AWS that the specified external user can assume this role.
+You can also have a role tied to the ARN of a user from a different organization. This allows the external user to assume that role as a part of your organization. This is typically used when you have a third party service that is acting on your AWS Organization. You will be asked to create a Cross-Account IAM Role and add the external user as a *Trust Relationship*. The *Trust Relationship* is telling AWS that the specified external user can assume this role.
 
 ![External IAM User with IAM Role diagram](/assets/iam/external-user-with-iam-role.png)
 
@@ -94,4 +94,4 @@ An IAM group is simply a collection of IAM users. You can use groups to specify 
 
 ![Complete IAM Group, IAM Role, IAM User, and IAM Policy diagram](/assets/iam/complete-iam-concepts.png)
 
-This should give you a quick idea of IAM and some of its concepts. We will be referring to a few of these in the coming chapters. Next let's quickly look at another AWS concept; the ARN.
+This should give you a quick overview of IAM and some of its concepts. We will be referring to a few of these elsewhere in the guide. You should also review a related concept [AWS ARN]({% link _chapters/what-is-an-arn.md %}){:target="_blank"}.

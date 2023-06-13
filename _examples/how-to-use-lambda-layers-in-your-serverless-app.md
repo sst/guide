@@ -67,7 +67,7 @@ Let's start by creating our API.
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { LayerVersion } from "aws-cdk-lib/aws-lambda";
 import { Api, StackContext } from "sst/constructs";
 
@@ -119,7 +119,7 @@ Now in our function, we'll be handling taking a screenshot of a given webpage.
 
 {%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
-```ts
+```typescript
 import chrome from "chrome-aws-lambda";
 
 // chrome-aws-lambda handles loading locally vs from the Layer
@@ -213,7 +213,7 @@ Now let's make a change to our function so that we return the screenshot directl
 
 {%change%} Replace the following lines in `packages/functions/src/lambda.ts`.
 
-```ts
+```typescript
 // Take the screenshot
 await page.screenshot();
 
@@ -226,7 +226,7 @@ return {
 
 with:
 
-```ts
+```typescript
 // Take the screenshot
 const screenshot = (await page.screenshot({ encoding: "base64" })) as string;
 

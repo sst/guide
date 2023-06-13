@@ -156,7 +156,7 @@ Now let's add the API.
 
 {%change%} Replace the code in `stacks/ExampleStack.ts` with below.
 
-```ts
+```typescript
 import { StackContext, Api } from "sst/constructs";
 
 export function ExampleStack({ stack }: StackContext) {
@@ -200,7 +200,7 @@ npm install planetscale-node
 
 {%change%} Now replace `packages/functions/src/lambda.ts` with the following.
 
-```ts
+```typescript
 import { PSDB } from "planetscale-node";
 // connect to main branch
 const db = new PSDB("main");
@@ -271,7 +271,7 @@ Now let's update our table with the hits.
 
 {%change%} Add this above the query statement in `packages/functions/src/lambda.ts`.
 
-```ts
+```typescript
 // increment tally by 1
 await db.query("UPDATE counter SET tally = tally + 1 WHERE counter = 'hits'");
 ```

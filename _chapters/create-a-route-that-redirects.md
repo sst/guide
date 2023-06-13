@@ -11,14 +11,14 @@ ref: create-a-route-that-redirects
 
 Let's first create a route that will check if the user is logged in before routing.
 
-{%change%} Add the following to `src/components/AuthenticatedRoute.js`.
+{%change%} Add the following file in components  `src/components/AuthenticatedRoute.tsx`.
 
-```jsx
-import React from "react";
+```tsx
+import React, {ReactElement} from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAppContext } from "../lib/contextLib";
 
-export default function AuthenticatedRoute({ children }) {
+export default function AuthenticatedRoute({ children }: { children: ReactElement }): ReactElement {
   const { pathname, search } = useLocation();
   const { isAuthenticated } = useAppContext();
 
@@ -28,6 +28,7 @@ export default function AuthenticatedRoute({ children }) {
 
   return children;
 }
+
 ```
 
 This simple component creates a `Route` where its children are rendered only if the user is authenticated. If the user is not authenticated, then it redirects to the login page. Let's take a closer look at it:
@@ -44,14 +45,19 @@ This simple component creates a `Route` where its children are rendered only if 
 
 We'll do something similar to ensure that the user is not authenticated.
 
-{%change%} Add the following to `src/components/UnauthenticatedRoute.js`.
+{%change%} Next the following file in components  `src/components/UnauthenticatedRoute.tsx`.
 
-```jsx
+```tsx
 import React, { cloneElement } from "react";
 import { Navigate } from "react-router-dom";
 import { useAppContext } from "../lib/contextLib";
 
-export default function UnauthenticatedRoute(props) {
+interface AuthProps {
+  children: React.ReactElement;
+}
+
+
+export default function UnauthenticatedRoute(props: AuthProps): React.ReactElement {
   const { isAuthenticated } = useAppContext();
   const { children } = props;
 
@@ -61,6 +67,7 @@ export default function UnauthenticatedRoute(props) {
 
   return cloneElement(children, props);
 }
+
 ```
 
 Here we are checking to ensure that the user is **not** authenticated before we render the child components. Example child components here would be `Login` and `Signup`. And in the case where the user is authenticated, we use the `Navigate` component to simply send the user to the homepage.

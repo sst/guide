@@ -12,16 +12,16 @@ It's important that we give the user some feedback while we are logging them in.
 
 ### Use an isLoading Flag
 
-{%change%} To do this we are going to add an `isLoading` flag to the state of our `src/containers/Login.js`. Add the following to the top of our `Login` function component.
+{%change%} To do this we are going to add an `isLoading` flag to the state of our `src/containers/Login.tsx`. Add the following to the top of our `Login` function component.
 
-```js
+```tsx
 const [isLoading, setIsLoading] = useState(false);
 ```
 
 {%change%} And we'll update it while we are logging in. So our `handleSubmit` function now looks like so:
 
-```js
-async function handleSubmit(event) {
+```tsx
+async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
   event.preventDefault();
 
   setIsLoading(true);
@@ -30,9 +30,14 @@ async function handleSubmit(event) {
     await Auth.signIn(email, password);
     userHasAuthenticated(true);
     nav("/");
-  } catch (e) {
-    alert(e.message);
-    setIsLoading(false);
+  } catch (error) {
+    // Prints the full error
+    console.error(error);
+    if (error instanceof Error) {
+      alert(error.message);
+    } else {
+      alert(String(error));
+    }
   }
 }
 ```
@@ -49,20 +54,21 @@ $ mkdir src/components/
 
 Here we'll be storing all our React components that are not dealing directly with our API or responding to routes.
 
-{%change%} Create a new file and add the following in `src/components/LoaderButton.js`.
+{%change%} Create a new file and add the following in `src/components/LoaderButton.tsx`.
 
-```jsx
+```tsx
 import React from "react";
 import Button from "react-bootstrap/Button";
-import { BsArrowRepeat } from "react-icons/bs";
+import {BsArrowRepeat} from "react-icons/bs";
 import "./LoaderButton.css";
 
+
 export default function LoaderButton({
-  isLoading,
-  className = "",
-  disabled = false,
-  ...props
-}) {
+   isLoading = false,
+   className = "",
+   disabled = false,
+   ...props
+ }) {
   return (
     <Button
       disabled={disabled || isLoading}
@@ -74,13 +80,14 @@ export default function LoaderButton({
     </Button>
   );
 }
+
 ```
 
 This is a really simple component that takes an `isLoading` prop and `disabled` prop. The latter is a result of what we have currently in our `Login` button. And we ensure that the button is disabled when `isLoading` is `true`. This makes it so that the user can't click it while we are in the process of logging them in.
 
 The `className` prop that we have is to ensure that a CSS class that's set for this component, doesn't override the `LoaderButton` CSS class that we are using internally.
 
-When the `isLoading` flag is on, we show an icon. The icon we include is from the Bootstrap icon set of [React Icons](https://react-icons.github.io/icons?name=bs).
+When the `isLoading` flag is on, we show an icon. The icon we include is from the Bootstrap icon set of [React Icons](https://react-icons.github.io/icons?name=bs){:target="_blank"}.
 
 And let's add a couple of styles to animate our loading icon.
 
@@ -113,11 +120,11 @@ This spins the icon infinitely with each spin taking a second. And by adding the
 
 Now we can use our new component in our `Login` container.
 
-{%change%} In `src/containers/Login.js` find the `<Button>` component in the `return` statement.
+{%change%} In `src/containers/Login.tsx` find the `<Button>` component in the `return` statement.
 
 ```html
-<Button block="true" size="lg" type="submit" disabled="{!validateForm()}">
-  Login
+<Button type="submit" disabled={!validateForm()}>
+    Login
 </Button>
 ```
 
@@ -137,13 +144,13 @@ Now we can use our new component in our `Login` container.
 
 {%change%} Also, let's replace `Button` import in the header. Remove this.
 
-```js
+```tsx
 import Button from "react-bootstrap/Button";
 ```
 
 {%change%} And add the following.
 
-```js
+```tsx
 import LoaderButton from "../components/LoaderButton";
 ```
 
@@ -155,53 +162,69 @@ And now when we switch over to the browser and try logging in, you should see th
 
 You might have noticed in our Login and App components that we simply `alert` when there is an error. We are going to keep our error handling simple. But it'll help us further down the line if we handle all of our errors in one place.
 
-{%change%} To do that, create `src/lib/errorLib.js` and add the following.
+{%change%} To do that, create `src/lib/errorLib.ts` and add the following.
 
-```js
-export function onError(error) {
-  let message = error.toString();
+```typescript
+export function onError(error: unknown) {
+  if (error !== "No current user") {
+    return;
+  }
+  
+  let message = String(error);
 
-  // Auth errors
-  if (!(error instanceof Error) && error.message) {
-    message = error.message;
+  if (!(error instanceof Error)
+    && error
+    && typeof error === 'object'
+    && 'message' in error
+    && error.message) {
+    message = String(error.message);
   }
 
   alert(message);
 }
+
+
 ```
 
 The `Auth` package throws errors in a different format, so all this code does is `alert` the error message we need. And in all other cases simply `alert` the error object itself.
 
-Let's use this in our Login container.
+Let's use this in our Login container (containers/Login.tsx).
 
-{%change%} Import the new error lib in the header of `src/containers/Login.js`.
+{%change%} Replace the catch statement in the `handleSubmit` function with:
 
-```js
+```tsx
+catch (error: unknown) {
+  onError(error);
+}
+```
+
+{%change%} And import the new error lib in the header of `src/containers/Login.tsx`.
+
+```tsx
 import { onError } from "../lib/errorLib";
 ```
 
-{%change%} And replace `alert(e.message);` in the `handleSubmit` function with:
-
-```js
-onError(e);
-```
 
 We'll do something similar in the App component.
 
-{%change%} Import the error lib in the header of `src/App.js`.
+{%change%} Replace the catch statement in the `onLoad` function with:
 
-```js
+```tsx
+catch (error: unknown) {
+  onError(error);
+}
+```
+
+{%change%} And import the error lib in the header of `src/App.tsx`.
+
+```tsx
 import { onError } from "./lib/errorLib";
 ```
 
-{%change%} And replace `alert(e);` in the `onLoad` function with:
-
-```js
-onError(e);
-```
 
 We'll improve our error handling a little later on in the guide.
 
-Also, if you would like to add _Forgot Password_ functionality for your users, you can refer to our [Extra Credit series of chapters on user management]({% link _chapters/manage-user-accounts-in-aws-amplify.md %}).
-
+{%aside%}
+Also, if you would like to add _Forgot Password_ functionality for your users, you can refer to our [Extra Credit series of chapters on user management]({% link _chapters/manage-user-accounts-in-aws-amplify.md %}){:target="_blank"}.
+{%endaside%}
 For now, we are ready to move on to the sign up process for our app.

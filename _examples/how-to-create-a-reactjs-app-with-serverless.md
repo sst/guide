@@ -72,7 +72,7 @@ We'll be using [Amazon DynamoDB](https://aws.amazon.com/dynamodb/); a reliable a
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { Api, StaticSite, StackContext, Table } from "sst/constructs";
 
 export function ExampleStack({ stack }: StackContext) {
@@ -98,7 +98,7 @@ Now let's add the API.
 
 {%change%} Add this below the `Table` definition in `stacks/ExampleStack.ts`.
 
-```ts
+```typescript
 // Create the HTTP API
 const api = new Api(stack, "Api", {
   defaults: {
@@ -128,7 +128,7 @@ To deploy a React.js app to AWS, we'll be using the SST [`StaticSite`]({{ site.d
 
 {%change%} Replace the following in `stacks/ExampleStack.ts`:
 
-```ts
+```typescript
 // Show the API endpoint in the output
 stack.addOutputs({
   ApiEndpoint: api.url,
@@ -137,7 +137,7 @@ stack.addOutputs({
 
 {%change%} With:
 
-```ts
+```typescript
 // Deploy our React app
 const site = new StaticSite(stack, "ReactSite", {
   path: "packages/frontend",
@@ -161,7 +161,7 @@ We are also setting up a [build time React environment variable](https://create-
 
 You can also optionally configure a custom domain.
 
-```ts
+```typescript
 // Deploy our React app
 const site = new StaticSite(stack, "ReactSite", {
   // ...
@@ -177,7 +177,7 @@ Our API is powered by a Lambda function. In the function we'll read from our Dyn
 
 {%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
-```ts
+```typescript
 import { DynamoDB } from "aws-sdk";
 import { Table } from "sst/node/table";
 
@@ -374,7 +374,7 @@ Let's update our table with the clicks.
 
 {%change%} Add this above the `return` statement in `packages/functions/src/lambda.ts`.
 
-```ts
+```typescript
 const putParams = {
   TableName: Table.Counter.tableName,
   Key: {

@@ -14,14 +14,14 @@ Now that we understand what _infrastructure as code_ is, we are ready to create 
 {%change%} Run the following in your working directory.
 
 ```bash
-$ npx create-sst@latest notes
+$ pnpm dlx create-sst@latest notes
 $ cd notes
-$ npm install
+$ pnpm install
 ```
 
 By default, our app will be deployed to the `us-east-1` AWS region. This can be changed in the `sst.config.ts` in your project root.
 
-```ts
+```typescript
 import { SSTConfig } from "sst";
 import { API } from "./stacks/MyStack";
 

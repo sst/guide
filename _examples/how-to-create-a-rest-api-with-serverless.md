@@ -64,7 +64,7 @@ Let's start by setting up the routes for our API.
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { Api, StackContext } from "sst/constructs";
 
 export function ExampleStack({ stack }: StackContext) {
@@ -100,7 +100,7 @@ For this example, we are not using a database. We'll look at that in detail in a
 
 {%change%} Let's add a file that contains our notes in `packages/core/src/notes.ts`.
 
-```ts
+```typescript
 export default {
   id1: {
     noteId: "id1",
@@ -123,7 +123,7 @@ Now add the code for our first endpoint.
 
 {%change%} Add a `packages/functions/src/list.ts`.
 
-```ts
+```typescript
 import notes from "@rest-api/core/notes";
 
 export async function handler() {
@@ -142,7 +142,7 @@ Note that this function need to be `async` to be invoked by AWS Lambda. Even tho
 
 {%change%} Add the following to `packages/functions/src/get.ts`.
 
-```ts
+```typescript
 import notes from "@rest-api/core/notes";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
@@ -166,7 +166,7 @@ Here we are checking if we have the requested note. If we do, we respond with it
 
 {%change%} Add the following to `packages/functions/src/update.ts`.
 
-```ts
+```typescript
 import notes from "@rest-api/core/notes";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
@@ -266,7 +266,7 @@ Let's make a quick change to our API. It would be good if the JSON strings are p
 
 {%change%} Replace `packages/functions/src/list.ts` with the following.
 
-```ts
+```typescript
 import notes from "@rest-api/core/notes";
 
 export async function handler() {

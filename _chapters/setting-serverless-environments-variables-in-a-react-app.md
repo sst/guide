@@ -33,9 +33,9 @@ Here's what we want to happening when developing locally:
 3. Then start our local React development environment.
 4. It should automatically pick up the backend environment variables.
 
-As an example, let's look at a really simple full-stack [SST app](/). It has a simple _Hello World_ API endpoint. And a React.js app.
+As an example, let's look at a really simple full-stack [SST app](/){:target="_blank"}. It has a simple _Hello World_ API endpoint. And a React.js app.
 
-```js
+```typescript
 import * as sst from "@serverless-stack/resources";
 
 export default class MyStack extends sst.Stack {
@@ -69,7 +69,7 @@ export default class MyStack extends sst.Stack {
 
 Here we are using the [`ReactStaticSite`]({{ site.docs_url }}/constructs/ReactStaticSite) construct. It allows us to set React environment variables from our API.
 
-```js
+```typescript
 environment: {
   // Pass in the API endpoint to our app
   REACT_APP_API_URL: api.url,
@@ -79,7 +79,7 @@ environment: {
 Now when we start our local development environment.
 
 ```bash
-$ npm start
+$ pnpm start
 ```
 
 SST generates a file in the `.build/` directory with the environment that we configured. It looks something like this.
@@ -96,10 +96,10 @@ SST generates a file in the `.build/` directory with the environment that we con
 ]
 ```
 
-On the React side, we'll now want to pick the environment variable up. To do this, we'll use a really simple CLI ([`@serverless-stack/static-site-env`](https://www.npmjs.com/package/@serverless-stack/static-site-env)) that reads from this file and sets it as a [build-time environment variable in React](https://create-react-app.dev/docs/adding-custom-environment-variables/).
+On the React side, we'll now want to pick the environment variable up. To do this, we'll use a really simple CLI ([`@serverless-stack/static-site-env`](https://www.npmjs.com/package/@serverless-stack/static-site-env){:target="_blank"}) that reads from this file and sets it as a [build-time environment variable in React](https://create-react-app.dev/docs/adding-custom-environment-variables/){:target="_blank"}.
 
 ```bash
-$ npm install @serverless-stack/static-site-env --save-dev
+$ pnpm add --save-dev @serverless-stack/static-site-env
 ```
 
 We can use the environment variable in our components using `process.env.REACT_APP_API_URL`.
@@ -130,7 +130,7 @@ We can now wrap our start script with it.
 So if we start our React local environment:
 
 ```bash
-$ npm run start
+$ pnpm run start
 ```
 
 It'll contain the environment variable that we had previously set in our serverless app!
@@ -141,17 +141,17 @@ Next, let's look at what happens when we deploy our full-stack app.
 
 ## While Deploying
 
-We need our React app to be deployed with our environment variables. SST uses [CDK]({% link _chapters/what-is-aws-cdk.md %}) internally, so the flow looks something like this.
+We need our React app to be deployed with our environment variables. SST uses [CDK]({% link _chapters/what-is-aws-cdk.md %}){:target="_blank"} internally, so the flow looks something like this.
 
 1. Deploy our API.
 2. Build our React app.
 3. Replace the environment variables in our React app.
 4. Deploy our React app to S3 and CloudFront.
 
-[SST](/) and the [`ReactStaticSite`]({{ site.docs_url }}/constructs/ReactStaticSite) construct do this automatically for you.
+[SST](/){:target="_blank"} and the [`ReactStaticSite`]({{ site.docs_url }}/constructs/ReactStaticSite){:target="_blank"} construct do this automatically for you.
 
 ![Serverless environment variable set in a React app deployed to AWS](/assets/extra-credit/serverless-environment-variable-set-in-a-react-app-deployed-to-aws.png)
 
 And that's it! You now have a full-stack serverless app where the environment variables from your backend are automatically set in your React app. You don't need to hard code them anymore and they work in your local development environment as well!
 
-For further details, check out our example on building a React.js app with SST: [**How to create a React.js app with serverless**]({% link _examples/how-to-create-a-reactjs-app-with-serverless.md %})
+For further details, check out our example on building a React.js app with SST: [**How to create a React.js app with serverless**]({% link _examples/how-to-create-a-reactjs-app-with-serverless.md %}){:target="_blank"}.

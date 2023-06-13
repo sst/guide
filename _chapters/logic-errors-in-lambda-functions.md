@@ -24,18 +24,26 @@ $ git checkout -b debug
 
 ### Push Some Faulty Code
 
-Let's trigger an error in `get.js` by commenting out the `noteId` field in the DynamoDB call's Key definition. This will cause the DynamoDB call to fail and in turn cause the Lambda function to fail.
+Let's trigger an error in `get.ts` by commenting out the `noteId` field in the DynamoDB call's Key definition. This will cause the DynamoDB call to fail and in turn cause the Lambda function to fail.
 
-{%change%} Replace the `main` function in `packages/functions/src/get.js` with the following.
+{%change%} Replace the `main` function in `packages/functions/src/get.ts` with the following.
 
-```js
-export const main = handler(async (event) => {
+```typescript
+export const main = handler(async (event: APIGatewayProxyEvent) => {
+  let path_id
+  if (!event.pathParameters || !event.pathParameters.id || event.pathParameters.id.length == 0) {
+    throw new Error("Please provide the 'id' parameter.");
+  } else {
+    path_id = event.pathParameters.id
+  }
+
   const params = {
     TableName: Table.Notes.tableName,
-    // 'Key' defines the partition key and sort key of the item to be retrieved
+    // 'Key' defines the partition key and sort key of0
+    // the item to be retrieved
     Key: {
-      userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
-      // noteId: event.pathParameters.id, // The id of the note from the path
+      userId: event.requestContext.authorizer?.iam.cognitoIdentity.identityId, // The id of the author
+      // noteId: path_id, // The id of the note from the path
     },
   };
 
@@ -56,7 +64,7 @@ Note the line that we've commented out.
 ```bash
 $ git add .
 $ git commit -m "Adding some faulty code"
-$ git push --set-upstream origin debug
+$ git push --set-upstream origin debug;
 ```
 
 ### Deploy the Faulty Code

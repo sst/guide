@@ -944,6 +944,13 @@
   word-wrap: break-word;
   word-break: break-word;
 
+  blockquote {
+    border-left: 3px solid $important-color;
+    font-size: 1.1rem;
+    font-style: normal;
+  }
+
+
   h2 {
     font-size: 32px;
 

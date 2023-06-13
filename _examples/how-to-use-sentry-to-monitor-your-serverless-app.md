@@ -73,7 +73,7 @@ Let's add the API.
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { LayerVersion } from "aws-cdk-lib/aws-lambda";
 import { Api, StackContext } from "sst/constructs";
 
@@ -96,7 +96,7 @@ We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to cr
 
 {%change%} Your `packages/functions/src/lambda.ts` should look something like this.
 
-```ts
+```typescript
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
@@ -134,7 +134,7 @@ You can then set the layer for all the functions in your stack using the [`addDe
 
 {%change%} Add the following to the top of the `ExampleStack` function in `stacks/ExampleStack.ts`.
 
-```ts
+```typescript
 // Configure Sentry
 if (!app.local) {
   const sentry = LayerVersion.fromLayerVersionArn(
@@ -162,7 +162,7 @@ Next, we'll instrument our Lambda functions by wrapping them with the Sentry han
 
 {%change%} Replace the code in `packages/functions/src/lambda.ts` with this.
 
-```ts
+```typescript
 import Sentry from "@sentry/serverless";
 
 export const handler = Sentry.AWSLambda.wrapHandler(async (event) => {
