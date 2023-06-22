@@ -25,11 +25,20 @@ description: "Build modern full-stack serverless applications on AWS with Next.j
       3. Go from idea to IPO!
     </h4>
 
+    <h6 class="site-command">
+      <a data-text="npm create sst@latest" class="command">
+        <span>$ npm create sst</span>
+        <span class="icon">
+          <i class="fa fa-copy" aria-hidden="true"></i>
+          <i class="fa fa-check" aria-hidden="true"></i>
+        </span>
+      </a>
+    </h6>
+
     <div class="controls">
-      <a data-text="npm create sst@latest" class="command sst-button secondary">
-        <span>npm create sst</span>
-        <i class="fa fa-copy" aria-hidden="true"></i>
-        <i class="fa fa-check" aria-hidden="true"></i>
+      <a href="https://youtu.be/JY_d0vf-rfw" class="sst-button secondary" target="_blank">
+        <i class="fa fa-youtube-play" aria-hidden="true"></i>
+        <span>Learn More</span>
       </a>
       <a class="sst-button primary" href="{{ site.docs_url }}">
         Get Started

@@ -382,6 +382,63 @@
     }
   }
 
+  .site-command {
+    padding-top: $spacing-unit / 2;
+    font-family: $code-font-family;
+    font-size: 20px;
+
+    @include media-query($on-palm) {
+      padding-top: 5px;
+      font-size: 14px;
+    }
+    
+    a {
+      padding-left: $spacing-unit - 2px;
+      color: $tertiary-text-color;
+      cursor: pointer;
+
+      @include media-query($on-palm) {
+        padding-left: $spacing-unit - 10px;
+
+        span.icon {
+          vertical-align: 1px;
+        }
+      }
+
+      span.icon {
+        visibility: hidden;
+        vertical-align: 2px;
+      }
+
+      &:hover {
+        span.icon {
+          visibility: visible;
+        }
+      }
+
+      &.copied {
+        i.fa:first-child {
+          display: none;
+        }
+        i.fa:last-child {
+          display: inline;
+        }
+      }
+    }
+
+    i.fa {
+      font-size: 13px;
+
+      @include media-query($on-palm) {
+        font-size: 10px;
+      }
+    
+      &:last-child {
+        display: none;
+      }
+    }
+  }
+
   .controls {
     margin-top: $spacing-unit * 1.5;
     text-align: center;
@@ -393,8 +450,8 @@
 
     a.sst-button {
       padding: {
-        left: 80px;
-        right: 80px;
+        left: 2 * $spacing-unit;
+        right: 2 * $spacing-unit;
       }
 
       @include media-query($on-palm) {
@@ -405,43 +462,25 @@
 
       &:first-child {
         padding: {
-          left: $spacing-unit;
-          right: $spacing-unit;
+          left: $spacing-unit + 10px;
+          right: $spacing-unit + 10px;
         }
-        cursor: pointer;
-        font-size: 18px;
-        font-weight: normal;
-        font-family: $code-font-family;
 
         @include media-query($on-palm) {
           font-size: 15px;
         }
 
-        span {
-          color: black;
-        }
-
         i.fa {
-          margin-left: 7px;
-          font-size: 16px;
-          opacity: 0.35;
+          margin-right: 8px;
+          font-size: 20px;
+          opacity: 0.25;
+          line-height: 0;
+          vertical-align: -1px;
 
           @include media-query($on-palm) {
-            margin-left: 5px;
+            margin-right: 5px;
             font-size: 13px;
-          }
-
-          &:last-child {
-            display: none;
-            opacity: 1;
-            color: $important-color;
-          }
-        }
-
-        &:not(.copied):hover {
-          i.fa {
-            opacity: 1;
-            color: $important-color;
+            vertical-align: 0;
           }
         }
       
