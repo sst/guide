@@ -6,14 +6,14 @@ date: 2021-05-26 00:00:00
 lang: en
 index: 2
 type: misc
-description: In this example we'll look at how to use a Lambda Layer in a serverless app using SST. We'll be using the chrome-aws-lambda Layer to take a screenshot of a webpage and return the image in our API.
-short_desc: Using the chrome-aws-lambda layer to take screenshots.
+description: In this example we'll look at how to use a Lambda Layer in a serverless app using SST. We'll be using the @sparticuz/chromium-min Layer to take a screenshot of a webpage and return the image in our API.
+short_desc: Using the @sparticuz/chromium-min layer to take screenshots.
 repo: layer-chrome-aws-lambda
 ref: how-to-use-lambda-layers-in-your-serverless-app
 comments_id: how-to-use-lambda-layers-in-your-serverless-app/2405
 ---
 
-In this example we will look at how to use [Layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) in your serverless app with [SST]({{ site.sst_github_repo }}). We'll be using the [chrome-aws-lambda](https://github.com/shelfio/chrome-aws-lambda-layer) Layer to take a screenshot of a webpage and return the image in our API.
+In this example we will look at how to use [Layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) in your serverless app with [SST]({{ site.sst_github_repo }}). We'll be using the [@sparticuz/chromium](https://github.com/Sparticuz/chromium) Layer to take a screenshot of a webpage and return the image in our API.
 
 We'll be using SST's [Live Lambda Development]({{ site.docs_url }}/live-lambda-development). It allows you to make changes and test locally without having to redeploy.
 
@@ -61,6 +61,9 @@ An SST app is made up of two parts.
 
    The code that's run when your API is invoked is placed in the `packages/functions/` directory of your project.
 
+3. `layers` - Lambda Layers
+
+   The code that's run when your API is invoked is placed in the `packages/functions/` directory of your project.
 ## Creating the API
 
 Let's start by creating our API.
@@ -68,14 +71,13 @@ Let's start by creating our API.
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
 ```ts
-import { LayerVersion } from "aws-cdk-lib/aws-lambda";
+import * as lambda from "aws-cdk-lib/aws-lambda";
 import { Api, StackContext } from "sst/constructs";
 
-const layerArn =
-  "arn:aws:lambda:us-east-1:764866452798:layer:chrome-aws-lambda:22";
-
 export function ExampleStack({ stack }: StackContext) {
-  const layer = LayerVersion.fromLayerVersionArn(stack, "Layer", layerArn);
+  const layerChromium = new lambda.LayerVersion(stack, "chromiumLayers", {
+    code: lambda.Code.fromAsset("layers/chromium"),
+  });
 
   // Create a HTTP API
   const api = new Api(stack, "Api", {
@@ -83,16 +85,16 @@ export function ExampleStack({ stack }: StackContext) {
       "GET /": {
         function: {
           handler: "packages/functions/src/lambda.handler",
-          // The chrome-aws-lambda layer currently does not work in Node.js 16
-          runtime: "nodejs14.x",
+          // Use 18.x here because in 14, 16 layers have some issue with using NODE_PATH
+          runtime: "nodejs18.x",
           // Increase the timeout for generating screenshots
           timeout: 15,
           // Load Chrome in a Layer
-          layers: [layer],
+          layers: [layerChromium],
           // Exclude bundling it in the Lambda function
           nodejs: {
             esbuild: {
-              external: ["chrome-aws-lambda"],
+              external: ["@sparticuz/chromium"],
             },
           },
         },
@@ -107,54 +109,83 @@ export function ExampleStack({ stack }: StackContext) {
 }
 ```
 
-Here, we are first getting a reference to the [ARN]({% link _chapters/what-is-an-arn.md %}) of the Layer we want to use. Head over to the [chrome-aws-lambda](https://github.com/shelfio/chrome-aws-lambda-layer) Layer repo and grab the one for your region.
+Here, we will download the Layer from the [Sparticuz/chromium](https://github.com/Sparticuz/chromium/releases/tag/v114.0.0) GitHub release. Create folder `layers/chromium` in the root of the project and unzip the file layer then you will have `layers/chromium/nodejs`. The `nodejs` folder contains the `node_modules` folder and the `package.json` file.
 
-We then use the [`Api`]({{ site.docs_url }}/constructs/Api) construct and add a single route (`GET /`). For the function that'll be handling the route, we increase the timeout, since generating a screenshot can take a little bit of time. We then reference the Layer we want and exclude the Lambda function from bundling the [chrome-aws-lambda](https://github.com/alixaxel/chrome-aws-lambda) npm package.
+We then use the [`Api`]({{ site.docs_url }}/constructs/Api) construct and add a single route (`GET /`). For the function that'll be handling the route, we increase the timeout, since generating a screenshot can take a little bit of time. We then reference the Layer we want and exclude the Lambda function from bundling the [@sparticuz/chromium](https://github.com/Sparticuz/chromium) npm package.
 
 Finally, we output the endpoint of our newly created API.
 
 ## Adding function code
+
+Download chromium locally, then you will have YOUR_LOCAL_CHROMIUM_PATH. You will need it in lambda function to run chromium.
+  
+```bash
+$ npx @puppeteer/browsers install chromium@latest --path /tmp/localChromium
+```
 
 Now in our function, we'll be handling taking a screenshot of a given webpage.
 
 {%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
 ```ts
-import chrome from "chrome-aws-lambda";
+import puppeteer from "puppeteer-core";
+import chromium from "@sparticuz/chromium";
 
 // chrome-aws-lambda handles loading locally vs from the Layer
-const puppeteer = chrome.puppeteer;
 
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+
+// This is the path to the local Chromium binary
+const YOUR_LOCAL_CHROMIUM_PATH = "/tmp/localChromium/chromium/mac-1165945/chrome-mac/Chromium.app/Contents/MacOS/Chromium";
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   // Get the url and dimensions from the query string
   const { url, width, height } = event.queryStringParameters!;
 
+  if (!url) {
+    return {
+      statusCode: 400,
+      body: "Please provide a url",
+    };
+  }
+
   const browser = await puppeteer.launch({
-    args: chrome.args,
-    executablePath: await chrome.executablePath,
+    args: chromium.args,
+    defaultViewport: chromium.defaultViewport,
+    executablePath: process.env.IS_LOCAL
+      ? YOUR_LOCAL_CHROMIUM_PATH
+      : await chromium.executablePath(),
+    headless: chromium.headless,
   });
 
   const page = await browser.newPage();
 
-  await page.setViewport({
-    width: Number(width),
-    height: Number(height),
-  });
+  if (width && height) {
+    await page.setViewport({
+      width: Number(width),
+      height: Number(height),
+    });
+  }
 
   // Navigate to the url
   await page.goto(url!);
 
   // Take the screenshot
-  await page.screenshot();
+  const screenshot = (await page.screenshot({ encoding: "base64" })) as string;
+
+  const pages = await browser.pages();
+  for (let i = 0; i < pages.length; i++) {
+    await pages[i].close();
+  }
+
+  await browser.close();
 
   return {
-    statusCode: 200,
     headers: { "Content-Type": "text/plain" },
     body: "Screenshot taken",
   };
 };
+
 ```
 
 First, we grab the webpage URL and dimensions for the screenshot from the query string. We then launch the browser and navigate to that URL, with those dimensions and take the screenshot.
@@ -162,12 +193,11 @@ First, we grab the webpage URL and dimensions for the screenshot from the query 
 Now let's install the npm packages we need.
 
 {%change%} Run the below command in the `packages/functions/` folder.
+Please check [Puppeteer's Chromium Support page](https://pptr.dev/chromium-support) and install the correct version of Chromium. At the moment writing this tutorial, puppeteer-core@20 is compatible with Chromium@113 is most stable.
 
 ```bash
-$ npm install puppeteer puppeteer-core chrome-aws-lambda
+$ npm install puppeteer-core^20.1.2 @sparticuz/chromium^113.0.1
 ```
-
-The `puppeteer` packages are used internally by the `chrome-aws-lambda` package.
 
 ## Starting your dev environment
 
