@@ -6,8 +6,8 @@ date: 2021-05-26 00:00:00
 lang: en
 index: 2
 type: misc
-description: In this example we'll look at how to use a Lambda Layer in a serverless app using SST. We'll be using the @sparticuz/chromium-min Layer to take a screenshot of a webpage and return the image in our API.
-short_desc: Using the @sparticuz/chromium-min layer to take screenshots.
+description: In this example we'll look at how to use a Lambda Layer in a serverless app using SST. We'll be using the @sparticuz/chromium Layer to take a screenshot of a webpage and return the image in our API.
+short_desc: Using the @sparticuz/chromium layer to take screenshots.
 repo: layer-chrome-aws-lambda
 ref: how-to-use-lambda-layers-in-your-serverless-app
 comments_id: how-to-use-lambda-layers-in-your-serverless-app/2405
