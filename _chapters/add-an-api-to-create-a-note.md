@@ -14,13 +14,13 @@ We'll first add an API to create a note. This API will take the note object as t
 
 ### Creating a Stack
 
-{%change%} Create a new file in `stacks/ApiStack.js` and add the following.
+{%change%} Create a new file in `stacks/ApiStack.ts` and add the following.
 
-```js
-import { Api, use } from "sst/constructs";
+```ts
+import { Api, StackContext, use } from "sst/constructs";
 import { StorageStack } from "./StorageStack";
 
-export function ApiStack({ stack, app }) {
+export function ApiStack({ stack }: StackContext) {
   const { table } = use(StorageStack);
 
   // Create the API
@@ -67,13 +67,13 @@ Let's add this new stack to the rest of our app.
 
 {%change%} In `sst.config.ts`, import the API stack at the top.
 
-```js
+```ts
 import { ApiStack } from "./stacks/ApiStack";
 ```
 
 {%change%} And, replace the `stacks` function with -
 
-```js
+```ts
 stacks(app) {
   app.stack(StorageStack).stack(ApiStack);
 },
@@ -83,20 +83,22 @@ stacks(app) {
 
 Now let's add the function that'll be creating our note.
 
-{%change%} Create a new file in `packages/functions/src/create.js` with the following.
+{%change%} Create a new file in `packages/functions/src/create.ts` with the following.
 
-```js
+```ts
+import { APIGatewayProxyEvent } from 'aws-lambda';
 import * as uuid from "uuid";
-import AWS from "aws-sdk";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { PutCommand } from "@aws-sdk/lib-dynamodb";
 import { Table } from "sst/node/table";
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const dynamoDb = new DynamoDBClient({});
 
-export async function main(event) {
+export const main = async (event: APIGatewayProxyEvent) => {
   // Request body is passed in as a JSON encoded string in 'event.body'
-  const data = JSON.parse(event.body);
+  const data = JSON.parse(event.body || "{}");
 
-  const params = {
+  const params = new PutCommand({
     TableName: Table.Notes.tableName,
     Item: {
       // The attributes of the item to be created
@@ -106,22 +108,28 @@ export async function main(event) {
       attachment: data.attachment, // Parsed from request body
       createdAt: Date.now(), // Current Unix timestamp
     },
-  };
+  });
 
   try {
-    await dynamoDb.put(params).promise();
+    await dynamoDb.send(params);
 
     return {
       statusCode: 200,
-      body: JSON.stringify(params.Item),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(params.input.Item),
     };
-  } catch (e) {
+  } catch (e: any) {
     return {
       statusCode: 500,
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ error: e.message }),
     };
   }
-}
+};
 ```
 
 There are some helpful comments in the code but let's go over them quickly.
@@ -139,11 +147,11 @@ Let's go ahead and install the npm packages that we are using here.
 {%change%} Run the following in the `packages/functions/` folder.
 
 ```bash
-$ npm install aws-sdk uuid
+$ npm install @aws-sdk/client-dynamodb @aws-sdk/lib-dynamodb @types/uuid uuid
 ```
 
-- **aws-sdk** allows us to talk to the various AWS services.
 - **uuid** generates unique ids.
+- **@aws-sdk/client-dynamodb** and **@aws-sdk/lib-dynamodb** for working with DynamoDB.
 
 ### Deploy Our Changes
 
@@ -194,16 +202,19 @@ Make a note of the `noteId`. We are going to use this newly created note in the 
 
 Before we move on to the next chapter, let's quickly refactor the code since we are going to be doing much of the same for all of our APIs.
 
-{%change%} Start by replacing our `create.js` with the following.
+{%change%} Start by replacing our `create.ts` with the following.
 
-```js
-import { Table } from "sst/node/table";
+```ts
+import { APIGatewayProxyEvent } from 'aws-lambda';
 import * as uuid from "uuid";
-import handler from "@notes/core/handler";
-import dynamoDb from "@notes/core/dynamodb";
+import handler from "@sst-guide/core/handler";
+import dynamodb from "@sst-guide/core/dynamodb";
+import { Table } from 'sst/node/table';
 
-export const main = handler(async (event) => {
-  const data = JSON.parse(event.body);
+export const main = handler(async (event: APIGatewayProxyEvent) => {
+  // Request body is passed in as a JSON encoded string in 'event.body'
+  const data = JSON.parse(event.body || "{}");
+
   const params = {
     TableName: Table.Notes.tableName,
     Item: {
@@ -216,10 +227,11 @@ export const main = handler(async (event) => {
     },
   };
 
-  await dynamoDb.put(params);
+  await dynamodb.put(params);
 
   return params.Item;
 });
+
 ```
 
 This code doesn't work just yet but it shows you what we want to accomplish:
@@ -231,36 +243,53 @@ This code doesn't work just yet but it shows you what we want to accomplish:
 
 Let's start by creating a `dynamodb` util that we can share across all our functions. We'll place this in the `packages/core` directory. This is where we'll be putting all our business logic.
 
-{%change%} Create a `packages/core/src/dynamodb.js` file with:
+{%change%} Create a `packages/core/src/dynamodb.ts` file with:
 
-```js
-import AWS from "aws-sdk";
+```ts
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import {
+  PutCommand,
+  PutCommandInput,
+  GetCommand,
+  GetCommandInput,
+  QueryCommand,
+  QueryCommandInput,
+  UpdateCommand,
+  UpdateCommandInput,
+  DeleteCommand,
+  DeleteCommandInput,
+} from "@aws-sdk/lib-dynamodb";
 
-const client = new AWS.DynamoDB.DocumentClient();
+const client = new DynamoDBClient({});
 
 export default {
-  get: (params) => client.get(params).promise(),
-  put: (params) => client.put(params).promise(),
-  query: (params) => client.query(params).promise(),
-  update: (params) => client.update(params).promise(),
-  delete: (params) => client.delete(params).promise(),
+  put: (params: PutCommandInput) => client.send(new PutCommand(params)),
+  get: (params: GetCommandInput) => client.send(new GetCommand(params)),
+  query: (params: QueryCommandInput) => client.send(new QueryCommand(params)),
+  update: (params: UpdateCommandInput) =>
+    client.send(new UpdateCommand(params)),
+  delete: (params: DeleteCommandInput) =>
+    client.send(new DeleteCommand(params)),
 };
+
 ```
 
 Here we are creating a convenience object that exposes the DynamoDB client methods that we are going to need in this guide.
 
-{%change%} Also create a `packages/core/src/handler.js` file with the following.
+{%change%} Also create a `packages/core/src/handler.ts` file with the following.
 
-```js
-export default function handler(lambda) {
-  return async function (event, context) {
+```ts
+import { ApiHandler } from "sst/node/api";
+
+export default function handler(lambda: any) {
+  return ApiHandler(async (event, context) => {
     let body, statusCode;
 
     try {
       // Run the Lambda
       body = await lambda(event, context);
       statusCode = 200;
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       body = { error: e.message };
       statusCode = 500;
@@ -269,9 +298,12 @@ export default function handler(lambda) {
     // Return HTTP response
     return {
       statusCode,
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(body),
     };
-  };
+  });
 }
 ```
 
@@ -283,7 +315,7 @@ Let's go over this in detail.
 - On success, we `JSON.stringify` the result and return it with a `200` status code.
 - If there is an error then we return the error message with a `500` status code.
 
-It's **important to note** that the `handler.js` needs to be **imported before we import anything else**. This is because we'll be adding some error handling to it later that needs to be initialized when our Lambda function is first invoked.
+It's **important to note** that the `handler.ts` needs to be **imported before we import anything else**. This is because we'll be adding some error handling to it later that needs to be initialized when our Lambda function is first invoked.
 
 Next, we are going to add the API to get a note given its id.
 
@@ -293,9 +325,9 @@ Next, we are going to add the API to get a note given its id.
 
 - Response `statusCode: 500`
 
-  If you see a `statusCode: 500` response when you invoke your function, the error has been reported by our code in the `catch` block. You'll see a `console.error` is included in our `handler.js` code above. Incorporating logs like these can help give you insight on issues and how to resolve them.
+  If you see a `statusCode: 500` response when you invoke your function, the error has been reported by our code in the `catch` block. You'll see a `console.error` is included in our `handler.ts` code above. Incorporating logs like these can help give you insight on issues and how to resolve them.
 
-  ```js
+  ```ts
   } catch (e) {
     // Prints the full error
     console.error(e);
