@@ -12,9 +12,9 @@ Now we are going to add an API that returns a list of all the notes a user has. 
 
 ### Add the Function
 
-{%change%} Create a new file in `packages/functions/src/list.js` with the following.
+{%change%} Create a new file in `packages/functions/src/list.ts` with the following.
 
-```js
+```ts
 import { Table } from "sst/node/table";
 import handler from "@notes/core/handler";
 import dynamoDb from "@notes/core/dynamodb";
@@ -40,15 +40,15 @@ export const main = handler(async () => {
 });
 ```
 
-This is pretty much the same as our `get.js` except we use a condition to only return the items that have the same `userId` as the one we are passing in. In our case, it's still hardcoded to `123`.
+This is pretty much the same as our `get.ts` except we use a condition to only return the items that have the same `userId` as the one we are passing in. In our case, it's still hardcoded to `123`.
 
 ### Add the Route
 
 Let's add the route for this new endpoint.
 
-{%change%} Add the following above the `POST /notes` route in `stacks/ApiStack.js`.
+{%change%} Add the following above the `POST /notes` route in `stacks/ApiStack.ts`.
 
-```js
+```ts
 "GET /notes": "packages/functions/src/list.main",
 ```
 

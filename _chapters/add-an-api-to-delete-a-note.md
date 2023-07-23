@@ -12,9 +12,9 @@ Finally, we are going to create an API that allows a user to delete a given note
 
 ### Add the Function
 
-{%change%} Create a new file in `packages/functions/src/delete.js` and paste the following.
+{%change%} Create a new file in `packages/functions/src/delete.ts` and paste the following.
 
-```js
+```ts
 import { Table } from "sst/node/table";
 import handler from "@notes/core/handler";
 import dynamoDb from "@notes/core/dynamodb";
@@ -41,9 +41,9 @@ This makes a DynamoDB `delete` call with the `userId` & `noteId` key to delete t
 
 Let's add a new route for the delete note API.
 
-{%change%} Add the following below the `PUT /notes{id}` route in `stacks/ApiStack.js`.
+{%change%} Add the following below the `PUT /notes{id}` route in `stacks/ApiStack.ts`.
 
-```js
+```ts
 "DELETE /notes/{id}": "packages/functions/src/delete.main",
 ```
 

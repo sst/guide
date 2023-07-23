@@ -12,9 +12,9 @@ Now let's create an API that allows a user to update a note with a new note obje
 
 ### Add the Function
 
-{%change%} Create a new file in `packages/functions/src/update.js` and paste the following.
+{%change%} Create a new file in `packages/functions/src/update.ts` and paste the following.
 
-```js
+```ts
 import { Table } from "sst/node/table";
 import handler from "@notes/core/handler";
 import dynamoDb from "@notes/core/dynamodb";
@@ -47,15 +47,15 @@ export const main = handler(async (event) => {
 });
 ```
 
-This should look similar to the `create.js` function. Here we make an `update` DynamoDB call with the new `content` and `attachment` values in the `params`.
+This should look similar to the `create.ts` function. Here we make an `update` DynamoDB call with the new `content` and `attachment` values in the `params`.
 
 ### Add the Route
 
 Let's add a new route for the get note API.
 
-{%change%} Add the following below the `GET /notes/{id}` route in `stacks/ApiStack.js`.
+{%change%} Add the following below the `GET /notes/{id}` route in `stacks/ApiStack.ts`.
 
-```js
+```ts
 "PUT /notes/{id}": "packages/functions/src/update.main",
 ```
 
