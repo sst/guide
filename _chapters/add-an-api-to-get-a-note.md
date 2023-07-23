@@ -12,9 +12,9 @@ Now that we [created a note]({% link _chapters/add-an-api-to-create-a-note.md %}
 
 ### Add the Function
 
-{%change%} Create a new file in `packages/functions/src/get.js` in your project root with the following:
+{%change%} Create a new file in `packages/functions/src/get.ts` in your project root with the following:
 
-```js
+```ts
 import { Table } from "sst/node/table";
 import handler from "@notes/core/handler";
 import dynamoDb from "@notes/core/dynamodb";
@@ -39,15 +39,15 @@ export const main = handler(async (event) => {
 });
 ```
 
-This follows exactly the same structure as our previous `create.js` function. The major difference here is that we are doing a `dynamoDb.get(params)` to get a note object given the `userId` (still hardcoded) and `noteId` that's passed in through the request.
+This follows exactly the same structure as our previous `create.ts` function. The major difference here is that we are doing a `dynamoDb.get(params)` to get a note object given the `userId` (still hardcoded) and `noteId` that's passed in through the request.
 
 ### Add the route
 
 Let's add a new route for the get note API.
 
-{%change%} Add the following below the `POST /notes` route in `stacks/ApiStack.js`.
+{%change%} Add the following below the `POST /notes` route in `stacks/ApiStack.ts`.
 
-```js
+```ts
 "GET /notes/{id}": "packages/functions/src/get.main",
 ```
 
