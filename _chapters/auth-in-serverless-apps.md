@@ -28,7 +28,7 @@ Our users make a request to our serverless API. It starts by hitting our API Gat
 
 In terms of access control, our API Gateway endpoint is allowed to invoke the Lambda functions we listed in the routes of our `stacks/ApiStack.ts`. And if you'll recall, our Lambda functions are allowed to connect to our DynamoDB tables.
 
-```js
+```ts
 bind: [table],
 ```
 

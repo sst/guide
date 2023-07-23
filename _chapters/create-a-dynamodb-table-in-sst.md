@@ -15,7 +15,7 @@ We are now going to start creating our infrastructure in [SST]({{ site.sst_githu
 
 {%change%} Add the following to a new file in `stacks/StorageStack.ts`.
 
-```typescript
+```ts
 import { StackContext, Table } from "sst/constructs";
 
 export function StorageStack({ stack }: StackContext) {
