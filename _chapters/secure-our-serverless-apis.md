@@ -17,21 +17,29 @@ Recall that we've been hard coding our user ids so far (with user id `123`). We'
 
 Recall the function signature of a Lambda function:
 
-```js
+```ts
 export async function main(event, context) {}
 ```
 
 Or the refactored version that we are using:
 
-```js
-export const main = handler(async (event) => {});
+```ts
+export const main = handler(async (event: APIGatewayProxyEventV2) => {});
 ```
 
 So far we've used the `event` object to get the path parameters (`event.pathParameters`) and request body (`event.body`).
 
+Change type event to APIGatewayProxyEventV2WithIAMAuthorizer;
+
+```ts
+import { APIGatewayProxyEventV2WithIAMAuthorizer } from 'aws-lambda';
+
+export const main = handler(async (event: APIGatewayProxyEventV2WithIAMAuthorizer) => {});
+```
+
 Now we'll get the id of the authenticated user.
 
-```js
+```ts
 event.requestContext.authorizer.iam.cognitoIdentity.identityId;
 ```
 
@@ -39,51 +47,51 @@ This is an id that's assigned to our user by our Cognito Identity Pool.
 
 You'll also recall that so far all of our APIs are hard coded to interact with a single user.
 
-```js
+```ts
 userId: "123", // The id of the author
 ```
 
 Let's change that.
 
-{%change%} Replace the above line in `packages/functions/src/create.js` with.
+{%change%} Replace the above line in `packages/functions/src/create.ts` with.
 
-```js
+```ts
 userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
 ```
 
-{%change%} Do the same in the `packages/functions/src/get.js`.
+{%change%} Do the same in the `packages/functions/src/get.ts`.
 
-```js
+```ts
 userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
 ```
 
-{%change%} And in the `packages/functions/src/update.js`.
+{%change%} And in the `packages/functions/src/update.ts`.
 
-```js
+```ts
 userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
 ```
 
-{%change%} In `packages/functions/src/delete.js` as well.
+{%change%} In `packages/functions/src/delete.ts` as well.
 
-```js
+```ts
 userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
 ```
 
-{%change%} In `packages/functions/src/list.js` find this line instead.
+{%change%} In `packages/functions/src/list.ts` find this line instead.
 
-```js
+```ts
 ":userId": "123",
 ```
 
 {%change%} And replace it with.
 
-```js
+```ts
 ":userId": event.requestContext.authorizer.iam.cognitoIdentity.identityId,
 ```
 
 {%change%} Also, include `event` in the function arguments.
 
-```js
+```ts
 export const main = handler(async (event) => {
 ```
 
@@ -127,7 +135,7 @@ We need to pass in quite a bit of our info to complete the above steps.
 - Replace the `API_ENDPOINT` with the `ApiEndpoint` from our [API stack outputs]({% link _chapters/add-an-api-to-create-a-note.md %}).
 - And for the `API_REGION` you can use the same `Region` as we used above. Since our entire app is deployed to the same region.
 
-While this might look intimidating, just keep in mind that behind the scenes all we are doing is generating some security headers before making a basic HTTP request. We won't need to do this when we connect from our React.js app.
+While this might look intimidating, just keep in mind that behind the scenes all we are doing is generating some security headers before making a basic HTTP request. We won't need to do this when we connect from our React.ts app.
 
 If you are on Windows, use the command below. The space between each option is very important.
 

@@ -17,15 +17,15 @@ Setting this all up can be pretty complicated in CDK. SST has a simple [`Auth`](
 
 ### Create a Stack
 
-{%change%} Add the following to a new file in `stacks/AuthStack.js`.
+{%change%} Add the following to a new file in `stacks/AuthStack.ts`.
 
-```js
+```ts
 import * as iam from "aws-cdk-lib/aws-iam";
-import { Cognito, use } from "sst/constructs";
+import { Cognito, StackContext, use } from "sst/constructs";
 import { StorageStack } from "./StorageStack";
 import { ApiStack } from "./ApiStack";
 
-export function AuthStack({ stack, app }) {
+export function AuthStack({ stack, app }: StackContext) {
   const { bucket } = use(StorageStack);
   const { api } = use(ApiStack);
 
@@ -82,7 +82,7 @@ Note, learn more about sharing resources between stacks [here](https://docs.sst.
 
 We are creating a specific IAM policy to secure the files our users will upload to our S3 bucket.
 
-```js
+```ts
 // Policy granting access to a specific folder in the bucket
 new iam.PolicyStatement({
   actions: ["s3:*"],
@@ -105,7 +105,7 @@ Let's add this stack to our app.
 
 {%change%} Replace the `stacks` function in `sst.config.ts` with this.
 
-```js
+```ts
 stacks(app) {
   app.stack(StorageStack).stack(ApiStack).stack(AuthStack);
 },
@@ -113,7 +113,7 @@ stacks(app) {
 
 {%change%} Also, import the new stack at the top.
 
-```js
+```ts
 import { AuthStack } from "./stacks/AuthStack";
 ```
 
@@ -121,10 +121,15 @@ import { AuthStack } from "./stacks/AuthStack";
 
 We also need to enable authentication in our API.
 
-{%change%} Add the following above the `function: {` line in `stacks/ApiStack.js`.
+{%change%} Add the following above the `function: {` line in `stacks/ApiStack.ts`.
 
-```js
-authorizer: "iam",
+```ts
+defaults: {
+  authorizer: "iam",
+  function: {
+    bind: [table],
+  },
+},
 ```
 
 This tells our API that we want to use `AWS_IAM` across all our routes.
