@@ -18,12 +18,13 @@ Now let's get started with creating an API to handle billing. It's going to take
 $ npm install stripe
 ```
 
-{%change%} Create a new file in `packages/functions/src/billing.js` with the following.
+{%change%} Create a new file in `packages/functions/src/billing.ts` with the following.
 
-```js
+```ts
 import Stripe from "stripe";
 import handler from "@notes/core/handler";
 import { calculateCost } from "@notes/core/cost";
+import { Config } from "sst/node/config";
 
 export const main = handler(async (event) => {
   const { storage, source } = JSON.parse(event.body);
@@ -31,7 +32,9 @@ export const main = handler(async (event) => {
   const description = "Scratch charge";
 
   // Load our secret key from the  environment variables
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  const stripe = new Stripe(Config.STRIPE_SECRET_KEY, {
+    apiVersion: "2022-11-15",
+  });
 
   await stripe.charges.create({
     source,
@@ -60,10 +63,10 @@ Note, if you are testing this from India, you'll need to add some shipping infor
 
 Now let's implement our `calculateCost` method. This is primarily our _business logic_.
 
-{%change%} Create a `packages/core/src/cost.js` and add the following.
+{%change%} Create a `packages/core/src/cost.ts` and add the following.
 
-```js
-export function calculateCost(storage) {
+```ts
+export function calculateCost(storage: number) {
   const rate = storage <= 10 ? 4 : storage <= 100 ? 2 : 1;
   return rate * storage * 100;
 }
@@ -77,9 +80,9 @@ Clearly, our serverless infrastructure might be cheap but our service isn't!
 
 Let's add a new route for our billing API.
 
-{%change%} Add the following below the `DELETE /notes/{id}` route in `stacks/ApiStack.js`.
+{%change%} Add the following below the `DELETE /notes/{id}` route in `stacks/ApiStack.ts`.
 
-```js
+```ts
 "POST /billing": "packages/functions/src/billing.main",
 ```
 

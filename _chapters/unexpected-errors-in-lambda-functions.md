@@ -106,7 +106,7 @@ export const main = handler(async (event) => {
 
 Now we'll set our Lambda function to use the lowest memory allowed.
 
-{%change%} Add the following below the `defaults: {` line in your `stacks/ApiStack.js`.
+{%change%} Add the following below the `defaults: {` line in your `stacks/ApiStack.ts`.
 
 ```js
 memorySize: 128,
