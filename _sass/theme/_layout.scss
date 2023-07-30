@@ -1171,3 +1171,42 @@
   font-size: 20px;
   text-align: center;
 }
+
+/** Newsletter Embed */
+@mixin emailoctopus-embed {
+  #emailoctopus-embed-container {
+    input[type="email"] {
+      padding: 10px;
+      font-size: 18px;
+      height: auto;
+
+      @extend %newsletter-input;
+    }
+    input[type="submit"] {
+      margin-bottom: 0 !important;
+      padding: 17px 16px;
+      font-size: 15px;
+      white-space: nowrap;
+      text-transform: uppercase;
+      font-family: $base-font-family;
+      background-color: $important-color;
+      color: white;
+      border-radius: 4px;
+      line-height: 1.1;
+      transition: 0.3s;
+      cursor: pointer;
+      border: 0;
+      font-weight: 700;
+
+      &:hover {
+        background-color: lighten($important-color, 7%);
+      }
+
+    }
+    .emailoctopus-success-message {
+    }
+    .mastfoot.disabled {
+      display: none;
+    }
+  }
+}

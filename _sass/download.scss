@@ -235,6 +235,33 @@ main > .download-ebook-page {
           line-height: 1.375;
         }
 
+        @include emailoctopus-embed;
+
+        #emailoctopus-embed-container {
+          .emailoctopus-form-wrapper {
+            margin-top: 0 !important;
+          }
+          .emailoctopus-form-row {
+            margin-bottom: 0 !important;
+          }
+          .main-form {
+            flex-grow: 1;
+            gap: $spacing-unit / 2;
+          }
+          input[type="email"] {
+            padding: 10px;
+            width: 100%;
+            font-size: 20px;
+            height: auto;
+          }
+          input[type="submit"] {
+            padding: 0 15px;
+            height: 54px;
+            font-size: 18px;
+          }
+        }
+
+
         form {
           display: flex;
           align-items: stretch;

@@ -1660,7 +1660,7 @@
     }
   }
 
-  .form-container {
+  & > .form-container {
     margin: $spacing-unit auto 0;
     position: relative;
     padding: $spacing-unit;
@@ -1732,75 +1732,35 @@
     }
   }
 
-  .form {
-    flex: 0 auto;
+  @include emailoctopus-embed;
 
-    @include media-query($on-laptop) {
-      flex: 1 1 auto;
+  #emailoctopus-embed-container {
+    flex: 0 0 auto;
+
+    .emailoctopus-form-wrapper {
+      margin-top: 0 !important;
     }
-
-    p.email-octopus-error-message,
-    p.email-octopus-success-message {
-      margin: 0;
+    .emailoctopus-form-row {
+      margin-bottom: 0 !important;
     }
+    .main-form {
+      flex-grow: 1;
+      flex-wrap: nowrap;
+      gap: $spacing-unit / 2;
 
-    form {
-      display: flex;
-      align-items: stretch;
-      justify-content: center;
-
-      @include media-query($on-laptop) {
-        display: block;
+      @include media-query($on-palm) {
+        flex-wrap: wrap;
       }
+    }
+    input[type="submit"] {
+      font-size: 16px;
+      line-height: 18px;
+      padding: 0 25px;
+      height: 50px;
+      text-transform: none;
 
-      .email-octopus-form-row {
-        margin: 0;
-        flex: 1 1 auto;
-      }
-
-      input {
-        margin: 0;
-        padding: 11px 18px;
-        width: 240px;
-        font-size: 18px;
-        line-height: 32px;
-        height: auto;
-        @extend %newsletter-input;
-
-        @include media-query($on-palm) {
-          width: 100%;
-          max-width: none;
-          font-size: 15px;
-        }
-      }
-
-      .email-octopus-form-row-subscribe {
-        margin-top: 0;
-        margin-left: $spacing-unit;
-
-        @include media-query($on-laptop) {
-          margin-top: $spacing-unit - 10px;
-          margin-left: 0;
-        }
-      }
-
-      button {
-        margin: 0;
-
-        @extend %sst-button;
-        @extend %sst-button-outline;
-        @extend %sst-button-primary-pseudo;
-
-        color: white;
-        font-size: 16px;
-        box-shadow: none;
-        line-height: 18px;
-        padding: 17px 40px 16px;
-        background: $important-color;
-
-        @include media-query($on-monitor) {
-          width: 100%;
-        }
+      @include media-query($on-monitor) {
+        width: 100%;
       }
     }
   }

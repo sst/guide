@@ -306,7 +306,7 @@ description: "Build modern full-stack serverless applications on AWS with Next.j
       <p>Join {{ site.stats.newsletter }} readers from the biggest companies in the world. We'll also send you updates when new versions are published.</p>
     </div>
     <div class="form">
-      {% include email-octopus-form.html button_copy="Download" source="home" %}
+      {% include email-octopus-form.html %}
     </div>
     <img class="sparkle-left" src="/assets/lander/graphics/guide-sparkle-left.svg" />
     <img class="sparkle-right" src="/assets/lander/graphics/guide-sparkle-right.svg" />
