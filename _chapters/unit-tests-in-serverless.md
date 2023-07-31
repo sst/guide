@@ -20,9 +20,9 @@ SST comes with built in support for writing and running tests. It uses [Vitest](
 
 Let's start by writing a test for the CDK infrastructure in our app. We are going to keep this fairly simple for now.
 
-{%change%} Add the following to `stacks/test/StorageStack.test.js`.
+{%change%} Add the following to `stacks/test/StorageStack.test.ts`.
 
-```js
+```ts
 import { Template } from "aws-cdk-lib/assertions";
 import { initProject } from "sst/project";
 import { App, getStack } from "sst/constructs";
@@ -48,9 +48,9 @@ This is a very simple CDK test that checks if our storage stack creates a Dynamo
 
 We are also going to test the business logic in our Lambda functions.
 
-{%change%} Create a new file in `packages/core/test/cost.test.js` and add the following.
+{%change%} Create a new file in `packages/core/test/cost.test.ts` and add the following.
 
-```js
+```ts
 import { expect, test } from "vitest";
 import { calculateCost } from "../src/cost";
 
@@ -90,7 +90,7 @@ Now let's add a test script.
 
 {%change%} Add the following to the `scripts` in your `packages.json`.
 
-```js
+```ts
 "test": "sst bind vitest run",
 ```
 
@@ -103,8 +103,8 @@ $ npm test
 You should see something like this:
 
 ```bash
- ✓ packages/core/test/cost.test.js (3)
- ✓ stacks/test/StorageStack.test.js (1)
+ ✓ packages/core/test/cost.test.ts (3)
+ ✓ stacks/test/StorageStack.test.ts (1)
 
 Test Files  2 passed (2)
      Tests  4 passed (4)
