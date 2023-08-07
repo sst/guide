@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://sst.dev/">
-    <img alt="SST" src="https://raw.githubusercontent.com/serverless-stack/identity/main/variants/sst-full.svg" width="377" />
+    <img alt="SST" src="https://raw.githubusercontent.com/sst/identity/main/variants/sst-full.svg" width="377" />
   </a>
 </p>
 
@@ -38,7 +38,7 @@ The entire guide is hosted on GitHub and we use [Discourse][discourse] for our c
 
 ## Source for the Demo App
 
-- [Demo Notes App](https://github.com/serverless-stack/demo-notes-app)
+- [Demo Notes App](https://github.com/sst/demo-notes-app)
 
 We also have an alternative Serverless Framework version: [backend serverless API](https://github.com/AnomalyInnovations/serverless-stack-demo-api) & [frontend React app](https://github.com/AnomalyInnovations/serverless-stack-demo-client).
 

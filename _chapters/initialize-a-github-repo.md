@@ -30,7 +30,7 @@ Once your repository is created, copy the repository URL. We'll need this soon.
 In our case the URL is:
 
 ``` txt
-https://github.com/serverless-stack/demo-notes-app.git
+https://github.com/sst/demo-notes-app.git
 ```
 
 ### Initialize Your New Repo

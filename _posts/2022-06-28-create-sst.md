@@ -4,7 +4,7 @@ title: "`create sst`"
 author: jay
 ---
 
-Today we are launching [`create sst`](https://github.com/serverless-stack/sst/tree/master/packages/create-sst) — a CLI that helps you get started with SST. It creates a full-stack starter that you can use to build your serverless applications.
+Today we are launching [`create sst`](https://github.com/sst/sst/tree/master/packages/create-sst) — a CLI that helps you get started with SST. It creates a full-stack starter that you can use to build your serverless applications.
 
 While serverless has been around for a few years, there isn't a [Twelve-Factor App](https://12factor.net) setup for it.
 
