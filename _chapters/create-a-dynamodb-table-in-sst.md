@@ -81,7 +81,7 @@ This will take a minute to run.
 {%change%} Also remove the template files.
 
 ```bash
-$ rm stacks/MyStack.ts packages/core/src/time.ts packages/functions/src/lambda.ts
+$ rm stacks/MyStack.ts packages/functions/src/lambda.ts
 ```
 
 ### Add to the App
