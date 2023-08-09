@@ -13,7 +13,7 @@ We are now going to start creating our infrastructure in [SST]({{ site.sst_githu
 
 ### Create a Stack
 
-{%change%} Add the following to a new file in `stacks/StorageStack.js`.
+{%change%} Add the following to a new file in `stacks/StorageStack.ts`.
 
 ```js
 import { Table } from "sst/constructs";
