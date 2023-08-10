@@ -120,7 +120,7 @@ You should see something like this at the end of the deploy process.
    StorageStack
 ```
 
-You can also head over to the **DynamoDB** tab in the [SST Console]({{ site.console_url }}) and check out the new table.
+You can also head over to the **DynamoDB** tab in the [SST Console]({{ site.old_console_url }}) and check out the new table.
 
 ![SST Console DynamoDB tab](/assets/part2/sst-console-dynamodb-tab.png)
 

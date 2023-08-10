@@ -70,7 +70,7 @@ You should see that the API stack is being updated.
 
 Let's test the get notes API. In the [previous chapter]({% link _chapters/add-an-api-to-get-a-note.md %}) we tested our create note API. It should've returned the new note's id as the `noteId`.
 
-Head back to the **API** tab in the [SST Console]({{ site.console_url }}) and select the `/notes/{id}` API. You might have to refresh your console.
+Head back to the **API** tab in the [SST Console]({{ site.old_console_url }}) and select the `/notes/{id}` API. You might have to refresh your console.
 
 {%change%} Set the `noteId` as the **id** and click **Send**.
 

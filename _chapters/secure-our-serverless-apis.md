@@ -154,7 +154,7 @@ Making API request
 }
 ```
 
-It'll have created a new note for our test user in the **DynamoDB** tab of the [SST Console]({{ site.console_url }}).
+It'll have created a new note for our test user in the **DynamoDB** tab of the [SST Console]({{ site.old_console_url }}).
 
 ![SST Console test user new note](/assets/part2/sst-console-test-user-new-note.png)
 

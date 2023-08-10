@@ -58,7 +58,6 @@ SST v2.1.14  ready!
 
 →  App:     notes
    Stage:   Jay
-   Console: https://console.sst.dev/notes/Jay
 
 ✓  Deployed:
    API
@@ -69,13 +68,13 @@ The `ApiEndpoint` is the API we just created. Let's test our endpoint. If you op
 
 ![Serverless Hello World API invoked](/assets/part2/sst-hello-world-api-invoked.png)
 
-You can also head over to the **SST Console** link in your browser. The [SST Console]({{ site.docs_url }}/console) is a web based dashboard to manage your SST apps.
+You can also head over to the **SST Console** link in your browser — [**old.console.sst.dev**]({{ site.old_console_url }}). The [SST Console]({{ site.docs_url }}/console) is a web based dashboard to manage your SST apps.
 
 ![SST Console Local tab](/assets/part2/sst-console-local-tab.png)
 
-The **Local** tab shows you real-time logs from your apps.
+Note that, there's a newer version of the [SST Console]({{ site.console_url }}). We'll be updating the guide to use this soon. But for now let's use the older version.
 
-Note that when you hit this endpoint the Lambda function is being run locally.
+The **Local** tab shows you real-time logs from your apps. Here when you hit this endpoint the Lambda function is being run _locally_.
 
 ## Deploying to prod
 

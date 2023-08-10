@@ -149,7 +149,7 @@ You should see something like this at the end of the deploy process.
    UserPoolId: us-east-1_TYEz7XP7P
 ```
 
-You'll also see our new User Pool if you head over to the **Cognito** tab in the [SST Console]({{ site.console_url }}).
+You'll also see our new User Pool if you head over to the **Cognito** tab in the [SST Console]({{ site.old_console_url }}).
 
 ![SST Console Cognito tab](/assets/part2/sst-console-cognito-tab.png)
 

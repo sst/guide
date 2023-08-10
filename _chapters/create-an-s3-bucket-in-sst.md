@@ -61,7 +61,7 @@ You should see that the storage stack has been updated.
    StorageStack
 ```
 
-You can also head over to the **Buckets** tab in the [SST Console]({{ site.console_url }}) and check out the new bucket.
+You can also head over to the **Buckets** tab in the [SST Console]({{ site.old_console_url }}) and check out the new bucket.
 
 ![SST Console Buckets tab](/assets/part2/sst-console-buckets-tab.png)
 
