@@ -132,7 +132,7 @@ While this might look intimidating, just keep in mind that behind the scenes all
 If you are on Windows, use the command below. The space between each option is very important.
 
 ```bash
-$ npx aws-api-gateway-cli-test --username admin@example.com --password Passw0rd! --user-pool-id USER_POOL_ID --app-client-id USER_POOL_CLIENT_ID --cognito-region COGNITO_REGION --identity-pool-id IDENTITY_POOL_ID --invoke-url API_ENDPOINT --api-gateway-region API_REGION --path-template /notes --method POST --body "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}"
+$ npx aws-api-gateway-cli-test --username admin@example.com --password Passw0rd! --user-pool-id USER_POOL_ID --app-client-id USER_POOL_CLIENT_ID --cognito-region COGNITO_REGION --identity-pool-id IDENTITY_POOL_ID --invoke-url API_ENDPOINT --api-gateway-region API_REGION --path-template /notes --method POST --body '{""content\":\"hello world\",\"attachment\":\"hello.jpg\"}'
 ```
 
 If the command is successful, the response will look similar to this.
