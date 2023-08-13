@@ -112,7 +112,10 @@ export function ExampleStack({ stack, app }: StackContext) {
         type: "jwt",
         jwt: {
           issuer: `https://${process.env.AUTH0_DOMAIN}/`,
-          audience: [`https://${process.env.AUTH0_DOMAIN}/api/v2/`],
+          audience: [
+            `${process.env.AUTH0_CLIENT_ID}`,
+            `https://${process.env.AUTH0_DOMAIN}/api/v2/`,
+          ],
         },
       },
     },
