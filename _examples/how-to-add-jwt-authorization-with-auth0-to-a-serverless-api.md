@@ -84,6 +84,15 @@ Note, after deployment you need to replace these values with the deployed URL.
 
 ![Auth0 URLs setup](/assets/examples/api-auth-jwt-auth0/auth0-urls-setup.png)
 
+## Setting the Environment Variables
+
+Edit (or create) a file at the root of your project named `.env` and add the following to it:
+
+```
+AUTH0_DOMAIN=<YOUR_AUTH0_DOMAIN>
+AUTH0_CLIENT_ID=<YOUR_AUTH0_CLIENT_ID>
+```
+
 ## Setting up the API
 
 Let's start by setting up an API.
@@ -102,8 +111,8 @@ export function ExampleStack({ stack, app }: StackContext) {
       auth0: {
         type: "jwt",
         jwt: {
-          issuer: process.env.AUTH0_DOMAIN + "/",
-          audience: [process.env.AUTH0_DOMAIN + "/api/v2/"],
+          issuer: `https://${process.env.AUTH0_DOMAIN}/`,
+          audience: [`https://${process.env.AUTH0_DOMAIN}/api/v2/`],
         },
       },
     },
