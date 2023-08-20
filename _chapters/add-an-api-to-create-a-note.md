@@ -14,7 +14,7 @@ We'll first add an API to create a note. This API will take the note object as t
 
 ### Creating a Stack
 
-{%change%} Create a new file in `stacks/ApiStack.js` and add the following.
+{%change%} Create a new file in `stacks/ApiStack.ts` and add the following.
 
 ```js
 import { Api, use } from "sst/constructs";
@@ -83,7 +83,7 @@ stacks(app) {
 
 Now let's add the function that'll be creating our note.
 
-{%change%} Create a new file in `packages/functions/src/create.js` with the following.
+{%change%} Create a new file in `packages/functions/src/create.ts` with the following.
 
 ```js
 import * as uuid from "uuid";
@@ -194,7 +194,7 @@ Make a note of the `noteId`. We are going to use this newly created note in the 
 
 Before we move on to the next chapter, let's quickly refactor the code since we are going to be doing much of the same for all of our APIs.
 
-{%change%} Start by replacing our `create.js` with the following.
+{%change%} Start by replacing our `create.ts` with the following.
 
 ```js
 import { Table } from "sst/node/table";
@@ -231,7 +231,7 @@ This code doesn't work just yet but it shows you what we want to accomplish:
 
 Let's start by creating a `dynamodb` util that we can share across all our functions. We'll place this in the `packages/core` directory. This is where we'll be putting all our business logic.
 
-{%change%} Create a `packages/core/src/dynamodb.js` file with:
+{%change%} Create a `packages/core/src/dynamodb.ts` file with:
 
 ```js
 import AWS from "aws-sdk";
@@ -249,7 +249,7 @@ export default {
 
 Here we are creating a convenience object that exposes the DynamoDB client methods that we are going to need in this guide.
 
-{%change%} Also create a `packages/core/src/handler.js` file with the following.
+{%change%} Also create a `packages/core/src/handler.ts` file with the following.
 
 ```js
 export default function handler(lambda) {
@@ -283,7 +283,7 @@ Let's go over this in detail.
 - On success, we `JSON.stringify` the result and return it with a `200` status code.
 - If there is an error then we return the error message with a `500` status code.
 
-It's **important to note** that the `handler.js` needs to be **imported before we import anything else**. This is because we'll be adding some error handling to it later that needs to be initialized when our Lambda function is first invoked.
+It's **important to note** that the `handler.ts` needs to be **imported before we import anything else**. This is because we'll be adding some error handling to it later that needs to be initialized when our Lambda function is first invoked.
 
 Next, we are going to add the API to get a note given its id.
 
@@ -293,7 +293,7 @@ Next, we are going to add the API to get a note given its id.
 
 - Response `statusCode: 500`
 
-  If you see a `statusCode: 500` response when you invoke your function, the error has been reported by our code in the `catch` block. You'll see a `console.error` is included in our `handler.js` code above. Incorporating logs like these can help give you insight on issues and how to resolve them.
+  If you see a `statusCode: 500` response when you invoke your function, the error has been reported by our code in the `catch` block. You'll see a `console.error` is included in our `handler.ts` code above. Incorporating logs like these can help give you insight on issues and how to resolve them.
 
   ```js
   } catch (e) {

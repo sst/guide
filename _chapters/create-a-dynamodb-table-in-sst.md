@@ -13,7 +13,7 @@ We are now going to start creating our infrastructure in [SST]({{ site.sst_githu
 
 ### Create a Stack
 
-{%change%} Add the following to a new file in `stacks/StorageStack.js`.
+{%change%} Add the following to a new file in `stacks/StorageStack.ts`.
 
 ```js
 import { Table } from "sst/constructs";
@@ -81,7 +81,7 @@ This will take a minute to run.
 {%change%} Also remove the template files.
 
 ```bash
-$ rm stacks/MyStack.ts packages/core/src/time.ts packages/functions/src/lambda.ts
+$ rm stacks/MyStack.ts packages/functions/src/lambda.ts
 ```
 
 ### Add to the App
