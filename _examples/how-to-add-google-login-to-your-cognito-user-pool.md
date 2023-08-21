@@ -65,7 +65,7 @@ First, let's create a [Cognito User Pool](https://docs.aws.amazon.com/cognito/la
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import * as cognito from "aws-cdk-lib/aws-cognito";
 import { Api, Cognito, StackContext, StaticSite } from "sst/constructs";
 
@@ -107,14 +107,14 @@ Now let's add Google OAuth for our serverless app, to do so we need to create a 
 
 ![GCP Console API Credentials](/assets/examples/api-oauth-google/gcp-console-api-credentials.png)
 
-```ts
+```typescript
 GOOGLE_CLIENT_ID=<YOUR_GOOGLE_CLIENT_ID>
 GOOGLE_CLIENT_SECRET=<YOUR_GOOGLE_CLIENT_SECRET>
 ```
 
 {%change%} Add this below the `Cognito` definition in `stacks/ExampleStack.ts`.
 
-```ts
+```typescript
 // Throw error if client ID & secret are not provided
 if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET)
   throw new Error("Please set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET");
@@ -143,7 +143,7 @@ Now let's associate a Cognito domain to the user pool, which can be used for sig
 
 {%change%} Add below code in `stacks/ExampleStack.ts`.
 
-```ts
+```typescript
 // Create a cognito userpool domain
 const domain = auth.cdk.userPool.addDomain("AuthDomain", {
   cognitoDomain: {
@@ -158,7 +158,7 @@ Note, the `domainPrefix` need to be globally unique across all AWS accounts in a
 
 {%change%} Replace the `Api` definition with the following in `stacks/ExampleStacks.ts`.
 
-```ts
+```typescript
 // Create a HTTP API
 const api = new Api(stack, "Api", {
   authorizers: {
@@ -201,7 +201,7 @@ Let's create two functions, one handling the public route, and the other for the
 
 {%change%} Add a `packages/functions/src/public.ts`.
 
-```ts
+```typescript
 export async function handler() {
   return {
     statusCode: 200,
@@ -212,7 +212,7 @@ export async function handler() {
 
 {%change%} Add a `packages/functions/src/private.ts`.
 
-```ts
+```typescript
 export async function handler() {
   return {
     statusCode: 200,
@@ -227,7 +227,7 @@ To deploy a React app to AWS, we'll be using the SST [`StaticSite`]({{ site.docs
 
 {%change%} Replace the `stack.addOutputs` call with the following.
 
-```ts
+```typescript
 // Create a React Static Site
 const site = new StaticSite(stack, "Site", {
   path: "packages/frontend",

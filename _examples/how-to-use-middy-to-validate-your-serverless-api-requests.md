@@ -72,7 +72,7 @@ Let's start by adding the API.
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { Api, StackContext } from "sst/constructs";
 
 export function ExampleStack({ stack }: StackContext) {
@@ -94,7 +94,7 @@ We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to cr
 
 {%change%} Replace the code in `packages/functions/src/lambda.ts` with:
 
-```ts
+```typescript
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
@@ -193,7 +193,7 @@ Let's understand what the above packages are.
 
 {%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
-```ts
+```typescript
 import middy from "@middy/core";
 import validator from "@middy/validator";
 import httpErrorHandler from "@middy/http-error-handler";
@@ -251,7 +251,7 @@ While we are here, let's add response validation as well.
 
 {%change%} Replace `packages/functions/src/lambda.ts` with this:
 
-```ts
+```typescript
 import middy from "@middy/core";
 import validator from "@middy/validator";
 import httpErrorHandler from "@middy/http-error-handler";
@@ -325,13 +325,13 @@ Instead of returning a number for status code, we'll return a string instead.
 
 {%change%} Replace this line:
 
-```ts
+```typescript
 statusCode: 200,
 ```
 
 With this:
 
-```ts
+```typescript
 statusCode: "success",
 ```
 
@@ -343,7 +343,7 @@ Great! The server now throws a `500 Internal Server Error` to let us know that s
 
 {%change%} Let's change the status code back.
 
-```ts
+```typescript
 statusCode: 200,
 ```
 

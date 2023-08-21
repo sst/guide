@@ -47,7 +47,7 @@ Buckets by default are not publicly accessible, so we need to change the S3 Buck
 
 {%change%} Add the following bucket policy into the editor. Where `notes-app-client` is the name of our S3 bucket. Make sure to use the name of your bucket here.
 
-``` json
+```json
 {
   "Version":"2012-10-17",
   "Statement":[{

@@ -12,13 +12,12 @@ Now that we are able to create a new note, let's create a page where we can see 
 
 Currently, our Home container is very simple. Let's add the conditional rendering in there.
 
-{%change%} Replace our `src/containers/Home.js` with the following.
+{%change%} Replace our `src/containers/Home.tsx` with the following.
 
-```jsx
-import React, { useState, useEffect } from "react";
+```tsx
+import React, {useState} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import { useAppContext } from "../lib/contextLib";
-import { onError } from "../lib/errorLib";
+import {useAppContext} from "../lib/contextLib";
 import "./Home.css";
 
 export default function Home() {
@@ -26,7 +25,9 @@ export default function Home() {
   const { isAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
 
-  function renderNotesList(notes) {
+  function renderNotesList(notes: {
+    [key: string | symbol]: any;
+  }) {
     return null;
   }
 
@@ -54,13 +55,14 @@ export default function Home() {
     </div>
   );
 }
+
 ```
 
 We are doing a few things of note here:
 
 1. Rendering the lander or the list of notes based on `isAuthenticated` flag in our app context.
 
-   ```js
+   ```tsx
    {
      isAuthenticated ? renderNotes() : renderLander();
    }
@@ -68,9 +70,9 @@ We are doing a few things of note here:
 
 2. Store our notes in the state. Currently, it's empty but we'll be calling our API for it.
 
-3. Once we fetch our list we'll use the `renderNotesList` method to render the items in the list.
+3. Once we fetch our list we'll use the `renderNotesList` method to render the items in the list.  We temporarily added a generic object definition for the notes Type.
 
-4. We're using the [Bootstrap utility classes](https://getbootstrap.com/docs/4.5/utilities/spacing/) `pb-3` (padding bottom), `mt-4` (margin top), `mb-3` (margin bottom), and `border-bottom` to style the _Your Notes_ header.
+4. We're using the [Bootstrap utility classes](https://getbootstrap.com/docs/4.5/utilities/spacing/){:target="_blank"} `pb-3` (padding bottom), `mt-4` (margin top), `mb-3` (margin bottom), and `border-bottom` to style the _Your Notes_ header.
 
 And that's our basic setup! Head over to the browser and the homepage of our app should render out an empty list.
 

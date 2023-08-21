@@ -17,7 +17,7 @@ We are going to create a single page app using [React.js](https://facebook.githu
 {%change%} Run the following command in your project root.
 
 ```bash
-$ npx create-react-app frontend --use-npm
+$ pnpm dlx create-react-app frontend --use-pnpm --template typescript
 $ cd frontend
 ```
 
@@ -30,60 +30,70 @@ We also want to load the environment variables from our backend. To do this, we�
 {%change%} Run the following **in the `frontend/` directory**.
 
 ```bash
-$ npm install sst --save-dev
+$ pnpm add --save-dev sst
 ```
 
 Now to use this package, we'll add it to our `package.json` scripts.
 
 {%change%} Replace the `start` script in your `frontend/package.json`.
 
-```js
+```typescript
 "start": "react-scripts start",
 ```
 
 {%change%} With.
 
-```js
+```typescript
 "start": "sst bind react-scripts start",
+```
+
+### Add Frontend into the PNPM Workspace
+
+{%change%} Open pnpm-workspace.yaml and add -"frontend/". It should look like this:
+
+```yaml
+packages:
+  - "packages/**/*"
+  - "frontend/"
 ```
 
 ### Add the React App to SST
 
-We are going to be deploying our React app to AWS. To do that we'll be using the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite) construct.
+We are going to be deploying our React app to AWS. To do that we'll be using the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite){:target="_blank"} construct.
 
-{%change%} Create a new file in `stacks/FrontendStack.js` and add the following.
+{%change%} Create a new file in `stacks/FrontendStack.ts` and add the following.
 
-```js
-import { StaticSite, use } from "sst/constructs";
-import { ApiStack } from "./ApiStack";
-import { AuthStack } from "./AuthStack";
-import { StorageStack } from "./StorageStack";
+```typescript
+import {StackContext, StaticSite, use} from "sst/constructs";
+import {ApiStack} from "./ApiStack";
+import {AuthStack} from "./AuthStack";
+import {StorageStack} from "./StorageStack";
 
-export function FrontendStack({ stack, app }) {
-  const { api } = use(ApiStack);
-  const { auth } = use(AuthStack);
-  const { bucket } = use(StorageStack);
+export function FrontendStack({ stack, app }: StackContext) {
+    const { api } = use(ApiStack);
+    const { auth } = use(AuthStack);
+    const { bucket } = use(StorageStack);
 
-  // Define our React app
-  const site = new StaticSite(stack, "ReactSite", {
-    path: "frontend",
-    buildOutput: "build",
-    buildCommand: "npm run build",
-    // Pass in our environment variables
-    environment: {
-      REACT_APP_API_URL: api.customDomainUrl || api.url,
-      REACT_APP_REGION: app.region,
-      REACT_APP_BUCKET: bucket.bucketName,
-      REACT_APP_USER_POOL_ID: auth.userPoolId,
-      REACT_APP_IDENTITY_POOL_ID: auth.cognitoIdentityPoolId,
-      REACT_APP_USER_POOL_CLIENT_ID: auth.userPoolClientId,
-    },
-  });
+    // Define our React app
+    const site = new StaticSite(stack, "ReactSite", {
+        path: "frontend",
+        buildOutput: "build",
+        buildCommand: "npm run build",
+        // Pass in our environment variables
+        environment: {
+            REACT_APP_API_URL: api.url,
+            REACT_APP_REGION: app.region,
+            REACT_APP_BUCKET: bucket.bucketName,
+            REACT_APP_USER_POOL_ID: auth.userPoolId,
+            REACT_APP_IDENTITY_POOL_ID: auth.cognitoIdentityPoolId || '',
+            REACT_APP_USER_POOL_CLIENT_ID: auth.userPoolClientId,
+        },
+    });
 
-  // Show the url in the output
-  stack.addOutputs({
-    SiteUrl: site.url || "http://localhost:3000",
-  });
+    // Show the url in the output
+    stack.addOutputs({
+        SiteUrl: site.url || "http://localhost:3000",
+    });
 }
 ```
 
@@ -92,16 +102,18 @@ We are creating a new stack in SST. We could've used one of the existing stacks 
 We are doing a couple of things of note here:
 
 1. We are pointing our `StaticSite` construct to the `frontend/` directory where our React app is.
-2. We are passing in the outputs from our other stacks as [environment variables in React](https://create-react-app.dev/docs/adding-custom-environment-variables/). This means that we won't have to hard code them in our React app. You can read more about this over in our chapter on, [Setting serverless environments variables in a React app]({% link _chapters/setting-serverless-environments-variables-in-a-react-app.md %}).
+2. We are passing in the outputs from our other stacks as [environment variables in React](https://create-react-app.dev/docs/adding-custom-environment-variables/){:target="_blank"}. This means that we won't have to hard code them in our React app. You can read more about this over in our chapter on, [Setting serverless environments variables in a React app]({% link _chapters/setting-serverless-environments-variables-in-a-react-app.md %}){:target="_blank"}.
 3. And finally, we are outputting out the URL of our React app.
 
 ### Adding to the app
 
 Let's add this new stack to the rest of our app.
 
-{%change%} Replace the `stacks` function in `sst.config.ts` with.
+Open `sst.config.ts` and add the following.
 
-```js
+{%change%} Replace the `stacks` function with:
+
+```typescript
 stacks(app) {
   app
     .stack(StorageStack)
@@ -111,19 +123,13 @@ stacks(app) {
 },
 ```
 
-{%change%} Also, import the new stack at the top.
+{%change%} And add the following import.
 
-```js
+```typescript
 import { FrontendStack } from "./stacks/FrontendStack";
 ```
 
-### Deploy the Changes
-
-If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
-
-Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
-
-You should see that the new frontend stack has been deployed.
+{%deploy%}
 
 ```bash
 ✓  Deployed:
@@ -139,12 +145,21 @@ Let’s start our React development environment.
 {%change%} In the `frontend/` directory run.
 
 ```bash
-$ npm start
+$ pnpm start
 ```
 
 This should fire up the newly created app in your browser.
 
 ![New Create React App screenshot](/assets/new-create-react-app.png)
+
+{%aside%}
+If you receive an error along the lines of `Plugin "react" was conflicted between "package.json » eslint-config-react-app` try restarting the frontend script.  If that doesn't work, try installing eslint in frontend and configure it as you wish.  If that doesn't work, editing and re-saving package.json seems to clear the error temporarily.
+
+```bash
+$ pnpm install eslint --save-dev
+$ pnpm exec eslint --init
+```
+{%endaside%}
 
 ### Change the Title
 

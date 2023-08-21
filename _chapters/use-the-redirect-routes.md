@@ -11,18 +11,11 @@ ref: use-the-redirect-routes
 
 Now that we created the `AuthenticatedRoute` and `UnauthenticatedRoute` in the last chapter, let's use them on the containers we want to secure.
 
-{%change%} First import them in the header of `src/Routes.js`.
+{%change%} First, we switch to our new redirect routes.
 
-```js
-import AuthenticatedRoute from "./components/AuthenticatedRoute";
-import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
-```
+So the following routes in `src/Routes.tsx` would be affected.
 
-Next, we simply switch to our new redirect routes.
-
-So the following routes in `src/Routes.js` would be affected.
-
-```jsx
+```tsx
 <Route path="/login" element={<Login />} />
 <Route path="/signup" element={<Signup />} />
 <Route path="/settings" element={<Settings />} />
@@ -32,7 +25,7 @@ So the following routes in `src/Routes.js` would be affected.
 
 {%change%} They should now look like so:
 
-```jsx
+```tsx
 <Route
   path="/login"
   element={
@@ -74,6 +67,12 @@ So the following routes in `src/Routes.js` would be affected.
     </AuthenticatedRoute>
   }
 />
+```
+{%change%} Then import them in the header of `src/Routes.tsx`.
+
+```tsx
+import AuthenticatedRoute from "./components/AuthenticatedRoute";
+import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
 ```
 
 And now if we tried to load a note page while not logged in, we would be redirected to the login page with a reference to the note page.

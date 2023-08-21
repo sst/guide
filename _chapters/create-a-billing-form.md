@@ -13,24 +13,29 @@ Now our settings page is going to have a form that will take a user's credit car
 {%change%} Run the following in the `frontend/` directory and **not** in your project root.
 
 ```bash
-$ npm install @stripe/react-stripe-js
+$ pnpm add @stripe/react-stripe-js --save
 ```
 
 Next let's create our billing form component.
 
-{%change%} Add the following to a new file in `src/components/BillingForm.js`.
+{%change%} Add the following to a new file in `src/components/BillingForm.tsx`.
 
 {% raw %}
 
-```jsx
-import React, { useState } from "react";
+```tsx
+import React, {FormEventHandler, useState} from "react";
 import Form from "react-bootstrap/Form";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import LoaderButton from "./LoaderButton";
+import LoaderButton from "../components/LoaderButton";
 import { useFormFields } from "../lib/hooksLib";
 import "./BillingForm.css";
 
-export default function BillingForm({ isLoading, onSubmit }) {
+interface BillingFormType {
+  isLoading: boolean,
+  onSubmit: React.FormEvent
+}
+
+export default function BillingForm({ isLoading, onSubmit }: BillingFormType) {
   const stripe = useStripe();
   const elements = useElements();
   const [fields, handleFieldChange] = useFormFields({
@@ -52,7 +57,7 @@ export default function BillingForm({ isLoading, onSubmit }) {
     );
   }
 
-  async function handleSubmitClick(event) {
+  async function handleSubmitClick(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (!stripe || !elements) {
@@ -61,9 +66,17 @@ export default function BillingForm({ isLoading, onSubmit }) {
       return;
     }
 
+    if (!elements.getElement(CardElement)) {
+      return;
+    }
+
     setIsProcessing(true);
 
     const cardElement = elements.getElement(CardElement);
+
+    if (!cardElement) {
+      return;
+    }
 
     const { token, error } = await stripe.createToken(cardElement);
 
@@ -74,53 +87,54 @@ export default function BillingForm({ isLoading, onSubmit }) {
 
   return (
     <Form className="BillingForm" onSubmit={handleSubmitClick}>
-      <Form.Group size="lg" controlId="storage">
-        <Form.Label>Storage</Form.Label>
-        <Form.Control
-          min="0"
-          type="number"
-          value={fields.storage}
-          onChange={handleFieldChange}
-          placeholder="Number of notes to store"
-        />
-      </Form.Group>
-      <hr />
-      <Form.Group size="lg" controlId="name">
-        <Form.Label>Cardholder&apos;s name</Form.Label>
-        <Form.Control
-          type="text"
-          value={fields.name}
-          onChange={handleFieldChange}
-          placeholder="Name on the card"
-        />
-      </Form.Group>
-      <Form.Label>Credit Card Info</Form.Label>
-      <CardElement
-        className="card-field"
-        onChange={(e) => setIsCardComplete(e.complete)}
-        options={{
-          style: {
-            base: {
-              fontSize: "16px",
-              fontWeight: "400",
-              color: "#495057",
-              fontFamily: "'Open Sans', sans-serif",
-            },
-          },
-        }}
-      />
-      <LoaderButton
-        block="true"
-        size="lg"
-        type="submit"
-        isLoading={isLoading}
-        disabled={!validateForm()}
-      >
-        Purchase
-      </LoaderButton>
-    </Form>
-  );
+  <Form.Group controlId="storage">
+    <Form.Label>Storage</Form.Label>
+    <Form.Control
+  min="0"
+  type="number"
+  value={fields.storage}
+  onChange={handleFieldChange}
+  placeholder="Number of notes to store"
+  />
+  </Form.Group>
+  <hr />
+  <Form.Group controlId="name">
+    <Form.Label>Cardholder&apos;s name</Form.Label>
+  <Form.Control
+  type="text"
+  value={fields.name}
+  onChange={handleFieldChange}
+  placeholder="Name on the card"
+    />
+    </Form.Group>
+    <Form.Label>Credit Card Info</Form.Label>
+  <CardElement
+  className="card-field"
+  onChange={(e) => setIsCardComplete(e.complete)}
+  options={{
+    style: {
+      base: {
+        fontSize: "16px",
+          fontWeight: "400",
+          color: "#495057",
+          fontFamily: "'Open Sans', sans-serif",
+      },
+    },
+  }}
+  />
+  <LoaderButton
+  block="true"
+
+  type="submit"
+  isLoading={isLoading}
+  disabled={!validateForm()}
+>
+  Purchase
+  </LoaderButton>
+  </Form>
+);
 }
+
 ```
 
 {% endraw %}
@@ -164,5 +178,9 @@ Also, let's add some styles to the card field so it matches the rest of our UI.
 ```
 
 These styles might look complicated. But we are just copying them from the other form fields on the page to make sure that the card field looks like them.
+
+{%note%}
+You may need to restart the frontend to pickup the new stripe libraries.
+{%endnote%}
 
 Next we'll plug our form into the settings page.

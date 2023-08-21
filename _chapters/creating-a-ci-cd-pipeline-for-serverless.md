@@ -20,7 +20,7 @@ So to recap, here's what we've created so far.
 - [A way to run unit tests for our infrastructure and functions]({% link _chapters/unit-tests-in-serverless.md %})
 - [Deployed to a prod environment with a custom domain]({% link _chapters/custom-domains-in-serverless-apis.md %})
 
-All of this is neatly [committed in a Git repo]({{ site.sst_demo_repo }}).
+All of this is neatly [committed in a Git repo]({{ site.sst_demo_repo }}){:target="_blank"}.
 
 So far we've been deploying our app locally through our command line. But if we had multiple people on our team, or if we were working on different features at the same time, we won't be able to work on our app because the changes would overwrite each other.
 
@@ -40,13 +40,13 @@ Here is what our workflow is going to look like:
   - Built
   - And deployed to prod
 
-Our workflow is fairly simple. But as your team grows, you'll need to add additionaly dev and staging environments.
+Our workflow is fairly simple. But as your team grows, you'll need to add additionally dev and staging environments.
 
 ### CI/CD for Serverless
 
-There are many common CI/CD services, like [Travis CI](https://travis-ci.org) or [CircleCI](https://circleci.com). These usually require you to manually configure the above pipeline. It involves a fair bit of scripts and configuration.
+There are many common CI/CD services, like [Travis CI](https://travis-ci.org){:target="_blank"} or [CircleCI](https://circleci.com){:target="_blank"}. These usually require you to manually configure the above pipeline. It involves a fair bit of scripts and configuration.
 
-To fix this we created a service called [**Seed**](https://seed.run). It requires no scripts and is built specifically for serverless. It also allows you to monitor and debug your serverless app. This is something we'll be doing later in the guide.
+To fix this we created a service called [**Seed**](https://seed.run){:target="_blank"}. It requires no scripts and is built specifically for serverless. It also allows you to monitor and debug your serverless app. This is something we'll be doing later in the guide.
 
 We should mention that you don't have to use Seed. And this section is completely optional.
 

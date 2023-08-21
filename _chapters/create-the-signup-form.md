@@ -4,7 +4,7 @@ title: Create the Signup Form
 date: 2017-01-20 00:00:00
 lang: en
 ref: create-the-signup-form
-description: We are going to create a signup page for our React.js app. To sign up users with Amazon Cognito, we need to create a form that allows users to enter a cofirmation code that is emailed to them.
+description: We are going to create a signup page for our React.js app. To sign up users with Amazon Cognito, we need to create a form that allows users to enter a confirmation code that is emailed to them.
 comments_id: create-the-signup-form/52
 ---
 
@@ -12,16 +12,16 @@ Let's start by creating the signup form that'll get the user's email and passwor
 
 ### Add the Container
 
-{%change%} Create a new container at `src/containers/Signup.js` with the following.
+{%change%} Create a new container at `src/containers/Signup.tsx` with the following.
 
-```jsx
-import React, { useState } from "react";
+```tsx
+import React, {useState} from "react";
 import Form from "react-bootstrap/Form";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
-import { useAppContext } from "../lib/contextLib";
-import { useFormFields } from "../lib/hooksLib";
-import { onError } from "../lib/errorLib";
+import {useAppContext} from "../lib/contextLib";
+import {ISignUpResult} from "amazon-cognito-identity-js";
+import {useFormFields} from "../lib/hooksLib";
 import "./Signup.css";
 
 export default function Signup() {
@@ -32,7 +32,7 @@ export default function Signup() {
     confirmationCode: "",
   });
   const nav = useNavigate();
-  const [newUser, setNewUser] = useState(null);
+  const [newUser, setNewUser] = useState<null | ISignUpResult>(null);
   const { userHasAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -48,14 +48,14 @@ export default function Signup() {
     return fields.confirmationCode.length > 0;
   }
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading(true);
-    setNewUser("test");
+    setNewUser(fields);
     setIsLoading(false);
   }
 
-  async function handleConfirmationSubmit(event) {
+  async function handleConfirmationSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading(true);
   }
@@ -63,7 +63,7 @@ export default function Signup() {
   function renderConfirmationForm() {
     return (
       <Form onSubmit={handleConfirmationSubmit}>
-        <Form.Group controlId="confirmationCode" size="lg">
+        <Form.Group controlId="confirmationCode">
           <Form.Label>Confirmation Code</Form.Label>
           <Form.Control
             autoFocus
@@ -75,7 +75,7 @@ export default function Signup() {
         </Form.Group>
         <LoaderButton
           block="true"
-          size="lg"
+
           type="submit"
           variant="success"
           isLoading={isLoading}
@@ -90,7 +90,7 @@ export default function Signup() {
   function renderForm() {
     return (
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="email" size="lg">
+        <Form.Group controlId="email">
           <Form.Label>Email</Form.Label>
           <Form.Control
             autoFocus
@@ -99,7 +99,7 @@ export default function Signup() {
             onChange={handleFieldChange}
           />
         </Form.Group>
-        <Form.Group controlId="password" size="lg">
+        <Form.Group controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
@@ -107,7 +107,7 @@ export default function Signup() {
             onChange={handleFieldChange}
           />
         </Form.Group>
-        <Form.Group controlId="confirmPassword" size="lg">
+        <Form.Group controlId="confirmPassword">
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type="password"
@@ -117,7 +117,7 @@ export default function Signup() {
         </Form.Group>
         <LoaderButton
           block="true"
-          size="lg"
+
           type="submit"
           variant="success"
           isLoading={isLoading}
@@ -135,6 +135,7 @@ export default function Signup() {
     </div>
   );
 }
+
 ```
 
 Most of the things we are doing here are fairly straightforward but let's go over them quickly.
@@ -153,7 +154,7 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 4. We are setting the `autoFocus` flags on the email and the confirmation code fields.
 
-   ```coffee
+   ```tsx
    <Form.Control
      autoFocus
      type="email"
@@ -164,7 +165,7 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 6. And you'll notice we are using the `useFormFields` custom React Hook that we [previously created]({% link _chapters/create-a-custom-react-hook-to-handle-form-fields.md %}) to handle our form fields.
 
-   ```js
+   ```typescript
    const [fields, handleFieldChange] = useFormFields({
      email: "",
      password: "",
@@ -190,20 +191,24 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 ### Add the Route
 
-{%change%} Finally, add our container as a route in `src/Routes.js` below our login route.
+{%change%} Finally, add our container as a route in `src/Routes.tsx` below our login route.
 
-```jsx
+```tsx
 <Route path="/signup" element={<Signup />} />
 ```
 
 {%change%} And include our component in the header.
 
-```js
+```typescript
 import Signup from "./containers/Signup";
 ```
 
-Now if we switch to our browser and navigate to the signup page we should see our newly created form. Our form doesn't do anything when we enter in our info but you can still try to fill in an email address, password, and the confirmation code. It'll give you an idea of how the form will behave once we connect it to Cognito.
+Now if we switch to our browser and navigate to the signup page we should see our newly created form. Our form doesn't do anything when we enter in our info but you can still try to fill in an email address, password, and confirmation password. 
 
 ![Signup page added screenshot](/assets/signup-page-added.png)
+
+Then, after hitting submit, you'll get the confirmation code form.  This'll give you an idea of how the form will behave once we connect it to Cognito.
+
+![Signup page added screenshot](/assets/signup-page-confirmation-code.png)
 
 Next, let's connect our signup form to Amazon Cognito.

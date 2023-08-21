@@ -612,3 +612,28 @@ main > .guide-page > .table-of-contents {
     }
   }
 }
+.extra-info {
+  color: darkslateblue;
+}
+.aside-info {
+  //width: 30%;
+  padding: 8px;
+  margin: 15px 0 15px 15px;
+  //float: right;
+  font-style: italic;
+  background-color: #f3ffff;
+  border-left: solid 3px darkslateblue;
+}
+
+
+
+.extra-note {
+  color: navy;
+}
+.aside-note {
+  padding-left: 15px;
+  margin-left: 15px;
+  font-style: italic;
+  border-left: solid 3px navy;
+  background-color: #f3ffff;
+}

@@ -16,21 +16,21 @@ Let's start by installing React Router.
 
 ### Installing React Router
 
-{%change%} Run the following command in the `frontend/` directory and **not** in your project root.
+{%change%} Run the following command **in the `frontend/` directory** and **not** in your project root.
 
 ```bash
-$ npm install react-router-dom
+$ pnpm add --save react-router-dom
 ```
 
-This installs the NPM package and adds the dependency to the `package.json` of your React app.
+This installs the package and adds the dependency to  `package.json` in your React app.
 
 ### Setting up React Router
 
-Even though we don't have any routes set up in our app, we can get the basic structure up and running. Our app currently runs from the `App` component in `src/App.js`. We are going to be using this component as the container for our entire app. To do that we'll encapsulate our `App` component within a `Router`.
+Even though we don't have any routes set up in our app, we can get the basic structure up and running. Our app currently runs from the `App` component in `src/App.tsx`. We are going to be using this component as the container for our entire app. To do that we'll encapsulate our `App` component within a `Router`.
 
-{%change%} Replace the following code in `src/index.js`:
+{%change%} Replace the following code in `src/index.tsx`:
 
-```jsx
+```tsx
 root.render(
   <React.StrictMode>
     <App />
@@ -40,7 +40,7 @@ root.render(
 
 {%change%} With this:
 
-```jsx
+```tsx
 root.render(
   <React.StrictMode>
     <Router>
@@ -50,9 +50,9 @@ root.render(
 );
 ```
 
-{%change%} And import this in the header of `src/index.js`.
+{%change%} And import this in the header of `src/index.tsx`.
 
-```jsx
+```tsx
 import { BrowserRouter as Router } from "react-router-dom";
 ```
 

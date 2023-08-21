@@ -1,10 +1,10 @@
-<p align="center">
+<p style="text-align: center;">
   <a href="https://sst.dev/">
     <img alt="SST" src="https://raw.githubusercontent.com/sst/identity/main/variants/sst-full.svg" width="377" />
   </a>
 </p>
 
-<p align="center">
+<p style="text-align: center;">
   <a href="https://discourse.sst.dev"><img alt="Discourse posts" src="https://img.shields.io/discourse/https/discourse.sst.dev/posts.svg?style=for-the-badge" /></a>
   <a href="https://twitter.com/SST_dev"><img alt="Twitter follow" src="https://img.shields.io/twitter/follow/SST_dev.svg?label=twitter&style=for-the-badge" /></a>
   <a href="https://sst.dev/discord"><img alt="Chat on Discord" src="https://img.shields.io/discord/983865673656705025?style=for-the-badge" /></a> 

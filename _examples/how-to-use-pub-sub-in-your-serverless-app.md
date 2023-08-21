@@ -64,7 +64,7 @@ An SST app is made up of two parts.
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { Api, StackContext, Topic } from "sst/constructs";
 
 export function ExampleStack({ stack }: StackContext) {
@@ -86,7 +86,7 @@ Now let's add the API.
 
 {%change%} Add this below the `Topic` definition in `stacks/ExampleStack.ts`.
 
-```ts
+```typescript
 // Create the HTTP API
 const api = new Api(stack, "Api", {
   defaults: {
@@ -116,7 +116,7 @@ We will create three functions, one handling the `/order` API request, and two f
 
 {%change%} Add a `packages/functions/src/order.ts`.
 
-```ts
+```typescript
 export async function main() {
   console.log("Order confirmed!");
   return {
@@ -128,7 +128,7 @@ export async function main() {
 
 {%change%} Add a `packages/functions/src/receipt.ts`.
 
-```ts
+```typescript
 import { SNSEvent } from "aws-lambda";
 
 export async function main(event: SNSEvent) {
@@ -141,7 +141,7 @@ export async function main(event: SNSEvent) {
 
 {%change%} Add a `packages/functions/src/shipping.ts`.
 
-```ts
+```typescript
 import { SNSEvent } from "aws-lambda";
 
 export async function main(event: SNSEvent) {
@@ -186,7 +186,7 @@ Now let's publish a message to our topic.
 
 {%change%} Replace the `packages/functions/src/order.ts` with the following.
 
-```ts
+```typescript
 import AWS from "aws-sdk";
 import { Topic } from "sst/node/topic";
 

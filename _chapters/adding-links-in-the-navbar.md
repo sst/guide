@@ -10,9 +10,9 @@ comments_id: adding-links-in-the-navbar/141
 
 Now that we have our first route set up, let's add a couple of links to the navbar of our app. These will direct users to login or signup for our app when they first visit it.
 
-{%change%} Replace the `App` function component in `src/App.js` with the following.
+{%change%} Replace the `App` function component in `src/App.tsx` with the following.
 
-```jsx
+```tsx
 function App() {
   return (
     <div className="App container py-3">
@@ -40,9 +40,9 @@ We also added a link to the _Scratch_ logo. It links back to the homepage of our
 
 And let's include the `Nav` component in the header.
 
-{%change%} Add the following import to the top of your `src/App.js`.
+{%change%} Add the following import to the top of your `src/App.tsx`.
 
-```jsx
+```tsx
 import Nav from "react-bootstrap/Nav";
 ```
 
@@ -52,25 +52,20 @@ Now if you flip over to your browser, you should see the links in our navbar.
 
 Unfortunately, when you click on them they refresh your browser while redirecting to the link. We need it to route it to the new link without refreshing the page since we are building a single page app.
 
-To fix this we need a component that works with React Router and React Bootstrap called [React Router Bootstrap](https://github.com/react-bootstrap/react-router-bootstrap). It can wrap around your `Navbar` links and use the React Router to route your app to the required link without refreshing the browser.
+To fix this we need a component that works with React Router and React Bootstrap called [React Router Bootstrap](https://github.com/react-bootstrap/react-router-bootstrap){:target="_blank"}. It can wrap around your `Navbar` links and use the React Router to route your app to the required link without refreshing the browser.
 
 {%change%} Run the following command in the `frontend/` directory and **not** in your project root.
 
 ```bash
-$ npm install react-router-bootstrap
+$ pnpm add --save react-router-bootstrap;pnpm add --save-dev @types/react-router-bootstrap
 ```
+{%aside%}
+You may need to restart the frontend script after this step.
+{%endaside%}
 
-Let's also import it.
+{%change%} We will now wrap our links with the `LinkContainer`. Replace the `App` function component in your `src/App.tsx` with this.
 
-{%change%} Add this to the top of your `src/App.js`.
-
-```jsx
-import { LinkContainer } from "react-router-bootstrap";
-```
-
-{%change%} We will now wrap our links with the `LinkContainer`. Replace the `App` function component in your `src/App.js` with this.
-
-```jsx
+```tsx
 function App() {
   return (
     <div className="App container py-3">
@@ -96,9 +91,17 @@ function App() {
 }
 ```
 
+Let's also import it.
+
+{%change%} Add this to the top of your `src/App.tsx`.
+
+```tsx
+import { LinkContainer } from "react-router-bootstrap";
+```
+
 We are doing one other thing here. We are grabbing the current path the user is on from the `window.location` object. And we set it as the `activeKey` of our `Nav` component. This'll highlight the link when we are on that page.
 
-```jsx
+```tsx
 <Nav activeKey={window.location.pathname}>
 ```
 

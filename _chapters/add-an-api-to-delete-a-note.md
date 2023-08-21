@@ -12,26 +12,34 @@ Finally, we are going to create an API that allows a user to delete a given note
 
 ### Add the Function
 
-{%change%} Create a new file in `packages/functions/src/delete.js` and paste the following.
+{%change%} Create a new file in `packages/functions/src/delete.ts` and paste the following.
 
-```js
-import { Table } from "sst/node/table";
+```typescript
 import handler from "@notes/core/handler";
+import { APIGatewayProxyEvent } from 'aws-lambda';
+import { Table } from "sst/node/table";
 import dynamoDb from "@notes/core/dynamodb";
 
-export const main = handler(async (event) => {
-  const params = {
-    TableName: Table.Notes.tableName,
-    // 'Key' defines the partition key and sort key of the item to be removed
-    Key: {
-      userId: "123", // The id of the author
-      noteId: event.pathParameters.id, // The id of the note from the path
-    },
-  };
+export const main = handler(async (event: APIGatewayProxyEvent) => {
 
-  await dynamoDb.delete(params);
+    let path_id
+    if (!event.pathParameters || !event.pathParameters.id || event.pathParameters.id.length == 0) {
+        throw new Error("Please provide the 'id' parameter.");
+    } else {
+        path_id = event.pathParameters.id
+    }
 
-  return { status: true };
+    const params = {
+        TableName: Table.Notes.tableName,
+        Key: {
+            userId: "123", // The id of the author
+            noteId: path_id, // The id of the note from the path
+        },
+    };
+
+    await dynamoDb.delete(params);
+
+    return { status: true };
 });
 ```
 
@@ -41,19 +49,13 @@ This makes a DynamoDB `delete` call with the `userId` & `noteId` key to delete t
 
 Let's add a new route for the delete note API.
 
-{%change%} Add the following below the `PUT /notes{id}` route in `stacks/ApiStack.js`.
+{%change%} Add the following below the `PUT /notes{id}` route in `stacks/ApiStack.ts`.
 
-```js
+```typescript
 "DELETE /notes/{id}": "packages/functions/src/delete.main",
 ```
 
-### Deploy Our Changes
-
-If you switch over to your terminal, you'll notice that your changes are being deployed.
-
-Note that, you'll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
-
-You should see that the API stack is being updated.
+{%deploy%}
 
 ```bash
 ✓  Deployed:

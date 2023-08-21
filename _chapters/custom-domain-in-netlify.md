@@ -56,7 +56,7 @@ This will show you the instructions for setting up your domain through Route 53.
 
 ### DNS Settings in Route 53
 
-To do this we need to head back to the [AWS Console](https://console.aws.amazon.com/). and search for Route 53 as the service.
+To do this we need to go to the [AWS Console](https://console.aws.amazon.com/). and search for Route 53 as the service.
 
 ![Select Route 53 service screenshot](/assets/select-route-53-service.png)
 

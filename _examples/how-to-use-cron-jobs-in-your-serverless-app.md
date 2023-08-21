@@ -64,7 +64,7 @@ Let's start by creating a cron job.
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { Cron, StackContext } from "sst/constructs";
 
 export function ExampleStack({ stack }: StackContext) {
@@ -83,7 +83,7 @@ Now in our function, we'll print out a message every time the function is run.
 
 {%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
-```ts
+```typescript
 export async function main() {
   console.log("Hi!");
   return {};
@@ -144,7 +144,7 @@ $ npm install node-fetch
 
 {%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
-```ts
+```typescript
 import fetch from "node-fetch";
 
 export async function main() {

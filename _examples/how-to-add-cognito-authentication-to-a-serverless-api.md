@@ -64,7 +64,7 @@ Let's start by setting up an API.
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { Api, Cognito, StackContext } from "sst/constructs";
 
 export function ExampleStack({ stack }: StackContext) {
@@ -102,7 +102,7 @@ By default, all routes have the authorization type `AWS_IAM`. This means the cal
 
 {%change%} Add this below the `Api` definition in `stacks/ExampleStack.ts`.
 
-```ts
+```typescript
 // Create auth provider
 const auth = new Cognito(stack, "Auth", {
   login: ["email"],
@@ -118,7 +118,7 @@ This also creates a Cognito Identity Pool which assigns IAM permissions to users
 
 {%change%} Replace the `stack.addOutputs` call with the following.
 
-```ts
+```typescript
 stack.addOutputs({
   ApiEndpoint: api.url,
   UserPoolId: auth.userPoolId,
@@ -135,7 +135,7 @@ We will create two functions, one for the public route, and one for the private 
 
 {%change%} Add a `packages/functions/src/public.ts`.
 
-```ts
+```typescript
 export async function main() {
   return {
     statusCode: 200,
@@ -146,7 +146,7 @@ export async function main() {
 
 {%change%} Add a `packages/functions/src/private.ts`.
 
-```ts
+```typescript
 export async function main() {
   return {
     statusCode: 200,
@@ -278,7 +278,7 @@ Let's make a quick change to our private route to print out the caller's user id
 
 {%change%} Replace `packages/functions/src/private.ts` with the following.
 
-```ts
+```typescript
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 export const main: APIGatewayProxyHandlerV2 = async (event) => {

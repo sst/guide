@@ -14,18 +14,18 @@ Let's now add an attachment to our note. The flow we are using here is very simp
 2. The file is uploaded to S3 under the user's folder and we get a key back.
 3. Create a note with the file key as the attachment.
 
-We are going to use the Storage module that AWS Amplify has. If you recall, that back in the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter we allow a logged in user access to a folder inside our S3 Bucket. AWS Amplify stores directly to this folder if we want to _privately_ store a file.
+We are going to use the Storage module that AWS Amplify has. If you recall, that back in the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}){:target="_blank"} chapter we allow a logged in user access to a folder inside our S3 Bucket. AWS Amplify stores directly to this folder if we want to _privately_ store a file.
 
 Also, just looking ahead a bit; we will be uploading files when a note is created and when a note is edited. So let's create a simple convenience method to help with that.
 
 ### Upload to S3
 
-{%change%} Create `src/lib/awsLib.js` and add the following:
+{%change%} Create `src/lib/awsLib.ts` and add the following:
 
-```js
+```typescript
 import { Storage } from "aws-amplify";
 
-export async function s3Upload(file) {
+export async function s3Upload(file: File) {
   const filename = `${Date.now()}-${file.name}`;
 
   const stored = await Storage.vault.put(filename, file, {
@@ -50,10 +50,10 @@ The above method does a couple of things.
 
 Now that we have our upload methods ready, let's call them from the create note method.
 
-{%change%} Replace the `handleSubmit` method in `src/containers/NewNote.js` with the following.
+{%change%} Replace the `handleSubmit` method in `src/containers/NewNote.tsx` with the following.
 
-```js
-async function handleSubmit(event) {
+```tsx
+async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
   event.preventDefault();
 
   if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
@@ -79,9 +79,9 @@ async function handleSubmit(event) {
 }
 ```
 
-{%change%} And make sure to include `s3Upload` by adding the following to the header of `src/containers/NewNote.js`.
+{%change%} And make sure to include `s3Upload` by adding the following to the header of `src/containers/NewNote.tsx`.
 
-```js
+```tsx
 import { s3Upload } from "../lib/awsLib";
 ```
 
@@ -94,3 +94,19 @@ The change we've made in the `handleSubmit` is that:
 Now when we switch over to our browser and submit the form with an uploaded file we should see the note being created successfully. And the app being redirected to the homepage.
 
 Next up we are going to allow users to see a list of the notes they've created.
+
+### Troubleshooting Tips
+
+_Sept 2020_
+
+No useful HTTP error codes will show up in the error alert message, you’ll simply get “Network Error”. Look in Chrome dev tools > Network tab as you’re saving the note.
+
+* Forgetting to enable CORS 6 on your S3 bucket will result in `403 Forbidden`.
+* You **can** pick a S3 bucket region that is different from your Cognito or API gateway. The upload will still work as long as your config.js is correct.
+* I didn’t know if the above was true so I tried making a new S3 bucket in a matching region, and thought that “Copy settings from an existing bucket” would copy the CORS configuration too. Surprise! It does not.
+* Setting your S3 region incorrectly in config.js results in a 301 Moved Permanently. Not super helpful :expressionless:
+* Deploying your backend does result in the creation of yet another S3 bucket with a long name like “notes-app-api-prod-serverlessdeploymentbucket-ab46blaq2”. I’ve never touched this bucket and I do not reference it in my config.js or my IAM policy.
+* The tutorial’s current IAM policy here 6 works for me as of Sept 2020.
+* It wasn’t obvious to me how to edit the Cognito policy after creating it: IAM > Roles (under IAM Resources) > “Cognito_YourpoolnameAuth_Role” > dropdown arrow next to “oneClick_Cognito_YourpoolnameAuth_Role_#########” > Edit Policy
+
+Thanks [sometimescasey](https://discourse.sst.dev/u/sometimescasey){:target="_blank"} for these tips!

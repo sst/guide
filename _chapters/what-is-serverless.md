@@ -24,9 +24,9 @@ For smaller companies and individual developers this can be a lot to handle. Thi
 
 Serverless computing (or serverless for short), is an execution model where the cloud provider (AWS, Azure, or Google Cloud) is responsible for executing a piece of code by dynamically allocating the resources. And only charging for the amount of resources used to run the code. The code is typically run inside stateless containers that can be triggered by a variety of events including http requests, database events, queuing services, monitoring alerts, file uploads, scheduled events (cron jobs), etc. The code that is sent to the cloud provider for execution is usually in the form of a function. Hence serverless is sometimes referred to as _"Functions as a Service"_ or _"FaaS"_. Following are the FaaS offerings of the major cloud providers:
 
-- AWS: [AWS Lambda](https://aws.amazon.com/lambda/)
-- Microsoft Azure: [Azure Functions](https://azure.microsoft.com/en-us/services/functions/)
-- Google Cloud: [Cloud Functions](https://cloud.google.com/functions/)
+- AWS: [AWS Lambda](https://aws.amazon.com/lambda/){:target="_blank"}
+- Microsoft Azure: [Azure Functions](https://azure.microsoft.com/en-us/services/functions/){:target="_blank"}
+- Google Cloud: [Cloud Functions](https://cloud.google.com/functions/){:target="_blank"}
 
 While serverless abstracts the underlying infrastructure away from the developer, servers are still involved in executing our functions.
 
@@ -40,7 +40,7 @@ The biggest change that we are faced with while transitioning to a serverless wo
 
 Your functions are typically run inside secure (almost) stateless containers. This means that you won't be able to run code in your application server that executes long after an event has completed or uses a prior execution context to serve a request. You have to effectively assume that your function is invoked in a new container every single time.
 
-There are some subtleties to this and we will discuss in the [What is AWS Lambda]({% link _chapters/what-is-aws-lambda.md %}) chapter.
+There are some subtleties to this and we will discuss in the next chapter.
 
 ### Cold Starts
 
@@ -48,6 +48,6 @@ Since your functions are run inside a container that is brought up on demand to 
 
 The duration of cold starts depends on the implementation of the specific cloud provider. On AWS Lambda it can range from anywhere between a few hundred milliseconds to a few seconds. It can depend on the runtime (or language) used, the size of the function (as a package), and of course the cloud provider in question. Cold starts have drastically improved over the years as cloud providers have gotten much better at optimizing for lower latency times.
 
-Aside from optimizing your functions, you can use simple tricks like a separate scheduled function to invoke your function every few minutes to keep it warm. [SST]({{ site.sst_github_repo }}), which we are going to be using in this tutorial, has a pre-built [Cron]({{ site.docs_url }}/constructs/Cron) construct to help with this.
+Aside from optimizing your functions, you can use simple tricks like a separate scheduled function to invoke your function every few minutes to keep it warm. [SST]({{ site.sst_github_repo }}){:target="_blank"}, which we are going to be using in this tutorial, has a pre-built [Cron]({{ site.docs_url }}/constructs/Cron){:target="_blank"} construct to help with this.
 
 Now that we have a good idea of serverless computing, let's take a deeper look at what a Lambda function is and how your code will be executed.

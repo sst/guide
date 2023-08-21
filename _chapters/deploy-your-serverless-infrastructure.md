@@ -74,4 +74,4 @@ $ serverless deploy --stage prod
 
 Note that, production in this case is just an environment with a stage called `prod`. You can call it anything you like. Serverless Framework will simply create another version of your app with a completely new set of resources. You can learn more about this in our chapter on [Stages in Serverless Framework]({% link _chapters/stages-in-serverless-framework.md %}).
 
-Next, you can head back to our main guide and [follow the frontend section]({% link _chapters/create-a-new-reactjs-app.md %}). Just remember to use the resources that were created here in your React.js app config!
+Next, you can go to our main guide and [follow the frontend section]({% link _chapters/create-a-new-reactjs-app.md %}). Just remember to use the resources that were created here in your React.js app config!

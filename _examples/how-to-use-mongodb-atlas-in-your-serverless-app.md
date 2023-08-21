@@ -65,7 +65,7 @@ First let's create the API endpoint and connect it to a Lambda function. We'll b
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { Api, StackContext } from "sst/constructs";
 
 export function ExampleStack({ stack }: StackContext) {
@@ -170,7 +170,7 @@ We are now ready to add the function code to query our newly created MongoDB dat
 
 {%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
-```ts
+```typescript
 import * as mongodb from "mongodb";
 
 const MongoClient = mongodb.MongoClient;
@@ -220,7 +220,7 @@ The `handler` function should be pretty straightforward here. We connect to our 
 
 The line of note is:
 
-```ts
+```typescript
 context.callbackWaitsForEmptyEventLoop = false;
 ```
 
@@ -282,13 +282,13 @@ Now let's make a quick change to our database query.
 
 {%change%} Replace the following line in `packages/functions/src/lambda.ts`.
 
-```ts
+```typescript
 const users = await db.collection("users").find({}).toArray();
 ```
 
 {%change%} With:
 
-```ts
+```typescript
 const users = await db.collection("users").find({}).limit(1).toArray();
 ```
 

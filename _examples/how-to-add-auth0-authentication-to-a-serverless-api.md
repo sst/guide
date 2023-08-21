@@ -65,7 +65,7 @@ Let's start by setting up an API.
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { StackContext, Api, Cognito } from "sst/constructs";
 
 export function ExampleStack({ stack }: StackContext) {
@@ -105,7 +105,7 @@ Now let's add authentication for our serverless app.
 
 {%change%} Add this below the `Api` definition in `stacks/ExampleStack.ts`. Make sure to replace the `domain` and `clientId` with that of your Auth0 app.
 
-```ts
+```typescript
 // Create auth provider
 const auth = new Cognito(stack, "Auth", {
   identityPoolFederation: {
@@ -124,7 +124,7 @@ This creates a [Cognito Identity Pool](https://docs.aws.amazon.com/cognito/lates
 
 {%change%} Replace the `stack.addOutputs` call with the following.
 
-```ts
+```typescript
 stack.addOutputs({
   ApiEndpoint: api.url,
   IdentityPoolId: auth.cognitoIdentityPoolId,
@@ -139,7 +139,7 @@ Let's create two functions, one handling the public route, and the other for the
 
 {%change%} Add a `packages/functions/src/public.ts`.
 
-```ts
+```typescript
 export async function main() {
   return {
     statusCode: 200,
@@ -150,7 +150,7 @@ export async function main() {
 
 {%change%} Add a `packages/functions/src/private.ts`.
 
-```ts
+```typescript
 export async function main() {
   return {
     statusCode: 200,
@@ -317,7 +317,7 @@ Let's make a quick change to our private route and print out the caller's user i
 
 {%change%} Replace `packages/functions/src/private.ts` with the following.
 
-```ts
+```typescript
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 export const main: APIGatewayProxyHandlerV2 = async (event) => {

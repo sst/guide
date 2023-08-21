@@ -12,9 +12,15 @@ Now that we have our basic homepage set up, let's make the API call to render ou
 
 ### Make the Request
 
-{%change%} Add the following right below the state variable declarations in `src/containers/Home.js`.
+{%change%} Replace the notes/setNotes state variable declaration line with this line in Home.tsx
 
-```js
+```tsx
+const [notes, setNotes] = useState<Array<NotesType>>([]);
+```
+
+{%change%} Add the following right below the state variable declarations at the top of the **Home** function in `src/containers/Home.tsx`.
+
+```tsx
 useEffect(() => {
   async function onLoad() {
     if (!isAuthenticated) {
@@ -35,18 +41,26 @@ useEffect(() => {
 }, [isAuthenticated]);
 
 function loadNotes() {
-  return API.get("notes", "/notes");
+  return API.get("notes", "/notes", {});
 }
 ```
 
-We are using the [useEffect React Hook](https://reactjs.org/docs/hooks-effect.html). We covered how this works back in the [Load the State from the Session]({% link _chapters/load-the-state-from-the-session.md %}) chapter.
+We are using the [useEffect React Hook](https://reactjs.org/docs/hooks-effect.html){:target="_blank"}. We covered how this works back in the [Load the State from the Session]({% link _chapters/load-the-state-from-the-session.md %}){:target="_blank"} chapter.
 
 Let's quickly go over how we are using it here. We want to make a request to our `/notes` API to get the list of notes when our component first loads. But only if the user is authenticated. Since our hook relies on `isAuthenticated`, we need to pass it in as the second argument in the `useEffect` call as an element in the array. This is basically telling React that we only want to run our Hook again when the `isAuthenticated` value changes.
 
-{%change%} And include our Amplify API module in the header.
+{%change%} Add `useEffect` into the import from react
 
-```js
+```tsx
+import React, {useEffect, useState} from "react";
+```
+
+{%change%} And include our Amplify API module, NotesLib, and ErrorLib in the header.
+
+```tsx
 import { API } from "aws-amplify";
+import {onError} from "../lib/errorLib";
+import {NotesType} from "../lib/notesLib";
 ```
 
 Now let's render the results.
@@ -55,8 +69,24 @@ Now let's render the results.
 
 {%change%} Replace our `renderNotesList` placeholder method with the following.
 
-```jsx
-function renderNotesList(notes) {
+```tsx
+function formatShortenedNote(str: string | undefined) {
+  if (!str) {
+    return "Empty Note"
+  }
+
+  return str.trim().split("\n")[0]
+}
+
+function formatCreatedAt(str: undefined | string | Date | number) {
+  if (!str) {
+    return ""
+  }
+
+  return new Date(str).toLocaleString()
+}
+
+function renderNotesList(notes: NotesType[]) {
   return (
     <>
       <LinkContainer to="/notes/new">
@@ -68,10 +98,10 @@ function renderNotesList(notes) {
       {notes.map(({ noteId, content, createdAt }) => (
         <LinkContainer key={noteId} to={`/notes/${noteId}`}>
           <ListGroup.Item action className="text-nowrap text-truncate">
-            <span className="fw-bold">{content.trim().split("\n")[0]}</span>
+            <span className="fw-bold">{formatShortenedNote(content)}</span>
             <br />
             <span className="text-muted">
-              Created: {new Date(createdAt).toLocaleString()}
+              Created: {formatCreatedAt(createdAt)}
             </span>
           </ListGroup.Item>
         </LinkContainer>
@@ -81,11 +111,18 @@ function renderNotesList(notes) {
 }
 ```
 
+{%change%} And include the `LinkContainer` and `BsPencilSquare` icon at the top of `src/containers/Home.tsx`.
+
+```tsx
+import { BsPencilSquare } from "react-icons/bs";
+import { LinkContainer } from "react-router-bootstrap";
+```
+
 The code above does a few things.
 
 1. It always renders a **Create a new note** button as the first item in the list (even if the list is empty). And it links to [the create note page that we previously created]({% link _chapters/add-the-create-note-page.md %}).
 
-   ```jsx
+   ```tsx
    <LinkContainer to="/notes/new">
      <ListGroup.Item action className="py-3 text-nowrap text-truncate">
        <BsPencilSquare size={17} />
@@ -98,32 +135,37 @@ The code above does a few things.
 
 3. We then render a list of all the notes.
 
-   ```js
+   ```tsx
    notes.map(({ noteId, content, createdAt }) => (...
    ```
 
 4. The first line of each note's content is set as the `ListGroup.Item` header.
 
-   ```js
-   note.content.trim().split("\n")[0];
+   ```tsx
+   function formatCreatedAt(str: undefined | string | Date | number) {
+    if (!str) {
+      return "Empty Note"
+    }
+    
+    return new Date(str).toLocaleString()
+    }
    ```
 
-5. And we convert the date the note was created to a more friendly format.
+5. And we safely convert the date the note was created to a more friendly format.
 
-   ```js
-   {
-     new Date(createdAt).toLocaleString();
+   ```tsx
+   function formatCreatedAt(str: undefined | string | Date | number) {
+     if (!str) {
+       return ""
+     }
+    
+     return new Date(str).toLocaleString()
    }
    ```
 
 6. The `LinkContainer` component directs our app to each of the items.
 
-{%change%} Include the `LinkContainer` and `BsPencilSquare` icon at the top of `src/containers/Home.js`.
 
-```js
-import { BsPencilSquare } from "react-icons/bs";
-import { LinkContainer } from "react-router-bootstrap";
-```
 
 Now head over to your browser and you should see your list displayed.
 

@@ -8,7 +8,7 @@ description: Amazon Resource Names (or ARNs) uniquely identify AWS resources. It
 comments_id: what-is-an-arn/34
 ---
 
-In the last chapter while we were looking at IAM policies we looked at how you can specify a resource using its ARN. Let's take a better look at what ARN is.
+An important concept in IAM is the ARN.
 
 Here is the official definition:
 
@@ -64,4 +64,4 @@ Finally, let's look at the common use cases for ARN.
    
    ARN is used to define which resource (S3 bucket in this case) the access is granted for. The wildcard `*` character is used here to match all resources inside the *Hello-bucket*.
 
-Next let's configure our AWS CLI. We'll be using the info from the IAM user account we created previously.
+Next, you can learn more about AWS AppSync.

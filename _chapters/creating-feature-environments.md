@@ -140,7 +140,7 @@ Select the **dev** stage, since we want the stage to be deployed into the **Deve
 
 ![Select Enable Auto-Deploy](/assets/best-practices/creating-feature-environments/select-enable-auto-deploy.png)
 
-Click **Pipeline** to head back.
+Click **Pipeline** to go.
 
 ![Head back to pipeline](/assets/best-practices/creating-feature-environments/head-back-to-pipeline.png)
 
