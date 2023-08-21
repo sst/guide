@@ -137,7 +137,13 @@ The `iamRoleStatements` section is telling AWS which resources our Lambda functi
 
 ### Test
 
-Now we are ready to test our new API. To be able to test it on our local we are going to mock the input parameters.
+<img class="code-marker" src="/assets/s.png" />To prepare for testing, you first need to rename the `env.example` file to `.env`.
+
+```bash
+$ mv env.example .env
+```
+
+We'll come back to that later, but now we are ready to test our new API. To be able to test it on our local we are going to mock the input parameters.
 
 {%change%} In our project root, create a `mocks/` directory.
 
