@@ -22,9 +22,9 @@ From your [AWS Console](https://console.aws.amazon.com) and select **Cognito** f
 
 ![Select Cognito Service screenshot](/assets/cognito-identity-pool/select-cognito-service.png)
 
-Select **Manage Federated Identities**.
+Select **Manage Identity Pools**.
 
-![Select Manage Federated Identities Screenshot](/assets/cognito-identity-pool/select-manage-federated-identities.png)
+![Select Manage Identity Pools Screenshot](/assets/cognito-identity-pool/select-manage-identity-pools.png)
 
 Enter an **Identity pool name**. If you have any existing Identity Pools, you'll need to click the **Create new identity pool** button.
 
@@ -33,6 +33,8 @@ Enter an **Identity pool name**. If you have any existing Identity Pools, you'll
 Select **Authentication providers**. Under **Cognito** tab, enter **User Pool ID** and **App Client ID** of the User Pool created in the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter. Select **Create Pool**.
 
 ![Fill Authentication Provider Info Screenshot](/assets/cognito-identity-pool/fill-authentication-provider-info.png)
+
+Select **Create Pool**.
 
 Now we need to specify what AWS resources are accessible for users with temporary credentials obtained from the Cognito Identity Pool.
 
