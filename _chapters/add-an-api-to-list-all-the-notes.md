@@ -15,29 +15,29 @@ Now we are going to add an API that returns a list of all the notes a user has. 
 {%change%} Create a new file in `packages/functions/src/list.ts` with the following.
 
 ```typescript
-import handler from "@notes/core/handler";
-import { APIGatewayProxyEvent } from 'aws-lambda';
 import { Table } from "sst/node/table";
+import handler from "@notes/core/handler";
 import dynamoDb from "@notes/core/dynamodb";
+import { APIGatewayProxyEvent } from "aws-lambda";
 
 export const main = handler(async () => {
-    const params = {
-        TableName: Table.Notes.tableName,
-        // 'KeyConditionExpression' defines the condition for the query
-        // - 'userId = :userId': only return items with matching 'userId'
-        //   partition key
-        KeyConditionExpression: "userId = :userId",
-        // 'ExpressionAttributeValues' defines the value in the condition
-        // - ':userId': defines 'userId' to be the id of the author
-        ExpressionAttributeValues: {
-            ":userId": "123",
-        },
-    };
+  const params = {
+    TableName: Table.Notes.tableName,
+    // 'KeyConditionExpression' defines the condition for the query
+    // - 'userId = :userId': only return items with matching 'userId'
+    //   partition key
+    KeyConditionExpression: "userId = :userId",
+    // 'ExpressionAttributeValues' defines the value in the condition
+    // - ':userId': defines 'userId' to be the id of the author
+    ExpressionAttributeValues: {
+      ":userId": "123",
+    },
+  };
 
-    const result = await dynamoDb.query(params);
+  const result = await dynamoDb.query(params);
 
-    // Return the matching list of items in response body
-    return result.Items;
+  // Return the matching list of items in response body
+  return result.Items;
 });
 ```
 
@@ -53,7 +53,15 @@ Let's add the route for this new endpoint.
 "GET /notes": "packages/functions/src/list.main",
 ```
 
-{%deploy%}
+### Deploy Our Changes
+
+If you switch over to your terminal, you will notice that your changes are being deployed.
+
+{%caution%}
+You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
+{%endcaution%}
+
+You should see that the new API stack has been deployed.
 
 ```bash
 ✓  Deployed:

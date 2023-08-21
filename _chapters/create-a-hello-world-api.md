@@ -10,7 +10,7 @@ comments_id: create-a-hello-world-api/2460
 
 With our newly created [SST]({{ site.sst_github_repo }}){:target="_blank"} app, we are ready to deploy a simple _Hello World_ API.
 
-In `stacks/MyStack.ts` you'll notice a API definition similar to this.
+{%change%} Replace our `stacks/MyStack.ts` with the following.
 
 ```typescript
 import { StackContext, Api } from "sst/constructs";
@@ -40,7 +40,7 @@ We'll do this by starting up our local development environment.
 {%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development){:target="_blank"} environment that allows you to work on your serverless apps live.
 
 ```bash
-$ pnpm exec sst dev
+$ pnpm sst dev
 ```
 
 The first time you run this command it'll ask you for the name of a stage. A stage or an environment is just a string that SST uses to namespace your deployments.
@@ -81,7 +81,7 @@ The **Local** tab shows you real-time logs from your apps. Here when you hit thi
 To deploy our API to prod, we'll need to stop our local development environment and run the following.
 
 ```bash
-$ pnpm exec sst deploy --stage prod
+$ pnpm sst deploy --stage prod
 ```
 
 We don't have to do this right now. We'll be doing it later once we are done working on our app.

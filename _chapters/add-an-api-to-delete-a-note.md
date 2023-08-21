@@ -15,31 +15,23 @@ Finally, we are going to create an API that allows a user to delete a given note
 {%change%} Create a new file in `packages/functions/src/delete.ts` and paste the following.
 
 ```typescript
-import handler from "@notes/core/handler";
-import { APIGatewayProxyEvent } from 'aws-lambda';
 import { Table } from "sst/node/table";
+import handler from "@notes/core/handler";
 import dynamoDb from "@notes/core/dynamodb";
+import { APIGatewayProxyEvent } from "aws-lambda";
 
 export const main = handler(async (event: APIGatewayProxyEvent) => {
+  const params = {
+    TableName: Table.Notes.tableName,
+    Key: {
+      userId: "123", // The id of the author
+      noteId: event?.pathParameters?.id, // The id of the note from the path
+    },
+  };
 
-    let path_id
-    if (!event.pathParameters || !event.pathParameters.id || event.pathParameters.id.length == 0) {
-        throw new Error("Please provide the 'id' parameter.");
-    } else {
-        path_id = event.pathParameters.id
-    }
+  await dynamoDb.delete(params);
 
-    const params = {
-        TableName: Table.Notes.tableName,
-        Key: {
-            userId: "123", // The id of the author
-            noteId: path_id, // The id of the note from the path
-        },
-    };
-
-    await dynamoDb.delete(params);
-
-    return { status: true };
+  return { status: true };
 });
 ```
 
@@ -55,7 +47,15 @@ Let's add a new route for the delete note API.
 "DELETE /notes/{id}": "packages/functions/src/delete.main",
 ```
 
-{%deploy%}
+### Deploy Our Changes
+
+If you switch over to your terminal, you will notice that your changes are being deployed.
+
+{%caution%}
+You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
+{%endcaution%}
+
+You should see that the new API stack has been deployed.
 
 ```bash
 ✓  Deployed:

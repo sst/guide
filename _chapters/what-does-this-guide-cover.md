@@ -80,30 +80,6 @@ You just need a couple of things to work through this guide:
 
 The guide is split roughly into a couple of parts:
 
-1. **The Basics**
-
-   Here we go over how to create your first full-stack serverless application. These chapters are roughly split up between the backend (Serverless) and the frontend (React). We also talk about how to deploy your serverless app and React app into production.
-
-   This section of the guide is carefully designed to be completed in its entirety. We go into all the steps in detail and have tons of screenshots to help you build your first app.
-
-2. **The Best Practices**
-
-   We launched this guide in early 2017 with just the first part. The SST community has grown and many of our readers have used the setup described in this guide to build apps that power their businesses. In this section, we cover the best practices of running production applications. These really begin to matter once your application codebase grows or when you add more folks to your team.
-
-   The chapters in this section are relatively standalone and tend to revolve around specific topics.
-
-3. **Using Serverless Framework**
-
-   The main part of the guide uses [**SST**]({{ site.sst_github_repo }}){:target="_blank"} . But we also cover building the same app using [Serverless Framework](https://github.com/serverless/serverless){:target="_blank"} . This is an optional section and is meant for folks trying to learn Serverless Framework.
-
-4. **Reference**
-
-   Finally, we have a collection of standalone chapters on various topics. We either refer to these in the guide or we use this to cover topics that don't necessarily belong to either of the two above sections.
-
-#### Building Your First Serverless App
-
-The first part of this guide helps you create the notes application and deploy it to production. We cover all the basics. Each service is created by hand. Here is what is covered in order.
-
 For the backend:
 
 - Configure your AWS account
@@ -138,7 +114,7 @@ Monitoring and debugging serverless apps:
 - Cover the debugging workflow for common serverless errors
 
 
-We believe this will give you a good foundation on building full-stack production ready serverless applications. If there are any other concepts or technologies you'd like us to cover, feel free to let us know on our [forums]({{ site.forum_url }}){:target="_blank"} .
+We believe this will give you a good foundation on building full-stack production ready serverless applications. If there are any other concepts or technologies you'd like us to cover, feel free to let us know on [Discord]({{ site.discord_invite_url }}){:target="_blank"} .
 
 [APIG]: https://aws.amazon.com/api-gateway/
 [Bootstrap]: http://getbootstrap.com/

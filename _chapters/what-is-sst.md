@@ -27,6 +27,4 @@ SST makes it easy to build serverless applications by allowing developers to:
 6. Use [higher-level constructs]({{ site.docs_url }}/packages/resources){:target="_blank"} designed specifically for serverless apps
 7. Configure Lambda functions with JS and TS (using [esbuild](https://esbuild.github.io/){:target="_blank"}), Go, Python, C#, and F#
 
-We also have an [alternative guide using Serverless Framework]({% link _chapters/setup-the-serverless-framework.md %}){:target="_blank"}.
-
 Before we start creating our application, let's look at the _infrastructure as code_ concept in a bit more detail.

@@ -14,7 +14,7 @@ Now that we understand what _infrastructure as code_ is, we are ready to create 
 {%change%} Run the following in your working directory.
 
 ```bash
-$ pnpm dlx create-sst@latest notes
+$ pnpm create sst notes
 $ cd notes
 $ pnpm install
 ```
@@ -50,6 +50,6 @@ An SST app is made up of two parts.
 
    The Lambda function code that's run when your API is invoked is placed in the `packages/functions` directory of your project. While `packages/core` contains our business logic.
 
-Later on we'll be adding a `frontend/` directory for our frontend React app.
+Our app is structured as a monorepo. Later on we'll be adding a `frontend/` directory for our React app.
 
 The starter project that's created is defining a simple _Hello World_ API. In the next chapter, we'll be deploying it and running it locally.

@@ -10,6 +10,7 @@ comments_id: what-is-aws-lambda/308
 
 [AWS Lambda](https://aws.amazon.com/lambda/){:target="_blank"} (or Lambda for short) is a serverless computing service provided by AWS. In this chapter we are going to be using Lambda to build our serverless application. And while we don't need to deal with the internals of how Lambda works, it's important to have a general idea of how your functions will be executed.
 
+
 ### Lambda Specs
 
 Let's start by quickly looking at the technical specifications of AWS Lambda. Lambda supports the following runtimes.
@@ -23,10 +24,10 @@ Let's start by quickly looking at the technical specifications of AWS Lambda. La
 - Rust
 
 {%aside%}
-Note that, [.NET Core 2.2 and 3.0 are supported through custom runtimes](https://aws.amazon.com/blogs/developer/announcing-amazon-lambda-runtimesupport/){:target="_blank"}.
-
-[See AWS for latest information on available runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html){:target="_blank"}.
+[.NET Core 2.2 and 3.0 are supported through custom runtimes](https://aws.amazon.com/blogs/developer/announcing-amazon-lambda-runtimesupport/){:target="_blank"}.
 {%endaside%}
+
+[Check out the AWS docs to learn more about the available runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html){:target="_blank"}.
 
 Each function runs inside a container with a 64-bit Amazon Linux AMI. And the execution environment has:
 

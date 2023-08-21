@@ -27,7 +27,7 @@ exclude:
   - .idea
 demo_url: "https://demo.sst.dev"
 
-github_repo: "https://github.com/AnomalyInnovations/serverless-stack-com"
+github_repo: "https://github.com/sst/sst.dev"
 github_edit_prefix: "/edit/master/"
 github_history_prefix: "/commits/master/"
 github_issues_prefix: "/issues/"
@@ -59,7 +59,7 @@ github_sponsor_url: "https://github.com/sponsors/jayair"
 twitter: "ServerlessStack"
 twitter_url: "https://twitter.com/sst_dev"
 slack_invite_url: "https://sst.dev/slack"
-discord_invite_url: "https://discord.gg/sst"
+discord_invite_url: "https://sst.dev/discord"
 linkedin_url: "https://www.linkedin.com/company/sst-dev"
 youtube_url: "https://www.youtube.com/c/sst-dev"
 
@@ -70,7 +70,7 @@ permalink: /blog/:title:output_ext
 stats:
   newsletter: "90,000"
   newsletter_short: "90k"
-  discord: "5500"
+  discord: "5800"
   github: "17000"
   github_short: "17k"
 

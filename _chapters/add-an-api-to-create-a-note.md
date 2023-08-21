@@ -21,29 +21,29 @@ import { Api, StackContext, use } from "sst/constructs";
 import { StorageStack } from "./StorageStack";
 
 export function ApiStack({ stack }: StackContext) {
-    const { table } = use(StorageStack);
+  const { table } = use(StorageStack);
 
-    // Create the API
-    const api = new Api(stack, "Api", {
-        defaults: {
-            function: {
-                bind: [table],
-            },
-        },
-        routes: {
-            "POST /notes": "packages/functions/src/create.main",
-        },
-    });
+  // Create the API
+  const api = new Api(stack, "Api", {
+    defaults: {
+      function: {
+        bind: [table],
+      },
+    },
+    routes: {
+      "POST /notes": "packages/functions/src/create.main",
+    },
+  });
 
-    // Show the API endpoint in the output
-    stack.addOutputs({
-        ApiEndpoint: api.url,
-    });
+  // Show the API endpoint in the output
+  stack.addOutputs({
+    ApiEndpoint: api.url,
+  });
 
-    // Return the API resource
-    return {
-        api,
-    };
+  // Return the API resource
+  return {
+    api,
+  };
 }
 ```
 
@@ -86,9 +86,9 @@ Now let's add the function that'll be creating our note.
 {%change%} Create a new file in `packages/functions/src/create.ts` with the following.
 
 ```typescript
-import { APIGatewayProxyEvent } from "aws-lambda";
 import AWS from "aws-sdk";
 import * as uuid from "uuid";
+import { APIGatewayProxyEvent } from "aws-lambda";
 
 import { Table } from "sst/node/table";
 
@@ -138,7 +138,6 @@ export async function main(event: APIGatewayProxyEvent) {
     };
   }
 }
-
 ```
 
 There are some helpful comments in the code but let's go over them quickly.
@@ -162,15 +161,24 @@ $ cd packages/functions
 {%change%} Then, run the following **in the `packages/functions/` folder** (Not in root).
 
 ```bash
-$ pnpm add --save aws-sdk aws-lambda uuid;pnpm add --save-dev @types/uuid @types/aws-lambda
+$ pnpm add --save aws-sdk aws-lambda uuid
+$ pnpm add --save-dev @types/uuid @types/aws-lambda
 ```
 
 - **aws-sdk** allows us to talk to the various AWS services.
 - **aws-lambda** 
 - **uuid** generates unique ids.
-- **@types/uuid** provides the TypeScript types for `uuid`.
+- **@types/aws-lambda** & **@types/uuid** provides the TypeScript types.
 
-{%deploy%}
+### Deploy Our Changes
+
+If you switch over to your terminal, you will notice that your changes are being deployed.
+
+{%caution%}
+You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
+{%endcaution%}
+
+You should see that the new API stack has been deployed.
 
 ```bash
 ✓  Deployed:
@@ -216,42 +224,39 @@ Before we move on to the next chapter, let's refactor this code. Since we'll be 
 {%change%} Start by replacing our `create.ts` with the following.
 
 ```typescript 
-import handler from "@notes/core/handler";
-import { APIGatewayProxyEvent } from 'aws-lambda';
-import { Table } from "sst/node/table";
 import * as uuid from "uuid";
+import { Table } from "sst/node/table";
+import handler from "@notes/core/handler";
 import dynamoDb from "@notes/core/dynamodb";
+import { APIGatewayProxyEvent } from "aws-lambda";
 
 export const main = handler(async (event: APIGatewayProxyEvent) => {
-    let data = {
-        content: '',
-        attachment: ''
-    }
+  let data = {
+    content: "",
+    attachment: "",
+  };
 
-    if (event.body != null) {
-        data = JSON.parse(event.body);
-    }
+  if (event.body != null) {
+    data = JSON.parse(event.body);
+  }
 
-    const params = {
-        TableName: Table.Notes.tableName,
-        Item: {
-            // The attributes of the item to be created
-            userId: "123", // The id of the author
-            noteId: uuid.v1(), // A unique uuid
-            content: data.content, // Parsed from request body
-            attachment: data.attachment, // Parsed from request body
-            createdAt: Date.now(), // Current Unix timestamp
-        },
-    };
+  const params = {
+    TableName: Table.Notes.tableName,
+    Item: {
+      // The attributes of the item to be created
+      userId: "123", // The id of the author
+      noteId: uuid.v1(), // A unique uuid
+      content: data.content, // Parsed from request body
+      attachment: data.attachment, // Parsed from request body
+      createdAt: Date.now(), // Current Unix timestamp
+    },
+  };
 
+  await dynamoDb.put(params);
 
-    await dynamoDb.put(params);
-
-    return params.Item;
+  return params.Item;
 });
 ```
-
-{%change%} Run the following in the `packages/functions/` folder (Not in root).
 
 This code doesn't work just yet but it shows you what we want to accomplish:
 
@@ -266,34 +271,30 @@ Let's start by creating a `dynamodb` util that we can share across all our funct
 
 ```typescript
 import AWS from "aws-sdk";
-import {DocumentClient} from "aws-sdk/lib/dynamodb/document_client";
+import { DocumentClient } from "aws-sdk/lib/dynamodb/document_client";
 
 const client = new AWS.DynamoDB.DocumentClient();
 
 export default {
-    get: (params: DocumentClient.GetItemInput) => client.get(params).promise(),
-    put: (params: DocumentClient.PutItemInput) => client.put(params).promise(),
-    query: (params: DocumentClient.QueryInput) => client.query(params).promise(),
-    update: (params: DocumentClient.UpdateItemInput) => client.update(params).promise(),
-    delete: (params: DocumentClient.DeleteItemInput) => client.delete(params).promise(),
+  get: (params: DocumentClient.GetItemInput) => client.get(params).promise(),
+  put: (params: DocumentClient.PutItemInput) => client.put(params).promise(),
+  query: (params: DocumentClient.QueryInput) => client.query(params).promise(),
+  update: (params: DocumentClient.UpdateItemInput) =>
+    client.update(params).promise(),
+  delete: (params: DocumentClient.DeleteItemInput) =>
+    client.delete(params).promise(),
 };
-
 ```
 
-Here we are creating a convenience object that exposes the DynamoDB client methods that we are going to need in this guide.  We are now using the aws-sdk to `core` as well. Run the following **in the packages/core/ folder**. 
-
-
-```bash
-$ pnpm add --save aws-sdk aws-lambda;pnpm add --save-dev @types/aws-lambda
-```
+Here we are creating a convenience object that exposes the DynamoDB client methods that we are going to need in this guide.
 
 {%change%} Also create a `packages/core/src/handler.ts` file with the following.
 
 ```typescript
-import { Context, APIGatewayEvent } from 'aws-lambda';
+import { Context, APIGatewayProxyEvent } from "aws-lambda";
 
 export default function handler(lambda: Function) {
-  return async function (event: APIGatewayEvent, context: Context) {
+  return async function (event: APIGatewayProxyEvent, context: Context) {
     let body, statusCode;
 
     try {
@@ -318,6 +319,14 @@ export default function handler(lambda: Function) {
 }
 ```
 
+{%change%} We are now using the aws-sdk to `core` as well. Run the following **in the `packages/core/` directory**. 
+
+
+```bash
+$ pnpm add --save aws-sdk aws-lambda
+$ pnpm add --save-dev @types/aws-lambda
+```
+
 Let's go over this in detail.
 
 - We are creating a `handler` function that we'll use as a wrapper around our Lambda functions.
@@ -326,7 +335,9 @@ Let's go over this in detail.
 - On success, we `JSON.stringify` the result and return it with a `200` status code.
 - If there is an error then we return the error message with a `500` status code.
 
-{%handler_caveat%}
+{%caution%}
+You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
+{%endcaution%}
 
 Next, we are going to add the API to get a note given its id.
 

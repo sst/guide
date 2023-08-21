@@ -1,15 +1,15 @@
 # Create aside formatted block
 # Provides extra information to the reader.
 module Jekyll
-  class Aside < Liquid::Block
+  class Caution < Liquid::Block
     def render(context)
       site = context.registers[:site]
       converter = site.find_converter_instance(::Jekyll::Converters::Markdown)
       aside_content = super
 
       <<-HTML.gsub /^\s+/, '' # remove whitespaces from heredocs
-      <aside class="aside-info">
-        <h5 class="extra-info">Info</h5>
+      <aside class="aside-caution">
+        <h5 class="extra-caution">Caution</h5>
         <div>
           #{converter.convert(aside_content)}
         </div>
@@ -19,4 +19,4 @@ module Jekyll
   end
 end
 
-Liquid::Template.register_tag('aside', Jekyll::Aside)
+Liquid::Template.register_tag('caution', Jekyll::Caution)

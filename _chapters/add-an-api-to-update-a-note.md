@@ -15,52 +15,38 @@ Now let's create an API that allows a user to update a note with a new note obje
 {%change%} Create a new file in `packages/functions/src/update.ts` and paste the following.
 
 ```typescript
-import handler from "@notes/core/handler";
-import { APIGatewayProxyEvent } from 'aws-lambda';
-import { Table } from "sst/node/table";
 import * as uuid from "uuid";
+import { Table } from "sst/node/table";
+import handler from "@notes/core/handler";
 import dynamoDb from "@notes/core/dynamodb";
+import { APIGatewayProxyEvent } from "aws-lambda";
 
 export const main = handler(async (event: APIGatewayProxyEvent) => {
-    let data = {
-        content: '',
-        attachment: ''
-    }
-    let path_id
-  
-    if (!event.pathParameters || !event.pathParameters.id || event.pathParameters.id.length == 0) {
-        throw new Error("Please provide the 'id' parameter.");
-    } else {
-       path_id = event.pathParameters.id
-    }
+  const data = JSON.parse(event.body || "{}");
 
-    if (event.body != null) {
-        data = JSON.parse(event.body);
-    }
+  const params = {
+    TableName: Table.Notes.tableName,
+    Key: {
+      // The attributes of the item to be created
+      userId: "123", // The id of the author
+      noteId: event?.pathParameters?.id, // The id of the note from the path
+    },
+    // 'UpdateExpression' defines the attributes to be updated
+    // 'ExpressionAttributeValues' defines the value in the update expression
+    UpdateExpression: "SET content = :content, attachment = :attachment",
+    ExpressionAttributeValues: {
+      ":attachment": data.attachment || null,
+      ":content": data.content || null,
+    },
+    // 'ReturnValues' specifies if and how to return the item's attributes,
+    // where ALL_NEW returns all attributes of the item after the update; you
+    // can inspect 'result' below to see how it works with different settings
+    ReturnValues: "ALL_NEW",
+  };
 
-    const params = {
-        TableName: Table.Notes.tableName,
-        Key: {
-            // The attributes of the item to be created
-            userId: "123", // The id of the author
-            noteId: path_id, // The id of the note from the path
-        },
-        // 'UpdateExpression' defines the attributes to be updated
-        // 'ExpressionAttributeValues' defines the value in the update expression
-        UpdateExpression: "SET content = :content, attachment = :attachment",
-        ExpressionAttributeValues: {
-            ":attachment": data.attachment || null,
-            ":content": data.content || null,
-        },
-        // 'ReturnValues' specifies if and how to return the item's attributes,
-        // where ALL_NEW returns all attributes of the item after the update; you
-        // can inspect 'result' below to see how it works with different settings
-        ReturnValues: "ALL_NEW",
-    };
+  await dynamoDb.update(params);
 
-    await dynamoDb.update(params);
-
-    return { status: true };
+  return { status: true };
 });
 ```
 
@@ -76,7 +62,15 @@ Let's add a new route for the get note API.
 "PUT /notes/{id}": "packages/functions/src/update.main",
 ```
 
-{%deploy%}
+### Deploy Our Changes
+
+If you switch over to your terminal, you will notice that your changes are being deployed.
+
+{%caution%}
+You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
+{%endcaution%}
+
+You should see that the new API stack has been deployed.
 
 ```bash
 ✓  Deployed:

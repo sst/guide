@@ -15,37 +15,29 @@ Now that we [created a note]({% link _chapters/add-an-api-to-create-a-note.md %}
 {%change%} Create a new file in `packages/functions/src/get.ts` in your project root with the following:
 
 ```typescript
-import handler from "@notes/core/handler";
-import { APIGatewayProxyEvent } from 'aws-lambda';
 import { Table } from "sst/node/table";
+import handler from "@notes/core/handler";
 import dynamoDb from "@notes/core/dynamodb";
+import { APIGatewayProxyEvent } from "aws-lambda";
 
 export const main = handler(async (event: APIGatewayProxyEvent) => {
-    let path_id
-  
-    if (!event.pathParameters || !event.pathParameters.id || event.pathParameters.id.length == 0) {
-        throw new Error("Please provide the 'id' parameter.");
-    } else {
-        path_id = event.pathParameters.id
-    }
+  const params = {
+    TableName: Table.Notes.tableName,
+    // 'Key' defines the partition key and sort key of
+    // the item to be retrieved
+    Key: {
+      userId: "123", // The id of the author
+      noteId: event?.pathParameters?.id, // The id of the note from the path
+    },
+  };
 
-    const params = {
-        TableName: Table.Notes.tableName,
-        // 'Key' defines the partition key and sort key of 
-        // the item to be retrieved
-        Key: {
-            userId: "123", // The id of the author
-            noteId: path_id, // The id of the note from the path
-        },
-    };
+  const result = await dynamoDb.get(params);
+  if (!result.Item) {
+    throw new Error("Item not found.");
+  }
 
-    const result = await dynamoDb.get(params);
-    if (!result.Item) {
-        throw new Error("Item not found.");
-    }
-
-    // Return the retrieved item
-    return result.Item;
+  // Return the retrieved item
+  return result.Item;
 });
 ```
 
@@ -61,7 +53,15 @@ Let's add a new route for the get note API.
 "GET /notes/{id}": "packages/functions/src/get.main",
 ```
 
-{%deploy%}
+### Deploy Our Changes
+
+If you switch over to your terminal, you will notice that your changes are being deployed.
+
+{%caution%}
+You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
+{%endcaution%}
+
+You should see that the new API stack has been deployed.
 
 ```bash
 ✓  Deployed:

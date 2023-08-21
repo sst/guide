@@ -19,26 +19,26 @@ We are now going to start creating our infrastructure in [SST]({{ site.sst_githu
 import { StackContext, Table } from "sst/constructs";
 
 export function StorageStack({ stack }: StackContext) {
-    // Create the DynamoDB table
-    const table = new Table(stack, "Notes", {
-        fields: {
-            userId: "string",
-            noteId: "string",
-        },
-        primaryIndex: { partitionKey: "userId", sortKey: "noteId" },
-    });
+  // Create the DynamoDB table
+  const table = new Table(stack, "Notes", {
+    fields: {
+      userId: "string",
+      noteId: "string",
+    },
+    primaryIndex: { partitionKey: "userId", sortKey: "noteId" },
+  });
 
-    return {
-        table,
-    };
+  return {
+    table,
+  };
 }
 ```
 
 Let's go over what we are doing here.
 
-We are creating a [new stack](https://docs.sst.dev/constructs/Stack){:target="_blank"} in our SST app. We will be using it to create all our storage related infrastructure (DynamoDB and S3). There's no specific reason why we are creating a separate stack for these resources. It's only meant as a way of organizing our resources and illustrating how to create separate stacks in our app.
+We are creating a [new stack](https://docs.sst.dev/constructs/Stack) in our SST app. We will be using it to create all our storage related infrastructure (DynamoDB and S3). There's no specific reason why we are creating a separate stack for these resources. It's only meant as a way of organizing our resources and illustrating how to create separate stacks in our app.
 
-We are using SST's [`Table`]({{ site.docs_url }}/constructs/Table){:target="_blank"} construct to create our DynamoDB table.
+We are using SST's [`Table`]({{ site.docs_url }}/constructs/Table) construct to create our DynamoDB table.
 
 It has two fields:
 
@@ -65,9 +65,7 @@ return {
 {%aside%} 
 Explicitly returning the attributes created is a stylistic choice intended to improve maintainability by clearly listing the exposed stacks.
 
-This will also allow us to reference this resource in our other stacks.
-
-You can learn more about sharing resources between stacks [here](https://docs.sst.dev/constructs/Stack#sharing-resources-between-stacks){:target="_blank"}.
+This will also allow us to reference this resource in our other stacks. [Learn more about sharing resources between stacks](https://docs.sst.dev/constructs/Stack#sharing-resources-between-stacks){:target="_blank"}.
 {%endaside%}
 
 ### Remove Template Files
@@ -77,7 +75,7 @@ The _Hello World_ API that we previously created, can now be removed. We can als
 {%change%} To remove the starter stack, run the following from your project root.
 
 ```bash
-$ pnpm exec sst remove API
+$ pnpm sst remove API
 ```
 
 This will take a minute to run.
@@ -85,7 +83,7 @@ This will take a minute to run.
 {%change%} Also remove the template files.
 
 ```bash
-$ rm stacks/MyStack.ts packages/core/src/time.ts packages/functions/src/lambda.ts
+$ rm -r stacks/MyStack.ts packages/core/src/todo.ts packages/core/src/event.ts packages/functions/src/lambda.ts packages/functions/src/todo.ts packages/functions/src/events
 ```
 
 ### Add to the App

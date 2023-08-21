@@ -10,9 +10,7 @@ module Jekyll
 
       <<-HTML.gsub /^\s+/, '' # remove whitespaces from heredocs
       <aside class="aside-note">
-        <h4 class="extra-note">
-          Note
-        </h4>
+        <h5 class="extra-note">Note</h5>
         <div>
           #{converter.convert(aside_content)}
         </div>
