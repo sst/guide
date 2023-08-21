@@ -199,7 +199,7 @@ export async function handler() {
 }
 ```
 
-We are using the [Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html). It allows us to connect to our database over HTTP using the [kysely-data-api](https://github.com/serverless-stack/kysely-data-api).
+We are using the [Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html). It allows us to connect to our database over HTTP using the [kysely-data-api](https://github.com/sst/kysely-data-api).
 
 For now we'll get the number of hits from a table called `tblcounter` and return it.
 

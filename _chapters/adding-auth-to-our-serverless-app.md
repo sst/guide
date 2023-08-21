@@ -145,7 +145,7 @@ This tells our API that we want to use `AWS_IAM` across all our routes.
    UserPoolId: us-east-1_TYEz7XP7P
 ```
 
-You'll also see our new User Pool if you head over to the **Cognito** tab in the [SST Console]({{ site.console_url }}){:target="_blank"}.
+You'll also see our new User Pool if you head over to the **Cognito** tab in the [SST Console]({{ site.old_console_url }}){:target="_blank"}.
 
 ![SST Console Cognito tab](/assets/part2/sst-console-cognito-tab.png)
 

@@ -7,11 +7,13 @@ description: "Build modern full-stack serverless applications on AWS with Next.j
 
   <div class="header-wrapper">
 
+    <!--
     <a class="site-announcement" href="{% link _posts/2023-04-17-open-next-v1.md %}">
       <span class="new">New</span>
       <span class="copy">OpenNext 1.0 is out. Learn more</span>
       <i class="fa fa-angle-right" aria-hidden="true"></i>
     </a>
+    -->
 
     <div class="site-description">
       <h1 class="site-description">Build modern full-stack applications on AWS</h1>
@@ -25,11 +27,20 @@ description: "Build modern full-stack serverless applications on AWS with Next.j
       3. Go from idea to IPO!
     </h4>
 
+    <h6 class="site-command">
+      <a data-text="npm create sst@latest" class="command">
+        <span>$ npm create sst</span>
+        <span class="icon">
+          <i class="fa fa-copy" aria-hidden="true"></i>
+          <i class="fa fa-check" aria-hidden="true"></i>
+        </span>
+      </a>
+    </h6>
+
     <div class="controls">
-      <a data-text="npm create sst@latest" class="command sst-button secondary">
-        <span>npm create sst</span>
-        <i class="fa fa-copy" aria-hidden="true"></i>
-        <i class="fa fa-check" aria-hidden="true"></i>
+      <a href="https://youtu.be/JY_d0vf-rfw" class="sst-button secondary" target="_blank">
+        <i class="fa fa-youtube-play" aria-hidden="true"></i>
+        <span>Learn More</span>
       </a>
       <a class="sst-button primary" href="{{ site.docs_url }}">
         Get Started
@@ -295,7 +306,7 @@ description: "Build modern full-stack serverless applications on AWS with Next.j
       <p>Join {{ site.stats.newsletter }} readers from the biggest companies in the world. We'll also send you updates when new versions are published.</p>
     </div>
     <div class="form">
-      {% include email-octopus-form.html button_copy="Download" source="home" %}
+      {% include email-octopus-form.html %}
     </div>
     <img class="sparkle-left" src="/assets/lander/graphics/guide-sparkle-left.svg" />
     <img class="sparkle-right" src="/assets/lander/graphics/guide-sparkle-right.svg" />

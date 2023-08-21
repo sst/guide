@@ -242,14 +242,14 @@ To test this:
 
 ## SST Starter
 
-Check out the repo here — [**github.com/AnomalyInnovations/serverless-stack/lerna-yarn-starter**](https://github.com/serverless-stack/lerna-yarn-starter)
+Check out the repo here — [**github.com/sst/lerna-yarn-starter**](https://github.com/sst/lerna-yarn-starter)
 
 ### Installation
 
 Start by cloning this repo
 
 ``` bash
-$ git clone https://github.com/serverless-stack/lerna-yarn-starter my-project
+$ git clone https://github.com/sst/lerna-yarn-starter my-project
 ```
 
 Enter the new directory

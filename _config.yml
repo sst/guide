@@ -39,9 +39,9 @@ frontend_user_mgmt_github_repo: "https://github.com/AnomalyInnovations/serverles
 backend_ext_api_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-demo-ext-api"
 backend_ext_resources_github_repo: "https://github.com/AnomalyInnovations/serverless-stack-demo-ext-resources"
 
-sst_github_repo: "https://github.com/serverless-stack/sst"
+sst_github_repo: "https://github.com/sst/sst"
 sst_github_examples_prefix: "/tree/master/examples/"
-sst_demo_repo: "https://github.com/serverless-stack/demo-notes-app"
+sst_demo_repo: "https://github.com/sst/demo-notes-app"
 
 seed_url: "https://seed.run"
 survey_url: "https://serverless-stack.typeform.com/to/xiPdCW"
@@ -51,6 +51,7 @@ google_analytics: "UA-3536629-11"
 docs_url: "https://docs.sst.dev"
 v1_conf_url: "https://v1conf.sst.dev"
 console_url: "https://console.sst.dev"
+old_console_url: "https://old.console.sst.dev"
 forum_url: "https://discourse.sst.dev"
 forum_thread_prefix: "/t/"
 patreon_url: "https://www.patreon.com/serverless_stack"
@@ -69,9 +70,9 @@ permalink: /blog/:title:output_ext
 stats:
   newsletter: "90,000"
   newsletter_short: "90k"
-  discord: "4000"
-  github: "15000"
-  github_short: "15k"
+  discord: "5500"
+  github: "17000"
+  github_short: "17k"
 
 collections:
   chapters:

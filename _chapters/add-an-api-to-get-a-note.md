@@ -74,7 +74,7 @@ Let's add a new route for the get note API.
 
 Let's test the get notes API. In the [previous chapter]({% link _chapters/add-an-api-to-get-a-note.md %}) we tested our create note API. It should've returned the new note's id as the `noteId`.
 
-Go to the **API** tab in the [SST Console]({{ site.console_url }}){:target="_blank"} and select the `/notes/{id}` API. You might have to refresh your console.
+Head back to the **API** tab in the [SST Console]({{ site.old_console_url }}) and select the `/notes/{id}` API. You might have to refresh your console.
 
 {%change%} Select the URL tab and enter the uuid for the previously created note in the value field for `id`. Then click the **Send** button.
 

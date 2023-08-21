@@ -185,7 +185,7 @@ It includes the API endpoint that we created.
 
 Now we are ready to test our new API.
 
-Go to the **API** tab in the [SST Console]({{ site.console_url }}){:target="_blank"} and check out the new API.  You should see the `POST /notes` route.  Notice the dropdown in the upper right hand corner, this allows you to select the various API endpoints.  It should display something like `<env>-notes-ApiStack / Api`
+Head over to the **API** tab in the [SST Console]({{ site.old_console_url }}) and check out the new API.
 
 ![SST Console API tab](/assets/part2/sst-console-api-tab.png)
 

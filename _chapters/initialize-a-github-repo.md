@@ -30,7 +30,7 @@ Once your repository is created, copy the repository URL. We'll need this soon.
 For example, [the demo code repository URL](https://github.com/serverless-stack/demo-notes-app.git){:target="_blank"} is:
 
 ``` txt
-https://github.com/serverless-stack/demo-notes-app.git
+https://github.com/sst/demo-notes-app.git
 ```
 
 ### Initialize Your New Repo

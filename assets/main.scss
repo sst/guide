@@ -157,6 +157,7 @@ div.support-footer {
   text-align: left;
   -webkit-appearance: none;
   transition: 0.3s;
+  outline: none;
 
   &::placeholder {
     color: transparentize($secondary-background-color, 0.3);
@@ -166,6 +167,7 @@ div.support-footer {
     border-color: darken($grey-color-light, 10%);
     background-color: transparentize($background-color, 0.7);
     outline: none;
+    box-shadow: none;
 
     &::placeholder {
     }
@@ -294,6 +296,39 @@ div.support-footer {
       flex: 0 0 $width;
     }
 
+    @include emailoctopus-embed;
+
+    #emailoctopus-embed-container {
+      flex: 0 0 auto;
+
+      .emailoctopus-form-wrapper {
+        margin-top: 0 !important;
+      }
+      .emailoctopus-form-row {
+        margin-bottom: 0 !important;
+      }
+      .main-form {
+        flex-grow: 1;
+        flex-wrap: nowrap;
+        gap: 7px;
+
+        @include media-query($on-palm) {
+          flex-wrap: wrap;
+        }
+      }
+      input[type="submit"] {
+        font-size: 16px;
+        line-height: 18px;
+        padding: 0 15px;
+        height: 50px;
+
+        @include media-query($on-monitor) {
+          width: 100%;
+        }
+      }
+    }
+
+    /*
     p.email-octopus-error-message {
       color: white;
     }
@@ -353,6 +388,7 @@ div.support-footer {
         background-color: lighten($important-color, 7%);
       }
     }
+    */
   }
 }
 
@@ -466,56 +502,23 @@ div.standalone-newsletter-form {
     }
   }
 
-  p.email-octopus-success-message {
-    margin: 0;
-  }
-  p.email-octopus-error-message {
-    margin: 0;
-    color: white;
+  @include emailoctopus-embed;
+
+  #emailoctopus-embed-container {
+    .emailoctopus-form-wrapper {
+      margin-top: 0 !important;
+    }
+    .emailoctopus-form-row {
+      margin-bottom: $spacing-unit / 2 !important;
+    }
   }
 
-  div.email-octopus-form-row {
-    margin-bottom: 0;
-  }
-
-  form {
+  .controls {
+    flex: 0 0 auto;
     width: 260px;
 
     @include media-query($on-palm) {
       width: 100%;
-    }
-  }
-
-  input.email-octopus-email-address {
-    margin: 0;
-    padding: 10px;
-    font-size: 18px;
-    height: auto;
-    @extend %newsletter-input;
-  }
-
-  .email-octopus-form-row-subscribe {
-    margin-top: 10px;
-  }
-
-  button {
-    margin: 0;
-    padding: 17px 16px;
-    font-size: 15px;
-    white-space: nowrap;
-    text-transform: uppercase;
-    font-family: $base-font-family;
-    display: block;
-    width: 100%;
-    background-color: $important-color;
-    color: white;
-    border-radius: 4px;
-    line-height: 1.1;
-    transition: 0.3s;
-    cursor: pointer;
-
-    &:hover {
-      background-color: lighten($important-color, 7%);
     }
   }
 }

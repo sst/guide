@@ -382,6 +382,63 @@
     }
   }
 
+  .site-command {
+    padding-top: $spacing-unit / 2;
+    font-family: $code-font-family;
+    font-size: 20px;
+
+    @include media-query($on-palm) {
+      padding-top: 5px;
+      font-size: 14px;
+    }
+    
+    a {
+      padding-left: $spacing-unit - 2px;
+      color: $tertiary-text-color;
+      cursor: pointer;
+
+      @include media-query($on-palm) {
+        padding-left: $spacing-unit - 10px;
+
+        span.icon {
+          vertical-align: 1px;
+        }
+      }
+
+      span.icon {
+        visibility: hidden;
+        vertical-align: 2px;
+      }
+
+      &:hover {
+        span.icon {
+          visibility: visible;
+        }
+      }
+
+      &.copied {
+        i.fa:first-child {
+          display: none;
+        }
+        i.fa:last-child {
+          display: inline;
+        }
+      }
+    }
+
+    i.fa {
+      font-size: 13px;
+
+      @include media-query($on-palm) {
+        font-size: 10px;
+      }
+    
+      &:last-child {
+        display: none;
+      }
+    }
+  }
+
   .controls {
     margin-top: $spacing-unit * 1.5;
     text-align: center;
@@ -393,8 +450,8 @@
 
     a.sst-button {
       padding: {
-        left: 80px;
-        right: 80px;
+        left: 2 * $spacing-unit;
+        right: 2 * $spacing-unit;
       }
 
       @include media-query($on-palm) {
@@ -405,43 +462,25 @@
 
       &:first-child {
         padding: {
-          left: $spacing-unit;
-          right: $spacing-unit;
+          left: $spacing-unit + 10px;
+          right: $spacing-unit + 10px;
         }
-        cursor: pointer;
-        font-size: 18px;
-        font-weight: normal;
-        font-family: $code-font-family;
 
         @include media-query($on-palm) {
           font-size: 15px;
         }
 
-        span {
-          color: black;
-        }
-
         i.fa {
-          margin-left: 7px;
-          font-size: 16px;
-          opacity: 0.35;
+          margin-right: 8px;
+          font-size: 20px;
+          opacity: 0.25;
+          line-height: 0;
+          vertical-align: -1px;
 
           @include media-query($on-palm) {
-            margin-left: 5px;
+            margin-right: 5px;
             font-size: 13px;
-          }
-
-          &:last-child {
-            display: none;
-            opacity: 1;
-            color: $important-color;
-          }
-        }
-
-        &:not(.copied):hover {
-          i.fa {
-            opacity: 1;
-            color: $important-color;
+            vertical-align: 0;
           }
         }
       
@@ -1621,7 +1660,7 @@
     }
   }
 
-  .form-container {
+  & > .form-container {
     margin: $spacing-unit auto 0;
     position: relative;
     padding: $spacing-unit;
@@ -1693,75 +1732,35 @@
     }
   }
 
-  .form {
-    flex: 0 auto;
+  @include emailoctopus-embed;
 
-    @include media-query($on-laptop) {
-      flex: 1 1 auto;
+  #emailoctopus-embed-container {
+    flex: 0 0 auto;
+
+    .emailoctopus-form-wrapper {
+      margin-top: 0 !important;
     }
-
-    p.email-octopus-error-message,
-    p.email-octopus-success-message {
-      margin: 0;
+    .emailoctopus-form-row {
+      margin-bottom: 0 !important;
     }
+    .main-form {
+      flex-grow: 1;
+      flex-wrap: nowrap;
+      gap: $spacing-unit / 2;
 
-    form {
-      display: flex;
-      align-items: stretch;
-      justify-content: center;
-
-      @include media-query($on-laptop) {
-        display: block;
+      @include media-query($on-palm) {
+        flex-wrap: wrap;
       }
+    }
+    input[type="submit"] {
+      font-size: 16px;
+      line-height: 18px;
+      padding: 0 25px;
+      height: 50px;
+      text-transform: none;
 
-      .email-octopus-form-row {
-        margin: 0;
-        flex: 1 1 auto;
-      }
-
-      input {
-        margin: 0;
-        padding: 11px 18px;
-        width: 240px;
-        font-size: 18px;
-        line-height: 32px;
-        height: auto;
-        @extend %newsletter-input;
-
-        @include media-query($on-palm) {
-          width: 100%;
-          max-width: none;
-          font-size: 15px;
-        }
-      }
-
-      .email-octopus-form-row-subscribe {
-        margin-top: 0;
-        margin-left: $spacing-unit;
-
-        @include media-query($on-laptop) {
-          margin-top: $spacing-unit - 10px;
-          margin-left: 0;
-        }
-      }
-
-      button {
-        margin: 0;
-
-        @extend %sst-button;
-        @extend %sst-button-outline;
-        @extend %sst-button-primary-pseudo;
-
-        color: white;
-        font-size: 16px;
-        box-shadow: none;
-        line-height: 18px;
-        padding: 17px 40px 16px;
-        background: $important-color;
-
-        @include media-query($on-monitor) {
-          width: 100%;
-        }
+      @include media-query($on-monitor) {
+        width: 100%;
       }
     }
   }

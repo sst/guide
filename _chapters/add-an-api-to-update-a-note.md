@@ -89,7 +89,7 @@ Let's add a new route for the get note API.
 
 Now we are ready to test the new API. In [an earlier chapter]({% link _chapters/add-an-api-to-get-a-note.md %}) we tested our create note API. It should've returned the new note's id as the `noteId`.
 
-Head to the **API** tab in the [SST Console]({{ site.console_url }}){:target="_blank"} and select the `PUT /notes/{id}` API.
+Head to the **API** tab in the [SST Console]({{ site.old_console_url }}){:target="_blank"} and select the `PUT /notes/{id}` API.
 
 {%change%} Set the `noteId` as the **id** and in the **Body** tab set the following as the request body. Then hit **Send**.
 
