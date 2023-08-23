@@ -29,11 +29,11 @@ $ pnpm add --save-dev --workspace-root vitest
 {%change%} Add the following to `stacks/test/StorageStack.test.ts`.
 
 ```typescript
-import { Template } from "aws-cdk-lib/assertions";
+import { it } from "vitest";
 import { initProject } from "sst/project";
 import { App, getStack } from "sst/constructs";
 import { StorageStack } from "../StorageStack";
-import { it } from "vitest";
+import { Template } from "aws-cdk-lib/assertions";
 
 it("Test StorageStack", async () => {
   await initProject({});
@@ -94,7 +94,7 @@ This should be straightforward. We are adding 3 tests. They are testing the diff
 
 Now let's add a test script.
 
-{%change%} Add the following to the `scripts` in your `package.json`.
+{%change%} Add the following to the `scripts` in the `package.json` in your **project root**.
 
 ```typescript
 "test": "sst bind vitest run",

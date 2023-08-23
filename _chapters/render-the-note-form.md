@@ -22,7 +22,7 @@ function formatFilename(str: string) {
 }
 
 function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
-  if ( event.currentTarget.files === null ) return
+  if (event.currentTarget.files === null) return;
   file.current = event.currentTarget.files[0];
 }
 
@@ -61,67 +61,65 @@ return (
   <div className="Notes">
     {note && (
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="content">
-          <Form.Control
-            as="textarea"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group className="mt-2" controlId="file">
-          <Form.Label>Attachment</Form.Label>
-          {note.attachment && (
-            <p>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href={note.attachmentURL}
-              >
-                {formatFilename(note.attachment)}
-              </a>
-            </p>
-          )}
-          <Form.Control onChange={handleFileChange} type="file" />
-        </Form.Group>
-        <LoaderButton
-          block="true"
-          size="lg"
-          type="submit"
-          isLoading={isLoading}
-          disabled={!validateForm()}
-        >
-          Save
-        </LoaderButton>
-        <LoaderButton
-          block="true"
-          size="lg"
-          variant="danger"
-          onClick={handleDelete}
-          isLoading={isDeleting}
-        >
-          Delete
-        </LoaderButton>
+        <Stack gap={3}>
+          <Form.Group controlId="content">
+            <Form.Control
+              size="lg"
+              as="textarea"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="mt-2" controlId="file">
+            <Form.Label>Attachment</Form.Label>
+            {note.attachment && (
+              <p>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={note.attachmentURL}
+                >
+                  {formatFilename(note.attachment)}
+                </a>
+              </p>
+            )}
+            <Form.Control onChange={handleFileChange} type="file" />
+          </Form.Group>
+          <Stack gap={1}>
+            <LoaderButton
+              size="lg"
+              type="submit"
+              isLoading={isLoading}
+              disabled={!validateForm()}
+            >
+              Save
+            </LoaderButton>
+            <LoaderButton
+              size="lg"
+              variant="danger"
+              onClick={handleDelete}
+              isLoading={isDeleting}
+            >
+              Delete
+            </LoaderButton>
+          </Stack>
+        </Stack>
       </Form>
     )}
   </div>
 );
 ```
-{%change%} To complete this code, Let's add `isLoading` and `isDeleting` below the state and ref declarations at the top of our `Notes` component function.
+{%change%} To complete this, let's add `isLoading` and `isDeleting` below the state and ref declarations at the top of our `Notes` component function.
 
 ```tsx
 const [isLoading, setIsLoading] = useState(false);
 const [isDeleting, setIsDeleting] = useState(false);
 ```
-{%change%} Then replace the `const file` definition with the following
+
+{%change%} Replace the `const [note, setNote]` definition with the right type.
 
 ```tsx
-const file = useRef<null | File>(null);
-```
-
-{%change%} as well as the `const note/setNote` definition as follows:
-
-```tsx
-const [note, setNote] = useState<null | NotesType>(null);
+const [note, setNote] = useState<null | NoteType>(null);
 ```
 
 {%change%} Let's also add some styles by adding the following to `src/containers/Notes.css`.
@@ -133,13 +131,14 @@ const [note, setNote] = useState<null | NotesType>(null);
 }
 ```
 
-{%change%} and finally, let's include the React-Bootstrap components that we are using here by adding the following to our header. And our styles, the `LoaderButton`, and the `config`.
+{%change%} And finally, let's add the imports.
 
 ```js
-import Form from "react-bootstrap/Form";
-import LoaderButton from "../components/LoaderButton";
 import config from "../config";
-import {NotesType} from "../lib/notesLib";
+import Form from "react-bootstrap/Form";
+import { NoteType } from "../types/note";
+import Stack from "react-bootstrap/Stack";
+import LoaderButton from "../components/LoaderButton";
 import "./Notes.css";
 ```
 
@@ -160,6 +159,6 @@ We are doing a few things here:
 
 And that's it. If you switch over to your browser, you should see the note loaded.
 
-![Notes page loaded screenshot](/assets/notes-page-loaded.png)
+![Notes page loaded screenshot](/assets/part2/notes-page-loaded.png)
 
 Next, we'll look at saving the changes we make to our note.

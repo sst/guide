@@ -10,7 +10,7 @@ comments_id: custom-domains-for-react-apps-on-aws/2463
 
 In the [previous chapter we configured a custom domain for our serverless API]({% link _chapters/custom-domains-in-serverless-apis.md %}). Now let's do the same for our frontend React.js app.
 
-{%change%} In the `stacks/FrontendStack.ts` add the following below the `new StaticSite(` line. Replace the placeholders with your domain. In our examples  reference **demo.my-serverless-app.com**.
+{%change%} In the `stacks/FrontendStack.ts` add the following below the `new StaticSite(` line.
 
 ```typescript
 customDomain:
@@ -44,7 +44,7 @@ REACT_APP_API_URL: api.url,
 REACT_APP_API_URL: api.customDomainUrl || api.url,
 ```
 
-Note that, if you are going to use a custom domain locally, you might need to remove your app (`pnpm exec sst remove`) and deploy it again. This is because CDK doesn't allow you to change these references dynamically.
+Note that, if you are going to use a custom domain locally, you might need to remove your app (`pnpm sst remove`) and deploy it again. This is because CDK doesn't allow you to change these references dynamically.
 
 We also need to update the outputs of our frontend stack.
 
@@ -52,7 +52,7 @@ We also need to update the outputs of our frontend stack.
 
 ```typescript
 stack.addOutputs({
-  SiteUrl: site.customDomainUrl || site.url || "http://localhost:3000",
+  SiteUrl: site.customDomainUrl || site.url,
 });
 ```
 
@@ -65,7 +65,7 @@ Just like the previous chapter, we need to update these changes in prod.
 {%change%} Run the following from your project root.
 
 ```bash
-$ pnpm exec sst deploy --stage prod
+$ pnpm sst deploy --stage prod
 ```
 
 This command will take a few minutes. At the end of the deploy process you should see something like this.

@@ -31,13 +31,12 @@ async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     userHasAuthenticated(true);
     nav("/");
   } catch (error) {
-    // Prints the full error
-    console.error(error);
     if (error instanceof Error) {
       alert(error.message);
     } else {
       alert(String(error));
     }
+    setIsLoading(false);
   }
 }
 ```
@@ -57,18 +56,16 @@ Here we'll be storing all our React components that are not dealing directly wit
 {%change%} Create a new file and add the following in `src/components/LoaderButton.tsx`.
 
 ```tsx
-import React from "react";
 import Button from "react-bootstrap/Button";
-import {BsArrowRepeat} from "react-icons/bs";
+import { BsArrowRepeat } from "react-icons/bs";
 import "./LoaderButton.css";
 
-
 export default function LoaderButton({
-   isLoading = false,
-   className = "",
-   disabled = false,
-   ...props
- }) {
+  className = "",
+  disabled = false,
+  isLoading = false,
+  ...props
+}) {
   return (
     <Button
       disabled={disabled || isLoading}
@@ -80,7 +77,6 @@ export default function LoaderButton({
     </Button>
   );
 }
-
 ```
 
 This is a really simple component that takes an `isLoading` prop and `disabled` prop. The latter is a result of what we have currently in our `Login` button. And we ensure that the button is disabled when `isLoading` is `true`. This makes it so that the user can't click it while we are in the process of logging them in.
@@ -123,7 +119,7 @@ Now we can use our new component in our `Login` container.
 {%change%} In `src/containers/Login.tsx` find the `<Button>` component in the `return` statement.
 
 ```html
-<Button type="submit" disabled={!validateForm()}>
+<Button size="lg" type="submit" disabled={!validateForm()}>
     Login
 </Button>
 ```
@@ -132,7 +128,6 @@ Now we can use our new component in our `Login` container.
 
 ```html
 <LoaderButton
-  block="true"
   size="lg"
   type="submit"
   isLoading={isLoading}
@@ -151,7 +146,7 @@ import Button from "react-bootstrap/Button";
 {%change%} And add the following.
 
 ```tsx
-import LoaderButton from "../components/LoaderButton";
+import LoaderButton from "../components/LoaderButton.tsx";
 ```
 
 And now when we switch over to the browser and try logging in, you should see the intermediate state before the login completes.
@@ -165,36 +160,27 @@ You might have noticed in our Login and App components that we simply `alert` wh
 {%change%} To do that, create `src/lib/errorLib.ts` and add the following.
 
 ```typescript
-export function onError(error: unknown) {
-  if (error !== "No current user") {
-    return;
-  }
-  
+export function onError(error: any) {
   let message = String(error);
 
-  if (!(error instanceof Error)
-    && error
-    && typeof error === 'object'
-    && 'message' in error
-    && error.message) {
+  if (!(error instanceof Error) && error.message) {
     message = String(error.message);
   }
 
   alert(message);
 }
-
-
 ```
 
 The `Auth` package throws errors in a different format, so all this code does is `alert` the error message we need. And in all other cases simply `alert` the error object itself.
 
 Let's use this in our Login container (containers/Login.tsx).
 
-{%change%} Replace the catch statement in the `handleSubmit` function with:
+{%change%} Replace the `catch` statement in the `handleSubmit` function with:
 
 ```tsx
-catch (error: unknown) {
+catch (error) {
   onError(error);
+  setIsLoading(false);
 }
 ```
 
@@ -204,14 +190,15 @@ catch (error: unknown) {
 import { onError } from "../lib/errorLib";
 ```
 
-
 We'll do something similar in the App component.
 
-{%change%} Replace the catch statement in the `onLoad` function with:
+{%change%} Replace the `catch` statement in the `onLoad` function with:
 
 ```tsx
-catch (error: unknown) {
-  onError(error);
+catch (error) {
+  if (error !== "No current user") {
+    onError(error);
+  }
 }
 ```
 
@@ -225,6 +212,7 @@ import { onError } from "./lib/errorLib";
 We'll improve our error handling a little later on in the guide.
 
 {%aside%}
-Also, if you would like to add _Forgot Password_ functionality for your users, you can refer to our [Extra Credit series of chapters on user management]({% link _chapters/manage-user-accounts-in-aws-amplify.md %}){:target="_blank"}.
+If you would like to add a _Forgot Password_ feature for your users, you can refer to our [Extra Credit series of chapters on user management]({% link _chapters/manage-user-accounts-in-aws-amplify.md %}){:target="_blank"}.
 {%endaside%}
+
 For now, we are ready to move on to the sign up process for our app.

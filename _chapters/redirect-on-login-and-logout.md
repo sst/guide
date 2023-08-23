@@ -28,7 +28,7 @@ Make sure to add it below the `export default function Login() {` line.
 {%change%} Then update the `handleSubmit` method in `src/containers/Login.tsx` to look like this:
 
 ```tsx
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
   event.preventDefault();
 
   try {
@@ -36,8 +36,6 @@ Make sure to add it below the `export default function Login() {` line.
     userHasAuthenticated(true);
     nav("/");
   } catch (error) {
-    // Prints the full error
-    console.error(error);
     if (error instanceof Error) {
       alert(error.message);
     } else {

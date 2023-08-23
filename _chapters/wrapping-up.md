@@ -15,7 +15,7 @@ Congratulations on completing the guide!
 
 We've covered how to build and deploy our backend serverless API and our frontend serverless app. And not only does it work well on the desktop.
 
-![App update live screenshot](/assets/app-update-live.png)
+![App update live screenshot](/assets/part2/app-update-live.png)
 
 It's mobile optimized as well!
 
@@ -57,7 +57,7 @@ You can even see the request logs in production.
 
 We hope what you've learned here can be adapted to fit the use case you have in mind. We are going to be covering a few other topics in the future while we keep this guide up to date.
 
-We'd love to hear from you about your experience following this guide. Please [**fill out our survey**]({{ site.survey_url }}){:target="_blank"} or send us any comments or feedback you might have, via [email](mailto:{{ site.email }}). And [please star our repo on GitHub]({{ site.sst_github_repo }}){:target="_blank"}, it really helps spread the word.
+We'd love to hear from you about your experience following this guide. Please send us any comments or feedback you might have, via [email](mailto:{{ site.email }}). And [please star our repo on GitHub]({{ site.sst_github_repo }}){:target="_blank"}, it really helps spread the word.
 
 <a class="button contact" href="{{ site.sst_github_repo }}" target="_blank">Star our GitHub repo</a>
 

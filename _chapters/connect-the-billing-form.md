@@ -14,48 +14,56 @@ Now all we have left to do is to connect our billing form to our billing API.
 
 {% raw %}
 ```tsx
-async function handleFormSubmit(storage: string, { token, error }: { token: any, error: any }):Promise<void> {
-    if (error) {
-      onError(error);
-      return;
-    }
-
-    setIsLoading(true);
-
-    try {
-      await billUser({
-        storage,
-        source: token.id,
-      });
-
-      alert("Your card has been charged successfully!");
-      nav("/");
-    } catch (e) {
-      onError(e);
-      setIsLoading(false);
-    }
+const handleFormSubmit: BillingFormType["onSubmit"] = async (
+  storage,
+  info
+) => {
+  if (info.error) {
+    onError(info.error);
+    return;
   }
 
-  return (
-    <div className="Settings">
-      <Elements
-        stripe={stripePromise}
-        options={{ fonts: [{
+  setIsLoading(true);
+
+  try {
+    await billUser({
+      storage,
+      source: info.token?.id,
+    });
+
+    alert("Your card has been charged successfully!");
+    nav("/");
+  } catch (e) {
+    onError(e);
+    setIsLoading(false);
+  }
+};
+
+return (
+  <div className="Settings">
+    <Elements
+      stripe={stripePromise}
+      options={{
+        fonts: [
+          {
             cssSrc:
               "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800",
-          }] }}
-      >
-        <BillingForm isLoading={isLoading} onSubmit={handleFormSubmit} />
-      </Elements>
-    </div>
-  );
+          },
+        ],
+      }}
+    >
+      <BillingForm isLoading={isLoading} onSubmit={handleFormSubmit} />
+    </Elements>
+  </div>
+);
 ```
 {% endraw %}
-{%change%} And add the following to the header.
+
+{%change%} Add the following imports to the header.
 
 ```tsx
 import { Elements } from "@stripe/react-stripe-js";
-import BillingForm from "../components/BillingForm";
+import { BillingForm, BillingFormType } from "../components/BillingForm";
 import "./Settings.css";
 ```
 

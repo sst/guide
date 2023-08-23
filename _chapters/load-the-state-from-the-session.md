@@ -14,12 +14,12 @@ Amplify gives us a way to get the current user session using the `Auth.currentSe
 
 ### Load User Session
 
-Let's load this when our app loads. To do this we are going to use another React hook, called [useEffect](https://reactjs.org/docs/hooks-effect.html){:target="_blank"}. Since `Auth.currentSession()` returns a promise, it means that we need to ensure that the rest of our app is only ready to go after this has been loaded.
+Let's load this when our app loads. To do this we are going to use another React hook, called useEffect. Since `Auth.currentSession()` returns a promise, it means that we need to ensure that the rest of our app is only ready to go after this has been loaded.
 
 {%change%} To do this, let's add another state variable to our `src/App.tsx` state called `isAuthenticating`. Add it to the top of our `App` function.
 
 ```tsx
-const [isAuthenticating, setIsAuthenticating] = useState<boolean>(true);
+const [isAuthenticating, setIsAuthenticating] = useState(true);
 ```
 
 We start with the value set to `true` because as we first load our app, it'll start by checking the current authentication state.
@@ -27,23 +27,22 @@ We start with the value set to `true` because as we first load our app, it'll st
 {%change%} To load the user session we'll add the following to our `src/App.tsx` right below our variable declarations.
 
 ```tsx
-  useEffect(() => {
-    onLoad();
+useEffect(() => {
+  onLoad();
 }, []);
 
 async function onLoad() {
-    try {
-        await Auth.currentSession();
-        userHasAuthenticated(true);
-    } catch (e) {
-        if (e !== "No current user") {
-            alert(e);
-        }
+  try {
+    await Auth.currentSession();
+    userHasAuthenticated(true);
+  } catch (e) {
+    if (e !== "No current user") {
+      alert(e);
     }
+  }
 
-    setIsAuthenticating(false);
+  setIsAuthenticating(false);
 }
-
 ```
 {%change%} Then include the `Auth` module by adding the following to the header of `src/App.tsx`.
 
@@ -54,14 +53,14 @@ import { Auth } from "aws-amplify";
 {%change%} Let's make sure to include the `useEffect` hook by replacing the React import in the header of `src/App.tsx` with:
 
 ```tsx
-import React, { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 ```
 
 Let's understand how this and the `useEffect` hook works.
 
 The `useEffect` hook takes a function and an array of variables. The function will be called every time the component is rendered. And the array of variables tell React to only re-run our function if the passed in array of variables have changed. This allows us to control when our function gets run. This has some neat consequences:
 
-1. If we don't pass in an array of variables, our hook gets executed everytime our component is rendered.
+1. If we don't pass in an array of variables, our hook gets executed every time our component is rendered.
 2. If we pass in some variables, on every render React will first check if those variables have changed, before running our function.
 3. If we pass in an empty list of variables, then it'll only run our function on the FIRST render.
 
@@ -73,14 +72,14 @@ So the top of our `App` function should now look like this:
 
 ```tsx
 function App() {
-    const [isAuthenticating, setIsAuthenticating] = useState<boolean>(true);
-    const [isAuthenticated, userHasAuthenticated] = useState<boolean>(false);
+  const [isAuthenticating, setIsAuthenticating] = useState(true);
+  const [isAuthenticated, userHasAuthenticated] = useState(false);
 
-    useEffect(() => {
-        onLoad();
-    }, []);
+  useEffect(() => {
+    onLoad();
+  }, []);
     
-    ...
+  ...
 ```
 
 ### Render When the State Is Ready
@@ -89,52 +88,45 @@ Since loading the user session is an asynchronous process, we want to ensure tha
 
 We'll conditionally render our app based on the `isAuthenticating` flag.
 
-{%change%} Replace our `return` statement in `src/App.tsx` with the following functions which are now called in the return.
+{%change%} Replace the `return` statement in `src/App.js` with the following.
 
 {% raw %}
 
 ```tsx
-function authenticationComplete() {
   return (
-    <div className="App container py-3">
-      <Navbar collapseOnSelect bg="light" expand="md" className="mb-3 px-3">
-        <LinkContainer to="/">
-          <Navbar.Brand className="fw-bold text-muted">Scratch</Navbar.Brand>
-        </LinkContainer>
-        <Navbar.Toggle />
-        <Navbar.Collapse className="justify-content-end">
-          <Nav activeKey={window.location.pathname}>
-            {isAuthenticated ? (
-              <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-            ) : (
-              <>
-                <LinkContainer to="/signup">
-                  <Nav.Link>Signup</Nav.Link>
-                </LinkContainer>
-                <LinkContainer to="/login">
-                  <Nav.Link>Login</Nav.Link>
-                </LinkContainer>
-              </>
-            )}
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated } as AppContextType}>
-        <Routes />
-      </AppContext.Provider>
-    </div>
-  )
-}
+    !isAuthenticating && (
+      <div className="App container py-3">
+        <Navbar collapseOnSelect bg="light" expand="md" className="mb-3 px-3">
+          <LinkContainer to="/">
+            <Navbar.Brand className="fw-bold text-muted">Scratch</Navbar.Brand>
+          </LinkContainer>
+          <Navbar.Toggle />
+          <Navbar.Collapse className="justify-content-end">
+            <Nav activeKey={window.location.pathname}>
+              {isAuthenticated ? (
+                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+              ) : (
+                <>
+                  <LinkContainer to="/signup">
+                    <Nav.Link>Signup</Nav.Link>
+                  </LinkContainer>
+                  <LinkContainer to="/login">
+                    <Nav.Link>Login</Nav.Link>
+                  </LinkContainer>
+                </>
+              )}
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+        <AppContext.Provider
+          value={{ isAuthenticated, userHasAuthenticated } as AppContextType}
+        >
+          <Routes />
+        </AppContext.Provider>
+      </div>
+    )
+  );
 
-function authenticationInProgress() {
-  return (
-    <div className="App container py-3">Wait...</div>
-  )
-}
-
-return (
-  isAuthenticating ? authenticationInProgress() : authenticationComplete()
-)
 ```
 
 {% endraw %}

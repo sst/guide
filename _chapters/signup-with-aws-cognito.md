@@ -29,7 +29,9 @@ async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
   }
 }
 
-async function handleConfirmationSubmit(event: React.FormEvent<HTMLFormElement>) {
+async function handleConfirmationSubmit(
+  event: React.FormEvent<HTMLFormElement>
+) {
   event.preventDefault();
   setIsLoading(true);
   try {
@@ -48,14 +50,24 @@ async function handleConfirmationSubmit(event: React.FormEvent<HTMLFormElement>)
 
 ```tsx
 import { Auth } from "aws-amplify";
-import {onError} from "../lib/errorLib";
-import {ISignUpResult} from "amazon-cognito-identity-js";
+import { onError } from "../lib/errorLib";
+import { ISignUpResult } from "amazon-cognito-identity-js";
 ```
 
-{%change%} Finally, replace the constant for newUser and setNewUser with the following:
+Let's use the right type for the new user object.
 
-```tsx
+{%change%} Replace the `const [newUser, setNewUser]` line with.
+
+```typescript
 const [newUser, setNewUser] = useState<null | ISignUpResult>(null);
+```
+
+Let's install the npm package.
+
+{%change%} Run the following **in the `packages/frontend/` directory**.
+
+```bash
+$ pnpm add --save-dev amazon-cognito-identity-js
 ```
 
 The flow here is pretty simple:

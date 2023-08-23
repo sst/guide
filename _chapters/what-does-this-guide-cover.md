@@ -14,7 +14,7 @@ However, unlike most tutorials out there, our goal is to go into the details of 
 
 ### Demo App
 
-The demo app is a single page application powered by a serverless API written completely in JavaScript.
+The demo app is a single page application powered by a serverless API written completely in TypeScript.
 
 [![Completed app desktop screenshot](/assets/completed-app-desktop.png)]({{ site.demo_url }}){:target="_blank"}
 
@@ -32,7 +32,6 @@ It is a relatively simple application but we are going to address the following 
 - The backend APIs need to be secure
 - The app needs to be responsive
 - The app should be deployed when we `git push`
-- We should be able to monitor and debug any errors
 
 #### Demo Source
 
@@ -60,7 +59,6 @@ We will be using the following set of technologies and services to build our ser
 - [Route 53][R53]{:target="_blank"}  for our domain
 - [S3][S3]{:target="_blank"}  for hosting our app and file uploads
 - [Seed][Seed]{:target="_blank"}  for automating serverless deployments
-- [Sentry][Sentry]{:target="_blank"}  for error reporting
 - [Stripe][Stripe]{:target="_blank"}  for processing credit card payments
 
 We are going to be using the **free tiers** for the above services. So you should be able to sign up for them for free. This of course does not apply to purchasing a new domain to host your app. Also for AWS, you are required to put in a credit card while creating an account. So if you happen to be creating resources above and beyond what we cover in this tutorial, you might end up getting charged.
@@ -71,10 +69,11 @@ While the list above might look daunting, we are trying to ensure that upon comp
 
 You just need a couple of things to work through this guide:
 
-- [Node v18+](https://nodejs.org/en/){:target="_blank"}  installed on your machine.
+- [Node v18+](https://nodejs.org/en/){:target="_blank"} installed on your machine.
 - [PNPM v8+](https://pnpm.io/){:target="_blank"}  installed on your machine.
-- A free [GitHub account](https://github.com/join){:target="_blank"} .
-- And basic knowledge of how to use the command line. 
+- A free [GitHub account](https://github.com/join){:target="_blank"}.
+- Basic knowledge of JavaScript and TypeScript.
+- And basic knowledge of how to use the command line.
 
 ### How This Guide Is Structured
 
@@ -106,13 +105,6 @@ Deploying to prod:
 - Use custom domains for the API and React
 - Create a CI/CD pipeline with Seed
 
-Monitoring and debugging serverless apps:
-
-- Set up error reporting in React using Sentry
-- Configure an Error Boundary in React
-- Add error logging to our serverless APIs
-- Cover the debugging workflow for common serverless errors
-
 
 We believe this will give you a good foundation on building full-stack production ready serverless applications. If there are any other concepts or technologies you'd like us to cover, feel free to let us know on [Discord]({{ site.discord_invite_url }}){:target="_blank"} .
 
@@ -131,5 +123,4 @@ We believe this will give you a good foundation on building full-stack productio
 [React]: https://facebook.github.io/react/
 [S3]: https://aws.amazon.com/s3/
 [Seed]: https://seed.run/
-[Sentry]: https://sentry.io/
 [Stripe]: https://stripe.com/

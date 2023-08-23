@@ -28,13 +28,15 @@ Now we are going to do something similar for our sign up page and it'll have a f
 {%change%} Add the following to `src/lib/hooksLib.ts`.
 
 ```typescript
-import {ChangeEvent, ChangeEventHandler, useState} from "react";
+import { useState, ChangeEvent, ChangeEventHandler } from "react";
 
 interface FieldsType {
   [key: string | symbol]: string;
 }
 
-export function useFormFields(initialState: FieldsType): [FieldsType, ChangeEventHandler] {
+export function useFormFields(
+  initialState: FieldsType
+): [FieldsType, ChangeEventHandler] {
   const [fields, setValues] = useState(initialState);
 
   return [
@@ -48,7 +50,6 @@ export function useFormFields(initialState: FieldsType): [FieldsType, ChangeEven
     },
   ];
 }
-
 ```
 
 Creating a custom hook is amazingly simple. In fact, we did this back when we created our app context. But let's go over in detail how this works:
@@ -77,86 +78,68 @@ And that's it! We can now use this in our Login component.
 
 ### Using Our Custom Hook
 
-{%change%} Replace our `src/containers/Login.tsx` with the following:
+We need to make a couple of changes to the component to use our custom hook.
 
-```tsx
-import React, {useState} from "react";
-import {Auth} from "aws-amplify";
-import Form from "react-bootstrap/Form";
-import {useNavigate} from "react-router-dom";
-import LoaderButton from "../components/LoaderButton";
-import {useAppContext} from "../lib/contextLib";
-import {useFormFields} from "../lib/hooksLib";
-import {onError} from "../lib/errorLib";
-import "./Login.css";
+{%change%} Let's start by importing it in `src/containers/Login.tsx`.
 
-export default function Login() {
-  const nav = useNavigate();
-  const { userHasAuthenticated } = useAppContext();
-  const [isLoading, setIsLoading] = useState(false);
-  const [fields, handleFieldChange] = useFormFields({
-    email: "",
-    password: "",
-  });
-
-  function validateForm() {
-    return fields.email.length > 0 && fields.password.length > 0;
-  }
-
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    setIsLoading(true);
-
-    try {
-      await Auth.signIn(fields.email, fields.password);
-      userHasAuthenticated(true);
-      nav("/");
-    } catch (error: unknown) {
-      onError(error);
-      setIsLoading(false);
-    }
-  }
-
-  return (
-    <div className="Login">
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            autoFocus
-            size="lg"
-            type="email"
-            value={fields.email}
-            onChange={handleFieldChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            size="lg"
-            value={fields.password}
-            onChange={handleFieldChange}
-          />
-        </Form.Group>
-        <LoaderButton
-          block="true"
-          size="lg"
-          type="submit"
-          isLoading={isLoading}
-          disabled={!validateForm()}
-        >
-          Login
-        </LoaderButton>
-      </Form>
-    </div>
-  );
-}
-
+```typescript
+import { useFormFields } from "../lib/hooksLib";
 ```
 
-You'll notice that we are using our `useFormFields` Hook. A good way to think about custom React Hooks is to simply replace the line where we use it, with the Hook code itself. So instead of this line:
+{%change%} Replace the variable declarations.
+
+```typescript
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+```
+
+{%change%} With:
+
+```typescript
+const [fields, handleFieldChange] = useFormFields({
+  email: "",
+  password: "",
+});
+```
+
+{%change%} Replace the `validateForm` function with.
+
+```typescript
+function validateForm() {
+  return fields.email.length > 0 && fields.password.length > 0;
+}
+```
+
+{%change%} In the `handleSubmit` function, replace the `Auth.signIn` call with.
+
+```typescript
+await Auth.signIn(fields.email, fields.password);
+```
+
+{%change%} Replace our two form fields, starting with the `<Form.Control type="email">`.
+
+```tsx
+<Form.Control
+  autoFocus
+  size="lg"
+  type="email"
+  value={fields.email}
+  onChange={handleFieldChange}
+/>
+```
+
+{%change%} And finally the password `<Form.Control type="password">`.
+
+```tsx
+<Form.Control
+  size="lg"
+  type="password"
+  value={fields.password}
+  onChange={handleFieldChange}
+/>
+```
+
+You'll notice that we are using our `useFormFields` hook. A good way to think about custom React Hooks is to simply replace the line where we use it, with the Hook code itself. So instead of this line:
 
 ```typescript
 const [fields, handleFieldChange] = useFormFields({
@@ -167,10 +150,10 @@ const [fields, handleFieldChange] = useFormFields({
 
 Simply imagine the code for the `useFormFields` function instead!
 
-Finally, we are setting our fields using the function our custom Hook is returning.
+Finally, we are setting our fields using the function our custom hook is returning.
 
 ```tsx
-onChange = { handleFieldChange };
+onChange = { handleFieldChange }
 ```
 
 Now we are ready to tackle our sign up page.

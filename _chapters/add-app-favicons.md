@@ -4,11 +4,11 @@ title: Add App Favicons
 date: 2017-01-07 00:00:00
 lang: en
 ref: add-app-favicons
-description: To generate app icons and favicons for our React.js app we will use the Realfavicongenerator.net service. This will replace the default favicon that Create React App comes with.
+description: To generate app icons and favicons for our React.js app we will use the Realfavicongenerator.net service. This will replace the default favicon that the Vite React template comes with.
 comments_id: add-app-favicons/155
 ---
 
-Create React App generates a simple favicon for our app and places it in `public/favicon.ico` of our app. However, getting the favicon to work on all browsers and mobile platforms requires a little more work. There are quite a few different requirements and dimensions. And this gives us a good opportunity to learn how to include files in the `public/` directory of our app.
+Vite generates a simple favicon for our app and places it in `public/vite.svg` of our app. However, getting the favicon to work on all browsers and mobile platforms requires a little more work. There are quite a few different requirements and dimensions. And this gives us a good opportunity to learn how to include files in the `public/` directory of our app.
 
 For our example, we are going to start with a simple image and generate the various versions from it.
 
@@ -35,16 +35,10 @@ This should generate your favicon package and the accompanying code.
 Let's remove the old icons files.
 
 {%note%} 
-We'll be working exclusively in the `frontend/` directory through the chapter on securing React pages.**
+We'll be working exclusively **in the `packages/frontend/` directory** for the rest of the frontend part of the guide.
 {%endnote%}
 
-{%change%} Run the following from our `frontend/` directory.
-
-```bash
-$ rm public/logo192.png public/logo512.png public/favicon.ico
-```
-
-{%change%} Then replace the contents of `public/manifest.json` with the following:
+{%change%} Then replace the contents of `public/site.webmanifest` with the following:
 
 ```json
 {
@@ -69,49 +63,22 @@ $ rm public/logo192.png public/logo512.png public/favicon.ico
 }
 ```
 
-To include a file from the `public/` directory in your HTML, Create React App needs the `%PUBLIC_URL%` prefix.
-
 {%change%} Add this to the `<head>` in your `public/index.html`.
 
 ```html
-<link
-  rel="apple-touch-icon"
-  sizes="180x180"
-  href="%PUBLIC_URL%/apple-touch-icon.png"
-/>
-<link
-  rel="icon"
-  type="image/png"
-  href="%PUBLIC_URL%/favicon-32x32.png"
-  sizes="32x32"
-/>
-<link
-  rel="icon"
-  type="image/png"
-  href="%PUBLIC_URL%/favicon-16x16.png"
-  sizes="16x16"
-/>
-<link
-  rel="mask-icon"
-  href="%PUBLIC_URL%/safari-pinned-tab.svg"
-  color="#5bbad5"
-/>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
 <meta name="description" content="A simple note taking app" />
-<meta name="theme-color" content="#ffffff" />
 ```
 
-{%change%} And **remove** the following lines that reference the original favicon and theme color.
+{%change%} And **remove** the following lines that reference the original favicon.
 
 ```html
-    <link href="%PUBLIC_URL%/favicon.ico" rel="icon" />
-<meta content="width=device-width, initial-scale=1" name="viewport" />
-<meta content="#000000" name="theme-color" />
-<meta
-        content="Web site created using create-react-app"
-        name="description"
-/>
-<link href="%PUBLIC_URL%/logo192.png" rel="apple-touch-icon" />
-
+<link rel="icon" type="image/svg+xml" href="/vite.svg" />
 ```
 
 Finally head over to your browser and add `/favicon-32x32.png` to the base URL path to ensure that the files were added correctly.

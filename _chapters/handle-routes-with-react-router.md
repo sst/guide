@@ -4,11 +4,11 @@ title: Handle Routes with React Router
 date: 2017-01-10 00:00:00
 lang: en
 ref: handle-routes-with-react-router
-description: Create React App does not ship with a way to set up routes in your app. To do so, we are going to use React Router. The latest version of React Router, React Router v6 embraces the composable nature of React’s components and makes it easy to work with routes in our single page app.
+description: To handle routes in our React app we are going to use React Router.
 comments_id: handle-routes-with-react-router/116
 ---
 
-Create React App sets a lot of things up by default but it does not come with a built-in way to handle routes. And since we are building a single page app, we are going to use [React Router](https://reacttraining.com/react-router/) to handle them for us.
+Since we are building a single page app, we are going to use [React Router](https://reactrouter.com/en/main) to handle the routes on the client side for us.
 
 React Router allows us to specify a route like: `/login`. And specify a React Component that should be loaded when a user goes to that page.
 
@@ -16,7 +16,7 @@ Let's start by installing React Router.
 
 ### Installing React Router
 
-{%change%} Run the following command **in the `frontend/` directory** and **not** in your project root.
+{%change%} Run the following command **in the `packages/frontend/` directory**.
 
 ```bash
 $ pnpm add --save react-router-dom
@@ -28,29 +28,25 @@ This installs the package and adds the dependency to  `package.json` in your Rea
 
 Even though we don't have any routes set up in our app, we can get the basic structure up and running. Our app currently runs from the `App` component in `src/App.tsx`. We are going to be using this component as the container for our entire app. To do that we'll encapsulate our `App` component within a `Router`.
 
-{%change%} Replace the following code in `src/index.tsx`:
+{%change%} Replace the following in `src/main.tsx`:
 
 ```tsx
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+<React.StrictMode>
+  <App />
+</React.StrictMode>
 ```
 
 {%change%} With this:
 
 ```tsx
-root.render(
-  <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
-  </React.StrictMode>
-);
+<React.StrictMode>
+  <Router>
+    <App />
+  </Router>
+</React.StrictMode>
 ```
 
-{%change%} And import this in the header of `src/index.tsx`.
+{%change%} And import this in the header of `src/main.tsx`.
 
 ```tsx
 import { BrowserRouter as Router } from "react-router-dom";

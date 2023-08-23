@@ -29,7 +29,7 @@ By using the route path `/notes/:id` we are telling the router to send all match
 {%change%} And include our component in the header.
 
 ```tsx
-import Notes from "./containers/Notes";
+import Notes from "./containers/Notes.tsx";
 ```
 
 Of course this component doesn't exist yet and we are going to create it now.
@@ -45,7 +45,7 @@ import { API, Storage } from "aws-amplify";
 import { onError } from "../lib/errorLib";
 
 export default function Notes() {
-  const file = useRef(null);
+  const file = useRef<null | File>(null)
   const { id } = useParams();
   const nav = useNavigate();
   const [note, setNote] = useState(null);
@@ -89,6 +89,6 @@ We are doing a couple of things here.
 
 Now if you switch over to your browser and navigate to a note that we previously created, you'll notice that the page renders an empty container.
 
-![Empty notes page loaded screenshot](/assets/empty-notes-page-loaded.png)
+![Empty notes page loaded screenshot](/assets/part2/empty-notes-page-loaded.png)
 
 Next up, we are going to render the note we just loaded.

@@ -15,20 +15,18 @@ Now let's create an API that allows a user to update a note with a new note obje
 {%change%} Create a new file in `packages/functions/src/update.ts` and paste the following.
 
 ```typescript
-import * as uuid from "uuid";
 import { Table } from "sst/node/table";
 import handler from "@notes/core/handler";
 import dynamoDb from "@notes/core/dynamodb";
-import { APIGatewayProxyEvent } from "aws-lambda";
 
-export const main = handler(async (event: APIGatewayProxyEvent) => {
+export const main = handler(async (event) => {
   const data = JSON.parse(event.body || "{}");
 
   const params = {
     TableName: Table.Notes.tableName,
     Key: {
       // The attributes of the item to be created
-      userId: "123", // The id of the author
+      userId: event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
       noteId: event?.pathParameters?.id, // The id of the note from the path
     },
     // 'UpdateExpression' defines the attributes to be updated
@@ -46,7 +44,7 @@ export const main = handler(async (event: APIGatewayProxyEvent) => {
 
   await dynamoDb.update(params);
 
-  return { status: true };
+  return JSON.stringify({ status: true });
 });
 ```
 

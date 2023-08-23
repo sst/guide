@@ -41,7 +41,7 @@ Next, scroll down and click **Show Env Variables**.
 And type in `STRIPE_SECRET_KEY` as the **Key**. 
 
 {%note%}
-We saved this in as an sst secret back in the [Handling Secrets in SST]({% link _chapters/handling-secrets-in-sst.md %}) chapter. Remember, you can run `pnpm exec sst secrets list` to see the secrets for the current stage.
+We saved this in as an sst secret back in the [Handling Secrets in SST]({% link _chapters/handling-secrets-in-sst.md %}) chapter. Remember, you can run `pnpm sst secrets list` to see the secrets for the current stage.
 {%endnote%}
 
 Hit **Add** to save your secret key.

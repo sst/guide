@@ -18,9 +18,8 @@ Now we are going to add an API that returns a list of all the notes a user has. 
 import { Table } from "sst/node/table";
 import handler from "@notes/core/handler";
 import dynamoDb from "@notes/core/dynamodb";
-import { APIGatewayProxyEvent } from "aws-lambda";
 
-export const main = handler(async () => {
+export const main = handler(async (event) => {
   const params = {
     TableName: Table.Notes.tableName,
     // 'KeyConditionExpression' defines the condition for the query
@@ -30,14 +29,15 @@ export const main = handler(async () => {
     // 'ExpressionAttributeValues' defines the value in the condition
     // - ':userId': defines 'userId' to be the id of the author
     ExpressionAttributeValues: {
-      ":userId": "123",
+      ":userId":
+        event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
     },
   };
 
   const result = await dynamoDb.query(params);
 
   // Return the matching list of items in response body
-  return result.Items;
+  return JSON.stringify(result.Items);
 });
 ```
 

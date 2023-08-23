@@ -215,8 +215,8 @@ custom-domains:
     - page: Custom domains for React apps on AWS
       url: /chapters/custom-domains-for-react-apps-on-aws.html
 
-automating-serverless-deployments:
-  title: Automating serverless deployments
+automating-deployments:
+  title: Automating deployments
   chapters:
     - page: Getting production ready
       url: /chapters/getting-production-ready.html
@@ -230,29 +230,29 @@ automating-serverless-deployments:
       - page: Deploying through Seed
         url: /chapters/deploying-through-seed.html
 
-monitor-debug-errors:
-  title: Monitoring and debugging
-  chapters:
-    - page: Debugging full-stack serverless apps
-      url: /chapters/debugging-full-stack-serverless-apps.html
-    - page: Setup error reporting in React
-      url: /chapters/setup-error-reporting-in-react.html
-      subchapters:
-        - page: Report API errors in React
-          url: /chapters/report-api-errors-in-react.html
-        - page: Configure an error boundary in React
-          url: /chapters/setup-an-error-boundary-in-react.html
-    - page: Setup error logging in serverless
-      url: /chapters/setup-error-logging-in-serverless.html
-      subchapters:
-        - page: Logic errors in Lambda functions
-          url: /chapters/logic-errors-in-lambda-functions.html
-        - page: Unexpected errors in Lambda functions
-          url: /chapters/unexpected-errors-in-lambda-functions.html
-        - page: Errors outside Lambda functions
-          url: /chapters/errors-outside-lambda-functions.html
-        - page: Errors in API Gateway
-          url: /chapters/errors-in-api-gateway.html
+#monitor-debug-errors:
+#  title: Monitoring and debugging
+#  chapters:
+#    - page: Debugging full-stack serverless apps
+#      url: /chapters/debugging-full-stack-serverless-apps.html
+#    - page: Setup error reporting in React
+#      url: /chapters/setup-error-reporting-in-react.html
+#      subchapters:
+#        - page: Report API errors in React
+#          url: /chapters/report-api-errors-in-react.html
+#        - page: Configure an error boundary in React
+#          url: /chapters/setup-an-error-boundary-in-react.html
+#    - page: Setup error logging in serverless
+#      url: /chapters/setup-error-logging-in-serverless.html
+#      subchapters:
+#        - page: Logic errors in Lambda functions
+#          url: /chapters/logic-errors-in-lambda-functions.html
+#        - page: Unexpected errors in Lambda functions
+#          url: /chapters/unexpected-errors-in-lambda-functions.html
+#        - page: Errors outside Lambda functions
+#          url: /chapters/errors-outside-lambda-functions.html
+#        - page: Errors in API Gateway
+#          url: /chapters/errors-in-api-gateway.html
 
 conclusion:
   title: Conclusion

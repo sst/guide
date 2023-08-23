@@ -20,54 +20,49 @@ Setting this all up can be pretty complicated in CDK. SST has a simple [`Auth`](
 {%change%} Add the following to a new file in `stacks/AuthStack.ts`.
 
 ```typescript
+import { ApiStack } from "./ApiStack";
 import * as iam from "aws-cdk-lib/aws-iam";
-import {Cognito, StackContext, use} from "sst/constructs";
-import {StorageStack} from "./StorageStack";
-import {ApiStack} from "./ApiStack";
+import { StorageStack } from "./StorageStack";
+import { Cognito, StackContext, use } from "sst/constructs";
 
 export function AuthStack({ stack, app }: StackContext) {
-    const { bucket } = use(StorageStack);
-    const { api } = use(ApiStack);
+  const { api } = use(ApiStack);
+  const { bucket } = use(StorageStack);
 
-    // Create a Cognito User Pool and Identity Pool
-    const auth = new Cognito(stack, "Auth", {
-        login: ["email"],
-    });
+  // Create a Cognito User Pool and Identity Pool
+  const auth = new Cognito(stack, "Auth", {
+    login: ["email"],
+  });
 
-    auth.attachPermissionsForAuthUsers(stack, [
-        // Allow access to the API
-        api,
-        // Policy granting access to a specific folder in the bucket
-        new iam.PolicyStatement({
-            actions: ["s3:*"],
-            effect: iam.Effect.ALLOW,
-            resources: [
-                bucket.bucketArn + "/private/${cognito-identity.amazonaws.com:sub}/*",
-            ],
-        }),
-    ]);
+  auth.attachPermissionsForAuthUsers(stack, [
+    // Allow access to the API
+    api,
+    // Policy granting access to a specific folder in the bucket
+    new iam.PolicyStatement({
+      actions: ["s3:*"],
+      effect: iam.Effect.ALLOW,
+      resources: [
+        bucket.bucketArn + "/private/${cognito-identity.amazonaws.com:sub}/*",
+      ],
+    }),
+  ]);
 
-    // Show the auth resources in the output
-    stack.addOutputs({
-        Region: app.region,
-        UserPoolId: auth.userPoolId,
-        IdentityPoolId: auth.cognitoIdentityPoolId,
-        UserPoolClientId: auth.userPoolClientId,
-    });
+  // Show the auth resources in the output
+  stack.addOutputs({
+    Region: app.region,
+    UserPoolId: auth.userPoolId,
+    UserPoolClientId: auth.userPoolClientId,
+    IdentityPoolId: auth.cognitoIdentityPoolId,
+  });
 
-    // Return the auth resource
-    return {
-        auth,
-    };
+  // Return the auth resource
+  return {
+    auth,
+  };
 }
-
 ```
 
 Let's go over what we are doing here.
-
-{% aside %}
-Learn more about sharing resources between stacks [here]({{ site.docs_url }}/constructs/Stack#sharing-resources-between-stacks){:target="_blank"}.
-{% endaside %}
 
 - We are creating a new stack for our auth infrastructure. While we don't need to create a separate stack, we are using it as an example to show how to work with multiple stacks.  Additionally, such separations can make maintenance easier.
 
@@ -80,6 +75,10 @@ Learn more about sharing resources between stacks [here]({{ site.docs_url }}/con
 - And we want them to access our S3 bucket. We'll look at this in detail below.
 
 - Finally, we output the ids of the auth resources that have been created and returning the auth resource so that other stacks can access this resource.
+
+{% aside %}
+Learn more about how to [share resources between stacks]({{ site.docs_url }}/constructs/Stack#sharing-resources-between-stacks){:target="_blank"}.
+{% endaside %}
 
 ### Securing Access to Uploaded Files
 
@@ -131,7 +130,15 @@ authorizer: "iam",
 
 This tells our API that we want to use `AWS_IAM` across all our routes.
 
-{%deploy%}
+### Deploy Our Changes
+
+If you switch over to your terminal, you will notice that your changes are being deployed.
+
+{%caution%}
+You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
+{%endcaution%}
+
+You should see that the new Auth stack is being deployed.
 
 ```bash
 ✓  Deployed:

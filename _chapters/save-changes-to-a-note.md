@@ -13,7 +13,7 @@ Now that our note loads into our form, let's work on saving the changes we make 
 {%change%} Replace the `handleSubmit` function in `src/containers/Notes.tsx` with the following.
 
 ```tsx
-function saveNote(note: NotesType) {
+function saveNote(note: NoteType) {
   return API.put("notes", `/notes/${id}`, {
     body: note,
   });
@@ -39,7 +39,7 @@ async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     if (file.current) {
       attachment = await s3Upload(file.current);
     } else if (note && note.attachment) {
-      attachment = note.attachment
+      attachment = note.attachment;
     }
 
     await saveNote({
@@ -70,7 +70,7 @@ The code above is doing a couple of things that should be very similar to what w
 
 Let's switch over to our browser and give it a try by saving some changes.
 
-![Notes page saving screenshot](/assets/notes-page-saving.png)
+![Notes page saving screenshot](/assets/part2/notes-page-saving.png)
 
 You might have noticed that we are not deleting the old attachment when we upload a new one. To keep things simple, we are leaving that bit of detail up to you. It should be pretty straightforward. Check the [AWS Amplify API Docs](https://aws.github.io/aws-amplify/api/classes/storageclass.html#remove){:target="_blank"} on how to a delete file from S3.
 

@@ -14,17 +14,18 @@ We also need a couple of icons in our application. We'll be using the [React Ico
 
 ### Installing React Bootstrap
 
-{%change%} Run the following command in your `frontend/` directory and **not** in your project root
+{%change%} Run the following command **in your `packages/frontend/` directory**.
 
 ```bash
-$ pnpm add --save bootstrap react-bootstrap react-icons;pnpm add --save-dev @types/bootstrap @types/react-bootstrap
+$ pnpm add --save bootstrap react-bootstrap react-icons
+$ pnpm add --save-dev @types/bootstrap @types/react-bootstrap
 ```
 
 This installs the packages and dependencies to the `package.json` of your React app.
 
 ### Add Bootstrap Styles
 
-{%change%} React Bootstrap uses the standard Bootstrap v5 styles; so just add the following styles to your `src/index.tsx`.
+{%change%} React Bootstrap uses the standard Bootstrap v5 styles; so just add the following styles to your `src/main.tsx`.
 
 ```typescript
 import "bootstrap/dist/css/bootstrap.min.css";

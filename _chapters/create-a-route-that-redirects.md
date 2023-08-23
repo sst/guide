@@ -14,11 +14,15 @@ Let's first create a route that will check if the user is logged in before routi
 {%change%} Add the following file in components  `src/components/AuthenticatedRoute.tsx`.
 
 ```tsx
-import React, {ReactElement} from "react";
+import { ReactElement } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAppContext } from "../lib/contextLib";
 
-export default function AuthenticatedRoute({ children }: { children: ReactElement }): ReactElement {
+export default function AuthenticatedRoute({
+  children,
+}: {
+  children: ReactElement;
+}): ReactElement {
   const { pathname, search } = useLocation();
   const { isAuthenticated } = useAppContext();
 
@@ -28,7 +32,6 @@ export default function AuthenticatedRoute({ children }: { children: ReactElemen
 
   return children;
 }
-
 ```
 
 This simple component creates a `Route` where its children are rendered only if the user is authenticated. If the user is not authenticated, then it redirects to the login page. Let's take a closer look at it:
@@ -48,16 +51,15 @@ We'll do something similar to ensure that the user is not authenticated.
 {%change%} Next the following file in components  `src/components/UnauthenticatedRoute.tsx`.
 
 ```tsx
-import React, { cloneElement } from "react";
+import { cloneElement, ReactElement } from "react";
 import { Navigate } from "react-router-dom";
 import { useAppContext } from "../lib/contextLib";
 
-interface AuthProps {
-  children: React.ReactElement;
+interface Props {
+  children: ReactElement;
 }
 
-
-export default function UnauthenticatedRoute(props: AuthProps): React.ReactElement {
+export default function UnauthenticatedRoute(props: Props): ReactElement {
   const { isAuthenticated } = useAppContext();
   const { children } = props;
 
@@ -67,7 +69,6 @@ export default function UnauthenticatedRoute(props: AuthProps): React.ReactEleme
 
   return cloneElement(children, props);
 }
-
 ```
 
 Here we are checking to ensure that the user is **not** authenticated before we render the child components. Example child components here would be `Login` and `Signup`. And in the case where the user is authenticated, we use the `Navigate` component to simply send the user to the homepage.

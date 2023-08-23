@@ -14,7 +14,7 @@ To do this we'll be using a library called [AWS Amplify](https://github.com/aws/
 
 ### Install AWS Amplify
 
-{%change%} Run the following command **in the `frontend/` directory** and **not** in your project root.
+{%change%} Run the following command **in the `packages/frontend/` directory**.
 
 ```bash
 $ pnpm add --save aws-amplify
@@ -32,18 +32,18 @@ Now, let's create a configuration file in frontend for our app that'll reference
 const config = {
   // Backend config
   s3: {
-    REGION: process.env.REACT_APP_REGION,
-    BUCKET: process.env.REACT_APP_BUCKET,
+    REGION: import.meta.env.VITE_REGION,
+    BUCKET: import.meta.env.VITE_BUCKET,
   },
   apiGateway: {
-    REGION: process.env.REACT_APP_REGION,
-    URL: process.env.REACT_APP_API_URL,
+    REGION: import.meta.env.VITE_REGION,
+    URL: import.meta.env.VITE_API_URL,
   },
   cognito: {
-    REGION: process.env.REACT_APP_REGION,
-    USER_POOL_ID: process.env.REACT_APP_USER_POOL_ID,
-    APP_CLIENT_ID: process.env.REACT_APP_USER_POOL_CLIENT_ID,
-    IDENTITY_POOL_ID: process.env.REACT_APP_IDENTITY_POOL_ID,
+    REGION: import.meta.env.VITE_REGION,
+    USER_POOL_ID: import.meta.env.VITE_USER_POOL_ID,
+    APP_CLIENT_ID: import.meta.env.VITE_USER_POOL_CLIENT_ID,
+    IDENTITY_POOL_ID: import.meta.env.VITE_IDENTITY_POOL_ID,
   },
 };
 
@@ -56,7 +56,7 @@ Here we are loading the environment that are set from our serverless backend. We
 
 Next we'll set up AWS Amplify.
 
-{%change%} To initialize AWS Amplify; add the following above the `root.render` line in `src/index.tsx`.
+{%change%} To initialize AWS Amplify; add the following above the `root.render` line in `src/main.tsx`.
 
 ```tsx
 Amplify.configure({
@@ -87,13 +87,24 @@ Amplify.configure({
 {%change%} Import it by adding the following to the header of your `src/index.tsx`.
 
 ```tsx
-import { Amplify } from 'aws-amplify';
+import { Amplify } from "aws-amplify";
 ```
 
 {%change%} And import the config we created above by also to the header of your `src/index.tsx`.
 
 ```tsx
-import config from './config';
+import config from "./config.ts";
+```
+
+Amplify has a [2 year old bug](https://github.com/vitejs/vite/issues/1502#issuecomment-758822680) that needs a workaround to use it with your frontend.  
+
+{%change%} Add the following at the end of your `<head>` tags in `frontend/index.html`.
+
+```html
+<script>
+  window.global = window;
+  var exports = {};
+</script>
 ```
 
 A couple of notes here.

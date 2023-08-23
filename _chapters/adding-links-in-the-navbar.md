@@ -17,9 +17,7 @@ function App() {
   return (
     <div className="App container py-3">
       <Navbar collapseOnSelect bg="light" expand="md" className="mb-3 px-3">
-        <Navbar.Brand href="/" className="font-weight-bold text-muted">
-          Scratch
-        </Navbar.Brand>
+        <Navbar.Brand className="fw-bold text-muted">Scratch</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Nav>
@@ -54,14 +52,12 @@ Unfortunately, when you click on them they refresh your browser while redirectin
 
 To fix this we need a component that works with React Router and React Bootstrap called [React Router Bootstrap](https://github.com/react-bootstrap/react-router-bootstrap){:target="_blank"}. It can wrap around your `Navbar` links and use the React Router to route your app to the required link without refreshing the browser.
 
-{%change%} Run the following command in the `frontend/` directory and **not** in your project root.
+{%change%} Run the following command **in the `packages/frontend/` directory**.
 
 ```bash
-$ pnpm add --save react-router-bootstrap;pnpm add --save-dev @types/react-router-bootstrap
+$ pnpm add --save react-router-bootstrap
+$ pnpm add --save-dev @types/react-router-bootstrap
 ```
-{%aside%}
-You may need to restart the frontend script after this step.
-{%endaside%}
 
 {%change%} We will now wrap our links with the `LinkContainer`. Replace the `App` function component in your `src/App.tsx` with this.
 

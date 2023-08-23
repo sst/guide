@@ -17,61 +17,64 @@ So let's start by creating the basic form that'll take the user's email (as thei
 {%change%} Create a new file `src/containers/Login.tsx` and add the following.
 
 ```tsx
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
+import Stack from "react-bootstrap/Stack";
 import Button from "react-bootstrap/Button";
 import "./Login.css";
 
 export default function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    function validateForm() {
-        return email.length > 0 && password.length > 0;
-    }
+  function validateForm() {
+    return email.length > 0 && password.length > 0;
+  }
 
-    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-    }
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+  }
 
-    return (
-        <div className="Login">
-            <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="email">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                        autoFocus
-                        size="lg"
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </Form.Group>
-                <Form.Group controlId="password">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        type="password"
-                        size="lg"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </Form.Group>
-                <Button type="submit" disabled={!validateForm()}>
-                    Login
-                </Button>
-            </Form>
-        </div>
-    );
+  return (
+    <div className="Login">
+      <Form onSubmit={handleSubmit}>
+        <Stack gap={3}>
+          <Form.Group controlId="email">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              autoFocus
+              size="lg"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group controlId="password">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              size="lg"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </Form.Group>
+          <Button size="lg" type="submit" disabled={!validateForm()}>
+            Login
+          </Button>
+        </Stack>
+      </Form>
+    </div>
+  );
 }
 ```
 
 We are introducing a couple of new concepts in this.
 
-1. Right at the top of our component, we are using the [useState hook](https://reactjs.org/docs/hooks-state.html){:target="_blank"} to store what the user enters in the form. The `useState` hook just gives you the current value of the variable you want to store in the state and a function to set the new value. If you are transitioning from Class components to using React Hooks, we've added [a chapter to help you understand how Hooks work]({% link _chapters/understanding-react-hooks.md %}){:target="_blank"}.
+1. Right at the top of our component, we are using the `useState` hook to store what the user enters in the form. The `useState` hook just gives you the current value of the variable you want to store in the state and a function to set the new value.
 
 2. We then connect the state to our two fields in the form using the `setEmail` and `setPassword` functions to store what the user types in — `e.target.value`. Once we set the new state, our component gets re-rendered. The variables `email` and `password` now have the new values.
 
-3. We are setting the form controls to show the value of our two state variables `email` and `password`. In React, this pattern of displaying the current form value as a state variable and setting the new one when a user types something, is called a [Controlled Component](https://reactjs.org/docs/forms.html#controlled-components){:target="_blank"}.
+3. We are setting the form controls to show the value of our two state variables `email` and `password`. In React, this pattern of displaying the current form value as a state variable and setting the new one when a user types something, is called a Controlled Component.
 
 4. We are setting the `autoFocus` flag for our email field, so that when our form loads, it sets focus to this field.
 
@@ -98,7 +101,7 @@ These styles roughly target any non-mobile screen sizes.
 
 ### Add the Route
 
-{%change%} Now we link this container up with the rest of our app by adding the following line to `src/Routes.tsx` below our home `<Route>`.
+{%change%} Now we link this container up with the rest of our app by adding the following line to `src/Routes.tsx` below our `<Home />` route.
 
 ```tsx
 <Route path="/login" element={<Login />} />
@@ -107,7 +110,7 @@ These styles roughly target any non-mobile screen sizes.
 {%change%} And include our component in the header.
 
 ```tsx
-import Login from "./containers/Login";
+import Login from "./containers/Login.tsx";
 ```
 
 Now if we switch to our browser and navigate to the login page we should see our newly created form.

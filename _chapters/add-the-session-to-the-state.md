@@ -20,19 +20,13 @@ To save the user's login state, let's include the `useState` hook in `src/App.ts
 {%change%} Add the following to the top of our `App` component function.
 
 ```tsx
-const [isAuthenticated, userHasAuthenticated] = useState<boolean>(false);
+const [isAuthenticated, userHasAuthenticated] = useState(false);
 ```
 
-Then, replace the `React` import:
+{%change%} Then import it.
 
 ```tsx
-import React from "react";
-```
-
-{%change%} with the following:
-
-```tsx
-import React, { useState } from "react";
+import { useState } from "react";
 ```
 
 This initializes the `isAuthenticated` state variable to `false`, as in the user is not logged in. And calling `userHasAuthenticated` updates it. But for the `Login` container to call this method we need to pass a reference of this method to it.
@@ -43,7 +37,7 @@ We are going to have to pass the session related info to all of our containers. 
 
 We'll create a context for our entire app that all of our containers will use.
 
-{%change%} Create a `src/lib/` directory in the `frontend/` React directory.
+{%change%} Create a `src/lib/` directory in the `packages/frontend/` React directory.
 
 ```bash
 $ mkdir src/lib/
@@ -54,22 +48,21 @@ We'll use this to store all our common code.
 {%change%} Add the following file with the content below `src/lib/contextLib.ts`.
 
 ```typescript
-import React, {createContext, useContext} from "react";
+import { createContext, useContext } from "react";
 
 export interface AppContextType {
-    isAuthenticated: boolean;
-    userHasAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+  isAuthenticated: boolean;
+  userHasAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const AppContext = createContext<AppContextType>({
-    isAuthenticated: false,
-    userHasAuthenticated: useAppContext
+  isAuthenticated: false,
+  userHasAuthenticated: useAppContext,
 });
 
 export function useAppContext() {
-    return useContext(AppContext);
+  return useContext(AppContext);
 }
-
 ```
 
 This really simple bit of code is creating and exporting two things:
@@ -98,9 +91,12 @@ Now to add our session to the context and to pass it to our containers:
 {% raw %}
 
 ```tsx
-<AppContext.Provider value={{ isAuthenticated, userHasAuthenticated } as AppContextType}>
-    <Routes />
+<AppContext.Provider
+  value={{ isAuthenticated, userHasAuthenticated } as AppContextType}
+>
+  <Routes />
 </AppContext.Provider>
+
 ```
 
 {% endraw %}

@@ -17,7 +17,6 @@ Let's start by creating the outer chrome of our application by first adding a na
 {%change%} Go ahead and remove the code inside `src/App.tsx` and replace it with the following.
 
 ```tsx
-import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import "./App.css";
 
@@ -53,17 +52,17 @@ For now we don't have any styles to add but we'll leave this file around, in cas
 
 Also, let's remove some unused template files.
 
-{%change%} Run the following **in the `frontend/` directory**.
+{%change%} Run the following **in the `packages/frontend/` directory**.
 
 ```bash
-$ rm src/logo.svg src/App.test.tsx
+$ rm -r public/vite.svg src/assets/
 ```
 
 ### Add the Home container
 
 Now that we have the outer chrome of our application ready, let's add the container for the homepage of our app. It'll respond to the `/` route.
 
-{%change%} Create a `src/containers/` directory by running the following **in the `frontend/` directory**.
+{%change%} Create a `src/containers/` directory by running the following **in the `packages/frontend/` directory**.
 
 ```bash
 $ mkdir src/containers/
@@ -74,7 +73,6 @@ We'll be storing all of our top level components here. These are components that
 {%change%} Create a new container and add the following to `src/containers/Home.tsx`.
 
 ```tsx
-import React from "react";
 import "./Home.css";
 
 export default function Home() {
@@ -114,9 +112,8 @@ Now we'll set up the routes so that we can have this container respond to the `/
 {%change%} Create `src/Routes.tsx` and add the following into it.
 
 ```tsx
-import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Home from "./containers/Home";
+import Home from "./containers/Home.tsx";
 
 export default function Links() {
   return (
@@ -136,7 +133,7 @@ Now let's render the routes into our App component.
 {%change%} Add the following to the header of your `src/App.tsx`.
 
 ```tsx
-import Routes from "./Routes";
+import Routes from "./Routes.tsx";
 ```
 
 {%change%} And add the following line below our `Navbar` component inside `src/App.tsx`.
@@ -165,6 +162,6 @@ This ensures that as we navigate to different routes in our app, the portion bel
 
 Finally, head over to your browser and your app should show the brand new homepage of your app.
 
-![New homepage loaded screenshot](/assets/new-homepage-loaded.png)
+![New homepage loaded screenshot](/assets/part2/new-homepage-loaded.png)
 
 Next we are going to add login and signup links to our navbar.

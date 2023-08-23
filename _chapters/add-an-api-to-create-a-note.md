@@ -228,9 +228,8 @@ import * as uuid from "uuid";
 import { Table } from "sst/node/table";
 import handler from "@notes/core/handler";
 import dynamoDb from "@notes/core/dynamodb";
-import { APIGatewayProxyEvent } from "aws-lambda";
 
-export const main = handler(async (event: APIGatewayProxyEvent) => {
+export const main = handler(async (event) => {
   let data = {
     content: "",
     attachment: "",
@@ -244,7 +243,7 @@ export const main = handler(async (event: APIGatewayProxyEvent) => {
     TableName: Table.Notes.tableName,
     Item: {
       // The attributes of the item to be created
-      userId: "123", // The id of the author
+      userId: event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
       noteId: uuid.v1(), // A unique uuid
       content: data.content, // Parsed from request body
       attachment: data.attachment, // Parsed from request body
@@ -254,7 +253,7 @@ export const main = handler(async (event: APIGatewayProxyEvent) => {
 
   await dynamoDb.put(params);
 
-  return params.Item;
+  return JSON.stringify(params.Item);
 });
 ```
 
@@ -293,7 +292,9 @@ Here we are creating a convenience object that exposes the DynamoDB client metho
 ```typescript
 import { Context, APIGatewayProxyEvent } from "aws-lambda";
 
-export default function handler(lambda: Function) {
+export default function handler(
+  lambda: (evt: APIGatewayProxyEvent, context: Context) => Promise<string>
+) {
   return async function (event: APIGatewayProxyEvent, context: Context) {
     let body, statusCode;
 
@@ -303,17 +304,19 @@ export default function handler(lambda: Function) {
       statusCode = 200;
     } catch (error) {
       statusCode = 500;
-      if (error instanceof Error) {
-        body = { error: error.message };
-      } else {
-        body = { error: String(error) };
-      }
+      body = JSON.stringify({
+        error: error instanceof Error ? error.message : String(error),
+      });
     }
 
     // Return HTTP response
     return {
+      body,
       statusCode,
-      body: JSON.stringify(body),
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true,
+      },
     };
   };
 }
@@ -332,7 +335,7 @@ Let's go over this in detail.
 - We are creating a `handler` function that we'll use as a wrapper around our Lambda functions.
 - It takes our Lambda function as the argument.
 - We then run the Lambda function in a `try/catch` block.
-- On success, we `JSON.stringify` the result and return it with a `200` status code.
+- On success, we take the result and return it with a `200` status code.
 - If there is an error then we return the error message with a `500` status code.
 
 {%caution%}
@@ -347,7 +350,7 @@ Next, we are going to add the API to get a note given its id.
 
 - path received type undefined
 
-  Restarting `pnpm exec sst dev` should pick up the new type information and resolve this error.
+  Restarting `pnpm sst dev` should pick up the new type information and resolve this error.
 
 - Response `statusCode: 500`
 

@@ -10,16 +10,25 @@ comments_id: call-the-create-api/124
 
 Now that we have our basic create note form working, let's connect it to our API. We'll do the upload to S3 a little bit later. Our APIs are secured using AWS IAM and Cognito User Pool is our authentication provider. Thankfully, Amplify takes care of this for us by using the logged in user's session.
 
-### Define NotesType
+### Define the type for a note
 
-{%change%} Add a new file `src/lib/notesLib.ts` with the following content.
+Let's start by creating a type definition for the note object. Create a new directory for our types.
+
+{%change%} Run the following **in the `packages/frontend/` directory**.
+
+```bash
+$ mkdir src/types
+```
+
+{%change%} Add a new file `src/types/note.ts` with the following.
 
 ```typescript
-export interface NotesType {
-  noteId?: string,
-  content: string,
-  createdAt?: string
-  [key: string | symbol]: any;
+export interface NoteType {
+  noteId?: string;
+  content: string;
+  createdAt?: string;
+  attachment?: string;
+  attachmentURL?: string;
 }
 ```
 
@@ -28,16 +37,16 @@ export interface NotesType {
 {%change%} Next, we'll replace our `handleSubmit` function with the following.
 
 ```tsx
-function createNote(note: NotesType) {
-return API.post("notes", "/notes", {
+function createNote(note: NoteType) {
+  return API.post("notes", "/notes", {
     body: note,
-});
+  });
 }
 
 async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-event.preventDefault();
+  event.preventDefault();
 
-if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
+  if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
     alert(
       `Please pick a file smaller than ${
         config.MAX_ATTACHMENT_SIZE / 1000000
@@ -62,8 +71,8 @@ if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
 
 ```tsx
 import { API } from "aws-amplify";
-import {onError} from "../lib/errorLib";
-import {NotesType} from "../lib/notesLib";
+import { NoteType } from "../types/note";
+import { onError } from "../lib/errorLib";
 ```
 
 We are doing a couple of things with these functions.

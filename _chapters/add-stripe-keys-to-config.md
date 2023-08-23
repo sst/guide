@@ -20,26 +20,22 @@ Make sure to replace, `YOUR_STRIPE_PUBLIC_KEY` with the **Publishable key** from
 
 Let's also add the Stripe.js packages
 
-{%change%} Run the following **in the `frontend/` directory** and **not** in your project root.
+{%change%} Run the following **in the `packages/frontend/` directory**.
 
 ```bash
-$ pnpm add @stripe/stripe-js --save
+$ pnpm add --save @stripe/stripe-js
 ```
 
 And load the Stripe config in our settings page.
 
-{%change%} Add the following at top of the `Settings` component in `src/containers/Settings.tsx` above the `billUser()` function.
+{%change%} Add the following **below the imports** in `src/containers/Settings.tsx`.
 
 ```typescript
+import { loadStripe } from "@stripe/stripe-js";
+
 const stripePromise = loadStripe(config.STRIPE_KEY);
 ```
 
 This loads the Stripe object from Stripe.js with the Stripe key when our settings page loads. We'll be using this in the coming chapters.
-
-{%change%} We'll also import `stripe` & `config` at the top.
-
-```typescript
-import { loadStripe } from "@stripe/stripe-js";
-```
 
 Next, we'll build our billing form.

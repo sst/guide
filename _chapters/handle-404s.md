@@ -17,7 +17,6 @@ Let's start by creating a component that will handle this for us.
 {%change%} Create a new component at `src/containers/NotFound.tsx` and add the following.
 
 ```tsx
-import React from "react";
 import "./NotFound.css";
 
 export default function NotFound() {
@@ -46,9 +45,7 @@ Now we just need to add this component to our routes to handle our 404s.
 {%change%} Find the `<Routes>` block in `src/Routes.tsx` and add it as the last line in that section.
 
 ```tsx
-{
-  /* Finally, catch all unmatched routes */
-}
+{/* Finally, catch all unmatched routes */}
 <Route path="*" element={<NotFound />} />;
 ```
 
@@ -57,7 +54,7 @@ This needs to always be the last route in the `<Routes>` block. You can think of
 {%change%} And include the `NotFound` component in the header by adding the following:
 
 ```js
-import NotFound from "./containers/NotFound";
+import NotFound from "./containers/NotFound.tsx";
 ```
 
 And that's it! Now if you were to switch over to your browser and try clicking on the Login or Signup buttons in the Nav you should see the 404 message that we have.

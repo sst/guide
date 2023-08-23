@@ -58,6 +58,6 @@ h1, h2, h3, h4, h5, h6 {
 
 Now if you just flip over to your browser with our new app, you should see the new fonts update automatically; thanks to the live reloading.
 
-![Custom fonts updated screenshot](/assets/custom-fonts-updated-ts.png)
+![Custom fonts updated screenshot](/assets/part2/custom-fonts-updated.png)
 
 We'll stay on the theme of adding styles and set up our project with Bootstrap to ensure that we have a consistent UI Kit to work with while building our app.

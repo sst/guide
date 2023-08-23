@@ -18,13 +18,13 @@ Recall that we've been hard coding our user ids so far (with user id `123`). We'
 Recall the function signature of a Lambda function:
 
 ```typescript
-export async function main(event: APIGatewayEvent, context: Context) {}
+export async function main(event: APIGatewayProxyEvent, context: Context) {}
 ```
 
 Or the refactored version that we are using:
 
 ```typescript
-export const main = handler(async (event: APIGatewayProxyEvent) => {});
+export const main = handler(async (event) => {});
 ```
 
 So far we've used the `event` object to get the path parameters (`event.pathParameters`) and request body (`event.body`).
@@ -81,12 +81,6 @@ userId: event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
 ":userId": event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
 ```
 
-{%change%} Also, include `event` in the function arguments.
-
-```typescript
-export const main = handler(async (event: APIGatewayProxyEvent) => {
-```
-
 Keep in mind that the `userId` above is the Federated Identity id (or Identity Pool user id). This is not the user id that is assigned in our User Pool. If you want to use the user's User Pool user Id instead, have a look at the [Mapping Cognito Identity Id and User Pool Id]({% link _chapters/mapping-cognito-identity-id-and-user-pool-id.md %}){:target="_blank"} chapter.
 
 To test these changes we cannot use the `curl` command anymore. We'll need to generate a set of authentication headers to make our requests. Let's do that next.
@@ -113,13 +107,16 @@ $ pnpm dlx aws-api-gateway-cli-test \
 --identity-pool-id='<IDENTITY_POOL_ID>' \
 --invoke-url='<API_ENDPOINT>' \
 --api-gateway-region='<API_REGION>' \
-\
 --username='admin@example.com' \
 --password='Passw0rd!' \
 --path-template='/notes' \
 --method='POST' \
 --body='{"content":"hello world","attachment":"hello.jpg"}'
 ```
+
+{%note%}
+The [`pnpm dlx`](https://pnpm.io/cli/dlx){:target="_blank"} command runs a given npm package without installing it as a dependency.
+{%endnote%}
 
 We need to pass in quite a bit of our info to complete the above steps.
 
@@ -134,7 +131,7 @@ While this might look intimidating, just keep in mind that behind the scenes all
 If you are on Windows, you can use the command below. The spaces between each option are very important.
 
 ```bash
-$ npx aws-api-gateway-cli-test --username admin@example.com --password Passw0rd! --user-pool-id USER_POOL_ID --app-client-id USER_POOL_CLIENT_ID --cognito-region COGNITO_REGION --identity-pool-id IDENTITY_POOL_ID --invoke-url API_ENDPOINT --api-gateway-region API_REGION --path-template /notes --method POST --body '{""content\":\"hello world\",\"attachment\":\"hello.jpg\"}'
+$ pnpm dlx aws-api-gateway-cli-test --username admin@example.com --password Passw0rd! --user-pool-id <USER_POOL_ID> --app-client-id <USER_POOL_CLIENT_ID> --cognito-region <COGNITO_REGION> --identity-pool-id <IDENTITY_POOL_ID> --invoke-url <API_ENDPOINT> --api-gateway-region <API_REGION> --path-template /notes --method POST --body '{""content\":\"hello world\",\"attachment\":\"hello.jpg\"}'
 ```
 {%endaside%}
 

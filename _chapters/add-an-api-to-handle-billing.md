@@ -12,7 +12,9 @@ Now let's get started with creating an API to handle billing. It's going to take
 
 ### Add a Billing Lambda
 
-{%change%} Start by installing the Stripe NPM package. Run the following **in the `packages/functions/` folder** of our project.
+Start by installing the Stripe npm package.
+
+{%change%} Run the following **in the `packages/functions/` directory** of our project.
 
 ```bash
 $ pnpm add --save stripe
@@ -21,44 +23,30 @@ $ pnpm add --save stripe
 {%change%} Create a new file in `packages/functions/src/billing.ts` with the following.
 
 ```typescript
-import handler from "@notes/core/handler";
 import Stripe from "stripe";
-import {calculateCost} from "@notes/core/cost";
-import {APIGatewayProxyEvent} from "aws-lambda";
-import {Config} from "sst/node/config";
+import { Config } from "sst/node/config";
+import handler from "@notes/core/handler";
+import { calculateCost } from "@notes/core/cost";
+import { APIGatewayProxyEvent } from "aws-lambda";
 
 export const main = handler(async (event: APIGatewayProxyEvent) => {
-    let data = {
-        storage: 0,
-        source: null
-    };
+  const { storage, source } = JSON.parse(event.body || "{}");
+  const amount = calculateCost(storage);
+  const description = "Scratch charge";
 
-    if (event.body != null) {
-        data = JSON.parse(event.body);
-    }
+  // Load our secret key
+  const stripe = new Stripe(Config.STRIPE_SECRET_KEY, {
+    apiVersion: "2023-08-16",
+  });
 
-    const { storage, source } = data;
+  await stripe.charges.create({
+    source,
+    amount,
+    description,
+    currency: "usd",
+  });
 
-    if (storage === 0 || source === null) {
-        throw new Error("Please provide valid transaction details.");
-    }
-
-    const amount: number = calculateCost(storage);
-    const description: string = "Scratch charge";
-
-    // Load our secret key
-    const stripe = new Stripe(Config.STRIPE_SECRET_KEY,{
-        apiVersion: '2022-11-15',
-    });
-
-    await stripe.charges.create({
-        source,
-        amount,
-        description,
-        currency: "usd",
-    });
-
-    return { status: true };
+  return { status: true };
 });
 ```
 
@@ -101,7 +89,15 @@ Let's add a new route for our billing API.
 "POST /billing": "packages/functions/src/billing.main",
 ```
 
-{%deploy%}
+### Deploy Our Changes
+
+If you switch over to your terminal, you will notice that your changes are being deployed.
+
+{%caution%}
+You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
+{%endcaution%}
+
+You should see that the new API stack has been deployed.
 
 ```bash
 ✓  Deployed:
@@ -116,7 +112,7 @@ Now that we have our billing API all set up, let's do a quick test in our local 
 
 We'll be using the same CLI from [a few chapters ago]({% link _chapters/secure-our-serverless-apis.md %}){:target="_blank"}.
 
-{%change%} Run the following in your terminal (If you have installed the tool you can use `apig-test` in place of `pnpm dlx` ).
+{%change%} Run the following in your terminal.
 
 ```bash
 $ pnpm dlx aws-api-gateway-cli-test \

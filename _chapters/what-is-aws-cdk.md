@@ -59,6 +59,6 @@ It's fairly straightforward. The key bit here is that even though we are using C
 [SST]({{ site.sst_github_repo }}){:target="_blank"} comes with a list of [higher-level CDK constructs]({{ site.docs_url }}/constructs){:target="_blank"} designed to make it easy to build serverless apps. They are easy to get started with, but also allow you to customize them. It also comes with a local development environment that we will be relying on through this guide. So when you run:
 
 - `sst build`, it runs `cdk synth` internally
-- `pnpm start` or `pnpm exec deploy`, it runs `cdk deploy`
+- `pnpm sst dev` or `pnpm sst deploy`, it runs `cdk deploy`
 
 Now we are ready to create our first SST app.

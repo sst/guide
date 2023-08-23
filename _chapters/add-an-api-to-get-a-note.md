@@ -18,15 +18,14 @@ Now that we [created a note]({% link _chapters/add-an-api-to-create-a-note.md %}
 import { Table } from "sst/node/table";
 import handler from "@notes/core/handler";
 import dynamoDb from "@notes/core/dynamodb";
-import { APIGatewayProxyEvent } from "aws-lambda";
 
-export const main = handler(async (event: APIGatewayProxyEvent) => {
+export const main = handler(async (event) => {
   const params = {
     TableName: Table.Notes.tableName,
     // 'Key' defines the partition key and sort key of
     // the item to be retrieved
     Key: {
-      userId: "123", // The id of the author
+      userId: event.requestContext.authorizer?.iam.cognitoIdentity?.identityId,
       noteId: event?.pathParameters?.id, // The id of the note from the path
     },
   };
@@ -37,7 +36,7 @@ export const main = handler(async (event: APIGatewayProxyEvent) => {
   }
 
   // Return the retrieved item
-  return result.Item;
+  return JSON.stringify(result.Item);
 });
 ```
 

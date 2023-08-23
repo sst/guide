@@ -123,8 +123,8 @@ MAX_ATTACHMENT_SIZE: 5000000,
 import NewNote from "./containers/NewNote";
 ```
 
-Now if we switch to our browser and navigate `http://localhost:3000/notes/new` we should see our newly created form. Try adding some content, uploading a file, and hitting submit to see it in action.
+Now if we switch to our browser and navigate `/notes/new` we should see our newly created form. Try adding some content, uploading a file, and hitting submit to see it in action.
 
-![New note page added screenshot](/assets/new-note-page-added.png)
+![New note page added screenshot](/assets/part2/new-note-page-added.png)
 
 Next, let's get into connecting this form to our API.

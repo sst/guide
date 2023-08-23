@@ -8,23 +8,21 @@ ref: deploying-through-seed
 comments_id: deploying-through-seed/177
 ---
 
-Now, we are almost ready to make our first deployment. Our app also contains a React app in the `frontend/` directory. We need to make sure to run an `npm install` in that directory. Create React App also fails the build on any warnings in a CI, so we'll disable that flag.
+Now, we are ready to make our first deployment. You can either Git push a new change to master to trigger it.
 
-Let's quickly add a build script to do this.
+Let’s do it through Git.
 
-{%change%} Create a new file in your project root called `seed.yml` with.
+{%change%} Go to your project root and run the following.
 
-``` yml
-before_build:
-  - echo 'export CI=false' >> $BASH_ENV
-  - cd frontend && npm install
+```bash
+$ npm version patch
 ```
 
-{%change%} And let's commit and push this change.
+This is simply updating the npm version for your project. It is a good way to keep track of the changes you are making to your project. And it also creates a quick Git commit for us.
 
-``` bash
-$ git add .
-$ git commit -m "Adding a seed build spec"
+{%change%} Push the change using.
+
+```bash
 $ git push
 ```
 
@@ -60,4 +58,6 @@ To give it a quick test, sign up for a new account and create a note.
 
 You can also test updating and removing a note. And also test out the billing page.
 
-So we are almost ready to wrap things up. But before we do, we want to cover one final really important topic; how to monitor and debug errors when your app is live.
+Congrats! Your app is now live!
+
+Let's wrap things up next.

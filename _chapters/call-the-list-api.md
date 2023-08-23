@@ -12,13 +12,13 @@ Now that we have our basic homepage set up, let's make the API call to render ou
 
 ### Make the Request
 
-{%change%} Replace the notes/setNotes state variable declaration line with this line in Home.tsx
+{%change%} Replace the `const [notes, setNotes]` state declaration in `src/containers/Home.tsx` with.
 
 ```tsx
-const [notes, setNotes] = useState<Array<NotesType>>([]);
+const [notes, setNotes] = useState<Array<NoteType>>([]);
 ```
 
-{%change%} Add the following right below the state variable declarations at the top of the **Home** function in `src/containers/Home.tsx`.
+{%change%} Add the following right below the state variable declarations at the top of the **Home** function.
 
 ```tsx
 useEffect(() => {
@@ -49,18 +49,18 @@ We are using the [useEffect React Hook](https://reactjs.org/docs/hooks-effect.ht
 
 Let's quickly go over how we are using it here. We want to make a request to our `/notes` API to get the list of notes when our component first loads. But only if the user is authenticated. Since our hook relies on `isAuthenticated`, we need to pass it in as the second argument in the `useEffect` call as an element in the array. This is basically telling React that we only want to run our Hook again when the `isAuthenticated` value changes.
 
-{%change%} Add `useEffect` into the import from react
+{%change%} Add `useEffect` into the import from React
 
 ```tsx
-import React, {useEffect, useState} from "react";
+import { useState, useEffect } from "react";
 ```
 
-{%change%} And include our Amplify API module, NotesLib, and ErrorLib in the header.
+{%change%} And import the other dependencies.
 
 ```tsx
 import { API } from "aws-amplify";
-import {onError} from "../lib/errorLib";
-import {NotesType} from "../lib/notesLib";
+import { NoteType } from "../types/note";
+import { onError } from "../lib/errorLib";
 ```
 
 Now let's render the results.
@@ -70,23 +70,11 @@ Now let's render the results.
 {%change%} Replace our `renderNotesList` placeholder method with the following.
 
 ```tsx
-function formatShortenedNote(str: string | undefined) {
-  if (!str) {
-    return "Empty Note"
-  }
-
-  return str.trim().split("\n")[0]
+function formatDate(str: undefined | string) {
+  return !str ? "" : new Date(str).toLocaleString();
 }
 
-function formatCreatedAt(str: undefined | string | Date | number) {
-  if (!str) {
-    return ""
-  }
-
-  return new Date(str).toLocaleString()
-}
-
-function renderNotesList(notes: NotesType[]) {
+function renderNotesList(notes: NoteType[]) {
   return (
     <>
       <LinkContainer to="/notes/new">
@@ -98,10 +86,10 @@ function renderNotesList(notes: NotesType[]) {
       {notes.map(({ noteId, content, createdAt }) => (
         <LinkContainer key={noteId} to={`/notes/${noteId}`}>
           <ListGroup.Item action className="text-nowrap text-truncate">
-            <span className="fw-bold">{formatShortenedNote(content)}</span>
+            <span className="fw-bold">{content.trim().split("\n")[0]}</span>
             <br />
             <span className="text-muted">
-              Created: {formatCreatedAt(createdAt)}
+              Created: {formatDate(createdAt)}
             </span>
           </ListGroup.Item>
         </LinkContainer>
@@ -142,25 +130,13 @@ The code above does a few things.
 4. The first line of each note's content is set as the `ListGroup.Item` header.
 
    ```tsx
-   function formatCreatedAt(str: undefined | string | Date | number) {
-    if (!str) {
-      return "Empty Note"
-    }
-    
-    return new Date(str).toLocaleString()
-    }
+   note.content.trim().split("\n")[0];
    ```
 
 5. And we safely convert the date the note was created to a more friendly format.
 
    ```tsx
-   function formatCreatedAt(str: undefined | string | Date | number) {
-     if (!str) {
-       return ""
-     }
-    
-     return new Date(str).toLocaleString()
-   }
+   !str ? "" : new Date(str).toLocaleString()
    ```
 
 6. The `LinkContainer` component directs our app to each of the items.

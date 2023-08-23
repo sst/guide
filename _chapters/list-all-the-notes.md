@@ -15,9 +15,9 @@ Currently, our Home container is very simple. Let's add the conditional renderin
 {%change%} Replace our `src/containers/Home.tsx` with the following.
 
 ```tsx
-import React, {useState} from "react";
+import { useState } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import {useAppContext} from "../lib/contextLib";
+import { useAppContext } from "../lib/contextLib";
 import "./Home.css";
 
 export default function Home() {
@@ -25,9 +25,7 @@ export default function Home() {
   const { isAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
 
-  function renderNotesList(notes: {
-    [key: string | symbol]: any;
-  }) {
+  function renderNotesList(notes: { [key: string | symbol]: any }) {
     return null;
   }
 
@@ -55,7 +53,6 @@ export default function Home() {
     </div>
   );
 }
-
 ```
 
 We are doing a few things of note here:

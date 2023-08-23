@@ -15,13 +15,13 @@ Let's start by creating the signup form that'll get the user's email and passwor
 {%change%} Create a new container at `src/containers/Signup.tsx` with the following.
 
 ```tsx
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
-import {useNavigate} from "react-router-dom";
+import Stack from "react-bootstrap/Stack";
+import { useNavigate } from "react-router-dom";
+import { useFormFields } from "../lib/hooksLib";
+import { useAppContext } from "../lib/contextLib";
 import LoaderButton from "../components/LoaderButton";
-import {useAppContext} from "../lib/contextLib";
-import {ISignUpResult} from "amazon-cognito-identity-js";
-import {useFormFields} from "../lib/hooksLib";
 import "./Signup.css";
 
 export default function Signup() {
@@ -32,9 +32,9 @@ export default function Signup() {
     confirmationCode: "",
   });
   const nav = useNavigate();
-  const [newUser, setNewUser] = useState<null | ISignUpResult>(null);
   const { userHasAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
+  const [newUser, setNewUser] = useState<null | string>(null);
 
   function validateForm() {
     return (
@@ -51,11 +51,13 @@ export default function Signup() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading(true);
-    setNewUser(fields);
+    setNewUser("test");
     setIsLoading(false);
   }
 
-  async function handleConfirmationSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleConfirmationSubmit(
+    event: React.FormEvent<HTMLFormElement>
+  ) {
     event.preventDefault();
     setIsLoading(true);
   }
@@ -63,26 +65,28 @@ export default function Signup() {
   function renderConfirmationForm() {
     return (
       <Form onSubmit={handleConfirmationSubmit}>
-        <Form.Group controlId="confirmationCode">
-          <Form.Label>Confirmation Code</Form.Label>
-          <Form.Control
-            autoFocus
-            type="tel"
-            onChange={handleFieldChange}
-            value={fields.confirmationCode}
-          />
-          <Form.Text muted>Please check your email for the code.</Form.Text>
-        </Form.Group>
-        <LoaderButton
-          block="true"
-
-          type="submit"
-          variant="success"
-          isLoading={isLoading}
-          disabled={!validateConfirmationForm()}
-        >
-          Verify
-        </LoaderButton>
+        <Stack gap={3}>
+          <Form.Group controlId="confirmationCode">
+            <Form.Label>Confirmation Code</Form.Label>
+            <Form.Control
+              size="lg"
+              autoFocus
+              type="tel"
+              onChange={handleFieldChange}
+              value={fields.confirmationCode}
+            />
+            <Form.Text muted>Please check your email for the code.</Form.Text>
+          </Form.Group>
+          <LoaderButton
+            size="lg"
+            type="submit"
+            variant="success"
+            isLoading={isLoading}
+            disabled={!validateConfirmationForm()}
+          >
+            Verify
+          </LoaderButton>
+        </Stack>
       </Form>
     );
   }
@@ -90,41 +94,45 @@ export default function Signup() {
   function renderForm() {
     return (
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            autoFocus
-            type="email"
-            value={fields.email}
-            onChange={handleFieldChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            value={fields.password}
-            onChange={handleFieldChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="confirmPassword">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type="password"
-            onChange={handleFieldChange}
-            value={fields.confirmPassword}
-          />
-        </Form.Group>
-        <LoaderButton
-          block="true"
-
-          type="submit"
-          variant="success"
-          isLoading={isLoading}
-          disabled={!validateForm()}
-        >
-          Signup
-        </LoaderButton>
+        <Stack gap={3}>
+          <Form.Group controlId="email">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              size="lg"
+              autoFocus
+              type="email"
+              value={fields.email}
+              onChange={handleFieldChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="password">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              size="lg"
+              type="password"
+              value={fields.password}
+              onChange={handleFieldChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="confirmPassword">
+            <Form.Label>Confirm Password</Form.Label>
+            <Form.Control
+              size="lg"
+              type="password"
+              onChange={handleFieldChange}
+              value={fields.confirmPassword}
+            />
+          </Form.Group>
+          <LoaderButton
+            size="lg"
+            type="submit"
+            variant="success"
+            isLoading={isLoading}
+            disabled={!validateForm()}
+          >
+            Signup
+          </LoaderButton>
+        </Stack>
       </Form>
     );
   }
@@ -135,7 +143,6 @@ export default function Signup() {
     </div>
   );
 }
-
 ```
 
 Most of the things we are doing here are fairly straightforward but let's go over them quickly.
@@ -154,12 +161,7 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 
 4. We are setting the `autoFocus` flags on the email and the confirmation code fields.
 
-   ```tsx
-   <Form.Control
-     autoFocus
-     type="email"
-   ...
-   ```
+   `<Form.Control autoFocus type="email" ... />`
 
 5. For now our `handleSubmit` and `handleConfirmationSubmit` don't do a whole lot besides setting the `isLoading` state and a dummy value for the `newUser` state.
 
@@ -200,15 +202,15 @@ Most of the things we are doing here are fairly straightforward but let's go ove
 {%change%} And include our component in the header.
 
 ```typescript
-import Signup from "./containers/Signup";
+import Signup from "./containers/Signup.tsx";
 ```
 
 Now if we switch to our browser and navigate to the signup page we should see our newly created form. Our form doesn't do anything when we enter in our info but you can still try to fill in an email address, password, and confirmation password. 
 
-![Signup page added screenshot](/assets/signup-page-added.png)
+![Signup page added screenshot](/assets/part2/signup-page-added.png)
 
 Then, after hitting submit, you'll get the confirmation code form.  This'll give you an idea of how the form will behave once we connect it to Cognito.
 
-![Signup page added screenshot](/assets/signup-page-confirmation-code.png)
+![Signup page added screenshot](/assets/part2/signup-page-confirmation-code.png)
 
 Next, let's connect our signup form to Amazon Cognito.

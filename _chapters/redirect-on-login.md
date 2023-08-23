@@ -35,7 +35,7 @@ Now let's update our component to use this parameter when it redirects.
 {%change%} Replace our current `UnauthenticatedRoute` function component with the following.
 
 ```tsx
-export default function UnauthenticatedRoute(props: AuthProps) {
+export default function UnauthenticatedRoute(props: Props) {
   const { isAuthenticated } = useAppContext();
   const { children } = props;
   const redirect = querystring("redirect");

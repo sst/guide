@@ -71,8 +71,8 @@ So the following routes in `src/Routes.tsx` would be affected.
 {%change%} Then import them in the header of `src/Routes.tsx`.
 
 ```tsx
-import AuthenticatedRoute from "./components/AuthenticatedRoute";
-import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
+import AuthenticatedRoute from "./components/AuthenticatedRoute.tsx";
+import UnauthenticatedRoute from "./components/UnauthenticatedRoute.tsx";
 ```
 
 And now if we tried to load a note page while not logged in, we would be redirected to the login page with a reference to the note page.
