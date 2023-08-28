@@ -9,6 +9,16 @@ ref: secure-our-serverless-apis
 comments_id: secure-our-serverless-apis/2467
 ---
 
+{%caution%}
+You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
+{%endcaution%}
+{%info%}
+You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
+{%endinfo%}
+{%note%}
+You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
+{%endnote%}
+
 Now that our APIs have been [secured with Cognito User Pool and Identity Pool]({% link _chapters/adding-auth-to-our-serverless-app.md %}), we are ready to use the authenticated user's info in our Lambda functions.
 
 Recall that we've been hard coding our user ids so far (with user id `123`). We'll need to grab the real user id from the Lambda function event.
@@ -123,17 +133,17 @@ We need to pass in quite a bit of our info to complete the above steps.
 - Use the username and password of the user created above.
 - Replace `USER_POOL_ID`, `USER_POOL_CLIENT_ID`, `COGNITO_REGION`, and `IDENTITY_POOL_ID` with the `UserPoolId`, `UserPoolClientId`, `Region`, and `IdentityPoolId` from our [previous chapter]({% link _chapters/adding-auth-to-our-serverless-app.md %}).
 - Replace the `API_ENDPOINT` with the `ApiEndpoint` from our [API stack outputs]({% link _chapters/add-an-api-to-create-a-note.md %}).
-- And for the `API_REGION` you can use the same `Region` as we used above. Since our entire app is deployed to the same region. (See Console output from auth for key **`apigTestFlags`**.  You can replace the part above the extra slash with those values. )
+- And for the `API_REGION` you can use the same `Region` as we used above. Since our entire app is deployed to the same region.
 
 While this might look intimidating, just keep in mind that behind the scenes all we are doing is generating some security headers before making a basic HTTP request. We won't need to do this when we connect from our React.js app.
 
-{%aside%}
+{%info%}
 If you are on Windows, you can use the command below. The spaces between each option are very important.
 
 ```bash
 $ pnpm dlx aws-api-gateway-cli-test --username admin@example.com --password Passw0rd! --user-pool-id <USER_POOL_ID> --app-client-id <USER_POOL_CLIENT_ID> --cognito-region <COGNITO_REGION> --identity-pool-id <IDENTITY_POOL_ID> --invoke-url <API_ENDPOINT> --api-gateway-region <API_REGION> --path-template /notes --method POST --body '{""content\":\"hello world\",\"attachment\":\"hello.jpg\"}'
 ```
-{%endaside%}
+{%endinfo%}
 
 If the command is successful, the response will look similar to this.
 

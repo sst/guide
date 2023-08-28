@@ -61,7 +61,7 @@ Finally, let's look at the common use cases for ARN.
        "Resource": "arn:aws:s3:::Hello-bucket/*"
    }
    ```
-   
+
    ARN is used to define which resource (S3 bucket in this case) the access is granted for. The wildcard `*` character is used here to match all resources inside the *Hello-bucket*.
 
 Next, you can learn more about AWS AppSync.

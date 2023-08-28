@@ -28,7 +28,7 @@ Enter a **User name**, then select **Next**.
 
 This account will be used by our [AWS CLI](https://aws.amazon.com/cli/) and [SST]({{ site.sst_github_repo }}). They will be connecting to the AWS API directly and will not be using the Management Console.  
 
-{%note%} 
+{%note%}
 The best practice is to avoid creating keys when possible.  When using programmatic access keys, regularly rotate them.  In most cases, there are alternative solutions, see the [AWS IAM User Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_RotateAccessKey) for more information.
 {%endnote%}
 

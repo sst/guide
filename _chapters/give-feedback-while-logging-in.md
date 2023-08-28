@@ -211,8 +211,8 @@ import { onError } from "./lib/errorLib";
 
 We'll improve our error handling a little later on in the guide.
 
-{%aside%}
+{%info%}
 If you would like to add a _Forgot Password_ feature for your users, you can refer to our [Extra Credit series of chapters on user management]({% link _chapters/manage-user-accounts-in-aws-amplify.md %}){:target="_blank"}.
-{%endaside%}
+{%endinfo%}
 
 For now, we are ready to move on to the sign up process for our app.

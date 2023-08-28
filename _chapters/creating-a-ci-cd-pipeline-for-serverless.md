@@ -40,13 +40,13 @@ Here is what our workflow is going to look like:
   - Built
   - And deployed to prod
 
-Our workflow is fairly simple. But as your team grows, you'll need to add additionally dev and staging environments.
+Our workflow is fairly simple. But as your team grows, you'll need to add additional dev and staging environments.
 
 ### CI/CD for Serverless
 
 There are many common CI/CD services, like [Travis CI](https://travis-ci.org){:target="_blank"} or [CircleCI](https://circleci.com){:target="_blank"}. These usually require you to manually configure the above pipeline. It involves a fair bit of scripts and configuration.
 
-To fix this we created a service called [**Seed**](https://seed.run){:target="_blank"}. It requires no scripts and is built specifically for serverless. It also allows you to monitor and debug your serverless app. This is something we'll be doing later in the guide.
+To fix this we created a service called [**Seed**](https://seed.run){:target="_blank"}. It requires no scripts and is built specifically for serverless. It also allows you to monitor and debug your serverless app.
 
 We should mention that you don't have to use Seed. And this section is completely optional.
 

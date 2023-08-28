@@ -133,7 +133,7 @@ The code above does a few things.
    note.content.trim().split("\n")[0];
    ```
 
-5. And we safely convert the date the note was created to a more friendly format.
+5. And we convert the date the note was created to a more friendly format.
 
    ```tsx
    !str ? "" : new Date(str).toLocaleString()

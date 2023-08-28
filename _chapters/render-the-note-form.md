@@ -156,7 +156,6 @@ We are doing a few things here:
 
 6. Our delete button also confirms with the user if they want to delete the note using the browser's `confirm` dialog.
 
-
 And that's it. If you switch over to your browser, you should see the note loaded.
 
 ![Notes page loaded screenshot](/assets/part2/notes-page-loaded.png)

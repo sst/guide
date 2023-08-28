@@ -45,21 +45,21 @@ We will be using the AWS Platform to build it. We might expand further and cover
 
 We will be using the following set of technologies and services to build our serverless application. 
 
-- [Bootstrap][Bootstrap]{:target="_blank"}  for the UI Kit
-- [Certificate Manager][CM]{:target="_blank"}  for SSL
-- [CloudFront][CF]{:target="_blank"}  for serving out our app
-- [CloudWatch][CloudWatch]{:target="_blank"}  for Lambda and API access logs
-- [Cognito][Cognito]{:target="_blank"}  for user authentication and securing our APIs
-- [DynamoDB][DynamoDB]{:target="_blank"}  for our database
-- [GitHub][GitHub]{:target="_blank"}  for hosting our project repos
-- [Lambda][Lambda]{:target="_blank"}  & [API Gateway][APIG]{:target="_blank"}  for our serverless API
-- [Netlify][Netlify]{:target="_blank"}  for automating React deployments
-- [React Router][RR]{:target="_blank"}  for routing
-- [React.js][React]{:target="_blank"}  for our single page app
-- [Route 53][R53]{:target="_blank"}  for our domain
-- [S3][S3]{:target="_blank"}  for hosting our app and file uploads
-- [Seed][Seed]{:target="_blank"}  for automating serverless deployments
-- [Stripe][Stripe]{:target="_blank"}  for processing credit card payments
+- [Bootstrap][Bootstrap]{:target="_blank"} for the UI Kit
+- [Certificate Manager][CM]{:target="_blank"} for SSL
+- [CloudFront][CF]{:target="_blank"} for serving out our app
+- [CloudWatch][CloudWatch]{:target="_blank"} for Lambda and API access logs
+- [Cognito][Cognito]{:target="_blank"} for user authentication and securing our APIs
+- [DynamoDB][DynamoDB]{:target="_blank"} for our database
+- [GitHub][GitHub]{:target="_blank"} for hosting our project repos
+- [Lambda][Lambda]{:target="_blank"} & [API Gateway][APIG]{:target="_blank"} for our serverless API
+- [Netlify][Netlify]{:target="_blank"} for automating React deployments
+- [React Router][RR]{:target="_blank"} for routing
+- [React.js][React]{:target="_blank"} for our single page app
+- [Route 53][R53]{:target="_blank"} for our domain
+- [S3][S3]{:target="_blank"} for hosting our app and file uploads
+- [Seed][Seed]{:target="_blank"} for automating serverless deployments
+- [Stripe][Stripe]{:target="_blank"} for processing credit card payments
 
 We are going to be using the **free tiers** for the above services. So you should be able to sign up for them for free. This of course does not apply to purchasing a new domain to host your app. Also for AWS, you are required to put in a credit card while creating an account. So if you happen to be creating resources above and beyond what we cover in this tutorial, you might end up getting charged.
 
@@ -70,7 +70,7 @@ While the list above might look daunting, we are trying to ensure that upon comp
 You just need a couple of things to work through this guide:
 
 - [Node v18+](https://nodejs.org/en/){:target="_blank"} installed on your machine.
-- [PNPM v8+](https://pnpm.io/){:target="_blank"}  installed on your machine.
+- [PNPM v8+](https://pnpm.io/){:target="_blank"} installed on your machine.
 - A free [GitHub account](https://github.com/join){:target="_blank"}.
 - Basic knowledge of JavaScript and TypeScript.
 - And basic knowledge of how to use the command line.

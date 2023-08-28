@@ -125,7 +125,7 @@ With these faulty lines:
 {isAuthenticated ? renderNotes() : renderLander()}
 { isAuthenticated.none.no }
 ```
- 
+
 {% endraw %}
 
 Now in your browser you should see something like this.

@@ -48,7 +48,7 @@ export const main = handler(async (event) => {
 });
 ```
 
-This should look similar to the `create.ts` function combined with the validation from `get.ts` . Here we make an `update` DynamoDB call with the new `content` and `attachment` values in the `params`.
+This should look similar to the `create.ts` function combined. Here we make an `update` DynamoDB call with the new `content` and `attachment` values in the `params`.
 
 ### Add the Route
 

@@ -20,7 +20,7 @@ SST comes with built in support for writing and running tests. It uses [Vitest](
 
 Let's start by writing a test for the CDK infrastructure in our app. We are going to keep this fairly simple for now.
 
-{%change%} Add vite for the workspace.
+{%change%} Add Vitest to the workspace.
 
 ```bash
 $ pnpm add --save-dev --workspace-root vitest

@@ -35,7 +35,7 @@ async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 }
 ```
 
-{%change%} And add the Auth module to the header of our Login container in `src/containers/Login.tsx`.
+{%change%} And import `Auth` in the header of `src/containers/Login.tsx`.
 
 ```tsx
 import { Auth } from "aws-amplify";

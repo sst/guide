@@ -23,9 +23,9 @@ Let's start by quickly looking at the technical specifications of AWS Lambda. La
 - Ruby 2.7
 - Rust
 
-{%aside%}
+{%info%}
 [.NET Core 2.2 and 3.0 are supported through custom runtimes](https://aws.amazon.com/blogs/developer/announcing-amazon-lambda-runtimesupport/){:target="_blank"}.
-{%endaside%}
+{%endinfo%}
 
 [Check out the AWS docs to learn more about the available runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html){:target="_blank"}.
 

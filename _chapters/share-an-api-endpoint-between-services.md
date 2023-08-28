@@ -54,7 +54,7 @@ In our [serverless-stack-demo-ext-api]({{ site.backend_ext_api_github_repo }}) r
         Ref: ApiGatewayRestApi
       Export:
         Name: ${self:custom.stage}-ExtApiGatewayRestApiId
-  
+
     ApiGatewayRestApiRootResourceId:
       Value:
          Fn::GetAtt:

@@ -67,7 +67,7 @@ We are doing a few things of note here:
 
 2. Store our notes in the state. Currently, it's empty but we'll be calling our API for it.
 
-3. Once we fetch our list we'll use the `renderNotesList` method to render the items in the list.  We temporarily added a generic object definition for the notes Type.
+3. Once we fetch our list we'll use the `renderNotesList` method to render the items in the list. 
 
 4. We're using the [Bootstrap utility classes](https://getbootstrap.com/docs/4.5/utilities/spacing/){:target="_blank"} `pb-3` (padding bottom), `mt-4` (margin top), `mb-3` (margin bottom), and `border-bottom` to style the _Your Notes_ header.
 

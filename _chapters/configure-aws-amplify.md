@@ -56,7 +56,7 @@ Here we are loading the environment that are set from our serverless backend. We
 
 Next we'll set up AWS Amplify.
 
-{%change%} To initialize AWS Amplify; add the following above the `root.render` line in `src/main.tsx`.
+{%change%} To initialize AWS Amplify; add the following above the `ReactDOM.createRoot` line in `src/main.tsx`.
 
 ```tsx
 Amplify.configure({
@@ -84,13 +84,13 @@ Amplify.configure({
 });
 ```
 
-{%change%} Import it by adding the following to the header of your `src/index.tsx`.
+{%change%} Import it by adding the following to the header of your `src/main.tsx`.
 
 ```tsx
 import { Amplify } from "aws-amplify";
 ```
 
-{%change%} And import the config we created above by also to the header of your `src/index.tsx`.
+{%change%} And import the config we created above in the header of your `src/main.tsx`.
 
 ```tsx
 import config from "./config.ts";

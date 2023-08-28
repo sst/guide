@@ -35,16 +35,14 @@ We need to use the custom domain URL of our API in our React app.
 {%change%} Find the following line in `stacks/FrontendStack.ts`.
 
 ```typescript
-REACT_APP_API_URL: api.url,
+VITE_API_URL: api.url,
 ```
 
 {%change%} And replace it with.
 
 ```typescript
-REACT_APP_API_URL: api.customDomainUrl || api.url,
+VITE_API_URL: api.customDomainUrl || api.url,
 ```
-
-Note that, if you are going to use a custom domain locally, you might need to remove your app (`pnpm sst remove`) and deploy it again. This is because CDK doesn't allow you to change these references dynamically.
 
 We also need to update the outputs of our frontend stack.
 

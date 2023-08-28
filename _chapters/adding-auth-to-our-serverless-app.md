@@ -64,7 +64,7 @@ export function AuthStack({ stack, app }: StackContext) {
 
 Let's go over what we are doing here.
 
-- We are creating a new stack for our auth infrastructure. While we don't need to create a separate stack, we are using it as an example to show how to work with multiple stacks.  Additionally, such separations can make maintenance easier.
+- We are creating a new stack for our auth infrastructure. While we don't need to create a separate stack, we are using it as an example to show how to work with multiple stacks.
 
 - The `Auth` construct creates a Cognito User Pool for us. We are using the `login` prop to state that we want our users to login with their email.
 
@@ -76,9 +76,9 @@ Let's go over what we are doing here.
 
 - Finally, we output the ids of the auth resources that have been created and returning the auth resource so that other stacks can access this resource.
 
-{% aside %}
+{% info %}
 Learn more about how to [share resources between stacks]({{ site.docs_url }}/constructs/Stack#sharing-resources-between-stacks){:target="_blank"}.
-{% endaside %}
+{% endinfo %}
 
 ### Securing Access to Uploaded Files
 
@@ -103,9 +103,9 @@ One other thing to note is that, the federated identity id is a UUID that is ass
 
 ### Add to the App
 
-Let's add this stack to our app config in file `sst.config.ts` .
+Let's add this stack to our config in `sst.config.ts`.
 
-{%change%} Replace the `stacks` function with this line that adds the AuthStack into our chain of stacks.
+{%change%} Replace the `stacks` function with this line that adds the `AuthStack` into our list of stacks.
 
 ```typescript
 stacks(app) {
@@ -122,7 +122,7 @@ import { AuthStack } from "./stacks/AuthStack";
 
 We also need to enable authentication in our API.
 
-{%change%} Add the following key into the defaults hash above the `function: {` line in `stacks/ApiStack.ts`.
+{%change%} Add the following prop into the `defaults` options above the `function: {` line in `stacks/ApiStack.ts`.
 
 ```typescript
 authorizer: "iam",

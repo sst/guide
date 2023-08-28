@@ -31,7 +31,7 @@ Let's start by creating a free Stripe account. Head over to [Stripe](https://das
 
 Once signed in with a confirmed account, you will be able to use the developer tools. 
 
-![Stripe dashboard screenshot](/assets/stripe/dashboard.png)
+![Stripe dashboard screenshot](/assets/part2/developer-section-in-stripe-dashboard.png)
 
 The first thing to do is switch to test mode. This is important because we don't want to charge our credit card every time we test our app.
 

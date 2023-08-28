@@ -71,7 +71,7 @@ We are adding the `BillingForm` component that we previously created here and pa
 
 To initialize the Stripe Elements we pass in the Stripe.js object that we loaded [a couple of chapters ago]({% link _chapters/add-stripe-keys-to-config.md %}). This Elements component needs to wrap around any Stripe React components.
 
-The Stripe elements are loaded inside an [IFrame](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe). So if we are using any custom fonts, we'll need to include them explicitly. As covered in the [Stripe documentation](https://stripe.com/docs/js/elements_object){:target="_blank"}
+The Stripe elements are loaded inside an [IFrame](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe). So if we are using any custom fonts, we'll need to include them explicitly. As covered in the [Stripe docs](https://stripe.com/docs/js/elements_object){:target="_blank"}.
 
 Finally, let's handle some styles for our settings page as a whole.
 

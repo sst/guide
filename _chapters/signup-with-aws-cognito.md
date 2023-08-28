@@ -46,7 +46,7 @@ async function handleConfirmationSubmit(
 }
 ```
 
-{%change%} Also, include the Amplify Auth, onError,  and ISignUpResult Type in our header.
+{%change%} Also, include the Amplify `Auth`, `onError`, and `ISignUpResult` type in our header.
 
 ```tsx
 import { Auth } from "aws-amplify";
@@ -111,8 +111,8 @@ aws cognito-idp admin-confirm-sign-up \
 
 Just be sure to use your Cognito `USER_POOL_ID` and the _email address_ you used to create the account.
 
-{%aside%}
+{%info%}
 If you would like to allow your users to change their email or password, you can refer to our [Extra Credit series of chapters on user management]({% link _chapters/manage-user-accounts-in-aws-amplify.md %}){:target="_blank"}.
-{%endaside%}
+{%endinfo%}
 
 Next up, we are going to create our first note.

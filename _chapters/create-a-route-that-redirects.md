@@ -11,7 +11,7 @@ ref: create-a-route-that-redirects
 
 Let's first create a route that will check if the user is logged in before routing.
 
-{%change%} Add the following file in components  `src/components/AuthenticatedRoute.tsx`.
+{%change%} Add the following file in components `src/components/AuthenticatedRoute.tsx`.
 
 ```tsx
 import { ReactElement } from "react";
@@ -48,7 +48,7 @@ This simple component creates a `Route` where its children are rendered only if 
 
 We'll do something similar to ensure that the user is not authenticated.
 
-{%change%} Next the following file in components  `src/components/UnauthenticatedRoute.tsx`.
+{%change%} Next, add the following file in components  `src/components/UnauthenticatedRoute.tsx`.
 
 ```tsx
 import { cloneElement, ReactElement } from "react";

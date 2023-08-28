@@ -45,7 +45,7 @@ $ git init
 
 ``` bash
 $ git add .
-``` 
+```
 
 {%change%} Create your first commit.
 
@@ -59,14 +59,14 @@ $ git commit -m "First commit"
 $ git branch -M main
 $ git remote add origin <REPO_URL>
 ```
-{%aside%}
+{%info%}
 Here `REPO_URL` is the URL we copied from GitHub in the steps above. You can verify that it has been set correctly by doing the following.
 
 ``` bash
 $ git remote -v
 ```
 
-{%endaside%}
+{%endinfo%}
 
 {%change%} Finally, let's push our first commit to GitHub using:
 

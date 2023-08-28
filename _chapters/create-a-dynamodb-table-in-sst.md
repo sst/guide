@@ -62,11 +62,11 @@ return {
 };
 ```
 
-{%aside%} 
-Explicitly returning the attributes created is a stylistic choice intended to improve maintainability by clearly listing the exposed stacks.
+{%info%}
+By explicitly returning the resources created in a stack, we can reference them in other stacks when we imported. We'll see this in action in the coming chapters.
 
-This will also allow us to reference this resource in our other stacks. [Learn more about sharing resources between stacks](https://docs.sst.dev/constructs/Stack#sharing-resources-between-stacks){:target="_blank"}.
-{%endaside%}
+[Learn more about sharing resources between stacks](https://docs.sst.dev/constructs/Stack#sharing-resources-between-stacks){:target="_blank"}.
+{%endinfo%}
 
 ### Remove Template Files
 

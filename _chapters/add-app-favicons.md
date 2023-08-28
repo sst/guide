@@ -34,7 +34,7 @@ This should generate your favicon package and the accompanying code.
 
 Let's remove the old icons files.
 
-{%note%} 
+{%note%}
 We'll be working exclusively **in the `packages/frontend/` directory** for the rest of the frontend part of the guide.
 {%endnote%}
 

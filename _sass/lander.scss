@@ -391,7 +391,7 @@
       padding-top: 5px;
       font-size: 14px;
     }
-    
+
     a {
       padding-left: $spacing-unit - 2px;
       color: $tertiary-text-color;
@@ -432,7 +432,7 @@
       @include media-query($on-palm) {
         font-size: 10px;
       }
-    
+
       &:last-child {
         display: none;
       }
@@ -483,7 +483,7 @@
             vertical-align: 0;
           }
         }
-      
+
         &.copied {
           i.fa {
             &:nth-last-child(2) {
@@ -796,7 +796,7 @@
         width: $m_size;
         height: $m_size;
       }
-    
+
       .active {
         cursor: default;
       }
@@ -1103,7 +1103,7 @@
                 0 8px 16px rgba(57, 92, 107,0.04),
                 0 16px 32px rgba(57, 92, 107,0.04), 
                 0 32px 64px rgba(57, 92, 107,0.04);
-  
+
     &:nth-child(1) {
       z-index: 3;
     }

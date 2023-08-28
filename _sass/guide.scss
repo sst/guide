@@ -613,54 +613,30 @@ main > .guide-page > .table-of-contents {
   }
 }
 
-.extra-info {
-  color: $secondary-text-color;
-  text-transform: uppercase;
-  letter-spacing: 0.04rem;
-  font-weight: bold;
-}
-.aside-info {
+aside {
   padding: $spacing-unit / 2;
   margin-bottom: $spacing-unit / 2;
-  background-color: #f3ffff;
-  border-left: solid 5px $brand-color;
   border-radius: 0 4px 4px 0;
 
-  & > div > *:last-child {
-    margin-bottom: 0;
+  &.info {
+    background-color: #f3ffff;
+    border-left: solid 5px $brand-color;
   }
-}
-
-.extra-note {
-  color: $secondary-text-color;
-  text-transform: uppercase;
-  letter-spacing: 0.04rem;
-  font-weight: bold;
-}
-.aside-note {
-  padding: $spacing-unit / 2;
-  margin-bottom: $spacing-unit / 2;
-  background-color: $secondary-background-color;
-  border-left: solid 5px $brand-color;
-  border-radius: 0 4px 4px 0;
-
-  & > div > *:last-child {
-    margin-bottom: 0;
+  &.note {
+    background-color: $secondary-background-color;
+    border-left: solid 5px $brand-color;
   }
-}
+  &.caution {
+    background-color: $secondary-background-color;
+    border-left: solid 5px $important-color;
+  }
 
-.extra-caution {
-  color: $secondary-text-color;
-  text-transform: uppercase;
-  letter-spacing: 0.04rem;
-  font-weight: bold;
-}
-.aside-caution {
-  padding: $spacing-unit / 2;
-  margin-bottom: $spacing-unit / 2;
-  background-color: $secondary-background-color;
-  border-left: solid 5px $important-color;
-  border-radius: 0 4px 4px 0;
+  & > h5 {
+    color: $secondary-text-color;
+    text-transform: uppercase;
+    letter-spacing: 0.04rem;
+    font-weight: bold;
+  }
 
   & > div > *:last-child {
     margin-bottom: 0;
