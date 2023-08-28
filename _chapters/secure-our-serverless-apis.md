@@ -9,16 +9,6 @@ ref: secure-our-serverless-apis
 comments_id: secure-our-serverless-apis/2467
 ---
 
-{%caution%}
-You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
-{%endcaution%}
-{%info%}
-You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
-{%endinfo%}
-{%note%}
-You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
-{%endnote%}
-
 Now that our APIs have been [secured with Cognito User Pool and Identity Pool]({% link _chapters/adding-auth-to-our-serverless-app.md %}), we are ready to use the authenticated user's info in our Lambda functions.
 
 Recall that we've been hard coding our user ids so far (with user id `123`). We'll need to grab the real user id from the Lambda function event.
