@@ -51,7 +51,7 @@ The first thing we can do is to configure our build system with the `REACT_APP_S
 }
 ```
 
-Recall that the `YOUR_S3_DEPLOY_BUCKET_NAME` is the S3 bucket we created to host our React app back in the [Create an S3 bucket]({% link _chapters/create-an-s3-bucket.md %}) chapter. And `YOUR_CF_DISTRIBUTION_ID` and `YOUR_WWW_CF_DISTRIBUTION_ID` are the CloudFront Distributions for the [apex]({% link _chapters/create-a-cloudfront-distribution.md %}) and [www]({% link _chapters/setup-www-domain-redirect.md %}) domains.
+Recall that the `YOUR_S3_DEPLOY_BUCKET_NAME` is the S3 bucket we created to host our React app back in the [Create an S3 bucket]({% link _archives/create-an-s3-bucket.md %}) chapter. And `YOUR_CF_DISTRIBUTION_ID` and `YOUR_WWW_CF_DISTRIBUTION_ID` are the CloudFront Distributions for the [apex]({% link _archives/create-a-cloudfront-distribution.md %}) and [www]({% link _archives/setup-www-domain-redirect.md %}) domains.
 
 Here we only have one environment and we use it for our local development and on live. The `npm start` command runs our local server and `npx sst deploy` command deploys our app to live.
 

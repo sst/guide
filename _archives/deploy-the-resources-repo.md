@@ -48,7 +48,7 @@ After the service is successfully deployed. Click **Promote** to deploy this to 
 
 ![Select Promote in dev stage](/assets/best-practices/deploy-resources-repo-to-seed/select-promote-in-dev-stage.png)
 
-You will see a list of changes in resources. Since this is the first time we are deploying to the `prod` stage, the change list shows all the resources that will be created. We'll take a look at this in detail later in the [Promoting to production]({% link _chapters/promoting-to-production.md %}) chapter.
+You will see a list of changes in resources. Since this is the first time we are deploying to the `prod` stage, the change list shows all the resources that will be created. We'll take a look at this in detail later in the [Promoting to production]({% link _archives/promoting-to-production.md %}) chapter.
 
 Click **Promote to Production**.
 

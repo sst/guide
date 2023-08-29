@@ -26,7 +26,7 @@ Notice a new build is triggered for the `prod` stage.
 
 ### Rollback infrastructure change
 
-In our monorepo setup, our app is made up of multiple services, and some services are dependent on each other. These dependencies require the services to be deployed in a specific order. Previously, we talked about how to [deploy services with dependencies]({% link _chapters/deploy-a-serverless-app-with-dependencies.md %}). We also need to watch out for the deployment order when rolling back a change.
+In our monorepo setup, our app is made up of multiple services, and some services are dependent on each other. These dependencies require the services to be deployed in a specific order. Previously, we talked about how to [deploy services with dependencies]({% link _archives/deploy-a-serverless-app-with-dependencies.md %}). We also need to watch out for the deployment order when rolling back a change.
 
 Let’s consider a simple example with just two services, `billing-api` and `notify-job`. Where `billing-api` exports an SNS topic named `note-purchased`. Here is an example of `billing-api`’s `serverless.yml`:
 

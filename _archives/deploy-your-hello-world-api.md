@@ -8,7 +8,7 @@ description: In this chapter we'll be deploying our first Hello World serverless
 comments_id: deploy-your-hello-world-api/2173
 ---
 
-So far we've [created our Serverless Framework]({% link _chapters/setup-the-serverless-framework.md %}) app. Now we are going to deploy it to AWS. Make sure you've [configured your AWS account]({% link _chapters/create-an-aws-account.md %}) and [AWS CLI]({% link _chapters/configure-the-aws-cli.md %}).
+So far we've [created our Serverless Framework]({% link _archives/setup-the-serverless-framework.md %}) app. Now we are going to deploy it to AWS. Make sure you've [configured your AWS account]({% link _chapters/create-an-aws-account.md %}) and [AWS CLI]({% link _chapters/configure-the-aws-cli.md %}).
 
 A big advantage with serverless is that there isn't any infrastructure or servers to provision. You can simply deploy your app directly and it's ready to serve (millions of) users right away.
 

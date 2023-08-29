@@ -30,7 +30,7 @@ Enter an **Identity pool name**. If you have any existing Identity Pools, you'll
 
 ![Fill Cognito Identity Pool Info Screenshot](/assets/cognito-identity-pool/fill-identity-pool-info.png)
 
-Select **Authentication providers**. Under **Cognito** tab, enter **User Pool ID** and **App Client ID** of the User Pool created in the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter. Select **Create Pool**.
+Select **Authentication providers**. Under **Cognito** tab, enter **User Pool ID** and **App Client ID** of the User Pool created in the [Create a Cognito user pool]({% link _archives/create-a-cognito-user-pool.md %}) chapter. Select **Create Pool**.
 
 ![Fill Authentication Provider Info Screenshot](/assets/cognito-identity-pool/fill-authentication-provider-info.png)
 
@@ -46,7 +46,7 @@ It will warn you to read the documentation. Select **Ok** to edit.
 
 ![Select Confirm Edit Policy Screenshot](/assets/cognito-identity-pool/select-confirm-edit-policy.png)
 
-{%change%} Add the following policy into the editor. Replace `YOUR_S3_UPLOADS_BUCKET_NAME` with the **bucket name** from the [Create an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}) chapter. And replace the `YOUR_API_GATEWAY_REGION` and `YOUR_API_GATEWAY_ID` with the ones that you got back in the [Deploy the APIs]({% link _chapters/deploy-the-apis.md %}) chapter.
+{%change%} Add the following policy into the editor. Replace `YOUR_S3_UPLOADS_BUCKET_NAME` with the **bucket name** from the [Create an S3 bucket for file uploads]({% link _archives/create-an-s3-bucket-for-file-uploads.md %}) chapter. And replace the `YOUR_API_GATEWAY_REGION` and `YOUR_API_GATEWAY_ID` with the ones that you got back in the [Deploy the APIs]({% link _archives/deploy-the-apis.md %}) chapter.
 
 In our case `YOUR_S3_UPLOADS_BUCKET_NAME` is `notes-app-uploads`, `YOUR_API_GATEWAY_ID` is `ly55wbovq4`, and `YOUR_API_GATEWAY_REGION` is `us-east-1`.
 
@@ -87,7 +87,7 @@ In our case `YOUR_S3_UPLOADS_BUCKET_NAME` is `notes-app-uploads`, `YOUR_API_GATE
 }
 ```
 
-Once a user has been authenticated with our User Pool and verified with our Identity Pool, he/she is assigned this [IAM role]({% link _chapters/what-is-iam.md %}). This role limits what our user has access to in our AWS account.
+Once a user has been authenticated with our User Pool and verified with our Identity Pool, he/she is assigned this [IAM role]({% link _archives/what-is-iam.md %}). This role limits what our user has access to in our AWS account.
 
 A quick note on the block that relates to the S3 Bucket. In the above policy we are granting our logged in users access to the path `private/${cognito-identity.amazonaws.com:sub}/`. Where `cognito-identity.amazonaws.com:sub` is the authenticated user's federated identity ID (their user id). So a user has access to only their folder within the bucket. This is how we are securing the uploads for each user.
 

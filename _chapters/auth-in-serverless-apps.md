@@ -56,7 +56,7 @@ To manage sign up and login functionality for our users, we'll be using an AWS s
 
 To manage access control to our AWS infrastructure we use another service called [Amazon Cognito Identity Pools](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html){:target="_blank"}. This service decides if our previously authenticated user has access to the resources he/she is trying to connect to. Identity Pools can have different authentication providers (like Cognito User Pools, Facebook, Google etc.). In our case, our Identity Pool will be connected to our User Pool.
 
-If you are a little confused about the differences between a User Pool and an Identity Pool, don't worry. We've got a chapter to help you with just that — [Cognito User Pool vs Identity Pool]({% link _chapters/cognito-user-pool-vs-identity-pool.md %}){:target="_blank"}
+If you are a little confused about the differences between a User Pool and an Identity Pool, don't worry. We've got a chapter to help you with just that — [Cognito User Pool vs Identity Pool]({% link _archives/cognito-user-pool-vs-identity-pool.md %}){:target="_blank"}
 
 #### Auth Role
 
@@ -64,8 +64,8 @@ Our Cognito Identity Pool has a set of rules (called an IAM Role) attached to it
 
 We've got a couple of chapters to help you better understand IAMs and ARNs in detail:
 
-- [What is IAM]({% link _chapters/what-is-iam.md %}){:target="_blank"}
-- [What is an ARN]({% link _chapters/what-is-an-arn.md %}){:target="_blank"}
+- [What is IAM]({% link _archives/what-is-iam.md %}){:target="_blank"}
+- [What is an ARN]({% link _archives/what-is-an-arn.md %}){:target="_blank"}
 
 But for now our authenticated users use the Auth Role in our Identity Pool to interact with our resources. This will help us ensure that our logged in users can only access our notes API. And not any other API in our AWS account.
 
@@ -96,7 +96,7 @@ Our React client will be directly uploading files to our S3 bucket. Similar to o
 
 ### Alternative Authentication Methods
 
-It's worth quickly mentioning that there are other ways to secure your APIs. We mentioned above that an Identity Pool can use Facebook or Google as an authentication provider. So instead of using a User Pool, you can use Facebook or Google. We have an Extra Credits chapter on Facebook specifically — [Facebook Login with Cognito using AWS Amplify]({% link _chapters/facebook-login-with-cognito-using-aws-amplify.md %}){:target="_blank"}
+It's worth quickly mentioning that there are other ways to secure your APIs. We mentioned above that an Identity Pool can use Facebook or Google as an authentication provider. So instead of using a User Pool, you can use Facebook or Google. We have an Extra Credits chapter on Facebook specifically — [Facebook Login with Cognito using AWS Amplify]({% link _archives/facebook-login-with-cognito-using-aws-amplify.md %}){:target="_blank"}
 
 You can also directly connect the User Pool to API Gateway. The downside with that is that you might not be able to manage access control centrally to the S3 bucket (or any other AWS resources in the future).
 

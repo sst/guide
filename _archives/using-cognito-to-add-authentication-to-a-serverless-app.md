@@ -10,7 +10,7 @@ comments_id: using-cognito-to-add-authentication-to-a-serverless-app/2434
 
 {% capture repo_url %}{{ site.sst_github_repo }}{{ site.sst_github_examples_prefix }}react-app-auth-cognito{% endcapture %}
 
-In the [previous chapter]({% link _chapters/how-to-add-authentication-to-a-serverless-app.md %}) we looked at the basics of adding authentication to a serverless app. In this chapter we look at how to use [Amazon Cognito](https://aws.amazon.com/cognito/) to add authentication to a serverless API. We'll also look at how to connect to this API using [AWS Amplify](https://aws.amazon.com/amplify/) in a [React.js](https://reactjs.org) app.
+In the [previous chapter]({% link _archives/how-to-add-authentication-to-a-serverless-app.md %}) we looked at the basics of adding authentication to a serverless app. In this chapter we look at how to use [Amazon Cognito](https://aws.amazon.com/cognito/) to add authentication to a serverless API. We'll also look at how to connect to this API using [AWS Amplify](https://aws.amazon.com/amplify/) in a [React.js](https://reactjs.org) app.
 
 ![Login with Cognito in React.js app](/assets/extra-auth/cognito/login-with-cognito-in-react-js-app.png)
 
@@ -41,7 +41,7 @@ Let’s start with looking at how to add Cognito User Pool to our app.
 
 ### How to Add Cognito
 
-In the [previous chapter]({% link _chapters/how-to-add-authentication-to-a-serverless-app.md %}) we talked about the various parts of Cognito ([User Pools and Identity Pools]({% link _chapters/cognito-user-pool-vs-identity-pool.md %})).
+In the [previous chapter]({% link _archives/how-to-add-authentication-to-a-serverless-app.md %}) we talked about the various parts of Cognito ([User Pools and Identity Pools]({% link _archives/cognito-user-pool-vs-identity-pool.md %})).
 
 SST makes it easy to add these to your application. In [`stacks/MyStack.js`]({{ repo_url }}/stacks/MyStack.js) you'll notice.
 
@@ -179,7 +179,7 @@ const site = new ReactStaticSite(this, "ReactSite", {
 });
 ```
 
-The key here is that we are [setting the outputs from our backend as environment variables in React]({% link _chapters/setting-serverless-environments-variables-in-a-react-app.md %}). Specifically, we are passing in the:
+The key here is that we are [setting the outputs from our backend as environment variables in React]({% link _archives/setting-serverless-environments-variables-in-a-react-app.md %}). Specifically, we are passing in the:
 
 1. API endpoint
 2. Region of our serverless app

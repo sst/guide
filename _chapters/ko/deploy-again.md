@@ -23,7 +23,7 @@ $ npm run build
 
 ### S3에 업로드
 
-작업 디렉토리에서 다음을 실행하여 S3 버킷에 앱을 업로드하십시오. `YOUR_S3_DEPLOY_BUCKET_NAME`을 [S3 버킷 생성하기]({% link _chapters/create-an-s3-bucket.md %}) 챕터에서 생성한 S3 버킷으로 바꿔야합니다.
+작업 디렉토리에서 다음을 실행하여 S3 버킷에 앱을 업로드하십시오. `YOUR_S3_DEPLOY_BUCKET_NAME`을 [S3 버킷 생성하기]({% link _archives/create-an-s3-bucket.md %}) 챕터에서 생성한 S3 버킷으로 바꿔야합니다.
 
 ```bash
 $ aws s3 sync build/ s3://YOUR_S3_DEPLOY_BUCKET_NAME --delete
@@ -94,4 +94,4 @@ An error occurred (InvalidArgument) when calling the CreateInvalidation operatio
 $ npx sst deploy
 ```
 
-이제 앱이 완성되었습니다. 그리고 여기까지가 Part I의 끝입니다. 다음 챕터에서는 이 스택을 자동화하여 향후 프로젝트에 사용할 수있는 방법을 살펴 보겠습니다. [AWS Amplify를 사용하는 Cognito의 Facebook 로그인]({% link _chapters/facebook-login-with-cognito-using-aws-amplify.md %}) 챕터에서 Facebook 로그인을 추가하는 방법을 살펴볼 수도 있는데, 모두 지금까지 Part I에서 다루었던 것을 토대로 진행됩니다.
+이제 앱이 완성되었습니다. 그리고 여기까지가 Part I의 끝입니다. 다음 챕터에서는 이 스택을 자동화하여 향후 프로젝트에 사용할 수있는 방법을 살펴 보겠습니다. [AWS Amplify를 사용하는 Cognito의 Facebook 로그인]({% link _archives/facebook-login-with-cognito-using-aws-amplify.md %}) 챕터에서 Facebook 로그인을 추가하는 방법을 살펴볼 수도 있는데, 모두 지금까지 Part I에서 다루었던 것을 토대로 진행됩니다.

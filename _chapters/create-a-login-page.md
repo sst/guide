@@ -8,7 +8,7 @@ description: We are going to add a login page to our React.js app. To create the
 comments_id: create-a-login-page/71
 ---
 
-Let's create a page where the users of our app can login with their credentials. When we [created our User Pool]({% link _chapters/create-a-cognito-user-pool.md %}){:target="_blank"} we asked it to allow a user to sign in and sign up with their email as their username. We'll be touching on this further when we create the signup form.
+Let's create a page where the users of our app can login with their credentials. When we [created our User Pool]({% link _archives/create-a-cognito-user-pool.md %}){:target="_blank"} we asked it to allow a user to sign in and sign up with their email as their username. We'll be touching on this further when we create the signup form.
 
 So let's start by creating the basic form that'll take the user's email (as their username) and password.
 

@@ -39,7 +39,7 @@ Selecciona **Añadir directamente las políticas existentes**.
 
 Busca **AdministratorAccess** y selecciona la política, luego selecciona **Siguiente: Etiquetas**.
 
-Podemos proporcionar una política más detallada aquí y lo cubriremos más adelante en el capitulo [Personalizar la política de Serverless IAM]({% link _chapters/customize-the-serverless-iam-policy.md %}). Pero por ahora, continuemos con esto.
+Podemos proporcionar una política más detallada aquí y lo cubriremos más adelante en el capitulo [Personalizar la política de Serverless IAM]({% link _archives/customize-the-serverless-iam-policy.md %}). Pero por ahora, continuemos con esto.
 
 ![Captura: política de administración añadida](/assets/es/iam-user/added-admin-policy.png)
 

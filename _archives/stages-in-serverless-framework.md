@@ -48,7 +48,7 @@ There are a couple of ways to set up stages for your project:
 
 - Separate AWS account for each stage
 
-  Just like how having each stage being separate APIs give us more flexibility to fine tune the IAM policy. We can take it a step further and create the API project in a different AWS account. Most companies don't keep their production infrastructure in the same account as their development infrastructure. This helps reduce any cases where developers accidentally edit/delete production resources. We go in to more detail on how to deploy to multiple AWS accounts using different AWS profiles in the [Configure Multiple AWS Profiles]({% link _chapters/configure-multiple-aws-profiles.md %}) chapter.
+  Just like how having each stage being separate APIs give us more flexibility to fine tune the IAM policy. We can take it a step further and create the API project in a different AWS account. Most companies don't keep their production infrastructure in the same account as their development infrastructure. This helps reduce any cases where developers accidentally edit/delete production resources. We go in to more detail on how to deploy to multiple AWS accounts using different AWS profiles in the [Configure Multiple AWS Profiles]({% link _archives/configure-multiple-aws-profiles.md %}) chapter.
 
 ### Deploying to a Stage
 
@@ -70,7 +70,7 @@ $ serverless deploy --stage dev
 
 ### Stage Variables in Serverless Framework
 
-Deploying to stages can be pretty simple but now let's look at how to configure our environment variables so that they work with our various stages. We went over the concept of environment variables in the chapter on [Serverless Environment Variables]({% link _chapters/serverless-environment-variables.md %}). Let's extend that to specify variables based on the stage we are deploying to.
+Deploying to stages can be pretty simple but now let's look at how to configure our environment variables so that they work with our various stages. We went over the concept of environment variables in the chapter on [Serverless Environment Variables]({% link _archives/serverless-environment-variables.md %}). Let's extend that to specify variables based on the stage we are deploying to.
 
 Let's take a look at a sample `serverless.yml` below.
 

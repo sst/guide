@@ -22,11 +22,11 @@ When I waved my badge in front of the black box, the system was able to verify w
 
 ### Adding Authentication in Serverless
 
-You can use one of AWS's built-in authentication methods in your [API Gateway](https://aws.amazon.com/api-gateway/) or [AppSync]({% link _chapters/what-is-aws-appsync.md %}) APIs. Or if you need some extra features, there are plenty of third-party services, some of which you can self-host.
+You can use one of AWS's built-in authentication methods in your [API Gateway](https://aws.amazon.com/api-gateway/) or [AppSync]({% link _archives/what-is-aws-appsync.md %}) APIs. Or if you need some extra features, there are plenty of third-party services, some of which you can self-host.
 
 1. **IAM**
 
-   [Identity and Access Management]({% link _chapters/what-is-iam.md %}), or IAM, is AWS's authentication system. It's used for authentication and authorization for management tasks, like the AWS Console, CLI, or calling from one resource to another.
+   [Identity and Access Management]({% link _archives/what-is-iam.md %}), or IAM, is AWS's authentication system. It's used for authentication and authorization for management tasks, like the AWS Console, CLI, or calling from one resource to another.
 
 2. **Cognito**
 
@@ -48,9 +48,9 @@ Let’s look at a couple of these options in detail.
 
 ### AWS IAM
 
-[AWS IAM]({% link _chapters/what-is-iam.md %}) is how AWS controls access to resources natively. When you log in to the AWS console or use the CLI, your request is authorized by IAM.
+[AWS IAM]({% link _archives/what-is-iam.md %}) is how AWS controls access to resources natively. When you log in to the AWS console or use the CLI, your request is authorized by IAM.
 
-You can use IAM to control access to an API Gateway or [AppSync API]({% link _chapters/what-is-aws-appsync.md %}) by attaching a role to the resource that's making requests. At runtime, the resource will assume the role, which will allow it to make requests to your API depending on what permissions you've given to the role.
+You can use IAM to control access to an API Gateway or [AppSync API]({% link _archives/what-is-aws-appsync.md %}) by attaching a role to the resource that's making requests. At runtime, the resource will assume the role, which will allow it to make requests to your API depending on what permissions you've given to the role.
 
 For example, if you create a Lambda function that needs access to your AppSync API, you would first define a role that provides that permission and allows the Lambda service to assume the role. When your function starts, it will tell IAM that it wants to assume the role that you defined. IAM will authenticate the request by verifying that it came from a Lambda function and that Lambdas are allowed to assume the role. Once the function has been authenticated, IAM will provide it with temporary credentials to use when making requests to AWS services.
 
@@ -85,7 +85,7 @@ Identity Pools provide a service called *identity federation*. Identity federati
 
 The Identity Pool will then verify the token came from a valid authentication service. Once it's satisfied that the token is valid, it will return temporary AWS credentials that use an IAM role that you've attached to the Identity Pool. So in a way the auth providers here are handling authentication. While, the Identity Pool is managing authorization.
 
-For a detailed comparison, check out our chapter on [Cognito User Pool vs Identity Pool]({% link _chapters/cognito-user-pool-vs-identity-pool.md %}).
+For a detailed comparison, check out our chapter on [Cognito User Pool vs Identity Pool]({% link _archives/cognito-user-pool-vs-identity-pool.md %}).
 
 #### Pricing
 
@@ -120,4 +120,4 @@ Finally, AWS automatically handles User Pool token validation. If you're using a
 
 ### Next Steps
 
-This chapter should give you a good high-level overview of how to handle authentication in serverless apps. In the next few chapters we'll be looking at specific examples of how to use various authentication providers. Starting with [how to use Cognito to add authentication to your serverless app]({% link _chapters/using-cognito-to-add-authentication-to-a-serverless-app.md %}).
+This chapter should give you a good high-level overview of how to handle authentication in serverless apps. In the next few chapters we'll be looking at specific examples of how to use various authentication providers. Starting with [how to use Cognito to add authentication to your serverless app]({% link _archives/using-cognito-to-add-authentication-to-a-serverless-app.md %}).

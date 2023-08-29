@@ -8,7 +8,7 @@ description: In this chapter we'll be using the `aws_iam` authorizer to secure o
 comments_id: secure-the-apis/2179
 ---
 
-Now that we have [created a User Pool]({% link _chapters/create-a-cognito-user-pool.md %}), [Identity Pool and an Auth Role]({% link _chapters/create-a-cognito-identity-pool.md %}); we are ready to use them to secure access to our APIs.
+Now that we have [created a User Pool]({% link _archives/create-a-cognito-user-pool.md %}), [Identity Pool and an Auth Role]({% link _archives/create-a-cognito-identity-pool.md %}); we are ready to use them to secure access to our APIs.
 
 ### Serverless IAM Auth
 
@@ -157,11 +157,11 @@ userId: event.requestContext.identity.cognitoIdentityId, // The id of the author
 ":userId": event.requestContext.identity.cognitoIdentityId,
 ```
 
-Keep in mind that the `userId` above is the Federated Identity id (or Identity Pool user id). This is not the user id that is assigned in our User Pool. If you want to use the user's User Pool user Id instead, have a look at the [Mapping Cognito Identity Id and User Pool Id]({% link _chapters/mapping-cognito-identity-id-and-user-pool-id.md %}) chapter.
+Keep in mind that the `userId` above is the Federated Identity id (or Identity Pool user id). This is not the user id that is assigned in our User Pool. If you want to use the user's User Pool user Id instead, have a look at the [Mapping Cognito Identity Id and User Pool Id]({% link _archives/mapping-cognito-identity-id-and-user-pool-id.md %}) chapter.
 
 ### Testing Locally
 
-If you recall the chapters where we first [created our API endpoints]({% link _chapters/add-a-create-note-api.md %}), we were using a set of mock events to test our Lambda functions. We stored these in the `mocks/` directory.
+If you recall the chapters where we first [created our API endpoints]({% link _archives/add-a-create-note-api.md %}), we were using a set of mock events to test our Lambda functions. We stored these in the `mocks/` directory.
 
 For example, the `create-event.json` looks like this.
 

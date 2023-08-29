@@ -48,7 +48,7 @@ We are doing two things of note here.
 
 2. We use the `await` keyword to invoke the `Auth.signIn()` method that returns a promise. And we need to label our `handleSubmit` method as `async`.
 
-Now if you try to login using the `admin@example.com` user (that we created in the [Create a Cognito Test User]({% link _chapters/create-a-cognito-test-user.md %}) chapter), you should see the browser alert that tells you that the login was successful.
+Now if you try to login using the `admin@example.com` user (that we created in the [Create a Cognito Test User]({% link _archives/create-a-cognito-test-user.md %}) chapter), you should see the browser alert that tells you that the login was successful.
 
 ![Login success screenshot](/assets/login-success.png)
 

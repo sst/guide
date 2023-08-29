@@ -28,10 +28,10 @@ The `npx` command is just a convenient way of running a NPM module without insta
 
 We need to pass in quite a bit of our info to complete the above steps.
 
-- Use the username and password of the user created in the [Create a Cognito test user]({% link _chapters/create-a-cognito-test-user.md %}) chapter.
-- Replace **YOUR_COGNITO_USER_POOL_ID**, **YOUR_COGNITO_APP_CLIENT_ID**, and **YOUR_COGNITO_REGION** with the values from the [Create a Cognito user pool]({% link _chapters/create-a-cognito-user-pool.md %}) chapter. In our case the region is `us-east-1`.
-- Replace **YOUR_IDENTITY_POOL_ID** with the one from the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter.
-- Use the **YOUR_API_GATEWAY_URL** and **YOUR_API_GATEWAY_REGION** with the ones from the [Deploy the APIs]({% link _chapters/deploy-the-apis.md %}) chapter. In our case the URL is `https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod` and the region is `us-east-1`.
+- Use the username and password of the user created in the [Create a Cognito test user]({% link _archives/create-a-cognito-test-user.md %}) chapter.
+- Replace **YOUR_COGNITO_USER_POOL_ID**, **YOUR_COGNITO_APP_CLIENT_ID**, and **YOUR_COGNITO_REGION** with the values from the [Create a Cognito user pool]({% link _archives/create-a-cognito-user-pool.md %}) chapter. In our case the region is `us-east-1`.
+- Replace **YOUR_IDENTITY_POOL_ID** with the one from the [Create a Cognito identity pool]({% link _archives/create-a-cognito-identity-pool.md %}) chapter.
+- Use the **YOUR_API_GATEWAY_URL** and **YOUR_API_GATEWAY_REGION** with the ones from the [Deploy the APIs]({% link _archives/deploy-the-apis.md %}) chapter. In our case the URL is `https://0f7jby961h.execute-api.us-east-1.amazonaws.com/prod` and the region is `us-east-1`.
 
 And run the following.
 
@@ -93,9 +93,9 @@ We've now got a serverless API that's secure and handles user authentication. In
 
   - If you're on Windows and are using Git Bash, try adding a trailing slash to `YOUR_API_GATEWAY_URL` while removing the leading slash from `--path-template`. In our case, it would result in `--invoke-url https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/ --path-template notes`. You can follow the discussion on this [here](https://github.com/AnomalyInnovations/serverless-stack-com/issues/112#issuecomment-345996566).
 
-  There is a good chance that this error is happening even before our Lambda functions are invoked. So we can start by making sure our IAM Roles are configured properly for our Identity Pool. Follow the steps as detailed in our [Debugging serverless API Issues]({% link _chapters/debugging-serverless-api-issues.md %}#missing-iam-policy) chapter to ensure that your IAM Roles have the right set of permissions.
+  There is a good chance that this error is happening even before our Lambda functions are invoked. So we can start by making sure our IAM Roles are configured properly for our Identity Pool. Follow the steps as detailed in our [Debugging serverless API Issues]({% link _archives/debugging-serverless-api-issues.md %}#missing-iam-policy) chapter to ensure that your IAM Roles have the right set of permissions.
 
-  Next, you can [enable API Gateway logs]({% link _chapters/api-gateway-and-lambda-logs.md %}#enable-api-gateway-cloudwatch-logs) and follow [these instructions]({% link _chapters/api-gateway-and-lambda-logs.md %}#viewing-api-gateway-cloudwatch-logs) to read the requests that are being logged. This should give you a better idea of what is going on.
+  Next, you can [enable API Gateway logs]({% link _archives/api-gateway-and-lambda-logs.md %}#enable-api-gateway-cloudwatch-logs) and follow [these instructions]({% link _archives/api-gateway-and-lambda-logs.md %}#viewing-api-gateway-cloudwatch-logs) to read the requests that are being logged. This should give you a better idea of what is going on.
 
   Finally, make sure to look at the comment thread below. We've helped quite a few people with similar issues and it's very likely that somebody has run into a similar issue as you.
 
@@ -111,7 +111,7 @@ We've now got a serverless API that's secure and handles user authentication. In
   })
   ```
 
-  And deploy it using `serverless deploy function -f create`. But we can't see this output when we make an HTTP request to it, since the console logs are not sent in our HTTP responses. We need to check the logs to see this. We have a [detailed chapter]({% link _chapters/api-gateway-and-lambda-logs.md %}#viewing-lambda-cloudwatch-logs) on working with API Gateway and Lambda logs and you can read about how to check your debug messages [here]({% link _chapters/api-gateway-and-lambda-logs.md %}#viewing-lambda-cloudwatch-logs).
+  And deploy it using `serverless deploy function -f create`. But we can't see this output when we make an HTTP request to it, since the console logs are not sent in our HTTP responses. We need to check the logs to see this. We have a [detailed chapter]({% link _archives/api-gateway-and-lambda-logs.md %}#viewing-lambda-cloudwatch-logs) on working with API Gateway and Lambda logs and you can read about how to check your debug messages [here]({% link _archives/api-gateway-and-lambda-logs.md %}#viewing-lambda-cloudwatch-logs).
 
   A common source of errors here is an improperly indented `serverless.yml`. Make sure to double-check the indenting in your `serverless.yml` by comparing it to the one from [this chapter](https://github.com/AnomalyInnovations/serverless-stack-demo-api/blob/master/serverless.yml).
 

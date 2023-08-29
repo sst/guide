@@ -9,11 +9,11 @@ ref: using-aws-cdk-with-serverless-framework
 comments_id: using-aws-cdk-with-serverless-framework/2101
 ---
 
-In this guide we've looked at two different ways of creating serverless applications; [using SST]({% link _chapters/create-an-sst-app.md %}) and [using Serverless Framework]({% link _chapters/setup-the-serverless-framework.md %}). But you can use the two of them together as well.
+In this guide we've looked at two different ways of creating serverless applications; [using SST]({% link _chapters/create-an-sst-app.md %}) and [using Serverless Framework]({% link _archives/setup-the-serverless-framework.md %}). But you can use the two of them together as well.
 
 As in, you can create your infrastructure with SST and manage your Lambda functions and APIs with Serverless Framework. There are a couple of reasons why you might find yourself wanting to do this.
 
-1. Your applications are currently built using Serverless Framework and you want to use [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}) instead of [CloudFormation for your resources]({% link _chapters/configure-dynamodb-in-serverless.md %}).
+1. Your applications are currently built using Serverless Framework and you want to use [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}) instead of [CloudFormation for your resources]({% link _archives/configure-dynamodb-in-serverless.md %}).
 2. Or, you are looking to [migrate from Serverless Framework to SST]({{ site.docs_url }}/migrating-from-serverless-framework).
 
 In this chapter we'll look at how we can use SST to define your infrastructure using CDK and connecting that to our Serverless Framework app.

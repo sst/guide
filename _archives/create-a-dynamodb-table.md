@@ -66,7 +66,7 @@ The `notes` table has now been created. If you find yourself stuck with the **Ta
 
 ![Select DynamoDB Service screenshot](/assets/dynamodb/dynamodb-table-created.png)
 
-It is also a good idea to set up backups for your DynamoDB table, especially if you are planning to use it in production. We cover this in an extra-credit chapter, [Backups in DynamoDB]({% link _chapters/backups-in-dynamodb.md %}).
+It is also a good idea to set up backups for your DynamoDB table, especially if you are planning to use it in production. We cover this in an extra-credit chapter, [Backups in DynamoDB]({% link _archives/backups-in-dynamodb.md %}).
 
 Next let's look at how we are going to store the files that our users upload.
 

@@ -40,7 +40,7 @@ Amazon IAM (Identity and Access Management)을 사용하면 AWS에서 사용자 
 
 **AdministratorAccess**를 검색해서 정책을 선택한 후, **다음: 태그**를 누르고 **다음: 검토**를 클릭합니다.
 
-나중에 [Serverless IAM 정책 사용자화]({% link _chapters/customize-the-serverless-iam-policy.md %})에서 보다 세부적인 정책을 적용하는 법을 알아보기로 하고 지금은 이 정책설정으로 계속하겠습니다.
+나중에 [Serverless IAM 정책 사용자화]({% link _archives/customize-the-serverless-iam-policy.md %})에서 보다 세부적인 정책을 적용하는 법을 알아보기로 하고 지금은 이 정책설정으로 계속하겠습니다.
 
 ![Admin 정책이 추가된 스크린샷](/assets/ko/iam-user/added-admin-policy.png)
 

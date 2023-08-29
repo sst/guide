@@ -67,7 +67,7 @@ There are some helpful comments in the code but we are doing a few simple things
 - The AWS JS SDK assumes the region based on the current region of the Lambda function. So if your DynamoDB table is in a different region, make sure to set it by calling `AWS.config.update({ region: "my-region" });` before initializing the DynamoDB client.
 - Parse the input from the `event.body`. This represents the HTTP request body.
 - It contains the contents of the note, as a string — `content`.
-- It also contains an `attachment`, if one exists. It's the filename of file that has been uploaded to [our S3 bucket]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}).
+- It also contains an `attachment`, if one exists. It's the filename of file that has been uploaded to [our S3 bucket]({% link _archives/create-an-s3-bucket-for-file-uploads.md %}).
 - We read the name of our DynamoDB table from the environment variable using `process.env.tableName`. We'll be setting this in our `serverless.yml` below. We do this so we won't have to hardcode it in every function.
 - The `userId` is the id for the author of the note. For now we are hardcoding it to `123`. Later we'll be setting this based on the authenticated user.
 - Make a call to DynamoDB to put a new object with a generated `noteId` and the current date as the `createdAt`.
@@ -129,7 +129,7 @@ functions:
           method: post
 ```
 
-Here we are adding our newly added create function to the configuration. We specify that it handles `post` requests at the `/notes` endpoint. This pattern of using a single Lambda function to respond to a single HTTP event is very much like the [Microservices architecture](https://en.wikipedia.org/wiki/Microservices). We discuss this and a few other patterns in the chapter on [organizing Serverless Framework projects]({% link _chapters/organizing-serverless-projects.md %}).
+Here we are adding our newly added create function to the configuration. We specify that it handles `post` requests at the `/notes` endpoint. This pattern of using a single Lambda function to respond to a single HTTP event is very much like the [Microservices architecture](https://en.wikipedia.org/wiki/Microservices). We discuss this and a few other patterns in the chapter on [organizing Serverless Framework projects]({% link _archives/organizing-serverless-projects.md %}).
 
 The `environment:` block allows us to define environment variables for our Lambda function. These are made available under the `process.env` Node.js variable. In our specific case, we are using `process.env.tableName` to access the name of our DynamoDB table.
 
@@ -167,7 +167,7 @@ If you have multiple profiles for your AWS SDK credentials, you will need to exp
 $ AWS_PROFILE=myProfile serverless invoke local --function create --path mocks/create-event.json
 ```
 
-Where `myProfile` is the name of the AWS profile you want to use. If you need more info on how to work with AWS profiles in Serverless, refer to our [Configure multiple AWS profiles]({% link _chapters/configure-multiple-aws-profiles.md %}) chapter.
+Where `myProfile` is the name of the AWS profile you want to use. If you need more info on how to work with AWS profiles in Serverless, refer to our [Configure multiple AWS profiles]({% link _archives/configure-multiple-aws-profiles.md %}) chapter.
 
 The response should look similar to this.
 

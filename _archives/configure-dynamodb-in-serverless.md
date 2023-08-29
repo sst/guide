@@ -9,7 +9,7 @@ ref: configure-dynamodb-in-serverless
 comments_id: configure-dynamodb-in-serverless/162
 ---
 
-For our Serverless Framework app, we had [previously created our DynamoDB table through the AWS console]({% link _chapters/create-a-dynamodb-table.md %}). This can be hard to do when you are creating multiple apps or environments. Ideally, we want to be able to do this programmatically. In this section we'll look at how to use [infrastructure as code]({% link _chapters/what-is-infrastructure-as-code.md %}) to do just that.
+For our Serverless Framework app, we had [previously created our DynamoDB table through the AWS console]({% link _archives/create-a-dynamodb-table.md %}). This can be hard to do when you are creating multiple apps or environments. Ideally, we want to be able to do this programmatically. In this section we'll look at how to use [infrastructure as code]({% link _chapters/what-is-infrastructure-as-code.md %}) to do just that.
 
 ### Create the Resource
 

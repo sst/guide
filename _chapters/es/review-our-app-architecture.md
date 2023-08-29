@@ -8,7 +8,7 @@ description: En este capítulo vamos a hacer un pequeño repaso de nuestra API S
 comments_id: review-our-app-architecture/2178
 ---
 
-Hasta ahora hemos [desplegado nuestro API Hola Mundo]({% link _chapters/deploy-your-hello-world-api.md %}), [creado una base de datos (DynamoDB)]({% link _chapters/create-a-dynamodb-table.md %}), y [creado un bucket S3 para la carga de nuestros archivos]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}). Estamos listos para comenzar a trabajar en nuestra API backend pero tengamos una rápida idea de como encaja todo lo antes mencionado.
+Hasta ahora hemos [desplegado nuestro API Hola Mundo]({% link _archives/deploy-your-hello-world-api.md %}), [creado una base de datos (DynamoDB)]({% link _archives/create-a-dynamodb-table.md %}), y [creado un bucket S3 para la carga de nuestros archivos]({% link _archives/create-an-s3-bucket-for-file-uploads.md %}). Estamos listos para comenzar a trabajar en nuestra API backend pero tengamos una rápida idea de como encaja todo lo antes mencionado.
 
 ### Arquitectura del API Hola Mundo
 

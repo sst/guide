@@ -46,7 +46,7 @@ Finally, head over to **Settings** > **Basic** and make a note of your **App ID*
 
 We are going to need this when we configure the AWS and React portion of our app.
 
-Next we are going to use [Cognito Identity Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html) to federate our identities. This means that when a user signs up with their Facebook account, they will get added to our Identity Pool. And our serverless backend API will get an Id that we can use. This Id will remain the same if the user signs in later at any point. If you are a little confused about how the Identity Pool is different from the User Pool, you can take a quick look at our [Cognito user pool vs identity pool]({% link _chapters/cognito-user-pool-vs-identity-pool.md %}) chapter.
+Next we are going to use [Cognito Identity Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html) to federate our identities. This means that when a user signs up with their Facebook account, they will get added to our Identity Pool. And our serverless backend API will get an Id that we can use. This Id will remain the same if the user signs in later at any point. If you are a little confused about how the Identity Pool is different from the User Pool, you can take a quick look at our [Cognito user pool vs identity pool]({% link _archives/cognito-user-pool-vs-identity-pool.md %}) chapter.
 
 ### Add Facebook as an Authentication Provider
 

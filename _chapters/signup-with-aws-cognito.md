@@ -112,7 +112,7 @@ aws cognito-idp admin-confirm-sign-up \
 Just be sure to use your Cognito `USER_POOL_ID` and the _email address_ you used to create the account.
 
 {%info%}
-If you would like to allow your users to change their email or password, you can refer to our [Extra Credit series of chapters on user management]({% link _chapters/manage-user-accounts-in-aws-amplify.md %}){:target="_blank"}.
+If you would like to allow your users to change their email or password, you can refer to our [Extra Credit series of chapters on user management]({% link _archives/manage-user-accounts-in-aws-amplify.md %}){:target="_blank"}.
 {%endinfo%}
 
 Next up, we are going to create our first note.

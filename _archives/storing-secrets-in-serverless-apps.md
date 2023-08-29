@@ -112,7 +112,7 @@ The above code reads the current stage from the environment variable `process.en
 - If the stage is `dev`, it exports `stageConfigs.dev`.
 - And if stage is `featureX`, it falls back to the dev config and exports `stageConfigs.dev`.
 
-If you need a refresher on the structure of our config, refer to the [Manage environment related config]({% link _chapters/manage-environment-related-config.md %}).
+If you need a refresher on the structure of our config, refer to the [Manage environment related config]({% link _archives/manage-environment-related-config.md %}).
 
 Now we can access the SSM value in our Lambda function.
 

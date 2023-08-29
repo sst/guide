@@ -9,7 +9,7 @@ redirect_from: /chapters/create-a-s3-bucket-for-file-uploads.html
 comments_id: create-an-s3-bucket-for-file-uploads/150
 ---
 
-Now that we have [our database table]({% link _chapters/create-a-dynamodb-table.md %}) ready; let's get things set up for handling file uploads. We need to handle file uploads because each note can have an uploaded file as an attachment.
+Now that we have [our database table]({% link _archives/create-a-dynamodb-table.md %}) ready; let's get things set up for handling file uploads. We need to handle file uploads because each note can have an uploaded file as an attachment.
 
 [Amazon S3](https://aws.amazon.com/s3/) (Simple Storage Service) provides storage service through web services interfaces like REST. You can store any object in S3 including images, videos, files, etc. Objects are organized into buckets, and identified within each bucket by a unique, user-assigned key.
 

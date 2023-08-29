@@ -17,7 +17,7 @@ When a request is made to your serverless API, it starts by hitting API Gateway 
 - [Lambda Function Error](#lambda-function-error)
 - [Lambda Function Timeout](#lambda-function-timeout)
 
-This chapter assumes you have turned on CloudWatch logging for API Gateway and that you know how to read both the API Gateway and Lambda logs. If you have not done so, start by taking a look at the chapter on [API Gateway and Lambda Logs]({% link _chapters/api-gateway-and-lambda-logs.md %}).
+This chapter assumes you have turned on CloudWatch logging for API Gateway and that you know how to read both the API Gateway and Lambda logs. If you have not done so, start by taking a look at the chapter on [API Gateway and Lambda Logs]({% link _archives/api-gateway-and-lambda-logs.md %}).
 
 ### Invalid API Endpoint
 
@@ -47,7 +47,7 @@ assigned to the Cognito Identity Pool has not been granted the **execute-api:Inv
 
 This is a tricky issue to debug because the request still has not reached API Gateway, and hence the error is not logged in the API Gateway CloudWatch logs. But we can perform a check to ensure that our Cognito Identity Pool users have the required permissions, using the [IAM policy Simulator](https://policysim.aws.amazon.com).
 
-Before we can use the simulator we first need to find out the name of the IAM role that we are using to connect to API Gateway. We had created this role back in the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter.
+Before we can use the simulator we first need to find out the name of the IAM role that we are using to connect to API Gateway. We had created this role back in the [Create a Cognito identity pool]({% link _archives/create-a-cognito-identity-pool.md %}) chapter.
 
 Select **Cognito** from your [AWS Console](https://console.aws.amazon.com).
 
@@ -85,7 +85,7 @@ Select **API Gateway** as the service and select the **Invoke** action.
 
 ![Select IAM Service Simulator Action](/assets/debugging/select-iam-policy-simulator-action.png)
 
-Expand the service and enter the API Gateway endpoint ARN, then select **Run Simulation**. The format here is the same one we used back in the [Create a Cognito identity pool]({% link _chapters/create-a-cognito-identity-pool.md %}) chapter; `arn:aws:execute-api:YOUR_API_GATEWAY_REGION:*:YOUR_API_GATEWAY_ID/*`. In our case this looks like `arn:aws:execute-api:us-east-1:*:ly55wbovq4/*`.
+Expand the service and enter the API Gateway endpoint ARN, then select **Run Simulation**. The format here is the same one we used back in the [Create a Cognito identity pool]({% link _archives/create-a-cognito-identity-pool.md %}) chapter; `arn:aws:execute-api:YOUR_API_GATEWAY_REGION:*:YOUR_API_GATEWAY_ID/*`. In our case this looks like `arn:aws:execute-api:us-east-1:*:ly55wbovq4/*`.
 
 ![Enter API Gateway Endpoint ARN](/assets/debugging/enter-api-gateway-endpoint-arn.png)
 

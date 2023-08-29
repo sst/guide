@@ -73,7 +73,7 @@ export function main(event, context, callback) {
 
 - AWS JS SDK는 람다 함수의 현재 리전을 기반으로 작업 리전을 가정합니다. 따라서 DynamoDB 테이블이 다른 리전에있는 경우 DynamoDB 클라이언트를 초기화하기 전에 AWS.config.update ({region : "my-region"})를 호출하여 설정해야합니다.
 - `event.body`에서 입력을 파싱합니다. 이것은 HTTP 요청 매개변수를 나타냅니다.
-- `userId`는 요청의 일부로 들어오는 연합 ID입니다. 이것은 접속자가 사용자 풀을 통해 인증 된 후에 설정됩니다. 우리는 Cognito 인증 풀을 설정할 다음 장에서 이에 대해 더 자세히 설명하겠습니다. 별도로 사용자 풀에 있는 사용자 ID를 이용하려는 경우; [Cognito ID 매핑 및 사용자 풀 ID]({% link _chapters/mapping-cognito-identity-id-and-user-pool-id.md %}) 장을 살펴보십시오.
+- `userId`는 요청의 일부로 들어오는 연합 ID입니다. 이것은 접속자가 사용자 풀을 통해 인증 된 후에 설정됩니다. 우리는 Cognito 인증 풀을 설정할 다음 장에서 이에 대해 더 자세히 설명하겠습니다. 별도로 사용자 풀에 있는 사용자 ID를 이용하려는 경우; [Cognito ID 매핑 및 사용자 풀 ID]({% link _archives/mapping-cognito-identity-id-and-user-pool-id.md %}) 장을 살펴보십시오.
 - DynamoDB를 호출하여 생성 된 `noteId` 및 현재 날짜가 `createdAt`인 새 객체를 넣습니다.
 - 성공하면 HTTP 상태 코드가 `200`인 새로 생성 된 노트 객체와 응답 헤더를 반환하여 **CORS(Cross-Origin Resource Sharing)** 를 사용하도록 설정합니다.
 - 그리고 DynamoDB 호출이 실패하면 HTTP 상태 코드가 '500'인 오류를 반환합니다.
@@ -135,7 +135,7 @@ functions:
           authorizer: aws_iam
 ```
 
-여기에 새로 추가 된 작성 기능을 구성에 추가합니다. 우리는`/notes` 엔드포인트에서`post` 요청을 처리하도록 지정합니다. 단일 람다 함수를 사용하여 단일 HTTP 이벤트에 응답하는이 패턴은 [Microservices 아키텍처](https://en.wikipedia.org/wiki/Microservices)와 매우 비슷합니다. 이 부분과 [Serverless Framework 프로젝트 구성하기]({% link _chapters/organizing-serverless-projects.md %}) 장에서 몇 가지 다른 패턴을 논의합니다. CORS 지원을 true로 설정했습니다. 프론트 엔드가 다른 도메인에서 제공되기 때문입니다. 승인자로서 사용자의 IAM 자격 증명을 기반으로 API에 대한 액세스를 제한하려고합니다. 이 내용과 Cognito Identity Pool 챕터에서 사용자 풀이 어떻게 작동하는지에 대해 알아볼 것입니다.
+여기에 새로 추가 된 작성 기능을 구성에 추가합니다. 우리는`/notes` 엔드포인트에서`post` 요청을 처리하도록 지정합니다. 단일 람다 함수를 사용하여 단일 HTTP 이벤트에 응답하는이 패턴은 [Microservices 아키텍처](https://en.wikipedia.org/wiki/Microservices)와 매우 비슷합니다. 이 부분과 [Serverless Framework 프로젝트 구성하기]({% link _archives/organizing-serverless-projects.md %}) 장에서 몇 가지 다른 패턴을 논의합니다. CORS 지원을 true로 설정했습니다. 프론트 엔드가 다른 도메인에서 제공되기 때문입니다. 승인자로서 사용자의 IAM 자격 증명을 기반으로 API에 대한 액세스를 제한하려고합니다. 이 내용과 Cognito Identity Pool 챕터에서 사용자 풀이 어떻게 작동하는지에 대해 알아볼 것입니다.
 
 `iamRoleStatements` 섹션은 람다 함수가 어떤 리소스에 액세스 할 수 있는지 AWS에 알려줍니다. 이 경우 람다 함수가 위에 나열된 작업을 DynamoDB에서 수행할 수 있습니다. DynamoDB는`arn:aws:dynamodb:us-east-1:*:*`를 사용하여 지정합니다. 이것은 대략`us-east-1` 리전의 모든 DynamoDB 테이블을 가리 킵니다. 여기에 테이블 이름을 지정하여보다 구체적으로 설명 할 수 있지만 여러분에게 연습 문제로 남겨 두겠습니다. 반드시 DynamoDB 테이블이 생성 된 리전을 사용하십시오. 나중에 발생하는 문제의 대부분의 원인이 될 수 있습니다. 우리에게는 이 리전이 'us-east-1'입니다.
 
@@ -176,7 +176,7 @@ $ serverless invoke local --function create --path mocks/create-event.json
 $ AWS_PROFILE=myProfile serverless invoke local --function create --path mocks/create-event.json
 ```
 
-`myProfile`은 여러분이 사용하고자 하는 AWS 프로필 이름입니다. 만일 서버리스에서 AWS 프로필을 어떻게 작동하는지 알고 싶으시다면 이 곳에 있는 [다중 AWS 프로필 설정하기]({% link _chapters/configure-multiple-aws-profiles.md %}) 챕터를 참고하십시오.
+`myProfile`은 여러분이 사용하고자 하는 AWS 프로필 이름입니다. 만일 서버리스에서 AWS 프로필을 어떻게 작동하는지 알고 싶으시다면 이 곳에 있는 [다중 AWS 프로필 설정하기]({% link _archives/configure-multiple-aws-profiles.md %}) 챕터를 참고하십시오.
 
 응답은 다음과 같이 나와야합니다.
 

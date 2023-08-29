@@ -68,7 +68,7 @@ A couple of things to notice here:
 5. The `package.json` (and the `node_modules/` dir) are at the root of the repo. However, it is fairly common to have a separate `package.json` inside each service directory.
 6. The `libs/` dir is just to illustrate that any common code that might be used across all services can be placed in here.
 7. To deploy this application you are going to need to run `serverless deploy` separately in each of the services.
-8. [Environments (or stages)]({% link _chapters/stages-in-serverless-framework.md %}) need to be co-ordinated across all the different services. So if your team is using a `dev`, `staging`, and `prod` environment, then you are going to need to define the specifics of this in each of the services.
+8. [Environments (or stages)]({% link _archives/stages-in-serverless-framework.md %}) need to be co-ordinated across all the different services. So if your team is using a `dev`, `staging`, and `prod` environment, then you are going to need to define the specifics of this in each of the services.
 
 #### Advantages of Monorepo
 
@@ -176,6 +176,6 @@ On the other hand, changes are going to happen less frequently in the **serverle
 
 So if you have a service that doesn't make sense to replicate in an ephemeral environment, we would suggest moving it to the repo with all the infrastructure services. This is what we have seen most teams do. And this setup scales well as your project and team grows.
 
-Note that, we build on this monorepo setup further by using [Lerna](https://lerna.js.org) and [Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) in our [Using Lerna and Yarn Workspaces with Serverless]({% link _chapters/using-lerna-and-yarn-workspaces-with-serverless.md %}) extra credit chapter.
+Note that, we build on this monorepo setup further by using [Lerna](https://lerna.js.org) and [Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) in our [Using Lerna and Yarn Workspaces with Serverless]({% link _archives/using-lerna-and-yarn-workspaces-with-serverless.md %}) extra credit chapter.
 
 Now that we have figured out how to organize our application into repos, let's look at how we split our app into the various services. We'll start with creating a separate service for our DynamoDB tables.

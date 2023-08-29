@@ -99,6 +99,6 @@ aws cognito-idp admin-confirm-sign-up \
 
 Cognito 사용자 풀 ID와 계정을 만드는 데 사용한 이메일을 사용하십시오.
 
-사용자가 이메일 또는 암호를 변경할 수 있도록 허용하려면 [Extra Credit series of chapters on user management]({% link _chapters/manage-user-accounts-in-aws-amplify.md %}) 챔터를 참조하십시오.
+사용자가 이메일 또는 암호를 변경할 수 있도록 허용하려면 [Extra Credit series of chapters on user management]({% link _archives/manage-user-accounts-in-aws-amplify.md %}) 챔터를 참조하십시오.
 
 다음으로 첫 번째 노트를 작성해 보겠습니다.

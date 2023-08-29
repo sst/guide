@@ -12,11 +12,11 @@ We've also split our environments across two AWS accounts; `Development` and `Pr
 
 Here is roughly what we are going to be covering:
 
-- [Developing your Lambda functions locally]({% link _chapters/invoke-lambda-functions-locally.md %})
-- [Invoking API Gateway endpoints locally]({% link _chapters/invoke-api-gateway-endpoints-locally.md %})
-- [Creating and working on feature environments]({% link _chapters/creating-feature-environments.md %})
-- [Creating a pull request environment]({% link _chapters/creating-pull-request-environments.md %})
-- [Promoting dev to production]({% link _chapters/promoting-to-production.md %})
-- [Rolling back]({% link _chapters/rollback-changes.md %})
+- [Developing your Lambda functions locally]({% link _archives/invoke-lambda-functions-locally.md %})
+- [Invoking API Gateway endpoints locally]({% link _archives/invoke-api-gateway-endpoints-locally.md %})
+- [Creating and working on feature environments]({% link _archives/creating-feature-environments.md %})
+- [Creating a pull request environment]({% link _archives/creating-pull-request-environments.md %})
+- [Promoting dev to production]({% link _archives/promoting-to-production.md %})
+- [Rolling back]({% link _archives/rollback-changes.md %})
 
 Let's start with how you work locally on your Lambda functions.

@@ -15,7 +15,7 @@ You might recall ([from the chapters where we work with our Lambda functions]({%
 1. Authenticate through your User Pool
 2. And then federate their identity through the Identity Pool
 
-At this second step, their User Pool information is no longer available to us. To better understand this flow you can take a look at the [Cognito user pool vs identity pool]({% link _chapters/cognito-user-pool-vs-identity-pool.md %}) chapter. But in a nutshell, you can have multiple authentication providers at step 1 and the Identity Pool just ensures that they are all given a _global_ user id that you can use.
+At this second step, their User Pool information is no longer available to us. To better understand this flow you can take a look at the [Cognito user pool vs identity pool]({% link _archives/cognito-user-pool-vs-identity-pool.md %}) chapter. But in a nutshell, you can have multiple authentication providers at step 1 and the Identity Pool just ensures that they are all given a _global_ user id that you can use.
 
 ### Finding the User Pool User Id
 

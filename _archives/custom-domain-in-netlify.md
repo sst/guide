@@ -8,7 +8,7 @@ ref: custom-domains-in-netlify
 comments_id: custom-domains-in-netlify/191
 ---
 
-Now that we [have our React app hosted on Netlify]({% link _chapters/setting-up-your-project-on-netlify.md %}), let's configure a custom domain.
+Now that we [have our React app hosted on Netlify]({% link _archives/setting-up-your-project-on-netlify.md %}), let's configure a custom domain.
 
 Before we get started, make sure to follow this chapter to [purchase a domain on Amazon Route 53]({% link _chapters/purchase-a-domain-with-route-53.md %}).
 

@@ -9,7 +9,7 @@ redirect_from: /chapters/create-a-build-script.html
 comments_id: create-a-build-script/189
 ---
 
-To automate our React.js deployments with [Netlify](https://www.netlify.com) we just need to set up a build script. If you recall from the [previous chapter]({% link _chapters/manage-environments-in-create-react-app.md %}), we had configured our app to use the `REACT_APP_STAGE` build environment variable. We are going to create a build script to tell Netlify to set this variable up for the different deployment cases.
+To automate our React.js deployments with [Netlify](https://www.netlify.com) we just need to set up a build script. If you recall from the [previous chapter]({% link _archives/manage-environments-in-create-react-app.md %}), we had configured our app to use the `REACT_APP_STAGE` build environment variable. We are going to create a build script to tell Netlify to set this variable up for the different deployment cases.
 
 ### Add the Netlify Build Script
 
@@ -48,7 +48,7 @@ The build script is configured based on contexts. There is a default one right u
 
 2. The `publish` option points to where our build is generated. In the case of Create React App it is the `build` directory in our project root.
 
-3. The `command` option is the build command that Netlify will use. If you recall the [Manage environments in Create React App]({% link _chapters/manage-environments-in-create-react-app.md %}) chapter, this will seem familiar. In the default context the command is `REACT_APP_STAGE=dev npm run build`.
+3. The `command` option is the build command that Netlify will use. If you recall the [Manage environments in Create React App]({% link _archives/manage-environments-in-create-react-app.md %}) chapter, this will seem familiar. In the default context the command is `REACT_APP_STAGE=dev npm run build`.
 
 The production context labelled, `context.production` is the only one where we set the `REACT_APP_STAGE` variable to `prod`. This is when we push to `master`. The `branch-deploy` is what we will be using when we push to any other non-production branch. The `deploy-preview` is for pull requests.
 

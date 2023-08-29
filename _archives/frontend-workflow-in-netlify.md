@@ -11,7 +11,7 @@ ref: frontend-workflow-in-netlify
 comments_id: frontend-workflow/192
 ---
 
-Now that we have our [Netlify build script configured]({% link _chapters/create-a-netlify-build-script.md %}), let's go over what our development workflow with Netlify will look like.
+Now that we have our [Netlify build script configured]({% link _archives/create-a-netlify-build-script.md %}), let's go over what our development workflow with Netlify will look like.
 
 ### Working in a Dev Branch
 

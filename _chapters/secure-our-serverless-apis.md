@@ -81,7 +81,7 @@ userId: event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
 ":userId": event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
 ```
 
-Keep in mind that the `userId` above is the Federated Identity id (or Identity Pool user id). This is not the user id that is assigned in our User Pool. If you want to use the user's User Pool user Id instead, have a look at the [Mapping Cognito Identity Id and User Pool Id]({% link _chapters/mapping-cognito-identity-id-and-user-pool-id.md %}){:target="_blank"} chapter.
+Keep in mind that the `userId` above is the Federated Identity id (or Identity Pool user id). This is not the user id that is assigned in our User Pool. If you want to use the user's User Pool user Id instead, have a look at the [Mapping Cognito Identity Id and User Pool Id]({% link _archives/mapping-cognito-identity-id-and-user-pool-id.md %}){:target="_blank"} chapter.
 
 To test these changes we cannot use the `curl` command anymore. We'll need to generate a set of authentication headers to make our requests. Let's do that next.
 

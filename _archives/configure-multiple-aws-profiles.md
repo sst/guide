@@ -117,7 +117,7 @@ There are a couple of things happening here.
 - We also defined `custom.myProfile`, which contains the AWS profiles we want to use to deploy for each stage. Just as before we want to use the `prodAccount` profile if we are deploying to stage `prod` and the `devAccount` profile if we are deploying to stage `dev`.
 - Finally, we set the `provider.profile` to `${self:custom.myProfile.${self:custom.myStage}}`. This picks the value of our profile depending on the current stage defined in `custom.myStage`.
 
-We used the concept of variables in Serverless Framework in this example. You can read more about this in the chapter on [Serverless Environment Variables]({% link _chapters/serverless-environment-variables.md %}).
+We used the concept of variables in Serverless Framework in this example. You can read more about this in the chapter on [Serverless Environment Variables]({% link _archives/serverless-environment-variables.md %}).
 
 Now, when you deploy to production, Serverless Framework is going to use the `prodAccount` profile. And the resources will be provisioned inside `prodAccount` profile user's AWS account.
 

@@ -8,7 +8,7 @@ ref: using-lerna-and-yarn-workspace-with-serverless
 comments_id: using-lerna-and-yarn-workspaces-with-serverless/1958
 ---
 
-In the [Organizing Serverless Projects]({% link _chapters/organizing-serverless-projects.md %}) chapter we covered the standard monorepo setup. This included [how to share code between your services]({% link _chapters/share-code-between-services.md %}) and [how to deploy a Serverless app with interdependent services]({% link _chapters/deploy-a-serverless-app-with-dependencies.md %}).
+In the [Organizing Serverless Projects]({% link _archives/organizing-serverless-projects.md %}) chapter we covered the standard monorepo setup. This included [how to share code between your services]({% link _archives/share-code-between-services.md %}) and [how to deploy a Serverless app with interdependent services]({% link _archives/deploy-a-serverless-app-with-dependencies.md %}).
 
 This setup works pretty well but as your team and project grows, you run into a new issue. You have some common code libraries that are used across multiple services. An update to these libraries would redeploy all your services. If your services were managed by separate folks on your team or by separate teams, this poses a problem. For any change made to the common code, would require all the other folks on your team to test or update their services.
 

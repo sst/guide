@@ -23,7 +23,7 @@ $ serverless deploy
 $ serverless deploy --aws-profile myProfile
 ```
 
-여기서`myProfile`은 사용할 AWS 프로파일의 이름입니다. Serverless에서 AWS 프로파일을 사용하는 방법에 대한 자세한 정보가 필요하면 [AWS 다중 프로파일 구성하기]({% link _chapters/configure-multiple-aws-profiles.md %}) 챕터를 참조하십시오.
+여기서`myProfile`은 사용할 AWS 프로파일의 이름입니다. Serverless에서 AWS 프로파일을 사용하는 방법에 대한 자세한 정보가 필요하면 [AWS 다중 프로파일 구성하기]({% link _archives/configure-multiple-aws-profiles.md %}) 챕터를 참조하십시오.
 
 이 명령의 출력 하단에 **서비스 정보**가 있습니다.
 

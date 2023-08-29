@@ -103,6 +103,6 @@ Select the domain **dev.ext-api.sst.dev** and leave the subdomain empty. Then se
 
 Similarly, you might have to wait for up to 40 minutes.
 
-Now we've delegated the `dev.api` subdomain of `notes-app.com` to our `Development` AWS account. We'll be configuring our app to use [these domains in a later chapter]({% link _chapters/share-route-53-domains-across-aws-accounts.md %}).
+Now we've delegated the `dev.api` subdomain of `notes-app.com` to our `Development` AWS account. We'll be configuring our app to use [these domains in a later chapter]({% link _archives/share-route-53-domains-across-aws-accounts.md %}).
 
 Next, let's quickly look at how you'll be managing the cost and usage for your two AWS accounts.
