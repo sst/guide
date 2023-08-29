@@ -22,7 +22,7 @@ So to recap, here's what we've created so far.
 
 All of this is neatly [committed in a Git repo]({{ site.sst_demo_repo }}){:target="_blank"}.
 
-So far we've been deploying our app locally through our command line. But if we had multiple people on our team, or if we were working on different features at the same time, we won't be able to work on our app because the changes would overwrite each other.
+So far we've been deploying our app locally through our command line — `pnpm sst deploy`. But if we had multiple people on our team, or if we were working on different features at the same time, we won't be able to work on our app because the changes would overwrite each other.
 
 To fix this we are going to implement a CI/CD pipeline for our full-stack serverless app. 
 

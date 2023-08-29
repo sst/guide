@@ -23,7 +23,7 @@ export const main = handler(async (event) => {
   const params = {
     TableName: Table.Notes.tableName,
     Key: {
-      userId: event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
+      userId: "123", // The id of the author
       noteId: event?.pathParameters?.id, // The id of the note from the path
     },
   };
@@ -69,17 +69,19 @@ Let's test the delete note API.
 
 In a [previous chapter]({% link _chapters/add-an-api-to-get-a-note.md %}) we tested our create note API. It should've returned the new note's id as the `noteId`.
 
-In the **API** tab of the [SST Console]({{ site.old_console_url }}), select the `DELETE /notes/{id}` API.
+{%change%} Run the following in your terminal.
 
-{%change%} Set the `noteId` as the **id** and click **Send**.
+``` bash
+$ curl -X DELETE https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes/<NOTE_ID>
+```
 
-You should see the note being deleted in the response.
+Make sure to replace the id at the end of the URL with the `noteId` from before.
 
-![SST Console delete note API request](/assets/part2/sst-console-delete-note-api-request.png)
+Here we are making a DELETE request to the note that we want to delete. The response should look something like this.
 
-And the note should be removed from the DynamoDB Table as well.
-
-![SST Console note removed in DynamoDB](/assets/part2/sst-console-note-removed-in-dynamodb.png)
+``` json
+{"status":true}
+```
 
 ### Commit the Changes
 

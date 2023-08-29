@@ -27,9 +27,8 @@ import Stripe from "stripe";
 import { Config } from "sst/node/config";
 import handler from "@notes/core/handler";
 import { calculateCost } from "@notes/core/cost";
-import { APIGatewayProxyEvent } from "aws-lambda";
 
-export const main = handler(async (event: APIGatewayProxyEvent) => {
+export const main = handler(async (event) => {
   const { storage, source } = JSON.parse(event.body || "{}");
   const amount = calculateCost(storage);
   const description = "Scratch charge";
@@ -46,7 +45,7 @@ export const main = handler(async (event: APIGatewayProxyEvent) => {
     currency: "usd",
   });
 
-  return { status: true };
+  return JSON.stringify({ status: true });
 });
 ```
 

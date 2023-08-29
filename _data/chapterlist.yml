@@ -208,6 +208,8 @@ secure-pages:
 custom-domains:
   title: Using Custom Domains
   chapters:
+    - page: Getting production ready
+      url: /chapters/getting-production-ready.html
     - page: Purchase a domain with Route 53
       url: /chapters/purchase-a-domain-with-route-53.html
     - page: Custom domains in serverless APIs
@@ -218,8 +220,6 @@ custom-domains:
 automating-deployments:
   title: Automating deployments
   chapters:
-    - page: Getting production ready
-      url: /chapters/getting-production-ready.html
     - page: Creating a CI/CD pipeline for serverless
       url: /chapters/creating-a-ci-cd-pipeline-for-serverless.html
       subchapters:

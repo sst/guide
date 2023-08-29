@@ -152,20 +152,39 @@ You should see that the new Auth stack is being deployed.
    UserPoolId: us-east-1_TYEz7XP7P
 ```
 
-You'll also see our new User Pool if you head over to the **Cognito** tab in the [SST Console]({{ site.old_console_url }}){:target="_blank"}.
-
-![SST Console Cognito tab](/assets/part2/sst-console-cognito-tab.png)
+Let's create a test user so that we can test our API.
 
 ### Create a Test User
 
-Let's create a test user so that we can test our API. Click the **Create User** button in the SST Console.
+We'll use AWS CLI to sign up a user with their email and password.
 
-{%change%} Fill in `admin@example.com` as the **Email** and `Passw0rd!` as the **Password**, then hit **Create**.
+{%change%} In your terminal, run.
 
-![SST Console Cognito create new user](/assets/part2/sst-console-cognito-create-new-user.png)
+``` bash
+$ aws cognito-idp sign-up \
+  --region <COGNITO_REGION> \
+  --client-id <USER_POOL_CLIENT_ID> \
+  --username admin@example.com \
+  --password Passw0rd!
+```
 
-This should create a new user.
+Make sure to replace `COGNITO_REGION` and `USER_POOL_CLIENT_ID` with the `Region` and `UserPoolClientId` from above.
 
-![SST Console Cognito new user](/assets/part2/sst-console-cognito-new-user.png)
+Now we need to verify this email. For now we'll do this via an administrator command.
+
+{%change%} In your terminal, run.
+
+``` bash
+$ aws cognito-idp admin-confirm-sign-up \
+  --region <COGNITO_REGION> \
+  --user-pool-id <USER_POOL_ID> \
+  --username admin@example.com
+```
+
+Replace the `COGNITO_REGION` and `USER_POOL_ID` with the `Region` and `UserPoolId` from above.
+
+{%caution%}
+The first command uses the `USER_POOL_CLIENT_ID` while the second command uses the `USER_POOL_ID`. Make sure to replace it with the right values.
+{%endcaution%}
 
 Now that the auth infrastructure and a test user has been created, let's use them to secure our APIs and test them.

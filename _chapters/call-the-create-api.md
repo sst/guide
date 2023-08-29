@@ -34,7 +34,7 @@ export interface NoteType {
 
 ### Call the Create API
 
-{%change%} Next, we'll replace our `handleSubmit` function with the following.
+{%change%} Next, we'll replace our `handleSubmit` function in `src/containers/NewNote.tsx` with.
 
 ```tsx
 function createNote(note: NoteType) {

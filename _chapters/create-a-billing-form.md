@@ -10,7 +10,7 @@ comments_id: create-a-billing-form/186
 
 Now our settings page is going to have a form that will take a user's credit card details, get a stripe token and call our billing API with it. Let's start by adding the Stripe React SDK to our project.
 
-{%change%} Run the following in the `frontend/` directory and **not** in your project root.
+{%change%} Run the following **in the `packages/frontend/` directory**.
 
 ```bash
 $ pnpm add --save @stripe/react-stripe-js

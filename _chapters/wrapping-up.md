@@ -19,7 +19,7 @@ We've covered how to build and deploy our backend serverless API and our fronten
 
 It's mobile optimized as well!
 
-<img alt="Mobile app homescreen screenshot" src="/assets/mobile-app-homescreen.png" width="432" />
+![Completed app mobile screenshot](/assets/part2/completed-app-mobile-lander.png){: width="432" }
 
 ### Manage in Prod
 

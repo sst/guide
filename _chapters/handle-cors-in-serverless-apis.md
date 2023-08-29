@@ -81,8 +81,8 @@ Next, we need to add the CORS headers in our Lambda function response.
 
 ```typescript
 return {
+  body,
   statusCode,
-  body: JSON.stringify(body),
 };
 ```
 
@@ -90,8 +90,8 @@ return {
 
 ```typescript
 return {
+  body,
   statusCode,
-  body: JSON.stringify(body),
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Credentials": true,

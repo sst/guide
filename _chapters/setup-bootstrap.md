@@ -25,7 +25,9 @@ This installs the packages and dependencies to the `package.json` of your React 
 
 ### Add Bootstrap Styles
 
-{%change%} React Bootstrap uses the standard Bootstrap v5 styles; so just add the following styles to your `src/main.tsx`.
+React Bootstrap uses the standard Bootstrap styles, so just import the style sheet.
+
+{%change%} **Add it above** the `import "./index.css"` line in `src/main.tsx`.
 
 ```typescript
 import "bootstrap/dist/css/bootstrap.min.css";

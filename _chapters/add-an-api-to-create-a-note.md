@@ -65,7 +65,7 @@ We are doing a couple of things of note here.
 
 Let's add this new stack to the rest of our app.
 
-{%change%} In `sst.config.ts`, replace the `stacks` function with -
+{%change%} In `sst.config.ts`, replace the `stacks` function with.
 
 ```typescript
 stacks(app) {
@@ -193,27 +193,35 @@ It includes the API endpoint that we created.
 
 Now we are ready to test our new API.
 
-Head over to the **API** tab in the [SST Console]({{ site.old_console_url }}) and check out the new API.
+{%change%} Run the following in your terminal.
 
-![SST Console API tab](/assets/part2/sst-console-api-tab.png)
-
-Here we can test our APIs.
-
-{%change%} Switch to the body tab in the API and add the following request body to the **Body** field and hit **Send**.
-
-```json
-{"content":"Hello World","attachment":"hello.jpg"}
+```bash
+curl -X POST \
+-H 'Content-Type: application/json' \
+-d '{"content":"Hello World","attachment":"hello.jpg"}' \
+<YOUR_ApiEndpoint>/notes
 ```
 
-You should see the create note API request being made.
+Replace `<YOUR_ApiEndpoint>` with the `ApiEndpoint` from the output above. For example, our command will look like:
 
-![SST Console create note API request](/assets/part2/sst-console-create-note-api-request.png)
+```bash
+curl -X POST \
+-H 'Content-Type: application/json' \
+-d '{"content":"Hello World","attachment":"hello.jpg"}' \
+https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes
+```
 
-Here we are making a POST request to our create note API. We are passing in the `content` and `attachment` as a JSON string. In this case the attachment is a made up file name. We haven't uploaded anything to S3 yet.
+Here we are making a POST request to our create note API. We are passing in the `content` and `attachment` as a JSON string. In this case the attachment is a made up file name. We haven’t uploaded anything to S3 yet.
 
-If you head over to the **DynamoDB** tab, you'll see the new note.
+{%info%}
+Make sure to keep your local environment, `sst dev` running in another window.
+{%endinfo%}
 
-![SST Console new note](/assets/part2/sst-console-new-note.png)
+The response should look something like this.
+
+```bash
+{"userId":"123","noteId":"a46b7fe0-008d-11ec-a6d5-a1d39a077784","content":"Hello World","attachment":"hello.jpg","createdAt":1629336889054}
+```
 
 Make a note of the `noteId`. We are going to use this newly created note in the next chapter.
 
@@ -243,7 +251,7 @@ export const main = handler(async (event) => {
     TableName: Table.Notes.tableName,
     Item: {
       // The attributes of the item to be created
-      userId: event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
+      userId: "123", // The id of the author
       noteId: uuid.v1(), // A unique uuid
       content: data.content, // Parsed from request body
       attachment: data.attachment, // Parsed from request body
@@ -313,10 +321,6 @@ export default function handler(
     return {
       body,
       statusCode,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Credentials": true,
-      },
     };
   };
 }

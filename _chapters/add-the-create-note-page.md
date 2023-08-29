@@ -69,9 +69,8 @@ export default function NewNote() {
           <Form.Control onChange={handleFileChange} type="file" />
         </Form.Group>
         <LoaderButton
-          block
-          type="submit"
           size="lg"
+          type="submit"
           variant="primary"
           isLoading={isLoading}
           disabled={!validateForm()}
@@ -120,7 +119,7 @@ MAX_ATTACHMENT_SIZE: 5000000,
 {%change%} And include our component in the header.
 
 ```tsx
-import NewNote from "./containers/NewNote";
+import NewNote from "./containers/NewNote.tsx";
 ```
 
 Now if we switch to our browser and navigate `/notes/new` we should see our newly created form. Try adding some content, uploading a file, and hitting submit to see it in action.

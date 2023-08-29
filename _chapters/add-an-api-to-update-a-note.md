@@ -26,7 +26,7 @@ export const main = handler(async (event) => {
     TableName: Table.Notes.tableName,
     Key: {
       // The attributes of the item to be created
-      userId: event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
+      userId: "123", // The id of the author
       noteId: event?.pathParameters?.id, // The id of the note from the path
     },
     // 'UpdateExpression' defines the attributes to be updated
@@ -81,16 +81,23 @@ You should see that the new API stack has been deployed.
 
 Now we are ready to test the new API. In [an earlier chapter]({% link _chapters/add-an-api-to-get-a-note.md %}) we tested our create note API. It should've returned the new note's id as the `noteId`.
 
-Head to the **API** tab in the [SST Console]({{ site.old_console_url }}){:target="_blank"} and select the `PUT /notes/{id}` API.
+{%change%} Run the following in your terminal.
 
-{%change%} Set the `noteId` as the **id** and in the **Body** tab set the following as the request body. Then hit **Send**.
-
-```json
-{"content":"New World","attachment":"new.jpg"}
+``` bash
+$ curl -X PUT \
+-H 'Content-Type: application/json' \
+-d '{"content":"New World","attachment":"new.jpg"}' \
+https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes/<NOTE_ID>
 ```
 
-You should see the note being updated in the response.
+Make sure to replace the id at the end of the URL with the `noteId` from before.
 
-![SST Console update note API request](/assets/part2/sst-console-update-note-api-request.png)
+Here we are making a PUT request to a note that we want to update. We are passing in the new `content` and `attachment` as a JSON string.
+
+The response should look something like this.
+
+``` json
+{"status":true}
+```
 
 Next we are going to add the API to delete a note given its id.

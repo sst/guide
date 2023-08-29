@@ -29,8 +29,7 @@ export const main = handler(async (event) => {
     // 'ExpressionAttributeValues' defines the value in the condition
     // - ':userId': defines 'userId' to be the id of the author
     ExpressionAttributeValues: {
-      ":userId":
-        event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
+      ":userId": "123",
     },
   };
 
@@ -72,14 +71,24 @@ You should see that the new API stack has been deployed.
 
 ### Test the API
 
-Let's test the list all notes API. Head to the **API** tab of the [SST Console]({{ site.old_console_url }}).
+Let's test list all notes API.
 
-{%change%} Select the `/notes` API and click **Send**.
+{%change%} Run the following in your terminal.
 
-You should see the notes being returned in the response.
+``` bash
+$ curl https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes
+```
 
-![SST Console list notes API request](/assets/part2/sst-console-list-notes-api-request.png)
+Again, replacing the example URL with your `ApiEndpoint` value.
 
-Notice that we are getting an array of notes. Instead of a single note.
+Since we are making a simple GET request, we could also go to this URL directly in your browser.
+
+The response should look something like this.
+
+``` json
+[{"attachment":"hello.jpg","content":"Hello World","createdAt":1629336889054,"noteId":"a46b7fe0-008d-11ec-a6d5-a1d39a077784","userId":"123"}]
+```
+
+Note that, we are getting an array of notes. Instead of a single note.
 
 Next we are going to add an API to update a note.

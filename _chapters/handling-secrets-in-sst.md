@@ -47,17 +47,17 @@ import { Api, Config, StackContext, use } from "sst/constructs";
 {%change%} Next, bind `STRIPE_SECRET_KEY` to the API in `stacks/ApiStack.ts`. Replace this:
 
 ```typescript
-    function: {
-        bind: [table],
-    },
+function: {
+  bind: [table],
+},
 ```
 
 {%change%} With: 
 
 ```typescript
-    function: {
-        bind: [table, STRIPE_SECRET_KEY],
-    },
+function: {
+  bind: [table, STRIPE_SECRET_KEY],
+},
 ```
 
 This will add `STRIPE_SECRET_KEY` as a secret in the stack.  And allow our API to access the secret.

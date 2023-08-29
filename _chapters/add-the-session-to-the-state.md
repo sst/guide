@@ -111,7 +111,7 @@ React Context's are made up of two parts. The first is the Provider. This is tel
 
 ### Use the Context to Update the State
 
-The second part of the Context API is the consumer. We'll add that to the Login container (src/containers/Login.tsx):
+The second part of the Context API is the consumer. We'll add that to the Login container, `src/containers/Login.tsx`.
 
 {%change%} Include the hook by adding it below the `export default function Login() {` line.
 

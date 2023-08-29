@@ -154,10 +154,6 @@ Making API request
 }
 ```
 
-It'll have created a new note for our test user in the **DynamoDB** tab of the [SST Console]({{ site.old_console_url }}){:target="_blank"}.
-
-![SST Console test user new note](/assets/part2/sst-console-test-user-new-note.png)
-
 ### Commit the Changes
 
 {%change%} Let's commit and push our changes to GitHub.
