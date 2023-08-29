@@ -23,35 +23,19 @@ It's mobile optimized as well!
 
 ### Manage in Prod
 
-One final thing! You can also manage your app in production with the [SST Console]({{ site.docs_url }}/console ).
+One final thing! You can also manage your app in production with the [SST Console]({{ site.console_url }}).
 
-Run the following in your project root.
+Head over to — [**console.sst.dev**]({{ site.console_url }}) and sign up for a free account.
 
-```bash
-$ pnpm sst console --stage prod
-```
+You'll need to create a new workspace and connect to your AWS account. Once connected, you'll see all your SST apps and the resources in them.
 
-This'll allow you to connect your SST Console to your prod stage.
+![SST Console prod resources](/assets/part2/sst-console-prod-resources.png)
 
-```txt
-SST Console: https://console.sst.dev/notes/prod/stacks
-```
+And you can view the logs for your functions and debug any issues.
 
-It'll show you all the resources in production.
+![SST Console prod logs](/assets/part2/sst-console-prod-logs.png)
 
-![SST Console prod stacks tab](/assets/part2/sst-console-prod-stacks-tab.png)
-
-All your users.
-
-![SST Console prod Cognito tab](/assets/part2/sst-console-prod-cognito-tab.png)
-
-The notes your users have created.
-
-![SST Console prod DynamoDB tab](/assets/part2/sst-console-prod-dynamodb-tab.png)
-
-You can even see the request logs in production.
-
-![SST Console prod functions tab](/assets/part2/sst-console-prod-functions-tab.png)
+[Read more about it over on our docs]({{ site.docs_url }}/console ).
 
 ---
 

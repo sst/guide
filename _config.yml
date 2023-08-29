@@ -25,6 +25,13 @@ url: "https://sst.dev" # the base hostname & protocol for your site, e.g. http:/
 
 exclude:
   - .idea
+  - LICENSE
+  - README.md
+  - package.json
+  - sst.config.ts
+  - pnpm-lock.yaml
+  - CONTRIBUTING.md
+
 demo_url: "https://demo.sst.dev"
 
 github_repo: "https://github.com/sst/sst.dev"
@@ -76,6 +83,8 @@ stats:
 
 collections:
   chapters:
+    output: true
+  archives:
     output: true
   examples:
     output: true

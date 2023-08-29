@@ -161,6 +161,10 @@ This should show where your frontend is running locally.
   ➜  press h to show help
 ```
 
+{%info%}
+SST doesn't deploy your frontend while you are working locally. This is because most frontends come with their own local dev environments.
+{%endinfo%}
+
 If you head to that URL in your browser you should see.
 
 ![New Vite React App screenshot](/assets/part2/new-vite-react-app.png)

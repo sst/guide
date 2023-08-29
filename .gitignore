@@ -1,4 +1,6 @@
 Session.vim
+.sst/
+node_modules/
 _site
 .sw*
 .*.sw*

@@ -62,6 +62,6 @@ To do this, hit the **Settings** link and click **Enable Unit Tests**.
 
 ![Click Enable Unit Tests in Seed](/assets/part2/click-enable-unit-tsts-in-seed.png)
 
-Back in our pipeline, you'll notice that our **dev** stage is hooked up to `main`. This means that any commits to `main` will trigger a build in dev. To keep things simple, we'll want to deploy to prod when we push to `main`. We also need to add our secret environment variables.
+Back in our pipeline, you'll notice that our **dev** stage is hooked up to `main`. This means that any commits to `main` will trigger a build in dev. To keep things simple, we'll want to deploy to prod when we push to `main`.
 
 Let's do that next.

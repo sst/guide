@@ -35,6 +35,12 @@ layout: default
 
         </div>
 
+        {% if page.collection == "archives" %}
+        <div class="post-archives">
+          This chapter has been archived and is no longer updated. <a href="{% link guide.md %}">View the current version of the guide</a>.
+        </div>
+        {% endif %}
+
         {% if page.bio %}
         <div class="post-author">
           This chapter is contributed by: {{ page.bio }}

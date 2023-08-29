@@ -225,8 +225,8 @@ automating-deployments:
       subchapters:
       - page: Setting up your project on Seed
         url: /chapters/setting-up-your-project-on-seed.html
-      - page: Configure secrets in Seed
-        url: /chapters/configure-secrets-in-seed.html
+#      - page: Configure secrets in Seed
+#        url: /chapters/configure-secrets-in-seed.html
       - page: Deploying through Seed
         url: /chapters/deploying-through-seed.html
 
@@ -278,7 +278,7 @@ best-practices-intro:
   title: Introduction
   chapters:
     - page: Best practices for building serverless apps
-      url: /chapters/best-practices-for-building-serverless-apps.html
+      url: /archives/best-practices-for-building-serverless-apps.html
 
 organize-serverless-apps:
   title: Organize a serverless app

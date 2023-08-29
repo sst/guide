@@ -66,7 +66,11 @@ Just like the previous chapter, we need to update these changes in prod.
 $ pnpm sst deploy --stage prod
 ```
 
-This command will take a few minutes. At the end of the deploy process you should see something like this.
+{%note%}
+Deploying changes to custom domains can take a few minutes.
+{%endnote%}
+
+At the end of the deploy process you should see something like this.
 
 ```bash
 ✓  Deployed:
@@ -77,7 +81,7 @@ This command will take a few minutes. At the end of the deploy process you shoul
 
 And that's it! Our React.js app is now deployed to prod under our own domain!
 
-![React app hosted on custom domain](/assets/part2/react-app-hosted-on-custom-domain.png)
+![App update live screenshot](/assets/part2/app-update-live.png)
 
 ### Commit the Changes
 

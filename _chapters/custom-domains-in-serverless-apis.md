@@ -40,7 +40,7 @@ Here we are returning the custom domain URL, if we have one. If not, then we ret
 
 ### Deploy the App
 
-We are now going to deploy our app to prod. You can go ahead and stop the local development environments for SST and React.
+Let's deploy these changes to prod.
 
 {%change%} Run the following from **your project root**.
 
@@ -48,7 +48,9 @@ We are now going to deploy our app to prod. You can go ahead and stop the local 
 $ pnpm sst deploy --stage prod
 ```
 
-This command will take a few minutes as it'll deploy your app to a completely new environment. Recall that we are deploying to a separate prod environment because we don't want to affect our users while we are actively developing our app. This ensures that we have a separate local dev environment and a separate prod environment.
+{%note%}
+Deploying changes to custom domains can take a few minutes.
+{%endnote%}
 
 At the end of the deploy process you should see something like this.
 

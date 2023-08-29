@@ -50,14 +50,10 @@ Once the build is complete, you'll notice all the stack outputs at the bottom.
 
 Let's check out our app in production.
 
-![Notes app in production](/assets/part2/notes-app-in-production.png)
+![App update live screenshot](/assets/part2/app-update-live.png)
 
-To give it a quick test, sign up for a new account and create a note.
+To give it a quick test, sign up for a new account and create a note. You can also test updating and removing a note. And also test out the billing page.
 
-![Create notes in production](/assets/part2/create-notes-in-production.png)
-
-You can also test updating and removing a note. And also test out the billing page.
-
-Congrats! Your app is now live!
+**Congrats! Your app is now live!**
 
 Let's wrap things up next.
