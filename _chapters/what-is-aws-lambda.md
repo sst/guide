@@ -14,15 +14,14 @@ comments_id: what-is-aws-lambda/308
 
 Let's start by quickly looking at the technical specifications of AWS Lambda. Lambda supports the following runtimes.
 
-- Node.js 18.x, 16.x, 14.x and 12.x
-- Java 11 and 8
-- Python 3.9, 3.8, 3.7 and 3.6
-- .NET 6, 3.1, 3.0 and 2.2
+- Node.js 18.x, 16.x, and 14.x
+- Java 17, 11 and 8
+- Python 3.11, 3.10, 3.9, 3.8, and 3.7
+- .NET 7 and 6
 - Go 1.x
-- Ruby 2.7
-- Rust
+- Ruby 3.2 and 2.7
+- [Rust](https://docs.aws.amazon.com/lambda/latest/dg/lambda-rust.html)
 
-Note that, [.NET Core 2.2 and 3.0 are supported through custom runtimes](https://aws.amazon.com/blogs/developer/announcing-amazon-lambda-runtimesupport/).
 
 [See AWS for latest information on available runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html).
 
