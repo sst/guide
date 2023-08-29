@@ -10,7 +10,7 @@ comments_id: create-a-hello-world-api/2460
 
 With our newly created [SST]({{ site.sst_github_repo }}) app, we are ready to deploy a simple _Hello World_ API.
 
-In `stacks/MyStack.ts` you'll notice a API definition similar to this.
+In `stacks/MyStack.ts` you'll notice an API definition similar to this.
 
 ```ts
 import { StackContext, Api } from "sst/constructs";
