@@ -62,8 +62,8 @@ jobs:
     - name: Archive pdf
       uses: actions/upload-artifact@v2
       with:
-        name: serverless-stack.pdf
-        path: etc/ebook/output/serverless-stack.pdf
+        name: sst-guide.pdf
+        path: etc/ebook/output/sst-guige.pdf
       
     # Generate EPUB
     - run: cd etc/ebook && make build-epub
@@ -72,15 +72,15 @@ jobs:
     - name: Archive epub
       uses: actions/upload-artifact@v2
       with:
-        name: serverless-stack.epub
-        path: etc/ebook/output/serverless-stack.epub
+        name: sst-guide.epub
+        path: etc/ebook/output/sst-guide.epub
       
     # Upload PDF
     - name: Upload book to S3
-      run: sudo apt-get install -y awscli && aws s3 cp etc/ebook/output/serverless-stack.pdf s3://anomaly/ServerlessStack/ServerlessStack-${{ steps.get_book_version.outputs.BOOK_VERSION }}.pdf --acl public-read
+      run: sudo apt-get install -y awscli && aws s3 cp etc/ebook/output/sst-guide.pdf s3://anomaly/SST/guide/sst-guide-${{ steps.get_book_version.outputs.BOOK_VERSION }}.pdf --acl public-read
       if: ${{ startsWith(steps.get_ref.outputs.REF, 'v' ) }}
 
     # Upload EPUB
     - name: Upload book to S3
-      run: sudo apt-get install -y awscli && aws s3 cp etc/ebook/output/serverless-stack.epub s3://anomaly/ServerlessStack/ServerlessStack-${{ steps.get_book_version.outputs.BOOK_VERSION }}.epub --acl public-read
+      run: sudo apt-get install -y awscli && aws s3 cp etc/ebook/output/sst-guide.epub s3://anomaly/SST/guide/sst-guide-${{ steps.get_book_version.outputs.BOOK_VERSION }}.epub --acl public-read
       if: ${{ startsWith(steps.get_ref.outputs.REF, 'v' ) }}
