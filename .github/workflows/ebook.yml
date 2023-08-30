@@ -63,7 +63,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: sst-guide.pdf
-        path: etc/ebook/output/sst-guige.pdf
+        path: etc/ebook/output/sst-guide.pdf
       
     # Generate EPUB
     - run: cd etc/ebook && make build-epub
