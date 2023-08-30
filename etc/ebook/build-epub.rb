@@ -106,9 +106,6 @@ def build_chapter chapter_data
     # Replace images path
     chapter = chapter.gsub(/\/assets\//, '../../assets/')
 
-    # Remove unsupported font characters
-    chapter = chapter.gsub('➜', '>')
-
     # Remove target blank
     chapter = chapter.gsub('{:target="_blank"}', '')
 
