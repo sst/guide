@@ -55,7 +55,7 @@ Most of this is fairly straightforward but let's go over it quickly:
 
 - We are using a `calculateCost(storage)` function (that we are going to add soon) to figure out how much to charge a user based on the number of notes that are going to be stored.
 
-- We create a new Stripe object using our Stripe Secret key. We are getting this from the environment variable that we configured in the [previous chapter]({% link _chapters/handling-secrets-in-sst.md %}). At the time of this guide's writing, we are using apiVersion `2022-11-15` but you can check the [Stripe documentation](https://stripe.com/docs/api/versioning){:target="_blank"} for the latest version.
+- We create a new Stripe object using our Stripe Secret key. We are getting this from the environment variable that we configured in the [previous chapter]({% link _chapters/handling-secrets-in-sst.md %}). At the time of this guide's writing, we are using `apiVersion` `2022-11-15` but you can check the [Stripe documentation](https://stripe.com/docs/api/versioning){:target="_blank"} for the latest version.
 
 - Finally, we use the `stripe.charges.create` method to charge the user and respond to the request if everything went through successfully.
 

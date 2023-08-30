@@ -107,6 +107,9 @@ def build_chapter chapter_data
     # Replace images path
     chapter = chapter.gsub(/\/assets\//, '../../assets/')
 
+    # Remove target blank
+    chapter = chapter.gsub('{:target="_blank"}', '')
+
     # Remove class in table
     chapter = chapter.gsub('{: .cost-table }', '')
 
