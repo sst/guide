@@ -4,10 +4,11 @@ title: Configure DynamoDB in serverless
 date: 2018-02-27 00:00:00
 lang: en
 description: We can define our DynamoDB table using the Infrastructure as Code pattern by using CloudFormation in our serverless.yml. We are going to define the AttributeDefinitions, KeySchema, and ProvisionedThroughput.
-redirect_from: /chapters/dynamodb-as-a-serverless-service.html
 ref: configure-dynamodb-in-serverless
 comments_id: configure-dynamodb-in-serverless/162
-redirect_from: /chapters/configure-dynamodb-in-serverless.html
+redirect_from:
+  - /chapters/configure-dynamodb-in-serverless.html
+  - /chapters/dynamodb-as-a-serverless-service.html
 ---
 
 For our Serverless Framework app, we had [previously created our DynamoDB table through the AWS console]({% link _archives/create-a-dynamodb-table.md %}). This can be hard to do when you are creating multiple apps or environments. Ideally, we want to be able to do this programmatically. In this section we'll look at how to use [infrastructure as code]({% link _chapters/what-is-infrastructure-as-code.md %}) to do just that.

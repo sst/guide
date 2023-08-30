@@ -4,10 +4,11 @@ title: Deploy a React App to AWS
 date: 2017-02-05 00:00:00
 lang: en
 description: Tutorial on how to host a React.js single page application on AWS S3 and CloudFront.
-redirect_from: /chapters/deploy-the-frontend.html
 comments_id: deploy-the-frontend/39
 ref: deploy-the-frontend
-redirect_from: /chapters/deploying-a-react-app-to-aws.html
+redirect_from:
+  - /chapters/deploying-a-react-app-to-aws.html
+  - /chapters/deploy-the-frontend.html
 ---
 
 In this section we'll be looking at how to deploy your React app as a static website on AWS.

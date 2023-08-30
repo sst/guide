@@ -1,11 +1,12 @@
 ---
 layout: post
 title: Serverless Node.js Starter
-redirect_from: /chapters/serverless-es7-service.html
 description: A serverless Node.js starter project that adds support for ES6 and TypeScript, linting, and unit tests to your Serverless Framework project.
 date: 2018-04-12 00:00:00
 comments_id: serverless-node-js-starter/22
-redirect_from: /chapters/serverless-nodejs-starter.html
+redirect_from:
+  - /chapters/serverless-nodejs-starter.html
+  - /chapters/serverless-es7-service.html
 ---
 
 Based on what we have gone through in this guide, it makes sense that we have a good starting point for our future projects. For this we created a couple of serverless starter projects that you can use called, [Serverless Node.js Starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter). If you are using TypeScript, we have a starter for you as well, [Serverless TypeScript Starter](https://github.com/AnomalyInnovations/serverless-typescript-starter). We also have a Python version called [Serverless Python Starter](https://github.com/AnomalyInnovations/serverless-python-starter). Our starter projects also work really well with [Seed](https://seed.run); a fully-configured CI/CD pipeline for Serverless Framework.

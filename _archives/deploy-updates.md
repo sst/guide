@@ -4,10 +4,11 @@ title: Deploy Updates
 date: 2017-02-12 00:00:00
 lang: en
 description: To be able to deploy updates to our React.js app hosted on S3 and CloudFront, we need to uploads our app to S3 and invalidate the CloudFront cache. We can do this using the “aws cloudfront create-invalidation” command in our AWS CLI. To automate these steps by running “npx sst deploy”, we will add these commands to predeploy, deploy, and postdeploy scripts in our package.json.
-redirect_from: /chapters/deploy-again.html
 comments_id: deploy-updates/16
 ref: deploy-updates
-redirect_from: /chapters/deploy-updates.html
+redirect_from:
+  - /chapters/deploy-updates.html
+  - /chapters/deploy-again.html
 ---
 
 Now let's look at how we make changes and update our app. The process is very similar to how we deployed our code to S3 but with a few changes. Here is what it looks like.

@@ -4,12 +4,12 @@ title: Add Support for ES6 and TypeScript
 date: 2016-12-29 12:00:00
 lang: en
 ref: add-support-for-es6-and-typescript
+description: AWS Lambda supports Node.js v10.x and v12.x. However, to use ES 6 features or TypeScript in our Serverless Framework project we need to use Babel, Webpack 5, and a ton of other packages. We can do this by using the serverless-bundle plugin to our project.
+comments_id: add-support-for-es6-es7-javascript/128
 redirect_from:
   - /chapters/add-support-for-es6-javascript.html
   - /chapters/add-support-for-es6-es7-javascript.html
-description: AWS Lambda supports Node.js v10.x and v12.x. However, to use ES 6 features or TypeScript in our Serverless Framework project we need to use Babel, Webpack 5, and a ton of other packages. We can do this by using the serverless-bundle plugin to our project.
-comments_id: add-support-for-es6-es7-javascript/128
-redirect_from: /chapters/add-support-for-es6-and-typescript.html
+  - /chapters/add-support-for-es6-and-typescript.html
 ---
 
 AWS Lambda supports Node.js v10.x, v12.x, and v14.x. However, the supported syntax is a little different when compared to the more advanced ECMAScript flavor of JavaScript that our frontend React app supports. It makes sense to use similar ES features across both parts of the project – specifically, we'll be relying on ES imports/exports in our handler functions.

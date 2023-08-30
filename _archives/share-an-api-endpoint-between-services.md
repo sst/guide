@@ -2,10 +2,11 @@
 layout: post
 title: Share an API Endpoint Between Services
 description: To share the same API Gateway domain across multiple services in serverless we need to "Export" the API Gateway Rest API Id and the API Gateway "RootResourceId" as a CloudFormation cross-stack reference. This will allow us to share the same API Gateway URL across Serverless projects.
-redirect_from: /chapters/api-gateway-domains-across-services.html
 date: 2019-09-29 00:00:00
 comments_id: api-gateway-domains-across-services/408
-redirect_from: /chapters/share-an-api-endpoint-between-services.html
+redirect_from:
+  - /chapters/share-an-api-endpoint-between-services.html
+  - /chapters/api-gateway-domains-across-services.html
 ---
 
 In this chapter we will look at how to work with API Gateway across multiple services. A challenge that you run into when splitting your APIs into multiple services is sharing the same domain for them. You might recall that APIs that are created as a part of the Serverless Framework service get their own unique URL that looks something like:

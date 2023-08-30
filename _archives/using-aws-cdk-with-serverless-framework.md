@@ -4,10 +4,11 @@ title: Using AWS CDK with Serverless Framework
 date: 2020-09-14 00:00:00
 lang: en
 description: To use AWS CDK and Serverless Framework together, you'll need to ensure that your CDK stacks are not deployed to multiple AWS accounts or environments. To fix this issue, we are going to use SST.
-redirect_from: /chapters/connect-serverless-framework-and-cdk-with-sst.html
 ref: using-aws-cdk-with-serverless-framework
 comments_id: using-aws-cdk-with-serverless-framework/2101
-redirect_from: /chapters/using-aws-cdk-with-serverless-framework.html
+redirect_from:
+  - /chapters/using-aws-cdk-with-serverless-framework.html
+  - /chapters/connect-serverless-framework-and-cdk-with-sst.html
 ---
 
 In this guide we've looked at two different ways of creating serverless applications; [using SST]({% link _chapters/create-an-sst-app.md %}) and [using Serverless Framework]({% link _archives/setup-the-serverless-framework.md %}). But you can use the two of them together as well.
