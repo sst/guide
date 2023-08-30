@@ -181,24 +181,24 @@ def merge_chapters
         chapter_list = YAML.load_file('../../_data/chapterlist.yml')
         chapter_list.each do |section_key, section|
 
-          # Add section header in table of content
-          if (section_key === 'intro')
-            file << "\\addtocontents{toc}{~\\par}\n"
-            file << "\\addtocontents{toc}{~\\par}\n"
-            file << "\\addtocontents{toc}{\\centerline{\\textbf{The Basics}}\\par}\n"
-          elsif (section_key === 'best-practices-intro')
-            file << "\\addtocontents{toc}{~\\par}\n"
-            file << "\\addtocontents{toc}{~\\par}\n"
-            file << "\\addtocontents{toc}{\\centerline{\\textbf{Best Practices}}\\par}\n"
-          elsif (section_key === 'setup-serverless')
-            file << "\\addtocontents{toc}{~\\par}\n"
-            file << "\\addtocontents{toc}{~\\par}\n"
-            file << "\\addtocontents{toc}{\\centerline{\\textbf{Serverless Framework}}\\par}\n"
-          elsif (section_key === 'extra-backend')
-            file << "\\addtocontents{toc}{~\\par}\n"
-            file << "\\addtocontents{toc}{~\\par}\n"
-            file << "\\addtocontents{toc}{\\centerline{\\textbf{Extra Credit}}\\par}\n"
-          end
+#          # Add section header in table of content
+#          if (section_key === 'intro')
+#            file << "\\addtocontents{toc}{~\\par}\n"
+#            file << "\\addtocontents{toc}{~\\par}\n"
+#            file << "\\addtocontents{toc}{\\centerline{\\textbf{The Basics}}\\par}\n"
+#          elsif (section_key === 'best-practices-intro')
+#            file << "\\addtocontents{toc}{~\\par}\n"
+#            file << "\\addtocontents{toc}{~\\par}\n"
+#            file << "\\addtocontents{toc}{\\centerline{\\textbf{Best Practices}}\\par}\n"
+#          elsif (section_key === 'setup-serverless')
+#            file << "\\addtocontents{toc}{~\\par}\n"
+#            file << "\\addtocontents{toc}{~\\par}\n"
+#            file << "\\addtocontents{toc}{\\centerline{\\textbf{Serverless Framework}}\\par}\n"
+#          elsif (section_key === 'extra-backend')
+#            file << "\\addtocontents{toc}{~\\par}\n"
+#            file << "\\addtocontents{toc}{~\\par}\n"
+#            file << "\\addtocontents{toc}{\\centerline{\\textbf{Extra Credit}}\\par}\n"
+#          end
 
           file << "\\part{" << section['title'] << "}\n\n"
 

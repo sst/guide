@@ -270,278 +270,283 @@ conclusion:
     - page: Staying up to date
       url: /chapters/staying-up-to-date.html
 
-#
-# Best Practices Section
-#
-
-best-practices-intro:
-  title: Introduction
-  chapters:
-    - page: Best practices for building serverless apps
-      url: /archives/best-practices-for-building-serverless-apps.html
-
-organize-serverless-apps:
-  title: Organize a serverless app
-  chapters:
-    - page: Organizing serverless projects
-      url: /archives/organizing-serverless-projects.html
-    - page: Cross-stack references in serverless
-      url: /archives/cross-stack-references-in-serverless.html
-    - page: Share code between services
-      url: /archives/share-code-between-services.html
-    - page: Share an API endpoint between services
-      url: /archives/share-an-api-endpoint-between-services.html
-    - page: Deploy a serverless app with dependencies
-      url: /archives/deploy-a-serverless-app-with-dependencies.html
-
-configure-environments:
-  title: Manage environments
-  chapters:
-    - page: Environments in serverless apps
-      url: /archives/environments-in-serverless-apps.html
-    - page: Structure environments across AWS accounts
-      url: /archives/structure-environments-across-aws-accounts.html
-    - page: Manage AWS accounts using AWS Organizations
-      url: /archives/manage-aws-accounts-using-aws-organizations.html
-    - page: Parameterize serverless resources names
-      url: /archives/parameterize-serverless-resources-names.html
-    - page: Deploying to multiple AWS accounts
-      url: /archives/deploying-to-multiple-aws-accounts.html
-      subchapters:
-        - page: Deploy the resources repo
-          url: /archives/deploy-the-resources-repo.html
-        - page: Deploy the API services repo
-          url: /archives/deploy-the-api-services-repo.html
-    - page: Manage environment related config
-      url: /archives/manage-environment-related-config.html
-    - page: Storing secrets in serverless apps
-      url: /archives/storing-secrets-in-serverless-apps.html
-    - page: Share Route 53 domains across AWS accounts
-      url: /archives/share-route-53-domains-across-aws-accounts.html
-    - page: Monitor usage for environments
-      url: /archives/monitor-usage-for-environments.html
-
-development-lifecycle:
-  title: Development lifecycle
-  chapters:
-    - page: Working on serverless apps
-      url: /archives/working-on-serverless-apps.html
-    - page: Invoke Lambda functions locally
-      url: /archives/invoke-lambda-functions-locally.html
-    - page: Invoke API Gateway endpoints locally
-      url: /archives/invoke-api-gateway-endpoints-locally.html
-    - page: Creating feature environments
-      url: /archives/creating-feature-environments.html
-    - page: Creating Pull Request environments
-      url: /archives/creating-pull-request-environments.html
-    - page: Promoting to production
-      url: /archives/promoting-to-production.html
-    - page: Rollback changes
-      url: /archives/rollback-changes.html
-    - page: Deploying only updated services
-      url: /archives/deploying-only-updated-services.html
-
-observability:
-  title: Observability
-  chapters:
-    - page: Tracing serverless apps with X-Ray
-      url: /archives/tracing-serverless-apps-with-x-ray.html
-
-best-practices-conclusion:
-  title: Conclusion
-  chapters:
-    - page: Wrapping up the best practices
-      url: /archives/wrapping-up-the-best-practices.html
-
-#
-# Serverless Framework Section
-#
-
-setup-serverless:
-  title: Setting up a serverless app
-  chapters:
-    - page: Set up the Serverless Framework
-      url: /archives/setup-the-serverless-framework.html
-      subchapters:
-        - page: Add support for ES6 and TypeScript
-          url: /archives/add-support-for-es6-and-typescript.html
-    - page: Deploy your Hello World API
-      url: /archives/deploy-your-hello-world-api.html
-
-setup-backend:
-  title: Create your AWS resources
-  chapters:
-    - page: Create a DynamoDB table
-      url: /archives/create-a-dynamodb-table.html
-    - page: Create an S3 bucket for file uploads
-      url: /archives/create-an-s3-bucket-for-file-uploads.html
-
-build-api:
-  title: Building a serverless API
-  chapters:
-    - page: Add a create note API
-      url: /archives/add-a-create-note-api.html
-    - page: Add a get note API
-      url: /archives/add-a-get-note-api.html
-    - page: Add a list all the notes API
-      url: /archives/add-a-list-all-the-notes-api.html
-    - page: Add an update note API
-      url: /archives/add-an-update-note-api.html
-    - page: Add a delete note API
-      url: /archives/add-a-delete-note-api.html
-    - page: Deploy the APIs
-      url: /archives/deploy-the-apis.html
-
-users-auth:
-  title: Users and authentication
-  chapters:
-    - page: Create a Cognito user pool
-      url: /archives/create-a-cognito-user-pool.html
-      subchapters:
-        - page: Create a Cognito test user
-          url: /archives/create-a-cognito-test-user.html
-    - page: Create a Cognito identity pool
-      url: /archives/create-a-cognito-identity-pool.html
-    - page: Secure the APIs
-      url: /archives/secure-the-apis.html
-    - page: Test the APIs
-      url: /archives/test-the-apis.html
-
-third-party-apis:
-  title: Secrets and 3rd party APIs
-  chapters:
-    - page: Working with 3rd party APIs
-      url: /archives/working-with-3rd-party-apis.html
-      subchapters:
-        - page: Add a billing API
-          url: /archives/add-a-billing-api.html
-    - page: Load secrets from .env
-      url: /archives/load-secrets-from-env.html
-    - page: Test the billing API
-      url: /archives/test-the-billing-api.html
-
-infrastructure-as-code:
-  title: Infrastructure as Code
-  chapters:
-    - page: Configure DynamoDB in serverless
-      url: /archives/configure-dynamodb-in-serverless.html
-    - page: Configure S3 in serverless
-      url: /archives/configure-s3-in-serverless.html
-    - page: Configure Cognito User Pool in serverless
-      url: /archives/configure-cognito-user-pool-in-serverless.html
-    - page: Configure Cognito Identity Pool in serverless
-      url: /archives/configure-cognito-identity-pool-in-serverless.html
-    - page: Handle API Gateway CORS errors
-      url: /archives/handle-api-gateway-cors-errors.html
-    - page: Deploy your serverless infrastructure
-      url: /archives/deploy-your-serverless-infrastructure.html
-
-#
-# Extra Credits Section
-#
-
-extra-backend:
-  title: Serverless
-  chapters:
-    - page: What is IAM
-      url: /archives/what-is-iam.html
-    - page: What is an ARN
-      url: /archives/what-is-an-arn.html
-    - page: What is AWS AppSync
-      url: /archives/what-is-aws-appsync.html
-    - page: Cognito user pool vs identity pool
-      url: /archives/cognito-user-pool-vs-identity-pool.html
-    - page: API Gateway and Lambda Logs
-      url: /archives/api-gateway-and-lambda-logs.html
-    - page: Debugging serverless API Issues
-      url: /archives/debugging-serverless-api-issues.html
-    - page: Serverless environment variables
-      url: /archives/serverless-environment-variables.html
-    - page: Stages in Serverless Framework
-      url: /archives/stages-in-serverless-framework.html
-    - page: Backups in DynamoDB
-      url: /archives/backups-in-dynamodb.html
-    - page: Configure multiple AWS profiles
-      url: /archives/configure-multiple-aws-profiles.html
-    - page: Customize the serverless IAM Policy
-      url: /archives/customize-the-serverless-iam-policy.html
-    - page: Mapping Cognito Identity Id and User Pool Id
-      url: /archives/mapping-cognito-identity-id-and-user-pool-id.html
-    - page: Connect to API Gateway with IAM auth
-      url: /archives/connect-to-api-gateway-with-iam-auth.html
-    - page: Serverless Node.js Starter
-      url: /archives/serverless-nodejs-starter.html
-    - page: Set custom domains through Seed
-      url: /archives/set-custom-domains-through-seed.html
-    - page: Using AWS CDK with Serverless Framework
-      url: /archives/using-aws-cdk-with-serverless-framework.html
-    - page: Package Lambdas with serverless-bundle
-      url: /archives/package-lambdas-with-serverless-bundle.html
-    - page: Dynamically generate social share images with serverless
-      url: /archives/dynamically-generate-social-share-images-with-serverless.html
-    - page: Using Lerna and Yarn Workspaces with serverless
-      url: /archives/using-lerna-and-yarn-workspaces-with-serverless.html
-
-extra-auth:
-  title: Authentication
-  chapters:
-    - page: How to add authentication to a serverless app
-      url: /archives/how-to-add-authentication-to-a-serverless-app.html
-      subchapters:
-        - page: Using Cognito to add authentication to a serverless app
-          url: /archives/using-cognito-to-add-authentication-to-a-serverless-app.html
-
-extra-frontend:
-  title: React
-  chapters:
-    - page: Understanding React Hooks
-      url: /archives/understanding-react-hooks.html
-    - page: Code Splitting in Create React App
-      url: /archives/code-splitting-in-create-react-app.html
-    - page: Environments in Create React App
-      url: /archives/environments-in-create-react-app.html
-    - page: Setting serverless environments variables in a React app
-      url: /archives/setting-serverless-environments-variables-in-a-react-app.html
-    - page: Deploying a React app to AWS
-      url: /archives/deploying-a-react-app-to-aws.html
-      subchapters:
-        - page: Create an S3 bucket
-          url: /archives/create-an-s3-bucket.html
-        - page: Deploy to S3
-          url: /archives/deploy-to-s3.html
-        - page: Create a CloudFront distribution
-          url: /archives/create-a-cloudfront-distribution.html
-        - page: Set up a Custom Domain With SSL
-          url: /archives/setup-a-custom-domain-with-ssl.html
-        - page: Set up your domain with CloudFront
-          url: /archives/setup-your-domain-with-cloudfront.html
-        - page: Set up www domain redirect
-          url: /archives/setup-www-domain-redirect.html
-        - page: Deploy updates
-          url: /archives/deploy-updates.html
-    - page: Deploying a React app to Netlify
-      url: /archives/deploying-a-react-app-to-netlify.html
-      subchapters:
-        - page: Setting up your project on Netlify
-          url: /archives/setting-up-your-project-on-netlify.html
-        - page: Custom domains in Netlify
-          url: /archives/custom-domain-in-netlify.html
-        - page: Creating a CI/CD pipeline for React
-          url: /archives/creating-a-ci-cd-pipeline-for-react.html
-        - page: Manage environments in Create React App
-          url: /archives/manage-environments-in-create-react-app.html
-        - page: Create a Netlify build script
-          url: /archives/create-a-netlify-build-script.html
-        - page: Frontend workflow in Netlify
-          url: /archives/frontend-workflow-in-netlify.html
-    - page: Manage User Accounts in AWS Amplify
-      url: /archives/manage-user-accounts-in-aws-amplify.html
-      subchapters:
-        - page: Handle Forgot and Reset Password
-          url: /archives/handle-forgot-and-reset-password.html
-        - page: Allow Users to Change Passwords
-          url: /archives/allow-users-to-change-passwords.html
-        - page: Allow Users to Change Their Email
-          url: /archives/allow-users-to-change-their-email.html
-    - page: Facebook Login with Cognito using AWS Amplify
-      url: /archives/facebook-login-with-cognito-using-aws-amplify.html
+# #
+# # Archived Chapters
+# #
+# 
+# 
+# #
+# # Best Practices Section
+# #
+# 
+# best-practices-intro:
+#   title: Introduction
+#   chapters:
+#     - page: Best practices for building serverless apps
+#       url: /archives/best-practices-for-building-serverless-apps.html
+# 
+# organize-serverless-apps:
+#   title: Organize a serverless app
+#   chapters:
+#     - page: Organizing serverless projects
+#       url: /archives/organizing-serverless-projects.html
+#     - page: Cross-stack references in serverless
+#       url: /archives/cross-stack-references-in-serverless.html
+#     - page: Share code between services
+#       url: /archives/share-code-between-services.html
+#     - page: Share an API endpoint between services
+#       url: /archives/share-an-api-endpoint-between-services.html
+#     - page: Deploy a serverless app with dependencies
+#       url: /archives/deploy-a-serverless-app-with-dependencies.html
+# 
+# configure-environments:
+#   title: Manage environments
+#   chapters:
+#     - page: Environments in serverless apps
+#       url: /archives/environments-in-serverless-apps.html
+#     - page: Structure environments across AWS accounts
+#       url: /archives/structure-environments-across-aws-accounts.html
+#     - page: Manage AWS accounts using AWS Organizations
+#       url: /archives/manage-aws-accounts-using-aws-organizations.html
+#     - page: Parameterize serverless resources names
+#       url: /archives/parameterize-serverless-resources-names.html
+#     - page: Deploying to multiple AWS accounts
+#       url: /archives/deploying-to-multiple-aws-accounts.html
+#       subchapters:
+#         - page: Deploy the resources repo
+#           url: /archives/deploy-the-resources-repo.html
+#         - page: Deploy the API services repo
+#           url: /archives/deploy-the-api-services-repo.html
+#     - page: Manage environment related config
+#       url: /archives/manage-environment-related-config.html
+#     - page: Storing secrets in serverless apps
+#       url: /archives/storing-secrets-in-serverless-apps.html
+#     - page: Share Route 53 domains across AWS accounts
+#       url: /archives/share-route-53-domains-across-aws-accounts.html
+#     - page: Monitor usage for environments
+#       url: /archives/monitor-usage-for-environments.html
+# 
+# development-lifecycle:
+#   title: Development lifecycle
+#   chapters:
+#     - page: Working on serverless apps
+#       url: /archives/working-on-serverless-apps.html
+#     - page: Invoke Lambda functions locally
+#       url: /archives/invoke-lambda-functions-locally.html
+#     - page: Invoke API Gateway endpoints locally
+#       url: /archives/invoke-api-gateway-endpoints-locally.html
+#     - page: Creating feature environments
+#       url: /archives/creating-feature-environments.html
+#     - page: Creating Pull Request environments
+#       url: /archives/creating-pull-request-environments.html
+#     - page: Promoting to production
+#       url: /archives/promoting-to-production.html
+#     - page: Rollback changes
+#       url: /archives/rollback-changes.html
+#     - page: Deploying only updated services
+#       url: /archives/deploying-only-updated-services.html
+# 
+# observability:
+#   title: Observability
+#   chapters:
+#     - page: Tracing serverless apps with X-Ray
+#       url: /archives/tracing-serverless-apps-with-x-ray.html
+# 
+# best-practices-conclusion:
+#   title: Conclusion
+#   chapters:
+#     - page: Wrapping up the best practices
+#       url: /archives/wrapping-up-the-best-practices.html
+# 
+# #
+# # Serverless Framework Section
+# #
+# 
+# setup-serverless:
+#   title: Setting up a serverless app
+#   chapters:
+#     - page: Set up the Serverless Framework
+#       url: /archives/setup-the-serverless-framework.html
+#       subchapters:
+#         - page: Add support for ES6 and TypeScript
+#           url: /archives/add-support-for-es6-and-typescript.html
+#     - page: Deploy your Hello World API
+#       url: /archives/deploy-your-hello-world-api.html
+# 
+# setup-backend:
+#   title: Create your AWS resources
+#   chapters:
+#     - page: Create a DynamoDB table
+#       url: /archives/create-a-dynamodb-table.html
+#     - page: Create an S3 bucket for file uploads
+#       url: /archives/create-an-s3-bucket-for-file-uploads.html
+# 
+# build-api:
+#   title: Building a serverless API
+#   chapters:
+#     - page: Add a create note API
+#       url: /archives/add-a-create-note-api.html
+#     - page: Add a get note API
+#       url: /archives/add-a-get-note-api.html
+#     - page: Add a list all the notes API
+#       url: /archives/add-a-list-all-the-notes-api.html
+#     - page: Add an update note API
+#       url: /archives/add-an-update-note-api.html
+#     - page: Add a delete note API
+#       url: /archives/add-a-delete-note-api.html
+#     - page: Deploy the APIs
+#       url: /archives/deploy-the-apis.html
+# 
+# users-auth:
+#   title: Users and authentication
+#   chapters:
+#     - page: Create a Cognito user pool
+#       url: /archives/create-a-cognito-user-pool.html
+#       subchapters:
+#         - page: Create a Cognito test user
+#           url: /archives/create-a-cognito-test-user.html
+#     - page: Create a Cognito identity pool
+#       url: /archives/create-a-cognito-identity-pool.html
+#     - page: Secure the APIs
+#       url: /archives/secure-the-apis.html
+#     - page: Test the APIs
+#       url: /archives/test-the-apis.html
+# 
+# third-party-apis:
+#   title: Secrets and 3rd party APIs
+#   chapters:
+#     - page: Working with 3rd party APIs
+#       url: /archives/working-with-3rd-party-apis.html
+#       subchapters:
+#         - page: Add a billing API
+#           url: /archives/add-a-billing-api.html
+#     - page: Load secrets from .env
+#       url: /archives/load-secrets-from-env.html
+#     - page: Test the billing API
+#       url: /archives/test-the-billing-api.html
+# 
+# infrastructure-as-code:
+#   title: Infrastructure as Code
+#   chapters:
+#     - page: Configure DynamoDB in serverless
+#       url: /archives/configure-dynamodb-in-serverless.html
+#     - page: Configure S3 in serverless
+#       url: /archives/configure-s3-in-serverless.html
+#     - page: Configure Cognito User Pool in serverless
+#       url: /archives/configure-cognito-user-pool-in-serverless.html
+#     - page: Configure Cognito Identity Pool in serverless
+#       url: /archives/configure-cognito-identity-pool-in-serverless.html
+#     - page: Handle API Gateway CORS errors
+#       url: /archives/handle-api-gateway-cors-errors.html
+#     - page: Deploy your serverless infrastructure
+#       url: /archives/deploy-your-serverless-infrastructure.html
+# 
+# #
+# # Extra Credits Section
+# #
+# 
+# extra-backend:
+#   title: Serverless
+#   chapters:
+#     - page: What is IAM
+#       url: /archives/what-is-iam.html
+#     - page: What is an ARN
+#       url: /archives/what-is-an-arn.html
+#     - page: What is AWS AppSync
+#       url: /archives/what-is-aws-appsync.html
+#     - page: Cognito user pool vs identity pool
+#       url: /archives/cognito-user-pool-vs-identity-pool.html
+#     - page: API Gateway and Lambda Logs
+#       url: /archives/api-gateway-and-lambda-logs.html
+#     - page: Debugging serverless API Issues
+#       url: /archives/debugging-serverless-api-issues.html
+#     - page: Serverless environment variables
+#       url: /archives/serverless-environment-variables.html
+#     - page: Stages in Serverless Framework
+#       url: /archives/stages-in-serverless-framework.html
+#     - page: Backups in DynamoDB
+#       url: /archives/backups-in-dynamodb.html
+#     - page: Configure multiple AWS profiles
+#       url: /archives/configure-multiple-aws-profiles.html
+#     - page: Customize the serverless IAM Policy
+#       url: /archives/customize-the-serverless-iam-policy.html
+#     - page: Mapping Cognito Identity Id and User Pool Id
+#       url: /archives/mapping-cognito-identity-id-and-user-pool-id.html
+#     - page: Connect to API Gateway with IAM auth
+#       url: /archives/connect-to-api-gateway-with-iam-auth.html
+#     - page: Serverless Node.js Starter
+#       url: /archives/serverless-nodejs-starter.html
+#     - page: Set custom domains through Seed
+#       url: /archives/set-custom-domains-through-seed.html
+#     - page: Using AWS CDK with Serverless Framework
+#       url: /archives/using-aws-cdk-with-serverless-framework.html
+#     - page: Package Lambdas with serverless-bundle
+#       url: /archives/package-lambdas-with-serverless-bundle.html
+#     - page: Dynamically generate social share images with serverless
+#       url: /archives/dynamically-generate-social-share-images-with-serverless.html
+#     - page: Using Lerna and Yarn Workspaces with serverless
+#       url: /archives/using-lerna-and-yarn-workspaces-with-serverless.html
+# 
+# extra-auth:
+#   title: Authentication
+#   chapters:
+#     - page: How to add authentication to a serverless app
+#       url: /archives/how-to-add-authentication-to-a-serverless-app.html
+#       subchapters:
+#         - page: Using Cognito to add authentication to a serverless app
+#           url: /archives/using-cognito-to-add-authentication-to-a-serverless-app.html
+# 
+# extra-frontend:
+#   title: React
+#   chapters:
+#     - page: Understanding React Hooks
+#       url: /archives/understanding-react-hooks.html
+#     - page: Code Splitting in Create React App
+#       url: /archives/code-splitting-in-create-react-app.html
+#     - page: Environments in Create React App
+#       url: /archives/environments-in-create-react-app.html
+#     - page: Setting serverless environments variables in a React app
+#       url: /archives/setting-serverless-environments-variables-in-a-react-app.html
+#     - page: Deploying a React app to AWS
+#       url: /archives/deploying-a-react-app-to-aws.html
+#       subchapters:
+#         - page: Create an S3 bucket
+#           url: /archives/create-an-s3-bucket.html
+#         - page: Deploy to S3
+#           url: /archives/deploy-to-s3.html
+#         - page: Create a CloudFront distribution
+#           url: /archives/create-a-cloudfront-distribution.html
+#         - page: Set up a Custom Domain With SSL
+#           url: /archives/setup-a-custom-domain-with-ssl.html
+#         - page: Set up your domain with CloudFront
+#           url: /archives/setup-your-domain-with-cloudfront.html
+#         - page: Set up www domain redirect
+#           url: /archives/setup-www-domain-redirect.html
+#         - page: Deploy updates
+#           url: /archives/deploy-updates.html
+#     - page: Deploying a React app to Netlify
+#       url: /archives/deploying-a-react-app-to-netlify.html
+#       subchapters:
+#         - page: Setting up your project on Netlify
+#           url: /archives/setting-up-your-project-on-netlify.html
+#         - page: Custom domains in Netlify
+#           url: /archives/custom-domain-in-netlify.html
+#         - page: Creating a CI/CD pipeline for React
+#           url: /archives/creating-a-ci-cd-pipeline-for-react.html
+#         - page: Manage environments in Create React App
+#           url: /archives/manage-environments-in-create-react-app.html
+#         - page: Create a Netlify build script
+#           url: /archives/create-a-netlify-build-script.html
+#         - page: Frontend workflow in Netlify
+#           url: /archives/frontend-workflow-in-netlify.html
+#     - page: Manage User Accounts in AWS Amplify
+#       url: /archives/manage-user-accounts-in-aws-amplify.html
+#       subchapters:
+#         - page: Handle Forgot and Reset Password
+#           url: /archives/handle-forgot-and-reset-password.html
+#         - page: Allow Users to Change Passwords
+#           url: /archives/allow-users-to-change-passwords.html
+#         - page: Allow Users to Change Their Email
+#           url: /archives/allow-users-to-change-their-email.html
+#     - page: Facebook Login with Cognito using AWS Amplify
+#       url: /archives/facebook-login-with-cognito-using-aws-amplify.html
