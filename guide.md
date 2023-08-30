@@ -41,10 +41,9 @@ description: Learn how to build full-stack apps using serverless and React on AW
       {% include toc-chapters.html items=site.data.chapterlist.secure-pages id="secure-pages" index="15" %}
 
       {% include toc-chapters.html items=site.data.chapterlist.custom-domains id="custom-domains" index="16" %}
-      {% include toc-chapters.html items=site.data.chapterlist.automating-serverless-deployments id="automating-serverless-deployments" index="17" %}
-      {% include toc-chapters.html items=site.data.chapterlist.monitor-debug-errors id="monitor-debug-errors" index="18" %}
+      {% include toc-chapters.html items=site.data.chapterlist.automating-deployments id="automating-deployments" index="17" %}
 
-      {% include toc-chapters.html items=site.data.chapterlist.conclusion id="conclusion" index="19" %}
+      {% include toc-chapters.html items=site.data.chapterlist.conclusion id="conclusion" index="18" %}
     </div>
 
     <div class="standalone-newsletter-form-container">
@@ -84,7 +83,6 @@ description: Learn how to build full-stack apps using serverless and React on AW
             {% include toc-chapters.html items=site.data.chapterlist.build-api id="build-api" %}
             {% include toc-chapters.html items=site.data.chapterlist.users-auth id="users-auth" %}
             {% include toc-chapters.html items=site.data.chapterlist.third-party-apis id="third-party-apis" %}
-            {% include toc-chapters.html items=site.data.chapterlist.domains-hosting id="domains-hosting" %}
             {% include toc-chapters.html items=site.data.chapterlist.infrastructure-as-code id="infrastructure-as-code" %}
             <a class="expand"><span class="sst-button tertiary">Show all</span></a>
           </div>

@@ -72,7 +72,7 @@ Let's start by creating a bucket.
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { Bucket, StackContext } from "sst/constructs";
 import * as lambda from "aws-cdk-lib/aws-lambda";
 
@@ -325,7 +325,7 @@ $ npx sst remove --stage prod
 
 Note that, by default resources like the S3 bucket are not removed automatically. To do so, you'll need to explicitly set it.
 
-```ts
+```typescript
 import * as cdk from "aws-cdk-lib";
 
 const bucket = new Bucket(stack, "Bucket", {

@@ -65,7 +65,7 @@ First, let's create a [Cognito User Pool](https://docs.aws.amazon.com/cognito/la
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { StackContext, Api, Cognito, StaticSite } from "sst/constructs";
 import * as cognito from "aws-cdk-lib/aws-cognito";
 
@@ -109,7 +109,7 @@ Note, we haven't yet set up GitHub OAuth with our user pool, we'll do it later.
 
 {%change%} Replace the `Api` definition with the following in `stacks/ExampleStacks.ts`.
 
-```ts
+```typescript
 // Create a HTTP API
 const api = new Api(stack, "api", {
   authorizers: {
@@ -156,7 +156,7 @@ Let's create four functions, one handling the public route, one handling the pri
 
 {%change%} Add a `packages/functions/src/public.ts`.
 
-```ts
+```typescript
 export async function handler() {
   return {
     statusCode: 200,
@@ -167,7 +167,7 @@ export async function handler() {
 
 {%change%} Add a `packages/functions/src/private.ts`.
 
-```ts
+```typescript
 export async function handler() {
   return {
     statusCode: 200,
@@ -182,7 +182,7 @@ Requesting data from the token endpoint, it will return the following form: `acc
 
 The idea for this endpoint is to take the form data sent from AWS Cognito, forward it back to GitHub with the header `accept: application/json` for GitHub API to return back in JSON form instead of **query** form.
 
-```ts
+```typescript
 import fetch from "node-fetch";
 import parser from "lambda-multipart-parser";
 
@@ -220,7 +220,7 @@ User info endpoint uses a different authorization scheme: `Authorization: token 
 
 The below lambda gets the Bearer token given by Cognito and modify the header to send token authorization scheme to GitHub and adds a **sub** field into the response for Cognito to map the username.
 
-```ts
+```typescript
 import fetch from "node-fetch";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
@@ -253,14 +253,14 @@ Note, if you haven't created a GitHub OAuth app, follow [this tutorial](https://
 
 ![GitHub API Credentials](/assets/examples/api-oauth-github/github-api-credentials.png)
 
-```ts
+```typescript
 GITHUB_CLIENT_ID=<YOUR_GITHUB_CLIENT_ID>
 GITHUB_CLIENT_SECRET=<YOUR_GITHUB_CLIENT_SECRET>
 ```
 
 {%change%} Add this below the `Auth` definition in `stacks/ExampleStack.ts`.
 
-```ts
+```typescript
 // Throw error if client ID & secret are not provided
 if (!process.env.GITHUB_CLIENT_ID || !process.env.GITHUB_CLIENT_SECRET)
   throw new Error("Please set GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET");
@@ -304,7 +304,7 @@ Now let's associate a Cognito domain to the user pool, which can be used for sig
 
 {%change%} Add below code in `stacks/ExampleStack.ts`.
 
-```ts
+```typescript
 // Create a cognito userpool domain
 const domain = auth.cdk.userPool.addDomain("AuthDomain", {
   cognitoDomain: {
@@ -321,7 +321,7 @@ To deploy a React app to AWS, we'll be using the SST [`StaticSite`]({{ site.docs
 
 {%change%} Replace the `stack.addOutputs` call with the following.
 
-```ts
+```typescript
 // Create a React Static Site
 const site = new StaticSite(stack, "Site", {
   path: "packages/frontend",
@@ -446,7 +446,7 @@ npm install aws-amplify
 
 {%change%} Replace `frontend/src/main.jsx` with below code.
 
-```ts
+```typescript
 /* eslint-disable no-undef */
 import React from "react";
 import ReactDOM from "react-dom";

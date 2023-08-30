@@ -75,7 +75,7 @@ Let's add the API.
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { StackContext, Api } from "sst/constructs";
 
 export function ExampleStack({ stack, app }: StackContext) {
@@ -97,7 +97,7 @@ We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to cr
 
 {%change%} Your `packages/functions/src/lambda.ts` should look something like this.
 
-```ts
+```typescript
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
@@ -138,7 +138,7 @@ You can then set the layer for all the functions in your stack using the [`addDe
 
 {%change%} Add the following above the `api` definiton line in `stacks/ExampleStack.ts`.
 
-```ts
+```typescript
 // Configure thundra to only prod
 if (!app.local) {
   const thundraAWSAccountNo = 269863060030;
@@ -227,7 +227,7 @@ npm install --save-dev @thundra/esbuild-plugin
 
 Create a new file called `esbuild.js` inside `config` folder in root and add the below code.
 
-```ts
+```typescript
 // config/esbuild.js
 
 /* eslint-disable @typescript-eslint/no-var-requires */
@@ -246,7 +246,7 @@ And then in `stacks/ExampleStack.ts` add the below code under the `defaults` in 
 
 {%change%} Replace the following in `stacks/ExampleStack.ts`:
 
-```ts
+```typescript
 const api = new Api(stack, "Api", {
   routes: {
     "GET /": "packages/functions/src/lambda.handler",
@@ -256,7 +256,7 @@ const api = new Api(stack, "Api", {
 
 {%change%} With:
 
-```ts
+```typescript
 const api = new Api(stack, "Api", {
   defaults: {
     function: {

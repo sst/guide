@@ -58,7 +58,7 @@ DynamoDB에서 인덱스가 작동하는 방식에 대한 이해를 돕기 위�
 
 ![DynamoDB 서비스 선택 스크린샷](/assets/dynamodb/dynamodb-table-created.png)
 
-DynamoDB 테이블에 대한 백업을 설정하는 것이 좋습니다. 특히 운영 환경에서 사용하는 경우에는 말이죠. 백업에 관해서는 별도 크래딧 챕터에서 다룹니다. [DynamoDB에서의 백업]({% link _chapters/backups-in-dynamodb.md %}).
+DynamoDB 테이블에 대한 백업을 설정하는 것이 좋습니다. 특히 운영 환경에서 사용하는 경우에는 말이죠. 백업에 관해서는 별도 크래딧 챕터에서 다룹니다. [DynamoDB에서의 백업]({% link _archives/backups-in-dynamodb.md %}).
 
 다음으로 파일 업로드를 처리할 수 있는 S3 버킷을 설정합니다.
 

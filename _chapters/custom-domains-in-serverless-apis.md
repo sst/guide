@@ -8,24 +8,29 @@ ref: custom-domains-in-serverless-apis
 comments_id: custom-domains-in-serverless-apis/2464
 ---
 
-In the [previous chapter]({% link _chapters/purchase-a-domain-with-route-53.md %}) we purchased a new domain on [Route 53](https://aws.amazon.com/route53/). Now let's use it for our serverless API.
+In the [previous chapter]({% link _chapters/purchase-a-domain-with-route-53.md %}) we purchased a new domain on [Route 53](https://aws.amazon.com/route53/){:target="_blank"}. Now let's use it for our serverless API.
 
-{%change%} In your `stacks/ApiStack.js` add the following above the `defaults: {` line.
+{%change%} In your `stacks/ApiStack.ts` replace the function declaration with the following to add `app` from `StackContext`.
 
-```js
-customDomain:
-  app.stage === "prod" ? "api.my-serverless-app.com" : undefined,
+```typescript
+export function ApiStack({ stack, app }: StackContext) {
 ```
 
-This tells SST that we want to use the custom domain `api.my-serverless-app.com` **if** we are deploying to the `prod` stage. We are not setting one for our `dev` stage, or any other stage.
+{%change%} Then, add the following above the `defaults: {` line in `stacks/ApiStack.ts`.
+
+```typescript
+customDomain: app.stage === "prod" ? "<Your Domain>" : undefined,
+```
+
+This tells SST that we want to use a custom domain **if** we are deploying to the `prod` stage. We are not setting one for our `dev` stage, or any other stage.
 
 We could for example, base it on the stage name, `api-${app.stage}.my-serverless-app.com`. So for `dev` it might be `api-dev.my-serverless-app.com`. But we'll leave that as an exercise for you.
 
 We also need to update the outputs of our API stack.
 
-{%change%} Replace the `stack.addOutputs` call at the bottom of `stacks/ApiStack.js`.
+{%change%} Finally, replace the `stack.addOutputs` call at the bottom of `stacks/ApiStack.ts`.
 
-```js
+```typescript
 stack.addOutputs({
   ApiEndpoint: api.customDomainUrl || api.url,
 });
@@ -35,15 +40,17 @@ Here we are returning the custom domain URL, if we have one. If not, then we ret
 
 ### Deploy the App
 
-We are now going to deploy our app to prod. You can go ahead and stop the local development environments for SST and React.
+Let's deploy these changes to prod.
 
-{%change%} Run the following from your project root.
+{%change%} Run the following from **your project root**.
 
 ```bash
-$ npx sst deploy --stage prod
+$ pnpm sst deploy --stage prod
 ```
 
-This command will take a few minutes as it'll deploy your app to a completely new environment. Recall that we are deploying to a separate prod environment because we don't want to affect our users while we are actively developing our app. This ensures that we have a separate local dev environment and a separate prod environment.
+{%note%}
+Deploying changes to custom domains can take a few minutes.
+{%endnote%}
 
 At the end of the deploy process you should see something like this.
 

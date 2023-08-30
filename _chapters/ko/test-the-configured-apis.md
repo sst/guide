@@ -8,9 +8,9 @@ comments_id: test-the-configured-apis/179
 ref: test-the-configured-apis
 ---
 
-이제 두 세트의 API(prod 및 dev)가 있습니다. 프론트엔드를 플러그인에 연결하기 전에 신속하게 테스트하여 제대로 작동하는지 확인하십시오. [API 테스트]({% link _chapters/test-the-apis.md %}) 챕터에서 [AWS API Gateway Test CLI](https://github.com/AnomalyInnovations/aws-api-gateway-cli-test)라는 간단한 유틸리티를 사용했습니다.
+이제 두 세트의 API(prod 및 dev)가 있습니다. 프론트엔드를 플러그인에 연결하기 전에 신속하게 테스트하여 제대로 작동하는지 확인하십시오. [API 테스트]({% link _archives/test-the-apis.md %}) 챕터에서 [AWS API Gateway Test CLI](https://github.com/AnomalyInnovations/aws-api-gateway-cli-test)라는 간단한 유틸리티를 사용했습니다.
 
-테스트를 수행하기 전에 두 환경에 대한 테스트 사용자를 생성하십시오. [Cognito 테스트 사용자 만들기]({% link _chapters/create-a-cognito-test-user.md %}) 챕터와 동일한 과정입니다.
+테스트를 수행하기 전에 두 환경에 대한 테스트 사용자를 생성하십시오. [Cognito 테스트 사용자 만들기]({% link _archives/create-a-cognito-test-user.md %}) 챕터와 동일한 과정입니다.
 
 ### 테스트 사용자 생성
 
@@ -89,7 +89,7 @@ $ npx aws-api-gateway-cli-test \
 
 - `YOUR_DEV_COGNITO_USER_POOL_ID` 및 `YOUR_DEV_COGNITO_APP_CLIENT_ID`는 모두 사용자의 Cognito 사용자 풀과 관련이 있습니다.
 - `YOUR_DEV_IDENTITY_POOL_ID`는 여러분의 Cognito ID 풀을 위한 것입니다.
-- 그리고 `YOUR_DEV_API_GATEWAY_URL`은 API 게이트웨이 엔드포인트입니다. `https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/dev`와 유사하게 보일겁니다. 그러나 사용자 정의 도메인으로 구성한 경우 [사용자 정의 도메인을 통해 시드 설정]({% link _chapters/set-custom-domains-through-seed.md %}) 챕터를 사용하십시오.
+- 그리고 `YOUR_DEV_API_GATEWAY_URL`은 API 게이트웨이 엔드포인트입니다. `https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/dev`와 유사하게 보일겁니다. 그러나 사용자 정의 도메인으로 구성한 경우 [사용자 정의 도메인을 통해 시드 설정]({% link _archives/set-custom-domains-through-seed.md %}) 챕터를 사용하십시오.
 - 마지막으로, `YOUR_DEV_API_GATEWAY_REGION` 과 `YOUR_DEV_COGNITO_REGION`은 배포한 지역입니다. 여기서는 `us-east-1`입니다.
 
 명령이 성공하면 다음과 같이 보일 것입니다.

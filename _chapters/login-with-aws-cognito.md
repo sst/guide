@@ -10,32 +10,37 @@ comments_id: login-with-aws-cognito/129
 
 We are going to use AWS Amplify to login to our Amazon Cognito setup. Let's start by importing it.
 
-### Import Auth from AWS Amplify
-
-{%change%} Add the Auth module to the header of our Login container in `src/containers/Login.js`.
-
-```jsx
-import { Auth } from "aws-amplify";
-```
-
 ### Login to Amazon Cognito
 
 The login code itself is relatively simple.
 
-{%change%} Simply replace our placeholder `handleSubmit` method in `src/containers/Login.js` with the following.
+{%change%} Simply replace our placeholder `handleSubmit` method in `src/containers/Login.tsx` with the following.
 
-```js
-async function handleSubmit(event) {
-  event.preventDefault();
+```tsx
+async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
 
-  try {
-    await Auth.signIn(email, password);
-    alert("Logged in");
-  } catch (e) {
-    alert(e.message);
-  }
+    try {
+        await Auth.signIn(email, password);
+        alert("Logged in");
+    } catch (error) {
+        // Prints the full error
+        console.error(error);
+        if (error instanceof Error) {
+            alert(error.message);
+        } else {
+            alert(String(error));
+        }
+    }
 }
 ```
+
+{%change%} And import `Auth` in the header of `src/containers/Login.tsx`.
+
+```tsx
+import { Auth } from "aws-amplify";
+```
+
 
 We are doing two things of note here.
 
@@ -43,7 +48,7 @@ We are doing two things of note here.
 
 2. We use the `await` keyword to invoke the `Auth.signIn()` method that returns a promise. And we need to label our `handleSubmit` method as `async`.
 
-Now if you try to login using the `admin@example.com` user (that we created in the [Create a Cognito Test User]({% link _chapters/create-a-cognito-test-user.md %}) chapter), you should see the browser alert that tells you that the login was successful.
+Now if you try to login using the `admin@example.com` user (that we created in the [Create a Cognito Test User]({% link _archives/create-a-cognito-test-user.md %}) chapter), you should see the browser alert that tells you that the login was successful.
 
 ![Login success screenshot](/assets/login-success.png)
 

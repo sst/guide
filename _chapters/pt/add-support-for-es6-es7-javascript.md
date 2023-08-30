@@ -13,7 +13,7 @@ comments_id: add-support-for-es6-es7-javascript/128
 
 O AWS Lambda possui suporte para o Node.js v8.10. A sintaxe suportada é um pouco diferente do que quando comparado com o frontend em React que vamos trabalhar bem em breve. É uma boa prática usar funcionalidades do ES similares entre os códigos das duas partes do projeto - especificamente, nós utilizaremos imports/exports em nossas funções. Para fazer isso, vamos transpilar nosso código usando o [Babel](https://babeljs.io) e o [Webpack 4](https://webpack.github.io). O Serverless Framework também suporta plugins que fazem isso automaticamente, então utilizaremos o [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack).
 
-Isso já foi adicionado no capítulo anterior usando o [`serverless-nodejs-starter`]({% link _chapters/serverless-nodejs-starter.md %}). Nós usamos esse modelo por algumas razões específicas:
+Isso já foi adicionado no capítulo anterior usando o [`serverless-nodejs-starter`]({% link _archives/serverless-nodejs-starter.md %}). Nós usamos esse modelo por algumas razões específicas:
 
 -   Usar uma versão similar do JavaScript no frontend e no backend
 -   Manter os mesmos números de linhas de código depois de transpilado para facilitar correção de erros

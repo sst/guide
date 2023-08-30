@@ -1,4 +1,6 @@
 Session.vim
+.sst/
+node_modules/
 _site
 .sw*
 .*.sw*
@@ -7,3 +9,4 @@ _site
 .jekyll-cache/
 .DS_Store
 vendor/
+.idea/

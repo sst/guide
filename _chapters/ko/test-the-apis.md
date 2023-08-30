@@ -30,9 +30,9 @@ $ npx aws-api-gateway-cli-test
 
 이제 위 단계를 완료하기 위해 많은 정보를 전달해야합니다.
 
-- [Cognito 테스트 사용자 만들기]({% link _chapters/create-a-cognito-test-user.md %}) 챕터에서 만든 사용자 이름과 암호를 이용하기
-- [Cognito 사용자 풀 만들기]({% link _chapters/create-a-cognito-user-pool.md %}) 챕터에서 생성한 값으로 **YOUR_COGNITO_USER_POOL_ID**, **YOUR_COGNITO_APP_CLIENT_ID**, 그리고 **YOUR_COGNITO_REGION** 를 바꾸기. 여기서 사용하는 리전은 `us-east-1` 입니다. -[Cognito 자격 증명 풀 만들기]({% link _chapters/create-a-cognito-identity-pool.md %}) 챕터에서 생성한 값으로 **YOUR_IDENTITY_POOL_ID** 를 바꾸기.
-- [API 배포하기]({% link _chapters/deploy-the-apis.md %}) 챕터에서 생성한 값으로 **YOUR_API_GATEWAY_URL** 와 **YOUR_API_GATEWAY_REGION**을 바꾸기. 여기서는 `https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod` 와 `us-east-1`를 사용합니다.
+- [Cognito 테스트 사용자 만들기]({% link _archives/create-a-cognito-test-user.md %}) 챕터에서 만든 사용자 이름과 암호를 이용하기
+- [Cognito 사용자 풀 만들기]({% link _archives/create-a-cognito-user-pool.md %}) 챕터에서 생성한 값으로 **YOUR_COGNITO_USER_POOL_ID**, **YOUR_COGNITO_APP_CLIENT_ID**, 그리고 **YOUR_COGNITO_REGION** 를 바꾸기. 여기서 사용하는 리전은 `us-east-1` 입니다. -[Cognito 자격 증명 풀 만들기]({% link _archives/create-a-cognito-identity-pool.md %}) 챕터에서 생성한 값으로 **YOUR_IDENTITY_POOL_ID** 를 바꾸기.
+- [API 배포하기]({% link _archives/deploy-the-apis.md %}) 챕터에서 생성한 값으로 **YOUR_API_GATEWAY_URL** 와 **YOUR_API_GATEWAY_REGION**을 바꾸기. 여기서는 `https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod` 와 `us-east-1`를 사용합니다.
 
 그리고 다음 내용을 실행합니다.
 
@@ -91,9 +91,9 @@ Making API request
 
 - Windows에서 Git Bash를 사용하는 경우 `--path-template`에서 선행 슬래시를 제거하는 반면 `YOUR_API_GATEWAY_URL`에는 후행 슬래시를 추가하십시오. 예제의 경우 `--invoke-url https://ly55wbovq4.execute-api.us-east-1.amazonaws.com/prod/ --path-template notes`가 됩니다. 보다 궁금한 부분에 대해서는 [이 곳에서](https://github.com/AnomalyInnovations/serverless-stack-com/issues/112#issuecomment-345996566) 논의 하실 수 있습니다.
 
-람다 함수가 호출되기 전에도이 오류가 발생할 가능성이 큽니다. 따라서 IAM 역할이 자격 증명 풀에 대해 올바르게 구성되어 있는지 확인할 필요가 있습니다. [서버리스 API 문제 디버깅]({% link _chapters/debugging-serverless-api-issues.md %}#missing-iam-policy) 챕터에 설명 된 단계를 수행하여 IAM 역할에 올바른 권한이 정의되어 있는지 확인하십시오.
+람다 함수가 호출되기 전에도이 오류가 발생할 가능성이 큽니다. 따라서 IAM 역할이 자격 증명 풀에 대해 올바르게 구성되어 있는지 확인할 필요가 있습니다. [서버리스 API 문제 디버깅]({% link _archives/debugging-serverless-api-issues.md %}#missing-iam-policy) 챕터에 설명 된 단계를 수행하여 IAM 역할에 올바른 권한이 정의되어 있는지 확인하십시오.
 
-다음으로 [API 게이트웨이 로그 사용]({% link _chapters/api-gateway-and-lambda-logs.md %}#enable-api-gateway-cloudwatch-logs) 및 [지침] ({% link _chapters/api-gateway-and-lambda-logs.md %}#viewing-api-gateway-cloudwatch-logs)를 사용하여 기록중인 로그를 조회합니다. 무슨 일이 일어났는지 더 잘 이해할 수 있습니다.
+다음으로 [API 게이트웨이 로그 사용]({% link _archives/api-gateway-and-lambda-logs.md %}#enable-api-gateway-cloudwatch-logs) 및 [지침] ({% link _archives/api-gateway-and-lambda-logs.md %}#viewing-api-gateway-cloudwatch-logs)를 사용하여 기록중인 로그를 조회합니다. 무슨 일이 일어났는지 더 잘 이해할 수 있습니다.
 
 마지막으로, 아래의 주석 스레드를 확인하십시오. 비슷한 문제를 가진 상당수의 사람들의 사례가 도움이 될 수 있으며 누군가와 유사한 문제가 발생했을 가능성이 큽니다.
 
@@ -108,7 +108,7 @@ catch(e) {
 }
 ```
 
-그리고 `serverless deploy function -f create`를 사용하여 배포하십시오. 그러나 console의 로그가 HTTP 응답에서 전송되지 않기 때문에 우리가 HTTP 요청을 할 때 이 디버그에 대한 출력을 볼 수 없습니다. 이를 확인하려면이 로그를 확인해야합니다. API 게이트웨이 및 람다 로그 작업에 대한 [자세한 정보]({% link _chapters/api-gateway-and-lambda-logs.md %}#viewing-lambda-cloudwatch-logs)가 있습니다. 디버그 메시지는 [여기]({% link _chapters/api-gateway-and-lambda-logs.md %}#viewing-lambda-cloudwatch-logs)를 확인하십시오.
+그리고 `serverless deploy function -f create`를 사용하여 배포하십시오. 그러나 console의 로그가 HTTP 응답에서 전송되지 않기 때문에 우리가 HTTP 요청을 할 때 이 디버그에 대한 출력을 볼 수 없습니다. 이를 확인하려면이 로그를 확인해야합니다. API 게이트웨이 및 람다 로그 작업에 대한 [자세한 정보]({% link _archives/api-gateway-and-lambda-logs.md %}#viewing-lambda-cloudwatch-logs)가 있습니다. 디버그 메시지는 [여기]({% link _archives/api-gateway-and-lambda-logs.md %}#viewing-lambda-cloudwatch-logs)를 확인하십시오.
 
 일반적인 에러의 대부분은 잘못 들여 쓰여진 `serverless.yml`입니다. `serverless.yml`에서 들여 쓰기를 [해당 챕터](https://github.com/AnomalyInnovations/serverless-stack-demo-api/blob/master/serverless.yml)의 것과 비교하여 거듭 확인하십시오.
 

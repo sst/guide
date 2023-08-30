@@ -23,7 +23,7 @@ Para ayudar en este proceso hemos creado, [`serverless-bundle`](https://github.c
 - Soporta conversiones (`transpiling`) de pruebas unitarias con [babel-jest](https://github.com/facebook/jest/tree/master/packages/babel-jest)
 - Soporta mapeos de código fuente (`Source map`) para mensajes de error apropiados
 
-Este se incluye automáticamente en el proyecto inicial que usamos en el capítulo anterior — [`serverless-nodejs-starter`]({% link _chapters/serverless-nodejs-starter.md %}). Para TypeScript, tenemos un iniciador tambien — [`serverless-typescript-starter`](https://github.com/AnomalyInnovations/serverless-typescript-starter).
+Este se incluye automáticamente en el proyecto inicial que usamos en el capítulo anterior — [`serverless-nodejs-starter`]({% link _archives/serverless-nodejs-starter.md %}). Para TypeScript, tenemos un iniciador tambien — [`serverless-typescript-starter`](https://github.com/AnomalyInnovations/serverless-typescript-starter).
 
 Sin embargo, si estas buscando agregar soporte ES6 y TypeScript a tus proyectos Serverless Framework existentes, puedes hacerlo instalando [serverless-bundle](https://github.com/AnomalyInnovations/serverless-bundle):
 
@@ -86,7 +86,7 @@ Deberías ver algo como esto en tu terminal.
 
 En el comando anterior estamos pidiendo al Serverless Framework invocar (localmente) una función Lambda llamada `hello`. Esto a su vez ejecutará el método `hello` que estamos exportando en nuestro archivo `handler.js`.
 
-Aquí estamos invocando directamente a la función Lambda . Aunque una vez desplegado, invocaremos a esta función por medio del API endpoint `/hello` (como hemos [hablado en el último capítulo]({% link _chapters/setup-the-serverless-framework.md %})).
+Aquí estamos invocando directamente a la función Lambda . Aunque una vez desplegado, invocaremos a esta función por medio del API endpoint `/hello` (como hemos [hablado en el último capítulo]({% link _archives/setup-the-serverless-framework.md %})).
 
 En este momento estamos casi listos para desplegar nuestra función Lambda y nuestro API . Pero antes vamos a revisar rápidamente una de las otras cosas que se han configurado por nosotros en este proyecto inicial.
 

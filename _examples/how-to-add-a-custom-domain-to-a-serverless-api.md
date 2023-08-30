@@ -65,7 +65,7 @@ Let's start by setting up an API
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { Api, StackContext } from "sst/constructs";
 
 export function ExampleStack({ stack, app }: StackContext) {
@@ -94,7 +94,7 @@ GET /
 
 We are also configuring a custom domain for the API endpoint.
 
-```ts
+```typescript
 customDomain: `${stage}.example.com`;
 ```
 
@@ -108,7 +108,7 @@ Or if you have a domain hosted on another provider, [read this to migrate it to 
 
 If you already have a domain in Route 53, SST will look for a [hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) with the name set to the base domain. So for example, if your custom domain is set to `dev.example.com`, SST will look for a hosted zone called `example.com`. If you have it set under a different hosted zone, you'll need to set that explicitly.
 
-```ts
+```typescript
 const api = new Api(stack, "Api", {
   customDomain: {
     domainName: "dev.api.example.com",
@@ -124,7 +124,7 @@ For this example, we are going to focus on the custom domain. So we are going to
 
 {%change%} Replace the `packages/functions/src/lambda.ts` with the following.
 
-```ts
+```typescript
 export async function main() {
   const response = {
     userId: 1,
@@ -205,7 +205,7 @@ Let's make a quick change to our API. It would be good if the JSON strings are p
 
 {%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
-```ts
+```typescript
 export async function main() {
   const response = {
     userId: 1,

@@ -9,7 +9,7 @@ comments_id: configure-cognito-user-pool-in-serverless/164
 ref: configure-cognito-user-pool-in-serverless
 ---
 
-이제 'serverless.yml'을 통해 Cognito 사용자 풀을 설정하는 방법을 살펴 보겠습니다. 이것은 [Cognito 사용자 풀 만들기]({% link _chapters/create-a-cognito-user-pool.md %}) 챕터에서 직접 작성한 것과 매우 유사해야합니다.
+이제 'serverless.yml'을 통해 Cognito 사용자 풀을 설정하는 방법을 살펴 보겠습니다. 이것은 [Cognito 사용자 풀 만들기]({% link _archives/create-a-cognito-user-pool.md %}) 챕터에서 직접 작성한 것과 매우 유사해야합니다.
 
 ### 리소스 만들기
 

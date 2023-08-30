@@ -13,7 +13,7 @@ comments_id: add-support-for-es6-es7-javascript/128
 
 AWS Lambda는 최근 Node.js v8.10와 v10.x에 대한 지원을 추가했습니다. 뒷 부분에서 다룰 프론트 엔드 React 앱과 비교할 때 지원되는 구문은 약간 다릅니다. 프로젝트의 두 부분에서 유사한 ES 기능을 사용하는 것이 합리적입니다. 특히 우리는 핸들러 함수에서 ES import/export를 사용합니다. 이를 위해 [Babel](https://babeljs.io) 및 [Webpack 4](https://webpack.github.io)를 사용하여 코드를 트랜스파일링합니다. 또한, Webpack을 사용하면 Lambda 함수에서 사용된 코드만을 포함하여 Lambda 함수 패키지의 생성을 최적화할 수 있습니다. 이를 통하여 패키지의 크기가 줄고 콜드 스타트 시간이 감소할 수 있습니다. Serverless Framework는 이를 자동으로 수행하는 플러그인을 지원합니다. 우리는 유명한 플러그인 [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack)의 확장인 [serverless-bundle](https://github.com/AnomalyInnovations/serverless-bundle)을 사용할 것입니다.
 
-이 모든 것들은 이전 장에서 [`serverless-nodejs-starter`]({% link _chapters/serverless-nodejs-starter.md %})를 사용하여 설치되었습니다. 스타터 프로젝트를 만든 이유는 아래와 같습니다.
+이 모든 것들은 이전 장에서 [`serverless-nodejs-starter`]({% link _archives/serverless-nodejs-starter.md %})를 사용하여 설치되었습니다. 스타터 프로젝트를 만든 이유는 아래와 같습니다.
 
 - Lambda 함수 패키지 생성의 최적화
 - 프론트 엔드 및 백엔드에서 비슷한 버전의 JavaScript 사용

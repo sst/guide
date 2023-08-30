@@ -32,7 +32,7 @@ For the type of project, select **React**.
 
 ![Sentry select React project](/assets/monitor-debug-errors/sentry-select-react-project.png)
 
-Give your project a name.
+Give your project a name. 
 
 ![Sentry name React project](/assets/monitor-debug-errors/sentry-name-react-project.png)
 
@@ -45,16 +45,20 @@ And that's it. Scroll down and copy the `Sentry.init` line.
 {%change%} Now head over to the React `frontend/` directory and install Sentry.
 
 ```bash
-$ npm install @sentry/browser --save
+$  pnpm add @sentry/react --save
 ```
 
 We are going to be using Sentry across our app. So it makes sense to keep all the Sentry related code in one place.
 
-{%change%} Add the following to the top of your `src/lib/errorLib.js`.
+{%change%} Add the following to the top of your `src/lib/errorLib.ts`.
 
-```js
-import * as Sentry from "@sentry/browser";
+```typescript
+import * as Sentry from "@sentry/react";
 import config from "../config";
+
+export interface ErrorInfoType {
+  [key: string | symbol]: string;
+}
 
 const isLocal = process.env.NODE_ENV === "development";
 
@@ -66,7 +70,7 @@ export function initSentry() {
   Sentry.init({ dsn: config.SENTRY_DSN });
 }
 
-export function logError(error, errorInfo = null) {
+export function logError(error: unknown, errorInfo: ErrorInfoType | null = null) {
   if (isLocal) {
     return;
   }
@@ -78,9 +82,9 @@ export function logError(error, errorInfo = null) {
 }
 ```
 
-{%change%} Add the `SENTRY_DSN` below the `const config = {` line in `src/config.js`.
+{%change%} Add the `SENTRY_DSN` below the `const config = {` line in `frontend/src/config.ts`.
 
-```js
+```typescript
 SENTRY_DSN: "https://your-dsn-id-here@sentry.io/123456",
 ```
 
@@ -95,12 +99,13 @@ The `logError` method is what we are going to call when we want to report an err
 
 Next, let's initialize our app with Sentry.
 
-{%change%} Add the following to the end of the imports in `src/index.js`.
+{%change%} Add the following to the end of the imports in `src/index.tsx`.
 
-```js
+```typescript
 import { initSentry } from "./lib/errorLib";
 
-initSentry();
+initSentry()
+
 ```
 
 Now we are ready to start reporting errors in our React app! Let's start with the API errors.

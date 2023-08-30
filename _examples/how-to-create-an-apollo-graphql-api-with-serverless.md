@@ -64,7 +64,7 @@ Let's start by setting up our GraphQL API.
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { GraphQLApi, StackContext } from "sst/constructs";
 
 export function ExampleStack({ stack }: StackContext) {
@@ -93,7 +93,7 @@ For this example, we are not using a database. We'll look at that in detail in a
 
 {%change%} Let's add a file that contains our notes in `packages/functions/src/lambda.ts`.
 
-```ts
+```typescript
 import { gql, ApolloServer } from "apollo-server-lambda";
 
 const typeDefs = gql`
@@ -190,7 +190,7 @@ Let's make a quick change to our API.
 
 {%change%} In `packages/functions/src/lambda.ts` replace `Hello, World!` with `Hello, New World!`.
 
-```ts
+```typescript
 const resolvers = {
   Query: {
     hello: () => "Hello, New World!",

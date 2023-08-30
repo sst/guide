@@ -13,37 +13,41 @@ To complete the login flow we are going to need to do two more things.
 1. Redirect the user to the homepage after they login.
 2. And redirect them back to the login page after they logout.
 
-We are going to use the `useNavigate` hook that comes with React Router. This will allow us to use the browser's [History API](https://developer.mozilla.org/en-US/docs/Web/API/History).
+We are going to use the `useNavigate` hook that comes with React Router. This will allow us to use the browser's [History API](https://developer.mozilla.org/en-US/docs/Web/API/History){:target="_blank"}.
 
 ### Redirect to Home on Login
 
-{%change%} First, initialize `useNavigate` hook in the beginning of `src/containers/Login.js`.
+{%change%} First, initialize `useNavigate` hook in the beginning of `src/containers/Login.tsx`.
 
-```js
+```tsx
 const nav = useNavigate();
 ```
 
 Make sure to add it below the `export default function Login() {` line.
 
-{%change%} Then update the `handleSubmit` method in `src/containers/Login.js` to look like this:
+{%change%} Then update the `handleSubmit` method in `src/containers/Login.tsx` to look like this:
 
-```js
-async function handleSubmit(event) {
+```tsx
+async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
   event.preventDefault();
 
   try {
     await Auth.signIn(email, password);
     userHasAuthenticated(true);
     nav("/");
-  } catch (e) {
-    alert(e.message);
+  } catch (error) {
+    if (error instanceof Error) {
+      alert(error.message);
+    } else {
+      alert(String(error));
+    }
   }
 }
 ```
 
-{%change%} Also, import `useNavigate` from React Router in the header of `src/containers/Login.js`.
+{%change%} Also, import `useNavigate` from React Router in the header of `src/containers/Login.tsx`.
 
-```js
+```tsx
 import { useNavigate } from "react-router-dom";
 ```
 
@@ -55,27 +59,27 @@ Now if you head over to your browser and try logging in, you should be redirecte
 
 Now we'll do something very similar for the logout process.
 
-{%change%} Add the `useNavigate` hook in the beginning of `App` component.
+{%change%} Add the `useNavigate` hook in the beginning of `App` component in `src/App.tsx`.
 
-```js
+```tsx
 const nav = useNavigate();
 ```
 
-{%change%} Import `useNavigate` from React Router in the header of `src/App.js`.
+{%change%} Import `useNavigate` from React Router in the header of `src/App.tsx`.
 
-```js
+```tsx
 import { useNavigate } from "react-router-dom";
 ```
 
-{%change%} Add the following to the bottom of the `handleLogout` function in our `src/App.js`.
+{%change%} Add the following to the bottom of the `handleLogout` function in our `src/App.tsx`.
 
-```jsx
+```tsx
 nav("/login");
 ```
 
 So our `handleLogout` function should now look like this.
 
-```js
+```tsx
 async function handleLogout() {
   await Auth.signOut();
 

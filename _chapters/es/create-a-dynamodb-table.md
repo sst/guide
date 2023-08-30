@@ -54,7 +54,7 @@ Se ha creado la tabla `notes`. Si te encuentras atascado con el mensaje **La tab
 
 ![Captura de pantalla de tabla de DynamoDB creada](/assets/es/dynamodb/dynamodb-table-created.png)
 
-También es una buena idea configurar copias de seguridad para tu tabla de DynamoDB, especialmente si planeas usarla en producción. Cubriremos esto en un capítulo adicional, [Copias de seguridad en DynamoDB]({% link _chapters/backups-in-dynamodb.md %}).
+También es una buena idea configurar copias de seguridad para tu tabla de DynamoDB, especialmente si planeas usarla en producción. Cubriremos esto en un capítulo adicional, [Copias de seguridad en DynamoDB]({% link _archives/backups-in-dynamodb.md %}).
 
 A continuación, configuraremos un bucket S3 para manejar las carga de archivos.
 

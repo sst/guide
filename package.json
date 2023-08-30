@@ -1,0 +1,10 @@
+{
+  "name": "sst.dev",
+  "version": "0.0.0",
+  "private": true,
+  "devDependencies": {
+    "sst": "^2.24.11",
+    "aws-cdk-lib": "2.91.0",
+    "constructs": "10.2.69"
+  }
+}

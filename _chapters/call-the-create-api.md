@@ -10,16 +10,40 @@ comments_id: call-the-create-api/124
 
 Now that we have our basic create note form working, let's connect it to our API. We'll do the upload to S3 a little bit later. Our APIs are secured using AWS IAM and Cognito User Pool is our authentication provider. Thankfully, Amplify takes care of this for us by using the logged in user's session.
 
-{%change%} Let's include the `API` module by adding the following to the header of `src/containers/NewNote.js`.
+### Define the type for a note
 
-```js
-import { API } from "aws-amplify";
+Let's start by creating a type definition for the note object. Create a new directory for our types.
+
+{%change%} Run the following **in the `packages/frontend/` directory**.
+
+```bash
+$ mkdir src/types
 ```
 
-{%change%} And replace our `handleSubmit` function with the following.
+{%change%} Add a new file `src/types/note.ts` with the following.
 
-```js
-async function handleSubmit(event) {
+```typescript
+export interface NoteType {
+  noteId?: string;
+  content: string;
+  createdAt?: string;
+  attachment?: string;
+  attachmentURL?: string;
+}
+```
+
+### Call the Create API
+
+{%change%} Next, we'll replace our `handleSubmit` function in `src/containers/NewNote.tsx` with.
+
+```tsx
+function createNote(note: NoteType) {
+  return API.post("notes", "/notes", {
+    body: note,
+  });
+}
+
+async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
   event.preventDefault();
 
   if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
@@ -41,15 +65,17 @@ async function handleSubmit(event) {
     setIsLoading(false);
   }
 }
-
-function createNote(note) {
-  return API.post("notes", "/notes", {
-    body: note,
-  });
-}
 ```
 
-This does a couple of simple things.
+{%change%} And include the `API` module by adding the following to the header of `src/containers/NewNote.tsx`.
+
+```tsx
+import { API } from "aws-amplify";
+import { NoteType } from "../types/note";
+import { onError } from "../lib/errorLib";
+```
+
+We are doing a couple of things with these functions.
 
 1. We make our create call in `createNote` by making a POST request to `/notes` and passing in our note object. Notice that the first two arguments to the `API.post()` method are `notes` and `/notes`. This is because back in the [Configure AWS Amplify]({% link _chapters/configure-aws-amplify.md %}) chapter we called these set of APIs by the name `notes`.
 

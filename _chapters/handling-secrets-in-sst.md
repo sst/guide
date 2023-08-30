@@ -3,57 +3,63 @@ layout: post
 title: Handling Secrets in SST
 date: 2021-08-17 00:00:00
 lang: en
-description: In this chapter we'll look at how to work with secrets in an SST app. We store secrets to a .env.local file and make sure to not commit it to Git.
+description: In this chapter we'll look at how to work with secrets in an SST app. We store secrets using the sst secrets CLI and bind it to our API.
 ref: handling-secrets-in-sst
 comments_id: handling-secrets-in-sst/2465
 ---
 
-In the [previous chapter]({% link _chapters/setup-a-stripe-account.md %}), we created a Stripe account and got a pair of keys. Including the Stripe secret key. We need this in our app but we do not want to store this secret environment variables in our code. In this chapter, we'll look at how to add secrets in SST.
+In the [previous chapter]({% link _chapters/setup-a-stripe-account.md %}), we created a Stripe account and got a pair of keys. Including the Stripe secret key. We need this in our app but we do not want to store this secret in our code. In this chapter, we'll look at how to add secrets in SST.
 
-We are going to create a `.env` file to store this.
+We will be using the [SST CLI]({{ site.docs_url }}/packages/sst){:target="_blank"} to [store secrets]({{ site.docs_url }}/packages/sst#sst-secrets){:target="_blank"} in the [AWS SSM Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html){:target="_blank"}. 
 
-{%change%} Create a new file in `.env.local` with the following.
+{%change%} Run the following in your project root.
 
 ```bash
-STRIPE_SECRET_KEY=STRIPE_TEST_SECRET_KEY
+$ pnpm sst secrets set STRIPE_SECRET_KEY <YOUR STRIPE SECRET TEST KEY>
 ```
 
-Make sure to replace the `STRIPE_TEST_SECRET_KEY` with the **Secret key** from the [previous]({% link _chapters/setup-a-stripe-account.md %}) chapter.
+{%note%}
+You can specify the stage for a secret. By default, the stage is your local stage.
+{%endnote%}
 
-SST automatically loads this into your application.
+You can run `pnpm sst secrets list` to see the secrets for the current stage.
 
-A note on committing these files. SST follows the convention used by [Create React App](https://create-react-app.dev/docs/adding-custom-environment-variables/#adding-development-environment-variables-in-env) and [others](https://nextjs.org/docs/basic-features/environment-variables#default-environment-variables) of committing `.env` files to Git but not the `.env.local` or `.env.$STAGE.local` files. You can [read more about it here]({{ site.docs_url }}/config#committing-env-files).
+Now that the secret is stored in AWS Parameter Store, we can add it into our stack using the [`Config`]({{ site.docs_url }}/config#define-a-secret){:target="_blank"} construct.
 
-To ensure that this file doesn't get committed, we'll need to add it to the `.gitignore` in our project root. You'll notice that the starter project we are using already has this in the `.gitignore`.
+{%change%} Add the following below the `use(StorageStack)` line in `stacks/ApiStack.ts`:
 
-```txt
-# environments
-.env*.local
+```typescript
+const STRIPE_SECRET_KEY = new Config.Secret(stack, "STRIPE_SECRET_KEY");
 ```
 
-Also, since we won't be committing this file to Git, we'll need to add this to our CI when we want to automate our deployments. We'll do this later in the guide.
+{%change%} Import `Config` in `stacks/ApiStack.js`. Replace the following.
 
-Next, let's add these to our functions.
+```typescript
+import { Api, StackContext, use } from "sst/constructs";
+```
 
-{%change%} Add the following below the `bind: [table],` line in `stacks/ApiStack.js`:
+{%change%} With:
 
-```js
-environment: {
-  STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+```typescript
+import { Api, Config, StackContext, use } from "sst/constructs";
+```
+
+{%change%} Next, bind `STRIPE_SECRET_KEY` to the API in `stacks/ApiStack.ts`. Replace this:
+
+```typescript
+function: {
+  bind: [table],
 },
 ```
 
-We are taking the environment variables in our SST app and passing it into our API.
+{%change%} With: 
 
-### Deploy our changes
-
-Switch over to your terminal and restart `sst dev` so that it picks up the new `.env.local` file.
-
-```bash
-✓  Deployed:
-   StorageStack
-   ApiStack
-   ...
+```typescript
+function: {
+  bind: [table, STRIPE_SECRET_KEY],
+},
 ```
+
+This will add `STRIPE_SECRET_KEY` as a secret in the stack.  And allow our API to access the secret.
 
 Now we are ready to add an API to handle billing.

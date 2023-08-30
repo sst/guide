@@ -10,14 +10,14 @@ ref: delete-a-note
 
 The last thing we need to do on the note page is allowing users to delete their note. We have the button all set up already. All that needs to be done is to hook it up with the API.
 
-{%change%} Replace our `handleDelete` function in `src/containers/Notes.js`.
+{%change%} Replace our `handleDelete` function in `src/containers/Notes.tsx`.
 
-```js
+```typescript
 function deleteNote() {
-  return API.del("notes", `/notes/${id}`);
+  return API.del("notes", `/notes/${id}`, {});
 }
 
-async function handleDelete(event) {
+async function handleDelete(event: React.FormEvent<HTMLModElement>) {
   event.preventDefault();
 
   const confirmed = window.confirm(
@@ -44,7 +44,7 @@ We are simply making a `DELETE` request to `/notes/:id` where we get the `id` fr
 
 Now if you switch over to your browser and try deleting a note you should see it confirm your action and then delete the note.
 
-![Note page deleting screenshot](/assets/note-page-deleting.png)
+![Note page deleting screenshot](/assets/part2/note-page-deleting.png)
 
 Again, you might have noticed that we are not deleting the attachment when we are deleting a note. We are leaving that up to you to keep things simple. Check the [AWS Amplify API Docs](https://aws.github.io/aws-amplify/api/classes/storageclass.html#remove) on how to a delete file from S3.
 

@@ -4,85 +4,93 @@ title: Create a New React.js App
 date: 2017-01-06 00:00:00
 lang: en
 ref: create-a-new-react-js-app
-description: In this chapter we'll use Create React App to create a new React.js app. We'll be deploying our React app to AWS using the SST StaticSite construct. It'll also load the environment variables from our serverless app.
+description: In this chapter we'll use Vite to create a new React.js app. We'll be deploying our React app to AWS using the SST StaticSite construct.
 comments_id: create-a-new-react-js-app/68
 ---
 
 We are now ready to work on our frontend. So far we've built and deployed our backend API and infrastructure. We are now going to build a web app that connects to our backend.
 
-We are going to create a single page app using [React.js](https://facebook.github.io/react/). We'll use the [Create React App](https://github.com/facebookincubator/create-react-app) project to set everything up.
+We are going to create a single page app using [React.js](https://facebook.github.io/react/). We'll use the [Vite](https://vitejs.dev) project to set everything up.
 
 ### Create a New React App
 
-{%change%} Run the following command in your project root.
+{%change%} Run the following command **in the `packages/` directory**.
 
 ```bash
-$ npx create-react-app frontend --use-npm
-$ cd frontend
+$ pnpm create vite frontend --template react-ts
 ```
 
-This should take a second to run, and it will create your new project in the `frontend/` directory.
+This will create your new project in the `frontend/` directory.
+
+{%change%} Now install the dependencies.
+
+```bash
+$ cd frontend
+$ pnpm install
+```
+
+This should take a second to run.
 
 ### Loading SST Environment Variables
 
-We also want to load the environment variables from our backend. To do this, we’ll be using the [@serverless-stack/static-site-env package](https://www.npmjs.com/package/@serverless-stack/static-site-env). It'll find the environment variables from our SST app and load it while starting the React development environment.
+We also want to load the environment variables from our backend. To do this, we’ll be using the [`sst bind`](https://docs.sst.dev/packages/sst#sst-bind) CLI. It'll find the environment variables from our SST app and load it while starting the React development environment. We'll set these environment variables below.
 
-{%change%} Run the following **in the `frontend/` directory**.
+{%change%} Run the following **in the `packages/frontend/` directory**.
 
 ```bash
-$ npm install sst --save-dev
+$ pnpm add --save-dev sst
 ```
 
-Now to use this package, we'll add it to our `package.json` scripts.
+To use the CLI, we'll add it to our `package.json` scripts.
 
-{%change%} Replace the `start` script in your `frontend/package.json`.
+{%change%} Replace the `dev` script in your `packages/frontend/package.json`.
 
-```js
-"start": "react-scripts start",
+```typescript
+"dev": "vite",
 ```
 
 {%change%} With.
 
-```js
-"start": "sst bind react-scripts start",
+```typescript
+"dev": "sst bind vite",
 ```
 
 ### Add the React App to SST
 
-We are going to be deploying our React app to AWS. To do that we'll be using the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite) construct.
+We are going to be deploying our React app to AWS. To do that we'll be using the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite){:target="_blank"} construct.
 
-{%change%} Create a new file in `stacks/FrontendStack.js` and add the following.
+{%change%} Create a new file in `stacks/FrontendStack.ts` and add the following.
 
-```js
-import { StaticSite, use } from "sst/constructs";
+```typescript
+import { StackContext, StaticSite, use } from "sst/constructs";
 import { ApiStack } from "./ApiStack";
 import { AuthStack } from "./AuthStack";
 import { StorageStack } from "./StorageStack";
 
-export function FrontendStack({ stack, app }) {
+export function FrontendStack({ stack, app }: StackContext) {
   const { api } = use(ApiStack);
   const { auth } = use(AuthStack);
   const { bucket } = use(StorageStack);
 
   // Define our React app
   const site = new StaticSite(stack, "ReactSite", {
-    path: "frontend",
-    buildOutput: "build",
-    buildCommand: "npm run build",
+    path: "packages/frontend",
+    buildCommand: "pnpm run build",
+    buildOutput: "dist",
     // Pass in our environment variables
     environment: {
-      REACT_APP_API_URL: api.customDomainUrl || api.url,
-      REACT_APP_REGION: app.region,
-      REACT_APP_BUCKET: bucket.bucketName,
-      REACT_APP_USER_POOL_ID: auth.userPoolId,
-      REACT_APP_IDENTITY_POOL_ID: auth.cognitoIdentityPoolId,
-      REACT_APP_USER_POOL_CLIENT_ID: auth.userPoolClientId,
+      VITE_API_URL: api.url,
+      VITE_REGION: app.region,
+      VITE_BUCKET: bucket.bucketName,
+      VITE_USER_POOL_ID: auth.userPoolId,
+      VITE_USER_POOL_CLIENT_ID: auth.userPoolClientId,
+      VITE_IDENTITY_POOL_ID: auth.cognitoIdentityPoolId || "",
     },
   });
 
   // Show the url in the output
   stack.addOutputs({
-    SiteUrl: site.url || "http://localhost:3000",
+    SiteUrl: site.url,
   });
 }
 ```
@@ -91,17 +99,19 @@ We are creating a new stack in SST. We could've used one of the existing stacks 
 
 We are doing a couple of things of note here:
 
-1. We are pointing our `StaticSite` construct to the `frontend/` directory where our React app is.
-2. We are passing in the outputs from our other stacks as [environment variables in React](https://create-react-app.dev/docs/adding-custom-environment-variables/). This means that we won't have to hard code them in our React app. You can read more about this over in our chapter on, [Setting serverless environments variables in a React app]({% link _chapters/setting-serverless-environments-variables-in-a-react-app.md %}).
+1. We are pointing our `StaticSite` construct to the `packages/frontend/` directory where our React app is.
+2. We are passing in the outputs from our other stacks as [environment variables in Vite](https://vitejs.dev/guide/env-and-mode.html#env-variables){:target="_blank"}. This means that we won't have to hard code them in our React app. The `VITE_*` prefix is a convention Vite uses to say that we want to access these in our frontend code.
 3. And finally, we are outputting out the URL of our React app.
 
 ### Adding to the app
 
 Let's add this new stack to the rest of our app.
 
-{%change%} Replace the `stacks` function in `sst.config.ts` with.
+Open `sst.config.ts` and add the following.
 
-```js
+{%change%} Replace the `stacks` function with:
+
+```typescript
 stacks(app) {
   app
     .stack(StorageStack)
@@ -111,49 +121,62 @@ stacks(app) {
 },
 ```
 
-{%change%} Also, import the new stack at the top.
+{%change%} And add the following import.
 
-```js
+```typescript
 import { FrontendStack } from "./stacks/FrontendStack";
 ```
 
-### Deploy the Changes
+### Deploy Our Changes
 
-If you switch over to your terminal, you'll notice that you are being prompted to redeploy your changes. Go ahead and hit _ENTER_.
+If you switch over to your terminal, you will notice that your changes are being deployed.
 
-Note that, you'll need to have `sst start` running for this to happen. If you had previously stopped it, then running `npx sst start` will deploy your changes again.
-
-You should see that the new frontend stack has been deployed.
+{%caution%}
+You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
+{%endcaution%}
 
 ```bash
 ✓  Deployed:
    ...
    FrontendStack
-   SiteUrl: http://localhost:3000
 ```
 
 ### Start the React App
 
 Let’s start our React development environment.
 
-{%change%} In the `frontend/` directory run.
+{%change%} In the `packages/frontend/` directory run.
 
 ```bash
-$ npm start
+$ pnpm run dev
 ```
 
-This should fire up the newly created app in your browser.
+This should show where your frontend is running locally.
 
-![New Create React App screenshot](/assets/new-create-react-app.png)
+```bash
+  VITE v4.4.9  ready in 227 ms
+
+  ➜  Local:   http://127.0.0.1:5173/
+  ➜  Network: use --host to expose
+  ➜  press h to show help
+```
+
+{%info%}
+SST doesn't deploy your frontend while you are working locally. This is because most frontends come with their own local dev environments.
+{%endinfo%}
+
+If you head to that URL in your browser you should see.
+
+![New Vite React App screenshot](/assets/part2/new-vite-react-app.png)
 
 ### Change the Title
 
-{%change%} Let's quickly change the title of our note taking app. Open up `public/index.html` and edit the `title` tag to the following:
+Let's quickly change the title of our note taking app.
+
+{%change%} Open up `packages/frontend/index.html` and edit the `title` tag to the following:
 
 ```html
 <title>Scratch - A simple note taking app</title>
 ```
-
-Create React App comes pre-loaded with a pretty convenient yet minimal development environment. It includes live reloading, a testing framework, ES6 support, and much more.
 
 Now we are ready to build our frontend! We are going to start by creating our app icon and updating the favicons.

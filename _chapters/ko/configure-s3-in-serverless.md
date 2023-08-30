@@ -44,7 +44,7 @@ Outputs:
       Ref: AttachmentsBucket
 ```
 
-[파일 업로드를 위한 S3 버킷 생성]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}) 챕터를 떠올려 보면 버킷을 만들고 CORS 정책을 구성했습니다. 프론트엔드 클라이언트에서 직접 업로드를 해야만 했기 때문에 이 작업을 수행해야 했습니다. 여기서도 동일한 정책을 구성합니다.
+[파일 업로드를 위한 S3 버킷 생성]({% link _archives/create-an-s3-bucket-for-file-uploads.md %}) 챕터를 떠올려 보면 버킷을 만들고 CORS 정책을 구성했습니다. 프론트엔드 클라이언트에서 직접 업로드를 해야만 했기 때문에 이 작업을 수행해야 했습니다. 여기서도 동일한 정책을 구성합니다.
 
 S3 버킷(DynamoDB 테이블과 달리)은 전역적으로 이름이 지정됩니다. 그래서 사전에 적합한 이름이 무엇인지를 알 수가 없습니다. 따라서 CloudFormation에서 버킷 이름을 생성하게하고 나중에 출력할 수 있도록 `Outputs:` 블럭을 추가합니다.
 

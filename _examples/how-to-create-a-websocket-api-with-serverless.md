@@ -64,7 +64,7 @@ We are going to use [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) to store
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { StackContext, Table, WebSocketApi } from "sst/constructs";
 
 export function ExampleStack({ stack }: StackContext) {
@@ -92,7 +92,7 @@ Now let's add the WebSocket API.
 
 {%change%} Add this below the `Table` definition in `stacks/ExampleStack.ts`.
 
-```ts
+```typescript
 // Create the WebSocket API
 const api = new WebSocketApi(stack, "Api", {
   defaults: {
@@ -123,7 +123,7 @@ Now in our functions, let's first handle the case when a client connects to our 
 
 {%change%} Add the following to `packages/functions/src/connect.ts`.
 
-```ts
+```typescript
 import { DynamoDB } from "aws-sdk";
 import { APIGatewayProxyHandler } from "aws-lambda";
 import { Table } from "sst/node/table";
@@ -158,7 +158,7 @@ Similarly, we'll remove the connection id from the table when a client disconnec
 
 {%change%} Add the following to `packages/functions/src/disconnect.ts`.
 
-```ts
+```typescript
 import { DynamoDB } from "aws-sdk";
 import { APIGatewayProxyHandler } from "aws-lambda";
 import { Table } from "sst/node/table";
@@ -183,7 +183,7 @@ Now before handling the `sendmessage` route, let's do a quick test. We'll leave 
 
 {%change%} Add this to `packages/functions/src/sendMessage.ts`.
 
-```ts
+```typescript
 import { APIGatewayProxyHandler } from "aws-lambda";
 
 export const main: APIGatewayProxyHandler = async (event) => {
@@ -249,7 +249,7 @@ Now let's update our function to send messages.
 
 {%change%} Replace your `packages/functions/src/sendMessage.ts` with:
 
-```ts
+```typescript
 import { DynamoDB, ApiGatewayManagementApi } from "aws-sdk";
 import { Table } from "sst/node/table";
 import { APIGatewayProxyHandler } from "aws-lambda";

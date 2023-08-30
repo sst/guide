@@ -135,7 +135,7 @@ We are going to use the [`Auth`]({{ site.docs_url }}/constructs/Auth) construct.
 
 {%change%} Add the following below the `Api` construct in `stacks/ExampleStack.ts`.
 
-```ts
+```typescript
 const auth = new Auth(stack, "auth", {
   authenticator: {
     handler: "packages/functions/src/auth.handler",
@@ -168,7 +168,7 @@ Now let's implement the `authenticator` function.
 
 {%change%} Add a file in `packages/functions/src/auth.ts` with the following.
 
-```ts
+```typescript
 import { Config } from "sst/node/config";
 import { AuthHandler, FacebookAdapter } from "sst/node/auth";
 
@@ -206,7 +206,7 @@ To deploy a React app to AWS, we'll be using the SST [`StaticSite`]({{ site.docs
 
 {%change%} Add the following above the `Auth` construct in `stacks/ExampleStack.ts`.
 
-```ts
+```typescript
 const site = new StaticSite(stack, "site", {
   path: "web",
   buildCommand: "npm run build",
@@ -367,7 +367,7 @@ First, to make creating and retrieving session typesafe, we'll start by defining
 
 {%change%} Add the following above the `AuthHandler` in `packages/functions/src/auth.ts`.
 
-```ts
+```typescript
 declare module "sst/node/auth" {
   export interface SessionTypes {
     user: {
@@ -434,7 +434,7 @@ Then in the frontend, we will check if the URL contains the `token` query string
 
 {%change%} Add the following above the `return` in `web/src/App.jsx`.
 
-```ts
+```typescript
 useEffect(() => {
   const search = window.location.search;
   const params = new URLSearchParams(search);
@@ -452,7 +452,7 @@ On page load, we will also check if the session token exists in the local storag
 
 {%change%} Add this above the `useEffect` we just added.
 
-```ts
+```typescript
 const [session, setSession] = useState(null);
 
 const getSession = async () => {
@@ -498,7 +498,7 @@ And finally, when the user clicks on `Sign out`, we need to clear the session to
 
 {%change%} Add the following above the `return`.
 
-```ts
+```typescript
 const signOut = async () => {
   localStorage.removeItem("session");
   setSession(null);
@@ -507,7 +507,7 @@ const signOut = async () => {
 
 {%change%} Also, remember to add the imports up top.
 
-```ts
+```typescript
 import { useEffect, useState } from "react";
 ```
 
@@ -533,7 +533,7 @@ We'll be using the SST [`Table`]({{ site.docs_url }}/constructs/Table) construct
 
 {%change%} Add the following above the `Api` construct in `stacks/ExampleStack.ts`.
 
-```ts
+```typescript
 const table = new Table(stack, "users", {
   fields: {
     userId: "string",
@@ -608,7 +608,7 @@ This is saving the `claims` we get from Facebook in our DynamoDB table.
 
 {%change%} Also add these imports up top.
 
-```ts
+```typescript
 import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb";
 import { marshall } from "@aws-sdk/util-dynamodb";
 import { Table } from "sst/node/table";
@@ -637,7 +637,7 @@ Now that the user data is stored in the database; let's create an API endpoint t
 
 {%change%} Add a file at `packages/functions/src/session.ts`.
 
-```ts
+```typescript
 import { Table } from "sst/node/table";
 import { ApiHandler } from "sst/node/api";
 import { useSession } from "sst/node/auth";
@@ -687,7 +687,7 @@ As we wait, let's update our frontend to make a request to the `/session` API to
 
 {%change%} Add the following above the `signOut` function in `web/src/App.jsx`.
 
-```ts
+```typescript
 const getUserInfo = async (session) => {
   try {
     const response = await fetch(
@@ -860,7 +860,7 @@ Note that when we are developing locally via `sst dev`, the `IS_LOCAL` environme
 
 {%change%} Also remember to import the `StaticSite` construct up top.
 
-```ts
+```typescript
 import { StaticSite } from "sst/node/site";
 ```
 

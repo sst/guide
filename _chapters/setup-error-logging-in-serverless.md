@@ -23,25 +23,30 @@ We are going to look at how to setup a debugging framework to catch the above er
 
 Let's start by adding some code to help us with that.
 
-{%change%} Create a `packages/core/src/debug.js` file from your project root with the following.
+{%change%} Create a `packages/core/src/debug.ts` file from your project root with the following.
 
-```js
+```typescript
 import util from "util";
 import AWS from "aws-sdk";
+import {APIGatewayEvent} from "aws-lambda";
 
-let logs;
+export interface LogType {
+  [key: string | symbol]: Date | string;
+}
+
+let logs:Array<LogType>;
 
 // Log AWS SDK calls
 AWS.config.logger = { log: debug };
 
-export default function debug() {
+export default function debug(...args: Array<any>) {
   logs.push({
     date: new Date(),
-    string: util.format.apply(null, arguments),
+    string: util.format.apply(null, [...args]),
   });
 }
 
-export function init(event) {
+export function init(event: APIGatewayEvent) {
   logs = [];
 
   // Log API event
@@ -52,9 +57,9 @@ export function init(event) {
   });
 }
 
-export function flush(e) {
+export function flush(error: unknown) {
   logs.forEach(({ date, string }) => console.debug(date, string));
-  console.error(e);
+  console.error(error);
 }
 ```
 
@@ -89,7 +94,7 @@ We are doing a few things of note in this simple helper.
 
 So in our Lambda function code, if we want to log some debug information that only gets printed out if we have an error, we'll do the following:
 
-```js
+```typescript
 debug(
   "This stores the message and prints to CloudWatch if Lambda function later throws an exception"
 );
@@ -97,7 +102,7 @@ debug(
 
 In contrast, if we always want to log to CloudWatch, we'll:
 
-```js
+```typescript
 console.log("This prints a message in CloudWatch prefixed with INFO");
 console.warn("This prints a message in CloudWatch prefixed with WARN");
 console.error("This prints a message in CloudWatch prefixed with ERROR");
@@ -111,13 +116,14 @@ You'll recall that all our Lambda functions are wrapped using a `handler()` meth
 
 We'll use the debug lib that we added above to improve our error handling.
 
-{%change%} Replace our `packages/core/src/handler.js` with the following.
+{%change%} Replace our `packages/core/src/handler.ts` with the following.
 
-```js
+```typescript
+import { Context, APIGatewayEvent } from 'aws-lambda';
 import * as debug from "./debug";
 
-export default function handler(lambda) {
-  return async function (event, context) {
+export default function handler(lambda: Function) {
+  return async function (event: APIGatewayEvent, context: Context) {
     let body, statusCode;
 
     // Start debugger
@@ -127,11 +133,15 @@ export default function handler(lambda) {
       // Run the Lambda
       body = await lambda(event, context);
       statusCode = 200;
-    } catch (e) {
+    } catch (error) {
       // Print debug messages
-      debug.flush(e);
+      debug.flush(error);
 
-      body = { error: e.message };
+      if (error instanceof Error) {
+        body = {error: error.message};
+      } else {
+        body = {error: String(error)};
+      }
       statusCode = 500;
     }
 
@@ -160,7 +170,7 @@ This should be fairly straightforward:
 
 You might recall the way we are currently using the above error handler in our Lambda functions.
 
-```js
+```typescript
 export const main = handler((event, context) => {
   // Do some work
   const a = 1 + 1;
@@ -171,7 +181,9 @@ export const main = handler((event, context) => {
 
 We wrap all of our Lambda functions using the error handler.
 
-Note that, the `handler.js` needs to be **imported before we import anything else**. This is because the `debug.js` that it imports needs to initialize AWS SDK logging before it's used anywhere else.
+Note that, the `handler.ts` needs to be **imported before we import anything else**. This is because the `debug.js` that it imports needs to initialize AWS SDK logging before it's used anywhere else.
+
+{%change%} Go check and make sure you have imported handler first.
 
 ### Commit the Code
 

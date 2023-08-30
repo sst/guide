@@ -110,7 +110,7 @@ Outputs:
       Ref: CognitoIdentityPool
 ```
 
-여기서 많은 작업이 일어나고 있는 것처럼 보입니다. 그러나 우리가 [Cognito ID 풀 만들기]({% link _chapters/create-a-cognito-identity-pool.md %}) 챕터에서했던 것과 거의 같습니다. CloudFormation이 보다 자세한 정보일 수 있으며 약간 어렵게 보일 수도 있습니다.
+여기서 많은 작업이 일어나고 있는 것처럼 보입니다. 그러나 우리가 [Cognito ID 풀 만들기]({% link _archives/create-a-cognito-identity-pool.md %}) 챕터에서했던 것과 거의 같습니다. CloudFormation이 보다 자세한 정보일 수 있으며 약간 어렵게 보일 수도 있습니다.
 
 이 구성의 여러 부분을 빠르게 살펴 보겠습니다.
 
@@ -118,11 +118,11 @@ Outputs:
 
 2. `AllowUnauthenticatedIdentities:false`를 추가하여 로그인한 사용자만 원한다고 설정했습니다.
 
-3. 다음으로 사용자 풀을 ID 공급자로 사용하겠다고 명시합니다. 우리는 특별히 `Ref:CognitoUserPoolClient` 라인을 사용하여 이를 수행합니다. 다시 [Serverless에서 Cognito 사용자 풀 만들기]({% link _chapters/configure-cognito-user-pool-in-serverless.md %}) 챕터를 참조하면 `CognitoUserPoolClient` 블럭이 있음을 알 수 있습니다. 그리고 여기에서 참조하고있다.
+3. 다음으로 사용자 풀을 ID 공급자로 사용하겠다고 명시합니다. 우리는 특별히 `Ref:CognitoUserPoolClient` 라인을 사용하여 이를 수행합니다. 다시 [Serverless에서 Cognito 사용자 풀 만들기]({% link _archives/configure-cognito-user-pool-in-serverless.md %}) 챕터를 참조하면 `CognitoUserPoolClient` 블럭이 있음을 알 수 있습니다. 그리고 여기에서 참조하고있다.
 
 4. 그런 다음 인증된 사용자에게 IAM 역할을 부여합니다.
 
-5. 이 역할에 다양한 요소를 추가합니다. 이것은 우리가 [Cognito ID 풀 만들기]({% link _chapters/create-a-cognito-identity-pool.md %}) 챕터에서 사용하는 방법과 같습니다. CloudFormation을 사용하려면 이 방법으로 포맷해야합니다.
+5. 이 역할에 다양한 요소를 추가합니다. 이것은 우리가 [Cognito ID 풀 만들기]({% link _archives/create-a-cognito-identity-pool.md %}) 챕터에서 사용하는 방법과 같습니다. CloudFormation을 사용하려면 이 방법으로 포맷해야합니다.
 
 6. `apiGatewayRestApi` ref는 serverless 프레임 워크가 `serverless.yml`에서 API 엔드포인트를 정의할 때 생성됩니다. 따라서이 경우에는 생성중인 API 리소스를 참조하고 있습니다.
 

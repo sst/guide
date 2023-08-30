@@ -64,7 +64,7 @@ An SST app is made up of two parts.
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { Api, KinesisStream, StackContext } from "sst/constructs";
 
 export function ExampleStack({ stack }: StackContext) {
@@ -86,7 +86,7 @@ Now let's add the API.
 
 {%change%} Add this below the `KinesisStream` definition in `stacks/ExampleStack.ts`.
 
-```ts
+```typescript
 // Create a HTTP API
 const api = new Api(stack, "Api", {
   defaults: {
@@ -115,7 +115,7 @@ We will create three functions, one for handling the API request, and the other 
 
 {%change%} Replace the `packages/functions/src/lambda.ts` with the following.
 
-```ts
+```typescript
 export async function handler() {
   console.log("Message queued!");
   return {
@@ -127,7 +127,7 @@ export async function handler() {
 
 {%change%} Add a `packages/functions/src/consumer1.ts`.
 
-```ts
+```typescript
 export async function handler() {
   console.log("Message 1 processed!");
   return {};
@@ -136,7 +136,7 @@ export async function handler() {
 
 {%change%} Add a `packages/functions/src/consumer2.ts`.
 
-```ts
+```typescript
 export async function handler() {
   console.log("Message 2 processed!");
   return {};
@@ -195,7 +195,7 @@ Now let's send a message to our Kinesis Data Stream.
 
 {%change%} Replace the `packages/functions/src/lambda.ts` with the following.
 
-```ts
+```typescript
 import AWS from "aws-sdk";
 import { KinesisStream } from "sst/node/kinesis-stream";
 

@@ -1,8 +1,9 @@
-<p align="center">
+<p style="text-align: center;">
   <a href="https://sst.dev/">
     <img alt="SST" src="https://raw.githubusercontent.com/sst/identity/main/variants/sst-full.svg" width="300" />
   </a>
 </p>
+
 
 <p align="center">
   <a href="https://sst.dev/discord"><img alt="Discord" src="https://img.shields.io/discord/983865673656705025?style=flat-square&label=Discord" /></a>

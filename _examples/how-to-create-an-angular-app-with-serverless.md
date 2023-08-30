@@ -71,7 +71,7 @@ We'll be using [Amazon DynamoDB](https://aws.amazon.com/dynamodb/); a reliable a
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import {
   Api,
   StaticSite,
@@ -103,7 +103,7 @@ Now let's add the API.
 
 {%change%} Add this below the `Table` definition in `stacks/ExampleStack.ts`.
 
-```ts
+```typescript
 // Create the HTTP API
 const api = new Api(stack, "Api", {
   defaults: {
@@ -133,7 +133,7 @@ To deploy an Angular app to AWS, we'll be using the SST [`StaticSite`]({{ site.d
 
 {%change%} Replace the following in `stacks/ExampleStack.ts`:
 
-```ts
+```typescript
 // Show the API endpoint in the output
 stack.addOutputs({
   ApiEndpoint: api.url,
@@ -142,7 +142,7 @@ stack.addOutputs({
 
 {%change%} With:
 
-```ts
+```typescript
 const site = new StaticSite(stack, "AngularSite", {
   path: "frontend",
   buildOutput: "dist",
@@ -167,7 +167,7 @@ We are also setting up an [Angular environment variable](https://Angular.io/guid
 
 You can also optionally configure a custom domain.
 
-```ts
+```typescript
 // Deploy our Angular app
 const site = new StaticSite(stack, "AngularSite", {
   // ...
@@ -183,7 +183,7 @@ Our API is powered by a Lambda function. In the function we'll read from our Dyn
 
 {%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
-```ts
+```typescript
 import { DynamoDB } from "aws-sdk";
 import { Table } from "sst/node/table";
 
@@ -284,7 +284,7 @@ In Angular, we have our `environment.ts` and `environment.prod.ts` files defined
 
 {%change%} Create a `setenv.ts` file inside `frontend/scripts` folder and add the below code
 
-```ts
+```typescript
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { writeFile } = require("fs");
 
@@ -311,7 +311,7 @@ We need to update our scripts to use this and the [`sst bind`](https://docs.sst.
 
 {%change%} Update the `package.json` in the `packages/frontend/` directory.
 
-```ts
+```typescript
 {
   // ...
   "scripts": {
@@ -357,7 +357,7 @@ We are now ready to add the UI for our app and connect it to our serverless API.
 
 {%change%} Replace `packages/frontend/src/app/app.component.ts` with.
 
-```ts
+```typescript
 import { environment } from "./../environments/environment";
 import { Component } from "@Angular/core";
 import { HttpClient } from "@Angular/common/http";
@@ -387,7 +387,7 @@ We need `HttpClientModule` to make API calls with our API, To make `HttpClientMo
 
 {%change%} Replace `packages/frontend/src/app/app.module.ts` with.
 
-```ts
+```typescript
 import { HttpClientModule } from "@Angular/common/http";
 import { NgModule } from "@Angular/core";
 import { BrowserModule } from "@Angular/platform-browser";
@@ -434,7 +434,7 @@ Let's update our table with the clicks.
 
 {%change%} Add this above the `return` statement in `packages/functions/src/lambda.ts`.
 
-```ts
+```typescript
 const putParams = {
   TableName: Table.Counter.tableName,
   Key: {
@@ -472,7 +472,7 @@ We'll replace placeholder env values in `environment.prod.ts` in our app with th
 
 {%change%} Replace `packages/frontend/src/environments/environment.prod.ts` with.
 
-```ts
+```typescript
 export const environment = {
   production: true,
   API_URL: "{{ PROD_API_URL }}",
@@ -481,7 +481,7 @@ export const environment = {
 
 {%change%} In `stacks/ExampleStack.ts` add the following, right below the `environment` key.
 
-```ts
+```typescript
 // To load the API URL from the environment in production mode (environment.prod.ts)
 replaceValues: [
   {

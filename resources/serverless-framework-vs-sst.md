@@ -172,7 +172,7 @@ This example comes with a VS Code [Launch Configuration](https://code.visualstud
 
 We are creating a simple API in our app. It's defined in `stacks/MyStack.ts`.
 
-```ts
+```typescript
 import { Api, StackContext } from "@serverless-stack/resources";
 
 export function MyStack({ stack }: StackContext) {
@@ -192,7 +192,7 @@ export function MyStack({ stack }: StackContext) {
 
 And when we hit this endpoint, it triggers our _Hello World_ Lambda function in `functions/lambda.ts`.
 
-```ts
+```typescript
 import { APIGatewayProxyEventV2, APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 export const handler: APIGatewayProxyHandlerV2 = async (

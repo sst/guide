@@ -44,7 +44,7 @@ handleSubmit = async (event) => {
 
 2. `await` 키워드를 사용하여 promise를 반환하는 Auth.signIn() 메소드를 호출합니다. 그리고 `handleSubmit` 메쏘드에 `async`라는 키워드를 붙일 필요가 있습니다.
 
-이제 `admin@example.com` 사용자([Cognito 테스트 사용자 만들기]({% link _chapters/create-a-cognito-test-user.md %}) 챕터에서 작성한 사용자)로 로그인하면, 로그인이 성공했다는 브라우저 경고가 표시됩니다.
+이제 `admin@example.com` 사용자([Cognito 테스트 사용자 만들기]({% link _archives/create-a-cognito-test-user.md %}) 챕터에서 작성한 사용자)로 로그인하면, 로그인이 성공했다는 브라우저 경고가 표시됩니다.
 
 ![로그인 성공 스크린 샷](/assets/login-success.png)
 

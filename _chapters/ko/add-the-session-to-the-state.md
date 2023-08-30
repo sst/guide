@@ -166,7 +166,7 @@ handleLogout = event => {
 }
 ```
 
-이제 브라우저로 가서 [Cognito 테스트 사용자 만들기]({% link _chapters/create-a-cognito-test-user.md %}) 챕터에서 만든 관리자 자격 증명으로 로그인 해보십시오. 로그아웃 버튼이 바로 나타납니다.
+이제 브라우저로 가서 [Cognito 테스트 사용자 만들기]({% link _archives/create-a-cognito-test-user.md %}) 챕터에서 만든 관리자 자격 증명으로 로그인 해보십시오. 로그아웃 버튼이 바로 나타납니다.
 
 ![로그인 상태 업데이트 스크린 샷](/assets/login-state-updated.png)
 

@@ -132,6 +132,6 @@ import LoaderButton from "../components/LoaderButton";
 
 ![로그인 로딩 상태 화면](/assets/login-loading-state.png)
 
-사용자를 위한 _비밀번호 찾기_ 기능을 추가하려면 [사용자 관리에 관한 추가 크레딧 시리즈]({% link _chapters/manage-user-accounts-in-aws-amplify.md %})를 참조하십시오.
+사용자를 위한 _비밀번호 찾기_ 기능을 추가하려면 [사용자 관리에 관한 추가 크레딧 시리즈]({% link _archives/manage-user-accounts-in-aws-amplify.md %})를 참조하십시오.
 
 이제 계속해서 회원 가입 프로세스를 구현해보도록 하겠습니다.

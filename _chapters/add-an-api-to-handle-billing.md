@@ -12,26 +12,31 @@ Now let's get started with creating an API to handle billing. It's going to take
 
 ### Add a Billing Lambda
 
-{%change%} Start by installing the Stripe NPM package. Run the following in the `packages/functions/` folder of our project.
+Start by installing the Stripe npm package.
+
+{%change%} Run the following **in the `packages/functions/` directory** of our project.
 
 ```bash
-$ npm install stripe
+$ pnpm add --save stripe
 ```
 
-{%change%} Create a new file in `packages/functions/src/billing.js` with the following.
+{%change%} Create a new file in `packages/functions/src/billing.ts` with the following.
 
-```js
+```typescript
 import Stripe from "stripe";
+import { Config } from "sst/node/config";
 import handler from "@notes/core/handler";
 import { calculateCost } from "@notes/core/cost";
 
 export const main = handler(async (event) => {
-  const { storage, source } = JSON.parse(event.body);
+  const { storage, source } = JSON.parse(event.body || "{}");
   const amount = calculateCost(storage);
   const description = "Scratch charge";
 
-  // Load our secret key from the  environment variables
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  // Load our secret key
+  const stripe = new Stripe(Config.STRIPE_SECRET_KEY, {
+    apiVersion: "2023-08-16",
+  });
 
   await stripe.charges.create({
     source,
@@ -40,7 +45,7 @@ export const main = handler(async (event) => {
     currency: "usd",
   });
 
-  return { status: true };
+  return JSON.stringify({ status: true });
 });
 ```
 
@@ -50,20 +55,20 @@ Most of this is fairly straightforward but let's go over it quickly:
 
 - We are using a `calculateCost(storage)` function (that we are going to add soon) to figure out how much to charge a user based on the number of notes that are going to be stored.
 
-- We create a new Stripe object using our Stripe Secret key. We are getting this from the environment variable that we configured in the [previous chapter]({% link _chapters/handling-secrets-in-sst.md %}). For newer versions of the Stripe SDK, you might've to pass in an API version.
+- We create a new Stripe object using our Stripe Secret key. We are getting this from the environment variable that we configured in the [previous chapter]({% link _chapters/handling-secrets-in-sst.md %}). At the time of this guide's writing, we are using apiVersion `2022-11-15` but you can check the [Stripe documentation](https://stripe.com/docs/api/versioning){:target="_blank"} for the latest version.
 
 - Finally, we use the `stripe.charges.create` method to charge the user and respond to the request if everything went through successfully.
 
-Note, if you are testing this from India, you'll need to add some shipping information as well. Check out the [details from our forums](https://discourse.sst.dev/t/test-the-billing-api/172/20).
+Note, if you are testing this from India, you'll need to add some shipping information as well. Check out the [details from our forums](https://discourse.sst.dev/t/test-the-billing-api/172/20){:target="_blank"}.
 
 ### Add the Business Logic
 
 Now let's implement our `calculateCost` method. This is primarily our _business logic_.
 
-{%change%} Create a `packages/core/src/cost.js` and add the following.
+{%change%} Create a `packages/core/src/cost.ts` and add the following.
 
-```js
-export function calculateCost(storage) {
+```typescript
+export function calculateCost(storage: number) {
   const rate = storage <= 10 ? 4 : storage <= 100 ? 2 : 1;
   return rate * storage * 100;
 }
@@ -77,19 +82,21 @@ Clearly, our serverless infrastructure might be cheap but our service isn't!
 
 Let's add a new route for our billing API.
 
-{%change%} Add the following below the `DELETE /notes/{id}` route in `stacks/ApiStack.js`.
+{%change%} Add the following below the `DELETE /notes/{id}` route in `stacks/ApiStack.ts`.
 
-```js
+```typescript
 "POST /billing": "packages/functions/src/billing.main",
 ```
 
 ### Deploy Our Changes
 
-If you switch over to your terminal, you'll notice that your changes are being deployed.
+If you switch over to your terminal, you will notice that your changes are being deployed.
 
-Note that, you'll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
+{%caution%}
+You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
+{%endcaution%}
 
-You should see that the API stack is being updated.
+You should see that the new API stack has been deployed.
 
 ```bash
 ✓  Deployed:
@@ -102,28 +109,31 @@ You should see that the API stack is being updated.
 
 Now that we have our billing API all set up, let's do a quick test in our local environment.
 
-We'll be using the same CLI from [a few chapters ago]({% link _chapters/secure-our-serverless-apis.md %}).
+We'll be using the same CLI from [a few chapters ago]({% link _chapters/secure-our-serverless-apis.md %}){:target="_blank"}.
 
 {%change%} Run the following in your terminal.
 
 ```bash
-$ npx aws-api-gateway-cli-test \
+$ pnpm dlx aws-api-gateway-cli-test \
 --username='admin@example.com' \
 --password='Passw0rd!' \
---user-pool-id='USER_POOL_ID' \
---app-client-id='USER_POOL_CLIENT_ID' \
---cognito-region='COGNITO_REGION' \
---identity-pool-id='IDENTITY_POOL_ID' \
---invoke-url='API_ENDPOINT' \
---api-gateway-region='API_REGION' \
+--user-pool-id='<USER_POOL_ID>' \
+--app-client-id='<USER_POOL_CLIENT_ID>' \
+--cognito-region='<COGNITO_REGION>' \
+--identity-pool-id='<IDENTITY_POOL_ID>' \
+--invoke-url='<API_ENDPOINT>' \
+--api-gateway-region='<API_REGION>' \
 --path-template='/billing' \
 --method='POST' \
 --body='{"source":"tok_visa","storage":21}'
 ```
+{%note%}
+Make sure to replace the `USER_POOL_ID`, `USER_POOL_CLIENT_ID`, `COGNITO_REGION`, `IDENTITY_POOL_ID`, `API_ENDPOINT`, and `API_REGION` with the [same values we used a couple of chapters ago]({% link _chapters/secure-our-serverless-apis.md %}){:target="_blank"}.
 
-Make sure to replace the `USER_POOL_ID`, `USER_POOL_CLIENT_ID`, `COGNITO_REGION`, `IDENTITY_POOL_ID`, `API_ENDPOINT`, and `API_REGION` with the [same values we used a couple of chapters ago]({% link _chapters/secure-our-serverless-apis.md %}).
+If you have the previous request, update the `path-template` and `body` with the new values.
+{%endnote%}
 
-Here we are testing with a Stripe test token called `tok_visa` and with `21` as the number of notes we want to store. You can read more about the Stripe test cards and tokens in the [Stripe API Docs here](https://stripe.com/docs/testing#cards).
+Here we are testing with a Stripe test token called `tok_visa` and with `21` as the number of notes we want to store. You can read more about the Stripe test cards and tokens in the [Stripe API Docs here](https://stripe.com/docs/testing#cards){:target="_blank"}.
 
 If the command is successful, the response will look similar to this.
 

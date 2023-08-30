@@ -11,23 +11,23 @@ ref: adding-auth-to-our-serverless-app
 comments_id: adding-auth-to-our-serverless-app/2457
 ---
 
-So far we've created the [DynamoDB table]({% link _chapters/create-a-dynamodb-table-in-sst.md %}), [S3 bucket]({% link _chapters/create-an-s3-bucket-in-sst.md %}), and [API]({% link _chapters/add-an-api-to-create-a-note.md %}) parts of our serverless backend. Now let's add auth into the mix. As we talked about in the [previous chapter]({% link _chapters/auth-in-serverless-apps.md %}), we are going to use [Cognito User Pool](https://aws.amazon.com/cognito/) to manage user sign ups and logins. While we are going to use [Cognito Identity Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html) to manage which resources our users have access to.
+So far we've created the [DynamoDB table]({% link _chapters/create-a-dynamodb-table-in-sst.md %}), [S3 bucket]({% link _chapters/create-an-s3-bucket-in-sst.md %}), and [API]({% link _chapters/add-an-api-to-create-a-note.md %}) parts of our serverless backend. Now let's add auth into the mix. As we talked about in the [previous chapter]({% link _chapters/auth-in-serverless-apps.md %}), we are going to use [Cognito User Pool](https://aws.amazon.com/cognito/){:target="_blank"} to manage user sign ups and logins. While we are going to use [Cognito Identity Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html){:target="_blank"} to manage which resources our users have access to.
 
-Setting this all up can be pretty complicated in CDK. SST has a simple [`Auth`]({{ site.docs_url }}/constructs/Auth) construct to help with this.
+Setting this all up can be pretty complicated in CDK. SST has a simple [`Auth`]({{ site.docs_url }}/constructs/Auth){:target="_blank"} construct to help with this.
 
 ### Create a Stack
 
-{%change%} Add the following to a new file in `stacks/AuthStack.js`.
+{%change%} Add the following to a new file in `stacks/AuthStack.ts`.
 
-```js
-import * as iam from "aws-cdk-lib/aws-iam";
-import { Cognito, use } from "sst/constructs";
-import { StorageStack } from "./StorageStack";
+```typescript
 import { ApiStack } from "./ApiStack";
+import * as iam from "aws-cdk-lib/aws-iam";
+import { StorageStack } from "./StorageStack";
+import { Cognito, StackContext, use } from "sst/constructs";
 
-export function AuthStack({ stack, app }) {
-  const { bucket } = use(StorageStack);
+export function AuthStack({ stack, app }: StackContext) {
   const { api } = use(ApiStack);
+  const { bucket } = use(StorageStack);
 
   // Create a Cognito User Pool and Identity Pool
   const auth = new Cognito(stack, "Auth", {
@@ -51,8 +51,8 @@ export function AuthStack({ stack, app }) {
   stack.addOutputs({
     Region: app.region,
     UserPoolId: auth.userPoolId,
-    IdentityPoolId: auth.cognitoIdentityPoolId,
     UserPoolClientId: auth.userPoolClientId,
+    IdentityPoolId: auth.cognitoIdentityPoolId,
   });
 
   // Return the auth resource
@@ -62,9 +62,9 @@ export function AuthStack({ stack, app }) {
 }
 ```
 
-Let's quickly go over what we are doing here.
+Let's go over what we are doing here.
 
-- We are creating a new stack for our auth infrastructure. We don't need to create a separate stack but we are using it as an example to show how to work with multiple stacks.
+- We are creating a new stack for our auth infrastructure. While we don't need to create a separate stack, we are using it as an example to show how to work with multiple stacks.
 
 - The `Auth` construct creates a Cognito User Pool for us. We are using the `login` prop to state that we want our users to login with their email.
 
@@ -74,15 +74,17 @@ Let's quickly go over what we are doing here.
 
 - And we want them to access our S3 bucket. We'll look at this in detail below.
 
-- Finally, we output the ids of the auth resources that've been created and returning the auth resource so that other stacks can access this resource.
+- Finally, we output the ids of the auth resources that have been created and returning the auth resource so that other stacks can access this resource.
 
-Note, learn more about sharing resources between stacks [here](https://docs.sst.dev/constructs/Stack#sharing-resources-between-stacks).
+{% info %}
+Learn more about how to [share resources between stacks]({{ site.docs_url }}/constructs/Stack#sharing-resources-between-stacks){:target="_blank"}.
+{% endinfo %}
 
 ### Securing Access to Uploaded Files
 
 We are creating a specific IAM policy to secure the files our users will upload to our S3 bucket.
 
-```js
+```typescript
 // Policy granting access to a specific folder in the bucket
 new iam.PolicyStatement({
   actions: ["s3:*"],
@@ -101,19 +103,18 @@ One other thing to note is that, the federated identity id is a UUID that is ass
 
 ### Add to the App
 
-Let's add this stack to our app.
+Let's add this stack to our config in `sst.config.ts`.
 
-{%change%} Replace the `stacks` function in `sst.config.ts` with this.
+{%change%} Replace the `stacks` function with this line that adds the `AuthStack` into our list of stacks.
 
-```js
+```typescript
 stacks(app) {
   app.stack(StorageStack).stack(ApiStack).stack(AuthStack);
 },
 ```
+{%change%} And import the new stack at the top of the file.
 
-{%change%} Also, import the new stack at the top.
-
-```js
+```typescript
 import { AuthStack } from "./stacks/AuthStack";
 ```
 
@@ -121,21 +122,23 @@ import { AuthStack } from "./stacks/AuthStack";
 
 We also need to enable authentication in our API.
 
-{%change%} Add the following above the `function: {` line in `stacks/ApiStack.js`.
+{%change%} Add the following prop into the `defaults` options above the `function: {` line in `stacks/ApiStack.ts`.
 
-```js
+```typescript
 authorizer: "iam",
 ```
 
 This tells our API that we want to use `AWS_IAM` across all our routes.
 
-### Deploy the App
+### Deploy Our Changes
 
-If you switch over to your terminal, you'll notice that your changes are being deployed.
+If you switch over to your terminal, you will notice that your changes are being deployed.
 
-Note that, you'll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
+{%caution%}
+You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
+{%endcaution%}
 
-You should see something like this at the end of the deploy process.
+You should see that the new Auth stack is being deployed.
 
 ```bash
 ✓  Deployed:
@@ -149,20 +152,39 @@ You should see something like this at the end of the deploy process.
    UserPoolId: us-east-1_TYEz7XP7P
 ```
 
-You'll also see our new User Pool if you head over to the **Cognito** tab in the [SST Console]({{ site.old_console_url }}).
-
-![SST Console Cognito tab](/assets/part2/sst-console-cognito-tab.png)
+Let's create a test user so that we can test our API.
 
 ### Create a Test User
 
-Let's create a test user so that we can test our API. Click the **Create User** button.
+We'll use AWS CLI to sign up a user with their email and password.
 
-{%change%} Fill in `admin@example.com` as the **Email** and `Passw0rd!` as the **Password**, then hit **Create**.
+{%change%} In your terminal, run.
 
-![SST Console Cognito create new user](/assets/part2/sst-console-cognito-create-new-user.png)
+``` bash
+$ aws cognito-idp sign-up \
+  --region <COGNITO_REGION> \
+  --client-id <USER_POOL_CLIENT_ID> \
+  --username admin@example.com \
+  --password Passw0rd!
+```
 
-This should create a new user.
+Make sure to replace `COGNITO_REGION` and `USER_POOL_CLIENT_ID` with the `Region` and `UserPoolClientId` from above.
 
-![SST Console Cognito new user](/assets/part2/sst-console-cognito-new-user.png)
+Now we need to verify this email. For now we'll do this via an administrator command.
+
+{%change%} In your terminal, run.
+
+``` bash
+$ aws cognito-idp admin-confirm-sign-up \
+  --region <COGNITO_REGION> \
+  --user-pool-id <USER_POOL_ID> \
+  --username admin@example.com
+```
+
+Replace the `COGNITO_REGION` and `USER_POOL_ID` with the `Region` and `UserPoolId` from above.
+
+{%caution%}
+The first command uses the `USER_POOL_CLIENT_ID` while the second command uses the `USER_POOL_ID`. Make sure to replace it with the right values.
+{%endcaution%}
 
 Now that the auth infrastructure and a test user has been created, let's use them to secure our APIs and test them.

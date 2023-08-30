@@ -74,7 +74,7 @@ For this example we'll be testing using a simple API endpoint.
 
 {%change%} Replace your `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { Api, StackContext } from "sst/constructs";
 
 export function ExampleStack({ stack }: StackContext) {
@@ -98,7 +98,7 @@ Our functions are stored in the `packages/functions/` directory. In this case, w
 
 {%change%} Create a `packages/functions/src/lambda.ts` with.
 
-```ts
+```typescript
 import { APIGatewayProxyEventV2, APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 export const handler: APIGatewayProxyHandlerV2 = async (
@@ -142,7 +142,7 @@ Since we are going to set breakpoints in our Lambda functions, it makes sense to
 
 SST has an [`--increase-timeout`]({{ site.docs_url }}/packages/sst#options) option that increases the function timeouts in your app to the maximum 15 minutes. We are using this option in our `launch.json`.
 
-```ts
+```typescript
 "runtimeArgs": ["start", "--increase-timeout"],
 ```
 
@@ -195,7 +195,7 @@ An advantage of using the Live Lambda Development environment is that you can ma
 
 {%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
-```ts
+```typescript
 import { APIGatewayProxyEventV2, APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 export const handler: APIGatewayProxyHandlerV2 = async (

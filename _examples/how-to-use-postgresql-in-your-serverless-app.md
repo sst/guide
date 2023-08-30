@@ -64,7 +64,7 @@ An SST app is made up of two parts.
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { Api, RDS, StackContext } from "sst/constructs";
 
 export function ExampleStack({ stack }: StackContext) {
@@ -127,7 +127,7 @@ Now let's add the API.
 
 {%change%} Add this below the `cluster` definition in `stacks/ExampleStack.ts`.
 
-```ts
+```typescript
 // Create a HTTP API
 const api = new Api(stack, "Api", {
   defaults: {
@@ -158,7 +158,7 @@ Now in our function, we'll start by reading from our PostgreSQL database.
 
 {%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
-```ts
+```typescript
 import { Kysely } from "kysely";
 import { DataApiDialect } from "kysely-data-api";
 import { RDSData } from "@aws-sdk/client-rds-data";
@@ -287,7 +287,7 @@ So let's update our table with the hits.
 
 {%change%} Add this above the `return` statement in `packages/functions/src/lambda.ts`.
 
-```ts
+```typescript
 await db
   .updateTable("tblcounter")
   .set({

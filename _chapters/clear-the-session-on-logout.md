@@ -12,9 +12,9 @@ Currently we are only removing the user session from our app's state. But when w
 
 AWS Amplify has a `Auth.signOut()` method that helps clear it out.
 
-{%change%} Let's replace the `handleLogout` function in our `src/App.js` with this:
+{%change%} Let's replace the `handleLogout` function in our `src/App.tsx` with this:
 
-```js
+```tsx
 async function handleLogout() {
   await Auth.signOut();
 

@@ -12,21 +12,22 @@ Now let's create an API that allows a user to update a note with a new note obje
 
 ### Add the Function
 
-{%change%} Create a new file in `packages/functions/src/update.js` and paste the following.
+{%change%} Create a new file in `packages/functions/src/update.ts` and paste the following.
 
-```js
+```typescript
 import { Table } from "sst/node/table";
 import handler from "@notes/core/handler";
 import dynamoDb from "@notes/core/dynamodb";
 
 export const main = handler(async (event) => {
-  const data = JSON.parse(event.body);
+  const data = JSON.parse(event.body || "{}");
+
   const params = {
     TableName: Table.Notes.tableName,
-    // 'Key' defines the partition key and sort key of the item to be updated
     Key: {
+      // The attributes of the item to be created
       userId: "123", // The id of the author
-      noteId: event.pathParameters.id, // The id of the note from the path
+      noteId: event?.pathParameters?.id, // The id of the note from the path
     },
     // 'UpdateExpression' defines the attributes to be updated
     // 'ExpressionAttributeValues' defines the value in the update expression
@@ -43,29 +44,31 @@ export const main = handler(async (event) => {
 
   await dynamoDb.update(params);
 
-  return { status: true };
+  return JSON.stringify({ status: true });
 });
 ```
 
-This should look similar to the `create.js` function. Here we make an `update` DynamoDB call with the new `content` and `attachment` values in the `params`.
+This should look similar to the `create.ts` function combined. Here we make an `update` DynamoDB call with the new `content` and `attachment` values in the `params`.
 
 ### Add the Route
 
 Let's add a new route for the get note API.
 
-{%change%} Add the following below the `GET /notes/{id}` route in `stacks/ApiStack.js`.
+{%change%} Add the following below the `GET /notes/{id}` route in `stacks/ApiStack.ts`.
 
-```js
+```typescript
 "PUT /notes/{id}": "packages/functions/src/update.main",
 ```
 
 ### Deploy Our Changes
 
-If you switch over to your terminal, you'll notice that your changes are being deployed.
+If you switch over to your terminal, you will notice that your changes are being deployed.
 
-Note that, you'll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
+{%caution%}
+You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
+{%endcaution%}
 
-You should see that the API stack is being updated.
+You should see that the new API stack has been deployed.
 
 ```bash
 ✓  Deployed:
@@ -78,16 +81,23 @@ You should see that the API stack is being updated.
 
 Now we are ready to test the new API. In [an earlier chapter]({% link _chapters/add-an-api-to-get-a-note.md %}) we tested our create note API. It should've returned the new note's id as the `noteId`.
 
-Head to the **API** tab in the [SST Console]({{ site.old_console_url }}) and select the `PUT /notes/{id}` API.
+{%change%} Run the following in your terminal.
 
-{%change%} Set the `noteId` as the **id** and in the **Body** tab set the following as the request body. Then hit **Send**.
-
-```json
-{"content":"New World","attachment":"new.jpg"}
+``` bash
+$ curl -X PUT \
+-H 'Content-Type: application/json' \
+-d '{"content":"New World","attachment":"new.jpg"}' \
+https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes/<NOTE_ID>
 ```
 
-You should see the note being updated in the response.
+Make sure to replace the id at the end of the URL with the `noteId` from before.
 
-![SST Console update note API request](/assets/part2/sst-console-update-note-api-request.png)
+Here we are making a PUT request to a note that we want to update. We are passing in the new `content` and `attachment` as a JSON string.
+
+The response should look something like this.
+
+``` json
+{"status":true}
+```
 
 Next we are going to add the API to delete a note given its id.

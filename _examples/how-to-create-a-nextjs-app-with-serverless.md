@@ -93,7 +93,7 @@ To support file uploads in our app, we need an S3 bucket. Let's add that.
 
 {%change%} Add the following above our `NextjsSite` definition in the `sst.config.ts`.
 
-```ts
+```typescript
 const bucket = new Bucket(stack, "public");
 ```
 
@@ -129,7 +129,7 @@ Now to let our users upload files in our Next.js app we need to start by generat
 
 {%change%} Add this to `pages/index.ts` above the `Home` component.
 
-```ts
+```typescript
 export async function getServerSideProps() {
   const command = new PutObjectCommand({
     ACL: "public-read",
@@ -152,7 +152,7 @@ $ npm install @aws-sdk/client-s3 @aws-sdk/s3-request-presigner
 
 {%change%} And add these to the imports.
 
-```ts
+```typescript
 import crypto from "crypto";
 import { Bucket } from "sst/node/bucket";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";

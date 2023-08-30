@@ -52,7 +52,7 @@ Let's start by setting up the routes for our API.
 
 {%change%} Add the following below the `config` function in the `sst.config.ts`.
 
-```ts
+```typescript
 stacks(app) {
 	app.setDefaultFunctionProps({
 		runtime: "go1.x",

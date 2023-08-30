@@ -10,24 +10,30 @@ comments_id: unit-tests-in-serverless/173
 
 Our serverless app is made up of two big parts; the code that defines our infrastructure and the code that powers our Lambda functions. We'd like to be able to test both of these.
 
-On the infrastructure side, we want to make sure the right type of resources are being created. So we don't mistakingly deploy some updates.
+On the infrastructure side, we want to make sure the right type of resources are being created. So we don't mistakenly deploy some updates.
 
 On the Lambda function side, we have some simple business logic that figures out exactly how much to charge our user based on the number of notes they want to store. We want to make sure that we test all the possible cases for this before we start charging people.
 
-SST comes with built in support for writing and running tests. It uses [Vitest](https://vitest.dev) internally for this.
+SST comes with built in support for writing and running tests. It uses [Vitest](https://vitest.dev){:target="_blank"} internally for this.
 
 ### Testing CDK Infrastructure
 
 Let's start by writing a test for the CDK infrastructure in our app. We are going to keep this fairly simple for now.
 
-{%change%} Add the following to `stacks/test/StorageStack.test.js`.
+{%change%} Add Vitest to the workspace. Run the following **in the project root**.
 
-```js
-import { Template } from "aws-cdk-lib/assertions";
+```bash
+$ pnpm add --save-dev --workspace-root vitest
+```
+
+{%change%} Add the following to `stacks/test/StorageStack.test.ts`.
+
+```typescript
+import { it } from "vitest";
 import { initProject } from "sst/project";
 import { App, getStack } from "sst/constructs";
 import { StorageStack } from "../StorageStack";
-import { it } from "vitest";
+import { Template } from "aws-cdk-lib/assertions";
 
 it("Test StorageStack", async () => {
   await initProject({});
@@ -42,15 +48,15 @@ it("Test StorageStack", async () => {
 });
 ```
 
-This is a very simple CDK test that checks if our storage stack creates a DynamoDB table and that the table's billing mode is set to `PAY_PER_REQUEST`. This is the default setting in SST's [`Table`]({{ site.docs_url }}/constructs/Table) construct. This test is making sure that we don't change this setting by mistake.
+This is a very simple CDK test that checks if our storage stack creates a DynamoDB table and that the table's billing mode is set to `PAY_PER_REQUEST`. This is the default setting in SST's [`Table`]({{ site.docs_url }}/constructs/Table){:target="_blank"} construct. This test is making sure that we don't change this setting by mistake.
 
 ### Testing Lambda Functions
 
 We are also going to test the business logic in our Lambda functions.
 
-{%change%} Create a new file in `packages/core/test/cost.test.js` and add the following.
+{%change%} Create a new file in `packages/core/test/cost.test.ts` and add the following.
 
-```js
+```typescript
 import { expect, test } from "vitest";
 import { calculateCost } from "../src/cost";
 
@@ -88,16 +94,16 @@ This should be straightforward. We are adding 3 tests. They are testing the diff
 
 Now let's add a test script.
 
-{%change%} Add the following to the `scripts` in your `packages.json`.
+{%change%} Add the following to the `scripts` in the `package.json` in your **project root**.
 
-```js
+```typescript
 "test": "sst bind vitest run",
 ```
 
-And we can run our tests by using the following command in the root of our project.
+And we can run our tests by using the following command **in the root** of our project.
 
 ```bash
-$ npm test
+$ pnpm test
 ```
 
 You should see something like this:
