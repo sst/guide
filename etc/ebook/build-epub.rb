@@ -113,15 +113,15 @@ def build_chapter chapter_data
     chapter = chapter.gsub('{: .cost-table }', '')
 
     # Remove image widths
-    chapter = chapter.gsub('\{:\s*width\s*=\s*"\d+"\s*\}', '')
+    chapter = chapter.gsub(/\{:\s*width\s*=\s*"\d+"\s*\}/, '')
 
     # Remove {% raw %} and {% endraw %} tags
     chapter = chapter.gsub(/{% (raw|endraw) %}/, '')
 
     # Replace admonition start tags
-    chapter = chapter.gsub(/{%\s*(note)\s*%\}\s*/, 'Note: ')
-    chapter = chapter.gsub(/{%\s*(info)\s*%\}\s*/, 'Info: ')
-    chapter = chapter.gsub(/{%\s*(caution)\s*%\}\s*/, 'Caution: ')
+    chapter = chapter.gsub(/{%\s*(note)\s*%\}\s*/, '_**Note**_: ')
+    chapter = chapter.gsub(/{%\s*(info)\s*%\}\s*/, '_**Info**_: ')
+    chapter = chapter.gsub(/{%\s*(caution)\s*%\}\s*/, '_**Caution**_: ')
     # Remove admonition end tags
     chapter = chapter.gsub(/\s*{%\s*(endnote)\s*%\}/, '')
     chapter = chapter.gsub(/\s*{%\s*(endinfo)\s*%\}/, '')
