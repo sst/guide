@@ -6,6 +6,7 @@ date: 2020-07-09 00:00:00
 lang: en
 ref: using-lerna-and-yarn-workspace-with-serverless
 comments_id: using-lerna-and-yarn-workspaces-with-serverless/1958
+redirect_from: /chapters/using-lerna-and-yarn-workspaces-with-serverless.html
 ---
 
 In the [Organizing Serverless Projects]({% link _archives/organizing-serverless-projects.md %}) chapter we covered the standard monorepo setup. This included [how to share code between your services]({% link _archives/share-code-between-services.md %}) and [how to deploy a Serverless app with interdependent services]({% link _archives/deploy-a-serverless-app-with-dependencies.md %}).

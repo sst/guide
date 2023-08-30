@@ -7,6 +7,7 @@ description: We should not store secret environment variables in our serverless.
 redirect_from: /chapters/load-secrets-from-env-yml.html
 ref: load-secrets-from-env-yml
 comments_id: load-secrets-from-env-yml/171
+redirect_from: /chapters/load-secrets-from-env.html
 ---
 
 As we had previously mentioned, we do not want to store our secret environment variables in our code. In our case it is the Stripe secret key. In this chapter, we'll look at how to do that.

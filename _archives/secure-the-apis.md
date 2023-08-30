@@ -6,6 +6,7 @@ lang: en
 ref: secure-the-apis
 description: In this chapter we'll be using the `aws_iam` authorizer to secure our serverless APIs. This uses a Cognito Identity Pool and Cognito User Pool for authentication. To identify our users, we'll be using the `cognitoIdentityId` that's passed in through the `event` object in our Lambda function.
 comments_id: secure-the-apis/2179
+redirect_from: /chapters/secure-the-apis.html
 ---
 
 Now that we have [created a User Pool]({% link _archives/create-a-cognito-user-pool.md %}), [Identity Pool and an Auth Role]({% link _archives/create-a-cognito-identity-pool.md %}); we are ready to use them to secure access to our APIs.

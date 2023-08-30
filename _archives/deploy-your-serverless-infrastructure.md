@@ -7,6 +7,7 @@ description: In this chapter we'll be deploying our entire serverless infrastruc
 code: backend_full
 ref: deploy-your-serverless-infrastructure
 comments_id: deploy-your-serverless-infrastructure/167
+redirect_from: /chapters/deploy-your-serverless-infrastructure.html
 ---
 
 Now that we have all our resources configured, let's go ahead and deploy our entire infrastructure.

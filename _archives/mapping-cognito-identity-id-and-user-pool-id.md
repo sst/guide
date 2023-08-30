@@ -4,6 +4,7 @@ title: Mapping Cognito Identity Id and User Pool Id
 description: Access a user's Cognito User Pool user Id in an AWS Lambda function that is secured using AWS IAM and Federated Identities using the event.requestContext.identity.cognitoAuthenticationProvider string.
 date: 2018-04-09 00:00:00
 comments_id: mapping-cognito-identity-id-and-user-pool-id/500
+redirect_from: /chapters/mapping-cognito-identity-id-and-user-pool-id.html
 ---
 
 If you are using the Cognito User Pool to manage your users while using the Identity Pool to secure your AWS resources; you might run into an interesting issue. How do you find the user's User Pool User Id in your Lambda function?

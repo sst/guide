@@ -7,6 +7,7 @@ description: To configure our Create React App with Netlify, we need to add a bu
 ref: create-a-netlify-build-script
 redirect_from: /chapters/create-a-build-script.html
 comments_id: create-a-build-script/189
+redirect_from: /chapters/create-a-netlify-build-script.html
 ---
 
 To automate our React.js deployments with [Netlify](https://www.netlify.com) we just need to set up a build script. If you recall from the [previous chapter]({% link _archives/manage-environments-in-create-react-app.md %}), we had configured our app to use the `REACT_APP_STAGE` build environment variable. We are going to create a build script to tell Netlify to set this variable up for the different deployment cases.

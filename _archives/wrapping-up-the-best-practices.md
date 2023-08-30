@@ -5,6 +5,7 @@ lang: en
 description: Wrapping up the best practices section of the tutorial and going over the next steps.
 date: 2019-10-08 00:00:00
 comments_id: wrapping-up-the-best-practices/1340
+redirect_from: /chapters/wrapping-up-the-best-practices.html
 ---
 
 Congratulations on completing this best practices section of the guide!

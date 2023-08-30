@@ -5,6 +5,7 @@ description: In the next series of chapters we will look at how to manage user a
 date: 2018-04-13 00:00:00
 code: user-management
 comments_id: manage-user-accounts-in-aws-amplify/505
+redirect_from: /chapters/manage-user-accounts-in-aws-amplify.html
 ---
 
 If you've followed along with [the first part of SST](/#the-basics) guide, you might be looking to add ways your users can better manage their accounts. This includes the ability to:

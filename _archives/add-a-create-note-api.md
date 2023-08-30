@@ -6,6 +6,7 @@ lang: en
 ref: add-a-create-note-api
 description: To allow users to create notes in our note taking app, we are going to add a create note POST API. To do this we are going to add a new Lambda function to our Serverless Framework project. The Lambda function will save the note to our DynamoDB table and return the newly created note.
 comments_id: add-a-create-note-api/125
+redirect_from: /chapters/add-a-create-note-api.html
 ---
 
 Let's get started on our backend by first adding an API to create a note. This API will take the note object as the input and store it in the database with a new id. The note object will contain the `content` field (the content of the note) and an `attachment` field (the URL to the uploaded file).

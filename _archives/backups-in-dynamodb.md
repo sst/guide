@@ -4,6 +4,7 @@ title: Backups in DynamoDB
 date: 2018-04-06 12:00:00
 description: Amazon DynamoDB allows you to create On-demand backups and enable Point-in-time recovery with a single click. Backups are fully-managed, extremely fast, and do not impact performance. In this chapter we look at the two ways to backup and restore DynamoDB tables.
 comments_id: backups-in-dynamodb/705
+redirect_from: /chapters/backups-in-dynamodb.html
 ---
 
 An important (yet overlooked) aspect of having a database powering your web application are, backups! In this chapter we are going to take a look at how to configure backups for your DynamoDB tables.

@@ -7,6 +7,7 @@ description: To use AWS CDK and Serverless Framework together, you'll need to en
 redirect_from: /chapters/connect-serverless-framework-and-cdk-with-sst.html
 ref: using-aws-cdk-with-serverless-framework
 comments_id: using-aws-cdk-with-serverless-framework/2101
+redirect_from: /chapters/using-aws-cdk-with-serverless-framework.html
 ---
 
 In this guide we've looked at two different ways of creating serverless applications; [using SST]({% link _chapters/create-an-sst-app.md %}) and [using Serverless Framework]({% link _archives/setup-the-serverless-framework.md %}). But you can use the two of them together as well.

@@ -7,6 +7,7 @@ description: We can define our S3 Buckets using the Infrastructure as Code patte
 redirect_from: /chapters/s3-as-a-serverless-service.html
 ref: configure-s3-in-serverless
 comments_id: configure-s3-in-serverless/163
+redirect_from: /chapters/configure-s3-in-serverless.html
 ---
 
 Now that we have DynamoDB configured, let's look at how we can configure the S3 file uploads bucket through our `serverless.yml`.

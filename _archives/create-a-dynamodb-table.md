@@ -6,6 +6,7 @@ lang: en
 ref: create-a-dynamodb-table
 description: Amazon DynamoDB is a fully managed NoSQL database that we are going to use to power our serverless API backend. DynamoDB stores data in tables and each table has a primary key that cannot be changed once set. We are also going to provision the throughput capacity by setting reads and writes for our DynamoDB table.
 comments_id: create-a-dynamodb-table/139
+redirect_from: /chapters/create-a-dynamodb-table.html
 ---
 
 We are going to build a REST API for our notes app. It's a simple [CRUD (create, read, update, and delete)](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) API. Meaning that we'll be performing these operations on our database. We also want our users to be able to upload files as attachments to their notes.

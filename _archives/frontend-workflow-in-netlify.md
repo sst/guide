@@ -9,6 +9,7 @@ redirect_from:
   - /chapters/frontend-workflow.html
 ref: frontend-workflow-in-netlify
 comments_id: frontend-workflow/192
+redirect_from: /chapters/frontend-workflow-in-netlify.html
 ---
 
 Now that we have our [Netlify build script configured]({% link _archives/create-a-netlify-build-script.md %}), let's go over what our development workflow with Netlify will look like.

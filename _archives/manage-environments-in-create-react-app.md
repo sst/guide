@@ -6,6 +6,7 @@ lang: en
 description: To configure environments in our Create React App, we will create a new custom environment variable. We will use this as a part of our build process and set the config based on environment that we are targeting.
 ref: manage-environments-in-create-react-app
 comments_id: manage-environments-in-create-react-app/182
+redirect_from: /chapters/manage-environments-in-create-react-app.html
 ---
 
 We want to ensure that our React.js app connects to the right version of the backend resources when we deploy it to different environments. Let's look at how to do that.

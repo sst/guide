@@ -5,6 +5,7 @@ description: Use the AWS Amplify Auth.updateUserAttributes method to support cha
 date: 2018-04-16 00:00:00
 code: user-management
 comments_id: allow-users-to-change-their-email/508
+redirect_from: /chapters/allow-users-to-change-their-email.html
 ---
 
 We want the users of our [Serverless notes app](https://demo.sst.dev) to be able to change their email. Recall that we are using Cognito to manage our users and AWS Amplify in our React app. In this chapter we will look at how to do that.

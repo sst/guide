@@ -6,6 +6,7 @@ lang: en
 description: In this chapter we'll look at how authentication works for serverless apps in AWS. We'll be looking at the differences between authentication and authorization, the various authentication options, and go into detail for IAM and Cognito.
 ref: how-to-add-authentication-to-a-serverless-app
 comments_id: how-to-add-authentication-to-a-serverless-app/2433
+redirect_from: /chapters/how-to-add-authentication-to-a-serverless-app.html
 ---
 
 In this section we'll look at how authentication works for serverless apps in AWS. Over the course of the next few chapters we'll be looking at the various authentication options.

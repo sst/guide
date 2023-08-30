@@ -5,6 +5,7 @@ description: For our React.js app to make requests to a serverless backend API s
 date: 2018-04-11 00:00:00
 comments_id: 113
 comments_id: comments-signup-with-aws-cognito/113
+redirect_from: /chapters/connect-to-api-gateway-with-iam-auth.html
 ---
 
 Connecting to an API Gateway endpoint secured using AWS IAM can be challenging. You need to sign your requests using [Signature Version 4](http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html). You can use:

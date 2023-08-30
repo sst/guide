@@ -4,6 +4,7 @@ title: Structure Environments Across AWS Accounts
 description: It is recommended to use separate AWS accounts to manage environments in your serverless app. It helps you keep your environments separate while allowing you to better deal with resource limits.
 date: 2019-09-30 00:00:00
 comments_id: structure-environments-across-aws-accounts/1336
+redirect_from: /chapters/structure-environments-across-aws-accounts.html
 ---
 
 The typical recommendation for teams is to deploy each of their environments to a separate AWS account. We find that this ends up being excessive for most teams. In our experience, what seems to work for many teams is:

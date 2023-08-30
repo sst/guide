@@ -6,6 +6,7 @@ lang: en
 ref: deploy-the-apis
 description: Use the “serverless deploy” command to deploy to AWS Lambda and API Gateway using the Serverless Framework. Running this command will display the list of deployed API endpoints and the AWS region it was deployed to. And we can run the "serverless deploy function" command when we want to update an individual Lambda function.
 comments_id: deploy-the-apis/121
+redirect_from: /chapters/deploy-the-apis.html
 ---
 
 So far we've been working on our Lambda functions locally. In this chapter we are going to deploy them.

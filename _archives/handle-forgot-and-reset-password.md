@@ -5,6 +5,7 @@ description: Use the AWS Amplify Auth.forgotPassword method to support forgot pa
 date: 2018-04-14 00:00:00
 code: user-management
 comments_id: handle-forgot-and-reset-password/506
+redirect_from: /chapters/handle-forgot-and-reset-password.html
 ---
 
 In our [serverless notes app](https://demo.sst.dev) we've used [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to sign up and login our users. In the frontend we've used [AWS Amplify](https://aws-amplify.github.io/) in our React app. However, if our users have forgotten their passwords, we need to have a way for them to reset their password. In this chapter we will look at how to do this.

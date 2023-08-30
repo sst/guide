@@ -6,6 +6,7 @@ lang: en
 description: To learn how to use a 3rd party API in our AWS Lambda functions, we are going to create a billing API using Stripe.
 ref: working-with-3rd-party-apis
 comments_id: working-with-3rd-party-apis/168
+redirect_from: /chapters/working-with-3rd-party-apis.html
 ---
 
 So far we've created a basic CRUD (create, read, update, and delete) API. We are going to make a small addition to this by adding an endpoint that works with a 3rd party API. This section is also going to illustrate how to work with environment variables and how to accept credit card payments using Stripe.

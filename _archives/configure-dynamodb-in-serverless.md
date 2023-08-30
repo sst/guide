@@ -7,6 +7,7 @@ description: We can define our DynamoDB table using the Infrastructure as Code p
 redirect_from: /chapters/dynamodb-as-a-serverless-service.html
 ref: configure-dynamodb-in-serverless
 comments_id: configure-dynamodb-in-serverless/162
+redirect_from: /chapters/configure-dynamodb-in-serverless.html
 ---
 
 For our Serverless Framework app, we had [previously created our DynamoDB table through the AWS console]({% link _archives/create-a-dynamodb-table.md %}). This can be hard to do when you are creating multiple apps or environments. Ideally, we want to be able to do this programmatically. In this section we'll look at how to use [infrastructure as code]({% link _chapters/what-is-infrastructure-as-code.md %}) to do just that.

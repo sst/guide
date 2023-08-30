@@ -6,6 +6,7 @@ lang: en
 ref: handle-api-gateway-cors-errors
 description: We need to add the CORS headers to our serverless API Gateway endpoint to handle 4xx and 5xx errors. This is to handle the case where our Lambda functions are not being invoked. 
 comments_id: handle-api-gateway-cors-errors/780
+redirect_from: /chapters/handle-api-gateway-cors-errors.html
 ---
 
 Our Serverless Framework app is now using infrastructure as code to configure its resources. Though we need to go over one small detail before moving forward.

@@ -6,6 +6,7 @@ lang: en
 description: To host our React app on Netlify start by signing up for a free account and adding your Git repository. We are also adding a catch all `_redirects` file in our project root.
 ref: setting-up-your-project-on-netlify
 comments_id: setting-up-your-project-on-netlify/190
+redirect_from: /chapters/setting-up-your-project-on-netlify.html
 ---
 
 Now we are going to host our React app on [Netlify](https://www.netlify.com). For reference, here's our React app in a GitHub repo.

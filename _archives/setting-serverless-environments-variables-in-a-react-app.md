@@ -6,6 +6,7 @@ lang: en
 description: In this chapter we look at how to set environment variables from your serverless app in your React.js app. By setting them automatically with the ReactStaticSite construct, you won't need to hard code them in your frontend.
 ref: setting-serverless-environments-variables-in-a-react-app
 comments_id: setting-serverless-environments-variables-in-a-react-app/2430
+redirect_from: /chapters/setting-serverless-environments-variables-in-a-react-app.html
 ---
 
 A common question full-stack developers have is "How do I set the environment variables from my backend in my frontend app?".

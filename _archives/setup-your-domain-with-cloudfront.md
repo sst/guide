@@ -6,6 +6,7 @@ lang: en
 description: We will add our domain and its certificate to our CloudFront Distribution. We will point the domain to our CloudFront Distribution with an Alias Resource Record Set. We also need to create an AAAA Record Set to support IPv6.
 comments_id: set-up-your-domain-with-cloudfront/149
 ref: set-up-your-domain-with-cloudfront
+redirect_from: /chapters/setup-your-domain-with-cloudfront.html
 ---
 
 Now that we have our domain and a certificate to serve it over HTTPS, let's associate these with our CloudFront Distribution

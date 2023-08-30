@@ -7,6 +7,7 @@ description: In this chapter we are going to look at how to create a CI/CD pipel
 ref: creating-a-ci-cd-pipeline-for-react
 redirect_from: /chapters/automating-react-deployments.html
 comments_id: creating-a-ci-cd-pipeline-for-react/188
+redirect_from: /chapters/creating-a-ci-cd-pipeline-for-react.html
 ---
 
 In the last couple of chapters, we [set our React.js app up in Netlify]({% link _archives/setting-up-your-project-on-netlify.md %}) and [added a custom domain to it]({% link _archives/custom-domain-in-netlify.md %}). In this chapter we'll look at how to use Netlify to create a CI/CD pipeline for our React app.

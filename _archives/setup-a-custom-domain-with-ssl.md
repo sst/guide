@@ -7,6 +7,7 @@ description: We want to create a custom domain for our React.js app that is host
 comments_id: chapter-comments-set-up-ssl/1868
 redirect_from: /chapters/setup-ssl.html
 ref: setup-a-custom-domain-with-ssl
+redirect_from: /chapters/setup-a-custom-domain-with-ssl.html
 ---
 
 Now that our CloudFront Distribution has been created. Let's configure it with a custom domain and setup SSL.

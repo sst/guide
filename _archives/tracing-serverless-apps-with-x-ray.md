@@ -5,6 +5,7 @@ description: In this chapter we look at how to trace serverless apps using AWS X
 date: 2019-10-02 00:00:00
 comments_id: tracing-serverless-apps-with-x-ray/1337
 canonical_url: https://seed.run/blog/how-to-trace-serverless-apps-with-aws-x-ray.html
+redirect_from: /chapters/tracing-serverless-apps-with-x-ray.html
 ---
 
 _This chapter is based on a blog post over on the [Seed blog](https://seed.run/blog/) — [www.seed.run/blog/how-to-trace-serverless-apps-with-aws-x-ray](https://seed.run/blog/how-to-trace-serverless-apps-with-aws-x-ray)._

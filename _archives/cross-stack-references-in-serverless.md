@@ -5,6 +5,7 @@ description: AWS CloudFormation allows us to link multiple serverless services u
 date: 2018-04-02 13:00:00
 ref: cross-stack-references-in-serverless
 comments_id: cross-stack-references-in-serverless/405
+redirect_from: /chapters/cross-stack-references-in-serverless.html
 ---
 
 In the previous chapter we looked at [some of the most common patterns for organizing your serverless applications]({% link _archives/organizing-serverless-projects.md %}). Now let's look at how to work with multiple services in your Serverless application.

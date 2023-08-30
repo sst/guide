@@ -4,6 +4,7 @@ title: Creating Pull Request Environments
 description: In this chapter we'll look at the workflow for creating new pull request based environments for your serverless app using Seed.
 date: 2019-10-02 00:00:00
 comments_id: creating-pull-request-environments/1318
+redirect_from: /chapters/creating-pull-request-environments.html
 ---
 
 Now that we are done working on our new feature, we would like our team lead to review our work before promoting it to production. To do that we are going to create a pull request and Seed will automatically create an ephemeral environment for it.

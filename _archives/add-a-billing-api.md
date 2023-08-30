@@ -6,6 +6,7 @@ lang: en
 description: We are going to create a Lambda function for our serverless billing API. It will take the Stripe token that is passed in from our app and use the Stripe JS SDK to process the payment.
 ref: add-a-billing-api
 comments_id: add-a-billing-api/170
+redirect_from: /chapters/add-a-billing-api.html
 ---
 
 Now let's get started with creating our billing API. It is going to take a Stripe token and the number of notes the user wants to store.

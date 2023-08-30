@@ -7,6 +7,7 @@ description: In this chapter we'll look at how to create a serverless service th
 repo: https://github.com/sst/social-cards
 ref: dynamically-generate-social-share-images-with-serverless
 comments_id: dynamically-generate-social-share-images-with-serverless/2419
+redirect_from: /chapters/dynamically-generate-social-share-images-with-serverless.html
 ---
 
 In this chapter we'll look at how to dynamically generate social share images or open graph (OG) images with serverless.

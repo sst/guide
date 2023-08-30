@@ -7,6 +7,7 @@ description: To be able to deploy updates to our React.js app hosted on S3 and C
 redirect_from: /chapters/deploy-again.html
 comments_id: deploy-updates/16
 ref: deploy-updates
+redirect_from: /chapters/deploy-updates.html
 ---
 
 Now let's look at how we make changes and update our app. The process is very similar to how we deployed our code to S3 but with a few changes. Here is what it looks like.

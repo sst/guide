@@ -101,3 +101,9 @@ plugins:
 #      path: ""
 #    values:
 #      image: serverless-stack-lander/index.png
+
+
+# Disable redirects plugin from creating
+# redirects.json
+redirect_from:
+  json: false

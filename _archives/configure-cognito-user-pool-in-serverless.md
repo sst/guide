@@ -6,6 +6,7 @@ lang: en
 description: We can define our Cognito User Pool using the Infrastructure as Code pattern by using CloudFormation in our serverless.yml. We are going to set the User Pool and App Client name based on the stage we are deploying to. We will also output the User Pool and App Client Id.
 ref: configure-cognito-user-pool-in-serverless
 comments_id: configure-cognito-user-pool-in-serverless/164
+redirect_from: /chapters/configure-cognito-user-pool-in-serverless.html
 ---
 
 Now let's look into setting up Cognito User Pool through the `serverless.yml`. It should be very similar to the one we did by hand in the [Create a Cognito user pool]({% link _archives/create-a-cognito-user-pool.md %}) chapter.

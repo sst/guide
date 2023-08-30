@@ -4,6 +4,7 @@ title: Customize the serverless IAM Policy
 description: Serverless Framework deploys using the policy attached to the IAM credentials in your AWS CLI profile. To customize the IAM Policy used, access can be restricted to the services that Serverless Framework needs, and to the project that is being deployed.
 date: 2018-04-08 00:00:00
 comments_id: customize-the-serverless-iam-policy/18
+redirect_from: /chapters/customize-the-serverless-iam-policy.html
 ---
 
 Serverless Framework deploys using the policy attached to the IAM credentials in your AWS CLI profile. Back in the [Create an IAM User]({% link _chapters/create-an-iam-user.md %}) chapter we created a user that the Serverless Framework will use to deploy our project. This user was assigned **AdministratorAccess**. This means that Serverless Framework and your project has complete access to your AWS account. This is fine in trusted environments but if you are working as a part of a team you might want to fine-tune the level of access based on who is using your project.

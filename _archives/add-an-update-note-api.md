@@ -6,6 +6,7 @@ lang: en
 ref: add-an-update-note-api
 description: To allow users to update their notes in our note taking app, we are going to add an update note PUT API. To do this we will add a new Lambda function to our Serverless Framework project. The Lambda function will update a user’s note in the DynamoDB table.
 comments_id: add-an-update-note-api/144
+redirect_from: /chapters/add-an-update-note-api.html
 ---
 
 Now let's create an API that allows a user to update a note with a new note object given its id.

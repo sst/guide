@@ -5,6 +5,7 @@ description: To allow your users to login using Facebook to your serverless Reac
 date: 2018-04-19 00:00:00
 code: facebook-login
 comments_id: facebook-login-with-cognito-using-aws-amplify/466
+redirect_from: /chapters/facebook-login-with-cognito-using-aws-amplify.html
 ---
 
 In our guide so far we have used the [Cognito User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) to sign up users to our [demo notes app](https://demo.sst.dev). This means that our users have to sign up for an account with their email and password. But you might want your users to use their Facebook or Google account to sign up for your app. It also means that your users won't have to remember another email and password combination for the sites they use. In this chapter we will look at how to add a _"Login with Facebook"_ option to our demo app.

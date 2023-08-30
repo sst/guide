@@ -7,6 +7,7 @@ ref: create-an-s3-bucket-for-file-uploads
 description: To allow users to upload files to our serverless app we are going to use Amazon S3 (Simple Storage Service). S3 allows you to store files and organize them into buckets.
 redirect_from: /chapters/create-a-s3-bucket-for-file-uploads.html
 comments_id: create-an-s3-bucket-for-file-uploads/150
+redirect_from: /chapters/create-an-s3-bucket-for-file-uploads.html
 ---
 
 Now that we have [our database table]({% link _archives/create-a-dynamodb-table.md %}) ready; let's get things set up for handling file uploads. We need to handle file uploads because each note can have an uploaded file as an attachment.
