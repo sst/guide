@@ -18,6 +18,7 @@ end
 
 # Github code link at end of chapters
 def github_code_link code_link, chapter_name
+    demo_github_repo = $config['sst_demo_repo']
     backend_github_repo = $config['backend_github_repo']
     frontend_github_repo = $config['frontend_github_repo']
     frontend_fb_login_github_repo = $config['frontend_fb_login_github_repo']
@@ -35,6 +36,10 @@ def github_code_link code_link, chapter_name
     if (code_link === 'backend')
         link_text = "Backend Source: #{chapter_name}"
         link = "#{backend_github_repo}/tree/#{chapter_name}"
+
+    elsif (code_link === 'sst-full')
+        link_text = "Notes App Source"
+        link = "#{demo_github_repo}"
 
     elsif (code_link === 'frontend')
         link_text = "Frontend Source: #{chapter_name}"
@@ -164,9 +169,13 @@ def build_chapter chapter_data
     chapter << discourse_link(chapter_front_matter['comments_id'])
 
     # Replace chapter specific content
+    if (chapter_name === 'wrapping-up')
+      chapter = chapter.gsub(/<a.*>Star our GitHub repo<\/a>/, "")
+    end
+    if (chapter_name === 'staying-up-to-date')
+      chapter = chapter.gsub(/<a.*>Subscribe<\/a>/, "")
+    end
     if (chapter_name === 'wrapping-up-the-best-practices')
-      # Remove the survey http link button. The survey link already exist in the paragraph
-      # before it, it is redundant.
       chapter = chapter.gsub(/<a.*>Fill out our survey<\/a>/, "")
     end
 

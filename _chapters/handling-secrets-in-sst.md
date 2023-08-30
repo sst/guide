@@ -63,11 +63,3 @@ function: {
 This will add `STRIPE_SECRET_KEY` as a secret in the stack.  And allow our API to access the secret.
 
 Now we are ready to add an API to handle billing.
-
-{%note%}
-Test note
-{%endnote%}
-
-{% info %} Test Info {% endinfo%}
-
-{%caution %} Test Caution {%endcaution%}
