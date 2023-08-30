@@ -37,7 +37,7 @@ def github_code_link code_link, chapter_name
         link_text = "Backend Source: #{chapter_name}"
         link = "#{backend_github_repo}/tree/#{chapter_name}"
 
-    elsif (code_link === 'sst-full')
+    elsif (code_link === 'sst_full')
         link_text = "Notes App Source"
         link = "#{demo_github_repo}"
 
@@ -174,6 +174,9 @@ def build_chapter chapter_data
     end
     if (chapter_name === 'staying-up-to-date')
       chapter = chapter.gsub(/<a.*>Subscribe<\/a>/, "")
+    end
+    if (chapter_name === 'translations')
+      chapter = chapter.gsub(/---[\s\S]*?---/, "")
     end
     if (chapter_name === 'wrapping-up-the-best-practices')
       chapter = chapter.gsub(/<a.*>Fill out our survey<\/a>/, "")

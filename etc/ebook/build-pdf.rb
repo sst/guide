@@ -37,7 +37,7 @@ def github_code_link code_link, chapter_name
         link_text = "Backend Source: #{chapter_name}"
         link = "#{backend_github_repo}/tree/#{chapter_name}"
 
-    elsif (code_link === 'sst-full')
+    elsif (code_link === 'sst_full')
         link_text = "Notes App Source"
         link = "#{demo_github_repo}"
 
