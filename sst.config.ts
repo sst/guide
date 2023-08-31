@@ -21,7 +21,7 @@ export default {
               }
             : stack.stage.startsWith("branchv")
             ? {
-                hostedZone: "sst.dev",
+                hostedZone: "archives.sst.dev",
                 domainName: `${stack.stage}.archives.sst.dev`,
               }
             : undefined,
