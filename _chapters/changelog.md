@@ -23,7 +23,7 @@ You can get these updates emailed to you via our [newsletter]({% link newsletter
 
 ### Changes
 
-#### [v8.0: {{ site.data.changelog.current.title }}](https://branchv74--serverless-stack.netlify.app/) (Current)
+#### [v8.0: {{ site.data.changelog.current.title }}](https://branchv80.archives.sst.dev/) (Current)
 
 {{ site.data.changelog.current.desc }}
 
