@@ -1,2 +1,0 @@
-before_compile:
-  - bundle install

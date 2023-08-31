@@ -25,7 +25,7 @@ export default {
             : undefined,
         errorPage: "404.html",
         buildOutput: "_site",
-        buildCommand: "bundle exec jekyll build",
+        buildCommand: "bundle install && bundle exec jekyll build",
       });
 
       stack.addOutputs({
