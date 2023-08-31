@@ -1,5 +1,7 @@
 import { SSTConfig } from "sst";
 import { StaticSite } from "sst/constructs";
+import { HostedZone } from "aws-cdk-lib/aws-route53";
+import { HttpsRedirect } from "aws-cdk-lib/aws-route53-patterns";
 
 export default {
   config(_input) {
@@ -27,6 +29,17 @@ export default {
         buildOutput: "_site",
         buildCommand: "bundle install && bundle exec jekyll build",
       });
+
+      // Redirect serverless-stack.com to sst.dev
+      if (stack.stage === "prod") {
+        new HttpsRedirect(stack, "Redirect", {
+          recordNames: ["serverless-stack.com", "www.serverless-stack.com"],
+          targetDomain: "sst.dev",
+          zone: HostedZone.fromLookup(stack, "HostedZone", {
+            domainName: "serverless-stack.com",
+          }),
+        });
+      }
 
       stack.addOutputs({
         Url: site.url,
