@@ -11,6 +11,18 @@ export default {
   stacks(app) {
     app.stack(function Site({ stack }) {
       const site = new StaticSite(stack, "site", {
+        customDomain:
+          stack.stage === "prod"
+            ? {
+                domainName: "sst.dev",
+                domainAlias: "www.sst.dev",
+              }
+            : stack.stage.startsWith("branchv")
+            ? {
+                hostedZone: "sst.dev",
+                domainName: `${stack.stage}.archives.sst.dev`,
+              }
+            : undefined,
         errorPage: "404.html",
         buildOutput: "_site",
         buildCommand: "bundle exec jekyll build",
