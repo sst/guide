@@ -11,8 +11,8 @@
 # make ebup              generate epub
 # ===========================================================================
 
+FILE_NAME = ebook
 OUTPUT_DIR = output
-FILE_NAME = sst-guide
 
 pdf: prepare merge-pdf build-pdf
 epub: prepare merge-epub build-epub
