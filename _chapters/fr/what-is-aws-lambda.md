@@ -14,13 +14,13 @@ comments_id: what-is-aws-lambda/308
 
 Voici les spécifications techniques d'AWS Lambda. Lambda supporte les langages suivants :
 
-- Node.js: v8.10 et v6.10
-- Java 8
-- Python: 3.6 et 2.7
-- .NET Core: 1.0.1 et 2.0
+- Node.js 18.x, 16.x, et 14.x
+- Java 17, 11 et 8
+- Python 3.11, 3.10, 3.9, 3.8, et 3.7
+- .NET 7 et 6
 - Go 1.x
-- Ruby 2.5
-- Rust
+- Ruby 3.2 et 2.7
+- [Rust](https://docs.aws.amazon.com/fr_fr/lambda/latest/dg/lambda-rust.html)
 
 Chaque fonction s'exécute dans un conteneur 64-bit Amazon Linux AMI. Et l'environnement d'exécution a :
 

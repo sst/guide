@@ -14,13 +14,13 @@ comments_id: what-is-aws-lambda/308
 
 Comencemos rápidamente por las especificaciones técnicas de AWS Lambda. Lambda soporta los siguientes entornos de ejecución:
 
-- Node.js: v8.10 y v6.10
-- Java 8
-- Python: 3.6 y 2.7
-- .NET Core: 1.0.1 y 2.0
+- Node.js 18.x, 16.x, y 14.x
+- Java 17, 11 y 8
+- Python 3.11, 3.10, 3.9, 3.8, y 3.7
+- .NET 7 y 6
 - Go 1.x
-- Ruby 2.5
-- Rust
+- Ruby 3.2 y 2.7
+- [Rust](https://docs.aws.amazon.com/es_es/lambda/latest/dg/lambda-rust.html)
 
 Cada función corre en un contenedor con Amazon Linux AMI a 64-bit. Y el entorno de ejecución cuenta con:
 

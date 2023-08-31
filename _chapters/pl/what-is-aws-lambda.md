@@ -14,15 +14,13 @@ comments_id: what-is-aws-lambda/308
 
 Zacznijmy od szybkiego przyjrzenia się specyfikacji technicznej usługi AWS Lambda. Lambda obsługuje następujące środowiska uruchomieniowe:
 
-- Node.js 12.13.0, 10.16.3, 8.10
-- Java 11, 8
-- Python 3.8, 3.7, 3.6, 2.7
-- .NET Core 2.1, 2.2, 3.0, 3.1
+- Node.js 18.x, 16.x,, 14.x
+- Java 17, 11, 8
+- Python 3.11, 3.10, 3.9, 3.8,, 3.7
+- .NET 7, 6
 - Go 1.x
-- Ruby 2.5
-- Rust
-
-Zwróć uwagę, że [wsparcie dla .NET Core 2.2 i 3.0 jest dostępne poprzez niestandardowe środowiska uruchomieniowe](https://aws.amazon.com/blogs/developer/announcing-amazon-lambda-runtimesupport/).
+- Ruby 3.2, 2.7
+- [Rust](https://docs.aws.amazon.com/lambda/latest/dg/lambda-rust.html)
 
 Każda funkcja działa w kontenerze z 64-bitowym AMI Amazon Linux. Środowisko wykonawcze posiada:
 

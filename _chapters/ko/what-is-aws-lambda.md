@@ -14,13 +14,13 @@ comments_id: what-is-aws-lambda/308
 
 AWS Lambda의 기술 사양을 빠르게 살펴보겠습니다. 우선 Lambda는 다음과 같은 런타임(Runtime)을 지원합니다.
 
-- Node.js: v8.10 and v6.10
-- Java 8
-- Python: 3.6 and 2.7
-- .NET Core: 1.0.1 and 2.0
+- Node.js 18.x, 16.x, and 14.x
+- Java 17, 11 and 8
+- Python 3.11, 3.10, 3.9, 3.8, and 3.7
+- .NET 7 and 6
 - Go 1.x
-- Ruby 2.5
-- Rust
+- Ruby 3.2 and 2.7
+- [Rust](https://docs.aws.amazon.com/ko_kr/lambda/latest/dg/lambda-rust.html)
 
 각 기능은 64 비트의 Amazon Linux AMI가 설치된 컨테이너에서 실행됩니다. 그리고 실행 환경은 다음과 같습니다.
 
