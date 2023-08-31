@@ -6,9 +6,9 @@
 
 
 <p align="center">
-  <a href="https://sst.dev/discord"><img alt="Discord" src="https://img.shields.io/discord/983865673656705025?style=flat-square&label=Discord" /></a>
-  <a href="https://twitter.com/sst_dev"><img alt="Twitter" src="https://img.shields.io/badge/Twitter-26a7de?style=flat-square" /></a>
-  <a href="https://www.youtube.com/c/sst-dev"><img alt="YouTube" src="https://img.shields.io/youtube/channel/subscribers/UCho8kA4-HMolEq6qEMRJetg?style=flat-square&label=YouTube" /></a>
+  <a href="https://sst.dev/discord"><img alt="Discord" src="https://img.shields.io/discord/983865673656705025?label=Discord" /></a>
+  <a href="https://twitter.com/sst_dev"><img alt="Twitter" src="https://img.shields.io/badge/Twitter-26a7de" /></a>
+  <a href="https://console.seed.run/anomaly/sst-dev"><img alt="Seed Status" src="https://api.seed.run/anomaly/sst-dev/stages/prod/build_badge" /></a>
 </p>
 
 ---
