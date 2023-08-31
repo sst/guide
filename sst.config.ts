@@ -42,7 +42,7 @@ export default {
       }
 
       stack.addOutputs({
-        Url: site.url,
+        Url: site.customDomainUrl || site.url,
       });
     });
   },

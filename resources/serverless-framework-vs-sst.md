@@ -257,7 +257,7 @@ Here is a video of it in action.
 
 And that's it! You can now add other parts of your infrastructure with [SST's constructs]({{ site.docs_url }}), CDK's constructs, or by adding your own.
 
-As a next step, you can check out this free 1000 page ebook on how to build full-stack serverless applications using SST and React. It's the most widely read resource for serverless and a great way to get started.
+As a next step, you can check out this free 300 page ebook on how to build full-stack serverless applications using SST and React. It's the most widely read resource for serverless and a great way to get started.
 
 <div class="extras">
   <div class="container">
