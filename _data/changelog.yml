@@ -1,6 +1,6 @@
 current:
   title: "Updating to TypeScript"
-  desc: "Aug 31, 2023: Using TS by default and switching to pnpm. And archiving old chapters."
+  desc: "Aug 31, 2023: Using TS by default, switching to pnpm, and using Vite instead of Create React App. And archiving old chapters."
 
 v7-4:
   title: "Upgrading to SST v2.5"
