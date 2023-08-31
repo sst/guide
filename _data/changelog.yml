@@ -1,4 +1,8 @@
 current:
+  title: "Updating to TypeScript"
+  desc: "Aug 31, 2023: Using TS by default and switching to pnpm. And archiving old chapters."
+
+v7-4:
   title: "Upgrading to SST v2.5"
   desc: "Apr 9, 2023: Updating the guide and code to use the latest `sst bind`."
 
