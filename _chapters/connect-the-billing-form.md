@@ -10,12 +10,16 @@ comments_id: connect-the-billing-form/187
 
 Now all we have left to do is to connect our billing form to our billing API.
 
-{%change%} Replace our `return` statement in `src/containers/Settings.js` with this.
+{%change%} Replace our `return` statement in `src/containers/Settings.tsx` with this.
 
-```jsx
-async function handleFormSubmit(storage, { token, error }) {
-  if (error) {
-    onError(error);
+{% raw %}
+```tsx
+const handleFormSubmit: BillingFormType["onSubmit"] = async (
+  storage,
+  info
+) => {
+  if (info.error) {
+    onError(info.error);
     return;
   }
 
@@ -24,7 +28,7 @@ async function handleFormSubmit(storage, { token, error }) {
   try {
     await billUser({
       storage,
-      source: token.id,
+      source: info.token?.id,
     });
 
     alert("Your card has been charged successfully!");
@@ -33,30 +37,33 @@ async function handleFormSubmit(storage, { token, error }) {
     onError(e);
     setIsLoading(false);
   }
-}
+};
 
 return (
   <div className="Settings">
     <Elements
       stripe={stripePromise}
-      fonts={[
-        {
-          cssSrc:
-            "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800",
-        },
-      ]}
+      options={{
+        fonts: [
+          {
+            cssSrc:
+              "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800",
+          },
+        ],
+      }}
     >
       <BillingForm isLoading={isLoading} onSubmit={handleFormSubmit} />
     </Elements>
   </div>
 );
 ```
+{% endraw %}
 
-{%change%} And add the following to the header.
+{%change%} Add the following imports to the header.
 
-```js
+```tsx
 import { Elements } from "@stripe/react-stripe-js";
-import BillingForm from "../components/BillingForm";
+import { BillingForm, BillingFormType } from "../components/BillingForm";
 import "./Settings.css";
 ```
 
@@ -64,18 +71,7 @@ We are adding the `BillingForm` component that we previously created here and pa
 
 To initialize the Stripe Elements we pass in the Stripe.js object that we loaded [a couple of chapters ago]({% link _chapters/add-stripe-keys-to-config.md %}). This Elements component needs to wrap around any Stripe React components.
 
-The Stripe elements are loaded inside an [IFrame](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe). So if we are using any custom fonts, we'll need to include them explicitly. Like we are doing above.
-
-```jsx
-<Elements
-  fonts={[
-    {
-      cssSrc:
-        "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800",
-    },
-  ]}
->
-```
+The Stripe elements are loaded inside an [IFrame](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe). So if we are using any custom fonts, we'll need to include them explicitly. As covered in the [Stripe docs](https://stripe.com/docs/js/elements_object){:target="_blank"}.
 
 Finally, let's handle some styles for our settings page as a whole.
 

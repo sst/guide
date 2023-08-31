@@ -243,7 +243,7 @@ Now let's make a change to our function so that we return the screenshot directl
 
 {%change%} Replace the following lines in `packages/functions/src/lambda.ts`.
 
-```ts
+```typescript
 // Take the screenshot
 await page.screenshot();
 
@@ -256,7 +256,7 @@ return {
 
 with:
 
-```ts
+```typescript
 // Take the screenshot
 const screenshot = (await page.screenshot({ encoding: "base64" })) as string;
 

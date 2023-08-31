@@ -75,7 +75,7 @@ Let's add the API.
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { StackContext, Api } from "sst/constructs";
 
 export function ExampleStack({ stack, app }: StackContext) {
@@ -97,7 +97,7 @@ We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to cr
 
 {%change%} Your `packages/functions/src/lambda.ts` should look something like this.
 
-```ts
+```typescript
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
@@ -135,7 +135,7 @@ Next, you'll need to import it into the stack and pass in the functions you want
 
 {%change%} Add the following above the `stack.addOutputs` line in `stacks/ExampleStack.ts`.
 
-```ts
+```typescript
 // Configure Datadog only in prod
 if (!app.local) {
   // Configure Datadog
@@ -152,7 +152,7 @@ if (!app.local) {
 
 {%change%} Also make sure to include the Datadog construct.
 
-```ts
+```typescript
 import { Datadog } from "datadog-cdk-constructs-v2";
 ```
 

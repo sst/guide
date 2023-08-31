@@ -43,7 +43,7 @@ The video is timestamped and here's roughly what we covered.
 
 Here's how you use the new `Job` construct. Start by creating a new job.
 
-```ts
+```typescript
 import { Job } from "@serverless-stack/resources";
 
 const job = new Job(stack, "MyJob", {
@@ -54,7 +54,7 @@ const job = new Job(stack, "MyJob", {
 
 Add the job handler.
 
-```ts
+```typescript
 import { JobHandler } from "@serverless-stack/node/job";
 
 declare module "@serverless-stack/node/job" {
@@ -72,7 +72,7 @@ export const handler = JobHandler("MyJob", async (payload) => {
 
 Finally invoke the job.
 
-```ts
+```typescript
 import { Job } from "@serverless-stack/node/job";
 
 function someFunction() {

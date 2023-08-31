@@ -12,10 +12,10 @@ Our secured pages redirect to the login page when the user is not logged in, wit
 
 Let's start by adding a method to read the `redirect` URL from the querystring.
 
-{%change%} Add the following method to your `src/components/UnauthenticatedRoute.js` below the imports.
+{%change%} Add the following method to your `src/components/UnauthenticatedRoute.tsx` below the imports and interface.
 
-```jsx
-function querystring(name, url = window.location.href) {
+```tsx
+function querystring(name: string, url = window.location.href) {
   const parsedName = name.replace(/[[]]/g, "\\$&");
   const regex = new RegExp(`[?&]${parsedName}(=([^&#]*)|&|#|$)`, "i");
   const results = regex.exec(url);
@@ -34,8 +34,8 @@ Now let's update our component to use this parameter when it redirects.
 
 {%change%} Replace our current `UnauthenticatedRoute` function component with the following.
 
-```jsx
-export default function UnauthenticatedRoute(props) {
+```tsx
+export default function UnauthenticatedRoute(props: Props) {
   const { isAuthenticated } = useAppContext();
   const { children } = props;
   const redirect = querystring("redirect");
@@ -48,15 +48,15 @@ export default function UnauthenticatedRoute(props) {
 }
 ```
 
-{%change%} And remove the following from the `handleSubmit` method in `src/containers/Login.js`.
+{%change%} And remove the following from the `handleSubmit` method in `src/containers/Login.tsx`.
 
-```jsx
+```tsx
 nav("/");
 ```
 
 {%change%} Also, remove the hook declaration.
 
-```jsx
+```tsx
 const nav = useNavigate();
 ```
 

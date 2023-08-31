@@ -4,7 +4,7 @@ title: Sponsors
 description: SST is a free open source guide. Show your support by sponsoring SST.
 ---
 
-[SST](https://sst.dev) is a free open source 1000+ page guide for building full-stack apps using Serverless and React on AWS. It attracts over 3.5K daily and 60K monthly visitors with over 230K page views per month. And we have over 20K email subscribers.
+[SST](https://sst.dev) is a free open source 300+ page guide for building full-stack apps using Serverless and React on AWS. It attracts over 3.5K daily and 60K monthly visitors with over 230K page views per month. And we have over 20K email subscribers.
 
 Learn to create a note taking app from scratch using Serverless and React. Follow our step-by-step tutorials with screenshots and code samples. And use [our forums](https://discourse.sst.dev) to ask us any questions.
 

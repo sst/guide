@@ -8,7 +8,8 @@ description: AWS Lambda is a serverless computing service provided by Amazon Web
 comments_id: what-is-aws-lambda/308
 ---
 
-[AWS Lambda](https://aws.amazon.com/lambda/) (or Lambda for short) is a serverless computing service provided by AWS. In this chapter we are going to be using Lambda to build our serverless application. And while we don't need to deal with the internals of how Lambda works, it's important to have a general idea of how your functions will be executed.
+[AWS Lambda](https://aws.amazon.com/lambda/){:target="_blank"} (or Lambda for short) is a serverless computing service provided by AWS. In this chapter we are going to be using Lambda to build our serverless application. And while we don't need to deal with the internals of how Lambda works, it's important to have a general idea of how your functions will be executed.
+
 
 ### Lambda Specs
 
@@ -22,8 +23,11 @@ Let's start by quickly looking at the technical specifications of AWS Lambda. La
 - Ruby 3.2 and 2.7
 - [Rust](https://docs.aws.amazon.com/lambda/latest/dg/lambda-rust.html)
 
+{%info%}
+[.NET Core 2.2 and 3.0 are supported through custom runtimes](https://aws.amazon.com/blogs/developer/announcing-amazon-lambda-runtimesupport/){:target="_blank"}.
+{%endinfo%}
 
-[See AWS for latest information on available runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html).
+[Check out the AWS docs to learn more about the available runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html){:target="_blank"}.
 
 Each function runs inside a container with a 64-bit Amazon Linux AMI. And the execution environment has:
 
@@ -36,15 +40,15 @@ Each function runs inside a container with a 64-bit Amazon Linux AMI. And the ex
 
 You might notice that CPU is not mentioned as a part of the container specification. This is because you cannot control the CPU directly. As you increase the memory, the CPU is increased as well.
 
-The ephemeral disk space is available in the form of the `/tmp` directory. You can only use this space for temporary storage since subsequent invocations will not have access to this. We'll talk a bit more on the stateless nature of the Lambda functions below.
+The ephemeral disk space is available in the form of the `/tmp` directory. You can only use this space for temporary storage since subsequent invocations will not have access to this. We will talk a bit more on the stateless nature of the Lambda functions below.
 
 The execution duration means that your Lambda function can run for a maximum of 900 seconds or 15 minutes. This means that Lambda isn't meant for long running processes.
 
-The package size refers to all your code necessary to run your function. This includes any dependencies (`node_modules/` directory in case of Node.js) that your function might import. There is a limit of 250MB on the uncompressed package and a 50MB limit once it has been compressed. If you need more space, you can package your container as a Docker image which can be up to 10GB. We'll take a look at the packaging process below.
+The package size refers to all your code necessary to run your function. This includes any dependencies (`node_modules/` directory in case of Node.js) that your function might import. There is a limit of 250MB on the uncompressed package and a 50MB limit once it has been compressed. If you need more space, you can package your container as a Docker image which can be up to 10GB. We will take a look at the packaging process below.
 
 ### Lambda Function
 
-Finally here is what a Lambda function (a Node.js version) looks like.
+Finally here is what a Lambda function using Node.js looks like.
 
 ![Anatomy of a Lambda Function image](/assets/anatomy-of-a-lambda-function.png)
 
@@ -52,13 +56,13 @@ Here `myHandler` is the name of our Lambda function. The `event` object contains
 
 ### Packaging Functions
 
-Lambda functions need to be packaged and sent to AWS. This is usually a process of compressing the function and all its dependencies and uploading it to an S3 bucket. And letting AWS know that you want to use this package when a specific event takes place. To help us with this process we use the [SST]({{ site.sst_github_repo }}). We'll go over this in detail later on in this guide.
+Lambda functions need to be packaged and sent to AWS. This is usually a process of compressing the function and all its dependencies and uploading it to an S3 bucket. And letting AWS know that you want to use this package when a specific event takes place. To help us with this process we use the [SST]({{ site.sst_github_repo }}). We will go over this in detail later on in this guide.
 
 ### Execution Model
 
 The container (and the resources used by it) that runs our function is managed completely by AWS. It is brought up when an event takes place and is turned off if it is not being used. If additional requests are made while the original event is being served, a new container is brought up to serve a request. This means that if we are undergoing a usage spike, the cloud provider simply creates multiple instances of the container with our function to serve those requests.
 
-This has some interesting implications. Firstly, our functions are effectively stateless. Secondly, each request (or event) is served by a single instance of a Lambda function. This means that you are not going to be handling concurrent requests in your code. AWS brings up a container whenever there is a new request. It does make some optimizations here. It will hang on to the container for a few minutes (5 - 15mins depending on the load) so it can respond to subsequent requests without a cold start.
+This has some interesting implications. Firstly, our functions are effectively stateless. Secondly, each request (or event) is served by a single instance of a Lambda function. This means that you are not going to be handling concurrent requests in your code. AWS brings up a container whenever there is a new request. It does make some optimizations here. It will hang on to the container for a few minutes (5 - 15 mins depending on the load) so it can respond to subsequent requests without a cold start.
 
 ### Stateless Functions
 
@@ -89,7 +93,7 @@ Note that while AWS might keep the container with your Lambda function around af
 
 Lambda comes with a very generous free tier and it is unlikely that you will go over this while working on this guide.
 
-The Lambda free tier includes 1M free requests per month and 400,000 GB-seconds of compute time per month. Past this, it costs $0.20 per 1 million requests and $0.00001667 for every GB-seconds. The GB-seconds is based on the memory consumption of the Lambda function. You can save up to 17% by purchasing AWS Compute Savings Plans in exchange for a 1 or 3 year commitment. For further details check out the [Lambda pricing page](https://aws.amazon.com/lambda/pricing/).
+The Lambda free tier includes 1M free requests per month and 400,000 GB-seconds of compute time per month. Past this, it costs $0.20 per 1 million requests and $0.00001667 for every GB-seconds. The GB-seconds is based on the memory consumption of the Lambda function. You can save up to 17% by purchasing AWS Compute Savings Plans in exchange for a 1 or 3 year commitment. For further details check out the [Lambda pricing page](https://aws.amazon.com/lambda/pricing/){:target="_blank"}.
 
 In our experience, Lambda is usually the least expensive part of our infrastructure costs.
 

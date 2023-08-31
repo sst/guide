@@ -14,25 +14,19 @@ Amplify gives us a way to get the current user session using the `Auth.currentSe
 
 ### Load User Session
 
-Let's load this when our app loads. To do this we are going to use another React hook, called [useEffect](https://reactjs.org/docs/hooks-effect.html). Since `Auth.currentSession()` returns a promise, it means that we need to ensure that the rest of our app is only ready to go after this has been loaded.
+Let's load this when our app loads. To do this we are going to use another React hook, called useEffect. Since `Auth.currentSession()` returns a promise, it means that we need to ensure that the rest of our app is only ready to go after this has been loaded.
 
-{%change%} To do this, let's add another state variable to our `src/App.js` state called `isAuthenticating`. Add it to the top of our `App` function.
+{%change%} To do this, let's add another state variable to our `src/App.tsx` state called `isAuthenticating`. Add it to the top of our `App` function.
 
-```js
+```tsx
 const [isAuthenticating, setIsAuthenticating] = useState(true);
 ```
 
 We start with the value set to `true` because as we first load our app, it'll start by checking the current authentication state.
 
-{%change%} Let's include the `Auth` module by adding the following to the header of `src/App.js`.
+{%change%} To load the user session we'll add the following to our `src/App.tsx` right below our variable declarations.
 
-```js
-import { Auth } from "aws-amplify";
-```
-
-{%change%} Now to load the user session we'll add the following to our `src/App.js` right below our variable declarations.
-
-```js
+```tsx
 useEffect(() => {
   onLoad();
 }, []);
@@ -50,12 +44,23 @@ async function onLoad() {
   setIsAuthenticating(false);
 }
 ```
+{%change%} Then include the `Auth` module by adding the following to the header of `src/App.tsx`.
+
+```tsx
+import { Auth } from "aws-amplify";
+```
+
+{%change%} Let's make sure to include the `useEffect` hook by replacing the React import in the header of `src/App.tsx` with:
+
+```tsx
+import { useState, useEffect } from "react";
+```
 
 Let's understand how this and the `useEffect` hook works.
 
 The `useEffect` hook takes a function and an array of variables. The function will be called every time the component is rendered. And the array of variables tell React to only re-run our function if the passed in array of variables have changed. This allows us to control when our function gets run. This has some neat consequences:
 
-1. If we don't pass in an array of variables, our hook gets executed everytime our component is rendered.
+1. If we don't pass in an array of variables, our hook gets executed every time our component is rendered.
 2. If we pass in some variables, on every render React will first check if those variables have changed, before running our function.
 3. If we pass in an empty list of variables, then it'll only run our function on the FIRST render.
 
@@ -65,7 +70,7 @@ When our app first loads, it'll run the `onLoad` function. All this does is load
 
 So the top of our `App` function should now look like this:
 
-```js
+```tsx
 function App() {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -77,54 +82,51 @@ function App() {
   ...
 ```
 
-{%change%} Let's make sure to include the `useEffect` hook by replacing the React import in the header of `src/App.js` with:
-
-```js
-import React, { useState, useEffect } from "react";
-```
-
 ### Render When the State Is Ready
 
 Since loading the user session is an asynchronous process, we want to ensure that our app does not change states when it first loads. To do this we'll hold off rendering our app till `isAuthenticating` is `false`.
 
 We'll conditionally render our app based on the `isAuthenticating` flag.
 
-{%change%} Our `return` statement in `src/App.js` should be as follows.
+{%change%} Replace the `return` statement in `src/App.js` with the following.
 
 {% raw %}
 
-```jsx
-return (
-  !isAuthenticating && (
-    <div className="App container py-3">
-      <Navbar collapseOnSelect bg="light" expand="md" className="mb-3 px-3">
-        <LinkContainer to="/">
-          <Navbar.Brand className="fw-bold text-muted">Scratch</Navbar.Brand>
-        </LinkContainer>
-        <Navbar.Toggle />
-        <Navbar.Collapse className="justify-content-end">
-          <Nav activeKey={window.location.pathname}>
-            {isAuthenticated ? (
-              <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-            ) : (
-              <>
-                <LinkContainer to="/signup">
-                  <Nav.Link>Signup</Nav.Link>
-                </LinkContainer>
-                <LinkContainer to="/login">
-                  <Nav.Link>Login</Nav.Link>
-                </LinkContainer>
-              </>
-            )}
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
-        <Routes />
-      </AppContext.Provider>
-    </div>
-  )
-);
+```tsx
+  return (
+    !isAuthenticating && (
+      <div className="App container py-3">
+        <Navbar collapseOnSelect bg="light" expand="md" className="mb-3 px-3">
+          <LinkContainer to="/">
+            <Navbar.Brand className="fw-bold text-muted">Scratch</Navbar.Brand>
+          </LinkContainer>
+          <Navbar.Toggle />
+          <Navbar.Collapse className="justify-content-end">
+            <Nav activeKey={window.location.pathname}>
+              {isAuthenticated ? (
+                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+              ) : (
+                <>
+                  <LinkContainer to="/signup">
+                    <Nav.Link>Signup</Nav.Link>
+                  </LinkContainer>
+                  <LinkContainer to="/login">
+                    <Nav.Link>Login</Nav.Link>
+                  </LinkContainer>
+                </>
+              )}
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+        <AppContext.Provider
+          value={{ isAuthenticated, userHasAuthenticated } as AppContextType}
+        >
+          <Routes />
+        </AppContext.Provider>
+      </div>
+    )
+  );
+
 ```
 
 {% endraw %}

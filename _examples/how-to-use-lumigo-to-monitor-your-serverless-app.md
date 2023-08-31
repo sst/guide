@@ -75,7 +75,7 @@ Let's add the API.
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { Api, StackContext } from "sst/constructs";
 import * as cdk from "aws-cdk-lib";
 
@@ -98,7 +98,7 @@ We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to cr
 
 {%change%} Your `packages/functions/src/lambda.ts` should look something like this.
 
-```ts
+```typescript
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
@@ -118,7 +118,7 @@ To enable Lambda monitoring for a function, add a `lumigo:auto-trace` tag and se
 
 {%change%} Add the following above `stack.addOutputs` in `stacks/ExampleStack.ts`.
 
-```ts
+```typescript
 // Enable auto trace only in prod
 if (!app.local)
   cdk.Tags.of(api.getFunction("GET /")).add("lumigo:auto-trace", "true");
@@ -126,7 +126,7 @@ if (!app.local)
 
 To monitor all the functions in a stack, you can use the [Stack]({{ site.docs_url }}/constructs/Stack) construct's `getAllFunctions` method and do the following at the bottom of your stack definition like below
 
-```ts
+```typescript
 stack
   .getAllFunctions()
   .forEach((fn) => cdk.Tags.of(fn).add("lumigo:auto-trace", "true"));

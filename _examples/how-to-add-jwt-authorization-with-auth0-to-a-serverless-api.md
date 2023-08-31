@@ -101,7 +101,7 @@ Let's start by setting up an API.
 
 Note that, the `issuer` option **ends with a trailing slash** (`/`).
 
-```ts
+```typescript
 import { StackContext, Api } from "sst/constructs";
 
 export function ExampleStack({ stack, app }: StackContext) {
@@ -153,7 +153,7 @@ Let's create two functions, one handling the public route, and the other for the
 
 {%change%} Add a `packages/functions/src/public.ts`.
 
-```ts
+```typescript
 export async function main() {
   return {
     statusCode: 200,
@@ -164,7 +164,7 @@ export async function main() {
 
 {%change%} Add a `packages/functions/src/private.ts`.
 
-```ts
+```typescript
 import { APIGatewayProxyHandlerV2WithJWTAuthorizer } from "aws-lambda";
 
 export const main: APIGatewayProxyHandlerV2WithJWTAuthorizer = async (
@@ -183,7 +183,7 @@ To deploy a React.js app to AWS, we'll be using the SST [`StaticSite`]({{ site.d
 
 {%change%} Replace the following in `stacks/ExampleStack.ts`:
 
-```ts
+```typescript
 // Show the API endpoint in the output
 stack.addOutputs({
   ApiEndpoint: api.url,
@@ -192,7 +192,7 @@ stack.addOutputs({
 
 {%change%} With:
 
-```ts
+```typescript
 const site = new StaticSite(stack, "Site", {
   path: "packages/frontend",
   buildOutput: "dist",
@@ -220,7 +220,7 @@ We are going to print out the resources that we created for reference.
 
 Make sure to import the `StaticSite` construct by adding below line
 
-```ts
+```typescript
 import { StaticSite } from "sst/constructs";
 ```
 
@@ -545,7 +545,7 @@ A note on these environments. SST is simply deploying the same app twice using t
 
 Note, if you get any error like `'request' is not exported by __vite-browser-external, imported by node_modules/@aws-sdk/credential-provider-imds/dist/es/remoteProvider/httpRequest.js` replace `vite.config.js` with below code.
 
-```ts
+```typescript
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 

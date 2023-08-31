@@ -27,7 +27,7 @@ Once your repository is created, copy the repository URL. We'll need this soon.
 
 ![Copy new GitHub repo url screenshot](/assets/part2/copy-new-github-repo-url.png)
 
-In our case the URL is:
+For example, [the demo code repository URL](https://github.com/serverless-stack/demo-notes-app.git){:target="_blank"} is:
 
 ``` txt
 https://github.com/sst/demo-notes-app.git
@@ -35,7 +35,7 @@ https://github.com/sst/demo-notes-app.git
 
 ### Initialize Your New Repo
 
-{%change%} Now head back to your project and use the following command to initialize your new repo.
+{%change%} Now go to your project and use the following command to initialize your new repo.
 
 ``` bash
 $ git init
@@ -50,21 +50,23 @@ $ git add .
 {%change%} Create your first commit.
 
 ``` bash
-$ git commit -m "First commit"
+$ git commit -m "First commit" 
 ```
 
-{%change%} Link it to the repo you created on GitHub.
+{%change%} Link it to the repo you created on GitHub by running the following, replacing **<REPO_URL>** with your repository URL.
 
 ``` bash
 $ git branch -M main
-$ git remote add origin REPO_URL
+$ git remote add origin <REPO_URL>
 ```
-
+{%info%}
 Here `REPO_URL` is the URL we copied from GitHub in the steps above. You can verify that it has been set correctly by doing the following.
 
 ``` bash
 $ git remote -v
 ```
+
+{%endinfo%}
 
 {%change%} Finally, let's push our first commit to GitHub using:
 

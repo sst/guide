@@ -64,7 +64,7 @@ An SST app is made up of two parts.
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { StackContext, Queue, Api } from "sst/constructs";
 
 export function ExampleStack({ stack }: StackContext) {
@@ -83,7 +83,7 @@ Now let's add the API.
 
 {%change%} Add this below the `Queue` definition in `stacks/ExampleStack.ts`.
 
-```ts
+```typescript
 // Create the HTTP API
 const api = new Api(stack, "Api", {
   defaults: {
@@ -113,7 +113,7 @@ We will create two functions, one for handling the API request, and one for the 
 
 {%change%} Replace the `packages/functions/src/lambda.ts` with the following.
 
-```ts
+```typescript
 export async function main() {
   console.log("Message queued!");
   return {
@@ -125,7 +125,7 @@ export async function main() {
 
 {%change%} Add a `packages/functions/src/consumer.ts`.
 
-```ts
+```typescript
 import { SQSEvent } from "aws-lambda";
 
 export async function main(event: SQSEvent) {
@@ -170,7 +170,7 @@ Now let's send a message to our queue.
 
 {%change%} Replace the `packages/functions/src/lambda.ts` with the following.
 
-```ts
+```typescript
 import AWS from "aws-sdk";
 import { Queue } from "sst/node/queue";
 

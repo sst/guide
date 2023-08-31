@@ -74,7 +74,7 @@ For this example we'll be testing using a simple API endpoint.
 
 Our API is defined in the `stacks/ExampleStack.ts`.
 
-```ts
+```typescript
 import { StackContext, Api } from "sst/constructs";
 
 export function ExampleStack({ stack }: StackContext) {
@@ -98,7 +98,7 @@ Our functions are stored in the `packages/functions/` directory. In this case, w
 
 {%change%} Replace your `packages/functions/src/lambda.ts` with.
 
-```ts
+```typescript
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
@@ -190,7 +190,7 @@ An advantage of using the Live Lambda Development environment is that you can ma
 
 {%change%} Replace `packages/functions/src/lambda.ts` with the following.
 
-```ts
+```typescript
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {

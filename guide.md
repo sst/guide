@@ -41,10 +41,9 @@ description: Learn how to build full-stack apps using serverless and React on AW
       {% include toc-chapters.html items=site.data.chapterlist.secure-pages id="secure-pages" index="15" %}
 
       {% include toc-chapters.html items=site.data.chapterlist.custom-domains id="custom-domains" index="16" %}
-      {% include toc-chapters.html items=site.data.chapterlist.automating-serverless-deployments id="automating-serverless-deployments" index="17" %}
-      {% include toc-chapters.html items=site.data.chapterlist.monitor-debug-errors id="monitor-debug-errors" index="18" %}
+      {% include toc-chapters.html items=site.data.chapterlist.automating-deployments id="automating-deployments" index="17" %}
 
-      {% include toc-chapters.html items=site.data.chapterlist.conclusion id="conclusion" index="19" %}
+      {% include toc-chapters.html items=site.data.chapterlist.conclusion id="conclusion" index="18" %}
     </div>
 
     <div class="standalone-newsletter-form-container">
@@ -64,12 +63,12 @@ description: Learn how to build full-stack apps using serverless and React on AW
             <h3>Best Practices</h3>
           </div>
           <div class="chapters best-practices">
-            {% include toc-chapters.html items=site.data.chapterlist.best-practices-intro id="best-practices-intro" %}
-            {% include toc-chapters.html items=site.data.chapterlist.organize-serverless-apps id="organize-serverless-apps" %}
-            {% include toc-chapters.html items=site.data.chapterlist.configure-environments id="configure-environments" %}
-            {% include toc-chapters.html items=site.data.chapterlist.development-lifecycle id="development-lifecycle" %}
-            {% include toc-chapters.html items=site.data.chapterlist.observability id="observability" %}
-            {% include toc-chapters.html items=site.data.chapterlist.best-practices-conclusion id="best-practices-conclusion" %}
+            {% include toc-chapters.html items=site.data.archiveslist.best-practices-intro id="best-practices-intro" %}
+            {% include toc-chapters.html items=site.data.archiveslist.organize-serverless-apps id="organize-serverless-apps" %}
+            {% include toc-chapters.html items=site.data.archiveslist.configure-environments id="configure-environments" %}
+            {% include toc-chapters.html items=site.data.archiveslist.development-lifecycle id="development-lifecycle" %}
+            {% include toc-chapters.html items=site.data.archiveslist.observability id="observability" %}
+            {% include toc-chapters.html items=site.data.archiveslist.best-practices-conclusion id="best-practices-conclusion" %}
             <a class="expand"><span class="sst-button tertiary">Show all</span></a>
           </div>
         </div>
@@ -79,13 +78,12 @@ description: Learn how to build full-stack apps using serverless and React on AW
             <h3>Serverless Framework</h3>
           </div>
           <div class="chapters serverless-framework">
-            {% include toc-chapters.html items=site.data.chapterlist.setup-serverless id="setup-serverless" %}
-            {% include toc-chapters.html items=site.data.chapterlist.setup-backend id="setup-backend" %}
-            {% include toc-chapters.html items=site.data.chapterlist.build-api id="build-api" %}
-            {% include toc-chapters.html items=site.data.chapterlist.users-auth id="users-auth" %}
-            {% include toc-chapters.html items=site.data.chapterlist.third-party-apis id="third-party-apis" %}
-            {% include toc-chapters.html items=site.data.chapterlist.domains-hosting id="domains-hosting" %}
-            {% include toc-chapters.html items=site.data.chapterlist.infrastructure-as-code id="infrastructure-as-code" %}
+            {% include toc-chapters.html items=site.data.archiveslist.setup-serverless id="setup-serverless" %}
+            {% include toc-chapters.html items=site.data.archiveslist.setup-backend id="setup-backend" %}
+            {% include toc-chapters.html items=site.data.archiveslist.build-api id="build-api" %}
+            {% include toc-chapters.html items=site.data.archiveslist.users-auth id="users-auth" %}
+            {% include toc-chapters.html items=site.data.archiveslist.third-party-apis id="third-party-apis" %}
+            {% include toc-chapters.html items=site.data.archiveslist.infrastructure-as-code id="infrastructure-as-code" %}
             <a class="expand"><span class="sst-button tertiary">Show all</span></a>
           </div>
         </div>
@@ -97,9 +95,9 @@ description: Learn how to build full-stack apps using serverless and React on AW
             <h3>Extra Credit</h3>
           </div>
           <div class="chapters expanded">
-            {% include toc-chapters.html items=site.data.chapterlist.extra-backend id="extra-backend" %}
-            {% include toc-chapters.html items=site.data.chapterlist.extra-auth id="extra-auth" %}
-            {% include toc-chapters.html items=site.data.chapterlist.extra-frontend id="extra-frontend" %}
+            {% include toc-chapters.html items=site.data.archiveslist.extra-backend id="extra-backend" %}
+            {% include toc-chapters.html items=site.data.archiveslist.extra-auth id="extra-auth" %}
+            {% include toc-chapters.html items=site.data.archiveslist.extra-frontend id="extra-frontend" %}
           </div>
         </div>
       </div>

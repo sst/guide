@@ -612,3 +612,33 @@ main > .guide-page > .table-of-contents {
     }
   }
 }
+
+aside {
+  padding: $spacing-unit / 2;
+  margin-bottom: $spacing-unit / 2;
+  border-radius: 0 4px 4px 0;
+
+  &.info {
+    background-color: #f3ffff;
+    border-left: solid 5px $brand-color;
+  }
+  &.note {
+    background-color: $secondary-background-color;
+    border-left: solid 5px $brand-color;
+  }
+  &.caution {
+    background-color: $secondary-background-color;
+    border-left: solid 5px $important-color;
+  }
+
+  & > h5 {
+    color: $secondary-text-color;
+    text-transform: uppercase;
+    letter-spacing: 0.04rem;
+    font-weight: bold;
+  }
+
+  & > div > *:last-child {
+    margin-bottom: 0;
+  }
+}

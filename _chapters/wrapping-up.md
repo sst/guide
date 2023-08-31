@@ -15,49 +15,33 @@ Congratulations on completing the guide!
 
 We've covered how to build and deploy our backend serverless API and our frontend serverless app. And not only does it work well on the desktop.
 
-![App update live screenshot](/assets/app-update-live.png)
+![App update live screenshot](/assets/part2/app-update-live.png)
 
 It's mobile optimized as well!
 
-<img alt="Mobile app homescreen screenshot" src="/assets/mobile-app-homescreen.png" width="432" />
+![Completed app mobile screenshot](/assets/part2/completed-app-mobile-lander.png){: width="432" }
 
 ### Manage in Prod
 
-One final thing! You can also manage your app in production with the [SST Console]({{ site.docs_url }}/console ).
+One final thing! You can also manage your app in production with the [SST Console]({{ site.console_url }}).
 
-Run the following in your project root.
+Head over to — [**console.sst.dev**]({{ site.console_url }}) and sign up for a free account.
 
-```bash
-$ npx sst console --stage prod
-```
+You'll need to create a new workspace and connect to your AWS account. Once connected, you'll see all your SST apps and the resources in them.
 
-This'll allow you to connect your SST Console to your prod stage.
+![SST Console prod resources](/assets/part2/sst-console-prod-resources.png)
 
-```txt
-SST Console: https://console.sst.dev/notes/prod/stacks
-```
+And you can view the logs for your functions and debug any issues.
 
-It'll show you all the resources in production.
+![SST Console prod logs](/assets/part2/sst-console-prod-logs.png)
 
-![SST Console prod stacks tab](/assets/part2/sst-console-prod-stacks-tab.png)
-
-All your users.
-
-![SST Console prod Cognito tab](/assets/part2/sst-console-prod-cognito-tab.png)
-
-The notes your users have created.
-
-![SST Console prod DynamoDB tab](/assets/part2/sst-console-prod-dynamodb-tab.png)
-
-You can even see the request logs in production.
-
-![SST Console prod functions tab](/assets/part2/sst-console-prod-functions-tab.png)
+[Read more about it over on our docs]({{ site.docs_url }}/console ).
 
 ---
 
 We hope what you've learned here can be adapted to fit the use case you have in mind. We are going to be covering a few other topics in the future while we keep this guide up to date.
 
-We'd love to hear from you about your experience following this guide. Please [**fill out our survey**]({{ site.survey_url }}) or send us any comments or feedback you might have, via [email](mailto:{{ site.email }}). And [please star our repo on GitHub]({{ site.sst_github_repo }}), it really helps spread the word.
+We'd love to hear from you about your experience following this guide. Please send us any comments or feedback you might have, via [email](mailto:{{ site.email }}). And [please star our repo on GitHub]({{ site.sst_github_repo }}){:target="_blank"}, it really helps spread the word.
 
 <a class="button contact" href="{{ site.sst_github_repo }}" target="_blank">Star our GitHub repo</a>
 

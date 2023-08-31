@@ -14,10 +14,9 @@ Currently, our app has a single component that renders our content. For creating
 
 Let's start by creating the outer chrome of our application by first adding a navigation bar to it. We are going to use the [Navbar](https://react-bootstrap.github.io/components/navbar/) React-Bootstrap component.
 
-{%change%} Go ahead and remove the code inside `src/App.js` and replace it with the following.
+{%change%} Go ahead and remove the code inside `src/App.tsx` and replace it with the following.
 
-```jsx
-import React from "react";
+```tsx
 import Navbar from "react-bootstrap/Navbar";
 import "./App.css";
 
@@ -53,17 +52,17 @@ For now we don't have any styles to add but we'll leave this file around, in cas
 
 Also, let's remove some unused template files.
 
-{%change%} Run the following in your React `frontend/` directory.
+{%change%} Run the following **in the `packages/frontend/` directory**.
 
 ```bash
-$ rm src/logo.svg src/App.test.js
+$ rm -r public/vite.svg src/assets/
 ```
 
 ### Add the Home container
 
 Now that we have the outer chrome of our application ready, let's add the container for the homepage of our app. It'll respond to the `/` route.
 
-{%change%} Create a `src/containers/` directory by running the following in the `frontend/` directory.
+{%change%} Create a `src/containers/` directory by running the following **in the `packages/frontend/` directory**.
 
 ```bash
 $ mkdir src/containers/
@@ -71,10 +70,9 @@ $ mkdir src/containers/
 
 We'll be storing all of our top level components here. These are components that will respond to our routes and make requests to our API. We will be calling them _containers_ through the rest of this tutorial.
 
-{%change%} Create a new container and add the following to `src/containers/Home.js`.
+{%change%} Create a new container and add the following to `src/containers/Home.tsx`.
 
-```jsx
-import React from "react";
+```tsx
 import "./Home.css";
 
 export default function Home() {
@@ -89,7 +87,7 @@ export default function Home() {
 }
 ```
 
-This simply renders our homepage given that the user is not currently signed in.
+This renders our homepage given that the user is not currently signed in.
 
 Now let's add a few lines to style this.
 
@@ -111,12 +109,11 @@ Now let's add a few lines to style this.
 
 Now we'll set up the routes so that we can have this container respond to the `/` route.
 
-{%change%} Create `src/Routes.js` and add the following into it.
+{%change%} Create `src/Routes.tsx` and add the following into it.
 
-```jsx
-import React from "react";
+```tsx
 import { Route, Routes } from "react-router-dom";
-import Home from "./containers/Home";
+import Home from "./containers/Home.tsx";
 
 export default function Links() {
   return (
@@ -133,21 +130,21 @@ This component uses this `Routes` component from React-Router that renders the f
 
 Now let's render the routes into our App component.
 
-{%change%} Add the following to the header of your `src/App.js`.
+{%change%} Add the following to the header of your `src/App.tsx`.
 
-```jsx
-import Routes from "./Routes";
+```tsx
+import Routes from "./Routes.tsx";
 ```
 
-{%change%} And add the following line below our `Navbar` component inside `src/App.js`.
+{%change%} And add the following line below our `Navbar` component inside `src/App.tsx`.
 
-```jsx
+```tsx
 <Routes />
 ```
 
-So the `App` function component of our `src/App.js` should now look like this.
+So the `App` function component of our `src/App.tsx` should now look like this.
 
-```jsx
+```tsx
 function App() {
   return (
     <div className="App container py-3">
@@ -165,6 +162,6 @@ This ensures that as we navigate to different routes in our app, the portion bel
 
 Finally, head over to your browser and your app should show the brand new homepage of your app.
 
-![New homepage loaded screenshot](/assets/new-homepage-loaded.png)
+![New homepage loaded screenshot](/assets/part2/new-homepage-loaded.png)
 
 Next we are going to add login and signup links to our navbar.

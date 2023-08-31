@@ -11,14 +11,18 @@ ref: create-a-route-that-redirects
 
 Let's first create a route that will check if the user is logged in before routing.
 
-{%change%} Add the following to `src/components/AuthenticatedRoute.js`.
+{%change%} Add the following file in components `src/components/AuthenticatedRoute.tsx`.
 
-```jsx
-import React from "react";
+```tsx
+import { ReactElement } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAppContext } from "../lib/contextLib";
 
-export default function AuthenticatedRoute({ children }) {
+export default function AuthenticatedRoute({
+  children,
+}: {
+  children: ReactElement;
+}): ReactElement {
   const { pathname, search } = useLocation();
   const { isAuthenticated } = useAppContext();
 
@@ -44,14 +48,18 @@ This simple component creates a `Route` where its children are rendered only if 
 
 We'll do something similar to ensure that the user is not authenticated.
 
-{%change%} Add the following to `src/components/UnauthenticatedRoute.js`.
+{%change%} Next, add the following file in components  `src/components/UnauthenticatedRoute.tsx`.
 
-```jsx
-import React, { cloneElement } from "react";
+```tsx
+import { cloneElement, ReactElement } from "react";
 import { Navigate } from "react-router-dom";
 import { useAppContext } from "../lib/contextLib";
 
-export default function UnauthenticatedRoute(props) {
+interface Props {
+  children: ReactElement;
+}
+
+export default function UnauthenticatedRoute(props: Props): ReactElement {
   const { isAuthenticated } = useAppContext();
   const { children } = props;
 

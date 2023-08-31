@@ -10,7 +10,7 @@ code: backend
 comments_id: handle-api-gateway-cors-errors/780
 ---
 
-API를 배포하기 전에 마지막으로 설정할 내용이 있습니다. 바로 CORS 헤더를 API Gateway 오류에 추가하는 일입니다. [노트 추가 API 생성하기]({% link _chapters/add-a-create-note-api.md %}) 장에서 우리는 람다 함수에 CORS 헤더를 추가했었습니다. 사실 API 요청을 할 때, API Gateway는 Lambda 함수 전에 호출됩니다. 즉, API Gateway 수준에서 오류가 발생하면 CORS 헤더가 설정되지 않습니다.
+API를 배포하기 전에 마지막으로 설정할 내용이 있습니다. 바로 CORS 헤더를 API Gateway 오류에 추가하는 일입니다. [노트 추가 API 생성하기]({% link _archives/add-a-create-note-api.md %}) 장에서 우리는 람다 함수에 CORS 헤더를 추가했었습니다. 사실 API 요청을 할 때, API Gateway는 Lambda 함수 전에 호출됩니다. 즉, API Gateway 수준에서 오류가 발생하면 CORS 헤더가 설정되지 않습니다.
 
 이것 때문에 고객이 오류 메시지를 볼 수 없어 디버깅하기가 어렵습니다. 그냥 다음과 같이 표시됩니다.
 

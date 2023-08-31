@@ -302,7 +302,7 @@ description: "Build modern full-stack serverless applications on AWS with Next.j
 
   <div class="form-container">
     <div class="form-copy">
-      <p>Download the FREE 1000 page ebook</p>
+      <p>Download the FREE 300 page ebook</p>
       <p>Join {{ site.stats.newsletter }} readers from the biggest companies in the world. We'll also send you updates when new versions are published.</p>
     </div>
     <div class="form">

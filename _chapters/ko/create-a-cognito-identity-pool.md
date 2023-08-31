@@ -31,7 +31,7 @@ Amazon Cognito 연동 자격증명은 개발자가 사용자에 대해 고유 �
 
 ![Cognito 자격 증명 풀 정보 입력 화면](/assets/cognito-identity-pool/fill-identity-pool-info.png)
 
-**인증 공급자**를 선택하고 **Cognito** 탭 아래에 [Cognito 사용자 풀 만들기]({% link _chapters/create-a-cognito-user-pool.md %}) 챕터에서 만들었던 사용자 풀의 **사용자 풀 ID**와 **App Client ID**를 입력합니다. **풀 생성**을 클릭합니다.
+**인증 공급자**를 선택하고 **Cognito** 탭 아래에 [Cognito 사용자 풀 만들기]({% link _archives/create-a-cognito-user-pool.md %}) 챕터에서 만들었던 사용자 풀의 **사용자 풀 ID**와 **App Client ID**를 입력합니다. **풀 생성**을 클릭합니다.
 
 ![인증 공급자 정보 입력 화면](/assets/cognito-identity-pool/fill-authentication-provider-info.png)
 
@@ -47,7 +47,7 @@ Amazon Cognito 연동 자격증명은 개발자가 사용자에 대해 고유 �
 
 ![정책 편집 확인 버튼 선택 화면](/assets/cognito-identity-pool/select-confirm-edit-policy.png)
 
-{%change%} 아래 정책을 편집화면에 추가합니다. 그리고 `YOUR_S3_UPLOADS_BUCKET_NAME`을 [S3 파일 업로드 버킷 만들기]({% link _chapters/create-an-s3-bucket-for-file-uploads.md %}) 챕터에서 만든 **버킷 이름**으로 대체합니다. 그리고 지난 장에서 여러분이 만든 API 배포시 확인한 `YOUR_API_GATEWAY_REGION` 와 `YOUR_API_GATEWAY_ID`을 입력합니다. 
+{%change%} 아래 정책을 편집화면에 추가합니다. 그리고 `YOUR_S3_UPLOADS_BUCKET_NAME`을 [S3 파일 업로드 버킷 만들기]({% link _archives/create-an-s3-bucket-for-file-uploads.md %}) 챕터에서 만든 **버킷 이름**으로 대체합니다. 그리고 지난 장에서 여러분이 만든 API 배포시 확인한 `YOUR_API_GATEWAY_REGION` 와 `YOUR_API_GATEWAY_ID`을 입력합니다. 
 
 여기에서는 `YOUR_S3_UPLOADS_BUCKET_NAME` 는 `notes-app-uploads`로, `YOUR_API_GATEWAY_ID` 는 `ly55wbovq4`, 그리고 `YOUR_API_GATEWAY_REGION` 는 `us-east-1`로 입력합니다.
 

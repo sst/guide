@@ -172,7 +172,7 @@ This example comes with a VS Code [Launch Configuration](https://code.visualstud
 
 We are creating a simple API in our app. It's defined in `stacks/MyStack.ts`.
 
-```ts
+```typescript
 import { Api, StackContext } from "@serverless-stack/resources";
 
 export function MyStack({ stack }: StackContext) {
@@ -192,7 +192,7 @@ export function MyStack({ stack }: StackContext) {
 
 And when we hit this endpoint, it triggers our _Hello World_ Lambda function in `functions/lambda.ts`.
 
-```ts
+```typescript
 import { APIGatewayProxyEventV2, APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 export const handler: APIGatewayProxyHandlerV2 = async (
@@ -257,7 +257,7 @@ Here is a video of it in action.
 
 And that's it! You can now add other parts of your infrastructure with [SST's constructs]({{ site.docs_url }}), CDK's constructs, or by adding your own.
 
-As a next step, you can check out this free 1000 page ebook on how to build full-stack serverless applications using SST and React. It's the most widely read resource for serverless and a great way to get started.
+As a next step, you can check out this free 300 page ebook on how to build full-stack serverless applications using SST and React. It's the most widely read resource for serverless and a great way to get started.
 
 <div class="extras">
   <div class="container">

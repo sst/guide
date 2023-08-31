@@ -14,21 +14,28 @@ We've covered debugging [errors in our code]({% link _chapters/logic-errors-in-l
 
 Lambda functions could fail not because of an error inside your handler code, but because of an error outside it. In this case, your Lambda function won't be invoked. Let's add some faulty code outside our handler function.
 
-{%change%} Replace the `main` function in `packages/functions/src/get.js` with the following.
+{%change%} Replace the `main` function in `packages/functions/src/get.ts` with the following.
 
-```js
+```typescript
 // Some faulty code
 dynamoDb.notExist();
 
-export const main = handler(async (event) => {
+export const main = handler(async (event: APIGatewayProxyEvent) => {
+  let path_id
+
+  if (!event.pathParameters || !event.pathParameters.id || event.pathParameters.id.length == 0) {
+    throw new Error("Please provide the 'id' parameter.");
+  } else {
+    path_id = event.pathParameters.id
+  }
+
   const params = {
     TableName: Table.Notes.tableName,
-    // 'Key' defines the partition key and sort key of the item to be retrieved
-    // - 'userId': Identity Pool identity id of the authenticated user
-    // - 'noteId': path parameter
+    // 'Key' defines the partition key and sort key of
+    // the item to be retrieved
     Key: {
-      userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
-      noteId: event.pathParameters.id,
+      userId: event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
+      noteId: path_id, // The id of the note from the path
     },
   };
 
@@ -40,6 +47,7 @@ export const main = handler(async (event) => {
   // Return the retrieved item
   return result.Item;
 });
+
 ```
 
 {%change%} Commit this code.
@@ -68,23 +76,30 @@ Note that, you might see there are 3 events for this error. This is because the 
 
 Another error that can happen outside a Lambda function is when the handler has been misnamed.
 
-{%change%} Replace the `main` function in `packages/functions/src/get.js` with the following.
+{%change%} Replace the `main` function in `packages/functions/src/get.ts` with the following.
 
-```js
+```typescript
 // Wrong handler function name
-export const main2 = handler(async (event) => {
+export const main2 = handler(async (event: APIGatewayProxyEvent) => {
+  let path_id
+
+  if (!event.pathParameters || !event.pathParameters.id || event.pathParameters.id.length == 0) {
+    throw new Error("Please provide the 'id' parameter.");
+  } else {
+    path_id = event.pathParameters.id
+  }
+
   const params = {
     TableName: Table.Notes.tableName,
-    // 'Key' defines the partition key and sort key of the item to be retrieved
-    // - 'userId': Identity Pool identity id of the authenticated user
-    // - 'noteId': path parameter
+    // 'Key' defines the partition key and sort key of
+    // the item to be retrieved
     Key: {
-      userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
-      noteId: event.pathParameters.id,
+      userId: event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
+      noteId: path_id, // The id of the note from the path
     },
   };
 
-  const result = await dynamoDbLib.call("get", params);
+  const result = await dynamoDb.get(params);
   if (!result.Item) {
     throw new Error("Item not found.");
   }
@@ -92,6 +107,7 @@ export const main2 = handler(async (event) => {
   // Return the retrieved item
   return result.Item;
 });
+
 ```
 
 {%change%} Let's commit this.
@@ -116,20 +132,30 @@ And that about covers the main Lambda function errors. So the next time you see 
 
 Let's cleanup all the faulty code.
 
-{%change%} Replace `packages/functions/src/get.js` with the following.
+{%change%} Replace `packages/functions/src/get.ts` with the following.
 
-```js
-import { Table } from "sst/node/table";
+```typescript
 import handler from "@notes/core/handler";
+import { APIGatewayProxyEvent } from 'aws-lambda';
+import { Table } from "sst/node/table";
 import dynamoDb from "@notes/core/dynamodb";
 
-export const main = handler(async (event) => {
+export const main = handler(async (event: APIGatewayProxyEvent) => {
+  let path_id
+
+  if (!event.pathParameters || !event.pathParameters.id || event.pathParameters.id.length == 0) {
+    throw new Error("Please provide the 'id' parameter.");
+  } else {
+    path_id = event.pathParameters.id
+  }
+
   const params = {
     TableName: Table.Notes.tableName,
-    // 'Key' defines the partition key and sort key of the item to be retrieved
+    // 'Key' defines the partition key and sort key of
+    // the item to be retrieved
     Key: {
-      userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
-      noteId: event.pathParameters.id, // The id of the note from the path
+      userId: event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
+      noteId: path_id, // The id of the note from the path
     },
   };
 
@@ -141,6 +167,7 @@ export const main = handler(async (event) => {
   // Return the retrieved item
   return result.Item;
 });
+
 ```
 
 Commit and push the code.

@@ -11,15 +11,15 @@
 # make ebup              generate epub
 # ===========================================================================
 
+FILE_NAME = ebook
 OUTPUT_DIR = output
-FILE_NAME = serverless-stack
 
 pdf: prepare merge-pdf build-pdf
 epub: prepare merge-epub build-epub
 
 start:
-	docker build -t serverless-stack-ebook .
-	docker run -it --rm --volume "`pwd`/../..:/data" --entrypoint /bin/bash serverless-stack-ebook
+	docker build -t sst-guide-ebook .
+	docker run -it --rm --volume "`pwd`/../..:/data" --entrypoint /bin/bash sst-guide-ebook
 
 prepare:
 	mkdir -p $(OUTPUT_DIR)

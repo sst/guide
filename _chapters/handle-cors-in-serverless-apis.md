@@ -10,7 +10,7 @@ comments_id: handle-cors-in-serverless-apis/2175
 
 Let's take stock of our setup so far. We have a serverless API backend that allows users to create notes and an S3 bucket where they can upload files. We are now almost ready to work on our frontend React app.
 
-However, before we can do that. There is one thing that needs to be taken care of — [CORS or Cross-Origin Resource Sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing).
+However, before we can do that. There is one thing that needs to be taken care of — [CORS or Cross-Origin Resource Sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing){:target="_blank"}.
 
 Since our React app is going to be run inside a browser (and most likely hosted on a domain separate from our serverless API and S3 bucket), we need to configure CORS to allow it to connect to our resources.
 
@@ -34,7 +34,7 @@ There are two things we need to do to support CORS in our serverless API.
 
    For all the other types of requests we need to make sure to include the appropriate CORS headers. These headers, just like the one above, need to include the domains that are allowed.
 
-There's a bit more to CORS than what we have covered here. So make sure to [check out the Wikipedia article for further details](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing).
+There's a bit more to CORS than what we have covered here. So make sure to [check out the Wikipedia article for further details](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing){:target="_blank"}.
 
 If we don't set the above up, then we'll see something like this in our HTTP responses.
 
@@ -46,9 +46,9 @@ And our browser won't show us the HTTP response. This can make debugging our API
 
 ### CORS in API Gateway
 
-The SST [`Api`]({{ site.docs_url }}/constructs/Api) construct that we are using enables CORS by default.
+The SST [`Api`]({{ site.docs_url }}/constructs/Api){:target="_blank"} construct that we are using enables CORS by default.
 
-```js
+```typescript
 new Api(this, "Api", {
   // Enabled by default
   cors: true,
@@ -58,9 +58,9 @@ new Api(this, "Api", {
 });
 ```
 
-You can further configure the specifics if necessary. You can [read more about this here]({{ site.docs_url }}/constructs/Api#cors).
+You can further configure the specifics if necessary. You can [read more about this here]({{ site.docs_url }}/constructs/Api#cors){:target="_blank"}.
 
-```js
+```typescript
 new Api(this, "Api", {
   cors: {
     allowMethods: ["get"],
@@ -77,21 +77,21 @@ We'll go with the default setting for now.
 
 Next, we need to add the CORS headers in our Lambda function response.
 
-{%change%} Replace the `return` statement in our `packages/core/src/handler.js`.
+{%change%} Replace the `return` statement in our `packages/core/src/handler.ts`.
 
-```js
+```typescript
 return {
+  body,
   statusCode,
-  body: JSON.stringify(body),
 };
 ```
 
 {%change%} With the following.
 
-```js
+```typescript
 return {
+  body,
   statusCode,
-  body: JSON.stringify(body),
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Credentials": true,

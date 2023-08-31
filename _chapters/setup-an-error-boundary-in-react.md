@@ -16,34 +16,35 @@ An Error Boundary is a component that allows us to catch any errors that might h
 
 It's incredibly straightforward to setup. So let's get started.
 
-{%change%} Add the following to `src/components/ErrorBoundary.js` in your `frontend/` directory.
+{%change%} Add the following to `src/components/ErrorBoundary.tsx` in your `frontend/` directory.
 
-```jsx
+```tsx
 import React from "react";
-import { logError } from "../lib/errorLib";
+import {logError} from "../lib/errorLib";
 import "./ErrorBoundary.css";
 
-export default class ErrorBoundary extends React.Component {
+export default class ErrorBoundary extends React.Component<any, any> {
   state = { hasError: false };
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(_error: unknown) {
     return { hasError: true };
   }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error: Error, errorInfo: any) {
     logError(error, errorInfo);
   }
 
   render() {
-    return this.state.hasError ? (
-      <div className="ErrorBoundary text-center">
+    if (this.state.hasError) {
+      return <div className="ErrorBoundary text-center">
         <h3>Sorry there was a problem loading this page</h3>
-      </div>
-    ) : (
-      this.props.children
-    );
+      </div>;
+    } else {
+      return this.props.children;
+    }
   }
 }
+
 ```
 
 The key part of this component is the `componentDidCatch` and `getDerivedStateFromError` methods. These get triggered when any of the child components have an unhandled error. We set the internal state, `hasError` to `true` to display our fallback UI. And we report the error to Sentry by calling `logError` with the `error` and `errorInfo` that comes with it.
@@ -64,25 +65,25 @@ The styles we are using are very similar to our `NotFound` component. We use tha
 
 To use the Error Boundary component that we created, we'll need to add it to our app component.
 
-{%change%} Find the following in `src/App.js`.
+{%change%} Find the following in `src/App.tsx`.
 
 {% raw %}
 
-```jsx
-<AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+```tsx
+<AppContext.Provider value={{ isAuthenticated, userHasAuthenticated } as AppContextType}>
   <Routes />
 </AppContext.Provider>
 ```
 
 {% endraw %}
 
-{%change%} And replace it with:
+{%change%} And wrap it with our `ErrorBoundary`:
 
 {% raw %}
 
-```jsx
+```tsx
 <ErrorBoundary>
-  <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+  <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated } as AppContextType}>
     <Routes />
   </AppContext.Provider>
 </ErrorBoundary>
@@ -92,7 +93,7 @@ To use the Error Boundary component that we created, we'll need to add it to our
 
 {%change%} Also, make sure to import it in the header of `src/App.js`.
 
-```js
+```tsx
 import ErrorBoundary from "./components/ErrorBoundary";
 ```
 
@@ -100,36 +101,29 @@ And that's it! Now an unhandled error in our containers will show a nice error m
 
 ### Commit the Changes
 
-{%change%} Let's quickly commit these to Git.
+{%change%} Let's commit these to Git (but don't push yet).
 
 ```bash
-$ git add .
-$ git commit -m "Adding React error reporting"
+$ git add .;git commit -m "Adding React error reporting";
 ```
 
 ### Test the Error Boundary
 
 Before we move on, let's do a quick test.
 
-Replace the following in `src/containers/Home.js`.
+Replace the following in `src/containers/Home.tsx`.
 
-```js
-{
-  isAuthenticated ? renderNotes() : renderLander();
-}
+```tsx
+{isAuthenticated ? renderNotes() : renderLander()}
 ```
 
 With these faulty lines:
 
 {% raw %}
 
-```js
-{
-  isAuthenticated ? renderNotes() : renderLander();
-}
-{
-  isAuthenticated.none.no;
-}
+```tsx
+{isAuthenticated ? renderNotes() : renderLander()}
+{ isAuthenticated.none.no }
 ```
 
 {% endraw %}
@@ -138,7 +132,9 @@ Now in your browser you should see something like this.
 
 ![React error message](/assets/monitor-debug-errors/react-error-message.png)
 
-Note that, you'll need to have the SST local development environment (`npm start`) and React local environment (`npm run start`) running.
+{%note%}  
+You'll need to have the SST local development environment (`npm start`) and React local environment (`npm run start`) running.
+{%endnote%}
 
 While developing, React doesn't show your Error Boundary fallback UI by default. To view that, hit the **close** button on the top right.
 

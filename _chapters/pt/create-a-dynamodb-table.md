@@ -54,7 +54,7 @@ A tabela `notes` foi criada. Caso a tela fique parada na mensagem **A tabela est
 
 ![Tela de seleção de tabelas do DynamoDB](/assets/dynamodb/dynamodb-table-created.png)
 
-É uma boa prática configurar backups para sua tabela, especialmente se planeja usar o projeto em produção. Vamos falar sobre isso no capítulo extra, [Backups no DynamoDB]({% link _chapters/backups-in-dynamodb.md %}).
+É uma boa prática configurar backups para sua tabela, especialmente se planeja usar o projeto em produção. Vamos falar sobre isso no capítulo extra, [Backups no DynamoDB]({% link _archives/backups-in-dynamodb.md %}).
 
 Agora vamos configurar um bucket no S3 para receber upload de arquivos.
 

@@ -9,16 +9,16 @@ ref: create-a-dynamodb-table-in-sst
 comments_id: create-a-dynamodb-table-in-sst/2459
 ---
 
-We are now going to start creating our infrastructure in [SST]({{ site.sst_github_repo }}) using [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}). Starting with DynamoDB.
+We are now going to start creating our infrastructure in [SST]({{ site.sst_github_repo }}){:target="_blank"} using [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}). Starting with DynamoDB.
 
 ### Create a Stack
 
-{%change%} Add the following to a new file in `stacks/StorageStack.js`.
+{%change%} Add the following to a new file in `stacks/StorageStack.ts`.
 
-```js
-import { Table } from "sst/constructs";
+```typescript
+import { StackContext, Table } from "sst/constructs";
 
-export function StorageStack({ stack, app }) {
+export function StorageStack({ stack }: StackContext) {
   // Create the DynamoDB table
   const table = new Table(stack, "Notes", {
     fields: {
@@ -34,9 +34,9 @@ export function StorageStack({ stack, app }) {
 }
 ```
 
-Let's quickly go over what we are doing here.
+Let's go over what we are doing here.
 
-We are creating a new stack in our SST app. We'll be using it to create all our storage related infrastructure (DynamoDB and S3). There's no specific reason why we are creating a separate stack for these resources. It's only meant as a way of organizing our resources and illustrating how to create separate stacks in our app.
+We are creating a [new stack](https://docs.sst.dev/constructs/Stack) in our SST app. We will be using it to create all our storage related infrastructure (DynamoDB and S3). There's no specific reason why we are creating a separate stack for these resources. It's only meant as a way of organizing our resources and illustrating how to create separate stacks in our app.
 
 We are using SST's [`Table`]({{ site.docs_url }}/constructs/Table) construct to create our DynamoDB table.
 
@@ -56,15 +56,17 @@ We are going to use the composite primary key (referenced by `primaryIndex` in c
 
 We are also returning the Table that's being created publicly.
 
-```js
+```typescript
 return {
   table,
 };
 ```
 
-This'll allow us to reference this resource in our other stacks.
+{%info%}
+By explicitly returning the resources created in a stack, we can reference them in other stacks when we imported. We'll see this in action in the coming chapters.
 
-Note, learn more about sharing resources between stacks [here](https://docs.sst.dev/constructs/Stack#sharing-resources-between-stacks).
+[Learn more about sharing resources between stacks](https://docs.sst.dev/constructs/Stack#sharing-resources-between-stacks){:target="_blank"}.
+{%endinfo%}
 
 ### Remove Template Files
 
@@ -73,7 +75,7 @@ The _Hello World_ API that we previously created, can now be removed. We can als
 {%change%} To remove the starter stack, run the following from your project root.
 
 ```bash
-$ npx sst remove API
+$ pnpm sst remove API
 ```
 
 This will take a minute to run.
@@ -81,7 +83,7 @@ This will take a minute to run.
 {%change%} Also remove the template files.
 
 ```bash
-$ rm stacks/MyStack.ts packages/core/src/time.ts packages/functions/src/lambda.ts
+$ rm -r stacks/MyStack.ts packages/core/src/todo.ts packages/core/src/event.ts packages/functions/src/lambda.ts packages/functions/src/todo.ts packages/functions/src/events
 ```
 
 ### Add to the App
@@ -90,7 +92,7 @@ Now let's add our new stack to the app.
 
 {%change%} Replace the `sst.config.ts` with this.
 
-```js
+```typescript
 import { SSTConfig } from "sst";
 import { StorageStack } from "./stacks/StorageStack";
 
@@ -119,9 +121,5 @@ You should see something like this at the end of the deploy process.
 ✓  Deployed:
    StorageStack
 ```
-
-You can also head over to the **DynamoDB** tab in the [SST Console]({{ site.old_console_url }}) and check out the new table.
-
-![SST Console DynamoDB tab](/assets/part2/sst-console-dynamodb-tab.png)
 
 Now that our database has been created, let's create an S3 bucket to handle file uploads.

@@ -12,9 +12,9 @@ Finally, we are going to create an API that allows a user to delete a given note
 
 ### Add the Function
 
-{%change%} Create a new file in `packages/functions/src/delete.js` and paste the following.
+{%change%} Create a new file in `packages/functions/src/delete.ts` and paste the following.
 
-```js
+```typescript
 import { Table } from "sst/node/table";
 import handler from "@notes/core/handler";
 import dynamoDb from "@notes/core/dynamodb";
@@ -22,16 +22,15 @@ import dynamoDb from "@notes/core/dynamodb";
 export const main = handler(async (event) => {
   const params = {
     TableName: Table.Notes.tableName,
-    // 'Key' defines the partition key and sort key of the item to be removed
     Key: {
       userId: "123", // The id of the author
-      noteId: event.pathParameters.id, // The id of the note from the path
+      noteId: event?.pathParameters?.id, // The id of the note from the path
     },
   };
 
   await dynamoDb.delete(params);
 
-  return { status: true };
+  return JSON.stringify({ status: true });
 });
 ```
 
@@ -41,19 +40,21 @@ This makes a DynamoDB `delete` call with the `userId` & `noteId` key to delete t
 
 Let's add a new route for the delete note API.
 
-{%change%} Add the following below the `PUT /notes{id}` route in `stacks/ApiStack.js`.
+{%change%} Add the following below the `PUT /notes{id}` route in `stacks/ApiStack.ts`.
 
-```js
+```typescript
 "DELETE /notes/{id}": "packages/functions/src/delete.main",
 ```
 
 ### Deploy Our Changes
 
-If you switch over to your terminal, you'll notice that your changes are being deployed.
+If you switch over to your terminal, you will notice that your changes are being deployed.
 
-Note that, you'll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
+{%caution%}
+You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
+{%endcaution%}
 
-You should see that the API stack is being updated.
+You should see that the new API stack has been deployed.
 
 ```bash
 ✓  Deployed:
@@ -68,17 +69,19 @@ Let's test the delete note API.
 
 In a [previous chapter]({% link _chapters/add-an-api-to-get-a-note.md %}) we tested our create note API. It should've returned the new note's id as the `noteId`.
 
-In the **API** tab of the [SST Console]({{ site.old_console_url }}), select the `DELETE /notes/{id}` API.
+{%change%} Run the following in your terminal.
 
-{%change%} Set the `noteId` as the **id** and click **Send**.
+``` bash
+$ curl -X DELETE https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes/<NOTE_ID>
+```
 
-You should see the note being deleted in the response.
+Make sure to replace the id at the end of the URL with the `noteId` from before.
 
-![SST Console delete note API request](/assets/part2/sst-console-delete-note-api-request.png)
+Here we are making a DELETE request to the note that we want to delete. The response should look something like this.
 
-And the note should be removed from the DynamoDB Table as well.
-
-![SST Console note removed in DynamoDB](/assets/part2/sst-console-note-removed-in-dynamodb.png)
+``` json
+{"status":true}
+```
 
 ### Commit the Changes
 

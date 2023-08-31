@@ -10,9 +10,9 @@ ref: report-api-errors-in-react
 
 Now that we have our [React app configured with Sentry]({% link _chapters/setup-error-reporting-in-react.md %}), let's go ahead and start sending it some errors.
 
-So far we've been using the `onError` method in `src/lib/errorLib.js` to handle errors. Recall that it doesn't do a whole lot outside of alerting the error.
+So far we've been using the `onError` method in `src/lib/errorLib.ts` to handle errors. Recall that it doesn't do a whole lot outside of alerting the error.
 
-```js
+```typescript
 export function onError(error) {
   let message = error.toString();
 
@@ -29,24 +29,58 @@ For most errors we simply alert the error message. But Amplify's Auth package do
 
 For API errors we want to report both the error and the API endpoint that caused the error. On the other hand, for Auth errors we need to create an `Error` object because Sentry needs actual errors sent to it.
 
-{%change%} Replace the `onError` method in `src/lib/errorLib.js` with the following:
+{%change%} Replace the `onError` method in `src/lib/errorLib.ts` with the following:
 
-```js
-export function onError(error) {
-  let errorInfo = {};
-  let message = error.toString();
-
-  // Auth errors
-  if (!(error instanceof Error) && error.message) {
-    errorInfo = error;
-    message = error.message;
-    error = new Error(message);
-    // API errors
-  } else if (error.config && error.config.url) {
-    errorInfo.url = error.config.url;
+```typescript
+export function onError(error: any) {
+  if (error === "No current user") {
+    // discard auth errors from non-logged-in user
+    return;
   }
 
-  logError(error, errorInfo);
+  let errorInfo = {} as ErrorInfoType
+  let message = String(error);
+  // typesafe version of our unknown error, always going to
+  // become an object for logging.
+  let err = {}
+
+  if (error instanceof Error) {
+    // It is an error, we can go forth and report it.
+    err = error;
+  } else {
+    if (!(error instanceof Error)
+      && typeof error === 'object'
+      && error !== null) {
+      //  At least it's an object, let's use it.
+      err = error;
+      // Let's cast it as an ErrorInfoType so we can check
+      // a couple more things.
+      errorInfo = error as ErrorInfoType;
+
+      // If it has a message, assume auth error from Amplify Auth
+      if ('message' in errorInfo
+        && typeof errorInfo.message === 'string') {
+        message = errorInfo.message;
+        error = new Error(message);
+      }
+
+      // Found Config, Assume API error from Amplify Axios
+      if ('config' in errorInfo
+        && typeof errorInfo.config === 'object'
+        && 'url' in errorInfo.config
+      ) {
+        errorInfo.url = errorInfo.config['url'];
+      }
+    }
+
+    // If nothing else, make a new error using message from 
+    // the start of all this.
+    if (typeof error !== 'object') {
+      err = new Error(message);
+    }
+  }
+
+  logError(err, errorInfo);
 
   alert(message);
 }

@@ -23,7 +23,7 @@ $ npm run build
 
 ### S3에 업로드
 
-이제 배포하려면 다음 명령을 실행하십시오. 여기서 `YOUR_S3_DEPLOY_BUCKET_NAME`은 [S3 버킷 생성하기]({% link _chapters/create-an-s3-bucket.md %}) 챕터에서 생성한 S3 버킷 이름입니다.
+이제 배포하려면 다음 명령을 실행하십시오. 여기서 `YOUR_S3_DEPLOY_BUCKET_NAME`은 [S3 버킷 생성하기]({% link _archives/create-an-s3-bucket.md %}) 챕터에서 생성한 S3 버킷 이름입니다.
 
 ``` bash
 $ aws s3 sync build/ s3://YOUR_S3_DEPLOY_BUCKET_NAME

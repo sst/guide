@@ -17,20 +17,30 @@ We are going to add a settings page to our app. This is going to allow users to 
 
 To get started let's add our settings page.
 
-{%change%} Create a new file in `src/containers/Settings.js` and add the following.
+{%change%} Create a new file in `src/types/billing.ts` and add the following to define a type for our billing API.
 
-```jsx
-import React, { useState } from "react";
-import { API } from "aws-amplify";
-import { useNavigate } from "react-router-dom";
-import { onError } from "../lib/errorLib";
+```typescript
+export interface BillingType {
+  storage: string;
+  source?: string;
+}
+```
+
+{%change%} Create a new file in `src/containers/Settings.tsx` and add the following.
+
+```tsx
+import { useState } from "react";
 import config from "../config";
+import { API } from "aws-amplify";
+import { onError } from "../lib/errorLib";
+import { useNavigate } from "react-router-dom";
+import { BillingType } from "../types/billing";
 
 export default function Settings() {
   const nav = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
-  function billUser(details) {
+  function billUser(details: BillingType) {
     return API.post("notes", "/billing", {
       body: details,
     });
@@ -40,69 +50,35 @@ export default function Settings() {
 }
 ```
 
-{%change%} Next import this component in the header of `src/Routes.js`.
+{%change%} Next, add the following below the `/signup` route in our `<Routes>` block in `src/Routes.js`.
 
-```js
-import Settings from "./containers/Settings";
-```
-
-{%change%} Add the following below the `/signup` route in our `<Routes>` block in `src/Routes.js`.
-
-```jsx
+```tsx
 <Route path="/settings" element={<Settings />} />
 ```
 
-{%change%} Next add a link to our settings page in the navbar by replacing the `return` statement in `src/App.js` with this.
+{%change%} And import this component in the header of `src/Routes.js`.
 
-{% raw %}
-
-```jsx
-return (
-  !isAuthenticating && (
-    <div className="App container py-3">
-      <Navbar collapseOnSelect bg="light" expand="md" className="mb-3 px-3">
-        <LinkContainer to="/">
-          <Navbar.Brand className="fw-bold text-muted">Scratch</Navbar.Brand>
-        </LinkContainer>
-        <Navbar.Toggle />
-        <Navbar.Collapse className="justify-content-end">
-          <Nav activeKey={window.location.pathname}>
-            {isAuthenticated ? (
-              <>
-                <LinkContainer to="/settings">
-                  <Nav.Link>Settings</Nav.Link>
-                </LinkContainer>
-                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-              </>
-            ) : (
-              <>
-                <LinkContainer to="/signup">
-                  <Nav.Link>Signup</Nav.Link>
-                </LinkContainer>
-                <LinkContainer to="/login">
-                  <Nav.Link>Login</Nav.Link>
-                </LinkContainer>
-              </>
-            )}
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
-        <Routes />
-      </AppContext.Provider>
-    </div>
-  )
-);
+```tsx
+import Settings from "./containers/Settings.tsx";
 ```
 
-{% endraw %}
+Next add a link to our settings page in the navbar.
 
-You'll notice that we added another link in the navbar that only displays when a user is logged in.
+{%change%} Replace the following line in the `return` statement `src/App.tsx`.
 
-```jsx
-<LinkContainer to="/settings">
-  <Nav.Link>Settings</Nav.Link>
-</LinkContainer>
+```tsx
+<Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+```
+
+{%change%} With.
+
+```tsx
+<>
+  <LinkContainer to="/settings">
+    <Nav.Link>Settings</Nav.Link>
+  </LinkContainer>
+  <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+</>
 ```
 
 Now if you head over to your app, you'll see a new **Settings** link at the top. Of course, the page is pretty empty right now.

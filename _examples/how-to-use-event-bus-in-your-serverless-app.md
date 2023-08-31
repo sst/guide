@@ -64,7 +64,7 @@ An SST app is made up of two parts.
 
 {%change%} Replace the `stacks/ExampleStack.ts` with the following.
 
-```ts
+```typescript
 import { Api, EventBus, StackContext } from "sst/constructs";
 
 export function ExampleStack({ stack }: StackContext) {
@@ -93,7 +93,7 @@ Now let's add the API.
 
 {%change%} Add this below the `EventBus` definition in `stacks/ExampleStack.ts`.
 
-```ts
+```typescript
 // Create a HTTP API
 const api = new Api(stack, "Api", {
   defaults: {
@@ -122,7 +122,7 @@ We will create three functions, one handling the `/order` API request, and two f
 
 {%change%} Add a `packages/functions/src/order.ts`.
 
-```ts
+```typescript
 export async function handler() {
   console.log("Order confirmed!");
   return {
@@ -134,7 +134,7 @@ export async function handler() {
 
 {%change%} Add a `packages/functions/src/receipt.ts`.
 
-```ts
+```typescript
 export async function handler() {
   console.log("Receipt sent!");
   return {};
@@ -143,7 +143,7 @@ export async function handler() {
 
 {%change%} Add a `packages/functions/src/shipping.ts`.
 
-```ts
+```typescript
 export async function handler() {
   console.log("Item shipped!");
   return {};
@@ -202,7 +202,7 @@ Now let's publish a event to our EventBus.
 
 {%change%} Replace the `packages/functions/src/order.ts` with the following.
 
-```ts
+```typescript
 import AWS from "aws-sdk";
 import { EventBus } from "sst/node/event-bus";
 
