@@ -13,7 +13,11 @@
 
 ---
 
-Repo for [**SST.dev**](https://sst.dev) and the [SST Guide](https://sst.dev/guide.html). If you are looking for the SST repo, [head over here](https://github.com/sst/sst).
+## About SST.dev
+
+This repo for [**SST.dev**](https://sst.dev) and the [SST Guide](https://sst.dev/guide.html). If you are looking for the SST repo, [head over here](https://github.com/sst/sst).
+
+SST.dev is built with [SST](https://sst.dev) and deployed with [Seed](https://seed.run).
 
 ## SST Guide
 
@@ -44,17 +48,18 @@ It is a single-page React app powered by a serverless CRUD API. We also cover ho
 
 ## Contributing
 
-Thank you for your considering to contribute. [Read more about how you can contribute to SST][contributing].
+[Read more about how you can contribute to the guide][contributing].
 
 ### Running Locally
 
-SST is built using [Jekyll](https://jekyllrb.com). [Follow these steps to install Jekyll](https://jekyllrb.com/docs/installation/).
+SST.dev is a [Jekyll](https://jekyllrb.com) site. [Follow these steps to install Jekyll](https://jekyllrb.com/docs/installation/).
 
 ### Viewing Locally
 
 To install, run the following in the root of the project.
 
 ```bash
+$ pnpm install
 $ bundle install
 ```
 
@@ -92,6 +97,14 @@ The above are run automatically through [Github Actions](https://github.com/sst/
 
 - When a new commit is pushed to master
 - And when a new tag is pushed, the generated eBook is uploaded to S3
+
+### Deploying Locally
+
+To deploy this site. Run:
+
+```bash
+$ npx sst deploy
+```
 
 ## Contributors
 
