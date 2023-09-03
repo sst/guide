@@ -48,12 +48,10 @@ We will be using the following set of technologies and services to build our ser
 - [Bootstrap][Bootstrap]{:target="_blank"} for the UI Kit
 - [Certificate Manager][CM]{:target="_blank"} for SSL
 - [CloudFront][CF]{:target="_blank"} for serving out our app
-- [CloudWatch][CloudWatch]{:target="_blank"} for Lambda and API access logs
 - [Cognito][Cognito]{:target="_blank"} for user authentication and securing our APIs
 - [DynamoDB][DynamoDB]{:target="_blank"} for our database
 - [GitHub][GitHub]{:target="_blank"} for hosting our project repos
 - [Lambda][Lambda]{:target="_blank"} & [API Gateway][APIG]{:target="_blank"} for our serverless API
-- [Netlify][Netlify]{:target="_blank"} for automating React deployments
 - [React Router][RR]{:target="_blank"} for routing
 - [React.js][React]{:target="_blank"} for our single page app
 - [Route 53][R53]{:target="_blank"} for our domain
@@ -112,12 +110,10 @@ We believe this will give you a good foundation on building full-stack productio
 [Bootstrap]: http://getbootstrap.com/
 [CF]: https://aws.amazon.com/cloudfront/
 [CM]: https://aws.amazon.com/certificate-manager/
-[CloudWatch]: https://aws.amazon.com/cloudwatch/
 [Cognito]: https://aws.amazon.com/cognito/
 [DynamoDB]: https://aws.amazon.com/dynamodb/
 [GitHub]: https://github.com/
 [Lambda]: https://aws.amazon.com/lambda/
-[Netlify]: https://netlify.com/
 [R53]: https://aws.amazon.com/route53/
 [RR]: https://github.com/ReactTraining/react-router/
 [React]: https://facebook.github.io/react/
