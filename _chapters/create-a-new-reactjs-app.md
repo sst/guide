@@ -35,12 +35,6 @@ This should take a second to run.
 
 We also want to load the environment variables from our backend. To do this, we’ll be using the [`sst bind`](https://docs.sst.dev/packages/sst#sst-bind) CLI. It'll find the environment variables from our SST app and load it while starting the React development environment. We'll set these environment variables below.
 
-{%change%} Run the following **in the `packages/frontend/` directory**.
-
-```bash
-$ pnpm add --save-dev sst
-```
-
 To use the CLI, we'll add it to our `package.json` scripts.
 
 {%change%} Replace the `dev` script in your `packages/frontend/package.json`.
