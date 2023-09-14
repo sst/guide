@@ -163,7 +163,7 @@ Next, we'll instrument our Lambda functions by wrapping them with the Sentry han
 {%change%} Replace the code in `packages/functions/src/lambda.ts` with this.
 
 ```typescript
-import Sentry from "@sentry/serverless";
+import * as Sentry from "@sentry/serverless";
 
 export const handler = Sentry.AWSLambda.wrapHandler(async (event) => {
   return {
