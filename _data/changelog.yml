@@ -1,4 +1,8 @@
 current:
+  title: "Updating Seed to IAM roles"
+  desc: "Sep 15, 2023: Minor changes to the setting up your project on Seed chapter."
+
+v8-0:
   title: "Updating to TypeScript"
   desc: "Aug 31, 2023: Using TS by default, switching to pnpm, and using Vite instead of Create React App. And archiving old chapters."
 

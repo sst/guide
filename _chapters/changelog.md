@@ -23,9 +23,15 @@ You can get these updates emailed to you via our [newsletter]({% link newsletter
 
 ### Changes
 
-#### [v8.0: {{ site.data.changelog.current.title }}](https://branchv80.archives.sst.dev/) (Current)
+#### [v8.0.1: {{ site.data.changelog.current.title }}](https://branchv801.archives.sst.dev/) (Current)
 
 {{ site.data.changelog.current.desc }}
+
+- [Tutorial changes]({{ site.github_repo }}/compare/v8.0...v8.0.1)
+
+#### [v8.0: {{ site.data.changelog.v8-0.title }}](https://branchv80.archives.sst.dev/)
+
+{{ site.data.changelog.v8-0.desc }}
 
 - [Tutorial changes]({{ site.github_repo }}/compare/v7.4...v8.0)
 - [Demo notes app source]({{ site.sst_demo_repo }}/compare/v1.4...v2.0)
