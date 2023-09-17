@@ -13,7 +13,7 @@ In our [serverless notes app](https://demo.sst.dev) we've used [Cognito User Poo
 The version of the notes app used in this chapter is hosted in a:
 
 - Separate GitHub repository: [**{{ site.frontend_user_mgmt_github_repo }}**]({{ site.frontend_user_mgmt_github_repo }})
-- And can be accessed through: [**https://demo-user-mgmt.sst.dev**](https://demo-user-mgmt.sst.dev)
+- And can be accessed through: [**https://demo-user-mgmt.sst.dev**](https://demo-user-mgmt.sst.dev)  <------ This link is broken ---<<
 
 Let's look at the main changes we need to make to allow users to reset their password.
 
