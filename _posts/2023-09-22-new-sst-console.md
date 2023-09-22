@@ -27,6 +27,12 @@ The SST Console will automatically show you any errors in your Lambda functions 
 
 When the Console starts up, it checks if you are running `sst dev` locally. If so, then it'll show you real-time logs from your local terminal.
 
+### Open source
+
+The Console is built with SST, deployed with [Seed](https://seed.run), and you can [view the source on GitHub](https://github.com/sst/console).
+
+The codebase is also a good example of what a production SST app looks like.
+
 ### Your team and AWS accounts
 
 You can create a workspace in the Console, invite your team, and connect all your AWS accounts. It'll automatically discover your SST apps.
