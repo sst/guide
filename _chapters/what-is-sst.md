@@ -19,7 +19,7 @@ SST makes it easy to build serverless applications by allowing developers to:
 1. Define their infrastructure using AWS CDK which we will cover in a later chapter.
 2. Test their applications live using [Live Lambda Development]({{ site.docs_url }}/live-lambda-development){:target="_blank"}
 3. Debugging with various IDEs
-   - [Debugging with VS Code]({{ site.docs_url }}/live-lambda-development#debugging-with-vscode){:target="_blank"}
+   - [Debugging with VS Code]({{ site.docs_url }}/live-lambda-development#debugging-with-vs-code){:target="_blank"}
    - [Debugging with WebStorm]({{ site.docs_url }}/live-lambda-development#debugging-with-webstorm){:target="_blank"}
    - [Debugging with IntelliJ IDEA]({{ site.docs_url }}/live-lambda-development#debugging-with-intellij-idea){:target="_blank"}
 4. [Web based dashboard]({{ site.docs_url }}/console){:target="_blank"} to manage your apps
