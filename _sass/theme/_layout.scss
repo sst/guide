@@ -154,8 +154,8 @@
       overflow-y: scroll;
 
       @include media-query($on-palm) {
-        padding-left: $spacing-unit / 2;
-        padding-right: $spacing-unit / 2;
+        padding-left: calc($spacing-unit / 2);
+        padding-right: calc($spacing-unit / 2);
       }
 
       .col1 {
@@ -198,7 +198,7 @@
         }
         .social {
           a:not(:last-child) {
-            margin-right: $spacing-unit / 2;
+            margin-right: calc($spacing-unit / 2);
           }
           .github {
             .stars {
@@ -217,8 +217,8 @@
     color: $secondary-text-color;
 
     @include media-query($on-laptop) {
-      padding-left: $spacing-unit / 2;
-      padding-right: $spacing-unit / 2;
+      padding-left: calc($spacing-unit / 2);
+      padding-right: calc($spacing-unit / 2);
     }
 
     @include media-query($on-palm) {
@@ -241,15 +241,15 @@
 
   & > .wrapper-header {
     margin: 0 auto;
-    padding: $spacing-unit / 2 + 5px $spacing-unit 0;
+    padding: calc($spacing-unit / 2 + 5px) $spacing-unit 0;
 
     &:after {
       @extend %bottom-border;
-      margin-top: $spacing-unit / 2 + 5px;
+      margin-top: calc($spacing-unit / 2 + 5px);
     }
 
     @include media-query($on-laptop) {
-      padding: $spacing-unit / 2 $spacing-unit / 2 0;
+      padding: calc($spacing-unit / 2) calc($spacing-unit / 2) 0;
     }
 
     & > .content {
@@ -277,8 +277,8 @@
 
               content: "";
               position: absolute;
-              left: - ($cSize - 28px ) / 2;
-              top: - ($cSize - 28px ) / 2;
+              left: calc(-1 * ($cSize - 28px ) / 2);
+              top: calc(-1 * ($cSize - 28px ) / 2);
               width: $cSize;
               height: $cSize;
             }
@@ -295,7 +295,7 @@
       }
 
       .col2 {
-        margin-left: $spacing-unit / 2;
+        margin-left: calc($spacing-unit / 2);
         display: flex;
         align-items: center;
       }
@@ -319,7 +319,7 @@
           a.links {
             margin: 0;
             display: none;
-            padding: $spacing-unit / 4 0;
+            padding: calc($spacing-unit / 4) 0;
           }
         }
         .col2 {
@@ -428,7 +428,7 @@
   }
 
   section.search {
-    margin-left: $spacing-unit / 2 + 5px;
+    margin-left: calc($spacing-unit / 2) + 5px;
     @extend %search;
 
     @include media-query($on-monitor) {
@@ -630,7 +630,7 @@
     }
 
     a {
-      margin-right: $spacing-unit / 3;
+      margin-right: calc($spacing-unit / 3);
     }
   }
 
@@ -654,7 +654,7 @@
   }
 
   .site-buttons {
-    margin: - 1 * $spacing-unit / 2 + 5px;
+    margin: calc(-1 * 0.5 * $spacing-unit  + 5px);
     padding-left: 5px;
     display: flex;
     flex-wrap: wrap;
@@ -667,7 +667,7 @@
     }
 
     .sst-button {
-      margin: $spacing-unit / 2 - 5px;
+      margin: calc($spacing-unit / 2 - 5px);
       padding: 13px 35px;
       line-height: 30px;
       flex: 1 1 auto;
@@ -761,21 +761,21 @@
 
 .page-content .post-container > .sidebar {
   margin-left: $spacing-unit;
-  padding-top: $spacing-unit / 2;
+  padding-top: calc($spacing-unit / 2);
   flex: 0 0 300px;
   font-size: 14px;
 
   @include media-query($on-laptop) {
     margin-left: 0;
     border-top: 2px solid $grey-color-light;
-    padding-top: $spacing-unit / 2 + 3px;
+    padding-top: calc($spacing-unit / 2 + 3px);
     order: 99;
   }
 
   .context-cta {
     background-color: $brand-color;
     border-radius: 5px;
-    padding: $spacing-unit / 2;
+    padding: calc($spacing-unit / 2);
     color: white;
 
     @include media-query($on-laptop) {
@@ -783,14 +783,14 @@
     }
 
     .header {
-      margin-bottom: $spacing-unit / 2;
+      margin-bottom: calc($spacing-unit / 2);
       padding-left: 98px;
       padding-bottom: 6px;
       position: relative;
 
       img {
         left: 0;
-        top: - (21px + $spacing-unit / 2);
+        top: calc(-1 * 0.5 * $spacing-unit - 21px);
         position: absolute;
         box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25),
                     0 3px 3px rgba(0, 0, 0, 0.125),
@@ -836,7 +836,7 @@
 
   p.section {
     margin-top: $spacing-unit;
-    margin-bottom: $spacing-unit / 2;
+    margin-bottom: calc($spacing-unit / 2);
     font-family: $heading-font-family;
     font-weight: 700;
     a {
@@ -890,7 +890,7 @@
 }
 .post-header {
   margin-bottom: $spacing-unit;
-  padding-bottom: $spacing-unit / 2;
+  padding-bottom: calc($spacing-unit / 2);
   border-bottom: 1px solid $grey-color-light;
 }
 
@@ -975,7 +975,7 @@
   }
 
   .video-wrapper {
-    margin-bottom: $spacing-unit / 2;
+    margin-bottom: calc($spacing-unit / 2);
     position: relative;
     padding-bottom: 56.25%; /* 16:9 */
     height: 0;
@@ -996,7 +996,7 @@
   text-align: center;
 
   @include media-query($on-laptop) {
-    margin-bottom: $spacing-unit / 2;
+    margin-bottom: calc($spacing-unit / 2);
   }
 
   .banners {
@@ -1023,7 +1023,7 @@
 }
 
 .post-closing {
-  margin-top: $spacing-unit / 2;
+  margin-top: calc($spacing-unit / 2);
   text-align: center;
 
   p {
@@ -1075,7 +1075,7 @@
 .post-footer {
   @extend %clearfix;
   margin-top: 3 * $spacing-unit;
-  margin-bottom: $spacing-unit / 2;
+  margin-bottom: calc($spacing-unit / 2);
 
   text-align: center;
 
@@ -1133,7 +1133,7 @@
   padding: $spacing-unit - 5px;
 
   @include media-query($on-palm) {
-    padding: $spacing-unit / 2;
+    padding: calc($spacing-unit / 2);
   }
 
   p {

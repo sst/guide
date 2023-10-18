@@ -207,7 +207,7 @@ div.support-footer {
     border-radius: 5px;
 
     @include media-query($on-palm) {
-      padding: $spacing-unit / 2;
+      padding: $spacing-unit * 0.5;
     }
 
     div.share {
@@ -253,7 +253,7 @@ div.support-footer {
 
       @include media-query($on-monitor) {
         margin-right: 0;
-        margin-bottom: $spacing-unit / 2;
+        margin-bottom: $spacing-unit * 0.5;
         text-align: center;
       }
 
@@ -395,7 +395,7 @@ div.support-footer {
 div.newsletter div.divider {
   $color: lighten($brand-color, 20%);
 
-  margin: $spacing-unit / 2 $spacing-unit - 10px;
+  margin: $spacing-unit * 0.5 $spacing-unit - 10px;
   text-align: center;
   position: relative;
 
@@ -463,12 +463,12 @@ div.standalone-newsletter-form-container {
   margin: 60px 0 100px;
 
   @include media-query($on-palm) {
-    margin: 0 0 $spacing-unit / 2;
+    margin: 0 0 $spacing-unit * 0.5;
   }
 }
 
 div.standalone-newsletter-form {
-  margin-bottom: $spacing-unit / 2;
+  margin-bottom: $spacing-unit * 0.5;
   background-color: $brand-color;
   border-radius: 5px;
   padding: $spacing-unit;
@@ -478,7 +478,7 @@ div.standalone-newsletter-form {
   justify-content: space-between;
 
   @include media-query($on-palm) {
-    padding: $spacing-unit / 2;
+    padding: $spacing-unit * 0.5;
     display: block;
     text-align: center;
   }
@@ -488,7 +488,7 @@ div.standalone-newsletter-form {
 
     @include media-query($on-palm) {
       margin-right: 0;
-      margin-bottom: $spacing-unit / 2;
+      margin-bottom: $spacing-unit * 0.5;
     }
 
     p {
@@ -509,7 +509,7 @@ div.standalone-newsletter-form {
       margin-top: 0 !important;
     }
     .emailoctopus-form-row {
-      margin-bottom: $spacing-unit / 2 !important;
+      margin-bottom: $spacing-unit * 0.5 !important;
     }
   }
 

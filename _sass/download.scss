@@ -3,7 +3,7 @@
 ////////////////
 main > .download-ebook-page {
   margin: 0 auto;
-  padding: 0 $spacing-unit $spacing-unit / 2;
+  padding: 0 $spacing-unit $spacing-unit * 0.5;
   max-width: calc(#{$post-content-width} - (#{$spacing-unit} * 2));
 
   & > .title {
@@ -37,7 +37,7 @@ main > .download-ebook-page {
       position: relative;
 
       @include media-query($on-palm) {
-        margin: $spacing-unit / 2 auto;
+        margin: $spacing-unit * 0.5 auto;
       }
 
       .scroll-content {
@@ -116,13 +116,13 @@ main > .download-ebook-page {
 
     .features {
       flex: 1 1 50%;
-      padding: $spacing-unit / 2 + 5px;
+      padding: $spacing-unit * 0.5 + 5px;
       border-radius: 8px;
       background-color: white;
       border: 1px solid $important-color;
 
       & > p {
-        margin-bottom: $spacing-unit / 2;
+        margin-bottom: $spacing-unit * 0.5;
         color: $secondary-text-color;
       }
 
@@ -184,7 +184,7 @@ main > .download-ebook-page {
           &:nth-child(2) {
             position: absolute;
             left: 50%;
-            margin-left: -1 * $width / 2;
+            margin-left: -1 * $width * 0.5;
           }
 
           @include media-query($on-laptop) {
@@ -221,7 +221,7 @@ main > .download-ebook-page {
         background-color: $brand-color;
         color: white;
         border-radius: 8px;
-        padding: $spacing-unit / 2 $spacing-unit / 2 + 5px $spacing-unit / 2 + 5px;
+        padding: $spacing-unit * 0.5 $spacing-unit * 0.5 + 5px $spacing-unit * 0.5 + 5px;
 
         h3 {
           margin-bottom: 0;
@@ -229,7 +229,7 @@ main > .download-ebook-page {
           font-family: $base-font-family;
         }
         p.copy {
-          margin-bottom: $spacing-unit / 2 + 5px;
+          margin-bottom: $spacing-unit * 0.5 + 5px;
           color: #C3CED2;
           font-size: 14px;
           line-height: 1.375;
@@ -246,7 +246,7 @@ main > .download-ebook-page {
           }
           .main-form {
             flex-grow: 1;
-            gap: $spacing-unit / 2;
+            gap: $spacing-unit * 0.5;
           }
           input[type="email"] {
             padding: 10px;
@@ -289,10 +289,10 @@ main > .download-ebook-page {
 
         .email-octopus-form-row-subscribe {
           margin-top: 0;
-          margin-left: $spacing-unit / 2 + 5px;
+          margin-left: $spacing-unit * 0.5 + 5px;
 
           @include media-query($on-palm) {
-            margin-top: $spacing-unit / 2;
+            margin-top: $spacing-unit * 0.5;
             margin-left: 0;
           }
         }

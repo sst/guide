@@ -58,8 +58,8 @@
   position: absolute;
   bottom: 0;
   left: 50%;
-  margin-left: - $size / 2;
-  margin-bottom: - $size / 2;
+  margin-left: - $size * 0.5;
+  margin-bottom: - $size * 0.5;
   border-radius: 100%;
   //filter: grayscale(100%);
 }
@@ -85,7 +85,7 @@ $img-margin: 15px;
     //filter: grayscale(100%);
   }
   li .post-info {
-    margin-top: $spacing-unit / 2;
+    margin-top: $spacing-unit * 0.5;
     font-size: 15px;
   }
   li .post-info .category {
@@ -105,7 +105,7 @@ $img-margin: 15px;
 }
 
 .blog .post-content .twitter-share {
-  margin-top: $spacing-unit / 2 + 5px;
+  margin-top: $spacing-unit * 0.5 + 5px;
   line-height: 2;
   span {
     margin-right: 4px;

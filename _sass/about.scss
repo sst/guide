@@ -4,7 +4,7 @@
 .home > .about-page {
 
   @include media-query($on-palm) {
-    padding: 0 $spacing-unit / 2;
+    padding: 0 calc($spacing-unit / 2);
   }
 
   .header {
@@ -100,7 +100,7 @@
   }
 
   .products {
-    margin: 0 -1 * $spacing-unit / 2;
+    margin: 0 calc(-1 * $spacing-unit / 2);
 
     display: flex;
     align-items: stretch;
@@ -109,24 +109,24 @@
     @include media-query($on-palm) {
       margin-top: $spacing-unit - 5px;
       display: block;
-      padding: 0 $spacing-unit / 2;
+      padding: 0 calc($spacing-unit / 2);
     }
 
     .product {
       flex: 1 1 auto;
-      margin: 0 $spacing-unit / 2;
+      margin: 0 calc($spacing-unit / 2);
       border-radius: 16px;
       padding: $spacing-unit 2 * $spacing-unit - 10px 2 * $spacing-unit - 5px;
       border: 1px dashed $important-color;
       box-sizing: border-box;
 
       @include media-query($on-monitor) {
-        padding: $spacing-unit / 2;
+        padding: calc($spacing-unit / 2);
       }
 
       @include media-query($on-palm) {
-        margin-bottom: $spacing-unit / 2;
-        padding: $spacing-unit / 2;
+        margin-bottom: calc($spacing-unit / 2);
+        padding: calc($spacing-unit / 2);
 
         &:last-child {
           margin-bottom: 0;
@@ -144,10 +144,10 @@
           style: dashed;
           color: $important-color;
         }
-        margin: $spacing-unit / 2 + 4px 0 $spacing-unit / 2;
+        margin: calc($spacing-unit / 2 + 4px) 0 calc($spacing-unit / 2);
 
         @include media-query($on-palm) {
-          margin: $spacing-unit / 2 0 $spacing-unit / 2 - 3px;
+          margin: calc($spacing-unit / 2) 0 calc($spacing-unit / 2 - 3px);
         }
       }
 
@@ -186,7 +186,7 @@
 
     @include media-query($on-palm) {
       margin-top: 2.5 * $spacing-unit;
-      padding: 2 * $spacing-unit + 10px $spacing-unit / 2 3 * $spacing-unit;
+      padding: 2 * $spacing-unit + 10px calc($spacing-unit / 2) 3 * $spacing-unit;
       border: none;
       box-shadow: 6px 9px 25px rgba(57, 92, 107, 0.3),
                   0px 4px 12px rgba(57, 92, 107, 0.4);
@@ -266,7 +266,7 @@
       }
 
       h5 {
-        margin-top: $spacing-unit / 2;
+        margin-top: calc($spacing-unit / 2);
         margin-bottom: 2px;
         font-family: $base-font-family;
         font-size: 20px;
@@ -288,7 +288,7 @@
         }
       }
       .links {
-        margin-top: $spacing-unit / 2 - 5px;
+        margin-top: calc($spacing-unit / 2 - 5px);
 
         @include media-query($on-palm) {
           margin-top: $spacing-unit - 10px;
@@ -300,7 +300,7 @@
           margin-right: $spacing-unit - 10px;
 
           @include media-query($on-palm) {
-            margin-right: $spacing-unit / 2;
+            margin-right: calc($spacing-unit / 2);
           }
         }
       }
@@ -401,14 +401,14 @@
           padding: $spacing-unit;
         }
         @include media-query($on-monitor) {
-          padding: $spacing-unit / 2;
+          padding: calc($spacing-unit / 2);
         }
       }
       a:nth-child(3) {
         padding-left: 2 * $spacing-unit;
 
         @include media-query($on-monitor) { padding: $spacing-unit; }
-        @include media-query($on-monitor) { padding: $spacing-unit / 2; }
+        @include media-query($on-monitor) { padding: calc($spacing-unit / 2); }
       }
     }
 
@@ -421,7 +421,7 @@
                   0px 4px 12px rgba(57, 92, 107, 0.4);
 
       @include media-query($on-palm) {
-        padding: 0 $spacing-unit / 2 $spacing-unit;
+        padding: 0 calc($spacing-unit / 2) $spacing-unit;
       }
     }
 
@@ -438,7 +438,7 @@
         flex: 0 0 300px - 1.5 * $spacing-unit;
         margin: 0 $spacing-unit - 8px;
         padding-top: $spacing-unit;
-        padding-bottom: $spacing-unit / 2;
+        padding-bottom: calc($spacing-unit / 2);
         text-align: left;
         border-bottom: 1px dashed $important-color;
 

@@ -63,10 +63,10 @@
       $button-margin: 4px;
       $controls-width: 3 * $button-size + 2 * $button-margin;
 
-      padding: 9px 9px + 5px + $controls-width 0 $spacing-unit / 2;
+      padding: 9px 9px + 5px + $controls-width 0 calc($spacing-unit / 2);
     }
 
-    padding: $spacing-unit / 2 $spacing-unit / 2 + 5px + $controls-width 0 $spacing-unit / 2 + 5px;
+    padding: calc($spacing-unit / 2) calc($spacing-unit / 2 + 5px + $controls-width) 0 calc($spacing-unit / 2 + 5px);
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -105,7 +105,7 @@
 
   .code-block {
     margin: 0 $spacing-unit - 10px 0;
-    padding: $spacing-unit / 2 + 3px 0 $spacing-unit - 10px;
+    padding: calc($spacing-unit / 2 + 3px) 0 $spacing-unit - 10px;
 
     color: white;
     font-size: 18px;
@@ -114,8 +114,8 @@
 
     @include media-query($on-palm) {
       font-size: 12px;
-      margin: 0 $spacing-unit / 2;
-      padding: $spacing-unit / 4 0 $spacing-unit / 2;
+      margin: 0 calc($spacing-unit / 2);
+      padding: calc($spacing-unit / 4) 0 calc($spacing-unit / 2);
     }
 
     .token-line {
@@ -168,14 +168,14 @@
     $button-margin: 6px;
     $controls-width: 3 * $button-size + 2 * $button-margin;
 
-    padding: 13px 13px + 5px + $controls-width 0 $spacing-unit / 2 + 3px;
+    padding: 13px 13px + 5px + $controls-width 0 calc($spacing-unit / 2 + 3px);
 
     @include media-query($on-palm) {
       $button-size: 9px;
       $button-margin: 4px;
       $controls-width: 3 * $button-size + 2 * $button-margin;
 
-      padding: 9px 9px + 5px + $controls-width 0 $spacing-unit / 2;
+      padding: 9px 9px + 5px + $controls-width 0 calc($spacing-unit / 2);
     }
 
     .controls {
@@ -194,13 +194,13 @@
   }
   .code-block {
     margin: 0 $spacing-unit - 12px;
-    padding: $spacing-unit / 2 - 8px 0 $spacing-unit - 14px;
+    padding: calc($spacing-unit / 2 - 8px) 0 $spacing-unit - 14px;
     font-size: 14px;
 
     @include media-query($on-palm) {
       font-size: 12px;
-      margin: 0 $spacing-unit / 2;
-      padding: $spacing-unit / 4 0 $spacing-unit / 2;
+      margin: 0 calc($spacing-unit / 2);
+      padding: calc($spacing-unit / 4) 0 calc($spacing-unit / 2);
     }
 
     .token-line {
@@ -256,7 +256,7 @@
     overflow: hidden;
 
     @include media-query($on-laptop) {
-      padding: 0 $spacing-unit / 2 1.5 * $spacing-unit;
+      padding: 0 calc($spacing-unit / 2) 1.5 * $spacing-unit;
     }
     @include media-query($on-palm) {
       overflow: visible;
@@ -265,7 +265,7 @@
   }
 
   .site-announcement {
-    margin: 0 auto $spacing-unit / 2 + 5px;
+    margin: 0 auto calc($spacing-unit / 2 + 5px);
     max-width: 560px;
     display: flex;
     align-items: center;
@@ -361,7 +361,7 @@
   }
 
   .site-description-full {
-    margin: $spacing-unit / 2 + 5px auto 0;
+    margin: calc($spacing-unit / 2 + 5px) auto 0;
     max-width: 600px;
     line-height: 1.7;
     font-size: 28px;
@@ -378,12 +378,12 @@
       font-size: 16px;
     }
     @include media-query($on-palm) {
-      margin-top: $spacing-unit / 2;
+      margin-top: calc($spacing-unit / 2);
     }
   }
 
   .site-command {
-    padding-top: $spacing-unit / 2;
+    padding-top: calc($spacing-unit / 2);
     font-family: $code-font-family;
     font-size: 20px;
 
@@ -444,7 +444,7 @@
     text-align: center;
 
     @include media-query($on-palm) {
-      margin-top: $spacing-unit / 2 + 3px;
+      margin-top: calc($spacing-unit / 2 + 3px);
       display: block;
     }
 
@@ -509,7 +509,7 @@
         margin-left: $spacing-unit;
 
         @include media-query($on-palm) {
-          margin-top: $spacing-unit / 2 + 3px;
+          margin-top: calc($spacing-unit / 2 + 3px);
           margin-left: 0;
         }
       }
@@ -669,7 +669,7 @@
 
 .home > .sections {
   text-align: center;
-  padding: $spacing-unit / 2 $spacing-unit 0;
+  padding: calc($spacing-unit / 2) $spacing-unit 0;
   overflow: hidden;
 
   @include media-query($on-palm) {
@@ -678,7 +678,7 @@
 
   &:after {
     @include media-query($on-palm) {
-      margin-top: $spacing-unit / 2;
+      margin-top: calc($spacing-unit / 2);
       border: none;
     }
   }
@@ -692,7 +692,7 @@
     position: relative;
 
     @include media-query($on-palm) {
-      padding: 0 $spacing-unit / 2;
+      padding: 0 calc($spacing-unit / 2);
     }
 
     h2 {
@@ -826,14 +826,14 @@
     @extend %code-editor;
 
     @include media-query($on-palm) {
-      margin-top: $spacing-unit / 2 - 2px;
+      margin-top: calc($spacing-unit / 2 - 2px);
       width: auto;
     }
   }
 }
 
 .home > .frontend > .timeline {
-  margin: $spacing-unit / 2 auto 0;
+  margin: calc($spacing-unit / 2) auto 0;
   height: 200px;
   @extend %timeline;
 
@@ -876,11 +876,11 @@
   }
   @include media-query($on-palm) {
     &:nth-child(2) {
-      margin-top: $spacing-unit / 2;
+      margin-top: calc($spacing-unit / 2);
       display: block;
     }
     &:last-child {
-      margin-top: $spacing-unit / 2;
+      margin-top: calc($spacing-unit / 2);
       height: $spacing-unit * 2.5;
       visibility: visible;
     }
@@ -896,7 +896,7 @@
 
   @include media-query($on-palm) {
     flex-direction: column;
-    padding: 0 $spacing-unit / 2;
+    padding: 0 calc($spacing-unit / 2);
   }
 
   .code-editor {
@@ -909,7 +909,7 @@
     }
     @include media-query($on-palm) {
       order: 2;
-      margin-top: $spacing-unit / 2 - 3px;
+      margin-top: calc($spacing-unit / 2 - 3px);
       margin-bottom: 0;
     }
   }
@@ -923,7 +923,7 @@
     flex-direction: column;
 
     @include media-query($on-laptop) {
-      flex: 0 0 $spacing-unit / 2 + 10px;
+      flex: 0 0 calc($spacing-unit / 2 + 10px);
 
       .timeline {
         display: none;
@@ -1017,7 +1017,7 @@
   &.apis .copy,
   &.deploy .copy {
     @include media-query($on-palm) {
-      margin-top: $spacing-unit / 2;
+      margin-top: calc($spacing-unit / 2);
     }
   }
 
@@ -1031,7 +1031,7 @@
 
     @include media-query($on-palm) {
       order: 2;
-      margin-top: $spacing-unit / 2 - 3px;
+      margin-top: calc($spacing-unit / 2 - 3px);
       margin-bottom: 0;
       min-width: 0;
       width: 100%;
@@ -1088,7 +1088,7 @@
     $padding-x: 10px;
     $padding-y: 5px;
 
-    margin-top: $spacing-unit / 2 - 3px;
+    margin-top: calc($spacing-unit / 2 - 3px);
     margin-bottom: 0;
   }
 
@@ -1222,7 +1222,7 @@
 }
 
 .home > .learn-more {
-  margin-top: $spacing-unit / 2;
+  margin-top: calc($spacing-unit / 2);
   text-align: center;
 
   @include media-query($on-laptop) {
@@ -1258,7 +1258,7 @@
 
   @include media-query($on-palm) {
     margin-top: $spacing-unit;
-    padding: 0 $spacing-unit / 2;
+    padding: 0 calc($spacing-unit / 2);
   }
 
   &:after {
@@ -1298,7 +1298,7 @@
     }
 
     @include media-query($on-laptop) {
-      margin-bottom: $spacing-unit / 2;
+      margin-bottom: calc($spacing-unit / 2);
     }
 
     span {
@@ -1318,7 +1318,7 @@
     }
 
     li {
-      padding: 0 $spacing-unit / 2 + 5px;
+      padding: 0 calc($spacing-unit / 2 + 5px);
       border-right: 1px dashed $background-color;
       text-align: center;
       width: 300px;
@@ -1334,7 +1334,7 @@
         border-right: none;
 
         @include media-query($on-laptop) {
-          padding-bottom: $spacing-unit / 2;
+          padding-bottom: calc($spacing-unit / 2);
           border-bottom: none;
         }
       }
@@ -1375,7 +1375,7 @@
 
   @include media-query($on-palm) {
     margin: $spacing-unit + 2px auto 0;
-    padding: 0 $spacing-unit / 2;
+    padding: 0 calc($spacing-unit / 2);
   }
 
   & > .content {
@@ -1430,7 +1430,7 @@
       padding: 0;
       position: absolute;
       top: 50%;
-      margin-top: - $size / 2;
+      margin-top: - calc($size / 2);
       width: $size;
       height: $size;
       border-radius: 50%;
@@ -1439,7 +1439,7 @@
       cursor: pointer;
 
       @include media-query($on-palm) {
-        margin-top: - $mSize / 2;
+        margin-top: - calc($mSize / 2);
         width: $mSize;
         height: $mSize;
       }
@@ -1453,8 +1453,8 @@
 
           content: "";
           position: absolute;
-          left: - ($cSize - $mSize ) / 2;
-          top: - ($cSize - $mSize ) / 2;
+          left: calc(-1 * ($cSize - $mSize ) / 2);
+          top: calc(-1 * ($cSize - $mSize ) / 2);
           width: $cSize;
           height: $cSize;
         }
@@ -1470,10 +1470,10 @@
       }
 
       &.prev {
-        left: - $size / 2;
+        left: calc(-1 * $size / 2);
 
         @include media-query($on-palm) {
-          left: - $mSize / 2;
+          left: calc(-1 * $mSize / 2);
         }
 
         img {
@@ -1485,10 +1485,10 @@
         }
       }
       &.next {
-        right: - $size / 2;
+        right: calc(-1 * $size / 2);
 
         @include media-query($on-palm) {
-          right: - $mSize / 2;
+          right: calc(-1 * $mSize / 2);
         }
 
         img {
@@ -1537,7 +1537,7 @@
       text-align: left;
 
       @include media-query($on-palm) {
-        margin-left: $spacing-unit / 2;
+        margin-left: calc($spacing-unit / 2);
       }
 
       p {
@@ -1590,7 +1590,7 @@
     }
   }
   .sst-button {
-    margin-top: $spacing-unit / 2 + 5px;
+    margin-top: calc($spacing-unit / 2 + 5px);
     box-shadow: none;
     padding: {
       left: 2.5 * $spacing-unit;
@@ -1611,7 +1611,7 @@
   padding: 2 * $spacing-unit $spacing-unit 0;
 
   @include media-query($on-laptop) {
-    padding: 2 * $spacing-unit $spacing-unit / 2 0;
+    padding: 2 * $spacing-unit ($spacing-unit * 0.5) 0;
   }
   @include media-query($on-palm) {
     padding-top: 0;
@@ -1746,7 +1746,7 @@
     .main-form {
       flex-grow: 1;
       flex-wrap: nowrap;
-      gap: $spacing-unit / 2;
+      gap: calc($spacing-unit * 0.5);
 
       @include media-query($on-palm) {
         flex-wrap: wrap;
@@ -1771,7 +1771,7 @@
  */
 .home .updates {
   margin: 0 auto;
-  padding: 0 $spacing-unit / 2;
+  padding: 0 calc($spacing-unit * 0.5);
   display: flex;
   align-items: stretch;
 
@@ -1782,7 +1782,7 @@
   .updates-desc {
     flex: 1 1 50%;
     margin: 0;
-    padding: 4 * $spacing-unit + 7px $spacing-unit / 2 0.5 * $spacing-unit + 5px 0;
+    padding: 4 * $spacing-unit + 7px calc($spacing-unit * 0.5) 0.5 * $spacing-unit + 5px 0;
     border-right: 1px solid darken($background-color, 35%);
     text-align: right;
     color: $tertiary-text-color;
@@ -1793,7 +1793,7 @@
     box-sizing: border-box;
 
     @include media-query($on-palm) {
-      padding: $spacing-unit / 2 0;
+      padding: calc($spacing-unit / 2) 0;
       border: none;
       text-align: center;
     }
@@ -1833,7 +1833,7 @@
     }
 
     .copy {
-      margin-top: $spacing-unit / 2;
+      margin-top: $spacing-unit * 0.5;
 
       @include media-query($on-palm) {
         margin: 0;
@@ -1869,7 +1869,7 @@
   margin: 2 * $spacing-unit 0;
 
   @include media-query($on-palm) {
-    margin: $spacing-unit / 2 0 2 * $spacing-unit - 5px;
+    margin: $spacing-unit * 0.5 0 2 * $spacing-unit - 5px;
   }
 
   .chapters {
@@ -1899,7 +1899,7 @@
       padding: $spacing-unit 0 0;
 
       @include media-query($on-laptop) {
-        padding-top: $spacing-unit / 2;
+        padding-top: $spacing-unit * 0.5;
       }
 
       @include media-query($on-palm) {
@@ -1922,7 +1922,7 @@
         }
 
         &:after {
-          margin-top: $spacing-unit / 2;
+          margin-top: $spacing-unit * 0.5;
           content: "";
           display: block;
           border-top: 1px dashed $important-color;
@@ -1941,10 +1941,10 @@
 
       & > ul {
         margin: 0;
-        padding: $spacing-unit / 2 - 3px $spacing-unit 0;
+        padding: $spacing-unit * 0.5 - 3px $spacing-unit 0;
 
         @include media-query($on-laptop) {
-          padding: $spacing-unit / 2 $spacing-unit / 2 0;
+          padding: $spacing-unit * 0.5 $spacing-unit * 0.5 0;
         }
 
         & > li {

@@ -4,13 +4,13 @@
 main > .careers-page {
 
   @include media-query($on-palm) {
-    padding: 0 $spacing-unit / 2;
+    padding: 0 $spacing-unit * 0.5;
   }
 
   .header {
 
     h1 {
-      margin: 0 auto $spacing-unit / 2;
+      margin: 0 auto $spacing-unit * 0.5;
       max-width: 570px;
       padding-top: $spacing-unit;
       font-size: 40px;
@@ -35,7 +35,7 @@ main > .careers-page {
 
     @include media-query($on-palm) {
       h1 {
-        padding-top: $spacing-unit / 2;
+        padding-top: $spacing-unit * 0.5;
         font-size: 34px;
       }
     }
