@@ -250,6 +250,11 @@ $ npx create-vite@latest web --template react
 $ cd web
 $ npm install
 ```
+For a react `TypeScript` project
+
+```bash
+npx create-vite@latest web --template react-ts
+```
 
 This sets up our React app in the `web/` directory.
 
