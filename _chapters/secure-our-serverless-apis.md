@@ -51,8 +51,10 @@ Let's change that.
 userId: event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
 ```
 
-{%change%} Do the same in the `packages/functions/src/get.ts`, `packages/functions/src/update.ts`,
-and `packages/functions/src/delete.ts`.
+{%change%} Do the same in these files:
+- `packages/functions/src/get.ts`,
+- `packages/functions/src/update.ts`,
+- and `packages/functions/src/delete.ts`
 
 {%change%} In `packages/functions/src/list.ts` find this line instead.
 
