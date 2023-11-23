@@ -51,23 +51,11 @@ Let's change that.
 userId: event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
 ```
 
-{%change%} Do the same in the `packages/functions/src/get.ts`.
+{%change%} Do the same in these files:
 
-```typescript
-userId: event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
-```
-
-{%change%} And in the `packages/functions/src/update.ts`.
-
-```typescript
-userId: event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
-```
-
-{%change%} In `packages/functions/src/delete.ts` as well.
-
-```typescript
-userId: event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
-```
+- `packages/functions/src/get.ts`
+- `packages/functions/src/update.ts`
+- `packages/functions/src/delete.ts`
 
 {%change%} In `packages/functions/src/list.ts` find this line instead.
 
