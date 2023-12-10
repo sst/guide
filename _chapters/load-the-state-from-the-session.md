@@ -88,7 +88,7 @@ Since loading the user session is an asynchronous process, we want to ensure tha
 
 We'll conditionally render our app based on the `isAuthenticating` flag.
 
-{%change%} Replace the `return` statement in `src/App.js` with the following.
+{%change%} Replace the `return` statement in `src/App.tsx` with the following.
 
 {% raw %}
 
