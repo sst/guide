@@ -17,7 +17,7 @@ We are going to create a single page app using [React.js](https://facebook.githu
 {%change%} Run the following command **in the `packages/` directory**.
 
 ```bash
-$ pnpm create vite frontend --template react-ts
+$ pnpm create vite frontend -- --template react-ts
 ```
 
 This will create your new project in the `frontend/` directory.
