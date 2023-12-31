@@ -42,20 +42,20 @@ return {
 
 ```typescript
 return {
-    bucket,
-    table,
+  bucket,
+  table,
 };
 ```
 
 This will allow us to reference the S3 bucket in other stacks.
 
-Note, learn more about sharing resources between stacks [here](https://docs.sst.dev/constructs/Stack#sharing-resources-between-stacks){:target="_blank"}.
+Note, learn more about sharing resources between stacks [here](https://docs.sst.dev/constructs/Stack#sharing-resources-between-stacks){:target="\_blank"}.
 
 ### Deploy the App
 
 If you switch over to your terminal, you will notice that your changes are being deployed.
 
-Note that, you will need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
+Note that, you will need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
 
 You should see that the storage stack has been updated.
 
