@@ -42,14 +42,14 @@ return {
 
 ```typescript
 return {
-  bucket,
-  table,
+    bucket,
+    table,
 };
 ```
 
 This will allow us to reference the S3 bucket in other stacks.
 
-Note, learn more about sharing resources between stacks [here](https://docs.sst.dev/constructs/Stack#sharing-resources-between-stacks){:target="\_blank"}.
+Note, learn more about sharing resources between stacks [here](https://docs.sst.dev/constructs/Stack#sharing-resources-between-stacks){:target="_blank"}.
 
 ### Deploy the App
 
