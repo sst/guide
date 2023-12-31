@@ -19,8 +19,11 @@ export function ApiStack({ stack, app }: StackContext) {
 {%change%} Then, add the following above the `defaults: {` line in `stacks/ApiStack.ts`.
 
 ```typescript
-customDomain: app.stage === "prod" ? "<Your Domain>" : undefined,
+customDomain: app.stage === "prod" ? "<api.yourdomainhere.com>" : undefined,
 ```
+{%note%}
+Without specifying the api subdomain, the deployment will attempt to create duplicate A (IPv4) and AAAA (IPv6) DNS records and error.  
+{%endnote%}
 
 This tells SST that we want to use a custom domain **if** we are deploying to the `prod` stage. We are not setting one for our `dev` stage, or any other stage.
 
