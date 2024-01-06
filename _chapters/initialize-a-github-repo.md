@@ -53,7 +53,7 @@ $ git add .
 $ git commit -m "First commit" 
 ```
 
-{%change%} Link it to the repo you created on GitHub by running the following, replacing **<REPO_URL>** with your repository URL.
+{%change%} Link it to the repo you created on GitHub by running the following, replacing <REPO_URL> with your repository URL.
 
 ``` bash
 $ git branch -M main
