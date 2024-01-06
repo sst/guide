@@ -55,7 +55,7 @@ Note, learn more about sharing resources between stacks [here](https://docs.sst.
 
 If you switch over to your terminal, you will notice that your changes are being deployed.
 
-Note that, you will need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
+Note that, you will need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
 
 You should see that the storage stack has been updated.
 
