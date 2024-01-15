@@ -50,7 +50,7 @@ export default function Settings() {
 }
 ```
 
-{%change%} Next, add the following below the `/signup` route in our `<Routes>` block in `src/Routes.js`.
+{%change%} Next, add the following below the `/signup` route in our `<Routes>` block in `src/Routes.tsx`.
 
 ```tsx
 <Route path="/settings" element={<Settings />} />
