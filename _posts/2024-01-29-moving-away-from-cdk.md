@@ -80,9 +80,9 @@ The CloudFormation template defines *what* infrastructure you want to create. It
 
 You give AWS CloudFormation a list of resources to create. It'll internally call the AWS SDK to create a resource. Then poll it until it's complete. It'll also maintain state of the resources it's managing.
 
-Both the process it runs and the state it maintains are completely opaque and handled on the AWS side. CloudFormation is not open source and does not run locally. You cannot customize it as a user and as we'll see later, neither can CDK.
+Both the process it runs and the state it maintains are completely opaque and handled on the AWS side. CloudFormation does not run locally. You cannot customize it as a user and as we'll see later, neither can CDK.
 
-> CloudFormation is not open source and does not run locally.
+> CloudFormation is a black box that does not run locally.
 
 As a framework author that's trying to build a better developer experience on AWS, this limits what we can do. And this turns out to be a deal-breaker. We'll look at why below. We'll also look at the alternative from the Terraform world.
 
