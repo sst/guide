@@ -578,10 +578,14 @@ I'm sure you have a lot of questions. I'm going to try and add to this section a
 
 Yes it's open source and it'll run on your local machine without you having to sign up for anything Pulumi or Terraform related.
 
-#### 2. Isn't Terraform not open source anymore?
+#### 2. Our company only uses AWS, can we still use Ion?
+
+Yes. While Ion will support multiple providers, if you are using AWS it will deploy completely to your AWS account. There won't be any other services or providers involved outside of the one you choose.
+
+#### 3. Isn't Terraform not open source anymore?
 
 There's been some recent fallout from the Terraform licensing change but that applies to the Terraform engine itself. Ion doesn't use this.
 
-#### 3. What happens to the SST Console?
+#### 4. What happens to the SST Console?
 
 It'll support Ion and SST v2 apps. We have some plans for making it easy to self-host the Console. We'll share more details once we launch Ion.
