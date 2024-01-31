@@ -412,7 +412,7 @@ Also this happened.
 
 [<img src="/assets/blog/sst-pulumi-tweet.png" alt="SST Pulumi tweet" style="width: min(100%, 480px);"/>](https://twitter.com/funcOfJoe/status/1690115160877535232)
 
-We decided to build a prototype a couple of months ago. We worked with the Pulumi team and founders closely to understand how their system works. We figured out how we could create a fully open source deployment experience with the Pulumi deployment engine and Terraform's providers.
+We decided to build a prototype a couple of months ago. We worked with the Pulumi team and founders closely to understand how their system works. We figured out how we could create a fully open source deployment experience with the Pulumi deployment engine and their bridged Terraform providers.
 
 You simply install the SST CLI globally, create an `sst.config.ts`, and run `sst deploy`. There's nothing else to install, there are no `node_modules`, no CDK version conflicts, no services to sign up for, and no black boxes. Everything runs on your local machine.
 
@@ -422,7 +422,7 @@ You simply install the SST CLI globally, create an `sst.config.ts`, and run `sst
 
 In Ion you define your infrastructure almost exactly like you do in SST today. Except instead of using CDK underneath it uses a TS version of the underlying Terraform provider. Note that Terraform providers are written in Go and are basically calls to the AWS SDK. There's some additional code to make sure these run safely, so you aren't hammering AWS.
 
-When you run `sst deploy`, those resources make a call to an embedded Pulumi engine that makes a call to the Terraform provider, and this makes the AWS SDK calls to create your resources.
+When you run `sst deploy`, those resources make a call to an embedded Pulumi engine that makes a call to their bridged Terraform provider, and this makes the AWS SDK calls to create your resources. A _bridged Terraform provider_ is a Pulumi provider that's programmatically bridged to the underlying Terraform Go provider.
 
 If you are familiar with Terraform you might be wondering, isn't Terraform like CloudFormation templates in that you write JSON or HCL. When you deploy these templates through the Terraform engine, it translates these to calls to the Terraform Go providers for those resources. In Ion's case we don't use the Terraform engine, we use Pulumi.
 
