@@ -75,7 +75,7 @@ We'll be working exclusively **in the `packages/frontend/` directory** for the r
 <meta name="description" content="A simple note taking app" />
 ```
 
-{%change%} And **remove** the following lines that reference the original favicon.
+{%change%} And **remove** the following line that references the original favicon.
 
 ```html
 <link rel="icon" type="image/svg+xml" href="/vite.svg" />
