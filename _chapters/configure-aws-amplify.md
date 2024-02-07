@@ -50,7 +50,7 @@ const config = {
 export default config;
 ```
 
-Here we are loading the environment that are set from our serverless backend. We did this back when we were first [setting up our React app]({% link _chapters/create-a-new-reactjs-app.md %}).
+Here we are loading the environment variables that are set from our serverless backend. We did this back when we were first [setting up our React app]({% link _chapters/create-a-new-reactjs-app.md %}).
 
 ### Add AWS Amplify
 
