@@ -32,7 +32,7 @@ Now that the secret is stored in AWS Parameter Store, we can add it into our sta
 const STRIPE_SECRET_KEY = new Config.Secret(stack, "STRIPE_SECRET_KEY");
 ```
 
-{%change%} Import `Config` in `stacks/ApiStack.js`. Replace the following.
+{%change%} Import `Config` in `stacks/ApiStack.ts`. Replace the following.
 
 ```typescript
 import { Api, StackContext, use } from "sst/constructs";
