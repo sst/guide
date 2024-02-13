@@ -18,7 +18,7 @@ This is going to be a fairly long post, so here's an outline of what we'll be co
      1. [CFN Is a Black Box](#1-cfn-is-a-black-box)
      2. [CDK Is Not IaC, It’s a CFN Hack](#2-cdk-is-not-iac-its-a-cfn-hack)
    - [Practical Problems](#practical-problems)
-     1. [Linking Resources](1-linking-resources)
+     1. [Linking Resources](#1-linking-resources)
      2. [Cyclical Dependencies](#2-cyclical-dependencies)
      3. [Export in Use](#3-export-in-use)
      4. [Swallowing Errors](#4-swallowing-errors)
