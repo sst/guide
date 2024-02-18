@@ -46,6 +46,12 @@ This is going to be a fairly long post, so here's an outline of what we'll be co
 8. [What’s Our Goal](#whats-our-goal)
 9. [FAQ](#faq)
 
+We also covered this post on a livestream.
+
+<div class="youtube-container">
+  <iframe src="https://www.youtube-nocookie.com/embed/4jphEjFIys8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 ---
 
 # What Is Ion?
