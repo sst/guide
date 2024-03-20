@@ -25,6 +25,7 @@ description: "Build modern full-stack serverless applications on AWS with Next.j
       3. Go from idea to IPO!
     </h4>
 
+    <!--
     <h6 class="site-command">
       <a data-text="npm create sst@latest" class="command">
         <span>$ npm create sst</span>
@@ -34,16 +35,24 @@ description: "Build modern full-stack serverless applications on AWS with Next.j
         </span>
       </a>
     </h6>
+    -->
 
     <div class="controls">
       <a href="https://youtu.be/JY_d0vf-rfw" class="sst-button secondary" target="_blank">
         <i class="fa fa-youtube-play" aria-hidden="true"></i>
         <span>Learn More</span>
       </a>
-      <a class="sst-button primary" href="{{ site.docs_url }}">
+      <a class="sst-button primary" href="https://ion.sst.dev/docs/">
         Get Started
       </a>
     </div>
+
+    <h6 class="sst2-notice">
+      <a href="{{ site.docs_url }}">
+        Get started with SST v2 instead 
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+      </a>
+    </h6>
 
   </div>
 
