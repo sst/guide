@@ -28,6 +28,14 @@ export default {
         errorPage: "404.html",
         buildOutput: "_site",
         buildCommand: "bundle install && bundle exec jekyll build",
+        //        assets: {
+        //          fileOptions: [
+        //            {
+        //              files: ["**/*.js", "**/*.css"],
+        //              cacheControl: "private,no-cache,no-store,must-revalidate",
+        //            },
+        //          ],
+        //        },
       });
 
       // Redirect serverless-stack.com to sst.dev
