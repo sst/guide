@@ -96,7 +96,7 @@ import { Amplify } from "aws-amplify";
 import config from "./config.ts";
 ```
 
-Amplify has a [2 year old bug](https://github.com/vitejs/vite/issues/1502#issuecomment-758822680) that needs a workaround to use it with your frontend.  
+Amplify has a [3 year old bug](https://github.com/vitejs/vite/issues/1502#issuecomment-758822680) that needs a workaround to use it with your frontend.  
 
 {%change%} Add the following at the end of your `<head>` tags in `frontend/index.html`.
 
