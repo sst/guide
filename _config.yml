@@ -77,7 +77,7 @@ permalink: /blog/:title:output_ext
 stats:
   newsletter: "90,000"
   newsletter_short: "90k"
-  discord: "10000"
+  discord: "10k"
   github: "20400"
   github_short: "20k"
 
