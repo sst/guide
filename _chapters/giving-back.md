@@ -36,7 +36,7 @@ If you've found this guide helpful please consider helping us out by doing the f
 
 - [**Give us a Star on GitHub**]({{ site.sst_github_repo }})
 
-  We rely on our GitHub repo for everything from hosting this site to code samples and comments. [Starring our repo]({{ site.sst_github_repo }}) helps us get the word out.
+  We rely on our GitHub repo for everything from hosting this site to code samples and comments.
 
 - **Sharing this guide**
 

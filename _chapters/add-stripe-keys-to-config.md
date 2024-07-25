@@ -23,7 +23,7 @@ Let's also add the Stripe.js packages
 {%change%} Run the following **in the `packages/frontend/` directory**.
 
 ```bash
-$ pnpm add --save @stripe/stripe-js
+$ npm install @stripe/stripe-js
 ```
 
 And load the Stripe config in our settings page.

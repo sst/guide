@@ -53,12 +53,3 @@ A CDK app is made up of multiple stacks. Or more specifically, multiple instance
 When you run `cdk synth`, it converts these stacks into CloudFormation templates. And when you run `cdk deploy`, it'll submit these to CloudFormation. CloudFormation creates these stacks and all the resources that are defined in them.
 
 It's fairly straightforward. The key bit here is that even though we are using CloudFormation internally, we are not working directly with the YAML or JSON templates anymore.
-
-### CDK and SST
-
-[SST]({{ site.sst_github_repo }}){:target="_blank"} comes with a list of [higher-level CDK constructs]({{ site.docs_url }}/constructs){:target="_blank"} designed to make it easy to build serverless apps. They are easy to get started with, but also allow you to customize them. It also comes with a local development environment that we will be relying on through this guide. So when you run:
-
-- `sst build`, it runs `cdk synth` internally
-- `pnpm sst dev` or `pnpm sst deploy`, it runs `cdk deploy`
-
-Now we are ready to create our first SST app.

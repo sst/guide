@@ -3,7 +3,7 @@ layout: post
 title: What is SST?
 date: 2021-08-17 00:00:00
 lang: en
-description: The SST makes it easy to build serverless applications. It's based on AWS CDK and allows developers to test their applications live.
+description: SST is a framework that makes it easy to build modern full-stack applications on your own infrastructure.
 ref: what-is-sst
 comments_id: comments-for-what-is-sst/2468
 ---
@@ -14,17 +14,13 @@ Since these services run on AWS, it can be tricky to test and debug them locally
 
 To solve these issues we created the [SST]({{ site.sst_github_repo }}){:target="_blank"}.
 
-SST makes it easy to build serverless applications by allowing developers to:
+SST makes it easy to build full-stack applications by allowing developers to:
 
-1. Define their infrastructure using AWS CDK which we will cover in a later chapter.
-2. Test their applications live using [Live Lambda Development]({{ site.docs_url }}/live-lambda-development){:target="_blank"}
-3. Debugging with various IDEs
-   - [Debugging with VS Code]({{ site.docs_url }}/live-lambda-development#debugging-with-vs-code){:target="_blank"}
-   - [Debugging with WebStorm]({{ site.docs_url }}/live-lambda-development#debugging-with-webstorm){:target="_blank"}
-   - [Debugging with IntelliJ IDEA]({{ site.docs_url }}/live-lambda-development#debugging-with-intellij-idea){:target="_blank"}
-4. [Web based dashboard]({{ site.docs_url }}/console){:target="_blank"} to manage your apps
-5. [Deploy to multiple environments and regions]({{ site.docs_url }}/deploying-your-app#deploying-to-a-stage){:target="_blank"}
-6. Use [higher-level constructs]({{ site.docs_url }}/packages/resources){:target="_blank"} designed specifically for serverless apps
-7. Configure Lambda functions with JS and TS (using [esbuild](https://esbuild.github.io/){:target="_blank"}), Go, Python, C#, and F#
+1. Define their _entire_ infrastructure in code
+2. Use [higher-level components]({{ site.ion_url }}/docs/components){:target="_blank"} designed for modern full-stack apps
+3. Test their applications [Live]({{ site.ion_url }}/docs/live){:target="_blank"}
+4. Debugging with your IDEs
+5. Manage their apps with a [web based dashboard]({{ site.ion_url }}/docs/console){:target="_blank"}
+6. Deploy to multiple environments and regions
 
 Before we start creating our application, let's look at the _infrastructure as code_ concept in a bit more detail.

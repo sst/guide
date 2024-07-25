@@ -180,6 +180,8 @@ extra-backend:
       url: /archives/what-is-iam.html
     - page: What is an ARN
       url: /archives/what-is-an-arn.html
+    - page: What is AWS CDK?
+      url: /archives/what-is-aws-cdk.html
     - page: What is AWS AppSync
       url: /archives/what-is-aws-appsync.html
     - page: Cognito user pool vs identity pool

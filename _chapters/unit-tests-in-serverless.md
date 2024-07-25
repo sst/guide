@@ -3,68 +3,30 @@ layout: post
 title: Unit Tests in Serverless
 date: 2021-07-17 00:00:00
 lang: en
-description: In this chapter we look at how to test the infrastructure and the Lambda functions in our serverless app. We use SST's built in test command to help us write and run our tests.
+description: In this chapter we look at how to write unit tests in our serverless apps using SST's CLI.
 ref: unit-tests-in-serverless
 comments_id: unit-tests-in-serverless/173
 ---
 
-Our serverless app is made up of two big parts; the code that defines our infrastructure and the code that powers our Lambda functions. We'd like to be able to test both of these.
+In this chapter we'll look at how to write unit tests for our serverless app. Typically you might want to test some of your _business logic_.
 
-On the infrastructure side, we want to make sure the right type of resources are being created. So we don't mistakenly deploy some updates.
+The template we are using comes with a setup to help with that. It uses [Vitest](https://vitest.dev){:target="_blank"} for this.
 
-On the Lambda function side, we have some simple business logic that figures out exactly how much to charge our user based on the number of notes they want to store. We want to make sure that we test all the possible cases for this before we start charging people.
+### Writing Tests
 
-SST comes with built in support for writing and running tests. It uses [Vitest](https://vitest.dev){:target="_blank"} internally for this.
+We are going to test the business logic that we added in the [previous chapter]({% link _chapters/add-an-api-to-handle-billing.md %}) to compute how much to bill a user.
 
-### Testing CDK Infrastructure
+{%change%} Create a new file in `packages/core/src/billing/test/index.test.ts` and add the following.
 
-Let's start by writing a test for the CDK infrastructure in our app. We are going to keep this fairly simple for now.
-
-{%change%} Add Vitest to the workspace. Run the following **in the project root**.
-
-```bash
-$ pnpm add --save-dev --workspace-root vitest
-```
-
-{%change%} Add the following to `stacks/test/StorageStack.test.ts`.
-
-```typescript
-import { it } from "vitest";
-import { initProject } from "sst/project";
-import { App, getStack } from "sst/constructs";
-import { StorageStack } from "../StorageStack";
-import { Template } from "aws-cdk-lib/assertions";
-
-it("Test StorageStack", async () => {
-  await initProject({});
-  const app = new App({ mode: "deploy" });
-  // WHEN
-  app.stack(StorageStack);
-  // THEN
-  const template = Template.fromStack(getStack(StorageStack));
-  template.hasResourceProperties("AWS::DynamoDB::Table", {
-    BillingMode: "PAY_PER_REQUEST",
-  });
-});
-```
-
-This is a very simple CDK test that checks if our storage stack creates a DynamoDB table and that the table's billing mode is set to `PAY_PER_REQUEST`. This is the default setting in SST's [`Table`]({{ site.docs_url }}/constructs/Table){:target="_blank"} construct. This test is making sure that we don't change this setting by mistake.
-
-### Testing Lambda Functions
-
-We are also going to test the business logic in our Lambda functions.
-
-{%change%} Create a new file in `packages/core/test/cost.test.ts` and add the following.
-
-```typescript
-import { expect, test } from "vitest";
-import { calculateCost } from "../src/cost";
+```ts
+import { test, expect } from "vitest";
+import { Billing } from "../";
 
 test("Lowest tier", () => {
   const storage = 10;
 
   const cost = 4000;
-  const expectedCost = calculateCost(storage);
+  const expectedCost = Billing.compute(storage);
 
   expect(cost).toEqual(expectedCost);
 });
@@ -73,7 +35,7 @@ test("Middle tier", () => {
   const storage = 100;
 
   const cost = 20000;
-  const expectedCost = calculateCost(storage);
+  const expectedCost = Billing.compute(storage);
 
   expect(cost).toEqual(expectedCost);
 });
@@ -82,7 +44,7 @@ test("Highest tier", () => {
   const storage = 101;
 
   const cost = 10100;
-  const expectedCost = calculateCost(storage);
+  const expectedCost = Billing.compute(storage);
 
   expect(cost).toEqual(expectedCost);
 });
@@ -92,32 +54,33 @@ This should be straightforward. We are adding 3 tests. They are testing the diff
 
 ### Run Tests
 
-Now let's add a test script.
+Now let's run these tests.
 
-{%change%} Add the following to the `scripts` in the `package.json` in your **project root**.
-
-```typescript
-"test": "sst bind vitest run",
-```
-
-And we can run our tests by using the following command **in the root** of our project.
+{%change%} Run the following in the **`packages/core/` directory**.
 
 ```bash
-$ pnpm test
+$ npm test
 ```
 
 You should see something like this:
 
 ```bash
- ✓ packages/core/test/cost.test.js (3)
- ✓ stacks/test/StorageStack.test.js (1)
+✓ src/billing/test/index.test.ts (3)
+  ✓ Lowest tier
+  ✓ Middle tier
+  ✓ Highest tier
 
-Test Files  2 passed (2)
-     Tests  4 passed (4)
-      Time  3.75s (in thread 91ms, 4116.79%)
+Test Files  1 passed (1)
+     Tests  3 passed (3)
 ```
 
-And that's it! We have unit tests all configured. These tests are fairly simple but should give you an idea of how to add more in the future. The key being that you are testing both your infrastructure and your functions.
+Internally this is running `sst shell vitest`. The [`sst shell`]({{ site.ion_url }}/docs/reference/cli/#shell){:target="_blank"} CLI connects any linked resources. This ensures that your tests have the same kind of access as the rest of your application code.
+
+{%info%}
+You'll need to Ctrl-C to quit the test runner. It's useful to have when you are working on them as it'll reload your tests. 
+{%endinfo%}
+
+And that's it! We have unit tests all configured. These tests are fairly simple but should give you an idea of how to add more in the future.
 
 ### Commit the Changes
 

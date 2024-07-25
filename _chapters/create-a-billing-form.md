@@ -13,7 +13,7 @@ Now our settings page is going to have a form that will take a user's credit car
 {%change%} Run the following **in the `packages/frontend/` directory**.
 
 ```bash
-$ pnpm add --save @stripe/react-stripe-js
+$ npm install @stripe/react-stripe-js
 ```
 
 Next let's create our billing form component.

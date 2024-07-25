@@ -17,26 +17,27 @@ Start by installing the Stripe npm package.
 {%change%} Run the following **in the `packages/functions/` directory** of our project.
 
 ```bash
-$ pnpm add --save stripe
+$ npm install stripe
 ```
 
 {%change%} Create a new file in `packages/functions/src/billing.ts` with the following.
 
-```typescript
+```ts
 import Stripe from "stripe";
-import { Config } from "sst/node/config";
-import handler from "@notes/core/handler";
-import { calculateCost } from "@notes/core/cost";
+import { Resource } from "sst";
+import { Util } from "@notes/core/util";
+import { Billing } from "@notes/core/billing";
 
-export const main = handler(async (event) => {
+export const main = Util.handler(async (event) => {
   const { storage, source } = JSON.parse(event.body || "{}");
-  const amount = calculateCost(storage);
+  const amount = Billing.compute(storage);
   const description = "Scratch charge";
 
-  // Load our secret key
-  const stripe = new Stripe(Config.STRIPE_SECRET_KEY, {
-    apiVersion: "2023-10-16",
-  });
+  const stripe = new Stripe(
+    // Load our secret key
+    Resource.StripeSecretKey.value,
+    { apiVersion: "2024-06-20" }
+  );
 
   await stripe.charges.create({
     source,
@@ -53,28 +54,34 @@ Most of this is fairly straightforward but let's go over it quickly:
 
 - We get the `storage` and `source` from the request body. The `storage` variable is the number of notes the user would like to store in his account. And `source` is the Stripe token for the card that we are going to charge.
 
-- We are using a `calculateCost(storage)` function (that we are going to add soon) to figure out how much to charge a user based on the number of notes that are going to be stored.
+- We are using a `Billing.compute(storage)` function, that we are going to add soon; to figure out how much to charge a user based on the number of notes that are going to be stored.
 
-- We create a new Stripe object using our Stripe Secret key. We are getting this from the environment variable that we configured in the [previous chapter]({% link _chapters/handling-secrets-in-sst.md %}). At the time of this guide's writing, we are using `apiVersion` `2023-10-16` but you can check the [Stripe documentation](https://stripe.com/docs/api/versioning){:target="_blank"} for the latest version.
+- We create a new Stripe object using our Stripe Secret key. We are getting this from the secret that we configured in the [previous chapter]({% link _chapters/handling-secrets-in-sst.md %}). At the time of writing, we are using `apiVersion` `2024-06-20` but you can check the [Stripe docs](https://stripe.com/docs/api/versioning){:target="_blank"} for the latest version.
 
-- Finally, we use the `stripe.charges.create` method to charge the user and respond to the request if everything went through successfully.
+- Finally, we use the `stripe.charges.create()` function to charge the user and respond to the request if everything went through successfully.
 
-Note, if you are testing this from India, you'll need to add some shipping information as well. Check out the [details from our forums](https://discourse.sst.dev/t/test-the-billing-api/172/20){:target="_blank"}.
+{%note%}
+If you are testing this from India, you'll need to add some shipping information as well. Check out the [details in our forums](https://discourse.sst.dev/t/test-the-billing-api/172/20){:target="_blank"}.
+{%endnote%}
 
 ### Add the Business Logic
 
-Now let's implement our `calculateCost` method. This is primarily our _business logic_.
+Now let's implement our `Billing.compute` function. This is primarily the _business logic_ in our app.
 
-{%change%} Create a `packages/core/src/cost.ts` and add the following.
+{%change%} Create a `packages/core/src/billing/index.ts` and add the following.
 
-```typescript
-export function calculateCost(storage: number) {
-  const rate = storage <= 10 ? 4 : storage <= 100 ? 2 : 1;
-  return rate * storage * 100;
+```ts
+export module Billing {
+  export function compute(storage: number) {
+    const rate = storage <= 10 ? 4 : storage <= 100 ? 2 : 1;
+    return rate * storage * 100;
+  }
 }
 ```
 
-This is basically saying that if a user wants to store 10 or fewer notes, we'll charge them $4 per note. For 11 to 100 notes, we'll charge $2 and any more than 100 is $1 per note. Since Stripe expects us to provide the amount in pennies (the currency’s smallest unit) we multiply the result by 100.
+A _module_ is a good way to organize our business logic. You want to create modules for the various _domains_ in your app. This follows some basic principles of [Domain-driven design](https://en.wikipedia.org/wiki/Domain-driven_design){:target="_blank"}.
+
+The `compute` function is basically saying that if a user wants to store 10 or fewer notes, we'll charge them $4 per note. For 11 to 100 notes, we'll charge $2 and any more than 100 is $1 per note. Since Stripe expects us to provide the amount in pennies (the currency’s smallest unit) we multiply the result by 100.
 
 Clearly, our serverless infrastructure might be cheap but our service isn't!
 
@@ -82,26 +89,25 @@ Clearly, our serverless infrastructure might be cheap but our service isn't!
 
 Let's add a new route for our billing API.
 
-{%change%} Add the following below the `DELETE /notes/{id}` route in `stacks/ApiStack.ts`.
+{%change%} Add the following below the `DELETE /notes/{id}` route in `infra/api.ts`.
 
-```typescript
-"POST /billing": "packages/functions/src/billing.main",
+```ts
+api.route("POST /billing", "packages/functions/src/billing.main");
 ```
 
 ### Deploy Our Changes
 
 If you switch over to your terminal, you will notice that your changes are being deployed.
 
-{%caution%}
-You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
-{%endcaution%}
+{%info%}
+You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
+{%endinfo%}
 
 You should see that the new API stack has been deployed.
 
 ```bash
-✓  Deployed:
-   StorageStack
-   ApiStack
++  Complete
+   Api: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
    ...
 ```
 
@@ -114,7 +120,7 @@ We'll be using the same CLI from [a few chapters ago]({% link _chapters/secure-o
 {%change%} Run the following in your terminal.
 
 ```bash
-$ pnpm dlx aws-api-gateway-cli-test \
+$ npx aws-api-gateway-cli-test \
 --username='admin@example.com' \
 --password='Passw0rd!' \
 --user-pool-id='<USER_POOL_ID>' \

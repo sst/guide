@@ -67,7 +67,7 @@ Let's install the npm package.
 {%change%} Run the following **in the `packages/frontend/` directory**.
 
 ```bash
-$ pnpm add --save-dev amazon-cognito-identity-js
+$ npm install amazon-cognito-identity-js
 ```
 
 The flow here is pretty simple:

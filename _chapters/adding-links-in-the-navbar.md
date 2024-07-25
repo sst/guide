@@ -55,8 +55,8 @@ To fix this we need a component that works with React Router and React Bootstrap
 {%change%} Run the following command **in the `packages/frontend/` directory**.
 
 ```bash
-$ pnpm add --save react-router-bootstrap
-$ pnpm add --save-dev @types/react-router-bootstrap
+$ npm install react-router-bootstrap
+$ npm install -D @types/react-router-bootstrap
 ```
 
 {%change%} We will now wrap our links with the `LinkContainer`. Replace the `App` function component in your `src/App.tsx` with this.

@@ -36,14 +36,10 @@ setup-sst:
       subchapters:
         - page: What is Infrastructure as Code?
           url: /chapters/what-is-infrastructure-as-code.html
-        - page: What is AWS CDK?
-          url: /chapters/what-is-aws-cdk.html
     - page: Create an SST app
       url: /chapters/create-an-sst-app.html
     - page: Create a Hello World API
       url: /chapters/create-a-hello-world-api.html
-    - page: Initialize a GitHub repo
-      url: /chapters/initialize-a-github-repo.html
 
 setup-sst-backend:
   title: Create your AWS resources
@@ -223,12 +219,12 @@ automating-deployments:
     - page: Creating a CI/CD pipeline for serverless
       url: /chapters/creating-a-ci-cd-pipeline-for-serverless.html
       subchapters:
-      - page: Setting up your project on Seed
-        url: /chapters/setting-up-your-project-on-seed.html
+      - page: Setting up the SST Console
+        url: /chapters/setting-up-the-sst-console.html
 #      - page: Configure secrets in Seed
 #        url: /chapters/configure-secrets-in-seed.html
-      - page: Deploying through Seed
-        url: /chapters/deploying-through-seed.html
+      - page: Deploying Through the SST Console
+        url: /chapters/deploying-through-the-sst-console.html
 
 #monitor-debug-errors:
 #  title: Monitoring and debugging

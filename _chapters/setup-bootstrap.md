@@ -17,8 +17,8 @@ We also need a couple of icons in our application. We'll be using the [React Ico
 {%change%} Run the following command **in your `packages/frontend/` directory**.
 
 ```bash
-$ pnpm add --save bootstrap react-bootstrap react-icons
-$ pnpm add --save-dev @types/bootstrap @types/react-bootstrap
+$ npm install bootstrap react-bootstrap react-icons
+$ npm install -D @types/bootstrap @types/react-bootstrap
 ```
 
 This installs the packages and dependencies to the `package.json` of your React app.

@@ -26,10 +26,10 @@ For reference, here is what we have so far.
 
 Our users make a request to our serverless API. It starts by hitting our API Gateway endpoint. And depending on the endpoint we request, it'll forward that request to the appropriate Lambda function.
 
-In terms of access control, our API Gateway endpoint is allowed to invoke the Lambda functions we listed in the routes of our `stacks/ApiStack.ts`. And if you'll recall, our Lambda functions are allowed to connect to our DynamoDB tables.
+In terms of access control, our API Gateway endpoint is allowed to invoke the Lambda functions we listed in the routes of our `infra/api.ts`. And if you'll recall, our Lambda functions are allowed to connect to our DynamoDB tables.
 
-```typescript
-bind: [table],
+```ts
+link: [table],
 ```
 
 For uploading files, our users will directly upload them to the [S3 bucket]({% link _chapters/create-an-s3-bucket-in-sst.md %}). While we'll look at how our frontend React app uploads files later in the guide, in this section we need to make sure that we secure access to it.

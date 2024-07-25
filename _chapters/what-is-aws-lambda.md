@@ -50,13 +50,24 @@ The package size refers to all your code necessary to run your function. This in
 
 Finally here is what a Lambda function using Node.js looks like.
 
-![Anatomy of a Lambda Function image](/assets/anatomy-of-a-lambda-function.png)
+```js
+export const handler = async (event, context) => {
+  // Do work
 
-Here `myHandler` is the name of our Lambda function. The `event` object contains all the information about the event that triggered this Lambda. In the case of an HTTP request it'll be information about the specific HTTP request. The `context` object contains info about the runtime our Lambda function is executing in. After we do all the work inside our Lambda function, we simply call the `callback` function with the results (or the error) and AWS will respond to the HTTP request with it.
+  return {
+    statusCode: 200,
+    body: "Hello World!"
+  };
+};
+```
+
+Here `handler` is the name of our Lambda function. It's an `async` function. The `event` object contains all the information about the event that triggered this Lambda. In the case of an HTTP request it'll be information about the specific HTTP request. The `context` object contains info about the runtime our Lambda function is executing in.
+
+After we do all the work inside our Lambda function, we simply return. If this function is connected to an API Gateway, your can return the response HTTP status code and body.
 
 ### Packaging Functions
 
-Lambda functions need to be packaged and sent to AWS. This is usually a process of compressing the function and all its dependencies and uploading it to an S3 bucket. And letting AWS know that you want to use this package when a specific event takes place. To help us with this process we use the [SST]({{ site.sst_github_repo }}). We will go over this in detail later on in this guide.
+Lambda functions need to be packaged and sent to AWS. This is usually a process of compressing the function and all its dependencies and uploading it to an S3 bucket. And letting AWS know that you want to use this package when a specific event takes place. To help us with this process we use the [SST]({{ site.ion_url }}). We will go over this in detail later on in this guide.
 
 ### Execution Model
 
@@ -70,14 +81,17 @@ The above execution model makes Lambda functions effectively stateless. This mea
 
 However, as noted in the optimization above, AWS will hang on to an existing container for a few minutes and use that to respond to any requests. So for that container instance, the code around the Lambda function will only be invoked once. While the actual Lambda function will be invoked for each request.
 
-For example, the `createNewDbConnection` method below is called once per container instance and not every time the Lambda function is invoked. The `myHandler` function on the other hand is called on every invocation.
+For example, the `createNewDbConnection` method below is called once per container instance and not every time the Lambda function is invoked. The `handler` function on the other hand is called on every invocation.
 
 ```js
 var dbConnection = createNewDbConnection();
 
-exports.myHandler = function (event, context, callback) {
+export const handler = async (event, context) => {
   var result = dbConnection.makeQuery();
-  callback(null, result);
+  return {
+    statusCode: 200,
+    body: JSON.stringify(result)
+  };
 };
 ```
 

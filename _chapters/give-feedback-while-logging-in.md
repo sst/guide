@@ -96,7 +96,7 @@ And let's add a couple of styles to animate our loading icon.
 
 .LoaderButton .spinning {
   margin-right: 7px;
-  top: 2px;
+  margin-bottom: 1px;
   animation: spin 1s infinite linear;
 }
 
