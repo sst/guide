@@ -23,7 +23,7 @@ You can get these updates emailed to you via our [newsletter]({% link newsletter
 
 ### Changes
 
-#### [v9.0: {{ site.data.changelog.current.title }}](https://branchv9.archives.sst.dev/) (Current)
+#### [v9.0: {{ site.data.changelog.current.title }}](https://branchv90.archives.sst.dev/) (Current)
 
 {{ site.data.changelog.current.desc }}
 
