@@ -1,4 +1,8 @@
 current:
+  title: "Migrate to Ion"
+  desc: "Jul 25, 2024: Migrating away from CDK to Terraform with SST Ion v0.1."
+
+v8-0-1:
   title: "Updating Seed to IAM roles"
   desc: "Sep 15, 2023: Minor changes to the setting up your project on Seed chapter."
 
