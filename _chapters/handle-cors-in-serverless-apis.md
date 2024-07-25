@@ -4,7 +4,7 @@ title: Handle CORS in Serverless APIs
 date: 2021-08-17 00:00:00
 lang: en
 ref: handle-cors-in-serverless-apis
-description: In this chapter we'll look at how to configure CORS in our serverless API. We'll be adding these settings in our SST Api construct and in our Lambda function responses.
+description: In this chapter we'll look at how to configure CORS in our serverless API. We'll be adding these settings in our SST ApiGatewayV2 component and in our Lambda function responses.
 comments_id: handle-cors-in-serverless-apis/2175
 ---
 
@@ -46,28 +46,21 @@ And our browser won't show us the HTTP response. This can make debugging our API
 
 ### CORS in API Gateway
 
-The SST [`Api`]({{ site.docs_url }}/constructs/Api){:target="_blank"} construct that we are using enables CORS by default.
+The [`ApiGatewayV2`]({{ site.ion_url }}/docs/component/aws/apigatewayv2/){:target="_blank"} component that we are using enables CORS by default.
 
-```typescript
-new Api(this, "Api", {
-  // Enabled by default
-  cors: true,
-  routes: {
-    "GET /notes": "functions/list.main",
-  },
+```ts
+new sst.aws.ApiGatewayV2("Api", {
+  cors: true
 });
 ```
 
-You can further configure the specifics if necessary. You can [read more about this here]({{ site.docs_url }}/constructs/Api#cors){:target="_blank"}.
+You can further configure the specifics if necessary. You can [read more about this here]({{ site.ion_url }}/docs/component/aws/apigatewayv2#cors){:target="_blank"}.
 
 ```typescript
-new Api(this, "Api", {
+new sst.aws.ApiGatewayV2("Api", {
   cors: {
-    allowMethods: ["get"],
-  },
-  routes: {
-    "GET /notes": "functions/list.main",
-  },
+    allowMethods: ["GET"]
+  }
 });
 ```
 
@@ -79,7 +72,7 @@ Next, we need to add the CORS headers in our Lambda function response.
 
 {%change%} Replace the `return` statement in our `packages/core/src/handler.ts`.
 
-```typescript
+```ts
 return {
   body,
   statusCode,
@@ -88,7 +81,7 @@ return {
 
 {%change%} With the following.
 
-```typescript
+```ts
 return {
   body,
   statusCode,

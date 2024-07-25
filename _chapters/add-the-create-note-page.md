@@ -19,6 +19,7 @@ First we are going to create the form for a note. It'll take some content and a 
 ```tsx
 import React, {useRef, useState} from "react";
 import Form from "react-bootstrap/Form";
+import Stack from "react-bootstrap/Stack";
 import {useNavigate} from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
 import config from "../config";
@@ -68,15 +69,17 @@ export default function NewNote() {
           <Form.Label>Attachment</Form.Label>
           <Form.Control onChange={handleFileChange} type="file" />
         </Form.Group>
-        <LoaderButton
-          size="lg"
-          type="submit"
-          variant="primary"
-          isLoading={isLoading}
-          disabled={!validateForm()}
-        >
-          Create
-        </LoaderButton>
+        <Stack>
+          <LoaderButton
+            size="lg"
+            type="submit"
+            variant="primary"
+            isLoading={isLoading}
+            disabled={!validateForm()}
+          >
+            Create
+          </LoaderButton>
+        </Stack>
       </Form>
     </div>
   );

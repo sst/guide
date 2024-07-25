@@ -12,16 +12,19 @@ Now that we [created a note]({% link _chapters/add-an-api-to-create-a-note.md %}
 
 ### Add the Function
 
-{%change%} Create a new file in `packages/functions/src/get.ts` in your project root with the following:
+{%change%} Create a new file in `packages/functions/src/get.ts` with the following:
 
-```typescript
-import { Table } from "sst/node/table";
-import handler from "@notes/core/handler";
-import dynamoDb from "@notes/core/dynamodb";
+```ts
+import { Resource } from "sst";
+import { Util } from "@notes/core/util";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { GetCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 
-export const main = handler(async (event) => {
+const dynamoDb = DynamoDBDocumentClient.from(new DynamoDBClient({}));
+
+export const main = Util.handler(async (event) => {
   const params = {
-    TableName: Table.Notes.tableName,
+    TableName: Resource.Notes.name,
     // 'Key' defines the partition key and sort key of
     // the item to be retrieved
     Key: {
@@ -30,7 +33,7 @@ export const main = handler(async (event) => {
     },
   };
 
-  const result = await dynamoDb.get(params);
+  const result = await dynamoDb.send(new GetCommand(params));
   if (!result.Item) {
     throw new Error("Item not found.");
   }
@@ -40,33 +43,31 @@ export const main = handler(async (event) => {
 });
 ```
 
-This follows exactly the same structure as our previous `create.ts` function. The major difference here is that we are doing a `dynamoDb.get(params)` to get a note object given the `userId` (still hardcoded) and `noteId` that's passed in through the request.
+This follows exactly the same structure as our previous `create.ts` function. The major difference here is that we are doing a `GetCommand(params)` to get a note object given the `userId` (still hardcoded) and `noteId` that's passed in through the request.
 
 ### Add the route
 
 Let's add a new route for the get note API.
 
-{%change%} Add the following below the `POST /notes` route in `stacks/ApiStack.ts`.
+{%change%} Add the following below the `POST /notes` route in `infra/api.ts`.
 
-```typescript
-"GET /notes/{id}": "packages/functions/src/get.main",
+```ts
+api.route("GET /notes/{id}", "packages/functions/src/get.main");
 ```
 
 ### Deploy Our Changes
 
 If you switch over to your terminal, you will notice that your changes are being deployed.
 
-{%caution%}
-You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
-{%endcaution%}
+{%info%}
+You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
+{%endinfo%}
 
 You should see that the new API stack has been deployed.
 
 ```bash
-✓  Deployed:
-   StorageStack
-   ApiStack
-   ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
++  Complete
+   Api: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
 ```
 
 ### Test the API

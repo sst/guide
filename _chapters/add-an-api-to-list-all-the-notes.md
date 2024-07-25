@@ -14,14 +14,17 @@ Now we are going to add an API that returns a list of all the notes a user has. 
 
 {%change%} Create a new file in `packages/functions/src/list.ts` with the following.
 
-```typescript
-import { Table } from "sst/node/table";
-import handler from "@notes/core/handler";
-import dynamoDb from "@notes/core/dynamodb";
+```ts
+import { Resource } from "sst";
+import { Util } from "@notes/core/util";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { QueryCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 
-export const main = handler(async (event) => {
+const dynamoDb = DynamoDBDocumentClient.from(new DynamoDBClient({}));
+
+export const main = Util.handler(async (event) => {
   const params = {
-    TableName: Table.Notes.tableName,
+    TableName: Resource.Notes.name,
     // 'KeyConditionExpression' defines the condition for the query
     // - 'userId = :userId': only return items with matching 'userId'
     //   partition key
@@ -33,7 +36,7 @@ export const main = handler(async (event) => {
     },
   };
 
-  const result = await dynamoDb.query(params);
+  const result = await dynamoDb.send(new QueryCommand(params));
 
   // Return the matching list of items in response body
   return JSON.stringify(result.Items);
@@ -46,27 +49,25 @@ This is pretty much the same as our `get.ts` except we use a condition to only r
 
 Let's add the route for this new endpoint.
 
-{%change%} Add the following above the `POST /notes` route in `stacks/ApiStack.ts`.
+{%change%} Add the following above the `POST /notes` route in `infra/api.ts`.
 
-```typescript
-"GET /notes": "packages/functions/src/list.main",
+```ts
+api.route("GET /notes", "packages/functions/src/list.main");
 ```
 
 ### Deploy Our Changes
 
 If you switch over to your terminal, you will notice that your changes are being deployed.
 
-{%caution%}
-You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
-{%endcaution%}
+{%info%}
+You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
+{%endinfo%}
 
 You should see that the new API stack has been deployed.
 
 ```bash
-✓  Deployed:
-   StorageStack
-   ApiStack
-   ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
++  Complete
+   Api: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
 ```
 
 ### Test the API
@@ -79,7 +80,7 @@ Let's test list all notes API.
 $ curl https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com/notes
 ```
 
-Again, replacing the example URL with your `ApiEndpoint` value.
+Again, replacing the example URL with your `Api` value.
 
 Since we are making a simple GET request, we could also go to this URL directly in your browser.
 

@@ -10,19 +10,9 @@ comments_id: review-our-app-architecture/2178
 
 So far we've [deployed our simple Hello World API]({% link _chapters/create-a-hello-world-api.md %}), [created a database (DynamoDB)]({% link _chapters/create-a-dynamodb-table-in-sst.md %}), and [created an S3 bucket for file uploads]({% link _chapters/create-an-s3-bucket-in-sst.md %}). We are ready to start working on our backend API but let's get a quick sense of how the aforementioned pieces fit together.
 
-### Hello World API Architecture
-
-Here's what was built initially when we created the SST boilerplate application with its Hello World API.
-
-![Serverless Hello World API architecture](/assets/diagrams/serverless-hello-world-api-architecture.png)
-
-API Gateway handles our main `/` endpoint, sending GET requests made to this to our default `services/functions/lambda.js` Lambda function.
-
 ### Notes App API Architecture
 
-Then we added DynamoDB and S3 to the mix. We will also be adding a few other Lambda functions.
-
-So our new notes app backend architecture will look something like this.
+Our notes app backend will look something like this.
 
 ![Serverless public API architecture](/assets/diagrams/serverless-public-api-architecture.png)
 

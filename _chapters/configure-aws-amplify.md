@@ -17,7 +17,7 @@ To do this we'll be using a library called [AWS Amplify](https://github.com/aws/
 {%change%} Run the following command **in the `packages/frontend/` directory**.
 
 ```bash
-$ pnpm add --save aws-amplify@^5
+$ npm install aws-amplify@^5
 ```
 
 This installs the NPM package and adds the dependency to the `package.json` of your React app..

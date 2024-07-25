@@ -17,148 +17,121 @@ We are going to create a single page app using [React.js](https://facebook.githu
 {%change%} Run the following command **in the `packages/` directory**.
 
 ```bash
-$ pnpm create vite frontend -- --template react-ts
+$ npm create vite@latest frontend -- --template react-ts
 ```
 
+{%note%}
+Make sure you use the extra `--` in the command.
+{%endnote%}
+
 This will create your new project in the `frontend/` directory.
+
+{%change%} Let's update the name of the package in the `packages/frontend/package.json`. Replace this:
+
+```diff
+- "name": "frontend",
++ "name": "@notes/frontend",
+```
+
+Make sure to use the name of your app instead of `notes`. 
 
 {%change%} Now install the dependencies.
 
 ```bash
 $ cd frontend
-$ pnpm install
+$ npm install
 ```
 
 This should take a second to run.
 
-### Loading SST Environment Variables
+We also need to make a small change to our Vite config to bundle our frontend.
 
-We also want to load the environment variables from our backend. To do this, we’ll be using the [`sst bind`](https://docs.sst.dev/packages/sst#sst-bind) CLI. It'll find the environment variables from our SST app and load it while starting the React development environment. We'll set these environment variables below.
+{%change%} Add the following below the `plugins: [react()],` line in `packages/frontend/vite.config.ts`.
 
-{%change%} Run the following **in the `packages/frontend/` directory**.
-
-```bash
-$ pnpm add --save-dev sst
-```
-
-To use the CLI, we'll add it to our `package.json` scripts.
-
-{%change%} Replace the `dev` script in your `packages/frontend/package.json`.
-
-```typescript
-"dev": "vite",
-```
-
-{%change%} With.
-
-```typescript
-"dev": "sst bind vite",
+```ts
+build: {
+  // NOTE: Needed when deploying
+  chunkSizeWarningLimit: 800,
+},
 ```
 
 ### Add the React App to SST
 
-We are going to be deploying our React app to AWS. To do that we'll be using the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite){:target="_blank"} construct.
+We are going to be deploying our React app to AWS. To do that we'll be using the SST [`StaticSite`]({{ site.ion_url }}/docs/component/aws/static-site/){:target="_blank"} component.
 
-{%change%} Create a new file in `stacks/FrontendStack.ts` and add the following.
+{%change%} Create a new file in `infra/web.ts` and add the following.
 
-```typescript
-import { StackContext, StaticSite, use } from "sst/constructs";
-import { ApiStack } from "./ApiStack";
-import { AuthStack } from "./AuthStack";
-import { StorageStack } from "./StorageStack";
+```ts
+import { api } from "./api";
+import { bucket } from "./storage";
+import { userPool, identityPool, userPoolClient } from "./auth";
 
-export function FrontendStack({ stack, app }: StackContext) {
-  const { api } = use(ApiStack);
-  const { auth } = use(AuthStack);
-  const { bucket } = use(StorageStack);
+const region = aws.getRegionOutput().name;
 
-  // Define our React app
-  const site = new StaticSite(stack, "ReactSite", {
-    path: "packages/frontend",
-    buildCommand: "pnpm run build",
-    buildOutput: "dist",
-    // Pass in our environment variables
-    environment: {
-      VITE_API_URL: api.url,
-      VITE_REGION: app.region,
-      VITE_BUCKET: bucket.bucketName,
-      VITE_USER_POOL_ID: auth.userPoolId,
-      VITE_USER_POOL_CLIENT_ID: auth.userPoolClientId,
-      VITE_IDENTITY_POOL_ID: auth.cognitoIdentityPoolId || "",
-    },
-  });
-
-  // Show the url in the output
-  stack.addOutputs({
-    SiteUrl: site.url,
-  });
-}
+export const frontend = new sst.aws.StaticSite("Frontend", {
+  path: "packages/frontend",
+  build: {
+    output: "dist",
+    command: "npm run build",
+  },
+  environment: {
+    VITE_REGION: region,
+    VITE_API_URL: api.url,
+    VITE_BUCKET: bucket.name,
+    VITE_USER_POOL_ID: userPool.id,
+    VITE_IDENTITY_POOL_ID: identityPool.id,
+    VITE_USER_POOL_CLIENT_ID: userPoolClient.id,
+  },
+});
 ```
-
-We are creating a new stack in SST. We could've used one of the existing stacks but this allows us to show how to connect stacks together.
 
 We are doing a couple of things of note here:
 
 1. We are pointing our `StaticSite` construct to the `packages/frontend/` directory where our React app is.
 2. We are passing in the outputs from our other stacks as [environment variables in Vite](https://vitejs.dev/guide/env-and-mode.html#env-variables){:target="_blank"}. This means that we won't have to hard code them in our React app. The `VITE_*` prefix is a convention Vite uses to say that we want to access these in our frontend code.
-3. And finally, we are outputting out the URL of our React app.
 
 ### Adding to the app
 
-Let's add this new stack to the rest of our app.
+Let's add this to our config.
 
-Open `sst.config.ts` and add the following.
 
-{%change%} Replace the `stacks` function with:
+{%change%} Add this below the `await import("./infra/api");` line in your `sst.config.ts`.
 
-```typescript
-stacks(app) {
-  app
-    .stack(StorageStack)
-    .stack(ApiStack)
-    .stack(AuthStack)
-    .stack(FrontendStack);
-},
-```
-
-{%change%} And add the following import.
-
-```typescript
-import { FrontendStack } from "./stacks/FrontendStack";
+```ts
+await import("./infra/web");
 ```
 
 ### Deploy Our Changes
 
 If you switch over to your terminal, you will notice that your changes are being deployed.
 
-{%caution%}
+{%info%}
 You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
-{%endcaution%}
+{%endinfo%}
 
 ```bash
-✓  Deployed:
++  Complete
+   Api: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
+   Frontend: https://d1wyq46yoha2b6.cloudfront.net
    ...
-   FrontendStack
 ```
 
-### Start the React App
+### Starting the React App
 
-Let’s start our React development environment.
+The `sst dev` CLI will automatically start our React frontend by running `npm run dev`. It also passes in the environment variables that we have configured above.
 
-{%change%} In the `packages/frontend/` directory run.
+![sst dev CLI starts frontend](/assets/part2/sst-dev-cli-starts-frontend.png)
 
-```bash
-$ pnpm run dev
-```
+You can click on **Frontend** in the sidebar or navigate to it.
 
 This should show where your frontend is running locally.
 
 ```bash
-  VITE v4.4.9  ready in 227 ms
+VITE v5.3.4  ready in 88 ms
 
-  ➜  Local:   http://127.0.0.1:5173/
-  ➜  Network: use --host to expose
-  ➜  press h to show help
+➜  Local:   http://127.0.0.1:5173/
+➜  Network: use --host to expose
+➜  press h + enter to show help
 ```
 
 {%info%}

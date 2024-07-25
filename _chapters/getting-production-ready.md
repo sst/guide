@@ -17,22 +17,21 @@ We are now going to deploy our app to prod. You can go ahead and stop the local 
 {%change%} Run the following **in your project root**.
 
 ```bash
-$ pnpm sst deploy --stage prod
+$ npx sst deploy --stage production
 ```
 
 This command will take a few minutes as it'll deploy your app to a completely new environment. Recall that we are deploying to a separate prod environment because we don't want to affect our users while we are actively developing our app. This ensures that we have a separate local dev environment and a separate prod environment.
 
 {%info%}
-The `prod` name that we are using is arbitrary. We can call it `production` or `live`. SST just uses the string internally to create a new version of your app.
+The `production` name that we are using is arbitrary. We can call it `prod` or `live`. SST just uses the string internally to create a new version of your app.
 {%endinfo%}
 
 At the end of the deploy process you should see something like this.
 
 ```bash
-✓  Deployed:
-   StorageStack
-   ApiStack
-   FrontendStack
++  Complete
+   Api: https://7qdwu0iuga.execute-api.us-east-1.amazonaws.com
+   Frontend: https://d1wyq16hczgtjw.cloudfront.net
    ...
 ```
 
@@ -40,19 +39,19 @@ At the end of the deploy process you should see something like this.
 
 We also need to configure out secrets for production. You'll recall we had previously [configured secrets for our local stage]({% link _chapters/handling-secrets-in-sst.md %}).
 
-We'll do the same here but for `prod`.
+We'll do the same here but for `production`.
 
 {%change%} Run the following **in your project root**.
 
 ```bash
-$ pnpm sst secrets set --stage prod STRIPE_SECRET_KEY <YOUR STRIPE SECRET TEST KEY>
+$ npx sst secret set --stage production StripeSecretKey <YOUR_STRIPE_SECRET_TEST_KEY>
 ```
 
 {%note%}
 For this guide we are using the same Stripe secret key in production but you'll likely be using different values in production.
 {%endnote%}
 
-You can run `pnpm sst secrets list` to see the secrets for the current stage.
+You can run `npx sst secret list --stage production` to see the secrets for prod.
 
 Our full-stack serverless app is almost ready to go. You can play around with the prod version.
 

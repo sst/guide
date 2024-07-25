@@ -10,7 +10,7 @@ comments_id: further-reading/209
 
 Once you've completed the guide, you are probably going to use SST for your next project. To help you along the way we try to compile a list of docs that you can use as a reference. The following can be used to drill down in detail for some of the technologies and services used in this guide.
 
-- [SST Documentation]({{ site.docs_url }}): Documentation for SST.
+- [SST Documentation]({{ site.ion_url }}): Documentation for SST
 
 - [DynamoDB, explained](https://www.dynamodbguide.com): A Primer on the DynamoDB NoSQL database
 
@@ -26,6 +26,6 @@ Once you've completed the guide, you are probably going to use SST for your next
 
 - [Vitest Docs](https://vitest.dev/guide/): The official Vitest docs
 
-- [Seed Docs](https://seed.run/docs/): The official Seed docs
+- [SST Console Docs]({{ site.ion_url }}/docs/console/): The SST Console docs
 
 If you have found any other guides or tutorials helpful in building your serverless app, feel free to edit this page and submit a PR. Or you can let us know via the comments.

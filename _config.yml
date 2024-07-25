@@ -56,6 +56,7 @@ survey_url: "https://serverless-stack.typeform.com/to/xiPdCW"
 google_analytics: "UA-3536629-11"
 
 docs_url: "https://docs.sst.dev"
+ion_url: "https://ion.sst.dev"
 v1_conf_url: "https://v1conf.sst.dev"
 console_url: "https://console.sst.dev"
 old_console_url: "https://old.console.sst.dev"
@@ -78,8 +79,8 @@ stats:
   newsletter: "90,000"
   newsletter_short: "90k"
   discord: "10k"
-  github: "20400"
-  github_short: "20k"
+  github: "21000"
+  github_short: "21k"
 
 collections:
   chapters:

@@ -15,7 +15,7 @@ To help people stay up to date with the changes, we run the [SST Newsletter]({% 
 - Outlines the recent updates to SST
 - Never sent out more than once a month
 - One click unsubscribe
-- And you get the entire guide as a 1000 page ebook
+- And you get the entire guide as a 300 page ebook
 
 You can also <a target="_blank" href="{{ site.twitter_url }}">follow us on Twitter</a>.
 

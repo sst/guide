@@ -14,21 +14,24 @@ Finally, we are going to create an API that allows a user to delete a given note
 
 {%change%} Create a new file in `packages/functions/src/delete.ts` and paste the following.
 
-```typescript
-import { Table } from "sst/node/table";
-import handler from "@notes/core/handler";
-import dynamoDb from "@notes/core/dynamodb";
+```ts
+import { Resource } from "sst";
+import { Util } from "@notes/core/util";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DeleteCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 
-export const main = handler(async (event) => {
+const dynamoDb = DynamoDBDocumentClient.from(new DynamoDBClient({}));
+
+export const main = Util.handler(async (event) => {
   const params = {
-    TableName: Table.Notes.tableName,
+    TableName: Resource.Notes.name,
     Key: {
       userId: "123", // The id of the author
       noteId: event?.pathParameters?.id, // The id of the note from the path
     },
   };
 
-  await dynamoDb.delete(params);
+  await dynamoDb.send(new DeleteCommand(params));
 
   return JSON.stringify({ status: true });
 });
@@ -40,19 +43,19 @@ This makes a DynamoDB `delete` call with the `userId` & `noteId` key to delete t
 
 Let's add a new route for the delete note API.
 
-{%change%} Add the following below the `PUT /notes{id}` route in `stacks/ApiStack.ts`.
+{%change%} Add the following below the `PUT /notes{id}` route in `infra/api.ts`.
 
-```typescript
-"DELETE /notes/{id}": "packages/functions/src/delete.main",
+```ts
+api.route("DELETE /notes/{id}", "packages/functions/src/delete.main");
 ```
 
 ### Deploy Our Changes
 
 If you switch over to your terminal, you will notice that your changes are being deployed.
 
-{%caution%}
-You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
-{%endcaution%}
+{%info%}
+You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
+{%endinfo%}
 
 You should see that the new API stack has been deployed.
 

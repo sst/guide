@@ -14,16 +14,19 @@ Now let's create an API that allows a user to update a note with a new note obje
 
 {%change%} Create a new file in `packages/functions/src/update.ts` and paste the following.
 
-```typescript
-import { Table } from "sst/node/table";
-import handler from "@notes/core/handler";
-import dynamoDb from "@notes/core/dynamodb";
+```ts
+import { Resource } from "sst";
+import { Util } from "@notes/core/util";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { UpdateCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 
-export const main = handler(async (event) => {
+const dynamoDb = DynamoDBDocumentClient.from(new DynamoDBClient({}));
+
+export const main = Util.handler(async (event) => {
   const data = JSON.parse(event.body || "{}");
 
   const params = {
-    TableName: Table.Notes.tableName,
+    TableName: Resource.Notes.name,
     Key: {
       // The attributes of the item to be created
       userId: "123", // The id of the author
@@ -36,13 +39,9 @@ export const main = handler(async (event) => {
       ":attachment": data.attachment || null,
       ":content": data.content || null,
     },
-    // 'ReturnValues' specifies if and how to return the item's attributes,
-    // where ALL_NEW returns all attributes of the item after the update; you
-    // can inspect 'result' below to see how it works with different settings
-    ReturnValues: "ALL_NEW",
   };
 
-  await dynamoDb.update(params);
+  await dynamoDb.send(new UpdateCommand(params));
 
   return JSON.stringify({ status: true });
 });
@@ -54,27 +53,25 @@ This should look similar to the `create.ts` function combined. Here we make an `
 
 Let's add a new route for the get note API.
 
-{%change%} Add the following below the `GET /notes/{id}` route in `stacks/ApiStack.ts`.
+{%change%} Add the following below the `GET /notes/{id}` route in `infra/api.ts`.
 
-```typescript
-"PUT /notes/{id}": "packages/functions/src/update.main",
+```ts
+api.route("PUT /notes/{id}", "packages/functions/src/update.main");
 ```
 
 ### Deploy Our Changes
 
 If you switch over to your terminal, you will notice that your changes are being deployed.
 
-{%caution%}
-You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
-{%endcaution%}
+{%info%}
+You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
+{%endinfo%}
 
 You should see that the new API stack has been deployed.
 
 ```bash
-✓  Deployed:
-   StorageStack
-   ApiStack
-   ApiEndpoint: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
++  Complete
+   Api: https://5bv7x0iuga.execute-api.us-east-1.amazonaws.com
 ```
 
 ### Test the API

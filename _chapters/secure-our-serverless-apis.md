@@ -17,21 +17,21 @@ Recall that we've been hard coding our user ids so far (with user id `123`). We'
 
 Recall the function signature of a Lambda function:
 
-```typescript
+```ts
 export async function main(event: APIGatewayProxyEvent, context: Context) {}
 ```
 
 Or the refactored version that we are using:
 
-```typescript
-export const main = handler(async (event) => {});
+```ts
+export const main = Util.handler(async (event) => {});
 ```
 
 So far we've used the `event` object to get the path parameters (`event.pathParameters`) and request body (`event.body`).
 
 Now we'll get the id of the authenticated user.
 
-```typescript
+```ts
 event.requestContext.authorizer?.iam.cognitoIdentity.identityId;
 ```
 
@@ -39,7 +39,7 @@ This is an id that's assigned to our user by our Cognito Identity Pool.
 
 You'll also recall that so far all of our APIs are hard coded to interact with a single user.
 
-```typescript
+```ts
 userId: "123", // The id of the author
 ```
 
@@ -47,7 +47,7 @@ Let's change that.
 
 {%change%} Replace the above line in `packages/functions/src/create.ts` with.
 
-```typescript
+```ts
 userId: event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
 ```
 
@@ -59,13 +59,13 @@ userId: event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
 
 {%change%} In `packages/functions/src/list.ts` find this line instead.
 
-```typescript
+```ts
 ":userId": "123",
 ```
 
 {%change%} And replace it with.
 
-```typescript
+```ts
 ":userId": event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
 ```
 
@@ -85,10 +85,8 @@ To be able to hit our API endpoints securely, we need to follow these steps.
 
 These steps can be a bit tricky to do by hand. So we created a simple tool called [AWS API Gateway Test CLI](https://github.com/AnomalyInnovations/aws-api-gateway-cli-test){:target="_blank"}.
 
-You can also run it using `pnpm dlx` as seen in the following example. (If you have installed the tool you can use `apig-test` in place of `pnpm dlx` ).
-
 ```bash
-$ pnpm dlx aws-api-gateway-cli-test \
+$ npx aws-api-gateway-cli-test \
 --user-pool-id='<USER_POOL_ID>' \
 --app-client-id='<USER_POOL_CLIENT_ID>' \
 --cognito-region='<COGNITO_REGION>' \
@@ -102,15 +100,11 @@ $ pnpm dlx aws-api-gateway-cli-test \
 --body='{"content":"hello world","attachment":"hello.jpg"}'
 ```
 
-{%note%}
-The [`pnpm dlx`](https://pnpm.io/cli/dlx){:target="_blank"} command runs a given npm package without installing it as a dependency.
-{%endnote%}
-
 We need to pass in quite a bit of our info to complete the above steps.
 
 - Use the username and password of the user created above.
-- Replace `USER_POOL_ID`, `USER_POOL_CLIENT_ID`, `COGNITO_REGION`, and `IDENTITY_POOL_ID` with the `UserPoolId`, `UserPoolClientId`, `Region`, and `IdentityPoolId` from our [previous chapter]({% link _chapters/adding-auth-to-our-serverless-app.md %}).
-- Replace the `API_ENDPOINT` with the `ApiEndpoint` from our [API stack outputs]({% link _chapters/add-an-api-to-create-a-note.md %}).
+- Replace `USER_POOL_ID`, `USER_POOL_CLIENT_ID`, `COGNITO_REGION`, and `IDENTITY_POOL_ID` with the `UserPool`, `UserPoolClient`, `Region`, and `IdentityPool` from our [previous chapter]({% link _chapters/adding-auth-to-our-serverless-app.md %}).
+- Replace the `API_ENDPOINT` with the `Api` from back when we [created our API]({% link _chapters/create-a-hello-world-api.md %}).
 - And for the `API_REGION` you can use the same `Region` as we used above. Since our entire app is deployed to the same region.
 
 While this might look intimidating, just keep in mind that behind the scenes all we are doing is generating some security headers before making a basic HTTP request. We won't need to do this when we connect from our React.js app.
@@ -119,7 +113,7 @@ While this might look intimidating, just keep in mind that behind the scenes all
 If you are on Windows, you can use the command below. The spaces between each option are very important.
 
 ```bash
-$ pnpm dlx aws-api-gateway-cli-test --username admin@example.com --password Passw0rd! --user-pool-id <USER_POOL_ID> --app-client-id <USER_POOL_CLIENT_ID> --cognito-region <COGNITO_REGION> --identity-pool-id <IDENTITY_POOL_ID> --invoke-url <API_ENDPOINT> --api-gateway-region <API_REGION> --path-template /notes --method POST --body "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}"
+$ npx aws-api-gateway-cli-test --username admin@example.com --password Passw0rd! --user-pool-id <USER_POOL_ID> --app-client-id <USER_POOL_CLIENT_ID> --cognito-region <COGNITO_REGION> --identity-pool-id <IDENTITY_POOL_ID> --invoke-url <API_ENDPOINT> --api-gateway-region <API_REGION> --path-template /notes --method POST --body "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}"
 ```
 {%endinfo%}
 

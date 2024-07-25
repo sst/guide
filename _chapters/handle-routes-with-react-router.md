@@ -19,7 +19,7 @@ Let's start by installing React Router.
 {%change%} Run the following command **in the `packages/frontend/` directory**.
 
 ```bash
-$ pnpm add --save react-router-dom
+$ npm install react-router-dom
 ```
 
 This installs the package and adds the dependency to  `package.json` in your React app.
