@@ -19,7 +19,7 @@ Let's do that by first creating a production branch.
 $ git checkout -b production
 ```
 
-Now let's push this to GitHub.
+{%change%} Now let's push this to GitHub.
 
 ```bash
 $ git push --set-upstream origin production
@@ -30,7 +30,7 @@ Now if you head into the **Autodeploy** tab for your app in the SST Console, you
 
 ![SST Console production deploy in progress](/assets/part2/sst-console-production-deploy-in-progress.png)
 
-Once the deploy is complete, you'll notice the stack outputs at the bottom.
+Once the deploy is complete, you'll notice the outputs at the bottom.
 
 ![Prod build stack outputs](/assets/part2/prod-build-stack-outputs.png)
 

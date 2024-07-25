@@ -98,7 +98,7 @@ For the frontend:
 
 Deploying to prod:
 
-- Use custom domains for the API and frontend
+- Use a custom domain for your app
 - Deploy your app when you push to git
 
 

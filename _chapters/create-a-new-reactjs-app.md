@@ -88,7 +88,7 @@ export const frontend = new sst.aws.StaticSite("Frontend", {
 We are doing a couple of things of note here:
 
 1. We are pointing our `StaticSite` component to the `packages/frontend/` directory where our React app is.
-2. We are passing in the outputs from our other stacks as [environment variables in Vite](https://vitejs.dev/guide/env-and-mode.html#env-variables){:target="_blank"}. This means that we won't have to hard code them in our React app. The `VITE_*` prefix is a convention Vite uses to say that we want to access these in our frontend code.
+2. We are passing in the outputs from our other components as [environment variables in Vite](https://vitejs.dev/guide/env-and-mode.html#env-variables){:target="_blank"}. This means that we won't have to hard code them in our React app. The `VITE_*` prefix is a convention Vite uses to say that we want to access these in our frontend code.
 
 ### Adding to the app
 

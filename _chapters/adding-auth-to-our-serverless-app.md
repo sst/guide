@@ -15,7 +15,7 @@ So far we've created the [DynamoDB table]({% link _chapters/create-a-dynamodb-ta
 
 Setting this all up can be pretty complicated in Terraform. SST has simple [`CognitoUserPool`]({{ site.ion_url }}/docs/component/aws/cognito-user-pool/){:target="_blank"} and [`CognitoIdentityPool`]({{ site.ion_url }}/docs/component/aws/cognito-identity-pool/){:target="_blank"} components to help with this.
 
-### Create a Stack
+### Create the Components
 
 {%change%} Add the following to a new file in `infra/auth.ts`.
 

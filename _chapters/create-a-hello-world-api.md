@@ -36,7 +36,7 @@ We are also _linking_ an S3 Bucket to our API. This allows the functions in our 
 export const bucket = new sst.aws.Bucket("Uploads");
 ```
 
-Also let's rename how this bucket is accessed in our app code. We'll go into detail for these files in the coming chapters.
+Also let's rename how this bucket is accessed in our app code. We'll go into detail about this in the coming chapters.
 
 {%change%} Rename `Resource.MyBucket.name` line in `packages/functions/src/api.ts`.
 
@@ -55,7 +55,9 @@ async run() {
 },
 ```
 
-Note that by default SST sets you up with a TypeScript project. While the config and infrastructure is in TypeScript, you are free to use regular JavaScript in your application code.
+{%note%}
+By default SST sets you up with a TypeScript project. While the infrastructure is in TypeScript, you are free to use regular JavaScript in your application code.
+{%endnote%}
 
 Let's go ahead and deploy this.
 
@@ -100,7 +102,7 @@ $ npx sst deploy --stage production
 
 We don't have to do this right now. We'll be doing it later once we are done working on our app.
 
-The idea here is that we are able to work on separate environments. So when we are working in our personal environment (`jayair`), it doesn't break the API for our users in `production`. The environment (or stage) names in this case are just strings and have no special significance. We could've called them `development` and `prod` instead.
+The idea here is that we are able to work on separate environments. So when we are working in our personal stage (`jayair`), it doesn't break the API for our users in `production`. The environment (or stage) names in this case are just strings and have no special significance. We could've called them `development` and `prod` instead.
 
 We are however creating completely new apps when we deploy to a different environment. This is another advantage of the SST workflow. The infrastructure as code idea makes it easy to replicate to new environments. And the pay per use model of serverless means that we are not charged for these new environments unless we actually use them.
 

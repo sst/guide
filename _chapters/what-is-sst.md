@@ -17,10 +17,10 @@ To solve these issues we created the [SST]({{ site.sst_github_repo }}){:target="
 SST makes it easy to build full-stack applications by allowing developers to:
 
 1. Define their _entire_ infrastructure in code
-2. Test their applications [Live]({{ site.ion_url }}/docs/live){:target="_blank"}
-3. Debugging with your IDEs
-4. [Web based dashboard]({{ site.ion_url }}/docs/console){:target="_blank"} to manage your apps
-5. Deploy to multiple environments and regions
-6. Use [higher-level components]({{ site.ion_url }}/docs/components){:target="_blank"} designed for modern full-stack apps
+2. Use [higher-level components]({{ site.ion_url }}/docs/components){:target="_blank"} designed for modern full-stack apps
+3. Test their applications [Live]({{ site.ion_url }}/docs/live){:target="_blank"}
+4. Debugging with your IDEs
+5. Manage their apps with a [web based dashboard]({{ site.ion_url }}/docs/console){:target="_blank"}
+6. Deploy to multiple environments and regions
 
 Before we start creating our application, let's look at the _infrastructure as code_ concept in a bit more detail.

@@ -58,7 +58,7 @@ Most of this is fairly straightforward but let's go over it quickly:
 
 - We create a new Stripe object using our Stripe Secret key. We are getting this from the secret that we configured in the [previous chapter]({% link _chapters/handling-secrets-in-sst.md %}). At the time of writing, we are using `apiVersion` `2024-06-20` but you can check the [Stripe docs](https://stripe.com/docs/api/versioning){:target="_blank"} for the latest version.
 
-- Finally, we use the `stripe.charges.create()` method to charge the user and respond to the request if everything went through successfully.
+- Finally, we use the `stripe.charges.create()` function to charge the user and respond to the request if everything went through successfully.
 
 {%note%}
 If you are testing this from India, you'll need to add some shipping information as well. Check out the [details in our forums](https://discourse.sst.dev/t/test-the-billing-api/172/20){:target="_blank"}.
@@ -66,7 +66,7 @@ If you are testing this from India, you'll need to add some shipping information
 
 ### Add the Business Logic
 
-Now let's implement our `Billing.compute` method. This is primarily the _business logic_ in our app.
+Now let's implement our `Billing.compute` function. This is primarily the _business logic_ in our app.
 
 {%change%} Create a `packages/core/src/billing/index.ts` and add the following.
 
@@ -81,7 +81,7 @@ export module Billing {
 
 A _module_ is a good way to organize our business logic. You want to create modules for the various _domains_ in your app. This follows some basic principles of [Domain-driven design](https://en.wikipedia.org/wiki/Domain-driven_design){:target="_blank"}.
 
-The `compute` method is basically saying that if a user wants to store 10 or fewer notes, we'll charge them $4 per note. For 11 to 100 notes, we'll charge $2 and any more than 100 is $1 per note. Since Stripe expects us to provide the amount in pennies (the currency’s smallest unit) we multiply the result by 100.
+The `compute` function is basically saying that if a user wants to store 10 or fewer notes, we'll charge them $4 per note. For 11 to 100 notes, we'll charge $2 and any more than 100 is $1 per note. Since Stripe expects us to provide the amount in pennies (the currency’s smallest unit) we multiply the result by 100.
 
 Clearly, our serverless infrastructure might be cheap but our service isn't!
 

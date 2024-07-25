@@ -28,7 +28,7 @@ export const table = new sst.aws.Dynamo("Notes", {
 
 Let's go over what we are doing here.
 
-We are using the [`Dynamo`]({{ site.ion_url }}/docs/component/aws/dynamo/) component to create our DynamoDB table.
+We are using the [`Dynamo`]({{ site.ion_url }}/docs/component/aws/dynamo/){:target="_blank"} component to create our DynamoDB table.
 
 It has two fields:
 
@@ -46,12 +46,14 @@ We are going to use the composite primary key (referenced by `primaryIndex` in c
 
 ### Deploy Changes
 
-After you make your changes SST will automatically create the table. You should see something like this at the end of the deploy process.
+After you make your changes, SST will automatically create the table. You should see something like this at the end of the deploy process.
 
 ```bash
 |  Created     Notes sst:aws:Dynamo
 ```
 
-You'll need to make sure you have `sst dev` running, if not then restart it.
+{%info%}
+You'll need to make sure you have `sst dev` running, if not then restart it by running `npx sst dev`.
+{%endinfo%}
 
 Now that our database has been created, let's create an S3 bucket to handle file uploads.

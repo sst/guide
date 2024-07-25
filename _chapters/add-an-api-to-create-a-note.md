@@ -12,7 +12,7 @@ Let's get started by creating the API for our notes app.
 
 We'll first add an API to create a note. This API will take the note object as the input and store it in the database with a new id. The note object will contain the `content` field (the content of the note) and an `attachment` field (the URL to the uploaded file).
 
-### Creating the API Stack
+### Creating the API
 
 {%change%} Replace the `infra/api.ts` with the following.
 
@@ -35,7 +35,7 @@ api.route("POST /notes", "packages/functions/src/create.main");
 
 We are doing a couple of things of note here.
 
-- We are creating an API using SST's [`Api`]({{ site.ion_url }}/docs/component/apigatewayv2/) component. It creates an [Amazon API Gateway HTTP API](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html){:target="_blank"}.
+- We are creating an API using SST's [`Api`]({{ site.ion_url }}/docs/component/apigatewayv2/){:target="_blank"} component. It creates an [Amazon API Gateway HTTP API](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html){:target="_blank"}.
 
 - We are [linking]({{ site.ion_url }}/docs/linking/){:target="_blank"} our DynamoDB table to our API using the `link` prop. This will allow our API to access our table.
 
@@ -109,7 +109,7 @@ There are some helpful comments in the code but let's go over them quickly.
 - Parse the input from the `event.body`. This represents the HTTP request body.
 - It contains the contents of the note, as a string — `content`.
 - It also contains an `attachment`, if one exists. It's the filename of a file that will be uploaded to [our S3 bucket]({% link _chapters/create-an-s3-bucket-in-sst.md %}).
-- We can access our linked DynamoDB table through `Resource.Notes.name` using the [SST SDK]({{ site.ion_url }}/docs/reference/sdk/){:target="_blank"}. Here `Notes` in `Resource.Notes` is the name of our Table component from the [Create a DynamoDB Table in SST]({% link _chapters/create-a-dynamodb-table-in-sst.md %}) chapter. By doing `link: [table]` earlier in this chapter, we are allowing our API to access our table.
+- We can access our linked DynamoDB table through `Resource.Notes.name` using the [SST SDK]({{ site.ion_url }}/docs/reference/sdk/){:target="_blank"}. Here, `Notes` in `Resource.Notes`, is the name of our Table component from the [Create a DynamoDB Table in SST]({% link _chapters/create-a-dynamodb-table-in-sst.md %}) chapter. By doing `link: [table]` earlier in this chapter, we are allowing our API to access our table.
 - The `userId` is the id for the author of the note. For now we are hardcoding it to `123`. Later we'll be setting this based on the authenticated user.
 - Make a call to DynamoDB to put a new object with a generated `noteId` and the current date as the `createdAt`.
 - And if the DynamoDB call fails then return an error with the HTTP status code `500`.
@@ -126,7 +126,7 @@ $ cd packages/functions
 
 ```bash
 $ npm install uuid @aws-sdk/lib-dynamodb @aws-sdk/client-dynamodb
-$ npm install add -D @types/uuid @types/aws-lambda
+$ npm install -D @types/uuid @types/aws-lambda
 ```
 
 - **uuid** generates unique ids.

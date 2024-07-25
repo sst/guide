@@ -36,6 +36,7 @@ Here is what our workflow is going to look like:
 
 - Our repo will be connected to our CI/CD service.
 - Any commits that are pushed to the `production` branch will be automatically deployed to the `production` stage.
+- Any PRs will be automatically deployed as preview environments.
 
 Our workflow is fairly simple. But as your team grows, you'll need to add additional dev, staging, or preview environments.
 

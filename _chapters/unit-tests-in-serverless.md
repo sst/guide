@@ -8,7 +8,7 @@ ref: unit-tests-in-serverless
 comments_id: unit-tests-in-serverless/173
 ---
 
-In the chapter we'll look at how to write unit tests for our serverless app. Typically you might want to test some of your _business logic_.
+In this chapter we'll look at how to write unit tests for our serverless app. Typically you might want to test some of your _business logic_.
 
 The template we are using comes with a setup to help with that. It uses [Vitest](https://vitest.dev){:target="_blank"} for this.
 
@@ -77,7 +77,7 @@ Test Files  1 passed (1)
 Internally this is running `sst shell vitest`. The [`sst shell`]({{ site.ion_url }}/docs/reference/cli/#shell){:target="_blank"} CLI connects any linked resources. This ensures that your tests have the same kind of access as the rest of your application code.
 
 {%info%}
-You'll need to Ctrl-C to quit the test runner. It's useful to have on when you are working on them as it'll rerun your tests live. 
+You'll need to Ctrl-C to quit the test runner. It's useful to have when you are working on them as it'll reload your tests. 
 {%endinfo%}
 
 And that's it! We have unit tests all configured. These tests are fairly simple but should give you an idea of how to add more in the future.

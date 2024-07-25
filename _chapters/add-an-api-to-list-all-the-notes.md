@@ -63,7 +63,7 @@ If you switch over to your terminal, you will notice that your changes are being
 You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
 {%endinfo%}
 
-You should see that the new API stack has been deployed.
+You should see that the new API has been deployed.
 
 ```bash
 +  Complete
