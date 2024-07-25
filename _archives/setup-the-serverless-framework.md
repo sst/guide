@@ -12,7 +12,7 @@ redirect_from: /chapters/setup-the-serverless-framework.html
 In this section we are going to use [Serverless Framework](https://github.com/serverless/serverless) to build our serverless app. It's very similar to [the notes app that we built using SST]({{ site.sst_demo_repo }}). With a couple of key differences:
 
 - We are only building the backend in Serverless Framework.
-- The backend is defined using [CloudFormation](https://aws.amazon.com/cloudformation) in Serverless Framework. While we use [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}) in SST.
+- The backend is defined using [CloudFormation](https://aws.amazon.com/cloudformation) in Serverless Framework. While we use [AWS CDK]({% link _archives/what-is-aws-cdk.md %}) in SST.
 
 ### Demo Repo
 

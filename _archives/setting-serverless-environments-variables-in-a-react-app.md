@@ -142,7 +142,7 @@ Next, let's look at what happens when we deploy our full-stack app.
 
 ## While Deploying
 
-We need our React app to be deployed with our environment variables. SST uses [CDK]({% link _chapters/what-is-aws-cdk.md %}){:target="_blank"} internally, so the flow looks something like this.
+We need our React app to be deployed with our environment variables. SST uses [CDK]({% link _archives/what-is-aws-cdk.md %}){:target="_blank"} internally, so the flow looks something like this.
 
 1. Deploy our API.
 2. Build our React app.

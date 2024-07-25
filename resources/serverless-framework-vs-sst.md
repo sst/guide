@@ -108,7 +108,7 @@ While this process works, it requires you to wait to see your results. Making fo
 
 ## SST
 
-In contrast, [SST]({{ site.sst_github_repo }}) was launched in early 2021 and has since grown rapidly to become the new way to build full-stack serverless applications. It uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}) to define your infrastructure. You define your stacks using real programming languages like JavaScript or TypeScript.
+In contrast, [SST]({{ site.sst_github_repo }}) was launched in early 2021 and has since grown rapidly to become the new way to build full-stack serverless applications. It uses [AWS CDK]({% link _archives/what-is-aws-cdk.md %}) to define your infrastructure. You define your stacks using real programming languages like JavaScript or TypeScript.
 
 ```js
 export function MyStack({ stack }) {
@@ -150,7 +150,7 @@ Let's quickly summarize the comparison between the two frameworks.
 | ------------------------- | ------------------------------------------------------------------------------- | -------------------------------------------------------------- |
 | Founded                   | 2015                                                                            | 2021                                                           |
 | Architecture              | Partly open source with hosted deployment engine                                | Completely open source and self-hosted                         |
-| Infrastructure Definition | [CloudFormation](https://aws.amazon.com/cloudformation/resources/templates/)    | [CDK]({% link _chapters/what-is-aws-cdk.md %})                 |
+| Infrastructure Definition | [CloudFormation](https://aws.amazon.com/cloudformation/resources/templates/)    | [CDK]({% link _archives/what-is-aws-cdk.md %})                 |
 |                           | Hard to manage large applications                                               | Easy to reuse infrastructure code                              |
 | Local Development         | Mocking or [serverless-offline](https://github.com/dherault/serverless-offline) | [Live Lambda Dev]({{ site.docs_url }}/live-lambda-development) |
 |                           | Repeatedly deploying changes                                                    | Setting breakpoints                                            |

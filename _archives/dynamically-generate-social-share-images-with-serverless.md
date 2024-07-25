@@ -81,7 +81,7 @@ $ npx create-sst@one --template=minimal/javascript-starter social-cards
 $ cd social-cards
 ```
 
-The infrastructure in our app is defined using [CDK]({% link _chapters/what-is-aws-cdk.md %}). Currently we just have a simple API that invokes a Lambda function.
+The infrastructure in our app is defined using [CDK]({% link _archives/what-is-aws-cdk.md %}). Currently we just have a simple API that invokes a Lambda function.
 
 You can see this in `stacks/MyStack.js`.
 

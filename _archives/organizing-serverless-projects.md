@@ -17,7 +17,7 @@ First let's start by quickly looking at the common terms used when talking about
 
 - **Stack**
 
-  A stack is a collection of resources that you manage as a single unit. We define CloudFormation stacks using [CDK]({% link _chapters/what-is-aws-cdk.md %}).
+  A stack is a collection of resources that you manage as a single unit. We define CloudFormation stacks using [CDK]({% link _archives/what-is-aws-cdk.md %}).
 
 - **Application**
 

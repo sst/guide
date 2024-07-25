@@ -12,7 +12,7 @@ In the previous chapter we looked at [some of the most common patterns for organ
 
 You might recall that a Serverless Framework service is where a single `serverless.yml` is used to define the project. And the `serverless.yml` file is converted into a [CloudFormation template](https://aws.amazon.com/cloudformation/aws-cloudformation-templates/) using Serverless Framework. This means that in the case of multiple services you might need to reference a resource that is available in a different service.
 
-You also might be defining your AWS infrastructure using [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}). And you want to make sure your serverless API is connected to those resources.
+You also might be defining your AWS infrastructure using [AWS CDK]({% link _archives/what-is-aws-cdk.md %}). And you want to make sure your serverless API is connected to those resources.
 
 For example, you might have your DynamoDB tables created in CDK and your APIs (as a Serverless Framework service) need to refer to them. Of course you don't want to hard code this. To do this we are going to be using cross-stack references.
 

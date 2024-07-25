@@ -63,7 +63,7 @@ export default {
 } satisfies SSTConfig;
 ```
 
-The `stacks` code describes the infrastructure of your serverless app. SST uses [AWS CDK]({% link _chapters/what-is-aws-cdk.md %}).
+The `stacks` code describes the infrastructure of your serverless app. SST uses [AWS CDK]({% link _archives/what-is-aws-cdk.md %}).
 
 You are **ready to deploy** your Next.js app at this point! But for the purpose of this example, we'll go a bit further and add a file uploads feature to our app.
 

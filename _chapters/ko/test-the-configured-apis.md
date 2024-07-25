@@ -26,7 +26,7 @@ $ aws cognito-idp sign-up \
   --password Passw0rd!
 ```
 
-Cognito App Client ID의 **dev** 버전을 찾으려면 [Seed를 통한 배포]({% link _chapters/deploying-through-seed.md %}) 챕터를 참조하십시오. 그리고`YOUR_DEV_COGNITO_REGION`을 배포한 지역으로 대체하십시오.
+Cognito App Client ID의 **dev** 버전을 찾으려면 [Seed를 통한 배포]({% link _chapters/deploying-through-the-sst-console.md %}) 챕터를 참조하십시오. 그리고`YOUR_DEV_COGNITO_REGION`을 배포한 지역으로 대체하십시오.
 
 <img class="code-marker" src="/assets/s.png"/> 다음으로 Cognito Admin CLI를 통해 사용자를 확인합니다.
 
@@ -37,7 +37,7 @@ $ aws cognito-idp admin-confirm-sign-up \
   --username admin@example.com
 ```
 
-리전과 `YOUR_DEV_COGNITO_USER_POOL_ID`를 [Seed를 통한 배포]({% link _chapters/deploying-through-seed.md %}) 챕터의 Cognito User Pool ID의 **dev** 버전으로 대체하십시오. 
+리전과 `YOUR_DEV_COGNITO_USER_POOL_ID`를 [Seed를 통한 배포]({% link _chapters/deploying-through-the-sst-console.md %}) 챕터의 Cognito User Pool ID의 **dev** 버전으로 대체하십시오. 
 
 **prod** 버전에서도 동일한 작업을 신속하게 수행합니다.
 
@@ -85,7 +85,7 @@ $ npx aws-api-gateway-cli-test \
 --body='{"content":"hello world","attachment":"hello.jpg"}'
 ```
 
-다음을 위해 [Seed를 통한 배포]({% link _chapters/deploying-through-seed.md %}) 챕터를 참조하십시오.
+다음을 위해 [Seed를 통한 배포]({% link _chapters/deploying-through-the-sst-console.md %}) 챕터를 참조하십시오.
 
 - `YOUR_DEV_COGNITO_USER_POOL_ID` 및 `YOUR_DEV_COGNITO_APP_CLIENT_ID`는 모두 사용자의 Cognito 사용자 풀과 관련이 있습니다.
 - `YOUR_DEV_IDENTITY_POOL_ID`는 여러분의 Cognito ID 풀을 위한 것입니다.

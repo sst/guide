@@ -108,7 +108,7 @@ export default {
 };
 ```
 
-다른 버전의 자원을 [Seed를 통해 배포]({% link _chapters/deploying-through-seed.md %}) 챕터의 자원으로 바꿔야합니다.
+다른 버전의 자원을 [Seed를 통해 배포]({% link _chapters/deploying-through-the-sst-console.md %}) 챕터의 자원으로 바꿔야합니다.
 
 `REACT_APP_STAGE`가 설정되어 있지 않으면 dev 환경을 기본값으로 설정한다는 것에주의하십시오. 이것은 현재의 빌드 프로세스(`npm start` 와 `npm run build`)가 `dev` 환경을 기본값으로한다는 것을 의미합니다. 그리고 두 환경에 공통적인 `MAX_ATTACHMENT_SIZE`와 같은 설정 값에 대해서는 다른 섹션에서 다루겠습니다.
 
