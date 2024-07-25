@@ -4,7 +4,7 @@ title: Create a New React.js App
 date: 2017-01-06 00:00:00
 lang: en
 ref: create-a-new-react-js-app
-description: In this chapter we'll use Vite to create a new React.js app. We'll be deploying our React app to AWS using the SST StaticSite construct.
+description: In this chapter we'll use Vite to create a new React.js app. We'll be deploying our React app to AWS using the SST StaticSite component.
 comments_id: create-a-new-react-js-app/68
 ---
 
@@ -87,7 +87,7 @@ export const frontend = new sst.aws.StaticSite("Frontend", {
 
 We are doing a couple of things of note here:
 
-1. We are pointing our `StaticSite` construct to the `packages/frontend/` directory where our React app is.
+1. We are pointing our `StaticSite` component to the `packages/frontend/` directory where our React app is.
 2. We are passing in the outputs from our other stacks as [environment variables in Vite](https://vitejs.dev/guide/env-and-mode.html#env-variables){:target="_blank"}. This means that we won't have to hard code them in our React app. The `VITE_*` prefix is a convention Vite uses to say that we want to access these in our frontend code.
 
 ### Adding to the app
@@ -106,7 +106,7 @@ await import("./infra/web");
 If you switch over to your terminal, you will notice that your changes are being deployed.
 
 {%info%}
-You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `pnpm sst dev` will deploy your changes again.
+You’ll need to have `sst dev` running for this to happen. If you had previously stopped it, then running `npx sst dev` will deploy your changes again.
 {%endinfo%}
 
 ```bash
@@ -127,7 +127,7 @@ You can click on **Frontend** in the sidebar or navigate to it.
 This should show where your frontend is running locally.
 
 ```bash
-VITE v5.3.4  ready in 88 ms
+VITE v5.3.4  ready in 104 ms
 
 ➜  Local:   http://127.0.0.1:5173/
 ➜  Network: use --host to expose

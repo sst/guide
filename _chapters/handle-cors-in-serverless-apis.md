@@ -50,6 +50,7 @@ The [`ApiGatewayV2`]({{ site.ion_url }}/docs/component/aws/apigatewayv2/){:targe
 
 ```ts
 new sst.aws.ApiGatewayV2("Api", {
+  // Enabled by default
   cors: true
 });
 ```

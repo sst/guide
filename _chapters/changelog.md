@@ -15,7 +15,7 @@ Below are the updates we’ve made to SST, each with:
 
 - Each update has a link to an **archived version of the tutorial**
 - Updates to the tutorial **compared to the last version**
-- Updates to the **API and Client repos**
+- Updates to the **guide and demo repos**
 
 While the hosted version of the tutorial and the code snippets are accurate, the sample project repo that is linked at the bottom of each chapter is unfortunately not. We do however maintain the past versions of the completed sample project repo. So you should be able to use those to figure things out. All this info is also available on the [releases page]({{ site.github_repo }}/releases) of our [GitHub repo]({{ site.github_repo }}).
 
