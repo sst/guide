@@ -71,7 +71,7 @@ We'll go with the default setting for now.
 
 Next, we need to add the CORS headers in our Lambda function response.
 
-{%change%} Replace the `return` statement in our `packages/core/src/handler.ts`.
+{%change%} Replace the `return` statement in our `packages/core/src/util/index.ts`.
 
 ```ts
 return {
