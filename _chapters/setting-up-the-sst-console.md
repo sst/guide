@@ -1,4 +1,4 @@
----
+dervived---
 layout: post
 title: Setting up the SST Console
 date: 2024-07-24 00:00:00
@@ -71,7 +71,7 @@ Do the same for a **PR environment**.
 
 ![Create PR environment SST Console](/assets/part2/create-pr-environment-sst-console.png)
 
-The two above environments tell the Console that any stage with the name `production` or starting with `pr-` should be auto-deployed to the given AWS account. By default, the stage names are dervived from the name of the branch.
+The two above environments tell the Console that any stage with the name `production` or starting with `pr-` should be auto-deployed to the given AWS account. By default, the stage names are derived from the name of the branch.
 
 So if you _git push_ to a branch called `production`, the SST Console will auto-deploy that to a stage called `production`.
 
