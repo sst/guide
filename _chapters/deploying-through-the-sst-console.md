@@ -9,7 +9,7 @@ ref: deploying-through-the-sst-console
 comments_id: deploying-through-the-sst-console/2958
 ---
 
-Now, we are ready to _git push_ to deploy our app to production with the SST Console. If you recall from the [previous chapter]({% link _chapters/setting-up-the-sst-console.md %}), we confgiured it to auto-deploy the `production` branch. 
+Now, we are ready to _git push_ to deploy our app to production with the SST Console. If you recall from the [previous chapter]({% link _chapters/setting-up-the-sst-console.md %}), we configured it to auto-deploy the `production` branch. 
 
 Let's do that by first creating a production branch.
 
