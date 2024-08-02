@@ -1,4 +1,4 @@
-dervived---
+---
 layout: post
 title: Setting up the SST Console
 date: 2024-07-24 00:00:00
