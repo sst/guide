@@ -15,9 +15,9 @@ comments_id: create-an-sst-app/2462
 
 Now that we have some background on SST and _infrastructure as code_, we are ready to create our first SST app!
 
-We are going to use a [template SST project][Template], it comes with a good monorepo setup. It'll help us organize our frontend and APIs.
+We are going to use a [template SST project][Template]{:target="_blank"}, it comes with a good monorepo setup. It'll help us organize our frontend and APIs.
 
-Head over to — [**github.com/sst/monorepo-template**][Template], click **Use this template** > **Create a new repository**. 
+Head over to — [**github.com/sst/monorepo-template**][Template]{:target="_blank"}, click **Use this template** > **Create a new repository**. 
 
 ![Use the SST monorepo GitHub template screenshot](/assets/part2/use-the-sst-monorepo-github-template-screenshot.png)
 
@@ -92,4 +92,4 @@ Later on we'll be adding a `packages/frontend/` directory for our React app.
 
 The starter project that's created is defining a simple _Hello World_ API. In the next chapter, we'll be deploying it and running it locally.
 
-[Template]: (https://github.com/sst/monorepo-template)
+[Template]: https://github.com/sst/monorepo-template
