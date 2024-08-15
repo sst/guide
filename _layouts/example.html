@@ -35,16 +35,9 @@ layout: default
 
         </div>
 
-        {% if page.repo != true %}
-        {% capture repo %}{{ site.sst_github_repo }}{{ site.sst_github_examples_prefix }}{{ page.repo }}{% endcapture %}
-        <div class="post-repo">
-          <i class="fa fa-github" aria-hidden="true"></i>
-          <span>Example code</span>
-          <a target="_blank" href="{{ repo }}">
-            {{ repo | replace: "https://", "" }}
-          </a>
+        <div class="post-archives">
+          This chapter has been archived and is no longer updated. <a href="{% link index.md %}">View the current version of the guide</a>.
         </div>
-        {% endif %}
 
         {% if page.bio %}
         <div class="post-author">
@@ -60,20 +53,6 @@ layout: default
 
       <div class="post-links">
 
-        {% if page.repo == true %}
-        {% capture repo %}{{ site.sst_github_repo }}{{ site.sst_github_examples_prefix }}{% endcapture %}
-        {% elsif page.repo != true %}
-        {% capture repo %}{{ site.sst_github_repo }}{{ site.sst_github_examples_prefix }}{{ page.repo }}{% endcapture %}
-        {% endif %}
-
-        {% if page.repo %}
-        <p>Example repo for reference</p>
-        <a target="_blank" href="{{ repo }}">
-          <i class="fa fa-github" aria-hidden="true"></i>
-          {{ repo | replace: "https://", "" }}
-        </a>
-        {% endif %}
-
         <p class="comments">For help and discussion</p>
         <a target="_blank" href="{{ site.forum_url }}{{ site.forum_thread_prefix }}{{ page.comments_id }}">
           <i class="fa fa-comments" aria-hidden="true"></i>
@@ -82,41 +61,17 @@ layout: default
 
       </div>
 
-      <div class="extras">
-        <div class="container">
-          <div class="newsletter">
-            {% include newsletter-form.html type="examples" %}
-          </div>
-        </div>
-      </div>
-
-      {% if page.ref != "examples-index" %}
-      <div class="other-examples">
-        <h2>More Examples</h2>
-        {% include examples-list.html %}
-      </div>
-      {% endif %}
-
-      <!--
-      {% include post-sponsor.html %}
-      -->
-
     </article>
 
     <aside id="toc-sidebar" class="sidebar example">
 
       <div class="about">
         <p class="eyebrow">About</p>
-        <h6>SST is an open source framework for serverless.</h6>
-        <p class="description">
-          Make changes and test your Lambda functions live, without having to redeploy.
-        </p>
+        <h6>SST is an open source framework for building modern full-stack apps.</h6>
         <a class="github" href="{{ site.sst_github_repo }}">
           View on GitHub
         </a>
       </div>
-
-      {% include newsletter-form-sidebar.html %}
 
     </aside>
 

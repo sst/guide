@@ -13,15 +13,17 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: SST
+title: SST Guide
 email: hello@sst.dev
 jobs_email: jobs@sst.dev
 description: > # this means to ignore newlines until "baseurl:"
-  Build modern full-stack applications on AWS.
+  Learn how to build modern full-stack apps on AWS.
 description_full: >
-  An open source framework for building modern full-stack applications on AWS.
+  The most widely read resource for building full-stack serverless apps on AWS.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://sst.dev" # the base hostname & protocol for your site, e.g. http://example.com
+
+sst_url: "https://sst.dev"
 
 exclude:
   - .idea
@@ -73,12 +75,10 @@ youtube_url: "https://www.youtube.com/c/sst-dev"
 
 social_cards_url: "https://social-cards.sst.dev"
 
-permalink: /blog/:title:output_ext
-
 stats:
   newsletter: "90,000"
   newsletter_short: "90k"
-  discord: "10k"
+  discord: "11k"
   github: "21000"
   github_short: "21k"
 

@@ -7,19 +7,19 @@
 
 <p align="center">
   <a href="https://sst.dev/discord"><img alt="Discord" src="https://img.shields.io/discord/983865673656705025?label=Discord" /></a>
-  <a href="https://twitter.com/sst_dev"><img alt="Twitter" src="https://img.shields.io/badge/Twitter-26a7de" /></a>
+  <a href="https://x.com/sst_dev"><img alt="Twitter" src="https://img.shields.io/twitter/follow/sst_dev" /></a>
   <a href="https://console.seed.run/anomaly/sst-dev"><img alt="Seed Status" src="https://api.seed.run/anomaly/sst-dev/stages/prod/build_badge" /></a>
 </p>
 
 ---
 
-## About SST.dev
+## SST Guide
 
-This repo for [**SST.dev**](https://sst.dev) and the [SST Guide](https://sst.dev/guide.html). If you are looking for the SST repo, [head over here](https://github.com/sst/sst).
+This repo for [**guide.sst.dev**](https://guide.sst.dev), the SST Guide. If you are looking for the SST repo, [head over here](https://github.com/sst/sst).
 
 SST.dev is built with [SST](https://sst.dev) and deployed with [Seed](https://seed.run).
 
-## SST Guide
+## About the Guide
 
 The guide is a comprehensive open source tutorial for building and deploying full-stack apps using Serverless and React on AWS.
 
@@ -38,7 +38,7 @@ It is a single-page React app powered by a serverless CRUD API. We also cover ho
 
 ### Getting Help
 
-- If you are running into issues with a specific chapter, join us on [Discord][discord] and post in `#help`.
+- If you are running into issues with a specific chapter, join us on [Discord][discord].
 - Open a [new issue](../../issues/new) if you've found a bug
 - If you've found a typo, edit the chapter and submit a [pull request][pr].
 
@@ -118,13 +118,13 @@ Thanks to these folks for their contributions to the content of SST.
 - [Vieko Franetovic](https://github.com/vieko): Translating chapters to Spanish
 - [Christian Kaindl](https://github.com/christiankaindl): Translating chapters to German
 - [Jae Chul Kim](https://github.com/bsg-bob): Translating chapters to Korean
-- [Ben Force](https://twitter.com/theBenForce): Extra credit chapters
-- [Eze Sunday](https://twitter.com/ezesundayeze): Extra credit chapters
-- [Maniteja Pratha](https://twitter.com/PrataManitej): Vue.js example
+- [Ben Force](https://x.com/theBenForce): Extra credit chapters
+- [Eze Sunday](https://x.com/ezesundayeze): Extra credit chapters
+- [Maniteja Pratha](https://x.com/PrataManitej): Vue.js example
 
 ---
 
-**Join our community** [Discord][discord] | [YouTube](https://www.youtube.com/c/sst-dev) | [Twitter](https://twitter.com/SST_dev) | [Contribute][contributing]
+**Join our community** [Discord][discord] | [YouTube](https://www.youtube.com/c/sst-dev) | [X.com](https://x.com/SST_dev) | [Contribute][contributing]
 
 [discourse]: https://discourse.sst.dev
 [discord]: https://sst.dev/discord

@@ -12,7 +12,7 @@ Esse guia foi feito para desenvolvedores full-stack ou desenvolvedores que desej
 
 Talvez você seja um desenvolvedor backend querendo aprender mais sobre a parte frontend de aplicações Serverless, ou um desenvolvedor frontend que gostaria de aprender mais sobre backend. Esse guia servirá para ambos os casos.
 
-Pessoalmente, a ideia do Serverless foi uma enorme revelação para nós e isso nos fez criar um guia com qual poderíamos compartilhar o que aprendemos. Você pode saber mais sobre nós [**aqui**]({% link about/index.html %}). E [veja alguns exemplos de pessoas que construíram aplicações com SST clicando aqui]({% link showcase.md %})
+Pessoalmente, a ideia do Serverless foi uma enorme revelação para nós e isso nos fez criar um guia com qual poderíamos compartilhar o que aprendemos. Você pode saber mais sobre nós [**aqui**]({{ site.sst_url }}). E [veja alguns exemplos de pessoas que construíram aplicações com SST clicando aqui]({% link showcase.md %})
 
 Por hora, apenas vamos abordar o desenvolvimento com JavaScript/TypeScript. Futuramente talvez abordemos outras linguagens e ambientes. Porém, para começar, nós achamos muito benéfico para um desenvolvedor full-stack utilizar apenas uma linguagem (TypeScript) e ambiente (Node.js) para a construção de uma aplicação completa.
 

@@ -10,7 +10,7 @@
     <div class="col1">
       <span class="menu-header">
         <a class="site-title" href="{{ "/" | relative_url}}">
-          <img alt="{{ site.title | escape }}" src="/assets/lander/logo/sst.svg" height="36" />
+          <img alt="{{ site.title | escape }}" src="/assets/lander/logo/sst-guide.svg" height="32" />
           <!--
           <img alt="{{ site.title | escape }}" src="/assets/lander/logo/sst-animation-svg0.svg" height="54" />
           <img alt="{{ site.title | escape }}" src="/assets/lander/logo/sst-animation-svg1.svg" height="54" />
@@ -23,11 +23,9 @@
           <img src="/assets/lander/menu-close.svg" />
         </a>
       </span>
-      <a class="links" href="{{ site.docs_url }}">Docs</a>
-      <a class="links" href="{% link guide.md %}">Guide</a>
-      <a class="links" href="{% link _examples/index.md %}">Examples</a>
-      <a class="links" href="{{ site.docs_url }}/constructs">Constructs</a>
-      <a class="links" href="{{ site.docs_url }}/clients">Clients</a>
+      <a class="links" target="_blank" href="{{ site.forum_url }}">Forums</a>
+      <a class="links" target="_blank" href="{% link _chapters/changelog.md %}">Changelog</a>
+      <a class="links" target="_blank" href="{% link newsletter.md %}">Newsletter</a>
     </div>
 
     <div class="col2">
