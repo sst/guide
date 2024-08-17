@@ -13,7 +13,10 @@ export default {
       const site = new StaticSite(stack, "site", {
         customDomain:
           stack.stage === "prod"
-            ? "guide.sst.dev"
+            ? {
+              hostedZone: "sst.dev",
+              domainName: "guide.sst.dev",
+            }
             : stack.stage.startsWith("branchv")
               ? {
                 hostedZone: "archives.sst.dev",
