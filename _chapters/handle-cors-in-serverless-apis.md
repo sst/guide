@@ -46,7 +46,7 @@ And our browser won't show us the HTTP response. This can make debugging our API
 
 ### CORS in API Gateway
 
-The [`ApiGatewayV2`]({{ site.ion_url }}/docs/component/aws/apigatewayv2/){:target="_blank"} component that we are using enables CORS by default.
+The [`ApiGatewayV2`]({{ site.sst_url }}/docs/component/aws/apigatewayv2/){:target="_blank"} component that we are using enables CORS by default.
 
 ```ts
 new sst.aws.ApiGatewayV2("Api", {
@@ -55,7 +55,7 @@ new sst.aws.ApiGatewayV2("Api", {
 });
 ```
 
-You can further configure the specifics if necessary. You can [read more about this here]({{ site.ion_url }}/docs/component/aws/apigatewayv2#cors){:target="_blank"}.
+You can further configure the specifics if necessary. You can [read more about this here]({{ site.sst_url }}/docs/component/aws/apigatewayv2#cors){:target="_blank"}.
 
 ```typescript
 new sst.aws.ApiGatewayV2("Api", {

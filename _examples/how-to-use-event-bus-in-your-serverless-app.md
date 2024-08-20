@@ -85,7 +85,7 @@ export function ExampleStack({ stack }: StackContext) {
 }
 ```
 
-This creates an EventBridge EventBus using [`EventBus`]({{ site.docs_url }}/constructs/EventBus) and it has two targets. Meaning when the event is published, both the functions will get run.
+This creates an EventBridge EventBus using [`EventBus`]({{ site.v2_url }}/constructs/EventBus) and it has two targets. Meaning when the event is published, both the functions will get run.
 
 ## Setting up the API
 
@@ -112,7 +112,7 @@ stack.addOutputs({
 });
 ```
 
-Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (`/order`). When we make a `POST` request to this endpoint the Lambda function called `handler` in `packages/functions/src/order.ts` will get invoked.
+Our [API]({{ site.v2_url }}/constructs/api) simply has one endpoint (`/order`). When we make a `POST` request to this endpoint the Lambda function called `handler` in `packages/functions/src/order.ts` will get invoked.
 
 We'll also bind our event bus to our API.
 
@@ -154,7 +154,7 @@ Now let's test our new API.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.v2_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npm run dev
@@ -184,7 +184,7 @@ Stack dev-eventbus-ExampleStack
 
 The `ApiEndpoint` is the API we just created.
 
-Let's test our endpoint using the integrated [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.docs_url }}/console).
+Let's test our endpoint using the integrated [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.v2_url }}/console).
 
 Go to the **Functions** tab and click the **Invoke** button of the `POST /order` function to send a `POST` request.
 

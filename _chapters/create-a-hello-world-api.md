@@ -63,7 +63,7 @@ Let's go ahead and deploy this.
 
 ### Start Your Dev Environment
 
-We'll do this by starting up our local development environment. SST's dev environment runs your functions [Live]({{ site.ion_url }}/docs/live){:target="_blank"}. It allows you to work on your serverless apps live.
+We'll do this by starting up our local development environment. SST's dev environment runs your functions [Live]({{ site.sst_url }}/docs/live){:target="_blank"}. It allows you to work on your serverless apps live.
 
 {%change%} Start your dev environment.
 

@@ -18,7 +18,7 @@ Recall the following from `infra/storage.ts`.
 export const bucket = new sst.aws.Bucket("Uploads");
 ```
 
-Here we are creating a new S3 bucket using the SST [`Bucket`]({{ site.ion_url }}/docs/component/aws/bucket){:target="_blank"} component.
+Here we are creating a new S3 bucket using the SST [`Bucket`]({{ site.sst_url }}/docs/component/aws/bucket){:target="_blank"} component.
 
 ### Commit the Changes
 

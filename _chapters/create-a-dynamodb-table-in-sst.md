@@ -28,7 +28,7 @@ export const table = new sst.aws.Dynamo("Notes", {
 
 Let's go over what we are doing here.
 
-We are using the [`Dynamo`]({{ site.ion_url }}/docs/component/aws/dynamo/){:target="_blank"} component to create our DynamoDB table.
+We are using the [`Dynamo`]({{ site.sst_url }}/docs/component/aws/dynamo/){:target="_blank"} component to create our DynamoDB table.
 
 It has two fields:
 

@@ -13,7 +13,7 @@ ref: how-to-create-a-nextjs-app-with-serverless
 comments_id: how-to-create-a-next-js-app-with-serverless/2486
 ---
 
-In this example we will look at how to deploy a full-stack [Next.js](https://nextjs.org) app to your AWS account with [OpenNext](https://open-next.js.org) and the [`NextjsSite`]({{ site.docs_url }}/constructs/NextjsSite) construct.
+In this example we will look at how to deploy a full-stack [Next.js](https://nextjs.org) app to your AWS account with [OpenNext](https://open-next.js.org) and the [`NextjsSite`]({{ site.v2_url }}/constructs/NextjsSite) construct.
 
 ## Requirements
 
@@ -75,7 +75,7 @@ You are **ready to deploy** your Next.js app at this point! But for the purpose 
 $ npx sst dev
 ```
 
-SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live. This will ask you to start your Next.js dev environment as well.
+SST features a [Live Lambda Development]({{ site.v2_url }}/live-lambda-development) environment that allows you to work on your serverless apps live. This will ask you to start your Next.js dev environment as well.
 
 {%change%} Start Next.js locally in a separate terminal.
 
@@ -97,7 +97,7 @@ To support file uploads in our app, we need an S3 bucket. Let's add that.
 const bucket = new Bucket(stack, "public");
 ```
 
-Here we are using the [`Bucket`]({{ site.docs_url }}/constructs/Bucket) construct to create an S3 bucket.
+Here we are using the [`Bucket`]({{ site.v2_url }}/constructs/Bucket) construct to create an S3 bucket.
 
 {%change%} Add it to the imports.
 
@@ -142,7 +142,7 @@ export async function getServerSideProps() {
 }
 ```
 
-This generates a presigned URL when our app loads. Note how we can access our S3 bucket in a typesafe way — `Bucket.public.bucketName`. [You can learn more about Resource Binding over on our docs]({{ site.docs_url }}/resource-binding).
+This generates a presigned URL when our app loads. Note how we can access our S3 bucket in a typesafe way — `Bucket.public.bucketName`. [You can learn more about Resource Binding over on our docs]({{ site.v2_url }}/resource-binding).
 
 {%change%} We need to install a couple of packages.
 
@@ -223,7 +223,7 @@ If you head over to the `URL` in your browser, you should see your new Next.js a
 
 ![Deployed Next.js app with SST](/assets/examples/nextjs-app/deployed-next-js-app-with-sst.png)
 
-We can [add a custom domain]({{ site.docs_url }}/custom-domains) to our app but we'll leave that as an exercise for later.
+We can [add a custom domain]({{ site.v2_url }}/custom-domains) to our app but we'll leave that as an exercise for later.
 
 ### Cleaning up
 

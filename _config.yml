@@ -21,7 +21,7 @@ description: > # this means to ignore newlines until "baseurl:"
 description_full: >
   The most widely read resource for building full-stack serverless apps on AWS.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://sst.dev" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://guide.sst.dev" # the base hostname & protocol for your site, e.g. http://example.com
 
 sst_url: "https://sst.dev"
 
@@ -36,7 +36,7 @@ exclude:
 
 demo_url: "https://demo.sst.dev"
 
-github_repo: "https://github.com/sst/sst.dev"
+github_repo: "https://github.com/sst/guide"
 github_edit_prefix: "/edit/master/"
 github_history_prefix: "/commits/master/"
 github_issues_prefix: "/issues/"
@@ -57,8 +57,7 @@ survey_url: "https://serverless-stack.typeform.com/to/xiPdCW"
 
 google_analytics: "UA-3536629-11"
 
-docs_url: "https://docs.sst.dev"
-ion_url: "https://ion.sst.dev"
+v2_url: "https://v2.sst.dev"
 v1_conf_url: "https://v1conf.sst.dev"
 console_url: "https://console.sst.dev"
 old_console_url: "https://old.console.sst.dev"

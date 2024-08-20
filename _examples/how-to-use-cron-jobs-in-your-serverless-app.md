@@ -75,7 +75,7 @@ export function ExampleStack({ stack }: StackContext) {
 }
 ```
 
-This creates a serverless cron job using [`Cron`]({{ site.docs_url }}/constructs/Cron). We've configured the cron job to run every minute.
+This creates a serverless cron job using [`Cron`]({{ site.v2_url }}/constructs/Cron). We've configured the cron job to run every minute.
 
 ## Adding function code
 
@@ -94,7 +94,7 @@ And let's test what we have so far.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.v2_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npm run dev
@@ -122,7 +122,7 @@ Stack dev-cron-job-ExampleStack
 
 Let's test our cron job using the integrated [SST Console](https://console.sst.dev).
 
-Note, the SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.docs_url }}/console).
+Note, the SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.v2_url }}/console).
 
 Go to the **Local** tab in the console.
 

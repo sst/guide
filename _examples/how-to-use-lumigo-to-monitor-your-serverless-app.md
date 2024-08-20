@@ -94,7 +94,7 @@ export function ExampleStack({ stack, app }: StackContext) {
 }
 ```
 
-We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `packages/functions/src/lambda.ts` will get invoked.
+We are using the SST [`Api`]({{ site.v2_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `packages/functions/src/lambda.ts` will get invoked.
 
 {%change%} Your `packages/functions/src/lambda.ts` should look something like this.
 
@@ -124,7 +124,7 @@ if (!app.local)
   cdk.Tags.of(api.getFunction("GET /")).add("lumigo:auto-trace", "true");
 ```
 
-To monitor all the functions in a stack, you can use the [Stack]({{ site.docs_url }}/constructs/Stack) construct's `getAllFunctions` method and do the following at the bottom of your stack definition like below
+To monitor all the functions in a stack, you can use the [Stack]({{ site.v2_url }}/constructs/Stack) construct's `getAllFunctions` method and do the following at the bottom of your stack definition like below
 
 ```typescript
 stack
@@ -156,7 +156,7 @@ Stack prod-lumigo-ExampleStack
 
 The `ApiEndpoint` is the API we just created.
 
-Let's test our endpoint using the integrated [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.docs_url }}/console).
+Let's test our endpoint using the integrated [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.v2_url }}/console).
 
 Run the below command to start SST console in **prod** stage.
 

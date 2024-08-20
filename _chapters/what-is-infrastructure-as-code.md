@@ -8,7 +8,7 @@ ref: what-is-infrastructure-as-code
 comments_id: what-is-infrastructure-as-code/161
 ---
 
-[SST]({{ site.ion_url }}){:target="_blank"} converts your infrastructure code into a series of API calls to your cloud providers. Behind the scenes it uses [Pulumi](https://www.pulumi.com/){:target="_blank"} and [Terraform](https://www.terraform.io/){:target="_blank"}, more on this below. Your SST config is a description of the infrastructure that you are trying to create as a part of your project. In our case we'll be defining Lambda functions, API Gateway endpoints, DynamoDB tables, S3 buckets, etc.
+[SST]({{ site.sst_url }}){:target="_blank"} converts your infrastructure code into a series of API calls to your cloud providers. Behind the scenes it uses [Pulumi](https://www.pulumi.com/){:target="_blank"} and [Terraform](https://www.terraform.io/){:target="_blank"}, more on this below. Your SST config is a description of the infrastructure that you are trying to create as a part of your project. In our case we'll be defining Lambda functions, API Gateway endpoints, DynamoDB tables, S3 buckets, etc.
 
 While you can configure this using the [AWS console](https://aws.amazon.com/console/){:target="_blank"}, you'll need to do a whole lot of clicking around. It's much better to configure our infrastructure programmatically.
 
@@ -99,6 +99,6 @@ If you have not worked with IaC before, it might feel unfamiliar at first. But a
 1. SST **automatically manages** the resources in AWS defined in your app.
 2. You don’t need to **make any manual changes** to them in your AWS Console.
 
-You can learn more about the [SST workflow]({{ site.ion_url }}/docs/workflow){:target="_blank"}.
+You can learn more about the [SST workflow]({{ site.sst_url }}/docs/workflow){:target="_blank"}.
 
 Now we are ready to create our first SST app.

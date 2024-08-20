@@ -79,9 +79,9 @@ export function ExampleStack({ stack }: StackContext) {
 }
 ```
 
-This creates an [RDS Serverless cluster]({{ site.docs_url }}/constructs/RDS). We also set the database engine to PostgreSQL. The database in the cluster that we'll be using is called `CounterDB` (as set in the `defaultDatabaseName` variable).
+This creates an [RDS Serverless cluster]({{ site.v2_url }}/constructs/RDS). We also set the database engine to PostgreSQL. The database in the cluster that we'll be using is called `CounterDB` (as set in the `defaultDatabaseName` variable).
 
-The `migrations` prop should point to the folder where your migration files are. The `RDS` construct uses [Kysely](https://koskimas.github.io/kysely/) to run and manage schema migrations. You can [read more about migrations here]({{ site.docs_url }}/constructs/RDS#configuring-migrations).
+The `migrations` prop should point to the folder where your migration files are. The `RDS` construct uses [Kysely](https://koskimas.github.io/kysely/) to run and manage schema migrations. You can [read more about migrations here]({{ site.v2_url }}/constructs/RDS#configuring-migrations).
 
 ## Setting up the Database
 
@@ -148,7 +148,7 @@ stack.addOutputs({
 });
 ```
 
-Our [API]({{ site.docs_url }}/constructs/Api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `packages/functions/src/lambda.ts` will get invoked.
+Our [API]({{ site.v2_url }}/constructs/Api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `packages/functions/src/lambda.ts` will get invoked.
 
 We'll also bind our database cluster to our API.
 
@@ -213,7 +213,7 @@ For now we'll get the number of hits from a table called `tblcounter` and return
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.v2_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npm run dev
@@ -249,7 +249,7 @@ Before we can test our endpoint let's create the `tblcounter` table in our datab
 
 ## Running migrations
 
-You can run migrations from the [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
+You can run migrations from the [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.v2_url }}/console).
 
 Go to the **RDS** tab and click the **Migrations** button on the top right corner.
 
@@ -275,7 +275,7 @@ Now that our table is created, let's test our endpoint with the [SST Console](ht
 
 Go to the **API** tab and click **Send** button to send a `POST` request.
 
-Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` construct. Set the headers, query params, request body, and view the function logs with the response.
+Note, The [API explorer]({{ site.v2_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` construct. Set the headers, query params, request body, and view the function logs with the response.
 
 ![API explorer invocation response](/assets/examples/rest-api-postgresql/api-explorer-invocation-response.png)
 

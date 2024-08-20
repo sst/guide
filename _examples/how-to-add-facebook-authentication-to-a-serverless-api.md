@@ -90,7 +90,7 @@ export function ExampleStack({ stack }: StackContext) {
 }
 ```
 
-We are creating an API here using the [`Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding two routes to it.
+We are creating an API here using the [`Api`]({{ site.v2_url }}/constructs/api) construct. And we are adding two routes to it.
 
 ```
 GET /private
@@ -117,7 +117,7 @@ const auth = new Cognito(stack, "Auth", {
 auth.attachPermissionsForAuthUsers(stack, [api]);
 ```
 
-This creates a [Cognito Identity Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html) which relies on Facebook to authenticate users. And we use the [`attachPermissionsForAuthUsers`]({{ site.docs_url }}/constructs/Auth#attachpermissionsforauthusers) method to allow our logged in users to access our API.
+This creates a [Cognito Identity Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html) which relies on Facebook to authenticate users. And we use the [`attachPermissionsForAuthUsers`]({{ site.v2_url }}/constructs/Auth#attachpermissionsforauthusers) method to allow our logged in users to access our API.
 
 {%change%} Replace the `stack.addOutputs` call with the following.
 
@@ -160,7 +160,7 @@ Now let's test our new API.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.v2_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npm run dev

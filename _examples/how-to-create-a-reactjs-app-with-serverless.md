@@ -13,7 +13,7 @@ ref: how-to-create-a-reactjs-app-with-serverless
 comments_id: how-to-create-a-react-js-app-with-serverless/2413
 ---
 
-In this example we will look at how to use [React.js](https://reactjs.org) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [SST]({{ site.sst_github_repo }}) and the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite) construct to deploy our app to AWS.
+In this example we will look at how to use [React.js](https://reactjs.org) with a [serverless]({% link _chapters/what-is-serverless.md %}) API to create a simple click counter app. We'll be using the [SST]({{ site.sst_github_repo }}) and the SST [`StaticSite`]({{ site.v2_url }}/constructs/StaticSite) construct to deploy our app to AWS.
 
 ## Requirements
 
@@ -86,7 +86,7 @@ export function ExampleStack({ stack }: StackContext) {
 }
 ```
 
-This creates a serverless DynamoDB table using the SST [`Table`]({{ site.docs_url }}/constructs/Table) construct. It has a primary key called `counter`. Our table is going to look something like this:
+This creates a serverless DynamoDB table using the SST [`Table`]({{ site.v2_url }}/constructs/Table) construct. It has a primary key called `counter`. Our table is going to look something like this:
 
 | counter | tally |
 | ------- | ----- |
@@ -118,13 +118,13 @@ stack.addOutputs({
 });
 ```
 
-We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `packages/functions/src/lambda.ts` will get invoked.
+We are using the SST [`Api`]({{ site.v2_url }}/constructs/Api) construct to create our API. It simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `packages/functions/src/lambda.ts` will get invoked.
 
 We'll also bind our table to our API. It allows our API to access (read and write) the table we just created.
 
 ### Setting up our React app
 
-To deploy a React.js app to AWS, we'll be using the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite) construct.
+To deploy a React.js app to AWS, we'll be using the SST [`StaticSite`]({{ site.v2_url }}/constructs/StaticSite) construct.
 
 {%change%} Replace the following in `stacks/ExampleStack.ts`:
 
@@ -157,7 +157,7 @@ stack.addOutputs({
 
 The construct is pointing to where our React.js app is located. We haven't created our app yet but for now we'll point to the `packages/frontend` directory.
 
-We are also setting up a [build time React environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) `REACT_APP_API_URL` with the endpoint of our API. The [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend. You can read more about this over in our chapter on, [Setting serverless environments variables in a React app]({% link _archives/setting-serverless-environments-variables-in-a-react-app.md %}).
+We are also setting up a [build time React environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) `REACT_APP_API_URL` with the endpoint of our API. The [`StaticSite`]({{ site.v2_url }}/constructs/StaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend. You can read more about this over in our chapter on, [Setting serverless environments variables in a React app]({% link _archives/setting-serverless-environments-variables-in-a-react-app.md %}).
 
 You can also optionally configure a custom domain.
 
@@ -217,7 +217,7 @@ And let's test what we have so far.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.v2_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npm run dev
@@ -248,11 +248,11 @@ Stack dev-react-app-ExampleStack
 
 The `ApiEndpoint` is the API we just created. While the `SiteUrl` our React app will run locally once we start it.
 
-Let's test our endpoint with the [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
+Let's test our endpoint with the [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.v2_url }}/console).
 
 Go to the **API** tab and click **Send** button to send a `POST` request.
 
-Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` construct. Set the headers, query params, request body, and view the function logs with the response.
+Note, The [API explorer]({{ site.v2_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` construct. Set the headers, query params, request body, and view the function logs with the response.
 
 ![API explorer invocation response](/assets/examples/angular-app/api-explorer-invocation-response.png)
 
@@ -398,7 +398,7 @@ And if you head over to your browser and click the button again, you should see 
 
 Also let's go to the **DynamoDB** tab in the SST Console and check that the value has been updated in the table.
 
-Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`Table`]({{ site.docs_url }}/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
+Note, The [DynamoDB explorer]({{ site.v2_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`Table`]({{ site.v2_url }}/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
 
 ![DynamoDB table view of counter table](/assets/examples/angular-app/dynamo-table-view-of-counter-table.png)
 

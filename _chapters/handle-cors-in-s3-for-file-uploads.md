@@ -10,7 +10,7 @@ comments_id: handle-cors-in-s3-for-file-uploads/2174
 
 In the notes app we are building, users will be uploading files to the bucket we just created. And since our app will be served through our custom domain, it'll be communicating across domains while it does the uploads. By default, S3 does not allow its resources to be accessed from a different domain. However, [cross-origin resource sharing (CORS)](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing){:target="_blank"} defines a way for client web applications that are loaded in one domain to interact with resources in a different domain.
 
-Similar to the [previous chapter]({% link _chapters/handle-cors-in-serverless-apis.md %}), the [`Bucket`]({{ site.ion_url }}/docs/component/aws/bucket/){:target="_blank"} component enables CORS by default.
+Similar to the [previous chapter]({% link _chapters/handle-cors-in-serverless-apis.md %}), the [`Bucket`]({{ site.sst_url }}/docs/component/aws/bucket/){:target="_blank"} component enables CORS by default.
 
 ```ts
 new sst.aws.Bucket("Uploads", {
@@ -19,7 +19,7 @@ new sst.aws.Bucket("Uploads", {
 });
 ```
 
-You can configure this further. [Read more about this here]({{ site.ion_url }}/docs/component/aws/bucket#cors){:target="_blank"}.
+You can configure this further. [Read more about this here]({{ site.sst_url }}/docs/component/aws/bucket#cors){:target="_blank"}.
 
 ```ts
 new sst.aws.Bucket("Uploads", {

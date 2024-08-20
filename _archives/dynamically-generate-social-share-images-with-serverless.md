@@ -764,7 +764,7 @@ And that's it! Our social cards are now dynamically created for all our pages.
 
 ### Wrapping Up
 
-You can check out how these images look on [Serverless-Stack.com](/) and on our [Docs site]({{ site.docs_url }}) by sharing a couple of our pages.
+You can check out how these images look on [Serverless-Stack.com](/) and on our [Docs site]({{ site.v2_url }}) by sharing a couple of our pages.
 
 Also, make sure to check out the repo that powers our social cards service — [{{ page.repo | remove: "https://" }}]({{ page.repo }})
 
@@ -774,8 +774,8 @@ The repo is setup with [Seed](https://seed.run), so a `git push` to the `main` b
 
 We used a couple of SST constructs while building this service. You can read more about them here:
 
-- [Api]({{ site.docs_url }}/constructs/Api)
-- [Bucket]({{ site.docs_url }}/constructs/Bucket)
-- [Function]({{ site.docs_url }}/constructs/Function)
+- [Api]({{ site.v2_url }}/constructs/Api)
+- [Bucket]({{ site.v2_url }}/constructs/Bucket)
+- [Function]({{ site.v2_url }}/constructs/Function)
 
 Hope you enjoyed this chapter. Leave a comment below if you have any questions or feedback!

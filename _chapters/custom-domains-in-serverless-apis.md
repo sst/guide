@@ -23,7 +23,7 @@ This tells SST that we want to use a custom domain **if** we are deploying to th
 
 We could for example, base it on the stage name, `api-${app.stage}.my-serverless-app.com`. So for `dev` it might be `api-dev.my-serverless-app.com`. But we'll leave that as an exercise for you.
 
-The `$app` is a global variable that's available in our config. You can [learn more about it here]({{ site.ion_url }}/docs/reference/global/#app){:target="_blank"}.
+The `$app` is a global variable that's available in our config. You can [learn more about it here]({{ site.sst_url }}/docs/reference/global/#app){:target="_blank"}.
 
 ### Deploy the App
 

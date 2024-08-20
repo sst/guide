@@ -90,7 +90,7 @@ export function ExampleStack({ stack }: StackContext) {
 }
 ```
 
-We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `packages/functions/src/lambda.ts` will get invoked.
+We are using the SST [`Api`]({{ site.v2_url }}/constructs/Api) construct to create our API. It simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `packages/functions/src/lambda.ts` will get invoked.
 
 {%change%} Replace the code in `packages/functions/src/lambda.ts` with:
 
@@ -113,7 +113,7 @@ Let's test what we have so far.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.v2_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npm run dev
@@ -143,7 +143,7 @@ Stack dev-middy-validator-ExampleStack
 
 The `ApiEndpoint` is the API we just created.
 
-Let's test our endpoint using the integrated [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.docs_url }}/console).
+Let's test our endpoint using the integrated [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.v2_url }}/console).
 
 Go to the **API** explorer and click on the `POST /` route. In the **Headers** tab set the content-type as **JSON** `Content-type: application/json`.
 

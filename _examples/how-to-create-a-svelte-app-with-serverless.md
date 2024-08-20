@@ -13,7 +13,7 @@ ref: how-to-create-a-svelte-app-with-serverless
 comments_id: how-to-create-a-svelte-app-with-serverless/2522
 ---
 
-In this example we will look at how to create and deploy [SvelteKit](https://kit.svelte.dev) to AWS with SST. We'll be using the [`SvelteKitSite`]({{ site.docs_url }}/constructs/SvelteKitSite) construct.
+In this example we will look at how to create and deploy [SvelteKit](https://kit.svelte.dev) to AWS with SST. We'll be using the [`SvelteKitSite`]({{ site.v2_url }}/constructs/SvelteKitSite) construct.
 
 ## Requirements
 
@@ -75,7 +75,7 @@ You are **ready to deploy** your Svelte app at this point! But for the purpose o
 $ npx sst dev
 ```
 
-SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live. This will ask you to start your Svelte dev environment as well.
+SST features a [Live Lambda Development]({{ site.v2_url }}/live-lambda-development) environment that allows you to work on your serverless apps live. This will ask you to start your Svelte dev environment as well.
 
 {%change%} Start Svelte locally in a separate terminal.
 
@@ -97,7 +97,7 @@ To support file uploads in our app, we need an S3 bucket. Let's add that.
 const bucket = new Bucket(stack, "public");
 ```
 
-Here we are using the [`Bucket`]({{ site.docs_url }}/constructs/Bucket) construct to create an S3 bucket.
+Here we are using the [`Bucket`]({{ site.v2_url }}/constructs/Bucket) construct to create an S3 bucket.
 
 {%change%} Add it to the imports.
 
@@ -142,7 +142,7 @@ export const load = (async () => {
 }) satisfies PageServerLoad;
 ```
 
-This generates a presigned URL when our app loads. Note how we can access our S3 bucket in a typesafe way — `Bucket.public.bucketName`. [You can learn more about Resource Binding over on our docs]({{ site.docs_url }}/resource-binding).
+This generates a presigned URL when our app loads. Note how we can access our S3 bucket in a typesafe way — `Bucket.public.bucketName`. [You can learn more about Resource Binding over on our docs]({{ site.v2_url }}/resource-binding).
 
 {%change%} We need to install a couple of packages.
 
@@ -232,7 +232,7 @@ If you head over to the `URL` in your browser, you should see your new Svelte ap
 
 ![Deployed SvelteKit app with SST](/assets/examples/svelte-app/deployed-sveltekit-app-with-sst.png)
 
-We can [add a custom domain]({{ site.docs_url }}/custom-domains) to our app but we'll leave that as an exercise for later.
+We can [add a custom domain]({{ site.v2_url }}/custom-domains) to our app but we'll leave that as an exercise for later.
 
 ### Cleaning up
 

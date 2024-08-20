@@ -79,7 +79,7 @@ export function ExampleStack({ stack }: StackContext) {
 }
 ```
 
-This creates a serverless DynamoDB table using [`Table`]({{ site.docs_url }}/constructs/Table). Our table is going to look something like this:
+This creates a serverless DynamoDB table using [`Table`]({{ site.v2_url }}/constructs/Table). Our table is going to look something like this:
 
 | userId | noteId | content | createdAt |
 | ------ | ------ | ------- | --------- |
@@ -115,7 +115,7 @@ stack.addOutputs({
 });
 ```
 
-We are creating an API here using the [`Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding five routes to it.
+We are creating an API here using the [`Api`]({{ site.v2_url }}/constructs/api) construct. And we are adding five routes to it.
 
 ```
 GET /notes
@@ -321,7 +321,7 @@ Now let's test what we've created so far.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.v2_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npm run dev
@@ -351,11 +351,11 @@ Stack dev-rest-api-dynamodb-ExampleStack
 
 The `ApiEndpoint` is the API we just created.
 
-Let's test our endpoint using the integrated [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.docs_url }}/console).
+Let's test our endpoint using the integrated [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.v2_url }}/console).
 
 Let's create our first note, go to the **API** explorer and click on the `POST /notes` route.
 
-Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` construct. Set the headers, query params, request body, and view the function logs with the response.
+Note, The [API explorer]({{ site.v2_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` construct. Set the headers, query params, request body, and view the function logs with the response.
 
 In the **Headers** tab enter `Content-type` in **Header 1** input and `application/json` in **Value 1** input. Go to the **Body** tab and paste the below json.
 
@@ -375,7 +375,7 @@ To retrieve the created note, go to `GET /notes/{id}` route and in the **URL** t
 
 Also let's go to the **DynamoDB** tab in the SST Console and check that the value has been created in the table.
 
-Note, The [DynamoDB explorer]({{ site.docs_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`Table`]({{ site.docs_url }}/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
+Note, The [DynamoDB explorer]({{ site.v2_url }}/console#dynamodb) allows you to query the DynamoDB tables in the [`Table`]({{ site.v2_url }}/constructs/Table) constructs in your app. You can scan the table, query specific keys, create and edit items.
 
 ![DynamoDB table view of table](/assets/examples/crud-rest-api-dynamodb/dynamo-table-view-of-table.png)
 

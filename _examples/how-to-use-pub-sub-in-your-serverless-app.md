@@ -78,7 +78,7 @@ export function ExampleStack({ stack }: StackContext) {
 }
 ```
 
-This creates an SNS topic using [`Topic`]({{ site.docs_url }}/constructs/Topic). And it has two subscribers. Meaning when the topic is published, both the functions will get run.
+This creates an SNS topic using [`Topic`]({{ site.v2_url }}/constructs/Topic). And it has two subscribers. Meaning when the topic is published, both the functions will get run.
 
 ## Setting up the API
 
@@ -106,7 +106,7 @@ stack.addOutputs({
 });
 ```
 
-Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (`/order`). When we make a `POST` request to this endpoint the Lambda function called `main` in `packages/functions/src/order.ts` will get invoked.
+Our [API]({{ site.v2_url }}/constructs/api) simply has one endpoint (`/order`). When we make a `POST` request to this endpoint the Lambda function called `main` in `packages/functions/src/order.ts` will get invoked.
 
 We'll also bind our topic to our API.
 
@@ -156,7 +156,7 @@ Now let's test our new API.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.v2_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npm run dev

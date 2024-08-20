@@ -72,7 +72,7 @@ stacks(app) {
 },
 ```
 
-We are creating an API here using the [`Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding three routes to it.
+We are creating an API here using the [`Api`]({{ site.v2_url }}/constructs/api) construct. And we are adding three routes to it.
 
 ```
 GET /notes
@@ -235,7 +235,7 @@ Now let's test our new API.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.v2_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npm run dev
@@ -265,11 +265,11 @@ Stack dev-rest-api-go-ExampleStack
 
 The `ApiEndpoint` is the API we just created.
 
-Let's test our endpoint using the integrated [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.docs_url }}/console).
+Let's test our endpoint using the integrated [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.v2_url }}/console).
 
 Go to the **API** explorer and click the **Send** button of the `GET /notes` route to get a list of notes.
 
-Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` construct. Set the headers, query params, request body, and view the function logs with the response.
+Note, The [API explorer]({{ site.v2_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` construct. Set the headers, query params, request body, and view the function logs with the response.
 
 ![API tab get notes response](/assets/examples/rest-api/api-tab-get-notes-response.png)
 

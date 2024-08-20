@@ -74,7 +74,7 @@ export default $config({
 To rename an app, you’ll need to remove the resources from the old one and deploy to the new one.
 {%endcaution%}
 
-The name of your app as you might recall is `notes`. A word of caution on IaC, if you rename your app after you deploy it, it doesn't rename the previously created resources in your app. You'll need to remove your old app and redeploy it again with the new name. To get a better sense of this, you can read more about the [SST workflow]({{ site.ion_url }}/docs/workflow){:target="_blank"}.
+The name of your app as you might recall is `notes`. A word of caution on IaC, if you rename your app after you deploy it, it doesn't rename the previously created resources in your app. You'll need to remove your old app and redeploy it again with the new name. To get a better sense of this, you can read more about the [SST workflow]({{ site.sst_url }}/docs/workflow){:target="_blank"}.
 
 ## Project layout
 

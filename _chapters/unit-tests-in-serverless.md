@@ -74,7 +74,7 @@ Test Files  1 passed (1)
      Tests  3 passed (3)
 ```
 
-Internally this is running `sst shell vitest`. The [`sst shell`]({{ site.ion_url }}/docs/reference/cli/#shell){:target="_blank"} CLI connects any linked resources. This ensures that your tests have the same kind of access as the rest of your application code.
+Internally this is running `sst shell vitest`. The [`sst shell`]({{ site.sst_url }}/docs/reference/cli/#shell){:target="_blank"} CLI connects any linked resources. This ensures that your tests have the same kind of access as the rest of your application code.
 
 {%info%}
 You'll need to Ctrl-C to quit the test runner. It's useful to have when you are working on them as it'll reload your tests. 

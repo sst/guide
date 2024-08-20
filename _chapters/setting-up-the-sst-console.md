@@ -9,7 +9,7 @@ ref: setting-up-the-sst-console
 comments_id: setting-up-the-sst-console/2957
 ---
 
-We are going to set up the [SST Console]({{ site.ion_url }}/docs/console/){:target="_blank"} to auto-deploy our app and manage our environments.
+We are going to set up the [SST Console]({{ site.sst_url }}/docs/console/){:target="_blank"} to auto-deploy our app and manage our environments.
 
 Start by [**signing up for a free account here**]({{ site.console_url }}){:target="_blank"}.
 

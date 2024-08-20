@@ -15,7 +15,7 @@ comments_id: how-to-debug-lambda-functions-with-visual-studio-code/2388
 
 In this example we will look at how to debug AWS Lambda functions with [Visual Studio Code (VS Code)](https://code.visualstudio.com) using [SST]({{ site.sst_github_repo }}).
 
-SST allows you to build and test Lambda functions locally using [Live Lambda Development]({{ site.docs_url }}/live-lambda-development). This means that you can attach breakpoints and inspect your Lambda functions locally, even if they are invoked remotely.
+SST allows you to build and test Lambda functions locally using [Live Lambda Development]({{ site.v2_url }}/live-lambda-development). This means that you can attach breakpoints and inspect your Lambda functions locally, even if they are invoked remotely.
 
 Here is a video of it in action.
 
@@ -140,7 +140,7 @@ To allow VS Code to set breakpoints and debug our Lambda functions we'll add it 
 
 Since we are going to set breakpoints in our Lambda functions, it makes sense to increase the timeouts.
 
-SST has an [`--increase-timeout`]({{ site.docs_url }}/packages/sst#options) option that increases the function timeouts in your app to the maximum 15 minutes. We are using this option in our `launch.json`.
+SST has an [`--increase-timeout`]({{ site.v2_url }}/packages/sst#options) option that increases the function timeouts in your app to the maximum 15 minutes. We are using this option in our `launch.json`.
 
 ```typescript
 "runtimeArgs": ["start", "--increase-timeout"],

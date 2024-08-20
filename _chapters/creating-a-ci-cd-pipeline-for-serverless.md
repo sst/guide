@@ -44,7 +44,7 @@ Our workflow is fairly simple. But as your team grows, you'll need to add additi
 
 There are many common CI/CD services, like [GitHub Actions](https://github.com/features/actions){:target="_blank"}, [Travis CI](https://travis-ci.org){:target="_blank"} or [CircleCI](https://circleci.com){:target="_blank"}. These usually require you to manually configure the above pipeline. It involves a fair bit of scripts and configuration.
 
-SST makes this easier with the [SST Console]({{ site.ion_url }}/docs/console/){:target="_blank"}'s [Autodeploy](/docs/console/#autodeploy){:target="_blank"} feature. It also shows you all the resources in your app and allows you to monitor and debug them.
+SST makes this easier with the [SST Console]({{ site.sst_url }}/docs/console/){:target="_blank"}'s [Autodeploy](/docs/console/#autodeploy){:target="_blank"} feature. It also shows you all the resources in your app and allows you to monitor and debug them.
 
 We should mention that you don't have to use the SST Console. And this section is completely optional.
 

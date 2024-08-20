@@ -57,7 +57,7 @@ build: {
 
 ### Add the React App to SST
 
-We are going to be deploying our React app to AWS. To do that we'll be using the SST [`StaticSite`]({{ site.ion_url }}/docs/component/aws/static-site/){:target="_blank"} component.
+We are going to be deploying our React app to AWS. To do that we'll be using the SST [`StaticSite`]({{ site.sst_url }}/docs/component/aws/static-site/){:target="_blank"} component.
 
 {%change%} Create a new file in `infra/web.ts` and add the following.
 

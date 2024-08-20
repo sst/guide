@@ -58,7 +58,7 @@ const auth = new sst.Cognito(this, "Auth", {
 });
 ```
 
-This is using the SST [`Cognito`]({{ site.docs_url }}/constructs/Cognito) construct to create a Cognito User Pool and an Identity Pool.
+This is using the SST [`Cognito`]({{ site.v2_url }}/constructs/Cognito) construct to create a Cognito User Pool and an Identity Pool.
 
 #### Aliases
 
@@ -99,7 +99,7 @@ new Cognito(this, "Auth", {
 
 #### Cognito Triggers
 
-You also might want to trigger (before and after authentication) some actions. The [Cognito Triggers]({{ site.docs_url }}/constructs/Cognito#authuserpooltriggers) allow you to define Lambda functions that get executed for specific events.
+You also might want to trigger (before and after authentication) some actions. The [Cognito Triggers]({{ site.v2_url }}/constructs/Cognito#authuserpooltriggers) allow you to define Lambda functions that get executed for specific events.
 
 ```js
 new Cognito(this, "Auth", {
@@ -114,7 +114,7 @@ new Cognito(this, "Auth", {
 
 ### Adding an API
 
-Now let's look at how we can use Cognito to secure our API. In [`stacks/MyStack.js`]({{ repo_url }}/stacks/MyStack.js) of our example, you'll notice our SST [`Api`]({{ site.docs_url }}/constructs/Api) definition.
+Now let's look at how we can use Cognito to secure our API. In [`stacks/MyStack.js`]({{ repo_url }}/stacks/MyStack.js) of our example, you'll notice our SST [`Api`]({{ site.v2_url }}/constructs/Api) definition.
 
 ```js
 // Create an HTTP API
@@ -163,7 +163,7 @@ export async function handler() {
 
 ### Adding a React Static Site
 
-We can now turn our attention to the frontend part of our application. In [`stacks/MyStack.js`]({{ repo_url }}/stacks/MyStack.js) take a look at the SST [`ReactStaticSite`]({{ site.docs_url }}/constructs/ReactStaticSite) definition.
+We can now turn our attention to the frontend part of our application. In [`stacks/MyStack.js`]({{ repo_url }}/stacks/MyStack.js) take a look at the SST [`ReactStaticSite`]({{ site.v2_url }}/constructs/ReactStaticSite) definition.
 
 ```js
 // Deploy our React app
@@ -555,7 +555,7 @@ Make sure to check out the rest of the [`frontend/src/App.js`]({{ repo_url }}/fr
 
 ### Testing our App
 
-SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
+SST features a [Live Lambda Development]({{ site.v2_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 To test our [example]({{ repo_url }}):
 

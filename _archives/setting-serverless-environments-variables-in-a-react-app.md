@@ -68,7 +68,7 @@ export default class MyStack extends sst.Stack {
 }
 ```
 
-Here we are using the [`ReactStaticSite`]({{ site.docs_url }}/constructs/ReactStaticSite) construct. It allows us to set React environment variables from our API.
+Here we are using the [`ReactStaticSite`]({{ site.v2_url }}/constructs/ReactStaticSite) construct. It allows us to set React environment variables from our API.
 
 ```typescript
 environment: {
@@ -149,7 +149,7 @@ We need our React app to be deployed with our environment variables. SST uses [C
 3. Replace the environment variables in our React app.
 4. Deploy our React app to S3 and CloudFront.
 
-[SST](/){:target="_blank"} and the [`ReactStaticSite`]({{ site.docs_url }}/constructs/ReactStaticSite){:target="_blank"} construct do this automatically for you.
+[SST](/){:target="_blank"} and the [`ReactStaticSite`]({{ site.v2_url }}/constructs/ReactStaticSite){:target="_blank"} construct do this automatically for you.
 
 ![Serverless environment variable set in a React app deployed to AWS](/assets/extra-credit/serverless-environment-variable-set-in-a-react-app-deployed-to-aws.png)
 

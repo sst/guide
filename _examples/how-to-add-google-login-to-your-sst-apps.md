@@ -13,7 +13,7 @@ ref: how-to-add-google-login-to-your-sst-app-with-sst-auth
 comments_id: how-to-add-google-login-to-your-sst-app-with-sst-auth/2643
 ---
 
-In this example, we will look at how to add Google Login to your serverless app using [SST Auth]({{ site.docs_url }}/auth).
+In this example, we will look at how to add Google Login to your serverless app using [SST Auth]({{ site.v2_url }}/auth).
 
 ## Requirements
 
@@ -140,7 +140,7 @@ Next, we need to create an **Authorize URL** to initiate the auth flow.
 
 #### Configure the construct
 
-We are going to use the [`Auth`]({{ site.docs_url }}/constructs/Auth) construct. It will help us create both the **Authorize URL** and the **Callback URL**.
+We are going to use the [`Auth`]({{ site.v2_url }}/constructs/Auth) construct. It will help us create both the **Authorize URL** and the **Callback URL**.
 
 {%change%} Add the following below the `Api` construct in `stacks/ExampleStack.ts`.
 
@@ -206,7 +206,7 @@ When the Authorize URL is invoked, it will initialize the auth flow and redirect
 
 Next, we are going to add a **Sign in with Google** button to our frontend. And on click, we will redirect the user to the **Authorize URL**.
 
-To deploy a React app to AWS, we'll be using the SST [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite) construct.
+To deploy a React app to AWS, we'll be using the SST [`StaticSite`]({{ site.v2_url }}/constructs/StaticSite) construct.
 
 {%change%} Add the following above the `Auth` construct in `stacks/ExampleStack.ts`.
 
@@ -232,7 +232,7 @@ const site = new StaticSite(stack, "Site", {
 
 The construct is pointing to the directory where we are going to add our React.js app.
 
-We are also setting up [build time React environment variables](https://vitejs.dev/guide/env-and-mode.html) with the endpoint of our API. The [`StaticSite`]({{ site.docs_url }}/constructs/StaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
+We are also setting up [build time React environment variables](https://vitejs.dev/guide/env-and-mode.html) with the endpoint of our API. The [`StaticSite`]({{ site.v2_url }}/constructs/StaticSite) allows us to set environment variables automatically from our backend, without having to hard code them in our frontend.
 
 {%change%} Also remember to import the `StaticSite` construct up top.
 
@@ -269,7 +269,7 @@ We also need to load the environment variables from our SST app. To do this, we'
 
 ## Start our dev environment
 
-SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
+SST features a [Live Lambda Development]({{ site.v2_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 {%change%} Run in the root.
 
@@ -537,7 +537,7 @@ So far we haven't been storing the data Google's been returning through the **Ca
 
 #### Create a DynamoDB table
 
-We'll be using the SST [`Table`]({{ site.docs_url }}/constructs/Table) construct.
+We'll be using the SST [`Table`]({{ site.v2_url }}/constructs/Table) construct.
 
 {%change%} Add the following above the `Api` construct in `stacks/ExampleStack.ts`.
 
@@ -676,7 +676,7 @@ export const handler = ApiHandler(async () => {
 });
 ```
 
-The handler calls a [`useSession()`]({{ site.docs_url }}/clients/auth#usesession) hook to decode the session token and retrieve the user's `userID` from the session data. Note that, `useSession` can be called anywhere in your Lambda handler. This works because we are using the [`ApiHandler`]({{ site.docs_url }}/clients/api#apihandler) to wrap our Lambda function.
+The handler calls a [`useSession()`]({{ site.v2_url }}/clients/auth#usesession) hook to decode the session token and retrieve the user's `userID` from the session data. Note that, `useSession` can be called anywhere in your Lambda handler. This works because we are using the [`ApiHandler`]({{ site.v2_url }}/clients/api#apihandler) to wrap our Lambda function.
 
 We then fetch the user's data from our database table with `userID` being the key.
 

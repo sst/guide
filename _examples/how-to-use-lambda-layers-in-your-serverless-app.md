@@ -15,7 +15,7 @@ comments_id: how-to-use-lambda-layers-in-your-serverless-app/2405
 
 In this example we will look at how to use [Layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) in your serverless app with [SST]({{ site.sst_github_repo }}). We'll be using the [@sparticuz/chromium](https://github.com/Sparticuz/chromium) Layer to take a screenshot of a webpage and return the image in our API.
 
-We'll be using SST's [Live Lambda Development]({{ site.docs_url }}/live-lambda-development). It allows you to make changes and test locally without having to redeploy.
+We'll be using SST's [Live Lambda Development]({{ site.v2_url }}/live-lambda-development). It allows you to make changes and test locally without having to redeploy.
 
 ## Requirements
 
@@ -112,7 +112,7 @@ export function ExampleStack({ stack }: StackContext) {
 }
 ```
 
-We then use the [`Api`]({{ site.docs_url }}/constructs/Api) construct and add a single route (`GET /`). For the function that'll be handling the route, we increase the timeout, since generating a screenshot can take a little bit of time.
+We then use the [`Api`]({{ site.v2_url }}/constructs/Api) construct and add a single route (`GET /`). For the function that'll be handling the route, we increase the timeout, since generating a screenshot can take a little bit of time.
 
 We create a layer based on what's in the `layers/chromium` directory, we'll download this below. We also exclude the Lambda function from bundling the [@sparticuz/chromium](https://github.com/Sparticuz/chromium) npm package.
 
@@ -221,7 +221,7 @@ $ npm install puppeteer-core@20.1.2 @sparticuz/chromium@113.0.1
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.v2_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npm run dev

@@ -89,7 +89,7 @@ export function ExampleStack({ stack }: StackContext) {
 }
 ```
 
-We are creating an API here using the [`Api`]({{ site.docs_url }}/constructs/api) construct. And we are adding two routes to it.
+We are creating an API here using the [`Api`]({{ site.v2_url }}/constructs/api) construct. And we are adding two routes to it.
 
 ```
 GET /private
@@ -159,7 +159,7 @@ Now let's test our new API.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.v2_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npm run dev

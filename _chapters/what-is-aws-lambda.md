@@ -67,7 +67,7 @@ After we do all the work inside our Lambda function, we simply return. If this f
 
 ### Packaging Functions
 
-Lambda functions need to be packaged and sent to AWS. This is usually a process of compressing the function and all its dependencies and uploading it to an S3 bucket. And letting AWS know that you want to use this package when a specific event takes place. To help us with this process we use the [SST]({{ site.ion_url }}). We will go over this in detail later on in this guide.
+Lambda functions need to be packaged and sent to AWS. This is usually a process of compressing the function and all its dependencies and uploading it to an S3 bucket. And letting AWS know that you want to use this package when a specific event takes place. To help us with this process we use the [SST]({{ site.sst_url }}). We will go over this in detail later on in this guide.
 
 ### Execution Model
 

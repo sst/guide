@@ -78,7 +78,7 @@ export function ExampleStack({ stack }: StackContext) {
 }
 ```
 
-This creates an Kinesis Data Stream using [`KinesisStream`]({{ site.docs_url }}/constructs/KinesisStream) and it has a consumer that polls for messages from the Kinesis Data Stream. The consumer function will run when it has polled 1 or more messages.
+This creates an Kinesis Data Stream using [`KinesisStream`]({{ site.v2_url }}/constructs/KinesisStream) and it has a consumer that polls for messages from the Kinesis Data Stream. The consumer function will run when it has polled 1 or more messages.
 
 ## Setting up the API
 
@@ -105,7 +105,7 @@ stack.addOutputs({
 });
 ```
 
-Our [API]({{ site.docs_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `packages/functions/src/lambda.ts` will get invoked.
+Our [API]({{ site.v2_url }}/constructs/api) simply has one endpoint (the root). When we make a `POST` request to this endpoint the Lambda function called `handler` in `packages/functions/src/lambda.ts` will get invoked.
 
 We'll also bind our stream to our API.
 
@@ -147,7 +147,7 @@ Now let's test our new API.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.v2_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npm run dev
@@ -177,7 +177,7 @@ Stack dev-kinesisstream-ExampleStack
 
 The `ApiEndpoint` is the API we just created.
 
-Let's test our endpoint with the [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
+Let's test our endpoint with the [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.v2_url }}/console).
 
 Go to the **Functions** tab and click the **Invoke** button of the `POST /` function to send a `POST` request.
 

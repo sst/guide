@@ -93,7 +93,7 @@ export function ExampleStack({ stack, app }: StackContext) {
 }
 ```
 
-We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `packages/functions/src/lambda.ts` will get invoked.
+We are using the SST [`Api`]({{ site.v2_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `packages/functions/src/lambda.ts` will get invoked.
 
 {%change%} Your `packages/functions/src/lambda.ts` should look something like this.
 
@@ -134,7 +134,7 @@ You can connect to Thundra in two ways,
 
 For this tutorial let's follow the second way.
 
-You can then set the layer for all the functions in your stack using the [`addDefaultFunctionLayers`]({{ site.docs_url }}/constructs/Stack#adddefaultfunctionlayers) and [`addDefaultFunctionEnv`]({{ site.docs_url }}/constructs/Stack#adddefaultfunctionenv). Note we only want to enable this when the function is deployed, and not when using [Live Lambda Dev]({{ site.docs_url }}/live-lambda-development).
+You can then set the layer for all the functions in your stack using the [`addDefaultFunctionLayers`]({{ site.v2_url }}/constructs/Stack#adddefaultfunctionlayers) and [`addDefaultFunctionEnv`]({{ site.v2_url }}/constructs/Stack#adddefaultfunctionenv). Note we only want to enable this when the function is deployed, and not when using [Live Lambda Dev]({{ site.v2_url }}/live-lambda-development).
 
 {%change%} Add the following above the `api` definiton line in `stacks/ExampleStack.ts`.
 
@@ -185,7 +185,7 @@ Stack prod-thundra-ExampleStack
 
 The `ApiEndpoint` is the API we just created.
 
-Let's test our endpoint using the integrated [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.docs_url }}/console).
+Let's test our endpoint using the integrated [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps [Learn more about it in our docs]({{ site.v2_url }}/console).
 
 Run the below command to start SST console in **prod** stage.
 

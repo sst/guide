@@ -85,7 +85,7 @@ export function ExampleStack({ stack }: StackContext) {
 }
 ```
 
-We are creating an Apollo GraphQL API here using the [`GraphQLApi`]({{ site.docs_url }}/constructs/GraphQLApi) construct. Our Apollo Server is powered by the Lambda function in `packages/functions/src/lambda.ts`.
+We are creating an Apollo GraphQL API here using the [`GraphQLApi`]({{ site.v2_url }}/constructs/GraphQLApi) construct. Our Apollo Server is powered by the Lambda function in `packages/functions/src/lambda.ts`.
 
 ## Adding function code
 
@@ -137,7 +137,7 @@ Now let's test our new Apollo GraphQL API.
 
 ## Starting your dev environment
 
-{%change%} SST features a [Live Lambda Development]({{ site.docs_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
+{%change%} SST features a [Live Lambda Development]({{ site.v2_url }}/live-lambda-development) environment that allows you to work on your serverless apps live.
 
 ```bash
 $ npm run dev
@@ -167,7 +167,7 @@ Stack dev-graphql-apollo-ExampleStack
 
 The `ApiEndpoint` is the API we just created.
 
-Let's test our endpoint with the [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
+Let's test our endpoint with the [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.v2_url }}/console).
 
 Go to the **GraphQL** tab and you should see the GraphQL Playground in action.
 

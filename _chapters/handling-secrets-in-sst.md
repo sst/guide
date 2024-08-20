@@ -10,7 +10,7 @@ comments_id: handling-secrets-in-sst/2465
 
 In the [previous chapter]({% link _chapters/setup-a-stripe-account.md %}), we created a Stripe account and got a pair of keys. Including the Stripe secret key. We need this in our app but we do not want to store this secret in our code. In this chapter, we'll look at how to add secrets in SST.
 
-We will be using the [`sst secret`]({{ site.ion_url }}/docs/reference/cli/#secret){:target="_blank"} CLI to store our secrets. 
+We will be using the [`sst secret`]({{ site.sst_url }}/docs/reference/cli/#secret){:target="_blank"} CLI to store our secrets. 
 
 {%change%} Run the following in your project root.
 
@@ -24,7 +24,7 @@ You can specify the stage for a secret. By default, the stage is your personal s
 
 You can run `npx sst secret list` to see the secrets for the current stage.
 
-Now that the secret is stored, we can add it into our config using the [`Secret`]({{ site.ion_url }}/docs/component/secret/){:target="_blank"} component.
+Now that the secret is stored, we can add it into our config using the [`Secret`]({{ site.sst_url }}/docs/component/secret/){:target="_blank"} component.
 
 {%change%} Add the following to your `infra/storage.ts`:
 

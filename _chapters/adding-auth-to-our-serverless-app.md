@@ -13,7 +13,7 @@ comments_id: adding-auth-to-our-serverless-app/2457
 
 So far we've created the [DynamoDB table]({% link _chapters/create-a-dynamodb-table-in-sst.md %}), [S3 bucket]({% link _chapters/create-an-s3-bucket-in-sst.md %}), and [API]({% link _chapters/add-an-api-to-create-a-note.md %}) parts of our serverless backend. Now let's add auth into the mix. As we talked about in the [previous chapter]({% link _chapters/auth-in-serverless-apps.md %}), we are going to use [Cognito User Pool](https://aws.amazon.com/cognito/){:target="_blank"} to manage user sign ups and logins. While we are going to use [Cognito Identity Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html){:target="_blank"} to manage which resources our users have access to.
 
-Setting this all up can be pretty complicated in Terraform. SST has simple [`CognitoUserPool`]({{ site.ion_url }}/docs/component/aws/cognito-user-pool/){:target="_blank"} and [`CognitoIdentityPool`]({{ site.ion_url }}/docs/component/aws/cognito-identity-pool/){:target="_blank"} components to help with this.
+Setting this all up can be pretty complicated in Terraform. SST has simple [`CognitoUserPool`]({{ site.sst_url }}/docs/component/aws/cognito-user-pool/){:target="_blank"} and [`CognitoIdentityPool`]({{ site.sst_url }}/docs/component/aws/cognito-identity-pool/){:target="_blank"} components to help with this.
 
 ### Create the Components
 

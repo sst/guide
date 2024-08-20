@@ -15,7 +15,7 @@ comments_id: how-to-debug-lambda-functions-with-intellij-idea/2530
 
 In this example we will look at how to debug AWS Lambda functions with [IntelliJ IDEA Ultimate](https://www.jetbrains.com/idea/) using [SST]({{ site.sst_github_repo }}).
 
-SST allows you to build and test Lambda functions locally using [Live Lambda Development]({{ site.docs_url }}/live-lambda-development). This means that you can attach breakpoints and inspect your Lambda functions locally, even if they are invoked remotely.
+SST allows you to build and test Lambda functions locally using [Live Lambda Development]({{ site.v2_url }}/live-lambda-development). This means that you can attach breakpoints and inspect your Lambda functions locally, even if they are invoked remotely.
 
 Here is a video of it in action.
 
@@ -127,7 +127,7 @@ It will open up a dialog where you need to configure the settings as per the pro
 
 Since we are going to set breakpoints in our Lambda functions, it makes sense to increase the timeouts.
 
-SST has an [`--increase-timeout`]({{ site.docs_url }}/packages/cli#options) option that increases the function timeouts in your app to the maximum 15 minutes.
+SST has an [`--increase-timeout`]({{ site.v2_url }}/packages/cli#options) option that increases the function timeouts in your app to the maximum 15 minutes.
 
 {%change%} Add `--increase-timeout` to the arguments to increase the timeout.
 
@@ -143,7 +143,7 @@ Click on **Debug** button to start the debugging
 
 ![Set Lambda function breakpoint in IntelliJ](/assets/examples/intellij-idea/set-lambda-function-breakpoint-in-intellij.png)
 
-The first time you start the [Live Lambda Development environment]({{ site.docs_url }}/live-lambda-development), you will be prompted to enter a stage name to use locally. If you are working within a team, it is recommended that you use a stage that's specific to you. This ensures that you and your teammate can share an AWS account and still have standalone environments. [Read more about this over on our docs]({{ site.docs_url }}/working-with-your-team).
+The first time you start the [Live Lambda Development environment]({{ site.v2_url }}/live-lambda-development), you will be prompted to enter a stage name to use locally. If you are working within a team, it is recommended that you use a stage that's specific to you. This ensures that you and your teammate can share an AWS account and still have standalone environments. [Read more about this over on our docs]({{ site.v2_url }}/working-with-your-team).
 
 Note that the prompt will be shown under the **Process Console** tab.
 

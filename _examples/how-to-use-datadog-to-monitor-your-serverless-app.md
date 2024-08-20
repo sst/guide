@@ -93,7 +93,7 @@ export function ExampleStack({ stack, app }: StackContext) {
 }
 ```
 
-We are using the SST [`Api`]({{ site.docs_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `packages/functions/src/lambda.ts` will get invoked.
+We are using the SST [`Api`]({{ site.v2_url }}/constructs/Api) construct to create our API. It simply has one endpoint at the root. When we make a `GET` request to this endpoint the function called `handler` in `packages/functions/src/lambda.ts` will get invoked.
 
 {%change%} Your `packages/functions/src/lambda.ts` should look something like this.
 
@@ -156,7 +156,7 @@ if (!app.local) {
 import { Datadog } from "datadog-cdk-constructs-v2";
 ```
 
-Note that [`getAllFunctions`]({{ site.docs_url }}/constructs/Stack#getallfunctions) gives you an array of all the Lambda functions created in this stack. If you want to monitor all the functions in your stack, make sure to call it at the end of your stack definition.
+Note that [`getAllFunctions`]({{ site.v2_url }}/constructs/Stack#getallfunctions) gives you an array of all the Lambda functions created in this stack. If you want to monitor all the functions in your stack, make sure to call it at the end of your stack definition.
 
 ## Deploying to prod
 
@@ -182,11 +182,11 @@ Stack prod-datadog-ExampleStack
 
 The `ApiEndpoint` is the API we just created.
 
-Let's test our endpoint with the [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.docs_url }}/console).
+Let's test our endpoint with the [SST Console](https://console.sst.dev). The SST Console is a web based dashboard to manage your SST apps. [Learn more about it in our docs]({{ site.v2_url }}/console).
 
 Go to the **API** tab and click **Send** button to send a `GET` request.
 
-Note, The [API explorer]({{ site.docs_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` construct. Set the headers, query params, request body, and view the function logs with the response.
+Note, The [API explorer]({{ site.v2_url }}/console#api) lets you make HTTP requests to any of the routes in your `Api` construct. Set the headers, query params, request body, and view the function logs with the response.
 
 ![API explorer invocation response](/assets/examples/datadog/api-explorer-invocation-response.png)
 
