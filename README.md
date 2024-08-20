@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://sst.dev/">
-    <img alt="SST" src="https://raw.githubusercontent.com/sst/identity/main/variants/sst-full.svg" width="300" />
+    <img alt="SST" src="assets/lander/logo/sst-guide.svg" width="350" />
   </a>
 </p>
 
