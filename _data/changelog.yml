@@ -1,4 +1,8 @@
 current:
+  title: "Flip Ion to v3"
+  desc: "Aug 20, 2024: Update SST version from Ion to v3."
+
+v9-0:
   title: "Migrate to Ion"
   desc: "Jul 25, 2024: Migrating away from CDK to Terraform with SST Ion v0.1."
 
