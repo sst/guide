@@ -105,14 +105,12 @@ This looks a little complicated but Amazon API Gateway has a format it uses to d
 We are also creating a specific IAM policy to secure the files our users will upload to our S3 bucket.
 
 ```ts
-// Policy granting access to a specific folder in the bucket
-new iam.PolicyStatement({
+{
   actions: ["s3:*"],
-  effect: iam.Effect.ALLOW,
   resources: [
-    bucket.bucketArn + "/private/${cognito-identity.amazonaws.com:sub}/*",
+    $concat(bucket.arn, "/private/${cognito-identity.amazonaws.com:sub}/*"),
   ],
-}),
+},
 ```
 
 Let's look at how this works.
