@@ -248,14 +248,16 @@
       margin-top: calc($spacing-unit / 2 + 5px);
     }
 
-    @include media-query($on-palm) {
+    @include media-query($on-laptop) {
+      padding-top: calc($spacing-unit / 2);
       &:after {
         margin-top: calc($spacing-unit / 2);
       }
     }
 
     @include media-query($on-laptop) {
-      padding: calc($spacing-unit / 2) calc($spacing-unit / 2) 0;
+      padding-left: calc($spacing-unit / 2);
+      padding-right: calc($spacing-unit / 2);
     }
 
     & > .content {
