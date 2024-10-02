@@ -91,7 +91,7 @@ We are creating an IAM policy to allow our authenticated users to access our API
       "arn:aws:execute-api:",
       region,
       ":",
-      aws.getcalleridentityoutput({}).accountid,
+      aws.getCallerIdentityOutput({}).accountId,
       ":",
       api.nodes.api.id,
       "/*/*/*"
