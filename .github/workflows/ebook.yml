@@ -40,7 +40,7 @@ jobs:
       env:
         BOOK_VERSION: ${{ steps.get_book_version.outputs.BOOK_VERSION }}
     - name: Archive pdf md
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: pdf.md
         path: etc/ebook/output/pdf.md
@@ -50,7 +50,7 @@ jobs:
       env:
         BOOK_VERSION: ${{ steps.get_book_version.outputs.BOOK_VERSION }}
     - name: Archive epub md
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: epub.md
         path: etc/ebook/output/epub.md
@@ -60,7 +60,7 @@ jobs:
       env:
         BOOK_VERSION: ${{ steps.get_book_version.outputs.BOOK_VERSION }}
     - name: Archive pdf
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: ebook.pdf
         path: etc/ebook/output/ebook.pdf
@@ -70,7 +70,7 @@ jobs:
       env:
         BOOK_VERSION: ${{ steps.get_book_version.outputs.BOOK_VERSION }}
     - name: Archive epub
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: ebook.epub
         path: etc/ebook/output/ebook.epub
